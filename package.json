@@ -1,0 +1,34 @@
+{
+  "name": "crocks",
+  "version": "0.0.1",
+  "description": "A collection of well known Monadic Containers for your utter enjoyment.",
+  "main": "crocks.js",
+  "scripts": {
+    "spec": "nodemon -q -e js -x 'npm test -s | tap-spec'",
+    "test": "tape test/specs/**/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/evilsoft/crocks.git"
+  },
+  "keywords": [
+    "FP",
+    "Functional",
+    "Monadic",
+    "Monads",
+    "fantasy",
+    "Applicative",
+    "Functor"
+  ],
+  "author": "Ian Hofmann-Hicks <evilsoft@aol.com> (evil)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/evilsoft/crocks/issues"
+  },
+  "homepage": "https://github.com/evilsoft/crocks#readme",
+  "devDependencies": {
+    "sinon": "^1.17.4",
+    "tap-spec": "^4.1.1",
+    "tape": "^4.6.0"
+  }
+}

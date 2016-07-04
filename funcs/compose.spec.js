@@ -1,8 +1,8 @@
 const test    = require('tape')
 const sinon   = require('sinon')
-const helpers = require('../../helpers')
+const helpers = require('../test/helpers')
 
-const compose = require('../../../funcs/compose')
+const compose = require('./compose')
 
 const noop      = helpers.noop
 const bindFunc  = helpers.bindFunc

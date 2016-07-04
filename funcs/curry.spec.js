@@ -1,7 +1,7 @@
 const test    = require('tape')
-const helpers = require('../../helpers')
+const helpers = require('../test/helpers')
 
-const curry = require('../../../funcs/curry')
+const curry = require('./curry')
 
 const noop      = helpers.noop
 const bindFunc  = helpers.bindFunc

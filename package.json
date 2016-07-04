@@ -5,7 +5,7 @@
   "main": "crocks.js",
   "scripts": {
     "spec": "nodemon -q -e js -x 'npm test -s | tap-spec'",
-    "test": "tape test/specs/**/*.js"
+    "test": "tape funcs/*.spec.js internal/*.spec.js ./*.spec.js"
   },
   "repository": {
     "type": "git",

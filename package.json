@@ -1,9 +1,12 @@
 {
   "name": "crocks",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "A collection of well known Monadic Containers for your utter enjoyment.",
   "main": "crocks.js",
   "scripts": {
+    "preversion": "npm test && npm run build",
+    "build:publish": "npm test && npm run build && npm publish",
+    "build": "webpack && uglifyjs dist/crocks.js -c \"warnings=false\" -m -o dist/crocks.min.js",
     "spec": "nodemon -q -e js -x 'npm test -s | tap-spec'",
     "test": "tape funcs/*.spec.js internal/*.spec.js ./*.spec.js"
   },
@@ -27,8 +30,14 @@
   },
   "homepage": "https://github.com/evilsoft/crocks#readme",
   "devDependencies": {
+    "babel-core": "^6.10.4",
+    "babel-loader": "^6.2.4",
+    "babel-plugin-transform-es2015-arrow-functions": "^6.8.0",
+    "babel-plugin-transform-es2015-shorthand-properties": "^6.8.0",
     "sinon": "^1.17.4",
     "tap-spec": "^4.1.1",
-    "tape": "^4.6.0"
+    "tape": "^4.6.0",
+    "uglify-js": "^2.7.0",
+    "webpack": "^1.13.1"
   }
 }

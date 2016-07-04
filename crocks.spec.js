@@ -10,5 +10,6 @@ test('entry', t => {
 
   t.equal(crocks.compose, compose, 'provides the compose function')
   t.equal(crocks.curry, curry, 'provides the compose function')
+
   t.end()
 })

@@ -2,5 +2,6 @@
 /** @author Ian Hofmann-Hicks (evil) */
 module.exports = {
   compose:  require('./funcs/compose'),
-  curry:    require('./funcs/curry')
+  curry:    require('./funcs/curry'),
+  Maybe:    require('./crocks/Maybe')
 }

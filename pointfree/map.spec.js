@@ -40,7 +40,7 @@ test('map', t => {
 test('map functor', t => {
   const functor = { map: sinon.spy(noop) }
 
-  map(id, functor)
+  map(id)(functor)
 
   t.equal(functor.map.calledWith(id), true, 'calls map on functor, passing the function')
   t.end()
@@ -50,7 +50,7 @@ test('map function composition', t => {
   const first   = sinon.spy(x => x + 2)
   const second  = sinon.spy(x => x * 10)
 
-  const comp    = map(second, first)
+  const comp    = map(second)(first)
   const result  = comp(0)
 
   t.equal(typeof comp, 'function', 'map returns a function')

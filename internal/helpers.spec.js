@@ -2,7 +2,7 @@ const test = require('tape')
 
 const internal    = require('./helpers')
 const isFunction  = internal.isFunction
-const isSameType  = internal.isSameType
+const isType      = internal.isType
 
 const helpers     = require('../test/helpers')
 const noop        = helpers.noop
@@ -23,16 +23,15 @@ test('isFunction internal helper', t => {
   t.end()
 })
 
-test('isSameType internal helper', t => {
+test('isType internal helper', t => {
   const first   = { type: () => 'first' }
   const second  = { type: () => 'second' }
 
-  t.equal(typeof isSameType, 'function', 'is a function')
+  t.equal(typeof isType, 'function', 'is a function')
 
-  t.equal(isSameType(first, first), true, 'reports true when they are the same')
-  t.equal(isSameType(first, second), false, 'reports false when they are the different containers')
-  t.equal(isSameType(0, {}), false, 'reports false when both are not containers')
-  t.equal(isSameType(first, []), false, 'reports false when one is not a container')
+  t.equal(isType(first.type(), first), true, 'reports true when they are the same')
+  t.equal(isType(first.type(), second), false, 'reports false when they are the different containers')
+  t.equal(isType(first.type(), []), false, 'reports false when one is not a container')
 
   t.end()
 })

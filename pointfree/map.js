@@ -1,15 +1,17 @@
-const curry = require('./curry')
+const curry   = require('../funcs/curry')
+const b_comb  = require('../combinators/b_comb')
 
 const helpers     = require('../internal/helpers')
 const isFunction  = helpers.isFunction
 
-function _map(fn, m) {
+// map :: Functor f => (a -> b) -> f a -> f b
+function map(fn, m) {
   if(!isFunction(fn)) {
     throw new TypeError('first arg to map must be a function')
   }
 
   if(isFunction(m)) {
-    return x => fn(m(x))
+    return b_comb(fn, m)
   } else if(m && isFunction(m.map)) {
     return m.map(fn)
   } else {
@@ -17,4 +19,4 @@ function _map(fn, m) {
   }
 }
 
-module.exports = curry(_map)
+module.exports = curry(map)

@@ -6,6 +6,10 @@ const helpers = require('../test/helpers')
 const noop      = helpers.noop
 const bindFunc  = helpers.bindFunc
 
+const id        = helpers.id
+const t_comb    = require('../combinators/t_comb')
+const b_comb    = require('../combinators/b_comb')
+
 const Maybe = require('./Maybe')
 
 test('Maybe', t => {
@@ -27,12 +31,6 @@ test('Maybe', t => {
 
   t.throws(Maybe, TypeError, 'Maybe throws when no parameters are passed')
 
-  t.end()
-})
-
-test('Maybe of', t => {
-  t.equal(Maybe.of(0).type(), 'Maybe', 'returns a maybe')
-  t.equal(Maybe.of(0).maybe(), 0, 'wraps the value passed into a maybe')
   t.end()
 })
 
@@ -101,7 +99,6 @@ test('Maybe map errors', t => {
 })
 
 test('Maybe map functionality', t => {
-  const id  = x => x
   const spy = sinon.spy(id)
 
   t.equal(Maybe(0).map(id).type(), 'Maybe', 'returns a Maybe')
@@ -122,7 +119,6 @@ test('Maybe map functionality', t => {
 })
 
 test('Maybe map algebras (Functor)', t => {
-  const id  = x => x
   const f   = x => x + 2
   const g   = x => x * 2
 
@@ -131,10 +127,118 @@ test('Maybe map algebras (Functor)', t => {
   t.end()
 })
 
-test('Maybe ap functionality', t => {
+test('Maybe ap errors', t => {
+  const m   = { type: () => 'NotMaybe' }
+
+  t.throws(Maybe(0).ap.bind(null, m), TypeError, 'throws when wrapped value is a falsey number')
+  t.throws(Maybe(1).ap.bind(null, m), TypeError, 'throws when wrapped value is a truthy number')
+  t.throws(Maybe('').ap.bind(null, m), TypeError, 'throws when wrapped value is a falsey string')
+  t.throws(Maybe('string').ap.bind(null, m), TypeError, 'throws when wrapped value is a truthy string')
+  t.throws(Maybe(false).ap.bind(null, m), TypeError, 'throws when wrapped value is false')
+  t.throws(Maybe(true).ap.bind(null, m), TypeError, 'throws when wrapped value is true')
+  t.throws(Maybe([]).ap.bind(null, m), TypeError, 'throws when wrapped value is an array')
+  t.throws(Maybe({}).ap.bind(null, m), TypeError, 'throws when wrapped value is an object')
+
+  t.throws(Maybe(noop).ap.bind(null, 0), TypeError, 'throws when passed a falsey number')
+  t.throws(Maybe(noop).ap.bind(null, 1), TypeError, 'throws when passed a truthy number')
+  t.throws(Maybe(noop).ap.bind(null, ''), TypeError, 'throws when passed a falsey string')
+  t.throws(Maybe(noop).ap.bind(null, 'string'), TypeError, 'throws when passed a truthy string')
+  t.throws(Maybe(noop).ap.bind(null, false), TypeError, 'throws when passed false')
+  t.throws(Maybe(noop).ap.bind(null, true), TypeError, 'throws when passed true')
+  t.throws(Maybe(noop).ap.bind(null, []), TypeError, 'throws when passed an array')
+  t.throws(Maybe(noop).ap.bind(null, {}), TypeError, 'throws when passed an object')
+
+  t.throws(Maybe(noop).ap.bind(null, m), TypeError, 'throws when container types differ')
+
   t.end()
 })
 
-test('Maybe chain functionality', t => {
+test('Maybe ap algebras (Apply)', t => {
+  const m = Maybe(id)
+
+  const a = m.map(b_comb).ap(m).ap(m)
+  const b = m.ap(m.ap(m))
+
+  t.equal(typeof Maybe(0).map, 'function', 'implements the Functor spec')
+
+  t.equal(a.ap(Maybe(3)).maybe(), b.ap(Maybe(3)).maybe(), 'composition Just')
+  t.equal(a.ap(Maybe(undefined)).maybe(), b.ap(Maybe(undefined)).maybe(), 'composition Nothing')
+
+  t.end()
+})
+
+test('Maybe of', t => {
+  t.equal(Maybe.of(0).type(), 'Maybe', 'returns a maybe')
+  t.equal(Maybe.of(0).maybe(), 0, 'wraps the value passed into a maybe')
+  t.end()
+})
+
+test('Maybe of algebras (Applicative)', t => {
+  const m = Maybe(id)
+
+  t.equal(typeof Maybe(0).ap, 'function', 'implements the Apply spec')
+
+  t.equal(m.ap(Maybe(3)).maybe(), 3, 'identity Just')
+  t.equal(m.ap(Maybe(undefined)).maybe(), null, 'identity Nothing')
+
+  t.equal(m.ap(Maybe.of(3)).maybe(), Maybe.of(id(3)).maybe(), 'homomorphism Just')
+  t.equal(m.ap(Maybe.of(undefined)).maybe(), Maybe.of(id(undefined)).maybe(), 'homomorphism Nothing')
+
+  const a = x => m.ap(Maybe.of(x))
+  const b = x => Maybe.of(t_comb(x)).ap(m)
+
+  t.equal(a(3).maybe(), b(3).maybe(), 'interchange Just')
+  t.equal(a(undefined).maybe(), b(undefined).maybe(), 'interchange Nothing')
+
+  t.end()
+})
+
+test('Maybe chain errors', t => {
+  const chain = bindFunc(Maybe(0).chain)
+
+  t.throws(chain(0), TypeError, 'throws when passed a falsey number')
+  t.throws(chain(1), TypeError, 'throws when passed a truthy number')
+  t.throws(chain(''), TypeError, 'throws when passed a falsey string')
+  t.throws(chain('string'), TypeError, 'throws when passed a truthy string')
+  t.throws(chain(false), TypeError, 'throws when passed false')
+  t.throws(chain(true), TypeError, 'throws when passed true')
+  t.throws(chain(null), TypeError, 'throws when passed null')
+  t.throws(chain(undefined), TypeError, 'throws when passed undefined')
+  t.throws(chain([]), TypeError, 'throws when passed an array')
+  t.throws(chain({}), TypeError, 'throws when passed an object')
+  t.doesNotThrow(chain(noop), 'does not throw when passed a function')
+
+  t.end()
+})
+
+test('Maybe chain algebras (Chain)', t => {
+  t.equal(typeof Maybe(0).ap, 'function', 'implements the Apply spec')
+
+  const f = x => Maybe(x + 2)
+  const g = x => Maybe(x + 10)
+
+  const a = x => Maybe(x).chain(f).chain(g)
+  const b = x => Maybe(x).chain(y => f(y).chain(g))
+
+  t.equal(a(10).maybe(), b(10).maybe(), 'assosiativity Just')
+  t.equal(a(null).maybe(), b(null).maybe(), 'assosiativity Nothing')
+
+  t.end()
+})
+
+test('Maybe chain algebras (Monad)', t => {
+  t.equal(typeof Maybe(0).chain, 'function', 'implements the Chain spec')
+  t.equal(typeof Maybe(0).of, 'function', 'implements the Applicative spec')
+
+  const f = x => Maybe(x)
+
+  t.equal(Maybe.of(3).chain(f).maybe(), f(3).maybe(), 'left identity Just')
+  t.equal(Maybe.of(null).chain(f).maybe(), f(null).maybe(), 'left identity Nothing')
+
+  const m = x => Maybe(x)
+
+  t.equal(m(3).chain(Maybe.of).maybe(), m(3).maybe(), 'right identity Just')
+  t.equal(m(null).chain(Maybe.of).maybe(), m(null).maybe(), 'right identity Nothing')
+
   t.end()
 })

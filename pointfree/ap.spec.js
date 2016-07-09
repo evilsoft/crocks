@@ -1,9 +1,10 @@
 const test  = require('tape')
 const sinon = require('sinon')
 
+const i_comb = require('../combinators/i_comb')
+
 const helpers   = require('../test/helpers')
 const bindFunc  = helpers.bindFunc
-const noop      = helpers.noop
 
 const ap  = require('./ap')
 
@@ -35,9 +36,8 @@ test('ap', t => {
 })
 
 test('ap applicative', t => {
-  const id  = x => x
-  const m   = { ap: sinon.spy(id) }
-  const x   = { ap: sinon.spy(id) }
+  const m   = { ap: sinon.spy(i_comb) }
+  const x   = { ap: sinon.spy(i_comb) }
 
   const result = ap(m)(x)
 

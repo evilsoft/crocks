@@ -3,8 +3,8 @@ const sinon = require('sinon')
 
 const helpers   = require('../test/helpers')
 const bindFunc  = helpers.bindFunc
-const id        = helpers.id
 
+const i_comb = require('./i_comb')
 const b_comb = require('./b_comb')
 
 test('b_comb (B combinator)', t => {
@@ -12,26 +12,26 @@ test('b_comb (B combinator)', t => {
 
   t.equal(typeof b_comb, 'function', 'is a function')
 
-  t.throws(b(0, id, 0), TypeError, 'throws when first arg is a falsey number')
-  t.throws(b(1, id, 0), TypeError, 'throws when first arg is a truthy number')
-  t.throws(b('', id, 0), TypeError, 'throws when first arg is a falsey string')
-  t.throws(b('string', id, 0), TypeError, 'throws when first arg is a truthy string')
-  t.throws(b(false, id, 0), TypeError, 'throws when first arg is false')
-  t.throws(b(true, id, 0), TypeError, 'throws when first arg is true')
-  t.throws(b([], id, 0), TypeError, 'throws when first arg is an array')
-  t.throws(b({}, id, 0), TypeError, 'throws when first arg is an object')
+  t.throws(b(0, i_comb, 0), TypeError, 'throws when first arg is a falsey number')
+  t.throws(b(1, i_comb, 0), TypeError, 'throws when first arg is a truthy number')
+  t.throws(b('', i_comb, 0), TypeError, 'throws when first arg is a falsey string')
+  t.throws(b('string', i_comb, 0), TypeError, 'throws when first arg is a truthy string')
+  t.throws(b(false, i_comb, 0), TypeError, 'throws when first arg is false')
+  t.throws(b(true, i_comb, 0), TypeError, 'throws when first arg is true')
+  t.throws(b([], i_comb, 0), TypeError, 'throws when first arg is an array')
+  t.throws(b({}, i_comb, 0), TypeError, 'throws when first arg is an object')
 
-  t.throws(b(id, 0, 0), TypeError, 'throws when second arg is a falsey number')
-  t.throws(b(id, 1, 0), TypeError, 'throws when second arg is a truthy number')
-  t.throws(b(id, '', 0), TypeError, 'throws when second arg is a falsey string')
-  t.throws(b(id, 'string', 0), TypeError, 'throws when second arg is a truthy string')
-  t.throws(b(id, false, 0), TypeError, 'throws when second arg is false')
-  t.throws(b(id, true, 0), TypeError, 'throws when second arg is true')
-  t.throws(b(id, [], 0), TypeError, 'throws when second arg is an array')
-  t.throws(b(id, {}, 0), TypeError, 'throws when second arg is an object')
+  t.throws(b(i_comb, 0, 0), TypeError, 'throws when second arg is a falsey number')
+  t.throws(b(i_comb, 1, 0), TypeError, 'throws when second arg is a truthy number')
+  t.throws(b(i_comb, '', 0), TypeError, 'throws when second arg is a falsey string')
+  t.throws(b(i_comb, 'string', 0), TypeError, 'throws when second arg is a truthy string')
+  t.throws(b(i_comb, false, 0), TypeError, 'throws when second arg is false')
+  t.throws(b(i_comb, true, 0), TypeError, 'throws when second arg is true')
+  t.throws(b(i_comb, [], 0), TypeError, 'throws when second arg is an array')
+  t.throws(b(i_comb, {}, 0), TypeError, 'throws when second arg is an object')
 
-  const f = sinon.spy(id)
-  const g = sinon.spy(id)
+  const f = sinon.spy(i_comb)
+  const g = sinon.spy(i_comb)
   const x = 74
 
   const result = b_comb(f)(g)(x)

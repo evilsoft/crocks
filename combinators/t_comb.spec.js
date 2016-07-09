@@ -3,8 +3,8 @@ const sinon = require('sinon')
 
 const helpers   = require('../test/helpers')
 const bindFunc  = helpers.bindFunc
-const id        = helpers.id
 
+const i_comb = require('./i_comb')
 const t_comb = require('./t_comb')
 
 test('t_comb (T combinator)', t => {
@@ -17,11 +17,11 @@ test('t_comb (T combinator)', t => {
   t.throws(tc(0, ''), 'throws when second arg is a falsey string')
   t.throws(tc(0, 'string'), 'throws when second arg is a truthy string')
   t.throws(tc(0, false), 'throws when second arg is false')
-  t.throws(tc(0, true), 'throws when second arg is true')
+  t.throws(tc(0, true), 'thROWS WHEN second arg is true')
   t.throws(tc(0, []), 'throws when second arg is an array')
   t.throws(tc(0, {}), 'throws when second arg is an object')
 
-  const f = sinon.spy(id)
+  const f = sinon.spy(i_comb)
   const x = 23
 
   const result = t_comb(x)(f)

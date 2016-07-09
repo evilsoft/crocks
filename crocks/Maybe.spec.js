@@ -6,9 +6,9 @@ const helpers = require('../test/helpers')
 const noop      = helpers.noop
 const bindFunc  = helpers.bindFunc
 
-const id        = helpers.id
 const t_comb    = require('../combinators/t_comb')
 const b_comb    = require('../combinators/b_comb')
+const i_comb    = require('../combinators/i_comb')
 
 const Maybe = require('./Maybe')
 
@@ -99,9 +99,9 @@ test('Maybe map errors', t => {
 })
 
 test('Maybe map functionality', t => {
-  const spy = sinon.spy(id)
+  const spy = sinon.spy(i_comb)
 
-  t.equal(Maybe(0).map(id).type(), 'Maybe', 'returns a Maybe')
+  t.equal(Maybe(0).map(i_comb).type(), 'Maybe', 'returns a Maybe')
 
   const undef = Maybe(undefined).map(spy)
 
@@ -122,7 +122,7 @@ test('Maybe map algebras (Functor)', t => {
   const f   = x => x + 2
   const g   = x => x * 2
 
-  t.equal(Maybe(0).map(id).maybe(), 0, 'identity')
+  t.equal(Maybe(0).map(i_comb).maybe(), 0, 'identity')
   t.equals(Maybe(10).map(x => f(g(x))).maybe(), Maybe(10).map(g).map(f).maybe(), 'composition')
   t.end()
 })
@@ -154,7 +154,7 @@ test('Maybe ap errors', t => {
 })
 
 test('Maybe ap algebras (Apply)', t => {
-  const m = Maybe(id)
+  const m = Maybe(i_comb)
 
   const a = m.map(b_comb).ap(m).ap(m)
   const b = m.ap(m.ap(m))
@@ -174,15 +174,15 @@ test('Maybe of', t => {
 })
 
 test('Maybe of algebras (Applicative)', t => {
-  const m = Maybe(id)
+  const m = Maybe(i_comb)
 
   t.equal(typeof Maybe(0).ap, 'function', 'implements the Apply spec')
 
   t.equal(m.ap(Maybe(3)).maybe(), 3, 'identity Just')
   t.equal(m.ap(Maybe(undefined)).maybe(), null, 'identity Nothing')
 
-  t.equal(m.ap(Maybe.of(3)).maybe(), Maybe.of(id(3)).maybe(), 'homomorphism Just')
-  t.equal(m.ap(Maybe.of(undefined)).maybe(), Maybe.of(id(undefined)).maybe(), 'homomorphism Nothing')
+  t.equal(m.ap(Maybe.of(3)).maybe(), Maybe.of(i_comb(3)).maybe(), 'homomorphism Just')
+  t.equal(m.ap(Maybe.of(undefined)).maybe(), Maybe.of(i_comb(undefined)).maybe(), 'homomorphism Nothing')
 
   const a = x => m.ap(Maybe.of(x))
   const b = x => Maybe.of(t_comb(x)).ap(m)

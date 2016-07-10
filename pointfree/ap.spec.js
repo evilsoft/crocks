@@ -36,8 +36,8 @@ test('ap pointfree', t => {
 })
 
 test('ap applicative', t => {
-  const m   = { ap: sinon.spy(i_comb) }
-  const x   = { ap: sinon.spy(i_comb) }
+  const m = { ap: sinon.spy(i_comb) }
+  const x = { ap: sinon.spy(i_comb) }
 
   const result = ap(m)(x)
 

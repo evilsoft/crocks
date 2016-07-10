@@ -1,7 +1,5 @@
 const curry       = require('../funcs/curry')
-
-const helpers     = require('../internal/helpers')
-const isFunction  = helpers.isFunction
+const isFunction  = require('../internal/isFunction')
 
 // chain :: Chain m => (a -> m b) -> m a -> m b
 function chain(fn, m) {

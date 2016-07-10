@@ -1,7 +1,7 @@
-const test = require('tape')
+const test  = require('tape')
 const sinon = require('sinon')
 
-const k_comb  = require('../combinators/k_comb')
+const k_comb = require('../combinators/k_comb')
 
 const helpers = require('../test/helpers')
 

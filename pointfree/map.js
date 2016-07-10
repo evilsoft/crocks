@@ -1,8 +1,6 @@
-const curry   = require('../funcs/curry')
-const b_comb  = require('../combinators/b_comb')
-
-const helpers     = require('../internal/helpers')
-const isFunction  = helpers.isFunction
+const curry       = require('../funcs/curry')
+const isFunction  = require('../internal/isFunction')
+const b_comb      = require('../combinators/b_comb')
 
 // map :: Functor f => (a -> b) -> f a -> f b
 function map(fn, m) {

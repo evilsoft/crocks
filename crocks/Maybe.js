@@ -1,6 +1,5 @@
-const helpers     = require('../internal/helpers')
-const isFunction  = helpers.isFunction
-const isType      = helpers.isType
+const isFunction  = require('../internal/isFunction')
+const isType      = require('../internal/isType')
 
 const isNothing = x => x === undefined || x === null
 

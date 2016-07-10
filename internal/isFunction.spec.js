@@ -1,13 +1,11 @@
 const test = require('tape')
 
-const internal    = require('./helpers')
-const isFunction  = internal.isFunction
-const isType      = internal.isType
+const isFunction = require('./isFunction')
 
-const helpers     = require('../test/helpers')
-const noop        = helpers.noop
+const helpers = require('../test/helpers')
+const noop    = helpers.noop
 
-test('isFunction internal helper', t => {
+test('isFunction internal function', t => {
   t.equal(typeof isFunction, 'function', 'is a function')
 
   t.equal(isFunction(noop), true, 'returns true when passed a function')
@@ -19,19 +17,6 @@ test('isFunction internal helper', t => {
   t.equal(isFunction(true), false, 'returns false when passed true')
   t.equal(isFunction([]), false, 'returns false when passed an array')
   t.equal(isFunction({}), false, 'returns false when passed an object')
-
-  t.end()
-})
-
-test('isType internal helper', t => {
-  const first   = { type: () => 'first' }
-  const second  = { type: () => 'second' }
-
-  t.equal(typeof isType, 'function', 'is a function')
-
-  t.equal(isType(first.type(), first), true, 'reports true when they are the same')
-  t.equal(isType(first.type(), second), false, 'reports false when they are the different containers')
-  t.equal(isType(first.type(), []), false, 'reports false when one is not a container')
 
   t.end()
 })

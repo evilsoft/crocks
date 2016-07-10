@@ -1,5 +1,4 @@
-const helpers     = require('../internal/helpers')
-const isFunction  = helpers.isFunction
+const isFunction = require('../internal/isFunction')
 
 function maybe(m) {
   if(!isFunction(m.maybe)) {

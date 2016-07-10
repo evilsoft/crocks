@@ -1,7 +1,5 @@
-const helpers = require('../internal/helpers')
-
-const isFunction  = helpers.isFunction
-const argsArray   = helpers.argsArray
+const isFunction  = require('../internal/isFunction')
+const argsArray   = require('../internal/argsArray')
 
 function compose() {
   if(!arguments.length) {

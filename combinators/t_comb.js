@@ -1,7 +1,5 @@
-const curry = require('../funcs/curry')
-
-const helpers     = require('../internal/helpers')
-const isFunction  = helpers.isFunction
+const curry       = require('../funcs/curry')
+const isFunction  = require('../internal/isFunction')
 
 // Reverse Application (Thrush)
 // t_comb :: a -> (a -> b) -> b

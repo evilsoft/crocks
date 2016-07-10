@@ -1,7 +1,5 @@
-const curry = require('../funcs/curry')
-
-const helpers     = require('../internal/helpers')
-const isFunction  = helpers.isFunction
+const curry       = require('../funcs/curry')
+const isFunction  = require('../internal/isFunction')
 
 // ap :: Applicative m => m a -> m (a -> b) ->  m b
 function ap(m, x) {

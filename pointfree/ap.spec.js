@@ -8,9 +8,9 @@ const bindFunc  = helpers.bindFunc
 
 const ap  = require('./ap')
 
-test('ap', t => {
+test('ap pointfree', t => {
   const a = bindFunc(ap)
-  const m = { ap: sinon.spy() }
+  const m = { ap: i_comb }
 
   t.equal(typeof ap, 'function', 'ap is a function')
 

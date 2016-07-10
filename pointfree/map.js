@@ -15,7 +15,7 @@ function map(fn, m) {
   } else if(m && isFunction(m.map)) {
     return m.map(fn)
   } else {
-    throw new TypeError('second arg to map must be Functor or function')
+    throw new TypeError('second arg to map must be a function or Functor of the same type')
   }
 }
 

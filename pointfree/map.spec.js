@@ -1,5 +1,4 @@
 const test  = require('tape')
-const map   = require('./map')
 const sinon = require('sinon')
 
 const i_comb  = require('../combinators/i_comb')
@@ -8,7 +7,9 @@ const helpers = require('../test/helpers')
 const bindFunc  = helpers.bindFunc
 const noop      = helpers.noop
 
-test('map', t => {
+const map   = require('./map')
+
+test('map pointfree', t => {
   const m = bindFunc(map)
   const f = { map: noop }
 

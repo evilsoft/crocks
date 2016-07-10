@@ -10,8 +10,9 @@ const i_comb  = require('./combinators/i_comb')
 const compose = require('./funcs/compose')
 const curry   = require('./funcs/curry')
 
-const map = require('./pointfree/map')
-const ap  = require('./pointfree/ap')
+const map   = require('./pointfree/map')
+const ap    = require('./pointfree/ap')
+const chain = require('./pointfree/chain')
 
 const Maybe   = require('./crocks/Maybe')
 
@@ -28,6 +29,7 @@ test('entry', t => {
 
   t.equal(crocks.map, map, 'provides the map point-free function')
   t.equal(crocks.ap, ap, 'provides the ap point-free function')
+  t.equal(crocks.chain, chain, 'provides the chain point-free function')
 
   t.equal(crocks.Maybe, Maybe, 'provides the Maybe function')
 

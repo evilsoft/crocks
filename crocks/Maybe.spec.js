@@ -6,9 +6,9 @@ const helpers = require('../test/helpers')
 const noop      = helpers.noop
 const bindFunc  = helpers.bindFunc
 
-const t_comb    = require('../combinators/t_comb')
-const b_comb    = require('../combinators/b_comb')
-const i_comb    = require('../combinators/i_comb')
+const t_comb  = require('../combinators/t_comb')
+const b_comb  = require('../combinators/b_comb')
+const i_comb  = require('../combinators/i_comb')
 
 const Maybe = require('./Maybe')
 
@@ -19,12 +19,6 @@ test('Maybe', t => {
   t.equal(typeof Maybe.of, 'function', 'Maybe provides an of function')
 
   t.equal(m.toString(), '[object Object]', 'Maybe returns an object')
-
-  t.equal(typeof m.equals, 'function', 'Maybe result provides an equals function')
-  t.equal(typeof m.map, 'function', 'Maybe result provides a map function')
-  t.equal(typeof m.chain, 'function', 'Maybe result provides a chain function')
-  t.equal(typeof m.ap, 'function', 'Maybe result provides an ap function')
-  t.equal(typeof m.of, 'function', 'Maybe result provides an of function')
 
   t.equal(typeof m.maybe, 'function', 'Maybe result provides a maybe function')
   t.equal(typeof m.type, 'function', 'Maybe result provides a type function')
@@ -72,6 +66,8 @@ test('Maybe equals algebras (Setoid)', t => {
   const a = Maybe(0)
   const b = Maybe(0)
   const c = Maybe(1)
+
+  t.equal(typeof Maybe(0).equals, 'function', 'provides an equals function')
 
   t.equals(a.equals(a), true, 'is reflexive')
   t.equals(a.equals(c) === c.equals(a), true, 'has symmetry (false)')
@@ -122,6 +118,8 @@ test('Maybe map algebras (Functor)', t => {
   const f   = x => x + 2
   const g   = x => x * 2
 
+  t.equal(typeof Maybe(0).map, 'function', 'provides a map function')
+
   t.equal(Maybe(0).map(i_comb).maybe(), 0, 'identity')
   t.equals(Maybe(10).map(x => f(g(x))).maybe(), Maybe(10).map(g).map(f).maybe(), 'composition')
   t.end()
@@ -159,6 +157,7 @@ test('Maybe ap algebras (Apply)', t => {
   const a = m.map(b_comb).ap(m).ap(m)
   const b = m.ap(m.ap(m))
 
+  t.equal(typeof Maybe(0).ap, 'function', 'provides an ap function')
   t.equal(typeof Maybe(0).map, 'function', 'implements the Functor spec')
 
   t.equal(a.ap(Maybe(3)).maybe(), b.ap(Maybe(3)).maybe(), 'composition Just')
@@ -176,6 +175,7 @@ test('Maybe of', t => {
 test('Maybe of algebras (Applicative)', t => {
   const m = Maybe(i_comb)
 
+  t.equal(typeof Maybe(0).of, 'function', 'provides an of function')
   t.equal(typeof Maybe(0).ap, 'function', 'implements the Apply spec')
 
   t.equal(m.ap(Maybe(3)).maybe(), 3, 'identity Just')
@@ -212,6 +212,7 @@ test('Maybe chain errors', t => {
 })
 
 test('Maybe chain algebras (Chain)', t => {
+  t.equal(typeof Maybe(0).chain, 'function', 'provides a chain function')
   t.equal(typeof Maybe(0).ap, 'function', 'implements the Apply spec')
 
   const f = x => Maybe(x + 2)

@@ -12,7 +12,7 @@ test('ap pointfree', t => {
   const a = bindFunc(ap)
   const m = { ap: i_comb }
 
-  t.equal(typeof ap, 'function', 'ap is a function')
+  t.equal(typeof ap, 'function', 'is a function')
 
   t.throws(a(0, m), TypeError, 'throws if first arg is a falsey number')
   t.throws(a(1, m), TypeError, 'throws if first arg is a truthy number')

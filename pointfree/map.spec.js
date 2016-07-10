@@ -13,7 +13,7 @@ test('map pointfree', t => {
   const m = bindFunc(map)
   const f = { map: noop }
 
-  t.equal(typeof map, 'function', 'map is a function')
+  t.equal(typeof map, 'function', 'is a function')
 
   t.throws(m(0, f), 'throws if first arg is a falsey number')
   t.throws(m(1, f), 'throws if first arg is a truthy number')

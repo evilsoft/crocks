@@ -13,7 +13,8 @@ const helpers = {
 const pointFree = {
   map:    require('./pointfree/map'),
   ap:     require('./pointfree/ap'),
-  chain:  require('./pointfree/chain')
+  chain:  require('./pointfree/chain'),
+  maybe:  require('./pointfree/maybe')
 }
 
 const combinators = {

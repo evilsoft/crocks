@@ -14,7 +14,8 @@ function curry(fn) {
   }
 
   return function() {
-    const args = argsArray(arguments)
+    const xs    = argsArray(arguments)
+    const args  = xs.length ? xs : [ undefined ]
 
     if(args.length < fn.length) {
       return curry(Function.bind.apply(fn, [null].concat(args)))

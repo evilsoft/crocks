@@ -15,7 +15,7 @@ test('chain pointfree', t => {
   const x = 'result'
   const m = { chain: sinon.spy(k_comb(x)) }
 
-  t.equal(typeof chain, 'function', 'chain is a function')
+  t.equal(typeof chain, 'function', 'is a function')
 
   t.throws(c(0, m), 'throws if first arg is a falsey number')
   t.throws(c(1, m), 'throws if first arg is a truthy number')

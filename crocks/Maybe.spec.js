@@ -52,7 +52,7 @@ test('Maybe equals functionality', t => {
   const c = Maybe(1)
 
   const value = 0
-  const nonMaybe = { type: 'NotMaybe' }
+  const nonMaybe = { type: 'Maybe...Not' }
 
   t.equals(a.equals(c), false, 'returns false when 2 Maybes are not equal')
   t.equals(a.equals(b), true, 'returns true when 2 Maybes are equal')

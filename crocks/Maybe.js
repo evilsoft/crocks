@@ -4,7 +4,7 @@ const isType      = require('../internal/isType')
 const isNothing = x => x === undefined || x === null
 
 function Maybe(x) {
-  if(arguments.length === 0) {
+  if(!arguments.length) {
     throw new TypeError('Maybe must wrap something')
   }
 

@@ -18,7 +18,7 @@ function Identity(x) {
 
   function map(fn) {
     if(!isFunction(fn)) {
-      throw new TypeError('Identity.map must be passed a function')
+      throw new TypeError('Identity.map: function required')
     }
 
     return Identity(fn(x))
@@ -26,16 +26,24 @@ function Identity(x) {
 
   function ap(m) {
     if(!isFunction(x)) {
-      throw new TypeError('Wrapped value must be a function for ap')
+      throw new TypeError('Identity.ap: Wrapped value must be a function')
     }
 
     if(!isType(type(), m)) {
-      throw new TypeError('Both containers need to be the same for ap')
+      throw new TypeError('Identity.ap: Identity required')
     }
     return m.map(x)
   }
 
-  return { value, type, equals, map, ap, of }
+  function chain(fn) {
+    if(!isFunction(fn)) {
+      throw new TypeError('Identity.chain: function required')
+    }
+
+    return map(fn).value()
+  }
+
+  return { value, type, equals, map, ap, of, chain }
 }
 
 Identity.of = x => Identity(x)

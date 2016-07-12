@@ -216,7 +216,7 @@ test('Maybe chain errors', t => {
   t.end()
 })
 
-test('Maybe chain algebras (Chain)', t => {
+test('Maybe chain properties (Chain)', t => {
   t.equal(typeof Maybe(0).chain, 'function', 'provides a chain function')
   t.equal(typeof Maybe(0).ap, 'function', 'implements the Apply spec')
 

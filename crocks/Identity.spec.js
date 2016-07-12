@@ -50,7 +50,7 @@ test('Identity equals functionality', t => {
   t.equals(a.equals(c), false, 'returns false when 2 Identities are not equal')
   t.equals(a.equals(b), true, 'returns true when 2 Identities are equal')
   t.equals(a.equals(value), false, 'returns false when passed a simple value')
-  t.equals(a.equals(nonIdentity), false, 'returns false when passed a non-Maybe')
+  t.equals(a.equals(nonIdentity), false, 'returns false when passed a non-Identity')
 
   t.end()
 })
@@ -174,6 +174,54 @@ test('Identity of properties (Applicative)', t => {
   const b = x => Identity.of(t_comb(x)).ap(m)
 
   t.equal(a(3).value(), b(3).value(), 'interchange')
+
+  t.end()
+})
+
+test('Identity chain errors', t => {
+  const chain = bindFunc(Identity(0).chain)
+
+  t.throws(chain(0), TypeError, 'throws when passed a falsey number')
+  t.throws(chain(1), TypeError, 'throws when passed a truthy number')
+  t.throws(chain(''), TypeError, 'throws when passed a falsey string')
+  t.throws(chain('string'), TypeError, 'throws when passed a truthy string')
+  t.throws(chain(false), TypeError, 'throws when passed false')
+  t.throws(chain(true), TypeError, 'throws when passed true')
+  t.throws(chain(null), TypeError, 'throws when passed null')
+  t.throws(chain(undefined), TypeError, 'throws when passed undefined')
+  t.throws(chain([]), TypeError, 'throws when passed an array')
+  t.throws(chain({}), TypeError, 'throws when passed an object')
+  t.doesNotThrow(chain(noop), 'does not throw when passed a function')
+
+  t.end()
+})
+
+test('Identity chain properties (Chain)', t => {
+  t.equal(typeof Identity(0).chain, 'function', 'provides a chain function')
+  t.equal(typeof Identity(0).ap, 'function', 'implements the Apply spec')
+
+  const f = x => Identity(x + 2)
+  const g = x => Identity(x + 10)
+
+  const a = x => Identity(x).chain(f).chain(g)
+  const b = x => Identity(x).chain(y => f(y).chain(g))
+
+  t.equal(a(10).value(), b(10).value(), 'assosiativity')
+
+  t.end()
+})
+
+test('Identity chain properties (Monad)', t => {
+  t.equal(typeof Identity(0).chain, 'function', 'implements the Chain spec')
+  t.equal(typeof Identity(0).of, 'function', 'implements the Applicative spec')
+
+  const f = x => Identity(x)
+
+  t.equal(Identity.of(3).chain(f).value(), f(3).value(), 'left identity')
+
+  const m = x => Identity(x)
+
+  t.equal(m(3).chain(Identity.of).value(), m(3).value(), 'right identity')
 
   t.end()
 })

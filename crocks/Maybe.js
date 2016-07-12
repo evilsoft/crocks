@@ -8,7 +8,9 @@ function Maybe(x) {
     throw new TypeError('Maybe must wrap something')
   }
 
-  const of = Maybe.of
+  const maybe = () => isNothing(x) ? null : x
+  const type  = () => 'Maybe'
+  const of    = Maybe.of
 
   function equals(m) {
     return isFunction(m.type)
@@ -18,7 +20,7 @@ function Maybe(x) {
 
   function map(fn) {
     if(!isFunction(fn)) {
-      throw new TypeError('Maybe.map must be passed a function')
+      throw new TypeError('Maybe.map: function required')
     }
 
     return Maybe(isNothing(x) ? null : fn(x))
@@ -28,11 +30,11 @@ function Maybe(x) {
     const fn = isNothing(x) ? () => null : x
 
     if(!isFunction(fn)) {
-      throw new TypeError('Wrapped value must be a function for ap')
+      throw new TypeError('Maybe.ap: Wrapped value must be a function')
     }
 
     if(!isType(type(), m)) {
-      throw new TypeError('Both containers need to be the same for ap')
+      throw new TypeError(' Maybe.ap: Maybe required')
     }
 
     return m.map(fn)
@@ -40,16 +42,14 @@ function Maybe(x) {
 
   function chain(fn) {
     if(!isFunction(fn)) {
-      throw new TypeError('Maybe.chain must be passed a function')
+      throw new TypeError('Maybe.chain: function required')
     }
 
     return isNothing(x) ? Maybe(null) : map(fn).maybe()
   }
 
-  const maybe = () => isNothing(x) ? null : x
-  const type  = () => 'Maybe'
 
-  return { of, equals, map, ap, chain, type, maybe }
+  return { maybe, type, equals, map, ap, of, chain }
 }
 
 Maybe.of = x => Maybe(x)

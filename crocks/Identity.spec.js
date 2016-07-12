@@ -5,7 +5,7 @@ const helpers   = require('../test/helpers')
 const bindFunc  = helpers.bindFunc
 const noop      = helpers.noop
 
-const i_comb    = require('../combinators/i_comb')
+const identity  = require('../combinators/identity')
 const composeB  = require('../combinators/composeB')
 const t_comb    = require('../combinators/t_comb')
 
@@ -87,7 +87,7 @@ test('Identity map errors', t => {
 })
 
 test('Identity map functionality', t => {
-  const spy = sinon.spy(i_comb)
+  const spy = sinon.spy(identity)
   const x   = 42
 
   const m = Identity(x).map(spy)
@@ -107,7 +107,7 @@ test('Identity map properties (Functor)', t => {
 
   t.equal(typeof m.map, 'function', 'provides a map function')
 
-  t.equal(m.map(i_comb).value(), m.value(), 'identity')
+  t.equal(m.map(identity).value(), m.value(), 'identity')
   t.equal(m.map(composeB(f, g)).value(), m.map(g).map(f).value(), 'composition')
 
   t.end()
@@ -140,7 +140,7 @@ test('Identity ap errors', t => {
 })
 
 test('Identity ap properties (Apply)', t => {
-  const m = Identity(i_comb)
+  const m = Identity(identity)
 
   const a = m.map(composeB).ap(m).ap(m)
   const b = m.ap(m.ap(m))
@@ -162,13 +162,13 @@ test('Identity of', t => {
 })
 
 test('Identity of properties (Applicative)', t => {
-  const m = Identity(i_comb)
+  const m = Identity(identity)
 
   t.equal(typeof Identity(0).of, 'function', 'provides an of function')
   t.equal(typeof Identity(0).ap, 'function', 'implements the Apply spec')
 
   t.equal(m.ap(Identity(3)).value(), 3, 'identity')
-  t.equal(m.ap(Identity.of(3)).value(), Identity.of(i_comb(3)).value(), 'homomorphism')
+  t.equal(m.ap(Identity.of(3)).value(), Identity.of(identity(3)).value(), 'homomorphism')
 
   const a = x => m.ap(Identity.of(x))
   const b = x => Identity.of(t_comb(x)).ap(m)

@@ -1,7 +1,7 @@
 const test  = require('tape')
 const sinon = require('sinon')
 
-const i_comb = require('../combinators/i_comb')
+const identity = require('../combinators/identity')
 
 const helpers   = require('../test/helpers')
 const bindFunc  = helpers.bindFunc
@@ -10,7 +10,7 @@ const ap  = require('./ap')
 
 test('ap pointfree', t => {
   const a = bindFunc(ap)
-  const m = { ap: i_comb }
+  const m = { ap: identity }
 
   t.equal(typeof ap, 'function', 'is a function')
 
@@ -36,8 +36,8 @@ test('ap pointfree', t => {
 })
 
 test('ap applicative', t => {
-  const m = { ap: sinon.spy(i_comb) }
-  const x = { ap: sinon.spy(i_comb) }
+  const m = { ap: sinon.spy(identity) }
+  const x = { ap: sinon.spy(identity) }
 
   const result = ap(m)(x)
 

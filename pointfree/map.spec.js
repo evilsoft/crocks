@@ -1,7 +1,7 @@
 const test  = require('tape')
 const sinon = require('sinon')
 
-const i_comb  = require('../combinators/i_comb')
+const identity = require('../combinators/identity')
 const helpers = require('../test/helpers')
 
 const bindFunc  = helpers.bindFunc
@@ -41,9 +41,9 @@ test('map pointfree', t => {
 test('map functor', t => {
   const m = { map: sinon.spy(noop) }
 
-  map(i_comb)(m)
+  map(identity)(m)
 
-  t.equal(m.map.calledWith(i_comb), true, 'calls map on functor, passing the function')
+  t.equal(m.map.calledWith(identity), true, 'calls map on functor, passing the function')
   t.end()
 })
 

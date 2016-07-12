@@ -21,7 +21,7 @@ const pointFree = {
 
 const combinators = {
   composeB: require('./combinators/composeB'),
-  i_comb:   require('./combinators/i_comb'),
+  identity: require('./combinators/identity'),
   k_comb:   require('./combinators/k_comb'),
   t_comb:   require('./combinators/t_comb')
 }

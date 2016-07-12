@@ -8,7 +8,7 @@ const bindFunc  = helpers.bindFunc
 
 const t_comb    = require('../combinators/t_comb')
 const composeB  = require('../combinators/composeB')
-const i_comb    = require('../combinators/i_comb')
+const identity  = require('../combinators/identity')
 
 const Maybe = require('./Maybe')
 
@@ -97,9 +97,9 @@ test('Maybe map errors', t => {
 })
 
 test('Maybe map functionality', t => {
-  const spy = sinon.spy(i_comb)
+  const spy = sinon.spy(identity)
 
-  t.equal(Maybe(0).map(i_comb).type(), 'Maybe', 'returns a Maybe')
+  t.equal(Maybe(0).map(identity).type(), 'Maybe', 'returns a Maybe')
 
   const undef = Maybe(undefined).map(spy)
 
@@ -122,7 +122,7 @@ test('Maybe map properties (Functor)', t => {
 
   t.equal(typeof Maybe(0).map, 'function', 'provides a map function')
 
-  t.equal(Maybe(0).map(i_comb).maybe(), 0, 'identity')
+  t.equal(Maybe(0).map(identity).maybe(), 0, 'identity')
   t.equals(Maybe(10).map(x => f(g(x))).maybe(), Maybe(10).map(g).map(f).maybe(), 'composition')
 
   t.end()
@@ -155,7 +155,7 @@ test('Maybe ap errors', t => {
 })
 
 test('Maybe ap properties (Apply)', t => {
-  const m = Maybe(i_comb)
+  const m = Maybe(identity)
 
   const a = m.map(composeB).ap(m).ap(m)
   const b = m.ap(m.ap(m))
@@ -178,7 +178,7 @@ test('Maybe of', t => {
 })
 
 test('Maybe of properties (Applicative)', t => {
-  const m = Maybe(i_comb)
+  const m = Maybe(identity)
 
   t.equal(typeof Maybe(0).of, 'function', 'provides an of function')
   t.equal(typeof Maybe(0).ap, 'function', 'implements the Apply spec')
@@ -186,8 +186,8 @@ test('Maybe of properties (Applicative)', t => {
   t.equal(m.ap(Maybe(3)).maybe(), 3, 'identity Just')
   t.equal(m.ap(Maybe(undefined)).maybe(), null, 'identity Nothing')
 
-  t.equal(m.ap(Maybe.of(3)).maybe(), Maybe.of(i_comb(3)).maybe(), 'homomorphism Just')
-  t.equal(m.ap(Maybe.of(undefined)).maybe(), Maybe.of(i_comb(undefined)).maybe(), 'homomorphism Nothing')
+  t.equal(m.ap(Maybe.of(3)).maybe(), Maybe.of(identity(3)).maybe(), 'homomorphism Just')
+  t.equal(m.ap(Maybe.of(undefined)).maybe(), Maybe.of(identity(undefined)).maybe(), 'homomorphism Nothing')
 
   const a = x => m.ap(Maybe.of(x))
   const b = x => Maybe.of(t_comb(x)).ap(m)

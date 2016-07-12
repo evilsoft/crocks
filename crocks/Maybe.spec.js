@@ -6,9 +6,9 @@ const helpers = require('../test/helpers')
 const noop      = helpers.noop
 const bindFunc  = helpers.bindFunc
 
-const t_comb    = require('../combinators/t_comb')
-const composeB  = require('../combinators/composeB')
-const identity  = require('../combinators/identity')
+const reverseApply  = require('../combinators/reverseApply')
+const composeB      = require('../combinators/composeB')
+const identity      = require('../combinators/identity')
 
 const Maybe = require('./Maybe')
 
@@ -190,7 +190,7 @@ test('Maybe of properties (Applicative)', t => {
   t.equal(m.ap(Maybe.of(undefined)).maybe(), Maybe.of(identity(undefined)).maybe(), 'homomorphism Nothing')
 
   const a = x => m.ap(Maybe.of(x))
-  const b = x => Maybe.of(t_comb(x)).ap(m)
+  const b = x => Maybe.of(reverseApply(x)).ap(m)
 
   t.equal(a(3).maybe(), b(3).maybe(), 'interchange Just')
   t.equal(a(undefined).maybe(), b(undefined).maybe(), 'interchange Nothing')

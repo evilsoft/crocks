@@ -2,10 +2,10 @@ const test = require('tape')
 
 const crocks = require('./crocks')
 
-const composeB  = require('./combinators/composeB')
-const constant  = require('./combinators/constant')
-const t_comb  = require('./combinators/t_comb')
-const identity  = require('./combinators/identity')
+const composeB      = require('./combinators/composeB')
+const constant      = require('./combinators/constant')
+const reverseApply  = require('./combinators/reverseApply')
+const identity      = require('./combinators/identity')
 
 const compose = require('./funcs/compose')
 const curry   = require('./funcs/curry')
@@ -26,7 +26,7 @@ test('entry', t => {
   t.equal(crocks.composeB, composeB, 'provides the B combinator')
   t.equal(crocks.identity, identity, 'provides the I combinator')
   t.equal(crocks.constant, constant, 'provides the K combinator')
-  t.equal(crocks.t_comb, t_comb, 'provides the T combinator')
+  t.equal(crocks.reverseApply, reverseApply, 'provides the T combinator')
 
   t.equal(crocks.compose, compose, 'provides the compose helper function')
   t.equal(crocks.curry, curry, 'provides the curry helper function')

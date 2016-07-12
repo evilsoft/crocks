@@ -5,9 +5,9 @@ const helpers   = require('../test/helpers')
 const bindFunc  = helpers.bindFunc
 const noop      = helpers.noop
 
-const identity  = require('../combinators/identity')
-const composeB  = require('../combinators/composeB')
-const t_comb    = require('../combinators/t_comb')
+const identity      = require('../combinators/identity')
+const composeB      = require('../combinators/composeB')
+const reverseApply  = require('../combinators/reverseApply')
 
 const Identity = require('./Identity')
 
@@ -171,7 +171,7 @@ test('Identity of properties (Applicative)', t => {
   t.equal(m.ap(Identity.of(3)).value(), Identity.of(identity(3)).value(), 'homomorphism')
 
   const a = x => m.ap(Identity.of(x))
-  const b = x => Identity.of(t_comb(x)).ap(m)
+  const b = x => Identity.of(reverseApply(x)).ap(m)
 
   t.equal(a(3).value(), b(3).value(), 'interchange')
 

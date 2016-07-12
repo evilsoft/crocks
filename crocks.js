@@ -20,10 +20,10 @@ const pointFree = {
 }
 
 const combinators = {
-  composeB: require('./combinators/composeB'),
-  identity: require('./combinators/identity'),
-  constant: require('./combinators/constant'),
-  t_comb:   require('./combinators/t_comb')
+  composeB:     require('./combinators/composeB'),
+  identity:     require('./combinators/identity'),
+  constant:     require('./combinators/constant'),
+  reverseApply: require('./combinators/reverseApply')
 }
 
 module.exports = Object.assign(

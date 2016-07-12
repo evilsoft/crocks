@@ -2,7 +2,7 @@ const test = require('tape')
 
 const crocks = require('./crocks')
 
-const b_comb  = require('./combinators/b_comb')
+const composeB  = require('./combinators/composeB')
 const k_comb  = require('./combinators/k_comb')
 const t_comb  = require('./combinators/t_comb')
 const i_comb  = require('./combinators/i_comb')
@@ -23,7 +23,7 @@ const Identity  = require('./crocks/Identity')
 test('entry', t => {
   t.equal(crocks.toString(), '[object Object]', 'is an object')
 
-  t.equal(crocks.b_comb, b_comb, 'provides the B combinator')
+  t.equal(crocks.composeB, composeB, 'provides the B combinator')
   t.equal(crocks.i_comb, i_comb, 'provides the I combinator')
   t.equal(crocks.k_comb, k_comb, 'provides the K combinator')
   t.equal(crocks.t_comb, t_comb, 'provides the T combinator')

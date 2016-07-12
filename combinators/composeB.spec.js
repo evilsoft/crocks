@@ -5,12 +5,12 @@ const helpers   = require('../test/helpers')
 const bindFunc  = helpers.bindFunc
 
 const i_comb = require('./i_comb')
-const b_comb = require('./b_comb')
+const composeB = require('./composeB')
 
-test('b_comb (B combinator)', t => {
-  const b = bindFunc(b_comb)
+test('composeB (B combinator)', t => {
+  const b = bindFunc(composeB)
 
-  t.equal(typeof b_comb, 'function', 'is a function')
+  t.equal(typeof composeB, 'function', 'is a function')
 
   t.throws(b(0, i_comb, 0), TypeError, 'throws when first arg is a falsey number')
   t.throws(b(1, i_comb, 0), TypeError, 'throws when first arg is a truthy number')
@@ -34,7 +34,7 @@ test('b_comb (B combinator)', t => {
   const g = sinon.spy(i_comb)
   const x = 74
 
-  const result = b_comb(f)(g)(x)
+  const result = composeB(f)(g)(x)
 
   t.equal(f.calledAfter(g), true, 'calls second function before the first')
   t.equal(g.calledWith(x), true, 'third argument passed into second function')

@@ -1,6 +1,6 @@
 const curry       = require('../funcs/curry')
 const isFunction  = require('../internal/isFunction')
-const b_comb      = require('../combinators/b_comb')
+const composeB    = require('../combinators/composeB')
 
 // map :: Functor f => (a -> b) -> f a -> f b
 function map(fn, m) {
@@ -9,7 +9,7 @@ function map(fn, m) {
   }
 
   if(isFunction(m)) {
-    return b_comb(fn, m)
+    return composeB(fn, m)
   } else if(m && isFunction(m.map)) {
     return m.map(fn)
   } else {

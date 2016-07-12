@@ -20,10 +20,10 @@ const pointFree = {
 }
 
 const combinators = {
-  b_comb: require('./combinators/b_comb'),
-  i_comb: require('./combinators/i_comb'),
-  k_comb: require('./combinators/k_comb'),
-  t_comb: require('./combinators/t_comb')
+  composeB: require('./combinators/composeB'),
+  i_comb:   require('./combinators/i_comb'),
+  k_comb:   require('./combinators/k_comb'),
+  t_comb:   require('./combinators/t_comb')
 }
 
 module.exports = Object.assign(

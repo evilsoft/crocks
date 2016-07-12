@@ -5,9 +5,9 @@ const helpers   = require('../test/helpers')
 const bindFunc  = helpers.bindFunc
 const noop      = helpers.noop
 
-const i_comb  = require('../combinators/i_comb')
-const b_comb  = require('../combinators/b_comb')
-const t_comb  = require('../combinators/t_comb')
+const i_comb    = require('../combinators/i_comb')
+const composeB  = require('../combinators/composeB')
+const t_comb    = require('../combinators/t_comb')
 
 const Identity = require('./Identity')
 
@@ -108,7 +108,7 @@ test('Identity map properties (Functor)', t => {
   t.equal(typeof m.map, 'function', 'provides a map function')
 
   t.equal(m.map(i_comb).value(), m.value(), 'identity')
-  t.equal(m.map(b_comb(f, g)).value(), m.map(g).map(f).value(), 'composition')
+  t.equal(m.map(composeB(f, g)).value(), m.map(g).map(f).value(), 'composition')
 
   t.end()
 })
@@ -142,7 +142,7 @@ test('Identity ap errors', t => {
 test('Identity ap properties (Apply)', t => {
   const m = Identity(i_comb)
 
-  const a = m.map(b_comb).ap(m).ap(m)
+  const a = m.map(composeB).ap(m).ap(m)
   const b = m.ap(m.ap(m))
 
   t.equal(typeof Identity(0).map, 'function', 'implements the Functor spec')

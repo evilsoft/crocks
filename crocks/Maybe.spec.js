@@ -6,9 +6,9 @@ const helpers = require('../test/helpers')
 const noop      = helpers.noop
 const bindFunc  = helpers.bindFunc
 
-const t_comb  = require('../combinators/t_comb')
-const b_comb  = require('../combinators/b_comb')
-const i_comb  = require('../combinators/i_comb')
+const t_comb    = require('../combinators/t_comb')
+const composeB  = require('../combinators/composeB')
+const i_comb    = require('../combinators/i_comb')
 
 const Maybe = require('./Maybe')
 
@@ -157,7 +157,7 @@ test('Maybe ap errors', t => {
 test('Maybe ap properties (Apply)', t => {
   const m = Maybe(i_comb)
 
-  const a = m.map(b_comb).ap(m).ap(m)
+  const a = m.map(composeB).ap(m).ap(m)
   const b = m.ap(m.ap(m))
 
   t.equal(typeof Maybe(0).ap, 'function', 'provides an ap function')

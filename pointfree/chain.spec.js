@@ -1,7 +1,7 @@
 const test  = require('tape')
 const sinon = require('sinon')
 
-const k_comb = require('../combinators/k_comb')
+const constant = require('../combinators/constant')
 
 const helpers = require('../test/helpers')
 
@@ -13,7 +13,7 @@ const chain = require('./chain')
 test('chain pointfree', t => {
   const c = bindFunc(chain)
   const x = 'result'
-  const m = { chain: sinon.spy(k_comb(x)) }
+  const m = { chain: sinon.spy(constant(x)) }
 
   t.equal(typeof chain, 'function', 'is a function')
 

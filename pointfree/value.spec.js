@@ -4,14 +4,14 @@ const sinon = require('sinon')
 const helpers   = require('../test/helpers')
 const bindFunc  = helpers.bindFunc
 
-const k_comb = require('../combinators/k_comb')
+const constant = require('../combinators/constant')
 
 const value = require('./value')
 
 test('value pointfree', t => {
   const f = bindFunc(value)
   const x = 'result'
-  const m = { value: sinon.spy(k_comb(x)) }
+  const m = { value: sinon.spy(constant(x)) }
 
   t.equal(typeof value, 'function', 'is a function')
 

@@ -4,14 +4,14 @@ const sinon = require('sinon')
 const helpers   = require('../test/helpers')
 const bindFunc  = helpers.bindFunc
 
-const k_comb = require('../combinators/k_comb')
+const constant = require('../combinators/constant')
 
 const maybe = require('./maybe')
 
 test('maybe pointfree', t => {
   const f = bindFunc(maybe)
   const x = 'result'
-  const m = { maybe: sinon.spy(k_comb(x)) }
+  const m = { maybe: sinon.spy(constant(x)) }
 
   t.equal(typeof maybe, 'function', 'is a function')
 

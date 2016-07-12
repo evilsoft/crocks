@@ -3,7 +3,7 @@ const test = require('tape')
 const crocks = require('./crocks')
 
 const composeB  = require('./combinators/composeB')
-const k_comb  = require('./combinators/k_comb')
+const constant  = require('./combinators/constant')
 const t_comb  = require('./combinators/t_comb')
 const identity  = require('./combinators/identity')
 
@@ -25,7 +25,7 @@ test('entry', t => {
 
   t.equal(crocks.composeB, composeB, 'provides the B combinator')
   t.equal(crocks.identity, identity, 'provides the I combinator')
-  t.equal(crocks.k_comb, k_comb, 'provides the K combinator')
+  t.equal(crocks.constant, constant, 'provides the K combinator')
   t.equal(crocks.t_comb, t_comb, 'provides the T combinator')
 
   t.equal(crocks.compose, compose, 'provides the compose helper function')

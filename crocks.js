@@ -2,7 +2,8 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const crocks = {
-  Maybe: require('./crocks/Maybe')
+  Maybe: require('./crocks/Maybe'),
+  Identity: require('./crocks/Identity')
 }
 
 const helpers = {
@@ -14,7 +15,8 @@ const pointFree = {
   map:    require('./pointfree/map'),
   ap:     require('./pointfree/ap'),
   chain:  require('./pointfree/chain'),
-  maybe:  require('./pointfree/maybe')
+  maybe:  require('./pointfree/maybe'),
+  value:  require('./pointfree/value')
 }
 
 const combinators = {

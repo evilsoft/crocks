@@ -15,8 +15,10 @@ const ap    = require('./pointfree/ap')
 const chain = require('./pointfree/chain')
 
 const maybe = require('./pointfree/maybe')
+const value = require('./pointfree/value')
 
-const Maybe   = require('./crocks/Maybe')
+const Maybe     = require('./crocks/Maybe')
+const Identity  = require('./crocks/Identity')
 
 test('entry', t => {
   t.equal(crocks.toString(), '[object Object]', 'is an object')
@@ -34,8 +36,10 @@ test('entry', t => {
   t.equal(crocks.chain, chain, 'provides the chain point-free function')
 
   t.equal(crocks.maybe, maybe, 'provides the maybe point-free function')
+  t.equal(crocks.value, value, 'provides the value point-free function')
 
   t.equal(crocks.Maybe, Maybe, 'provides the Maybe function')
+  t.equal(crocks.Identity, Identity, 'provides the Identity function')
 
   t.end()
 })

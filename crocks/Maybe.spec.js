@@ -62,16 +62,18 @@ test('Maybe equals functionality', t => {
   t.end()
 })
 
-test('Maybe equals algebras (Setoid)', t => {
+test('Maybe equals properties (Setoid)', t => {
   const a = Maybe(0)
   const b = Maybe(0)
   const c = Maybe(1)
+  const d = Maybe(0)
 
   t.equal(typeof Maybe(0).equals, 'function', 'provides an equals function')
 
-  t.equals(a.equals(a), true, 'is reflexive')
-  t.equals(a.equals(c) === c.equals(a), true, 'has symmetry (false)')
-  t.equals((a.equals(b) && b.equals(c)) === a.equals(c), true, 'has symmetry (true)')
+  t.equals(a.equals(a), true, 'reflexivity')
+  t.equals(a.equals(b), b.equals(a), 'symmetry (equal)')
+  t.equals(a.equals(c), c.equals(a), 'symmetry (!equal)')
+  t.equals(a.equals(b) && b.equals(d), a.equals(d), 'transitivity')
 
   t.end()
 })
@@ -114,28 +116,29 @@ test('Maybe map functionality', t => {
   t.end()
 })
 
-test('Maybe map algebras (Functor)', t => {
-  const f   = x => x + 2
-  const g   = x => x * 2
+test('Maybe map properties (Functor)', t => {
+  const f = x => x + 2
+  const g = x => x * 2
 
   t.equal(typeof Maybe(0).map, 'function', 'provides a map function')
 
   t.equal(Maybe(0).map(i_comb).maybe(), 0, 'identity')
   t.equals(Maybe(10).map(x => f(g(x))).maybe(), Maybe(10).map(g).map(f).maybe(), 'composition')
+
   t.end()
 })
 
 test('Maybe ap errors', t => {
-  const m   = { type: () => 'NotMaybe' }
+  const m   = { type: () => 'Maybe...Not' }
 
-  t.throws(Maybe(0).ap.bind(null, m), TypeError, 'throws when wrapped value is a falsey number')
-  t.throws(Maybe(1).ap.bind(null, m), TypeError, 'throws when wrapped value is a truthy number')
-  t.throws(Maybe('').ap.bind(null, m), TypeError, 'throws when wrapped value is a falsey string')
-  t.throws(Maybe('string').ap.bind(null, m), TypeError, 'throws when wrapped value is a truthy string')
-  t.throws(Maybe(false).ap.bind(null, m), TypeError, 'throws when wrapped value is false')
-  t.throws(Maybe(true).ap.bind(null, m), TypeError, 'throws when wrapped value is true')
-  t.throws(Maybe([]).ap.bind(null, m), TypeError, 'throws when wrapped value is an array')
-  t.throws(Maybe({}).ap.bind(null, m), TypeError, 'throws when wrapped value is an object')
+  t.throws(Maybe(0).ap.bind(null, Maybe(0)), TypeError, 'throws when wrapped value is a falsey number')
+  t.throws(Maybe(1).ap.bind(null, Maybe(0)), TypeError, 'throws when wrapped value is a truthy number')
+  t.throws(Maybe('').ap.bind(null, Maybe(0)), TypeError, 'throws when wrapped value is a falsey string')
+  t.throws(Maybe('string').ap.bind(null, Maybe(0)), TypeError, 'throws when wrapped value is a truthy string')
+  t.throws(Maybe(false).ap.bind(null, Maybe(0)), TypeError, 'throws when wrapped value is false')
+  t.throws(Maybe(true).ap.bind(null, Maybe(0)), TypeError, 'throws when wrapped value is true')
+  t.throws(Maybe([]).ap.bind(null, Maybe(0)), TypeError, 'throws when wrapped value is an array')
+  t.throws(Maybe({}).ap.bind(null, Maybe(0)), TypeError, 'throws when wrapped value is an object')
 
   t.throws(Maybe(noop).ap.bind(null, 0), TypeError, 'throws when passed a falsey number')
   t.throws(Maybe(noop).ap.bind(null, 1), TypeError, 'throws when passed a truthy number')
@@ -151,7 +154,7 @@ test('Maybe ap errors', t => {
   t.end()
 })
 
-test('Maybe ap algebras (Apply)', t => {
+test('Maybe ap properties (Apply)', t => {
   const m = Maybe(i_comb)
 
   const a = m.map(b_comb).ap(m).ap(m)
@@ -167,12 +170,14 @@ test('Maybe ap algebras (Apply)', t => {
 })
 
 test('Maybe of', t => {
-  t.equal(Maybe.of(0).type(), 'Maybe', 'returns a maybe')
-  t.equal(Maybe.of(0).maybe(), 0, 'wraps the value passed into a maybe')
+  t.equal(Maybe.of, Maybe(0).of, 'Maybe.of is the same as the instance version')
+  t.equal(Maybe.of(0).type(), 'Maybe', 'returns a Maybe')
+  t.equal(Maybe.of(0).maybe(), 0, 'wraps the value passed into a Maybe')
+
   t.end()
 })
 
-test('Maybe of algebras (Applicative)', t => {
+test('Maybe of properties (Applicative)', t => {
   const m = Maybe(i_comb)
 
   t.equal(typeof Maybe(0).of, 'function', 'provides an of function')
@@ -227,7 +232,7 @@ test('Maybe chain algebras (Chain)', t => {
   t.end()
 })
 
-test('Maybe chain algebras (Monad)', t => {
+test('Maybe chain properties (Monad)', t => {
   t.equal(typeof Maybe(0).chain, 'function', 'implements the Chain spec')
   t.equal(typeof Maybe(0).of, 'function', 'implements the Applicative spec')
 

@@ -1,4 +1,5 @@
 const isFunction = require('../internal/isFunction')
+const isType    = require('../internal/isType')
 
 function Identity(x) {
   if(!arguments.length) {
@@ -7,6 +8,7 @@ function Identity(x) {
 
   const value = () => x
   const type  = () => 'Identity'
+  const of    = Identity.of
 
   function equals(m) {
     return isFunction(m.type)
@@ -22,7 +24,20 @@ function Identity(x) {
     return Identity(fn(x))
   }
 
-  return { value, type, equals, map }
+  function ap(m) {
+    if(!isFunction(x)) {
+      throw new TypeError('Wrapped value must be a function for ap')
+    }
+
+    if(!isType(type(), m)) {
+      throw new TypeError('Both containers need to be the same for ap')
+    }
+    return m.map(x)
+  }
+
+  return { value, type, equals, map, ap, of }
 }
+
+Identity.of = x => Identity(x)
 
 module.exports = Identity

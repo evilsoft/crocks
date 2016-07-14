@@ -15,15 +15,17 @@ const Maybe = require('./Maybe')
 test('Maybe', t => {
   const m = Maybe(0)
 
-  t.equal(typeof Maybe, 'function', 'Maybe is a function')
-  t.equal(typeof Maybe.of, 'function', 'Maybe provides an of function')
+  t.equal(typeof Maybe, 'function', 'is a function')
+  t.equal(typeof Maybe.of, 'function', 'provides an of function')
+  t.equal(typeof Maybe.type, 'function', 'provides a type function')
+  t.equal(Maybe.type, Maybe(0).type, 'static type function matches instance type function')
 
-  t.equal(m.toString(), '[object Object]', 'Maybe returns an object')
+  t.equal(m.toString(), '[object Object]', 'returns an object')
 
-  t.equal(typeof m.maybe, 'function', 'Maybe result provides a maybe function')
-  t.equal(typeof m.type, 'function', 'Maybe result provides a type function')
+  t.equal(typeof m.maybe, 'function', 'result provides a maybe function')
+  t.equal(typeof m.type, 'function', 'result provides a type function')
 
-  t.throws(Maybe, TypeError, 'Maybe throws when no parameters are passed')
+  t.throws(Maybe, TypeError, 'throws when no parameters are passed')
 
   t.end()
 })

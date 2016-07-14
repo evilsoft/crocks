@@ -1,22 +1,23 @@
 const isFunction  = require('../internal/isFunction')
 const isType      = require('../internal/isType')
 
+const constant  = require('../combinators/constant')
+
 const isNothing = x => x === undefined || x === null
+
+const _type = constant('Maybe')
+const _of   = Maybe
 
 function Maybe(x) {
   if(!arguments.length) {
     throw new TypeError('Maybe must wrap something')
   }
 
-  const maybe = () => isNothing(x) ? null : x
-  const type  = () => 'Maybe'
-  const of    = Maybe.of
+  const maybe = constant(isNothing(x) ? null : x)
+  const type  = _type
+  const of    = _of
 
-  function equals(m) {
-    return isFunction(m.type)
-      && type() === m.type()
-      && x === m.maybe()
-  }
+  const equals = m => isType(type(), m) && x === m.maybe()
 
   function map(fn) {
     if(!isFunction(fn)) {
@@ -27,7 +28,7 @@ function Maybe(x) {
   }
 
   function ap(m) {
-    const fn = isNothing(x) ? () => null : x
+    const fn = isNothing(x) ? constant(null) : x
 
     if(!isFunction(fn)) {
       throw new TypeError('Maybe.ap: Wrapped value must be a function')
@@ -48,10 +49,10 @@ function Maybe(x) {
     return isNothing(x) ? Maybe(null) : map(fn).maybe()
   }
 
-
   return { maybe, type, equals, map, ap, of, chain }
 }
 
-Maybe.of = x => Maybe(x)
+Maybe.of    = _of
+Maybe.type  = _type
 
 module.exports = Maybe

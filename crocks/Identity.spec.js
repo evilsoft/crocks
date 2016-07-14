@@ -17,7 +17,9 @@ test('Identity', t => {
   t.equal(typeof Identity, 'function', 'is a function')
   t.equal(m.toString(), '[object Object]', 'returns an object')
 
-  t.equal(typeof Identity.of, 'function', 'Identity provides an of function')
+  t.equal(typeof Identity.of, 'function', 'provides an of function')
+  t.equal(typeof Identity.type, 'function', 'provides a type function')
+  t.equal(Identity.type, Identity(0).type, 'static type function matches instance type function')
 
   t.equal(typeof m.value, 'function', 'provides a value function')
   t.equal(typeof m.type, 'function', 'provides a type function')

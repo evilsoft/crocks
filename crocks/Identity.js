@@ -1,27 +1,29 @@
 const isFunction = require('../internal/isFunction')
 const isType    = require('../internal/isType')
 
+const constant  = require('../combinators/constant')
+const composeB  = require('../combinators/composeB')
+
+const _type = constant('Identity')
+const _of   = Identity
+
 function Identity(x) {
   if(!arguments.length) {
     throw new TypeError('Identity must wrap something')
   }
 
-  const value = () => x
-  const type  = () => 'Identity'
-  const of    = Identity.of
+  const value = constant(x)
+  const type  = _type
+  const of    = _of
 
-  function equals(m) {
-    return isFunction(m.type)
-      && type() === m.type()
-      && x === m.value()
-  }
+  const equals = m => isType(type(), m) && x === m.value()
 
   function map(fn) {
     if(!isFunction(fn)) {
       throw new TypeError('Identity.map: function required')
     }
 
-    return Identity(fn(x))
+    return composeB(Identity, fn, x)
   }
 
   function ap(m) {
@@ -46,6 +48,7 @@ function Identity(x) {
   return { value, type, equals, map, ap, of, chain }
 }
 
-Identity.of = x => Identity(x)
+Identity.of   = _of
+Identity.type = _type
 
 module.exports = Identity

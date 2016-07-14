@@ -12,6 +12,8 @@ test('reverseApply (T combinator)', t => {
 
   t.equal(typeof reverseApply, 'function', 'is a function')
 
+  t.throws(tc(0, undefined), 'throws when second arg is undefined')
+  t.throws(tc(0, null), 'throws when second arg is null')
   t.throws(tc(0, 0), 'throws when second arg is a falsey number')
   t.throws(tc(0, 1), 'throws when second arg is a truthy number')
   t.throws(tc(0, ''), 'throws when second arg is a falsey string')

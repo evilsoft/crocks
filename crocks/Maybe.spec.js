@@ -81,14 +81,14 @@ test('Maybe equals properties (Setoid)', t => {
 test('Maybe map errors', t => {
   const map = bindFunc(Maybe(0).map)
 
+  t.throws(map(undefined), TypeError, 'throws when passed undefined')
+  t.throws(map(null), TypeError, 'throws when passed null')
   t.throws(map(0), TypeError, 'throws when passed a falsey number')
   t.throws(map(1), TypeError, 'throws when passed a truthy number')
   t.throws(map(''), TypeError, 'throws when passed a falsey string')
   t.throws(map('string'), TypeError, 'throws when passed a truthy string')
   t.throws(map(false), TypeError, 'throws when passed false')
   t.throws(map(true), TypeError, 'throws when passed true')
-  t.throws(map(null), TypeError, 'throws when passed null')
-  t.throws(map(undefined), TypeError, 'throws when passed undefined')
   t.throws(map([]), TypeError, 'throws when passed an array')
   t.throws(map({}), TypeError, 'throws when passed an object')
   t.doesNotThrow(map(noop), 'does not throw when passed a function')
@@ -201,14 +201,14 @@ test('Maybe of properties (Applicative)', t => {
 test('Maybe chain errors', t => {
   const chain = bindFunc(Maybe(0).chain)
 
+  t.throws(chain(undefined), TypeError, 'throws when passed undefined')
+  t.throws(chain(null), TypeError, 'throws when passed null')
   t.throws(chain(0), TypeError, 'throws when passed a falsey number')
   t.throws(chain(1), TypeError, 'throws when passed a truthy number')
   t.throws(chain(''), TypeError, 'throws when passed a falsey string')
   t.throws(chain('string'), TypeError, 'throws when passed a truthy string')
   t.throws(chain(false), TypeError, 'throws when passed false')
   t.throws(chain(true), TypeError, 'throws when passed true')
-  t.throws(chain(null), TypeError, 'throws when passed null')
-  t.throws(chain(undefined), TypeError, 'throws when passed undefined')
   t.throws(chain([]), TypeError, 'throws when passed an array')
   t.throws(chain({}), TypeError, 'throws when passed an object')
   t.doesNotThrow(chain(noop), 'does not throw when passed a function')

@@ -17,6 +17,8 @@ test('chain pointfree', t => {
 
   t.equal(typeof chain, 'function', 'is a function')
 
+  t.throws(c(undefined, m), 'throws if first arg is undefined')
+  t.throws(c(null, m), 'throws if first arg is null')
   t.throws(c(0, m), 'throws if first arg is a falsey number')
   t.throws(c(1, m), 'throws if first arg is a truthy number')
   t.throws(c('', m), 'throws if first arg is a falsey string')
@@ -26,6 +28,8 @@ test('chain pointfree', t => {
   t.throws(c([], m), 'throws if first arg is an array')
   t.throws(c({}, m), 'throws if first arg is an object')
 
+  t.throws(c(noop, undefined), 'throws if second arg is undefined')
+  t.throws(c(noop, null), 'throws if second arg is null')
   t.throws(c(noop, 0), 'throws if second arg is a falsey number')
   t.throws(c(noop, 1), 'throws if second arg is a truthy number')
   t.throws(c(noop, ''), 'throws if second arg is a falsey string')
@@ -34,12 +38,12 @@ test('chain pointfree', t => {
   t.throws(c(noop, true), 'throws if second arg is true')
   t.throws(c(noop, {}), 'throws if second arg is an object')
 
-  t.doesNotThrow(c(noop, m), 'does not throw when a function and chain passed')
+  t.doesNotThrow(c(noop, m), 'allows a function and Chain')
 
   const f   = sinon.spy()
   const res = chain(f, m)
 
-  t.equal(m.chain.calledWith(f), true, 'calls chain on Chain, passing the function')
+  t.ok(m.chain.calledWith(f), 'calls chain on Chain, passing the function')
   t.equal(res, x, 'returns the result of chain on Chain')
 
   t.end()

@@ -15,6 +15,8 @@ test('value pointfree', t => {
 
   t.equal(typeof value, 'function', 'is a function')
 
+  t.throws(f(undefined), TypeError, 'throws if passed undefined')
+  t.throws(f(null), TypeError, 'throws if passed null')
   t.throws(f(0), TypeError, 'throws if passed a falsey number')
   t.throws(f(1), TypeError, 'throws if passed a truthy number')
   t.throws(f(''), TypeError, 'throws if passed a falsey string')

@@ -73,6 +73,8 @@ test('Identity equal properties (Setoid)', t => {
 test('Identity map errors', t => {
   const map = bindFunc(Identity(0).map)
 
+  t.throws(map(undefined), TypeError, 'throws when passed undefined')
+  t.throws(map(null), TypeError, 'throws when passed null')
   t.throws(map(0), TypeError, 'throws when passed falsey number')
   t.throws(map(1), TypeError, 'throws when passed truthy number')
   t.throws(map(''), TypeError, 'throws when passed falsey string')
@@ -116,6 +118,8 @@ test('Identity map properties (Functor)', t => {
 test('Identity ap errors', t => {
   const m   = { type: () => 'Identity...Not' }
 
+  t.throws(Identity(undefined).ap.bind(null, Identity(0)), TypeError, 'throws when wrapped value is undefined')
+  t.throws(Identity(null).ap.bind(null, Identity(0)), TypeError, 'throws when wrapped value is null')
   t.throws(Identity(0).ap.bind(null, Identity(0)), TypeError, 'throws when wrapped value is a falsey number')
   t.throws(Identity(1).ap.bind(null, Identity(0)), TypeError, 'throws when wrapped value is a truthy number')
   t.throws(Identity('').ap.bind(null, Identity(0)), TypeError, 'throws when wrapped value is a falsey string')
@@ -125,6 +129,8 @@ test('Identity ap errors', t => {
   t.throws(Identity([]).ap.bind(null, Identity(0)), TypeError, 'throws when wrapped value is an array')
   t.throws(Identity({}).ap.bind(null, Identity(0)), TypeError, 'throws when wrapped value is an object')
 
+  t.throws(Identity(noop).ap.bind(null, undefined), TypeError, 'throws when passed undefined')
+  t.throws(Identity(noop).ap.bind(null, null), TypeError, 'throws when passed null')
   t.throws(Identity(noop).ap.bind(null, 0), TypeError, 'throws when passed a falsey number')
   t.throws(Identity(noop).ap.bind(null, 1), TypeError, 'throws when passed a truthy number')
   t.throws(Identity(noop).ap.bind(null, ''), TypeError, 'throws when passed a falsey string')
@@ -181,6 +187,8 @@ test('Identity of properties (Applicative)', t => {
 test('Identity chain errors', t => {
   const chain = bindFunc(Identity(0).chain)
 
+  t.throws(chain(undefined), TypeError, 'throws when passed undefined')
+  t.throws(chain(null), TypeError, 'throws when passed null')
   t.throws(chain(0), TypeError, 'throws when passed a falsey number')
   t.throws(chain(1), TypeError, 'throws when passed a truthy number')
   t.throws(chain(''), TypeError, 'throws when passed a falsey string')

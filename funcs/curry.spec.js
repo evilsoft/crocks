@@ -12,6 +12,7 @@ test('curry', t => {
   t.equal(typeof curry, 'function', 'curry is a function')
 
   t.throws(c(undefined), TypeError, 'throws TypeError when undefined passed')
+  t.throws(c(null), TypeError, 'throws TypeError when null passed')
 
   t.throws(curry, TypeError, 'throws TypeError when nothing passed')
   t.throws(c(''), TypeError, 'throws TypeError when falsey string passed')

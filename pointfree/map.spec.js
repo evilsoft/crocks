@@ -15,6 +15,8 @@ test('map pointfree', t => {
 
   t.equal(typeof map, 'function', 'is a function')
 
+  t.throws(m(undefined, f), 'throws if first arg is undefined')
+  t.throws(m(null, f), 'throws if first arg is null')
   t.throws(m(0, f), 'throws if first arg is a falsey number')
   t.throws(m(1, f), 'throws if first arg is a truthy number')
   t.throws(m('', f), 'throws if first arg is a falsey string')
@@ -24,6 +26,8 @@ test('map pointfree', t => {
   t.throws(m([], f), 'throws if first arg is an array')
   t.throws(m({}, f), 'throws if first arg is an object')
 
+  t.throws(m(noop, undefined), 'throws if second arg is undefined')
+  t.throws(m(noop, null), 'throws if second arg is null')
   t.throws(m(noop, 0), 'throws if second arg is a falsey number')
   t.throws(m(noop, 1), 'throws if second arg is a truthy number')
   t.throws(m(noop, ''), 'throws if second arg is a falsey string')

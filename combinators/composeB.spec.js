@@ -12,6 +12,8 @@ test('composeB (B combinator)', t => {
 
   t.equal(typeof composeB, 'function', 'is a function')
 
+  t.throws(b(undefined, identity, 0), TypeError, 'throws when first arg is undefined')
+  t.throws(b(null, identity, 0), TypeError, 'throws when first arg is null')
   t.throws(b(0, identity, 0), TypeError, 'throws when first arg is a falsey number')
   t.throws(b(1, identity, 0), TypeError, 'throws when first arg is a truthy number')
   t.throws(b('', identity, 0), TypeError, 'throws when first arg is a falsey string')
@@ -21,6 +23,8 @@ test('composeB (B combinator)', t => {
   t.throws(b([], identity, 0), TypeError, 'throws when first arg is an array')
   t.throws(b({}, identity, 0), TypeError, 'throws when first arg is an object')
 
+  t.throws(b(identity, undefined, 0), TypeError, 'throws when second arg is undefined')
+  t.throws(b(identity, null, 0), TypeError, 'throws when second arg is null')
   t.throws(b(identity, 0, 0), TypeError, 'throws when second arg is a falsey number')
   t.throws(b(identity, 1, 0), TypeError, 'throws when second arg is a truthy number')
   t.throws(b(identity, '', 0), TypeError, 'throws when second arg is a falsey string')

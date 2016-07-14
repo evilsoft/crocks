@@ -14,6 +14,8 @@ test('ap pointfree', t => {
 
   t.equal(typeof ap, 'function', 'is a function')
 
+  t.throws(a(undefined, m), TypeError, 'throws if first arg is undefined')
+  t.throws(a(null, m), TypeError, 'throws if first arg is null')
   t.throws(a(0, m), TypeError, 'throws if first arg is a falsey number')
   t.throws(a(1, m), TypeError, 'throws if first arg is a truthy number')
   t.throws(a('', m), TypeError, 'throws if first arg is a falsey number')
@@ -23,6 +25,8 @@ test('ap pointfree', t => {
   t.throws(a([], m), TypeError, 'throws if first arg is an array')
   t.throws(a({}, m), TypeError, 'throws if first arg is an object without an ap method')
 
+  t.throws(a(m, undefined), TypeError, 'throws if second arg is undefined')
+  t.throws(a(m, null), TypeError, 'throws if second arg is null')
   t.throws(a(m, 0), TypeError, 'throws if second arg is a falsey number')
   t.throws(a(m, 1), TypeError, 'throws if second arg is a truthy number')
   t.throws(a(m, ''), TypeError, 'throws if second arg is a falsey number')

@@ -6,15 +6,21 @@ const crocks = {
   Identity: require('./crocks/Identity')
 }
 
+const monoids = {
+  Any: require('./monoids/Any')
+}
+
 const helpers = {
   compose:  require('./funcs/compose'),
-  curry:    require('./funcs/curry')
+  curry:    require('./funcs/curry'),
+  mconcat:  require('./funcs/mconcat')
 }
 
 const pointFree = {
   map:    require('./pointfree/map'),
   ap:     require('./pointfree/ap'),
   chain:  require('./pointfree/chain'),
+  concat: require('./pointfree/concat'),
   maybe:  require('./pointfree/maybe'),
   value:  require('./pointfree/value')
 }
@@ -31,5 +37,6 @@ module.exports = Object.assign(
   combinators,
   helpers,
   pointFree,
-  crocks
+  crocks,
+  monoids
 )

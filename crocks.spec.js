@@ -9,16 +9,20 @@ const identity      = require('./combinators/identity')
 
 const compose = require('./funcs/compose')
 const curry   = require('./funcs/curry')
+const mconcat = require('./funcs/mconcat')
 
-const map   = require('./pointfree/map')
-const ap    = require('./pointfree/ap')
-const chain = require('./pointfree/chain')
+const map     = require('./pointfree/map')
+const ap      = require('./pointfree/ap')
+const chain   = require('./pointfree/chain')
+const concat  = require('./pointfree/concat')
 
 const maybe = require('./pointfree/maybe')
 const value = require('./pointfree/value')
 
 const Maybe     = require('./crocks/Maybe')
 const Identity  = require('./crocks/Identity')
+
+const Any = require('./monoids/Any')
 
 test('entry', t => {
   t.equal(crocks.toString(), '[object Object]', 'is an object')
@@ -28,18 +32,22 @@ test('entry', t => {
   t.equal(crocks.constant, constant, 'provides the K combinator')
   t.equal(crocks.reverseApply, reverseApply, 'provides the T combinator')
 
-  t.equal(crocks.compose, compose, 'provides the compose helper function')
-  t.equal(crocks.curry, curry, 'provides the curry helper function')
+  t.equal(crocks.compose, compose, 'provides the compose function')
+  t.equal(crocks.curry, curry, 'provides the curry function')
+  t.equal(crocks.mconcat, mconcat, 'provides the mconcat function')
 
   t.equal(crocks.map, map, 'provides the map point-free function')
   t.equal(crocks.ap, ap, 'provides the ap point-free function')
   t.equal(crocks.chain, chain, 'provides the chain point-free function')
+  t.equal(crocks.concat, concat, 'provides the concat point-free function')
 
   t.equal(crocks.maybe, maybe, 'provides the maybe point-free function')
   t.equal(crocks.value, value, 'provides the value point-free function')
 
   t.equal(crocks.Maybe, Maybe, 'provides the Maybe function')
   t.equal(crocks.Identity, Identity, 'provides the Identity function')
+
+  t.equal(crocks.Any, Any, 'provides the Any function')
 
   t.end()
 })

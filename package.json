@@ -4,11 +4,11 @@
   "description": "A collection of well known Monadic Containers for your utter enjoyment.",
   "main": "crocks.js",
   "scripts": {
-    "preversion": "npm test && npm run build",
+    "preversion": "npm run build",
     "build:publish": "npm test && npm run build && npm publish",
-    "build": "webpack && uglifyjs dist/crocks.js -c \"warnings=false\" -m -o dist/crocks.min.js",
+    "build": "npm test && webpack && uglifyjs dist/crocks.js -c \"warnings=false\" -m -o dist/crocks.min.js",
     "spec": "nodemon -q -e js -x 'npm test -s | tap-spec'",
-    "test": "tape combinators/*.spec.js crocks/*.spec.js funcs/*.spec.js internal/*.spec.js pointfree/*.spec.js ./*.spec.js"
+    "test": "tape combinators/*.spec.js crocks/*.spec.js funcs/*.spec.js internal/*.spec.js monoids/*.spec.js pointfree/*.spec.js ./*.spec.js"
   },
   "repository": {
     "type": "git",

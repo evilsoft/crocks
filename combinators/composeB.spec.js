@@ -40,9 +40,9 @@ test('composeB (B combinator)', t => {
 
   const result = composeB(f)(g)(x)
 
-  t.equal(f.calledAfter(g), true, 'calls second function before the first')
-  t.equal(g.calledWith(x), true, 'third argument passed into second function')
-  t.equal(f.calledWith(g.returnValues[0]), true, 'first function passed result of second function')
+  t.ok(f.calledAfter(g), 'calls second function before the first')
+  t.ok(g.calledWith(x), 'third argument passed into second function')
+  t.ok(f.calledWith(g.returnValues[0]), 'first function passed result of second function')
   t.equal(result, f.returnValues[0], 'return the result of the first function')
 
   t.end()

@@ -45,7 +45,7 @@ test('ap applicative', t => {
 
   const result = ap(m)(x)
 
-  t.equal(x.ap.calledWith(m), true, 'calls the ap method on the second arg passing in the first arg')
+  t.ok(x.ap.calledWith(m), 'calls the ap method on the second arg passing in the first arg')
 
   t.end()
 })

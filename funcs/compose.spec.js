@@ -42,9 +42,10 @@ test('composed function', t => {
   const args    = [ 'first', 'second' ]
   const result  = compose(second, first).apply(null, args)
 
-  t.equal(first.calledBefore(second), true, 'right-most function is called first')
-  t.equal(first.calledWith.apply(first, args), true, 'right-most function applied with all arguments')
-  t.equal(second.calledWith('string'), true, 'second function receives result of the first function')
+  t.ok(first.calledBefore(second), 'right-most function is called first')
+  t.ok(first.calledWith.apply(first, args), 'right-most function applied with all arguments')
+  t.ok(second.calledWith('string'), 'second function receives result of the first function')
+
   t.equal(result, 'bling', 'returns the result of the left-most function')
   t.end()
 })

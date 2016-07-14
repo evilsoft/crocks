@@ -47,7 +47,7 @@ test('map functor', t => {
 
   map(identity)(m)
 
-  t.equal(m.map.calledWith(identity), true, 'calls map on functor, passing the function')
+  t.ok(m.map.calledWith(identity), 'calls map on functor, passing the function')
   t.end()
 })
 
@@ -59,9 +59,9 @@ test('map function composition', t => {
   const result  = comp(0)
 
   t.equal(typeof comp, 'function', 'map returns a function')
-  t.equal(first.calledBefore(second), true, 'map calls the second function first')
+  t.ok(first.calledBefore(second), 'map calls the second function first')
 
-  t.equal(second.calledWith(first.returnValues[0]), true, 'result of first is passed to the second')
+  t.ok(second.calledWith(first.returnValues[0]), 'result of first is passed to the second')
   t.equal(result, second.returnValues[0], 'result of second is returned')
 
   t.end()

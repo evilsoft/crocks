@@ -2,7 +2,7 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const crocks = {
-  Maybe: require('./crocks/Maybe'),
+  Maybe:    require('./crocks/Maybe'),
   Identity: require('./crocks/Identity')
 }
 

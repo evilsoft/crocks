@@ -28,7 +28,7 @@ test('reverseApply (T combinator)', t => {
 
   const result = reverseApply(x)(f)
 
-  t.equal(f.calledWith(x), true, 'function called passing first arg')
+  t.ok(f.calledWith(x), 'function called passing first arg')
   t.equal(result, x, 'returns the result of the passed function')
 
 

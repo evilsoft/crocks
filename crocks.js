@@ -26,9 +26,10 @@ const pointFree = {
 }
 
 const combinators = {
+  applyTo:      require('./combinators/applyTo'),
   composeB:     require('./combinators/composeB'),
-  identity:     require('./combinators/identity'),
   constant:     require('./combinators/constant'),
+  identity:     require('./combinators/identity'),
   reverseApply: require('./combinators/reverseApply')
 }
 

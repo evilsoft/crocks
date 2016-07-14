@@ -2,6 +2,7 @@ const test = require('tape')
 
 const crocks = require('./crocks')
 
+const applyTo       = require('./combinators/applyTo')
 const composeB      = require('./combinators/composeB')
 const constant      = require('./combinators/constant')
 const reverseApply  = require('./combinators/reverseApply')
@@ -27,9 +28,10 @@ const Any = require('./monoids/Any')
 test('entry', t => {
   t.equal(crocks.toString(), '[object Object]', 'is an object')
 
+  t.equal(crocks.applyTo, applyTo, 'provides the A combinator')
   t.equal(crocks.composeB, composeB, 'provides the B combinator')
-  t.equal(crocks.identity, identity, 'provides the I combinator')
   t.equal(crocks.constant, constant, 'provides the K combinator')
+  t.equal(crocks.identity, identity, 'provides the I combinator')
   t.equal(crocks.reverseApply, reverseApply, 'provides the T combinator')
 
   t.equal(crocks.compose, compose, 'provides the compose function')

@@ -36,9 +36,9 @@ test('map pointfree', t => {
   t.throws(m(noop, true), 'throws if second arg is true')
   t.throws(m(noop, {}), 'throws if second arg is an object')
 
-  t.doesNotThrow(m(noop, f), 'does not throw when a function and functor passed')
-  t.doesNotThrow(m(noop, []), 'does not throw when a function and an array passed')
-  t.doesNotThrow(m(noop, noop), 'does not throw when two functions are passed')
+  t.doesNotThrow(m(noop, f), 'allows a function and functor')
+  t.doesNotThrow(m(noop, []), 'allows a function and an array')
+  t.doesNotThrow(m(noop, noop), 'allows two functions')
   t.end()
 })
 

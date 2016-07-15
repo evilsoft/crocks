@@ -3,6 +3,7 @@ const sinon = require('sinon')
 
 const helpers   = require('../test/helpers')
 const bindFunc  = helpers.bindFunc
+const noop      = helpers.noop
 
 const constant = require('../combinators/constant')
 
@@ -25,6 +26,7 @@ test('value pointfree', t => {
   t.throws(f(true), TypeError, 'throws if passed true')
   t.throws(f([]), TypeError, 'throws if passed an array')
   t.throws(f({}), TypeError, 'throws if passed an object')
+  t.throws(f(noop), TypeError, 'throws if passed a function')
 
   const result = value(m)
 

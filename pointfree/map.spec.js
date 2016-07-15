@@ -7,7 +7,7 @@ const helpers = require('../test/helpers')
 const bindFunc  = helpers.bindFunc
 const noop      = helpers.noop
 
-const map   = require('./map')
+const map = require('./map')
 
 test('map pointfree', t => {
   const m = bindFunc(map)

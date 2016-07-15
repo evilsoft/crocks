@@ -1,8 +1,8 @@
 const isFunction = require('../internal/isFunction')
 
 function value(m) {
-  if(!isFunction(m.value)) {
-    throw new TypeError('Argument to value must be an Identity')
+  if(!(m && isFunction(m.value))) {
+    throw new TypeError('value: Arg must be an Identity or Monoid')
   }
 
   return m.value()

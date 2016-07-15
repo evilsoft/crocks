@@ -4,11 +4,11 @@ const isFunction  = require('../internal/isFunction')
 // chain :: Chain m => (a -> m b) -> m a -> m b
 function chain(fn, m) {
   if(!isFunction(fn)) {
-    throw new TypeError('first arg to chain must be a function')
+    throw new TypeError('chain: First arg must be a function')
   }
 
   if(!(m && isFunction(m.chain))) {
-    throw new TypeError('second arg to chain must be a Chain of the same type')
+    throw new TypeError('chain: second arg must be a Chain of the same type')
   }
 
   return m.chain(fn)

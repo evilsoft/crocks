@@ -24,6 +24,7 @@ const Maybe     = require('./crocks/Maybe')
 const Identity  = require('./crocks/Identity')
 
 const Any = require('./monoids/Any')
+const All = require('./monoids/All')
 
 test('entry', t => {
   t.equal(crocks.toString(), '[object Object]', 'is an object')
@@ -50,6 +51,7 @@ test('entry', t => {
   t.equal(crocks.Identity, Identity, 'provides the Identity function')
 
   t.equal(crocks.Any, Any, 'provides the Any function')
+  t.equal(crocks.All, All, 'provides the All function')
 
   t.end()
 })

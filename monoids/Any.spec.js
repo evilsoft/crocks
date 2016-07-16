@@ -11,6 +11,7 @@ test('Any', t => {
   const a = bindFunc(Any)
   t.equal(typeof Any, 'function', 'is a function')
 
+  // TODO: Move to ok
   t.equal(typeof Any.empty, 'function', 'provides an empty function')
   t.equal(typeof Any.type, 'function', 'provides a type function')
   t.equal(Any(0).toString(), '[object Object]', 'returns an object')
@@ -33,6 +34,7 @@ test('Any', t => {
 })
 
 test('Any value', t => {
+  // TODO: move to ok
   t.equal(typeof Any(0).value, 'function', 'is a function')
 
   t.equal(Any(undefined).value(), false, 'reports false for undefined')
@@ -50,6 +52,7 @@ test('Any value', t => {
 })
 
 test('Any type', t => {
+  // TODO: move to ok, add compare spec (instance/static)
   t.equal(typeof Any(0).type, 'function', 'is a function')
   t.equal(Any(0).type(), 'Any', 'reports the expected type')
 

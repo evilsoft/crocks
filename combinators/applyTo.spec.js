@@ -1,8 +1,9 @@
 const test  = require('tape')
 const sinon = require('sinon')
 
-const identity = require('./identity')
-const bindFunc = require('../test/helpers').bindFunc
+const identity    = require('./identity')
+const bindFunc    = require('../test/helpers').bindFunc
+const isFunction  = require('../internal/isFunction')
 
 const applyTo = require('./applyTo')
 
@@ -10,7 +11,7 @@ test('applyTo (A Combinator)', t => {
   const a   = bindFunc(applyTo)
   const fn  = sinon.spy(identity)
 
-  t.equal(typeof applyTo, 'function', 'is a function')
+  t.ok(isFunction(applyTo), 'is a function')
 
   t.throws(a(undefined, 0), TypeError, 'throws when first arg is undefined')
   t.throws(a(null, 0), TypeError, 'throws when first arg is null')

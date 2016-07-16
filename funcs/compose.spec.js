@@ -4,13 +4,14 @@ const helpers = require('../test/helpers')
 
 const compose = require('./compose')
 
-const noop      = helpers.noop
-const bindFunc  = helpers.bindFunc
+const noop        = helpers.noop
+const bindFunc    = helpers.bindFunc
+const isFunction  = require('../internal/isFunction')
 
 test('compose parameters', t => {
   const c = bindFunc(compose)
 
-  t.equal(typeof compose, 'function', 'compose is a function')
+  t.ok(isFunction(compose), 'function', 'compose is a function')
 
   t.throws(compose, TypeError, 'throws Error when nothing passed')
 
@@ -27,7 +28,7 @@ test('compose parameters', t => {
   t.throws(c({}), TypeError, 'throws TypeError when object passed')
   t.throws(c([]), TypeError, 'throws TypeError when array passed')
 
-  t.equal(typeof compose(noop), 'function', 'returns a function')
+  t.ok(isFunction(compose(noop)), 'returns a function')
 
   t.end()
 })

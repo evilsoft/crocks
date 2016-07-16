@@ -3,13 +3,14 @@ const helpers = require('../test/helpers')
 
 const curry = require('./curry')
 
-const noop      = helpers.noop
-const bindFunc  = helpers.bindFunc
+const noop        = helpers.noop
+const bindFunc    = helpers.bindFunc
+const isFunction  = require('../internal/isFunction')
 
 test('curry', t => {
   const c = bindFunc(curry)
 
-  t.equal(typeof curry, 'function', 'curry is a function')
+  t.ok(isFunction(curry), 'function', 'curry is a function')
 
   t.throws(c(undefined), TypeError, 'throws TypeError when undefined passed')
   t.throws(c(null), TypeError, 'throws TypeError when null passed')
@@ -22,7 +23,7 @@ test('curry', t => {
   t.throws(c(false), TypeError, 'throws TypeError when false passed')
   t.throws(c(true), TypeError, 'throws TypeError when true passed')
 
-  t.equal(typeof curry(noop), 'function', 'returns a function')
+  t.ok(isFunction(curry(noop)), 'returns a function')
 
   t.end()
 })

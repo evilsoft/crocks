@@ -1,8 +1,9 @@
-const test  = require('tape')
-const sinon = require('sinon')
+const test    = require('tape')
+const sinon   = require('sinon')
+const helpers = require('../test/helpers')
 
-const helpers   = require('../test/helpers')
-const bindFunc  = helpers.bindFunc
+const isFunction  = require('../internal/isFunction')
+const bindFunc    = helpers.bindFunc
 
 const identity      = require('./identity')
 const reverseApply  = require('./reverseApply')
@@ -10,7 +11,7 @@ const reverseApply  = require('./reverseApply')
 test('reverseApply (T combinator)', t => {
   const tc = bindFunc(reverseApply)
 
-  t.equal(typeof reverseApply, 'function', 'is a function')
+  t.ok(isFunction(reverseApply), 'is a function')
 
   t.throws(tc(0, undefined), 'throws when second arg is undefined')
   t.throws(tc(0, null), 'throws when second arg is null')

@@ -14,7 +14,8 @@ const monoids = {
 const helpers = {
   compose:  require('./funcs/compose'),
   curry:    require('./funcs/curry'),
-  mconcat:  require('./funcs/mconcat')
+  mconcat:  require('./funcs/mconcat'),
+  liftA:    require('./funcs/liftA')
 }
 
 const pointFree = {

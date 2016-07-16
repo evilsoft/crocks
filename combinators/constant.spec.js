@@ -1,14 +1,15 @@
-const test  = require('tape')
+const test    = require('tape')
+const helpers = require('../test/helpers')
 
-const helpers   = require('../test/helpers')
-const noop      = helpers.noop
+const isFunction  = require('../internal/isFunction')
+const noop        = helpers.noop
 
 const constant = require('./constant')
 
 test('constant (K combinator)', t => {
   const x = 3
 
-  t.equal(typeof constant, 'function', 'is a function')
+  t.ok(isFunction(constant), 'is a function')
 
   t.equal(constant(x, undefined), x, 'returns first parameter when second is undefined')
   t.equal(constant(x, null), x, 'returns first parameter when second is null')

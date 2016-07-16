@@ -1,8 +1,9 @@
-const test = require('tape')
+const test    = require('tape')
+const helpers = require('../test/helpers')
 
-const helpers   = require('../test/helpers')
-const bindFunc  = helpers.bindFunc
-const noop      = helpers.noop
+const bindFunc    = helpers.bindFunc
+const noop        = helpers.noop
+const isFunction  = require('../internal/isFunction')
 
 const constant = require('../combinators/constant')
 const identity = require('../combinators/identity')
@@ -21,7 +22,7 @@ Last.empty = () => Last(null)
 test('mconcat', t => {
   const mc  = bindFunc(mconcat)
 
-  t.equal(typeof mconcat, 'function', 'is a function')
+  t.ok(isFunction(mconcat), 'is a function')
 
   t.throws(mc(undefined, []), TypeError, 'throws when first arg is undefined')
   t.throws(mc(null, []), TypeError, 'throws when first arg is null')

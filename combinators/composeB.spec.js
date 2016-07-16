@@ -1,8 +1,9 @@
-const test  = require('tape')
-const sinon = require('sinon')
+const test    = require('tape')
+const sinon   = require('sinon')
+const helpers = require('../test/helpers')
 
-const helpers   = require('../test/helpers')
-const bindFunc  = helpers.bindFunc
+const isFunction  = require('../internal/isFunction')
+const bindFunc    = helpers.bindFunc
 
 const identity  = require('./identity')
 const composeB  = require('./composeB')
@@ -10,7 +11,7 @@ const composeB  = require('./composeB')
 test('composeB (B combinator)', t => {
   const b = bindFunc(composeB)
 
-  t.equal(typeof composeB, 'function', 'is a function')
+  t.ok(isFunction(composeB), 'is a function')
 
   t.throws(b(undefined, identity, 0), TypeError, 'throws when first arg is undefined')
   t.throws(b(null, identity, 0), TypeError, 'throws when first arg is null')

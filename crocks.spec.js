@@ -26,6 +26,7 @@ const Identity  = require('./crocks/Identity')
 
 const Any = require('./monoids/Any')
 const All = require('./monoids/All')
+const Sum = require('./monoids/Sum')
 
 test('entry', t => {
   t.equal(crocks.toString(), '[object Object]', 'is an object')
@@ -54,6 +55,7 @@ test('entry', t => {
 
   t.equal(crocks.Any, Any, 'provides the Any function')
   t.equal(crocks.All, All, 'provides the All function')
+  t.equal(crocks.Sum, Sum, 'provides the Sum function')
 
   t.end()
 })

@@ -8,7 +8,8 @@ const crocks = {
 
 const monoids = {
   Any: require('./monoids/Any'),
-  All: require('./monoids/All')
+  All: require('./monoids/All'),
+  Sum: require('./monoids/Sum')
 }
 
 const helpers = {

@@ -5,8 +5,9 @@ const crocks = require('./crocks')
 const applyTo       = require('./combinators/applyTo')
 const composeB      = require('./combinators/composeB')
 const constant      = require('./combinators/constant')
-const reverseApply  = require('./combinators/reverseApply')
 const identity      = require('./combinators/identity')
+const reverseApply  = require('./combinators/reverseApply')
+const substitution  = require('./combinators/substitution')
 
 const compose = require('./funcs/compose')
 const curry   = require('./funcs/curry')
@@ -36,6 +37,7 @@ test('entry', t => {
   t.equal(crocks.constant, constant, 'provides the K combinator')
   t.equal(crocks.identity, identity, 'provides the I combinator')
   t.equal(crocks.reverseApply, reverseApply, 'provides the T combinator')
+  t.equal(crocks.substitution, substitution, 'provides the S combinator')
 
   t.equal(crocks.compose, compose, 'provides the compose function')
   t.equal(crocks.curry, curry, 'provides the curry function')

@@ -33,7 +33,8 @@ const combinators = {
   composeB:     require('./combinators/composeB'),
   constant:     require('./combinators/constant'),
   identity:     require('./combinators/identity'),
-  reverseApply: require('./combinators/reverseApply')
+  reverseApply: require('./combinators/reverseApply'),
+  substitution: require('./combinators/substitution')
 }
 
 module.exports = Object.assign(

@@ -8,7 +8,7 @@ function substitution(f, g, x) {
     throw new TypeError('substitution: First two args must be functions')
   }
 
-  return f(x)(g(x))
+  return curry(f)(x, g(x))
 }
 
 module.exports = curry(substitution)

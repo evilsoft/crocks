@@ -1,8 +1,7 @@
-const curry   = require('../funcs/curry')
+const curry = require('../funcs/curry')
 
-const isFunction = require('../internal/isFunction')
-
-const isApply = m => m && isFunction(m.ap) && isFunction(m.map)
+const isFunction  = require('../internal/isFunction')
+const isApply     = require('../internal/isApply')
 
 function liftA2(fn, x, y) {
   if(!isFunction(fn)) {

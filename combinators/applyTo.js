@@ -5,7 +5,7 @@ const isFunction  = require('../internal/isFunction')
 // applyTo:: (a -> b) -> a -> b
 function applyTo(fn, x) {
   if(!isFunction(fn)) {
-    throw new TypeError('applyTo: first argument must be a function')
+    throw new TypeError('applyTo: First arg must be a function')
   }
 
   return fn(x)

@@ -32,6 +32,7 @@ const combinators = {
   applyTo:      require('./combinators/applyTo'),
   composeB:     require('./combinators/composeB'),
   constant:     require('./combinators/constant'),
+  flip:         require('./combinators/flip'),
   identity:     require('./combinators/identity'),
   reverseApply: require('./combinators/reverseApply'),
   substitution: require('./combinators/substitution')

@@ -14,6 +14,7 @@ const compose = require('./funcs/compose')
 const curry   = require('./funcs/curry')
 const mconcat = require('./funcs/mconcat')
 const liftA   = require('./funcs/liftA')
+const liftA2  = require('./funcs/liftA2')
 
 const map     = require('./pointfree/map')
 const ap      = require('./pointfree/ap')
@@ -45,6 +46,7 @@ test('entry', t => {
   t.equal(crocks.curry, curry, 'provides the curry function')
   t.equal(crocks.mconcat, mconcat, 'provides the mconcat function')
   t.equal(crocks.liftA, liftA, 'provides the liftA function')
+  t.equal(crocks.liftA2, liftA2, 'provides the liftA2 function')
 
   t.equal(crocks.map, map, 'provides the map point-free function')
   t.equal(crocks.ap, ap, 'provides the ap point-free function')

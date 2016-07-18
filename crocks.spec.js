@@ -28,9 +28,10 @@ const value = require('./pointfree/value')
 const Maybe     = require('./crocks/Maybe')
 const Identity  = require('./crocks/Identity')
 
-const Any = require('./monoids/Any')
-const All = require('./monoids/All')
-const Sum = require('./monoids/Sum')
+const Any   = require('./monoids/Any')
+const All   = require('./monoids/All')
+const Prod  = require('./monoids/Prod')
+const Sum   = require('./monoids/Sum')
 
 test('entry', t => {
   t.equal(crocks.toString(), '[object Object]', 'is an object')
@@ -63,6 +64,7 @@ test('entry', t => {
 
   t.equal(crocks.Any, Any, 'provides the Any function')
   t.equal(crocks.All, All, 'provides the All function')
+  t.equal(crocks.Prod, Prod, 'provides the Prod function')
   t.equal(crocks.Sum, Sum, 'provides the Sum function')
 
   t.end()

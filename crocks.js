@@ -17,7 +17,8 @@ const helpers = {
   curry:    require('./funcs/curry'),
   mconcat:  require('./funcs/mconcat'),
   liftA:    require('./funcs/liftA'),
-  liftA2:   require('./funcs/liftA2')
+  liftA2:   require('./funcs/liftA2'),
+  liftA3:   require('./funcs/liftA3')
 }
 
 const pointFree = {

@@ -23,10 +23,12 @@ const chain   = require('./pointfree/chain')
 const concat  = require('./pointfree/concat')
 
 const maybe = require('./pointfree/maybe')
+const run   = require('./pointfree/run')
 const value = require('./pointfree/value')
 
 const Maybe     = require('./crocks/Maybe')
 const Identity  = require('./crocks/Identity')
+const IO        = require('./crocks/IO')
 
 const Any   = require('./monoids/Any')
 const All   = require('./monoids/All')
@@ -58,9 +60,11 @@ test('entry', t => {
 
   t.equal(crocks.maybe, maybe, 'provides the maybe point-free function')
   t.equal(crocks.value, value, 'provides the value point-free function')
+  t.equal(crocks.run, run, 'provides the run point-free function')
 
   t.equal(crocks.Maybe, Maybe, 'provides the Maybe function')
   t.equal(crocks.Identity, Identity, 'provides the Identity function')
+  t.equal(crocks.IO, IO, 'provides the IO function')
 
   t.equal(crocks.Any, Any, 'provides the Any function')
   t.equal(crocks.All, All, 'provides the All function')

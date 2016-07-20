@@ -3,7 +3,8 @@
 
 const crocks = {
   Maybe:    require('./crocks/Maybe'),
-  Identity: require('./crocks/Identity')
+  Identity: require('./crocks/Identity'),
+  IO:       require('./crocks/IO')
 }
 
 const monoids = {
@@ -23,11 +24,12 @@ const helpers = {
 }
 
 const pointFree = {
-  map:    require('./pointfree/map'),
   ap:     require('./pointfree/ap'),
   chain:  require('./pointfree/chain'),
   concat: require('./pointfree/concat'),
+  map:    require('./pointfree/map'),
   maybe:  require('./pointfree/maybe'),
+  run:    require('./pointfree/run'),
   value:  require('./pointfree/value')
 }
 

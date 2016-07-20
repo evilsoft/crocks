@@ -1,7 +1,8 @@
-const test  = require('tape')
-const sinon = require('sinon')
+const test    = require('tape')
+const sinon   = require('sinon')
+const helpers = require('../test/helpers')
 
-const helpers   = require('../test/helpers')
+const isFunction  = require('../internal/isFunction')
 const bindFunc  = helpers.bindFunc
 const noop      = helpers.noop
 
@@ -14,15 +15,15 @@ const Identity = require('./Identity')
 test('Identity', t => {
   const m = Identity(0)
 
-  t.equal(typeof Identity, 'function', 'is a function')
+  t.ok(isFunction(Identity), 'is a function')
   t.equal(m.toString(), '[object Object]', 'returns an object')
 
-  t.equal(typeof Identity.of, 'function', 'provides an of function')
-  t.equal(typeof Identity.type, 'function', 'provides a type function')
+  t.ok(isFunction(Identity.of), 'provides an of function')
+  t.ok(isFunction(Identity.type), 'provides a type function')
   t.equal(Identity.type, Identity(0).type, 'static type function matches instance type function')
 
-  t.equal(typeof m.value, 'function', 'provides a value function')
-  t.equal(typeof m.type, 'function', 'provides a type function')
+  t.ok(isFunction(m.value), 'provides a value function')
+  t.ok(isFunction(m.type), 'provides a type function')
 
   t.throws(Identity, TypeError, 'throws when no parameters are passed')
 
@@ -63,7 +64,7 @@ test('Identity equal properties (Setoid)', t => {
   const c = Identity(1)
   const d = Identity(0)
 
-  t.equals(typeof Identity(0).equals, 'function', 'provides an equals function')
+  t.ok(isFunction(Identity(0).equals), 'provides an equals function')
   t.equals(a.equals(a), true, 'reflexivity')
   t.equals(a.equals(b), b.equals(a), 'symmetry (equal)')
   t.equals(a.equals(c), c.equals(a), 'symmetry (!equal)')
@@ -109,7 +110,7 @@ test('Identity map properties (Functor)', t => {
   const f = x => x + 54
   const g = x => x * 4
 
-  t.equal(typeof m.map, 'function', 'provides a map function')
+  t.ok(isFunction(m.map), 'provides a map function')
 
   t.equal(m.map(identity).value(), m.value(), 'identity')
   t.equal(m.map(composeB(f, g)).value(), m.map(g).map(f).value(), 'composition')
@@ -153,8 +154,8 @@ test('Identity ap properties (Apply)', t => {
   const a = m.map(composeB).ap(m).ap(m)
   const b = m.ap(m.ap(m))
 
-  t.equal(typeof Identity(0).map, 'function', 'implements the Functor spec')
-  t.equal(typeof Identity(0).ap, 'function', 'provides an ap function')
+  t.ok(isFunction(Identity(0).map), 'implements the Functor spec')
+  t.ok(isFunction(Identity(0).ap), 'provides an ap function')
 
   t.equal(a.ap(Identity(3)).value(), b.ap(Identity(3)).value(), 'composition')
 
@@ -172,8 +173,8 @@ test('Identity of', t => {
 test('Identity of properties (Applicative)', t => {
   const m = Identity(identity)
 
-  t.equal(typeof Identity(0).of, 'function', 'provides an of function')
-  t.equal(typeof Identity(0).ap, 'function', 'implements the Apply spec')
+  t.ok(isFunction(Identity(0).of), 'provides an of function')
+  t.ok(isFunction(Identity(0).ap), 'implements the Apply spec')
 
   t.equal(m.ap(Identity(3)).value(), 3, 'identity')
   t.equal(m.ap(Identity.of(3)).value(), Identity.of(identity(3)).value(), 'homomorphism')
@@ -207,8 +208,8 @@ test('Identity chain errors', t => {
 })
 
 test('Identity chain properties (Chain)', t => {
-  t.equal(typeof Identity(0).chain, 'function', 'provides a chain function')
-  t.equal(typeof Identity(0).ap, 'function', 'implements the Apply spec')
+  t.ok(isFunction(Identity(0).chain), 'provides a chain function')
+  t.ok(isFunction(Identity(0).ap), 'implements the Apply spec')
 
   const f = x => Identity(x + 2)
   const g = x => Identity(x + 10)
@@ -222,16 +223,14 @@ test('Identity chain properties (Chain)', t => {
 })
 
 test('Identity chain properties (Monad)', t => {
-  t.equal(typeof Identity(0).chain, 'function', 'implements the Chain spec')
-  t.equal(typeof Identity(0).of, 'function', 'implements the Applicative spec')
+  t.ok(isFunction(Identity(0).chain), 'implements the Chain spec')
+  t.ok(isFunction(Identity(0).of), 'implements the Applicative spec')
 
   const f = x => Identity(x)
 
   t.equal(Identity.of(3).chain(f).value(), f(3).value(), 'left identity')
 
-  const m = x => Identity(x)
-
-  t.equal(m(3).chain(Identity.of).value(), m(3).value(), 'right identity')
+  t.equal(f(3).chain(Identity.of).value(), f(3).value(), 'right identity')
 
   t.end()
 })

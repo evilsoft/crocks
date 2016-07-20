@@ -1,18 +1,19 @@
-const test  = require('tape')
-const sinon = require('sinon')
+const test    = require('tape')
+const sinon   = require('sinon')
+const helpers = require('../test/helpers')
+
+const isFunction  = require('../internal/isFunction')
+const bindFunc    = helpers.bindFunc
 
 const identity = require('../combinators/identity')
 
-const helpers   = require('../test/helpers')
-const bindFunc  = helpers.bindFunc
-
-const ap  = require('./ap')
+const ap = require('./ap')
 
 test('ap pointfree', t => {
   const a = bindFunc(ap)
   const m = { ap: identity }
 
-  t.equal(typeof ap, 'function', 'is a function')
+  t.ok(isFunction(ap), 'is a function')
 
   t.throws(a(undefined, m), TypeError, 'throws if first arg is undefined')
   t.throws(a(null, m), TypeError, 'throws if first arg is null')

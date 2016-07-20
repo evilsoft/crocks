@@ -1,9 +1,8 @@
 const isFunction  = require('../internal/isFunction')
+const isNumber    = require('../internal/isNumber')
 const isType      = require('../internal/isType')
 
 const constant = require('../combinators/constant')
-
-const isNumber = x => typeof x === 'number'
 
 const _empty  = () => Prod(1)
 const _type   = constant('Prod')

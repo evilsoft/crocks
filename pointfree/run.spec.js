@@ -1,9 +1,10 @@
-const test  = require('tape')
-const sinon = require('sinon')
+const test    = require('tape')
+const sinon   = require('sinon')
+const helpers = require('../test/helpers')
 
-const helpers   = require('../test/helpers')
-const bindFunc  = helpers.bindFunc
-const noop      = helpers.noop
+const isFunction  = require('../internal/isFunction')
+const bindFunc    = helpers.bindFunc
+const noop        = helpers.noop
 
 const constant = require('../combinators/constant')
 
@@ -14,7 +15,7 @@ test('run pointfree', t => {
   const x = 'result'
   const m = { run: sinon.spy(constant(x)) }
 
-  t.equal(typeof run, 'function', 'is a function')
+  t.ok(isFunction(run), 'is a function')
 
   t.throws(f(undefined), TypeError, 'throws if passed undefined')
   t.throws(f(null), TypeError, 'throws if passed null')
@@ -30,7 +31,7 @@ test('run pointfree', t => {
 
   const result = run(m)
 
-  t.equal(m.run.called, true, 'calls value on the passed Identity')
+  t.ok(m.run.called, 'calls value on the passed Identity')
   t.equal(result, x, 'returns the result of calling m.run')
 
   t.end()

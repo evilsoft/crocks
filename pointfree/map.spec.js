@@ -1,11 +1,12 @@
-const test  = require('tape')
-const sinon = require('sinon')
-
-const identity = require('../combinators/identity')
+const test    = require('tape')
+const sinon   = require('sinon')
 const helpers = require('../test/helpers')
 
-const bindFunc  = helpers.bindFunc
-const noop      = helpers.noop
+const isFunction  = require('../internal/isFunction')
+const bindFunc    = helpers.bindFunc
+const noop        = helpers.noop
+
+const identity = require('../combinators/identity')
 
 const map = require('./map')
 
@@ -13,7 +14,7 @@ test('map pointfree', t => {
   const m = bindFunc(map)
   const f = { map: noop }
 
-  t.equal(typeof map, 'function', 'is a function')
+  t.ok(isFunction(map), 'is a function')
 
   t.throws(m(undefined, f), 'throws if first arg is undefined')
   t.throws(m(null, f), 'throws if first arg is null')
@@ -39,6 +40,7 @@ test('map pointfree', t => {
   t.doesNotThrow(m(noop, f), 'allows a function and functor')
   t.doesNotThrow(m(noop, []), 'allows a function and an array')
   t.doesNotThrow(m(noop, noop), 'allows two functions')
+
   t.end()
 })
 
@@ -58,7 +60,7 @@ test('map function composition', t => {
   const comp    = map(second)(first)
   const result  = comp(0)
 
-  t.equal(typeof comp, 'function', 'map returns a function')
+  t.ok(isFunction(comp), 'map returns a function')
   t.ok(first.calledBefore(second), 'map calls the second function first')
 
   t.ok(second.calledWith(first.returnValues[0]), 'result of first is passed to the second')

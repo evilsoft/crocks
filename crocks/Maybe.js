@@ -10,7 +10,7 @@ const _of   = Maybe
 
 function Maybe(x) {
   if(!arguments.length) {
-    throw new TypeError('Maybe must wrap something')
+    throw new TypeError('Maybe: Must wrap something')
   }
 
   const maybe = constant(isNothing(x) ? null : x)
@@ -35,7 +35,7 @@ function Maybe(x) {
     }
 
     if(!isType(type(), m)) {
-      throw new TypeError(' Maybe.ap: Maybe required')
+      throw new TypeError('Maybe.ap: Maybe required')
     }
 
     return m.map(fn)

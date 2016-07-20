@@ -1,6 +1,8 @@
-const test = require('tape')
+const test    = require('tape')
+const helpers = require('../test/helpers')
 
-const bindFunc = require('../test/helpers').bindFunc
+const isFunction  = require('../internal/isFunction')
+const bindFunc    = helpers.bindFunc
 
 const identity  = require('../combinators/identity')
 const constant  = require('../combinators/constant')
@@ -10,10 +12,10 @@ const All = require('./All')
 test('All', t => {
   const m = bindFunc(All)
 
-  t.equal(typeof All, 'function', 'is a function')
+  t.ok(isFunction(All), 'is a function')
 
-  t.equal(typeof All.empty, 'function', 'provides an empty function')
-  t.equal(typeof All.type, 'function', 'provides a type function')
+  t.ok(isFunction(All.empty), 'provides an empty function')
+  t.ok(isFunction(All.type), 'provides a type function')
   t.equal(All(0).toString(), '[object Object]', 'returns an object')
 
   t.throws(All, TypeError, 'throws when nothing is passed')
@@ -34,7 +36,7 @@ test('All', t => {
 })
 
 test('All value', t => {
-  t.equal(typeof All(0).value, 'function', 'is a function')
+  t.ok(isFunction(All(0).value), 'is a function')
 
   t.equal(All(undefined).value(), false, 'reports false for undefined')
   t.equal(All(null).value(), false, 'reports false for null')
@@ -51,7 +53,7 @@ test('All value', t => {
 })
 
 test('All type', t => {
-  t.equal(typeof All(0).type, 'function', 'is a function')
+  t.ok(isFunction(All(0).type), 'is a function')
   t.equal(All.type, All(0).type, 'is the same function as the static type')
   t.equal(All(0).type(), 'All', 'reports the expected type')
 
@@ -66,7 +68,7 @@ test('All concat properties (Semigoup)', t => {
   const left  = a.concat(b).concat(c)
   const right = a.concat(b.concat(c))
 
-  t.equal(typeof a.concat, 'function', 'provides a concat function')
+  t.ok(isFunction(a.concat), 'provides a concat function')
   t.equal(left.value(), right.value(), 'associativity')
   t.equal(a.concat(b).type(), a.type(), 'returns an Any')
 
@@ -103,8 +105,8 @@ test('All concat functionality', t => {
 test('All empty properties (Monoid)', t => {
   const m = All(3)
 
-  t.equal(typeof m.concat, 'function', 'provides a concat function')
-  t.equal(typeof m.empty, 'function', 'provides an empty function')
+  t.ok(isFunction(m.concat), 'provides a concat function')
+  t.ok(isFunction(m.empty), 'provides an empty function')
 
   const right = m.concat(m.empty())
   const left  = m.empty().concat(m)

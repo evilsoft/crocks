@@ -1,9 +1,10 @@
-const test  = require('tape')
-const sinon = require('sinon')
+const test    = require('tape')
+const sinon   = require('sinon')
+const helpers = require('../test/helpers')
 
-const helpers   = require('../test/helpers')
-const bindFunc  = helpers.bindFunc
-const noop      = helpers.noop
+const isFunction  = require('../internal/isFunction')
+const bindFunc    = helpers.bindFunc
+const noop        = helpers.noop
 
 const identity = require('../combinators/identity')
 
@@ -12,7 +13,7 @@ const concat = require('./concat')
 test('concat pointfree', t => {
   const f = bindFunc(concat)
 
-  t.equal(typeof concat, 'function', 'is a function')
+  t.ok(isFunction(concat), 'is a function')
 
   t.throws(f(0, undefined), TypeError, 'throws is second arg is undefined')
   t.throws(f(0, null), TypeError, 'throws is second arg is null')

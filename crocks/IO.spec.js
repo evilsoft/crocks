@@ -17,15 +17,15 @@ test('IO', t => {
   const m   = IO(noop)
   const io  = bindFunc(IO)
 
-  t.equal(typeof IO, 'function', 'is a function')
+  t.ok(isFunction(IO), 'is a function')
   t.equal(m.toString(), '[object Object]', 'returns an object')
 
-  t.equal(typeof IO.of, 'function', 'provides an of function')
-  t.equal(typeof IO.type, 'function', 'provides a type function')
+  t.ok(isFunction(IO.of), 'provides an of function')
+  t.ok(isFunction(IO.type), 'provides a type function')
   t.equal(IO.type, IO(noop).type, 'static type function matches instance type function')
 
-  t.equal(typeof m.run, 'function', 'provides a value function')
-  t.equal(typeof m.type, 'function', 'provides a type function')
+  t.ok(isFunction(m.run), 'provides a value function')
+  t.ok(isFunction(m.type), 'provides a type function')
 
   t.throws(io(), TypeError, 'throws with no parameters')
 
@@ -90,7 +90,7 @@ test('IO map functionality', t => {
   m.run()
 
   t.ok(spy.called, 'calls mapping function when ran')
-  t.equal(m.run(), x, 'returns the result of the map inside of new Identity')
+  t.equal(m.run(), x, 'returns the result of the map inside of new IO')
 
   t.end()
 })

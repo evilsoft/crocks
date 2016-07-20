@@ -1,8 +1,9 @@
-const test  = require('tape')
-const sinon = require('sinon')
+const test    = require('tape')
+const sinon   = require('sinon')
+const helpers = require('../test/helpers')
 
-const helpers   = require('../test/helpers')
-const bindFunc  = helpers.bindFunc
+const isFunction  = require('../internal/isFunction')
+const bindFunc    = helpers.bindFunc
 
 const constant = require('../combinators/constant')
 
@@ -13,7 +14,7 @@ test('maybe pointfree', t => {
   const x = 'result'
   const m = { maybe: sinon.spy(constant(x)) }
 
-  t.equal(typeof maybe, 'function', 'is a function')
+  t.ok(isFunction(maybe), 'is a function')
 
   t.throws(f(undefined), TypeError, 'throws if passed undefined')
   t.throws(f(null), TypeError, 'throws if passed null')
@@ -28,7 +29,7 @@ test('maybe pointfree', t => {
 
   const result = maybe(m)
 
-  t.equal(m.maybe.called, true, 'calls maybe on the passed Maybe')
+  t.ok(m.maybe.called, 'calls maybe on the passed Maybe')
   t.equal(result, x, 'returns the result of calling m.maybe')
 
   t.end()

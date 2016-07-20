@@ -3,8 +3,9 @@ const sinon = require('sinon')
 
 const helpers = require('../test/helpers')
 
-const noop      = helpers.noop
-const bindFunc  = helpers.bindFunc
+const isFunction  = require('../internal/isFunction')
+const noop        = helpers.noop
+const bindFunc    = helpers.bindFunc
 
 const reverseApply  = require('../combinators/reverseApply')
 const composeB      = require('../combinators/composeB')
@@ -15,15 +16,15 @@ const Maybe = require('./Maybe')
 test('Maybe', t => {
   const m = Maybe(0)
 
-  t.equal(typeof Maybe, 'function', 'is a function')
-  t.equal(typeof Maybe.of, 'function', 'provides an of function')
-  t.equal(typeof Maybe.type, 'function', 'provides a type function')
+  t.ok(isFunction(Maybe), 'is a function')
+  t.ok(isFunction(Maybe.of), 'provides an of function')
+  t.ok(isFunction(Maybe.type), 'provides a type function')
   t.equal(Maybe.type, Maybe(0).type, 'static type function matches instance type function')
 
   t.equal(m.toString(), '[object Object]', 'returns an object')
 
-  t.equal(typeof m.maybe, 'function', 'result provides a maybe function')
-  t.equal(typeof m.type, 'function', 'result provides a type function')
+  t.ok(isFunction(m.maybe), 'result provides a maybe function')
+  t.ok(isFunction(m.type), 'result provides a type function')
 
   t.throws(Maybe, TypeError, 'throws when no parameters are passed')
 
@@ -70,7 +71,7 @@ test('Maybe equals properties (Setoid)', t => {
   const c = Maybe(1)
   const d = Maybe(0)
 
-  t.equal(typeof Maybe(0).equals, 'function', 'provides an equals function')
+  t.ok(isFunction(Maybe(0).equals), 'provides an equals function')
 
   t.equals(a.equals(a), true, 'reflexivity')
   t.equals(a.equals(b), b.equals(a), 'symmetry (equal)')
@@ -83,16 +84,16 @@ test('Maybe equals properties (Setoid)', t => {
 test('Maybe map errors', t => {
   const map = bindFunc(Maybe(0).map)
 
-  t.throws(map(undefined), TypeError, 'throws when passed undefined')
-  t.throws(map(null), TypeError, 'throws when passed null')
-  t.throws(map(0), TypeError, 'throws when passed a falsey number')
-  t.throws(map(1), TypeError, 'throws when passed a truthy number')
-  t.throws(map(''), TypeError, 'throws when passed a falsey string')
-  t.throws(map('string'), TypeError, 'throws when passed a truthy string')
-  t.throws(map(false), TypeError, 'throws when passed false')
-  t.throws(map(true), TypeError, 'throws when passed true')
-  t.throws(map([]), TypeError, 'throws when passed an array')
-  t.throws(map({}), TypeError, 'throws when passed an object')
+  t.throws(map(undefined), TypeError, 'throws with undefined')
+  t.throws(map(null), TypeError, 'throws with null')
+  t.throws(map(0), TypeError, 'throws with falsey number')
+  t.throws(map(1), TypeError, 'throws with truthy number')
+  t.throws(map(''), TypeError, 'throws with falsey string')
+  t.throws(map('string'), TypeError, 'throws with truthy string')
+  t.throws(map(false), TypeError, 'throws with false')
+  t.throws(map(true), TypeError, 'throws with true')
+  t.throws(map([]), TypeError, 'throws with an array')
+  t.throws(map({}), TypeError, 'throws iwth object')
   t.doesNotThrow(map(noop), 'does not throw when passed a function')
 
   t.end()
@@ -122,7 +123,7 @@ test('Maybe map properties (Functor)', t => {
   const f = x => x + 2
   const g = x => x * 2
 
-  t.equal(typeof Maybe(0).map, 'function', 'provides a map function')
+  t.ok(isFunction(Maybe(0).map), 'provides a map function')
 
   t.equal(Maybe(0).map(identity).maybe(), 0, 'identity')
   t.equals(Maybe(10).map(x => f(g(x))).maybe(), Maybe(10).map(g).map(f).maybe(), 'composition')
@@ -162,8 +163,8 @@ test('Maybe ap properties (Apply)', t => {
   const a = m.map(composeB).ap(m).ap(m)
   const b = m.ap(m.ap(m))
 
-  t.equal(typeof Maybe(0).ap, 'function', 'provides an ap function')
-  t.equal(typeof Maybe(0).map, 'function', 'implements the Functor spec')
+  t.ok(isFunction(Maybe(0).ap), 'provides an ap function')
+  t.ok(isFunction(Maybe(0).map), 'implements the Functor spec')
 
   t.equal(a.ap(Maybe(3)).maybe(), b.ap(Maybe(3)).maybe(), 'composition Just')
   t.equal(a.ap(Maybe(undefined)).maybe(), b.ap(Maybe(undefined)).maybe(), 'composition Nothing')
@@ -182,8 +183,8 @@ test('Maybe of', t => {
 test('Maybe of properties (Applicative)', t => {
   const m = Maybe(identity)
 
-  t.equal(typeof Maybe(0).of, 'function', 'provides an of function')
-  t.equal(typeof Maybe(0).ap, 'function', 'implements the Apply spec')
+  t.ok(isFunction(Maybe(0).of), 'provides an of function')
+  t.ok(isFunction(Maybe(0).ap), 'implements the Apply spec')
 
   t.equal(m.ap(Maybe(3)).maybe(), 3, 'identity Just')
   t.equal(m.ap(Maybe(undefined)).maybe(), null, 'identity Nothing')
@@ -219,8 +220,8 @@ test('Maybe chain errors', t => {
 })
 
 test('Maybe chain properties (Chain)', t => {
-  t.equal(typeof Maybe(0).chain, 'function', 'provides a chain function')
-  t.equal(typeof Maybe(0).ap, 'function', 'implements the Apply spec')
+  t.ok(isFunction(Maybe(0).chain), 'provides a chain function')
+  t.ok(isFunction(Maybe(0).ap), 'implements the Apply spec')
 
   const f = x => Maybe(x + 2)
   const g = x => Maybe(x + 10)
@@ -235,8 +236,8 @@ test('Maybe chain properties (Chain)', t => {
 })
 
 test('Maybe chain properties (Monad)', t => {
-  t.equal(typeof Maybe(0).chain, 'function', 'implements the Chain spec')
-  t.equal(typeof Maybe(0).of, 'function', 'implements the Applicative spec')
+  t.ok(isFunction(Maybe(0).chain), 'implements the Chain spec')
+  t.ok(isFunction(Maybe(0).of), 'implements the Applicative spec')
 
   const f = x => Maybe(x)
 

@@ -1,6 +1,8 @@
-const test = require('tape')
+const test    = require('tape')
+const helpers = require('../test/helpers')
 
-const bindFunc = require('../test/helpers').bindFunc
+const isFunction  = require('../internal/isFunction')
+const bindFunc    = helpers.bindFunc
 
 const identity  = require('../combinators/identity')
 const constant  = require('../combinators/constant')
@@ -9,11 +11,11 @@ const Any = require('./Any')
 
 test('Any', t => {
   const a = bindFunc(Any)
-  t.equal(typeof Any, 'function', 'is a function')
 
-  // TODO: Move to ok
-  t.equal(typeof Any.empty, 'function', 'provides an empty function')
-  t.equal(typeof Any.type, 'function', 'provides a type function')
+  t.ok(isFunction(Any), 'is a function')
+
+  t.ok(isFunction(Any.empty), 'provides an empty function')
+  t.ok(isFunction(Any.type), 'provides a type function')
   t.equal(Any(0).toString(), '[object Object]', 'returns an object')
 
   t.throws(Any, TypeError, 'throws when nothing is passed')
@@ -34,8 +36,7 @@ test('Any', t => {
 })
 
 test('Any value', t => {
-  // TODO: move to ok
-  t.equal(typeof Any(0).value, 'function', 'is a function')
+  t.ok(isFunction(Any(0).value), 'is a function')
 
   t.equal(Any(undefined).value(), false, 'reports false for undefined')
   t.equal(Any(null).value(), false, 'reports false for null')
@@ -52,8 +53,9 @@ test('Any value', t => {
 })
 
 test('Any type', t => {
-  // TODO: move to ok, add compare spec (instance/static)
-  t.equal(typeof Any(0).type, 'function', 'is a function')
+  t.ok(isFunction(Any(0).type), 'is a function')
+
+  t.equal(Any(0).type, Any.type, 'static and instance versions are the same')
   t.equal(Any(0).type(), 'Any', 'reports the expected type')
 
   t.end()
@@ -67,7 +69,7 @@ test('Any concat properties (Semigoup)', t => {
   const left = a.concat(b).concat(c)
   const right = a.concat(b.concat(c))
 
-  t.equal(typeof a.concat, 'function', 'provides a concat function')
+  t.ok(isFunction(a.concat), 'provides a concat function')
   t.equal(left.value(), right.value(), 'associativity')
   t.equal(a.concat(b).type(), a.type(), 'returns an Any')
 
@@ -104,8 +106,8 @@ test('Any concat functionality', t => {
 test('Any empty properties (Monoid)', t => {
   const m = Any(3)
 
-  t.equal(typeof m.concat, 'function', 'provides a concat function')
-  t.equal(typeof m.empty, 'function', 'provides an empty function')
+  t.ok(isFunction(m.concat), 'provides a concat function')
+  t.ok(isFunction(m.empty), 'provides an empty function')
 
   const right = m.concat(m.empty())
   const left  = m.empty().concat(m)

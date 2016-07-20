@@ -1,12 +1,12 @@
-const test  = require('tape')
-const sinon = require('sinon')
-
-const constant = require('../combinators/constant')
-
+const test    = require('tape')
+const sinon   = require('sinon')
 const helpers = require('../test/helpers')
 
-const bindFunc  = helpers.bindFunc
-const noop      = helpers.noop
+const isFunction  = require('../internal/isFunction')
+const bindFunc    = helpers.bindFunc
+const noop        = helpers.noop
+
+const constant = require('../combinators/constant')
 
 const chain = require('./chain')
 
@@ -15,7 +15,7 @@ test('chain pointfree', t => {
   const x = 'result'
   const m = { chain: sinon.spy(constant(x)) }
 
-  t.equal(typeof chain, 'function', 'is a function')
+  t.ok(isFunction(chain), 'is a function')
 
   t.throws(c(undefined, m), 'throws if first arg is undefined')
   t.throws(c(null, m), 'throws if first arg is null')

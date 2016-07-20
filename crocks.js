@@ -15,12 +15,13 @@ const monoids = {
 }
 
 const helpers = {
-  compose:  require('./funcs/compose'),
-  curry:    require('./funcs/curry'),
-  mconcat:  require('./funcs/mconcat'),
-  liftA:    require('./funcs/liftA'),
-  liftA2:   require('./funcs/liftA2'),
-  liftA3:   require('./funcs/liftA3')
+  compose:    require('./funcs/compose'),
+  curry:      require('./funcs/curry'),
+  liftA:      require('./funcs/liftA'),
+  liftA2:     require('./funcs/liftA2'),
+  liftA3:     require('./funcs/liftA3'),
+  mconcat:    require('./funcs/mconcat'),
+  mconcatMap: require('./funcs/mconcatMap'),
 }
 
 const pointFree = {

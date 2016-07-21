@@ -19,10 +19,8 @@ test('isNumber internal function', t => {
   t.equal(isNumber([]), false, 'returns false with an array')
   t.equal(isNumber({}), false, 'returns false with an object')
 
-  t.equal(isNumber(0), true, 'returns false with falsey number')
+  t.equal(isNumber(0), true, 'returns true with falsey number')
   t.equal(isNumber(1), true, 'returns true with truthy number')
-  t.equal(isNumber(1.087), true, 'returns true with float')
 
   t.end()
 })
-

@@ -1,6 +1,7 @@
 const test    = require('tape')
 const helpers = require('../test/helpers')
 
+const isObject    = require('../internal/isObject')
 const isFunction  = require('../internal/isFunction')
 const bindFunc    = helpers.bindFunc
 
@@ -17,17 +18,19 @@ test('Prod', t => {
   t.ok(isFunction(Prod.empty), 'provides an empty function')
   t.ok(isFunction(Prod.type), 'provides an type function')
 
-  t.throws(Prod, TypeError, 'throws when nothing is passed')
-  t.throws(s(identity), TypeError, 'throws when passed a function')
-  t.throws(s(undefined), TypeError, 'throws with undefined')
-  t.throws(s(null), 'throws with null')
-  t.throws(s(''), 'throws with falsey string')
-  t.throws(s('string'), 'throws with truthy string')
-  t.throws(s(false), 'throws with false')
-  t.throws(s(true), 'throws with true')
-  t.throws(s([]), 'throws with an array')
-  t.throws(s({}), 'throws with an object')
+  t.ok(isObject(Prod(0)), 'returns an object')
 
+  t.throws(s(), TypeError, 'throws with nothing')
+  t.throws(s(identity), TypeError, 'throws with a function')
+  t.throws(s(''), TypeError, 'throws with falsey string')
+  t.throws(s('string'), TypeError, 'throws with truthy string')
+  t.throws(s(false), TypeError, 'throws with false')
+  t.throws(s(true), TypeError, 'throws with true')
+  t.throws(s([]), TypeError, 'throws with an array')
+  t.throws(s({}), TypeError, 'throws with an object')
+
+  t.doesNotThrow(s(undefined), 'allows undefined')
+  t.doesNotThrow(s(null), 'allows null')
   t.doesNotThrow(s(0), 'allows a falsey number')
   t.doesNotThrow(s(1), 'allows a truthy number')
 
@@ -35,7 +38,12 @@ test('Prod', t => {
 })
 
 test('Prod value', t => {
+  const empty = Prod.empty().value()
+
   t.ok(isFunction(Prod(0).value), 'is a function')
+
+  t.equal(Prod(undefined).value(), empty, 'provides an empty value for undefined')
+  t.equal(Prod(null).value(), empty, 'provides an empty value for null ')
 
   t.equal(Prod(0).value(), 0, 'provides a wrapped falsey number')
   t.equal(Prod(1).value(), 1, 'provides a wrapped truthy number')

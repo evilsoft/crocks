@@ -1,13 +1,16 @@
-const isFunction  = require('../internal/isFunction')
-const isNumber    = require('../internal/isNumber')
-const isType      = require('../internal/isType')
+const isFunction    = require('../internal/isFunction')
+const isNumber      = require('../internal/isNumber')
+const isType        = require('../internal/isType')
+const isUndefOrNull = require('../internal/isUndefOrNull')
 
 const constant = require('../combinators/constant')
 
 const _empty  = () => Sum(0)
 const _type   = constant('Sum')
 
-function Sum(x) {
+function Sum(n) {
+  const x = isUndefOrNull(n) ? _empty().value() : n
+
   if(!arguments.length || !isNumber(x)) {
     throw new TypeError('Sum: must wrap a numeric value')
   }

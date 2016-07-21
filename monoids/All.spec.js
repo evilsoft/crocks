@@ -1,6 +1,7 @@
 const test    = require('tape')
 const helpers = require('../test/helpers')
 
+const isObject    = require('../internal/isObject')
 const isFunction  = require('../internal/isFunction')
 const bindFunc    = helpers.bindFunc
 
@@ -16,7 +17,7 @@ test('All', t => {
 
   t.ok(isFunction(All.empty), 'provides an empty function')
   t.ok(isFunction(All.type), 'provides a type function')
-  t.equal(All(0).toString(), '[object Object]', 'returns an object')
+  t.ok(isObject(All(0)), 'returns an object')
 
   t.throws(All, TypeError, 'throws when nothing is passed')
   t.throws(m(identity), TypeError, 'throws when passed a function')
@@ -38,8 +39,8 @@ test('All', t => {
 test('All value', t => {
   t.ok(isFunction(All(0).value), 'is a function')
 
-  t.equal(All(undefined).value(), false, 'reports false for undefined')
-  t.equal(All(null).value(), false, 'reports false for null')
+  t.equal(All(undefined).value(), true, 'reports true for undefined')
+  t.equal(All(null).value(), true, 'reports true for null')
   t.equal(All(0).value(), false, 'reports false for falsey number')
   t.equal(All(1).value(), true, 'reports true for truthy number')
   t.equal(All('').value(), false, 'reports false for falsey number')

@@ -1,6 +1,7 @@
 const test    = require('tape')
 const helpers = require('../test/helpers')
 
+const isObject    = require('../internal/isObject')
 const isFunction  = require('../internal/isFunction')
 const bindFunc    = helpers.bindFunc
 
@@ -16,7 +17,7 @@ test('Any', t => {
 
   t.ok(isFunction(Any.empty), 'provides an empty function')
   t.ok(isFunction(Any.type), 'provides a type function')
-  t.equal(Any(0).toString(), '[object Object]', 'returns an object')
+  t.ok(isObject(Any(0)), 'returns an object')
 
   t.throws(Any, TypeError, 'throws when nothing is passed')
   t.throws(a(identity), TypeError, 'throws when passed a function')

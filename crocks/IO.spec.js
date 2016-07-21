@@ -2,6 +2,7 @@ const test    = require('tape')
 const sinon   = require('sinon')
 const helpers = require('../test/helpers')
 
+const isObject    = require('../internal/isObject')
 const isFunction  = require('../internal/isFunction')
 const bindFunc    = helpers.bindFunc
 const noop        = helpers.noop
@@ -18,7 +19,7 @@ test('IO', t => {
   const io  = bindFunc(IO)
 
   t.ok(isFunction(IO), 'is a function')
-  t.equal(m.toString(), '[object Object]', 'returns an object')
+  t.ok(isObject(m), 'returns an object')
 
   t.ok(isFunction(IO.of), 'provides an of function')
   t.ok(isFunction(IO.type), 'provides a type function')

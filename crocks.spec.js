@@ -31,10 +31,11 @@ const Maybe     = require('./crocks/Maybe')
 const Identity  = require('./crocks/Identity')
 const IO        = require('./crocks/IO')
 
-const Any   = require('./monoids/Any')
-const All   = require('./monoids/All')
-const Prod  = require('./monoids/Prod')
-const Sum   = require('./monoids/Sum')
+const All     = require('./monoids/All')
+const Any     = require('./monoids/Any')
+const Assign  = require('./monoids/Assign')
+const Prod    = require('./monoids/Prod')
+const Sum     = require('./monoids/Sum')
 
 test('entry', t => {
   t.equal(crocks.toString(), '[object Object]', 'is an object')
@@ -68,10 +69,11 @@ test('entry', t => {
   t.equal(crocks.Identity, Identity, 'provides the Identity function')
   t.equal(crocks.IO, IO, 'provides the IO function')
 
-  t.equal(crocks.Any, Any, 'provides the Any function')
-  t.equal(crocks.All, All, 'provides the All function')
-  t.equal(crocks.Prod, Prod, 'provides the Prod function')
-  t.equal(crocks.Sum, Sum, 'provides the Sum function')
+  t.equal(crocks.All, All, 'provides the All monoid')
+  t.equal(crocks.Any, Any, 'provides the Any monoid')
+  t.equal(crocks.Assign, Assign, 'provides the Assign monoid')
+  t.equal(crocks.Prod, Prod, 'provides the Prod monoid')
+  t.equal(crocks.Sum, Sum, 'provides the Sum monoid')
 
   t.end()
 })

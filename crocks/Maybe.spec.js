@@ -3,6 +3,7 @@ const sinon = require('sinon')
 
 const helpers = require('../test/helpers')
 
+const isObject    = require('../internal/isObject')
 const isFunction  = require('../internal/isFunction')
 const noop        = helpers.noop
 const bindFunc    = helpers.bindFunc
@@ -21,7 +22,7 @@ test('Maybe', t => {
   t.ok(isFunction(Maybe.type), 'provides a type function')
   t.equal(Maybe.type, Maybe(0).type, 'static type function matches instance type function')
 
-  t.equal(m.toString(), '[object Object]', 'returns an object')
+  t.ok(isObject(m), 'returns an object')
 
   t.ok(isFunction(m.maybe), 'result provides a maybe function')
   t.ok(isFunction(m.type), 'result provides a type function')

@@ -1,12 +1,15 @@
-const isFunction  = require('../internal/isFunction')
-const isType      = require('../internal/isType')
+const isFunction    = require('../internal/isFunction')
+const isType        = require('../internal/isType')
+const isUndefOrNull = require('../internal/isUndefOrNull')
 
 const constant = require('../combinators/constant')
 
 const _type   = constant('Any')
 const _empty  = () => Any(false)
 
-function Any(x) {
+function Any(b) {
+  const x = isUndefOrNull(b) ? _empty().value() : b
+
   if(!arguments.length || isFunction(x)) {
     throw new TypeError('Any: Must wrap a non-function value')
   }

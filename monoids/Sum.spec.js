@@ -1,6 +1,7 @@
 const test    = require('tape')
 const helpers = require('../test/helpers')
 
+const isObject    = require('../internal/isObject')
 const isFunction  = require('../internal/isFunction')
 const bindFunc    = helpers.bindFunc
 
@@ -16,18 +17,19 @@ test('Sum', t => {
 
   t.ok(isFunction(Sum.empty), 'provides an empty function')
   t.ok(isFunction(Sum.type), 'provides an type function')
+  t.ok(isObject(Sum(0)), 'returns an object')
 
-  t.throws(Sum, TypeError, 'throws when nothing is passed')
-  t.throws(s(identity), TypeError, 'throws when passed a function')
-  t.throws(s(undefined), TypeError, 'throws with undefined')
-  t.throws(s(null), 'throws with null')
-  t.throws(s(''), 'throws with falsey string')
-  t.throws(s('string'), 'throws with truthy string')
-  t.throws(s(false), 'throws with false')
-  t.throws(s(true), 'throws with true')
-  t.throws(s([]), 'throws with an array')
-  t.throws(s({}), 'throws with an object')
+  t.throws(Sum, TypeError, 'throws with nothing')
+  t.throws(s(identity), TypeError, 'throws with a function')
+  t.throws(s(''), TypeError, 'throws with falsey string')
+  t.throws(s('string'), TypeError, 'throws with truthy string')
+  t.throws(s(false), TypeError, 'throws with false')
+  t.throws(s(true), TypeError, 'throws with true')
+  t.throws(s([]), TypeError, 'throws with an array')
+  t.throws(s({}), TypeError, 'throws with an object')
 
+  t.doesNotThrow(s(undefined), 'allows undefined')
+  t.doesNotThrow(s(null), 'allows null')
   t.doesNotThrow(s(0), 'allows a falsey number')
   t.doesNotThrow(s(1), 'allows a truthy number')
 
@@ -35,7 +37,12 @@ test('Sum', t => {
 })
 
 test('Sum value', t => {
+  const empty = Sum.empty().value()
+
   t.ok(isFunction(Sum(0).value), 'is a function')
+
+  t.equal(Sum(undefined).value(), empty, 'provides an empty value for undefined')
+  t.equal(Sum(null).value(), empty, 'provides an empty value for null ')
 
   t.equal(Sum(0).value(), 0, 'provides a wrapped falsey number')
   t.equal(Sum(1).value(), 1, 'provides a wrapped truthy number')

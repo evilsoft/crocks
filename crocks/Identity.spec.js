@@ -2,9 +2,10 @@ const test    = require('tape')
 const sinon   = require('sinon')
 const helpers = require('../test/helpers')
 
+const isObject    = require('../internal/isObject')
 const isFunction  = require('../internal/isFunction')
-const bindFunc  = helpers.bindFunc
-const noop      = helpers.noop
+const bindFunc    = helpers.bindFunc
+const noop        = helpers.noop
 
 const identity      = require('../combinators/identity')
 const composeB      = require('../combinators/composeB')
@@ -16,7 +17,7 @@ test('Identity', t => {
   const m = Identity(0)
 
   t.ok(isFunction(Identity), 'is a function')
-  t.equal(m.toString(), '[object Object]', 'returns an object')
+  t.ok(isObject(m), 'returns an object')
 
   t.ok(isFunction(Identity.of), 'provides an of function')
   t.ok(isFunction(Identity.type), 'provides a type function')

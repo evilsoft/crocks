@@ -1,12 +1,15 @@
-const isFunction  = require('../internal/isFunction')
-const isType      = require('../internal/isType')
+const isFunction    = require('../internal/isFunction')
+const isType        = require('../internal/isType')
+const isUndefOrNull = require('../internal/isUndefOrNull')
 
 const constant = require('../combinators/constant')
 
-const _type   = constant('All')
 const _empty  = () => All(true)
+const _type   = constant('All')
 
-function All(x) {
+function All(b) {
+  const x = isUndefOrNull(b) ? _empty().value() : b
+
   if(!arguments.length || isFunction(x)) {
     throw new TypeError('All: Must wrap a non-function value')
   }

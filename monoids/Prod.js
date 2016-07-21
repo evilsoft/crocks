@@ -1,15 +1,18 @@
-const isFunction  = require('../internal/isFunction')
-const isNumber    = require('../internal/isNumber')
-const isType      = require('../internal/isType')
+const isFunction    = require('../internal/isFunction')
+const isNumber      = require('../internal/isNumber')
+const isType        = require('../internal/isType')
+const isUndefOrNull = require('../internal/isUndefOrNull')
 
 const constant = require('../combinators/constant')
 
 const _empty  = () => Prod(1)
 const _type   = constant('Prod')
 
-function Prod(x) {
+function Prod(n) {
+  const x = isUndefOrNull(n) ? _empty().value() : n
+
   if(!arguments.length || !isNumber(x)) {
-    throw new TypeError('Prod: must wrap a numeric value')
+    throw new TypeError('Prod: Requires numeric value')
   }
 
   const value   = constant(x)

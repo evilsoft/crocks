@@ -11,7 +11,7 @@ const constant  = require('../combinators/constant')
 const Assign = require('./Assign')
 
 test('Assign', t => {
-  const s = bindFunc(Assign)
+  const a = bindFunc(Assign)
 
   t.ok(isFunction(Assign), 'is a function')
 
@@ -21,19 +21,18 @@ test('Assign', t => {
   t.ok(isObject(Assign({})), 'returns an object')
 
   t.throws(Assign, TypeError, 'throws with nothing')
-  t.throws(s(identity), TypeError, 'throws with a function')
-  t.throws(s(''), TypeError, 'throws with falsey string')
-  t.throws(s('string'), TypeError, 'throws with truthy string')
-  t.throws(s(false), TypeError, 'throws with false')
-  t.throws(s(true), TypeError, 'throws with true')
-  t.throws(s([]), TypeError, 'throws with an array')
+  t.throws(a(identity), TypeError, 'throws with a function')
+  t.throws(a(0), TypeError, 'throws with falsey number')
+  t.throws(a(1), TypeError, 'throws with truthy number')
+  t.throws(a(''), TypeError, 'throws with falsey string')
+  t.throws(a('string'), TypeError, 'throws with truthy string')
+  t.throws(a(false), TypeError, 'throws with false')
+  t.throws(a(true), TypeError, 'throws with true')
+  t.throws(a([]), TypeError, 'throws with an array')
 
-  t.throws(s(0), TypeError, 'throws with falsey number')
-  t.throws(s(1), TypeError, 'throws with truthy number')
-
-  t.doesNotThrow(s(undefined), 'allows undefined')
-  t.doesNotThrow(s(null), 'allows null')
-  t.doesNotThrow(s({}), 'allows an object')
+  t.doesNotThrow(a(undefined), 'allows undefined')
+  t.doesNotThrow(a(null), 'allows null')
+  t.doesNotThrow(a({}), 'allows an object')
 
   t.end()
 })
@@ -87,7 +86,7 @@ test('Assign concat functionality', t => {
   const a = Assign(x)
   const b = Assign(y)
 
-  const notProd = { type: constant('Assign...Not') }
+  const notAssign = { type: constant('Assign...Not') }
 
   const cat = bindFunc(a.concat)
 
@@ -101,7 +100,7 @@ test('Assign concat functionality', t => {
   t.throws(cat(true), TypeError, 'throws when passed true')
   t.throws(cat([]), TypeError, 'throws when passed array')
   t.throws(cat({}), TypeError, 'throws when passed object')
-  t.throws(cat(notProd), TypeError, 'throws when passed non-Any')
+  t.throws(cat(notAssign), TypeError, 'throws when passed non-Assign')
 
   t.same(a.concat(b).value(), result, 'merges values as expected')
 

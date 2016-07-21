@@ -18,7 +18,7 @@ function mconcatMap(M, f, xs) {
     throw new TypeError('mconcatMap: Requires an array for third arg')
   }
 
-  return xs.reduce(foldWith(composeB(M, f)), M.empty()).value()
+  return xs.reduce(foldWith(composeB(M, f)), M.empty())
 }
 
 module.exports = curry(mconcatMap)

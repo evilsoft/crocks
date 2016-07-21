@@ -13,7 +13,7 @@ function mconcat(M, xs) {
     throw new TypeError('mconcat: Requires an array for second arg')
   }
 
-  return xs.reduce(foldWith(M), M.empty()).value()
+  return xs.reduce(foldWith(M), M.empty())
 }
 
 module.exports = curry(mconcat)

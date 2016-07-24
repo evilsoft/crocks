@@ -12,6 +12,7 @@ const monoids = {
   Any:      require('./monoids/Any'),
   Assign:   require('./monoids/Assign'),
   Compose:  require('./monoids/Compose'),
+  Flip:     require('./monoids/Flip'),
   Prod:     require('./monoids/Prod'),
   Sum:      require('./monoids/Sum')
 }

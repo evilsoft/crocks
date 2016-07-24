@@ -35,6 +35,7 @@ const All     = require('./monoids/All')
 const Any     = require('./monoids/Any')
 const Assign  = require('./monoids/Assign')
 const Compose = require('./monoids/Compose')
+const Flip    = require('./monoids/Flip')
 const Prod    = require('./monoids/Prod')
 const Sum     = require('./monoids/Sum')
 
@@ -74,6 +75,7 @@ test('entry', t => {
   t.equal(crocks.Any, Any, 'provides the Any monoid')
   t.equal(crocks.Assign, Assign, 'provides the Assign monoid')
   t.equal(crocks.Compose, Compose, 'provides the Compose monoid')
+  t.equal(crocks.Flip, Flip, 'provides the Flip monoid')
   t.equal(crocks.Prod, Prod, 'provides the Prod monoid')
   t.equal(crocks.Sum, Sum, 'provides the Sum monoid')
 

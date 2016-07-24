@@ -5,17 +5,7 @@ const bindFunc    = helpers.bindFunc
 const noop        = helpers.noop
 const isFunction  = require('../internal/isFunction')
 
-const constant = require('../combinators/constant')
-const identity = require('../combinators/identity')
-
-function Last(x) {
-  return {
-    concat: identity,
-    value:  constant(x)
-  }
-}
-
-Last.empty = () => Last(null)
+const Last = require('../test/LastMonoid')
 
 const mconcatMap = require('./mconcatMap')
 

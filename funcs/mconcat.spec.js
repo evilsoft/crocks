@@ -2,22 +2,11 @@ const test    = require('tape')
 const helpers = require('../test/helpers')
 
 const bindFunc    = helpers.bindFunc
-const noop        = helpers.noop
 const isFunction  = require('../internal/isFunction')
-
-const constant = require('../combinators/constant')
-const identity = require('../combinators/identity')
 
 const mconcat = require('./mconcat')
 
-function Last(x) {
-  return {
-    concat: identity,
-    value:  constant(x)
-  }
-}
-
-Last.empty = () => Last(null)
+const Last = require('../test/LastMonoid')
 
 test('mconcat', t => {
   const mc  = bindFunc(mconcat)

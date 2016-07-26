@@ -45,8 +45,8 @@ test('Maybe maybe', t => {
   t.equal(Maybe(false).maybe(), false, 'maybe returns false when false is wrapped')
   t.equal(Maybe(true).maybe(), true, 'maybe returns true when true is wrapped')
 
-  t.equal(Maybe(null).maybe(), null, 'maybe returns null when null is wrapped')
-  t.equal(Maybe(undefined).maybe(), null, 'maybe returns null when undefined is wrapped')
+  t.equal(Maybe(null).maybe(), undefined, 'maybe returns undefined when null is wrapped')
+  t.equal(Maybe(undefined).maybe(), undefined, 'maybe returns undefined when undefined is wrapped')
   t.end()
 })
 
@@ -108,7 +108,7 @@ test('Maybe map functionality', t => {
   const undef = Maybe(undefined).map(spy)
 
   t.equal(undef.type(), 'Maybe', 'returns a Maybe when undefined')
-  t.equal(undef.maybe(), null, 'returns a Maybe with a null value')
+  t.equal(undef.maybe(), undefined, 'returns a Maybe with an undefined value')
   t.equal(spy.called, false, 'mapped function is never called when undefined')
 
   const def = Maybe(0).map(spy)
@@ -188,7 +188,7 @@ test('Maybe of properties (Applicative)', t => {
   t.ok(isFunction(Maybe(0).ap), 'implements the Apply spec')
 
   t.equal(m.ap(Maybe(3)).maybe(), 3, 'identity Just')
-  t.equal(m.ap(Maybe(undefined)).maybe(), null, 'identity Nothing')
+  t.equal(m.ap(Maybe(undefined)).maybe(), undefined, 'identity Nothing')
 
   t.equal(m.ap(Maybe.of(3)).maybe(), Maybe.of(identity(3)).maybe(), 'homomorphism Just')
   t.equal(m.ap(Maybe.of(undefined)).maybe(), Maybe.of(identity(undefined)).maybe(), 'homomorphism Nothing')

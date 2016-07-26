@@ -13,7 +13,7 @@ function Maybe(x) {
     throw new TypeError('Maybe: Must wrap something')
   }
 
-  const maybe = constant(isNothing(x) ? null : x)
+  const maybe = constant(isNothing(x) ? undefined : x)
   const type  = _type
   const of    = _of
 
@@ -24,11 +24,11 @@ function Maybe(x) {
       throw new TypeError('Maybe.map: function required')
     }
 
-    return Maybe(isNothing(x) ? null : fn(x))
+    return Maybe(isNothing(x) ? undefined : fn(x))
   }
 
   function ap(m) {
-    const fn = isNothing(x) ? constant(null) : x
+    const fn = isNothing(x) ? constant(undefined) : x
 
     if(!isFunction(fn)) {
       throw new TypeError('Maybe.ap: Wrapped value must be a function')
@@ -46,7 +46,7 @@ function Maybe(x) {
       throw new TypeError('Maybe.chain: function required')
     }
 
-    return isNothing(x) ? Maybe(null) : map(fn).maybe()
+    return isNothing(x) ? Maybe(undefined) : map(fn).maybe()
   }
 
   return { maybe, type, equals, map, ap, of, chain }

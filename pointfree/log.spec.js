@@ -8,14 +8,14 @@ const noop        = helpers.noop
 
 const constant = require('../combinators/constant')
 
-const value = require('./value')
+const log = require('./log')
 
-test('value pointfree', t => {
-  const f = bindFunc(value)
+test('log pointfree', t => {
+  const f = bindFunc(log)
   const x = 'result'
-  const m = { value: sinon.spy(constant(x)) }
+  const m = { log: sinon.spy(constant(x)) }
 
-  t.ok(isFunction(value), 'is a function')
+  t.ok(isFunction(log), 'is a function')
 
   t.throws(f(undefined), TypeError, 'throws if passed undefined')
   t.throws(f(null), TypeError, 'throws if passed null')
@@ -29,9 +29,9 @@ test('value pointfree', t => {
   t.throws(f({}), TypeError, 'throws if passed an object')
   t.throws(f(noop), TypeError, 'throws if passed a function')
 
-  const result = value(m)
+  const result = log(m)
 
-  t.ok(m.value.called, 'calls value on the passed container')
+  t.ok(m.log.called, 'calls value on the passed container')
   t.equal(result, x, 'returns the result of calling m.value')
 
   t.end()

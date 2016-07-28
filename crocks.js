@@ -29,15 +29,16 @@ const helpers = {
 }
 
 const pointFree = {
-  ap:     require('./pointfree/ap'),
-  chain:  require('./pointfree/chain'),
-  concat: require('./pointfree/concat'),
-  log:    require('./pointfree/log'),
-  map:    require('./pointfree/map'),
-  maybe:  require('./pointfree/maybe'),
-  read:   require('./pointfree/read'),
-  run:    require('./pointfree/run'),
-  value:  require('./pointfree/value')
+  ap:         require('./pointfree/ap'),
+  chain:      require('./pointfree/chain'),
+  concat:     require('./pointfree/concat'),
+  log:        require('./pointfree/log'),
+  map:        require('./pointfree/map'),
+  maybe:      require('./pointfree/maybe'),
+  read:       require('./pointfree/read'),
+  reduceLog:  require('./pointfree/reduceLog'),
+  run:        require('./pointfree/run'),
+  value:      require('./pointfree/value')
 }
 
 const combinators = {

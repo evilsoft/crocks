@@ -290,3 +290,35 @@ test('Writer chain properties (Monad)', t => {
 
   t.end()
 })
+
+test('Writer reduceLog errors', t => {
+  const reduceLog = bindFunc(Writer(0, 0).reduceLog)
+
+  t.throws(reduceLog(undefined), TypeError, 'throws when passed undefined')
+  t.throws(reduceLog(null), TypeError, 'throws when passed null')
+  t.throws(reduceLog(0), TypeError, 'throws when passed falsey number')
+  t.throws(reduceLog(1), TypeError, 'throws when passed truthy number')
+  t.throws(reduceLog(''), TypeError, 'throws when passed falsey string')
+  t.throws(reduceLog('string'), TypeError, 'throws when passed truthy string')
+  t.throws(reduceLog(false), TypeError, 'throws when passed false')
+  t.throws(reduceLog(true), TypeError, 'throws when passed true')
+  t.throws(reduceLog([]), TypeError, 'throws when passed an array')
+  t.throws(reduceLog({}), TypeError, 'throws when passed an object')
+  t.doesNotThrow(reduceLog(noop))
+
+  t.end()
+})
+
+test('Writer reduceLog', t => {
+  const w = Writer(0, 0)
+  const f = _ => Writer(1, 0)
+  const g = _ => Writer(2, 0)
+  const r = (x, y) => x + y
+
+  const result = w.chain(f).chain(g).reduceLog(r)
+
+  t.ok(isFunction(w.reduceLog), 'is a function')
+  t.same(result.log(), [ 3 ], 'reduces the log as expected')
+
+  t.end()
+})

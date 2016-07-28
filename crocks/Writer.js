@@ -52,7 +52,21 @@ function Writer(entry, val) {
     return Writer(log().concat(w.log()), w.value())
   }
 
-  return { type, read, value, log, equals, map, ap, of, chain }
+  function reduceLog(fn) {
+    if(!isFunction(fn)) {
+      throw new TypeError('Writer.reduceLog: function required')
+    }
+
+    const l = log().length ? log().reduce(fn) : log()
+
+    return Writer(l, value())
+  }
+
+  return {
+    type, read, value, log,
+    equals, map, ap, of, chain,
+    reduceLog
+  }
 }
 
 Writer.of   = _of

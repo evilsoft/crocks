@@ -23,13 +23,16 @@ const ap      = require('./pointfree/ap')
 const chain   = require('./pointfree/chain')
 const concat  = require('./pointfree/concat')
 
+const log   = require('./pointfree/log')
 const maybe = require('./pointfree/maybe')
+const read  = require('./pointfree/read')
 const run   = require('./pointfree/run')
 const value = require('./pointfree/value')
 
-const Maybe     = require('./crocks/Maybe')
 const Identity  = require('./crocks/Identity')
 const IO        = require('./crocks/IO')
+const Maybe     = require('./crocks/Maybe')
+const Writer    = require('./crocks/Writer')
 
 const All     = require('./monoids/All')
 const Any     = require('./monoids/Any')
@@ -63,13 +66,16 @@ test('entry', t => {
   t.equal(crocks.chain, chain, 'provides the chain point-free function')
   t.equal(crocks.concat, concat, 'provides the concat point-free function')
 
+  t.equal(crocks.log, log, 'provides the log point-free function')
   t.equal(crocks.maybe, maybe, 'provides the maybe point-free function')
   t.equal(crocks.value, value, 'provides the value point-free function')
+  t.equal(crocks.read, read, 'provides the read point-free function')
   t.equal(crocks.run, run, 'provides the run point-free function')
 
-  t.equal(crocks.Maybe, Maybe, 'provides the Maybe function')
   t.equal(crocks.Identity, Identity, 'provides the Identity function')
   t.equal(crocks.IO, IO, 'provides the IO function')
+  t.equal(crocks.Maybe, Maybe, 'provides the Maybe function')
+  t.equal(crocks.Writer, Writer, 'provides the Writer function')
 
   t.equal(crocks.All, All, 'provides the All monoid')
   t.equal(crocks.Any, Any, 'provides the Any monoid')

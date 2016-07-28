@@ -21,10 +21,7 @@ test('Identity', t => {
 
   t.ok(isFunction(Identity.of), 'provides an of function')
   t.ok(isFunction(Identity.type), 'provides a type function')
-  t.equal(Identity.type, Identity(0).type, 'static type function matches instance type function')
-
-  t.ok(isFunction(m.value), 'provides a value function')
-  t.ok(isFunction(m.type), 'provides a type function')
+  t.equal(Identity.type, m.type, 'static type function matches instance type function')
 
   t.throws(Identity, TypeError, 'throws when no parameters are passed')
 
@@ -32,13 +29,19 @@ test('Identity', t => {
 })
 
 test('Identity type', t => {
-  t.equal(Identity(0).type(), 'Identity', 'type returns Identity')
+  const m = Identity(0)
+
+  t.ok(isFunction(m.type), 'provides a type function')
+  t.equal(m.type(), 'Identity', 'type returns Identity')
   t.end()
 })
 
 test('Identity value', t => {
   const x = 'some value'
-  t.equal(Identity(x).value(), x,'value returns the wrapped value' )
+  const m = Identity(x)
+
+  t.ok(isFunction(m.value), 'is a function')
+  t.equal(m.value(), x,'value returns the wrapped value' )
 
   t.end()
 })
@@ -59,7 +62,7 @@ test('Identity equals functionality', t => {
   t.end()
 })
 
-test('Identity equal properties (Setoid)', t => {
+test('Identity equals properties (Setoid)', t => {
   const a = Identity(0)
   const b = Identity(0)
   const c = Identity(1)

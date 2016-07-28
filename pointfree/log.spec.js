@@ -31,8 +31,8 @@ test('log pointfree', t => {
 
   const result = log(m)
 
-  t.ok(m.log.called, 'calls value on the passed container')
-  t.equal(result, x, 'returns the result of calling m.value')
+  t.ok(m.log.called, 'calls log on the passed container')
+  t.equal(result, x, 'returns the result of calling m.log')
 
   t.end()
 })

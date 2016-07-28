@@ -129,10 +129,10 @@ test('Writer map functionality', t => {
 
   t.equal(m.type(), 'Writer', 'returns a Writer')
   t.equal(spy.called, true, 'calls mapping function')
-  t.equal(m.read().value, x, 'returns the result of the map inside of new Writer, on value key')
-  t.same(m.read().log, [ l ], 'returns the result of the map inside of new Writer, on log key')
+  t.equal(m.value(), x, 'returns the result of the map inside of new Writer, on value key')
+  t.same(m.log(), [ l ], 'returns the result of the map inside of new Writer, on log key')
 
-  t.same(m.map(identity).read().log, [ l ], 'does not add to the log on map')
+  t.same(m.map(identity).log(), [ l ], 'does not add to the log on map')
 
   t.end()
 })
@@ -145,8 +145,8 @@ test('Writer map properties (Functor)', t => {
 
   t.ok(isFunction(m.map), 'provides a map function')
 
-  t.equal(m.map(identity).read().value, m.read().value, 'identity')
-  t.equal(m.map(composeB(f, g)).read().value, m.map(g).map(f).read().value, 'composition')
+  t.equal(m.map(identity).value(), m.value(), 'identity')
+  t.equal(m.map(composeB(f, g)).value(), m.map(g).map(f).value(), 'composition')
 
   t.end()
 })
@@ -191,7 +191,7 @@ test('Writer ap properties (Apply)', t => {
   t.ok(isFunction(m.map), 'implements the Functor spec')
   t.ok(isFunction(m.ap), 'provides an ap function')
 
-  t.equal(a.ap(Writer(0, 3)).read().value, b.ap(Writer(0, 3)).read().value, 'composition')
+  t.equal(a.ap(Writer(0, 3)).value(), b.ap(Writer(0, 3)).value(), 'composition')
 
   t.end()
 })
@@ -200,8 +200,8 @@ test('Writer ap functionality', t => {
   const a = Writer(0, x => x + 2)
   const b = Writer(1, 27)
 
-  t.same(a.ap(b).read().log, [ 0, 1 ], 'concats applied Writers log to inital log')
-  t.equal(a.ap(b).read().value, 29, 'applys applied value to function')
+  t.same(a.ap(b).log(), [ 0, 1 ], 'concats applied Writers log to inital log')
+  t.equal(a.ap(b).value(), 29, 'applys applied value to function')
 
   t.end()
 })
@@ -209,8 +209,8 @@ test('Writer ap functionality', t => {
 test('Writer of', t => {
   t.equal(Writer.of, Writer(0, 0).of, 'Writer.of is the same as the instance version')
   t.equal(Writer.of(0).type(), 'Writer', 'returns an Writer')
-  t.equal(Writer.of(0).read().value, 0, 'wraps the value passed into a Writer')
-  t.same(Writer.of(0).read().log, [], 'provides an empty array as the log')
+  t.equal(Writer.of(0).value(), 0, 'wraps the value passed into a Writer')
+  t.same(Writer.of(0).log(), [], 'provides an empty array as the log')
 
   t.end()
 })
@@ -221,13 +221,13 @@ test('Writer of properties (Applicative)', t => {
   t.ok(isFunction(m.of), 'provides an of function')
   t.ok(isFunction(m.ap), 'implements the Apply spec')
 
-  t.equal(m.ap(Writer(0, 3)).read().value, 3, 'identity')
-  t.equal(m.ap(Writer.of(3)).read().value, Writer.of(identity(3)).read().value, 'homomorphism')
+  t.equal(m.ap(Writer(0, 3)).value(), 3, 'identity')
+  t.equal(m.ap(Writer.of(3)).value(), Writer.of(identity(3)).value(), 'homomorphism')
 
   const a = x => m.ap(Writer.of(x))
   const b = x => Writer.of(reverseApply(x)).ap(m)
 
-  t.equal(a(3).read().value, b(3).read().value, 'interchange')
+  t.equal(a(3).value(), b(3).value(), 'interchange')
 
   t.end()
 })
@@ -258,8 +258,8 @@ test('Writer chain functionality', t => {
   const m   = Writer(0, 45)
   const fn  = x => Writer(1, x + 2)
 
-  t.same(m.chain(fn).read().log, [ 0, 1 ], 'concats chained log to initial log')
-  t.equal(m.chain(fn).read().value, 47, 'applys function to wrapped value')
+  t.same(m.chain(fn).log(), [ 0, 1 ], 'concats chained log to initial log')
+  t.equal(m.chain(fn).value(), 47, 'applys function to wrapped value')
 
   t.end()
 })
@@ -274,7 +274,7 @@ test('Writer chain properties (Chain)', t => {
   const a = x => Writer(0, x).chain(f).chain(g)
   const b = x => Writer(0, x).chain(y => f(y).chain(g))
 
-  t.equal(a(10).read().value, b(10).read().value, 'assosiativity')
+  t.equal(a(10).value(), b(10).value(), 'assosiativity')
 
   t.end()
 })
@@ -285,8 +285,8 @@ test('Writer chain properties (Monad)', t => {
 
   const f = x => Writer(0, x)
 
-  t.equal(Writer.of(3).chain(f).read().value, f(3).read().value, 'left identity')
-  t.equal(f(3).chain(Writer.of).read().value, f(3).read().value, 'right identity')
+  t.equal(Writer.of(3).chain(f).value(), f(3).value(), 'left identity')
+  t.equal(f(3).chain(Writer.of).value(), f(3).value(), 'right identity')
 
   t.end()
 })

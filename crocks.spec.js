@@ -42,6 +42,7 @@ const Assign  = require('./monoids/Assign')
 const Compose = require('./monoids/Compose')
 const Flip    = require('./monoids/Flip')
 const Min     = require('./monoids/Min')
+const Max     = require('./monoids/Max')
 const Prod    = require('./monoids/Prod')
 const Sum     = require('./monoids/Sum')
 
@@ -88,6 +89,7 @@ test('entry', t => {
   t.equal(crocks.Compose, Compose, 'provides the Compose monoid')
   t.equal(crocks.Flip, Flip, 'provides the Flip monoid')
   t.equal(crocks.Min, Min, 'provides the Min monoid')
+  t.equal(crocks.Max, Max, 'provides the Max monoid')
   t.equal(crocks.Prod, Prod, 'provides the Prod monoid')
   t.equal(crocks.Sum, Sum, 'provides the Sum monoid')
 

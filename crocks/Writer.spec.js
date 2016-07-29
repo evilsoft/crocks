@@ -11,6 +11,8 @@ const identity      = require('../combinators/identity')
 const composeB      = require('../combinators/composeB')
 const reverseApply  = require('../combinators/reverseApply')
 
+const Last = require('../test/LastMonoid')
+
 const Writer = require('./Writer.js')
 
 test('Writer', t => {
@@ -319,6 +321,39 @@ test('Writer reduceLog', t => {
 
   t.ok(isFunction(w.reduceLog), 'is a function')
   t.same(result.log(), [ 3 ], 'reduces the log as expected')
+
+  t.end()
+})
+
+test('Writer mreduceLog errors', t => {
+  const mreduceLog = bindFunc(Writer(0, 0).mreduceLog)
+
+  t.throws(mreduceLog(undefined), TypeError, 'throws with undefined')
+  t.throws(mreduceLog(null), TypeError, 'throws with null')
+  t.throws(mreduceLog(0), TypeError, 'throws with falsey number')
+  t.throws(mreduceLog(1), TypeError, 'throws with truthy number')
+  t.throws(mreduceLog(''), TypeError, 'throws with falsey string')
+  t.throws(mreduceLog('string'), TypeError, 'throws with truthy string')
+  t.throws(mreduceLog(false), TypeError, 'throws with false')
+  t.throws(mreduceLog(true), TypeError, 'throws with true')
+  t.throws(mreduceLog([]), TypeError, 'throws with an array')
+  t.throws(mreduceLog({}), TypeError, 'throws with an object')
+  t.throws(mreduceLog(noop), TypeError, 'throws with a function')
+
+  t.doesNotThrow(mreduceLog(Last), 'allows a Monoid')
+
+  t.end()
+})
+
+test('Writer mreduceLog', t => {
+  const w = Writer('first', 0)
+  const f = _ => Writer('second', 0)
+  const g = _ => Writer('last', 0)
+
+  const result = w.chain(f).chain(g).mreduceLog(Last)
+
+  t.ok(isFunction(w.mreduceLog), 'is a function')
+  t.same(result.log(), [ 'last' ], 'reduces the log as expected')
 
   t.end()
 })

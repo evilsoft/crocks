@@ -1,6 +1,9 @@
 const constant    = require('../combinators/constant')
 const isType      = require('../internal/isType')
 const isFunction  = require('../internal/isFunction')
+const isMonoid    = require('../internal/isMonoid')
+
+const mconcat = require('../funcs/mconcat')
 
 const wrapValue = x => Array.isArray(x) ? x.slice() : [ x ]
 
@@ -9,7 +12,7 @@ const _type = constant('Writer')
 
 function Writer(entry, val) {
   if(arguments.length !== 2) {
-    throw new TypeError('Writer: requires a log entry and a value')
+    throw new TypeError('Writer: Requires a log entry and a value')
   }
 
   const type    = _type
@@ -54,7 +57,7 @@ function Writer(entry, val) {
 
   function reduceLog(fn) {
     if(!isFunction(fn)) {
-      throw new TypeError('Writer.reduceLog: function required')
+      throw new TypeError('Writer.reduceLog: Function required')
     }
 
     const l = log().length ? log().reduce(fn) : log()
@@ -62,10 +65,20 @@ function Writer(entry, val) {
     return Writer(l, value())
   }
 
+  function mreduceLog(m) {
+    if(!isMonoid(m)) {
+      throw new TypeError('Writer.mreduceLog: Monoid required')
+    }
+
+    const l = log().length ? mconcat(m, log()).value() : log()
+
+    return Writer(l, value())
+  }
+
   return {
     type, read, value, log,
     equals, map, ap, of, chain,
-    reduceLog
+    reduceLog, mreduceLog
   }
 }
 

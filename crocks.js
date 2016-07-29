@@ -14,6 +14,7 @@ const monoids = {
   Assign:   require('./monoids/Assign'),
   Compose:  require('./monoids/Compose'),
   Flip:     require('./monoids/Flip'),
+  Min:      require('./monoids/Min'),
   Prod:     require('./monoids/Prod'),
   Sum:      require('./monoids/Sum')
 }

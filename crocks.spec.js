@@ -29,6 +29,7 @@ const read        = require('./pointfree/read')
 const reduceLog   = require('./pointfree/reduceLog')
 const mreduceLog  = require('./pointfree/mreduceLog')
 const run         = require('./pointfree/run')
+const runWith     = require('./pointfree/runWith')
 const value       = require('./pointfree/value')
 
 const Identity  = require('./crocks/Identity')
@@ -77,6 +78,7 @@ test('entry', t => {
   t.equal(crocks.mreduceLog, mreduceLog, 'provides the mreduceLog point-free function')
   t.equal(crocks.read, read, 'provides the read point-free function')
   t.equal(crocks.run, run, 'provides the run point-free function')
+  t.equal(crocks.runWith, runWith, 'provides the runWith point-free function')
   t.equal(crocks.value, value, 'provides the value point-free function')
 
   t.equal(crocks.Identity, Identity, 'provides the Identity function')

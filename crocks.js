@@ -42,6 +42,7 @@ const pointFree = {
   reduceLog:    require('./pointfree/reduceLog'),
   mreduceLog:   require('./pointfree/mreduceLog'),
   run:          require('./pointfree/run'),
+  runWith:      require('./pointfree/runWith'),
   value:        require('./pointfree/value')
 }
 

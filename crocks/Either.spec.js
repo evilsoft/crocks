@@ -123,8 +123,8 @@ test('Either equals functionality', t => {
   t.equals(ra.equals(rb), true, 'returns true when 2 Right Eithers are equal')
   t.equals(rc.equals(value), false, 'returns when Right passed a simple value')
 
-  t.equals(la.equals(nonEither), false, 'returns false when passed a non-Maybe')
-  t.equals(ra.equals(lb), false, 'returns true when 2 Maybes are equal')
+  t.equals(la.equals(nonEither), false, 'returns false when passed a non-Either')
+  t.equals(ra.equals(lb), false, 'returns true when 2 Eithers are equal')
 
   t.end()
 })
@@ -215,6 +215,143 @@ test('Either map properties (Functor)', t => {
 
   t.equal(Either.Left(45).map(identity).value(), 45, 'Left identity')
   t.equals(Either.Left(10).map(x => f(g(x))).value(), Either.Left(10).map(g).map(f).value(), 'Left composition')
+
+  t.end()
+})
+
+test('Either ap errors', t => {
+  const m   = { type: () => 'Either...Not' }
+
+  t.throws(Either.of(0).ap.bind(null, Either.of(0)), TypeError, 'throws when wrapped value is a falsey number')
+  t.throws(Either.of(1).ap.bind(null, Either.of(0)), TypeError, 'throws when wrapped value is a truthy number')
+  t.throws(Either.of('').ap.bind(null, Either.of(0)), TypeError, 'throws when wrapped value is a falsey string')
+  t.throws(Either.of('string').ap.bind(null, Either.of(0)), TypeError, 'throws when wrapped value is a truthy string')
+  t.throws(Either.of(false).ap.bind(null, Either.of(0)), TypeError, 'throws when wrapped value is false')
+  t.throws(Either.of(true).ap.bind(null, Either.of(0)), TypeError, 'throws when wrapped value is true')
+  t.throws(Either.of([]).ap.bind(null, Either.of(0)), TypeError, 'throws when wrapped value is an array')
+  t.throws(Either.of({}).ap.bind(null, Either.of(0)), TypeError, 'throws when wrapped value is an object')
+
+  t.doesNotThrow(Either.Left(0).ap.bind(null, Either.of(0)), 'does not throw when ap on Left')
+
+  t.throws(Either.of(noop).ap.bind(null, 0), TypeError, 'throws when passed a falsey number')
+  t.throws(Either.of(noop).ap.bind(null, 1), TypeError, 'throws when passed a truthy number')
+  t.throws(Either.of(noop).ap.bind(null, ''), TypeError, 'throws when passed a falsey string')
+  t.throws(Either.of(noop).ap.bind(null, 'string'), TypeError, 'throws when passed a truthy string')
+  t.throws(Either.of(noop).ap.bind(null, false), TypeError, 'throws when passed false')
+  t.throws(Either.of(noop).ap.bind(null, true), TypeError, 'throws when passed true')
+  t.throws(Either.of(noop).ap.bind(null, []), TypeError, 'throws when passed an array')
+  t.throws(Either.of(noop).ap.bind(null, {}), TypeError, 'throws when passed an object')
+
+  t.doesNotThrow(Either.Left(noop).ap.bind(null, Either.of(0)), 'does not throw when ap on Left')
+
+  t.throws(Either.of(noop).ap.bind(null, m), TypeError, 'throws when container types differ on Right')
+  t.doesNotThrow(Either.Left(noop).ap.bind(null, m), 'does not throws when container types differ on Left')
+
+  t.end()
+})
+
+test('Either ap properties (Apply)', t => {
+  const m = Either.Right(identity)
+
+  const a = m.map(composeB).ap(m).ap(m)
+  const b = m.ap(m.ap(m))
+
+  t.ok(isFunction(m.ap), 'provides an ap function')
+  t.ok(isFunction(m.map), 'implements the Functor spec')
+
+  t.equal(a.ap(Either.Right(3)).value(), b.ap(Either.Right(3)).value(), 'composition Right')
+
+  t.end()
+})
+
+test('Either of', t => {
+  t.equal(Either.of, Either(null, 0).of, 'Either.of is the same as the instance version')
+  t.equal(Either.of(0).type(), 'Either', 'returns an Either')
+  t.equal(Either.of(0).either(constant('left'), identity), 0, 'wraps the value into an Either.Right')
+
+  t.end()
+})
+
+test('Either of properties (Applicative)', t => {
+  const r = Either.Right(identity)
+  const l = Either.Left('left')
+
+  t.ok(isFunction(r.of), 'Right provides an of function')
+  t.ok(isFunction(l.of), 'Left provides an of function')
+  t.ok(isFunction(r.ap), 'Right implements the Apply spec')
+  t.ok(isFunction(l.ap), 'Left implements the Apply spec')
+
+  t.equal(r.ap(Either.Right(3)).value(), 3, 'identity Right')
+  t.equal(r.ap(Either.of(3)).value(), Either.of(identity(3)).value(), 'homomorphism Right')
+
+  const a = x => r.ap(Either.of(x))
+  const b = x => Either.of(reverseApply(x)).ap(r)
+
+  t.equal(a(3).value(), b(3).value(), 'interchange Right')
+
+  t.end()
+})
+
+test('Either chain errors', t => {
+  const rchain = bindFunc(Either.Right(0).chain)
+  const lchain = bindFunc(Either.Left(0).chain)
+
+  t.throws(rchain(undefined), TypeError, 'Right throws when passed undefined')
+  t.throws(rchain(null), TypeError, 'Right throws when passed null')
+  t.throws(rchain(0), TypeError, 'Right throws when passed a falsey number')
+  t.throws(rchain(1), TypeError, 'Right throws when passed a truthy number')
+  t.throws(rchain(''), TypeError, 'Right throws when passed a falsey string')
+  t.throws(rchain('string'), TypeError, 'Right throws when passed a truthy string')
+  t.throws(rchain(false), TypeError, 'Right throws when passed false')
+  t.throws(rchain(true), TypeError, 'Right throws when passed true')
+  t.throws(rchain([]), TypeError, 'Right throws when passed an array')
+  t.throws(rchain({}), TypeError, 'Right throws when passed an object')
+  t.doesNotThrow(rchain(noop), 'Right does not throw when passed a function')
+
+  t.throws(lchain(undefined), TypeError, 'Left throws when passed undefined')
+  t.throws(lchain(null), TypeError, 'Left throws when passed null')
+  t.throws(lchain(0), TypeError, 'Left throws when passed a falsey number')
+  t.throws(lchain(1), TypeError, 'Left throws when passed a truthy number')
+  t.throws(lchain(''), TypeError, 'Left throws when passed a falsey string')
+  t.throws(lchain('string'), TypeError, 'Left throws when passed a truthy string')
+  t.throws(lchain(false), TypeError, 'Left throws when passed false')
+  t.throws(lchain(true), TypeError, 'Left throws when passed true')
+  t.throws(lchain([]), TypeError, 'Left throws when passed an array')
+  t.throws(lchain({}), TypeError, 'Left throws when passed an object')
+  t.doesNotThrow(lchain(noop), 'Left does not throw when passed a function')
+
+  t.end()
+})
+
+test('Either chain properties (Chain)', t => {
+  t.ok(isFunction(Either.Right(0).chain), 'Right provides a chain function')
+  t.ok(isFunction(Either.Right(0).ap), 'Right implements the Apply spec')
+
+  t.ok(isFunction(Either.Left(0).chain), 'Left provides a chain function')
+  t.ok(isFunction(Either.Left(0).ap), 'Leftimplements the Apply spec')
+
+  const f = x => Either.Right(x + 2)
+  const g = x => Either.Right(x + 10)
+
+  const a = x => Either.Right(x).chain(f).chain(g)
+  const b = x => Either.Right(x).chain(y => f(y).chain(g))
+
+  t.equal(a(10).value(), b(10).value(), 'assosiativity Right')
+
+  t.end()
+})
+
+test('Either chain properties (Monad)', t => {
+  t.ok(isFunction(Either.Right(0).chain), 'Right implements the Chain spec')
+  t.ok(isFunction(Either.Right(0).of), 'Right implements the Applicative spec')
+
+  const f = x => Either.Right(x)
+
+  t.equal(Either.of(3).chain(f).value(), f(3).value(), 'left identity Right')
+
+  const m = x => Either.Right(x)
+
+  t.equal(m(3).chain(Either.of).value(), m(3).value(), 'right identity Right')
 
   t.end()
 })

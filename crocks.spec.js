@@ -32,6 +32,7 @@ const run         = require('./pointfree/run')
 const runWith     = require('./pointfree/runWith')
 const value       = require('./pointfree/value')
 
+const Either    = require('./crocks/Either')
 const Identity  = require('./crocks/Identity')
 const IO        = require('./crocks/IO')
 const Maybe     = require('./crocks/Maybe')
@@ -81,6 +82,7 @@ test('entry', t => {
   t.equal(crocks.runWith, runWith, 'provides the runWith point-free function')
   t.equal(crocks.value, value, 'provides the value point-free function')
 
+  t.equal(crocks.Either, Either, 'provides the Either function')
   t.equal(crocks.Identity, Identity, 'provides the Identity function')
   t.equal(crocks.IO, IO, 'provides the IO function')
   t.equal(crocks.Maybe, Maybe, 'provides the Maybe function')

@@ -3,6 +3,8 @@ const isNumber      = require('../internal/isNumber')
 const isType        = require('../internal/isType')
 const isUndefOrNull = require('../internal/isUndefOrNull')
 
+const _inspect = require('../funcs/inspect')
+
 const constant = require('../combinators/constant')
 
 const _empty  = () => Sum(0)
@@ -19,6 +21,8 @@ function Sum(n) {
   const type    = _type
   const empty   = _empty
 
+  const inspect = constant(`Sum${_inspect(value())}`)
+
   function concat(m) {
     if(!(m && isType(type(), m))) {
       throw new TypeError('Sum.concat: Sum required')
@@ -27,7 +31,7 @@ function Sum(n) {
     return Sum(x + m.value())
   }
 
-  return { value, type, concat, empty }
+  return { inspect, value, type, concat, empty }
 }
 
 Sum.empty = _empty

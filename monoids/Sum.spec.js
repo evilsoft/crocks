@@ -36,6 +36,15 @@ test('Sum', t => {
   t.end()
 })
 
+test('Sum inspect', t => {
+  const m = Sum(90)
+
+  t.ok(isFunction(m.inspect), 'provides an inpsect function')
+  t.equal(m.inspect(), 'Sum 90', 'returns inspect string')
+
+  t.end()
+})
+
 test('Sum value', t => {
   const empty = Sum.empty().value()
 

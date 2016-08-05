@@ -25,6 +25,7 @@ const monoids = {
 const helpers = {
   compose:    require('./funcs/compose'),
   curry:      require('./funcs/curry'),
+  inspect:    require('./funcs/inspect'),
   liftA:      require('./funcs/liftA'),
   liftA2:     require('./funcs/liftA2'),
   liftA3:     require('./funcs/liftA3'),

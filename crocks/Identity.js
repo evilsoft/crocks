@@ -1,5 +1,7 @@
-const isFunction = require('../internal/isFunction')
-const isType    = require('../internal/isType')
+const isFunction  = require('../internal/isFunction')
+const isType      = require('../internal/isType')
+
+const _inspect = require('../funcs/inspect')
 
 const constant  = require('../combinators/constant')
 const composeB  = require('../combinators/composeB')
@@ -17,6 +19,7 @@ function Identity(x) {
   const of    = _of
 
   const equals = m => isType(type(), m) && x === m.value()
+  const inspect = constant(`Identity${_inspect(x)}`)
 
   function map(fn) {
     if(!isFunction(fn)) {
@@ -45,7 +48,8 @@ function Identity(x) {
     return map(fn).value()
   }
 
-  return { value, type, equals, map, ap, of, chain }
+
+  return { inspect, value, type, equals, map, ap, of, chain }
 }
 
 Identity.of   = _of

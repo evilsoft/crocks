@@ -28,6 +28,15 @@ test('Identity', t => {
   t.end()
 })
 
+test('Identity inspect', t => {
+  const m = Identity(0)
+
+  t.ok(isFunction(m.inspect), 'provides an inpsect function')
+  t.equal(m.inspect(), 'Identity 0', 'returns inspect string')
+
+  t.end()
+})
+
 test('Identity type', t => {
   const m = Identity(0)
 

@@ -36,6 +36,15 @@ test('Min', t => {
   t.end()
 })
 
+test('Min inspect', t => {
+  const m = Min(0)
+
+  t.ok(isFunction(m.inspect), 'provides an inpsect function')
+  t.equal(m.inspect(), 'Min 0', 'returns inspect string')
+
+  t.end()
+})
+
 test('Min value', t => {
   const empty = Min.empty().value()
 

@@ -37,6 +37,15 @@ test('Assign', t => {
   t.end()
 })
 
+test('Assign inspect', t => {
+  const m = Assign({ great: true })
+
+  t.ok(isFunction(m.inspect), 'provides an inpsect function')
+  t.equal(m.inspect(), 'Assign {}', 'returns inspect string')
+
+  t.end()
+})
+
 test('Assign value', t => {
   const empty = Assign.empty().value()
   const x     = {}

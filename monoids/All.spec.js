@@ -36,6 +36,15 @@ test('All', t => {
   t.end()
 })
 
+test('All inspect', t => {
+  const m = All(0)
+
+  t.ok(isFunction(m.inspect), 'provides an inpsect function')
+  t.equal(m.inspect(), 'All false', 'returns inspect string')
+
+  t.end()
+})
+
 test('All value', t => {
   t.ok(isFunction(All(0).value), 'is a function')
 

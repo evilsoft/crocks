@@ -1,6 +1,8 @@
 const isFunction  = require('../internal/isFunction')
 const isType      = require('../internal/isType')
 
+const _inspect = require('../funcs/inspect')
+
 const composeB = require('../combinators/composeB')
 const constant = require('../combinators/constant')
 
@@ -12,8 +14,9 @@ function Reader(runWith) {
     throw new TypeError('Reader: Must wrap a function')
   }
 
-  const type  = _type
-  const of    = _of
+  const type    = _type
+  const of      = _of
+  const inspect = constant(`Reader${_inspect(runWith)}`)
 
   function map(fn) {
     if(!isFunction(fn)) {
@@ -39,7 +42,7 @@ function Reader(runWith) {
     return Reader(e => fn(runWith(e)).runWith(e))
   }
 
-  return { type, runWith, map, ap, chain, of }
+  return { inspect, type, runWith, map, ap, chain, of }
 }
 
 Reader.of   = _of

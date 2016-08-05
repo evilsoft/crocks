@@ -3,6 +3,8 @@ const isType      = require('../internal/isType')
 
 const constant  = require('../combinators/constant')
 
+const _inspect = require('../funcs/inspect')
+
 const isNothing = x => x === undefined || x === null
 
 const _type = constant('Maybe')
@@ -17,7 +19,10 @@ function Maybe(x) {
   const type  = _type
   const of    = _of
 
-  const equals = m => isType(type(), m) && x === m.maybe()
+  const equals  = m => isType(type(), m) && x === m.maybe()
+  const inspect = constant(
+    isNothing(x) ? `Maybe.Nothing` : `Maybe${_inspect(x)}`
+  )
 
   function map(fn) {
     if(!isFunction(fn)) {
@@ -48,7 +53,7 @@ function Maybe(x) {
     return isNothing(x) ? Maybe(undefined) : map(fn).maybe()
   }
 
-  return { maybe, type, equals, map, ap, of, chain }
+  return { inspect, maybe, type, equals, map, ap, of, chain }
 }
 
 Maybe.of    = _of

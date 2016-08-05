@@ -44,6 +44,15 @@ test('IO', t => {
   t.end()
 })
 
+test('IO inspect', t => {
+  const m = IO(noop)
+
+  t.ok(isFunction(m.inspect), 'provides an inpsect function')
+  t.equal(m.inspect(), 'IO Function', 'returns inspect string')
+
+  t.end()
+})
+
 test('IO type', t => {
   t.equal(IO(noop).type(), 'IO', 'type returns IO')
   t.end()

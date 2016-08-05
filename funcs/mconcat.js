@@ -1,5 +1,6 @@
 const curry       = require('./curry')
 const isFunction  = require('../internal/isFunction')
+const isArray     = require('../internal/isArray')
 
 const foldWith = m => (x, y) => x.concat(m(y))
 
@@ -8,7 +9,7 @@ function mconcat(M, xs) {
   if(!(M && isFunction(M.empty))) {
     throw new TypeError('mconcat: Monoid required for first arg')
   }
-  else if(!Array.isArray(xs)) {
+  else if(!isArray(xs)) {
     throw new TypeError('mconcat: Array required for second arg')
   }
 

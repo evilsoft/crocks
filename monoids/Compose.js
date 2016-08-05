@@ -2,6 +2,8 @@ const isFunction    = require('../internal/isFunction')
 const isType        = require('../internal/isType')
 const isUndefOrNull = require('../internal/isUndefOrNull')
 
+const _inspect = require('../funcs/inspect')
+
 const composeB = require('../combinators/composeB')
 const constant = require('../combinators/constant')
 const identity = require('../combinators/identity')
@@ -20,6 +22,8 @@ function Compose(f) {
   const type    = _type
   const empty   = _empty
 
+  const inspect = constant(`Compose${_inspect(value())}`)
+
   function concat(m) {
     if(!(m && isType(type(), m))) {
       throw new TypeError('Compose.concat: Compose required')
@@ -28,7 +32,7 @@ function Compose(f) {
     return Compose(composeB(x, m.value()))
   }
 
-  return { value, type, concat, empty }
+  return { inspect, value, type, concat, empty }
 }
 
 Compose.empty = _empty

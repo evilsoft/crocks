@@ -55,6 +55,19 @@ test('Either.Right', t => {
   t.end()
 })
 
+test('Either inspect', t => {
+  const l = Either.Left(0)
+  const r = Either.Right(1)
+
+  t.ok(isFunction(l.inspect), 'Left provides an inpsect function')
+  t.ok(isFunction(r.inspect), 'Right provides an inpsect function')
+
+  t.equal(l.inspect(), 'Either.Left 0', 'Left returns inspect string')
+  t.equal(r.inspect(), 'Either.Right 1', 'Right returns inspect string')
+
+  t.end()
+})
+
 test('Either type', t => {
   t.equal(Either(null, 0).type(), 'Either', 'type returns Either')
   t.end()

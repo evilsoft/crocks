@@ -2,6 +2,7 @@ const isFunction  = require('../internal/isFunction')
 const isType      = require('../internal/isType')
 const constant    = require('../combinators/constant')
 const composeB    = require('../combinators/composeB')
+const _inspect    = require('../funcs/inspect')
 
 const isEqual = x => y => x === y
 
@@ -20,6 +21,12 @@ function Either(l, r) {
   else if(l === null && r === null) {
     throw new TypeError('Either: Requires at least one of its arguments to be none-null')
   }
+
+  const inspect = constant(
+    either(
+      constant(`Either.Left${_inspect(l)}`),
+      constant(`Either.Right${_inspect(r)}`)
+    ))
 
   const type    = _type
   const value   = () => isLeft(l) ? l : r
@@ -61,7 +68,11 @@ function Either(l, r) {
     return either(Either.Left, fn)
   }
 
-  return { type, either, value, equals, map, ap, of, chain }
+  return {
+    inspect, type, either,
+    value, equals, map,
+    ap, of, chain
+  }
 }
 
 Either.of   = _of

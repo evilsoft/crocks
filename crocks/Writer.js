@@ -2,10 +2,13 @@ const constant    = require('../combinators/constant')
 const isType      = require('../internal/isType')
 const isFunction  = require('../internal/isFunction')
 const isMonoid    = require('../internal/isMonoid')
+const isArray     = require('../internal/isArray')
+
+const _inspect = require('../funcs/inspect')
 
 const mconcat = require('../funcs/mconcat')
 
-const wrapValue = x => Array.isArray(x) ? x.slice() : [ x ]
+const wrapValue = x => isArray(x) ? x.slice() : [ x ]
 
 const _of   = x => Writer([], x)
 const _type = constant('Writer')
@@ -20,6 +23,7 @@ function Writer(entry, val) {
   const equals  = m => isType(type(), m) && m.value() === value()
   const value   = constant(val)
   const log     = constant(wrapValue(entry))
+  const inspect = constant(`Writer(${_inspect(log())}${_inspect(value())} )`)
 
   const read = constant({
     log:    log(),
@@ -75,7 +79,7 @@ function Writer(entry, val) {
   }
 
   return {
-    type, read, value, log,
+    inspect, type, read, value, log,
     equals, map, ap, of, chain,
     reduceLog, mreduceLog
   }

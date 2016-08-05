@@ -3,6 +3,8 @@ const isType        = require('../internal/isType')
 const isUndefOrNull = require('../internal/isUndefOrNull')
 const isObject      = require('../internal/isObject')
 
+const _inspect = require('../funcs/inspect')
+
 const constant = require('../combinators/constant')
 
 const _empty  = () => Assign({})
@@ -19,6 +21,8 @@ function Assign(o) {
   const type    = _type
   const empty   = _empty
 
+  const inspect = constant(`Assign${_inspect(value())}`)
+
   function concat(m) {
     if(!(m && isType(type(), m))) {
       throw new TypeError('Assign.concat: Assign required')
@@ -27,7 +31,7 @@ function Assign(o) {
     return Assign(Object.assign({}, x, m.value()))
   }
 
-  return { value, type, concat, empty }
+  return { inspect, value, type, concat, empty }
 }
 
 Assign.empty = _empty

@@ -44,6 +44,15 @@ test('Reader', t => {
   t.end()
 })
 
+test('Reader inspect', t => {
+  const m = Reader(noop)
+
+  t.ok(isFunction(m.inspect), 'provides an inpsect function')
+  t.equal(m.inspect(), 'Reader Function', 'returns inspect string')
+
+  t.end()
+})
+
 test('Reader type', t => {
   t.equal(Reader(noop).type(), 'Reader', 'type returns Reader')
   t.end()

@@ -32,6 +32,17 @@ test('Maybe', t => {
   t.end()
 })
 
+test('Maybe inspect', t => {
+  const m = Maybe('great')
+  const n = Maybe(null)
+
+  t.ok(isFunction(m.inspect), 'provides an inpsect function')
+  t.equal(m.inspect(), 'Maybe great', 'returns inspect string')
+  t.equal(n.inspect(), 'Maybe.Nothing', 'Nothing returns inspect string')
+
+  t.end()
+})
+
 test('Maybe type', t => {
   t.equal(Maybe(0).type(), 'Maybe', 'type returns Maybe')
   t.end()

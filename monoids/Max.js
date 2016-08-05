@@ -2,6 +2,8 @@ const isNumber      = require('../internal/isNumber')
 const isUndefOrNull = require('../internal/isUndefOrNull')
 const isType        = require('../internal/isType')
 
+const _inspect = require('../funcs/inspect')
+
 const constant = require('../combinators/constant')
 
 const _empty  = () => Max(-Infinity)
@@ -18,6 +20,8 @@ function Max(n) {
   const type  = _type
   const empty = _empty
 
+  const inspect = constant(`Max${_inspect(value())}`)
+
   function concat(m) {
     if(!(m && isType(type(), m))) {
       throw new TypeError('Max.concat: Max requried')
@@ -26,7 +30,7 @@ function Max(n) {
     return Max(Math.max(x, m.value()))
   }
 
-  return { value, type, concat, empty }
+  return { inspect, value, type, concat, empty }
 }
 
 Max.empty = _empty

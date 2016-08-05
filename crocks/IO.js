@@ -1,6 +1,8 @@
 const isFunction  = require('../internal/isFunction')
 const isType      = require('../internal/isType')
 
+const _inspect = require('../funcs/inspect')
+
 const composeB = require('../combinators/composeB')
 const constant = require('../combinators/constant')
 
@@ -12,8 +14,9 @@ function IO(run) {
     throw new TypeError('IO: Must wrap a function')
   }
 
-  const type  = _type
-  const of    = _of
+  const type    = _type
+  const of      = _of
+  const inspect = constant(`IO${_inspect(run)}`)
 
   function map(fn) {
     if(!isFunction(fn)) {
@@ -39,7 +42,7 @@ function IO(run) {
     return IO(_ => fn(run()).run())
   }
 
-  return { run, type, map, ap, of, chain }
+  return { inspect, run, type, map, ap, of, chain }
 }
 
 IO.of   = _of

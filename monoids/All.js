@@ -2,6 +2,8 @@ const isFunction    = require('../internal/isFunction')
 const isType        = require('../internal/isType')
 const isUndefOrNull = require('../internal/isUndefOrNull')
 
+const _inspect = require('../funcs/inspect')
+
 const constant = require('../combinators/constant')
 
 const _empty  = () => All(true)
@@ -18,6 +20,8 @@ function All(b) {
   const type  = _type
   const empty = _empty
 
+  const inspect = constant(`All${_inspect(value())}`)
+
   function concat(m) {
     if(!(m && isType(type(), m))) {
       throw new TypeError('All.concat: All required')
@@ -26,7 +30,7 @@ function All(b) {
     return All(m.value() && value())
   }
 
-  return { value, type, concat, empty }
+  return { inspect, value, type, concat, empty }
 }
 
 All.empty = _empty

@@ -2,6 +2,8 @@ const isMonoid    = require('../internal/isMonoid')
 const isFunction  = require('../internal/isFunction')
 const constant    = require('../combinators/constant')
 
+const _inspect = require('../funcs/inspect')
+
 function Flip(M) {
   if(!arguments.length || !isFunction(M.empty)) {
     throw new TypeError('Flip: Monoid required')
@@ -18,6 +20,8 @@ function Flip(M) {
   function Flipped(y) {
     const x = M(y)
 
+    const inspect = constant(`Flip(${_inspect(x)} )`)
+
     function concat(m) {
       return Flipped(m.inner().concat(x).value())
     }
@@ -27,7 +31,7 @@ function Flip(M) {
     const empty = _empty
     const type  = _type
 
-    return { inner, value, type, concat, empty }
+    return { inspect, inner, value, type, concat, empty }
   }
 
   Flipped.empty = _empty

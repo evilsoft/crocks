@@ -3,6 +3,8 @@ const isNumber      = require('../internal/isNumber')
 const isType        = require('../internal/isType')
 const isUndefOrNull = require('../internal/isUndefOrNull')
 
+const _inspect = require('../funcs/inspect')
+
 const constant = require('../combinators/constant')
 
 const _empty  = () => Prod(1)
@@ -19,6 +21,8 @@ function Prod(n) {
   const type    = _type
   const empty   = _empty
 
+  const inspect = constant(`Prod${_inspect(value())}`)
+
   function concat(m) {
     if(!(m && isType(type(), m))) {
       throw new TypeError('Prod.concat: Prod required')
@@ -27,7 +31,7 @@ function Prod(n) {
     return Prod(x * m.value())
   }
 
-  return { value, type, concat, empty }
+  return { inspect, value, type, concat, empty }
 }
 
 Prod.empty = _empty

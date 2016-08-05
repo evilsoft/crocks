@@ -12,6 +12,7 @@ const substitution  = require('./combinators/substitution')
 
 const compose     = require('./funcs/compose')
 const curry       = require('./funcs/curry')
+const inspect     = require('./funcs/inspect')
 const liftA       = require('./funcs/liftA')
 const liftA2      = require('./funcs/liftA2')
 const liftA3      = require('./funcs/liftA3')
@@ -62,6 +63,7 @@ test('entry', t => {
 
   t.equal(crocks.compose, compose, 'provides the compose function')
   t.equal(crocks.curry, curry, 'provides the curry function')
+  t.equal(crocks.inspect, inspect, 'provides the inspect function')
   t.equal(crocks.liftA, liftA, 'provides the liftA function')
   t.equal(crocks.liftA2, liftA2, 'provides the liftA2 function')
   t.equal(crocks.liftA3, liftA3, 'provides the liftA3 function')

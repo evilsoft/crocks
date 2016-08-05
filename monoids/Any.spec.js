@@ -36,6 +36,15 @@ test('Any', t => {
   t.end()
 })
 
+test('Any inspect', t => {
+  const m = Any(1)
+
+  t.ok(isFunction(m.inspect), 'provides an inpsect function')
+  t.equal(m.inspect(), 'Any true', 'returns inspect string')
+
+  t.end()
+})
+
 test('Any value', t => {
   t.ok(isFunction(Any(0).value), 'is a function')
 

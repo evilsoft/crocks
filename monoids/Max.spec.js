@@ -36,6 +36,15 @@ test('Max', t => {
   t.end()
 })
 
+test('Max inspect', t => {
+  const m = Max(124)
+
+  t.ok(isFunction(m.inspect), 'provides an inpsect function')
+  t.equal(m.inspect(), 'Max 124', 'returns inspect string')
+
+  t.end()
+})
+
 test('Max value', t => {
   const empty = Max.empty().value()
 

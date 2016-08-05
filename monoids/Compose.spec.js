@@ -39,6 +39,15 @@ test('Compose', t => {
   t.end()
 })
 
+test('Compose inspect', t => {
+  const m = Compose(noop)
+
+  t.ok(isFunction(m.inspect), 'provides an inpsect function')
+  t.equal(m.inspect(), 'Compose Function', 'returns inspect string')
+
+  t.end()
+})
+
 test('Compose value', t => {
   const empty = Compose.empty().value()
   const x     = x => x + 1

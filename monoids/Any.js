@@ -2,6 +2,8 @@ const isFunction    = require('../internal/isFunction')
 const isType        = require('../internal/isType')
 const isUndefOrNull = require('../internal/isUndefOrNull')
 
+const _inspect = require('../funcs/inspect')
+
 const constant = require('../combinators/constant')
 
 const _type   = constant('Any')
@@ -18,6 +20,8 @@ function Any(b) {
   const type  = _type
   const empty = _empty
 
+  const inspect = constant(`Any${_inspect(value())}`)
+
   function concat(m) {
     if(!(m && isType(type(), m))) {
       throw new TypeError('Any.concat: Any required')
@@ -26,7 +30,7 @@ function Any(b) {
     return Any(m.value() || value())
   }
 
-  return { value, type, concat, empty }
+  return { inspect, value, type, concat, empty }
 }
 
 Any.empty = _empty

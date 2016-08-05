@@ -32,6 +32,15 @@ test('Writer', t => {
   t.end()
 })
 
+test('Writer inspect', t => {
+  const m = Writer(0, 0)
+
+  t.ok(isFunction(m.inspect), 'provides an inpsect function')
+  t.equal(m.inspect(), 'Writer( [] 0 )', 'returns inspect string')
+
+  t.end()
+})
+
 test('Writer type', t => {
   const m = Writer(0, 0)
 

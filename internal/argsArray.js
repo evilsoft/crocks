@@ -1,3 +1,4 @@
+// argsArray :: ArrayLike -> [ a ]
 function argsArray(x) {
   return Array.prototype.slice.call(x)
 }

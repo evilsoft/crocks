@@ -12,7 +12,7 @@ function Sum(n) {
   const x = isUndefOrNull(n) ? _empty().value() : n
 
   if(!arguments.length || !isNumber(x)) {
-    throw new TypeError('Sum: must wrap a numeric value')
+    throw new TypeError('Sum: Numeric value required')
   }
 
   const value   = constant(x)
@@ -21,7 +21,7 @@ function Sum(n) {
 
   function concat(m) {
     if(!(m && isType(type(), m))) {
-      throw new TypeError('Sum.concat: Arg must be another Sum')
+      throw new TypeError('Sum.concat: Sum required')
     }
 
     return Sum(x + m.value())

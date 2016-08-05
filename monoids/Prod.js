@@ -12,7 +12,7 @@ function Prod(n) {
   const x = isUndefOrNull(n) ? _empty().value() : n
 
   if(!arguments.length || !isNumber(x)) {
-    throw new TypeError('Prod: Requires numeric value')
+    throw new TypeError('Prod: Numeric value required')
   }
 
   const value   = constant(x)
@@ -21,7 +21,7 @@ function Prod(n) {
 
   function concat(m) {
     if(!(m && isType(type(), m))) {
-      throw new TypeError('Prod.concat: Arg must be another Prod')
+      throw new TypeError('Prod.concat: Prod required')
     }
 
     return Prod(x * m.value())

@@ -28,7 +28,7 @@ function Writer(entry, val) {
 
   function map(fn) {
     if(!isFunction(fn)) {
-      throw new TypeError('Writer.map: requires a function')
+      throw new TypeError('Writer.map: Function required')
     }
 
     return Writer(log(), fn(value()))
@@ -38,8 +38,7 @@ function Writer(entry, val) {
     if(!isFunction(value())) {
       throw new TypeError('Writer.ap: Wrapped value must be a function')
     }
-
-    if(!isType(type(), m)) {
+    else if(!isType(type(), m)) {
       throw new TypeError('Writer.ap: Writer required')
     }
 
@@ -48,7 +47,7 @@ function Writer(entry, val) {
 
   function chain(fn) {
     if(!isFunction(fn)) {
-      throw new TypeError('Writer.chain: function required')
+      throw new TypeError('Writer.chain: Function required')
     }
 
     const w = fn(value())

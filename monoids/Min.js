@@ -11,7 +11,7 @@ function Min(n) {
   const x = isUndefOrNull(n) ? _empty().value() : n
 
   if(!arguments.length || !isNumber(x)) {
-    throw new TypeError('Min: must wrap a numeric value')
+    throw new TypeError('Min: Numeric value required')
   }
 
   const value = constant(x)
@@ -20,7 +20,7 @@ function Min(n) {
 
   function concat(m) {
     if(!(m && isType(type(), m))) {
-      throw new TypeError('Min.concat: Arg must be another Min')
+      throw new TypeError('Min.concat: Min required')
     }
 
     return Min(Math.min(x, m.value()))

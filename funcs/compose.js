@@ -1,9 +1,10 @@
 const isFunction  = require('../internal/isFunction')
 const argsArray   = require('../internal/argsArray')
 
+// compose :: ...fns -> fn
 function compose() {
   if(!arguments.length) {
-    throw new TypeError('compose: Must receive at least one function')
+    throw new TypeError('compose: At least one function required')
   }
 
   const fns = argsArray(arguments)

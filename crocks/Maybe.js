@@ -21,7 +21,7 @@ function Maybe(x) {
 
   function map(fn) {
     if(!isFunction(fn)) {
-      throw new TypeError('Maybe.map: function required')
+      throw new TypeError('Maybe.map: Function required')
     }
 
     return Maybe(isNothing(x) ? undefined : fn(x))
@@ -33,8 +33,7 @@ function Maybe(x) {
     if(!isFunction(fn)) {
       throw new TypeError('Maybe.ap: Wrapped value must be a function')
     }
-
-    if(!isType(type(), m)) {
+    else if(!isType(type(), m)) {
       throw new TypeError('Maybe.ap: Maybe required')
     }
 
@@ -43,7 +42,7 @@ function Maybe(x) {
 
   function chain(fn) {
     if(!isFunction(fn)) {
-      throw new TypeError('Maybe.chain: function required')
+      throw new TypeError('Maybe.chain: Function required')
     }
 
     return isNothing(x) ? Maybe(undefined) : map(fn).maybe()

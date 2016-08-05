@@ -4,7 +4,7 @@ const isFunction = require('../internal/isFunction')
 
 function runWith(x, m) {
   if(!(m && isFunction(m.runWith))) {
-    throw new TypeError('run: Secong arg must be a Reader')
+    throw new TypeError('run: Reader required for second arg')
   }
 
   return m.runWith(x)

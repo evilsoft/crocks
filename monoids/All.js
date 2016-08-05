@@ -11,7 +11,7 @@ function All(b) {
   const x = isUndefOrNull(b) ? _empty().value() : b
 
   if(!arguments.length || isFunction(x)) {
-    throw new TypeError('All: Must wrap a non-function value')
+    throw new TypeError('All: Non-function value required')
   }
 
   const value = constant(!!x)
@@ -20,7 +20,7 @@ function All(b) {
 
   function concat(m) {
     if(!(m && isType(type(), m))) {
-      throw new TypeError('All.concat: Arg must be another All')
+      throw new TypeError('All.concat: All required')
     }
 
     return All(m.value() && value())

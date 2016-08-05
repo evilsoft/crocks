@@ -1,4 +1,4 @@
-// isUndefOrNull :: a -> Bool
+// isUndefOrNull :: a -> Boolean
 function isUndefOrNull(x) {
   return x === undefined || x === null
 }

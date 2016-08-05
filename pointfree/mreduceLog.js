@@ -4,11 +4,10 @@ const isFunction  = require('../internal/isFunction')
 
 function mreduceLog(m, w) {
   if(!isMonoid(m)) {
-    throw new TypeError('mreduceLog: First arg must be a Monoid')
+    throw new TypeError('mreduceLog: Monoid required for first arg')
   }
-
-  if(!(m && isFunction(w.mreduceLog))) {
-    throw new TypeError('mreduceLog: Second arg must be a Writer')
+  else if(!(m && isFunction(w.mreduceLog))) {
+    throw new TypeError('mreduceLog: Writer required for second arg')
   }
 
   return w.mreduceLog(m)

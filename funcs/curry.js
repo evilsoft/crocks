@@ -8,7 +8,7 @@ function applyCurry(fn, arg) {
 
 function curry(fn) {
   if(!isFunction(fn)) {
-    throw new TypeError('curry: Must receive one function')
+    throw new TypeError('curry: Function required')
   }
 
   return function() {

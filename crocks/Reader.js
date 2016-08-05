@@ -33,7 +33,7 @@ function Reader(runWith) {
 
   function chain(fn) {
     if(!isFunction(fn)) {
-      throw new TypeError('Reader.chain: function required')
+      throw new TypeError('Reader.chain: Function required')
     }
 
     return Reader(e => fn(runWith(e)).runWith(e))

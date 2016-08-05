@@ -1,4 +1,4 @@
-// isObject:: a -> Bool
+// isObject:: a -> Boolean
 function isObject(x) {
   return !!x
     && x.toString

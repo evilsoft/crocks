@@ -13,7 +13,7 @@ function Compose(f) {
   const x = isUndefOrNull(f) ? _empty().value() : f
 
   if(!arguments.length || !isFunction(x)) {
-    throw new TypeError('Compose: Requires a function')
+    throw new TypeError('Compose: Function required')
   }
 
   const value   = constant(x)
@@ -22,7 +22,7 @@ function Compose(f) {
 
   function concat(m) {
     if(!(m && isType(type(), m))) {
-      throw new TypeError('Compose.concat: Requires another Compose')
+      throw new TypeError('Compose.concat: Compose required')
     }
 
     return Compose(composeB(x, m.value()))

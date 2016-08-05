@@ -1,4 +1,4 @@
-// isNumber :: a -> Bool
+// isNumber :: a -> Boolean
 function isNumber(x) {
   return typeof x === 'number'
 }

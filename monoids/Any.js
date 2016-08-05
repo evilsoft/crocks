@@ -11,7 +11,7 @@ function Any(b) {
   const x = isUndefOrNull(b) ? _empty().value() : b
 
   if(!arguments.length || isFunction(x)) {
-    throw new TypeError('Any: Must wrap a non-function value')
+    throw new TypeError('Any: Non-function value required')
   }
 
   const value = constant(!!x)
@@ -20,7 +20,7 @@ function Any(b) {
 
   function concat(m) {
     if(!(m && isType(type(), m))) {
-      throw new TypeError('Any.concat: Arg must be another Any')
+      throw new TypeError('Any.concat: Any required')
     }
 
     return Any(m.value() || value())

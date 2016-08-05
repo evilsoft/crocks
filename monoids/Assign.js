@@ -12,7 +12,7 @@ function Assign(o) {
   const x = isUndefOrNull(o) ? _empty().value() : o
 
   if(!arguments.length || !isObject(x)) {
-    throw new TypeError('Assign: Requires Object')
+    throw new TypeError('Assign: Object required')
   }
 
   const value   = constant(x)
@@ -21,7 +21,7 @@ function Assign(o) {
 
   function concat(m) {
     if(!(m && isType(type(), m))) {
-      throw new TypeError('Assign.concat: Requires another Assign')
+      throw new TypeError('Assign.concat: Assign required')
     }
 
     return Assign(Object.assign({}, x, m.value()))

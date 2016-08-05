@@ -5,7 +5,7 @@ const isFunction  = require('../internal/isFunction')
 // (a -> b -> c) -> (a -> b) -> a -> c
 function substitution(f, g, x) {
   if(!isFunction(f) || !isFunction(g)) {
-    throw new TypeError('substitution: First two args must be functions')
+    throw new TypeError('substitution: Functions required for first two args')
   }
 
   return curry(f)(x, g(x))

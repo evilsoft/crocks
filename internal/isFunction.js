@@ -1,4 +1,4 @@
-// isFunction :: a -> Bool
+// isFunction :: a -> Boolean
 function isFunction(fn) {
   return typeof fn === 'function'
 }

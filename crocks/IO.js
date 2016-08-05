@@ -17,7 +17,7 @@ function IO(run) {
 
   function map(fn) {
     if(!isFunction(fn)) {
-      throw new TypeError('IO.map: function required')
+      throw new TypeError('IO.map: Function required')
     }
 
     return IO(composeB(fn, run))
@@ -33,7 +33,7 @@ function IO(run) {
 
   function chain(fn) {
     if(!isFunction(fn)) {
-      throw new TypeError('IO.chain: function required')
+      throw new TypeError('IO.chain: Function required')
     }
 
     return IO(_ => fn(run()).run())

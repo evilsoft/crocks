@@ -11,7 +11,7 @@ function Max(n) {
   const x = isUndefOrNull(n) ? _empty().value() : n
 
   if(!arguments.length || !isNumber(x)) {
-    throw new TypeError('Max: must wrap a numeric value')
+    throw new TypeError('Max: Numeric value required')
   }
 
   const value = constant(x)
@@ -20,7 +20,7 @@ function Max(n) {
 
   function concat(m) {
     if(!(m && isType(type(), m))) {
-      throw new TypeError('Max.concat: Arg must be another Max')
+      throw new TypeError('Max.concat: Max requried')
     }
 
     return Max(Math.max(x, m.value()))

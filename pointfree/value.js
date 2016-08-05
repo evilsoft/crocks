@@ -2,7 +2,7 @@ const isFunction = require('../internal/isFunction')
 
 function value(m) {
   if(!(m && isFunction(m.value))) {
-    throw new TypeError('value: Arg must be an Either, Identity, Writer or Monoid')
+    throw new TypeError('value: Either, Identity, Writer or Monoid required')
   }
 
   return m.value()

@@ -3,9 +3,8 @@ const isFunction  = require('../internal/isFunction')
 const constant    = require('../combinators/constant')
 
 function Flip(M) {
-
   if(!arguments.length || !isFunction(M.empty)) {
-    throw new TypeError('Flip: Requires a Monoid')
+    throw new TypeError('Flip: Monoid required')
   }
 
   function _empty() {

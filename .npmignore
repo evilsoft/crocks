@@ -1,8 +1,9 @@
 node_modules
+test
+*.spec.js
+
 .node-version
-
 *.log
-
 .DS_Store
 .DS_Store?
 .Spotlight-V100

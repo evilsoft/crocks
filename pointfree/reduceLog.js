@@ -3,11 +3,10 @@ const isFunction  = require('../internal/isFunction')
 
 function reduceLog(fn, m) {
   if(!isFunction(fn)) {
-    throw new TypeError('reduceLog: First arg must be a function')
+    throw new TypeError('reduceLog: Function required for first arg')
   }
-
-  if(!(m && isFunction(m.reduceLog))) {
-    throw new TypeError('reduceLog: second arg must be a Writer')
+  else if(!(m && isFunction(m.reduceLog))) {
+    throw new TypeError('reduceLog: Writer required for second arg')
   }
 
   return m.reduceLog(fn)

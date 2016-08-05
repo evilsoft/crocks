@@ -9,7 +9,7 @@ const _of   = Identity
 
 function Identity(x) {
   if(!arguments.length) {
-    throw new TypeError('Identity must wrap something')
+    throw new TypeError('Identity: Must wrap something')
   }
 
   const value = constant(x)
@@ -20,7 +20,7 @@ function Identity(x) {
 
   function map(fn) {
     if(!isFunction(fn)) {
-      throw new TypeError('Identity.map: function required')
+      throw new TypeError('Identity.map: Function required')
     }
 
     return composeB(Identity, fn, x)
@@ -30,16 +30,16 @@ function Identity(x) {
     if(!isFunction(x)) {
       throw new TypeError('Identity.ap: Wrapped value must be a function')
     }
-
-    if(!isType(type(), m)) {
+    else if(!isType(type(), m)) {
       throw new TypeError('Identity.ap: Identity required')
     }
+
     return m.map(x)
   }
 
   function chain(fn) {
     if(!isFunction(fn)) {
-      throw new TypeError('Identity.chain: function required')
+      throw new TypeError('Identity.chain: Function required')
     }
 
     return map(fn).value()

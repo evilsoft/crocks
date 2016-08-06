@@ -24,6 +24,7 @@ const ap      = require('./pointfree/ap')
 const chain   = require('./pointfree/chain')
 const concat  = require('./pointfree/concat')
 
+const either      = require('./pointfree/either')
 const log         = require('./pointfree/log')
 const maybe       = require('./pointfree/maybe')
 const option      = require('./pointfree/option')
@@ -76,6 +77,7 @@ test('entry', t => {
   t.equal(crocks.chain, chain, 'provides the chain point-free function')
   t.equal(crocks.concat, concat, 'provides the concat point-free function')
 
+  t.equal(crocks.either, either, 'provides the either point-free function')
   t.equal(crocks.log, log, 'provides the log point-free function')
   t.equal(crocks.maybe, maybe, 'provides the maybe point-free function')
   t.equal(crocks.option, option, 'provides the option point-free function')

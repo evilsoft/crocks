@@ -37,6 +37,7 @@ const pointFree = {
   ap:           require('./pointfree/ap'),
   chain:        require('./pointfree/chain'),
   concat:       require('./pointfree/concat'),
+  either:       require('./pointfree/either'),
   log:          require('./pointfree/log'),
   map:          require('./pointfree/map'),
   maybe:        require('./pointfree/maybe'),

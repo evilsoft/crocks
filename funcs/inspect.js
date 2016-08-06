@@ -1,3 +1,6 @@
+/** @license ISC License (c) copyright 2016 original and current authors */
+/** @author Ian Hofmann-Hicks (evil) */
+
 const isFunction  = require('../internal/isFunction')
 const isObject    = require('../internal/isObject')
 const isArray     = require('../internal/isArray')

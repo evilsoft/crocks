@@ -1,3 +1,6 @@
+/** @license ISC License (c) copyright 2016 original and current authors */
+/** @author Ian Hofmann-Hicks (evil) */
+
 const constant    = require('../combinators/constant')
 const isType      = require('../internal/isType')
 const isFunction  = require('../internal/isFunction')

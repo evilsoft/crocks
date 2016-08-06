@@ -45,7 +45,10 @@ function IO(run) {
     return IO(_ => fn(run()).run())
   }
 
-  return { inspect, run, type, map, ap, of, chain }
+  return {
+    inspect, run, type,
+    map, ap, of, chain
+  }
 }
 
 IO.of   = _of

@@ -52,7 +52,10 @@ function Identity(x) {
   }
 
 
-  return { inspect, value, type, equals, map, ap, of, chain }
+  return {
+    inspect, value, type,
+    equals, map, ap, of, chain
+  }
 }
 
 Identity.of   = _of

@@ -45,7 +45,10 @@ function Reader(runWith) {
     return Reader(e => fn(runWith(e)).runWith(e))
   }
 
-  return { inspect, type, runWith, map, ap, chain, of }
+  return {
+    inspect, runWith, type,
+    map, ap, chain, of
+  }
 }
 
 Reader.of   = _of

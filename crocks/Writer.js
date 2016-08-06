@@ -82,9 +82,9 @@ function Writer(entry, val) {
   }
 
   return {
-    inspect, type, read, value, log,
-    equals, map, ap, of, chain,
-    reduceLog, mreduceLog
+    inspect, read, value, log,
+    reduceLog, mreduceLog, type,
+    equals, map, ap, of, chain
   }
 }
 

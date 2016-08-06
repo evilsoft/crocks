@@ -22,7 +22,7 @@ function Either(l, r) {
     throw new TypeError('Either: Requires two arguments')
   }
   else if(l === null && r === null) {
-    throw new TypeError('Either: Requires at least one of its arguments to be none-null')
+    throw new TypeError('Either: Requires at least one of its arguments to be non-null')
   }
 
   const inspect = constant(
@@ -72,8 +72,8 @@ function Either(l, r) {
   }
 
   return {
-    inspect, type, either,
-    value, equals, map,
+    inspect, either, value,
+    type, equals, map,
     ap, of, chain
   }
 }

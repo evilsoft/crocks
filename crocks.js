@@ -26,7 +26,6 @@ const helpers = {
   compose:    require('./funcs/compose'),
   curry:      require('./funcs/curry'),
   inspect:    require('./funcs/inspect'),
-  liftA:      require('./funcs/liftA'),
   liftA2:     require('./funcs/liftA2'),
   liftA3:     require('./funcs/liftA3'),
   mconcat:    require('./funcs/mconcat'),
@@ -51,7 +50,6 @@ const pointFree = {
 }
 
 const combinators = {
-  applyTo:      require('./combinators/applyTo'),
   composeB:     require('./combinators/composeB'),
   constant:     require('./combinators/constant'),
   flip:         require('./combinators/flip'),

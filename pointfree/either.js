@@ -6,7 +6,7 @@ function either(lf, rf, m) {
     throw new TypeError('either: first two args must be functions')
   }
   else if(!(m && isFunction(m.either))) {
-    throw new TypeError('either: Last arg must be an Either')
+    throw new TypeError('either: Last arg must be an Either or Maybe')
   }
 
   return m.either(lf, rf)

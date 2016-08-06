@@ -15,25 +15,32 @@ function Maybe(x) {
     throw new TypeError('Maybe: Must wrap something')
   }
 
-  const maybe = constant(isNothing(x) ? undefined : x)
-  const type  = _type
-  const of    = _of
+  const type    = _type
+  const of      = _of
+
+  const either  = (n, s) => isNothing(x) ? n() : s(x)
+  const option  = n => either(constant(n), constant(x))
+  const maybe   = constant(option(undefined))
 
   const equals  = m => isType(type(), m) && x === m.maybe()
-  const inspect = constant(
-    isNothing(x) ? `Maybe.Nothing` : `Maybe${_inspect(x)}`
-  )
+
+  function inspect() {
+    return either(
+      constant(`Maybe.Nothing`),
+      constant(`Maybe${_inspect(x)}`)
+    )
+  }
 
   function map(fn) {
     if(!isFunction(fn)) {
       throw new TypeError('Maybe.map: Function required')
     }
 
-    return Maybe(isNothing(x) ? undefined : fn(x))
+    return Maybe(either(constant(undefined), fn))
   }
 
   function ap(m) {
-    const fn = isNothing(x) ? constant(undefined) : x
+    const fn = option(constant(undefined))
 
     if(!isFunction(fn)) {
       throw new TypeError('Maybe.ap: Wrapped value must be a function')
@@ -50,10 +57,16 @@ function Maybe(x) {
       throw new TypeError('Maybe.chain: Function required')
     }
 
-    return isNothing(x) ? Maybe(undefined) : map(fn).maybe()
+    return either(
+      constant(Maybe(undefined)),
+      constant(map(fn).maybe())
+    )
   }
 
-  return { inspect, maybe, type, equals, map, ap, of, chain }
+  return {
+    inspect, maybe, either, option,
+    type, equals, map, ap, of, chain
+  }
 }
 
 Maybe.of    = _of

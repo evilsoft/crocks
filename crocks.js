@@ -40,6 +40,7 @@ const pointFree = {
   log:          require('./pointfree/log'),
   map:          require('./pointfree/map'),
   maybe:        require('./pointfree/maybe'),
+  option:       require('./pointfree/option'),
   read:         require('./pointfree/read'),
   reduceLog:    require('./pointfree/reduceLog'),
   mreduceLog:   require('./pointfree/mreduceLog'),

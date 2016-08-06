@@ -26,6 +26,7 @@ const concat  = require('./pointfree/concat')
 
 const log         = require('./pointfree/log')
 const maybe       = require('./pointfree/maybe')
+const option      = require('./pointfree/option')
 const read        = require('./pointfree/read')
 const reduceLog   = require('./pointfree/reduceLog')
 const mreduceLog  = require('./pointfree/mreduceLog')
@@ -77,6 +78,7 @@ test('entry', t => {
 
   t.equal(crocks.log, log, 'provides the log point-free function')
   t.equal(crocks.maybe, maybe, 'provides the maybe point-free function')
+  t.equal(crocks.option, option, 'provides the option point-free function')
   t.equal(crocks.reduceLog, reduceLog, 'provides the reduceLog point-free function')
   t.equal(crocks.mreduceLog, mreduceLog, 'provides the mreduceLog point-free function')
   t.equal(crocks.read, read, 'provides the read point-free function')

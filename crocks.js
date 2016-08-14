@@ -39,6 +39,7 @@ const pointFree = {
   chain:        require('./pointfree/chain'),
   concat:       require('./pointfree/concat'),
   either:       require('./pointfree/either'),
+  fst:          require('./pointfree/fst'),
   log:          require('./pointfree/log'),
   map:          require('./pointfree/map'),
   maybe:        require('./pointfree/maybe'),
@@ -48,6 +49,7 @@ const pointFree = {
   mreduceLog:   require('./pointfree/mreduceLog'),
   run:          require('./pointfree/run'),
   runWith:      require('./pointfree/runWith'),
+  snd:          require('./pointfree/snd'),
   value:        require('./pointfree/value')
 }
 

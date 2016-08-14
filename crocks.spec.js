@@ -24,6 +24,7 @@ const concat  = require('./pointfree/concat')
 const map     = require('./pointfree/map')
 
 const either      = require('./pointfree/either')
+const fst         = require('./pointfree/fst')
 const log         = require('./pointfree/log')
 const maybe       = require('./pointfree/maybe')
 const option      = require('./pointfree/option')
@@ -32,6 +33,7 @@ const reduceLog   = require('./pointfree/reduceLog')
 const mreduceLog  = require('./pointfree/mreduceLog')
 const run         = require('./pointfree/run')
 const runWith     = require('./pointfree/runWith')
+const snd         = require('./pointfree/snd')
 const value       = require('./pointfree/value')
 
 const Either    = require('./crocks/Either')
@@ -76,6 +78,7 @@ test('entry', t => {
   t.equal(crocks.concat, concat, 'provides the concat point-free function')
   t.equal(crocks.map, map, 'provides the map point-free function')
 
+  t.equal(crocks.fst, fst, 'provides the fst point-free function')
   t.equal(crocks.either, either, 'provides the either point-free function')
   t.equal(crocks.log, log, 'provides the log point-free function')
   t.equal(crocks.maybe, maybe, 'provides the maybe point-free function')
@@ -85,6 +88,7 @@ test('entry', t => {
   t.equal(crocks.read, read, 'provides the read point-free function')
   t.equal(crocks.run, run, 'provides the run point-free function')
   t.equal(crocks.runWith, runWith, 'provides the runWith point-free function')
+  t.equal(crocks.snd, snd, 'provides the snd point-free function')
   t.equal(crocks.value, value, 'provides the value point-free function')
 
   t.equal(crocks.Either, Either, 'provides the Either function')

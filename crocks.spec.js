@@ -37,6 +37,7 @@ const Either    = require('./crocks/Either')
 const Identity  = require('./crocks/Identity')
 const IO        = require('./crocks/IO')
 const Maybe     = require('./crocks/Maybe')
+const Pair      = require('./crocks/Pair')
 const Reader    = require('./crocks/Reader')
 const Writer    = require('./crocks/Writer')
 
@@ -88,6 +89,7 @@ test('entry', t => {
   t.equal(crocks.Identity, Identity, 'provides the Identity function')
   t.equal(crocks.IO, IO, 'provides the IO function')
   t.equal(crocks.Maybe, Maybe, 'provides the Maybe function')
+  t.equal(crocks.Pair, Pair, 'provides the Pair function')
   t.equal(crocks.Reader, Reader, 'provides the Reader function')
   t.equal(crocks.Writer, Writer, 'provides the Writer function')
 

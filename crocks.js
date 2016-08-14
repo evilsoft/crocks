@@ -35,6 +35,7 @@ const helpers = {
 
 const pointFree = {
   ap:           require('./pointfree/ap'),
+  bimap:        require('./pointfree/bimap'),
   chain:        require('./pointfree/chain'),
   concat:       require('./pointfree/concat'),
   either:       require('./pointfree/either'),

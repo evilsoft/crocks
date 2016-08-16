@@ -4,9 +4,9 @@ const isType      = require('../internal/isType')
 const isFunction  = require('../internal/isFunction')
 const isSemigroup = require('../internal/isSemigroup')
 
-const _type = constant('Pair')
-
 const _inspect = require('../funcs/inspect')
+
+const _type = constant('Pair')
 
 function Pair(f, s) {
   if(arguments.length < 2) {
@@ -90,7 +90,7 @@ function Pair(f, s) {
     const m = fn(snd())
 
     if(!isSemigroup(m.fst())) {
-      throw new TypeError('Pair.chain: Semigroup required for first value of chaind function result')
+      throw new TypeError('Pair.chain: Semigroup required for first value of chained function result')
     }
 
     return Pair(

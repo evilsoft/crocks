@@ -12,6 +12,13 @@ const constant = require('../combinators/constant')
 const _of   = x => Reader(constant(x))
 const _type = constant('Reader')
 
+function ask(fn) {
+  if(!isFunction(fn)) {
+    throw new TypeError('Reader.ask: Function required')
+  }
+  return Reader(fn)
+}
+
 function Reader(runWith) {
   if(!arguments.length || !isFunction(runWith)) {
     throw new TypeError('Reader: Must wrap a function')
@@ -53,5 +60,6 @@ function Reader(runWith) {
 
 Reader.of   = _of
 Reader.type = _type
+Reader.ask  = ask
 
 module.exports = Reader

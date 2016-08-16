@@ -23,6 +23,7 @@ test('Reader', t => {
 
   t.ok(isFunction(Reader.of), 'provides an of function')
   t.ok(isFunction(Reader.type), 'provides a type function')
+  t.ok(isFunction(Reader.ask), 'provides an ask function')
   t.equal(Reader.type, Reader(noop).type, 'static type function matches instance type function')
 
   t.ok(isFunction(m.runWith), 'provides a runWith function')
@@ -69,6 +70,36 @@ test('Reader runWith', t => {
   t.ok(fn.called, 'calls the wrapped function')
   t.equal(result, fn(e), 'passes in env to the function, returning result')
 
+  t.end()
+})
+
+test('Reader ask errors', t => {
+  const ask = bindFunc(Reader.ask)
+
+  t.throws(ask(undefined), TypeError, 'throws with undefined')
+  t.throws(ask(null), TypeError, 'throws with null')
+  t.throws(ask(0), TypeError, 'throws with falsey number')
+  t.throws(ask(1), TypeError, 'throws with truthy number')
+  t.throws(ask(''), TypeError, 'throws with falsey string')
+  t.throws(ask('string'), TypeError, 'throws with truthy string')
+  t.throws(ask(false), TypeError, 'throws with false')
+  t.throws(ask(true), TypeError, 'throws with true')
+  t.throws(ask([]), TypeError, 'throws with an array')
+  t.throws(ask({}), TypeError, 'throws with an object')
+
+  t.doesNotThrow(ask(noop), 'allows functions')
+
+  t.end()
+})
+
+test('Reader ask functionality', t => {
+  const f = sinon.spy(identity)
+  const x = Reader.ask(f)
+
+  x.runWith(3)
+
+  t.equal(x.type(), 'Reader', 'returns a Reader')
+  t.ok(f.calledWith(3), 'returned Reader wraps the passed function')
   t.end()
 })
 

@@ -80,7 +80,7 @@ test('All concat properties (Semigoup)', t => {
 
   t.ok(isFunction(a.concat), 'provides a concat function')
   t.equal(left.value(), right.value(), 'associativity')
-  t.equal(a.concat(b).type(), a.type(), 'returns an Any')
+  t.equal(a.concat(b).type(), a.type(), 'returns an All')
 
   t.end()
 })
@@ -122,7 +122,7 @@ test('All empty properties (Monoid)', t => {
   const left  = m.empty().concat(m)
 
   t.equal(right.value(), m.value(), 'right identity')
-  t.equal(left.value(), m.value(), 'right identity')
+  t.equal(left.value(), m.value(), 'left identity')
 
   t.end()
 })
@@ -131,7 +131,7 @@ test('All empty functionality', t => {
   const x = All(0).empty()
 
   t.equal(x.type(), 'All', 'provides an All')
-  t.equal(x.value(), true, 'wraps a false value')
+  t.equal(x.value(), true, 'provides a true value')
 
   t.end()
 })

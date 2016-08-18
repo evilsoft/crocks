@@ -5,6 +5,12 @@ const isFunction  = require('../internal/isFunction')
 const isObject    = require('../internal/isObject')
 const isArray     = require('../internal/isArray')
 
+function arrayInspect(xs) {
+  return xs.length
+    ? xs.map(inspect).reduce((a, x) => a + ',' + x)
+    : xs
+}
+
 function inspect(x) {
   if(x && isFunction(x.inspect)) {
     return ` ${x.inspect()}`
@@ -19,7 +25,7 @@ function inspect(x) {
   }
 
   if(isArray(x)) {
-    return ' []'
+    return ` [${arrayInspect(x) } ]`
   }
 
   return ` ${x}`

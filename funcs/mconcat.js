@@ -12,8 +12,8 @@ function mconcat(M, xs) {
   if(!(M && isFunction(M.empty))) {
     throw new TypeError('mconcat: Monoid required for first arg')
   }
-  else if(!isArray(xs)) {
-    throw new TypeError('mconcat: Array required for second arg')
+  else if(!(xs && isFunction(xs.reduce))) {
+    throw new TypeError('mconcat: Foldable required for second arg')
   }
 
   return xs.reduce(foldWith(M), M.empty())

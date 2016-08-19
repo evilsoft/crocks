@@ -1,12 +1,17 @@
 const test    = require('tape')
 const helpers = require('../test/helpers')
 
-const constant  = require('../combinators/constant')
+const constant      = require('../combinators/constant')
+const identity      = require('../combinators/identity')
+const composeB      = require('../combinators/composeB')
+const reverseApply  = require('../combinators/reverseApply')
 
 const isObject    = require('../internal/isObject')
 const isFunction  = require('../internal/isFunction')
 const bindFunc    = helpers.bindFunc
 const noop        = helpers.noop
+
+const Last = require('../test/LastMonoid')
 
 const List = require('./List')
 
@@ -180,6 +185,153 @@ test('List reduce functionality', t => {
 
   t.equal(m.reduce(f, 0), 6, 'reduces as expected with a neutral initial value')
   t.equal(m.reduce(f, 10), 16, 'reduces as expected with a non-neutral initial value')
+
+  t.end()
+})
+
+test('List foldWith errors', t => {
+  const foldWith = bindFunc(List([ 1, 2 ]).foldWith)
+
+  t.throws(foldWith(undefined), TypeError, 'throws with undefined')
+  t.throws(foldWith(null), TypeError, 'throws with null')
+  t.throws(foldWith(0), TypeError, 'throws with falsey number')
+  t.throws(foldWith(1), TypeError, 'throws with truthy number')
+  t.throws(foldWith(''), TypeError, 'throws with falsey string')
+  t.throws(foldWith('string'), TypeError, 'throws with truthy string')
+  t.throws(foldWith(false), TypeError, 'throws with false')
+  t.throws(foldWith(true), TypeError, 'throws with true')
+  t.throws(foldWith({}), TypeError, 'throws with an object')
+  t.throws(foldWith([]), TypeError, 'throws with an array')
+
+  t.doesNotThrow(foldWith(Last), 'allows a Monoid')
+
+  t.end()
+})
+
+test('List foldWith functionality', t => {
+  const x = List([ 1, 2, 3 ]).foldWith(Last)
+
+  t.equal(x, 3, 'folds the list left to right')
+
+  t.end()
+})
+
+test('List ap errors', t => {
+  const ap = bindFunc(List([ noop ]).ap)
+
+  t.throws(List([ undefined ]).ap.bind(null, List([ 0 ])), TypeError, 'throws when wrapped value is undefined')
+  t.throws(List([ null ]).ap.bind(null, List([ 0 ])), TypeError, 'throws when wrapped value is null')
+  t.throws(List([ 0 ]).ap.bind(null, List([ 0 ])), TypeError, 'throws when wrapped value is a falsey number')
+  t.throws(List([ 1 ]).ap.bind(null, List([ 0 ])), TypeError, 'throws when wrapped value is a truthy number')
+  t.throws(List([ '' ]).ap.bind(null, List([ 0 ])), TypeError, 'throws when wrapped value is a falsey string')
+  t.throws(List([ 'string' ]).ap.bind(null, List([ 0 ])), TypeError, 'throws when wrapped value is a truthy string')
+  t.throws(List([ false ]).ap.bind(null, List([ 0 ])), TypeError, 'throws when wrapped value is false')
+  t.throws(List([ true ]).ap.bind(null, List([ 0 ])), TypeError, 'throws when wrapped value is true')
+  t.throws(List([ [] ]).ap.bind(null, List([ 0 ])), TypeError, 'throws when wrapped value is an array')
+  t.throws(List([ {} ]).ap.bind(null, List([ 0 ])), TypeError, 'throws when wrapped value is an object')
+  t.throws(List([ noop, 'string' ]).ap.bind(null, List([ 0 ])), TypeError, 'throws when wrapped values are not all functions')
+
+
+  t.throws(ap(undefined), TypeError, 'throws with undefined')
+  t.throws(ap(null), TypeError, 'throws with null')
+  t.throws(ap(0), TypeError, 'throws with falsey number')
+  t.throws(ap(1), TypeError, 'throws with truthy number')
+  t.throws(ap(''), TypeError, 'throws with falsey string')
+  t.throws(ap('string'), TypeError, 'throws with truthy string')
+  t.throws(ap(false), TypeError, 'throws with false')
+  t.throws(ap(true), TypeError, 'throws with true')
+  t.throws(ap([]), TypeError, 'throws with an array')
+  t.throws(ap({}), TypeError, 'throws with an object')
+
+  t.doesNotThrow(ap(List([ 45 ])), 'allows a List when functions are wrapped')
+
+  t.end()
+})
+
+test('List ap properties (Apply)', t => {
+  const m = List([ identity ])
+
+  const a = m.map(composeB).ap(m).ap(m)
+  const b = m.ap(m.ap(m))
+
+  t.ok(isFunction(List([]).ap), 'provides an ap function')
+  t.ok(isFunction(List([]).map), 'implements the Functor spec')
+
+  t.same(a.ap(List([ 3 ])).value(), b.ap(List([ 3 ])).value(), 'composition')
+
+  t.end()
+})
+
+test('List of', t => {
+  t.equal(List.of, List([]).of, 'List.of is the same as the instance version')
+  t.equal(List.of(0).type(), 'List', 'returns an Identity')
+  t.same(List.of(0).value(), [ 0 ], 'wraps the value passed into List into an array')
+
+  t.end()
+})
+
+test('List of properties (Applicative)', t => {
+  const m = List([ identity ])
+
+  t.ok(isFunction(List([]).of), 'provides an of function')
+  t.ok(isFunction(List([]).ap), 'implements the Apply spec')
+
+  t.same(m.ap(List([3])).value(), [ 3 ], 'identity')
+  t.same(m.ap(List.of(3)).value(), List.of(identity(3)).value(), 'homomorphism')
+
+  const a = x => m.ap(List.of(x))
+  const b = x => List.of(reverseApply(x)).ap(m)
+
+  t.same(a(3).value(), b(3).value(), 'interchange')
+
+  t.end()
+})
+
+test('List chain errors', t => {
+  const chain = bindFunc(List([ 0 ]).chain)
+  const f = x => List.of(x)
+
+  t.throws(chain(undefined), TypeError, 'throws when passed undefined')
+  t.throws(chain(null), TypeError, 'throws when passed null')
+  t.throws(chain(0), TypeError, 'throws when passed a falsey number')
+  t.throws(chain(1), TypeError, 'throws when passed a truthy number')
+  t.throws(chain(''), TypeError, 'throws when passed a falsey string')
+  t.throws(chain('string'), TypeError, 'throws when passed a truthy string')
+  t.throws(chain(false), TypeError, 'throws when passed false')
+  t.throws(chain(true), TypeError, 'throws when passed true')
+  t.throws(chain(null), TypeError, 'throws when passed null')
+  t.throws(chain(undefined), TypeError, 'throws when passed undefined')
+  t.throws(chain([]), TypeError, 'throws when passed an array')
+  t.throws(chain({}), TypeError, 'throws when passed an object')
+
+  t.doesNotThrow(chain(f), 'does not throw when passed a function')
+
+  t.end()
+})
+
+test('List chain properties (Chain)', t => {
+  t.ok(isFunction(List([]).chain), 'provides a chain function')
+  t.ok(isFunction(List([]).ap), 'implements the Apply spec')
+
+  const f = x => List.of(x + 2)
+  const g = x => List.of(x + 10)
+
+  const a = x => List.of(x).chain(f).chain(g)
+  const b = x => List.of(x).chain(y => f(y).chain(g))
+
+  t.same(a(10).value(), b(10).value(), 'assosiativity')
+
+  t.end()
+})
+
+test('List chain properties (Monad)', t => {
+  t.ok(isFunction(List([]).chain), 'implements the Chain spec')
+  t.ok(isFunction(List([]).of), 'implements the Applicative spec')
+
+  const f = x => List([ x ])
+
+  t.same(List.of(3).chain(f).value(), f(3).value(), 'left identity')
+  t.same(f(3).chain(List.of).value(), f(3).value(), 'right identity')
 
   t.end()
 })

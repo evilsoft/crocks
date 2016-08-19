@@ -20,6 +20,18 @@ function List(xs) {
     throw new TypeError('List: Must wrap an array')
   }
 
+  function flatMap(fn) {
+    return function(y, x) {
+      const m = fn(x)
+
+      if(!(m && isType(type(), m))) {
+        throw new TypeError('List.chain: Function must return a List')
+      }
+
+      return y.concat(m.value())
+    }
+  }
+
   const type  = _type
   const of    = _of
   const value = constant(xs.slice())
@@ -28,7 +40,7 @@ function List(xs) {
   const inspect = () => `List${_inspect(xs)}`
 
   function equals(m) {
-    if(isType(type(), m)) {
+    if(m && isType(type(), m)) {
       const mxs = m.value()
 
       return xs.length === mxs.length
@@ -76,7 +88,7 @@ function List(xs) {
     if(!allFuncs) {
       throw new TypeError('List.ap: Wrapped values must be all be functions')
     }
-    else if(!isType(type(), m)) {
+    else if(!(m && isType(type(), m))) {
       throw new TypeError('List.ap: List required')
     }
 
@@ -88,12 +100,7 @@ function List(xs) {
       throw new TypeError('List.chain: Function required')
     }
 
-    return List(
-      xs.reduce(
-        (acc, x) => acc.concat(fn(x).value()),
-        []
-      )
-    )
+    return List(xs.reduce(flatMap(fn), []))
   }
 
   return {

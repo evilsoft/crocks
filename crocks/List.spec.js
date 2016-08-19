@@ -189,33 +189,6 @@ test('List reduce functionality', t => {
   t.end()
 })
 
-test('List foldWith errors', t => {
-  const foldWith = bindFunc(List([ 1, 2 ]).foldWith)
-
-  t.throws(foldWith(undefined), TypeError, 'throws with undefined')
-  t.throws(foldWith(null), TypeError, 'throws with null')
-  t.throws(foldWith(0), TypeError, 'throws with falsey number')
-  t.throws(foldWith(1), TypeError, 'throws with truthy number')
-  t.throws(foldWith(''), TypeError, 'throws with falsey string')
-  t.throws(foldWith('string'), TypeError, 'throws with truthy string')
-  t.throws(foldWith(false), TypeError, 'throws with false')
-  t.throws(foldWith(true), TypeError, 'throws with true')
-  t.throws(foldWith({}), TypeError, 'throws with an object')
-  t.throws(foldWith([]), TypeError, 'throws with an array')
-
-  t.doesNotThrow(foldWith(Last), 'allows a Monoid')
-
-  t.end()
-})
-
-test('List foldWith functionality', t => {
-  const x = List([ 1, 2, 3 ]).foldWith(Last)
-
-  t.equal(x, 3, 'folds the list left to right')
-
-  t.end()
-})
-
 test('List ap errors', t => {
   const ap = bindFunc(List([ noop ]).ap)
 

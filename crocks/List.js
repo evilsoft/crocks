@@ -66,14 +66,6 @@ function List(xs) {
     return xs.reduce(fn, i)
   }
 
-  function foldWith(m) {
-    if(!isMonoid(m)) {
-      throw new TypeError('List.foldWith: Monoid required')
-    }
-
-    return xs.length ? mconcat(m, xs).value() : xs
-  }
-
   function map(fn) {
     if(!isFunction(fn)) {
       throw new TypeError('List.map: Function required')
@@ -105,7 +97,7 @@ function List(xs) {
 
   return {
     inspect, value, type, equals,
-    empty, concat, reduce, foldWith,
+    empty, concat, reduce,
     map, of, ap, chain
   }
 }

@@ -1,3 +1,6 @@
+/** @license ISC License (c) copyright 2016 original and current authors */
+/** @author Ian Hofmann-Hicks (evil) */
+
 const constant = require('../combinators/constant')
 
 const isType      = require('../internal/isType')
@@ -89,7 +92,10 @@ function Pair(f, s) {
 
     const m = fn(snd())
 
-    if(!isSemigroup(m.fst())) {
+    if(!(m && isType(type(), m))) {
+      throw new TypeError('Pair.chain: function must return a Pair')
+    }
+    else if(!isSemigroup(m.fst())) {
       throw new TypeError('Pair.chain: Semigroup required for first value of chained function result')
     }
 

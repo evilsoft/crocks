@@ -29,7 +29,7 @@ function Identity(x) {
       throw new TypeError('Identity.map: Function required')
     }
 
-    return composeB(Identity, fn, x)
+    return Identity(fn(x))
   }
 
   function ap(m) {
@@ -48,7 +48,13 @@ function Identity(x) {
       throw new TypeError('Identity.chain: Function required')
     }
 
-    return map(fn).value()
+    const m = fn(x)
+
+    if(!(m && isType(type(), m))) {
+      throw new TypeError('Identity.chain: function must return an Identity')
+    }
+
+    return m
   }
 
 

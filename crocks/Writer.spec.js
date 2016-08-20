@@ -261,8 +261,9 @@ test('Writer chain errors', t => {
   t.throws(chain(true), TypeError, 'throws with true')
   t.throws(chain([]), TypeError, 'throws with an array')
   t.throws(chain({}), TypeError, 'throws with an object')
+  t.throws(chain(noop), TypeError, 'throws with non-Writer returning function')
 
-  t.doesNotThrow(chain(fn), 'allows a function')
+  t.doesNotThrow(chain(fn), 'allows a Writer returning function')
 
   t.end()
 })

@@ -69,7 +69,13 @@ function Either(l, r) {
       throw new TypeError('Either.chain: function required')
     }
 
-    return either(Either.Left, fn)
+    const m = either(Either.Left, fn)
+
+    if(!(m && isType(type(), m))) {
+      throw new TypeError('Either.chain: function must return an Either')
+    }
+
+    return m
   }
 
   return {

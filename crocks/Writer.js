@@ -58,6 +58,11 @@ function Writer(entry, val) {
     }
 
     const w = fn(value())
+
+    if(!(w && isType(type(), w))) {
+      throw new TypeError('Writer.chain: function must return a Writer')
+    }
+
     return Writer(log().concat(w.log()), w.value())
   }
 

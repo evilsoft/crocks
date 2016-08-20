@@ -60,10 +60,17 @@ function Maybe(x) {
       throw new TypeError('Maybe.chain: Function required')
     }
 
-    return either(
-      constant(Maybe(undefined)),
-      constant(map(fn).maybe())
-    )
+    if(isNothing(x)) {
+      return Maybe(undefined)
+    }
+
+    const m = fn(x)
+
+    if(!(m && isType(type(), m))) {
+      throw new TypeError('Maybe.chain: function must return a Maybe')
+    }
+
+    return m
   }
 
   return {

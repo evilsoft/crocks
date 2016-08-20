@@ -215,7 +215,8 @@ test('Maybe of properties (Applicative)', t => {
 })
 
 test('Maybe chain errors', t => {
-  const chain = bindFunc(Maybe(0).chain)
+  const chain   = bindFunc(Maybe(0).chain)
+  const nChain  = bindFunc(Maybe(undefined).chain)
 
   t.throws(chain(undefined), TypeError, 'throws with undefined')
   t.throws(chain(null), TypeError, 'throws with null')
@@ -227,8 +228,9 @@ test('Maybe chain errors', t => {
   t.throws(chain(true), TypeError, 'throws with true')
   t.throws(chain([]), TypeError, 'throws with an array')
   t.throws(chain({}), TypeError, 'throws with an object')
+  t.throws(chain(noop), TypeError, 'throws with a non-Maybe returning function')
 
-  t.doesNotThrow(chain(noop), 'allows a function')
+  t.doesNotThrow(chain(Maybe.of), 'allows a Maybe returning function')
 
   t.end()
 })

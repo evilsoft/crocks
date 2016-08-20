@@ -307,8 +307,9 @@ test('Pair chain errors', t => {
   t.throws(chain(true), TypeError, 'throws with true')
   t.throws(chain([]), TypeError, 'throws with an array')
   t.throws(chain({}), TypeError, 'throws with an object')
+  t.throws(chain(noop), TypeError, 'throws with non-Pair returning function')
 
-  t.doesNotThrow(chain(fn), 'does not throw when passed a function')
+  t.doesNotThrow(chain(fn), 'allows Pair returning function')
 
   t.end()
 })

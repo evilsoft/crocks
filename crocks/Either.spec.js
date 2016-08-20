@@ -314,7 +314,8 @@ test('Either chain errors', t => {
   t.throws(rchain(true), TypeError, 'Right throws with true')
   t.throws(rchain([]), TypeError, 'Right throws with an array')
   t.throws(rchain({}), TypeError, 'Right throws with an object')
-  t.doesNotThrow(rchain(noop), 'Right allows a function')
+  t.throws(rchain(noop), TypeError, 'Right throws with a non Either returning function')
+  t.doesNotThrow(rchain(Either.of), 'Right allows a function')
 
   t.throws(lchain(undefined), TypeError, 'Left throws with undefined')
   t.throws(lchain(null), TypeError, 'Left throws with null')
@@ -326,7 +327,7 @@ test('Either chain errors', t => {
   t.throws(lchain(true), TypeError, 'Left throws with true')
   t.throws(lchain([]), TypeError, 'Left throws with an array')
   t.throws(lchain({}), TypeError, 'Left throws with an object')
-  t.doesNotThrow(lchain(noop), 'Left allows a function')
+  t.doesNotThrow(lchain(noop), 'Left allows any function')
 
   t.end()
 })

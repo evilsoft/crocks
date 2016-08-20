@@ -61,14 +61,12 @@ function Writer(entry, val) {
     return Writer(log().concat(w.log()), w.value())
   }
 
-  function reduceLog(fn) {
+  function reduceLog(fn, init) {
     if(!isFunction(fn)) {
       throw new TypeError('Writer.reduceLog: Function required')
     }
 
-    const l = log().length ? log().reduce(fn) : log()
-
-    return Writer(l, value())
+    return Writer(log().reduce(fn, init), value())
   }
 
   function mreduceLog(m) {
@@ -76,9 +74,7 @@ function Writer(entry, val) {
       throw new TypeError('Writer.mreduceLog: Monoid required')
     }
 
-    const l = log().length ? mconcat(m, log()).value() : log()
-
-    return Writer(l, value())
+    return Writer(mconcat(m, log()).value(), value())
   }
 
   return {

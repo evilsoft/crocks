@@ -5,7 +5,7 @@ const curry       = require('../funcs/curry')
 const isMonoid    = require('../internal/isMonoid')
 const isFunction  = require('../internal/isFunction')
 
-function mreduceLog(m, w) {
+function mreduceLog(m, init, w) {
   if(!isMonoid(m)) {
     throw new TypeError('mreduceLog: Monoid required for first arg')
   }
@@ -13,7 +13,7 @@ function mreduceLog(m, w) {
     throw new TypeError('mreduceLog: Writer required for second arg')
   }
 
-  return w.mreduceLog(m)
+  return w.mreduceLog(m, init)
 }
 
 module.exports = curry(mreduceLog)

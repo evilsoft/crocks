@@ -324,9 +324,9 @@ test('Writer reduceLog', t => {
   const w = Writer(0, 0)
   const f = _ => Writer(1, 0)
   const g = _ => Writer(2, 0)
-  const r = (x, y) => x + y
+  const add = (x, y) => x + y
 
-  const result = w.chain(f).chain(g).reduceLog(r)
+  const result = w.chain(f).chain(g).reduceLog(add, 0)
 
   t.ok(isFunction(w.reduceLog), 'is a function')
   t.same(result.log(), [ 3 ], 'reduces the log as expected')

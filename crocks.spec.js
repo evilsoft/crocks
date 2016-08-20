@@ -2,6 +2,7 @@ const test = require('tape')
 
 const crocks = require('./crocks')
 
+const applyTo       = require('./combinators/applyTo')
 const composeB      = require('./combinators/composeB')
 const constant      = require('./combinators/constant')
 const flip          = require('./combinators/flip')
@@ -60,12 +61,13 @@ const Sum     = require('./monoids/Sum')
 test('entry', t => {
   t.equal(crocks.toString(), '[object Object]', 'is an object')
 
-  t.equal(crocks.composeB, composeB, 'provides the B combinator')
-  t.equal(crocks.constant, constant, 'provides the K combinator')
-  t.equal(crocks.flip, flip, 'provides the C combinator')
-  t.equal(crocks.identity, identity, 'provides the I combinator')
-  t.equal(crocks.reverseApply, reverseApply, 'provides the T combinator')
-  t.equal(crocks.substitution, substitution, 'provides the S combinator')
+  t.equal(crocks.applyTo, applyTo, 'provides the A combinator (applyTo)')
+  t.equal(crocks.composeB, composeB, 'provides the B combinator (composeB)')
+  t.equal(crocks.constant, constant, 'provides the K combinator (constant)')
+  t.equal(crocks.flip, flip, 'provides the C combinator (flip)')
+  t.equal(crocks.identity, identity, 'provides the I combinator (identity)')
+  t.equal(crocks.reverseApply, reverseApply, 'provides the T combinator (reverseApply)')
+  t.equal(crocks.substitution, substitution, 'provides the S combinator (substitution)')
 
   t.equal(crocks.compose, compose, 'provides the compose function')
   t.equal(crocks.curry, curry, 'provides the curry function')

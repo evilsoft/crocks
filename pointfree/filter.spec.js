@@ -37,18 +37,18 @@ test('filter pointfree', t => {
   t.throws(m(noop, true), 'throws if second arg is true')
   t.throws(m(noop, {}), 'throws if second arg is an object')
 
-  t.doesNotThrow(m(noop, f), 'allows a function and foldable')
-  t.doesNotThrow(m(noop, []), 'allows a function and an array')
+  t.doesNotThrow(m(noop, f), 'allows a function and Foldable container')
+  t.doesNotThrow(m(noop, []), 'allows a function and an array (also Foldable)')
 
   t.end()
 })
 
-test('filter foldable', t => {
+test('filter Foldable', t => {
   const m = { filter: sinon.spy(noop) }
 
   filter(identity, m)
 
-  t.ok(m.filter.calledWith(identity), 'calls map on functor, passing the function')
+  t.ok(m.filter.calledWith(identity), 'calls filter on Foldable, passing the function')
 
   t.end()
 })

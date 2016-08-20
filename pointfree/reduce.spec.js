@@ -38,8 +38,8 @@ test('reduce pointfree', t => {
   t.throws(r(noop, 0, true), 'throws if second arg is true')
   t.throws(r(noop, 0, {}), 'throws if second arg is an object')
 
-  t.doesNotThrow(r(noop, 0, m), 'allows a function and container')
-  t.doesNotThrow(r(noop, 0, []), 'allows a function and an array')
+  t.doesNotThrow(r(noop, 0, m), 'allows a function and Foldable')
+  t.doesNotThrow(r(noop, 0, []), 'allows a function and an array (Foldable)')
 
   const f   = sinon.spy()
   const res = reduce(f, 0, m)

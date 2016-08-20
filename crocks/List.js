@@ -4,12 +4,10 @@
 const isFunction  = require('../internal/isFunction')
 const isArray     = require('../internal/isArray')
 const isType      = require('../internal/isType')
-const isMonoid    = require('../internal/isMonoid')
 
 const constant  = require('../combinators/constant')
 
 const _inspect    = require('../funcs/inspect')
-const mconcat     = require('../funcs/mconcat')
 
 const _type     = constant('List')
 const _of       = x => List([ x ])

@@ -12,8 +12,6 @@ const isFunction  = require('../internal/isFunction')
 const bindFunc    = helpers.bindFunc
 const noop        = helpers.noop
 
-const Last = require('../test/LastMonoid')
-
 const List = require('./List')
 
 test('List', t => {
@@ -59,7 +57,7 @@ test('List type', t => {
 test('List value', t => {
   const x = List([ 'some-thing', 34 ]).value()
 
-  t.same(x, [ 'some-thing', 34 ], 'proivdes the wrapped array')
+  t.same(x, [ 'some-thing', 34 ], 'provides the wrapped array')
 
   t.end()
 })
@@ -96,7 +94,7 @@ test('List equals properties (Setoid)', t => {
   t.end()
 })
 
-test('List concat properties (Semigoup)', t => {
+test('List concat properties (Semigroup)', t => {
   const a = List([ 1, '' ])
   const b = List([ 0, null ])
   const c = List([ true, 'string' ])
@@ -119,16 +117,16 @@ test('List concat functionality', t => {
 
   const cat = bindFunc(a.concat)
 
-  t.throws(cat(undefined), TypeError, 'throws when passed undefined')
-  t.throws(cat(null), TypeError, 'throws when passed null')
-  t.throws(cat(0), TypeError, 'throws when passed falsey number')
-  t.throws(cat(1), TypeError, 'throws when passed truthy number')
-  t.throws(cat(''), TypeError, 'throws when passed falsey string')
-  t.throws(cat('string'), TypeError, 'throws when passed truthy string')
-  t.throws(cat(false), TypeError, 'throws when passed false')
-  t.throws(cat(true), TypeError, 'throws when passed true')
-  t.throws(cat([]), TypeError, 'throws when passed array')
-  t.throws(cat({}), TypeError, 'throws when passed object')
+  t.throws(cat(undefined), TypeError, 'throws with undefined')
+  t.throws(cat(null), TypeError, 'throws with null')
+  t.throws(cat(0), TypeError, 'throws with falsey number')
+  t.throws(cat(1), TypeError, 'throws with truthy number')
+  t.throws(cat(''), TypeError, 'throws with falsey string')
+  t.throws(cat('string'), TypeError, 'throws with truthy string')
+  t.throws(cat(false), TypeError, 'throws with false')
+  t.throws(cat(true), TypeError, 'throws with true')
+  t.throws(cat([]), TypeError, 'throws with an array')
+  t.throws(cat({}), TypeError, 'throws with an object')
   t.throws(cat(notList), TypeError, 'throws when passed non-List')
 
   t.same(a.concat(b).value(), [ 1, 2, 3, 4 ], 'concats second to first')
@@ -193,20 +191,18 @@ test('List reduce functionality', t => {
 test('List filter errors', t => {
   const filter = bindFunc(List([ 0 ]).filter)
 
-  t.throws(filter(undefined), TypeError, 'throws when passed undefined')
-  t.throws(filter(null), TypeError, 'throws when passed null')
-  t.throws(filter(0), TypeError, 'throws when passed a falsey number')
-  t.throws(filter(1), TypeError, 'throws when passed a truthy number')
-  t.throws(filter(''), TypeError, 'throws when passed a falsey string')
-  t.throws(filter('string'), TypeError, 'throws when passed a truthy string')
-  t.throws(filter(false), TypeError, 'throws when passed false')
-  t.throws(filter(true), TypeError, 'throws when passed true')
-  t.throws(filter(null), TypeError, 'throws when passed null')
-  t.throws(filter(undefined), TypeError, 'throws when passed undefined')
-  t.throws(filter([]), TypeError, 'throws when passed an array')
-  t.throws(filter({}), TypeError, 'throws when passed an object')
+  t.throws(filter(undefined), TypeError, 'throws with undefined')
+  t.throws(filter(null), TypeError, 'throws with null')
+  t.throws(filter(0), TypeError, 'throws with falsey number')
+  t.throws(filter(1), TypeError, 'throws with truthy number')
+  t.throws(filter(''), TypeError, 'throws with falsey string')
+  t.throws(filter('string'), TypeError, 'throws with truthy string')
+  t.throws(filter(false), TypeError, 'throws with false')
+  t.throws(filter(true), TypeError, 'throws with true')
+  t.throws(filter([]), TypeError, 'throws with an array')
+  t.throws(filter({}), TypeError, 'throws with an object')
 
-  t.doesNotThrow(filter(noop), 'does not throw when passed a function')
+  t.doesNotThrow(filter(noop), 'allows a function')
 
   t.end()
 })
@@ -237,7 +233,7 @@ test('List map errors', t => {
   t.throws(map([]), TypeError, 'throws with an array')
   t.throws(map({}), TypeError, 'throws with an object')
 
-  t.doesNotThrow(map(noop))
+  t.doesNotThrow(map(noop), 'allows a function')
 
   t.end()
 })
@@ -317,8 +313,8 @@ test('List ap properties (Apply)', t => {
 
 test('List of', t => {
   t.equal(List.of, List([]).of, 'List.of is the same as the instance version')
-  t.equal(List.of(0).type(), 'List', 'returns an Identity')
-  t.same(List.of(0).value(), [ 0 ], 'wraps the value passed into List into an array')
+  t.equal(List.of(0).type(), 'List', 'returns a List')
+  t.same(List.of(0).value(), [ 0 ], 'wraps the value passed into List in an array')
 
   t.end()
 })
@@ -344,20 +340,18 @@ test('List chain errors', t => {
   const chain = bindFunc(List([ 0 ]).chain)
   const f = x => List.of(x)
 
-  t.throws(chain(undefined), TypeError, 'throws when passed undefined')
-  t.throws(chain(null), TypeError, 'throws when passed null')
-  t.throws(chain(0), TypeError, 'throws when passed a falsey number')
-  t.throws(chain(1), TypeError, 'throws when passed a truthy number')
-  t.throws(chain(''), TypeError, 'throws when passed a falsey string')
-  t.throws(chain('string'), TypeError, 'throws when passed a truthy string')
-  t.throws(chain(false), TypeError, 'throws when passed false')
-  t.throws(chain(true), TypeError, 'throws when passed true')
-  t.throws(chain(null), TypeError, 'throws when passed null')
-  t.throws(chain(undefined), TypeError, 'throws when passed undefined')
-  t.throws(chain([]), TypeError, 'throws when passed an array')
-  t.throws(chain({}), TypeError, 'throws when passed an object')
+  t.throws(chain(undefined), TypeError, 'throws with undefined')
+  t.throws(chain(null), TypeError, 'throws with null')
+  t.throws(chain(0), TypeError, 'throw withs falsey number')
+  t.throws(chain(1), TypeError, 'throws with truthy number')
+  t.throws(chain(''), TypeError, 'throws with falsey string')
+  t.throws(chain('string'), TypeError, 'throws with truthy string')
+  t.throws(chain(false), TypeError, 'throws with false')
+  t.throws(chain(true), TypeError, 'throws with true')
+  t.throws(chain([]), TypeError, 'throws with an array')
+  t.throws(chain({}), TypeError, 'throws with an object')
 
-  t.doesNotThrow(chain(f), 'does not throw when passed a function')
+  t.doesNotThrow(chain(f), 'allows a function')
 
   t.end()
 })

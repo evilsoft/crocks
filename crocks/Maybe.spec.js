@@ -18,16 +18,12 @@ test('Maybe', t => {
   const m = Maybe(0)
 
   t.ok(isFunction(Maybe), 'is a function')
-  t.ok(isFunction(Maybe.of), 'provides an of function')
-  t.ok(isFunction(Maybe.type), 'provides a type function')
-  t.equal(Maybe.type, Maybe(0).type, 'static type function matches instance type function')
-
   t.ok(isObject(m), 'returns an object')
 
-  t.ok(isFunction(m.maybe), 'result provides a maybe function')
-  t.ok(isFunction(m.type), 'result provides a type function')
+  t.ok(isFunction(Maybe.of), 'provides an of function')
+  t.ok(isFunction(Maybe.type), 'provides a type function')
 
-  t.throws(Maybe, TypeError, 'throws when no parameters are passed')
+  t.throws(Maybe, TypeError, 'throws with no parameters')
 
   t.end()
 })
@@ -36,7 +32,7 @@ test('Maybe inspect', t => {
   const m = Maybe('great')
   const n = Maybe(null)
 
-  t.ok(isFunction(m.inspect), 'provides an inpsect function')
+  t.ok(isFunction(m.inspect), 'provides an inspect function')
   t.equal(m.inspect(), 'Maybe great', 'returns inspect string')
   t.equal(n.inspect(), 'Maybe.Nothing', 'Nothing returns inspect string')
 
@@ -69,10 +65,10 @@ test('Maybe equals functionality', t => {
   const value = 0
   const nonMaybe = { type: 'Maybe...Not' }
 
-  t.equals(a.equals(c), false, 'returns false when 2 Maybes are not equal')
-  t.equals(a.equals(b), true, 'returns true when 2 Maybes are equal')
-  t.equals(a.equals(value), false, 'returns false when passed a simple value')
-  t.equals(a.equals(nonMaybe), false, 'returns false when passed a non-Maybe')
+  t.equal(a.equals(c), false, 'returns false when 2 Maybes are not equal')
+  t.equal(a.equals(b), true, 'returns true when 2 Maybes are equal')
+  t.equal(a.equals(value), false, 'returns false when passed a simple value')
+  t.equal(a.equals(nonMaybe), false, 'returns false when passed a non-Maybe')
 
   t.end()
 })
@@ -85,10 +81,10 @@ test('Maybe equals properties (Setoid)', t => {
 
   t.ok(isFunction(Maybe(0).equals), 'provides an equals function')
 
-  t.equals(a.equals(a), true, 'reflexivity')
-  t.equals(a.equals(b), b.equals(a), 'symmetry (equal)')
-  t.equals(a.equals(c), c.equals(a), 'symmetry (!equal)')
-  t.equals(a.equals(b) && b.equals(d), a.equals(d), 'transitivity')
+  t.equal(a.equals(a), true, 'reflexivity')
+  t.equal(a.equals(b), b.equals(a), 'symmetry (equal)')
+  t.equal(a.equals(c), c.equals(a), 'symmetry (!equal)')
+  t.equal(a.equals(b) && b.equals(d), a.equals(d), 'transitivity')
 
   t.end()
 })
@@ -106,7 +102,8 @@ test('Maybe map errors', t => {
   t.throws(map(true), TypeError, 'throws with true')
   t.throws(map([]), TypeError, 'throws with an array')
   t.throws(map({}), TypeError, 'throws iwth object')
-  t.doesNotThrow(map(noop), 'does not throw when passed a function')
+
+  t.doesNotThrow(map(noop), 'allows a function')
 
   t.end()
 })
@@ -138,13 +135,14 @@ test('Maybe map properties (Functor)', t => {
   t.ok(isFunction(Maybe(0).map), 'provides a map function')
 
   t.equal(Maybe(0).map(identity).maybe(), 0, 'identity')
-  t.equals(Maybe(10).map(x => f(g(x))).maybe(), Maybe(10).map(g).map(f).maybe(), 'composition')
+  t.equal(Maybe(10).map(x => f(g(x))).maybe(), Maybe(10).map(g).map(f).maybe(), 'composition')
 
   t.end()
 })
 
 test('Maybe ap errors', t => {
   const m   = { type: () => 'Maybe...Not' }
+  const ap  = bindFunc(Maybe(noop).ap)
 
   t.throws(Maybe(0).ap.bind(null, Maybe(0)), TypeError, 'throws when wrapped value is a falsey number')
   t.throws(Maybe(1).ap.bind(null, Maybe(0)), TypeError, 'throws when wrapped value is a truthy number')
@@ -155,16 +153,19 @@ test('Maybe ap errors', t => {
   t.throws(Maybe([]).ap.bind(null, Maybe(0)), TypeError, 'throws when wrapped value is an array')
   t.throws(Maybe({}).ap.bind(null, Maybe(0)), TypeError, 'throws when wrapped value is an object')
 
-  t.throws(Maybe(noop).ap.bind(null, 0), TypeError, 'throws when passed a falsey number')
-  t.throws(Maybe(noop).ap.bind(null, 1), TypeError, 'throws when passed a truthy number')
-  t.throws(Maybe(noop).ap.bind(null, ''), TypeError, 'throws when passed a falsey string')
-  t.throws(Maybe(noop).ap.bind(null, 'string'), TypeError, 'throws when passed a truthy string')
-  t.throws(Maybe(noop).ap.bind(null, false), TypeError, 'throws when passed false')
-  t.throws(Maybe(noop).ap.bind(null, true), TypeError, 'throws when passed true')
-  t.throws(Maybe(noop).ap.bind(null, []), TypeError, 'throws when passed an array')
-  t.throws(Maybe(noop).ap.bind(null, {}), TypeError, 'throws when passed an object')
+  t.throws(ap(undefined), TypeError, 'throws with undefined')
+  t.throws(ap(null), TypeError, 'throws with null')
+  t.throws(ap(0), TypeError, 'throws with falsey number')
+  t.throws(ap(1), TypeError, 'throws with truthy number')
+  t.throws(ap(''), TypeError, 'throws with falsey string')
+  t.throws(ap('string'), TypeError, 'throws with truthy string')
+  t.throws(ap(false), TypeError, 'throws with false')
+  t.throws(ap(true), TypeError, 'throws with true')
+  t.throws(ap([]), TypeError, 'throws with an array')
+  t.throws(ap({}), TypeError, 'throws with an object')
+  t.throws(ap(m), TypeError, 'throws when container types differ')
 
-  t.throws(Maybe(noop).ap.bind(null, m), TypeError, 'throws when container types differ')
+  t.doesNotThrow(ap(Maybe(0)), 'allows a Maybe')
 
   t.end()
 })
@@ -216,17 +217,18 @@ test('Maybe of properties (Applicative)', t => {
 test('Maybe chain errors', t => {
   const chain = bindFunc(Maybe(0).chain)
 
-  t.throws(chain(undefined), TypeError, 'throws when passed undefined')
-  t.throws(chain(null), TypeError, 'throws when passed null')
-  t.throws(chain(0), TypeError, 'throws when passed a falsey number')
-  t.throws(chain(1), TypeError, 'throws when passed a truthy number')
-  t.throws(chain(''), TypeError, 'throws when passed a falsey string')
-  t.throws(chain('string'), TypeError, 'throws when passed a truthy string')
-  t.throws(chain(false), TypeError, 'throws when passed false')
-  t.throws(chain(true), TypeError, 'throws when passed true')
-  t.throws(chain([]), TypeError, 'throws when passed an array')
-  t.throws(chain({}), TypeError, 'throws when passed an object')
-  t.doesNotThrow(chain(noop), 'does not throw when passed a function')
+  t.throws(chain(undefined), TypeError, 'throws with undefined')
+  t.throws(chain(null), TypeError, 'throws with null')
+  t.throws(chain(0), TypeError, 'throws with falsey number')
+  t.throws(chain(1), TypeError, 'throws with truthy number')
+  t.throws(chain(''), TypeError, 'throws with falsey string')
+  t.throws(chain('string'), TypeError, 'throws with truthy string')
+  t.throws(chain(false), TypeError, 'throws with false')
+  t.throws(chain(true), TypeError, 'throws with true')
+  t.throws(chain([]), TypeError, 'throws with an array')
+  t.throws(chain({}), TypeError, 'throws with an object')
+
+  t.doesNotThrow(chain(noop), 'allows a function')
 
   t.end()
 })

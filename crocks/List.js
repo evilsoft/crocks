@@ -106,8 +106,8 @@ function List(xs) {
 
   return {
     inspect, value, type, equals,
-    empty, concat, reduce, filter,
-    map, of, ap, chain
+    concat, empty, reduce, filter,
+    map, ap, of, chain
   }
 }
 

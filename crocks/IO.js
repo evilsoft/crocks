@@ -19,6 +19,7 @@ function IO(run) {
 
   const type    = _type
   const of      = _of
+
   const inspect = constant(`IO${_inspect(run)}`)
 
   function map(fn) {

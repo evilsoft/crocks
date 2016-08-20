@@ -29,8 +29,6 @@ test('flip (C combinator)', t => {
   const result = flip(g, 10, 5)
 
   t.equal(result, x, 'flips arguments')
-  // TODO: curry test helper, for realz
-  // t.equal(g.calledWith(5, 10), 'flips arguments to passed function')
 
   t.end()
 })

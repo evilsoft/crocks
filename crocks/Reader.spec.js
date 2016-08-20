@@ -24,10 +24,6 @@ test('Reader', t => {
   t.ok(isFunction(Reader.of), 'provides an of function')
   t.ok(isFunction(Reader.type), 'provides a type function')
   t.ok(isFunction(Reader.ask), 'provides an ask function')
-  t.equal(Reader.type, Reader(noop).type, 'static type function matches instance type function')
-
-  t.ok(isFunction(m.runWith), 'provides a runWith function')
-  t.ok(isFunction(m.type), 'provides a type function')
 
   t.throws(r(), TypeError, 'throws with no parameters')
 
@@ -42,13 +38,15 @@ test('Reader', t => {
   t.throws(r([]), TypeError, 'throws with array')
   t.throws(r({}), TypeError, 'throws with object')
 
+  t.doesNotThrow(r(noop), 'allows a function')
+
   t.end()
 })
 
 test('Reader inspect', t => {
   const m = Reader(noop)
 
-  t.ok(isFunction(m.inspect), 'provides an inpsect function')
+  t.ok(isFunction(m.inspect), 'provides an inspect function')
   t.equal(m.inspect(), 'Reader Function', 'returns inspect string')
 
   t.end()
@@ -87,7 +85,7 @@ test('Reader ask errors', t => {
   t.throws(ask([]), TypeError, 'throws with an array')
   t.throws(ask({}), TypeError, 'throws with an object')
 
-  t.doesNotThrow(ask(noop), 'allows functions')
+  t.doesNotThrow(ask(noop), 'allows a function')
 
   t.end()
 })
@@ -116,7 +114,8 @@ test('Reader map errors', t => {
   t.throws(map(true), TypeError, 'throws with true')
   t.throws(map([]), TypeError, 'throws with an array')
   t.throws(map({}), TypeError, 'throws with an object')
-  t.doesNotThrow(map(noop), 'allows functions')
+
+  t.doesNotThrow(map(noop), 'allows a function')
 
   t.end()
 })
@@ -155,20 +154,22 @@ test('Reader map properties (Functor)', t => {
 })
 
 test('Reader ap errors', t => {
+  const ap = bindFunc(Reader(noop).ap)
   const m  = { type: () => 'Reader...Not' }
 
-  t.throws(Reader(noop).ap.bind(null, undefined), TypeError, 'throws when passed undefined')
-  t.throws(Reader(noop).ap.bind(null, null), TypeError, 'throws when passed null')
-  t.throws(Reader(noop).ap.bind(null, 0), TypeError, 'throws when passed a falsey number')
-  t.throws(Reader(noop).ap.bind(null, 1), TypeError, 'throws when passed a truthy number')
-  t.throws(Reader(noop).ap.bind(null, ''), TypeError, 'throws when passed a falsey string')
-  t.throws(Reader(noop).ap.bind(null, 'string'), TypeError, 'throws when passed a truthy string')
-  t.throws(Reader(noop).ap.bind(null, false), TypeError, 'throws when passed false')
-  t.throws(Reader(noop).ap.bind(null, true), TypeError, 'throws when passed true')
-  t.throws(Reader(noop).ap.bind(null, []), TypeError, 'throws when passed an array')
-  t.throws(Reader(noop).ap.bind(null, {}), TypeError, 'throws when passed an object')
+  t.throws(ap(undefined), TypeError, 'throws with undefined')
+  t.throws(ap(null), TypeError, 'throws with null')
+  t.throws(ap(0), TypeError, 'throws with falsey number')
+  t.throws(ap(1), TypeError, 'throws with truthy number')
+  t.throws(ap(''), TypeError, 'throws with falsey string')
+  t.throws(ap('string'), TypeError, 'throws with truthy string')
+  t.throws(ap(false), TypeError, 'throws with false')
+  t.throws(ap(true), TypeError, 'throws with true')
+  t.throws(ap([]), TypeError, 'throws with an array')
+  t.throws(ap({}), TypeError, 'throws with an object')
+  t.throws(ap(m), TypeError, 'throws when Non-Reader')
 
-  t.throws(Reader(noop).ap.bind(null, m), TypeError, 'throws when container types differ')
+  t.doesNotThrow(ap(Reader(noop)), 'allows a function')
 
   t.end()
 })
@@ -228,11 +229,10 @@ test('Reader chain errors', t => {
   t.throws(chain('string'), TypeError, 'throws with truthy string')
   t.throws(chain(false), TypeError, 'throws with false')
   t.throws(chain(true), TypeError, 'throws with true')
-  t.throws(chain(null), TypeError, 'throws with null')
   t.throws(chain([]), TypeError, 'throws with an array')
   t.throws(chain({}), TypeError, 'throws with an object')
 
-  t.doesNotThrow(chain(noop), 'does not throw when passed a function')
+  t.doesNotThrow(chain(noop), 'allows a function')
 
   t.end()
 })

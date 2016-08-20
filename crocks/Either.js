@@ -25,16 +25,17 @@ function Either(l, r) {
     throw new TypeError('Either: Requires at least one of its arguments to be non-null')
   }
 
-  const inspect = constant(
-    either(
-      constant(`Either.Left${_inspect(l)}`),
-      constant(`Either.Right${_inspect(r)}`)
-    ))
-
   const type    = _type
   const value   = () => isLeft(l) ? l : r
   const equals  = m => isType(type(), m) && m.either(isEqual(l), isEqual(r))
   const of      = _of
+
+  const inspect = constant(
+    either(
+      constant(`Either.Left${_inspect(l)}`),
+      constant(`Either.Right${_inspect(r)}`)
+    )
+  )
 
   function either(lf, rf) {
     if(!isFunction(lf) || !isFunction(rf)) {
@@ -72,9 +73,8 @@ function Either(l, r) {
   }
 
   return {
-    inspect, either, value,
-    type, equals, map,
-    ap, of, chain
+    inspect, either, value, type,
+    equals, map, ap, of, chain
   }
 }
 

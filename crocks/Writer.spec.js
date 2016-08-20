@@ -24,10 +24,9 @@ test('Writer', t => {
 
   t.ok(isFunction(Writer.of), 'provides an of function')
   t.ok(isFunction(Writer.type), 'provides a type function')
-  t.equal(Writer.type, w.type, 'static type function matches instance type function')
 
-  t.throws(f(), TypeError, 'throws when no parameters are passed')
-  t.throws(f(0), TypeError, 'throws when one parameter is passed')
+  t.throws(f(), TypeError, 'throws with no parameters')
+  t.throws(f(0), TypeError, 'throws with one parameter')
 
   t.end()
 })
@@ -35,7 +34,7 @@ test('Writer', t => {
 test('Writer inspect', t => {
   const m = Writer(0, 0)
 
-  t.ok(isFunction(m.inspect), 'provides an inpsect function')
+  t.ok(isFunction(m.inspect), 'provides an inspect function')
   t.equal(m.inspect(), 'Writer( [ 0 ] 0 )', 'returns inspect string')
 
   t.end()
@@ -44,8 +43,8 @@ test('Writer inspect', t => {
 test('Writer type', t => {
   const m = Writer(0, 0)
 
-  t.ok(isFunction(m.type), 'provides a type function')
-  t.equal(m.type(), 'Writer', 'type returns Writer')
+  t.ok(isFunction(m.type), 'is a function')
+  t.equal(m.type(), 'Writer', 'returns Writer')
   t.end()
 })
 
@@ -56,6 +55,7 @@ test('Writer read', t => {
 
   t.ok(isFunction(m.read), 'is a function')
   t.ok(isObject(m.read()),'returns an object' )
+
   t.equal(m.read().value, x,'returns the wrapped value on the value key' )
   t.same(m.read().log, [ l ],'returns the wrapped log on the log key in an array' )
 
@@ -116,17 +116,18 @@ test('Writer equals properties (Setoid)', t => {
 test('Writer map errors', t => {
   const map = bindFunc(Writer(0, 0).map)
 
-  t.throws(map(undefined), TypeError, 'throws when passed undefined')
-  t.throws(map(null), TypeError, 'throws when passed null')
-  t.throws(map(0), TypeError, 'throws when passed falsey number')
-  t.throws(map(1), TypeError, 'throws when passed truthy number')
-  t.throws(map(''), TypeError, 'throws when passed falsey string')
-  t.throws(map('string'), TypeError, 'throws when passed truthy string')
-  t.throws(map(false), TypeError, 'throws when passed false')
-  t.throws(map(true), TypeError, 'throws when passed true')
-  t.throws(map([]), TypeError, 'throws when passed an array')
-  t.throws(map({}), TypeError, 'throws when passed an object')
-  t.doesNotThrow(map(noop))
+  t.throws(map(undefined), TypeError, 'throws with undefined')
+  t.throws(map(null), TypeError, 'throws with null')
+  t.throws(map(0), TypeError, 'throws with falsey number')
+  t.throws(map(1), TypeError, 'throws with truthy number')
+  t.throws(map(''), TypeError, 'throws with falsey string')
+  t.throws(map('string'), TypeError, 'throws with truthy string')
+  t.throws(map(false), TypeError, 'throws with false')
+  t.throws(map(true), TypeError, 'throws with true')
+  t.throws(map([]), TypeError, 'throws with an array')
+  t.throws(map({}), TypeError, 'throws with an object')
+
+  t.doesNotThrow(map(noop), 'allows a function')
 
   t.end()
 })
@@ -165,6 +166,7 @@ test('Writer map properties (Functor)', t => {
 test('Writer ap errors', t => {
   const m = { type: () => 'Writer...Not' }
   const w = Writer(0, 0)
+  const ap  = bindFunc(Writer(0, noop).ap)
 
   t.throws(Writer(0, undefined).ap.bind(null, w), TypeError, 'throws when wrapped value is undefined')
   t.throws(Writer(0, null).ap.bind(null, w), TypeError, 'throws when wrapped value is null')
@@ -177,18 +179,19 @@ test('Writer ap errors', t => {
   t.throws(Writer(0, []).ap.bind(null, w), TypeError, 'throws when wrapped value is an array')
   t.throws(Writer(0, {}).ap.bind(null, w), TypeError, 'throws when wrapped value is an object')
 
-  t.throws(Writer(0, noop).ap.bind(null, undefined), TypeError, 'throws when passed undefined')
-  t.throws(Writer(0, noop).ap.bind(null, null), TypeError, 'throws when passed null')
-  t.throws(Writer(0, noop).ap.bind(null, 0), TypeError, 'throws when passed a falsey number')
-  t.throws(Writer(0, noop).ap.bind(null, 1), TypeError, 'throws when passed a truthy number')
-  t.throws(Writer(0, noop).ap.bind(null, ''), TypeError, 'throws when passed a falsey string')
-  t.throws(Writer(0, noop).ap.bind(null, 'string'), TypeError, 'throws when passed a truthy string')
-  t.throws(Writer(0, noop).ap.bind(null, false), TypeError, 'throws when passed false')
-  t.throws(Writer(0, noop).ap.bind(null, true), TypeError, 'throws when passed true')
-  t.throws(Writer(0, noop).ap.bind(null, []), TypeError, 'throws when passed an array')
-  t.throws(Writer(0, noop).ap.bind(null, {}), TypeError, 'throws when passed an object')
+  t.throws(ap(undefined), TypeError, 'throws with undefined')
+  t.throws(ap(null), TypeError, 'throws with null')
+  t.throws(ap(0), TypeError, 'throws with falsey number')
+  t.throws(ap(1), TypeError, 'throws with truthy number')
+  t.throws(ap(''), TypeError, 'throws with falsey string')
+  t.throws(ap('string'), TypeError, 'throws with truthy string')
+  t.throws(ap(false), TypeError, 'throws with false')
+  t.throws(ap(true), TypeError, 'throws with true')
+  t.throws(ap([]), TypeError, 'throws with an array')
+  t.throws(ap({}), TypeError, 'throws with an object')
+  t.throws(ap(m), TypeError, 'throws with Non-Writer')
 
-  t.throws(Writer(0, noop).ap.bind(null, m), TypeError, 'throws when container types differ')
+  t.doesNotThrow(ap(Writer(0, 0)), 'allows a Writer')
 
   t.end()
 })
@@ -248,19 +251,18 @@ test('Writer chain errors', t => {
   const chain = bindFunc(m.chain)
   const fn    = x => Writer(0, x)
 
-  t.throws(chain(undefined), TypeError, 'throws when passed undefined')
-  t.throws(chain(null), TypeError, 'throws when passed null')
-  t.throws(chain(0), TypeError, 'throws when passed a falsey number')
-  t.throws(chain(1), TypeError, 'throws when passed a truthy number')
-  t.throws(chain(''), TypeError, 'throws when passed a falsey string')
-  t.throws(chain('string'), TypeError, 'throws when passed a truthy string')
-  t.throws(chain(false), TypeError, 'throws when passed false')
-  t.throws(chain(true), TypeError, 'throws when passed true')
-  t.throws(chain(null), TypeError, 'throws when passed null')
-  t.throws(chain(undefined), TypeError, 'throws when passed undefined')
-  t.throws(chain([]), TypeError, 'throws when passed an array')
-  t.throws(chain({}), TypeError, 'throws when passed an object')
-  t.doesNotThrow(chain(fn), 'does not throw when passed a function')
+  t.throws(chain(undefined), TypeError, 'throws with undefined')
+  t.throws(chain(null), TypeError, 'throws with null')
+  t.throws(chain(0), TypeError, 'throws with falsey number')
+  t.throws(chain(1), TypeError, 'throws with truthy number')
+  t.throws(chain(''), TypeError, 'throws with falsey string')
+  t.throws(chain('string'), TypeError, 'throws with truthy string')
+  t.throws(chain(false), TypeError, 'throws with false')
+  t.throws(chain(true), TypeError, 'throws with true')
+  t.throws(chain([]), TypeError, 'throws with an array')
+  t.throws(chain({}), TypeError, 'throws with an object')
+
+  t.doesNotThrow(chain(fn), 'allows a function')
 
   t.end()
 })
@@ -305,25 +307,26 @@ test('Writer chain properties (Monad)', t => {
 test('Writer reduceLog errors', t => {
   const reduceLog = bindFunc(Writer(0, 0).reduceLog)
 
-  t.throws(reduceLog(undefined), TypeError, 'throws when passed undefined')
-  t.throws(reduceLog(null), TypeError, 'throws when passed null')
-  t.throws(reduceLog(0), TypeError, 'throws when passed falsey number')
-  t.throws(reduceLog(1), TypeError, 'throws when passed truthy number')
-  t.throws(reduceLog(''), TypeError, 'throws when passed falsey string')
-  t.throws(reduceLog('string'), TypeError, 'throws when passed truthy string')
-  t.throws(reduceLog(false), TypeError, 'throws when passed false')
-  t.throws(reduceLog(true), TypeError, 'throws when passed true')
-  t.throws(reduceLog([]), TypeError, 'throws when passed an array')
-  t.throws(reduceLog({}), TypeError, 'throws when passed an object')
-  t.doesNotThrow(reduceLog(noop))
+  t.throws(reduceLog(undefined), TypeError, 'throws with undefined')
+  t.throws(reduceLog(null), TypeError, 'throws with null')
+  t.throws(reduceLog(0), TypeError, 'throws with falsey number')
+  t.throws(reduceLog(1), TypeError, 'throws with truthy number')
+  t.throws(reduceLog(''), TypeError, 'throws with falsey string')
+  t.throws(reduceLog('string'), TypeError, 'throws with truthy string')
+  t.throws(reduceLog(false), TypeError, 'throws with false')
+  t.throws(reduceLog(true), TypeError, 'throws with true')
+  t.throws(reduceLog([]), TypeError, 'throws with an array')
+  t.throws(reduceLog({}), TypeError, 'throws with an object')
+
+  t.doesNotThrow(reduceLog(noop), 'allows a function')
 
   t.end()
 })
 
 test('Writer reduceLog', t => {
-  const w = Writer(0, 0)
-  const f = _ => Writer(1, 0)
-  const g = _ => Writer(2, 0)
+  const w   = Writer(0, 0)
+  const f   = _ => Writer(1, 0)
+  const g   = _ => Writer(2, 0)
   const add = (x, y) => x + y
 
   const result = w.chain(f).chain(g).reduceLog(add, 0)

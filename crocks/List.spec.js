@@ -23,9 +23,7 @@ test('List', t => {
   t.ok(isFunction(List.of), 'provides an of function')
   t.ok(isFunction(List.type), 'provides a type function')
 
-  t.equals(List.type, List([]).type, 'static type function matches instance type function')
-
-  t.throws(List, TypeError, 'throws when no parameters are passed')
+  t.throws(List, TypeError, 'throws with no parameters')
   t.throws(m(undefined), TypeError, 'throws with undefined')
   t.throws(m(null), TypeError, 'throws with null')
   t.throws(m(0), TypeError, 'throws with falsey number')
@@ -35,6 +33,7 @@ test('List', t => {
   t.throws(m(false), TypeError, 'throws with false')
   t.throws(m(true), TypeError, 'throws with true')
   t.throws(m({}), TypeError, 'throws with an object')
+
   t.doesNotThrow(m([]), TypeError, 'allows an array')
 
   t.end()
@@ -70,10 +69,10 @@ test('List equals functionality', t => {
   const value = 'yep'
   const nonList = { type: 'List...Not' }
 
-  t.equals(a.equals(c), false, 'returns false when 2 Lists are not equal')
-  t.equals(a.equals(b), true, 'returns true when 2 Lists are equal')
-  t.equals(a.equals(value), false, 'returns false when passed a simple value')
-  t.equals(a.equals(nonList), false, 'returns false when passed a non-List')
+  t.equal(a.equals(c), false, 'returns false when 2 Lists are not equal')
+  t.equal(a.equals(b), true, 'returns true when 2 Lists are equal')
+  t.equal(a.equals(value), false, 'returns false when passed a simple value')
+  t.equal(a.equals(nonList), false, 'returns false when passed a non-List')
 
   t.end()
 })
@@ -86,10 +85,10 @@ test('List equals properties (Setoid)', t => {
 
   t.ok(isFunction(List([]).equals), 'provides an equals function')
 
-  t.equals(a.equals(a), true, 'reflexivity')
-  t.equals(a.equals(b), b.equals(a), 'symmetry (equal)')
-  t.equals(a.equals(c), c.equals(a), 'symmetry (!equal)')
-  t.equals(a.equals(b) && b.equals(d), a.equals(d), 'transitivity')
+  t.equal(a.equals(a), true, 'reflexivity')
+  t.equal(a.equals(b), b.equals(a), 'symmetry (equal)')
+  t.equal(a.equals(c), c.equals(a), 'symmetry (!equal)')
+  t.equal(a.equals(b) && b.equals(d), a.equals(d), 'transitivity')
 
   t.end()
 })

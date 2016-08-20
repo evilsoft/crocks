@@ -41,8 +41,6 @@ test('substitution (S combinator)', t => {
 
   const result = sub(f, g, 2)
 
-  // TODO: build helper for spies on curried functions
-  // need better coverage on this here flow
   t.equal(result, 4, 'returns expected result')
 
   t.end()

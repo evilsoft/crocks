@@ -21,9 +21,8 @@ test('Identity', t => {
 
   t.ok(isFunction(Identity.of), 'provides an of function')
   t.ok(isFunction(Identity.type), 'provides a type function')
-  t.equal(Identity.type, m.type, 'static type function matches instance type function')
 
-  t.throws(Identity, TypeError, 'throws when no parameters are passed')
+  t.throws(Identity, TypeError, 'throws with no parameters')
 
   t.end()
 })
@@ -63,10 +62,10 @@ test('Identity equals functionality', t => {
   const value       = 0
   const nonIdentity = { type: 'Identity...Not' }
 
-  t.equals(a.equals(c), false, 'returns false when 2 Identities are not equal')
-  t.equals(a.equals(b), true, 'returns true when 2 Identities are equal')
-  t.equals(a.equals(value), false, 'returns false when passed a simple value')
-  t.equals(a.equals(nonIdentity), false, 'returns false when passed a non-Identity')
+  t.equal(a.equals(c), false, 'returns false when 2 Identities are not equal')
+  t.equal(a.equals(b), true, 'returns true when 2 Identities are equal')
+  t.equal(a.equals(value), false, 'returns false when passed a simple value')
+  t.equal(a.equals(nonIdentity), false, 'returns false when passed a non-Identity')
 
   t.end()
 })
@@ -78,10 +77,10 @@ test('Identity equals properties (Setoid)', t => {
   const d = Identity(0)
 
   t.ok(isFunction(Identity(0).equals), 'provides an equals function')
-  t.equals(a.equals(a), true, 'reflexivity')
-  t.equals(a.equals(b), b.equals(a), 'symmetry (equal)')
-  t.equals(a.equals(c), c.equals(a), 'symmetry (!equal)')
-  t.equals(a.equals(b) && b.equals(d), a.equals(d), 'transitivity')
+  t.equal(a.equals(a), true, 'reflexivity')
+  t.equal(a.equals(b), b.equals(a), 'symmetry (equal)')
+  t.equal(a.equals(c), c.equals(a), 'symmetry (!equal)')
+  t.equal(a.equals(b) && b.equals(d), a.equals(d), 'transitivity')
 
   t.end()
 })

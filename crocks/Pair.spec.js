@@ -16,18 +16,12 @@ test('Pair', t => {
   const x = Pair(0, 0)
 
   t.ok(isFunction(Pair), 'is a function')
-
-  t.ok(isFunction(Pair.type), 'provides a type function')
-  t.equal(Pair.type, x.type, 'static type function matches instance type function')
-
   t.ok(isObject(x), 'returns an object')
 
-  t.ok(isFunction(x.value), 'result provides a value function')
-  t.ok(isFunction(x.fst), 'result provides a fst function')
-  t.ok(isFunction(x.snd), 'result provides a snd function')
+  t.ok(isFunction(Pair.type), 'provides a type function')
 
-  t.throws(m(), TypeError, 'throws when no parameters are passed')
-  t.throws(m(1), TypeError, 'throws when only one parameter is passed')
+  t.throws(m(), TypeError, 'throws with no parameters')
+  t.throws(m(1), TypeError, 'throws with one parameter')
 
   t.end()
 })
@@ -76,10 +70,10 @@ test('Pair equals functionality', t => {
   const value = 'yep'
   const nonPair = { type: 'Pair...Not' }
 
-  t.equals(a.equals(c), false, 'returns false when 2 Pairs are not equal')
-  t.equals(a.equals(b), true, 'returns true when 2 Pairs are equal')
-  t.equals(a.equals(value), false, 'returns false when passed a simple value')
-  t.equals(a.equals(nonPair), false, 'returns false when passed a non-Pair')
+  t.equal(a.equals(c), false, 'returns false when 2 Pairs are not equal')
+  t.equal(a.equals(b), true, 'returns true when 2 Pairs are equal')
+  t.equal(a.equals(value), false, 'returns false when passed a simple value')
+  t.equal(a.equals(nonPair), false, 'returns false when passed a non-Pair')
 
   t.end()
 })
@@ -92,10 +86,10 @@ test('Pair equals properties (Setoid)', t => {
 
   t.ok(isFunction(Pair(0, 0).equals), 'provides an equals function')
 
-  t.equals(a.equals(a), true, 'reflexivity')
-  t.equals(a.equals(b), b.equals(a), 'symmetry (equal)')
-  t.equals(a.equals(c), c.equals(a), 'symmetry (!equal)')
-  t.equals(a.equals(b) && b.equals(d), a.equals(d), 'transitivity')
+  t.equal(a.equals(a), true, 'reflexivity')
+  t.equal(a.equals(b), b.equals(a), 'symmetry (equal)')
+  t.equal(a.equals(c), c.equals(a), 'symmetry (!equal)')
+  t.equal(a.equals(b) && b.equals(d), a.equals(d), 'transitivity')
 
   t.end()
 })
@@ -150,7 +144,8 @@ test('Pair map errors', t => {
   t.throws(map(true), TypeError, 'throws with true')
   t.throws(map([]), TypeError, 'throws with an array')
   t.throws(map({}), TypeError, 'throws with object')
-  t.doesNotThrow(map(noop), 'does not throw when passed a function')
+
+  t.doesNotThrow(map(noop), 'allows a function')
 
   t.end()
 })
@@ -160,8 +155,8 @@ test('Pair map functionality', t => {
   const n = m.map(x => x + 5)
 
   t.equal(m.map(identity).type(), 'Pair', 'returns a Pair')
-  t.equals(n.fst(), 5, 'Does not modify first value')
-  t.equals(n.snd(), 50, 'applies function to second value')
+  t.equal(n.fst(), 5, 'Does not modify first value')
+  t.equal(n.snd(), 50, 'applies function to second value')
 
   t.end()
 })
@@ -173,7 +168,12 @@ test('Pair map properties (Functor)', t => {
   t.ok(isFunction(Pair(0, 0).map), 'provides a map function')
 
   t.same(Pair(0, 45).map(identity).value(), [ 0, 45 ], 'identity')
-  t.same(Pair(50, 22).map(x => f(g(x))).value(), Pair(50, 22).map(g).map(f).value(), 'composition')
+
+  t.same(
+    Pair(50, 22).map(x => f(g(x))).value(),
+    Pair(50, 22).map(g).map(f).value(),
+    'composition'
+  )
 
   t.end()
 })
@@ -203,7 +203,7 @@ test('Pair bimap errors', t => {
   t.throws(bimap(noop, []), TypeError, 'throws with an array in second argument')
   t.throws(bimap(noop, {}), TypeError, 'throws with object in second argument')
 
-  t.doesNotThrow(bimap(noop, noop), 'does not throw when passed a function')
+  t.doesNotThrow(bimap(noop, noop), 'allows functions')
 
   t.end()
 })
@@ -216,8 +216,8 @@ test('Pair bimap functionality', t => {
   const n = m.bimap(add5, add7)
 
   t.equal(m.bimap(identity, identity).type(), 'Pair', 'returns a Pair')
-  t.equals(n.fst(), 10, 'applies the first function to the first value')
-  t.equals(n.snd(), 55, 'applies the second function to second value')
+  t.equal(n.fst(), 10, 'applies the first function to the first value')
+  t.equal(n.snd(), 55, 'applies the second function to second value')
 
   t.end()
 })
@@ -244,7 +244,7 @@ test('Pair bimap properties (Bifunctor)', t => {
 test('Pair ap errors', t => {
   const m     = { type: () => 'Pair...Not' }
   const badAp = bindFunc(Pair(0, 0).ap)
-  const ap    = bindFunc(Pair([], 0).ap)
+  const ap    = bindFunc(Pair([], noop).ap)
 
   t.throws(badAp(Pair([], noop)), TypeError, 'throws if wrapped first value is not a Semigroup')
   t.throws(ap(Pair(0, noop)), TypeError, 'throws if Pair with a non-Semigroup as first value is provided')
@@ -258,16 +258,17 @@ test('Pair ap errors', t => {
   t.throws(Pair([], []).ap.bind(null, Pair([], 0)), TypeError, 'throws when second wrapped value is an array')
   t.throws(Pair([], {}).ap.bind(null, Pair([], 0)), TypeError, 'throws when second wrapped value is an object')
 
-  t.throws(Pair([], noop).ap.bind(null, 0), TypeError, 'throws when passed a falsey number')
-  t.throws(Pair([], noop).ap.bind(null, 1), TypeError, 'throws when passed a truthy number')
-  t.throws(Pair([], noop).ap.bind(null, ''), TypeError, 'throws when passed a falsey string')
-  t.throws(Pair([], noop).ap.bind(null, 'string'), TypeError, 'throws when passed a truthy string')
-  t.throws(Pair([], noop).ap.bind(null, false), TypeError, 'throws when passed false')
-  t.throws(Pair([], noop).ap.bind(null, true), TypeError, 'throws when passed true')
-  t.throws(Pair([], noop).ap.bind(null, []), TypeError, 'throws when passed an array')
-  t.throws(Pair([], noop).ap.bind(null, {}), TypeError, 'throws when passed an object')
+  t.throws(ap(0), TypeError, 'throws with falsey number')
+  t.throws(ap(1), TypeError, 'throws with truthy number')
+  t.throws(ap(''), TypeError, 'throws with falsey string')
+  t.throws(ap('string'), TypeError, 'throws with truthy string')
+  t.throws(ap(false), TypeError, 'throws with false')
+  t.throws(ap(true), TypeError, 'throws with true')
+  t.throws(ap([]), TypeError, 'throws with an array')
+  t.throws(ap({}), TypeError, 'throws with an object')
+  t.throws(ap(m), TypeError, 'throws when non-Pair')
 
-  t.throws(Pair([], noop).ap.bind(null, m), TypeError, 'throws when container types differ')
+  t.doesNotThrow(ap(Pair([], 22)), 'allows a Pair')
 
   t.end()
 })
@@ -296,16 +297,16 @@ test('Pair chain errors', t => {
   t.throws(badChain(noop), TypeError, 'throws if wrapped first value is not a Semigroup')
   t.throws(chain(badFn), TypeError, 'throws if monadic function returns a Pair with a non-Semigroup as first value')
 
-  t.throws(chain(undefined), TypeError, 'throws when passed undefined')
-  t.throws(chain(null), TypeError, 'throws when passed null')
-  t.throws(chain(0), TypeError, 'throws when passed a falsey number')
-  t.throws(chain(1), TypeError, 'throws when passed a truthy number')
-  t.throws(chain(''), TypeError, 'throws when passed a falsey string')
-  t.throws(chain('string'), TypeError, 'throws when passed a truthy string')
-  t.throws(chain(false), TypeError, 'throws when passed false')
-  t.throws(chain(true), TypeError, 'throws when passed true')
-  t.throws(chain([]), TypeError, 'throws when passed an array')
-  t.throws(chain({}), TypeError, 'throws when passed an object')
+  t.throws(chain(undefined), TypeError, 'throws with undefined')
+  t.throws(chain(null), TypeError, 'throws with null')
+  t.throws(chain(0), TypeError, 'throws with falsey number')
+  t.throws(chain(1), TypeError, 'throws with truthy number')
+  t.throws(chain(''), TypeError, 'throws with falsey string')
+  t.throws(chain('string'), TypeError, 'throws with truthy string')
+  t.throws(chain(false), TypeError, 'throws with false')
+  t.throws(chain(true), TypeError, 'throws with true')
+  t.throws(chain([]), TypeError, 'throws with an array')
+  t.throws(chain({}), TypeError, 'throws with an object')
 
   t.doesNotThrow(chain(fn), 'does not throw when passed a function')
 

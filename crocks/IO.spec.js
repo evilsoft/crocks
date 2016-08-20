@@ -23,10 +23,6 @@ test('IO', t => {
 
   t.ok(isFunction(IO.of), 'provides an of function')
   t.ok(isFunction(IO.type), 'provides a type function')
-  t.equal(IO.type, IO(noop).type, 'static type function matches instance type function')
-
-  t.ok(isFunction(m.run), 'provides a value function')
-  t.ok(isFunction(m.type), 'provides a type function')
 
   t.throws(io(), TypeError, 'throws with no parameters')
 
@@ -40,6 +36,8 @@ test('IO', t => {
   t.throws(io(true), TypeError, 'throws with true')
   t.throws(io([]), TypeError, 'throws with array')
   t.throws(io({}), TypeError, 'throws with object')
+
+  t.doesNotThrow(io(noop), 'allows a function')
 
   t.end()
 })

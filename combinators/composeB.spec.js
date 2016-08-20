@@ -44,7 +44,7 @@ test('composeB (B combinator)', t => {
   t.ok(f.calledAfter(g), 'calls second function before the first')
   t.ok(g.calledWith(x), 'third argument passed into second function')
   t.ok(f.calledWith(g.returnValues[0]), 'first function passed result of second function')
-  t.equal(result, f.returnValues[0], 'return the result of the first function')
+  t.equal(result, f.returnValues[0], 'returns the result of the first function')
 
   t.end()
 })

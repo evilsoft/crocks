@@ -13,12 +13,12 @@ function Pair(f, s) {
     throw new TypeError('Pair: Must provide a first and second value')
   }
 
-  const inspect = () => `Pair [${_inspect(f)},${_inspect(s)} ]`
-
   const type  = _type
   const value = constant([ f, s ])
   const fst   = constant(f)
   const snd   = constant(s)
+
+  const inspect = () => `Pair [${_inspect(f)},${_inspect(s)} ]`
 
   function equals(m) {
     return isType(type(), m)
@@ -27,7 +27,7 @@ function Pair(f, s) {
   }
 
   function concat(m) {
-    if(!isType(type(), m)) {
+    if(!(m && isType(type(), m))) {
       throw new TypeError('Pair.concat: Pair required')
     }
     else if(!isSemigroup(fst()) || !isSemigroup(snd())) {
@@ -69,11 +69,11 @@ function Pair(f, s) {
     else if(!isSemigroup(fst())) {
       throw new TypeError('Pair.ap: Semigroup required for first value')
     }
+    else if(!(m && isType(type(), m))) {
+      throw new TypeError('Pair.ap: Pair required')
+    }
     else if(!isSemigroup(m.fst())) {
       throw new TypeError('Pair.ap: Semigroup required for first value')
-    }
-    else if(!isType(type(), m)) {
-      throw new TypeError('Pair.ap: Pair required')
     }
 
     return chain(fn => m.map(fn))
@@ -100,8 +100,9 @@ function Pair(f, s) {
   }
 
   return {
-    type, value, fst, snd, inspect,
-    equals, concat, map, bimap, ap, chain
+    inspect, value, fst, snd,
+    type, equals, concat,
+    map, bimap, ap, chain
   }
 }
 

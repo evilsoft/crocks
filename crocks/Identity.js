@@ -53,8 +53,8 @@ function Identity(x) {
 
 
   return {
-    inspect, value, type,
-    equals, map, ap, of, chain
+    inspect, value, type, equals,
+    map, ap, of, chain
   }
 }
 

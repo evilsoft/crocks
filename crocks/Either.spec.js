@@ -20,21 +20,16 @@ test('Either', t => {
   const e = bindFunc(Either)
 
   t.ok(isFunction(Either), 'is a function')
+  t.ok(isObject(m), 'returns an object')
+
   t.ok(isFunction(Either.of), 'provides an of function')
   t.ok(isFunction(Either.type), 'provides a type function')
   t.ok(isFunction(Either.Left), 'provides a Left function')
   t.ok(isFunction(Either.Right), 'provides a Right function')
 
-  t.ok(isObject(m), 'returns an object')
-
-  t.ok(isFunction(m.either), 'result provides an either function')
-  t.ok(isFunction(m.value), 'result provides a value function')
-  t.ok(isFunction(m.type), 'result provides a type function')
-  t.equal(Either.type, m.type, 'static type function matches instance type function')
-
-  t.throws(Either, TypeError, 'throws when no parameters are passed')
-  t.throws(e(0), TypeError, 'throws when one parameter is passed')
-  t.throws(e(null, null), TypeError, 'throws when two nulls are passed')
+  t.throws(Either, TypeError, 'throws with no parameters')
+  t.throws(e(0), TypeError, 'throws with one parameter')
+  t.throws(e(null, null), TypeError, 'throws with two nulls')
 
   t.end()
 })
@@ -59,7 +54,7 @@ test('Either inspect', t => {
   const l = Either.Left(0)
   const r = Either.Right(1)
 
-  t.ok(isFunction(l.inspect), 'Left provides an inpsect function')
+  t.ok(isFunction(l.inspect), 'Left provides an inspect function')
   t.ok(isFunction(r.inspect), 'Right provides an inpsect function')
 
   t.equal(l.inspect(), 'Either.Left 0', 'Left returns inspect string')
@@ -128,16 +123,16 @@ test('Either equals functionality', t => {
   const value = 1
   const nonEither = { type: 'Either...Not' }
 
-  t.equals(la.equals(lc), false, 'returns false when 2 Left Eithers are not equal')
-  t.equals(la.equals(lb), true, 'returns true when 2 Left Eithers are equal')
-  t.equals(lc.equals(value), false, 'returns when Left passed a simple value')
+  t.equal(la.equals(lc), false, 'returns false when 2 Left Eithers are not equal')
+  t.equal(la.equals(lb), true, 'returns true when 2 Left Eithers are equal')
+  t.equal(lc.equals(value), false, 'returns when Left passed a simple value')
 
-  t.equals(ra.equals(rc), false, 'returns false when 2 Right Eithers are not equal')
-  t.equals(ra.equals(rb), true, 'returns true when 2 Right Eithers are equal')
-  t.equals(rc.equals(value), false, 'returns when Right passed a simple value')
+  t.equal(ra.equals(rc), false, 'returns false when 2 Right Eithers are not equal')
+  t.equal(ra.equals(rb), true, 'returns true when 2 Right Eithers are equal')
+  t.equal(rc.equals(value), false, 'returns when Right passed a simple value')
 
-  t.equals(la.equals(nonEither), false, 'returns false when passed a non-Either')
-  t.equals(ra.equals(lb), false, 'returns true when 2 Eithers are equal')
+  t.equal(la.equals(nonEither), false, 'returns false when passed a non-Either')
+  t.equal(ra.equals(lb), false, 'returns true when 2 Eithers are equal')
 
   t.end()
 })
@@ -155,15 +150,15 @@ test('Either equals properties (Setoid)', t => {
 
   t.ok(isFunction(Either(null, 0).equals), 'provides an equals function')
 
-  t.equals(la.equals(la), true, 'Left reflexivity')
-  t.equals(la.equals(lb), lb.equals(la), 'Left symmetry (equal)')
-  t.equals(la.equals(lc), lc.equals(la), 'Left symmetry (!equal)')
-  t.equals(la.equals(lb) && lb.equals(ld), la.equals(ld), 'Left transitivity')
+  t.equal(la.equals(la), true, 'Left reflexivity')
+  t.equal(la.equals(lb), lb.equals(la), 'Left symmetry (equal)')
+  t.equal(la.equals(lc), lc.equals(la), 'Left symmetry (!equal)')
+  t.equal(la.equals(lb) && lb.equals(ld), la.equals(ld), 'Left transitivity')
 
-  t.equals(ra.equals(ra), true, 'Right reflexivity')
-  t.equals(ra.equals(rb), rb.equals(ra), 'Right symmetry (equal)')
-  t.equals(ra.equals(rc), rc.equals(ra), 'Right symmetry (!equal)')
-  t.equals(ra.equals(rb) && rb.equals(rd), ra.equals(rd), 'Right transitivity')
+  t.equal(ra.equals(ra), true, 'Right reflexivity')
+  t.equal(ra.equals(rb), rb.equals(ra), 'Right symmetry (equal)')
+  t.equal(ra.equals(rc), rc.equals(ra), 'Right symmetry (!equal)')
+  t.equal(ra.equals(rb) && rb.equals(rd), ra.equals(rd), 'Right transitivity')
 
   t.end()
 })
@@ -224,10 +219,10 @@ test('Either map properties (Functor)', t => {
   t.ok(isFunction(Either.Right(0).map), 'right provides a map function')
 
   t.equal(Either.Right(30).map(identity).value(), 30, 'Right identity')
-  t.equals(Either.Right(10).map(x => f(g(x))).value(), Either.Right(10).map(g).map(f).value(), 'Right composition')
+  t.equal(Either.Right(10).map(x => f(g(x))).value(), Either.Right(10).map(g).map(f).value(), 'Right composition')
 
   t.equal(Either.Left(45).map(identity).value(), 45, 'Left identity')
-  t.equals(Either.Left(10).map(x => f(g(x))).value(), Either.Left(10).map(g).map(f).value(), 'Left composition')
+  t.equal(Either.Left(10).map(x => f(g(x))).value(), Either.Left(10).map(g).map(f).value(), 'Left composition')
 
   t.end()
 })
@@ -309,29 +304,29 @@ test('Either chain errors', t => {
   const rchain = bindFunc(Either.Right(0).chain)
   const lchain = bindFunc(Either.Left(0).chain)
 
-  t.throws(rchain(undefined), TypeError, 'Right throws when passed undefined')
-  t.throws(rchain(null), TypeError, 'Right throws when passed null')
-  t.throws(rchain(0), TypeError, 'Right throws when passed a falsey number')
-  t.throws(rchain(1), TypeError, 'Right throws when passed a truthy number')
-  t.throws(rchain(''), TypeError, 'Right throws when passed a falsey string')
-  t.throws(rchain('string'), TypeError, 'Right throws when passed a truthy string')
-  t.throws(rchain(false), TypeError, 'Right throws when passed false')
-  t.throws(rchain(true), TypeError, 'Right throws when passed true')
-  t.throws(rchain([]), TypeError, 'Right throws when passed an array')
-  t.throws(rchain({}), TypeError, 'Right throws when passed an object')
-  t.doesNotThrow(rchain(noop), 'Right does not throw when passed a function')
+  t.throws(rchain(undefined), TypeError, 'Right throws with undefined')
+  t.throws(rchain(null), TypeError, 'Right throws with null')
+  t.throws(rchain(0), TypeError, 'Right throws falsey with number')
+  t.throws(rchain(1), TypeError, 'Right throws truthy with number')
+  t.throws(rchain(''), TypeError, 'Right throws falsey with string')
+  t.throws(rchain('string'), TypeError, 'Right throws with truthy string')
+  t.throws(rchain(false), TypeError, 'Right throws with false')
+  t.throws(rchain(true), TypeError, 'Right throws with true')
+  t.throws(rchain([]), TypeError, 'Right throws with an array')
+  t.throws(rchain({}), TypeError, 'Right throws with an object')
+  t.doesNotThrow(rchain(noop), 'Right allows a function')
 
-  t.throws(lchain(undefined), TypeError, 'Left throws when passed undefined')
-  t.throws(lchain(null), TypeError, 'Left throws when passed null')
-  t.throws(lchain(0), TypeError, 'Left throws when passed a falsey number')
-  t.throws(lchain(1), TypeError, 'Left throws when passed a truthy number')
-  t.throws(lchain(''), TypeError, 'Left throws when passed a falsey string')
-  t.throws(lchain('string'), TypeError, 'Left throws when passed a truthy string')
-  t.throws(lchain(false), TypeError, 'Left throws when passed false')
-  t.throws(lchain(true), TypeError, 'Left throws when passed true')
-  t.throws(lchain([]), TypeError, 'Left throws when passed an array')
-  t.throws(lchain({}), TypeError, 'Left throws when passed an object')
-  t.doesNotThrow(lchain(noop), 'Left does not throw when passed a function')
+  t.throws(lchain(undefined), TypeError, 'Left throws with undefined')
+  t.throws(lchain(null), TypeError, 'Left throws with null')
+  t.throws(lchain(0), TypeError, 'Left throws with falsey number')
+  t.throws(lchain(1), TypeError, 'Left throws with truthy number')
+  t.throws(lchain(''), TypeError, 'Left throws with falsey string')
+  t.throws(lchain('string'), TypeError, 'Left throws with truthy string')
+  t.throws(lchain(false), TypeError, 'Left throws with false')
+  t.throws(lchain(true), TypeError, 'Left throws with true')
+  t.throws(lchain([]), TypeError, 'Left throws with an array')
+  t.throws(lchain({}), TypeError, 'Left throws with an object')
+  t.doesNotThrow(lchain(noop), 'Left allows a function')
 
   t.end()
 })

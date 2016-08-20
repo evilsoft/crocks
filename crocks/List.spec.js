@@ -1,4 +1,5 @@
 const test    = require('tape')
+const sinon   = require('sinon')
 const helpers = require('../test/helpers')
 
 const constant      = require('../combinators/constant')
@@ -185,6 +186,85 @@ test('List reduce functionality', t => {
 
   t.equal(m.reduce(f, 0), 6, 'reduces as expected with a neutral initial value')
   t.equal(m.reduce(f, 10), 16, 'reduces as expected with a non-neutral initial value')
+
+  t.end()
+})
+
+test('List filter errors', t => {
+  const filter = bindFunc(List([ 0 ]).filter)
+
+  t.throws(filter(undefined), TypeError, 'throws when passed undefined')
+  t.throws(filter(null), TypeError, 'throws when passed null')
+  t.throws(filter(0), TypeError, 'throws when passed a falsey number')
+  t.throws(filter(1), TypeError, 'throws when passed a truthy number')
+  t.throws(filter(''), TypeError, 'throws when passed a falsey string')
+  t.throws(filter('string'), TypeError, 'throws when passed a truthy string')
+  t.throws(filter(false), TypeError, 'throws when passed false')
+  t.throws(filter(true), TypeError, 'throws when passed true')
+  t.throws(filter(null), TypeError, 'throws when passed null')
+  t.throws(filter(undefined), TypeError, 'throws when passed undefined')
+  t.throws(filter([]), TypeError, 'throws when passed an array')
+  t.throws(filter({}), TypeError, 'throws when passed an object')
+
+  t.doesNotThrow(filter(noop), 'does not throw when passed a function')
+
+  t.end()
+})
+
+test('List filter functionality', t => {
+  const m = List([ 4, 5, 10, 34, 'string' ])
+
+  const bigNum      = x => typeof x === 'number' && x > 10
+  const justStrings = x => typeof x === 'string'
+
+  t.same(m.filter(bigNum).value(), [ 34 ], 'filters for bigNums')
+  t.same(m.filter(justStrings).value(), [ 'string' ], 'filters for strings')
+
+  t.end()
+})
+
+test('List map errors', t => {
+  const map = bindFunc(List([]).map)
+
+  t.throws(map(undefined), TypeError, 'throws with undefined')
+  t.throws(map(null), TypeError, 'throws with null')
+  t.throws(map(0), TypeError, 'throws with falsey number')
+  t.throws(map(1), TypeError, 'throws with truthy number')
+  t.throws(map(''), TypeError, 'throws with falsey string')
+  t.throws(map('string'), TypeError, 'throws with truthy string')
+  t.throws(map(false), TypeError, 'throws with false')
+  t.throws(map(true), TypeError, 'throws with true')
+  t.throws(map([]), TypeError, 'throws with an array')
+  t.throws(map({}), TypeError, 'throws with an object')
+
+  t.doesNotThrow(map(noop))
+
+  t.end()
+})
+
+test('List map functionality', t => {
+  const spy = sinon.spy(identity)
+  const xs  = [ 42 ]
+
+  const m = List(xs).map(spy)
+
+  t.equal(m.type(), 'List', 'returns a List')
+  t.equal(spy.called, true, 'calls mapping function')
+  t.same(m.value(), xs, 'returns the result of the map inside of new List')
+
+  t.end()
+})
+
+test('List map properties (Functor)', t => {
+  const m = List([ 49 ])
+
+  const f = x => x + 54
+  const g = x => x * 4
+
+  t.ok(isFunction(m.map), 'provides a map function')
+
+  t.same(m.map(identity).value(), m.value(), 'identity')
+  t.same(m.map(composeB(f, g)).value(), m.map(g).map(f).value(), 'composition')
 
   t.end()
 })

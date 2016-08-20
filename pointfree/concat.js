@@ -4,11 +4,10 @@
 const curry       = require('../funcs/curry')
 const isFunction  = require('../internal/isFunction')
 const isString    = require('../internal/isString')
-
-const isSemiGroup = m => m.concat && isFunction(m.concat)
+const isSemigroup = require('../internal/isSemigroup')
 
 function concat(x, m) {
-  if(!isSemiGroup(m)) {
+  if(!isSemigroup(m)) {
     throw new TypeError('concat: Semi-group required for second arg')
   }
 

@@ -66,6 +66,17 @@ function List(xs) {
     return xs.reduce(fn, i)
   }
 
+  function filter(fn) {
+    if(!isFunction(fn)) {
+      throw new TypeError('List.filter: Function required')
+    }
+
+    return reduce(
+      (x, y) => fn(y) ? x.concat(x.of(y)) : x,
+      empty()
+    )
+  }
+
   function map(fn) {
     if(!isFunction(fn)) {
       throw new TypeError('List.map: Function required')
@@ -97,7 +108,7 @@ function List(xs) {
 
   return {
     inspect, value, type, equals,
-    empty, concat, reduce,
+    empty, concat, reduce, filter,
     map, of, ap, chain
   }
 }

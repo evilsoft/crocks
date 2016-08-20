@@ -14,13 +14,13 @@ test('Any', t => {
   const a = bindFunc(Any)
 
   t.ok(isFunction(Any), 'is a function')
+  t.ok(isObject(Any(0)), 'returns an object')
 
   t.ok(isFunction(Any.empty), 'provides an empty function')
   t.ok(isFunction(Any.type), 'provides a type function')
-  t.ok(isObject(Any(0)), 'returns an object')
 
-  t.throws(Any, TypeError, 'throws when nothing is passed')
-  t.throws(a(identity), TypeError, 'throws when passed a function')
+  t.throws(Any, TypeError, 'throws with nothing')
+  t.throws(a(identity), TypeError, 'throws with a function')
 
   t.doesNotThrow(a(undefined), 'allows undefined')
   t.doesNotThrow(a(null), 'allows null')
@@ -39,7 +39,7 @@ test('Any', t => {
 test('Any inspect', t => {
   const m = Any(1)
 
-  t.ok(isFunction(m.inspect), 'provides an inpsect function')
+  t.ok(isFunction(m.inspect), 'provides an inspect function')
   t.equal(m.inspect(), 'Any true', 'returns inspect string')
 
   t.end()
@@ -66,7 +66,7 @@ test('Any type', t => {
   t.ok(isFunction(Any(0).type), 'is a function')
 
   t.equal(Any(0).type, Any.type, 'static and instance versions are the same')
-  t.equal(Any(0).type(), 'Any', 'reports the expected type')
+  t.equal(Any(0).type(), 'Any', 'reports Any')
 
   t.end()
 })
@@ -94,17 +94,17 @@ test('Any concat functionality', t => {
 
   const cat = bindFunc(a.concat)
 
-  t.throws(cat(undefined), TypeError, 'throws when passed undefined')
-  t.throws(cat(null), TypeError, 'throws when passed null')
-  t.throws(cat(0), TypeError, 'throws when passed falsey number')
-  t.throws(cat(1), TypeError, 'throws when passed truthy number')
-  t.throws(cat(''), TypeError, 'throws when passed falsey string')
-  t.throws(cat('string'), TypeError, 'throws when passed truthy string')
-  t.throws(cat(false), TypeError, 'throws when passed false')
-  t.throws(cat(true), TypeError, 'throws when passed true')
-  t.throws(cat([]), TypeError, 'throws when passed array')
-  t.throws(cat({}), TypeError, 'throws when passed object')
-  t.throws(cat(notAny), TypeError, 'throws when passed non-Any')
+  t.throws(cat(undefined), TypeError, 'throws with undefined')
+  t.throws(cat(null), TypeError, 'throws with null')
+  t.throws(cat(0), TypeError, 'throws with falsey number')
+  t.throws(cat(1), TypeError, 'throws with truthy number')
+  t.throws(cat(''), TypeError, 'throws with falsey string')
+  t.throws(cat('string'), TypeError, 'throws with truthy string')
+  t.throws(cat(false), TypeError, 'throws with false')
+  t.throws(cat(true), TypeError, 'throws with true')
+  t.throws(cat([]), TypeError, 'throws with an array')
+  t.throws(cat({}), TypeError, 'throws with an object')
+  t.throws(cat(notAny), TypeError, 'throws with non-Any')
 
   t.equal(a.concat(b).value(), true, 'true to false reports true')
   t.equal(a.concat(a).value(), true, 'true to true reports true')
@@ -123,7 +123,7 @@ test('Any empty properties (Monoid)', t => {
   const left  = m.empty().concat(m)
 
   t.equal(right.value(), m.value(), 'right identity')
-  t.equal(left.value(), m.value(), 'right identity')
+  t.equal(left.value(), m.value(), 'left identity')
 
   t.end()
 })

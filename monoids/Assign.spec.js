@@ -14,11 +14,10 @@ test('Assign', t => {
   const a = bindFunc(Assign)
 
   t.ok(isFunction(Assign), 'is a function')
+  t.ok(isObject(Assign({})), 'returns an object')
 
   t.ok(isFunction(Assign.empty), 'provides an empty function')
   t.ok(isFunction(Assign.type), 'provides an type function')
-
-  t.ok(isObject(Assign({})), 'returns an object')
 
   t.throws(Assign, TypeError, 'throws with nothing')
   t.throws(a(identity), TypeError, 'throws with a function')
@@ -40,7 +39,7 @@ test('Assign', t => {
 test('Assign inspect', t => {
   const m = Assign({ great: true })
 
-  t.ok(isFunction(m.inspect), 'provides an inpsect function')
+  t.ok(isFunction(m.inspect), 'provides an inspect function')
   t.equal(m.inspect(), 'Assign {}', 'returns inspect string')
 
   t.end()
@@ -53,9 +52,8 @@ test('Assign value', t => {
   t.ok(isFunction(Assign(x).value), 'is a function')
 
   t.same(Assign(undefined).value(), empty, 'provides an empty value for undefined')
-  t.same(Assign(null).value(), empty, 'provides an empty value for null ')
+  t.same(Assign(null).value(), empty, 'provides an empty value for null')
 
-  t.equal(Assign(x).value(), x, 'provides the wrapped object')
   t.equal(Assign(x).value(), x, 'provides the wrapped object')
 
   t.end()
@@ -65,7 +63,7 @@ test('Assign type', t => {
   t.ok(isFunction(Assign({}).type), 'is a function')
 
   t.equal(Assign({}).type, Assign.type, 'static and instance versions are the same')
-  t.equal(Assign({}).type(), 'Assign', 'reports the expected type (Assign)')
+  t.equal(Assign({}).type(), 'Assign', 'reports Assign')
 
   t.end()
 })
@@ -99,17 +97,17 @@ test('Assign concat functionality', t => {
 
   const cat = bindFunc(a.concat)
 
-  t.throws(cat(undefined), TypeError, 'throws when passed undefined')
-  t.throws(cat(null), TypeError, 'throws when passed null')
-  t.throws(cat(0), TypeError, 'throws when passed falsey number')
-  t.throws(cat(1), TypeError, 'throws when passed truthy number')
-  t.throws(cat(''), TypeError, 'throws when passed falsey string')
-  t.throws(cat('string'), TypeError, 'throws when passed truthy string')
-  t.throws(cat(false), TypeError, 'throws when passed false')
-  t.throws(cat(true), TypeError, 'throws when passed true')
-  t.throws(cat([]), TypeError, 'throws when passed array')
-  t.throws(cat({}), TypeError, 'throws when passed object')
-  t.throws(cat(notAssign), TypeError, 'throws when passed non-Assign')
+  t.throws(cat(undefined), TypeError, 'throws with undefined')
+  t.throws(cat(null), TypeError, 'throws with null')
+  t.throws(cat(0), TypeError, 'throws with falsey number')
+  t.throws(cat(1), TypeError, 'throws with truthy number')
+  t.throws(cat(''), TypeError, 'throws with falsey string')
+  t.throws(cat('string'), TypeError, 'throws with truthy string')
+  t.throws(cat(false), TypeError, 'throws with false')
+  t.throws(cat(true), TypeError, 'throws with true')
+  t.throws(cat([]), TypeError, 'throws with an array')
+  t.throws(cat({}), TypeError, 'throws with an object')
+  t.throws(cat(notAssign), TypeError, 'throws with non-Assign')
 
   t.same(a.concat(b).value(), result, 'merges values as expected')
 

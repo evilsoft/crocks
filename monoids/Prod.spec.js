@@ -14,11 +14,10 @@ test('Prod', t => {
   const s = bindFunc(Prod)
 
   t.ok(isFunction(Prod), 'is a function')
+  t.ok(isObject(Prod(0)), 'returns an object')
 
   t.ok(isFunction(Prod.empty), 'provides an empty function')
   t.ok(isFunction(Prod.type), 'provides an type function')
-
-  t.ok(isObject(Prod(0)), 'returns an object')
 
   t.throws(s(), TypeError, 'throws with nothing')
   t.throws(s(identity), TypeError, 'throws with a function')
@@ -40,7 +39,7 @@ test('Prod', t => {
 test('Prod inspect', t => {
   const m = Prod(1)
 
-  t.ok(isFunction(m.inspect), 'provides an inpsect function')
+  t.ok(isFunction(m.inspect), 'provides an inspect function')
   t.equal(m.inspect(), 'Prod 1', 'returns inspect string')
 
   t.end()
@@ -52,7 +51,7 @@ test('Prod value', t => {
   t.ok(isFunction(Prod(0).value), 'is a function')
 
   t.equal(Prod(undefined).value(), empty, 'provides an empty value for undefined')
-  t.equal(Prod(null).value(), empty, 'provides an empty value for null ')
+  t.equal(Prod(null).value(), empty, 'provides an empty value for null')
 
   t.equal(Prod(0).value(), 0, 'provides a wrapped falsey number')
   t.equal(Prod(1).value(), 1, 'provides a wrapped truthy number')
@@ -64,7 +63,7 @@ test('Prod type', t => {
   t.ok(isFunction(Prod(0).type), 'is a function')
 
   t.equal(Prod(0).type, Prod.type, 'static and instance versions are the same')
-  t.equal(Prod(0).type(), 'Prod', 'reports the expected type (Prod)')
+  t.equal(Prod(0).type(), 'Prod', 'reports Prod')
 
   t.end()
 })
@@ -96,17 +95,17 @@ test('Prod concat functionality', t => {
 
   const cat = bindFunc(a.concat)
 
-  t.throws(cat(undefined), TypeError, 'throws when passed undefined')
-  t.throws(cat(null), TypeError, 'throws when passed null')
-  t.throws(cat(0), TypeError, 'throws when passed falsey number')
-  t.throws(cat(1), TypeError, 'throws when passed truthy number')
-  t.throws(cat(''), TypeError, 'throws when passed falsey string')
-  t.throws(cat('string'), TypeError, 'throws when passed truthy string')
-  t.throws(cat(false), TypeError, 'throws when passed false')
-  t.throws(cat(true), TypeError, 'throws when passed true')
-  t.throws(cat([]), TypeError, 'throws when passed array')
-  t.throws(cat({}), TypeError, 'throws when passed object')
-  t.throws(cat(notProd), TypeError, 'throws when passed non-Any')
+  t.throws(cat(undefined), TypeError, 'throws with undefined')
+  t.throws(cat(null), TypeError, 'throws with null')
+  t.throws(cat(0), TypeError, 'throws with falsey number')
+  t.throws(cat(1), TypeError, 'throws with truthy number')
+  t.throws(cat(''), TypeError, 'throws with falsey string')
+  t.throws(cat('string'), TypeError, 'throws with truthy string')
+  t.throws(cat(false), TypeError, 'throws with false')
+  t.throws(cat(true), TypeError, 'throws with true')
+  t.throws(cat([]), TypeError, 'throws with an array')
+  t.throws(cat({}), TypeError, 'throws with an object')
+  t.throws(cat(notProd), TypeError, 'throws with non-Prod')
 
   t.equals(a.concat(b).value(), (x * y), 'Multiplies wrapped values as expected')
 

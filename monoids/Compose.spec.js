@@ -42,7 +42,7 @@ test('Compose', t => {
 test('Compose inspect', t => {
   const m = Compose(noop)
 
-  t.ok(isFunction(m.inspect), 'provides an inpsect function')
+  t.ok(isFunction(m.inspect), 'provides an inspect function')
   t.equal(m.inspect(), 'Compose Function', 'returns inspect string')
 
   t.end()
@@ -67,7 +67,7 @@ test('Compose type', t => {
   t.ok(isFunction(Compose(noop).type), 'is a function')
 
   t.equal(Compose(noop).type, Compose.type, 'static and instance versions are the same')
-  t.equal(Compose(noop).type(), 'Compose', 'reports the expected type (Compose)')
+  t.equal(Compose(noop).type(), 'Compose', 'reports Compose')
 
   t.end()
 })
@@ -103,17 +103,17 @@ test('Compose concat functionality', t => {
 
   const cat = bindFunc(a.concat)
 
-  t.throws(cat(undefined), TypeError, 'throws when passed undefined')
-  t.throws(cat(null), TypeError, 'throws when passed null')
-  t.throws(cat(0), TypeError, 'throws when passed falsey number')
-  t.throws(cat(1), TypeError, 'throws when passed truthy number')
-  t.throws(cat(''), TypeError, 'throws when passed falsey string')
-  t.throws(cat('string'), TypeError, 'throws when passed truthy string')
-  t.throws(cat(false), TypeError, 'throws when passed false')
-  t.throws(cat(true), TypeError, 'throws when passed true')
-  t.throws(cat([]), TypeError, 'throws when passed array')
-  t.throws(cat({}), TypeError, 'throws when passed object')
-  t.throws(cat(notCompose), TypeError, 'throws when passed non-Compose')
+  t.throws(cat(undefined), TypeError, 'throws with undefined')
+  t.throws(cat(null), TypeError, 'throws with null')
+  t.throws(cat(0), TypeError, 'throws with falsey number')
+  t.throws(cat(1), TypeError, 'throws with truthy number')
+  t.throws(cat(''), TypeError, 'throws with falsey string')
+  t.throws(cat('string'), TypeError, 'throws with truthy string')
+  t.throws(cat(false), TypeError, 'throws with false')
+  t.throws(cat(true), TypeError, 'throws with true')
+  t.throws(cat([]), TypeError, 'throws with an array')
+  t.throws(cat({}), TypeError, 'throws with an object')
+  t.throws(cat(notCompose), TypeError, 'throws with non-Compose')
 
   t.same(a.concat(b).value()('house'), result, 'builds composition as expected')
 

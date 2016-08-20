@@ -39,7 +39,7 @@ test('Min', t => {
 test('Min inspect', t => {
   const m = Min(0)
 
-  t.ok(isFunction(m.inspect), 'provides an inpsect function')
+  t.ok(isFunction(m.inspect), 'provides an inspect function')
   t.equal(m.inspect(), 'Min 0', 'returns inspect string')
 
   t.end()
@@ -51,7 +51,7 @@ test('Min value', t => {
   t.ok(isFunction(Min(0).value), 'is a function')
 
   t.equal(Min(undefined).value(), empty, 'provides an empty value for undefined')
-  t.equal(Min(null).value(), empty, 'provides an empty value for null ')
+  t.equal(Min(null).value(), empty, 'provides an empty value for null')
 
   t.equal(Min(0).value(), 0, 'provides a wrapped falsey number')
   t.equal(Min(1).value(), 1, 'provides a wrapped truthy number')
@@ -63,7 +63,7 @@ test('Min type', t => {
   t.ok(isFunction(Min(0).type), 'is a function')
 
   t.equal(Min(0).type, Min.type, 'static and instance versions are the same')
-  t.equal(Min(0).type(), 'Min', 'reports the expected type (Min)')
+  t.equal(Min(0).type(), 'Min', 'reports Min')
 
   t.end()
 })
@@ -95,17 +95,17 @@ test('Min concat functionality', t => {
 
   const cat = bindFunc(a.concat)
 
-  t.throws(cat(undefined), TypeError, 'throws when passed undefined')
-  t.throws(cat(null), TypeError, 'throws when passed null')
-  t.throws(cat(0), TypeError, 'throws when passed falsey number')
-  t.throws(cat(1), TypeError, 'throws when passed truthy number')
-  t.throws(cat(''), TypeError, 'throws when passed falsey string')
-  t.throws(cat('string'), TypeError, 'throws when passed truthy string')
-  t.throws(cat(false), TypeError, 'throws when passed false')
-  t.throws(cat(true), TypeError, 'throws when passed true')
-  t.throws(cat([]), TypeError, 'throws when passed array')
-  t.throws(cat({}), TypeError, 'throws when passed object')
-  t.throws(cat(notMin), TypeError, 'throws when passed non-Min')
+  t.throws(cat(undefined), TypeError, 'throws with undefined')
+  t.throws(cat(null), TypeError, 'throws with null')
+  t.throws(cat(0), TypeError, 'throws with falsey number')
+  t.throws(cat(1), TypeError, 'throws with truthy number')
+  t.throws(cat(''), TypeError, 'throws with falsey string')
+  t.throws(cat('string'), TypeError, 'throws with truthy string')
+  t.throws(cat(false), TypeError, 'throws with false')
+  t.throws(cat(true), TypeError, 'throws with true')
+  t.throws(cat([]), TypeError, 'throws with an array')
+  t.throws(cat({}), TypeError, 'throws with an object')
+  t.throws(cat(notMin), TypeError, 'throws with non-Min')
 
   t.equals(a.concat(b).value(), x, 'provides min of wrapped values as expected')
 

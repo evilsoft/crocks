@@ -2,6 +2,7 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const crocks = {
+  Const:    require('./crocks/Const'),
   Either:   require('./crocks/Either'),
   Identity: require('./crocks/Identity'),
   IO:       require('./crocks/IO'),

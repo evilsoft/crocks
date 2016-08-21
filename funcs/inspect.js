@@ -20,12 +20,12 @@ function inspect(x) {
     return ' Function'
   }
 
-  if(isObject(x)) {
-    return ' {}'
-  }
-
   if(isArray(x)) {
     return ` [${arrayInspect(x) } ]`
+  }
+
+  if(isObject(x)) {
+    return ' {}'
   }
 
   return ` ${x}`

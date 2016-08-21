@@ -9,7 +9,6 @@ const noop        = helpers.noop
 
 const identity      = require('../combinators/identity')
 const composeB      = require('../combinators/composeB')
-const reverseApply  = require('../combinators/reverseApply')
 
 const MockCrock = require('../test/MockCrock')
 

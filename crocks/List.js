@@ -1,9 +1,10 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isFunction  = require('../internal/isFunction')
-const isArray     = require('../internal/isArray')
-const isType      = require('../internal/isType')
+const isFunction    = require('../internal/isFunction')
+const isArray       = require('../internal/isArray')
+const isType        = require('../internal/isType')
+const isApplicative = require('../internal/isApplicative')
 
 const constant  = require('../combinators/constant')
 
@@ -105,11 +106,24 @@ function List(xs) {
     return List(xs.reduce(flatMap(fn), []))
   }
 
+  function jailSeq(acc, x) {
+    if(!isApplicative(x)) {
+      throw new TypeError('List.sequence: Must must wrap an Applicative')
+    }
+
+    return x
+      .map(v => _concat(List.of(v)))
+      .ap(acc)
+  }
+
   function sequence(af) {
+    if(!isFunction(af)) {
+      throw new TypeError('List.sequence: Applicative Function required')
+    }
+
     return reduce(
-      (acc, x) => x.map(v => _concat(List.of(v))).ap(acc),
-      af(List([]))
-    )
+      jailSeq,
+      af(List.empty()))
   }
 
   return {

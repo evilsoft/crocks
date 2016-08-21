@@ -63,7 +63,7 @@ function Identity(x) {
       throw new TypeError('Identity.sequence: Applicative Function required')
     }
     else if(!isApplicative(x)) {
-      throw new TypeError('Identity.sequence: Identity must wrap an Applicative')
+      throw new TypeError('Identity.sequence: Must wrap an Applicative')
     }
 
     return x.map(Identity)

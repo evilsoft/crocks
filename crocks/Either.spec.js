@@ -13,6 +13,8 @@ const composeB      = require('../combinators/composeB')
 const identity      = require('../combinators/identity')
 const constant      = require('../combinators/constant')
 
+const MockCrock = require('../test/MockCrock')
+
 const Either = require('./Either')
 
 test('Either', t => {
@@ -366,8 +368,7 @@ test('Either chain properties (Monad)', t => {
 })
 
 test('Either sequence errors', t => {
-  const fake = { map: identity, ap: identity, of: identity }
-  const rseq = bindFunc(Either.Right(fake).sequence)
+  const rseq = bindFunc(Either.Right(MockCrock(0)).sequence)
   const lseq = bindFunc(Either.Left('Left').sequence)
 
   const rseqBad = bindFunc(Either.Right(0).sequence)
@@ -399,6 +400,22 @@ test('Either sequence errors', t => {
 
   t.throws(rseqBad(noop), TypeError, 'Right without wrapping Applicative throws')
   t.doesNotThrow(lseqBad(noop), 'allows Left without wrapping Applicative')
+
+  t.end()
+})
+
+test('Either sequence functionality', t => {
+  const x = 284
+  const r = Either.Right(MockCrock(x)).sequence(MockCrock.of)
+  const l = Either.Left('Left').sequence(MockCrock.of)
+
+  t.equal(r.type(), 'MockCrock', 'Provides an outer type of MockCrock')
+  t.equal(r.value().type(), 'Either', 'Provides an inner type of Either')
+  t.equal(r.value().value(), x, 'Either contains original inner value')
+
+  t.equal(l.type(), 'MockCrock', 'Provides an outer type of MockCrock')
+  t.equal(l.value().type(), 'Either', 'Provides an inner type of Either')
+  t.equal(l.value().value(), 'Left', 'Either contains original Left value')
 
   t.end()
 })

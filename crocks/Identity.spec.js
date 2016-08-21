@@ -11,6 +11,8 @@ const identity      = require('../combinators/identity')
 const composeB      = require('../combinators/composeB')
 const reverseApply  = require('../combinators/reverseApply')
 
+const MockCrock = require('../test/MockCrock')
+
 const Identity = require('./Identity')
 
 test('Identity', t => {
@@ -248,8 +250,7 @@ test('Identity chain properties (Monad)', t => {
 })
 
 test('Identity sequence errors', t => {
-  const fake    = { map: identity, ap: identity, of: identity }
-  const seq     = bindFunc(Identity(fake).sequence)
+  const seq     = bindFunc(Identity(MockCrock(32)).sequence)
   const seqBad  = bindFunc(Identity(0).sequence)
 
   t.throws(seq(undefined), TypeError, 'throws with undefined')
@@ -265,6 +266,17 @@ test('Identity sequence errors', t => {
   t.doesNotThrow(seq(noop), 'allows a function')
 
   t.throws(seqBad(noop), TypeError, 'wrapping non-Applicative throws')
+
+  t.end()
+})
+
+test('Identity sequence functionality', t => {
+  const x = true
+  const m = Identity(MockCrock(x)).sequence(MockCrock.of)
+
+  t.equal(m.type(), 'MockCrock', 'Provides an outer type of MockCrock')
+  t.equal(m.value().type(), 'Identity', 'Provides an inner type of Identity')
+  t.equal(m.value().value(), x, 'Identity contains original inner value')
 
   t.end()
 })

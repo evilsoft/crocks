@@ -12,6 +12,8 @@ const reverseApply  = require('../combinators/reverseApply')
 const composeB      = require('../combinators/composeB')
 const identity      = require('../combinators/identity')
 
+const MockCrock = require('../test/MockCrock')
+
 const Maybe = require('./Maybe')
 
 test('Maybe', t => {
@@ -269,8 +271,7 @@ test('Maybe chain properties (Monad)', t => {
 })
 
 test('Maybe sequence errors', t => {
-  const fake    = { map: identity, ap: identity, of: identity }
-  const seq     = bindFunc(Maybe(fake).sequence)
+  const seq     = bindFunc(Maybe(MockCrock({ something: true })).sequence)
   const seqBad  = bindFunc(Maybe(0).sequence)
 
   const seqNothing  = bindFunc(Maybe(undefined).sequence)
@@ -289,6 +290,22 @@ test('Maybe sequence errors', t => {
 
   t.throws(seqBad(noop), TypeError, 'wrapping non-Applicative throws')
   t.doesNotThrow(seqNothing(noop), 'allows Nothing with non-Applicative wrapped')
+
+  t.end()
+})
+
+test('Maybe sequence functionality', t => {
+  const x = []
+  const s = Maybe(MockCrock(x)).sequence(MockCrock.of)
+  const n = Maybe(MockCrock(null)).sequence(MockCrock.of)
+
+  t.equal(s.type(), 'MockCrock', 'Provides an outer type of MockCrock')
+  t.equal(s.value().type(), 'Maybe', 'Provides an inner type of Maybe')
+  t.same(s.value().maybe(), x, 'Maybe contains original inner value')
+
+  t.equal(n.type(), 'MockCrock', 'Provides an outer type of MockCrock')
+  t.equal(n.value().type(), 'Maybe', 'Provides an inner type of Maybe')
+  t.equal(n.value().option('Nothing'), 'Nothing', 'Reports as a Nothing')
 
   t.end()
 })

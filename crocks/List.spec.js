@@ -12,6 +12,8 @@ const isFunction  = require('../internal/isFunction')
 const bindFunc    = helpers.bindFunc
 const noop        = helpers.noop
 
+const MockCrock = require('../test/MockCrock')
+
 const List = require('./List')
 
 test('List', t => {
@@ -379,5 +381,36 @@ test('List chain properties (Monad)', t => {
   t.same(List.of(3).chain(f).value(), f(3).value(), 'left identity')
   t.same(f(3).chain(List.of).value(), f(3).value(), 'right identity')
 
+  t.end()
+})
+
+test('List sequence errors', t => {
+  const seq     = bindFunc(List.of(MockCrock(2)).sequence)
+  const seqBad  = bindFunc(List.of(0).sequence)
+
+  t.throws(seq(undefined), TypeError, 'throws with undefined')
+  t.throws(seq(null), TypeError, 'throws with null')
+  t.throws(seq(0), TypeError, 'throws falsey with number')
+  t.throws(seq(1), TypeError, 'throws truthy with number')
+  t.throws(seq(''), TypeError, 'throws falsey with string')
+  t.throws(seq('string'), TypeError, 'throws with truthy string')
+  t.throws(seq(false), TypeError, 'throws with false')
+  t.throws(seq(true), TypeError, 'throws with true')
+  t.throws(seq([]), TypeError, 'throws with an array')
+  t.throws(seq({}), TypeError, 'throws with an object')
+  t.doesNotThrow(seq(List.of), 'allows a function')
+
+  t.throws(seqBad(noop), TypeError, 'wrapping non-Applicative throws')
+
+  t.end()
+})
+
+test('List sequence functionality', t => {
+  const x = 'string'
+  const m = List.of(MockCrock(x)).sequence(MockCrock.of)
+
+  t.equal(m.type(), 'MockCrock', 'Provides an outer type of MockCrock')
+  t.equal(m.value().type(), 'List', 'Provides an inner type of List')
+  t.same(m.value().value(), [ x ], 'inner List contains original inner value')
   t.end()
 })

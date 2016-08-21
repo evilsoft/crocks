@@ -212,7 +212,7 @@ test('Identity chain errors', t => {
   t.throws(chain(true), TypeError, 'throws with true')
   t.throws(chain([]), TypeError, 'throws with an array')
   t.throws(chain({}), TypeError, 'throws with an object')
-  t.throws(chain(noop), TypeError, 'throws with a non-Idenity returning function')
+  t.throws(chain(noop), TypeError, 'throws with a non-Identity returning function')
 
   t.doesNotThrow(chain(Identity.of), 'allows an Identity returning function')
 
@@ -243,6 +243,28 @@ test('Identity chain properties (Monad)', t => {
   t.equal(Identity.of(3).chain(f).value(), f(3).value(), 'left identity')
 
   t.equal(f(3).chain(Identity.of).value(), f(3).value(), 'right identity')
+
+  t.end()
+})
+
+test('Identity sequence errors', t => {
+  const fake    = { map: identity, ap: identity, of: identity }
+  const seq     = bindFunc(Identity(fake).sequence)
+  const seqBad  = bindFunc(Identity(0).sequence)
+
+  t.throws(seq(undefined), TypeError, 'throws with undefined')
+  t.throws(seq(null), TypeError, 'throws with null')
+  t.throws(seq(0), TypeError, 'throws falsey with number')
+  t.throws(seq(1), TypeError, 'throws truthy with number')
+  t.throws(seq(''), TypeError, 'throws falsey with string')
+  t.throws(seq('string'), TypeError, 'throws with truthy string')
+  t.throws(seq(false), TypeError, 'throws with false')
+  t.throws(seq(true), TypeError, 'throws with true')
+  t.throws(seq([]), TypeError, 'throws with an array')
+  t.throws(seq({}), TypeError, 'throws with an object')
+  t.doesNotThrow(seq(noop), 'allows a function')
+
+  t.throws(seqBad(noop), TypeError, 'wrapping non-Applicative throws')
 
   t.end()
 })

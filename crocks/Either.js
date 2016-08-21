@@ -1,11 +1,12 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isFunction  = require('../internal/isFunction')
-const isType      = require('../internal/isType')
-const constant    = require('../combinators/constant')
-const composeB    = require('../combinators/composeB')
-const _inspect    = require('../funcs/inspect')
+const isFunction    = require('../internal/isFunction')
+const isApplicative = require('../internal/isApplicative')
+const isType        = require('../internal/isType')
+const constant      = require('../combinators/constant')
+const composeB      = require('../combinators/composeB')
+const _inspect      = require('../funcs/inspect')
 
 const isEqual = x => y => x === y
 
@@ -78,9 +79,28 @@ function Either(l, r) {
     return m
   }
 
+  function jailSeq(x) {
+    if(!isApplicative(x)) {
+      throw new TypeError('Either.sequence: Must wrap an Applicative')
+    }
+
+    return x.map(Either.of)
+  }
+
+  function sequence(af) {
+    if(!isFunction(af)) {
+      throw new TypeError('Either.sequence: Applicative Function required')
+    }
+
+    return either(
+      x => af(Either.Left(x)),
+      jailSeq
+    )
+  }
+
   return {
     inspect, either, value, type,
-    equals, map, ap, of, chain
+    equals, map, ap, of, chain, sequence
   }
 }
 

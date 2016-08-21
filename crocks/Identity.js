@@ -1,8 +1,9 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isFunction  = require('../internal/isFunction')
-const isType      = require('../internal/isType')
+const isFunction    = require('../internal/isFunction')
+const isType        = require('../internal/isType')
+const isApplicative = require('../internal/isApplicative')
 
 const _inspect = require('../funcs/inspect')
 
@@ -57,10 +58,20 @@ function Identity(x) {
     return m
   }
 
+  function sequence(af) {
+    if(!isFunction(af)) {
+      throw new TypeError('Identity.sequence: Applicative Function required')
+    }
+    else if(!isApplicative(x)) {
+      throw new TypeError('Identity.sequence: Identity must wrap an Applicative')
+    }
+
+    return x.map(Identity)
+  }
 
   return {
     inspect, value, type, equals,
-    map, ap, of, chain
+    map, ap, of, chain, sequence
   }
 }
 

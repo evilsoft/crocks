@@ -364,3 +364,41 @@ test('Either chain properties (Monad)', t => {
 
   t.end()
 })
+
+test('Either sequence errors', t => {
+  const fake = { map: identity, ap: identity, of: identity }
+  const rseq = bindFunc(Either.Right(fake).sequence)
+  const lseq = bindFunc(Either.Left('Left').sequence)
+
+  const rseqBad = bindFunc(Either.Right(0).sequence)
+  const lseqBad = bindFunc(Either.Left(0).sequence)
+
+  t.throws(rseq(undefined), TypeError, 'Right throws with undefined')
+  t.throws(rseq(null), TypeError, 'Right throws with null')
+  t.throws(rseq(0), TypeError, 'Right throws falsey with number')
+  t.throws(rseq(1), TypeError, 'Right throws truthy with number')
+  t.throws(rseq(''), TypeError, 'Right throws falsey with string')
+  t.throws(rseq('string'), TypeError, 'Right throws with truthy string')
+  t.throws(rseq(false), TypeError, 'Right throws with false')
+  t.throws(rseq(true), TypeError, 'Right throws with true')
+  t.throws(rseq([]), TypeError, 'Right throws with an array')
+  t.throws(rseq({}), TypeError, 'Right throws with an object')
+  t.doesNotThrow(rseq(noop), 'Right allows a function')
+
+  t.throws(lseq(undefined), TypeError, 'Left throws with undefined')
+  t.throws(lseq(null), TypeError, 'Left throws with null')
+  t.throws(lseq(0), TypeError, 'Left throws with falsey number')
+  t.throws(lseq(1), TypeError, 'Left throws with truthy number')
+  t.throws(lseq(''), TypeError, 'Left throws with falsey string')
+  t.throws(lseq('string'), TypeError, 'Left throws with truthy string')
+  t.throws(lseq(false), TypeError, 'Left throws with false')
+  t.throws(lseq(true), TypeError, 'Left throws with true')
+  t.throws(lseq([]), TypeError, 'Left throws with an array')
+  t.throws(lseq({}), TypeError, 'Left throws with an object')
+  t.doesNotThrow(lseq(noop), 'Left allows a function')
+
+  t.throws(rseqBad(noop), TypeError, 'Right without wrapping Applicative throws')
+  t.doesNotThrow(lseqBad(noop), 'allows Left without wrapping Applicative')
+
+  t.end()
+})

@@ -1,8 +1,9 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isFunction  = require('../internal/isFunction')
-const isType      = require('../internal/isType')
+const isApplicative = require('../internal/isApplicative')
+const isFunction    = require('../internal/isFunction')
+const isType        = require('../internal/isType')
 
 const constant  = require('../combinators/constant')
 
@@ -73,9 +74,27 @@ function Maybe(x) {
     return m
   }
 
+  function jailSeq(type) {
+    return function(x) {
+      if(!isApplicative(x)) {
+        throw new TypeError(`${type()}.sequence: Must wrap an Applicative`)
+      }
+
+      return x.map(Maybe)
+    }
+  }
+
+  function sequence(af) {
+    return either(
+      constant(af(Maybe(undefined))),
+      jailSeq(type)
+    )
+  }
+
   return {
     inspect, maybe, either, option,
-    type, equals, map, ap, of, chain
+    type, equals, map, ap, of, chain,
+    sequence
   }
 }
 

@@ -8,6 +8,7 @@ const isType      = require('../internal/isType')
 const constant  = require('../combinators/constant')
 
 const _inspect    = require('../funcs/inspect')
+const _concat     = require('../pointfree/concat')
 
 const _type     = constant('List')
 const _of       = x => List([ x ])
@@ -104,10 +105,17 @@ function List(xs) {
     return List(xs.reduce(flatMap(fn), []))
   }
 
+  function sequence(af) {
+    return reduce(
+      (acc, x) => x.map(v => _concat(List.of(v))).ap(acc),
+      af(List([]))
+    )
+  }
+
   return {
     inspect, value, type, equals,
     concat, empty, reduce, filter,
-    map, ap, of, chain
+    map, ap, of, chain, sequence
   }
 }
 

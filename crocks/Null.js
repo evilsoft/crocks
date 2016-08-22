@@ -8,25 +8,27 @@ const _inspect = require('../funcs/inspect')
 
 const constant = require('../combinators/constant')
 
-const _type = constant('Const')
+const _type   = constant('Null')
+const _of     = Null
+const _empty  = Null
 
-function Const(x) {
-  if(!arguments.length) {
-    throw new TypeError('Const: Must wrap something')
-  }
+function Null() {
+  const x = null
 
   const equals = m => isType(type(), m) && x === m.value()
-  const inspect = constant(`Const${_inspect(x)}`)
+  const inspect = constant(`Null`)
 
   const value = constant(x)
   const type  = _type
+  const of    = _of
+  const empty = _empty
 
   function concat(m) {
     if(!(m && isType(type(), m))) {
-      throw new TypeError('Const.concat: Const required')
+      throw new TypeError('Null.concat: Null required')
     }
 
-    return Const(x)
+    return Null()
   }
 
   function map(fn) {
@@ -34,39 +36,41 @@ function Const(x) {
       throw new TypeError('Const.map: Function required')
     }
 
-    fn(x)
-
-    return Const(x)
+    return Null(fn(x))
   }
 
   function ap(m) {
     if(!isType(type(), m)) {
-      throw new TypeError('Const.ap: Const required')
+      throw new TypeError('Null.ap: Null required')
     }
 
-    return Const(x)
+    return Null()
   }
 
   function chain(fn) {
     if(!isFunction(fn)) {
-      throw new TypeError('Const.chain: Function required')
+      throw new TypeError('Null.chain: Function required')
     }
 
     const m = fn(x)
 
     if(!(m && isType(type(), m))) {
-      throw new TypeError('Const.chain: function must return a Const')
+      throw new TypeError('Null.chain: function must return a Null')
     }
 
-    return Const(x)
+    return Null()
   }
 
   return {
     inspect, value, type, equals,
-    concat, map, ap, chain
+    concat, empty, map, ap, of, chain
   }
 }
 
-Const.type  = _type
+Null.type   = _type
+Null.of     = _of
+Null.empty  = _empty
 
-module.exports = Const
+module.exports = Null
+
+

@@ -7,77 +7,79 @@ const isFunction  = require('../internal/isFunction')
 const bindFunc    = helpers.bindFunc
 const noop        = helpers.noop
 
-const identity  = require('../combinators/identity')
-const composeB  = require('../combinators/composeB')
+const identity      = require('../combinators/identity')
+const composeB      = require('../combinators/composeB')
+const reverseApply  = require('../combinators/composeB')
 
 const MockCrock = require('../test/MockCrock')
 
-const Const = require('./Const')
+const Null = require('./Null')
 
-test('Const', t => {
-  const m = Const(0)
+test('Null', t => {
+  const m = Null(0)
 
-  t.ok(isFunction(Const), 'is a function')
+  t.ok(isFunction(Null), 'is a function')
   t.ok(isObject(m), 'returns an object')
 
-  t.ok(isFunction(Const.type), 'provides a type function')
+  t.ok(isFunction(Null.type), 'provides a type function')
+  t.ok(isFunction(Null.empty), 'provides an empty function')
 
-  t.throws(Const, TypeError, 'throws with no parameters')
+  t.doesNotThrow(Null, 'allows no parameters')
 
   t.end()
 })
 
-test('Const inspect', t => {
-  const m = Const(0)
+test('Null inspect', t => {
+  const m = Null(0)
 
   t.ok(isFunction(m.inspect), 'provides an inpsect function')
-  t.equal(m.inspect(), 'Const 0', 'returns inspect string')
+  t.equal(m.inspect(), 'Null', 'returns inspect string')
 
   t.end()
 })
 
-test('Const type', t => {
-  const m = Const(0)
+test('Null type', t => {
+  const m = Null(0)
 
   t.ok(isFunction(m.type), 'provides a type function')
-  t.equal(m.type(), 'Const', 'type returns Const')
+  t.equal(m.type(), 'Null', 'type returns Null')
 
   t.end()
 })
 
-test('Const value', t => {
+test('Null value', t => {
   const x = 'some value'
-  const m = Const(x)
+  const m = Null(x)
 
   t.ok(isFunction(m.value), 'is a function')
-  t.equal(m.value(), x,'value returns the wrapped value' )
+  t.equal(m.value(), null,'value always returns null' )
 
   t.end()
 })
 
-test('Const equals functionality', t => {
-  const a = Const(0)
-  const b = Const(0)
-  const c = Const(1)
+test('Null equals functionality', t => {
+  const a = Null(0)
+  const b = Null(0)
+  const c = Null(1)
 
   const value = 0
-  const nonConst = MockCrock(value)
+  const nonNull = MockCrock(value)
 
-  t.equal(a.equals(c), false, 'returns false when 2 Consts are not equal')
-  t.equal(a.equals(b), true, 'returns true when 2 Consts are equal')
+  t.equal(a.equals(c), true, 'returns true when 2 Nulls initial values are not equal')
+  t.equal(a.equals(b), true, 'returns true when 2 Nulls initial values are equal')
   t.equal(a.equals(value), false, 'returns false when passed a simple value')
-  t.equal(a.equals(nonConst), false, 'returns false when passed a non-Const')
+  t.equal(a.equals(nonNull), false, 'returns false when passed a non-Null')
 
   t.end()
 })
 
-test('Const equals properties (Setoid)', t => {
-  const a = Const(0)
-  const b = Const(0)
-  const c = Const(1)
-  const d = Const(0)
+test('Null equals properties (Setoid)', t => {
+  const a = Null(0)
+  const b = Null(0)
+  const c = Null(1)
+  const d = Null(0)
 
-  t.ok(isFunction(Const(0).equals), 'provides an equals function')
+  t.ok(isFunction(Null(0).equals), 'provides an equals function')
   t.equal(a.equals(a), true, 'reflexivity')
   t.equal(a.equals(b), b.equals(a), 'symmetry (equal)')
   t.equal(a.equals(c), c.equals(a), 'symmetry (!equal)')
@@ -86,26 +88,26 @@ test('Const equals properties (Setoid)', t => {
   t.end()
 })
 
-test('Const concat properties (Semigoup)', t => {
-  const a = Const(0)
-  const b = Const(true)
-  const c = Const('')
+test('Null concat properties (Semigoup)', t => {
+  const a = Null(0)
+  const b = Null(true)
+  const c = Null('')
 
   const left  = a.concat(b).concat(c)
   const right = a.concat(b.concat(c))
 
   t.ok(isFunction(a.concat), 'provides a concat function')
   t.equal(left.value(), right.value(), 'associativity')
-  t.equal(a.concat(b).type(), a.type(), 'returns a Const')
+  t.equal(a.concat(b).type(), a.type(), 'returns a Null')
 
   t.end()
 })
 
-test('Const concat functionality', t => {
-  const a = Const(89)
-  const b = Const(false)
+test('Null concat functionality', t => {
+  const a = Null(23)
+  const b = Null(null)
 
-  const notConst = MockCrock()
+  const notNull = MockCrock()
 
   const cat = bindFunc(a.concat)
 
@@ -119,16 +121,40 @@ test('Const concat functionality', t => {
   t.throws(cat(true), TypeError, 'throws with true')
   t.throws(cat([]), TypeError, 'throws with an array')
   t.throws(cat({}), TypeError, 'throws with an object')
-  t.throws(cat(notConst), TypeError, 'throws when passed non-Const')
+  t.throws(cat(notNull), TypeError, 'throws when passed non-Null')
 
-  t.equal(a.concat(b).value(), 89, 'reports first Const - a')
-  t.equal(b.concat(a).value(), false, 'reports first Const - b')
+  t.equal(a.concat(b).value(), null, 'reports null for 23')
+  t.equal(b.concat(a).value(), null, 'null for true')
 
   t.end()
 })
 
-test('Const map errors', t => {
-  const map = bindFunc(Const(0).map)
+test('Null empty properties (Monoid)', t => {
+  const m = Null(3)
+
+  t.ok(isFunction(m.concat), 'provides a concat function')
+  t.ok(isFunction(m.empty), 'provides an empty function')
+
+  const right = m.concat(m.empty())
+  const left  = m.empty().concat(m)
+
+  t.equal(right.value(), m.value(), 'right identity')
+  t.equal(left.value(), m.value(), 'left identity')
+
+  t.end()
+})
+
+test('Null empty functionality', t => {
+  const x = Null(0).empty()
+
+  t.equal(x.type(), 'Null', 'provides a Null')
+  t.equal(x.value(), null, 'wraps a null value')
+
+  t.end()
+})
+
+test('Null map errors', t => {
+  const map = bindFunc(Null(0).map)
 
   t.throws(map(undefined), TypeError, 'throws when passed undefined')
   t.throws(map(null), TypeError, 'throws when passed null')
@@ -145,21 +171,21 @@ test('Const map errors', t => {
   t.end()
 })
 
-test('Const map functionality', t => {
+test('Null map functionality', t => {
   const spy = sinon.spy(x => x + 2)
   const x   = 42
 
-  const m = Const(x).map(spy)
+  const m = Null(x).map(spy)
 
-  t.equal(m.type(), 'Const', 'returns a Const')
+  t.equal(m.type(), 'Null', 'returns a Null')
   t.equal(spy.called, true, 'calls mapping function')
-  t.equal(m.value(), x, 'returns the original Const')
+  t.equal(m.value(), null, 'returns null')
 
   t.end()
 })
 
-test('Const map properties (Functor)', t => {
-  const m = Const(10)
+test('Null map properties (Functor)', t => {
+  const m = Null(10)
 
   const f = x => x + 54
   const g = x => x * 4
@@ -172,9 +198,9 @@ test('Const map properties (Functor)', t => {
   t.end()
 })
 
-test('Const ap errors', t => {
+test('Null ap errors', t => {
   const m  = MockCrock('joy')
-  const ap = bindFunc(Const(32).ap)
+  const ap = bindFunc(Null(32).ap)
 
   t.throws(ap(undefined), TypeError, 'throws when passed undefined')
   t.throws(ap(null), TypeError, 'throws when passed null')
@@ -192,23 +218,48 @@ test('Const ap errors', t => {
   t.end()
 })
 
-test('Const ap properties (Apply)', t => {
-  const m = Const({ some: 'thing' })
+test('Null ap properties (Apply)', t => {
+  const m = Null({ some: 'thing' })
 
   const a = m.map(composeB).ap(m).ap(m)
   const b = m.ap(m.ap(m))
 
-  t.ok(isFunction(Const(0).map), 'implements the Functor spec')
-  t.ok(isFunction(Const(0).ap), 'provides an ap function')
+  t.ok(isFunction(Null(0).map), 'implements the Functor spec')
+  t.ok(isFunction(Null(0).ap), 'provides an ap function')
 
-  t.same(a.ap(Const(3)).value(), b.ap(Const(3)).value(), 'composition')
+  t.same(a.ap(Null(3)).value(), b.ap(Null(3)).value(), 'composition')
 
   t.end()
 })
 
-test('Const chain errors', t => {
-  const chain = bindFunc(Const(0).chain)
-  const f     = _ => Const('blah')
+test('Null of', t => {
+  t.equal(Null.of, Null(0).of, 'Null.of is the same as the instance version')
+  t.equal(Null.of(0).type(), 'Null', 'returns a Null')
+  t.equal(Null.of(0).value(), null, 'returns the default null value')
+
+  t.end()
+})
+
+test('Null of properties (Applicative)', t => {
+  const m = Null(identity)
+
+  t.ok(isFunction(Null(0).of), 'provides an of function')
+  t.ok(isFunction(Null(0).ap), 'implements the Apply spec')
+
+  t.equal(m.ap(Null(3)).value(), null, 'identity')
+  t.equal(m.ap(Null.of(3)).value(), Null.of(identity(3)).value(), 'homomorphism')
+
+  const a = x => m.ap(Null.of(x))
+  const b = x => Null.of(reverseApply(x)).ap(m)
+
+  t.equal(a(3).value(), b(3).value(), 'interchange')
+
+  t.end()
+})
+
+test('Null chain errors', t => {
+  const chain = bindFunc(Null(0).chain)
+  const f     = _ => Null('blah')
 
   t.throws(chain(undefined), TypeError, 'throws with undefined')
   t.throws(chain(null), TypeError, 'throws with null')
@@ -220,22 +271,22 @@ test('Const chain errors', t => {
   t.throws(chain(true), TypeError, 'throws with true')
   t.throws(chain([]), TypeError, 'throws with an array')
   t.throws(chain({}), TypeError, 'throws with an object')
-  t.throws(chain(noop), TypeError, 'throws with a non-Const returning function')
+  t.throws(chain(noop), TypeError, 'throws with a non-Null returning function')
 
-  t.doesNotThrow(chain(f), 'allows a Const returning function')
+  t.doesNotThrow(chain(f), 'allows a Null returning function')
 
   t.end()
 })
 
-test('Const chain properties (Chain)', t => {
-  t.ok(isFunction(Const(0).chain), 'provides a chain function')
-  t.ok(isFunction(Const(0).ap), 'implements the Apply spec')
+test('Null chain properties (Chain)', t => {
+  t.ok(isFunction(Null(0).chain), 'provides a chain function')
+  t.ok(isFunction(Null(0).ap), 'implements the Apply spec')
 
-  const f = x => Const(x + 2)
-  const g = x => Const(x + 10)
+  const f = x => Null(x + 2)
+  const g = x => Null(x + 10)
 
-  const a = x => Const(x).chain(f).chain(g)
-  const b = x => Const(x).chain(y => f(y).chain(g))
+  const a = x => Null(x).chain(f).chain(g)
+  const b = x => Null(x).chain(y => f(y).chain(g))
 
   t.equal(a(10).value(), b(10).value(), 'assosiativity')
 

@@ -290,3 +290,16 @@ test('Null chain properties (Chain)', t => {
 
   t.end()
 })
+
+test('Identity chain properties (Monad)', t => {
+  t.ok(isFunction(Null(0).chain), 'implements the Chain spec')
+  t.ok(isFunction(Null(0).of), 'implements the Applicative spec')
+
+  const f = x => Null(x)
+
+  t.equal(Null.of(56).chain(f).value(), f(56).value(), 'left identity')
+
+  t.equal(f(3).chain(Null.of).value(), f(3).value(), 'right identity')
+
+  t.end()
+})

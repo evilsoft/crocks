@@ -178,7 +178,7 @@ test('Null map functionality', t => {
   const m = Null(x).map(spy)
 
   t.equal(m.type(), 'Null', 'returns a Null')
-  t.equal(spy.called, true, 'calls mapping function')
+  t.notOk(spy.called, 'does not call mapping function')
   t.equal(m.value(), null, 'returns null')
 
   t.end()
@@ -259,7 +259,6 @@ test('Null of properties (Applicative)', t => {
 
 test('Null chain errors', t => {
   const chain = bindFunc(Null(0).chain)
-  const f     = _ => Null('blah')
 
   t.throws(chain(undefined), TypeError, 'throws with undefined')
   t.throws(chain(null), TypeError, 'throws with null')
@@ -271,9 +270,8 @@ test('Null chain errors', t => {
   t.throws(chain(true), TypeError, 'throws with true')
   t.throws(chain([]), TypeError, 'throws with an array')
   t.throws(chain({}), TypeError, 'throws with an object')
-  t.throws(chain(noop), TypeError, 'throws with a non-Null returning function')
 
-  t.doesNotThrow(chain(f), 'allows a Null returning function')
+  t.doesNotThrow(chain(noop), 'allows any function')
 
   t.end()
 })

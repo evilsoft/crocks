@@ -152,7 +152,7 @@ test('Const map functionality', t => {
   const m = Const(x).map(spy)
 
   t.equal(m.type(), 'Const', 'returns a Const')
-  t.equal(spy.called, true, 'calls mapping function')
+  t.notOk(spy.called, 'does not call the mapping function')
   t.equal(m.value(), x, 'returns the original Const')
 
   t.end()
@@ -208,7 +208,6 @@ test('Const ap properties (Apply)', t => {
 
 test('Const chain errors', t => {
   const chain = bindFunc(Const(0).chain)
-  const f     = _ => Const('blah')
 
   t.throws(chain(undefined), TypeError, 'throws with undefined')
   t.throws(chain(null), TypeError, 'throws with null')
@@ -220,9 +219,8 @@ test('Const chain errors', t => {
   t.throws(chain(true), TypeError, 'throws with true')
   t.throws(chain([]), TypeError, 'throws with an array')
   t.throws(chain({}), TypeError, 'throws with an object')
-  t.throws(chain(noop), TypeError, 'throws with a non-Const returning function')
 
-  t.doesNotThrow(chain(f), 'allows a Const returning function')
+  t.doesNotThrow(chain(noop), 'allows a function, of any kind')
 
   t.end()
 })

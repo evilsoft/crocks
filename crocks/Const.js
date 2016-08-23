@@ -34,8 +34,6 @@ function Const(x) {
       throw new TypeError('Const.map: Function required')
     }
 
-    fn(x)
-
     return Const(x)
   }
 
@@ -50,12 +48,6 @@ function Const(x) {
   function chain(fn) {
     if(!isFunction(fn)) {
       throw new TypeError('Const.chain: Function required')
-    }
-
-    const m = fn(x)
-
-    if(!(m && isType(type(), m))) {
-      throw new TypeError('Const.chain: function must return a Const')
     }
 
     return Const(x)

@@ -36,7 +36,7 @@ function Null() {
       throw new TypeError('Const.map: Function required')
     }
 
-    return Null(fn(x))
+    return Null()
   }
 
   function ap(m) {
@@ -50,12 +50,6 @@ function Null() {
   function chain(fn) {
     if(!isFunction(fn)) {
       throw new TypeError('Null.chain: Function required')
-    }
-
-    const m = fn(x)
-
-    if(!(m && isType(type(), m))) {
-      throw new TypeError('Null.chain: function must return a Null')
     }
 
     return Null()

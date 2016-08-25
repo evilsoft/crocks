@@ -113,6 +113,40 @@ test('Either either', t => {
   t.end()
 })
 
+test('Either swap', t => {
+  const fn = bindFunc(Either.Right(23).swap)
+
+  t.throws(fn(null, noop), TypeError, 'throws with null in left')
+  t.throws(fn(undefined, noop), TypeError, 'throws with undefined in left')
+  t.throws(fn(0, noop), TypeError, 'throws with falsey number in left')
+  t.throws(fn(1, noop), TypeError, 'throws with truthy number in left')
+  t.throws(fn('', noop), TypeError, 'throws with falsey string in left')
+  t.throws(fn('string', noop), TypeError, 'throws with truthy string in left')
+  t.throws(fn(false, noop), TypeError, 'throws with false in left')
+  t.throws(fn(true, noop), TypeError, 'throws with true in left')
+  t.throws(fn({}, noop), TypeError, 'throws with object in left')
+  t.throws(fn([], noop), TypeError, 'throws with array in left')
+
+  t.throws(fn(noop, null), TypeError, 'throws with null in right')
+  t.throws(fn(noop, undefined), TypeError, 'throws with undefined in right')
+  t.throws(fn(noop, 0), TypeError, 'throws with falsey number in right')
+  t.throws(fn(noop, 1), TypeError, 'throws with truthy number in right')
+  t.throws(fn(noop, ''), TypeError, 'throws with falsey string in right')
+  t.throws(fn(noop, 'string'), TypeError, 'throws with truthy string in right')
+  t.throws(fn(noop, false), TypeError, 'throws with false in right')
+  t.throws(fn(noop, true), TypeError, 'throws with true in right')
+  t.throws(fn(noop, {}), TypeError, 'throws with object in right')
+  t.throws(fn(noop, []), TypeError, 'throws with array in right')
+
+  const l = Either.Left('here').swap(constant('left'), identity)
+  const r = Either.Right('here').swap(identity, constant('right'))
+
+  t.ok(l.equals(Either.Right('left')),'returns an Either.Right wrapping left' )
+  t.ok(r.equals(Either.Left('right')),'returns an Either.Left wrapping right' )
+
+  t.end()
+})
+
 test('Either equals functionality', t => {
   const la = Either.Left(0)
   const lb = Either.Left(0)
@@ -225,6 +259,36 @@ test('Either map properties (Functor)', t => {
 
   t.equal(Either.Left(45).map(identity).value(), 45, 'Left identity')
   t.equal(Either.Left(10).map(x => f(g(x))).value(), Either.Left(10).map(g).map(f).value(), 'Left composition')
+
+  t.end()
+})
+
+test('Either bimap errors', t => {
+  const bimap = bindFunc(Either.Right('popcorn').bimap)
+
+  t.throws(bimap(undefined, noop), TypeError, 'throws with undefined in first argument')
+  t.throws(bimap(null, noop), TypeError, 'throws with null in first argument')
+  t.throws(bimap(0, noop), TypeError, 'throws with falsey number in first argument')
+  t.throws(bimap(1, noop), TypeError, 'throws with truthy number in first argument')
+  t.throws(bimap('', noop), TypeError, 'throws with falsey string in first argument')
+  t.throws(bimap('string', noop), TypeError, 'throws with truthy string in first argument')
+  t.throws(bimap(false, noop), TypeError, 'throws with false in first argument')
+  t.throws(bimap(true, noop), TypeError, 'throws with true in first argument')
+  t.throws(bimap([], noop), TypeError, 'throws with an array in first argument')
+  t.throws(bimap({}, noop), TypeError, 'throws with object in first argument')
+
+  t.throws(bimap(noop, undefined), TypeError, 'throws with undefined in second argument')
+  t.throws(bimap(noop, null), TypeError, 'throws with null in second argument')
+  t.throws(bimap(noop, 0), TypeError, 'throws with falsey number in second argument')
+  t.throws(bimap(noop, 1), TypeError, 'throws with truthy number in second argument')
+  t.throws(bimap(noop, ''), TypeError, 'throws with falsey string in second argument')
+  t.throws(bimap(noop, 'string'), TypeError, 'throws with truthy string in second argument')
+  t.throws(bimap(noop, false), TypeError, 'throws with false in second argument')
+  t.throws(bimap(noop, true), TypeError, 'throws with true in second argument')
+  t.throws(bimap(noop, []), TypeError, 'throws with an array in second argument')
+  t.throws(bimap(noop, {}), TypeError, 'throws with object in second argument')
+
+  t.doesNotThrow(bimap(noop, noop), 'allows functions')
 
   t.end()
 })

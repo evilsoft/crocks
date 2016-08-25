@@ -38,12 +38,31 @@ function Either(l, r) {
     )
   )
 
-  function either(lf, rf) {
-    if(!isFunction(lf) || !isFunction(rf)) {
+  function either(f, g) {
+    if(!isFunction(f) || !isFunction(g)) {
       throw new TypeError('Either.either: Requires both left and right functions')
     }
 
-    return isLeft(l) ? lf(l) : rf(r)
+    return isLeft(l) ? f(l) : g(r)
+  }
+
+  function swap(f, g) {
+    if(!isFunction(f) || !isFunction(g)) {
+      throw new TypeError('Either.swap: Requires both left and right functions')
+    }
+
+    return either(
+      composeB(Either.Right, f),
+      composeB(Either.Left, g)
+    )
+  }
+
+  function coalesce(f, g) {
+    if(!isFunction(f) || !isFunction(g)) {
+      throw new TypeError('Either.coalecse: Requires both left and right functions')
+    }
+
+    return Either.Right(either(f, g))
   }
 
   function map(fn) {
@@ -52,6 +71,17 @@ function Either(l, r) {
     }
 
     return either(Either.Left, composeB(Either.Right, fn))
+  }
+
+  function bimap(f, g) {
+    if(!isFunction(f) || !isFunction(g)) {
+      throw new TypeError('Either.bimap: Requires both left and right functions')
+    }
+
+    return either(
+      composeB(Either.Left, f),
+      composeB(Either.Right, g)
+    )
   }
 
   function ap(m) {
@@ -99,8 +129,8 @@ function Either(l, r) {
   }
 
   return {
-    inspect, either, value, type,
-    equals, map, ap, of, chain, sequence
+    inspect, either, value, type, swap, coalesce,
+    equals, map, bimap, ap, of, chain, sequence
   }
 }
 

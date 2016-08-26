@@ -131,6 +131,38 @@ test('Pair concat properties (Semigroup)', t => {
   t.end()
 })
 
+test('Pair swap', t => {
+  const fn = bindFunc(Pair(0, 0).swap)
+
+  t.throws(fn(null, noop), TypeError, 'throws with null in left')
+  t.throws(fn(undefined, noop), TypeError, 'throws with undefined in left')
+  t.throws(fn(0, noop), TypeError, 'throws with falsey number in left')
+  t.throws(fn(1, noop), TypeError, 'throws with truthy number in left')
+  t.throws(fn('', noop), TypeError, 'throws with falsey string in left')
+  t.throws(fn('string', noop), TypeError, 'throws with truthy string in left')
+  t.throws(fn(false, noop), TypeError, 'throws with false in left')
+  t.throws(fn(true, noop), TypeError, 'throws with true in left')
+  t.throws(fn({}, noop), TypeError, 'throws with object in left')
+  t.throws(fn([], noop), TypeError, 'throws with array in left')
+
+  t.throws(fn(noop, null), TypeError, 'throws with null in right')
+  t.throws(fn(noop, undefined), TypeError, 'throws with undefined in right')
+  t.throws(fn(noop, 0), TypeError, 'throws with falsey number in right')
+  t.throws(fn(noop, 1), TypeError, 'throws with truthy number in right')
+  t.throws(fn(noop, ''), TypeError, 'throws with falsey string in right')
+  t.throws(fn(noop, false), TypeError, 'throws with false in right')
+  t.throws(fn(noop, true), TypeError, 'throws with true in right')
+  t.throws(fn(noop, {}), TypeError, 'throws with object in right')
+  t.throws(fn(noop, []), TypeError, 'throws with array in right')
+
+  const f = x => `was ${x}`
+  const l = Pair('left', 'right').swap(f, f)
+
+  t.ok(l.equals(Pair('was right', 'was left')),'returns a pair with swapped, mapped values')
+
+  t.end()
+})
+
 test('Pair map errors', t => {
   const map = bindFunc(Pair(0, 'gibbles').map)
 

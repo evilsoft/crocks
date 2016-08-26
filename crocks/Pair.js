@@ -11,17 +11,17 @@ const _inspect = require('../funcs/inspect')
 
 const _type = constant('Pair')
 
-function Pair(f, s) {
+function Pair(l, r) {
   if(arguments.length < 2) {
     throw new TypeError('Pair: Must provide a first and second value')
   }
 
   const type  = _type
-  const value = constant([ f, s ])
-  const fst   = constant(f)
-  const snd   = constant(s)
+  const value = constant([ l, r ])
+  const fst   = constant(l)
+  const snd   = constant(r)
 
-  const inspect = () => `Pair [${_inspect(f)},${_inspect(s)} ]`
+  const inspect = () => `Pair [${_inspect(l)},${_inspect(r)} ]`
 
   function equals(m) {
     return isType(type(), m)
@@ -46,23 +46,28 @@ function Pair(f, s) {
     )
   }
 
+  function swap(f, g) {
+    if(!isFunction(f) || !isFunction(g)) {
+      throw new TypeError('Pair.swap: Requires both left and right functions')
+    }
+
+    return Pair(g(r), f(l))
+  }
+
   function map(fn) {
     if(!isFunction(fn)) {
       throw new TypeError('Pair.map: Function required')
     }
 
-    return Pair(f, fn(s))
+    return Pair(l, fn(r))
   }
 
-  function bimap(lf, rf) {
-    if(!isFunction(lf) || !isFunction(rf)) {
+  function bimap(f, g) {
+    if(!isFunction(f) || !isFunction(g)) {
       throw new TypeError('Pair.bimap: Function required for both arguments')
     }
 
-    return Pair(
-      lf(f),
-      rf(s)
-    )
+    return Pair(f(l), g(r))
   }
 
   function ap(m) {
@@ -107,7 +112,7 @@ function Pair(f, s) {
 
   return {
     inspect, value, fst, snd,
-    type, equals, concat,
+    type, equals, concat, swap,
     map, bimap, ap, chain
   }
 }

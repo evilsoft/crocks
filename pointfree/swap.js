@@ -6,7 +6,7 @@ function swap(f, g, m) {
     throw new TypeError('swap: Function required for first two args')
   }
   else if(!isFunction(m.swap)) {
-    throw new TypeError('swap: Either or Maybe or required for third arg')
+    throw new TypeError('swap: Either or Pair required for third arg')
   }
 
   return m.swap(f, g)

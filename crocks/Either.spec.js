@@ -147,6 +147,40 @@ test('Either swap', t => {
   t.end()
 })
 
+test('Either coalesce', t => {
+  const fn = bindFunc(Either.Right(23).coalesce)
+
+  t.throws(fn(null, noop), TypeError, 'throws with null in left')
+  t.throws(fn(undefined, noop), TypeError, 'throws with undefined in left')
+  t.throws(fn(0, noop), TypeError, 'throws with falsey number in left')
+  t.throws(fn(1, noop), TypeError, 'throws with truthy number in left')
+  t.throws(fn('', noop), TypeError, 'throws with falsey string in left')
+  t.throws(fn('string', noop), TypeError, 'throws with truthy string in left')
+  t.throws(fn(false, noop), TypeError, 'throws with false in left')
+  t.throws(fn(true, noop), TypeError, 'throws with true in left')
+  t.throws(fn({}, noop), TypeError, 'throws with object in left')
+  t.throws(fn([], noop), TypeError, 'throws with array in left')
+
+  t.throws(fn(noop, null), TypeError, 'throws with null in right')
+  t.throws(fn(noop, undefined), TypeError, 'throws with undefined in right')
+  t.throws(fn(noop, 0), TypeError, 'throws with falsey number in right')
+  t.throws(fn(noop, 1), TypeError, 'throws with truthy number in right')
+  t.throws(fn(noop, ''), TypeError, 'throws with falsey string in right')
+  t.throws(fn(noop, 'string'), TypeError, 'throws with truthy string in right')
+  t.throws(fn(noop, false), TypeError, 'throws with false in right')
+  t.throws(fn(noop, true), TypeError, 'throws with true in right')
+  t.throws(fn(noop, {}), TypeError, 'throws with object in right')
+  t.throws(fn(noop, []), TypeError, 'throws with array in right')
+
+  const l = Either.Left('here').coalesce(constant('was left'), identity)
+  const r = Either.Right('here').coalesce(identity, constant('was right'))
+
+  t.ok(l.equals(Either.Right('was left')),'returns an Either.Right wrapping was left' )
+  t.ok(r.equals(Either.Right('was right')),'returns an Either.Right wrapping was right' )
+
+  t.end()
+})
+
 test('Either equals functionality', t => {
   const la = Either.Left(0)
   const lb = Either.Left(0)

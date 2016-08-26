@@ -9,6 +9,7 @@ const noop        = helpers.noop
 const bindFunc    = helpers.bindFunc
 
 const reverseApply  = require('../combinators/reverseApply')
+const constant      = require('../combinators/constant')
 const composeB      = require('../combinators/composeB')
 const identity      = require('../combinators/identity')
 
@@ -56,6 +57,86 @@ test('Maybe maybe', t => {
 
   t.equal(Maybe(null).maybe(), undefined, 'maybe returns undefined when null is wrapped')
   t.equal(Maybe(undefined).maybe(), undefined, 'maybe returns undefined when undefined is wrapped')
+  t.end()
+})
+
+test('Maybe option', t => {
+  const nothing   = Maybe(null)
+  const something = Maybe('something')
+
+  t.equal(nothing.option('was nothing'), 'was nothing', 'returns passed value when called on Nothing')
+  t.equal(something.option('was something'), 'something', 'returns wrapped value when called on Something')
+
+  t.end()
+})
+
+test('Maybe either', t => {
+  const nothing   = Maybe(null)
+  const something = Maybe('value')
+
+  const fn = bindFunc(Maybe(23).either)
+
+  t.throws(fn(), TypeError, 'throws when nothing passed')
+
+  t.throws(fn(null, noop), TypeError, 'throws with null in left')
+  t.throws(fn(undefined, noop), TypeError, 'throws with undefined in left')
+  t.throws(fn(0, noop), TypeError, 'throws with falsey number in left')
+  t.throws(fn(1, noop), TypeError, 'throws with truthy number in left')
+  t.throws(fn('', noop), TypeError, 'throws with falsey string in left')
+  t.throws(fn('string', noop), TypeError, 'throws with truthy string in left')
+  t.throws(fn(false, noop), TypeError, 'throws with false in left')
+  t.throws(fn(true, noop), TypeError, 'throws with true in left')
+  t.throws(fn({}, noop), TypeError, 'throws with object in left')
+  t.throws(fn([], noop), TypeError, 'throws with array in left')
+
+  t.throws(fn(noop, null), TypeError, 'throws with null in right')
+  t.throws(fn(noop, undefined), TypeError, 'throws with undefined in right')
+  t.throws(fn(noop, 0), TypeError, 'throws with falsey number in right')
+  t.throws(fn(noop, 1), TypeError, 'throws with truthy number in right')
+  t.throws(fn(noop, ''), TypeError, 'throws with falsey string in right')
+  t.throws(fn(noop, 'string'), TypeError, 'throws with truthy string in right')
+  t.throws(fn(noop, false), TypeError, 'throws with false in right')
+  t.throws(fn(noop, true), TypeError, 'throws with true in right')
+  t.throws(fn(noop, {}), TypeError, 'throws with object in right')
+  t.throws(fn(noop, []), TypeError, 'throws with array in right')
+
+  t.equal(nothing.either(constant('nothing'), constant('something')), 'nothing', 'returns left function result when called on Nothing')
+  t.equal(something.either(constant('nothing'), constant('something')), 'something', 'returns right function result when called on Somthing')
+
+  t.end()
+})
+
+test('Maybe coalesce', t => {
+  const fn = bindFunc(Maybe(23).coalesce)
+
+  t.throws(fn(null, noop), TypeError, 'throws with null in left')
+  t.throws(fn(undefined, noop), TypeError, 'throws with undefined in left')
+  t.throws(fn(0, noop), TypeError, 'throws with falsey number in left')
+  t.throws(fn(1, noop), TypeError, 'throws with truthy number in left')
+  t.throws(fn('', noop), TypeError, 'throws with falsey string in left')
+  t.throws(fn('string', noop), TypeError, 'throws with truthy string in left')
+  t.throws(fn(false, noop), TypeError, 'throws with false in left')
+  t.throws(fn(true, noop), TypeError, 'throws with true in left')
+  t.throws(fn({}, noop), TypeError, 'throws with object in left')
+  t.throws(fn([], noop), TypeError, 'throws with array in left')
+
+  t.throws(fn(noop, null), TypeError, 'throws with null in right')
+  t.throws(fn(noop, undefined), TypeError, 'throws with undefined in right')
+  t.throws(fn(noop, 0), TypeError, 'throws with falsey number in right')
+  t.throws(fn(noop, 1), TypeError, 'throws with truthy number in right')
+  t.throws(fn(noop, ''), TypeError, 'throws with falsey string in right')
+  t.throws(fn(noop, 'string'), TypeError, 'throws with truthy string in right')
+  t.throws(fn(noop, false), TypeError, 'throws with false in right')
+  t.throws(fn(noop, true), TypeError, 'throws with true in right')
+  t.throws(fn(noop, {}), TypeError, 'throws with object in right')
+  t.throws(fn(noop, []), TypeError, 'throws with array in right')
+
+  const nothing   = Maybe(null).coalesce(constant('was nothing'), identity)
+  const something = Maybe('here').coalesce(identity, constant('was something'))
+
+  t.ok(nothing.equals(Maybe('was nothing')),'returns a Maybe wrapping was nothing' )
+  t.ok(something.equals(Maybe('was something')),'returns a Maybe wrapping was something' )
+
   t.end()
 })
 

@@ -22,7 +22,6 @@ function Maybe(x) {
   const type    = _type
   const of      = _of
 
-  const either  = (n, s) => isNothing(x) ? n() : s(x)
   const option  = n => either(constant(n), constant(x))
   const maybe   = constant(option(undefined))
 
@@ -33,6 +32,22 @@ function Maybe(x) {
       constant(`Maybe.Nothing`),
       constant(`Maybe${_inspect(x)}`)
     )
+  }
+
+  function either(f, g) {
+    if(!isFunction(f) || !isFunction(g)) {
+      throw new TypeError('Maybe.either: Requires both left and right functions')
+    }
+
+    return isNothing(x) ? f() : g(x)
+  }
+
+  function coalesce(f, g) {
+    if(!isFunction(f) || !isFunction(g)) {
+      throw new TypeError('Maybe.coalesce: Requires both left and right functions')
+    }
+
+    return Maybe(either(f, g))
   }
 
   function map(fn) {
@@ -93,8 +108,8 @@ function Maybe(x) {
 
   return {
     inspect, maybe, either, option,
-    type, equals, map, ap, of, chain,
-    sequence
+    type, equals, coalesce, map, ap,
+    of, chain, sequence
   }
 }
 

@@ -59,7 +59,7 @@ function Either(l, r) {
 
   function coalesce(f, g) {
     if(!isFunction(f) || !isFunction(g)) {
-      throw new TypeError('Either.coalecse: Requires both left and right functions')
+      throw new TypeError('Either.coalesce: Requires both left and right functions')
     }
 
     return Either.Right(either(f, g))

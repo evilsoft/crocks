@@ -17,6 +17,7 @@ const liftA2      = require('./funcs/liftA2')
 const liftA3      = require('./funcs/liftA3')
 const mconcat     = require('./funcs/mconcat')
 const mconcatMap  = require('./funcs/mconcatMap')
+const pipe        = require('./funcs/pipe')
 
 const ap        = require('./pointfree/ap')
 const bimap     = require('./pointfree/bimap')
@@ -81,6 +82,7 @@ test('entry', t => {
   t.equal(crocks.liftA3, liftA3, 'provides the liftA3 function')
   t.equal(crocks.mconcat, mconcat, 'provides the mconcat function')
   t.equal(crocks.mconcatMap, mconcatMap, 'provides the mconcatMap function')
+  t.equal(crocks.pipe, pipe, 'provides the pipe function')
 
   t.equal(crocks.ap, ap, 'provides the ap point-free function')
   t.equal(crocks.bimap, bimap, 'provides the bimap point-free function')

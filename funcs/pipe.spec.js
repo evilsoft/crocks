@@ -2,18 +2,18 @@ const test    = require('tape')
 const sinon   = require('sinon')
 const helpers = require('../test/helpers')
 
-const compose = require('./compose')
-
 const noop        = helpers.noop
 const bindFunc    = helpers.bindFunc
 const isFunction  = require('../internal/isFunction')
 
-test('compose parameters', t => {
-  const c = bindFunc(compose)
+const pipe = require('./pipe')
 
-  t.ok(isFunction(compose), 'compose is a function')
+test('pipe parameters', t => {
+  const c = bindFunc(pipe)
 
-  t.throws(compose, TypeError, 'throws Error when nothing passed')
+  t.ok(isFunction(pipe), 'pipe is a function')
+
+  t.throws(pipe, TypeError, 'throws Error when nothing passed')
 
   t.throws(c(undefined), TypeError, 'throws TypeError when undefined passed')
   t.throws(c(null), TypeError, 'throws TypeError when null passed')
@@ -28,12 +28,12 @@ test('compose parameters', t => {
   t.throws(c({}), TypeError, 'throws TypeError when object passed')
   t.throws(c([]), TypeError, 'throws TypeError when array passed')
 
-  t.ok(isFunction(compose(noop)), 'returns a function')
+  t.ok(isFunction(pipe(noop)), 'returns a function')
 
   t.end()
 })
 
-test('composed function', t => {
+test('pipe function', t => {
   const retString = () => 'string'
   const retBling  = () => 'bling'
 
@@ -41,9 +41,9 @@ test('composed function', t => {
   const second  = sinon.spy(retBling)
 
   const args    = [ 'first', 'second' ]
-  const result  = compose(second, first).apply(null, args)
+  const result  = pipe(first, second).apply(null, args)
 
-  t.ok(first.calledBefore(second), 'right-most function is called first')
+  t.ok(first.calledBefore(second), 'left-most function is called first')
   t.ok(first.calledWith.apply(first, args), 'right-most function applied with all arguments')
   t.ok(second.calledWith('string'), 'second function receives result of the first function')
 

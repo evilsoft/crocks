@@ -4,6 +4,8 @@
 const isFunction  = require('../internal/isFunction')
 const argsArray   = require('../internal/argsArray')
 
+const pipe = require('./pipe')
+
 // compose :: ...fns -> fn
 function compose() {
   if(!arguments.length) {
@@ -16,12 +18,7 @@ function compose() {
     throw new TypeError('compose: Only accepts functions')
   }
 
-  return function() {
-    return fns.reduceRight(
-      (x, fn) => fn.apply(null, [].concat(x)),
-      argsArray(arguments)
-    )
-  }
+  return pipe.apply(null, fns.slice().reverse())
 }
 
 module.exports = compose

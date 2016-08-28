@@ -34,6 +34,7 @@ const helpers = {
   liftA3:     require('./funcs/liftA3'),
   mconcat:    require('./funcs/mconcat'),
   mconcatMap: require('./funcs/mconcatMap'),
+  pipe:       require('./funcs/pipe')
 }
 
 const pointFree = {

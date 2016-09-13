@@ -1,9 +1,9 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const curry       = require('../funcs/curry')
-const isFunction  = require('../internal/isFunction')
-const composeB    = require('../combinators/composeB')
+const curry = require('../funcs/curry')
+const composeB = require('../combinators/composeB')
+const isFunction = require('../internal/isFunction')
 
 // map :: Functor f => (a -> b) -> f a -> f b
 function map(fn, m) {

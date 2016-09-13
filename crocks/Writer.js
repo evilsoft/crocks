@@ -1,36 +1,51 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const constant    = require('../combinators/constant')
-const isType      = require('../internal/isType')
-const isFunction  = require('../internal/isFunction')
-const isMonoid    = require('../internal/isMonoid')
-const isArray     = require('../internal/isArray')
+const isType = require('../internal/isType')
+const isFunction = require('../internal/isFunction')
+const isMonoid = require('../internal/isMonoid')
+const isArray = require('../internal/isArray')
 
 const _inspect = require('../funcs/inspect')
-
 const mconcat = require('../funcs/mconcat')
 
-const wrapValue = x => isArray(x) ? x.slice() : [ x ]
+const constant = require('../combinators/constant')
 
-const _of   = x => Writer([], x)
-const _type = constant('Writer')
+const wrapValue =
+  x => isArray(x) ? x.slice() : [ x ]
+
+const _of =
+  x => Writer([], x)
+
+const _type =
+  constant('Writer')
 
 function Writer(entry, val) {
   if(arguments.length !== 2) {
     throw new TypeError('Writer: Requires a log entry and a value')
   }
 
-  const type    = _type
-  const of      = _of
-  const equals  = m => isType(type(), m) && m.value() === value()
-  const value   = constant(val)
-  const log     = constant(wrapValue(entry))
-  const inspect = constant(`Writer(${_inspect(log())}${_inspect(value())} )`)
+  const type =
+    _type
+
+  const of =
+    _of
+
+  const equals =
+    m => isType(type(), m) && m.value() === value()
+
+  const value =
+    constant(val)
+
+  const log =
+    constant(wrapValue(entry))
+
+  const inspect =
+    constant(`Writer(${_inspect(log())}${_inspect(value())} )`)
 
   const read = constant({
-    log:    log(),
-    value:  value()
+    log: log(),
+    value: value()
   })
 
   function map(fn) {
@@ -89,7 +104,10 @@ function Writer(entry, val) {
   }
 }
 
-Writer.of   = _of
-Writer.type = _type
+Writer.of =
+  _of
+
+Writer.type =
+  _type
 
 module.exports = Writer

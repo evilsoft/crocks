@@ -2,7 +2,6 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const curry = require('../funcs/curry')
-
 const isFunction = require('../internal/isFunction')
 
 function runWith(x, m) {

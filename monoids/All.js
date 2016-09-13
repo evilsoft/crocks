@@ -1,16 +1,19 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isFunction    = require('../internal/isFunction')
-const isType        = require('../internal/isType')
+const isType = require('../internal/isType')
+const isFunction = require('../internal/isFunction')
 const isUndefOrNull = require('../internal/isUndefOrNull')
 
 const _inspect = require('../funcs/inspect')
 
 const constant = require('../combinators/constant')
 
-const _empty  = () => All(true)
-const _type   = constant('All')
+const _empty =
+  () => All(true)
+
+const _type =
+  constant('All')
 
 function All(b) {
   const x = isUndefOrNull(b) ? _empty().value() : b
@@ -19,11 +22,17 @@ function All(b) {
     throw new TypeError('All: Non-function value required')
   }
 
-  const value = constant(!!x)
-  const type  = _type
-  const empty = _empty
+  const value =
+    constant(!!x)
 
-  const inspect = constant(`All${_inspect(value())}`)
+  const type =
+    _type
+
+  const empty =
+    _empty
+
+  const inspect =
+    constant(`All${_inspect(value())}`)
 
   function concat(m) {
     if(!(m && isType(type(), m))) {
@@ -36,7 +45,10 @@ function All(b) {
   return { inspect, value, type, concat, empty }
 }
 
-All.empty = _empty
-All.type  = _type
+All.empty =
+  _empty
+
+All.type =
+  _type
 
 module.exports = All

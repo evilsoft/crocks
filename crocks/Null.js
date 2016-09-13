@@ -1,27 +1,42 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isFunction  = require('../internal/isFunction')
-const isType      = require('../internal/isType')
+const isFunction = require('../internal/isFunction')
+const isType = require('../internal/isType')
 
 const _inspect = require('../funcs/inspect')
 
 const constant = require('../combinators/constant')
 
-const _type   = constant('Null')
-const _of     = Null
-const _empty  = Null
+const _type =
+  constant('Null')
+
+const _of =
+  Null
+
+const _empty =
+  Null
 
 function Null() {
   const x = null
 
-  const equals = m => isType(type(), m) && x === m.value()
-  const inspect = constant(`Null`)
+  const equals =
+    m => isType(type(), m) && x === m.value()
 
-  const value = constant(x)
-  const type  = _type
-  const of    = _of
-  const empty = _empty
+  const inspect =
+    constant(`Null`)
+
+  const value =
+    constant(x)
+
+  const type =
+    _type
+
+  const of =
+    _of
+
+  const empty =
+    _empty
 
   function concat(m) {
     if(!(m && isType(type(), m))) {
@@ -33,7 +48,7 @@ function Null() {
 
   function map(fn) {
     if(!isFunction(fn)) {
-      throw new TypeError('Const.map: Function required')
+      throw new TypeError('Null.map: Function required')
     }
 
     return Null()
@@ -61,9 +76,14 @@ function Null() {
   }
 }
 
-Null.type   = _type
-Null.of     = _of
-Null.empty  = _empty
+Null.type =
+  _type
+
+Null.of =
+  _of
+
+Null.empty =
+  _empty
 
 module.exports = Null
 

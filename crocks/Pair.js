@@ -1,27 +1,36 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const constant = require('../combinators/constant')
-
-const isType      = require('../internal/isType')
-const isFunction  = require('../internal/isFunction')
+const isType = require('../internal/isType')
+const isFunction = require('../internal/isFunction')
 const isSemigroup = require('../internal/isSemigroup')
 
 const _inspect = require('../funcs/inspect')
 
-const _type = constant('Pair')
+const constant = require('../combinators/constant')
+
+const _type =
+  constant('Pair')
 
 function Pair(l, r) {
   if(arguments.length < 2) {
     throw new TypeError('Pair: Must provide a first and second value')
   }
 
-  const type  = _type
-  const value = constant([ l, r ])
-  const fst   = constant(l)
-  const snd   = constant(r)
+  const type =
+    _type
 
-  const inspect = () => `Pair [${_inspect(l)},${_inspect(r)} ]`
+  const value =
+    constant([ l, r ])
+
+  const fst =
+    constant(l)
+
+  const snd =
+    constant(r)
+
+  const inspect =
+    () => `Pair [${_inspect(l)},${_inspect(r)} ]`
 
   function equals(m) {
     return isType(type(), m)

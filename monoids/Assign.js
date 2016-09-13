@@ -1,17 +1,20 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isFunction    = require('../internal/isFunction')
-const isType        = require('../internal/isType')
+const isType = require('../internal/isType')
+const isObject = require('../internal/isObject')
+const isFunction = require('../internal/isFunction')
 const isUndefOrNull = require('../internal/isUndefOrNull')
-const isObject      = require('../internal/isObject')
 
 const _inspect = require('../funcs/inspect')
 
 const constant = require('../combinators/constant')
 
-const _empty  = () => Assign({})
-const _type   = constant('Assign')
+const _empty =
+  () => Assign({})
+
+const _type =
+  constant('Assign')
 
 function Assign(o) {
   const x = isUndefOrNull(o) ? _empty().value() : o
@@ -20,11 +23,17 @@ function Assign(o) {
     throw new TypeError('Assign: Object required')
   }
 
-  const value   = constant(x)
-  const type    = _type
-  const empty   = _empty
+  const value =
+    constant(x)
 
-  const inspect = constant(`Assign${_inspect(value())}`)
+  const type =
+    _type
+
+  const empty =
+    _empty
+
+  const inspect =
+    constant(`Assign${_inspect(value())}`)
 
   function concat(m) {
     if(!(m && isType(type(), m))) {
@@ -37,7 +46,10 @@ function Assign(o) {
   return { inspect, value, type, concat, empty }
 }
 
-Assign.empty = _empty
-Assign.type  = _type
+Assign.empty =
+  _empty
+
+Assign.type =
+  _type
 
 module.exports = Assign

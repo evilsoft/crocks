@@ -1,10 +1,9 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const curry = require('../funcs/curry')
-
-const isFunction  = require('../internal/isFunction')
-const isApply     = require('../internal/isApply')
+const curry = require('./curry')
+const isApply = require('../internal/isApply')
+const isFunction = require('../internal/isFunction')
 
 // liftA2 :: Applicative m => (a -> a -> b) -> m a -> m a -> m b
 function liftA2(fn, x, y) {

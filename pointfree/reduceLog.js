@@ -1,8 +1,8 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const curry       = require('../funcs/curry')
-const isFunction  = require('../internal/isFunction')
+const curry = require('../funcs/curry')
+const isFunction = require('../internal/isFunction')
 
 function reduceLog(fn, m) {
   if(!isFunction(fn)) {

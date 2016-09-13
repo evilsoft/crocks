@@ -1,9 +1,9 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isFunction  = require('../internal/isFunction')
-const argsArray   = require('../internal/argsArray')
-const identity    = require('../combinators/identity')
+const identity = require('../combinators/identity')
+const argsArray = require('../internal/argsArray')
+const isFunction = require('../internal/isFunction')
 
 function applyPipe(f, g) {
   return function() {
@@ -17,14 +17,18 @@ function pipe() {
     throw new TypeError('pipe: At least one function required')
   }
 
-  const fns = argsArray(arguments)
+  const fns =
+    argsArray(arguments)
 
   if(fns.filter(x => !isFunction(x)).length) {
     throw new TypeError('pipe: Only accepts functions')
   }
 
-  const head = fns[0]
-  const tail = fns.slice(1).concat(identity)
+  const head =
+    fns[0]
+
+  const tail =
+    fns.slice(1).concat(identity)
 
   return tail.reduce(applyPipe, head)
 }

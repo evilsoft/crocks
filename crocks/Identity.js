@@ -1,29 +1,40 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isFunction    = require('../internal/isFunction')
-const isType        = require('../internal/isType')
+const isFunction = require('../internal/isFunction')
+const isType = require('../internal/isType')
 const isApplicative = require('../internal/isApplicative')
 
 const _inspect = require('../funcs/inspect')
 
-const constant  = require('../combinators/constant')
-const composeB  = require('../combinators/composeB')
+const constant = require('../combinators/constant')
+const composeB = require('../combinators/composeB')
 
-const _type = constant('Identity')
-const _of   = Identity
+const _type =
+  constant('Identity')
+
+const _of =
+  Identity
 
 function Identity(x) {
   if(!arguments.length) {
     throw new TypeError('Identity: Must wrap something')
   }
 
-  const value = constant(x)
-  const type  = _type
-  const of    = _of
+  const value =
+    constant(x)
 
-  const equals = m => isType(type(), m) && x === m.value()
-  const inspect = constant(`Identity${_inspect(x)}`)
+  const type =
+    _type
+
+  const of =
+    _of
+
+  const equals =
+    m => isType(type(), m) && x === m.value()
+
+  const inspect =
+    constant(`Identity${_inspect(x)}`)
 
   function map(fn) {
     if(!isFunction(fn)) {
@@ -75,7 +86,10 @@ function Identity(x) {
   }
 }
 
-Identity.of   = _of
-Identity.type = _type
+Identity.of =
+  _of
+
+Identity.type =
+  _type
 
 module.exports = Identity

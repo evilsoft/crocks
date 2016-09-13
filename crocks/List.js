@@ -1,19 +1,24 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isFunction    = require('../internal/isFunction')
-const isArray       = require('../internal/isArray')
-const isType        = require('../internal/isType')
+const isFunction = require('../internal/isFunction')
+const isArray = require('../internal/isArray')
+const isType = require('../internal/isType')
 const isApplicative = require('../internal/isApplicative')
 
-const constant  = require('../combinators/constant')
+const constant = require('../combinators/constant')
 
-const _inspect    = require('../funcs/inspect')
-const _concat     = require('../pointfree/concat')
+const _inspect = require('../funcs/inspect')
+const _concat = require('../pointfree/concat')
 
-const _type     = constant('List')
-const _of       = x => List([ x ])
-const _empty    = () => List([])
+const _type =
+  constant('List')
+
+const _of =
+  x => List([ x ])
+
+const _empty =
+  () => List([])
 
 function List(xs) {
   if(!arguments.length || !isArray(xs)) {
@@ -32,12 +37,20 @@ function List(xs) {
     }
   }
 
-  const type  = _type
-  const of    = _of
-  const value = constant(xs.slice())
-  const empty = _empty
+  const type =
+    _type
 
-  const inspect = () => `List${_inspect(xs)}`
+  const of =
+    _of
+
+  const value =
+    constant(xs.slice())
+
+  const empty =
+    _empty
+
+  const inspect =
+    () => `List${_inspect(xs)}`
 
   function equals(m) {
     if(m && isType(type(), m)) {
@@ -133,8 +146,13 @@ function List(xs) {
   }
 }
 
-List.type   = _type
-List.of     = _of
-List.empty  = _empty
+List.type =
+  _type
+
+List.of =
+  _of
+
+List.empty =
+  _empty
 
 module.exports = List

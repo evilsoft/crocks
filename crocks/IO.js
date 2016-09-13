@@ -1,26 +1,33 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isFunction  = require('../internal/isFunction')
-const isType      = require('../internal/isType')
+const isFunction = require('../internal/isFunction')
+const isType = require('../internal/isType')
 
 const _inspect = require('../funcs/inspect')
 
 const composeB = require('../combinators/composeB')
 const constant = require('../combinators/constant')
 
-const _type = constant('IO')
-const _of   = x => IO(constant(x))
+const _type =
+  constant('IO')
+
+const _of =
+  x => IO(constant(x))
 
 function IO(run) {
   if(!arguments.length || !isFunction(run)) {
     throw new TypeError('IO: Must wrap a function')
   }
 
-  const type    = _type
-  const of      = _of
+  const type =
+    _type
 
-  const inspect = constant(`IO${_inspect(run)}`)
+  const of =
+    _of
+
+  const inspect =
+    constant(`IO${_inspect(run)}`)
 
   function map(fn) {
     if(!isFunction(fn)) {
@@ -52,7 +59,10 @@ function IO(run) {
   }
 }
 
-IO.of   = _of
-IO.type = _type
+IO.of =
+  _of
+
+IO.type =
+  _type
 
 module.exports = IO

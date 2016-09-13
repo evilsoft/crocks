@@ -1,22 +1,32 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isFunction    = require('../internal/isFunction')
+const isFunction = require('../internal/isFunction')
 const isApplicative = require('../internal/isApplicative')
-const isType        = require('../internal/isType')
-const constant      = require('../combinators/constant')
-const composeB      = require('../combinators/composeB')
-const _inspect      = require('../funcs/inspect')
+const isType = require('../internal/isType')
 
-const isEqual = x => y => x === y
+const constant = require('../combinators/constant')
+const composeB = require('../combinators/composeB')
 
-Either.Left   = l => Either(l, null)
-Either.Right  = r => Either(null, r)
+const _inspect = require('../funcs/inspect')
 
-const _of   = Either.Right
-const _type = constant('Either')
+const isEqual =
+  x => y => x === y
 
-const isLeft = l => l !== null
+Either.Left =
+  l => Either(l, null)
+
+Either.Right =
+  r => Either(null, r)
+
+const _of =
+  Either.Right
+
+const _type =
+  constant('Either')
+
+const isLeft =
+  l => l !== null
 
 function Either(l, r) {
   if(arguments.length < 2) {
@@ -26,10 +36,17 @@ function Either(l, r) {
     throw new TypeError('Either: Requires at least one of its arguments to be non-null')
   }
 
-  const type    = _type
-  const value   = () => isLeft(l) ? l : r
-  const equals  = m => isType(type(), m) && m.either(isEqual(l), isEqual(r))
-  const of      = _of
+  const type =
+    _type
+
+  const value =
+    () => isLeft(l) ? l : r
+
+  const equals =
+    m => isType(type(), m) && m.either(isEqual(l), isEqual(r))
+
+  const of =
+    _of
 
   const inspect = constant(
     either(

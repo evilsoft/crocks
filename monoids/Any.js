@@ -1,16 +1,19 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isFunction    = require('../internal/isFunction')
-const isType        = require('../internal/isType')
+const isType = require('../internal/isType')
+const isFunction = require('../internal/isFunction')
 const isUndefOrNull = require('../internal/isUndefOrNull')
 
 const _inspect = require('../funcs/inspect')
 
 const constant = require('../combinators/constant')
 
-const _type   = constant('Any')
-const _empty  = () => Any(false)
+const _type =
+  constant('Any')
+
+const _empty =
+  () => Any(false)
 
 function Any(b) {
   const x = isUndefOrNull(b) ? _empty().value() : b
@@ -19,11 +22,17 @@ function Any(b) {
     throw new TypeError('Any: Non-function value required')
   }
 
-  const value = constant(!!x)
-  const type  = _type
-  const empty = _empty
+  const value =
+    constant(!!x)
 
-  const inspect = constant(`Any${_inspect(value())}`)
+  const type =
+    _type
+
+  const empty =
+    _empty
+
+  const inspect =
+    constant(`Any${_inspect(value())}`)
 
   function concat(m) {
     if(!(m && isType(type(), m))) {

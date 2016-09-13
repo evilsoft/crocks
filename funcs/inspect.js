@@ -1,9 +1,9 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isFunction  = require('../internal/isFunction')
-const isObject    = require('../internal/isObject')
-const isArray     = require('../internal/isArray')
+const isArray = require('../internal/isArray')
+const isObject = require('../internal/isObject')
+const isFunction = require('../internal/isFunction')
 
 function arrayInspect(xs) {
   return xs.length

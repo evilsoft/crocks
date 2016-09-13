@@ -1,16 +1,19 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isNumber      = require('../internal/isNumber')
+const isType = require('../internal/isType')
+const isNumber = require('../internal/isNumber')
 const isUndefOrNull = require('../internal/isUndefOrNull')
-const isType        = require('../internal/isType')
 
 const _inspect = require('../funcs/inspect')
 
 const constant = require('../combinators/constant')
 
-const _empty  = () => Min(Infinity)
-const _type   = constant('Min')
+const _empty =
+  () => Min(Infinity)
+
+const _type =
+  constant('Min')
 
 function Min(n) {
   const x = isUndefOrNull(n) ? _empty().value() : n
@@ -19,11 +22,17 @@ function Min(n) {
     throw new TypeError('Min: Numeric value required')
   }
 
-  const value = constant(x)
-  const type  = _type
-  const empty = _empty
+  const value =
+    constant(x)
 
-  const inspect = constant(`Min${_inspect(value())}`)
+  const type =
+    _type
+
+  const empty =
+    _empty
+
+  const inspect =
+    constant(`Min${_inspect(value())}`)
 
   function concat(m) {
     if(!(m && isType(type(), m))) {
@@ -36,7 +45,10 @@ function Min(n) {
   return { inspect, value, type, concat, empty }
 }
 
-Min.empty = _empty
-Min.type  = _type
+Min.empty =
+  _empty
+
+Min.type =
+  _type
 
 module.exports = Min

@@ -1,8 +1,8 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isFunction  = require('../internal/isFunction')
-const argsArray   = require('../internal/argsArray')
+const isFunction = require('../internal/isFunction')
+const argsArray = require('../internal/argsArray')
 
 function applyCurry(fn, arg) {
   if(!isFunction(fn)) { return fn }
@@ -15,8 +15,11 @@ function curry(fn) {
   }
 
   return function() {
-    const xs    = argsArray(arguments)
-    const args  = xs.length ? xs : [ undefined ]
+    const xs =
+      argsArray(arguments)
+
+    const args =
+      xs.length ? xs : [ undefined ]
 
     if(args.length < fn.length) {
       return curry(Function.bind.apply(fn, [null].concat(args)))
@@ -26,7 +29,9 @@ function curry(fn) {
       ? fn.apply(null, args)
       : args.reduce(applyCurry, fn)
 
-    if(isFunction(val)) { return curry(val) }
+    if(isFunction(val)) {
+      return curry(val)
+    }
 
     return val
   }

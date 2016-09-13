@@ -2,30 +2,41 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const isApplicative = require('../internal/isApplicative')
-const isFunction    = require('../internal/isFunction')
-const isType        = require('../internal/isType')
+const isFunction = require('../internal/isFunction')
+const isType = require('../internal/isType')
 
-const constant  = require('../combinators/constant')
+const constant = require('../combinators/constant')
 
 const _inspect = require('../funcs/inspect')
 
-const isNothing = x => x === undefined || x === null
+const isNothing =
+  x => x === undefined || x === null
 
-const _type = constant('Maybe')
-const _of   = Maybe
+const _type=
+  constant('Maybe')
+
+const _of =
+  Maybe
 
 function Maybe(x) {
   if(!arguments.length) {
     throw new TypeError('Maybe: Must wrap something')
   }
 
-  const type    = _type
-  const of      = _of
+  const type =
+    _type
 
-  const option  = n => either(constant(n), constant(x))
-  const maybe   = constant(option(undefined))
+  const of =
+    _of
 
-  const equals  = m => isType(type(), m) && x === m.maybe()
+  const option =
+    n => either(constant(n), constant(x))
+
+  const maybe =
+    constant(option(undefined))
+
+  const equals =
+    m => isType(type(), m) && x === m.maybe()
 
   function inspect() {
     return either(
@@ -113,7 +124,10 @@ function Maybe(x) {
   }
 }
 
-Maybe.of    = _of
-Maybe.type  = _type
+Maybe.of =
+  _of
+
+Maybe.type =
+  _type
 
 module.exports = Maybe

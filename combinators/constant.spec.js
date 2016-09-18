@@ -1,8 +1,8 @@
-const test    = require('tape')
+const test = require('tape')
 const helpers = require('../test/helpers')
 
+const noop = helpers.noop
 const isFunction  = require('../internal/isFunction')
-const noop        = helpers.noop
 
 const constant = require('./constant')
 

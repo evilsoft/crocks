@@ -1,10 +1,10 @@
-const test    = require('tape')
-const sinon   = require('sinon')
+const test = require('tape')
+const sinon = require('sinon')
 const helpers = require('../test/helpers')
 
-const isFunction  = require('../internal/isFunction')
-const bindFunc    = helpers.bindFunc
-const noop        = helpers.noop
+const noop = helpers.noop
+const bindFunc = helpers.bindFunc
+const isFunction = require('../internal/isFunction')
 
 const constant = require('../combinators/constant')
 
@@ -41,7 +41,7 @@ test('reduce pointfree', t => {
   t.doesNotThrow(r(noop, 0, m), 'allows a function and Foldable')
   t.doesNotThrow(r(noop, 0, []), 'allows a function and an array (Foldable)')
 
-  const f   = sinon.spy()
+  const f = sinon.spy()
   const res = reduce(f, 0, m)
 
   t.ok(m.reduce.calledWith(f), 'calls reduce on container, passing the function')

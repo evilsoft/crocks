@@ -1,15 +1,15 @@
-const test    = require('tape')
-const sinon   = require('sinon')
+const test = require('tape')
+const sinon = require('sinon')
 const helpers = require('../test/helpers')
 
-const isObject    = require('../internal/isObject')
-const isFunction  = require('../internal/isFunction')
-const bindFunc    = helpers.bindFunc
-const noop        = helpers.noop
+const isObject = require('../internal/isObject')
+const isFunction = require('../internal/isFunction')
+const bindFunc = helpers.bindFunc
+const noop = helpers.noop
 
-const identity      = require('../combinators/identity')
-const composeB      = require('../combinators/composeB')
-const reverseApply  = require('../combinators/reverseApply')
+const identity = require('../combinators/identity')
+const composeB = require('../combinators/composeB')
+const reverseApply = require('../combinators/reverseApply')
 
 const MockCrock = require('../test/MockCrock')
 
@@ -61,7 +61,7 @@ test('Identity equals functionality', t => {
   const b = Identity(0)
   const c = Identity(1)
 
-  const value       = 0
+  const value = 0
   const nonIdentity = { type: 'Identity...Not' }
 
   t.equal(a.equals(c), false, 'returns false when 2 Identities are not equal')
@@ -107,7 +107,7 @@ test('Identity map errors', t => {
 
 test('Identity map functionality', t => {
   const spy = sinon.spy(identity)
-  const x   = 42
+  const x = 42
 
   const m = Identity(x).map(spy)
 
@@ -133,7 +133,7 @@ test('Identity map properties (Functor)', t => {
 })
 
 test('Identity ap errors', t => {
-  const m   = { type: () => 'Identity...Not' }
+  const m = { type: () => 'Identity...Not' }
 
   t.throws(Identity(undefined).ap.bind(null, Identity(0)), TypeError, 'throws when wrapped value is undefined')
   t.throws(Identity(null).ap.bind(null, Identity(0)), TypeError, 'throws when wrapped value is null')
@@ -250,8 +250,8 @@ test('Identity chain properties (Monad)', t => {
 })
 
 test('Identity sequence errors', t => {
-  const seq     = bindFunc(Identity(MockCrock(32)).sequence)
-  const seqBad  = bindFunc(Identity(0).sequence)
+  const seq = bindFunc(Identity(MockCrock(32)).sequence)
+  const seqBad = bindFunc(Identity(0).sequence)
 
   t.throws(seq(undefined), TypeError, 'throws with undefined')
   t.throws(seq(null), TypeError, 'throws with null')

@@ -1,22 +1,22 @@
-const test    = require('tape')
-const sinon   = require('sinon')
+const test = require('tape')
+const sinon = require('sinon')
 const helpers = require('../test/helpers')
 
-const isObject    = require('../internal/isObject')
-const isFunction  = require('../internal/isFunction')
-const bindFunc    = helpers.bindFunc
-const noop        = helpers.noop
+const noop = helpers.noop
+const bindFunc = helpers.bindFunc
+const isObject = require('../internal/isObject')
+const isFunction = require('../internal/isFunction')
 
-const composeB      = require('../combinators/composeB')
-const constant      = require('../combinators/constant')
-const identity      = require('../combinators/identity')
+const composeB = require('../combinators/composeB')
+const constant = require('../combinators/constant')
+const identity = require('../combinators/identity')
 const reverseApply  = require('../combinators/reverseApply')
 
 const IO = require('./IO')
 
 test('IO', t => {
-  const m   = IO(noop)
-  const io  = bindFunc(IO)
+  const m = IO(noop)
+  const io = bindFunc(IO)
 
   t.ok(isFunction(IO), 'is a function')
   t.ok(isObject(m), 'returns an object')
@@ -57,8 +57,8 @@ test('IO type', t => {
 })
 
 test('IO run', t => {
-  const fn  = sinon.spy(constant('result'))
-  const m   = IO(fn)
+  const fn = sinon.spy(constant('result'))
+  const m = IO(fn)
 
   const result = m.run()
 
@@ -87,7 +87,7 @@ test('IO map errors', t => {
 })
 
 test('IO map functionality', t => {
-  const x   = 42
+  const x = 42
   const spy = sinon.spy(constant(x))
 
   const m = IO(noop).map(spy)
@@ -118,7 +118,7 @@ test('IO map properties (Functor)', t => {
 })
 
 test('IO ap errors', t => {
-  const m  = { type: () => 'IO...Not' }
+  const m = { type: () => 'IO...Not' }
 
   t.throws(IO(noop).ap.bind(null, undefined), TypeError, 'throws when passed undefined')
   t.throws(IO(noop).ap.bind(null, null), TypeError, 'throws when passed null')

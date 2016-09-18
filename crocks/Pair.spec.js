@@ -1,13 +1,13 @@
-const test    = require('tape')
+const test = require('tape')
 const helpers = require('../test/helpers')
 
-const identity  = require('../combinators/identity')
-const composeB  = require('../combinators/composeB')
+const identity = require('../combinators/identity')
+const composeB = require('../combinators/composeB')
 
-const isObject    = require('../internal/isObject')
-const isFunction  = require('../internal/isFunction')
-const bindFunc    = helpers.bindFunc
-const noop        = helpers.noop
+const noop = helpers.noop
+const bindFunc = helpers.bindFunc
+const isObject = require('../internal/isObject')
+const isFunction = require('../internal/isFunction')
 
 const Pair = require('./Pair')
 
@@ -95,8 +95,8 @@ test('Pair equals properties (Setoid)', t => {
 })
 
 test('Pair concat errors', t => {
-  const bad   = bindFunc(Pair(0, 0).concat)
-  const good  = bindFunc(Pair([], 'string').concat)
+  const bad = bindFunc(Pair(0, 0).concat)
+  const good = bindFunc(Pair([], 'string').concat)
 
   t.throws(bad(Pair([], [])), TypeError, 'throws when left Pair does not contain Semigroups')
   t.throws(good(Pair(0, 0)), TypeError, 'throws when right Pair does not contain Semigroups')
@@ -120,7 +120,7 @@ test('Pair concat properties (Semigroup)', t => {
   const b = Pair([ 2 ], '2')
   const c = Pair([ 3 ], '3')
 
-  const left  = a.concat(b).concat(c)
+  const left = a.concat(b).concat(c)
   const right = a.concat(b.concat(c))
 
   t.ok(isFunction(Pair(0, 0).concat), 'is a function')
@@ -274,9 +274,9 @@ test('Pair bimap properties (Bifunctor)', t => {
 })
 
 test('Pair ap errors', t => {
-  const m     = { type: () => 'Pair...Not' }
+  const m = { type: () => 'Pair...Not' }
   const badAp = bindFunc(Pair(0, 0).ap)
-  const ap    = bindFunc(Pair([], noop).ap)
+  const ap = bindFunc(Pair([], noop).ap)
 
   t.throws(badAp(Pair([], noop)), TypeError, 'throws if wrapped first value is not a Semigroup')
   t.throws(ap(Pair(0, noop)), TypeError, 'throws if Pair with a non-Semigroup as first value is provided')
@@ -324,7 +324,7 @@ test('Pair chain errors', t => {
   const chain = bindFunc(Pair([], 0).chain)
 
   const badFn = x => Pair(0, 0)
-  const fn    = x => Pair([], 0)
+  const fn = x => Pair([], 0)
 
   t.throws(badChain(noop), TypeError, 'throws if wrapped first value is not a Semigroup')
   t.throws(chain(badFn), TypeError, 'throws if monadic function returns a Pair with a non-Semigroup as first value')

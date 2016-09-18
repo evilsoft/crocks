@@ -1,10 +1,10 @@
-const test    = require('tape')
-const sinon   = require('sinon')
+const test = require('tape')
+const sinon = require('sinon')
 const helpers = require('../test/helpers')
 
-const isFunction  = require('../internal/isFunction')
-const bindFunc    = helpers.bindFunc
-const noop        = helpers.noop
+const noop = helpers.noop
+const bindFunc = helpers.bindFunc
+const isFunction = require('../internal/isFunction')
 
 const identity = require('../combinators/identity')
 
@@ -54,11 +54,11 @@ test('map functor', t => {
 })
 
 test('map function composition', t => {
-  const first   = sinon.spy(x => x + 2)
-  const second  = sinon.spy(x => x * 10)
+  const first = sinon.spy(x => x + 2)
+  const second = sinon.spy(x => x * 10)
 
-  const comp    = map(second)(first)
-  const result  = comp(0)
+  const comp = map(second)(first)
+  const result = comp(0)
 
   t.ok(isFunction(comp), 'map returns a function')
   t.ok(first.calledBefore(second), 'map calls the second function first')

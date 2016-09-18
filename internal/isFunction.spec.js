@@ -1,9 +1,9 @@
 const test = require('tape')
+const helpers = require('../test/helpers')
+
+const noop = helpers.noop
 
 const isFunction = require('./isFunction')
-
-const helpers = require('../test/helpers')
-const noop    = helpers.noop
 
 test('isFunction internal function', t => {
   t.equal(typeof isFunction, 'function', 'is a function')

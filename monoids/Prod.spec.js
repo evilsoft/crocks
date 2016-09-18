@@ -1,12 +1,12 @@
-const test    = require('tape')
+const test= require('tape')
 const helpers = require('../test/helpers')
 
-const isObject    = require('../internal/isObject')
-const isFunction  = require('../internal/isFunction')
-const bindFunc    = helpers.bindFunc
+const isObject = require('../internal/isObject')
+const isFunction = require('../internal/isFunction')
+const bindFunc = helpers.bindFunc
 
-const identity  = require('../combinators/identity')
-const constant  = require('../combinators/constant')
+const identity = require('../combinators/identity')
+const constant = require('../combinators/constant')
 
 const Prod = require('./Prod')
 
@@ -73,7 +73,7 @@ test('Prod concat properties (Semigroup)', t => {
   const b = Prod(20)
   const c = Prod(35)
 
-  const left  = a.concat(b).concat(c)
+  const left = a.concat(b).concat(c)
   const right = a.concat(b.concat(c))
 
   t.ok(isFunction(Prod(0).concat), 'is a function')
@@ -119,7 +119,7 @@ test('Prod empty properties (Monoid)', t => {
   t.ok(isFunction(m.empty), 'provides a empty function')
 
   const right = m.concat(m.empty())
-  const left  = m.empty().concat(m)
+  const left = m.empty().concat(m)
 
   t.equal(right.value(), m.value(), 'right identity')
   t.equal(left.value(), m.value(), 'left identity')

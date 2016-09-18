@@ -1,12 +1,12 @@
-const test    = require('tape')
+const test = require('tape')
 const helpers = require('../test/helpers')
 
-const isObject    = require('../internal/isObject')
-const isFunction  = require('../internal/isFunction')
-const bindFunc    = helpers.bindFunc
+const bindFunc = helpers.bindFunc
+const isObject = require('../internal/isObject')
+const isFunction = require('../internal/isFunction')
 
-const identity  = require('../combinators/identity')
-const constant  = require('../combinators/constant')
+const identity = require('../combinators/identity')
+const constant = require('../combinators/constant')
 
 const Max = require('./Max')
 
@@ -73,7 +73,7 @@ test('Max concat properties (Semigroup)', t => {
   const b = Max(20)
   const c = Max(35)
 
-  const left  = a.concat(b).concat(c)
+  const left = a.concat(b).concat(c)
   const right = a.concat(b.concat(c))
 
   t.ok(isFunction(Max(0).concat), 'is a function')

@@ -1,12 +1,12 @@
-const test    = require('tape')
+const test = require('tape')
 const helpers = require('../test/helpers')
 
-const isObject    = require('../internal/isObject')
-const isFunction  = require('../internal/isFunction')
-const bindFunc    = helpers.bindFunc
+const bindFunc = helpers.bindFunc
+const isObject = require('../internal/isObject')
+const isFunction = require('../internal/isFunction')
 
-const identity  = require('../combinators/identity')
-const constant  = require('../combinators/constant')
+const identity = require('../combinators/identity')
+const constant = require('../combinators/constant')
 
 const Assign = require('./Assign')
 
@@ -47,7 +47,7 @@ test('Assign inspect', t => {
 
 test('Assign value', t => {
   const empty = Assign.empty().value()
-  const x     = {}
+  const x = {}
 
   t.ok(isFunction(Assign(x).value), 'is a function')
 
@@ -73,7 +73,7 @@ test('Assign concat properties (Semigroup)', t => {
   const b = Assign({ value: 'b' })
   const c = Assign({ value: 'c' })
 
-  const left  = a.concat(b).concat(c)
+  const left = a.concat(b).concat(c)
   const right = a.concat(b.concat(c))
 
   t.ok(isFunction(Assign({}).concat), 'is a function')
@@ -121,7 +121,7 @@ test('Assign empty properties (Monoid)', t => {
   t.ok(isFunction(m.empty), 'provides a empty function')
 
   const right = m.concat(m.empty())
-  const left  = m.empty().concat(m)
+  const left = m.empty().concat(m)
 
   t.same(right.value(), m.value(), 'right identity')
   t.same(left.value(), m.value(), 'left identity')

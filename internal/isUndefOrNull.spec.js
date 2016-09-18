@@ -1,8 +1,8 @@
-const test    = require('tape')
+const test = require('tape')
 const helpers = require('../test/helpers')
 
-const isFunction  = require('./isFunction')
-const noop        = helpers.noop
+const noop = helpers.noop
+const isFunction = require('./isFunction')
 
 const isUndefOrNull = require('./isUndefOrNull')
 

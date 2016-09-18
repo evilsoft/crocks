@@ -1,22 +1,22 @@
-const test    = require('tape')
-const sinon   = require('sinon')
+const test = require('tape')
+const sinon = require('sinon')
 const helpers = require('../test/helpers')
 
-const isObject    = require('../internal/isObject')
+const noop = helpers.noop
+const bindFunc = helpers.bindFunc
+const isObject = require('../internal/isObject')
 const isFunction  = require('../internal/isFunction')
-const bindFunc    = helpers.bindFunc
-const noop        = helpers.noop
 
-const composeB      = require('../combinators/composeB')
-const constant      = require('../combinators/constant')
-const identity      = require('../combinators/identity')
-const reverseApply  = require('../combinators/reverseApply')
+const composeB = require('../combinators/composeB')
+const constant = require('../combinators/constant')
+const identity = require('../combinators/identity')
+const reverseApply = require('../combinators/reverseApply')
 
 const Reader = require('./Reader')
 
 test('Reader', t => {
-  const m  = Reader(noop)
-  const r  = bindFunc(Reader)
+  const m = Reader(noop)
+  const r = bindFunc(Reader)
 
   t.ok(isFunction(Reader), 'is a function')
   t.ok(isObject(m), 'returns an object')
@@ -58,10 +58,10 @@ test('Reader type', t => {
 })
 
 test('Reader runWith', t => {
-  const add2  = x => x + 2
-  const fn    = sinon.spy(add2)
-  const m     = Reader(fn)
-  const e     = 94
+  const add2 = x => x + 2
+  const fn = sinon.spy(add2)
+  const m = Reader(fn)
+  const e = 94
 
   const result = m.runWith(e)
 
@@ -121,9 +121,9 @@ test('Reader map errors', t => {
 })
 
 test('Reader map functionality', t => {
-  const e     = 99
-  const add7  = x => x + 7
-  const spy   = sinon.spy(add7)
+  const e = 99
+  const add7 = x => x + 7
+  const spy = sinon.spy(add7)
 
   const m = Reader(identity).map(spy)
 
@@ -155,7 +155,7 @@ test('Reader map properties (Functor)', t => {
 
 test('Reader ap errors', t => {
   const ap = bindFunc(Reader(noop).ap)
-  const m  = { type: () => 'Reader...Not' }
+  const m = { type: () => 'Reader...Not' }
 
   t.throws(ap(undefined), TypeError, 'throws with undefined')
   t.throws(ap(null), TypeError, 'throws with null')
@@ -200,9 +200,10 @@ test('Reader of', t => {
 })
 
 test('Reader of properties (Applicative)', t => {
-  const m     = Reader(constant(identity))
+  const m = Reader(constant(identity))
+  const e = 38
+
   const add27 = x => x + 27
-  const e     = 38
 
   t.ok(isFunction(Reader(noop).of), 'provides an of function')
   t.ok(isFunction(Reader(noop).ap), 'implements the Apply spec')

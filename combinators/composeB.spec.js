@@ -1,12 +1,12 @@
-const test    = require('tape')
-const sinon   = require('sinon')
+const test = require('tape')
+const sinon = require('sinon')
 const helpers = require('../test/helpers')
 
-const isFunction  = require('../internal/isFunction')
-const bindFunc    = helpers.bindFunc
+const bindFunc = helpers.bindFunc
+const isFunction = require('../internal/isFunction')
 
-const identity  = require('./identity')
-const composeB  = require('./composeB')
+const identity = require('./identity')
+const composeB = require('./composeB')
 
 test('composeB (B combinator)', t => {
   const b = bindFunc(composeB)

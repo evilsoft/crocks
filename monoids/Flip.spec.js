@@ -1,8 +1,8 @@
-const test    = require('tape')
+const test = require('tape')
 const helpers = require('../test/helpers')
 
-const isFunction  = require('../internal/isFunction')
-const bindFunc    = helpers.bindFunc
+const bindFunc = helpers.bindFunc
+const isFunction = require('../internal/isFunction')
 
 const Last = require('../test/LastMonoid')
 const Flip = require('./Flip')

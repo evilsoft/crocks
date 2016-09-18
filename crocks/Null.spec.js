@@ -1,15 +1,15 @@
-const test    = require('tape')
-const sinon   = require('sinon')
+const test = require('tape')
+const sinon = require('sinon')
 const helpers = require('../test/helpers')
 
-const isObject    = require('../internal/isObject')
-const isFunction  = require('../internal/isFunction')
-const bindFunc    = helpers.bindFunc
-const noop        = helpers.noop
+const noop = helpers.noop
+const bindFunc = helpers.bindFunc
+const isObject = require('../internal/isObject')
+const isFunction = require('../internal/isFunction')
 
-const identity      = require('../combinators/identity')
-const composeB      = require('../combinators/composeB')
-const reverseApply  = require('../combinators/composeB')
+const identity = require('../combinators/identity')
+const composeB = require('../combinators/composeB')
+const reverseApply = require('../combinators/composeB')
 
 const MockCrock = require('../test/MockCrock')
 
@@ -93,7 +93,7 @@ test('Null concat properties (Semigoup)', t => {
   const b = Null(true)
   const c = Null('')
 
-  const left  = a.concat(b).concat(c)
+  const left = a.concat(b).concat(c)
   const right = a.concat(b.concat(c))
 
   t.ok(isFunction(a.concat), 'provides a concat function')
@@ -136,7 +136,7 @@ test('Null empty properties (Monoid)', t => {
   t.ok(isFunction(m.empty), 'provides an empty function')
 
   const right = m.concat(m.empty())
-  const left  = m.empty().concat(m)
+  const left = m.empty().concat(m)
 
   t.equal(right.value(), m.value(), 'right identity')
   t.equal(left.value(), m.value(), 'left identity')
@@ -173,7 +173,7 @@ test('Null map errors', t => {
 
 test('Null map functionality', t => {
   const spy = sinon.spy(x => x + 2)
-  const x   = 42
+  const x = 42
 
   const m = Null(x).map(spy)
 
@@ -199,7 +199,7 @@ test('Null map properties (Functor)', t => {
 })
 
 test('Null ap errors', t => {
-  const m  = MockCrock('joy')
+  const m = MockCrock('joy')
   const ap = bindFunc(Null(32).ap)
 
   t.throws(ap(undefined), TypeError, 'throws when passed undefined')
@@ -291,7 +291,7 @@ test('Null chain properties (Chain)', t => {
   t.end()
 })
 
-test('Identity chain properties (Monad)', t => {
+test('Null chain properties (Monad)', t => {
   t.ok(isFunction(Null(0).chain), 'implements the Chain spec')
   t.ok(isFunction(Null(0).of), 'implements the Applicative spec')
 

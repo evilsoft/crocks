@@ -1,10 +1,10 @@
-const test    = require('tape')
-const sinon   = require('sinon')
+const test = require('tape')
+const sinon = require('sinon')
 const helpers = require('../test/helpers')
 
-const isFunction  = require('../internal/isFunction')
-const bindFunc    = helpers.bindFunc
-const noop        = helpers.noop
+const noop = helpers.noop
+const bindFunc = helpers.bindFunc
+const isFunction = require('../internal/isFunction')
 
 const constant = require('../combinators/constant')
 
@@ -40,7 +40,7 @@ test('chain pointfree', t => {
 
   t.doesNotThrow(c(noop, m), 'allows a function and Chain')
 
-  const f   = sinon.spy()
+  const f = sinon.spy()
   const res = chain(f, m)
 
   t.ok(m.chain.calledWith(f), 'calls chain on Chain, passing the function')

@@ -1,17 +1,16 @@
-const test  = require('tape')
+const test = require('tape')
 const sinon = require('sinon')
-
 const helpers = require('../test/helpers')
 
-const isObject    = require('../internal/isObject')
-const isFunction  = require('../internal/isFunction')
-const noop        = helpers.noop
-const bindFunc    = helpers.bindFunc
+const noop = helpers.noop
+const bindFunc = helpers.bindFunc
+const isObject = require('../internal/isObject')
+const isFunction = require('../internal/isFunction')
 
-const reverseApply  = require('../combinators/reverseApply')
-const constant      = require('../combinators/constant')
-const composeB      = require('../combinators/composeB')
-const identity      = require('../combinators/identity')
+const constant = require('../combinators/constant')
+const composeB = require('../combinators/composeB')
+const identity = require('../combinators/identity')
+const reverseApply = require('../combinators/reverseApply')
 
 const MockCrock = require('../test/MockCrock')
 
@@ -61,7 +60,7 @@ test('Maybe maybe', t => {
 })
 
 test('Maybe option', t => {
-  const nothing   = Maybe(null)
+  const nothing = Maybe(null)
   const something = Maybe('something')
 
   t.equal(nothing.option('was nothing'), 'was nothing', 'returns passed value when called on Nothing')
@@ -71,7 +70,7 @@ test('Maybe option', t => {
 })
 
 test('Maybe either', t => {
-  const nothing   = Maybe(null)
+  const nothing = Maybe(null)
   const something = Maybe('value')
 
   const fn = bindFunc(Maybe(23).either)
@@ -131,7 +130,7 @@ test('Maybe coalesce', t => {
   t.throws(fn(noop, {}), TypeError, 'throws with object in right')
   t.throws(fn(noop, []), TypeError, 'throws with array in right')
 
-  const nothing   = Maybe(null).coalesce(constant('was nothing'), identity)
+  const nothing = Maybe(null).coalesce(constant('was nothing'), identity)
   const something = Maybe('here').coalesce(identity, constant('was something'))
 
   t.ok(nothing.equals(Maybe('was nothing')),'returns a Maybe wrapping was nothing' )
@@ -224,8 +223,8 @@ test('Maybe map properties (Functor)', t => {
 })
 
 test('Maybe ap errors', t => {
-  const m   = { type: () => 'Maybe...Not' }
-  const ap  = bindFunc(Maybe(noop).ap)
+  const m = { type: () => 'Maybe...Not' }
+  const ap = bindFunc(Maybe(noop).ap)
 
   t.throws(Maybe(0).ap.bind(null, Maybe(0)), TypeError, 'throws when wrapped value is a falsey number')
   t.throws(Maybe(1).ap.bind(null, Maybe(0)), TypeError, 'throws when wrapped value is a truthy number')
@@ -298,8 +297,8 @@ test('Maybe of properties (Applicative)', t => {
 })
 
 test('Maybe chain errors', t => {
-  const chain   = bindFunc(Maybe(0).chain)
-  const nChain  = bindFunc(Maybe(undefined).chain)
+  const chain = bindFunc(Maybe(0).chain)
+  const nChain = bindFunc(Maybe(undefined).chain)
 
   t.throws(chain(undefined), TypeError, 'throws with undefined')
   t.throws(chain(null), TypeError, 'throws with null')
@@ -352,10 +351,10 @@ test('Maybe chain properties (Monad)', t => {
 })
 
 test('Maybe sequence errors', t => {
-  const seq     = bindFunc(Maybe(MockCrock({ something: true })).sequence)
-  const seqBad  = bindFunc(Maybe(0).sequence)
+  const seq = bindFunc(Maybe(MockCrock({ something: true })).sequence)
+  const seqBad = bindFunc(Maybe(0).sequence)
 
-  const seqNothing  = bindFunc(Maybe(undefined).sequence)
+  const seqNothing = bindFunc(Maybe(undefined).sequence)
 
   t.throws(seq(undefined), TypeError, 'throws with undefined')
   t.throws(seq(null), TypeError, 'throws with null')

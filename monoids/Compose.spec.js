@@ -1,13 +1,13 @@
-const test    = require('tape')
+const test = require('tape')
 const helpers = require('../test/helpers')
 
-const isObject    = require('../internal/isObject')
-const isFunction  = require('../internal/isFunction')
-const bindFunc    = helpers.bindFunc
-const noop        = helpers.noop
+const noop = helpers.noop
+const bindFunc = helpers.bindFunc
+const isObject = require('../internal/isObject')
+const isFunction = require('../internal/isFunction')
 
-const identity  = require('../combinators/identity')
-const constant  = require('../combinators/constant')
+const identity = require('../combinators/identity')
+const constant = require('../combinators/constant')
 
 const Compose = require('./Compose')
 
@@ -50,7 +50,7 @@ test('Compose inspect', t => {
 
 test('Compose value', t => {
   const empty = Compose.empty().value()
-  const x     = x => x + 1
+  const x = x => x + 1
 
   t.ok(isFunction(Compose(x).value), 'is a function')
 
@@ -79,7 +79,7 @@ test('Compose concat properties (Semigroup)', t => {
 
   const x = 56
 
-  const left  = a.concat(b).concat(c).value()
+  const left = a.concat(b).concat(c).value()
   const right = a.concat(b.concat(c)).value()
 
   t.ok(isFunction(Compose(noop).concat), 'is a function')
@@ -128,7 +128,7 @@ test('Compose empty properties (Monoid)', t => {
   t.ok(isFunction(m.empty), 'provides a empty function')
 
   const right = m.concat(m.empty()).value()
-  const left  = m.empty().concat(m).value()
+  const left = m.empty().concat(m).value()
 
   t.same(right(x), m.value()(x), 'right identity')
   t.same(left(x), m.value()(x), 'left identity')

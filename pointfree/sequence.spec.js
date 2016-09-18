@@ -1,10 +1,10 @@
-const test    = require('tape')
-const sinon   = require('sinon')
+const test = require('tape')
+const sinon = require('sinon')
 const helpers = require('../test/helpers')
 
-const isFunction  = require('../internal/isFunction')
-const bindFunc    = helpers.bindFunc
-const noop        = helpers.noop
+const noop = helpers.noop
+const bindFunc = helpers.bindFunc
+const isFunction = require('../internal/isFunction')
 
 const constant = require('../combinators/constant')
 
@@ -12,7 +12,8 @@ const sequence = require('./sequence')
 
 test('sequence pointfree', t => {
   const seq = bindFunc(sequence)
-  const x   = 'super cool'
+
+  const x = 'super cool'
   const m = { sequence: sinon.spy(constant(x)) }
 
   t.ok(isFunction(seq), 'is a function')
@@ -40,7 +41,7 @@ test('sequence pointfree', t => {
 
   t.doesNotThrow(seq(noop, m), 'allows a function and Traverable')
 
-  const f   = sinon.spy()
+  const f = sinon.spy()
   const res = sequence(f, m)
 
   t.ok(m.sequence.calledWith(f), 'calls sequence on Traversable, passing the function')

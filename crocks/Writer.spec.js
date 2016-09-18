@@ -1,14 +1,14 @@
-const test    = require('tape')
-const sinon   = require('sinon')
+const test = require('tape')
+const sinon = require('sinon')
 const helpers = require('../test/helpers')
 
-const isFunction  = require('../internal/isFunction')
-const isObject    = require('../internal/isObject')
-const bindFunc    = helpers.bindFunc
-const noop        = helpers.noop
+const noop = helpers.noop
+const bindFunc = helpers.bindFunc
+const isObject = require('../internal/isObject')
+const isFunction = require('../internal/isFunction')
 
-const identity      = require('../combinators/identity')
-const composeB      = require('../combinators/composeB')
+const identity = require('../combinators/identity')
+const composeB = require('../combinators/composeB')
 const reverseApply  = require('../combinators/reverseApply')
 
 const Last = require('../test/LastMonoid')
@@ -87,7 +87,7 @@ test('Writer equals functionality', t => {
   const b = Writer(15, 0)
   const c = Writer(23, 1)
 
-  const value     = 0
+  const value = 0
   const nonWriter = { type: 'Writer...Not' }
 
   t.equals(a.equals(c), false, 'returns false when 2 Writers values are not equal')
@@ -134,8 +134,8 @@ test('Writer map errors', t => {
 
 test('Writer map functionality', t => {
   const spy = sinon.spy(identity)
-  const x   = 42
-  const l   = 'log'
+  const x = 42
+  const l = 'log'
 
   const m = Writer(l, x).map(spy)
 
@@ -166,7 +166,7 @@ test('Writer map properties (Functor)', t => {
 test('Writer ap errors', t => {
   const m = { type: () => 'Writer...Not' }
   const w = Writer(0, 0)
-  const ap  = bindFunc(Writer(0, noop).ap)
+  const ap = bindFunc(Writer(0, noop).ap)
 
   t.throws(Writer(0, undefined).ap.bind(null, w), TypeError, 'throws when wrapped value is undefined')
   t.throws(Writer(0, null).ap.bind(null, w), TypeError, 'throws when wrapped value is null')
@@ -247,9 +247,9 @@ test('Writer of properties (Applicative)', t => {
 })
 
 test('Writer chain errors', t => {
-  const m     = Writer(0, 0)
+  const m = Writer(0, 0)
   const chain = bindFunc(m.chain)
-  const fn    = x => Writer(0, x)
+  const fn = x => Writer(0, x)
 
   t.throws(chain(undefined), TypeError, 'throws with undefined')
   t.throws(chain(null), TypeError, 'throws with null')
@@ -269,8 +269,8 @@ test('Writer chain errors', t => {
 })
 
 test('Writer chain functionality', t => {
-  const m   = Writer(0, 45)
-  const fn  = x => Writer(1, x + 2)
+  const m = Writer(0, 45)
+  const fn = x => Writer(1, x + 2)
 
   t.same(m.chain(fn).log(), [ 0, 1 ], 'concats chained log to initial log')
   t.equal(m.chain(fn).value(), 47, 'applys function to wrapped value')
@@ -325,9 +325,9 @@ test('Writer reduceLog errors', t => {
 })
 
 test('Writer reduceLog', t => {
-  const w   = Writer(0, 0)
-  const f   = _ => Writer(1, 0)
-  const g   = _ => Writer(2, 0)
+  const w = Writer(0, 0)
+  const f = _ => Writer(1, 0)
+  const g = _ => Writer(2, 0)
   const add = (x, y) => x + y
 
   const result = w.chain(f).chain(g).reduceLog(add, 0)

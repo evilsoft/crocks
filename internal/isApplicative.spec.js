@@ -1,9 +1,9 @@
 const test = require('tape')
 
-const isFunction  = require('./isFunction')
+const isFunction = require('./isFunction')
 
 const isApplicative = require('./isApplicative')
-const identity      = require('../combinators/identity')
+const identity = require('../combinators/identity')
 
 test('isApplicative internal function', t => {
   const fake = {

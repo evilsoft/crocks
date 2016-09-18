@@ -1,12 +1,12 @@
-const test    = require('tape')
+const test = require('tape')
 const helpers = require('../test/helpers')
 
-const isObject    = require('../internal/isObject')
-const isFunction  = require('../internal/isFunction')
-const bindFunc    = helpers.bindFunc
+const bindFunc = helpers.bindFunc
+const isObject = require('../internal/isObject')
+const isFunction = require('../internal/isFunction')
 
-const identity  = require('../combinators/identity')
-const constant  = require('../combinators/constant')
+const identity = require('../combinators/identity')
+const constant = require('../combinators/constant')
 
 const Any = require('./Any')
 
@@ -120,7 +120,7 @@ test('Any empty properties (Monoid)', t => {
   t.ok(isFunction(m.empty), 'provides an empty function')
 
   const right = m.concat(m.empty())
-  const left  = m.empty().concat(m)
+  const left = m.empty().concat(m)
 
   t.equal(right.value(), m.value(), 'right identity')
   t.equal(left.value(), m.value(), 'left identity')

@@ -1,12 +1,12 @@
-const test    = require('tape')
+const test = require('tape')
 const helpers = require('../test/helpers')
 
-const isObject    = require('../internal/isObject')
-const isFunction  = require('../internal/isFunction')
-const bindFunc    = helpers.bindFunc
+const bindFunc = helpers.bindFunc
+const isObject = require('../internal/isObject')
+const isFunction = require('../internal/isFunction')
 
-const identity  = require('../combinators/identity')
-const constant  = require('../combinators/constant')
+const identity = require('../combinators/identity')
+const constant = require('../combinators/constant')
 
 const All = require('./All')
 
@@ -75,7 +75,7 @@ test('All concat properties (Semigoup)', t => {
   const b = All(true)
   const c = All('')
 
-  const left  = a.concat(b).concat(c)
+  const left = a.concat(b).concat(c)
   const right = a.concat(b.concat(c))
 
   t.ok(isFunction(a.concat), 'provides a concat function')
@@ -119,7 +119,7 @@ test('All empty properties (Monoid)', t => {
   t.ok(isFunction(m.empty), 'provides an empty function')
 
   const right = m.concat(m.empty())
-  const left  = m.empty().concat(m)
+  const left = m.empty().concat(m)
 
   t.equal(right.value(), m.value(), 'right identity')
   t.equal(left.value(), m.value(), 'left identity')

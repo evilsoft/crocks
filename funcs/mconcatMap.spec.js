@@ -1,16 +1,16 @@
-const test    = require('tape')
+const test = require('tape')
 const helpers = require('../test/helpers')
 
-const bindFunc    = helpers.bindFunc
-const noop        = helpers.noop
-const isFunction  = require('../internal/isFunction')
+const bindFunc = helpers.bindFunc
+const noop = helpers.noop
+const isFunction = require('../internal/isFunction')
 
 const Last = require('../test/LastMonoid')
 
 const mconcatMap = require('./mconcatMap')
 
 test('mconcatMap', t => {
-  const mc  = bindFunc(mconcatMap)
+  const mc = bindFunc(mconcatMap)
 
   t.ok(isFunction(mconcatMap), 'is a function')
 
@@ -48,7 +48,7 @@ test('mconcatMap', t => {
 
   t.doesNotThrow(mc(Last, noop, [1, 2, 3]), 'allows a populated array as second argument')
 
-  const addOne  = x => x + 1
+  const addOne = x => x + 1
   const nothing = mconcatMap(Last, addOne, [])
   const something = mconcatMap(Last, addOne, [1, 2, 3])
 

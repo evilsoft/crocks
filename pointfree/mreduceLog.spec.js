@@ -1,10 +1,10 @@
-const test    = require('tape')
-const sinon   = require('sinon')
+const test = require('tape')
+const sinon = require('sinon')
 const helpers = require('../test/helpers')
 
-const isFunction  = require('../internal/isFunction')
-const bindFunc    = helpers.bindFunc
-const noop        = helpers.noop
+const noop = helpers.noop
+const bindFunc = helpers.bindFunc
+const isFunction = require('../internal/isFunction')
 
 const constant = require('../combinators/constant')
 
@@ -44,7 +44,7 @@ test('mreduceLog pointfree', t => {
 
   t.doesNotThrow(r(Last, 0, m), 'allows a Monoid and valid container')
 
-  const f   = sinon.spy()
+  const f= sinon.spy()
   const res = mreduceLog(Last, 0, m)
 
   t.ok(m.mreduceLog.calledWith(Last), 'calls mreduceLog on container, passing the monoid')

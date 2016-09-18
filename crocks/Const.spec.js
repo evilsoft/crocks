@@ -1,14 +1,14 @@
-const test    = require('tape')
-const sinon   = require('sinon')
+const test = require('tape')
+const sinon = require('sinon')
 const helpers = require('../test/helpers')
 
-const isObject    = require('../internal/isObject')
+const noop = helpers.noop
+const bindFunc = helpers.bindFunc
+const isObject = require('../internal/isObject')
 const isFunction  = require('../internal/isFunction')
-const bindFunc    = helpers.bindFunc
-const noop        = helpers.noop
 
-const identity  = require('../combinators/identity')
-const composeB  = require('../combinators/composeB')
+const identity = require('../combinators/identity')
+const composeB = require('../combinators/composeB')
 
 const MockCrock = require('../test/MockCrock')
 
@@ -91,7 +91,7 @@ test('Const concat properties (Semigoup)', t => {
   const b = Const(true)
   const c = Const('')
 
-  const left  = a.concat(b).concat(c)
+  const left = a.concat(b).concat(c)
   const right = a.concat(b.concat(c))
 
   t.ok(isFunction(a.concat), 'provides a concat function')
@@ -147,7 +147,7 @@ test('Const map errors', t => {
 
 test('Const map functionality', t => {
   const spy = sinon.spy(x => x + 2)
-  const x   = 42
+  const x = 42
 
   const m = Const(x).map(spy)
 
@@ -173,7 +173,7 @@ test('Const map properties (Functor)', t => {
 })
 
 test('Const ap errors', t => {
-  const m  = MockCrock('joy')
+  const m = MockCrock('joy')
   const ap = bindFunc(Const(32).ap)
 
   t.throws(ap(undefined), TypeError, 'throws when passed undefined')

@@ -5,8 +5,8 @@ const isFunction = require('../internal/isFunction')
 const isType = require('./isType')
 
 test('isType internal helper', t => {
-  const first   = { type: () => 'first' }
-  const second  = { type: () => 'second' }
+  const first = { type: () => 'first' }
+  const second = { type: () => 'second' }
 
   t.ok(isFunction(isType), 'is a function')
 

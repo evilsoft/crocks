@@ -1,11 +1,11 @@
-const test    = require('tape')
+const test = require('tape')
 const helpers = require('../test/helpers')
 
 const curry = require('./curry')
 
-const noop        = helpers.noop
-const bindFunc    = helpers.bindFunc
-const isFunction  = require('../internal/isFunction')
+const noop = helpers.noop
+const bindFunc = helpers.bindFunc
+const isFunction = require('../internal/isFunction')
 
 test('curry', t => {
   const c = bindFunc(curry)
@@ -45,8 +45,8 @@ test('curried function with one parameter', t => {
 })
 
 test('curried function with multiple parameters', t => {
-  const sumThree  = (x, y, z) => x + y + z
-  const func      = curry(sumThree)
+  const sumThree = (x, y, z) => x + y + z
+  const func = curry(sumThree)
 
   t.equal(func(1, 2, 3), sumThree(1, 2, 3), 'returns the result when fully applied')
   t.equal(func(1)(2)(3), sumThree(1, 2, 3), 'returns the result when curried')
@@ -58,8 +58,8 @@ test('curried function with multiple parameters', t => {
 })
 
 test('curried function with curried function', t => {
-  const sumThree  = x => y => z => x + y + z
-  const func      = curry(sumThree)
+  const sumThree = x => y => z => x + y + z
+  const func = curry(sumThree)
 
   t.equal(func(1, 2, 3), sumThree(1)(2)(3), 'returns the result when fully applied')
   t.equal(func(1)(2)(3), sumThree(1)(2)(3), 'returns the result when curried')
@@ -71,8 +71,8 @@ test('curried function with curried function', t => {
 })
 
 test('curried function with context application', t => {
-  const sumThree  = (x, y) => z => x + y + z
-  const func      = curry(sumThree)
+  const sumThree = (x, y) => z => x + y + z
+  const func = curry(sumThree)
 
   t.equal(func(1, 2, 3), sumThree(1, 2)(3), 'returns the result when fully applied')
   t.equal(func(1)(2)(3), sumThree(1, 2)(3), 'returns the result when curried')

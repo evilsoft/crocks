@@ -1,12 +1,12 @@
-const test    = require('tape')
-const sinon   = require('sinon')
+const test = require('tape')
+const sinon = require('sinon')
 const helpers = require('../test/helpers')
 
-const isFunction  = require('../internal/isFunction')
-const bindFunc    = helpers.bindFunc
+const bindFunc = helpers.bindFunc
+const isFunction = require('../internal/isFunction')
 
-const identity      = require('./identity')
-const reverseApply  = require('./reverseApply')
+const identity = require('./identity')
+const reverseApply = require('./reverseApply')
 
 test('reverseApply (T combinator)', t => {
   const tc = bindFunc(reverseApply)

@@ -8,7 +8,8 @@ const _inspect = require('../funcs/inspect')
 
 const constant = require('../combinators/constant')
 
-const _type = constant('Const')
+const _type =
+  constant('Const')
 
 function Const(x) {
   if(!arguments.length) {

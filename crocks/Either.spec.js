@@ -1,17 +1,17 @@
-const test  = require('tape')
+const test = require('tape')
 const sinon = require('sinon')
 
 const helpers = require('../test/helpers')
 
-const isObject    = require('../internal/isObject')
-const isFunction  = require('../internal/isFunction')
-const noop        = helpers.noop
-const bindFunc    = helpers.bindFunc
+const noop = helpers.noop
+const bindFunc = helpers.bindFunc
+const isObject = require('../internal/isObject')
+const isFunction = require('../internal/isFunction')
 
-const reverseApply  = require('../combinators/reverseApply')
-const composeB      = require('../combinators/composeB')
-const identity      = require('../combinators/identity')
-const constant      = require('../combinators/constant')
+const composeB = require('../combinators/composeB')
+const identity = require('../combinators/identity')
+const constant = require('../combinators/constant')
+const reverseApply = require('../combinators/reverseApply')
 
 const MockCrock = require('../test/MockCrock')
 
@@ -45,9 +45,9 @@ test('Either.Left', t => {
 })
 
 test('Either.Right', t => {
-  const l = Either.Right('value')
+  const r = Either.Right('value')
 
-  t.equal(l.either(constant('left'), identity), 'value', 'creates an Either.Right')
+  t.equal(r.either(constant('left'), identity), 'value', 'creates an Either.Right')
 
   t.end()
 })
@@ -328,7 +328,7 @@ test('Either bimap errors', t => {
 })
 
 test('Either ap errors', t => {
-  const m   = { type: () => 'Either...Not' }
+  const m = { type: () => 'Either...Not' }
 
   t.throws(Either.of(0).ap.bind(null, Either.of(0)), TypeError, 'throws when wrapped value is a falsey number')
   t.throws(Either.of(1).ap.bind(null, Either.of(0)), TypeError, 'throws when wrapped value is a truthy number')

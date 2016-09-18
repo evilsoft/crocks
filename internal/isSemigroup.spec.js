@@ -1,8 +1,7 @@
 const test = require('tape')
 
-const isFunction = require('./isFunction')
-
 const identity = require('../combinators/identity')
+const isFunction = require('./isFunction')
 
 const isSemigroup = require('./isSemigroup')
 

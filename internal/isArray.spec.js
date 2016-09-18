@@ -1,10 +1,10 @@
 const test = require('tape')
-
-const isFunction  = require('./isFunction')
-const isArray     = require('./isArray')
-
 const helpers = require('../test/helpers')
-const noop    = helpers.noop
+
+const noop = helpers.noop
+const isArray = require('./isArray')
+const isFunction  = require('./isFunction')
+
 
 test('isArray internal function', t => {
   t.ok(isFunction(isArray), 'is a function')

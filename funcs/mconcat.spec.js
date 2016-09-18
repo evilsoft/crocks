@@ -1,15 +1,15 @@
-const test    = require('tape')
+const test = require('tape')
 const helpers = require('../test/helpers')
 
-const bindFunc    = helpers.bindFunc
-const isFunction  = require('../internal/isFunction')
+const bindFunc = helpers.bindFunc
+const isFunction = require('../internal/isFunction')
 
 const mconcat = require('./mconcat')
 
 const Last = require('../test/LastMonoid')
 
 test('mconcat', t => {
-  const mc  = bindFunc(mconcat)
+  const mc = bindFunc(mconcat)
 
   t.ok(isFunction(mconcat), 'is a function')
 
@@ -36,7 +36,7 @@ test('mconcat', t => {
 
   t.doesNotThrow(mc(Last, [1, 2, 3]), 'allows a populated array as second argument')
 
-  const nothing   = mconcat(Last, [])
+  const nothing = mconcat(Last, [])
   const something = mconcat(Last, [1, 2, 3])
 
   t.equal(nothing.value(), Last.empty().value(), 'returns the empty value when passed an empty array')

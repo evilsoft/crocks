@@ -1,16 +1,16 @@
-const test    = require('tape')
-const sinon   = require('sinon')
+const test = require('tape')
+const sinon = require('sinon')
 const helpers = require('../test/helpers')
 
-const constant      = require('../combinators/constant')
-const identity      = require('../combinators/identity')
-const composeB      = require('../combinators/composeB')
-const reverseApply  = require('../combinators/reverseApply')
+const constant = require('../combinators/constant')
+const identity = require('../combinators/identity')
+const composeB = require('../combinators/composeB')
+const reverseApply = require('../combinators/reverseApply')
 
-const isObject    = require('../internal/isObject')
-const isFunction  = require('../internal/isFunction')
-const bindFunc    = helpers.bindFunc
-const noop        = helpers.noop
+const noop = helpers.noop
+const bindFunc = helpers.bindFunc
+const isObject = require('../internal/isObject')
+const isFunction = require('../internal/isFunction')
 
 const MockCrock = require('../test/MockCrock')
 
@@ -100,7 +100,7 @@ test('List concat properties (Semigroup)', t => {
   const b = List([ 0, null ])
   const c = List([ true, 'string' ])
 
-  const left  = a.concat(b).concat(c)
+  const left = a.concat(b).concat(c)
   const right = a.concat(b.concat(c))
 
   t.ok(isFunction(a.concat), 'provides a concat function')
@@ -143,7 +143,7 @@ test('List empty properties (Monoid)', t => {
   t.ok(isFunction(m.empty), 'provides an empty function')
 
   const right = m.concat(m.empty())
-  const left  = m.empty().concat(m)
+  const left = m.empty().concat(m)
 
   t.same(right.value(), m.value(), 'right identity')
   t.same(left.value(), m.value(), 'left identity')
@@ -211,7 +211,7 @@ test('List filter errors', t => {
 test('List filter functionality', t => {
   const m = List([ 4, 5, 10, 34, 'string' ])
 
-  const bigNum      = x => typeof x === 'number' && x > 10
+  const bigNum = x => typeof x === 'number' && x > 10
   const justStrings = x => typeof x === 'string'
 
   t.same(m.filter(bigNum).value(), [ 34 ], 'filters for bigNums')
@@ -241,7 +241,7 @@ test('List map errors', t => {
 
 test('List map functionality', t => {
   const spy = sinon.spy(identity)
-  const xs  = [ 42 ]
+  const xs = [ 42 ]
 
   const m = List(xs).map(spy)
 
@@ -385,8 +385,8 @@ test('List chain properties (Monad)', t => {
 })
 
 test('List sequence errors', t => {
-  const seq     = bindFunc(List.of(MockCrock(2)).sequence)
-  const seqBad  = bindFunc(List.of(0).sequence)
+  const seq = bindFunc(List.of(MockCrock(2)).sequence)
+  const seqBad = bindFunc(List.of(0).sequence)
 
   t.throws(seq(undefined), TypeError, 'throws with undefined')
   t.throws(seq(null), TypeError, 'throws with null')

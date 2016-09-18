@@ -1,15 +1,18 @@
-const test  = require('tape')
+const test = require('tape')
 const sinon = require('sinon')
 
-const identity    = require('./identity')
-const bindFunc    = require('../test/helpers').bindFunc
-const isFunction  = require('../internal/isFunction')
+const identity = require('./identity')
+const bindFunc = require('../test/helpers').bindFunc
+const isFunction = require('../internal/isFunction')
 
 const applyTo = require('./applyTo')
 
 test('applyTo (A Combinator)', t => {
-  const a   = bindFunc(applyTo)
-  const fn  = sinon.spy(identity)
+  const a =
+    bindFunc(applyTo)
+
+  const fn =
+    sinon.spy(identity)
 
   t.ok(isFunction(applyTo), 'is a function')
 
@@ -26,7 +29,7 @@ test('applyTo (A Combinator)', t => {
 
   t.doesNotThrow(a(identity, 0), 'does not throw when first arg is a function')
 
-  const x       = 45
+  const x = 45
   const result  = applyTo(fn)(x)
 
   t.ok(fn.calledWith(x), 'passed function is called with the passed data')

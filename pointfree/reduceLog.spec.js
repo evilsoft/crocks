@@ -1,10 +1,10 @@
-const test    = require('tape')
-const sinon   = require('sinon')
+const test = require('tape')
+const sinon = require('sinon')
 const helpers = require('../test/helpers')
 
-const isFunction  = require('../internal/isFunction')
-const bindFunc    = helpers.bindFunc
-const noop        = helpers.noop
+const noop = helpers.noop
+const bindFunc = helpers.bindFunc
+const isFunction = require('../internal/isFunction')
 
 const constant = require('../combinators/constant')
 
@@ -40,7 +40,7 @@ test('reduceLog pointfree', t => {
 
   t.doesNotThrow(r(noop, m), 'allows a function and valid container')
 
-  const f   = sinon.spy()
+  const f = sinon.spy()
   const res = reduceLog(f, m)
 
   t.ok(m.reduceLog.calledWith(f), 'calls reduceLog on container, passing the function')

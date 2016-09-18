@@ -1,18 +1,18 @@
-const test    = require('tape')
+const test = require('tape')
 const helpers = require('../test/helpers')
 
 const Identity = require('../crocks/Identity')
 
-const isFunction  = require('../internal/isFunction')
-const bindFunc    = helpers.bindFunc
-const identity    = require('../combinators/identity')
+const isFunction = require('../internal/isFunction')
+const bindFunc = helpers.bindFunc
+const identity = require('../combinators/identity')
 
 const liftA2 = require('./liftA2')
 
 test('liftA2', t => {
-  const fn  = bindFunc(liftA2)
-  const m1  = Identity(4)
-  const m2  = Identity(8)
+  const fn = bindFunc(liftA2)
+  const m1 = Identity(4)
+  const m2 = Identity(8)
 
   const add = x => y => x + y
 

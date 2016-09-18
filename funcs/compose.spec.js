@@ -1,11 +1,11 @@
-const test    = require('tape')
-const sinon   = require('sinon')
+const test = require('tape')
+const sinon = require('sinon')
 const helpers = require('../test/helpers')
 
 const compose = require('./compose')
 
-const noop        = helpers.noop
-const bindFunc    = helpers.bindFunc
+const noop = helpers.noop
+const bindFunc = helpers.bindFunc
 const isFunction  = require('../internal/isFunction')
 
 test('compose parameters', t => {
@@ -35,13 +35,13 @@ test('compose parameters', t => {
 
 test('composed function', t => {
   const retString = () => 'string'
-  const retBling  = () => 'bling'
+  const retBling = () => 'bling'
 
-  const first   = sinon.spy(retString)
-  const second  = sinon.spy(retBling)
+  const first = sinon.spy(retString)
+  const second = sinon.spy(retBling)
 
-  const args    = [ 'first', 'second' ]
-  const result  = compose(second, first).apply(null, args)
+  const args = [ 'first', 'second' ]
+  const result = compose(second, first).apply(null, args)
 
   t.ok(first.calledBefore(second), 'right-most function is called first')
   t.ok(first.calledWith.apply(first, args), 'right-most function applied with all arguments')

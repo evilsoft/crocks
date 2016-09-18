@@ -1,13 +1,11 @@
 const test = require('tape')
 
-const isFunction = require('./isFunction')
-
 const identity = require('../combinators/identity')
+const isFunction = require('./isFunction')
 
 const isString = require('./isString')
 
 test('isString internal function', t => {
-
   t.ok(isFunction(isString))
 
   t.equal(isString(undefined), false, 'returns false for undefined')

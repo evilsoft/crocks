@@ -59,6 +59,7 @@ const pointFree = {
   sequence: require('./pointfree/sequence'),
   snd: require('./pointfree/snd'),
   swap: require('./pointfree/swap'),
+  traverse: require('./pointfree/traverse'),
   value: require('./pointfree/value')
 }
 

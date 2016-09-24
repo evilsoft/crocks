@@ -27,6 +27,7 @@ const concat = require('./pointfree/concat')
 const map = require('./pointfree/map')
 const sequence = require('./pointfree/sequence')
 const swap = require('./pointfree/swap')
+const traverse = require('./pointfree/traverse')
 
 const either = require('./pointfree/either')
 const filter = require('./pointfree/filter')
@@ -90,7 +91,9 @@ test('entry', t => {
   t.equal(crocks.concat, concat, 'provides the coalesce point-free function')
   t.equal(crocks.coalesce, coalesce, 'provides the concat point-free function')
   t.equal(crocks.map, map, 'provides the map point-free function')
+  t.equal(crocks.sequence, sequence, 'provides the sequence point-free function')
   t.equal(crocks.swap, swap, 'provides the swap point-free function')
+  t.equal(crocks.traverse, traverse, 'provides the traverse point-free function')
 
   t.equal(crocks.either, either, 'provides the either point-free function')
   t.equal(crocks.filter, filter, 'provides the filter point-free function')
@@ -104,7 +107,6 @@ test('entry', t => {
   t.equal(crocks.read, read, 'provides the read point-free function')
   t.equal(crocks.run, run, 'provides the run point-free function')
   t.equal(crocks.runWith, runWith, 'provides the runWith point-free function')
-  t.equal(crocks.sequence, sequence, 'provides the sequence point-free function')
   t.equal(crocks.snd, snd, 'provides the snd point-free function')
   t.equal(crocks.value, value, 'provides the value point-free function')
 

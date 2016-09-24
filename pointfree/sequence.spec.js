@@ -45,7 +45,7 @@ test('sequence pointfree', t => {
   const res = sequence(f, m)
 
   t.ok(m.sequence.calledWith(f), 'calls sequence on Traversable, passing the function')
-  t.equal(res, x, 'returns the result of chain on Chain')
+  t.equal(res, x, 'returns the result of sequence on Traversable')
 
   t.end()
 })

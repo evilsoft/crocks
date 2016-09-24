@@ -8,7 +8,7 @@ function traverse(fn, af, m) {
   if(!isFunction(fn)) {
     throw new TypeError('traverse: Applicative returning function required for first argument')
   }
-  if(!isFunction(af)) {
+  else if(!isFunction(af)) {
     throw new TypeError('traverse: Applicative function required for second argument')
   }
   else if(!(m && isFunction(m.traverse))) {

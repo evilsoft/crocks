@@ -280,3 +280,47 @@ test('Identity sequence functionality', t => {
 
   t.end()
 })
+
+test('Identity traverse errors', t => {
+  const trav = bindFunc(Identity(32).traverse)
+  const f = x => MockCrock(x)
+
+  t.throws(trav(undefined, noop), TypeError, 'throws with undefined in first argument')
+  t.throws(trav(null, noop), TypeError, 'throws with null in first argument')
+  t.throws(trav(0, noop), TypeError, 'throws falsey with number in first argument')
+  t.throws(trav(1, noop), TypeError, 'throws truthy with number in first argument')
+  t.throws(trav('', noop), TypeError, 'throws falsey with string in first argument')
+  t.throws(trav('string', noop), TypeError, 'throws with truthy string in first argument')
+  t.throws(trav(false, noop), TypeError, 'throws with false in first argument')
+  t.throws(trav(true, noop), TypeError, 'throws with true in first argument')
+  t.throws(trav([], noop), TypeError, 'throws with an array in first argument')
+  t.throws(trav({}, noop), TypeError, 'throws with an object in first argument')
+  t.throws(trav(noop, noop), TypeError, 'throws when first function does not return an Applicaitve')
+
+  t.throws(trav(f, undefined), TypeError, 'throws with undefined in second argument')
+  t.throws(trav(f, null), TypeError, 'throws with null in second argument')
+  t.throws(trav(f, 0), TypeError, 'throws falsey with number in second argument')
+  t.throws(trav(f, 1), TypeError, 'throws truthy with number in second argument')
+  t.throws(trav(f, ''), TypeError, 'throws falsey with string in second argument')
+  t.throws(trav(f, 'string'), TypeError, 'throws with truthy string in second argument')
+  t.throws(trav(f, false), TypeError, 'throws with false in second argument')
+  t.throws(trav(f, true), TypeError, 'throws with true in second argument')
+  t.throws(trav(f, []), TypeError, 'throws with an array in second argument')
+  t.throws(trav(f, {}), TypeError, 'throws with an object in second argument')
+
+  t.doesNotThrow(trav(f, noop), 'allows an Applicative returning function in first arg and function is second arg')
+
+  t.end()
+})
+
+test('Identity traverse functionality', t => {
+  const x = true
+  const f = x => MockCrock(x)
+  const m = Identity(x).traverse(f, MockCrock)
+
+  t.equal(m.type(), 'MockCrock', 'Provides an outer type of MockCrock')
+  t.equal(m.value().type(), 'Identity', 'Provides an inner type of Identity')
+  t.equal(m.value().value(), x, 'Identity contains original inner value')
+
+  t.end()
+})

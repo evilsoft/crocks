@@ -9,6 +9,7 @@ const _inspect = require('../funcs/inspect')
 
 const constant = require('../combinators/constant')
 const composeB = require('../combinators/composeB')
+const identity = require('../combinators/identity')
 
 const _type =
   constant('Identity')
@@ -80,9 +81,27 @@ function Identity(x) {
     return x.map(Identity)
   }
 
+  function traverse(f, af) {
+    if(!isFunction(f)) {
+      throw new TypeError('Identity.traverse: Applicative returning function required for first argument')
+    }
+    else if(!isFunction(af)) {
+      throw new TypeError('Identity.traverse: Applicative function required for second argument')
+    }
+
+    const m = f(x)
+
+    if(!isApplicative(m)) {
+      throw new TypeError('Identity.traverse: First function must return an Applicative')
+    }
+
+    return m.map(Identity)
+  }
+
   return {
     inspect, value, type, equals,
-    map, ap, of, chain, sequence
+    map, ap, of, chain, sequence,
+    traverse
   }
 }
 

@@ -11,9 +11,12 @@ function MockCrock(x) {
   const chain     = fn => fn(x)
   const of        = _of
   const sequence  = _ => x.map(MockCrock)
+  const traverse  = (f, _) => f(x).map(MockCrock)
 
   return {
-    value, type, map, ap, chain, of, sequence
+    value, type, map, ap,
+    chain, of, sequence,
+    traverse
   }
 }
 

@@ -6,10 +6,10 @@ const isFunction = require('../internal/isFunction')
 
 function reduce(fn, init, m) {
   if(!isFunction(fn)) {
-    throw new TypeError('reduce: Function required for first arg')
+    throw new TypeError('reduce: Function required for first argument')
   }
   else if(!(m && isFunction(m.reduce))) {
-    throw new TypeError('reduce: Foldable required for third arg')
+    throw new TypeError('reduce: Foldable required for third argument')
   }
 
   return m.reduce(fn, init)

@@ -8,7 +8,7 @@ const isFunction = require('../internal/isFunction')
 // map :: Functor f => (a -> b) -> f a -> f b
 function map(fn, m) {
   if(!isFunction(fn)) {
-    throw new TypeError('map: Function required for first arg')
+    throw new TypeError('map: Function required for first argument')
   }
   else if(isFunction(m)) {
     return composeB(fn, m)
@@ -17,7 +17,7 @@ function map(fn, m) {
     return m.map(fn)
   }
   else {
-    throw new TypeError('map: Function or Functor of the same type required for second arg')
+    throw new TypeError('map: Function or Functor of the same type required for second requirement')
   }
 }
 

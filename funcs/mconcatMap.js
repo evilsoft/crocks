@@ -11,13 +11,13 @@ const foldWith =
 // mconcatMap :: Monoid M => M -> (a -> b) -> [a] -> M b
 function mconcatMap(M, f, xs) {
   if(!(M && isFunction(M.empty))) {
-    throw new TypeError('mconcatMap: Monoid required for first arg')
+    throw new TypeError('mconcatMap: Monoid required for first argument')
   }
   else if(!isFunction(f)) {
-    throw new TypeError('mconcatMap: Function required for second arg')
+    throw new TypeError('mconcatMap: Function required for second argument')
   }
   else if(!(xs && isFunction(xs.reduce))) {
-    throw new TypeError('mconcatMap: Foldable required for third arg')
+    throw new TypeError('mconcatMap: Foldable required for third argument')
   }
 
   return xs.reduce(foldWith(composeB(M, f)), M.empty())

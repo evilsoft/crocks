@@ -6,10 +6,10 @@ const isFunction = require('../internal/isFunction')
 
 function sequence(af, m) {
   if(!isFunction(af)) {
-    throw new TypeError('sequence: Applicative function required for first arg')
+    throw new TypeError('sequence: Applicative function required for first argument')
   }
   else if(!(m && isFunction(m.sequence))) {
-    throw new TypeError('sequence: Traverable required for second arg')
+    throw new TypeError('sequence: Traverable required for second argument')
   }
 
   return m.sequence(af)

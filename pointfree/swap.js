@@ -6,10 +6,10 @@ const isFunction = require('../internal/isFunction')
 
 function swap(f, g, m) {
   if(!isFunction(f) || !isFunction(g)) {
-    throw new TypeError('swap: Function required for first two args')
+    throw new TypeError('swap: Function required for first two arguments')
   }
   else if(!isFunction(m.swap)) {
-    throw new TypeError('swap: Either or Pair required for third arg')
+    throw new TypeError('swap: Either or Pair required for third arguments')
   }
 
   return m.swap(f, g)

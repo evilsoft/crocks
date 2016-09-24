@@ -7,13 +7,13 @@ const isFunction = require('../internal/isFunction')
 // filter :: Foldable f => (a -> Boolean) -> f a -> f a
 function filter(fn, m) {
   if(!isFunction(fn)) {
-    throw new TypeError('filter: Function required for first arg')
+    throw new TypeError('filter: Function required for first argument')
   }
   else if(m && isFunction(m.filter)) {
     return m.filter(fn)
   }
   else {
-    throw new TypeError('filter: Foldable of the same type required for second arg')
+    throw new TypeError('filter: Foldable of the same type required for second argument')
   }
 }
 

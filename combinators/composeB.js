@@ -8,7 +8,7 @@ const isFunction = require('../internal/isFunction')
 // composeB :: (b -> c) -> (a -> b) -> a -> c
 function composeB(f, g, x) {
   if(!isFunction(f) || !isFunction(g)) {
-    throw new TypeError('composeB: Functions required for first two args')
+    throw new TypeError('composeB: Functions required for first two arguments')
   }
 
   return f(g(x))

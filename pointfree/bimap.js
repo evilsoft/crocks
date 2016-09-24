@@ -6,10 +6,10 @@ const isFunction = require('../internal/isFunction')
 
 function bimap(f, g, m) {
   if(!isFunction(f) || !isFunction(g)) {
-    throw new TypeError('bimap: Function required for first two args')
+    throw new TypeError('bimap: Function required for first two arguments')
   }
   else if(!isFunction(m.bimap)) {
-    throw new TypeError('bimap: Bifunctor required for third arg')
+    throw new TypeError('bimap: Bifunctor required for third argument')
   }
 
   return m.bimap(f, g)

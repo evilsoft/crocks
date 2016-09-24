@@ -11,10 +11,10 @@ const mconcatMap = require('./mconcatMap')
 // mconcat :: Monoid M => M -> [a] -> M a
 function mconcat(M, xs) {
   if(!(M && isMonoid(M))) {
-    throw new TypeError('mconcat: Monoid required for first arg')
+    throw new TypeError('mconcat: Monoid required for first argument')
   }
   else if(!(xs && isFunction(xs.reduce))) {
-    throw new TypeError('mconcat: Foldable required for second arg')
+    throw new TypeError('mconcat: Foldable required for second argument')
   }
 
   return mconcatMap(M, identity, xs)

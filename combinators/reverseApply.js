@@ -8,7 +8,7 @@ const isFunction = require('../internal/isFunction')
 // reverseApply :: a -> (a -> b) -> b
 function reverseApply(x, f) {
   if(!isFunction(f)) {
-    throw new TypeError('reverseApply: Function required for second arg')
+    throw new TypeError('reverseApply: Function required for second argument')
   }
 
   return f(x)

@@ -28,6 +28,14 @@ const _type =
 const isLeft =
   l => l !== null
 
+function runSequence(x) {
+  if(!isApplicative(x)) {
+    throw new TypeError('Either.sequence: Must wrap an Applicative')
+  }
+
+  return x.map(Either.of)
+}
+
 function Either(l, r) {
   if(arguments.length < 2) {
     throw new TypeError('Either: Requires two arguments')
@@ -126,28 +134,38 @@ function Either(l, r) {
     return m
   }
 
-  function jailSeq(x) {
-    if(!isApplicative(x)) {
-      throw new TypeError('Either.sequence: Must wrap an Applicative')
-    }
-
-    return x.map(Either.of)
-  }
-
   function sequence(af) {
     if(!isFunction(af)) {
       throw new TypeError('Either.sequence: Applicative Function required')
     }
 
     return either(
-      x => af(Either.Left(x)),
-      jailSeq
+      composeB(af, Either.Left),
+      runSequence
+    )
+  }
+
+  function traverse(f, af) {
+    if(!isFunction(f) || !isFunction(af)) {
+      throw new TypeError('Either.traverse: Applicative returning functions required for both arguments')
+    }
+
+    const m = either(composeB(af, Either.Left), f)
+
+    if(!isApplicative(m)) {
+      throw new TypeError('Either.traverse: Both functions must return an Applicative')
+    }
+
+    return either(
+      constant(m),
+      constant(m.map(Either.of))
     )
   }
 
   return {
-    inspect, either, value, type, swap, coalesce,
-    equals, map, bimap, ap, of, chain, sequence
+    inspect, either, value, type,
+    swap, coalesce, equals, map, bimap,
+    ap, of, chain, sequence, traverse
   }
 }
 

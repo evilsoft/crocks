@@ -517,3 +517,78 @@ test('Either sequence functionality', t => {
 
   t.end()
 })
+
+test('Either traverse errors', t => {
+  const rtrav = bindFunc(Either.Right(0).traverse)
+  const ltrav = bindFunc(Either.Left('Left').traverse)
+
+  const f = x => MockCrock(x)
+
+  t.throws(rtrav(undefined, noop), TypeError, 'Right throws with undefined in first argument')
+  t.throws(rtrav(null, noop), TypeError, 'Right throws with null in first argument')
+  t.throws(rtrav(0, noop), TypeError, 'Right throws falsey with number in first argument')
+  t.throws(rtrav(1, noop), TypeError, 'Right throws truthy with number in first argument')
+  t.throws(rtrav('', noop), TypeError, 'Right throws falsey with string in first argument')
+  t.throws(rtrav('string', noop), TypeError, 'Right throws with truthy string in first argument')
+  t.throws(rtrav(false, noop), TypeError, 'Right throws with false in first argument')
+  t.throws(rtrav(true, noop), TypeError, 'Right throws with true in first argument')
+  t.throws(rtrav([], noop), TypeError, 'Right throws with an array in first argument')
+  t.throws(rtrav({}, noop), TypeError, 'Right throws with an object in first argument')
+
+  t.throws(rtrav(f, undefined), TypeError, 'Right throws with undefined in second argument')
+  t.throws(rtrav(f, null), TypeError, 'Right throws with null in second argument')
+  t.throws(rtrav(f, 0), TypeError, 'Right throws falsey with number in second argument')
+  t.throws(rtrav(f, 1), TypeError, 'Right throws truthy with number in second argument')
+  t.throws(rtrav(f, ''), TypeError, 'Right throws falsey with string in second argument')
+  t.throws(rtrav(f, 'string'), TypeError, 'Right throws with truthy string in second argument')
+  t.throws(rtrav(f, false), TypeError, 'Right throws with false in second argument')
+  t.throws(rtrav(f, true), TypeError, 'Right throws with true in second argument')
+  t.throws(rtrav(f, []), TypeError, 'Right throws with an array in second argument')
+  t.throws(rtrav(f, {}), TypeError, 'Right throws with an object in second argument')
+  t.throws(rtrav(noop, noop), TypeError, 'Right throws when first function does not return an Applicaitve')
+  t.doesNotThrow(rtrav(f, noop), 'Right allows an Applicative returning function in first argument')
+
+  t.throws(ltrav(undefined, MockCrock), TypeError, 'Left throws with undefined in first argument')
+  t.throws(ltrav(null, MockCrock), TypeError, 'Left throws with null in first argument')
+  t.throws(ltrav(0, MockCrock), TypeError, 'Left throws with falsey number in first argument')
+  t.throws(ltrav(1, MockCrock), TypeError, 'Left throws with truthy number in first argument')
+  t.throws(ltrav('', MockCrock), TypeError, 'Left throws with falsey string in first argument')
+  t.throws(ltrav('string', MockCrock), TypeError, 'Left throws with truthy string in first argument')
+  t.throws(ltrav(false, MockCrock), TypeError, 'Left throws with false in first argument')
+  t.throws(ltrav(true, MockCrock), TypeError, 'Left throws with true in first argument')
+  t.throws(ltrav([], MockCrock), TypeError, 'Left throws with an array in first argument')
+  t.throws(ltrav({}, MockCrock), TypeError, 'Left throws with an object in first argument')
+
+  t.throws(ltrav(noop, undefined), TypeError, 'Left throws with undefined in second argument')
+  t.throws(ltrav(noop, null), TypeError, 'Left throws with null in second argument')
+  t.throws(ltrav(noop, 0), TypeError, 'Left throws falsey with number in second argument')
+  t.throws(ltrav(noop, 1), TypeError, 'Left throws truthy with number in second argument')
+  t.throws(ltrav(noop, ''), TypeError, 'Left throws falsey with string in second argument')
+  t.throws(ltrav(noop, 'string'), TypeError, 'Left throws with truthy string in second argument')
+  t.throws(ltrav(noop, false), TypeError, 'Left throws with false in second argument')
+  t.throws(ltrav(noop, true), TypeError, 'Left throws with true in second argument')
+  t.throws(ltrav(noop, []), TypeError, 'Left throws with an array in second argument')
+  t.throws(ltrav(noop, {}), TypeError, 'Left throws with an object in second argument')
+  t.throws(ltrav(noop, noop), TypeError, 'Left throws when second function does not return an Applicaitve')
+
+  t.doesNotThrow(ltrav(noop, MockCrock), 'Left allows an Applicative returning function in the second arg')
+
+  t.end()
+})
+
+test('Either traverse functionality', t => {
+  const x = 284
+  const f = x => MockCrock(x)
+  const r = Either.Right(x).traverse(f, MockCrock)
+  const l = Either.Left('Left').traverse(f, MockCrock)
+
+  t.equal(r.type(), 'MockCrock', 'Provides an outer type of MockCrock')
+  t.equal(r.value().type(), 'Either', 'Provides an inner type of Either')
+  t.equal(r.value().value(), x, 'Either contains original inner value')
+
+  t.equal(l.type(), 'MockCrock', 'Provides an outer type of MockCrock')
+  t.equal(l.value().type(), 'Either', 'Provides an inner type of Either')
+  t.equal(l.value().value(), 'Left', 'Either contains original Left value')
+
+  t.end()
+})

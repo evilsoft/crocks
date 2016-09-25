@@ -3,6 +3,7 @@
 
 const isArray = require('../internal/isArray')
 const isObject = require('../internal/isObject')
+const isString = require('../internal/isString')
 const isFunction = require('../internal/isFunction')
 
 function arrayInspect(xs) {
@@ -26,6 +27,10 @@ function inspect(x) {
 
   if(isObject(x)) {
     return ' {}'
+  }
+
+  if(isString(x)) {
+    return ` "${x}"`
   }
 
   return ` ${x}`

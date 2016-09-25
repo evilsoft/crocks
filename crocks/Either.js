@@ -136,7 +136,7 @@ function Either(l, r) {
 
   function sequence(af) {
     if(!isFunction(af)) {
-      throw new TypeError('Either.sequence: Applicative Function required')
+      throw new TypeError('Either.sequence: Applicative returning function required')
     }
 
     return either(

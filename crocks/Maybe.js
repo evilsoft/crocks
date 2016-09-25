@@ -6,6 +6,7 @@ const isFunction = require('../internal/isFunction')
 const isType = require('../internal/isType')
 
 const constant = require('../combinators/constant')
+const composeB = require('../combinators/composeB')
 
 const _inspect = require('../funcs/inspect')
 
@@ -100,27 +101,46 @@ function Maybe(x) {
     return m
   }
 
-  function jailSeq(type) {
-    return function(x) {
-      if(!isApplicative(x)) {
-        throw new TypeError(`${type()}.sequence: Must wrap an Applicative`)
-      }
-
-      return x.map(Maybe)
+  function runSequence(x) {
+    if(!isApplicative(x)) {
+      throw new TypeError(`Maybe.sequence: Must wrap an Applicative`)
     }
+
+    return x.map(Maybe)
   }
 
   function sequence(af) {
+    if(!isFunction(af)) {
+      throw new TypeError('Maybe.sequence: Applicative returning function required')
+    }
+
     return either(
-      constant(af(Maybe(undefined))),
-      jailSeq(type)
+      composeB(af, Maybe),
+      runSequence
+    )
+  }
+
+  function traverse(f, af) {
+    if(!isFunction(f) || !isFunction(af)) {
+      throw new TypeError('Maybe.traverse: Applicative returning functions required for both arguments')
+    }
+
+    const m = either(composeB(af, Maybe), f)
+
+    if(!isApplicative(m)) {
+      throw new TypeError('Maybe.traverse: Both functions must return an Applicative')
+    }
+
+    return either(
+      constant(m),
+      constant(m.map(Maybe))
     )
   }
 
   return {
     inspect, maybe, either, option,
     type, equals, coalesce, map, ap,
-    of, chain, sequence
+    of, chain, sequence, traverse
   }
 }
 

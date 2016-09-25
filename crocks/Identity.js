@@ -82,11 +82,8 @@ function Identity(x) {
   }
 
   function traverse(f, af) {
-    if(!isFunction(f)) {
-      throw new TypeError('Identity.traverse: Applicative returning function required for first argument')
-    }
-    else if(!isFunction(af)) {
-      throw new TypeError('Identity.traverse: Applicative function required for second argument')
+    if(!isFunction(f) || !isFunction(af)) {
+      throw new TypeError('Identity.traverse: Applicative returning functions required for both arguments')
     }
 
     const m = f(x)

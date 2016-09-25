@@ -20,6 +20,30 @@ const _of =
 const _empty =
   () => List([])
 
+function runSequence(acc, x) {
+  if(!isApplicative(x)) {
+    throw new TypeError('List.sequence: Must must wrap Applicatives')
+  }
+
+  return x
+    .map(v => _concat(List.of(v)))
+    .ap(acc)
+}
+
+function runTraverse(f) {
+  return function(acc, x) {
+    const m = f(x)
+
+    if(!isApplicative(acc) || !isApplicative(m)) {
+      throw new TypeError('List.traverse: Both function must return an Applicative')
+    }
+
+    return m
+      .map(v => _concat(List.of(v)))
+      .ap(acc)
+  }
+}
+
 function List(xs) {
   if(!arguments.length || !isArray(xs)) {
     throw new TypeError('List: Must wrap an array')
@@ -119,30 +143,33 @@ function List(xs) {
     return List(xs.reduce(flatMap(fn), []))
   }
 
-  function jailSeq(acc, x) {
-    if(!isApplicative(x)) {
-      throw new TypeError('List.sequence: Must must wrap an Applicative')
-    }
-
-    return x
-      .map(v => _concat(List.of(v)))
-      .ap(acc)
-  }
-
   function sequence(af) {
     if(!isFunction(af)) {
       throw new TypeError('List.sequence: Applicative Function required')
     }
 
     return reduce(
-      jailSeq,
-      af(List.empty()))
+      runSequence,
+      af(List.empty())
+    )
+  }
+
+  function traverse(f, af) {
+    if(!isFunction(f) || !isFunction(af)) {
+      throw new TypeError('List.traverse: Applicative returning functions required for both arguments')
+    }
+
+    return reduce(
+      runTraverse(f),
+      af(List.empty())
+    )
   }
 
   return {
     inspect, value, type, equals,
     concat, empty, reduce, filter,
-    map, ap, of, chain, sequence
+    map, ap, of, chain, sequence,
+    traverse
   }
 }
 

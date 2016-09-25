@@ -398,7 +398,7 @@ test('List sequence errors', t => {
   t.throws(seq(true), TypeError, 'throws with true')
   t.throws(seq([]), TypeError, 'throws with an array')
   t.throws(seq({}), TypeError, 'throws with an object')
-  t.doesNotThrow(seq(List.of), 'allows a function')
+  t.doesNotThrow(seq(MockCrock), 'allows an Applicative returning function')
 
   t.throws(seqBad(noop), TypeError, 'wrapping non-Applicative throws')
 
@@ -408,6 +408,50 @@ test('List sequence errors', t => {
 test('List sequence functionality', t => {
   const x = 'string'
   const m = List.of(MockCrock(x)).sequence(MockCrock.of)
+
+  t.equal(m.type(), 'MockCrock', 'Provides an outer type of MockCrock')
+  t.equal(m.value().type(), 'List', 'Provides an inner type of List')
+  t.same(m.value().value(), [ x ], 'inner List contains original inner value')
+  t.end()
+})
+
+test('List traverse errors', t => {
+  const trav = bindFunc(List.of(2).traverse)
+  const f = x => MockCrock(x)
+
+  t.throws(trav(undefined, MockCrock), TypeError, 'throws with undefined in first argument')
+  t.throws(trav(null, MockCrock), TypeError, 'throws with null in first argument')
+  t.throws(trav(0, MockCrock), TypeError, 'throws falsey with number in first argument')
+  t.throws(trav(1, MockCrock), TypeError, 'throws truthy with number in first argument')
+  t.throws(trav('', MockCrock), TypeError, 'throws falsey with string in first argument')
+  t.throws(trav('string', MockCrock), TypeError, 'throws with truthy string in first argument')
+  t.throws(trav(false, MockCrock), TypeError, 'throws with false in first argument')
+  t.throws(trav(true, MockCrock), TypeError, 'throws with true in first argument')
+  t.throws(trav([], MockCrock), TypeError, 'throws with an array in first argument')
+  t.throws(trav({}, MockCrock), TypeError, 'throws with an object in first argument')
+  t.throws(trav(noop, MockCrock), TypeError, 'throws with non-Appicative returning function in first argument')
+
+  t.throws(trav(f, undefined), TypeError, 'throws with undefined in second argument')
+  t.throws(trav(f, null), TypeError, 'throws with null in second argument')
+  t.throws(trav(f, 0), TypeError, 'throws falsey with number in second argument')
+  t.throws(trav(f, 1), TypeError, 'throws truthy with number in second argument')
+  t.throws(trav(f, ''), TypeError, 'throws falsey with string in second argument')
+  t.throws(trav(f, 'string'), TypeError, 'throws with truthy string in second argument')
+  t.throws(trav(f, false), TypeError, 'throws with false in second argument')
+  t.throws(trav(f, true), TypeError, 'throws with true in second argument')
+  t.throws(trav(f, []), TypeError, 'throws with an array in second argument')
+  t.throws(trav(f, {}), TypeError, 'throws with an object in second argument')
+  t.throws(trav(f, noop), TypeError, 'throws with non-Appicative returning function in second argument')
+
+  t.doesNotThrow(trav(f, MockCrock), 'allows Applicative returning functions')
+
+  t.end()
+})
+
+test('List traverse functionality', t => {
+  const x = 'string'
+  const f = x => MockCrock(x)
+  const m = List.of(x).traverse(f, MockCrock.of)
 
   t.equal(m.type(), 'MockCrock', 'Provides an outer type of MockCrock')
   t.equal(m.value().type(), 'List', 'Provides an inner type of List')

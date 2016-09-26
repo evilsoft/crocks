@@ -94,7 +94,7 @@ function Writer(entry, val) {
       throw new TypeError('Writer.mreduceLog: Monoid required')
     }
 
-    return Writer(mconcat(m, log()).value(), value())
+    return Writer(mconcat(m, log()), value())
   }
 
   return {

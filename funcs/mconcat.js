@@ -8,7 +8,7 @@ const isFunction = require('../internal/isFunction')
 
 const mconcatMap = require('./mconcatMap')
 
-// mconcat :: Monoid M => M -> [a] -> M a
+// mconcat :: Monoid M => M -> [a] -> a
 function mconcat(M, xs) {
   if(!(M && isMonoid(M))) {
     throw new TypeError('mconcat: Monoid required for first argument')

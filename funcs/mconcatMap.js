@@ -8,7 +8,7 @@ const isFunction = require('../internal/isFunction')
 const foldWith =
   m => (x, y) => x.concat(m(y))
 
-// mconcatMap :: Monoid M => M -> (a -> b) -> [a] -> M b
+// mconcatMap :: Monoid M => M -> (a -> b) -> [a] -> b
 function mconcatMap(M, f, xs) {
   if(!(M && isFunction(M.empty))) {
     throw new TypeError('mconcatMap: Monoid required for first argument')
@@ -20,7 +20,7 @@ function mconcatMap(M, f, xs) {
     throw new TypeError('mconcatMap: Foldable required for third argument')
   }
 
-  return xs.reduce(foldWith(composeB(M, f)), M.empty())
+  return xs.reduce(foldWith(composeB(M, f)), M.empty()).value()
 }
 
 module.exports = curry(mconcatMap)

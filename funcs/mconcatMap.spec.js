@@ -52,8 +52,8 @@ test('mconcatMap', t => {
   const nothing = mconcatMap(Last, addOne, [])
   const something = mconcatMap(Last, addOne, [1, 2, 3])
 
-  t.equal(nothing.value(), Last.empty().value(), 'returns the empty value when passed an empty array')
-  t.equal(something.value(), 4, 'returns the last value by lifting and calling concat on each after running through map function')
+  t.equal(nothing, Last.empty().value(), 'returns the empty value when passed an empty array')
+  t.equal(something, 4, 'returns the last value by lifting and calling concat on each after running through map function')
 
   t.end()
 })

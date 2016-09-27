@@ -22,7 +22,7 @@ const _empty =
 
 function runSequence(acc, x) {
   if(!isApplicative(x)) {
-    throw new TypeError('List.sequence: Must must wrap Applicatives')
+    throw new TypeError('List.sequence: Must wrap Applicatives')
   }
 
   return x
@@ -35,7 +35,7 @@ function runTraverse(f) {
     const m = f(x)
 
     if(!isApplicative(acc) || !isApplicative(m)) {
-      throw new TypeError('List.traverse: Both function must return an Applicative')
+      throw new TypeError('List.traverse: Both functions must return an Applicative')
     }
 
     return m

@@ -12,7 +12,7 @@ function traverse(fn, af, m) {
     throw new TypeError('traverse: Applicative function required for second argument')
   }
   else if(!(m && isFunction(m.traverse))) {
-    throw new TypeError('traverse: Traverable required for third argument')
+    throw new TypeError('traverse: Traversable required for third argument')
   }
 
   return m.traverse(fn, af)

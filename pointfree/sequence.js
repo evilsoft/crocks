@@ -9,7 +9,7 @@ function sequence(af, m) {
     throw new TypeError('sequence: Applicative function required for first argument')
   }
   else if(!(m && isFunction(m.sequence))) {
-    throw new TypeError('sequence: Traverable required for second argument')
+    throw new TypeError('sequence: Traversable required for second argument')
   }
 
   return m.sequence(af)

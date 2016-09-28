@@ -7,7 +7,7 @@ const isMonoid = require('../internal/isMonoid')
 const isArray = require('../internal/isArray')
 
 const _inspect = require('../funcs/inspect')
-const mconcat = require('../funcs/mconcat')
+const mreduce = require('../funcs/mreduce')
 
 const constant = require('../combinators/constant')
 
@@ -94,7 +94,7 @@ function Writer(entry, val) {
       throw new TypeError('Writer.mreduceLog: Monoid required')
     }
 
-    return Writer(mconcat(m, log()), value())
+    return Writer(mreduce(m, log()), value())
   }
 
   return {

@@ -3,6 +3,7 @@
 
 const curry = require('./curry')
 const composeB = require('../combinators/composeB')
+const isMonoid = require('../internal/isMonoid')
 const isFunction = require('../internal/isFunction')
 
 const foldWith =
@@ -10,7 +11,7 @@ const foldWith =
 
 // mconcatMap :: Monoid M => M -> (b -> a) -> [b] -> M a
 function mconcatMap(M, f, xs) {
-  if(!(M && isFunction(M.empty))) {
+  if(!(M && isMonoid(M))) {
     throw new TypeError('mconcatMap: Monoid required for first argument')
   }
   else if(!isFunction(f)) {

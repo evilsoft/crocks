@@ -12,6 +12,8 @@ test('isApplicative internal function', t => {
     of: identity
   }
 
+  t.ok(isFunction(isApplicative), 'is a function')
+
   t.equal(isApplicative(undefined), false, 'returns false for undefined')
   t.equal(isApplicative(null), false, 'returns false for null')
   t.equal(isApplicative(0), false, 'returns false for falsey number')

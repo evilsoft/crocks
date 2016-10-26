@@ -13,73 +13,73 @@ const reverseApply = require('../combinators/composeB')
 
 const MockCrock = require('../test/MockCrock')
 
-const Null = require('./Null')
+const Unit = require('./Unit')
 
-test('Null', t => {
-  const m = Null(0)
+test('Unit', t => {
+  const m = Unit(0)
 
-  t.ok(isFunction(Null), 'is a function')
+  t.ok(isFunction(Unit), 'is a function')
   t.ok(isObject(m), 'returns an object')
 
-  t.ok(isFunction(Null.type), 'provides a type function')
-  t.ok(isFunction(Null.empty), 'provides an empty function')
+  t.ok(isFunction(Unit.type), 'provides a type function')
+  t.ok(isFunction(Unit.empty), 'provides an empty function')
 
-  t.doesNotThrow(Null, 'allows no parameters')
+  t.doesNotThrow(Unit, 'allows no parameters')
 
   t.end()
 })
 
-test('Null inspect', t => {
-  const m = Null(0)
+test('Unit inspect', t => {
+  const m = Unit(0)
 
   t.ok(isFunction(m.inspect), 'provides an inpsect function')
-  t.equal(m.inspect(), 'Null', 'returns inspect string')
+  t.equal(m.inspect(), 'Unit', 'returns inspect string')
 
   t.end()
 })
 
-test('Null type', t => {
-  const m = Null(0)
+test('Unit type', t => {
+  const m = Unit(0)
 
   t.ok(isFunction(m.type), 'provides a type function')
-  t.equal(m.type(), 'Null', 'type returns Null')
+  t.equal(m.type(), 'Unit', 'type returns Unit')
 
   t.end()
 })
 
-test('Null value', t => {
+test('Unit value', t => {
   const x = 'some value'
-  const m = Null(x)
+  const m = Unit(x)
 
   t.ok(isFunction(m.value), 'is a function')
-  t.equal(m.value(), null,'value always returns null' )
+  t.equal(m.value(), undefined,'value always returns undefined' )
 
   t.end()
 })
 
-test('Null equals functionality', t => {
-  const a = Null(0)
-  const b = Null(0)
-  const c = Null(1)
+test('Unit equals functionality', t => {
+  const a = Unit(0)
+  const b = Unit(0)
+  const c = Unit(1)
 
   const value = 0
-  const nonNull = MockCrock(value)
+  const nonUnit = MockCrock(value)
 
   t.equal(a.equals(c), true, 'returns true when 2 Nulls initial values are not equal')
   t.equal(a.equals(b), true, 'returns true when 2 Nulls initial values are equal')
   t.equal(a.equals(value), false, 'returns false when passed a simple value')
-  t.equal(a.equals(nonNull), false, 'returns false when passed a non-Null')
+  t.equal(a.equals(nonUnit), false, 'returns false when passed a non-Unit')
 
   t.end()
 })
 
-test('Null equals properties (Setoid)', t => {
-  const a = Null(0)
-  const b = Null(0)
-  const c = Null(1)
-  const d = Null(0)
+test('Unit equals properties (Setoid)', t => {
+  const a = Unit(0)
+  const b = Unit(0)
+  const c = Unit(1)
+  const d = Unit(0)
 
-  t.ok(isFunction(Null(0).equals), 'provides an equals function')
+  t.ok(isFunction(Unit(0).equals), 'provides an equals function')
   t.equal(a.equals(a), true, 'reflexivity')
   t.equal(a.equals(b), b.equals(a), 'symmetry (equal)')
   t.equal(a.equals(c), c.equals(a), 'symmetry (!equal)')
@@ -88,26 +88,26 @@ test('Null equals properties (Setoid)', t => {
   t.end()
 })
 
-test('Null concat properties (Semigoup)', t => {
-  const a = Null(0)
-  const b = Null(true)
-  const c = Null('')
+test('Unit concat properties (Semigoup)', t => {
+  const a = Unit(0)
+  const b = Unit(true)
+  const c = Unit('')
 
   const left = a.concat(b).concat(c)
   const right = a.concat(b.concat(c))
 
   t.ok(isFunction(a.concat), 'provides a concat function')
   t.equal(left.value(), right.value(), 'associativity')
-  t.equal(a.concat(b).type(), a.type(), 'returns a Null')
+  t.equal(a.concat(b).type(), a.type(), 'returns a Unit')
 
   t.end()
 })
 
-test('Null concat functionality', t => {
-  const a = Null(23)
-  const b = Null(null)
+test('Unit concat functionality', t => {
+  const a = Unit(23)
+  const b = Unit(null)
 
-  const notNull = MockCrock()
+  const notUnit = MockCrock()
 
   const cat = bindFunc(a.concat)
 
@@ -121,16 +121,16 @@ test('Null concat functionality', t => {
   t.throws(cat(true), TypeError, 'throws with true')
   t.throws(cat([]), TypeError, 'throws with an array')
   t.throws(cat({}), TypeError, 'throws with an object')
-  t.throws(cat(notNull), TypeError, 'throws when passed non-Null')
+  t.throws(cat(notUnit), TypeError, 'throws when passed non-Unit')
 
-  t.equal(a.concat(b).value(), null, 'reports null for 23')
-  t.equal(b.concat(a).value(), null, 'null for true')
+  t.equal(a.concat(b).value(), undefined, 'reports null for 23')
+  t.equal(b.concat(a).value(), undefined, 'undefined for true')
 
   t.end()
 })
 
-test('Null empty properties (Monoid)', t => {
-  const m = Null(3)
+test('Unit empty properties (Monoid)', t => {
+  const m = Unit(3)
 
   t.ok(isFunction(m.concat), 'provides a concat function')
   t.ok(isFunction(m.empty), 'provides an empty function')
@@ -144,17 +144,17 @@ test('Null empty properties (Monoid)', t => {
   t.end()
 })
 
-test('Null empty functionality', t => {
-  const x = Null(0).empty()
+test('Unit empty functionality', t => {
+  const x = Unit(0).empty()
 
-  t.equal(x.type(), 'Null', 'provides a Null')
-  t.equal(x.value(), null, 'wraps a null value')
+  t.equal(x.type(), 'Unit', 'provides a Unit')
+  t.equal(x.value(), undefined, 'wraps an undefined value')
 
   t.end()
 })
 
-test('Null map errors', t => {
-  const map = bindFunc(Null(0).map)
+test('Unit map errors', t => {
+  const map = bindFunc(Unit(0).map)
 
   t.throws(map(undefined), TypeError, 'throws when passed undefined')
   t.throws(map(null), TypeError, 'throws when passed null')
@@ -171,21 +171,21 @@ test('Null map errors', t => {
   t.end()
 })
 
-test('Null map functionality', t => {
+test('Unit map functionality', t => {
   const spy = sinon.spy(x => x + 2)
   const x = 42
 
-  const m = Null(x).map(spy)
+  const m = Unit(x).map(spy)
 
-  t.equal(m.type(), 'Null', 'returns a Null')
+  t.equal(m.type(), 'Unit', 'returns a Unit')
   t.notOk(spy.called, 'does not call mapping function')
-  t.equal(m.value(), null, 'returns null')
+  t.equal(m.value(), undefined, 'returns undefined')
 
   t.end()
 })
 
-test('Null map properties (Functor)', t => {
-  const m = Null(10)
+test('Unit map properties (Functor)', t => {
+  const m = Unit(10)
 
   const f = x => x + 54
   const g = x => x * 4
@@ -198,9 +198,9 @@ test('Null map properties (Functor)', t => {
   t.end()
 })
 
-test('Null ap errors', t => {
+test('Unit ap errors', t => {
   const m = MockCrock('joy')
-  const ap = bindFunc(Null(32).ap)
+  const ap = bindFunc(Unit(32).ap)
 
   t.throws(ap(undefined), TypeError, 'throws when passed undefined')
   t.throws(ap(null), TypeError, 'throws when passed null')
@@ -218,47 +218,47 @@ test('Null ap errors', t => {
   t.end()
 })
 
-test('Null ap properties (Apply)', t => {
-  const m = Null({ some: 'thing' })
+test('Unit ap properties (Apply)', t => {
+  const m = Unit({ some: 'thing' })
 
   const a = m.map(composeB).ap(m).ap(m)
   const b = m.ap(m.ap(m))
 
-  t.ok(isFunction(Null(0).map), 'implements the Functor spec')
-  t.ok(isFunction(Null(0).ap), 'provides an ap function')
+  t.ok(isFunction(Unit(0).map), 'implements the Functor spec')
+  t.ok(isFunction(Unit(0).ap), 'provides an ap function')
 
-  t.same(a.ap(Null(3)).value(), b.ap(Null(3)).value(), 'composition')
-
-  t.end()
-})
-
-test('Null of', t => {
-  t.equal(Null.of, Null(0).of, 'Null.of is the same as the instance version')
-  t.equal(Null.of(0).type(), 'Null', 'returns a Null')
-  t.equal(Null.of(0).value(), null, 'returns the default null value')
+  t.same(a.ap(Unit(3)).value(), b.ap(Unit(3)).value(), 'composition')
 
   t.end()
 })
 
-test('Null of properties (Applicative)', t => {
-  const m = Null(identity)
+test('Unit of', t => {
+  t.equal(Unit.of, Unit(0).of, 'Unit.of is the same as the instance version')
+  t.equal(Unit.of(0).type(), 'Unit', 'returns a Unit')
+  t.equal(Unit.of(0).value(), undefined, 'returns the default undefined value')
 
-  t.ok(isFunction(Null(0).of), 'provides an of function')
-  t.ok(isFunction(Null(0).ap), 'implements the Apply spec')
+  t.end()
+})
 
-  t.equal(m.ap(Null(3)).value(), null, 'identity')
-  t.equal(m.ap(Null.of(3)).value(), Null.of(identity(3)).value(), 'homomorphism')
+test('Unit of properties (Applicative)', t => {
+  const m = Unit(identity)
 
-  const a = x => m.ap(Null.of(x))
-  const b = x => Null.of(reverseApply(x)).ap(m)
+  t.ok(isFunction(Unit(0).of), 'provides an of function')
+  t.ok(isFunction(Unit(0).ap), 'implements the Apply spec')
+
+  t.equal(m.ap(Unit(3)).value(), undefined, 'identity')
+  t.equal(m.ap(Unit.of(3)).value(), Unit.of(identity(3)).value(), 'homomorphism')
+
+  const a = x => m.ap(Unit.of(x))
+  const b = x => Unit.of(reverseApply(x)).ap(m)
 
   t.equal(a(3).value(), b(3).value(), 'interchange')
 
   t.end()
 })
 
-test('Null chain errors', t => {
-  const chain = bindFunc(Null(0).chain)
+test('Unit chain errors', t => {
+  const chain = bindFunc(Unit(0).chain)
 
   t.throws(chain(undefined), TypeError, 'throws with undefined')
   t.throws(chain(null), TypeError, 'throws with null')
@@ -276,30 +276,30 @@ test('Null chain errors', t => {
   t.end()
 })
 
-test('Null chain properties (Chain)', t => {
-  t.ok(isFunction(Null(0).chain), 'provides a chain function')
-  t.ok(isFunction(Null(0).ap), 'implements the Apply spec')
+test('Unit chain properties (Chain)', t => {
+  t.ok(isFunction(Unit(0).chain), 'provides a chain function')
+  t.ok(isFunction(Unit(0).ap), 'implements the Apply spec')
 
-  const f = x => Null(x + 2)
-  const g = x => Null(x + 10)
+  const f = x => Unit(x + 2)
+  const g = x => Unit(x + 10)
 
-  const a = x => Null(x).chain(f).chain(g)
-  const b = x => Null(x).chain(y => f(y).chain(g))
+  const a = x => Unit(x).chain(f).chain(g)
+  const b = x => Unit(x).chain(y => f(y).chain(g))
 
   t.equal(a(10).value(), b(10).value(), 'assosiativity')
 
   t.end()
 })
 
-test('Null chain properties (Monad)', t => {
-  t.ok(isFunction(Null(0).chain), 'implements the Chain spec')
-  t.ok(isFunction(Null(0).of), 'implements the Applicative spec')
+test('Unit chain properties (Monad)', t => {
+  t.ok(isFunction(Unit(0).chain), 'implements the Chain spec')
+  t.ok(isFunction(Unit(0).of), 'implements the Applicative spec')
 
-  const f = x => Null(x)
+  const f = x => Unit(x)
 
-  t.equal(Null.of(56).chain(f).value(), f(56).value(), 'left identity')
+  t.equal(Unit.of(56).chain(f).value(), f(56).value(), 'left identity')
 
-  t.equal(f(3).chain(Null.of).value(), f(3).value(), 'right identity')
+  t.equal(f(3).chain(Unit.of).value(), f(3).value(), 'right identity')
 
   t.end()
 })

@@ -8,9 +8,9 @@ const crocks = {
   IO: require('./crocks/IO'),
   List: require('./crocks/List'),
   Maybe: require('./crocks/Maybe'),
-  Null: require('./crocks/Null'),
   Pair: require('./crocks/Pair'),
   Reader: require('./crocks/Reader'),
+  Unit: require('./crocks/Unit'),
   Writer: require('./crocks/Writer')
 }
 

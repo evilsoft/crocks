@@ -9,22 +9,22 @@ const _inspect = require('../funcs/inspect')
 const constant = require('../combinators/constant')
 
 const _type =
-  constant('Null')
+  constant('Unit')
 
 const _of =
-  Null
+  Unit
 
 const _empty =
-  Null
+  Unit
 
-function Null() {
-  const x = null
+function Unit() {
+  const x = undefined
 
   const equals =
     m => isType(type(), m) && x === m.value()
 
   const inspect =
-    constant(`Null`)
+    constant(`Unit`)
 
   const value =
     constant(x)
@@ -40,34 +40,34 @@ function Null() {
 
   function concat(m) {
     if(!(m && isType(type(), m))) {
-      throw new TypeError('Null.concat: Null required')
+      throw new TypeError('Unit.concat: Unit required')
     }
 
-    return Null()
+    return Unit()
   }
 
   function map(fn) {
     if(!isFunction(fn)) {
-      throw new TypeError('Null.map: Function required')
+      throw new TypeError('Unit.map: Function required')
     }
 
-    return Null()
+    return Unit()
   }
 
   function ap(m) {
     if(!isType(type(), m)) {
-      throw new TypeError('Null.ap: Null required')
+      throw new TypeError('Unit.ap: Unit required')
     }
 
-    return Null()
+    return Unit()
   }
 
   function chain(fn) {
     if(!isFunction(fn)) {
-      throw new TypeError('Null.chain: Function required')
+      throw new TypeError('Unit.chain: Function required')
     }
 
-    return Null()
+    return Unit()
   }
 
   return {
@@ -76,15 +76,15 @@ function Null() {
   }
 }
 
-Null.type =
+Unit.type =
   _type
 
-Null.of =
+Unit.of =
   _of
 
-Null.empty =
+Unit.empty =
   _empty
 
-module.exports = Null
+module.exports = Unit
 
 

@@ -1,6 +1,7 @@
 const test = require('tape')
 const helpers = require('../test/helpers')
 
+const isObject = require('./isObject')
 const isFunction = require('./isFunction')
 const bindFunc = helpers.bindFunc
 
@@ -47,3 +48,19 @@ test('defineUnion internal function', t => {
   t.end()
 })
 
+test('defineUnion resulting type', t => {
+  const u = defineUnion({ None: [], One: [ 'a' ] })
+
+  t.ok(isObject(u), 'returns an object')
+
+  t.ok(isFunction(u.caseOf), 'provides a caseOf function')
+  t.ok(isFunction(u.None), 'provides a `None` constructor')
+  t.ok(isFunction(u.One), 'provides a `One` constructor')
+
+  t.end()
+})
+
+test('defineUnion constructors', t => {
+
+  t.end()
+})

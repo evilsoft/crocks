@@ -24,6 +24,8 @@ test('Maybe', t => {
 
   t.ok(isFunction(Maybe.of), 'provides an of function')
   t.ok(isFunction(Maybe.type), 'provides a type function')
+  t.ok(isFunction(Maybe.Nothing), 'provides a Nothing constructor')
+  t.ok(isFunction(Maybe.Just), 'provides a Just constructor')
 
   t.throws(Maybe, TypeError, 'throws with no parameters')
 
@@ -31,52 +33,50 @@ test('Maybe', t => {
 })
 
 test('Maybe inspect', t => {
-  const m = Maybe('great')
-  const n = Maybe(null)
+  const m = Maybe.Just('great')
+  const n = Maybe.Nothing()
 
   t.ok(isFunction(m.inspect), 'provides an inspect function')
-  t.equal(m.inspect(), 'Maybe "great"', 'returns inspect string')
+  t.equal(m.inspect(), 'Maybe.Just "great"', 'returns inspect string')
   t.equal(n.inspect(), 'Maybe.Nothing', 'Nothing returns inspect string')
 
   t.end()
 })
 
 test('Maybe type', t => {
-  t.equal(Maybe(0).type(), 'Maybe', 'type returns Maybe')
+  t.equal(Maybe.Just(0).type(), 'Maybe', 'type returns Maybe for Just')
+  t.equal(Maybe.Nothing().type(), 'Maybe', 'type returns Maybe for Nothing')
+
   t.end()
 })
 
 test('Maybe maybe', t => {
-  t.equal(Maybe(0).maybe(), 0, 'maybe returns 0 when 0 is wrapped')
-  t.equal(Maybe(1).maybe(), 1, 'maybe returns 1 when 1 is wrapped')
+  t.equal(Maybe.Just(0).maybe(), 0, 'maybe returns 0 when 0 is wrapped')
+  t.equal(Maybe.Just(1).maybe(), 1, 'maybe returns 1 when 1 is wrapped')
   t.equal(Maybe('').maybe(), '', "maybe returns '' when '' is wrapped")
   t.equal(Maybe('string').maybe(), 'string', "maybe returns 'string' when 'string' is wrapped")
   t.equal(Maybe(false).maybe(), false, 'maybe returns false when false is wrapped')
   t.equal(Maybe(true).maybe(), true, 'maybe returns true when true is wrapped')
 
-  t.equal(Maybe(null).maybe(), undefined, 'maybe returns undefined when null is wrapped')
+  t.equal(Maybe(null).maybe(), null, 'maybe returns undefined when null is wrapped')
   t.equal(Maybe(undefined).maybe(), undefined, 'maybe returns undefined when undefined is wrapped')
   t.end()
 })
 
 test('Maybe option', t => {
-  const nothing = Maybe(null)
-  const something = Maybe('something')
+  const nothing = Maybe.Nothing()
+  const just = Maybe.Just('something')
 
   t.equal(nothing.option('was nothing'), 'was nothing', 'returns passed value when called on Nothing')
-  t.equal(something.option('was something'), 'something', 'returns wrapped value when called on Something')
+  t.equal(just.option('was something'), 'something', 'returns wrapped value when called on Something')
 
   t.end()
 })
 
 test('Maybe either', t => {
-  const nothing = Maybe(null)
-  const something = Maybe('value')
-
-  const fn = bindFunc(Maybe(23).either)
+  const fn = bindFunc(Maybe.Just(23).either)
 
   t.throws(fn(), TypeError, 'throws when nothing passed')
-
   t.throws(fn(null, noop), TypeError, 'throws with null in left')
   t.throws(fn(undefined, noop), TypeError, 'throws with undefined in left')
   t.throws(fn(0, noop), TypeError, 'throws with falsey number in left')
@@ -99,14 +99,17 @@ test('Maybe either', t => {
   t.throws(fn(noop, {}), TypeError, 'throws with object in right')
   t.throws(fn(noop, []), TypeError, 'throws with array in right')
 
+  const nothing = Maybe.Nothing()
+  const just = Maybe.Just('value')
+
   t.equal(nothing.either(constant('nothing'), constant('something')), 'nothing', 'returns left function result when called on Nothing')
-  t.equal(something.either(constant('nothing'), constant('something')), 'something', 'returns right function result when called on Somthing')
+  t.equal(just.either(constant('nothing'), constant('something')), 'something', 'returns right function result when called on Somthing')
 
   t.end()
 })
 
 test('Maybe coalesce', t => {
-  const fn = bindFunc(Maybe(23).coalesce)
+  const fn = bindFunc(Maybe.Just(23).coalesce)
 
   t.throws(fn(null, noop), TypeError, 'throws with null in left')
   t.throws(fn(undefined, noop), TypeError, 'throws with undefined in left')
@@ -130,38 +133,44 @@ test('Maybe coalesce', t => {
   t.throws(fn(noop, {}), TypeError, 'throws with object in right')
   t.throws(fn(noop, []), TypeError, 'throws with array in right')
 
-  const nothing = Maybe(null).coalesce(constant('was nothing'), identity)
-  const something = Maybe('here').coalesce(identity, constant('was something'))
+  const nothing = Maybe.Nothing().coalesce(constant('was nothing'), identity)
+  const just = Maybe.Just('here').coalesce(identity, constant('was something'))
 
-  t.ok(nothing.equals(Maybe('was nothing')),'returns a Maybe wrapping was nothing' )
-  t.ok(something.equals(Maybe('was something')),'returns a Maybe wrapping was something' )
+  t.ok(nothing.equals(Maybe.Just('was nothing')),'returns a Maybe wrapping was nothing')
+  t.ok(just.equals(Maybe.Just('was something')),'returns a Maybe wrapping was something')
 
   t.end()
 })
 
 test('Maybe equals functionality', t => {
-  const a = Maybe(0)
-  const b = Maybe(0)
-  const c = Maybe(1)
+  const a = Maybe.Just(0)
+  const b = Maybe.Just(0)
+  const c = Maybe.Just(1)
+
+  const d = Maybe.Just(undefined)
+  const n = Maybe.Nothing()
 
   const value = 0
   const nonMaybe = { type: 'Maybe...Not' }
 
-  t.equal(a.equals(c), false, 'returns false when 2 Maybes are not equal')
-  t.equal(a.equals(b), true, 'returns true when 2 Maybes are equal')
+  t.equal(a.equals(c), false, 'returns false when 2 Justs are not equal')
+  t.equal(d.equals(n), false, 'returns false when Just(undefinded) and Nothing compared')
   t.equal(a.equals(value), false, 'returns false when passed a simple value')
   t.equal(a.equals(nonMaybe), false, 'returns false when passed a non-Maybe')
+
+  t.equal(a.equals(b), true, 'returns true when 2 Justs are equal')
+  t.equal(n.equals(Maybe.Nothing()), true, 'returns true when Nothings compared')
 
   t.end()
 })
 
 test('Maybe equals properties (Setoid)', t => {
-  const a = Maybe(0)
-  const b = Maybe(0)
-  const c = Maybe(1)
-  const d = Maybe(0)
+  const a = Maybe.Just(0)
+  const b = Maybe.Just(0)
+  const c = Maybe.Just(1)
+  const d = Maybe.Just(0)
 
-  t.ok(isFunction(Maybe(0).equals), 'provides an equals function')
+  t.ok(isFunction(Maybe.Just(0).equals), 'provides an equals function')
 
   t.equal(a.equals(a), true, 'reflexivity')
   t.equal(a.equals(b), b.equals(a), 'symmetry (equal)')
@@ -172,7 +181,7 @@ test('Maybe equals properties (Setoid)', t => {
 })
 
 test('Maybe map errors', t => {
-  const map = bindFunc(Maybe(0).map)
+  const map = bindFunc(Maybe.Just(0).map)
 
   t.throws(map(undefined), TypeError, 'throws with undefined')
   t.throws(map(null), TypeError, 'throws with null')
@@ -193,19 +202,19 @@ test('Maybe map errors', t => {
 test('Maybe map functionality', t => {
   const spy = sinon.spy(identity)
 
-  t.equal(Maybe(0).map(identity).type(), 'Maybe', 'returns a Maybe')
+  t.equal(Maybe.Just('Just').map(identity).option('Nothing'), 'Just', 'Just returns a Just')
+  t.equal(Maybe.Nothing().map(identity).option('Nothing'), 'Nothing', 'Nothing returns a Nothing')
 
-  const undef = Maybe(undefined).map(spy)
+  const nothing = Maybe.Nothing().map(spy)
 
-  t.equal(undef.type(), 'Maybe', 'returns a Maybe when undefined')
-  t.equal(undef.maybe(), undefined, 'returns a Maybe with an undefined value')
-  t.equal(spy.called, false, 'mapped function is never called when undefined')
+  t.equal(nothing.option('Nothing'), 'Nothing', 'returns a Nothing when mapping a Nothing')
+  t.equal(spy.called, false, 'mapping function is never called on Nothing')
 
-  const def = Maybe(0).map(spy)
+  const def = Maybe.Just('Just').map(spy)
 
-  t.equal(def.type(), 'Maybe', 'returns a Maybe when not undefined')
-  t.equal(def.maybe(), 0, 'returns a Maybe with the same value when mapped with identity')
-  t.equal(spy.called, true, 'mapped function is called when not undefined')
+  t.equal(def.option('Nothing'), 'Just', 'returns a Just')
+  t.equal(def.maybe(), 'Just', 'returns a Just with the same value when mapped with identity')
+  t.equal(spy.called, true, 'mapped function is called on Just')
 
   t.end()
 })
@@ -214,17 +223,18 @@ test('Maybe map properties (Functor)', t => {
   const f = x => x + 2
   const g = x => x * 2
 
-  t.ok(isFunction(Maybe(0).map), 'provides a map function')
+  t.ok(isFunction(Maybe.Just(0).map), 'Just provides a map function')
+  t.ok(isFunction(Maybe.Nothing().map), 'Just provides a map function')
 
-  t.equal(Maybe(0).map(identity).maybe(), 0, 'identity')
-  t.equal(Maybe(10).map(x => f(g(x))).maybe(), Maybe(10).map(g).map(f).maybe(), 'composition')
+  t.equal(Maybe.Just(null).map(identity).maybe(), null, 'identity')
+  t.equal(Maybe.Just(10).map(x => f(g(x))).maybe(), Maybe(10).map(g).map(f).maybe(), 'composition')
 
   t.end()
 })
 
 test('Maybe ap errors', t => {
   const m = { type: () => 'Maybe...Not' }
-  const ap = bindFunc(Maybe(noop).ap)
+  const ap = bindFunc(Maybe.Just(noop).ap)
 
   t.throws(Maybe(0).ap.bind(null, Maybe(0)), TypeError, 'throws when wrapped value is a falsey number')
   t.throws(Maybe(1).ap.bind(null, Maybe(0)), TypeError, 'throws when wrapped value is a truthy number')
@@ -247,22 +257,28 @@ test('Maybe ap errors', t => {
   t.throws(ap({}), TypeError, 'throws with an object')
   t.throws(ap(m), TypeError, 'throws when container types differ')
 
-  t.doesNotThrow(ap(Maybe(0)), 'allows a Maybe')
+  t.doesNotThrow(ap(Maybe.Just(0)), 'allows a Maybe')
 
   t.end()
 })
 
 test('Maybe ap properties (Apply)', t => {
-  const m = Maybe(identity)
+  const m = Maybe.Just(identity)
 
   const a = m.map(composeB).ap(m).ap(m)
   const b = m.ap(m.ap(m))
 
-  t.ok(isFunction(Maybe(0).ap), 'provides an ap function')
-  t.ok(isFunction(Maybe(0).map), 'implements the Functor spec')
+  const j = Maybe.Just(3)
+  const n = Maybe.Nothing()
 
-  t.equal(a.ap(Maybe(3)).maybe(), b.ap(Maybe(3)).maybe(), 'composition Just')
-  t.equal(a.ap(Maybe(undefined)).maybe(), b.ap(Maybe(undefined)).maybe(), 'composition Nothing')
+  t.ok(isFunction(j.ap), 'Just provides an ap function')
+  t.ok(isFunction(j.map), 'Just implements the Functor spec')
+
+  t.ok(isFunction(n.ap), 'Nothing provides an ap function')
+  t.ok(isFunction(n.map), 'Nothing implements the Functor spec')
+
+  t.equal(a.ap(j).option('Nothing'), b.ap(j).option('Nothing'), 'composition Just')
+  t.equal(a.ap(n).option('Nothing'), b.ap(n).option('Nothing'), 'composition Nothing')
 
   t.end()
 })
@@ -276,22 +292,21 @@ test('Maybe of', t => {
 })
 
 test('Maybe of properties (Applicative)', t => {
-  const m = Maybe(identity)
+  const m = Maybe.Just(identity)
 
-  t.ok(isFunction(Maybe(0).of), 'provides an of function')
-  t.ok(isFunction(Maybe(0).ap), 'implements the Apply spec')
+  const j = Maybe.Just(3)
+  const n = Maybe.Nothing()
 
-  t.equal(m.ap(Maybe(3)).maybe(), 3, 'identity Just')
-  t.equal(m.ap(Maybe(undefined)).maybe(), undefined, 'identity Nothing')
+  t.ok(isFunction(j.of), 'Just provides an of function')
+  t.ok(isFunction(j.ap), 'Just implements the Apply spec')
 
-  t.equal(m.ap(Maybe.of(3)).maybe(), Maybe.of(identity(3)).maybe(), 'homomorphism Just')
-  t.equal(m.ap(Maybe.of(undefined)).maybe(), Maybe.of(identity(undefined)).maybe(), 'homomorphism Nothing')
+  t.equal(m.ap(j).maybe(), 3, 'identity')
+  t.equal(m.ap(Maybe.of(3)).maybe(), Maybe.of(identity(3)).maybe(), 'homomorphism')
 
   const a = x => m.ap(Maybe.of(x))
   const b = x => Maybe.of(reverseApply(x)).ap(m)
 
   t.equal(a(3).maybe(), b(3).maybe(), 'interchange Just')
-  t.equal(a(undefined).maybe(), b(undefined).maybe(), 'interchange Nothing')
 
   t.end()
 })
@@ -318,17 +333,22 @@ test('Maybe chain errors', t => {
 })
 
 test('Maybe chain properties (Chain)', t => {
-  t.ok(isFunction(Maybe(0).chain), 'provides a chain function')
-  t.ok(isFunction(Maybe(0).ap), 'implements the Apply spec')
+  const j = Maybe.Just(0)
+  const n = Maybe.Nothing()
 
-  const f = x => Maybe(x + 2)
-  const g = x => Maybe(x + 10)
+  t.ok(isFunction(j.chain), 'Just provides a chain function')
+  t.ok(isFunction(j.ap), 'Just implements the Apply spec')
 
-  const a = x => Maybe(x).chain(f).chain(g)
-  const b = x => Maybe(x).chain(y => f(y).chain(g))
+  t.ok(isFunction(n.chain), 'Nothing provides a chain function')
+  t.ok(isFunction(n.ap), 'Nothing implements the Apply spec')
 
-  t.equal(a(10).maybe(), b(10).maybe(), 'assosiativity Just')
-  t.equal(a(null).maybe(), b(null).maybe(), 'assosiativity Nothing')
+  const f = x => Maybe.of(x + 2)
+  const g = x => Maybe.of(x + 10)
+
+  const a = x => Maybe.of(x).chain(f).chain(g)
+  const b = x => Maybe.of(x).chain(y => f(y).chain(g))
+
+  t.equal(a(10).maybe(), b(10).maybe(), 'assosiativity')
 
   t.end()
 })
@@ -337,15 +357,10 @@ test('Maybe chain properties (Monad)', t => {
   t.ok(isFunction(Maybe(0).chain), 'implements the Chain spec')
   t.ok(isFunction(Maybe(0).of), 'implements the Applicative spec')
 
-  const f = x => Maybe(x)
+  const f = Maybe.of
 
-  t.equal(Maybe.of(3).chain(f).maybe(), f(3).maybe(), 'left identity Just')
-  t.equal(Maybe.of(null).chain(f).maybe(), f(null).maybe(), 'left identity Nothing')
-
-  const m = x => Maybe(x)
-
-  t.equal(m(3).chain(Maybe.of).maybe(), m(3).maybe(), 'right identity Just')
-  t.equal(m(null).chain(Maybe.of).maybe(), m(null).maybe(), 'right identity Nothing')
+  t.equal(Maybe.of(3).chain(f).maybe(), f(3).maybe(), 'left identity')
+  t.equal(f(3).chain(Maybe.of).maybe(), f(3).maybe(), 'right identity')
 
   t.end()
 })
@@ -354,7 +369,7 @@ test('Maybe sequence errors', t => {
   const seq = bindFunc(Maybe(MockCrock({ something: true })).sequence)
   const seqBad = bindFunc(Maybe(0).sequence)
 
-  const seqNothing = bindFunc(Maybe(undefined).sequence)
+  const seqNothing = bindFunc(Maybe.Nothing().sequence)
 
   t.throws(seq(undefined), TypeError, 'throws with undefined')
   t.throws(seq(null), TypeError, 'throws with null')
@@ -375,9 +390,9 @@ test('Maybe sequence errors', t => {
 })
 
 test('Maybe sequence functionality', t => {
-  const x = []
-  const s = Maybe(MockCrock(x)).sequence(MockCrock.of)
-  const n = Maybe(MockCrock(null)).sequence(MockCrock.of)
+  const x = [ 'a' ]
+  const s = Maybe.Just(MockCrock(x)).sequence(MockCrock.of)
+  const n = Maybe.Nothing().sequence(MockCrock.of)
 
   t.equal(s.type(), 'MockCrock', 'Provides an outer type of MockCrock')
   t.equal(s.value().type(), 'Maybe', 'Provides an inner type of Maybe')
@@ -391,8 +406,8 @@ test('Maybe sequence functionality', t => {
 })
 
 test('Maybe traverse errors', t => {
-  const rtrav = bindFunc(Maybe(0).traverse)
-  const ltrav = bindFunc(Maybe(null).traverse)
+  const rtrav = bindFunc(Maybe.Just(0).traverse)
+  const ltrav = bindFunc(Maybe.Nothing().traverse)
 
   const f = x => MockCrock(x)
 
@@ -452,8 +467,8 @@ test('Maybe traverse functionality', t => {
   const x = 'bubbles'
   const f = x => MockCrock(x)
 
-  const r = Maybe(x).traverse(f, MockCrock)
-  const l = Maybe(null).traverse(f, MockCrock)
+  const r = Maybe.Just(x).traverse(f, MockCrock)
+  const l = Maybe.Nothing().traverse(f, MockCrock)
 
   t.equal(r.type(), 'MockCrock', 'Provides an outer type of MockCrock')
   t.equal(r.value().type(), 'Maybe', 'Provides an inner type of Maybe')

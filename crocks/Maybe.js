@@ -2,47 +2,56 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const isApplicative = require('../internal/isApplicative')
+const defineUnion = require('../internal/defineUnion')
 const isFunction = require('../internal/isFunction')
 const isType = require('../internal/isType')
 
 const constant = require('../combinators/constant')
+const identity = require('../combinators/identity')
 const composeB = require('../combinators/composeB')
 
 const _inspect = require('../funcs/inspect')
 
-const isNothing =
-  x => x === undefined || x === null
+const _maybe = defineUnion({ Nothing: [], Just: [ 'a' ] })
+
+const Nothing = _maybe.Nothing
+const Just = _maybe.Just
 
 const _type=
   constant('Maybe')
 
 const _of =
-  Maybe
+  composeB(Maybe, Just)
 
-function Maybe(x) {
+function Maybe(u) {
   if(!arguments.length) {
-    throw new TypeError('Maybe: Must wrap something')
+    throw new TypeError('Maybe: Must wrap something, try using Nothing or Just constructors')
   }
 
-  const type =
-    _type
+  const x = (u && isFunction(u.tag) && (u.tag() === 'Nothing' || u.tag() === 'Just'))
+    ? u : Just(u)
+
+  const type = _type
 
   const of =
     _of
 
   const option =
-    n => either(constant(n), constant(x))
+    n => either(constant(n), identity)
 
   const maybe =
     constant(option(undefined))
 
   const equals =
-    m => isType(type(), m) && x === m.maybe()
+    m => isType(type(), m) && either(
+      constant(m.either(constant(true), constant(false))),
+      constant(m.either(constant(false), constant(true)))
+    ) && maybe() === m.maybe()
 
   function inspect() {
     return either(
       constant(`Maybe.Nothing`),
-      constant(`Maybe${_inspect(x)}`)
+      x => `Maybe.Just${_inspect(x)}`
     )
   }
 
@@ -51,7 +60,10 @@ function Maybe(x) {
       throw new TypeError('Maybe.either: Requires both left and right functions')
     }
 
-    return isNothing(x) ? f() : g(x)
+    return _maybe.caseOf({
+      Nothing: f,
+      Just: g
+    }, x)
   }
 
   function coalesce(f, g) {
@@ -59,7 +71,7 @@ function Maybe(x) {
       throw new TypeError('Maybe.coalesce: Requires both left and right functions')
     }
 
-    return Maybe(either(f, g))
+    return Maybe.Just(either(f, g))
   }
 
   function map(fn) {
@@ -67,7 +79,10 @@ function Maybe(x) {
       throw new TypeError('Maybe.map: Function required')
     }
 
-    return Maybe(either(constant(undefined), fn))
+    return either(
+      Maybe.Nothing,
+      composeB(Maybe.Just, fn)
+    )
   }
 
   function ap(m) {
@@ -88,11 +103,7 @@ function Maybe(x) {
       throw new TypeError('Maybe.chain: Function required')
     }
 
-    if(isNothing(x)) {
-      return Maybe(undefined)
-    }
-
-    const m = fn(x)
+    const m = either(Maybe.Nothing, fn)
 
     if(!(m && isType(type(), m))) {
       throw new TypeError('Maybe.chain: function must return a Maybe')
@@ -106,7 +117,7 @@ function Maybe(x) {
       throw new TypeError(`Maybe.sequence: Must wrap an Applicative`)
     }
 
-    return x.map(Maybe)
+    return x.map(Maybe.of)
   }
 
   function sequence(af) {
@@ -115,7 +126,7 @@ function Maybe(x) {
     }
 
     return either(
-      composeB(af, Maybe),
+      composeB(af, Maybe.Nothing),
       runSequence
     )
   }
@@ -125,7 +136,7 @@ function Maybe(x) {
       throw new TypeError('Maybe.traverse: Applicative returning functions required for both arguments')
     }
 
-    const m = either(composeB(af, Maybe), f)
+    const m = either(composeB(af, Maybe.Nothing), f)
 
     if(!isApplicative(m)) {
       throw new TypeError('Maybe.traverse: Both functions must return an Applicative')
@@ -149,5 +160,11 @@ Maybe.of =
 
 Maybe.type =
   _type
+
+Maybe.Nothing =
+  composeB(Maybe, Nothing)
+
+Maybe.Just =
+  composeB(Maybe, Just)
 
 module.exports = Maybe

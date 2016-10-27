@@ -30,7 +30,7 @@ function Pair(l, r) {
     constant(r)
 
   const inspect =
-    () => `Pair [${_inspect(l)},${_inspect(r)} ]`
+    () => `Pair${_inspect(l)}${_inspect(r)}`
 
   function equals(m) {
     return isType(type(), m)

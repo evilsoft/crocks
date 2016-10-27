@@ -36,7 +36,6 @@ function construction(def, tag) {
   }
 }
 
-// defineUnion :: Object -> Function
 function defineUnion(defs) {
   if(!isObject(defs) || isEmpty(defs)) {
     throw new TypeError('defineUnion: Argument must be an Object containing definition lists')

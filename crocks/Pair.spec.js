@@ -30,7 +30,7 @@ test('Pair inspect', t => {
   const m = Pair(0, 'nice')
 
   t.ok(isFunction(m.inspect), 'provides an inpsect function')
-  t.equal(m.inspect(), "Pair [ 0, \"nice\" ]", 'returns inspect string')
+  t.equal(m.inspect(), "Pair 0 \"nice\"", 'returns inspect string')
 
   t.end()
 })

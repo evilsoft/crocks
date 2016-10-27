@@ -17,11 +17,11 @@ const _maybe = defineUnion({ Nothing: [], Just: [ 'a' ] })
 const Nothing = _maybe.Nothing
 const Just = _maybe.Just
 
-const _type=
-  constant('Maybe')
-
 const _of =
   composeB(Maybe, Just)
+
+const _type=
+  constant('Maybe')
 
 function Maybe(u) {
   if(!arguments.length) {
@@ -31,10 +31,11 @@ function Maybe(u) {
   const x = (u && isFunction(u.tag) && (u.tag() === 'Nothing' || u.tag() === 'Just'))
     ? u : Just(u)
 
-  const type = _type
-
   const of =
     _of
+
+  const type =
+    _type
 
   const option =
     n => either(constant(n), identity)

@@ -24,7 +24,7 @@ function Unit() {
     m => isType(type(), m) && x === m.value()
 
   const inspect =
-    constant(`Unit`)
+    constant(`()`)
 
   const value =
     constant(x)

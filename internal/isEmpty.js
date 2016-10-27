@@ -11,7 +11,7 @@ function isEmpty(x) {
     return !x.length
   }
 
-  return !x;
+  return !x
 }
 
 module.exports = isEmpty

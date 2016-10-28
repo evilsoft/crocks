@@ -9,8 +9,13 @@ const _inspect = require('../funcs/inspect')
 
 const constant = require('../combinators/constant')
 
+const Unit = require('./Unit')
+
 const _type =
   constant('Pair')
+
+const _of =
+  x => Pair(Unit(), x)
 
 function Pair(l, r) {
   if(arguments.length < 2) {
@@ -19,6 +24,9 @@ function Pair(l, r) {
 
   const type =
     _type
+
+  const of =
+    _of
 
   const value =
     constant([ l, r ])
@@ -122,10 +130,14 @@ function Pair(l, r) {
   return {
     inspect, value, fst, snd,
     type, equals, concat, swap,
-    map, bimap, ap, chain
+    map, bimap, ap, of, chain
   }
 }
 
-Pair.type = _type
+Pair.type =
+  _type
+
+Pair.of =
+  _of
 
 module.exports = Pair

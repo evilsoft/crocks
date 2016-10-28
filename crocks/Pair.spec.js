@@ -8,8 +8,10 @@ const noop = helpers.noop
 const bindFunc = helpers.bindFunc
 const isObject = require('../internal/isObject')
 const isFunction = require('../internal/isFunction')
+const reverseApply = require('../combinators/reverseApply')
 
 const Pair = require('./Pair')
+const Unit = require('./Unit')
 
 test('Pair', t => {
   const m = bindFunc(Pair)
@@ -19,6 +21,7 @@ test('Pair', t => {
   t.ok(isObject(x), 'returns an object')
 
   t.ok(isFunction(Pair.type), 'provides a type function')
+  t.ok(isFunction(Pair.of), 'provides an of function')
 
   t.throws(m(), TypeError, 'throws with no parameters')
   t.throws(m(1), TypeError, 'throws with one parameter')
@@ -319,6 +322,32 @@ test('Pair ap properties (Apply)', t => {
   t.end()
 })
 
+test('Pair of', t => {
+  t.equal(Pair.of, Pair(0, 0).of, 'Pair.of is the same as the instance version')
+  t.equal(Pair.of(0).type(), 'Pair', 'returns a Pair')
+
+  t.end()
+})
+
+test('Pair of properties (Applicative)', t => {
+  const m = Pair(Unit(), identity)
+
+  const v = Pair(Unit(), 3)
+
+  t.ok(isFunction(m.of), 'Pair provides an of function')
+  t.ok(isFunction(m.ap), 'Pair implements the Apply spec')
+
+  t.equal(m.ap(v).snd(), 3, 'identity on snd value')
+  t.equal(m.ap(Pair.of(3)).snd(), Pair.of(identity(3)).snd(), 'homomorphism on snd value')
+
+  const a = x => m.ap(Pair.of(x))
+  const b = x => Pair.of(reverseApply(x)).ap(m)
+
+  t.equal(a(3).snd(), b(3).snd(), 'interchange on snd value')
+
+  t.end()
+})
+
 test('Pair chain errors', t => {
   const badChain = bindFunc(Pair(0, 0).chain)
   const chain = bindFunc(Pair([], 0).chain)
@@ -357,6 +386,18 @@ test('Pair chain properties (Chain)', t => {
   const b = x => Pair([ 'a' ], x).chain(y => f(y).chain(g))
 
   t.same(a(10).value(), b(10).value(), 'assosiativity')
+
+  t.end()
+})
+
+test('Pair chain properties (Monad)', t => {
+  t.ok(isFunction(Pair(0, 0).chain), 'implements the Chain spec')
+  t.ok(isFunction(Pair(0, 0).of), 'implements the Applicative spec')
+
+  const f = Pair.of
+
+  t.equal(Pair.of(3).chain(f).snd(), f(3).snd(), 'left identity')
+  t.equal(f(3).chain(Pair.of).snd(), f(3).snd(), 'right identity')
 
   t.end()
 })

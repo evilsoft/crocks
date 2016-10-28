@@ -2,9 +2,10 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const isApplicative = require('../internal/isApplicative')
-const defineUnion = require('../internal/defineUnion')
 const isFunction = require('../internal/isFunction')
 const isType = require('../internal/isType')
+
+const defineUnion = require('../internal/defineUnion')
 
 const constant = require('../combinators/constant')
 const identity = require('../combinators/identity')

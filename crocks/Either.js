@@ -1,32 +1,34 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isFunction = require('../internal/isFunction')
 const isApplicative = require('../internal/isApplicative')
+const isFunction = require('../internal/isFunction')
 const isType = require('../internal/isType')
+
+const defineUnion = require('../internal/defineUnion')
 
 const constant = require('../combinators/constant')
 const composeB = require('../combinators/composeB')
+const identity = require('../combinators/identity')
 
 const _inspect = require('../funcs/inspect')
 
-const isEqual =
-  x => y => x === y
+const _either = defineUnion({ Left: [ 'a' ], Right: [ 'b' ] })
+
+const Left = _either.Left
+const Right = _either.Right
 
 Either.Left =
-  l => Either(l, null)
+  composeB(Either, Left)
 
 Either.Right =
-  r => Either(null, r)
+  composeB(Either, Right)
 
 const _of =
   Either.Right
 
 const _type =
   constant('Either')
-
-const isLeft =
-  l => l !== null
 
 function runSequence(x) {
   if(!isApplicative(x)) {
@@ -36,30 +38,33 @@ function runSequence(x) {
   return x.map(Either.of)
 }
 
-function Either(l, r) {
-  if(arguments.length < 2) {
-    throw new TypeError('Either: Requires two arguments')
+function Either(u) {
+  if(!arguments.length) {
+    throw new TypeError('Either: Must wrap something, try using Left or Right constructors')
   }
-  else if(l === null && r === null) {
-    throw new TypeError('Either: Requires at least one of its arguments to be non-null')
-  }
+
+  const x = (u && isFunction(u.tag) && (u.tag() === 'Left' || u.tag() === 'Right'))
+    ? u : Right(u)
 
   const type =
     _type
 
   const value =
-    () => isLeft(l) ? l : r
+    constant(either(identity, identity))
 
   const equals =
-    m => isType(type(), m) && m.either(isEqual(l), isEqual(r))
+    m => isType(type(), m) && either(
+      constant(m.either(constant(true), constant(false))),
+      constant(m.either(constant(false), constant(true)))
+    ) && value() === m.value()
 
   const of =
     _of
 
   const inspect = constant(
     either(
-      constant(`Either.Left${_inspect(l)}`),
-      constant(`Either.Right${_inspect(r)}`)
+       l => `Either.Left${_inspect(l)}`,
+       r => `Either.Right${_inspect(r)}`
     )
   )
 
@@ -68,7 +73,10 @@ function Either(l, r) {
       throw new TypeError('Either.either: Requires both left and right functions')
     }
 
-    return isLeft(l) ? f(l) : g(r)
+    return _either.caseOf({
+      Left: f,
+      Right: g
+    }, x)
   }
 
   function swap(f, g) {

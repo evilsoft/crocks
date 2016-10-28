@@ -18,7 +18,7 @@ const MockCrock = require('../test/MockCrock')
 const Either = require('./Either')
 
 test('Either', t => {
-  const m = Either(null, 0)
+  const m = Either(0)
   const e = bindFunc(Either)
 
   t.ok(isFunction(Either), 'is a function')
@@ -30,8 +30,6 @@ test('Either', t => {
   t.ok(isFunction(Either.Right), 'provides a Right function')
 
   t.throws(Either, TypeError, 'throws with no parameters')
-  t.throws(e(0), TypeError, 'throws with one parameter')
-  t.throws(e(null, null), TypeError, 'throws with two nulls')
 
   t.end()
 })
@@ -66,7 +64,7 @@ test('Either inspect', t => {
 })
 
 test('Either type', t => {
-  t.equal(Either(null, 0).type(), 'Either', 'type returns Either')
+  t.equal(Either(0).type(), 'Either', 'type returns Either')
   t.end()
 })
 
@@ -202,7 +200,7 @@ test('Either equals functionality', t => {
   t.equal(rc.equals(value), false, 'returns when Right passed a simple value')
 
   t.equal(la.equals(nonEither), false, 'returns false when passed a non-Either')
-  t.equal(ra.equals(lb), false, 'returns true when 2 Eithers are equal')
+  t.equal(ra.equals(lb), false, 'returns false when Left compared to Right')
 
   t.end()
 })
@@ -218,7 +216,7 @@ test('Either equals properties (Setoid)', t => {
   const rc = Either.Right(1)
   const rd = Either.Right(0)
 
-  t.ok(isFunction(Either(null, 0).equals), 'provides an equals function')
+  t.ok(isFunction(Either(null).equals), 'provides an equals function')
 
   t.equal(la.equals(la), true, 'Left reflexivity')
   t.equal(la.equals(lb), lb.equals(la), 'Left symmetry (equal)')
@@ -373,7 +371,7 @@ test('Either ap properties (Apply)', t => {
 })
 
 test('Either of', t => {
-  t.equal(Either.of, Either(null, 0).of, 'Either.of is the same as the instance version')
+  t.equal(Either.of, Either(0).of, 'Either.of is the same as the instance version')
   t.equal(Either.of(0).type(), 'Either', 'returns an Either')
   t.equal(Either.of(0).either(constant('left'), identity), 0, 'wraps the value into an Either.Right')
 

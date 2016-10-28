@@ -97,7 +97,10 @@ function Maybe(u) {
       throw new TypeError('Maybe.ap: Maybe required')
     }
 
-    return m.map(fn)
+    return either(
+      Maybe.Nothing,
+      m.map
+    )
   }
 
   function chain(fn) {

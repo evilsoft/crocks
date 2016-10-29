@@ -153,7 +153,7 @@ function Either(u) {
     )
   }
 
-  function traverse(f, af) {
+  function traverse(af, f) {
     if(!isFunction(f) || !isFunction(af)) {
       throw new TypeError('Either.traverse: Applicative returning functions required for both arguments')
     }

@@ -544,7 +544,8 @@ test('Either traverse errors', t => {
   t.throws(rtrav(f, []), TypeError, 'Right throws with an array in second argument')
   t.throws(rtrav(f, {}), TypeError, 'Right throws with an object in second argument')
   t.throws(rtrav(noop, noop), TypeError, 'Right throws when first function does not return an Applicaitve')
-  t.doesNotThrow(rtrav(f, noop), 'Right allows an Applicative returning function in first argument')
+
+  t.doesNotThrow(rtrav(noop, f), 'Right requires an Applicative returning function in second argument')
 
   t.throws(ltrav(undefined, MockCrock), TypeError, 'Left throws with undefined in first argument')
   t.throws(ltrav(null, MockCrock), TypeError, 'Left throws with null in first argument')
@@ -569,7 +570,7 @@ test('Either traverse errors', t => {
   t.throws(ltrav(noop, {}), TypeError, 'Left throws with an object in second argument')
   t.throws(ltrav(noop, noop), TypeError, 'Left throws when second function does not return an Applicaitve')
 
-  t.doesNotThrow(ltrav(noop, MockCrock), 'Left allows an Applicative returning function in the second arg')
+  t.doesNotThrow(ltrav(MockCrock, noop), 'Left requires an Applicative returning function in the first arg')
 
   t.end()
 })

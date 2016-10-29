@@ -6,6 +6,7 @@ const crocks = {
   Either: require('./crocks/Either'),
   Identity: require('./crocks/Identity'),
   IO: require('./crocks/IO'),
+  List: require('./crocks/List'),
   Maybe: require('./crocks/Maybe'),
   Pair: require('./crocks/Pair'),
   Reader: require('./crocks/Reader'),

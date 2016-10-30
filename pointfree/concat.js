@@ -3,7 +3,6 @@
 
 const curry = require('../funcs/curry')
 const isString = require('../internal/isString')
-const isFunction = require('../internal/isFunction')
 const isSemigroup = require('../internal/isSemigroup')
 
 function concat(x, m) {

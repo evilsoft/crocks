@@ -11,6 +11,11 @@ const constant = require('../combinators/constant')
 const _inspect = require('../funcs/inspect')
 const _concat = require('../pointfree/concat')
 
+const Maybe = require('./Maybe')
+
+const Nothing = Maybe.Nothing
+const Just = Maybe.Just
+
 const _type =
   constant('List')
 
@@ -75,6 +80,19 @@ function List(xs) {
 
   const inspect =
     () => `List${_inspect(xs)}`
+
+  const head =
+    () => xs.length
+      ? Just(xs[0])
+      : Nothing()
+
+  const tail =
+    () => xs.length && xs.length > 1
+      ? Just(List(xs.slice(1)))
+      : Nothing()
+
+  const cons =
+    x => List([x].concat(xs))
 
   function equals(m) {
     if(m && isType(type(), m)) {
@@ -166,9 +184,9 @@ function List(xs) {
   }
 
   return {
-    inspect, value, type, equals,
-    concat, empty, reduce, filter,
-    map, ap, of, chain, sequence,
+    inspect, value, head, tail, cons,
+    type, equals, concat, empty, reduce,
+    filter, map, ap, of, chain, sequence,
     traverse
   }
 }

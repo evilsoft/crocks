@@ -41,11 +41,13 @@ const pointFree = {
   ap: require('./pointfree/ap'),
   bimap: require('./pointfree/bimap'),
   chain: require('./pointfree/chain'),
-  concat: require('./pointfree/concat'),
   coalesce: require('./pointfree/coalesce'),
+  concat: require('./pointfree/concat'),
+  cons: require('./pointfree/cons'),
   either: require('./pointfree/either'),
   filter: require('./pointfree/filter'),
   fst: require('./pointfree/fst'),
+  head: require('./pointfree/head'),
   log: require('./pointfree/log'),
   map: require('./pointfree/map'),
   maybe: require('./pointfree/maybe'),
@@ -59,6 +61,7 @@ const pointFree = {
   sequence: require('./pointfree/sequence'),
   snd: require('./pointfree/snd'),
   swap: require('./pointfree/swap'),
+  tail: require('./pointfree/tail'),
   traverse: require('./pointfree/traverse'),
   value: require('./pointfree/value')
 }

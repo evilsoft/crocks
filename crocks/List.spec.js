@@ -13,6 +13,7 @@ const isObject = require('../internal/isObject')
 const isFunction = require('../internal/isFunction')
 
 const MockCrock = require('../test/MockCrock')
+const Maybe     = require('./Maybe')
 
 const List = require('./List')
 
@@ -52,6 +53,59 @@ test('List inspect', t => {
 
 test('List type', t => {
   t.equal(List([]).type(), 'List', 'returns List')
+  t.end()
+})
+
+test('List head', t => {
+  const empty = List.empty()
+  const one = List.of(1)
+  const two = List([ 2, 3 ])
+
+  t.ok(isFunction(two.head), 'Provides a head Function')
+
+  t.equal(empty.head().type(), Maybe.type(), 'empty List returns a Maybe')
+  t.equal(one.head().type(), Maybe.type(), 'one element List returns a Maybe')
+  t.equal(two.head().type(), Maybe.type(), 'two element List returns a Maybe')
+
+  t.equal(empty.head().option('Nothing'), 'Nothing', 'empty List returns a Nothing')
+  t.equal(one.head().option('Nothing'), 1, 'one element List returns a `Just 1`')
+  t.equal(two.head().option('Nothing'), 2, 'two element List returns a `Just 2`')
+
+  t.end()
+})
+
+test('List tail', t => {
+  const empty = List.empty()
+  const one = List.of(1)
+  const two = List([ 2, 3 ])
+  const three = List([ 4, 5, 6 ])
+
+  t.ok(isFunction(two.tail), 'Provides a tail Function')
+
+  t.equal(empty.tail().type(), Maybe.type(), 'empty List returns a Maybe')
+  t.equal(one.tail().type(), Maybe.type(), 'one element List returns a Maybe')
+  t.equal(two.tail().type(), Maybe.type(), 'two element List returns a Maybe')
+  t.equal(three.tail().type(), Maybe.type(), 'three element List returns a Maybe')
+
+  t.equal(empty.tail().option('Nothing'), 'Nothing', 'empty List returns a Nothing')
+  t.equal(one.tail().option('Nothing'), 'Nothing', 'one element List returns a `Just 1`')
+  t.equal(two.tail().option('Nothing').type(), 'List', 'two element List returns a `Just List`')
+  t.same(two.tail().option('Nothing').value(), [ 3 ], 'two element Maybe List contains  `[ 3 ]`')
+  t.equal(three.tail().option('Nothing').type(), 'List', 'three element List returns a `Just List`')
+  t.same(three.tail().option('Nothing').value(), [ 5, 6 ], 'three element Maybe List contains  `[ 5, 6 ]`')
+
+  t.end()
+})
+
+test('List cons', t => {
+  const list = List.of('guy')
+  const consed = list.cons('hello')
+
+  t.ok(isFunction(list.cons), 'provides a cons function')
+
+  t.notSame(list.value(), consed.value(), 'keeps old list intact')
+  t.same(consed.value(), [ 'hello', 'guy' ], 'returns a list with the element pushed to front')
+
   t.end()
 })
 

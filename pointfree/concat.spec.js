@@ -15,14 +15,14 @@ test('concat pointfree', t => {
 
   t.ok(isFunction(concat), 'is a function')
 
-  t.throws(f(0, undefined), TypeError, 'throws is second arg is undefined')
-  t.throws(f(0, null), TypeError, 'throws is second arg is null')
-  t.throws(f(0, 0), TypeError, 'throws is second arg is falsey number')
-  t.throws(f(0, 1), TypeError, 'throws is second arg is truthy number')
-  t.throws(f(0, false), TypeError, 'throws is second arg is false')
-  t.throws(f(0, true), TypeError, 'throws is second arg is true')
-  t.throws(f(0, {}), TypeError, 'throws is second arg is true')
-  t.throws(f(0, noop), TypeError, 'throws is second arg is function')
+  t.throws(f(0, undefined), TypeError, 'throws if second arg is undefined')
+  t.throws(f(0, null), TypeError, 'throws if second arg is null')
+  t.throws(f(0, 0), TypeError, 'throws if second arg is falsey number')
+  t.throws(f(0, 1), TypeError, 'throws if second arg is truthy number')
+  t.throws(f(0, false), TypeError, 'throws if second arg is false')
+  t.throws(f(0, true), TypeError, 'throws if second arg is true')
+  t.throws(f(0, {}), TypeError, 'throws if second arg is true')
+  t.throws(f(0, noop), TypeError, 'throws if second arg is function')
 
   t.end()
 })

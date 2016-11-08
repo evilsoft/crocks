@@ -40,6 +40,7 @@ const helpers = {
 const pointFree = {
   ap: require('./pointfree/ap'),
   bimap: require('./pointfree/bimap'),
+  branch: require('./pointfree/branch'),
   chain: require('./pointfree/chain'),
   coalesce: require('./pointfree/coalesce'),
   concat: require('./pointfree/concat'),
@@ -52,6 +53,7 @@ const pointFree = {
   log: require('./pointfree/log'),
   map: require('./pointfree/map'),
   maybe: require('./pointfree/maybe'),
+  merge: require('./pointfree/merge'),
   option: require('./pointfree/option'),
   promap: require('./pointfree/promap'),
   read: require('./pointfree/read'),

@@ -17,7 +17,7 @@ test('Assign', t => {
   t.ok(isObject(Assign({})), 'returns an object')
 
   t.ok(isFunction(Assign.empty), 'provides an empty function')
-  t.ok(isFunction(Assign.type), 'provides an type function')
+  t.ok(isFunction(Assign.type), 'provides a type function')
 
   t.throws(Assign, TypeError, 'throws with nothing')
   t.throws(a(identity), TypeError, 'throws with a function')

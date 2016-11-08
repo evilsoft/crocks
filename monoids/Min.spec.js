@@ -16,7 +16,7 @@ test('Min', t => {
   t.ok(isFunction(Min), 'is a function')
 
   t.ok(isFunction(Min.empty), 'provides an empty function')
-  t.ok(isFunction(Min.type), 'provides an type function')
+  t.ok(isFunction(Min.type), 'provides a type function')
   t.ok(isObject(Min(0)), 'returns an object')
 
   t.throws(Min, TypeError, 'throws with nothing')

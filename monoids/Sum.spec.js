@@ -17,7 +17,7 @@ test('Sum', t => {
   t.ok(isObject(Sum(0)), 'returns an object')
 
   t.ok(isFunction(Sum.empty), 'provides an empty function')
-  t.ok(isFunction(Sum.type), 'provides an type function')
+  t.ok(isFunction(Sum.type), 'provides a type function')
 
   t.throws(Sum, TypeError, 'throws with nothing')
   t.throws(s(identity), TypeError, 'throws with a function')

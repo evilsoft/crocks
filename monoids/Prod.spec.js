@@ -17,7 +17,7 @@ test('Prod', t => {
   t.ok(isObject(Prod(0)), 'returns an object')
 
   t.ok(isFunction(Prod.empty), 'provides an empty function')
-  t.ok(isFunction(Prod.type), 'provides an type function')
+  t.ok(isFunction(Prod.type), 'provides a type function')
 
   t.throws(s(), TypeError, 'throws with nothing')
   t.throws(s(identity), TypeError, 'throws with a function')

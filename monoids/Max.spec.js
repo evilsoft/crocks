@@ -16,7 +16,7 @@ test('Max', t => {
   t.ok(isFunction(Max), 'is a function')
 
   t.ok(isFunction(Max.empty), 'provides an empty function')
-  t.ok(isFunction(Max.type), 'provides an type function')
+  t.ok(isFunction(Max.type), 'provides a type function')
   t.ok(isObject(Max(0)), 'returns an object')
 
   t.throws(Max, TypeError, 'throws with nothing')

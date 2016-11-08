@@ -18,7 +18,7 @@ test('Compose', t => {
   t.ok(isFunction(Compose), 'is a function')
 
   t.ok(isFunction(Compose.empty), 'provides an empty function')
-  t.ok(isFunction(Compose.type), 'provides an type function')
+  t.ok(isFunction(Compose.type), 'provides a type function')
 
   t.ok(isObject(Compose(noop)), 'returns an object')
 

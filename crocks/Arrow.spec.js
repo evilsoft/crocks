@@ -11,6 +11,8 @@ const identity = require('../combinators/identity')
 const composeB = require('../combinators/composeB')
 const constant = require('../combinators/constant')
 
+const Pair = require('./Pair')
+
 const Arrow = require('./Arrow')
 
 test('Arrow', t => {
@@ -27,6 +29,8 @@ test('Arrow', t => {
   t.ok(isFunction(Arrow.map), 'provides a map function')
   t.ok(isFunction(Arrow.contramap), 'provides a contramap function')
   t.ok(isFunction(Arrow.promap), 'provides a promap function')
+  t.ok(isFunction(Arrow.branch), 'provides a branch function')
+  t.ok(isFunction(Arrow.merge), 'provides a merge function')
 
   t.ok(isObject(Arrow(noop)), 'returns an object')
 
@@ -345,6 +349,62 @@ test('Arrow promap properties (Functor)', t => {
     m.promap(f, k).promap(g, h).runWith(x),
     'composition'
   )
+
+  t.end()
+})
+
+test('Arrow branch', t => {
+  t.ok(isFunction(Arrow(noop).branch), 'provides a branch function')
+
+  const m = Arrow(identity).branch()
+  const x = 23
+
+  t.equal(m.runWith(x).type(), 'Pair', 'returns a Pair type')
+  t.equal(m.runWith(x).fst(), x, 'left of pair is the passed value')
+  t.equal(m.runWith(x).snd(), x, 'right of pair is the passed value')
+
+  t.end()
+})
+
+test('Arrow merge', t => {
+  t.ok(isFunction(Arrow(noop).merge), 'provides a merge function')
+
+  const m = Arrow(identity)
+  const merge = bindFunc(m.merge)
+
+  t.throws(merge(undefined), TypeError, 'throws with undefined')
+  t.throws(merge(null), TypeError, 'throws with null')
+  t.throws(merge(0), TypeError, 'throws with falsey number')
+  t.throws(merge(1), TypeError, 'throws with truthy number')
+  t.throws(merge(''), TypeError, 'throws with falsey string')
+  t.throws(merge('string'), TypeError, 'throws with truthy string')
+  t.throws(merge(false), TypeError, 'throws with false')
+  t.throws(merge(true), TypeError, 'throws with true')
+  t.throws(merge([]), TypeError, 'throws with an array')
+  t.throws(merge({}), TypeError, 'throws with an object')
+
+  const runWith = bindFunc(m.merge(identity).runWith)
+
+  t.throws(runWith(undefined), TypeError, 'throws with undefined')
+  t.throws(runWith(null), TypeError, 'throws with null')
+  t.throws(runWith(0), TypeError, 'throws with falsey number')
+  t.throws(runWith(1), TypeError, 'throws with truthy number')
+  t.throws(runWith(''), TypeError, 'throws with falsey string')
+  t.throws(runWith('string'), TypeError, 'throws with truthy string')
+  t.throws(runWith(false), TypeError, 'throws with false')
+  t.throws(runWith(true), TypeError, 'throws with true')
+  t.throws(runWith([]), TypeError, 'throws with an array')
+  t.throws(runWith({}), TypeError, 'throws with an object')
+
+  t.doesNotThrow(merge(identity), 'does not throw when passed a function')
+  t.doesNotThrow(runWith(Pair.of(2)), 'does not throw when inner value is a Pair')
+
+  const f = (x, y) => x + y
+
+  const x = 5
+  const y = 7
+
+  t.equal(m.merge(f).runWith(Pair(5, 7)), f(5, 7), 'Applys fst to first argument and snd to second, returning result')
 
   t.end()
 })

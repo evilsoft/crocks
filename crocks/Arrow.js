@@ -10,6 +10,8 @@ const identity = require('../combinators/identity')
 const constant = require('../combinators/constant')
 const compose = require('../funcs/compose')
 
+const Pair = require('./Pair')
+
 const _type =
   constant('Arrow')
 
@@ -65,10 +67,28 @@ function Arrow(runWith) {
     return Arrow(compose(r, runWith, l))
   }
 
+  function branch() {
+    return Arrow(x => Pair(x, x))
+  }
+
+  function merge(fn) {
+    if(!isFunction(fn)) {
+      throw new TypeError('Arrow.merge: Binary function required')
+    }
+
+    return Arrow(function(x) {
+      if(!(x && x.type && x.type() === Pair.type())) {
+        throw TypeError('Arrow.merge: Pair required for inner argument')
+      }
+
+      return fn(x.fst(), x.snd())
+    })
+  }
+
   return {
     inspect, type, value, runWith,
     concat, empty, map, contramap,
-    promap
+    promap, branch, merge
   }
 }
 
@@ -92,5 +112,11 @@ Arrow.contramap =
 
 Arrow.promap =
   require('../pointfree/promap')
+
+Arrow.branch =
+  require('../pointfree/branch')
+
+Arrow.merge =
+  require('../pointfree/merge')
 
 module.exports = Arrow

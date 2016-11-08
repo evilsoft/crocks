@@ -24,6 +24,9 @@ test('Arrow', t => {
   t.ok(isFunction(Arrow.value), 'provides a value function')
   t.ok(isFunction(Arrow.concat), 'provides a concat function')
   t.ok(isFunction(Arrow.runWith), 'provides a runWith function')
+  t.ok(isFunction(Arrow.map), 'provides a map function')
+  t.ok(isFunction(Arrow.contramap), 'provides a contramap function')
+  t.ok(isFunction(Arrow.promap), 'provides a promap function')
 
   t.ok(isObject(Arrow(noop)), 'returns an object')
 
@@ -136,5 +139,212 @@ test('Arrow concat functionality', t => {
 })
 
 test('Arrow empty properties (Monoid)', t => {
+  const m = Arrow(x => x + 45)
+  const x = 32
+
+  t.ok(isFunction(m.concat), 'provides a concat function')
+  t.ok(isFunction(m.empty), 'provides a empty function')
+
+  const right = m.concat(m.empty()).runWith
+  const left = m.empty().concat(m).runWith
+
+  t.same(right(x), m.runWith(x), 'right identity')
+  t.same(left(x), m.runWith(x), 'left identity')
+
+  t.end()
+})
+
+test('Arrow empty functionality', t => {
+  const m = Arrow(noop).empty()
+
+  t.equal(m.empty, Arrow.empty, 'static and instance versions are the same')
+
+  t.equal(m.type(), 'Arrow', 'provides an Arrow')
+  t.same(m.runWith(13), 13, 'wraps an identity function')
+
+  t.end()
+})
+
+test('Arrow map errors', t => {
+  const map = bindFunc(Arrow(noop).map)
+
+  t.throws(map(undefined), TypeError, 'throws with undefined')
+  t.throws(map(null), TypeError, 'throws with null')
+  t.throws(map(0), TypeError, 'throws with falsey number')
+  t.throws(map(1), TypeError, 'throws with truthy number')
+  t.throws(map(''), TypeError, 'throws with falsey string')
+  t.throws(map('string'), TypeError, 'throws with truthy string')
+  t.throws(map(false), TypeError, 'throws with false')
+  t.throws(map(true), TypeError, 'throws with true')
+  t.throws(map([]), TypeError, 'throws with an array')
+  t.throws(map({}), TypeError, 'throws with an object')
+
+  t.doesNotThrow(map(noop), 'allows functions')
+
+  t.end()
+})
+
+test('Arrow map functionality', t => {
+  const x = 42
+  const spy = sinon.spy(identity)
+
+  const m = Arrow(identity).map(spy)
+
+  t.equal(m.type(), 'Arrow', 'returns an Arrow')
+  t.notOk(spy.called, 'does not call mapping function initially')
+
+  m.runWith(x)
+
+  t.ok(spy.called, 'calls mapping function when ran')
+  t.equal(m.runWith(x), x, 'returns the result of the resulting composition')
+
+  t.end()
+})
+
+test('Arrow map properties (Functor)', t => {
+  const m = Arrow(identity)
+
+  const f = x => x + 12
+  const g = x => x * 10
+
+  const x = 76
+
+  t.ok(isFunction(m.map), 'provides a map function')
+
+  t.equal(m.map(identity).runWith(x), m.runWith(x), 'identity')
+  t.equal(m.map(composeB(f, g)).runWith(x), m.map(g).map(f).runWith(x), 'composition')
+
+  t.end()
+})
+
+test('Arrow contramap errors', t => {
+  const cmap = bindFunc(Arrow(noop).contramap)
+
+  t.throws(cmap(undefined), TypeError, 'throws with undefined')
+  t.throws(cmap(null), TypeError, 'throws with null')
+  t.throws(cmap(0), TypeError, 'throws with falsey number')
+  t.throws(cmap(1), TypeError, 'throws with truthy number')
+  t.throws(cmap(''), TypeError, 'throws with falsey string')
+  t.throws(cmap('string'), TypeError, 'throws with truthy string')
+  t.throws(cmap(false), TypeError, 'throws with false')
+  t.throws(cmap(true), TypeError, 'throws with true')
+  t.throws(cmap([]), TypeError, 'throws with an array')
+  t.throws(cmap({}), TypeError, 'throws with an object')
+
+  t.doesNotThrow(cmap(noop), 'allows functions')
+
+  t.end()
+})
+
+test('Arrow contramap functionality', t => {
+  const spy = sinon.spy(identity)
+  const x = 7
+
+  const m = Arrow(identity).contramap(spy)
+
+  t.equal(m.type(), 'Arrow', 'returns an Arrow')
+  t.notOk(spy.called, 'does not call mapping function initially')
+
+  m.runWith(x)
+
+  t.ok(spy.called, 'calls mapping function when ran')
+  t.equal(m.runWith(x), x, 'returns the result of the resulting composition')
+
+  t.end()
+})
+
+test('Arrow contramap properties (Contra Functor)', t => {
+  const m = Arrow(identity)
+
+  const f = x => x + 12
+  const g = x => x * 10
+
+  const x = 76
+
+  t.ok(isFunction(m.contramap), 'provides a contramap function')
+
+  t.equal(m.contramap(identity).runWith(x), m.runWith(x), 'identity')
+  t.equal(m.contramap(composeB(f, g)).runWith(x), m.contramap(f).contramap(g).runWith(x), 'composition')
+
+  t.end()
+})
+
+test('Arrow promap errors', t => {
+  const promap = bindFunc(Arrow(noop).promap)
+
+  t.throws(promap(undefined, noop), TypeError, 'throws with undefined as first argument')
+  t.throws(promap(null, noop), TypeError, 'throws with null as first argument')
+  t.throws(promap(0, noop), TypeError, 'throws with falsey number as first argument')
+  t.throws(promap(1, noop), TypeError, 'throws with truthy number as first argument')
+  t.throws(promap('', noop), TypeError, 'throws with falsey string as first argument')
+  t.throws(promap('string', noop), TypeError, 'throws with truthy string as first argument')
+  t.throws(promap(false, noop), TypeError, 'throws with false as first argument')
+  t.throws(promap(true, noop), TypeError, 'throws with true as first argument')
+  t.throws(promap([], noop), TypeError, 'throws with an array as first argument')
+  t.throws(promap({}, noop), TypeError, 'throws with an object as first argument')
+
+  t.throws(promap(noop, undefined), TypeError, 'throws with undefined as second argument')
+  t.throws(promap(noop, null), TypeError, 'throws with null as second argument')
+  t.throws(promap(noop, 0), TypeError, 'throws with falsey number as second argument')
+  t.throws(promap(noop, 1), TypeError, 'throws with truthy number as second argument')
+  t.throws(promap(noop, ''), TypeError, 'throws with falsey string as second argument')
+  t.throws(promap(noop, 'string'), TypeError, 'throws with truthy string as second argument')
+  t.throws(promap(noop, false), TypeError, 'throws with false as second argument')
+  t.throws(promap(noop, true), TypeError, 'throws with true as second argument')
+  t.throws(promap(noop, []), TypeError, 'throws with an array as second argument')
+  t.throws(promap(noop, {}), TypeError, 'throws with an object as second argument')
+
+  t.doesNotThrow(promap(noop, noop), 'allows functions')
+
+  t.end()
+})
+
+test('Arrow promap functionality', t => {
+  const x = 42
+  const f = x => x * 20
+  const g = x => x + 10
+
+  const spyLeft = sinon.spy(f)
+  const spyRight = sinon.spy(g)
+
+  const comp = composeB(g, f)
+
+  const m = Arrow(identity).promap(spyLeft, spyRight)
+
+  t.equal(m.type(), 'Arrow', 'returns an Arrow')
+  t.notOk(spyLeft.called, 'does not call left mapping function initially')
+  t.notOk(spyRight.called, 'does not call right mapping function initially')
+
+  m.runWith(x)
+
+  t.ok(spyLeft.called, 'calls left mapping function when ran')
+  t.ok(spyRight.called, 'calls right mapping function when ran')
+  t.equal(m.runWith(x), comp(x), 'returns the result of the resulting composition')
+
+  t.end()
+})
+
+test('Arrow promap properties (Functor)', t => {
+  const m = Arrow(identity)
+
+  const f = x => x + 12
+  const g = x => x * 10
+
+  const h = x => x + 2
+  const k = x => x * 2
+
+  const x = 76
+
+  t.ok(isFunction(m.map), 'provides a map function')
+  t.ok(isFunction(m.promap), 'provides a promap function')
+
+  t.equal(m.promap(identity, identity).runWith(x), m.runWith(x), 'identity')
+
+  t.equal(
+    m.promap(composeB(f, g), composeB(h, k)).runWith(x),
+    m.promap(f, k).promap(g, h).runWith(x),
+    'composition'
+  )
+
   t.end()
 })

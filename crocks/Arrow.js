@@ -6,11 +6,15 @@ const isType = require('../internal/isType')
 
 const _inspect = require('../funcs/inspect')
 
+const identity = require('../combinators/identity')
 const constant = require('../combinators/constant')
-const composeB = require('../combinators/composeB')
+const compose = require('../funcs/compose')
 
 const _type =
   constant('Arrow')
+
+const _empty =
+  () => Arrow(identity)
 
 function Arrow(runWith) {
   if(!isFunction(runWith)) {
@@ -19,6 +23,9 @@ function Arrow(runWith) {
 
   const type =
     _type
+
+  const empty =
+    _empty
 
   const value =
     constant(runWith)
@@ -31,16 +38,41 @@ function Arrow(runWith) {
       throw new TypeError('Arrow.concat: Arrow required')
     }
 
-    return Arrow(composeB(m.runWith, runWith))
+    return map(m.runWith)
+  }
+
+  function map(fn) {
+    if(!isFunction(fn)) {
+      throw new TypeError('Arrow.map: Function required')
+    }
+
+    return Arrow(compose(fn, runWith))
+  }
+
+  function contramap(fn) {
+    if(!isFunction(fn)) {
+      throw new TypeError('Arrow.contramap: Function required')
+    }
+
+    return Arrow(compose(runWith, fn))
+  }
+
+  function promap(l, r) {
+    if(!isFunction(l) || !isFunction(r)) {
+      throw new TypeError('Arrow.promap: Functions required for both arguments')
+    }
+
+    return Arrow(compose(r, runWith, l))
   }
 
   return {
     inspect, type, value, runWith,
-    concat
+    concat, empty, map, contramap,
+    promap
   }
 }
 
-Arrow.empty = () => {}
+Arrow.empty = _empty
 Arrow.type = _type
 
 Arrow.concat =
@@ -51,5 +83,14 @@ Arrow.value =
 
 Arrow.runWith =
   require('../pointfree/runWith')
+
+Arrow.map =
+  require('../pointfree/map')
+
+Arrow.contramap =
+  require('../pointfree/contramap')
+
+Arrow.promap =
+  require('../pointfree/promap')
 
 module.exports = Arrow

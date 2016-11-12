@@ -85,38 +85,27 @@ function Arrow(runWith) {
     })
   }
 
+  function first(fn) {
+    if(!isFunction(fn)) {
+      throw new TypeError('Arrow.first: Function required')
+    }
+
+    return Arrow(function(x) {
+      if(!(x && x.type && x.type() === Pair.type())) {
+        throw TypeError('Arrow.first: Pair required for inner argument')
+      }
+      return x.bimap(fn, identity)
+    })
+  }
+
   return {
     inspect, type, value, runWith,
     concat, empty, map, contramap,
-    promap, branch, merge
+    promap, branch, merge, first
   }
 }
 
 Arrow.empty = _empty
 Arrow.type = _type
-
-Arrow.concat =
-  require('../pointfree/concat')
-
-Arrow.value =
-  require('../pointfree/value')
-
-Arrow.runWith =
-  require('../pointfree/runWith')
-
-Arrow.map =
-  require('../pointfree/map')
-
-Arrow.contramap =
-  require('../pointfree/contramap')
-
-Arrow.promap =
-  require('../pointfree/promap')
-
-Arrow.branch =
-  require('../pointfree/branch')
-
-Arrow.merge =
-  require('../pointfree/merge')
 
 module.exports = Arrow

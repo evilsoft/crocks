@@ -23,15 +23,6 @@ test('Arrow', t => {
   t.ok(isFunction(Arrow.empty), 'provides an empty function')
   t.ok(isFunction(Arrow.type), 'provides a type function')
 
-  t.ok(isFunction(Arrow.value), 'provides a value function')
-  t.ok(isFunction(Arrow.concat), 'provides a concat function')
-  t.ok(isFunction(Arrow.runWith), 'provides a runWith function')
-  t.ok(isFunction(Arrow.map), 'provides a map function')
-  t.ok(isFunction(Arrow.contramap), 'provides a contramap function')
-  t.ok(isFunction(Arrow.promap), 'provides a promap function')
-  t.ok(isFunction(Arrow.branch), 'provides a branch function')
-  t.ok(isFunction(Arrow.merge), 'provides a merge function')
-
   t.ok(isObject(Arrow(noop)), 'returns an object')
 
   t.throws(Arrow, TypeError, 'throws with nothing')
@@ -405,6 +396,49 @@ test('Arrow merge', t => {
   const y = 7
 
   t.equal(m.merge(f).runWith(Pair(5, 7)), f(5, 7), 'Applys fst to first argument and snd to second, returning result')
+
+  t.end()
+})
+
+test('Arrow first', t => {
+  t.ok(isFunction(Arrow(noop).first), 'provides a first function')
+
+  const m = Arrow(identity)
+  const first = bindFunc(m.first)
+
+  t.throws(first(undefined), TypeError, 'throws with undefined')
+  t.throws(first(null), TypeError, 'throws with null')
+  t.throws(first(0), TypeError, 'throws with falsey number')
+  t.throws(first(1), TypeError, 'throws with truthy number')
+  t.throws(first(''), TypeError, 'throws with falsey string')
+  t.throws(first('string'), TypeError, 'throws with truthy string')
+  t.throws(first(false), TypeError, 'throws with false')
+  t.throws(first(true), TypeError, 'throws with true')
+  t.throws(first([]), TypeError, 'throws with an array')
+  t.throws(first({}), TypeError, 'throws with an object')
+
+  const runWith = bindFunc(m.first(identity).runWith)
+
+  t.throws(runWith(undefined), TypeError, 'throws with undefined as inner argument')
+  t.throws(runWith(null), TypeError, 'throws with null as inner argument')
+  t.throws(runWith(0), TypeError, 'throws with falsey number as inner argument')
+  t.throws(runWith(1), TypeError, 'throws with truthy number as inner argument')
+  t.throws(runWith(''), TypeError, 'throws with falsey string as inner argument')
+  t.throws(runWith('string'), TypeError, 'throws with truthy string as inner argument')
+  t.throws(runWith(false), TypeError, 'throws with false as inner argument')
+  t.throws(runWith(true), TypeError, 'throws with true as inner argument')
+  t.throws(runWith([]), TypeError, 'throws with an array as inner argument')
+  t.throws(runWith({}), TypeError, 'throws with an object as inner argument')
+
+  t.doesNotThrow(first(identity), 'does not throw when passed a function')
+  t.doesNotThrow(runWith(Pair.of(2)), 'does not throw when inner value is a Pair')
+
+  const fn = x => x + 1
+  const result = m.first(fn).runWith(Pair(10, 10))
+
+  t.equal(result.type(), 'Pair', 'returns a Pair')
+  t.equal(result.fst(), 11, 'applies the function to the fst element of a pair')
+  t.equal(result.snd(), 10, 'does not apply the function to the second element of a pair')
 
   t.end()
 })

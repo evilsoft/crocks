@@ -19,7 +19,6 @@ const monoids = {
   All: require('./monoids/All'),
   Any: require('./monoids/Any'),
   Assign: require('./monoids/Assign'),
-  Flip: require('./monoids/Flip'),
   Min: require('./monoids/Min'),
   Max: require('./monoids/Max'),
   Prod: require('./monoids/Prod'),

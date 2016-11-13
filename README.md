@@ -46,16 +46,48 @@ const Maybe = require('crocks/crocks/Maybe')
 ## What is in this?
 There are (5) classifications of "things" included in this library:
 
-* Combinators (`crocks/combinators`): A collection of functions that are used for working with other functions. These do things like compose (2) functions together, or flip arguments on a function. They typically either take a function, return a function or a bit a both. These are considered the glue that holds a mighty house of `crocks` together and aid in writing reusable code.
-
-
 * Crocks (`crocks/crocks`): These are the ADTs that this library is centered around. They are all Functor based Data Types that provide different computational contexts for working in a more declarative, functional flow. For the most part, a majority of the other bits in `crocks` exist to server these ADTs.
-
-* Helper Functions (`crocks/funcs`): All other support functions that are either convenient versions of combinators or not even combinators at all cover this group.
 
 * Monoids (`crocks/monoids`): These helpful ADTs are in a class of their own, not really Functors in their own right (although some can be), they are still very useful in our everyday programming needs. Every need to Sum a list of Numbers or mix a mess of objects together? This is were you will find the ADTs you need to do that.
 
-* Point-Free Functions (`crocks/pointfree`): Wanna use these ADTs in a way that you never have to reference the actual data being worked on? Well here is where you will find all of these functions to do that. For every algebra available on both the `crocks` and `monoids` there is a function here.
+* Combinators (`crocks/combinators`): A collection of functions that are used for working with other functions. These do things like compose (2) functions together, or flip arguments on a function. They typically either take a function, return a function or a bit a both. These are considered the glue that holds the mighty house of `Crocks` together and a valuable aid in writing reusable code.
+
+* Helper Functions (`crocks/funcs`): All other support functions that are either convenient versions of combinators or not even combinators at all cover this group.
+
+* Point-Free Functions (`crocks/pointfree`): Wanna use these ADTs in a way that you never have to reference the actual data being worked on? Well here is where you will find all of these functions to do that. For every algebra available on both the `Crocks` and `Monoids` there is a function here.
+
+### Crocks
+The `Crocks` are the heart and soul of this library. This is where you will find all your favorite ADT's you have grown to :heart:. They include gems such as: `Maybe`, `Either` and `IO`, to name a few. The are usually just a simple constructor that takes either a function or value (depending on the type) and will return you a "container" that wraps whatever you passed it. Each container provides a variety of functions that act as the operations you can do on the contained value. There are many types that share the same function names, but what they do from type to type may vary.
+
+| Crock | Constructor | Instance |
+|---|---|---|
+| `Arrow` | `empty`, `type` | `inspect`, `type`, `value`, `runWith`, `concat`, `empty`, `map`, `contramap`, `promap`, `first`, `second` |
+| `Const` | `type` | `inspect`, `type`, `equals`, `value`, `concat`, `map`, `ap`, `chain` |
+| `Either` | `Left`, `Right`, `type`, `of`| `inspect`, `type`, `equals`, `value`, `either`, `swap`, `coalesce`, `map`, `bimap`, `ap`, `of`, `chain`, `sequence`, `traverse` |
+| `Identity` | `type`, `of` | `inspect`, `type`, `equals`, `value`, `map`, `ap`, `of`, `chain`, `sequence`, `traverse` |
+| `IO` | `type`, `of` | `inspect`, `type`, `run`, `map`, `ap`, `of`, `chain` |
+| `List` |  `empty`, `type`, `of` | `inspect`, `type`, `equals`, `value`, `head`, `tail`, `cons`, `concat`, `empty`, `reduce`, `filter`, `map`, `ap`, `of`, `chain`, `sequence`, `traverse` |
+| `Maybe` | `Nothing`, `Just`, `type`, `of` | `inspect`, `type`, `equals`, `maybe`, `either`, `option`, `coalesce`, `map`, `ap`, `of`, `chain`, `sequence`, `traverse` |
+| `Pair` | `type`, `of` |`inspect`, `type`, `equals`, `value`, `fst`, `snd`, `merge`, `concat`, `swap`, `map`, `bimap`, `ap`, `of`, `chain` |
+| `Reader` | `ask`, `type`, `of`| `inspect`, `type`, `runWith`, `map`, `ap`, `of`, `chain` |
+| `Unit` | `empty`, `type`, `of` | `inspect`, `type`, `equals`, `value`, `concat`, `empty`, `map`, `ap`, `of`, `chain` |
+| `Writer`| `type`, `of` | `inspect`, `type`, `equals`, `value`, `log`, `read`, `map`, `ap`, `of`, `chain` |
+
+### Monoids
+Each `Monoid` provides a means to represent a binary operation and is usually locked down to a specific type. These are great when you need to combine a list of values down to one value. In this library, any ADT that provides both an `empty` and `concat` function can be used as a `Monoid`. There are a few of the `Crocks` that are also monoidial, so be on the look out for those as well. All `Monoids` work with the point-free functions `mconcat`, `mreduce`, `mconcatMap` and `mreduceMap`.
+
+All `Monoids` provide `empty` and `type` function on their Constructors as well as the following Instance Functions: `inspect`, `type`, `value`, `empty` and `concat`.
+
+
+| Monoid | Type | Operation | Empty (Identity) |
+|---|---|---|---|
+| `All` | Boolean | Logical AND | `true` |
+| `Any` | Boolean | Logical OR | `false` |
+| `Assign` | Object | `Object.assign` | `{}` |
+| `Max` | Number | `Math.max` | `-Infinity` |
+| `Min` | Number | `Math.min` | `Infinity` |
+| `Prod` | Number | Multiplication | `1` |
+| `Sum` | Number | Addition | `0` |
 
 ### Combinators
 #### `applyTo : (a -> b) -> a -> b`
@@ -78,7 +110,3 @@ Ever run into a situation where you have a value but do not have a function to a
 
 #### `substitution : (a -> b -> c) -> (a -> b) -> a -> c`
 While it a complicated little bugger, it can come in very handy from time to time. In it's first two arguments it takes functions. The first must be binary and the second unary. That will return you a function that is ready to take some value. Once supplied the fun starts, it will pass the `a` to the first argument of both functions, and the result of the second function to the second parameter of the first function. Finally after all that juggling, it will return the result of that first function. When used with partial application on that first parameter, a whole new world of combinatory madness is presented!
-
-### Crocks
-#### `Const a`
-This is a special ADT. Once you get it going, no matter what you do with it, it will always retain the value it was initialized with.

@@ -10,104 +10,95 @@ const _inspect = require('../funcs/inspect')
 const mreduce = require('../funcs/mreduce')
 
 const constant = require('../combinators/constant')
+const composeB = require('../combinators/composeB')
 
-const wrapValue =
-  x => isArray(x) ? x.slice() : [ x ]
-
-const _of =
-  x => Writer([], x)
-
-const _type =
-  constant('Writer')
-
-function Writer(entry, val) {
-  if(arguments.length !== 2) {
-    throw new TypeError('Writer: Requires a log entry and a value')
+function _Writer(Monoid) {
+  if(!isMonoid(Monoid)) {
+    throw new TypeError('Writer: Monoid required for construction')
   }
 
-  const type =
-    _type
+  const _of =
+    x => Writer(Monoid.empty().value(), x)
 
-  const of =
+  const _type =
+    constant('Writer(' + Monoid.type() + ')')
+
+  function Writer(entry, val) {
+    if(arguments.length !== 2) {
+      throw new TypeError('Writer: Log entry and a value required')
+    }
+
+    const type =
+      _type
+
+    const of =
+      _of
+
+    const equals =
+      m => isType(type(), m) && m.value() === value()
+
+    const value =
+      constant(val)
+
+    const log =
+      constant(Monoid(entry))
+
+    const inspect =
+      constant(`Writer(${_inspect(log())}${_inspect(value())} )`)
+
+    const read = constant({
+      log: log().value(),
+      value: value()
+    })
+
+    function map(fn) {
+      if(!isFunction(fn)) {
+        throw new TypeError('Writer.map: Function required')
+      }
+
+      return Writer(log().value(), fn(value()))
+    }
+
+    function ap(m) {
+      if(!isFunction(value())) {
+        throw new TypeError('Writer.ap: Wrapped value must be a function')
+      }
+      else if(!isType(type(), m)) {
+        throw new TypeError('Writer.ap: Writer required')
+      }
+
+      return chain(fn => m.map(fn))
+    }
+
+    function chain(fn) {
+      if(!isFunction(fn)) {
+        throw new TypeError('Writer.chain: Function required')
+      }
+
+      const w = fn(value())
+
+      if(!(w && isType(type(), w))) {
+        throw new TypeError('Writer.chain: function must return a Writer')
+      }
+
+      return Writer(log().concat(w.log()).value(), w.value())
+    }
+
+    return {
+      inspect, read, value,
+      log, type, equals, map,
+      ap, of, chain
+    }
+  }
+
+  Writer.of =
     _of
 
-  const equals =
-    m => isType(type(), m) && m.value() === value()
+  Writer.type =
+    _type
 
-  const value =
-    constant(val)
-
-  const log =
-    constant(wrapValue(entry))
-
-  const inspect =
-    constant(`Writer(${_inspect(log())}${_inspect(value())} )`)
-
-  const read = constant({
-    log: log(),
-    value: value()
-  })
-
-  function map(fn) {
-    if(!isFunction(fn)) {
-      throw new TypeError('Writer.map: Function required')
-    }
-
-    return Writer(log(), fn(value()))
-  }
-
-  function ap(m) {
-    if(!isFunction(value())) {
-      throw new TypeError('Writer.ap: Wrapped value must be a function')
-    }
-    else if(!isType(type(), m)) {
-      throw new TypeError('Writer.ap: Writer required')
-    }
-
-    return chain(fn => m.map(fn))
-  }
-
-  function chain(fn) {
-    if(!isFunction(fn)) {
-      throw new TypeError('Writer.chain: Function required')
-    }
-
-    const w = fn(value())
-
-    if(!(w && isType(type(), w))) {
-      throw new TypeError('Writer.chain: function must return a Writer')
-    }
-
-    return Writer(log().concat(w.log()), w.value())
-  }
-
-  function reduceLog(fn, init) {
-    if(!isFunction(fn)) {
-      throw new TypeError('Writer.reduceLog: Function required')
-    }
-
-    return Writer(log().reduce(fn, init), value())
-  }
-
-  function mreduceLog(m) {
-    if(!isMonoid(m)) {
-      throw new TypeError('Writer.mreduceLog: Monoid required')
-    }
-
-    return Writer(mreduce(m, log()), value())
-  }
-
-  return {
-    inspect, read, value, log,
-    reduceLog, mreduceLog, type,
-    equals, map, ap, of, chain
-  }
+  return Writer
 }
 
-Writer.of =
-  _of
 
-Writer.type =
-  _type
-
-module.exports = Writer
+module.exports = _Writer

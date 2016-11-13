@@ -13,7 +13,8 @@ const reverseApply  = require('../combinators/reverseApply')
 
 const Last = require('../test/LastMonoid')
 
-const Writer = require('./Writer.js')
+const _Writer = require('./Writer.js')
+const Writer = _Writer(Last)
 
 test('Writer', t => {
   const w = Writer(0, 0)
@@ -34,8 +35,9 @@ test('Writer', t => {
 test('Writer inspect', t => {
   const m = Writer(0, 0)
 
+
   t.ok(isFunction(m.inspect), 'provides an inspect function')
-  t.equal(m.inspect(), 'Writer( [ 0 ] 0 )', 'returns inspect string')
+  t.equal(m.inspect(), 'Writer( Last 0 0 )', 'returns inspect string')
 
   t.end()
 })
@@ -44,7 +46,7 @@ test('Writer type', t => {
   const m = Writer(0, 0)
 
   t.ok(isFunction(m.type), 'is a function')
-  t.equal(m.type(), 'Writer', 'returns Writer')
+  t.equal(m.type(), 'Writer(Last)', 'returns Writer with Monoid Type')
   t.end()
 })
 
@@ -54,10 +56,10 @@ test('Writer read', t => {
   const m = Writer(l, x)
 
   t.ok(isFunction(m.read), 'is a function')
-  t.ok(isObject(m.read()),'returns an object' )
+  t.ok(isObject(m.read()), 'returns an object')
 
-  t.equal(m.read().value, x,'returns the wrapped value on the value key' )
-  t.same(m.read().log, [ l ],'returns the wrapped log on the log key in an array' )
+  t.equal(m.read().value, x, 'returns the wrapped value on the value key')
+  t.same(m.read().log, l, 'returns unwrapped log value')
 
   t.end()
 })
@@ -77,7 +79,8 @@ test('Writer log', t => {
   const w = Writer(x, 0)
 
   t.ok(isFunction(w.log), 'is a function')
-  t.same(w.log(), [ x ], 'proivdes log entry wrapped in an array')
+  t.equal(w.log().type(), 'Last', 'returns a monoid')
+  t.equal(w.log().value(), x, 'monoid contains log value')
 
   t.end()
 })
@@ -139,12 +142,12 @@ test('Writer map functionality', t => {
 
   const m = Writer(l, x).map(spy)
 
-  t.equal(m.type(), 'Writer', 'returns a Writer')
+  t.equal(m.type(), 'Writer(Last)', 'returns a Writer')
   t.equal(spy.called, true, 'calls mapping function')
   t.equal(m.value(), x, 'returns the result of the map inside of new Writer, on value key')
-  t.same(m.log(), [ l ], 'returns the result of the map inside of new Writer, on log key')
+  t.same(m.log().value(), l, 'returns the result of the map inside of new Writer, on log key')
 
-  t.same(m.map(identity).log(), [ l ], 'does not add to the log on map')
+  t.same(m.map(identity).log().value(), l, 'does not add to the log on map')
 
   t.end()
 })
@@ -214,17 +217,20 @@ test('Writer ap functionality', t => {
   const a = Writer(0, x => x + 2)
   const b = Writer(1, 27)
 
-  t.same(a.ap(b).log(), [ 0, 1 ], 'concats applied Writers log to inital log')
+  t.same(a.ap(b).log().value(), 1, 'concats applied Writers log to inital log')
   t.equal(a.ap(b).value(), 29, 'applys applied value to function')
 
   t.end()
 })
 
 test('Writer of', t => {
+  const w = Writer.of(0)
+
   t.equal(Writer.of, Writer(0, 0).of, 'Writer.of is the same as the instance version')
-  t.equal(Writer.of(0).type(), 'Writer', 'returns an Writer')
-  t.equal(Writer.of(0).value(), 0, 'wraps the value passed into a Writer')
-  t.same(Writer.of(0).log(), [], 'provides an empty array as the log')
+
+  t.equal(w.type(), 'Writer(Last)', 'returns an Writer')
+  t.equal(w.value(), 0, 'wraps the value passed into a Writer')
+  t.same(w.log().value(), Last.empty().value(), 'provides an empty Monoid as the log')
 
   t.end()
 })
@@ -272,7 +278,7 @@ test('Writer chain functionality', t => {
   const m = Writer(0, 45)
   const fn = x => Writer(1, x + 2)
 
-  t.same(m.chain(fn).log(), [ 0, 1 ], 'concats chained log to initial log')
+  t.same(m.chain(fn).log().value(), 1, 'concats chained log to initial log')
   t.equal(m.chain(fn).value(), 47, 'applys function to wrapped value')
 
   t.end()
@@ -301,72 +307,6 @@ test('Writer chain properties (Monad)', t => {
 
   t.equal(Writer.of(3).chain(f).value(), f(3).value(), 'left identity')
   t.equal(f(3).chain(Writer.of).value(), f(3).value(), 'right identity')
-
-  t.end()
-})
-
-test('Writer reduceLog errors', t => {
-  const reduceLog = bindFunc(Writer(0, 0).reduceLog)
-
-  t.throws(reduceLog(undefined), TypeError, 'throws with undefined')
-  t.throws(reduceLog(null), TypeError, 'throws with null')
-  t.throws(reduceLog(0), TypeError, 'throws with falsey number')
-  t.throws(reduceLog(1), TypeError, 'throws with truthy number')
-  t.throws(reduceLog(''), TypeError, 'throws with falsey string')
-  t.throws(reduceLog('string'), TypeError, 'throws with truthy string')
-  t.throws(reduceLog(false), TypeError, 'throws with false')
-  t.throws(reduceLog(true), TypeError, 'throws with true')
-  t.throws(reduceLog([]), TypeError, 'throws with an array')
-  t.throws(reduceLog({}), TypeError, 'throws with an object')
-
-  t.doesNotThrow(reduceLog(noop), 'allows a function')
-
-  t.end()
-})
-
-test('Writer reduceLog', t => {
-  const w = Writer(0, 0)
-  const f = _ => Writer(1, 0)
-  const g = _ => Writer(2, 0)
-  const add = (x, y) => x + y
-
-  const result = w.chain(f).chain(g).reduceLog(add, 0)
-
-  t.ok(isFunction(w.reduceLog), 'is a function')
-  t.same(result.log(), [ 3 ], 'reduces the log as expected')
-
-  t.end()
-})
-
-test('Writer mreduceLog errors', t => {
-  const mreduceLog = bindFunc(Writer(0, 0).mreduceLog)
-
-  t.throws(mreduceLog(undefined), TypeError, 'throws with undefined')
-  t.throws(mreduceLog(null), TypeError, 'throws with null')
-  t.throws(mreduceLog(0), TypeError, 'throws with falsey number')
-  t.throws(mreduceLog(1), TypeError, 'throws with truthy number')
-  t.throws(mreduceLog(''), TypeError, 'throws with falsey string')
-  t.throws(mreduceLog('string'), TypeError, 'throws with truthy string')
-  t.throws(mreduceLog(false), TypeError, 'throws with false')
-  t.throws(mreduceLog(true), TypeError, 'throws with true')
-  t.throws(mreduceLog([]), TypeError, 'throws with an array')
-  t.throws(mreduceLog({}), TypeError, 'throws with an object')
-  t.throws(mreduceLog(noop), TypeError, 'throws with a function')
-
-  t.doesNotThrow(mreduceLog(Last), 'allows a Monoid')
-
-  t.end()
-})
-
-test('Writer mreduceLog', t => {
-  const w = Writer('first', 0)
-  const f = _ => Writer('second', 0)
-  const g = _ => Writer('last', 0)
-
-  const result = w.chain(f).chain(g).mreduceLog(Last)
-
-  t.ok(isFunction(w.mreduceLog), 'is a function')
-  t.same(result.log(), [ 'last' ], 'reduces the log as expected')
 
   t.end()
 })

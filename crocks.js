@@ -60,8 +60,6 @@ const pointFree = {
   promap: require('./pointfree/promap'),
   read: require('./pointfree/read'),
   reduce: require('./pointfree/reduce'),
-  reduceLog: require('./pointfree/reduceLog'),
-  mreduceLog: require('./pointfree/mreduceLog'),
   run: require('./pointfree/run'),
   runWith: require('./pointfree/runWith'),
   sequence: require('./pointfree/sequence'),

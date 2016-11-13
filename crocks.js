@@ -36,6 +36,8 @@ const helpers = {
   liftA3: require('./funcs/liftA3'),
   mconcat: require('./funcs/mconcat'),
   mconcatMap: require('./funcs/mconcatMap'),
+  mreduce: require('./funcs/mreduce'),
+  mreduceMap: require('./funcs/mreduceMap'),
   pipe: require('./funcs/pipe')
 }
 

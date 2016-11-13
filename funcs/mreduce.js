@@ -8,7 +8,7 @@ const isFunction = require('../internal/isFunction')
 
 const mconcatMap = require('./mconcatMap')
 
-// mreduce :: Monoid M => M -> [a] -> a
+// mreduce :: Monoid M => M -> ([ a ] | List a) -> a
 function mreduce(M, xs) {
   if(!(M && isMonoid(M))) {
     throw new TypeError('mreduce: Monoid required for first argument')

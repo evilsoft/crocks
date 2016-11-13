@@ -11,7 +11,7 @@ function applyPipe(f, g) {
   }
 }
 
-// pipe :: ...fns -> fn
+// pipe : ((a -> b), (b -> c), ..., (y -> z)) -> a -> z
 function pipe() {
   if(!arguments.length) {
     throw new TypeError('pipe: At least one function required')

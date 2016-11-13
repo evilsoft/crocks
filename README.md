@@ -57,21 +57,23 @@ There are (5) classifications of "things" included in this library:
 * Point-Free Functions (`crocks/pointfree`): Wanna use these ADTs in a way that you never have to reference the actual data being worked on? Well here is where you will find all of these functions to do that. For every algebra available on both the `Crocks` and `Monoids` there is a function here.
 
 ### Crocks
-The `Crocks` are the heart and soul of this library. This is where you will find all your favorite ADT's you have grown to :heart:. They include gems such as: `Maybe`, `Either` and `IO`, to name a few. The are usually just a simple constructor that takes either a function or value (depending on the type) and will return you a "container" that wraps whatever you passed it. Each container provides a variety of functions that act as the operations you can do on the contained value. There are many types that share the same function names, but what they do from type to type may vary.
+The `Crocks` are the heart and soul of this library. This is where you will find all your favorite ADT's you have grown to :heart:. They include gems such as: `Maybe`, `Either` and `IO`, to name a few. The are usually just a simple constructor that takes either a function or value (depending on the type) and will return you a "container" that wraps whatever you passed it. Each container provides a variety of functions that act as the operations you can do on the contained value. There are many types that share the same function names, but what they do from type to type may vary. Every `Crock` provides `type` function on the Constructor and both `inspect` and `type` functions on their Instances.
+
+All `Crocks` are Constructor functions of the given type, with `Writer` being an exception. The `Writer` function takes a `Monoid` that will represent the `log`. Once you provide the `Monoid`, the function will return the `Writer` Constructor for your `Writer` for that specific `Monoid`.
 
 | Crock | Constructor | Instance |
 |---|---|---|
-| `Arrow` | `empty`, `type` | `inspect`, `type`, `value`, `runWith`, `concat`, `empty`, `map`, `contramap`, `promap`, `first`, `second` |
-| `Const` | `type` | `inspect`, `type`, `equals`, `value`, `concat`, `map`, `ap`, `chain` |
-| `Either` | `Left`, `Right`, `type`, `of`| `inspect`, `type`, `equals`, `value`, `either`, `swap`, `coalesce`, `map`, `bimap`, `ap`, `of`, `chain`, `sequence`, `traverse` |
-| `Identity` | `type`, `of` | `inspect`, `type`, `equals`, `value`, `map`, `ap`, `of`, `chain`, `sequence`, `traverse` |
-| `IO` | `type`, `of` | `inspect`, `type`, `run`, `map`, `ap`, `of`, `chain` |
-| `List` |  `empty`, `type`, `of` | `inspect`, `type`, `equals`, `value`, `head`, `tail`, `cons`, `concat`, `empty`, `reduce`, `filter`, `map`, `ap`, `of`, `chain`, `sequence`, `traverse` |
-| `Maybe` | `Nothing`, `Just`, `type`, `of` | `inspect`, `type`, `equals`, `maybe`, `either`, `option`, `coalesce`, `map`, `ap`, `of`, `chain`, `sequence`, `traverse` |
-| `Pair` | `type`, `of` |`inspect`, `type`, `equals`, `value`, `fst`, `snd`, `merge`, `concat`, `swap`, `map`, `bimap`, `ap`, `of`, `chain` |
-| `Reader` | `ask`, `type`, `of`| `inspect`, `type`, `runWith`, `map`, `ap`, `of`, `chain` |
-| `Unit` | `empty`, `type`, `of` | `inspect`, `type`, `equals`, `value`, `concat`, `empty`, `map`, `ap`, `of`, `chain` |
-| `Writer`| `type`, `of` | `inspect`, `type`, `equals`, `value`, `log`, `read`, `map`, `ap`, `of`, `chain` |
+| `Arrow` | `empty` | `value`, `runWith`, `concat`, `empty`, `map`, `contramap`, `promap`, `first`, `second` |
+| `Const` | -- | `equals`, `value`, `concat`, `map`, `ap`, `chain` |
+| `Either` | `Left`, `Right`, `of`| `inspect`, `type`, `equals`, `value`, `either`, `swap`, `coalesce`, `map`, `bimap`, `ap`, `of`, `chain`, `sequence`, `traverse` |
+| `Identity` | `of` | `equals`, `value`, `map`, `ap`, `of`, `chain`, `sequence`, `traverse` |
+| `IO` | `of` | `run`, `map`, `ap`, `of`, `chain` |
+| `List` |  `empty`, `of` | `inspect`, `type`, `equals`, `value`, `head`, `tail`, `cons`, `concat`, `empty`, `reduce`, `filter`, `map`, `ap`, `of`, `chain`, `sequence`, `traverse` |
+| `Maybe` | `Nothing`, `Just`, `of` | `equals`, `maybe`, `either`, `option`, `coalesce`, `map`, `ap`, `of`, `chain`, `sequence`, `traverse` |
+| `Pair` | `of` | `equals`, `value`, `fst`, `snd`, `merge`, `concat`, `swap`, `map`, `bimap`, `ap`, `of`, `chain` |
+| `Reader` | `ask`, `of`| `runWith`, `map`, `ap`, `of`, `chain` |
+| `Unit` | `empty`, `of` | `equals`, `value`, `concat`, `empty`, `map`, `ap`, `of`, `chain` |
+| `Writer`| `of` | `equals`, `value`, `log`, `read`, `map`, `ap`, `of`, `chain` |
 
 ### Monoids
 Each `Monoid` provides a means to represent a binary operation and is usually locked down to a specific type. These are great when you need to combine a list of values down to one value. In this library, any ADT that provides both an `empty` and `concat` function can be used as a `Monoid`. There are a few of the `Crocks` that are also monoidial, so be on the look out for those as well. All `Monoids` work with the point-free functions `mconcat`, `mreduce`, `mconcatMap` and `mreduceMap`.
@@ -110,3 +112,33 @@ Ever run into a situation where you have a value but do not have a function to a
 
 #### `substitution : (a -> b -> c) -> (a -> b) -> a -> c`
 While it a complicated little bugger, it can come in very handy from time to time. In it's first two arguments it takes functions. The first must be binary and the second unary. That will return you a function that is ready to take some value. Once supplied the fun starts, it will pass the `a` to the first argument of both functions, and the result of the second function to the second parameter of the first function. Finally after all that juggling, it will return the result of that first function. When used with partial application on that first parameter, a whole new world of combinatory madness is presented!
+
+### Helper Functions
+#### `branch : a -> Pair a a`
+When you want to branch a computation into two parts, this is the function you want to reach for. All it does is let you pass in any `a` and will return you a `Pair` that has your value on both the first and second parameter. This allows you to work on the value in two separate computation paths. Be advised that this is Javascript and if `a` is an object type (`Object`, `Array`, `Date`, etc) they will reference each other.
+
+**Pro-Tip**: `Pair` provides a `merge` function that will let you fold the two values into a single value.
+
+#### `compose : ((y -> z), (x -> y), ..., (a -> b)) -> a -> z`
+While the `composeB` can be used to create a composition of two functions, there are times when you want to compose an entire flow together. That is where `compose` is useful. With `compose` you can create a right-to-left composition of functions. It will return you a function that represents your flow. Not really sold on writing flows from right-to-left? Well then, I would recommend reaching for `pipe`.
+
+#### `curry : ((a, b, c) -> d) -> a -> b -> c -> d`
+Pass this function a function and it will return you a function that can be called in any form that you require until all arguments have been provided. For example if you pass a function: `f : (a, b, c) -> d` you get back a function that can be called in any combination, such as: `f(x, y, z)`, `f(x)(y)(z)`, `f(x, y)(z)`, or even `f(x)(y, z)`. This is great for doing partial application on functions for maximum reusability.
+
+#### `inspect : a -> String`
+The containers are not very easy to peek into as a result of them locking down their wrapped values. `inspect` is just a simple function that takes some data and returns a nice formatted `String` that will provide the type of container and the wrapped value (when possible).
+
+#### `liftA2 : Applicative m => (a -> b -> c) -> m a -> m b -> m c`
+#### `liftA3 : Applicative m => (a -> b -> c -> d) -> m a -> m b -> m c -> m d`
+Ever see yourself wanting to `map` a binary or tri-ary function, but `map` only allows unary functions? Both of these functions allow you to pass in your function as well as the number of `Applicatives` (containers that provide both `of` and `ap` functions) you need to get the mapping you are looking for.
+
+#### `mconcat : Monoid m => m -> ([ a ] | List a) -> m a`
+#### `mreduce : Monoid m => m -> ([ a ] | List a) -> a`
+These two functions are very handy for combining an entire `List` or `Array` of values by providing a `Monoid` and your collection of values. The difference between the two is that `mconcat` returns the result inside the `Monoid` used to combine them. Where `mreduce` returns the bare value itself.
+
+#### `mconcatMap : Monoid m => m -> (b -> a) -> ([ b ] | List b) -> m a`
+#### `mreduceMap : Monoid m => m -> (b -> a) -> ([ b ] | List b) -> a`
+There comes a time where the values you have in a `List` or an `Array` are not in the type that is needed for the `Monoid` you want to combine with. These two functions can be used to `map` some transforming function from a given type into the type needed for the `Monoid`. In essence, this function will run each value through the function before it lifts the value into the `Monoid`, before `concat` is applied. The difference between the two is that `mconcatMap` returns the result inside the `Monoid` used to combine them. Where `mreduceMap` returns the bare value itself.
+
+#### `pipe : ((a -> b), (b -> c), ..., (y -> z)) -> a -> z`
+If you find yourself not able to come to terms with doing the typical right-to-left, then `crocks` provides a means to accommodate you. This function does the same thing as `compose`, the only difference is it allows you define your flows in a left-to-right manner.

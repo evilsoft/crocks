@@ -9,7 +9,7 @@ const isFunction = require('../internal/isFunction')
 const foldWith =
   m => (x, y) => x.concat(m(y))
 
-// mconcatMap :: Monoid M => M -> (b -> a) -> [b] -> M a
+// mconcatMap :: Monoid M => M -> (b -> a) -> ([ b ] | List b) -> M a
 function mconcatMap(M, f, xs) {
   if(!(M && isMonoid(M))) {
     throw new TypeError('mconcatMap: Monoid required for first argument')

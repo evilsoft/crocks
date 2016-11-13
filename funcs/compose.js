@@ -5,7 +5,7 @@ const pipe = require('./pipe')
 const argsArray = require('../internal/argsArray')
 const isFunction = require('../internal/isFunction')
 
-// compose :: ...fns -> fn
+// compose : ((y -> z), (x -> y), ..., (a -> b)) -> a -> z
 function compose() {
   if(!arguments.length) {
     throw new TypeError('compose: At least one function required')

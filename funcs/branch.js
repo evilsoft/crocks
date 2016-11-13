@@ -5,6 +5,7 @@ const isFunction = require('../internal/isFunction')
 
 const Pair = require('../crocks/Pair')
 
+// branch : a -> Pair a a
 function branch(x) {
   return Pair(x, x)
 }

@@ -5,7 +5,7 @@ const curry = require('./curry')
 const isApply = require('../internal/isApply')
 const isFunction = require('../internal/isFunction')
 
-// liftA3 :: Applicative m => (a -> a -> a -> b) -> m a -> m a -> m a -> m b
+// liftA3 :: Applicative m => (a -> b -> c -> d) -> m a -> m b -> m c -> m d
 function liftA3(fn, x, y, z) {
   if(!isFunction(fn)) {
     throw new TypeError('liftA3: Function required for first argument')

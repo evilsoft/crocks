@@ -9,6 +9,7 @@ function applyCurry(fn, arg) {
   return fn.length > 1 ? fn.bind(null, arg) : fn.call(null, arg)
 }
 
+// curry : ((a, b, c) -> d) -> a -> b -> c -> d
 function curry(fn) {
   if(!isFunction(fn)) {
     throw new TypeError('curry: Function required')

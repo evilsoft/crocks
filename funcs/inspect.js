@@ -12,6 +12,7 @@ function arrayInspect(xs) {
     : xs
 }
 
+// inspect : a -> String
 function inspect(x) {
   if(x && isFunction(x.inspect)) {
     return ` ${x.inspect()}`

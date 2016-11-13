@@ -4,13 +4,10 @@
 const isType = require('../internal/isType')
 const isFunction = require('../internal/isFunction')
 const isMonoid = require('../internal/isMonoid')
-const isArray = require('../internal/isArray')
 
 const _inspect = require('../funcs/inspect')
-const mreduce = require('../funcs/mreduce')
 
 const constant = require('../combinators/constant')
-const composeB = require('../combinators/composeB')
 
 function _Writer(Monoid) {
   if(!isMonoid(Monoid)) {
@@ -21,7 +18,7 @@ function _Writer(Monoid) {
     x => Writer(Monoid.empty().value(), x)
 
   const _type =
-    constant('Writer(' + Monoid.type() + ')')
+    constant(`Writer(${Monoid.type()})`)
 
   function Writer(entry, val) {
     if(arguments.length !== 2) {

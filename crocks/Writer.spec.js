@@ -16,6 +16,25 @@ const Last = require('../test/LastMonoid')
 const _Writer = require('./Writer.js')
 const Writer = _Writer(Last)
 
+test('Writer construction', t => {
+  const w = bindFunc(_Writer)
+
+  t.throws(w(undefined), TypeError, 'throws with undefined')
+  t.throws(w(null), TypeError, 'throws with null')
+  t.throws(w(0), TypeError, 'throws with falsey number')
+  t.throws(w(1), TypeError, 'throws with truthy number')
+  t.throws(w(''), TypeError, 'throws with falsey string')
+  t.throws(w('string'), TypeError, 'throws with truthy string')
+  t.throws(w(false), TypeError, 'throws with false')
+  t.throws(w(true), TypeError, 'throws with true')
+  t.throws(w([]), TypeError, 'throws with an array')
+  t.throws(w({}), TypeError, 'throws with an object')
+  t.throws(w(noop), TypeError, 'throws with a function')
+
+  t.doesNotThrow(w(Last), 'allows a Monoid')
+  t.end()
+})
+
 test('Writer', t => {
   const w = Writer(0, 0)
   const f = bindFunc(Writer)

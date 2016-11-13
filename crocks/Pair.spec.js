@@ -1,5 +1,6 @@
 const test = require('tape')
 const helpers = require('../test/helpers')
+const sinon = require('sinon')
 
 const identity = require('../combinators/identity')
 const composeB = require('../combinators/composeB')
@@ -39,28 +40,66 @@ test('Pair inspect', t => {
 })
 
 test('Pair type', t => {
-  t.equal(Pair(0, 0).type(), 'Pair', 'type returns Pair')
+  const p = Pair(0, 0)
+
+  t.ok(isFunction(p.type), 'provides a type function')
+  t.equal(p.type(), 'Pair', 'type returns Pair')
+
   t.end()
 })
 
 test('Pair value', t => {
-  const x = Pair('great', true).value()
+  const p = Pair('great', true)
 
-  t.same(x, [ 'great', true ], 'proivdes both values in an array')
+  t.ok(isFunction(p.value), 'provides a value function')
+  t.same(p.value(), [ 'great', true ], 'proivdes both values in an array')
 
   t.end()
 })
 
 test('Pair fst', t => {
-  const x = Pair(34, false).fst()
-  t.same(x, 34, 'proivdes the first value')
+  const p = Pair(34, false)
+
+  t.ok(isFunction(p.fst), 'provides a fst function')
+  t.same(p.fst(), 34, 'proivdes the first value')
 
   t.end()
 })
 
 test('Pair snd', t => {
-  const x = Pair([ 1, 2 ], { nice: true }).snd()
-  t.same(x, { nice: true }, 'proivdes the second value')
+  const p = Pair([ 1, 2 ], { nice: true })
+
+  t.ok(isFunction(p.snd), 'provides a snd function')
+  t.same(p.snd(), { nice: true }, 'proivdes the second value')
+
+  t.end()
+})
+
+test('Pair merge', t => {
+  const p = Pair(1, 20)
+
+  t.ok(isFunction(p.merge), 'provides a merge function')
+
+  const merge = bindFunc(p.merge)
+
+  t.throws(merge(undefined), TypeError, 'throws with undefined')
+  t.throws(merge(null), TypeError, 'throws with null')
+  t.throws(merge(0), TypeError, 'throws with falsey number')
+  t.throws(merge(1), TypeError, 'throws with truthy number')
+  t.throws(merge(''), TypeError, 'throws with falsey string')
+  t.throws(merge('string'), TypeError, 'throws with truthy string')
+  t.throws(merge(false), TypeError, 'throws with false')
+  t.throws(merge(true), TypeError, 'throws with true')
+  t.throws(merge([]), TypeError, 'throws with an array')
+  t.throws(merge({}), TypeError, 'throws with object')
+
+  t.doesNotThrow(merge(noop), 'allows a function')
+
+  const fn = sinon.spy((x, y) => x + y)
+  const res = p.merge(fn)
+
+  t.ok(fn.returned(res), 'provides the result of the passed in function')
+  t.ok(fn.calledWith(p.fst(), p.snd()), 'pass the fst value to first argument and snd to second')
 
   t.end()
 })

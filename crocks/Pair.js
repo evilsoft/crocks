@@ -40,6 +40,14 @@ function Pair(l, r) {
   const inspect =
     () => `Pair${_inspect(l)}${_inspect(r)}`
 
+  function merge(fn) {
+    if(!isFunction(fn)) {
+      throw new TypeError('Pair.merge: Binary function required')
+    }
+
+    return fn(fst(), snd())
+  }
+
   function equals(m) {
     return isType(type(), m)
       && m.fst() === fst()
@@ -129,8 +137,9 @@ function Pair(l, r) {
 
   return {
     inspect, value, fst, snd,
-    type, equals, concat, swap,
-    map, bimap, ap, of, chain
+    type, merge, equals, concat,
+    swap, map, bimap, ap, of,
+    chain
   }
 }
 

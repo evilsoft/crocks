@@ -49,7 +49,7 @@ test('merge arrow', t => {
   const result = merge(identity)(m)
 
   t.ok(m.merge.calledWith(identity), 'calls merge on arrow, passing the function')
-  t.equal(result, x, 'returns the result of m.merge')
+  t.ok(m.merge.returned(x), 'returns the result of m.merge')
 
   t.end()
 })

@@ -3,12 +3,10 @@
 
 const isFunction = require('../internal/isFunction')
 
-function branch(m) {
-  if(!(m && isFunction(m.branch))) {
-    throw new TypeError('branch: Arrow required')
-  }
+const Pair = require('../crocks/Pair')
 
-  return m.branch()
+function branch(x) {
+  return Pair(x, x)
 }
 
 module.exports = branch

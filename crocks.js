@@ -28,6 +28,7 @@ const monoids = {
 }
 
 const helpers = {
+  branch: require('./funcs/branch'),
   compose: require('./funcs/compose'),
   curry: require('./funcs/curry'),
   inspect: require('./funcs/inspect'),
@@ -41,7 +42,6 @@ const helpers = {
 const pointFree = {
   ap: require('./pointfree/ap'),
   bimap: require('./pointfree/bimap'),
-  branch: require('./pointfree/branch'),
   chain: require('./pointfree/chain'),
   coalesce: require('./pointfree/coalesce'),
   concat: require('./pointfree/concat'),

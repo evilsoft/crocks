@@ -67,30 +67,12 @@ function Arrow(runWith) {
     return Arrow(compose(r, runWith, l))
   }
 
-  function branch() {
-    return Arrow(x => Pair(x, x))
-  }
-
-  function merge(fn) {
-    if(!isFunction(fn)) {
-      throw new TypeError('Arrow.merge: Binary function required')
-    }
-
-    return Arrow(function(x) {
-      if(!(x && x.type && x.type() === Pair.type())) {
-        throw TypeError('Arrow.merge: Pair required for inner argument')
-      }
-
-      return fn(x.fst(), x.snd())
-    })
-  }
-
   function first(fn) {
     if(!isFunction(fn)) {
       throw new TypeError('Arrow.first: Function required')
     }
 
-    return Arrow(function(x) {
+    return map(function(x) {
       if(!(x && x.type && x.type() === Pair.type())) {
         throw TypeError('Arrow.first: Pair required for inner argument')
       }
@@ -98,10 +80,25 @@ function Arrow(runWith) {
     })
   }
 
+  function second(fn) {
+    if(!isFunction(fn)) {
+      throw new TypeError('Arrow.second: Function required')
+    }
+
+    return map(function(x) {
+      if(!(x && x.type && x.type() === Pair.type())) {
+        throw TypeError('Arrow.second: Pair required for inner argument')
+      }
+
+      return x.bimap(identity, fn)
+    })
+  }
+
+
   return {
     inspect, type, value, runWith,
     concat, empty, map, contramap,
-    promap, branch, merge, first
+    promap, first, second
   }
 }
 

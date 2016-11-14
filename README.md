@@ -54,7 +54,7 @@ There are (5) classifications of "things" included in this library:
 
 * Helper Functions (`crocks/funcs`): All other support functions that are either convenient versions of combinators or not even combinators at all cover this group.
 
-* Point-Free Functions (`crocks/pointfree`): Wanna use these ADTs in a way that you never have to reference the actual data being worked on? Well here is where you will find all of these functions to do that. For every algebra available on both the `Crocks` and `Monoids` there is a function here.
+* Point-free Functions (`crocks/pointfree`): Wanna use these ADTs in a way that you never have to reference the actual data being worked on? Well here is where you will find all of these functions to do that. For every algebra available on both the `Crocks` and `Monoids` there is a function here.
 
 ### Crocks
 The `Crocks` are the heart and soul of this library. This is where you will find all your favorite ADT's you have grown to :heart:. They include gems such as: `Maybe`, `Either` and `IO`, to name a few. The are usually just a simple constructor that takes either a function or value (depending on the type) and will return you a "container" that wraps whatever you passed it. Each container provides a variety of functions that act as the operations you can do on the contained value. There are many types that share the same function names, but what they do from type to type may vary. Every `Crock` provides `type` function on the Constructor and both `inspect` and `type` functions on their Instances.
@@ -142,3 +142,40 @@ There comes a time where the values you have in a `List` or an `Array` are not i
 
 #### `pipe : ((a -> b), (b -> c), ..., (y -> z)) -> a -> z`
 If you find yourself not able to come to terms with doing the typical right-to-left, then `crocks` provides a means to accommodate you. This function does the same thing as `compose`, the only difference is it allows you define your flows in a left-to-right manner.
+
+#### Point-free Functions
+While it can seem natural to work with all these containers in a fluent fashion, it can get cumbersome and hard to get a lot of reuse out of. A way to really get the most out of reusability in Javascript is to take what is called a point-free approach. Below is a small code same to contrast the difference between the two calling styles:
+
+```javascript
+const crocks = require('crocks')
+
+const { compose, map } = crocks // map is the point-free function
+
+const { Maybe } = crocks
+const { Nothing, Just } = Maybe
+
+const isEven =
+  x => !(x % 2)
+
+const maybeInt =
+  x => !Number.isInteger(x)
+    ? Nothing() : Just(x)
+
+function fluentIsEven(data) {
+  return maybeInt(data)
+    .map(isEven)
+}
+
+const pointfreeIsEven =
+  compose(map(isEven), maybeInt)
+```
+
+These functions provide a very clean way to build out very simple functions and compose them all together to compose a more complicated flow. Each point-free function provided in `crocks` is "auto-curried" and follows a "data-last" pattern in the order of how it receives it's arguments. Typically the most stable of the arguments comes first, moving all the way to the least stable argument (which usually is the data flowing through your composition). Below lists the provided functions and the data types they work with (`m` refers to an accepted Datatype):
+
+| Function | Signature | Datatypes |
+|---|---|---|
+| `ap` | `m a -> m (a -> b) -> m b` | `Const`, `Either`, `Identity`, `IO`, `List`, `Maybe`, `Pair`, `Reader`, `Unit`, `Writer` |
+| `bimap` | `(a -> c) -> (b -> d) -> m a b -> m c d` | `Either`, `Pair` |
+| `chain` | `(a -> m b) -> m a -> m b` | `Const`, `Either`, `Identity`, `IO`, `List`, `Maybe`, `Pair`, `Reader`, `Unit`, `Writer`|
+| `coalesce` | `(a -> c) -> m a b -> m c b` | `Maybe`, `Either` |
+| `concat` | 

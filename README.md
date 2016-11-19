@@ -172,10 +172,66 @@ const pointfreeIsEven =
 
 These functions provide a very clean way to build out very simple functions and compose them all together to compose a more complicated flow. Each point-free function provided in `crocks` is "auto-curried" and follows a "data-last" pattern in the order of how it receives it's arguments. Typically the most stable of the arguments comes first, moving all the way to the least stable argument (which usually is the data flowing through your composition). Below lists the provided functions and the data types they work with (`m` refers to an accepted Datatype):
 
-| Function | Signature | Datatypes |
-|---|---|---|
-| `ap` | `m a -> m (a -> b) -> m b` | `Const`, `Either`, `Identity`, `IO`, `List`, `Maybe`, `Pair`, `Reader`, `Unit`, `Writer` |
-| `bimap` | `(a -> c) -> (b -> d) -> m a b -> m c d` | `Either`, `Pair` |
-| `chain` | `(a -> m b) -> m a -> m b` | `Const`, `Either`, `Identity`, `IO`, `List`, `Maybe`, `Pair`, `Reader`, `Unit`, `Writer`|
-| `coalesce` | `(a -> c) -> m a b -> m c b` | `Maybe`, `Either` |
-| `concat` | 
+##### Signatures
+| Function | Signature |
+|---|---|
+| `ap` | `m a -> m (a -> b) -> m b` |
+| `bimap` | `(a -> c) -> (b -> d) -> m a b -> m c d` |
+| `chain` | `(a -> m b) -> m a -> m b` |
+| `coalesce` | `(a -> b) -> m a b -> m a b` |
+| `concat` | `m a -> m a -> m a` |
+| `cons` | `a -> m a -> m a` |
+| `contramap` | `(b -> a) -> m a -> m b` |
+| `either` | `(a -> c) -> (b -> c) -> m a b -> c` |
+| `filter` | `(a -> Boolean) -> m a -> m a` |
+| `first` | `(a -> b) -> m (a, c) -> m (b, c)` |
+| `fst` | `m a b -> a` |
+| `head` | `m a -> Maybe a` |
+| `log` | `m a b -> a` |
+| `map` | `(a -> b) -> m a -> m b` |
+| `maybe` | `a -> m a -> a` |
+| `merge` | `(a -> b -> c) -> m a b -> c` |
+| `option` | `a -> m a -> a` |
+| `promap` | `(c -> a) -> (b -> d) -> m a b -> m c d` |
+| `read` | `m a b -> a` |
+| `reduce` | `(b -> a -> b) -> b -> m a -> b` |
+| `run` | `m a -> b` |
+| `second` | `(b -> c) -> m (a, b) -> m (a, c)` |
+| `sequence` | `Apply f => (b -> f b) -> m (f a) -> f (m a)` |
+| `snd` | `m a b -> b` |
+| `swap` | `m a b -> m b a` |
+| `tail` | `m a -> Maybe (m a)` |
+| `traverse` | `Apply f => (c -> f c) -> (a -> f b) -> m (f a) -> f (m b)` |
+| `value` | `m a -> a` |
+
+##### Datatypes
+| Function | Datatypes |
+|---|---|
+| `ap` | `Const`, `Either`, `Identity`, `IO`, `List`, `Maybe`, `Pair`, `Reader`, `Unit`, `Writer` |
+| `bimap` | `Either`, `Pair` |
+| `chain` | `Const`, `Either`, `Identity`, `IO`, `List`, `Maybe`, `Pair`, `Reader`, `Unit`, `Writer` |
+| `coalesce` | `Maybe`, `Either` |
+| `concat` | `Array`, `String`, `Arrow`, `Const`, `List`, `Pair`, `Unit`, `All`, `Any`, `Assign`, `Max`, `Min`, `Prod`, `Sum` |
+| `cons` | `Array`, `List` |
+| `contramap` | `Arrow` |
+| `either` | `Either`, `Maybe` |
+| `filter` | `Array`, `List` |
+| `first` | `Arrow` |
+| `fst` | `Pair` |
+| `head` | `Array, List` |
+| `log` | `Writer` |
+| `map` | `Array`, `Function`, `Arrow`, `Const`, `Either`, `Identity`, `IO`, `List`, `Maybe`, `Pair`, `Reader`, `Unit`, `Writer` |
+| `maybe` | `Maybe` |
+| `merge` | `Pair` |
+| `option` | `Either`, `Maybe` |
+| `promap` | `Arrow` |
+| `read` | `Writer` |
+| `reduce` | `Array`, `List` |
+| `run` | `IO` |
+| `second` | `Arrow` |
+| `sequence` | `Either`, `Identity`, `List`, `Maybe` |
+| `snd` | `Pair` |
+| `swap` | `Pair` |
+| `tail` | `Array`, `String`, `List` |
+| `traverse` | `Either`, `Identity`, `List`, `Maybe` |
+| `value` | `Arrow`, `Const`, `Either`, `Identity`, `List`, `Pair`, `Unit`, `Writer` |

@@ -10,7 +10,7 @@ const isFunction = require('../internal/isFunction')
 test('curry', t => {
   const c = bindFunc(curry)
 
-  t.ok(isFunction(curry), 'function', 'curry is a function')
+  t.ok(isFunction(curry), 'curry is a function')
 
   t.throws(c(undefined), TypeError, 'throws TypeError when undefined passed')
   t.throws(c(null), TypeError, 'throws TypeError when null passed')

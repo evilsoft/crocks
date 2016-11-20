@@ -29,6 +29,7 @@ const helpers = {
   branch: require('./funcs/branch'),
   compose: require('./funcs/compose'),
   curry: require('./funcs/curry'),
+  ifElse: require('./funcs/ifElse'),
   inspect: require('./funcs/inspect'),
   liftA2: require('./funcs/liftA2'),
   liftA3: require('./funcs/liftA3'),
@@ -36,7 +37,10 @@ const helpers = {
   mconcatMap: require('./funcs/mconcatMap'),
   mreduce: require('./funcs/mreduce'),
   mreduceMap: require('./funcs/mreduceMap'),
-  pipe: require('./funcs/pipe')
+  pipe: require('./funcs/pipe'),
+  safe: require('./funcs/safe'),
+  unless: require('./funcs/unless'),
+  when: require('./funcs/when')
 }
 
 const pointFree = {

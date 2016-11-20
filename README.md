@@ -146,6 +146,10 @@ There comes a time where the values you have in a `List` or an `Array` are not i
 #### `pipe : ((a -> b), (b -> c), ..., (y -> z)) -> a -> z`
 If you find yourself not able to come to terms with doing the typical right-to-left, then `crocks` provides a means to accommodate you. This function does the same thing as `compose`, the only difference is it allows you define your flows in a left-to-right manner.
 
+#### `safe : (a -> Boolean) -> a -> Maybe a`
+When using a `Maybe`, it is a common practice to lift into a `Just` or a `Nothing` depending on a condition on the value to be lifted.  It is so common that it warrants a function, and that function is called `safe`. Provide a predicate (a function that returns a Boolean) and a value to be lifted. The value will be evaluated against the predicate, and will lift it into a `Just` if true and a `Nothing` if false.
+
+
 #### `unless : (a -> Boolean) -> (a -> b) -> a -> a | b`
 There may come a time when you need to adjust a value when a condition is false, that is where `unless` can come into play. Just provide a predicate function (a function that returns a Boolean) and a function to apply your desired modification. This will get you back a function that when you pass it a value, it will evaluate it and if false, will run your value through the provided function. Either the original or modified value will be returned depending on the result of the predicate. Check out `when` for a negated version of this function.
 

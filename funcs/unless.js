@@ -14,7 +14,6 @@ function unless(pred, f) {
   }
 
   return x => !pred(x) ? f(x) : x
-
 }
 
 module.exports = curry(unless)

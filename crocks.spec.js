@@ -22,6 +22,7 @@ const mconcatMap = require('./funcs/mconcatMap')
 const mreduce = require('./funcs/mreduce')
 const mreduceMap = require('./funcs/mreduceMap')
 const pipe = require('./funcs/pipe')
+const when = require('./funcs/when')
 
 const ap = require('./pointfree/ap')
 const bimap = require('./pointfree/bimap')
@@ -94,6 +95,7 @@ test('entry', t => {
   t.equal(crocks.mreduce, mreduce, 'provides the mreduce function')
   t.equal(crocks.mreduceMap, mreduceMap, 'provides the mreduceMap function')
   t.equal(crocks.pipe, pipe, 'provides the pipe function')
+  t.equal(crocks.when, when, 'provides the when function')
 
   t.equal(crocks.ap, ap, 'provides the ap point-free function')
   t.equal(crocks.bimap, bimap, 'provides the bimap point-free function')

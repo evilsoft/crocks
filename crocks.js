@@ -37,7 +37,8 @@ const helpers = {
   mconcatMap: require('./funcs/mconcatMap'),
   mreduce: require('./funcs/mreduce'),
   mreduceMap: require('./funcs/mreduceMap'),
-  pipe: require('./funcs/pipe')
+  pipe: require('./funcs/pipe'),
+  when: require('./funcs/when')
 }
 
 const pointFree = {

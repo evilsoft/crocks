@@ -125,6 +125,9 @@ While the `composeB` can be used to create a composition of two functions, there
 #### `curry : ((a, b, c) -> d) -> a -> b -> c -> d`
 Pass this function a function and it will return you a function that can be called in any form that you require until all arguments have been provided. For example if you pass a function: `f : (a, b, c) -> d` you get back a function that can be called in any combination, such as: `f(x, y, z)`, `f(x)(y)(z)`, `f(x, y)(z)`, or even `f(x)(y, z)`. This is great for doing partial application on functions for maximum reusability.
 
+#### `ifElse : (a -> Boolean) -> (a -> b) -> (a -> c) -> a -> b | c`
+Whenever you need to modify a value based some condition and want a functional way to do it without some imperative `if` statement, then reach for `ifElse`. This function take a predicate (some function that returns a Boolean) and two functions. The first is what is executed when the predicate is true, the second on a false condition. This will return a function ready to take a value to run through the predicate. After the value is evaluated, it will be ran through it's corresponding function, returning the result as the final result. This function comes in really handy when creating lifting functions for Sum Types (like `Either` or `Maybe`).
+
 #### `inspect : a -> String`
 The containers are not very easy to peek into as a result of them locking down their wrapped values. `inspect` is just a simple function that takes some data and returns a nice formatted `String` that will provide the type of container and the wrapped value (when possible).
 
@@ -142,6 +145,9 @@ There comes a time where the values you have in a `List` or an `Array` are not i
 
 #### `pipe : ((a -> b), (b -> c), ..., (y -> z)) -> a -> z`
 If you find yourself not able to come to terms with doing the typical right-to-left, then `crocks` provides a means to accommodate you. This function does the same thing as `compose`, the only difference is it allows you define your flows in a left-to-right manner.
+
+#### `when : (a -> Boolean) -> (a -> b) -> a -> b | a`
+There may come a time when you need to adjust a value when a condition is true, that is where `when` can come into play. Just provide a predicate function (a function that returns a Boolean) and a function to apply your desired modification. This will get you back a function that when you pass it a value, it will evaluate it and if true, will run your value through the provided function. Either the original or modified value will be returned depending on the result of the predicate.
 
 #### Point-free Functions
 While it can seem natural to work with all these containers in a fluent fashion, it can get cumbersome and hard to get a lot of reuse out of. A way to really get the most out of reusability in Javascript is to take what is called a point-free approach. Below is a small code same to contrast the difference between the two calling styles:
@@ -196,6 +202,7 @@ These functions provide a very clean way to build out very simple functions and 
 | `read` | `m a b -> a` |
 | `reduce` | `(b -> a -> b) -> b -> m a -> b` |
 | `run` | `m a -> b` |
+| `runWith` | `a -> m -> b` |
 | `second` | `(b -> c) -> m (a, b) -> m (a, c)` |
 | `sequence` | `Apply f => (b -> f b) -> m (f a) -> f (m a)` |
 | `snd` | `m a b -> b` |
@@ -228,6 +235,7 @@ These functions provide a very clean way to build out very simple functions and 
 | `read` | `Writer` |
 | `reduce` | `Array`, `List` |
 | `run` | `IO` |
+| `runWith` | `Arrow`, `Reader` |
 | `second` | `Arrow` |
 | `sequence` | `Either`, `Identity`, `List`, `Maybe` |
 | `snd` | `Pair` |

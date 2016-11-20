@@ -8,12 +8,12 @@ const isFunction = require('../internal/isFunction')
 
 const constant = require('../combinators/constant')
 
-const when = require('./when')
+const unless = require('./unless')
 
-test('when', t => {
-  const f = bindFunc(when)
+test('unless', t => {
+  const f = bindFunc(unless)
 
-  t.ok(isFunction(when), 'is a function')
+  t.ok(isFunction(unless), 'is a function')
 
   t.throws(f(undefined, noop), 'throws with undefined in first argument')
   t.throws(f(null, noop), 'throws with null in first argument')
@@ -37,8 +37,8 @@ test('when', t => {
   t.throws(f(noop, {}), 'throws with an object in second argument')
   t.throws(f(noop, []), 'throws with an array in second argument')
 
-  const g = when(noop, noop)
-  const h = when(constant(true), x => x * 2, 11)
+  const g = unless(noop, noop)
+  const h = unless(constant(false), x => x * 2, 11)
 
   t.ok(isFunction(g), 'returns a function when first two functions applied')
   t.equals(h, 22, 'returns result when all three arguments applied')
@@ -46,21 +46,21 @@ test('when', t => {
   t.end()
 })
 
-test('when functionality', t => {
+test('unless functionality', t => {
   const func = sinon.spy(constant('called'))
   const pred = x => !!x
 
-  const f = when(pred, func)
-
-  const tResult = f(true)
-
-  t.ok(func.calledOnce, 'function called when true')
-  t.ok(func.returned(tResult), 'returns the result of the function when true')
+  const f = unless(pred, func)
 
   const fResult = f(false)
 
-  t.ok(func.calledOnce, 'function not called when false')
-  t.equal(fResult, false, 'just returns value when false')
+  t.ok(func.calledOnce, 'function called when false')
+  t.ok(func.returned(fResult), 'returns the result of the function when false')
+
+  const tResult = f(true)
+
+  t.ok(func.calledOnce, 'function not called when true')
+  t.equal(tResult, true, 'just returns value when true')
 
   t.end()
 })

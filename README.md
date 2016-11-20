@@ -146,8 +146,11 @@ There comes a time where the values you have in a `List` or an `Array` are not i
 #### `pipe : ((a -> b), (b -> c), ..., (y -> z)) -> a -> z`
 If you find yourself not able to come to terms with doing the typical right-to-left, then `crocks` provides a means to accommodate you. This function does the same thing as `compose`, the only difference is it allows you define your flows in a left-to-right manner.
 
+#### `unless : (a -> Boolean) -> (a -> b) -> a -> a | b`
+There may come a time when you need to adjust a value when a condition is false, that is where `unless` can come into play. Just provide a predicate function (a function that returns a Boolean) and a function to apply your desired modification. This will get you back a function that when you pass it a value, it will evaluate it and if false, will run your value through the provided function. Either the original or modified value will be returned depending on the result of the predicate. Check out `when` for a negated version of this function.
+
 #### `when : (a -> Boolean) -> (a -> b) -> a -> b | a`
-There may come a time when you need to adjust a value when a condition is true, that is where `when` can come into play. Just provide a predicate function (a function that returns a Boolean) and a function to apply your desired modification. This will get you back a function that when you pass it a value, it will evaluate it and if true, will run your value through the provided function. Either the original or modified value will be returned depending on the result of the predicate.
+There may come a time when you need to adjust a value when a condition is true, that is where `when` can come into play. Just provide a predicate function (a function that returns a Boolean) and a function to apply your desired modification. This will get you back a function that when you pass it a value, it will evaluate it and if true, will run your value through the provided function. Either the original or modified value will be returned depending on the result of the predicate. Check out `unless` for a negated version of this function.
 
 #### Point-free Functions
 While it can seem natural to work with all these containers in a fluent fashion, it can get cumbersome and hard to get a lot of reuse out of. A way to really get the most out of reusability in Javascript is to take what is called a point-free approach. Below is a small code same to contrast the difference between the two calling styles:

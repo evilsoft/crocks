@@ -14,7 +14,7 @@ const ifElse = require('./ifElse')
 test('ifElse', t => {
   const f = bindFunc(ifElse)
 
-  t.ok(isFunction(ifElse), 'ifElse is a function')
+  t.ok(isFunction(ifElse), 'is a function')
 
   t.throws(f(undefined, noop, noop), 'throws with undefined in first argument')
   t.throws(f(null, noop, noop), 'throws with null in first argument')

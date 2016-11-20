@@ -38,6 +38,7 @@ const helpers = {
   mreduce: require('./funcs/mreduce'),
   mreduceMap: require('./funcs/mreduceMap'),
   pipe: require('./funcs/pipe'),
+  unless: require('./funcs/unless'),
   when: require('./funcs/when')
 }
 

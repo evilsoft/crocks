@@ -64,6 +64,7 @@ const List = require('./crocks/List')
 const Maybe = require('./crocks/Maybe')
 const Pair = require('./crocks/Pair')
 const Reader = require('./crocks/Reader')
+const State = require('./crocks/State')
 const Unit = require('./crocks/Unit')
 const Writer = require('./crocks/Writer')
 
@@ -140,6 +141,7 @@ test('entry', t => {
   t.equal(crocks.Maybe, Maybe, 'provides the Maybe function')
   t.equal(crocks.Pair, Pair, 'provides the Pair function')
   t.equal(crocks.Reader, Reader, 'provides the Reader function')
+  t.equal(crocks.State, State, 'provides the State function')
   t.equal(crocks.Unit, Unit, 'provides the Unit function')
   t.equal(crocks.Writer, Writer, 'provides the Writer function')
 

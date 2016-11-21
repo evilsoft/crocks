@@ -48,7 +48,7 @@ There are (5) classifications of "things" included in this library:
 
 * Crocks (`crocks/crocks`): These are the ADTs that this library is centered around. They are all Functor based Data Types that provide different computational contexts for working in a more declarative, functional flow. For the most part, a majority of the other bits in `crocks` exist to server these ADTs.
 
-* Monoids (`crocks/monoids`): These helpful ADTs are in a class of their own, not really Functors in their own right (although some can be), they are still very useful in our everyday programming needs. Every need to Sum a list of Numbers or mix a mess of objects together? This is were you will find the ADTs you need to do that.
+* Monoids (`crocks/monoids`): These helpful ADTs are in a class of their own, not really Functors in their own right (although some can be), they are still very useful in our everyday programming needs. Ever need to Sum a list of Numbers or mix a mess of objects together? This is were you will find the ADTs you need to do that.
 
 * Combinators (`crocks/combinators`): A collection of functions that are used for working with other functions. These do things like compose (2) functions together, or flip arguments on a function. They typically either take a function, return a function or a bit a both. These are considered the glue that holds the mighty house of `Crocks` together and a valuable aid in writing reusable code.
 
@@ -65,10 +65,10 @@ All `Crocks` are Constructor functions of the given type, with `Writer` being an
 |---|---|---|
 | `Arrow` | `empty` | `value`, `runWith`, `concat`, `empty`, `map`, `contramap`, `promap`, `first`, `second` |
 | `Const` | -- | `equals`, `value`, `concat`, `map`, `ap`, `chain` |
-| `Either` | `Left`, `Right`, `of`| `inspect`, `type`, `equals`, `value`, `either`, `swap`, `coalesce`, `map`, `bimap`, `ap`, `of`, `chain`, `sequence`, `traverse` |
+| `Either` | `Left`, `Right`, `of`| `equals`, `value`, `either`, `swap`, `coalesce`, `map`, `bimap`, `ap`, `of`, `chain`, `sequence`, `traverse` |
 | `Identity` | `of` | `equals`, `value`, `map`, `ap`, `of`, `chain`, `sequence`, `traverse` |
 | `IO` | `of` | `run`, `map`, `ap`, `of`, `chain` |
-| `List` |  `empty`, `of` | `inspect`, `type`, `equals`, `value`, `head`, `tail`, `cons`, `concat`, `empty`, `reduce`, `filter`, `map`, `ap`, `of`, `chain`, `sequence`, `traverse` |
+| `List` |  `empty`, `of` | `equals`, `value`, `head`, `tail`, `cons`, `concat`, `empty`, `reduce`, `filter`, `map`, `ap`, `of`, `chain`, `sequence`, `traverse` |
 | `Maybe` | `Nothing`, `Just`, `of` | `equals`, `maybe`, `either`, `option`, `coalesce`, `map`, `ap`, `of`, `chain`, `sequence`, `traverse` |
 | `Pair` | `of` | `equals`, `value`, `fst`, `snd`, `merge`, `concat`, `swap`, `map`, `bimap`, `ap`, `of`, `chain` |
 | `Reader` | `ask`, `of`| `runWith`, `map`, `ap`, `of`, `chain` |

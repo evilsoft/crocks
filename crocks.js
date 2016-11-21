@@ -11,6 +11,7 @@ const crocks = {
   Maybe: require('./crocks/Maybe'),
   Pair: require('./crocks/Pair'),
   Reader: require('./crocks/Reader'),
+  State: require('./crocks/State'),
   Unit: require('./crocks/Unit'),
   Writer: require('./crocks/Writer')
 }

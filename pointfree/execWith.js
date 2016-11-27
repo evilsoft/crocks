@@ -4,12 +4,12 @@
 const curry = require('../funcs/curry')
 const isFunction = require('../internal/isFunction')
 
-function runWith(x, m) {
-  if(!(m && isFunction(m.runWith))) {
-    throw new TypeError('runWith: Arrow, Reader or State required for second argument')
+function execWith(x, m) {
+  if(!(m && isFunction(m.execWith))) {
+    throw new TypeError('execWith: State required for second argument')
   }
 
-  return m.runWith(x)
+  return m.execWith(x)
 }
 
-module.exports = curry(runWith)
+module.exports = curry(execWith)

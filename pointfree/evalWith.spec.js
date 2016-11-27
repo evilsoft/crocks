@@ -8,14 +8,14 @@ const isFunction  = require('../internal/isFunction')
 
 const constant = require('../combinators/constant')
 
-const runWith = require('./runWith')
+const evalWith = require('./evalWith')
 
-test('runWith pointfree', t => {
-  const f = bindFunc(runWith)
+test('evalWith pointfree', t => {
+  const f = bindFunc(evalWith)
   const x = 'result'
-  const m = { runWith: sinon.spy(constant(x)) }
+  const m = { evalWith: sinon.spy(constant(x)) }
 
-  t.ok(isFunction(runWith), 'is a function')
+  t.ok(isFunction(evalWith), 'is a function')
 
   t.throws(f(13, undefined), TypeError, 'throws if passed undefined')
   t.throws(f(13, null), TypeError, 'throws if passed null')
@@ -29,10 +29,10 @@ test('runWith pointfree', t => {
   t.throws(f(13, {}), TypeError, 'throws if passed an object')
   t.throws(f(13, noop), TypeError, 'throws if passed a function')
 
-  const result = runWith(23)(m)
+  const result = evalWith(23)(m)
 
-  t.ok(m.runWith.called, 'calls runWith on the passed container')
-  t.equal(result, x, 'returns the result of calling m.runWith')
+  t.ok(m.evalWith.called, 'calls evalWith on the passed container')
+  t.equal(result, x, 'returns the result of calling m.evalWith')
 
   t.end()
 })

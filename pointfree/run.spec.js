@@ -31,7 +31,7 @@ test('run pointfree', t => {
 
   const result = run(m)
 
-  t.ok(m.run.called, 'calls value on the passed Identity')
+  t.ok(m.run.called, 'calls run on the passed container')
   t.equal(result, x, 'returns the result of calling m.run')
 
   t.end()

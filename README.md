@@ -72,6 +72,7 @@ All `Crocks` are Constructor functions of the given type, with `Writer` being an
 | `Maybe` | `Nothing`, `Just`, `of` | `equals`, `maybe`, `either`, `option`, `coalesce`, `map`, `ap`, `of`, `chain`, `sequence`, `traverse` |
 | `Pair` | `of` | `equals`, `value`, `fst`, `snd`, `merge`, `concat`, `swap`, `map`, `bimap`, `ap`, `of`, `chain` |
 | `Reader` | `ask`, `of`| `runWith`, `map`, `ap`, `of`, `chain` |
+| `State` | `get`, `gets`, `put`, `modify` `of`| `runWith`, `execWith`, `evalWith`, `map`, `ap`, `of`, `chain` |
 | `Unit` | `empty`, `of` | `equals`, `value`, `concat`, `empty`, `map`, `ap`, `of`, `chain` |
 | `Writer`| `of` | `equals`, `value`, `log`, `read`, `map`, `ap`, `of`, `chain` |
 
@@ -196,6 +197,8 @@ These functions provide a very clean way to build out very simple functions and 
 | `cons` | `a -> m a -> m a` |
 | `contramap` | `(b -> a) -> m a -> m b` |
 | `either` | `(a -> c) -> (b -> c) -> m a b -> c` |
+| `evalWith` | `a -> m -> b` |
+| `execWith` | `a -> m -> b` |
 | `filter` | `(a -> Boolean) -> m a -> m a` |
 | `first` | `(a -> b) -> m (a, c) -> m (b, c)` |
 | `fst` | `m a b -> a` |
@@ -221,20 +224,22 @@ These functions provide a very clean way to build out very simple functions and 
 ##### Datatypes
 | Function | Datatypes |
 |---|---|
-| `ap` | `Const`, `Either`, `Identity`, `IO`, `List`, `Maybe`, `Pair`, `Reader`, `Unit`, `Writer` |
+| `ap` | `Const`, `Either`, `Identity`, `IO`, `List`, `Maybe`, `Pair`, `Reader`, `State`, `Unit`, `Writer` |
 | `bimap` | `Either`, `Pair` |
-| `chain` | `Const`, `Either`, `Identity`, `IO`, `List`, `Maybe`, `Pair`, `Reader`, `Unit`, `Writer` |
+| `chain` | `Const`, `Either`, `Identity`, `IO`, `List`, `Maybe`, `Pair`, `Reader`, `State`, `Unit`, `Writer` |
 | `coalesce` | `Maybe`, `Either` |
 | `concat` | `Array`, `String`, `Arrow`, `Const`, `List`, `Pair`, `Unit`, `All`, `Any`, `Assign`, `Max`, `Min`, `Prod`, `Sum` |
 | `cons` | `Array`, `List` |
 | `contramap` | `Arrow` |
 | `either` | `Either`, `Maybe` |
+| `evalWith` | `State` |
+| `execWith` | `State` |
 | `filter` | `Array`, `List` |
 | `first` | `Arrow` |
 | `fst` | `Pair` |
 | `head` | `Array, List` |
 | `log` | `Writer` |
-| `map` | `Array`, `Function`, `Arrow`, `Const`, `Either`, `Identity`, `IO`, `List`, `Maybe`, `Pair`, `Reader`, `Unit`, `Writer` |
+| `map` | `Array`, `Function`, `Arrow`, `Const`, `Either`, `Identity`, `IO`, `List`, `Maybe`, `Pair`, `Reader`, `State`, `Unit`, `Writer` |
 | `maybe` | `Maybe` |
 | `merge` | `Pair` |
 | `option` | `Either`, `Maybe` |
@@ -242,7 +247,7 @@ These functions provide a very clean way to build out very simple functions and 
 | `read` | `Writer` |
 | `reduce` | `Array`, `List` |
 | `run` | `IO` |
-| `runWith` | `Arrow`, `Reader` |
+| `runWith` | `Arrow`, `Reader`, `State` |
 | `second` | `Arrow` |
 | `sequence` | `Either`, `Identity`, `List`, `Maybe` |
 | `snd` | `Pair` |

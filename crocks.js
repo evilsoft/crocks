@@ -52,6 +52,8 @@ const pointFree = {
   concat: require('./pointfree/concat'),
   cons: require('./pointfree/cons'),
   contramap: require('./pointfree/contramap'),
+  evalWith: require('./pointfree/evalWith'),
+  execWith: require('./pointfree/execWith'),
   either: require('./pointfree/either'),
   filter: require('./pointfree/filter'),
   fst: require('./pointfree/fst'),

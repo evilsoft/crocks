@@ -12,6 +12,7 @@ const constant = require('../combinators/constant')
 const composeB = require('../combinators/composeB')
 
 const Pair = require('./Pair')
+const Unit = require('./Unit')
 const State = require('./State')
 
 test('State', t => {
@@ -23,6 +24,10 @@ test('State', t => {
 
   t.ok(isFunction(State.of), 'provides an of function')
   t.ok(isFunction(State.type), 'provides a type function')
+  t.ok(isFunction(State.get), 'provides a get function')
+  t.ok(isFunction(State.gets), 'provides a gets function')
+  t.ok(isFunction(State.put), 'provides a put function')
+  t.ok(isFunction(State.modify), 'provides a modify function')
 
   t.throws(s(), TypeError, 'throws with no parameters')
 
@@ -90,6 +95,86 @@ test('State evalWith', t => {
 
   t.ok(f.calledWith(s), 'runs internal function with argument')
   t.equal(result, target, 'returns the fst (result) of the pair')
+
+  t.end()
+})
+
+test('State get', t => {
+  const state = State.get()
+  const v = 75
+
+  t.equals(state.type(), State.type(), 'returns a State')
+  t.equals(state.runWith(v).type(), Pair.type(), 'returns a Pair when ran')
+  t.equals(state.evalWith(v), v, 'sets the result value to ran state')
+  t.equals(state.execWith(v), v, 'sets the state value to ran state')
+
+  t.end()
+})
+
+test('State gets', t => {
+  const gets = bindFunc(State.gets)
+
+  t.throws(gets(undefined), TypeError, 'throws with undefined')
+  t.throws(gets(null), TypeError, 'throws with null')
+  t.throws(gets(0), TypeError, 'throws with falsey number')
+  t.throws(gets(1), TypeError, 'throws with truthy number')
+  t.throws(gets(''), TypeError, 'throws with falsey string')
+  t.throws(gets('string'), TypeError, 'throws with truthy string')
+  t.throws(gets(false), TypeError, 'throws with false')
+  t.throws(gets(true), TypeError, 'throws with true')
+  t.throws(gets([]), TypeError, 'throws with an array')
+  t.throws(gets({}), TypeError, 'throws with an object')
+
+  const f = x => x * 2
+  const v = 75
+
+  const state = State.gets(f)
+
+  t.equals(state.type(), State.type(), 'returns a State')
+  t.equals(state.runWith(v).type(), Pair.type(), 'returns a Pair when ran')
+  t.equals(state.evalWith(v), f(v), 'sets the result value to value returned by the function')
+  t.equals(state.execWith(v), v, 'sets the state value to ran state')
+
+  t.end()
+})
+
+test('State put', t => {
+  const v = 75
+  const s = 0
+
+  const state = State.put(v)
+
+  t.equals(state.type(), State.type(), 'returns a State')
+  t.equals(state.runWith(s).type(), Pair.type(), 'returns a Pair when ran')
+  t.equals(state.evalWith(s).type(), Unit.type(), 'sets the result value to a Unit')
+  t.equals(state.execWith(s), v, 'overrides state value to put value')
+
+  t.end()
+})
+
+test('State modify', t => {
+  const modify = bindFunc(State.modify)
+
+  t.throws(modify(undefined), TypeError, 'throws with undefined')
+  t.throws(modify(null), TypeError, 'throws with null')
+  t.throws(modify(0), TypeError, 'throws with falsey number')
+  t.throws(modify(1), TypeError, 'throws with truthy number')
+  t.throws(modify(''), TypeError, 'throws with falsey string')
+  t.throws(modify('string'), TypeError, 'throws with truthy string')
+  t.throws(modify(false), TypeError, 'throws with false')
+  t.throws(modify(true), TypeError, 'throws with true')
+  t.throws(modify([]), TypeError, 'throws with an array')
+  t.throws(modify({}), TypeError, 'throws with an object')
+
+  const f = x => x  + 10
+  const s = 75
+
+  const state = State.modify(f)
+
+  t.equals(state.type(), State.type(), 'returns a State')
+  t.equals(state.runWith(s).type(), Pair.type(), 'returns a Pair when ran')
+  t.equals(state.evalWith(s).type(), Unit.type(), 'sets the result value to a Unit')
+  t.equals(state.execWith(s), f(s), 'overrides state value to put value')
 
   t.end()
 })

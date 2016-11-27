@@ -17,6 +17,22 @@ const _of =
 const _type =
   constant('State')
 
+function gets(fn) {
+  if(!isFunction(fn)) {
+    throw new TypeError('State.gets: Function Required')
+  }
+
+  return State(s => Pair(fn(s), s))
+}
+
+function modify(fn) {
+  if(!isFunction(fn)) {
+    throw new TypeError('State.modify: Function Required')
+  }
+
+  return State(s => Pair(Unit(), fn(s)))
+}
+
 function State(runWith) {
   if(!isFunction(runWith)) {
     throw new TypeError('State: Must wrap a function in the form (s -> Pair a s)')
@@ -123,5 +139,17 @@ State.of =
 
 State.type =
   _type
+
+State.get =
+  _ => State(s => Pair(s, s))
+
+State.gets =
+  gets
+
+State.put =
+  x => modify(constant(x))
+
+State.modify =
+  modify
 
 module.exports = State

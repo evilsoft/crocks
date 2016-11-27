@@ -194,7 +194,7 @@ test('Reader ap properties (Apply)', t => {
 test('Reader of', t => {
   t.equal(Reader.of, Reader(noop).of, 'of is the same as the instance version')
   t.equal(Reader.of(0).type(), 'Reader', 'returns a Reader')
-  t.equal(Reader.of(0).runWith(22), 0, 'wraps the value passed into an Reader')
+  t.equal(Reader.of(0).runWith(22), 0, 'wraps the value passed in a Reader')
 
   t.end()
 })

@@ -56,6 +56,44 @@ test('State type', t => {
   t.end()
 })
 
+test('State runWith', t => {
+  const f = sinon.spy(x => x * 2)
+
+  const s = 34
+  const result = State(f).runWith(s)
+
+  t.ok(f.calledWith(s), 'runs internal function with argument')
+  t.ok(f.returned(result), 'returns the result of the internal function')
+
+  t.end()
+})
+
+test('State execWith', t => {
+  const target = 0
+  const f = sinon.spy(x => Pair(x, target))
+
+  const s = 99
+  const result = State(f).execWith(s)
+
+  t.ok(f.calledWith(s), 'runs passed function with argument')
+  t.equal(result, target, 'returns the snd (state) of the pair')
+
+  t.end()
+})
+
+test('State evalWith', t => {
+  const target = 'bullseye'
+  const f = sinon.spy(x => Pair(target, x))
+
+  const s = 'arrow'
+  const result = State(f).evalWith(s)
+
+  t.ok(f.calledWith(s), 'runs internal function with argument')
+  t.equal(result, target, 'returns the fst (result) of the pair')
+
+  t.end()
+})
+
 test('State map errors', t => {
   const map = bindFunc(State(noop).map)
 
@@ -178,7 +216,7 @@ test('State ap properties (Apply)', t => {
   t.ok(isFunction(State(noop).map), 'implements the Functor spec')
   t.ok(isFunction(State(noop).ap), 'provides an ap function')
 
-  t.equal(a.runWith().fst(), b.runWith().fst(), 'composition')
+  t.equal(a.evalWith(), b.evalWith(), 'composition')
 
   t.end()
 })
@@ -186,7 +224,33 @@ test('State ap properties (Apply)', t => {
 test('State of', t => {
   t.equal(State.of, State(noop).of, 'of is the same as the instance version')
   t.equal(State.of(0).type(), 'State', 'returns a State')
-  t.equal(State.of(0).runWith(22).fst(), 0, 'wraps the value passed into State')
+  t.equal(State.of(0).evalWith(22), 0, 'wraps the value passed into State')
+
+  t.end()
+})
+
+test('State of properties (Applicative)', t => {
+  const m = State(s => Pair(s, s))
+  const f = x => x * 9
+  const v = 12
+  const s = 38
+
+  t.ok(isFunction(State(noop).of), 'provides an of function')
+  t.ok(isFunction(State(noop).ap), 'implements the Apply spec')
+
+  t.equal(State.of(identity).ap(m).evalWith(s), m.evalWith(s), 'identity')
+
+  t.equal(
+    State.of(f).ap(State.of(v)).evalWith(s),
+    State.of(f(v)).evalWith(s),
+    'homomorphism'
+  )
+
+  const u = State.of(f)
+  const a = x => u.ap(State.of(x))
+  const b = x => State.of(f => f(x)).ap(u)
+
+  t.equal(a(3).evalWith(s), b(3).evalWith(s), 'interchange')
 
   t.end()
 })
@@ -235,6 +299,35 @@ test('State chain errors', t => {
   t.throws(noState([]), TypeError, 'throws when chain function returns an array')
   t.throws(noState({}), TypeError, 'throws when chain function returns an object')
   t.throws(noState(noop), TypeError, 'throws when chain function returns a function')
+
+  t.end()
+})
+
+test('State chain properties (Chain)', t => {
+  t.ok(isFunction(State(noop).chain), 'provides a chain function')
+  t.ok(isFunction(State(noop).ap), 'implements the Apply spec')
+
+  const s = 8
+
+  const f = x => State(s => Pair(x + s + 2, s))
+  const g = x => State(s => Pair(x + s + 10, s))
+
+  const a = x => State(s => Pair(x, s)).chain(f).chain(g)
+  const b = x => State(s => Pair(x, s)).chain(y => f(y).chain(g))
+
+  t.equal(a(10).evalWith(s), b(10).evalWith(s), 'assosiativity')
+
+  t.end()
+})
+
+test('State chain properties (Monad)', t => {
+  t.ok(State(noop).chain, 'implements ohe Chain spec')
+  t.ok(State(noop).of, 'implements the Applicative spec')
+
+  const f = x => State(s => Pair(x, s))
+
+  t.equal(State.of(3).chain(f).evalWith(0), f(3).evalWith(0), 'left identity')
+  t.equal(f(6).chain(State.of).evalWith(0), f(6).evalWith(0), 'right identity')
 
   t.end()
 })

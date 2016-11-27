@@ -9,6 +9,7 @@ const _inspect = require('../funcs/inspect')
 const constant = require('../combinators/constant')
 
 const Pair = require('../crocks/Pair')
+const Unit = require('../crocks/Unit')
 
 const _of =
   x => State(s => Pair(x, s))
@@ -29,6 +30,26 @@ function State(runWith) {
 
   const inspect =
     constant(`State${_inspect(runWith)}`)
+
+  function execWith(s) {
+    const pair = runWith(s)
+
+    if(!isType(Pair.type(), pair)) {
+      throw new TypeError('State.execWith: Must wrap a function in the form (s -> Pair a s)')
+    }
+
+    return pair.snd()
+  }
+
+  function evalWith(s) {
+    const pair = runWith(s)
+
+    if(!isType(Pair.type(), pair)) {
+      throw new TypeError('State.evalWith: Must wrap a function in the form (s -> Pair a s)')
+    }
+
+    return pair.fst()
+  }
 
   function map(fn) {
     if(!isFunction(fn)) {
@@ -91,8 +112,9 @@ function State(runWith) {
   }
 
   return {
-    runWith, inspect, type,
-    map, ap, chain, of
+    runWith, execWith, evalWith,
+    inspect, type, map, ap, chain,
+    of
   }
 }
 

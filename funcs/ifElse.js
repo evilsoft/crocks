@@ -14,7 +14,6 @@ function ifElse(pred, f, g) {
   }
 
   return x => !!pred(x) ? f(x) : g(x)
-
 }
 
 module.exports = curry(ifElse)

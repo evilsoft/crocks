@@ -5,7 +5,7 @@ const helpers = require('../test/helpers')
 const noop = helpers.noop
 const bindFunc = helpers.bindFunc
 const isObject = require('../internal/isObject')
-const isFunction  = require('../internal/isFunction')
+const isFunction = require('../internal/isFunction')
 
 const composeB = require('../combinators/composeB')
 const constant = require('../combinators/constant')
@@ -194,7 +194,7 @@ test('Reader ap properties (Apply)', t => {
 test('Reader of', t => {
   t.equal(Reader.of, Reader(noop).of, 'of is the same as the instance version')
   t.equal(Reader.of(0).type(), 'Reader', 'returns a Reader')
-  t.equal(Reader.of(0).runWith(22), 0, 'wraps the value passed into an Reader')
+  t.equal(Reader.of(0).runWith(22), 0, 'wraps the value passed in a Reader')
 
   t.end()
 })

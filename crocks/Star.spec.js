@@ -9,11 +9,8 @@ const noop = helpers.noop
 
 const identity = require('../combinators/identity')
 const composeB = require('../combinators/composeB')
-const constant = require('../combinators/constant')
 
 const MockCrock = require('../test/MockCrock')
-
-const Pair = require('./Pair')
 
 const Star = require('./Star')
 

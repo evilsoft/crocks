@@ -3,15 +3,11 @@
 
 const isFunction = require('../internal/isFunction')
 const isFunctor = require('../internal/isFunctor')
-const isType = require('../internal/isType')
 
 const _inspect = require('../funcs/inspect')
 
-const identity = require('../combinators/identity')
 const constant = require('../combinators/constant')
 const compose = require('../funcs/compose')
-
-const Pair = require('./Pair')
 
 const _type =
   constant('Star')

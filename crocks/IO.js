@@ -16,7 +16,7 @@ const _of =
   x => IO(constant(x))
 
 function IO(run) {
-  if(!arguments.length || !isFunction(run)) {
+  if(!isFunction(run)) {
     throw new TypeError('IO: Must wrap a function')
   }
 

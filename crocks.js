@@ -10,6 +10,7 @@ const crocks = {
   List: require('./crocks/List'),
   Maybe: require('./crocks/Maybe'),
   Pair: require('./crocks/Pair'),
+  Pred: require('./crocks/Pred'),
   Reader: require('./crocks/Reader'),
   Star: require('./crocks/Star'),
   State: require('./crocks/State'),

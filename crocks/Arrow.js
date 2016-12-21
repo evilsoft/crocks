@@ -94,7 +94,6 @@ function Arrow(runWith) {
     })
   }
 
-
   return {
     inspect, type, value, runWith,
     concat, empty, map, contramap,

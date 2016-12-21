@@ -72,6 +72,7 @@ All `Crocks` are Constructor functions of the given type, with `Writer` being an
 | `Maybe` | `Nothing`, `Just`, `of` | `equals`, `maybe`, `either`, `option`, `coalesce`, `map`, `ap`, `of`, `chain`, `sequence`, `traverse` |
 | `Pair` | `of` | `equals`, `value`, `fst`, `snd`, `merge`, `concat`, `swap`, `map`, `bimap`, `ap`, `of`, `chain` |
 | `Reader` | `ask`, `of`| `runWith`, `map`, `ap`, `of`, `chain` |
+| `Star` | -- | `runWith`, `map`, `contramap`, `promap` |
 | `State` | `get`, `gets`, `put`, `modify` `of`| `runWith`, `execWith`, `evalWith`, `map`, `ap`, `of`, `chain` |
 | `Unit` | `empty`, `of` | `equals`, `value`, `concat`, `empty`, `map`, `ap`, `of`, `chain` |
 | `Writer`| `of` | `equals`, `value`, `log`, `read`, `map`, `ap`, `of`, `chain` |
@@ -230,7 +231,7 @@ These functions provide a very clean way to build out very simple functions and 
 | `coalesce` | `Maybe`, `Either` |
 | `concat` | `Array`, `String`, `Arrow`, `Const`, `List`, `Pair`, `Unit`, `All`, `Any`, `Assign`, `Max`, `Min`, `Prod`, `Sum` |
 | `cons` | `Array`, `List` |
-| `contramap` | `Arrow` |
+| `contramap` | `Arrow`, `Star` |
 | `either` | `Either`, `Maybe` |
 | `evalWith` | `State` |
 | `execWith` | `State` |
@@ -239,15 +240,15 @@ These functions provide a very clean way to build out very simple functions and 
 | `fst` | `Pair` |
 | `head` | `Array, List` |
 | `log` | `Writer` |
-| `map` | `Array`, `Function`, `Arrow`, `Const`, `Either`, `Identity`, `IO`, `List`, `Maybe`, `Pair`, `Reader`, `State`, `Unit`, `Writer` |
+| `map` | `Array`, `Function`, `Arrow`, `Const`, `Either`, `Identity`, `IO`, `List`, `Maybe`, `Pair`, `Reader`, `Star`, `State`, `Unit`, `Writer` |
 | `maybe` | `Maybe` |
 | `merge` | `Pair` |
 | `option` | `Either`, `Maybe` |
-| `promap` | `Arrow` |
+| `promap` | `Arrow`, `Star` |
 | `read` | `Writer` |
 | `reduce` | `Array`, `List` |
 | `run` | `IO` |
-| `runWith` | `Arrow`, `Reader`, `State` |
+| `runWith` | `Arrow`, `Reader`, `Star`, `State` |
 | `second` | `Arrow` |
 | `sequence` | `Either`, `Identity`, `List`, `Maybe` |
 | `snd` | `Pair` |

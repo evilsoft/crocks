@@ -59,23 +59,26 @@ There are (5) classifications of "things" included in this library:
 ### Crocks
 The `Crocks` are the heart and soul of this library. This is where you will find all your favorite ADT's you have grown to :heart:. They include gems such as: `Maybe`, `Either` and `IO`, to name a few. The are usually just a simple constructor that takes either a function or value (depending on the type) and will return you a "container" that wraps whatever you passed it. Each container provides a variety of functions that act as the operations you can do on the contained value. There are many types that share the same function names, but what they do from type to type may vary. Every `Crock` provides `type` function on the Constructor and both `inspect` and `type` functions on their Instances.
 
-All `Crocks` are Constructor functions of the given type, with `Writer` being an exception. The `Writer` function takes a `Monoid` that will represent the `log`. Once you provide the `Monoid`, the function will return the `Writer` Constructor for your `Writer` for that specific `Monoid`.
+All `Crocks` are Constructor functions of the given type, with `Writer` being an exception. The `Writer` function takes a `Monoid` that will represent the `log`. Once you provide the `Monoid`, the function will return the `Writer` Constructor for your `Writer` using that specific `Monoid`.
 
 | Crock | Constructor | Instance |
 |---|---|---|
-| `Arrow` | `empty` | `value`, `runWith`, `concat`, `empty`, `map`, `contramap`, `promap`, `first`, `second` |
-| `Const` | -- | `equals`, `value`, `concat`, `map`, `ap`, `chain` |
-| `Either` | `Left`, `Right`, `of`| `equals`, `value`, `either`, `swap`, `coalesce`, `map`, `bimap`, `ap`, `of`, `chain`, `sequence`, `traverse` |
-| `Identity` | `of` | `equals`, `value`, `map`, `ap`, `of`, `chain`, `sequence`, `traverse` |
-| `IO` | `of` | `run`, `map`, `ap`, `of`, `chain` |
-| `List` |  `empty`, `of` | `equals`, `value`, `head`, `tail`, `cons`, `concat`, `empty`, `reduce`, `filter`, `map`, `ap`, `of`, `chain`, `sequence`, `traverse` |
-| `Maybe` | `Nothing`, `Just`, `of` | `equals`, `maybe`, `either`, `option`, `coalesce`, `map`, `ap`, `of`, `chain`, `sequence`, `traverse` |
-| `Pair` | `of` | `equals`, `value`, `fst`, `snd`, `merge`, `concat`, `swap`, `map`, `bimap`, `ap`, `of`, `chain` |
-| `Reader` | `ask`, `of`| `runWith`, `map`, `ap`, `of`, `chain` |
-| `Star` | -- | `runWith`, `map`, `contramap`, `promap` |
-| `State` | `get`, `gets`, `put`, `modify` `of`| `runWith`, `execWith`, `evalWith`, `map`, `ap`, `of`, `chain` |
-| `Unit` | `empty`, `of` | `equals`, `value`, `concat`, `empty`, `map`, `ap`, `of`, `chain` |
-| `Writer`| `of` | `equals`, `value`, `log`, `read`, `map`, `ap`, `of`, `chain` |
+| `Arrow` | `empty` | `concat`, `contramap`, `empty`, `first`, `map`, `promap`, `runWith`, `second`, `value` |
+| `Const` | -- | `ap`, `chain`, `concat`, `equals`, `map`, `value` |
+| `Either` | `Left`, `Right`, `of`| `ap`, `bimap`, `chain`, `coalesce`, `either`, `equals`, `map`, `of`, `sequence`, `swap`, `traverse`, `value` |
+| `Identity` | `of` | `ap`, `chain`, `equals`, `map`, `of`, `sequence`, `traverse`, `value` |
+| `IO` | `of` | `ap`, `chain`, `map`, `of`, `run` |
+| `List` |  `empty`, `of` | `ap`, `chain`, `concat`, `cons`, `empty`, `equals`, `filter`, `head`, `map`, `of`, `reduce`, `sequence`, `tail`, `traverse`, `value` |
+| `Maybe` | `Nothing`, `Just`, `of` | `ap`, `chain`, `coalesce`, `equals`, `either`, `map`, `maybe`, `of`, `option`, `sequence`, `traverse` |
+| `Pair` | `of` | `ap`, `bimap`, `chain`, `concat`, `equals`, `fst`, `map`, `merge`, `of`, `snd`, `swap`, `value` |
+| `Pred`[*] | `empty` | `concat`, `contramap`, `empty`, `runWith`, `value` |
+| `Reader` | `ask`, `of`| `ap`, `chain`, `map`, `of`, `runWith` |
+| `Star` | -- | `contramap`, `map`, `promap`, `runWith` |
+| `State` | `get`, `gets`, `modify` `of`, `put`| `ap`, `chain`, `evalWith`, `execWith`, `map`, `of`, `runWith` |
+| `Unit` | `empty`, `of` | `ap`, `chain`, `concat`, `empty`, `equals`, `map`, `of`, `value` |
+| `Writer`| `of` | `ap`, `chain`, `equals`, `log`, `map`, `of`, `read`, `value` |
+
+[*] based on [this article](https://medium.com/@drboolean/monoidal-contravariant-functors-are-actually-useful-1032211045c4#.polugsx2a)
 
 ### Monoids
 Each `Monoid` provides a means to represent a binary operation and is usually locked down to a specific type. These are great when you need to combine a list of values down to one value. In this library, any ADT that provides both an `empty` and `concat` function can be used as a `Monoid`. There are a few of the `Crocks` that are also monoidial, so be on the look out for those as well. All `Monoids` work with the point-free functions `mconcat`, `mreduce`, `mconcatMap` and `mreduceMap`.
@@ -229,9 +232,9 @@ These functions provide a very clean way to build out very simple functions and 
 | `bimap` | `Either`, `Pair` |
 | `chain` | `Const`, `Either`, `Identity`, `IO`, `List`, `Maybe`, `Pair`, `Reader`, `State`, `Unit`, `Writer` |
 | `coalesce` | `Maybe`, `Either` |
-| `concat` | `Array`, `String`, `Arrow`, `Const`, `List`, `Pair`, `Unit`, `All`, `Any`, `Assign`, `Max`, `Min`, `Prod`, `Sum` |
+| `concat` | `All`, `Any`, `Array`, `Arrow`, `Assign`, `Const`, `List`, `Max`, `Min`, `Pair`, `Pred`, `Prod`, `String`, `Sum`, `Unit` |
 | `cons` | `Array`, `List` |
-| `contramap` | `Arrow`, `Star` |
+| `contramap` | `Arrow`, `Pred`, `Star` |
 | `either` | `Either`, `Maybe` |
 | `evalWith` | `State` |
 | `execWith` | `State` |
@@ -240,7 +243,7 @@ These functions provide a very clean way to build out very simple functions and 
 | `fst` | `Pair` |
 | `head` | `Array, List` |
 | `log` | `Writer` |
-| `map` | `Array`, `Function`, `Arrow`, `Const`, `Either`, `Identity`, `IO`, `List`, `Maybe`, `Pair`, `Reader`, `Star`, `State`, `Unit`, `Writer` |
+| `map` | `Array`, `Arrow`, `Const`, `Either`, `Function`, `Identity`, `IO`, `List`, `Maybe`, `Pair`, `Reader`, `Star`, `State`, `Unit`, `Writer` |
 | `maybe` | `Maybe` |
 | `merge` | `Pair` |
 | `option` | `Either`, `Maybe` |
@@ -248,11 +251,11 @@ These functions provide a very clean way to build out very simple functions and 
 | `read` | `Writer` |
 | `reduce` | `Array`, `List` |
 | `run` | `IO` |
-| `runWith` | `Arrow`, `Reader`, `Star`, `State` |
+| `runWith` | `Arrow`, `Pred`, `Reader`, `Star`, `State` |
 | `second` | `Arrow` |
 | `sequence` | `Either`, `Identity`, `List`, `Maybe` |
 | `snd` | `Pair` |
 | `swap` | `Pair` |
-| `tail` | `Array`, `String`, `List` |
+| `tail` | `Array`, `List`, `String` |
 | `traverse` | `Either`, `Identity`, `List`, `Maybe` |
-| `value` | `Arrow`, `Const`, `Either`, `Identity`, `List`, `Pair`, `Unit`, `Writer` |
+| `value` | `Arrow`, `Const`, `Either`, `Identity`, `List`, `Pair`, `Pred`, `Unit`, `Writer` |

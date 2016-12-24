@@ -85,23 +85,6 @@ test('Arrow runWith', t => {
   t.end()
 })
 
-test('Arrow concat properties (Semigroup)', t => {
-  const a = Arrow(x => x + 1)
-  const b = Arrow(x => x * 10)
-  const c = Arrow(x => x - 5)
-
-  t.ok(isFunction(Arrow(identity).concat), 'is a function')
-
-  const left = a.concat(b).concat(c).runWith
-  const right = a.concat(b.concat(c)).runWith
-  const x = 20
-
-  t.same(left(x), right(x), 'associativity')
-  t.same(a.concat(b).type(), a.type(), 'returns Semigroup of same type')
-
-  t.end()
-})
-
 test('Arrow concat functionality', t => {
   const f = x => x + 1
   const g = x => x * 0
@@ -133,6 +116,34 @@ test('Arrow concat functionality', t => {
   t.end()
 })
 
+test('Arrow concat properties (Semigroup)', t => {
+  const a = Arrow(x => x + 1)
+  const b = Arrow(x => x * 10)
+  const c = Arrow(x => x - 5)
+
+  t.ok(isFunction(Arrow(identity).concat), 'is a function')
+
+  const left = a.concat(b).concat(c).runWith
+  const right = a.concat(b.concat(c)).runWith
+  const x = 20
+
+  t.same(left(x), right(x), 'associativity')
+  t.same(a.concat(b).type(), a.type(), 'returns Semigroup of same type')
+
+  t.end()
+})
+
+test('Arrow empty functionality', t => {
+  const m = Arrow(noop).empty()
+
+  t.equal(m.empty, Arrow.empty, 'static and instance versions are the same')
+
+  t.equal(m.type(), 'Arrow', 'provides an Arrow')
+  t.same(m.runWith(13), 13, 'wraps an identity function')
+
+  t.end()
+})
+
 test('Arrow empty properties (Monoid)', t => {
   const m = Arrow(x => x + 45)
   const x = 32
@@ -145,17 +156,6 @@ test('Arrow empty properties (Monoid)', t => {
 
   t.same(right(x), m.runWith(x), 'right identity')
   t.same(left(x), m.runWith(x), 'left identity')
-
-  t.end()
-})
-
-test('Arrow empty functionality', t => {
-  const m = Arrow(noop).empty()
-
-  t.equal(m.empty, Arrow.empty, 'static and instance versions are the same')
-
-  t.equal(m.type(), 'Arrow', 'provides an Arrow')
-  t.same(m.runWith(13), 13, 'wraps an identity function')
 
   t.end()
 })

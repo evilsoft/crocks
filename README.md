@@ -130,7 +130,7 @@ While the `composeB` can be used to create a composition of two functions, there
 #### `curry : ((a, b, c) -> d) -> a -> b -> c -> d`
 Pass this function a function and it will return you a function that can be called in any form that you require until all arguments have been provided. For example if you pass a function: `f : (a, b, c) -> d` you get back a function that can be called in any combination, such as: `f(x, y, z)`, `f(x)(y)(z)`, `f(x, y)(z)`, or even `f(x)(y, z)`. This is great for doing partial application on functions for maximum reusability.
 
-#### `ifElse : (a -> Boolean) -> (a -> b) -> (a -> c) -> a -> b | c`
+#### `ifElse : ((a -> Boolean) | Pred) -> (a -> b) -> (a -> c) -> a -> b | c`
 Whenever you need to modify a value based some condition and want a functional way to do it without some imperative `if` statement, then reach for `ifElse`. This function take a predicate (some function that returns a Boolean) and two functions. The first is what is executed when the predicate is true, the second on a false condition. This will return a function ready to take a value to run through the predicate. After the value is evaluated, it will be ran through it's corresponding function, returning the result as the final result. This function comes in really handy when creating lifting functions for Sum Types (like `Either` or `Maybe`).
 
 #### `inspect : a -> String`
@@ -151,14 +151,14 @@ There comes a time where the values you have in a `List` or an `Array` are not i
 #### `pipe : ((a -> b), (b -> c), ..., (y -> z)) -> a -> z`
 If you find yourself not able to come to terms with doing the typical right-to-left, then `crocks` provides a means to accommodate you. This function does the same thing as `compose`, the only difference is it allows you define your flows in a left-to-right manner.
 
-#### `safe : (a -> Boolean) -> a -> Maybe a`
+#### `safe : ((a -> Boolean) | Pred) -> a -> Maybe a`
 When using a `Maybe`, it is a common practice to lift into a `Just` or a `Nothing` depending on a condition on the value to be lifted.  It is so common that it warrants a function, and that function is called `safe`. Provide a predicate (a function that returns a Boolean) and a value to be lifted. The value will be evaluated against the predicate, and will lift it into a `Just` if true and a `Nothing` if false.
 
 
-#### `unless : (a -> Boolean) -> (a -> b) -> a -> a | b`
+#### `unless : ((a -> Boolean) | Pred) -> (a -> b) -> a -> a | b`
 There may come a time when you need to adjust a value when a condition is false, that is where `unless` can come into play. Just provide a predicate function (a function that returns a Boolean) and a function to apply your desired modification. This will get you back a function that when you pass it a value, it will evaluate it and if false, will run your value through the provided function. Either the original or modified value will be returned depending on the result of the predicate. Check out `when` for a negated version of this function.
 
-#### `when : (a -> Boolean) -> (a -> b) -> a -> b | a`
+#### `when : ((a -> Boolean) | Pred) -> (a -> b) -> a -> b | a`
 There may come a time when you need to adjust a value when a condition is true, that is where `when` can come into play. Just provide a predicate function (a function that returns a Boolean) and a function to apply your desired modification. This will get you back a function that when you pass it a value, it will evaluate it and if true, will run your value through the provided function. Either the original or modified value will be returned depending on the result of the predicate. Check out `unless` for a negated version of this function.
 
 #### Point-free Functions
@@ -203,7 +203,7 @@ These functions provide a very clean way to build out very simple functions and 
 | `either` | `(a -> c) -> (b -> c) -> m a b -> c` |
 | `evalWith` | `a -> m -> b` |
 | `execWith` | `a -> m -> b` |
-| `filter` | `(a -> Boolean) -> m a -> m a` |
+| `filter` | `((a -> Boolean) | Pred) -> m a -> m a` |
 | `first` | `(a -> b) -> m (a, c) -> m (b, c)` |
 | `fst` | `m a b -> a` |
 | `head` | `m a -> Maybe a` |

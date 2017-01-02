@@ -14,6 +14,7 @@ const isFunction = require('../internal/isFunction')
 
 const MockCrock = require('../test/MockCrock')
 const Maybe     = require('./Maybe')
+const Pred      = require('./Pred')
 
 const List = require('./List')
 
@@ -258,6 +259,7 @@ test('List filter errors', t => {
   t.throws(filter({}), TypeError, 'throws with an object')
 
   t.doesNotThrow(filter(noop), 'allows a function')
+  t.doesNotThrow(filter(Pred(noop)), 'allows a Pred')
 
   t.end()
 })
@@ -268,8 +270,14 @@ test('List filter functionality', t => {
   const bigNum = x => typeof x === 'number' && x > 10
   const justStrings = x => typeof x === 'string'
 
-  t.same(m.filter(bigNum).value(), [ 34 ], 'filters for bigNums')
-  t.same(m.filter(justStrings).value(), [ 'string' ], 'filters for strings')
+  const bigNumPred = Pred(bigNum)
+  const justStringsPred = Pred(justStrings)
+
+  t.same(m.filter(bigNum).value(), [ 34 ], 'filters for bigNums with function')
+  t.same(m.filter(justStrings).value(), [ 'string' ], 'filters for strings with function')
+
+  t.same(m.filter(bigNumPred).value(), [ 34 ], 'filters for bigNums with Pred')
+  t.same(m.filter(justStringsPred).value(), [ 'string' ], 'filters for strings with Pred')
 
   t.end()
 })

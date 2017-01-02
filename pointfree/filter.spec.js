@@ -8,6 +8,8 @@ const isFunction = require('../internal/isFunction')
 
 const identity = require('../combinators/identity')
 
+const Pred = require('../crocks/Pred')
+
 const filter = require('./filter')
 
 test('filter pointfree', t => {
@@ -39,6 +41,9 @@ test('filter pointfree', t => {
 
   t.doesNotThrow(m(noop, f), 'allows a function and Foldable container')
   t.doesNotThrow(m(noop, []), 'allows a function and an array (also Foldable)')
+
+  t.doesNotThrow(m(Pred(noop), f), 'allows a Pred and Foldable container')
+  t.doesNotThrow(m(Pred(noop), []), 'allows a Pred and an array (also Foldable)')
 
   t.end()
 })

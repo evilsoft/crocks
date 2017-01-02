@@ -6,6 +6,8 @@ const noop = helpers.noop
 const bindFunc = helpers.bindFunc
 const isFunction = require('../internal/isFunction')
 
+const Pred = require('../crocks/Pred')
+
 const constant = require('../combinators/constant')
 
 const when = require('./when')
@@ -37,6 +39,12 @@ test('when', t => {
   t.throws(f(noop, {}), 'throws with an object in second argument')
   t.throws(f(noop, []), 'throws with an array in second argument')
 
+  const func = x => !!x
+  const pred = Pred(func)
+
+  t.doesNotThrow(f(func, noop), 'allows a predicate function in first argument')
+  t.doesNotThrow(f(pred, noop), 'allows a Pred in first argument')
+
   const g = when(noop, noop)
   const h = when(constant(true), x => x * 2, 11)
 
@@ -46,9 +54,28 @@ test('when', t => {
   t.end()
 })
 
-test('when functionality', t => {
+test('when predicate function', t => {
   const func = sinon.spy(constant('called'))
   const pred = x => !!x
+
+  const f = when(pred, func)
+
+  const tResult = f(true)
+
+  t.ok(func.calledOnce, 'function called when true')
+  t.ok(func.returned(tResult), 'returns the result of the function when true')
+
+  const fResult = f(false)
+
+  t.ok(func.calledOnce, 'function not called when false')
+  t.equal(fResult, false, 'just returns value when false')
+
+  t.end()
+})
+
+test('when Pred', t => {
+  const func = sinon.spy(constant('called'))
+  const pred = Pred(x => !!x)
 
   const f = when(pred, func)
 

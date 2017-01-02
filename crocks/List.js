@@ -121,10 +121,14 @@ function List(xs) {
     return xs.reduce(fn, i)
   }
 
-  function filter(fn) {
-    if(!isFunction(fn)) {
-      throw new TypeError('List.filter: Function required')
+  function filter(pred) {
+    if(!(isFunction(pred) || isType('Pred', pred))) {
+      throw new TypeError('List.filter: Pred or predicate function required')
     }
+
+    const fn = isFunction(pred)
+      ? pred
+      : pred.runWith
 
     return reduce(
       (x, y) => fn(y) ? x.concat(x.of(y)) : x,

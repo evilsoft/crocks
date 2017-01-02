@@ -3,7 +3,7 @@
 
 const isType = require('../internal/isType')
 const isNumber = require('../internal/isNumber')
-const isUndefOrNull = require('../internal/isUndefOrNull')
+const isNil = require('../internal/isNil')
 
 const _inspect = require('../funcs/inspect')
 
@@ -16,7 +16,7 @@ const _type =
   constant('Max')
 
 function Max(n) {
-  const x = isUndefOrNull(n) ? _empty().value() : n
+  const x = isNil(n) ? _empty().value() : n
 
   if(!arguments.length || !isNumber(x)) {
     throw new TypeError('Max: Numeric value required')

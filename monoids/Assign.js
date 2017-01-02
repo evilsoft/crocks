@@ -4,7 +4,7 @@
 const isType = require('../internal/isType')
 const isObject = require('../internal/isObject')
 const isFunction = require('../internal/isFunction')
-const isUndefOrNull = require('../internal/isUndefOrNull')
+const isNil = require('../internal/isNil')
 
 const _inspect = require('../funcs/inspect')
 
@@ -17,7 +17,7 @@ const _type =
   constant('Assign')
 
 function Assign(o) {
-  const x = isUndefOrNull(o) ? _empty().value() : o
+  const x = isNil(o) ? _empty().value() : o
 
   if(!arguments.length || !isObject(x)) {
     throw new TypeError('Assign: Object required')

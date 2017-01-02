@@ -154,6 +154,8 @@ If you find yourself not able to come to terms with doing the typical right-to-l
 #### `safe : (a -> Boolean) -> a -> Maybe a`
 When using a `Maybe`, it is a common practice to lift into a `Just` or a `Nothing` depending on a condition on the value to be lifted.  It is so common that it warrants a function, and that function is called `safe`. Provide a predicate (a function that returns a Boolean) and a value to be lifted. The value will be evaluated against the predicate, and will lift it into a `Just` if true and a `Nothing` if false.
 
+#### `tryCatch : (a -> b) -> a -> Either e b`
+Typical try-catch blocks are very imperative in their usage. This `tryCatch` function provides a means of capturing that imperative nature in a simple declarative style. Pass it a function that could fail and it will return you another function wrapping the first function. When called the new function will either return the result in an `Either.Right` if everything was good, or an error wrapped in an `Either.Left` if it fails.
 
 #### `unless : (a -> Boolean) -> (a -> b) -> a -> a | b`
 There may come a time when you need to adjust a value when a condition is false, that is where `unless` can come into play. Just provide a predicate function (a function that returns a Boolean) and a function to apply your desired modification. This will get you back a function that when you pass it a value, it will evaluate it and if false, will run your value through the provided function. Either the original or modified value will be returned depending on the result of the predicate. Check out `when` for a negated version of this function.

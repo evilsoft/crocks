@@ -42,6 +42,7 @@ const helpers = {
   mreduceMap: require('./funcs/mreduceMap'),
   pipe: require('./funcs/pipe'),
   safe: require('./funcs/safe'),
+  tryCatch: require('./funcs/tryCatch'),
   unless: require('./funcs/unless'),
   when: require('./funcs/when')
 }

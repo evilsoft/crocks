@@ -3,13 +3,19 @@
 
 const curry = require('../funcs/curry')
 const isFunction = require('../internal/isFunction')
+const isType = require('../internal/isType')
 
 // filter :: Foldable f => (a -> Boolean) -> f a -> f a
-function filter(fn, m) {
-  if(!isFunction(fn)) {
-    throw new TypeError('filter: Function required for first argument')
+function filter(pred, m) {
+  if(!(isFunction(pred) || isType('Pred', pred))) {
+    throw new TypeError('filter: Pred or predicate function required for first argument')
   }
   else if(m && isFunction(m.filter)) {
+
+    const fn = isFunction(pred)
+      ? pred
+      : pred.runWith
+
     return m.filter(fn)
   }
   else {

@@ -2,18 +2,23 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const isFunction = require('../internal/isFunction')
+const isType = require('../internal/isType')
 const curry = require('./curry')
 
 function when(pred, f) {
-  if(!isFunction(pred)) {
-    throw new TypeError('when: Predicate function required for first argument')
+  if(!(isFunction(pred) || isType('Pred', pred))) {
+    throw new TypeError('when: Pred or predicate function required for first argument')
   }
 
   if(!isFunction(f)) {
     throw new TypeError('when: Function required for second argument')
   }
 
-  return x => !!pred(x) ? f(x) : x
+  const func = isFunction(pred)
+    ? pred
+    : pred.runWith
+
+  return x => !!func(x) ? f(x) : x
 }
 
 module.exports = curry(when)

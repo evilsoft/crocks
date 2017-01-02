@@ -9,6 +9,8 @@ const isFunction = require('../internal/isFunction')
 const identity = require('../combinators/identity')
 const constant = require('../combinators/constant')
 
+const Pred = require('../crocks/Pred')
+
 const ifElse = require('./ifElse')
 
 test('ifElse', t => {
@@ -49,6 +51,12 @@ test('ifElse', t => {
   t.throws(f(noop, noop, {}), 'throws with an object in third argument')
   t.throws(f(noop, noop, []), 'throws with an array in third argument')
 
+  const func = x => !!x
+  const pred = Pred(func)
+
+  t.doesNotThrow(f(func, noop, noop), 'allows a predicate function in first argument')
+  t.doesNotThrow(f(pred, noop, noop), 'allows a Pred in first argument')
+
   const g = ifElse(noop, noop, noop)
   const h = ifElse(constant(true), identity, noop, 11)
 
@@ -58,10 +66,31 @@ test('ifElse', t => {
   t.end()
 })
 
-test('ifElse functionality', t => {
+test('ifElse predicate function', t => {
   const tPath = sinon.spy(identity)
   const fPath = sinon.spy(constant(10))
   const pred = x => x >= 10
+
+  const f = ifElse(pred, tPath, fPath)
+
+  const tResult = f(11)
+
+  t.ok(tPath.calledOnce, 'true function called when true')
+  t.ok(tPath.returned(tResult), 'returns the result of the true function when true')
+
+  const fResult = f(5)
+
+  t.ok(fPath.calledOnce, 'false function called when false')
+  t.ok(tPath.calledOnce, 'true function not called when false')
+  t.ok(fPath.returned(fResult), 'returns the result of the false function when false')
+
+  t.end()
+})
+
+test('ifElse Pred', t => {
+  const tPath = sinon.spy(identity)
+  const fPath = sinon.spy(constant(10))
+  const pred = Pred(x => x >= 10)
 
   const f = ifElse(pred, tPath, fPath)
 

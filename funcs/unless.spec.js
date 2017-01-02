@@ -8,6 +8,8 @@ const isFunction = require('../internal/isFunction')
 
 const constant = require('../combinators/constant')
 
+const Pred = require('../crocks/Pred')
+
 const unless = require('./unless')
 
 test('unless', t => {
@@ -37,6 +39,12 @@ test('unless', t => {
   t.throws(f(noop, {}), 'throws with an object in second argument')
   t.throws(f(noop, []), 'throws with an array in second argument')
 
+  const func = x => !!x
+  const pred = Pred(func)
+
+  t.doesNotThrow(f(func, noop), 'allows a predicate function in first argument')
+  t.doesNotThrow(f(pred, noop), 'allows a Pred in first argument')
+
   const g = unless(noop, noop)
   const h = unless(constant(false), x => x * 2, 11)
 
@@ -46,9 +54,28 @@ test('unless', t => {
   t.end()
 })
 
-test('unless functionality', t => {
+test('unless predicate function', t => {
   const func = sinon.spy(constant('called'))
   const pred = x => !!x
+
+  const f = unless(pred, func)
+
+  const fResult = f(false)
+
+  t.ok(func.calledOnce, 'function called when false')
+  t.ok(func.returned(fResult), 'returns the result of the function when false')
+
+  const tResult = f(true)
+
+  t.ok(func.calledOnce, 'function not called when true')
+  t.equal(tResult, true, 'just returns value when true')
+
+  t.end()
+})
+
+test('unless Pred', t => {
+  const func = sinon.spy(constant('called'))
+  const pred = Pred(x => !!x)
 
   const f = unless(pred, func)
 

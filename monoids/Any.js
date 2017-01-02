@@ -3,7 +3,7 @@
 
 const isType = require('../internal/isType')
 const isFunction = require('../internal/isFunction')
-const isUndefOrNull = require('../internal/isUndefOrNull')
+const isNil = require('../internal/isNil')
 
 const _inspect = require('../funcs/inspect')
 
@@ -16,7 +16,7 @@ const _empty =
   () => Any(false)
 
 function Any(b) {
-  const x = isUndefOrNull(b) ? _empty().value() : b
+  const x = isNil(b) ? _empty().value() : b
 
   if(!arguments.length || isFunction(x)) {
     throw new TypeError('Any: Non-function value required')

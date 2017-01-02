@@ -4,7 +4,7 @@
 const isType = require('../internal/isType')
 const isNumber = require('../internal/isNumber')
 const isFunction = require('../internal/isFunction')
-const isUndefOrNull = require('../internal/isUndefOrNull')
+const isNil = require('../internal/isNil')
 
 const _inspect = require('../funcs/inspect')
 
@@ -17,7 +17,7 @@ const _type =
   constant('Sum')
 
 function Sum(n) {
-  const x = isUndefOrNull(n) ? _empty().value() : n
+  const x = isNil(n) ? _empty().value() : n
 
   if(!arguments.length || !isNumber(x)) {
     throw new TypeError('Sum: Numeric value required')

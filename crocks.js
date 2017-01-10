@@ -32,6 +32,7 @@ const helpers = {
   branch: require('./funcs/branch'),
   compose: require('./funcs/compose'),
   curry: require('./funcs/curry'),
+  curryN: require('./funcs/curryN'),
   ifElse: require('./funcs/ifElse'),
   inspect: require('./funcs/inspect'),
   liftA2: require('./funcs/liftA2'),

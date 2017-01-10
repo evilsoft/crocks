@@ -4,11 +4,11 @@
 const isFunction = require('../internal/isFunction')
 const isType = require('../internal/isType')
 
-const _inspect = require('../funcs/inspect')
+const _inspect = require('../helpers/inspect')
+const compose = require('../helpers/compose')
 
 const identity = require('../combinators/identity')
 const constant = require('../combinators/constant')
-const compose = require('../funcs/compose')
 
 const Pair = require('./Pair')
 

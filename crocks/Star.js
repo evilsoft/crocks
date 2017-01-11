@@ -4,7 +4,7 @@
 const isFunction = require('../internal/isFunction')
 const isFunctor = require('../internal/isFunctor')
 
-const _inspect = require('../helpers/inspect')
+const _inspect = require('../internal/inspect')
 
 const constant = require('../combinators/constant')
 const compose = require('../helpers/compose')

@@ -4,10 +4,10 @@
 const isFunction = require('../internal/isFunction')
 const isFunctor = require('../internal/isFunctor')
 
-const _inspect = require('../funcs/inspect')
+const _inspect = require('../helpers/inspect')
 
 const constant = require('../combinators/constant')
-const compose = require('../funcs/compose')
+const compose = require('../helpers/compose')
 
 const _type =
   constant('Star')

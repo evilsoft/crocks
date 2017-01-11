@@ -5,7 +5,7 @@ const isType = require('../internal/isType')
 const isNumber = require('../internal/isNumber')
 const isNil = require('../internal/isNil')
 
-const _inspect = require('../funcs/inspect')
+const _inspect = require('../helpers/inspect')
 
 const constant = require('../combinators/constant')
 

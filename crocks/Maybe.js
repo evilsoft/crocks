@@ -11,7 +11,7 @@ const constant = require('../combinators/constant')
 const identity = require('../combinators/identity')
 const composeB = require('../combinators/composeB')
 
-const _inspect = require('../funcs/inspect')
+const _inspect = require('../helpers/inspect')
 
 const _maybe = defineUnion({ Nothing: [], Just: [ 'a' ] })
 

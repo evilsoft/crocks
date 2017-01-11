@@ -1,6 +1,6 @@
 const identity = require('../combinators/identity')
 const constant = require('../combinators/constant')
-const _inspect = require('../funcs/inspect')
+const _inspect = require('../helpers/inspect')
 
 const _type = constant('Last')
 

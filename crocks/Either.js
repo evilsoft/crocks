@@ -11,7 +11,7 @@ const constant = require('../combinators/constant')
 const composeB = require('../combinators/composeB')
 const identity = require('../combinators/identity')
 
-const _inspect = require('../funcs/inspect')
+const _inspect = require('../helpers/inspect')
 
 const _either = defineUnion({ Left: [ 'a' ], Right: [ 'b' ] })
 

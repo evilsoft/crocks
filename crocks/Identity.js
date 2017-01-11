@@ -5,7 +5,7 @@ const isFunction = require('../internal/isFunction')
 const isType = require('../internal/isType')
 const isApplicative = require('../internal/isApplicative')
 
-const _inspect = require('../funcs/inspect')
+const _inspect = require('../helpers/inspect')
 
 const constant = require('../combinators/constant')
 const composeB = require('../combinators/composeB')

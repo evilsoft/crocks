@@ -8,7 +8,7 @@ const isApplicative = require('../internal/isApplicative')
 
 const constant = require('../combinators/constant')
 
-const _inspect = require('../funcs/inspect')
+const _inspect = require('../helpers/inspect')
 const _concat = require('../pointfree/concat')
 
 const Maybe = require('./Maybe')

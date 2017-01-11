@@ -1,7 +1,7 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const curry = require('../funcs/curry')
+const curry = require('../helpers/curry')
 const constant = require('../combinators/constant')
 const argsArray = require('./argsArray')
 

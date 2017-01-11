@@ -29,23 +29,23 @@ const monoids = {
 }
 
 const helpers = {
-  branch: require('./funcs/branch'),
-  compose: require('./funcs/compose'),
-  curry: require('./funcs/curry'),
-  curryN: require('./funcs/curryN'),
-  ifElse: require('./funcs/ifElse'),
-  inspect: require('./funcs/inspect'),
-  liftA2: require('./funcs/liftA2'),
-  liftA3: require('./funcs/liftA3'),
-  mconcat: require('./funcs/mconcat'),
-  mconcatMap: require('./funcs/mconcatMap'),
-  mreduce: require('./funcs/mreduce'),
-  mreduceMap: require('./funcs/mreduceMap'),
-  pipe: require('./funcs/pipe'),
-  safe: require('./funcs/safe'),
-  tryCatch: require('./funcs/tryCatch'),
-  unless: require('./funcs/unless'),
-  when: require('./funcs/when')
+  branch: require('./helpers/branch'),
+  compose: require('./helpers/compose'),
+  curry: require('./helpers/curry'),
+  curryN: require('./helpers/curryN'),
+  ifElse: require('./helpers/ifElse'),
+  inspect: require('./helpers/inspect'),
+  liftA2: require('./helpers/liftA2'),
+  liftA3: require('./helpers/liftA3'),
+  mconcat: require('./helpers/mconcat'),
+  mconcatMap: require('./helpers/mconcatMap'),
+  mreduce: require('./helpers/mreduce'),
+  mreduceMap: require('./helpers/mreduceMap'),
+  pipe: require('./helpers/pipe'),
+  safe: require('./helpers/safe'),
+  tryCatch: require('./helpers/tryCatch'),
+  unless: require('./helpers/unless'),
+  when: require('./helpers/when')
 }
 
 const pointFree = {

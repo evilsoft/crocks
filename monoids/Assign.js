@@ -6,7 +6,7 @@ const isObject = require('../internal/isObject')
 const isFunction = require('../internal/isFunction')
 const isNil = require('../internal/isNil')
 
-const _inspect = require('../funcs/inspect')
+const _inspect = require('../helpers/inspect')
 
 const constant = require('../combinators/constant')
 

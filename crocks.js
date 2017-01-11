@@ -34,7 +34,6 @@ const helpers = {
   curry: require('./helpers/curry'),
   curryN: require('./helpers/curryN'),
   ifElse: require('./helpers/ifElse'),
-  inspect: require('./helpers/inspect'),
   liftA2: require('./helpers/liftA2'),
   liftA3: require('./helpers/liftA3'),
   mconcat: require('./helpers/mconcat'),

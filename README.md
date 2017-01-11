@@ -57,7 +57,7 @@ There are (5) classifications of "things" included in this library:
 * Point-free Functions (`crocks/pointfree`): Wanna use these ADTs in a way that you never have to reference the actual data being worked on? Well here is where you will find all of these functions to do that. For every algebra available on both the `Crocks` and `Monoids` there is a function here.
 
 ### Crocks
-The `Crocks` are the heart and soul of this library. This is where you will find all your favorite ADT's you have grown to :heart:. They include gems such as: `Maybe`, `Either` and `IO`, to name a few. The are usually just a simple constructor that takes either a function or value (depending on the type) and will return you a "container" that wraps whatever you passed it. Each container provides a variety of functions that act as the operations you can do on the contained value. There are many types that share the same function names, but what they do from type to type may vary. Every `Crock` provides `type` function on the Constructor and both `inspect` and `type` functions on their Instances.
+The `Crocks` are the heart and soul of this library. This is where you will find all your favorite ADT's you have grown to :heart:. They include gems such as: `Maybe`, `Either` and `IO`, to name a few. The are usually just a simple constructor that takes either a function or value (depending on the type) and will return you a "container" that wraps whatever you passed it. Each container provides a variety of functions that act as the operations you can do on the contained value. There are many types that share the same function names, but what they do from type to type may vary.  Every Crock provides type function on the Constructor and both inspect and type functions on their Instances.
 
 All `Crocks` are Constructor functions of the given type, with `Writer` being an exception. The `Writer` function takes a `Monoid` that will represent the `log`. Once you provide the `Monoid`, the function will return the `Writer` Constructor for your `Writer` using that specific `Monoid`.
 
@@ -83,7 +83,7 @@ All `Crocks` are Constructor functions of the given type, with `Writer` being an
 ### Monoids
 Each `Monoid` provides a means to represent a binary operation and is usually locked down to a specific type. These are great when you need to combine a list of values down to one value. In this library, any ADT that provides both an `empty` and `concat` function can be used as a `Monoid`. There are a few of the `Crocks` that are also monoidial, so be on the look out for those as well. All `Monoids` work with the point-free functions `mconcat`, `mreduce`, `mconcatMap` and `mreduceMap`.
 
-All `Monoids` provide `empty` and `type` function on their Constructors as well as the following Instance Functions: `inspect`, `type`, `value`, `empty` and `concat`.
+All `Monoids` provide `empty` and `type` function on their Constructors as well as the following Instance Functions: inspect, `type`, `value`, `empty` and `concat`.
 
 
 | Monoid | Type | Operation | Empty (Identity) |
@@ -135,9 +135,6 @@ When dealing with variable argument functions, there are times when you may want
 
 #### `ifElse : ((a -> Boolean) | Pred) -> (a -> b) -> (a -> c) -> a -> b | c`
 Whenever you need to modify a value based some condition and want a functional way to do it without some imperative `if` statement, then reach for `ifElse`. This function take a predicate (some function that returns a Boolean) and two functions. The first is what is executed when the predicate is true, the second on a false condition. This will return a function ready to take a value to run through the predicate. After the value is evaluated, it will be ran through it's corresponding function, returning the result as the final result. This function comes in really handy when creating lifting functions for Sum Types (like `Either` or `Maybe`).
-
-#### `inspect : a -> String`
-The containers are not very easy to peek into as a result of them locking down their wrapped values. `inspect` is just a simple function that takes some data and returns a nice formatted `String` that will provide the type of container and the wrapped value (when possible).
 
 #### `liftA2 : Applicative m => (a -> b -> c) -> m a -> m b -> m c`
 #### `liftA3 : Applicative m => (a -> b -> c -> d) -> m a -> m b -> m c -> m d`

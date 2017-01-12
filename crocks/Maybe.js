@@ -5,13 +5,12 @@ const isApplicative = require('../internal/isApplicative')
 const isFunction = require('../internal/isFunction')
 const isType = require('../internal/isType')
 
+const _inspect = require('../internal/inspect')
 const defineUnion = require('../internal/defineUnion')
 
+const composeB = require('../combinators/composeB')
 const constant = require('../combinators/constant')
 const identity = require('../combinators/identity')
-const composeB = require('../combinators/composeB')
-
-const _inspect = require('../helpers/inspect')
 
 const _maybe = defineUnion({ Nothing: [], Just: [ 'a' ] })
 

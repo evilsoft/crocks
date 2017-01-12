@@ -3,7 +3,7 @@ const helpers = require('../test/helpers')
 
 const noop = helpers.noop
 const constant = require('../combinators/constant')
-const isFunction = require('../internal/isFunction')
+const isFunction = require('./isFunction')
 
 const inspect = require('./inspect')
 

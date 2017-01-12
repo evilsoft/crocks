@@ -4,7 +4,7 @@
 const isFunction = require('../internal/isFunction')
 const isType = require('../internal/isType')
 
-const _inspect = require('../helpers/inspect')
+const _inspect = require('../internal/inspect')
 
 const constant = require('../combinators/constant')
 

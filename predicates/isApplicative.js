@@ -2,11 +2,12 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const isFunction = require('./isFunction')
+const isApply = require('./isApply')
 
+// isApplicative : a -> Boolean
 function isApplicative(m) {
   return !!m
-    && isFunction(m.map)
-    && isFunction(m.ap)
+    && isApply(m)
     && isFunction(m.of)
 }
 

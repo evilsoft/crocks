@@ -3,7 +3,8 @@ const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
 const noop = helpers.noop
-const isFunction = require('../internal/isFunction')
+
+const isFunction = require('../predicates/isFunction')
 
 const Last = require('../test/LastMonoid')
 

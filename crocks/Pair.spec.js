@@ -2,14 +2,15 @@ const test = require('tape')
 const helpers = require('../test/helpers')
 const sinon = require('sinon')
 
-const identity = require('../combinators/identity')
 const composeB = require('../combinators/composeB')
+const identity = require('../combinators/identity')
+const reverseApply = require('../combinators/reverseApply')
 
 const noop = helpers.noop
 const bindFunc = helpers.bindFunc
-const isObject = require('../internal/isObject')
-const isFunction = require('../internal/isFunction')
-const reverseApply = require('../combinators/reverseApply')
+
+const isFunction = require('../predicates/isFunction')
+const isObject = require('../predicates/isObject')
 
 const Pair = require('./Pair')
 const Unit = require('./Unit')

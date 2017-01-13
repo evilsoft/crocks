@@ -3,13 +3,14 @@ const sinon = require('sinon')
 const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
-const isFunction = require('../internal/isFunction')
-const isObject = require('../internal/isObject')
 const noop = helpers.noop
 
+const isFunction = require('../predicates/isFunction')
+const isObject = require('../predicates/isObject')
+
+const composeB = require('../combinators/composeB')
 const constant = require('../combinators/constant')
 const identity = require('../combinators/identity')
-const composeB = require('../combinators/composeB')
 
 const Pred = require('./Pred')
 

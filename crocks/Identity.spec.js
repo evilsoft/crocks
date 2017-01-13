@@ -2,8 +2,9 @@ const test = require('tape')
 const sinon = require('sinon')
 const helpers = require('../test/helpers')
 
-const isObject = require('../internal/isObject')
-const isFunction = require('../internal/isFunction')
+const isObject = require('../predicates/isObject')
+const isFunction = require('../predicates/isFunction')
+
 const bindFunc = helpers.bindFunc
 const noop = helpers.noop
 

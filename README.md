@@ -44,7 +44,7 @@ const Maybe = require('crocks/crocks/Maybe')
 ```
 
 ## What is in this?
-There are (5) classifications of "things" included in this library:
+There are (6) classifications of "things" included in this library:
 
 * Crocks (`crocks/crocks`): These are the ADTs that this library is centered around. They are all Functor based Data Types that provide different computational contexts for working in a more declarative, functional flow. For the most part, a majority of the other bits in `crocks` exist to server these ADTs.
 
@@ -54,6 +54,8 @@ There are (5) classifications of "things" included in this library:
 
 * Helper Functions (`crocks/helpers`): All other support functions that are either convenient versions of combinators or not even combinators at all cover this group.
 
+* Predicate Functions (`crocks/predicates`): A helpful collection of predicate functions to get you started.
+
 * Point-free Functions (`crocks/pointfree`): Wanna use these ADTs in a way that you never have to reference the actual data being worked on? Well here is where you will find all of these functions to do that. For every algebra available on both the `Crocks` and `Monoids` there is a function here.
 
 ### Crocks
@@ -62,7 +64,7 @@ The `Crocks` are the heart and soul of this library. This is where you will find
 All `Crocks` are Constructor functions of the given type, with `Writer` being an exception. The `Writer` function takes a `Monoid` that will represent the `log`. Once you provide the `Monoid`, the function will return the `Writer` Constructor for your `Writer` using that specific `Monoid`.
 
 | Crock | Constructor | Instance |
-|---|---|---|
+|---|:---|:---|
 | `Arrow` | `empty` | `concat`, `contramap`, `empty`, `first`, `map`, `promap`, `runWith`, `second`, `value` |
 | `Const` | -- | `ap`, `chain`, `concat`, `equals`, `map`, `value` |
 | `Either` | `Left`, `Right`, `of`| `ap`, `bimap`, `chain`, `coalesce`, `either`, `equals`, `map`, `of`, `sequence`, `swap`, `traverse`, `value` |
@@ -148,6 +150,9 @@ These two functions are very handy for combining an entire `List` or `Array` of 
 #### `mreduceMap : Monoid m => m -> (b -> a) -> ([ b ] | List b) -> a`
 There comes a time where the values you have in a `List` or an `Array` are not in the type that is needed for the `Monoid` you want to combine with. These two functions can be used to `map` some transforming function from a given type into the type needed for the `Monoid`. In essence, this function will run each value through the function before it lifts the value into the `Monoid`, before `concat` is applied. The difference between the two is that `mconcatMap` returns the result inside the `Monoid` used to combine them. Where `mreduceMap` returns the bare value itself.
 
+#### `not : ((a -> Boolean) | Pred) -> a -> Boolean`
+When you need to negate a predicate function or a `Pred`, but want a new predicate function that does the negation, then `not` is going to get you what you need. Using `not` will allow you to stay as declarative as possible. Just pass `not` your predicate function or `Pred` and it will give you back a predicate function ready for insertion into your flow. All predicate based functions in `crocks` take either a `Pred` or predicate function, so it should be easy to swap between the two.
+
 #### `pipe : ((a -> b), (b -> c), ..., (y -> z)) -> a -> z`
 If you find yourself not able to come to terms with doing the typical right-to-left, then `crocks` provides a means to accommodate you. This function does the same thing as `compose`, the only difference is it allows you define your flows in a left-to-right manner.
 
@@ -163,7 +168,28 @@ There may come a time when you need to adjust a value when a condition is false,
 #### `when : ((a -> Boolean) | Pred) -> (a -> b) -> a -> b | a`
 There may come a time when you need to adjust a value when a condition is true, that is where `when` can come into play. Just provide a predicate function (a function that returns a Boolean) and a function to apply your desired modification. This will get you back a function that when you pass it a value, it will evaluate it and if true, will run your value through the provided function. Either the original or modified value will be returned depending on the result of the predicate. Check out `unless` for a negated version of this function.
 
-#### Point-free Functions
+### Predicate Functions
+All functions in this group have a signature of `a -> Boolean` and are easily used with the many predicate based functions that ship with `crocks`, like `safe`, `ifElse` and `filter` to name a few. They also fit naturally with the `Pred` ADT. Below is a list of all the current predicates that are included with a description of their truth:
+
+* `isApplicative`: an ADT that provides `map`, `ap` and `of` functions
+* `isApply`: an ADT that provides `map` and `ap` functions
+* `isArray`: Array
+* `isBoolean`: Boolean
+* `isEmpty`: Empty Object, Array or String; All falsey values
+* `isFunction`: Function
+* `isFunctor`: an ADT that provides a `map` function
+* `isInteger`: Integer
+* `isMonad`: an ADT that provides `map`, `ap`, `chain` and `of` functions
+* `isMonoid`: an ADT that provides `concat` and `empty` functions
+* `isNil`: undefined or null
+* `isNumber`: Number that is not a NaN value, Infinity included
+* `isObject`: Plain Old Javascript Object (POJO)
+* `isSemigroup`: an ADT that provides a `concat` function
+* `isSetoid`: an ADT that provides an `equals` function
+* `isString`: String
+* `isTraversable`: an ADT that provides `map` and `traverse` functions
+
+### Point-free Functions
 While it can seem natural to work with all these containers in a fluent fashion, it can get cumbersome and hard to get a lot of reuse out of. A way to really get the most out of reusability in Javascript is to take what is called a point-free approach. Below is a small code same to contrast the difference between the two calling styles:
 
 ```javascript
@@ -194,7 +220,7 @@ These functions provide a very clean way to build out very simple functions and 
 
 ##### Signatures
 | Function | Signature |
-|---|---|
+|---|:---|
 | `ap` | `m a -> m (a -> b) -> m b` |
 | `bimap` | `(a -> c) -> (b -> d) -> m a b -> m c d` |
 | `chain` | `(a -> m b) -> m a -> m b` |
@@ -229,7 +255,7 @@ These functions provide a very clean way to build out very simple functions and 
 
 ##### Datatypes
 | Function | Datatypes |
-|---|---|
+|---|:---|
 | `ap` | `Const`, `Either`, `Identity`, `IO`, `List`, `Maybe`, `Pair`, `Reader`, `State`, `Unit`, `Writer` |
 | `bimap` | `Either`, `Pair` |
 | `chain` | `Const`, `Either`, `Identity`, `IO`, `List`, `Maybe`, `Pair`, `Reader`, `State`, `Unit`, `Writer` |

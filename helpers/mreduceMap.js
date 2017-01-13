@@ -2,8 +2,9 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const curry = require('./curry')
-const isMonoid = require('../internal/isMonoid')
-const isFunction = require('../internal/isFunction')
+
+const isFunction = require('../predicates/isFunction')
+const isMonoid = require('../predicates/isMonoid')
 
 const mconcatMap = require('./mconcatMap')
 

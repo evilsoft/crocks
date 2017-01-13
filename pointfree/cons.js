@@ -2,8 +2,9 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const curry = require('../helpers/curry')
-const isArray = require('../internal/isArray')
-const isFunction = require('../internal/isFunction')
+
+const isArray = require('../predicates/isArray')
+const isFunction = require('../predicates/isFunction')
 
 function cons(x, m) {
   if(isFunction(m.cons)) {

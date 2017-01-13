@@ -4,9 +4,10 @@ const helpers = require('../test/helpers')
 
 const compose = require('./compose')
 
-const noop = helpers.noop
 const bindFunc = helpers.bindFunc
-const isFunction  = require('../internal/isFunction')
+const noop = helpers.noop
+
+const isFunction  = require('../predicates/isFunction')
 
 test('compose parameters', t => {
   const c = bindFunc(compose)

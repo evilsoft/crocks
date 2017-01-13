@@ -2,11 +2,12 @@ const test = require('tape')
 const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
-const isFunction = require('../internal/isFunction')
 
-const mconcat = require('./mconcat')
+const isFunction = require('../predicates/isFunction')
 
 const Last = require('../test/LastMonoid')
+
+const mconcat = require('./mconcat')
 
 test('mconcat', t => {
   const mc = bindFunc(mconcat)

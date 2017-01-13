@@ -5,7 +5,7 @@ const isFunction = require('./isFunction')
 
 const isMonoid = require('./isMonoid')
 
-test('isMonoid internal function', t => {
+test('isMonoid predicate function', t => {
   const fake = { concat: identity, empty: identity }
 
   t.ok(isFunction(isMonoid))

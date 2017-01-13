@@ -2,9 +2,10 @@ const test    = require('tape')
 const sinon   = require('sinon')
 const helpers = require('../test/helpers')
 
-const isFunction  = require('../internal/isFunction')
 const bindFunc    = helpers.bindFunc
 const noop        = helpers.noop
+
+const isFunction  = require('../predicates/isFunction')
 
 const constant = require('../combinators/constant')
 

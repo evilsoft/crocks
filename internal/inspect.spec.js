@@ -2,8 +2,10 @@ const test = require('tape')
 const helpers = require('../test/helpers')
 
 const noop = helpers.noop
+
 const constant = require('../combinators/constant')
-const isFunction = require('./isFunction')
+
+const isFunction = require('../predicates/isFunction')
 
 const inspect = require('./inspect')
 

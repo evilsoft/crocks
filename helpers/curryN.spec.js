@@ -2,11 +2,12 @@ const test = require('tape')
 const sinon = require('sinon')
 const helpers = require('../test/helpers')
 
-const curryN = require('./curryN')
-
-const noop = helpers.noop
 const bindFunc = helpers.bindFunc
-const isFunction = require('../internal/isFunction')
+const noop = helpers.noop
+
+const isFunction = require('../predicates/isFunction')
+
+const curryN = require('./curryN')
 
 test('curryN errors', t => {
   const c = bindFunc(curryN)

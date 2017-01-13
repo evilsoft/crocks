@@ -3,9 +3,10 @@ const helpers = require('../test/helpers')
 
 const curry = require('./curry')
 
-const noop = helpers.noop
 const bindFunc = helpers.bindFunc
-const isFunction = require('../internal/isFunction')
+const noop = helpers.noop
+
+const isFunction = require('../predicates/isFunction')
 
 test('curry', t => {
   const c = bindFunc(curry)

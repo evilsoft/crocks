@@ -2,7 +2,7 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const curry = require('../helpers/curry')
-const isFunction = require('../internal/isFunction')
+const isFunction = require('../predicates/isFunction')
 
 // Substitution (Starling)
 // (a -> b -> c) -> (a -> b) -> a -> c

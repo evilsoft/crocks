@@ -5,7 +5,7 @@ const identity = require('../combinators/identity')
 
 const isFunctor = require('./isFunctor')
 
-test('isFunctor internal function', t => {
+test('isFunctor predicate function', t => {
   const fake = { map: identity }
 
   t.equal(isFunctor(undefined), false, 'returns false for undefined')

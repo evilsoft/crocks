@@ -1,11 +1,11 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isType = require('../internal/isType')
-const isFunction = require('../internal/isFunction')
-const isSemigroup = require('../internal/isSemigroup')
+const isFunction = require('../predicates/isFunction')
+const isSemigroup = require('../predicates/isSemigroup')
 
 const _inspect = require('../internal/inspect')
+const isType = require('../internal/isType')
 
 const constant = require('../combinators/constant')
 

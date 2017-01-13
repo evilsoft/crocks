@@ -1,11 +1,13 @@
 const test = require('tape')
 const helpers = require('../test/helpers')
 
-const noop = helpers.noop
 const bindFunc = helpers.bindFunc
-const isFunction = require('../internal/isFunction')
+const noop = helpers.noop
+
+const isFunction = require('../predicates/isFunction')
 
 const either = require('../pointfree/either')
+
 const constant = require('../combinators/constant')
 
 const tryCatch = require('./tryCatch')

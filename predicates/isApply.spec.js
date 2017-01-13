@@ -5,7 +5,7 @@ const identity = require('../combinators/identity')
 
 const isApply = require('./isApply')
 
-test('isApply internal function', t => {
+test('isApply predicate function', t => {
   const fake = { map: identity, ap: identity }
 
   t.equal(isApply(undefined), false, 'returns false for undefined')

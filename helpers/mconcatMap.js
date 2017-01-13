@@ -2,9 +2,11 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const curry = require('./curry')
+
 const composeB = require('../combinators/composeB')
-const isMonoid = require('../internal/isMonoid')
-const isFunction = require('../internal/isFunction')
+
+const isFunction = require('../predicates/isFunction')
+const isMonoid = require('../predicates/isMonoid')
 
 const foldWith =
   m => (x, y) => x.concat(m(y))

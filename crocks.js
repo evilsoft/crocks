@@ -1,6 +1,16 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
+const combinators = {
+  applyTo: require('./combinators/applyTo'),
+  composeB: require('./combinators/composeB'),
+  constant: require('./combinators/constant'),
+  flip: require('./combinators/flip'),
+  identity: require('./combinators/identity'),
+  reverseApply: require('./combinators/reverseApply'),
+  substitution: require('./combinators/substitution')
+}
+
 const crocks = {
   Arrow: require('./crocks/Arrow'),
   Const: require('./crocks/Const'),
@@ -18,16 +28,6 @@ const crocks = {
   Writer: require('./crocks/Writer')
 }
 
-const monoids = {
-  All: require('./monoids/All'),
-  Any: require('./monoids/Any'),
-  Assign: require('./monoids/Assign'),
-  Min: require('./monoids/Min'),
-  Max: require('./monoids/Max'),
-  Prod: require('./monoids/Prod'),
-  Sum: require('./monoids/Sum')
-}
-
 const helpers = {
   branch: require('./helpers/branch'),
   compose: require('./helpers/compose'),
@@ -40,11 +40,22 @@ const helpers = {
   mconcatMap: require('./helpers/mconcatMap'),
   mreduce: require('./helpers/mreduce'),
   mreduceMap: require('./helpers/mreduceMap'),
+  not: require('./helpers/not'),
   pipe: require('./helpers/pipe'),
   safe: require('./helpers/safe'),
   tryCatch: require('./helpers/tryCatch'),
   unless: require('./helpers/unless'),
   when: require('./helpers/when')
+}
+
+const monoids = {
+  All: require('./monoids/All'),
+  Any: require('./monoids/Any'),
+  Assign: require('./monoids/Assign'),
+  Min: require('./monoids/Min'),
+  Max: require('./monoids/Max'),
+  Prod: require('./monoids/Prod'),
+  Sum: require('./monoids/Sum')
 }
 
 const pointFree = {
@@ -79,21 +90,27 @@ const pointFree = {
   value: require('./pointfree/value')
 }
 
-const combinators = {
-  applyTo: require('./combinators/applyTo'),
-  composeB: require('./combinators/composeB'),
-  constant: require('./combinators/constant'),
-  flip: require('./combinators/flip'),
-  identity: require('./combinators/identity'),
-  reverseApply: require('./combinators/reverseApply'),
-  substitution: require('./combinators/substitution')
+const predicates = {
+  isApplicative: require('./predicates/isApplicative'),
+  isApply: require('./predicates/isApply'),
+  isArray: require('./predicates/isArray'),
+  isEmpty: require('./predicates/isEmpty'),
+  isFunction: require('./predicates/isFunction'),
+  isFunctor: require('./predicates/isFunctor'),
+  isMonoid: require('./predicates/isMonoid'),
+  isNil: require('./predicates/isNil'),
+  isNumber: require('./predicates/isNumber'),
+  isObject: require('./predicates/isObject'),
+  isSemigroup: require('./predicates/isSemigroup'),
+  isString: require('./predicates/isString'),
 }
 
 module.exports = Object.assign(
   {},
   combinators,
-  helpers,
-  pointFree,
   crocks,
-  monoids
+  helpers,
+  monoids,
+  pointFree,
+  predicates
 )

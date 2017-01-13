@@ -2,13 +2,15 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const curry = require('../helpers/curry')
+
 const constant = require('../combinators/constant')
+
 const argsArray = require('./argsArray')
 
-const isObject = require('./isObject')
-const isEmpty = require('./isEmpty')
-const isArray = require('./isArray')
-const isString = require('./isString')
+const isArray = require('../predicates/isArray')
+const isEmpty = require('../predicates/isEmpty')
+const isObject = require('../predicates/isObject')
+const isString = require('../predicates/isString')
 
 const isDefinition = x => isString(x) && x.length
 

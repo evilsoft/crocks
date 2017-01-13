@@ -3,8 +3,8 @@ const helpers = require('../test/helpers')
 const sinon = require('sinon')
 
 const bindFunc = helpers.bindFunc
-const isFunction = require('../internal/isFunction')
-const isObject = require('../internal/isObject')
+const isFunction = require('../predicates/isFunction')
+const isObject = require('../predicates/isObject')
 const noop = helpers.noop
 
 const identity = require('../combinators/identity')

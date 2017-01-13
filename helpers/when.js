@@ -1,10 +1,13 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isFunction = require('../internal/isFunction')
+const isFunction = require('../predicates/isFunction')
+
 const isType = require('../internal/isType')
+
 const curry = require('./curry')
 
+// when : (a -> Boolean) | Pred -> (a -> b) -> a -> b | a
 function when(pred, f) {
   if(!(isFunction(pred) || isType('Pred', pred))) {
     throw new TypeError('when: Pred or predicate function required for first argument')

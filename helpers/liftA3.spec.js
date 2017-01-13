@@ -1,10 +1,12 @@
 const test = require('tape')
 const helpers = require('../test/helpers')
 
+const bindFunc = helpers.bindFunc
+
 const Identity = require('../crocks/Identity')
 
-const isFunction = require('../internal/isFunction')
-const bindFunc = helpers.bindFunc
+const isFunction = require('../predicates/isFunction')
+
 const identity = require('../combinators/identity')
 
 const liftA3 = require('./liftA3')

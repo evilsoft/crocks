@@ -3,7 +3,7 @@ const sinon = require('sinon')
 
 const identity = require('./identity')
 const bindFunc = require('../test/helpers').bindFunc
-const isFunction = require('../internal/isFunction')
+const isFunction = require('../predicates/isFunction')
 
 const applyTo = require('./applyTo')
 

@@ -1,13 +1,13 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isFunction = require('../internal/isFunction')
-const isFunctor = require('../internal/isFunctor')
+const isFunction = require('../predicates/isFunction')
+const isFunctor = require('../predicates/isFunctor')
 
 const _inspect = require('../internal/inspect')
 
-const constant = require('../combinators/constant')
 const compose = require('../helpers/compose')
+const constant = require('../combinators/constant')
 
 const _type =
   constant('Star')

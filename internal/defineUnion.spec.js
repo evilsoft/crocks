@@ -1,9 +1,10 @@
 const test = require('tape')
 const helpers = require('../test/helpers')
 
-const isObject = require('./isObject')
-const isFunction = require('./isFunction')
 const bindFunc = helpers.bindFunc
+
+const isFunction = require('../predicates/isFunction')
+const isObject = require('../predicates/isObject')
 
 const defineUnion = require('./defineUnion')
 

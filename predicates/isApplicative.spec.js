@@ -5,7 +5,7 @@ const isFunction = require('./isFunction')
 const isApplicative = require('./isApplicative')
 const identity = require('../combinators/identity')
 
-test('isApplicative internal function', t => {
+test('isApplicative predicate function', t => {
   const fake = {
     map: identity,
     ap: identity,

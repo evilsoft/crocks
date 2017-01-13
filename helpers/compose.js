@@ -3,7 +3,8 @@
 
 const pipe = require('./pipe')
 const argsArray = require('../internal/argsArray')
-const isFunction = require('../internal/isFunction')
+
+const isFunction = require('../predicates/isFunction')
 
 // compose : ((y -> z), (x -> y), ..., (a -> b)) -> a -> z
 function compose() {

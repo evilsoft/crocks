@@ -5,9 +5,12 @@ const helpers = require('../test/helpers')
 const bindFunc = helpers.bindFunc
 const noop = helpers.noop
 
+const isArray = require('../predicates/isArray')
 const isFunction = require('../predicates/isFunction')
 
 const constant = require('../combinators/constant')
+
+const MockCrock = require('../test/MockCrock')
 
 const traverse = require('./traverse')
 
@@ -49,10 +52,17 @@ test('traverse pointfree', t => {
   t.throws(trav(noop, noop, 'string'), 'throws if third arg is a truthy string')
   t.throws(trav(noop, noop, false), 'throws if third arg is false')
   t.throws(trav(noop, noop, true), 'throws if third arg is true')
-  t.throws(trav(noop, noop, []), 'throws if third arg is an array')
   t.throws(trav(noop, noop, {}), 'throws if third arg is an object')
 
   t.doesNotThrow(trav(noop, noop, m), 'allows two functions and a Traverable')
+  t.doesNotThrow(trav(noop, noop, []), 'allows two functions and an Array ')
+
+  t.end()
+})
+
+test('traverse with Traversable', t => {
+  const x = 'super sweet'
+  const m = { traverse: sinon.spy(constant(x)) }
 
   const f = sinon.spy()
   const g = sinon.spy()
@@ -60,6 +70,19 @@ test('traverse pointfree', t => {
 
   t.ok(m.traverse.calledWith(f, g), 'calls traverse on Traversable, passing the functions')
   t.equal(res, x, 'returns the result of traverse on Traversable')
+
+  t.end()
+})
+
+test('traverse with Array', t => {
+  const f = sinon.spy(x => MockCrock(x + 2))
+
+  const outer = traverse(MockCrock.of, f, [ 12, 23 ])
+  const inner = outer.value()
+
+  t.equal(outer.type(), 'MockCrock', 'outer container is a MockCrock')
+  t.ok(isArray(inner), 'inner container is an Array')
+  t.same((inner), [ 14, 25 ], 'mapping/lifting function applied to every element')
 
   t.end()
 })

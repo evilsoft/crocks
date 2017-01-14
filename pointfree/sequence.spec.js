@@ -5,17 +5,19 @@ const helpers = require('../test/helpers')
 const bindFunc = helpers.bindFunc
 const noop = helpers.noop
 
+const isArray = require('../predicates/isArray')
 const isFunction = require('../predicates/isFunction')
 
 const constant = require('../combinators/constant')
+
+const MockCrock = require('../test/MockCrock')
 
 const sequence = require('./sequence')
 
 test('sequence pointfree', t => {
   const seq = bindFunc(sequence)
 
-  const x = 'super cool'
-  const m = { sequence: sinon.spy(constant(x)) }
+  const m = { sequence: constant(23) }
 
   t.ok(isFunction(seq), 'is a function')
 
@@ -41,12 +43,31 @@ test('sequence pointfree', t => {
   t.throws(seq(noop, {}), 'throws if second arg is an object')
 
   t.doesNotThrow(seq(noop, m), 'allows a function and Traverable')
+  t.doesNotThrow(seq(noop, []), 'allows a function and an Array')
+
+  t.end()
+})
+
+test('sequence with Traversable', t => {
+  const x = 'gnarly dude'
+  const m = { sequence: sinon.spy(constant(x)) }
 
   const f = sinon.spy()
   const res = sequence(f, m)
 
   t.ok(m.sequence.calledWith(f), 'calls sequence on Traversable, passing the function')
   t.equal(res, x, 'returns the result of sequence on Traversable')
+
+  t.end()
+})
+
+test('sequence with Array', t => {
+  const outer = sequence(MockCrock.of, [ MockCrock(12), MockCrock(23) ])
+  const inner = outer.value()
+
+  t.equal(outer.type(), 'MockCrock', 'outer container is a MockCrock')
+  t.ok(isArray(inner), 'inner container is an Array')
+  t.equal((inner.length), 2, 'inner array maintains structure')
 
   t.end()
 })

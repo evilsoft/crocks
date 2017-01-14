@@ -1,6 +1,6 @@
 const test = require('tape')
 
-const isFunction = require('../internal/isFunction')
+const isFunction = require('../predicates/isFunction')
 
 const isType = require('./isType')
 

@@ -4,7 +4,7 @@
 const isFunction = require('./isFunction')
 const isFunctor = require('./isFunctor')
 
-// isApply :: a -> Boolean
+// isApply : a -> Boolean
 function isApply(m) {
   return !!m && isFunctor(m) && isFunction(m.ap)
 }

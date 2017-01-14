@@ -8,7 +8,7 @@
     "build:publish": "npm test && npm run build && npm publish",
     "build": "npm test && webpack && uglifyjs dist/crocks.js -c \"warnings=false\" -m -o dist/crocks.min.js",
     "spec": "nodemon -q -e js -x 'npm test -s | tap-spec'",
-    "test": "tape combinators/*.spec.js crocks/*.spec.js funcs/*.spec.js internal/*.spec.js monoids/*.spec.js pointfree/*.spec.js ./*.spec.js"
+    "test": "tape combinators/*.spec.js crocks/*.spec.js helpers/*.spec.js internal/*.spec.js monoids/*.spec.js pointfree/*.spec.js ./predicates/*.spec.js ./*.spec.js"
   },
   "repository": {
     "type": "git",

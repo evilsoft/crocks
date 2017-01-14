@@ -2,8 +2,10 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const curry = require('../helpers/curry')
-const isFunction = require('../internal/isFunction')
+
 const isType = require('../internal/isType')
+
+const isFunction = require('../predicates/isFunction')
 
 // filter :: Foldable f => (a -> Boolean) -> f a -> f a
 function filter(pred, m) {

@@ -3,8 +3,10 @@ const helpers = require('../test/helpers')
 
 const Identity = require('../crocks/Identity')
 
-const isFunction = require('../internal/isFunction')
 const bindFunc = helpers.bindFunc
+
+const isFunction = require('../predicates/isFunction')
+
 const identity = require('../combinators/identity')
 
 const liftA2 = require('./liftA2')

@@ -5,7 +5,7 @@ const isFunction = require('./isFunction')
 
 const isSemigroup = require('./isSemigroup')
 
-test('isSemigroup internal function', t => {
+test('isSemigroup predicate function', t => {
   const fake = { concat: identity }
 
   t.ok(isFunction(isSemigroup))
@@ -22,7 +22,7 @@ test('isSemigroup internal function', t => {
   t.equal(isSemigroup(''), true, 'returns true for falsey string')
   t.equal(isSemigroup('string'), true, 'returns true for truthy string')
   t.equal(isSemigroup([]), true, 'returns true for an array')
-  t.equal(isSemigroup(fake), true, 'returns true when an Semigroup is passed')
+  t.equal(isSemigroup(fake), true, 'returns true when a Semigroup is passed')
 
   t.end()
 })

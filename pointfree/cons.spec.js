@@ -4,7 +4,8 @@ const helpers = require('../test/helpers')
 
 const noop = helpers.noop
 const bindFunc = helpers.bindFunc
-const isFunction  = require('../internal/isFunction')
+
+const isFunction  = require('../predicates/isFunction')
 
 const identity = require('../combinators/identity')
 

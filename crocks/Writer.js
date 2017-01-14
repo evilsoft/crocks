@@ -2,8 +2,9 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const isType = require('../internal/isType')
-const isFunction = require('../internal/isFunction')
-const isMonoid = require('../internal/isMonoid')
+
+const isFunction = require('../predicates/isFunction')
+const isMonoid = require('../predicates/isMonoid')
 
 const _inspect = require('../internal/inspect')
 

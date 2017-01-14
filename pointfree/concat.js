@@ -2,8 +2,9 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const curry = require('../helpers/curry')
-const isString = require('../internal/isString')
-const isSemigroup = require('../internal/isSemigroup')
+
+const isSemigroup = require('../predicates/isSemigroup')
+const isString = require('../predicates/isString')
 
 function concat(x, m) {
   if(!isSemigroup(m)) {

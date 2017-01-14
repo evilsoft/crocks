@@ -2,8 +2,10 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const curry = require('../helpers/curry')
+
 const composeB = require('../combinators/composeB')
-const isFunction = require('../internal/isFunction')
+
+const isFunction = require('../predicates/isFunction')
 
 // contramap : Functor f => (b -> a) -> f b -> f a
 function contramap(fn, m) {

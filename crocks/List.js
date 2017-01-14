@@ -1,12 +1,12 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isFunction = require('../internal/isFunction')
-const isArray = require('../internal/isArray')
-const isType = require('../internal/isType')
-const isApplicative = require('../internal/isApplicative')
+const isApplicative = require('../predicates/isApplicative')
+const isArray = require('../predicates/isArray')
+const isFunction = require('../predicates/isFunction')
 
 const _inspect = require('../internal/inspect')
+const isType = require('../internal/isType')
 
 const constant = require('../combinators/constant')
 

@@ -5,7 +5,7 @@ const noop = helpers.noop
 
 const isFunction = require('./isFunction')
 
-test('isFunction internal function', t => {
+test('isFunction predicate function', t => {
   t.equal(typeof isFunction, 'function', 'is a function')
 
   t.equal(isFunction(noop), true, 'returns true when passed a function')

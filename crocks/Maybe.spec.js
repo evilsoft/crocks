@@ -4,11 +4,12 @@ const helpers = require('../test/helpers')
 
 const noop = helpers.noop
 const bindFunc = helpers.bindFunc
-const isObject = require('../internal/isObject')
-const isFunction = require('../internal/isFunction')
 
-const constant = require('../combinators/constant')
+const isFunction = require('../predicates/isFunction')
+const isObject = require('../predicates/isObject')
+
 const composeB = require('../combinators/composeB')
+const constant = require('../combinators/constant')
 const identity = require('../combinators/identity')
 const reverseApply = require('../combinators/reverseApply')
 

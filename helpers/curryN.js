@@ -1,8 +1,9 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isNumber = require('../internal/isNumber')
-const isFunction = require('../internal/isFunction')
+const isFunction = require('../predicates/isFunction')
+const isNumber = require('../predicates/isNumber')
+
 const argsArray = require('../internal/argsArray')
 
 function curryN(n, fn) {

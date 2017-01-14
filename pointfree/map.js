@@ -2,8 +2,10 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const curry = require('../helpers/curry')
+
 const composeB = require('../combinators/composeB')
-const isFunction = require('../internal/isFunction')
+
+const isFunction = require('../predicates/isFunction')
 
 // map :: Functor f => (a -> b) -> f a -> f b
 function map(fn, m) {

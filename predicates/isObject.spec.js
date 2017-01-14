@@ -6,7 +6,7 @@ const isFunction = require('./isFunction')
 
 const isObject = require('./isObject')
 
-test('isObject internal function', t => {
+test('isObject predicate function', t => {
   t.ok(isFunction(isObject), 'is a function')
 
   t.equal(isObject(noop), false, 'returns false with function')

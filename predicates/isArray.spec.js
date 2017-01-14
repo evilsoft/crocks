@@ -2,11 +2,11 @@ const test = require('tape')
 const helpers = require('../test/helpers')
 
 const noop = helpers.noop
+
 const isArray = require('./isArray')
 const isFunction  = require('./isFunction')
 
-
-test('isArray internal function', t => {
+test('isArray predicate function', t => {
   t.ok(isFunction(isArray), 'is a function')
 
   t.ok(isArray([]), 'returns true when passed an array')

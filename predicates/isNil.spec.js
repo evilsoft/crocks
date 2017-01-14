@@ -6,7 +6,7 @@ const isFunction = require('./isFunction')
 
 const isNil = require('./isNil')
 
-test('isNil internal function', t => {
+test('isNil predicate function', t => {
   t.ok(isFunction(isNil), 'is a function')
 
   t.equal(isNil(noop), false, 'returns false with function')

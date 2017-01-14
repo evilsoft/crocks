@@ -1,10 +1,10 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isArray = require('./isArray')
-const isObject = require('./isObject')
-const isString = require('./isString')
-const isFunction = require('./isFunction')
+const isArray = require('../predicates/isArray')
+const isFunction = require('../predicates/isFunction')
+const isObject = require('../predicates/isObject')
+const isString = require('../predicates/isString')
 
 function arrayInspect(xs) {
   return xs.length

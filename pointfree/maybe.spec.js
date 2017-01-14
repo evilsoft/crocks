@@ -3,7 +3,8 @@ const sinon = require('sinon')
 const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
-const isFunction = require('../internal/isFunction')
+
+const isFunction = require('../predicates/isFunction')
 
 const constant = require('../combinators/constant')
 

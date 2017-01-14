@@ -2,9 +2,10 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const isType = require('../internal/isType')
-const isObject = require('../internal/isObject')
-const isFunction = require('../internal/isFunction')
-const isNil = require('../internal/isNil')
+
+const isFunction = require('../predicates/isFunction')
+const isNil = require('../predicates/isNil')
+const isObject = require('../predicates/isObject')
 
 const _inspect = require('../internal/inspect')
 

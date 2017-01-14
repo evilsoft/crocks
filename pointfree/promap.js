@@ -2,7 +2,9 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const curry = require('../helpers/curry')
-const isFunction = require('../internal/isFunction')
+
+const isFunction = require('../predicates/isFunction')
+
 const composeB = require('../combinators/composeB')
 
 function promap(l, r, m) {

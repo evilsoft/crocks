@@ -6,7 +6,7 @@ const isFunction = require('./isFunction')
 
 const isNumber = require('./isNumber')
 
-test('isNumber internal function', t => {
+test('isNumber predicate function', t => {
   t.ok(isFunction(isNumber), 'is a function')
 
   t.equal(isNumber(noop), false, 'returns false with function')
@@ -18,6 +18,7 @@ test('isNumber internal function', t => {
   t.equal(isNumber(true), false, 'returns false with true')
   t.equal(isNumber([]), false, 'returns false with an array')
   t.equal(isNumber({}), false, 'returns false with an object')
+  t.equal(isNumber(NaN), false, 'returns false with a NaN')
 
   t.equal(isNumber(0), true, 'returns true with falsey number')
   t.equal(isNumber(1), true, 'returns true with truthy number')

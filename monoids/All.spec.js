@@ -2,11 +2,12 @@ const test = require('tape')
 const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
-const isObject = require('../internal/isObject')
-const isFunction = require('../internal/isFunction')
 
-const identity = require('../combinators/identity')
+const isFunction = require('../predicates/isFunction')
+const isObject = require('../predicates/isObject')
+
 const constant = require('../combinators/constant')
+const identity = require('../combinators/identity')
 
 const All = require('./All')
 

@@ -2,7 +2,7 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const curry = require('../helpers/curry')
-const isFunction = require('../internal/isFunction')
+const isFunction = require('../predicates/isFunction')
 
 // Applicator
 // applyTo :: (a -> b) -> a -> b

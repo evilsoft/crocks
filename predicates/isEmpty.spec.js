@@ -4,8 +4,7 @@ const isFunction = require('./isFunction')
 
 const isEmpty = require('./isEmpty')
 
-test('isEmpty internal function', t => {
-
+test('isEmpty predicate function', t => {
   t.ok(isFunction(isEmpty), 'is a function')
 
   t.equal(isEmpty(undefined), true, 'returns true with undefined')

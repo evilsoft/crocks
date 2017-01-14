@@ -2,7 +2,8 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const curry = require('../helpers/curry')
-const isFunction = require('../internal/isFunction')
+
+const isFunction = require('../predicates/isFunction')
 
 // ap :: Applicative m => m a -> m (a -> b) ->  m b
 function ap(m, x) {

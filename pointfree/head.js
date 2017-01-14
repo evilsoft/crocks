@@ -1,9 +1,9 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isArray = require('../internal/isArray')
-const isString = require('../internal/isString')
-const isFunction = require('../internal/isFunction')
+const isArray = require('../predicates/isArray')
+const isFunction = require('../predicates/isFunction')
+const isString = require('../predicates/isString')
 
 const M = require('../crocks/Maybe')
 

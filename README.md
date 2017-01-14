@@ -39,7 +39,7 @@ import curry from 'crocks/helpers/curry'
 import map from 'crocks/pointfree/map'
 
 // you can of course do the same with require statements:
-const Maybe = require('crocks/crocks/Maybe')
+const All = require('crocks/monoids/All')
 ...
 ```
 
@@ -109,7 +109,7 @@ Provides a means to describe a composition between two functions. it takes two f
 This is a very handy dandy function, used a lot. Pass it any value and it will give you back a function that will return that same value no matter what you pass it.
 
 #### `flip : (a -> b -> c) -> b -> a -> c`
-This little function just takes a function and returns a function that takes the first two parameters in reverse. Once can compose flip calls down the line to flip all, or some of the other parameters if there are more than two. Mix and match to your :heart:s desire.
+This little function just takes a function and returns a function that takes the first two parameters in reverse. One can compose flip calls down the line to flip all, or some of the other parameters if there are more than two. Mix and match to your :heart:'s desire.
 
 #### `identity :  a -> a`
 This function and `constant` are the workhorses of writing code with this library. It quite simply is just a function that when you pass it something, it returns that thing right back to you. So simple, I will leave it as an exercise to reason about why this is so powerful and important.
@@ -151,7 +151,7 @@ These two functions are very handy for combining an entire `List` or `Array` of 
 There comes a time where the values you have in a `List` or an `Array` are not in the type that is needed for the `Monoid` you want to combine with. These two functions can be used to `map` some transforming function from a given type into the type needed for the `Monoid`. In essence, this function will run each value through the function before it lifts the value into the `Monoid`, before `concat` is applied. The difference between the two is that `mconcatMap` returns the result inside the `Monoid` used to combine them. Where `mreduceMap` returns the bare value itself.
 
 #### `not : ((a -> Boolean) | Pred) -> a -> Boolean`
-When you need to negate a predicate function or a `Pred`, but want a new predicate function that does the negation, then `not` is going to get you what you need. Using `not` will allow you to stay as declarative as possible. Just pass `not` your predicate function or `Pred` and it will give you back a predicate function ready for insertion into your flow. All predicate based functions in `crocks` take either a `Pred` or predicate function, so it should be easy to swap between the two.
+When you need to negate a predicate function or a `Pred`, but want a new predicate function that does the negation, then `not` is going to get you what you need. Using `not` will allow you to stay as declarative as possible. Just pass `not` your predicate function or a `Pred`, and it will give you back a predicate function ready for insertion into your flow. All predicate based functions in `crocks` take either a `Pred` or predicate function, so it should be easy to swap between the two.
 
 #### `pipe : ((a -> b), (b -> c), ..., (y -> z)) -> a -> z`
 If you find yourself not able to come to terms with doing the typical right-to-left, then `crocks` provides a means to accommodate you. This function does the same thing as `compose`, the only difference is it allows you define your flows in a left-to-right manner.
@@ -246,11 +246,11 @@ These functions provide a very clean way to build out very simple functions and 
 | `run` | `m a -> b` |
 | `runWith` | `a -> m -> b` |
 | `second` | `(b -> c) -> m (a, b) -> m (a, c)` |
-| `sequence` | `Apply f => (b -> f b) -> m (f a) -> f (m a)` |
+| `sequence` | `Applicative f => (b -> f b) -> m (f a) -> f (m a)` |
 | `snd` | `m a b -> b` |
 | `swap` | `m a b -> m b a` |
 | `tail` | `m a -> Maybe (m a)` |
-| `traverse` | `Apply f => (c -> f c) -> (a -> f b) -> m (f a) -> f (m b)` |
+| `traverse` | `Applicative f => (c -> f c) -> (a -> f b) -> m (f a) -> f (m b)` |
 | `value` | `m a -> a` |
 
 ##### Datatypes
@@ -281,9 +281,9 @@ These functions provide a very clean way to build out very simple functions and 
 | `run` | `IO` |
 | `runWith` | `Arrow`, `Pred`, `Reader`, `Star`, `State` |
 | `second` | `Arrow` |
-| `sequence` | `Either`, `Identity`, `List`, `Maybe` |
+| `sequence` | `Array`, `Either`, `Identity`, `List`, `Maybe` |
 | `snd` | `Pair` |
 | `swap` | `Pair` |
 | `tail` | `Array`, `List`, `String` |
-| `traverse` | `Either`, `Identity`, `List`, `Maybe` |
+| `traverse` | `Array`, `Either`, `Identity`, `List`, `Maybe` |
 | `value` | `Arrow`, `Const`, `Either`, `Identity`, `List`, `Pair`, `Pred`, `Unit`, `Writer` |

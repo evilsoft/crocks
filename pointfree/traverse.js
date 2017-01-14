@@ -3,20 +3,42 @@
 
 const curry = require('../helpers/curry')
 
+const isApplicative = require('../predicates/isApplicative')
+const isArray = require('../predicates/isArray')
 const isFunction = require('../predicates/isFunction')
 
-function traverse(fn, af, m) {
-  if(!isFunction(fn)) {
-    throw new TypeError('traverse: Applicative returning function required for first argument')
-  }
-  else if(!isFunction(af)) {
-    throw new TypeError('traverse: Applicative function required for second argument')
-  }
-  else if(!(m && isFunction(m.traverse))) {
-    throw new TypeError('traverse: Traversable required for third argument')
-  }
+const concat = require('./concat')
 
-  return m.traverse(fn, af)
+function runTraverse(f) {
+  return function(acc, x) {
+    const m = f(x)
+
+    if(!isApplicative(acc) || !isApplicative(m)) {
+      throw new TypeError('traverse: Both functions must return an Applicative')
+    }
+
+    return m
+      .map(v => concat([ v ]))
+      .ap(acc)
+  }
+}
+
+function traverse(af, fn, m) {
+  if(!isFunction(af)) {
+    throw new TypeError('traverse: Applicative function required for first argument')
+  }
+  else if(!isFunction(fn)) {
+    throw new TypeError('traverse: Applicative returning function required for second argument')
+  }
+  else if((m && isFunction(m.traverse))) {
+    return m.traverse(af, fn)
+  }
+  else if((isArray(m))) {
+    return m.reduce(runTraverse(fn), af([]))
+  }
+  else {
+    throw new TypeError('traverse: Traversable or Array required for third argument')
+  }
 }
 
 module.exports = curry(traverse)

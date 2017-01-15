@@ -66,6 +66,7 @@ All `Crocks` are Constructor functions of the given type, with `Writer` being an
 | Crock | Constructor | Instance |
 |---|:---|:---|
 | `Arrow` | `empty` | `concat`, `contramap`, `empty`, `first`, `map`, `promap`, `runWith`, `second`, `value` |
+| `Async` | `fromPromise`, `of`, `rejected` | `ap`, `bimap`, `chain`, `coalesce`, `fork`, `map`, `of`, `swap`, `toPromise` |
 | `Const` | -- | `ap`, `chain`, `concat`, `equals`, `map`, `value` |
 | `Either` | `Left`, `Right`, `of`| `ap`, `bimap`, `chain`, `coalesce`, `either`, `equals`, `map`, `of`, `sequence`, `swap`, `traverse`, `value` |
 | `Identity` | `of` | `ap`, `chain`, `equals`, `map`, `of`, `sequence`, `traverse`, `value` |
@@ -262,10 +263,10 @@ These functions provide a very clean way to build out very simple functions and 
 ##### Datatypes
 | Function | Datatypes |
 |---|:---|
-| `ap` | `Const`, `Either`, `Identity`, `IO`, `List`, `Maybe`, `Pair`, `Reader`, `State`, `Unit`, `Writer` |
-| `bimap` | `Either`, `Pair` |
-| `chain` | `Const`, `Either`, `Identity`, `IO`, `List`, `Maybe`, `Pair`, `Reader`, `State`, `Unit`, `Writer` |
-| `coalesce` | `Maybe`, `Either` |
+| `ap` | `Async`, `Const`, `Either`, `Identity`, `IO`, `List`, `Maybe`, `Pair`, `Reader`, `State`, `Unit`, `Writer` |
+| `bimap` | `Async`, `Either`, `Pair` |
+| `chain` | `Async`, `Const`, `Either`, `Identity`, `IO`, `List`, `Maybe`, `Pair`, `Reader`, `State`, `Unit`, `Writer` |
+| `coalesce` | `Async`, `Maybe`, `Either` |
 | `concat` | `All`, `Any`, `Array`, `Arrow`, `Assign`, `Const`, `List`, `Max`, `Min`, `Pair`, `Pred`, `Prod`, `String`, `Sum`, `Unit` |
 | `cons` | `Array`, `List` |
 | `contramap` | `Arrow`, `Pred`, `Star` |
@@ -275,9 +276,9 @@ These functions provide a very clean way to build out very simple functions and 
 | `filter` | `Array`, `List` |
 | `first` | `Arrow` |
 | `fst` | `Pair` |
-| `head` | `Array, List` |
+| `head` | `Array`, `List` |
 | `log` | `Writer` |
-| `map` | `Array`, `Arrow`, `Const`, `Either`, `Function`, `Identity`, `IO`, `List`, `Maybe`, `Pair`, `Reader`, `Star`, `State`, `Unit`, `Writer` |
+| `map` | `Async`, `Array`, `Arrow`, `Const`, `Either`, `Function`, `Identity`, `IO`, `List`, `Maybe`, `Pair`, `Reader`, `Star`, `State`, `Unit`, `Writer` |
 | `maybe` | `Maybe` |
 | `merge` | `Pair` |
 | `option` | `Either`, `Maybe` |
@@ -289,7 +290,7 @@ These functions provide a very clean way to build out very simple functions and 
 | `second` | `Arrow` |
 | `sequence` | `Array`, `Either`, `Identity`, `List`, `Maybe` |
 | `snd` | `Pair` |
-| `swap` | `Pair` |
+| `swap` | `Async`, `Either`, `Pair` |
 | `tail` | `Array`, `List`, `String` |
 | `traverse` | `Array`, `Either`, `Identity`, `List`, `Maybe` |
 | `value` | `Arrow`, `Const`, `Either`, `Identity`, `List`, `Pair`, `Pred`, `Unit`, `Writer` |

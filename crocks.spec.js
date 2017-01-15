@@ -62,6 +62,7 @@ const tail = require('./pointfree/tail')
 const value = require('./pointfree/value')
 
 const Arrow = require('./crocks/Arrow')
+const Async = require('./crocks/Async')
 const Const = require('./crocks/Const')
 const Either = require('./crocks/Either')
 const Identity = require('./crocks/Identity')
@@ -160,6 +161,7 @@ test('entry', t => {
   t.equal(crocks.value, value, 'provides the value point-free function')
 
   t.equal(crocks.Arrow, Arrow, 'provides the Arrow function')
+  t.equal(crocks.Async, Async, 'provides the Async function')
   t.equal(crocks.Const, Const, 'provides the Const function')
   t.equal(crocks.Either, Either, 'provides the Either function')
   t.equal(crocks.Identity, Identity, 'provides the Identity function')

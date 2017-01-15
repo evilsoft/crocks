@@ -13,6 +13,7 @@ const combinators = {
 
 const crocks = {
   Arrow: require('./crocks/Arrow'),
+  Async: require('./crocks/Async'),
   Const: require('./crocks/Const'),
   Either: require('./crocks/Either'),
   Identity: require('./crocks/Identity'),

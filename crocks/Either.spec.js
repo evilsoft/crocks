@@ -19,7 +19,6 @@ const Either = require('./Either')
 
 test('Either', t => {
   const m = Either(0)
-  const e = bindFunc(Either)
 
   t.ok(isFunction(Either), 'is a function')
   t.ok(isObject(m), 'returns an object')
@@ -139,8 +138,8 @@ test('Either swap', t => {
   const l = Either.Left('here').swap(constant('left'), identity)
   const r = Either.Right('here').swap(identity, constant('right'))
 
-  t.ok(l.equals(Either.Right('left')),'returns an Either.Right wrapping left' )
-  t.ok(r.equals(Either.Left('right')),'returns an Either.Left wrapping right' )
+  t.ok(l.equals(Either.Right('left')), 'returns an Either.Right wrapping left')
+  t.ok(r.equals(Either.Left('right')), 'returns an Either.Left wrapping right')
 
   t.end()
 })

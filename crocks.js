@@ -13,6 +13,7 @@ const combinators = {
 
 const crocks = {
   Arrow: require('./crocks/Arrow'),
+  Async: require('./crocks/Async'),
   Const: require('./crocks/Const'),
   Either: require('./crocks/Either'),
   Identity: require('./crocks/Identity'),
@@ -41,8 +42,10 @@ const helpers = {
   mreduce: require('./helpers/mreduce'),
   mreduceMap: require('./helpers/mreduceMap'),
   not: require('./helpers/not'),
+  once: require('./helpers/once'),
   pipe: require('./helpers/pipe'),
   safe: require('./helpers/safe'),
+  tap: require('./helpers/tap'),
   tryCatch: require('./helpers/tryCatch'),
   unless: require('./helpers/unless'),
   when: require('./helpers/when')

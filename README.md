@@ -66,6 +66,7 @@ All `Crocks` are Constructor functions of the given type, with `Writer` being an
 | Crock | Constructor | Instance |
 |---|:---|:---|
 | `Arrow` | `empty` | `concat`, `contramap`, `empty`, `first`, `map`, `promap`, `runWith`, `second`, `value` |
+| `Async` | `fromPromise`, `of`, `rejected` | `ap`, `bimap`, `chain`, `coalesce`, `fork`, `map`, `of`, `swap`, `toPromise` |
 | `Const` | -- | `ap`, `chain`, `concat`, `equals`, `map`, `value` |
 | `Either` | `Left`, `Right`, `of`| `ap`, `bimap`, `chain`, `coalesce`, `either`, `equals`, `map`, `of`, `sequence`, `swap`, `traverse`, `value` |
 | `Identity` | `of` | `ap`, `chain`, `equals`, `map`, `of`, `sequence`, `traverse`, `value` |
@@ -153,11 +154,17 @@ There comes a time where the values you have in a `List` or an `Array` are not i
 #### `not : ((a -> Boolean) | Pred) -> a -> Boolean`
 When you need to negate a predicate function or a `Pred`, but want a new predicate function that does the negation, then `not` is going to get you what you need. Using `not` will allow you to stay as declarative as possible. Just pass `not` your predicate function or a `Pred`, and it will give you back a predicate function ready for insertion into your flow. All predicate based functions in `crocks` take either a `Pred` or predicate function, so it should be easy to swap between the two.
 
+#### `once : ((*) -> a) -> ((*) -> a)`
+There are times in Javascript development where you only want to call a function once and memoize the first result for every subsequent call to that function. Just pass the function you want guarded to `once` and you will get back a function with the expected guarantees.
+
 #### `pipe : ((a -> b), (b -> c), ..., (y -> z)) -> a -> z`
 If you find yourself not able to come to terms with doing the typical right-to-left, then `crocks` provides a means to accommodate you. This function does the same thing as `compose`, the only difference is it allows you define your flows in a left-to-right manner.
 
 #### `safe : ((a -> Boolean) | Pred) -> a -> Maybe a`
 When using a `Maybe`, it is a common practice to lift into a `Just` or a `Nothing` depending on a condition on the value to be lifted.  It is so common that it warrants a function, and that function is called `safe`. Provide a predicate (a function that returns a Boolean) and a value to be lifted. The value will be evaluated against the predicate, and will lift it into a `Just` if true and a `Nothing` if false.
+
+#### `tap : (a -> b) -> a -> a`
+It is hard knowing what is going on inside of some of these ADTs or your wonderful function compositions. Debugging can get messy when you need to insert a side-effect into your flow for introspection purposes. With `tap`, you can intervene in your otherwise pristine flow and make sure that the original value is passed along to the next step of your flow. This function does not guarantee immutability for reference types (Objects, Arrays, etc), you will need to exercise some discipline here to not mutate.
 
 #### `tryCatch : (a -> b) -> a -> Either e b`
 Typical try-catch blocks are very imperative in their usage. This `tryCatch` function provides a means of capturing that imperative nature in a simple declarative style. Pass it a function that could fail and it will return you another function wrapping the first function. When called the new function will either return the result in an `Either.Right` if everything was good, or an error wrapped in an `Either.Left` if it fails.
@@ -256,10 +263,10 @@ These functions provide a very clean way to build out very simple functions and 
 ##### Datatypes
 | Function | Datatypes |
 |---|:---|
-| `ap` | `Const`, `Either`, `Identity`, `IO`, `List`, `Maybe`, `Pair`, `Reader`, `State`, `Unit`, `Writer` |
-| `bimap` | `Either`, `Pair` |
-| `chain` | `Const`, `Either`, `Identity`, `IO`, `List`, `Maybe`, `Pair`, `Reader`, `State`, `Unit`, `Writer` |
-| `coalesce` | `Maybe`, `Either` |
+| `ap` | `Async`, `Const`, `Either`, `Identity`, `IO`, `List`, `Maybe`, `Pair`, `Reader`, `State`, `Unit`, `Writer` |
+| `bimap` | `Async`, `Either`, `Pair` |
+| `chain` | `Async`, `Const`, `Either`, `Identity`, `IO`, `List`, `Maybe`, `Pair`, `Reader`, `State`, `Unit`, `Writer` |
+| `coalesce` | `Async`, `Maybe`, `Either` |
 | `concat` | `All`, `Any`, `Array`, `Arrow`, `Assign`, `Const`, `List`, `Max`, `Min`, `Pair`, `Pred`, `Prod`, `String`, `Sum`, `Unit` |
 | `cons` | `Array`, `List` |
 | `contramap` | `Arrow`, `Pred`, `Star` |
@@ -269,9 +276,9 @@ These functions provide a very clean way to build out very simple functions and 
 | `filter` | `Array`, `List` |
 | `first` | `Arrow` |
 | `fst` | `Pair` |
-| `head` | `Array, List` |
+| `head` | `Array`, `List` |
 | `log` | `Writer` |
-| `map` | `Array`, `Arrow`, `Const`, `Either`, `Function`, `Identity`, `IO`, `List`, `Maybe`, `Pair`, `Reader`, `Star`, `State`, `Unit`, `Writer` |
+| `map` | `Async`, `Array`, `Arrow`, `Const`, `Either`, `Function`, `Identity`, `IO`, `List`, `Maybe`, `Pair`, `Reader`, `Star`, `State`, `Unit`, `Writer` |
 | `maybe` | `Maybe` |
 | `merge` | `Pair` |
 | `option` | `Either`, `Maybe` |
@@ -283,7 +290,7 @@ These functions provide a very clean way to build out very simple functions and 
 | `second` | `Arrow` |
 | `sequence` | `Array`, `Either`, `Identity`, `List`, `Maybe` |
 | `snd` | `Pair` |
-| `swap` | `Pair` |
+| `swap` | `Async`, `Either`, `Pair` |
 | `tail` | `Array`, `List`, `String` |
 | `traverse` | `Array`, `Either`, `Identity`, `List`, `Maybe` |
 | `value` | `Arrow`, `Const`, `Either`, `Identity`, `List`, `Pair`, `Pred`, `Unit`, `Writer` |

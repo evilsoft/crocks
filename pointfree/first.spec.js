@@ -3,10 +3,13 @@ const sinon = require('sinon')
 const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
+const noop = helpers.noop
 
 const isFunction = require('../predicates/isFunction')
 
 const constant = require('../combinators/constant')
+
+const Pair = require('../crocks/Pair')
 
 const first = require('./first')
 
@@ -27,13 +30,50 @@ test('first pointfree', t => {
   t.throws(f(false), 'throws if arg is false')
   t.throws(f(true), 'throws if arg is true')
   t.throws(f({}), 'throws if arg is an object')
+  t.throws(f([]), 'throws if arg is an array')
 
   t.doesNotThrow(f(m), 'allows an Arrow')
+  t.doesNotThrow(f(noop), 'allows a function')
 
   const res = first(m)
 
   t.ok(m.first.called, 'calls first on Arrow')
   t.equal(res, x, 'returns the result of first on Arrow')
+
+  t.end()
+})
+
+test('first with Arrow', t => {
+  const x = 'result'
+  const m = { first: sinon.spy(constant(x)) }
+  const res = first(m)
+
+  t.ok(m.first.called, 'calls first on Arrow')
+  t.equal(res, x, 'returns the result of first on Arrow')
+
+  t.end()
+})
+
+test('first with Function', t => {
+  const f = first(x => x + 1)
+  const g = bindFunc(f)
+
+  const res = f(Pair(3, 3))
+
+  t.throws(g(undefined), TypeError, 'throws when wrapped function called with undefined')
+  t.throws(g(null), TypeError, 'throws when wrapped function called with null')
+  t.throws(g(0), TypeError, 'throws when wrapped function called with falsey number')
+  t.throws(g(1), TypeError, 'throws when wrapped function called with truthy number')
+  t.throws(g(''), TypeError, 'throws when wrapped function called with falsey string')
+  t.throws(g('string'), TypeError, 'throws when wrapped function called with truthy string')
+  t.throws(g(false), TypeError, 'throws when wrapped function called with false')
+  t.throws(g(true), TypeError, 'throws when wrapped function called with true')
+  t.throws(g({}), TypeError, 'throws when wrapped function called with an Object')
+  t.throws(g([]), TypeError, 'throws when wrapped function called with an Array')
+  t.throws(g(noop), TypeError, 'throws when wrapped function called with a function')
+
+  t.equal(res.fst(), 4, 'Applies function to `fst` of the Pair')
+  t.equal(res.snd(), 3, 'Does not Apply function to `snd` of the Pair')
 
   t.end()
 })

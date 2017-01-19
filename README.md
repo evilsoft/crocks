@@ -274,7 +274,7 @@ These functions provide a very clean way to build out very simple functions and 
 | `evalWith` | `State` |
 | `execWith` | `State` |
 | `filter` | `Array`, `List` |
-| `first` | `Arrow` |
+| `first` | `Arrow`, `Function` |
 | `fst` | `Pair` |
 | `head` | `Array`, `List` |
 | `log` | `Writer` |
@@ -287,7 +287,7 @@ These functions provide a very clean way to build out very simple functions and 
 | `reduce` | `Array`, `List` |
 | `run` | `IO` |
 | `runWith` | `Arrow`, `Pred`, `Reader`, `Star`, `State` |
-| `second` | `Arrow` |
+| `second` | `Arrow`, `Function` |
 | `sequence` | `Array`, `Either`, `Identity`, `List`, `Maybe` |
 | `snd` | `Pair` |
 | `swap` | `Async`, `Either`, `Pair` |

@@ -2,13 +2,24 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const isFunction = require('../predicates/isFunction')
+const isType = require('../internal/isType')
+const identity = require('../combinators/identity')
 
 function first(m) {
-  if(!(m && isFunction(m.first))) {
-    throw new TypeError('first: Arrow required')
+  if(isFunction(m)) {
+    return function(x) {
+      if(!(x && isType('Pair', x))) {
+        throw new TypeError('first: Pair required as input')
+      }
+
+      return x.bimap(m, identity)
+    }
+  } else if(m && isFunction(m.first)) {
+    return m.first()
+  } else {
+    throw new TypeError('first: Arrow or Function required')
   }
 
-  return m.first()
 }
 
 module.exports = first

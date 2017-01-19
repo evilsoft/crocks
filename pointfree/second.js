@@ -1,20 +1,14 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const curry = require('../helpers/curry')
-
 const isFunction = require('../predicates/isFunction')
 
-function second(fn, m) {
-  if(!isFunction(fn)) {
-    throw new TypeError('second: Function required for first argument')
-  }
-
+function second(m) {
   if(!(m && isFunction(m.second))) {
-    throw new TypeError('second: Arrow of the same type required for second argument')
+    throw new TypeError('second: Arrow required')
   }
 
-  return m.second(fn)
+  return m.second()
 }
 
-module.exports = curry(second)
+module.exports = second

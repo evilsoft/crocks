@@ -239,7 +239,7 @@ These functions provide a very clean way to build out very simple functions and 
 | `evalWith` | `a -> m -> b` |
 | `execWith` | `a -> m -> b` |
 | `filter` | `((a -> Boolean) | Pred) -> m a -> m a` |
-| `first` | `(a -> b) -> m (a, c) -> m (b, c)` |
+| `first` | `m (a -> b) -> m ((a, c) -> (b, c))` |
 | `fst` | `m a b -> a` |
 | `head` | `m a -> Maybe a` |
 | `log` | `m a b -> a` |
@@ -252,7 +252,7 @@ These functions provide a very clean way to build out very simple functions and 
 | `reduce` | `(b -> a -> b) -> b -> m a -> b` |
 | `run` | `m a -> b` |
 | `runWith` | `a -> m -> b` |
-| `second` | `(b -> c) -> m (a, b) -> m (a, c)` |
+| `second` | `m (a -> b) -> m ((c, a) -> (c, b))` |
 | `sequence` | `Applicative f => (b -> f b) -> m (f a) -> f (m a)` |
 | `snd` | `m a b -> b` |
 | `swap` | `m a b -> m b a` |

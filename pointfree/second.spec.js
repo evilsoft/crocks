@@ -3,7 +3,6 @@ const sinon = require('sinon')
 const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
-const noop = helpers.noop
 
 const isFunction = require('../predicates/isFunction')
 
@@ -13,38 +12,27 @@ const second = require('./second')
 
 test('second pointfree', t => {
   const s = bindFunc(second)
+
   const x = 'result'
   const m = { second: sinon.spy(constant(x)) }
 
   t.ok(isFunction(second), 'is a function')
 
-  t.throws(s(undefined, m), 'throws if first arg is undefined')
-  t.throws(s(null, m), 'throws if first arg is null')
-  t.throws(s(0, m), 'throws if first arg is a falsey number')
-  t.throws(s(1, m), 'throws if first arg is a truthy number')
-  t.throws(s('', m), 'throws if first arg is a falsey string')
-  t.throws(s('string', m), 'throws if first arg is a truthy string')
-  t.throws(s(false, m), 'throws if first arg is false')
-  t.throws(s(true, m), 'throws if first arg is true')
-  t.throws(s([], m), 'throws if first arg is an array')
-  t.throws(s({}, m), 'throws if first arg is an object')
+  t.throws(s(undefined), 'throws if arg is undefined')
+  t.throws(s(null), 'throws if arg is null')
+  t.throws(s(0), 'throws if arg is a falsey number')
+  t.throws(s(1), 'throws if arg is a truthy number')
+  t.throws(s(''), 'throws if arg is a falsey string')
+  t.throws(s('string'), 'throws if arg is a truthy string')
+  t.throws(s(false), 'throws if arg is false')
+  t.throws(s(true), 'throws if arg is true')
+  t.throws(s({}), 'throws if arg is an object')
 
-  t.throws(s(noop, undefined), 'throws if second arg is undefined')
-  t.throws(s(noop, null), 'throws if second arg is null')
-  t.throws(s(noop, 0), 'throws if second arg is a falsey number')
-  t.throws(s(noop, 1), 'throws if second arg is a truthy number')
-  t.throws(s(noop, ''), 'throws if second arg is a falsey string')
-  t.throws(s(noop, 'string'), 'throws if second arg is a truthy string')
-  t.throws(s(noop, false), 'throws if second arg is false')
-  t.throws(s(noop, true), 'throws if second arg is true')
-  t.throws(s(noop, {}), 'throws if second arg is an object')
+  t.doesNotThrow(s(m), 'allows an Arrow')
 
-  t.doesNotThrow(s(noop, m), 'allows a function and Arrow')
+  const res = second(m)
 
-  const g = sinon.spy()
-  const res = second(g, m)
-
-  t.ok(m.second.calledWith(g), 'calls second on Arrow, passing the function')
+  t.ok(m.second.called, 'calls second on Arrow')
   t.equal(res, x, 'returns the result of second on Arrow')
 
   t.end()

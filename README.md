@@ -267,14 +267,14 @@ These functions provide a very clean way to build out very simple functions and 
 | `bimap` | `Async`, `Either`, `Pair` |
 | `chain` | `Async`, `Const`, `Either`, `Identity`, `IO`, `List`, `Maybe`, `Pair`, `Reader`, `State`, `Unit`, `Writer` |
 | `coalesce` | `Async`, `Maybe`, `Either` |
-| `concat` | `All`, `Any`, `Array`, `Arrow`, `Assign`, `Const`, `List`, `Max`, `Min`, `Pair`, `Pred`, `Prod`, `String`, `Sum`, `Unit` |
+| `concat` | `All`, `Any`, `Array`, `Arrow`, `Assign`, `Const`, `List`, `Max`, `Min`, `Pair`, `Pred`, `Prod`, `Star`, `String`, `Sum`, `Unit` |
 | `cons` | `Array`, `List` |
 | `contramap` | `Arrow`, `Pred`, `Star` |
 | `either` | `Either`, `Maybe` |
 | `evalWith` | `State` |
 | `execWith` | `State` |
 | `filter` | `Array`, `List` |
-| `first` | `Arrow`, `Function` |
+| `first` | `Arrow`, `Function`, `Star` |
 | `fst` | `Pair` |
 | `head` | `Array`, `List` |
 | `log` | `Writer` |
@@ -287,7 +287,7 @@ These functions provide a very clean way to build out very simple functions and 
 | `reduce` | `Array`, `List` |
 | `run` | `IO` |
 | `runWith` | `Arrow`, `Pred`, `Reader`, `Star`, `State` |
-| `second` | `Arrow`, `Function` |
+| `second` | `Arrow`, `Function`, `Star` |
 | `sequence` | `Array`, `Either`, `Identity`, `List`, `Maybe` |
 | `snd` | `Pair` |
 | `swap` | `Async`, `Either`, `Pair` |

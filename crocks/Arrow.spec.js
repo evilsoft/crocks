@@ -319,7 +319,7 @@ test('Arrow promap functionality', t => {
   t.end()
 })
 
-test('Arrow promap properties (Functor)', t => {
+test('Arrow promap properties (Profunctor)', t => {
   const m = Arrow(identity)
 
   const f = x => x + 12
@@ -349,7 +349,7 @@ test('Arrow first', t => {
 
   const m = Arrow(x => x + 1)
 
-  const runWith = bindFunc(m.first(identity).runWith)
+  const runWith = bindFunc(m.first().runWith)
 
   t.throws(runWith(undefined), TypeError, 'throws with undefined as inner argument')
   t.throws(runWith(null), TypeError, 'throws with null as inner argument')
@@ -378,7 +378,7 @@ test('Arrow second', t => {
 
   const m = Arrow(x => x + 1)
 
-  const runWith = bindFunc(m.second(identity).runWith)
+  const runWith = bindFunc(m.second().runWith)
 
   t.throws(runWith(undefined), TypeError, 'throws with undefined as inner argument')
   t.throws(runWith(null), TypeError, 'throws with null as inner argument')

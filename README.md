@@ -1,5 +1,10 @@
-# crocks.js
-`crocks` is a collection of popular *Algebraic Data Types (ADTs)* that are all the rage in functional programming. You have heard of things like `Maybe` and `Either` and heck maybe even `IO`, that is what these are. The main goal of `crocks` is to curate and provide not only a common interface between each type (where possible of course), but also all of the helper functions needed to hit the ground running.
+<img style="display: block; width: 360px; margin: 24px auto;" src="https://cdn.rawgit.com/rstegg/crocks/dfdee636/crocks_js.svg" />
+
+# a collection of popular *Algebraic Data Types*
+
+The Algebraic Data Types (ADT)s included in `crocks` are those which are trending in functional programming. If you've ever heard of `Maybe` or `Either`, or even `IO`, you're in the right place! The main goal of `crocks` is to provide a *curated common interface* between each type and include all the helper functions needed to get the wheel spinning.
+
+This library *should* work, with no additional compilation in all current browsers (Edge, Safari, Chrome, Firefox). If it does not, please file an issue! :smile_cat:
 
 ## Installation
 `crocks` is available from `npm` and is just a shell command away. All you need to do is run the following to save it as a dependency in your current project folder:
@@ -11,16 +16,16 @@ $ npm install crocks -S
 This will pull down `crocks` into your project's `node_modules` folder and can be accessed by adding something like the following in the file that needs it:
 
 ```javascript
-// node require syntax
+// node require syntax - "es5"
 const crocks = require('crocks')
 
-// Javascript modules (if you are transpiling or using rollup.js)
+// Javascript modules (if you are transpiling or using rollup.js) - "es6"
 import crocks from 'crocks'
 ```
 
-There is no compilation going on here, so as a result, you will need to bundle or run with node `4.x` or higher. This lib *should* work, with no additional compilation in all current browsers (Edge, Safari, Chrome, Firefox), if it does not, please file an issue as I really, really want it to. :smile_cat:.
+There is no compilation going on here, so as a result, you will need to bundle or run with node `4.x` or higher.
 
-Another thing to note is, if you are transpiling, then destructuring in your `import` statement is not going to work as you are thinking (maybe if you are using `babel`, but this will be broken once modules are available in node, so be careful). Basically you should not do this, as `crocks` will not be set up for it until modules are available in node:
+**Precaution**: if you are de-structuring inline your `import` statement, you will need to use `babel` as this will not be supported once modules are available in node. Basically you should not do this, as `crocks` will not be set up for it until modules are available in node:
 
 ```javascript
 // Nope! Nope! Nope!:
@@ -30,7 +35,7 @@ import { Maybe, compose, curry, map } from 'crocks'
 import crocks from 'crocks'
 const { Maybe, compose, curry, map } = crocks
 
-// do not wanna bring all of crocks into your bundle?
+// don't wanna bring all of crocks into your bundle?
 // I feel ya, try this:
 
 import Maybe from 'crocks/crocks/Maybe'
@@ -38,7 +43,7 @@ import compose from 'crocks/helpers/compose'
 import curry from 'crocks/helpers/curry'
 import map from 'crocks/pointfree/map'
 
-// you can of course do the same with require statements:
+// you can, of course, do the same with require statements:
 const All = require('crocks/monoids/All')
 ...
 ```

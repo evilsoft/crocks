@@ -1,20 +1,25 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const curry = require('../helpers/curry')
-
 const isFunction = require('../predicates/isFunction')
+const isType = require('../internal/isType')
+const identity = require('../combinators/identity')
 
-function first(fn, m) {
-  if(!isFunction(fn)) {
-    throw new TypeError('first: Function required for first argument')
+function first(m) {
+  if(isFunction(m)) {
+    return function(x) {
+      if(!(x && isType('Pair', x))) {
+        throw new TypeError('first: Pair required as input')
+      }
+
+      return x.bimap(m, identity)
+    }
+  } else if(m && isFunction(m.first)) {
+    return m.first()
+  } else {
+    throw new TypeError('first: Arrow or Function required')
   }
 
-  if(!(m && isFunction(m.first))) {
-    throw new TypeError('first: Arrow of the same type required for second argument')
-  }
-
-  return m.first(fn)
 }
 
-module.exports = curry(first)
+module.exports = first

@@ -68,30 +68,22 @@ function Arrow(runWith) {
     return Arrow(compose(r, runWith, l))
   }
 
-  function first(fn) {
-    if(!isFunction(fn)) {
-      throw new TypeError('Arrow.first: Function required')
-    }
-
-    return map(function(x) {
+  function first() {
+    return Arrow(function(x) {
       if(!(x && x.type && x.type() === Pair.type())) {
         throw TypeError('Arrow.first: Pair required for inner argument')
       }
-      return x.bimap(fn, identity)
+      return x.bimap(runWith, identity)
     })
   }
 
-  function second(fn) {
-    if(!isFunction(fn)) {
-      throw new TypeError('Arrow.second: Function required')
-    }
-
-    return map(function(x) {
+  function second() {
+    return Arrow(function(x) {
       if(!(x && x.type && x.type() === Pair.type())) {
         throw TypeError('Arrow.second: Pair required for inner argument')
       }
 
-      return x.bimap(identity, fn)
+      return x.bimap(identity, runWith)
     })
   }
 

@@ -319,7 +319,7 @@ test('Arrow promap functionality', t => {
   t.end()
 })
 
-test('Arrow promap properties (Functor)', t => {
+test('Arrow promap properties (Profunctor)', t => {
   const m = Arrow(identity)
 
   const f = x => x + 12
@@ -347,21 +347,9 @@ test('Arrow promap properties (Functor)', t => {
 test('Arrow first', t => {
   t.ok(isFunction(Arrow(noop).first), 'provides a first function')
 
-  const m = Arrow(identity)
-  const first = bindFunc(m.first)
+  const m = Arrow(x => x + 1)
 
-  t.throws(first(undefined), TypeError, 'throws with undefined')
-  t.throws(first(null), TypeError, 'throws with null')
-  t.throws(first(0), TypeError, 'throws with falsey number')
-  t.throws(first(1), TypeError, 'throws with truthy number')
-  t.throws(first(''), TypeError, 'throws with falsey string')
-  t.throws(first('string'), TypeError, 'throws with truthy string')
-  t.throws(first(false), TypeError, 'throws with false')
-  t.throws(first(true), TypeError, 'throws with true')
-  t.throws(first([]), TypeError, 'throws with an array')
-  t.throws(first({}), TypeError, 'throws with an object')
-
-  const runWith = bindFunc(m.first(identity).runWith)
+  const runWith = bindFunc(m.first().runWith)
 
   t.throws(runWith(undefined), TypeError, 'throws with undefined as inner argument')
   t.throws(runWith(null), TypeError, 'throws with null as inner argument')
@@ -374,11 +362,9 @@ test('Arrow first', t => {
   t.throws(runWith([]), TypeError, 'throws with an array as inner argument')
   t.throws(runWith({}), TypeError, 'throws with an object as inner argument')
 
-  t.doesNotThrow(first(identity), 'does not throw when passed a function')
   t.doesNotThrow(runWith(Pair.of(2)), 'does not throw when inner value is a Pair')
 
-  const fn = x => x + 1
-  const result = m.first(fn).runWith(Pair(10, 10))
+  const result = m.first().runWith(Pair(10, 10))
 
   t.equal(result.type(), 'Pair', 'returns a Pair')
   t.equal(result.fst(), 11, 'applies the function to the fst element of a pair')
@@ -390,21 +376,9 @@ test('Arrow first', t => {
 test('Arrow second', t => {
   t.ok(isFunction(Arrow(noop).second), 'provides a second function')
 
-  const m = Arrow(identity)
-  const second = bindFunc(m.second)
+  const m = Arrow(x => x + 1)
 
-  t.throws(second(undefined), TypeError, 'throws with undefined')
-  t.throws(second(null), TypeError, 'throws with null')
-  t.throws(second(0), TypeError, 'throws with falsey number')
-  t.throws(second(1), TypeError, 'throws with truthy number')
-  t.throws(second(''), TypeError, 'throws with falsey string')
-  t.throws(second('string'), TypeError, 'throws with truthy string')
-  t.throws(second(false), TypeError, 'throws with false')
-  t.throws(second(true), TypeError, 'throws with true')
-  t.throws(second([]), TypeError, 'throws with an array')
-  t.throws(second({}), TypeError, 'throws with an object')
-
-  const runWith = bindFunc(m.second(identity).runWith)
+  const runWith = bindFunc(m.second().runWith)
 
   t.throws(runWith(undefined), TypeError, 'throws with undefined as inner argument')
   t.throws(runWith(null), TypeError, 'throws with null as inner argument')
@@ -417,11 +391,9 @@ test('Arrow second', t => {
   t.throws(runWith([]), TypeError, 'throws with an array as inner argument')
   t.throws(runWith({}), TypeError, 'throws with an object as inner argument')
 
-  t.doesNotThrow(second(identity), 'does not throw when passed a function')
   t.doesNotThrow(runWith(Pair.of(2)), 'does not throw when inner value is a Pair')
 
-  const fn = x => x + 1
-  const result = m.second(fn).runWith(Pair(10, 10))
+  const result = m.second().runWith(Pair(10, 10))
 
   t.equal(result.type(), 'Pair', 'returns a Pair')
   t.equal(result.snd(), 11, 'applies the function to the snd element of a pair')

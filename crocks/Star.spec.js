@@ -9,9 +9,11 @@ const isFunction = require('../predicates/isFunction')
 const isObject = require('../predicates/isObject')
 
 const composeB = require('../combinators/composeB')
+const constant = require('../combinators/constant')
 const identity = require('../combinators/identity')
 
 const MockCrock = require('../test/MockCrock')
+const Pair = require('./Pair')
 
 const Star = require('./Star')
 
@@ -70,6 +72,83 @@ test('Star runWith', t => {
 
   t.ok(f.calledWith('apple'), 'calls the wrapped function passing provided argument')
   t.ok(f.returned(result), 'returns the result of the wrapped function')
+
+  t.end()
+})
+
+test('Star concat functionality', t => {
+  const f = x => MockCrock(x + 1)
+
+  const a = Star(f)
+
+  const notStar = { type: constant('Star...Not') }
+  const notMock  = { type: constant('Mock...Not') }
+
+  const cat = bindFunc(a.concat)
+
+  t.throws(cat(undefined), TypeError, 'throws with undefined')
+  t.throws(cat(null), TypeError, 'throws with null')
+  t.throws(cat(0), TypeError, 'throws with falsey number')
+  t.throws(cat(1), TypeError, 'throws with truthy number')
+  t.throws(cat(''), TypeError, 'throws with falsey string')
+  t.throws(cat('string'), TypeError, 'throws with truthy string')
+  t.throws(cat(false), TypeError, 'throws with false')
+  t.throws(cat(true), TypeError, 'throws with true')
+  t.throws(cat([]), TypeError, 'throws with an array')
+  t.throws(cat({}), TypeError, 'throws with an object')
+  t.throws(cat(notStar), TypeError, 'throws with non-Star')
+
+  const noMonadFst = bindFunc(Star(identity).concat(a).runWith)
+
+  t.throws(noMonadFst(undefined), TypeError, 'throws when first computation returns undefined')
+  t.throws(noMonadFst(null), TypeError, 'throws when first computation returns null')
+  t.throws(noMonadFst(0), TypeError, 'throws when first computation returns falsey number')
+  t.throws(noMonadFst(1), TypeError, 'throws when first computation returns truthy number')
+  t.throws(noMonadFst(''), TypeError, 'throws when first computation returns falsey string')
+  t.throws(noMonadFst('string'), TypeError, 'throws when first computation returns truthy string')
+  t.throws(noMonadFst(false), TypeError, 'throws when first computation returns false')
+  t.throws(noMonadFst(true), TypeError, 'throws when first computation returns true')
+  t.throws(noMonadFst({}), TypeError, 'throws when first computation returns false')
+  t.throws(noMonadFst([]), TypeError, 'throws when first computation returns true')
+
+  const noMonadSnd = bindFunc(x => a.concat(Star(constant(x))).runWith(10))
+
+  t.throws(noMonadSnd(undefined), TypeError, 'throws when second computation returns undefined')
+  t.throws(noMonadSnd(null), TypeError, 'throws when second computation returns null')
+  t.throws(noMonadSnd(0), TypeError, 'throws when second computation returns falsey number')
+  t.throws(noMonadSnd(1), TypeError, 'throws when second computation returns truthy number')
+  t.throws(noMonadSnd(''), TypeError, 'throws when second computation returns falsey string')
+  t.throws(noMonadSnd('string'), TypeError, 'throws when second computation returns truthy string')
+  t.throws(noMonadSnd(false), TypeError, 'throws when second computation returns false')
+  t.throws(noMonadSnd(true), TypeError, 'throws when second computation returns true')
+  t.throws(noMonadSnd({}), TypeError, 'throws when second computation returns false')
+  t.throws(noMonadSnd([]), TypeError, 'throws when second computation returns true')
+  t.throws(noMonadSnd(notMock), TypeError, 'throws when second computation returns non-MockCrock')
+
+  const x = 13
+  const g = x => MockCrock(x * 10)
+
+  const chained = f(x).chain(g).value()
+  const star = a.concat(Star(g)).runWith(x).value()
+
+  t.equal(chained, star, 'builds composition as expected')
+
+  t.end()
+})
+
+test('Star concat properties (Semigroup)', t => {
+  const a = Star(x => MockCrock(x + 1))
+  const b = Star(x => MockCrock(x * 10))
+  const c = Star(x => MockCrock(x - 5))
+
+  t.ok(isFunction(Star(identity).concat), 'is a function')
+
+  const left = a.concat(b).concat(c).runWith
+  const right = a.concat(b.concat(c)).runWith
+  const x = 20
+
+  t.same(left(x).value(), right(x).value(), 'associativity')
+  t.same(a.concat(b).type(), a.type(), 'returns Semigroup of same type')
 
   t.end()
 })
@@ -272,6 +351,90 @@ test('Star promap properties (Functor)', t => {
     m.promap(f, k).promap(g, h).runWith(x).value(),
     'composition'
   )
+
+  t.end()
+})
+
+test('Star first', t => {
+  t.ok(isFunction(Star(noop).first), 'provides a first function')
+
+  const m = Star(x => MockCrock(x + 1))
+
+  const runWith = bindFunc(m.first().runWith)
+
+  t.throws(runWith(undefined), TypeError, 'throws with undefined input')
+  t.throws(runWith(null), TypeError, 'throws with null as input')
+  t.throws(runWith(0), TypeError, 'throws with falsey number as input')
+  t.throws(runWith(1), TypeError, 'throws with truthy number as input')
+  t.throws(runWith(''), TypeError, 'throws with falsey string as input')
+  t.throws(runWith('string'), TypeError, 'throws with truthy string as input')
+  t.throws(runWith(false), TypeError, 'throws with false as input')
+  t.throws(runWith(true), TypeError, 'throws with true as input')
+  t.throws(runWith([]), TypeError, 'throws with an array as input')
+  t.throws(runWith({}), TypeError, 'throws with an object as input')
+
+  t.doesNotThrow(runWith(Pair.of(2)), 'does not throw when inner value is a Pair')
+
+  const notValid = bindFunc(x => Star(_ => x).first().runWith(Pair(2, 3)))
+
+  t.throws(notValid(undefined), TypeError, 'throws with undefined input')
+  t.throws(notValid(null), TypeError, 'throws with null as input')
+  t.throws(notValid(0), TypeError, 'throws with falsey number as input')
+  t.throws(notValid(1), TypeError, 'throws with truthy number as input')
+  t.throws(notValid(''), TypeError, 'throws with falsey string as input')
+  t.throws(notValid('string'), TypeError, 'throws with truthy string as input')
+  t.throws(notValid(false), TypeError, 'throws with false as input')
+  t.throws(notValid(true), TypeError, 'throws with true as input')
+  t.throws(notValid({}), TypeError, 'throws with an object as input')
+
+  const result = m.first().runWith(Pair(10, 10)).value()
+
+  t.equal(result.type(), 'Pair', 'returns a Pair')
+  t.equal(result.fst(), 11, 'applies the function to the fst element of a pair')
+  t.equal(result.snd(), 10, 'does not apply the function to the second element of a pair')
+
+  t.end()
+})
+
+test('Star second', t => {
+  t.ok(isFunction(Star(noop).second), 'provides a second function')
+
+  const m = Star(x => MockCrock(x + 1))
+
+  const runWith = bindFunc(m.second().runWith)
+
+  t.throws(runWith(undefined), TypeError, 'throws with undefined as input')
+  t.throws(runWith(null), TypeError, 'throws with null as input')
+  t.throws(runWith(0), TypeError, 'throws with falsey number as input')
+  t.throws(runWith(1), TypeError, 'throws with truthy number as input')
+  t.throws(runWith(''), TypeError, 'throws with falsey string as input')
+  t.throws(runWith('string'), TypeError, 'throws with truthy string as input')
+  t.throws(runWith(false), TypeError, 'throws with false as input')
+  t.throws(runWith(true), TypeError, 'throws with true as input')
+  t.throws(runWith([]), TypeError, 'throws with an array as input')
+  t.throws(runWith({}), TypeError, 'throws with an object as input')
+
+  t.doesNotThrow(runWith(Pair.of(2)), 'does not throw when inner value is a Pair')
+
+  const notValid = bindFunc(x => Star(_ => x).second().runWith(Pair(2, 3)))
+
+  t.throws(notValid(undefined), TypeError, 'throws when computation returns undefined')
+  t.throws(notValid(null), TypeError, 'throws when computation returns null')
+  t.throws(notValid(0), TypeError, 'throws when computation returns falsey number')
+  t.throws(notValid(1), TypeError, 'throws when computation returns truthy number')
+  t.throws(notValid(''), TypeError, 'throws when computation returns falsey string')
+  t.throws(notValid('string'), TypeError, 'throws when computation returns truthy string')
+  t.throws(notValid(false), TypeError, 'throws when computation returns false')
+  t.throws(notValid(true), TypeError, 'throws when computation returns true')
+  t.throws(notValid({}), TypeError, 'throws an when computation returns object')
+
+  t.doesNotThrow(notValid(MockCrock.of(2)), 'does not throw when computation returns a Functor')
+
+  const result = m.second().runWith(Pair(10, 10)).value()
+
+  t.equal(result.type(), 'Pair', 'returns a Pair')
+  t.equal(result.snd(), 11, 'applies the function to the snd element of a pair')
+  t.equal(result.fst(), 10, 'does not apply the function to the first element of a pair')
 
   t.end()
 })

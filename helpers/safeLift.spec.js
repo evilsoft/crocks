@@ -1,0 +1,87 @@
+const test = require('tape')
+const sinon = require('sinon')
+const helpers = require('../test/helpers')
+
+const bindFunc = helpers.bindFunc
+const noop = helpers.noop
+
+const isFunction = require('../predicates/isFunction')
+
+const identity = require('../combinators/identity')
+
+const Pred = require('../crocks/Pred')
+
+const safeLift = require('./safeLift')
+
+test('safeLift', t => {
+  const f = bindFunc(safeLift)
+
+  t.ok(isFunction(safeLift), 'is a function')
+
+  t.throws(f(undefined, noop), 'throws with undefined in first argument')
+  t.throws(f(null, noop), 'throws with null in first argument')
+  t.throws(f(0, noop), 'throws with falsey number in first argument')
+  t.throws(f(1, noop), 'throws with truthy number in first argument')
+  t.throws(f('', noop), 'throws with falsey string in first argument')
+  t.throws(f('string', noop), 'throws with truthy string in first argument')
+  t.throws(f(false, noop), 'throws with false in first argument')
+  t.throws(f(true, noop), 'throws with true in first argument')
+  t.throws(f({}, noop), 'throws with an object in first argument')
+  t.throws(f([], noop), 'throws with an array in first argument')
+
+  t.throws(f(noop, undefined), 'throws with undefined in second argument')
+  t.throws(f(noop, null), 'throws with null in second argument')
+  t.throws(f(noop, 0), 'throws with falsey number in second argument')
+  t.throws(f(noop, 1), 'throws with truthy number in second argument')
+  t.throws(f(noop, ''), 'throws with falsey string in second argument')
+  t.throws(f(noop, 'string'), 'throws with truthy string in second argument')
+  t.throws(f(noop, false), 'throws with false in second argument')
+  t.throws(f(noop, true), 'throws with true in second argument')
+  t.throws(f(noop, {}), 'throws with an object in second argument')
+  t.throws(f(noop, []), 'throws with an array in second argument')
+
+  t.doesNotThrow(f(noop, noop), 'allows a function and function')
+  t.doesNotThrow(f(Pred(noop), noop), 'allows a Pred and function')
+
+  t.end()
+})
+
+test('safeLift predicate function', t => {
+  const pred = x => !!x
+  const fn = sinon.spy(identity)
+
+  const f = safeLift(pred, fn)
+
+  const fResult = f(false).option('nothing')
+
+  t.equals(fResult, 'nothing', 'returns a Nothing when false')
+  t.notOk(fn.called, 'does not call the function on a Nothing')
+
+  const tResult = f('just').option('nothing')
+
+  t.equals(tResult, 'just', 'returns a Just when true')
+  t.ok(fn.called, 'calls the function on a Just')
+  t.same(fn.args[0], [ 'just' ], 'passed wrapped value to function on a Just')
+
+  t.end()
+})
+
+test('safeLift Pred', t => {
+  const pred = Pred(x => !!x)
+  const fn = sinon.spy(identity)
+
+  const f = safeLift(pred, fn)
+
+  const fResult = f(0).option('nothing')
+
+  t.equals(fResult, 'nothing', 'returns a Nothing when false')
+  t.notOk(fn.called, 'does not call the function on a Nothing')
+
+  const tResult = f('just').option('nothing')
+
+  t.equals(tResult, 'just', 'returns a Just when true')
+  t.ok(fn.called, 'calls the function on a Just')
+  t.same(fn.args[0], [ 'just' ], 'passed wrapped value to function on a Just')
+
+  t.end()
+})

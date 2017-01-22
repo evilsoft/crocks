@@ -34,6 +34,7 @@ const helpers = {
   compose: require('./helpers/compose'),
   curry: require('./helpers/curry'),
   curryN: require('./helpers/curryN'),
+  fanout: require('./helpers/fanout'),
   ifElse: require('./helpers/ifElse'),
   liftA2: require('./helpers/liftA2'),
   liftA3: require('./helpers/liftA3'),

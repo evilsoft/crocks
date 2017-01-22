@@ -46,7 +46,7 @@ const All = require('crocks/monoids/All')
 ## What is in this?
 There are (6) classifications of "things" included in this library:
 
-* Crocks (`crocks/crocks`): These are the ADTs that this library is centered around. They are all Functor based Data Types that provide different computational contexts for working in a more declarative, functional flow. For the most part, a majority of the other bits in `crocks` exist to server these ADTs.
+* Crocks (`crocks/crocks`): These are the ADTs that this library is centered around. They are all Functor based Data Types that provide different computational contexts for working in a more declarative, functional flow. For the most part, a majority of the other bits in `crocks` exist to serve these ADTs.
 
 * Monoids (`crocks/monoids`): These helpful ADTs are in a class of their own, not really Functors in their own right (although some can be), they are still very useful in our everyday programming needs. Ever need to Sum a list of Numbers or mix a mess of objects together? This is were you will find the ADTs you need to do that.
 
@@ -131,10 +131,15 @@ When you want to branch a computation into two parts, this is the function you w
 While the `composeB` can be used to create a composition of two functions, there are times when you want to compose an entire flow together. That is where `compose` is useful. With `compose` you can create a right-to-left composition of functions. It will return you a function that represents your flow. Not really sold on writing flows from right-to-left? Well then, I would recommend reaching for `pipe`.
 
 #### `curry : ((a, b, ...) -> z) -> a -> b -> ... -> z`
-Pass this function a function and it will return you a function that can be called in any form that you require until all arguments have been provided. For example if you pass a function: `f : (a, b, c) -> d` you get back a function that can be called in any combination, such as: `f(x, y, z)`, `f(x)(y)(z)`, `f(x, y)(z)`, or even `f(x)(y, z)`. This is great for doing partial application on functions for maximum reusability.
+Pass this function a function and it will return you a function that can be called in any form that you require until all arguments have been provided. For example if you pass a function: `f : (a, b, c) -> d` you get back a function that can be called in any combination, such as: `f(x, y, z)`, `f(x)(y)(z)`, `f(x, y)(z)`, or even `f(x)(y, z)`. This is great for doing partial application on functions for maximum re-usability.
 
 #### `curryN : Number -> ((a, b, ...) -> z) -> a -> b -> ... -> z`
 When dealing with variable argument functions, there are times when you may want to curry a specific number of arguments. Just pass this function the number of arguments you want to curry as well as the function, and it will not call the wrapped function until all arguments have been passed. This function will ONLY pass the number of arguments that you specified, any remaining arguments are discarded. This is great for limiting the arity of a given function when additional parameters are defaulted or not needed. This function will not auto curry functions returning functions like `curry` does, use with `curry` if you need to do some fancy setup for your wrapped function's api.
+
+#### `fanout : (a -> b) -> (a -> c) -> (a -> Pair b c)`
+#### `fanout : Arrow a b -> Arrow a c -> Arrow a (Pair b c)`
+#### `fanout : Monad m => Star a (m b) -> Star a (m c) -> Star a (m (Pair b c))`
+There are may times that you need to keep some running or persistent state while performing a given computation. A common way to do this is to take the input to the computation and branch it into a `Pair` and perform different operations on each version of the input. This is such a common pattern that it warrents the `fanout` function to take care of the initial split and mapping. Just provide a pair of either simple functions or a pair of one of the computation types (`Arrow` or `Star`). You will get back something of the same type that is configured to split it's input into a pair and than apply the first Function/ADT to the first portion of the underlying `Pair` and the second on the second.
 
 #### `ifElse : ((a -> Boolean) | Pred) -> (a -> b) -> (a -> c) -> a -> b | c`
 Whenever you need to modify a value based some condition and want a functional way to do it without some imperative `if` statement, then reach for `ifElse`. This function take a predicate (some function that returns a Boolean) and two functions. The first is what is executed when the predicate is true, the second on a false condition. This will return a function ready to take a value to run through the predicate. After the value is evaluated, it will be ran through it's corresponding function, returning the result as the final result. This function comes in really handy when creating lifting functions for Sum Types (like `Either` or `Maybe`).

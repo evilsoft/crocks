@@ -187,7 +187,7 @@ All functions in this group have a signature of `a -> Boolean` and are easily us
 * `isApply`: an ADT that provides `map` and `ap` functions
 * `isArray`: Array
 * `isBoolean`: Boolean
-* `isEmpty`: Empty Object, Array or String; All falsey values
+* `isEmpty`: Empty Object, Array or String
 * `isFunction`: Function
 * `isFunctor`: an ADT that provides a `map` function
 * `isInteger`: Integer

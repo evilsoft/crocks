@@ -18,16 +18,14 @@ const _empty =
   Unit
 
 function Unit() {
-  const x = undefined
-
   const equals =
-    m => isType(type(), m) && x === m.value()
+    m => isType(type(), m) && undefined === m.value()
 
   const inspect =
     constant(`()`)
 
   const value =
-    constant(x)
+    constant(undefined)
 
   const type =
     _type

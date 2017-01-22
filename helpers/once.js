@@ -12,11 +12,12 @@ function once(fn) {
   }
 
   return function() {
-    if(called) { return result }
+    if(!called) {
+      called = true
+      result = fn.apply(null, arguments)
+    }
 
-    called = true
-    return result =
-      fn.apply(null, arguments)
+    return result
   }
 }
 

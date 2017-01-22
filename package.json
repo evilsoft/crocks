@@ -7,8 +7,11 @@
     "preversion": "npm run build",
     "build:publish": "npm test && npm run build && npm publish",
     "build": "npm test && webpack && uglifyjs dist/crocks.js -c \"warnings=false\" -m -o dist/crocks.min.js",
-    "spec": "nodemon -q -e js -x 'npm test -s | tap-spec'",
-    "test": "tape combinators/*.spec.js crocks/*.spec.js helpers/*.spec.js internal/*.spec.js monoids/*.spec.js pointfree/*.spec.js ./predicates/*.spec.js ./*.spec.js"
+    "lint": "jshint .",
+    "lint:dev": "jshint --reporter=node_modules/jshint-stylish .",
+    "spec": "tape combinators/*.spec.js crocks/*.spec.js helpers/*.spec.js internal/*.spec.js monoids/*.spec.js pointfree/*.spec.js ./predicates/*.spec.js ./*.spec.js",
+    "spec:dev": "nodemon -q -e js -x 'npm run spec -s | tap-spec'",
+    "test": "npm run lint && npm run spec"
   },
   "repository": {
     "type": "git",
@@ -35,6 +38,8 @@
     "babel-plugin-transform-es2015-arrow-functions": "^6.8.0",
     "babel-plugin-transform-es2015-shorthand-properties": "^6.8.0",
     "babel-plugin-transform-es2015-template-literals": "^6.8.0",
+    "jshint": "^2.9.4",
+    "jshint-stylish": "^2.2.1",
     "nodemon": "^1.9.2",
     "sinon": "^1.17.4",
     "tap-spec": "^4.1.1",

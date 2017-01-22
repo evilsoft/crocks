@@ -2,6 +2,10 @@ node_modules
 test
 *.spec.js
 
+.travis.yml
+.jshintignore
+.jshintrc
+
 .node-version
 *.log
 .DS_Store

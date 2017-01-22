@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/evilsoft/crocks.svg?branch=master)](https://travis-ci.org/evilsoft/crocks)
+
 # crocks.js
 `crocks` is a collection of popular *Algebraic Data Types (ADTs)* that are all the rage in functional programming. You have heard of things like `Maybe` and `Either` and heck maybe even `IO`, that is what these are. The main goal of `crocks` is to curate and provide not only a common interface between each type (where possible of course), but also all of the helper functions needed to hit the ground running.
 

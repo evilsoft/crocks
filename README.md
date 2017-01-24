@@ -165,10 +165,16 @@ When you need to negate a predicate function or a `Pred`, but want a new predica
 There are times in Javascript development where you only want to call a function once and memoize the first result for every subsequent call to that function. Just pass the function you want guarded to `once` and you will get back a function with the expected guarantees.
 
 #### `pipe : ((a -> b), (b -> c), ..., (y -> z)) -> a -> z`
-If you find yourself not able to come to terms with doing the typical right-to-left, then `crocks` provides a means to accommodate you. This function does the same thing as `compose`, the only difference is it allows you define your flows in a left-to-right manner.
+If you find yourself not able to come to terms with doing the typical right-to-left composition, then `crocks` provides a means to accommodate you. This function does the same thing as `compose`, the only difference is it allows you define your flows in a left-to-right manner.
+
+#### `prop : (String | Number) -> a -> Maybe b`
+If you want some safety around pulling a value out of an Object or Array with a single key or index, you can always reach for `prop`. Well, as long as you are working with non-nested data that is. Just tell `prop` either the key or index you are interested in, and you will get back a function that will take anything and return a `Just` with the wrapped value if the key/index exists. If the key/index does not exist however, you will get back a `Nothing`.
 
 #### `safe : ((a -> Boolean) | Pred) -> a -> Maybe a`
 When using a `Maybe`, it is a common practice to lift into a `Just` or a `Nothing` depending on a condition on the value to be lifted.  It is so common that it warrants a function, and that function is called `safe`. Provide a predicate (a function that returns a Boolean) and a value to be lifted. The value will be evaluated against the predicate, and will lift it into a `Just` if true and a `Nothing` if false.
+
+#### `safeLift : ((a -> Boolean) | Pred) -> (a -> b) -> Maybe b`
+While `safe` is used to lift a value into a `Maybe`, you can reach for `safeLift` when you want to run a function in the safety of the `Maybe` context. Just like `safe`, you pass it either a `Pred` or a predicate function to determine if you get a `Just` or a `Nothing`, but then instead of a value, you pass it a unary function. `safeLift` will then give you back a new function that will first lift its argument into a `Maybe` and then maps your original function over the result.
 
 #### `tap : (a -> b) -> a -> a`
 It is hard knowing what is going on inside of some of these ADTs or your wonderful function compositions. Debugging can get messy when you need to insert a side-effect into your flow for introspection purposes. With `tap`, you can intervene in your otherwise pristine flow and make sure that the original value is passed along to the next step of your flow. This function does not guarantee immutability for reference types (Objects, Arrays, etc), you will need to exercise some discipline here to not mutate.
@@ -183,25 +189,27 @@ There may come a time when you need to adjust a value when a condition is false,
 There may come a time when you need to adjust a value when a condition is true, that is where `when` can come into play. Just provide a predicate function (a function that returns a Boolean) and a function to apply your desired modification. This will get you back a function that when you pass it a value, it will evaluate it and if true, will run your value through the provided function. Either the original or modified value will be returned depending on the result of the predicate. Check out `unless` for a negated version of this function.
 
 ### Predicate Functions
-All functions in this group have a signature of `a -> Boolean` and are easily used with the many predicate based functions that ship with `crocks`, like `safe`, `ifElse` and `filter` to name a few. They also fit naturally with the `Pred` ADT. Below is a list of all the current predicates that are included with a description of their truth:
+All functions in this group have a signature of `* -> Boolean` and are used with the many predicate based functions that ship with `crocks`, like `safe`, `ifElse` and `filter` to name a few. They also fit naturally with the `Pred` ADT. Below is a list of all the current predicates that are included with a description of their truth:
 
-* `isApplicative`: an ADT that provides `map`, `ap` and `of` functions
-* `isApply`: an ADT that provides `map` and `ap` functions
-* `isArray`: Array
-* `isBoolean`: Boolean
-* `isEmpty`: Empty Object, Array or String
-* `isFunction`: Function
-* `isFunctor`: an ADT that provides a `map` function
-* `isInteger`: Integer
-* `isMonad`: an ADT that provides `map`, `ap`, `chain` and `of` functions
-* `isMonoid`: an ADT that provides `concat` and `empty` functions
-* `isNil`: undefined or null
-* `isNumber`: Number that is not a NaN value, Infinity included
-* `isObject`: Plain Old Javascript Object (POJO)
-* `isSemigroup`: an ADT that provides a `concat` function
-* `isSetoid`: an ADT that provides an `equals` function
-* `isString`: String
-* `isTraversable`: an ADT that provides `map` and `traverse` functions
+* `hasKey : (String | Number) -> a -> Boolean`: An Array or Object that contains the provided index or key
+* `isApplicative : a -> Boolean`: an ADT that provides `map`, `ap` and `of` functions
+* `isApply : a -> Boolean`: an ADT that provides `map` and `ap` functions
+* `isArray : a -> Boolean`: Array
+* `isDefined : a -> Boolean`: Every value that is not `undefined`, `null` included
+* `isBoolean : a -> Boolean`: Boolean
+* `isEmpty : a -> Boolean`: Empty Object, Array or String
+* `isFunction : a -> Boolean`: Function
+* `isFunctor : a -> Boolean`: an ADT that provides a `map` function
+* `isInteger : a -> Boolean`: Integer
+* `isMonad : a -> Boolean`: an ADT that provides `map`, `ap`, `chain` and `of` functions
+* `isMonoid : a -> Boolean`: an ADT that provides `concat` and `empty` functions
+* `isNil : a -> Boolean`: undefined or null
+* `isNumber : a -> Boolean`: Number that is not a NaN value, Infinity included
+* `isObject : a -> Boolean`: Plain Old Javascript Object (POJO)
+* `isSemigroup : a -> Boolean`: an ADT that provides a `concat` function
+* `isSetoid : a -> Boolean`: an ADT that provides an `equals` function
+* `isString : a -> Boolean`: String
+* `isTraversable : a -> Boolean`: an ADT that provides `map` and `traverse` functions
 
 ### Point-free Functions
 While it can seem natural to work with all these containers in a fluent fashion, it can get cumbersome and hard to get a lot of reuse out of. A way to really get the most out of reusability in Javascript is to take what is called a point-free approach. Below is a small code same to contrast the difference between the two calling styles:

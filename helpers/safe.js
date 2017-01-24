@@ -13,6 +13,7 @@ const Pred = require('../crocks/Pred')
 const Nothing = Maybe.Nothing
 const Just = Maybe.Just
 
+// safe : ((a -> Boolean) | Pred) -> a -> Maybe a
 function safe(pred) {
   if(!(isFunction(pred) || isType(Pred.type(), pred))) {
     throw new TypeError('safe: Pred or predicate function required for first argument')

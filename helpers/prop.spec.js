@@ -13,7 +13,7 @@ test('prop function', t => {
   t.ok(isFunction(prop), 'is a function')
 
   t.throws(p(undefined, {}), TypeError, 'throws with undefined in first argument')
-  t.throws(p(null, {}), TypeError, 'throws with undefined in first argument')
+  t.throws(p(null, {}), TypeError, 'throws with null in first argument')
   t.throws(p(false, {}), TypeError, 'throws with false in first argument')
   t.throws(p(true, {}), TypeError, 'throws with true in first argument')
   t.throws(p(1.5, {}), TypeError, 'throws with float in first argument')

@@ -46,6 +46,7 @@ const helpers = {
   once: require('./helpers/once'),
   pipe: require('./helpers/pipe'),
   prop: require('./helpers/prop'),
+  propPath: require('./helpers/propPath'),
   safe: require('./helpers/safe'),
   safeLift: require('./helpers/safeLift'),
   tap: require('./helpers/tap'),

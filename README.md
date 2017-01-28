@@ -170,6 +170,9 @@ If you find yourself not able to come to terms with doing the typical right-to-l
 #### `prop : (String | Number) -> a -> Maybe b`
 If you want some safety around pulling a value out of an Object or Array with a single key or index, you can always reach for `prop`. Well, as long as you are working with non-nested data that is. Just tell `prop` either the key or index you are interested in, and you will get back a function that will take anything and return a `Just` with the wrapped value if the key/index exists. If the key/index does not exist however, you will get back a `Nothing`.
 
+#### `propPath : [ String | Number ] -> a -> Maybe b`
+While `prop` is good for simple, single-level structures, there may come a time when you have to work with nested POJOs or Arrays. When you run into this situation, just pull in `propPath` and pass it a left-to-right traversal path of keys, indices or a combination of both (gross...but possible). This will kick you back a function that behaves just like `prop`. You pass it some data, and it will attempt to resolve your provided path. If the path is valid, it will return the value residing there (`null` included!) in a `Just`. But if at any point that path "breaks" it will give you back a `Nothing`.
+
 #### `safe : ((a -> Boolean) | Pred) -> a -> Maybe a`
 When using a `Maybe`, it is a common practice to lift into a `Just` or a `Nothing` depending on a condition on the value to be lifted.  It is so common that it warrants a function, and that function is called `safe`. Provide a predicate (a function that returns a Boolean) and a value to be lifted. The value will be evaluated against the predicate, and will lift it into a `Just` if true and a `Nothing` if false.
 

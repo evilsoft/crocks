@@ -6,6 +6,9 @@ test
 .jshintignore
 .jshintrc
 
+.coveralls.yml
+.nyc_output/
+
 .node-version
 *.log
 .DS_Store

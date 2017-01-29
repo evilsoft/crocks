@@ -1,15 +1,25 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
+const isFoldable= require('../predicates/isFoldable')
 const isFunction = require('../predicates/isFunction')
 
 const _inspect = require('../internal/inspect')
+const argsArray = require('../internal/argsArray')
 const isType = require('../internal/isType')
 
 const constant = require('../combinators/constant')
 const composeB = require('../combinators/composeB')
 
+const sequence = require('../pointfree/sequence')
+
 const once = require('../helpers/once')
+const mreduceMap = require('../helpers/mreduceMap')
+
+const All = require('../monoids/All')
+
+const allAsyncs =
+  mreduceMap(All, x => isType(Async.type(), x))
 
 const _type =
   constant('Async')
@@ -19,6 +29,32 @@ const _of =
 
 const _rejected =
   x => Async((reject, _) => reject(x))
+
+function all(asyncs) {
+  if(!(isFoldable(asyncs) && allAsyncs(asyncs))) {
+    throw new TypeError('Async.all: Foldable structure of Asyncs required')
+  }
+
+  return sequence(Async.of, asyncs)
+}
+
+function fromNode(fn, ctx) {
+  if(!isFunction(fn)) {
+    throw new TypeError('Async.fromNode: CPS function required')
+  }
+
+  return function() {
+    const args = argsArray(arguments)
+
+    return Async((reject, resolve) => {
+      fn.apply((ctx | null),
+        args.concat(
+          (err, data) => err ? reject(err) : resolve(data)
+        )
+      )
+    })
+  }
+}
 
 const hasPromiseInterface =
   x => x && isFunction(x.then) && isFunction(x.catch)
@@ -187,5 +223,7 @@ Async.type = _type
 Async.of = _of
 Async.rejected = _rejected
 Async.fromPromise = fromPromise
+Async.fromNode = fromNode
+Async.all = all
 
 module.exports = Async

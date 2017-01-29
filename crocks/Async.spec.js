@@ -58,6 +58,43 @@ test('Async rejected', t => {
 })
 
 test('Async fromPromise', t => {
+  const resProm = x => new Promise((res, _) => res(x))
+
+  t.ok(isFunction(Async.fromPromise), 'is a function')
+  t.ok(isFunction(Async.fromPromise(resProm)), 'returns a function')
+
+  const fn = bindFunc(Async.fromPromise)
+  const fork = bindFunc(x => Async.fromPromise(_ => x)().fork(noop, noop))
+
+  t.throws(fn(undefined), TypeError, 'throws with undefined')
+  t.throws(fn(null), TypeError, 'throws with null')
+  t.throws(fn(0), TypeError, 'throws with falsey number')
+  t.throws(fn(1), TypeError, 'throws with truthy number')
+  t.throws(fn(''), TypeError, 'throws with falsey string')
+  t.throws(fn('string'), TypeError, 'throws with truthy string')
+  t.throws(fn(false), TypeError, 'throws with false')
+  t.throws(fn(true), TypeError, 'throws with true')
+  t.throws(fn([]), TypeError, 'throws with an array')
+  t.throws(fn({}), TypeError, 'throws with an object')
+
+  t.throws(fork(undefined), TypeError, 'throws when undefined is returned from promise function')
+  t.throws(fork(null), TypeError, 'throws when null is returned from promise function')
+  t.throws(fork(0), TypeError, 'throws when falsey number is returned from promise function')
+  t.throws(fork(1), TypeError, 'throws when truthy number is returned from promise function')
+  t.throws(fork(''), TypeError, 'throws when falsey string is returned from promise function')
+  t.throws(fork('string'), TypeError, 'throws when truthy string is returned from promise function')
+  t.throws(fork(false), TypeError, 'throws when false is returned from promise function')
+  t.throws(fork(true), TypeError, 'throws when true is returned from promise function')
+  t.throws(fork([]), TypeError, 'throws when an array is returned from promise function')
+  t.throws(fork({}), TypeError, 'throws when an object is returned from promise function')
+  t.throws(fork(noop), TypeError, 'throws when an object is returned from promise function')
+
+  t.end()
+})
+
+test('Async fromPromise resolution', t => {
+  t.plan(2)
+
   const val = 'super fun'
 
   const rejProm = x => new Promise((_, rej) => rej(x))
@@ -66,10 +103,94 @@ test('Async fromPromise', t => {
   const rej = y => x => t.equal(x, y, 'rejects a rejected Promise')
   const res = y => x => t.equal(x, y, 'resolves a resolved Promise')
 
+
   Async.fromPromise(rejProm)(val).fork(rej(val), res(val))
   Async.fromPromise(resProm)(val).fork(rej(val), res(val))
+})
 
+test('Async fromNode', t => {
+  const resCPS = (x, cf) => cf(null, x)
+
+  t.ok(isFunction(Async.fromNode), 'is a function')
+  t.ok(isFunction(Async.fromNode(resCPS)), 'returns a function')
+
+  const fn = bindFunc(Async.fromNode)
+
+  t.throws(fn(undefined), TypeError, 'throws with undefined')
+  t.throws(fn(null), TypeError, 'throws with null')
+  t.throws(fn(0), TypeError, 'throws with falsey number')
+  t.throws(fn(1), TypeError, 'throws with truthy number')
+  t.throws(fn(''), TypeError, 'throws with falsey string')
+  t.throws(fn('string'), TypeError, 'throws with truthy string')
+  t.throws(fn(false), TypeError, 'throws with false')
+  t.throws(fn(true), TypeError, 'throws with true')
+  t.throws(fn([]), TypeError, 'throws with an array')
+  t.throws(fn({}), TypeError, 'throws with an object')
+
+  t.end()
+})
+
+test('Async fromNode resolution', t => {
   t.plan(2)
+
+  const val = 'super fun'
+
+  const rejCPS = (x, cf) => cf(x)
+  const resCPS = (x, cf) => cf(null, x)
+
+  const rej = y => x => t.equal(x, y, 'rejects an erred CPS')
+  const res = y => x => t.equal(x, y, 'resolves a good CPS')
+
+  Async.fromNode(rejCPS)(val).fork(rej(val), res(val))
+  Async.fromNode(resCPS)(val).fork(rej(val), res(val))
+})
+
+test('Async all', t => {
+  const all = bindFunc(Async.all)
+
+  t.ok(isFunction(Async.all), 'is a function')
+
+  t.throws(all(undefined), TypeError, 'throws with undefined')
+  t.throws(all(null), TypeError, 'throws with null')
+  t.throws(all(0), TypeError, 'throws with falsey number')
+  t.throws(all(1), TypeError, 'throws with truthy number')
+  t.throws(all(''), TypeError, 'throws with falsey string')
+  t.throws(all('string'), TypeError, 'throws with truthy string')
+  t.throws(all(false), TypeError, 'throws with false')
+  t.throws(all(true), TypeError, 'throws with true')
+  t.throws(all({}), TypeError, 'throws with an object')
+  t.throws(all(noop), TypeError, 'throws with a function')
+
+  t.throws(all([ undefined ]), TypeError, 'throws an array of with undefineds')
+  t.throws(all([ null ]), TypeError, 'throws an array of with nulls')
+  t.throws(all([ 0 ]), TypeError, 'throws with an array of falsey numbers')
+  t.throws(all([ 1 ]), TypeError, 'throws with an array of truthy numbers')
+  t.throws(all([ '' ]), TypeError, 'throws with an array of falsey strings')
+  t.throws(all([ 'string' ]), TypeError, 'throws with an array of truthy strings')
+  t.throws(all([ false ]), TypeError, 'throws with an array of falses')
+  t.throws(all([ true ]), TypeError, 'throws with an array of trues')
+  t.throws(all([ {} ]), TypeError, 'throws with an objects')
+  t.throws(all([ [] ]), TypeError, 'throws with an array of arrays')
+  t.throws(all([ noop ]), TypeError, 'throws with an array of functions')
+
+  t.end()
+})
+
+test('Async all resolution', t => {
+  t.plan(3)
+
+  const val = 'super fun'
+  const bad = 'issues'
+
+  const rej = y => x => t.same(x, y, 'rejects when one rejects')
+  const res = y => x => t.same(x, y, 'resolves with array of values when all resolve')
+  const empty = y => x => t.same(x, y, 'resolves with an empty array when passed an empty array')
+
+  Async.all([ Async.of(val), Async.of(val) ]).fork(rej(bad), res([ val, val ]))
+  Async.all([ Async.rejected(bad), Async.of(val) ]).fork(rej(bad), res([ val, val ]))
+  Async.all([]).fork(rej(bad), empty([]))
+
+  t.end()
 })
 
 test('Async inspect', t => {

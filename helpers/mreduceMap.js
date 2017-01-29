@@ -3,6 +3,7 @@
 
 const curry = require('./curry')
 
+const isFoldable = require('../predicates/isFoldable')
 const isFunction = require('../predicates/isFunction')
 const isMonoid = require('../predicates/isMonoid')
 
@@ -16,7 +17,7 @@ function mreduceMap(M, f, xs) {
   else if(!isFunction(f)) {
     throw new TypeError('mreduceMap: Function required for second argument')
   }
-  else if(!(xs && isFunction(xs.reduce))) {
+  else if(!(isFoldable(xs))) {
     throw new TypeError('mreduceMap: Foldable required for third argument')
   }
 

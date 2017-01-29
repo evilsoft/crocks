@@ -3,13 +3,14 @@
 
 const curry = require('../helpers/curry')
 
+const isFoldable = require('../predicates/isFoldable')
 const isFunction = require('../predicates/isFunction')
 
 function reduce(fn, init, m) {
   if(!isFunction(fn)) {
     throw new TypeError('reduce: Function required for first argument')
   }
-  else if(!(m && isFunction(m.reduce))) {
+  else if(!(isFoldable(m))) {
     throw new TypeError('reduce: Foldable required for third argument')
   }
 

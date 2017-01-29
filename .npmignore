@@ -1,6 +1,7 @@
 node_modules
 test
 *.spec.js
+docs
 
 .travis.yml
 .jshintignore

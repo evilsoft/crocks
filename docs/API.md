@@ -6,7 +6,7 @@ crocks.js API
     * Async
     * Const
     * Either
-    * Identity
+    * [Identity](crocks/Identity.md)
     * IO
     * List
     * Maybe

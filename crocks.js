@@ -45,7 +45,10 @@ const helpers = {
   not: require('./helpers/not'),
   once: require('./helpers/once'),
   pipe: require('./helpers/pipe'),
+  prop: require('./helpers/prop'),
+  propPath: require('./helpers/propPath'),
   safe: require('./helpers/safe'),
+  safeLift: require('./helpers/safeLift'),
   tap: require('./helpers/tap'),
   tryCatch: require('./helpers/tryCatch'),
   unless: require('./helpers/unless'),
@@ -97,9 +100,11 @@ const pointFree = {
 }
 
 const predicates = {
+  hasKey: require('./predicates/hasKey'),
   isApplicative: require('./predicates/isApplicative'),
   isApply: require('./predicates/isApply'),
   isArray: require('./predicates/isArray'),
+  isDefined: require('./predicates/isDefined'),
   isEmpty: require('./predicates/isEmpty'),
   isFunction: require('./predicates/isFunction'),
   isFunctor: require('./predicates/isFunctor'),

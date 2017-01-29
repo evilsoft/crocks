@@ -106,6 +106,7 @@ const predicates = {
   isArray: require('./predicates/isArray'),
   isDefined: require('./predicates/isDefined'),
   isEmpty: require('./predicates/isEmpty'),
+  isFoldable: require('./predicates/isFoldable'),
   isFunction: require('./predicates/isFunction'),
   isFunctor: require('./predicates/isFunctor'),
   isMonoid: require('./predicates/isMonoid'),

@@ -5,6 +5,7 @@ const curry = require('./curry')
 
 const composeB = require('../combinators/composeB')
 
+const isFoldable = require('../predicates/isFoldable')
 const isFunction = require('../predicates/isFunction')
 const isMonoid = require('../predicates/isMonoid')
 
@@ -19,7 +20,7 @@ function mconcatMap(M, f, xs) {
   else if(!isFunction(f)) {
     throw new TypeError('mconcatMap: Function required for second argument')
   }
-  else if(!(xs && isFunction(xs.reduce))) {
+  else if(!(isFoldable(xs))) {
     throw new TypeError('mconcatMap: Foldable required for third argument')
   }
 

@@ -3,7 +3,7 @@
 
 const curry = require('./curry')
 
-const isFunction = require('../predicates/isFunction')
+const isFoldable = require('../predicates/isFoldable')
 const isMonoid = require('../predicates/isMonoid')
 
 const identity = require('../combinators/identity')
@@ -15,7 +15,7 @@ function mconcat(M, xs) {
   if(!(M && isMonoid(M))) {
     throw new TypeError('mconcat: Monoid required for first argument')
   }
-  else if(!(xs && isFunction(xs.reduce))) {
+  else if(!(isFoldable(xs))) {
     throw new TypeError('mconcat: Foldable required for second argument')
   }
 

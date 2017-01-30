@@ -402,11 +402,13 @@ test('List of properties (Applicative)', t => {
 
 test('List chain errors', t => {
   const chain = bindFunc(List([ 0 ]).chain)
+  const bad = bindFunc(x => List.of(x).chain(identity))
+
   const f = x => List.of(x)
 
   t.throws(chain(undefined), TypeError, 'throws with undefined')
   t.throws(chain(null), TypeError, 'throws with null')
-  t.throws(chain(0), TypeError, 'throw withs falsey number')
+  t.throws(chain(0), TypeError, 'throw with falsey number')
   t.throws(chain(1), TypeError, 'throws with truthy number')
   t.throws(chain(''), TypeError, 'throws with falsey string')
   t.throws(chain('string'), TypeError, 'throws with truthy string')
@@ -414,6 +416,19 @@ test('List chain errors', t => {
   t.throws(chain(true), TypeError, 'throws with true')
   t.throws(chain([]), TypeError, 'throws with an array')
   t.throws(chain({}), TypeError, 'throws with an object')
+
+  t.throws(bad(undefined), TypeError, 'throws when function returns undefined')
+  t.throws(bad(null), TypeError, 'throws when function returns null')
+  t.throws(bad(0), TypeError, 'throws when function returns falsey number')
+  t.throws(bad(1), TypeError, 'throws when function returns truthy number')
+  t.throws(bad(''), TypeError, 'throws when function returns falsey string')
+  t.throws(bad('string'), TypeError, 'throws when function returns truthy string')
+  t.throws(bad(false), TypeError, 'throws when function returns false')
+  t.throws(bad(true), TypeError, 'throws when function returns true')
+  t.throws(bad([]), TypeError, 'throws when function returns an array')
+  t.throws(bad({}), TypeError, 'throws when function returns an object')
+  t.throws(bad(noop), TypeError, 'throws when function returns a function')
+  t.throws(bad(MockCrock), TypeError, 'throws when function a non-List ADT')
 
   t.doesNotThrow(chain(f), 'allows a function')
 

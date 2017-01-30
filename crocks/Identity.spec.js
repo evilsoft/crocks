@@ -307,6 +307,20 @@ test('Identity traverse errors', t => {
   t.throws(trav(MockCrock, []), TypeError, 'throws with an array in second argument')
   t.throws(trav(MockCrock, {}), TypeError, 'throws with an object in second argument')
 
+  const noApply = bindFunc(x => Identity.of(x).traverse(MockCrock.of, identity))
+
+  t.throws(noApply(undefined), TypeError, 'throws when second argument returns undefined')
+  t.throws(noApply(null), TypeError, 'throws when second argument returns null')
+  t.throws(noApply(0), TypeError, 'throws when second argument returns falsey number')
+  t.throws(noApply(1), TypeError, 'throws when second argument returns truthy number')
+  t.throws(noApply(''), TypeError, 'throws when second argument returns falsey string')
+  t.throws(noApply('string'), TypeError, 'throws when second argument returns truthy string')
+  t.throws(noApply(false), TypeError, 'throws when second argument returns false')
+  t.throws(noApply(true), TypeError, 'throws when second argument returns true')
+  t.throws(noApply({}), TypeError, 'throws when second argument returns an object')
+  t.throws(noApply([]), TypeError, 'throws when second argument returns an array')
+  t.throws(noApply(noop), TypeError, 'throws when second argument returns function')
+
   t.doesNotThrow(trav(noop, MockCrock), 'requires an Applicative returning function in second arg and function in first arg')
 
   t.end()

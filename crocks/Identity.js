@@ -89,7 +89,7 @@ function Identity(x) {
     const m = f(x)
 
     if(!isApplicative(m)) {
-      throw new TypeError('Identity.traverse: First function must return an Applicative')
+      throw new TypeError('Identity.traverse: Both functions must return an Applicative')
     }
 
     return m.map(Identity)

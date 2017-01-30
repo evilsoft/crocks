@@ -216,6 +216,30 @@ test('Async fork', t => {
   const rej = sinon.spy(identity)
   const noCall = sinon.spy(noop)
 
+  const fork = bindFunc(resolved.fork)
+
+  t.throws(fork(undefined, noop), 'throws with undefined in first argument')
+  t.throws(fork(null, noop), 'throws with null in first argument')
+  t.throws(fork(0, noop), 'throws with falsey number in first argument')
+  t.throws(fork(1, noop), 'throws with truthy number in first argument')
+  t.throws(fork('', noop), 'throws with falsey string in first argument')
+  t.throws(fork('string', noop), 'throws with truthy string in first argument')
+  t.throws(fork(false, noop), 'throws with false in first argument')
+  t.throws(fork(true, noop), 'throws with true in first argument')
+  t.throws(fork({}, noop), 'throws with an object in first argument')
+  t.throws(fork([], noop), 'throws with an array in first argument')
+
+  t.throws(fork(noop, undefined), 'throws with undefined in first argument')
+  t.throws(fork(noop, null), 'throws with null in first argument')
+  t.throws(fork(noop, 0), 'throws with falsey number in first argument')
+  t.throws(fork(noop, 1), 'throws with truthy number in first argument')
+  t.throws(fork(noop, ''), 'throws with falsey string in first argument')
+  t.throws(fork(noop, 'string'), 'throws with truthy string in first argument')
+  t.throws(fork(noop, false), 'throws with false in first argument')
+  t.throws(fork(noop, true), 'throws with true in first argument')
+  t.throws(fork(noop, {}), 'throws with an object in first argument')
+  t.throws(fork(noop, []), 'throws with an array in first argument')
+
   resolved.fork(noCall, res)
   rejected.fork(rej, noCall)
 

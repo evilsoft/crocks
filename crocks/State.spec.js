@@ -75,6 +75,20 @@ test('State runWith', t => {
 })
 
 test('State execWith', t => {
+  const execWith = bindFunc(State(identity).execWith)
+
+  t.throws(execWith(undefined), TypeError, 'throws when wrapped function returns undefined')
+  t.throws(execWith(null), TypeError, 'throws when wrapped function returns null')
+  t.throws(execWith(0), TypeError, 'throws when wrapped function returns falsey number')
+  t.throws(execWith(1), TypeError, 'throws when wrapped function returns truthy number')
+  t.throws(execWith(''), TypeError, 'throws when wrapped function returns falsey string')
+  t.throws(execWith('string'), TypeError, 'throws when wrapped function returns truthy string')
+  t.throws(execWith(false), TypeError, 'throws when wrapped function returns false')
+  t.throws(execWith(true), TypeError, 'throws when wrapped function returns true')
+  t.throws(execWith({}), TypeError, 'throws when wrapped function returns an object')
+  t.throws(execWith([]), TypeError, 'throws when wrapped function returns an array')
+  t.throws(execWith(noop), TypeError, 'throws when wrapped function returns a function')
+
   const target = 0
   const f = sinon.spy(x => Pair(x, target))
 
@@ -88,6 +102,20 @@ test('State execWith', t => {
 })
 
 test('State evalWith', t => {
+  const evalWith = bindFunc(State(identity).evalWith)
+
+  t.throws(evalWith(undefined), TypeError, 'throws when wrapped function returns undefined')
+  t.throws(evalWith(null), TypeError, 'throws when wrapped function returns null')
+  t.throws(evalWith(0), TypeError, 'throws when wrapped function returns falsey number')
+  t.throws(evalWith(1), TypeError, 'throws when wrapped function returns truthy number')
+  t.throws(evalWith(''), TypeError, 'throws when wrapped function returns falsey string')
+  t.throws(evalWith('string'), TypeError, 'throws when wrapped function returns truthy string')
+  t.throws(evalWith(false), TypeError, 'throws when wrapped function returns false')
+  t.throws(evalWith(true), TypeError, 'throws when wrapped function returns true')
+  t.throws(evalWith({}), TypeError, 'throws when wrapped function returns an object')
+  t.throws(evalWith([]), TypeError, 'throws when wrapped function returns an array')
+  t.throws(evalWith(noop), TypeError, 'throws when wrapped function returns a function')
+
   const target = 'bullseye'
   const f = sinon.spy(x => Pair(target, x))
 
@@ -372,7 +400,7 @@ test('State chain errors', t => {
   t.throws(noPair({}), TypeError, 'throws when inner function returns an object')
   t.throws(noPair(noop), TypeError, 'throws when inner function returns a function')
 
-  const noState = bindFunc(m.chain(identity).runWith)
+  const noState = bindFunc(State(x => Pair(0, 0)).chain(identity).runWith)
 
   t.throws(noState(undefined), TypeError, 'throws when chain function returns undefined')
   t.throws(noState(null), TypeError, 'throws when chain function returns null')

@@ -15,7 +15,7 @@ function mreduce(M, xs) {
   if(!(M && isMonoid(M))) {
     throw new TypeError('mreduce: Monoid required for first argument')
   }
-  else if(!(isFoldable)) {
+  else if(!(isFoldable(xs))) {
     throw new TypeError('mreduce: Foldable required for second argument')
   }
 

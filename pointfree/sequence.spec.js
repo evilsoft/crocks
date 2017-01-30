@@ -42,6 +42,16 @@ test('sequence pointfree', t => {
   t.throws(seq(noop, true), 'throws if second arg is true')
   t.throws(seq(noop, {}), 'throws if second arg is an object')
 
+  t.throws(seq(noop, [ undefined ]), 'throws if second arg wraps an undefined')
+  t.throws(seq(noop, [ null ]), 'throws if second arg wraps a null')
+  t.throws(seq(noop, [ 0 ]), 'throws if second arg wraps a falsey number')
+  t.throws(seq(noop, [ 1 ]), 'throws if second arg wraps a truthy number')
+  t.throws(seq(noop, [ '' ]), 'throws if second arg wraps a falsey string')
+  t.throws(seq(noop, [ 'string' ]), 'throws if second arg wraps a truthy string')
+  t.throws(seq(noop, [ false ]), 'throws if second arg wraps false')
+  t.throws(seq(noop, [ true ]), 'throws if second arg wraps true')
+  t.throws(seq(noop, [ {} ]), 'throws if second arg wraps an object')
+
   t.doesNotThrow(seq(noop, m), 'allows a function and Traverable')
   t.doesNotThrow(seq(noop, []), 'allows a function and an Array')
 

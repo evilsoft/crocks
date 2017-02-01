@@ -11,15 +11,15 @@ const constant = require('../combinators/constant')
 
 const Pair = require('../crocks/Pair')
 
-const first = require('./first')
+const both = require('./both')
 
-test('first pointfree', t => {
-  const f = bindFunc(first)
+test('both pointfree', t => {
+  const f = bindFunc(both)
 
   const x = 'result'
-  const m = { first: sinon.spy(constant(x)) }
+  const m = { both: sinon.spy(constant(x)) }
 
-  t.ok(isFunction(first), 'is a function')
+  t.ok(isFunction(both), 'is a function')
 
   t.throws(f(undefined), 'throws if arg is undefined')
   t.throws(f(null), 'throws if arg is null')
@@ -38,19 +38,19 @@ test('first pointfree', t => {
   t.end()
 })
 
-test('first with Arrow or Star', t => {
+test('both with Arrow or Star', t => {
   const x = 'result'
-  const m = { first: sinon.spy(constant(x)) }
-  const res = first(m)
+  const m = { both: sinon.spy(constant(x)) }
+  const res = both(m)
 
-  t.ok(m.first.called, 'calls first on Arrow or Star')
-  t.equal(res, x, 'returns the result of first on Arrow or Star')
+  t.ok(m.both.called, 'calls both on Arrow or Star')
+  t.equal(res, x, 'returns the result of both on Arrow or Star')
 
   t.end()
 })
 
-test('first with Function', t => {
-  const f = first(x => x + 1)
+test('both with Function', t => {
+  const f = both(x => x + 1)
   const g = bindFunc(f)
 
   const res = f(Pair(3, 3))
@@ -68,7 +68,7 @@ test('first with Function', t => {
   t.throws(g(noop), TypeError, 'throws when wrapped function called with a function')
 
   t.equal(res.fst(), 4, 'Applies function to `fst` of the Pair')
-  t.equal(res.snd(), 3, 'Does not Apply function to `snd` of the Pair')
+  t.equal(res.snd(), 4, 'Applies function to `snd` of the Pair')
 
   t.end()
 })

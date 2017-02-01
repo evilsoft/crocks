@@ -401,3 +401,32 @@ test('Arrow second', t => {
 
   t.end()
 })
+
+test('Arrow both', t => {
+  t.ok(isFunction(Arrow(noop).both), 'provides a both function')
+
+  const m = Arrow(x => x + 1)
+
+  const runWith = bindFunc(m.both().runWith)
+
+  t.throws(runWith(undefined), TypeError, 'throws with undefined as inner argument')
+  t.throws(runWith(null), TypeError, 'throws with null as inner argument')
+  t.throws(runWith(0), TypeError, 'throws with falsey number as inner argument')
+  t.throws(runWith(1), TypeError, 'throws with truthy number as inner argument')
+  t.throws(runWith(''), TypeError, 'throws with falsey string as inner argument')
+  t.throws(runWith('string'), TypeError, 'throws with truthy string as inner argument')
+  t.throws(runWith(false), TypeError, 'throws with false as inner argument')
+  t.throws(runWith(true), TypeError, 'throws with true as inner argument')
+  t.throws(runWith([]), TypeError, 'throws with an array as inner argument')
+  t.throws(runWith({}), TypeError, 'throws with an object as inner argument')
+
+  t.doesNotThrow(runWith(Pair.of(2)), 'does not throw when inner value is a Pair')
+
+  const result = m.both().runWith(Pair(10, 10))
+
+  t.equal(result.type(), 'Pair', 'returns a Pair')
+  t.equal(result.fst(), 11, 'applies the function to the first element of a pair')
+  t.equal(result.snd(), 11, 'applies the function to the snd element of a pair')
+
+  t.end()
+})

@@ -33,6 +33,18 @@
     "url": "https://github.com/evilsoft/crocks/issues"
   },
   "homepage": "https://github.com/evilsoft/crocks#readme",
+  "nyc" : {
+    "check-coverage": true,
+    "lines": 100,
+    "statements": 100,
+    "functions": 100,
+    "branches": 100,
+    "exclude": [
+      "dist/",
+      "test/",
+      "**/*.spec.js"
+    ]
+  },
   "devDependencies": {
     "babel-core": "^6.10.4",
     "babel-loader": "^6.2.4",

@@ -177,7 +177,7 @@ While `prop` is good for simple, single-level structures, there may come a time 
 #### `safe : ((a -> Boolean) | Pred) -> a -> Maybe a`
 When using a `Maybe`, it is a common practice to lift into a `Just` or a `Nothing` depending on a condition on the value to be lifted.  It is so common that it warrants a function, and that function is called `safe`. Provide a predicate (a function that returns a Boolean) and a value to be lifted. The value will be evaluated against the predicate, and will lift it into a `Just` if true and a `Nothing` if false.
 
-#### `safeLift : ((a -> Boolean) | Pred) -> (a -> b) -> Maybe b`
+#### `safeLift : ((a -> Boolean) | Pred) -> (a -> b) -> a -> Maybe b`
 While `safe` is used to lift a value into a `Maybe`, you can reach for `safeLift` when you want to run a function in the safety of the `Maybe` context. Just like `safe`, you pass it either a `Pred` or a predicate function to determine if you get a `Just` or a `Nothing`, but then instead of a value, you pass it a unary function. `safeLift` will then give you back a new function that will first lift its argument into a `Maybe` and then maps your original function over the result.
 
 #### `tap : (a -> b) -> a -> a`
@@ -250,6 +250,7 @@ These functions provide a very clean way to build out very simple functions and 
 |---|:---|
 | `ap` | `m a -> m (a -> b) -> m b` |
 | `bimap` | `(a -> c) -> (b -> d) -> m a b -> m c d` |
+| `both` | `m (a -> b) -> m ((a, a) -> (b, b))` |
 | `chain` | `(a -> m b) -> m a -> m b` |
 | `coalesce` | `(a -> b) -> m a b -> m a b` |
 | `concat` | `m a -> m a -> m a` |
@@ -285,6 +286,7 @@ These functions provide a very clean way to build out very simple functions and 
 |---|:---|
 | `ap` | `Async`, `Const`, `Either`, `Identity`, `IO`, `List`, `Maybe`, `Pair`, `Reader`, `State`, `Unit`, `Writer` |
 | `bimap` | `Async`, `Either`, `Pair` |
+| `both` | `Arrow`, `Function`, `Star` |
 | `chain` | `Async`, `Const`, `Either`, `Identity`, `IO`, `List`, `Maybe`, `Pair`, `Reader`, `State`, `Unit`, `Writer` |
 | `coalesce` | `Async`, `Maybe`, `Either` |
 | `concat` | `All`, `Any`, `Array`, `Arrow`, `Assign`, `Const`, `List`, `Max`, `Min`, `Pair`, `Pred`, `Prod`, `Star`, `String`, `Sum`, `Unit` |

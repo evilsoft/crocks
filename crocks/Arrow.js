@@ -87,10 +87,19 @@ function Arrow(runWith) {
     })
   }
 
+  function both() {
+    return Arrow(function(x) {
+      if(!(x && x.type && x.type() === Pair.type())) {
+        throw TypeError('Arrow.both: Pair required for inner argument')
+      }
+      return x.bimap(runWith, runWith)
+    })
+  }
+
   return {
     inspect, type, value, runWith,
     concat, empty, map, contramap,
-    promap, first, second
+    promap, first, second, both
   }
 }
 

@@ -11,7 +11,7 @@ const isType = require('../internal/isType')
 
 const Pred = require('../crocks/Pred')
 
-// safeLift : ((a -> Boolean) | Pred) -> (a -> b) -> Maybe b
+// safeLift : ((a -> Boolean) | Pred) -> (a -> b) -> a -> Maybe b
 function safeLift(pred, fn) {
   if(!(isFunction(pred) || isType(Pred.type(), pred))) {
     throw new TypeError('safeLift: Pred or predicate function required for first argument')

@@ -438,3 +438,46 @@ test('Star second', t => {
 
   t.end()
 })
+
+test('Star both', t => {
+  t.ok(isFunction(Star(noop).both), 'provides a both function')
+
+  const m = Star(x => MockCrock(x + 1))
+
+  const runWith = bindFunc(m.both().runWith)
+
+  t.throws(runWith(undefined), TypeError, 'throws with undefined as input')
+  t.throws(runWith(null), TypeError, 'throws with null as input')
+  t.throws(runWith(0), TypeError, 'throws with falsey number as input')
+  t.throws(runWith(1), TypeError, 'throws with truthy number as input')
+  t.throws(runWith(''), TypeError, 'throws with falsey string as input')
+  t.throws(runWith('string'), TypeError, 'throws with truthy string as input')
+  t.throws(runWith(false), TypeError, 'throws with false as input')
+  t.throws(runWith(true), TypeError, 'throws with true as input')
+  t.throws(runWith([]), TypeError, 'throws with an array as input')
+  t.throws(runWith({}), TypeError, 'throws with an object as input')
+
+  t.doesNotThrow(runWith(Pair.of(2)), 'does not throw when inner value is a Pair')
+
+  const notValid = bindFunc(x => Star(_ => x).both().runWith(Pair(2, 3)))
+
+  t.throws(notValid(undefined), TypeError, 'throws when computation returns undefined')
+  t.throws(notValid(null), TypeError, 'throws when computation returns null')
+  t.throws(notValid(0), TypeError, 'throws when computation returns falsey number')
+  t.throws(notValid(1), TypeError, 'throws when computation returns truthy number')
+  t.throws(notValid(''), TypeError, 'throws when computation returns falsey string')
+  t.throws(notValid('string'), TypeError, 'throws when computation returns truthy string')
+  t.throws(notValid(false), TypeError, 'throws when computation returns false')
+  t.throws(notValid(true), TypeError, 'throws when computation returns true')
+  t.throws(notValid({}), TypeError, 'throws an when computation returns object')
+
+  t.doesNotThrow(notValid(MockCrock.of(2)), 'does not throw when computation returns a Functor')
+
+  const result = m.both().runWith(Pair(10, 10)).value()
+
+  t.equal(result.type(), 'Pair', 'returns a Pair')
+  t.equal(result.fst(), 11, 'applies the function to the first element of a pair')
+  t.equal(result.snd(), 11, 'applies the function to the snd element of a pair')
+
+  t.end()
+})

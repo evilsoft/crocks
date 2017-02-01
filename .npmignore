@@ -6,6 +6,7 @@ test
 .jshintignore
 .jshintrc
 
+coverage
 .coveralls.yml
 .nyc_output/
 

@@ -12,6 +12,8 @@ const identity = require('../combinators/identity')
 const compose = require('../helpers/compose')
 const constant = require('../combinators/constant')
 
+const sequence = require('../pointfree/sequence')
+
 const Pair = require('./Pair')
 
 const _type =
@@ -124,9 +126,26 @@ function Star(runWith) {
     })
   }
 
+  function both() {
+    return Star(function(x) {
+      if(!isType(Pair.type(), x)) {
+        throw TypeError('Star.both: Pair required for computation input')
+      }
+
+      const p = x.bimap(runWith, runWith)
+      const m = p.fst()
+
+      if(!isMonad(m)) {
+        throw new TypeError('Star.both: Computaion must return a Monad')
+      }
+
+      return sequence(m.of, p.value()).map(x => Pair(x[0], x[1]))
+    })
+  }
+
   return {
     inspect, type, runWith, concat, map,
-    contramap, promap, first, second
+    contramap, promap, first, second, both
   }
 }
 

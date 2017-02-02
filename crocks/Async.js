@@ -47,7 +47,7 @@ function fromNode(fn, ctx) {
     const args = argsArray(arguments)
 
     return Async((reject, resolve) => {
-      fn.apply((ctx | null),
+      fn.apply(ctx,
         args.concat(
           (err, data) => err ? reject(err) : resolve(data)
         )

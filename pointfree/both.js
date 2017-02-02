@@ -1,4 +1,4 @@
-/** @license ISC License (c) copyright 2016 original and current authors */
+/** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
 const isFunction = require('../predicates/isFunction')
@@ -7,20 +7,20 @@ const identity = require('../combinators/identity')
 
 const Pair = require('../crocks/Pair')
 
-function second(m) {
+function both(m) {
   if(isFunction(m)) {
     return function(x) {
       if(!(x && isType(Pair.type(), x))) {
-        throw new TypeError('first: Pair required as input')
+        throw new TypeError('both: Pair required as input')
       }
 
-      return x.bimap(identity, m)
+      return x.bimap(m, m)
     }
-  } else if(m && isFunction(m.second)) {
-    return m.second()
+  } else if(m && isFunction(m.both)) {
+    return m.both()
   } else {
-    throw new TypeError('second: Arrow, Function or Star required')
+    throw new TypeError('both: Arrow, Function or Star required')
   }
 }
 
-module.exports = second
+module.exports = both

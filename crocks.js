@@ -68,6 +68,7 @@ const monoids = {
 const pointFree = {
   ap: require('./pointfree/ap'),
   bimap: require('./pointfree/bimap'),
+  both: require('./pointfree/both'),
   chain: require('./pointfree/chain'),
   coalesce: require('./pointfree/coalesce'),
   concat: require('./pointfree/concat'),

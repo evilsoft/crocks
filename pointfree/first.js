@@ -5,10 +5,12 @@ const isFunction = require('../predicates/isFunction')
 const isType = require('../internal/isType')
 const identity = require('../combinators/identity')
 
+const Pair = require('../crocks/Pair')
+
 function first(m) {
   if(isFunction(m)) {
     return function(x) {
-      if(!(x && isType('Pair', x))) {
+      if(!(x && isType(Pair.type(), x))) {
         throw new TypeError('first: Pair required as input')
       }
 
@@ -17,9 +19,8 @@ function first(m) {
   } else if(m && isFunction(m.first)) {
     return m.first()
   } else {
-    throw new TypeError('first: Arrow or Function required')
+    throw new TypeError('first: Arrow, Function or Star required')
   }
-
 }
 
 module.exports = first

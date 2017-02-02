@@ -46,6 +46,7 @@ const sequence = require('./pointfree/sequence')
 const swap = require('./pointfree/swap')
 const traverse = require('./pointfree/traverse')
 
+const both = require('./pointfree/both')
 const cons = require('./pointfree/cons')
 const either = require('./pointfree/either')
 const evalWith = require('./pointfree/evalWith')
@@ -118,6 +119,7 @@ test('entry', t => {
   t.equal(crocks.reverseApply, reverseApply, 'provides the T combinator (reverseApply)')
   t.equal(crocks.substitution, substitution, 'provides the S combinator (substitution)')
 
+  t.equal(crocks.branch, branch, 'provides the branch function')
   t.equal(crocks.compose, compose, 'provides the compose function')
   t.equal(crocks.curry, curry, 'provides the curry function')
   t.equal(crocks.curryN, curryN, 'provides the curryN function')
@@ -153,7 +155,7 @@ test('entry', t => {
   t.equal(crocks.swap, swap, 'provides the swap point-free function')
   t.equal(crocks.traverse, traverse, 'provides the traverse point-free function')
 
-  t.equal(crocks.branch, branch, 'provides the branch point-free function')
+  t.equal(crocks.both, both, 'provides the both point-free function')
   t.equal(crocks.cons, cons, 'provides the cons point-free function')
   t.equal(crocks.either, either, 'provides the either point-free function')
   t.equal(crocks.evalWith, evalWith, 'provides the evalWith point-free function')

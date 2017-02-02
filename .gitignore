@@ -3,7 +3,8 @@ node_modules
 dist/
 
 .coveralls.yml
-.nyc_output/
+.nyc_output
+coverage
 
 *.log
 

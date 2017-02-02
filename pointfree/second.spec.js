@@ -37,13 +37,13 @@ test('second pointfree', t => {
   t.end()
 })
 
-test('second with Arrow', t => {
+test('second with Arrow or Star', t => {
   const x = 'result'
   const m = { second: sinon.spy(constant(x)) }
   const res = second(m)
 
-  t.ok(m.second.called, 'calls second on Arrow')
-  t.equal(res, x, 'returns the result of second on Arrow')
+  t.ok(m.second.called, 'calls second on Arrow or Star')
+  t.equal(res, x, 'returns the result of second on Arrow or Star')
 
   t.end()
 })

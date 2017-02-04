@@ -2,6 +2,10 @@ node_modules
 test
 *.spec.js
 
+.npmignore
+.babelrc
+webpack.config.js
+
 .travis.yml
 .jshintignore
 .jshintrc

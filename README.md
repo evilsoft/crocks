@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/evilsoft/crocks.svg?branch=master)](https://travis-ci.org/evilsoft/crocks) [![Coverage Status](https://coveralls.io/repos/github/evilsoft/crocks/badge.svg?branch=master)](https://coveralls.io/github/evilsoft/crocks?branch=master)
+[![NPM version](https://badge.fury.io/js/crocks.svg)](https://www.npmjs.com/package/crocks)
 
 # crocks.js
 `crocks` is a collection of popular *Algebraic Data Types (ADTs)* that are all the rage in functional programming. You have heard of things like `Maybe` and `Either` and heck maybe even `IO`, that is what these are. The main goal of `crocks` is to curate and provide not only a common interface between each type (where possible of course), but also all of the helper functions needed to hit the ground running.
@@ -60,6 +61,7 @@ There are (6) classifications of "things" included in this library:
 
 * Point-free Functions (`crocks/pointfree`): Wanna use these ADTs in a way that you never have to reference the actual data being worked on? Well here is where you will find all of these functions to do that. For every algebra available on both the `Crocks` and `Monoids` there is a function here.
 
+* Transformation Functions (`crocks/transform`): All the functions found here are used to transform from one type to another, naturally. These come are handy in situations where you have functions that return one type (like an `Either`), but are working in a context of another (say `Maybe`). You would like to compose these, but in doing so will result in a nesting that you will need to account for for the rest of your flow.
 
 ### Crocks
 The `Crocks` are the heart and soul of this library. This is where you will find all your favorite ADT's you have grown to :heart:. They include gems such as: `Maybe`, `Either` and `IO`, to name a few. The are usually just a simple constructor that takes either a function or value (depending on the type) and will return you a "container" that wraps whatever you passed it. Each container provides a variety of functions that act as the operations you can do on the contained value. There are many types that share the same function names, but what they do from type to type may vary.  Every Crock provides type function on the Constructor and both inspect and type functions on their Instances.
@@ -316,3 +318,121 @@ These functions provide a very clean way to build out very simple functions and 
 | `tail` | `Array`, `List`, `String` |
 | `traverse` | `Array`, `Either`, `Identity`, `List`, `Maybe` |
 | `value` | `Arrow`, `Const`, `Either`, `Identity`, `List`, `Pair`, `Pred`, `Unit`, `Writer` |
+
+### Transformation Functions
+Transformation functions are mostly used to reduce unwanted nesting of similar types. Take for example the following structure:
+
+```javascript
+const data =
+  Either.of(Maybe.of(3))  // Right Just 3
+
+// mapping on the inner Maybe is tedious at best
+data
+  .map(map(x => x + 1))   // Right Just 4
+  .map(map(x => x * 10))  // Right Just 40
+
+// and extraction...super gross
+data
+  .either(identity, identity)  // Just 3
+  .option(0)                   // 3
+
+// or
+data
+  .either(option(0), option(0))  // 3
+```
+
+The transformation functions, that ship with `crocks`, provide a means for dealing with this. Using them effectively, can turn the above code into something more like this:
+
+```javascript
+const data =
+  Either.of(Maybe.of(3))      // Right Just 3
+    .chain(maybeToEither(0))  // Right 3
+
+// mapping on a single Either, much better
+data
+  .map(x => x + 1)  // Right 4
+  .map(x => x * 10) // Right 40
+
+// no need to default the Left case anymore
+data
+  .either(identity, identity) // 3
+
+// effects of the inner type are applied immediately
+const nested =
+  Either.of(Maybe.Nothing) // Right Nothing
+
+const unnested =
+  nested
+    .chain(maybeToEither(0))  // Left 0
+
+// Always maps, although the inner Maybe skips
+nested
+  .map(map(x => x + 1))        // Right Nothing (runs mapping)
+  .map(map(x => x * 10))       // Right Nothing (runs mapping)
+  .either(identity, identity)  // Nothing
+  .option(0)                   // 0
+
+// Never maps on a Left, just skips it
+unnested
+  .map(x => x + 1)             // Left 0 (skips mapping)
+  .map(x => x * 10)            // Left 0 (skips mapping)
+  .either(identity, identity)  // 0
+```
+
+Not all types can be transformed to and from each other. Some of them are lazy and/or asynchronous, or are just too far removed. Also, some transformations will result in a loss of information. Moving from an `Either` to a `Maybe`, for instance, would lose the `Left` value of `Either` as a `Maybe`'s first parameter (`Nothing`) is fixed at `Unit`. Conversely, if you move the other way around, from a `Maybe` to an `Either` you must provide a default `Left` value. Which means, if the inner `Maybe` results in a `Nothing`, it will map to `Left` of your provided value. As such, not all of these functions are guaranteed isomorphic. With some types you just cannot go back and forth and expect to retain information.
+
+Each function provides two signatures, one for if a Function is used for the second argument and another if the source ADT is passed instead. Although it may seem strange, this provides some flexibility on how to apply the transformation. The ADT version is great for squishing an already nested type or to perform the transformation in a composition. While the Function version can be used to extend an existing function without having to explicitly compose it. Both versions can be seen here:
+
+```javascript
+// Avoid nesting
+// inc : a -> Maybe Number
+const inc =
+  safeLift(isNumber, x => x + 1)
+
+// using Function signature
+// asyncInc : a -> Async Number Number
+const asyncInc =
+  maybeToAsync(0, inc)
+
+// using ADT signature to compose (extending functions)
+// asyncInc : a -> Async Number Number
+const anotherInc =
+  compose(maybeToAsync(0), inc)
+
+// resolveValue : a -> Async _ a
+const resolveValue =
+  Async.of
+
+resolveValue(3)                          // Resolved 3
+  .chain(asyncInc)                       // Resolved 4
+  .chain(anotherInc)                     // Resolved 5
+  .chain(compose(maybeToAsync(20), inc)) // Resolved 6
+
+resolveValue('oops')                     // Resolved 'oops'
+  .chain(asyncInc)                       // Rejected 0
+  .chain(anotherInc)                     // Rejected 0
+  .chain(compose(maybeToAsync(20), inc)) // Rejected 0
+
+// Squash existing nesting
+// Just Right 'nice'
+const good =
+  Maybe.of(Either.Right('nice'))
+
+// Just Left 'not so nice'
+const bad =
+  Maybe.of(Either.Left('not so nice'))
+
+good
+  .chain(eitherToMaybe) // Just 'nice'
+
+bad
+  .chain(eitherToMaybe) // Nothing
+```
+
+#### Transformation Signatures
+| Transform | ADT signature | Function Signature |
+|---|---|---|
+| `eitherToAsync` | `Either e a -> Async e a` | `(a -> Either e b) -> a -> Async e b` |
+| `eitherToMaybe` | `Either b a -> Maybe a` | `(a -> Either c b) -> a -> Maybe b` |
+| `maybeToAsync` | `e -> Maybe a -> Async e a` | `e -> (a -> Maybe b) -> a -> Async e b` |
+| `maybeToEither` | `c -> Maybe b a -> Maybe a` | `c -> (a -> Maybe b) -> a -> Either c b` |

@@ -1,10 +1,9 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isType = require('../internal/isType')
-
 const isNil = require('../predicates/isNil')
 const isNumber = require('../predicates/isNumber')
+const isSameType = require('../predicates/isSameType')
 
 const _inspect = require('../internal/inspect')
 
@@ -36,7 +35,7 @@ function Min(n) {
     constant(`Min${_inspect(value())}`)
 
   function concat(m) {
-    if(!(m && isType(type(), m))) {
+    if(!isSameType(Min, m)) {
       throw new TypeError('Min.concat: Min required')
     }
 

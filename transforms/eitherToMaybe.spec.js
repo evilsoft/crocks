@@ -6,7 +6,7 @@ const bindFunc = helpers.bindFunc
 const identity = require('../combinators/identity')
 
 const isFunction = require('../predicates/isFunction')
-const isType = require('../internal/isType')
+const isSameType = require('../predicates/isSameType')
 
 const Either = require('../crocks/Either')
 const Maybe = require('../crocks/Maybe')
@@ -39,8 +39,8 @@ test('eitherToMaybe with Either', t => {
   const good = eitherToMaybe(Either.Right(some))
   const bad = eitherToMaybe(Either.Left(none))
 
-  t.ok(isType(Maybe.type(), good), 'returns a Maybe when Right')
-  t.ok(isType(Maybe.type(), bad), 'returns a Maybe when Left')
+  t.ok(isSameType(Maybe, good), 'returns a Maybe when Right')
+  t.ok(isSameType(Maybe, bad), 'returns a Maybe when Left')
 
   t.equals(good.option(none), some, 'Right maps to a Just')
   t.equals(bad.option(none), none, 'Left maps to a Nothing')
@@ -73,8 +73,8 @@ test('eitherToMaybe with Either returning function', t => {
   const good = eitherToMaybe(lift, some)
   const bad = eitherToMaybe(lift, undefined)
 
-  t.ok(isType(Maybe.type(), good), 'returns a Maybe with a Right')
-  t.ok(isType(Maybe.type(), bad), 'returns a Maybe with a Left')
+  t.ok(isSameType(Maybe, good), 'returns a Maybe with a Right')
+  t.ok(isSameType(Maybe, bad), 'returns a Maybe with a Left')
 
   t.equals(good.option(none), some, 'Right maps to a Just')
   t.equals(bad.option(none), none, 'Left maps to a Nothing')

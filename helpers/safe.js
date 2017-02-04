@@ -2,7 +2,7 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const isFunction = require('../predicates/isFunction')
-const isType = require('../internal/isType')
+const isSameType = require('../predicates/isSameType')
 
 const curry = require('./curry')
 const ifElse = require('./ifElse')
@@ -15,7 +15,7 @@ const Just = Maybe.Just
 
 // safe : ((a -> Boolean) | Pred) -> a -> Maybe a
 function safe(pred) {
-  if(!(isFunction(pred) || isType(Pred.type(), pred))) {
+  if(!(isFunction(pred) || isSameType(Pred, pred))) {
     throw new TypeError('safe: Pred or predicate function required for first argument')
   }
   const fn = isFunction(pred)

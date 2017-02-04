@@ -70,7 +70,7 @@ All `Crocks` are Constructor functions of the given type, with `Writer` being an
 
 | Crock | Constructor | Instance |
 |---|:---|:---|
-| `Arrow` | `empty` | `concat`, `contramap`, `empty`, `first`, `map`, `promap`, `runWith`, `second`, `value` |
+| `Arrow` | `empty` | `both`, `concat`, `contramap`, `empty`, `first`, `map`, `promap`, `runWith`, `second`, `value` |
 | `Async` | `all`, `fromNode`, `fromPromise`, `of`, `rejected` | `ap`, `bimap`, `chain`, `coalesce`, `fork`, `map`, `of`, `swap`, `toPromise` |
 | `Const` | -- | `ap`, `chain`, `concat`, `equals`, `map`, `value` |
 | `Either` | `Left`, `Right`, `of`| `ap`, `bimap`, `chain`, `coalesce`, `either`, `equals`, `map`, `of`, `sequence`, `swap`, `traverse`, `value` |
@@ -81,7 +81,7 @@ All `Crocks` are Constructor functions of the given type, with `Writer` being an
 | `Pair` | `of` | `ap`, `bimap`, `chain`, `concat`, `equals`, `fst`, `map`, `merge`, `of`, `snd`, `swap`, `value` |
 | `Pred`[*] | `empty` | `concat`, `contramap`, `empty`, `runWith`, `value` |
 | `Reader` | `ask`, `of`| `ap`, `chain`, `map`, `of`, `runWith` |
-| `Star` | -- | `contramap`, `map`, `promap`, `runWith` |
+| `Star` | -- | `both`, `contramap`, `map`, `promap`, `runWith` |
 | `State` | `get`, `gets`, `modify` `of`, `put`| `ap`, `chain`, `evalWith`, `execWith`, `map`, `of`, `runWith` |
 | `Unit` | `empty`, `of` | `ap`, `chain`, `concat`, `empty`, `equals`, `map`, `of`, `value` |
 | `Writer`| `of` | `ap`, `chain`, `equals`, `log`, `map`, `of`, `read`, `value` |
@@ -198,25 +198,26 @@ There may come a time when you need to adjust a value when a condition is true, 
 All functions in this group have a signature of `* -> Boolean` and are used with the many predicate based functions that ship with `crocks`, like `safe`, `ifElse` and `filter` to name a few. They also fit naturally with the `Pred` ADT. Below is a list of all the current predicates that are included with a description of their truth:
 
 * `hasKey : (String | Number) -> a -> Boolean`: An Array or Object that contains the provided index or key
-* `isApplicative`: an ADT that provides `map`, `ap` and `of` functions
-* `isApply`: an ADT that provides `map` and `ap` functions
-* `isArray`: Array
-* `isBoolean`: Boolean
+* `isApplicative : a -> Boolean`: an ADT that provides `map`, `ap` and `of` functions
+* `isApply : a -> Boolean`: an ADT that provides `map` and `ap` functions
+* `isArray : a -> Boolean`: Array
+* `isBoolean : a -> Boolean`: Boolean
 * `isDefined : a -> Boolean`: Every value that is not `undefined`, `null` included
-* `isEmpty`: Empty Object, Array or String
-* `isFoldable`: Array, List or any structure with a `reduce` function
-* `isFunction`: Function
-* `isFunctor`: an ADT that provides a `map` function
-* `isInteger`: Integer
-* `isMonad`: an ADT that provides `map`, `ap`, `chain` and `of` functions
-* `isMonoid`: an ADT that provides `concat` and `empty` functions
-* `isNil`: undefined or null
-* `isNumber`: Number that is not a NaN value, Infinity included
-* `isObject`: Plain Old Javascript Object (POJO)
-* `isSemigroup`: an ADT that provides a `concat` function
-* `isSetoid`: an ADT that provides an `equals` function
-* `isString`: String
-* `isTraversable`: an ADT that provides `map` and `traverse` functions
+* `isEmpty : a -> Boolean`: Empty Object, Array or String
+* `isFoldable : a -> Boolean`: Array, List or any structure with a `reduce` function
+* `isFunction : a -> Boolean`: Function
+* `isFunctor : a -> Boolean`: an ADT that provides a `map` function
+* `isInteger : a -> Boolean`: Integer
+* `isMonad : a -> Boolean`: an ADT that provides `map`, `ap`, `chain` and `of` functions
+* `isMonoid : a -> Boolean`: an ADT that provides `concat` and `empty` functions
+* `isNil : a -> Boolean`: undefined or null
+* `isNumber : a -> Boolean`: Number that is not a NaN value, Infinity included
+* `isObject : a -> Boolean`: Plain Old Javascript Object (POJO)
+* `isSameType : a -> b -> Boolean`: both ADTs are of the same type (Instance or TypeRep)
+* `isSemigroup : a -> Boolean`: an ADT that provides a `concat` function
+* `isSetoid : a -> Boolean`: an ADT that provides an `equals` function
+* `isString : a -> Boolean`: String
+* `isTraversable : a -> Boolean`: an ADT that provides `map` and `traverse` functions
 
 ### Point-free Functions
 While it can seem natural to work with all these containers in a fluent fashion, it can get cumbersome and hard to get a lot of reuse out of. A way to really get the most out of reusability in Javascript is to take what is called a point-free approach. Below is a small code same to contrast the difference between the two calling styles:

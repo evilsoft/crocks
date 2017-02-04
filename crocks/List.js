@@ -4,15 +4,16 @@
 const isApplicative = require('../predicates/isApplicative')
 const isArray = require('../predicates/isArray')
 const isFunction = require('../predicates/isFunction')
+const isSameType = require('../predicates/isSameType')
 
 const _inspect = require('../internal/inspect')
-const isType = require('../internal/isType')
 
 const constant = require('../combinators/constant')
 
 const _concat = require('../pointfree/concat')
 
 const Maybe = require('./Maybe')
+const Pred = require('./Pred')
 
 const Nothing = Maybe.Nothing
 const Just = Maybe.Just
@@ -59,7 +60,7 @@ function List(xs) {
     return function(y, x) {
       const m = fn(x)
 
-      if(!(m && isType(type(), m))) {
+      if(!isSameType(List, m)) {
         throw new TypeError('List.chain: Function must return a List')
       }
 
@@ -96,7 +97,7 @@ function List(xs) {
     x => List([x].concat(xs))
 
   function equals(m) {
-    if(m && isType(type(), m)) {
+    if(isSameType(List, m)) {
       const mxs = m.value()
 
       return xs.length === mxs.length
@@ -107,7 +108,7 @@ function List(xs) {
   }
 
   function concat(m) {
-    if(!(m && isType(type(), m))) {
+    if(!isSameType(List, m)) {
       throw new TypeError('List.concat: List required')
     }
 
@@ -123,7 +124,7 @@ function List(xs) {
   }
 
   function filter(pred) {
-    if(!(isFunction(pred) || isType('Pred', pred))) {
+    if(!(isFunction(pred) || isSameType(Pred, pred))) {
       throw new TypeError('List.filter: Pred or predicate function required')
     }
 
@@ -151,7 +152,7 @@ function List(xs) {
     if(!allFuncs) {
       throw new TypeError('List.ap: Wrapped values must be all be functions')
     }
-    else if(!(m && isType(type(), m))) {
+    else if(!isSameType(List, m)) {
       throw new TypeError('List.ap: List required')
     }
 

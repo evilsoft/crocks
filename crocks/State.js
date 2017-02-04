@@ -2,9 +2,9 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const isFunction = require('../predicates/isFunction')
+const isSameType = require('../predicates/isSameType')
 
 const _inspect = require('../internal/inspect')
-const isType = require('../internal/isType')
 
 const constant = require('../combinators/constant')
 
@@ -50,7 +50,7 @@ function State(runWith) {
   function execWith(s) {
     const pair = runWith(s)
 
-    if(!isType(Pair.type(), pair)) {
+    if(!isSameType(Pair, pair)) {
       throw new TypeError('State.execWith: Must wrap a function in the form (s -> Pair a s)')
     }
 
@@ -60,7 +60,7 @@ function State(runWith) {
   function evalWith(s) {
     const pair = runWith(s)
 
-    if(!isType(Pair.type(), pair)) {
+    if(!isSameType(Pair, pair)) {
       throw new TypeError('State.evalWith: Must wrap a function in the form (s -> Pair a s)')
     }
 
@@ -75,7 +75,7 @@ function State(runWith) {
     return State(s => {
       const m = runWith(s)
 
-      if(!isType(Pair.type(), m)) {
+      if(!isSameType(Pair, m)) {
         throw new TypeError('State.map: Must wrap a function in the form (s -> Pair a s)')
       }
 
@@ -84,14 +84,14 @@ function State(runWith) {
   }
 
   function ap(m) {
-    if(!isType(type(), m)) {
+    if(!isSameType(State, m)) {
       throw new TypeError('State.ap: State required')
     }
 
     return State(s => {
       const pair = runWith(s)
 
-      if(!isType(Pair.type(), pair)) {
+      if(!isSameType(Pair, pair)) {
         throw new TypeError('State.ap: Must wrap a function in the form (s -> Pair a s)')
       }
 
@@ -113,13 +113,13 @@ function State(runWith) {
     return State(s => {
       const pair = runWith(s)
 
-      if(!isType(Pair.type(), pair)) {
+      if(!isSameType(Pair, pair)) {
         throw new TypeError('State.chain: Must wrap a function in the form (s -> Pair a s)')
       }
 
       const m = fn(pair.fst())
 
-      if(!isType(type(), m)) {
+      if(!isSameType(State, m)) {
         throw new TypeError('State.chain: Function must return another State')
       }
 

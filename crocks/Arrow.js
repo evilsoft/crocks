@@ -3,7 +3,7 @@
 
 const isFunction = require('../predicates/isFunction')
 
-const isType = require('../internal/isType')
+const isSameType = require('../predicates/isSameType')
 const _inspect = require('../internal/inspect')
 
 const compose = require('../helpers/compose')
@@ -37,7 +37,7 @@ function Arrow(runWith) {
     constant(`Arrow${_inspect(value())}`)
 
   function concat(m) {
-    if(!(m && isType(type(), m))) {
+    if(!(isSameType(Arrow, m))) {
       throw new TypeError('Arrow.concat: Arrow required')
     }
 

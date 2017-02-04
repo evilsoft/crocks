@@ -2,7 +2,8 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const isFunction = require('../predicates/isFunction')
-const isType = require('../internal/isType')
+const isSameType = require('../predicates/isSameType')
+
 const identity = require('../combinators/identity')
 
 const Pair = require('../crocks/Pair')
@@ -10,7 +11,7 @@ const Pair = require('../crocks/Pair')
 function both(m) {
   if(isFunction(m)) {
     return function(x) {
-      if(!(x && isType(Pair.type(), x))) {
+      if(!isSameType(Pair, x)) {
         throw new TypeError('both: Pair required as input')
       }
 

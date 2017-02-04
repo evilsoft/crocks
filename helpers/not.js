@@ -2,13 +2,15 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const curry = require('./curry')
-const isFunction = require('../predicates/isFunction')
 
-const isType = require('../internal/isType')
+const isFunction = require('../predicates/isFunction')
+const isSameType = require('../predicates/isSameType')
+
+const Pred = require('../crocks/Pred')
 
 // not : (a -> Boolean) | Pred -> a -> Boolean
 function not(pred, x) {
-  if(!(isFunction(pred) || isType('Pred', pred))) {
+  if(!(isFunction(pred) || isSameType(Pred, pred))) {
     throw new TypeError('not: Pred or predicate function required for first argument')
   }
 

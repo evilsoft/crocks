@@ -4,7 +4,7 @@
 const curry = require('../helpers/curry')
 
 const isFunction = require('../predicates/isFunction')
-const isType = require('../internal/isType')
+const isSameType = require('../predicates/isSameType')
 
 const Either = require('../crocks/Either')
 const Async = require('../crocks/Async')
@@ -15,14 +15,14 @@ const applyTransform = either =>
 // eitherToAsync : Either e a -> Async e a
 // eitherToAsync : (a -> Either e b) -> a -> Async e b
 function eitherToAsync(either) {
-  if(isType(Either.type(), either)) {
+  if(isSameType(Either, either)) {
     return applyTransform(either)
   }
   else if(isFunction(either)) {
     return function(x) {
       const m = either(x)
 
-      if(!isType(Either.type(), m)) {
+      if(!isSameType(Either, m)) {
         throw new TypeError('eitherToAsync: Either returing function required')
       }
 

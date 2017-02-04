@@ -2,9 +2,9 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const isFunction = require('../predicates/isFunction')
+const isSameType = require('../predicates/isSameType')
 
 const _inspect = require('../internal/inspect')
-const isType = require('../internal/isType')
 
 const composeB = require('../combinators/composeB')
 const constant = require('../combinators/constant')
@@ -45,7 +45,7 @@ function Reader(runWith) {
   }
 
   function ap(m) {
-    if(!isType(type(), m)) {
+    if(!isSameType(Reader, m)) {
       throw new TypeError('Reader.ap: Reader required')
     }
 

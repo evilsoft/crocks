@@ -2,7 +2,7 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const isFunction = require('../predicates/isFunction')
-const isType = require('../internal/isType')
+const isSameType = require('../predicates/isSameType')
 
 const _inspect = require('../internal/inspect')
 
@@ -17,7 +17,7 @@ function Const(x) {
   }
 
   const equals =
-    m => isType(type(), m) && x === m.value()
+    m => isSameType(Const, m) && x === m.value()
 
   const inspect =
     constant(`Const${_inspect(x)}`)
@@ -29,7 +29,7 @@ function Const(x) {
     _type
 
   function concat(m) {
-    if(!(m && isType(type(), m))) {
+    if(!isSameType(Const, m)) {
       throw new TypeError('Const.concat: Const required')
     }
 
@@ -45,7 +45,7 @@ function Const(x) {
   }
 
   function ap(m) {
-    if(!isType(type(), m)) {
+    if(!isSameType(Const, m)) {
       throw new TypeError('Const.ap: Const required')
     }
 

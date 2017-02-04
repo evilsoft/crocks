@@ -1,10 +1,9 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isType = require('../internal/isType')
-
 const isNil = require('../predicates/isNil')
 const isNumber = require('../predicates/isNumber')
+const isSameType = require('../predicates/isSameType')
 
 const _inspect = require('../internal/inspect')
 
@@ -36,7 +35,7 @@ function Max(n) {
     constant(`Max${_inspect(value())}`)
 
   function concat(m) {
-    if(!(m && isType(type(), m))) {
+    if(!isSameType(Max, m)) {
       throw new TypeError('Max.concat: Max requried')
     }
 

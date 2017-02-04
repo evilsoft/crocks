@@ -2,13 +2,14 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const isFunction = require('../predicates/isFunction')
+const isSameType = require('../predicates/isSameType')
 
-const isType = require('../internal/isType')
+const Pred = require('../crocks/Pred')
 
 const curry = require('./curry')
 
 function unless(pred, f) {
-  if(!(isFunction(pred) || isType('Pred', pred))) {
+  if(!(isFunction(pred) || isSameType(Pred, pred))) {
     throw new TypeError('unless: Pred or predicate function required for first argument')
   }
 

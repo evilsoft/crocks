@@ -5,7 +5,7 @@ const isFunction = require('../predicates/isFunction')
 const isSemigroup = require('../predicates/isSemigroup')
 
 const _inspect = require('../internal/inspect')
-const isType = require('../internal/isType')
+const isSameType = require('../predicates/isSameType')
 
 const constant = require('../combinators/constant')
 
@@ -49,13 +49,13 @@ function Pair(l, r) {
   }
 
   function equals(m) {
-    return isType(type(), m)
+    return isSameType(Pair, m)
       && m.fst() === fst()
       && m.snd() === snd()
   }
 
   function concat(m) {
-    if(!(m && isType(type(), m))) {
+    if(!(m && isSameType(Pair, m))) {
       throw new TypeError('Pair.concat: Pair required')
     }
     else if(!isSemigroup(fst()) || !isSemigroup(snd())) {
@@ -102,7 +102,7 @@ function Pair(l, r) {
     else if(!isSemigroup(fst())) {
       throw new TypeError('Pair.ap: Semigroup required for first value')
     }
-    else if(!(m && isType(type(), m))) {
+    else if(!(isSameType(Pair, m))) {
       throw new TypeError('Pair.ap: Pair required')
     }
     else if(!isSemigroup(m.fst())) {
@@ -122,7 +122,7 @@ function Pair(l, r) {
 
     const m = fn(snd())
 
-    if(!(m && isType(type(), m))) {
+    if(!(isSameType(Pair, m))) {
       throw new TypeError('Pair.chain: function must return a Pair')
     }
     else if(!isSemigroup(m.fst())) {

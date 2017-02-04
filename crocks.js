@@ -105,17 +105,23 @@ const predicates = {
   isApplicative: require('./predicates/isApplicative'),
   isApply: require('./predicates/isApply'),
   isArray: require('./predicates/isArray'),
+  isBoolean: require('./predicates/isBoolean'),
   isDefined: require('./predicates/isDefined'),
   isEmpty: require('./predicates/isEmpty'),
   isFoldable: require('./predicates/isFoldable'),
   isFunction: require('./predicates/isFunction'),
   isFunctor: require('./predicates/isFunctor'),
+  isInteger: require('./predicates/isInteger'),
+  isMonad: require('./predicates/isMonad'),
   isMonoid: require('./predicates/isMonoid'),
   isNil: require('./predicates/isNil'),
   isNumber: require('./predicates/isNumber'),
   isObject: require('./predicates/isObject'),
+  isSameType: require('./predicates/isSameType'),
+  isSetoid: require('./predicates/isSetoid'),
   isSemigroup: require('./predicates/isSemigroup'),
-  isString: require('./predicates/isString')
+  isString: require('./predicates/isString'),
+  isTraversable: require('./predicates/isTraversable')
 }
 
 const transforms = {

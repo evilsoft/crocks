@@ -7,13 +7,13 @@ const map = require('../pointfree/map')
 const safe = require('./safe')
 
 const isFunction = require('../predicates/isFunction')
-const isType = require('../internal/isType')
+const isSameType = require('../predicates/isSameType')
 
 const Pred = require('../crocks/Pred')
 
 // safeLift : ((a -> Boolean) | Pred) -> (a -> b) -> a -> Maybe b
 function safeLift(pred, fn) {
-  if(!(isFunction(pred) || isType(Pred.type(), pred))) {
+  if(!(isFunction(pred) || isSameType(Pred, pred))) {
     throw new TypeError('safeLift: Pred or predicate function required for first argument')
   }
   else if(!isFunction(fn)) {

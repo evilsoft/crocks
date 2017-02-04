@@ -4,7 +4,7 @@
 const isFunction = require('../predicates/isFunction')
 
 const _inspect = require('../internal/inspect')
-const isType = require('../internal/isType')
+const isSameType = require('../predicates/isSameType')
 
 const composeB = require('../combinators/composeB')
 const constant = require('../combinators/constant')
@@ -38,7 +38,7 @@ function IO(run) {
   }
 
   function ap(m) {
-    if(!isType(type(), m)) {
+    if(!isSameType(IO, m)) {
       throw new TypeError('IO.ap: IO required')
     }
 

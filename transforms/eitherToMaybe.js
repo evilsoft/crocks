@@ -4,7 +4,7 @@
 const curry = require('../helpers/curry')
 
 const isFunction = require('../predicates/isFunction')
-const isType = require('../internal/isType')
+const isSameType = require('../predicates/isSameType')
 
 const Either = require('../crocks/Either')
 const Maybe = require('../crocks/Maybe')
@@ -15,14 +15,14 @@ const applyTransform = either =>
 // eitherToMaybe : Either b a -> Maybe a
 // eitherToMaybe : (a -> Either c b) -> a -> Maybe b
 function eitherToMaybe(either) {
-  if(isType(Either.type(), either)) {
+  if(isSameType(Either, either)) {
     return applyTransform(either)
   }
   else if(isFunction(either)) {
     return function(x) {
       const m = either(x)
 
-      if(!isType(Either.type(), m)) {
+      if(!isSameType(Either, m)) {
         throw new TypeError('eitherToMaybe: Either returing function required')
       }
 

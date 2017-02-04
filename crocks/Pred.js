@@ -2,9 +2,9 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const isFunction = require('../predicates/isFunction')
+const isSameType = require('../predicates/isSameType')
 
 const _inspect = require('../internal/inspect')
-const isType = require('../internal/isType')
 
 const constant = require('../combinators/constant')
 const composeB = require('../combinators/composeB')
@@ -33,7 +33,7 @@ function Pred(runWith) {
     constant(runWith)
 
   function concat(m) {
-    if(!(m && isType(type(), m))) {
+    if(!isSameType(Pred, m)) {
       throw new TypeError('Pred.concat: Pred required')
     }
 

@@ -8,7 +8,7 @@ const noop = helpers.noop
 const identity = require('../combinators/identity')
 
 const isFunction = require('../predicates/isFunction')
-const isType = require('../internal/isType')
+const isSameType = require('../predicates/isSameType')
 
 const Either = require('../crocks/Either')
 const Async = require('../crocks/Async')
@@ -41,8 +41,8 @@ test('eitherToAsync with Either', t => {
   const good = eitherToAsync(Either.Right(some))
   const bad = eitherToAsync(Either.Left(none))
 
-  t.ok(isType(Async.type(), good), 'returns an Async when Right')
-  t.ok(isType(Async.type(), bad), 'returns an Async when Left')
+  t.ok(isSameType(Async, good), 'returns an Async when Right')
+  t.ok(isSameType(Async, bad), 'returns an Async when Left')
 
   const res = sinon.spy(noop)
   const rej = sinon.spy(noop)
@@ -81,8 +81,8 @@ test('eitherToAsync with Either returning function', t => {
   const good = eitherToAsync(lift, some)
   const bad = eitherToAsync(lift, undefined)
 
-  t.ok(isType(Async.type(), good), 'returns an Async when Right')
-  t.ok(isType(Async.type(), bad), 'returns an Async when Left')
+  t.ok(isSameType(Async, good), 'returns an Async when Right')
+  t.ok(isSameType(Async, bad), 'returns an Async when Left')
 
   const res = sinon.spy(noop)
   const rej = sinon.spy(noop)

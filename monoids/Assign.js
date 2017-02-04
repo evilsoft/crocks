@@ -1,11 +1,10 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isType = require('../internal/isType')
-
 const isFunction = require('../predicates/isFunction')
 const isNil = require('../predicates/isNil')
 const isObject = require('../predicates/isObject')
+const isSameType = require('../predicates/isSameType')
 
 const _inspect = require('../internal/inspect')
 
@@ -37,7 +36,7 @@ function Assign(o) {
     constant(`Assign${_inspect(value())}`)
 
   function concat(m) {
-    if(!(m && isType(type(), m))) {
+    if(!isSameType(Assign, m)) {
       throw new TypeError('Assign.concat: Assign required')
     }
 

@@ -3,8 +3,8 @@
 
 const isApplicative = require('../predicates/isApplicative')
 const isFunction = require('../predicates/isFunction')
+const isSameType = require('../predicates/isSameType')
 
-const isType = require('../internal/isType')
 const _inspect = require('../internal/inspect')
 const defineUnion = require('../internal/defineUnion')
 
@@ -52,7 +52,7 @@ function Either(u) {
     constant(either(identity, identity))
 
   const equals =
-    m => isType(type(), m) && either(
+    m => isSameType(Either, m) && either(
       constant(m.either(constant(true), constant(false))),
       constant(m.either(constant(false), constant(true)))
     ) && value() === m.value()
@@ -120,7 +120,7 @@ function Either(u) {
     if(!either(constant(true), isFunction)) {
       throw new TypeError('Either.ap: Wrapped value must be a function')
     }
-    else if(!either(constant(true), constant(isType(type(), m)))) {
+    else if(!either(constant(true), constant(isSameType(Either, m)))) {
       throw new TypeError('Either.ap: Either required')
     }
 
@@ -134,7 +134,7 @@ function Either(u) {
 
     const m = either(Either.Left, fn)
 
-    if(!(m && isType(type(), m))) {
+    if(!isSameType(Either, m)) {
       throw new TypeError('Either.chain: function must return an Either')
     }
 

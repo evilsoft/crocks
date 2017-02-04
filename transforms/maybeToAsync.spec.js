@@ -8,7 +8,7 @@ const noop = helpers.noop
 const identity = require('../combinators/identity')
 
 const isFunction = require('../predicates/isFunction')
-const isType = require('../internal/isType')
+const isSameType = require('../predicates/isSameType')
 
 const Maybe = require('../crocks/Maybe')
 const Async = require('../crocks/Async')
@@ -44,8 +44,8 @@ test('maybeToAsync with Maybe', t => {
   const good = maybeToAsync(none, Maybe.Just(some))
   const bad = maybeToAsync(none, Maybe.Nothing())
 
-  t.ok(isType(Async.type(), good), 'returns an Async with a Just')
-  t.ok(isType(Async.type(), bad), 'returns an Async with a Nothing')
+  t.ok(isSameType(Async, good), 'returns an Async with a Just')
+  t.ok(isSameType(Async, bad), 'returns an Async with a Nothing')
 
   const res = sinon.spy(noop)
   const rej = sinon.spy(noop)
@@ -84,8 +84,8 @@ test('maybeToAsync with Maybe returning function', t => {
   const good = maybeToAsync(none, lift, some)
   const bad = maybeToAsync(none, lift, undefined)
 
-  t.ok(isType(Async.type(), good), 'returns an Async with a Just')
-  t.ok(isType(Async.type(), bad), 'returns an Async with a Nothing')
+  t.ok(isSameType(Async, good), 'returns an Async with a Just')
+  t.ok(isSameType(Async, bad), 'returns an Async with a Nothing')
 
   const res = sinon.spy(noop)
   const rej = sinon.spy(noop)

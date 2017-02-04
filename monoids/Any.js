@@ -1,10 +1,9 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isType = require('../internal/isType')
-
 const isFunction = require('../predicates/isFunction')
 const isNil = require('../predicates/isNil')
+const isSameType = require('../predicates/isSameType')
 
 const _inspect = require('../internal/inspect')
 
@@ -36,7 +35,7 @@ function Any(b) {
     constant(`Any${_inspect(value())}`)
 
   function concat(m) {
-    if(!(m && isType(type(), m))) {
+    if(!isSameType(Any, m)) {
       throw new TypeError('Any.concat: Any required')
     }
 

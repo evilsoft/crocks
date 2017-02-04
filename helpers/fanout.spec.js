@@ -5,7 +5,7 @@ const bindFunc = helpers.bindFunc
 const noop = helpers.noop
 
 const isFunction = require('../predicates/isFunction')
-const isType = require('../internal/isType')
+const isSameType = require('../predicates/isSameType')
 
 const Arrow = require('../crocks/Arrow')
 const MockCrock = require('../test/MockCrock')
@@ -63,7 +63,7 @@ test('fanout with functions', t => {
 
   t.ok(isFunction(fanned), 'returns a function')
 
-  t.ok(isType(Pair.type(), result), 'fanned function returns a Pair')
+  t.ok(isSameType(Pair, result), 'fanned function returns a Pair')
   t.equal(result.fst(), f(x), 'applys first function to fst of Pair')
   t.equal(result.snd(), g(x), 'applys second function to snd of Pair')
 
@@ -77,11 +77,11 @@ test('fanout with Arrows', t => {
 
   const fanned = fanout(Arrow(f), Arrow(g))
 
-  t.ok(isType(Arrow.type(), fanned), 'returns an Arrow')
+  t.ok(isSameType(Arrow, fanned), 'returns an Arrow')
 
   const result = fanned.runWith(x)
 
-  t.ok(isType(Pair.type(), result), 'fanned function returns a Pair')
+  t.ok(isSameType(Pair, result), 'fanned function returns a Pair')
   t.equal(result.fst(), f(x), 'applys first function to fst of Pair')
   t.equal(result.snd(), g(x), 'applys second function to snd of Pair')
 
@@ -95,11 +95,11 @@ test('fanout with Stars', t => {
 
   const fanned = fanout(Star(f), Star(g))
 
-  t.ok(isType(Star.type(), fanned), 'returns a Star')
+  t.ok(isSameType(Star, fanned), 'returns a Star')
 
   const result = fanned.runWith(x).value()
 
-  t.ok(isType(Pair.type(), result), 'fanned function returns a Pair')
+  t.ok(isSameType(Pair, result), 'fanned function returns a Pair')
   t.equal(result.fst(), f(x).value(), 'applys first function to fst of Pair')
   t.equal(result.snd(), g(x).value(), 'applys second function to snd of Pair')
 

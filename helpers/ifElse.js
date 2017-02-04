@@ -1,14 +1,15 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isType = require('../internal/isType')
-
 const isFunction = require('../predicates/isFunction')
+const isSameType = require('../predicates/isSameType')
+
+const Pred = require('../crocks/Pred')
 
 const curry = require('./curry')
 
 function ifElse(pred, f, g) {
-  if(!(isFunction(pred) || isType('Pred', pred))) {
+  if(!(isFunction(pred) || isSameType(Pred, pred))) {
     throw new TypeError('ifElse: Pred or predicate function required for first argument')
   }
 

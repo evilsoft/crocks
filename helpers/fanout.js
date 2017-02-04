@@ -3,7 +3,7 @@
 
 const curry = require('./curry')
 const isFunction = require('../predicates/isFunction')
-const isType = require('../internal/isType')
+const isSameType = require('../predicates/isSameType')
 
 const branch = require('./branch')
 const compose = require('./compose')
@@ -14,9 +14,8 @@ const Arrow = require('../crocks/Arrow')
 const Star = require('../crocks/Star')
 
 const valid = (x, y) =>
-  (isType(Arrow.type(), x) || isType(Star.type(), y))
-    && (x && isFunction(x.type))
-    && isType(x.type(), y)
+  (isSameType(Arrow, x) || isSameType(Star, y))
+    && isSameType(x, y)
 
 // fanout : m a b -> m a c -> m a (b, c)
 function fanout(fst, snd) {

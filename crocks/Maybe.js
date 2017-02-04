@@ -3,10 +3,10 @@
 
 const isApplicative = require('../predicates/isApplicative')
 const isFunction = require('../predicates/isFunction')
+const isSameType = require('../predicates/isSameType')
 
 const _inspect = require('../internal/inspect')
 const defineUnion = require('../internal/defineUnion')
-const isType = require('../internal/isType')
 
 const composeB = require('../combinators/composeB')
 const constant = require('../combinators/constant')
@@ -44,7 +44,7 @@ function Maybe(u) {
     constant(option(undefined))
 
   const equals =
-    m => isType(type(), m) && either(
+    m => isSameType(Maybe, m) && either(
       constant(m.either(constant(true), constant(false))),
       constant(m.either(constant(false), constant(true)))
     ) && maybe() === m.maybe()
@@ -92,7 +92,7 @@ function Maybe(u) {
     if(!isFunction(fn)) {
       throw new TypeError('Maybe.ap: Wrapped value must be a function')
     }
-    else if(!isType(type(), m)) {
+    else if(!isSameType(Maybe, m)) {
       throw new TypeError('Maybe.ap: Maybe required')
     }
 
@@ -109,7 +109,7 @@ function Maybe(u) {
 
     const m = either(Maybe.Nothing, fn)
 
-    if(!(m && isType(type(), m))) {
+    if(!isSameType(Maybe, m)) {
       throw new TypeError('Maybe.chain: function must return a Maybe')
     }
 

@@ -3,9 +3,9 @@
 
 const isApplicative = require('../predicates/isApplicative')
 const isFunction = require('../predicates/isFunction')
+const isSameType = require('../predicates/isSameType')
 
 const _inspect = require('../internal/inspect')
-const isType = require('../internal/isType')
 
 const composeB = require('../combinators/composeB')
 const constant = require('../combinators/constant')
@@ -32,7 +32,7 @@ function Identity(x) {
     _of
 
   const equals =
-    m => isType(type(), m) && x === m.value()
+    m => isSameType(Identity, m) && x === m.value()
 
   const inspect =
     constant(`Identity${_inspect(x)}`)
@@ -49,7 +49,7 @@ function Identity(x) {
     if(!isFunction(x)) {
       throw new TypeError('Identity.ap: Wrapped value must be a function')
     }
-    else if(!isType(type(), m)) {
+    else if(!isSameType(Identity, m)) {
       throw new TypeError('Identity.ap: Identity required')
     }
 
@@ -63,7 +63,7 @@ function Identity(x) {
 
     const m = fn(x)
 
-    if(!(m && isType(type(), m))) {
+    if(!isSameType(Identity, m)) {
       throw new TypeError('Identity.chain: function must return an Identity')
     }
 

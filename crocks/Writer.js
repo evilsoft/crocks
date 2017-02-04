@@ -1,10 +1,9 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isType = require('../internal/isType')
-
 const isFunction = require('../predicates/isFunction')
 const isMonoid = require('../predicates/isMonoid')
+const isSameType = require('../predicates/isSameType')
 
 const _inspect = require('../internal/inspect')
 
@@ -33,7 +32,7 @@ function _Writer(Monoid) {
       _of
 
     const equals =
-      m => isType(type(), m) && m.value() === value()
+      m => isSameType(Writer, m) && m.value() === value()
 
     const value =
       constant(val)
@@ -61,7 +60,7 @@ function _Writer(Monoid) {
       if(!isFunction(value())) {
         throw new TypeError('Writer.ap: Wrapped value must be a function')
       }
-      else if(!isType(type(), m)) {
+      else if(!isSameType(Writer, m)) {
         throw new TypeError('Writer.ap: Writer required')
       }
 
@@ -75,7 +74,7 @@ function _Writer(Monoid) {
 
       const w = fn(value())
 
-      if(!(w && isType(type(), w))) {
+      if(!(w && isSameType(Writer, w))) {
         throw new TypeError('Writer.chain: function must return a Writer')
       }
 

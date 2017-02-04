@@ -4,13 +4,13 @@
 const isFunction = require('../predicates/isFunction')
 const isFunctor = require('../predicates/isFunctor')
 const isMonad = require('../predicates/isMonad')
+const isSameType = require('../predicates/isSameType')
 
-const isType = require('../internal/isType')
 const _inspect = require('../internal/inspect')
 
-const identity = require('../combinators/identity')
 const compose = require('../helpers/compose')
 const constant = require('../combinators/constant')
+const identity = require('../combinators/identity')
 
 const sequence = require('../pointfree/sequence')
 
@@ -31,7 +31,7 @@ function Star(runWith) {
     constant(`Star${_inspect(runWith)}`)
 
   function concat(s) {
-    if(!(s && isType(type(), s))) {
+    if(!isSameType(Star, s)) {
       throw new TypeError('Star.concat: Star required')
     }
 
@@ -45,7 +45,7 @@ function Star(runWith) {
       return m.chain(function(val) {
         const inner = s.runWith(val)
 
-        if(!(inner && isType(m.type(), inner))) {
+        if(!isSameType(m, inner)) {
           throw new TypeError('Star.concat: Computations must return Monads of the same type')
         }
 
@@ -96,7 +96,7 @@ function Star(runWith) {
 
   function first() {
     return Star(function(x) {
-      if(!isType(Pair.type(), x)) {
+      if(!isSameType(Pair, x)) {
         throw TypeError('Star.first: Pair required for computation input')
       }
 
@@ -112,7 +112,7 @@ function Star(runWith) {
 
   function second() {
     return Star(function(x) {
-      if(!isType(Pair.type(), x)) {
+      if(!isSameType(Pair, x)) {
         throw TypeError('Star.second: Pair required for computation input')
       }
 
@@ -128,7 +128,7 @@ function Star(runWith) {
 
   function both() {
     return Star(function(x) {
-      if(!isType(Pair.type(), x)) {
+      if(!isSameType(Pair, x)) {
         throw TypeError('Star.both: Pair required for computation input')
       }
 

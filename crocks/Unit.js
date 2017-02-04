@@ -4,7 +4,7 @@
 const isFunction = require('../predicates/isFunction')
 
 const _inspect = require('../internal/inspect')
-const isType = require('../internal/isType')
+const isSameType = require('../predicates/isSameType')
 
 const constant = require('../combinators/constant')
 
@@ -19,7 +19,7 @@ const _empty =
 
 function Unit() {
   const equals =
-    m => isType(type(), m) && undefined === m.value()
+    m => isSameType(Unit, m) && undefined === m.value()
 
   const inspect =
     constant(`()`)
@@ -37,7 +37,7 @@ function Unit() {
     _empty
 
   function concat(m) {
-    if(!(m && isType(type(), m))) {
+    if(!(isSameType(Unit, m))) {
       throw new TypeError('Unit.concat: Unit required')
     }
 
@@ -53,7 +53,7 @@ function Unit() {
   }
 
   function ap(m) {
-    if(!isType(type(), m)) {
+    if(!isSameType(Unit, m)) {
       throw new TypeError('Unit.ap: Unit required')
     }
 

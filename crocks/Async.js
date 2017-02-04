@@ -6,7 +6,7 @@ const isFunction = require('../predicates/isFunction')
 
 const _inspect = require('../internal/inspect')
 const argsArray = require('../internal/argsArray')
-const isType = require('../internal/isType')
+const isSameType = require('../predicates/isSameType')
 
 const constant = require('../combinators/constant')
 const composeB = require('../combinators/composeB')
@@ -19,7 +19,7 @@ const mreduceMap = require('../helpers/mreduceMap')
 const All = require('../monoids/All')
 
 const allAsyncs =
-  mreduceMap(All, x => isType(Async.type(), x))
+  mreduceMap(All, x => isSameType(Async, x))
 
 const _type =
   constant('Async')
@@ -163,7 +163,7 @@ function Async(fn) {
     var fnDone = false
     var valueDone = false
 
-    if(!isType(type(), m)) {
+    if(!isSameType(Async, m)) {
       throw new TypeError('Async.ap: Async required')
     }
 
@@ -203,7 +203,7 @@ function Async(fn) {
       fork(reject, function(x) {
         const m = fn(x)
 
-        if(!isType(type(), m)) {
+        if(!isSameType(Async, m)) {
           throw new TypeError('Async.chain: Function must return another Async')
         }
 

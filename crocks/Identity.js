@@ -64,7 +64,7 @@ function Identity(x) {
     const m = fn(x)
 
     if(!isSameType(Identity, m)) {
-      throw new TypeError('Identity.chain: function must return an Identity')
+      throw new TypeError('Identity.chain: Function must return an Identity')
     }
 
     return m

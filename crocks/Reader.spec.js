@@ -234,7 +234,20 @@ test('Reader chain errors', t => {
   t.throws(chain([]), TypeError, 'throws with an array')
   t.throws(chain({}), TypeError, 'throws with an object')
 
-  t.doesNotThrow(chain(noop), 'allows a function')
+  const badRtn =
+    bindFunc(x => Reader(identity).chain(identity).runWith(x))
+
+  t.throws(badRtn(undefined), TypeError, 'throws when function returns undefined')
+  t.throws(badRtn(null), TypeError, 'throws when function returns null')
+  t.throws(badRtn(0), TypeError, 'throws when function returns a falsey number')
+  t.throws(badRtn(1), TypeError, 'throws when function returns a truthy number')
+  t.throws(badRtn(''), TypeError, 'throws when function returns a falsey string')
+  t.throws(badRtn('string'), TypeError, 'throws when function returns a truthy string')
+  t.throws(badRtn(false), TypeError, 'throws when function returns false')
+  t.throws(badRtn(true), TypeError, 'throws when function returns true')
+  t.throws(badRtn([]), TypeError, 'throws when function returns an array')
+  t.throws(badRtn({}), TypeError, 'throws when function returns an object')
+  t.throws(badRtn(noop), TypeError, 'throws when function returns a function')
 
   t.end()
 })

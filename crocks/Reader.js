@@ -57,7 +57,15 @@ function Reader(runWith) {
       throw new TypeError('Reader.chain: Function required')
     }
 
-    return Reader(e => fn(runWith(e)).runWith(e))
+    return Reader(function(e) {
+      const m = fn(runWith(e))
+
+      if(!isSameType(Reader, m)) {
+        throw new TypeError('Reader.chain: Function must return a Reader')
+      }
+
+      return m.runWith(e)
+    })
   }
 
   return {

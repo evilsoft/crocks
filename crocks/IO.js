@@ -50,7 +50,15 @@ function IO(run) {
       throw new TypeError('IO.chain: Function required')
     }
 
-    return IO(_ => fn(run()).run())
+    return IO(function() {
+      const m = fn(run())
+
+      if(!isSameType(IO, m)) {
+        throw new TypeError('IO.chain: Function must return an IO')
+      }
+
+      return m.run()
+    })
   }
 
   return {

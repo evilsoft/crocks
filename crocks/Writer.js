@@ -74,8 +74,8 @@ function _Writer(Monoid) {
 
       const w = fn(value())
 
-      if(!(w && isSameType(Writer, w))) {
-        throw new TypeError('Writer.chain: function must return a Writer')
+      if(!isSameType(Writer, w)) {
+        throw new TypeError('Writer.chain: Function must return a Writer')
       }
 
       return Writer(log().concat(w.log()).value(), w.value())

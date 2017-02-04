@@ -110,7 +110,7 @@ function Maybe(u) {
     const m = either(Maybe.Nothing, fn)
 
     if(!isSameType(Maybe, m)) {
-      throw new TypeError('Maybe.chain: function must return a Maybe')
+      throw new TypeError('Maybe.chain: Function must return a Maybe')
     }
 
     return m

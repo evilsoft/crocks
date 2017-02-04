@@ -8,7 +8,7 @@ const isString = require('../predicates/isString')
 
 function concat(x, m) {
   if(!isSemigroup(m)) {
-    throw new TypeError('concat: Semi-group required for second argument')
+    throw new TypeError('concat: Semigroup required for second argument')
   }
 
   if(isString(m)) {

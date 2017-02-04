@@ -99,7 +99,7 @@ function Either(u) {
 
   function map(fn) {
     if(!isFunction(fn)) {
-      throw new TypeError('Either.map: function required')
+      throw new TypeError('Either.map: Function required')
     }
 
     return either(Either.Left, composeB(Either.Right, fn))
@@ -129,13 +129,13 @@ function Either(u) {
 
   function chain(fn) {
     if(!isFunction(fn)) {
-      throw new TypeError('Either.chain: function required')
+      throw new TypeError('Either.chain: Function required')
     }
 
     const m = either(Either.Left, fn)
 
     if(!isSameType(Either, m)) {
-      throw new TypeError('Either.chain: function must return an Either')
+      throw new TypeError('Either.chain: Function must return an Either')
     }
 
     return m

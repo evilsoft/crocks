@@ -97,7 +97,7 @@ function Async(fn) {
 
   function fork(reject, resolve) {
     if(!isFunction(reject) || !isFunction(resolve)) {
-      throw new TypeError('Async.fork: reject and resolve functions required')
+      throw new TypeError('Async.fork: Reject and resolve functions required')
     }
 
     fn(reject, resolve)

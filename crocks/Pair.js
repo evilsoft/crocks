@@ -123,7 +123,7 @@ function Pair(l, r) {
     const m = fn(snd())
 
     if(!(isSameType(Pair, m))) {
-      throw new TypeError('Pair.chain: function must return a Pair')
+      throw new TypeError('Pair.chain: Function must return a Pair')
     }
     else if(!isSemigroup(m.fst())) {
       throw new TypeError('Pair.chain: Semigroup required for first value of chained function result')

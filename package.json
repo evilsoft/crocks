@@ -1,6 +1,6 @@
 {
   "name": "crocks",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "A collection of well known Monadic Containers for your utter enjoyment.",
   "main": "crocks.js",
   "scripts": {
@@ -33,7 +33,7 @@
     "url": "https://github.com/evilsoft/crocks/issues"
   },
   "homepage": "https://github.com/evilsoft/crocks#readme",
-  "nyc" : {
+  "nyc": {
     "check-coverage": true,
     "lines": 100,
     "statements": 100,

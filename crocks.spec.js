@@ -108,6 +108,11 @@ const isObject = require('./predicates/isObject')
 const isSemigroup = require('./predicates/isSemigroup')
 const isString = require('./predicates/isString')
 
+const eitherToAsync = require('./transforms/eitherToAsync')
+const eitherToMaybe = require('./transforms/eitherToMaybe')
+const maybeToAsync = require('./transforms/maybeToAsync')
+const maybeToEither  = require('./transforms/maybeToEither')
+
 test('entry', t => {
   t.equal(crocks.toString(), '[object Object]', 'is an object')
 
@@ -216,6 +221,11 @@ test('entry', t => {
   t.equal(crocks.isObject, isObject, 'provides the isObject function')
   t.equal(crocks.isSemigroup, isSemigroup, 'provides the isSemigroup function')
   t.equal(crocks.isString, isString, 'provides the isString function')
+
+  t.equal(crocks.eitherToAsync, eitherToAsync, 'provides the eitherToAsync function')
+  t.equal(crocks.eitherToMaybe, eitherToMaybe, 'provides the eitherToMaybe function')
+  t.equal(crocks.maybeToAsync, maybeToAsync, 'provides the maybeToAsync function')
+  t.equal(crocks.maybeToEither, maybeToEither, 'provides the maybeToEither function')
 
   t.end()
 })

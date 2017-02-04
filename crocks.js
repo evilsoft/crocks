@@ -115,7 +115,14 @@ const predicates = {
   isNumber: require('./predicates/isNumber'),
   isObject: require('./predicates/isObject'),
   isSemigroup: require('./predicates/isSemigroup'),
-  isString: require('./predicates/isString'),
+  isString: require('./predicates/isString')
+}
+
+const transforms = {
+  eitherToAsync: require('./transforms/eitherToAsync'),
+  eitherToMaybe: require('./transforms/eitherToMaybe'),
+  maybeToAsync: require('./transforms/maybeToAsync'),
+  maybeToEither: require('./transforms/maybeToEither')
 }
 
 module.exports = Object.assign(
@@ -125,5 +132,6 @@ module.exports = Object.assign(
   helpers,
   monoids,
   pointFree,
-  predicates
+  predicates,
+  transforms
 )

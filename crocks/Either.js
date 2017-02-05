@@ -1,6 +1,7 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
+const ifElse = require('../logic/ifElse')
 const isApplicative = require('../predicates/isApplicative')
 const isFunction = require('../predicates/isFunction')
 const isSameType = require('../predicates/isSameType')
@@ -43,8 +44,7 @@ function Either(u) {
     throw new TypeError('Either: Must wrap something, try using Left or Right constructors')
   }
 
-  const x = (u && isFunction(u.tag) && (u.tag() === 'Left' || u.tag() === 'Right'))
-    ? u : Right(u)
+  const x = ifElse(_either.includes, identity, Right, u)
 
   const type =
     _type

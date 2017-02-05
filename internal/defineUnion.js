@@ -9,6 +9,7 @@ const argsArray = require('./argsArray')
 
 const isArray = require('../predicates/isArray')
 const isEmpty = require('../predicates/isEmpty')
+const isFunction = require('../predicates/isFunction')
 const isObject = require('../predicates/isObject')
 const isString = require('../predicates/isString')
 
@@ -26,6 +27,9 @@ function caseOf(defs) {
     return cases[tag()].apply(null, args)
   }
 }
+
+const includes =
+  defs => m => !!m && isFunction(m.tag) && Object.keys(defs).indexOf(m.tag()) !== -1
 
 function construction(def, tag) {
   return function() {
@@ -53,7 +57,7 @@ function defineUnion(defs) {
     obj[tag] = construction(def, tag)
 
     return obj
-  }, { caseOf: curry(caseOf(defs)) })
+  }, { caseOf: curry(caseOf(defs)), includes: curry(includes(defs)) })
 }
 
 module.exports = defineUnion

@@ -1,7 +1,7 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const curry = require('./curry')
+const curry = require('../helpers/curry')
 
 const isFunction = require('../predicates/isFunction')
 const isSameType = require('../predicates/isSameType')

@@ -13,7 +13,7 @@ const constant = require('../combinators/constant')
 
 const when = require('./when')
 
-test('when', t => {
+test('when logic function', t => {
   const f = bindFunc(when)
 
   t.ok(isFunction(when), 'is a function')
@@ -55,7 +55,7 @@ test('when', t => {
   t.end()
 })
 
-test('when predicate function', t => {
+test('when with predicate function', t => {
   const func = sinon.spy(constant('called'))
   const pred = x => !!x
 
@@ -74,7 +74,7 @@ test('when predicate function', t => {
   t.end()
 })
 
-test('when Pred', t => {
+test('when with Pred', t => {
   const func = sinon.spy(constant('called'))
   const pred = Pred(x => !!x)
 

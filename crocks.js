@@ -35,14 +35,12 @@ const helpers = {
   curry: require('./helpers/curry'),
   curryN: require('./helpers/curryN'),
   fanout: require('./helpers/fanout'),
-  ifElse: require('./helpers/ifElse'),
   liftA2: require('./helpers/liftA2'),
   liftA3: require('./helpers/liftA3'),
   mconcat: require('./helpers/mconcat'),
   mconcatMap: require('./helpers/mconcatMap'),
   mreduce: require('./helpers/mreduce'),
   mreduceMap: require('./helpers/mreduceMap'),
-  not: require('./helpers/not'),
   once: require('./helpers/once'),
   pipe: require('./helpers/pipe'),
   prop: require('./helpers/prop'),
@@ -50,9 +48,16 @@ const helpers = {
   safe: require('./helpers/safe'),
   safeLift: require('./helpers/safeLift'),
   tap: require('./helpers/tap'),
-  tryCatch: require('./helpers/tryCatch'),
-  unless: require('./helpers/unless'),
-  when: require('./helpers/when')
+  tryCatch: require('./helpers/tryCatch')
+}
+
+const logic = {
+  and: require('./logic/and'),
+  ifElse: require('./logic/ifElse'),
+  not: require('./logic/not'),
+  or: require('./logic/or'),
+  unless: require('./logic/unless'),
+  when: require('./logic/when')
 }
 
 const monoids = {
@@ -136,6 +141,7 @@ module.exports = Object.assign(
   combinators,
   crocks,
   helpers,
+  logic,
   monoids,
   pointFree,
   predicates,

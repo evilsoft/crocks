@@ -6,7 +6,7 @@ const isSameType = require('../predicates/isSameType')
 
 const Pred = require('../crocks/Pred')
 
-const curry = require('./curry')
+const curry = require('../helpers/curry')
 
 // when : (a -> Boolean) | Pred -> (a -> b) -> a -> b | a
 function when(pred, f) {

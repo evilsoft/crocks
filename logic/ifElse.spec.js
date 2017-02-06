@@ -14,7 +14,7 @@ const Pred = require('../crocks/Pred')
 
 const ifElse = require('./ifElse')
 
-test('ifElse', t => {
+test('ifElse logic function', t => {
   const f = bindFunc(ifElse)
 
   t.ok(isFunction(ifElse), 'is a function')
@@ -67,7 +67,7 @@ test('ifElse', t => {
   t.end()
 })
 
-test('ifElse predicate function', t => {
+test('ifElse with predicate function', t => {
   const tPath = sinon.spy(identity)
   const fPath = sinon.spy(constant(10))
   const pred = x => x >= 10
@@ -88,7 +88,7 @@ test('ifElse predicate function', t => {
   t.end()
 })
 
-test('ifElse Pred', t => {
+test('ifElse with Pred', t => {
   const tPath = sinon.spy(identity)
   const fPath = sinon.spy(constant(10))
   const pred = Pred(x => x >= 10)

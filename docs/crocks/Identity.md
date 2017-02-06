@@ -2,18 +2,11 @@
 
 `Identity : a -> a`
 
-It's just a function which returns what you pass into it.
+Crock which returns the same value that was used as its argument
 
-## What a crock!
+## Why?
 
-It converts your `non-crock` into a `crock`
-
-```js
-const frozenPizza = Identity('pizza') //Identity pizza
-const microwave = x => 'microwave ' + x
-const dinner = frozenPizza.map(microwave) //Identity "microwave pizza"
-dinner.value() // "microwave pizza"
-```
+To expose the constructor and instances defined below
 
 | Constructor | Instance |
 |:---|:---|
@@ -23,41 +16,38 @@ dinner.value() // "microwave pizza"
 
 ### of
 
-```js
-crocks.Identity.of([1,2,10])
-crocks.Identity([1,2,10])
-```
+`Identity a => a -> Identity a`
 
 ## Instances
 
 ### ap
 
-`Function (a -> b) -> Function b`
+`Identity m => m (a -> b) -> m b`
 
 ### chain
 
-`(a -> m b) -> m b`
+`Identity m => (a -> m b) -> m b`
 
 ### equals
 
-`x -> Boolean`
+`Identity x => x -> Boolean`
 
 ### map
 
-`(a -> b) -> Function b`
+`Identity m => m (a -> b) -> Identity m b`
 
 ### of
 
-`a -> Function a`
+`Identity a => a -> Identity a`
 
 ### sequence
 
-`Type (m a) -> m (Type a)`
+`Identity m a => (m a) -> m (Identity a)`
 
 ### traverse
 
-`a -> Function b -> Function b`
+`Identity (a -> m b) => a -> m b -> Identity m b`
 
 ### value
 
-`a -> a`
+`Identity a -> a`

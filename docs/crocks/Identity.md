@@ -1,6 +1,6 @@
 # Identity
 
-`Identity : a -> a`
+`Identity a`
 
 Crock which returns the same value that was used as its argument
 
@@ -20,34 +20,42 @@ To expose the constructor and instances defined below
 
 ## Instances
 
-### ap
+### inspect
 
-`Identity m => m (a -> b) -> m b`
+`Identity a => Identity a`
 
-### chain
+### value
 
-`Identity m => (a -> m b) -> m b`
+`() -> a`
+
+### type
+
+`() -> Identity`
 
 ### equals
 
-`Identity x => x -> Boolean`
+`a -> Boolean`
 
 ### map
 
-`Identity m => m (a -> b) -> Identity m b`
+`Identity m => m (a -> b) -> m b`
+
+### ap
+
+`Identity m => m a ~> m (a -> b) -> m b`
 
 ### of
 
 `Identity a => a -> Identity a`
 
+### chain
+
+`Identity m => m a ~> (a -> m b) -> m b`
+
 ### sequence
 
-`Identity m a => (m a) -> m (Identity a)`
+`Identity m, Applicative f => m (f b) ~> f (m a) -> m (f a)`
 
 ### traverse
 
-`Identity (a -> m b) => a -> m b -> Identity m b`
-
-### value
-
-`Identity a -> a`
+`Identity m, Applicative f => m a ~> f (m b) -> m (f b)`

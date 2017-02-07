@@ -4,33 +4,33 @@
 
 Crock which returns the same value that was used as its argument
 
-## Why?
+The identity crock is so principle to union types, it is often overlooked.
 
-To expose the constructor and instances defined below
+The identity exposes these constructors and instances:
 
 | Constructor | Instance |
 |:---|:---|
-| [`of`](#of) | [`ap`](#ap), [`chain`](#chain), [`equals`](#equals), [`map`](#map), [`of`](#of), [`sequence`](#sequence), [`traverse`](#traverse), [`value`](#value) |
+| [`of`](#of) | [`inspect`](#inspect), [`value`](#value), [`type`](#type), [`equals`](#equals), [`map`](#map), [`ap`](#ap), [`of`](#of), [`chain`](#chain), [`sequence`](#sequence), [`traverse`](#traverse) |
 
 ## Constructors
 
 ### of
 
-`Identity a => a -> Identity a`
+`Identity m => a -> m a`
 
 ## Instances
 
 ### inspect
 
-`Identity a => Identity a`
+`() => String`
 
 ### value
 
-`() -> a`
+`Identity m => m a ~> () => a`
 
 ### type
 
-`() -> Identity`
+`() -> String`
 
 ### equals
 
@@ -38,15 +38,15 @@ To expose the constructor and instances defined below
 
 ### map
 
-`Identity m => m (a -> b) -> m b`
+`Identity m => m a ~> (a -> b) -> m b`
 
 ### ap
 
-`Identity m => m a ~> m (a -> b) -> m b`
+`Identity m => m (a -> b) ~> m a -> m b`
 
 ### of
 
-`Identity a => a -> Identity a`
+`Identity m => a -> m a`
 
 ### chain
 
@@ -54,8 +54,8 @@ To expose the constructor and instances defined below
 
 ### sequence
 
-`Identity m, Applicative f => m (f b) ~> f (m a) -> m (f a)`
+`Identity m, Applicative f => m (f a) ~> (b -> f b) -> f (m a)`
 
 ### traverse
 
-`Identity m, Applicative f => m a ~> f (m b) -> m (f b)`
+`Identity m, Applicative f => m a ~> (c -> f c) -> (a -> f b) -> f (m b)`

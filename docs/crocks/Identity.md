@@ -4,7 +4,28 @@
 
 Crock which returns the same value that was used as its argument
 
-The identity crock is so principle to union types, it is often overlooked.
+The "`Identity`" crock creates linear data flow in comparison to imperative usage.
+
+## Imperative
+
+```js
+const capitalizeFirstLetter = string => {
+  const firstLetter = string.charAt(0)
+  const upppercasedLetter = firstLetter.toUpperCase()
+  return upppercasedLetter + string.slice(1);
+}
+```
+
+## With Identity
+
+```js
+const capitalizeFirstLetter = string =>
+  Identity(string)
+    .map(str => str.charAt(0))
+    .map(char => char.toUpperCase())
+    .map(upper => upper + str.slice(1))
+    .value()
+```
 
 The identity exposes these constructors and instances:
 

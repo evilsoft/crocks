@@ -4,21 +4,17 @@
 
 Crock which returns the same value that was used as its argument
 
-The "`Identity`" crock creates linear data flow in comparison to imperative usage.
-
-## Imperative
+"`Identity`" creates linear data flow in comparison to imperative usage.
 
 ```js
+// Imperative flow
 const capitalizeFirstLetter = string => {
   const firstLetter = string.charAt(0)
   const upppercasedLetter = firstLetter.toUpperCase()
   return upppercasedLetter + string.slice(1);
 }
-```
 
-## With Identity
-
-```js
+// Declarative flow
 const capitalizeFirstLetter = string =>
   Identity(string)
     .map(str => str.charAt(0))

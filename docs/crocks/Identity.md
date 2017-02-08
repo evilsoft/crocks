@@ -23,11 +23,11 @@ const capitalizeFirstLetter = string =>
   Identity(string)
     .map(str => str.charAt(0))
     .map(char => char.toUpperCase())
-    .map(upper => upper + str.slice(1))
+    .map(upper => upper + string.slice(1))
     .value()
 ```
 
-The identity exposes these constructors and instances:
+`Identity` exposes these constructors and instances:
 
 | Constructor | Instance |
 |:---|:---|

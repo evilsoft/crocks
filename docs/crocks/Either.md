@@ -1,27 +1,13 @@
 # Either
 
-`Either l r`
+`Either a b`
 
-Crock which takes a `l` and a `r`, or just a `r`, and acts accordingly:
-* taking only `r` will proceed as `Identity`
-* taking `l` and `r` will handle errors (or results defined as `Left`) with `l` and results with `r` (or results defined as `Right`)
+Crock which --
 
 The "`Either`" crock creates disjunction with a linear data flow.
 
 ```js
-// Imperative flow
-const renderPage = user => {
-  const isAuthenticated = user ? true : false
-  return isAuthenticated ? "Home Page" : "Login Page"
-}
-
-// Declarative flow
-const isAuthenticated = u => u ? Either.Right(u) : Either.Left("Login Page")
-
-const renderPage = user =>
-  isAuthenticated(user)
-  .map(u => "Home Page")
-  .value()
+--
 ```
 
 `Either` exposes these constructors and instances:
@@ -34,11 +20,11 @@ const renderPage = user =>
 
 ### Left
 
-`Either m => l -> m l _`
+`Either m => a -> m a _`
 
 ### Right
 
-`Either m => r -> m _ r`
+`Either m => a -> m _ a`
 
 ### of
 
@@ -52,11 +38,11 @@ const renderPage = user =>
 
 ### either
 
-`Either m => m l r ~> (l -> c) -> (r -> d) -> m l d`
+`Either m => m c a ~> (c -> b) -> (a -> b) -> b`
 
 ### value
 
-`Either m => m l r ~> () => a`
+`Either m => m c a ~> () => c | a`
 
 ### type
 
@@ -64,11 +50,11 @@ const renderPage = user =>
 
 ### swap
 
-`Either m => m l r ~> m r l`
+`Either m => m a b ~> m a b`
 
 ### coalesce
 
-`Either m => m l r ~> (l -> a) -> m _ a`
+`Either m => m a b ~> (b -> c) -> m _ c`
 
 ### equals
 
@@ -76,15 +62,15 @@ const renderPage = user =>
 
 ### map
 
-`Either m => m l r ~> (r -> d) -> m c d`
+`Either m => m c a ~> (a -> b) -> m a b`
 
 ### bimap
 
-`Either m => m l r ~> (l -> c) -> (r -> d) -> m c d`
+`Either m => m a b ~> (a -> c) -> (b -> d) -> m c d`
 
 ### ap
 
-`Either m => m l (r -> a) ~> m l r -> m l a`
+`Either m => m c (a -> b) ~> m c a -> m c b`
 
 ### of
 
@@ -92,12 +78,12 @@ const renderPage = user =>
 
 ### chain
 
-`Either m => m l r ~> (r -> m a) -> m l a`
+`Either m => m c a ~> (a -> m c b) -> m c b`
 
 ### sequence
 
-`Either m, Applicative f => m l (f r) ~> (l -> f l) -> (r -> f r) -> f (m l r)`
+`Either m, Applicative f => m c (f a) ~> (b -> f b) -> f (m c a)`
 
 ### traverse
 
-`Either m, Applicative f => m l r ~> (a -> f a) -> (r -> f b) -> f (m l b)`
+`Either m, Applicative f => m c a ~> (d -> f d) -> (a -> f b) -> f (m c b)`

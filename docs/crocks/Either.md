@@ -54,7 +54,7 @@
 
 ### coalesce
 
-`Either m => m c a ~> (c -> a) -> m _ a`
+`Either m => m c a ~> (c -> b) -> (a -> b) -> m _ b`
 
 ### equals
 

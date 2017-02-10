@@ -1,16 +1,16 @@
 # Either
 
-`Either a b`
+`Either c a`
 
-Crock which --
+--
 
-The "`Either`" crock creates disjunction with a linear data flow.
+--
 
 ```js
 --
 ```
 
-`Either` exposes these constructors and instances:
+`Either` exposes the following constructor and instances:
 
 | Constructor | Instance |
 |:---|:---|
@@ -20,7 +20,7 @@ The "`Either`" crock creates disjunction with a linear data flow.
 
 ### Left
 
-`Either m => a -> m a _`
+`Either m => c -> m c _`
 
 ### Right
 
@@ -50,11 +50,11 @@ The "`Either`" crock creates disjunction with a linear data flow.
 
 ### swap
 
-`Either m => m a b ~> m a b`
+`Either m => m c a ~> m a c`
 
 ### coalesce
 
-`Either m => m a b ~> (b -> c) -> m _ c`
+`Either m => m c a ~> (c -> a) -> m _ a`
 
 ### equals
 
@@ -66,7 +66,7 @@ The "`Either`" crock creates disjunction with a linear data flow.
 
 ### bimap
 
-`Either m => m a b ~> (a -> c) -> (b -> d) -> m c d`
+`Either m => m c a ~> (c -> d) -> (a -> b) -> m d b`
 
 ### ap
 

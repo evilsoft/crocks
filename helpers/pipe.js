@@ -2,10 +2,8 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const argsArray = require('../internal/argsArray')
-
-const isFunction = require('../predicates/isFunction')
-
 const identity = require('../combinators/identity')
+const isFunction = require('../predicates/isFunction')
 
 function applyPipe(f, g) {
   return function() {

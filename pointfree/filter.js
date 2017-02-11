@@ -8,13 +8,12 @@ const isSameType = require('../predicates/isSameType')
 
 const Pred = require('../crocks/Pred')
 
-// filter :: Foldable f => (a -> Boolean) -> f a -> f a
+// filter : Foldable f => (a -> Boolean) -> f a -> f a
 function filter(pred, m) {
   if(!(isFunction(pred) || isSameType(Pred, pred))) {
     throw new TypeError('filter: Pred or predicate function required for first argument')
   }
   else if(m && isFunction(m.filter)) {
-
     const fn = isFunction(pred)
       ? pred
       : pred.runWith
@@ -22,7 +21,7 @@ function filter(pred, m) {
     return m.filter(fn)
   }
   else {
-    throw new TypeError('filter: Foldable of the same type required for second argument')
+    throw new TypeError('filter: Foldable required for second argument')
   }
 }
 

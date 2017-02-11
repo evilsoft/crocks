@@ -9,6 +9,7 @@ const isSameType = require('../predicates/isSameType')
 const _inspect = require('../internal/inspect')
 
 const constant = require('../combinators/constant')
+const not = require('../logic/not')
 
 const _concat = require('../pointfree/concat')
 
@@ -150,6 +151,19 @@ function List(x) {
     )
   }
 
+  function reject(pred) {
+    if(!(isFunction(pred) || isSameType(Pred, pred))) {
+      throw new TypeError('List.reject: Pred or predicate function required')
+    }
+
+    const fn = not(isFunction(pred) ? pred : pred.runWith)
+
+    return reduce(
+      (x, y) => fn(y) ? x.concat(x.of(y)) : x,
+      empty()
+    )
+  }
+
   function map(fn) {
     if(!isFunction(fn)) {
       throw new TypeError('List.map: Function required')
@@ -204,8 +218,8 @@ function List(x) {
   return {
     inspect, value, toArray, head, tail, cons,
     type, equals, concat, empty, reduce,
-    filter, map, ap, of, chain, sequence,
-    traverse
+    filter, reject, map, ap, of, chain,
+    sequence, traverse
   }
 }
 

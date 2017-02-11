@@ -51,19 +51,6 @@ test('Maybe type', t => {
   t.end()
 })
 
-test('Maybe maybe', t => {
-  t.equal(Maybe.Just(0).maybe(), 0, 'maybe returns 0 when 0 is wrapped')
-  t.equal(Maybe.Just(1).maybe(), 1, 'maybe returns 1 when 1 is wrapped')
-  t.equal(Maybe('').maybe(), '', "maybe returns '' when '' is wrapped")
-  t.equal(Maybe('string').maybe(), 'string', "maybe returns 'string' when 'string' is wrapped")
-  t.equal(Maybe(false).maybe(), false, 'maybe returns false when false is wrapped')
-  t.equal(Maybe(true).maybe(), true, 'maybe returns true when true is wrapped')
-
-  t.equal(Maybe(null).maybe(), null, 'maybe returns undefined when null is wrapped')
-  t.equal(Maybe(undefined).maybe(), undefined, 'maybe returns undefined when undefined is wrapped')
-  t.end()
-})
-
 test('Maybe option', t => {
   const nothing = Maybe.Nothing()
   const just = Maybe.Just('something')
@@ -214,7 +201,7 @@ test('Maybe map functionality', t => {
   const def = Maybe.Just('Just').map(spy)
 
   t.equal(def.option('Nothing'), 'Just', 'returns a Just')
-  t.equal(def.maybe(), 'Just', 'returns a Just with the same value when mapped with identity')
+  t.equal(def.option('Nothing'), 'Just', 'returns a Just with the same value when mapped with identity')
   t.equal(spy.called, true, 'mapped function is called on Just')
 
   t.end()
@@ -227,8 +214,12 @@ test('Maybe map properties (Functor)', t => {
   t.ok(isFunction(Maybe.Just(0).map), 'Just provides a map function')
   t.ok(isFunction(Maybe.Nothing().map), 'Just provides a map function')
 
-  t.equal(Maybe.Just(null).map(identity).maybe(), null, 'identity')
-  t.equal(Maybe.Just(10).map(x => f(g(x))).maybe(), Maybe(10).map(g).map(f).maybe(), 'composition')
+  t.equal(Maybe.Just(null).map(identity).option('Nothing'), null, 'identity')
+  t.equal(
+    Maybe.Just(10).map(x => f(g(x))).option('Nothing'),
+    Maybe(10).map(g).map(f).option('Other'),
+    'composition'
+  )
 
   t.end()
 })
@@ -287,7 +278,7 @@ test('Maybe ap properties (Apply)', t => {
 test('Maybe of', t => {
   t.equal(Maybe.of, Maybe(0).of, 'Maybe.of is the same as the instance version')
   t.equal(Maybe.of(0).type(), 'Maybe', 'returns a Maybe')
-  t.equal(Maybe.of(0).maybe(), 0, 'wraps the value passed into a Maybe')
+  t.equal(Maybe.of(0).option('Nothing'), 0, 'wraps the value passed into a Maybe')
 
   t.end()
 })
@@ -301,13 +292,17 @@ test('Maybe of properties (Applicative)', t => {
   t.ok(isFunction(j.of), 'Just provides an of function')
   t.ok(isFunction(j.ap), 'Just implements the Apply spec')
 
-  t.equal(m.ap(j).maybe(), 3, 'identity')
-  t.equal(m.ap(Maybe.of(3)).maybe(), Maybe.of(identity(3)).maybe(), 'homomorphism')
+  t.equal(m.ap(j).option('Nothing'), 3, 'identity')
+  t.equal(
+    m.ap(Maybe.of(3)).option('Nothing'),
+    Maybe.of(identity(3)).option('Nothing'),
+    'homomorphism'
+  )
 
   const a = x => m.ap(Maybe.of(x))
   const b = x => Maybe.of(reverseApply(x)).ap(m)
 
-  t.equal(a(3).maybe(), b(3).maybe(), 'interchange Just')
+  t.equal(a(3).option('Nothing'), b(3).option('Other'), 'interchange Just')
 
   t.end()
 })
@@ -349,7 +344,7 @@ test('Maybe chain properties (Chain)', t => {
   const a = x => Maybe.of(x).chain(f).chain(g)
   const b = x => Maybe.of(x).chain(y => f(y).chain(g))
 
-  t.equal(a(10).maybe(), b(10).maybe(), 'assosiativity')
+  t.equal(a(10).option('Nothing'), b(10).option('Other'), 'assosiativity')
 
   t.end()
 })
@@ -360,8 +355,8 @@ test('Maybe chain properties (Monad)', t => {
 
   const f = Maybe.of
 
-  t.equal(Maybe.of(3).chain(f).maybe(), f(3).maybe(), 'left identity')
-  t.equal(f(3).chain(Maybe.of).maybe(), f(3).maybe(), 'right identity')
+  t.equal(Maybe.of(3).chain(f).option('First'), f(3).option('Second'), 'left identity')
+  t.equal(f(3).chain(Maybe.of).option('First'), f(3).option('Second'), 'right identity')
 
   t.end()
 })
@@ -397,7 +392,7 @@ test('Maybe sequence functionality', t => {
 
   t.equal(s.type(), 'MockCrock', 'Provides an outer type of MockCrock')
   t.equal(s.value().type(), 'Maybe', 'Provides an inner type of Maybe')
-  t.same(s.value().maybe(), x, 'Maybe contains original inner value')
+  t.same(s.value().option('Nothing'), x, 'Maybe contains original inner value')
 
   t.equal(n.type(), 'MockCrock', 'Provides an outer type of MockCrock')
   t.equal(n.value().type(), 'Maybe', 'Provides an inner type of Maybe')
@@ -472,7 +467,7 @@ test('Maybe traverse functionality', t => {
 
   t.equal(r.type(), 'MockCrock', 'Provides an outer type of MockCrock')
   t.equal(r.value().type(), 'Maybe', 'Provides an inner type of Maybe')
-  t.equal(r.value().maybe(), x, 'Maybe contains original inner value')
+  t.equal(r.value().option('Nothing'), x, 'Maybe contains original inner value')
 
   t.equal(l.type(), 'MockCrock', 'Provides an outer type of MockCrock')
   t.equal(l.value().type(), 'Maybe', 'Provides an inner type of Maybe')

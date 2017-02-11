@@ -11,7 +11,7 @@ const Pred = require('../crocks/Pred')
 
 const not = require('./not')
 
-test('not', t => {
+test('not logic function', t => {
   const f = bindFunc(not)
 
   t.ok(isFunction(not), 'is a function')
@@ -36,7 +36,7 @@ test('not', t => {
   t.end()
 })
 
-test('not predicate function', t => {
+test('not with predicate function', t => {
   const f = not(identity)
 
   t.equals(f(undefined), true, 'returns true with undefined')
@@ -53,7 +53,7 @@ test('not predicate function', t => {
   t.end()
 })
 
-test('not Pred', t => {
+test('not with Pred', t => {
   const f = not(Pred(x => !!x))
 
   t.equals(f(undefined), true, 'returns true with undefined')

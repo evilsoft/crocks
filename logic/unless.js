@@ -6,8 +6,9 @@ const isSameType = require('../predicates/isSameType')
 
 const Pred = require('../crocks/Pred')
 
-const curry = require('./curry')
+const curry = require('../helpers/curry')
 
+// unless : (a -> Boolean) | Pred -> (a -> b) -> a | b
 function unless(pred, f) {
   if(!(isFunction(pred) || isSameType(Pred, pred))) {
     throw new TypeError('unless: Pred or predicate function required for first argument')

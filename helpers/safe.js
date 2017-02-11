@@ -5,7 +5,7 @@ const isFunction = require('../predicates/isFunction')
 const isSameType = require('../predicates/isSameType')
 
 const curry = require('./curry')
-const ifElse = require('./ifElse')
+const ifElse = require('../logic/ifElse')
 
 const Maybe = require('../crocks/Maybe')
 const Pred = require('../crocks/Pred')

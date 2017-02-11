@@ -57,6 +57,8 @@ There are (6) classifications of "things" included in this library:
 
 * Helper Functions (`crocks/helpers`): All other support functions that are either convenient versions of combinators or not even combinators at all cover this group.
 
+* Logic Functions (`crocks/logic`): A helpful collection of Logic based combinators. All of these functions work with predicate functions and let you combine them in some very interesting ways.
+
 * Predicate Functions (`crocks/predicates`): A helpful collection of predicate functions to get you started.
 
 * Point-free Functions (`crocks/pointfree`): Wanna use these ADTs in a way that you never have to reference the actual data being worked on? Well here is where you will find all of these functions to do that. For every algebra available on both the `Crocks` and `Monoids` there is a function here.
@@ -146,9 +148,6 @@ When dealing with variable argument functions, there are times when you may want
 #### `fanout : Monad m => Star a (m b) -> Star a (m c) -> Star a (m (Pair b c))`
 There are may times that you need to keep some running or persistent state while performing a given computation. A common way to do this is to take the input to the computation and branch it into a `Pair` and perform different operations on each version of the input. This is such a common pattern that it warrents the `fanout` function to take care of the initial split and mapping. Just provide a pair of either simple functions or a pair of one of the computation types (`Arrow` or `Star`). You will get back something of the same type that is configured to split it's input into a pair and than apply the first Function/ADT to the first portion of the underlying `Pair` and the second on the second.
 
-#### `ifElse : ((a -> Boolean) | Pred) -> (a -> b) -> (a -> c) -> a -> b | c`
-Whenever you need to modify a value based some condition and want a functional way to do it without some imperative `if` statement, then reach for `ifElse`. This function take a predicate (some function that returns a Boolean) and two functions. The first is what is executed when the predicate is true, the second on a false condition. This will return a function ready to take a value to run through the predicate. After the value is evaluated, it will be ran through it's corresponding function, returning the result as the final result. This function comes in really handy when creating lifting functions for Sum Types (like `Either` or `Maybe`).
-
 #### `liftA2 : Applicative m => (a -> b -> c) -> m a -> m b -> m c`
 #### `liftA3 : Applicative m => (a -> b -> c -> d) -> m a -> m b -> m c -> m d`
 Ever see yourself wanting to `map` a binary or tri-ary function, but `map` only allows unary functions? Both of these functions allow you to pass in your function as well as the number of `Applicatives` (containers that provide both `of` and `ap` functions) you need to get the mapping you are looking for.
@@ -160,9 +159,6 @@ These two functions are very handy for combining an entire `List` or `Array` of 
 #### `mconcatMap : Monoid m => m -> (b -> a) -> ([ b ] | List b) -> m a`
 #### `mreduceMap : Monoid m => m -> (b -> a) -> ([ b ] | List b) -> a`
 There comes a time where the values you have in a `List` or an `Array` are not in the type that is needed for the `Monoid` you want to combine with. These two functions can be used to `map` some transforming function from a given type into the type needed for the `Monoid`. In essence, this function will run each value through the function before it lifts the value into the `Monoid`, before `concat` is applied. The difference between the two is that `mconcatMap` returns the result inside the `Monoid` used to combine them. Where `mreduceMap` returns the bare value itself.
-
-#### `not : ((a -> Boolean) | Pred) -> a -> Boolean`
-When you need to negate a predicate function or a `Pred`, but want a new predicate function that does the negation, then `not` is going to get you what you need. Using `not` will allow you to stay as declarative as possible. Just pass `not` your predicate function or a `Pred`, and it will give you back a predicate function ready for insertion into your flow. All predicate based functions in `crocks` take either a `Pred` or predicate function, so it should be easy to swap between the two.
 
 #### `once : ((*) -> a) -> ((*) -> a)`
 There are times in Javascript development where you only want to call a function once and memoize the first result for every subsequent call to that function. Just pass the function you want guarded to `once` and you will get back a function with the expected guarantees.
@@ -187,6 +183,21 @@ It is hard knowing what is going on inside of some of these ADTs or your wonderf
 
 #### `tryCatch : (a -> b) -> a -> Either e b`
 Typical try-catch blocks are very imperative in their usage. This `tryCatch` function provides a means of capturing that imperative nature in a simple declarative style. Pass it a function that could fail and it will return you another function wrapping the first function. When called the new function will either return the result in an `Either.Right` if everything was good, or an error wrapped in an `Either.Left` if it fails.
+
+### Logic Functions
+The functions in this section are used to represent logical branching in a declarative manner. Each of these functions require either `Pred`s or predicate functions in their input. Since these functions work with Preds and predicate functions, rather than values, this allows for composeable, "lazy" evaluation.
+
+#### `and : ((a -> Boolean) | Pred) -> ((a -> Boolean) | Pred) -> a -> Boolean`
+Say you have two predicate functions or `Pred`s and would like to combine them into one predicate over conjunction, well you came to the right place, `and` accepts either predicate functions or `Pred`s and will return you a function ready to take a value. Once that value is passed, it will run it through both of the predicates and return the result of combining it over a `logical and`. This is super helpful combined with `or` for putting together reusable, complex predicates. As they follow the general form of `(a -> Boolean)` they are easily combined with other logic functions.
+
+#### `ifElse : ((a -> Boolean) | Pred) -> (a -> b) -> (a -> c) -> a -> b | c`
+Whenever you need to modify a value based some condition and want a functional way to do it without some imperative `if` statement, then reach for `ifElse`. This function take a predicate (some function that returns a Boolean) and two functions. The first is what is executed when the predicate is true, the second on a false condition. This will return a function ready to take a value to run through the predicate. After the value is evaluated, it will be ran through it's corresponding function, returning the result as the final result. This function comes in really handy when creating lifting functions for Sum Types (like `Either` or `Maybe`).
+
+#### `not : ((a -> Boolean) | Pred) -> a -> Boolean`
+When you need to negate a predicate function or a `Pred`, but want a new predicate function that does the negation, then `not` is going to get you what you need. Using `not` will allow you to stay as declarative as possible. Just pass `not` your predicate function or a `Pred`, and it will give you back a predicate function ready for insertion into your flow. All predicate based functions in `crocks` take either a `Pred` or predicate function, so it should be easy to swap between the two.
+
+#### `or : ((a -> Boolean) | Pred) -> ((a -> Boolean) | Pred) -> a -> Boolean`
+Say you have two predicate functions or `Pred`s and would like to combine them into one predicate over disjunction, look no further, `or` accepts either predicate functions or `Pred`s and will return you a function ready to take a value. Once that value is passed, it will run it through both of the predicates and return the result of combining it over a `logical or`. This is super helpful combined with `and` for putting together reusable, complex predicates. As they follow the general form of `(a -> Boolean)` they are easily combined with other logic functions.
 
 #### `unless : ((a -> Boolean) | Pred) -> (a -> b) -> a -> a | b`
 There may come a time when you need to adjust a value when a condition is false, that is where `unless` can come into play. Just provide a predicate function (a function that returns a Boolean) and a function to apply your desired modification. This will get you back a function that when you pass it a value, it will evaluate it and if false, will run your value through the provided function. Either the original or modified value will be returned depending on the result of the predicate. Check out `when` for a negated version of this function.

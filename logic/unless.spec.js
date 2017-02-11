@@ -13,7 +13,7 @@ const Pred = require('../crocks/Pred')
 
 const unless = require('./unless')
 
-test('unless', t => {
+test('unless logic function', t => {
   const f = bindFunc(unless)
 
   t.ok(isFunction(unless), 'is a function')
@@ -55,7 +55,7 @@ test('unless', t => {
   t.end()
 })
 
-test('unless predicate function', t => {
+test('unless with predicate function', t => {
   const func = sinon.spy(constant('called'))
   const pred = x => !!x
 
@@ -74,7 +74,7 @@ test('unless predicate function', t => {
   t.end()
 })
 
-test('unless Pred', t => {
+test('unless with Pred', t => {
   const func = sinon.spy(constant('called'))
   const pred = Pred(x => !!x)
 

@@ -9,7 +9,7 @@
     "build": "npm test && webpack && uglifyjs dist/crocks.js -c \"warnings=false\" -m -o dist/crocks.min.js",
     "lint": "jshint .",
     "lint:dev": "jshint --reporter=node_modules/jshint-stylish .",
-    "spec": "tape combinators/*.spec.js crocks/*.spec.js helpers/*.spec.js internal/*.spec.js monoids/*.spec.js pointfree/*.spec.js ./predicates/*.spec.js ./transforms/*.spec.js ./*.spec.js",
+    "spec": "tape combinators/*.spec.js crocks/*.spec.js helpers/*.spec.js internal/*.spec.js logic/*.spec.js monoids/*.spec.js pointfree/*.spec.js ./predicates/*.spec.js ./transforms/*.spec.js ./*.spec.js",
     "spec:dev": "nodemon -q -e js -x 'npm run spec -s | tap-spec'",
     "test": "npm run lint && nyc npm run spec",
     "coverage": "nyc report --reporter=text-lcov | coveralls"

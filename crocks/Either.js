@@ -48,14 +48,11 @@ function Either(u) {
   const type =
     _type
 
-  const value =
-    constant(either(identity, identity))
-
   const equals =
     m => isSameType(Either, m) && either(
-      constant(m.either(constant(true), constant(false))),
-      constant(m.either(constant(false), constant(true)))
-    ) && value() === m.value()
+      x => m.either(y => y === x, constant(false)),
+      x => m.either(constant(false), y => y === x)
+    )
 
   const of =
     _of
@@ -170,7 +167,7 @@ function Either(u) {
   }
 
   return {
-    inspect, either, value, type,
+    inspect, either, type,
     swap, coalesce, equals, map, bimap,
     ap, of, chain, sequence, traverse
   }

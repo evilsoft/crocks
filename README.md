@@ -75,11 +75,11 @@ All `Crocks` are Constructor functions of the given type, with `Writer` being an
 | `Arrow` | `empty` | `both`, `concat`, `contramap`, `empty`, `first`, `map`, `promap`, `runWith`, `second`, `value` |
 | `Async` | `all`, `fromNode`, `fromPromise`, `of`, `rejected` | `alt`, `ap`, `bimap`, `chain`, `coalesce`, `fork`, `map`, `of`, `swap`, `toPromise` |
 | `Const` | -- | `ap`, `chain`, `concat`, `equals`, `map`, `value` |
-| `Either` | `Left`, `Right`, `of`| `alt`, `ap`, `bimap`, `chain`, `coalesce`, `either`, `equals`, `map`, `of`, `sequence`, `swap`, `traverse`, `value` |
+| `Either` | `Left`, `Right`, `of`| `alt`, `ap`, `bimap`, `chain`, `coalesce`, `either`, `equals`, `map`, `of`, `sequence`, `swap`, `traverse` |
 | `Identity` | `of` | `ap`, `chain`, `equals`, `map`, `of`, `sequence`, `traverse`, `value` |
 | `IO` | `of` | `ap`, `chain`, `map`, `of`, `run` |
 | `List` |  `empty`, `of` | `ap`, `chain`, `concat`, `cons`, `empty`, `equals`, `filter`, `head`, `map`, `of`, `reduce`, `sequence`, `tail`, `traverse`, `value` |
-| `Maybe` | `Nothing`, `Just`, `of`, `zero` | `alt`, `ap`, `chain`, `coalesce`, `equals`, `either`, `map`, `maybe`, `of`, `option`, `sequence`, `traverse`, `zero` |
+| `Maybe` | `Nothing`, `Just`, `of`, `zero` | `alt`, `ap`, `chain`, `coalesce`, `equals`, `either`, `map`, `of`, `option`, `sequence`, `traverse`, `zero` |
 | `Pair` | `of` | `ap`, `bimap`, `chain`, `concat`, `equals`, `fst`, `map`, `merge`, `of`, `snd`, `swap`, `value` |
 | `Pred`[*] | `empty` | `concat`, `contramap`, `empty`, `runWith`, `value` |
 | `Reader` | `ask`, `of`| `ap`, `chain`, `map`, `of`, `runWith` |
@@ -141,7 +141,7 @@ While the `composeB` can be used to create a composition of two functions, there
 Pass this function a function and it will return you a function that can be called in any form that you require until all arguments have been provided. For example if you pass a function: `f : (a, b, c) -> d` you get back a function that can be called in any combination, such as: `f(x, y, z)`, `f(x)(y)(z)`, `f(x, y)(z)`, or even `f(x)(y, z)`. This is great for doing partial application on functions for maximum re-usability.
 
 #### `curryN : Number -> ((a, b, ...) -> z) -> a -> b -> ... -> z`
-When dealing with variable argument functions, there are times when you may want to curry a specific number of arguments. Just pass this function the number of arguments you want to curry as well as the function, and it will not call the wrapped function until all arguments have been passed. This function will ONLY pass the number of arguments that you specified, any remaining arguments are discarded. This is great for limiting the arity of a given function when additional parameters are defaulted or not needed. This function will not auto curry functions returning functions like `curry` does, use with `curry` if you need to do some fancy setup for your wrapped function's api.
+When dealing with variable argument functions, there are times when you may want to curry a specific number of arguments. Just pass this function the number of arguments you want to curry as well as the function, and it will not call the wrapped function until all arguments have been passed. This function will ONLY pass the number of arguments that you specified, any remaining arguments are discarded. This is great for limiting the arity of a given function when additional parameters are defaulted or not needed. This function will not auto curry functions returning functions like `curry` does, use with `curry` if you need to do some fancy setup for your wrapped function's API.
 
 #### `fanout : (a -> b) -> (a -> c) -> (a -> Pair b c)`
 #### `fanout : Arrow a b -> Arrow a c -> Arrow a (Pair b c)`
@@ -190,7 +190,7 @@ The functions in this section are used to represent logical branching in a decla
 #### `and : ((a -> Boolean) | Pred) -> ((a -> Boolean) | Pred) -> a -> Boolean`
 Say you have two predicate functions or `Pred`s and would like to combine them into one predicate over conjunction, well you came to the right place, `and` accepts either predicate functions or `Pred`s and will return you a function ready to take a value. Once that value is passed, it will run it through both of the predicates and return the result of combining it over a `logical and`. This is super helpful combined with `or` for putting together reusable, complex predicates. As they follow the general form of `(a -> Boolean)` they are easily combined with other logic functions.
 
-#### `ifElse : ((a -> Boolean) | Pred) -> (a -> b) -> (a -> c) -> a -> b | c`
+#### `ifElse : ((a -> Boolean) | Pred) -> (* -> a) -> (* -> a) -> * -> a`
 Whenever you need to modify a value based some condition and want a functional way to do it without some imperative `if` statement, then reach for `ifElse`. This function take a predicate (some function that returns a Boolean) and two functions. The first is what is executed when the predicate is true, the second on a false condition. This will return a function ready to take a value to run through the predicate. After the value is evaluated, it will be ran through it's corresponding function, returning the result as the final result. This function comes in really handy when creating lifting functions for Sum Types (like `Either` or `Maybe`).
 
 #### `not : ((a -> Boolean) | Pred) -> a -> Boolean`
@@ -199,10 +199,10 @@ When you need to negate a predicate function or a `Pred`, but want a new predica
 #### `or : ((a -> Boolean) | Pred) -> ((a -> Boolean) | Pred) -> a -> Boolean`
 Say you have two predicate functions or `Pred`s and would like to combine them into one predicate over disjunction, look no further, `or` accepts either predicate functions or `Pred`s and will return you a function ready to take a value. Once that value is passed, it will run it through both of the predicates and return the result of combining it over a `logical or`. This is super helpful combined with `and` for putting together reusable, complex predicates. As they follow the general form of `(a -> Boolean)` they are easily combined with other logic functions.
 
-#### `unless : ((a -> Boolean) | Pred) -> (a -> b) -> a -> a | b`
+#### `unless : ((a -> Boolean) | Pred) -> (* -> a) -> * -> a`
 There may come a time when you need to adjust a value when a condition is false, that is where `unless` can come into play. Just provide a predicate function (a function that returns a Boolean) and a function to apply your desired modification. This will get you back a function that when you pass it a value, it will evaluate it and if false, will run your value through the provided function. Either the original or modified value will be returned depending on the result of the predicate. Check out `when` for a negated version of this function.
 
-#### `when : ((a -> Boolean) | Pred) -> (a -> b) -> a -> b | a`
+#### `when : ((a -> Boolean) | Pred) -> (* -> a) -> * -> a`
 There may come a time when you need to adjust a value when a condition is true, that is where `when` can come into play. Just provide a predicate function (a function that returns a Boolean) and a function to apply your desired modification. This will get you back a function that when you pass it a value, it will evaluate it and if true, will run your value through the provided function. Either the original or modified value will be returned depending on the result of the predicate. Check out `unless` for a negated version of this function.
 
 ### Predicate Functions
@@ -237,23 +237,24 @@ While it can seem natural to work with all these containers in a fluent fashion,
 ```javascript
 const crocks = require('crocks')
 
-const { compose, map } = crocks // map is the point-free function
+const {
+  compose, map, safe, isInteger
+} = crocks // map is the point-free function
 
-const { Maybe } = crocks
-const { Nothing, Just } = Maybe
-
+// isEven : Integer -> Boolean
 const isEven =
-  x => !(x % 2)
+  x => (x % 2) === 0
 
+// maybeInt : a -> Maybe Integer
 const maybeInt =
-  x => !Number.isInteger(x)
-    ? Nothing() : Just(x)
+  safe(isInteger)
 
-function fluentIsEven(data) {
-  return maybeInt(data)
+// fluentIsEven : a -> Maybe Boolean
+const fluentIsEven = data =>
+  maybeInt(data)
     .map(isEven)
-}
 
+// pointfreeIsEven : a -> Maybe Boolean
 const pointfreeIsEven =
   compose(map(isEven), maybeInt)
 ```
@@ -281,7 +282,6 @@ These functions provide a very clean way to build out very simple functions and 
 | `head` | `m a -> Maybe a` |
 | `log` | `m a b -> a` |
 | `map` | `(a -> b) -> m a -> m b` |
-| `maybe` | `a -> m a -> a` |
 | `merge` | `(a -> b -> c) -> m a b -> c` |
 | `option` | `a -> m a -> a` |
 | `promap` | `(c -> a) -> (b -> d) -> m a b -> m c d` |
@@ -318,7 +318,6 @@ These functions provide a very clean way to build out very simple functions and 
 | `head` | `Array`, `List` |
 | `log` | `Writer` |
 | `map` | `Async`, `Array`, `Arrow`, `Const`, `Either`, `Function`, `Identity`, `IO`, `List`, `Maybe`, `Pair`, `Reader`, `Star`, `State`, `Unit`, `Writer` |
-| `maybe` | `Maybe` |
 | `merge` | `Pair` |
 | `option` | `Either`, `Maybe` |
 | `promap` | `Arrow`, `Star` |
@@ -332,7 +331,7 @@ These functions provide a very clean way to build out very simple functions and 
 | `swap` | `Async`, `Either`, `Pair` |
 | `tail` | `Array`, `List`, `String` |
 | `traverse` | `Array`, `Either`, `Identity`, `List`, `Maybe` |
-| `value` | `Arrow`, `Const`, `Either`, `Identity`, `List`, `Pair`, `Pred`, `Unit`, `Writer` |
+| `value` | `Arrow`, `Const`, `Identity`, `List`, `Pair`, `Pred`, `Unit`, `Writer` |
 
 ### Transformation Functions
 Transformation functions are mostly used to reduce unwanted nesting of similar types. Take for example the following structure:

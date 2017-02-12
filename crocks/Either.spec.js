@@ -68,13 +68,6 @@ test('Either type', t => {
   t.end()
 })
 
-test('Either value', t => {
-  t.equal(Either.Left(23).value(), 23, 'value returns the left when isLeft')
-  t.equal(Either.Right(98).value(), 98, 'value returns the right when isRight')
-
-  t.end()
-})
-
 test('Either either', t => {
   const l = Either.Left('left')
   const r = Either.Right('right')
@@ -269,11 +262,11 @@ test('Either map functionality', t => {
   const r = Either.Right(0).map(rspy)
 
   t.equal(l.type(), 'Either', 'returns an Either Type')
-  t.equal(l.value(), 0, 'returns the original Left value')
+  t.equal(l.either(identity, constant(1)), 0, 'returns the original Left value')
   t.notOk(lspy.called, 'mapped function is never called when Left')
 
   t.equal(r.type(), 'Either', 'returns a Either type')
-  t.equal(r.value(), 0, 'returns a Right Either with the same value when mapped with identity')
+  t.equal(r.either(constant(1), identity), 0, 'returns a Right Either with the same value when mapped with identity')
   t.ok(rspy.called, 'mapped function is called when Right')
 
   t.end()
@@ -283,14 +276,26 @@ test('Either map properties (Functor)', t => {
   const f = x => x + 2
   const g = x => x * 2
 
-  t.ok(isFunction(Either.Left(0).map), 'left provides a map function')
-  t.ok(isFunction(Either.Right(0).map), 'right provides a map function')
+  const Right = Either.Right
+  const Left = Either.Left
 
-  t.equal(Either.Right(30).map(identity).value(), 30, 'Right identity')
-  t.equal(Either.Right(10).map(x => f(g(x))).value(), Either.Right(10).map(g).map(f).value(), 'Right composition')
+  t.ok(isFunction(Left(0).map), 'left provides a map function')
+  t.ok(isFunction(Right(0).map), 'right provides a map function')
 
-  t.equal(Either.Left(45).map(identity).value(), 45, 'Left identity')
-  t.equal(Either.Left(10).map(x => f(g(x))).value(), Either.Left(10).map(g).map(f).value(), 'Left composition')
+  t.equal(Right(30).map(identity).either(constant(0), identity), 30, 'Right identity')
+
+  t.equal(
+    Right(10).map(composeB(f, g)).either(constant(0), identity),
+    Right(10).map(g).map(f).either(constant(0), identity),
+    'Right composition'
+  )
+
+  t.equal(Left(45).map(identity).either(identity, constant(0)), 45, 'Left identity')
+  t.equal(
+    Left(10).map(composeB(f, g)).either(identity, constant(0)),
+    Left(10).map(g).map(f).either(identity, constant(0)),
+    'Left composition'
+  )
 
   t.end()
 })
@@ -452,7 +457,8 @@ test('Either ap errors', t => {
 })
 
 test('Either ap properties (Apply)', t => {
-  const m = Either.Right(identity)
+  const Right = Either.Right
+  const m = Right(identity)
 
   const a = m.map(composeB).ap(m).ap(m)
   const b = m.ap(m.ap(m))
@@ -460,7 +466,11 @@ test('Either ap properties (Apply)', t => {
   t.ok(isFunction(m.ap), 'provides an ap function')
   t.ok(isFunction(m.map), 'implements the Functor spec')
 
-  t.equal(a.ap(Either.Right(3)).value(), b.ap(Either.Right(3)).value(), 'composition Right')
+  t.equal(
+    a.ap(Right(3)).either(constant(0), identity),
+    b.ap(Right(3)).either(constant(0), identity),
+    'composition Right'
+  )
 
   t.end()
 })
@@ -474,21 +484,32 @@ test('Either of', t => {
 })
 
 test('Either of properties (Applicative)', t => {
-  const r = Either.Right(identity)
-  const l = Either.Left('left')
+  const Right = Either.Right
+  const Left = Either.Left
+
+  const r = Right(identity)
+  const l = Left('left')
 
   t.ok(isFunction(r.of), 'Right provides an of function')
   t.ok(isFunction(l.of), 'Left provides an of function')
   t.ok(isFunction(r.ap), 'Right implements the Apply spec')
   t.ok(isFunction(l.ap), 'Left implements the Apply spec')
 
-  t.equal(r.ap(Either.Right(3)).value(), 3, 'identity Right')
-  t.equal(r.ap(Either.of(3)).value(), Either.of(identity(3)).value(), 'homomorphism Right')
+  t.equal(r.ap(Right(3)).either(constant(0), identity), 3, 'identity Right')
+  t.equal(
+    r.ap(Either.of(3)).either(constant(0), identity),
+    Either.of(3).either(constant(0), identity),
+    'homomorphism Right'
+  )
 
   const a = x => r.ap(Either.of(x))
   const b = x => Either.of(reverseApply(x)).ap(r)
 
-  t.equal(a(3).value(), b(3).value(), 'interchange Right')
+  t.equal(
+    a(3).either(constant(0),identity),
+    b(3).either(constant(0),identity),
+    'interchange Right'
+  )
 
   t.end()
 })
@@ -526,34 +547,51 @@ test('Either chain errors', t => {
 })
 
 test('Either chain properties (Chain)', t => {
-  t.ok(isFunction(Either.Right(0).chain), 'Right provides a chain function')
-  t.ok(isFunction(Either.Right(0).ap), 'Right implements the Apply spec')
+  const Right = Either.Right
+  const Left = Either.Left
 
-  t.ok(isFunction(Either.Left(0).chain), 'Left provides a chain function')
-  t.ok(isFunction(Either.Left(0).ap), 'Leftimplements the Apply spec')
+  t.ok(isFunction(Right(0).chain), 'Right provides a chain function')
+  t.ok(isFunction(Right(0).ap), 'Right implements the Apply spec')
 
-  const f = x => Either.Right(x + 2)
-  const g = x => Either.Right(x + 10)
+  t.ok(isFunction(Left(0).chain), 'Left provides a chain function')
+  t.ok(isFunction(Left(0).ap), 'Leftimplements the Apply spec')
 
-  const a = x => Either.Right(x).chain(f).chain(g)
-  const b = x => Either.Right(x).chain(y => f(y).chain(g))
+  const f = x => Right(x + 2)
+  const g = x => Right(x + 10)
 
-  t.equal(a(10).value(), b(10).value(), 'assosiativity Right')
+  const a = x => Right(x).chain(f).chain(g)
+  const b = x => Right(x).chain(y => f(y).chain(g))
+
+  t.equal(
+    a(10).either(constant(0), identity),
+    b(10).either(constant(0), identity),
+    'assosiativity Right'
+  )
 
   t.end()
 })
 
 test('Either chain properties (Monad)', t => {
-  t.ok(isFunction(Either.Right(0).chain), 'Right implements the Chain spec')
-  t.ok(isFunction(Either.Right(0).of), 'Right implements the Applicative spec')
+  const Right = Either.Right
 
-  const f = x => Either.Right(x)
+  t.ok(isFunction(Right(0).chain), 'Right implements the Chain spec')
+  t.ok(isFunction(Right(0).of), 'Right implements the Applicative spec')
 
-  t.equal(Either.of(3).chain(f).value(), f(3).value(), 'left identity Right')
+  const f = x => Right(x)
 
-  const m = x => Either.Right(x)
+  t.equal(
+    Either.of(3).chain(f).either(constant(0), identity),
+    f(3).either(constant(0), identity),
+    'left identity Right'
+  )
 
-  t.equal(m(3).chain(Either.of).value(), m(3).value(), 'right identity Right')
+  const m = x => Right(x)
+
+  t.equal(
+    m(3).chain(Either.of).either(constant(0), identity),
+    m(3).either(constant(0), identity),
+    'right identity Right'
+  )
 
   t.end()
 })
@@ -596,17 +634,21 @@ test('Either sequence errors', t => {
 })
 
 test('Either sequence functionality', t => {
+  const Right = Either.Right
+  const Left = Either.Left
+
   const x = 284
-  const r = Either.Right(MockCrock(x)).sequence(MockCrock.of)
-  const l = Either.Left('Left').sequence(MockCrock.of)
+
+  const r = Right(MockCrock(x)).sequence(MockCrock.of)
+  const l = Left('Left').sequence(MockCrock.of)
 
   t.equal(r.type(), 'MockCrock', 'Provides an outer type of MockCrock')
   t.equal(r.value().type(), 'Either', 'Provides an inner type of Either')
-  t.equal(r.value().value(), x, 'Either contains original inner value')
+  t.equal(r.value().either(constant(0), identity), x, 'Either contains original inner value')
 
   t.equal(l.type(), 'MockCrock', 'Provides an outer type of MockCrock')
   t.equal(l.value().type(), 'Either', 'Provides an inner type of Either')
-  t.equal(l.value().value(), 'Left', 'Either contains original Left value')
+  t.equal(l.value().either(identity, constant(0)), 'Left', 'Either contains original Left value')
 
   t.end()
 })
@@ -671,18 +713,22 @@ test('Either traverse errors', t => {
 })
 
 test('Either traverse functionality', t => {
-  const x = 284
-  const f = x => MockCrock(x)
-  const r = Either.Right(x).traverse(f, MockCrock)
-  const l = Either.Left('Left').traverse(f, MockCrock)
+  const Right = Either.Right
+  const Left = Either.Left
+
+  const x = 98
+
+  const f = MockCrock
+  const r = Right(x).traverse(f, MockCrock)
+  const l = Left('Left').traverse(f, MockCrock)
 
   t.equal(r.type(), 'MockCrock', 'Provides an outer type of MockCrock')
   t.equal(r.value().type(), 'Either', 'Provides an inner type of Either')
-  t.equal(r.value().value(), x, 'Either contains original inner value')
+  t.equal(r.value().either(constant(0), identity), x, 'Either contains original inner value')
 
   t.equal(l.type(), 'MockCrock', 'Provides an outer type of MockCrock')
   t.equal(l.value().type(), 'Either', 'Provides an inner type of Either')
-  t.equal(l.value().value(), 'Left', 'Either contains original Left value')
+  t.equal(l.value().either(identity, constant(0)), 'Left', 'Either contains original Left value')
 
   t.end()
 })

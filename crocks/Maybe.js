@@ -52,14 +52,11 @@ function Maybe(u) {
   const option =
     n => either(constant(n), identity)
 
-  const maybe =
-    constant(option(undefined))
-
   const equals =
     m => isSameType(Maybe, m) && either(
       constant(m.either(constant(true), constant(false))),
-      constant(m.either(constant(false), constant(true)))
-    ) && maybe() === m.maybe()
+      x => m.either(constant(false), y => y === x)
+    )
 
   function inspect() {
     return either(
@@ -176,8 +173,8 @@ function Maybe(u) {
   }
 
   return {
-    inspect, maybe, either, option,
-    type, equals, coalesce, map, alt,
+    inspect, either, option, type,
+    equals, coalesce, map, alt,
     zero, ap, of, chain, sequence,
     traverse
   }

@@ -28,10 +28,10 @@ const _empty =
   () => List([])
 
 function fromArray(xs) {
-  if(!arguments.length || !isArray(xs)) {
+  if(!isArray(xs)) {
     throw new TypeError('List.fromArray: Array required')
   }
-  return xs.reduce((res, x)  => res.concat(List.of(x)), List.empty())
+  return xs.reduce((res, x) => res.concat(List.of(x)), List.empty())
 }
 
 function runSequence(acc, x) {
@@ -59,7 +59,7 @@ function runTraverse(f) {
 }
 
 function List(xs) {
-  if(!arguments.length || !isArray(xs)) {
+  if(!isArray(xs)) {
     throw new TypeError('List: Must wrap an array')
   }
 

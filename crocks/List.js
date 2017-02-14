@@ -12,6 +12,8 @@ const constant = require('../combinators/constant')
 
 const _concat = require('../pointfree/concat')
 
+const _mconcat = require('../helpers/mconcat')
+
 const Maybe = require('./Maybe')
 const Pred = require('./Pred')
 
@@ -29,9 +31,9 @@ const _empty =
 
 function fromArray(xs) {
   if(!arguments.length || !isArray(xs)) {
-    throw new TypeError('List.fromArray: Must wrap an array')
+    throw new TypeError('List.fromArray: Array required')
   }
-  return List(xs)
+  return _mconcat(List, [xs])
 }
 
 function runSequence(acc, x) {
@@ -85,7 +87,7 @@ function List(xs) {
     () => xs.slice()
 
   const toArray =
-    () => xs.length && xs.reduce((res, x)  => res.concat(x), [])
+    () => xs.slice()
 
   const empty =
     _empty

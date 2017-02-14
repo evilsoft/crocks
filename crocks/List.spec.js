@@ -123,7 +123,7 @@ test('List value', t => {
 test('List toArray', t => {
   const a = List([ 'some-thing', ['else', 43], 34 ]).toArray()
 
-  t.same(a, [ 'some-thing', 'else', 43, 34 ], 'folds the wrapped array')
+  t.same(a, [ 'some-thing', ['else', 43], 34 ], 'provides the wrapped array')
 
   t.end()
 })
@@ -395,8 +395,6 @@ test('List of', t => {
 test('List fromArray', t => {
   const fromArray = bindFunc(List.fromArray)
 
-  const notList = { type: constant('List...Not') }
-
   t.throws(fromArray(undefined), TypeError, 'throws with undefined')
   t.throws(fromArray(null), TypeError, 'throws with null')
   t.throws(fromArray(0), TypeError, 'throws with falsey number')
@@ -406,7 +404,6 @@ test('List fromArray', t => {
   t.throws(fromArray(false), TypeError, 'throws with false')
   t.throws(fromArray(true), TypeError, 'throws with true')
   t.throws(fromArray({}), TypeError, 'throws with an object')
-  t.throws(fromArray(notList), TypeError, 'throws when passed non-List')
 
   t.equal(List.fromArray([0]).type(), 'List', 'returns a List')
   t.same(List.fromArray([0]).value(), [ 0 ], 'wraps the value passed into List in an array')

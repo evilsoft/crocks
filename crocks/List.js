@@ -12,8 +12,6 @@ const constant = require('../combinators/constant')
 
 const _concat = require('../pointfree/concat')
 
-const _mconcat = require('../helpers/mconcat')
-
 const Maybe = require('./Maybe')
 const Pred = require('./Pred')
 
@@ -33,7 +31,7 @@ function fromArray(xs) {
   if(!arguments.length || !isArray(xs)) {
     throw new TypeError('List.fromArray: Array required')
   }
-  return _mconcat(List, [xs])
+  return xs.reduce((res, x)  => res.concat(List.of(x)), List.empty())
 }
 
 function runSequence(acc, x) {

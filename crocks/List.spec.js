@@ -121,9 +121,9 @@ test('List value', t => {
 })
 
 test('List toArray', t => {
-  const a = List([ 'some-thing', ['else', 43], 34 ]).toArray()
+  const a = List([ 'some-thing', 34 ]).toArray()
 
-  t.same(a, [ 'some-thing', ['else', 43], 34 ], 'provides the wrapped array')
+  t.same(a, [ 'some-thing', 34 ], 'provides the wrapped array')
 
   t.end()
 })

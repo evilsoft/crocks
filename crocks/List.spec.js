@@ -121,9 +121,10 @@ test('List value', t => {
 })
 
 test('List toArray', t => {
-  const a = List([ 'some-thing', 34 ]).toArray()
+  const data = [ 'some-thing', ['else', 43], 34 ]
+  const a = List(data).toArray()
 
-  t.same(a, [ 'some-thing', 34 ], 'provides the wrapped array')
+  t.same(a, data, 'provides the wrapped array')
 
   t.end()
 })
@@ -405,8 +406,10 @@ test('List fromArray', t => {
   t.throws(fromArray(true), TypeError, 'throws with true')
   t.throws(fromArray({}), TypeError, 'throws with an object')
 
+  const data = [[2, 1], 'a']
+
   t.equal(List.fromArray([0]).type(), 'List', 'returns a List')
-  t.same(List.fromArray([[2, 1], 'a']).value(), [[2, 1], 'a'], 'wraps the value passed into List in an array')
+  t.same(List.fromArray(data).value(), data, 'wraps the value passed into List in an array')
 
   t.end()
 })

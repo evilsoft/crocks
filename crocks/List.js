@@ -85,7 +85,7 @@ function List(xs) {
     () => xs.slice()
 
   const toArray =
-    () => xs.slice()
+    value
 
   const empty =
     _empty

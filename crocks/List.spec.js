@@ -406,7 +406,7 @@ test('List fromArray', t => {
   t.throws(fromArray({}), TypeError, 'throws with an object')
 
   t.equal(List.fromArray([0]).type(), 'List', 'returns a List')
-  t.same(List.fromArray([0]).value(), [ 0 ], 'wraps the value passed into List in an array')
+  t.same(List.fromArray([[2, 1], 'a']).value(), [[2, 1], 'a'], 'wraps the value passed into List in an array')
 
   t.end()
 })

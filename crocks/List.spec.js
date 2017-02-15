@@ -26,6 +26,7 @@ test('List', t => {
   t.ok(isObject(List([])), 'returns an object')
 
   t.ok(isFunction(List.of), 'provides an of function')
+  t.ok(isFunction(List.fromArray), 'provides a fromArray function')
   t.ok(isFunction(List.type), 'provides a type function')
 
   t.throws(List, TypeError, 'throws with no parameters')
@@ -115,6 +116,15 @@ test('List value', t => {
   const x = List([ 'some-thing', 34 ]).value()
 
   t.same(x, [ 'some-thing', 34 ], 'provides the wrapped array')
+
+  t.end()
+})
+
+test('List toArray', t => {
+  const data = [ 'some-thing', ['else', 43], 34 ]
+  const a = List(data).toArray()
+
+  t.same(a, data, 'provides the wrapped array')
 
   t.end()
 })
@@ -379,6 +389,27 @@ test('List of', t => {
   t.equal(List.of, List([]).of, 'List.of is the same as the instance version')
   t.equal(List.of(0).type(), 'List', 'returns a List')
   t.same(List.of(0).value(), [ 0 ], 'wraps the value passed into List in an array')
+
+  t.end()
+})
+
+test('List fromArray', t => {
+  const fromArray = bindFunc(List.fromArray)
+
+  t.throws(fromArray(undefined), TypeError, 'throws with undefined')
+  t.throws(fromArray(null), TypeError, 'throws with null')
+  t.throws(fromArray(0), TypeError, 'throws with falsey number')
+  t.throws(fromArray(1), TypeError, 'throws with truthy number')
+  t.throws(fromArray(''), TypeError, 'throws with falsey string')
+  t.throws(fromArray('string'), TypeError, 'throws with truthy string')
+  t.throws(fromArray(false), TypeError, 'throws with false')
+  t.throws(fromArray(true), TypeError, 'throws with true')
+  t.throws(fromArray({}), TypeError, 'throws with an object')
+
+  const data = [[2, 1], 'a']
+
+  t.equal(List.fromArray([0]).type(), 'List', 'returns a List')
+  t.same(List.fromArray(data).value(), data, 'wraps the value passed into List in an array')
 
   t.end()
 })

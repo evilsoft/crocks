@@ -27,6 +27,13 @@ const _of =
 const _empty =
   () => List([])
 
+function fromArray(xs) {
+  if(!isArray(xs)) {
+    throw new TypeError('List.fromArray: Array required')
+  }
+  return xs.reduce((res, x) => res.concat(List.of(x)), List.empty())
+}
+
 function runSequence(acc, x) {
   if(!isApplicative(x)) {
     throw new TypeError('List.sequence: Must wrap Applicatives')
@@ -52,7 +59,7 @@ function runTraverse(f) {
 }
 
 function List(xs) {
-  if(!arguments.length || !isArray(xs)) {
+  if(!isArray(xs)) {
     throw new TypeError('List: Must wrap an array')
   }
 
@@ -76,6 +83,9 @@ function List(xs) {
 
   const value =
     () => xs.slice()
+
+  const toArray =
+    value
 
   const empty =
     _empty
@@ -190,7 +200,7 @@ function List(xs) {
   }
 
   return {
-    inspect, value, head, tail, cons,
+    inspect, value, toArray, head, tail, cons,
     type, equals, concat, empty, reduce,
     filter, map, ap, of, chain, sequence,
     traverse
@@ -205,5 +215,8 @@ List.of =
 
 List.empty =
   _empty
+
+List.fromArray =
+  fromArray
 
 module.exports = List

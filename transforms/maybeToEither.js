@@ -16,7 +16,7 @@ const applyTransform = (left, maybe) =>
     Either.Right
   )
 
-// maybeToEither : b -> Maybe a -> Either b a
+// maybeToEither : c -> Maybe a -> Either c a
 // maybeToEither : c -> (a -> Maybe b) -> a -> Either c b
 function maybeToEither(left, maybe) {
   if(isSameType(Maybe, maybe)) {

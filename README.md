@@ -438,4 +438,4 @@ bad
 | `eitherToMaybe` | `Either b a -> Maybe a` | `(a -> Either c b) -> a -> Maybe b` |
 | `listToArray` | `List a -> [ a ]` | `(a -> List b) -> [ b ]` |
 | `maybeToAsync` | `e -> Maybe a -> Async e a` | `e -> (a -> Maybe b) -> a -> Async e b` |
-| `maybeToEither` | `c -> Maybe b a -> Maybe a` | `c -> (a -> Maybe b) -> a -> Either c b` |
+| `maybeToEither` | `c -> Maybe a -> Either c a` | `c -> (a -> Maybe b) -> a -> Either c b` |

@@ -433,7 +433,9 @@ bad
 #### Transformation Signatures
 | Transform | ADT signature | Function Signature |
 |---|---|---|
+| `arrayToList` | `[ a ] -> List a` | `(a -> [ b ]) -> List b` |
 | `eitherToAsync` | `Either e a -> Async e a` | `(a -> Either e b) -> a -> Async e b` |
 | `eitherToMaybe` | `Either b a -> Maybe a` | `(a -> Either c b) -> a -> Maybe b` |
+| `listToArray` | `List a -> [ a ]` | `(a -> List b) -> [ b ]` |
 | `maybeToAsync` | `e -> Maybe a -> Async e a` | `e -> (a -> Maybe b) -> a -> Async e b` |
-| `maybeToEither` | `c -> Maybe b a -> Maybe a` | `c -> (a -> Maybe b) -> a -> Either c b` |
+| `maybeToEither` | `c -> Maybe a -> Either c a` | `c -> (a -> Maybe b) -> a -> Either c b` |

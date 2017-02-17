@@ -10,7 +10,7 @@
 --
 ```
 
-`IO` exposes the following constructor and instances:
+`IO` exposes the following constructor and instance functions:
 
 | Constructor | Instance |
 |:---|:---|

@@ -73,7 +73,7 @@ All `Crocks` are Constructor functions of the given type, with `Writer` being an
 | Crock | Constructor | Instance |
 |---|:---|:---|
 | `Arrow` | `empty` | `both`, `concat`, `contramap`, `empty`, `first`, `map`, `promap`, `runWith`, `second`, `value` |
-| `Async` | `all`, `fromNode`, `fromPromise`, `of`, `rejected` | `alt`, `ap`, `bimap`, `chain`, `coalesce`, `fork`, `map`, `of`, `swap`, `toPromise` |
+| `Async` | , `Rejected`, `Resolved`, `all`, `fromNode`, `fromPromise`, `of` | `alt`, `ap`, `bimap`, `chain`, `coalesce`, `fork`, `map`, `of`, `swap`, `toPromise` |
 | `Const` | -- | `ap`, `chain`, `concat`, `equals`, `map`, `value` |
 | `Either` | `Left`, `Right`, `of`| `alt`, `ap`, `bimap`, `chain`, `coalesce`, `either`, `equals`, `map`, `of`, `sequence`, `swap`, `traverse` |
 | `Identity` | `of` | `ap`, `chain`, `equals`, `map`, `of`, `sequence`, `traverse`, `value` |
@@ -415,7 +415,7 @@ const anotherInc =
 
 // resolveValue : a -> Async _ a
 const resolveValue =
-  Async.of
+  Async.Resolved
 
 resolveValue(3)                          // Resolved 3
   .chain(asyncInc)                       // Resolved 4

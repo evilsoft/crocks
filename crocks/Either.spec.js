@@ -334,20 +334,22 @@ test('Either bimap properties (Bifunctor)', t => {
   const f = x => x + 2
   const g = x => x * 2
 
+  const e = either(identity, identity)
+
   t.ok(isFunction(Either.Left(0).bimap), 'left provides a bimap function')
   t.ok(isFunction(Either.Right(0).bimap), 'right provides a bimap function')
 
-  t.equal(Either.Right(30).bimap(constant(0), identity).value(), 30, 'Right identity')
+  t.equal(e(Either.Right(30).bimap(constant(0), identity)), 30, 'Right identity')
   t.equal(
-    Either.Right(10).bimap(constant(0), composeB(f, g)).value(),
-    Either.Right(10).bimap(constant(0), g).bimap(constant(0), f).value(),
+    e(Either.Right(10).bimap(constant(0), composeB(f, g))),
+    e(Either.Right(10).bimap(constant(0), g).bimap(constant(0), f)),
     'Right composition'
   )
 
-  t.equal(Either.Left(45).bimap(identity, constant(0)).value(), 45, 'Left identity')
+  t.equal(e(Either.Left(45).bimap(identity, constant(0))), 45, 'Left identity')
   t.equal(
-    Either.Left(10).bimap(composeB(f, g), constant(0)).value(),
-    Either.Left(10).bimap(g, constant(0)).bimap(f, constant(0)).value(),
+    e(Either.Left(10).bimap(composeB(f, g), constant(0))),
+    e(Either.Left(10).bimap(g, constant(0)).bimap(f, constant(0))),
     'Left composition'
   )
 

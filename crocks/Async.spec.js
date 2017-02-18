@@ -527,7 +527,7 @@ test('Async alt errors', t => {
   t.throws(altResolved({}), TypeError, 'throws when passed an object with Resolved')
   t.throws(altResolved(m), TypeError, 'throws when container types differ on Resolved')
 
-  const altRejected = bindFunc(Async.rejected(0).alt)
+  const altRejected = bindFunc(Async.Rejected(0).alt)
 
   t.throws(altRejected(undefined), TypeError, 'throws when passed an undefined with Rejected')
   t.throws(altRejected(null), TypeError, 'throws when passed a null with Rejected')
@@ -548,8 +548,8 @@ test('Async alt functionality', t => {
   const resolved = Async.of('Resolved')
   const anotherResolved = Async.of('Another Resolved')
 
-  const rejected = Async.rejected('Rejected')
-  const anotherRejected = Async.rejected('Another Rejected')
+  const rejected = Async.Rejected('Rejected')
+  const anotherRejected = Async.Rejected('Another Rejected')
 
   const res = sinon.spy()
   const rej = sinon.spy()
@@ -565,7 +565,7 @@ test('Async alt functionality', t => {
 
 test('Async alt properties (Alt)', t => {
   const a = Async.of('a')
-  const b = Async.rejected('Rejected')
+  const b = Async.Rejected('Rejected')
   const c = Async.of('c')
 
   const assocLeft = sinon.spy()

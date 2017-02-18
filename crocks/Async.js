@@ -158,6 +158,19 @@ function Async(fn) {
     })
   }
 
+  function alt(m) {
+    if(!isSameType(Async, m)) {
+      throw new TypeError('Async.alt: Async required')
+    }
+
+    return Async((rej, res) => {
+      fork(
+        _ => m.fork(rej, res),
+        res
+      )
+    })
+  }
+
   function ap(m) {
     var fn, value
     var fnDone = false
@@ -214,8 +227,8 @@ function Async(fn) {
 
   return {
     fork, toPromise, inspect, type,
-    swap, coalesce, map, bimap, ap,
-    chain, of
+    swap, coalesce, map, bimap, alt,
+    ap, chain, of
   }
 }
 

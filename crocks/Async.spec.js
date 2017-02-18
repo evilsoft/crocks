@@ -492,6 +492,83 @@ test('Async bimap properties (Bifunctor)', t => {
   t.end()
 })
 
+test('Async alt errors', t => {
+  const m = { type: () => 'Async...Not' }
+
+  const altResolved = bindFunc(Async.of(0).alt)
+
+  t.throws(altResolved(undefined), TypeError, 'throws when passed an undefined with Resolved')
+  t.throws(altResolved(null), TypeError, 'throws when passed a null with Resolved')
+  t.throws(altResolved(0), TypeError, 'throws when passed a falsey number with Resolved')
+  t.throws(altResolved(1), TypeError, 'throws when passed a truthy number with Resolved')
+  t.throws(altResolved(''), TypeError, 'throws when passed a falsey string with Resolved')
+  t.throws(altResolved('string'), TypeError, 'throws when passed a truthy string with Resolved')
+  t.throws(altResolved(false), TypeError, 'throws when passed false with Resolved')
+  t.throws(altResolved(true), TypeError, 'throws when passed true with Resolved')
+  t.throws(altResolved([]), TypeError, 'throws when passed an array with Resolved')
+  t.throws(altResolved({}), TypeError, 'throws when passed an object with Resolved')
+  t.throws(altResolved(m), TypeError, 'throws when container types differ on Resolved')
+
+  const altRejected = bindFunc(Async.rejected(0).alt)
+
+  t.throws(altRejected(undefined), TypeError, 'throws when passed an undefined with Rejected')
+  t.throws(altRejected(null), TypeError, 'throws when passed a null with Rejected')
+  t.throws(altRejected(0), TypeError, 'throws when passed a falsey number with Rejected')
+  t.throws(altRejected(1), TypeError, 'throws when passed a truthy number with Rejected')
+  t.throws(altRejected(''), TypeError, 'throws when passed a falsey string with Rejected')
+  t.throws(altRejected('string'), TypeError, 'throws when passed a truthy string with Rejected')
+  t.throws(altRejected(false), TypeError, 'throws when passed false with Rejected')
+  t.throws(altRejected(true), TypeError, 'throws when passed true with Rejected')
+  t.throws(altRejected([]), TypeError, 'throws when passed an array with Rejected')
+  t.throws(altRejected({}), TypeError, 'throws when passed an object with Rejected')
+  t.throws(altRejected(m), TypeError, 'throws when container types differ on Rejected')
+
+  t.end()
+})
+
+test('Async alt functionality', t => {
+  const resolved = Async.of('Resolved')
+  const anotherResolved = Async.of('Another Resolved')
+
+  const rejected = Async.rejected('Rejected')
+  const anotherRejected = Async.rejected('Another Rejected')
+
+  const res = sinon.spy()
+  const rej = sinon.spy()
+
+  rejected.alt(anotherRejected).fork(rej, noop)
+  resolved.alt(rejected).alt(anotherResolved).fork(noop, res)
+
+  t.ok(res.calledWith('Resolved'), 'retains first Resolved')
+  t.ok(rej.calledWith('Another Rejected'), 'provdes last Rejected when all Rejects')
+
+  t.end()
+})
+
+test('Async alt properties (Alt)', t => {
+  const a = Async.of('a')
+  const b = Async.rejected('Rejected')
+  const c = Async.of('c')
+
+  const assocLeft = sinon.spy()
+  const assocRight = sinon.spy()
+
+  a.alt(b).alt(c).fork(noop, assocLeft)
+  a.alt(b.alt(c)).fork(noop, assocRight)
+
+  t.same(assocLeft.args[0], assocRight.args[0], 'assosiativity')
+
+  const distLeft = sinon.spy()
+  const distRight = sinon.spy()
+
+  a.alt(b).map(identity).fork(noop, distLeft)
+  a.map(identity).alt(b.map(identity)).fork(noop, distRight)
+
+  t.same(distLeft.args[0], distRight.args[0], 'distributivity')
+
+  t.end()
+})
+
 test('Async ap errors', t => {
   const m = { type: () => 'Async...Not' }
 
@@ -545,7 +622,7 @@ test('Async ap properties (Apply)', t => {
   t.end()
 })
 
-test('Aync of', t => {
+test('Async of', t => {
   const f = sinon.spy()
 
   t.equal(Async.of, Async(noop).of, 'Async.of is the same as the instance version')

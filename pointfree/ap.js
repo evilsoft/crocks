@@ -3,11 +3,12 @@
 
 const curry = require('../helpers/curry')
 
-const isFunction = require('../predicates/isFunction')
+const isApplicative = require('../predicates/isApplicative')
+const isSameType = require('../predicates/isSameType')
 
 // ap :: Applicative m => m a -> m (a -> b) ->  m b
 function ap(m, x) {
-  if(!(m && isFunction(m.ap)) || !(m && isFunction(x.ap))) {
+  if(!(isApplicative(m) && isSameType(m, x))) {
     throw new TypeError('ap: Both arguments must be Applys of the same type')
   }
 

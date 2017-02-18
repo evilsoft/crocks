@@ -71,13 +71,13 @@ All `Crocks` are Constructor functions of the given type, with `Writer` being an
 | Crock | Constructor | Instance |
 |---|:---|:---|
 | `Arrow` | `empty` | `both`, `concat`, `contramap`, `empty`, `first`, `map`, `promap`, `runWith`, `second`, `value` |
-| `Async` | `all`, `fromNode`, `fromPromise`, `of`, `rejected` | `ap`, `bimap`, `chain`, `coalesce`, `fork`, `map`, `of`, `swap`, `toPromise` |
+| `Async` | `all`, `fromNode`, `fromPromise`, `of`, `rejected` | `alt`, `ap`, `bimap`, `chain`, `coalesce`, `fork`, `map`, `of`, `swap`, `toPromise` |
 | `Const` | -- | `ap`, `chain`, `concat`, `equals`, `map`, `value` |
-| `Either` | `Left`, `Right`, `of`| `ap`, `bimap`, `chain`, `coalesce`, `either`, `equals`, `map`, `of`, `sequence`, `swap`, `traverse`, `value` |
+| `Either` | `Left`, `Right`, `of`| `alt`, `ap`, `bimap`, `chain`, `coalesce`, `either`, `equals`, `map`, `of`, `sequence`, `swap`, `traverse`, `value` |
 | `Identity` | `of` | `ap`, `chain`, `equals`, `map`, `of`, `sequence`, `traverse`, `value` |
 | `IO` | `of` | `ap`, `chain`, `map`, `of`, `run` |
 | `List` |  `empty`, `of` | `ap`, `chain`, `concat`, `cons`, `empty`, `equals`, `filter`, `head`, `map`, `of`, `reduce`, `sequence`, `tail`, `traverse`, `value` |
-| `Maybe` | `Nothing`, `Just`, `of` | `ap`, `chain`, `coalesce`, `equals`, `either`, `map`, `maybe`, `of`, `option`, `sequence`, `traverse` |
+| `Maybe` | `Nothing`, `Just`, `of`, `zero` | `alt`, `ap`, `chain`, `coalesce`, `equals`, `either`, `map`, `maybe`, `of`, `option`, `sequence`, `traverse`, `zero` |
 | `Pair` | `of` | `ap`, `bimap`, `chain`, `concat`, `equals`, `fst`, `map`, `merge`, `of`, `snd`, `swap`, `value` |
 | `Pred`[*] | `empty` | `concat`, `contramap`, `empty`, `runWith`, `value` |
 | `Reader` | `ask`, `of`| `ap`, `chain`, `map`, `of`, `runWith` |
@@ -198,6 +198,7 @@ There may come a time when you need to adjust a value when a condition is true, 
 All functions in this group have a signature of `* -> Boolean` and are used with the many predicate based functions that ship with `crocks`, like `safe`, `ifElse` and `filter` to name a few. They also fit naturally with the `Pred` ADT. Below is a list of all the current predicates that are included with a description of their truth:
 
 * `hasKey : (String | Number) -> a -> Boolean`: An Array or Object that contains the provided index or key
+* `isAlt : a -> Boolean`: an ADT that provides `map` and `alt` functions
 * `isApplicative : a -> Boolean`: an ADT that provides `map`, `ap` and `of` functions
 * `isApply : a -> Boolean`: an ADT that provides `map` and `ap` functions
 * `isArray : a -> Boolean`: Array
@@ -251,6 +252,7 @@ These functions provide a very clean way to build out very simple functions and 
 ##### Signatures
 | Function | Signature |
 |---|:---|
+| `alt` | `m a -> m a -> m a` |
 | `ap` | `m a -> m (a -> b) -> m b` |
 | `bimap` | `(a -> c) -> (b -> d) -> m a b -> m c d` |
 | `both` | `m (a -> b) -> m ((a, a) -> (b, b))` |
@@ -287,6 +289,7 @@ These functions provide a very clean way to build out very simple functions and 
 ##### Datatypes
 | Function | Datatypes |
 |---|:---|
+| `alt` | `Async`, `Either`, `Maybe` |
 | `ap` | `Async`, `Const`, `Either`, `Identity`, `IO`, `List`, `Maybe`, `Pair`, `Reader`, `State`, `Unit`, `Writer` |
 | `bimap` | `Async`, `Either`, `Pair` |
 | `both` | `Arrow`, `Function`, `Star` |

@@ -17,11 +17,20 @@ const _maybe = defineUnion({ Nothing: [], Just: [ 'a' ] })
 const Nothing = _maybe.Nothing
 const Just = _maybe.Just
 
+Maybe.Nothing =
+  composeB(Maybe, Nothing)
+
+Maybe.Just =
+  composeB(Maybe, Just)
+
 const _of =
   composeB(Maybe, Just)
 
 const _type=
   constant('Maybe')
+
+const _zero =
+  composeB(Maybe, Nothing)
 
 function Maybe(u) {
   if(!arguments.length) {
@@ -36,6 +45,9 @@ function Maybe(u) {
 
   const type =
     _type
+
+  const zero =
+    _zero
 
   const option =
     n => either(constant(n), identity)
@@ -83,6 +95,17 @@ function Maybe(u) {
     return either(
       Maybe.Nothing,
       composeB(Maybe.Just, fn)
+    )
+  }
+
+  function alt(m) {
+    if(!isSameType(Maybe, m)) {
+      throw new TypeError('Maybe.alt: Maybe required')
+    }
+
+    return either(
+      constant(m),
+      Maybe.Just
     )
   }
 
@@ -154,8 +177,9 @@ function Maybe(u) {
 
   return {
     inspect, maybe, either, option,
-    type, equals, coalesce, map, ap,
-    of, chain, sequence, traverse
+    type, equals, coalesce, map, alt,
+    zero, ap, of, chain, sequence,
+    traverse
   }
 }
 
@@ -165,10 +189,7 @@ Maybe.of =
 Maybe.type =
   _type
 
-Maybe.Nothing =
-  composeB(Maybe, Nothing)
-
-Maybe.Just =
-  composeB(Maybe, Just)
+Maybe.zero =
+  _zero
 
 module.exports = Maybe

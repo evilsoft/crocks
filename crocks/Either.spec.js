@@ -9,8 +9,9 @@ const isObject = require('../predicates/isObject')
 const isFunction = require('../predicates/isFunction')
 
 const composeB = require('../combinators/composeB')
-const identity = require('../combinators/identity')
 const constant = require('../combinators/constant')
+const either = require('../pointfree/either')
+const identity = require('../combinators/identity')
 const reverseApply = require('../combinators/reverseApply')
 
 const MockCrock = require('../test/MockCrock')
@@ -324,9 +325,102 @@ test('Either bimap errors', t => {
   t.end()
 })
 
+test('Either bimap properties (Bifunctor)', t => {
+  const f = x => x + 2
+  const g = x => x * 2
+
+  t.ok(isFunction(Either.Left(0).bimap), 'left provides a bimap function')
+  t.ok(isFunction(Either.Right(0).bimap), 'right provides a bimap function')
+
+  t.equal(Either.Right(30).bimap(constant(0), identity).value(), 30, 'Right identity')
+  t.equal(
+    Either.Right(10).bimap(constant(0), composeB(f, g)).value(),
+    Either.Right(10).bimap(constant(0), g).bimap(constant(0), f).value(),
+    'Right composition'
+  )
+
+  t.equal(Either.Left(45).bimap(identity, constant(0)).value(), 45, 'Left identity')
+  t.equal(
+    Either.Left(10).bimap(composeB(f, g), constant(0)).value(),
+    Either.Left(10).bimap(g, constant(0)).bimap(f, constant(0)).value(),
+    'Left composition'
+  )
+
+  t.end()
+})
+
+test('Either alt errors', t => {
+  const m = { type: () => 'Either...Not' }
+
+  const altRight = bindFunc(Either.of(0).alt)
+
+  t.throws(altRight(undefined), TypeError, 'throws when passed an undefined with Right')
+  t.throws(altRight(null), TypeError, 'throws when passed a null with Right')
+  t.throws(altRight(0), TypeError, 'throws when passed a falsey number with Right')
+  t.throws(altRight(1), TypeError, 'throws when passed a truthy number with Right')
+  t.throws(altRight(''), TypeError, 'throws when passed a falsey string with Right')
+  t.throws(altRight('string'), TypeError, 'throws when passed a truthy string with Right')
+  t.throws(altRight(false), TypeError, 'throws when passed false with Right')
+  t.throws(altRight(true), TypeError, 'throws when passed true with Right')
+  t.throws(altRight([]), TypeError, 'throws when passed an array with Right')
+  t.throws(altRight({}), TypeError, 'throws when passed an object with Right')
+  t.throws(altRight(m), TypeError, 'throws when container types differ on Right')
+
+  const altLeft = bindFunc(Either.Left(0).alt)
+
+  t.throws(altLeft(undefined), TypeError, 'throws when passed an undefined with Left')
+  t.throws(altLeft(null), TypeError, 'throws when passed a null with Left')
+  t.throws(altLeft(0), TypeError, 'throws when passed a falsey number with Left')
+  t.throws(altLeft(1), TypeError, 'throws when passed a truthy number with Left')
+  t.throws(altLeft(''), TypeError, 'throws when passed a falsey string with Left')
+  t.throws(altLeft('string'), TypeError, 'throws when passed a truthy string with Left')
+  t.throws(altLeft(false), TypeError, 'throws when passed false with Left')
+  t.throws(altLeft(true), TypeError, 'throws when passed true with Left')
+  t.throws(altLeft([]), TypeError, 'throws when passed an array with Left')
+  t.throws(altLeft({}), TypeError, 'throws when passed an object with Left')
+  t.throws(altLeft(m), TypeError, 'throws when container types differ on Left')
+
+  t.end()
+})
+
+test('Either alt functionality', t => {
+  const right = Either.of('Right')
+  const anotherRight = Either.of('Another Right')
+
+  const left = Either.Left('Left')
+  const anotherLeft = Either.Left('Another Left')
+
+  const f = either(identity, identity)
+
+  t.equals(f(right.alt(left).alt(anotherRight)), 'Right', 'retains first Right success')
+  t.equals(f(left.alt(anotherLeft)), 'Another Left', 'provdes last Left when all Lefts')
+
+  t.end()
+})
+
+test('Either alt properties (Alt)', t => {
+  const a = Either.of('a')
+  const b = Either.Left('Left')
+  const c = Either.of('c')
+
+  const f = either(identity, identity)
+
+  t.equals(f(a.alt(b).alt(c)), f(a.alt(b.alt(c))), 'assosiativity')
+
+  t.equals(
+    f(a.alt(b).map(identity)),
+    f(a.map(identity).alt(b.map(identity))),
+    'distributivity'
+  )
+
+  t.end()
+})
+
 test('Either ap errors', t => {
   const m = { type: () => 'Either...Not' }
 
+  t.throws(Either.of(undefined).ap.bind(null, Either.of(0)), TypeError, 'throws when wrapped value is an undefined')
+  t.throws(Either.of(null).ap.bind(null, Either.of(0)), TypeError, 'throws when wrapped value is a null')
   t.throws(Either.of(0).ap.bind(null, Either.of(0)), TypeError, 'throws when wrapped value is a falsey number')
   t.throws(Either.of(1).ap.bind(null, Either.of(0)), TypeError, 'throws when wrapped value is a truthy number')
   t.throws(Either.of('').ap.bind(null, Either.of(0)), TypeError, 'throws when wrapped value is a falsey string')
@@ -338,6 +432,8 @@ test('Either ap errors', t => {
 
   t.doesNotThrow(Either.Left(0).ap.bind(null, Either.of(0)), 'does not throw when ap on Left')
 
+  t.throws(Either.of(noop).ap.bind(null, undefined), TypeError, 'throws when passed an undefined')
+  t.throws(Either.of(noop).ap.bind(null, null), TypeError, 'throws when passed a null')
   t.throws(Either.of(noop).ap.bind(null, 0), TypeError, 'throws when passed a falsey number')
   t.throws(Either.of(noop).ap.bind(null, 1), TypeError, 'throws when passed a truthy number')
   t.throws(Either.of(noop).ap.bind(null, ''), TypeError, 'throws when passed a falsey string')

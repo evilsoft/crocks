@@ -34,6 +34,7 @@ const tryCatch = require('./helpers/tryCatch')
 const unless = require('./helpers/unless')
 const when = require('./helpers/when')
 
+const alt = require('./pointfree/alt')
 const ap = require('./pointfree/ap')
 const bimap = require('./pointfree/bimap')
 const chain = require('./pointfree/chain')
@@ -93,6 +94,7 @@ const Prod = require('./monoids/Prod')
 const Sum = require('./monoids/Sum')
 
 const hasKey = require('./predicates/hasKey')
+const isAlt = require('./predicates/isAlt')
 const isApplicative = require('./predicates/isApplicative')
 const isApply = require('./predicates/isApply')
 const isArray = require('./predicates/isArray')
@@ -154,6 +156,7 @@ test('entry', t => {
   t.equal(crocks.unless, unless, 'provides the unless function')
   t.equal(crocks.when, when, 'provides the when function')
 
+  t.equal(crocks.alt, alt, 'provides the alt point-free function')
   t.equal(crocks.ap, ap, 'provides the ap point-free function')
   t.equal(crocks.bimap, bimap, 'provides the bimap point-free function')
   t.equal(crocks.chain, chain, 'provides the chain point-free function')
@@ -213,6 +216,7 @@ test('entry', t => {
   t.equal(crocks.Sum, Sum, 'provides the Sum monoid')
 
   t.equal(crocks.hasKey, hasKey, 'provides the hasKey function')
+  t.equal(crocks.isAlt, isAlt, 'provides the isAlt function')
   t.equal(crocks.isApplicative, isApplicative, 'provides the isApplicative function')
   t.equal(crocks.isApply, isApply, 'provides the isApply function')
   t.equal(crocks.isArray, isArray, 'provides the isArray function')

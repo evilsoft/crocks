@@ -27,7 +27,7 @@ const _type =
 const _of =
   x => Async((_, resolve) => resolve(x))
 
-const _rejected =
+const Rejected =
   x => Async((reject, _) => reject(x))
 
 function all(asyncs) {
@@ -221,9 +221,13 @@ function Async(fn) {
 
 Async.type = _type
 Async.of = _of
-Async.rejected = _rejected
+
+Async.Rejected = Rejected
+Async.Resolved = _of
+
 Async.fromPromise = fromPromise
 Async.fromNode = fromNode
+
 Async.all = all
 
 module.exports = Async

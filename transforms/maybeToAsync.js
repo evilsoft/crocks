@@ -12,8 +12,8 @@ const Async = require('../crocks/Async')
 
 const applyTransform = (left, maybe) =>
   maybe.either(
-    constant(Async.rejected(left)),
-    Async.of
+    constant(Async.Rejected(left)),
+    Async.Resolved
   )
 
 // maybeToAsync : e -> Maybe a -> Async e a

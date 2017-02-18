@@ -10,7 +10,7 @@ const Either = require('../crocks/Either')
 const Async = require('../crocks/Async')
 
 const applyTransform = either =>
-  either.either(Async.rejected, Async.of)
+  either.either(Async.Rejected, Async.Resolved)
 
 // eitherToAsync : Either e a -> Async e a
 // eitherToAsync : (a -> Either e b) -> a -> Async e b

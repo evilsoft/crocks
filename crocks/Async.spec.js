@@ -24,7 +24,10 @@ test('Async', t => {
 
   t.ok(isFunction(Async.of), 'provides an of function')
   t.ok(isFunction(Async.type), 'provides a type function')
-  t.ok(isFunction(Async.rejected), 'provides a rejected function')
+
+  t.ok(isFunction(Async.Resolved), 'provides a Resolved function')
+  t.ok(isFunction(Async.Rejected), 'provides a Rejected function')
+
   t.ok(isFunction(Async.fromPromise), 'provides a fromPromise function')
 
   t.throws(Async, TypeError, 'throws with no parameters')
@@ -42,9 +45,9 @@ test('Async', t => {
   t.end()
 })
 
-test('Async rejected', t => {
+test('Async Rejected', t => {
   const x = 'sorry'
-  const m = Async.rejected(x)
+  const m = Async.Rejected(x)
 
   const rej = sinon.spy()
   const res = sinon.spy()
@@ -53,6 +56,21 @@ test('Async rejected', t => {
 
   t.ok(rej.calledWith(x), 'calls the rejected function with rejected value')
   t.notOk(res.called, 'does not call the resolved function')
+
+  t.end()
+})
+
+test('Async Resolved', t => {
+  const x = 'sorry'
+  const m = Async.Resolved(x)
+
+  const rej = sinon.spy()
+  const res = sinon.spy()
+
+  m.fork(rej, res)
+
+  t.ok(res.calledWith(x), 'calls the resolved function with resolved value')
+  t.notOk(rej.called, 'does not call the rejected function')
 
   t.end()
 })
@@ -186,8 +204,8 @@ test('Async all resolution', t => {
   const res = y => x => t.same(x, y, 'resolves with array of values when all resolve')
   const empty = y => x => t.same(x, y, 'resolves with an empty array when passed an empty array')
 
-  Async.all([ Async.of(val), Async.of(val) ]).fork(rej(bad), res([ val, val ]))
-  Async.all([ Async.rejected(bad), Async.of(val) ]).fork(rej(bad), res([ val, val ]))
+  Async.all([ Async.Resolved(val), Async.Resolved(val) ]).fork(rej(bad), res([ val, val ]))
+  Async.all([ Async.Rejected(bad), Async.Resolved(val) ]).fork(rej(bad), res([ val, val ]))
   Async.all([]).fork(rej(bad), empty([]))
 
   t.end()
@@ -256,8 +274,8 @@ test('Async toPromise', t => {
   const rej = y => x => t.equal(x, y, 'rejects a rejected Async')
   const res = y => x => t.equal(x, y, 'resolves a resolved Async')
 
-  Async.rejected(val).toPromise().then(res(val)).catch(rej(val))
-  Async.of(val).toPromise().then(res(val)).catch(rej(val))
+  Async.Rejected(val).toPromise().then(res(val)).catch(rej(val))
+  Async.Resolved(val).toPromise().then(res(val)).catch(rej(val))
 
   t.plan(2)
 })
@@ -454,8 +472,8 @@ test('Async bimap functionality', t => {
 test('Async bimap properties (Bifunctor)', t => {
   const bimap = (f, g) => m => m.bimap(f, g)
 
-  const rej = Async.rejected(10)
-  const res = Async.of(10)
+  const rej = Async.Rejected(20)
+  const res = Async.Resolved(10)
 
   const rejId = sinon.spy()
   const resId = sinon.spy()

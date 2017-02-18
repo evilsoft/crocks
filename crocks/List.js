@@ -58,10 +58,12 @@ function runTraverse(f) {
   }
 }
 
-function List(xs) {
-  if(!isArray(xs)) {
-    throw new TypeError('List: Must wrap an array')
+function List(x) {
+  if(!arguments.length) {
+    throw new TypeError('List: List must wrap something')
   }
+
+  const xs = isArray(x) ? x.slice() : [ x ]
 
   function flatMap(fn) {
     return function(y, x) {

@@ -21,6 +21,7 @@ const List = require('./List')
 
 test('List', t => {
   const m = bindFunc(List)
+  const f = x => List(x).toArray()
 
   t.ok(isFunction(List), 'is a function')
   t.ok(isObject(List([])), 'returns an object')
@@ -30,17 +31,16 @@ test('List', t => {
   t.ok(isFunction(List.type), 'provides a type function')
 
   t.throws(List, TypeError, 'throws with no parameters')
-  t.throws(m(undefined), TypeError, 'throws with undefined')
-  t.throws(m(null), TypeError, 'throws with null')
-  t.throws(m(0), TypeError, 'throws with falsey number')
-  t.throws(m(1), TypeError, 'throws with truthy number')
-  t.throws(m(''), TypeError, 'throws with falsey string')
-  t.throws(m('string'), TypeError, 'throws with truthy string')
-  t.throws(m(false), TypeError, 'throws with false')
-  t.throws(m(true), TypeError, 'throws with true')
-  t.throws(m({}), TypeError, 'throws with an object')
-
-  t.doesNotThrow(m([]), TypeError, 'allows an array')
+  t.same(f(undefined), [ undefined ], 'wraps value in array when called with undefined')
+  t.same(f(null), [ null ], 'wraps value in array when called with null')
+  t.same(f(0), [ 0 ], 'wraps value in array when called with falsey number')
+  t.same(f(1), [ 1 ], 'wraps value in array when called with truthy number')
+  t.same(f(''), [ '' ], 'wraps value in array when called with falsey string')
+  t.same(f('string'), [ 'string' ], 'wraps value in array when called with truthy string')
+  t.same(f(false), [ false ], 'wraps value in array when called with false')
+  t.same(f(true), [ true ], 'wraps value in array when called with true')
+  t.same(f({}), [ {} ], 'wraps value in array when called with an Object')
+  t.same(f([ 1, 2, 3 ]), [ 1, 2, 3 ], 'Does not wrap an array, just uses it as the list')
 
   t.end()
 })

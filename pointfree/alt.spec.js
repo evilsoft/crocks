@@ -11,16 +11,16 @@ const identity = require('../combinators/identity')
 const constant = require('../combinators/constant')
 
 const mock = x => Object.assign({}, x, {
-  map: noop, of: noop, chain: noop, type: constant('silly')
+  map: noop, type: constant('silly')
 })
 
-const ap = require('./ap')
+const alt = require('./alt')
 
-test('ap pointfree', t => {
-  const a = bindFunc(ap)
-  const m = mock({ ap: identity })
+test('alt pointfree', t => {
+  const a = bindFunc(alt)
+  const m = mock({ alt: identity })
 
-  t.ok(isFunction(ap), 'is a function')
+  t.ok(isFunction(alt), 'is a function')
 
   t.throws(a(undefined, m), TypeError, 'throws if first arg is undefined')
   t.throws(a(null, m), TypeError, 'throws if first arg is null')
@@ -31,7 +31,7 @@ test('ap pointfree', t => {
   t.throws(a(false, m), TypeError, 'throws if first arg is false')
   t.throws(a(true, m), TypeError, 'throws if first arg is true')
   t.throws(a([], m), TypeError, 'throws if first arg is an array')
-  t.throws(a({}, m), TypeError, 'throws if first arg is an object without an ap method')
+  t.throws(a({}, m), TypeError, 'throws if first arg is an object')
 
   t.throws(a(m, undefined), TypeError, 'throws if second arg is undefined')
   t.throws(a(m, null), TypeError, 'throws if second arg is null')
@@ -42,18 +42,18 @@ test('ap pointfree', t => {
   t.throws(a(m, false), TypeError, 'throws if second arg is false')
   t.throws(a(m, true), TypeError, 'throws if second arg is true')
   t.throws(a(m, []), TypeError, 'throws if second arg is an array')
-  t.throws(a(m, {}), TypeError, 'throws if second arg is an object without an ap method')
+  t.throws(a(m, {}), TypeError, 'throws if second arg is an object')
 
   t.end()
 })
 
-test('ap applicative', t => {
-  const m = mock({ ap: sinon.spy(identity) })
-  const x = mock({ ap: sinon.spy(identity) })
+test('alt with Alt', t => {
+  const m = mock({ alt: sinon.spy(identity) })
+  const x = mock({ alt: sinon.spy(identity) })
 
-  const result = ap(m)(x)
+  const result = alt(m)(x)
 
-  t.ok(x.ap.calledWith(m), 'calls the ap method on the second arg passing in the first arg')
+  t.ok(x.alt.calledWith(m), 'calls the alt function on the second arg passing in the first arg')
 
   t.end()
 })

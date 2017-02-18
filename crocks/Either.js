@@ -116,6 +116,17 @@ function Either(u) {
     )
   }
 
+  function alt(m) {
+    if(!isSameType(Either, m)) {
+      throw new TypeError('Either.alt: Either required')
+    }
+
+    return either(
+      constant(m),
+      Either.Right
+    )
+  }
+
   function ap(m) {
     if(!either(constant(true), isFunction)) {
       throw new TypeError('Either.ap: Wrapped value must be a function')
@@ -172,7 +183,7 @@ function Either(u) {
   return {
     inspect, either, value, type,
     swap, coalesce, equals, map, bimap,
-    ap, of, chain, sequence, traverse
+    alt, ap, of, chain, sequence, traverse
   }
 }
 

@@ -10,6 +10,7 @@ const isObject = require('../predicates/isObject')
 
 const composeB = require('../combinators/composeB')
 const constant = require('../combinators/constant')
+const either = require('../pointfree/either')
 const identity = require('../combinators/identity')
 const reverseApply = require('../combinators/reverseApply')
 
@@ -25,6 +26,7 @@ test('Maybe', t => {
 
   t.ok(isFunction(Maybe.of), 'provides an of function')
   t.ok(isFunction(Maybe.type), 'provides a type function')
+  t.ok(isFunction(Maybe.zero), 'provides a zero function')
   t.ok(isFunction(Maybe.Nothing), 'provides a Nothing constructor')
   t.ok(isFunction(Maybe.Just), 'provides a Just constructor')
 
@@ -229,6 +231,85 @@ test('Maybe map properties (Functor)', t => {
 
   t.equal(Maybe.Just(null).map(identity).maybe(), null, 'identity')
   t.equal(Maybe.Just(10).map(x => f(g(x))).maybe(), Maybe(10).map(g).map(f).maybe(), 'composition')
+
+  t.end()
+})
+
+test('Maybe alt errors', t => {
+  const m = { type: () => 'Maybe...Not' }
+
+  const altJust = bindFunc(Maybe.of(0).alt)
+
+  t.throws(altJust(undefined), TypeError, 'throws when passed an undefined with Just')
+  t.throws(altJust(null), TypeError, 'throws when passed a null with Just')
+  t.throws(altJust(0), TypeError, 'throws when passed a falsey number with Just')
+  t.throws(altJust(1), TypeError, 'throws when passed a truthy number with Just')
+  t.throws(altJust(''), TypeError, 'throws when passed a falsey string with Just')
+  t.throws(altJust('string'), TypeError, 'throws when passed a truthy string with Just')
+  t.throws(altJust(false), TypeError, 'throws when passed false with Just')
+  t.throws(altJust(true), TypeError, 'throws when passed true with Just')
+  t.throws(altJust([]), TypeError, 'throws when passed an array with Just')
+  t.throws(altJust({}), TypeError, 'throws when passed an object with Just')
+  t.throws(altJust(m), TypeError, 'throws when container types differ on Just')
+
+  const altNothing = bindFunc(Maybe.Nothing().alt)
+
+  t.throws(altNothing(undefined), TypeError, 'throws when passed an undefined with Nothing')
+  t.throws(altNothing(null), TypeError, 'throws when passed a null with Nothing')
+  t.throws(altNothing(0), TypeError, 'throws when passed a falsey number with Nothing')
+  t.throws(altNothing(1), TypeError, 'throws when passed a truthy number with Nothing')
+  t.throws(altNothing(''), TypeError, 'throws when passed a falsey string with Nothing')
+  t.throws(altNothing('string'), TypeError, 'throws when passed a truthy string with Nothing')
+  t.throws(altNothing(false), TypeError, 'throws when passed false with Nothing')
+  t.throws(altNothing(true), TypeError, 'throws when passed true with Nothing')
+  t.throws(altNothing([]), TypeError, 'throws when passed an array with Nothing')
+  t.throws(altNothing({}), TypeError, 'throws when passed an object with Nothing')
+  t.throws(altNothing(m), TypeError, 'throws when container types differ on Nothing')
+
+  t.end()
+})
+
+test('Maybe alt functionality', t => {
+  const just = Maybe.of('Just')
+  const anotherJust = Maybe.of('Another Just')
+
+  const nothing = Maybe.Nothing()
+  const anotherNothing = Maybe.Nothing()
+
+  const f = either(constant('nothing'), identity)
+
+  t.equals(f(just.alt(nothing).alt(anotherJust)), 'Just', 'retains first Just success')
+  t.equals(f(nothing.alt(anotherNothing)), 'nothing', 'provdes Nothing when all Nothings')
+
+  t.end()
+})
+
+test('Maybe alt properties (Alt)', t => {
+  const a = Maybe.of('a')
+  const b = Maybe.Nothing()
+  const c = Maybe.of('c')
+
+  const f = either(constant('nothing'), identity)
+
+  t.equals(f(a.alt(b).alt(c)), f(a.alt(b.alt(c))), 'assosiativity')
+
+  t.equals(
+    f(a.alt(b).map(identity)),
+    f(a.map(identity).alt(b.map(identity))),
+    'distributivity'
+  )
+
+  t.end()
+})
+
+test('Maybe zero properties (Plus)', t => {
+  const a = Maybe.of('a')
+
+  const f = either(constant('nothing'), identity)
+
+  t.equals(f(a.alt(Maybe.zero())), f(a), 'right identity')
+  t.equals(f(Maybe.zero().alt(a)), f(a), 'left identity')
+  t.equals(f(Maybe.zero().map(identity)), f(Maybe.zero()), 'annihilation')
 
   t.end()
 })

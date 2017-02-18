@@ -66,6 +66,7 @@ const monoids = {
 }
 
 const pointFree = {
+  alt: require('./pointfree/alt'),
   ap: require('./pointfree/ap'),
   bimap: require('./pointfree/bimap'),
   both: require('./pointfree/both'),
@@ -102,6 +103,7 @@ const pointFree = {
 
 const predicates = {
   hasKey: require('./predicates/hasKey'),
+  isAlt: require('./predicates/isAlt'),
   isApplicative: require('./predicates/isApplicative'),
   isApply: require('./predicates/isApply'),
   isArray: require('./predicates/isArray'),

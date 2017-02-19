@@ -6,6 +6,8 @@ test
 .babelrc
 webpack.config.js
 
+CHANGELOG.md
+
 .travis.yml
 .jshintignore
 .jshintrc

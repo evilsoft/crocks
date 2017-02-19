@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/evilsoft/crocks.svg?branch=master)](https://travis-ci.org/evilsoft/crocks) [![Coverage Status](https://coveralls.io/repos/github/evilsoft/crocks/badge.svg?branch=master)](https://coveralls.io/github/evilsoft/crocks?branch=master)
+[![Join the chat at https://gitter.im/crocksjs/crocks](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/crocksjs/crocks?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![NPM version](https://badge.fury.io/js/crocks.svg)](https://www.npmjs.com/package/crocks)
 
 # crocks.js

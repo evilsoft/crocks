@@ -7,6 +7,7 @@ const isFunction = require('../predicates/isFunction')
 const isSameType = require('../predicates/isSameType')
 
 const Pred = require('../crocks/Pred')
+const predOrFunc = require('../internal/predOrFunc')
 
 // not : (a -> Boolean) | Pred -> a -> Boolean
 function not(pred, x) {
@@ -14,11 +15,7 @@ function not(pred, x) {
     throw new TypeError('not: Pred or predicate function required for first argument')
   }
 
-  const func = isFunction(pred)
-    ? pred
-    : pred.runWith
-
-  return !func(x)
+  return !predOrFunc(pred, x)
 }
 
 module.exports = curry(not)

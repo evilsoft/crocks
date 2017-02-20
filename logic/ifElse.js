@@ -18,9 +18,8 @@ function ifElse(pred, f, g) {
     throw new TypeError('ifElse: Functions required for second and third arguments')
   }
 
-  const func = isFunction(pred)
-    ? pred
-    : pred.runWith
+  const func =
+    isFunction(pred) ? pred : pred.runWith
 
   return x => !!func(x) ? f(x) : g(x)
 }

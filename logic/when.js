@@ -5,6 +5,10 @@ const isFunction = require('../predicates/isFunction')
 const isSameType = require('../predicates/isSameType')
 
 const Pred = require('../crocks/Pred')
+const predOrFunc = require('../internal/predOrFunc')
+
+const identity = require('../combinators/identity')
+const ifElse = require('./ifElse')
 
 const curry = require('../helpers/curry')
 
@@ -18,11 +22,7 @@ function when(pred, f) {
     throw new TypeError('when: Function required for second argument')
   }
 
-  const func = isFunction(pred)
-    ? pred
-    : pred.runWith
-
-  return x => !!func(x) ? f(x) : x
+  return ifElse(predOrFunc(pred), f, identity)
 }
 
 module.exports = curry(when)

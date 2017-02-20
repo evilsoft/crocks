@@ -7,6 +7,7 @@ const isFunction = require('../predicates/isFunction')
 const isSameType = require('../predicates/isSameType')
 
 const _inspect = require('../internal/inspect')
+const predOrFunc = require('../internal/predOrFunc')
 
 const constant = require('../combinators/constant')
 const not = require('../logic/not')
@@ -141,9 +142,7 @@ function List(x) {
       throw new TypeError('List.filter: Pred or predicate function required')
     }
 
-    const fn = isFunction(pred)
-      ? pred
-      : pred.runWith
+    const fn = predOrFunc(pred)
 
     return reduce(
       (x, y) => fn(y) ? x.concat(x.of(y)) : x,
@@ -156,7 +155,7 @@ function List(x) {
       throw new TypeError('List.reject: Pred or predicate function required')
     }
 
-    const fn = not(isFunction(pred) ? pred : pred.runWith)
+    const fn = not(predOrFunc(pred))
 
     return reduce(
       (x, y) => fn(y) ? x.concat(x.of(y)) : x,

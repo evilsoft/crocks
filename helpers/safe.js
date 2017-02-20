@@ -9,6 +9,7 @@ const ifElse = require('../logic/ifElse')
 
 const Maybe = require('../crocks/Maybe')
 const Pred = require('../crocks/Pred')
+const predOrFunc = require('../internal/predOrFunc')
 
 const Nothing = Maybe.Nothing
 const Just = Maybe.Just
@@ -18,11 +19,8 @@ function safe(pred) {
   if(!(isFunction(pred) || isSameType(Pred, pred))) {
     throw new TypeError('safe: Pred or predicate function required for first argument')
   }
-  const fn = isFunction(pred)
-    ? pred
-    : pred.runWith
 
-  return ifElse(fn, Just, Nothing)
+  return ifElse(predOrFunc(pred), Just, Nothing)
 }
 
 module.exports = curry(safe)

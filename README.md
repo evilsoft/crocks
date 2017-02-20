@@ -74,22 +74,22 @@ All `Crocks` are Constructor functions of the given type, with `Writer` being an
 | Crock | Constructor | Instance |
 |---|:---|:---|
 | `Arrow` | `empty` | `both`, `concat`, `contramap`, `empty`, `first`, `map`, `promap`, `runWith`, `second`, `value` |
-| `Async` | , `Rejected`, `Resolved`, `all`, `fromNode`, `fromPromise`, `of` | `alt`, `ap`, `bimap`, `chain`, `coalesce`, `fork`, `map`, `of`, `swap`, `toPromise` |
+| `Async` | `Rejected`, `Resolved`, `all`, `fromNode`, `fromPromise`, `of` | `alt`, `ap`, `bimap`, `chain`, `coalesce`, `fork`, `map`, `of`, `swap`, `toPromise` |
 | `Const` | -- | `ap`, `chain`, `concat`, `equals`, `map`, `value` |
 | `Either` | `Left`, `Right`, `of`| `alt`, `ap`, `bimap`, `chain`, `coalesce`, `either`, `equals`, `map`, `of`, `sequence`, `swap`, `traverse` |
 | `Identity` | `of` | `ap`, `chain`, `equals`, `map`, `of`, `sequence`, `traverse`, `value` |
 | `IO` | `of` | `ap`, `chain`, `map`, `of`, `run` |
-| `List` |  `empty`, `of` | `ap`, `chain`, `concat`, `cons`, `empty`, `equals`, `filter`, `head`, `map`, `of`, `reduce`, `sequence`, `tail`, `traverse`, `value` |
+| `List` |  `empty`, `fromArray`, `of` | `ap`, `chain`, `concat`, `cons`, `empty`, `equals`, `filter`, `head`, `map`, `of`, `reduce`, `reject`, `sequence`, `tail`, `toArray`, `traverse`, `value` |
 | `Maybe` | `Nothing`, `Just`, `of`, `zero` | `alt`, `ap`, `chain`, `coalesce`, `equals`, `either`, `map`, `of`, `option`, `sequence`, `traverse`, `zero` |
 | `Pair` | `of` | `ap`, `bimap`, `chain`, `concat`, `equals`, `fst`, `map`, `merge`, `of`, `snd`, `swap`, `value` |
-| `Pred`[*] | `empty` | `concat`, `contramap`, `empty`, `runWith`, `value` |
+| `Pred` * | `empty` | `concat`, `contramap`, `empty`, `runWith`, `value` |
 | `Reader` | `ask`, `of`| `ap`, `chain`, `map`, `of`, `runWith` |
 | `Star` | -- | `both`, `contramap`, `map`, `promap`, `runWith` |
 | `State` | `get`, `gets`, `modify` `of`, `put`| `ap`, `chain`, `evalWith`, `execWith`, `map`, `of`, `runWith` |
 | `Unit` | `empty`, `of` | `ap`, `chain`, `concat`, `empty`, `equals`, `map`, `of`, `value` |
 | `Writer`| `of` | `ap`, `chain`, `equals`, `log`, `map`, `of`, `read`, `value` |
 
-[*] based on [this article](https://medium.com/@drboolean/monoidal-contravariant-functors-are-actually-useful-1032211045c4#.polugsx2a)
+\* based on [this article](https://medium.com/@drboolean/monoidal-contravariant-functors-are-actually-useful-1032211045c4#.polugsx2a)
 
 ### Monoids
 Each `Monoid` provides a means to represent a binary operation and is usually locked down to a specific type. These are great when you need to combine a list of values down to one value. In this library, any ADT that provides both an `empty` and `concat` function can be used as a `Monoid`. There are a few of the `Crocks` that are also monoidial, so be on the look out for those as well. All `Monoids` work with the point-free functions `mconcat`, `mreduce`, `mconcatMap` and `mreduceMap`.
@@ -114,7 +114,7 @@ Seems really silly, but is quite useful for a lot of things. It takes a function
 #### `composeB : (b -> c) -> (a -> b) -> a -> c`
 Provides a means to describe a composition between two functions. it takes two functions and an value. Given `composeB(f, g)`, which is read `f` after `g`, it will return a function that will take value `a` and apply it to `g`, passing the result as an argument to `f`, and will finally return the result of `f`. (This allows only two functions, if you want to avoid things like: `composeB(composeB(f, g), composeB(h, i))` then check out `crocks/helpers/compose`.)
 
-#### `constant : a -> b -> a`
+#### `constant : a -> _ -> a`
 This is a very handy dandy function, used a lot. Pass it any value and it will give you back a function that will return that same value no matter what you pass it.
 
 #### `flip : (a -> b -> c) -> b -> a -> c`
@@ -268,17 +268,17 @@ These functions provide a very clean way to build out very simple functions and 
 | `alt` | `m a -> m a -> m a` |
 | `ap` | `m a -> m (a -> b) -> m b` |
 | `bimap` | `(a -> c) -> (b -> d) -> m a b -> m c d` |
-| `both` | `m (a -> b) -> m ((a, a) -> (b, b))` |
+| `both` | `m (a -> b) -> m (Pair a a -> Pair b b)` |
 | `chain` | `(a -> m b) -> m a -> m b` |
-| `coalesce` | `(a -> b) -> m a b -> m a b` |
+| `coalesce` | `(a -> c) -> (b -> c) -> m a b -> m _ c` |
 | `concat` | `m a -> m a -> m a` |
 | `cons` | `a -> m a -> m a` |
 | `contramap` | `(b -> a) -> m a -> m b` |
 | `either` | `(a -> c) -> (b -> c) -> m a b -> c` |
 | `evalWith` | `a -> m -> b` |
 | `execWith` | `a -> m -> b` |
-| `filter` | `((a -> Boolean) | Pred) -> m a -> m a` |
-| `first` | `m (a -> b) -> m ((a, c) -> (b, c))` |
+| `filter` | `((a -> Boolean) | Pred a) -> m a -> m a` |
+| `first` | `m (a -> b) -> m (Pair a c -> Pair b c)` |
 | `fst` | `m a b -> a` |
 | `head` | `m a -> Maybe a` |
 | `log` | `m a b -> a` |
@@ -288,9 +288,10 @@ These functions provide a very clean way to build out very simple functions and 
 | `promap` | `(c -> a) -> (b -> d) -> m a b -> m c d` |
 | `read` | `m a b -> a` |
 | `reduce` | `(b -> a -> b) -> b -> m a -> b` |
+| `reject` | `((a -> Boolean) | Pred a) -> m a -> m a` |
 | `run` | `m a -> b` |
 | `runWith` | `a -> m -> b` |
-| `second` | `m (a -> b) -> m ((c, a) -> (c, b))` |
+| `second` | `m (a -> b) -> m (Pair c a -> Pair c b)` |
 | `sequence` | `Applicative f => (b -> f b) -> m (f a) -> f (m a)` |
 | `snd` | `m a b -> b` |
 | `swap` | `m a b -> m b a` |
@@ -324,6 +325,7 @@ These functions provide a very clean way to build out very simple functions and 
 | `promap` | `Arrow`, `Star` |
 | `read` | `Writer` |
 | `reduce` | `Array`, `List` |
+| `reject` | `Array`, `List` |
 | `run` | `IO` |
 | `runWith` | `Arrow`, `Pred`, `Reader`, `Star`, `State` |
 | `second` | `Arrow`, `Function`, `Star` |

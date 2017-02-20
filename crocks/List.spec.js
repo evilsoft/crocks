@@ -293,6 +293,44 @@ test('List filter functionality', t => {
   t.end()
 })
 
+test('List reject errors', t => {
+  const reject = bindFunc(List([ 0 ]).reject)
+
+  t.throws(reject(undefined), TypeError, 'throws with undefined')
+  t.throws(reject(null), TypeError, 'throws with null')
+  t.throws(reject(0), TypeError, 'throws with falsey number')
+  t.throws(reject(1), TypeError, 'throws with truthy number')
+  t.throws(reject(''), TypeError, 'throws with falsey string')
+  t.throws(reject('string'), TypeError, 'throws with truthy string')
+  t.throws(reject(false), TypeError, 'throws with false')
+  t.throws(reject(true), TypeError, 'throws with true')
+  t.throws(reject([]), TypeError, 'throws with an array')
+  t.throws(reject({}), TypeError, 'throws with an object')
+
+  t.doesNotThrow(reject(noop), 'allows a function')
+  t.doesNotThrow(reject(Pred(noop)), 'allows a Pred')
+
+  t.end()
+})
+
+test('List reject functionality', t => {
+  const m = List([ 4, 5, 10, 34, 'string' ])
+
+  const bigNum = x => typeof x === 'number' && x > 10
+  const justStrings = x => typeof x === 'string'
+
+  const bigNumPred = Pred(bigNum)
+  const justStringsPred = Pred(justStrings)
+
+  t.same(m.reject(bigNum).value(), [ 4, 5, 10, 'string' ], 'rejects bigNums with function')
+  t.same(m.reject(justStrings).value(), [ 4, 5, 10, 34 ], 'rejects strings with function')
+
+  t.same(m.reject(bigNumPred).value(), [ 4, 5, 10, 'string' ], 'rejects bigNums with Pred')
+  t.same(m.reject(justStringsPred).value(), [ 4, 5, 10, 34 ], 'rejects strings with Pred')
+
+  t.end()
+})
+
 test('List map errors', t => {
   const map = bindFunc(List([]).map)
 

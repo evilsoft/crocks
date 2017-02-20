@@ -1,4 +1,20 @@
 # Change Log for `crocks`
+v0.3.1 -- Feb. 19, 2017
+--
+### Additions
+* Crock Instance Functions:
+  * `List reject`
+* Pointfree Functions
+  * `reject`
+
+### Non-Breaking
+  * Clean up README a bit.
+  * DRY up the `Pred`/predicate functions to use the new `predOrFunc` internal function
+
+### Pull Requests
+* [#77 - fix up README and add reject to List and reject pointfree](https://github.com/evilsoft/crocks/pull/77)
+* [#78 - dd predOrFunc internal function and use it to lean up the logic functions](https://github.com/evilsoft/crocks/pull/78)
+
 v0.3.0 -- Feb. 18, 2017
 --
 ### Breaking

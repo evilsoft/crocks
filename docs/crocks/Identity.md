@@ -58,7 +58,7 @@
 
 ### traverse
 
-`Identity m, Applicative f => m a ~> (c -> f c) -> (a -> f b) -> f (m b)`
+`Identity m, Applicative f => m a ~> ((c -> f c), a -> f b) -> f (m b)`
 
 ### type
 

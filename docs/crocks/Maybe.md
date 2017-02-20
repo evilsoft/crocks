@@ -10,13 +10,13 @@
 --
 ```
 
-`Maybe` exposes the following constructor and instances:
+`Maybe` exposes the following functions on the constructor and instance:
 
 | Constructor | Instance |
 |:---|:---|
-| [`Nothing`](#nothing), [`Just`](#just), [`of`](#of) | [`inspect`](#inspect), [`maybe`](#maybe), [`either`](#either), [`option`](#option), [`type`](#type), [`equals`](#equals), [`coalesce`](#coalesce), [`map`](#map), [`ap`](#ap), [`of`](#of), [`chain`](#chain), [`sequence`](#sequence), [`traverse`](#traverse) |
+| [`Just`](#just), [`Nothing`](#nothing), [`of`](#of), [`type`](#type), [`zero`](#zero) | [`alt`](#alt), [`ap`](#ap), [`chain`](#chain), [`coalesce`](#coalesce), [`either`](#either), [`equals`](#equals), [`inspect`](#inspect), [`map`](#map), [`maybe`](#maybe), [`of`](#of), [`option`](#option), [`sequence`](#sequence), [`traverse`](#traverse), [`type`](#type) |
 
-## Constructors
+## Constructor
 
 ### Nothing
 
@@ -30,47 +30,55 @@
 
 `Maybe m => a -> m a`
 
-## Instances
-
-### inspect
-
-`() => String`
-
-### equals
-
-`a -> Boolean`
-
-### either
-
-`Maybe m => m a ~> (_ -> b) -> (a -> b) -> b`
-
-### option
-
-`Maybe m => m a ~> a -> a`
-
 ### type
 
 `() -> String`
 
-### coalesce
+### zero
 
-`Maybe m => m a ~> (_ -> b) -> (a -> b) -> m b`
+`Maybe m => () -> m a`
 
-### map
+## Instance
 
-`Maybe m => m a ~> (a -> b) -> m b`
+### alt
+
+`Maybe m => m a ~> m a -> m a`
 
 ### ap
 
 `Maybe m => m (a -> b) ~> m a -> m b`
 
+### chain
+
+`Maybe m => m a ~> (a -> m b) -> m b`
+
+### coalesce
+
+`Maybe m => m a ~> (() -> b) -> (a -> b) -> m b`
+
+### either
+
+`Maybe m => m a ~> (() -> b) -> (a -> b) -> b`
+
+### equals
+
+`a -> Boolean`
+
+### inspect
+
+`() -> String`
+
+### map
+
+`Maybe m => m a ~> (a -> b) -> m b`
+
 ### of
 
 `Maybe m => a -> m a`
 
-### chain
+### option
 
-`Maybe m => m a ~> (a -> m b) -> m b`
+`Maybe m => m a ~> a -> a`
 
 ### sequence
 
@@ -79,3 +87,11 @@
 ### traverse
 
 `Maybe m, Applicative f => m a ~> (c -> f c) -> (a -> f b) -> f (m b)`
+
+### type
+
+`() -> String`
+
+### zero
+
+`Maybe m => () -> m a`

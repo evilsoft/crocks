@@ -10,13 +10,13 @@
 --
 ```
 
-`Either` exposes the following constructor and instances:
+`Either` exposes the following functions on the constructor and instance:
 
 | Constructor | Instance |
 |:---|:---|
-| [`Left`](#left), [`Right`](#right), [`of`](#of) | [`inspect`](#inspect), [`value`](#value), [`type`](#type), [`equals`](#equals), [`map`](#map), [`ap`](#ap), [`of`](#of), [`chain`](#chain), [`sequence`](#sequence), [`traverse`](#traverse) |
+| [`Left`](#left), [`Right`](#right), [`of`](#of), [`type`](#type) | [`alt`](#alt), [`ap`](#ap), [`bimap`](#bimap), [`chain`](#chain), [`coalesce`](#coalesce), [`either`](#either), [`equals`](#equals), [`inspect`](#inspect), [`map`](#map),  [`of`](#of), [`sequence`](#sequence), [`swap`](#swap), [`traverse`](#traverse), [`type`](#type) |
 
-## Constructors
+## Constructor
 
 ### Left
 
@@ -30,60 +30,64 @@
 
 `Either m => a -> m _ a`
 
-## Instances
-
-### inspect
-
-`() => String`
-
-### either
-
-`Either m => m c a ~> (c -> b) -> (a -> b) -> b`
-
-### value
-
-`Either m => m c a ~> () => c | a`
-
 ### type
 
 `() -> String`
 
-### swap
+## Instance
 
-`Either m => m c a ~> m a c`
+### alt
 
-### coalesce
-
-`Either m => m c a ~> (c -> b) -> (a -> b) -> m _ b`
-
-### equals
-
-`a -> Boolean`
-
-### map
-
-`Either m => m c a ~> (a -> b) -> m a b`
-
-### bimap
-
-`Either m => m c a ~> (c -> d) -> (a -> b) -> m d b`
+`Either m => m c a ~> m c a -> m c a`
 
 ### ap
 
 `Either m => m c (a -> b) ~> m c a -> m c b`
 
-### of
+### bimap
 
-`Either m => a -> m _ a`
+`Either m => m c a ~> (c -> d) -> (a -> b) -> m d b`
 
 ### chain
 
 `Either m => m c a ~> (a -> m c b) -> m c b`
 
+### coalesce
+
+`Either m => m c a ~> (c -> b) -> (a -> b) -> m _ b`
+
+### either
+
+`Either m => m c a ~> (c -> b) -> (a -> b) -> b`
+
+### equals
+
+`a -> Boolean`
+
+### inspect
+
+`() -> String`
+
+### map
+
+`Either m => m c a ~> (a -> b) -> m c b`
+
+### of
+
+`Either m => a -> m _ a`
+
 ### sequence
 
 `Either m, Applicative f => m c (f a) ~> (b -> f b) -> f (m c a)`
 
+### swap
+
+`Either m => m c a ~> (c -> d) -> (a -> b) -> m b d`
+
 ### traverse
 
 `Either m, Applicative f => m c a ~> (d -> f d) -> (a -> f b) -> f (m c b)`
+
+### type
+
+`() -> String`

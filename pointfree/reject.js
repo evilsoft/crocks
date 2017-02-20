@@ -3,15 +3,13 @@
 
 const curry = require('../helpers/curry')
 
-const ifElse = require('../logic/ifElse')
 const isArray = require('../predicates/isArray')
 const isFunction = require('../predicates/isFunction')
 const isSameType = require('../predicates/isSameType')
 const not = require('../logic/not')
 
-const identity = require('../combinators/identity')
-
 const Pred = require('../crocks/Pred')
+const predOrFunc = require('../internal/predOrFunc')
 
 // reject : Foldable f => (a -> Boolean) -> f a -> f a
 function reject(pred, m) {
@@ -19,8 +17,7 @@ function reject(pred, m) {
     throw new TypeError('reject: Pred or predicate function required for first argument')
   }
 
-  const fn =
-    ifElse(isFunction, identity, p => p.runWith, pred)
+  const fn = predOrFunc(pred)
 
   if(isArray(m)) {
     return m.filter(not(fn))

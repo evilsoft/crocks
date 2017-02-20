@@ -7,6 +7,7 @@ const isFunction = require('../predicates/isFunction')
 const isSameType = require('../predicates/isSameType')
 
 const Pred = require('../crocks/Pred')
+const predOrFunc = require('../internal/predOrFunc')
 
 // filter : Foldable f => (a -> Boolean) -> f a -> f a
 function filter(pred, m) {
@@ -14,15 +15,10 @@ function filter(pred, m) {
     throw new TypeError('filter: Pred or predicate function required for first argument')
   }
   else if(m && isFunction(m.filter)) {
-    const fn = isFunction(pred)
-      ? pred
-      : pred.runWith
+    return m.filter(predOrFunc(pred))
+  }
 
-    return m.filter(fn)
-  }
-  else {
-    throw new TypeError('filter: Foldable required for second argument')
-  }
+  throw new TypeError('filter: Foldable required for second argument')
 }
 
 module.exports = curry(filter)

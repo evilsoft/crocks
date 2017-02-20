@@ -1,5 +1,4 @@
 const test = require('tape')
-const sinon = require('sinon')
 const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
@@ -7,6 +6,7 @@ const noop = helpers.noop
 
 const isFunction = require('../predicates/isFunction')
 
+const constant = require('../combinators/constant')
 const identity = require('../combinators/identity')
 
 const Pred = require('../crocks/Pred')
@@ -50,11 +50,11 @@ test('filter pointfree', t => {
 })
 
 test('filter Foldable', t => {
-  const m = { filter: sinon.spy(noop) }
+  const m = { filter: constant('called') }
 
-  filter(identity, m)
+  const result = filter(identity, m)
 
-  t.ok(m.filter.calledWith(identity), 'calls filter on Foldable, passing the function')
+  t.equals(result, 'called', 'calls filter on Foldable, passing the function')
 
   t.end()
 })

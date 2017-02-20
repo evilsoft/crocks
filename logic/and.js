@@ -5,14 +5,9 @@ const isFunction = require('../predicates/isFunction')
 const isSameType = require('../predicates/isSameType')
 
 const Pred = require('../crocks/Pred')
+const predOrFunc = require('../internal/predOrFunc')
 
 const curry = require('../helpers/curry')
-const identity = require('../combinators/identity')
-
-const ifElse = require('./ifElse')
-
-const predOrFunc =
-  ifElse(isFunction, identity, x => x.runWith)
 
 // and : (a -> Boolean) | Pred -> (a -> Boolean) | Pred -> a -> Boolean
 function and(f, g) {

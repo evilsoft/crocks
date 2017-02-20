@@ -86,7 +86,7 @@
 
 ### traverse
 
-`Either m, Applicative f => m c a ~> (d -> f d) -> (a -> f b) -> f (m c b)`
+`Either m, Applicative f => m c a ~> ((d -> f d), a -> f b) -> f (m c b)`
 
 ### type
 

@@ -86,7 +86,7 @@
 
 ### traverse
 
-`Maybe m, Applicative f => m a ~> (c -> f c) -> (a -> f b) -> f (m b)`
+`Maybe m, Applicative f => m a ~> ((c -> f c), a -> f b) -> f (m b)`
 
 ### type
 

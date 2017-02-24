@@ -5,8 +5,10 @@ const helpers = require('../test/helpers')
 const noop = helpers.noop
 const bindFunc = helpers.bindFunc
 
+const isArray = require('../predicates/isArray')
 const isFunction = require('../predicates/isFunction')
 const isObject = require('../predicates/isObject')
+const isSameType = require('../predicates/isSameType')
 
 const composeB = require('../combinators/composeB')
 const constant = require('../combinators/constant')
@@ -132,6 +134,99 @@ test('Maybe coalesce', t => {
   t.end()
 })
 
+test('Maybe concat errors', t => {
+  const m = { type: () => 'Maybe...Not' }
+
+  const good = Maybe.of([])
+
+  const f = bindFunc(Maybe.of([]).concat)
+  const nonMaybeErr = /Maybe.concat: Maybe of Semigroup required/
+
+  t.throws(f(undefined), nonMaybeErr, 'throws with undefined')
+  t.throws(f(null), nonMaybeErr, 'throws with null')
+  t.throws(f(0), nonMaybeErr, 'throws with falsey number')
+  t.throws(f(1), nonMaybeErr, 'throws with truthy number')
+  t.throws(f(''), nonMaybeErr, 'throws with falsey string')
+  t.throws(f('string'), nonMaybeErr, 'throws with truthy string')
+  t.throws(f(false), nonMaybeErr, 'throws with false')
+  t.throws(f(true), nonMaybeErr, 'throws with true')
+  t.throws(f([]), nonMaybeErr, 'throws with array')
+  t.throws(f({}), nonMaybeErr, 'throws with object')
+  t.throws(f(m), nonMaybeErr, 'throws with non-Maybe')
+
+  const innerErr = /Maybe.concat: Both containers must contain Semigroups of the same type/
+  const notSemiLeft = bindFunc(x => Maybe.of(x).concat(good))
+
+  t.throws(notSemiLeft(undefined), innerErr, 'throws with undefined on left')
+  t.throws(notSemiLeft(null), innerErr, 'throws with null on left')
+  t.throws(notSemiLeft(0), innerErr, 'throws with falsey number on left')
+  t.throws(notSemiLeft(1), innerErr, 'throws with truthy number on left')
+  t.throws(notSemiLeft(''), innerErr, 'throws with falsey string on left')
+  t.throws(notSemiLeft('string'), innerErr, 'throws with truthy string on left')
+  t.throws(notSemiLeft(false), innerErr, 'throws with false on left')
+  t.throws(notSemiLeft(true), innerErr, 'throws with true on left')
+  t.throws(notSemiLeft({}), innerErr, 'throws with object on left')
+
+  const notSemiRight = bindFunc(x => good.concat(Maybe.of(x)))
+
+  t.throws(notSemiRight(undefined), innerErr, 'throws with undefined on right')
+  t.throws(notSemiRight(null), innerErr, 'throws with null on right')
+  t.throws(notSemiRight(0), innerErr, 'throws with falsey number on right')
+  t.throws(notSemiRight(1), innerErr, 'throws with truthy number on right')
+  t.throws(notSemiRight(''), innerErr, 'throws with falsey string on right')
+  t.throws(notSemiRight('string'), innerErr, 'throws with truthy string on right')
+  t.throws(notSemiRight(false), innerErr, 'throws with false on right')
+  t.throws(notSemiRight(true), innerErr, 'throws with true on right')
+  t.throws(notSemiRight({}), innerErr, 'throws with object on right')
+
+  const noMatch = bindFunc(() => good.concat(Maybe.of('')))
+  t.throws(noMatch({}), innerErr, 'throws with different semigroups')
+
+  t.end()
+})
+
+test('Maybe concat functionality', t => {
+  const extract =
+    either(constant('Nothing'), identity)
+
+  const nothing = Maybe.Nothing()
+  const a = Maybe.Just([ 1, 2 ])
+  const b = Maybe.Just([ 4, 3 ])
+
+  const just = a.concat(b)
+  const nothingRight = a.concat(nothing)
+  const nothingLeft = nothing.concat(a)
+
+  t.ok(isSameType(Maybe, just), 'returns anothor Maybe with Just')
+  t.ok(isSameType(Maybe, nothingRight), 'returns anothor Maybe with Nothing on Right')
+  t.ok(isSameType(Maybe, nothingLeft), 'returns anothor Maybe with Nothing on Left')
+
+  t.same(extract(just), [ 1, 2, 4, 3 ], 'concats the inner semigroup with Justs')
+  t.equals(extract(nothingRight), 'Nothing', 'returns a Nothing with a Nothing on Right')
+  t.equals(extract(nothingLeft), 'Nothing', 'returns a Nothing with a Nothing on Left')
+
+  t.end()
+})
+
+test('Maybe concat properties (Semigoup)', t => {
+  const extract =
+    either(constant('Nothing'), identity)
+
+  const a = Maybe.Just([ 'a' ])
+  const b = Maybe.Just([ 'b' ])
+  const c = Maybe.Just([ 'c' ])
+
+  const left = a.concat(b).concat(c)
+  const right = a.concat(b.concat(c))
+
+  t.ok(isFunction(a.concat), 'provides a concat function')
+
+  t.same(extract(left), extract(right), 'associativity')
+  t.ok(isArray(extract(a.concat(b))), 'returns an Array')
+
+  t.end()
+})
+
 test('Maybe equals functionality', t => {
   const a = Maybe.Just(0)
   const b = Maybe.Just(0)
@@ -171,6 +266,7 @@ test('Maybe equals properties (Setoid)', t => {
 })
 
 test('Maybe map errors', t => {
+  const m = { type: () => 'Maybe...Not' }
   const map = bindFunc(Maybe.Just(0).map)
 
   t.throws(map(undefined), TypeError, 'throws with undefined')
@@ -182,7 +278,8 @@ test('Maybe map errors', t => {
   t.throws(map(false), TypeError, 'throws with false')
   t.throws(map(true), TypeError, 'throws with true')
   t.throws(map([]), TypeError, 'throws with an array')
-  t.throws(map({}), TypeError, 'throws iwth object')
+  t.throws(map({}), TypeError, 'throws with object')
+  t.throws(map(m), TypeError, 'throws with non-Maybe')
 
   t.doesNotThrow(map(noop), 'allows a function')
 

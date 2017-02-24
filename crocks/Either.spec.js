@@ -5,8 +5,11 @@ const helpers = require('../test/helpers')
 
 const noop = helpers.noop
 const bindFunc = helpers.bindFunc
-const isObject = require('../predicates/isObject')
+
+const isArray = require('../predicates/isArray')
 const isFunction = require('../predicates/isFunction')
+const isObject = require('../predicates/isObject')
+const isSameType = require('../predicates/isSameType')
 
 const composeB = require('../combinators/composeB')
 const constant = require('../combinators/constant')
@@ -168,6 +171,114 @@ test('Either coalesce', t => {
 
   t.ok(l.equals(Either.Right('was left')),'returns an Either.Right wrapping was left' )
   t.ok(r.equals(Either.Right('was right')),'returns an Either.Right wrapping was right' )
+
+  t.end()
+})
+
+test('Either concat errors', t => {
+  const m = { type: () => 'Either...Not' }
+
+  const good = Either.Right([])
+  const bad = Either.Left([])
+
+  const f = bindFunc(Either.Right([]).concat)
+  const nonEitherErr = /Either.concat: Either of Semigroup required/
+
+  t.throws(f(undefined), nonEitherErr, 'throws with undefined on Right')
+  t.throws(f(null), nonEitherErr, 'throws with null on Right')
+  t.throws(f(0), nonEitherErr, 'throws with falsey number on Right')
+  t.throws(f(1), nonEitherErr, 'throws with truthy number on Right')
+  t.throws(f(''), nonEitherErr, 'throws with falsey string on Right')
+  t.throws(f('string'), nonEitherErr, 'throws with truthy string on Right')
+  t.throws(f(false), nonEitherErr, 'throws with false on Right')
+  t.throws(f(true), nonEitherErr, 'throws with true on Right')
+  t.throws(f([]), nonEitherErr, 'throws with array on Right')
+  t.throws(f({}), nonEitherErr, 'throws with object on Right')
+  t.throws(f(m), nonEitherErr, 'throws with non-Either on Right')
+
+  const g = bindFunc(Either.Left(0).concat)
+
+  t.throws(g(undefined), nonEitherErr, 'throws with undefined on Left')
+  t.throws(g(null), nonEitherErr, 'throws with null on Left')
+  t.throws(g(0), nonEitherErr, 'throws with falsey number on Left')
+  t.throws(g(1), nonEitherErr, 'throws with truthy number on Left')
+  t.throws(g(''), nonEitherErr, 'throws with falsey string on Left')
+  t.throws(g('string'), nonEitherErr, 'throws with truthy string on Left')
+  t.throws(g(false), nonEitherErr, 'throws with false on Left')
+  t.throws(g(true), nonEitherErr, 'throws with true on Left')
+  t.throws(g([]), nonEitherErr, 'throws with array on Left')
+  t.throws(g({}), nonEitherErr, 'throws with object on Left')
+  t.throws(g(m), nonEitherErr, 'throws with non-Either on Left')
+
+  const innerErr = /Either.concat: Both containers must contain Semigroups of the same type/
+  const notSemiLeft = bindFunc(x => Either.Right(x).concat(good))
+
+  t.throws(notSemiLeft(undefined), innerErr, 'throws with undefined on left')
+  t.throws(notSemiLeft(null), innerErr, 'throws with null on left')
+  t.throws(notSemiLeft(0), innerErr, 'throws with falsey number on left')
+  t.throws(notSemiLeft(1), innerErr, 'throws with truthy number on left')
+  t.throws(notSemiLeft(''), innerErr, 'throws with falsey string on left')
+  t.throws(notSemiLeft('string'), innerErr, 'throws with truthy string on left')
+  t.throws(notSemiLeft(false), innerErr, 'throws with false on left')
+  t.throws(notSemiLeft(true), innerErr, 'throws with true on left')
+  t.throws(notSemiLeft({}), innerErr, 'throws with object on left')
+
+  const notSemiRight = bindFunc(x => good.concat(Either.Right(x)))
+
+  t.throws(notSemiRight(undefined), innerErr, 'throws with undefined on right')
+  t.throws(notSemiRight(null), innerErr, 'throws with null on right')
+  t.throws(notSemiRight(0), innerErr, 'throws with falsey number on right')
+  t.throws(notSemiRight(1), innerErr, 'throws with truthy number on right')
+  t.throws(notSemiRight(''), innerErr, 'throws with falsey string on right')
+  t.throws(notSemiRight('string'), innerErr, 'throws with truthy string on right')
+  t.throws(notSemiRight(false), innerErr, 'throws with false on right')
+  t.throws(notSemiRight(true), innerErr, 'throws with true on right')
+  t.throws(notSemiRight({}), innerErr, 'throws with object on right')
+
+  const noMatch = bindFunc(() => good.concat(Either.Right('')))
+  t.throws(noMatch({}), innerErr, 'throws with different semigroups')
+
+  t.end()
+})
+
+test('Either concat functionality', t => {
+  const extract =
+    either(identity, identity)
+
+  const left = Either.Left('Left')
+  const a = Either.Right([ 1, 2 ])
+  const b = Either.Right([ 4, 3 ])
+
+  const right = a.concat(b)
+  const leftRight = a.concat(left)
+  const leftLeft = left.concat(a)
+
+  t.ok(isSameType(Either, right), 'returns another Either with Right')
+  t.ok(isSameType(Either, leftRight), 'returns another Either with Left on right side')
+  t.ok(isSameType(Either, leftLeft), 'returns another Either with Left on left side')
+
+  t.same(extract(right), [ 1, 2, 4, 3 ], 'concats the inner semigroup with Rights')
+  t.equals(extract(leftRight), 'Left', 'returns a Left with a Left on right side')
+  t.equals(extract(leftLeft), 'Left', 'returns a Left with a Left on left side')
+
+  t.end()
+})
+
+test('Either concat properties (Semigoup)', t => {
+  const extract =
+    either(identity, identity)
+
+  const a = Either.Right([ 'a' ])
+  const b = Either.Right([ 'b' ])
+  const c = Either.Right([ 'c' ])
+
+  const left = a.concat(b).concat(c)
+  const right = a.concat(b.concat(c))
+
+  t.ok(isFunction(a.concat), 'provides a concat function')
+
+  t.same(extract(left), extract(right), 'associativity')
+  t.ok(isArray(extract(a.concat(b))), 'returns an Array')
 
   t.end()
 })

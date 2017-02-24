@@ -6,6 +6,7 @@ const isFunction = require('../predicates/isFunction')
 const isSameType = require('../predicates/isSameType')
 
 const _inspect = require('../internal/inspect')
+const innerConcat = require('../internal/innerConcat')
 
 const composeB = require('../combinators/composeB')
 const constant = require('../combinators/constant')
@@ -36,6 +37,14 @@ function Identity(x) {
 
   const inspect =
     constant(`Identity${_inspect(x)}`)
+
+  function concat(m) {
+    if(!isSameType(Identity, m)) {
+      throw new TypeError('Identity.concat: Identity of Semigroup required')
+    }
+
+    return innerConcat(Identity, m, x)
+  }
 
   function map(fn) {
     if(!isFunction(fn)) {
@@ -97,8 +106,8 @@ function Identity(x) {
 
   return {
     inspect, value, type, equals,
-    map, ap, of, chain, sequence,
-    traverse
+    concat, map, ap, of, chain,
+    sequence, traverse
   }
 }
 

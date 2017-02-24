@@ -7,6 +7,7 @@ const isSameType = require('../predicates/isSameType')
 
 const _inspect = require('../internal/inspect')
 const defineUnion = require('../internal/defineUnion')
+const innerConcat = require('../internal/innerConcat')
 
 const composeB = require('../combinators/composeB')
 const constant = require('../combinators/constant')
@@ -74,6 +75,17 @@ function Maybe(u) {
       Nothing: f,
       Just: g
     }, x)
+  }
+
+  function concat(m) {
+    if(!isSameType(Maybe, m)) {
+      throw new TypeError('Maybe.concat: Maybe of Semigroup required')
+    }
+
+    return either(
+      Maybe.Nothing,
+      innerConcat(Maybe, m)
+    )
   }
 
   function coalesce(f, g) {
@@ -174,7 +186,7 @@ function Maybe(u) {
 
   return {
     inspect, either, option, type,
-    equals, coalesce, map, alt,
+    concat, equals, coalesce, map, alt,
     zero, ap, of, chain, sequence,
     traverse
   }

@@ -1,4 +1,22 @@
 # Change Log for `crocks`
+v0.4.0 -- Feb. 26, 2017
+--
+### Additions
+* Crock Instance Functions:
+  * `Either concat`
+  * `Identity concat`
+  * `Maybe concat`
+* Pointfree Functions
+  * `reject`
+
+### Breaking
+  * Remove `of` and `value` from `Pair`.
+  * Allow `isSameType` to compare JS type constructors to JS values and value types to other value types.
+
+### Pull Requests
+* [#85 - Add `concat` to `Maybe`, `Either` and `Identity`](https://github.com/evilsoft/crocks/pull/85)
+* [#86 - Remove of and value from Pair](https://github.com/evilsoft/crocks/pull/86)
+
 v0.3.1 -- Feb. 19, 2017
 --
 ### Additions
@@ -9,11 +27,11 @@ v0.3.1 -- Feb. 19, 2017
 
 ### Non-Breaking
   * Clean up README a bit.
-  * DRY up the `Pred`/predicate functions to use the new `predOrFunc` internal function
+  * DRY up the `Pred`/predicate functions to use the new `predOrFunc` internal function.
 
 ### Pull Requests
 * [#77 - fix up README and add reject to List and reject pointfree](https://github.com/evilsoft/crocks/pull/77)
-* [#78 - dd predOrFunc internal function and use it to lean up the logic functions](https://github.com/evilsoft/crocks/pull/78)
+* [#78 - predOrFunc internal function and use it to lean up the logic functions](https://github.com/evilsoft/crocks/pull/78)
 
 v0.3.0 -- Feb. 18, 2017
 --

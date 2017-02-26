@@ -6,8 +6,6 @@ v0.4.0 -- Feb. 26, 2017
   * `Either concat`
   * `Identity concat`
   * `Maybe concat`
-* Pointfree Functions
-  * `reject`
 
 ### Breaking
   * Remove `of` and `value` from `Pair`.

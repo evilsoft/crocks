@@ -373,7 +373,7 @@ test('Star first', t => {
   t.throws(runWith([]), TypeError, 'throws with an array as input')
   t.throws(runWith({}), TypeError, 'throws with an object as input')
 
-  t.doesNotThrow(runWith(Pair.of(2)), 'does not throw when inner value is a Pair')
+  t.doesNotThrow(runWith(Pair(1, 2)), 'does not throw when inner value is a Pair')
 
   const notValid = bindFunc(x => Star(_ => x).first().runWith(Pair(2, 3)))
 
@@ -414,7 +414,7 @@ test('Star second', t => {
   t.throws(runWith([]), TypeError, 'throws with an array as input')
   t.throws(runWith({}), TypeError, 'throws with an object as input')
 
-  t.doesNotThrow(runWith(Pair.of(2)), 'does not throw when inner value is a Pair')
+  t.doesNotThrow(runWith(Pair(1, 2)), 'does not throw when inner value is a Pair')
 
   const notValid = bindFunc(x => Star(_ => x).second().runWith(Pair(2, 3)))
 
@@ -457,7 +457,7 @@ test('Star both', t => {
   t.throws(runWith([]), TypeError, 'throws with an array as input')
   t.throws(runWith({}), TypeError, 'throws with an object as input')
 
-  t.doesNotThrow(runWith(Pair.of(2)), 'does not throw when inner value is a Pair')
+  t.doesNotThrow(runWith(Pair(1, 2)), 'does not throw when inner value is a Pair')
 
   const notValid = bindFunc(x => Star(_ => x).both().runWith(Pair(2, 3)))
 

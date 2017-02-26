@@ -4,7 +4,7 @@ const sinon = require('sinon')
 
 const composeB = require('../combinators/composeB')
 const identity = require('../combinators/identity')
-const reverseApply = require('../combinators/reverseApply')
+const merge = require('../pointfree/merge')
 
 const noop = helpers.noop
 const bindFunc = helpers.bindFunc
@@ -13,7 +13,6 @@ const isFunction = require('../predicates/isFunction')
 const isObject = require('../predicates/isObject')
 
 const Pair = require('./Pair')
-const Unit = require('./Unit')
 
 test('Pair', t => {
   const m = bindFunc(Pair)
@@ -23,7 +22,6 @@ test('Pair', t => {
   t.ok(isObject(x), 'returns an object')
 
   t.ok(isFunction(Pair.type), 'provides a type function')
-  t.ok(isFunction(Pair.of), 'provides an of function')
 
   t.throws(m(), TypeError, 'throws with no parameters')
   t.throws(m(1), TypeError, 'throws with one parameter')
@@ -45,15 +43,6 @@ test('Pair type', t => {
 
   t.ok(isFunction(p.type), 'provides a type function')
   t.equal(p.type(), 'Pair', 'type returns Pair')
-
-  t.end()
-})
-
-test('Pair value', t => {
-  const p = Pair('great', true)
-
-  t.ok(isFunction(p.value), 'provides a value function')
-  t.same(p.value(), [ 'great', true ], 'proivdes both values in an array')
 
   t.end()
 })
@@ -159,6 +148,9 @@ test('Pair concat functionality', t => {
 })
 
 test('Pair concat properties (Semigroup)', t => {
+  const extract =
+    merge((x, y) => [ x, y ])
+
   const a = Pair([ 1 ], '1')
   const b = Pair([ 2 ], '2')
   const c = Pair([ 3 ], '3')
@@ -168,7 +160,7 @@ test('Pair concat properties (Semigroup)', t => {
 
   t.ok(isFunction(Pair(0, 0).concat), 'is a function')
 
-  t.same(left.value(), right.value(), 'associativity')
+  t.same(extract(left), extract(right), 'associativity')
   t.equal(a.concat(b).type(), a.type(), 'returns Semigroup of the same type')
 
   t.end()
@@ -237,16 +229,19 @@ test('Pair map functionality', t => {
 })
 
 test('Pair map properties (Functor)', t => {
+  const extract =
+    merge((x, y) => [ x, y ])
+
   const f = x => x + 2
   const g = x => x * 2
 
   t.ok(isFunction(Pair(0, 0).map), 'provides a map function')
 
-  t.same(Pair(0, 45).map(identity).value(), [ 0, 45 ], 'identity')
+  t.same(extract(Pair(0, 45).map(identity)), [ 0, 45 ], 'identity')
 
   t.same(
-    Pair(50, 22).map(x => f(g(x))).value(),
-    Pair(50, 22).map(g).map(f).value(),
+    extract(Pair(50, 22).map(x => f(g(x)))),
+    extract(Pair(50, 22).map(g).map(f)),
     'composition'
   )
 
@@ -298,6 +293,9 @@ test('Pair bimap functionality', t => {
 })
 
 test('Pair bimap properties (Bifunctor)', t => {
+  const extract =
+    merge((x, y) => [ x, y ])
+
   const f1 = x => x + 2
   const f2 = x => x + 5
 
@@ -306,10 +304,10 @@ test('Pair bimap properties (Bifunctor)', t => {
 
   t.ok(isFunction(Pair(0, 0).bimap), 'provides a bimap function')
 
-  t.same(Pair(0, 45).bimap(identity, identity).value(), [ 0, 45 ], 'identity')
+  t.same(extract(Pair(0, 45).bimap(identity, identity)), [ 0, 45 ], 'identity')
   t.same(
-    Pair(50, 22).bimap(x => f1(g1(x)), x => f2(g2(x))).value(),
-    Pair(50, 22).bimap(g1, g2).bimap(f1, f2).value(),
+    extract(Pair(50, 22).bimap(x => f1(g1(x)), x => f2(g2(x)))),
+    extract(Pair(50, 22).bimap(g1, g2).bimap(f1, f2)),
     'composition'
   )
 
@@ -367,6 +365,9 @@ test('Pair ap errors', t => {
 })
 
 test('Pair ap properties (Apply)', t => {
+  const extract =
+    merge((x, y) => [ x, y ])
+
   const m = Pair([ 'm' ], identity)
 
   const a = m.map(composeB).ap(m).ap(m)
@@ -375,33 +376,11 @@ test('Pair ap properties (Apply)', t => {
   t.ok(isFunction(Pair(0, 0).ap), 'provides an ap function')
   t.ok(isFunction(Pair(0, 0).map), 'implements the Functor spec')
 
-  t.same(a.ap(Pair([ 'n' ], 3)).value(), b.ap(Pair([ 'n' ], 3)).value(), 'composition')
-
-  t.end()
-})
-
-test('Pair of', t => {
-  t.equal(Pair.of, Pair(0, 0).of, 'Pair.of is the same as the instance version')
-  t.equal(Pair.of(0).type(), 'Pair', 'returns a Pair')
-
-  t.end()
-})
-
-test('Pair of properties (Applicative)', t => {
-  const m = Pair(Unit(), identity)
-
-  const v = Pair(Unit(), 3)
-
-  t.ok(isFunction(m.of), 'Pair provides an of function')
-  t.ok(isFunction(m.ap), 'Pair implements the Apply spec')
-
-  t.equal(m.ap(v).snd(), 3, 'identity on snd value')
-  t.equal(m.ap(Pair.of(3)).snd(), Pair.of(identity(3)).snd(), 'homomorphism on snd value')
-
-  const a = x => m.ap(Pair.of(x))
-  const b = x => Pair.of(reverseApply(x)).ap(m)
-
-  t.equal(a(3).snd(), b(3).snd(), 'interchange on snd value')
+  t.same(
+    extract(a.ap(Pair([ 'n' ], 3))),
+    extract(b.ap(Pair([ 'n' ], 3))),
+    'composition'
+  )
 
   t.end()
 })
@@ -434,6 +413,9 @@ test('Pair chain errors', t => {
 })
 
 test('Pair chain properties (Chain)', t => {
+  const extract =
+    merge((x, y) => [ x, y ])
+
   t.ok(isFunction(Pair([], 0).chain), 'provides a chain function')
   t.ok(isFunction(Pair([], 0).ap), 'implements the Apply spec')
 
@@ -443,19 +425,7 @@ test('Pair chain properties (Chain)', t => {
   const a = x => Pair([ 'a' ], x).chain(f).chain(g)
   const b = x => Pair([ 'a' ], x).chain(y => f(y).chain(g))
 
-  t.same(a(10).value(), b(10).value(), 'assosiativity')
-
-  t.end()
-})
-
-test('Pair chain properties (Monad)', t => {
-  t.ok(isFunction(Pair(0, 0).chain), 'implements the Chain spec')
-  t.ok(isFunction(Pair(0, 0).of), 'implements the Applicative spec')
-
-  const f = Pair.of
-
-  t.equal(Pair.of(3).chain(f).snd(), f(3).snd(), 'left identity')
-  t.equal(f(3).chain(Pair.of).snd(), f(3).snd(), 'right identity')
+  t.same(extract(a(10)), extract(b(10)), 'assosiativity')
 
   t.end()
 })

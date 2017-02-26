@@ -362,7 +362,7 @@ test('Arrow first', t => {
   t.throws(runWith([]), TypeError, 'throws with an array as inner argument')
   t.throws(runWith({}), TypeError, 'throws with an object as inner argument')
 
-  t.doesNotThrow(runWith(Pair.of(2)), 'does not throw when inner value is a Pair')
+  t.doesNotThrow(runWith(Pair(1, 2)), 'does not throw when inner value is a Pair')
 
   const result = m.first().runWith(Pair(10, 10))
 
@@ -391,7 +391,7 @@ test('Arrow second', t => {
   t.throws(runWith([]), TypeError, 'throws with an array as inner argument')
   t.throws(runWith({}), TypeError, 'throws with an object as inner argument')
 
-  t.doesNotThrow(runWith(Pair.of(2)), 'does not throw when inner value is a Pair')
+  t.doesNotThrow(runWith(Pair(1, 2)), 'does not throw when inner value is a Pair')
 
   const result = m.second().runWith(Pair(10, 10))
 
@@ -420,7 +420,7 @@ test('Arrow both', t => {
   t.throws(runWith([]), TypeError, 'throws with an array as inner argument')
   t.throws(runWith({}), TypeError, 'throws with an object as inner argument')
 
-  t.doesNotThrow(runWith(Pair.of(2)), 'does not throw when inner value is a Pair')
+  t.doesNotThrow(runWith(Pair(1, 2)), 'does not throw when inner value is a Pair')
 
   const result = m.both().runWith(Pair(10, 10))
 

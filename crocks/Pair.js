@@ -9,13 +9,8 @@ const isSameType = require('../predicates/isSameType')
 
 const constant = require('../combinators/constant')
 
-const Unit = require('./Unit')
-
 const _type =
   constant('Pair')
-
-const _of =
-  x => Pair(Unit(), x)
 
 function Pair(l, r) {
   if(arguments.length < 2) {
@@ -24,12 +19,6 @@ function Pair(l, r) {
 
   const type =
     _type
-
-  const of =
-    _of
-
-  const value =
-    constant([ l, r ])
 
   const fst =
     constant(l)
@@ -136,17 +125,13 @@ function Pair(l, r) {
   }
 
   return {
-    inspect, value, fst, snd,
-    type, merge, equals, concat,
-    swap, map, bimap, ap, of,
-    chain
+    inspect, fst, snd, type,
+    merge, equals, concat, swap,
+    map, bimap, ap, chain
   }
 }
 
 Pair.type =
   _type
-
-Pair.of =
-  _of
 
 module.exports = Pair

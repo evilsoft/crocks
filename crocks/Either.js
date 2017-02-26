@@ -7,6 +7,7 @@ const isSameType = require('../predicates/isSameType')
 
 const _inspect = require('../internal/inspect')
 const defineUnion = require('../internal/defineUnion')
+const innerConcat = require('../internal/innerConcat')
 
 const constant = require('../combinators/constant')
 const composeB = require('../combinators/composeB')
@@ -73,6 +74,17 @@ function Either(u) {
       Left: f,
       Right: g
     }, x)
+  }
+
+  function concat(m) {
+    if(!isSameType(Either, m)) {
+      throw new TypeError('Either.concat: Either of Semigroup required')
+    }
+
+    return either(
+      Either.Left,
+      innerConcat(Either, m)
+    )
   }
 
   function swap(f, g) {
@@ -178,7 +190,7 @@ function Either(u) {
   }
 
   return {
-    inspect, either, type,
+    inspect, either, type, concat,
     swap, coalesce, equals, map, bimap,
     alt, ap, of, chain, sequence, traverse
   }

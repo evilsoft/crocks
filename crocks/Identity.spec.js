@@ -2,8 +2,10 @@ const test = require('tape')
 const sinon = require('sinon')
 const helpers = require('../test/helpers')
 
-const isObject = require('../predicates/isObject')
+const isArray = require('../predicates/isArray')
 const isFunction = require('../predicates/isFunction')
+const isObject = require('../predicates/isObject')
+const isSameType = require('../predicates/isSameType')
 
 const bindFunc = helpers.bindFunc
 const noop = helpers.noop
@@ -84,6 +86,76 @@ test('Identity equals properties (Setoid)', t => {
   t.equal(a.equals(b), b.equals(a), 'symmetry (equal)')
   t.equal(a.equals(c), c.equals(a), 'symmetry (!equal)')
   t.equal(a.equals(b) && b.equals(d), a.equals(d), 'transitivity')
+
+  t.end()
+})
+
+test('Identity concat errors', t => {
+  const m = { type: () => 'Identity...Not' }
+
+  const good = Identity([])
+
+  const f = bindFunc(Identity([]).concat)
+  const nonIdentErr = /Identity.concat: Identity of Semigroup required/
+
+  t.throws(f(undefined), nonIdentErr, 'throws with undefined')
+  t.throws(f(null), nonIdentErr, 'throws with null')
+  t.throws(f(0), nonIdentErr, 'throws with falsey number')
+  t.throws(f(1), nonIdentErr, 'throws with truthy number')
+  t.throws(f(''), nonIdentErr, 'throws with falsey string')
+  t.throws(f('string'), nonIdentErr, 'throws with truthy string')
+  t.throws(f(false), nonIdentErr, 'throws with false')
+  t.throws(f(true), nonIdentErr, 'throws with true')
+  t.throws(f([]), nonIdentErr, 'throws with array')
+  t.throws(f({}), nonIdentErr, 'throws with object')
+  t.throws(f(m), nonIdentErr, 'throws with non-Identity')
+
+  const innerErr = /Identity.concat: Both containers must contain Semigroups of the same type/
+  const notSemi = bindFunc(x => Identity(x).concat(good))
+
+  t.throws(notSemi(undefined), innerErr, 'throws with undefined on left')
+  t.throws(notSemi(null), innerErr, 'throws with null on left')
+  t.throws(notSemi(0), innerErr, 'throws with falsey number on left')
+  t.throws(notSemi(1), innerErr, 'throws with truthy number on left')
+  t.throws(notSemi(''), innerErr, 'throws with falsey string on left')
+  t.throws(notSemi('string'), innerErr, 'throws with truthy string on left')
+  t.throws(notSemi(false), innerErr, 'throws with false on left')
+  t.throws(notSemi(true), innerErr, 'throws with true on left')
+  t.throws(notSemi({}), innerErr, 'throws with object on left')
+
+  const noMatch = bindFunc(() => good.concat(Identity('')))
+  t.throws(noMatch({}), innerErr, 'throws with different semigroups')
+
+  t.end()
+})
+
+test('Identity concat functionality', t => {
+  const a = Identity([ 1, 2 ])
+  const b = Identity([ 4, 3 ])
+
+  const res = a.concat(b)
+
+  t.ok(isSameType(Identity, res), 'returns another Identity')
+  t.same(res.value(), [ 1, 2, 4, 3 ], 'concats the inner semigroup with Rights')
+
+  t.end()
+})
+
+test('Identity concat properties (Semigoup)', t => {
+  const extract =
+    m => m.value()
+
+  const a = Identity([ 'a' ])
+  const b = Identity([ 'b' ])
+  const c = Identity([ 'c' ])
+
+  const left = a.concat(b).concat(c)
+  const right = a.concat(b.concat(c))
+
+  t.ok(isFunction(a.concat), 'provides a concat function')
+
+  t.same(extract(left), extract(right), 'associativity')
+  t.ok(isArray(extract(a.concat(b))), 'returns an Array')
 
   t.end()
 })

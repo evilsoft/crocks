@@ -70,7 +70,7 @@ function Arrow(runWith) {
 
   function first() {
     return Arrow(function(x) {
-      if(!(x && x.type && x.type() === Pair.type())) {
+      if(!(isSameType(Pair, x))) {
         throw TypeError('Arrow.first: Pair required for inner argument')
       }
       return x.bimap(runWith, identity)
@@ -79,7 +79,7 @@ function Arrow(runWith) {
 
   function second() {
     return Arrow(function(x) {
-      if(!(x && x.type && x.type() === Pair.type())) {
+      if(!(isSameType(Pair, x))) {
         throw TypeError('Arrow.second: Pair required for inner argument')
       }
 
@@ -89,7 +89,7 @@ function Arrow(runWith) {
 
   function both() {
     return Arrow(function(x) {
-      if(!(x && x.type && x.type() === Pair.type())) {
+      if(!(isSameType(Pair, x))) {
         throw TypeError('Arrow.both: Pair required for inner argument')
       }
       return x.bimap(runWith, runWith)

@@ -1,24 +1,28 @@
 const test = require('tape')
 
 const isFunction = require('../predicates/isFunction')
+const merge = require('../pointfree/merge')
 
 const branch = require('./branch')
 
 test('branch function', t => {
+  const extract =
+    merge((x, y) => [ x, y ])
+
   t.ok(isFunction(branch), 'is a function')
 
   t.equal(branch(3).type(), 'Pair', 'returns a Pair')
 
-  t.same(branch(undefined).value(), [ undefined, undefined ], 'undefined returns a Pair of undefined')
-  t.same(branch(null).value(), [ null, null ], 'undefined returns a Pair of null')
-  t.same(branch(0).value(), [ 0, 0 ], '0 returns a Pair of 0')
-  t.same(branch(1).value(), [ 1, 1 ], '1 returns a Pair of 1')
-  t.same(branch('').value(), [ '', '' ], 'empty string returns a Pair of empty strings')
-  t.same(branch('string').value(), [ 'string', 'string' ], '"string" returns a Pair of "string"')
-  t.same(branch(false).value(), [ false, false ], 'false returns a Pair of falses')
-  t.same(branch(true).value(), [ true, true ], 'true returns a Pair of trues')
-  t.same(branch([]).value(), [ [], [] ], 'array returns a Pair of arrays')
-  t.same(branch({}).value(), [ {}, {} ], 'object returns a Pair of objects')
+  t.same(extract(branch(undefined)), [ undefined, undefined ], 'undefined returns a Pair of undefined')
+  t.same(extract(branch(null)), [ null, null ], 'undefined returns a Pair of null')
+  t.same(extract(branch(0)), [ 0, 0 ], '0 returns a Pair of 0')
+  t.same(extract(branch(1)), [ 1, 1 ], '1 returns a Pair of 1')
+  t.same(extract(branch('')), [ '', '' ], 'empty string returns a Pair of empty strings')
+  t.same(extract(branch('string')), [ 'string', 'string' ], '"string" returns a Pair of "string"')
+  t.same(extract(branch(false)), [ false, false ], 'false returns a Pair of falses')
+  t.same(extract(branch(true)), [ true, true ], 'true returns a Pair of trues')
+  t.same(extract(branch([])), [ [], [] ], 'array returns a Pair of arrays')
+  t.same(extract(branch({})), [ {}, {} ], 'object returns a Pair of objects')
 
   t.end()
 })

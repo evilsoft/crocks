@@ -81,7 +81,7 @@ All `Crocks` are Constructor functions of the given type, with `Writer` being an
 | `IO` | `of` | `ap`, `chain`, `map`, `of`, `run` |
 | `List` |  `empty`, `fromArray`, `of` | `ap`, `chain`, `concat`, `cons`, `empty`, `equals`, `filter`, `head`, `map`, `of`, `reduce`, `reject`, `sequence`, `tail`, `toArray`, `traverse`, `value` |
 | `Maybe` | `Nothing`, `Just`, `of`, `zero` | `alt`, `ap`, `chain`, `coalesce`, `concat`, `equals`, `either`, `map`, `of`, `option`, `sequence`, `traverse`, `zero` |
-| `Pair` | `of` | `ap`, `bimap`, `chain`, `concat`, `equals`, `fst`, `map`, `merge`, `of`, `snd`, `swap`, `value` |
+| `Pair` | --- | `ap`, `bimap`, `chain`, `concat`, `equals`, `fst`, `map`, `merge`, `of`, `snd`, `swap` |
 | `Pred` * | `empty` | `concat`, `contramap`, `empty`, `runWith`, `value` |
 | `Reader` | `ask`, `of`| `ap`, `chain`, `map`, `of`, `runWith` |
 | `Star` | -- | `both`, `concat`, `contramap`, `map`, `promap`, `runWith` |
@@ -226,7 +226,7 @@ All functions in this group have a signature of `* -> Boolean` and are used with
 * `isNil : a -> Boolean`: undefined or null
 * `isNumber : a -> Boolean`: Number that is not a NaN value, Infinity included
 * `isObject : a -> Boolean`: Plain Old Javascript Object (POJO)
-* `isSameType : a -> b -> Boolean`: both ADTs are of the same type (Instance or TypeRep)
+* `isSameType : a -> b -> Boolean`: Constructor matches a values type, or two values types match
 * `isSemigroup : a -> Boolean`: an ADT that provides a `concat` function
 * `isSetoid : a -> Boolean`: an ADT that provides an `equals` function
 * `isString : a -> Boolean`: String
@@ -334,7 +334,7 @@ These functions provide a very clean way to build out very simple functions and 
 | `swap` | `Async`, `Either`, `Pair` |
 | `tail` | `Array`, `List`, `String` |
 | `traverse` | `Array`, `Either`, `Identity`, `List`, `Maybe` |
-| `value` | `Arrow`, `Const`, `Identity`, `List`, `Pair`, `Pred`, `Unit`, `Writer` |
+| `value` | `Arrow`, `Const`, `Identity`, `List`, `Pred`, `Unit`, `Writer` |
 
 ### Transformation Functions
 Transformation functions are mostly used to reduce unwanted nesting of similar types. Take for example the following structure:

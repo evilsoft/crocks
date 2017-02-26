@@ -12,6 +12,7 @@ const compose = require('../helpers/compose')
 const constant = require('../combinators/constant')
 const identity = require('../combinators/identity')
 
+const merge = require('../pointfree/merge')
 const sequence = require('../pointfree/sequence')
 
 const Pair = require('./Pair')
@@ -139,7 +140,7 @@ function Star(runWith) {
         throw new TypeError('Star.both: Computaion must return a Monad')
       }
 
-      return sequence(m.of, p.value()).map(x => Pair(x[0], x[1]))
+      return sequence(m.of, merge((x, y) => [ x, y ], p)).map(x => Pair(x[0], x[1]))
     })
   }
 

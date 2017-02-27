@@ -14,7 +14,7 @@
 
 | Constructor | Instance |
 |:---|:---|
-| [`type`](#type) | [`ap`](#ap), [`bimap`](#bimap), [`chain`](#chain), [`concat`](#concat), [`equals`](#equals), [`fst`](#fst), [`inspect`](#inspect),  [`map`](#map), [`merge`](#merge), [`of`](#of), [`type`](#type), [`snd`](#snd), [`swap`](#swap), [`value`](#value) |
+| [`type`](#type) | [`ap`](#ap), [`bimap`](#bimap), [`chain`](#chain), [`concat`](#concat), [`equals`](#equals), [`fst`](#fst), [`inspect`](#inspect), [`map`](#map), [`merge`](#merge), [`of`](#of), [`type`](#type), [`snd`](#snd), [`swap`](#swap) |
 
 ## Constructor
 
@@ -71,7 +71,3 @@
 ### swap
 
 `Pair m => m c a ~> (c -> d) -> (a -> b) -> m b d`
-
-### value
-
-`Pair m => m c a ~> () -> [ c, a ]`

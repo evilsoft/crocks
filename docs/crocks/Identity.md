@@ -14,7 +14,7 @@
 
 | Constructor | Instance |
 |:---|:---|
-| [`of`](#of), [`type`](#type) | [`ap`](#ap), [`chain`](#chain), [`equals`](#equals), [`inspect`](#inspect), [`map`](#map), [`of`](#of), [`sequence`](#sequence), [`traverse`](#traverse), [`type`](#type), [`value`](#value) |
+| [`of`](#of), [`type`](#type) | [`ap`](#ap), [`chain`](#chain), [`concat`](#concat), [`equals`](#equals), [`inspect`](#inspect), [`map`](#map), [`of`](#of), [`sequence`](#sequence), [`traverse`](#traverse), [`type`](#type), [`value`](#value) |
 
 ## Constructor
 
@@ -35,6 +35,10 @@
 ### chain
 
 `Identity m => m a ~> (a -> m b) -> m b`
+
+### concat
+
+`Identity m, Semigroup a => m a ~> m a -> m a`
 
 ### equals
 

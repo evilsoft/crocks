@@ -56,11 +56,11 @@ test('Pred type', t => {
 })
 
 test('Pred value', t => {
-  const f = constant('some Predicate')
+  const f = constant('')
   const p = Pred(f)
 
   t.ok(isFunction(p.value), 'is a function')
-  t.equal(p.value()(), f(), 'provides the wrapped function')
+  t.equals(p.value()(), !!f(), 'returns a coerced to Boolean version of the function')
 
   t.end()
 })
@@ -69,10 +69,25 @@ test('Pred runWith', t => {
   const fn = sinon.spy(constant('result'))
   const m = Pred(fn)
 
+  const nonBoolPred =
+    x => Pred(constant(x)).runWith()
+
+  t.equals(nonBoolPred(undefined), false, 'returns false when wrapped function returns undefined')
+  t.equals(nonBoolPred(null), false, 'returns false when wrapped function returns null')
+  t.equals(nonBoolPred(0), false, 'returns false when wrapped function returns falsey number')
+  t.equals(nonBoolPred(1), true, 'returns true when wrapped function returns truthy number')
+  t.equals(nonBoolPred(''), false, 'returns false when wrapped function returns falsey string')
+  t.equals(nonBoolPred('string'), true, 'returns true when wrapped function returns truthy string')
+  t.equals(nonBoolPred(false), false, 'returns false when wrapped function returns false')
+  t.equals(nonBoolPred(true), true, 'returns true when wrapped function returns true')
+  t.equals(nonBoolPred({}), true, 'returns true when wrapped function returns an object')
+  t.equals(nonBoolPred([]), true, 'returns true when wrapped function returns an array')
+  t.equals(nonBoolPred(noop), true, 'returns true when wrapped function returns a function')
+
   const result = m.runWith(false)
 
   t.ok(fn.called, 'calls the wrapped function')
-  t.equal(result, fn(),'returns result of the wrapped function' )
+  t.equal(result, !!fn(),'returns Boolean equiv result of the wrapped function' )
 
   t.end()
 })
@@ -108,7 +123,7 @@ test('Pred contramap functionality', t => {
   m.runWith(x)
 
   t.ok(spy.called, 'calls mapping function when ran')
-  t.equal(m.runWith(x), x, 'returns the result of the resulting composition')
+  t.equal(m.runWith(x), !!x, 'returns the Boolean equiv result of the resulting composition')
 
   t.end()
 })

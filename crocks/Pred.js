@@ -15,10 +15,13 @@ const _type =
 const _empty =
   () => Pred(constant(true))
 
-function Pred(runWith) {
-  if(!isFunction(runWith)) {
+function Pred(pred) {
+  if(!isFunction(pred)) {
     throw new TypeError('Pred: Predicate function required')
   }
+
+  const runWith =
+    x => !!pred(x)
 
   const type =
     _type
@@ -37,7 +40,7 @@ function Pred(runWith) {
       throw new TypeError('Pred.concat: Pred required')
     }
 
-    return Pred(x => runWith(x) && m.runWith(x))
+    return Pred(x => !!runWith(x) && !!m.runWith(x))
   }
 
   function contramap(fn) {

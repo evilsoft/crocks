@@ -16,7 +16,7 @@
 |:---|:---|
 | [`empty`](#empty), [`fromArray`](#fromArray), [`of`](#of) | [`ap`](#ap), [`chain`](#chain), [`concat`](#concat), [`cons`](#cons), [`empty`](#empty), [`equals`](#equals), [`filter`](#filter), [`head`](#head), [`map`](#map), [`of`](#of), [`reduce`](#reduce), [`reject`](#reject), [`sequence`](#sequence), [`tail`](#tail), [`toArray`](#toArray), [`traverse`](#traverse), [`value`](#value) |
 
-## Constructors
+## Constructor
 
 ### empty
 
@@ -29,8 +29,6 @@
 ### of
 
 `List m => a -> m a`
-
-## Instances
 
 ## Instance
 

@@ -14,7 +14,7 @@
 
 | Constructor | Instance |
 |:---|:---|
-| [`Just`](#just), [`Nothing`](#nothing), [`of`](#of), [`type`](#type), [`zero`](#zero) | [`alt`](#alt), [`ap`](#ap), [`chain`](#chain), [`coalesce`](#coalesce), [`either`](#either), [`equals`](#equals), [`inspect`](#inspect), [`map`](#map), [`maybe`](#maybe), [`of`](#of), [`option`](#option), [`sequence`](#sequence), [`traverse`](#traverse), [`type`](#type) |
+| [`Just`](#just), [`Nothing`](#nothing), [`of`](#of), [`type`](#type), [`zero`](#zero) | [`alt`](#alt), [`ap`](#ap), [`chain`](#chain), [`coalesce`](#coalesce), [`concat`](#concat), [`either`](#either), [`equals`](#equals), [`inspect`](#inspect), [`map`](#map), [`maybe`](#maybe), [`of`](#of), [`option`](#option), [`sequence`](#sequence), [`traverse`](#traverse), [`type`](#type) |
 
 ## Constructor
 
@@ -55,6 +55,10 @@
 ### coalesce
 
 `Maybe m => m a ~> (() -> b) -> (a -> b) -> m b`
+
+### concat
+
+`Maybe m, Semigroup a => m a ~> m a -> m a`
 
 ### either
 

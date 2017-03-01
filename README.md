@@ -294,7 +294,7 @@ These functions provide a very clean way to build out very simple functions and 
 | `second` | `m (a -> b) -> m (Pair c a -> Pair c b)` |
 | `sequence` | `Applicative f => (b -> f b) -> m (f a) -> f (m a)` |
 | `snd` | `m a b -> b` |
-| `swap` | `m a b -> m b a` |
+| `swap` | `(c -> d) -> (a -> b) -> m c a -> m b d` |
 | `tail` | `m a -> Maybe (m a)` |
 | `traverse` | `Applicative f => (c -> f c) -> (a -> f b) -> m (f a) -> f (m b)` |
 | `value` | `m a -> a` |

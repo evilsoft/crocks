@@ -54,7 +54,7 @@
 
 ### coalesce
 
-`Maybe m => m a ~> (() -> b) -> (a -> b) -> m b`
+`Maybe m => m a ~> ((() -> b), (a -> b)) -> m b`
 
 ### concat
 
@@ -62,7 +62,7 @@
 
 ### either
 
-`Maybe m => m a ~> (() -> b) -> (a -> b) -> b`
+`Maybe m => m a ~> ((() -> b), (a -> b)) -> b`
 
 ### equals
 

@@ -30,7 +30,7 @@
 
 ### bimap
 
-`Pair m => m c a ~> (c -> d) -> (a -> b) -> m d b`
+`Pair m => m c a ~> ((c -> d), (a -> b)) -> m d b`
 
 ### chain
 
@@ -70,4 +70,4 @@
 
 ### swap
 
-`Pair m => m c a ~> (c -> d) -> (a -> b) -> m b d`
+`Pair m => m c a ~> ((c -> d), (a -> b)) -> m b d`

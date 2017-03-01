@@ -46,7 +46,7 @@
 
 ### bimap
 
-`Either m => m c a ~> (c -> d) -> (a -> b) -> m d b`
+`Either m => m c a ~> ((c -> d), (a -> b)) -> m d b`
 
 ### chain
 
@@ -54,7 +54,7 @@
 
 ### coalesce
 
-`Either m => m c a ~> (c -> b) -> (a -> b) -> m _ b`
+`Either m => m c a ~> ((c -> b), (a -> b)) -> m _ b`
 
 ### concat
 
@@ -62,7 +62,7 @@
 
 ### either
 
-`Either m => m c a ~> (c -> b) -> (a -> b) -> b`
+`Either m => m c a ~> ((c -> b), (a -> b)) -> b`
 
 ### equals
 
@@ -86,7 +86,7 @@
 
 ### swap
 
-`Either m => m c a ~> (c -> d) -> (a -> b) -> m b d`
+`Either m => m c a ~> ((c -> d), (a -> b)) -> m b d`
 
 ### traverse
 

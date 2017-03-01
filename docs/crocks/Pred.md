@@ -34,7 +34,7 @@
 
 ### contramap
 
-`Pred m => m a ~> (a -> b) -> m b`
+`Pred m => m a ~> (b -> a) -> m b`
 
 ### empty
 

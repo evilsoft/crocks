@@ -14,13 +14,9 @@
 
 | Constructor | Instance |
 |:---|:---|
-| [`empty`](#empty), [`type`](#type) | [`both`](#both), [`concat`](#concat), [`contramap`](#contramap), [`empty`](#empty), [`first`](#first), [`inspect`](#inspect), [`map`](#map), [`promap`](#promap), [`runWith`](#runWith), [`second`](#second), [`type`](#type), [`value`](#value) |
+| [`type`](#type) | [`both`](#both), [`contramap`](#contramap), [`first`](#first), [`inspect`](#inspect), [`map`](#map), [`promap`](#promap), [`runWith`](#runWith), [`second`](#second), [`type`](#type) |
 
 ## Constructor
-
-### empty
-
-`Arrow m => () -> m a a`
 
 ### type
 
@@ -32,17 +28,9 @@
 
 `Arrow m, Pair p => m a b ~> () -> m (p a a) (p b b)`
 
-### concat
-
-`Arrow m => m a b ~> m a b -> m a b`
-
 ### contramap
 
 `Arrow m => m a b ~> (c -> a) -> m c b`
-
-### empty
-
-`Arrow m => () -> m a a`
 
 ### first
 
@@ -71,7 +59,3 @@
 ### type
 
 `() -> String`
-
-### value
-
-`Arrow m => m a b ~> (a -> b)`

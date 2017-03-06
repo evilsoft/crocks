@@ -30,7 +30,9 @@ test('List', t => {
   t.ok(isFunction(List.fromArray), 'provides a fromArray function')
   t.ok(isFunction(List.type), 'provides a type function')
 
-  t.throws(List, TypeError, 'throws with no parameters')
+  const err = /List: List must wrap something/
+  t.throws(List, err, 'throws with no parameters')
+
   t.same(f(undefined), [ undefined ], 'wraps value in array when called with undefined')
   t.same(f(null), [ null ], 'wraps value in array when called with null')
   t.same(f(0), [ 0 ], 'wraps value in array when called with falsey number')
@@ -41,6 +43,28 @@ test('List', t => {
   t.same(f(true), [ true ], 'wraps value in array when called with true')
   t.same(f({}), [ {} ], 'wraps value in array when called with an Object')
   t.same(f([ 1, 2, 3 ]), [ 1, 2, 3 ], 'Does not wrap an array, just uses it as the list')
+
+  t.end()
+})
+
+test('List fromArray', t => {
+  const fromArray = bindFunc(List.fromArray)
+
+  const err = /List.fromArray: Array required/
+  t.throws(fromArray(undefined), err, 'throws with undefined')
+  t.throws(fromArray(null), err, 'throws with null')
+  t.throws(fromArray(0), err, 'throws with falsey number')
+  t.throws(fromArray(1), err, 'throws with truthy number')
+  t.throws(fromArray(''), err, 'throws with falsey string')
+  t.throws(fromArray('string'), err, 'throws with truthy string')
+  t.throws(fromArray(false), err, 'throws with false')
+  t.throws(fromArray(true), err, 'throws with true')
+  t.throws(fromArray({}), err, 'throws with an object')
+
+  const data = [[2, 1], 'a']
+
+  t.equal(List.fromArray([0]).type(), 'List', 'returns a List')
+  t.same(List.fromArray(data).value(), data, 'wraps the value passed into List in an array')
 
   t.end()
 })
@@ -184,17 +208,18 @@ test('List concat functionality', t => {
 
   const cat = bindFunc(a.concat)
 
-  t.throws(cat(undefined), TypeError, 'throws with undefined')
-  t.throws(cat(null), TypeError, 'throws with null')
-  t.throws(cat(0), TypeError, 'throws with falsey number')
-  t.throws(cat(1), TypeError, 'throws with truthy number')
-  t.throws(cat(''), TypeError, 'throws with falsey string')
-  t.throws(cat('string'), TypeError, 'throws with truthy string')
-  t.throws(cat(false), TypeError, 'throws with false')
-  t.throws(cat(true), TypeError, 'throws with true')
-  t.throws(cat([]), TypeError, 'throws with an array')
-  t.throws(cat({}), TypeError, 'throws with an object')
-  t.throws(cat(notList), TypeError, 'throws when passed non-List')
+  const err = /List.concat: List required/
+  t.throws(cat(undefined), err, 'throws with undefined')
+  t.throws(cat(null), err, 'throws with null')
+  t.throws(cat(0), err, 'throws with falsey number')
+  t.throws(cat(1), err, 'throws with truthy number')
+  t.throws(cat(''), err, 'throws with falsey string')
+  t.throws(cat('string'), err, 'throws with truthy string')
+  t.throws(cat(false), err, 'throws with false')
+  t.throws(cat(true), err, 'throws with true')
+  t.throws(cat([]), err, 'throws with an array')
+  t.throws(cat({}), err, 'throws with an object')
+  t.throws(cat(notList), err, 'throws when passed non-List')
 
   t.same(a.concat(b).value(), [ 1, 2, 3, 4 ], 'concats second to first')
   t.same(b.concat(a).value(), [ 3, 4, 1, 2 ], 'concats first to second')
@@ -229,18 +254,17 @@ test('List empty functionality', t => {
 test('List reduce errors', t => {
   const reduce = bindFunc(List([ 1, 2 ]).reduce)
 
-  t.throws(reduce(undefined, 0), TypeError, 'throws with undefined in the first argument')
-  t.throws(reduce(null, 0), TypeError, 'throws with null in the first argument')
-  t.throws(reduce(0, 0), TypeError, 'throws with falsey number in the first argument')
-  t.throws(reduce(1, 0), TypeError, 'throws with truthy number in the first argument')
-  t.throws(reduce('', 0), TypeError, 'throws with falsey string in the first argument')
-  t.throws(reduce('string', 0), TypeError, 'throws with truthy string in the first argument')
-  t.throws(reduce(false, 0), TypeError, 'throws with false in the first argument')
-  t.throws(reduce(true, 0), TypeError, 'throws with true in the first argument')
-  t.throws(reduce({}, 0), TypeError, 'throws with an object in the first argument')
-  t.throws(reduce([], 0), TypeError, 'throws with an array in the first argument')
-
-  t.doesNotThrow(reduce(noop, 0), TypeError, 'allows function in the first argument')
+  const err = /List.reduce: Function required for first argument/
+  t.throws(reduce(undefined, 0), err, 'throws with undefined in the first argument')
+  t.throws(reduce(null, 0), err, 'throws with null in the first argument')
+  t.throws(reduce(0, 0), err, 'throws with falsey number in the first argument')
+  t.throws(reduce(1, 0), err, 'throws with truthy number in the first argument')
+  t.throws(reduce('', 0), err, 'throws with falsey string in the first argument')
+  t.throws(reduce('string', 0), err, 'throws with truthy string in the first argument')
+  t.throws(reduce(false, 0), err, 'throws with false in the first argument')
+  t.throws(reduce(true, 0), err, 'throws with true in the first argument')
+  t.throws(reduce({}, 0), err, 'throws with an object in the first argument')
+  t.throws(reduce([], 0), err, 'throws with an array in the first argument')
 
   t.end()
 })
@@ -255,22 +279,51 @@ test('List reduce functionality', t => {
   t.end()
 })
 
+test('List fold errors', t => {
+  const f = bindFunc(x => List(x).fold())
+
+  const noSemi = /List.fold: List must contain Semigroups of the same type/
+  t.throws(f(undefined), noSemi, 'throws when contains single undefined')
+  t.throws(f(null), noSemi, 'throws when contains single null')
+  t.throws(f(0), noSemi, 'throws when contains single falsey number')
+  t.throws(f(1), noSemi, 'throws when contains single truthy number')
+  t.throws(f(false), noSemi, 'throws when contains single false')
+  t.throws(f(true), noSemi, 'throws when contains single true')
+  t.throws(f({}), noSemi, 'throws when contains a single object')
+  t.throws(f(noop), noSemi, 'throws when contains a single function')
+
+  const empty = /List.fold: List must contain at least one Semigroup/
+  t.throws(f([]), empty, 'throws when empty')
+
+  const diff = /List.fold: List must contain Semigroups of the same type/
+  t.throws(f([ [], '' ]), diff, 'throws when empty')
+
+  t.end()
+})
+
+test('List fold functionality', t => {
+  const f = x => List(x).fold()
+
+  t.same(f([ [ 1 ], [ 2 ] ]), [ 1, 2 ], 'combines and extracts semigroups')
+  t.equals(f('lucky'), 'lucky', 'extracts a single semigroup')
+
+  t.end()
+})
+
 test('List filter errors', t => {
   const filter = bindFunc(List([ 0 ]).filter)
 
-  t.throws(filter(undefined), TypeError, 'throws with undefined')
-  t.throws(filter(null), TypeError, 'throws with null')
-  t.throws(filter(0), TypeError, 'throws with falsey number')
-  t.throws(filter(1), TypeError, 'throws with truthy number')
-  t.throws(filter(''), TypeError, 'throws with falsey string')
-  t.throws(filter('string'), TypeError, 'throws with truthy string')
-  t.throws(filter(false), TypeError, 'throws with false')
-  t.throws(filter(true), TypeError, 'throws with true')
-  t.throws(filter([]), TypeError, 'throws with an array')
-  t.throws(filter({}), TypeError, 'throws with an object')
-
-  t.doesNotThrow(filter(noop), 'allows a function')
-  t.doesNotThrow(filter(Pred(noop)), 'allows a Pred')
+  const err = /List.filter: Pred or predicate function required/
+  t.throws(filter(undefined), err, 'throws with undefined')
+  t.throws(filter(null), err, 'throws with null')
+  t.throws(filter(0), err, 'throws with falsey number')
+  t.throws(filter(1), err, 'throws with truthy number')
+  t.throws(filter(''), err, 'throws with falsey string')
+  t.throws(filter('string'), err, 'throws with truthy string')
+  t.throws(filter(false), err, 'throws with false')
+  t.throws(filter(true), err, 'throws with true')
+  t.throws(filter([]), err, 'throws with an array')
+  t.throws(filter({}), err, 'throws with an object')
 
   t.end()
 })
@@ -296,19 +349,17 @@ test('List filter functionality', t => {
 test('List reject errors', t => {
   const reject = bindFunc(List([ 0 ]).reject)
 
-  t.throws(reject(undefined), TypeError, 'throws with undefined')
-  t.throws(reject(null), TypeError, 'throws with null')
-  t.throws(reject(0), TypeError, 'throws with falsey number')
-  t.throws(reject(1), TypeError, 'throws with truthy number')
-  t.throws(reject(''), TypeError, 'throws with falsey string')
-  t.throws(reject('string'), TypeError, 'throws with truthy string')
-  t.throws(reject(false), TypeError, 'throws with false')
-  t.throws(reject(true), TypeError, 'throws with true')
-  t.throws(reject([]), TypeError, 'throws with an array')
-  t.throws(reject({}), TypeError, 'throws with an object')
-
-  t.doesNotThrow(reject(noop), 'allows a function')
-  t.doesNotThrow(reject(Pred(noop)), 'allows a Pred')
+  const err = /List.reject: Pred or predicate function required/
+  t.throws(reject(undefined), err, 'throws with undefined')
+  t.throws(reject(null), err, 'throws with null')
+  t.throws(reject(0), err, 'throws with falsey number')
+  t.throws(reject(1), err, 'throws with truthy number')
+  t.throws(reject(''), err, 'throws with falsey string')
+  t.throws(reject('string'), err, 'throws with truthy string')
+  t.throws(reject(false), err, 'throws with false')
+  t.throws(reject(true), err, 'throws with true')
+  t.throws(reject([]), err, 'throws with an array')
+  t.throws(reject({}), err, 'throws with an object')
 
   t.end()
 })
@@ -334,16 +385,17 @@ test('List reject functionality', t => {
 test('List map errors', t => {
   const map = bindFunc(List([]).map)
 
-  t.throws(map(undefined), TypeError, 'throws with undefined')
-  t.throws(map(null), TypeError, 'throws with null')
-  t.throws(map(0), TypeError, 'throws with falsey number')
-  t.throws(map(1), TypeError, 'throws with truthy number')
-  t.throws(map(''), TypeError, 'throws with falsey string')
-  t.throws(map('string'), TypeError, 'throws with truthy string')
-  t.throws(map(false), TypeError, 'throws with false')
-  t.throws(map(true), TypeError, 'throws with true')
-  t.throws(map([]), TypeError, 'throws with an array')
-  t.throws(map({}), TypeError, 'throws with an object')
+  const err = /List.map: Function required/
+  t.throws(map(undefined), err, 'throws with undefined')
+  t.throws(map(null), err, 'throws with null')
+  t.throws(map(0), err, 'throws with falsey number')
+  t.throws(map(1), err, 'throws with truthy number')
+  t.throws(map(''), err, 'throws with falsey string')
+  t.throws(map('string'), err, 'throws with truthy string')
+  t.throws(map(false), err, 'throws with false')
+  t.throws(map(true), err, 'throws with true')
+  t.throws(map([]), err, 'throws with an array')
+  t.throws(map({}), err, 'throws with an object')
 
   t.doesNotThrow(map(noop), 'allows a function')
 
@@ -378,33 +430,34 @@ test('List map properties (Functor)', t => {
 })
 
 test('List ap errors', t => {
-  const ap = bindFunc(List([ noop ]).ap)
+  const left = bindFunc(x => List([ x ]).ap(List([ 0 ])))
 
-  t.throws(List([ undefined ]).ap.bind(null, List([ 0 ])), TypeError, 'throws when wrapped value is undefined')
-  t.throws(List([ null ]).ap.bind(null, List([ 0 ])), TypeError, 'throws when wrapped value is null')
-  t.throws(List([ 0 ]).ap.bind(null, List([ 0 ])), TypeError, 'throws when wrapped value is a falsey number')
-  t.throws(List([ 1 ]).ap.bind(null, List([ 0 ])), TypeError, 'throws when wrapped value is a truthy number')
-  t.throws(List([ '' ]).ap.bind(null, List([ 0 ])), TypeError, 'throws when wrapped value is a falsey string')
-  t.throws(List([ 'string' ]).ap.bind(null, List([ 0 ])), TypeError, 'throws when wrapped value is a truthy string')
-  t.throws(List([ false ]).ap.bind(null, List([ 0 ])), TypeError, 'throws when wrapped value is false')
-  t.throws(List([ true ]).ap.bind(null, List([ 0 ])), TypeError, 'throws when wrapped value is true')
-  t.throws(List([ [] ]).ap.bind(null, List([ 0 ])), TypeError, 'throws when wrapped value is an array')
-  t.throws(List([ {} ]).ap.bind(null, List([ 0 ])), TypeError, 'throws when wrapped value is an object')
-  t.throws(List([ noop, 'string' ]).ap.bind(null, List([ 0 ])), TypeError, 'throws when wrapped values are not all functions')
+  const noFunc = /List.ap: Wrapped values must be all be functions/
+  t.throws(left([ undefined ]), noFunc, 'throws when wrapped value is undefined')
+  t.throws(left([ null ]), noFunc, 'throws when wrapped value is null')
+  t.throws(left([ 0 ]), noFunc, 'throws when wrapped value is a falsey number')
+  t.throws(left([ 1 ]), noFunc, 'throws when wrapped value is a truthy number')
+  t.throws(left([ '' ]), noFunc, 'throws when wrapped value is a falsey string')
+  t.throws(left([ 'string' ]), noFunc, 'throws when wrapped value is a truthy string')
+  t.throws(left([ false ]), noFunc, 'throws when wrapped value is false')
+  t.throws(left([ true ]), noFunc, 'throws when wrapped value is true')
+  t.throws(left([ [] ]), noFunc, 'throws when wrapped value is an array')
+  t.throws(left([ {} ]), noFunc, 'throws when wrapped value is an object')
+  t.throws(left([  noop, 'string' ]), noFunc, 'throws when wrapped values are not all functions')
 
+  const ap = bindFunc(x => List([ noop ]).ap(x))
 
-  t.throws(ap(undefined), TypeError, 'throws with undefined')
-  t.throws(ap(null), TypeError, 'throws with null')
-  t.throws(ap(0), TypeError, 'throws with falsey number')
-  t.throws(ap(1), TypeError, 'throws with truthy number')
-  t.throws(ap(''), TypeError, 'throws with falsey string')
-  t.throws(ap('string'), TypeError, 'throws with truthy string')
-  t.throws(ap(false), TypeError, 'throws with false')
-  t.throws(ap(true), TypeError, 'throws with true')
-  t.throws(ap([]), TypeError, 'throws with an array')
-  t.throws(ap({}), TypeError, 'throws with an object')
-
-  t.doesNotThrow(ap(List([ 45 ])), 'allows a List when functions are wrapped')
+  const noList = /List.ap: List required/
+  t.throws(ap(undefined), noList, 'throws with undefined')
+  t.throws(ap(null), noList, 'throws with null')
+  t.throws(ap(0), noList, 'throws with falsey number')
+  t.throws(ap(1), noList, 'throws with truthy number')
+  t.throws(ap(''), noList, 'throws with falsey string')
+  t.throws(ap('string'), noList, 'throws with truthy string')
+  t.throws(ap(false), noList, 'throws with false')
+  t.throws(ap(true), noList, 'throws with true')
+  t.throws(ap([]), noList, 'throws with an array')
+  t.throws(ap({}), noList, 'throws with an object')
 
   t.end()
 })
@@ -427,27 +480,6 @@ test('List of', t => {
   t.equal(List.of, List([]).of, 'List.of is the same as the instance version')
   t.equal(List.of(0).type(), 'List', 'returns a List')
   t.same(List.of(0).value(), [ 0 ], 'wraps the value passed into List in an array')
-
-  t.end()
-})
-
-test('List fromArray', t => {
-  const fromArray = bindFunc(List.fromArray)
-
-  t.throws(fromArray(undefined), TypeError, 'throws with undefined')
-  t.throws(fromArray(null), TypeError, 'throws with null')
-  t.throws(fromArray(0), TypeError, 'throws with falsey number')
-  t.throws(fromArray(1), TypeError, 'throws with truthy number')
-  t.throws(fromArray(''), TypeError, 'throws with falsey string')
-  t.throws(fromArray('string'), TypeError, 'throws with truthy string')
-  t.throws(fromArray(false), TypeError, 'throws with false')
-  t.throws(fromArray(true), TypeError, 'throws with true')
-  t.throws(fromArray({}), TypeError, 'throws with an object')
-
-  const data = [[2, 1], 'a']
-
-  t.equal(List.fromArray([0]).type(), 'List', 'returns a List')
-  t.same(List.fromArray(data).value(), data, 'wraps the value passed into List in an array')
 
   t.end()
 })
@@ -475,31 +507,31 @@ test('List chain errors', t => {
 
   const f = x => List.of(x)
 
-  t.throws(chain(undefined), TypeError, 'throws with undefined')
-  t.throws(chain(null), TypeError, 'throws with null')
-  t.throws(chain(0), TypeError, 'throw with falsey number')
-  t.throws(chain(1), TypeError, 'throws with truthy number')
-  t.throws(chain(''), TypeError, 'throws with falsey string')
-  t.throws(chain('string'), TypeError, 'throws with truthy string')
-  t.throws(chain(false), TypeError, 'throws with false')
-  t.throws(chain(true), TypeError, 'throws with true')
-  t.throws(chain([]), TypeError, 'throws with an array')
-  t.throws(chain({}), TypeError, 'throws with an object')
+  const noFunc = /List.chain: Function required/
+  t.throws(chain(undefined), noFunc, 'throws with undefined')
+  t.throws(chain(null), noFunc, 'throws with null')
+  t.throws(chain(0), noFunc, 'throw with falsey number')
+  t.throws(chain(1), noFunc, 'throws with truthy number')
+  t.throws(chain(''), noFunc, 'throws with falsey string')
+  t.throws(chain('string'), noFunc, 'throws with truthy string')
+  t.throws(chain(false), noFunc, 'throws with false')
+  t.throws(chain(true), noFunc, 'throws with true')
+  t.throws(chain([]), noFunc, 'throws with an array')
+  t.throws(chain({}), noFunc, 'throws with an object')
 
-  t.throws(bad(undefined), TypeError, 'throws when function returns undefined')
-  t.throws(bad(null), TypeError, 'throws when function returns null')
-  t.throws(bad(0), TypeError, 'throws when function returns falsey number')
-  t.throws(bad(1), TypeError, 'throws when function returns truthy number')
-  t.throws(bad(''), TypeError, 'throws when function returns falsey string')
-  t.throws(bad('string'), TypeError, 'throws when function returns truthy string')
-  t.throws(bad(false), TypeError, 'throws when function returns false')
-  t.throws(bad(true), TypeError, 'throws when function returns true')
-  t.throws(bad([]), TypeError, 'throws when function returns an array')
-  t.throws(bad({}), TypeError, 'throws when function returns an object')
-  t.throws(bad(noop), TypeError, 'throws when function returns a function')
-  t.throws(bad(MockCrock), TypeError, 'throws when function a non-List ADT')
-
-  t.doesNotThrow(chain(f), 'allows a function')
+  const noList = /List.chain: Function must return a List/
+  t.throws(bad(undefined), noList, 'throws when function returns undefined')
+  t.throws(bad(null), noList, 'throws when function returns null')
+  t.throws(bad(0), noList, 'throws when function returns falsey number')
+  t.throws(bad(1), noList, 'throws when function returns truthy number')
+  t.throws(bad(''), noList, 'throws when function returns falsey string')
+  t.throws(bad('string'), noList, 'throws when function returns truthy string')
+  t.throws(bad(false), noList, 'throws when function returns false')
+  t.throws(bad(true), noList, 'throws when function returns true')
+  t.throws(bad([]), noList, 'throws when function returns an array')
+  t.throws(bad({}), noList, 'throws when function returns an object')
+  t.throws(bad(noop), noList, 'throws when function returns a function')
+  t.throws(bad(MockCrock), noList, 'throws when function a non-List ADT')
 
   t.end()
 })
@@ -535,19 +567,21 @@ test('List sequence errors', t => {
   const seq = bindFunc(List.of(MockCrock(2)).sequence)
   const seqBad = bindFunc(List.of(0).sequence)
 
-  t.throws(seq(undefined), TypeError, 'throws with undefined')
-  t.throws(seq(null), TypeError, 'throws with null')
-  t.throws(seq(0), TypeError, 'throws falsey with number')
-  t.throws(seq(1), TypeError, 'throws truthy with number')
-  t.throws(seq(''), TypeError, 'throws falsey with string')
-  t.throws(seq('string'), TypeError, 'throws with truthy string')
-  t.throws(seq(false), TypeError, 'throws with false')
-  t.throws(seq(true), TypeError, 'throws with true')
-  t.throws(seq([]), TypeError, 'throws with an array')
-  t.throws(seq({}), TypeError, 'throws with an object')
+  const err = /List.sequence: Applicative Function required/
+  t.throws(seq(undefined), err, 'throws with undefined')
+  t.throws(seq(null), err, 'throws with null')
+  t.throws(seq(0), err, 'throws falsey with number')
+  t.throws(seq(1), err, 'throws truthy with number')
+  t.throws(seq(''), err, 'throws falsey with string')
+  t.throws(seq('string'), err, 'throws with truthy string')
+  t.throws(seq(false), err, 'throws with false')
+  t.throws(seq(true), err, 'throws with true')
+  t.throws(seq([]), err, 'throws with an array')
+  t.throws(seq({}), err, 'throws with an object')
   t.doesNotThrow(seq(MockCrock), 'allows an Applicative returning function')
 
-  t.throws(seqBad(noop), TypeError, 'wrapping non-Applicative throws')
+  const noAppl = /List.sequence: Must wrap Applicatives/
+  t.throws(seqBad(noop), noAppl, 'wrapping non-Applicative throws')
 
   t.end()
 })
@@ -565,29 +599,32 @@ test('List sequence functionality', t => {
 test('List traverse errors', t => {
   const trav = bindFunc(List.of(2).traverse)
 
-  t.throws(trav(undefined, MockCrock), TypeError, 'throws with undefined in first argument')
-  t.throws(trav(null, MockCrock), TypeError, 'throws with null in first argument')
-  t.throws(trav(0, MockCrock), TypeError, 'throws falsey with number in first argument')
-  t.throws(trav(1, MockCrock), TypeError, 'throws truthy with number in first argument')
-  t.throws(trav('', MockCrock), TypeError, 'throws falsey with string in first argument')
-  t.throws(trav('string', MockCrock), TypeError, 'throws with truthy string in first argument')
-  t.throws(trav(false, MockCrock), TypeError, 'throws with false in first argument')
-  t.throws(trav(true, MockCrock), TypeError, 'throws with true in first argument')
-  t.throws(trav([], MockCrock), TypeError, 'throws with an array in first argument')
-  t.throws(trav({}, MockCrock), TypeError, 'throws with an object in first argument')
-  t.throws(trav(noop, MockCrock), TypeError, 'throws with non-Appicative returning function in first argument')
+  const noFunc = /List.traverse: Applicative returning functions required for both arguments/
+  t.throws(trav(undefined, MockCrock), noFunc, 'throws with undefined in first argument')
+  t.throws(trav(null, MockCrock), noFunc, 'throws with null in first argument')
+  t.throws(trav(0, MockCrock), noFunc, 'throws falsey with number in first argument')
+  t.throws(trav(1, MockCrock), noFunc, 'throws truthy with number in first argument')
+  t.throws(trav('', MockCrock), noFunc, 'throws falsey with string in first argument')
+  t.throws(trav('string', MockCrock), noFunc, 'throws with truthy string in first argument')
+  t.throws(trav(false, MockCrock), noFunc, 'throws with false in first argument')
+  t.throws(trav(true, MockCrock), noFunc, 'throws with true in first argument')
+  t.throws(trav([], MockCrock), noFunc, 'throws with an array in first argument')
+  t.throws(trav({}, MockCrock), noFunc, 'throws with an object in first argument')
 
-  t.throws(trav(MockCrock, undefined), TypeError, 'throws with undefined in second argument')
-  t.throws(trav(MockCrock, null), TypeError, 'throws with null in second argument')
-  t.throws(trav(MockCrock, 0), TypeError, 'throws falsey with number in second argument')
-  t.throws(trav(MockCrock, 1), TypeError, 'throws truthy with number in second argument')
-  t.throws(trav(MockCrock, ''), TypeError, 'throws falsey with string in second argument')
-  t.throws(trav(MockCrock, 'string'), TypeError, 'throws with truthy string in second argument')
-  t.throws(trav(MockCrock, false), TypeError, 'throws with false in second argument')
-  t.throws(trav(MockCrock, true), TypeError, 'throws with true in second argument')
-  t.throws(trav(MockCrock, []), TypeError, 'throws with an array in second argument')
-  t.throws(trav(MockCrock, {}), TypeError, 'throws with an object in second argument')
-  t.throws(trav(MockCrock, noop), TypeError, 'throws with non-Appicative returning function in second argument')
+  t.throws(trav(MockCrock, undefined), noFunc, 'throws with undefined in second argument')
+  t.throws(trav(MockCrock, null), noFunc, 'throws with null in second argument')
+  t.throws(trav(MockCrock, 0), noFunc, 'throws falsey with number in second argument')
+  t.throws(trav(MockCrock, 1), noFunc, 'throws truthy with number in second argument')
+  t.throws(trav(MockCrock, ''), noFunc, 'throws falsey with string in second argument')
+  t.throws(trav(MockCrock, 'string'), noFunc, 'throws with truthy string in second argument')
+  t.throws(trav(MockCrock, false), noFunc, 'throws with false in second argument')
+  t.throws(trav(MockCrock, true), noFunc, 'throws with true in second argument')
+  t.throws(trav(MockCrock, []), noFunc, 'throws with an array in second argument')
+  t.throws(trav(MockCrock, {}), noFunc, 'throws with an object in second argument')
+
+  const noAppl = /List.traverse: Both functions must return an Applicative/
+  t.throws(trav(noop, MockCrock), noAppl, 'throws with non-Appicative returning function in first argument')
+  t.throws(trav(MockCrock, noop), noAppl, 'throws with non-Appicative returning function in second argument')
 
   t.doesNotThrow(trav(MockCrock, MockCrock), 'allows Applicative returning functions')
 

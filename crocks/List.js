@@ -3,8 +3,10 @@
 
 const isApplicative = require('../predicates/isApplicative')
 const isArray = require('../predicates/isArray')
+const isEmpty = require('../predicates/isEmpty')
 const isFunction = require('../predicates/isFunction')
 const isSameType = require('../predicates/isSameType')
+const isSemigroup = require('../predicates/isSemigroup')
 
 const _inspect = require('../internal/inspect')
 const predOrFunc = require('../internal/predOrFunc')
@@ -137,6 +139,24 @@ function List(x) {
     return xs.reduce(fn, i)
   }
 
+  function fold() {
+    if(isEmpty(xs)) {
+      throw new TypeError('List.fold: List must contain at least one Semigroup')
+    }
+    if(xs.length === 1) {
+      if(!isSemigroup(xs[0])) {
+        throw new TypeError('List.fold: List must contain Semigroups of the same type')
+      }
+      return xs[0]
+    }
+    return xs.reduce(function(x, y) {
+      if(!(isSemigroup(x) && isSameType(x, y))) {
+        throw new TypeError('List.fold: List must contain Semigroups of the same type')
+      }
+      return x.concat(y)
+    })
+  }
+
   function filter(pred) {
     if(!(isFunction(pred) || isSameType(Pred, pred))) {
       throw new TypeError('List.filter: Pred or predicate function required')
@@ -172,7 +192,8 @@ function List(x) {
   }
 
   function ap(m) {
-    const allFuncs = xs.reduce((b, i) => b && isFunction(i), true)
+    const allFuncs =
+      xs.reduce((b, i) => b && isFunction(i), true)
 
     if(!allFuncs) {
       throw new TypeError('List.ap: Wrapped values must be all be functions')
@@ -216,7 +237,7 @@ function List(x) {
 
   return {
     inspect, value, toArray, head, tail, cons,
-    type, equals, concat, empty, reduce,
+    type, equals, concat, empty, reduce, fold,
     filter, reject, map, ap, of, chain,
     sequence, traverse
   }

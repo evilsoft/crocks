@@ -85,6 +85,7 @@ const pointFree = {
   either: require('./pointfree/either'),
   filter: require('./pointfree/filter'),
   first: require('./pointfree/first'),
+  fold: require('./pointfree/fold'),
   fst: require('./pointfree/fst'),
   head: require('./pointfree/head'),
   log: require('./pointfree/log'),

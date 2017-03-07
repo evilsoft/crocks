@@ -23,6 +23,7 @@ const crocks = {
   Pair: require('./crocks/Pair'),
   Pred: require('./crocks/Pred'),
   Reader: require('./crocks/Reader'),
+  Result: require('./crocks/Result'),
   Star: require('./crocks/Star'),
   State: require('./crocks/State'),
   Unit: require('./crocks/Unit'),
@@ -133,10 +134,17 @@ const predicates = {
 }
 
 const transforms = {
+  arrayToList: require('./transforms/arrayToList'),
   eitherToAsync: require('./transforms/eitherToAsync'),
   eitherToMaybe: require('./transforms/eitherToMaybe'),
+  eitherToResult: require('./transforms/eitherToResult'),
+  listToArray: require('./transforms/listToArray'),
   maybeToAsync: require('./transforms/maybeToAsync'),
-  maybeToEither: require('./transforms/maybeToEither')
+  maybeToEither: require('./transforms/maybeToEither'),
+  maybeToResult: require('./transforms/maybeToResult'),
+  resultToAsync: require('./transforms/resultToAsync'),
+  resultToEither: require('./transforms/resultToEither'),
+  resultToMaybe: require('./transforms/resultToMaybe')
 }
 
 module.exports = Object.assign(

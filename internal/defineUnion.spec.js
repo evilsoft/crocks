@@ -60,8 +60,3 @@ test('defineUnion resulting type', t => {
 
   t.end()
 })
-
-test('defineUnion constructors', t => {
-
-  t.end()
-})

@@ -1,6 +1,7 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
+const ifElse = require('../logic/ifElse')
 const isApplicative = require('../predicates/isApplicative')
 const isFunction = require('../predicates/isFunction')
 const isSameType = require('../predicates/isSameType')
@@ -38,8 +39,7 @@ function Maybe(u) {
     throw new TypeError('Maybe: Must wrap something, try using Nothing or Just constructors')
   }
 
-  const x = (u && isFunction(u.tag) && (u.tag() === 'Nothing' || u.tag() === 'Just'))
-    ? u : Just(u)
+  const x = ifElse(_maybe.includes, identity, Just, u)
 
   const of =
     _of

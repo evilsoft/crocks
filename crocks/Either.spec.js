@@ -667,7 +667,7 @@ test('Either chain properties (Chain)', t => {
   t.ok(isFunction(Right(0).ap), 'Right implements the Apply spec')
 
   t.ok(isFunction(Left(0).chain), 'Left provides a chain function')
-  t.ok(isFunction(Left(0).ap), 'Leftimplements the Apply spec')
+  t.ok(isFunction(Left(0).ap), 'Left implements the Apply spec')
 
   const f = x => Right(x + 2)
   const g = x => Right(x + 10)

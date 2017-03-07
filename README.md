@@ -84,6 +84,7 @@ All `Crocks` are Constructor functions of the given type, with `Writer` being an
 | `Pair` | --- | `ap`, `bimap`, `chain`, `concat`, `equals`, `fst`, `map`, `merge`, `of`, `snd`, `swap` |
 | `Pred` * | `empty` | `concat`, `contramap`, `empty`, `runWith`, `value` |
 | `Reader` | `ask`, `of`| `ap`, `chain`, `map`, `of`, `runWith` |
+| `Result` | `Err`, `Ok`, `of`| `alt`, `ap`, `bimap`, `chain`, `coalesce`, `concat`, `either`, `equals`, `map`, `of`, `sequence`, `swap`, `traverse` |
 | `Star` | -- | `both`, `concat`, `contramap`, `map`, `promap`, `runWith` |
 | `State` | `get`, `gets`, `modify` `of`, `put`| `ap`, `chain`, `evalWith`, `execWith`, `map`, `of`, `runWith` |
 | `Unit` | `empty`, `of` | `ap`, `chain`, `concat`, `empty`, `equals`, `map`, `of`, `value` |
@@ -303,27 +304,27 @@ These functions provide a very clean way to build out very simple functions and 
 ##### Datatypes
 | Function | Datatypes |
 |---|:---|
-| `alt` | `Async`, `Either`, `Maybe` |
-| `ap` | `Async`, `Const`, `Either`, `Identity`, `IO`, `List`, `Maybe`, `Pair`, `Reader`, `State`, `Unit`, `Writer` |
-| `bimap` | `Async`, `Either`, `Pair` |
+| `alt` | `Async`, `Either`, `Maybe`, `Result` |
+| `ap` | `Async`, `Const`, `Either`, `Identity`, `IO`, `List`, `Maybe`, `Pair`, `Reader`, `Result`, `State`, `Unit`, `Writer` |
+| `bimap` | `Async`, `Either`, `Pair`, `Result` |
 | `both` | `Arrow`, `Function`, `Star` |
-| `chain` | `Async`, `Const`, `Either`, `Identity`, `IO`, `List`, `Maybe`, `Pair`, `Reader`, `State`, `Unit`, `Writer` |
-| `coalesce` | `Async`, `Maybe`, `Either` |
-| `concat` | `All`, `Any`, `Array`, `Arrow`, `Assign`, `Const`, `Either`, `Identity`, `List`, `Max`, `Maybe`, `Min`, `Pair`, `Pred`, `Prod`, `Star`, `String`, `Sum`, `Unit` |
+| `chain` | `Async`, `Const`, `Either`, `Identity`, `IO`, `List`, `Maybe`, `Pair`, `Reader`, `Result`, `State`, `Unit`, `Writer` |
+| `coalesce` | `Async`, `Either`, `Maybe`, `Result` |
+| `concat` | `All`, `Any`, `Array`, `Arrow`, `Assign`, `Const`, `Either`, `Identity`, `List`, `Max`, `Maybe`, `Min`, `Pair`, `Pred`, `Prod`, `Result`, `Star`, `String`, `Sum`, `Unit` |
 | `cons` | `Array`, `List` |
 | `contramap` | `Arrow`, `Pred`, `Star` |
-| `either` | `Either`, `Maybe` |
+| `either` | `Either`, `Maybe`, `Result` |
 | `evalWith` | `State` |
 | `execWith` | `State` |
 | `filter` | `Array`, `List` |
 | `first` | `Arrow`, `Function`, `Star` |
 | `fold` | `Array`, `List` |
 | `fst` | `Pair` |
-| `head` | `Array`, `List` |
+| `head` | `Array`, `List`, `String` |
 | `log` | `Writer` |
-| `map` | `Async`, `Array`, `Arrow`, `Const`, `Either`, `Function`, `Identity`, `IO`, `List`, `Maybe`, `Pair`, `Reader`, `Star`, `State`, `Unit`, `Writer` |
+| `map` | `Async`, `Array`, `Arrow`, `Const`, `Either`, `Function`, `Identity`, `IO`, `List`, `Maybe`, `Pair`, `Reader`, `Result`, `Star`, `State`, `Unit`, `Writer` |
 | `merge` | `Pair` |
-| `option` | `Either`, `Maybe` |
+| `option` | `Maybe` |
 | `promap` | `Arrow`, `Star` |
 | `read` | `Writer` |
 | `reduce` | `Array`, `List` |
@@ -331,12 +332,12 @@ These functions provide a very clean way to build out very simple functions and 
 | `run` | `IO` |
 | `runWith` | `Arrow`, `Pred`, `Reader`, `Star`, `State` |
 | `second` | `Arrow`, `Function`, `Star` |
-| `sequence` | `Array`, `Either`, `Identity`, `List`, `Maybe` |
+| `sequence` | `Array`, `Either`, `Identity`, `List`, `Maybe`, `Result` |
 | `snd` | `Pair` |
-| `swap` | `Async`, `Either`, `Pair` |
+| `swap` | `Async`, `Either`, `Pair`, `Result` |
 | `tail` | `Array`, `List`, `String` |
-| `traverse` | `Array`, `Either`, `Identity`, `List`, `Maybe` |
-| `value` | `Arrow`, `Const`, `Identity`, `List`, `Pred`, `Unit`, `Writer` |
+| `traverse` | `Array`, `Either`, `Identity`, `List`, `Maybe`, `Result` |
+| `value` | `Const`, `Identity`, `Pred`, `Unit`, `Writer` |
 
 ### Transformation Functions
 Transformation functions are mostly used to reduce unwanted nesting of similar types. Take for example the following structure:
@@ -454,6 +455,11 @@ bad
 | `arrayToList` | `[ a ] -> List a` | `(a -> [ b ]) -> a -> List b` |
 | `eitherToAsync` | `Either e a -> Async e a` | `(a -> Either e b) -> a -> Async e b` |
 | `eitherToMaybe` | `Either b a -> Maybe a` | `(a -> Either c b) -> a -> Maybe b` |
+| `eitherToResult` | `Either e a -> Result e a` | `(a -> Either e b) -> a -> Result e b` |
 | `listToArray` | `List a -> [ a ]` | `(a -> List b) -> a -> [ b ]` |
 | `maybeToAsync` | `e -> Maybe a -> Async e a` | `e -> (a -> Maybe b) -> a -> Async e b` |
 | `maybeToEither` | `c -> Maybe a -> Either c a` | `c -> (a -> Maybe b) -> a -> Either c b` |
+| `maybeToResult` | `c -> Maybe a -> Result c a` | `c -> (a -> Maybe b) -> a -> Result c b` |
+| `resultToAsync` | `Result e a -> Async e a` | `(a -> Result e b) -> a -> Async e b` |
+| `resultToEither` | `Result e a -> Either e a` | `(a -> Result e b) -> a -> Either e b` |
+| `resultToMaybe` | `Result b a -> Maybe a` | `(a -> Result c b) -> a -> Maybe b` |

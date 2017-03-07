@@ -279,6 +279,7 @@ These functions provide a very clean way to build out very simple functions and 
 | `execWith` | `a -> m -> b` |
 | `filter` | `((a -> Boolean) | Pred a) -> m a -> m a` |
 | `first` | `m (a -> b) -> m (Pair a c -> Pair b c)` |
+| `fold` | `Semigroup s => m s -> s` |
 | `fst` | `m a b -> a` |
 | `head` | `m a -> Maybe a` |
 | `log` | `m a b -> a` |
@@ -316,6 +317,7 @@ These functions provide a very clean way to build out very simple functions and 
 | `execWith` | `State` |
 | `filter` | `Array`, `List` |
 | `first` | `Arrow`, `Function`, `Star` |
+| `fold` | `Array`, `List` |
 | `fst` | `Pair` |
 | `head` | `Array`, `List` |
 | `log` | `Writer` |

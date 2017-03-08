@@ -103,6 +103,7 @@ All `Monoids` provide `empty` and `type` function on their Constructors as well 
 | `All` | Boolean | Logical AND | `true` |
 | `Any` | Boolean | Logical OR | `false` |
 | `Assign` | Object | `Object.assign` | `{}` |
+| `Endo` | Function | `compose` | `identity` |
 | `Max` | Number | `Math.max` | `-Infinity` |
 | `Min` | Number | `Math.min` | `Infinity` |
 | `Prod` | Number | Multiplication | `1` |
@@ -310,7 +311,7 @@ These functions provide a very clean way to build out very simple functions and 
 | `both` | `Arrow`, `Function`, `Star` |
 | `chain` | `Async`, `Const`, `Either`, `Identity`, `IO`, `List`, `Maybe`, `Pair`, `Reader`, `Result`, `State`, `Unit`, `Writer` |
 | `coalesce` | `Async`, `Either`, `Maybe`, `Result` |
-| `concat` | `All`, `Any`, `Array`, `Arrow`, `Assign`, `Const`, `Either`, `Identity`, `List`, `Max`, `Maybe`, `Min`, `Pair`, `Pred`, `Prod`, `Result`, `Star`, `String`, `Sum`, `Unit` |
+| `concat` | `All`, `Any`, `Array`, `Arrow`, `Assign`, `Const`, `Either`, `Endo`, `Identity`, `List`, `Max`, `Maybe`, `Min`, `Pair`, `Pred`, `Prod`, `Result`, `Star`, `String`, `Sum`, `Unit` |
 | `cons` | `Array`, `List` |
 | `contramap` | `Arrow`, `Pred`, `Star` |
 | `either` | `Either`, `Maybe`, `Result` |
@@ -330,7 +331,7 @@ These functions provide a very clean way to build out very simple functions and 
 | `reduce` | `Array`, `List` |
 | `reject` | `Array`, `List` |
 | `run` | `IO` |
-| `runWith` | `Arrow`, `Pred`, `Reader`, `Star`, `State` |
+| `runWith` | `Arrow`, `Endo`, `Pred`, `Reader`, `Star`, `State` |
 | `second` | `Arrow`, `Function`, `Star` |
 | `sequence` | `Array`, `Either`, `Identity`, `List`, `Maybe`, `Result` |
 | `snd` | `Pair` |

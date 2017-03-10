@@ -140,6 +140,25 @@ When you want to branch a computation into two parts, this is the function you w
 #### `compose : ((y -> z), (x -> y), ..., (a -> b)) -> a -> z`
 While the `composeB` can be used to create a composition of two functions, there are times when you want to compose an entire flow together. That is where `compose` is useful. With `compose` you can create a right-to-left composition of functions. It will return you a function that represents your flow. Not really sold on writing flows from right-to-left? Well then, I would recommend reaching for `pipe`.
 
+#### `composeP : Promise p => ((y -> p z c), (x -> p y c), ..., (a -> p b c)) -> a -> p z c`
+When working with `Promise`s, it is common place to create chains on a `Promise`'s `then` function:
+```js
+const promFunc = x =>
+  promiseSomething(x)
+    .then(doSomething)
+    .then(doAnother)
+```
+
+Doing this involves a lot of boilerplate and forces you into a fluent style, whether you want to be or not. Using `composeP` you have the option to compose a series of `Promise` returning functions like you would any other function composition, in a right-to-left fashion. Like so:
+
+```js
+const { composeP } = crocks
+
+const promFunc =
+  composeP(doAnother, doSomething, promiseSomething)
+```
+Due to the nature of the `then` function, only the head of your composition needs to return a `Promise`. This will create a function that takes a value, which is passed through your chain, returning a `Promise` which can be extended. This is only a `then` chain, it does not do anything with the `catch` function.
+
 #### `curry : ((a, b, ...) -> z) -> a -> b -> ... -> z`
 Pass this function a function and it will return you a function that can be called in any form that you require until all arguments have been provided. For example if you pass a function: `f : (a, b, c) -> d` you get back a function that can be called in any combination, such as: `f(x, y, z)`, `f(x)(y)(z)`, `f(x, y)(z)`, or even `f(x)(y, z)`. This is great for doing partial application on functions for maximum re-usability.
 
@@ -168,6 +187,21 @@ There are times in Javascript development where you only want to call a function
 
 #### `pipe : ((a -> b), (b -> c), ..., (y -> z)) -> a -> z`
 If you find yourself not able to come to terms with doing the typical right-to-left composition, then `crocks` provides a means to accommodate you. This function does the same thing as `compose`, the only difference is it allows you define your flows in a left-to-right manner.
+
+#### `pipeP : Promise p => ((a -> p b d), (b -> p c d), ..., (y -> p z d)) -> a -> p z d`
+Like the `composeP` function, `pipeP` will let you remove the standard boilerplate that comes with working with `Promise` chains. The only difference between `pipeP` and `composeP` is that it takes its functions in a left-to-right order:
+
+```js
+const { pipeP } = crocks
+
+const promFunc = x =>
+  promise(x)
+    .then(doSomething)
+    .then(doAnother)
+
+const promPipe =
+  pipeP(proimse, doSomething, doAnother)
+```
 
 #### `prop : (String | Number) -> a -> Maybe b`
 If you want some safety around pulling a value out of an Object or Array with a single key or index, you can always reach for `prop`. Well, as long as you are working with non-nested data that is. Just tell `prop` either the key or index you are interested in, and you will get back a function that will take anything and return a `Just` with the wrapped value if the key/index exists. If the key/index does not exist however, you will get back a `Nothing`.
@@ -228,6 +262,7 @@ All functions in this group have a signature of `* -> Boolean` and are used with
 * `isNil : a -> Boolean`: undefined or null
 * `isNumber : a -> Boolean`: Number that is not a NaN value, Infinity included
 * `isObject : a -> Boolean`: Plain Old Javascript Object (POJO)
+* `isPromise : a -> Boolean`: An object implementing `then` and `catch`
 * `isSameType : a -> b -> Boolean`: Constructor matches a values type, or two values types match
 * `isSemigroup : a -> Boolean`: an ADT that provides a `concat` function
 * `isSetoid : a -> Boolean`: an ADT that provides an `equals` function

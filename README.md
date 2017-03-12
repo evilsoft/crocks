@@ -50,26 +50,26 @@ const All = require('crocks/monoids/All')
 ## What is in this?
 There are (6) classifications of "things" included in this library:
 
-* Crocks (`crocks/crocks`): These are the ADTs that this library is centered around. They are all Functor based Data Types that provide different computational contexts for working in a more declarative, functional flow. For the most part, a majority of the other bits in `crocks` exist to serve these ADTs.
+* [Crocks](#crocks) (`crocks/crocks`): These are the ADTs that this library is centered around. They are all Functor based Data Types that provide different computational contexts for working in a more declarative, functional flow. For the most part, a majority of the other bits in `crocks` exist to serve these ADTs.
 
-* Monoids (`crocks/monoids`): These helpful ADTs are in a class of their own, not really Functors in their own right (although some can be), they are still very useful in our everyday programming needs. Ever need to Sum a list of Numbers or mix a mess of objects together? This is were you will find the ADTs you need to do that.
+* [Monoids](#monoids) (`crocks/monoids`): These helpful ADTs are in a class of their own, not really Functors in their own right (although some can be), they are still very useful in our everyday programming needs. Ever need to Sum a list of Numbers or mix a mess of objects together? This is were you will find the ADTs you need to do that.
 
-* Combinators (`crocks/combinators`): A collection of functions that are used for working with other functions. These do things like compose (2) functions together, or flip arguments on a function. They typically either take a function, return a function or a bit a both. These are considered the glue that holds the mighty house of `Crocks` together and a valuable aid in writing reusable code.
+* [Combinators](#combinators) (`crocks/combinators`): A collection of functions that are used for working with other functions. These do things like compose (2) functions together, or flip arguments on a function. They typically either take a function, return a function or a bit a both. These are considered the glue that holds the mighty house of `Crocks` together and a valuable aid in writing reusable code.
 
-* Helper Functions (`crocks/helpers`): All other support functions that are either convenient versions of combinators or not even combinators at all cover this group.
+* [Helper Functions](#helper-functions) (`crocks/helpers`): All other support functions that are either convenient versions of combinators or not even combinators at all cover this group.
 
-* Logic Functions (`crocks/logic`): A helpful collection of Logic based combinators. All of these functions work with predicate functions and let you combine them in some very interesting ways.
+* [Logic Functions](#logic-functions) (`crocks/logic`): A helpful collection of Logic based combinators. All of these functions work with predicate functions and let you combine them in some very interesting ways.
 
-* Predicate Functions (`crocks/predicates`): A helpful collection of predicate functions to get you started.
+* [Predicate Functions](#predicate-functions) (`crocks/predicates`): A helpful collection of predicate functions to get you started.
 
-* Point-free Functions (`crocks/pointfree`): Wanna use these ADTs in a way that you never have to reference the actual data being worked on? Well here is where you will find all of these functions to do that. For every algebra available on both the `Crocks` and `Monoids` there is a function here.
+* [Point-free Functions](#point-free-functions) (`crocks/pointfree`): Wanna use these ADTs in a way that you never have to reference the actual data being worked on? Well here is where you will find all of these functions to do that. For every algebra available on both the `Crocks` and `Monoids` there is a function here.
 
-* Transformation Functions (`crocks/transform`): All the functions found here are used to transform from one type to another, naturally. These come are handy in situations where you have functions that return one type (like an `Either`), but are working in a context of another (say `Maybe`). You would like to compose these, but in doing so will result in a nesting that you will need to account for for the rest of your flow.
+* [Transformation Functions](#transformation-functions) (`crocks/transform`): All the functions found here are used to transform from one type to another, naturally. These come are handy in situations where you have functions that return one type (like an `Either`), but are working in a context of another (say `Maybe`). You would like to compose these, but in doing so will result in a nesting that you will need to account for for the rest of your flow.
 
 ### Crocks
 The `Crocks` are the heart and soul of this library. This is where you will find all your favorite ADT's you have grown to :heart:. They include gems such as: `Maybe`, `Either` and `IO`, to name a few. The are usually just a simple constructor that takes either a function or value (depending on the type) and will return you a "container" that wraps whatever you passed it. Each container provides a variety of functions that act as the operations you can do on the contained value. There are many types that share the same function names, but what they do from type to type may vary.  Every Crock provides type function on the Constructor and both inspect and type functions on their Instances.
 
-All `Crocks` are Constructor functions of the given type, with `Writer` being an exception. The `Writer` function takes a `Monoid` that will represent the `log`. Once you provide the `Monoid`, the function will return the `Writer` Constructor for your `Writer` using that specific `Monoid`.
+All `Crocks` are Constructor functions of the given type, with `Writer` being an exception. The `Writer` function takes a [`Monoid`](#monoids) that will represent the `log`. Once you provide the [`Monoid`](#monoids), the function will return the `Writer` Constructor for your `Writer` using that specific [`Monoid`](#monoids).
 
 | Crock | Constructor | Instance |
 |---|:---|:---|
@@ -93,7 +93,7 @@ All `Crocks` are Constructor functions of the given type, with `Writer` being an
 \* based on [this article](https://medium.com/@drboolean/monoidal-contravariant-functors-are-actually-useful-1032211045c4#.polugsx2a)
 
 ### Monoids
-Each `Monoid` provides a means to represent a binary operation and is usually locked down to a specific type. These are great when you need to combine a list of values down to one value. In this library, any ADT that provides both an `empty` and `concat` function can be used as a `Monoid`. There are a few of the `Crocks` that are also monoidial, so be on the look out for those as well. All `Monoids` work with the point-free functions `mconcat`, `mreduce`, `mconcatMap` and `mreduceMap`.
+Each `Monoid` provides a means to represent a binary operation and is usually locked down to a specific type. These are great when you need to combine a list of values down to one value. In this library, any ADT that provides both an `empty` and `concat` function can be used as a `Monoid`. There are a few of the [`Crocks`](#crocks) that are also monoidial, so be on the look out for those as well. All `Monoids` work with the point-free functions [`mconcat`](#mconcat), [`mreduce`](#mreduce), [`mconcatMap`](#mconcatmap) and [`mreduceMap`](#mreducemap).
 
 All `Monoids` provide `empty` and `type` function on their Constructors as well as the following Instance Functions: inspect, `type`, `value`, `empty` and `concat`.
 
@@ -110,37 +110,67 @@ All `Monoids` provide `empty` and `type` function on their Constructors as well 
 | `Sum` | Number | Addition | `0` |
 
 ### Combinators
-#### `applyTo : (a -> b) -> a -> b`
+#### applyTo
+```haskell
+applyTo : (a -> b) -> a -> b
+```
 Seems really silly, but is quite useful for a lot of things. It takes a function and a value and then returns the result of that function with the argument applied.
 
-#### `composeB : (b -> c) -> (a -> b) -> a -> c`
-Provides a means to describe a composition between two functions. it takes two functions and an value. Given `composeB(f, g)`, which is read `f` after `g`, it will return a function that will take value `a` and apply it to `g`, passing the result as an argument to `f`, and will finally return the result of `f`. (This allows only two functions, if you want to avoid things like: `composeB(composeB(f, g), composeB(h, i))` then check out `crocks/helpers/compose`.)
+#### composeB
+```haskell
+composeB : (b -> c) -> (a -> b) -> a -> c
+```
+Provides a means to describe a composition between two functions. it takes two functions and an value. Given `composeB(f, g)`, which is read `f` after `g`, it will return a function that will take value `a` and apply it to `g`, passing the result as an argument to `f`, and will finally return the result of `f`. (This allows only two functions, if you want to avoid things like: `composeB(composeB(f, g), composeB(h, i))` then check out [`compose`](#compose).)
 
-#### `constant : a -> _ -> a`
+#### constant
+```haskell
+constant : a -> _ -> a
+```
 This is a very handy dandy function, used a lot. Pass it any value and it will give you back a function that will return that same value no matter what you pass it.
 
-#### `flip : (a -> b -> c) -> b -> a -> c`
+#### flip
+```haskell
+flip : (a -> b -> c) -> b -> a -> c
+```
 This little function just takes a function and returns a function that takes the first two parameters in reverse. One can compose flip calls down the line to flip all, or some of the other parameters if there are more than two. Mix and match to your :heart:'s desire.
 
-#### `identity :  a -> a`
-This function and `constant` are the workhorses of writing code with this library. It quite simply is just a function that when you pass it something, it returns that thing right back to you. So simple, I will leave it as an exercise to reason about why this is so powerful and important.
+#### identity
+```haskell
+identity :  a -> a
+```
+This function and [`constant`](#constant) are the workhorses of writing code with this library. It quite simply is just a function that when you pass it something, it returns that thing right back to you. So simple, I will leave it as an exercise to reason about why this is so powerful and important.
 
-#### `reverseApply : a -> (a -> b) -> b`
+#### reverseApply
+```haskell
+reverseApply : a -> (a -> b) -> b
+```
 Ever run into a situation where you have a value but do not have a function to apply it to? Well this little bird, named Thrush, is there to help out. Just give it a value and it will give you back a function ready to take a function. Once that function is provided, it will return the result of applying your value to that function.
 
-#### `substitution : (a -> b -> c) -> (a -> b) -> a -> c`
+#### substitution
+```haskell
+substitution : (a -> b -> c) -> (a -> b) -> a -> c
+```
 While it a complicated little bugger, it can come in very handy from time to time. In it's first two arguments it takes functions. The first must be binary and the second unary. That will return you a function that is ready to take some value. Once supplied the fun starts, it will pass the `a` to the first argument of both functions, and the result of the second function to the second parameter of the first function. Finally after all that juggling, it will return the result of that first function. When used with partial application on that first parameter, a whole new world of combinatory madness is presented!
 
 ### Helper Functions
-#### `branch : a -> Pair a a`
+#### branch
+```haskell
+branch : a -> Pair a a
+```
 When you want to branch a computation into two parts, this is the function you want to reach for. All it does is let you pass in any `a` and will return you a `Pair` that has your value on both the first and second parameter. This allows you to work on the value in two separate computation paths. Be advised that this is Javascript and if `a` is an object type (`Object`, `Array`, `Date`, etc) they will reference each other.
 
 **Pro-Tip**: `Pair` provides a `merge` function that will let you fold the two values into a single value.
 
-#### `compose : ((y -> z), (x -> y), ..., (a -> b)) -> a -> z`
-While the `composeB` can be used to create a composition of two functions, there are times when you want to compose an entire flow together. That is where `compose` is useful. With `compose` you can create a right-to-left composition of functions. It will return you a function that represents your flow. Not really sold on writing flows from right-to-left? Well then, I would recommend reaching for `pipe`.
+#### compose
+```haskell
+compose : ((y -> z), (x -> y), ..., (a -> b)) -> a -> z
+```
+While the [`composeB`](#composeb) can be used to create a composition of two functions, there are times when you want to compose an entire flow together. That is where `compose` is useful. With `compose` you can create a right-to-left composition of functions. It will return you a function that represents your flow. Not really sold on writing flows from right-to-left? Well then, I would recommend reaching for [`pipe`](#pipe).
 
-#### `composeP : Promise p => ((y -> p z c), (x -> p y c), ..., (a -> p b c)) -> a -> p z c`
+#### composeP
+```haskell
+composeP : Promise p => ((y -> p z c), (x -> p y c), ..., (a -> p b c)) -> a -> p z c
+```
 When working with `Promise`s, it is common place to create chains on a `Promise`'s `then` function:
 ```js
 const promFunc = x =>
@@ -157,39 +187,69 @@ const { composeP } = crocks
 const promFunc =
   composeP(doAnother, doSomething, promiseSomething)
 ```
-Due to the nature of the `then` function, only the head of your composition needs to return a `Promise`. This will create a function that takes a value, which is passed through your chain, returning a `Promise` which can be extended. This is only a `then` chain, it does not do anything with the `catch` function.
+Due to the nature of the `then` function, only the head of your composition needs to return a `Promise`. This will create a function that takes a value, which is passed through your chain, returning a `Promise` which can be extended. This is only a `then` chain, it does not do anything with the `catch` function. If you would like to provide your functions in a left-to-right manner, check out [pipeP](#pipep).
 
-#### `curry : ((a, b, ...) -> z) -> a -> b -> ... -> z`
+#### curry
+```haskell
+curry : ((a, b, ...) -> z) -> a -> b -> ... -> z
+```
 Pass this function a function and it will return you a function that can be called in any form that you require until all arguments have been provided. For example if you pass a function: `f : (a, b, c) -> d` you get back a function that can be called in any combination, such as: `f(x, y, z)`, `f(x)(y)(z)`, `f(x, y)(z)`, or even `f(x)(y, z)`. This is great for doing partial application on functions for maximum re-usability.
 
-#### `curryN : Number -> ((a, b, ...) -> z) -> a -> b -> ... -> z`
-When dealing with variable argument functions, there are times when you may want to curry a specific number of arguments. Just pass this function the number of arguments you want to curry as well as the function, and it will not call the wrapped function until all arguments have been passed. This function will ONLY pass the number of arguments that you specified, any remaining arguments are discarded. This is great for limiting the arity of a given function when additional parameters are defaulted or not needed. This function will not auto curry functions returning functions like `curry` does, use with `curry` if you need to do some fancy setup for your wrapped function's API.
+#### curryN
+```haskell
+curryN : Number -> ((a, b, ...) -> z) -> a -> b -> ... -> z
+```
+When dealing with variable argument functions, there are times when you may want to curry a specific number of arguments. Just pass this function the number of arguments you want to curry as well as the function, and it will not call the wrapped function until all arguments have been passed. This function will ONLY pass the number of arguments that you specified, any remaining arguments are discarded. This is great for limiting the arity of a given function when additional parameters are defaulted or not needed. This function will not auto curry functions returning functions like [`curry`](#curry) does, use with [`curry`](#curry) if you need to do some fancy setup for your wrapped function's API.
 
-#### `fanout : (a -> b) -> (a -> c) -> (a -> Pair b c)`
-#### `fanout : Arrow a b -> Arrow a c -> Arrow a (Pair b c)`
-#### `fanout : Monad m => Star a (m b) -> Star a (m c) -> Star a (m (Pair b c))`
-There are may times that you need to keep some running or persistent state while performing a given computation. A common way to do this is to take the input to the computation and branch it into a `Pair` and perform different operations on each version of the input. This is such a common pattern that it warrents the `fanout` function to take care of the initial split and mapping. Just provide a pair of either simple functions or a pair of one of the computation types (`Arrow` or `Star`). You will get back something of the same type that is configured to split it's input into a pair and than apply the first Function/ADT to the first portion of the underlying `Pair` and the second on the second.
+#### fanout
+```haskell
+fanout : (a -> b) -> (a -> c) -> (a -> Pair b c)
+fanout : Arrow a b -> Arrow a c -> Arrow a (Pair b c)
+fanout : Monad m => Star a (m b) -> Star a (m c) -> Star a (m (Pair b c))
+```
+There are may times that you need to keep some running or persistent state while performing a given computation. A common way to do this is to take the input to the computation and branch it into a `Pair` and perform different operations on each version of the input. This is such a common pattern that it warrants the `fanout` function to take care of the initial split and mapping. Just provide a pair of either simple functions or a pair of one of the computation types (`Arrow` or `Star`). You will get back something of the same type that is configured to split it's input into a pair and than apply the first Function/ADT to the first portion of the underlying `Pair` and the second on the second.
 
-#### `liftA2 : Applicative m => (a -> b -> c) -> m a -> m b -> m c`
-#### `liftA3 : Applicative m => (a -> b -> c -> d) -> m a -> m b -> m c -> m d`
-Ever see yourself wanting to `map` a binary or tri-ary function, but `map` only allows unary functions? Both of these functions allow you to pass in your function as well as the number of `Applicatives` (containers that provide both `of` and `ap` functions) you need to get the mapping you are looking for.
+#### liftA2
+#### liftA3
+```haskell
+liftA2 : Applicative m => (a -> b -> c) -> m a -> m b -> m c
+liftA3 : Applicative m => (a -> b -> c -> d) -> m a -> m b -> m c -> m d
+```
+Ever see yourself wanting to `map` a binary or tri-nary function, but `map` only allows unary functions? Both of these functions allow you to pass in your function as well as the number of `Applicatives` (containers that provide both `of` and `ap` functions) you need to get the mapping you are looking for.
 
-#### `mconcat : Monoid m => m -> ([ a ] | List a) -> m a`
-#### `mreduce : Monoid m => m -> ([ a ] | List a) -> a`
-These two functions are very handy for combining an entire `List` or `Array` of values by providing a `Monoid` and your collection of values. The difference between the two is that `mconcat` returns the result inside the `Monoid` used to combine them. Where `mreduce` returns the bare value itself.
+#### mconcat
+#### mreduce
+```haskell
+mconcat : Monoid m => m -> ([ a ] | List a) -> m a
+mreduce : Monoid m => m -> ([ a ] | List a) -> a
+```
+These two functions are very handy for combining an entire `List` or `Array` of values by providing a [`Monoid`](#monoids) and your collection of values. The difference between the two is that `mconcat` returns the result inside the [`Monoid`](#monoids) used to combine them. Where `mreduce` returns the bare value itself.
 
-#### `mconcatMap : Monoid m => m -> (b -> a) -> ([ b ] | List b) -> m a`
-#### `mreduceMap : Monoid m => m -> (b -> a) -> ([ b ] | List b) -> a`
-There comes a time where the values you have in a `List` or an `Array` are not in the type that is needed for the `Monoid` you want to combine with. These two functions can be used to `map` some transforming function from a given type into the type needed for the `Monoid`. In essence, this function will run each value through the function before it lifts the value into the `Monoid`, before `concat` is applied. The difference between the two is that `mconcatMap` returns the result inside the `Monoid` used to combine them. Where `mreduceMap` returns the bare value itself.
+#### mconcatMap
+#### mreduceMap
+```haskell
+mconcatMap : Monoid m => m -> (b -> a) -> ([ b ] | List b) -> m a
+mreduceMap : Monoid m => m -> (b -> a) -> ([ b ] | List b) -> a
+```
+There comes a time where the values you have in a `List` or an `Array` are not in the type that is needed for the [`Monoid`](#monoids) you want to combine with. These two functions can be used to `map` some transforming function from a given type into the type needed for the [`Monoid`](#monoids). In essence, this function will run each value through the function before it lifts the value into the [`Monoid`](#monoids), before `concat` is applied. The difference between the two is that `mconcatMap` returns the result inside the [`Monoid`](#monoids) used to combine them. Where `mreduceMap` returns the bare value itself.
 
-#### `once : ((*) -> a) -> ((*) -> a)`
-There are times in Javascript development where you only want to call a function once and memoize the first result for every subsequent call to that function. Just pass the function you want guarded to `once` and you will get back a function with the expected guarantees.
+#### once
+```haskell
+once : ((*) -> a) -> ((*) -> a)
+```
+There are times in Javascript development where you only want to call a function once and memo-ize the first result for every subsequent call to that function. Just pass the function you want guarded to `once` and you will get back a function with the expected guarantees.
 
-#### `pipe : ((a -> b), (b -> c), ..., (y -> z)) -> a -> z`
-If you find yourself not able to come to terms with doing the typical right-to-left composition, then `crocks` provides a means to accommodate you. This function does the same thing as `compose`, the only difference is it allows you define your flows in a left-to-right manner.
+#### pipe
+```haskell
+pipe : ((a -> b), (b -> c), ..., (y -> z)) -> a -> z
+```
+If you find yourself not able to come to terms with doing the typical right-to-left composition, then `crocks` provides a means to accommodate you. This function does the same thing as [`compose`](#compose), the only difference is it allows you define your flows in a left-to-right manner.
 
-#### `pipeP : Promise p => ((a -> p b d), (b -> p c d), ..., (y -> p z d)) -> a -> p z d`
-Like the `composeP` function, `pipeP` will let you remove the standard boilerplate that comes with working with `Promise` chains. The only difference between `pipeP` and `composeP` is that it takes its functions in a left-to-right order:
+#### pipeP
+```haskell
+pipeP : Promise p => ((a -> p b d), (b -> p c d), ..., (y -> p z d)) -> a -> p z d
+```
+Like the [`composeP`](#composep) function, `pipeP` will let you remove the standard boilerplate that comes with working with `Promise` chains. The only difference between `pipeP` and [`composeP`](#composep) is that it takes its functions in a left-to-right order:
 
 ```js
 const { pipeP } = crocks
@@ -203,47 +263,83 @@ const promPipe =
   pipeP(proimse, doSomething, doAnother)
 ```
 
-#### `prop : (String | Number) -> a -> Maybe b`
+#### prop
+```haskell
+prop : (String | Number) -> a -> Maybe b
+```
 If you want some safety around pulling a value out of an Object or Array with a single key or index, you can always reach for `prop`. Well, as long as you are working with non-nested data that is. Just tell `prop` either the key or index you are interested in, and you will get back a function that will take anything and return a `Just` with the wrapped value if the key/index exists. If the key/index does not exist however, you will get back a `Nothing`.
 
-#### `propPath : [ String | Number ] -> a -> Maybe b`
-While `prop` is good for simple, single-level structures, there may come a time when you have to work with nested POJOs or Arrays. When you run into this situation, just pull in `propPath` and pass it a left-to-right traversal path of keys, indices or a combination of both (gross...but possible). This will kick you back a function that behaves just like `prop`. You pass it some data, and it will attempt to resolve your provided path. If the path is valid, it will return the value residing there (`null` included!) in a `Just`. But if at any point that path "breaks" it will give you back a `Nothing`.
+#### propPath
+```haskell
+propPath : [ String | Number ] -> a -> Maybe b
+```
+While [`prop`](#prop) is good for simple, single-level structures, there may come a time when you have to work with nested POJOs or Arrays. When you run into this situation, just pull in `propPath` and pass it a left-to-right traversal path of keys, indices or a combination of both (gross...but possible). This will kick you back a function that behaves just like [`prop`](#prop). You pass it some data, and it will attempt to resolve your provided path. If the path is valid, it will return the value residing there (`null` included!) in a `Just`. But if at any point that path "breaks" it will give you back a `Nothing`.
 
-#### `safe : ((a -> Boolean) | Pred) -> a -> Maybe a`
+#### safe
+```haskell
+safe : ((a -> Boolean) | Pred) -> a -> Maybe a
+```
 When using a `Maybe`, it is a common practice to lift into a `Just` or a `Nothing` depending on a condition on the value to be lifted.  It is so common that it warrants a function, and that function is called `safe`. Provide a predicate (a function that returns a Boolean) and a value to be lifted. The value will be evaluated against the predicate, and will lift it into a `Just` if true and a `Nothing` if false.
 
-#### `safeLift : ((a -> Boolean) | Pred) -> (a -> b) -> a -> Maybe b`
-While `safe` is used to lift a value into a `Maybe`, you can reach for `safeLift` when you want to run a function in the safety of the `Maybe` context. Just like `safe`, you pass it either a `Pred` or a predicate function to determine if you get a `Just` or a `Nothing`, but then instead of a value, you pass it a unary function. `safeLift` will then give you back a new function that will first lift its argument into a `Maybe` and then maps your original function over the result.
+#### safeLift
+```haskell
+safeLift : ((a -> Boolean) | Pred) -> (a -> b) -> a -> Maybe b
+```
+While [`safe`](#safe) is used to lift a value into a `Maybe`, you can reach for `safeLift` when you want to run a function in the safety of the `Maybe` context. Just like [`safe`](#safe), you pass it either a `Pred` or a predicate function to determine if you get a `Just` or a `Nothing`, but then instead of a value, you pass it a unary function. `safeLift` will then give you back a new function that will first lift its argument into a `Maybe` and then maps your original function over the result.
 
-#### `tap : (a -> b) -> a -> a`
-It is hard knowing what is going on inside of some of these ADTs or your wonderful function compositions. Debugging can get messy when you need to insert a side-effect into your flow for introspection purposes. With `tap`, you can intervene in your otherwise pristine flow and make sure that the original value is passed along to the next step of your flow. This function does not guarantee immutability for reference types (Objects, Arrays, etc), you will need to exercise some discipline here to not mutate.
+#### tap
+```haskell
+tap : (a -> b) -> a -> a
+```
+It is hard knowing what is going on inside of some of these ADTs or your wonderful function compositions. Debugging can get messy when you need to insert a side-effect into your flow for introspection purposes. With `tap`, you can intervene in your otherwise pristine flow and make sure that the original value is passed along to the next step of your flow. This function does not guarantee immutability for reference types (`Objects`, `Arrays`, etc), you will need to exercise some discipline here to not mutate.
 
-#### `tryCatch : (a -> b) -> a -> Either e b`
+#### tryCatch
+```haskell
+tryCatch : (a -> b) -> a -> Either e b
+```
 Typical try-catch blocks are very imperative in their usage. This `tryCatch` function provides a means of capturing that imperative nature in a simple declarative style. Pass it a function that could fail and it will return you another function wrapping the first function. When called the new function will either return the result in an `Either.Right` if everything was good, or an error wrapped in an `Either.Left` if it fails.
 
 ### Logic Functions
-The functions in this section are used to represent logical branching in a declarative manner. Each of these functions require either `Pred`s or predicate functions in their input. Since these functions work with Preds and predicate functions, rather than values, this allows for composeable, "lazy" evaluation.
+The functions in this section are used to represent logical branching in a declarative manner. Each of these functions require either `Pred`s or predicate functions in their input. Since these functions work with `Pred`s and predicate functions, rather than values, this allows for composeable, "lazy" evaluation.
 
-#### `and : ((a -> Boolean) | Pred) -> ((a -> Boolean) | Pred) -> a -> Boolean`
+#### and
+```haskell
+and : ((a -> Boolean) | Pred) -> ((a -> Boolean) | Pred) -> a -> Boolean
+```
 Say you have two predicate functions or `Pred`s and would like to combine them into one predicate over conjunction, well you came to the right place, `and` accepts either predicate functions or `Pred`s and will return you a function ready to take a value. Once that value is passed, it will run it through both of the predicates and return the result of combining it over a `logical and`. This is super helpful combined with `or` for putting together reusable, complex predicates. As they follow the general form of `(a -> Boolean)` they are easily combined with other logic functions.
 
-#### `ifElse : ((a -> Boolean) | Pred) -> (* -> a) -> (* -> a) -> * -> a`
+#### ifElse
+```haskell
+ifElse : ((a -> Boolean) | Pred) -> (* -> a) -> (* -> a) -> * -> a
+```
 Whenever you need to modify a value based some condition and want a functional way to do it without some imperative `if` statement, then reach for `ifElse`. This function take a predicate (some function that returns a Boolean) and two functions. The first is what is executed when the predicate is true, the second on a false condition. This will return a function ready to take a value to run through the predicate. After the value is evaluated, it will be ran through it's corresponding function, returning the result as the final result. This function comes in really handy when creating lifting functions for Sum Types (like `Either` or `Maybe`).
 
-#### `not : ((a -> Boolean) | Pred) -> a -> Boolean`
+#### not
+```haskell
+not : ((a -> Boolean) | Pred) -> a -> Boolean
+```
 When you need to negate a predicate function or a `Pred`, but want a new predicate function that does the negation, then `not` is going to get you what you need. Using `not` will allow you to stay as declarative as possible. Just pass `not` your predicate function or a `Pred`, and it will give you back a predicate function ready for insertion into your flow. All predicate based functions in `crocks` take either a `Pred` or predicate function, so it should be easy to swap between the two.
 
-#### `or : ((a -> Boolean) | Pred) -> ((a -> Boolean) | Pred) -> a -> Boolean`
+#### or
+```haskell
+or : ((a -> Boolean) | Pred) -> ((a -> Boolean) | Pred) -> a -> Boolean
+```
 Say you have two predicate functions or `Pred`s and would like to combine them into one predicate over disjunction, look no further, `or` accepts either predicate functions or `Pred`s and will return you a function ready to take a value. Once that value is passed, it will run it through both of the predicates and return the result of combining it over a `logical or`. This is super helpful combined with `and` for putting together reusable, complex predicates. As they follow the general form of `(a -> Boolean)` they are easily combined with other logic functions.
 
-#### `unless : ((a -> Boolean) | Pred) -> (* -> a) -> * -> a`
-There may come a time when you need to adjust a value when a condition is false, that is where `unless` can come into play. Just provide a predicate function (a function that returns a Boolean) and a function to apply your desired modification. This will get you back a function that when you pass it a value, it will evaluate it and if false, will run your value through the provided function. Either the original or modified value will be returned depending on the result of the predicate. Check out `when` for a negated version of this function.
+#### unless
+```haskell
+unless : ((a -> Boolean) | Pred) -> (* -> a) -> * -> a
+```
+There may come a time when you need to adjust a value when a condition is false, that is where `unless` can come into play. Just provide a predicate function (a function that returns a Boolean) and a function to apply your desired modification. This will get you back a function that when you pass it a value, it will evaluate it and if false, will run your value through the provided function. Either the original or modified value will be returned depending on the result of the predicate. Check out [`when`](#when) for a negated version of this function.
 
-#### `when : ((a -> Boolean) | Pred) -> (* -> a) -> * -> a`
-There may come a time when you need to adjust a value when a condition is true, that is where `when` can come into play. Just provide a predicate function (a function that returns a Boolean) and a function to apply your desired modification. This will get you back a function that when you pass it a value, it will evaluate it and if true, will run your value through the provided function. Either the original or modified value will be returned depending on the result of the predicate. Check out `unless` for a negated version of this function.
+#### when
+```haskell
+when : ((a -> Boolean) | Pred) -> (* -> a) -> * -> a
+```
+There may come a time when you need to adjust a value when a condition is true, that is where `when` can come into play. Just provide a predicate function (a function that returns a Boolean) and a function to apply your desired modification. This will get you back a function that when you pass it a value, it will evaluate it and if true, will run your value through the provided function. Either the original or modified value will be returned depending on the result of the predicate. Check out [`unless`](#unless) for a negated version of this function.
 
 ### Predicate Functions
-All functions in this group have a signature of `* -> Boolean` and are used with the many predicate based functions that ship with `crocks`, like `safe`, `ifElse` and `filter` to name a few. They also fit naturally with the `Pred` ADT. Below is a list of all the current predicates that are included with a description of their truth:
+All functions in this group have a signature of `* -> Boolean` and are used with the many predicate based functions that ship with `crocks`, like [`safe`](#safe), [`ifElse`](#ifelse) and `filter` to name a few. They also fit naturally with the `Pred` ADT. Below is a list of all the current predicates that are included with a description of their truth:
 
 * `hasKey : (String | Number) -> a -> Boolean`: An Array or Object that contains the provided index or key
 * `isAlt : a -> Boolean`: an ADT that provides `map` and `alt` functions

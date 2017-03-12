@@ -33,6 +33,7 @@ const crocks = {
 const helpers = {
   branch: require('./helpers/branch'),
   compose: require('./helpers/compose'),
+  composeP: require('./helpers/composeP'),
   curry: require('./helpers/curry'),
   curryN: require('./helpers/curryN'),
   fanout: require('./helpers/fanout'),
@@ -44,6 +45,7 @@ const helpers = {
   mreduceMap: require('./helpers/mreduceMap'),
   once: require('./helpers/once'),
   pipe: require('./helpers/pipe'),
+  pipeP: require('./helpers/pipeP'),
   prop: require('./helpers/prop'),
   propPath: require('./helpers/propPath'),
   safe: require('./helpers/safe'),
@@ -127,6 +129,7 @@ const predicates = {
   isNil: require('./predicates/isNil'),
   isNumber: require('./predicates/isNumber'),
   isObject: require('./predicates/isObject'),
+  isPromise: require('./predicates/isPromise'),
   isSameType: require('./predicates/isSameType'),
   isSetoid: require('./predicates/isSetoid'),
   isSemigroup: require('./predicates/isSemigroup'),

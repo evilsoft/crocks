@@ -1,8 +1,9 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isFoldable= require('../predicates/isFoldable')
+const isFoldable = require('../predicates/isFoldable')
 const isFunction = require('../predicates/isFunction')
+const isPromise = require('../predicates/isPromise')
 
 const _inspect = require('../internal/inspect')
 const argsArray = require('../internal/argsArray')
@@ -56,9 +57,6 @@ function fromNode(fn, ctx) {
   }
 }
 
-const hasPromiseInterface =
-  x => x && isFunction(x.then) && isFunction(x.catch)
-
 function fromPromise(fn) {
   if(!isFunction(fn)) {
     throw new TypeError('Async.fromPromise: Promise returning function required')
@@ -70,7 +68,7 @@ function fromPromise(fn) {
     return Async(function(reject, resolve) {
       const promise = fn.apply(null, promiseArgs)
 
-      if(!hasPromiseInterface(promise)) {
+      if(!isPromise(promise)) {
         throw new TypeError('Async.fromPromise: Promise returning function required')
       }
 

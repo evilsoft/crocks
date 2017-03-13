@@ -1,4 +1,37 @@
 # Change Log for `crocks`
+v0.4.1 -- Mar. 12, 2017
+--
+### Additions
+* Crocks:
+  * `Result`
+* Crock Instance Functions:
+  * `List fold`
+* Helper Functions:
+  * `composeP`
+  * `pipeP`
+* Monoids:
+  * `Endo`
+* Pointfree Functions:
+  * `fold`
+* Predicate Functions:
+  * `isPromise`
+* Transformation Functions:
+  * `eitherToResult`
+  * `maybeToResult`
+  * `resultToAsync`
+  * `resultToEither`
+  * `resultToMaybe`
+
+### Bug fixes
+* Lock `Pred` down to returning `Boolean` values as defined.
+
+### Pull Requests
+* [#91 - `Pred` should only return `Boolean`s](https://github.com/evilsoft/crocks/pull/91)
+* [#101 - Add `fold` to List and a pointfree version for Arrays/Lists](https://github.com/evilsoft/crocks/pull/101)
+* [#100 - Add the Result Crock](https://github.com/evilsoft/crocks/pull/100)
+* [#104 - Add the Endo Monoid](https://github.com/evilsoft/crocks/pull/104)
+* [#107 - Add `composeP`, `pipeP` and `isPromise`](https://github.com/evilsoft/crocks/pull/107)
+
 v0.4.0 -- Feb. 26, 2017
 --
 ### Additions

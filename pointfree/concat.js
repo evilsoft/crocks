@@ -3,12 +3,13 @@
 
 const curry = require('../helpers/curry')
 
+const isSameType = require('../predicates/isSameType')
 const isSemigroup = require('../predicates/isSemigroup')
 const isString = require('../predicates/isString')
 
 function concat(x, m) {
-  if(!isSemigroup(m)) {
-    throw new TypeError('concat: Semigroup required for second argument')
+  if(!(isSemigroup(m) && isSameType(x, m))) {
+    throw new TypeError('concat: Semigroups of the same type required both arguments')
   }
 
   if(isString(m)) {

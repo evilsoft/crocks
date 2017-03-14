@@ -348,6 +348,7 @@ All functions in this group have a signature of `* -> Boolean` and are used with
 * `isArray : a -> Boolean`: Array
 * `isBoolean : a -> Boolean`: Boolean
 * `isDefined : a -> Boolean`: Every value that is not `undefined`, `null` included
+* `isChain : a -> Boolean`: an ADT that provides `map`, `ap` and `chain` functions
 * `isEmpty : a -> Boolean`: Empty Object, Array or String
 * `isFoldable : a -> Boolean`: Array, List or any structure with a `reduce` function
 * `isFunction : a -> Boolean`: Function
@@ -437,10 +438,10 @@ These functions provide a very clean way to build out very simple functions and 
 | Function | Datatypes |
 |---|:---|
 | `alt` | `Async`, `Either`, `Maybe`, `Result` |
-| `ap` | `Async`, `Const`, `Either`, `Identity`, `IO`, `List`, `Maybe`, `Pair`, `Reader`, `Result`, `State`, `Unit`, `Writer` |
+| `ap` | `Array`, `Async`, `Const`, `Either`, `Identity`, `IO`, `List`, `Maybe`, `Pair`, `Reader`, `Result`, `State`, `Unit`, `Writer` |
 | `bimap` | `Async`, `Either`, `Pair`, `Result` |
 | `both` | `Arrow`, `Function`, `Star` |
-| `chain` | `Async`, `Const`, `Either`, `Identity`, `IO`, `List`, `Maybe`, `Pair`, `Reader`, `Result`, `State`, `Unit`, `Writer` |
+| `chain` | `Array`, `Async`, `Const`, `Either`, `Identity`, `IO`, `List`, `Maybe`, `Pair`, `Reader`, `Result`, `State`, `Unit`, `Writer` |
 | `coalesce` | `Async`, `Either`, `Maybe`, `Result` |
 | `concat` | `All`, `Any`, `Array`, `Arrow`, `Assign`, `Const`, `Either`, `Endo`, `Identity`, `List`, `Max`, `Maybe`, `Min`, `Pair`, `Pred`, `Prod`, `Result`, `Star`, `String`, `Sum`, `Unit` |
 | `cons` | `Array`, `List` |

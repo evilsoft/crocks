@@ -196,7 +196,7 @@ function List(x) {
       xs.reduce((b, i) => b && isFunction(i), true)
 
     if(!allFuncs) {
-      throw new TypeError('List.ap: Wrapped values must be all be functions')
+      throw new TypeError('List.ap: Wrapped values must all be functions')
     }
     else if(!isSameType(List, m)) {
       throw new TypeError('List.ap: List required')

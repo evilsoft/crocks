@@ -341,7 +341,7 @@ There may come a time when you need to adjust a value when a condition is true, 
 ### Predicate Functions
 All functions in this group have a signature of `* -> Boolean` and are used with the many predicate based functions that ship with `crocks`, like [`safe`](#safe), [`ifElse`](#ifelse) and `filter` to name a few. They also fit naturally with the `Pred` ADT. Below is a list of all the current predicates that are included with a description of their truth:
 
-* `hasKey : (String | Number) -> a -> Boolean`: An Array or Object that contains the provided index or key
+* `hasProp : (String | Number) -> a -> Boolean`: An Array or Object that contains the provided index or key
 * `isAlt : a -> Boolean`: an ADT that provides `map` and `alt` functions
 * `isApplicative : a -> Boolean`: an ADT that provides `map`, `ap` and `of` functions
 * `isApply : a -> Boolean`: an ADT that provides `map` and `ap` functions

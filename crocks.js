@@ -112,7 +112,7 @@ const pointFree = {
 }
 
 const predicates = {
-  hasKey: require('./predicates/hasKey'),
+  hasProp: require('./predicates/hasProp'),
   isAlt: require('./predicates/isAlt'),
   isApplicative: require('./predicates/isApplicative'),
   isApply: require('./predicates/isApply'),

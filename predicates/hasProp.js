@@ -6,13 +6,13 @@ const curry = require('../helpers/curry')
 const isString = require('./isString')
 const isInteger = require('./isInteger')
 
-// hasKey : (String | Number) -> a -> Boolean
-function hasKey(key, x) {
+// hasProp : (String | Number) -> a -> Boolean
+function hasProp(key, x) {
   if(!(isString(key) || isInteger(key))) {
-    throw new TypeError('has: Number or String required for first argument')
+    throw new TypeError('hasProp: Number or String required for first argument')
   }
 
   return (!!x && x[key] !== undefined)
 }
 
-module.exports = curry(hasKey)
+module.exports = curry(hasProp)

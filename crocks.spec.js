@@ -101,7 +101,7 @@ const or = require('./logic/or')
 const when = require('./logic/when')
 const unless = require('./logic/unless')
 
-const hasKey = require('./predicates/hasKey')
+const hasProp = require('./predicates/hasProp')
 const isAlt = require('./predicates/isAlt')
 const isApplicative = require('./predicates/isApplicative')
 const isApply = require('./predicates/isApply')
@@ -239,7 +239,7 @@ test('entry', t => {
   t.equal(crocks.when, when, 'provides the when logic function')
   t.equal(crocks.unless, unless, 'provides the unless logic function')
 
-  t.equal(crocks.hasKey, hasKey, 'provides the hasKey function')
+  t.equal(crocks.hasProp, hasProp, 'provides the hasProp function')
   t.equal(crocks.isAlt, isAlt, 'provides the isAlt function')
   t.equal(crocks.isApplicative, isApplicative, 'provides the isApplicative function')
   t.equal(crocks.isApply, isApply, 'provides the isApply function')

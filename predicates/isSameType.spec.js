@@ -7,9 +7,6 @@ const noop = helpers.noop
 const isSameType = require('./isSameType')
 
 test('isSameType predicate function', t => {
-  const first = { type: () => 'first' }
-  const second = { type: () => 'second' }
-
   t.ok(isFunction(isSameType), 'is a function')
 
   t.end()

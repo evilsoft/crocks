@@ -1,12 +1,9 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isFunction = require('../predicates/isFunction')
-
-const _inspect = require('../internal/inspect')
-const isSameType = require('../predicates/isSameType')
-
 const constant = require('../combinators/constant')
+const isFunction = require('../predicates/isFunction')
+const isSameType = require('../predicates/isSameType')
 
 const _type =
   constant('Unit')

@@ -13,6 +13,8 @@ const fold = require('./fold')
 test('fold pointfree errors', t => {
   const f = bindFunc(fold)
 
+  t.ok(isFunction(fold), 'is a function')
+
   const noFold = /fold: Non-empty Foldable with at least one Semigroup is required/
   t.throws(f(undefined), noFold, 'throws when passed undefined')
   t.throws(f(null), noFold, 'throws when passed null')
@@ -30,8 +32,8 @@ test('fold pointfree errors', t => {
   t.throws(f([ 0 ]), noSemi, 'throws when passed a single element array with no semigroup')
 
   const notSame = /fold: Foldable must contain Semigroups of the same type/
-  t.throws(f([ '', 0 ]), noSemi, 'throws when not elements are semigroups')
-  t.throws(f([ '', [] ]), noSemi, 'throws when different semigroups')
+  t.throws(f([ '', 0 ]), notSame, 'throws when not elements are semigroups')
+  t.throws(f([ '', [] ]), notSame, 'throws when different semigroups')
 
   t.end()
 })

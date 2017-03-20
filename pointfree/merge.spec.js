@@ -47,7 +47,7 @@ test('merge arrow', t => {
   const x = 34
   const m = { merge: sinon.spy(constant(x)) }
 
-  const result = merge(identity)(m)
+  merge(identity, m)
 
   t.ok(m.merge.calledWith(identity), 'calls merge on arrow, passing the function')
   t.ok(m.merge.returned(x), 'returns the result of m.merge')

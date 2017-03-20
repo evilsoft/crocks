@@ -29,7 +29,7 @@ const _of =
   x => Async((_, resolve) => resolve(x))
 
 const Rejected =
-  x => Async((reject, _) => reject(x))
+  x => Async((reject) => reject(x))
 
 function all(asyncs) {
   if(!(isFoldable(asyncs) && allAsyncs(asyncs))) {
@@ -163,7 +163,7 @@ function Async(fn) {
 
     return Async((rej, res) => {
       fork(
-        _ => m.fork(rej, res),
+        () => m.fork(rej, res),
         res
       )
     })

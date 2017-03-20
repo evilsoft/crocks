@@ -212,8 +212,8 @@ test('IO chain properties (Chain)', t => {
   t.ok(isFunction(IO(noop).chain), 'provides a chain function')
   t.ok(isFunction(IO(noop).ap), 'implements the Apply spec')
 
-  const f = x => IO(_ => x + 2)
-  const g = x => IO(_ => x + 10)
+  const f = x => IO(() => x + 2)
+  const g = x => IO(() => x + 10)
 
   const a = x => IO(constant(x)).chain(f).chain(g)
   const b = x => IO(constant(x)).chain(y => f(y).chain(g))

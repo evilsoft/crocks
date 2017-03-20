@@ -34,7 +34,7 @@ const _type =
 const concatErr =
   m => x => m.either(
     y => and(isSemigroup, isSameType(y), x) ? x.concat(y) : x,
-    _ => x
+    () => x
   )
 
 function runSequence(x) {
@@ -158,7 +158,7 @@ function Result(u) {
           throw new TypeError('Result.ap: Wrapped value must be a function')
         }
 
-        return m.either(Result.Err, _ => m.map(fn))
+        return m.either(Result.Err, () => m.map(fn))
       }
     )
   }

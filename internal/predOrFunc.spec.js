@@ -1,10 +1,6 @@
 const test = require('tape')
 const sinon = require('sinon')
 
-const helpers = require('../test/helpers')
-
-const noop = helpers.noop
-
 const isFunction = require('../predicates/isFunction')
 const predOrFunc = require('./predOrFunc')
 

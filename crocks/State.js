@@ -141,7 +141,7 @@ State.type =
   _type
 
 State.get =
-  _ => State(s => Pair(s, s))
+  () => State(s => Pair(s, s))
 
 State.gets =
   gets

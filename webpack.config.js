@@ -1,5 +1,3 @@
-const webpack = require('webpack')
-
 module.exports = {
   entry: './crocks.js',
   output: {

@@ -179,7 +179,6 @@ test('Either concat errors', t => {
   const m = { type: () => 'Either...Not' }
 
   const good = Either.Right([])
-  const bad = Either.Left([])
 
   const f = bindFunc(Either.Right([]).concat)
   const nonEitherErr = /Either.concat: Either of Semigroup required/

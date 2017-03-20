@@ -51,7 +51,7 @@ test('ap applicative', t => {
   const m = mock({ ap: sinon.spy(identity) })
   const x = mock({ ap: sinon.spy(identity) })
 
-  const result = ap(m)(x)
+  ap(m, x)
 
   t.ok(x.ap.calledWith(m), 'calls the ap method on the second arg passing in the first arg')
 

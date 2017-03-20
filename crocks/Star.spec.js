@@ -242,7 +242,7 @@ test('Star contramap functionality', t => {
   t.equal(m.type(), 'Star', 'returns a Star')
   t.notOk(spy.called, 'does not call mapping function initially')
 
-  const result = m.runWith(x)
+  m.runWith(x)
 
   t.ok(spy.called, 'calls mapping function when ran')
   t.equal(m.runWith(x).value(), x, 'returns the result of the resulting composition')
@@ -320,7 +320,7 @@ test('Star promap functionality', t => {
   t.notOk(spyLeft.called, 'does not call left mapping function initially')
   t.notOk(spyRight.called, 'does not call right mapping function initially')
 
-  const result = m.runWith(x)
+  m.runWith(x)
 
   t.ok(spyLeft.called, 'calls left mapping function when ran')
   t.ok(spyRight.called, 'calls right mapping function when ran')
@@ -375,7 +375,7 @@ test('Star first', t => {
 
   t.doesNotThrow(runWith(Pair(1, 2)), 'does not throw when inner value is a Pair')
 
-  const notValid = bindFunc(x => Star(_ => x).first().runWith(Pair(2, 3)))
+  const notValid = bindFunc(x => Star(() => x).first().runWith(Pair(2, 3)))
 
   t.throws(notValid(undefined), TypeError, 'throws with undefined input')
   t.throws(notValid(null), TypeError, 'throws with null as input')
@@ -416,7 +416,7 @@ test('Star second', t => {
 
   t.doesNotThrow(runWith(Pair(1, 2)), 'does not throw when inner value is a Pair')
 
-  const notValid = bindFunc(x => Star(_ => x).second().runWith(Pair(2, 3)))
+  const notValid = bindFunc(x => Star(() => x).second().runWith(Pair(2, 3)))
 
   t.throws(notValid(undefined), TypeError, 'throws when computation returns undefined')
   t.throws(notValid(null), TypeError, 'throws when computation returns null')
@@ -459,7 +459,7 @@ test('Star both', t => {
 
   t.doesNotThrow(runWith(Pair(1, 2)), 'does not throw when inner value is a Pair')
 
-  const notValid = bindFunc(x => Star(_ => x).both().runWith(Pair(2, 3)))
+  const notValid = bindFunc(x => Star(() => x).both().runWith(Pair(2, 3)))
 
   t.throws(notValid(undefined), TypeError, 'throws when computation returns undefined')
   t.throws(notValid(null), TypeError, 'throws when computation returns null')

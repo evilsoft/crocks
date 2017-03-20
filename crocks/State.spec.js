@@ -9,7 +9,6 @@ const isObject = require('../predicates/isObject')
 const isFunction = require('../predicates/isFunction')
 
 const composeB = require('../combinators/composeB')
-const constant = require('../combinators/constant')
 const identity = require('../combinators/identity')
 
 const Pair = require('./Pair')
@@ -400,7 +399,7 @@ test('State chain errors', t => {
   t.throws(noPair({}), TypeError, 'throws when inner function returns an object')
   t.throws(noPair(noop), TypeError, 'throws when inner function returns a function')
 
-  const noState = bindFunc(State(x => Pair(0, 0)).chain(identity).runWith)
+  const noState = bindFunc(State(() => Pair(0, 0)).chain(identity).runWith)
 
   t.throws(noState(undefined), TypeError, 'throws when chain function returns undefined')
   t.throws(noState(null), TypeError, 'throws when chain function returns null')

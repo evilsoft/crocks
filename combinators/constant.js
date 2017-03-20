@@ -5,6 +5,6 @@ const curry = require('../helpers/curry')
 
 // Constant (Kestrel)
 // constant :: a -> b -> a
-const constant = x => _ => x
+const constant = x => () => x
 
 module.exports = curry(constant)

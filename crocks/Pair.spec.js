@@ -389,8 +389,8 @@ test('Pair chain errors', t => {
   const badChain = bindFunc(Pair(0, 0).chain)
   const chain = bindFunc(Pair([], 0).chain)
 
-  const badFn = x => Pair(0, 0)
-  const fn = x => Pair([], 0)
+  const badFn = () => Pair(0, 0)
+  const fn = () => Pair([], 0)
 
   t.throws(badChain(noop), TypeError, 'throws if wrapped first value is not a Semigroup')
   t.throws(chain(badFn), TypeError, 'throws if monadic function returns a Pair with a non-Semigroup as first value')

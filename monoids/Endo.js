@@ -2,7 +2,6 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const isFunction = require('../predicates/isFunction')
-const isNil = require('../predicates/isNil')
 const isSameType = require('../predicates/isSameType')
 
 const _inspect = require('../internal/inspect')

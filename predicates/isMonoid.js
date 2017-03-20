@@ -2,7 +2,6 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const isFunction = require('./isFunction')
-const isSemigroup = require('./isSemigroup')
 
 // isMonoid :: a -> Boolean
 function isMonoid(m) {

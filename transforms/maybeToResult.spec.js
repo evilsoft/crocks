@@ -16,7 +16,6 @@ const maybeToResult = require('./maybeToResult')
 test('maybeToResult transform', t => {
   const f = bindFunc(maybeToResult)
   const x = 23
-  const m = Maybe.of(x)
 
   t.ok(isFunction(maybeToResult), 'is a function')
 

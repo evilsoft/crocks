@@ -1,5 +1,15 @@
 {
   "asi": true,
+  "curly": true,
+  "eqeqeq": true,
   "esversion": 6,
-  "laxbreak": true
+  "freeze": true,
+  "funcscope": true,
+  "globals": {
+    "require": true,
+    "module": true
+  },
+  "laxbreak": true,
+  "undef": true,
+  "unused": true
 }

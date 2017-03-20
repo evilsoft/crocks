@@ -5,7 +5,6 @@ const bindFunc = helpers.bindFunc
 
 const identity = require('../combinators/identity')
 
-const isArray = require('../predicates/isArray')
 const isFunction = require('../predicates/isFunction')
 const isSameType = require('../predicates/isSameType')
 

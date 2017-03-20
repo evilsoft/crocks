@@ -4,8 +4,6 @@
 const isFunction = require('../predicates/isFunction')
 const isSameType = require('../predicates/isSameType')
 
-const identity = require('../combinators/identity')
-
 const Pair = require('../crocks/Pair')
 
 function both(m) {

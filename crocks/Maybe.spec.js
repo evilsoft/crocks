@@ -463,9 +463,7 @@ test('Maybe of', t => {
 
 test('Maybe of properties (Applicative)', t => {
   const m = Maybe.Just(identity)
-
   const j = Maybe.Just(3)
-  const n = Maybe.Nothing()
 
   t.ok(isFunction(j.of), 'Just provides an of function')
   t.ok(isFunction(j.ap), 'Just implements the Apply spec')
@@ -487,7 +485,6 @@ test('Maybe of properties (Applicative)', t => {
 
 test('Maybe chain errors', t => {
   const chain = bindFunc(Maybe(0).chain)
-  const nChain = bindFunc(Maybe(undefined).chain)
 
   t.throws(chain(undefined), TypeError, 'throws with undefined')
   t.throws(chain(null), TypeError, 'throws with null')

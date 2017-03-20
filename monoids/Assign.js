@@ -1,7 +1,6 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isFunction = require('../predicates/isFunction')
 const isNil = require('../predicates/isNil')
 const isObject = require('../predicates/isObject')
 const isSameType = require('../predicates/isSameType')

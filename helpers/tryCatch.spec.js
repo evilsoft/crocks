@@ -35,7 +35,7 @@ test('tryCatch', t => {
 
 test('tryCatch functionality', t => {
   const f = x => x
-  const g = _ =>  { throw new Error('silly error') }
+  const g = () =>  { throw new Error('silly error') }
 
   const extract =
     either(constant('left'), constant('right'))

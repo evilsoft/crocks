@@ -20,7 +20,6 @@ const Pred      = require('./Pred')
 const List = require('./List')
 
 test('List', t => {
-  const m = bindFunc(List)
   const f = x => List(x).toArray()
 
   t.ok(isFunction(List), 'is a function')
@@ -504,8 +503,6 @@ test('List of properties (Applicative)', t => {
 test('List chain errors', t => {
   const chain = bindFunc(List([ 0 ]).chain)
   const bad = bindFunc(x => List.of(x).chain(identity))
-
-  const f = x => List.of(x)
 
   const noFunc = /List.chain: Function required/
   t.throws(chain(undefined), noFunc, 'throws with undefined')

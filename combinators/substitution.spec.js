@@ -1,5 +1,4 @@
 const test = require('tape')
-const sinon = require('sinon')
 const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc

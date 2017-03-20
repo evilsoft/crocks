@@ -9,7 +9,7 @@ const isPromise = require('../predicates/isPromise')
 
 function applyPipe(f, g) {
   return function() {
-    p = f.apply(null, arguments)
+    const p = f.apply(null, arguments)
 
     if(!isPromise(p)) {
       throw new TypeError('pipeP: Only accepts Promise returning functions')

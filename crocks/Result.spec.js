@@ -114,7 +114,6 @@ test('Result concat errors', t => {
   const m = { type: () => 'Result...Not' }
 
   const good = Result.Ok([])
-  const bad = Result.Err([])
 
   const f = bindFunc(Result.Ok([]).concat)
 
@@ -575,7 +574,7 @@ test('Result ap errors', t => {
 
 test('Result Err ap functionality', t => {
   const Err = Result.Err
-  const m = Result.Ok(x => y => z => x)
+  const m = Result.Ok(x => () => () => x)
 
   const extract = either(identity, constant('Ok'))
 

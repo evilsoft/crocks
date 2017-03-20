@@ -8,9 +8,7 @@ const isSameType = require('../predicates/isSameType')
 const _inspect = require('../internal/inspect')
 const innerConcat = require('../internal/innerConcat')
 
-const composeB = require('../combinators/composeB')
 const constant = require('../combinators/constant')
-const identity = require('../combinators/identity')
 
 const _type =
   constant('Identity')

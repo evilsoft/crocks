@@ -76,13 +76,13 @@ test('Async Resolved', t => {
 })
 
 test('Async fromPromise', t => {
-  const resProm = x => new Promise((res, _) => res(x))
+  const resProm = x => new Promise((res) => res(x))
 
   t.ok(isFunction(Async.fromPromise), 'is a function')
   t.ok(isFunction(Async.fromPromise(resProm)), 'returns a function')
 
   const fn = bindFunc(Async.fromPromise)
-  const fork = bindFunc(x => Async.fromPromise(_ => x)().fork(noop, noop))
+  const fork = bindFunc(x => Async.fromPromise(() => x)().fork(noop, noop))
 
   t.throws(fn(undefined), TypeError, 'throws with undefined')
   t.throws(fn(null), TypeError, 'throws with null')
@@ -116,7 +116,7 @@ test('Async fromPromise resolution', t => {
   const val = 'super fun'
 
   const rejProm = x => new Promise((_, rej) => rej(x))
-  const resProm = x => new Promise((res, _) => res(x))
+  const resProm = x => new Promise((res) => res(x))
 
   const rej = y => x => t.equal(x, y, 'rejects a rejected Promise')
   const res = y => x => t.equal(x, y, 'resolves a resolved Promise')
@@ -228,7 +228,7 @@ test('Async type', t => {
 
 test('Async fork', t => {
   const resolved = Async((_, res) => res('resolved'))
-  const rejected = Async((rej, _) => rej('rejected'))
+  const rejected = Async((rej) => rej('rejected'))
 
   const res = sinon.spy(identity)
   const rej = sinon.spy(identity)
@@ -305,7 +305,7 @@ test('Async swap', t => {
   t.throws(fn(noop, {}), TypeError, 'throws with object in right')
   t.throws(fn(noop, []), TypeError, 'throws with array in right')
 
-  const rejected = Async((rej, _) => rej('silly')).swap(constant('was rejected'), identity)
+  const rejected = Async((rej) => rej('silly')).swap(constant('was rejected'), identity)
   const resolved = Async((_, res) => res('silly')).swap(identity, constant('was resolved'))
 
   const rej = sinon.spy()
@@ -346,7 +346,7 @@ test('Async coalesce', t => {
   t.throws(fn(noop, {}), TypeError, 'throws with object in right')
   t.throws(fn(noop, []), TypeError, 'throws with array in right')
 
-  const rejected = Async((rej, _) => rej()).coalesce(constant('was rejected'), identity)
+  const rejected = Async((rej) => rej()).coalesce(constant('was rejected'), identity)
   const resolved = Async((_, res) => res()).coalesce(identity, constant('was resolved'))
 
   const rej = sinon.spy()
@@ -384,8 +384,8 @@ test('Async map errors', t => {
 test('Async map functionality', t => {
   const mapFn = sinon.spy()
 
-  const rejected = Async((rej, _) => rej('rejected')).map(mapFn).fork(noop, noop)
-  const resolved = Async((_, res) => res('resolved')).map(mapFn).fork(noop, noop)
+  Async((rej) => rej('rejected')).map(mapFn).fork(noop, noop)
+  Async((_, res) => res('resolved')).map(mapFn).fork(noop, noop)
 
   t.equal(Async(noop).map(noop).type(), 'Async', 'returns an Async')
   t.ok(mapFn.calledWith('resolved'), 'calls map function on resolved')
@@ -455,7 +455,7 @@ test('Async bimap functionality', t => {
   const rej = sinon.spy()
   const res = sinon.spy()
 
-  Async((rej, _) => rej('rejected')).bimap(left, right).fork(rej, res)
+  Async((rej) => rej('rejected')).bimap(left, right).fork(rej, res)
   Async((_, res) => res('resolved')).bimap(left, right).fork(rej, res)
 
   t.equal(Async(noop).bimap(noop, noop).type(), 'Async', 'returns an Async')
@@ -714,8 +714,10 @@ test('Async chain properties (Chain)', t => {
   const f = x => Async((_, res) => res(x + 2))
   const g = x => Async((_, res) => res(x + 10))
 
-  const a = x => Async((_, res) => res(x)).chain(f).chain(g).fork(noop, aRes)
-  const b = x => Async((_, res) => res(x)).chain(y => f(y).chain(g)).fork(noop, bRes)
+  const x = 12
+
+  Async((_, res) => res(x)).chain(f).chain(g).fork(noop, aRes)
+  Async((_, res) => res(x)).chain(y => f(y).chain(g)).fork(noop, bRes)
 
   t.same(aRes.args[0], bRes.args[0], 'assosiativity')
 
@@ -728,16 +730,16 @@ test('Async chain properties (Monad)', t => {
 
   const f = x => Async((_, res) => res(x))
 
-  aLeft = sinon.spy()
-  bLeft = sinon.spy()
+  const aLeft = sinon.spy()
+  const bLeft = sinon.spy()
 
   Async.of(3).chain(f).fork(noop, aLeft)
   f(3).fork(noop, bLeft)
 
   t.same(aLeft.args[0], bLeft.args[0], 'left identity')
 
-  aRight = sinon.spy()
-  bRight = sinon.spy()
+  const aRight = sinon.spy()
+  const bRight = sinon.spy()
 
   f(3).chain(Async.of).fork(noop, aRight)
   f(3).fork(noop, bRight)

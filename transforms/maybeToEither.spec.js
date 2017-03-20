@@ -16,7 +16,6 @@ const maybeToEither = require('./maybeToEither')
 test('maybeToEither transform', t => {
   const f = bindFunc(maybeToEither)
   const x = 23
-  const m = Maybe.of(x)
 
   t.ok(isFunction(maybeToEither), 'is a function')
 

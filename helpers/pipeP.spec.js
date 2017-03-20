@@ -1,14 +1,11 @@
 const test = require('tape')
-const sinon = require('sinon')
 const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
 const noop = helpers.noop
 
-const isFunction = require('../predicates/isFunction')
-
-const compose = require('./compose')
 const identity = require('../combinators/identity')
+const isFunction = require('../predicates/isFunction')
 
 const pipeP = require('./pipeP')
 

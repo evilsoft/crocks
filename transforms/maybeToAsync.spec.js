@@ -19,7 +19,6 @@ test('maybeToAsync transform', t => {
   const f = bindFunc(maybeToAsync)
 
   const x = 23
-  const m = Maybe.of(x)
 
   t.ok(isFunction(maybeToAsync), 'is a function')
 

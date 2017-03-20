@@ -51,7 +51,7 @@ test('alt with Alt', t => {
   const m = mock({ alt: sinon.spy(identity) })
   const x = mock({ alt: sinon.spy(identity) })
 
-  const result = alt(m)(x)
+  alt(m, x)
 
   t.ok(x.alt.calledWith(m), 'calls the alt function on the second arg passing in the first arg')
 

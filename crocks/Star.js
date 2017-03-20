@@ -10,7 +10,6 @@ const _inspect = require('../internal/inspect')
 
 const compose = require('../helpers/compose')
 const constant = require('../combinators/constant')
-const identity = require('../combinators/identity')
 
 const merge = require('../pointfree/merge')
 const sequence = require('../pointfree/sequence')

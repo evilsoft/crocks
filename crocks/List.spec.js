@@ -431,7 +431,7 @@ test('List map properties (Functor)', t => {
 test('List ap errors', t => {
   const left = bindFunc(x => List([ x ]).ap(List([ 0 ])))
 
-  const noFunc = /List.ap: Wrapped values must be all be functions/
+  const noFunc = /List.ap: Wrapped values must all be functions/
   t.throws(left([ undefined ]), noFunc, 'throws when wrapped value is undefined')
   t.throws(left([ null ]), noFunc, 'throws when wrapped value is null')
   t.throws(left([ 0 ]), noFunc, 'throws when wrapped value is a falsey number')

@@ -2,11 +2,11 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const isFunction = require('./isFunction')
-const isFunctor = require('./isFunctor')
+const isApply = require('./isApply')
 
-// isApply : a -> Boolean
-function isApply(m) {
-  return isFunctor(m) && isFunction(m.ap)
+// isChain : a -> Boolean
+function isChain(m) {
+  return isApply(m) && isFunction(m.chain)
 }
 
-module.exports = isApply
+module.exports = isChain

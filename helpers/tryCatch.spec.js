@@ -5,10 +5,14 @@ const bindFunc = helpers.bindFunc
 const noop = helpers.noop
 
 const isFunction = require('../predicates/isFunction')
+const isSameType = require('../predicates/isSameType')
 
 const either = require('../pointfree/either')
 
 const constant = require('../combinators/constant')
+const identity = require('../combinators/identity')
+
+const Result = require('../crocks/Result')
 
 const tryCatch = require('./tryCatch')
 
@@ -34,17 +38,25 @@ test('tryCatch', t => {
 })
 
 test('tryCatch functionality', t => {
+  const msg = 'silly error'
+
   const f = x => x
-  const g = () =>  { throw new Error('silly error') }
+  const g = () =>  { throw new Error(msg) }
 
   const extract =
-    either(constant('left'), constant('right'))
+    either(identity, constant('Ok'))
 
-  const right = extract(tryCatch(f, null))
-  const left = extract(tryCatch(g, null))
+  const ok = tryCatch(f, null)
+  const err = tryCatch(g, null)
 
-  t.equals(right, 'right', 'returns a Right when no error')
-  t.equals(left, 'left', 'returns a Left when error')
+  t.ok(isSameType(Result, ok), 'Non-error returns a Result')
+  t.ok(isSameType(Result, err), 'Error returns a Result')
+
+  const good = extract(ok)
+  const bad = extract(err)
+
+  t.equals(good, 'Ok', 'returns an Ok when no error')
+  t.equals(bad.message, msg, 'returns an Err with error on error')
 
   t.end()
 })

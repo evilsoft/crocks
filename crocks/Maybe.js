@@ -59,12 +59,11 @@ function Maybe(u) {
       x => m.either(constant(false), y => y === x)
     )
 
-  function inspect() {
-    return either(
-      constant(`Maybe.Nothing`),
-      x => `Maybe.Just${_inspect(x)}`
+  const inspect = () =>
+    either(
+      constant(`Nothing`),
+      x => `Just${_inspect(x)}`
     )
-  }
 
   function either(f, g) {
     if(!isFunction(f) || !isFunction(g)) {

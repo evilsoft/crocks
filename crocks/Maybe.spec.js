@@ -41,9 +41,10 @@ test('Maybe inspect', t => {
   const m = Maybe.Just('great')
   const n = Maybe.Nothing()
 
-  t.ok(isFunction(m.inspect), 'provides an inspect function')
-  t.equal(m.inspect(), 'Maybe.Just "great"', 'returns inspect string')
-  t.equal(n.inspect(), 'Maybe.Nothing', 'Nothing returns inspect string')
+  t.ok(isFunction(m.inspect), 'Just provides an inspect function')
+  t.ok(isFunction(n.inspect), 'Nothing provides an inspect function')
+  t.equal(m.inspect(), 'Just "great"', 'returns inspect string')
+  t.equal(n.inspect(), 'Nothing', 'Nothing returns inspect string')
 
   t.end()
 })

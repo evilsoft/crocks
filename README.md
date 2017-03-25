@@ -295,9 +295,9 @@ It is hard knowing what is going on inside of some of these ADTs or your wonderf
 
 #### tryCatch
 ```haskell
-tryCatch : (a -> b) -> a -> Either e b
+tryCatch : (a -> b) -> a -> Result e b
 ```
-Typical try-catch blocks are very imperative in their usage. This `tryCatch` function provides a means of capturing that imperative nature in a simple declarative style. Pass it a function that could fail and it will return you another function wrapping the first function. When called the new function will either return the result in an `Either.Right` if everything was good, or an error wrapped in an `Either.Left` if it fails.
+Typical try-catch blocks are very imperative in their usage. This `tryCatch` function provides a means of capturing that imperative nature in a simple declarative style. Pass it a function that could fail and it will return you another function wrapping the first function. When called, the new function will either return the result in a `Result.Ok` if everything was good, or an error wrapped in an `Result.Err` if it fails.
 
 ### Logic Functions
 The functions in this section are used to represent logical branching in a declarative manner. Each of these functions require either `Pred`s or predicate functions in their input. Since these functions work with `Pred`s and predicate functions, rather than values, this allows for composeable, "lazy" evaluation.
@@ -328,13 +328,13 @@ Say you have two predicate functions or `Pred`s and would like to combine them i
 
 #### unless
 ```haskell
-unless : ((a -> Boolean) | Pred) -> (* -> a) -> * -> a
+unless : ((a -> Boolean) | Pred) -> (a -> a) -> a -> a
 ```
 There may come a time when you need to adjust a value when a condition is false, that is where `unless` can come into play. Just provide a predicate function (a function that returns a Boolean) and a function to apply your desired modification. This will get you back a function that when you pass it a value, it will evaluate it and if false, will run your value through the provided function. Either the original or modified value will be returned depending on the result of the predicate. Check out [`when`](#when) for a negated version of this function.
 
 #### when
 ```haskell
-when : ((a -> Boolean) | Pred) -> (* -> a) -> * -> a
+when : ((a -> Boolean) | Pred) -> (a -> a) -> a -> a
 ```
 There may come a time when you need to adjust a value when a condition is true, that is where `when` can come into play. Just provide a predicate function (a function that returns a Boolean) and a function to apply your desired modification. This will get you back a function that when you pass it a value, it will evaluate it and if true, will run your value through the provided function. Either the original or modified value will be returned depending on the result of the predicate. Check out [`unless`](#unless) for a negated version of this function.
 

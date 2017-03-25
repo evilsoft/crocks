@@ -5,18 +5,18 @@ const isFunction = require('../predicates/isFunction')
 
 const curry = require('./curry')
 
-const Either = require('../crocks/Either')
+const Result = require('../crocks/Result')
 
-const Left = Either.Left
-const Right = Either.Right
+const Err = Result.Err
+const Ok = Result.Ok
 
 function tryCatch(fn) {
   if(!isFunction(fn)) {
     throw new TypeError('tryCatch: Function required for first argument')
   }
   return function(x) {
-    try { return Right(fn(x)) }
-    catch(e) { return Left(e) }
+    try { return Ok(fn(x)) }
+    catch(e) { return Err(e) }
   }
 }
 

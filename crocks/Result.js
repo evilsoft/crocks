@@ -65,12 +65,11 @@ function Result(u) {
   const of =
     _of
 
-  const inspect = constant(
+  const inspect = () =>
     either(
-      l => `Result.Err${_inspect(l)}`,
-      r => `Result.Ok${_inspect(r)}`
+      l => `Err${_inspect(l)}`,
+      r => `Ok${_inspect(r)}`
     )
-  )
 
   function either(f, g) {
     if(!isFunction(f) || !isFunction(g)) {

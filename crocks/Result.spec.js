@@ -62,8 +62,8 @@ test('Result inspect', t => {
   t.ok(isFunction(l.inspect), 'Err provides an inspect function')
   t.ok(isFunction(r.inspect), 'Ok provides an inspect function')
 
-  t.equal(l.inspect(), 'Result.Err 0', 'Err returns inspect string')
-  t.equal(r.inspect(), 'Result.Ok 1', 'Ok returns inspect string')
+  t.equal(l.inspect(), 'Err 0', 'Err returns inspect string')
+  t.equal(r.inspect(), 'Ok 1', 'Ok returns inspect string')
 
   t.end()
 })

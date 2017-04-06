@@ -60,8 +60,8 @@ test('Either inspect', t => {
   t.ok(isFunction(l.inspect), 'Left provides an inspect function')
   t.ok(isFunction(r.inspect), 'Right provides an inpsect function')
 
-  t.equal(l.inspect(), 'Either.Left 0', 'Left returns inspect string')
-  t.equal(r.inspect(), 'Either.Right 1', 'Right returns inspect string')
+  t.equal(l.inspect(), 'Left 0', 'Left returns inspect string')
+  t.equal(r.inspect(), 'Right 1', 'Right returns inspect string')
 
   t.end()
 })

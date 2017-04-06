@@ -60,8 +60,8 @@ function Either(u) {
 
   const inspect = constant(
     either(
-       l => `Either.Left${_inspect(l)}`,
-       r => `Either.Right${_inspect(r)}`
+       l => `Left${_inspect(l)}`,
+       r => `Right${_inspect(r)}`
     )
   )
 

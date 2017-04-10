@@ -9,6 +9,8 @@ const _inspect = require('../internal/inspect')
 
 const constant = require('../combinators/constant')
 
+const object = require('../internal/object')
+
 const _empty =
   () => Assign({})
 
@@ -39,7 +41,7 @@ function Assign(o) {
       throw new TypeError('Assign.concat: Assign required')
     }
 
-    return Assign(Object.assign({}, x, m.value()))
+    return Assign(object.assign(m.value(), x))
   }
 
   return { inspect, value, type, concat, empty }

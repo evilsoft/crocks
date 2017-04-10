@@ -3,7 +3,7 @@
 
 // isNil :: a -> Boolean
 function isNil(x) {
-  return x === undefined || x === null
+  return x === undefined || x === null || Number.isNaN(x)
 }
 
 module.exports = isNil

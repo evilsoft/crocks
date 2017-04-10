@@ -21,6 +21,7 @@ test('isNil predicate function', t => {
 
   t.equal(isNil(undefined), true, 'returns true with undefined')
   t.equal(isNil(null), true, 'returns true with null')
+  t.equal(isNil(NaN), true, 'returns true with NaN')
 
   t.end()
 })

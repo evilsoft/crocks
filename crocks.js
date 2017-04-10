@@ -31,19 +31,27 @@ const crocks = {
 }
 
 const helpers = {
+  assign: require('./helpers/assign'),
+  assoc: require('./helpers/assoc'),
   branch: require('./helpers/branch'),
   compose: require('./helpers/compose'),
   composeP: require('./helpers/composeP'),
   curry: require('./helpers/curry'),
   curryN: require('./helpers/curryN'),
+  defaultProps: require('./helpers/defaultProps'),
+  defaultTo: require('./helpers/defaultTo'),
   fanout: require('./helpers/fanout'),
+  fromPairs: require('./helpers/fromPairs'),
   liftA2: require('./helpers/liftA2'),
   liftA3: require('./helpers/liftA3'),
   mconcat: require('./helpers/mconcat'),
   mconcatMap: require('./helpers/mconcatMap'),
   mreduce: require('./helpers/mreduce'),
   mreduceMap: require('./helpers/mreduceMap'),
+  objOf: require('./helpers/objOf'),
+  omit: require('./helpers/omit'),
   once: require('./helpers/once'),
+  pick: require('./helpers/pick'),
   pipe: require('./helpers/pipe'),
   pipeP: require('./helpers/pipeP'),
   prop: require('./helpers/prop'),
@@ -51,6 +59,7 @@ const helpers = {
   safe: require('./helpers/safe'),
   safeLift: require('./helpers/safeLift'),
   tap: require('./helpers/tap'),
+  toPairs: require('./helpers/toPairs'),
   tryCatch: require('./helpers/tryCatch')
 }
 

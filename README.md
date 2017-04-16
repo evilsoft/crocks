@@ -449,7 +449,7 @@ These functions provide a very clean way to build out very simple functions and 
 | `either` | `Either`, `Maybe`, `Result` |
 | `evalWith` | `State` |
 | `execWith` | `State` |
-| `filter` | `Array`, `List` |
+| `filter` | `Array`, `List`, `Object` |
 | `first` | `Arrow`, `Function`, `Star` |
 | `fold` | `Array`, `List` |
 | `fst` | `Pair` |
@@ -461,7 +461,7 @@ These functions provide a very clean way to build out very simple functions and 
 | `promap` | `Arrow`, `Star` |
 | `read` | `Writer` |
 | `reduce` | `Array`, `List` |
-| `reject` | `Array`, `List` |
+| `reject` | `Array`, `List`, `Object` |
 | `run` | `IO` |
 | `runWith` | `Arrow`, `Endo`, `Pred`, `Reader`, `Star`, `State` |
 | `second` | `Arrow`, `Function`, `Star` |

@@ -29,7 +29,7 @@ test('map pointfree', t => {
   t.throws(m([], f), noFunc, 'throws if first arg is an array')
   t.throws(m({}, f), noFunc, 'throws if first arg is an object')
 
-  const noFunctor = /map: Function or Functor of the same type required for second requirement/
+  const noFunctor = /map: Object, Function or Functor of the same type required for second requirement/
   t.throws(m(noop, undefined), noFunctor, 'throws if second arg is undefined')
   t.throws(m(noop, null), noFunctor, 'throws if second arg is null')
   t.throws(m(noop, 0), noFunctor, 'throws if second arg is a falsey number')
@@ -38,7 +38,6 @@ test('map pointfree', t => {
   t.throws(m(noop, 'string'), noFunctor, 'throws if second arg is a truthy string')
   t.throws(m(noop, false), noFunctor, 'throws if second arg is false')
   t.throws(m(noop, true), noFunctor, 'throws if second arg is true')
-  t.throws(m(noop, {}), noFunctor, 'throws if second arg is an object')
 
   t.end()
 })
@@ -73,6 +72,15 @@ test('map function composition', t => {
 
   t.ok(second.calledWith(first.returnValues[0]), 'result of first is passed to the second')
   t.equal(result, second.returnValues[0], 'result of second is returned')
+
+  t.end()
+})
+
+test('map object', t => {
+  const f = x => x + 1
+  const m = { a: 3, b: 4 }
+
+  t.same(map(f, m), { a: 4, b: 5 }, 'applies function to each element in the object')
 
   t.end()
 })

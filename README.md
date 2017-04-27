@@ -153,6 +153,18 @@ substitution : (a -> b -> c) -> (a -> b) -> a -> c
 While it a complicated little bugger, it can come in very handy from time to time. In it's first two arguments it takes functions. The first must be binary and the second unary. That will return you a function that is ready to take some value. Once supplied the fun starts, it will pass the `a` to the first argument of both functions, and the result of the second function to the second parameter of the first function. Finally after all that juggling, it will return the result of that first function. When used with partial application on that first parameter, a whole new world of combinatory madness is presented!
 
 ### Helper Functions
+#### assign
+```haskell
+assign : Object -> Object -> Object
+```
+When working with `Object`s, a common operation is to combine (2) of them. This can be accomplished in `crocks` by reaching for `assign`. Unlike the `Object.assign` that ships with JavaScript, this `assign` will combine your `Object`s into a new shallow copy of their merger. `assign` only takes two arguments and will overwrite keys present in the second argument with values from the first. As with most of the `crocks` `Object` based functions, `assign` will omit any key-value pairs that are `undefined`. Check out a related function named [`defaultProps`](#defaultprops) that will only assign values that are `undefined` in the second argument.
+
+#### assoc
+```haskell
+assoc : String -> a -> Object -> Object
+```
+There may come a time when you want to add a key-value pair to an `Object` and want control over how the key and value are applied. That is where `assoc` can come to your aid. Just provide a `String` key and a value of any type to be associated to the key. Finally pass it any `Object` and you will get back a shallow copy with your key-value pair merged in. This will overwrite any exiting keys with new value specified. Used with [`flip`](#flip), you can do some interesting things with this function, give it a play! If you just want to create an `Object` and not concatenate it to another `Object`, [`objOf`](#objof) may be the function for you.
+
 #### branch
 ```haskell
 branch : a -> Pair a a
@@ -201,6 +213,18 @@ curryN : Number -> ((a, b, ...) -> z) -> a -> b -> ... -> z
 ```
 When dealing with variable argument functions, there are times when you may want to curry a specific number of arguments. Just pass this function the number of arguments you want to curry as well as the function, and it will not call the wrapped function until all arguments have been passed. This function will ONLY pass the number of arguments that you specified, any remaining arguments are discarded. This is great for limiting the arity of a given function when additional parameters are defaulted or not needed. This function will not auto curry functions returning functions like [`curry`](#curry) does, use with [`curry`](#curry) if you need to do some fancy setup for your wrapped function's API.
 
+#### defaultProps
+```haskell
+defaultProps : Object -> Object -> Object
+```
+Picture this, you have an `Object` and you want to make sure that some properties are set with a given default value. When the need for this type of operation presents itself, `defaultProps` can come to your aid. Just pass it an `Object` that defines your defaults and then the `Object` your want to default those props on. If a key that is present on the defaults `Object` is not defined on your data, then the default value will be used. Otherwise, the value from your data will be used instead. You could just apply [`flip`](#flip) to the [`assign`](#assign) function and get the same result, but having a function named `defaultProps` may be easier to read in code. As with most `Object` related functions in `crocks`, `defaultProps` will return you a shallow copy of the result and not include any `undefined` values in either `Object`.
+
+#### defaultTo
+```haskell
+defaultTo : a -> b -> a
+```
+With things like `null`, `undefined` and `NaN` showing up all over the place, it can be hard to keep your expected types inline without resorting to nesting in a `Maybe` with functions like [`safe`](#safe). If you want to specifically guard for `null`, `undefined` and `NaN` and get things defaulted into the expected type, then `defaultTo` should work for you. Just pass it what you would like your default value to be and then the value you want guarded, and you will get back either the default or the passed value, depending on if the passed value is `null`, `undefined` or `NaN`. While this *is* JavaScript and you can return anything, it is suggested to stick to the signature and only let `a`s through. As a `b` can be an `a` as well.
+
 #### fanout
 ```haskell
 fanout : (a -> b) -> (a -> c) -> (a -> Pair b c)
@@ -208,6 +232,12 @@ fanout : Arrow a b -> Arrow a c -> Arrow a (Pair b c)
 fanout : Monad m => Star a (m b) -> Star a (m c) -> Star a (m (Pair b c))
 ```
 There are may times that you need to keep some running or persistent state while performing a given computation. A common way to do this is to take the input to the computation and branch it into a `Pair` and perform different operations on each version of the input. This is such a common pattern that it warrants the `fanout` function to take care of the initial split and mapping. Just provide a pair of either simple functions or a pair of one of the computation types (`Arrow` or `Star`). You will get back something of the same type that is configured to split it's input into a pair and than apply the first Function/ADT to the first portion of the underlying `Pair` and the second on the second.
+
+#### fromPairs
+```haskell
+fromPairs : [ (Pair String a) ] | List (Pair String a) -> Object
+```
+As an inverse to [`toPairs`](#topairs), `fromPairs` takes either an `Array` or `List` of key-value `Pair`s and constructs an `Object` from it. The `Pair` must contain a `String` in the `fst` and any type of value in the `snd`. The `fst` will become the key for the value in the `snd`. All primitive values are copied into the new `Object`, while non-primitives are references to the original. If you provide an `undefined` values for the second, that `Pair` will not be represented in the resulting `Object`. Also, when if multiple keys share the same name, that last value will be moved over.
 
 #### liftA2
 #### liftA3
@@ -233,11 +263,29 @@ mreduceMap : Monoid m => m -> (b -> a) -> ([ b ] | List b) -> a
 ```
 There comes a time where the values you have in a `List` or an `Array` are not in the type that is needed for the [`Monoid`](#monoids) you want to combine with. These two functions can be used to `map` some transforming function from a given type into the type needed for the [`Monoid`](#monoids). In essence, this function will run each value through the function before it lifts the value into the [`Monoid`](#monoids), before `concat` is applied. The difference between the two is that `mconcatMap` returns the result inside the [`Monoid`](#monoids) used to combine them. Where `mreduceMap` returns the bare value itself.
 
+#### objOf
+```haskell
+objOf : String -> a -> Object
+```
+If you ever find yourself in a situation where you have a key and a value and just want to combine the two into an `Object`, then it sounds like `objOf` is the function for you. Just pass it a `String` for the key and any type of value, and you'll get back an `Object` that is composed of those two. If you find yourself constantly concatenating the result of this function into another `Object`, you may want to use [`assoc`](#assoc) instead.
+
+#### omit
+```haskell
+omit : ([ String ] | List String) -> Object -> Object
+```
+Sometimes you just want to strip `Object`s of unwanted properties by key. Using `omit` will help you get that done. Just pass it a `Foldable` structure with a series of `String`s as keys and then pass it an `Object` and you will get back not only a shallow copy, but also an `Object` free of any of those pesky `undefined` values. You can think of `omit` as a way to black-list or reject `Object` properties based on key names. This function ignores inherited properties and should only be used with POJOs. If you want to filter or white-list properties rather than reject them, take a look at [`pick`](#pick).
+
 #### once
 ```haskell
 once : ((*) -> a) -> ((*) -> a)
 ```
 There are times in Javascript development where you only want to call a function once and memo-ize the first result for every subsequent call to that function. Just pass the function you want guarded to `once` and you will get back a function with the expected guarantees.
+
+#### pick
+```haskell
+pick : ([ String ] | List String) -> Object -> Object
+```
+When dealing with `Object`s, sometimes it is necessary to only let some of the key-value pairs on an object through. Think of `pick` as a sort of white-list or filter for `Object` properties. Pass it a `Foldable` structure of `String`s that are the keys you would like to pick off of your `Object`. This will give you back a shallow copy of the key-value pairs you specified. This function will ignore inherited properties and should only be used with POJOs. Any `undefined` values will not be copied over, although `null` values are allowed. For black-listing properties, have a look at [`omit`](#omit).
 
 #### pipe
 ```haskell
@@ -265,13 +313,13 @@ const promPipe =
 
 #### prop
 ```haskell
-prop : (String | Number) -> a -> Maybe b
+prop : (String | Number) -> (Object | Array) -> Maybe a
 ```
 If you want some safety around pulling a value out of an Object or Array with a single key or index, you can always reach for `prop`. Well, as long as you are working with non-nested data that is. Just tell `prop` either the key or index you are interested in, and you will get back a function that will take anything and return a `Just` with the wrapped value if the key/index exists. If the key/index does not exist however, you will get back a `Nothing`.
 
 #### propPath
 ```haskell
-propPath : [ String | Number ] -> a -> Maybe b
+propPath : [ String | Number ] -> (Object | Array) -> Maybe a
 ```
 While [`prop`](#prop) is good for simple, single-level structures, there may come a time when you have to work with nested POJOs or Arrays. When you run into this situation, just pull in `propPath` and pass it a left-to-right traversal path of keys, indices or a combination of both (gross...but possible). This will kick you back a function that behaves just like [`prop`](#prop). You pass it some data, and it will attempt to resolve your provided path. If the path is valid, it will return the value residing there (`null` included!) in a `Just`. But if at any point that path "breaks" it will give you back a `Nothing`.
 
@@ -292,6 +340,12 @@ While [`safe`](#safe) is used to lift a value into a `Maybe`, you can reach for 
 tap : (a -> b) -> a -> a
 ```
 It is hard knowing what is going on inside of some of these ADTs or your wonderful function compositions. Debugging can get messy when you need to insert a side-effect into your flow for introspection purposes. With `tap`, you can intervene in your otherwise pristine flow and make sure that the original value is passed along to the next step of your flow. This function does not guarantee immutability for reference types (`Objects`, `Arrays`, etc), you will need to exercise some discipline here to not mutate.
+
+#### toPairs
+```haskell
+toPairs : Object -> List (Pair String a)
+```
+When dealing with `Object`s, sometimes it makes more sense to work in a `Foldable` structure like a `List` of key-value `Pair`s. `toPairs` provides a means to take an object and give you back a `List` of `Pairs` that have a `String` that represents the key in the `fst` and the value for that key in the `snd`. The primitive values are copied, while non-primitive values are references. Like most of the `Object` functions in `crocks`, any keys with `undefined` values will be omitted from the result. `crocks` provides an inverse to this function named [`fromPairs`](#frompairs).
 
 #### tryCatch
 ```haskell
@@ -356,8 +410,8 @@ All functions in this group have a signature of `* -> Boolean` and are used with
 * `isInteger : a -> Boolean`: Integer
 * `isMonad : a -> Boolean`: an ADT that provides `map`, `ap`, `chain` and `of` functions
 * `isMonoid : a -> Boolean`: an ADT that provides `concat` and `empty` functions
-* `isNil : a -> Boolean`: undefined or null
-* `isNumber : a -> Boolean`: Number that is not a NaN value, Infinity included
+* `isNil : a -> Boolean`: `undefined` or `null` or `NaN`
+* `isNumber : a -> Boolean`: `Number` that is not a `NaN` value, `Infinity` included
 * `isObject : a -> Boolean`: Plain Old Javascript Object (POJO)
 * `isPromise : a -> Boolean`: An object implementing `then` and `catch`
 * `isSameType : a -> b -> Boolean`: Constructor matches a values type, or two values types match
@@ -411,7 +465,7 @@ These functions provide a very clean way to build out very simple functions and 
 | `either` | `(a -> c) -> (b -> c) -> m a b -> c` |
 | `evalWith` | `a -> m -> b` |
 | `execWith` | `a -> m -> b` |
-| `filter` | `((a -> Boolean) | Pred a) -> m a -> m a` |
+| `filter` | <code>((a -> Boolean) &#124; Pred a) -> m a -> m a</code> |
 | `first` | `m (a -> b) -> m (Pair a c -> Pair b c)` |
 | `fold` | `Semigroup s => m s -> s` |
 | `fst` | `m a b -> a` |
@@ -423,7 +477,7 @@ These functions provide a very clean way to build out very simple functions and 
 | `promap` | `(c -> a) -> (b -> d) -> m a b -> m c d` |
 | `read` | `m a b -> a` |
 | `reduce` | `(b -> a -> b) -> b -> m a -> b` |
-| `reject` | `((a -> Boolean) | Pred a) -> m a -> m a` |
+| `reject` | <code>((a -> Boolean) &#124; Pred a) -> m a -> m a</code> |
 | `run` | `m a -> b` |
 | `runWith` | `a -> m -> b` |
 | `second` | `m (a -> b) -> m (Pair c a -> Pair c b)` |
@@ -455,7 +509,7 @@ These functions provide a very clean way to build out very simple functions and 
 | `fst` | `Pair` |
 | `head` | `Array`, `List`, `String` |
 | `log` | `Writer` |
-| `map` | `Async`, `Array`, `Arrow`, `Const`, `Either`, `Function`, `Identity`, `IO`, `List`, `Maybe`, `Pair`, `Reader`, `Result`, `Star`, `State`, `Unit`, `Writer` |
+| `map` | `Async`, `Array`, `Arrow`, `Const`, `Either`, `Function`, `Identity`, `IO`, `List`, `Maybe`, `Object`, `Pair`, `Reader`, `Result`, `Star`, `State`, `Unit`, `Writer` |
 | `merge` | `Pair` |
 | `option` | `Maybe` |
 | `promap` | `Arrow`, `Star` |

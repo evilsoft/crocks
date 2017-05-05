@@ -1,4 +1,44 @@
 # Change Log for `crocks`
+v0.5.0 -- May 4, 2017
+--
+### Breaking
+  * Rename `hasKey` to `hasProp`
+  * Allow `ap` pointfree to accept `Array`
+  * Allow `chain` pointfree to accept `Array`
+  * Restrict `concat` pointfree to Semigroups of the same type
+  * Restrict `liftA*` functions to `Apply`s of the same type
+  * Update `isApply` predicate to report true for `Array`
+  * Update `isChain` predicate to report true for `Array`
+  * Allow `filter` pointfree to accept `Object`
+  * Allow `reject` pointfree to accept `Object`
+  * Change `tryCatch` to return a `Result` instead of `Either`
+  * Remove parent name when inspecting `Either`
+  * Remove parent name when inspecting `Maybe`
+  * Remove parent name when inspecting `Result`
+
+### Additions
+* Helper Functions:
+  * `assign`
+  * `assoc`
+  * `defaultProps`
+  * `defaultTo`
+  * `fromPairs`
+  * `objOf`
+  * `omit`
+  * `pick`
+  * `toPairs`
+* Predicates
+  * `isChain`
+
+### Pull Requests
+* [#110 - Rename `hasKey` to `hasProp` for :corn:sistancy](https://github.com/evilsoft/crocks/pull/110)
+* [#113 - Better Linting and Some :lipstick:](https://github.com/evilsoft/crocks/pull/113)
+* [#112 - Accept `Array` for `chain` and `ap` pointfree functions](https://github.com/evilsoft/crocks/pull/112)
+* [#114 - `tryCatch` should return a `Result` and not an `Either`](https://github.com/evilsoft/crocks/pull/114)
+* [#115 - Remove parent type on inspect string for sum types](https://github.com/evilsoft/crocks/pull/115)
+* [#118 - Update `reject` and `filter` to accept `Object`s](https://github.com/evilsoft/crocks/pull/118)
+* [#119 - Add a bunch of `Object` related functions.](https://github.com/evilsoft/crocks/pull/119)
+
 v0.4.1 -- Mar. 12, 2017
 --
 ### Additions

@@ -2,9 +2,9 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const curry = require('../helpers/curry')
-const isArray = require('../predicates/isArray')
-const isFunction = require('../predicates/isFunction')
-const isNil = require('../predicates/isNil')
+const isArray = require('./isArray')
+const isFunction = require('./isFunction')
+const isNil = require('./isNil')
 
 function isAdt(x) {
   return !!x && isFunction(x.type)

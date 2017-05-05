@@ -1,7 +1,7 @@
 const test = require('tape')
 const helpers = require('../test/helpers')
 
-const isFunction = require('../predicates/isFunction')
+const isFunction = require('./isFunction')
 const noop = helpers.noop
 
 const isSameType = require('./isSameType')

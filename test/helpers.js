@@ -1,5 +1,4 @@
 const slice = x => Array.prototype.slice.call(x)
-const noop  = Function.prototype
 
 function bindFunc(fn) {
   return function() {
@@ -8,5 +7,5 @@ function bindFunc(fn) {
 }
 
 module.exports = {
-  noop, bindFunc
+  bindFunc
 }

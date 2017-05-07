@@ -3,9 +3,9 @@ const sinon = require('sinon')
 const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
-const noop = helpers.noop
 
 const isFunction = require('../predicates/isFunction')
+const unit = require('../helpers/unit')
 
 const pipe = require('./pipe')
 
@@ -29,7 +29,7 @@ test('pipe parameters', t => {
   t.throws(c({}), TypeError, 'throws TypeError when object passed')
   t.throws(c([]), TypeError, 'throws TypeError when array passed')
 
-  t.ok(isFunction(pipe(noop)), 'returns a function')
+  t.ok(isFunction(pipe(unit)), 'returns a function')
 
   t.end()
 })

@@ -3,7 +3,7 @@ const sinon = require('sinon')
 const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
-const noop = helpers.noop
+const unit = require('../helpers/unit')
 
 const isFunction = require('../predicates/isFunction')
 
@@ -29,18 +29,18 @@ test('reduce pointfree', t => {
   t.throws(r([], 0, m), 'throws if first arg is an array')
   t.throws(r({}, 0, m), 'throws if first arg is an object')
 
-  t.throws(r(noop, 0, undefined), 'throws if second arg is undefined')
-  t.throws(r(noop, 0, null), 'throws if second arg is null')
-  t.throws(r(noop, 0, 0), 'throws if second arg is a falsey number')
-  t.throws(r(noop, 0, 1), 'throws if second arg is a truthy number')
-  t.throws(r(noop, 0, ''), 'throws if second arg is a falsey string')
-  t.throws(r(noop, 0, 'string'), 'throws if second arg is a truthy string')
-  t.throws(r(noop, 0, false), 'throws if second arg is false')
-  t.throws(r(noop, 0, true), 'throws if second arg is true')
-  t.throws(r(noop, 0, {}), 'throws if second arg is an object')
+  t.throws(r(unit, 0, undefined), 'throws if second arg is undefined')
+  t.throws(r(unit, 0, null), 'throws if second arg is null')
+  t.throws(r(unit, 0, 0), 'throws if second arg is a falsey number')
+  t.throws(r(unit, 0, 1), 'throws if second arg is a truthy number')
+  t.throws(r(unit, 0, ''), 'throws if second arg is a falsey string')
+  t.throws(r(unit, 0, 'string'), 'throws if second arg is a truthy string')
+  t.throws(r(unit, 0, false), 'throws if second arg is false')
+  t.throws(r(unit, 0, true), 'throws if second arg is true')
+  t.throws(r(unit, 0, {}), 'throws if second arg is an object')
 
-  t.doesNotThrow(r(noop, 0, m), 'allows a function and Foldable')
-  t.doesNotThrow(r(noop, 0, []), 'allows a function and an array (Foldable)')
+  t.doesNotThrow(r(unit, 0, m), 'allows a function and Foldable')
+  t.doesNotThrow(r(unit, 0, []), 'allows a function and an array (Foldable)')
 
   const f = sinon.spy()
   const res = reduce(f, 0, m)

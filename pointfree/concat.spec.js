@@ -2,7 +2,7 @@ const test = require('tape')
 const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
-const noop = helpers.noop
+const unit = require('../helpers/unit')
 
 const isFunction  = require('../predicates/isFunction')
 
@@ -23,7 +23,7 @@ test('concat pointfree', t => {
   t.throws(f('', false), TypeError, 'throws if second arg is false')
   t.throws(f('', true), TypeError, 'throws if second arg is true')
   t.throws(f('', {}), TypeError, 'throws if second arg is true')
-  t.throws(f('', noop), TypeError, 'throws if second arg is function')
+  t.throws(f('', unit), TypeError, 'throws if second arg is function')
 
   t.throws(f([], ''), err, 'throws when semigroups differ')
 

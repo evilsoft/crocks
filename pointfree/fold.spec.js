@@ -3,7 +3,7 @@ const sinon = require('sinon')
 const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
-const noop = helpers.noop
+const unit = require('../helpers/unit')
 
 const constant = require('../combinators/constant')
 const isFunction = require('../predicates/isFunction')
@@ -25,7 +25,7 @@ test('fold pointfree errors', t => {
   t.throws(f(false), noFold, 'throws when passed false')
   t.throws(f(true), noFold, 'throws when passed true')
   t.throws(f({}), noFold, 'throws when passed an object')
-  t.throws(f(noop), noFold, 'throws when passed a function')
+  t.throws(f(unit), noFold, 'throws when passed a function')
   t.throws(f([]), noFold, 'throws when passed an empty array')
 
   const noSemi = /fold: Foldable must contain Semigroups of the same type/

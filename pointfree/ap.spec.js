@@ -3,7 +3,7 @@ const sinon = require('sinon')
 const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
-const noop = helpers.noop
+const unit = require('../helpers/unit')
 
 const isFunction = require('../predicates/isFunction')
 
@@ -11,7 +11,7 @@ const identity = require('../combinators/identity')
 const constant = require('../combinators/constant')
 
 const mock = x => Object.assign({}, x, {
-  map: noop, of: noop, chain: noop, type: constant('silly')
+  map: unit, of: unit, chain: unit, type: constant('silly')
 })
 
 const ap = require('./ap')

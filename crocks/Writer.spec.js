@@ -2,8 +2,8 @@ const test = require('tape')
 const sinon = require('sinon')
 const helpers = require('../test/helpers')
 
-const noop = helpers.noop
 const bindFunc = helpers.bindFunc
+const unit = require('../helpers/unit')
 
 const isFunction = require('../predicates/isFunction')
 const isObject = require('../predicates/isObject')
@@ -30,7 +30,7 @@ test('Writer construction', t => {
   t.throws(w(true), TypeError, 'throws with true')
   t.throws(w([]), TypeError, 'throws with an array')
   t.throws(w({}), TypeError, 'throws with an object')
-  t.throws(w(noop), TypeError, 'throws with a function')
+  t.throws(w(unit), TypeError, 'throws with a function')
 
   t.doesNotThrow(w(Last), 'allows a Monoid')
   t.end()
@@ -150,7 +150,7 @@ test('Writer map errors', t => {
   t.throws(map([]), TypeError, 'throws with an array')
   t.throws(map({}), TypeError, 'throws with an object')
 
-  t.doesNotThrow(map(noop), 'allows a function')
+  t.doesNotThrow(map(unit), 'allows a function')
 
   t.end()
 })
@@ -189,7 +189,7 @@ test('Writer map properties (Functor)', t => {
 test('Writer ap errors', t => {
   const m = { type: () => 'Writer...Not' }
   const w = Writer(0, 0)
-  const ap = bindFunc(Writer(0, noop).ap)
+  const ap = bindFunc(Writer(0, unit).ap)
 
   t.throws(Writer(0, undefined).ap.bind(null, w), TypeError, 'throws when wrapped value is undefined')
   t.throws(Writer(0, null).ap.bind(null, w), TypeError, 'throws when wrapped value is null')
@@ -287,7 +287,7 @@ test('Writer chain errors', t => {
   t.throws(chain(true), TypeError, 'throws with true')
   t.throws(chain([]), TypeError, 'throws with an array')
   t.throws(chain({}), TypeError, 'throws with an object')
-  t.throws(chain(noop), TypeError, 'throws with non-Writer returning function')
+  t.throws(chain(unit), TypeError, 'throws with non-Writer returning function')
 
   t.doesNotThrow(chain(fn), 'allows a Writer returning function')
 

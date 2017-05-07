@@ -1,8 +1,7 @@
 const test = require('tape')
-const helpers = require('../test/helpers')
 
 const isFunction = require('./isFunction')
-const noop = helpers.noop
+const unit = require('../helpers/unit')
 
 const isSameType = require('./isSameType')
 
@@ -36,7 +35,7 @@ test('isSameType (Nils)', t => {
   t.equal(isSameType(undefined, true), false, 'reports false with undefined and true')
   t.equal(isSameType(undefined, []), false, 'reports false with undefined and array')
   t.equal(isSameType(undefined, {}), false, 'reports false with undefined and an object')
-  t.equal(isSameType(undefined, noop), false, 'reports false with undefined and a function')
+  t.equal(isSameType(undefined, unit), false, 'reports false with undefined and a function')
 
   t.equal(isSameType(null, undefined), false, 'reports false with null and undefined')
   t.equal(isSameType(0, undefined), false, 'reports false with falsey number and undefined')
@@ -47,7 +46,7 @@ test('isSameType (Nils)', t => {
   t.equal(isSameType(true, undefined), false, 'reports false with true and undefined')
   t.equal(isSameType([], undefined), false, 'reports false with array and undefined')
   t.equal(isSameType({}, undefined), false, 'reports false with an object and undefined')
-  t.equal(isSameType(noop, undefined), false, 'reports false with a function and undefined')
+  t.equal(isSameType(unit, undefined), false, 'reports false with a function and undefined')
 
   t.equal(isSameType(null, undefined), false, 'reports false null and undefined')
   t.equal(isSameType(null, 0), false, 'reports false with null and falsey number')
@@ -58,7 +57,7 @@ test('isSameType (Nils)', t => {
   t.equal(isSameType(null, true), false, 'reports false with null and true')
   t.equal(isSameType(null, []), false, 'reports false with null and array')
   t.equal(isSameType(null, {}), false, 'reports false with null and an object')
-  t.equal(isSameType(null, noop), false, 'reports false with null and a function')
+  t.equal(isSameType(null, unit), false, 'reports false with null and a function')
 
   t.equal(isSameType(null, undefined), false, 'reports false undefined and null')
   t.equal(isSameType(0, null), false, 'reports false with falsey number and null')
@@ -69,7 +68,7 @@ test('isSameType (Nils)', t => {
   t.equal(isSameType(true, null), false, 'reports false with true and null')
   t.equal(isSameType([], null), false, 'reports false with array and null')
   t.equal(isSameType({}, null), false, 'reports false with an object and null')
-  t.equal(isSameType(noop, null), false, 'reports false with a function and null')
+  t.equal(isSameType(unit, null), false, 'reports false with a function and null')
 
   t.end()
 })
@@ -103,7 +102,7 @@ test('isSameType (Numbers)', t => {
   t.equal(isSameType(0, true), false, 'reports false with falsey number and true')
   t.equal(isSameType(0, {}), false, 'reports false with falsey number and object')
   t.equal(isSameType(0, []), false, 'reports false with falsey number and array')
-  t.equal(isSameType(0, noop), false, 'reports false with falsey number and function')
+  t.equal(isSameType(0, unit), false, 'reports false with falsey number and function')
 
   t.equal(isSameType('', 0), false, 'reports false with falsey string and falsey number')
   t.equal(isSameType('string', 0), false, 'reports false with truthy string and falsey number')
@@ -111,7 +110,7 @@ test('isSameType (Numbers)', t => {
   t.equal(isSameType(true, 0), false, 'reports false with true and falsey number')
   t.equal(isSameType({}, 0), false, 'reports false with object and falsey number')
   t.equal(isSameType([], 0), false, 'reports false with array and falsey number')
-  t.equal(isSameType(noop, 0), false, 'reports false with function and falsey number')
+  t.equal(isSameType(unit, 0), false, 'reports false with function and falsey number')
 
   t.equal(isSameType(1, ''), false, 'reports false with truthy number and falsey string')
   t.equal(isSameType(1, 'string'), false, 'reports false with truthy number and truthy string')
@@ -119,7 +118,7 @@ test('isSameType (Numbers)', t => {
   t.equal(isSameType(1, true), false, 'reports false with truthy number and true')
   t.equal(isSameType(1, {}), false, 'reports false with truthy number and object')
   t.equal(isSameType(1, []), false, 'reports false with truthy number and array')
-  t.equal(isSameType(1, noop), false, 'reports false with truthy number and function')
+  t.equal(isSameType(1, unit), false, 'reports false with truthy number and function')
 
   t.equal(isSameType('', 1), false, 'reports false with falsey string and truthy number')
   t.equal(isSameType('string', 1), false, 'reports false with truthy string and truthy number')
@@ -127,7 +126,7 @@ test('isSameType (Numbers)', t => {
   t.equal(isSameType(true, 1), false, 'reports false with true and truthy number')
   t.equal(isSameType({}, 1), false, 'reports false with object and truthy number')
   t.equal(isSameType([], 1), false, 'reports false with array and truthy number')
-  t.equal(isSameType(noop, 1), false, 'reports false with function and truthy number')
+  t.equal(isSameType(unit, 1), false, 'reports false with function and truthy number')
 
   t.end()
 })
@@ -159,25 +158,25 @@ test('isSameType (Strings)', t => {
   t.equal(isSameType('', true), false, 'reports false with falsey string and true')
   t.equal(isSameType('', {}), false, 'reports false with falsey string and object')
   t.equal(isSameType('', []), false, 'reports false with falsey string and array')
-  t.equal(isSameType('', noop), false, 'reports false with falsey string and function')
+  t.equal(isSameType('', unit), false, 'reports false with falsey string and function')
 
   t.equal(isSameType(false, ''), false, 'reports false with false and falsey string')
   t.equal(isSameType(true, ''), false, 'reports false with true and falsey string')
   t.equal(isSameType({}, ''), false, 'reports false with object and falsey string')
   t.equal(isSameType([], ''), false, 'reports false with array and falsey string')
-  t.equal(isSameType(noop, ''), false, 'reports false with function and falsey string')
+  t.equal(isSameType(unit, ''), false, 'reports false with function and falsey string')
 
   t.equal(isSameType('string', false), false, 'reports false with truthy string and false')
   t.equal(isSameType('string', true), false, 'reports false with truthy string and true')
   t.equal(isSameType('string', {}), false, 'reports false with truthy string and object')
   t.equal(isSameType('string', []), false, 'reports false with truthy string and array')
-  t.equal(isSameType('string', noop), false, 'reports false with truthy string and function')
+  t.equal(isSameType('string', unit), false, 'reports false with truthy string and function')
 
   t.equal(isSameType(false, 'string'), false, 'reports false with false and truthy string')
   t.equal(isSameType(true, 'string'), false, 'reports false with true and truthy string')
   t.equal(isSameType({}, 'string'), false, 'reports false with object and truthy string')
   t.equal(isSameType([], 'string'), false, 'reports false with array and truthy string')
-  t.equal(isSameType(noop, 'string'), false, 'reports false with function and truthy string')
+  t.equal(isSameType(unit, 'string'), false, 'reports false with function and truthy string')
 
   t.end()
 })
@@ -209,19 +208,19 @@ test('isSameType (Booleans)', t => {
 
   t.equal(isSameType(false, {}), false, 'reports false with false string and object')
   t.equal(isSameType(false, []), false, 'reports false with false string and array')
-  t.equal(isSameType(false, noop), false, 'reports false with false string and function')
+  t.equal(isSameType(false, unit), false, 'reports false with false string and function')
 
   t.equal(isSameType({}, false), false, 'reports false with object and false string')
   t.equal(isSameType([], false), false, 'reports false with array and false string')
-  t.equal(isSameType(noop, false), false, 'reports false with function and false string')
+  t.equal(isSameType(unit, false), false, 'reports false with function and false string')
 
   t.equal(isSameType(true, {}), false, 'reports false with true and object')
   t.equal(isSameType(true, []), false, 'reports false with true and array')
-  t.equal(isSameType(true, noop), false, 'reports false with true and function')
+  t.equal(isSameType(true, unit), false, 'reports false with true and function')
 
   t.equal(isSameType({}, true), false, 'reports false with object and true')
   t.equal(isSameType([], true), false, 'reports false with array and true')
-  t.equal(isSameType(noop, true), false, 'reports false with function and true')
+  t.equal(isSameType(unit, true), false, 'reports false with function and true')
 
   t.end()
 })
@@ -249,10 +248,10 @@ test('isSameType (Objects)', t => {
   t.equal(isSameType([], Object), false, 'reports false with array and Object')
 
   t.equal(isSameType({}, []), false, 'reports false with object and array')
-  t.equal(isSameType({}, noop), false, 'reports false with object and function')
+  t.equal(isSameType({}, unit), false, 'reports false with object and function')
 
   t.equal(isSameType([], {}), false, 'reports false with array and object')
-  t.equal(isSameType(noop, {}), false, 'reports false with noop and object')
+  t.equal(isSameType(unit, {}), false, 'reports false with unit and object')
 
   t.end()
 })
@@ -279,17 +278,17 @@ test('isSameType (Arrays)', t => {
   t.equal(isSameType(true, Array), false, 'reports false with true and Array')
   t.equal(isSameType({}, Array), false, 'reports false with object and Array')
 
-  t.equal(isSameType(noop, []), false, 'reports false with function and array')
-  t.equal(isSameType([], noop), false, 'reports false with array and function')
+  t.equal(isSameType(unit, []), false, 'reports false with function and array')
+  t.equal(isSameType([], unit), false, 'reports false with array and function')
 
   t.end()
 })
 
 test('isSameType (Functions)', t => {
-  t.equal(isSameType(Function, noop), true, 'reports true with Function and function')
-  t.equal(isSameType(noop, Function), true, 'reports true with function and Function')
+  t.equal(isSameType(Function, unit), true, 'reports true with Function and function')
+  t.equal(isSameType(unit, Function), true, 'reports true with function and Function')
 
-  t.equal(isSameType(noop, x => x), true, 'reports true with function and function')
+  t.equal(isSameType(unit, x => x), true, 'reports true with function and function')
 
   t.equal(isSameType(Function, 0), false, 'reports false with Function and falsey number')
   t.equal(isSameType(Function, 1), false, 'reports false with Function and truthy number')

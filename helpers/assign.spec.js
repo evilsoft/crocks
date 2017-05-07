@@ -2,11 +2,11 @@ const test = require('tape')
 const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
-const noop = helpers.noop
+const unit = require('../helpers/unit')
 
 const assign = require('./assign')
 
-test('assign', t => {
+test('assign helper function', t => {
   const fn = bindFunc(assign)
 
   const err = /assign: Objects required for both arguments/
@@ -18,7 +18,7 @@ test('assign', t => {
   t.throws(fn('string', {}), err, 'throws when first arg is a truthy string')
   t.throws(fn(false, {}), err, 'throws when first arg is false')
   t.throws(fn(true, {}), err, 'throws when first arg is true')
-  t.throws(fn(noop, {}), err, 'throws when first arg is a function')
+  t.throws(fn(unit, {}), err, 'throws when first arg is a function')
   t.throws(fn([], {}), err, 'throws when first arg is an array')
 
   t.throws(fn({}, undefined), err, 'throws when second arg is undefined')
@@ -29,7 +29,7 @@ test('assign', t => {
   t.throws(fn({}, 'string'), err, 'throws when second arg is a truthy string')
   t.throws(fn({}, false), err, 'throws when second arg is false')
   t.throws(fn({}, true), err, 'throws when second arg is true')
-  t.throws(fn({}, noop), err, 'throws when second arg is a function')
+  t.throws(fn({}, unit), err, 'throws when second arg is a function')
   t.throws(fn({}, []), err, 'throws when second arg is an array')
 
   const first = {

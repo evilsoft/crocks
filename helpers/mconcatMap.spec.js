@@ -2,7 +2,7 @@ const test = require('tape')
 const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
-const noop = helpers.noop
+const unit = require('../helpers/unit')
 
 const isFunction = require('../predicates/isFunction')
 
@@ -15,16 +15,16 @@ test('mconcatMap', t => {
 
   t.ok(isFunction(mconcatMap), 'is a function')
 
-  t.throws(mc(undefined, noop, []), TypeError, 'throws when first arg is undefined')
-  t.throws(mc(null, noop, []), TypeError, 'throws when first arg is null')
-  t.throws(mc(0, noop, []), TypeError, 'throws when first arg is falsey number')
-  t.throws(mc(1, noop, []), TypeError, 'throws when first arg is truthy number')
-  t.throws(mc('', noop, []), TypeError, 'throws when first arg is falsey string')
-  t.throws(mc('string', noop, []), TypeError, 'throws when first arg is truthy string')
-  t.throws(mc(false, noop, []), TypeError, 'throws when first arg is false')
-  t.throws(mc(true, noop, []), TypeError, 'throws when first arg is true')
-  t.throws(mc({}, noop, []), TypeError, 'throws when first arg is an object')
-  t.throws(mc([], noop, []), TypeError, 'throws when first arg is an array')
+  t.throws(mc(undefined, unit, []), TypeError, 'throws when first arg is undefined')
+  t.throws(mc(null, unit, []), TypeError, 'throws when first arg is null')
+  t.throws(mc(0, unit, []), TypeError, 'throws when first arg is falsey number')
+  t.throws(mc(1, unit, []), TypeError, 'throws when first arg is truthy number')
+  t.throws(mc('', unit, []), TypeError, 'throws when first arg is falsey string')
+  t.throws(mc('string', unit, []), TypeError, 'throws when first arg is truthy string')
+  t.throws(mc(false, unit, []), TypeError, 'throws when first arg is false')
+  t.throws(mc(true, unit, []), TypeError, 'throws when first arg is true')
+  t.throws(mc({}, unit, []), TypeError, 'throws when first arg is an object')
+  t.throws(mc([], unit, []), TypeError, 'throws when first arg is an array')
 
   t.throws(mc(Last, undefined, []), TypeError, 'throws when second arg is undefined')
   t.throws(mc(Last, null, []), TypeError, 'throws when second arg is null')
@@ -37,17 +37,17 @@ test('mconcatMap', t => {
   t.throws(mc(Last, {}, []), TypeError, 'throws when second arg is an object')
   t.throws(mc(Last, [], []), TypeError, 'throws when second arg is an array')
 
-  t.throws(mc(Last, noop, undefined), TypeError, 'throws when third arg is undefined')
-  t.throws(mc(Last, noop, null), TypeError, 'throws when third arg is null')
-  t.throws(mc(Last, noop, 0), TypeError, 'throws when arg third is falsey number')
-  t.throws(mc(Last, noop, 1), TypeError, 'throws when arg third is truthy number')
-  t.throws(mc(Last, noop, ''), TypeError, 'throws when arg third is falsey string')
-  t.throws(mc(Last, noop, 'string'), TypeError, 'throws when third arg is truthy string')
-  t.throws(mc(Last, noop, false), TypeError, 'throws when third arg is false')
-  t.throws(mc(Last, noop, true), TypeError, 'throws when third arg is true')
-  t.throws(mc(Last, noop, {}), TypeError, 'throws when third arg is an object')
+  t.throws(mc(Last, unit, undefined), TypeError, 'throws when third arg is undefined')
+  t.throws(mc(Last, unit, null), TypeError, 'throws when third arg is null')
+  t.throws(mc(Last, unit, 0), TypeError, 'throws when arg third is falsey number')
+  t.throws(mc(Last, unit, 1), TypeError, 'throws when arg third is truthy number')
+  t.throws(mc(Last, unit, ''), TypeError, 'throws when arg third is falsey string')
+  t.throws(mc(Last, unit, 'string'), TypeError, 'throws when third arg is truthy string')
+  t.throws(mc(Last, unit, false), TypeError, 'throws when third arg is false')
+  t.throws(mc(Last, unit, true), TypeError, 'throws when third arg is true')
+  t.throws(mc(Last, unit, {}), TypeError, 'throws when third arg is an object')
 
-  t.doesNotThrow(mc(Last, noop, [ 1, 2, 3 ]), 'allows a populated array as second argument')
+  t.doesNotThrow(mc(Last, unit, [ 1, 2, 3 ]), 'allows a populated array as second argument')
 
   const addOne = x => x + 1
   const nothing = mconcatMap(Last, addOne, [])

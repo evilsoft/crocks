@@ -3,9 +3,9 @@ const sinon = require('sinon')
 const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
-const noop = helpers.noop
 
 const isFunction = require('../predicates/isFunction')
+const unit = require('../helpers/unit')
 
 const constant = require('../combinators/constant')
 const identity = require('../combinators/identity')
@@ -36,15 +36,15 @@ test('chain pointfree', t => {
   t.throws(c({}, m), noFunc, 'throws if first arg is an object')
 
   const noChain = /chain: Chain of the same type required for second argument/
-  t.throws(c(noop, undefined), noChain, 'throws if second arg is undefined')
-  t.throws(c(noop, null), noChain, 'throws if second arg is null')
-  t.throws(c(noop, 0), noChain, 'throws if second arg is a falsey number')
-  t.throws(c(noop, 1), noChain, 'throws if second arg is a truthy number')
-  t.throws(c(noop, ''), noChain, 'throws if second arg is a falsey string')
-  t.throws(c(noop, 'string'), noChain, 'throws if second arg is a truthy string')
-  t.throws(c(noop, false), noChain, 'throws if second arg is false')
-  t.throws(c(noop, true), noChain, 'throws if second arg is true')
-  t.throws(c(noop, {}), noChain, 'throws if second arg is an object')
+  t.throws(c(unit, undefined), noChain, 'throws if second arg is undefined')
+  t.throws(c(unit, null), noChain, 'throws if second arg is null')
+  t.throws(c(unit, 0), noChain, 'throws if second arg is a falsey number')
+  t.throws(c(unit, 1), noChain, 'throws if second arg is a truthy number')
+  t.throws(c(unit, ''), noChain, 'throws if second arg is a falsey string')
+  t.throws(c(unit, 'string'), noChain, 'throws if second arg is a truthy string')
+  t.throws(c(unit, false), noChain, 'throws if second arg is false')
+  t.throws(c(unit, true), noChain, 'throws if second arg is true')
+  t.throws(c(unit, {}), noChain, 'throws if second arg is an object')
 
   const noArray = /chain: Function must return an Array/
   t.throws(c(constant(undefined), [ 1 ]), noArray, 'throws when function returns an undefined')
@@ -57,7 +57,7 @@ test('chain pointfree', t => {
   t.throws(c(constant(true), [ 1 ]), noArray, 'throws when function returns true')
   t.throws(c(constant({}), [ 1 ]), noArray, 'throws when function returns an object')
 
-  t.doesNotThrow(c(noop, m), 'allows a function and Chain')
+  t.doesNotThrow(c(unit, m), 'allows a function and Chain')
 
   const f = sinon.spy()
   const res = chain(f, m)

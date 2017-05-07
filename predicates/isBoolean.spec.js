@@ -1,15 +1,14 @@
 const test = require('tape')
-const helpers = require('../test/helpers')
 
-const noop = helpers.noop
 const isFunction = require('./isFunction')
+const unit = require('../helpers/unit')
 
 const isBoolean = require('./isBoolean')
 
 test('isBoolean predicate function', t => {
   t.ok(isFunction(isBoolean), 'is a function')
 
-  t.equal(isBoolean(noop), false, 'returns false with function')
+  t.equal(isBoolean(unit), false, 'returns false with function')
   t.equal(isBoolean(undefined), false, 'returns false with undefined')
   t.equal(isBoolean(null), false, 'returns false with null')
   t.equal(isBoolean(''), false, 'returns false with falsey string')

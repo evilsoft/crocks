@@ -2,9 +2,9 @@ const test = require('tape')
 const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
-const noop = helpers.noop
 
 const isFunction = require('../predicates/isFunction')
+const unit = require('../helpers/unit')
 
 const constant = require('../combinators/constant')
 const identity = require('../combinators/identity')
@@ -15,7 +15,7 @@ const filter = require('./filter')
 
 test('filter pointfree', t => {
   const m = bindFunc(filter)
-  const f = { filter: noop }
+  const f = { filter: unit }
 
   t.ok(isFunction(filter), 'is a function')
 
@@ -32,22 +32,22 @@ test('filter pointfree', t => {
   t.throws(m({}, f), noFunc, 'throws if first arg is an object')
 
   const noData = /filter: Foldable or Object required for second argument/
-  t.throws(m(noop, undefined), noData, 'throws if second arg is undefined')
-  t.throws(m(noop, null), noData, 'throws if second arg is null')
-  t.throws(m(noop, 0), noData, 'throws if second arg is a falsey number')
-  t.throws(m(noop, 1), noData, 'throws if second arg is a truthy number')
-  t.throws(m(noop, ''), noData, 'throws if second arg is a falsey string')
-  t.throws(m(noop, 'string'), noData, 'throws if second arg is a truthy string')
-  t.throws(m(noop, false), noData, 'throws if second arg is false')
-  t.throws(m(noop, true), noData, 'throws if second arg is true')
+  t.throws(m(unit, undefined), noData, 'throws if second arg is undefined')
+  t.throws(m(unit, null), noData, 'throws if second arg is null')
+  t.throws(m(unit, 0), noData, 'throws if second arg is a falsey number')
+  t.throws(m(unit, 1), noData, 'throws if second arg is a truthy number')
+  t.throws(m(unit, ''), noData, 'throws if second arg is a falsey string')
+  t.throws(m(unit, 'string'), noData, 'throws if second arg is a truthy string')
+  t.throws(m(unit, false), noData, 'throws if second arg is false')
+  t.throws(m(unit, true), noData, 'throws if second arg is true')
 
-  t.doesNotThrow(m(noop, f), 'allows a function and Foldable container')
-  t.doesNotThrow(m(noop, []), 'allows a function and an array (also Foldable)')
-  t.doesNotThrow(m(noop, {}), 'allows a function and an object')
+  t.doesNotThrow(m(unit, f), 'allows a function and Foldable container')
+  t.doesNotThrow(m(unit, []), 'allows a function and an array (also Foldable)')
+  t.doesNotThrow(m(unit, {}), 'allows a function and an object')
 
-  t.doesNotThrow(m(Pred(noop), f), 'allows a Pred and Foldable container')
-  t.doesNotThrow(m(Pred(noop), []), 'allows a Pred and an array (also Foldable)')
-  t.doesNotThrow(m(Pred(noop), {}), 'allows a Pred and an object')
+  t.doesNotThrow(m(Pred(unit), f), 'allows a Pred and Foldable container')
+  t.doesNotThrow(m(Pred(unit), []), 'allows a Pred and an array (also Foldable)')
+  t.doesNotThrow(m(Pred(unit), {}), 'allows a Pred and an object')
 
   t.end()
 })

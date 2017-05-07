@@ -1,8 +1,7 @@
 const test = require('tape')
-const helpers = require('../test/helpers')
 
-const noop = helpers.noop
 const isFunction  = require('../predicates/isFunction')
+const unit = require('../helpers/unit')
 
 const constant = require('./constant')
 
@@ -21,7 +20,7 @@ test('constant (K combinator)', t => {
   t.equal(constant(x, true), x, 'returns first parameter when second is true')
   t.equal(constant(x, []), x, 'returns first parameter when second is an array')
   t.equal(constant(x, {}), x, 'returns first parameter when second is an object')
-  t.equal(constant(x, noop), x, 'returns first parameter when second is a function')
+  t.equal(constant(x, unit), x, 'returns first parameter when second is a function')
 
   t.end()
 })

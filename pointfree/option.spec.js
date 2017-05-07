@@ -3,7 +3,7 @@ const sinon   = require('sinon')
 const helpers = require('../test/helpers')
 
 const bindFunc    = helpers.bindFunc
-const noop        = helpers.noop
+const unit = require('../helpers/unit')
 
 const isFunction  = require('../predicates/isFunction')
 
@@ -28,7 +28,7 @@ test('option pointfree', t => {
   t.throws(f(0, true), TypeError, 'throws if passed true in second arg')
   t.throws(f(0, []), TypeError, 'throws if passed an array in second arg')
   t.throws(f(0, {}), TypeError, 'throws if passed an object in second arg')
-  t.throws(f(0, noop), TypeError, 'throws if passed a function in second arg')
+  t.throws(f(0, unit), TypeError, 'throws if passed a function in second arg')
 
   const result = option(0, m)
 

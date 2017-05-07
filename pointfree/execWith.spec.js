@@ -3,7 +3,7 @@ const sinon = require('sinon')
 const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
-const noop = helpers.noop
+const unit = require('../helpers/unit')
 
 const isFunction  = require('../predicates/isFunction')
 
@@ -28,7 +28,7 @@ test('execWith pointfree', t => {
   t.throws(f(13, true), TypeError, 'throws if passed true')
   t.throws(f(13, []), TypeError, 'throws if passed an array')
   t.throws(f(13, {}), TypeError, 'throws if passed an object')
-  t.throws(f(13, noop), TypeError, 'throws if passed a function')
+  t.throws(f(13, unit), TypeError, 'throws if passed a function')
 
   const result = execWith(23)(m)
 

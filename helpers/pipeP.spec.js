@@ -2,7 +2,7 @@ const test = require('tape')
 const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
-const noop = helpers.noop
+const unit = require('../helpers/unit')
 
 const identity = require('../combinators/identity')
 const isFunction = require('../predicates/isFunction')
@@ -13,8 +13,8 @@ test('pipeP parameters', t => {
   const prom = x => Promise.resolve(x)
 
   const pp = bindFunc(pipeP)
-  const f = bindFunc(pipeP(noop))
-  const g = bindFunc(pipeP(noop, prom))
+  const f = bindFunc(pipeP(unit))
+  const g = bindFunc(pipeP(unit, prom))
 
   t.ok(isFunction(pipeP), 'pipeP is a function')
 

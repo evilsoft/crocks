@@ -2,7 +2,7 @@ const test = require('tape')
 const sinon = require('sinon')
 const helpers = require('../test/helpers')
 
-const noop = helpers.noop
+const unit = require('../helpers/unit')
 const bindFunc = helpers.bindFunc
 
 const isFunction = require('../predicates/isFunction')
@@ -16,7 +16,7 @@ const reverseApply = require('../combinators/reverseApply')
 const Reader = require('./Reader')
 
 test('Reader', t => {
-  const m = Reader(noop)
+  const m = Reader(unit)
   const r = bindFunc(Reader)
 
   t.ok(isFunction(Reader), 'is a function')
@@ -39,13 +39,13 @@ test('Reader', t => {
   t.throws(r([]), TypeError, 'throws with array')
   t.throws(r({}), TypeError, 'throws with object')
 
-  t.doesNotThrow(r(noop), 'allows a function')
+  t.doesNotThrow(r(unit), 'allows a function')
 
   t.end()
 })
 
 test('Reader inspect', t => {
-  const m = Reader(noop)
+  const m = Reader(unit)
 
   t.ok(isFunction(m.inspect), 'provides an inspect function')
   t.equal(m.inspect(), 'Reader Function', 'returns inspect string')
@@ -54,7 +54,7 @@ test('Reader inspect', t => {
 })
 
 test('Reader type', t => {
-  t.equal(Reader(noop).type(), 'Reader', 'type returns Reader')
+  t.equal(Reader(unit).type(), 'Reader', 'type returns Reader')
   t.end()
 })
 
@@ -86,7 +86,7 @@ test('Reader ask errors', t => {
   t.throws(ask([]), TypeError, 'throws with an array')
   t.throws(ask({}), TypeError, 'throws with an object')
 
-  t.doesNotThrow(ask(noop), 'allows a function')
+  t.doesNotThrow(ask(unit), 'allows a function')
 
   t.end()
 })
@@ -103,7 +103,7 @@ test('Reader ask functionality', t => {
 })
 
 test('Reader map errors', t => {
-  const map = bindFunc(Reader(noop).map)
+  const map = bindFunc(Reader(unit).map)
 
   t.throws(map(undefined), TypeError, 'throws with undefined')
   t.throws(map(null), TypeError, 'throws with null')
@@ -116,7 +116,7 @@ test('Reader map errors', t => {
   t.throws(map([]), TypeError, 'throws with an array')
   t.throws(map({}), TypeError, 'throws with an object')
 
-  t.doesNotThrow(map(noop), 'allows a function')
+  t.doesNotThrow(map(unit), 'allows a function')
 
   t.end()
 })
@@ -155,7 +155,7 @@ test('Reader map properties (Functor)', t => {
 })
 
 test('Reader ap errors', t => {
-  const ap = bindFunc(Reader(noop).ap)
+  const ap = bindFunc(Reader(unit).ap)
   const m = { type: () => 'Reader...Not' }
 
   t.throws(ap(undefined), TypeError, 'throws with undefined')
@@ -170,7 +170,7 @@ test('Reader ap errors', t => {
   t.throws(ap({}), TypeError, 'throws with an object')
   t.throws(ap(m), TypeError, 'throws when Non-Reader')
 
-  t.doesNotThrow(ap(Reader(noop)), 'allows a function')
+  t.doesNotThrow(ap(Reader(unit)), 'allows a function')
 
   t.end()
 })
@@ -184,8 +184,8 @@ test('Reader ap properties (Apply)', t => {
   const a = m.map(composeB).ap(m).ap(m)
   const b = m.ap(m.ap(m))
 
-  t.ok(isFunction(Reader(noop).map), 'implements the Functor spec')
-  t.ok(isFunction(Reader(noop).ap), 'provides an ap function')
+  t.ok(isFunction(Reader(unit).map), 'implements the Functor spec')
+  t.ok(isFunction(Reader(unit).ap), 'provides an ap function')
 
   t.equal(a.ap(Reader(add3)).runWith(e), b.ap(Reader(add3)).runWith(e), 'composition')
 
@@ -193,7 +193,7 @@ test('Reader ap properties (Apply)', t => {
 })
 
 test('Reader of', t => {
-  t.equal(Reader.of, Reader(noop).of, 'of is the same as the instance version')
+  t.equal(Reader.of, Reader(unit).of, 'of is the same as the instance version')
   t.equal(Reader.of(0).type(), 'Reader', 'returns a Reader')
   t.equal(Reader.of(0).runWith(22), 0, 'wraps the value passed in a Reader')
 
@@ -206,8 +206,8 @@ test('Reader of properties (Applicative)', t => {
 
   const add27 = x => x + 27
 
-  t.ok(isFunction(Reader(noop).of), 'provides an of function')
-  t.ok(isFunction(Reader(noop).ap), 'implements the Apply spec')
+  t.ok(isFunction(Reader(unit).of), 'provides an of function')
+  t.ok(isFunction(Reader(unit).ap), 'implements the Apply spec')
 
   t.equal(m.ap(Reader(add27)).runWith(e), add27(e), 'identity')
   t.equal(m.ap(Reader.of(3)).runWith(e), Reader.of(identity(3)).runWith(e), 'homomorphism')
@@ -221,7 +221,7 @@ test('Reader of properties (Applicative)', t => {
 })
 
 test('Reader chain errors', t => {
-  const chain = bindFunc(Reader(noop).chain)
+  const chain = bindFunc(Reader(unit).chain)
 
   t.throws(chain(undefined), TypeError, 'throws with undefined')
   t.throws(chain(null), TypeError, 'throws null')
@@ -247,14 +247,14 @@ test('Reader chain errors', t => {
   t.throws(badRtn(true), TypeError, 'throws when function returns true')
   t.throws(badRtn([]), TypeError, 'throws when function returns an array')
   t.throws(badRtn({}), TypeError, 'throws when function returns an object')
-  t.throws(badRtn(noop), TypeError, 'throws when function returns a function')
+  t.throws(badRtn(unit), TypeError, 'throws when function returns a function')
 
   t.end()
 })
 
 test('Reader chain properties (Chain)', t => {
-  t.ok(isFunction(Reader(noop).chain), 'provides a chain function')
-  t.ok(isFunction(Reader(noop).ap), 'implements the Apply spec')
+  t.ok(isFunction(Reader(unit).chain), 'provides a chain function')
+  t.ok(isFunction(Reader(unit).ap), 'implements the Apply spec')
 
   const e = 8
 
@@ -270,8 +270,8 @@ test('Reader chain properties (Chain)', t => {
 })
 
 test('Reader chain properties (Monad)', t => {
-  t.ok(isFunction(Reader(noop).chain), 'implements the Chain spec')
-  t.ok(Reader(noop).of, 'implements the Applicative spec')
+  t.ok(isFunction(Reader(unit).chain), 'implements the Chain spec')
+  t.ok(Reader(unit).of, 'implements the Applicative spec')
 
   const f = x => Reader(constant(x))
 

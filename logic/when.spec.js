@@ -3,7 +3,7 @@ const sinon = require('sinon')
 const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
-const noop = helpers.noop
+const unit = require('../helpers/unit')
 
 const isFunction = require('../predicates/isFunction')
 
@@ -18,35 +18,35 @@ test('when logic function', t => {
 
   t.ok(isFunction(when), 'is a function')
 
-  t.throws(f(undefined, noop), 'throws with undefined in first argument')
-  t.throws(f(null, noop), 'throws with null in first argument')
-  t.throws(f(0, noop), 'throws with falsey number in first argument')
-  t.throws(f(1, noop), 'throws with truthy number in first argument')
-  t.throws(f('', noop), 'throws with falsey string in first argument')
-  t.throws(f('string', noop), 'throws with truthy string in first argument')
-  t.throws(f(false, noop), 'throws with false in first argument')
-  t.throws(f(true, noop), 'throws with true in first argument')
-  t.throws(f({}, noop), 'throws with an object in first argument')
-  t.throws(f([], noop), 'throws with an array in first argument')
+  t.throws(f(undefined, unit), 'throws with undefined in first argument')
+  t.throws(f(null, unit), 'throws with null in first argument')
+  t.throws(f(0, unit), 'throws with falsey number in first argument')
+  t.throws(f(1, unit), 'throws with truthy number in first argument')
+  t.throws(f('', unit), 'throws with falsey string in first argument')
+  t.throws(f('string', unit), 'throws with truthy string in first argument')
+  t.throws(f(false, unit), 'throws with false in first argument')
+  t.throws(f(true, unit), 'throws with true in first argument')
+  t.throws(f({}, unit), 'throws with an object in first argument')
+  t.throws(f([], unit), 'throws with an array in first argument')
 
-  t.throws(f(noop, undefined), 'throws with undefined in second argument')
-  t.throws(f(noop, null), 'throws with null in second argument')
-  t.throws(f(noop, 0), 'throws with falsey number in second argument')
-  t.throws(f(noop, 1), 'throws with truthy number in second argument')
-  t.throws(f(noop, ''), 'throws with falsey string in second argument')
-  t.throws(f(noop, 'string'), 'throws with truthy string in second argument')
-  t.throws(f(noop, false), 'throws with false in second argument')
-  t.throws(f(noop, true), 'throws with true in second argument')
-  t.throws(f(noop, {}), 'throws with an object in second argument')
-  t.throws(f(noop, []), 'throws with an array in second argument')
+  t.throws(f(unit, undefined), 'throws with undefined in second argument')
+  t.throws(f(unit, null), 'throws with null in second argument')
+  t.throws(f(unit, 0), 'throws with falsey number in second argument')
+  t.throws(f(unit, 1), 'throws with truthy number in second argument')
+  t.throws(f(unit, ''), 'throws with falsey string in second argument')
+  t.throws(f(unit, 'string'), 'throws with truthy string in second argument')
+  t.throws(f(unit, false), 'throws with false in second argument')
+  t.throws(f(unit, true), 'throws with true in second argument')
+  t.throws(f(unit, {}), 'throws with an object in second argument')
+  t.throws(f(unit, []), 'throws with an array in second argument')
 
   const func = x => !!x
   const pred = Pred(func)
 
-  t.doesNotThrow(f(func, noop), 'allows a predicate function in first argument')
-  t.doesNotThrow(f(pred, noop), 'allows a Pred in first argument')
+  t.doesNotThrow(f(func, unit), 'allows a predicate function in first argument')
+  t.doesNotThrow(f(pred, unit), 'allows a Pred in first argument')
 
-  const g = when(noop, noop)
+  const g = when(unit, unit)
   const h = when(constant(true), x => x * 2, 11)
 
   t.ok(isFunction(g), 'returns a function when first two functions applied')

@@ -3,7 +3,7 @@ const sinon = require('sinon')
 const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
-const noop = helpers.noop
+const unit = require('../helpers/unit')
 
 const isFunction = require('../predicates/isFunction')
 
@@ -33,7 +33,7 @@ test('first pointfree', t => {
   t.throws(f([]), 'throws if arg is an array')
 
   t.doesNotThrow(f(m), 'allows an Arrow')
-  t.doesNotThrow(f(noop), 'allows a function')
+  t.doesNotThrow(f(unit), 'allows a function')
 
   t.end()
 })
@@ -65,7 +65,7 @@ test('first with Function', t => {
   t.throws(g(true), TypeError, 'throws when wrapped function called with true')
   t.throws(g({}), TypeError, 'throws when wrapped function called with an Object')
   t.throws(g([]), TypeError, 'throws when wrapped function called with an Array')
-  t.throws(g(noop), TypeError, 'throws when wrapped function called with a function')
+  t.throws(g(unit), TypeError, 'throws when wrapped function called with a function')
 
   t.equal(res.fst(), 4, 'Applies function to `fst` of the Pair')
   t.equal(res.snd(), 3, 'Does not Apply function to `snd` of the Pair')

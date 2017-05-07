@@ -3,7 +3,7 @@ const sinon = require('sinon')
 const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
-const noop = helpers.noop
+const unit = require('../helpers/unit')
 
 const identity = require('../combinators/identity')
 
@@ -46,8 +46,8 @@ test('maybeToAsync with Maybe', t => {
   t.ok(isSameType(Async, good), 'returns an Async with a Just')
   t.ok(isSameType(Async, bad), 'returns an Async with a Nothing')
 
-  const res = sinon.spy(noop)
-  const rej = sinon.spy(noop)
+  const res = sinon.spy(unit)
+  const rej = sinon.spy(unit)
 
   good.fork(rej, res)
   bad.fork(rej, res)
@@ -86,8 +86,8 @@ test('maybeToAsync with Maybe returning function', t => {
   t.ok(isSameType(Async, good), 'returns an Async with a Just')
   t.ok(isSameType(Async, bad), 'returns an Async with a Nothing')
 
-  const res = sinon.spy(noop)
-  const rej = sinon.spy(noop)
+  const res = sinon.spy(unit)
+  const rej = sinon.spy(unit)
 
   good.fork(rej, res)
   bad.fork(rej, res)

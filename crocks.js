@@ -33,11 +33,11 @@ const crocks = {
 const helpers = {
   assign: require('./helpers/assign'),
   assoc: require('./helpers/assoc'),
+  binary: require('./helpers/binary'),
   branch: require('./helpers/branch'),
   compose: require('./helpers/compose'),
   composeP: require('./helpers/composeP'),
   curry: require('./helpers/curry'),
-  curryN: require('./helpers/curryN'),
   defaultProps: require('./helpers/defaultProps'),
   defaultTo: require('./helpers/defaultTo'),
   fanout: require('./helpers/fanout'),
@@ -48,9 +48,11 @@ const helpers = {
   mconcatMap: require('./helpers/mconcatMap'),
   mreduce: require('./helpers/mreduce'),
   mreduceMap: require('./helpers/mreduceMap'),
+  nAry: require('./helpers/nAry'),
   objOf: require('./helpers/objOf'),
   omit: require('./helpers/omit'),
   once: require('./helpers/once'),
+  partial: require('./helpers/partial'),
   pick: require('./helpers/pick'),
   pipe: require('./helpers/pipe'),
   pipeP: require('./helpers/pipeP'),
@@ -60,7 +62,9 @@ const helpers = {
   safeLift: require('./helpers/safeLift'),
   tap: require('./helpers/tap'),
   toPairs: require('./helpers/toPairs'),
-  tryCatch: require('./helpers/tryCatch')
+  tryCatch: require('./helpers/tryCatch'),
+  unary: require('./helpers/unary'),
+  unit: require('./helpers/unit')
 }
 
 const logic = {
@@ -93,6 +97,7 @@ const pointFree = {
   concat: require('./pointfree/concat'),
   cons: require('./pointfree/cons'),
   contramap: require('./pointfree/contramap'),
+  empty: require('./pointfree/empty'),
   evalWith: require('./pointfree/evalWith'),
   execWith: require('./pointfree/execWith'),
   either: require('./pointfree/either'),
@@ -103,7 +108,6 @@ const pointFree = {
   head: require('./pointfree/head'),
   log: require('./pointfree/log'),
   map: require('./pointfree/map'),
-  maybe: require('./pointfree/maybe'),
   merge: require('./pointfree/merge'),
   option: require('./pointfree/option'),
   promap: require('./pointfree/promap'),

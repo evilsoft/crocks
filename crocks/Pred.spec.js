@@ -3,7 +3,7 @@ const sinon = require('sinon')
 const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
-const noop = helpers.noop
+const unit = require('../helpers/unit')
 
 const isFunction = require('../predicates/isFunction')
 const isObject = require('../predicates/isObject')
@@ -22,7 +22,7 @@ test('Pred', t => {
   t.ok(isFunction(Pred.type), 'provides a type function')
   t.ok(isFunction(Pred.empty), 'provides an empty function')
 
-  t.ok(isObject(Pred(noop)), 'returns an object')
+  t.ok(isObject(Pred(unit)), 'returns an object')
 
   t.throws(Pred, TypeError, 'throws with nothing')
   t.throws(p(undefined), TypeError, 'throws with undefined')
@@ -36,13 +36,13 @@ test('Pred', t => {
   t.throws(p({}), TypeError, 'throws with an object')
   t.throws(p([]), TypeError, 'throws with an array')
 
-  t.doesNotThrow(p(noop), 'allows a function')
+  t.doesNotThrow(p(unit), 'allows a function')
 
   t.end()
 })
 
 test('Pred inspect', t => {
-  const m = Pred(noop)
+  const m = Pred(unit)
 
   t.ok(isFunction(m.inspect), 'provides an inpsect function')
   t.equal(m.inspect(), 'Pred Function', 'returns inspect string')
@@ -51,7 +51,7 @@ test('Pred inspect', t => {
 })
 
 test('Pred type', t => {
-  t.equal(Pred(noop).type(), 'Pred', 'type returns Pred')
+  t.equal(Pred(unit).type(), 'Pred', 'type returns Pred')
   t.end()
 })
 
@@ -82,7 +82,7 @@ test('Pred runWith', t => {
   t.equals(nonBoolPred(true), true, 'returns true when wrapped function returns true')
   t.equals(nonBoolPred({}), true, 'returns true when wrapped function returns an object')
   t.equals(nonBoolPred([]), true, 'returns true when wrapped function returns an array')
-  t.equals(nonBoolPred(noop), true, 'returns true when wrapped function returns a function')
+  t.equals(nonBoolPred(unit), true, 'returns true when wrapped function returns a function')
 
   const result = m.runWith(false)
 
@@ -93,7 +93,7 @@ test('Pred runWith', t => {
 })
 
 test('Pred contramap errors', t => {
-  const cmap = bindFunc(Pred(noop).contramap)
+  const cmap = bindFunc(Pred(unit).contramap)
 
   t.throws(cmap(undefined), TypeError, 'throws with undefined')
   t.throws(cmap(null), TypeError, 'throws with null')
@@ -106,7 +106,7 @@ test('Pred contramap errors', t => {
   t.throws(cmap([]), TypeError, 'throws with an array')
   t.throws(cmap({}), TypeError, 'throws with an object')
 
-  t.doesNotThrow(cmap(noop), 'allows functions')
+  t.doesNotThrow(cmap(unit), 'allows functions')
 
   t.end()
 })

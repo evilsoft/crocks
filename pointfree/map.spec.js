@@ -3,7 +3,7 @@ const sinon = require('sinon')
 const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
-const noop = helpers.noop
+const unit = require('../helpers/unit')
 
 const isFunction = require('../predicates/isFunction')
 
@@ -13,7 +13,7 @@ const map = require('./map')
 
 test('map pointfree', t => {
   const m = bindFunc(map)
-  const f = { map: noop }
+  const f = { map: unit }
 
   t.ok(isFunction(map), 'is a function')
 
@@ -30,20 +30,20 @@ test('map pointfree', t => {
   t.throws(m({}, f), noFunc, 'throws if first arg is an object')
 
   const noFunctor = /map: Object, Function or Functor of the same type required for second requirement/
-  t.throws(m(noop, undefined), noFunctor, 'throws if second arg is undefined')
-  t.throws(m(noop, null), noFunctor, 'throws if second arg is null')
-  t.throws(m(noop, 0), noFunctor, 'throws if second arg is a falsey number')
-  t.throws(m(noop, 1), noFunctor, 'throws if second arg is a truthy number')
-  t.throws(m(noop, ''), noFunctor, 'throws if second arg is a falsey string')
-  t.throws(m(noop, 'string'), noFunctor, 'throws if second arg is a truthy string')
-  t.throws(m(noop, false), noFunctor, 'throws if second arg is false')
-  t.throws(m(noop, true), noFunctor, 'throws if second arg is true')
+  t.throws(m(unit, undefined), noFunctor, 'throws if second arg is undefined')
+  t.throws(m(unit, null), noFunctor, 'throws if second arg is null')
+  t.throws(m(unit, 0), noFunctor, 'throws if second arg is a falsey number')
+  t.throws(m(unit, 1), noFunctor, 'throws if second arg is a truthy number')
+  t.throws(m(unit, ''), noFunctor, 'throws if second arg is a falsey string')
+  t.throws(m(unit, 'string'), noFunctor, 'throws if second arg is a truthy string')
+  t.throws(m(unit, false), noFunctor, 'throws if second arg is false')
+  t.throws(m(unit, true), noFunctor, 'throws if second arg is true')
 
   t.end()
 })
 
 test('map functor', t => {
-  const m = { map: sinon.spy(noop) }
+  const m = { map: sinon.spy(unit) }
 
   map(identity)(m)
 

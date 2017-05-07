@@ -2,7 +2,7 @@ const test = require('tape')
 const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
-const noop = helpers.noop
+const unit = require('../helpers/unit')
 
 const isObject = require('../predicates/isObject')
 
@@ -22,7 +22,7 @@ test('fromPairs', t => {
   t.throws(fn('string'), noFold, 'throws when argument is a truthy string')
   t.throws(fn(false), noFold, 'throws when argument is false')
   t.throws(fn(true), noFold, 'throws when argument is true')
-  t.throws(fn(noop), noFold, 'throws when argument is a function')
+  t.throws(fn(unit), noFold, 'throws when argument is a function')
   t.throws(fn({}), noFold, 'throws when argument is an object')
 
   t.throws(fn([ undefined ]), noFold, 'throws when argument contains undefined')
@@ -33,7 +33,7 @@ test('fromPairs', t => {
   t.throws(fn([ 'string' ]), noFold, 'throws when argument contains a truthy string')
   t.throws(fn([ false ]), noFold, 'throws when argument contains false')
   t.throws(fn([ true ]), noFold, 'throws when argument contains true')
-  t.throws(fn([ noop ]), noFold, 'throws when argument contains a function')
+  t.throws(fn([ unit ]), noFold, 'throws when argument contains a function')
   t.throws(fn([ {} ]), noFold, 'throws when argument contains an object')
 
   const buildPair =
@@ -46,7 +46,7 @@ test('fromPairs', t => {
   t.throws(buildPair(1), noString, 'throws when fst of Pair is a truthy number')
   t.throws(buildPair(false), noString, 'throws when fst of Pair is false')
   t.throws(buildPair(true), noString, 'throws when fst of Pair is true')
-  t.throws(buildPair(noop), noString, 'throws when fst of Pair is a function')
+  t.throws(buildPair(unit), noString, 'throws when fst of Pair is a function')
   t.throws(buildPair({}), noString, 'throws when fst of Pair is an object')
   t.throws(buildPair([]), noString, 'throws when fst of Pair is an object')
 

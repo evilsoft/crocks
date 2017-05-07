@@ -5,7 +5,7 @@ const merge = require('../pointfree/merge')
 
 const branch = require('./branch')
 
-test('branch function', t => {
+test('branch helper function', t => {
   const extract =
     merge((x, y) => [ x, y ])
 

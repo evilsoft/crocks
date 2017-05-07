@@ -2,7 +2,7 @@ const test = require('tape')
 const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
-const noop = helpers.noop
+const unit = require('../helpers/unit')
 
 const isFunction = require('../predicates/isFunction')
 const isSameType = require('../predicates/isSameType')
@@ -32,7 +32,7 @@ test('tryCatch', t => {
   t.throws(f({}), 'throws with an object in first argument')
   t.throws(f([]), 'throws with an array in first argument')
 
-  t.doesNotThrow(f(noop), 'allows a function in first argument')
+  t.doesNotThrow(f(unit), 'allows a function in first argument')
 
   t.end()
 })

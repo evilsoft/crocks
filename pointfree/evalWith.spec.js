@@ -2,9 +2,9 @@ const test = require('tape')
 const sinon = require('sinon')
 const helpers = require('../test/helpers')
 
-const noop = helpers.noop
 const bindFunc = helpers.bindFunc
 const isFunction  = require('../predicates/isFunction')
+const unit = require('../helpers/unit')
 
 const constant = require('../combinators/constant')
 
@@ -27,7 +27,7 @@ test('evalWith pointfree', t => {
   t.throws(f(13, true), TypeError, 'throws if passed true')
   t.throws(f(13, []), TypeError, 'throws if passed an array')
   t.throws(f(13, {}), TypeError, 'throws if passed an object')
-  t.throws(f(13, noop), TypeError, 'throws if passed a function')
+  t.throws(f(13, unit), TypeError, 'throws if passed a function')
 
   const result = evalWith(23)(m)
 

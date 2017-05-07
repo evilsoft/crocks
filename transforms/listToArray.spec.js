@@ -31,7 +31,7 @@ test('listToArray transform', t => {
 })
 
 test('listToArray with List', t => {
-  const data = [23, 45, 'a', [42, 56, ['19']]]
+  const data = [ 23, 45, 'a', [ 42, 56, [ '19' ] ] ]
   const list = List.fromArray(data)
 
   const a = listToArray(list)
@@ -56,7 +56,7 @@ test('listToArray with List returning function', t => {
   t.throws(f({}), TypeError, 'throws if function returns an object')
   t.throws(f([]), TypeError, 'throws if function returns an array')
 
-  const data = [32, 54, 'b', [24, 65], ['91']]
+  const data = [ 32, 54, 'b', [ 24, 65 ], [ '91' ] ]
   const list = List.fromArray(data)
 
   const m = listToArray(identity, list)
@@ -65,5 +65,4 @@ test('listToArray with List returning function', t => {
   t.same(m, data, 'preserves the structure of underlying data')
 
   t.end()
-
 })

@@ -39,7 +39,7 @@ test('hasProp function', t => {
   t.equals(hasProp(key, {}), false, 'returns false when key does not exist on object')
 
   t.equals(hasProp(2, arr), true, 'returns true when index exists in array')
-  t.equals(hasProp("1", arr), true, 'returns true when string index exists in array')
+  t.equals(hasProp('1', arr), true, 'returns true when string index exists in array')
   t.equals(hasProp(-1, arr), false, 'returns false when index does not exist in array')
 
   t.end()

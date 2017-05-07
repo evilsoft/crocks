@@ -31,7 +31,7 @@ test('arrayToList transform', t => {
 })
 
 test('arrayToList with Array', t => {
-  const data = [23, 45, 'a', [42, 56, ['19']]]
+  const data = [ 23, 45, 'a', [ 42, 56, [ '19' ] ] ]
 
   const a = arrayToList(data)
 
@@ -54,7 +54,7 @@ test('arrayToList with Array returning function', t => {
   t.throws(f(true), TypeError, 'throws if function returns true')
   t.throws(f({}), TypeError, 'throws if function returns an object')
 
-  const data = [32, 54, 'b', [24, 65], ['91']]
+  const data = [ 32, 54, 'b', [ 24, 65 ], [ '91' ] ]
 
   const m = arrayToList(identity, data)
 

@@ -35,10 +35,10 @@ test('mreduce', t => {
   t.throws(mc(Last, true), TypeError, 'throws when second arg is true')
   t.throws(mc(Last, {}), TypeError, 'throws when second arg is an object')
 
-  t.doesNotThrow(mc(Last, [1, 2, 3]), 'allows a populated array as second argument')
+  t.doesNotThrow(mc(Last, [ 1, 2, 3 ]), 'allows a populated array as second argument')
 
   const nothing = mreduce(Last, [])
-  const something = mreduce(Last, [1, 2, 3])
+  const something = mreduce(Last, [ 1, 2, 3 ])
 
   t.equal(nothing, Last.empty().value(), 'returns the empty value when passed an empty array')
   t.equal(something, 3, 'returns the last value by lifting and calling concat on each')

@@ -68,7 +68,7 @@ test('filter Array', t => {
   const pred = Pred(x => x <= 10)
 
   t.same(filter(fn, ar), [ 56 ], 'filters as expected with a predicate function')
-  t.same(filter(pred, ar), [ 1, 9, 7], 'filters as expected with a Pred')
+  t.same(filter(pred, ar), [ 1, 9, 7 ], 'filters as expected with a Pred')
 
   t.end()
 })

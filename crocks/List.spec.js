@@ -60,9 +60,9 @@ test('List fromArray', t => {
   t.throws(fromArray(true), err, 'throws with true')
   t.throws(fromArray({}), err, 'throws with an object')
 
-  const data = [[2, 1], 'a']
+  const data = [ [ 2, 1 ], 'a' ]
 
-  t.equal(List.fromArray([0]).type(), 'List', 'returns a List')
+  t.equal(List.fromArray([ 0 ]).type(), 'List', 'returns a List')
   t.same(List.fromArray(data).value(), data, 'wraps the value passed into List in an array')
 
   t.end()
@@ -72,7 +72,7 @@ test('List inspect', t => {
   const m = List([ 1, true, 'string' ])
 
   t.ok(isFunction(m.inspect), 'provides an inpsect function')
-  t.equal(m.inspect(), "List [ 1, true, \"string\" ]", 'returns inspect string')
+  t.equal(m.inspect(), 'List [ 1, true, "string" ]', 'returns inspect string')
 
   t.end()
 })
@@ -144,7 +144,7 @@ test('List value', t => {
 })
 
 test('List toArray', t => {
-  const data = [ 'some-thing', ['else', 43], 34 ]
+  const data = [ 'some-thing', [ 'else', 43 ], 34 ]
   const a = List(data).toArray()
 
   t.same(a, data, 'provides the wrapped array')
@@ -489,7 +489,7 @@ test('List of properties (Applicative)', t => {
   t.ok(isFunction(List([]).of), 'provides an of function')
   t.ok(isFunction(List([]).ap), 'implements the Apply spec')
 
-  t.same(m.ap(List([3])).value(), [ 3 ], 'identity')
+  t.same(m.ap(List([ 3 ])).value(), [ 3 ], 'identity')
   t.same(m.ap(List.of(3)).value(), List.of(identity(3)).value(), 'homomorphism')
 
   const a = x => m.ap(List.of(x))

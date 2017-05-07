@@ -47,11 +47,11 @@ test('mconcatMap', t => {
   t.throws(mc(Last, noop, true), TypeError, 'throws when third arg is true')
   t.throws(mc(Last, noop, {}), TypeError, 'throws when third arg is an object')
 
-  t.doesNotThrow(mc(Last, noop, [1, 2, 3]), 'allows a populated array as second argument')
+  t.doesNotThrow(mc(Last, noop, [ 1, 2, 3 ]), 'allows a populated array as second argument')
 
   const addOne = x => x + 1
   const nothing = mconcatMap(Last, addOne, [])
-  const something = mconcatMap(Last, addOne, [1, 2, 3])
+  const something = mconcatMap(Last, addOne, [ 1, 2, 3 ])
 
   t.equal(nothing.value(), Last.empty().value(), 'returns the empty value when passed an empty array')
   t.equal(something.value(), 4, 'returns the last value by lifting and calling concat on each after running through map function')

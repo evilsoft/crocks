@@ -87,7 +87,7 @@ test('liftA3 arrays', t => {
   const f = liftA3(add)
 
   t.same(f([ 1 ], [ 2 ], [ 3 ]), [ 6 ], 'applys single element lists')
-  t.same(f([ 1, 2 ], [ 3, 4 ], [ 5, 6 ]), [ 9, 10, 10, 11, 10, 11, 11, 12], 'applys multi element lists')
+  t.same(f([ 1, 2 ], [ 3, 4 ], [ 5, 6 ]), [ 9, 10, 10, 11, 10, 11, 11, 12 ], 'applys multi element lists')
   t.same(f([ 1, 2 ], [ 3 ], []), [], 'returns empty when fourth arg is empty array')
 
   t.end()

@@ -1,5 +1,4 @@
 node_modules
 dist
-test
-coveragE
+coverage
 *.spec.js

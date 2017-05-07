@@ -17,11 +17,13 @@ function first(m) {
 
       return x.bimap(m, identity)
     }
-  } else if(m && isFunction(m.first)) {
-    return m.first()
-  } else {
-    throw new TypeError('first: Arrow, Function or Star required')
   }
+
+  if(m && isFunction(m.first)) {
+    return m.first()
+  }
+
+  throw new TypeError('first: Arrow, Function or Star required')
 }
 
 module.exports = first

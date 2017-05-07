@@ -24,7 +24,7 @@ function curry(fn) {
       xs.length ? xs : [ undefined ]
 
     if(args.length < fn.length) {
-      return curry(Function.bind.apply(fn, [null].concat(args)))
+      return curry(Function.bind.apply(fn, [ null ].concat(args)))
     }
 
     const val = (args.length === fn.length)

@@ -61,7 +61,7 @@ function Maybe(u) {
 
   const inspect = () =>
     either(
-      constant(`Nothing`),
+      constant('Nothing'),
       x => `Just${_inspect(x)}`
     )
 
@@ -149,7 +149,7 @@ function Maybe(u) {
 
   function runSequence(x) {
     if(!isApplicative(x)) {
-      throw new TypeError(`Maybe.sequence: Must wrap an Applicative`)
+      throw new TypeError('Maybe.sequence: Must wrap an Applicative')
     }
 
     return x.map(Maybe.of)

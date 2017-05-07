@@ -21,13 +21,15 @@ const valid = (x, y) =>
 function fanout(fst, snd) {
   if(isFunction(fst) && isFunction(snd)) {
     return compose(second(snd), first(fst), branch)
-  } else if(valid(fst, snd)) {
+  }
+
+  if(valid(fst, snd)) {
     return first(fst)
       .concat(second(snd))
       .contramap(branch)
-  } else {
-    throw new TypeError('fanout: Arrows, Functions or Stars of the same type required for both arguments')
   }
+
+  throw new TypeError('fanout: Arrows, Functions or Stars of the same type required for both arguments')
 }
 
 module.exports = curry(fanout)

@@ -110,7 +110,7 @@ function List(x) {
       : Nothing()
 
   const cons =
-    x => List([x].concat(xs))
+    x => List([ x ].concat(xs))
 
   function equals(m) {
     if(isSameType(List, m)) {

@@ -9,8 +9,8 @@ webpack.config.js
 CHANGELOG.md
 
 .travis.yml
-.jshintignore
-.jshintrc
+.eslintignore
+.eslintrc
 
 coverage
 .coveralls.yml

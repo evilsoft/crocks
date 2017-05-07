@@ -15,11 +15,13 @@ function both(m) {
 
       return x.bimap(m, m)
     }
-  } else if(m && isFunction(m.both)) {
-    return m.both()
-  } else {
-    throw new TypeError('both: Arrow, Function or Star required')
   }
+
+  if(m && isFunction(m.both)) {
+    return m.both()
+  }
+
+  throw new TypeError('both: Arrow, Function or Star required')
 }
 
 module.exports = both

@@ -21,7 +21,7 @@ function ifElse(pred, f, g) {
   const func =
     isFunction(pred) ? pred : pred.runWith
 
-  return x => !!func(x) ? f(x) : g(x)
+  return x => func(x) ? f(x) : g(x)
 }
 
 module.exports = curry(ifElse)

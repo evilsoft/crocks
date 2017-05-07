@@ -14,7 +14,7 @@ $ npm i
 Once that is done cooking, you should be good to go and ready to run some of the provided scripts used to aid the development process. Below is a list of the common commands that can be leveraged by the typical contributor:
 
 ### Linting
-Part of the continuous integration is a lint check using `jshint`. If the code does not pass the linter, it will fail the build and cannot be merged if a Pull Request is submitted. It is recommended to run the linter occasionally to verify you are coding in the desired style. The configuration for use in some IDEs that support `jshint`, can be found in the default `.jshintrc` file located in the project directory. When developing, it is recommended to use the following command in the project directory:
+Part of the continuous integration is a lint check using `eslint`. If the code does not pass the linter, it will fail the build and cannot be merged if a Pull Request is submitted. It is recommended to run the linter occasionally to verify you are coding in the desired style. The configuration for use in some IDEs that support `eslint`, can be found in the default `.eslintrc` file located in the project directory. When developing, it is recommended to use the following command in the project directory:
 
 ```
 $ npm run lint:dev

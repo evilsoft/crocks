@@ -6,12 +6,12 @@ function isEmpty(x) {
   if(isObject(x)) {
     return !Object.keys(x).length
   }
-  else if(x && x.length !== undefined) {
+
+  if(x && x.length !== undefined) {
     return !x.length
   }
-  else {
-    return true
-  }
+
+  return true
 }
 
 module.exports = isEmpty

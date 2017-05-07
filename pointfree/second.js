@@ -17,11 +17,13 @@ function second(m) {
 
       return x.bimap(identity, m)
     }
-  } else if(m && isFunction(m.second)) {
-    return m.second()
-  } else {
-    throw new TypeError('second: Arrow, Function or Star required')
   }
+
+  if(m && isFunction(m.second)) {
+    return m.second()
+  }
+
+  throw new TypeError('second: Arrow, Function or Star required')
 }
 
 module.exports = second

@@ -20,9 +20,10 @@ function caseOf(defs) {
     const tag = m.tag
     const def = defs[tag()]
 
-    const args = def.reduce(function(xs, x) {
-      return xs.concat([m[x].value()])
-    }, [])
+    const args = def.reduce(
+      (xs, x) => xs.concat([ m[x].value() ]),
+      []
+    )
 
     return cases[tag()].apply(null, args)
   }

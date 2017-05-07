@@ -27,11 +27,15 @@ function typeRep(x, y) {
 
 // isSameType :: Container m => m -> m -> Boolean
 function isSameType(x, y) {
-  if(isAdt(x) || isAdt(y)) { return adtType(x, y) }
-  else {
-    if(isNil(x) || isNil(y)) { return x === y }
-    return typeRep(x, y) || typeName(x) === typeName(y)
+  if(isAdt(x) || isAdt(y)) {
+    return adtType(x, y)
   }
+
+  if(isNil(x) || isNil(y)) {
+    return x === y
+  }
+
+  return typeRep(x, y) || typeName(x) === typeName(y)
 }
 
 module.exports = curry(isSameType)

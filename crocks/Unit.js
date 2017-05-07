@@ -19,7 +19,7 @@ function Unit() {
     m => isSameType(Unit, m) && undefined === m.value()
 
   const inspect =
-    constant(`()`)
+    constant('()')
 
   const value =
     constant(undefined)

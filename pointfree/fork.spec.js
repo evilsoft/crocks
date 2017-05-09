@@ -50,9 +50,10 @@ test('fork pointfree', t => {
   t.throws(f(noop, noop, {}), TypeError, 'throws if third arg an object')
   t.throws(f(noop, noop, noop), TypeError, 'throws if third arg a function')
 
-  fork(noop, noop, m)
+  const result = fork(noop, noop, m)
 
   t.ok(m.fork.called, 'calls fork on the passed container')
+  t.equals(undefined, result, 'returns undefined')
 
   const rej = sinon.spy()
   const res = sinon.spy()

@@ -12,7 +12,7 @@ function fork(reject, resolve, m) {
     throw new TypeError('fork: Async required')
   }
 
-  return m.fork(reject, resolve)
+  m.fork(reject, resolve)
 }
 
 module.exports = curry(fork)

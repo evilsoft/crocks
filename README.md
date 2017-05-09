@@ -606,7 +606,7 @@ These functions provide a very clean way to build out very simple functions and 
 | `filter` | <code>((a -> Boolean) &#124; Pred a) -> m a -> m a</code> |
 | `first` | `m (a -> b) -> m (Pair a c -> Pair b c)` |
 | `fold` | `Semigroup s => m s -> s` |
-| `fork` | `(a -> _) -> (a -> _) -> m a -> _` |
+| `fork` | `Async m => (a -> _) -> (b -> _) -> m a b -> _` |
 | `fst` | `m a b -> a` |
 | `head` | `m a -> Maybe a` |
 | `log` | `m a b -> a` |

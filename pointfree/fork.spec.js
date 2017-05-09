@@ -5,7 +5,7 @@ const helpers = require('../test/helpers')
 const bindFunc = helpers.bindFunc
 const noop = helpers.noop
 
-const { Resolved, Rejected } = require('../crocks/Async')
+const Async = require('../crocks/Async')
 const isFunction = require('../predicates/isFunction')
 
 const fork = require('./fork')
@@ -58,7 +58,7 @@ test('fork pointfree', t => {
   const rej = sinon.spy()
   const res = sinon.spy()
 
-  const resolved = Resolved()
+  const resolved = Async.Resolved()
   fork(rej, res, resolved)
 
   t.ok(res.called, 'calls passed resolve function')
@@ -66,7 +66,7 @@ test('fork pointfree', t => {
   rej.reset()
   res.reset()
 
-  const rejected = Rejected()
+  const rejected = Async.Rejected()
   fork(rej, res, rejected)
 
   t.ok(rej.called, 'calls passed reject function')

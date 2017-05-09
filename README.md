@@ -165,6 +165,12 @@ assoc : String -> a -> Object -> Object
 ```
 There may come a time when you want to add a key-value pair to an `Object` and want control over how the key and value are applied. That is where `assoc` can come to your aid. Just provide a `String` key and a value of any type to be associated to the key. Finally pass it any `Object` and you will get back a shallow copy with your key-value pair merged in. This will overwrite any exiting keys with new value specified. Used with [`flip`](#flip), you can do some interesting things with this function, give it a play! If you just want to create an `Object` and not concatenate it to another `Object`, [`objOf`](#objof) may be the function for you.
 
+#### binary
+```haskell
+binary : (* -> c) -> a -> b -> c
+```
+With all the different functions out there in the real world, sometimes it is nice to restrict them to a specific -arity to work with your all your wonderful compositions. When you want to restict any function of any arity to a simple binary function. Just pass your function to `binary` and you will get back a curried, binary function that will only apply (2) arguments to the inner function, ignoring any others. This works very well with functions like `Array.prototype.reduce` where you may only care about the first 2 arguments. if you need to constrain to more than (2) arguments, then you will want to reach for  [`nAry`](#nary). `binary` is basically syntactic sugar for `nAry(2, fn)`. Also related is [`unary`](#unary), which constrains to (1) argument.
+
 #### branch
 ```haskell
 branch : a -> Pair a a
@@ -206,12 +212,6 @@ Due to the nature of the `then` function, only the head of your composition need
 curry : ((a, b, ...) -> z) -> a -> b -> ... -> z
 ```
 Pass this function a function and it will return you a function that can be called in any form that you require until all arguments have been provided. For example if you pass a function: `f : (a, b, c) -> d` you get back a function that can be called in any combination, such as: `f(x, y, z)`, `f(x)(y)(z)`, `f(x, y)(z)`, or even `f(x)(y, z)`. This is great for doing partial application on functions for maximum re-usability.
-
-#### curryN
-```haskell
-curryN : Number -> ((a, b, ...) -> z) -> a -> b -> ... -> z
-```
-When dealing with variable argument functions, there are times when you may want to curry a specific number of arguments. Just pass this function the number of arguments you want to curry as well as the function, and it will not call the wrapped function until all arguments have been passed. This function will ONLY pass the number of arguments that you specified, any remaining arguments are discarded. This is great for limiting the arity of a given function when additional parameters are defaulted or not needed. This function will not auto curry functions returning functions like [`curry`](#curry) does, use with [`curry`](#curry) if you need to do some fancy setup for your wrapped function's API.
 
 #### defaultProps
 ```haskell
@@ -263,6 +263,12 @@ mreduceMap : Monoid m => m -> (b -> a) -> ([ b ] | List b) -> a
 ```
 There comes a time where the values you have in a `List` or an `Array` are not in the type that is needed for the [`Monoid`](#monoids) you want to combine with. These two functions can be used to `map` some transforming function from a given type into the type needed for the [`Monoid`](#monoids). In essence, this function will run each value through the function before it lifts the value into the [`Monoid`](#monoids), before `concat` is applied. The difference between the two is that `mconcatMap` returns the result inside the [`Monoid`](#monoids) used to combine them. Where `mreduceMap` returns the bare value itself.
 
+#### nAry
+```haskell
+nAry : Number -> (* -> a) -> * -> * -> a
+```
+When using functions like `Math.max` or `Object.assign` that take as many arguments as you can throw at them, it makes it hard to `curry` them in a reasonable manner. `nAry` can make things a little nicer for functions like that. It can also be put to good use to limit a given function to a desired number of arguments to avoid accidentally supplying default arguments when you do not what them applied. First pass `nAry` the number of arguments you wish to limit the function to and then the function you wish to limit. `nAry` will give you back a curried function that will only apply the specified number of arguments to the inner function. Unary and binary functions are so common that `crocks` provides specific functions for those cases: [`unary`](#unary) and [`binary`](#binary).
+
 #### objOf
 ```haskell
 objOf : String -> a -> Object
@@ -280,6 +286,26 @@ Sometimes you just want to strip `Object`s of unwanted properties by key. Using 
 once : ((*) -> a) -> ((*) -> a)
 ```
 There are times in Javascript development where you only want to call a function once and memo-ize the first result for every subsequent call to that function. Just pass the function you want guarded to `once` and you will get back a function with the expected guarantees.
+
+#### partial
+```haskell
+partial : ((* -> c), *) -> * -> c
+```
+There are many times when using functions from non-functional libraries or from built-in JS functions, where it does not make sense to wrap it in a [`curry`](#curry). You just want to partially apply some arguments to it and get back a function ready to take the rest. That is a perfect opportunity to use `partial`. Just pass a function as the first argument and then apply any other arguments to it. You will get back a curried function that is ready to accept the rest of the arguments.
+
+```js
+const { map, partial } = require('crocks')
+
+const max10 =
+  partial(Math.min, 10)
+
+const data =
+  [ 13, 5, 13 ]
+
+map(max10, data)
+// [ 10, 5, 10]
+
+```
 
 #### pick
 ```haskell
@@ -352,6 +378,18 @@ When dealing with `Object`s, sometimes it makes more sense to work in a `Foldabl
 tryCatch : (a -> b) -> a -> Result e b
 ```
 Typical try-catch blocks are very imperative in their usage. This `tryCatch` function provides a means of capturing that imperative nature in a simple declarative style. Pass it a function that could fail and it will return you another function wrapping the first function. When called, the new function will either return the result in a `Result.Ok` if everything was good, or an error wrapped in an `Result.Err` if it fails.
+
+#### unary
+```haskell
+unary : (* -> b) -> a -> b
+```
+If you every need to lock down a given function to just one argument, then look no further than `unary`. Just pass it a function of any arity, and you will get back another function that will only apply (1) argument to given function, no matter what is passed to it. `unary` is just syntactic sugar around [`nAry`](#nary) in the form of `nAry(1, fn)` as it is such a common case. Another common case is [`binary`](#binary), which as the name applies only applys (2) arguments to a given function.
+
+#### unit
+```haskell
+unit : () -> undefined
+```
+While it seems like just a simple function, `unit` can be used for a number of things. A common use for it is as a default `noop` as it is a function that does nothing and returns `undefined`. You can also use it in a pointed fashion to represent some special value for a given type. This pointed use is the heart and soul of the infamous `Maybe` type.
 
 ### Logic Functions
 The functions in this section are used to represent logical branching in a declarative manner. Each of these functions require either `Pred`s or predicate functions in their input. Since these functions work with `Pred`s and predicate functions, rather than values, this allows for composeable, "lazy" evaluation.
@@ -463,6 +501,7 @@ These functions provide a very clean way to build out very simple functions and 
 | `cons` | `a -> m a -> m a` |
 | `contramap` | `(b -> a) -> m a -> m b` |
 | `either` | `(a -> c) -> (b -> c) -> m a b -> c` |
+| `empty` | `m -> m` |
 | `evalWith` | `a -> m -> b` |
 | `execWith` | `a -> m -> b` |
 | `filter` | <code>((a -> Boolean) &#124; Pred a) -> m a -> m a</code> |
@@ -501,6 +540,7 @@ These functions provide a very clean way to build out very simple functions and 
 | `cons` | `Array`, `List` |
 | `contramap` | `Arrow`, `Pred`, `Star` |
 | `either` | `Either`, `Maybe`, `Result` |
+| `empty` | `All`, `Any`, `Array`, `Assign`,, `Endo`, `List`, `Max`, `Min`, `Object`, `Pred`, `Prod`, `String`, `Sum`, `Unit` |
 | `evalWith` | `State` |
 | `execWith` | `State` |
 | `filter` | `Array`, `List`, `Object` |

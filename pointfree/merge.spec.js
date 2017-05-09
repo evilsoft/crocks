@@ -3,7 +3,7 @@ const sinon = require('sinon')
 const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
-const noop = helpers.noop
+const unit = require('../helpers/unit')
 
 const isFunction = require('../predicates/isFunction')
 
@@ -14,7 +14,7 @@ const merge  = require('./merge')
 
 test('merge pointfree', t => {
   const m = bindFunc(merge)
-  const a = { merge: noop }
+  const a = { merge: unit }
 
   t.ok(isFunction(merge), 'is a function')
 
@@ -29,16 +29,16 @@ test('merge pointfree', t => {
   t.throws(m([], a), 'throws if first arg is an array')
   t.throws(m({}, a), 'throws if first arg is an object')
 
-  t.throws(m(noop, undefined), 'throws if second arg is undefined')
-  t.throws(m(noop, null), 'throws if second arg is null')
-  t.throws(m(noop, 0), 'throws if second arg is a falsey number')
-  t.throws(m(noop, 1), 'throws if second arg is a truthy number')
-  t.throws(m(noop, ''), 'throws if second arg is a falsey string')
-  t.throws(m(noop, 'string'), 'throws if second arg is a truthy string')
-  t.throws(m(noop, false), 'throws if second arg is false')
-  t.throws(m(noop, true), 'throws if second arg is true')
-  t.throws(m(noop, []), 'throws if second arg is an array')
-  t.throws(m(noop, {}), 'throws if second arg is an object')
+  t.throws(m(unit, undefined), 'throws if second arg is undefined')
+  t.throws(m(unit, null), 'throws if second arg is null')
+  t.throws(m(unit, 0), 'throws if second arg is a falsey number')
+  t.throws(m(unit, 1), 'throws if second arg is a truthy number')
+  t.throws(m(unit, ''), 'throws if second arg is a falsey string')
+  t.throws(m(unit, 'string'), 'throws if second arg is a truthy string')
+  t.throws(m(unit, false), 'throws if second arg is false')
+  t.throws(m(unit, true), 'throws if second arg is true')
+  t.throws(m(unit, []), 'throws if second arg is an array')
+  t.throws(m(unit, {}), 'throws if second arg is an object')
 
   t.end()
 })

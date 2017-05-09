@@ -7,8 +7,8 @@ const constant = require('../combinators/constant')
 const identity = require('../combinators/identity')
 const reverseApply = require('../combinators/reverseApply')
 
-const noop = helpers.noop
 const bindFunc = helpers.bindFunc
+const unit = require('../helpers/unit')
 
 const isFunction = require('../predicates/isFunction')
 const isObject = require('../predicates/isObject')
@@ -289,7 +289,7 @@ test('List fold errors', t => {
   t.throws(f(false), noSemi, 'throws when contains single false')
   t.throws(f(true), noSemi, 'throws when contains single true')
   t.throws(f({}), noSemi, 'throws when contains a single object')
-  t.throws(f(noop), noSemi, 'throws when contains a single function')
+  t.throws(f(unit), noSemi, 'throws when contains a single function')
 
   const empty = /List.fold: List must contain at least one Semigroup/
   t.throws(f([]), empty, 'throws when empty')
@@ -396,7 +396,7 @@ test('List map errors', t => {
   t.throws(map([]), err, 'throws with an array')
   t.throws(map({}), err, 'throws with an object')
 
-  t.doesNotThrow(map(noop), 'allows a function')
+  t.doesNotThrow(map(unit), 'allows a function')
 
   t.end()
 })
@@ -442,9 +442,9 @@ test('List ap errors', t => {
   t.throws(left([ true ]), noFunc, 'throws when wrapped value is true')
   t.throws(left([ [] ]), noFunc, 'throws when wrapped value is an array')
   t.throws(left([ {} ]), noFunc, 'throws when wrapped value is an object')
-  t.throws(left([  noop, 'string' ]), noFunc, 'throws when wrapped values are not all functions')
+  t.throws(left([  unit, 'string' ]), noFunc, 'throws when wrapped values are not all functions')
 
-  const ap = bindFunc(x => List([ noop ]).ap(x))
+  const ap = bindFunc(x => List([ unit ]).ap(x))
 
   const noList = /List.ap: List required/
   t.throws(ap(undefined), noList, 'throws with undefined')
@@ -527,7 +527,7 @@ test('List chain errors', t => {
   t.throws(bad(true), noList, 'throws when function returns true')
   t.throws(bad([]), noList, 'throws when function returns an array')
   t.throws(bad({}), noList, 'throws when function returns an object')
-  t.throws(bad(noop), noList, 'throws when function returns a function')
+  t.throws(bad(unit), noList, 'throws when function returns a function')
   t.throws(bad(MockCrock), noList, 'throws when function a non-List ADT')
 
   t.end()
@@ -578,7 +578,7 @@ test('List sequence errors', t => {
   t.doesNotThrow(seq(MockCrock), 'allows an Applicative returning function')
 
   const noAppl = /List.sequence: Must wrap Applicatives/
-  t.throws(seqBad(noop), noAppl, 'wrapping non-Applicative throws')
+  t.throws(seqBad(unit), noAppl, 'wrapping non-Applicative throws')
 
   t.end()
 })
@@ -620,8 +620,8 @@ test('List traverse errors', t => {
   t.throws(trav(MockCrock, {}), noFunc, 'throws with an object in second argument')
 
   const noAppl = /List.traverse: Both functions must return an Applicative/
-  t.throws(trav(noop, MockCrock), noAppl, 'throws with non-Appicative returning function in first argument')
-  t.throws(trav(MockCrock, noop), noAppl, 'throws with non-Appicative returning function in second argument')
+  t.throws(trav(unit, MockCrock), noAppl, 'throws with non-Appicative returning function in first argument')
+  t.throws(trav(MockCrock, unit), noAppl, 'throws with non-Appicative returning function in second argument')
 
   t.doesNotThrow(trav(MockCrock, MockCrock), 'allows Applicative returning functions')
 

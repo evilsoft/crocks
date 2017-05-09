@@ -8,7 +8,7 @@ const isObject = require('../predicates/isObject')
 const isSameType = require('../predicates/isSameType')
 
 const bindFunc = helpers.bindFunc
-const noop = helpers.noop
+const unit = require('../helpers/unit')
 
 const identity = require('../combinators/identity')
 const composeB = require('../combinators/composeB')
@@ -173,7 +173,7 @@ test('Identity map errors', t => {
   t.throws(map(true), TypeError, 'throws when passed true')
   t.throws(map([]), TypeError, 'throws when passed an array')
   t.throws(map({}), TypeError, 'throws when passed an object')
-  t.doesNotThrow(map(noop))
+  t.doesNotThrow(map(unit))
 
   t.end()
 })
@@ -219,18 +219,18 @@ test('Identity ap errors', t => {
   t.throws(Identity([]).ap.bind(null, Identity(0)), TypeError, 'throws when wrapped value is an array')
   t.throws(Identity({}).ap.bind(null, Identity(0)), TypeError, 'throws when wrapped value is an object')
 
-  t.throws(Identity(noop).ap.bind(null, undefined), TypeError, 'throws when passed undefined')
-  t.throws(Identity(noop).ap.bind(null, null), TypeError, 'throws when passed null')
-  t.throws(Identity(noop).ap.bind(null, 0), TypeError, 'throws when passed a falsey number')
-  t.throws(Identity(noop).ap.bind(null, 1), TypeError, 'throws when passed a truthy number')
-  t.throws(Identity(noop).ap.bind(null, ''), TypeError, 'throws when passed a falsey string')
-  t.throws(Identity(noop).ap.bind(null, 'string'), TypeError, 'throws when passed a truthy string')
-  t.throws(Identity(noop).ap.bind(null, false), TypeError, 'throws when passed false')
-  t.throws(Identity(noop).ap.bind(null, true), TypeError, 'throws when passed true')
-  t.throws(Identity(noop).ap.bind(null, []), TypeError, 'throws when passed an array')
-  t.throws(Identity(noop).ap.bind(null, {}), TypeError, 'throws when passed an object')
+  t.throws(Identity(unit).ap.bind(null, undefined), TypeError, 'throws when passed undefined')
+  t.throws(Identity(unit).ap.bind(null, null), TypeError, 'throws when passed null')
+  t.throws(Identity(unit).ap.bind(null, 0), TypeError, 'throws when passed a falsey number')
+  t.throws(Identity(unit).ap.bind(null, 1), TypeError, 'throws when passed a truthy number')
+  t.throws(Identity(unit).ap.bind(null, ''), TypeError, 'throws when passed a falsey string')
+  t.throws(Identity(unit).ap.bind(null, 'string'), TypeError, 'throws when passed a truthy string')
+  t.throws(Identity(unit).ap.bind(null, false), TypeError, 'throws when passed false')
+  t.throws(Identity(unit).ap.bind(null, true), TypeError, 'throws when passed true')
+  t.throws(Identity(unit).ap.bind(null, []), TypeError, 'throws when passed an array')
+  t.throws(Identity(unit).ap.bind(null, {}), TypeError, 'throws when passed an object')
 
-  t.throws(Identity(noop).ap.bind(null, m), TypeError, 'throws when container types differ')
+  t.throws(Identity(unit).ap.bind(null, m), TypeError, 'throws when container types differ')
 
   t.end()
 })
@@ -287,7 +287,7 @@ test('Identity chain errors', t => {
   t.throws(chain(true), TypeError, 'throws with true')
   t.throws(chain([]), TypeError, 'throws with an array')
   t.throws(chain({}), TypeError, 'throws with an object')
-  t.throws(chain(noop), TypeError, 'throws with a non-Identity returning function')
+  t.throws(chain(unit), TypeError, 'throws with a non-Identity returning function')
 
   t.doesNotThrow(chain(Identity.of), 'allows an Identity returning function')
 
@@ -336,9 +336,9 @@ test('Identity sequence errors', t => {
   t.throws(seq(true), TypeError, 'throws with true')
   t.throws(seq([]), TypeError, 'throws with an array')
   t.throws(seq({}), TypeError, 'throws with an object')
-  t.doesNotThrow(seq(noop), 'allows a function')
+  t.doesNotThrow(seq(unit), 'allows a function')
 
-  t.throws(seqBad(noop), TypeError, 'wrapping non-Applicative throws')
+  t.throws(seqBad(unit), TypeError, 'wrapping non-Applicative throws')
 
   t.end()
 })
@@ -391,9 +391,9 @@ test('Identity traverse errors', t => {
   t.throws(noApply(true), TypeError, 'throws when second argument returns true')
   t.throws(noApply({}), TypeError, 'throws when second argument returns an object')
   t.throws(noApply([]), TypeError, 'throws when second argument returns an array')
-  t.throws(noApply(noop), TypeError, 'throws when second argument returns function')
+  t.throws(noApply(unit), TypeError, 'throws when second argument returns function')
 
-  t.doesNotThrow(trav(noop, MockCrock), 'requires an Applicative returning function in second arg and function in first arg')
+  t.doesNotThrow(trav(unit, MockCrock), 'requires an Applicative returning function in second arg and function in first arg')
 
   t.end()
 })

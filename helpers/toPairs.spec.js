@@ -2,7 +2,7 @@ const test = require('tape')
 const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
-const noop = helpers.noop
+const unit = require('../helpers/unit')
 
 const isSameType = require('../predicates/isSameType')
 const List = require('../crocks/List')
@@ -21,7 +21,7 @@ test('toPairs', t => {
   t.throws(fn(''), err, 'throws when argument is a falsey string')
   t.throws(fn(false), err, 'throws when argument is false')
   t.throws(fn(true), err, 'throws when argument is true')
-  t.throws(fn(noop), err, 'throws when argument is a function')
+  t.throws(fn(unit), err, 'throws when argument is a function')
   t.throws(fn([]), err, 'throws when argument is an array')
 
   const data = {

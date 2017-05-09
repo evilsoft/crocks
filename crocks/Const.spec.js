@@ -2,7 +2,7 @@ const test = require('tape')
 const sinon = require('sinon')
 const helpers = require('../test/helpers')
 
-const noop = helpers.noop
+const unit = require('../helpers/unit')
 const bindFunc = helpers.bindFunc
 const isObject = require('../predicates/isObject')
 const isFunction  = require('../predicates/isFunction')
@@ -140,7 +140,7 @@ test('Const map errors', t => {
   t.throws(map(true), TypeError, 'throws when passed true')
   t.throws(map([]), TypeError, 'throws when passed an array')
   t.throws(map({}), TypeError, 'throws when passed an object')
-  t.doesNotThrow(map(noop))
+  t.doesNotThrow(map(unit))
 
   t.end()
 })
@@ -220,7 +220,7 @@ test('Const chain errors', t => {
   t.throws(chain([]), TypeError, 'throws with an array')
   t.throws(chain({}), TypeError, 'throws with an object')
 
-  t.doesNotThrow(chain(noop), 'allows a function, of any kind')
+  t.doesNotThrow(chain(unit), 'allows a function, of any kind')
 
   t.end()
 })

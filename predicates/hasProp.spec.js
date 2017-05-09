@@ -2,8 +2,7 @@ const test = require('tape')
 const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
-
-const noop = helpers.noop
+const unit = require('../helpers/unit')
 
 const isFunction = require('../predicates/isFunction')
 
@@ -21,7 +20,7 @@ test('hasProp function', t => {
   t.throws(f(true, {}), err, 'throws with true number in first argument')
   t.throws(f({}, {}), err, 'throws with object in first argument')
   t.throws(f([], {}), err, 'throws with array in first argument')
-  t.throws(f(noop, {}), err, 'throws with function in first argument')
+  t.throws(f(unit, {}), err, 'throws with function in first argument')
 
   const key = 'something'
   const val = 'thirty-six'

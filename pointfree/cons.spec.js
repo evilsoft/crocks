@@ -2,8 +2,8 @@ const test = require('tape')
 const sinon = require('sinon')
 const helpers = require('../test/helpers')
 
-const noop = helpers.noop
 const bindFunc = helpers.bindFunc
+const unit = require('../helpers/unit')
 
 const isFunction  = require('../predicates/isFunction')
 
@@ -25,7 +25,7 @@ test('cons pointfree', t => {
   t.throws(f(0, false), TypeError, 'throws when second arg is false')
   t.throws(f(0, true), TypeError, 'throws when second arg is true')
   t.throws(f(0, {}), TypeError, 'throws when second arg is true')
-  t.throws(f(0, noop), TypeError, 'throws when second arg is function')
+  t.throws(f(0, unit), TypeError, 'throws when second arg is function')
 
   t.end()
 })

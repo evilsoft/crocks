@@ -3,7 +3,7 @@ const sinon = require('sinon')
 
 const helpers = require('../test/helpers')
 
-const noop = helpers.noop
+const unit = require('../helpers/unit')
 const bindFunc = helpers.bindFunc
 const isObject = require('../predicates/isObject')
 const isFunction = require('../predicates/isFunction')
@@ -16,7 +16,7 @@ const reverseApply = require('../combinators/reverseApply')
 const Async = require('./Async')
 
 test('Async', t => {
-  const m = Async(noop)
+  const m = Async(unit)
   const a = bindFunc(Async)
 
   t.ok(isFunction(Async), 'is a function')
@@ -82,7 +82,7 @@ test('Async fromPromise', t => {
   t.ok(isFunction(Async.fromPromise(resProm)), 'returns a function')
 
   const fn = bindFunc(Async.fromPromise)
-  const fork = bindFunc(x => Async.fromPromise(() => x)().fork(noop, noop))
+  const fork = bindFunc(x => Async.fromPromise(() => x)().fork(unit, unit))
 
   t.throws(fn(undefined), TypeError, 'throws with undefined')
   t.throws(fn(null), TypeError, 'throws with null')
@@ -105,7 +105,7 @@ test('Async fromPromise', t => {
   t.throws(fork(true), TypeError, 'throws when true is returned from promise function')
   t.throws(fork([]), TypeError, 'throws when an array is returned from promise function')
   t.throws(fork({}), TypeError, 'throws when an object is returned from promise function')
-  t.throws(fork(noop), TypeError, 'throws when an object is returned from promise function')
+  t.throws(fork(unit), TypeError, 'throws when an object is returned from promise function')
 
   t.end()
 })
@@ -177,7 +177,7 @@ test('Async all', t => {
   t.throws(all(false), TypeError, 'throws with false')
   t.throws(all(true), TypeError, 'throws with true')
   t.throws(all({}), TypeError, 'throws with an object')
-  t.throws(all(noop), TypeError, 'throws with a function')
+  t.throws(all(unit), TypeError, 'throws with a function')
 
   t.throws(all([ undefined ]), TypeError, 'throws an array of with undefineds')
   t.throws(all([ null ]), TypeError, 'throws an array of with nulls')
@@ -189,7 +189,7 @@ test('Async all', t => {
   t.throws(all([ true ]), TypeError, 'throws with an array of trues')
   t.throws(all([ {} ]), TypeError, 'throws with an objects')
   t.throws(all([ [] ]), TypeError, 'throws with an array of arrays')
-  t.throws(all([ noop ]), TypeError, 'throws with an array of functions')
+  t.throws(all([ unit ]), TypeError, 'throws with an array of functions')
 
   t.end()
 })
@@ -212,7 +212,7 @@ test('Async all resolution', t => {
 })
 
 test('Async inspect', t => {
-  const a = Async(noop)
+  const a = Async(unit)
 
   t.ok(isFunction(a.inspect), 'provides an inspect function')
   t.equals(a.inspect(), 'Async Function', 'returns the expected result')
@@ -221,7 +221,7 @@ test('Async inspect', t => {
 })
 
 test('Async type', t => {
-  t.equal(Async(noop).type(), 'Async', 'returns Async')
+  t.equal(Async(unit).type(), 'Async', 'returns Async')
 
   t.end()
 })
@@ -232,31 +232,31 @@ test('Async fork', t => {
 
   const res = sinon.spy(identity)
   const rej = sinon.spy(identity)
-  const noCall = sinon.spy(noop)
+  const noCall = sinon.spy(unit)
 
   const fork = bindFunc(resolved.fork)
 
-  t.throws(fork(undefined, noop), 'throws with undefined in first argument')
-  t.throws(fork(null, noop), 'throws with null in first argument')
-  t.throws(fork(0, noop), 'throws with falsey number in first argument')
-  t.throws(fork(1, noop), 'throws with truthy number in first argument')
-  t.throws(fork('', noop), 'throws with falsey string in first argument')
-  t.throws(fork('string', noop), 'throws with truthy string in first argument')
-  t.throws(fork(false, noop), 'throws with false in first argument')
-  t.throws(fork(true, noop), 'throws with true in first argument')
-  t.throws(fork({}, noop), 'throws with an object in first argument')
-  t.throws(fork([], noop), 'throws with an array in first argument')
+  t.throws(fork(undefined, unit), 'throws with undefined in first argument')
+  t.throws(fork(null, unit), 'throws with null in first argument')
+  t.throws(fork(0, unit), 'throws with falsey number in first argument')
+  t.throws(fork(1, unit), 'throws with truthy number in first argument')
+  t.throws(fork('', unit), 'throws with falsey string in first argument')
+  t.throws(fork('string', unit), 'throws with truthy string in first argument')
+  t.throws(fork(false, unit), 'throws with false in first argument')
+  t.throws(fork(true, unit), 'throws with true in first argument')
+  t.throws(fork({}, unit), 'throws with an object in first argument')
+  t.throws(fork([], unit), 'throws with an array in first argument')
 
-  t.throws(fork(noop, undefined), 'throws with undefined in first argument')
-  t.throws(fork(noop, null), 'throws with null in first argument')
-  t.throws(fork(noop, 0), 'throws with falsey number in first argument')
-  t.throws(fork(noop, 1), 'throws with truthy number in first argument')
-  t.throws(fork(noop, ''), 'throws with falsey string in first argument')
-  t.throws(fork(noop, 'string'), 'throws with truthy string in first argument')
-  t.throws(fork(noop, false), 'throws with false in first argument')
-  t.throws(fork(noop, true), 'throws with true in first argument')
-  t.throws(fork(noop, {}), 'throws with an object in first argument')
-  t.throws(fork(noop, []), 'throws with an array in first argument')
+  t.throws(fork(unit, undefined), 'throws with undefined in first argument')
+  t.throws(fork(unit, null), 'throws with null in first argument')
+  t.throws(fork(unit, 0), 'throws with falsey number in first argument')
+  t.throws(fork(unit, 1), 'throws with truthy number in first argument')
+  t.throws(fork(unit, ''), 'throws with falsey string in first argument')
+  t.throws(fork(unit, 'string'), 'throws with truthy string in first argument')
+  t.throws(fork(unit, false), 'throws with false in first argument')
+  t.throws(fork(unit, true), 'throws with true in first argument')
+  t.throws(fork(unit, {}), 'throws with an object in first argument')
+  t.throws(fork(unit, []), 'throws with an array in first argument')
 
   resolved.fork(noCall, res)
   rejected.fork(rej, noCall)
@@ -281,29 +281,29 @@ test('Async toPromise', t => {
 })
 
 test('Async swap', t => {
-  const fn = bindFunc(Async(noop).swap)
+  const fn = bindFunc(Async(unit).swap)
 
-  t.throws(fn(null, noop), TypeError, 'throws with null in left')
-  t.throws(fn(undefined, noop), TypeError, 'throws with undefined in left')
-  t.throws(fn(0, noop), TypeError, 'throws with falsey number in left')
-  t.throws(fn(1, noop), TypeError, 'throws with truthy number in left')
-  t.throws(fn('', noop), TypeError, 'throws with falsey string in left')
-  t.throws(fn('string', noop), TypeError, 'throws with truthy string in left')
-  t.throws(fn(false, noop), TypeError, 'throws with false in left')
-  t.throws(fn(true, noop), TypeError, 'throws with true in left')
-  t.throws(fn({}, noop), TypeError, 'throws with object in left')
-  t.throws(fn([], noop), TypeError, 'throws with array in left')
+  t.throws(fn(null, unit), TypeError, 'throws with null in left')
+  t.throws(fn(undefined, unit), TypeError, 'throws with undefined in left')
+  t.throws(fn(0, unit), TypeError, 'throws with falsey number in left')
+  t.throws(fn(1, unit), TypeError, 'throws with truthy number in left')
+  t.throws(fn('', unit), TypeError, 'throws with falsey string in left')
+  t.throws(fn('string', unit), TypeError, 'throws with truthy string in left')
+  t.throws(fn(false, unit), TypeError, 'throws with false in left')
+  t.throws(fn(true, unit), TypeError, 'throws with true in left')
+  t.throws(fn({}, unit), TypeError, 'throws with object in left')
+  t.throws(fn([], unit), TypeError, 'throws with array in left')
 
-  t.throws(fn(noop, null), TypeError, 'throws with null in right')
-  t.throws(fn(noop, undefined), TypeError, 'throws with undefined in right')
-  t.throws(fn(noop, 0), TypeError, 'throws with falsey number in right')
-  t.throws(fn(noop, 1), TypeError, 'throws with truthy number in right')
-  t.throws(fn(noop, ''), TypeError, 'throws with falsey string in right')
-  t.throws(fn(noop, 'string'), TypeError, 'throws with truthy string in right')
-  t.throws(fn(noop, false), TypeError, 'throws with false in right')
-  t.throws(fn(noop, true), TypeError, 'throws with true in right')
-  t.throws(fn(noop, {}), TypeError, 'throws with object in right')
-  t.throws(fn(noop, []), TypeError, 'throws with array in right')
+  t.throws(fn(unit, null), TypeError, 'throws with null in right')
+  t.throws(fn(unit, undefined), TypeError, 'throws with undefined in right')
+  t.throws(fn(unit, 0), TypeError, 'throws with falsey number in right')
+  t.throws(fn(unit, 1), TypeError, 'throws with truthy number in right')
+  t.throws(fn(unit, ''), TypeError, 'throws with falsey string in right')
+  t.throws(fn(unit, 'string'), TypeError, 'throws with truthy string in right')
+  t.throws(fn(unit, false), TypeError, 'throws with false in right')
+  t.throws(fn(unit, true), TypeError, 'throws with true in right')
+  t.throws(fn(unit, {}), TypeError, 'throws with object in right')
+  t.throws(fn(unit, []), TypeError, 'throws with array in right')
 
   const rejected = Async((rej) => rej('silly')).swap(constant('was rejected'), identity)
   const resolved = Async((_, res) => res('silly')).swap(identity, constant('was resolved'))
@@ -322,29 +322,29 @@ test('Async swap', t => {
 })
 
 test('Async coalesce', t => {
-  const fn = bindFunc(Async(noop).coalesce)
+  const fn = bindFunc(Async(unit).coalesce)
 
-  t.throws(fn(null, noop), TypeError, 'throws with null in left')
-  t.throws(fn(undefined, noop), TypeError, 'throws with undefined in left')
-  t.throws(fn(0, noop), TypeError, 'throws with falsey number in left')
-  t.throws(fn(1, noop), TypeError, 'throws with truthy number in left')
-  t.throws(fn('', noop), TypeError, 'throws with falsey string in left')
-  t.throws(fn('string', noop), TypeError, 'throws with truthy string in left')
-  t.throws(fn(false, noop), TypeError, 'throws with false in left')
-  t.throws(fn(true, noop), TypeError, 'throws with true in left')
-  t.throws(fn({}, noop), TypeError, 'throws with object in left')
-  t.throws(fn([], noop), TypeError, 'throws with array in left')
+  t.throws(fn(null, unit), TypeError, 'throws with null in left')
+  t.throws(fn(undefined, unit), TypeError, 'throws with undefined in left')
+  t.throws(fn(0, unit), TypeError, 'throws with falsey number in left')
+  t.throws(fn(1, unit), TypeError, 'throws with truthy number in left')
+  t.throws(fn('', unit), TypeError, 'throws with falsey string in left')
+  t.throws(fn('string', unit), TypeError, 'throws with truthy string in left')
+  t.throws(fn(false, unit), TypeError, 'throws with false in left')
+  t.throws(fn(true, unit), TypeError, 'throws with true in left')
+  t.throws(fn({}, unit), TypeError, 'throws with object in left')
+  t.throws(fn([], unit), TypeError, 'throws with array in left')
 
-  t.throws(fn(noop, null), TypeError, 'throws with null in right')
-  t.throws(fn(noop, undefined), TypeError, 'throws with undefined in right')
-  t.throws(fn(noop, 0), TypeError, 'throws with falsey number in right')
-  t.throws(fn(noop, 1), TypeError, 'throws with truthy number in right')
-  t.throws(fn(noop, ''), TypeError, 'throws with falsey string in right')
-  t.throws(fn(noop, 'string'), TypeError, 'throws with truthy string in right')
-  t.throws(fn(noop, false), TypeError, 'throws with false in right')
-  t.throws(fn(noop, true), TypeError, 'throws with true in right')
-  t.throws(fn(noop, {}), TypeError, 'throws with object in right')
-  t.throws(fn(noop, []), TypeError, 'throws with array in right')
+  t.throws(fn(unit, null), TypeError, 'throws with null in right')
+  t.throws(fn(unit, undefined), TypeError, 'throws with undefined in right')
+  t.throws(fn(unit, 0), TypeError, 'throws with falsey number in right')
+  t.throws(fn(unit, 1), TypeError, 'throws with truthy number in right')
+  t.throws(fn(unit, ''), TypeError, 'throws with falsey string in right')
+  t.throws(fn(unit, 'string'), TypeError, 'throws with truthy string in right')
+  t.throws(fn(unit, false), TypeError, 'throws with false in right')
+  t.throws(fn(unit, true), TypeError, 'throws with true in right')
+  t.throws(fn(unit, {}), TypeError, 'throws with object in right')
+  t.throws(fn(unit, []), TypeError, 'throws with array in right')
 
   const rejected = Async((rej) => rej()).coalesce(constant('was rejected'), identity)
   const resolved = Async((_, res) => res()).coalesce(identity, constant('was resolved'))
@@ -352,8 +352,8 @@ test('Async coalesce', t => {
   const rej = sinon.spy()
   const res = sinon.spy()
 
-  rejected.fork(noop, rej)
-  resolved.fork(noop, res)
+  rejected.fork(unit, rej)
+  resolved.fork(unit, res)
 
   t.ok(rej.calledWith('was rejected'), 'resolves a rejected, applying left coalesce function')
   t.ok(res.calledWith('was resolved'), 'resolves a resolved, applying right coalesce function')
@@ -363,7 +363,7 @@ test('Async coalesce', t => {
 })
 
 test('Async map errors', t => {
-  const map = bindFunc(Async(noop).map)
+  const map = bindFunc(Async(unit).map)
 
   t.throws(map(undefined), TypeError, 'throws with undefined')
   t.throws(map(null), TypeError, 'throws with null')
@@ -376,7 +376,7 @@ test('Async map errors', t => {
   t.throws(map([]), TypeError, 'throws with an array')
   t.throws(map({}), TypeError, 'throws iwth object')
 
-  t.doesNotThrow(map(noop), 'allows a function')
+  t.doesNotThrow(map(unit), 'allows a function')
 
   t.end()
 })
@@ -384,10 +384,10 @@ test('Async map errors', t => {
 test('Async map functionality', t => {
   const mapFn = sinon.spy()
 
-  Async((rej) => rej('rejected')).map(mapFn).fork(noop, noop)
-  Async((_, res) => res('resolved')).map(mapFn).fork(noop, noop)
+  Async((rej) => rej('rejected')).map(mapFn).fork(unit, unit)
+  Async((_, res) => res('resolved')).map(mapFn).fork(unit, unit)
 
-  t.equal(Async(noop).map(noop).type(), 'Async', 'returns an Async')
+  t.equal(Async(unit).map(unit).type(), 'Async', 'returns an Async')
   t.ok(mapFn.calledWith('resolved'), 'calls map function on resolved')
   t.notOk(mapFn.calledWith('rejected'), 'does not calls map function on rejected')
 
@@ -398,19 +398,19 @@ test('Async map properties (Functor)', t => {
   const f = x => x + 2
   const g = x => x * 2
 
-  t.ok(isFunction(Async(noop).map), 'provides a map function')
+  t.ok(isFunction(Async(unit).map), 'provides a map function')
 
   const x = 30
   const id = sinon.spy()
 
-  Async((_, res) => res(x)).map(identity).fork(noop, id)
+  Async((_, res) => res(x)).map(identity).fork(unit, id)
 
   const y = 10
   const left = sinon.spy()
   const right = sinon.spy()
 
-  Async((_, res) => res(y)).map(composeB(f, g)).fork(noop, left)
-  Async((_, res) => res(y)).map(g).map(f).fork(noop, right)
+  Async((_, res) => res(y)).map(composeB(f, g)).fork(unit, left)
+  Async((_, res) => res(y)).map(g).map(f).fork(unit, right)
 
   t.ok(id.calledWith(x), 'identity')
   t.same(left.args[0], right.args[0], 'composition')
@@ -419,31 +419,31 @@ test('Async map properties (Functor)', t => {
 })
 
 test('Async bimap errors', t => {
-  const bimap = bindFunc(Async(noop).bimap)
+  const bimap = bindFunc(Async(unit).bimap)
 
-  t.throws(bimap(undefined, noop), TypeError, 'throws with undefined in first argument')
-  t.throws(bimap(null, noop), TypeError, 'throws with null in first argument')
-  t.throws(bimap(0, noop), TypeError, 'throws with falsey number in first argument')
-  t.throws(bimap(1, noop), TypeError, 'throws with truthy number in first argument')
-  t.throws(bimap('', noop), TypeError, 'throws with falsey string in first argument')
-  t.throws(bimap('string', noop), TypeError, 'throws with truthy string in first argument')
-  t.throws(bimap(false, noop), TypeError, 'throws with false in first argument')
-  t.throws(bimap(true, noop), TypeError, 'throws with true in first argument')
-  t.throws(bimap([], noop), TypeError, 'throws with an array in first argument')
-  t.throws(bimap({}, noop), TypeError, 'throws with object in first argument')
+  t.throws(bimap(undefined, unit), TypeError, 'throws with undefined in first argument')
+  t.throws(bimap(null, unit), TypeError, 'throws with null in first argument')
+  t.throws(bimap(0, unit), TypeError, 'throws with falsey number in first argument')
+  t.throws(bimap(1, unit), TypeError, 'throws with truthy number in first argument')
+  t.throws(bimap('', unit), TypeError, 'throws with falsey string in first argument')
+  t.throws(bimap('string', unit), TypeError, 'throws with truthy string in first argument')
+  t.throws(bimap(false, unit), TypeError, 'throws with false in first argument')
+  t.throws(bimap(true, unit), TypeError, 'throws with true in first argument')
+  t.throws(bimap([], unit), TypeError, 'throws with an array in first argument')
+  t.throws(bimap({}, unit), TypeError, 'throws with object in first argument')
 
-  t.throws(bimap(noop, undefined), TypeError, 'throws with undefined in second argument')
-  t.throws(bimap(noop, null), TypeError, 'throws with null in second argument')
-  t.throws(bimap(noop, 0), TypeError, 'throws with falsey number in second argument')
-  t.throws(bimap(noop, 1), TypeError, 'throws with truthy number in second argument')
-  t.throws(bimap(noop, ''), TypeError, 'throws with falsey string in second argument')
-  t.throws(bimap(noop, 'string'), TypeError, 'throws with truthy string in second argument')
-  t.throws(bimap(noop, false), TypeError, 'throws with false in second argument')
-  t.throws(bimap(noop, true), TypeError, 'throws with true in second argument')
-  t.throws(bimap(noop, []), TypeError, 'throws with an array in second argument')
-  t.throws(bimap(noop, {}), TypeError, 'throws with object in second argument')
+  t.throws(bimap(unit, undefined), TypeError, 'throws with undefined in second argument')
+  t.throws(bimap(unit, null), TypeError, 'throws with null in second argument')
+  t.throws(bimap(unit, 0), TypeError, 'throws with falsey number in second argument')
+  t.throws(bimap(unit, 1), TypeError, 'throws with truthy number in second argument')
+  t.throws(bimap(unit, ''), TypeError, 'throws with falsey string in second argument')
+  t.throws(bimap(unit, 'string'), TypeError, 'throws with truthy string in second argument')
+  t.throws(bimap(unit, false), TypeError, 'throws with false in second argument')
+  t.throws(bimap(unit, true), TypeError, 'throws with true in second argument')
+  t.throws(bimap(unit, []), TypeError, 'throws with an array in second argument')
+  t.throws(bimap(unit, {}), TypeError, 'throws with object in second argument')
 
-  t.doesNotThrow(bimap(noop, noop), 'allows functions')
+  t.doesNotThrow(bimap(unit, unit), 'allows functions')
 
   t.end()
 })
@@ -458,7 +458,7 @@ test('Async bimap functionality', t => {
   Async((rej) => rej('rejected')).bimap(left, right).fork(rej, res)
   Async((_, res) => res('resolved')).bimap(left, right).fork(rej, res)
 
-  t.equal(Async(noop).bimap(noop, noop).type(), 'Async', 'returns an Async')
+  t.equal(Async(unit).bimap(unit, unit).type(), 'Async', 'returns an Async')
 
   t.ok(rej.calledWith('left'), 'reject called with result of left function')
   t.ok(res.calledWith('right'), 'resolve called with result of right function')
@@ -480,11 +480,11 @@ test('Async bimap properties (Bifunctor)', t => {
 
   const bimapId = bimap(identity, identity)
 
-  rej.fork(rejId, noop)
-  bimapId(rej).fork(rejId, noop)
+  rej.fork(rejId, unit)
+  bimapId(rej).fork(rejId, unit)
 
-  res.fork(noop, resId)
-  bimapId(res).fork(noop, resId)
+  res.fork(unit, resId)
+  bimapId(res).fork(unit, resId)
 
   t.same(rejId.args[0], rejId.args[1], 'rejected identity')
   t.same(resId.args[0], resId.args[1], 'resolved identity')
@@ -498,11 +498,11 @@ test('Async bimap properties (Bifunctor)', t => {
 
   const bimapComp = bimap(comp, comp)
 
-  bimapComp(rej).fork(rejComp, noop)
-  rej.bimap(g, g).bimap(f, f).fork(rejComp, noop)
+  bimapComp(rej).fork(rejComp, unit)
+  rej.bimap(g, g).bimap(f, f).fork(rejComp, unit)
 
-  bimapComp(res).fork(noop, resComp)
-  res.bimap(g, g).bimap(f, f).fork(noop, resComp)
+  bimapComp(res).fork(unit, resComp)
+  res.bimap(g, g).bimap(f, f).fork(unit, resComp)
 
   t.same(rejComp.args[0], rejComp.args[1], 'rejected composition')
   t.same(resComp.args[0], resComp.args[1], 'resovled composition')
@@ -554,8 +554,8 @@ test('Async alt functionality', t => {
   const res = sinon.spy()
   const rej = sinon.spy()
 
-  rejected.alt(anotherRejected).fork(rej, noop)
-  resolved.alt(rejected).alt(anotherResolved).fork(noop, res)
+  rejected.alt(anotherRejected).fork(rej, unit)
+  resolved.alt(rejected).alt(anotherResolved).fork(unit, res)
 
   t.ok(res.calledWith('Resolved'), 'retains first Resolved')
   t.ok(rej.calledWith('Another Rejected'), 'provdes last Rejected when all Rejects')
@@ -571,16 +571,16 @@ test('Async alt properties (Alt)', t => {
   const assocLeft = sinon.spy()
   const assocRight = sinon.spy()
 
-  a.alt(b).alt(c).fork(noop, assocLeft)
-  a.alt(b.alt(c)).fork(noop, assocRight)
+  a.alt(b).alt(c).fork(unit, assocLeft)
+  a.alt(b.alt(c)).fork(unit, assocRight)
 
   t.same(assocLeft.args[0], assocRight.args[0], 'assosiativity')
 
   const distLeft = sinon.spy()
   const distRight = sinon.spy()
 
-  a.alt(b).map(identity).fork(noop, distLeft)
-  a.map(identity).alt(b.map(identity)).fork(noop, distRight)
+  a.alt(b).map(identity).fork(unit, distLeft)
+  a.map(identity).alt(b.map(identity)).fork(unit, distRight)
 
   t.same(distLeft.args[0], distRight.args[0], 'distributivity')
 
@@ -591,7 +591,7 @@ test('Async ap errors', t => {
   const m = { type: () => 'Async...Not' }
 
   const lift = v =>
-    Async.of(v).ap(Async.of(0)).fork.bind(null, noop, noop)
+    Async.of(v).ap(Async.of(0)).fork.bind(null, unit, unit)
 
   t.throws(lift(undefined), TypeError, 'throws when wrapped value is undefined')
   t.throws(lift(null), TypeError, 'throws when wrapped value is null')
@@ -604,18 +604,18 @@ test('Async ap errors', t => {
   t.throws(lift([]), TypeError, 'throws when wrapped value is an array')
   t.throws(lift({}), TypeError, 'throws when wrapped value is an object')
 
-  t.throws(Async.of(noop).ap.bind(null, undefined), TypeError, 'throws when passed undefined')
-  t.throws(Async.of(noop).ap.bind(null, null), TypeError, 'throws when passed null')
-  t.throws(Async.of(noop).ap.bind(null, 0), TypeError, 'throws when passed a falsey number')
-  t.throws(Async.of(noop).ap.bind(null, 1), TypeError, 'throws when passed a truthy number')
-  t.throws(Async.of(noop).ap.bind(null, ''), TypeError, 'throws when passed a falsey string')
-  t.throws(Async.of(noop).ap.bind(null, 'string'), TypeError, 'throws when passed a truthy string')
-  t.throws(Async.of(noop).ap.bind(null, false), TypeError, 'throws when passed false')
-  t.throws(Async.of(noop).ap.bind(null, true), TypeError, 'throws when passed true')
-  t.throws(Async.of(noop).ap.bind(null, []), TypeError, 'throws when passed an array')
-  t.throws(Async.of(noop).ap.bind(null, {}), TypeError, 'throws when passed an object')
+  t.throws(Async.of(unit).ap.bind(null, undefined), TypeError, 'throws when passed undefined')
+  t.throws(Async.of(unit).ap.bind(null, null), TypeError, 'throws when passed null')
+  t.throws(Async.of(unit).ap.bind(null, 0), TypeError, 'throws when passed a falsey number')
+  t.throws(Async.of(unit).ap.bind(null, 1), TypeError, 'throws when passed a truthy number')
+  t.throws(Async.of(unit).ap.bind(null, ''), TypeError, 'throws when passed a falsey string')
+  t.throws(Async.of(unit).ap.bind(null, 'string'), TypeError, 'throws when passed a truthy string')
+  t.throws(Async.of(unit).ap.bind(null, false), TypeError, 'throws when passed false')
+  t.throws(Async.of(unit).ap.bind(null, true), TypeError, 'throws when passed true')
+  t.throws(Async.of(unit).ap.bind(null, []), TypeError, 'throws when passed an array')
+  t.throws(Async.of(unit).ap.bind(null, {}), TypeError, 'throws when passed an object')
 
-  t.throws(Async.of(noop).ap.bind(null, m), TypeError, 'throws when container types differ')
+  t.throws(Async.of(unit).ap.bind(null, m), TypeError, 'throws when container types differ')
 
   t.end()
 })
@@ -629,11 +629,11 @@ test('Async ap properties (Apply)', t => {
   const aRes = sinon.spy()
   const bRes = sinon.spy()
 
-  t.ok(isFunction(Async(noop).map), 'implements the Functor spec')
-  t.ok(isFunction(Async(noop).ap), 'provides an ap function')
+  t.ok(isFunction(Async(unit).map), 'implements the Functor spec')
+  t.ok(isFunction(Async(unit).ap), 'provides an ap function')
 
-  a.fork(noop, aRes)
-  b.fork(noop, bRes)
+  a.fork(unit, aRes)
+  b.fork(unit, bRes)
 
   t.same(aRes.args[0], bRes.args[0], 'compostion')
 
@@ -643,10 +643,10 @@ test('Async ap properties (Apply)', t => {
 test('Async of', t => {
   const f = sinon.spy()
 
-  t.equal(Async.of, Async(noop).of, 'Async.of is the same as the instance version')
+  t.equal(Async.of, Async(unit).of, 'Async.of is the same as the instance version')
   t.equal(Async.of(0).type(), 'Async', 'returns an Async')
 
-  Async.of(0).fork(noop, f)
+  Async.of(0).fork(unit, f)
 
   t.ok(f.calledWith(0), 'wraps the value passed into an Async')
 
@@ -656,27 +656,27 @@ test('Async of', t => {
 test('Async of properties (Applicative)', t => {
   const m = Async.of(identity)
 
-  t.ok(isFunction(Async(noop).of), 'provides an of function')
-  t.ok(isFunction(Async(noop).ap), 'implements the Apply spec')
+  t.ok(isFunction(Async(unit).of), 'provides an of function')
+  t.ok(isFunction(Async(unit).ap), 'implements the Apply spec')
 
   const idRes = sinon.spy()
-  m.ap(Async.of(3)).fork(noop, idRes)
+  m.ap(Async.of(3)).fork(unit, idRes)
 
   t.ok(idRes.calledWith(3), 'identity')
 
   const aHomoRes = sinon.spy()
   const bHomoRes = sinon.spy()
 
-  m.ap(Async.of(3)).fork(noop, aHomoRes)
-  Async.of(identity(3)).fork(noop, bHomoRes)
+  m.ap(Async.of(3)).fork(unit, aHomoRes)
+  Async.of(identity(3)).fork(unit, bHomoRes)
 
   t.same(aHomoRes.args[0], bHomoRes.args[0], 'homomorphism')
 
   const aInterRes = sinon.spy()
   const bInterRes = sinon.spy()
 
-  m.ap(Async.of(3)).fork(noop, aInterRes)
-  Async.of(reverseApply(3)).ap(m).fork(noop, bInterRes)
+  m.ap(Async.of(3)).fork(unit, aInterRes)
+  Async.of(reverseApply(3)).ap(m).fork(unit, bInterRes)
 
   t.same(aInterRes.args[0], bInterRes.args[0], 'interchange')
 
@@ -684,7 +684,7 @@ test('Async of properties (Applicative)', t => {
 })
 
 test('Async chain errors', t => {
-  const chain = bindFunc(Async(noop).chain)
+  const chain = bindFunc(Async(unit).chain)
 
   t.throws(chain(undefined), TypeError, 'throws with undefined')
   t.throws(chain(null), TypeError, 'throws with null')
@@ -697,16 +697,16 @@ test('Async chain errors', t => {
   t.throws(chain([]), TypeError, 'throws with an array')
   t.throws(chain({}), TypeError, 'throws with an object')
 
-  t.throws(Async.of(3).chain(noop).fork.bind(null, noop, noop), TypeError, 'throws with a non-Async returning function')
+  t.throws(Async.of(3).chain(unit).fork.bind(null, unit, unit), TypeError, 'throws with a non-Async returning function')
 
-  t.doesNotThrow(Async.of(3).chain(Async.of).fork.bind(null, noop, noop), 'allows an Async returning function')
+  t.doesNotThrow(Async.of(3).chain(Async.of).fork.bind(null, unit, unit), 'allows an Async returning function')
 
   t.end()
 })
 
 test('Async chain properties (Chain)', t => {
-  t.ok(isFunction(Async(noop).chain), 'provides a chain function')
-  t.ok(isFunction(Async(noop).ap), 'implements the Apply spec')
+  t.ok(isFunction(Async(unit).chain), 'provides a chain function')
+  t.ok(isFunction(Async(unit).ap), 'implements the Apply spec')
 
   const aRes = sinon.spy()
   const bRes = sinon.spy()
@@ -716,8 +716,8 @@ test('Async chain properties (Chain)', t => {
 
   const x = 12
 
-  Async((_, res) => res(x)).chain(f).chain(g).fork(noop, aRes)
-  Async((_, res) => res(x)).chain(y => f(y).chain(g)).fork(noop, bRes)
+  Async((_, res) => res(x)).chain(f).chain(g).fork(unit, aRes)
+  Async((_, res) => res(x)).chain(y => f(y).chain(g)).fork(unit, bRes)
 
   t.same(aRes.args[0], bRes.args[0], 'assosiativity')
 
@@ -725,24 +725,24 @@ test('Async chain properties (Chain)', t => {
 })
 
 test('Async chain properties (Monad)', t => {
-  t.ok(isFunction(Async(noop).chain), 'implements the Chain spec')
-  t.ok(isFunction(Async(noop).of), 'implements the Applicative spec')
+  t.ok(isFunction(Async(unit).chain), 'implements the Chain spec')
+  t.ok(isFunction(Async(unit).of), 'implements the Applicative spec')
 
   const f = x => Async((_, res) => res(x))
 
   const aLeft = sinon.spy()
   const bLeft = sinon.spy()
 
-  Async.of(3).chain(f).fork(noop, aLeft)
-  f(3).fork(noop, bLeft)
+  Async.of(3).chain(f).fork(unit, aLeft)
+  f(3).fork(unit, bLeft)
 
   t.same(aLeft.args[0], bLeft.args[0], 'left identity')
 
   const aRight = sinon.spy()
   const bRight = sinon.spy()
 
-  f(3).chain(Async.of).fork(noop, aRight)
-  f(3).fork(noop, bRight)
+  f(3).chain(Async.of).fork(unit, aRight)
+  f(3).fork(unit, bRight)
 
   t.same(aRight.args[0], bRight.args[0], 'right identity')
 

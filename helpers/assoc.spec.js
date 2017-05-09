@@ -2,11 +2,11 @@ const test = require('tape')
 const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
-const noop = helpers.noop
+const unit = require('../helpers/unit')
 
 const assoc = require('./assoc')
 
-test('assoc', t => {
+test('assoc helper function', t => {
   const fn = bindFunc(assoc)
 
   const noKey = /assoc: String required for first argument/
@@ -16,7 +16,7 @@ test('assoc', t => {
   t.throws(fn(1, 1, {}), noKey, 'throws when first arg is a truthy number')
   t.throws(fn(false, 1, {}), noKey, 'throws when first arg is false')
   t.throws(fn(true, 1, {}), noKey, 'throws when first arg is true')
-  t.throws(fn(noop, 1, {}), noKey, 'throws when first arg is a function')
+  t.throws(fn(unit, 1, {}), noKey, 'throws when first arg is a function')
   t.throws(fn([], 1, {}), noKey, 'throws when first arg is an array')
   t.throws(fn({}, 1, {}), noKey, 'throws when first arg is an object')
 
@@ -29,7 +29,7 @@ test('assoc', t => {
   t.throws(fn('key', 1, 'string'), noObj, 'throws when third arg is a truthy string')
   t.throws(fn('key', 1, false), noObj, 'throws when third arg is false')
   t.throws(fn('key', 1, true), noObj, 'throws when third arg is true')
-  t.throws(fn('key', 1, noop), noObj, 'throws when third arg is a function')
+  t.throws(fn('key', 1, unit), noObj, 'throws when third arg is a function')
   t.throws(fn('key', 1, []), noObj, 'throws when third arg is an array')
 
   const data = { a: 45, b: 23 }

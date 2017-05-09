@@ -2,7 +2,7 @@ const test = require('tape')
 const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
-const noop = helpers.noop
+const unit = require('../helpers/unit')
 
 const identity = require('../combinators/identity')
 const isFunction = require('../predicates/isFunction')
@@ -13,8 +13,8 @@ test('composeP parameters', t => {
   const prom = x => Promise.resolve(x)
 
   const pp = bindFunc(composeP)
-  const f = bindFunc(composeP(noop))
-  const g = bindFunc(composeP(prom, noop))
+  const f = bindFunc(composeP(unit))
+  const g = bindFunc(composeP(prom, unit))
 
   t.ok(isFunction(composeP), 'composeP is a function')
 

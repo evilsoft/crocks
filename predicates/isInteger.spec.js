@@ -1,7 +1,6 @@
 const test = require('tape')
-const helpers = require('../test/helpers')
 
-const noop = helpers.noop
+const unit = require('../helpers/unit')
 const isFunction = require('./isFunction')
 
 const isInteger = require('./isInteger')
@@ -9,7 +8,7 @@ const isInteger = require('./isInteger')
 test('isInteger predicate function', t => {
   t.ok(isFunction(isInteger), 'is a function')
 
-  t.equal(isInteger(noop), false, 'returns false with function')
+  t.equal(isInteger(unit), false, 'returns false with function')
   t.equal(isInteger(undefined), false, 'returns false with undefined')
   t.equal(isInteger(null), false, 'returns false with null')
   t.equal(isInteger(''), false, 'returns false with falsey string')

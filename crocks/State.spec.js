@@ -3,7 +3,7 @@ const sinon = require('sinon')
 const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
-const noop = helpers.noop
+const unit = require('../helpers/unit')
 
 const isObject = require('../predicates/isObject')
 const isFunction = require('../predicates/isFunction')
@@ -16,7 +16,7 @@ const Unit = require('./Unit')
 const State = require('./State')
 
 test('State', t => {
-  const m = State(noop)
+  const m = State(unit)
   const s = bindFunc(State)
 
   t.ok(isFunction(State), 'is a function')
@@ -42,13 +42,13 @@ test('State', t => {
   t.throws(s([]), TypeError, 'throws with array')
   t.throws(s({}), TypeError, 'throws with object')
 
-  t.doesNotThrow(s(noop), 'allows a function')
+  t.doesNotThrow(s(unit), 'allows a function')
 
   t.end()
 })
 
 test('State inspect', t => {
-  const m = State(noop)
+  const m = State(unit)
 
   t.ok(isFunction(m.inspect), 'provides an inspect function')
   t.equal(m.inspect(), 'State Function', 'returns inspect string')
@@ -57,7 +57,7 @@ test('State inspect', t => {
 })
 
 test('State type', t => {
-  t.equal(State(noop).type(), 'State', 'type returns State')
+  t.equal(State(unit).type(), 'State', 'type returns State')
   t.end()
 })
 
@@ -86,7 +86,7 @@ test('State execWith', t => {
   t.throws(execWith(true), TypeError, 'throws when wrapped function returns true')
   t.throws(execWith({}), TypeError, 'throws when wrapped function returns an object')
   t.throws(execWith([]), TypeError, 'throws when wrapped function returns an array')
-  t.throws(execWith(noop), TypeError, 'throws when wrapped function returns a function')
+  t.throws(execWith(unit), TypeError, 'throws when wrapped function returns a function')
 
   const target = 0
   const f = sinon.spy(x => Pair(x, target))
@@ -113,7 +113,7 @@ test('State evalWith', t => {
   t.throws(evalWith(true), TypeError, 'throws when wrapped function returns true')
   t.throws(evalWith({}), TypeError, 'throws when wrapped function returns an object')
   t.throws(evalWith([]), TypeError, 'throws when wrapped function returns an array')
-  t.throws(evalWith(noop), TypeError, 'throws when wrapped function returns a function')
+  t.throws(evalWith(unit), TypeError, 'throws when wrapped function returns a function')
 
   const target = 'bullseye'
   const f = sinon.spy(x => Pair(target, x))
@@ -208,7 +208,7 @@ test('State modify', t => {
 })
 
 test('State map errors', t => {
-  const map = bindFunc(State(noop).map)
+  const map = bindFunc(State(unit).map)
 
   t.throws(map(undefined), TypeError, 'throws with undefined')
   t.throws(map(null), TypeError, 'throws with null')
@@ -221,7 +221,7 @@ test('State map errors', t => {
   t.throws(map([]), TypeError, 'throws with an array')
   t.throws(map({}), TypeError, 'throws with an object')
 
-  t.doesNotThrow(map(noop), 'allows a function')
+  t.doesNotThrow(map(unit), 'allows a function')
 
   const m = bindFunc(State(identity).map(x => x + 1).runWith)
   const n = bindFunc(State(x => Pair(x, x)).map(x => x + 1).runWith)
@@ -266,7 +266,7 @@ test('State map properties (Functor)', t => {
 })
 
 test('State ap errors', t => {
-  const ap = bindFunc(State(noop).ap)
+  const ap = bindFunc(State(unit).ap)
   const m = { type: () => 'State...Not' }
 
   t.throws(ap(undefined), TypeError, 'throws with undefined')
@@ -296,7 +296,7 @@ test('State ap errors', t => {
   t.throws(noPair(true), TypeError, 'throws when inner function returns true')
   t.throws(noPair([]), TypeError, 'throws when inner function returns an array')
   t.throws(noPair({}), TypeError, 'throws when inner function returns an object')
-  t.throws(noPair(noop), TypeError, 'throws when inner function returns a function')
+  t.throws(noPair(unit), TypeError, 'throws when inner function returns a function')
 
   const noFunc =
     x => bindFunc(State(s => Pair(x, s)).ap(f(3)).runWith)
@@ -326,8 +326,8 @@ test('State ap properties (Apply)', t => {
   const a = m.map(composeB).ap(lift(g)).ap(lift(9))
   const b = m.ap(lift(g).ap(lift(9)))
 
-  t.ok(isFunction(State(noop).map), 'implements the Functor spec')
-  t.ok(isFunction(State(noop).ap), 'provides an ap function')
+  t.ok(isFunction(State(unit).map), 'implements the Functor spec')
+  t.ok(isFunction(State(unit).ap), 'provides an ap function')
 
   t.equal(a.evalWith(), b.evalWith(), 'composition')
 
@@ -335,7 +335,7 @@ test('State ap properties (Apply)', t => {
 })
 
 test('State of', t => {
-  t.equal(State.of, State(noop).of, 'of is the same as the instance version')
+  t.equal(State.of, State(unit).of, 'of is the same as the instance version')
   t.equal(State.of(0).type(), 'State', 'returns a State')
   t.equal(State.of(0).evalWith(22), 0, 'wraps the value passed into State')
 
@@ -348,8 +348,8 @@ test('State of properties (Applicative)', t => {
   const v = 12
   const s = 38
 
-  t.ok(isFunction(State(noop).of), 'provides an of function')
-  t.ok(isFunction(State(noop).ap), 'implements the Apply spec')
+  t.ok(isFunction(State(unit).of), 'provides an of function')
+  t.ok(isFunction(State(unit).ap), 'implements the Apply spec')
 
   t.equal(State.of(identity).ap(m).evalWith(s), m.evalWith(s), 'identity')
 
@@ -369,7 +369,7 @@ test('State of properties (Applicative)', t => {
 })
 
 test('State chain errors', t => {
-  const chain = bindFunc(State(noop).chain)
+  const chain = bindFunc(State(unit).chain)
 
   t.throws(chain(undefined), TypeError, 'throws with undefined')
   t.throws(chain(null), TypeError, 'throws with null')
@@ -397,7 +397,7 @@ test('State chain errors', t => {
   t.throws(noPair(true), TypeError, 'throws when inner function returns true')
   t.throws(noPair([]), TypeError, 'throws when inner function returns an array')
   t.throws(noPair({}), TypeError, 'throws when inner function returns an object')
-  t.throws(noPair(noop), TypeError, 'throws when inner function returns a function')
+  t.throws(noPair(unit), TypeError, 'throws when inner function returns a function')
 
   const noState = bindFunc(State(() => Pair(0, 0)).chain(identity).runWith)
 
@@ -411,14 +411,14 @@ test('State chain errors', t => {
   t.throws(noState(true), TypeError, 'throws when chain function returns true')
   t.throws(noState([]), TypeError, 'throws when chain function returns an array')
   t.throws(noState({}), TypeError, 'throws when chain function returns an object')
-  t.throws(noState(noop), TypeError, 'throws when chain function returns a function')
+  t.throws(noState(unit), TypeError, 'throws when chain function returns a function')
 
   t.end()
 })
 
 test('State chain properties (Chain)', t => {
-  t.ok(isFunction(State(noop).chain), 'provides a chain function')
-  t.ok(isFunction(State(noop).ap), 'implements the Apply spec')
+  t.ok(isFunction(State(unit).chain), 'provides a chain function')
+  t.ok(isFunction(State(unit).ap), 'implements the Apply spec')
 
   const s = 8
 
@@ -434,8 +434,8 @@ test('State chain properties (Chain)', t => {
 })
 
 test('State chain properties (Monad)', t => {
-  t.ok(State(noop).chain, 'implements ohe Chain spec')
-  t.ok(State(noop).of, 'implements the Applicative spec')
+  t.ok(State(unit).chain, 'implements ohe Chain spec')
+  t.ok(State(unit).of, 'implements the Applicative spec')
 
   const f = x => State(s => Pair(x, s))
 

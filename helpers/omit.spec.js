@@ -2,7 +2,7 @@ const test = require('tape')
 const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
-const noop = helpers.noop
+const unit = require('../helpers/unit')
 
 const omit = require('./omit')
 
@@ -18,7 +18,7 @@ test('omit', t => {
   t.throws(fn('string', {}), noFold, 'throws when first arg is a truthy string')
   t.throws(fn(false, {}), noFold, 'throws when first arg is false')
   t.throws(fn(true, {}), noFold, 'throws when first arg is true')
-  t.throws(fn(noop, {}), noFold, 'throws when first arg is a function')
+  t.throws(fn(unit, {}), noFold, 'throws when first arg is a function')
   t.throws(fn({}, {}), noFold, 'throws when first arg is an object')
 
   const noObj = /omit: Object required for second argument/
@@ -30,7 +30,7 @@ test('omit', t => {
   t.throws(fn([], 'string'), noObj, 'throws when second arg is a truthy string')
   t.throws(fn([], false), noObj, 'throws when second arg is false')
   t.throws(fn([], true), noObj, 'throws when second arg is true')
-  t.throws(fn([], noop), noObj, 'throws when second arg is a function')
+  t.throws(fn([], unit), noObj, 'throws when second arg is a function')
   t.throws(fn([], []), noObj, 'throws when second arg is an array')
 
   const data = { a: 23, b: true, c: 'sea', d: undefined }

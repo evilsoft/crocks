@@ -2,7 +2,7 @@ const test = require('tape')
 const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
-const noop = helpers.noop
+const unit = require('../helpers/unit')
 
 const objOf = require('./objOf')
 
@@ -17,7 +17,7 @@ test('objOf', t => {
   t.throws(fn('', {}), err, 'throws when first arg is a falsey string')
   t.throws(fn(false, {}), err, 'throws when first arg is false')
   t.throws(fn(true, {}), err, 'throws when first arg is true')
-  t.throws(fn(noop, {}), err, 'throws when first arg is a function')
+  t.throws(fn(unit, {}), err, 'throws when first arg is a function')
   t.throws(fn({}, {}), err, 'throws when first arg is an object')
   t.throws(fn([], {}), err, 'throws when first arg is an array')
 
@@ -29,7 +29,7 @@ test('objOf', t => {
   t.same(objOf('key', 'string'), { key: 'string' }, 'allows for a truthy string value')
   t.same(objOf('key', false), { key: false }, 'allows for a false value')
   t.same(objOf('key', true), { key: true }, 'allows for a true value')
-  t.same(objOf('key', noop), { key: noop }, 'allows for a function value')
+  t.same(objOf('key', unit), { key: unit }, 'allows for a function value')
   t.same(objOf('key', {}), { key: {} }, 'allows for an object value')
   t.same(objOf('key', []), { key: [] }, 'allows for an array value')
 

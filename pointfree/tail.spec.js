@@ -3,7 +3,7 @@ const sinon = require('sinon')
 const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
-const noop = helpers.noop
+const unit = require('../helpers/unit')
 
 const isFunction  = require('../predicates/isFunction')
 
@@ -25,7 +25,7 @@ test('tail pointfree', t => {
   t.throws(f(false), TypeError, 'throws when arg is false')
   t.throws(f(true), TypeError, 'throws when arg is true')
   t.throws(f({}), TypeError, 'throws when arg is an object without head')
-  t.throws(f(noop), TypeError, 'throws when arg is function')
+  t.throws(f(unit), TypeError, 'throws when arg is function')
 
   t.end()
 })

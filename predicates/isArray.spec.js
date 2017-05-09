@@ -1,7 +1,6 @@
 const test = require('tape')
-const helpers = require('../test/helpers')
 
-const noop = helpers.noop
+const unit = require('../helpers/unit')
 
 const isArray = require('./isArray')
 const isFunction  = require('./isFunction')
@@ -10,7 +9,7 @@ test('isArray predicate function', t => {
   t.ok(isFunction(isArray), 'is a function')
 
   t.ok(isArray([]), 'returns true when passed an array')
-  t.notOk(isArray(noop), 'returns false when passed a function')
+  t.notOk(isArray(unit), 'returns false when passed a function')
   t.notOk(isArray(undefined), 'returns false when passed undefined')
   t.notOk(isArray(null), 'returns false when passed null')
   t.notOk(isArray(0), 'returns false when passed a falsey number')

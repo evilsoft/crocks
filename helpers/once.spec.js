@@ -3,7 +3,7 @@ const sinon = require('sinon')
 const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
-const noop = helpers.noop
+const unit = require('../helpers/unit')
 
 const isFunction = require('../predicates/isFunction')
 
@@ -27,7 +27,7 @@ test('once', t => {
   t.throws(f({}), 'throws with an object')
   t.throws(f([]), 'throws with an array')
 
-  t.doesNotThrow(f(noop), 'allows a function')
+  t.doesNotThrow(f(unit), 'allows a function')
 
   const inner = sinon.spy(identity)
   const fn = once(inner)

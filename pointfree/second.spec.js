@@ -3,7 +3,7 @@ const sinon = require('sinon')
 const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
-const noop = helpers.noop
+const unit = require('../helpers/unit')
 
 const isFunction = require('../predicates/isFunction')
 
@@ -16,7 +16,7 @@ const second = require('./second')
 test('second pointfree', t => {
   const s = bindFunc(second)
 
-  const m = { second: noop }
+  const m = { second: unit }
 
   t.ok(isFunction(second), 'is a function')
 
@@ -31,7 +31,7 @@ test('second pointfree', t => {
   t.throws(s({}), 'throws if arg is an object')
   t.throws(s([]), 'throws if arg is an array')
 
-  t.doesNotThrow(s(noop), 'allows a Function')
+  t.doesNotThrow(s(unit), 'allows a Function')
   t.doesNotThrow(s(m), 'allows an Arrow')
 
   t.end()
@@ -64,7 +64,7 @@ test('second with Function', t => {
   t.throws(g(true), TypeError, 'throws when wrapped function called with true')
   t.throws(g({}), TypeError, 'throws when wrapped function called with an Object')
   t.throws(g([]), TypeError, 'throws when wrapped function called with an Array')
-  t.throws(g(noop), TypeError, 'throws when wrapped function called with a function')
+  t.throws(g(unit), TypeError, 'throws when wrapped function called with a function')
 
   t.equal(res.fst(), 3, 'Does not Apply function to `fst` of the Pair')
   t.equal(res.snd(), 4, 'Applies function to `snd` of the Pair')

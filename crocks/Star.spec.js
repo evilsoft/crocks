@@ -3,7 +3,7 @@ const helpers = require('../test/helpers')
 const sinon = require('sinon')
 
 const bindFunc = helpers.bindFunc
-const noop = helpers.noop
+const unit = require('../helpers/unit')
 
 const isFunction = require('../predicates/isFunction')
 const isObject = require('../predicates/isObject')
@@ -24,7 +24,7 @@ test('Star', t => {
 
   t.ok(isFunction(Star.type), 'provides a type function')
 
-  t.ok(isObject(Star(noop)), 'returns an object')
+  t.ok(isObject(Star(unit)), 'returns an object')
 
   t.throws(Star, TypeError, 'throws with nothing')
   t.throws(a(undefined), TypeError, 'throws with undefined')
@@ -38,13 +38,13 @@ test('Star', t => {
   t.throws(a({}), TypeError, 'throws with an object')
   t.throws(a([]), TypeError, 'throws with an array')
 
-  t.doesNotThrow(a(noop), 'allows a function')
+  t.doesNotThrow(a(unit), 'allows a function')
 
   t.end()
 })
 
 test('Star inspect', t => {
-  const a = Star(noop)
+  const a = Star(unit)
 
   t.ok(isFunction(a.inspect), 'provides an inspect function')
   t.equal(a.inspect(), 'Star Function', 'returns inspect string')
@@ -53,7 +53,7 @@ test('Star inspect', t => {
 })
 
 test('Star type', t => {
-  const a = Star(noop)
+  const a = Star(unit)
   t.ok(isFunction(a.type), 'is a function')
 
   t.equal(a.type, Star.type, 'static and instance versions are the same')
@@ -154,7 +154,7 @@ test('Star concat properties (Semigroup)', t => {
 })
 
 test('Star map errors', t => {
-  const map = bindFunc(Star(noop).map)
+  const map = bindFunc(Star(unit).map)
 
   t.throws(map(undefined), TypeError, 'throws with undefined')
   t.throws(map(null), TypeError, 'throws with null')
@@ -167,7 +167,7 @@ test('Star map errors', t => {
   t.throws(map([]), TypeError, 'throws with an array')
   t.throws(map({}), TypeError, 'throws with an object')
 
-  t.doesNotThrow(map(noop), 'allows functions')
+  t.doesNotThrow(map(unit), 'allows functions')
 
   const runWith = bindFunc(Star(identity).map(identity).runWith)
 
@@ -215,7 +215,7 @@ test('Star map properties (Functor)', t => {
 })
 
 test('Star contramap errors', t => {
-  const cmap = bindFunc(Star(noop).contramap)
+  const cmap = bindFunc(Star(unit).contramap)
 
   t.throws(cmap(undefined), TypeError, 'throws with undefined')
   t.throws(cmap(null), TypeError, 'throws with null')
@@ -228,7 +228,7 @@ test('Star contramap errors', t => {
   t.throws(cmap([]), TypeError, 'throws with an array')
   t.throws(cmap({}), TypeError, 'throws with an object')
 
-  t.doesNotThrow(cmap(noop), 'allows functions')
+  t.doesNotThrow(cmap(unit), 'allows functions')
 
   t.end()
 })
@@ -273,29 +273,29 @@ test('Star contramap properties (Contra Functor)', t => {
 test('Star promap errors', t => {
   const promap = bindFunc(Star(MockCrock).promap)
 
-  t.throws(promap(undefined, noop), TypeError, 'throws with undefined as first argument')
-  t.throws(promap(null, noop), TypeError, 'throws with null as first argument')
-  t.throws(promap(0, noop), TypeError, 'throws with falsey number as first argument')
-  t.throws(promap(1, noop), TypeError, 'throws with truthy number as first argument')
-  t.throws(promap('', noop), TypeError, 'throws with falsey string as first argument')
-  t.throws(promap('string', noop), TypeError, 'throws with truthy string as first argument')
-  t.throws(promap(false, noop), TypeError, 'throws with false as first argument')
-  t.throws(promap(true, noop), TypeError, 'throws with true as first argument')
-  t.throws(promap([], noop), TypeError, 'throws with an array as first argument')
-  t.throws(promap({}, noop), TypeError, 'throws with an object as first argument')
+  t.throws(promap(undefined, unit), TypeError, 'throws with undefined as first argument')
+  t.throws(promap(null, unit), TypeError, 'throws with null as first argument')
+  t.throws(promap(0, unit), TypeError, 'throws with falsey number as first argument')
+  t.throws(promap(1, unit), TypeError, 'throws with truthy number as first argument')
+  t.throws(promap('', unit), TypeError, 'throws with falsey string as first argument')
+  t.throws(promap('string', unit), TypeError, 'throws with truthy string as first argument')
+  t.throws(promap(false, unit), TypeError, 'throws with false as first argument')
+  t.throws(promap(true, unit), TypeError, 'throws with true as first argument')
+  t.throws(promap([], unit), TypeError, 'throws with an array as first argument')
+  t.throws(promap({}, unit), TypeError, 'throws with an object as first argument')
 
-  t.throws(promap(noop, undefined), TypeError, 'throws with undefined as second argument')
-  t.throws(promap(noop, null), TypeError, 'throws with null as second argument')
-  t.throws(promap(noop, 0), TypeError, 'throws with falsey number as second argument')
-  t.throws(promap(noop, 1), TypeError, 'throws with truthy number as second argument')
-  t.throws(promap(noop, ''), TypeError, 'throws with falsey string as second argument')
-  t.throws(promap(noop, 'string'), TypeError, 'throws with truthy string as second argument')
-  t.throws(promap(noop, false), TypeError, 'throws with false as second argument')
-  t.throws(promap(noop, true), TypeError, 'throws with true as second argument')
-  t.throws(promap(noop, []), TypeError, 'throws with an array as second argument')
-  t.throws(promap(noop, {}), TypeError, 'throws with an object as second argument')
+  t.throws(promap(unit, undefined), TypeError, 'throws with undefined as second argument')
+  t.throws(promap(unit, null), TypeError, 'throws with null as second argument')
+  t.throws(promap(unit, 0), TypeError, 'throws with falsey number as second argument')
+  t.throws(promap(unit, 1), TypeError, 'throws with truthy number as second argument')
+  t.throws(promap(unit, ''), TypeError, 'throws with falsey string as second argument')
+  t.throws(promap(unit, 'string'), TypeError, 'throws with truthy string as second argument')
+  t.throws(promap(unit, false), TypeError, 'throws with false as second argument')
+  t.throws(promap(unit, true), TypeError, 'throws with true as second argument')
+  t.throws(promap(unit, []), TypeError, 'throws with an array as second argument')
+  t.throws(promap(unit, {}), TypeError, 'throws with an object as second argument')
 
-  t.doesNotThrow(promap(noop, noop), 'allows functions')
+  t.doesNotThrow(promap(unit, unit), 'allows functions')
 
   const runWith = bindFunc(Star(identity).promap(identity, identity).runWith)
 
@@ -356,7 +356,7 @@ test('Star promap properties (Functor)', t => {
 })
 
 test('Star first', t => {
-  t.ok(isFunction(Star(noop).first), 'provides a first function')
+  t.ok(isFunction(Star(unit).first), 'provides a first function')
 
   const m = Star(x => MockCrock(x + 1))
 
@@ -397,7 +397,7 @@ test('Star first', t => {
 })
 
 test('Star second', t => {
-  t.ok(isFunction(Star(noop).second), 'provides a second function')
+  t.ok(isFunction(Star(unit).second), 'provides a second function')
 
   const m = Star(x => MockCrock(x + 1))
 
@@ -440,7 +440,7 @@ test('Star second', t => {
 })
 
 test('Star both', t => {
-  t.ok(isFunction(Star(noop).both), 'provides a both function')
+  t.ok(isFunction(Star(unit).both), 'provides a both function')
 
   const m = Star(x => MockCrock(x + 1))
 

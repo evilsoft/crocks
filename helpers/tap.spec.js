@@ -3,7 +3,7 @@ const sinon = require('sinon')
 const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
-const noop = helpers.noop
+const unit = require('../helpers/unit')
 
 const isFunction = require('../predicates/isFunction')
 
@@ -28,7 +28,7 @@ test('tap', t => {
   t.throws(f({}, x), 'throws with an object in first argument')
   t.throws(f([], x), 'throws with an array in first argument')
 
-  t.doesNotThrow(f(noop, x), 'allows a function in first argument')
+  t.doesNotThrow(f(unit, x), 'allows a function in first argument')
 
   const result = tap(fn, x)
 

@@ -2,8 +2,8 @@ const test = require('tape')
 const sinon = require('sinon')
 const helpers = require('../test/helpers')
 
-const noop = helpers.noop
 const bindFunc = helpers.bindFunc
+const unit = require('../helpers/unit')
 
 const isFunction = require('../predicates/isFunction')
 const isObject = require('../predicates/isObject')
@@ -16,7 +16,7 @@ const reverseApply  = require('../combinators/reverseApply')
 const IO = require('./IO')
 
 test('IO', t => {
-  const m = IO(noop)
+  const m = IO(unit)
   const io = bindFunc(IO)
 
   t.ok(isFunction(IO), 'is a function')
@@ -38,13 +38,13 @@ test('IO', t => {
   t.throws(io([]), TypeError, 'throws with array')
   t.throws(io({}), TypeError, 'throws with object')
 
-  t.doesNotThrow(io(noop), 'allows a function')
+  t.doesNotThrow(io(unit), 'allows a function')
 
   t.end()
 })
 
 test('IO inspect', t => {
-  const m = IO(noop)
+  const m = IO(unit)
 
   t.ok(isFunction(m.inspect), 'provides an inpsect function')
   t.equal(m.inspect(), 'IO Function', 'returns inspect string')
@@ -53,7 +53,7 @@ test('IO inspect', t => {
 })
 
 test('IO type', t => {
-  t.equal(IO(noop).type(), 'IO', 'type returns IO')
+  t.equal(IO(unit).type(), 'IO', 'type returns IO')
   t.end()
 })
 
@@ -70,7 +70,7 @@ test('IO run', t => {
 })
 
 test('IO map errors', t => {
-  const map = bindFunc(IO(noop).map)
+  const map = bindFunc(IO(unit).map)
 
   t.throws(map(undefined), TypeError, 'throws with undefined')
   t.throws(map(null), TypeError, 'throws with null')
@@ -82,7 +82,7 @@ test('IO map errors', t => {
   t.throws(map(true), TypeError, 'throws with true')
   t.throws(map([]), TypeError, 'throws with an array')
   t.throws(map({}), TypeError, 'throws with an object')
-  t.doesNotThrow(map(noop), 'allows functions')
+  t.doesNotThrow(map(unit), 'allows functions')
 
   t.end()
 })
@@ -91,7 +91,7 @@ test('IO map functionality', t => {
   const x = 42
   const spy = sinon.spy(constant(x))
 
-  const m = IO(noop).map(spy)
+  const m = IO(unit).map(spy)
 
   t.equal(m.type(), 'IO', 'returns an IO')
   t.notOk(spy.called, 'does not call mapping function initially')
@@ -121,18 +121,18 @@ test('IO map properties (Functor)', t => {
 test('IO ap errors', t => {
   const m = { type: () => 'IO...Not' }
 
-  t.throws(IO(noop).ap.bind(null, undefined), TypeError, 'throws when passed undefined')
-  t.throws(IO(noop).ap.bind(null, null), TypeError, 'throws when passed null')
-  t.throws(IO(noop).ap.bind(null, 0), TypeError, 'throws when passed a falsey number')
-  t.throws(IO(noop).ap.bind(null, 1), TypeError, 'throws when passed a truthy number')
-  t.throws(IO(noop).ap.bind(null, ''), TypeError, 'throws when passed a falsey string')
-  t.throws(IO(noop).ap.bind(null, 'string'), TypeError, 'throws when passed a truthy string')
-  t.throws(IO(noop).ap.bind(null, false), TypeError, 'throws when passed false')
-  t.throws(IO(noop).ap.bind(null, true), TypeError, 'throws when passed true')
-  t.throws(IO(noop).ap.bind(null, []), TypeError, 'throws when passed an array')
-  t.throws(IO(noop).ap.bind(null, {}), TypeError, 'throws when passed an object')
+  t.throws(IO(unit).ap.bind(null, undefined), TypeError, 'throws when passed undefined')
+  t.throws(IO(unit).ap.bind(null, null), TypeError, 'throws when passed null')
+  t.throws(IO(unit).ap.bind(null, 0), TypeError, 'throws when passed a falsey number')
+  t.throws(IO(unit).ap.bind(null, 1), TypeError, 'throws when passed a truthy number')
+  t.throws(IO(unit).ap.bind(null, ''), TypeError, 'throws when passed a falsey string')
+  t.throws(IO(unit).ap.bind(null, 'string'), TypeError, 'throws when passed a truthy string')
+  t.throws(IO(unit).ap.bind(null, false), TypeError, 'throws when passed false')
+  t.throws(IO(unit).ap.bind(null, true), TypeError, 'throws when passed true')
+  t.throws(IO(unit).ap.bind(null, []), TypeError, 'throws when passed an array')
+  t.throws(IO(unit).ap.bind(null, {}), TypeError, 'throws when passed an object')
 
-  t.throws(IO(noop).ap.bind(null, m), TypeError, 'throws when container types differ')
+  t.throws(IO(unit).ap.bind(null, m), TypeError, 'throws when container types differ')
 
   t.end()
 })
@@ -143,8 +143,8 @@ test('IO ap properties (Apply)', t => {
   const a = m.map(composeB).ap(m).ap(m)
   const b = m.ap(m.ap(m))
 
-  t.ok(isFunction(IO(noop).map), 'implements the Functor spec')
-  t.ok(isFunction(IO(noop).ap), 'provides an ap function')
+  t.ok(isFunction(IO(unit).map), 'implements the Functor spec')
+  t.ok(isFunction(IO(unit).ap), 'provides an ap function')
 
   t.equal(a.ap(IO(constant(3))).run(), b.ap(IO(constant(3))).run(), 'composition')
 
@@ -152,7 +152,7 @@ test('IO ap properties (Apply)', t => {
 })
 
 test('IO of', t => {
-  t.equal(IO.of, IO(noop).of, 'of is the same as the instance version')
+  t.equal(IO.of, IO(unit).of, 'of is the same as the instance version')
   t.equal(IO.of(0).type(), 'IO', 'returns an IO')
   t.equal(IO.of(0).run(), 0, 'wraps the value passed into an IO')
 
@@ -162,8 +162,8 @@ test('IO of', t => {
 test('IO of properties (Applicative)', t => {
   const m = IO(constant(identity))
 
-  t.ok(isFunction(IO(noop).of), 'provides an of function')
-  t.ok(isFunction(IO(noop).ap), 'implements the Apply spec')
+  t.ok(isFunction(IO(unit).of), 'provides an of function')
+  t.ok(isFunction(IO(unit).ap), 'implements the Apply spec')
 
   t.equal(m.ap(IO(constant(27))).run(), 27, 'identity')
   t.equal(m.ap(IO.of(3)).run(), IO.of(identity(3)).run(), 'homomorphism')
@@ -177,7 +177,7 @@ test('IO of properties (Applicative)', t => {
 })
 
 test('IO chain errors', t => {
-  const chain = bindFunc(IO(noop).chain)
+  const chain = bindFunc(IO(unit).chain)
 
   t.throws(chain(undefined), TypeError, 'throws with undefined')
   t.throws(chain(null), TypeError, 'throws null')
@@ -203,14 +203,14 @@ test('IO chain errors', t => {
   t.throws(badRtn(true), TypeError, 'throws when function returns true')
   t.throws(badRtn([]), TypeError, 'throws when function returns an array')
   t.throws(badRtn({}), TypeError, 'throws when function returns an object')
-  t.throws(badRtn(noop), TypeError, 'throws when function returns a function')
+  t.throws(badRtn(unit), TypeError, 'throws when function returns a function')
 
   t.end()
 })
 
 test('IO chain properties (Chain)', t => {
-  t.ok(isFunction(IO(noop).chain), 'provides a chain function')
-  t.ok(isFunction(IO(noop).ap), 'implements the Apply spec')
+  t.ok(isFunction(IO(unit).chain), 'provides a chain function')
+  t.ok(isFunction(IO(unit).ap), 'implements the Apply spec')
 
   const f = x => IO(() => x + 2)
   const g = x => IO(() => x + 10)
@@ -224,8 +224,8 @@ test('IO chain properties (Chain)', t => {
 })
 
 test('IO chain properties (Monad)', t => {
-  t.ok(isFunction(IO(noop).chain), 'implements the Chain spec')
-  t.ok(IO(noop).of, 'implements the Applicative spec')
+  t.ok(isFunction(IO(unit).chain), 'implements the Chain spec')
+  t.ok(IO(unit).of, 'implements the Applicative spec')
 
   const f = x => IO(constant(x))
 

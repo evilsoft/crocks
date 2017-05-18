@@ -1,25 +1,41 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const pipe = require('./pipe')
 const argsArray = require('../internal/argsArray')
-
+const identity = require('../combinators/identity')
 const isFunction = require('../predicates/isFunction')
 
+const err = 'compose: Functions required'
+
+function applyPipe(f, g) {
+  if(!isFunction(g)) {
+    throw new TypeError(err)
+  }
+
+  return function() {
+    return g.call(null, f.apply(null, argsArray(arguments)))
+  }
+}
 // compose : ((y -> z), (x -> y), ..., (a -> b)) -> a -> z
 function compose() {
   if(!arguments.length) {
-    throw new TypeError('compose: At least one function required')
+    throw new TypeError(err)
   }
 
   const fns =
-    argsArray(arguments)
+    argsArray(arguments).slice().reverse()
 
-  if(fns.filter(x => !isFunction(x)).length) {
-    throw new TypeError('compose: Only accepts functions')
+  const head =
+    fns[0]
+
+  if(!isFunction(head)) {
+    throw new TypeError(err)
   }
 
-  return pipe.apply(null, fns.slice().reverse())
+  const tail =
+    fns.slice(1).concat(identity)
+
+  return tail.reduce(applyPipe, head)
 }
 
 module.exports = compose

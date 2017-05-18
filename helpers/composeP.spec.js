@@ -9,38 +9,48 @@ const isFunction = require('../predicates/isFunction')
 
 const composeP = require('./composeP')
 
-test('composeP parameters', t => {
+test('composeP errors', t => {
   const prom = x => Promise.resolve(x)
 
   const pp = bindFunc(composeP)
   const f = bindFunc(composeP(unit))
   const g = bindFunc(composeP(prom, unit))
 
-  t.ok(isFunction(composeP), 'composeP is a function')
+  const err = /composeP: Promise returning functions required/
+  t.throws(composeP, err, 'throws when nothing passed')
 
-  const noArgs = /composeP: At least one Promise returning function required/
-  t.throws(composeP, noArgs, 'throws when nothing passed')
+  t.throws(f(), err, 'throws when single function does not return a Promise')
+  t.throws(g(), err, 'throws when head function does not return a Promise')
 
-  const noFuncs = /composeP: Only accepts Promise returning functions/
-  t.throws(f(), noFuncs, 'throws when single function does not return a Promise')
-  t.throws(g(), noFuncs, 'throws when head function does not return a Promise')
+  t.throws(pp(undefined), err, 'throws when undefined passed')
+  t.throws(pp(null), err, 'throws when null passed')
+  t.throws(pp(''), err, 'throws when falsey string passed')
+  t.throws(pp('string'), err, 'throws when truthy string passed')
+  t.throws(pp(0), err, 'throws when falsy number passed')
+  t.throws(pp(1), err, 'throws when truthy number passed')
+  t.throws(pp(false), err, 'throws when false passed')
+  t.throws(pp(true), err, 'throws when true passed')
+  t.throws(pp({}), err, 'throws when object passed')
+  t.throws(pp([]), err, 'throws when array passed')
 
-  t.throws(pp(undefined), noFuncs, 'throws when undefined passed')
-  t.throws(pp(null), noFuncs, 'throws when null passed')
-  t.throws(pp(''), noFuncs, 'throws when falsey string passed')
-  t.throws(pp('string'), noFuncs, 'throws when truthy string passed')
-  t.throws(pp(0), noFuncs, 'throws when falsy number passed')
-  t.throws(pp(1), noFuncs, 'throws when truthy number passed')
-  t.throws(pp(false), noFuncs, 'throws when false passed')
-  t.throws(pp(true), noFuncs, 'throws when true passed')
-  t.throws(pp({}), noFuncs, 'throws when object passed')
-  t.throws(pp([]), noFuncs, 'throws when array passed')
+  t.throws(pp(undefined, prom), err, 'throws when undefined passed')
+  t.throws(pp(null, prom), err, 'throws when null passed')
+  t.throws(pp('', prom), err, 'throws when falsey string passed')
+  t.throws(pp('string', prom), err, 'throws when truthy string passed')
+  t.throws(pp(0, prom), err, 'throws when falsy number passed')
+  t.throws(pp(1, prom), err, 'throws when truthy number passed')
+  t.throws(pp(false, prom), err, 'throws when false passed')
+  t.throws(pp(true, prom), err, 'throws when true passed')
+  t.throws(pp({}, prom), err, 'throws when object passed')
+  t.throws(pp([], prom), err, 'throws when array passed')
 
   t.end()
 })
 
 test('composeP functionality', t => {
-  t.plan(5)
+  t.plan(6)
+
+  t.ok(isFunction(composeP), 'composeP is a function')
 
   const res = x => Promise.resolve(x)
   const rej = x => Promise.reject(x)

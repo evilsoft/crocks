@@ -5,7 +5,13 @@ const argsArray = require('../internal/argsArray')
 const identity = require('../combinators/identity')
 const isFunction = require('../predicates/isFunction')
 
+const err = 'pipe: Functions required'
+
 function applyPipe(f, g) {
+  if(!isFunction(g)) {
+    throw new TypeError(err)
+  }
+
   return function() {
     return g.call(null, f.apply(null, argsArray(arguments)))
   }
@@ -14,18 +20,18 @@ function applyPipe(f, g) {
 // pipe : ((a -> b), (b -> c), ..., (y -> z)) -> a -> z
 function pipe() {
   if(!arguments.length) {
-    throw new TypeError('pipe: At least one function required')
+    throw new TypeError(err)
   }
 
   const fns =
     argsArray(arguments)
 
-  if(fns.filter(x => !isFunction(x)).length) {
-    throw new TypeError('pipe: Only accepts functions')
-  }
-
   const head =
     fns[0]
+
+  if(!isFunction(head)) {
+    throw new TypeError(err)
+  }
 
   const tail =
     fns.slice(1).concat(identity)

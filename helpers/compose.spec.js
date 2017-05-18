@@ -14,20 +14,30 @@ test('compose parameters', t => {
 
   t.ok(isFunction(compose), 'compose is a function')
 
-  t.throws(compose, TypeError, 'throws Error when nothing passed')
+  const err = /compose: Functions required/
+  t.throws(compose, err, 'throws Error when nothing passed')
 
-  t.throws(c(undefined), TypeError, 'throws TypeError when undefined passed')
-  t.throws(c(null), TypeError, 'throws TypeError when null passed')
+  t.throws(c(undefined), err, 'throws when undefined passed')
+  t.throws(c(null), err, 'throws when null passed')
+  t.throws(c(''), err, 'throws when falsey string passed')
+  t.throws(c('string'), err, 'throws when truthy string passed')
+  t.throws(c(0), err, 'throws when falsy number passed')
+  t.throws(c(1), err, 'throws when truthy number passed')
+  t.throws(c(false), err, 'throws when false passed')
+  t.throws(c(true), err, 'throws when true passed')
+  t.throws(c({}), err, 'throws when object passed')
+  t.throws(c([]), err, 'throws when array passed')
 
-  t.throws(c(''), TypeError, 'throws TypeError when falsey string passed')
-  t.throws(c('string'), TypeError, 'throws TypeError when truthy string passed')
-  t.throws(c(0), TypeError, 'throws TypeError when falsy number passed')
-  t.throws(c(1), TypeError, 'throws TypeError when truthy number passed')
-  t.throws(c(false), TypeError, 'throws TypeError when false passed')
-  t.throws(c(true), TypeError, 'throws TypeError when true passed')
-
-  t.throws(c({}), TypeError, 'throws TypeError when object passed')
-  t.throws(c([]), TypeError, 'throws TypeError when array passed')
+  t.throws(c(undefined, unit), err, 'throws when undefined passed as second argument')
+  t.throws(c(null, unit), err, 'throws when null passed as second argument')
+  t.throws(c('', unit), err, 'throws when falsey string passed as second argument')
+  t.throws(c('string', unit), err, 'throws when truthy string passed as second argument')
+  t.throws(c(0, unit), err, 'throws when falsy number passed as second argument')
+  t.throws(c(1, unit), err, 'throws when truthy number passed as second argument')
+  t.throws(c(false, unit), err, 'throws when false passed as second argument')
+  t.throws(c(true, unit), err, 'throws when true passed as second argument')
+  t.throws(c({}, unit), err, 'throws when object passed as second argument')
+  t.throws(c([], unit), err, 'throws when array passed as second argument')
 
   t.ok(isFunction(compose(unit)), 'returns a function')
 

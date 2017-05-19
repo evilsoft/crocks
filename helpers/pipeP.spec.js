@@ -9,7 +9,7 @@ const isFunction = require('../predicates/isFunction')
 
 const pipeP = require('./pipeP')
 
-test('pipeP parameters', t => {
+test('pipeP errors', t => {
   const prom = x => Promise.resolve(x)
 
   const pp = bindFunc(pipeP)
@@ -18,23 +18,33 @@ test('pipeP parameters', t => {
 
   t.ok(isFunction(pipeP), 'pipeP is a function')
 
-  const noArgs = /pipeP: At least one Promise returning function required/
-  t.throws(pipeP, noArgs, 'throws when nothing passed')
+  const err = /pipeP: Promise returning functions required/
+  t.throws(pipeP, err, 'throws when nothing passed')
 
-  const noFuncs = /pipeP: Only accepts Promise returning functions/
-  t.throws(f(), noFuncs, 'throws when single function does not return a Promise')
-  t.throws(g(), noFuncs, 'throws when head function does not return a Promise')
+  t.throws(f(), err, 'throws when single function does not return a Promise')
+  t.throws(g(), err, 'throws when head function does not return a Promise')
 
-  t.throws(pp(undefined), noFuncs, 'throws when undefined passed')
-  t.throws(pp(null), noFuncs, 'throws when null passed')
-  t.throws(pp(''), noFuncs, 'throws when falsey string passed')
-  t.throws(pp('string'), noFuncs, 'throws when truthy string passed')
-  t.throws(pp(0), noFuncs, 'throws when falsy number passed')
-  t.throws(pp(1), noFuncs, 'throws when truthy number passed')
-  t.throws(pp(false), noFuncs, 'throws when false passed')
-  t.throws(pp(true), noFuncs, 'throws when true passed')
-  t.throws(pp({}), noFuncs, 'throws when object passed')
-  t.throws(pp([]), noFuncs, 'throws when array passed')
+  t.throws(pp(undefined), err, 'throws when undefined passed')
+  t.throws(pp(null), err, 'throws when null passed')
+  t.throws(pp(''), err, 'throws when falsey string passed')
+  t.throws(pp('string'), err, 'throws when truthy string passed')
+  t.throws(pp(0), err, 'throws when falsy number passed')
+  t.throws(pp(1), err, 'throws when truthy number passed')
+  t.throws(pp(false), err, 'throws when false passed')
+  t.throws(pp(true), err, 'throws when true passed')
+  t.throws(pp({}), err, 'throws when object passed')
+  t.throws(pp([]), err, 'throws when array passed')
+
+  t.throws(pp(prom, undefined), err, 'throws when undefined passed as second argument')
+  t.throws(pp(prom, null), err, 'throws when null passed as second argument')
+  t.throws(pp(prom, ''), err, 'throws when falsey string passed as second argument')
+  t.throws(pp(prom, 'string'), err, 'throws when truthy string passed as second argument')
+  t.throws(pp(prom, 0), err, 'throws when falsy number passed as second argument')
+  t.throws(pp(prom, 1), err, 'throws when truthy number passed as second argument')
+  t.throws(pp(prom, false), err, 'throws when false passed as second argument')
+  t.throws(pp(prom, true), err, 'throws when true passed as second argument')
+  t.throws(pp(prom, {}), err, 'throws when object passed as second argument')
+  t.throws(pp(prom, []), err, 'throws when array passed as second argument')
 
   t.end()
 })

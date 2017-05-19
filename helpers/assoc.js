@@ -12,7 +12,8 @@ function assoc(key, val, obj) {
   if(!isString(key)) {
     throw new TypeError('assoc: String required for first argument')
   }
-  else if(!isObject(obj)) {
+
+  if(!isObject(obj)) {
     throw new TypeError('assoc: Object required for third argument')
   }
   return object.assign({ [key]: val }, obj)

@@ -48,7 +48,7 @@ const All = require('crocks/monoids/All')
 ```
 
 ## What is in this?
-There are (6) classifications of "things" included in this library:
+There are (8) classifications of "things" included in this library:
 
 * [Crocks](#crocks) (`crocks/crocks`): These are the ADTs that this library is centered around. They are all Functor based Data Types that provide different computational contexts for working in a more declarative, functional flow. For the most part, a majority of the other bits in `crocks` exist to serve these ADTs.
 
@@ -185,6 +185,63 @@ compose : ((y -> z), (x -> y), ..., (a -> b)) -> a -> z
 ```
 While the [`composeB`](#composeb) can be used to create a composition of two functions, there are times when you want to compose an entire flow together. That is where `compose` is useful. With `compose` you can create a right-to-left composition of functions. It will return you a function that represents your flow. Not really sold on writing flows from right-to-left? Well then, I would recommend reaching for [`pipe`](#pipe).
 
+#### composeK
+```haskell
+composeK : Chain m => ((y -> m z), (x -> m y), ..., (a -> m b)) -> a -> m z
+```
+There are many times that, when working with the various `crocks`, our flows are just a series of `chain`s. Due to some neat properties with types that provide a `chain` function, you can remove some boilerplate by reaching for `composeK`. Just pass it the functions you would normally pass to `chain` and it will do all the boring hook up for you. Just like `compose`, functions are applied right-to-left, so you can turn this:
+
+```js
+const { chain, compose, isObject, prop, safe } = crocks
+
+const data = {
+  do: { re: { mi: 'fa' } }
+}
+
+// fluent : a -> Maybe b
+const fluent = x =>
+  safe(isObject, x)
+    .chain(prop('do'))
+    .chain(prop('re'))
+    .chain(prop('mi'))
+
+fluent(data)
+// => Just 'fa'
+
+// pointfree : a -> Maybe b
+const pointfree = compose(
+  chain(prop('mi')),
+  chain(prop('re')),
+  chain(prop('do')),
+  safe(isObject)
+)
+
+pointfree(data)
+// => Just 'fa'
+```
+
+into the more abbreviated form:
+
+```js
+const { composeK, isObject, prop, safe } = crocks
+
+const data = {
+  do: { re: { mi: 'fa' } }
+}
+
+// flow : a -> Maybe b
+const flow = composeK(
+  prop('mi'),
+  prop('re'),
+  prop('do'),
+  safe(isObject)
+)
+
+flow(data)
+// => Just 'fa'
+```
+As demonstrated in the above example, this function more closely resembles flows that are using a more pointfree style of coding. As with the other composition functions in `crocks`, a [`pipeK`](#pipek) function is provided for flows that make more sense expressed in a left-to-right style.
+
 #### composeP
 ```haskell
 composeP : Promise p => ((y -> p z c), (x -> p y c), ..., (a -> p b c)) -> a -> p z c
@@ -224,6 +281,12 @@ Picture this, you have an `Object` and you want to make sure that some propertie
 defaultTo : a -> b -> a
 ```
 With things like `null`, `undefined` and `NaN` showing up all over the place, it can be hard to keep your expected types inline without resorting to nesting in a `Maybe` with functions like [`safe`](#safe). If you want to specifically guard for `null`, `undefined` and `NaN` and get things defaulted into the expected type, then `defaultTo` should work for you. Just pass it what you would like your default value to be and then the value you want guarded, and you will get back either the default or the passed value, depending on if the passed value is `null`, `undefined` or `NaN`. While this *is* JavaScript and you can return anything, it is suggested to stick to the signature and only let `a`s through. As a `b` can be an `a` as well.
+
+#### dissoc
+```haskell
+dissoc : String -> Object -> Object
+```
+While [`assoc`](#assoc) can be used to associate a given key value pair to a given `Object`, `dissoc` does the opposite. Just pass `dissoc` a `String` key and the `Object` you wish to dissociate that key from and you will get back a new, shallow copy of the `Object` sans your key. As with all the `Object` functions, `dissoc` will remove any `undefined` values from the result.
 
 #### fanout
 ```haskell
@@ -304,7 +367,6 @@ const data =
 
 map(max10, data)
 // [ 10, 5, 10]
-
 ```
 
 #### pick
@@ -318,6 +380,43 @@ When dealing with `Object`s, sometimes it is necessary to only let some of the k
 pipe : ((a -> b), (b -> c), ..., (y -> z)) -> a -> z
 ```
 If you find yourself not able to come to terms with doing the typical right-to-left composition, then `crocks` provides a means to accommodate you. This function does the same thing as [`compose`](#compose), the only difference is it allows you define your flows in a left-to-right manner.
+
+#### pipeK
+```haskell
+pipe : Chain m => ((a -> m b), (b -> m c), ..., (y -> m z)) -> a -> m z
+```
+Like [`composeK`](#composek), you can remove much of the boilerplate when chaining together a series of functions with the signature: `Chain m => a -> m b`. The difference between the two functions is, while [`composeK`](composek) is right-to-left, `pipeK` is the opposite, taking its functions left-to-right.
+
+```js
+const { curry, List, Writer } = require('../crocks')
+
+const OpWriter =
+  Writer(List)
+
+const addLog = curry(
+  (x, y) => OpWriter(`adding ${x} to ${y}`, x + y)
+)
+
+const scaleLog = curry(
+  (x, y) => OpWriter(`scaling ${y} by ${x}`, x * y)
+)
+
+const fluent = x =>
+  OpWriter.of(x)
+    .chain(addLog(4))
+    .chain(scaleLog(3))
+
+fluent(0).log()
+// => List [ "adding 4 to 0", "scaling 4 by 3" ]
+
+const chainPipe = pipeK(
+  addLog(4),
+  scaleLog(3)
+)
+
+chainPipe(0).log()
+// => List [ "adding 4 to 0", "scaling 4 by 3" ]
+```
 
 #### pipeP
 ```haskell

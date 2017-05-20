@@ -82,7 +82,5 @@ test('composeK function', t => {
   t.ok(f.calledWith(23, 30), 'applies all arguments to head function')
   t.equal(f.lastCall.returnValue, resSingle, 'returns the result of the function')
 
-  t.equals()
-
   t.end()
 })

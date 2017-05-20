@@ -76,7 +76,7 @@ test('Star runWith', t => {
   t.end()
 })
 
-test('Star concat functionality', t => {
+test('Star compose functionality', t => {
   const f = x => MockCrock(x + 1)
 
   const a = Star(f)
@@ -84,7 +84,7 @@ test('Star concat functionality', t => {
   const notStar = { type: constant('Star...Not') }
   const notMock  = { type: constant('Mock...Not') }
 
-  const cat = bindFunc(a.concat)
+  const cat = bindFunc(a.compose)
 
   t.throws(cat(undefined), TypeError, 'throws with undefined')
   t.throws(cat(null), TypeError, 'throws with null')
@@ -98,7 +98,7 @@ test('Star concat functionality', t => {
   t.throws(cat({}), TypeError, 'throws with an object')
   t.throws(cat(notStar), TypeError, 'throws with non-Star')
 
-  const noMonadFst = bindFunc(Star(identity).concat(a).runWith)
+  const noMonadFst = bindFunc(Star(identity).compose(a).runWith)
 
   t.throws(noMonadFst(undefined), TypeError, 'throws when first computation returns undefined')
   t.throws(noMonadFst(null), TypeError, 'throws when first computation returns null')
@@ -111,7 +111,7 @@ test('Star concat functionality', t => {
   t.throws(noMonadFst({}), TypeError, 'throws when first computation returns false')
   t.throws(noMonadFst([]), TypeError, 'throws when first computation returns true')
 
-  const noMonadSnd = bindFunc(x => a.concat(Star(constant(x))).runWith(10))
+  const noMonadSnd = bindFunc(x => a.compose(Star(constant(x))).runWith(10))
 
   t.throws(noMonadSnd(undefined), TypeError, 'throws when second computation returns undefined')
   t.throws(noMonadSnd(null), TypeError, 'throws when second computation returns null')
@@ -129,26 +129,26 @@ test('Star concat functionality', t => {
   const g = x => MockCrock(x * 10)
 
   const chained = f(x).chain(g).value()
-  const star = a.concat(Star(g)).runWith(x).value()
+  const star = a.compose(Star(g)).runWith(x).value()
 
   t.equal(chained, star, 'builds composition as expected')
 
   t.end()
 })
 
-test('Star concat properties (Semigroup)', t => {
+test('Star compose properties (Semigroupoid)', t => {
   const a = Star(x => MockCrock(x + 1))
   const b = Star(x => MockCrock(x * 10))
   const c = Star(x => MockCrock(x - 5))
 
-  t.ok(isFunction(Star(identity).concat), 'is a function')
+  t.ok(isFunction(Star(identity).compose), 'is a function')
 
-  const left = a.concat(b).concat(c).runWith
-  const right = a.concat(b.concat(c)).runWith
+  const left = a.compose(b).compose(c).runWith
+  const right = a.compose(b.compose(c)).runWith
   const x = 20
 
   t.same(left(x).value(), right(x).value(), 'associativity')
-  t.same(a.concat(b).type(), a.type(), 'returns Semigroup of same type')
+  t.same(a.compose(b).type(), a.type(), 'returns Semigroupoid of same type')
 
   t.end()
 })

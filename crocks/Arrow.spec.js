@@ -20,8 +20,8 @@ test('Arrow', t => {
 
   t.ok(isFunction(Arrow), 'is a function')
 
-  t.ok(isFunction(Arrow.empty), 'provides an empty function')
   t.ok(isFunction(Arrow.type), 'provides a type function')
+  t.ok(isFunction(Arrow.id), 'provides an id function')
 
   t.ok(isObject(Arrow(unit)), 'returns an object')
 
@@ -85,7 +85,7 @@ test('Arrow runWith', t => {
   t.end()
 })
 
-test('Arrow concat functionality', t => {
+test('Arrow compose functionality', t => {
   const f = x => x + 1
   const g = x => x * 0
 
@@ -97,7 +97,7 @@ test('Arrow concat functionality', t => {
 
   const notArrow = { type: constant('Arrow...Not') }
 
-  const cat = bindFunc(a.concat)
+  const cat = bindFunc(a.compose)
 
   t.throws(cat(undefined), TypeError, 'throws with undefined')
   t.throws(cat(null), TypeError, 'throws with null')
@@ -111,48 +111,48 @@ test('Arrow concat functionality', t => {
   t.throws(cat({}), TypeError, 'throws with an object')
   t.throws(cat(notArrow), TypeError, 'throws with non-Arrow')
 
-  t.same(a.concat(b).runWith(x), result, 'builds composition as expected')
+  t.same(a.compose(b).runWith(x), result, 'builds composition as expected')
 
   t.end()
 })
 
-test('Arrow concat properties (Semigroup)', t => {
+test('Arrow compose properties (Semigroupoid)', t => {
   const a = Arrow(x => x + 1)
   const b = Arrow(x => x * 10)
   const c = Arrow(x => x - 5)
 
-  t.ok(isFunction(Arrow(identity).concat), 'is a function')
+  t.ok(isFunction(Arrow(identity).compose), 'is a function')
 
-  const left = a.concat(b).concat(c).runWith
-  const right = a.concat(b.concat(c)).runWith
+  const left = a.compose(b).compose(c).runWith
+  const right = a.compose(b.compose(c)).runWith
   const x = 20
 
   t.same(left(x), right(x), 'associativity')
-  t.same(a.concat(b).type(), a.type(), 'returns Semigroup of same type')
+  t.same(a.compose(b).type(), a.type(), 'returns Semigroupoid of same type')
 
   t.end()
 })
 
-test('Arrow empty functionality', t => {
-  const m = Arrow(unit).empty()
+test('Arrow id functionality', t => {
+  const m = Arrow(unit).id()
 
-  t.equal(m.empty, Arrow.empty, 'static and instance versions are the same')
+  t.equal(m.id, Arrow.id, 'static and instance versions are the same')
 
-  t.equal(m.type(), 'Arrow', 'provides an Arrow')
+  t.equal(m.type(), Arrow.type(), 'provides an Arrow')
   t.same(m.runWith(13), 13, 'wraps an identity function')
 
   t.end()
 })
 
-test('Arrow empty properties (Monoid)', t => {
+test('Arrow id properties (Category)', t => {
   const m = Arrow(x => x + 45)
   const x = 32
 
-  t.ok(isFunction(m.concat), 'provides a concat function')
-  t.ok(isFunction(m.empty), 'provides a empty function')
+  t.ok(isFunction(m.compose), 'provides a compose function')
+  t.ok(isFunction(m.id), 'provides an id function')
 
-  const right = m.concat(m.empty()).runWith
-  const left = m.empty().concat(m).runWith
+  const right = m.compose(m.id()).runWith
+  const left = m.id().compose(m).runWith
 
   t.same(right(x), m.runWith(x), 'right identity')
   t.same(left(x), m.runWith(x), 'left identity')

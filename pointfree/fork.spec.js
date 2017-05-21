@@ -12,7 +12,8 @@ const fork = require('./fork')
 
 test('fork pointfree', t => {
   const f = bindFunc(fork)
-  const m = { fork: sinon.spy() }
+  const m = Async.of(unit)
+  sinon.stub(m, 'fork').callsFake(unit)
 
   t.ok(isFunction(fork), 'is a function')
 
@@ -58,21 +59,12 @@ test('fork pointfree', t => {
   const rej = sinon.spy()
   const res = sinon.spy()
 
-  const resolved = Async.Resolved()
-  fork(rej, res, resolved)
+  fork(rej, res, m)
 
-  t.ok(res.called, 'calls passed resolve function')
-  t.notOk(rej.called, 'does not call passed reject function')
+  t.ok(m.fork.calledWith(rej, res), 'calls fork on forkable passing the rej and res functions')
   rej.reset()
   res.reset()
-
-  const rejected = Async.Rejected()
-  fork(rej, res, rejected)
-
-  t.ok(rej.called, 'calls passed reject function')
-  t.notOk(res.called, 'does not call passed resolve function')
-  rej.reset()
-  res.reset()
+  m.fork.restore()
 
   t.end()
 })

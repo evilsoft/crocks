@@ -1,4 +1,39 @@
 # Change Log for `crocks`
+v0.6.0 -- May 21, 2017
+--
+### Breaking
+  * Remove `curryN` in favor of `nAry`
+  * Replace `concat` and `empty` with `compose` and `id` on `Arrow`
+  * Replace `concat` with `compose` on `Star`
+
+### Additions
+* Helper Functions:
+  * `binary`
+  * `composeK`
+  * `composeS`
+  * `dissoc`
+  * `nAry`
+  * `partial`
+  * `pipeK`
+  * `pipeS`
+  * `unary`
+  * `unit`
+* Pointfree
+  * `empty`
+* Predicates
+  * `isCategory`
+  * `isSemigroupoid`
+
+### Non-Breaking
+  * Small optimization on all `pipe` and `compose` functions.
+
+### Pull Requests
+* [#121 - Add some Function based Helper functions](https://github.com/evilsoft/crocks/pull/121)
+* [#124 - Add cancellation to Async](https://github.com/evilsoft/crocks/pull/124)
+* [#125 - Add composeK, dissoc and pipeK](https://github.com/evilsoft/crocks/pull/125)
+* [#126 - Better compose and pipe functions](https://github.com/evilsoft/crocks/pull/126)
+* [#127 - Move Star and Arrow from Semigroups to Semigroupoids](https://github.com/evilsoft/crocks/pull/127)
+
 v0.5.0 -- May 4, 2017
 --
 ### Breaking

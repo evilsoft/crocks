@@ -50,11 +50,11 @@ const All = require('crocks/monoids/All')
 ## What is in this?
 There are (8) classifications of "things" included in this library:
 
-* [Crocks](#crocks) (`crocks/crocks`): These are the ADTs that this library is centered around. They are all Functor based Data Types that provide different computational contexts for working in a more declarative, functional flow. For the most part, a majority of the other bits in `crocks` exist to serve these ADTs.
+* [Crocks](#crocks) (`crocks/crocks`): These are the ADTs that this library is centered around. They are all `Functor` based Data Types that provide different computational contexts for working in a more declarative, functional flow. For the most part, a majority of the other bits in `crocks` exist to serve these ADTs.
 
-* [Monoids](#monoids) (`crocks/monoids`): These helpful ADTs are in a class of their own, not really Functors in their own right (although some can be), they are still very useful in our everyday programming needs. Ever need to Sum a list of Numbers or mix a mess of objects together? This is were you will find the ADTs you need to do that.
+* [Monoids](#monoids) (`crocks/monoids`): These helpful ADTs are in a class of their own, not really `Functor`s in their own right (although some can be), they are still very useful in our everyday programming needs. Ever need to Sum a list of Numbers or mix a mess of objects together? This is were you will find the ADTs you need to do that.
 
-* [Combinators](#combinators) (`crocks/combinators`): A collection of functions that are used for working with other functions. These do things like compose (2) functions together, or flip arguments on a function. They typically either take a function, return a function or a bit a both. These are considered the glue that holds the mighty house of `Crocks` together and a valuable aid in writing reusable code.
+* [Combinators](#combinators) (`crocks/combinators`): A collection of functions that are used for working with other functions. These do things like compose (2) functions together, or flip arguments on a function. They typically either take a function, return a function or a bit a both. These are considered the glue that holds the mighty house of `crocks` together and a valuable aid in writing reusable code.
 
 * [Helper Functions](#helper-functions) (`crocks/helpers`): All other support functions that are either convenient versions of combinators or not even combinators at all cover this group.
 
@@ -67,13 +67,13 @@ There are (8) classifications of "things" included in this library:
 * [Transformation Functions](#transformation-functions) (`crocks/transform`): All the functions found here are used to transform from one type to another, naturally. These come are handy in situations where you have functions that return one type (like an `Either`), but are working in a context of another (say `Maybe`). You would like to compose these, but in doing so will result in a nesting that you will need to account for for the rest of your flow.
 
 ### Crocks
-The `Crocks` are the heart and soul of this library. This is where you will find all your favorite ADT's you have grown to :heart:. They include gems such as: `Maybe`, `Either` and `IO`, to name a few. The are usually just a simple constructor that takes either a function or value (depending on the type) and will return you a "container" that wraps whatever you passed it. Each container provides a variety of functions that act as the operations you can do on the contained value. There are many types that share the same function names, but what they do from type to type may vary.  Every Crock provides type function on the Constructor and both inspect and type functions on their Instances.
+The `crocks` are the heart and soul of this library. This is where you will find all your favorite ADT's you have grown to :heart:. They include gems such as: `Maybe`, `Either` and `IO`, to name a few. The are usually just a simple constructor that takes either a function or value (depending on the type) and will return you a "container" that wraps whatever you passed it. Each container provides a variety of functions that act as the operations you can do on the contained value. There are many types that share the same function names, but what they do from type to type may vary.  Every Crock provides type function on the Constructor and both inspect and type functions on their Instances.
 
 All `Crocks` are Constructor functions of the given type, with `Writer` being an exception. The `Writer` function takes a [`Monoid`](#monoids) that will represent the `log`. Once you provide the [`Monoid`](#monoids), the function will return the `Writer` Constructor for your `Writer` using that specific [`Monoid`](#monoids).
 
 | Crock | Constructor | Instance |
 |---|:---|:---|
-| `Arrow` | `empty` | `both`, `concat`, `contramap`, `empty`, `first`, `map`, `promap`, `runWith`, `second`, `value` |
+| `Arrow` | `id` | `both`, `compose`, `contramap`, `empty`, `first`, `map`, `promap`, `runWith`, `second`, `value` |
 | `Async` | `Rejected`, `Resolved`, `all`, `fromNode`, `fromPromise`, `of` | `alt`, `ap`, `bimap`, `chain`, `coalesce`, `fork`, `map`, `of`, `swap`, `toPromise` |
 | `Const` | -- | `ap`, `chain`, `concat`, `equals`, `map`, `value` |
 | `Either` | `Left`, `Right`, `of`| `alt`, `ap`, `bimap`, `chain`, `coalesce`, `concat`, `either`, `equals`, `map`, `of`, `sequence`, `swap`, `traverse` |
@@ -85,7 +85,7 @@ All `Crocks` are Constructor functions of the given type, with `Writer` being an
 | `Pred` * | `empty` | `concat`, `contramap`, `empty`, `runWith`, `value` |
 | `Reader` | `ask`, `of`| `ap`, `chain`, `map`, `of`, `runWith` |
 | `Result` | `Err`, `Ok`, `of`| `alt`, `ap`, `bimap`, `chain`, `coalesce`, `concat`, `either`, `equals`, `map`, `of`, `sequence`, `swap`, `traverse` |
-| `Star` | -- | `both`, `concat`, `contramap`, `map`, `promap`, `runWith` |
+| `Star` | -- | `both`, `compose`, `contramap`, `map`, `promap`, `runWith` |
 | `State` | `get`, `gets`, `modify` `of`, `put`| `ap`, `chain`, `evalWith`, `execWith`, `map`, `of`, `runWith` |
 | `Unit` | `empty`, `of` | `ap`, `chain`, `concat`, `empty`, `equals`, `map`, `of`, `value` |
 | `Writer`| `of` | `ap`, `chain`, `equals`, `log`, `map`, `of`, `read`, `value` |
@@ -93,7 +93,7 @@ All `Crocks` are Constructor functions of the given type, with `Writer` being an
 \* based on [this article](https://medium.com/@drboolean/monoidal-contravariant-functors-are-actually-useful-1032211045c4#.polugsx2a)
 
 ### Monoids
-Each `Monoid` provides a means to represent a binary operation and is usually locked down to a specific type. These are great when you need to combine a list of values down to one value. In this library, any ADT that provides both an `empty` and `concat` function can be used as a `Monoid`. There are a few of the [`Crocks`](#crocks) that are also monoidial, so be on the look out for those as well. All `Monoids` work with the point-free functions [`mconcat`](#mconcat), [`mreduce`](#mreduce), [`mconcatMap`](#mconcatmap) and [`mreduceMap`](#mreducemap).
+Each `Monoid` provides a means to represent a binary operation and is usually locked down to a specific type. These are great when you need to combine a list of values down to one value. In this library, any ADT that provides both an `empty` and `concat` function can be used as a `Monoid`. There are a few of the [`crocks`](#crocks) that are also monoidial, so be on the look out for those as well. All `Monoids` work with the point-free functions [`mconcat`](#mconcat), [`mreduce`](#mreduce), [`mconcatMap`](#mconcatmap) and [`mreduceMap`](#mreducemap).
 
 All `Monoids` provide `empty` and `type` function on their Constructors as well as the following Instance Functions: inspect, `type`, `value`, `empty` and `concat`.
 
@@ -264,6 +264,38 @@ const promFunc =
 ```
 Due to the nature of the `then` function, only the head of your composition needs to return a `Promise`. This will create a function that takes a value, which is passed through your chain, returning a `Promise` which can be extended. This is only a `then` chain, it does not do anything with the `catch` function. If you would like to provide your functions in a left-to-right manner, check out [pipeP](#pipep).
 
+#### composeS
+```haskell
+composeS : Semigroupoid s => (s y z, s x y, ..., s a b) -> s a z
+```
+When working with things like `Arrow` and `Star` there will come a point when you would like to compose them like you would any `Function`. That is where `composeS` comes in handy. Just pass it the `Semigroupoid`s you want to compose and it will give you back a new `Semigroupoid` of the same type with all of the underlying functions composed and ready to be run. Like [`compose`](#compose), `composeS` composes the functions in a right-to-left fashion. If you would like to represent your flow in a more left-to-right manner, then [`pipeS`](#pipes) is provided for such things.
+
+```js
+const {
+  Arrow, bimap, branch, composeS, merge, mreduce, Sum
+} = require('crocks')
+
+const length =
+  xs => xs.length
+
+const divide =
+  (x, y) => x / y
+
+const avg =
+  Arrow(bimap(mreduce(Sum), length))
+    .promap(branch, merge(divide))
+
+const double =
+  Arrow(x => x * 2)
+
+const data =
+  [ 34, 198, 3, 43, 92 ]
+
+composeS(double, avg)
+  .runWith(data)
+// => 148
+```
+
 #### curry
 ```haskell
 curry : ((a, b, ...) -> z) -> a -> b -> ... -> z
@@ -286,7 +318,7 @@ With things like `null`, `undefined` and `NaN` showing up all over the place, it
 ```haskell
 dissoc : String -> Object -> Object
 ```
-While [`assoc`](#assoc) can be used to associate a given key value pair to a given `Object`, `dissoc` does the opposite. Just pass `dissoc` a `String` key and the `Object` you wish to dissociate that key from and you will get back a new, shallow copy of the `Object` sans your key. As with all the `Object` functions, `dissoc` will remove any `undefined` values from the result.
+While [`assoc`](#assoc) can be used to associate a given key-value pair to a given `Object`, `dissoc` does the opposite. Just pass `dissoc` a `String` key and the `Object` you wish to dissociate that key from and you will get back a new, shallow copy of the `Object` sans your key. As with all the `Object` functions, `dissoc` will remove any `undefined` values from the result.
 
 #### fanout
 ```haskell
@@ -308,7 +340,7 @@ As an inverse to [`toPairs`](#topairs), `fromPairs` takes either an `Array` or `
 liftA2 : Applicative m => (a -> b -> c) -> m a -> m b -> m c
 liftA3 : Applicative m => (a -> b -> c -> d) -> m a -> m b -> m c -> m d
 ```
-Ever see yourself wanting to `map` a binary or tri-nary function, but `map` only allows unary functions? Both of these functions allow you to pass in your function as well as the number of `Applicatives` (containers that provide both `of` and `ap` functions) you need to get the mapping you are looking for.
+Ever see yourself wanting to `map` a binary or trinary function, but `map` only allows unary functions? Both of these functions allow you to pass in your function as well as the number of `Applicatives` (containers that provide both `of` and `ap` functions) you need to get the mapping you are looking for.
 
 #### mconcat
 #### mreduce
@@ -366,7 +398,7 @@ const data =
   [ 13, 5, 13 ]
 
 map(max10, data)
-// [ 10, 5, 10]
+// => [ 10, 5, 10]
 ```
 
 #### pick
@@ -383,9 +415,9 @@ If you find yourself not able to come to terms with doing the typical right-to-l
 
 #### pipeK
 ```haskell
-pipe : Chain m => ((a -> m b), (b -> m c), ..., (y -> m z)) -> a -> m z
+pipeK : Chain m => ((a -> m b), (b -> m c), ..., (y -> m z)) -> a -> m z
 ```
-Like [`composeK`](#composek), you can remove much of the boilerplate when chaining together a series of functions with the signature: `Chain m => a -> m b`. The difference between the two functions is, while [`composeK`](composek) is right-to-left, `pipeK` is the opposite, taking its functions left-to-right.
+Like [`composeK`](#composek), you can remove much of the boilerplate when chaining together a series of functions with the signature: `Chain m => a -> m b`. The difference between the two functions is, while [`composeK`](#composek) is right-to-left, `pipeK` is the opposite, taking its functions left-to-right.
 
 ```js
 const { curry, List, Writer } = require('../crocks')
@@ -434,6 +466,44 @@ const promFunc = x =>
 
 const promPipe =
   pipeP(proimse, doSomething, doAnother)
+```
+
+#### pipeS
+```haskell
+pipeS : Semigroupoid s => (s a b, s b c, ..., s y z) -> s a z
+```
+While `Star`s and `Arrow`s come in very handy at times, the only thing that could make them better is to compose them . With `pipeS` you can do just that with any `Semigroupoid`. Just like with [`composeS`](#composes), you just pass it `Semigroupoid`s of the same type and you will get back another `Semigroupoid` with them all composed together. The only difference between the two, is that `pipeS` composes in a left-to-right fashion, while [`composeS`](#composes) does the opposite.
+
+```js
+const {
+  curry, isNumber, pipeS, prop, safeLift, Star
+} = require('../crocks')
+
+const add = curry(
+  (x, y) => x + y
+)
+
+const pull =
+  x => Star(prop(x))
+
+const safeAdd =
+  x => Star(safeLift(isNumber, add(x)))
+
+const data = {
+  num: 56,
+  string: '56'
+}
+
+const flow = (key, num) => pipeS(
+  pull(key),
+  safeAdd(num)
+)
+
+flow('num', 10).runWith(data)
+// => Just 66
+
+flow('string', 100).runWith(data)
+// => Nothing
 ```
 
 #### prop
@@ -538,8 +608,9 @@ All functions in this group have a signature of `* -> Boolean` and are used with
 * `isApply : a -> Boolean`: an ADT that provides `map` and `ap` functions
 * `isArray : a -> Boolean`: Array
 * `isBoolean : a -> Boolean`: Boolean
-* `isDefined : a -> Boolean`: Every value that is not `undefined`, `null` included
+* `isCategory : a -> Boolean`: an ADT that provides `id` and `compose` functions
 * `isChain : a -> Boolean`: an ADT that provides `map`, `ap` and `chain` functions
+* `isDefined : a -> Boolean`: Every value that is not `undefined`, `null` included
 * `isEmpty : a -> Boolean`: Empty Object, Array or String
 * `isFoldable : a -> Boolean`: Array, List or any structure with a `reduce` function
 * `isFunction : a -> Boolean`: Function
@@ -553,6 +624,7 @@ All functions in this group have a signature of `* -> Boolean` and are used with
 * `isPromise : a -> Boolean`: An object implementing `then` and `catch`
 * `isSameType : a -> b -> Boolean`: Constructor matches a values type, or two values types match
 * `isSemigroup : a -> Boolean`: an ADT that provides a `concat` function
+* `isSemigroupoid : a -> Boolean`: an ADT that provides a `compose` function
 * `isSetoid : a -> Boolean`: an ADT that provides an `equals` function
 * `isString : a -> Boolean`: String
 * `isTraversable : a -> Boolean`: an ADT that provides `map` and `traverse` functions
@@ -635,11 +707,11 @@ These functions provide a very clean way to build out very simple functions and 
 | `both` | `Arrow`, `Function`, `Star` |
 | `chain` | `Array`, `Async`, `Const`, `Either`, `Identity`, `IO`, `List`, `Maybe`, `Pair`, `Reader`, `Result`, `State`, `Unit`, `Writer` |
 | `coalesce` | `Async`, `Either`, `Maybe`, `Result` |
-| `concat` | `All`, `Any`, `Array`, `Arrow`, `Assign`, `Const`, `Either`, `Endo`, `Identity`, `List`, `Max`, `Maybe`, `Min`, `Pair`, `Pred`, `Prod`, `Result`, `Star`, `String`, `Sum`, `Unit` |
+| `concat` | `All`, `Any`, `Array`, `Assign`, `Const`, `Either`, `Endo`, `Identity`, `List`, `Max`, `Maybe`, `Min`, `Pair`, `Pred`, `Prod`, `Result`, `String`, `Sum`, `Unit` |
 | `cons` | `Array`, `List` |
 | `contramap` | `Arrow`, `Pred`, `Star` |
 | `either` | `Either`, `Maybe`, `Result` |
-| `empty` | `All`, `Any`, `Array`, `Assign`,, `Endo`, `List`, `Max`, `Min`, `Object`, `Pred`, `Prod`, `String`, `Sum`, `Unit` |
+| `empty` | `All`, `Any`, `Array`, `Assign`, `Endo`, `List`, `Max`, `Min`, `Object`, `Pred`, `Prod`, `String`, `Sum`, `Unit` |
 | `evalWith` | `State` |
 | `execWith` | `State` |
 | `filter` | `Array`, `List`, `Object` |

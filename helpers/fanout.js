@@ -25,7 +25,7 @@ function fanout(fst, snd) {
 
   if(valid(fst, snd)) {
     return first(fst)
-      .concat(second(snd))
+      .compose(second(snd))
       .contramap(branch)
   }
 

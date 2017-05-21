@@ -38,6 +38,7 @@ const helpers = {
   compose: require('./helpers/compose'),
   composeK: require('./helpers/composeK'),
   composeP: require('./helpers/composeP'),
+  composeS: require('./helpers/composeS'),
   curry: require('./helpers/curry'),
   defaultProps: require('./helpers/defaultProps'),
   defaultTo: require('./helpers/defaultTo'),
@@ -59,6 +60,7 @@ const helpers = {
   pipe: require('./helpers/pipe'),
   pipeK: require('./helpers/pipeK'),
   pipeP: require('./helpers/pipeP'),
+  pipeS: require('./helpers/pipeS'),
   prop: require('./helpers/prop'),
   propPath: require('./helpers/propPath'),
   safe: require('./helpers/safe'),
@@ -134,6 +136,7 @@ const predicates = {
   isApply: require('./predicates/isApply'),
   isArray: require('./predicates/isArray'),
   isBoolean: require('./predicates/isBoolean'),
+  isCategory: require('./predicates/isCategory'),
   isChain: require('./predicates/isChain'),
   isDefined: require('./predicates/isDefined'),
   isEmpty: require('./predicates/isEmpty'),
@@ -150,6 +153,7 @@ const predicates = {
   isSameType: require('./predicates/isSameType'),
   isSetoid: require('./predicates/isSetoid'),
   isSemigroup: require('./predicates/isSemigroup'),
+  isSemigroupoid: require('./predicates/isSemigroupoid'),
   isString: require('./predicates/isString'),
   isTraversable: require('./predicates/isTraversable')
 }

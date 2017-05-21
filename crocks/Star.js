@@ -8,7 +8,7 @@ const isSameType = require('../predicates/isSameType')
 
 const _inspect = require('../internal/inspect')
 
-const compose = require('../helpers/compose')
+const composeB = require('../combinators/composeB')
 const constant = require('../combinators/constant')
 
 const merge = require('../pointfree/merge')
@@ -30,7 +30,7 @@ function Star(runWith) {
   const inspect =
     constant(`Star${_inspect(runWith)}`)
 
-  function concat(s) {
+  function compose(s) {
     if(!isSameType(Star, s)) {
       throw new TypeError('Star.concat: Star required')
     }
@@ -75,7 +75,7 @@ function Star(runWith) {
       throw new TypeError('Star.contramap: Function required')
     }
 
-    return Star(compose(runWith, fn))
+    return Star(composeB(runWith, fn))
   }
 
   function promap(l, r) {
@@ -144,7 +144,7 @@ function Star(runWith) {
   }
 
   return {
-    inspect, type, runWith, concat, map,
+    inspect, type, runWith, compose, map,
     contramap, promap, first, second, both
   }
 }

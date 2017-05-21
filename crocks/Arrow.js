@@ -1,22 +1,19 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isFunction = require('../predicates/isFunction')
-
-const isSameType = require('../predicates/isSameType')
 const _inspect = require('../internal/inspect')
-
-const compose = require('../helpers/compose')
-
-const identity = require('../combinators/identity')
+const composeB = require('../combinators/composeB')
 const constant = require('../combinators/constant')
+const identity = require('../combinators/identity')
+const isFunction = require('../predicates/isFunction')
+const isSameType = require('../predicates/isSameType')
 
 const Pair = require('./Pair')
 
 const _type =
   constant('Arrow')
 
-const _empty =
+const _id =
   () => Arrow(identity)
 
 function Arrow(runWith) {
@@ -27,18 +24,18 @@ function Arrow(runWith) {
   const type =
     _type
 
-  const empty =
-    _empty
-
   const value =
     constant(runWith)
 
   const inspect =
     constant(`Arrow${_inspect(value())}`)
 
-  function concat(m) {
+  const id =
+    _id
+
+  function compose(m) {
     if(!(isSameType(Arrow, m))) {
-      throw new TypeError('Arrow.concat: Arrow required')
+      throw new TypeError('Arrow.compose: Arrow required')
     }
 
     return map(m.runWith)
@@ -49,7 +46,7 @@ function Arrow(runWith) {
       throw new TypeError('Arrow.map: Function required')
     }
 
-    return Arrow(compose(fn, runWith))
+    return Arrow(composeB(fn, runWith))
   }
 
   function contramap(fn) {
@@ -57,7 +54,7 @@ function Arrow(runWith) {
       throw new TypeError('Arrow.contramap: Function required')
     }
 
-    return Arrow(compose(runWith, fn))
+    return Arrow(composeB(runWith, fn))
   }
 
   function promap(l, r) {
@@ -65,7 +62,7 @@ function Arrow(runWith) {
       throw new TypeError('Arrow.promap: Functions required for both arguments')
     }
 
-    return Arrow(compose(r, runWith, l))
+    return Arrow(composeB(r, composeB(runWith, l)))
   }
 
   function first() {
@@ -98,12 +95,12 @@ function Arrow(runWith) {
 
   return {
     inspect, type, value, runWith,
-    concat, empty, map, contramap,
+    id, compose, map, contramap,
     promap, first, second, both
   }
 }
 
-Arrow.empty = _empty
+Arrow.id = _id
 Arrow.type = _type
 
 module.exports = Arrow

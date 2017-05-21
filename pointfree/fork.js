@@ -2,13 +2,15 @@
 /** @author Matt Ross (amsross) */
 
 const isFunction = require('../predicates/isFunction')
+const isSameType = require('../predicates/isSameType')
 const curry = require('../helpers/curry')
+const Async = require('../crocks/Async')
 
 function fork(reject, resolve, m) {
   if(!isFunction(reject) || !isFunction(resolve)) {
     throw new TypeError('fork: Reject and resolve functions required')
   }
-  else if(!(m && isFunction(m.fork))) {
+  if(!(m && isSameType(Async, m))) {
     throw new TypeError('fork: Async required')
   }
 

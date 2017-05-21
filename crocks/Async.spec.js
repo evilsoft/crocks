@@ -207,8 +207,6 @@ test('Async all resolution', t => {
   Async.all([ Async.Resolved(val), Async.Resolved(val) ]).fork(rej(bad), res([ val, val ]))
   Async.all([ Async.Rejected(bad), Async.Resolved(val) ]).fork(rej(bad), res([ val, val ]))
   Async.all([]).fork(rej(bad), empty([]))
-
-  t.end()
 })
 
 test('Async inspect', t => {
@@ -261,6 +259,7 @@ test('Async fork', t => {
   resolved.fork(noCall, res)
   rejected.fork(rej, noCall)
 
+  t.ok(isFunction(Async.of(34).fork(unit, unit)), 'fork returns a function')
   t.ok(res.calledWith('resolved'), 'calls resolved function when Async is resolved')
   t.ok(rej.calledWith('rejected'), 'calls rejected function when Async is rejected')
   t.notOk(noCall.called, 'does not call the other function')
@@ -268,7 +267,122 @@ test('Async fork', t => {
   t.end()
 })
 
+test('Async cancel chain cleanup functions', t => {
+  const resCleanUp = sinon.spy()
+  const rejCleanUp = sinon.spy()
+  const forkCleanUp = sinon.spy()
+
+  const cancel =
+    Async.of(0)
+      .chain(x => Async((_, res) => { res(x) }, resCleanUp))
+      .chain(x => Async(rej => { rej(x) }, rejCleanUp))
+      .fork(unit, unit, forkCleanUp)
+
+  cancel()
+
+  t.ok(rejCleanUp.calledAfter(resCleanUp), 'calls the first Async cleanup first')
+  t.ok(forkCleanUp.calledAfter(rejCleanUp), 'calls the fork cleanup last')
+
+  cancel()
+
+  t.ok(resCleanUp.calledOnce, 'calls the Async level cleanup only once')
+  t.ok(rejCleanUp.calledOnce, 'calls the Async level cleanup only once')
+  t.ok(forkCleanUp.calledOnce, 'calls the fork level cleanup only once')
+
+  t.end()
+})
+
+test('Async cancel ap cleanup functions', t => {
+  const resCleanUp = sinon.spy()
+  const rejCleanUp = sinon.spy()
+  const forkCleanUp = sinon.spy()
+
+  const cancel =
+    Async.of(x => y => [ x, y ])
+      .ap(Async((_, res) => { res(1) }, resCleanUp))
+      .ap(Async((_, rej) => { rej(1) }, rejCleanUp))
+      .fork(unit, unit, forkCleanUp)
+
+  cancel()
+
+  t.ok(rejCleanUp.calledAfter(resCleanUp), 'calls the first Async cleanup first')
+  t.ok(forkCleanUp.calledAfter(resCleanUp), 'calls the fork cleanup last')
+
+  cancel()
+
+  t.ok(resCleanUp.calledOnce, 'calls the resolved Async level cleanup only once')
+  t.ok(rejCleanUp.calledOnce, 'calls the rejected Async level cleanup only once')
+  t.ok(forkCleanUp.calledOnce, 'calls the fork level cleanup only once')
+
+  t.end()
+})
+
+test('Async cancel alt cleanup functions', t => {
+  const rejCleanUp = sinon.spy()
+  const resCleanUp = sinon.spy()
+  const forkCleanUp = sinon.spy()
+
+  const cancel =
+    Async.Rejected(0)
+      .alt(Async(rej => { rej(1) }, rejCleanUp))
+      .alt(Async((_, res) => { res(1) }, resCleanUp))
+      .fork(unit, unit, forkCleanUp)
+
+  cancel()
+
+  t.ok(resCleanUp.calledAfter(rejCleanUp), 'calls the first Async cleanup first')
+  t.ok(forkCleanUp.calledAfter(resCleanUp), 'calls the fork cleanup last')
+
+  cancel()
+
+  t.ok(rejCleanUp.calledOnce, 'calls the rejected Async level cleanup only once')
+  t.ok(resCleanUp.calledOnce, 'calls the resolved Async level cleanup only once')
+  t.ok(forkCleanUp.calledOnce, 'calls the fork level cleanup only once')
+
+  t.end()
+})
+
+test('Async cancel cancellation', t => {
+  t.plan(5)
+
+  function cancelTest(rejected, func) {
+    return function() {
+      return Async((rej, res) => setTimeout(() => rejected ? rej(0) : res(0)))[func].apply(null, arguments).fork(
+        t.fail.bind(t, `reject called after a ${func}`),
+        t.fail.bind(t, `resolve called after a ${func}`)
+      )
+    }
+  }
+
+  const swap = sinon.spy()
+  const coalesce = sinon.spy()
+  const map = sinon.spy()
+  const bimap = sinon.spy()
+  const chain = sinon.spy(x => Async.of(x))
+
+  cancelTest(true, 'swap')(swap, swap)()
+  cancelTest(false, 'swap')(swap, swap)()
+  cancelTest(true, 'coalesce')(coalesce, coalesce)()
+  cancelTest(false, 'coalesce')(coalesce, coalesce)()
+  cancelTest(true, 'map')(map)()
+  cancelTest(false, 'map')(map)()
+  cancelTest(true, 'bimap')(bimap, bimap)()
+  cancelTest(false, 'bimap')(bimap, bimap)()
+  cancelTest(true, 'chain')(chain)()
+  cancelTest(false, 'chain')(chain)()
+
+  setTimeout(() => {
+    t.notOk(swap.called, 'does not run swap')
+    t.notOk(coalesce.called, 'does not run coalesce')
+    t.notOk(map.called, 'does not run map')
+    t.notOk(bimap.called, 'does not run bimap')
+    t.notOk(chain.called, 'does not run chain')
+  })
+})
+
 test('Async toPromise', t => {
+  t.plan(2)
+
   const val = 1337
 
   const rej = y => x => t.equal(x, y, 'rejects a rejected Async')
@@ -276,8 +390,6 @@ test('Async toPromise', t => {
 
   Async.Rejected(val).toPromise().then(res(val)).catch(rej(val))
   Async.Resolved(val).toPromise().then(res(val)).catch(rej(val))
-
-  t.plan(2)
 })
 
 test('Async swap', t => {

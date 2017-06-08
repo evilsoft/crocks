@@ -81,7 +81,7 @@ All `Crocks` are Constructor functions of the given type, with `Writer` being an
 | `IO` | `of` | `ap`, `chain`, `map`, `of`, `run` |
 | `List` |  `empty`, `fromArray`, `of` | `ap`, `chain`, `concat`, `cons`, `empty`, `equals`, `filter`, `head`, `map`, `of`, `reduce`, `reject`, `sequence`, `tail`, `toArray`, `traverse`, `value` |
 | `Maybe` | `Nothing`, `Just`, `of`, `zero` | `alt`, `ap`, `chain`, `coalesce`, `concat`, `equals`, `either`, `map`, `of`, `option`, `sequence`, `traverse`, `zero` |
-| `Pair` | --- | `ap`, `bimap`, `chain`, `concat`, `equals`, `fst`, `map`, `merge`, `of`, `snd`, `swap` |
+| `Pair` | --- | `ap`, `bimap`, `chain`, `concat`, `equals`, `extend`, `fst`, `map`, `merge`, `of`, `snd`, `swap` |
 | `Pred` * | `empty` | `concat`, `contramap`, `empty`, `runWith`, `value` |
 | `Reader` | `ask`, `of`| `ap`, `chain`, `map`, `of`, `runWith` |
 | `Result` | `Err`, `Ok`, `of`| `alt`, `ap`, `bimap`, `chain`, `coalesce`, `concat`, `either`, `equals`, `map`, `of`, `sequence`, `swap`, `traverse` |
@@ -612,6 +612,7 @@ All functions in this group have a signature of `* -> Boolean` and are used with
 * `isChain : a -> Boolean`: an ADT that provides `map`, `ap` and `chain` functions
 * `isDefined : a -> Boolean`: Every value that is not `undefined`, `null` included
 * `isEmpty : a -> Boolean`: Empty Object, Array or String
+* `isExtend : a -> Boolean`: an ADT that provides `map` and `extend` functions
 * `isFoldable : a -> Boolean`: Array, List or any structure with a `reduce` function
 * `isFunction : a -> Boolean`: Function
 * `isFunctor : a -> Boolean`: an ADT that provides a `map` function
@@ -675,6 +676,7 @@ These functions provide a very clean way to build out very simple functions and 
 | `empty` | `m -> m` |
 | `evalWith` | `a -> m -> b` |
 | `execWith` | `a -> m -> b` |
+| `extend` | `(m a -> b) -> m a -> m b` |
 | `filter` | <code>((a -> Boolean) &#124; Pred a) -> m a -> m a</code> |
 | `first` | `m (a -> b) -> m (Pair a c -> Pair b c)` |
 | `fold` | `Semigroup s => m s -> s` |
@@ -714,6 +716,7 @@ These functions provide a very clean way to build out very simple functions and 
 | `empty` | `All`, `Any`, `Array`, `Assign`, `Endo`, `List`, `Max`, `Min`, `Object`, `Pred`, `Prod`, `String`, `Sum`, `Unit` |
 | `evalWith` | `State` |
 | `execWith` | `State` |
+| `extend` | `Pair` |
 | `filter` | `Array`, `List`, `Object` |
 | `first` | `Arrow`, `Function`, `Star` |
 | `fold` | `Array`, `List` |

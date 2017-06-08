@@ -27,7 +27,7 @@ function Pair(l, r) {
     constant(r)
 
   const inspect =
-    () => `Pair${_inspect(l)}${_inspect(r)}`
+    () => `Pair(${_inspect(l)},${_inspect(r)} )`
 
   function merge(fn) {
     if(!isFunction(fn)) {
@@ -124,10 +124,18 @@ function Pair(l, r) {
     )
   }
 
+  function extend(fn) {
+    if(!isFunction(fn)) {
+      throw new TypeError('Pair.extend: Function required')
+    }
+
+    return Pair(l, fn(Pair(l, r)))
+  }
+
   return {
     inspect, fst, snd, type,
     merge, equals, concat, swap,
-    map, bimap, ap, chain
+    map, bimap, ap, chain, extend
   }
 }
 

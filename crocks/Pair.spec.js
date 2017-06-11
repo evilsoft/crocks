@@ -33,7 +33,7 @@ test('Pair inspect', t => {
   const m = Pair(0, 'nice')
 
   t.ok(isFunction(m.inspect), 'provides an inpsect function')
-  t.equal(m.inspect(), 'Pair 0 "nice"', 'returns inspect string')
+  t.equal(m.inspect(), 'Pair( 0, "nice" )', 'returns inspect string')
 
   t.end()
 })
@@ -426,6 +426,39 @@ test('Pair chain properties (Chain)', t => {
   const b = x => Pair([ 'a' ], x).chain(y => f(y).chain(g))
 
   t.same(extract(a(10)), extract(b(10)), 'assosiativity')
+
+  t.end()
+})
+
+test('Pair extend errors', t => {
+  const extend = bindFunc(Pair(0, 'gibbles').extend)
+
+  const err = /Pair.extend: Function required/
+  t.throws(extend(undefined), err, 'throws with undefined')
+  t.throws(extend(null), err, 'throws with null')
+  t.throws(extend(0), err, 'throws with falsey number')
+  t.throws(extend(1), err, 'throws with truthy number')
+  t.throws(extend(''), err, 'throws with falsey string')
+  t.throws(extend('string'), err, 'throws with truthy string')
+  t.throws(extend(false), err, 'throws with false')
+  t.throws(extend(true), err, 'throws with true')
+  t.throws(extend([]), err, 'throws with an array')
+  t.throws(extend({}), err, 'throws with object')
+
+  t.doesNotThrow(extend(unit), 'allows a function')
+  t.end()
+})
+
+test('Pair extend properties (Extend)', t => {
+  const m = Pair(0, 23)
+
+  const f = p => p.snd() + 30
+  const g = p => p.snd() * 3
+
+  const left = m.extend(g).extend(f)
+  const right = m.extend(w => f(w.extend(g)))
+
+  t.ok(left.equals(right), 'composition')
 
   t.end()
 })

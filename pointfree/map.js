@@ -29,7 +29,7 @@ function map(fn, m) {
     return object.map(fn, m)
   }
   else {
-    throw new TypeError('map: Object, Function or Functor of the same type required for second requirement')
+    throw new TypeError('map: Object, Function or Functor of the same type required for second argument')
   }
 }
 

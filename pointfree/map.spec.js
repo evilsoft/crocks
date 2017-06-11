@@ -29,7 +29,7 @@ test('map pointfree', t => {
   t.throws(m([], f), noFunc, 'throws if first arg is an array')
   t.throws(m({}, f), noFunc, 'throws if first arg is an object')
 
-  const noFunctor = /map: Object, Function or Functor of the same type required for second requirement/
+  const noFunctor = /map: Object, Function or Functor of the same type required for second argument/
   t.throws(m(unit, undefined), noFunctor, 'throws if second arg is undefined')
   t.throws(m(unit, null), noFunctor, 'throws if second arg is null')
   t.throws(m(unit, 0), noFunctor, 'throws if second arg is a falsey number')

@@ -37,6 +37,15 @@ test('All', t => {
   t.end()
 })
 
+test('All @@implements', t => {
+  const f = All['@@implements']
+
+  t.equal(f('concat'), true, 'implements concat func')
+  t.equal(f('empty'), true, 'implements empty func')
+
+  t.end()
+})
+
 test('All inspect', t => {
   const m = All(0)
 

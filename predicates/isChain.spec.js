@@ -1,4 +1,7 @@
 const test = require('tape')
+const helpers = require('../test/helpers')
+
+const makeFake = helpers.makeFake
 
 const isFunction = require('./isFunction')
 const identity = require('../combinators/identity')
@@ -6,7 +9,8 @@ const identity = require('../combinators/identity')
 const isChain = require('./isChain')
 
 test('isChain predicate function', t => {
-  const fake = { map: identity, ap: identity, chain: identity }
+  const Fake = makeFake([ 'ap', 'chain', 'map' ])
+  const fake = Fake()
 
   t.equal(isChain(undefined), false, 'returns false for undefined')
   t.equal(isChain(null), false, 'returns false for null')
@@ -20,6 +24,7 @@ test('isChain predicate function', t => {
   t.equal(isChain([]), false, 'returns false for an array')
   t.equal(isChain(identity), false, 'returns false for function')
 
+  t.equal(isChain(Fake), true, 'returns true when a Chain Constructor is passed')
   t.equal(isChain(fake), true, 'returns true when a Chain is passed')
 
   t.ok(isFunction(isChain))

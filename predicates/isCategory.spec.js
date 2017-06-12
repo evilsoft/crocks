@@ -1,4 +1,7 @@
 const test = require('tape')
+const helpers = require('../test/helpers')
+
+const makeFake = helpers.makeFake
 
 const identity = require('../combinators/identity')
 const isFunction = require('./isFunction')
@@ -6,10 +9,8 @@ const isFunction = require('./isFunction')
 const isCategory = require('./isCategory')
 
 test('isCategory predicate function', t => {
-  const fake = {
-    compose: identity,
-    id: identity
-  }
+  const Fake = makeFake([ 'compose', 'id' ])
+  const fake = Fake()
 
   t.ok(isFunction(isCategory))
 
@@ -25,7 +26,8 @@ test('isCategory predicate function', t => {
   t.equal(isCategory({}), false, 'returns false for an object')
   t.equal(isCategory(identity), false, 'returns false for function')
 
-  t.equal(isCategory(fake), true, 'returns true when a Semigroupoid is passed')
+  t.equal(isCategory(Fake), true, 'returns true when a Category Constructor is passed')
+  t.equal(isCategory(fake), true, 'returns true when a Category is passed')
 
   t.end()
 })

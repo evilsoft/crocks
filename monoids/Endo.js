@@ -1,14 +1,14 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isFunction = require('../predicates/isFunction')
-const isSameType = require('../predicates/isSameType')
-
+const _implements = require('../internal/implements')
 const _inspect = require('../internal/inspect')
 
 const composeB = require('../combinators/composeB')
 const constant = require('../combinators/constant')
 const identity = require('../combinators/identity')
+const isFunction = require('../predicates/isFunction')
+const isSameType = require('../predicates/isSameType')
 
 const _empty =
   () => Endo(identity)
@@ -43,6 +43,10 @@ function Endo(runWith) {
 
   return { inspect, value, type, concat, empty, runWith }
 }
+
+Endo['@@implements'] = _implements(
+  [ 'concat', 'empty' ]
+)
 
 Endo.empty =
   _empty

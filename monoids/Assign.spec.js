@@ -37,6 +37,15 @@ test('Assign', t => {
   t.end()
 })
 
+test('Assign @@implements', t => {
+  const f = Assign['@@implements']
+
+  t.equal(f('concat'), true, 'implements concat func')
+  t.equal(f('empty'), true, 'implements empty func')
+
+  t.end()
+})
+
 test('Assign inspect', t => {
   const m = Assign({ great: true })
 

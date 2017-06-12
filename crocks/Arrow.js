@@ -1,6 +1,7 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
+const _implements = require('../internal/implements')
 const _inspect = require('../internal/inspect')
 const composeB = require('../combinators/composeB')
 const constant = require('../combinators/constant')
@@ -102,5 +103,9 @@ function Arrow(runWith) {
 
 Arrow.id = _id
 Arrow.type = _type
+
+Arrow['@@implements'] = _implements(
+  [ 'compose', 'contramap', 'id', 'map', 'promap' ]
+)
 
 module.exports = Arrow

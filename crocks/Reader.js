@@ -1,13 +1,13 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isFunction = require('../predicates/isFunction')
-const isSameType = require('../predicates/isSameType')
-
+const _implements = require('../internal/implements')
 const _inspect = require('../internal/inspect')
 
 const composeB = require('../combinators/composeB')
 const constant = require('../combinators/constant')
+const isFunction = require('../predicates/isFunction')
+const isSameType = require('../predicates/isSameType')
 
 const _of =
   x => Reader(constant(x))
@@ -82,5 +82,9 @@ Reader.type =
 
 Reader.ask =
   ask
+
+Reader['@@implements'] = _implements(
+  [ 'ap', 'chain', 'map', 'of' ]
+)
 
 module.exports = Reader

@@ -37,6 +37,15 @@ test('Min', t => {
   t.end()
 })
 
+test('Min @@implements', t => {
+  const f = Min['@@implements']
+
+  t.equal(f('concat'), true, 'implements concat func')
+  t.equal(f('empty'), true, 'implements empty func')
+
+  t.end()
+})
+
 test('Min inspect', t => {
   const m = Min(0)
 

@@ -1,12 +1,11 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
+const _implements = require('../internal/implements')
+const _inspect = require('../internal/inspect')
+const constant = require('../combinators/constant')
 const isFunction = require('../predicates/isFunction')
 const isSameType = require('../predicates/isSameType')
-
-const _inspect = require('../internal/inspect')
-
-const constant = require('../combinators/constant')
 
 const _type =
   constant('Const')
@@ -65,8 +64,11 @@ function Const(x) {
     concat, map, ap, chain
   }
 }
-
 Const.type =
   _type
+
+Const['@@implements'] = _implements(
+  [ 'ap', 'chain', 'concat', 'equals', 'map' ]
+)
 
 module.exports = Const

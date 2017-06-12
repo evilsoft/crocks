@@ -1,4 +1,7 @@
 const test = require('tape')
+const helpers = require('../test/helpers')
+
+const makeFake = helpers.makeFake
 
 const identity = require('../combinators/identity')
 const isFunction = require('./isFunction')
@@ -6,7 +9,8 @@ const isFunction = require('./isFunction')
 const isMonoid = require('./isMonoid')
 
 test('isMonoid predicate function', t => {
-  const fake = { concat: identity, empty: identity }
+  const Fake = makeFake([ 'concat', 'empty' ])
+  const fake = Fake()
 
   t.ok(isFunction(isMonoid))
 
@@ -22,6 +26,7 @@ test('isMonoid predicate function', t => {
   t.equal(isMonoid([]), false, 'returns false for an array')
   t.equal(isMonoid(identity), false, 'returns false for function')
 
+  t.equal(isMonoid(Fake), true, 'returns true when an Monoid Constructor is passed')
   t.equal(isMonoid(fake), true, 'returns true when an Monoid is passed')
 
   t.end()

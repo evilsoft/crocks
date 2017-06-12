@@ -37,6 +37,15 @@ test('Max', t => {
   t.end()
 })
 
+test('Max @@implements', t => {
+  const f = Max['@@implements']
+
+  t.equal(f('concat'), true, 'implements concat func')
+  t.equal(f('empty'), true, 'implements empty func')
+
+  t.end()
+})
+
 test('Max inspect', t => {
   const m = Max(124)
 

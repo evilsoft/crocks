@@ -1,4 +1,7 @@
 const test = require('tape')
+const helpers = require('../test/helpers')
+
+const makeFake = helpers.makeFake
 
 const identity = require('../combinators/identity')
 const isFunction = require('./isFunction')
@@ -6,7 +9,8 @@ const isFunction = require('./isFunction')
 const isTraversable = require('./isTraversable')
 
 test('isTraversable predicate function', t => {
-  const fake = { map: identity, traverse: identity }
+  const Fake = makeFake([ 'map', 'traverse' ])
+  const fake = Fake()
 
   t.ok(isFunction(isTraversable))
 
@@ -22,6 +26,7 @@ test('isTraversable predicate function', t => {
   t.equal(isTraversable([]), false, 'returns false for an array')
   t.equal(isTraversable(identity), false, 'returns false for function')
 
+  t.equal(isTraversable(Fake), true, 'returns true when a Traversable Constructor is passed')
   t.equal(isTraversable(fake), true, 'returns true when a Traversable is passed')
 
   t.end()

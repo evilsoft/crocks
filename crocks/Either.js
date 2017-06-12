@@ -1,20 +1,18 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const ifElse = require('../logic/ifElse')
+const _defineUnion = require('../internal/defineUnion')
+const _implements = require('../internal/implements')
+const _innerConcat = require('../internal/innerConcat')
+const _inspect = require('../internal/inspect')
+
+const composeB = require('../combinators/composeB')
+const constant = require('../combinators/constant')
 const isApplicative = require('../predicates/isApplicative')
 const isFunction = require('../predicates/isFunction')
 const isSameType = require('../predicates/isSameType')
 
-const _inspect = require('../internal/inspect')
-const defineUnion = require('../internal/defineUnion')
-const innerConcat = require('../internal/innerConcat')
-
-const constant = require('../combinators/constant')
-const composeB = require('../combinators/composeB')
-const identity = require('../combinators/identity')
-
-const _either = defineUnion({ Left: [ 'a' ], Right: [ 'b' ] })
+const _either = _defineUnion({ Left: [ 'a' ], Right: [ 'b' ] })
 
 const Left = _either.Left
 const Right = _either.Right
@@ -44,7 +42,9 @@ function Either(u) {
     throw new TypeError('Either: Must wrap something, try using Left or Right constructors')
   }
 
-  const x = ifElse(_either.includes, identity, Right, u)
+  const x = !_either.includes(u)
+    ? Right(u)
+    : u
 
   const type =
     _type
@@ -83,7 +83,7 @@ function Either(u) {
 
     return either(
       Either.Left,
-      innerConcat(Either, m)
+      _innerConcat(Either, m)
     )
   }
 
@@ -198,5 +198,9 @@ function Either(u) {
 
 Either.of   = _of
 Either.type = _type
+
+Either['@@implements'] = _implements(
+  [ 'alt', 'ap', 'bimap', 'chain', 'concat', 'equals', 'map', 'of', 'traverse' ]
+)
 
 module.exports = Either

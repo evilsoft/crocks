@@ -39,6 +39,22 @@ test('Result', t => {
   t.end()
 })
 
+test('Result @@implements', t => {
+  const f = Result['@@implements']
+
+  t.equal(f('alt'), true, 'implements alt func')
+  t.equal(f('ap'), true, 'implements ap func')
+  t.equal(f('bimap'), true, 'implements bimap func')
+  t.equal(f('chain'), true, 'implements chain func')
+  t.equal(f('concat'), true, 'implements concat func')
+  t.equal(f('equals'), true, 'implements equals func')
+  t.equal(f('map'), true, 'implements map func')
+  t.equal(f('of'), true, 'implements of func')
+  t.equal(f('traverse'), true, 'implements traverse func')
+
+  t.end()
+})
+
 test('Result.Err', t => {
   const l = Result.Err('value')
 

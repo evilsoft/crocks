@@ -29,6 +29,20 @@ test('Pair', t => {
   t.end()
 })
 
+test('Pair @@implements', t => {
+  const f = Pair['@@implements']
+
+  t.equal(f('ap'), true, 'implements ap func')
+  t.equal(f('bimap'), true, 'implements bimap func')
+  t.equal(f('chain'), true, 'implements chain func')
+  t.equal(f('concat'), true, 'implements concat func')
+  t.equal(f('equals'), true, 'implements equals func')
+  t.equal(f('extend'), true, 'implements extend func')
+  t.equal(f('map'), true, 'implements map func')
+
+  t.end()
+})
+
 test('Pair inspect', t => {
   const m = Pair(0, 'nice')
 

@@ -1,4 +1,7 @@
 const test = require('tape')
+const helpers = require('../test/helpers')
+
+const makeFake = helpers.makeFake
 
 const identity = require('../combinators/identity')
 const isFunction = require('./isFunction')
@@ -6,7 +9,8 @@ const isFunction = require('./isFunction')
 const isSemigroup = require('./isSemigroup')
 
 test('isSemigroup predicate function', t => {
-  const fake = { concat: identity }
+  const Fake = makeFake([ 'concat' ])
+  const fake = Fake()
 
   t.ok(isFunction(isSemigroup))
 
@@ -22,6 +26,8 @@ test('isSemigroup predicate function', t => {
   t.equal(isSemigroup(''), true, 'returns true for falsey string')
   t.equal(isSemigroup('string'), true, 'returns true for truthy string')
   t.equal(isSemigroup([]), true, 'returns true for an array')
+
+  t.equal(isSemigroup(Fake), true, 'returns true when a Semigroup Constructor is passed')
   t.equal(isSemigroup(fake), true, 'returns true when a Semigroup is passed')
 
   t.end()

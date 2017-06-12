@@ -43,6 +43,17 @@ test('Star', t => {
   t.end()
 })
 
+test('Star @@implements', t => {
+  const f = Star['@@implements']
+
+  t.equal(f('compose'), true, 'implements compose func')
+  t.equal(f('contramap'), true, 'implements contramap func')
+  t.equal(f('map'), true, 'implements map func')
+  t.equal(f('promap'), true, 'implements promap func')
+
+  t.end()
+})
+
 test('Star inspect', t => {
   const a = Star(unit)
 

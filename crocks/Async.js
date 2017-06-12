@@ -1,27 +1,23 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
+const _argsArray = require('../internal/argsArray')
+const _implements = require('../internal/implements')
+const _inspect = require('../internal/inspect')
+
+const composeB = require('../combinators/composeB')
+const constant = require('../combinators/constant')
 const isFoldable = require('../predicates/isFoldable')
 const isFunction = require('../predicates/isFunction')
 const isPromise = require('../predicates/isPromise')
-
-const _inspect = require('../internal/inspect')
-const argsArray = require('../internal/argsArray')
 const isSameType = require('../predicates/isSameType')
-
-const constant = require('../combinators/constant')
-const composeB = require('../combinators/composeB')
-
-const sequence = require('../pointfree/sequence')
-
 const once = require('../helpers/once')
-const mreduceMap = require('../helpers/mreduceMap')
+const sequence = require('../pointfree/sequence')
 const unit = require('../helpers/unit')
 
-const All = require('../monoids/All')
 
-const allAsyncs =
-  mreduceMap(All, x => isSameType(Async, x))
+const allAsyncs = xs =>
+  xs.reduce((acc, x) => acc && isSameType(Async, x), true)
 
 const _type =
   constant('Async')
@@ -46,7 +42,7 @@ function fromNode(fn, ctx) {
   }
 
   return function() {
-    const args = argsArray(arguments)
+    const args = _argsArray(arguments)
 
     return Async((reject, resolve) => {
       fn.apply(ctx,
@@ -261,5 +257,9 @@ Async.fromPromise = fromPromise
 Async.fromNode = fromNode
 
 Async.all = all
+
+Async['@@implements'] = _implements(
+  [ 'alt', 'ap', 'bimap', 'chain', 'map', 'of' ]
+)
 
 module.exports = Async

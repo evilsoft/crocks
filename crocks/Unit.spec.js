@@ -30,6 +30,20 @@ test('Unit', t => {
   t.end()
 })
 
+test('Unit @@implements', t => {
+  const f = Unit['@@implements']
+
+  t.equal(f('ap'), true, 'implements ap func')
+  t.equal(f('chain'), true, 'implements chain func')
+  t.equal(f('concat'), true, 'implements concat func')
+  t.equal(f('empty'), true, 'implements empty func')
+  t.equal(f('equals'), true, 'implements equals func')
+  t.equal(f('map'), true, 'implements map func')
+  t.equal(f('of'), true, 'implements of func')
+
+  t.end()
+})
+
 test('Unit inspect', t => {
   const m = Unit(0)
 

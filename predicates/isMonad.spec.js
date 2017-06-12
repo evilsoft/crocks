@@ -1,4 +1,7 @@
 const test = require('tape')
+const helpers = require('../test/helpers')
+
+const makeFake = helpers.makeFake
 
 const isFunction = require('./isFunction')
 
@@ -7,12 +10,8 @@ const identity = require('../combinators/identity')
 const isMonad = require('./isMonad')
 
 test('isMonad predicate function', t => {
-  const fake = {
-    map: identity,
-    ap: identity,
-    of: identity,
-    chain: identity
-  }
+  const Fake = makeFake([ 'ap', 'chain', 'map', 'of' ])
+  const fake = Fake()
 
   t.ok(isFunction(isMonad), 'is a function')
 
@@ -28,6 +27,7 @@ test('isMonad predicate function', t => {
   t.equal(isMonad([]), false, 'returns false for an array')
   t.equal(isMonad(identity), false, 'returns false for function')
 
+  t.equal(isMonad(Fake), true, 'returns true when a Monad Constructor is passed')
   t.equal(isMonad(fake), true, 'returns true when a Monad is passed')
 
   t.end()

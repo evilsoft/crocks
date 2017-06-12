@@ -1,13 +1,13 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isFunction = require('../predicates/isFunction')
-const isMonoid = require('../predicates/isMonoid')
-const isSameType = require('../predicates/isSameType')
-
+const _implements = require('../internal/implements')
 const _inspect = require('../internal/inspect')
 
 const constant = require('../combinators/constant')
+const isFunction = require('../predicates/isFunction')
+const isMonoid = require('../predicates/isMonoid')
+const isSameType = require('../predicates/isSameType')
 
 function _Writer(Monoid) {
   if(!isMonoid(Monoid)) {
@@ -93,6 +93,10 @@ function _Writer(Monoid) {
 
   Writer.type =
     _type
+
+  Writer['@@implements'] = _implements(
+    [ 'ap', 'chain', 'equals', 'map', 'of' ]
+  )
 
   return Writer
 }

@@ -1,4 +1,7 @@
 const test = require('tape')
+const helpers = require('../test/helpers')
+
+const makeFake = helpers.makeFake
 
 const isFunction = require('./isFunction')
 const identity = require('../combinators/identity')
@@ -6,7 +9,8 @@ const identity = require('../combinators/identity')
 const isFunctor = require('./isFunctor')
 
 test('isFunctor predicate function', t => {
-  const fake = { map: identity }
+  const Fake = makeFake([ 'map' ])
+  const fake = Fake()
 
   t.equal(isFunctor(undefined), false, 'returns false for undefined')
   t.equal(isFunctor(null), false, 'returns false for null')
@@ -19,8 +23,9 @@ test('isFunctor predicate function', t => {
   t.equal(isFunctor({}), false, 'returns false for an object')
   t.equal(isFunctor(identity), false, 'returns false for function')
 
-  t.equal(isFunctor(fake), true, 'returns true when a Functor is passed')
   t.equal(isFunctor([]), true, 'returns true for an array')
+  t.equal(isFunctor(Fake), true, 'returns true when a Functor Constructor is passed')
+  t.equal(isFunctor(fake), true, 'returns true when a Functor is passed')
 
   t.ok(isFunction(isFunctor))
 

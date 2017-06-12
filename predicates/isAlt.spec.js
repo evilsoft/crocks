@@ -1,4 +1,7 @@
 const test = require('tape')
+const helpers = require('../test/helpers')
+
+const makeFake = helpers.makeFake
 
 const isFunction = require('./isFunction')
 
@@ -7,10 +10,8 @@ const identity = require('../combinators/identity')
 const isAlt = require('./isAlt')
 
 test('isAlt predicate function', t => {
-  const fake = {
-    map: identity,
-    alt: identity
-  }
+  const Fake = makeFake([ 'alt', 'map' ])
+  const fake = Fake()
 
   t.ok(isFunction(isAlt), 'is a function')
 
@@ -26,6 +27,7 @@ test('isAlt predicate function', t => {
   t.equal(isAlt([]), false, 'returns false for an array')
   t.equal(isAlt(identity), false, 'returns false for function')
 
+  t.equal(isAlt(Fake), true, 'returns true when an Alt Constuctor is passed')
   t.equal(isAlt(fake), true, 'returns true when an Alt is passed')
 
   t.end()

@@ -1,16 +1,15 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isFunction = require('../predicates/isFunction')
-const isFunctor = require('../predicates/isFunctor')
-const isMonad = require('../predicates/isMonad')
-const isSameType = require('../predicates/isSameType')
-
+const _implements = require('../internal/implements')
 const _inspect = require('../internal/inspect')
 
 const composeB = require('../combinators/composeB')
 const constant = require('../combinators/constant')
-
+const isFunction = require('../predicates/isFunction')
+const isFunctor = require('../predicates/isFunctor')
+const isMonad = require('../predicates/isMonad')
+const isSameType = require('../predicates/isSameType')
 const merge = require('../pointfree/merge')
 const sequence = require('../pointfree/sequence')
 
@@ -150,5 +149,9 @@ function Star(runWith) {
 }
 
 Star.type = _type
+
+Star['@@implements'] = _implements(
+  [ 'compose', 'contramap', 'map', 'promap' ]
+)
 
 module.exports = Star

@@ -39,6 +39,15 @@ test('Endo', t => {
   t.end()
 })
 
+test('Endo @@implements', t => {
+  const f = Endo['@@implements']
+
+  t.equal(f('concat'), true, 'implements concat func')
+  t.equal(f('empty'), true, 'implements empty func')
+
+  t.end()
+})
+
 test('Endo inspect', t => {
   const m = Endo(identity)
 

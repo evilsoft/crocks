@@ -1,6 +1,8 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
+const _implements = require('../internal/implements')
+
 const constant = require('../combinators/constant')
 const isFunction = require('../predicates/isFunction')
 const isSameType = require('../predicates/isSameType')
@@ -16,7 +18,7 @@ const _empty =
 
 function Unit() {
   const equals =
-    m => isSameType(Unit, m) && undefined === m.value()
+    m => isSameType(Unit, m)
 
   const inspect =
     constant('()')
@@ -80,6 +82,8 @@ Unit.of =
 Unit.empty =
   _empty
 
+Unit['@@implements'] = _implements(
+  [ 'ap', 'chain', 'concat', 'empty', 'equals', 'map', 'of' ]
+)
+
 module.exports = Unit
-
-

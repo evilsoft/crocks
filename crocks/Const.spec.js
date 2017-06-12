@@ -27,6 +27,18 @@ test('Const', t => {
   t.end()
 })
 
+test('Const @@implements', t => {
+  const f = Const['@@implements']
+
+  t.equal(f('ap'), true, 'implements ap func')
+  t.equal(f('chain'), true, 'implements chain func')
+  t.equal(f('concat'), true, 'implements concat func')
+  t.equal(f('equals'), true, 'implements equals func')
+  t.equal(f('map'), true, 'implements map func')
+
+  t.end()
+})
+
 test('Const inspect', t => {
   const m = Const(0)
 

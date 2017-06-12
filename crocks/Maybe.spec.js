@@ -37,6 +37,22 @@ test('Maybe', t => {
   t.end()
 })
 
+test('Maybe @@implements', t => {
+  const f = Maybe['@@implements']
+
+  t.equal(f('alt'), true, 'implements alt func')
+  t.equal(f('ap'), true, 'implements ap func')
+  t.equal(f('chain'), true, 'implements chain func')
+  t.equal(f('concat'), true, 'implements concat func')
+  t.equal(f('equals'), true, 'implements equals func')
+  t.equal(f('map'), true, 'implements map func')
+  t.equal(f('of'), true, 'implements of func')
+  t.equal(f('traverse'), true, 'implements traverse func')
+  t.equal(f('zero'), true, 'implements zero func')
+
+  t.end()
+})
+
 test('Maybe inspect', t => {
   const m = Maybe.Just('great')
   const n = Maybe.Nothing()

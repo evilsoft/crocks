@@ -1,4 +1,7 @@
 const test = require('tape')
+const helpers = require('../test/helpers')
+
+const makeFake = helpers.makeFake
 
 const identity = require('../combinators/identity')
 const isFunction = require('./isFunction')
@@ -6,7 +9,8 @@ const isFunction = require('./isFunction')
 const isSemigroupoid = require('./isSemigroupoid')
 
 test('isSemigroupoid predicate function', t => {
-  const fake = { compose: identity }
+  const Fake = makeFake([ 'compose' ])
+  const fake = Fake()
 
   t.ok(isFunction(isSemigroupoid))
 
@@ -22,6 +26,7 @@ test('isSemigroupoid predicate function', t => {
   t.equal(isSemigroupoid({}), false, 'returns false for an object')
   t.equal(isSemigroupoid(identity), false, 'returns false for function')
 
+  t.equal(isSemigroupoid(Fake), true, 'returns true when a Semigroupoid Constructor is passed')
   t.equal(isSemigroupoid(fake), true, 'returns true when a Semigroupoid is passed')
 
   t.end()

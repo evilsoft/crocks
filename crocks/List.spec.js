@@ -46,6 +46,22 @@ test('List', t => {
   t.end()
 })
 
+test('List @@implements', t => {
+  const f = List['@@implements']
+
+  t.equal(f('ap'), true, 'implements ap func')
+  t.equal(f('chain'), true, 'implements chain func')
+  t.equal(f('concat'), true, 'implements concat func')
+  t.equal(f('empty'), true, 'implements empty func')
+  t.equal(f('equals'), true, 'implements equals func')
+  t.equal(f('map'), true, 'implements map func')
+  t.equal(f('of'), true, 'implements of func')
+  t.equal(f('reduce'), true, 'implements reduce func')
+  t.equal(f('traverse'), true, 'implements traverse func')
+
+  t.end()
+})
+
 test('List fromArray', t => {
   const fromArray = bindFunc(List.fromArray)
 

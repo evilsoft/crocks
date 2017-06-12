@@ -1,13 +1,13 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isNil = require('../predicates/isNil')
-const isNumber = require('../predicates/isNumber')
-const isSameType = require('../predicates/isSameType')
-
+const _implements = require('../internal/implements')
 const _inspect = require('../internal/inspect')
 
 const constant = require('../combinators/constant')
+const isNil = require('../predicates/isNil')
+const isNumber = require('../predicates/isNumber')
+const isSameType = require('../predicates/isSameType')
 
 const _empty =
   () => Sum(0)
@@ -44,6 +44,10 @@ function Sum(n) {
 
   return { inspect, value, type, concat, empty }
 }
+
+Sum['@@implements'] = _implements(
+  [ 'concat', 'empty' ]
+)
 
 Sum.empty =
   _empty

@@ -2,11 +2,12 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const isString = require('./isString')
-const isFunction = require('./isFunction')
+const _hasAlg = require('../internal/hasAlg')
 
 // isSemigroup : a -> Boolean
 function isSemigroup(m) {
-  return isString(m) || (!!m && isFunction(m.concat))
+  return isString(m)
+    || (!!m && _hasAlg('concat', m))
 }
 
 module.exports = isSemigroup

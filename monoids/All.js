@@ -1,13 +1,13 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isFunction = require('../predicates/isFunction')
-const isNil = require('../predicates/isNil')
-const isSameType = require('../predicates/isSameType')
-
+const _implements = require('../internal/implements')
 const _inspect = require('../internal/inspect')
 
 const constant = require('../combinators/constant')
+const isFunction = require('../predicates/isFunction')
+const isNil = require('../predicates/isNil')
+const isSameType = require('../predicates/isSameType')
 
 const _empty =
   () => All(true)
@@ -44,6 +44,10 @@ function All(b) {
 
   return { inspect, value, type, concat, empty }
 }
+
+All['@@implements'] = _implements(
+  [ 'concat', 'empty' ]
+)
 
 All.empty =
   _empty

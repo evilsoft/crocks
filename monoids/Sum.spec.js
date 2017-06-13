@@ -37,6 +37,15 @@ test('Sum', t => {
   t.end()
 })
 
+test('Sum @@implements', t => {
+  const f = Sum['@@implements']
+
+  t.equal(f('concat'), true, 'implements concat func')
+  t.equal(f('empty'), true, 'implements empty func')
+
+  t.end()
+})
+
 test('Sum inspect', t => {
   const m = Sum(90)
 

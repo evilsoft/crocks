@@ -1,12 +1,13 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isFunction = require('./isFunction')
+const _hasAlg = require('../internal/hasAlg')
 const isApply = require('./isApply')
 
 // isChain : a -> Boolean
 function isChain(m) {
-  return isApply(m) && isFunction(m.chain)
+  return isApply(m)
+    && _hasAlg('chain', m)
 }
 
 module.exports = isChain

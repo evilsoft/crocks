@@ -42,6 +42,18 @@ test('Arrow', t => {
   t.end()
 })
 
+test('Arrow @@implements', t => {
+  const f = Arrow['@@implements']
+
+  t.equal(f('compose'), true, 'implements compose func')
+  t.equal(f('contramap'), true, 'implements contramap func')
+  t.equal(f('id'), true, 'implements id func')
+  t.equal(f('map'), true, 'implements map func')
+  t.equal(f('promap'), true, 'implements promap func')
+
+  t.end()
+})
+
 test('Arrow inspect', t => {
   const a = Arrow(unit)
 

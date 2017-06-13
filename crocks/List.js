@@ -1,20 +1,19 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
+const _concat = require('../pointfree/concat')
+const _implements = require('../internal/implements')
+const _inspect = require('../internal/inspect')
+
+const constant = require('../combinators/constant')
 const isApplicative = require('../predicates/isApplicative')
 const isArray = require('../predicates/isArray')
 const isEmpty = require('../predicates/isEmpty')
 const isFunction = require('../predicates/isFunction')
 const isSameType = require('../predicates/isSameType')
 const isSemigroup = require('../predicates/isSemigroup')
-
-const _inspect = require('../internal/inspect')
-const predOrFunc = require('../internal/predOrFunc')
-
-const constant = require('../combinators/constant')
 const not = require('../logic/not')
-
-const _concat = require('../pointfree/concat')
+const predOrFunc = require('../internal/predOrFunc')
 
 const Maybe = require('./Maybe')
 const Pred = require('./Pred')
@@ -254,5 +253,9 @@ List.empty =
 
 List.fromArray =
   fromArray
+
+List['@@implements'] = _implements(
+  [ 'ap', 'chain', 'concat', 'empty', 'equals', 'map', 'of', 'reduce', 'traverse' ]
+)
 
 module.exports = List

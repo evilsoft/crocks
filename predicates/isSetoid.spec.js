@@ -1,4 +1,7 @@
 const test = require('tape')
+const helpers = require('../test/helpers')
+
+const makeFake = helpers.makeFake
 
 const identity = require('../combinators/identity')
 const isFunction = require('./isFunction')
@@ -6,7 +9,8 @@ const isFunction = require('./isFunction')
 const isSetoid = require('./isSetoid')
 
 test('isSetoid predicate function', t => {
-  const fake = { equals: identity }
+  const Fake = makeFake([ 'equals' ])
+  const fake = Fake()
 
   t.ok(isFunction(isSetoid))
 
@@ -22,6 +26,7 @@ test('isSetoid predicate function', t => {
   t.equal(isSetoid({}), false, 'returns false for an object')
   t.equal(isSetoid(identity), false, 'returns false for function')
 
+  t.equal(isSetoid(Fake), true, 'returns true when a Setoid Constructor is passed')
   t.equal(isSetoid(fake), true, 'returns true when a Setoid is passed')
 
   t.end()

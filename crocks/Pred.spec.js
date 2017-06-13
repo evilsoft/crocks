@@ -41,6 +41,16 @@ test('Pred', t => {
   t.end()
 })
 
+test('Pred @@implements', t => {
+  const f = Pred['@@implements']
+
+  t.equal(f('concat'), true, 'implements concat func')
+  t.equal(f('contramap'), true, 'implements contramap func')
+  t.equal(f('empty'), true, 'implements empty func')
+
+  t.end()
+})
+
 test('Pred inspect', t => {
   const m = Pred(unit)
 

@@ -1,20 +1,20 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
+const _defineUnion = require('../internal/defineUnion')
+const _implements = require('../internal/implements')
+const _innerConcat = require('../internal/innerConcat')
+const _inspect = require('../internal/inspect')
+
+const composeB = require('../combinators/composeB')
+const constant = require('../combinators/constant')
+const identity = require('../combinators/identity')
 const ifElse = require('../logic/ifElse')
 const isApplicative = require('../predicates/isApplicative')
 const isFunction = require('../predicates/isFunction')
 const isSameType = require('../predicates/isSameType')
 
-const _inspect = require('../internal/inspect')
-const defineUnion = require('../internal/defineUnion')
-const innerConcat = require('../internal/innerConcat')
-
-const composeB = require('../combinators/composeB')
-const constant = require('../combinators/constant')
-const identity = require('../combinators/identity')
-
-const _maybe = defineUnion({ Nothing: [], Just: [ 'a' ] })
+const _maybe = _defineUnion({ Nothing: [], Just: [ 'a' ] })
 
 const Nothing = _maybe.Nothing
 const Just = _maybe.Just
@@ -83,7 +83,7 @@ function Maybe(u) {
 
     return either(
       Maybe.Nothing,
-      innerConcat(Maybe, m)
+      _innerConcat(Maybe, m)
     )
   }
 
@@ -199,5 +199,9 @@ Maybe.type =
 
 Maybe.zero =
   _zero
+
+Maybe['@@implements'] = _implements(
+  [ 'alt', 'ap', 'chain', 'concat', 'equals', 'map', 'of', 'traverse', 'zero' ]
+)
 
 module.exports = Maybe

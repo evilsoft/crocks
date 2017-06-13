@@ -604,12 +604,15 @@ All functions in this group have a signature of `* -> Boolean` and are used with
 
 * `hasProp : (String | Number) -> a -> Boolean`: An Array or Object that contains the provided index or key
 * `isAlt : a -> Boolean`: an ADT that provides `map` and `alt` functions
+* `isAlternative : a -> Boolean`: an ADT that provides `alt`, `zero`, `map`, `ap`, `chain` and `of` functions
 * `isApplicative : a -> Boolean`: an ADT that provides `map`, `ap` and `of` functions
 * `isApply : a -> Boolean`: an ADT that provides `map` and `ap` functions
 * `isArray : a -> Boolean`: Array
+* `isBifunctor : a -> Boolean`: an ADT that provides `map` and `bimap` functions
 * `isBoolean : a -> Boolean`: Boolean
 * `isCategory : a -> Boolean`: an ADT that provides `id` and `compose` functions
 * `isChain : a -> Boolean`: an ADT that provides `map`, `ap` and `chain` functions
+* `isContravariant : a -> Boolean`: an ADT that provides `contramap` function
 * `isDefined : a -> Boolean`: Every value that is not `undefined`, `null` included
 * `isEmpty : a -> Boolean`: Empty Object, Array or String
 * `isExtend : a -> Boolean`: an ADT that provides `map` and `extend` functions
@@ -622,6 +625,8 @@ All functions in this group have a signature of `* -> Boolean` and are used with
 * `isNil : a -> Boolean`: `undefined` or `null` or `NaN`
 * `isNumber : a -> Boolean`: `Number` that is not a `NaN` value, `Infinity` included
 * `isObject : a -> Boolean`: Plain Old Javascript Object (POJO)
+* `isPlus : a -> Boolean`: an ADT that provides `map`, `alt` and `zero` functions
+* `isProfunctor : a -> Boolean`: an ADT that provides `map`, `contramap` and `promap` functions
 * `isPromise : a -> Boolean`: An object implementing `then` and `catch`
 * `isSameType : a -> b -> Boolean`: Constructor matches a values type, or two values types match
 * `isSemigroup : a -> Boolean`: an ADT that provides a `concat` function

@@ -1,14 +1,14 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
+const _implements = require('../internal/implements')
+const _innerConcat = require('../internal/innerConcat')
+const _inspect = require('../internal/inspect')
+
+const constant = require('../combinators/constant')
 const isApplicative = require('../predicates/isApplicative')
 const isFunction = require('../predicates/isFunction')
 const isSameType = require('../predicates/isSameType')
-
-const _inspect = require('../internal/inspect')
-const innerConcat = require('../internal/innerConcat')
-
-const constant = require('../combinators/constant')
 
 const _type =
   constant('Identity')
@@ -41,7 +41,7 @@ function Identity(x) {
       throw new TypeError('Identity.concat: Identity of Semigroup required')
     }
 
-    return innerConcat(Identity, m, x)
+    return _innerConcat(Identity, m, x)
   }
 
   function map(fn) {
@@ -114,5 +114,9 @@ Identity.of =
 
 Identity.type =
   _type
+
+Identity['@@implements'] = _implements(
+  [ 'ap', 'chain', 'concat', 'equals', 'map', 'of', 'traverse' ]
+)
 
 module.exports = Identity

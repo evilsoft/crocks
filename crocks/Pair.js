@@ -1,13 +1,13 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isFunction = require('../predicates/isFunction')
-const isSemigroup = require('../predicates/isSemigroup')
-
+const _implements = require('../internal/implements')
 const _inspect = require('../internal/inspect')
-const isSameType = require('../predicates/isSameType')
 
 const constant = require('../combinators/constant')
+const isFunction = require('../predicates/isFunction')
+const isSameType = require('../predicates/isSameType')
+const isSemigroup = require('../predicates/isSemigroup')
 
 const _type =
   constant('Pair')
@@ -141,5 +141,9 @@ function Pair(l, r) {
 
 Pair.type =
   _type
+
+Pair['@@implements'] = _implements(
+  [ 'ap', 'bimap', 'chain', 'concat', 'extend', 'equals', 'map' ]
+)
 
 module.exports = Pair

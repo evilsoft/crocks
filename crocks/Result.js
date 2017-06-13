@@ -1,6 +1,11 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
+const _defineUnion = require('../internal/defineUnion')
+const _implements = require('../internal/implements')
+const _innerConcat = require('../internal/innerConcat')
+const _inspect = require('../internal/inspect')
+
 const and = require('../logic/and')
 const ifElse = require('../logic/ifElse')
 const isApplicative = require('../predicates/isApplicative')
@@ -8,16 +13,12 @@ const isFunction = require('../predicates/isFunction')
 const isSameType = require('../predicates/isSameType')
 const isSemigroup = require('../predicates/isSemigroup')
 
-const _inspect = require('../internal/inspect')
-const defineUnion = require('../internal/defineUnion')
-const innerConcat = require('../internal/innerConcat')
-
 const composeB = require('../combinators/composeB')
 const constant = require('../combinators/constant')
 const identity = require('../combinators/identity')
 
 const _result =
-  defineUnion({ Err: [ 'a' ], Ok: [ 'b' ] })
+  _defineUnion({ Err: [ 'a' ], Ok: [ 'b' ] })
 
 Result.Err =
   composeB(Result, _result.Err)
@@ -89,7 +90,7 @@ function Result(u) {
 
     return either(
       Result.Err,
-      innerConcat(Result, m)
+      _innerConcat(Result, m)
     )
   }
 
@@ -215,5 +216,9 @@ Result.of =
 
 Result.type =
   _type
+
+Result['@@implements'] = _implements(
+  [ 'alt', 'ap', 'bimap', 'chain', 'concat', 'equals', 'map', 'of', 'traverse' ]
+)
 
 module.exports = Result

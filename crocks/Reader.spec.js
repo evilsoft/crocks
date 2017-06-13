@@ -44,6 +44,17 @@ test('Reader', t => {
   t.end()
 })
 
+test('Reader @@implements', t => {
+  const f = Reader['@@implements']
+
+  t.equal(f('ap'), true, 'implements ap func')
+  t.equal(f('chain'), true, 'implements chain func')
+  t.equal(f('map'), true, 'implements map func')
+  t.equal(f('of'), true, 'implements of func')
+
+  t.end()
+})
+
 test('Reader inspect', t => {
   const m = Reader(unit)
 

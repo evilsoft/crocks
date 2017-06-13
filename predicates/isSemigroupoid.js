@@ -1,11 +1,11 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isFunction = require('./isFunction')
+const _hasAlg = require('../internal/hasAlg')
 
 // isSemigroupoid : a -> Boolean
 function isSemigroupoid(m) {
-  return !!m && isFunction(m.compose)
+  return !!m && _hasAlg('compose', m)
 }
 
 module.exports = isSemigroupoid

@@ -1,15 +1,14 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
+const _implements = require('../internal/implements')
+const _inspect = require('../internal/inspect')
+const _object = require('../internal/object')
+
+const constant = require('../combinators/constant')
 const isNil = require('../predicates/isNil')
 const isObject = require('../predicates/isObject')
 const isSameType = require('../predicates/isSameType')
-
-const _inspect = require('../internal/inspect')
-
-const constant = require('../combinators/constant')
-
-const object = require('../internal/object')
 
 const _empty =
   () => Assign({})
@@ -41,11 +40,15 @@ function Assign(o) {
       throw new TypeError('Assign.concat: Assign required')
     }
 
-    return Assign(object.assign(m.value(), x))
+    return Assign(_object.assign(m.value(), x))
   }
 
   return { inspect, value, type, concat, empty }
 }
+
+Assign['@@implements'] = _implements(
+  [ 'concat', 'empty' ]
+)
 
 Assign.empty =
   _empty

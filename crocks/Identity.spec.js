@@ -32,6 +32,20 @@ test('Identity', t => {
   t.end()
 })
 
+test('Identity @@implements', t => {
+  const f = Identity['@@implements']
+
+  t.equal(f('ap'), true, 'implements ap func')
+  t.equal(f('chain'), true, 'implements chain func')
+  t.equal(f('concat'), true, 'implements concat func')
+  t.equal(f('equals'), true, 'implements equals func')
+  t.equal(f('map'), true, 'implements map func')
+  t.equal(f('of'), true, 'implements of func')
+  t.equal(f('traverse'), true, 'implements traverse func')
+
+  t.end()
+})
+
 test('Identity inspect', t => {
   const m = Identity(0)
 

@@ -1,13 +1,13 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isFunction = require('../predicates/isFunction')
-const isSameType = require('../predicates/isSameType')
-
+const _implements = require('../internal/implements')
 const _inspect = require('../internal/inspect')
 
-const constant = require('../combinators/constant')
 const composeB = require('../combinators/composeB')
+const constant = require('../combinators/constant')
+const isFunction = require('../predicates/isFunction')
+const isSameType = require('../predicates/isSameType')
 
 const _type =
   constant('Pred')
@@ -60,5 +60,9 @@ function Pred(pred) {
 
 Pred.empty = _empty
 Pred.type = _type
+
+Pred['@@implements'] = _implements(
+  [ 'concat', 'contramap', 'empty' ]
+)
 
 module.exports = Pred

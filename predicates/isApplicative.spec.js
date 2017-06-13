@@ -1,4 +1,7 @@
 const test = require('tape')
+const helpers = require('../test/helpers')
+
+const makeFake = helpers.makeFake
 
 const isFunction = require('./isFunction')
 
@@ -6,11 +9,8 @@ const isApplicative = require('./isApplicative')
 const identity = require('../combinators/identity')
 
 test('isApplicative predicate function', t => {
-  const fake = {
-    map: identity,
-    ap: identity,
-    of: identity
-  }
+  const Fake = makeFake([ 'ap', 'map', 'of' ])
+  const fake = Fake()
 
   t.ok(isFunction(isApplicative), 'is a function')
 
@@ -26,7 +26,8 @@ test('isApplicative predicate function', t => {
   t.equal(isApplicative([]), false, 'returns false for an array')
   t.equal(isApplicative(identity), false, 'returns false for function')
 
-  t.equal(isApplicative(fake), true, 'returns true when an Apply is passed')
+  t.equal(isApplicative(Fake), true, 'returns true when an Applicative Constructor is passed')
+  t.equal(isApplicative(fake), true, 'returns true when an Applicative is passed')
 
   t.end()
 })

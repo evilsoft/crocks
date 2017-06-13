@@ -1,12 +1,12 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isFunction = require('../predicates/isFunction')
-const isSameType = require('../predicates/isSameType')
-
+const _implements = require('../internal/implements')
 const _inspect = require('../internal/inspect')
 
 const constant = require('../combinators/constant')
+const isFunction = require('../predicates/isFunction')
+const isSameType = require('../predicates/isSameType')
 
 const Pair = require('../crocks/Pair')
 const Unit = require('../crocks/Unit')
@@ -151,5 +151,9 @@ State.put =
 
 State.modify =
   modify
+
+State['@@implements'] = _implements(
+  [ 'ap', 'chain', 'map', 'of' ]
+)
 
 module.exports = State

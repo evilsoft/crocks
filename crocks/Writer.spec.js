@@ -52,6 +52,18 @@ test('Writer', t => {
   t.end()
 })
 
+test('Writer @@implements', t => {
+  const f = Writer['@@implements']
+
+  t.equal(f('ap'), true, 'implements ap func')
+  t.equal(f('chain'), true, 'implements chain func')
+  t.equal(f('equals'), true, 'implements equals func')
+  t.equal(f('map'), true, 'implements map func')
+  t.equal(f('of'), true, 'implements of func')
+
+  t.end()
+})
+
 test('Writer inspect', t => {
   const m = Writer(0, 0)
 

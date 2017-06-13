@@ -1,4 +1,7 @@
 const test = require('tape')
+const helpers = require('../test/helpers')
+
+const makeFake = helpers.makeFake
 
 const isFunction = require('./isFunction')
 
@@ -7,7 +10,8 @@ const identity = require('../combinators/identity')
 const isFoldable = require('./isFoldable')
 
 test('isFoldable predicate function', t => {
-  const fake = { reduce: identity }
+  const Fake = makeFake([ 'reduce' ])
+  const fake = Fake()
 
   t.ok(isFunction(isFoldable), 'is a function')
 
@@ -23,6 +27,7 @@ test('isFoldable predicate function', t => {
   t.equal(isFoldable(identity), false, 'returns false for function')
 
   t.equal(isFoldable([]), true, 'returns true for an array')
+  t.equal(isFoldable(Fake), true, 'returns true when a Foldable Constructor structure is passed')
   t.equal(isFoldable(fake), true, 'returns true when a Foldable structure is passed')
 
   t.end()

@@ -47,6 +47,17 @@ test('State', t => {
   t.end()
 })
 
+test('State @@implements', t => {
+  const f = State['@@implements']
+
+  t.equal(f('ap'), true, 'implements ap func')
+  t.equal(f('chain'), true, 'implements chain func')
+  t.equal(f('map'), true, 'implements map func')
+  t.equal(f('of'), true, 'implements of func')
+
+  t.end()
+})
+
 test('State inspect', t => {
   const m = State(unit)
 

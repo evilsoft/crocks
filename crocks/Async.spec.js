@@ -45,6 +45,19 @@ test('Async', t => {
   t.end()
 })
 
+test('Async @@implements', t => {
+  const f = Async['@@implements']
+
+  t.equal(f('alt'), true, 'implements alt func')
+  t.equal(f('ap'), true, 'implements ap func')
+  t.equal(f('bimap'), true, 'implements bimap func')
+  t.equal(f('chain'), true, 'implements chain func')
+  t.equal(f('map'), true, 'implements map func')
+  t.equal(f('of'), true, 'implements of func')
+
+  t.end()
+})
+
 test('Async Rejected', t => {
   const x = 'sorry'
   const m = Async.Rejected(x)

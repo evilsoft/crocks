@@ -1,4 +1,7 @@
 const test = require('tape')
+const helpers = require('../test/helpers')
+
+const makeFake = helpers.makeFake
 
 const isFunction = require('./isFunction')
 const identity = require('../combinators/identity')
@@ -6,7 +9,8 @@ const identity = require('../combinators/identity')
 const isApply = require('./isApply')
 
 test('isApply predicate function', t => {
-  const fake = { map: identity, ap: identity }
+  const Fake = makeFake([ 'ap', 'map' ])
+  const fake = Fake()
 
   t.equal(isApply(undefined), false, 'returns false for undefined')
   t.equal(isApply(null), false, 'returns false for null')
@@ -20,6 +24,7 @@ test('isApply predicate function', t => {
   t.equal(isApply([]), false, 'returns false for an array')
   t.equal(isApply(identity), false, 'returns false for function')
 
+  t.equal(isApply(Fake), true, 'returns true when an Apply Constructor is passed')
   t.equal(isApply(fake), true, 'returns true when an Apply is passed')
 
   t.ok(isFunction(isApply))

@@ -37,6 +37,15 @@ test('Prod', t => {
   t.end()
 })
 
+test('Prod @@implements', t => {
+  const f = Prod['@@implements']
+
+  t.equal(f('concat'), true, 'implements concat func')
+  t.equal(f('empty'), true, 'implements empty func')
+
+  t.end()
+})
+
 test('Prod inspect', t => {
   const m = Prod(1)
 

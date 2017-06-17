@@ -214,7 +214,7 @@ test('Result concat functionality', t => {
   t.end()
 })
 
-test('Result concat properties (Semigoup)', t => {
+test('Result concat properties (Semigroup)', t => {
   const extract =
     either(identity, identity)
 

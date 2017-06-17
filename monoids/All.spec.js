@@ -107,7 +107,7 @@ test('All concat functionality', t => {
   t.end()
 })
 
-test('All concat properties (Semigoup)', t => {
+test('All concat properties (Semigroup)', t => {
   const a = All(0)
   const b = All(true)
   const c = All('')

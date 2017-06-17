@@ -103,7 +103,7 @@ test('Unit equals properties (Setoid)', t => {
   t.end()
 })
 
-test('Unit concat properties (Semigoup)', t => {
+test('Unit concat properties (Semigroup)', t => {
   const a = Unit(0)
   const b = Unit(true)
   const c = Unit('')

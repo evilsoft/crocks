@@ -98,7 +98,7 @@ test('Const equals properties (Setoid)', t => {
   t.end()
 })
 
-test('Const concat properties (Semigoup)', t => {
+test('Const concat properties (Semigroup)', t => {
   const a = Const(0)
   const b = Const(true)
   const c = Const('')

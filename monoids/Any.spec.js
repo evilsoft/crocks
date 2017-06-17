@@ -81,7 +81,7 @@ test('Any type', t => {
   t.end()
 })
 
-test('Any concat properties (Semigoup)', t => {
+test('Any concat properties (Semigroup)', t => {
   const a = Any(0)
   const b = Any(true)
   const c = Any('')

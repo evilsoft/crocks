@@ -104,6 +104,7 @@ All `Monoids` provide `empty` and `type` function on their Constructors as well 
 | `Any` | Boolean | Logical OR | `false` |
 | `Assign` | Object | `Object.assign` | `{}` |
 | `Endo` | Function | `compose` | `identity` |
+| `First` | Maybe | First `Just` | `Nothing` |
 | `Last` | Maybe | Last `Just` | `Nothing` |
 | `Max` | Number | `Math.max` | `-Infinity` |
 | `Min` | Number | `Math.min` | `Infinity` |
@@ -715,11 +716,11 @@ These functions provide a very clean way to build out very simple functions and 
 | `both` | `Arrow`, `Function`, `Star` |
 | `chain` | `Array`, `Async`, `Const`, `Either`, `Identity`, `IO`, `List`, `Maybe`, `Pair`, `Reader`, `Result`, `State`, `Unit`, `Writer` |
 | `coalesce` | `Async`, `Either`, `Maybe`, `Result` |
-| `concat` | `All`, `Any`, `Array`, `Assign`, `Const`, `Either`, `Endo`, `Identity`, `List`, `Max`, `Maybe`, `Min`, `Pair`, `Pred`, `Prod`, `Result`, `String`, `Sum`, `Unit` |
+| `concat` | `All`, `Any`, `Array`, `Assign`, `Const`, `Either`, `Endo`, `First`, `Identity`, `Last`, `List`, `Max`, `Maybe`, `Min`, `Pair`, `Pred`, `Prod`, `Result`, `String`, `Sum`, `Unit` |
 | `cons` | `Array`, `List` |
 | `contramap` | `Arrow`, `Pred`, `Star` |
 | `either` | `Either`, `Maybe`, `Result` |
-| `empty` | `All`, `Any`, `Array`, `Assign`, `Endo`, `List`, `Max`, `Min`, `Object`, `Pred`, `Prod`, `String`, `Sum`, `Unit` |
+| `empty` | `All`, `Any`, `Array`, `Assign`, `Endo`, `First`, `Last`, `List`, `Max`, `Min`, `Object`, `Pred`, `Prod`, `String`, `Sum`, `Unit` |
 | `evalWith` | `State` |
 | `execWith` | `State` |
 | `extend` | `Pair` |
@@ -731,7 +732,7 @@ These functions provide a very clean way to build out very simple functions and 
 | `log` | `Writer` |
 | `map` | `Async`, `Array`, `Arrow`, `Const`, `Either`, `Function`, `Identity`, `IO`, `List`, `Maybe`, `Object`, `Pair`, `Reader`, `Result`, `Star`, `State`, `Unit`, `Writer` |
 | `merge` | `Pair` |
-| `option` | `Maybe` |
+| `option` | `First`, `Last`, `Maybe` |
 | `promap` | `Arrow`, `Star` |
 | `read` | `Writer` |
 | `reduce` | `Array`, `List` |
@@ -744,7 +745,7 @@ These functions provide a very clean way to build out very simple functions and 
 | `swap` | `Async`, `Either`, `Pair`, `Result` |
 | `tail` | `Array`, `List`, `String` |
 | `traverse` | `Array`, `Either`, `Identity`, `List`, `Maybe`, `Result` |
-| `value` | `Const`, `Identity`, `Pred`, `Unit`, `Writer` |
+| `value` | `All`, `Any`, `Assign`, `Const`, `Endo`, `First`, `Identity`, `Last`, `Max`, `Min`, `Pred`, `Prod`, `Sum`, `Unit`, `Writer` |
 
 ### Transformation Functions
 Transformation functions are mostly used to reduce unwanted nesting of similar types. Take for example the following structure:
@@ -861,19 +862,28 @@ bad
 |---|---|---|
 | `arrayToList` | `[ a ] -> List a` | `(a -> [ b ]) -> a -> List b` |
 | `eitherToAsync` | `Either e a -> Async e a` | `(a -> Either e b) -> a -> Async e b` |
+| `eitherToFirst` | `Either b a -> First a` | `(a -> Either c b) -> a -> First b` |
 | `eitherToLast` | `Either b a -> Last a` | `(a -> Either c b) -> a -> Last b` |
 | `eitherToMaybe` | `Either b a -> Maybe a` | `(a -> Either c b) -> a -> Maybe b` |
 | `eitherToResult` | `Either e a -> Result e a` | `(a -> Either e b) -> a -> Result e b` |
-| `lastToAsync` | `e -> Last a -> Async e a` | `e -> (a -> Last b) -> a -> Last e b` |
+| `firstToAsync` | `e -> First a -> Async e a` | `e -> (a -> First b) -> a -> Async e b` |
+| `firstToEither` | `c -> First a -> Either c a` | `c -> (a -> First b) -> a -> Either c b` |
+| `firstToLast` | `First a -> Last a` | `(a -> First b) -> a -> Last b` |
+| `firstToMaybe` | `First a -> Maybe a` | `(a -> First b) -> a -> Maybe b` |
+| `firstToResult` | `c -> First a -> Result c a` | `c -> (a -> First b) -> a -> Result c b` |
+| `lastToAsync` | `e -> Last a -> Async e a` | `e -> (a -> Last b) -> a -> Async e b` |
 | `lastToEither` | `c -> Last a -> Either c a` | `c -> (a -> Last b) -> a -> Either c b` |
+| `lastToFirst` | `Last a -> First a` | `(a -> Last b) -> a -> First b` |
 | `lastToMaybe` | `Last a -> Maybe a` | `(a -> Last b) -> a -> Maybe b` |
 | `lastToResult` | `c -> Last a -> Result c a` | `c -> (a -> Last b) -> a -> Result c b` |
 | `listToArray` | `List a -> [ a ]` | `(a -> List b) -> a -> [ b ]` |
 | `maybeToAsync` | `e -> Maybe a -> Async e a` | `e -> (a -> Maybe b) -> a -> Async e b` |
 | `maybeToEither` | `c -> Maybe a -> Either c a` | `c -> (a -> Maybe b) -> a -> Either c b` |
+| `maybeToFirst` | `Maybe a -> First a` | `(a -> Maybe b) -> a -> First b` |
 | `maybeToLast` | `Maybe a -> Last a` | `(a -> Maybe b) -> a -> Last b` |
 | `maybeToResult` | `c -> Maybe a -> Result c a` | `c -> (a -> Maybe b) -> a -> Result c b` |
 | `resultToAsync` | `Result e a -> Async e a` | `(a -> Result e b) -> a -> Async e b` |
 | `resultToEither` | `Result e a -> Either e a` | `(a -> Result e b) -> a -> Either e b` |
+| `resultToFirst` | `Result e a -> First a` | `(a -> Result e b) -> a -> First b` |
 | `resultToLast` | `Result e a -> Last a` | `(a -> Result e b) -> a -> Last b` |
 | `resultToMaybe` | `Result e a -> Maybe a` | `(a -> Result e b) -> a -> Maybe b` |

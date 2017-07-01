@@ -9,8 +9,8 @@ const isSameType = require('../predicates/isSameType')
 const Result = require('../crocks/Result')
 const Maybe = require('../crocks/Maybe')
 
-const applyTransform = either =>
-  either.either(Maybe.Nothing, Maybe.Just)
+const applyTransform = result =>
+  result.either(Maybe.Nothing, Maybe.Just)
 
 // resultToMaybe : Result b a -> Maybe a
 // resultToMaybe : (a -> Result c b) -> a -> Maybe b

@@ -181,7 +181,7 @@ test('Pred concat functionality', t => {
   t.end()
 })
 
-test('Pred concat properties (Semigoup)', t => {
+test('Pred concat properties (Semigroup)', t => {
   const a = Pred(constant(false))
   const b = Pred(constant(true))
   const c = Pred(constant(false))

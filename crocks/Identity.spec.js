@@ -155,7 +155,7 @@ test('Identity concat functionality', t => {
   t.end()
 })
 
-test('Identity concat properties (Semigoup)', t => {
+test('Identity concat properties (Semigroup)', t => {
   const extract =
     m => m.value()
 

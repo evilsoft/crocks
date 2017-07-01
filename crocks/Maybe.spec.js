@@ -225,7 +225,7 @@ test('Maybe concat functionality', t => {
   t.end()
 })
 
-test('Maybe concat properties (Semigoup)', t => {
+test('Maybe concat properties (Semigroup)', t => {
   const extract =
     either(constant('Nothing'), identity)
 

@@ -279,7 +279,7 @@ test('Either concat functionality', t => {
   t.end()
 })
 
-test('Either concat properties (Semigoup)', t => {
+test('Either concat properties (Semigroup)', t => {
   const extract =
     either(identity, identity)
 

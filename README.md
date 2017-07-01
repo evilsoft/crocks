@@ -104,6 +104,7 @@ All `Monoids` provide `empty` and `type` function on their Constructors as well 
 | `Any` | Boolean | Logical OR | `false` |
 | `Assign` | Object | `Object.assign` | `{}` |
 | `Endo` | Function | `compose` | `identity` |
+| `Last` | Maybe | Last `Just` | `Nothing` |
 | `Max` | Number | `Math.max` | `-Infinity` |
 | `Min` | Number | `Math.min` | `Infinity` |
 | `Prod` | Number | Multiplication | `1` |
@@ -860,12 +861,19 @@ bad
 |---|---|---|
 | `arrayToList` | `[ a ] -> List a` | `(a -> [ b ]) -> a -> List b` |
 | `eitherToAsync` | `Either e a -> Async e a` | `(a -> Either e b) -> a -> Async e b` |
+| `eitherToLast` | `Either b a -> Last a` | `(a -> Either c b) -> a -> Last b` |
 | `eitherToMaybe` | `Either b a -> Maybe a` | `(a -> Either c b) -> a -> Maybe b` |
 | `eitherToResult` | `Either e a -> Result e a` | `(a -> Either e b) -> a -> Result e b` |
+| `lastToAsync` | `e -> Last a -> Async e a` | `e -> (a -> Last b) -> a -> Last e b` |
+| `lastToEither` | `c -> Last a -> Either c a` | `c -> (a -> Last b) -> a -> Either c b` |
+| `lastToMaybe` | `Last a -> Maybe a` | `(a -> Last b) -> a -> Maybe b` |
+| `lastToResult` | `c -> Last a -> Result c a` | `c -> (a -> Last b) -> a -> Result c b` |
 | `listToArray` | `List a -> [ a ]` | `(a -> List b) -> a -> [ b ]` |
 | `maybeToAsync` | `e -> Maybe a -> Async e a` | `e -> (a -> Maybe b) -> a -> Async e b` |
 | `maybeToEither` | `c -> Maybe a -> Either c a` | `c -> (a -> Maybe b) -> a -> Either c b` |
+| `maybeToLast` | `Maybe a -> Last a` | `(a -> Maybe b) -> a -> Last b` |
 | `maybeToResult` | `c -> Maybe a -> Result c a` | `c -> (a -> Maybe b) -> a -> Result c b` |
 | `resultToAsync` | `Result e a -> Async e a` | `(a -> Result e b) -> a -> Async e b` |
 | `resultToEither` | `Result e a -> Either e a` | `(a -> Result e b) -> a -> Either e b` |
-| `resultToMaybe` | `Result b a -> Maybe a` | `(a -> Result c b) -> a -> Maybe b` |
+| `resultToLast` | `Result e a -> Last a` | `(a -> Result e b) -> a -> Last b` |
+| `resultToMaybe` | `Result e a -> Maybe a` | `(a -> Result e b) -> a -> Maybe b` |

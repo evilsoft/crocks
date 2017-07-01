@@ -86,6 +86,7 @@ const monoids = {
   Any: require('./monoids/Any'),
   Assign: require('./monoids/Assign'),
   Endo: require('./monoids/Endo'),
+  Last: require('./monoids/Last'),
   Min: require('./monoids/Min'),
   Max: require('./monoids/Max'),
   Prod: require('./monoids/Prod'),
@@ -168,14 +169,21 @@ const predicates = {
 const transforms = {
   arrayToList: require('./transforms/arrayToList'),
   eitherToAsync: require('./transforms/eitherToAsync'),
+  eitherToLast: require('./transforms/eitherToLast'),
   eitherToMaybe: require('./transforms/eitherToMaybe'),
   eitherToResult: require('./transforms/eitherToResult'),
+  lastToAsync: require('./transforms/lastToAsync'),
+  lastToEither: require('./transforms/lastToEither'),
+  lastToMaybe: require('./transforms/lastToMaybe'),
+  lastToResult: require('./transforms/lastToResult'),
   listToArray: require('./transforms/listToArray'),
   maybeToAsync: require('./transforms/maybeToAsync'),
   maybeToEither: require('./transforms/maybeToEither'),
+  maybeToLast: require('./transforms/maybeToLast'),
   maybeToResult: require('./transforms/maybeToResult'),
   resultToAsync: require('./transforms/resultToAsync'),
   resultToEither: require('./transforms/resultToEither'),
+  resultToLast: require('./transforms/resultToLast'),
   resultToMaybe: require('./transforms/resultToMaybe')
 }
 

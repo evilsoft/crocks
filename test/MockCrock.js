@@ -1,4 +1,5 @@
-const constant = require('../combinators/constant')
+const constant = require('../src/core/constant')
+const isSameType = require('../src/core/isSameType')
 
 const _type = constant('MockCrock')
 const _of   = x => MockCrock(x)
@@ -12,11 +13,14 @@ function MockCrock(x) {
   const of        = _of
   const sequence  = () => x.map(MockCrock)
   const traverse  = (_, f) => f(x).map(MockCrock)
+  const equals =
+    m => isSameType(MockCrock, m)
+      && m.value() === x
 
   return {
     value, type, map, ap,
     chain, of, sequence,
-    traverse
+    traverse, equals
   }
 }
 

@@ -35,36 +35,36 @@ import crocks from 'crocks'
 const { Maybe, compose, curry, map } = crocks
 
 // do not wanna bring all of crocks into your bundle?
-// I feel ya, try this:
+// I feel ya, all try this:
 
-import Maybe from 'crocks/crocks/Maybe'
-import compose from 'crocks/helpers/compose'
-import curry from 'crocks/helpers/curry'
-import map from 'crocks/pointfree/map'
+import Maybe from 'crocks/lib/Maybe'
+import compose from 'crocks/lib/compose'
+import curry from 'crocks/lib/curry'
+import map from 'crocks/lib/map'
 
 // you can of course do the same with require statements:
-const All = require('crocks/monoids/All')
+const All = require('crocks/lib/All')
 ...
 ```
 
 ## What is in this?
 There are (8) classifications of "things" included in this library:
 
-* [Crocks](#crocks) (`crocks/crocks`): These are the ADTs that this library is centered around. They are all `Functor` based Data Types that provide different computational contexts for working in a more declarative, functional flow. For the most part, a majority of the other bits in `crocks` exist to serve these ADTs.
+* [Crocks](#crocks): These are the ADTs that this library is centered around. They are all `Functor` based Data Types that provide different computational contexts for working in a more declarative, functional flow. For the most part, a majority of the other bits in `crocks` exist to serve these ADTs.
 
-* [Monoids](#monoids) (`crocks/monoids`): These helpful ADTs are in a class of their own, not really `Functor`s in their own right (although some can be), they are still very useful in our everyday programming needs. Ever need to Sum a list of Numbers or mix a mess of objects together? This is were you will find the ADTs you need to do that.
+* [Monoids](#monoids): These helpful ADTs are in a class of their own, not really `Functor`s in their own right (although some can be), they are still very useful in our everyday programming needs. Ever need to Sum a list of Numbers or mix a mess of objects together? This is were you will find the ADTs you need to do that.
 
-* [Combinators](#combinators) (`crocks/combinators`): A collection of functions that are used for working with other functions. These do things like compose (2) functions together, or flip arguments on a function. They typically either take a function, return a function or a bit a both. These are considered the glue that holds the mighty house of `crocks` together and a valuable aid in writing reusable code.
+* [Combinators](#combinators): A collection of functions that are used for working with other functions. These do things like compose (2) functions together, or flip arguments on a function. They typically either take a function, return a function or a bit a both. These are considered the glue that holds the mighty house of `crocks` together and a valuable aid in writing reusable code.
 
-* [Helper Functions](#helper-functions) (`crocks/helpers`): All other support functions that are either convenient versions of combinators or not even combinators at all cover this group.
+* [Helper Functions](#helper-functions): All other support functions that are either convenient versions of combinators or not even combinators at all cover this group.
 
-* [Logic Functions](#logic-functions) (`crocks/logic`): A helpful collection of Logic based combinators. All of these functions work with predicate functions and let you combine them in some very interesting ways.
+* [Logic Functions](#logic-functions): A helpful collection of Logic based combinators. All of these functions work with predicate functions and let you combine them in some very interesting ways.
 
-* [Predicate Functions](#predicate-functions) (`crocks/predicates`): A helpful collection of predicate functions to get you started.
+* [Predicate Functions](#predicate-functions): A helpful collection of predicate functions to get you started.
 
-* [Point-free Functions](#point-free-functions) (`crocks/pointfree`): Wanna use these ADTs in a way that you never have to reference the actual data being worked on? Well here is where you will find all of these functions to do that. For every algebra available on both the `Crocks` and `Monoids` there is a function here.
+* [Point-free Functions](#point-free-functions): Wanna use these ADTs in a way that you never have to reference the actual data being worked on? Well here is where you will find all of these functions to do that. For every algebra available on both the `Crocks` and `Monoids` there is a function here.
 
-* [Transformation Functions](#transformation-functions) (`crocks/transform`): All the functions found here are used to transform from one type to another, naturally. These come are handy in situations where you have functions that return one type (like an `Either`), but are working in a context of another (say `Maybe`). You would like to compose these, but in doing so will result in a nesting that you will need to account for for the rest of your flow.
+* [Transformation Functions](#transformation-functions): All the functions found here are used to transform from one type to another, naturally. These come are handy in situations where you have functions that return one type (like an `Either`), but are working in a context of another (say `Maybe`). You would like to compose these, but in doing so will result in a nesting that you will need to account for for the rest of your flow.
 
 ### Crocks
 The `crocks` are the heart and soul of this library. This is where you will find all your favorite ADT's you have grown to :heart:. They include gems such as: `Maybe`, `Either` and `IO`, to name a few. The are usually just a simple constructor that takes either a function or value (depending on the type) and will return you a "container" that wraps whatever you passed it. Each container provides a variety of functions that act as the operations you can do on the contained value. There are many types that share the same function names, but what they do from type to type may vary.  Every Crock provides type function on the Constructor and both inspect and type functions on their Instances.

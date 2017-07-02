@@ -1,0 +1,39 @@
+/** @license ISC License (c) copyright 2017 original and current authors */
+/** @author Ian Hofmann-Hicks (evil) */
+
+const Maybe = require('./core/Maybe')
+const Result = require('./core/Result')
+const constant = require('./core/constant')
+const curry = require('./core/curry')
+const isFunction = require('./core/isFunction')
+const isSameType = require('./core/isSameType')
+
+const applyTransform = (left, maybe) =>
+  maybe.either(
+    constant(Result.Err(left)),
+    Result.Ok
+  )
+
+// maybeToResult : c -> Maybe a -> Result c a
+// maybeToResult : c -> (a -> Maybe b) -> a -> Result c b
+function maybeToResult(left, maybe) {
+  if(isFunction(maybe)) {
+    return function(x) {
+      const m = maybe(x)
+
+      if(!isSameType(Maybe, m)) {
+        throw new TypeError('maybeToResult: Maybe returing function required for second argument')
+      }
+
+      return applyTransform(left, m)
+    }
+  }
+
+  if(isSameType(Maybe, maybe)) {
+    return applyTransform(left, maybe)
+  }
+
+  throw new TypeError('maybeToResult: Maybe or Maybe returing function required for second argument')
+}
+
+module.exports = curry(maybeToResult)

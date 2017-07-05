@@ -1,4 +1,49 @@
 # Change Log for `crocks`
+v0.6.1 -- July 04, 2017
+--
+### Additions
+* Crocks API:
+  * `Pair.extend`
+* Monoids:
+  * `First`
+  * `Last`
+* Pointfree
+  * `extend`
+* Predicates
+  * `isAlternative`
+  * `isBifunctor`
+  * `isContravariant`
+  * `isPlus`
+  * `isProfunctor`
+  * `isExtend`
+* Transforms
+  * `eitherToFirst`
+  * `eitherToLast`
+  * `firstToAsync`
+  * `firstToEither`
+  * `firstToLast`
+  * `firstToMaybe`
+  * `firstToResult`
+  * `lastToAsync`
+  * `lastToEither`
+  * `lastToFirst`
+  * `lastToMaybe`
+  * `lastToResult`
+  * `maybeToFirst`
+  * `maybeToLast`
+  * `resultToFirst`
+  * `resultToLast`
+
+### Non-Breaking
+* Add internal functions for typeclass determination
+* Add `@@implements` function on all types for typeclass determination
+
+### Pull Requests
+* [#128 - Add `extend` to `Pair`](https://github.com/evilsoft/crocks/pull/128)
+* [#129 - Add `@@implements`to allow Constructors to signal what they do](https://github.com/evilsoft/crocks/pull/129)
+* [#130 - Add the Last Monoid](https://github.com/evilsoft/crocks/pull/130)
+* [#131 - Add the First Monoid](https://github.com/evilsoft/crocks/pull/131)
+
 v0.6.0 -- May 21, 2017
 --
 ### Breaking

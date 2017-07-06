@@ -1,8 +1,7 @@
-const identity = require('../combinators/identity')
-const constant = require('../combinators/constant')
-
-const _implements = require('../internal/implements')
-const _inspect = require('../internal/inspect')
+const _implements = require('../src/core/implements')
+const _inspect = require('../src/core/inspect')
+const constant = require('../src/core/constant')
+const identity = require('../src/core/identity')
 
 const _type = constant('Last')
 

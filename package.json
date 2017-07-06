@@ -2,15 +2,17 @@
   "name": "crocks",
   "version": "0.6.1",
   "description": "A collection of well known Monadic Containers for your utter enjoyment.",
-  "main": "crocks.js",
+  "main": "lib/index.js",
   "scripts": {
     "preversion": "npm run build",
     "build:publish": "npm test && npm run build && npm publish",
-    "build": "npm test && webpack && uglifyjs dist/crocks.js -c \"warnings=false\" -m -o dist/crocks.min.js",
+    "build:dist": "rm -rf dist && webpack && uglifyjs dist/crocks.js -c \"warnings=false\" -m -o dist/crocks.min.js",
+    "build": "rm -rf lib && buble -i src -o lib && npm run build:dist",
     "lint": "eslint .",
-    "spec": "tape combinators/*.spec.js crocks/*.spec.js helpers/*.spec.js internal/*.spec.js logic/*.spec.js monoids/*.spec.js pointfree/*.spec.js ./predicates/*.spec.js ./transforms/*.spec.js ./*.spec.js",
-    "spec:coverage": "nyc npm run spec",
-    "spec:dev": "nodemon -q -e js -x 'npm run spec -s | tap-spec'",
+    "spec:coverage": "nyc npm run spec:lib",
+    "spec:dev": "nodemon -q -e js -x 'npm run spec:src -s | tap-spec'",
+    "spec:lib": "npm run build && tape lib/core/*.spec.js lib/*.spec.js",
+    "spec:src": "tape src/core/*.spec.js src/*.spec.js",
     "test": "npm run lint && npm run spec:coverage",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
@@ -40,18 +42,13 @@
     "functions": 100,
     "branches": 100,
     "exclude": [
-      "dist/",
+      "src/",
       "test/",
       "**/*.spec.js"
     ]
   },
   "devDependencies": {
-    "babel-core": "^6.10.4",
-    "babel-loader": "^6.2.4",
-    "babel-plugin-transform-es2015-arrow-functions": "^6.8.0",
-    "babel-plugin-transform-es2015-computed-properties": "^6.24.1",
-    "babel-plugin-transform-es2015-shorthand-properties": "^6.8.0",
-    "babel-plugin-transform-es2015-template-literals": "^6.8.0",
+    "buble": "^0.15.2",
     "coveralls": "^2.11.15",
     "eslint": "^3.19.0",
     "nodemon": "^1.9.2",

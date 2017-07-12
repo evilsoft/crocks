@@ -2,7 +2,7 @@ const test = require('tape')
 
 const isFunction = require('./isFunction')
 const isInteger = require('./isInteger')
-const unit = require('./unit')
+const unit = require('./_unit')
 
 test('isInteger predicate function', t => {
   t.ok(isFunction(isInteger), 'is a function')

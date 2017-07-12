@@ -1,7 +1,6 @@
 node_modules
 .node-version
-dist/
-lib/
+build/
 
 .coveralls.yml
 .nyc_output

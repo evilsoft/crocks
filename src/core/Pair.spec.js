@@ -9,8 +9,10 @@ const compose = curry(require('./compose'))
 const identity = require('./identity')
 const isFunction = require('./isFunction')
 const isObject = require('./isObject')
-const merge = curry(require('./merge'))
-const unit = require('./unit')
+const unit = require('./_unit')
+
+const merge =
+  fn => m => m.merge(fn)
 
 const Pair = require('./Pair')
 

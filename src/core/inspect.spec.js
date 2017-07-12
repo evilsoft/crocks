@@ -2,7 +2,7 @@ const test = require('tape')
 
 const isFunction = require('./isFunction')
 const constant = require('./constant')
-const unit = require('./unit')
+const unit = require('./_unit')
 
 const inspect = require('./inspect')
 

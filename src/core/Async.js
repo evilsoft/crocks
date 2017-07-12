@@ -13,7 +13,7 @@ const isFunction = require('./isFunction')
 const isPromise = require('./isPromise')
 const isSameType = require('./isSameType')
 const once = require('./once')
-const unit = require('./unit')
+const unit = require('./_unit')
 
 const allAsyncs = xs =>
   xs.reduce((acc, x) => acc && isSameType(Async, x), true)

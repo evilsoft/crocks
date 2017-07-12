@@ -13,7 +13,7 @@ const isArray = require('./isArray')
 const isFunction = require('./isFunction')
 const isObject = require('./isObject')
 const isSameType = require('./isSameType')
-const unit = require('./unit')
+const unit = require('./_unit')
 
 const either =
   (f, g) => m => m.either(f, g)

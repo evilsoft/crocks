@@ -1,6 +1,7 @@
 const test = require('tape')
 
-const unit = require('./unit')
+const unit = require('./_unit')
+
 const isFunction = require('./isFunction')
 
 test('isFunction core', t => {

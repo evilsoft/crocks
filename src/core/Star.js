@@ -11,7 +11,9 @@ const isFunction = require('./isFunction')
 const isFunctor = require('./isFunctor')
 const isMonad = require('./isMonad')
 const isSameType = require('./isSameType')
-const merge = require('./merge')
+
+const merge =
+  (fn, m) => m.merge(fn)
 
 const sequence =
   (af, m) => array.sequence(af, m)

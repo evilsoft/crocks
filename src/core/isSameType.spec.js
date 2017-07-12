@@ -1,7 +1,7 @@
 const test = require('tape')
 
 const isFunction = require('./isFunction')
-const unit = require('./unit')
+const unit = require('./_unit')
 
 const isSameType = require('./isSameType')
 

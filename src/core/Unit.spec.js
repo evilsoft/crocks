@@ -11,7 +11,7 @@ const isObject = require('./isObject')
 const curry = require('./curry')
 const compose = curry(require('./compose'))
 const identity = require('./identity')
-const unit = require('./unit')
+const unit = require('./_unit')
 
 const reverseApply =
   x => fn => fn(x)

@@ -1,11 +1,8 @@
 module.exports = {
-  entry: './lib/index.js',
+  entry: './build/index.js',
   output: {
-    filename: 'dist/crocks.js',
+    filename: 'build/dist/crocks.js',
     library: 'crocks',
     libraryTarget: 'umd',
-  },
-  stats: {
-    warnings: false
   }
 }

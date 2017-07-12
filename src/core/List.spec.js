@@ -11,7 +11,7 @@ const constant = require('./constant')
 const identity = require('./identity')
 const isFunction = require('./isFunction')
 const isObject = require('./isObject')
-const unit = require('./unit')
+const unit = require('./_unit')
 
 const Maybe = require('./Maybe')
 const Pred = require('./Pred')

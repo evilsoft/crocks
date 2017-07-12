@@ -1,9 +1,9 @@
 const test = require('tape')
 
-const unit = require('./unit')
+const isFunction  = require('./isFunction')
+const unit = require('./_unit')
 
 const isArray = require('./isArray')
-const isFunction  = require('./isFunction')
 
 test('isArray predicate function', t => {
   t.ok(isFunction(isArray), 'is a function')

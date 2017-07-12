@@ -11,7 +11,7 @@ const constant = require('./constant')
 const identity = require('./identity')
 const isObject = require('./isObject')
 const isFunction = require('./isFunction')
-const unit = require('./unit')
+const unit = require('./_unit')
 
 const reverseApply =
   x => fn => fn(x)

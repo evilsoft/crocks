@@ -7,7 +7,7 @@ const bindFunc = helpers.bindFunc
 const _compose = require('./compose')
 const isFunction = require('./isFunction')
 const isObject = require('./isObject')
-const unit = require('./unit')
+const unit = require('./_unit')
 
 const identity = require('./identity')
 const constant = require('./constant')

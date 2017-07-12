@@ -1,7 +1,8 @@
 const test = require('tape')
-const unit = require('./unit')
 
 const isFunction = require('./isFunction')
+const unit = require('./_unit')
+
 const isPromise = require('./isPromise')
 
 test('isPromise core', t => {

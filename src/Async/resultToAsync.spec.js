@@ -18,16 +18,17 @@ test('resultToAsync transform', t => {
 
   t.ok(isFunction(resultToAsync), 'is a function')
 
-  t.throws(f(undefined), TypeError, 'throws if arg is undefined')
-  t.throws(f(null), TypeError, 'throws if arg is null')
-  t.throws(f(0), TypeError, 'throws if arg is a falsey number')
-  t.throws(f(1), TypeError, 'throws if arg is a truthy number')
-  t.throws(f(''), TypeError, 'throws if arg is a falsey string')
-  t.throws(f('string'), TypeError, 'throws if arg is a truthy string')
-  t.throws(f(false), TypeError, 'throws if arg is false')
-  t.throws(f(true), TypeError, 'throws if arg is true')
-  t.throws(f([]), TypeError, 'throws if arg is an array')
-  t.throws(f({}), TypeError, 'throws if arg is an object')
+  const err = /resultToAsync: Result or Result returing function required/
+  t.throws(f(undefined), err, 'throws if arg is undefined')
+  t.throws(f(null), err, 'throws if arg is null')
+  t.throws(f(0), err, 'throws if arg is a falsey number')
+  t.throws(f(1), err, 'throws if arg is a truthy number')
+  t.throws(f(''), err, 'throws if arg is a falsey string')
+  t.throws(f('string'), err, 'throws if arg is a truthy string')
+  t.throws(f(false), err, 'throws if arg is false')
+  t.throws(f(true), err, 'throws if arg is true')
+  t.throws(f([]), err, 'throws if arg is an array')
+  t.throws(f({}), err, 'throws if arg is an object')
 
   t.end()
 })
@@ -62,16 +63,17 @@ test('resultToAsync with Result returning function', t => {
 
   const f = bindFunc(resultToAsync(identity))
 
-  t.throws(f(undefined), TypeError, 'throws if function returns undefined')
-  t.throws(f(null), TypeError, 'throws if function returns null')
-  t.throws(f(0), TypeError, 'throws if function returns a falsey number')
-  t.throws(f(1), TypeError, 'throws if function returns a truthy number')
-  t.throws(f(''), TypeError, 'throws if function returns a falsey string')
-  t.throws(f('string'), TypeError, 'throws if function returns a truthy string')
-  t.throws(f(false), TypeError, 'throws if function returns false')
-  t.throws(f(true), TypeError, 'throws if function returns true')
-  t.throws(f([]), TypeError, 'throws if function returns an array')
-  t.throws(f({}), TypeError, 'throws if function returns an object')
+  const err = /resultToAsync: Result returing function required/
+  t.throws(f(undefined), err, 'throws if function returns undefined')
+  t.throws(f(null), err, 'throws if function returns null')
+  t.throws(f(0), err, 'throws if function returns a falsey number')
+  t.throws(f(1), err, 'throws if function returns a truthy number')
+  t.throws(f(''), err, 'throws if function returns a falsey string')
+  t.throws(f('string'), err, 'throws if function returns a truthy string')
+  t.throws(f(false), err, 'throws if function returns false')
+  t.throws(f(true), err, 'throws if function returns true')
+  t.throws(f([]), err, 'throws if function returns an array')
+  t.throws(f({}), err, 'throws if function returns an object')
 
   const lift =
     x => x !== undefined ? Result.Ok(x) : Result.Err(none)

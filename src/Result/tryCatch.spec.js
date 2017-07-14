@@ -20,16 +20,17 @@ test('tryCatch', t => {
 
   t.ok(isFunction(tryCatch), 'is a function')
 
-  t.throws(f(undefined), 'throws with undefined in first argument')
-  t.throws(f(null), 'throws with null in first argument')
-  t.throws(f(0), 'throws with falsey number in first argument')
-  t.throws(f(1), 'throws with truthy number in first argument')
-  t.throws(f(''), 'throws with falsey string in first argument')
-  t.throws(f('string'), 'throws with truthy string in first argument')
-  t.throws(f(false), 'throws with false in first argument')
-  t.throws(f(true), 'throws with true in first argument')
-  t.throws(f({}), 'throws with an object in first argument')
-  t.throws(f([]), 'throws with an array in first argument')
+  const err = /tryCatch: Function required for first argument/
+  t.throws(f(undefined), err, 'throws with undefined in first argument')
+  t.throws(f(null), err, 'throws with null in first argument')
+  t.throws(f(0), err, 'throws with falsey number in first argument')
+  t.throws(f(1), err, 'throws with truthy number in first argument')
+  t.throws(f(''), err, 'throws with falsey string in first argument')
+  t.throws(f('string'), err, 'throws with truthy string in first argument')
+  t.throws(f(false), err, 'throws with false in first argument')
+  t.throws(f(true), err, 'throws with true in first argument')
+  t.throws(f({}), err, 'throws with an object in first argument')
+  t.throws(f([]), err, 'throws with an array in first argument')
 
   t.doesNotThrow(f(unit), 'allows a function in first argument')
 

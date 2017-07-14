@@ -12,13 +12,14 @@ test('prop function', t => {
 
   t.ok(isFunction(prop), 'is a function')
 
-  t.throws(p(undefined, {}), TypeError, 'throws with undefined in first argument')
-  t.throws(p(null, {}), TypeError, 'throws with null in first argument')
-  t.throws(p(false, {}), TypeError, 'throws with false in first argument')
-  t.throws(p(true, {}), TypeError, 'throws with true in first argument')
-  t.throws(p(1.5, {}), TypeError, 'throws with float in first argument')
-  t.throws(p([], {}), TypeError, 'throws with an array in first argument')
-  t.throws(p({}, {}), TypeError, 'throws with an object in first argument')
+  const err = /prop: String or integer required for first argument/
+  t.throws(p(undefined, {}), err, 'throws with undefined in first argument')
+  t.throws(p(null, {}), err, 'throws with null in first argument')
+  t.throws(p(false, {}), err, 'throws with false in first argument')
+  t.throws(p(true, {}), err, 'throws with true in first argument')
+  t.throws(p(1.5, {}), err, 'throws with float in first argument')
+  t.throws(p([], {}), err, 'throws with an array in first argument')
+  t.throws(p({}, {}), err, 'throws with an object in first argument')
 
   const value = 'Bobby Joe'
   const obj = { a: value, bad: null }

@@ -12,22 +12,23 @@ test('propPath function', t => {
 
   t.ok(isFunction(propPath), 'is a function')
 
-  t.throws(p(undefined, {}), TypeError, 'throws with undefined in first argument')
-  t.throws(p(null, {}), TypeError, 'throws with null in first argument')
-  t.throws(p(0, {}), TypeError, 'throws with falsey number in first argument')
-  t.throws(p(1, {}), TypeError, 'throws with truthy number in first argument')
-  t.throws(p('', {}), TypeError, 'throws with falsey string in first argument')
-  t.throws(p('string', {}), TypeError, 'throws with truthy string in first argument')
-  t.throws(p(false, {}), TypeError, 'throws with false in first argument')
-  t.throws(p(true, {}), TypeError, 'throws with true in first argument')
-  t.throws(p({}, {}), TypeError, 'throws with an object in first argument')
+  const err = /propPath: Array of strings or integers required for first argument/
+  t.throws(p(undefined, {}), err, 'throws with undefined in first argument')
+  t.throws(p(null, {}), err, 'throws with null in first argument')
+  t.throws(p(0, {}), err, 'throws with falsey number in first argument')
+  t.throws(p(1, {}), err, 'throws with truthy number in first argument')
+  t.throws(p('', {}), err, 'throws with falsey string in first argument')
+  t.throws(p('string', {}), err, 'throws with truthy string in first argument')
+  t.throws(p(false, {}), err, 'throws with false in first argument')
+  t.throws(p(true, {}), err, 'throws with true in first argument')
+  t.throws(p({}, {}), err, 'throws with an object in first argument')
 
-  t.throws(p([ undefined ], {}), TypeError, 'throws with an array of undefined in first argument')
-  t.throws(p([ null ], {}), TypeError, 'throws with array of null in first argument')
-  t.throws(p(false, {}), TypeError, 'throws with an arrau of false in first argument')
-  t.throws(p(true, {}), TypeError, 'throws with an array of true in first argument')
-  t.throws(p([ {} ], {}), TypeError, 'throws with an array of objects in first argument')
-  t.throws(p([ [ 'key' ] ], {}), TypeError, 'throws with a nested array in first argument')
+  t.throws(p([ undefined ], {}), err, 'throws with an array of undefined in first argument')
+  t.throws(p([ null ], {}), err, 'throws with array of null in first argument')
+  t.throws(p(false, {}), err, 'throws with an arrau of false in first argument')
+  t.throws(p(true, {}), err, 'throws with an array of true in first argument')
+  t.throws(p([ {} ], {}), err, 'throws with an array of objects in first argument')
+  t.throws(p([ [ 'key' ] ], {}), err, 'throws with a nested array in first argument')
 
   const value = 'Cry Clown Cry'
   const obj = { a: { b: value }, bad: { thing: null } }

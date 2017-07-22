@@ -1,23 +1,6 @@
-node_modules
-test
-src
 *.spec.js
-
 .npmignore
-.babelrc
-webpack.config.js
 
-CHANGELOG.md
-
-.travis.yml
-.eslintignore
-.eslintrc
-
-coverage
-.coveralls.yml
-.nyc_output/
-
-.node-version
 *.log
 .DS_Store
 .DS_Store?

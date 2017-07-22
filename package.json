@@ -5,7 +5,7 @@
   "main": "./index.js",
   "scripts": {
     "preversion": "npm run build",
-    "build:publish": "npm test && npm run build && npm publish",
+    "build:publish": "npm test && ./bin/publish",
     "build:dist": "webpack && uglifyjs build/dist/crocks.js -c \"warnings=false\" -m -o build/dist/crocks.min.js",
     "build": "rm -rf build && buble -i src -o build && npm run build:dist",
     "lint": "eslint .",

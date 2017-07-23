@@ -4,13 +4,11 @@
 const _implements = require('../core/implements')
 const _innerConcat = require('../core/innerConcat')
 const _inspect = require('../core/inspect')
-const constant = require('../core/constant')
+const _type = require('../core/types').types('Identity')
+
 const isApplicative = require('../core/isApplicative')
 const isFunction = require('../core/isFunction')
 const isSameType = require('../core/isSameType')
-
-const _type =
-  constant('Identity')
 
 const _of =
   Identity
@@ -21,7 +19,7 @@ function Identity(x) {
   }
 
   const value =
-    constant(x)
+    () => x
 
   const type =
     _type
@@ -33,7 +31,7 @@ function Identity(x) {
     m => isSameType(Identity, m) && x === m.value()
 
   const inspect =
-    constant(`Identity${_inspect(x)}`)
+    () => `Identity${_inspect(x)}`
 
   function concat(m) {
     if(!isSameType(Identity, m)) {

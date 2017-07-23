@@ -25,7 +25,6 @@ test('State', t => {
   t.ok(isFunction(State.of), 'provides an of function')
   t.ok(isFunction(State.type), 'provides a type function')
   t.ok(isFunction(State.get), 'provides a get function')
-  t.ok(isFunction(State.gets), 'provides a gets function')
   t.ok(isFunction(State.put), 'provides a put function')
   t.ok(isFunction(State.modify), 'provides a modify function')
 
@@ -139,35 +138,24 @@ test('State evalWith', t => {
 })
 
 test('State get', t => {
-  const state = State.get()
-  const v = 75
+  const get = bindFunc(State.get)
 
-  t.equals(state.type(), State.type(), 'returns a State')
-  t.equals(state.runWith(v).type(), Pair.type(), 'returns a Pair when ran')
-  t.equals(state.evalWith(v), v, 'sets the result value to ran state')
-  t.equals(state.execWith(v), v, 'sets the state value to ran state')
-
-  t.end()
-})
-
-test('State gets', t => {
-  const gets = bindFunc(State.gets)
-
-  t.throws(gets(undefined), TypeError, 'throws with undefined')
-  t.throws(gets(null), TypeError, 'throws with null')
-  t.throws(gets(0), TypeError, 'throws with falsey number')
-  t.throws(gets(1), TypeError, 'throws with truthy number')
-  t.throws(gets(''), TypeError, 'throws with falsey string')
-  t.throws(gets('string'), TypeError, 'throws with truthy string')
-  t.throws(gets(false), TypeError, 'throws with false')
-  t.throws(gets(true), TypeError, 'throws with true')
-  t.throws(gets([]), TypeError, 'throws with an array')
-  t.throws(gets({}), TypeError, 'throws with an object')
+  const err = /State.get: Function Required/
+  t.throws(get(undefined), err, 'throws with undefined')
+  t.throws(get(null), err, 'throws with null')
+  t.throws(get(0), err, 'throws with falsey number')
+  t.throws(get(1), err, 'throws with truthy number')
+  t.throws(get(''), err, 'throws with falsey string')
+  t.throws(get('string'), err, 'throws with truthy string')
+  t.throws(get(false), err, 'throws with false')
+  t.throws(get(true), err, 'throws with true')
+  t.throws(get([]), err, 'throws with an array')
+  t.throws(get({}), err, 'throws with an object')
 
   const f = x => x * 2
   const v = 75
 
-  const state = State.gets(f)
+  const state = State.get(f)
 
   t.equals(state.type(), State.type(), 'returns a State')
   t.equals(state.runWith(v).type(), Pair.type(), 'returns a Pair when ran')

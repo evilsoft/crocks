@@ -4,9 +4,11 @@
 const _compose = require('./compose')
 const _implements = require('./implements')
 const _inspect = require('./inspect')
+const _type = require('../core/types').types('Star')
+
 const Pair = require('./Pair')
+
 const array = require('./array')
-const constant = require('./constant')
 const isFunction = require('./isFunction')
 const isFunctor = require('./isFunctor')
 const isMonad = require('./isMonad')
@@ -18,9 +20,6 @@ const merge =
 const sequence =
   (af, m) => array.sequence(af, m)
 
-const _type =
-  constant('Star')
-
 function Star(runWith) {
   if(!isFunction(runWith)) {
     throw new TypeError('Star: Function in the form (a -> f b) required')
@@ -30,7 +29,7 @@ function Star(runWith) {
     _type
 
   const inspect =
-    constant(`Star${_inspect(runWith)}`)
+    () => `Star${_inspect(runWith)}`
 
   function compose(s) {
     if(!isSameType(Star, s)) {

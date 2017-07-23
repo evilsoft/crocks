@@ -3,8 +3,8 @@
 
 const _implements = require('./implements')
 const _inspect = require('./inspect')
-const constant = require('./constant')
-const identity = require('./identity')
+const _type = require('../core/types').types('First')
+
 const isSameType = require('./isSameType')
 
 const Maybe = require('./Maybe')
@@ -12,16 +12,13 @@ const Maybe = require('./Maybe')
 const _empty =
   () => First(Maybe.Nothing())
 
-const _type =
-  constant('First')
-
 function First(x) {
   if(!arguments.length) {
     throw new TypeError('First: Requires one argument')
   }
 
   const maybe =
-    !isSameType(Maybe, x) ? Maybe.of(x) : x.map(identity)
+    !isSameType(Maybe, x) ? Maybe.of(x) : x.map(x => x)
 
   const empty =
     _empty
@@ -30,10 +27,10 @@ function First(x) {
     _type
 
   const inspect =
-    constant(`First(${_inspect(maybe)} )`)
+    () => `First(${_inspect(maybe)} )`
 
   const value =
-    constant(maybe)
+    () => maybe
 
   const option =
     maybe.option
@@ -44,10 +41,10 @@ function First(x) {
     }
 
     const n =
-      m.value().map(identity)
+      m.value().map(x => x)
 
     return First(
-      maybe.either(constant(n), Maybe.Just)
+      maybe.either(() => n, Maybe.Just)
     )
   }
 

@@ -3,16 +3,14 @@
 
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
+const _type = require('../core/types').types('IO')
+
 const compose = require('../core/compose')
-const constant = require('../core/constant')
 const isFunction = require('../core/isFunction')
 const isSameType = require('../core/isSameType')
 
-const _type =
-  constant('IO')
-
 const _of =
-  x => IO(constant(x))
+  x => IO(() => x)
 
 function IO(run) {
   if(!isFunction(run)) {
@@ -26,7 +24,7 @@ function IO(run) {
     _of
 
   const inspect =
-    constant(`IO${_inspect(run)}`)
+    () => `IO${_inspect(run)}`
 
   function map(fn) {
     if(!isFunction(fn)) {

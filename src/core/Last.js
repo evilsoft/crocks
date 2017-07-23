@@ -3,8 +3,8 @@
 
 const _implements = require('./implements')
 const _inspect = require('./inspect')
-const constant = require('./constant')
-const identity = require('./identity')
+const _type = require('../core/types').types('Last')
+
 const isSameType = require('./isSameType')
 
 const Maybe = require('./Maybe')
@@ -12,19 +12,16 @@ const Maybe = require('./Maybe')
 const _empty =
   () => Last(Maybe.Nothing())
 
-const _type =
-  constant('Last')
-
 function Last(x) {
   if(!arguments.length) {
     throw new TypeError('Last: Requires one argument')
   }
 
   const maybe =
-    !isSameType(Maybe, x) ? Maybe.of(x) : x.map(identity)
+    !isSameType(Maybe, x) ? Maybe.of(x) : x.map(x => x)
 
   const value =
-    constant(maybe)
+    () => maybe
 
   const type =
     _type
@@ -33,7 +30,7 @@ function Last(x) {
     _empty
 
   const inspect =
-    constant(`Last(${_inspect(maybe)} )`)
+    () => `Last(${_inspect(maybe)} )`
 
   const option =
     maybe.option
@@ -44,12 +41,12 @@ function Last(x) {
     }
 
     const n =
-      m.value().map(identity)
+      m.value().map(x => x)
 
     return Last(
       maybe.either(
-        constant(n),
-        constant(n.either(constant(maybe), constant(n)))
+        () => n,
+        () => n.either(() => maybe, () => n)
       )
     )
   }

@@ -3,16 +3,14 @@
 
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
-const constant = require('../core/constant')
+const _type = require('../core/types').types('Sum')
+
 const isNil = require('../core/isNil')
 const isNumber = require('../core/isNumber')
 const isSameType = require('../core/isSameType')
 
 const _empty =
   () => Sum(0)
-
-const _type =
-  constant('Sum')
 
 function Sum(n) {
   const x = isNil(n) ? _empty().value() : n
@@ -22,7 +20,7 @@ function Sum(n) {
   }
 
   const value =
-    constant(x)
+    () => x
 
   const type =
     _type
@@ -31,7 +29,7 @@ function Sum(n) {
     _empty
 
   const inspect =
-    constant(`Sum${_inspect(value())}`)
+    () => `Sum${_inspect(value())}`
 
   function concat(m) {
     if(!isSameType(Sum, m)) {

@@ -3,16 +3,14 @@
 
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
+const _type = require('../core/types').types('Reader')
+
 const compose = require('../core/compose')
-const constant = require('../core/constant')
 const isFunction = require('../core/isFunction')
 const isSameType = require('../core/isSameType')
 
 const _of =
-  x => Reader(constant(x))
-
-const _type =
-  constant('Reader')
+  x => Reader(() => x)
 
 function ask(fn) {
   if(!isFunction(fn)) {
@@ -33,7 +31,7 @@ function Reader(runWith) {
     _of
 
   const inspect =
-    constant(`Reader${_inspect(runWith)}`)
+    () => `Reader${_inspect(runWith)}`
 
   function map(fn) {
     if(!isFunction(fn)) {

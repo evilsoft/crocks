@@ -3,16 +3,14 @@
 
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
-const constant = require('../core/constant')
+const _type = require('../core/types').types('Prod')
+
 const isNil = require('../core/isNil')
 const isNumber = require('../core/isNumber')
 const isSameType = require('../core/isSameType')
 
 const _empty =
   () => Prod(1)
-
-const _type =
-  constant('Prod')
 
 function Prod(n) {
   const x = isNil(n) ? _empty().value() : n
@@ -22,7 +20,7 @@ function Prod(n) {
   }
 
   const value =
-    constant(x)
+    () => x
 
   const type =
     _type
@@ -31,7 +29,7 @@ function Prod(n) {
     _empty
 
   const inspect =
-    constant(`Prod${_inspect(value())}`)
+    () => `Prod${_inspect(value())}`
 
   function concat(m) {
     if(!isSameType(Prod, m)) {

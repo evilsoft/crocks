@@ -5,6 +5,8 @@ const _defineUnion = require('./defineUnion')
 const _implements = require('./implements')
 const _innerConcat = require('./innerConcat')
 const _inspect = require('./inspect')
+const _type = require('../core/types').types('Maybe')
+
 const compose = require('./compose')
 const constant = require('./constant')
 const identity = require('./identity')
@@ -29,9 +31,6 @@ Maybe.Just =
 
 const _of =
   compose(Maybe, Just)
-
-const _type=
-  constant('Maybe')
 
 const _zero =
   compose(Maybe, Nothing)

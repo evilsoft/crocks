@@ -4,9 +4,10 @@
 const _argsArray = require('./argsArray')
 const _implements = require('./implements')
 const _inspect = require('./inspect')
+const _type = require('./types').types('Async')
+
 const array = require('./array')
 const compose = require('./compose')
-const constant = require('./constant')
 const isArray = require('./isArray')
 const isFoldable = require('./isFoldable')
 const isFunction = require('./isFunction')
@@ -17,9 +18,6 @@ const unit = require('./_unit')
 
 const allAsyncs = xs =>
   xs.reduce((acc, x) => acc && isSameType(Async, x), true)
-
-const _type =
-  constant('Async')
 
 const _of =
   x => Async((_, resolve) => resolve(x))
@@ -98,7 +96,7 @@ function Async(fn, parentCancel) {
     _of
 
   const inspect =
-    constant(`Async${_inspect(fn)}`)
+    () => `Async${_inspect(fn)}`
 
   function fork(reject, resolve, cleanup) {
     if(!isFunction(reject) || !isFunction(resolve)) {

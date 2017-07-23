@@ -3,13 +3,11 @@
 
 const _implements = require('./implements')
 const _inspect = require('./inspect')
-const constant = require('./constant')
+const _type = require('../core/types').types('Pair')
+
 const isFunction = require('./isFunction')
 const isSameType = require('./isSameType')
 const isSemigroup = require('./isSemigroup')
-
-const _type =
-  constant('Pair')
 
 function Pair(l, r) {
   if(arguments.length < 2) {
@@ -20,10 +18,10 @@ function Pair(l, r) {
     _type
 
   const fst =
-    constant(l)
+    () => l
 
   const snd =
-    constant(r)
+    () => r
 
   const inspect =
     () => `Pair(${_inspect(l)},${_inspect(r)} )`

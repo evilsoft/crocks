@@ -5,6 +5,7 @@ const _defineUnion = require('./defineUnion')
 const _implements = require('./implements')
 const _innerConcat = require('./innerConcat')
 const _inspect = require('./inspect')
+const _type = require('../core/types').types('Result')
 
 const compose = require('./compose')
 const constant = require('./constant')
@@ -24,9 +25,6 @@ Result.Ok =
 
 const _of =
   Result.Ok
-
-const _type =
-  constant('Result')
 
 const concatErr =
   m => x => m.either(

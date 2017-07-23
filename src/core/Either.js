@@ -5,6 +5,7 @@ const _defineUnion = require('./defineUnion')
 const _implements = require('./implements')
 const _innerConcat = require('./innerConcat')
 const _inspect = require('./inspect')
+const _type = require('../core/types').types('Either')
 
 const compose = require('./compose')
 const constant = require('./constant')
@@ -25,9 +26,6 @@ Either.Right =
 
 const _of =
   Either.Right
-
-const _type =
-  constant('Either')
 
 function runSequence(x) {
   if(!isApplicative(x)) {

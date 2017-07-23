@@ -3,16 +3,14 @@
 
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
-const constant = require('../core/constant')
+const _type = require('../core/types').types('Max')
+
 const isNil = require('../core/isNil')
 const isNumber = require('../core/isNumber')
 const isSameType = require('../core/isSameType')
 
 const _empty =
   () => Max(-Infinity)
-
-const _type =
-  constant('Max')
 
 function Max(n) {
   const x = isNil(n) ? _empty().value() : n
@@ -22,7 +20,7 @@ function Max(n) {
   }
 
   const value =
-    constant(x)
+    () => x
 
   const type =
     _type
@@ -31,7 +29,7 @@ function Max(n) {
     _empty
 
   const inspect =
-    constant(`Max${_inspect(value())}`)
+    () => `Max${_inspect(value())}`
 
   function concat(m) {
     if(!isSameType(Max, m)) {

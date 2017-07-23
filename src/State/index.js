@@ -3,21 +3,20 @@
 
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
+const _type = require('../core/types').types('State')
+
 const Pair = require('../core/Pair')
 const Unit = require('../core/Unit')
-const constant = require('../core/constant')
+
 const isFunction = require('../core/isFunction')
 const isSameType = require('../core/isSameType')
 
 const _of =
   x => State(s => Pair(x, s))
 
-const _type =
-  constant('State')
-
-function gets(fn) {
+function get(fn) {
   if(!isFunction(fn)) {
-    throw new TypeError('State.gets: Function Required')
+    throw new TypeError('State.get: Function Required')
   }
 
   return State(s => Pair(fn(s), s))
@@ -43,7 +42,7 @@ function State(runWith) {
     _type
 
   const inspect =
-    constant(`State${_inspect(runWith)}`)
+    () => `State${_inspect(runWith)}`
 
   function execWith(s) {
     const pair = runWith(s)
@@ -139,13 +138,10 @@ State.type =
   _type
 
 State.get =
-  () => State(s => Pair(s, s))
-
-State.gets =
-  gets
+  get
 
 State.put =
-  x => modify(constant(x))
+  x => modify(() => (x))
 
 State.modify =
   modify

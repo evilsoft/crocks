@@ -3,8 +3,8 @@
 
 const _implements = require('./implements')
 const _inspect = require('./inspect')
+const _type = require('../core/types').types('List')
 
-const constant = require('./constant')
 const isApplicative = require('./isApplicative')
 const isArray = require('./isArray')
 const isEmpty = require('./isEmpty')
@@ -21,9 +21,6 @@ const _concat =
 
 const { Nothing, Just }= require('./Maybe')
 const Pred = require('./Pred')
-
-const _type =
-  constant('List')
 
 const _of =
   x => List([ x ])

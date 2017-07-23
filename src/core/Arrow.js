@@ -1,18 +1,16 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
+const _compose = require('./compose')
 const _implements = require('./implements')
 const _inspect = require('./inspect')
-const _compose = require('./compose')
-const constant = require('./constant')
+const _type = require('./types').types('Arrow')
+
 const identity = require('./identity')
 const isFunction = require('./isFunction')
 const isSameType = require('./isSameType')
 
 const Pair = require('./Pair')
-
-const _type =
-  constant('Arrow')
 
 const _id =
   () => Arrow(identity)
@@ -26,10 +24,10 @@ function Arrow(runWith) {
     _type
 
   const value =
-    constant(runWith)
+    () => runWith
 
   const inspect =
-    constant(`Arrow${_inspect(value())}`)
+    () => `Arrow${_inspect(value())}`
 
   const id =
     _id

@@ -2,12 +2,10 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const _implements = require('./implements')
-const constant = require('./constant')
+const _type = require('../core/types').types('Unit')
+
 const isFunction = require('./isFunction')
 const isSameType = require('./isSameType')
-
-const _type =
-  constant('Unit')
 
 const _of =
   Unit
@@ -20,10 +18,10 @@ function Unit() {
     m => isSameType(Unit, m)
 
   const inspect =
-    constant('()')
+    () => '()'
 
   const value =
-    constant(undefined)
+    () => undefined
 
   const type =
     _type

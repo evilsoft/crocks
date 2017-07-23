@@ -3,16 +3,14 @@
 
 const _implements = require('./implements')
 const _inspect = require('./inspect')
+const _type = require('../core/types').types('Pred')
+
 const compose = require('./compose')
-const constant = require('./constant')
 const isFunction = require('./isFunction')
 const isSameType = require('./isSameType')
 
-const _type =
-  constant('Pred')
-
 const _empty =
-  () => Pred(constant(true))
+  () => Pred(() => true)
 
 function Pred(pred) {
   if(!isFunction(pred)) {
@@ -26,13 +24,13 @@ function Pred(pred) {
     _type
 
   const inspect =
-    constant(`Pred${_inspect(runWith)}`)
+    () => `Pred${_inspect(runWith)}`
 
   const empty =
     _empty
 
   const value =
-    constant(runWith)
+    () => runWith
 
   function concat(m) {
     if(!isSameType(Pred, m)) {

@@ -4,16 +4,14 @@
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
 const _object = require('../core/object')
-const constant = require('../core/constant')
+const _type = require('../core/types').types('Assign')
+
 const isNil = require('../core/isNil')
 const isObject = require('../core/isObject')
 const isSameType = require('../core/isSameType')
 
 const _empty =
   () => Assign({})
-
-const _type =
-  constant('Assign')
 
 function Assign(o) {
   const x = isNil(o) ? _empty().value() : o
@@ -23,7 +21,7 @@ function Assign(o) {
   }
 
   const value =
-    constant(x)
+    () => x
 
   const type =
     _type
@@ -32,7 +30,7 @@ function Assign(o) {
     _empty
 
   const inspect =
-    constant(`Assign${_inspect(value())}`)
+    () => `Assign${_inspect(value())}`
 
   function concat(m) {
     if(!isSameType(Assign, m)) {

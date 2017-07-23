@@ -3,16 +3,14 @@
 
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
-const constant = require('../core/constant')
+const _type = require('../core/types').types('All')
+
 const isFunction = require('../core/isFunction')
 const isNil = require('../core/isNil')
 const isSameType = require('../core/isSameType')
 
 const _empty =
   () => All(true)
-
-const _type =
-  constant('All')
 
 function All(b) {
   const x = isNil(b) ? _empty().value() : b
@@ -22,7 +20,7 @@ function All(b) {
   }
 
   const value =
-    constant(!!x)
+    () => !!x
 
   const type =
     _type
@@ -31,7 +29,7 @@ function All(b) {
     _empty
 
   const inspect =
-    constant(`All${_inspect(value())}`)
+    () => `All${_inspect(value())}`
 
   function concat(m) {
     if(!isSameType(All, m)) {

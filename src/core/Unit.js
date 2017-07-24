@@ -2,7 +2,7 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const _implements = require('./implements')
-const type = require('../core/types').type('Unit')
+const type = require('./types').type('Unit')
 
 const isFunction = require('./isFunction')
 const isSameType = require('./isSameType')

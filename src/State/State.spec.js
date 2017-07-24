@@ -137,10 +137,10 @@ test('State evalWith', t => {
   t.end()
 })
 
-test('State get', t => {
+test('State get errors', t => {
   const get = bindFunc(State.get)
 
-  const err = /State.get: Function Required/
+  const err = /State.get: No arguments or function required/
   t.throws(get(undefined), err, 'throws with undefined')
   t.throws(get(null), err, 'throws with null')
   t.throws(get(0), err, 'throws with falsey number')
@@ -152,14 +152,36 @@ test('State get', t => {
   t.throws(get([]), err, 'throws with an array')
   t.throws(get({}), err, 'throws with an object')
 
+  t.doesNotThrow(get(identity), 'does not throw with a function')
+  t.doesNotThrow(get(), 'does not throw without a function')
+
+  t.end()
+})
+
+test('State get with function', t => {
   const f = x => x * 2
   const v = 75
 
   const state = State.get(f)
 
   t.equals(state.type(), State.type(), 'returns a State')
+
   t.equals(state.runWith(v).type(), Pair.type(), 'returns a Pair when ran')
   t.equals(state.evalWith(v), f(v), 'sets the result value to value returned by the function')
+  t.equals(state.execWith(v), v, 'sets the state value to ran state')
+
+  t.end()
+})
+
+test('State get without function', t => {
+  const v = 75
+
+  const state = State.get()
+
+  t.equals(state.type(), State.type(), 'returns a State')
+
+  t.equals(state.runWith(v).type(), Pair.type(), 'returns a Pair when ran')
+  t.equals(state.evalWith(v), v, 'sets the result value to value returned by the function')
   t.equals(state.execWith(v), v, 'sets the state value to ran state')
 
   t.end()

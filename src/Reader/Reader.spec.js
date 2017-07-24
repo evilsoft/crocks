@@ -88,23 +88,25 @@ test('Reader runWith', t => {
 test('Reader ask errors', t => {
   const ask = bindFunc(Reader.ask)
 
-  t.throws(ask(undefined), TypeError, 'throws with undefined')
-  t.throws(ask(null), TypeError, 'throws with null')
-  t.throws(ask(0), TypeError, 'throws with falsey number')
-  t.throws(ask(1), TypeError, 'throws with truthy number')
-  t.throws(ask(''), TypeError, 'throws with falsey string')
-  t.throws(ask('string'), TypeError, 'throws with truthy string')
-  t.throws(ask(false), TypeError, 'throws with false')
-  t.throws(ask(true), TypeError, 'throws with true')
-  t.throws(ask([]), TypeError, 'throws with an array')
-  t.throws(ask({}), TypeError, 'throws with an object')
+  const err = /Reader.ask: No argument or function required/
+  t.throws(ask(undefined), err, 'throws with undefined')
+  t.throws(ask(null), err, 'throws with null')
+  t.throws(ask(0), err, 'throws with falsey number')
+  t.throws(ask(1), err, 'throws with truthy number')
+  t.throws(ask(''), err, 'throws with falsey string')
+  t.throws(ask('string'), err, 'throws with truthy string')
+  t.throws(ask(false), err, 'throws with false')
+  t.throws(ask(true), err, 'throws with true')
+  t.throws(ask([]), err, 'throws with an array')
+  t.throws(ask({}), err, 'throws with an object')
 
   t.doesNotThrow(ask(unit), 'allows a function')
+  t.doesNotThrow(ask(), 'allows nothing')
 
   t.end()
 })
 
-test('Reader ask functionality', t => {
+test('Reader ask with function', t => {
   const f = sinon.spy(identity)
   const x = Reader.ask(f)
 
@@ -112,6 +114,17 @@ test('Reader ask functionality', t => {
 
   t.equal(x.type(), 'Reader', 'returns a Reader')
   t.ok(f.calledWith(3), 'returned Reader wraps the passed function')
+  t.end()
+})
+
+test('Reader ask without function', t => {
+  const x = Reader.ask()
+  const data = 3
+
+  const result = x.runWith(data)
+
+  t.equal(x.type(), 'Reader', 'returns a Reader')
+  t.equal(result,  data, 'returns identity of passed value')
   t.end()
 })
 

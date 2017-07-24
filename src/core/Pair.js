@@ -3,7 +3,7 @@
 
 const _implements = require('./implements')
 const _inspect = require('./inspect')
-const type = require('../core/types').type('Pair')
+const type = require('./types').type('Pair')
 
 const isFunction = require('./isFunction')
 const isSameType = require('./isSameType')

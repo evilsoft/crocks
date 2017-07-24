@@ -5,7 +5,7 @@ const _defineUnion = require('./defineUnion')
 const _implements = require('./implements')
 const _innerConcat = require('./innerConcat')
 const _inspect = require('./inspect')
-const type = require('../core/types').type('Maybe')
+const type = require('./types').type('Maybe')
 
 const compose = require('./compose')
 const constant = require('./constant')

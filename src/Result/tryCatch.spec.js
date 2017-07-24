@@ -3,7 +3,7 @@ const helpers = require('../../test/helpers')
 
 const bindFunc = helpers.bindFunc
 
-const Result = require('../core/Result')
+const Result = require('.')
 const constant = require('../core/constant')
 const identity = require('../core/identity')
 const isFunction = require('../core/isFunction')

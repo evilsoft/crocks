@@ -2,7 +2,7 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const Result = require('.')
-const Either = require('../core/Either')
+const Either = require('../core/types').proxy('Either')
 
 const curry = require('../core/curry')
 const isFunction = require('../core/isFunction')

@@ -3,16 +3,14 @@
 
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
-const constant = require('../core/constant')
+const type = require('../core/types').type('Min')
+
 const isNil = require('../core/isNil')
 const isNumber = require('../core/isNumber')
 const isSameType = require('../core/isSameType')
 
 const _empty =
   () => Min(Infinity)
-
-const _type =
-  constant('Min')
 
 function Min(n) {
   const x = isNil(n) ? _empty().value() : n
@@ -22,16 +20,13 @@ function Min(n) {
   }
 
   const value =
-    constant(x)
-
-  const type =
-    _type
+    () => x
 
   const empty =
     _empty
 
   const inspect =
-    constant(`Min${_inspect(value())}`)
+    () => `Min${_inspect(value())}`
 
   function concat(m) {
     if(!isSameType(Min, m)) {
@@ -48,10 +43,7 @@ Min['@@implements'] = _implements(
   [ 'concat', 'empty' ]
 )
 
-Min.empty =
-  _empty
-
-Min.type =
-  _type
+Min.empty = _empty
+Min.type = type
 
 module.exports = Min

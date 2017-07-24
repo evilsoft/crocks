@@ -3,17 +3,14 @@
 
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
+const type = require('../core/types').type('Endo')
+
 const compose = require('../core/compose')
-const constant = require('../core/constant')
-const identity = require('../core/identity')
 const isFunction = require('../core/isFunction')
 const isSameType = require('../core/isSameType')
 
 const _empty =
-  () => Endo(identity)
-
-const _type =
-  constant('Endo')
+  () => Endo(x => x)
 
 function Endo(runWith) {
   if(!isFunction(runWith)) {
@@ -21,16 +18,13 @@ function Endo(runWith) {
   }
 
   const value =
-    constant(runWith)
-
-  const type =
-    _type
+    () => runWith
 
   const empty =
     _empty
 
   const inspect =
-    constant(`Endo${_inspect(value())}`)
+    () => `Endo${_inspect(value())}`
 
   function concat(m) {
     if(!isSameType(Endo, m)) {
@@ -47,11 +41,8 @@ Endo['@@implements'] = _implements(
   [ 'concat', 'empty' ]
 )
 
-Endo.empty =
-  _empty
-
-Endo.type =
-  _type
+Endo.empty = _empty
+Endo.type = type
 
 module.exports = Endo
 

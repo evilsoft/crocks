@@ -3,16 +3,14 @@
 
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
+const type = require('../core/types').type('Reader')
+
 const compose = require('../core/compose')
-const constant = require('../core/constant')
 const isFunction = require('../core/isFunction')
 const isSameType = require('../core/isSameType')
 
 const _of =
-  x => Reader(constant(x))
-
-const _type =
-  constant('Reader')
+  x => Reader(() => x)
 
 function ask(fn) {
   if(!isFunction(fn)) {
@@ -26,14 +24,11 @@ function Reader(runWith) {
     throw new TypeError('Reader: Must wrap a function')
   }
 
-  const type =
-    _type
-
   const of =
     _of
 
   const inspect =
-    constant(`Reader${_inspect(runWith)}`)
+    () => `Reader${_inspect(runWith)}`
 
   function map(fn) {
     if(!isFunction(fn)) {
@@ -73,14 +68,9 @@ function Reader(runWith) {
   }
 }
 
-Reader.of =
-  _of
-
-Reader.type =
-  _type
-
-Reader.ask =
-  ask
+Reader.of = _of
+Reader.type = type
+Reader.ask = ask
 
 Reader['@@implements'] = _implements(
   [ 'ap', 'chain', 'map', 'of' ]

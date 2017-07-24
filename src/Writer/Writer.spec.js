@@ -79,7 +79,7 @@ test('Writer type', t => {
   const m = Writer(0, 0)
 
   t.ok(isFunction(m.type), 'is a function')
-  t.equal(m.type(), 'Writer(Last)', 'returns Writer with Monoid Type')
+  t.equal(m.type(), 'Writer( Last )', 'returns Writer with Monoid Type')
   t.end()
 })
 
@@ -175,7 +175,7 @@ test('Writer map functionality', t => {
 
   const m = Writer(l, x).map(spy)
 
-  t.equal(m.type(), 'Writer(Last)', 'returns a Writer')
+  t.equal(m.type(), 'Writer( Last )', 'returns a Writer')
   t.equal(spy.called, true, 'calls mapping function')
   t.equal(m.value(), x, 'returns the result of the map inside of new Writer, on value key')
   t.same(m.log().value(), l, 'returns the result of the map inside of new Writer, on log key')
@@ -261,7 +261,7 @@ test('Writer of', t => {
 
   t.equal(Writer.of, Writer(0, 0).of, 'Writer.of is the same as the instance version')
 
-  t.equal(w.type(), 'Writer(Last)', 'returns an Writer')
+  t.equal(w.type(), 'Writer( Last )', 'returns an Writer')
   t.equal(w.value(), 0, 'wraps the value passed into a Writer')
   t.same(w.log().value(), Last.empty().value(), 'provides an empty Monoid as the log')
 

@@ -3,8 +3,9 @@ const helpers = require('../../test/helpers')
 
 const bindFunc = helpers.bindFunc
 
-const Last = require('../core/Last')
-const Result = require('../core/Result')
+const Result = require('.')
+const Last = require('../Last')
+
 const identity = require('../core/identity')
 const isFunction = require('../core/isFunction')
 const isSameType = require('../core/isSameType')

@@ -3,7 +3,8 @@ const helpers = require('../../test/helpers')
 
 const bindFunc = helpers.bindFunc
 
-const Pred = require('../core/Pred')
+const Pred = require('../Pred')
+
 const isFunction = require('../core/isFunction')
 const unit = require('../core/_unit')
 

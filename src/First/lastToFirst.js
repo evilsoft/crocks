@@ -2,7 +2,7 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const First = require('.')
-const Last = require('../core/Last')
+const Last = require('../core/types').proxy('Last')
 
 const curry = require('../core/curry')
 const isFunction = require('../core/isFunction')

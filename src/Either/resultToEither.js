@@ -1,8 +1,9 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const Either = require('../core/Either')
-const Result = require('../core/Result')
+const Either = require('.')
+const Result = require('../core/types').proxy('Result')
+
 const curry = require('../core/curry')
 const isFunction = require('../core/isFunction')
 const isSameType = require('../core/isSameType')

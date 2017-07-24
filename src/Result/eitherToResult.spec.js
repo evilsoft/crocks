@@ -4,7 +4,7 @@ const helpers = require('../../test/helpers')
 const bindFunc = helpers.bindFunc
 
 const Result = require('.')
-const Either = require('../core/Either')
+const Either = require('../Either')
 
 const constant = require('../core/constant')
 const identity = require('../core/identity')
@@ -53,7 +53,7 @@ test('eitherToResult with Result returning function', t => {
   const some = 'something'
   const none = 'nothing'
 
-  t.ok(isFunction(eitherToResult(Either.of)), 'returns a function')
+  t.ok(isFunction(eitherToResult(Either.Right)), 'returns a function')
 
   const f = bindFunc(eitherToResult(identity))
 

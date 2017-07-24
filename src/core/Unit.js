@@ -2,12 +2,10 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const _implements = require('./implements')
-const constant = require('./constant')
+const type = require('../core/types').type('Unit')
+
 const isFunction = require('./isFunction')
 const isSameType = require('./isSameType')
-
-const _type =
-  constant('Unit')
 
 const _of =
   Unit
@@ -20,13 +18,10 @@ function Unit() {
     m => isSameType(Unit, m)
 
   const inspect =
-    constant('()')
+    () => '()'
 
   const value =
-    constant(undefined)
-
-  const type =
-    _type
+    () => undefined
 
   const of =
     _of
@@ -72,14 +67,9 @@ function Unit() {
   }
 }
 
-Unit.type =
-  _type
-
-Unit.of =
-  _of
-
-Unit.empty =
-  _empty
+Unit.type = type
+Unit.of = _of
+Unit.empty = _empty
 
 Unit['@@implements'] = _implements(
   [ 'ap', 'chain', 'concat', 'empty', 'equals', 'map', 'of' ]

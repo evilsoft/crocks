@@ -3,30 +3,25 @@
 
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
+const type = require('../core/types').type('IO')
+
 const compose = require('../core/compose')
-const constant = require('../core/constant')
 const isFunction = require('../core/isFunction')
 const isSameType = require('../core/isSameType')
 
-const _type =
-  constant('IO')
-
 const _of =
-  x => IO(constant(x))
+  x => IO(() => x)
 
 function IO(run) {
   if(!isFunction(run)) {
     throw new TypeError('IO: Must wrap a function')
   }
 
-  const type =
-    _type
-
   const of =
     _of
 
   const inspect =
-    constant(`IO${_inspect(run)}`)
+    () => `IO${_inspect(run)}`
 
   function map(fn) {
     if(!isFunction(fn)) {
@@ -66,11 +61,8 @@ function IO(run) {
   }
 }
 
-IO.of =
-  _of
-
-IO.type =
-  _type
+IO.of = _of
+IO.type = type
 
 IO['@@implements'] = _implements(
   [ 'ap', 'chain', 'map', 'of' ]

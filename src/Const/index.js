@@ -3,12 +3,10 @@
 
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
-const constant = require('../core/constant')
+const type = require('../core/types').type('Const')
+
 const isFunction = require('../core/isFunction')
 const isSameType = require('../core/isSameType')
-
-const _type =
-  constant('Const')
 
 function Const(x) {
   if(!arguments.length) {
@@ -19,13 +17,10 @@ function Const(x) {
     m => isSameType(Const, m) && x === m.value()
 
   const inspect =
-    constant(`Const${_inspect(x)}`)
+    () => `Const${_inspect(x)}`
 
   const value =
-    constant(x)
-
-  const type =
-    _type
+    () => x
 
   function concat(m) {
     if(!isSameType(Const, m)) {
@@ -65,7 +60,7 @@ function Const(x) {
   }
 }
 Const.type =
-  _type
+  type
 
 Const['@@implements'] = _implements(
   [ 'ap', 'chain', 'concat', 'equals', 'map' ]

@@ -3,13 +3,11 @@
 
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
-const constant = require('../core/constant')
+const type = require('../core/types').type('Any')
+
 const isFunction = require('../core/isFunction')
 const isNil = require('../core/isNil')
 const isSameType = require('../core/isSameType')
-
-const _type =
-  constant('Any')
 
 const _empty =
   () => Any(false)
@@ -22,16 +20,13 @@ function Any(b) {
   }
 
   const value =
-    constant(!!x)
-
-  const type =
-    _type
+    () => !!x
 
   const empty =
     _empty
 
   const inspect =
-    constant(`Any${_inspect(value())}`)
+    () => `Any${_inspect(value())}`
 
   function concat(m) {
     if(!isSameType(Any, m)) {
@@ -49,6 +44,6 @@ Any['@@implements'] = _implements(
 )
 
 Any.empty = _empty
-Any.type  = _type
+Any.type  = type
 
 module.exports = Any

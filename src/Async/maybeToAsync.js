@@ -2,7 +2,7 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const Async = require('.')
-const Maybe = require('../core/Maybe')
+const Maybe = require('../core/types').proxy('Maybe')
 
 const constant = require('../core/constant')
 const curry = require('../core/curry')

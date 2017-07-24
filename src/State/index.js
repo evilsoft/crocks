@@ -3,21 +3,20 @@
 
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
+const type = require('../core/types').type('State')
+
 const Pair = require('../core/Pair')
 const Unit = require('../core/Unit')
-const constant = require('../core/constant')
+
 const isFunction = require('../core/isFunction')
 const isSameType = require('../core/isSameType')
 
 const _of =
   x => State(s => Pair(x, s))
 
-const _type =
-  constant('State')
-
-function gets(fn) {
+function get(fn) {
   if(!isFunction(fn)) {
-    throw new TypeError('State.gets: Function Required')
+    throw new TypeError('State.get: Function Required')
   }
 
   return State(s => Pair(fn(s), s))
@@ -39,11 +38,8 @@ function State(runWith) {
   const of =
     _of
 
-  const type =
-    _type
-
   const inspect =
-    constant(`State${_inspect(runWith)}`)
+    () => `State${_inspect(runWith)}`
 
   function execWith(s) {
     const pair = runWith(s)
@@ -132,23 +128,14 @@ function State(runWith) {
   }
 }
 
-State.of =
-  _of
+State.of = _of
+State.type = type
+State.get = get
 
-State.type =
-  _type
-
-State.get =
-  () => State(s => Pair(s, s))
-
-State.gets =
-  gets
+State.modify = modify
 
 State.put =
-  x => modify(constant(x))
-
-State.modify =
-  modify
+  x => modify(() => (x))
 
 State['@@implements'] = _implements(
   [ 'ap', 'chain', 'map', 'of' ]

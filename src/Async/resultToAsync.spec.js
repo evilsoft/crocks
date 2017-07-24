@@ -4,8 +4,8 @@ const helpers = require('../../test/helpers')
 
 const bindFunc = helpers.bindFunc
 
-const Async = require('../core/Async')
-const Result = require('../core/Result')
+const Async = require('.')
+const Result = require('../Result')
 const identity = require('../core/identity')
 const isFunction = require('../core/isFunction')
 const isSameType = require('../core/isSameType')

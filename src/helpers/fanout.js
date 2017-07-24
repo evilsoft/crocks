@@ -1,9 +1,9 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const Arrow = require('../core/Arrow')
+const Arrow = require('../core/types').proxy('Arrow')
+const Star = require('../core/types').proxy('Star')
 const Pair = require('../core/Pair')
-const Star = require('../core/Star')
 
 const curry = require('../core/curry')
 const isFunction = require('../core/isFunction')

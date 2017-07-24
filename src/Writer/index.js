@@ -3,6 +3,8 @@
 
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
+const __type = require('../core/types').type('Writer')
+
 const constant = require('../core/constant')
 const isFunction = require('../core/isFunction')
 const isMonoid = require('../core/isMonoid')
@@ -17,7 +19,7 @@ function _Writer(Monoid) {
     x => Writer(Monoid.empty().value(), x)
 
   const _type =
-    constant(`Writer(${Monoid.type()})`)
+    () => `${__type()}( ${Monoid.type()} )`
 
   function Writer(entry, val) {
     if(arguments.length !== 2) {

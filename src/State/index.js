@@ -15,11 +15,15 @@ const _of =
   x => State(s => Pair(x, s))
 
 function get(fn) {
-  if(!isFunction(fn)) {
-    throw new TypeError('State.get: Function Required')
+  if(!arguments.length) {
+    return State(s => Pair(s, s))
   }
 
-  return State(s => Pair(fn(s), s))
+  if(isFunction(fn)) {
+    return State(s => Pair(fn(s), s))
+  }
+
+  throw new TypeError('State.get: No arguments or function required')
 }
 
 function modify(fn) {

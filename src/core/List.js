@@ -3,7 +3,7 @@
 
 const _implements = require('./implements')
 const _inspect = require('./inspect')
-const type = require('../core/types').type('List')
+const type = require('./types').type('List')
 
 const isApplicative = require('./isApplicative')
 const isArray = require('./isArray')

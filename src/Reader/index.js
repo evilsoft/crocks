@@ -13,10 +13,15 @@ const _of =
   x => Reader(() => x)
 
 function ask(fn) {
-  if(!isFunction(fn)) {
-    throw new TypeError('Reader.ask: Function required')
+  if(!arguments.length) {
+    return Reader(x => x)
   }
-  return Reader(fn)
+
+  if(isFunction(fn)) {
+    return Reader(fn)
+  }
+
+  throw new TypeError('Reader.ask: No argument or function required')
 }
 
 function Reader(runWith) {

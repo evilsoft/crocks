@@ -2,7 +2,8 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const _safe = require('../core/safe')
-const Pred = require('../core/Pred')
+const Pred = require('../core/types').proxy('Pred')
+
 const curry = require('../core/curry')
 const isFunction = require('../core/isFunction')
 const isSameType = require('../core/isSameType')

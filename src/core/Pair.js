@@ -3,7 +3,7 @@
 
 const _implements = require('./implements')
 const _inspect = require('./inspect')
-const _type = require('../core/types').types('Pair')
+const type = require('../core/types').type('Pair')
 
 const isFunction = require('./isFunction')
 const isSameType = require('./isSameType')
@@ -13,9 +13,6 @@ function Pair(l, r) {
   if(arguments.length < 2) {
     throw new TypeError('Pair: Must provide a first and second value')
   }
-
-  const type =
-    _type
 
   const fst =
     () => l
@@ -137,7 +134,7 @@ function Pair(l, r) {
 }
 
 Pair.type =
-  _type
+  type
 
 Pair['@@implements'] = _implements(
   [ 'ap', 'bimap', 'chain', 'concat', 'extend', 'equals', 'map' ]

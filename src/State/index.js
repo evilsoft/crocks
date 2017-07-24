@@ -3,7 +3,7 @@
 
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
-const _type = require('../core/types').types('State')
+const type = require('../core/types').type('State')
 
 const Pair = require('../core/Pair')
 const Unit = require('../core/Unit')
@@ -37,9 +37,6 @@ function State(runWith) {
 
   const of =
     _of
-
-  const type =
-    _type
 
   const inspect =
     () => `State${_inspect(runWith)}`
@@ -131,20 +128,14 @@ function State(runWith) {
   }
 }
 
-State.of =
-  _of
+State.of = _of
+State.type = type
+State.get = get
 
-State.type =
-  _type
-
-State.get =
-  get
+State.modify = modify
 
 State.put =
   x => modify(() => (x))
-
-State.modify =
-  modify
 
 State['@@implements'] = _implements(
   [ 'ap', 'chain', 'map', 'of' ]

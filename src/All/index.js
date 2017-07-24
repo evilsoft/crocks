@@ -3,7 +3,7 @@
 
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
-const _type = require('../core/types').types('All')
+const type = require('../core/types').type('All')
 
 const isFunction = require('../core/isFunction')
 const isNil = require('../core/isNil')
@@ -21,9 +21,6 @@ function All(b) {
 
   const value =
     () => !!x
-
-  const type =
-    _type
 
   const empty =
     _empty
@@ -50,6 +47,6 @@ All.empty =
   _empty
 
 All.type =
-  _type
+  type
 
 module.exports = All

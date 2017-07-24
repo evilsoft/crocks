@@ -2,7 +2,7 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const Result = require('.')
-const Last = require('../core/Last')
+const Last = require('../core/types').proxy('Last')
 
 const constant = require('../core/constant')
 const curry = require('../core/curry')

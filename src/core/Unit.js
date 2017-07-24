@@ -2,7 +2,7 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const _implements = require('./implements')
-const _type = require('../core/types').types('Unit')
+const type = require('../core/types').type('Unit')
 
 const isFunction = require('./isFunction')
 const isSameType = require('./isSameType')
@@ -22,9 +22,6 @@ function Unit() {
 
   const value =
     () => undefined
-
-  const type =
-    _type
 
   const of =
     _of
@@ -70,14 +67,9 @@ function Unit() {
   }
 }
 
-Unit.type =
-  _type
-
-Unit.of =
-  _of
-
-Unit.empty =
-  _empty
+Unit.type = type
+Unit.of = _of
+Unit.empty = _empty
 
 Unit['@@implements'] = _implements(
   [ 'ap', 'chain', 'concat', 'empty', 'equals', 'map', 'of' ]

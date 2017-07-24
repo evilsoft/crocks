@@ -31,9 +31,13 @@ const _types = {
   'Writer': () => 'Writer',
 }
 
-function types(type) {
-  return _types[type] || _types['unk']
-}
 
-exports.types =
-  types
+const type =
+  type => _types[type] || _types['unk']
+
+const proxy =
+  t => ({ type: type(t) })
+
+module.exports = {
+  proxy, type
+}

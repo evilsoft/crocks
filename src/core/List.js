@@ -3,7 +3,7 @@
 
 const _implements = require('./implements')
 const _inspect = require('./inspect')
-const _type = require('../core/types').types('List')
+const type = require('../core/types').type('List')
 
 const isApplicative = require('./isApplicative')
 const isArray = require('./isArray')
@@ -19,8 +19,9 @@ const not =
 const _concat =
   x => m => m.concat(x)
 
-const { Nothing, Just }= require('./Maybe')
-const Pred = require('./Pred')
+const { Nothing, Just } = require('./Maybe')
+
+const Pred = require('./types').proxy('Pred')
 
 const _of =
   x => List([ x ])
@@ -77,9 +78,6 @@ function List(x) {
       return y.concat(m.value())
     }
   }
-
-  const type =
-    _type
 
   const of =
     _of
@@ -239,7 +237,7 @@ function List(x) {
 }
 
 List.type =
-  _type
+  type
 
 List.of =
   _of

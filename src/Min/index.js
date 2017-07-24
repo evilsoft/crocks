@@ -3,7 +3,7 @@
 
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
-const _type = require('../core/types').types('Min')
+const type = require('../core/types').type('Min')
 
 const isNil = require('../core/isNil')
 const isNumber = require('../core/isNumber')
@@ -21,9 +21,6 @@ function Min(n) {
 
   const value =
     () => x
-
-  const type =
-    _type
 
   const empty =
     _empty
@@ -46,10 +43,7 @@ Min['@@implements'] = _implements(
   [ 'concat', 'empty' ]
 )
 
-Min.empty =
-  _empty
-
-Min.type =
-  _type
+Min.empty = _empty
+Min.type = type
 
 module.exports = Min

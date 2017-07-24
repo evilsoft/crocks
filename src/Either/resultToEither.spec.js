@@ -4,7 +4,7 @@ const helpers = require('../../test/helpers')
 const bindFunc = helpers.bindFunc
 
 const Either = require('.')
-const Result = require('../core/Result')
+const Result = require('../Result')
 
 const constant = require('../core/constant')
 const identity = require('../core/identity')

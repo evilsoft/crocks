@@ -14,7 +14,7 @@ const isObject = require('./isObject')
 const unit = require('./_unit')
 
 const Maybe = require('./Maybe')
-const Pred = require('./Pred')
+const Pred = require('../Pred')
 
 const reverseApply =
   x => fn => fn(x)

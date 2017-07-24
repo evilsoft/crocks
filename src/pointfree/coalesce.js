@@ -9,7 +9,7 @@ function coalesce(f, g, m) {
     throw new TypeError('coalesce: Functions required for first two arguments')
   }
   else if(!isFunction(m.coalesce)) {
-    throw new TypeError('coalesce: Either or Maybe required for third argument')
+    throw new TypeError('coalesce: Async, Either, Maybe or Result required for third argument')
   }
 
   return m.coalesce(f, g)

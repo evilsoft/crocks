@@ -4,7 +4,7 @@ const helpers = require('../../test/helpers')
 const bindFunc = helpers.bindFunc
 
 const Last = require('.')
-const Result = require('../core/Result')
+const Result = require('../Result')
 
 const identity = require('../core/identity')
 const isFunction = require('../core/isFunction')

@@ -1,7 +1,8 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const Pred = require('../core/Pred')
+const Pred = require('../core/types').proxy('Pred')
+
 const compose = require('../core/compose')
 const curry = require('../core/curry')
 const isFunction = require('../core/isFunction')

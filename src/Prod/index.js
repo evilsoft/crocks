@@ -3,7 +3,7 @@
 
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
-const _type = require('../core/types').types('Prod')
+const type = require('../core/types').type('Prod')
 
 const isNil = require('../core/isNil')
 const isNumber = require('../core/isNumber')
@@ -21,9 +21,6 @@ function Prod(n) {
 
   const value =
     () => x
-
-  const type =
-    _type
 
   const empty =
     _empty
@@ -46,10 +43,7 @@ Prod['@@implements'] = _implements(
   [ 'concat', 'empty' ]
 )
 
-Prod.empty =
-  _empty
-
-Prod.type =
-  _type
+Prod.empty = _empty
+Prod.type = type
 
 module.exports = Prod

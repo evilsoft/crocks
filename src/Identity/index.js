@@ -4,7 +4,7 @@
 const _implements = require('../core/implements')
 const _innerConcat = require('../core/innerConcat')
 const _inspect = require('../core/inspect')
-const _type = require('../core/types').types('Identity')
+const type = require('../core/types').type('Identity')
 
 const isApplicative = require('../core/isApplicative')
 const isFunction = require('../core/isFunction')
@@ -20,9 +20,6 @@ function Identity(x) {
 
   const value =
     () => x
-
-  const type =
-    _type
 
   const of =
     _of
@@ -106,11 +103,8 @@ function Identity(x) {
   }
 }
 
-Identity.of =
-  _of
-
-Identity.type =
-  _type
+Identity.of = _of
+Identity.type = type
 
 Identity['@@implements'] = _implements(
   [ 'ap', 'chain', 'concat', 'equals', 'map', 'of', 'traverse' ]

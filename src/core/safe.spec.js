@@ -1,6 +1,6 @@
 const test = require('tape')
 
-const Pred = require('./Pred')
+const Pred = require('../Pred')
 const isFunction = require('./isFunction')
 
 const safe = require('./safe')

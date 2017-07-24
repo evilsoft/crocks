@@ -4,9 +4,9 @@ const MockCrock = require('../../test/MockCrock')
 
 const bindFunc = helpers.bindFunc
 
-const Arrow = require('../core/Arrow')
+const Arrow = require('../Arrow')
 const Pair = require('../core/Pair')
-const Star = require('../core/Star')
+const Star = require('../Star')
 const identity = require('../core/identity')
 const isFunction = require('../core/isFunction')
 const isSameType = require('../core/isSameType')

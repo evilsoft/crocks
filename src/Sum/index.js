@@ -3,7 +3,7 @@
 
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
-const _type = require('../core/types').types('Sum')
+const type = require('../core/types').type('Sum')
 
 const isNil = require('../core/isNil')
 const isNumber = require('../core/isNumber')
@@ -21,9 +21,6 @@ function Sum(n) {
 
   const value =
     () => x
-
-  const type =
-    _type
 
   const empty=
     _empty
@@ -46,10 +43,7 @@ Sum['@@implements'] = _implements(
   [ 'concat', 'empty' ]
 )
 
-Sum.empty =
-  _empty
-
-Sum.type =
-  _type
+Sum.empty = _empty
+Sum.type = type
 
 module.exports = Sum

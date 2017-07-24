@@ -3,7 +3,7 @@
 
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
-const _type = require('../core/types').types('Any')
+const type = require('../core/types').type('Any')
 
 const isFunction = require('../core/isFunction')
 const isNil = require('../core/isNil')
@@ -21,9 +21,6 @@ function Any(b) {
 
   const value =
     () => !!x
-
-  const type =
-    _type
 
   const empty =
     _empty
@@ -47,6 +44,6 @@ Any['@@implements'] = _implements(
 )
 
 Any.empty = _empty
-Any.type  = _type
+Any.type  = type
 
 module.exports = Any

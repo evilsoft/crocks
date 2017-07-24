@@ -4,7 +4,7 @@
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
 const _object = require('../core/object')
-const _type = require('../core/types').types('Assign')
+const type = require('../core/types').type('Assign')
 
 const isNil = require('../core/isNil')
 const isObject = require('../core/isObject')
@@ -22,9 +22,6 @@ function Assign(o) {
 
   const value =
     () => x
-
-  const type =
-    _type
 
   const empty =
     _empty
@@ -51,6 +48,6 @@ Assign.empty =
   _empty
 
 Assign.type =
-  _type
+  type
 
 module.exports = Assign

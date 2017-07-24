@@ -5,7 +5,7 @@ const helpers = require('../../test/helpers')
 const bindFunc = helpers.bindFunc
 
 const Async = require('.')
-const Either = require('../core/Either')
+const Either = require('../Either')
 
 const identity = require('../core/identity')
 const isFunction = require('../core/isFunction')
@@ -60,7 +60,7 @@ test('eitherToAsync with Either returning function', t => {
   const some = 'something'
   const none = 'nothing'
 
-  t.ok(isFunction(eitherToAsync(Either.of)), 'returns a function')
+  t.ok(isFunction(eitherToAsync(Either.Right)), 'returns a function')
 
   const f = bindFunc(eitherToAsync(identity))
 

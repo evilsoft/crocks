@@ -3,7 +3,7 @@
 
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
-const _type = require('../core/types').types('Endo')
+const type = require('../core/types').type('Endo')
 
 const compose = require('../core/compose')
 const isFunction = require('../core/isFunction')
@@ -19,9 +19,6 @@ function Endo(runWith) {
 
   const value =
     () => runWith
-
-  const type =
-    _type
 
   const empty =
     _empty
@@ -44,11 +41,8 @@ Endo['@@implements'] = _implements(
   [ 'concat', 'empty' ]
 )
 
-Endo.empty =
-  _empty
-
-Endo.type =
-  _type
+Endo.empty = _empty
+Endo.type = type
 
 module.exports = Endo
 

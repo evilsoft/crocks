@@ -3,7 +3,7 @@
 
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
-const _type = require('../core/types').types('Max')
+const type = require('../core/types').type('Max')
 
 const isNil = require('../core/isNil')
 const isNumber = require('../core/isNumber')
@@ -21,9 +21,6 @@ function Max(n) {
 
   const value =
     () => x
-
-  const type =
-    _type
 
   const empty =
     _empty
@@ -46,10 +43,7 @@ Max['@@implements'] = _implements(
   [ 'concat', 'empty' ]
 )
 
-Max.empty =
-  _empty
-
-Max.type =
-  _type
+Max.empty = _empty
+Max.type = type
 
 module.exports = Max

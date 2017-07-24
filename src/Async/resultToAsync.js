@@ -2,7 +2,8 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const Async = require('.')
-const Result = require('../core/Result')
+const Result = require('../core/types').proxy('Result')
+
 const curry = require('../core/curry')
 const isFunction = require('../core/isFunction')
 const isSameType = require('../core/isSameType')

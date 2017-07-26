@@ -44,7 +44,7 @@ const helpers = {
   defaultTo: require('./helpers/defaultTo'),
   dissoc: require('./helpers/dissoc'),
   fanout: require('./helpers/fanout'),
-  fromPairs: require('./Pair/fromPairs'),
+  fromPairs: require('./helpers/fromPairs'),
   liftA2: require('./helpers/liftA2'),
   liftA3: require('./helpers/liftA3'),
   mconcat: require('./helpers/mconcat'),

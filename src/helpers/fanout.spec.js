@@ -6,11 +6,14 @@ const bindFunc = helpers.bindFunc
 
 const Arrow = require('../Arrow')
 const Pair = require('../core/Pair')
-const Star = require('../Star')
+const _Star = require('../Star')
+
 const identity = require('../core/identity')
 const isFunction = require('../core/isFunction')
 const isSameType = require('../core/isSameType')
 const unit = require('../core/_unit')
+
+const Star = _Star(MockCrock)
 
 const fanout = require('./fanout')
 

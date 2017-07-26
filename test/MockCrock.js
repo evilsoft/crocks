@@ -1,5 +1,6 @@
 const constant = require('../src/core/constant')
 const isSameType = require('../src/core/isSameType')
+const _implements = require('../src/core/implements')
 
 const _type = constant('MockCrock')
 const _of   = x => MockCrock(x)
@@ -26,5 +27,9 @@ function MockCrock(x) {
 
 MockCrock.type  = _type
 MockCrock.of    = _of
+
+MockCrock['@@implements'] = _implements(
+  [ 'ap', 'chain', 'equals', 'map', 'of', 'traverse' ]
+)
 
 module.exports = MockCrock

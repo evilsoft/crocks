@@ -4,13 +4,12 @@
 const _compose = require('../core/compose')
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
-const type = require('../core/types').type('Star')
+const _type = require('../core/types').type('Star')
 
 const Pair = require('../core/Pair')
 
 const array = require('../core/array')
 const isFunction = require('../core/isFunction')
-const isFunctor = require('../core/isFunctor')
 const isMonad = require('../core/isMonad')
 const isSameType = require('../core/isSameType')
 
@@ -20,137 +19,162 @@ const merge =
 const sequence =
   (af, m) => array.sequence(af, m)
 
-function Star(runWith) {
-  if(!isFunction(runWith)) {
-    throw new TypeError('Star: Function in the form (a -> f b) required')
+function _Star(Monad) {
+  if(!isMonad(Monad)) {
+    throw new TypeError('Star: Monad required for construction')
   }
 
-  const inspect =
-    () => `Star${_inspect(runWith)}`
+  const _id =
+    () => Star(Monad.of)
 
-  function compose(s) {
-    if(!isSameType(Star, s)) {
-      throw new TypeError('Star.concat: Star required')
+  const innerType =
+    Monad.type()
+
+  const outerType =
+    `${_type()}( ${innerType} )`
+
+  const type =
+    () => outerType
+
+  function Star(runWith) {
+    if(!isFunction(runWith)) {
+      throw new TypeError(`${outerType}: Function in the form (a -> m b) required`)
     }
 
-    return Star(function(x) {
-      const m = runWith(x)
+    const inspect =
+      () => `${outerType}${_inspect(runWith)}`
 
-      if(!isMonad(m)) {
-        throw new TypeError('Star.concat: Computations must return a Monad')
+    const id =
+      _id
+
+    function compose(s) {
+      if(!isSameType(Star, s)) {
+        throw new TypeError(`${outerType}.compose: ${outerType} required`)
       }
 
-      return m.chain(function(val) {
-        const inner = s.runWith(val)
+      return Star(function(x) {
+        const m = runWith(x)
 
-        if(!isSameType(m, inner)) {
-          throw new TypeError('Star.concat: Computations must return Monads of the same type')
+        if(!isSameType(Monad, m)) {
+          throw new TypeError(`${outerType}.compose: Computations must return a type of ${innerType}`)
         }
 
-        return inner
+        return m.chain(function(val) {
+          const inner = s.runWith(val)
+
+          if(!isSameType(m, inner)) {
+            throw new TypeError(`${outerType}.compose: Both computations must return a type of ${innerType}`)
+          }
+
+          return inner
+        })
       })
-    })
-  }
-
-  function map(fn) {
-    if(!isFunction(fn)) {
-      throw new TypeError('Star.map: Function required')
     }
 
-    return Star(function(x) {
-      const m = runWith(x)
-
-      if(!isFunctor(m)) {
-        throw new TypeError('Star.map: Computation must return a Functor')
+    function map(fn) {
+      if(!isFunction(fn)) {
+        throw new TypeError(`${outerType}.map: Function required`)
       }
 
-      return m.map(fn)
-    })
-  }
+      return Star(function(x) {
+        const m = runWith(x)
 
-  function contramap(fn) {
-    if(!isFunction(fn)) {
-      throw new TypeError('Star.contramap: Function required')
+        if(!isSameType(Monad, m)) {
+          throw new TypeError(`${outerType}.map: Computations must return a type of ${innerType}`)
+        }
+
+        return m.map(fn)
+      })
     }
 
-    return Star(_compose(runWith, fn))
-  }
+    function contramap(fn) {
+      if(!isFunction(fn)) {
+        throw new TypeError(`${outerType}.contramap: Function required`)
+      }
 
-  function promap(l, r) {
-    if(!isFunction(l) || !isFunction(r)) {
-      throw new TypeError('Star.promap: Functions required for both arguments')
+      return Star(_compose(runWith, fn))
     }
 
-    return Star(function(x) {
-      const m = runWith(l(x))
-
-      if(!isFunctor(m)) {
-        throw new TypeError('Star.promap: Computation must return a Functor')
+    function promap(l, r) {
+      if(!isFunction(l) || !isFunction(r)) {
+        throw new TypeError(`${outerType}.promap: Functions required for both arguments`)
       }
 
-      return m.map(r)
-    })
+      return Star(function(x) {
+        const m = runWith(l(x))
+
+        if(!isSameType(Monad, m)) {
+          throw new TypeError(`${outerType}.promap: Computation must return a type of ${innerType}`)
+        }
+
+        return m.map(r)
+      })
+    }
+
+    function first() {
+      return Star(function(x) {
+        if(!isSameType(Pair, x)) {
+          throw TypeError(`${outerType}.first: Pair required for computation input`)
+        }
+
+        const m = runWith(x.fst())
+
+        if(!isSameType(Monad, m)) {
+          throw new TypeError(`${outerType}.first: Computation must return a type of ${innerType}`)
+        }
+
+        return m.map(l => Pair(l, x.snd()))
+      })
+    }
+
+    function second() {
+      return Star(function(x) {
+        if(!isSameType(Pair, x)) {
+          throw TypeError(`${outerType}.second: Pair required for computation input`)
+        }
+
+        const m = runWith(x.snd())
+
+        if(!isSameType(Monad, m)) {
+          throw new TypeError(`${outerType}.second: Computation must return a type of ${innerType}`)
+        }
+
+        return m.map(r => Pair(x.fst(), r))
+      })
+    }
+
+    function both() {
+      return Star(function(x) {
+        if(!isSameType(Pair, x)) {
+          throw TypeError(`${outerType}.both: Pair required for computation input`)
+        }
+
+        const p = x.bimap(runWith, runWith)
+        const m = p.fst()
+
+        if(!isSameType(Monad, m)) {
+          throw new TypeError(`${outerType}.both: Computation must return a type of ${innerType}`)
+        }
+
+        return sequence(m.of, merge((x, y) => [ x, y ], p)).map(x => Pair(x[0], x[1]))
+      })
+    }
+
+    return {
+      inspect, type, runWith,
+      id, compose, map, contramap,
+      promap, first, second, both
+    }
   }
 
-  function first() {
-    return Star(function(x) {
-      if(!isSameType(Pair, x)) {
-        throw TypeError('Star.first: Pair required for computation input')
-      }
+  Star.id = _id
+  Star.type = type
 
-      const m = runWith(x.fst())
+  Star['@@implements'] = _implements(
+    [ 'compose', 'contramap', 'id', 'map', 'promap' ]
+  )
 
-      if(!isFunctor(m)) {
-        throw new TypeError('Star.first: Computaion must return a Functor')
-      }
-
-      return m.map(l => Pair(l, x.snd()))
-    })
-  }
-
-  function second() {
-    return Star(function(x) {
-      if(!isSameType(Pair, x)) {
-        throw TypeError('Star.second: Pair required for computation input')
-      }
-
-      const m = runWith(x.snd())
-
-      if(!isFunctor(m)) {
-        throw new TypeError('Star.second: Computation must return a Functor')
-      }
-
-      return m.map(r => Pair(x.fst(), r))
-    })
-  }
-
-  function both() {
-    return Star(function(x) {
-      if(!isSameType(Pair, x)) {
-        throw TypeError('Star.both: Pair required for computation input')
-      }
-
-      const p = x.bimap(runWith, runWith)
-      const m = p.fst()
-
-      if(!isMonad(m)) {
-        throw new TypeError('Star.both: Computaion must return a Monad')
-      }
-
-      return sequence(m.of, merge((x, y) => [ x, y ], p)).map(x => Pair(x[0], x[1]))
-    })
-  }
-
-  return {
-    inspect, type, runWith, compose, map,
-    contramap, promap, first, second, both
-  }
+  return Star
 }
 
-Star.type = type
-
-Star['@@implements'] = _implements(
-  [ 'compose', 'contramap', 'map', 'promap' ]
-)
-
-module.exports = Star
+module.exports = _Star

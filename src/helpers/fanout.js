@@ -1,17 +1,20 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const Arrow = require('../core/types').proxy('Arrow')
-const Star = require('../core/types').proxy('Star')
 const Pair = require('../core/Pair')
 
 const curry = require('../core/curry')
+const isContravariant = require('../core/isContravariant')
 const isFunction = require('../core/isFunction')
 const isSameType = require('../core/isSameType')
+const isSemigroupoid = require('../core/isSemigroupoid')
 
 const valid = (x, y) =>
-  (isSameType(Arrow, x) || isSameType(Star, y))
-    && isSameType(x, y)
+  isSameType(x, y)
+    && isSemigroupoid(x)
+    && isContravariant(x)
+    && isFunction(x.first)
+    && isFunction(x.second)
 
 // fanout : m a b -> m a c -> m a (b, c)
 function fanout(fst, snd) {

@@ -522,17 +522,32 @@ test('Result alt errors', t => {
   t.end()
 })
 
-test('Result alt functionality', t => {
+test('Result alt functionality with Semigroup Err', t => {
   const right = Result.of('Ok')
   const anotherOk = Result.of('Another Ok')
 
-  const left = Result.Err('Err')
-  const anotherErr = Result.Err('Another Err')
+  const left = Result.Err([ 'Err' ])
+  const anotherErr = Result.Err([ 'Another Err' ])
 
   const f = either(identity, identity)
 
   t.equals(f(right.alt(left).alt(anotherOk)), 'Ok', 'retains first Ok success')
-  t.equals(f(left.alt(anotherErr)), 'Another Err', 'provdes last Err when all Errs')
+  t.same(f(left.alt(anotherErr)), [ 'Err', 'Another Err' ], 'provdes accumulated Err when all Errs')
+
+  t.end()
+})
+
+test('Result alt functionality without Semigroup Err', t => {
+  const right = Result.of('Ok')
+  const anotherOk = Result.of('Another Ok')
+
+  const left = Result.Err(3)
+  const anotherErr = Result.Err(13)
+
+  const f = either(identity, identity)
+
+  t.equals(f(right.alt(left).alt(anotherOk)), 'Ok', 'retains first Ok success')
+  t.same(f(left.alt(anotherErr)), 13, 'provdes last Err when all Errs')
 
   t.end()
 })

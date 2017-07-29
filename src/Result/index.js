@@ -26,11 +26,14 @@ Result.Ok =
 const _of =
   Result.Ok
 
-const concatErr =
-  m => x => m.either(
+const concatApErr =
+  m => x => Result.Err(m.either(
     y => isSemigroup(x) && isSameType(y, x) ? x.concat(y) : x,
     () => x
-  )
+  ))
+
+const concatAltErr =
+  r => l => Result.Err(isSemigroup(r) && isSameType(l, r) ? l.concat(r) : r)
 
 function runSequence(x) {
   if(!isApplicative(x)) {
@@ -131,9 +134,9 @@ function Result(u) {
       throw new TypeError('Result.alt: Result required')
     }
 
-    return either(
-      constant(m),
-      Result.Ok
+    return m.either(
+      r => either(concatAltErr(r), Result.Ok),
+      r => either(() => Result.Ok(r), Result.Ok)
     )
   }
 
@@ -143,7 +146,7 @@ function Result(u) {
     }
 
     return either(
-      compose(Result.Err, concatErr(m)),
+      concatApErr(m),
       function(fn) {
         if(!isFunction(fn)) {
           throw new TypeError('Result.ap: Wrapped value must be a function')

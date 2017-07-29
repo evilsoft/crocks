@@ -1,7 +1,41 @@
 # Change Log for `crocks`
-v0.6.1 -- July 04, 2017
+v0.7.0 -- July 28, 2017
+--
+### Breaking
+
+  * Restructure entire folder structure into a src folder with folders for each type. Functions that construct types are now housed in their respective types folder. All general functions that work many types are still in their old folders `combinators`, `helpers`, `logic`, `pointfree` and `predicates`. All `transformation` functions have been moved into the folder of the type that they transform into (i.e. `resultToEither` is in the folder `Either`). This is the first step to moving to a monorepo format.
+  * `Reader.ask` now takes either a `Function` or no arguments. If a function is provided it will map the environment through the function. No arguments behaves like `identity`.
+  * Removed `State.gets` and updated `State.get` to take either a `Function` or no arguments. Passing a `Function` will apply the state to that function an update the value to match the result. No arguments behaves like `identity` matching the value to the state.
+  * Allow for `Star` to be fixed to a specific `Monad`. Instead of using `Star` to construct a `Star`, it now takes a `Monad` constructor returning the consumer a constructor specific for that type of `Monad`.
+  * Update `Result.alt` to accumulate `Err`s if the `Result` wraps a `Semigroup`, much like `Result.ap`, it will `concat` the `Semigroup`s together.
+
+### Additions
+
+* Crocks:
+  * `Star.id`
+
+### Bug fixes
+  * All code is now compiled through `buble`, which means that it clears up all of the errors we were experiencing with Safari and in some instances `uglifyJS`. The code published to `npm` will now be standard `es5`.
+
+### Optimizations
+* Have all functions used by the library that are available on the public API do no type checks when called by other library functions.
+
+### Pull Requests
+* [#132 - Compile all code for a better experience and flatten API](https://github.com/evilsoft/crocks/pull/132)
+* [#133 - Remove name conflict with new structure](https://github.com/evilsoft/crocks/pull/133)
+* [#134 - Move type based functions into type folders](https://github.com/evilsoft/crocks/pull/134)
+* [#135 - Add publish bits for new api](https://github.com/evilsoft/crocks/pull/135)
+* [#136 - Use TypeProxies to remove simple type check dependencies](https://github.com/evilsoft/crocks/pull/136)
+* [#137 - Make `Reader.ask` and `State.get` use identity by default ](https://github.com/evilsoft/crocks/pull/137)
+* [#138 - Make `Star` a `Category` by fixing it to a given `Monad`](https://github.com/evilsoft/crocks/pull/138)
+* [#139 - Update README and some :lipstick:](https://github.com/evilsoft/crocks/pull/139)
+* [#140 - Accumulate `Err` on `Alt` for `Result` type](https://github.com/evilsoft/crocks/pull/140)
+
+
+ v0.6.1 -- July 04, 2017
 --
 ### Additions
+
 * Crocks API:
   * `Pair.extend`
 * Monoids:

@@ -1,7 +1,6 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const _compose = require('../core/compose')
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
 const type = require('../core/types').type('Arrow')
@@ -9,7 +8,7 @@ const type = require('../core/types').type('Arrow')
 const isFunction = require('../core/isFunction')
 const isSameType = require('../core/isSameType')
 
-const Pair = require('../core/Pair')
+const Pair = require('../core/types').proxy('Pair')
 
 const _id =
   () => Arrow(x => x)
@@ -41,7 +40,7 @@ function Arrow(runWith) {
       throw new TypeError('Arrow.map: Function required')
     }
 
-    return Arrow(_compose(fn, runWith))
+    return Arrow(x => fn(runWith(x)))
   }
 
   function contramap(fn) {
@@ -49,7 +48,7 @@ function Arrow(runWith) {
       throw new TypeError('Arrow.contramap: Function required')
     }
 
-    return Arrow(_compose(runWith, fn))
+    return Arrow(x => runWith(fn(x)))
   }
 
   function promap(l, r) {
@@ -57,7 +56,7 @@ function Arrow(runWith) {
       throw new TypeError('Arrow.promap: Functions required for both arguments')
     }
 
-    return Arrow(_compose(r, _compose(runWith, l)))
+    return Arrow(x => r(runWith(l(x))))
   }
 
   function first() {

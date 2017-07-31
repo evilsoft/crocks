@@ -41,16 +41,23 @@ function Pair(l, r) {
     if(!(m && isSameType(Pair, m))) {
       throw new TypeError('Pair.concat: Pair required')
     }
-    else if(!isSemigroup(fst()) || !isSemigroup(snd())) {
-      throw new TypeError('Pair.concat: Source Pair must contain Semigroups')
+
+    const lf = fst()
+    const ls = snd()
+    const rf = m.fst()
+    const rs = m.snd()
+
+    if(!(isSemigroup(lf) && isSemigroup(ls))) {
+      throw new TypeError('Pair.concat: Both Pairs must contain Semigroups of the same type')
     }
-    else if(!isSemigroup(m.fst()) || !isSemigroup(m.snd())) {
-      throw new TypeError('Pair.concat: Provided Pair must contain Semigroups')
+
+    if(!(isSameType(lf, rf) && isSameType(ls, rs))) {
+      throw new TypeError('Pair.concat: Both Pairs must contain Semigroups of the same type')
     }
 
     return Pair(
-      fst().concat(m.fst()),
-      snd().concat(m.snd())
+      lf.concat(rf),
+      ls.concat(rs)
     )
   }
 
@@ -79,28 +86,35 @@ function Pair(l, r) {
   }
 
   function ap(m) {
-    if(!isFunction(snd())) {
-      throw new TypeError('Pair.ap: Function required for second value')
-    }
-    else if(!isSemigroup(fst())) {
-      throw new TypeError('Pair.ap: Semigroup required for first value')
-    }
-    else if(!(isSameType(Pair, m))) {
+    if(!(isSameType(Pair, m))) {
       throw new TypeError('Pair.ap: Pair required')
     }
-    else if(!isSemigroup(m.fst())) {
-      throw new TypeError('Pair.ap: Semigroup required for first value')
+
+    const fn = snd()
+
+    if(!isFunction(fn)) {
+      throw new TypeError('Pair.ap: Function required for second value')
     }
 
-    return chain(fn => m.map(fn))
+    const l = fst()
+    const r = m.fst()
+
+    if(!(isSemigroup(l) && isSameType(l, r))) {
+      throw new TypeError('Pair.ap: Semigroups of the same type is required for first values')
+    }
+
+    return Pair(l.concat(r), fn(m.snd()))
   }
 
   function chain(fn) {
-    if(!isSemigroup(fst())) {
-      throw new TypeError('Pair.chain: Semigroup required for first value')
-    }
-    else if(!isFunction(fn)) {
+    const l = fst()
+
+    if(!isFunction(fn)) {
       throw new TypeError('Pair.chain: Function required')
+    }
+
+    if(!isSemigroup(l)) {
+      throw new TypeError('Pair.chain: Semigroups of the same type required for first values')
     }
 
     const m = fn(snd())
@@ -108,12 +122,15 @@ function Pair(l, r) {
     if(!(isSameType(Pair, m))) {
       throw new TypeError('Pair.chain: Function must return a Pair')
     }
-    else if(!isSemigroup(m.fst())) {
-      throw new TypeError('Pair.chain: Semigroup required for first value of chained function result')
+
+    const r = m.fst()
+
+    if(!isSameType(l, r)) {
+      throw new TypeError('Pair.chain: Semigroups of the same type required for first values')
     }
 
     return Pair(
-      fst().concat(m.fst()),
+      l.concat(r),
       m.snd()
     )
   }

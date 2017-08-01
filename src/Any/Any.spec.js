@@ -19,8 +19,9 @@ test('Any', t => {
   t.ok(isFunction(Any.empty), 'provides an empty function')
   t.ok(isFunction(Any.type), 'provides a type function')
 
-  t.throws(Any, TypeError, 'throws with nothing')
-  t.throws(a(identity), TypeError, 'throws with a function')
+  const err = /Any: Non-function value required/
+  t.throws(Any, err, 'throws with nothing')
+  t.throws(a(identity), err, 'throws with a function')
 
   t.doesNotThrow(a(undefined), 'allows undefined')
   t.doesNotThrow(a(null), 'allows null')
@@ -103,17 +104,18 @@ test('Any concat functionality', t => {
 
   const cat = bindFunc(a.concat)
 
-  t.throws(cat(undefined), TypeError, 'throws with undefined')
-  t.throws(cat(null), TypeError, 'throws with null')
-  t.throws(cat(0), TypeError, 'throws with falsey number')
-  t.throws(cat(1), TypeError, 'throws with truthy number')
-  t.throws(cat(''), TypeError, 'throws with falsey string')
-  t.throws(cat('string'), TypeError, 'throws with truthy string')
-  t.throws(cat(false), TypeError, 'throws with false')
-  t.throws(cat(true), TypeError, 'throws with true')
-  t.throws(cat([]), TypeError, 'throws with an array')
-  t.throws(cat({}), TypeError, 'throws with an object')
-  t.throws(cat(notAny), TypeError, 'throws with non-Any')
+  const err = /Any.concat: Any required/
+  t.throws(cat(undefined), err, 'throws with undefined')
+  t.throws(cat(null), err, 'throws with null')
+  t.throws(cat(0), err, 'throws with falsey number')
+  t.throws(cat(1), err, 'throws with truthy number')
+  t.throws(cat(''), err, 'throws with falsey string')
+  t.throws(cat('string'), err, 'throws with truthy string')
+  t.throws(cat(false), err, 'throws with false')
+  t.throws(cat(true), err, 'throws with true')
+  t.throws(cat([]), err, 'throws with an array')
+  t.throws(cat({}), err, 'throws with an object')
+  t.throws(cat(notAny), err, 'throws with non-Any')
 
   t.equal(a.concat(b).value(), true, 'true to false reports true')
   t.equal(a.concat(a).value(), true, 'true to true reports true')

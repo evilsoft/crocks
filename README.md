@@ -937,3 +937,4 @@ bad
 | `resultToFirst` | `Result e a -> First a` | `(a -> Result e b) -> a -> First b` | `crocks/First` |
 | `resultToLast` | `Result e a -> Last a` | `(a -> Result e b) -> a -> Last b` | `crocks/Last` |
 | `resultToMaybe` | `Result e a -> Maybe a` | `(a -> Result e b) -> a -> Maybe b` | `crocks/Maybe` |
+| `writerToPair` | `Writer m a -> Pair m a` | `(a -> Writer m b) -> a -> Pair m b` | `crocks/Pair` |

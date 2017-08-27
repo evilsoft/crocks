@@ -23,6 +23,9 @@ function Pair(l, r) {
   const inspect =
     () => `Pair(${_inspect(l)},${_inspect(r)} )`
 
+  const toArray =
+    () => [ l, r ]
+
   function merge(fn) {
     if(!isFunction(fn)) {
       throw new TypeError('Pair.merge: Binary function required')
@@ -144,9 +147,10 @@ function Pair(l, r) {
   }
 
   return {
-    inspect, fst, snd, type,
-    merge, equals, concat, swap,
-    map, bimap, ap, chain, extend
+    inspect, fst, snd, toArray,
+    type, merge, equals, concat,
+    swap, map, bimap, ap, chain,
+    extend
   }
 }
 

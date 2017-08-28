@@ -195,7 +195,8 @@ const transforms = {
   resultToEither: require('./Either/resultToEither'),
   resultToFirst: require('./First/resultToFirst'),
   resultToLast: require('./Last/resultToLast'),
-  resultToMaybe: require('./Maybe/resultToMaybe')
+  resultToMaybe: require('./Maybe/resultToMaybe'),
+  writerToPair: require('./Pair/writerToPair')
 }
 
 module.exports = Object.assign(

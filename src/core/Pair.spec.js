@@ -82,6 +82,15 @@ test('Pair snd', t => {
   t.end()
 })
 
+test('Pair toArray', t => {
+  const p = Pair(34, 'string')
+
+  t.ok(isFunction(p.toArray), 'provides a toArray function')
+  t.same(p.toArray(), [ 34, 'string' ], 'returns an array with the Pairs values')
+
+  t.end()
+})
+
 test('Pair merge', t => {
   const p = Pair(1, 20)
 

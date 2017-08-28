@@ -371,6 +371,36 @@ liftA3 : Applicative m => (a -> b -> c -> d) -> m a -> m b -> m c -> m d
 ```
 Ever see yourself wanting to `map` a binary or trinary function, but `map` only allows unary functions? Both of these functions allow you to pass in your function as well as the number of `Applicatives` (containers that provide both `of` and `ap` functions) you need to get the mapping you are looking for.
 
+#### mapReduce
+`crocks/helpers/mapReduce`
+```haskell
+mapReduce : Foldable f => (a -> b) -> (c -> b -> c) -> c -> f a
+```
+Sometimes you need the power provided by [`mreduceMap`](#mreducemap) but you do not have a `Monoid` to lift into. `mapReduce` provides the same power, but with the flexibility of using functions to lift and combine. `mapReduce` takes a unary mapping function, a binary reduction function, the initial value and finally a `Foldable` structure of data. Once all arguments are provided, `mapReduce` folds the provided data, by mapping each value through your mapping function, before sending it to the second argument of your reduction function.
+
+```javascript
+const  Max = require('crocks/Max')
+const { Nothing } = require('crocks/Maybe')
+const  isNumber = require('crocks/predicates/isNumber')
+const  mapReduce = require('crocks/helpers/mapReduce')
+const  safeLift = require('crocks/Maybe/safeLift')
+
+
+const data =
+  [ '100', null, 3, true, 1 ]
+
+const safeMax = mapReduce(
+  safeLift(isNumber, Max),
+  (y, x) => y.concat(x).alt(y).alt(x),
+  Nothing()
+)
+
+safeMax(data)
+  .option(Max.empty())
+  .value()
+// => 3
+```
+
 #### mconcat
 #### mreduce
 `crocks/helpers/mconcat`

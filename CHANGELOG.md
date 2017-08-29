@@ -1,4 +1,22 @@
 # Change Log for `crocks`
+v0.7.1 -- August 28, 2017
+--
+### Additions
+* Crocks
+  * `Pair.toArray`
+* Helpers:
+  * `mapReduce`
+* Transforms
+  * `Pair/writerToPair`
+
+### Optimizations
+* General cleanup and better specs for `All`, `Any`, `Arrow` and `Pair`
+
+### Pull Requests
+* [#141 - Clean up `All`, `Any`, `Arrow` and `Pair`](https://github.com/evilsoft/crocks/pull/141)
+* [#142 - Add Some `Pair` Transforms](https://github.com/evilsoft/crocks/pull/142)
+* [#143 - Add `mapReduce` helper function](https://github.com/evilsoft/crocks/pull/143)
+
 v0.7.0 -- July 28, 2017
 --
 ### Breaking

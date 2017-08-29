@@ -23,6 +23,7 @@ const crocks = {
   Pair: require('./Pair'),
   Pred: require('./Pred'),
   Reader: require('./Reader'),
+  ReaderT: require('./Reader/ReaderT'),
   Result: require('./Result'),
   Star: require('./Star'),
   State: require('./State'),

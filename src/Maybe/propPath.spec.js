@@ -56,5 +56,11 @@ test('propPath function', t => {
 
   t.equals(propPath([ 'things', 2 ], mixed).option('nothing'), value, 'allows for traversal with a mixed path on a mixed structure')
 
+  const fn =
+    x => propPath([ 'key' ], x).option('nothing')
+
+  t.equals(fn(undefined), 'nothing', 'returns Nothing when data is undefined')
+  t.equals(fn(null), 'nothing', 'returns Nothing when data is null')
+
   t.end()
 })

@@ -7,7 +7,7 @@ const compose = require('../core/compose')
 const curry = require('../core/curry')
 const isFunction = require('../core/isFunction')
 const isSameType = require('../core/isSameType')
-const safe = require('../core/safe')
+const safe = require('./safe')
 
 const map =
   fn => m => m.map(fn)

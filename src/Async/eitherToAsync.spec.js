@@ -1,18 +1,19 @@
 const test = require('tape')
 const sinon = require('sinon')
-const helpers = require('../../test/helpers')
+const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
 
 const Async = require('.')
 const Either = require('../Either')
 
-const identity = require('../core/identity')
 const isFunction = require('../core/isFunction')
 const isSameType = require('../core/isSameType')
 const unit = require('../core/_unit')
 
 const eitherToAsync = require('./eitherToAsync')
+
+const identity = x => x
 
 test('eitherToAsync transform', t => {
   const f = bindFunc(eitherToAsync)

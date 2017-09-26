@@ -4,10 +4,11 @@
 const Result = require('.')
 const Maybe = require('../core/types').proxy('Maybe')
 
-const constant = require('../core/constant')
 const curry = require('../core/curry')
 const isFunction = require('../core/isFunction')
 const isSameType = require('../core/isSameType')
+
+const constant = x => () => x
 
 const applyTransform = (left, maybe) =>
   maybe.either(

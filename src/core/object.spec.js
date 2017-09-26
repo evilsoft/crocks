@@ -1,13 +1,14 @@
 const test = require('tape')
 
 const compose = require('./compose')
-const identity = require('./identity')
 
 const object = require('./object')
 
 const assign = object.assign
 const filter = object.filter
 const map = object.map
+
+const identity = x => x
 
 test('object assign functionality', t => {
   const first = {

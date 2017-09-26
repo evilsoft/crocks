@@ -1,14 +1,14 @@
 const test = require('tape')
-const helpers = require('../../test/helpers')
+const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
 
 const Maybe = require('../core/Maybe')
-const constant = require('../core/constant')
 const isFunction = require('../core/isFunction')
 const isObject = require('../core/isObject')
 const isSameType = require('../core/isSameType')
 
+const constant = x => () => x
 const extract = m => m.option('empty')
 
 const Last = require('.')

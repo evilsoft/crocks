@@ -1,12 +1,13 @@
 const test = require('tape')
 const sinon = require('sinon')
-const helpers = require('../../test/helpers')
+const helpers = require('../test/helpers')
 const bindFunc = helpers.bindFunc
 
-const identity = require('../core/identity')
 const isFunction = require('../core/isFunction')
 
 const applyTo = require('./applyTo')
+
+const identity = x => x
 
 test('applyTo (A Combinator)', t => {
   const a =

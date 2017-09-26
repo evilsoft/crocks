@@ -1,18 +1,19 @@
 const test = require('tape')
 const sinon = require('sinon')
-const helpers = require('../../test/helpers')
+const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
 
 const Async = require('.')
 const First = require('../First')
 
-const identity = require('../core/identity')
 const isFunction = require('../core/isFunction')
 const isSameType = require('../core/isSameType')
 const unit = require('../core/_unit')
 
 const firstToAsync = require('./firstToAsync')
+
+const identity = x => x
 
 test('firstToAsync transform', t => {
   const f = bindFunc(firstToAsync)

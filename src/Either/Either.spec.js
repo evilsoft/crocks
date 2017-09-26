@@ -1,14 +1,12 @@
 const test = require('tape')
 const sinon = require('sinon')
-const MockCrock = require('../../test/MockCrock')
-const helpers = require('../../test/helpers')
+const MockCrock = require('../test/MockCrock')
+const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
 
 const curry = require('../core/curry')
 const compose = curry(require('../core/compose'))
-const constant = require('../core/constant')
-const identity = require('../core/identity')
 const isArray = require('../core/isArray')
 const isFunction = require('../core/isFunction')
 const isObject = require('../core/isObject')
@@ -20,6 +18,9 @@ const either =
 
 const reverseApply =
   x => fn => fn(x)
+
+const constant = x => () => x
+const identity = x => x
 
 const Either = require('.')
 

@@ -1,12 +1,13 @@
 const test = require('tape')
-const helpers = require('../../test/helpers')
+const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
 
-const constant = require('../core/constant')
-const identity = require('../core/identity')
 const isFunction = require('../core/isFunction')
 const isObject = require('../core/isObject')
+
+const constant = x => () => x
+const identity = x => x
 
 const Sum = require('.')
 

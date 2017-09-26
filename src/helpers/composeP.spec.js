@@ -1,11 +1,12 @@
 const test = require('tape')
-const helpers = require('../../test/helpers')
+const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
 
-const identity = require('../core/identity')
 const isFunction = require('../core/isFunction')
 const unit = require('../core/_unit')
+
+const identity = x => x
 
 const composeP = require('./composeP')
 

@@ -1,11 +1,12 @@
 const test = require('tape')
 const sinon = require('sinon')
-const helpers = require('../../test/helpers')
+const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
 
-const constant = require('../core/constant')
 const unit = require('../core/_unit')
+
+const constant = x => () => x
 
 const empty = require('./empty')
 

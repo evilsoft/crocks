@@ -1,12 +1,13 @@
 const test = require('tape')
-const helpers = require('../../test/helpers')
+const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
 
-const identity = require('../core/identity')
 const isFunction = require('../core/isFunction')
 
 const sub = require('./substitution')
+
+const identity = x => x
 
 test('substitution (S combinator)', t => {
   const s = bindFunc(sub)

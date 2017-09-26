@@ -1,13 +1,14 @@
 const test = require('tape')
-const helpers = require('../../test/helpers')
+const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
 
 const Either = require('../Either')
 const Last = require('.')
-const identity = require('../core/identity')
 const isFunction = require('../core/isFunction')
 const isSameType = require('../core/isSameType')
+
+const identity = x => x
 
 const eitherToLast = require('./eitherToLast')
 

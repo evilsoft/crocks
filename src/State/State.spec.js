@@ -1,6 +1,6 @@
 const test = require('tape')
 const sinon = require('sinon')
-const helpers = require('../../test/helpers')
+const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
 
@@ -8,10 +8,11 @@ const Pair = require('../core/Pair')
 const Unit = require('../core/Unit')
 const curry = require('../core/curry')
 const compose = curry(require('../core/compose'))
-const identity = require('../core/identity')
 const isObject = require('../core/isObject')
 const isFunction = require('../core/isFunction')
 const unit = require('../core/_unit')
+
+const identity = x => x
 
 const State = require('.')
 

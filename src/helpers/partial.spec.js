@@ -1,5 +1,5 @@
 const test = require('tape')
-const helpers = require('../../test/helpers')
+const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
 const isFunction = require('../core/isFunction')

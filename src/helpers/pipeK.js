@@ -1,14 +1,12 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const argsArray = require('../core/argsArray')
-const identity = require('../core/identity')
 const isChain = require('../core/isChain')
 const isFunction = require('../core/isFunction')
 
 const err = 'pipeK: Chain returning functions of the same type required'
 
-function pipeK(head) {
+function pipeK(head, ...fns) {
   if(!(arguments.length && isFunction(head))) {
     throw new TypeError(err)
   }
@@ -17,10 +15,7 @@ function pipeK(head) {
     return head
   }
 
-  const fns =
-    argsArray(arguments)
-
-  const tail = fns.slice(1).reduce((comp, fn) => {
+  const tail = fns.reduce((comp, fn) => {
     if(!isFunction(fn)) {
       throw new TypeError(err)
     }
@@ -31,7 +26,7 @@ function pipeK(head) {
       }
       return comp(m).chain(fn)
     }
-  }, identity)
+  }, x => x)
 
   return function() {
     return tail(head.apply(null, arguments))

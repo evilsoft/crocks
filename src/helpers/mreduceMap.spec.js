@@ -1,6 +1,6 @@
 const test = require('tape')
-const Last = require('../../test/LastMonoid')
-const helpers = require('../../test/helpers')
+const Last = require('../test/LastMonoid')
+const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
 

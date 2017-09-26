@@ -1,14 +1,15 @@
 const test = require('tape')
-const helpers = require('../../test/helpers')
+const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
 
 const Result = require('.')
-const constant = require('../core/constant')
-const identity = require('../core/identity')
 const isFunction = require('../core/isFunction')
 const isSameType = require('../core/isSameType')
 const unit = require('../core/_unit')
+
+const constant = x => () => x
+const identity = x => x
 
 const either =
   (f, g) => m => m.either(f, g)

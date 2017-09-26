@@ -1,7 +1,7 @@
 const test = require('tape')
 const sinon = require('sinon')
 
-const identity = require('./identity')
+const identity = x => x
 
 const compose = require('./compose')
 

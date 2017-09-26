@@ -5,10 +5,11 @@ const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
 const __type = require('../core/types').type('Writer')
 
-const constant = require('../core/constant')
 const isFunction = require('../core/isFunction')
 const isMonoid = require('../core/isMonoid')
 const isSameType = require('../core/isSameType')
+
+const constant = x => () => x
 
 function _Writer(Monoid) {
   if(!isMonoid(Monoid)) {

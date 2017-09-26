@@ -1,13 +1,14 @@
 const test = require('tape')
 const sinon = require('sinon')
-const helpers = require('../../test/helpers')
+const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
 
-const constant = require('../core/constant')
-const identity = require('../core/identity')
 const isFunction = require('../core/isFunction')
 const unit = require('../core/_unit')
+
+const constant = x => () => x
+const identity = x => x
 
 const swap = require('./swap')
 

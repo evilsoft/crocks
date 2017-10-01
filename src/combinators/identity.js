@@ -3,5 +3,7 @@
 
 // Identity (Idiot)
 // identity :: a -> a
-module.exports =
-  require('../core/identity')
+const identity =
+  x => x
+
+module.exports = identity

@@ -1,5 +1,5 @@
 const test = require('tape')
-const helpers = require('../../test/helpers')
+const helpers = require('../test/helpers')
 const sinon = require('sinon')
 
 const bindFunc = helpers.bindFunc
@@ -9,12 +9,14 @@ const isFunction = require('../core/isFunction')
 const isObject = require('../core/isObject')
 const unit = require('../core/_unit')
 
-const identity = require('../core/identity')
-const constant = require('../core/constant')
-
 const Pair = require('../core/Pair')
 
+const constant = x => () => x
+
 const Arrow = require('.')
+
+const identity =
+  x => x
 
 test('Arrow', t => {
   const a = bindFunc(Arrow)

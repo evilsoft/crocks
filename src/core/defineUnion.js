@@ -1,14 +1,14 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const argsArray = require('./argsArray')
-const constant = require('./constant')
 const curry = require('./curry')
 const isArray = require('./isArray')
 const isEmpty = require('./isEmpty')
 const isFunction = require('./isFunction')
 const isObject = require('./isObject')
 const isString = require('./isString')
+
+const constant = x => () => x
 
 const isDefinition =
   x => isString(x) && x.length
@@ -31,9 +31,7 @@ const includes =
   defs => m => !!m && isFunction(m.tag) && Object.keys(defs).indexOf(m.tag()) !== -1
 
 function construction(def, tag) {
-  return function() {
-    const args = argsArray(arguments)
-
+  return function(...args) {
     return def.reduce(function(obj, key, index) {
       obj[key] = { value: constant(args[index]) }
       return obj

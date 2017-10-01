@@ -1,19 +1,20 @@
 const test = require('tape')
 const sinon = require('sinon')
-const helpers = require('../../test/helpers')
-const MockCrock = require('../../test/MockCrock')
+const helpers = require('../test/helpers')
+const MockCrock = require('../test/MockCrock')
 
 const bindFunc = helpers.bindFunc
 
 const _compose = require('../core/compose')
-const constant = require('../core/constant')
-const identity = require('../core/identity')
 const isFunction = require('../core/isFunction')
 const isObject = require('../core/isObject')
 const isSameType = require('../core/isSameType')
 const unit = require('../core/_unit')
 
 const Pair = require('../core/Pair')
+
+const constant = x => () => x
+const identity = x => x
 
 const _Star = require('.')
 

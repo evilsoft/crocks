@@ -1,21 +1,19 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const argsArray = require('../core/argsArray')
-const identity = require('../core/identity')
 const isChain = require('../core/isChain')
 const isFunction = require('../core/isFunction')
 
 const err = 'composeK: Chain returning functions of the same type required'
 
 // composeK : Chain m => ((y -> m z), (x -> m y), ..., (a -> m b)) -> a -> m z
-function composeK() {
+function composeK(...args) {
   if(!(arguments.length)) {
     throw new TypeError(err)
   }
 
   const fns =
-    argsArray(arguments).slice().reverse()
+    args.slice().reverse()
 
   const head =
     fns[0]
@@ -39,7 +37,7 @@ function composeK() {
       }
       return comp(m).chain(fn)
     }
-  }, identity)
+  }, x => x)
 
   return function() {
     return tail(head.apply(null, arguments))

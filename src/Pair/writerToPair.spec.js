@@ -1,16 +1,17 @@
 const test = require('tape')
-const helpers = require('../../test/helpers')
-const Last = require('../../test/LastMonoid')
+const helpers = require('../test/helpers')
+const Last = require('../test/LastMonoid')
 
 const bindFunc = helpers.bindFunc
 
 const Pair = require('.')
 const Writer = require('../Writer')(Last)
 
-const constant = require('../core/constant')
-const identity = require('../core/identity')
 const isFunction = require('../core/isFunction')
 const isSameType = require('../core/isSameType')
+
+const constant = x => () => x
+const identity = x => x
 
 const writerToPair = require('./writerToPair')
 

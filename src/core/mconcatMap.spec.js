@@ -1,6 +1,6 @@
 const test = require('tape')
 
-const Last = require('../../test/LastMonoid')
+const Last = require('../test/LastMonoid')
 const isFunction = require('./isFunction')
 
 const mconcatMap = require('./mconcatMap')

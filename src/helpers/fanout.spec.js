@@ -1,6 +1,6 @@
 const test = require('tape')
-const helpers = require('../../test/helpers')
-const MockCrock = require('../../test/MockCrock')
+const helpers = require('../test/helpers')
+const MockCrock = require('../test/MockCrock')
 
 const bindFunc = helpers.bindFunc
 
@@ -8,12 +8,13 @@ const Arrow = require('../Arrow')
 const Pair = require('../core/Pair')
 const _Star = require('../Star')
 
-const identity = require('../core/identity')
 const isFunction = require('../core/isFunction')
 const isSameType = require('../core/isSameType')
 const unit = require('../core/_unit')
 
 const Star = _Star(MockCrock)
+
+const identity = x => x
 
 const fanout = require('./fanout')
 

@@ -1,12 +1,13 @@
 const test = require('tape')
 const sinon = require('sinon')
-const Mock = require('../../test/MockCrock')
-const helpers = require('../../test/helpers')
+const Mock = require('../test/MockCrock')
+const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
 
-const identity = require('../core/identity')
 const isFunction = require('../core/isFunction')
+
+const identity = x => x
 
 const pipeK = require('./pipeK')
 

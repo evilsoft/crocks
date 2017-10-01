@@ -1,16 +1,17 @@
 const test = require('tape')
 const sinon = require('sinon')
-const helpers = require('../../test/helpers')
-const Last = require('../../test/LastMonoid')
+const helpers = require('../test/helpers')
+const Last = require('../test/LastMonoid')
 
 const bindFunc = helpers.bindFunc
 
 const curry = require('../core/curry')
 const compose = curry(require('../core/compose'))
-const identity = require('../core/identity')
 const isFunction = require('../core/isFunction')
 const isObject = require('../core/isObject')
 const unit = require('../core/_unit')
+
+const identity = x => x
 
 const reverseApply =
   x => fn => fn(x)

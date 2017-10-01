@@ -1,8 +1,9 @@
 const test = require('tape')
 
-const identity = require('./identity')
 const isFunction = require('./isFunction')
 const unit = require('./_unit')
+
+const identity = x => x
 
 test('unit core', t => {
   t.ok(isFunction(unit), 'is a function')

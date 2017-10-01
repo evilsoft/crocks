@@ -1,18 +1,19 @@
 const test = require('tape')
 const sinon = require('sinon')
-const helpers = require('../../test/helpers')
+const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
 
 const Async = require('.')
 const Maybe = require('../core/Maybe')
 
-const identity = require('../core/identity')
 const isFunction = require('../core/isFunction')
 const isSameType = require('../core/isSameType')
 const unit = require('../core/_unit')
 
 const maybeToAsync = require('./maybeToAsync')
+
+const identity = x => x
 
 test('maybeToAsync transform', t => {
   const f = bindFunc(maybeToAsync)

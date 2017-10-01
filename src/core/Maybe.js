@@ -8,11 +8,12 @@ const _inspect = require('./inspect')
 const type = require('./types').type('Maybe')
 
 const compose = require('./compose')
-const constant = require('./constant')
-const identity = require('./identity')
 const isApplicative = require('./isApplicative')
 const isFunction = require('./isFunction')
 const isSameType = require('./isSameType')
+
+const constant = x => () => x
+const identity = x => x
 
 const _maybe =
   _defineUnion({ Nothing: [], Just: [ 'a' ] })

@@ -1,14 +1,11 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const argsArray = require('../core/argsArray')
 const curry = require('../core/curry')
 const isFunction = require('../core/isFunction')
 
 // partial : ((* -> c), *) -> * -> c
-function partial() {
-  const args = argsArray(arguments)
-
+function partial(...args) {
   const fn = args[0]
   const xs = args.slice(1)
 

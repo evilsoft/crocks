@@ -1,6 +1,7 @@
-const constant = require('../src/core/constant')
-const isSameType = require('../src/core/isSameType')
-const _implements = require('../src/core/implements')
+const isSameType = require('../core/isSameType')
+const _implements = require('../core/implements')
+
+const constant = x => () => x
 
 const _type = constant('MockCrock')
 const _of   = x => MockCrock(x)

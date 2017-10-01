@@ -1,15 +1,16 @@
 const test = require('tape')
 const sinon = require('sinon')
-const helpers = require('../../test/helpers')
+const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
 
 const curry = require('./curry')
 const compose = curry(require('./compose'))
-const identity = require('./identity')
 const isFunction = require('./isFunction')
 const isObject = require('./isObject')
 const unit = require('./_unit')
+
+const identity = x => x
 
 const merge =
   fn => m => m.merge(fn)

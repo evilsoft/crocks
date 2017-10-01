@@ -1,10 +1,11 @@
 const test = require('tape')
-const helpers = require('../../test/helpers')
+const helpers = require('../test/helpers')
 
 const makeFake = helpers.makeFake
 
-const identity = require('./identity')
 const isFunction = require('./isFunction')
+
+const identity = x => x
 
 const isContravariant = require('./isContravariant')
 

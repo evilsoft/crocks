@@ -1,13 +1,14 @@
 const test = require('tape')
 const sinon = require('sinon')
-const helpers = require('../../test/helpers')
+const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
 
 const Pair = require('../core/Pair')
-const constant = require('../core/constant')
 const isFunction = require('../core/isFunction')
 const unit = require('../core/_unit')
+
+const constant = x => () => x
 
 const both = require('./both')
 

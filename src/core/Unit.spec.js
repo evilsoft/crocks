@@ -1,7 +1,7 @@
 const test = require('tape')
 const sinon = require('sinon')
-const MockCrock = require('../../test/MockCrock')
-const helpers = require('../../test/helpers')
+const MockCrock = require('../test/MockCrock')
+const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
 
@@ -10,8 +10,9 @@ const isObject = require('./isObject')
 
 const curry = require('./curry')
 const compose = curry(require('./compose'))
-const identity = require('./identity')
 const unit = require('./_unit')
+
+const identity = x => x
 
 const reverseApply =
   x => fn => fn(x)

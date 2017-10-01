@@ -8,11 +8,12 @@ const _inspect = require('../core/inspect')
 const type = require('../core/types').type('Result')
 
 const compose = require('../core/compose')
-const constant = require('../core/constant')
 const isApplicative = require('../core/isApplicative')
 const isFunction = require('../core/isFunction')
 const isSameType = require('../core/isSameType')
 const isSemigroup = require('../core/isSemigroup')
+
+const constant = x => () => x
 
 const _result =
   _defineUnion({ Err: [ 'a' ], Ok: [ 'b' ] })

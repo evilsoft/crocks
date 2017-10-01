@@ -1,18 +1,19 @@
 const test = require('tape')
-const helpers = require('../../test/helpers')
+const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
 
 const curry = require('./curry')
 const compose = curry(require('./compose'))
-const constant = require('./constant')
-const identity = require('./identity')
 
 const array = require('./array')
 
 const map = array.map
 const ap = array.ap
 const chain = array.chain
+
+const constant = x => () => x
+const identity = x => x
 
 test('array map properties (Functor)', t => {
   const m = [ 49 ]

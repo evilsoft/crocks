@@ -1,9 +1,10 @@
 const test = require('tape')
 const sinon = require('sinon')
 
-const constant = require('./constant')
-const identity = require('./identity')
 const isFunction = require('./isFunction')
+
+const constant = x => () => x
+const identity = x => x
 
 const hasAlg = require('./hasAlg')
 

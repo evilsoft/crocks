@@ -2,12 +2,12 @@ const test = require('tape')
 const sinon = require('sinon')
 
 const isFunction = require('./isFunction')
-const identity = require('./identity')
+
+const identity = x => x
 
 const once = require('./once')
 
 test('once core', t => {
-
   t.ok(isFunction(once), 'is a function')
 
   const inner = sinon.spy(identity)

@@ -3,8 +3,9 @@
 
 const curry = require('../core/curry')
 const compose = require('../core/compose')
-const constant = require('../core/constant')
 const isFunction = require('../core/isFunction')
+
+const constant = x => () => x
 
 // tap : (a -> b) -> a -> a
 function tap(fn, x) {

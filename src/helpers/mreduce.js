@@ -2,10 +2,11 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const curry = require('../core/curry')
-const identity = require('../core/identity')
 const isFoldable = require('../core/isFoldable')
 const isMonoid = require('../core/isMonoid')
 const mconcatMap = require('../core/mconcatMap')
+
+const identity = x => x
 
 // mreduce : Monoid M => M -> ([ a ] | List a) -> a
 function mreduce(M, xs) {

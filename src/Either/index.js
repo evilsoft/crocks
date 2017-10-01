@@ -8,10 +8,11 @@ const _inspect = require('../core/inspect')
 const type = require('../core/types').type('Either')
 
 const compose = require('../core/compose')
-const constant = require('../core/constant')
 const isApplicative = require('../core/isApplicative')
 const isFunction = require('../core/isFunction')
 const isSameType = require('../core/isSameType')
+
+const constant = x => () => x
 
 const _either =
   _defineUnion({ Left: [ 'a' ], Right: [ 'b' ] })

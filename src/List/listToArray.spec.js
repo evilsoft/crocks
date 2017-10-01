@@ -1,13 +1,14 @@
 const test = require('tape')
-const helpers = require('../../test/helpers')
+const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
 
 const List = require('.')
 
-const identity = require('../core/identity')
 const isArray = require('../core/isArray')
 const isFunction = require('../core/isFunction')
+
+const identity = x => x
 
 const listToArray = require('./listToArray')
 

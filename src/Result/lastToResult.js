@@ -4,10 +4,11 @@
 const Result = require('.')
 const Last = require('../core/types').proxy('Last')
 
-const constant = require('../core/constant')
 const curry = require('../core/curry')
 const isFunction = require('../core/isFunction')
 const isSameType = require('../core/isSameType')
+
+const constant = x => () => x
 
 const applyTransform = (left, last) =>
   last.value().either(

@@ -709,7 +709,8 @@ All functions in this group have a signature of `* -> Boolean` and are used with
 * `isObject : a -> Boolean`: Plain Old Javascript Object (POJO)
 * `isPlus : a -> Boolean`: an ADT that provides `map`, `alt` and `zero` functions
 * `isProfunctor : a -> Boolean`: an ADT that provides `map`, `contramap` and `promap` functions
-* `isPromise : a -> Boolean`: An object implementing `then` and `catch`
+* `isPromise : a -> Boolean`: an object implementing `then` and `catch`
+* `isSame : a -> b -> Boolean`: same value or reference, use `equals` for value equality
 * `isSameType : a -> b -> Boolean`: Constructor matches a values type, or two values types match
 * `isSemigroup : a -> Boolean`: an ADT that provides a `concat` function
 * `isSemigroupoid : a -> Boolean`: an ADT that provides a `compose` function
@@ -761,6 +762,7 @@ These functions provide a very clean way to build out very simple functions and 
 | `contramap` | `(b -> a) -> m a -> m b` | `crocks/pointfree` |
 | `either` | `(a -> c) -> (b -> c) -> m a b -> c` | `crocks/pointfree` |
 | `empty` | `m -> m` | `crocks/pointfree` |
+| `equals` | `m -> m -> Boolean` | `crocks/pointfree` |
 | `evalWith` | `a -> m -> b` | `crocks/State` |
 | `execWith` | `a -> m -> b` | `crocks/State` |
 | `extend` | `(m a -> b) -> m a -> m b` | `crocks/pointfree` |

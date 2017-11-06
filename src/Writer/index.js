@@ -1,6 +1,7 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
+const _equals = require('../core/equals')
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
 const __type = require('../core/types').type('Writer')
@@ -34,7 +35,8 @@ function _Writer(Monoid) {
       _of
 
     const equals =
-      m => isSameType(Writer, m) && m.value() === value()
+      m => isSameType(Writer, m)
+        && _equals(m.value(), val)
 
     const value =
       constant(val)

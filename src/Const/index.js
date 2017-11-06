@@ -1,6 +1,7 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
+const _equals = require('../core/equals')
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
 const type = require('../core/types').type('Const')
@@ -14,7 +15,8 @@ function Const(x) {
   }
 
   const equals =
-    m => isSameType(Const, m) && x === m.value()
+    m => isSameType(Const, m)
+      && _equals(x, m.value())
 
   const inspect =
     () => `Const${_inspect(x)}`

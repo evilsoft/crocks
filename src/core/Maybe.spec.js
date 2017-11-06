@@ -271,10 +271,10 @@ test('Maybe equals functionality', t => {
 })
 
 test('Maybe equals properties (Setoid)', t => {
-  const a = Maybe.Just(0)
-  const b = Maybe.Just(0)
-  const c = Maybe.Just(1)
-  const d = Maybe.Just(0)
+  const a = Maybe.Just([ 1, 'joe' ])
+  const b = Maybe.Just([ 1, 'joe' ])
+  const c = Maybe.Just([ 'joe', 1 ])
+  const d = Maybe.Just([ 1, 'joe' ])
 
   t.ok(isFunction(Maybe.Just(0).equals), 'provides an equals function')
 

@@ -1,6 +1,7 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
+const _equals = require('./equals')
 const _implements = require('./implements')
 const _inspect = require('./inspect')
 const type = require('./types').type('Pair')
@@ -36,8 +37,8 @@ function Pair(l, r) {
 
   function equals(m) {
     return isSameType(Pair, m)
-      && m.fst() === fst()
-      && m.snd() === snd()
+      && _equals(m.fst(), fst())
+      && _equals(m.snd(), snd())
   }
 
   function concat(m) {

@@ -85,10 +85,10 @@ test('Const equals functionality', t => {
 })
 
 test('Const equals properties (Setoid)', t => {
-  const a = Const(0)
-  const b = Const(0)
-  const c = Const(1)
-  const d = Const(0)
+  const a = Const({ a: true })
+  const b = Const({ a: true })
+  const c = Const({ a: true, b: 'not' })
+  const d = Const({ a: true })
 
   t.ok(isFunction(Const(0).equals), 'provides an equals function')
   t.equal(a.equals(a), true, 'reflexivity')

@@ -65,12 +65,12 @@ test('Identity type', t => {
   t.end()
 })
 
-test('Identity value', t => {
+test('Identity valueOf', t => {
   const x = 'some value'
   const m = Identity(x)
 
-  t.ok(isFunction(m.value), 'is a function')
-  t.equal(m.value(), x,'value returns the wrapped value' )
+  t.ok(isFunction(m.valueOf), 'is a function')
+  t.equal(m.valueOf(), x,'value returns the wrapped value' )
 
   t.end()
 })
@@ -152,14 +152,14 @@ test('Identity concat functionality', t => {
   const res = a.concat(b)
 
   t.ok(isSameType(Identity, res), 'returns another Identity')
-  t.same(res.value(), [ 1, 2, 4, 3 ], 'concats the inner semigroup with Rights')
+  t.same(res.valueOf(), [ 1, 2, 4, 3 ], 'concats the inner semigroup with Rights')
 
   t.end()
 })
 
 test('Identity concat properties (Semigroup)', t => {
   const extract =
-    m => m.value()
+    m => m.valueOf()
 
   const a = Identity([ 'a' ])
   const b = Identity([ 'b' ])
@@ -202,7 +202,7 @@ test('Identity map functionality', t => {
 
   t.equal(m.type(), 'Identity', 'returns an Identity')
   t.equal(spy.called, true, 'calls mapping function')
-  t.equal(m.value(), x, 'returns the result of the map inside of new Identity')
+  t.equal(m.valueOf(), x, 'returns the result of the map inside of new Identity')
 
   t.end()
 })
@@ -215,8 +215,8 @@ test('Identity map properties (Functor)', t => {
 
   t.ok(isFunction(m.map), 'provides a map function')
 
-  t.equal(m.map(identity).value(), m.value(), 'identity')
-  t.equal(m.map(compose(f, g)).value(), m.map(g).map(f).value(), 'composition')
+  t.equal(m.map(identity).valueOf(), m.valueOf(), 'identity')
+  t.equal(m.map(compose(f, g)).valueOf(), m.map(g).map(f).valueOf(), 'composition')
 
   t.end()
 })
@@ -260,7 +260,7 @@ test('Identity ap properties (Apply)', t => {
   t.ok(isFunction(Identity(0).map), 'implements the Functor spec')
   t.ok(isFunction(Identity(0).ap), 'provides an ap function')
 
-  t.equal(a.ap(Identity(3)).value(), b.ap(Identity(3)).value(), 'composition')
+  t.equal(a.ap(Identity(3)).valueOf(), b.ap(Identity(3)).valueOf(), 'composition')
 
   t.end()
 })
@@ -268,7 +268,7 @@ test('Identity ap properties (Apply)', t => {
 test('Identity of', t => {
   t.equal(Identity.of, Identity(0).of, 'Identity.of is the same as the instance version')
   t.equal(Identity.of(0).type(), 'Identity', 'returns an Identity')
-  t.equal(Identity.of(0).value(), 0, 'wraps the value passed into an Identity')
+  t.equal(Identity.of(0).valueOf(), 0, 'wraps the value passed into an Identity')
 
   t.end()
 })
@@ -279,13 +279,13 @@ test('Identity of properties (Applicative)', t => {
   t.ok(isFunction(Identity(0).of), 'provides an of function')
   t.ok(isFunction(Identity(0).ap), 'implements the Apply spec')
 
-  t.equal(m.ap(Identity(3)).value(), 3, 'identity')
-  t.equal(m.ap(Identity.of(3)).value(), Identity.of(identity(3)).value(), 'homomorphism')
+  t.equal(m.ap(Identity(3)).valueOf(), 3, 'identity')
+  t.equal(m.ap(Identity.of(3)).valueOf(), Identity.of(identity(3)).valueOf(), 'homomorphism')
 
   const a = x => m.ap(Identity.of(x))
   const b = x => Identity.of(reverseApply(x)).ap(m)
 
-  t.equal(a(3).value(), b(3).value(), 'interchange')
+  t.equal(a(3).valueOf(), b(3).valueOf(), 'interchange')
 
   t.end()
 })
@@ -320,7 +320,7 @@ test('Identity chain properties (Chain)', t => {
   const a = x => Identity(x).chain(f).chain(g)
   const b = x => Identity(x).chain(y => f(y).chain(g))
 
-  t.equal(a(10).value(), b(10).value(), 'assosiativity')
+  t.equal(a(10).valueOf(), b(10).valueOf(), 'assosiativity')
 
   t.end()
 })
@@ -331,9 +331,9 @@ test('Identity chain properties (Monad)', t => {
 
   const f = x => Identity(x)
 
-  t.equal(Identity.of(3).chain(f).value(), f(3).value(), 'left identity')
+  t.equal(Identity.of(3).chain(f).valueOf(), f(3).valueOf(), 'left identity')
 
-  t.equal(f(3).chain(Identity.of).value(), f(3).value(), 'right identity')
+  t.equal(f(3).chain(Identity.of).valueOf(), f(3).valueOf(), 'right identity')
 
   t.end()
 })
@@ -364,8 +364,8 @@ test('Identity sequence functionality', t => {
   const m = Identity(MockCrock(x)).sequence(MockCrock.of)
 
   t.equal(m.type(), 'MockCrock', 'Provides an outer type of MockCrock')
-  t.equal(m.value().type(), 'Identity', 'Provides an inner type of Identity')
-  t.equal(m.value().value(), x, 'Identity contains original inner value')
+  t.equal(m.valueOf().type(), 'Identity', 'Provides an inner type of Identity')
+  t.equal(m.valueOf().valueOf(), x, 'Identity contains original inner value')
 
   t.end()
 })
@@ -420,8 +420,8 @@ test('Identity traverse functionality', t => {
   const m = Identity(x).traverse(f, MockCrock)
 
   t.equal(m.type(), 'MockCrock', 'Provides an outer type of MockCrock')
-  t.equal(m.value().type(), 'Identity', 'Provides an inner type of Identity')
-  t.equal(m.value().value(), x, 'Identity contains original inner value')
+  t.equal(m.valueOf().type(), 'Identity', 'Provides an inner type of Identity')
+  t.equal(m.valueOf().valueOf(), x, 'Identity contains original inner value')
 
   t.end()
 })

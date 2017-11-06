@@ -19,7 +19,7 @@ function mreduceMap(M, f, xs) {
     throw new TypeError('mreduceMap: Foldable required for third argument')
   }
 
-  return mconcatMap(M, f, xs).value()
+  return mconcatMap(M, f, xs).valueOf()
 }
 
 module.exports = curry(mreduceMap)

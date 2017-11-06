@@ -36,7 +36,7 @@ test('arrayToList with Array', t => {
   const a = arrayToList(data)
 
   t.ok(isSameType(List, a), 'returns a List from an Array')
-  t.same(a.value(), data, 'preserves the structure of underlying data')
+  t.same(a.valueOf(), data, 'preserves the structure of underlying data')
 
   t.end()
 })
@@ -59,7 +59,7 @@ test('arrayToList with Array returning function', t => {
   const m = arrayToList(identity, data)
 
   t.ok(isSameType(List, m), 'returns a List from a function returning an Array')
-  t.same(m.value(), data, 'preserves the structure of underlying data')
+  t.same(m.valueOf(), data, 'preserves the structure of underlying data')
 
   t.end()
 })

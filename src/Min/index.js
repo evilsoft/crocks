@@ -13,30 +13,30 @@ const _empty =
   () => Min(Infinity)
 
 function Min(n) {
-  const x = isNil(n) ? _empty().value() : n
+  const x = isNil(n) ? _empty().valueOf() : n
 
   if(!arguments.length || !isNumber(x)) {
     throw new TypeError('Min: Numeric value required')
   }
 
-  const value =
+  const valueOf =
     () => x
 
   const empty =
     _empty
 
   const inspect =
-    () => `Min${_inspect(value())}`
+    () => `Min${_inspect(valueOf())}`
 
   function concat(m) {
     if(!isSameType(Min, m)) {
       throw new TypeError('Min.concat: Min required')
     }
 
-    return Min(Math.min(x, m.value()))
+    return Min(Math.min(x, m.valueOf()))
   }
 
-  return { inspect, value, type, concat, empty }
+  return { inspect, valueOf, type, concat, empty }
 }
 
 Min['@@implements'] = _implements(

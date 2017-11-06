@@ -587,12 +587,12 @@ test('Maybe sequence functionality', t => {
   const n = Maybe.Nothing().sequence(MockCrock.of)
 
   t.equal(s.type(), 'MockCrock', 'Provides an outer type of MockCrock')
-  t.equal(s.value().type(), 'Maybe', 'Provides an inner type of Maybe')
-  t.same(s.value().option('Nothing'), x, 'Maybe contains original inner value')
+  t.equal(s.valueOf().type(), 'Maybe', 'Provides an inner type of Maybe')
+  t.same(s.valueOf().option('Nothing'), x, 'Maybe contains original inner value')
 
   t.equal(n.type(), 'MockCrock', 'Provides an outer type of MockCrock')
-  t.equal(n.value().type(), 'Maybe', 'Provides an inner type of Maybe')
-  t.equal(n.value().option('Nothing'), 'Nothing', 'Reports as a Nothing')
+  t.equal(n.valueOf().type(), 'Maybe', 'Provides an inner type of Maybe')
+  t.equal(n.valueOf().option('Nothing'), 'Nothing', 'Reports as a Nothing')
 
   t.end()
 })
@@ -662,12 +662,12 @@ test('Maybe traverse functionality', t => {
   const l = Maybe.Nothing().traverse(f, MockCrock)
 
   t.equal(r.type(), 'MockCrock', 'Provides an outer type of MockCrock')
-  t.equal(r.value().type(), 'Maybe', 'Provides an inner type of Maybe')
-  t.equal(r.value().option('Nothing'), x, 'Maybe contains original inner value')
+  t.equal(r.valueOf().type(), 'Maybe', 'Provides an inner type of Maybe')
+  t.equal(r.valueOf().option('Nothing'), x, 'Maybe contains original inner value')
 
   t.equal(l.type(), 'MockCrock', 'Provides an outer type of MockCrock')
-  t.equal(l.value().type(), 'Maybe', 'Provides an inner type of Maybe')
-  t.equal(l.value().option('Nothing'), 'Nothing', 'Maybe is a Nothing')
+  t.equal(l.valueOf().type(), 'Maybe', 'Provides an inner type of Maybe')
+  t.equal(l.valueOf().option('Nothing'), 'Nothing', 'Maybe is a Nothing')
 
   t.end()
 })

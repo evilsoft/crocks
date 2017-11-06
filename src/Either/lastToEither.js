@@ -11,7 +11,7 @@ const isSameType = require('../core/isSameType')
 const constant = x => () => x
 
 const applyTransform = (left, last) =>
-  last.value().either(
+  last.valueOf().either(
     constant(Either.Left(left)),
     Either.Right
   )

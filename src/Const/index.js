@@ -16,12 +16,12 @@ function Const(x) {
 
   const equals =
     m => isSameType(Const, m)
-      && _equals(x, m.value())
+      && _equals(x, m.valueOf())
 
   const inspect =
     () => `Const${_inspect(x)}`
 
-  const value =
+  const valueOf =
     () => x
 
   function concat(m) {
@@ -57,7 +57,7 @@ function Const(x) {
   }
 
   return {
-    inspect, value, type, equals,
+    inspect, valueOf, type, equals,
     concat, map, ap, chain
   }
 }

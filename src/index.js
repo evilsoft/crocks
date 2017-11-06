@@ -132,7 +132,7 @@ const pointfree = {
   swap: require('./pointfree/swap'),
   tail: require('./pointfree/tail'),
   traverse: require('./pointfree/traverse'),
-  value: require('./pointfree/value')
+  valueOf: require('./pointfree/valueOf')
 }
 
 const predicates = {

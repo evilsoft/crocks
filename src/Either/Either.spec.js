@@ -774,12 +774,12 @@ test('Either sequence functionality', t => {
   const l = Left('Left').sequence(MockCrock.of)
 
   t.equal(r.type(), 'MockCrock', 'Provides an outer type of MockCrock')
-  t.equal(r.value().type(), 'Either', 'Provides an inner type of Either')
-  t.equal(r.value().either(constant(0), identity), x, 'Either contains original inner value')
+  t.equal(r.valueOf().type(), 'Either', 'Provides an inner type of Either')
+  t.equal(r.valueOf().either(constant(0), identity), x, 'Either contains original inner value')
 
   t.equal(l.type(), 'MockCrock', 'Provides an outer type of MockCrock')
-  t.equal(l.value().type(), 'Either', 'Provides an inner type of Either')
-  t.equal(l.value().either(identity, constant(0)), 'Left', 'Either contains original Left value')
+  t.equal(l.valueOf().type(), 'Either', 'Provides an inner type of Either')
+  t.equal(l.valueOf().either(identity, constant(0)), 'Left', 'Either contains original Left value')
 
   t.end()
 })
@@ -854,12 +854,12 @@ test('Either traverse functionality', t => {
   const l = Left('Left').traverse(f, MockCrock)
 
   t.equal(r.type(), 'MockCrock', 'Provides an outer type of MockCrock')
-  t.equal(r.value().type(), 'Either', 'Provides an inner type of Either')
-  t.equal(r.value().either(constant(0), identity), x, 'Either contains original inner value')
+  t.equal(r.valueOf().type(), 'Either', 'Provides an inner type of Either')
+  t.equal(r.valueOf().either(constant(0), identity), x, 'Either contains original inner value')
 
   t.equal(l.type(), 'MockCrock', 'Provides an outer type of MockCrock')
-  t.equal(l.value().type(), 'Either', 'Provides an inner type of Either')
-  t.equal(l.value().either(identity, constant(0)), 'Left', 'Either contains original Left value')
+  t.equal(l.valueOf().type(), 'Either', 'Provides an inner type of Either')
+  t.equal(l.valueOf().either(identity, constant(0)), 'Left', 'Either contains original Left value')
 
   t.end()
 })

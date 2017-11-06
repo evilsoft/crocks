@@ -50,12 +50,12 @@ test('First inspect', t => {
   t.end()
 })
 
-test('First value', t => {
-  t.ok(isFunction(First(0).value), 'is a function')
+test('First valueOf', t => {
+  t.ok(isFunction(First(0).valueOf), 'is a function')
 
-  const val = First(1).value()
-  const just = First(Maybe.Just(2)).value()
-  const nothing = First(Maybe.Nothing()).value()
+  const val = First(1).valueOf()
+  const just = First(Maybe.Just(2)).valueOf()
+  const nothing = First(Maybe.Nothing()).valueOf()
 
   t.ok(isSameType(Maybe, val), 'returns a Maybe when constructed with a value')
   t.ok(isSameType(Maybe, just), 'returns a Maybe when constructed with a Just')

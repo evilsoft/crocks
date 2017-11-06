@@ -99,11 +99,11 @@ test('fanout with Stars', t => {
 
   t.ok(isSameType(Star, fanned), 'returns a Star')
 
-  const result = fanned.runWith(x).value()
+  const result = fanned.runWith(x).valueOf()
 
   t.ok(isSameType(Pair, result), 'fanned function returns a Pair')
-  t.equal(result.fst(), f(x).value(), 'applys first function to fst of Pair')
-  t.equal(result.snd(), g(x).value(), 'applys second function to snd of Pair')
+  t.equal(result.fst(), f(x).valueOf(), 'applys first function to fst of Pair')
+  t.equal(result.snd(), g(x).valueOf(), 'applys second function to snd of Pair')
 
   t.end()
 })

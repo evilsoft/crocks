@@ -19,7 +19,7 @@ function Identity(x) {
     throw new TypeError('Identity: Must wrap something')
   }
 
-  const value =
+  const valueOf =
     () => x
 
   const of =
@@ -27,7 +27,7 @@ function Identity(x) {
 
   const equals =
     m => isSameType(Identity, m)
-      && _equals(x, m.value())
+      && _equals(x, m.valueOf())
 
   const inspect =
     () => `Identity${_inspect(x)}`
@@ -99,7 +99,7 @@ function Identity(x) {
   }
 
   return {
-    inspect, value, type, equals,
+    inspect, valueOf, type, equals,
     concat, map, ap, of, chain,
     sequence, traverse
   }

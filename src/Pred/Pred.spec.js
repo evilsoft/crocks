@@ -65,12 +65,12 @@ test('Pred type', t => {
   t.end()
 })
 
-test('Pred value', t => {
+test('Pred valueOf', t => {
   const f = constant('')
   const p = Pred(f)
 
-  t.ok(isFunction(p.value), 'is a function')
-  t.equals(p.value()(), !!f(), 'returns a coerced to Boolean version of the function')
+  t.ok(isFunction(p.valueOf), 'is a function')
+  t.equals(p.valueOf()(), !!f(), 'returns a coerced to Boolean version of the function')
 
   t.end()
 })

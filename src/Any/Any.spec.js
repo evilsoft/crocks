@@ -56,19 +56,19 @@ test('Any inspect', t => {
   t.end()
 })
 
-test('Any value', t => {
-  t.ok(isFunction(Any(0).value), 'is a function')
+test('Any valueOf', t => {
+  t.ok(isFunction(Any(0).valueOf), 'is a function')
 
-  t.equal(Any(undefined).value(), false, 'reports false for undefined')
-  t.equal(Any(null).value(), false, 'reports false for null')
-  t.equal(Any(0).value(), false, 'reports false for falsey number')
-  t.equal(Any(1).value(), true, 'reports true for truthy number')
-  t.equal(Any('').value(), false, 'reports false for falsey number')
-  t.equal(Any('string').value(), true, 'reports true for truthy string')
-  t.equal(Any(false).value(), false, 'reports false for false')
-  t.equal(Any(true).value(), true, 'reports true for true')
-  t.equal(Any([]).value(), true, 'reports true for an array')
-  t.equal(Any({}).value(), true, 'reports true for an object')
+  t.equal(Any(undefined).valueOf(), false, 'reports false for undefined')
+  t.equal(Any(null).valueOf(), false, 'reports false for null')
+  t.equal(Any(0).valueOf(), false, 'reports false for falsey number')
+  t.equal(Any(1).valueOf(), true, 'reports true for truthy number')
+  t.equal(Any('').valueOf(), false, 'reports false for falsey number')
+  t.equal(Any('string').valueOf(), true, 'reports true for truthy string')
+  t.equal(Any(false).valueOf(), false, 'reports false for false')
+  t.equal(Any(true).valueOf(), true, 'reports true for true')
+  t.equal(Any([]).valueOf(), true, 'reports true for an array')
+  t.equal(Any({}).valueOf(), true, 'reports true for an object')
 
   t.end()
 })
@@ -91,7 +91,7 @@ test('Any concat properties (Semigroup)', t => {
   const right = a.concat(b.concat(c))
 
   t.ok(isFunction(a.concat), 'provides a concat function')
-  t.equal(left.value(), right.value(), 'associativity')
+  t.equal(left.valueOf(), right.valueOf(), 'associativity')
   t.equal(a.concat(b).type(), a.type(), 'returns an Any')
 
   t.end()
@@ -118,9 +118,9 @@ test('Any concat functionality', t => {
   t.throws(cat({}), err, 'throws with an object')
   t.throws(cat(notAny), err, 'throws with non-Any')
 
-  t.equal(a.concat(b).value(), true, 'true to false reports true')
-  t.equal(a.concat(a).value(), true, 'true to true reports true')
-  t.equal(b.concat(b).value(), false, 'false to false reports false')
+  t.equal(a.concat(b).valueOf(), true, 'true to false reports true')
+  t.equal(a.concat(a).valueOf(), true, 'true to true reports true')
+  t.equal(b.concat(b).valueOf(), false, 'false to false reports false')
 
   t.end()
 })
@@ -134,8 +134,8 @@ test('Any empty properties (Monoid)', t => {
   const right = m.concat(m.empty())
   const left = m.empty().concat(m)
 
-  t.equal(right.value(), m.value(), 'right identity')
-  t.equal(left.value(), m.value(), 'left identity')
+  t.equal(right.valueOf(), m.valueOf(), 'right identity')
+  t.equal(left.valueOf(), m.valueOf(), 'left identity')
 
   t.end()
 })
@@ -144,7 +144,7 @@ test('Any empty functionality', t => {
   const x = Any(0).empty()
 
   t.equal(x.type(), 'Any', 'provides an Any')
-  t.equal(x.value(), false, 'wraps a false value')
+  t.equal(x.valueOf(), false, 'wraps a false value')
 
   t.end()
 })

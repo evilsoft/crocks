@@ -176,8 +176,8 @@ test('Star compose functionality', t => {
   const x = 13
   const g = x => MockCrock(x * 10)
 
-  const chained = f(x).chain(g).value()
-  const star = a.compose(Star(g)).runWith(x).value()
+  const chained = f(x).chain(g).valueOf()
+  const star = a.compose(Star(g)).runWith(x).valueOf()
 
   t.equal(chained, star, 'builds composition as expected')
 
@@ -195,7 +195,7 @@ test('Star compose properties (Semigroupoid)', t => {
   const right = a.compose(b.compose(c)).runWith
   const x = 20
 
-  t.same(left(x).value(), right(x).value(), 'associativity')
+  t.same(left(x).valueOf(), right(x).valueOf(), 'associativity')
   t.same(a.compose(b).type(), a.type(), 'returns Semigroupoid of same type')
 
   t.end()
@@ -210,7 +210,7 @@ test('Star id functionality', t => {
 
   t.ok(isSameType(Star, m), 'provides an Arrow')
   t.ok(isSameType(MockCrock, result), 'returns an instance of the wraped monad')
-  t.equals(result.value(), value, 'resulting instance wraps idenity of input')
+  t.equals(result.valueOf(), value, 'resulting instance wraps idenity of input')
 
   t.end()
 })
@@ -225,8 +225,8 @@ test('Star id properties (Category)', t => {
   const right = m.compose(m.id()).runWith
   const left = m.id().compose(m).runWith
 
-  t.same(right(x).value(), m.runWith(x).value(), 'right identity')
-  t.same(left(x).value(), m.runWith(x).value(), 'left identity')
+  t.same(right(x).valueOf(), m.runWith(x).valueOf(), 'right identity')
+  t.same(left(x).valueOf(), m.runWith(x).valueOf(), 'left identity')
 
   t.end()
 })
@@ -269,7 +269,7 @@ test('Star map functionality', t => {
 
   t.ok(spy.called, 'calls mapping function when ran')
   t.equal(result.type(), 'MockCrock', 'returns the resulting Functor')
-  t.equal(result.value(), x, 'resulting Functor contains original value')
+  t.equal(result.valueOf(), x, 'resulting Functor contains original value')
 
   t.end()
 })
@@ -284,10 +284,10 @@ test('Star map properties (Functor)', t => {
 
   t.ok(isFunction(m.map), 'provides a map function')
 
-  t.equal(m.map(identity).runWith(x).value(), m.runWith(x).value(), 'identity')
+  t.equal(m.map(identity).runWith(x).valueOf(), m.runWith(x).valueOf(), 'identity')
   t.equal(
-    m.map(_compose(f, g)).runWith(x).value(),
-    m.map(g).map(f).runWith(x).value(),
+    m.map(_compose(f, g)).runWith(x).valueOf(),
+    m.map(g).map(f).runWith(x).valueOf(),
     'composition'
   )
 
@@ -326,7 +326,7 @@ test('Star contramap functionality', t => {
   m.runWith(x)
 
   t.ok(spy.called, 'calls mapping function when ran')
-  t.equal(m.runWith(x).value(), x, 'returns the result of the resulting composition')
+  t.equal(m.runWith(x).valueOf(), x, 'returns the result of the resulting composition')
 
   t.end()
 })
@@ -341,10 +341,10 @@ test('Star contramap properties (Contra Functor)', t => {
 
   t.ok(isFunction(m.contramap), 'provides a contramap function')
 
-  t.equal(m.contramap(identity).runWith(x).value(), m.runWith(x).value(), 'identity')
+  t.equal(m.contramap(identity).runWith(x).valueOf(), m.runWith(x).valueOf(), 'identity')
   t.equal(
-    m.contramap(_compose(f, g)).runWith(x).value(),
-    m.contramap(f).contramap(g).runWith(x).value(),
+    m.contramap(_compose(f, g)).runWith(x).valueOf(),
+    m.contramap(f).contramap(g).runWith(x).valueOf(),
     'composition'
   )
 
@@ -407,7 +407,7 @@ test('Star promap functionality', t => {
 
   t.ok(spyLeft.called, 'calls left mapping function when ran')
   t.ok(spyRight.called, 'calls right mapping function when ran')
-  t.equal(m.runWith(x).value(), comp(x), 'returns the result of the resulting composition')
+  t.equal(m.runWith(x).valueOf(), comp(x), 'returns the result of the resulting composition')
 
   t.end()
 })
@@ -427,11 +427,11 @@ test('Star promap properties (Functor)', t => {
   t.ok(isFunction(m.contramap), 'provides a contramap function')
   t.ok(isFunction(m.promap), 'provides a promap function')
 
-  t.equal(m.promap(identity, identity).runWith(x).value(), m.runWith(x).value(), 'identity')
+  t.equal(m.promap(identity, identity).runWith(x).valueOf(), m.runWith(x).valueOf(), 'identity')
 
   t.equal(
-    m.promap(_compose(f, g), _compose(h, k)).runWith(x).value(),
-    m.promap(f, k).promap(g, h).runWith(x).value(),
+    m.promap(_compose(f, g), _compose(h, k)).runWith(x).valueOf(),
+    m.promap(f, k).promap(g, h).runWith(x).valueOf(),
     'composition'
   )
 
@@ -472,7 +472,7 @@ test('Star first', t => {
   t.throws(notValid(true), err, 'throws with true as input')
   t.throws(notValid({}), err, 'throws with an object as input')
 
-  const result = m.first().runWith(Pair(10, 10)).value()
+  const result = m.first().runWith(Pair(10, 10)).valueOf()
 
   t.ok(isSameType(Pair, result), 'returns a Pair')
   t.equal(result.fst(), 11, 'applies the function to the fst element of a pair')
@@ -517,7 +517,7 @@ test('Star second', t => {
 
   t.doesNotThrow(notValid(MockCrock.of(2)), 'does not throw when computation returns a Functor')
 
-  const result = m.second().runWith(Pair(10, 10)).value()
+  const result = m.second().runWith(Pair(10, 10)).valueOf()
 
   t.ok(isSameType(Pair, result), 'returns a Pair')
   t.equal(result.snd(), 11, 'applies the function to the snd element of a pair')
@@ -562,7 +562,7 @@ test('Star both', t => {
 
   t.doesNotThrow(notValid(MockCrock.of(2)), 'does not throw when computation returns a Functor')
 
-  const result = m.both().runWith(Pair(10, 10)).value()
+  const result = m.both().runWith(Pair(10, 10)).valueOf()
 
   t.ok(isSameType(Pair, result), 'returns a Pair')
   t.equal(result.fst(), 11, 'applies the function to the first element of a pair')

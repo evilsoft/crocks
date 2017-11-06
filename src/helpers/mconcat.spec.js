@@ -39,8 +39,8 @@ test('mconcat helper', t => {
   const nothing = mconcat(Last, [])
   const something = mconcat(Last, [ 1, 2, 3 ])
 
-  t.equal(nothing.value(), Last.empty().value(), 'returns the empty value when passed an empty array')
-  t.equal(something.value(), 3, 'returns the last value by lifting and calling concat on each')
+  t.equal(nothing.valueOf(), Last.empty().valueOf(), 'returns the empty value when passed an empty array')
+  t.equal(something.valueOf(), 3, 'returns the last value by lifting and calling concat on each')
 
   t.end()
 })

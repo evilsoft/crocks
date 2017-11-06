@@ -65,12 +65,12 @@ test('Unit type', t => {
   t.end()
 })
 
-test('Unit value', t => {
+test('Unit valueOf', t => {
   const x = 'some value'
   const m = Unit(x)
 
-  t.ok(isFunction(m.value), 'is a function')
-  t.equal(m.value(), undefined,'value always returns undefined' )
+  t.ok(isFunction(m.valueOf), 'is a function')
+  t.equal(m.valueOf(), undefined,'value always returns undefined' )
 
   t.end()
 })
@@ -115,7 +115,7 @@ test('Unit concat properties (Semigroup)', t => {
   const right = a.concat(b.concat(c))
 
   t.ok(isFunction(a.concat), 'provides a concat function')
-  t.equal(left.value(), right.value(), 'associativity')
+  t.equal(left.valueOf(), right.valueOf(), 'associativity')
   t.equal(a.concat(b).type(), a.type(), 'returns a Unit')
 
   t.end()
@@ -141,8 +141,8 @@ test('Unit concat functionality', t => {
   t.throws(cat({}), TypeError, 'throws with an object')
   t.throws(cat(notUnit), TypeError, 'throws when passed non-Unit')
 
-  t.equal(a.concat(b).value(), undefined, 'reports null for 23')
-  t.equal(b.concat(a).value(), undefined, 'undefined for true')
+  t.equal(a.concat(b).valueOf(), undefined, 'reports null for 23')
+  t.equal(b.concat(a).valueOf(), undefined, 'undefined for true')
 
   t.end()
 })
@@ -156,8 +156,8 @@ test('Unit empty properties (Monoid)', t => {
   const right = m.concat(m.empty())
   const left = m.empty().concat(m)
 
-  t.equal(right.value(), m.value(), 'right identity')
-  t.equal(left.value(), m.value(), 'left identity')
+  t.equal(right.valueOf(), m.valueOf(), 'right identity')
+  t.equal(left.valueOf(), m.valueOf(), 'left identity')
 
   t.end()
 })
@@ -166,7 +166,7 @@ test('Unit empty functionality', t => {
   const x = Unit(0).empty()
 
   t.equal(x.type(), 'Unit', 'provides a Unit')
-  t.equal(x.value(), undefined, 'wraps an undefined value')
+  t.equal(x.valueOf(), undefined, 'wraps an undefined value')
 
   t.end()
 })
@@ -197,7 +197,7 @@ test('Unit map functionality', t => {
 
   t.equal(m.type(), 'Unit', 'returns a Unit')
   t.notOk(spy.called, 'does not call mapping function')
-  t.equal(m.value(), undefined, 'returns undefined')
+  t.equal(m.valueOf(), undefined, 'returns undefined')
 
   t.end()
 })
@@ -210,8 +210,8 @@ test('Unit map properties (Functor)', t => {
 
   t.ok(isFunction(m.map), 'provides a map function')
 
-  t.equal(m.map(identity).value(), m.value(), 'identity')
-  t.equal(m.map(compose(f, g)).value(), m.map(g).map(f).value(), 'composition')
+  t.equal(m.map(identity).valueOf(), m.valueOf(), 'identity')
+  t.equal(m.map(compose(f, g)).valueOf(), m.map(g).map(f).valueOf(), 'composition')
 
   t.end()
 })
@@ -245,7 +245,7 @@ test('Unit ap properties (Apply)', t => {
   t.ok(isFunction(Unit(0).map), 'implements the Functor spec')
   t.ok(isFunction(Unit(0).ap), 'provides an ap function')
 
-  t.same(a.ap(Unit(3)).value(), b.ap(Unit(3)).value(), 'composition')
+  t.same(a.ap(Unit(3)).valueOf(), b.ap(Unit(3)).valueOf(), 'composition')
 
   t.end()
 })
@@ -253,7 +253,7 @@ test('Unit ap properties (Apply)', t => {
 test('Unit of', t => {
   t.equal(Unit.of, Unit(0).of, 'Unit.of is the same as the instance version')
   t.equal(Unit.of(0).type(), 'Unit', 'returns a Unit')
-  t.equal(Unit.of(0).value(), undefined, 'returns the default undefined value')
+  t.equal(Unit.of(0).valueOf(), undefined, 'returns the default undefined value')
 
   t.end()
 })
@@ -264,13 +264,13 @@ test('Unit of properties (Applicative)', t => {
   t.ok(isFunction(Unit(0).of), 'provides an of function')
   t.ok(isFunction(Unit(0).ap), 'implements the Apply spec')
 
-  t.equal(m.ap(Unit(3)).value(), undefined, 'identity')
-  t.equal(m.ap(Unit.of(3)).value(), Unit.of(identity(3)).value(), 'homomorphism')
+  t.equal(m.ap(Unit(3)).valueOf(), undefined, 'identity')
+  t.equal(m.ap(Unit.of(3)).valueOf(), Unit.of(identity(3)).valueOf(), 'homomorphism')
 
   const a = x => m.ap(Unit.of(x))
   const b = x => Unit.of(reverseApply(x)).ap(m)
 
-  t.equal(a(3).value(), b(3).value(), 'interchange')
+  t.equal(a(3).valueOf(), b(3).valueOf(), 'interchange')
 
   t.end()
 })
@@ -304,7 +304,7 @@ test('Unit chain properties (Chain)', t => {
   const a = x => Unit(x).chain(f).chain(g)
   const b = x => Unit(x).chain(y => f(y).chain(g))
 
-  t.equal(a(10).value(), b(10).value(), 'assosiativity')
+  t.equal(a(10).valueOf(), b(10).valueOf(), 'assosiativity')
 
   t.end()
 })
@@ -315,9 +315,9 @@ test('Unit chain properties (Monad)', t => {
 
   const f = x => Unit(x)
 
-  t.equal(Unit.of(56).chain(f).value(), f(56).value(), 'left identity')
+  t.equal(Unit.of(56).chain(f).valueOf(), f(56).valueOf(), 'left identity')
 
-  t.equal(f(3).chain(Unit.of).value(), f(3).value(), 'right identity')
+  t.equal(f(3).chain(Unit.of).valueOf(), f(3).valueOf(), 'right identity')
 
   t.end()
 })

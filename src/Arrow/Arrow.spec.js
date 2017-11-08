@@ -77,16 +77,6 @@ test('Arrow type', t => {
   t.end()
 })
 
-test('Arrow value', t => {
-  const f = constant('dat function')
-  const a = Arrow(f)
-
-  t.ok(isFunction(a.value), 'is a function')
-  t.equal(a.value()(), f(), 'provides the wrapped function')
-
-  t.end()
-})
-
 test('Arrow runWith', t => {
   const f = sinon.spy(identity)
   const a = Arrow(f)

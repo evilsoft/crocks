@@ -18,11 +18,8 @@ function Arrow(runWith) {
     throw new TypeError('Arrow: Function required')
   }
 
-  const value =
-    () => runWith
-
   const inspect =
-    () => `Arrow${_inspect(value())}`
+    () => `Arrow${_inspect(runWith)}`
 
   const id =
     _id
@@ -88,7 +85,7 @@ function Arrow(runWith) {
   }
 
   return {
-    inspect, type, value, runWith,
+    inspect, type, runWith,
     id, compose, map, contramap,
     promap, first, second, both
   }

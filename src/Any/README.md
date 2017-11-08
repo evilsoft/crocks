@@ -2,7 +2,9 @@
 ```haskell
 Any Boolean
 ```
-`Any` is a `Monoid` that will combine two values of any type using logical disjunction (OR) on their coerced `Boolean` values, mapping truth-y values to `true` and false-y values to `false`.
+`Any` is a `Monoid` that will combine two values of any type using logical
+disjunction (OR) on their coerced `Boolean` values, mapping truth-y values to
+`true` and false-y values to `false`.
 
 ```js
 const Any = require('crocks/Any')
@@ -39,9 +41,13 @@ anyNumber([ true, 'string' ])
 Any.empty :: () -> Any
 ```
 
-`empty` provides the identity for the `Monoid` in that when the value it provides is `concat`ed to any other value, it will return the other value. In the case of `Any` the result of `empty` is `false`. `empty` is available on both the Constructor and the Instance for convenience.
+`empty` provides the identity for the `Monoid` in that when the value it
+provides is `concat`ed to any other value, it will return the other value. In
+the case of `Any` the result of `empty` is `false`. `empty` is available on both
+the Constructor and the Instance for convenience.
+
 ```js
-Any.empty() //=> Any true
+Any.empty() //=> Any false
 
 Any(true).concat(Any.empty())   //=> Any true
 Any(false).concat(Any.empty())  //=> Any false
@@ -53,7 +59,13 @@ Any(false).concat(Any.empty())  //=> Any false
 Any.type :: () -> String
 ```
 
-`type` provides a string representation of the type name for a given type in `crocks`. While it is used mostly internally for law validation, it can be useful to the end user for debugging and building out custom types based on the standard `crocks` types. While type comparisons can easily be done manually by calling `type` on a given type, using the `isSameType` function hides much of the boilerplate. `type` is available on both the Constructor and the Instance for convenience.
+`type` provides a string representation of the type name for a given type in
+`crocks`. While it is used mostly internally for law validation, it can be
+useful to the end user for debugging and building out custom types based on the
+standard `crocks` types. While type comparisons can easily be done manually by
+calling `type` on a given type, using the `isSameType` function hides much of
+the boilerplate. `type` is available on both the Constructor and the Instance
+for convenience.
 
 ```js
 const Assign = require('crocks/Assign')
@@ -65,8 +77,8 @@ isSameType(Any, Any(3))         //=> true
 isSameType(Any, Any)            //=> true
 isSameType(Any(false), Assign)  //=> false
 
-//=> false
 isSameType(Any, Assign({ food: 'always' }))
+//=> false
 ```
 
 ## Instance Methods
@@ -76,7 +88,9 @@ isSameType(Any, Assign({ food: 'always' }))
 Any ~> Any -> Any
 ```
 
-`concat` is used to combine (2) `Semigroup`s of the same type under an operation specified by the `Semigroup`. In the case of `Any`, it will combine the two using logical OR (disjunction).
+`concat` is used to combine (2) `Semigroup`s of the same type under an operation
+specified by the `Semigroup`. In the case of `Any`, it will combine the two
+using logical OR (disjunction).
 
 ```js
 Any(true).concat(Any(true))   //=> Any true
@@ -85,19 +99,23 @@ Any(false).concat(Any(true))  //=> Any true
 Any(false).concat(Any(false)) //=> Any false
 ```
 
-### value
+### valueOf
 ```haskell
 Any ~> () -> Boolean
 ```
 
-`value` is used on all `crocks` `Monoid`s as a means of extraction. While the extraction is available, types that implement `value` are not necessarily a `Comonad`. This function is used primarily for convenience for some of the helper functions that ship with `crocks`. Calling `value` on an `Any` instance will result in the underlying `Boolean` value.
+`valueOf` is used on all `crocks` `Monoid`s as a means of extraction. While the
+extraction is available, types that implement `valueOf` are not necessarily a
+`Comonad`. This function is used primarily for convenience for some of the
+helper functions that ship with `crocks`. Calling `value` on an `Any` instance
+will result in the underlying `Boolean` value.
 
 ```js
-Any(0).value()        //=> false
-Any('string').value() //=> true
+Any(0).valueOf()        //=> false
+Any('string').valueOf() //=> true
 
 //=> true
 Any(45)
  .concat('')
- .value()
+ .valueOf()
 ```

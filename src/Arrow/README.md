@@ -3,7 +3,7 @@
 Arrow a b
 ```
 `Arrow` is a `Profunctor` that lifts a function of type `a -> b` and allows for
-lazy execution of the function. `Arrow` can be considered a `Strong` `Profunctor`
+lazy execution of the function. `Arrow` can be considered a `Strong Profunctor`
 if the underlying data running throw the `Arrow` is a `Pair`, typically in the
 form of `Arrow (Pair a c) (Pair b d)`. This will allow you to split execution
 into two distinct paths, applying `Arrow` to a specific path. The parameters of
@@ -26,7 +26,8 @@ const arrUpper =
   Arrow(str => str.toUpperCase())
 
 arrUpper
-  .runWith('nice') //=> 'NICE'
+  .runWith('nice')
+//=> 'NICE'
 
 // getName :: a -> String
 const getName = compose(
@@ -41,13 +42,16 @@ const arrUpperName =
     .contramap(getName)
 
 arrUpperName
-  .runWith({ name: 'joey' }) //=> 'JOEY'
+  .runWith({ name: 'joey' })
+//=> 'JOEY'
 
 arrUpperName
-  .runWith({ age: 23 }) //=> 'NO NAME'
+  .runWith({ age: 23 })
+//=> 'NO NAME'
 
 arrUpperName
-  .runWith({ name: false }) //=> 'NO NAME'
+  .runWith({ name: false })
+//=> 'NO NAME'
 ```
 
 ## Implements
@@ -65,6 +69,7 @@ the left or right side of a given function, it will essentially result in a
 morphism that is, for all intents and purposes, the given function. For `Arrow`,
 `id` is the simple `identity` function that echoes it's given argument
 (`x => x`). As a convenience, `id` is also available on the `Arrow` instance.
+
 ```js
 const Arrow = require('crocks/Arrow')
 
@@ -150,7 +155,7 @@ const arrDouble =
 const arrDoubleAndAdd =
   arrDouble
     .both()
-    .map(merge((x, y) => x + y))
+    .map(merge(add))
 
 arrDouble
   .runWith(200)  //=> 400
@@ -199,10 +204,12 @@ const data =
   [ 12, 2, 36, 35 ]
 
 arrDoubleEven
-  .runWith(data) //=> [ 24, 4, 72 ]
+  .runWith(data)
+//=> [ 24, 4, 72 ]
 
 arrEvenCount
-  .runWith(data) //=> 3
+  .runWith(data)
+//=> 3
 ```
 
 ### contramap
@@ -242,16 +249,20 @@ const arrAdd10Value =
     .contramap(getValue('value', 0))
 
 arrAdd10
-  .runWith(23) //=> 33
+  .runWith(23)
+//=> 33
 
 arrAdd10Value
-  .runWith({ value: 23 }) //=> 33
+  .runWith({ value: 23 })
+  //=> 33
 
 arrAdd10Value
-  .runWith({ value: '23' }) //=> 10
+  .runWith({ value: '23' })
+  //=> 10
 
 arrAdd10Value
-  .runWith({ num: '23' }) //=> 10
+  .runWith({ num: '23' })
+//=> 10
 ```
 
 ### first
@@ -273,7 +284,8 @@ const arrToUpper =
   Arrow(x => x.toUpperCase())
 
 arrToUpper
-  .runWith('burrito bounce') //=> 'BURRITO BOUNCE'
+  .runWith('burrito bounce')
+//=> 'BURRITO BOUNCE'
 
 // join :: Pair String -> Object
 const join = p => ({
@@ -338,10 +350,10 @@ arrStringFS
 Arrow a b ~> ((c -> a), (b -> d)) -> Arrow c d
 ```
 
-`promap` can be used to adapt BOTH ends of an `Arrow` allow for existing `Arrow`s
-to be reused in places in a flow where the types so not line up. It combines both
-`map` and `conramap` into one operation. Just pass the `contramap` function as
-the first argument and the `map` function as the second.
+`promap` can be used to adapt BOTH ends of an `Arrow` allowing for existing
+`Arrow`s to be reused in places in a flow where the types do not line up. It
+combines both `map` and `conramap` into one operation. Just pass the `contramap`
+function as the first argument and the `map` function as the second.
 
 ```js
 const Arrow = require('crocks/Arrow')
@@ -442,9 +454,9 @@ arrAvgList
 Pair p => Arrow a b ~> () -> Arrow (p c a) (p c b)
 ```
 
-Used to apply a given `Arrow` over the second slot of a `Pair`, leaving the first
-slot untouched. The input to the `Arrow` must match the expected type on the second
-slot of the incoming `Pair`.
+Used to apply a given `Arrow` over the second slot of a `Pair`, leaving the
+first slot untouched. The input to the `Arrow` must match the expected type on
+the second slot of the incoming `Pair`.
 
 ```js
 const Arrow = require('crocks/Arrow')

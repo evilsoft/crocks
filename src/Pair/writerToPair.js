@@ -1,7 +1,6 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const Pair = require('../core/Pair')
 const curry = require('../core/curry')
 const isFunction = require('../core/isFunction')
 
@@ -9,7 +8,7 @@ const isWriter =
   x => !!x && isFunction(x.read)
 
 const applyTransform = w =>
-  Pair(w.log(), w.value())
+  w.read()
 
 // writerToPair : Monoid m => Writer m a -> Pair m a
 // writerToPair : Monoid m => (a -> Writer m a) -> Pair m b

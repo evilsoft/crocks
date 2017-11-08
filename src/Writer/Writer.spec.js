@@ -5,10 +5,12 @@ const Last = require('../test/LastMonoid')
 
 const bindFunc = helpers.bindFunc
 
+const Pair = require('../core/Pair')
 const curry = require('../core/curry')
 const compose = curry(require('../core/compose'))
 const isFunction = require('../core/isFunction')
 const isObject = require('../core/isObject')
+const isSameType = require('../core/isSameType')
 const unit = require('../core/_unit')
 
 const identity = x => x
@@ -90,10 +92,10 @@ test('Writer read', t => {
   const m = Writer(l, x)
 
   t.ok(isFunction(m.read), 'is a function')
-  t.ok(isObject(m.read()), 'returns an object')
+  t.ok(isSameType(Pair, m.read()), 'returns a Pair')
 
-  t.equal(m.read().value, x, 'returns the wrapped value on the value key')
-  t.same(m.read().log, l, 'returns unwrapped log value')
+  t.equal(m.read().snd(), x, 'returns the value on the value snd')
+  t.same(m.read().fst().value(), l, 'returns log Monoid')
 
   t.end()
 })

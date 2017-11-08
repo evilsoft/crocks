@@ -776,7 +776,7 @@ These functions provide a very clean way to build out very simple functions and 
 | `merge` | `(a -> b -> c) -> m a b -> c` | `crocks/Pair` |
 | `option` | `a -> m a -> a` | `crocks/pointfree` |
 | `promap` | `(c -> a) -> (b -> d) -> m a b -> m c d` | `crocks/pointfree` |
-| `read` | `m a b -> a` | `crocks/Writer` |
+| `read` | `m a b -> Pair a b` | `crocks/Writer` |
 | `reduce` | `(b -> a -> b) -> b -> m a -> b` | `crocks/pointfree` |
 | `reject` | <code>((a -> Boolean) &#124; Pred a) -> m a -> m a</code> | `crocks/pointfree` |
 | `run` | `m a -> b` | `crocks/pointfree` |

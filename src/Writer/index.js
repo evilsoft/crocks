@@ -5,6 +5,7 @@ const _equals = require('../core/equals')
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
 const __type = require('../core/types').type('Writer')
+const Pair = require('../core/Pair')
 
 const isFunction = require('../core/isFunction')
 const isMonoid = require('../core/isMonoid')
@@ -47,10 +48,8 @@ function _Writer(Monoid) {
     const inspect =
       constant(`Writer(${_inspect(log())}${_inspect(value())} )`)
 
-    const read = constant({
-      log: log().value(),
-      value: value()
-    })
+    const read = () =>
+      Pair(log(), val)
 
     function map(fn) {
       if(!isFunction(fn)) {

@@ -103,7 +103,7 @@ test('traverse with Array', t => {
   const f = sinon.spy(x => MockCrock(x + 2))
 
   const outer = traverse(MockCrock.of, f, [ 12, 23 ])
-  const inner = outer.value()
+  const inner = outer.valueOf()
 
   t.equal(outer.type(), 'MockCrock', 'outer container is a MockCrock')
   t.ok(isArray(inner), 'inner container is an Array')

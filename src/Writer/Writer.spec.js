@@ -95,17 +95,17 @@ test('Writer read', t => {
   t.ok(isSameType(Pair, m.read()), 'returns a Pair')
 
   t.equal(m.read().snd(), x, 'returns the value on the value snd')
-  t.same(m.read().fst().value(), l, 'returns log Monoid')
+  t.same(m.read().fst().valueOf(), l, 'returns log Monoid')
 
   t.end()
 })
 
-test('Writer value', t => {
+test('Writer valueOf', t => {
   const x = 34
   const w = Writer(0, x)
 
-  t.ok(isFunction(w.value), 'is a function')
-  t.equal(w.value(), x, 'provides wrapped value')
+  t.ok(isFunction(w.valueOf), 'is a function')
+  t.equal(w.valueOf(), x, 'provides wrapped value')
 
   t.end()
 })
@@ -116,7 +116,7 @@ test('Writer log', t => {
 
   t.ok(isFunction(w.log), 'is a function')
   t.equal(w.log().type(), 'Last', 'returns a monoid')
-  t.equal(w.log().value(), x, 'monoid contains log value')
+  t.equal(w.log().valueOf(), x, 'monoid contains log value')
 
   t.end()
 })
@@ -180,10 +180,10 @@ test('Writer map functionality', t => {
 
   t.equal(m.type(), 'Writer( Last )', 'returns a Writer')
   t.equal(spy.called, true, 'calls mapping function')
-  t.equal(m.value(), x, 'returns the result of the map inside of new Writer, on value key')
-  t.same(m.log().value(), l, 'returns the result of the map inside of new Writer, on log key')
+  t.equal(m.valueOf(), x, 'returns the result of the map inside of new Writer, on value key')
+  t.same(m.log().valueOf(), l, 'returns the result of the map inside of new Writer, on log key')
 
-  t.same(m.map(identity).log().value(), l, 'does not add to the log on map')
+  t.same(m.map(identity).log().valueOf(), l, 'does not add to the log on map')
 
   t.end()
 })
@@ -196,8 +196,8 @@ test('Writer map properties (Functor)', t => {
 
   t.ok(isFunction(m.map), 'provides a map function')
 
-  t.equal(m.map(identity).value(), m.value(), 'identity')
-  t.equal(m.map(compose(f, g)).value(), m.map(g).map(f).value(), 'composition')
+  t.equal(m.map(identity).valueOf(), m.valueOf(), 'identity')
+  t.equal(m.map(compose(f, g)).valueOf(), m.map(g).map(f).valueOf(), 'composition')
 
   t.end()
 })
@@ -244,7 +244,7 @@ test('Writer ap properties (Apply)', t => {
   t.ok(isFunction(m.map), 'implements the Functor spec')
   t.ok(isFunction(m.ap), 'provides an ap function')
 
-  t.equal(a.ap(Writer(0, 3)).value(), b.ap(Writer(0, 3)).value(), 'composition')
+  t.equal(a.ap(Writer(0, 3)).valueOf(), b.ap(Writer(0, 3)).valueOf(), 'composition')
 
   t.end()
 })
@@ -253,8 +253,8 @@ test('Writer ap functionality', t => {
   const a = Writer(0, x => x + 2)
   const b = Writer(1, 27)
 
-  t.same(a.ap(b).log().value(), 1, 'concats applied Writers log to inital log')
-  t.equal(a.ap(b).value(), 29, 'applys applied value to function')
+  t.same(a.ap(b).log().valueOf(), 1, 'concats applied Writers log to inital log')
+  t.equal(a.ap(b).valueOf(), 29, 'applys applied value to function')
 
   t.end()
 })
@@ -265,8 +265,8 @@ test('Writer of', t => {
   t.equal(Writer.of, Writer(0, 0).of, 'Writer.of is the same as the instance version')
 
   t.equal(w.type(), 'Writer( Last )', 'returns an Writer')
-  t.equal(w.value(), 0, 'wraps the value passed into a Writer')
-  t.same(w.log().value(), Last.empty().value(), 'provides an empty Monoid as the log')
+  t.equal(w.valueOf(), 0, 'wraps the value passed into a Writer')
+  t.same(w.log().valueOf(), Last.empty().valueOf(), 'provides an empty Monoid as the log')
 
   t.end()
 })
@@ -277,13 +277,13 @@ test('Writer of properties (Applicative)', t => {
   t.ok(isFunction(m.of), 'provides an of function')
   t.ok(isFunction(m.ap), 'implements the Apply spec')
 
-  t.equal(m.ap(Writer(0, 3)).value(), 3, 'identity')
-  t.equal(m.ap(Writer.of(3)).value(), Writer.of(identity(3)).value(), 'homomorphism')
+  t.equal(m.ap(Writer(0, 3)).valueOf(), 3, 'identity')
+  t.equal(m.ap(Writer.of(3)).valueOf(), Writer.of(identity(3)).valueOf(), 'homomorphism')
 
   const a = x => m.ap(Writer.of(x))
   const b = x => Writer.of(reverseApply(x)).ap(m)
 
-  t.equal(a(3).value(), b(3).value(), 'interchange')
+  t.equal(a(3).valueOf(), b(3).valueOf(), 'interchange')
 
   t.end()
 })
@@ -314,8 +314,8 @@ test('Writer chain functionality', t => {
   const m = Writer(0, 45)
   const fn = x => Writer(1, x + 2)
 
-  t.same(m.chain(fn).log().value(), 1, 'concats chained log to initial log')
-  t.equal(m.chain(fn).value(), 47, 'applys function to wrapped value')
+  t.same(m.chain(fn).log().valueOf(), 1, 'concats chained log to initial log')
+  t.equal(m.chain(fn).valueOf(), 47, 'applys function to wrapped value')
 
   t.end()
 })
@@ -330,7 +330,7 @@ test('Writer chain properties (Chain)', t => {
   const a = x => Writer(0, x).chain(f).chain(g)
   const b = x => Writer(0, x).chain(y => f(y).chain(g))
 
-  t.equal(a(10).value(), b(10).value(), 'assosiativity')
+  t.equal(a(10).valueOf(), b(10).valueOf(), 'assosiativity')
 
   t.end()
 })
@@ -341,8 +341,8 @@ test('Writer chain properties (Monad)', t => {
 
   const f = x => Writer(0, x)
 
-  t.equal(Writer.of(3).chain(f).value(), f(3).value(), 'left identity')
-  t.equal(f(3).chain(Writer.of).value(), f(3).value(), 'right identity')
+  t.equal(Writer.of(3).chain(f).valueOf(), f(3).valueOf(), 'left identity')
+  t.equal(f(3).chain(Writer.of).valueOf(), f(3).valueOf(), 'right identity')
 
   t.end()
 })

@@ -10,7 +10,7 @@ function LastMonoid(x) {
   return {
     inspect: constant('Last' + _inspect(x)),
     concat: identity,
-    value:  constant(x),
+    valueOf:  constant(x),
     type:   _type
   }
 }

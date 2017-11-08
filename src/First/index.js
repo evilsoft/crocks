@@ -26,7 +26,7 @@ function First(x) {
   const inspect =
     () => `First(${_inspect(maybe)} )`
 
-  const value =
+  const valueOf =
     () => maybe
 
   const option =
@@ -38,7 +38,7 @@ function First(x) {
     }
 
     const n =
-      m.value().map(x => x)
+      m.valueOf().map(x => x)
 
     return First(
       maybe.either(() => n, Maybe.Just)
@@ -47,7 +47,7 @@ function First(x) {
 
   return {
     concat, empty, inspect,
-    option, type, value
+    option, type, valueOf
   }
 }
 

@@ -77,29 +77,29 @@ All `Crocks` are Constructor functions of the given type, with `Writer` being an
 
 | Crock | Constructor | Instance |
 |---|:---|:---|
-| `Arrow` | `id` | `both`, `compose`, `contramap`, `empty`, `first`, `map`, `promap`, `runWith`, `second`, `value` |
+| `Arrow` | `id` | `both`, `compose`, `contramap`, `empty`, `first`, `map`, `promap`, `runWith`, `second` |
 | `Async` | `Rejected`, `Resolved`, `all`, `fromNode`, `fromPromise`, `of` | `alt`, `ap`, `bimap`, `chain`, `coalesce`, `fork`, `map`, `of`, `swap`, `toPromise` |
-| `Const` | -- | `ap`, `chain`, `concat`, `equals`, `map`, `value` |
+| `Const` | -- | `ap`, `chain`, `concat`, `equals`, `map`, `valueOf` |
 | `Either` | `Left`, `Right`, `of`| `alt`, `ap`, `bimap`, `chain`, `coalesce`, `concat`, `either`, `equals`, `map`, `of`, `sequence`, `swap`, `traverse` |
-| `Identity` | `of` | `ap`, `chain`, `concat`, `equals`, `map`, `of`, `sequence`, `traverse`, `value` |
+| `Identity` | `of` | `ap`, `chain`, `concat`, `equals`, `map`, `of`, `sequence`, `traverse`, `valueOf` |
 | `IO` | `of` | `ap`, `chain`, `map`, `of`, `run` |
-| `List` |  `empty`, `fromArray`, `of` | `ap`, `chain`, `concat`, `cons`, `empty`, `equals`, `filter`, `head`, `map`, `of`, `reduce`, `reject`, `sequence`, `tail`, `toArray`, `traverse`, `value` |
+| `List` |  `empty`, `fromArray`, `of` | `ap`, `chain`, `concat`, `cons`, `empty`, `equals`, `filter`, `head`, `map`, `of`, `reduce`, `reject`, `sequence`, `tail`, `toArray`, `traverse`, `valueOf` |
 | `Maybe` | `Nothing`, `Just`, `of`, `zero` | `alt`, `ap`, `chain`, `coalesce`, `concat`, `equals`, `either`, `map`, `of`, `option`, `sequence`, `traverse`, `zero` |
 | `Pair` | --- | `ap`, `bimap`, `chain`, `concat`, `equals`, `extend`, `fst`, `map`, `merge`, `of`, `snd`, `swap`, `toArray` |
-| `Pred` * | `empty` | `concat`, `contramap`, `empty`, `runWith`, `value` |
+| `Pred` * | `empty` | `concat`, `contramap`, `empty`, `runWith`, `valueOf` |
 | `Reader` | `ask`, `of`| `ap`, `chain`, `map`, `of`, `runWith` |
 | `Result` | `Err`, `Ok`, `of`| `alt`, `ap`, `bimap`, `chain`, `coalesce`, `concat`, `either`, `equals`, `map`, `of`, `sequence`, `swap`, `traverse` |
 | `Star` | `id` | `both`, `compose`, `contramap`, `map`, `promap`, `runWith` |
 | `State` | `get`, `modify` `of`, `put`| `ap`, `chain`, `evalWith`, `execWith`, `map`, `of`, `runWith` |
-| `Unit` | `empty`, `of` | `ap`, `chain`, `concat`, `empty`, `equals`, `map`, `of`, `value` |
-| `Writer`| `of` | `ap`, `chain`, `equals`, `log`, `map`, `of`, `read`, `value` |
+| `Unit` | `empty`, `of` | `ap`, `chain`, `concat`, `empty`, `equals`, `map`, `of`, `valueOf` |
+| `Writer`| `of` | `ap`, `chain`, `equals`, `log`, `map`, `of`, `read`, `valueOf` |
 
 \* based on [this article](https://medium.com/@drboolean/monoidal-contravariant-functors-are-actually-useful-1032211045c4#.polugsx2a)
 
 ### Monoids
 Each `Monoid` provides a means to represent a binary operation and is usually locked down to a specific type. These are great when you need to combine a list of values down to one value. In this library, any ADT that provides both an `empty` and `concat` function can be used as a `Monoid`. There are a few of the [`crocks`](#crocks) that are also monoidial, so be on the look out for those as well. All `Monoids` work with the point-free functions [`mconcat`](#mconcat), [`mreduce`](#mreduce), [`mconcatMap`](#mconcatmap) and [`mreduceMap`](#mreducemap).
 
-All `Monoids` provide `empty` and `type` function on their Constructors as well as the following Instance Functions: inspect, `type`, `value`, `empty` and `concat`.
+All `Monoids` provide `empty` and `type` function on their Constructors as well as the following Instance Functions: inspect, `type`, `valueOf`, `empty` and `concat`.
 
 
 | Monoid | Type | Operation | Empty (Identity) |
@@ -128,7 +128,7 @@ Seems really silly, but is quite useful for a lot of things. It takes a function
 ```haskell
 composeB : (b -> c) -> (a -> b) -> a -> c
 ```
-Provides a means to describe a composition between two functions. it takes two functions and an value. Given `composeB(f, g)`, which is read `f` after `g`, it will return a function that will take value `a` and apply it to `g`, passing the result as an argument to `f`, and will finally return the result of `f`. (This allows only two functions, if you want to avoid things like: `composeB(composeB(f, g), composeB(h, i))` then check out [`compose`](#compose).)
+Provides a means to describe a composition between two functions. it takes two functions and a value. Given `composeB(f, g)`, which is read `f` after `g`, it will return a function that will take value `a` and apply it to `g`, passing the result as an argument to `f`, and will finally return the result of `f`. (This allows only two functions, if you want to avoid things like: `composeB(composeB(f, g), composeB(h, i))` then check out [`compose`](#compose).)
 
 #### constant
 `crocks/combinators/constant`
@@ -397,7 +397,7 @@ const safeMax = mapReduce(
 
 safeMax(data)
   .option(Max.empty())
-  .value()
+  .valueOf()
 // => 3
 ```
 
@@ -787,7 +787,7 @@ These functions provide a very clean way to build out very simple functions and 
 | `swap` | `(c -> d) -> (a -> b) -> m c a -> m b d` | `crocks/pointfree` |
 | `tail` | `m a -> Maybe (m a)` | `crocks/pointfree` |
 | `traverse` | `Applicative f => (c -> f c) -> (a -> f b) -> m (f a) -> f (m b)` | `crocks/pointfree` |
-| `value` | `m a -> a` | `crocks/pointfree` |
+| `valueOf` | `m a -> a` | `crocks/pointfree` |
 
 ##### Datatypes
 | Function | Datatypes |
@@ -827,7 +827,7 @@ These functions provide a very clean way to build out very simple functions and 
 | `swap` | `Async`, `Either`, `Pair`, `Result` |
 | `tail` | `Array`, `List`, `String` |
 | `traverse` | `Array`, `Either`, `Identity`, `List`, `Maybe`, `Result` |
-| `value` | `All`, `Any`, `Assign`, `Const`, `Endo`, `First`, `Identity`, `Last`, `Max`, `Min`, `Pred`, `Prod`, `Sum`, `Unit`, `Writer` |
+| `valueOf` | `All`, `Any`, `Assign`, `Const`, `Endo`, `First`, `Identity`, `Last`, `Max`, `Min`, `Pred`, `Prod`, `Sum`, `Unit`, `Writer` |
 
 ### Transformation Functions
 Transformation functions are mostly used to reduce unwanted nesting of similar types. Take for example the following structure:

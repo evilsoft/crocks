@@ -56,19 +56,19 @@ test('All inspect', t => {
   t.end()
 })
 
-test('All value', t => {
-  t.ok(isFunction(All(0).value), 'is a function')
+test('All valueOf', t => {
+  t.ok(isFunction(All(0).valueOf), 'is a function')
 
-  t.equal(All(undefined).value(), true, 'reports true for undefined')
-  t.equal(All(null).value(), true, 'reports true for null')
-  t.equal(All(0).value(), false, 'reports false for falsey number')
-  t.equal(All(1).value(), true, 'reports true for truthy number')
-  t.equal(All('').value(), false, 'reports false for falsey number')
-  t.equal(All('string').value(), true, 'reports true for truthy string')
-  t.equal(All(false).value(), false, 'reports false for false')
-  t.equal(All(true).value(), true, 'reports true for true')
-  t.equal(All([]).value(), true, 'reports true for an array')
-  t.equal(All({}).value(), true, 'reports true for an object')
+  t.equal(All(undefined).valueOf(), true, 'reports true for undefined')
+  t.equal(All(null).valueOf(), true, 'reports true for null')
+  t.equal(All(0).valueOf(), false, 'reports false for falsey number')
+  t.equal(All(1).valueOf(), true, 'reports true for truthy number')
+  t.equal(All('').valueOf(), false, 'reports false for falsey number')
+  t.equal(All('string').valueOf(), true, 'reports true for truthy string')
+  t.equal(All(false).valueOf(), false, 'reports false for false')
+  t.equal(All(true).valueOf(), true, 'reports true for true')
+  t.equal(All([]).valueOf(), true, 'reports true for an array')
+  t.equal(All({}).valueOf(), true, 'reports true for an object')
 
   t.end()
 })
@@ -102,9 +102,9 @@ test('All concat functionality', t => {
   t.throws(cat({}), err, 'throws with an object')
   t.throws(cat(notAll), err, 'throws when passed non-All')
 
-  t.equal(a.concat(a).value(), true, 'true to true reports true')
-  t.equal(a.concat(b).value(), false, 'true to false reports false')
-  t.equal(b.concat(b).value(), false, 'false to false reports false')
+  t.equal(a.concat(a).valueOf(), true, 'true to true reports true')
+  t.equal(a.concat(b).valueOf(), false, 'true to false reports false')
+  t.equal(b.concat(b).valueOf(), false, 'false to false reports false')
 
   t.end()
 })
@@ -118,7 +118,7 @@ test('All concat properties (Semigroup)', t => {
   const right = a.concat(b.concat(c))
 
   t.ok(isFunction(a.concat), 'provides a concat function')
-  t.equal(left.value(), right.value(), 'associativity')
+  t.equal(left.valueOf(), right.valueOf(), 'associativity')
   t.equal(a.concat(b).type(), a.type(), 'returns an All')
 
   t.end()
@@ -128,7 +128,7 @@ test('All empty functionality', t => {
   const x = All(0).empty()
 
   t.equal(x.type(), 'All', 'provides an All')
-  t.equal(x.value(), true, 'provides a true value')
+  t.equal(x.valueOf(), true, 'provides a true value')
 
   t.end()
 })
@@ -142,8 +142,8 @@ test('All empty properties (Monoid)', t => {
   const right = m.concat(m.empty())
   const left = m.empty().concat(m)
 
-  t.equal(right.value(), m.value(), 'right identity')
-  t.equal(left.value(), m.value(), 'left identity')
+  t.equal(right.valueOf(), m.valueOf(), 'right identity')
+  t.equal(left.valueOf(), m.valueOf(), 'left identity')
 
   t.end()
 })

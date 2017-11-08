@@ -19,7 +19,7 @@ function _Writer(Monoid) {
   }
 
   const _of =
-    x => Writer(Monoid.empty().value(), x)
+    x => Writer(Monoid.empty().valueOf(), x)
 
   const _type =
     () => `${__type()}( ${Monoid.type()} )`
@@ -37,16 +37,16 @@ function _Writer(Monoid) {
 
     const equals =
       m => isSameType(Writer, m)
-        && _equals(m.value(), val)
+        && _equals(m.valueOf(), val)
 
-    const value =
+    const valueOf =
       constant(val)
 
     const log =
       constant(Monoid(entry))
 
     const inspect =
-      constant(`Writer(${_inspect(log())}${_inspect(value())} )`)
+      constant(`Writer(${_inspect(log())}${_inspect(valueOf())} )`)
 
     const read = () =>
       Pair(log(), val)
@@ -56,11 +56,11 @@ function _Writer(Monoid) {
         throw new TypeError('Writer.map: Function required')
       }
 
-      return Writer(log().value(), fn(value()))
+      return Writer(log().valueOf(), fn(valueOf()))
     }
 
     function ap(m) {
-      if(!isFunction(value())) {
+      if(!isFunction(valueOf())) {
         throw new TypeError('Writer.ap: Wrapped value must be a function')
       }
       else if(!isSameType(Writer, m)) {
@@ -75,17 +75,17 @@ function _Writer(Monoid) {
         throw new TypeError('Writer.chain: Function required')
       }
 
-      const w = fn(value())
+      const w = fn(valueOf())
 
       if(!isSameType(Writer, w)) {
         throw new TypeError('Writer.chain: Function must return a Writer')
       }
 
-      return Writer(log().concat(w.log()).value(), w.value())
+      return Writer(log().concat(w.log()).valueOf(), w.valueOf())
     }
 
     return {
-      inspect, read, value,
+      inspect, read, valueOf,
       log, type, equals, map,
       ap, of, chain
     }

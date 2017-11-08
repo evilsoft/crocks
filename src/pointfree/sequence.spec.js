@@ -72,7 +72,7 @@ test('sequence with Traversable', t => {
 
 test('sequence with Array', t => {
   const outer = sequence(MockCrock.of, [ MockCrock(12), MockCrock(23) ])
-  const inner = outer.value()
+  const inner = outer.valueOf()
 
   t.equal(outer.type(), 'MockCrock', 'outer container is a MockCrock')
   t.ok(isArray(inner), 'inner container is an Array')

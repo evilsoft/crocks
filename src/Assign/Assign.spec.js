@@ -55,16 +55,16 @@ test('Assign inspect', t => {
   t.end()
 })
 
-test('Assign value', t => {
-  const empty = Assign.empty().value()
+test('Assign valueOf', t => {
+  const empty = Assign.empty().valueOf()
   const x = {}
 
-  t.ok(isFunction(Assign(x).value), 'is a function')
+  t.ok(isFunction(Assign(x).valueOf), 'is a function')
 
-  t.same(Assign(undefined).value(), empty, 'provides an empty value for undefined')
-  t.same(Assign(null).value(), empty, 'provides an empty value for null')
+  t.same(Assign(undefined).valueOf(), empty, 'provides an empty value for undefined')
+  t.same(Assign(null).valueOf(), empty, 'provides an empty value for null')
 
-  t.equal(Assign(x).value(), x, 'provides the wrapped object')
+  t.equal(Assign(x).valueOf(), x, 'provides the wrapped object')
 
   t.end()
 })
@@ -88,7 +88,7 @@ test('Assign concat properties (Semigroup)', t => {
 
   t.ok(isFunction(Assign({}).concat), 'is a function')
 
-  t.same(left.value(), right.value(), 'associativity')
+  t.same(left.valueOf(), right.valueOf(), 'associativity')
   t.equal(a.concat(b).type(), a.type(), 'returns Semigroup of the same type')
 
   t.end()
@@ -119,7 +119,7 @@ test('Assign concat functionality', t => {
   t.throws(cat({}), TypeError, 'throws with an object')
   t.throws(cat(notAssign), TypeError, 'throws with non-Assign')
 
-  t.same(a.concat(b).value(), result, 'merges values as expected')
+  t.same(a.concat(b).valueOf(), result, 'merges values as expected')
 
   t.end()
 })
@@ -133,8 +133,8 @@ test('Assign empty properties (Monoid)', t => {
   const right = m.concat(m.empty())
   const left = m.empty().concat(m)
 
-  t.same(right.value(), m.value(), 'right identity')
-  t.same(left.value(), m.value(), 'left identity')
+  t.same(right.valueOf(), m.valueOf(), 'right identity')
+  t.same(left.valueOf(), m.valueOf(), 'left identity')
 
   t.equal(m.empty().type(), m.type(), 'returns a Monoid of the same type')
 
@@ -147,7 +147,7 @@ test('Assign empty functionality', t => {
   t.equal(Assign({}).empty, Assign.empty, 'static and instance versions are the same')
 
   t.equal(x.type(), 'Assign', 'provides an Assign')
-  t.same(x.value(), {}, 'wraps an empty object')
+  t.same(x.valueOf(), {}, 'wraps an empty object')
 
   t.end()
 })

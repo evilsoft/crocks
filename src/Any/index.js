@@ -13,30 +13,30 @@ const _empty =
   () => Any(false)
 
 function Any(b) {
-  const x = isNil(b) ? _empty().value() : b
+  const x = isNil(b) ? _empty().valueOf() : b
 
   if(!arguments.length || isFunction(x)) {
     throw new TypeError('Any: Non-function value required')
   }
 
-  const value =
+  const valueOf =
     () => !!x
 
   const empty =
     _empty
 
   const inspect =
-    () => `Any${_inspect(value())}`
+    () => `Any${_inspect(valueOf())}`
 
   function concat(m) {
     if(!isSameType(Any, m)) {
       throw new TypeError('Any.concat: Any required')
     }
 
-    return Any(m.value() || value())
+    return Any(m.valueOf() || valueOf())
   }
 
-  return { inspect, value, type, concat, empty }
+  return { inspect, valueOf, type, concat, empty }
 }
 
 Any['@@implements'] = _implements(

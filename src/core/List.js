@@ -76,18 +76,18 @@ function List(x) {
         throw new TypeError('List.chain: Function must return a List')
       }
 
-      return y.concat(m.value())
+      return y.concat(m.valueOf())
     }
   }
 
   const of =
     _of
 
-  const value =
+  const valueOf =
     () => xs.slice()
 
   const toArray =
-    value
+    valueOf
 
   const empty =
     _empty
@@ -110,14 +110,14 @@ function List(x) {
 
   const equals = m =>
     isSameType(List, m)
-      && _equals(xs, m.value())
+      && _equals(xs, m.valueOf())
 
   function concat(m) {
     if(!isSameType(List, m)) {
       throw new TypeError('List.concat: List required')
     }
 
-    return List(xs.concat(m.value()))
+    return List(xs.concat(m.valueOf()))
   }
 
   function reduce(fn, i) {
@@ -223,7 +223,7 @@ function List(x) {
   }
 
   return {
-    inspect, value, toArray, head, tail, cons,
+    inspect, valueOf, toArray, head, tail, cons,
     type, equals, concat, empty, reduce, fold,
     filter, reject, map, ap, of, chain,
     sequence, traverse

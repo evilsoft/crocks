@@ -127,7 +127,7 @@ const snd = require('./Pair/snd')
 const swap = require('./pointfree/swap')
 const tail = require('./pointfree/tail')
 const traverse = require('./pointfree/traverse')
-const value = require('./pointfree/value')
+const valueOf = require('./pointfree/valueOf')
 
 // predicates
 const hasProp = require('./predicates/hasProp')
@@ -323,7 +323,7 @@ test('entry', t => {
   t.equal(crocks.swap, swap, 'provides the swap pointfree')
   t.equal(crocks.tail, tail, 'provides the tail pointfree')
   t.equal(crocks.traverse, traverse, 'provides the traverse pointfree')
-  t.equal(crocks.value, value, 'provides the value pointfree')
+  t.equal(crocks.valueOf, valueOf, 'provides the valueOf pointfree')
 
   // predicates
   t.equal(crocks.hasProp, hasProp, 'provides the hasProp predicate')

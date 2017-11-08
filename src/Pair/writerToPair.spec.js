@@ -45,7 +45,7 @@ test('writerToPair with Writer', t => {
 
   t.equals(p.snd(), value, 'second contains the value')
   t.ok(isSameType(Last, p.fst()), 'first contains the Writers Monoid')
-  t.equals(p.fst().value(), log, 'first Monoid wraps the same log value from Writer')
+  t.equals(p.fst().valueOf(), log, 'first Monoid wraps the same log value from Writer')
 
   t.end()
 })
@@ -79,7 +79,7 @@ test('writerToPair with Writer returning function', t => {
 
   t.equals(p.snd(), value, 'second contains the value')
   t.ok(isSameType(Last, p.fst()), 'first contains the Writers Monoid')
-  t.equals(p.fst().value(), log, 'first Monoid wraps the same log value from Writer')
+  t.equals(p.fst().valueOf(), log, 'first Monoid wraps the same log value from Writer')
 
   t.end()
 })

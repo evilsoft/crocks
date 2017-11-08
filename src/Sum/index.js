@@ -13,30 +13,30 @@ const _empty =
   () => Sum(0)
 
 function Sum(n) {
-  const x = isNil(n) ? _empty().value() : n
+  const x = isNil(n) ? _empty().valueOf() : n
 
   if(!arguments.length || !isNumber(x)) {
     throw new TypeError('Sum: Numeric value required')
   }
 
-  const value =
+  const valueOf =
     () => x
 
   const empty=
     _empty
 
   const inspect =
-    () => `Sum${_inspect(value())}`
+    () => `Sum${_inspect(valueOf())}`
 
   function concat(m) {
     if(!isSameType(Sum, m)) {
       throw new TypeError('Sum.concat: Sum required')
     }
 
-    return Sum(x + m.value())
+    return Sum(x + m.valueOf())
   }
 
-  return { inspect, value, type, concat, empty }
+  return { inspect, valueOf, type, concat, empty }
 }
 
 Sum['@@implements'] = _implements(

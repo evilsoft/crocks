@@ -2,6 +2,7 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const _defineUnion = require('./defineUnion')
+const _equals = require('./equals')
 const _implements = require('./implements')
 const _innerConcat = require('./innerConcat')
 const _inspect = require('./inspect')
@@ -56,7 +57,7 @@ function Maybe(u) {
   const equals =
     m => isSameType(Maybe, m) && either(
       constant(m.either(constant(true), constant(false))),
-      x => m.either(constant(false), y => y === x)
+      x => m.either(constant(false), y => _equals(y, x))
     )
 
   const inspect = () =>

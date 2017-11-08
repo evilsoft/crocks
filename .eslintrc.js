@@ -27,7 +27,6 @@ module.exports = {
     "no-new-func": [ "error" ],
     "no-param-reassign": [ "error" ],
     "no-return-assign": [ "error" ],
-    "no-self-compare": [ "error" ],
     "no-sequences": [ "error" ],
     "no-trailing-spaces": [ "error" ],
     "no-void": [ "error" ],

@@ -92,10 +92,10 @@ test('Identity equals functionality', t => {
 })
 
 test('Identity equals properties (Setoid)', t => {
-  const a = Identity(0)
-  const b = Identity(0)
-  const c = Identity(1)
-  const d = Identity(0)
+  const a = Identity({ a: 45 })
+  const b = Identity({ a: 45 })
+  const c = Identity({ a: 45, b: 'ken' })
+  const d = Identity({ a: 45 })
 
   t.ok(isFunction(Identity(0).equals), 'provides an equals function')
   t.equal(a.equals(a), true, 'reflexivity')

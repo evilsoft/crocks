@@ -1,6 +1,7 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
+const _equals = require('../core/equals')
 const _implements = require('../core/implements')
 const _innerConcat = require('../core/innerConcat')
 const _inspect = require('../core/inspect')
@@ -25,7 +26,8 @@ function Identity(x) {
     _of
 
   const equals =
-    m => isSameType(Identity, m) && x === m.value()
+    m => isSameType(Identity, m)
+      && _equals(x, m.value())
 
   const inspect =
     () => `Identity${_inspect(x)}`

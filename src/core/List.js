@@ -1,6 +1,7 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
+const _equals = require('./equals')
 const _implements = require('./implements')
 const _inspect = require('./inspect')
 const type = require('./types').type('List')
@@ -107,16 +108,9 @@ function List(x) {
   const cons =
     x => List([ x ].concat(xs))
 
-  function equals(m) {
-    if(isSameType(List, m)) {
-      const mxs = m.value()
-
-      return xs.length === mxs.length
-        && xs.reduce((res, x, i) => res && x === mxs[i], true)
-    }
-
-    return false
-  }
+  const equals = m =>
+    isSameType(List, m)
+      && _equals(xs, m.value())
 
   function concat(m) {
     if(!isSameType(List, m)) {

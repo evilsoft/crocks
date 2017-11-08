@@ -328,15 +328,15 @@ test('Either equals functionality', t => {
 })
 
 test('Either equals properties (Setoid)', t => {
-  const la = Either.Left(0)
-  const lb = Either.Left(0)
-  const lc = Either.Left(1)
-  const ld = Either.Left(0)
+  const la = Either.Left({ a: 'nice' })
+  const lb = Either.Left({ a: 'nice' })
+  const lc = Either.Left({ a: 'nice', b: 45 })
+  const ld = Either.Left({ a: 'nice' })
 
-  const ra = Either.Right(0)
-  const rb = Either.Right(0)
-  const rc = Either.Right(1)
-  const rd = Either.Right(0)
+  const ra = Either.Right([ 1, 2 ])
+  const rb = Either.Right([ 1, 2 ])
+  const rc = Either.Right([ 3, 2, 1 ])
+  const rd = Either.Right([ 1, 2 ])
 
   t.ok(isFunction(Either(null).equals), 'provides an equals function')
 

@@ -1,4 +1,46 @@
 # Change Log for `crocks`
+v0.8.0 -- November 09, 2017
+--
+### Breaking
+
+* Changes `value` `pointfree` and instance methods to `valueOf`.
+* All `Setoid`s now compare Object types by value.
+  * `Const`
+  * `Either`
+  * `Identity`
+  * `List`
+  * `Maybe`
+  * `Pair`
+  * `Result`
+  * `Writer`
+
+### Additions
+
+* READMES:
+  * `All`
+  * `Any`
+  * `Arrow`
+* Predicates
+  * `isSame`
+* Pointfree
+  * `equals`
+
+### Bug fixes
+  * `propPath` and `prop` would throw then passed `undefined`, `null` or `NaN`. Now they do not.
+
+### Optimizations
+* Just use the native es6 rest operator instead of slicing arguments.
+* Optimized `isSameType` function.
+
+### Pull Requests
+* [#145 - Allow `prop` and `propPath` to accept `null` and `undefined` as data](https://github.com/evilsoft/crocks/pull/145)
+* [#147 - Move to ES6 Rest operator instead of slicing arguments.](https://github.com/evilsoft/crocks/pull/147)
+* [#148 - Add READMEs for All, Any and Arrow types](https://github.com/evilsoft/crocks/pull/148)
+* [#149 - Equality is by value](https://github.com/evilsoft/crocks/pull/149)
+* [#151 - Use `valueOf` instead of `value`](https://github.com/evilsoft/crocks/pull/151)
+* [#150 - Return `Pair` for `Writer`'s `read` method](https://github.com/evilsoft/crocks/pull/150)
+
+
 v0.7.1 -- August 28, 2017
 --
 ### Additions

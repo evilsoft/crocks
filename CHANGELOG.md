@@ -13,6 +13,7 @@ v0.8.0 -- November 09, 2017
   * `Pair`
   * `Result`
   * `Writer`
+* `read` method on `Writer` instance now returns a `Monoid m => Pair m a` instead of an Object with `{ log, value }`.
 
 ### Additions
 

@@ -34,8 +34,8 @@ function modify(fn) {
   return State(s => Pair(Unit(), fn(s)))
 }
 
-function State(runWith) {
-  if(!isFunction(runWith)) {
+function State(fn) {
+  if(!isFunction(fn)) {
     throw new TypeError('State: Must wrap a function in the form (s -> Pair a s)')
   }
 
@@ -43,25 +43,26 @@ function State(runWith) {
     _of
 
   const inspect =
-    () => `State${_inspect(runWith)}`
+    () => `State${_inspect(fn)}`
 
-  function execWith(s) {
-    const pair = runWith(s)
+  function runWith(state, ...params) {
+    const [ func = 'runWith' ] = params
+    const m = fn(state)
 
-    if(!isSameType(Pair, pair)) {
-      throw new TypeError('State.execWith: Must wrap a function in the form (s -> Pair a s)')
+    if(!isSameType(Pair, m)) {
+      throw new TypeError(`State.${func}: Must wrap a function in the form (s -> Pair a s)`)
     }
 
+    return m
+  }
+
+  function execWith(s) {
+    const pair = runWith(s, 'execWith')
     return pair.snd()
   }
 
   function evalWith(s) {
-    const pair = runWith(s)
-
-    if(!isSameType(Pair, pair)) {
-      throw new TypeError('State.evalWith: Must wrap a function in the form (s -> Pair a s)')
-    }
-
+    const pair = runWith(s, 'evalWith')
     return pair.fst()
   }
 
@@ -71,12 +72,7 @@ function State(runWith) {
     }
 
     return State(s => {
-      const m = runWith(s)
-
-      if(!isSameType(Pair, m)) {
-        throw new TypeError('State.map: Must wrap a function in the form (s -> Pair a s)')
-      }
-
+      const m = runWith(s, 'map')
       return Pair(fn(m.fst()), m.snd())
     })
   }
@@ -87,12 +83,7 @@ function State(runWith) {
     }
 
     return State(s => {
-      const pair = runWith(s)
-
-      if(!isSameType(Pair, pair)) {
-        throw new TypeError('State.ap: Must wrap a function in the form (s -> Pair a s)')
-      }
-
+      const pair = runWith(s, 'ap')
       const fn = pair.fst()
 
       if(!isFunction(fn)) {
@@ -105,16 +96,11 @@ function State(runWith) {
 
   function chain(fn) {
     if(!isFunction(fn)) {
-      throw new TypeError('State.chain: Function required')
+      throw new TypeError('State.chain: State returning function required')
     }
 
     return State(s => {
-      const pair = runWith(s)
-
-      if(!isSameType(Pair, pair)) {
-        throw new TypeError('State.chain: Must wrap a function in the form (s -> Pair a s)')
-      }
-
+      const pair = runWith(s, 'chain')
       const m = fn(pair.fst())
 
       if(!isSameType(State, m)) {

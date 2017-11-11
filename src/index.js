@@ -47,6 +47,7 @@ const helpers = {
   fromPairs: require('./helpers/fromPairs'),
   liftA2: require('./helpers/liftA2'),
   liftA3: require('./helpers/liftA3'),
+  mapProps: require('./helpers/mapProps'),
   mapReduce: require('./helpers/mapReduce'),
   mconcat: require('./helpers/mconcat'),
   mconcatMap: require('./helpers/mconcatMap'),

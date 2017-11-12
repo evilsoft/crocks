@@ -188,7 +188,7 @@ binary : (* -> c) -> a -> b -> c
 With all the different functions out there in the real world, sometimes it is nice to restrict them to a specific -arity to work with your all your wonderful compositions. When you want to restict any function of any arity to a simple binary function. Just pass your function to `binary` and you will get back a curried, binary function that will only apply (2) arguments to the inner function, ignoring any others. This works very well with functions like `Array.prototype.reduce` where you may only care about the first 2 arguments. if you need to constrain to more than (2) arguments, then you will want to reach for  [`nAry`](#nary). `binary` is basically syntactic sugar for `nAry(2, fn)`. Also related is [`unary`](#unary), which constrains to (1) argument.
 
 #### branch
-`crocks/helpers/branch`
+`crocks/Pair/branch`
 ```haskell
 branch : a -> Pair a a
 ```

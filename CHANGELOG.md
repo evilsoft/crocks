@@ -1,4 +1,24 @@
 # Change Log for `crocks`
+
+v0.8.1 -- November 14, 2017
+--
+### Additions
+* Helpers:
+  * `mapProps`
+
+### Bug fixes
+* `runWith` on `State` did not report an error unless one of the
+  methods were called. Now it throws if the result is not a `Pair`
+  for all calls to `runWith`
+* Update path on branch helper on README to point to location
+un `Pair`
+
+
+### Pull Requests
+* [#154 - Updated path for branch - helpers -> Pair](https://github.com/evilsoft/crocks/pull/154)
+* [#152 - Better `runWith` errors for State](https://github.com/evilsoft/crocks/pull/152)
+* [#153 - Add a new `mapProps` helper function](https://github.com/evilsoft/crocks/pull/153)
+
 v0.8.0 -- November 09, 2017
 --
 ### Breaking
@@ -40,7 +60,6 @@ v0.8.0 -- November 09, 2017
 * [#149 - Equality is by value](https://github.com/evilsoft/crocks/pull/149)
 * [#151 - Use `valueOf` instead of `value`](https://github.com/evilsoft/crocks/pull/151)
 * [#150 - Return `Pair` for `Writer`'s `read` method](https://github.com/evilsoft/crocks/pull/150)
-
 
 v0.7.1 -- August 28, 2017
 --

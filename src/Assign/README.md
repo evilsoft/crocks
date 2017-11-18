@@ -1,0 +1,111 @@
+# Assign
+```haskell
+Assign Object
+```
+`Assign` is a `Monoid` that will combine two objects using `Object.assign` on their `Object` values, merging and overwriting new values for values that are not undefined.
+
+```js
+const Assign = require('crocks/Assign')
+
+const first = { name : "Bob" }
+const last = { lastName: "Smith" }
+
+const person
+  = Assign(first).concat(last)
+//=> Assign { name: "Bob", lastName: "Smith" }
+
+```
+## Implements
+`Semigroup`, `Monoid`
+
+## Constructor Methods
+
+### empty
+```haskell
+Assign.empty :: () -> Assign
+```
+
+`empty` provides the identity for the `Monoid` in that when the value it provides is `concat`ed to object other value, it will return the other value. In the case of `Assign` the result of `empty` is `{}`. `empty` is available on both the Constructor and the Instance for convenience.
+```js
+Assign.empty()
+//=> Assign {}
+
+Assign({})
+  .concat(Assign.empty())        
+//=> Assign {}
+Assign({ a: 1 })
+  .concat(Assign.empty())
+//=> Assign { a: 1 }
+```
+
+### type
+```haskell
+Assign.type :: () -> String
+```
+
+`type` provides a string representation of the type name for a given type in `crocks`. While it is used mostly internally for law validation, it can be useful to the end user for debugging and building out custom types based on the standard `crocks` types. While type comparisons can easily be done manually by calling `type` on a given type, using the `isSameType` function hides much of the boilerplate. `type` is available on both the Constructor and the Instance for convenience.
+
+```js
+const Assign = require('crocks/Assign')
+const Sum = require('crocks/Sum')
+const Maybe = require('crocks/Maybe')
+const isSameType = require('crocks/predicates/isSameType')
+
+const myData
+  = Assign({ name: 'Joe', age: 41 })
+
+myData.type()
+//=>  "Assign"
+
+isSameType(Sum, myData)
+//=> false
+isSameType(Maybe, myData)
+//=> false
+isSameType(Assign, myData)
+//=> true
+```
+
+## Instance Methods
+
+### concat
+```haskell
+Assign ~> Assign -> Assign
+```
+
+`concat` is used to combine (2) `Semigroup`s of the same type under an operation specified by the `Semigroup`. In the case of `Assign`, it will combine two objects, overwriting object previous value with the newer values.
+
+```js
+Assign({})
+  .concat(Assign({}))
+//=> Assign {}
+Assign({ a: 1 })
+  .concat(Assign({ b: 2 }))
+//=> Assign { a: 1, b: 2 }
+Assign({ a: 1, b: 2 })
+  .concat(Assign({ a: 3, b: 4 }))
+//=> Assign { a: 3, b: 4 }
+Assign({ b: 4 })
+  .concat(Assign({ a: 1 }))
+//=> Assign { b: 4, a: 1 }
+```
+
+### valueOf
+```haskell
+Assign ~> () -> Object
+```
+
+`valueOf` is used on all `crocks` `Monoid`s as a means of extraction. While the extraction is available, types that implement `valueOf` are not necessarily a `Comonad`. This function is used primarily for convenience for some of the helper functions that ship with `crocks`. Calling `valueOf` on an `Assign` instance will result in the underlying `Object` value.
+
+```js
+Assign({})
+  .valueOf()
+//=> {}
+Assign({ a: 1 })
+  .valueOf()
+//=> { a: 1 }
+
+Assign({ a: 1 })
+ .concat({ b: 25 })
+ .valueOf()
+//=> { a: 1, b: 25 }
+```

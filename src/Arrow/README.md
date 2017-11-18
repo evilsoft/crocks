@@ -26,12 +26,8 @@ const arrUpper =
   Arrow(str => str.toUpperCase())
 
 arrUpper
-<<<<<<< HEAD
-  .runWith('nice') //=> 'NICE'
-=======
   .runWith('nice')
 //=> 'NICE'
->>>>>>> 68de04589e6d783e917aa954dfb3133abaa9a608
 
 // getName :: a -> String
 const getName = compose(
@@ -46,16 +42,6 @@ const arrUpperName =
     .contramap(getName)
 
 arrUpperName
-<<<<<<< HEAD
-  .runWith({ name: 'joey' }) //=> 'JOEY'
-
-arrUpperName
-  .runWith({ age: 23 }) //=> 'NO NAME'
-
-arrUpperName
-  .runWith({ name: false }) //=> 'NO NAME'
-
-=======
   .runWith({ name: 'joey' })
 //=> 'JOEY'
 
@@ -66,7 +52,6 @@ arrUpperName
 arrUpperName
   .runWith({ name: false })
 //=> 'NO NAME'
->>>>>>> 68de04589e6d783e917aa954dfb3133abaa9a608
 ```
 
 ## Implements
@@ -79,10 +64,6 @@ arrUpperName
 Arrow.id :: () -> Arrow a
 ```
 
-<<<<<<< HEAD
-`id` provides the identity for the `Arrow` in that when it is composed to either the left or right side of a given function, it will essentially result in a morphisim that is, for all intents and purposes, the given function. For `Arrow`, `id` is the simple `identity` function that echos it's given argument (`x => x`). As a convenience, `id` is also available on the `Arrow` instance.
-```js
-=======
 `id` provides the identity for the `Arrow` in that when it is composed to either
 the left or right side of a given function, it will essentially result in a
 morphism that is, for all intents and purposes, the given function. For `Arrow`,
@@ -92,7 +73,6 @@ morphism that is, for all intents and purposes, the given function. For `Arrow`,
 ```js
 const Arrow = require('crocks/Arrow')
 
->>>>>>> 68de04589e6d783e917aa954dfb3133abaa9a608
 // arrId :: Arrow a
 const id = Arrow.id()
 
@@ -100,11 +80,7 @@ const id = Arrow.id()
 const arrow =
   Arrow(x => x.toString())
 
-<<<<<<< HEAD
-// right :: Arrow a String
-=======
 // left :: Arrow a String
->>>>>>> 68de04589e6d783e917aa954dfb3133abaa9a608
 const left =
   id.compose(arrow)
 
@@ -122,16 +98,6 @@ left.runWith(12)  //=> '12'
 Arrow.type :: () -> String
 ```
 
-<<<<<<< HEAD
-`type` provides a string representation of the type name for a given type in `crocks`. While it is used mostly internally for law validation, it can be useful to the end user for debugging and building out custom types based on the standard `crocks` types. While type comparisons can easily be done manually by calling `type` on a given type, using the `isSameType` function hides much of the boilerplate. `type` is available on both the Constructor and the Instance for convenience.
-
-```js
-const Identity = require('crocks/Identity')
-const K = require('crocks/helpers/identity')
-const isSameType = require('crocks/predicates/isSameType')
-
-Arrow.type() //=>  "Arrow"
-=======
 `type` provides a string representation of the type name for a given type in
 `crocks`. While it is used mostly internally for law validation, it can be useful
 to the end user for debugging and building out custom types based on the standard
@@ -148,20 +114,11 @@ const I = require('crocks/combinators/identity')
 const isSameType = require('crocks/predicates/isSameType')
 
 Arrow.type() //=> "Arrow"
->>>>>>> 68de04589e6d783e917aa954dfb3133abaa9a608
 
 isSameType(Arrow, Arrow(x => x + 3))  //=> true
 isSameType(Arrow, Arrow)              //=> true
-<<<<<<< HEAD
-isSameType(Arrow, Idenity(0))         //=> false
-<<<<<<< HEAD
-isSameType(Arrow(K), Identity)        //=> false
-=======
-=======
 isSameType(Arrow, Identity(0))        //=> false
->>>>>>> cfbf9fbfd10bc8926ace9f364ae1a3d394c84d97
 isSameType(Arrow(I), Identity)        //=> false
->>>>>>> 68de04589e6d783e917aa954dfb3133abaa9a608
 ```
 
 ## Instance Methods
@@ -171,20 +128,6 @@ isSameType(Arrow(I), Identity)        //=> false
 Pair p => Arrow a b ~> () -> Arrow (p a a) (p b b)
 ```
 
-<<<<<<< HEAD
-`both` allows for the mode of a given `Arrow` to switch to a manner that applies itself to both slots of a `Pair` that is passed through the `Arrow`. As noted in the type signature, `both` will give back an `Arrow` has a new signature that utilizes a `Pair` on both sides.
-
-```js
-const merge = require('crocks/Pair/merge')
-
-const double =
-  Arrow(x => x * 2)
-
-const doubleAndAdd =
-  double
-    .both()
-    .map(merge((x, y) => x + y))
-=======
 `both` allows for the mode of a given `Arrow` to switch to a manner that applies
 itself to both slots of a `Pair` that is passed through the `Arrow`. As noted in
 the type signature, `both` will give back an `Arrow` has a new signature that
@@ -544,5 +487,4 @@ const arrAddFull =
 arrAddFull
   .runWith(names)
 //=> { full: 'Joey Fella', first: 'Joey', last: 'Fella' }
->>>>>>> 68de04589e6d783e917aa954dfb3133abaa9a608
 ```

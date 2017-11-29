@@ -1,6 +1,6 @@
 {
   "name": "crocks",
-  "version": "0.6.1",
+  "version": "0.8.1",
   "description": "A collection of well known Monadic Containers for your utter enjoyment.",
   "main": "./index.js",
   "scripts": {
@@ -43,7 +43,7 @@
     "branches": 100,
     "exclude": [
       "src/",
-      "test/",
+      "build/test/",
       "**/*.spec.js"
     ]
   },

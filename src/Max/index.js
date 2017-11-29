@@ -13,30 +13,30 @@ const _empty =
   () => Max(-Infinity)
 
 function Max(n) {
-  const x = isNil(n) ? _empty().value() : n
+  const x = isNil(n) ? _empty().valueOf() : n
 
   if(!arguments.length || !isNumber(x)) {
     throw new TypeError('Max: Numeric value required')
   }
 
-  const value =
+  const valueOf =
     () => x
 
   const empty =
     _empty
 
   const inspect =
-    () => `Max${_inspect(value())}`
+    () => `Max${_inspect(valueOf())}`
 
   function concat(m) {
     if(!isSameType(Max, m)) {
       throw new TypeError('Max.concat: Max requried')
     }
 
-    return Max(Math.max(x, m.value()))
+    return Max(Math.max(x, m.valueOf()))
   }
 
-  return { inspect, value, type, concat, empty }
+  return { inspect, valueOf, type, concat, empty }
 }
 
 Max['@@implements'] = _implements(

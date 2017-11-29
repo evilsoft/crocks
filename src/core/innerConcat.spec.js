@@ -1,7 +1,7 @@
 const test = require('tape')
-const helpers = require('../../test/helpers')
-const Mock = require('../../test/MockCrock')
-const Last = require('../../test/LastMonoid')
+const helpers = require('../test/helpers')
+const Mock = require('../test/MockCrock')
+const Last = require('../test/LastMonoid')
 
 const bindFunc = helpers.bindFunc
 
@@ -39,8 +39,8 @@ test('innerConcat functionality', t => {
   const res = fn(left)
 
   t.ok(isSameType(Mock, res), 'returns a container of the same type')
-  t.ok(isSameType(Last, res.value()), 'new value is a Monoid of the expected type')
-  t.equals(res.value().value(), val, 'new value is a Monoid of the expected type')
+  t.ok(isSameType(Last, res.valueOf()), 'new value is a Monoid of the expected type')
+  t.equals(res.valueOf().valueOf(), val, 'new value is a Monoid of the expected type')
 
   t.end()
 })

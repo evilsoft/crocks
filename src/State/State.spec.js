@@ -1,6 +1,6 @@
 const test = require('tape')
 const sinon = require('sinon')
-const helpers = require('../../test/helpers')
+const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
 
@@ -8,10 +8,11 @@ const Pair = require('../core/Pair')
 const Unit = require('../core/Unit')
 const curry = require('../core/curry')
 const compose = curry(require('../core/compose'))
-const identity = require('../core/identity')
 const isObject = require('../core/isObject')
 const isFunction = require('../core/isFunction')
 const unit = require('../core/_unit')
+
+const identity = x => x
 
 const State = require('.')
 
@@ -28,18 +29,19 @@ test('State', t => {
   t.ok(isFunction(State.put), 'provides a put function')
   t.ok(isFunction(State.modify), 'provides a modify function')
 
-  t.throws(s(), TypeError, 'throws with no parameters')
+  const err = /State: Must wrap a function in the form \(s -> Pair a s\)/
+  t.throws(s(), err, 'throws with no parameters')
 
-  t.throws(s(undefined), TypeError, 'throws with undefined')
-  t.throws(s(null), TypeError, 'throws with null')
-  t.throws(s(0), TypeError, 'throws with falsey number')
-  t.throws(s(1), TypeError, 'throws with truthy number')
-  t.throws(s(''), TypeError, 'throws with falsey string')
-  t.throws(s('string'), TypeError, 'throws with truthy string')
-  t.throws(s(false), TypeError, 'throws with false')
-  t.throws(s(true), TypeError, 'throws with true')
-  t.throws(s([]), TypeError, 'throws with array')
-  t.throws(s({}), TypeError, 'throws with object')
+  t.throws(s(undefined), err, 'throws with undefined')
+  t.throws(s(null), err, 'throws with null')
+  t.throws(s(0), err, 'throws with falsey number')
+  t.throws(s(1), err, 'throws with truthy number')
+  t.throws(s(''), err, 'throws with falsey string')
+  t.throws(s('string'), err, 'throws with truthy string')
+  t.throws(s(false), err, 'throws with false')
+  t.throws(s(true), err, 'throws with true')
+  t.throws(s([]), err, 'throws with array')
+  t.throws(s({}), err, 'throws with object')
 
   t.doesNotThrow(s(unit), 'allows a function')
 
@@ -71,8 +73,28 @@ test('State type', t => {
   t.end()
 })
 
+test('State runWith errors', t => {
+  const runWith = bindFunc(State(identity).runWith)
+
+  const err = /State.runWith: Must wrap a function in the form \(s -> Pair a s\)/
+
+  t.throws(runWith(undefined), err, 'throws when wrapped function returns undefined')
+  t.throws(runWith(null), err, 'throws when wrapped function returns null')
+  t.throws(runWith(0), err, 'throws when wrapped function returns falsey number')
+  t.throws(runWith(1), err, 'throws when wrapped function returns truthy number')
+  t.throws(runWith(''), err, 'throws when wrapped function returns falsey string')
+  t.throws(runWith('string'), err, 'throws when wrapped function returns truthy string')
+  t.throws(runWith(false), err, 'throws when wrapped function returns false')
+  t.throws(runWith(true), err, 'throws when wrapped function returns true')
+  t.throws(runWith({}), err, 'throws when wrapped function returns an object')
+  t.throws(runWith([]), err, 'throws when wrapped function returns an array')
+  t.throws(runWith(unit), err, 'throws when wrapped function returns a function')
+
+  t.end()
+})
+
 test('State runWith', t => {
-  const f = sinon.spy(x => x * 2)
+  const f = sinon.spy(x => Pair(x * 2, x))
 
   const s = 34
   const result = State(f).runWith(s)
@@ -86,17 +108,18 @@ test('State runWith', t => {
 test('State execWith', t => {
   const execWith = bindFunc(State(identity).execWith)
 
-  t.throws(execWith(undefined), TypeError, 'throws when wrapped function returns undefined')
-  t.throws(execWith(null), TypeError, 'throws when wrapped function returns null')
-  t.throws(execWith(0), TypeError, 'throws when wrapped function returns falsey number')
-  t.throws(execWith(1), TypeError, 'throws when wrapped function returns truthy number')
-  t.throws(execWith(''), TypeError, 'throws when wrapped function returns falsey string')
-  t.throws(execWith('string'), TypeError, 'throws when wrapped function returns truthy string')
-  t.throws(execWith(false), TypeError, 'throws when wrapped function returns false')
-  t.throws(execWith(true), TypeError, 'throws when wrapped function returns true')
-  t.throws(execWith({}), TypeError, 'throws when wrapped function returns an object')
-  t.throws(execWith([]), TypeError, 'throws when wrapped function returns an array')
-  t.throws(execWith(unit), TypeError, 'throws when wrapped function returns a function')
+  const err = /State.execWith: Must wrap a function in the form \(s -> Pair a s\)/
+  t.throws(execWith(undefined), err, 'throws when wrapped function returns undefined')
+  t.throws(execWith(null), err, 'throws when wrapped function returns null')
+  t.throws(execWith(0), err, 'throws when wrapped function returns falsey number')
+  t.throws(execWith(1), err, 'throws when wrapped function returns truthy number')
+  t.throws(execWith(''), err, 'throws when wrapped function returns falsey string')
+  t.throws(execWith('string'), err, 'throws when wrapped function returns truthy string')
+  t.throws(execWith(false), err, 'throws when wrapped function returns false')
+  t.throws(execWith(true), err, 'throws when wrapped function returns true')
+  t.throws(execWith({}), err, 'throws when wrapped function returns an object')
+  t.throws(execWith([]), err, 'throws when wrapped function returns an array')
+  t.throws(execWith(unit), err, 'throws when wrapped function returns a function')
 
   const target = 0
   const f = sinon.spy(x => Pair(x, target))
@@ -113,17 +136,18 @@ test('State execWith', t => {
 test('State evalWith', t => {
   const evalWith = bindFunc(State(identity).evalWith)
 
-  t.throws(evalWith(undefined), TypeError, 'throws when wrapped function returns undefined')
-  t.throws(evalWith(null), TypeError, 'throws when wrapped function returns null')
-  t.throws(evalWith(0), TypeError, 'throws when wrapped function returns falsey number')
-  t.throws(evalWith(1), TypeError, 'throws when wrapped function returns truthy number')
-  t.throws(evalWith(''), TypeError, 'throws when wrapped function returns falsey string')
-  t.throws(evalWith('string'), TypeError, 'throws when wrapped function returns truthy string')
-  t.throws(evalWith(false), TypeError, 'throws when wrapped function returns false')
-  t.throws(evalWith(true), TypeError, 'throws when wrapped function returns true')
-  t.throws(evalWith({}), TypeError, 'throws when wrapped function returns an object')
-  t.throws(evalWith([]), TypeError, 'throws when wrapped function returns an array')
-  t.throws(evalWith(unit), TypeError, 'throws when wrapped function returns a function')
+  const err = /State.evalWith: Must wrap a function in the form \(s -> Pair a s\)/
+  t.throws(evalWith(undefined), err, 'throws when wrapped function returns undefined')
+  t.throws(evalWith(null), err, 'throws when wrapped function returns null')
+  t.throws(evalWith(0), err, 'throws when wrapped function returns falsey number')
+  t.throws(evalWith(1), err, 'throws when wrapped function returns truthy number')
+  t.throws(evalWith(''), err, 'throws when wrapped function returns falsey string')
+  t.throws(evalWith('string'), err, 'throws when wrapped function returns truthy string')
+  t.throws(evalWith(false), err, 'throws when wrapped function returns false')
+  t.throws(evalWith(true), err, 'throws when wrapped function returns true')
+  t.throws(evalWith({}), err, 'throws when wrapped function returns an object')
+  t.throws(evalWith([]), err, 'throws when wrapped function returns an array')
+  t.throws(evalWith(unit), err, 'throws when wrapped function returns a function')
 
   const target = 'bullseye'
   const f = sinon.spy(x => Pair(target, x))
@@ -204,16 +228,17 @@ test('State put', t => {
 test('State modify', t => {
   const modify = bindFunc(State.modify)
 
-  t.throws(modify(undefined), TypeError, 'throws with undefined')
-  t.throws(modify(null), TypeError, 'throws with null')
-  t.throws(modify(0), TypeError, 'throws with falsey number')
-  t.throws(modify(1), TypeError, 'throws with truthy number')
-  t.throws(modify(''), TypeError, 'throws with falsey string')
-  t.throws(modify('string'), TypeError, 'throws with truthy string')
-  t.throws(modify(false), TypeError, 'throws with false')
-  t.throws(modify(true), TypeError, 'throws with true')
-  t.throws(modify([]), TypeError, 'throws with an array')
-  t.throws(modify({}), TypeError, 'throws with an object')
+  const err = /State.modify: Function Required/
+  t.throws(modify(undefined), err, 'throws with undefined')
+  t.throws(modify(null), err, 'throws with null')
+  t.throws(modify(0), err, 'throws with falsey number')
+  t.throws(modify(1), err, 'throws with truthy number')
+  t.throws(modify(''), err, 'throws with falsey string')
+  t.throws(modify('string'), err, 'throws with truthy string')
+  t.throws(modify(false), err, 'throws with false')
+  t.throws(modify(true), err, 'throws with true')
+  t.throws(modify([]), err, 'throws with an array')
+  t.throws(modify({}), err, 'throws with an object')
 
   const f = x => x  + 10
   const s = 75
@@ -231,23 +256,25 @@ test('State modify', t => {
 test('State map errors', t => {
   const map = bindFunc(State(unit).map)
 
-  t.throws(map(undefined), TypeError, 'throws with undefined')
-  t.throws(map(null), TypeError, 'throws with null')
-  t.throws(map(0), TypeError, 'throws with falsey number')
-  t.throws(map(1), TypeError, 'throws with truthy number')
-  t.throws(map(''), TypeError, 'throws with falsey string')
-  t.throws(map('string'), TypeError, 'throws with truthy string')
-  t.throws(map(false), TypeError, 'throws with false')
-  t.throws(map(true), TypeError, 'throws with true')
-  t.throws(map([]), TypeError, 'throws with an array')
-  t.throws(map({}), TypeError, 'throws with an object')
+  const err = /State.map: Function required/
+  t.throws(map(undefined), err, 'throws with undefined')
+  t.throws(map(null), err, 'throws with null')
+  t.throws(map(0), err, 'throws with falsey number')
+  t.throws(map(1), err, 'throws with truthy number')
+  t.throws(map(''), err, 'throws with falsey string')
+  t.throws(map('string'), err, 'throws with truthy string')
+  t.throws(map(false), err, 'throws with false')
+  t.throws(map(true), err, 'throws with true')
+  t.throws(map([]), err, 'throws with an array')
+  t.throws(map({}), err, 'throws with an object')
 
   t.doesNotThrow(map(unit), 'allows a function')
 
   const m = bindFunc(State(identity).map(x => x + 1).runWith)
   const n = bindFunc(State(x => Pair(x, x)).map(x => x + 1).runWith)
 
-  t.throws(m(3), 'throws when wrapped function is not (s -> (a, s))')
+  const noPair = /State.map: Must wrap a function in the form \(s -> Pair a s\)/
+  t.throws(m(3), noPair, 'throws when wrapped function is not (s -> (a, s))')
   t.doesNotThrow(n(3), 'throws when wrapped function is not (s -> (a, s))')
 
   t.end()
@@ -290,48 +317,51 @@ test('State ap errors', t => {
   const ap = bindFunc(State(unit).ap)
   const m = { type: () => 'State...Not' }
 
-  t.throws(ap(undefined), TypeError, 'throws with undefined')
-  t.throws(ap(null), TypeError, 'throws with null')
-  t.throws(ap(0), TypeError, 'throws with falsey number')
-  t.throws(ap(1), TypeError, 'throws with truthy number')
-  t.throws(ap(''), TypeError, 'throws with falsey string')
-  t.throws(ap('string'), TypeError, 'throws with truthy string')
-  t.throws(ap(false), TypeError, 'throws with false')
-  t.throws(ap(true), TypeError, 'throws with true')
-  t.throws(ap([]), TypeError, 'throws with an array')
-  t.throws(ap({}), TypeError, 'throws with an object')
-  t.throws(ap(m), TypeError, 'throws when Non-State')
+  const err = /State.ap: State required/
+  t.throws(ap(undefined), err, 'throws with undefined')
+  t.throws(ap(null), err, 'throws with null')
+  t.throws(ap(0), err, 'throws with falsey number')
+  t.throws(ap(1), err, 'throws with truthy number')
+  t.throws(ap(''), err, 'throws with falsey string')
+  t.throws(ap('string'), err, 'throws with truthy string')
+  t.throws(ap(false), err, 'throws with false')
+  t.throws(ap(true), err, 'throws with true')
+  t.throws(ap([]), err, 'throws with an array')
+  t.throws(ap({}), err, 'throws with an object')
+  t.throws(ap(m), err, 'throws when Non-State')
 
   const f = x => State(y => Pair(x, y))
   const n = State(identity)
 
   const noPair = bindFunc(n.ap(State(f)).runWith)
 
-  t.throws(noPair(undefined), TypeError, 'throws when inner function returns undefined')
-  t.throws(noPair(null), TypeError, 'throws when inner function returns null')
-  t.throws(noPair(0), TypeError, 'throws when inner function returns falsey number')
-  t.throws(noPair(1), TypeError, 'throws when inner function returns truthy number')
-  t.throws(noPair(''), TypeError, 'throws when inner function returns falsey string')
-  t.throws(noPair('string'), TypeError, 'throws when inner function returns truthy string')
-  t.throws(noPair(false), TypeError, 'throws when inner function returns false')
-  t.throws(noPair(true), TypeError, 'throws when inner function returns true')
-  t.throws(noPair([]), TypeError, 'throws when inner function returns an array')
-  t.throws(noPair({}), TypeError, 'throws when inner function returns an object')
-  t.throws(noPair(unit), TypeError, 'throws when inner function returns a function')
+  const noPairErr = /State.ap: Must wrap a function in the form \(s -> Pair a s\)/
+  t.throws(noPair(undefined), noPairErr, 'throws when inner function returns undefined')
+  t.throws(noPair(null), noPairErr, 'throws when inner function returns null')
+  t.throws(noPair(0), noPairErr, 'throws when inner function returns falsey number')
+  t.throws(noPair(1), noPairErr, 'throws when inner function returns truthy number')
+  t.throws(noPair(''), noPairErr, 'throws when inner function returns falsey string')
+  t.throws(noPair('string'), noPairErr, 'throws when inner function returns truthy string')
+  t.throws(noPair(false), noPairErr, 'throws when inner function returns false')
+  t.throws(noPair(true), noPairErr, 'throws when inner function returns true')
+  t.throws(noPair([]), noPairErr, 'throws when inner function returns an array')
+  t.throws(noPair({}), noPairErr, 'throws when inner function returns an object')
+  t.throws(noPair(unit), noPairErr, 'throws when inner function returns a function')
 
   const noFunc =
     x => bindFunc(State(s => Pair(x, s)).ap(f(3)).runWith)
 
-  t.throws(noFunc(undefined)(3), TypeError, 'throws when source value is undefined')
-  t.throws(noFunc(null)(3), TypeError, 'throws when source value is null')
-  t.throws(noFunc(0)(3), TypeError, 'throws when source value is falsey number')
-  t.throws(noFunc(1)(3), TypeError, 'throws when source value is truthy number')
-  t.throws(noFunc('')(3), TypeError, 'throws when source value is falsey string')
-  t.throws(noFunc('string')(3), TypeError, 'throws when source value is truthy string')
-  t.throws(noFunc(false)(3), TypeError, 'throws when source value is false')
-  t.throws(noFunc(true)(3), TypeError, 'throws when source value is true')
-  t.throws(noFunc([])(3), TypeError, 'throws when source value is an array')
-  t.throws(noFunc({})(3), TypeError, 'throws when source value is an object')
+  const noFuncErr = /State.ap: Source value must be a function/
+  t.throws(noFunc(undefined)(3), noFuncErr, 'throws when source value is undefined')
+  t.throws(noFunc(null)(3), noFuncErr, 'throws when source value is null')
+  t.throws(noFunc(0)(3), noFuncErr, 'throws when source value is falsey number')
+  t.throws(noFunc(1)(3), noFuncErr, 'throws when source value is truthy number')
+  t.throws(noFunc('')(3), noFuncErr, 'throws when source value is falsey string')
+  t.throws(noFunc('string')(3), noFuncErr, 'throws when source value is truthy string')
+  t.throws(noFunc(false)(3), noFuncErr, 'throws when source value is false')
+  t.throws(noFunc(true)(3), noFuncErr, 'throws when source value is true')
+  t.throws(noFunc([])(3), noFuncErr, 'throws when source value is an array')
+  t.throws(noFunc({})(3), noFuncErr, 'throws when source value is an object')
 
   t.end()
 })
@@ -392,47 +422,50 @@ test('State of properties (Applicative)', t => {
 test('State chain errors', t => {
   const chain = bindFunc(State(unit).chain)
 
-  t.throws(chain(undefined), TypeError, 'throws with undefined')
-  t.throws(chain(null), TypeError, 'throws with null')
-  t.throws(chain(0), TypeError, 'throws with falsey number')
-  t.throws(chain(1), TypeError, 'throws with truthy number')
-  t.throws(chain(''), TypeError, 'throws with falsey string')
-  t.throws(chain('string'), TypeError, 'throws with truthy string')
-  t.throws(chain(false), TypeError, 'throws with false')
-  t.throws(chain(true), TypeError, 'throws with true')
-  t.throws(chain([]), TypeError, 'throws with an array')
-  t.throws(chain({}), TypeError, 'throws with an object')
+  const err = /State.chain: State returning function required/
+  t.throws(chain(undefined), err, 'throws with undefined')
+  t.throws(chain(null), err, 'throws with null')
+  t.throws(chain(0), err, 'throws with falsey number')
+  t.throws(chain(1), err, 'throws with truthy number')
+  t.throws(chain(''), err, 'throws with falsey string')
+  t.throws(chain('string'), err, 'throws with truthy string')
+  t.throws(chain(false), err, 'throws with false')
+  t.throws(chain(true), err, 'throws with true')
+  t.throws(chain([]), err, 'throws with an array')
+  t.throws(chain({}), err, 'throws with an object')
 
   const f = x => State(y => Pair(x, y))
   const m = State(identity)
 
   const noPair = bindFunc(m.chain(f).runWith)
 
-  t.throws(noPair(undefined), TypeError, 'throws when inner function returns undefined')
-  t.throws(noPair(null), TypeError, 'throws when inner function returns null')
-  t.throws(noPair(0), TypeError, 'throws when inner function returns falsey number')
-  t.throws(noPair(1), TypeError, 'throws when inner function returns truthy number')
-  t.throws(noPair(''), TypeError, 'throws when inner function returns falsey string')
-  t.throws(noPair('string'), TypeError, 'throws when inner function returns truthy string')
-  t.throws(noPair(false), TypeError, 'throws when inner function returns false')
-  t.throws(noPair(true), TypeError, 'throws when inner function returns true')
-  t.throws(noPair([]), TypeError, 'throws when inner function returns an array')
-  t.throws(noPair({}), TypeError, 'throws when inner function returns an object')
-  t.throws(noPair(unit), TypeError, 'throws when inner function returns a function')
+  const noPairErr = /State.chain: Must wrap a function in the form \(s -> Pair a s\)/
+  t.throws(noPair(undefined), noPairErr, 'throws when inner function returns undefined')
+  t.throws(noPair(null), noPairErr, 'throws when inner function returns null')
+  t.throws(noPair(0), noPairErr, 'throws when inner function returns falsey number')
+  t.throws(noPair(1), noPairErr, 'throws when inner function returns truthy number')
+  t.throws(noPair(''), noPairErr, 'throws when inner function returns falsey string')
+  t.throws(noPair('string'), noPairErr, 'throws when inner function returns truthy string')
+  t.throws(noPair(false), noPairErr, 'throws when inner function returns false')
+  t.throws(noPair(true), noPairErr, 'throws when inner function returns true')
+  t.throws(noPair([]), noPairErr, 'throws when inner function returns an array')
+  t.throws(noPair({}), noPairErr, 'throws when inner function returns an object')
+  t.throws(noPair(unit), noPairErr, 'throws when inner function returns a function')
 
   const noState = bindFunc(State(() => Pair(0, 0)).chain(identity).runWith)
 
-  t.throws(noState(undefined), TypeError, 'throws when chain function returns undefined')
-  t.throws(noState(null), TypeError, 'throws when chain function returns null')
-  t.throws(noState(0), TypeError, 'throws when chain function returns falsey number')
-  t.throws(noState(1), TypeError, 'throws when chain function returns truthy number')
-  t.throws(noState(''), TypeError, 'throws when chain function returns falsey string')
-  t.throws(noState('string'), TypeError, 'throws when chain function returns truthy string')
-  t.throws(noState(false), TypeError, 'throws when chain function returns false')
-  t.throws(noState(true), TypeError, 'throws when chain function returns true')
-  t.throws(noState([]), TypeError, 'throws when chain function returns an array')
-  t.throws(noState({}), TypeError, 'throws when chain function returns an object')
-  t.throws(noState(unit), TypeError, 'throws when chain function returns a function')
+  const noStateErr = /State.chain: Function must return another State/
+  t.throws(noState(undefined), noStateErr, 'throws when chain function returns undefined')
+  t.throws(noState(null), noStateErr, 'throws when chain function returns null')
+  t.throws(noState(0), noStateErr, 'throws when chain function returns falsey number')
+  t.throws(noState(1), noStateErr, 'throws when chain function returns truthy number')
+  t.throws(noState(''), noStateErr, 'throws when chain function returns falsey string')
+  t.throws(noState('string'), noStateErr, 'throws when chain function returns truthy string')
+  t.throws(noState(false), noStateErr, 'throws when chain function returns false')
+  t.throws(noState(true), noStateErr, 'throws when chain function returns true')
+  t.throws(noState([]), noStateErr, 'throws when chain function returns an array')
+  t.throws(noState({}), noStateErr, 'throws when chain function returns an object')
+  t.throws(noState(unit), noStateErr, 'throws when chain function returns a function')
 
   t.end()
 })

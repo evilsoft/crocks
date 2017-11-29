@@ -1,5 +1,6 @@
 *.spec.js
 .npmignore
+test/
 
 *.log
 .DS_Store

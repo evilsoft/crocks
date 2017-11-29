@@ -47,6 +47,8 @@ const helpers = {
   fromPairs: require('./helpers/fromPairs'),
   liftA2: require('./helpers/liftA2'),
   liftA3: require('./helpers/liftA3'),
+  mapProps: require('./helpers/mapProps'),
+  mapReduce: require('./helpers/mapReduce'),
   mconcat: require('./helpers/mconcat'),
   mconcatMap: require('./helpers/mconcatMap'),
   mreduce: require('./helpers/mreduce'),
@@ -106,6 +108,7 @@ const pointfree = {
   contramap: require('./pointfree/contramap'),
   either: require('./pointfree/either'),
   empty: require('./pointfree/empty'),
+  equals: require('./pointfree/equals'),
   evalWith: require('./State/evalWith'),
   execWith: require('./State/execWith'),
   extend: require('./pointfree/extend'),
@@ -130,7 +133,7 @@ const pointfree = {
   swap: require('./pointfree/swap'),
   tail: require('./pointfree/tail'),
   traverse: require('./pointfree/traverse'),
-  value: require('./pointfree/value')
+  valueOf: require('./pointfree/valueOf')
 }
 
 const predicates = {
@@ -160,6 +163,7 @@ const predicates = {
   isPlus: require('./predicates/isPlus'),
   isProfunctor: require('./predicates/isProfunctor'),
   isPromise: require('./predicates/isPromise'),
+  isSame: require('./predicates/isSame'),
   isSameType: require('./predicates/isSameType'),
   isSemigroup: require('./predicates/isSemigroup'),
   isSemigroupoid: require('./predicates/isSemigroupoid'),
@@ -195,7 +199,8 @@ const transforms = {
   resultToEither: require('./Either/resultToEither'),
   resultToFirst: require('./First/resultToFirst'),
   resultToLast: require('./Last/resultToLast'),
-  resultToMaybe: require('./Maybe/resultToMaybe')
+  resultToMaybe: require('./Maybe/resultToMaybe'),
+  writerToPair: require('./Pair/writerToPair')
 }
 
 module.exports = Object.assign(

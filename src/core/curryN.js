@@ -1,13 +1,8 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const argsArray = require('./argsArray')
-
 function curryN(n, fn) {
-  return function() {
-    const xs =
-      argsArray(arguments)
-
+  return function(...xs) {
     const args =
       xs.length ? xs : [ undefined ]
 

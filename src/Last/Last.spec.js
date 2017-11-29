@@ -1,14 +1,14 @@
 const test = require('tape')
-const helpers = require('../../test/helpers')
+const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
 
 const Maybe = require('../core/Maybe')
-const constant = require('../core/constant')
 const isFunction = require('../core/isFunction')
 const isObject = require('../core/isObject')
 const isSameType = require('../core/isSameType')
 
+const constant = x => () => x
 const extract = m => m.option('empty')
 
 const Last = require('.')
@@ -48,12 +48,12 @@ test('Last inspect', t => {
   t.end()
 })
 
-test('Last value', t => {
-  t.ok(isFunction(Last(0).value), 'is a function')
+test('Last valueOf', t => {
+  t.ok(isFunction(Last(0).valueOf), 'is a function')
 
-  const val = Last(1).value()
-  const just = Last(Maybe.Just(2)).value()
-  const nothing = Last(Maybe.Nothing()).value()
+  const val = Last(1).valueOf()
+  const just = Last(Maybe.Just(2)).valueOf()
+  const nothing = Last(Maybe.Nothing()).valueOf()
 
   t.ok(isSameType(Maybe, val), 'returns a Maybe when constructed with a value')
   t.ok(isSameType(Maybe, just), 'returns a Maybe when constructed with a Just')

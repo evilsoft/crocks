@@ -1,7 +1,6 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const argsArray = require('./argsArray')
 const isFunction = require('./isFunction')
 
 function applyCurry(fn, arg) {
@@ -11,10 +10,7 @@ function applyCurry(fn, arg) {
 
 // curry : ((a, b, c) -> d) -> a -> b -> c -> d
 function curry(fn) {
-  return function() {
-    const xs =
-      argsArray(arguments)
-
+  return function(...xs) {
     const args =
       xs.length ? xs : [ undefined ]
 

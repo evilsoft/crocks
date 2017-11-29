@@ -20,7 +20,7 @@ function Last(x) {
   const maybe =
     !isSameType(Maybe, x) ? Maybe.of(x) : x.map(x => x)
 
-  const value =
+  const valueOf =
     () => maybe
 
   const empty =
@@ -38,7 +38,7 @@ function Last(x) {
     }
 
     const n =
-      m.value().map(x => x)
+      m.valueOf().map(x => x)
 
     return Last(
       maybe.either(
@@ -49,7 +49,7 @@ function Last(x) {
   }
 
   return {
-    concat, empty, inspect, option, type, value
+    concat, empty, inspect, option, type, valueOf
   }
 }
 

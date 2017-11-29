@@ -20,7 +20,7 @@ function Unit() {
   const inspect =
     () => '()'
 
-  const value =
+  const valueOf =
     () => undefined
 
   const of =
@@ -62,7 +62,7 @@ function Unit() {
   }
 
   return {
-    inspect, value, type, equals,
+    inspect, valueOf, type, equals,
     concat, empty, map, ap, of, chain
   }
 }

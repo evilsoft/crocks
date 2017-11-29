@@ -2,40 +2,17 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const curry = require('./curry')
-const isArray = require('./isArray')
 const isFunction = require('./isFunction')
-const isNil = require('./isNil')
+const type = require('./type')
 
-function isAdt(x) {
-  return !!x && isFunction(x.type)
-}
-
-function adtType(x, y) {
-  return isAdt(x)
-    && isAdt(y)
-    && x.type() === y.type()
-}
-
-function typeName(x) {
-  return isArray(x) ? 'array' : typeof x
-}
-
-function typeRep(x, y) {
-  return x.name === y.constructor.name
-    || y.name === x.constructor.name
-}
-
-// isSameType :: Container m => m -> m -> Boolean
+// isSameType :: Container m => (m, m) -> Boolean
 function isSameType(x, y) {
-  if(isAdt(x) || isAdt(y)) {
-    return adtType(x, y)
-  }
+  const tX = type(x)
+  const tY = type(y)
 
-  if(isNil(x) || isNil(y)) {
-    return x === y
-  }
-
-  return typeRep(x, y) || typeName(x) === typeName(y)
+  return tX === tY
+    || (isFunction(x) && x.name === tY)
+    || (isFunction(y) && y.name === tX)
 }
 
 module.exports = curry(isSameType)

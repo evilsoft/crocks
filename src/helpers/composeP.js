@@ -1,9 +1,6 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const argsArray = require('../core/argsArray')
-
-const identity = require('../core/identity')
 const isFunction = require('../core/isFunction')
 const isPromise = require('../core/isPromise')
 
@@ -25,13 +22,13 @@ function applyPipe(f, g) {
   }
 }
 
-function composeP() {
+function composeP(...args) {
   if(!arguments.length) {
     throw new TypeError(err)
   }
 
   const fns =
-    argsArray(arguments).reverse()
+    args.reverse()
 
   const head =
     fns[0]
@@ -41,7 +38,7 @@ function composeP() {
   }
 
   const tail =
-    fns.slice(1).concat(identity)
+    fns.slice(1).concat(x => x)
 
   return tail.reduce(applyPipe, head)
 }

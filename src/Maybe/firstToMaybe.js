@@ -8,7 +8,7 @@ const isFunction = require('../core/isFunction')
 const isSameType = require('../core/isSameType')
 
 const applyTransform = first =>
-  first.value()
+  first.valueOf()
 
 // firstToMaybe : First a -> Maybe a
 // firstToMaybe : (a -> First b) -> a -> Maybe b

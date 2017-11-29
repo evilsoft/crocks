@@ -1,12 +1,13 @@
 const test= require('tape')
-const helpers = require('../../test/helpers')
+const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
 
-const constant = require('../core/constant')
-const identity = require('../core/identity')
 const isFunction = require('../core/isFunction')
 const isObject = require('../core/isObject')
+
+const constant = x => () => x
+const identity = x => x
 
 const Prod = require('.')
 
@@ -54,16 +55,16 @@ test('Prod inspect', t => {
   t.end()
 })
 
-test('Prod value', t => {
-  const empty = Prod.empty().value()
+test('Prod valueOf', t => {
+  const empty = Prod.empty().valueOf()
 
-  t.ok(isFunction(Prod(0).value), 'is a function')
+  t.ok(isFunction(Prod(0).valueOf), 'is a function')
 
-  t.equal(Prod(undefined).value(), empty, 'provides an empty value for undefined')
-  t.equal(Prod(null).value(), empty, 'provides an empty value for null')
+  t.equal(Prod(undefined).valueOf(), empty, 'provides an empty value for undefined')
+  t.equal(Prod(null).valueOf(), empty, 'provides an empty value for null')
 
-  t.equal(Prod(0).value(), 0, 'provides a wrapped falsey number')
-  t.equal(Prod(1).value(), 1, 'provides a wrapped truthy number')
+  t.equal(Prod(0).valueOf(), 0, 'provides a wrapped falsey number')
+  t.equal(Prod(1).valueOf(), 1, 'provides a wrapped truthy number')
 
   t.end()
 })
@@ -87,7 +88,7 @@ test('Prod concat properties (Semigroup)', t => {
 
   t.ok(isFunction(Prod(0).concat), 'is a function')
 
-  t.equal(left.value(), right.value(), 'associativity')
+  t.equal(left.valueOf(), right.valueOf(), 'associativity')
   t.equal(a.concat(b).type(), a.type(), 'returns Semigroup of the same type')
 
   t.end()
@@ -116,7 +117,7 @@ test('Prod concat functionality', t => {
   t.throws(cat({}), TypeError, 'throws with an object')
   t.throws(cat(notProd), TypeError, 'throws with non-Prod')
 
-  t.equals(a.concat(b).value(), (x * y), 'Multiplies wrapped values as expected')
+  t.equals(a.concat(b).valueOf(), (x * y), 'Multiplies wrapped values as expected')
 
   t.end()
 })
@@ -130,8 +131,8 @@ test('Prod empty properties (Monoid)', t => {
   const right = m.concat(m.empty())
   const left = m.empty().concat(m)
 
-  t.equal(right.value(), m.value(), 'right identity')
-  t.equal(left.value(), m.value(), 'left identity')
+  t.equal(right.valueOf(), m.valueOf(), 'right identity')
+  t.equal(left.valueOf(), m.valueOf(), 'left identity')
 
   t.equal(m.empty().type(), m.type(), 'returns a Monoid of the same type')
 
@@ -144,7 +145,7 @@ test('Prod empty functionality', t => {
   t.equal(Prod(5).empty, Prod.empty, 'static and instance versions are the same')
 
   t.equal(x.type(), 'Prod', 'provides a Prod')
-  t.equal(x.value(), 1, 'wraps a 1')
+  t.equal(x.valueOf(), 1, 'wraps a 1')
 
   t.end()
 })

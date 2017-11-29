@@ -1,6 +1,7 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
+const _equals = require('./equals')
 const _implements = require('./implements')
 const _inspect = require('./inspect')
 const type = require('./types').type('List')
@@ -75,18 +76,18 @@ function List(x) {
         throw new TypeError('List.chain: Function must return a List')
       }
 
-      return y.concat(m.value())
+      return y.concat(m.valueOf())
     }
   }
 
   const of =
     _of
 
-  const value =
+  const valueOf =
     () => xs.slice()
 
   const toArray =
-    value
+    valueOf
 
   const empty =
     _empty
@@ -107,23 +108,16 @@ function List(x) {
   const cons =
     x => List([ x ].concat(xs))
 
-  function equals(m) {
-    if(isSameType(List, m)) {
-      const mxs = m.value()
-
-      return xs.length === mxs.length
-        && xs.reduce((res, x, i) => res && x === mxs[i], true)
-    }
-
-    return false
-  }
+  const equals = m =>
+    isSameType(List, m)
+      && _equals(xs, m.valueOf())
 
   function concat(m) {
     if(!isSameType(List, m)) {
       throw new TypeError('List.concat: List required')
     }
 
-    return List(xs.concat(m.value()))
+    return List(xs.concat(m.valueOf()))
   }
 
   function reduce(fn, i) {
@@ -229,7 +223,7 @@ function List(x) {
   }
 
   return {
-    inspect, value, toArray, head, tail, cons,
+    inspect, valueOf, toArray, head, tail, cons,
     type, equals, concat, empty, reduce, fold,
     filter, reject, map, ap, of, chain,
     sequence, traverse

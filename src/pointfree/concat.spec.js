@@ -1,6 +1,6 @@
 const test = require('tape')
-const helpers = require('../../test/helpers')
-const Last = require('../../test/LastMonoid')
+const helpers = require('../test/helpers')
+const Last = require('../test/LastMonoid')
 
 const bindFunc = helpers.bindFunc
 
@@ -54,7 +54,7 @@ test('concat pointfree semigroup', t => {
 
   const result = concat(Last('3'), m)
 
-  t.equal(result.value(), '3', 'concats semigroup as expected')
+  t.equal(result.valueOf(), '3', 'concats semigroup as expected')
 
   t.end()
 })

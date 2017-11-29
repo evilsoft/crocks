@@ -26,7 +26,7 @@ function Pred(pred) {
   const empty =
     _empty
 
-  const value =
+  const valueOf =
     () => runWith
 
   function concat(m) {
@@ -47,7 +47,7 @@ function Pred(pred) {
 
   return {
     runWith, inspect, type,
-    value, empty, concat,
+    valueOf, empty, concat,
     contramap
   }
 }

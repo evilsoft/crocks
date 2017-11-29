@@ -5,12 +5,13 @@ const Async = require('.')
 const First = require('../core/types').proxy('First')
 
 const curry = require('../core/curry')
-const constant = require('../core/constant')
 const isFunction = require('../core/isFunction')
 const isSameType = require('../core/isSameType')
 
+const constant = x => () => x
+
 const applyTransform = (left, first) =>
-  first.value().either(
+  first.valueOf().either(
     constant(Async.Rejected(left)),
     Async.Resolved
   )

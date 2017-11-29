@@ -1,14 +1,15 @@
 const test = require('tape')
 const sinon = require('sinon')
-const helpers = require('../../test/helpers')
-const MockCrock = require('../../test/MockCrock')
+const helpers = require('../test/helpers')
+const MockCrock = require('../test/MockCrock')
 
 const bindFunc = helpers.bindFunc
 
-const constant = require('../core/constant')
 const isArray = require('../core/isArray')
 const isFunction = require('../core/isFunction')
 const unit = require('../core/_unit')
+
+const constant = x => () => x
 
 const sequence = require('./sequence')
 
@@ -71,7 +72,7 @@ test('sequence with Traversable', t => {
 
 test('sequence with Array', t => {
   const outer = sequence(MockCrock.of, [ MockCrock(12), MockCrock(23) ])
-  const inner = outer.value()
+  const inner = outer.valueOf()
 
   t.equal(outer.type(), 'MockCrock', 'outer container is a MockCrock')
   t.ok(isArray(inner), 'inner container is an Array')

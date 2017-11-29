@@ -1,19 +1,20 @@
 const test = require('tape')
 const sinon = require('sinon')
-const helpers = require('../../test/helpers')
-const MockCrock = require('../../test/MockCrock')
+const helpers = require('../test/helpers')
+const MockCrock = require('../test/MockCrock')
 
 const bindFunc = helpers.bindFunc
 
 const curry = require('../core/curry')
 const compose = curry(require('../core/compose'))
-const constant = require('../core/constant')
-const identity = require('../core/identity')
 const isArray = require('../core/isArray')
 const isFunction = require('../core/isFunction')
 const isObject = require('../core/isObject')
 const isSameType = require('../core/isSameType')
 const unit = require('../core/_unit')
+
+const constant = x => () => x
+const identity = x => x
 
 const either =
   (f, g) => m => m.either(f, g)
@@ -522,17 +523,32 @@ test('Result alt errors', t => {
   t.end()
 })
 
-test('Result alt functionality', t => {
+test('Result alt functionality with Semigroup Err', t => {
   const right = Result.of('Ok')
   const anotherOk = Result.of('Another Ok')
 
-  const left = Result.Err('Err')
-  const anotherErr = Result.Err('Another Err')
+  const left = Result.Err([ 'Err' ])
+  const anotherErr = Result.Err([ 'Another Err' ])
 
   const f = either(identity, identity)
 
   t.equals(f(right.alt(left).alt(anotherOk)), 'Ok', 'retains first Ok success')
-  t.equals(f(left.alt(anotherErr)), 'Another Err', 'provdes last Err when all Errs')
+  t.same(f(left.alt(anotherErr)), [ 'Err', 'Another Err' ], 'provdes accumulated Err when all Errs')
+
+  t.end()
+})
+
+test('Result alt functionality without Semigroup Err', t => {
+  const right = Result.of('Ok')
+  const anotherOk = Result.of('Another Ok')
+
+  const left = Result.Err(3)
+  const anotherErr = Result.Err(13)
+
+  const f = either(identity, identity)
+
+  t.equals(f(right.alt(left).alt(anotherOk)), 'Ok', 'retains first Ok success')
+  t.same(f(left.alt(anotherErr)), 13, 'provdes last Err when all Errs')
 
   t.end()
 })
@@ -799,12 +815,12 @@ test('Result sequence functionality', t => {
   const e = Err('Err').sequence(MockCrock.of)
 
   t.ok(isSameType(MockCrock, o), 'Provides an outer type of MockCrock')
-  t.ok(isSameType(Result, o.value()), 'Provides an outer type of MockCrock')
-  t.equal(o.value().either(constant(0), identity), x, 'Result contains original inner value')
+  t.ok(isSameType(Result, o.valueOf()), 'Provides an outer type of MockCrock')
+  t.equal(o.valueOf().either(constant(0), identity), x, 'Result contains original inner value')
 
   t.ok(isSameType(MockCrock, e), 'Provides an outer type of MockCrock')
-  t.ok(isSameType(Result, e.value()), 'Provides an inner type of Result')
-  t.equal(e.value().either(identity, constant(0)), 'Err', 'Result contains original Err value')
+  t.ok(isSameType(Result, e.valueOf()), 'Provides an inner type of Result')
+  t.equal(e.valueOf().either(identity, constant(0)), 'Err', 'Result contains original Err value')
 
   t.end()
 })
@@ -878,12 +894,12 @@ test('Result traverse functionality', t => {
   const l = Err('Err').traverse(f, MockCrock)
 
   t.ok(isSameType(MockCrock, r), 'Provides an outer type of MockCrock')
-  t.ok(isSameType(Result, r.value()), 'Provides an inner type of Result')
-  t.equal(r.value().either(constant(0), identity), x, 'Result contains original inner value')
+  t.ok(isSameType(Result, r.valueOf()), 'Provides an inner type of Result')
+  t.equal(r.valueOf().either(constant(0), identity), x, 'Result contains original inner value')
 
   t.ok(isSameType(MockCrock, l), 'Provides an outer type of MockCrock')
-  t.ok(isSameType(Result, l.value()), 'Provides an inner type of Result')
-  t.equal(l.value().either(identity, constant(0)), 'Err', 'Result contains original Err value')
+  t.ok(isSameType(Result, l.valueOf()), 'Provides an inner type of Result')
+  t.equal(l.valueOf().either(identity, constant(0)), 'Err', 'Result contains original Err value')
 
   t.end()
 })

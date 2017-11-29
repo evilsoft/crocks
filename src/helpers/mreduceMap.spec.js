@@ -1,6 +1,6 @@
 const test = require('tape')
-const Last = require('../../test/LastMonoid')
-const helpers = require('../../test/helpers')
+const Last = require('../test/LastMonoid')
+const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
 
@@ -52,7 +52,7 @@ test('mreduceMap helper', t => {
   const nothing = mreduceMap(Last, addOne, [])
   const something = mreduceMap(Last, addOne, [ 1, 2, 3 ])
 
-  t.equal(nothing, Last.empty().value(), 'returns the empty value when passed an empty array')
+  t.equal(nothing, Last.empty().valueOf(), 'returns the empty value when passed an empty array')
   t.equal(something, 4, 'returns the last value by lifting and calling concat on each after running through map function')
 
   t.end()

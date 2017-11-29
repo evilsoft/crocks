@@ -1,12 +1,13 @@
 const test = require('tape')
-const helpers = require('../../test/helpers')
+const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
 
-const constant = require('../core/constant')
-const identity = require('../core/identity')
 const isFunction = require('../core/isFunction')
 const isObject = require('../core/isObject')
+
+const constant = x => () => x
+const identity = x => x
 
 const Min = require('.')
 
@@ -54,16 +55,16 @@ test('Min inspect', t => {
   t.end()
 })
 
-test('Min value', t => {
-  const empty = Min.empty().value()
+test('Min valueOf', t => {
+  const empty = Min.empty().valueOf()
 
-  t.ok(isFunction(Min(0).value), 'is a function')
+  t.ok(isFunction(Min(0).valueOf), 'is a function')
 
-  t.equal(Min(undefined).value(), empty, 'provides an empty value for undefined')
-  t.equal(Min(null).value(), empty, 'provides an empty value for null')
+  t.equal(Min(undefined).valueOf(), empty, 'provides an empty value for undefined')
+  t.equal(Min(null).valueOf(), empty, 'provides an empty value for null')
 
-  t.equal(Min(0).value(), 0, 'provides a wrapped falsey number')
-  t.equal(Min(1).value(), 1, 'provides a wrapped truthy number')
+  t.equal(Min(0).valueOf(), 0, 'provides a wrapped falsey number')
+  t.equal(Min(1).valueOf(), 1, 'provides a wrapped truthy number')
 
   t.end()
 })
@@ -87,7 +88,7 @@ test('Min concat properties (Semigroup)', t => {
 
   t.ok(isFunction(Min(0).concat), 'is a function')
 
-  t.equal(left.value(), right.value(), 'associativity')
+  t.equal(left.valueOf(), right.valueOf(), 'associativity')
   t.equal(a.concat(b).type(), a.type(), 'returns Semigroup of the same type')
 
   t.end()
@@ -116,7 +117,7 @@ test('Min concat functionality', t => {
   t.throws(cat({}), TypeError, 'throws with an object')
   t.throws(cat(notMin), TypeError, 'throws with non-Min')
 
-  t.equals(a.concat(b).value(), x, 'provides min of wrapped values as expected')
+  t.equals(a.concat(b).valueOf(), x, 'provides min of wrapped values as expected')
 
   t.end()
 })
@@ -130,8 +131,8 @@ test('Min empty properties (Monoid)', t => {
   const right = m.concat(m.empty())
   const left = m.empty().concat(m)
 
-  t.equal(right.value(), m.value(), 'right identity')
-  t.equal(left.value(), m.value(), 'left identity')
+  t.equal(right.valueOf(), m.valueOf(), 'right identity')
+  t.equal(left.valueOf(), m.valueOf(), 'left identity')
 
   t.equal(m.empty().type(), m.type(), 'returns a Monoid of the same type')
 
@@ -144,7 +145,7 @@ test('Min empty functionality', t => {
   t.equal(Min(0).empty, Min.empty, 'static and instance versions are the same')
 
   t.equal(x.type(), 'Min', 'provides a Min')
-  t.equal(x.value(), Infinity, 'wraps an Infinity')
+  t.equal(x.valueOf(), Infinity, 'wraps an Infinity')
 
   t.end()
 })

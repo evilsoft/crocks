@@ -2,9 +2,10 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const isApplicative = require('./isApplicative')
-const identity = require('./identity')
 const isArray = require('./isArray')
 const isFunction = require('./isFunction')
+
+const identity = x => x
 
 const concat =
   x => m => m.concat(x)

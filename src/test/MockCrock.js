@@ -1,12 +1,13 @@
-const constant = require('../src/core/constant')
-const isSameType = require('../src/core/isSameType')
-const _implements = require('../src/core/implements')
+const _implements = require('../core/implements')
+const _equals = require('../core/equals')
+
+const constant = x => () => x
 
 const _type = constant('MockCrock')
 const _of   = x => MockCrock(x)
 
 function MockCrock(x) {
-  const value     = constant(x)
+  const valueOf     = constant(x)
   const map       = fn => MockCrock(fn(x))
   const type      = _type
   const ap        = m => m.map(x)
@@ -15,11 +16,10 @@ function MockCrock(x) {
   const sequence  = () => x.map(MockCrock)
   const traverse  = (_, f) => f(x).map(MockCrock)
   const equals =
-    m => isSameType(MockCrock, m)
-      && m.value() === x
+    m => _equals(m.valueOf(), x)
 
   return {
-    value, type, map, ap,
+    valueOf, type, map, ap,
     chain, of, sequence,
     traverse, equals
   }

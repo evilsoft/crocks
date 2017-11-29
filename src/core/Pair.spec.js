@@ -1,15 +1,16 @@
 const test = require('tape')
 const sinon = require('sinon')
-const helpers = require('../../test/helpers')
+const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
 
 const curry = require('./curry')
 const compose = curry(require('./compose'))
-const identity = require('./identity')
 const isFunction = require('./isFunction')
 const isObject = require('./isObject')
 const unit = require('./_unit')
+
+const identity = x => x
 
 const merge =
   fn => m => m.merge(fn)
@@ -25,8 +26,9 @@ test('Pair core', t => {
 
   t.ok(isFunction(Pair.type), 'provides a type function')
 
-  t.throws(m(), TypeError, 'throws with no parameters')
-  t.throws(m(1), TypeError, 'throws with one parameter')
+  const err = /Pair: Must provide a first and second value/
+  t.throws(m(), err, 'throws with no parameters')
+  t.throws(m(1), err, 'throws with one parameter')
 
   t.end()
 })
@@ -81,6 +83,15 @@ test('Pair snd', t => {
   t.end()
 })
 
+test('Pair toArray', t => {
+  const p = Pair(34, 'string')
+
+  t.ok(isFunction(p.toArray), 'provides a toArray function')
+  t.same(p.toArray(), [ 34, 'string' ], 'returns an array with the Pairs values')
+
+  t.end()
+})
+
 test('Pair merge', t => {
   const p = Pair(1, 20)
 
@@ -88,16 +99,17 @@ test('Pair merge', t => {
 
   const merge = bindFunc(p.merge)
 
-  t.throws(merge(undefined), TypeError, 'throws with undefined')
-  t.throws(merge(null), TypeError, 'throws with null')
-  t.throws(merge(0), TypeError, 'throws with falsey number')
-  t.throws(merge(1), TypeError, 'throws with truthy number')
-  t.throws(merge(''), TypeError, 'throws with falsey string')
-  t.throws(merge('string'), TypeError, 'throws with truthy string')
-  t.throws(merge(false), TypeError, 'throws with false')
-  t.throws(merge(true), TypeError, 'throws with true')
-  t.throws(merge([]), TypeError, 'throws with an array')
-  t.throws(merge({}), TypeError, 'throws with object')
+  const err = /Pair.merge: Binary function required/
+  t.throws(merge(undefined), err, 'throws with undefined')
+  t.throws(merge(null), err, 'throws with null')
+  t.throws(merge(0), err, 'throws with falsey number')
+  t.throws(merge(1), err, 'throws with truthy number')
+  t.throws(merge(''), err, 'throws with falsey string')
+  t.throws(merge('string'), err, 'throws with truthy string')
+  t.throws(merge(false), err, 'throws with false')
+  t.throws(merge(true), err, 'throws with true')
+  t.throws(merge([]), err, 'throws with an array')
+  t.throws(merge({}), err, 'throws with object')
 
   t.doesNotThrow(merge(unit), 'allows a function')
 
@@ -146,9 +158,12 @@ test('Pair concat errors', t => {
   const bad = bindFunc(Pair(0, 0).concat)
   const good = bindFunc(Pair([], 'string').concat)
 
-  t.throws(bad(Pair([], [])), TypeError, 'throws when left Pair does not contain Semigroups')
-  t.throws(good(Pair(0, 0)), TypeError, 'throws when right Pair does not contain Semigroups')
-  t.throws(good([]), TypeError, 'throws when Non-Pair passed')
+  const noPair = /Pair.concat: Pair required/
+  t.throws(good([]), noPair, 'throws when Non-Pair passed')
+
+  const err = /Pair.concat: Both Pairs must contain Semigroups of the same type/
+  t.throws(bad(Pair([], [])), err, 'throws when left Pair does not contain Semigroups')
+  t.throws(good(Pair(0, 0)), err, 'throws when right Pair does not contain Semigroups')
 
   t.end()
 })
@@ -185,26 +200,27 @@ test('Pair concat properties (Semigroup)', t => {
 test('Pair swap', t => {
   const fn = bindFunc(Pair(0, 0).swap)
 
-  t.throws(fn(null, unit), TypeError, 'throws with null in left')
-  t.throws(fn(undefined, unit), TypeError, 'throws with undefined in left')
-  t.throws(fn(0, unit), TypeError, 'throws with falsey number in left')
-  t.throws(fn(1, unit), TypeError, 'throws with truthy number in left')
-  t.throws(fn('', unit), TypeError, 'throws with falsey string in left')
-  t.throws(fn('string', unit), TypeError, 'throws with truthy string in left')
-  t.throws(fn(false, unit), TypeError, 'throws with false in left')
-  t.throws(fn(true, unit), TypeError, 'throws with true in left')
-  t.throws(fn({}, unit), TypeError, 'throws with object in left')
-  t.throws(fn([], unit), TypeError, 'throws with array in left')
+  const err = /Pair.swap: Requires both left and right functions/
+  t.throws(fn(null, unit), err, 'throws with null in left')
+  t.throws(fn(undefined, unit), err, 'throws with undefined in left')
+  t.throws(fn(0, unit), err, 'throws with falsey number in left')
+  t.throws(fn(1, unit), err, 'throws with truthy number in left')
+  t.throws(fn('', unit), err, 'throws with falsey string in left')
+  t.throws(fn('string', unit), err, 'throws with truthy string in left')
+  t.throws(fn(false, unit), err, 'throws with false in left')
+  t.throws(fn(true, unit), err, 'throws with true in left')
+  t.throws(fn({}, unit), err, 'throws with object in left')
+  t.throws(fn([], unit), err, 'throws with array in left')
 
-  t.throws(fn(unit, null), TypeError, 'throws with null in right')
-  t.throws(fn(unit, undefined), TypeError, 'throws with undefined in right')
-  t.throws(fn(unit, 0), TypeError, 'throws with falsey number in right')
-  t.throws(fn(unit, 1), TypeError, 'throws with truthy number in right')
-  t.throws(fn(unit, ''), TypeError, 'throws with falsey string in right')
-  t.throws(fn(unit, false), TypeError, 'throws with false in right')
-  t.throws(fn(unit, true), TypeError, 'throws with true in right')
-  t.throws(fn(unit, {}), TypeError, 'throws with object in right')
-  t.throws(fn(unit, []), TypeError, 'throws with array in right')
+  t.throws(fn(unit, null), err, 'throws with null in right')
+  t.throws(fn(unit, undefined), err, 'throws with undefined in right')
+  t.throws(fn(unit, 0), err, 'throws with falsey number in right')
+  t.throws(fn(unit, 1), err, 'throws with truthy number in right')
+  t.throws(fn(unit, ''), err, 'throws with falsey string in right')
+  t.throws(fn(unit, false), err, 'throws with false in right')
+  t.throws(fn(unit, true), err, 'throws with true in right')
+  t.throws(fn(unit, {}), err, 'throws with object in right')
+  t.throws(fn(unit, []), err, 'throws with array in right')
 
   const f = x => `was ${x}`
   const l = Pair('left', 'right').swap(f, f)
@@ -217,16 +233,17 @@ test('Pair swap', t => {
 test('Pair map errors', t => {
   const map = bindFunc(Pair(0, 'gibbles').map)
 
-  t.throws(map(undefined), TypeError, 'throws with undefined')
-  t.throws(map(null), TypeError, 'throws with null')
-  t.throws(map(0), TypeError, 'throws with falsey number')
-  t.throws(map(1), TypeError, 'throws with truthy number')
-  t.throws(map(''), TypeError, 'throws with falsey string')
-  t.throws(map('string'), TypeError, 'throws with truthy string')
-  t.throws(map(false), TypeError, 'throws with false')
-  t.throws(map(true), TypeError, 'throws with true')
-  t.throws(map([]), TypeError, 'throws with an array')
-  t.throws(map({}), TypeError, 'throws with object')
+  const err = /Pair.map: Function required/
+  t.throws(map(undefined), err, 'throws with undefined')
+  t.throws(map(null), err, 'throws with null')
+  t.throws(map(0), err, 'throws with falsey number')
+  t.throws(map(1), err, 'throws with truthy number')
+  t.throws(map(''), err, 'throws with falsey string')
+  t.throws(map('string'), err, 'throws with truthy string')
+  t.throws(map(false), err, 'throws with false')
+  t.throws(map(true), err, 'throws with true')
+  t.throws(map([]), err, 'throws with an array')
+  t.throws(map({}), err, 'throws with object')
 
   t.doesNotThrow(map(unit), 'allows a function')
 
@@ -267,27 +284,28 @@ test('Pair map properties (Functor)', t => {
 test('Pair bimap errors', t => {
   const bimap = bindFunc(Pair(0, 'gibbles').bimap)
 
-  t.throws(bimap(undefined, unit), TypeError, 'throws with undefined in first argument')
-  t.throws(bimap(null, unit), TypeError, 'throws with null in first argument')
-  t.throws(bimap(0, unit), TypeError, 'throws with falsey number in first argument')
-  t.throws(bimap(1, unit), TypeError, 'throws with truthy number in first argument')
-  t.throws(bimap('', unit), TypeError, 'throws with falsey string in first argument')
-  t.throws(bimap('string', unit), TypeError, 'throws with truthy string in first argument')
-  t.throws(bimap(false, unit), TypeError, 'throws with false in first argument')
-  t.throws(bimap(true, unit), TypeError, 'throws with true in first argument')
-  t.throws(bimap([], unit), TypeError, 'throws with an array in first argument')
-  t.throws(bimap({}, unit), TypeError, 'throws with object in first argument')
+  const err = /Pair.bimap: Function required for both arguments/
+  t.throws(bimap(undefined, unit), err, 'throws with undefined in first argument')
+  t.throws(bimap(null, unit), err, 'throws with null in first argument')
+  t.throws(bimap(0, unit), err, 'throws with falsey number in first argument')
+  t.throws(bimap(1, unit), err, 'throws with truthy number in first argument')
+  t.throws(bimap('', unit), err, 'throws with falsey string in first argument')
+  t.throws(bimap('string', unit), err, 'throws with truthy string in first argument')
+  t.throws(bimap(false, unit), err, 'throws with false in first argument')
+  t.throws(bimap(true, unit), err, 'throws with true in first argument')
+  t.throws(bimap([], unit), err, 'throws with an array in first argument')
+  t.throws(bimap({}, unit), err, 'throws with object in first argument')
 
-  t.throws(bimap(unit, undefined), TypeError, 'throws with undefined in second argument')
-  t.throws(bimap(unit, null), TypeError, 'throws with null in second argument')
-  t.throws(bimap(unit, 0), TypeError, 'throws with falsey number in second argument')
-  t.throws(bimap(unit, 1), TypeError, 'throws with truthy number in second argument')
-  t.throws(bimap(unit, ''), TypeError, 'throws with falsey string in second argument')
-  t.throws(bimap(unit, 'string'), TypeError, 'throws with truthy string in second argument')
-  t.throws(bimap(unit, false), TypeError, 'throws with false in second argument')
-  t.throws(bimap(unit, true), TypeError, 'throws with true in second argument')
-  t.throws(bimap(unit, []), TypeError, 'throws with an array in second argument')
-  t.throws(bimap(unit, {}), TypeError, 'throws with object in second argument')
+  t.throws(bimap(unit, undefined), err, 'throws with undefined in second argument')
+  t.throws(bimap(unit, null), err, 'throws with null in second argument')
+  t.throws(bimap(unit, 0), err, 'throws with falsey number in second argument')
+  t.throws(bimap(unit, 1), err, 'throws with truthy number in second argument')
+  t.throws(bimap(unit, ''), err, 'throws with falsey string in second argument')
+  t.throws(bimap(unit, 'string'), err, 'throws with truthy string in second argument')
+  t.throws(bimap(unit, false), err, 'throws with false in second argument')
+  t.throws(bimap(unit, true), err, 'throws with true in second argument')
+  t.throws(bimap(unit, []), err, 'throws with an array in second argument')
+  t.throws(bimap(unit, {}), err, 'throws with object in second argument')
 
   t.doesNotThrow(bimap(unit, unit), 'allows functions')
 
@@ -335,45 +353,48 @@ test('Pair ap errors', t => {
 
   const ap = bindFunc((l, r) => l.ap(r))
 
-  t.throws(ap(Pair(undefined, unit), Pair([], true)), TypeError, 'throws if wrapped first value is undefined')
-  t.throws(ap(Pair(null, unit), Pair([], true)), TypeError, 'throws if wrapped first value is null')
-  t.throws(ap(Pair(0, unit), Pair([], true)), TypeError, 'throws if wrapped first value is a falsey number')
-  t.throws(ap(Pair(1, unit), Pair([], true)), TypeError, 'throws if wrapped first value is a truthy number')
-  t.throws(ap(Pair(false, unit), Pair([], true)), TypeError, 'throws if wrapped first value is false')
-  t.throws(ap(Pair(true, unit), Pair([], true)), TypeError, 'throws if wrapped first value is true')
-  t.throws(ap(Pair({}, unit), Pair([], true)), TypeError, 'throws if wrapped first value is an object')
-  t.throws(ap(Pair(unit, unit), Pair([], true)), TypeError, 'throws if wrapped first value is a function')
+  const err = /Pair.ap: Pair required/
+  t.throws(ap(Pair([], unit), undefined), err, 'throws with undefined')
+  t.throws(ap(Pair([], unit), null), err, 'throws with null')
+  t.throws(ap(Pair([], unit), 0), err, 'throws with falsey number')
+  t.throws(ap(Pair([], unit), 1), err, 'throws with truthy number')
+  t.throws(ap(Pair([], unit), ''), err, 'throws with falsey string')
+  t.throws(ap(Pair([], unit), 'string'), err, 'throws with truthy string')
+  t.throws(ap(Pair([], unit), false), err, 'throws with false')
+  t.throws(ap(Pair([], unit), true), err, 'throws with true')
+  t.throws(ap(Pair([], unit), []), err, 'throws with an array')
+  t.throws(ap(Pair([], unit), {}), err, 'throws with an object')
+  t.throws(ap(Pair([], unit), m), err, 'throws when non-Pair')
 
-  t.throws(ap(Pair([], undefined), Pair([], 0)), TypeError, 'throws when second wrapped value is undefined')
-  t.throws(ap(Pair([], null), Pair([], 0)), TypeError, 'throws when second wrapped value is null')
-  t.throws(ap(Pair([], 0), Pair([], 0)), TypeError, 'throws when second wrapped value is a falsey number')
-  t.throws(ap(Pair([], 1), Pair([], 0)), TypeError, 'throws when second wrapped value is a truthy number')
-  t.throws(ap(Pair([], ''), Pair([], 0)), TypeError, 'throws when second wrapped value is a falsey string')
-  t.throws(ap(Pair([], 'string'), Pair([], 0)), TypeError, 'throws when second wrapped value is a truthy string')
-  t.throws(ap(Pair([], false), Pair([], 0)), TypeError, 'throws when second wrapped value is false')
-  t.throws(ap(Pair([], true), Pair([], 0)), TypeError, 'throws when second wrapped value is true')
-  t.throws(ap(Pair([], []), Pair([], 0)), TypeError, 'throws when second wrapped value is an array')
-  t.throws(ap(Pair([], {}), Pair([], 0)), TypeError, 'throws when second wrapped value is an object')
+  const noSemi = /Pair.ap: Semigroups of the same type is required for first values/
+  t.throws(ap(Pair(undefined, unit), Pair([], true)), noSemi, 'throws if wrapped first value is undefined')
+  t.throws(ap(Pair(null, unit), Pair([], true)), noSemi, 'throws if wrapped first value is null')
+  t.throws(ap(Pair(0, unit), Pair([], true)), noSemi, 'throws if wrapped first value is a falsey number')
+  t.throws(ap(Pair(1, unit), Pair([], true)), noSemi, 'throws if wrapped first value is a truthy number')
+  t.throws(ap(Pair(false, unit), Pair([], true)), noSemi, 'throws if wrapped first value is false')
+  t.throws(ap(Pair(true, unit), Pair([], true)), noSemi, 'throws if wrapped first value is true')
+  t.throws(ap(Pair({}, unit), Pair([], true)), noSemi, 'throws if wrapped first value is an object')
+  t.throws(ap(Pair(unit, unit), Pair([], true)), noSemi, 'throws if wrapped first value is a function')
 
-  t.throws(ap(Pair([], unit), Pair(undefined, 0)), TypeError, 'throws when first of passed value is undefined')
-  t.throws(ap(Pair([], unit), Pair(null, 0)), TypeError, 'throws when first of passed value is null')
-  t.throws(ap(Pair([], unit), Pair(0, 0)), TypeError, 'throws when first of passed value is a falsey number')
-  t.throws(ap(Pair([], unit), Pair(1, 0)), TypeError, 'throws when first of passed value is a truthy number')
-  t.throws(ap(Pair([], unit), Pair(false, 0)), TypeError, 'throws when first of passed value is false')
-  t.throws(ap(Pair([], unit), Pair(true, 0)), TypeError, 'throws when first of passed value is true')
-  t.throws(ap(Pair([], unit), Pair({}, 0)), TypeError, 'throws when first of passed value is an object')
+  t.throws(ap(Pair([], unit), Pair(undefined, 0)), noSemi, 'throws when first of passed value is undefined')
+  t.throws(ap(Pair([], unit), Pair(null, 0)), noSemi, 'throws when first of passed value is null')
+  t.throws(ap(Pair([], unit), Pair(0, 0)), noSemi, 'throws when first of passed value is a falsey number')
+  t.throws(ap(Pair([], unit), Pair(1, 0)), noSemi, 'throws when first of passed value is a truthy number')
+  t.throws(ap(Pair([], unit), Pair(false, 0)), noSemi, 'throws when first of passed value is false')
+  t.throws(ap(Pair([], unit), Pair(true, 0)), noSemi, 'throws when first of passed value is true')
+  t.throws(ap(Pair([], unit), Pair({}, 0)), noSemi, 'throws when first of passed value is an object')
 
-  t.throws(ap(Pair([], unit), undefined), TypeError, 'throws with undefined')
-  t.throws(ap(Pair([], unit), null), TypeError, 'throws with null')
-  t.throws(ap(Pair([], unit), 0), TypeError, 'throws with falsey number')
-  t.throws(ap(Pair([], unit), 1), TypeError, 'throws with truthy number')
-  t.throws(ap(Pair([], unit), ''), TypeError, 'throws with falsey string')
-  t.throws(ap(Pair([], unit), 'string'), TypeError, 'throws with truthy string')
-  t.throws(ap(Pair([], unit), false), TypeError, 'throws with false')
-  t.throws(ap(Pair([], unit), true), TypeError, 'throws with true')
-  t.throws(ap(Pair([], unit), []), TypeError, 'throws with an array')
-  t.throws(ap(Pair([], unit), {}), TypeError, 'throws with an object')
-  t.throws(ap(Pair([], unit), m), TypeError, 'throws when non-Pair')
+  const noFunc = /Pair.ap: Function required for second value/
+  t.throws(ap(Pair([], undefined), Pair([], 0)), noFunc, 'throws when second wrapped value is undefined')
+  t.throws(ap(Pair([], null), Pair([], 0)), noFunc, 'throws when second wrapped value is null')
+  t.throws(ap(Pair([], 0), Pair([], 0)), noFunc, 'throws when second wrapped value is a falsey number')
+  t.throws(ap(Pair([], 1), Pair([], 0)), noFunc, 'throws when second wrapped value is a truthy number')
+  t.throws(ap(Pair([], ''), Pair([], 0)), noFunc, 'throws when second wrapped value is a falsey string')
+  t.throws(ap(Pair([], 'string'), Pair([], 0)), noFunc, 'throws when second wrapped value is a truthy string')
+  t.throws(ap(Pair([], false), Pair([], 0)), noFunc, 'throws when second wrapped value is false')
+  t.throws(ap(Pair([], true), Pair([], 0)), noFunc, 'throws when second wrapped value is true')
+  t.throws(ap(Pair([], []), Pair([], 0)), noFunc, 'throws when second wrapped value is an array')
+  t.throws(ap(Pair([], {}), Pair([], 0)), noFunc, 'throws when second wrapped value is an object')
 
   t.doesNotThrow(ap(Pair([], identity), Pair([], 22)), 'allows a Pair')
 
@@ -408,20 +429,24 @@ test('Pair chain errors', t => {
   const badFn = () => Pair(0, 0)
   const fn = () => Pair([], 0)
 
-  t.throws(badChain(unit), TypeError, 'throws if wrapped first value is not a Semigroup')
-  t.throws(chain(badFn), TypeError, 'throws if monadic function returns a Pair with a non-Semigroup as first value')
+  const noSemi = /Pair.chain: Semigroups of the same type required for first values/
+  t.throws(badChain(unit), noSemi, 'throws if wrapped first value is not a Semigroup')
+  t.throws(chain(badFn), noSemi, 'throws if monadic function returns a Pair with a non-Semigroup as first value')
 
-  t.throws(chain(undefined), TypeError, 'throws with undefined')
-  t.throws(chain(null), TypeError, 'throws with null')
-  t.throws(chain(0), TypeError, 'throws with falsey number')
-  t.throws(chain(1), TypeError, 'throws with truthy number')
-  t.throws(chain(''), TypeError, 'throws with falsey string')
-  t.throws(chain('string'), TypeError, 'throws with truthy string')
-  t.throws(chain(false), TypeError, 'throws with false')
-  t.throws(chain(true), TypeError, 'throws with true')
-  t.throws(chain([]), TypeError, 'throws with an array')
-  t.throws(chain({}), TypeError, 'throws with an object')
-  t.throws(chain(unit), TypeError, 'throws with non-Pair returning function')
+  const noPair = /Pair.chain: Function must return a Pair/
+  t.throws(chain(unit), noPair, 'throws with non-Pair returning function')
+
+  const err = /Pair.chain: Function required/
+  t.throws(chain(undefined), err, 'throws with undefined')
+  t.throws(chain(null), err, 'throws with null')
+  t.throws(chain(0), err, 'throws with falsey number')
+  t.throws(chain(1), err, 'throws with truthy number')
+  t.throws(chain(''), err, 'throws with falsey string')
+  t.throws(chain('string'), err, 'throws with truthy string')
+  t.throws(chain(false), err, 'throws with false')
+  t.throws(chain(true), err, 'throws with true')
+  t.throws(chain([]), err, 'throws with an array')
+  t.throws(chain({}), err, 'throws with an object')
 
   t.doesNotThrow(chain(fn), 'allows Pair returning function')
 

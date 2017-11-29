@@ -1,17 +1,16 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const _compose = require('../core/compose')
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
 const _type = require('../core/types').type('Star')
-
-const Pair = require('../core/Pair')
 
 const array = require('../core/array')
 const isFunction = require('../core/isFunction')
 const isMonad = require('../core/isMonad')
 const isSameType = require('../core/isSameType')
+
+const Pair = require('../core/Pair')
 
 const merge =
   (fn, m) => m.merge(fn)
@@ -92,7 +91,7 @@ function _Star(Monad) {
         throw new TypeError(`${outerType}.contramap: Function required`)
       }
 
-      return Star(_compose(runWith, fn))
+      return Star(x => runWith(fn(x)))
     }
 
     function promap(l, r) {

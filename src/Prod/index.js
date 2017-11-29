@@ -13,30 +13,30 @@ const _empty =
   () => Prod(1)
 
 function Prod(n) {
-  const x = isNil(n) ? _empty().value() : n
+  const x = isNil(n) ? _empty().valueOf() : n
 
   if(!arguments.length || !isNumber(x)) {
     throw new TypeError('Prod: Numeric value required')
   }
 
-  const value =
+  const valueOf =
     () => x
 
   const empty =
     _empty
 
   const inspect =
-    () => `Prod${_inspect(value())}`
+    () => `Prod${_inspect(valueOf())}`
 
   function concat(m) {
     if(!isSameType(Prod, m)) {
       throw new TypeError('Prod.concat: Prod required')
     }
 
-    return Prod(x * m.value())
+    return Prod(x * m.valueOf())
   }
 
-  return { inspect, value, type, concat, empty }
+  return { inspect, valueOf, type, concat, empty }
 }
 
 Prod['@@implements'] = _implements(

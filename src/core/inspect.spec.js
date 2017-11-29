@@ -1,8 +1,9 @@
 const test = require('tape')
 
 const isFunction = require('./isFunction')
-const constant = require('./constant')
 const unit = require('./_unit')
+
+const constant = x => () => x
 
 const inspect = require('./inspect')
 

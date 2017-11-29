@@ -1,11 +1,12 @@
 const test = require('tape')
-const helpers = require('../../test/helpers')
-const MockCrock = require('../../test/MockCrock')
+const helpers = require('../test/helpers')
+const MockCrock = require('../test/MockCrock')
 
 const bindFunc = helpers.bindFunc
 
-const identity = require('../core/identity')
 const isFunction = require('../core/isFunction')
+
+const identity = x => x
 
 const liftA2 = require('./liftA2')
 

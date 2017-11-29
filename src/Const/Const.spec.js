@@ -1,18 +1,19 @@
 const test = require('tape')
 const sinon = require('sinon')
-const MockCrock = require('../../test/MockCrock')
-const helpers = require('../../test/helpers')
+const MockCrock = require('../test/MockCrock')
+const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
 
 const curry = require('../core/curry')
 const compose = curry(require('../core/compose'))
-const identity = require('../core/identity')
 const isObject = require('../core/isObject')
 const isFunction  = require('../core/isFunction')
 const unit = require('../core/_unit')
 
 const Const = require('.')
+
+const identity = x => x
 
 test('Const', t => {
   const m = Const(0)
@@ -57,12 +58,12 @@ test('Const type', t => {
   t.end()
 })
 
-test('Const value', t => {
+test('Const valueOf', t => {
   const x = 'some value'
   const m = Const(x)
 
-  t.ok(isFunction(m.value), 'is a function')
-  t.equal(m.value(), x,'value returns the wrapped value' )
+  t.ok(isFunction(m.valueOf), 'is a function')
+  t.equal(m.valueOf(), x,'valueOf returns the wrapped value' )
 
   t.end()
 })
@@ -84,10 +85,10 @@ test('Const equals functionality', t => {
 })
 
 test('Const equals properties (Setoid)', t => {
-  const a = Const(0)
-  const b = Const(0)
-  const c = Const(1)
-  const d = Const(0)
+  const a = Const({ a: true })
+  const b = Const({ a: true })
+  const c = Const({ a: true, b: 'not' })
+  const d = Const({ a: true })
 
   t.ok(isFunction(Const(0).equals), 'provides an equals function')
   t.equal(a.equals(a), true, 'reflexivity')
@@ -107,7 +108,7 @@ test('Const concat properties (Semigroup)', t => {
   const right = a.concat(b.concat(c))
 
   t.ok(isFunction(a.concat), 'provides a concat function')
-  t.equal(left.value(), right.value(), 'associativity')
+  t.equal(left.valueOf(), right.valueOf(), 'associativity')
   t.equal(a.concat(b).type(), a.type(), 'returns a Const')
 
   t.end()
@@ -133,8 +134,8 @@ test('Const concat functionality', t => {
   t.throws(cat({}), TypeError, 'throws with an object')
   t.throws(cat(notConst), TypeError, 'throws when passed non-Const')
 
-  t.equal(a.concat(b).value(), 89, 'reports first Const - a')
-  t.equal(b.concat(a).value(), false, 'reports first Const - b')
+  t.equal(a.concat(b).valueOf(), 89, 'reports first Const - a')
+  t.equal(b.concat(a).valueOf(), false, 'reports first Const - b')
 
   t.end()
 })
@@ -165,7 +166,7 @@ test('Const map functionality', t => {
 
   t.equal(m.type(), 'Const', 'returns a Const')
   t.notOk(spy.called, 'does not call the mapping function')
-  t.equal(m.value(), x, 'returns the original Const')
+  t.equal(m.valueOf(), x, 'returns the original Const')
 
   t.end()
 })
@@ -178,8 +179,8 @@ test('Const map properties (Functor)', t => {
 
   t.ok(isFunction(m.map), 'provides a map function')
 
-  t.equal(m.map(identity).value(), m.value(), 'identity')
-  t.equal(m.map(compose(f, g)).value(), m.map(g).map(f).value(), 'composition')
+  t.equal(m.map(identity).valueOf(), m.valueOf(), 'identity')
+  t.equal(m.map(compose(f, g)).valueOf(), m.map(g).map(f).valueOf(), 'composition')
 
   t.end()
 })
@@ -213,7 +214,7 @@ test('Const ap properties (Apply)', t => {
   t.ok(isFunction(Const(0).map), 'implements the Functor spec')
   t.ok(isFunction(Const(0).ap), 'provides an ap function')
 
-  t.same(a.ap(Const(3)).value(), b.ap(Const(3)).value(), 'composition')
+  t.same(a.ap(Const(3)).valueOf(), b.ap(Const(3)).valueOf(), 'composition')
 
   t.end()
 })
@@ -247,7 +248,7 @@ test('Const chain properties (Chain)', t => {
   const a = x => Const(x).chain(f).chain(g)
   const b = x => Const(x).chain(y => f(y).chain(g))
 
-  t.equal(a(10).value(), b(10).value(), 'assosiativity')
+  t.equal(a(10).valueOf(), b(10).valueOf(), 'assosiativity')
 
   t.end()
 })

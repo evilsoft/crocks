@@ -1,15 +1,16 @@
 const test = require('tape')
 const sinon = require('sinon')
-const helpers = require('../../test/helpers')
+const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
 
 const compose = require('../core/compose')
-const constant = require('../core/constant')
-const identity = require('../core/identity')
 const isFunction = require('../core/isFunction')
 const isObject = require('../core/isObject')
 const unit = require('../core/_unit')
+
+const constant = x => () => x
+const identity = x => x
 
 const Pred = require('.')
 
@@ -64,12 +65,12 @@ test('Pred type', t => {
   t.end()
 })
 
-test('Pred value', t => {
+test('Pred valueOf', t => {
   const f = constant('')
   const p = Pred(f)
 
-  t.ok(isFunction(p.value), 'is a function')
-  t.equals(p.value()(), !!f(), 'returns a coerced to Boolean version of the function')
+  t.ok(isFunction(p.valueOf), 'is a function')
+  t.equals(p.valueOf()(), !!f(), 'returns a coerced to Boolean version of the function')
 
   t.end()
 })

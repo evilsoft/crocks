@@ -1,14 +1,12 @@
 const test = require('tape')
 const sinon = require('sinon')
-const MockCrock = require('../../test/MockCrock')
-const helpers = require('../../test/helpers')
+const MockCrock = require('../test/MockCrock')
+const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
 
 const curry = require('../core/curry')
 const compose = curry(require('../core/compose'))
-const constant = require('../core/constant')
-const identity = require('../core/identity')
 const isArray = require('../core/isArray')
 const isFunction = require('../core/isFunction')
 const isObject = require('../core/isObject')
@@ -20,6 +18,9 @@ const either =
 
 const reverseApply =
   x => fn => fn(x)
+
+const constant = x => () => x
+const identity = x => x
 
 const Either = require('.')
 
@@ -327,15 +328,15 @@ test('Either equals functionality', t => {
 })
 
 test('Either equals properties (Setoid)', t => {
-  const la = Either.Left(0)
-  const lb = Either.Left(0)
-  const lc = Either.Left(1)
-  const ld = Either.Left(0)
+  const la = Either.Left({ a: 'nice' })
+  const lb = Either.Left({ a: 'nice' })
+  const lc = Either.Left({ a: 'nice', b: 45 })
+  const ld = Either.Left({ a: 'nice' })
 
-  const ra = Either.Right(0)
-  const rb = Either.Right(0)
-  const rc = Either.Right(1)
-  const rd = Either.Right(0)
+  const ra = Either.Right([ 1, 2 ])
+  const rb = Either.Right([ 1, 2 ])
+  const rc = Either.Right([ 3, 2, 1 ])
+  const rd = Either.Right([ 1, 2 ])
 
   t.ok(isFunction(Either(null).equals), 'provides an equals function')
 
@@ -773,12 +774,12 @@ test('Either sequence functionality', t => {
   const l = Left('Left').sequence(MockCrock.of)
 
   t.equal(r.type(), 'MockCrock', 'Provides an outer type of MockCrock')
-  t.equal(r.value().type(), 'Either', 'Provides an inner type of Either')
-  t.equal(r.value().either(constant(0), identity), x, 'Either contains original inner value')
+  t.equal(r.valueOf().type(), 'Either', 'Provides an inner type of Either')
+  t.equal(r.valueOf().either(constant(0), identity), x, 'Either contains original inner value')
 
   t.equal(l.type(), 'MockCrock', 'Provides an outer type of MockCrock')
-  t.equal(l.value().type(), 'Either', 'Provides an inner type of Either')
-  t.equal(l.value().either(identity, constant(0)), 'Left', 'Either contains original Left value')
+  t.equal(l.valueOf().type(), 'Either', 'Provides an inner type of Either')
+  t.equal(l.valueOf().either(identity, constant(0)), 'Left', 'Either contains original Left value')
 
   t.end()
 })
@@ -853,12 +854,12 @@ test('Either traverse functionality', t => {
   const l = Left('Left').traverse(f, MockCrock)
 
   t.equal(r.type(), 'MockCrock', 'Provides an outer type of MockCrock')
-  t.equal(r.value().type(), 'Either', 'Provides an inner type of Either')
-  t.equal(r.value().either(constant(0), identity), x, 'Either contains original inner value')
+  t.equal(r.valueOf().type(), 'Either', 'Provides an inner type of Either')
+  t.equal(r.valueOf().either(constant(0), identity), x, 'Either contains original inner value')
 
   t.equal(l.type(), 'MockCrock', 'Provides an outer type of MockCrock')
-  t.equal(l.value().type(), 'Either', 'Provides an inner type of Either')
-  t.equal(l.value().either(identity, constant(0)), 'Left', 'Either contains original Left value')
+  t.equal(l.valueOf().type(), 'Either', 'Provides an inner type of Either')
+  t.equal(l.valueOf().either(identity, constant(0)), 'Left', 'Either contains original Left value')
 
   t.end()
 })

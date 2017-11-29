@@ -1,7 +1,8 @@
 const test = require('tape')
 
-const identity = require('./identity')
 const isFunction = require('./isFunction')
+
+const identity = x => x
 
 const isExtend = require('./isExtend')
 

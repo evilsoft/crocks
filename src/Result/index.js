@@ -2,17 +2,19 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const _defineUnion = require('../core/defineUnion')
+const _equals = require('../core/equals')
 const _implements = require('../core/implements')
 const _innerConcat = require('../core/innerConcat')
 const _inspect = require('../core/inspect')
 const type = require('../core/types').type('Result')
 
 const compose = require('../core/compose')
-const constant = require('../core/constant')
 const isApplicative = require('../core/isApplicative')
 const isFunction = require('../core/isFunction')
 const isSameType = require('../core/isSameType')
 const isSemigroup = require('../core/isSemigroup')
+
+const constant = x => () => x
 
 const _result =
   _defineUnion({ Err: [ 'a' ], Ok: [ 'b' ] })
@@ -26,11 +28,14 @@ Result.Ok =
 const _of =
   Result.Ok
 
-const concatErr =
-  m => x => m.either(
+const concatApErr =
+  m => x => Result.Err(m.either(
     y => isSemigroup(x) && isSameType(y, x) ? x.concat(y) : x,
     () => x
-  )
+  ))
+
+const concatAltErr =
+  r => l => Result.Err(isSemigroup(r) && isSameType(l, r) ? l.concat(r) : r)
 
 function runSequence(x) {
   if(!isApplicative(x)) {
@@ -50,8 +55,8 @@ function Result(u) {
 
   const equals =
     m => isSameType(Result, m) && either(
-      x => m.either(y => y === x, constant(false)),
-      x => m.either(constant(false), y => y === x)
+      x => m.either(y => _equals(y, x), constant(false)),
+      x => m.either(constant(false), y => _equals(y, x))
     )
 
   const of =
@@ -131,9 +136,9 @@ function Result(u) {
       throw new TypeError('Result.alt: Result required')
     }
 
-    return either(
-      constant(m),
-      Result.Ok
+    return m.either(
+      r => either(concatAltErr(r), Result.Ok),
+      r => either(() => Result.Ok(r), Result.Ok)
     )
   }
 
@@ -143,7 +148,7 @@ function Result(u) {
     }
 
     return either(
-      compose(Result.Err, concatErr(m)),
+      concatApErr(m),
       function(fn) {
         if(!isFunction(fn)) {
           throw new TypeError('Result.ap: Wrapped value must be a function')

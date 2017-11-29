@@ -17,24 +17,24 @@ function Endo(runWith) {
     throw new TypeError('Endo: Function value required')
   }
 
-  const value =
+  const valueOf =
     () => runWith
 
   const empty =
     _empty
 
   const inspect =
-    () => `Endo${_inspect(value())}`
+    () => `Endo${_inspect(valueOf())}`
 
   function concat(m) {
     if(!isSameType(Endo, m)) {
       throw new TypeError('Endo.concat: Endo required')
     }
 
-    return Endo(compose(m.value(), value()))
+    return Endo(compose(m.valueOf(), valueOf()))
   }
 
-  return { inspect, value, type, concat, empty, runWith }
+  return { inspect, valueOf, type, concat, empty, runWith }
 }
 
 Endo['@@implements'] = _implements(

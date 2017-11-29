@@ -1,5 +1,5 @@
 const test = require('tape')
-const helpers = require('../../test/helpers')
+const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
 
@@ -41,6 +41,12 @@ test('prop function', t => {
   t.equals(arrGood.option('nothing'), value, 'returns a Just with the value when index is found')
   t.equals(arrBad.option('nothing'), 'nothing', 'returns a Nothing when index is not found')
   t.equals(arrNull(arr).option('nothing'), null, 'returns a Just null when index is found and value is null')
+
+  const fn =
+    x => prop('key', x).option('nothing')
+
+  t.equals(fn(undefined), 'nothing', 'returns Nothing when data is undefined')
+  t.equals(fn(null), 'nothing', 'returns Nothing when data is null')
 
   t.end()
 })

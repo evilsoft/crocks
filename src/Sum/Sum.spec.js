@@ -1,12 +1,13 @@
 const test = require('tape')
-const helpers = require('../../test/helpers')
+const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
 
-const constant = require('../core/constant')
-const identity = require('../core/identity')
 const isFunction = require('../core/isFunction')
 const isObject = require('../core/isObject')
+
+const constant = x => () => x
+const identity = x => x
 
 const Sum = require('.')
 
@@ -54,16 +55,16 @@ test('Sum inspect', t => {
   t.end()
 })
 
-test('Sum value', t => {
-  const empty = Sum.empty().value()
+test('Sum valueOf', t => {
+  const empty = Sum.empty().valueOf()
 
-  t.ok(isFunction(Sum(0).value), 'is a function')
+  t.ok(isFunction(Sum(0).valueOf), 'is a function')
 
-  t.equal(Sum(undefined).value(), empty, 'provides an empty value for undefined')
-  t.equal(Sum(null).value(), empty, 'provides an empty value for null')
+  t.equal(Sum(undefined).valueOf(), empty, 'provides an empty value for undefined')
+  t.equal(Sum(null).valueOf(), empty, 'provides an empty value for null')
 
-  t.equal(Sum(0).value(), 0, 'provides a wrapped falsey number')
-  t.equal(Sum(1).value(), 1, 'provides a wrapped truthy number')
+  t.equal(Sum(0).valueOf(), 0, 'provides a wrapped falsey number')
+  t.equal(Sum(1).valueOf(), 1, 'provides a wrapped truthy number')
 
   t.end()
 })
@@ -87,7 +88,7 @@ test('Sum concat properties (Semigroup)', t => {
 
   t.ok(isFunction(Sum(0).concat), 'is a function')
 
-  t.equal(left.value(), right.value(), 'associativity')
+  t.equal(left.valueOf(), right.valueOf(), 'associativity')
   t.equal(a.concat(b).type(), a.type(), 'returns Semigroup of the same type')
 
   t.end()
@@ -116,7 +117,7 @@ test('Sum concat functionality', t => {
   t.throws(cat({}), TypeError, 'throws with an object')
   t.throws(cat(notSum), TypeError, 'throws with non-Sum')
 
-  t.equals(a.concat(b).value(), (x + y), 'sums wrapped values as expected')
+  t.equals(a.concat(b).valueOf(), (x + y), 'sums wrapped values as expected')
 
   t.end()
 })
@@ -130,8 +131,8 @@ test('Sum empty properties (Monoid)', t => {
   const right = m.concat(m.empty())
   const left = m.empty().concat(m)
 
-  t.equal(right.value(), m.value(), 'right identity')
-  t.equal(left.value(), m.value(), 'left identity')
+  t.equal(right.valueOf(), m.valueOf(), 'right identity')
+  t.equal(left.valueOf(), m.valueOf(), 'left identity')
 
   t.equal(m.empty().type(), m.type(), 'returns a Monoid of the same type')
 
@@ -144,7 +145,7 @@ test('Sum empty functionality', t => {
   t.equal(Sum(0).empty, Sum.empty, 'static and instance versions are the same')
 
   t.equal(x.type(), 'Sum', 'provides a Sum')
-  t.equal(x.value(), 0, 'wraps a 0')
+  t.equal(x.valueOf(), 0, 'wraps a 0')
 
   t.end()
 })

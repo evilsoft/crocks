@@ -1,12 +1,13 @@
 const test = require('tape')
-const helpers = require('../../test/helpers')
+const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
 
-const constant = require('../core/constant')
-const identity = require('../core/identity')
 const isFunction = require('../core/isFunction')
 const isObject = require('../core/isObject')
+
+const constant = x => () => x
+const identity = x => x
 
 const Max = require('.')
 
@@ -54,16 +55,16 @@ test('Max inspect', t => {
   t.end()
 })
 
-test('Max value', t => {
-  const empty = Max.empty().value()
+test('Max valueOf', t => {
+  const empty = Max.empty().valueOf()
 
-  t.ok(isFunction(Max(0).value), 'is a function')
+  t.ok(isFunction(Max(0).valueOf), 'is a function')
 
-  t.equal(Max(undefined).value(), empty, 'provides an empty value for undefined')
-  t.equal(Max(null).value(), empty, 'provides an empty value for null')
+  t.equal(Max(undefined).valueOf(), empty, 'provides an empty value for undefined')
+  t.equal(Max(null).valueOf(), empty, 'provides an empty value for null')
 
-  t.equal(Max(0).value(), 0, 'provides a wrapped falsey number')
-  t.equal(Max(1).value(), 1, 'provides a wrapped truthy number')
+  t.equal(Max(0).valueOf(), 0, 'provides a wrapped falsey number')
+  t.equal(Max(1).valueOf(), 1, 'provides a wrapped truthy number')
 
   t.end()
 })
@@ -87,7 +88,7 @@ test('Max concat properties (Semigroup)', t => {
 
   t.ok(isFunction(Max(0).concat), 'is a function')
 
-  t.equal(left.value(), right.value(), 'associativity')
+  t.equal(left.valueOf(), right.valueOf(), 'associativity')
   t.equal(a.concat(b).type(), a.type(), 'returns Semigroup of the same type')
 
   t.end()
@@ -116,7 +117,7 @@ test('Max concat functionality', t => {
   t.throws(cat({}), TypeError, 'throws with an object')
   t.throws(cat(notMax), TypeError, 'throws with non-Max')
 
-  t.equals(a.concat(b).value(), y, 'provides max wrapped values as expected')
+  t.equals(a.concat(b).valueOf(), y, 'provides max wrapped values as expected')
 
   t.end()
 })
@@ -130,8 +131,8 @@ test('Max empty properties (Monoid)', t => {
   const right = m.concat(m.empty())
   const left  = m.empty().concat(m)
 
-  t.equal(right.value(), m.value(), 'right identity')
-  t.equal(left.value(), m.value(), 'left identity')
+  t.equal(right.valueOf(), m.valueOf(), 'right identity')
+  t.equal(left.valueOf(), m.valueOf(), 'left identity')
 
   t.equal(m.empty().type(), m.type(), 'returns a Monoid of the same type')
 
@@ -144,7 +145,7 @@ test('Max empty functionality', t => {
   t.equal(Max(0).empty, Max.empty, 'static and instance versions are the same')
 
   t.equal(x.type(), 'Max', 'provides a Max')
-  t.equal(x.value(), -Infinity, 'wraps a -Infinity')
+  t.equal(x.valueOf(), -Infinity, 'wraps a -Infinity')
 
   t.end()
 })

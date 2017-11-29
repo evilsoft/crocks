@@ -1,7 +1,6 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const _argsArray = require('../core/argsArray')
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
 const type = require('../core/types').type('Async')
@@ -43,17 +42,14 @@ function fromNode(fn, ctx) {
     throw new TypeError('Async.fromNode: CPS function required')
   }
 
-  return function() {
-    const args = _argsArray(arguments)
-
-    return Async((reject, resolve) => {
+  return (...args) =>
+    Async((reject, resolve) => {
       fn.apply(ctx,
         args.concat(
           (err, data) => err ? reject(err) : resolve(data)
         )
       )
     })
-  }
 }
 
 function fromPromise(fn) {

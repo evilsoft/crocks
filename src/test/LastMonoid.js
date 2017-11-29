@@ -1,7 +1,8 @@
-const _implements = require('../src/core/implements')
-const _inspect = require('../src/core/inspect')
-const constant = require('../src/core/constant')
-const identity = require('../src/core/identity')
+const _implements = require('../core/implements')
+const _inspect = require('../core/inspect')
+
+const constant = x => () => x
+const identity = x => x
 
 const _type = constant('Last')
 
@@ -9,7 +10,7 @@ function LastMonoid(x) {
   return {
     inspect: constant('Last' + _inspect(x)),
     concat: identity,
-    value:  constant(x),
+    valueOf:  constant(x),
     type:   _type
   }
 }

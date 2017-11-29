@@ -5,12 +5,13 @@ const Either = require('.')
 const Last = require('../core/types').proxy('Last')
 
 const curry = require('../core/curry')
-const constant = require('../core/constant')
 const isFunction = require('../core/isFunction')
 const isSameType = require('../core/isSameType')
 
+const constant = x => () => x
+
 const applyTransform = (left, last) =>
-  last.value().either(
+  last.valueOf().either(
     constant(Either.Left(left)),
     Either.Right
   )

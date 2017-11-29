@@ -1,14 +1,15 @@
 const test = require('tape')
-const helpers = require('../../test/helpers')
+const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
 
 const First = require('.')
 const Result = require('../Result')
 
-const identity = require('../core/identity')
 const isFunction = require('../core/isFunction')
 const isSameType = require('../core/isSameType')
+
+const identity = x => x
 
 const resultToFirst = require('./resultToFirst')
 

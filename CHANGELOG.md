@@ -1,7 +1,121 @@
 # Change Log for `crocks`
-v0.6.1 -- July 04, 2017
+
+v0.8.1 -- November 14, 2017
 --
 ### Additions
+* Helpers:
+  * `mapProps`
+
+### Bug fixes
+* `runWith` on `State` did not report an error unless one of the
+  methods were called. Now it throws if the result is not a `Pair`
+  for all calls to `runWith`
+* Update path on branch helper on README to point to location
+un `Pair`
+
+
+### Pull Requests
+* [#154 - Updated path for branch - helpers -> Pair](https://github.com/evilsoft/crocks/pull/154)
+* [#152 - Better `runWith` errors for State](https://github.com/evilsoft/crocks/pull/152)
+* [#153 - Add a new `mapProps` helper function](https://github.com/evilsoft/crocks/pull/153)
+
+v0.8.0 -- November 09, 2017
+--
+### Breaking
+
+* Changes `value` `pointfree` and instance methods to `valueOf`.
+* All `Setoid`s now compare Object types by value.
+  * `Const`
+  * `Either`
+  * `Identity`
+  * `List`
+  * `Maybe`
+  * `Pair`
+  * `Result`
+  * `Writer`
+* `read` method on `Writer` instance now returns a `Monoid m => Pair m a` instead of an Object with `{ log, value }`.
+
+### Additions
+
+* READMES:
+  * `All`
+  * `Any`
+  * `Arrow`
+* Predicates
+  * `isSame`
+* Pointfree
+  * `equals`
+
+### Bug fixes
+  * `propPath` and `prop` would throw then passed `undefined`, `null` or `NaN`. Now they do not.
+
+### Optimizations
+* Just use the native es6 rest operator instead of slicing arguments.
+* Optimized `isSameType` function.
+
+### Pull Requests
+* [#145 - Allow `prop` and `propPath` to accept `null` and `undefined` as data](https://github.com/evilsoft/crocks/pull/145)
+* [#147 - Move to ES6 Rest operator instead of slicing arguments.](https://github.com/evilsoft/crocks/pull/147)
+* [#148 - Add READMEs for All, Any and Arrow types](https://github.com/evilsoft/crocks/pull/148)
+* [#149 - Equality is by value](https://github.com/evilsoft/crocks/pull/149)
+* [#151 - Use `valueOf` instead of `value`](https://github.com/evilsoft/crocks/pull/151)
+* [#150 - Return `Pair` for `Writer`'s `read` method](https://github.com/evilsoft/crocks/pull/150)
+
+v0.7.1 -- August 28, 2017
+--
+### Additions
+* Crocks
+  * `Pair.toArray`
+* Helpers:
+  * `mapReduce`
+* Transforms
+  * `Pair/writerToPair`
+
+### Optimizations
+* General cleanup and better specs for `All`, `Any`, `Arrow` and `Pair`
+
+### Pull Requests
+* [#141 - Clean up `All`, `Any`, `Arrow` and `Pair`](https://github.com/evilsoft/crocks/pull/141)
+* [#142 - Add Some `Pair` Transforms](https://github.com/evilsoft/crocks/pull/142)
+* [#143 - Add `mapReduce` helper function](https://github.com/evilsoft/crocks/pull/143)
+
+v0.7.0 -- July 28, 2017
+--
+### Breaking
+
+  * Restructure entire folder structure into a src folder with folders for each type. Functions that construct types are now housed in their respective types folder. All general functions that work many types are still in their old folders `combinators`, `helpers`, `logic`, `pointfree` and `predicates`. All `transformation` functions have been moved into the folder of the type that they transform into (i.e. `resultToEither` is in the folder `Either`). This is the first step to moving to a monorepo format.
+  * `Reader.ask` now takes either a `Function` or no arguments. If a function is provided it will map the environment through the function. No arguments behaves like `identity`.
+  * Removed `State.gets` and updated `State.get` to take either a `Function` or no arguments. Passing a `Function` will apply the state to that function an update the value to match the result. No arguments behaves like `identity` matching the value to the state.
+  * Allow for `Star` to be fixed to a specific `Monad`. Instead of using `Star` to construct a `Star`, it now takes a `Monad` constructor returning the consumer a constructor specific for that type of `Monad`.
+  * Update `Result.alt` to accumulate `Err`s if the `Result` wraps a `Semigroup`, much like `Result.ap`, it will `concat` the `Semigroup`s together.
+
+### Additions
+
+* Crocks:
+  * `Star.id`
+
+### Bug fixes
+  * All code is now compiled through `buble`, which means that it clears up all of the errors we were experiencing with Safari and in some instances `uglifyJS`. The code published to `npm` will now be standard `es5`.
+
+### Optimizations
+* Have all functions used by the library that are available on the public API do no type checks when called by other library functions.
+
+### Pull Requests
+* [#132 - Compile all code for a better experience and flatten API](https://github.com/evilsoft/crocks/pull/132)
+* [#133 - Remove name conflict with new structure](https://github.com/evilsoft/crocks/pull/133)
+* [#134 - Move type based functions into type folders](https://github.com/evilsoft/crocks/pull/134)
+* [#135 - Add publish bits for new api](https://github.com/evilsoft/crocks/pull/135)
+* [#136 - Use TypeProxies to remove simple type check dependencies](https://github.com/evilsoft/crocks/pull/136)
+* [#137 - Make `Reader.ask` and `State.get` use identity by default ](https://github.com/evilsoft/crocks/pull/137)
+* [#138 - Make `Star` a `Category` by fixing it to a given `Monad`](https://github.com/evilsoft/crocks/pull/138)
+* [#139 - Update README and some :lipstick:](https://github.com/evilsoft/crocks/pull/139)
+* [#140 - Accumulate `Err` on `Alt` for `Result` type](https://github.com/evilsoft/crocks/pull/140)
+
+
+ v0.6.1 -- July 04, 2017
+--
+### Additions
+
 * Crocks API:
   * `Pair.extend`
 * Monoids:

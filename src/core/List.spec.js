@@ -1,20 +1,21 @@
 const test = require('tape')
 const sinon = require('sinon')
-const helpers = require('../../test/helpers')
-const MockCrock = require('../../test/MockCrock')
+const helpers = require('../test/helpers')
+const MockCrock = require('../test/MockCrock')
 
 const bindFunc = helpers.bindFunc
 
 const curry = require('./curry')
 const _compose = curry(require('./compose'))
-const constant = require('./constant')
-const identity = require('./identity')
 const isFunction = require('./isFunction')
 const isObject = require('./isObject')
 const unit = require('./_unit')
 
 const Maybe = require('./Maybe')
 const Pred = require('../Pred')
+
+const constant = x => () => x
+const identity = x => x
 
 const reverseApply =
   x => fn => fn(x)
@@ -81,7 +82,7 @@ test('List fromArray', t => {
   const data = [ [ 2, 1 ], 'a' ]
 
   t.equal(List.fromArray([ 0 ]).type(), 'List', 'returns a List')
-  t.same(List.fromArray(data).value(), data, 'wraps the value passed into List in an array')
+  t.same(List.fromArray(data).valueOf(), data, 'wraps the value passed into List in an array')
 
   t.end()
 })
@@ -134,9 +135,9 @@ test('List tail', t => {
   t.equal(empty.tail().option('Nothing'), 'Nothing', 'empty List returns a Nothing')
   t.equal(one.tail().option('Nothing'), 'Nothing', 'one element List returns a `Just 1`')
   t.equal(two.tail().option('Nothing').type(), 'List', 'two element List returns a `Just List`')
-  t.same(two.tail().option('Nothing').value(), [ 3 ], 'two element Maybe List contains  `[ 3 ]`')
+  t.same(two.tail().option('Nothing').valueOf(), [ 3 ], 'two element Maybe List contains  `[ 3 ]`')
   t.equal(three.tail().option('Nothing').type(), 'List', 'three element List returns a `Just List`')
-  t.same(three.tail().option('Nothing').value(), [ 5, 6 ], 'three element Maybe List contains  `[ 5, 6 ]`')
+  t.same(three.tail().option('Nothing').valueOf(), [ 5, 6 ], 'three element Maybe List contains  `[ 5, 6 ]`')
 
   t.end()
 })
@@ -147,14 +148,14 @@ test('List cons', t => {
 
   t.ok(isFunction(list.cons), 'provides a cons function')
 
-  t.notSame(list.value(), consed.value(), 'keeps old list intact')
-  t.same(consed.value(), [ 'hello', 'guy' ], 'returns a list with the element pushed to front')
+  t.notSame(list.valueOf(), consed.valueOf(), 'keeps old list intact')
+  t.same(consed.valueOf(), [ 'hello', 'guy' ], 'returns a list with the element pushed to front')
 
   t.end()
 })
 
-test('List value', t => {
-  const x = List([ 'some-thing', 34 ]).value()
+test('List valueOf', t => {
+  const x = List([ 'some-thing', 34 ]).valueOf()
 
   t.same(x, [ 'some-thing', 34 ], 'provides the wrapped array')
 
@@ -211,7 +212,7 @@ test('List concat properties (Semigroup)', t => {
   const right = a.concat(b.concat(c))
 
   t.ok(isFunction(a.concat), 'provides a concat function')
-  t.same(left.value(), right.value(), 'associativity')
+  t.same(left.valueOf(), right.valueOf(), 'associativity')
   t.equal(a.concat(b).type(), a.type(), 'returns a List')
 
   t.end()
@@ -238,8 +239,8 @@ test('List concat functionality', t => {
   t.throws(cat({}), err, 'throws with an object')
   t.throws(cat(notList), err, 'throws when passed non-List')
 
-  t.same(a.concat(b).value(), [ 1, 2, 3, 4 ], 'concats second to first')
-  t.same(b.concat(a).value(), [ 3, 4, 1, 2 ], 'concats first to second')
+  t.same(a.concat(b).valueOf(), [ 1, 2, 3, 4 ], 'concats second to first')
+  t.same(b.concat(a).valueOf(), [ 3, 4, 1, 2 ], 'concats first to second')
 
   t.end()
 })
@@ -253,8 +254,8 @@ test('List empty properties (Monoid)', t => {
   const right = m.concat(m.empty())
   const left = m.empty().concat(m)
 
-  t.same(right.value(), m.value(), 'right identity')
-  t.same(left.value(), m.value(), 'left identity')
+  t.same(right.valueOf(), m.valueOf(), 'right identity')
+  t.same(left.valueOf(), m.valueOf(), 'left identity')
 
   t.end()
 })
@@ -263,7 +264,7 @@ test('List empty functionality', t => {
   const x = List([ 0, 1, true ]).empty()
 
   t.equal(x.type(), 'List', 'provides a List')
-  t.same(x.value(), [], 'provides an empty array')
+  t.same(x.valueOf(), [], 'provides an empty array')
 
   t.end()
 })
@@ -354,11 +355,11 @@ test('List filter functionality', t => {
   const bigNumPred = Pred(bigNum)
   const justStringsPred = Pred(justStrings)
 
-  t.same(m.filter(bigNum).value(), [ 34 ], 'filters for bigNums with function')
-  t.same(m.filter(justStrings).value(), [ 'string' ], 'filters for strings with function')
+  t.same(m.filter(bigNum).valueOf(), [ 34 ], 'filters for bigNums with function')
+  t.same(m.filter(justStrings).valueOf(), [ 'string' ], 'filters for strings with function')
 
-  t.same(m.filter(bigNumPred).value(), [ 34 ], 'filters for bigNums with Pred')
-  t.same(m.filter(justStringsPred).value(), [ 'string' ], 'filters for strings with Pred')
+  t.same(m.filter(bigNumPred).valueOf(), [ 34 ], 'filters for bigNums with Pred')
+  t.same(m.filter(justStringsPred).valueOf(), [ 'string' ], 'filters for strings with Pred')
 
   t.end()
 })
@@ -390,11 +391,11 @@ test('List reject functionality', t => {
   const bigNumPred = Pred(bigNum)
   const justStringsPred = Pred(justStrings)
 
-  t.same(m.reject(bigNum).value(), [ 4, 5, 10, 'string' ], 'rejects bigNums with function')
-  t.same(m.reject(justStrings).value(), [ 4, 5, 10, 34 ], 'rejects strings with function')
+  t.same(m.reject(bigNum).valueOf(), [ 4, 5, 10, 'string' ], 'rejects bigNums with function')
+  t.same(m.reject(justStrings).valueOf(), [ 4, 5, 10, 34 ], 'rejects strings with function')
 
-  t.same(m.reject(bigNumPred).value(), [ 4, 5, 10, 'string' ], 'rejects bigNums with Pred')
-  t.same(m.reject(justStringsPred).value(), [ 4, 5, 10, 34 ], 'rejects strings with Pred')
+  t.same(m.reject(bigNumPred).valueOf(), [ 4, 5, 10, 'string' ], 'rejects bigNums with Pred')
+  t.same(m.reject(justStringsPred).valueOf(), [ 4, 5, 10, 34 ], 'rejects strings with Pred')
 
   t.end()
 })
@@ -427,7 +428,7 @@ test('List map functionality', t => {
 
   t.equal(m.type(), 'List', 'returns a List')
   t.equal(spy.called, true, 'calls mapping function')
-  t.same(m.value(), xs, 'returns the result of the map inside of new List')
+  t.same(m.valueOf(), xs, 'returns the result of the map inside of new List')
 
   t.end()
 })
@@ -440,8 +441,8 @@ test('List map properties (Functor)', t => {
 
   t.ok(isFunction(m.map), 'provides a map function')
 
-  t.same(m.map(identity).value(), m.value(), 'identity')
-  t.same(m.map(_compose(f, g)).value(), m.map(g).map(f).value(), 'composition')
+  t.same(m.map(identity).valueOf(), m.valueOf(), 'identity')
+  t.same(m.map(_compose(f, g)).valueOf(), m.map(g).map(f).valueOf(), 'composition')
 
   t.end()
 })
@@ -488,7 +489,7 @@ test('List ap properties (Apply)', t => {
   t.ok(isFunction(List([]).ap), 'provides an ap function')
   t.ok(isFunction(List([]).map), 'implements the Functor spec')
 
-  t.same(a.ap(List([ 3 ])).value(), b.ap(List([ 3 ])).value(), 'composition')
+  t.same(a.ap(List([ 3 ])).valueOf(), b.ap(List([ 3 ])).valueOf(), 'composition')
 
   t.end()
 })
@@ -496,7 +497,7 @@ test('List ap properties (Apply)', t => {
 test('List of', t => {
   t.equal(List.of, List([]).of, 'List.of is the same as the instance version')
   t.equal(List.of(0).type(), 'List', 'returns a List')
-  t.same(List.of(0).value(), [ 0 ], 'wraps the value passed into List in an array')
+  t.same(List.of(0).valueOf(), [ 0 ], 'wraps the value passed into List in an array')
 
   t.end()
 })
@@ -507,13 +508,13 @@ test('List of properties (Applicative)', t => {
   t.ok(isFunction(List([]).of), 'provides an of function')
   t.ok(isFunction(List([]).ap), 'implements the Apply spec')
 
-  t.same(m.ap(List([ 3 ])).value(), [ 3 ], 'identity')
-  t.same(m.ap(List.of(3)).value(), List.of(identity(3)).value(), 'homomorphism')
+  t.same(m.ap(List([ 3 ])).valueOf(), [ 3 ], 'identity')
+  t.same(m.ap(List.of(3)).valueOf(), List.of(identity(3)).valueOf(), 'homomorphism')
 
   const a = x => m.ap(List.of(x))
   const b = x => List.of(reverseApply(x)).ap(m)
 
-  t.same(a(3).value(), b(3).value(), 'interchange')
+  t.same(a(3).valueOf(), b(3).valueOf(), 'interchange')
 
   t.end()
 })
@@ -561,7 +562,7 @@ test('List chain properties (Chain)', t => {
   const a = x => List.of(x).chain(f).chain(g)
   const b = x => List.of(x).chain(y => f(y).chain(g))
 
-  t.same(a(10).value(), b(10).value(), 'assosiativity')
+  t.same(a(10).valueOf(), b(10).valueOf(), 'assosiativity')
 
   t.end()
 })
@@ -572,8 +573,8 @@ test('List chain properties (Monad)', t => {
 
   const f = x => List([ x ])
 
-  t.same(List.of(3).chain(f).value(), f(3).value(), 'left identity')
-  t.same(f(3).chain(List.of).value(), f(3).value(), 'right identity')
+  t.same(List.of(3).chain(f).valueOf(), f(3).valueOf(), 'left identity')
+  t.same(f(3).chain(List.of).valueOf(), f(3).valueOf(), 'right identity')
 
   t.end()
 })
@@ -606,8 +607,8 @@ test('List sequence functionality', t => {
   const m = List.of(MockCrock(x)).sequence(MockCrock.of)
 
   t.equal(m.type(), 'MockCrock', 'Provides an outer type of MockCrock')
-  t.equal(m.value().type(), 'List', 'Provides an inner type of List')
-  t.same(m.value().value(), [ x ], 'inner List contains original inner value')
+  t.equal(m.valueOf().type(), 'List', 'Provides an inner type of List')
+  t.same(m.valueOf().valueOf(), [ x ], 'inner List contains original inner value')
   t.end()
 })
 
@@ -652,7 +653,7 @@ test('List traverse functionality', t => {
   const m = List.of(x).traverse(f, MockCrock.of)
 
   t.equal(m.type(), 'MockCrock', 'Provides an outer type of MockCrock')
-  t.equal(m.value().type(), 'List', 'Provides an inner type of List')
-  t.same(m.value().value(), [ x ], 'inner List contains original inner value')
+  t.equal(m.valueOf().type(), 'List', 'Provides an inner type of List')
+  t.same(m.valueOf().valueOf(), [ x ], 'inner List contains original inner value')
   t.end()
 })

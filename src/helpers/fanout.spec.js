@@ -1,6 +1,6 @@
 const test = require('tape')
-const helpers = require('../../test/helpers')
-const MockCrock = require('../../test/MockCrock')
+const helpers = require('../test/helpers')
+const MockCrock = require('../test/MockCrock')
 
 const bindFunc = helpers.bindFunc
 
@@ -8,12 +8,13 @@ const Arrow = require('../Arrow')
 const Pair = require('../core/Pair')
 const _Star = require('../Star')
 
-const identity = require('../core/identity')
 const isFunction = require('../core/isFunction')
 const isSameType = require('../core/isSameType')
 const unit = require('../core/_unit')
 
 const Star = _Star(MockCrock)
+
+const identity = x => x
 
 const fanout = require('./fanout')
 
@@ -98,11 +99,11 @@ test('fanout with Stars', t => {
 
   t.ok(isSameType(Star, fanned), 'returns a Star')
 
-  const result = fanned.runWith(x).value()
+  const result = fanned.runWith(x).valueOf()
 
   t.ok(isSameType(Pair, result), 'fanned function returns a Pair')
-  t.equal(result.fst(), f(x).value(), 'applys first function to fst of Pair')
-  t.equal(result.snd(), g(x).value(), 'applys second function to snd of Pair')
+  t.equal(result.fst(), f(x).valueOf(), 'applys first function to fst of Pair')
+  t.equal(result.snd(), g(x).valueOf(), 'applys second function to snd of Pair')
 
   t.end()
 })

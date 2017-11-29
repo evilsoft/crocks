@@ -2,17 +2,19 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const _defineUnion = require('./defineUnion')
+const _equals = require('./equals')
 const _implements = require('./implements')
 const _innerConcat = require('./innerConcat')
 const _inspect = require('./inspect')
 const type = require('./types').type('Maybe')
 
 const compose = require('./compose')
-const constant = require('./constant')
-const identity = require('./identity')
 const isApplicative = require('./isApplicative')
 const isFunction = require('./isFunction')
 const isSameType = require('./isSameType')
+
+const constant = x => () => x
+const identity = x => x
 
 const _maybe =
   _defineUnion({ Nothing: [], Just: [ 'a' ] })
@@ -55,7 +57,7 @@ function Maybe(u) {
   const equals =
     m => isSameType(Maybe, m) && either(
       constant(m.either(constant(true), constant(false))),
-      x => m.either(constant(false), y => y === x)
+      x => m.either(constant(false), y => _equals(y, x))
     )
 
   const inspect = () =>

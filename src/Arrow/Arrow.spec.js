@@ -1,5 +1,5 @@
 const test = require('tape')
-const helpers = require('../../test/helpers')
+const helpers = require('../test/helpers')
 const sinon = require('sinon')
 
 const bindFunc = helpers.bindFunc
@@ -9,12 +9,14 @@ const isFunction = require('../core/isFunction')
 const isObject = require('../core/isObject')
 const unit = require('../core/_unit')
 
-const identity = require('../core/identity')
-const constant = require('../core/constant')
-
 const Pair = require('../core/Pair')
 
+const constant = x => () => x
+
 const Arrow = require('.')
+
+const identity =
+  x => x
 
 test('Arrow', t => {
   const a = bindFunc(Arrow)
@@ -26,17 +28,18 @@ test('Arrow', t => {
 
   t.ok(isObject(Arrow(unit)), 'returns an object')
 
-  t.throws(Arrow, TypeError, 'throws with nothing')
-  t.throws(a(undefined), TypeError, 'throws with undefined')
-  t.throws(a(null), TypeError, 'throws with undefined')
-  t.throws(a(0), TypeError, 'throws with falsey number')
-  t.throws(a(1), TypeError, 'throws with truthy number')
-  t.throws(a(''), TypeError, 'throws with falsey string')
-  t.throws(a('string'), TypeError, 'throws with truthy string')
-  t.throws(a(false), TypeError, 'throws with false')
-  t.throws(a(true), TypeError, 'throws with true')
-  t.throws(a({}), TypeError, 'throws with an object')
-  t.throws(a([]), TypeError, 'throws with an array')
+  const err = /Arrow: Function required/
+  t.throws(Arrow, err, 'throws with nothing')
+  t.throws(a(undefined), err, 'throws with undefined')
+  t.throws(a(null), err, 'throws with undefined')
+  t.throws(a(0), err, 'throws with falsey number')
+  t.throws(a(1), err, 'throws with truthy number')
+  t.throws(a(''), err, 'throws with falsey string')
+  t.throws(a('string'), err, 'throws with truthy string')
+  t.throws(a(false), err, 'throws with false')
+  t.throws(a(true), err, 'throws with true')
+  t.throws(a({}), err, 'throws with an object')
+  t.throws(a([]), err, 'throws with an array')
 
   t.doesNotThrow(a(unit), 'allows a function')
 
@@ -74,16 +77,6 @@ test('Arrow type', t => {
   t.end()
 })
 
-test('Arrow value', t => {
-  const f = constant('dat function')
-  const a = Arrow(f)
-
-  t.ok(isFunction(a.value), 'is a function')
-  t.equal(a.value()(), f(), 'provides the wrapped function')
-
-  t.end()
-})
-
 test('Arrow runWith', t => {
   const f = sinon.spy(identity)
   const a = Arrow(f)
@@ -112,17 +105,18 @@ test('Arrow compose functionality', t => {
 
   const cat = bindFunc(a.compose)
 
-  t.throws(cat(undefined), TypeError, 'throws with undefined')
-  t.throws(cat(null), TypeError, 'throws with null')
-  t.throws(cat(0), TypeError, 'throws with falsey number')
-  t.throws(cat(1), TypeError, 'throws with truthy number')
-  t.throws(cat(''), TypeError, 'throws with falsey string')
-  t.throws(cat('string'), TypeError, 'throws with truthy string')
-  t.throws(cat(false), TypeError, 'throws with false')
-  t.throws(cat(true), TypeError, 'throws with true')
-  t.throws(cat([]), TypeError, 'throws with an array')
-  t.throws(cat({}), TypeError, 'throws with an object')
-  t.throws(cat(notArrow), TypeError, 'throws with non-Arrow')
+  const err = /Arrow.compose: Arrow required/
+  t.throws(cat(undefined), err, 'throws with undefined')
+  t.throws(cat(null), err, 'throws with null')
+  t.throws(cat(0), err, 'throws with falsey number')
+  t.throws(cat(1), err, 'throws with truthy number')
+  t.throws(cat(''), err, 'throws with falsey string')
+  t.throws(cat('string'), err, 'throws with truthy string')
+  t.throws(cat(false), err, 'throws with false')
+  t.throws(cat(true), err, 'throws with true')
+  t.throws(cat([]), err, 'throws with an array')
+  t.throws(cat({}), err, 'throws with an object')
+  t.throws(cat(notArrow), err, 'throws with non-Arrow')
 
   t.same(a.compose(b).runWith(x), result, 'builds composition as expected')
 
@@ -176,16 +170,17 @@ test('Arrow id properties (Category)', t => {
 test('Arrow map errors', t => {
   const map = bindFunc(Arrow(unit).map)
 
-  t.throws(map(undefined), TypeError, 'throws with undefined')
-  t.throws(map(null), TypeError, 'throws with null')
-  t.throws(map(0), TypeError, 'throws with falsey number')
-  t.throws(map(1), TypeError, 'throws with truthy number')
-  t.throws(map(''), TypeError, 'throws with falsey string')
-  t.throws(map('string'), TypeError, 'throws with truthy string')
-  t.throws(map(false), TypeError, 'throws with false')
-  t.throws(map(true), TypeError, 'throws with true')
-  t.throws(map([]), TypeError, 'throws with an array')
-  t.throws(map({}), TypeError, 'throws with an object')
+  const err = /Arrow.map: Function required/
+  t.throws(map(undefined), err, 'throws with undefined')
+  t.throws(map(null), err, 'throws with null')
+  t.throws(map(0), err, 'throws with falsey number')
+  t.throws(map(1), err, 'throws with truthy number')
+  t.throws(map(''), err, 'throws with falsey string')
+  t.throws(map('string'), err, 'throws with truthy string')
+  t.throws(map(false), err, 'throws with false')
+  t.throws(map(true), err, 'throws with true')
+  t.throws(map([]), err, 'throws with an array')
+  t.throws(map({}), err, 'throws with an object')
 
   t.doesNotThrow(map(unit), 'allows functions')
 
@@ -228,16 +223,17 @@ test('Arrow map properties (Functor)', t => {
 test('Arrow contramap errors', t => {
   const cmap = bindFunc(Arrow(unit).contramap)
 
-  t.throws(cmap(undefined), TypeError, 'throws with undefined')
-  t.throws(cmap(null), TypeError, 'throws with null')
-  t.throws(cmap(0), TypeError, 'throws with falsey number')
-  t.throws(cmap(1), TypeError, 'throws with truthy number')
-  t.throws(cmap(''), TypeError, 'throws with falsey string')
-  t.throws(cmap('string'), TypeError, 'throws with truthy string')
-  t.throws(cmap(false), TypeError, 'throws with false')
-  t.throws(cmap(true), TypeError, 'throws with true')
-  t.throws(cmap([]), TypeError, 'throws with an array')
-  t.throws(cmap({}), TypeError, 'throws with an object')
+  const err = /Arrow.contramap: Function required/
+  t.throws(cmap(undefined), err, 'throws with undefined')
+  t.throws(cmap(null), err, 'throws with null')
+  t.throws(cmap(0), err, 'throws with falsey number')
+  t.throws(cmap(1), err, 'throws with truthy number')
+  t.throws(cmap(''), err, 'throws with falsey string')
+  t.throws(cmap('string'), err, 'throws with truthy string')
+  t.throws(cmap(false), err, 'throws with false')
+  t.throws(cmap(true), err, 'throws with true')
+  t.throws(cmap([]), err, 'throws with an array')
+  t.throws(cmap({}), err, 'throws with an object')
 
   t.doesNotThrow(cmap(unit), 'allows functions')
 
@@ -280,27 +276,28 @@ test('Arrow contramap properties (Contra Functor)', t => {
 test('Arrow promap errors', t => {
   const promap = bindFunc(Arrow(unit).promap)
 
-  t.throws(promap(undefined, unit), TypeError, 'throws with undefined as first argument')
-  t.throws(promap(null, unit), TypeError, 'throws with null as first argument')
-  t.throws(promap(0, unit), TypeError, 'throws with falsey number as first argument')
-  t.throws(promap(1, unit), TypeError, 'throws with truthy number as first argument')
-  t.throws(promap('', unit), TypeError, 'throws with falsey string as first argument')
-  t.throws(promap('string', unit), TypeError, 'throws with truthy string as first argument')
-  t.throws(promap(false, unit), TypeError, 'throws with false as first argument')
-  t.throws(promap(true, unit), TypeError, 'throws with true as first argument')
-  t.throws(promap([], unit), TypeError, 'throws with an array as first argument')
-  t.throws(promap({}, unit), TypeError, 'throws with an object as first argument')
+  const err = /Arrow.promap: Functions required for both arguments/
+  t.throws(promap(undefined, unit), err, 'throws with undefined as first argument')
+  t.throws(promap(null, unit), err, 'throws with null as first argument')
+  t.throws(promap(0, unit), err, 'throws with falsey number as first argument')
+  t.throws(promap(1, unit), err, 'throws with truthy number as first argument')
+  t.throws(promap('', unit), err, 'throws with falsey string as first argument')
+  t.throws(promap('string', unit), err, 'throws with truthy string as first argument')
+  t.throws(promap(false, unit), err, 'throws with false as first argument')
+  t.throws(promap(true, unit), err, 'throws with true as first argument')
+  t.throws(promap([], unit), err, 'throws with an array as first argument')
+  t.throws(promap({}, unit), err, 'throws with an object as first argument')
 
-  t.throws(promap(unit, undefined), TypeError, 'throws with undefined as second argument')
-  t.throws(promap(unit, null), TypeError, 'throws with null as second argument')
-  t.throws(promap(unit, 0), TypeError, 'throws with falsey number as second argument')
-  t.throws(promap(unit, 1), TypeError, 'throws with truthy number as second argument')
-  t.throws(promap(unit, ''), TypeError, 'throws with falsey string as second argument')
-  t.throws(promap(unit, 'string'), TypeError, 'throws with truthy string as second argument')
-  t.throws(promap(unit, false), TypeError, 'throws with false as second argument')
-  t.throws(promap(unit, true), TypeError, 'throws with true as second argument')
-  t.throws(promap(unit, []), TypeError, 'throws with an array as second argument')
-  t.throws(promap(unit, {}), TypeError, 'throws with an object as second argument')
+  t.throws(promap(unit, undefined), err, 'throws with undefined as second argument')
+  t.throws(promap(unit, null), err, 'throws with null as second argument')
+  t.throws(promap(unit, 0), err, 'throws with falsey number as second argument')
+  t.throws(promap(unit, 1), err, 'throws with truthy number as second argument')
+  t.throws(promap(unit, ''), err, 'throws with falsey string as second argument')
+  t.throws(promap(unit, 'string'), err, 'throws with truthy string as second argument')
+  t.throws(promap(unit, false), err, 'throws with false as second argument')
+  t.throws(promap(unit, true), err, 'throws with true as second argument')
+  t.throws(promap(unit, []), err, 'throws with an array as second argument')
+  t.throws(promap(unit, {}), err, 'throws with an object as second argument')
 
   t.doesNotThrow(promap(unit, unit), 'allows functions')
 
@@ -364,16 +361,17 @@ test('Arrow first', t => {
 
   const runWith = bindFunc(m.first().runWith)
 
-  t.throws(runWith(undefined), TypeError, 'throws with undefined as inner argument')
-  t.throws(runWith(null), TypeError, 'throws with null as inner argument')
-  t.throws(runWith(0), TypeError, 'throws with falsey number as inner argument')
-  t.throws(runWith(1), TypeError, 'throws with truthy number as inner argument')
-  t.throws(runWith(''), TypeError, 'throws with falsey string as inner argument')
-  t.throws(runWith('string'), TypeError, 'throws with truthy string as inner argument')
-  t.throws(runWith(false), TypeError, 'throws with false as inner argument')
-  t.throws(runWith(true), TypeError, 'throws with true as inner argument')
-  t.throws(runWith([]), TypeError, 'throws with an array as inner argument')
-  t.throws(runWith({}), TypeError, 'throws with an object as inner argument')
+  const err = /Arrow.first: Pair required for inner argument/
+  t.throws(runWith(undefined), err, 'throws with undefined as inner argument')
+  t.throws(runWith(null), err, 'throws with null as inner argument')
+  t.throws(runWith(0), err, 'throws with falsey number as inner argument')
+  t.throws(runWith(1), err, 'throws with truthy number as inner argument')
+  t.throws(runWith(''), err, 'throws with falsey string as inner argument')
+  t.throws(runWith('string'), err, 'throws with truthy string as inner argument')
+  t.throws(runWith(false), err, 'throws with false as inner argument')
+  t.throws(runWith(true), err, 'throws with true as inner argument')
+  t.throws(runWith([]), err, 'throws with an array as inner argument')
+  t.throws(runWith({}), err, 'throws with an object as inner argument')
 
   t.doesNotThrow(runWith(Pair(1, 2)), 'does not throw when inner value is a Pair')
 
@@ -393,16 +391,17 @@ test('Arrow second', t => {
 
   const runWith = bindFunc(m.second().runWith)
 
-  t.throws(runWith(undefined), TypeError, 'throws with undefined as inner argument')
-  t.throws(runWith(null), TypeError, 'throws with null as inner argument')
-  t.throws(runWith(0), TypeError, 'throws with falsey number as inner argument')
-  t.throws(runWith(1), TypeError, 'throws with truthy number as inner argument')
-  t.throws(runWith(''), TypeError, 'throws with falsey string as inner argument')
-  t.throws(runWith('string'), TypeError, 'throws with truthy string as inner argument')
-  t.throws(runWith(false), TypeError, 'throws with false as inner argument')
-  t.throws(runWith(true), TypeError, 'throws with true as inner argument')
-  t.throws(runWith([]), TypeError, 'throws with an array as inner argument')
-  t.throws(runWith({}), TypeError, 'throws with an object as inner argument')
+  const err = /Arrow.second: Pair required for inner argument/
+  t.throws(runWith(undefined), err, 'throws with undefined as inner argument')
+  t.throws(runWith(null), err, 'throws with null as inner argument')
+  t.throws(runWith(0), err, 'throws with falsey number as inner argument')
+  t.throws(runWith(1), err, 'throws with truthy number as inner argument')
+  t.throws(runWith(''), err, 'throws with falsey string as inner argument')
+  t.throws(runWith('string'), err, 'throws with truthy string as inner argument')
+  t.throws(runWith(false), err, 'throws with false as inner argument')
+  t.throws(runWith(true), err, 'throws with true as inner argument')
+  t.throws(runWith([]), err, 'throws with an array as inner argument')
+  t.throws(runWith({}), err, 'throws with an object as inner argument')
 
   t.doesNotThrow(runWith(Pair(1, 2)), 'does not throw when inner value is a Pair')
 
@@ -422,16 +421,17 @@ test('Arrow both', t => {
 
   const runWith = bindFunc(m.both().runWith)
 
-  t.throws(runWith(undefined), TypeError, 'throws with undefined as inner argument')
-  t.throws(runWith(null), TypeError, 'throws with null as inner argument')
-  t.throws(runWith(0), TypeError, 'throws with falsey number as inner argument')
-  t.throws(runWith(1), TypeError, 'throws with truthy number as inner argument')
-  t.throws(runWith(''), TypeError, 'throws with falsey string as inner argument')
-  t.throws(runWith('string'), TypeError, 'throws with truthy string as inner argument')
-  t.throws(runWith(false), TypeError, 'throws with false as inner argument')
-  t.throws(runWith(true), TypeError, 'throws with true as inner argument')
-  t.throws(runWith([]), TypeError, 'throws with an array as inner argument')
-  t.throws(runWith({}), TypeError, 'throws with an object as inner argument')
+  const err = /Arrow.both: Pair required for inner argument/
+  t.throws(runWith(undefined), err, 'throws with undefined as inner argument')
+  t.throws(runWith(null), err, 'throws with null as inner argument')
+  t.throws(runWith(0), err, 'throws with falsey number as inner argument')
+  t.throws(runWith(1), err, 'throws with truthy number as inner argument')
+  t.throws(runWith(''), err, 'throws with falsey string as inner argument')
+  t.throws(runWith('string'), err, 'throws with truthy string as inner argument')
+  t.throws(runWith(false), err, 'throws with false as inner argument')
+  t.throws(runWith(true), err, 'throws with true as inner argument')
+  t.throws(runWith([]), err, 'throws with an array as inner argument')
+  t.throws(runWith({}), err, 'throws with an object as inner argument')
 
   t.doesNotThrow(runWith(Pair(1, 2)), 'does not throw when inner value is a Pair')
 

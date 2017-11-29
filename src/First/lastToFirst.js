@@ -9,7 +9,7 @@ const isFunction = require('../core/isFunction')
 const isSameType = require('../core/isSameType')
 
 const applyTransform = last =>
-  First(last.value())
+  First(last.valueOf())
 
 // lastToFirst : Last a -> First a
 // lastToFirst : (a -> Last b) -> a -> First b

@@ -14,30 +14,30 @@ const _empty =
   () => Assign({})
 
 function Assign(o) {
-  const x = isNil(o) ? _empty().value() : o
+  const x = isNil(o) ? _empty().valueOf() : o
 
   if(!arguments.length || !isObject(x)) {
     throw new TypeError('Assign: Object required')
   }
 
-  const value =
+  const valueOf =
     () => x
 
   const empty =
     _empty
 
   const inspect =
-    () => `Assign${_inspect(value())}`
+    () => `Assign${_inspect(valueOf())}`
 
   function concat(m) {
     if(!isSameType(Assign, m)) {
       throw new TypeError('Assign.concat: Assign required')
     }
 
-    return Assign(_object.assign(m.value(), x))
+    return Assign(_object.assign(m.valueOf(), x))
   }
 
-  return { inspect, value, type, concat, empty }
+  return { inspect, valueOf, type, concat, empty }
 }
 
 Assign['@@implements'] = _implements(

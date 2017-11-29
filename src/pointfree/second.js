@@ -3,9 +3,10 @@
 
 const Pair = require('../core/types').proxy('Pair')
 
-const identity = require('../core/identity')
 const isFunction = require('../core/isFunction')
 const isSameType = require('../core/isSameType')
+
+const identity = x => x
 
 function second(m) {
   if(isFunction(m)) {

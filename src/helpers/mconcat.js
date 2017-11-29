@@ -2,10 +2,11 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const curry = require('../core/curry')
-const identity = require('../core/identity')
 const isFoldable = require('../core/isFoldable')
 const isMonoid = require('../core/isMonoid')
 const mconcatMap = require('../core/mconcatMap')
+
+const identity = x => x
 
 // mconcat : Monoid m => m -> ([ a ] | List a) -> m a
 function mconcat(M, xs) {

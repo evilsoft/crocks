@@ -1,15 +1,16 @@
 const test = require('tape')
 const sinon = require('sinon')
-const helpers = require('../../test/helpers')
+const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
 
 const compose = require('../core/compose')
-const constant = require('../core/constant')
-const identity = require('../core/identity')
 const isFunction = require('../core/isFunction')
 const isObject = require('../core/isObject')
 const isSameType = require('../core/isSameType')
+
+const constant = x => () => x
+const identity = x => x
 
 const Endo = require('.')
 
@@ -56,13 +57,13 @@ test('Endo inspect', t => {
   t.end()
 })
 
-test('Endo value', t => {
-  t.ok(isFunction(Endo(identity).value), 'is a function')
+test('Endo valueOf', t => {
+  t.ok(isFunction(Endo(identity).valueOf), 'is a function')
 
   const x = 3
   const fn = sinon.spy(identity)
 
-  const result = Endo(fn).value()(x)
+  const result = Endo(fn).valueOf()(x)
 
   t.equal(result, x, 'returns the expected value when result of `value` is called')
   t.ok(fn.calledWith(x), 'calls the internal function with the value passed to the result of `value`')
@@ -106,7 +107,7 @@ test('Endo concat properties (Semigroup)', t => {
 
   t.ok(isFunction(Endo(identity).concat), 'is a function')
 
-  t.same(left.value()(''), right.value()(''), 'associativity')
+  t.same(left.valueOf()(''), right.valueOf()(''), 'associativity')
   t.ok(isSameType(Endo, a.concat(b)), 'returns Semigroup of the same type')
 
   t.end()

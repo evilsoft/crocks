@@ -13,30 +13,30 @@ const _empty =
   () => All(true)
 
 function All(b) {
-  const x = isNil(b) ? _empty().value() : b
+  const x = isNil(b) ? _empty().valueOf() : b
 
   if(!arguments.length || isFunction(x)) {
     throw new TypeError('All: Non-function value required')
   }
 
-  const value =
+  const valueOf =
     () => !!x
 
   const empty =
     _empty
 
   const inspect =
-    () => `All${_inspect(value())}`
+    () => `All${_inspect(valueOf())}`
 
   function concat(m) {
     if(!isSameType(All, m)) {
       throw new TypeError('All.concat: All required')
     }
 
-    return All(m.value() && value())
+    return All(m.valueOf() && valueOf())
   }
 
-  return { inspect, value, type, concat, empty }
+  return { inspect, valueOf, type, concat, empty }
 }
 
 All['@@implements'] = _implements(

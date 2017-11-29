@@ -1,15 +1,16 @@
 const test = require('tape')
 const sinon = require('sinon')
-const helpers = require('../../test/helpers')
-const MockCrock = require('../../test/MockCrock')
+const helpers = require('../test/helpers')
+const MockCrock = require('../test/MockCrock')
 
 const bindFunc = helpers.bindFunc
 
-const constant = require('../core/constant')
-const identity = require('../core/identity')
 const isArray = require('../core/isArray')
 const isFunction = require('../core/isFunction')
 const unit = require('../core/_unit')
+
+const constant = x => () => x
+const identity = x => x
 
 const traverse = require('./traverse')
 
@@ -102,7 +103,7 @@ test('traverse with Array', t => {
   const f = sinon.spy(x => MockCrock(x + 2))
 
   const outer = traverse(MockCrock.of, f, [ 12, 23 ])
-  const inner = outer.value()
+  const inner = outer.valueOf()
 
   t.equal(outer.type(), 'MockCrock', 'outer container is a MockCrock')
   t.ok(isArray(inner), 'inner container is an Array')

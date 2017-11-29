@@ -2,16 +2,18 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const _defineUnion = require('../core/defineUnion')
+const _equals = require('../core/equals')
 const _implements = require('../core/implements')
 const _innerConcat = require('../core/innerConcat')
 const _inspect = require('../core/inspect')
 const type = require('../core/types').type('Either')
 
 const compose = require('../core/compose')
-const constant = require('../core/constant')
 const isApplicative = require('../core/isApplicative')
 const isFunction = require('../core/isFunction')
 const isSameType = require('../core/isSameType')
+
+const constant = x => () => x
 
 const _either =
   _defineUnion({ Left: [ 'a' ], Right: [ 'b' ] })
@@ -46,8 +48,8 @@ function Either(u) {
 
   const equals =
     m => isSameType(Either, m) && either(
-      x => m.either(y => y === x, constant(false)),
-      x => m.either(constant(false), y => y === x)
+      x => m.either(y => _equals(y, x), constant(false)),
+      x => m.either(constant(false), y => _equals(y, x))
     )
 
   const of =

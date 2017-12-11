@@ -7,11 +7,11 @@ Assign Object
 ```js
 const Assign = require('crocks/Assign')
 
-const first = { name : "Bob" }
+const first = { name: "Bob" }
 const last = { lastName: "Smith" }
 
-const person
-  = Assign(first).concat(last)
+const person =
+  Assign(first).concat(last)
 //=> Assign { name: "Bob", lastName: "Smith" }
 
 ```
@@ -33,6 +33,7 @@ Assign.empty()
 Assign({})
   .concat(Assign.empty())        
 //=> Assign {}
+
 Assign({ a: 1 })
   .concat(Assign.empty())
 //=> Assign { a: 1 }
@@ -51,8 +52,8 @@ const Sum = require('crocks/Sum')
 const Maybe = require('crocks/Maybe')
 const isSameType = require('crocks/predicates/isSameType')
 
-const myData
-  = Assign({ name: 'Joe', age: 41 })
+const myData =
+  Assign({ name: 'Joe', age: 41 })
 
 myData.type()
 //=>  "Assign"
@@ -72,18 +73,21 @@ isSameType(Assign, myData)
 Assign ~> Assign -> Assign
 ```
 
-`concat` is used to combine (2) `Semigroup`s of the same type under an operation specified by the `Semigroup`. In the case of `Assign`, it will combine two objects, overwriting object previous value with the newer values.
+`concat` is used to combine (2) `Semigroup`s of the same type under an operation specified by the `Semigroup`. In the case of `Assign`, it will combine two objects, overwriting the first `Object`'s previous values with the values of the second `Object`.
 
 ```js
 Assign({})
   .concat(Assign({}))
 //=> Assign {}
+
 Assign({ a: 1 })
   .concat(Assign({ b: 2 }))
 //=> Assign { a: 1, b: 2 }
+
 Assign({ a: 1, b: 2 })
   .concat(Assign({ a: 3, b: 4 }))
 //=> Assign { a: 3, b: 4 }
+
 Assign({ b: 4 })
   .concat(Assign({ a: 1 }))
 //=> Assign { b: 4, a: 1 }
@@ -100,12 +104,13 @@ Assign ~> () -> Object
 Assign({})
   .valueOf()
 //=> {}
+
 Assign({ a: 1 })
   .valueOf()
 //=> { a: 1 }
 
 Assign({ a: 1 })
- .concat({ b: 25 })
- .valueOf()
+  .concat({ b: 25 })
+  .valueOf()
 //=> { a: 1, b: 25 }
 ```

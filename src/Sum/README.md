@@ -12,18 +12,19 @@ const mconcatMap = require('crocks/helpers/mconcatMap')
 Sum(13)
 //=> Sum 13
 
-mconcat(Sum, [5,2])
+mconcat(Sum, [ 5, 2 ])
 //=> Sum 7
 
 Sum(10)
   .concat(10)
 //=> Sum 20
 
-// mapToSumByTen :: [Number] -> Sum
-const mapToSumByTen = mconcatMap(Sum, x => x * 10)
+// mapToSumByTen :: [ Number ] -> Sum
+const sumByTen =
+  mconcatMap(Sum, x => x * 10)
 
-mapToSumByTen([2,2])
-//=> 40
+sumByTen([ 2, 2 ])
+//=> Sum 40
 ```
 
 ## Implements
@@ -44,6 +45,7 @@ Sum.empty()
 Sum.empty()
   .concat(Sum.empty())
 //=> Sum 0
+
 Sum(4)
   .concat(Sum.empty())
 //=> Sum 4
@@ -61,15 +63,16 @@ const Sum = require('crocks/Sum')
 const Prod = require('crocks/Prod')
 const isSameType = require('crocks/predicates/isSameType')
 
-Sum.type()
-//=>  "Sum"
-
 const sum5 = Sum(5)
 
+sum5.type()
+//=> "Sum"
+
 isSameType(Sum, sum5)
-//=> false
-isSameType(Prod, sum5)
 //=> true
+
+isSameType(Prod, sum5)
+//=> false
 ```
 
 ## Instance Methods
@@ -85,12 +88,15 @@ Sum ~> Sum -> Sum
 Sum(5)
   .concat(Sum(4))
 //=> Sum 9
+
 Sum(45)
   .concat(Sum(32))
 //=> Sum 77
+
 Sum(1000)
   .concat(Sum(Infinity))
 //=> Sum Infinity
+
 Sum(1)
   .concat(Sum(3))
 //=> Sum 4
@@ -107,10 +113,8 @@ Sum ~> () -> Number
 Sum(4)
   .valueOf()
 //=> 4
+
 Sum.empty()
-  .valueOf()
-//=> 0
-Sum(false)
   .valueOf()
 //=> 0
 

@@ -21,13 +21,13 @@ tenProd
 //=> Prod 1000
 
 // prodBy2 :: Number -> Prod
-const prodBy2 =
-  mconcatMap(Prod, 2)
+const double =
+  compose(concat(Prod(2)), Prod)
 
-prodBy2(4)
+double(4)
 //=> Prod 8
 
-prodBy2(11)
+double(11)
 //=> Prod 22
 ```
 
@@ -43,11 +43,13 @@ Prod.empty :: () -> Prod
 
 `empty` provides the identity for the `Monoid` in that when the value it provides is `concat`ed to object other value, it will return the other value. In the case of `Prod` the result of `empty` is `1`. `empty` is available on both the Constructor and the Instance for convenience.
 ```js
-Prod.empty() //=> Prod 1
+Prod.empty()
+//=> Prod 1
 
 Prod.empty()
   .concat(Prod.empty())
 //=> Prod 1
+
 Prod(4)
   .concat(Prod.empty())
 //=> Prod 4
@@ -66,12 +68,14 @@ const Prod = require('crocks/Prod')
 const Sum = require('crocks/Sum')
 const isSameType = require('crocks/predicates/isSameType')
 
-Prod.type() //=>  "Prod"
-
 const prod5 = Prod(5)
+
+prod5.type()
+//=> "Prod"
 
 isSameType(Sum, prod5)
 //=> false
+
 isSameType(Prod, prod5)
 //=> true
 ```
@@ -89,12 +93,15 @@ Prod ~> Prod -> Prod
 Prod(5)
   .concat(Prod(4))
 //=> Prod 20
+
 Prod(45)
   .concat(Prod(32))
 //=> Prod 1440
+
 Prod(1000)
   .concat(Prod(Infinity))
 //=> Prod Infinity
+
 Prod.empty()
   .concat(Prod(3))
 //=> Prod 3
@@ -111,6 +118,7 @@ Prod ~> () -> Number
 Prod.empty()
   .valueOf()
 //=> 1
+
 Prod(4)
   .valueOf()
 //=> 4

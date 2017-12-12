@@ -117,7 +117,7 @@ test('ReaderT runWith', t => {
   const result = m.runWith(e)
 
   t.ok(fn.called, 'calls the wrapped function')
-  t.equals(result.value(), fn(e).value(), 'env to the function, returning result')
+  t.equals(result.valueOf(), fn(e).valueOf(), 'env to the function, returning result')
 
   t.end()
 })
@@ -152,7 +152,7 @@ test('ReaderT ask with function', t => {
 
   t.ok(isSameType(ReaderMock, x), 'returns a ReaderT of the same type')
   t.ok(isSameType(Mock, result), 'returns the underlying type when ran')
-  t.equal(result.value(), fn(env), 'inner Monad contains the result of passing the env through the function')
+  t.equal(result.valueOf(), fn(env), 'inner Monad contains the result of passing the env through the function')
 
   t.end()
 })
@@ -165,7 +165,7 @@ test('ReaderT ask without function', t => {
 
   t.ok(isSameType(ReaderMock, x), 'returns a ReaderT')
   t.ok(isSameType(Mock, result), 'returns the underlying type when ran')
-  t.equal(result.value(),  env, 'inner Monad contains the passed environment')
+  t.equal(result.valueOf(),  env, 'inner Monad contains the passed environment')
 
   t.end()
 })
@@ -190,7 +190,7 @@ test('ReaderT lift function', t => {
   const result = ReaderMock.lift(m).runWith(0)
 
   t.ok(isSameType(Mock, result), 'returns an instance of the inner Monad')
-  t.equals(m.value(), result.value(), 'value of inner Monad is not changed')
+  t.equals(m.valueOf(), result.valueOf(), 'value of inner Monad is not changed')
 
   t.end()
 })
@@ -233,7 +233,7 @@ test('ReaderT liftFn function', t => {
   const result = f(m)
 
   t.ok(isSameType(Mock, result), 'returns an instance of the inner Monad as returned by the inner function')
-  t.equals(m.value(), result.value(), 'returns the result of the lifted function')
+  t.equals(m.valueOf(), result.valueOf(), 'returns the result of the lifted function')
 
   t.end()
 })
@@ -272,7 +272,7 @@ test('ReaderT map functionality', t => {
 
   t.ok(spy.called, 'calls mapping function when ran')
   t.ok(isSameType(Mock, x), 'returns an instance of the inner Monad')
-  t.equal(x.value(), add7(e), 'returns the wrapped result of the map inside the inner Monad')
+  t.equal(x.valueOf(), add7(e), 'returns the wrapped result of the map inside the inner Monad')
 
   t.end()
 })
@@ -286,10 +286,10 @@ test('ReaderT map properties (Functor)', t => {
 
   t.ok(isFunction(m.map), 'provides a map function')
 
-  t.equal(m.map(identity).runWith(e).value(), m.runWith(e).value(), 'identity')
+  t.equal(m.map(identity).runWith(e).valueOf(), m.runWith(e).valueOf(), 'identity')
   t.equal(
-    m.map(compose(f, g)).runWith(e).value(),
-    m.map(g).map(f).runWith(e).value(),
+    m.map(compose(f, g)).runWith(e).valueOf(),
+    m.map(g).map(f).runWith(e).valueOf(),
     'composition'
   )
 
@@ -330,8 +330,8 @@ test('ReaderT ap properties (Apply)', t => {
   const b = m.ap(m.ap(m))
 
   t.equal(
-    a.ap(ReaderMock(add3)).runWith(e).value(),
-    b.ap(ReaderMock(add3)).runWith(e).value(),
+    a.ap(ReaderMock(add3)).runWith(e).valueOf(),
+    b.ap(ReaderMock(add3)).runWith(e).valueOf(),
     'composition'
   )
 
@@ -342,7 +342,7 @@ test('ReaderT of', t => {
   t.equal(ReaderMock.of, ReaderMock(unit).of, 'of is the same as the instance version')
 
   t.ok(isSameType(ReaderMock, ReaderMock.of(0)), 'returns a ReaderMock')
-  t.equal(ReaderMock.of(0).runWith(22).value(), 0, 'wraps the value passed in a ReaderT')
+  t.equal(ReaderMock.of(0).runWith(22).valueOf(), 0, 'wraps the value passed in a ReaderT')
 
   t.end()
 })
@@ -357,17 +357,17 @@ test('ReaderT of properties (Applicative)', t => {
   const add27 =
     x => Mock(x + 27)
 
-  t.equal(m.ap(ReaderMock(add27)).runWith(e).value(), add27(e).value(), 'identity')
+  t.equal(m.ap(ReaderMock(add27)).runWith(e).valueOf(), add27(e).valueOf(), 'identity')
   t.equal(
-    m.ap(ReaderMock.of(3)).runWith(e).value(),
-    ReaderMock.of(identity(3)).runWith(e).value(),
+    m.ap(ReaderMock.of(3)).runWith(e).valueOf(),
+    ReaderMock.of(identity(3)).runWith(e).valueOf(),
     'homomorphism'
   )
 
   const a = x => m.ap(ReaderMock.of(x))
   const b = x => ReaderMock.of(reverseApply(x)).ap(m)
 
-  t.equal(a(3).runWith(e).value(), b(3).runWith(e).value(), 'interchange')
+  t.equal(a(3).runWith(e).valueOf(), b(3).runWith(e).valueOf(), 'interchange')
 
   t.end()
 })
@@ -418,7 +418,7 @@ test('ReaderT chain properties (Chain)', t => {
   const a = x => ReaderMock(() => Mock(x)).chain(f).chain(g)
   const b = x => ReaderMock(() => Mock(x)).chain(y => f(y).chain(g))
 
-  t.equal(a(10).runWith(e).value(), b(10).runWith(e).value(), 'assosiativity')
+  t.equal(a(10).runWith(e).valueOf(), b(10).runWith(e).valueOf(), 'assosiativity')
 
   t.end()
 })
@@ -429,8 +429,8 @@ test('ReaderT chain properties (Monad)', t => {
 
   const f = x => ReaderMock(() => Mock(x))
 
-  t.equal(ReaderMock.of(3).chain(f).runWith(0).value(), f(3).runWith(0).value(), 'left identity')
-  t.equal(f(6).chain(ReaderMock.of).runWith(0).value(), f(6).runWith(0).value(), 'right identity')
+  t.equal(ReaderMock.of(3).chain(f).runWith(0).valueOf(), f(3).runWith(0).valueOf(), 'left identity')
+  t.equal(f(6).chain(ReaderMock.of).runWith(0).valueOf(), f(6).runWith(0).valueOf(), 'right identity')
 
   t.end()
 })

@@ -79,7 +79,6 @@ test('State runWith errors', t => {
   const runWith = bindFunc(State(identity).runWith)
 
   const err = /State.runWith: Must wrap a function in the form \(s -> Pair a s\)/
-
   t.throws(runWith(undefined), err, 'throws when wrapped function returns undefined')
   t.throws(runWith(null), err, 'throws when wrapped function returns null')
   t.throws(runWith(0), err, 'throws when wrapped function returns falsey number')

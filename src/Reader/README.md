@@ -2,8 +2,19 @@
 ```haskell
 Reader e a
 ```
-`Reader` is a `Monad` that enables the  composition of computations that depend
-on a shared environment `(e -> a)`.
+`Reader` is a lazy Product Type that enables the  composition of computations
+that depend on a shared environment `(e -> a)`. The left portion, the `e` must
+be fixed to a type for all related computations. The right portion `a` can vary
+in its type.
+
+As `Reader` is lazy, wrapping a function of the form `(e -> a)`, nothing is
+executed until it is run with an environment. `Reader` provides a method on
+it's instance that will take an environment called `runWith` that will run
+the instance with a given environment.
+
+Not only is `Reader`'s environment fixed to a type, but it should be immutable
+for the "life" computation. If a referential type is used as the environment
+great care should be taken to not modify the value of the environment.
 
 ```js
 const Reader = require('crocks/Reader')
@@ -315,6 +326,53 @@ applyTransform(45)
 //=> 130
 ```
 
+### runWith
+```haskell
+Reader e a ~> e -> a
+```
+
+As `Reader` is a lazy datatype that requires a shared environment to run, it's
+instance provides a `runWith` method that takes in an environment and returns
+the result of the computation.
+
+```js
+const { ask } = require('crocks/Reader')
+const Pair = require('crocks/Pair')
+
+const fst = require('crocks/Pair/fst')
+const liftA2 = require('crocks/helpers/liftA2')
+const snd = require('crocks/Pair/snd')
+
+// data :: Pair Number Number
+const data =
+  Pair(20, 45)
+
+// getCorrect :: Reader (Pair Number Number) Number
+const getCorrect =
+  ask(fst)
+
+// getTotal :: Reader (Pair Number Number) Number
+const getTotal =
+  ask(snd)
+
+// divide :: Number -> Number -> Number
+const divide =
+  x => y => x / y
+
+// formatPercent :: Number -> String
+const formatPercent =
+  x => `${Math.floor(x * 1000) / 10}%`
+
+// calcPercent :: Reader (Pair Number Number) String
+const calcPercent =
+  liftA2(divide, getCorrect, getTotal)
+    .map(formatPercent)
+
+calcPercent
+  .runWith(data)
+//=. '44.4%'
+```
+
 Monad Transformer
 ---
 
@@ -323,7 +381,7 @@ Monad Transformer
 Monad m => ReaderT e (m a)
 ```
 
-`ReaderT` is a `Monad Transformer` that wraps a given `Monad` with a Reader.
+`ReaderT` is a `Monad Transformer` that wraps a given `Monad` with a `Reader`.
 This allows the interface of a `Reader` that enables the  composition of
 computations that depend on a shared environment `(e -> a)`, but provides a way
 to abstract a means the `Reader` portion, when combining `ReaderT`s of the same
@@ -395,7 +453,6 @@ When mixed with composition, `lift` can be used to promote functions that take
 the form of `a -> m b` into a function that can be `chain`ed with the `ReaderT`.
 Although, [`liftFn`](#liftfn) can be used to remove the composition boilerplate
 and promote and `a -> m b` function.
-
 
 ```js
 const ReaderT = require('crocks/Reader/ReaderT')
@@ -492,7 +549,6 @@ add20
 add20
   .runWith(9)
 //=> Left "9 is not gte to 10"
-
 ```
 
 #### of
@@ -647,7 +703,6 @@ first
 liftA2(add, first, second)
   .runWith(Pair('Bob', 'Jones'))
 //=> Err [ 'Bob is not a Number', 'Jones is not a Number' ]
-
 ```
 
 #### chain
@@ -707,4 +762,44 @@ getLastName
 getLastName
   .runWith(10)
 //=> Nothing
+```
+
+### runWith
+```haskell
+Monad m => ReaderT e (m a) ~> e -> m a
+```
+
+In order to unwrap the underlying `Monad`, `ReaderT` needs to be ran with a
+given environment. A `ReaderT` instance comes equipped with a `runWith` method
+that accepts an environment and returns the resulting `Monad`.
+
+```js
+const ReaderT = require('../crocks/src/Reader/ReaderT')
+const Maybe = require('crocks/Maybe')
+
+const MaybeReader = ReaderT(Maybe)
+const { ask, liftFn } = MaybeReader
+
+const prop = require('crocks/Maybe/prop')
+
+// data :: Object
+const data = {
+  animals: [
+    'tiger', 'muskrat', 'mouse'
+  ]
+}
+
+// length :: Array -> Number
+const length =
+  x => x.length
+
+// getProp :: String -> ReaderT Object (Maybe [])
+const getProp = key =>
+  ask()
+    .chain(liftFn(prop(key)))
+
+getProp('animals')
+  .map(length)
+  .runWith(data)
+//=> Just 3
 ```

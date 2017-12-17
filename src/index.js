@@ -17,6 +17,7 @@ const crocks = {
   Async: require('./Async'),
   Const: require('./Const'),
   Either: require('./Either'),
+  Equiv: require('./Equiv'),
   Identity: require('./Identity'),
   IO: require('./IO'),
   List: require('./List'),

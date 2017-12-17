@@ -140,6 +140,7 @@ will return the `Writer` Constructor for your `Writer` using that specific
 | `Async` | `Rejected`, `Resolved`, `all`, `fromNode`, `fromPromise`, `of` | `alt`, `ap`, `bimap`, `chain`, `coalesce`, `fork`, `map`, `of`, `swap`, `toPromise` |
 | `Const` | -- | `ap`, `chain`, `concat`, `equals`, `map`, `valueOf` |
 | `Either` | `Left`, `Right`, `of`| `alt`, `ap`, `bimap`, `chain`, `coalesce`, `concat`, `either`, `equals`, `map`, `of`, `sequence`, `swap`, `traverse` |
+| `Equiv`  | `empty` | `concat`, `contramap`, `empty`, `compareWith`, `valueOf` |
 | `Identity` | `of` | `ap`, `chain`, `concat`, `equals`, `map`, `of`, `sequence`, `traverse`, `valueOf` |
 | `IO` | `of` | `ap`, `chain`, `map`, `of`, `run` |
 | `List` |  `empty`, `fromArray`, `of` | `ap`, `chain`, `concat`, `cons`, `empty`, `equals`, `filter`, `head`, `map`, `of`, `reduce`, `reject`, `sequence`, `tail`, `toArray`, `traverse`, `valueOf` |

@@ -930,6 +930,32 @@ some data, and it will attempt to resolve your provided path. If the path is
 valid, it will return the value residing there (`null` included!) in a `Just`.
 But if at any point that path "breaks" it will give you back a `Nothing`.
 
+#### propOr
+`crocks/helpers/propOr`
+```haskell
+propOr :: a -> (String | Integer) -> b -> c
+```
+If you want some safety around pulling a value out of an Object or Array with a
+single key or index, you can always reach for `propOr`. Well, as long as you are
+working with non-nested data that is. Just tell `propOr` either the key or index
+you are interested in, and you will get back a function that will take anything
+and return the wrapped value if the key/index exists. If the
+key/index does not exist however, you will get back a default value.
+
+#### propPathOr
+`crocks/helpers/propPathOr`
+```haskell
+propPathOr :: a -> [ String | Integer ] -> b -> c
+```
+While [`propOr`](#propor) is good for simple, single-level structures, there may
+come a time when you have to work with nested POJOs or Arrays. When you run into
+this situation, just pull in `propPathOr` and pass it a left-to-right traversal
+path of keys, indices or a combination of both (gross...but possible). This will
+kick you back a function that behaves just like [`propOr`](#propor). You pass it
+some data, and it will attempt to resolve your provided path. If the path is
+valid, it will return the value.
+But if at any point that path "breaks" it will give you back the default value.
+
 #### safe
 `crocks/Maybe/safe`
 ```haskell

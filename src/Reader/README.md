@@ -56,7 +56,7 @@ Reader.ask :: () -> Reader e e
 Reader.ask :: (e -> b) -> Reader e b
 ```
 
-A construction helper that returns a `Reader` with environment on the right
+A construction helper that returns a `Reader` with the environment on the right
 portion of the `Reader`. `ask` can take a function, that can be used to map the
 environment to a different type or value.
 
@@ -92,7 +92,7 @@ Reader.of :: a -> Reader e a
 ```
 
 `of` is used to construct a `Reader` with the right portion populated with it's
-argument. `of` essentially will lift a value of type `a` into a `Reader`. Giving
+argument. `of` essentially will lift a value of type `a` into a `Reader`, giving
 back a `Reader` that is "pointed" to the specific value provided. `of` makes
 for a wonderful starting point for some of the more complicated flows.
 

@@ -907,7 +907,7 @@ flow('string', 100).runWith(data)
 #### prop
 `crocks/Maybe/prop`
 ```haskell
-prop :: (String | Number) -> a -> Maybe b
+prop :: (String | Integer) -> a -> Maybe b
 ```
 If you want some safety around pulling a value out of an Object or Array with a
 single key or index, you can always reach for `prop`. Well, as long as you are
@@ -919,7 +919,7 @@ key/index does not exist however, you will get back a `Nothing`.
 #### propPath
 `crocks/Maybe/propPath`
 ```haskell
-propPath :: [ String | Number ] -> a -> Maybe b
+propPath :: [ String | Integer ] -> a -> Maybe b
 ```
 While [`prop`](#prop) is good for simple, single-level structures, there may
 come a time when you have to work with nested POJOs or Arrays. When you run into

@@ -916,6 +916,34 @@ you are interested in, and you will get back a function that will take anything
 and return a `Just` with the wrapped value if the key/index exists. If the
 key/index does not exist however, you will get back a `Nothing`.
 
+#### propOr
+`crocks/helpers/propOr`
+```haskell
+propOr :: a -> (String | Integer) -> b -> c
+```
+
+If you want some safety around pulling a value out of an Object or Array with a
+single key or index, you can always reach for `propOr`. Well, as long as you are
+working with non-nested data that is. Just tell `propOr` either the key or index
+you are interested in, and you will get back a function that will take anything
+and return the wrapped value if the key/index exists. If the key/index does not
+exist however, you will get back a default value.
+
+```js
+const { get } = require('crocks/State')
+const propOr = require('crocks/helpers/propOr')
+
+const data = { foo: 'bar' }
+
+get()
+  .map(propOr('default', 'foo'))
+  .evalWith(data) // bar
+
+get()
+  .map(propOr('default', 'baz'))
+  .evalWith(data) // default
+```
+
 #### propPath
 `crocks/Maybe/propPath`
 ```haskell
@@ -930,18 +958,6 @@ some data, and it will attempt to resolve your provided path. If the path is
 valid, it will return the value residing there (`null` included!) in a `Just`.
 But if at any point that path "breaks" it will give you back a `Nothing`.
 
-#### propOr
-`crocks/helpers/propOr`
-```haskell
-propOr :: a -> (String | Integer) -> b -> c
-```
-If you want some safety around pulling a value out of an Object or Array with a
-single key or index, you can always reach for `propOr`. Well, as long as you are
-working with non-nested data that is. Just tell `propOr` either the key or index
-you are interested in, and you will get back a function that will take anything
-and return the wrapped value if the key/index exists. If the
-key/index does not exist however, you will get back a default value.
-
 #### propPathOr
 `crocks/helpers/propPathOr`
 ```haskell
@@ -953,8 +969,23 @@ this situation, just pull in `propPathOr` and pass it a left-to-right traversal
 path of keys, indices or a combination of both (gross...but possible). This will
 kick you back a function that behaves just like [`propOr`](#propor). You pass it
 some data, and it will attempt to resolve your provided path. If the path is
-valid, it will return the value.
-But if at any point that path "breaks" it will give you back the default value.
+valid, it will return the value. But if at any point that path "breaks" it will
+give you back the default value.
+
+```js
+const { get } = require('crocks/State')
+const propPathOr = require('crocks/helpers/propPathOr')
+
+const data = { foo: { bar: 'bar' }, baz: null }
+
+get()
+  .map(propPathOr('default', ['foo', 'bar']))
+  .evalWith(data) // bar
+
+get()
+  .map(propPathOr('default', ['baz', 'tommy']))
+  .evalWith(data) // default
+```
 
 #### safe
 `crocks/Maybe/safe`

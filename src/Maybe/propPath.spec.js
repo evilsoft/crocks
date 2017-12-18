@@ -65,6 +65,7 @@ test('propPath function', t => {
 
   t.equals(fn(undefined), 'nothing', 'returns Nothing when data is undefined')
   t.equals(fn(null), 'nothing', 'returns Nothing when data is null')
+  t.equals(fn(NaN), 'nothing', 'returns Nothing when data is NaN')
 
   t.end()
 })

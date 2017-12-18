@@ -12,6 +12,9 @@ const unit = require('../core/_unit')
 const constant = x => () => x
 const identity = x => x
 
+const isSame =
+  (x, y) => x === y
+
 const Equiv = require('.')
 
 test('Equiv', t => {
@@ -22,7 +25,7 @@ test('Equiv', t => {
   t.ok(isFunction(Equiv.type), 'provides a type function')
   t.ok(isFunction(Equiv.empty), 'provides an empty function')
 
-  t.ok(isObject(Equiv(unit)), 'returns an object')
+  t.ok(isObject(Equiv(isSame)), 'returns an object')
 
   const err = /Equiv: Comparison function required/
   t.throws(Equiv, err, 'throws with nothing')
@@ -53,7 +56,7 @@ test('Equiv @@implements', t => {
 })
 
 test('Equiv inspect', t => {
-  const m = Equiv(unit)
+  const m = Equiv(isSame)
 
   t.ok(isFunction(m.inspect), 'provides an inpsect function')
   t.equal(m.inspect(), 'Equiv Function', 'returns inspect string')
@@ -62,18 +65,18 @@ test('Equiv inspect', t => {
 })
 
 test('Equiv type', t => {
-  t.equal(Equiv(unit).type(), 'Equiv', 'type returns Equiv')
-  t.equal(Equiv(unit).type(), Equiv.type(), 'constructor and instance return same value')
+  t.equal(Equiv(isSame).type(), 'Equiv', 'type returns Equiv')
+  t.equal(Equiv(isSame).type(), Equiv.type(), 'constructor and instance return same value')
 
   t.end()
 })
 
 test('Equiv compareWith', t => {
-  const fn = sinon.spy(constant('result'))
+  const fn = sinon.spy(isSame)
   const m = Equiv(fn)
 
   const nonBoolEquiv =
-    x => Equiv(constant(x)).compareWith()
+    x => Equiv(constant(x)).compareWith(1, 1)
 
   t.equals(nonBoolEquiv(undefined), false, 'returns false when wrapped function returns undefined')
   t.equals(nonBoolEquiv(null), false, 'returns false when wrapped function returns null')
@@ -87,26 +90,25 @@ test('Equiv compareWith', t => {
   t.equals(nonBoolEquiv([]), true, 'returns true when wrapped function returns an array')
   t.equals(nonBoolEquiv(unit), true, 'returns true when wrapped function returns a function')
 
-  const result = m.compareWith(false)
+  const result = m.compareWith(false, false)
 
   t.ok(fn.called, 'calls the wrapped function')
-  t.equal(result, !!fn(),'returns Boolean equiv result of the wrapped function' )
+  t.equal(result, !!fn(false, false),'returns Boolean equiv result of the wrapped function' )
 
   t.end()
 })
 
 test('Equiv valueOf', t => {
-  const f = constant('')
-  const e = Equiv(f)
+  const e = Equiv(isSame)
 
   t.ok(isFunction(e.valueOf), 'is a function')
-  t.equals(e.valueOf()(), !!f(), 'returns a coerced to Boolean version of the function')
+  t.equals(e.valueOf()(4, 5), !!isSame(4, 5), 'returns a coerced to Boolean version of the function')
 
   t.end()
 })
 
 test('Equiv contramap errors', t => {
-  const cmap = bindFunc(Equiv(unit).contramap)
+  const cmap = bindFunc(Equiv(isSame).contramap)
 
   const err = /Equiv.contramap: Function required/
   t.throws(cmap(undefined), err, 'throws with undefined')
@@ -127,9 +129,6 @@ test('Equiv contramap errors', t => {
 
 test('Equiv contramap functionality', t => {
   const spy = sinon.spy(identity)
-
-  const isSame =
-    (x, y) => x === y
 
   const x = 23
   const y = 100
@@ -153,7 +152,7 @@ test('Equiv contramap functionality', t => {
 })
 
 test('Equiv contramap properties (Contra Functor)', t => {
-  const m = Equiv((x, y) => x === y)
+  const m = Equiv(isSame)
 
   const f = x => x + 17
   const g = x => x * 3
@@ -199,9 +198,9 @@ test('Equiv concat functionality', t => {
   t.throws(cat({}), err, 'throws with an object')
   t.throws(cat(notEquiv), err, 'throws when passed non-Equiv')
 
-  t.equal(a.concat(a).compareWith(), true, 'true to true reports true')
-  t.equal(a.concat(b).compareWith(), false, 'true to false reports false')
-  t.equal(b.concat(b).compareWith(), false, 'false to false reports false')
+  t.equal(a.concat(a).compareWith(1, 1), true, 'true to true reports true')
+  t.equal(a.concat(b).compareWith(1, 1), false, 'true to false reports false')
+  t.equal(b.concat(b).compareWith(1, 1), false, 'false to false reports false')
 
   t.end()
 })
@@ -215,7 +214,7 @@ test('Equiv concat properties (Semigroup)', t => {
   const right = a.concat(b.concat(c))
 
   t.ok(isFunction(a.concat), 'provides a concat function')
-  t.equal(left.compareWith(), right.compareWith(), 'associativity')
+  t.equal(left.compareWith('', ''), right.compareWith('', ''), 'associativity')
 
   t.equal(a.concat(b).type(), a.type(), 'returns an Equiv')
 
@@ -226,13 +225,13 @@ test('Equiv empty functionality', t => {
   const e = Equiv(identity).empty()
 
   t.equal(e.type(), 'Equiv', 'provides an Equiv')
-  t.equal(e.compareWith(), true, 'provides a true value')
+  t.equal(e.compareWith('a', 'A'), true, 'provides a true value')
 
   t.end()
 })
 
 test('Equiv empty properties (Monoid)', t => {
-  const m = Equiv(constant(true))
+  const m = Equiv(isSame)
 
   t.ok(isFunction(m.concat), 'provides a concat function')
   t.ok(isFunction(m.empty), 'provides an empty function')
@@ -240,8 +239,17 @@ test('Equiv empty properties (Monoid)', t => {
   const right = m.concat(m.empty())
   const left = m.empty().concat(m)
 
-  t.equal(right.compareWith(), m.compareWith(), 'right identity')
-  t.equal(left.compareWith(), m.compareWith(), 'left identity')
+  t.equal(
+    right.compareWith(34, 45),
+    m.compareWith(34, 45),
+    'right identity'
+  )
+
+  t.equal(
+    left.compareWith(10, 10),
+    m.compareWith(10, 10),
+    'left identity'
+  )
 
   t.end()
 })

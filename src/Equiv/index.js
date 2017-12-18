@@ -4,6 +4,7 @@
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
 
+const curry = require('../core/curry')
 const isFunction = require('../core/isFunction')
 const isSameType = require('../core/isSameType')
 
@@ -17,8 +18,9 @@ function Equiv(compare) {
     throw new TypeError('Equiv: Comparison function required')
   }
 
-  const compareWith =
+  const compareWith = curry(
     (x, y) => !!compare(x, y)
+  )
 
   const inspect =
     () => `Equiv${_inspect(compare)}`

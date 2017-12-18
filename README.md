@@ -1253,6 +1253,7 @@ accepted Datatype):
 | `both` | `m (a -> b) -> m (Pair a a -> Pair b b)` | `crocks/pointfree` |
 | `chain` | `(a -> m b) -> m a -> m b` | `crocks/pointfree` |
 | `coalesce` | `(a -> c) -> (b -> c) -> m a b -> m _ c` | `crocks/pointfree` |
+| `compareWith` | `a -> a -> m a -> Boolean` | `crocks/pointfree` |
 | `concat` | `m a -> m a -> m a` | `crocks/pointfree` |
 | `cons` | `a -> m a -> m a` | `crocks/pointfree` |
 | `contramap` | `(b -> a) -> m a -> m b` | `crocks/pointfree` |

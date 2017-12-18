@@ -108,6 +108,7 @@ const pointfree = {
   both: require('./pointfree/both'),
   chain: require('./pointfree/chain'),
   coalesce: require('./pointfree/coalesce'),
+  compareWith: require('./pointfree/compareWith'),
   concat: require('./pointfree/concat'),
   cons: require('./pointfree/cons'),
   contramap: require('./pointfree/contramap'),

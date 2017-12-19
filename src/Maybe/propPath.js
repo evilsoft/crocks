@@ -6,15 +6,14 @@ const { Nothing, Just } = Maybe
 
 const curry = require('../core/curry')
 const isArray = require('../core/isArray')
-const isDefined = require('../core/isDefined')
 const isInteger = require('../core/isInteger')
 const isNil= require('../core/isNil')
 const isString = require('../core/isString')
 
 const lift = x =>
-  isDefined(x) ? Just(x) : Nothing()
+  !isNil(x) ? Just(x) : Nothing()
 
-// propPath : [ String | Number ] -> a -> Maybe b
+// propPath : [ String | Integer ] -> a -> Maybe b
 function propPath(keys, target) {
   if(!isArray(keys)) {
     throw new TypeError('propPath: Array of strings or integers required for first argument')

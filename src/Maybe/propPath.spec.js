@@ -31,25 +31,29 @@ test('propPath function', t => {
   t.throws(p([ [ 'key' ] ], {}), err, 'throws with a nested array in first argument')
 
   const value = 'Cry Clown Cry'
-  const obj = { a: { b: value }, bad: { thing: null } }
+  const obj = { a: { b: value }, bad: { thing: null, stuff: NaN } }
 
   const objGood = propPath([ 'a', 'b' ])(obj)
   const objBad = propPath([ 'b', 'c' ], obj)
   const objNull = propPath([ 'bad', 'thing' ])
+  const objNaN = propPath([ 'bad', 'stuff' ])
 
   t.equals(objGood.option('nothing'), value, 'returns a Just with the value when key path is found')
   t.equals(objBad.option('nothing'), 'nothing', 'returns a Nothing when key path is not found')
-  t.equals(objNull(obj).option('nothing'), null, 'returns a Just null when keypath is found and value is null')
+  t.equals(objNull(obj).option('nothing'), 'nothing', 'returns a Nothing when keypath is found and value is null')
+  t.equals(objNaN(obj).option('nothing'), 'nothing', 'returns a Nothing when keypath is found and value is NaN')
 
-  const arr = [ [ 'blank', value ], [ null, 'crazy' ] ]
+  const arr = [ [ 'blank', value ], [ null, 'crazy' ], [ NaN ] ]
 
   const arrGood = propPath([ 0, 1 ], arr)
   const arrBad = propPath([ 5 ])(arr)
   const arrNull = propPath([ 1, 0 ])
+  const arrNaN = propPath([ 2, 0 ])
 
   t.equals(arrGood.option('nothing'), value, 'returns a Just with the value when index is found')
   t.equals(arrBad.option('nothing'), 'nothing', 'returns a Nothing when index is not found')
-  t.equals(arrNull(arr).option('nothing'), null, 'returns a Just null when index is found and value is null')
+  t.equals(arrNull(arr).option('nothing'), 'nothing', 'returns a Nothing when index is found and value is null')
+  t.equals(arrNaN(arr).option('nothing'), 'nothing', 'returns a Nothing when index is found and value is NaN')
   t.same(propPath([], arr).option('nothing'), arr, 'returns a Just with original value when an empty array is provided as path')
 
   const mixed = { things: [ 1, 45, value, 10 ] }
@@ -61,6 +65,7 @@ test('propPath function', t => {
 
   t.equals(fn(undefined), 'nothing', 'returns Nothing when data is undefined')
   t.equals(fn(null), 'nothing', 'returns Nothing when data is null')
+  t.equals(fn(NaN), 'nothing', 'returns Nothing when data is NaN')
 
   t.end()
 })

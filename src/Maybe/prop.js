@@ -2,16 +2,15 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const curry = require('../core/curry')
-const isDefined = require('../core/isDefined')
 const isNil= require('../core/isNil')
 const isInteger = require('../core/isInteger')
 const isString = require('../core/isString')
 const { Nothing, Just } = require('../core/Maybe')
 
 const lift = x =>
-  isDefined(x) ? Just(x) : Nothing()
+  !isNil(x) ? Just(x) : Nothing()
 
-// prop : String | Number -> a -> Maybe b
+// prop : (String | Integer) -> a -> Maybe b
 function prop(key, target) {
   if(!(isString(key) || isInteger(key))) {
     throw new TypeError('prop: String or integer required for first argument')

@@ -1,5 +1,6 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
+/** @author Henrique Limas */
 
 const combinators = {
   applyTo: require('./combinators/applyTo'),
@@ -66,6 +67,8 @@ const helpers = {
   pipeS: require('./helpers/pipeS'),
   prop: require('./Maybe/prop'),
   propPath: require('./Maybe/propPath'),
+  propOr: require('./helpers/propOr'),
+  propPathOr: require('./helpers/propPathOr'),
   safe: require('./Maybe/safe'),
   safeLift: require('./Maybe/safeLift'),
   tap: require('./helpers/tap'),

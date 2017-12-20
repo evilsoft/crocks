@@ -1,0 +1,169 @@
+---
+title: "Home"
+description: "A collection of well known Monadic Containers for your utter enjoyment."
+---
+
+{namespace pageIndex}
+
+/**
+ * @param site
+ */
+{template .render}
+  {call main.render data="all"}
+    {param content kind="html"}
+      {call .header data="all" /}
+      {call .why /}
+      {call .highlights /}
+      {call .footer /}
+    {/param}
+  {/call}
+{/template}
+
+/**
+ * @param site
+ */
+{template .header}
+  <header class="header">
+    <div class="container">
+      <h1 class="header-title">{$site.title}</h1>
+      <h2 class="header-subtitle">{$site.index.description}</h2>
+      <div class="header-cta">
+        <a href="docs/getting-started.html" class="btn btn-accent">Get Started</a>
+      </div>
+    </div>
+
+    <p class="gh-btns">
+      <iframe src="//ghbtns.com/github-btn.html?user=evilsoft&amp;repo=crocks&amp;type=watch&amp;count=true&amp;size=large" allowtransparency="true" frameborder="0" scrolling="0" width="150" height="30"></iframe>
+      <iframe src="//ghbtns.com/github-btn.html?user=evilsoft&amp;repo=crocks&amp;type=fork&amp;count=true&amp;size=large" allowtransparency="true" frameborder="0" scrolling="0" width="150" height="30"></iframe>
+    </p>
+  </header>
+{/template}
+
+/**
+ *
+ */
+{template .why}
+  <article class="about">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-md-offset-2">
+          <h3 class="about-title">Why?</h3>
+          <p class="about-description">Because Functional Programming matters and Crocks make that world simplier curating and providing not only a common interface between each type (where possible of course), but also all of the helper functions needed to hit the ground running.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+{/template}
+
+/**
+ *
+ */
+{template .features}
+  <div class="features">
+    <div class="container">
+      <div class="row">
+        <section class="feature col-md-4 col-md-offset-2">
+          <div class="feature-graphic">
+            <span class="icon-16-bullhorn"></span>
+          </div>
+          <h3 class="feature-title">Heading</h3>
+          <p class="feature-description">Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros praesent commodo.</p>
+        </section>
+        <section class="feature col-md-4">
+          <div class="feature-graphic">
+            <span class="icon-16-lock"></span>
+          </div>
+          <h3 class="feature-title">Heading</h3>
+          <p class="feature-description">Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros praesent commodo.</p>
+        </section>
+        <section class="feature col-md-4">
+          <div class="feature-graphic">
+            <span class="icon-16-calendar"></span>
+          </div>
+          <h3 class="feature-title">Heading</h3>
+          <p class="feature-description">Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros praesent commodo.</p>
+        </section>
+      </div>
+    </div>
+  </div>
+{/template}
+
+/**
+ *
+ */
+{template .how}
+  <article class="about">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-md-offset-2">
+          <h3 class="about-title">It's easier than you think</h3>
+          <p class="about-description">Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros praesent commodo ultricies vehicula ut.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+{/template}
+
+/**
+ *
+ */
+{template .highlights}
+  <div class="highlights">
+    <div class="container">
+      <section class="highlight row">
+        <div class="col-md-6 col-md-offset-2">
+          <h4 class="highlight-title">Work in a more declarative, functional flow.</h4>
+          <p class="highlight-description">Crocks implements all Functor based Data Types that provide different computational contexts for working in a more declarative, functional flow</p>
+        </div>
+        <div class="col-md-5 col-md-offset-1">
+          <div class="highlight-graphic">
+            <span class="icon-16-balloon-topic"></span>
+          </div>
+        </div>
+      </section>
+      <section class="highlight row">
+        <div class="col-md-6 col-md-push-9">
+          <h4 class="highlight-title">Use a collection of popular Algebraic Data Types (ADTs)</h4>
+          <p class="highlight-description">You have heard of things like Maybe and Either and heck maybe even IO, that is what Crocks provide.</p>
+        </div>
+        <div class="col-md-5 col-md-offset-2 col-md-pull-6">
+          <div class="highlight-graphic">
+            <span class="icon-16-menu"></span>
+          </div>
+        </div>
+      </section>
+      <section class="highlight row">
+        <div class="col-md-6 col-md-offset-2">
+          <h4 class="highlight-title">Combine a list of values down to one value</h4>
+          <p class="highlight-description">Crocks provides Monoid, where you can represent a binary operation and usually locked down it to a specific type. These are great when you need to combine a list of values down to one value.</p>
+        </div>
+        <div class="col-md-5 col-md-offset-1">
+          <div class="highlight-graphic">
+            <span class="icon-16-org_chart"></span>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+{/template}
+
+/**
+ *
+ */
+{template .footer}
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <p class="footer-description col-md-3 col-md-offset-2">
+          <a href="https://github.com/evilsoft/crocks">Crocks</a>
+        </p>
+        <p class="footer-description col-md-4">
+          <a href="https://github.com/evilsoft/crocks/blob/master/LICENSE">Distributed under ISC License</a>
+        </p>
+        <p class="footer-description col-md-5">
+          Found an issue with the docs? Report it <a href="https://github.com/evilsoft/crocks/issues/new">here</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+{/template}

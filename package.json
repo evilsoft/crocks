@@ -5,6 +5,7 @@
   "main": "./index.js",
   "scripts": {
     "preversion": "npm run build",
+    "postpublish": "cd docs && electric deploy",
     "build:publish": "npm test && ./bin/publish",
     "build:dist": "webpack && uglifyjs build/dist/crocks.js -c \"warnings=false\" -m -o build/dist/crocks.min.js",
     "build": "rm -rf build && buble -i src -o build && npm run build:dist",

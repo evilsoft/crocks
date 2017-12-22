@@ -15,8 +15,9 @@ Covariant, but is Contravariant allowing both inputs to vary in their type.
 logical conjunction, with it's empty value always returning `true`.
 
 As `Equiv` wraps a function, it is lazy and a given instance will not produce
-a result until both arguments are satisfied. A given instance can be ran by
-calling the method `compareWith`, providing both values for comparison.
+a result until both arguments are satisfied. A given instance can be run by
+calling the method [`compareWith`](#comparewith), providing both values for
+comparison.
 
 ```js
 const Equiv = require('crocks/Equiv')
@@ -105,7 +106,7 @@ const isSameType = require('crocks/predicates/isSameType')
 
 Equiv.type() //=>  "Equiv"
 
-isSameType(Equiv, Equiv(3))         //=> true
+isSameType(Equiv, Equiv(equals))    //=> true
 isSameType(Equiv, Equiv)            //=> true
 isSameType(Equiv, Endo(x => x * 2)) //=> false
 isSameType(Equiv(equals), Endo)     //=> false

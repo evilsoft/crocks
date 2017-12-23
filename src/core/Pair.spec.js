@@ -24,6 +24,8 @@ test('Pair core', t => {
   t.ok(isFunction(Pair), 'is a function')
   t.ok(isObject(x), 'returns an object')
 
+  t.equals(Pair(0, 0).constructor, Pair, 'provides TypeRep on constructor')
+
   t.ok(isFunction(Pair.type), 'provides a type function')
 
   const err = /Pair: Must provide a first and second value/

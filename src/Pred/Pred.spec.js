@@ -24,6 +24,8 @@ test('Pred', t => {
 
   t.ok(isObject(Pred(unit)), 'returns an object')
 
+  t.equals(Pred(unit).constructor, Pred, 'provides TypeRep on constructor')
+
   const err = /Pred: Predicate function required/
   t.throws(Pred, err, 'throws with nothing')
   t.throws(p(undefined), err, 'throws with undefined')

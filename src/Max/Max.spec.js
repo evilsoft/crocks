@@ -20,6 +20,8 @@ test('Max', t => {
   t.ok(isFunction(Max.type), 'provides a type function')
   t.ok(isObject(Max(0)), 'returns an object')
 
+  t.equals(Max(0).constructor, Max, 'provides TypeRep on constructor')
+
   t.throws(Max, TypeError, 'throws with nothing')
   t.throws(m(identity), TypeError, 'throws with a function')
   t.throws(m(''), TypeError, 'throws with falsey string')

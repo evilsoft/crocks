@@ -36,7 +36,11 @@ function Min(n) {
     return Min(Math.min(x, m.valueOf()))
   }
 
-  return { inspect, valueOf, type, concat, empty }
+  return {
+    inspect, valueOf, type,
+    concat, empty,
+    constructor: Min
+  }
 }
 
 Min['@@implements'] = _implements(

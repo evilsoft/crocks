@@ -23,6 +23,8 @@ test('Const', t => {
 
   t.ok(isFunction(Const.type), 'provides a type function')
 
+  t.equals(Const(true).constructor, Const, 'provides TypeRep on constructor')
+
   t.throws(Const, TypeError, 'throws with no parameters')
 
   t.end()

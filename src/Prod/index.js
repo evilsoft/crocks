@@ -36,7 +36,11 @@ function Prod(n) {
     return Prod(x * m.valueOf())
   }
 
-  return { inspect, valueOf, type, concat, empty }
+  return {
+    inspect, valueOf, type,
+    concat, empty,
+    constructor: Prod
+  }
 }
 
 Prod['@@implements'] = _implements(

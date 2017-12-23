@@ -76,8 +76,9 @@ function Reader(runWith) {
   }
 
   return {
-    inspect, runWith, type,
-    map, ap, chain, of
+    inspect, runWith, type, map,
+    ap, chain, of,
+    constructor: Reader
   }
 }
 

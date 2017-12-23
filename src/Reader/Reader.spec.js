@@ -26,6 +26,8 @@ test('Reader', t => {
   t.ok(isFunction(Reader), 'is a function')
   t.ok(isObject(m), 'returns an object')
 
+  t.equals(Reader(unit).constructor, Reader, 'provides TypeRep on constructor')
+
   t.ok(isFunction(Reader.of), 'provides an of function')
   t.ok(isFunction(Reader.type), 'provides a type function')
   t.ok(isFunction(Reader.ask), 'provides an ask function')

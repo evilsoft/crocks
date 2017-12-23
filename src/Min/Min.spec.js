@@ -20,6 +20,8 @@ test('Min', t => {
   t.ok(isFunction(Min.type), 'provides a type function')
   t.ok(isObject(Min(0)), 'returns an object')
 
+  t.equals(Min(0).constructor, Min, 'provides TypeRep on constructor')
+
   t.throws(Min, TypeError, 'throws with nothing')
   t.throws(m(identity), TypeError, 'throws with a function')
   t.throws(m(''), TypeError, 'throws with falsey string')

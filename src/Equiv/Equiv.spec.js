@@ -27,6 +27,8 @@ test('Equiv', t => {
 
   t.ok(isObject(Equiv(isSame)), 'returns an object')
 
+  t.equals(Equiv(isSame).constructor, Equiv, 'provides TypeRep on constructor')
+
   const err = /Equiv: Comparison function required/
   t.throws(Equiv, err, 'throws with nothing')
   t.throws(e(undefined), err, 'throws with undefined')

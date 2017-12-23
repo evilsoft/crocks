@@ -58,9 +58,11 @@ function Const(x) {
 
   return {
     inspect, valueOf, type, equals,
-    concat, map, ap, chain
+    concat, map, ap, chain,
+    constructor: Const
   }
 }
+
 Const.type =
   type
 

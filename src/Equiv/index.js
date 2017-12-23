@@ -53,7 +53,8 @@ function Equiv(compare) {
 
   return {
     inspect, type, compareWith, valueOf,
-    contramap, concat, empty
+    contramap, concat, empty,
+    constructor: Equiv
   }
 }
 

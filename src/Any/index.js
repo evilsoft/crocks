@@ -36,7 +36,11 @@ function Any(b) {
     return Any(m.valueOf() || valueOf())
   }
 
-  return { inspect, valueOf, type, concat, empty }
+  return {
+    inspect, valueOf, type,
+    concat, empty,
+    constructor: Any
+  }
 }
 
 Any['@@implements'] = _implements(

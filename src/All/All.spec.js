@@ -15,7 +15,9 @@ test('All', t => {
   const m = bindFunc(All)
 
   t.ok(isFunction(All), 'is a function')
-  t.ok(isObject(All(0)), 'returns an object')
+  t.ok(isObject(All(false)), 'returns an object')
+
+  t.equals(All(true).constructor, All, 'provides TypeRep on constructor')
 
   t.ok(isFunction(All.empty), 'provides an empty function')
   t.ok(isFunction(All.type), 'provides a type function')

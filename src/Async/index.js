@@ -238,7 +238,8 @@ function Async(fn, parentCancel) {
   return {
     fork, toPromise, inspect, type,
     swap, coalesce, map, bimap, alt,
-    ap, chain, of
+    ap, chain, of,
+    constructor: Async
   }
 }
 

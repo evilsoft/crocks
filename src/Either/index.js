@@ -189,7 +189,8 @@ function Either(u) {
   return {
     inspect, either, type, concat,
     swap, coalesce, equals, map, bimap,
-    alt, ap, of, chain, sequence, traverse
+    alt, ap, of, chain, sequence, traverse,
+    constructor: Either
   }
 }
 

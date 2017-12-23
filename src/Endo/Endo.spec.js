@@ -20,6 +20,8 @@ test('Endo', t => {
   t.ok(isFunction(Endo), 'is a function')
   t.ok(isObject(Endo(identity)), 'returns an object')
 
+  t.equals(Endo(identity).constructor, Endo, 'provides TypeRep on constructor')
+
   t.ok(isFunction(Endo.empty), 'provides an empty function')
   t.ok(isFunction(Endo.type), 'provides a type function')
 

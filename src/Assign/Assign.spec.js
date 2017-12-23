@@ -17,6 +17,8 @@ test('Assign', t => {
   t.ok(isFunction(Assign), 'is a function')
   t.ok(isObject(Assign({})), 'returns an object')
 
+  t.equals(Assign({}).constructor, Assign, 'provides TypeRep on constructor')
+
   t.ok(isFunction(Assign.empty), 'provides an empty function')
   t.ok(isFunction(Assign.type), 'provides a type function')
 

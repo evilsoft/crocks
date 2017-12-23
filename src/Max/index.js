@@ -36,7 +36,11 @@ function Max(n) {
     return Max(Math.max(x, m.valueOf()))
   }
 
-  return { inspect, valueOf, type, concat, empty }
+  return {
+    inspect, valueOf, type,
+    concat, empty,
+    constructor: Max
+  }
 }
 
 Max['@@implements'] = _implements(

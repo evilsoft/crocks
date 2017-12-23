@@ -226,7 +226,8 @@ function List(x) {
     inspect, valueOf, toArray, head, tail, cons,
     type, equals, concat, empty, reduce, fold,
     filter, reject, map, ap, of, chain,
-    sequence, traverse
+    sequence, traverse,
+    constructor: List
   }
 }
 

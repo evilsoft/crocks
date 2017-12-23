@@ -37,7 +37,11 @@ function Assign(o) {
     return Assign(_object.assign(m.valueOf(), x))
   }
 
-  return { inspect, valueOf, type, concat, empty }
+  return {
+    inspect, valueOf,
+    type, concat, empty,
+    constructor: Assign
+  }
 }
 
 Assign['@@implements'] = _implements(

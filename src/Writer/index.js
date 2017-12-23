@@ -87,7 +87,8 @@ function _Writer(Monoid) {
     return {
       inspect, read, valueOf,
       log, type, equals, map,
-      ap, of, chain
+      ap, of, chain,
+      constructor: Writer
     }
   }
 
@@ -103,6 +104,5 @@ function _Writer(Monoid) {
 
   return Writer
 }
-
 
 module.exports = _Writer

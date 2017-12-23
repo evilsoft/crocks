@@ -29,6 +29,9 @@ test('Async', t => {
   t.ok(isFunction(Async.of), 'provides an of function')
   t.ok(isFunction(Async.type), 'provides a type function')
 
+  t.equals(Async.Resolved(3).constructor, Async, 'provides TypeRep on constructor on Resolved')
+  t.equals(Async.Rejected(3).constructor, Async, 'provides TypeRep on constructor on Rejected')
+
   t.ok(isFunction(Async.Resolved), 'provides a Resolved function')
   t.ok(isFunction(Async.Rejected), 'provides a Rejected function')
 

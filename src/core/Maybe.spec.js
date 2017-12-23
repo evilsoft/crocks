@@ -30,6 +30,9 @@ test('Maybe', t => {
   t.ok(isFunction(Maybe), 'is a function')
   t.ok(isObject(m), 'returns an object')
 
+  t.equals(Maybe.Just(2).constructor, Maybe, 'provides TypeRep on constructor for Just')
+  t.equals(Maybe.Nothing().constructor, Maybe, 'provides TypeRep on constructor for Nothing')
+
   t.ok(isFunction(Maybe.of), 'provides an of function')
   t.ok(isFunction(Maybe.type), 'provides a type function')
   t.ok(isFunction(Maybe.zero), 'provides a zero function')

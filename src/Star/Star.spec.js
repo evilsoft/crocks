@@ -27,6 +27,8 @@ test('Star', t => {
 
   t.ok(isFunction(Star.type), 'provides a type function')
 
+  t.equals(Star(unit).constructor, Star, 'provides TypeRep on constructor')
+
   t.ok(isObject(Star(unit)), 'returns an object')
 
   const err = /Star: Monad required for construction/

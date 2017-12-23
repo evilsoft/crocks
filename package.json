@@ -1,6 +1,6 @@
 {
   "name": "crocks",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "description": "A collection of well known Monadic Containers for your utter enjoyment.",
   "main": "./index.js",
   "scripts": {

@@ -11,7 +11,7 @@ const isSameType = require('./isSameType')
 const innerConcat = require('./innerConcat')
 
 test('innerConcat errors', t => {
-  const err = /MockCrock.concat\: /
+  const err = /MockCrock.concat:/
 
   const outer = bindFunc(x => innerConcat(Mock, Mock.of(Last(4)))(x))
 

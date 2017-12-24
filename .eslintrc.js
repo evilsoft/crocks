@@ -8,6 +8,9 @@ module.exports = {
   "parserOptions": {
     "sourceType": "module"
   },
+  "plugins": [
+    'markdown'
+  ],
   "rules": {
     "array-bracket-spacing": [ "error", "always" ],
     "arrow-spacing": [ "error" ],

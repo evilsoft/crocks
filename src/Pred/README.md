@@ -94,8 +94,8 @@ const empty =
 const notEmpty =
   Pred(not(isEmpty))
 
- empty
-    .runWith('')
+empty
+  .runWith('')
 //=> true
 
 notEmpty

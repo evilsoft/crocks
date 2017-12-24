@@ -21,6 +21,7 @@ comparison.
 
 ```js
 const Equiv = require('crocks/Equiv')
+
 const equals = require('crocks/pointfree/equals')
 
 // toString :: a -> String
@@ -62,6 +63,7 @@ convenience.
 
 ```js
 const Equiv = require('crocks/Equiv')
+
 const equals = require('crocks/pointfree/equals')
 
 const eq =
@@ -100,6 +102,8 @@ the boilerplate. `type` is available on both the Constructor and the Instance
 for convenience.
 
 ```js
+const Equiv = require('crocks/Equiv')
+
 const Endo = require('crocks/Endo')
 const equals = require('crocks/pointfree/equals')
 const isSameType = require('crocks/predicates/isSameType')
@@ -125,6 +129,7 @@ specified by the `Semigroup`. In the case of `Equiv`, the results of both
 
 ```js
 const Equiv = require('crocks/Equiv')
+
 const compareWith = require('crocks/pointfree/compareWith')
 const equals = require('crocks/pointfree/equals')
 const isSameType = require('crocks/predicates/isSameType')
@@ -195,6 +200,7 @@ function.
 
 ```js
 const Equiv = require('crocks/Equiv')
+
 const equals = require('crocks/pointfree/equals')
 
 // length :: String -> Number
@@ -243,6 +249,7 @@ instance will result in the underlying curried equivalence function.
 
 ```js
 const Equiv = require('crocks/Equiv')
+
 const compose = require('crocks/helpers/compose')
 const equals = require('crocks/pointfree/equals')
 const propOr = require('crocks/helpers/propOr')

@@ -117,7 +117,7 @@ Arrow.type() //=> "Arrow"
 
 isSameType(Arrow, Arrow(x => x + 3))  //=> true
 isSameType(Arrow, Arrow)              //=> true
-isSameType(Arrow, Idenity(0))         //=> false
+isSameType(Arrow, Identity(0))        //=> false
 isSameType(Arrow(I), Identity)        //=> false
 ```
 

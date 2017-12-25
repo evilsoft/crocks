@@ -8,6 +8,7 @@ disjunction (OR) on their coerced `Boolean` values, mapping truth-y values to
 
 ```js
 const Any = require('crocks/Any')
+
 const isNumber = require('crocks/predicates/isNumber')
 const mconcatMap = require('crocks/helpers/mconcat')
 
@@ -47,6 +48,8 @@ the case of `Any` the result of `empty` is `false`. `empty` is available on both
 the Constructor and the Instance for convenience.
 
 ```js
+const Any = require('crocks/Any')
+
 Any.empty() //=> Any false
 
 Any(true).concat(Any.empty())   //=> Any true
@@ -68,6 +71,8 @@ the boilerplate. `type` is available on both the Constructor and the Instance
 for convenience.
 
 ```js
+const Any = require('crocks/Any')
+
 const Assign = require('crocks/Assign')
 const isSameType = require('crocks/predicates/isSameType')
 
@@ -93,6 +98,8 @@ specified by the `Semigroup`. In the case of `Any`, it will combine the two
 using logical OR (disjunction).
 
 ```js
+const Any = require('crocks/Any')
+
 Any(true).concat(Any(true))   //=> Any true
 Any(true).concat(Any(false))  //=> Any true
 Any(false).concat(Any(true))  //=> Any true
@@ -111,11 +118,13 @@ helper functions that ship with `crocks`. Calling `value` on an `Any` instance
 will result in the underlying `Boolean` value.
 
 ```js
+const Any = require('crocks/Any')
+
 Any(0).valueOf()        //=> false
 Any('string').valueOf() //=> true
 
 //=> true
 Any(45)
- .concat('')
- .valueOf()
+  .concat('')
+  .valueOf()
 ```

@@ -1,0 +1,354 @@
+@font-face {
+  font-family: "icon-12";
+  src: url('./icon-12.eot');
+  src: url('./icon-12.eot?#iefix') format('eot'),
+       url('./icon-12.woff') format('woff'),
+       url('./icon-12.ttf') format('truetype'),
+       url('./icon-12.svg#icon-12') format('svg');
+}
+
+[class^="icon-12-"], [class*="icon-12-"] {
+  speak: none;
+  font-family: "icon-12";
+  font-size: 16px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  line-height: 100%;
+  letter-spacing: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+.icon-12-alert:before {
+  content: "\E001";
+}
+
+.icon-12-apps:before {
+  content: "\E002";
+}
+
+.icon-12-arrow-down-rod:before {
+  content: "\E003";
+}
+
+.icon-12-arrow-down-short:before {
+  content: "\E004";
+}
+
+.icon-12-arrow-increase:before {
+  content: "\E005";
+}
+
+.icon-12-arrow-left-rod:before {
+  content: "\E006";
+}
+
+.icon-12-arrow-left-short:before {
+  content: "\E007";
+}
+
+.icon-12-arrow-right-rod:before {
+  content: "\E008";
+}
+
+.icon-12-arrow-right-short:before {
+  content: "\E009";
+}
+
+.icon-12-arrow-up-rod:before {
+  content: "\E00A";
+}
+
+.icon-12-arrow-up-short:before {
+  content: "\E00B";
+}
+
+.icon-12-arrows-expand:before {
+  content: "\E00C";
+}
+
+.icon-12-arrows:before {
+  content: "\E00D";
+}
+
+.icon-12-balloon-topic:before {
+  content: "\E00E";
+}
+
+.icon-12-bell-off:before {
+  content: "\E00F";
+}
+
+.icon-12-bell:before {
+  content: "\E010";
+}
+
+.icon-12-bookmark:before {
+  content: "\E011";
+}
+
+.icon-12-briefcase:before {
+  content: "\E012";
+}
+
+.icon-12-bug:before {
+  content: "\E013";
+}
+
+.icon-12-building:before {
+  content: "\E014";
+}
+
+.icon-12-camera:before {
+  content: "\E015";
+}
+
+.icon-12-card:before {
+  content: "\E016";
+}
+
+.icon-12-cart:before {
+  content: "\E017";
+}
+
+.icon-12-check:before {
+  content: "\E018";
+}
+
+.icon-12-clock:before {
+  content: "\E019";
+}
+
+.icon-12-close-short:before {
+  content: "\E01A";
+}
+
+.icon-12-cloud:before {
+  content: "\E01B";
+}
+
+.icon-12-code-file:before {
+  content: "\E01C";
+}
+
+.icon-12-collections:before {
+  content: "\E01D";
+}
+
+.icon-12-database:before {
+  content: "\E01E";
+}
+
+.icon-12-download:before {
+  content: "\E01F";
+}
+
+.icon-12-ellipses:before {
+  content: "\E020";
+}
+
+.icon-12-exclamation:before {
+  content: "\E021";
+}
+
+.icon-12-external:before {
+  content: "\E022";
+}
+
+.icon-12-eye-off:before {
+  content: "\E023";
+}
+
+.icon-12-eye:before {
+  content: "\E024";
+}
+
+.icon-12-facebook:before {
+  content: "\E025";
+}
+
+.icon-12-file:before {
+  content: "\E026";
+}
+
+.icon-12-flag:before {
+  content: "\E027";
+}
+
+.icon-12-flash-off:before {
+  content: "\E028";
+}
+
+.icon-12-flash:before {
+  content: "\E029";
+}
+
+.icon-12-folder:before {
+  content: "\E02A";
+}
+
+.icon-12-forbidden:before {
+  content: "\E02B";
+}
+
+.icon-12-fork:before {
+  content: "\E02C";
+}
+
+.icon-12-gear:before {
+  content: "\E02D";
+}
+
+.icon-12-github:before {
+  content: "\E02E";
+}
+
+.icon-12-google:before {
+  content: "\E02F";
+}
+
+.icon-12-graph:before {
+  content: "\E030";
+}
+
+.icon-12-groups:before {
+  content: "\E031";
+}
+
+.icon-12-hash:before {
+  content: "\E032";
+}
+
+.icon-12-heart-full:before {
+  content: "\E033";
+}
+
+.icon-12-house:before {
+  content: "\E034";
+}
+
+.icon-12-image:before {
+  content: "\E035";
+}
+
+.icon-12-info-card:before {
+  content: "\E036";
+}
+
+.icon-12-info:before {
+  content: "\E037";
+}
+
+.icon-12-leave:before {
+  content: "\E038";
+}
+
+.icon-12-link:before {
+  content: "\E039";
+}
+
+.icon-12-lock:before {
+  content: "\E03A";
+}
+
+.icon-12-magnifier:before {
+  content: "\E03B";
+}
+
+.icon-12-mail:before {
+  content: "\E03C";
+}
+
+.icon-12-map:before {
+  content: "\E03D";
+}
+
+.icon-12-menu:before {
+  content: "\E03E";
+}
+
+.icon-12-minus:before {
+  content: "\E03F";
+}
+
+.icon-12-module:before {
+  content: "\E040";
+}
+
+.icon-12-overlap:before {
+  content: "\E041";
+}
+
+.icon-12-pause:before {
+  content: "\E042";
+}
+
+.icon-12-pen:before {
+  content: "\E043";
+}
+
+.icon-12-people:before {
+  content: "\E044";
+}
+
+.icon-12-person-card-2:before {
+  content: "\E045";
+}
+
+.icon-12-person-card-3:before {
+  content: "\E046";
+}
+
+.icon-12-person:before {
+  content: "\E047";
+}
+
+.icon-12-persons:before {
+  content: "\E048";
+}
+
+.icon-12-pin:before {
+  content: "\E049";
+}
+
+.icon-12-play:before {
+  content: "\E04A";
+}
+
+.icon-12-plus:before {
+  content: "\E04B";
+}
+
+.icon-12-post:before {
+  content: "\E04C";
+}
+
+.icon-12-rocket:before {
+  content: "\E04D";
+}
+
+.icon-12-spinner-double-arrow:before {
+  content: "\E04E";
+}
+
+.icon-12-star:before {
+  content: "\E04F";
+}
+
+.icon-12-table:before {
+  content: "\E050";
+}
+
+.icon-12-trash:before {
+  content: "\E051";
+}
+
+.icon-12-twitter:before {
+  content: "\E052";
+}
+
+.icon-12-upload:before {
+  content: "\E053";
+}

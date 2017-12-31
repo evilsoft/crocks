@@ -17,6 +17,8 @@ test('Sum', t => {
   t.ok(isFunction(Sum), 'is a function')
   t.ok(isObject(Sum(0)), 'returns an object')
 
+  t.equals(Sum(0).constructor, Sum, 'provides TypeRep on constructor')
+
   t.ok(isFunction(Sum.empty), 'provides an empty function')
   t.ok(isFunction(Sum.type), 'provides a type function')
 

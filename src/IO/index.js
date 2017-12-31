@@ -57,7 +57,8 @@ function IO(run) {
 
   return {
     inspect, run, type,
-    map, ap, of, chain
+    map, ap, of, chain,
+    constructor: IO
   }
 }
 

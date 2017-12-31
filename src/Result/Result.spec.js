@@ -30,6 +30,9 @@ test('Result', t => {
   t.ok(isFunction(Result), 'is a function')
   t.ok(isObject(m), 'returns an object')
 
+  t.equals(Result.Ok(true).constructor, Result, 'provides TypeRep on constructor for Ok')
+  t.equals(Result.Err(true).constructor, Result, 'provides TypeRep on constructor for Err')
+
   t.ok(isFunction(Result.of), 'provides an of function')
   t.ok(isFunction(Result.type), 'provides a type function')
   t.ok(isFunction(Result.Err), 'provides an Err function')

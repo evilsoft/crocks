@@ -101,7 +101,8 @@ function Identity(x) {
   return {
     inspect, valueOf, type, equals,
     concat, map, ap, of, chain,
-    sequence, traverse
+    sequence, traverse,
+    constructor: Identity
   }
 }
 

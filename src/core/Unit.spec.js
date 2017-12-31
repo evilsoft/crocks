@@ -25,6 +25,8 @@ test('Unit', t => {
   t.ok(isFunction(Unit), 'is a function')
   t.ok(isObject(m), 'returns an object')
 
+  t.equals(Unit(false).constructor, Unit, 'provides TypeRep on constructor')
+
   t.ok(isFunction(Unit.type), 'provides a type function')
   t.ok(isFunction(Unit.empty), 'provides an empty function')
 

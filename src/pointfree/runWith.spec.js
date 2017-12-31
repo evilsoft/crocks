@@ -18,17 +18,18 @@ test('runWith pointfree', t => {
 
   t.ok(isFunction(runWith), 'is a function')
 
-  t.throws(f(13, undefined), TypeError, 'throws if passed undefined')
-  t.throws(f(13, null), TypeError, 'throws if passed null')
-  t.throws(f(13, 0), TypeError, 'throws if passed a falsey number')
-  t.throws(f(13, 1), TypeError, 'throws if passed a truthy number')
-  t.throws(f(13, ''), TypeError, 'throws if passed a falsey string')
-  t.throws(f(13, 'string'), TypeError, 'throws if passed a truthy string')
-  t.throws(f(13, false), TypeError, 'throws if passed false')
-  t.throws(f(13, true), TypeError, 'throws if passed true')
-  t.throws(f(13, []), TypeError, 'throws if passed an array')
-  t.throws(f(13, {}), TypeError, 'throws if passed an object')
-  t.throws(f(13, unit), TypeError, 'throws if passed a function')
+  const err = /runWith: Arrow, Endo, Pred, Reader, Star or State required for second argument/
+  t.throws(f(13, undefined), err, 'throws if passed undefined')
+  t.throws(f(13, null), err, 'throws if passed null')
+  t.throws(f(13, 0), err, 'throws if passed a falsey number')
+  t.throws(f(13, 1), err, 'throws if passed a truthy number')
+  t.throws(f(13, ''), err, 'throws if passed a falsey string')
+  t.throws(f(13, 'string'), err, 'throws if passed a truthy string')
+  t.throws(f(13, false), err, 'throws if passed false')
+  t.throws(f(13, true), err, 'throws if passed true')
+  t.throws(f(13, []), err, 'throws if passed an array')
+  t.throws(f(13, {}), err, 'throws if passed an object')
+  t.throws(f(13, unit), err, 'throws if passed a function')
 
   const result = runWith(23)(m)
 

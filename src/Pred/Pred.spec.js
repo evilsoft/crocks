@@ -24,17 +24,20 @@ test('Pred', t => {
 
   t.ok(isObject(Pred(unit)), 'returns an object')
 
-  t.throws(Pred, TypeError, 'throws with nothing')
-  t.throws(p(undefined), TypeError, 'throws with undefined')
-  t.throws(p(null), TypeError, 'throws with undefined')
-  t.throws(p(0), TypeError, 'throws with falsey number')
-  t.throws(p(1), TypeError, 'throws with truthy number')
-  t.throws(p(''), TypeError, 'throws with falsey string')
-  t.throws(p('string'), TypeError, 'throws with truthy string')
-  t.throws(p(false), TypeError, 'throws with false')
-  t.throws(p(true), TypeError, 'throws with true')
-  t.throws(p({}), TypeError, 'throws with an object')
-  t.throws(p([]), TypeError, 'throws with an array')
+  t.equals(Pred(unit).constructor, Pred, 'provides TypeRep on constructor')
+
+  const err = /Pred: Predicate function required/
+  t.throws(Pred, err, 'throws with nothing')
+  t.throws(p(undefined), err, 'throws with undefined')
+  t.throws(p(null), err, 'throws with undefined')
+  t.throws(p(0), err, 'throws with falsey number')
+  t.throws(p(1), err, 'throws with truthy number')
+  t.throws(p(''), err, 'throws with falsey string')
+  t.throws(p('string'), err, 'throws with truthy string')
+  t.throws(p(false), err, 'throws with false')
+  t.throws(p(true), err, 'throws with true')
+  t.throws(p({}), err, 'throws with an object')
+  t.throws(p([]), err, 'throws with an array')
 
   t.doesNotThrow(p(unit), 'allows a function')
 
@@ -62,6 +65,8 @@ test('Pred inspect', t => {
 
 test('Pred type', t => {
   t.equal(Pred(unit).type(), 'Pred', 'type returns Pred')
+  t.equal(Pred(unit).type(), Pred.type(), 'constructor and instance return same value')
+
   t.end()
 })
 
@@ -105,16 +110,17 @@ test('Pred runWith', t => {
 test('Pred contramap errors', t => {
   const cmap = bindFunc(Pred(unit).contramap)
 
-  t.throws(cmap(undefined), TypeError, 'throws with undefined')
-  t.throws(cmap(null), TypeError, 'throws with null')
-  t.throws(cmap(0), TypeError, 'throws with falsey number')
-  t.throws(cmap(1), TypeError, 'throws with truthy number')
-  t.throws(cmap(''), TypeError, 'throws with falsey string')
-  t.throws(cmap('string'), TypeError, 'throws with truthy string')
-  t.throws(cmap(false), TypeError, 'throws with false')
-  t.throws(cmap(true), TypeError, 'throws with true')
-  t.throws(cmap([]), TypeError, 'throws with an array')
-  t.throws(cmap({}), TypeError, 'throws with an object')
+  const err = /Pred.contramap: Function required/
+  t.throws(cmap(undefined), err, 'throws with undefined')
+  t.throws(cmap(null), err, 'throws with null')
+  t.throws(cmap(0), err, 'throws with falsey number')
+  t.throws(cmap(1), err, 'throws with truthy number')
+  t.throws(cmap(''), err, 'throws with falsey string')
+  t.throws(cmap('string'), err, 'throws with truthy string')
+  t.throws(cmap(false), err, 'throws with false')
+  t.throws(cmap(true), err, 'throws with true')
+  t.throws(cmap([]), err, 'throws with an array')
+  t.throws(cmap({}), err, 'throws with an object')
 
   t.doesNotThrow(cmap(unit), 'allows functions')
 
@@ -162,17 +168,18 @@ test('Pred concat functionality', t => {
 
   const cat = bindFunc(a.concat)
 
-  t.throws(cat(undefined), TypeError, 'throws with undefined')
-  t.throws(cat(null), TypeError, 'throws with null')
-  t.throws(cat(0), TypeError, 'throws with falsey number')
-  t.throws(cat(1), TypeError, 'throws with truthy number')
-  t.throws(cat(''), TypeError, 'throws with falsey string')
-  t.throws(cat('string'), TypeError, 'throws with truthy string')
-  t.throws(cat(false), TypeError, 'throws with false')
-  t.throws(cat(true), TypeError, 'throws with true')
-  t.throws(cat([]), TypeError, 'throws with an array')
-  t.throws(cat({}), TypeError, 'throws with an object')
-  t.throws(cat(notPred), TypeError, 'throws when passed non-Pred')
+  const err = /Pred.concat: Pred required/
+  t.throws(cat(undefined), err, 'throws with undefined')
+  t.throws(cat(null), err, 'throws with null')
+  t.throws(cat(0), err, 'throws with falsey number')
+  t.throws(cat(1), err, 'throws with truthy number')
+  t.throws(cat(''), err, 'throws with falsey string')
+  t.throws(cat('string'), err, 'throws with truthy string')
+  t.throws(cat(false), err, 'throws with false')
+  t.throws(cat(true), err, 'throws with true')
+  t.throws(cat([]), err, 'throws with an array')
+  t.throws(cat({}), err, 'throws with an object')
+  t.throws(cat(notPred), err, 'throws when passed non-Pred')
 
   t.equal(a.concat(a).runWith(), true, 'true to true reports true')
   t.equal(a.concat(b).runWith(), false, 'true to false reports false')

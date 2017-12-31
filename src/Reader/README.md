@@ -147,7 +147,7 @@ Reader.type() //=> 'Reader'
 
 isSameType(Reader, Reader.of(76))   //=> true
 isSameType(Reader, Reader)          //=> true
-isSameType(Reader, Idenity(0))      //=> false
+isSameType(Reader, Identity(0))     //=> false
 isSameType(Reader(I), Identity)     //=> false
 ```
 
@@ -192,7 +192,7 @@ const lengthObj =
 
 // addLength :: Object -> Redaer Array Object
 const addLength = x =>
- ask(propOr('list', []))
+  ask(propOr('list', []))
     .map(B(assign(x), lengthObj))
 
 Reader.of({ num: 27 })
@@ -454,6 +454,7 @@ the form of `a -> m b` into a function that can be `chain`ed with the `ReaderT`.
 Although, [`liftFn`](#liftfn) can be used to remove the composition boilerplate
 and promote and `a -> m b` function.
 
+<!-- eslint-disable no-console -->
 ```js
 const ReaderT = require('crocks/Reader/ReaderT')
 const Async = require('crocks/Async')
@@ -629,7 +630,7 @@ envToUpper
 //=> Nothing
 
 envToUpper
-  .runWith("hola")
+  .runWith('hola')
 //=> Just "HOLA"
 
 ```

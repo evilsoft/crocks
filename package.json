@@ -1,6 +1,6 @@
 {
   "name": "crocks",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "description": "A collection of well known Monadic Containers for your utter enjoyment.",
   "main": "./index.js",
   "scripts": {
@@ -9,7 +9,7 @@
     "build:publish": "npm test && ./bin/publish",
     "build:dist": "webpack && uglifyjs build/dist/crocks.js -c \"warnings=false\" -m -o build/dist/crocks.min.js",
     "build": "rm -rf build && buble -i src -o build && npm run build:dist",
-    "lint": "eslint .",
+    "lint": "eslint --ext .md,.js .",
     "spec:coverage": "nyc npm run spec:build",
     "spec:dev": "nodemon -q -e js -w src -x 'npm run spec:src -s | tap-spec'",
     "spec:build": "npm run build && tape build/**/*.spec.js build/*.spec.js",
@@ -49,15 +49,16 @@
     ]
   },
   "devDependencies": {
-    "buble": "^0.15.2",
-    "coveralls": "^2.11.15",
-    "eslint": "^3.19.0",
+    "buble": "^0.18.0",
+    "coveralls": "^3.0.0",
+    "eslint": "^4.13.1",
+    "eslint-plugin-markdown": "^1.0.0-beta.6",
     "nodemon": "^1.9.2",
-    "nyc": "^10.1.2",
-    "sinon": "^2.1.0",
+    "nyc": "^11.4.1",
+    "sinon": "^4.1.3",
     "tap-spec": "^4.1.1",
     "tape": "^4.6.0",
-    "uglify-js": "^2.7.0",
-    "webpack": "^2.3.3"
+    "uglify-js": "^3.2.2",
+    "webpack": "^3.10.0"
   }
 }

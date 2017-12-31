@@ -1,5 +1,30 @@
 # Change Log for `crocks`
 
+v0.8.2 -- December 22, 2017
+--
+### Additions
+* READMES:
+  * `Equiv`
+  * `Pred`
+  * `Reader`
+  * `ReaderT`
+* Crocks:
+  * `Equiv`
+  * `ReaderT`
+* Helpers:
+  * `propOr`
+  * `propPathOr`
+
+### Bug fixes
+* `propPath` would throw when it encountered `NaN` or `null` values in the path
+
+### Pull Requests
+* [#156 - Add `ReaderT` and Documentation for both `Reader` and `ReaderT`](https://github.com/evilsoft/crocks/pull/156)
+* [#158 - Add `propOr` and `propPathOr` and Documentation for both](https://github.com/evilsoft/crocks/pull/158)
+* [#160 - `propPath` will no longer throw with `NaN` and `null` values.](https://github.com/evilsoft/crocks/pull/160)
+* [#161 - Add the `Equiv` datatype](https://github.com/evilsoft/crocks/pull/161)
+* [#166 - Add Documentation for the `Pred` datatype](https://github.com/evilsoft/crocks/pull/166)
+
 v0.8.1 -- November 14, 2017
 --
 ### Additions
@@ -10,8 +35,7 @@ v0.8.1 -- November 14, 2017
 * `runWith` on `State` did not report an error unless one of the
   methods were called. Now it throws if the result is not a `Pair`
   for all calls to `runWith`
-* Update path on branch helper on README to point to location
-un `Pair`
+* Update path on branch helper on README to point to location in `Pair`
 
 
 ### Pull Requests

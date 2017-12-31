@@ -26,6 +26,8 @@ test('Identity', t => {
   t.ok(isFunction(Identity), 'is a function')
   t.ok(isObject(m), 'returns an object')
 
+  t.equals(Identity(true).constructor, Identity, 'provides TypeRep on constructor')
+
   t.ok(isFunction(Identity.of), 'provides an of function')
   t.ok(isFunction(Identity.type), 'provides a type function')
 

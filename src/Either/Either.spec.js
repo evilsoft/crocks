@@ -30,6 +30,9 @@ test('Either', t => {
   t.ok(isFunction(Either), 'is a function')
   t.ok(isObject(m), 'returns an object')
 
+  t.equals(Either.Right(0).constructor, Either, 'provides TypeRep on constructor for Right')
+  t.equals(Either.Left(0).constructor, Either, 'provides TypeRep on constructor for Left')
+
   t.ok(isFunction(Either.of), 'provides an of function')
   t.ok(isFunction(Either.type), 'provides a type function')
   t.ok(isFunction(Either.Left), 'provides a Left function')

@@ -34,7 +34,11 @@ function Endo(runWith) {
     return Endo(compose(m.valueOf(), valueOf()))
   }
 
-  return { inspect, valueOf, type, concat, empty, runWith }
+  return {
+    inspect, valueOf, type,
+    concat, empty, runWith,
+    constructor: Endo
+  }
 }
 
 Endo['@@implements'] = _implements(

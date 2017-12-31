@@ -4,6 +4,7 @@
   "description": "A collection of well known Monadic Containers for your utter enjoyment.",
   "main": "./index.js",
   "scripts": {
+    "setup": "./bin/setup",
     "preversion": "npm run build",
     "postpublish": "npm run docs:deploy",
     "build:publish": "npm test && ./bin/publish",

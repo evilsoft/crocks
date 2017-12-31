@@ -1,6 +1,7 @@
 node_modules
 build
 coverage
+docs
 
 README.md
 !src/**/README.md

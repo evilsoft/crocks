@@ -1,0 +1,105 @@
+{namespace tutorial}
+
+/**
+ * @param content
+ * @param? elementClasses
+ * @param page
+ * @param site
+ */
+{template .render}
+  <div class="{$elementClasses ?: 'main'}">
+    <main class="content">
+      <div class="tutorial">
+        {if $page}
+          {call .sidebar}
+            {param page: $site.index.children['tutorials'].children[$page.parentId] /}
+          {/call}
+          {call .tutorials data="all"}
+            {param content: $content /}
+            {param page: $page /}
+            {param site: $site /}
+          {/call}
+        {/if}
+      </div>
+    </main>
+  </div>
+{/template}
+
+/**
+ * @param content
+ * @param page
+ * @param site
+ */
+{template .tutorials}
+  <div class="sidebar-offset">
+    {call Topbar.render}
+      {param items: $site.topbar /}
+      {param style: 'topbar-light' /}
+      {param logo: [
+        'text': $site.title,
+        'icon': $site.icon,
+        'href': $site.basePath
+      ] /}
+    {/call}
+
+    <div class="container">
+      <h6 class="tutorial-title">
+        {$site.index.children['tutorials'].children[$page.parentId].tutorialTitle}
+      </h6>
+      {call TutorialTimer.render /}
+      <div class="container-blog card">
+        {$content}
+        {call .footerButtons }
+          {param page: $page /}
+          {param site: $site /}
+        {/call}
+      </div>
+    </div>
+  </div>
+{/template}
+
+/**
+ * @param page
+ * @param site
+ */
+{template .footerButtons}
+  <div class="tutorial-page-nav">
+    {let $tutorialObject: $site.index.children['tutorials'].children[$page.parentId] /}
+    {if $page.weight < length($tutorialObject.childIds)}
+      {if $page.buttonTitle}
+        {let $nextPageUrl: $tutorialObject.children[$tutorialObject.childIds[$page.weight]].url /}
+        <a href="{$nextPageUrl}" class="btn btn-accent btn-sm">
+          {$page.buttonTitle}
+        </a>
+      {/if}
+    {/if}
+  </div>
+{/template}
+
+/**
+ * @param page
+ */
+{template .sidebar}
+  <div class="sidebar-navigation">
+    <nav class="sidebar">
+      {call ElectricNavigation.render}
+        {param listClasses: 'sidebar-list' /}
+        {param listItemClasses: 'sidebar-item' /}
+        {param anchorVariant: 'tutorial' /}
+        {param section: $page /}
+      {/call}
+    </nav>
+  </div>
+{/template}
+
+/**
+ * @param page
+ */
+{deltemplate ElectricNavigation.anchor variant="'tutorial'"}
+  <a class="sidebar-link{$page.active ? ' sidebar-link-selected' : ''}" href="{$page.url}" data-time="{$page.time}">
+    <span class="before"></span>
+    <span class="tutorial-step">{$page.weight}</span>
+    <span class="section-title">{$page.title}</span>
+    <span class="after"></span>
+  </a>
+{/deltemplate}

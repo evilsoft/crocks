@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([7,13,14,15],[
+webpackJsonppageComponent([5,13,14,15],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19019,8 +19019,8 @@ function $guide(opt_data, opt_ignored, opt_ijData) {
           'class', 'container-hybrid');
         ie_open('h1', null, null,
             'class', 'title');
-          var dyn0 = opt_data.page.title;
-          if (typeof dyn0 == 'function') dyn0(); else if (dyn0 != null) itext(dyn0);
+          var dyn2 = opt_data.page.title;
+          if (typeof dyn2 == 'function') dyn2(); else if (dyn2 != null) itext(dyn2);
           itext(' Guide');
         ie_close('h1');
       ie_close('div');
@@ -19033,8 +19033,8 @@ function $guide(opt_data, opt_ignored, opt_ijData) {
             'class', 'docs-content col-xs-16 col-md-9');
           ie_open('div', null, null,
               'class', 'guide-content');
-            var dyn1 = opt_data.content;
-            if (typeof dyn1 == 'function') dyn1(); else if (dyn1 != null) itext(dyn1);
+            var dyn3 = opt_data.content;
+            if (typeof dyn3 == 'function') dyn3(); else if (dyn3 != null) itext(dyn3);
           ie_close('div');
           if (opt_data.site.githubRepo) {
             $contribute(opt_data, null, opt_ijData);
@@ -19077,7 +19077,7 @@ function $contribute(opt_data, opt_ignored, opt_ijData) {
       ie_open('p');
         itext('Contribute on Github! ');
         ie_open('a', null, null,
-            'href', 'https://github.com/' + opt_data.site.githubRepo + '/tree/master/' + opt_data.page.srcFilePath,
+            'href', 'https://github.com/' + opt_data.site.githubRepo + '/tree/master/docs/' + opt_data.page.srcFilePath,
             'class', 'contribute-link',
             'target', '_blank');
           itext('Edit this section');
@@ -19174,8 +19174,8 @@ function $render(opt_data, opt_ignored, opt_ijData) {
     ie_open('main', null, null,
         'class', 'content');
       $templateAlias1({items: opt_data.site.topbar, style: 'topbar-light', logo: {text: opt_data.site.title, icon: opt_data.site.icon, href: opt_data.site.basePath}}, null, opt_ijData);
-      var dyn2 = opt_data.content;
-      if (typeof dyn2 == 'function') dyn2(); else if (dyn2 != null) itext(dyn2);
+      var dyn4 = opt_data.content;
+      if (typeof dyn4 == 'function') dyn4(); else if (dyn4 != null) itext(dyn4);
     ie_close('main');
   ie_close('div');
 }
@@ -19297,14 +19297,14 @@ function $tutorials(opt_data, opt_ignored, opt_ijData) {
         'class', 'container');
       ie_open('h6', null, null,
           'class', 'tutorial-title');
-        var dyn3 = opt_data.site.index.children['tutorials'].children[opt_data.page.parentId].tutorialTitle;
-        if (typeof dyn3 == 'function') dyn3(); else if (dyn3 != null) itext(dyn3);
+        var dyn5 = opt_data.site.index.children['tutorials'].children[opt_data.page.parentId].tutorialTitle;
+        if (typeof dyn5 == 'function') dyn5(); else if (dyn5 != null) itext(dyn5);
       ie_close('h6');
       $templateAlias2(null, null, opt_ijData);
       ie_open('div', null, null,
           'class', 'container-blog card');
-        var dyn4 = opt_data.content;
-        if (typeof dyn4 == 'function') dyn4(); else if (dyn4 != null) itext(dyn4);
+        var dyn6 = opt_data.content;
+        if (typeof dyn6 == 'function') dyn6(); else if (dyn6 != null) itext(dyn6);
         $footerButtons(opt_data, null, opt_ijData);
       ie_close('div');
     ie_close('div');
@@ -19326,15 +19326,15 @@ if (goog.DEBUG) {
 function $footerButtons(opt_data, opt_ignored, opt_ijData) {
   ie_open('div', null, null,
       'class', 'tutorial-page-nav');
-    var tutorialObject__soy76 = opt_data.site.index.children['tutorials'].children[opt_data.page.parentId];
-    if (opt_data.page.weight < tutorialObject__soy76.childIds.length) {
+    var tutorialObject__soy100 = opt_data.site.index.children['tutorials'].children[opt_data.page.parentId];
+    if (opt_data.page.weight < tutorialObject__soy100.childIds.length) {
       if (opt_data.page.buttonTitle) {
-        var nextPageUrl__soy81 = tutorialObject__soy76.children[tutorialObject__soy76.childIds[opt_data.page.weight]].url;
+        var nextPageUrl__soy105 = tutorialObject__soy100.children[tutorialObject__soy100.childIds[opt_data.page.weight]].url;
         ie_open('a', null, null,
-            'href', nextPageUrl__soy81,
+            'href', nextPageUrl__soy105,
             'class', 'btn btn-accent btn-sm');
-          var dyn5 = opt_data.page.buttonTitle;
-          if (typeof dyn5 == 'function') dyn5(); else if (dyn5 != null) itext(dyn5);
+          var dyn7 = opt_data.page.buttonTitle;
+          if (typeof dyn7 == 'function') dyn7(); else if (dyn7 != null) itext(dyn7);
         ie_close('a');
       }
     }
@@ -19375,7 +19375,7 @@ if (goog.DEBUG) {
  * @return {void}
  * @suppress {checkTypes}
  */
-function __deltemplate_s96_88c0813b(opt_data, opt_ignored, opt_ijData) {
+function __deltemplate_s120_88c0813b(opt_data, opt_ignored, opt_ijData) {
   ie_open('a', null, null,
       'class', 'sidebar-link' + (opt_data.page.active ? ' sidebar-link-selected' : ''),
       'href', opt_data.page.url,
@@ -19384,23 +19384,23 @@ function __deltemplate_s96_88c0813b(opt_data, opt_ignored, opt_ijData) {
         'class', 'before');
     ie_open('span', null, null,
         'class', 'tutorial-step');
-      var dyn6 = opt_data.page.weight;
-      if (typeof dyn6 == 'function') dyn6(); else if (dyn6 != null) itext(dyn6);
+      var dyn8 = opt_data.page.weight;
+      if (typeof dyn8 == 'function') dyn8(); else if (dyn8 != null) itext(dyn8);
     ie_close('span');
     ie_open('span', null, null,
         'class', 'section-title');
-      var dyn7 = opt_data.page.title;
-      if (typeof dyn7 == 'function') dyn7(); else if (dyn7 != null) itext(dyn7);
+      var dyn9 = opt_data.page.title;
+      if (typeof dyn9 == 'function') dyn9(); else if (dyn9 != null) itext(dyn9);
     ie_close('span');
     ie_void('span', null, null,
         'class', 'after');
   ie_close('a');
 }
-exports.__deltemplate_s96_88c0813b = __deltemplate_s96_88c0813b;
+exports.__deltemplate_s120_88c0813b = __deltemplate_s120_88c0813b;
 if (goog.DEBUG) {
-  __deltemplate_s96_88c0813b.soyTemplateName = 'tutorial.__deltemplate_s96_88c0813b';
+  __deltemplate_s120_88c0813b.soyTemplateName = 'tutorial.__deltemplate_s120_88c0813b';
 }
-soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'tutorial', 0, __deltemplate_s96_88c0813b);
+soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'tutorial', 0, __deltemplate_s120_88c0813b);
 
 exports.render.params = ["content","elementClasses","page","site"];
 exports.render.types = {"content":"any","elementClasses":"any","page":"any","site":"any"};
@@ -28176,12 +28176,14 @@ exports.default = parseFromAnchor;
 /* 218 */,
 /* 219 */,
 /* 220 */,
-/* 221 */
+/* 221 */,
+/* 222 */,
+/* 223 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "vXFVU", function() { return vXFVU; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "lTFWS", function() { return lTFWS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28193,15 +28195,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var templates;
 goog.loadModule(function(exports) {
 
-// This file was automatically generated from monoids.soy.
+// This file was automatically generated from predicate-functions.soy.
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace vXFVU.
+ * @fileoverview Templates in namespace lTFWS.
  * @public
  */
 
-goog.module('vXFVU.incrementaldom');
+goog.module('lTFWS.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28233,313 +28235,457 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var param666 = function() {
+  var param689 = function() {
     ie_open('h3');
-      itext('Monoids');
+      itext('Predicate Functions');
     ie_close('h3');
     ie_open('p');
-      itext('Each ');
+      itext('All functions in this group have a signature of ');
       ie_open('code');
-        itext('Monoid');
+        itext('* -> Boolean');
       ie_close('code');
-      itext(' provides a means to represent a binary operation and is usually locked down to a specific type. These are great when you need to combine a list of values down to one value. In this library, any ADT that provides both an');
+      itext(' and are used with the many predicate based functions that ship with ');
       ie_open('code');
-        itext('empty');
+        itext('crocks');
       ie_close('code');
+      itext(', like');
+      ie_open('a', null, null,
+          'href', '#safe');
+        ie_open('code');
+          itext('safe');
+        ie_close('code');
+      ie_close('a');
+      itext(', ');
+      ie_open('a', null, null,
+          'href', '#ifelse');
+        ie_open('code');
+          itext('ifElse');
+        ie_close('code');
+      ie_close('a');
       itext(' and ');
       ie_open('code');
-        itext('concat');
+        itext('filter');
       ie_close('code');
-      itext(' function can be used as a ');
+      itext(' to name a few. They also fit naturally with the ');
       ie_open('code');
-        itext('Monoid');
+        itext('Pred');
       ie_close('code');
-      itext('. There are a few of the');
-      ie_open('a', null, null,
-          'href', '#crocks');
-        ie_open('code');
-          itext('crocks');
-        ie_close('code');
-      ie_close('a');
-      itext(' that are also monoidial, so be on the look out for those as well. All ');
+      itext(' ADT. All predicate functions can be referenced from');
       ie_open('code');
-        itext('Monoids');
+        itext('crocks/predicates');
       ie_close('code');
-      itext(' work with the point-free functions ');
-      ie_open('a', null, null,
-          'href', '#mconcat');
-        ie_open('code');
-          itext('mconcat');
-        ie_close('code');
-      ie_close('a');
-      itext(',');
-      ie_open('a', null, null,
-          'href', '#mreduce');
-        ie_open('code');
-          itext('mreduce');
-        ie_close('code');
-      ie_close('a');
-      itext(', ');
-      ie_open('a', null, null,
-          'href', '#mconcatmap');
-        ie_open('code');
-          itext('mconcatMap');
-        ie_close('code');
-      ie_close('a');
-      itext(' and');
-      ie_open('a', null, null,
-          'href', '#mreducemap');
-        ie_open('code');
-          itext('mreduceMap');
-        ie_close('code');
-      ie_close('a');
-      itext('.');
+      itext(' Below is a list of all the current predicates that are included with a description of their truth:');
     ie_close('p');
-    ie_open('p');
-      itext('All ');
-      ie_open('code');
-        itext('Monoids');
-      ie_close('code');
-      itext(' provide ');
-      ie_open('code');
-        itext('empty');
-      ie_close('code');
-      itext(' and ');
-      ie_open('code');
-        itext('type');
-      ie_close('code');
-      itext(' function on their Constructors as well as the following Instance Functions: inspect, ');
-      ie_open('code');
-        itext('type');
-      ie_close('code');
-      itext(', ');
-      ie_open('code');
-        itext('valueOf');
-      ie_close('code');
-      itext(', ');
-      ie_open('code');
-        itext('empty');
-      ie_close('code');
-      itext(' and');
-      ie_open('code');
-        itext('concat');
-      ie_close('code');
-      itext('.');
-    ie_close('p');
-    ie_open('table');
-      ie_open('thead');
-        ie_open('tr');
-          ie_open('th');
-            itext('Monoid');
-          ie_close('th');
-          ie_open('th');
-            itext('Type');
-          ie_close('th');
-          ie_open('th');
-            itext('Operation');
-          ie_close('th');
-          ie_open('th');
-            itext('Empty (Identity)');
-          ie_close('th');
-        ie_close('tr');
-      ie_close('thead');
-      ie_open('tbody');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('All');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td');
-            itext('Boolean');
-          ie_close('td');
-          ie_open('td');
-            itext('Logical AND');
-          ie_close('td');
-          ie_open('td');
-            ie_open('code');
-              itext('true');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('Any');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td');
-            itext('Boolean');
-          ie_close('td');
-          ie_open('td');
-            itext('Logical OR');
-          ie_close('td');
-          ie_open('td');
-            ie_open('code');
-              itext('false');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('Assign');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td');
-            itext('Object');
-          ie_close('td');
-          ie_open('td');
-            ie_open('code');
-              itext('Object.assign');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td');
-            ie_open('code');
-              itext('{}');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('Endo');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td');
-            itext('Function');
-          ie_close('td');
-          ie_open('td');
-            ie_open('code');
-              itext('compose');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td');
-            ie_open('code');
-              itext('identity');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('First');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td');
-            itext('Maybe');
-          ie_close('td');
-          ie_open('td');
-            itext('First ');
-            ie_open('code');
-              itext('Just');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td');
-            ie_open('code');
-              itext('Nothing');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('Last');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td');
-            itext('Maybe');
-          ie_close('td');
-          ie_open('td');
-            itext('Last ');
-            ie_open('code');
-              itext('Just');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td');
-            ie_open('code');
-              itext('Nothing');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('Max');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td');
-            itext('Number');
-          ie_close('td');
-          ie_open('td');
-            ie_open('code');
-              itext('Math.max');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td');
-            ie_open('code');
-              itext('-Infinity');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('Min');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td');
-            itext('Number');
-          ie_close('td');
-          ie_open('td');
-            ie_open('code');
-              itext('Math.min');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td');
-            ie_open('code');
-              itext('Infinity');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('Prod');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td');
-            itext('Number');
-          ie_close('td');
-          ie_open('td');
-            itext('Multiplication');
-          ie_close('td');
-          ie_open('td');
-            ie_open('code');
-              itext('1');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('Sum');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td');
-            itext('Number');
-          ie_close('td');
-          ie_open('td');
-            itext('Addition');
-          ie_close('td');
-          ie_open('td');
-            ie_open('code');
-              itext('0');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-      ie_close('tbody');
-    ie_close('table');
+    ie_open('ul');
+      ie_open('li');
+        ie_open('code');
+          itext('hasProp :: (String | Number) -> a -> Boolean');
+        ie_close('code');
+        itext(': An Array or Object that contains the provided index or key');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isAlt :: a -> Boolean');
+        ie_close('code');
+        itext(': an ADT that provides ');
+        ie_open('code');
+          itext('map');
+        ie_close('code');
+        itext(' and ');
+        ie_open('code');
+          itext('alt');
+        ie_close('code');
+        itext(' functions');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isAlternative :: a -> Boolean');
+        ie_close('code');
+        itext(': an ADT that provides ');
+        ie_open('code');
+          itext('alt');
+        ie_close('code');
+        itext(', ');
+        ie_open('code');
+          itext('zero');
+        ie_close('code');
+        itext(', ');
+        ie_open('code');
+          itext('map');
+        ie_close('code');
+        itext(', ');
+        ie_open('code');
+          itext('ap');
+        ie_close('code');
+        itext(', ');
+        ie_open('code');
+          itext('chain');
+        ie_close('code');
+        itext(' and ');
+        ie_open('code');
+          itext('of');
+        ie_close('code');
+        itext(' functions');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isApplicative :: a -> Boolean');
+        ie_close('code');
+        itext(': an ADT that provides ');
+        ie_open('code');
+          itext('map');
+        ie_close('code');
+        itext(', ');
+        ie_open('code');
+          itext('ap');
+        ie_close('code');
+        itext(' and ');
+        ie_open('code');
+          itext('of');
+        ie_close('code');
+        itext(' functions');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isApply :: a -> Boolean');
+        ie_close('code');
+        itext(': an ADT that provides ');
+        ie_open('code');
+          itext('map');
+        ie_close('code');
+        itext(' and ');
+        ie_open('code');
+          itext('ap');
+        ie_close('code');
+        itext(' functions');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isArray :: a -> Boolean');
+        ie_close('code');
+        itext(': Array');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isBifunctor :: a -> Boolean');
+        ie_close('code');
+        itext(': an ADT that provides ');
+        ie_open('code');
+          itext('map');
+        ie_close('code');
+        itext(' and ');
+        ie_open('code');
+          itext('bimap');
+        ie_close('code');
+        itext(' functions');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isBoolean :: a -> Boolean');
+        ie_close('code');
+        itext(': Boolean');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isCategory :: a -> Boolean');
+        ie_close('code');
+        itext(': an ADT that provides ');
+        ie_open('code');
+          itext('id');
+        ie_close('code');
+        itext(' and ');
+        ie_open('code');
+          itext('compose');
+        ie_close('code');
+        itext(' functions');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isChain :: a -> Boolean');
+        ie_close('code');
+        itext(': an ADT that provides ');
+        ie_open('code');
+          itext('map');
+        ie_close('code');
+        itext(', ');
+        ie_open('code');
+          itext('ap');
+        ie_close('code');
+        itext(' and ');
+        ie_open('code');
+          itext('chain');
+        ie_close('code');
+        itext(' functions');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isContravariant : a -> Boolean');
+        ie_close('code');
+        itext(': an ADT that provides ');
+        ie_open('code');
+          itext('contramap');
+        ie_close('code');
+        itext(' function');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isDefined :: a -> Boolean');
+        ie_close('code');
+        itext(': Every value that is not ');
+        ie_open('code');
+          itext('undefined');
+        ie_close('code');
+        itext(', ');
+        ie_open('code');
+          itext('null');
+        ie_close('code');
+        itext(' included');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isEmpty :: a -> Boolean');
+        ie_close('code');
+        itext(': Empty Object, Array or String');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isExtend :: a -> Boolean');
+        ie_close('code');
+        itext(': an ADT that provides ');
+        ie_open('code');
+          itext('map');
+        ie_close('code');
+        itext(' and ');
+        ie_open('code');
+          itext('extend');
+        ie_close('code');
+        itext(' functions');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isFoldable :: a -> Boolean');
+        ie_close('code');
+        itext(': Array, List or any structure with a ');
+        ie_open('code');
+          itext('reduce');
+        ie_close('code');
+        itext(' function');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isFunction :: a -> Boolean');
+        ie_close('code');
+        itext(': Function');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isFunctor :: a -> Boolean');
+        ie_close('code');
+        itext(': an ADT that provides a ');
+        ie_open('code');
+          itext('map');
+        ie_close('code');
+        itext(' function');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isInteger :: a -> Boolean');
+        ie_close('code');
+        itext(': Integer');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isMonad :: a -> Boolean');
+        ie_close('code');
+        itext(': an ADT that provides ');
+        ie_open('code');
+          itext('map');
+        ie_close('code');
+        itext(', ');
+        ie_open('code');
+          itext('ap');
+        ie_close('code');
+        itext(', ');
+        ie_open('code');
+          itext('chain');
+        ie_close('code');
+        itext(' and ');
+        ie_open('code');
+          itext('of');
+        ie_close('code');
+        itext(' functions');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isMonoid :: a -> Boolean');
+        ie_close('code');
+        itext(': an ADT that provides ');
+        ie_open('code');
+          itext('concat');
+        ie_close('code');
+        itext(' and ');
+        ie_open('code');
+          itext('empty');
+        ie_close('code');
+        itext(' functions');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isNil :: a -> Boolean');
+        ie_close('code');
+        itext(': ');
+        ie_open('code');
+          itext('undefined');
+        ie_close('code');
+        itext(' or ');
+        ie_open('code');
+          itext('null');
+        ie_close('code');
+        itext(' or ');
+        ie_open('code');
+          itext('NaN');
+        ie_close('code');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isNumber :: a -> Boolean');
+        ie_close('code');
+        itext(': ');
+        ie_open('code');
+          itext('Number');
+        ie_close('code');
+        itext(' that is not a ');
+        ie_open('code');
+          itext('NaN');
+        ie_close('code');
+        itext(' value, ');
+        ie_open('code');
+          itext('Infinity');
+        ie_close('code');
+        itext(' included');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isObject :: a -> Boolean');
+        ie_close('code');
+        itext(': Plain Old Javascript Object (POJO)');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isPlus :: a -> Boolean');
+        ie_close('code');
+        itext(': an ADT that provides ');
+        ie_open('code');
+          itext('map');
+        ie_close('code');
+        itext(', ');
+        ie_open('code');
+          itext('alt');
+        ie_close('code');
+        itext(' and ');
+        ie_open('code');
+          itext('zero');
+        ie_close('code');
+        itext(' functions');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isProfunctor : a -> Boolean');
+        ie_close('code');
+        itext(': an ADT that provides ');
+        ie_open('code');
+          itext('map');
+        ie_close('code');
+        itext(', ');
+        ie_open('code');
+          itext('contramap');
+        ie_close('code');
+        itext(' and ');
+        ie_open('code');
+          itext('promap');
+        ie_close('code');
+        itext(' functions');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isPromise :: a -> Boolean');
+        ie_close('code');
+        itext(': an object implementing ');
+        ie_open('code');
+          itext('then');
+        ie_close('code');
+        itext(' and ');
+        ie_open('code');
+          itext('catch');
+        ie_close('code');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isSame :: a -> b -> Boolean');
+        ie_close('code');
+        itext(': same value or reference, use ');
+        ie_open('code');
+          itext('equals');
+        ie_close('code');
+        itext(' for value equality');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isSameType :: a -> b -> Boolean');
+        ie_close('code');
+        itext(': Constructor matches a values type, or two values types match');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isSemigroup :: a -> Boolean');
+        ie_close('code');
+        itext(': an ADT that provides a ');
+        ie_open('code');
+          itext('concat');
+        ie_close('code');
+        itext(' function');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isSemigroupoid :: a -> Boolean');
+        ie_close('code');
+        itext(': an ADT that provides a ');
+        ie_open('code');
+          itext('compose');
+        ie_close('code');
+        itext(' function');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isSetoid :: a -> Boolean');
+        ie_close('code');
+        itext(': an ADT that provides an ');
+        ie_open('code');
+          itext('equals');
+        ie_close('code');
+        itext(' function');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isString :: a -> Boolean');
+        ie_close('code');
+        itext(': String');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isTraversable :: a -> Boolean');
+        ie_close('code');
+        itext(': an ADT that provides ');
+        ie_open('code');
+          itext('map');
+        ie_close('code');
+        itext(' and ');
+        ie_open('code');
+          itext('traverse');
+        ie_close('code');
+        itext(' functions');
+      ie_close('li');
+    ie_close('ul');
     ie_open('input', null, null,
         'type', 'hidden',
         'value', opt_data.page.title);
@@ -28549,11 +28695,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'value', opt_data.site.title);
     ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({content: param666}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param689}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'vXFVU.render';
+  $render.soyTemplateName = 'lTFWS.render';
 }
 
 exports.render.params = ["page","site"];
@@ -28563,16 +28709,14 @@ return exports;
 
 });
 
-class vXFVU extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(vXFVU, templates);
+class lTFWS extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(lTFWS, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
 
 
 /***/ }),
-/* 222 */,
-/* 223 */,
 /* 224 */,
 /* 225 */,
 /* 226 */,
@@ -28582,11 +28726,7 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(vXFVU, templates);
 /* 230 */,
 /* 231 */,
 /* 232 */,
-/* 233 */,
-/* 234 */,
-/* 235 */,
-/* 236 */,
-/* 237 */
+/* 233 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28620,9 +28760,9 @@ __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _monoidsSoy = __webpack_require__(221);
+var _predicateFunctionsSoy = __webpack_require__(223);
 
-var _monoidsSoy2 = _interopRequireDefault(_monoidsSoy);
+var _predicateFunctionsSoy2 = _interopRequireDefault(_predicateFunctionsSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28632,23 +28772,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var vXFVU = function (_Component) {
-  _inherits(vXFVU, _Component);
+var lTFWS = function (_Component) {
+  _inherits(lTFWS, _Component);
 
-  function vXFVU() {
-    _classCallCheck(this, vXFVU);
+  function lTFWS() {
+    _classCallCheck(this, lTFWS);
 
-    return _possibleConstructorReturn(this, (vXFVU.__proto__ || Object.getPrototypeOf(vXFVU)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (lTFWS.__proto__ || Object.getPrototypeOf(lTFWS)).apply(this, arguments));
   }
 
-  return vXFVU;
+  return lTFWS;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(vXFVU, _monoidsSoy2.default);
+_metalSoy2.default.register(lTFWS, _predicateFunctionsSoy2.default);
 
-exports.default = vXFVU;
+exports.default = lTFWS;
 
 /***/ })
-],[237]);
+],[233]);

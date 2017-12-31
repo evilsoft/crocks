@@ -19019,8 +19019,8 @@ function $guide(opt_data, opt_ignored, opt_ijData) {
           'class', 'container-hybrid');
         ie_open('h1', null, null,
             'class', 'title');
-          var dyn0 = opt_data.page.title;
-          if (typeof dyn0 == 'function') dyn0(); else if (dyn0 != null) itext(dyn0);
+          var dyn2 = opt_data.page.title;
+          if (typeof dyn2 == 'function') dyn2(); else if (dyn2 != null) itext(dyn2);
           itext(' Guide');
         ie_close('h1');
       ie_close('div');
@@ -19033,8 +19033,8 @@ function $guide(opt_data, opt_ignored, opt_ijData) {
             'class', 'docs-content col-xs-16 col-md-9');
           ie_open('div', null, null,
               'class', 'guide-content');
-            var dyn1 = opt_data.content;
-            if (typeof dyn1 == 'function') dyn1(); else if (dyn1 != null) itext(dyn1);
+            var dyn3 = opt_data.content;
+            if (typeof dyn3 == 'function') dyn3(); else if (dyn3 != null) itext(dyn3);
           ie_close('div');
           if (opt_data.site.githubRepo) {
             $contribute(opt_data, null, opt_ijData);
@@ -19077,7 +19077,7 @@ function $contribute(opt_data, opt_ignored, opt_ijData) {
       ie_open('p');
         itext('Contribute on Github! ');
         ie_open('a', null, null,
-            'href', 'https://github.com/' + opt_data.site.githubRepo + '/tree/master/' + opt_data.page.srcFilePath,
+            'href', 'https://github.com/' + opt_data.site.githubRepo + '/tree/master/docs/' + opt_data.page.srcFilePath,
             'class', 'contribute-link',
             'target', '_blank');
           itext('Edit this section');
@@ -19174,8 +19174,8 @@ function $render(opt_data, opt_ignored, opt_ijData) {
     ie_open('main', null, null,
         'class', 'content');
       $templateAlias1({items: opt_data.site.topbar, style: 'topbar-light', logo: {text: opt_data.site.title, icon: opt_data.site.icon, href: opt_data.site.basePath}}, null, opt_ijData);
-      var dyn2 = opt_data.content;
-      if (typeof dyn2 == 'function') dyn2(); else if (dyn2 != null) itext(dyn2);
+      var dyn4 = opt_data.content;
+      if (typeof dyn4 == 'function') dyn4(); else if (dyn4 != null) itext(dyn4);
     ie_close('main');
   ie_close('div');
 }
@@ -19297,14 +19297,14 @@ function $tutorials(opt_data, opt_ignored, opt_ijData) {
         'class', 'container');
       ie_open('h6', null, null,
           'class', 'tutorial-title');
-        var dyn3 = opt_data.site.index.children['tutorials'].children[opt_data.page.parentId].tutorialTitle;
-        if (typeof dyn3 == 'function') dyn3(); else if (dyn3 != null) itext(dyn3);
+        var dyn5 = opt_data.site.index.children['tutorials'].children[opt_data.page.parentId].tutorialTitle;
+        if (typeof dyn5 == 'function') dyn5(); else if (dyn5 != null) itext(dyn5);
       ie_close('h6');
       $templateAlias2(null, null, opt_ijData);
       ie_open('div', null, null,
           'class', 'container-blog card');
-        var dyn4 = opt_data.content;
-        if (typeof dyn4 == 'function') dyn4(); else if (dyn4 != null) itext(dyn4);
+        var dyn6 = opt_data.content;
+        if (typeof dyn6 == 'function') dyn6(); else if (dyn6 != null) itext(dyn6);
         $footerButtons(opt_data, null, opt_ijData);
       ie_close('div');
     ie_close('div');
@@ -19326,15 +19326,15 @@ if (goog.DEBUG) {
 function $footerButtons(opt_data, opt_ignored, opt_ijData) {
   ie_open('div', null, null,
       'class', 'tutorial-page-nav');
-    var tutorialObject__soy76 = opt_data.site.index.children['tutorials'].children[opt_data.page.parentId];
-    if (opt_data.page.weight < tutorialObject__soy76.childIds.length) {
+    var tutorialObject__soy100 = opt_data.site.index.children['tutorials'].children[opt_data.page.parentId];
+    if (opt_data.page.weight < tutorialObject__soy100.childIds.length) {
       if (opt_data.page.buttonTitle) {
-        var nextPageUrl__soy81 = tutorialObject__soy76.children[tutorialObject__soy76.childIds[opt_data.page.weight]].url;
+        var nextPageUrl__soy105 = tutorialObject__soy100.children[tutorialObject__soy100.childIds[opt_data.page.weight]].url;
         ie_open('a', null, null,
-            'href', nextPageUrl__soy81,
+            'href', nextPageUrl__soy105,
             'class', 'btn btn-accent btn-sm');
-          var dyn5 = opt_data.page.buttonTitle;
-          if (typeof dyn5 == 'function') dyn5(); else if (dyn5 != null) itext(dyn5);
+          var dyn7 = opt_data.page.buttonTitle;
+          if (typeof dyn7 == 'function') dyn7(); else if (dyn7 != null) itext(dyn7);
         ie_close('a');
       }
     }
@@ -19375,7 +19375,7 @@ if (goog.DEBUG) {
  * @return {void}
  * @suppress {checkTypes}
  */
-function __deltemplate_s96_88c0813b(opt_data, opt_ignored, opt_ijData) {
+function __deltemplate_s120_88c0813b(opt_data, opt_ignored, opt_ijData) {
   ie_open('a', null, null,
       'class', 'sidebar-link' + (opt_data.page.active ? ' sidebar-link-selected' : ''),
       'href', opt_data.page.url,
@@ -19384,23 +19384,23 @@ function __deltemplate_s96_88c0813b(opt_data, opt_ignored, opt_ijData) {
         'class', 'before');
     ie_open('span', null, null,
         'class', 'tutorial-step');
-      var dyn6 = opt_data.page.weight;
-      if (typeof dyn6 == 'function') dyn6(); else if (dyn6 != null) itext(dyn6);
+      var dyn8 = opt_data.page.weight;
+      if (typeof dyn8 == 'function') dyn8(); else if (dyn8 != null) itext(dyn8);
     ie_close('span');
     ie_open('span', null, null,
         'class', 'section-title');
-      var dyn7 = opt_data.page.title;
-      if (typeof dyn7 == 'function') dyn7(); else if (dyn7 != null) itext(dyn7);
+      var dyn9 = opt_data.page.title;
+      if (typeof dyn9 == 'function') dyn9(); else if (dyn9 != null) itext(dyn9);
     ie_close('span');
     ie_void('span', null, null,
         'class', 'after');
   ie_close('a');
 }
-exports.__deltemplate_s96_88c0813b = __deltemplate_s96_88c0813b;
+exports.__deltemplate_s120_88c0813b = __deltemplate_s120_88c0813b;
 if (goog.DEBUG) {
-  __deltemplate_s96_88c0813b.soyTemplateName = 'tutorial.__deltemplate_s96_88c0813b';
+  __deltemplate_s120_88c0813b.soyTemplateName = 'tutorial.__deltemplate_s120_88c0813b';
 }
-soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'tutorial', 0, __deltemplate_s96_88c0813b);
+soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'tutorial', 0, __deltemplate_s120_88c0813b);
 
 exports.render.params = ["content","elementClasses","page","site"];
 exports.render.types = {"content":"any","elementClasses":"any","page":"any","site":"any"};
@@ -28179,7 +28179,7 @@ exports.default = parseFromAnchor;
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "crFrZ", function() { return crFrZ; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NtvCs", function() { return NtvCs; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28195,11 +28195,11 @@ goog.loadModule(function(exports) {
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace crFrZ.
+ * @fileoverview Templates in namespace NtvCs.
  * @public
  */
 
-goog.module('crFrZ.incrementaldom');
+goog.module('NtvCs.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28354,7 +28354,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'crFrZ.render';
+  $render.soyTemplateName = 'NtvCs.render';
 }
 
 exports.render.params = ["page","site"];
@@ -28364,8 +28364,8 @@ return exports;
 
 });
 
-class crFrZ extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(crFrZ, templates);
+class NtvCs extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(NtvCs, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
@@ -28381,12 +28381,7 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(crFrZ, templates);
 /* 226 */,
 /* 227 */,
 /* 228 */,
-/* 229 */,
-/* 230 */,
-/* 231 */,
-/* 232 */,
-/* 233 */,
-/* 234 */
+/* 229 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28432,23 +28427,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var crFrZ = function (_Component) {
-  _inherits(crFrZ, _Component);
+var NtvCs = function (_Component) {
+  _inherits(NtvCs, _Component);
 
-  function crFrZ() {
-    _classCallCheck(this, crFrZ);
+  function NtvCs() {
+    _classCallCheck(this, NtvCs);
 
-    return _possibleConstructorReturn(this, (crFrZ.__proto__ || Object.getPrototypeOf(crFrZ)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (NtvCs.__proto__ || Object.getPrototypeOf(NtvCs)).apply(this, arguments));
   }
 
-  return crFrZ;
+  return NtvCs;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(crFrZ, _indexSoy2.default);
+_metalSoy2.default.register(NtvCs, _indexSoy2.default);
 
-exports.default = crFrZ;
+exports.default = NtvCs;
 
 /***/ })
-],[234]);
+],[229]);

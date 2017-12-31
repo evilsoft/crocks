@@ -3,7 +3,9 @@
   "name": "crocks",
   "version": "0.0.0",
   "scripts": {
-    "start": "electric"
+    "start": "electric run --env dev",
+    "docs:build": "electric build",
+    "docs:deploy": "electric deploy"
   },
   "devDependencies": {
     "electric-cli": "^2.2.0",

@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([7,13,14,15],[
+webpackJsonppageComponent([12,13,14,15],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -28171,17 +28171,12 @@ exports.default = parseFromAnchor;
 /* 213 */,
 /* 214 */,
 /* 215 */,
-/* 216 */,
-/* 217 */,
-/* 218 */,
-/* 219 */,
-/* 220 */,
-/* 221 */
+/* 216 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "oiHjx", function() { return oiHjx; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SxXFO", function() { return SxXFO; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28193,15 +28188,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var templates;
 goog.loadModule(function(exports) {
 
-// This file was automatically generated from monoids.soy.
+// This file was automatically generated from combinators.soy.
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace oiHjx.
+ * @fileoverview Templates in namespace SxXFO.
  * @public
  */
 
-goog.module('oiHjx.incrementaldom');
+goog.module('SxXFO.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28222,6 +28217,8 @@ var ie_open_end = IncrementalDom.elementOpenEnd;
 var itext = IncrementalDom.text;
 var iattr = IncrementalDom.attr;
 
+var $templateAlias2 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('ElectricCode.incrementaldom', 'render');
+
 var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('guide.incrementaldom', 'render');
 
 
@@ -28233,313 +28230,144 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var param666 = function() {
+  var param261 = function() {
     ie_open('h3');
-      itext('Monoids');
+      itext('Combinators');
     ie_close('h3');
+    ie_open('h4');
+      itext('applyTo');
+    ie_close('h4');
     ie_open('p');
-      itext('Each ');
       ie_open('code');
-        itext('Monoid');
+        itext('crocks/combinators/applyTo');
       ie_close('code');
-      itext(' provides a means to represent a binary operation and is usually locked down to a specific type. These are great when you need to combine a list of values down to one value. In this library, any ADT that provides both an');
-      ie_open('code');
-        itext('empty');
-      ie_close('code');
-      itext(' and ');
-      ie_open('code');
-        itext('concat');
-      ie_close('code');
-      itext(' function can be used as a ');
-      ie_open('code');
-        itext('Monoid');
-      ie_close('code');
-      itext('. There are a few of the');
-      ie_open('a', null, null,
-          'href', '#crocks');
-        ie_open('code');
-          itext('crocks');
-        ie_close('code');
-      ie_close('a');
-      itext(' that are also monoidial, so be on the look out for those as well. All ');
-      ie_open('code');
-        itext('Monoids');
-      ie_close('code');
-      itext(' work with the point-free functions ');
-      ie_open('a', null, null,
-          'href', '#mconcat');
-        ie_open('code');
-          itext('mconcat');
-        ie_close('code');
-      ie_close('a');
-      itext(',');
-      ie_open('a', null, null,
-          'href', '#mreduce');
-        ie_open('code');
-          itext('mreduce');
-        ie_close('code');
-      ie_close('a');
-      itext(', ');
-      ie_open('a', null, null,
-          'href', '#mconcatmap');
-        ie_open('code');
-          itext('mconcatMap');
-        ie_close('code');
-      ie_close('a');
-      itext(' and');
-      ie_open('a', null, null,
-          'href', '#mreducemap');
-        ie_open('code');
-          itext('mreduceMap');
-        ie_close('code');
-      ie_close('a');
-      itext('.');
     ie_close('p');
+    $templateAlias2({code: 'applyTo :: (a -> b) -> a -> b', mode: 'haskell'}, null, opt_ijData);
     ie_open('p');
-      itext('All ');
-      ie_open('code');
-        itext('Monoids');
-      ie_close('code');
-      itext(' provide ');
-      ie_open('code');
-        itext('empty');
-      ie_close('code');
-      itext(' and ');
-      ie_open('code');
-        itext('type');
-      ie_close('code');
-      itext(' function on their Constructors as well as the following Instance Functions: inspect, ');
-      ie_open('code');
-        itext('type');
-      ie_close('code');
-      itext(', ');
-      ie_open('code');
-        itext('valueOf');
-      ie_close('code');
-      itext(', ');
-      ie_open('code');
-        itext('empty');
-      ie_close('code');
-      itext(' and');
-      ie_open('code');
-        itext('concat');
-      ie_close('code');
-      itext('.');
+      itext('Seems really silly, but is quite useful for a lot of things. It takes a function and a value and then returns the result of that function with the argument applied.');
     ie_close('p');
-    ie_open('table');
-      ie_open('thead');
-        ie_open('tr');
-          ie_open('th');
-            itext('Monoid');
-          ie_close('th');
-          ie_open('th');
-            itext('Type');
-          ie_close('th');
-          ie_open('th');
-            itext('Operation');
-          ie_close('th');
-          ie_open('th');
-            itext('Empty (Identity)');
-          ie_close('th');
-        ie_close('tr');
-      ie_close('thead');
-      ie_open('tbody');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('All');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td');
-            itext('Boolean');
-          ie_close('td');
-          ie_open('td');
-            itext('Logical AND');
-          ie_close('td');
-          ie_open('td');
-            ie_open('code');
-              itext('true');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('Any');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td');
-            itext('Boolean');
-          ie_close('td');
-          ie_open('td');
-            itext('Logical OR');
-          ie_close('td');
-          ie_open('td');
-            ie_open('code');
-              itext('false');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('Assign');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td');
-            itext('Object');
-          ie_close('td');
-          ie_open('td');
-            ie_open('code');
-              itext('Object.assign');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td');
-            ie_open('code');
-              itext('{}');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('Endo');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td');
-            itext('Function');
-          ie_close('td');
-          ie_open('td');
-            ie_open('code');
-              itext('compose');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td');
-            ie_open('code');
-              itext('identity');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('First');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td');
-            itext('Maybe');
-          ie_close('td');
-          ie_open('td');
-            itext('First ');
-            ie_open('code');
-              itext('Just');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td');
-            ie_open('code');
-              itext('Nothing');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('Last');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td');
-            itext('Maybe');
-          ie_close('td');
-          ie_open('td');
-            itext('Last ');
-            ie_open('code');
-              itext('Just');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td');
-            ie_open('code');
-              itext('Nothing');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('Max');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td');
-            itext('Number');
-          ie_close('td');
-          ie_open('td');
-            ie_open('code');
-              itext('Math.max');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td');
-            ie_open('code');
-              itext('-Infinity');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('Min');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td');
-            itext('Number');
-          ie_close('td');
-          ie_open('td');
-            ie_open('code');
-              itext('Math.min');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td');
-            ie_open('code');
-              itext('Infinity');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('Prod');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td');
-            itext('Number');
-          ie_close('td');
-          ie_open('td');
-            itext('Multiplication');
-          ie_close('td');
-          ie_open('td');
-            ie_open('code');
-              itext('1');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('Sum');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td');
-            itext('Number');
-          ie_close('td');
-          ie_open('td');
-            itext('Addition');
-          ie_close('td');
-          ie_open('td');
-            ie_open('code');
-              itext('0');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-      ie_close('tbody');
-    ie_close('table');
+    ie_open('h4');
+      itext('composeB');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/combinators/composeB');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'composeB :: (b -> c) -> (a -> b) -> a -> c', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('Provides a means to describe a composition between two functions. it takes two functions and a value. Given ');
+      ie_open('code');
+        itext('composeB(f, g)');
+      ie_close('code');
+      itext(', which is read ');
+      ie_open('code');
+        itext('f');
+      ie_close('code');
+      itext(' after ');
+      ie_open('code');
+        itext('g');
+      ie_close('code');
+      itext(', it will return a function that will take value ');
+      ie_open('code');
+        itext('a');
+      ie_close('code');
+      itext(' and apply it to ');
+      ie_open('code');
+        itext('g');
+      ie_close('code');
+      itext(', passing the result as an argument to ');
+      ie_open('code');
+        itext('f');
+      ie_close('code');
+      itext(', and will finally return the result of ');
+      ie_open('code');
+        itext('f');
+      ie_close('code');
+      itext('. (This allows only two functions, if you want to avoid things like:');
+      ie_open('code');
+        itext('composeB(composeB(f, g), composeB(h, i))');
+      ie_close('code');
+      itext(' then check out');
+      ie_open('a', null, null,
+          'href', '#compose');
+        ie_open('code');
+          itext('compose');
+        ie_close('code');
+      ie_close('a');
+      itext('.)');
+    ie_close('p');
+    ie_open('h4');
+      itext('constant');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/combinators/constant');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'constant :: a -> _ -> a', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('This is a very handy dandy function, used a lot. Pass it any value and it will give you back a function that will return that same value no matter what you pass it.');
+    ie_close('p');
+    ie_open('h4');
+      itext('flip');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/combinators/flip');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'flip :: (a -> b -> c) -> b -> a -> c', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('This little function just takes a function and returns a function that takes the first two parameters in reverse. One can compose flip calls down the line to flip all, or some of the other parameters if there are more than two. Mix and match to your :heart:\'s desire.');
+    ie_close('p');
+    ie_open('h4');
+      itext('identity');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/combinators/identity');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'identity ::  a -> a', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('This function and ');
+      ie_open('a', null, null,
+          'href', '#constant');
+        ie_open('code');
+          itext('constant');
+        ie_close('code');
+      ie_close('a');
+      itext(' are the workhorses of writing code with this library. It quite simply is just a function that when you pass it something, it returns that thing right back to you. So simple, I will leave it as an exercise to reason about why this is so powerful and important.');
+    ie_close('p');
+    ie_open('h4');
+      itext('reverseApply');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/combinators/reverseApply');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'reverseApply :: a -> (a -> b) -> b', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('Ever run into a situation where you have a value but do not have a function to apply it to? Well this little bird, named Thrush, is there to help out. Just give it a value and it will give you back a function ready to take a function. Once that function is provided, it will return the result of applying your value to that function.');
+    ie_close('p');
+    ie_open('h4');
+      itext('substitution');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/combinators/substitution');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'substitution :: (a -> b -> c) -> (a -> b) -> a -> c', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('While it a complicated little bugger, it can come in very handy from time to time. In it\'s first two arguments it takes functions. The first must be binary and the second unary. That will return you a function that is ready to take some value. Once supplied the fun starts, it will pass the ');
+      ie_open('code');
+        itext('a');
+      ie_close('code');
+      itext(' to the first argument of both functions, and the result of the second function to the second parameter of the first function. Finally after all that juggling, it will return the result of that first function. When used with partial application on that first parameter, a whole new world of combinatory madness is presented!');
+    ie_close('p');
     ie_open('input', null, null,
         'type', 'hidden',
         'value', opt_data.page.title);
@@ -28549,11 +28377,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'value', opt_data.site.title);
     ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({content: param666}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param261}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'oiHjx.render';
+  $render.soyTemplateName = 'SxXFO.render';
 }
 
 exports.render.params = ["page","site"];
@@ -28563,14 +28391,19 @@ return exports;
 
 });
 
-class oiHjx extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(oiHjx, templates);
+class SxXFO extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(SxXFO, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
 
 
 /***/ }),
+/* 217 */,
+/* 218 */,
+/* 219 */,
+/* 220 */,
+/* 221 */,
 /* 222 */,
 /* 223 */,
 /* 224 */,
@@ -28581,12 +28414,7 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(oiHjx, templates);
 /* 229 */,
 /* 230 */,
 /* 231 */,
-/* 232 */,
-/* 233 */,
-/* 234 */,
-/* 235 */,
-/* 236 */,
-/* 237 */
+/* 232 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28620,9 +28448,9 @@ __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _monoidsSoy = __webpack_require__(221);
+var _combinatorsSoy = __webpack_require__(216);
 
-var _monoidsSoy2 = _interopRequireDefault(_monoidsSoy);
+var _combinatorsSoy2 = _interopRequireDefault(_combinatorsSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28632,23 +28460,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var oiHjx = function (_Component) {
-  _inherits(oiHjx, _Component);
+var SxXFO = function (_Component) {
+  _inherits(SxXFO, _Component);
 
-  function oiHjx() {
-    _classCallCheck(this, oiHjx);
+  function SxXFO() {
+    _classCallCheck(this, SxXFO);
 
-    return _possibleConstructorReturn(this, (oiHjx.__proto__ || Object.getPrototypeOf(oiHjx)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (SxXFO.__proto__ || Object.getPrototypeOf(SxXFO)).apply(this, arguments));
   }
 
-  return oiHjx;
+  return SxXFO;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(oiHjx, _monoidsSoy2.default);
+_metalSoy2.default.register(SxXFO, _combinatorsSoy2.default);
 
-exports.default = oiHjx;
+exports.default = SxXFO;
 
 /***/ })
-],[237]);
+],[232]);

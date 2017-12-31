@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([12,13,14,15],[
+webpackJsonppageComponent([8,13,14,15],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -28171,12 +28171,16 @@ exports.default = parseFromAnchor;
 /* 213 */,
 /* 214 */,
 /* 215 */,
-/* 216 */
+/* 216 */,
+/* 217 */,
+/* 218 */,
+/* 219 */,
+/* 220 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "XDypk", function() { return XDypk; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tubIg", function() { return tubIg; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28188,15 +28192,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var templates;
 goog.loadModule(function(exports) {
 
-// This file was automatically generated from combinators.soy.
+// This file was automatically generated from logic-functions.soy.
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace XDypk.
+ * @fileoverview Templates in namespace tubIg.
  * @public
  */
 
-goog.module('XDypk.incrementaldom');
+goog.module('tubIg.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28230,143 +28234,179 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var param261 = function() {
+  var param627 = function() {
     ie_open('h3');
-      itext('Combinators');
+      itext('Logic Functions');
     ie_close('h3');
+    ie_open('p');
+      itext('The functions in this section are used to represent logical branching in a declarative manner. Each of these functions require either ');
+      ie_open('code');
+        itext('Pred');
+      ie_close('code');
+      itext('s or predicate functions in their input. Since these functions work with ');
+      ie_open('code');
+        itext('Pred');
+      ie_close('code');
+      itext('s and predicate functions, rather than values, this allows for composeable, "lazy" evaluation. All logic functions can be referenced from ');
+      ie_open('code');
+        itext('crocks/logic');
+      ie_close('code');
+    ie_close('p');
     ie_open('h4');
-      itext('applyTo');
+      itext('and');
     ie_close('h4');
+    $templateAlias2({code: 'and :: ((a -> Boolean) | Pred) -> ((a -> Boolean) | Pred) -> a -> Boolean', mode: 'haskell'}, null, opt_ijData);
     ie_open('p');
+      itext('Say you have two predicate functions or ');
       ie_open('code');
-        itext('crocks/combinators/applyTo');
+        itext('Pred');
       ie_close('code');
-    ie_close('p');
-    $templateAlias2({code: 'applyTo :: (a -> b) -> a -> b', mode: 'haskell'}, null, opt_ijData);
-    ie_open('p');
-      itext('Seems really silly, but is quite useful for a lot of things. It takes a function and a value and then returns the result of that function with the argument applied.');
+      itext('s and would like to combine them into one predicate over conjunction, well you came to the right place, ');
+      ie_open('code');
+        itext('and');
+      ie_close('code');
+      itext('accepts either predicate functions or ');
+      ie_open('code');
+        itext('Pred');
+      ie_close('code');
+      itext('s and will return you a function ready to take a value. Once that value is passed, it will run it through both of the predicates and return the result of combining it over a ');
+      ie_open('code');
+        itext('logical and');
+      ie_close('code');
+      itext('. This is super helpful combined with ');
+      ie_open('code');
+        itext('or');
+      ie_close('code');
+      itext(' for putting together reusable, complex predicates. As they follow the general form of ');
+      ie_open('code');
+        itext('(a -> Boolean)');
+      ie_close('code');
+      itext(' they are easily combined with other logic functions.');
     ie_close('p');
     ie_open('h4');
-      itext('composeB');
+      itext('ifElse');
     ie_close('h4');
+    $templateAlias2({code: 'ifElse :: ((a -> Boolean) | Pred) -> (* -> a) -> (* -> a) -> * -> a', mode: 'haskell'}, null, opt_ijData);
     ie_open('p');
+      itext('Whenever you need to modify a value based some condition and want a functional way to do it without some imperative ');
       ie_open('code');
-        itext('crocks/combinators/composeB');
+        itext('if');
       ie_close('code');
+      itext(' statement, then reach for ');
+      ie_open('code');
+        itext('ifElse');
+      ie_close('code');
+      itext('. This function take a predicate (some function that returns a Boolean) and two functions. The first is what is executed when the predicate is true, the second on a false condition. This will return a function ready to take a value to run through the predicate. After the value is evaluated, it will be ran through it\'s corresponding function, returning the result as the final result. This function comes in really handy when creating lifting functions for Sum Types (like');
+      ie_open('code');
+        itext('Either');
+      ie_close('code');
+      itext(' or ');
+      ie_open('code');
+        itext('Maybe');
+      ie_close('code');
+      itext(').');
     ie_close('p');
-    $templateAlias2({code: 'composeB :: (b -> c) -> (a -> b) -> a -> c', mode: 'haskell'}, null, opt_ijData);
+    ie_open('h4');
+      itext('not');
+    ie_close('h4');
+    $templateAlias2({code: 'not :: ((a -> Boolean) | Pred) -> a -> Boolean', mode: 'haskell'}, null, opt_ijData);
     ie_open('p');
-      itext('Provides a means to describe a composition between two functions. it takes two functions and a value. Given ');
+      itext('When you need to negate a predicate function or a ');
       ie_open('code');
-        itext('composeB(f, g)');
+        itext('Pred');
       ie_close('code');
-      itext(', which is read ');
+      itext(', but want a new predicate function that does the negation, then ');
       ie_open('code');
-        itext('f');
+        itext('not');
       ie_close('code');
-      itext(' after ');
+      itext(' is going to get you what you need. Using ');
       ie_open('code');
-        itext('g');
+        itext('not');
       ie_close('code');
-      itext(', it will return a function that will take value ');
+      itext(' will allow you to stay as declarative as possible. Just pass ');
       ie_open('code');
-        itext('a');
+        itext('not');
       ie_close('code');
-      itext(' and apply it to ');
+      itext(' your predicate function or a ');
       ie_open('code');
-        itext('g');
+        itext('Pred');
       ie_close('code');
-      itext(', passing the result as an argument to ');
+      itext(', and it will give you back a predicate function ready for insertion into your flow. All predicate based functions in ');
       ie_open('code');
-        itext('f');
+        itext('crocks');
       ie_close('code');
-      itext(', and will finally return the result of ');
+      itext(' take either a ');
       ie_open('code');
-        itext('f');
+        itext('Pred');
       ie_close('code');
-      itext('. (This allows only two functions, if you want to avoid things like:');
+      itext(' or predicate function, so it should be easy to swap between the two.');
+    ie_close('p');
+    ie_open('h4');
+      itext('or');
+    ie_close('h4');
+    $templateAlias2({code: 'or :: ((a -> Boolean) | Pred) -> ((a -> Boolean) | Pred) -> a -> Boolean', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('Say you have two predicate functions or ');
       ie_open('code');
-        itext('composeB(composeB(f, g), composeB(h, i))');
+        itext('Pred');
       ie_close('code');
-      itext(' then check out');
+      itext('s and would like to combine them into one predicate over disjunction, look no further, ');
+      ie_open('code');
+        itext('or');
+      ie_close('code');
+      itext(' accepts either predicate functions or ');
+      ie_open('code');
+        itext('Pred');
+      ie_close('code');
+      itext('s and will return you a function ready to take a value. Once that value is passed, it will run it through both of the predicates and return the result of combining it over a ');
+      ie_open('code');
+        itext('logical or');
+      ie_close('code');
+      itext('. This is super helpful combined with ');
+      ie_open('code');
+        itext('and');
+      ie_close('code');
+      itext(' for putting together reusable, complex predicates. As they follow the general form of ');
+      ie_open('code');
+        itext('(a -> Boolean)');
+      ie_close('code');
+      itext(' they are easily combined with other logic functions.');
+    ie_close('p');
+    ie_open('h4');
+      itext('unless');
+    ie_close('h4');
+    $templateAlias2({code: 'unless :: ((a -> Boolean) | Pred) -> (a -> a) -> a -> a', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('There may come a time when you need to adjust a value when a condition is false, that is where ');
+      ie_open('code');
+        itext('unless');
+      ie_close('code');
+      itext(' can come into play. Just provide a predicate function (a function that returns a Boolean) and a function to apply your desired modification. This will get you back a function that when you pass it a value, it will evaluate it and if false, will run your value through the provided function. Either the original or modified value will be returned depending on the result of the predicate. Check out ');
       ie_open('a', null, null,
-          'href', '#compose');
+          'href', '#when');
         ie_open('code');
-          itext('compose');
+          itext('when');
         ie_close('code');
       ie_close('a');
-      itext('.)');
+      itext(' for a negated version of this function.');
     ie_close('p');
     ie_open('h4');
-      itext('constant');
+      itext('when');
     ie_close('h4');
+    $templateAlias2({code: 'when :: ((a -> Boolean) | Pred) -> (a -> a) -> a -> a', mode: 'haskell'}, null, opt_ijData);
     ie_open('p');
+      itext('There may come a time when you need to adjust a value when a condition is true, that is where ');
       ie_open('code');
-        itext('crocks/combinators/constant');
+        itext('when');
       ie_close('code');
-    ie_close('p');
-    $templateAlias2({code: 'constant :: a -> _ -> a', mode: 'haskell'}, null, opt_ijData);
-    ie_open('p');
-      itext('This is a very handy dandy function, used a lot. Pass it any value and it will give you back a function that will return that same value no matter what you pass it.');
-    ie_close('p');
-    ie_open('h4');
-      itext('flip');
-    ie_close('h4');
-    ie_open('p');
-      ie_open('code');
-        itext('crocks/combinators/flip');
-      ie_close('code');
-    ie_close('p');
-    $templateAlias2({code: 'flip :: (a -> b -> c) -> b -> a -> c', mode: 'haskell'}, null, opt_ijData);
-    ie_open('p');
-      itext('This little function just takes a function and returns a function that takes the first two parameters in reverse. One can compose flip calls down the line to flip all, or some of the other parameters if there are more than two. Mix and match to your :heart:\'s desire.');
-    ie_close('p');
-    ie_open('h4');
-      itext('identity');
-    ie_close('h4');
-    ie_open('p');
-      ie_open('code');
-        itext('crocks/combinators/identity');
-      ie_close('code');
-    ie_close('p');
-    $templateAlias2({code: 'identity ::  a -> a', mode: 'haskell'}, null, opt_ijData);
-    ie_open('p');
-      itext('This function and ');
+      itext(' can come into play. Just provide a predicate function (a function that returns a Boolean) and a function to apply your desired modification. This will get you back a function that when you pass it a value, it will evaluate it and if true, will run your value through the provided function. Either the original or modified value will be returned depending on the result of the predicate. Check out ');
       ie_open('a', null, null,
-          'href', '#constant');
+          'href', '#unless');
         ie_open('code');
-          itext('constant');
+          itext('unless');
         ie_close('code');
       ie_close('a');
-      itext(' are the workhorses of writing code with this library. It quite simply is just a function that when you pass it something, it returns that thing right back to you. So simple, I will leave it as an exercise to reason about why this is so powerful and important.');
-    ie_close('p');
-    ie_open('h4');
-      itext('reverseApply');
-    ie_close('h4');
-    ie_open('p');
-      ie_open('code');
-        itext('crocks/combinators/reverseApply');
-      ie_close('code');
-    ie_close('p');
-    $templateAlias2({code: 'reverseApply :: a -> (a -> b) -> b', mode: 'haskell'}, null, opt_ijData);
-    ie_open('p');
-      itext('Ever run into a situation where you have a value but do not have a function to apply it to? Well this little bird, named Thrush, is there to help out. Just give it a value and it will give you back a function ready to take a function. Once that function is provided, it will return the result of applying your value to that function.');
-    ie_close('p');
-    ie_open('h4');
-      itext('substitution');
-    ie_close('h4');
-    ie_open('p');
-      ie_open('code');
-        itext('crocks/combinators/substitution');
-      ie_close('code');
-    ie_close('p');
-    $templateAlias2({code: 'substitution :: (a -> b -> c) -> (a -> b) -> a -> c', mode: 'haskell'}, null, opt_ijData);
-    ie_open('p');
-      itext('While it a complicated little bugger, it can come in very handy from time to time. In it\'s first two arguments it takes functions. The first must be binary and the second unary. That will return you a function that is ready to take some value. Once supplied the fun starts, it will pass the ');
-      ie_open('code');
-        itext('a');
-      ie_close('code');
-      itext(' to the first argument of both functions, and the result of the second function to the second parameter of the first function. Finally after all that juggling, it will return the result of that first function. When used with partial application on that first parameter, a whole new world of combinatory madness is presented!');
+      itext(' for a negated version of this function.');
     ie_close('p');
     ie_open('input', null, null,
         'type', 'hidden',
@@ -28377,11 +28417,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'value', opt_data.site.title);
     ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({content: param261}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param627}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'XDypk.render';
+  $render.soyTemplateName = 'tubIg.render';
 }
 
 exports.render.params = ["page","site"];
@@ -28391,18 +28431,14 @@ return exports;
 
 });
 
-class XDypk extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(XDypk, templates);
+class tubIg extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(tubIg, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
 
 
 /***/ }),
-/* 217 */,
-/* 218 */,
-/* 219 */,
-/* 220 */,
 /* 221 */,
 /* 222 */,
 /* 223 */,
@@ -28417,7 +28453,8 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(XDypk, templates);
 /* 232 */,
 /* 233 */,
 /* 234 */,
-/* 235 */
+/* 235 */,
+/* 236 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28451,9 +28488,9 @@ __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _combinatorsSoy = __webpack_require__(216);
+var _logicFunctionsSoy = __webpack_require__(220);
 
-var _combinatorsSoy2 = _interopRequireDefault(_combinatorsSoy);
+var _logicFunctionsSoy2 = _interopRequireDefault(_logicFunctionsSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28463,23 +28500,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var XDypk = function (_Component) {
-  _inherits(XDypk, _Component);
+var tubIg = function (_Component) {
+  _inherits(tubIg, _Component);
 
-  function XDypk() {
-    _classCallCheck(this, XDypk);
+  function tubIg() {
+    _classCallCheck(this, tubIg);
 
-    return _possibleConstructorReturn(this, (XDypk.__proto__ || Object.getPrototypeOf(XDypk)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (tubIg.__proto__ || Object.getPrototypeOf(tubIg)).apply(this, arguments));
   }
 
-  return XDypk;
+  return tubIg;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(XDypk, _combinatorsSoy2.default);
+_metalSoy2.default.register(tubIg, _logicFunctionsSoy2.default);
 
-exports.default = XDypk;
+exports.default = tubIg;
 
 /***/ })
-],[235]);
+],[236]);

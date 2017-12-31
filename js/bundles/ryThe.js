@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([8,13,14,15],[
+webpackJsonppageComponent([11,13,14,15],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -28172,15 +28172,12 @@ exports.default = parseFromAnchor;
 /* 214 */,
 /* 215 */,
 /* 216 */,
-/* 217 */,
-/* 218 */,
-/* 219 */,
-/* 220 */
+/* 217 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "XZZOk", function() { return XZZOk; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ryThe", function() { return ryThe; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28192,15 +28189,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var templates;
 goog.loadModule(function(exports) {
 
-// This file was automatically generated from logic-functions.soy.
+// This file was automatically generated from crocks.soy.
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace XZZOk.
+ * @fileoverview Templates in namespace ryThe.
  * @public
  */
 
-goog.module('XZZOk.incrementaldom');
+goog.module('ryThe.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28221,8 +28218,6 @@ var ie_open_end = IncrementalDom.elementOpenEnd;
 var itext = IncrementalDom.text;
 var iattr = IncrementalDom.attr;
 
-var $templateAlias2 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('ElectricCode.incrementaldom', 'render');
-
 var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('guide.incrementaldom', 'render');
 
 
@@ -28234,179 +28229,1003 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var param627 = function() {
+  var param305 = function() {
     ie_open('h3');
-      itext('Logic Functions');
+      itext('Crocks');
     ie_close('h3');
     ie_open('p');
-      itext('The functions in this section are used to represent logical branching in a declarative manner. Each of these functions require either ');
-      ie_open('code');
-        itext('Pred');
-      ie_close('code');
-      itext('s or predicate functions in their input. Since these functions work with ');
-      ie_open('code');
-        itext('Pred');
-      ie_close('code');
-      itext('s and predicate functions, rather than values, this allows for composeable, "lazy" evaluation. All logic functions can be referenced from ');
-      ie_open('code');
-        itext('crocks/logic');
-      ie_close('code');
-    ie_close('p');
-    ie_open('h4');
-      itext('and');
-    ie_close('h4');
-    $templateAlias2({code: 'and :: ((a -> Boolean) | Pred) -> ((a -> Boolean) | Pred) -> a -> Boolean', mode: 'haskell'}, null, opt_ijData);
-    ie_open('p');
-      itext('Say you have two predicate functions or ');
-      ie_open('code');
-        itext('Pred');
-      ie_close('code');
-      itext('s and would like to combine them into one predicate over conjunction, well you came to the right place, ');
-      ie_open('code');
-        itext('and');
-      ie_close('code');
-      itext('accepts either predicate functions or ');
-      ie_open('code');
-        itext('Pred');
-      ie_close('code');
-      itext('s and will return you a function ready to take a value. Once that value is passed, it will run it through both of the predicates and return the result of combining it over a ');
-      ie_open('code');
-        itext('logical and');
-      ie_close('code');
-      itext('. This is super helpful combined with ');
-      ie_open('code');
-        itext('or');
-      ie_close('code');
-      itext(' for putting together reusable, complex predicates. As they follow the general form of ');
-      ie_open('code');
-        itext('(a -> Boolean)');
-      ie_close('code');
-      itext(' they are easily combined with other logic functions.');
-    ie_close('p');
-    ie_open('h4');
-      itext('ifElse');
-    ie_close('h4');
-    $templateAlias2({code: 'ifElse :: ((a -> Boolean) | Pred) -> (* -> a) -> (* -> a) -> * -> a', mode: 'haskell'}, null, opt_ijData);
-    ie_open('p');
-      itext('Whenever you need to modify a value based some condition and want a functional way to do it without some imperative ');
-      ie_open('code');
-        itext('if');
-      ie_close('code');
-      itext(' statement, then reach for ');
-      ie_open('code');
-        itext('ifElse');
-      ie_close('code');
-      itext('. This function take a predicate (some function that returns a Boolean) and two functions. The first is what is executed when the predicate is true, the second on a false condition. This will return a function ready to take a value to run through the predicate. After the value is evaluated, it will be ran through it\'s corresponding function, returning the result as the final result. This function comes in really handy when creating lifting functions for Sum Types (like');
-      ie_open('code');
-        itext('Either');
-      ie_close('code');
-      itext(' or ');
-      ie_open('code');
-        itext('Maybe');
-      ie_close('code');
-      itext(').');
-    ie_close('p');
-    ie_open('h4');
-      itext('not');
-    ie_close('h4');
-    $templateAlias2({code: 'not :: ((a -> Boolean) | Pred) -> a -> Boolean', mode: 'haskell'}, null, opt_ijData);
-    ie_open('p');
-      itext('When you need to negate a predicate function or a ');
-      ie_open('code');
-        itext('Pred');
-      ie_close('code');
-      itext(', but want a new predicate function that does the negation, then ');
-      ie_open('code');
-        itext('not');
-      ie_close('code');
-      itext(' is going to get you what you need. Using ');
-      ie_open('code');
-        itext('not');
-      ie_close('code');
-      itext(' will allow you to stay as declarative as possible. Just pass ');
-      ie_open('code');
-        itext('not');
-      ie_close('code');
-      itext(' your predicate function or a ');
-      ie_open('code');
-        itext('Pred');
-      ie_close('code');
-      itext(', and it will give you back a predicate function ready for insertion into your flow. All predicate based functions in ');
+      itext('The ');
       ie_open('code');
         itext('crocks');
       ie_close('code');
-      itext(' take either a ');
+      itext(' are the heart and soul of this library. This is where you will find all your favorite ADT\'s you have grown to love. They include gems such as:');
       ie_open('code');
-        itext('Pred');
+        itext('Maybe');
       ie_close('code');
-      itext(' or predicate function, so it should be easy to swap between the two.');
+      itext(', ');
+      ie_open('code');
+        itext('Either');
+      ie_close('code');
+      itext(' and ');
+      ie_open('code');
+        itext('IO');
+      ie_close('code');
+      itext(', to name a few. The are usually just a simple constructor that takes either a function or value (depending on the type) and will return you a "container" that wraps whatever you passed it. Each container provides a variety of functions that act as the operations you can do on the contained value. There are many types that share the same function names, but what they do from type to type may vary.  Every Crock provides type function on the Constructor and both inspect and type functions on their Instances.');
     ie_close('p');
-    ie_open('h4');
-      itext('or');
-    ie_close('h4');
-    $templateAlias2({code: 'or :: ((a -> Boolean) | Pred) -> ((a -> Boolean) | Pred) -> a -> Boolean', mode: 'haskell'}, null, opt_ijData);
     ie_open('p');
-      itext('Say you have two predicate functions or ');
+      itext('All ');
       ie_open('code');
-        itext('Pred');
+        itext('Crocks');
       ie_close('code');
-      itext('s and would like to combine them into one predicate over disjunction, look no further, ');
+      itext(' are Constructor functions of the given type, with ');
       ie_open('code');
-        itext('or');
+        itext('Writer');
       ie_close('code');
-      itext(' accepts either predicate functions or ');
+      itext(' being an exception. The ');
       ie_open('code');
-        itext('Pred');
+        itext('Writer');
       ie_close('code');
-      itext('s and will return you a function ready to take a value. Once that value is passed, it will run it through both of the predicates and return the result of combining it over a ');
-      ie_open('code');
-        itext('logical or');
-      ie_close('code');
-      itext('. This is super helpful combined with ');
-      ie_open('code');
-        itext('and');
-      ie_close('code');
-      itext(' for putting together reusable, complex predicates. As they follow the general form of ');
-      ie_open('code');
-        itext('(a -> Boolean)');
-      ie_close('code');
-      itext(' they are easily combined with other logic functions.');
-    ie_close('p');
-    ie_open('h4');
-      itext('unless');
-    ie_close('h4');
-    $templateAlias2({code: 'unless :: ((a -> Boolean) | Pred) -> (a -> a) -> a -> a', mode: 'haskell'}, null, opt_ijData);
-    ie_open('p');
-      itext('There may come a time when you need to adjust a value when a condition is false, that is where ');
-      ie_open('code');
-        itext('unless');
-      ie_close('code');
-      itext(' can come into play. Just provide a predicate function (a function that returns a Boolean) and a function to apply your desired modification. This will get you back a function that when you pass it a value, it will evaluate it and if false, will run your value through the provided function. Either the original or modified value will be returned depending on the result of the predicate. Check out ');
+      itext(' function takes a ');
       ie_open('a', null, null,
-          'href', '#when');
+          'href', '#monoids');
         ie_open('code');
-          itext('when');
+          itext('Monoid');
         ie_close('code');
       ie_close('a');
-      itext(' for a negated version of this function.');
-    ie_close('p');
-    ie_open('h4');
-      itext('when');
-    ie_close('h4');
-    $templateAlias2({code: 'when :: ((a -> Boolean) | Pred) -> (a -> a) -> a -> a', mode: 'haskell'}, null, opt_ijData);
-    ie_open('p');
-      itext('There may come a time when you need to adjust a value when a condition is true, that is where ');
+      itext(' that will represent the ');
       ie_open('code');
-        itext('when');
+        itext('log');
       ie_close('code');
-      itext(' can come into play. Just provide a predicate function (a function that returns a Boolean) and a function to apply your desired modification. This will get you back a function that when you pass it a value, it will evaluate it and if true, will run your value through the provided function. Either the original or modified value will be returned depending on the result of the predicate. Check out ');
+      itext('. Once you provide the ');
       ie_open('a', null, null,
-          'href', '#unless');
+          'href', '#monoids');
         ie_open('code');
-          itext('unless');
+          itext('Monoid');
         ie_close('code');
       ie_close('a');
-      itext(' for a negated version of this function.');
+      itext(', the function will return the ');
+      ie_open('code');
+        itext('Writer');
+      ie_close('code');
+      itext(' Constructor for your ');
+      ie_open('code');
+        itext('Writer');
+      ie_close('code');
+      itext(' using that specific');
+      ie_open('a', null, null,
+          'href', '#monoids');
+        ie_open('code');
+          itext('Monoid');
+        ie_close('code');
+      ie_close('a');
+      itext('.');
+    ie_close('p');
+    ie_open('table');
+      ie_open('thead');
+        ie_open('tr');
+          ie_open('th');
+            itext('Crock');
+          ie_close('th');
+          ie_open('th', null, null,
+              'style', 'text-align:left');
+            itext('Constructor');
+          ie_close('th');
+          ie_open('th', null, null,
+              'style', 'text-align:left');
+            itext('Instance');
+          ie_close('th');
+        ie_close('tr');
+      ie_close('thead');
+      ie_open('tbody');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('Arrow');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('id');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('both');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('compose');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('contramap');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('empty');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('first');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('map');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('promap');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('runWith');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('second');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('Async');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('Rejected');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Resolved');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('all');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('fromNode');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('fromPromise');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('of');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('alt');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('ap');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('bimap');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('chain');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('coalesce');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('fork');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('map');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('of');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('swap');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('toPromise');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('Const');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            itext('--');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('ap');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('chain');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('concat');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('equals');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('map');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('valueOf');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('Either');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('Left');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Right');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('of');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('alt');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('ap');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('bimap');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('chain');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('coalesce');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('concat');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('either');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('equals');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('map');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('of');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('sequence');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('swap');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('traverse');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('Identity');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('of');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('ap');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('chain');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('concat');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('equals');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('map');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('of');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('sequence');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('traverse');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('valueOf');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('IO');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('of');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('ap');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('chain');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('map');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('of');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('run');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('List');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('empty');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('fromArray');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('of');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('ap');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('chain');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('concat');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('cons');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('empty');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('equals');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('filter');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('head');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('map');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('of');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('reduce');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('reject');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('sequence');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('tail');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('toArray');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('traverse');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('valueOf');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('Maybe');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('Nothing');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Just');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('of');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('zero');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('alt');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('ap');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('chain');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('coalesce');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('concat');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('equals');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('either');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('map');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('of');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('option');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('sequence');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('traverse');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('zero');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('Pair');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            itext('---');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('ap');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('bimap');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('chain');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('concat');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('equals');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('extend');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('fst');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('map');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('merge');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('of');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('snd');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('swap');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('toArray');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('Pred');
+            ie_close('code');
+            itext(' *');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('empty');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('concat');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('contramap');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('empty');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('runWith');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('valueOf');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('Reader');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('ask');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('of');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('ap');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('chain');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('map');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('of');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('runWith');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('Result');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('Err');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Ok');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('of');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('alt');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('ap');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('bimap');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('chain');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('coalesce');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('concat');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('either');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('equals');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('map');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('of');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('sequence');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('swap');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('traverse');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('Star');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('id');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('both');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('compose');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('contramap');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('map');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('promap');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('runWith');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('State');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('get');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('modify');
+            ie_close('code');
+            itext(' ');
+            ie_open('code');
+              itext('of');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('put');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('ap');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('chain');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('evalWith');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('execWith');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('map');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('of');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('runWith');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('Unit');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('empty');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('of');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('ap');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('chain');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('concat');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('empty');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('equals');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('map');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('of');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('valueOf');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('Writer');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('of');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('ap');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('chain');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('equals');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('log');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('map');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('of');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('read');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('valueOf');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+      ie_close('tbody');
+    ie_close('table');
+    ie_open('p');
+      itext('* based on ');
+      ie_open('a', null, null,
+          'href', 'https://medium.com/@drboolean/monoidal-contravariant-functors-are-actually-useful-1032211045c4#.polugsx2a');
+        itext('this article');
+      ie_close('a');
     ie_close('p');
     ie_open('input', null, null,
         'type', 'hidden',
@@ -28417,11 +29236,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'value', opt_data.site.title);
     ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({content: param627}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param305}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'XZZOk.render';
+  $render.soyTemplateName = 'ryThe.render';
 }
 
 exports.render.params = ["page","site"];
@@ -28431,14 +29250,17 @@ return exports;
 
 });
 
-class XZZOk extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(XZZOk, templates);
+class ryThe extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(ryThe, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
 
 
 /***/ }),
+/* 218 */,
+/* 219 */,
+/* 220 */,
 /* 221 */,
 /* 222 */,
 /* 223 */,
@@ -28453,8 +29275,7 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(XZZOk, templates);
 /* 232 */,
 /* 233 */,
 /* 234 */,
-/* 235 */,
-/* 236 */
+/* 235 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28488,9 +29309,9 @@ __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _logicFunctionsSoy = __webpack_require__(220);
+var _crocksSoy = __webpack_require__(217);
 
-var _logicFunctionsSoy2 = _interopRequireDefault(_logicFunctionsSoy);
+var _crocksSoy2 = _interopRequireDefault(_crocksSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28500,23 +29321,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var XZZOk = function (_Component) {
-  _inherits(XZZOk, _Component);
+var ryThe = function (_Component) {
+  _inherits(ryThe, _Component);
 
-  function XZZOk() {
-    _classCallCheck(this, XZZOk);
+  function ryThe() {
+    _classCallCheck(this, ryThe);
 
-    return _possibleConstructorReturn(this, (XZZOk.__proto__ || Object.getPrototypeOf(XZZOk)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (ryThe.__proto__ || Object.getPrototypeOf(ryThe)).apply(this, arguments));
   }
 
-  return XZZOk;
+  return ryThe;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(XZZOk, _logicFunctionsSoy2.default);
+_metalSoy2.default.register(ryThe, _crocksSoy2.default);
 
-exports.default = XZZOk;
+exports.default = ryThe;
 
 /***/ })
-],[236]);
+],[235]);

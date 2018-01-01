@@ -1,14 +1,14 @@
 ---
+title: "Helpers"
 description: "Helper functions"
-layout: "guide"
-title: "Helper Functions"
-weight: 4
+layout: "notopic"
+weight: 2
 ---
 
-## Helper Functions
-
 #### assign
+
 `crocks/helpers/assign`
+
 ```haskell
 assign :: Object -> Object -> Object
 ```
@@ -23,7 +23,9 @@ named [`defaultProps`](#defaultprops) that will only assign values that are
 `undefined` in the second argument.
 
 #### assoc
+
 `crocks/helpers/assoc`
+
 ```haskell
 assoc :: String -> a -> Object -> Object
 ```
@@ -32,12 +34,13 @@ want control over how the key and value are applied. That is where `assoc` can
 come to your aid. Just provide a `String` key and a value of any type to be
 associated to the key. Finally pass it any `Object` and you will get back a
 shallow copy with your key-value pair merged in. This will overwrite any exiting
-keys with new value specified. Used with [`flip`](#flip), you can do some
-interesting things with this function, give it a play! If you just want to
-create an `Object` and not concatenate it to another `Object`, [`objOf`](#objof)
-may be the function for you.
+keys with new value specified. Used with [`flip`](combinators.html#flip),
+you can do some interesting things with this function, give it a play! If you
+just want to create an `Object` and not concatenate it to another `Object`,
+[`objOf`](#objof) may be the function for you.
 
 #### binary
+
 `crocks/helpers/binary`
 ```haskell
 binary :: (* -> c) -> a -> b -> c
@@ -54,7 +57,9 @@ for  [`nAry`](#nary). `binary` is basically syntactic sugar for `nAry(2, fn)`.
 Also related is [`unary`](#unary), which constrains to (1) argument.
 
 #### branch
+
 `crocks/Pair/branch`
+
 ```haskell
 branch :: a -> Pair a a
 ```
@@ -69,19 +74,23 @@ will reference each other.
 values into a single value.
 
 #### compose
+
 `crocks/helpers/compose`
+
 ```haskell
 compose :: ((y -> z), (x -> y), ..., (a -> b)) -> a -> z
 ```
-While the [`composeB`](#composeb) can be used to create a composition of two
-functions, there are times when you want to compose an entire flow together.
-That is where `compose` is useful. With `compose` you can create a right-to-left
-composition of functions. It will return you a function that represents your
-flow. Not really sold on writing flows from right-to-left? Well then, I would
-recommend reaching for [`pipe`](#pipe).
+While the [`composeB`](combinators.html#composeb) can be used to create a
+composition of two functions, there are times when you want to compose an entire
+flow together. That is where `compose` is useful. With `compose` you can create
+a right-to-left composition of functions. It will return you a function that
+represents your flow. Not really sold on writing flows from right-to-left? Well
+then, I would recommend reaching for [`pipe`](#pipe).
 
 #### composeK
+
 `crocks/helpers/composeK`
+
 ```haskell
 composeK :: Chain m => ((y -> m z), (x -> m y), ..., (a -> m b)) -> a -> m z
 ```
@@ -147,12 +156,16 @@ functions in `crocks`, a [`pipeK`](#pipek) function is provided for flows that
 make more sense expressed in a left-to-right style.
 
 #### composeP
+
 `crocks/helpers/composeP`
+
 ```haskell
 composeP :: Promise p => ((y -> p z c), (x -> p y c), ..., (a -> p b c)) -> a -> p z c
 ```
+
 When working with `Promise`s, it is common place to create chains on a
 `Promise`'s `then` function:
+
 ```javascript
 const promFunc = x =>
   promiseSomething(x)
@@ -179,7 +192,9 @@ If you would like to provide your functions in a left-to-right manner, check out
 [pipeP](#pipep).
 
 #### composeS
+
 `crocks/helpers/composeS`
+
 ```haskell
 composeS :: Semigroupoid s => (s y z, s x y, ..., s a b) -> s a z
 ```
@@ -219,7 +234,9 @@ composeS(double, avg)
 ```
 
 #### curry
+
 `crocks/helpers/curry`
+
 ```haskell
 curry :: ((a, b, ...) -> z) -> a -> b -> ... -> z
 ```
@@ -231,7 +248,9 @@ that can be called in any combination, such as: `f(x, y, z)`, `f(x)(y)(z)`,
 on functions for maximum re-usability.
 
 #### defaultProps
+
 `crocks/helpers/defaultProps`
+
 ```haskell
 defaultProps :: Object -> Object -> Object
 ```
@@ -241,14 +260,17 @@ operation presents itself, `defaultProps` can come to your aid. Just pass it an
 `Object` that defines your defaults and then the `Object` your want to default
 those props on. If a key that is present on the defaults `Object` is not defined
 on your data, then the default value will be used. Otherwise, the value from
-your data will be used instead. You could just apply [`flip`](#flip) to the
-[`assign`](#assign) function and get the same result, but having a function
-named `defaultProps` may be easier to read in code. As with most `Object`
-related functions in `crocks`, `defaultProps` will return you a shallow copy of
-the result and not include any `undefined` values in either `Object`.
+your data will be used instead. You could just apply
+[`flip`](combinators.html#flip) to the [`assign`](#assign) function and get the
+same result, but having a function named `defaultProps` may be easier to read in
+code. As with most `Object` related functions in `crocks`, `defaultProps` will
+return you a shallow copy of the result and not include any `undefined` values
+in either `Object`.
 
 #### defaultTo
+
 `crocks/helpers/defaultTo`
+
 ```haskell
 defaultTo :: a -> b -> a
 ```
@@ -264,7 +286,9 @@ anything, it is suggested to stick to the signature and only let `a`s through.
 As a `b` can be an `a` as well.
 
 #### dissoc
+
 `crocks/helpers/dissoc`
+
 ```haskell
 dissoc :: String -> Object -> Object
 ```
@@ -275,7 +299,9 @@ new, shallow copy of the `Object` sans your key. As with all the `Object`
 functions, `dissoc` will remove any `undefined` values from the result.
 
 #### fanout
+
 `crocks/helpers/fanout`
+
 ```haskell
 fanout :: (a -> b) -> (a -> c) -> (a -> Pair b c)
 fanout :: Arrow a b -> Arrow a c -> Arrow a (Pair b c)
@@ -292,7 +318,9 @@ configured to split it's input into a pair and than apply the first Function/ADT
 to the first portion of the underlying `Pair` and the second on the second.
 
 #### fromPairs
+
 `crocks/helpers/fromPairs`
+
 ```haskell
 fromPairs :: [ (Pair String a) ] | List (Pair String a) -> Object
 ```
@@ -306,11 +334,18 @@ represented in the resulting `Object`. Also, when if multiple keys share the
 same name, that last value will be moved over.
 
 #### liftA2
-#### liftA3
+
 `crocks/helpers/liftA2`
-`crocks/helpers/liftA3`
+
 ```haskell
 liftA2 :: Applicative m => (a -> b -> c) -> m a -> m b -> m c
+```
+
+#### liftA3
+
+`crocks/helpers/liftA3`
+
+```haskell
 liftA3 :: Applicative m => (a -> b -> c -> d) -> m a -> m b -> m c -> m d
 ```
 Ever see yourself wanting to `map` a binary or trinary function, but `map` only
@@ -319,7 +354,9 @@ function as well as the number of `Applicatives` (containers that provide both
 `of` and `ap` functions) you need to get the mapping you are looking for.
 
 #### mapProps
+
 `crocks/helpers/mapProps`
+
 ```haskell
 mapProps :: { (* -> *) } -> Object -> Object
 ```
@@ -371,7 +408,9 @@ mapProps(mapping, {
 ```
 
 #### mapReduce
+
 `crocks/helpers/mapReduce`
+
 ```haskell
 mapReduce :: Foldable f => (a -> b) -> (c -> b -> c) -> c -> f a
 ```
@@ -390,7 +429,6 @@ const  isNumber = require('crocks/predicates/isNumber')
 const  mapReduce = require('crocks/helpers/mapReduce')
 const  safeLift = require('crocks/Maybe/safeLift')
 
-
 const data =
   [ '100', null, 3, true, 1 ]
 
@@ -407,39 +445,56 @@ safeMax(data)
 ```
 
 #### mconcat
-#### mreduce
+
 `crocks/helpers/mconcat`
-`crocks/helpers/mreduce`
+
 ```haskell
 mconcat :: Monoid m => m -> ([ a ] | List a) -> m a
+```
+
+#### mreduce
+
+`crocks/helpers/mreduce`
+
+```haskell
 mreduce :: Monoid m => m -> ([ a ] | List a) -> a
 ```
 These two functions are very handy for combining an entire `List` or `Array` of
-values by providing a [`Monoid`](#monoids) and your collection of values. The
-difference between the two is that `mconcat` returns the result inside the
-[`Monoid`](#monoids) used to combine them. Where `mreduce` returns the bare
-value itself.
+values by providing a [`Monoid`](../monoids/index.html) and your collection of
+values. The difference between the two is that `mconcat` returns the result
+inside the [`Monoid`](../monoids/index.html) used to combine them. Where
+`mreduce` returns the bare value itself.
 
 #### mconcatMap
-#### mreduceMap
+
 `crocks/helpers/mconcatMap`
-`crocks/helpers/mreduceMap`
+
 ```haskell
 mconcatMap :: Monoid m => m -> (b -> a) -> ([ b ] | List b) -> m a
+```
+
+#### mreduceMap
+
+`crocks/helpers/mreduceMap`
+
+```haskell
 mreduceMap :: Monoid m => m -> (b -> a) -> ([ b ] | List b) -> a
 ```
 There comes a time where the values you have in a `List` or an `Array` are not
-in the type that is needed for the [`Monoid`](#monoids) you want to combine
-with. These two functions can be used to `map` some transforming function from a
-given type into the type needed for the [`Monoid`](#monoids). In essence, this
-function will run each value through the function before it lifts the value
-into the [`Monoid`](#monoids), before `concat` is applied. The difference
+in the type that is needed for the [`Monoid`](../monoids/index.html) you want to
+combine with. These two functions can be used to `map` some transforming
+function from a given type into the type needed for the
+[`Monoid`](../monoids/index.html). In essence, this function will run each value
+through the function before it lifts the value into the
+[`Monoid`](../monoids/index.html), before `concat` is applied. The difference
 between the two is that `mconcatMap` returns the result inside the
-[`Monoid`](#monoids) used to combine them. Where `mreduceMap` returns the bare
-value itself.
+[`Monoid`](../monoids/index.html) used to combine them. Where `mreduceMap`
+returns the bare value itself.
 
 #### nAry
+
 `crocks/helpers/nAry`
+
 ```haskell
 nAry :: Number -> (* -> a) -> * -> * -> a
 ```
@@ -456,7 +511,9 @@ arguments to the inner function. Unary and binary functions are so common that
 [`binary`](#binary).
 
 #### objOf
+
 `crocks/helpers/objOf`
+
 ```haskell
 objOf :: String -> a -> Object
 ```
@@ -468,7 +525,9 @@ yourself constantly concatenating the result of this function into another
 `Object`, you may want to use [`assoc`](#assoc) instead.
 
 #### omit
+
 `crocks/helpers/omit`
+
 ```haskell
 omit :: ([ String ] | List String) -> Object -> Object
 ```
@@ -482,7 +541,9 @@ properties and should only be used with POJOs. If you want to filter or
 white-list properties rather than reject them, take a look at [`pick`](#pick).
 
 #### once
+
 `crocks/helpers/once`
+
 ```haskell
 once :: ((*) -> a) -> ((*) -> a)
 ```
@@ -492,7 +553,9 @@ Just pass the function you want guarded to `once` and you will get back a
 function with the expected guarantees.
 
 #### partial
+
 `crocks/helpers/partial`
+
 ```haskell
 partial :: ((* -> c), *) -> * -> c
 ```
@@ -518,7 +581,9 @@ map(max10, data)
 ```
 
 #### pick
+
 `crocks/helpers/pick`
+
 ```haskell
 pick :: ([ String ] | List String) -> Object -> Object
 ```
@@ -532,7 +597,9 @@ values will not be copied over, although `null` values are allowed. For
 black-listing properties, have a look at [`omit`](#omit).
 
 #### pipe
+
 `crocks/helpers/pipe`
+
 ```haskell
 pipe :: ((a -> b), (b -> c), ..., (y -> z)) -> a -> z
 ```
@@ -542,7 +609,9 @@ This function does the same thing as [`compose`](#compose), the only difference
 is it allows you define your flows in a left-to-right manner.
 
 #### pipeK
+
 `crocks/helpers/pipeK`
+
 ```haskell
 pipeK :: Chain m => ((a -> m b), (b -> m c), ..., (y -> m z)) -> a -> m z
 ```
@@ -584,7 +653,9 @@ chainPipe(0).log()
 ```
 
 #### pipeP
+
 `crocks/helpers/pipeP`
+
 ```haskell
 pipeP :: Promise p => ((a -> p b d), (b -> p c d), ..., (y -> p z d)) -> a -> p z d
 ```
@@ -606,7 +677,9 @@ const promPipe =
 ```
 
 #### pipeS
+
 `crocks/helpers/pipeS`
+
 ```haskell
 pipeS :: Semigroupoid s => (s a b, s b c, ..., s y z) -> s a z
 ```
@@ -651,7 +724,9 @@ flow('string', 100).runWith(data)
 ```
 
 #### prop
+
 `crocks/Maybe/prop`
+
 ```haskell
 prop :: (String | Integer) -> a -> Maybe b
 ```
@@ -663,7 +738,9 @@ and return a `Just` with the wrapped value if the key/index exists. If the
 key/index does not exist however, you will get back a `Nothing`.
 
 #### propOr
+
 `crocks/helpers/propOr`
+
 ```haskell
 propOr :: a -> (String | Integer) -> b -> c
 ```
@@ -691,7 +768,9 @@ get()
 ```
 
 #### propPath
+
 `crocks/Maybe/propPath`
+
 ```haskell
 propPath :: [ String | Integer ] -> a -> Maybe b
 ```
@@ -705,7 +784,9 @@ valid, it will return the value residing there (`null` included!) in a `Just`.
 But if at any point that path "breaks" it will give you back a `Nothing`.
 
 #### propPathOr
+
 `crocks/helpers/propPathOr`
+
 ```haskell
 propPathOr :: a -> [ String | Integer ] -> b -> c
 ```
@@ -734,7 +815,9 @@ get()
 ```
 
 #### safe
+
 `crocks/Maybe/safe`
+
 ```haskell
 safe :: ((a -> Boolean) | Pred) -> a -> Maybe a
 ```
@@ -746,7 +829,9 @@ value will be evaluated against the predicate, and will lift it into a `Just` if
 true and a `Nothing` if false.
 
 #### safeLift
+
 `crocks/Maybe/safeLift`
+
 ```haskell
 safeLift :: ((a -> Boolean) | Pred) -> (a -> b) -> a -> Maybe b
 ```
@@ -759,7 +844,9 @@ that will first lift its argument into a `Maybe` and then maps your original
 function over the result.
 
 #### tap
+
 `crocks/helpers/tap`
+
 ```haskell
 tap :: (a -> b) -> a -> a
 ```
@@ -772,7 +859,9 @@ immutability for reference types (`Objects`, `Arrays`, etc), you will need to
 exercise some discipline here to not mutate.
 
 #### toPairs
+
 `crocks/Pair/toPairs`
+
 ```haskell
 toPairs :: Object -> List (Pair String a)
 ```
@@ -786,7 +875,9 @@ references. Like most of the `Object` functions in `crocks`, any keys with
 to this function named [`fromPairs`](#frompairs).
 
 #### tryCatch
+
 `crocks/Result/tryCatch`
+
 ```haskell
 tryCatch :: (a -> b) -> a -> Result e b
 ```
@@ -798,7 +889,9 @@ either return the result in a `Result.Ok` if everything was good, or an error
 wrapped in an `Result.Err` if it fails.
 
 #### unary
+
 `crocks/helpers/unary`
+
 ```haskell
 unary :: (* -> b) -> a -> b
 ```
@@ -811,7 +904,9 @@ Another common case is [`binary`](#binary) which, as the name implies, only
 applies (2) arguments to a given function.
 
 #### unit
+
 `crocks/helpers/unit`
+
 ```haskell
 unit :: () -> undefined
 ```
@@ -820,131 +915,3 @@ things. A common use for it is as a default `noop` as it is a function that does
 nothing and returns `undefined`. You can also use it in a pointed fashion to
 represent some special value for a given type. This pointed use is the heart and
 soul of the infamous `Maybe` type.
-
-### Logic Functions
-The functions in this section are used to represent logical branching in a
-declarative manner. Each of these functions require either `Pred`s or predicate
-functions in their input. Since these functions work with `Pred`s and predicate
-functions, rather than values, this allows for composeable, "lazy" evaluation.
-All logic functions can be referenced from `crocks/logic`
-
-#### and
-```haskell
-and :: ((a -> Boolean) | Pred) -> ((a -> Boolean) | Pred) -> a -> Boolean
-```
-Say you have two predicate functions or `Pred`s and would like to combine them
-into one predicate over conjunction, well you came to the right place, `and`
-accepts either predicate functions or `Pred`s and will return you a function
-ready to take a value. Once that value is passed, it will run it through both of
-the predicates and return the result of combining it over a `logical and`. This
-is super helpful combined with `or` for putting together reusable, complex
-predicates. As they follow the general form of `(a -> Boolean)` they are easily
-combined with other logic functions.
-
-#### ifElse
-```haskell
-ifElse :: ((a -> Boolean) | Pred) -> (* -> a) -> (* -> a) -> * -> a
-```
-Whenever you need to modify a value based some condition and want a functional
-way to do it without some imperative `if` statement, then reach for `ifElse`.
-This function take a predicate (some function that returns a Boolean) and two
-functions. The first is what is executed when the predicate is true, the second
-on a false condition. This will return a function ready to take a value to run
-through the predicate. After the value is evaluated, it will be ran through it's
-corresponding function, returning the result as the final result. This function
-comes in really handy when creating lifting functions for Sum Types (like
-`Either` or `Maybe`).
-
-#### not
-```haskell
-not :: ((a -> Boolean) | Pred) -> a -> Boolean
-```
-When you need to negate a predicate function or a `Pred`, but want a new
-predicate function that does the negation, then `not` is going to get you what
-you need. Using `not` will allow you to stay as declarative as possible. Just
-pass `not` your predicate function or a `Pred`, and it will give you back a
-predicate function ready for insertion into your flow. All predicate based
-functions in `crocks` take either a `Pred` or predicate function, so it should
-be easy to swap between the two.
-
-#### or
-```haskell
-or :: ((a -> Boolean) | Pred) -> ((a -> Boolean) | Pred) -> a -> Boolean
-```
-Say you have two predicate functions or `Pred`s and would like to combine them
-into one predicate over disjunction, look no further, `or` accepts either
-predicate functions or `Pred`s and will return you a function ready to take a
-value. Once that value is passed, it will run it through both of the predicates
-and return the result of combining it over a `logical or`. This is super helpful
-combined with `and` for putting together reusable, complex predicates. As they
-follow the general form of `(a -> Boolean)` they are easily combined with other
-logic functions.
-
-#### unless
-```haskell
-unless :: ((a -> Boolean) | Pred) -> (a -> a) -> a -> a
-```
-There may come a time when you need to adjust a value when a condition is false,
-that is where `unless` can come into play. Just provide a predicate function (a
-function that returns a Boolean) and a function to apply your desired
-modification. This will get you back a function that when you pass it a value,
-it will evaluate it and if false, will run your value through the provided
-function. Either the original or modified value will be returned depending on
-the result of the predicate. Check out [`when`](#when) for a negated version of
-this function.
-
-#### when
-```haskell
-when :: ((a -> Boolean) | Pred) -> (a -> a) -> a -> a
-```
-There may come a time when you need to adjust a value when a condition is true,
-that is where `when` can come into play. Just provide a predicate function (a
-function that returns a Boolean) and a function to apply your desired
-modification. This will get you back a function that when you pass it a value,
-it will evaluate it and if true, will run your value through the provided
-function. Either the original or modified value will be returned depending on
-the result of the predicate. Check out [`unless`](#unless) for a negated version
-of this function.
-
-### Predicate Functions
-All functions in this group have a signature of `* -> Boolean` and are used with
-the many predicate based functions that ship with `crocks`, like
-[`safe`](#safe), [`ifElse`](#ifelse) and `filter` to name a few. They also fit
-naturally with the `Pred` ADT. All predicate functions can be referenced from
-`crocks/predicates` Below is a list of all the current predicates that are
-included with a description of their truth:
-
-* `hasProp :: (String | Number) -> a -> Boolean`: An Array or Object that contains the provided index or key
-* `isAlt :: a -> Boolean`: an ADT that provides `map` and `alt` functions
-* `isAlternative :: a -> Boolean`: an ADT that provides `alt`, `zero`, `map`, `ap`, `chain` and `of` functions
-* `isApplicative :: a -> Boolean`: an ADT that provides `map`, `ap` and `of` functions
-* `isApply :: a -> Boolean`: an ADT that provides `map` and `ap` functions
-* `isArray :: a -> Boolean`: Array
-* `isBifunctor :: a -> Boolean`: an ADT that provides `map` and `bimap` functions
-* `isBoolean :: a -> Boolean`: Boolean
-* `isCategory :: a -> Boolean`: an ADT that provides `id` and `compose` functions
-* `isChain :: a -> Boolean`: an ADT that provides `map`, `ap` and `chain` functions
-* `isContravariant : a -> Boolean`: an ADT that provides `contramap` function
-* `isDefined :: a -> Boolean`: Every value that is not `undefined`, `null` included
-* `isEmpty :: a -> Boolean`: Empty Object, Array or String
-* `isExtend :: a -> Boolean`: an ADT that provides `map` and `extend` functions
-* `isFoldable :: a -> Boolean`: Array, List or any structure with a `reduce` function
-* `isFunction :: a -> Boolean`: Function
-* `isFunctor :: a -> Boolean`: an ADT that provides a `map` function
-* `isInteger :: a -> Boolean`: Integer
-* `isMonad :: a -> Boolean`: an ADT that provides `map`, `ap`, `chain` and `of` functions
-* `isMonoid :: a -> Boolean`: an ADT that provides `concat` and `empty` functions
-* `isNil :: a -> Boolean`: `undefined` or `null` or `NaN`
-* `isNumber :: a -> Boolean`: `Number` that is not a `NaN` value, `Infinity` included
-* `isObject :: a -> Boolean`: Plain Old Javascript Object (POJO)
-* `isPlus :: a -> Boolean`: an ADT that provides `map`, `alt` and `zero` functions
-* `isProfunctor : a -> Boolean`: an ADT that provides `map`, `contramap` and `promap` functions
-* `isPromise :: a -> Boolean`: an object implementing `then` and `catch`
-* `isSame :: a -> b -> Boolean`: same value or reference, use `equals` for value equality
-* `isSameType :: a -> b -> Boolean`: Constructor matches a values type, or two values types match
-* `isSemigroup :: a -> Boolean`: an ADT that provides a `concat` function
-* `isSemigroupoid :: a -> Boolean`: an ADT that provides a `compose` function
-* `isSetoid :: a -> Boolean`: an ADT that provides an `equals` function
-* `isString :: a -> Boolean`: String
-* `isTraversable :: a -> Boolean`: an ADT that provides `map` and `traverse` functions
-

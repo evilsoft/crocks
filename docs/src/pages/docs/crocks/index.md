@@ -1,8 +1,9 @@
 ---
-description: "Crocks API"
-layout: "guide"
 title: "Crocks"
-weight: 1
+description: "Crocks API"
+layout: "notopic"
+icon: "code-file"
+weight: 2
 ---
 
 ### Crocks

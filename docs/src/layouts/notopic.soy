@@ -1,4 +1,4 @@
-{namespace guide}
+{namespace notopic}
 
 /**
  * @param page
@@ -21,7 +21,7 @@
           {param section: $site.index.children['docs'] /}
           {param site: $site /}
         {/call}
-        {call .guide data="all" /}
+        {call .notopic data="all" /}
       </div>
     </main>
   </div>
@@ -32,7 +32,7 @@
  * @param site
  * @param content
  */
-{template .guide}
+{template .notopic}
   <div class="sidebar-offset">
 
     <header class="guide-header">
@@ -43,7 +43,7 @@
 
     <div class="container-hybrid">
       <div class="docs-guide row">
-        <div class="docs-content col-xs-16 col-md-9">
+        <div class="docs-content col-xs-16 col-md-12">
           <div class="guide-content">
             {$content}
           </div>
@@ -52,15 +52,6 @@
             {call .contribute data="all" /}
           {/if}
         </div>
-
-        <nav class="col-xs-16 col-md-offset-2 col-md-5">
-          <div class="docs-nav-container">
-            {call ElectricReadingProgress.render}
-              {param elementClasses: 'docs-nav' /}
-              {param offsetTop: 200 /}
-            {/call}
-          </div>
-        </nav>
       </div>
     </div>
   </div>

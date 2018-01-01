@@ -16,6 +16,10 @@ module.exports = {
       basePath: ''
     }
   },
+  markdownOptions: {
+    html: true,
+    linkify: true
+  },
   metalComponents: [
     'electric-marble-components',
     'marble-topbar'

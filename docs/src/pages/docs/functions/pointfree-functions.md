@@ -1,11 +1,10 @@
 ---
-description: "Point-free Functions API"
-layout: "guide"
 title: "Point-free Functions"
-weight: 7
+description: "Point-free Functions API"
+layout: "notopic"
+weight: 5
 ---
 
-### Point-free Functions
 While it can seem natural to work with all these containers in a fluent fashion,
 it can get cumbersome and hard to get a lot of reuse out of. A way to really get
 the most out of reusability in Javascript is to take what is called a point-free

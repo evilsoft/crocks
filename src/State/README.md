@@ -2,33 +2,34 @@
 ```haskell
 State s a
 ```
-`State` is an Algebraic Data Type that abstracts away state management
-associated when working with stateful computations.`State` is parameterized by
-two types, a state `s` and a resultant `a`. The `a` may vary it's type, but
-the `s` must be fixed to a type that is used by all related stateful
-computations.
+`State` is an Algebraic Data Type that abstracts away the associated state
+management that comes with stateful computations.`State` is parameterized by
+two types, a state `s` and a resultant `a`. The resultant portion may vary it's
+type, but the state portion must be fixed to a type that is used by all related
+stateful computations.
 
 All `State` instances wrap a function of the form `s -> Pair a s` and can be
 constructed by providing a function of this form. In order to get maximum
-reuse of existing functions, a few construction helpers are available on
+reuse of existing functions, a few construction helpers are available on the
 `State` constructor.
 
 `State` is lazy and is required to be run at the edge with some initial state.
 Three methods are available on the instance for running the `State` with a
-given initial state. `runWith` will return a `Pair a s` with the state `s` on
-the right and the resultant `a` on the left.
+given initial state. [`runWith`](#runwith) will return a `Pair a s` with the
+state `s` on the right and the resultant `a` on the left.
 
 The other two are used for extracting either the state or resultant, unwrapping
-the values from the `Pair` and discarding the unwanted portion. `evalWith` is
-used when the resultant is wanted, while `execWith` is used to pull the state.
+the values from the `Pair` and discarding the unwanted portion.
+[`evalWith`](#evalwith) used when the resultant is wanted, while
+[`execWith`](#execwith) is used to pull the state.
 
 ```js
-const Pair = require('crocks/Pair')
 const State = require('crocks/State')
+const { get, put } = State
 
+const Pair = require('crocks/Pair')
 const constant = require('crocks/combinators/constant')
 
-const { get, put } = State
 
 // toUpper :: String -> String
 const toUpper =
@@ -79,17 +80,18 @@ State.get :: () -> State s s
 State.get :: (s -> a) -> State s a
 ```
 
-A construction helper that is used to access the state portion of `State`. To
-make the state accessible, `get` will place the state in the resultant portion,
-overwriting what was there previously.
+A construction helper that is used to access the state portion of a given
+`State` instance. To make the state accessible, `get` will place the state in
+the resultant portion, overwriting what was there previously.
 
-`get` may be called with or without a function as an argument. When a function
-is not provided, the state will be applied to the resultant as is. The state
-will be mapped over any provided function that takes the same type as the
+`get` may be called with or without a function as it's argument. When nothing is
+provided for the argument, the state will be applied to the resultant as is. The
+state will be mapped over any provided function that takes the same type as the
 state, with the result deposited in the resultant.
 
 ```js
 const { get } = require('crocks/State')
+
 const chain = require('crocks/pointfree/chain')
 const compose = require('crocks/helpers/compose')
 const isNumber = require('crocks/predicates/isNumber')
@@ -97,7 +99,7 @@ const option = require('crocks/pointfree/option')
 const prop = require('crocks/Maybe/prop')
 const safe = require('crocks/Maybe/safe')
 
-// propOr :: (String, (b -> Boolean), a) -> Object -> b
+// propOr :: (String, (b -> Boolean), a) -> Object -> c
 const propOr = (key, pred, def) =>
   compose(option(def), chain(safe(pred)), prop(key))
 
@@ -131,13 +133,14 @@ State.modify :: (s -> s) -> State s ()
 
 A construction helper that can be used to lift an endo-function that matches
 the fixed type of the state portion. The lifted function will receive the state
-and then replace it with the result of the function. Great care should be taken
-to not use functions that will change the type of the state as it may not be
-expected in other stateful computations and can result in hard to track down
-bugs.
+and returns a new `State` instance with the result of the function in the state
+portion. Great care should be taken to not use functions that will change the
+type of the state as it may not be expected in other stateful computations and
+can result in hard to track down bugs.
 
 ```js
 const { modify } = require('crocks/State')
+
 const mapProps = require('crocks/helpers/mapProps')
 
 // add :: Number -> Number -> Number
@@ -170,10 +173,11 @@ addValue(5)
 State.put :: s -> State s ()
 ```
 
-Used to replace a given state with a new value, `put` can be used anytime that
-the state can change without having to know about it's previous value. If the
-previous value is required for a given stateful computation, [`modify`](#modify)
-can be used to lift a function that represents the change.
+Used to replace the state portion of a given State instance,, `put` can be
+employed anytime that the state can change without having to know about it's
+previous value. If the previous value is required for a given stateful
+computation, [`modify`](#modify) can be used to lift a function that represents
+the change.
 
 As put updates the state, it is important to ensure that the state portion stays
 fixed for all related functions. Changing the type of the state portion may
@@ -220,7 +224,7 @@ State.of :: a -> State s a
 ```
 
 Used to "blindly" lift any Javascript value into a `State`, `of` will take the
-provided value you and return back a new `State` instance with the value in
+provided value and return back a new `State` instance with the value in
 the resultant. There are many uses for `of`, but mostly it is used to set the
 resultant in the same way [`put`](#put) is used to replace the state. Many times
 `of` is used at the start of a given stateful computation or in conjunction
@@ -281,10 +285,11 @@ State s a ~> (a -> b) -> State s b
 ```
 
 While the state portion `s` of `State` must remain fixed to a type, the
-resultant `a` can vary in it's type as needed. This allows to represent complex
-stateful computations with `State`. The `map` method provides a means to lift
-a function into the datatype that will be applied to the resultant and return
-a new instance of `State` with the result of the function as the new resultant.
+resultant `a` can vary in it's type as needed. This allows complex stateful
+computations to be represented with `State`. The `map` method provides a means
+to lift a function into the datatype that will be applied to the resultant and
+return a new instance of `State` with the result of the function as the new
+resultant.
 
 While this is similar to the [`modify`](#modify) construction helper, which
 lifts an endo-function that acts upon the state, `map` does not require an
@@ -457,14 +462,14 @@ add(10)
 State s a ~> s -> Pair a s
 ```
 
-`State` is a lazy datatype that is requires a value for it's state portion to
-be run. A given `State` instance provides a `runWith` method that accepts a
-value to run the instance with. The value must be a member of the type that the
+`State` is a lazy datatype that requires a value for it's state portion to be
+run. A given `State` instance provides a `runWith` method that accepts a value
+to run the instance with. The value must be a member of the type that the
 given `State` instance is fixed to in it's state portion, `s`.
 
-`runWith`, when called with a value, will run the state transition with the given
-value as the initial state and will return the resulting `Pair` with the
-resultant in the `fst` (first) and the state in the `snd` (second).
+When called, `runWith` will run the state transition with the given value as the
+initial state and will return the resulting `Pair` with the resultant in the
+`fst` (first) and the state in the `snd` (second).
 
 
 ```js
@@ -498,9 +503,9 @@ be run. A given `State` instance provides an `evalWith` method that accepts a
 value to run the instance with. The value must be a member of the type that the
 given `State` instance is fixed to in it's state portion, `s`.
 
-`evalWith`, when called with a value, will run the state transition with the
-given value as the initial state and will return the resulting resultant and
-will discard the state portion.
+When called, `evalWith` will run the state transition with the given value as
+the initial state and will return the resulting resultant discarding the state
+portion.
 
 ```js
 const State = require('crocks/State')
@@ -551,9 +556,9 @@ be run. A given `State` instance provides an `execWith` method that accepts a
 value to run the instance with. The value must be a member of the type that the
 given `State` instance is fixed to in it's state portion, `s`.
 
-`execWith`, when called with a value, will run the state transition with the
-given value as the initial state and will return the resulting state and will
-discard the resultant portion.
+When called, `execWith` will run the state transition with the given value as
+the initial state and will return the resulting state, discarding the resultant
+portion.
 
 ```js
 const { modify } = require('crocks/State')
@@ -600,9 +605,10 @@ also return the resulting resultant, throwing away the resulting state.
 ```js
 const { get } = require('crocks/State')
 
+const evalWith = require('crocks/State/evalWith')
+
 const compose = require('crocks/helpers/compose')
 const curry = require('crocks/helpers/curry')
-const evalWith = require('crocks/State/evalWith')
 const flip = require('crocks/combinators/flip')
 
 // addToState :: Number -> State Number Number

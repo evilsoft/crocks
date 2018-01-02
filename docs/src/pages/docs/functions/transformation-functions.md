@@ -1,11 +1,10 @@
 ---
-description: "Transformation Functions API"
-layout: "guide"
 title: "Transformation Functions"
-weight: 8
+description: "Transformation Functions API"
+layout: "notopic"
+weight: 6
 ---
 
-### Transformation Functions
 Transformation functions are mostly used to reduce unwanted nesting of similar
 types. Take for example the following structure:
 

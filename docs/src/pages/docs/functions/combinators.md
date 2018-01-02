@@ -1,13 +1,14 @@
 ---
 description: "Combinators API"
-layout: "guide"
+layout: "notopic"
 title: "Combinators"
-weight: 3
+weight: 1
 ---
 
-### Combinators
 #### applyTo
+
 `crocks/combinators/applyTo`
+
 ```haskell
 applyTo :: (a -> b) -> a -> b
 ```
@@ -16,7 +17,9 @@ and a value and then returns the result of that function with the argument
 applied.
 
 #### composeB
+
 `crocks/combinators/composeB`
+
 ```haskell
 composeB :: (b -> c) -> (a -> b) -> a -> c
 ```
@@ -26,10 +29,12 @@ will return a function that will take value `a` and apply it to `g`, passing the
 result as an argument to `f`, and will finally return the result of `f`. (This
 allows only two functions, if you want to avoid things like:
 `composeB(composeB(f, g), composeB(h, i))` then check out
-[`compose`](#compose).)
+[`compose`](helpers.html#compose).)
 
 #### constant
+
 `crocks/combinators/constant`
+
 ```haskell
 constant :: a -> _ -> a
 ```
@@ -38,17 +43,21 @@ give you back a function that will return that same value no matter what you
 pass it.
 
 #### flip
+
 `crocks/combinators/flip`
+
 ```haskell
 flip :: (a -> b -> c) -> b -> a -> c
 ```
-This little function just takes a function and returns a function that takes the
-first two parameters in reverse. One can compose flip calls down the line to
+This little function just takes a function and returns a function that takes
+the first two parameters in reverse. One can compose flip calls down the line to
 flip all, or some of the other parameters if there are more than two. Mix and
-match to your :heart:'s desire.
+match to your heart's desire.
 
 #### identity
+
 `crocks/combinators/identity`
+
 ```haskell
 identity ::  a -> a
 ```
@@ -58,7 +67,9 @@ something, it returns that thing right back to you. So simple, I will leave it
 as an exercise to reason about why this is so powerful and important.
 
 #### reverseApply
+
 `crocks/combinators/reverseApply`
+
 ```haskell
 reverseApply :: a -> (a -> b) -> b
 ```
@@ -69,7 +80,9 @@ Once that function is provided, it will return the result of applying your value
 to that function.
 
 #### substitution
+
 `crocks/combinators/substitution`
+
 ```haskell
 substitution :: (a -> b -> c) -> (a -> b) -> a -> c
 ```
@@ -81,4 +94,3 @@ of both functions, and the result of the second function to the second parameter
 of the first function. Finally after all that juggling, it will return the
 result of that first function. When used with partial application on that first
 parameter, a whole new world of combinatory madness is presented!
-

@@ -1,11 +1,10 @@
 ---
 description: "Logic Functions API"
-layout: "guide"
+layout: "notopic"
 title: "Logic Functions"
-weight: 5
+weight: 3
 ---
 
-### Logic Functions
 The functions in this section are used to represent logical branching in a
 declarative manner. Each of these functions require either `Pred`s or predicate
 functions in their input. Since these functions work with `Pred`s and predicate

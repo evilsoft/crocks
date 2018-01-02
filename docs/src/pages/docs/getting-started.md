@@ -1,8 +1,8 @@
 ---
+title: "Getting Started"
 description: "Getting started with a Crocks."
 icon: "arrow-right-rod"
 layout: "guide"
-title: "Getting Started"
 weight: 1
 ---
 
@@ -32,11 +32,11 @@ import crocks from 'crocks'
 
 <article id="import-only-what-you-need">
 
-## Import only what you need 
+## Import only what you need
 
 This lib *should* work, with no additional compilation in all current browsers
 (Edge, Safari, Chrome, Firefox), if it does not, please file an issue as I
-really, really want it to. :smile_cat:.
+really, really want it to. 
 
 There is a lot to this library, and as such it may not be desired to bring in
 the entire library when bundling for a library or a frontend application. If

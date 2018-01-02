@@ -1,23 +1,12 @@
 ---
-title: "API"
-description: "Crocks API"
-layout: "guide"
+title: "Functions"
+description: "functions"
+layout: "notopic"
 icon: "code-file"
-weight: 2
+weight: 4
 ---
 
-There are (8) classifications of "things" included in this library:
-
-* [Crocks](crocks.html): These are the ADTs that this library is centered around.
-They are all `Functor` based Data Types that provide different computational
-contexts for working in a more declarative, functional flow. For the most part,
-a majority of the other bits in `crocks` exist to serve these ADTs.
-
-* [Monoids](monoids.html): These helpful ADTs are in a class of their own, not
-really `Functor`s in their own right (although some can be), they are still very
-useful in our everyday programming needs. Ever need to Sum a list of Numbers or
-mix a mess of objects together? This is were you will find the ADTs you need to
-do that.
+There are (6) function classifications included in this library:
 
 * [Combinators](combinators.html): A collection of functions that are used for
 working with other functions. These do things like compose (2) functions

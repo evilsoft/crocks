@@ -1,8 +1,9 @@
 ---
+title: "Monoids"
 description: "Monoids API"
 layout: "guide"
-title: "Monoids"
-weight: 2
+icon: "code-file"
+weight: 3
 ---
 
 ### Monoids

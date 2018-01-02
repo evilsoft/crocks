@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([15,20,21,22],[
+webpackJsonppageComponent([18,21,22,23],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -28350,14 +28350,12 @@ exports.default = parseFromAnchor;
 /* 216 */,
 /* 217 */,
 /* 218 */,
-/* 219 */,
-/* 220 */,
-/* 221 */
+/* 219 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "eHyed", function() { return eHyed; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "JPMLJ", function() { return JPMLJ; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28369,15 +28367,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var templates;
 goog.loadModule(function(exports) {
 
-// This file was automatically generated from State.soy.
+// This file was automatically generated from Pred.soy.
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace eHyed.
+ * @fileoverview Templates in namespace JPMLJ.
  * @public
  */
 
-goog.module('eHyed.incrementaldom');
+goog.module('JPMLJ.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28411,237 +28409,170 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var param734 = function() {
-    $templateAlias2({code: 'State s a', mode: 'haskell'}, null, opt_ijData);
+  var param483 = function() {
+    $templateAlias2({code: 'Pred a Boolean', mode: 'haskell'}, null, opt_ijData);
     ie_open('p');
+      itext('Defined as a Monoidal Contravariant datatype, ');
       ie_open('code');
-        itext('State');
+        itext('Pred');
       ie_close('code');
-      itext(' is an Algebraic Data Type that abstracts away the associated state management that comes with stateful computations.');
+      itext(' wraps a predicate function of the form ');
       ie_open('code');
-        itext('State');
+        itext('(a -> Boolean)');
       ie_close('code');
-      itext(' is parameterized by two types, a state ');
-      ie_open('code');
-        itext('s');
-      ie_close('code');
-      itext(' and a resultant ');
-      ie_open('code');
-        itext('a');
-      ie_close('code');
-      itext('. The resultant portion may vary it\'s type, but the state portion must be fixed to a type that is used by all related stateful computations.');
+      itext('.');
     ie_close('p');
     ie_open('p');
-      itext('All ');
+      itext('The far right parameter of ');
       ie_open('code');
-        itext('State');
+        itext('Pred');
       ie_close('code');
-      itext(' instances wrap a function of the form ');
+      itext(' is always fixed to the type of ');
       ie_open('code');
-        itext('s -> Pair a s');
+        itext('Boolean');
       ie_close('code');
-      itext(' and can be constructed by providing a function of this form. In order to get maximum reuse of existing functions, a few construction helpers are available on the');
-      ie_open('code');
-        itext('State');
-      ie_close('code');
-      itext(' constructor.');
+      itext(', so the result of the wrapped predicate function can never be mapped. While the right parameter is fixed, the input to the predicate can vary.');
     ie_close('p');
     ie_open('p');
+      itext('Another property of ');
       ie_open('code');
-        itext('State');
+        itext('Pred');
       ie_close('code');
-      itext(' is lazy and is required to be run at the edge with some initial state. Three methods are available on the instance for running the ');
+      itext(' instances is that they can be combined using their Monodial interface. Combining instances will result in a new instance that returns the result of each ');
       ie_open('code');
-        itext('State');
+        itext('Pred');
       ie_close('code');
-      itext(' with a given initial state. ');
+      itext(' under logical conjunction.');
+    ie_close('p');
+    ie_open('p');
+      itext('As ');
+      ie_open('code');
+        itext('Pred');
+      ie_close('code');
+      itext(' wraps a function, it is lazy and will not execute until its argument is satisfied. A given instance is run but calling the ');
       ie_open('a', null, null,
           'href', '#runwith');
         ie_open('code');
           itext('runWith');
         ie_close('code');
       ie_close('a');
-      itext(' will return a ');
-      ie_open('code');
-        itext('Pair a s');
-      ie_close('code');
-      itext(' with the state ');
-      ie_open('code');
-        itext('s');
-      ie_close('code');
-      itext(' on the right and the resultant ');
-      ie_open('code');
-        itext('a');
-      ie_close('code');
-      itext(' on the left.');
+      itext('method, supplying it the argument to test.');
     ie_close('p');
     ie_open('p');
-      itext('The other two are used for extracting either the state or resultant, unwrapping the values from the ');
+      itext('One of the features of ');
       ie_open('code');
-        itext('Pair');
+        itext('crocks');
       ie_close('code');
-      itext(' and discarding the unwanted portion.');
-      ie_open('a', null, null,
-          'href', '#evalwith');
-        ie_open('code');
-          itext('evalWith');
-        ie_close('code');
-      ie_close('a');
-      itext(' used when the resultant is wanted, while');
-      ie_open('a', null, null,
-          'href', '#execwith');
-        ie_open('code');
-          itext('execWith');
-        ie_close('code');
-      ie_close('a');
-      itext(' is used to pull the state.');
+      itext(' is the ability to use both normal predicate functions and ');
+      ie_open('code');
+        itext('Pred');
+      ie_close('code');
+      itext(' instances interchangeably. For any ');
+      ie_open('code');
+        itext('crocks');
+      ie_close('code');
+      itext(' function that takes a predicate, either a predicate function or a ');
+      ie_open('code');
+        itext('Pred');
+      ie_close('code');
+      itext(' instance can be used.');
     ie_close('p');
-    $templateAlias2({code: 'const State = require(\'crocks/State\')\nconst { get, put } = State\n\nconst Pair = require(\'crocks/Pair\')\nconst constant = require(\'crocks/combinators/constant\')\n\n\n// toUpper :: String -> String\nconst toUpper =\n  x => x.toUpperCase()\n\n// putResultant :: String -> State String String\nconst putResultant = x =>\n  put(x)\n    .map(constant(x))\n\n// standard construction\n// State String String\nState(s => Pair(toUpper(s), s))\n  .runWith(\'nice\')\n//=> Pair(\'NICE\', \'nice\')\n\n// construction helper\n// State String String\nget(toUpper)\n  .runWith(\'nice\')\n//=> Pair(\'NICE\', \'nice\')\n\n// combine states\nget(toUpper)\n  .chain(putResultant)\n  .runWith(\'nice\')\n//=> Pair(\'NICE\', \'NICE\')\n\n// pull resultant only\nget(toUpper)\n  .evalWith(\'nice\')\n//=> \'NICE\'\n\n// pull state only\nget(toUpper)\n  .execWith(\'nice\')\n//=> \'nice\'', mode: 'javascript'}, null, opt_ijData);
+    ie_open('p');
+      itext('This implementation of ');
+      ie_open('code');
+        itext('Pred');
+      ie_close('code');
+      itext(' was heavily inspired by ');
+      ie_open('a', null, null,
+          'href', 'https://medium.com/@drboolean/monoidal-contravariant-functors-are-actually-useful-1032211045c4#.polugsx2a');
+        itext('this article');
+      ie_close('a');
+      itext('.');
+    ie_close('p');
+    $templateAlias2({code: 'const Pred = require(\'crocks/Pred\')\n\nconst isNumber = require(\'crocks/predicates/isNumber\')\nconst propOr = require(\'crocks/helpers/propOr\')\nconst filter = require(\'crocks/pointfree/filter\')\n\n// largeNumber :: Pred Number\nconst largeNumber =\n  Pred(isNumber)\n    .concat(Pred(x => x > 100))\n\n// largeItem :: Pred Object\nconst largeItem =\n  largeNumber\n    .contramap(propOr(null, \'item\'))\n\nlargeNumber\n  .runWith(45)\n//=> false\n\nlargeNumber\n  .runWith(175)\n//=> true\n\nlargeItem\n  .runWith({ item: 190 })\n//=> true\n\nlargeItem\n  .runWith({ item: 9 })\n//=> false\n\nlargeItem\n  .runWith(9)\n//=> false\n\nfilter(largeNumber, [ 200, 375, 15 ])\n//=> [ 200, 375 ]', mode: 'javascript'}, null, opt_ijData);
     ie_open('article', null, null,
-        'id', 'implements');
+        'id', 'topic-implements');
       ie_open('h2');
-        itext('Implements');
+        ie_open('a', null, null,
+            'id', 'implements',
+            'href', '#implements');
+          itext('Implements');
+        ie_close('a');
       ie_close('h2');
       ie_open('p');
         ie_open('code');
-          itext('Functor');
+          itext('Semigroup');
         ie_close('code');
         itext(', ');
         ie_open('code');
-          itext('Apply');
+          itext('Monoid');
         ie_close('code');
         itext(', ');
         ie_open('code');
-          itext('Chain');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('Applicative');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('Monad');
+          itext('Contravariant');
         ie_close('code');
       ie_close('p');
     ie_close('article');
     ie_open('article', null, null,
-        'id', 'constructor');
+        'id', 'topic-constructor');
       ie_open('h2');
-        itext('Constructor Methods');
+        ie_open('a', null, null,
+            'id', 'constructor-methods',
+            'href', '#constructor-methods');
+          itext('Constructor Methods');
+        ie_close('a');
       ie_close('h2');
       ie_open('h4');
-        itext('get');
-      ie_close('h4');
-      $templateAlias2({code: 'State.get :: () -> State s s\nState.get :: (s -> a) -> State s a', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('A construction helper that is used to access the state portion of a given');
-        ie_open('code');
-          itext('State');
-        ie_close('code');
-        itext(' instance. To make the state accessible, ');
-        ie_open('code');
-          itext('get');
-        ie_close('code');
-        itext(' will place the state in the resultant portion, overwriting what was there previously.');
-      ie_close('p');
-      ie_open('p');
-        ie_open('code');
-          itext('get');
-        ie_close('code');
-        itext(' may be called with or without a function as it\'s argument. When nothing is provided for the argument, the state will be applied to the resultant as is. The state will be mapped over any provided function that takes the same type as the state, with the result deposited in the resultant.');
-      ie_close('p');
-      $templateAlias2({code: 'const { get } = require(\'crocks/State\')\n\nconst chain = require(\'crocks/pointfree/chain\')\nconst compose = require(\'crocks/helpers/compose\')\nconst isNumber = require(\'crocks/predicates/isNumber\')\nconst option = require(\'crocks/pointfree/option\')\nconst prop = require(\'crocks/Maybe/prop\')\nconst safe = require(\'crocks/Maybe/safe\')\n\n// propOr :: (String, (b -> Boolean), a) -> Object -> c\nconst propOr = (key, pred, def) =>\n  compose(option(def), chain(safe(pred)), prop(key))\n\n// safeNumber :: Object -> Number\nconst safeNumber =\n  propOr(\'number\', isNumber, 0)\n\nget(safeNumber)\n  .runWith({ number: 23 })\n//=> Pair(23, { number: 23 })\n\nget(safeNumber)\n  .evalWith({ number: \'23\' })\n//=> 0\n\nget()\n  .map(safeNumber)\n  .evalWith({ number: 23 })\n//=> 23\n\nget()\n  .map(safeNumber)\n  .runWith({ string: \'47\' })\n//=> Pair(0, { string: \'47\'})', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        itext('modify');
-      ie_close('h4');
-      $templateAlias2({code: 'State.modify :: (s -> s) -> State s ()', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('A construction helper that can be used to lift an endo-function that matches the fixed type of the state portion. The lifted function will receive the state and returns a new ');
-        ie_open('code');
-          itext('State');
-        ie_close('code');
-        itext(' instance with the result of the function in the state portion. Great care should be taken to not use functions that will change the type of the state as it may not be expected in other stateful computations and can result in hard to track down bugs.');
-      ie_close('p');
-      $templateAlias2({code: 'const { modify } = require(\'crocks/State\')\n\nconst mapProps = require(\'crocks/helpers/mapProps\')\n\n// add :: Number -> Number -> Number\nconst add =\n  x => y => x + y\n\n// addState :: Number -> State Number ()\nconst addState = x =>\n  modify(add(x))\n\n// addValue :: Number -> State Object ()\nconst addValue = x =>\n  modify(mapProps({ value: add(x) }))\n\naddState(5)\n  .execWith(45)\n//=> 50\n\naddValue(5)\n  .execWith({ value: 45 })\n//=> { value: 50 }\n\naddValue(5)\n  .execWith({})\n//=> {}', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        itext('put');
-      ie_close('h4');
-      $templateAlias2({code: 'State.put :: s -> State s ()', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('Used to replace the state portion of a given State instance,, ');
-        ie_open('code');
-          itext('put');
-        ie_close('code');
-        itext(' can be employed anytime that the state can change without having to know about it\'s previous value. If the previous value is required for a given stateful computation, ');
         ie_open('a', null, null,
-            'href', '#modify');
-          ie_open('code');
-            itext('modify');
-          ie_close('code');
+            'id', 'empty',
+            'href', '#empty');
+          itext('empty');
         ie_close('a');
-        itext(' can be used to lift a function that represents the change.');
-      ie_close('p');
-      ie_open('p');
-        itext('As put updates the state, it is important to ensure that the state portion stays fixed for all related functions. Changing the type of the state portion may result in hard to debug bugs and destroys the relationship between stateful computations.');
-      ie_close('p');
-      $templateAlias2({code: 'const { put } = require(\'crocks/State\')\n\nconst compose = require(\'crocks/helpers/compose\')\nconst isString = require(\'crocks/predicates/isString\')\nconst option = require(\'crocks/pointfree/option\')\nconst safe = require(\'crocks/Maybe/safe\')\n\n// safeString :: a -> String\nconst safeString =\n  compose(option(\'\'), safe(isString))\n\n// reset :: () -> State String ()\nconst reset = () =>\n  put(\'\')\n\n// update :: a ->  State String ()\nconst update =\n  compose(put, safeString)\n\n// heckYeah :: State String ()\nconst heckYeah =\n  update(\'Oh Heck Yeah\')\n\nheckYeah\n  .execWith(\'Gosh\')\n//=> \'Oh Heck Yeah\'\n\nheckYeah\n  .chain(reset)\n  .runWith(\'Gosh\')\n// Pair((), \'\')', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        itext('of');
       ie_close('h4');
-      $templateAlias2({code: 'State.of :: a -> State s a', mode: 'haskell'}, null, opt_ijData);
+      $templateAlias2({code: 'Pred.empty :: () -> Pred a', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
-        itext('Used to "blindly" lift any Javascript value into a ');
         ie_open('code');
-          itext('State');
+          itext('empty');
         ie_close('code');
-        itext(', ');
+        itext(' provides the identity for the ');
         ie_open('code');
-          itext('of');
+          itext('Monoid');
         ie_close('code');
-        itext(' will take the provided value and return back a new ');
+        itext(' in that when the value it provides is ');
         ie_open('code');
-          itext('State');
+          itext('concat');
         ie_close('code');
-        itext(' instance with the value in the resultant. There are many uses for ');
+        itext('ed to any other value, it will return the other value. In the case of ');
         ie_open('code');
-          itext('of');
+          itext('Pred');
         ie_close('code');
-        itext(', but mostly it is used to set the resultant in the same way ');
-        ie_open('a', null, null,
-            'href', '#put');
-          ie_open('code');
-            itext('put');
-          ie_close('code');
-        ie_close('a');
-        itext(' is used to replace the state. Many times');
+        itext(' the result of ');
         ie_open('code');
-          itext('of');
+          itext('empty');
         ie_close('code');
-        itext(' is used at the start of a given stateful computation or in conjunction with ');
-        ie_open('a', null, null,
-            'href', '#put');
-          ie_open('code');
-            itext('put');
-          ie_close('code');
-        ie_close('a');
-        itext(' and ');
-        ie_open('a', null, null,
-            'href', '#modify');
-          ie_open('code');
-            itext('modify');
-          ie_close('code');
-        ie_close('a');
-        itext(' to replace the ');
+        itext(' is a ');
         ie_open('code');
-          itext('Unit');
+          itext('Pred');
         ie_close('code');
-        itext(' the resultant is set to for those construction helpers.');
+        itext(' that will always return');
+        ie_open('code');
+          itext('true');
+        ie_close('code');
+        itext('. ');
+        ie_open('code');
+          itext('empty');
+        ie_close('code');
+        itext(' is available on both the Constructor and the Instance for convenience.');
       ie_close('p');
-      $templateAlias2({code: 'const State = require(\'crocks/State\')\nconst { get, put } = State\n\n// updatePop :: String -> State String String\nconst updatePop = x =>\n  get().chain(\n    old => put(x).chain(\n      () => State.of(old)\n    )\n  )\n\nState.of(\'hotness\')\n  .chain(updatePop)\n  .runWith(\'crusty\')\n//=> Pair(\'crusty\', \'hotness\')', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'const Pred = require(\'crocks/Pred\')\n\nconst isEmpty = require(\'crocks/predicates/isEmpty\')\nconst not = require(\'crocks/logic/not\')\n\n// empty :: Pred a\nconst empty =\n  Pred.empty()\n\n// notEmpty :: Pred a\nconst notEmpty =\n  Pred(not(isEmpty))\n\nempty\n  .runWith(\'\')\n//=> true\n\nnotEmpty\n  .concat(empty)\n  .runWith([])\n//=> false\n\nnotEmpty\n  .concat(empty)\n  .runWith([ 1, 2, 3 ])\n//=> true\n\nempty\n  .concat(notEmpty)\n  .runWith(\'\')\n//=> false\n\nempty\n  .concat(notEmpty)\n  .runWith(\'123\')\n//=> true', mode: 'javascript'}, null, opt_ijData);
       ie_open('h4');
-        itext('type');
+        ie_open('a', null, null,
+            'id', 'type',
+            'href', '#type');
+          itext('type');
+        ie_close('a');
       ie_close('h4');
-      $templateAlias2({code: 'State.type :: () -> String', mode: 'haskell'}, null, opt_ijData);
+      $templateAlias2({code: 'Pred.type :: () -> String', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
         ie_open('code');
           itext('type');
@@ -28668,333 +28599,169 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_close('code');
         itext(' is available on both the Constructor and the Instance for convenience.');
       ie_close('p');
-      $templateAlias2({code: 'const State = require(\'crocks/State\')\n\nconst Reader = require(\'crocks/Reader\')\nconst identity = require(\'crocks/combinators/identity\')\nconst isSameType = require(\'crocks/predicates/isSameType\')\n\nState.type() //=>  "State"\n\nisSameType(State, State.of(3))        //=> true\nisSameType(State, State)              //=> true\nisSameType(State, Reader(identity))   //=> false\nisSameType(State.of(false), Reader)   //=> false', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'const Pred = require(\'crocks/Pred\')\n\nconst Maybe = require(\'crocks/Maybe\')\nconst isNil = require(\'crocks/predicates/isEmpty\')\nconst isSameType = require(\'crocks/predicates/isSameType\')\n\nPred.type()   //=>  "Pred"\n\nisSameType(Pred, Pred(isNil))    //=> true\nisSameType(Pred, Pred)           //=> true\nisSameType(Pred, Maybe.Just(4))  //=> false\nisSameType(Pred(isNil), Maybe)   //=> false', mode: 'javascript'}, null, opt_ijData);
     ie_close('article');
     ie_open('article', null, null,
-        'id', 'instance');
+        'id', 'topic-instance');
       ie_open('h2');
-        itext('Instance Methods');
+        ie_open('a', null, null,
+            'id', 'instance-methods',
+            'href', '#instance-methods');
+          itext('Instance Methods');
+        ie_close('a');
       ie_close('h2');
       ie_open('h4');
-        itext('map');
-      ie_close('h4');
-      $templateAlias2({code: 'State s a ~> (a -> b) -> State s b', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('While the state portion ');
-        ie_open('code');
-          itext('s');
-        ie_close('code');
-        itext(' of ');
-        ie_open('code');
-          itext('State');
-        ie_close('code');
-        itext(' must remain fixed to a type, the resultant ');
-        ie_open('code');
-          itext('a');
-        ie_close('code');
-        itext(' can vary in it\'s type as needed. This allows complex stateful computations to be represented with ');
-        ie_open('code');
-          itext('State');
-        ie_close('code');
-        itext('. The ');
-        ie_open('code');
-          itext('map');
-        ie_close('code');
-        itext(' method provides a means to lift a function into the datatype that will be applied to the resultant and return a new instance of ');
-        ie_open('code');
-          itext('State');
-        ie_close('code');
-        itext(' with the result of the function as the new resultant.');
-      ie_close('p');
-      ie_open('p');
-        itext('While this is similar to the ');
         ie_open('a', null, null,
-            'href', '#modify');
-          ie_open('code');
-            itext('modify');
-          ie_close('code');
+            'id', 'concat',
+            'href', '#concat');
+          itext('concat');
         ie_close('a');
-        itext(' construction helper, which lifts an endo-function that acts upon the state, ');
-        ie_open('code');
-          itext('map');
-        ie_close('code');
-        itext(' does not require an endo-function as it can move to any type.');
-      ie_close('p');
-      ie_open('p');
-        itext('Due to the composition law associated with ');
-        ie_open('code');
-          itext('map');
-        ie_close('code');
-        itext(', successive ');
-        ie_open('code');
-          itext('map');
-        ie_close('code');
-        itext('s can be composed together using function composition. This will give the same results but will only map the value once, instead of once for every mapping.');
-      ie_close('p');
-      $templateAlias2({code: 'const { get } = require(\'crocks/State\')\n\nconst compose = require(\'crocks/helpers/compose\')\nconst objOf = require(\'crocks/helpers/objOf\')\nconst propOr = require(\'crocks/helpers/propOr\')\n\n// add :: Number -> Number -> Number\nconst add =\n  x => y => x + y\n\n// getNum :: State Object Number\nconst getNum =\n  get(propOr(0, \'num\'))\n\ngetNum\n  .map(add(10))\n  .evalWith({ num: 32 })\n//=> 42\n\ngetNum\n  .map(add(10))\n  .map(objOf(\'result\'))\n  .evalWith({ val: 32 })\n//=> { result: 10 }\n\n// comp :: Number -> Object\nconst comp = compose(\n  objOf(\'result\'),\n  add(10)\n)\n\ngetNum\n  .map(comp)\n  .evalWith({ num: 32 })\n//=> { result: 42 }', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        itext('ap');
       ie_close('h4');
-      $templateAlias2({code: 'State s (a -> b) ~> State s a -> State s b', mode: 'haskell'}, null, opt_ijData);
+      $templateAlias2({code: 'Pred a ~> Pred a -> Pred a', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
-        itext('Short for apply, the ');
         ie_open('code');
-          itext('ap');
+          itext('concat');
         ie_close('code');
-        itext(' method is used to apply the resultant of a given');
+        itext(' is used to combine (2) ');
         ie_open('code');
-          itext('State');
+          itext('Semigroup');
         ie_close('code');
-        itext(' instance to a function wrapped in another instance. On a ');
+        itext('s of the same type under an operation specified by the ');
         ie_open('code');
-          itext('State');
+          itext('Semigroup');
         ie_close('code');
-        itext('instance that wraps a function, calling ');
+        itext('. In the case of ');
         ie_open('code');
-          itext('ap');
+          itext('Pred');
         ie_close('code');
-        itext(', providing it another ');
+        itext(', the results of both');
         ie_open('code');
-          itext('State');
+          itext('Preds');
         ie_close('code');
-        itext('instance, will return a new ');
-        ie_open('code');
-          itext('State');
-        ie_close('code');
-        itext(' instance with the result of the function in the resultant portion.');
+        itext('s are combined under logical conjunction.');
       ie_close('p');
-      ie_open('p');
-        itext('When used with curried, polyadic functions, multiple stateful computations can be combined using the lifted function as a means to combine each of the instances\' resultants.');
-      ie_close('p');
-      $templateAlias2({code: 'const { get, modify } = require(\'crocks/State\')\n\nconst assoc = require(\'crocks/helpers/assoc\')\nconst propOr = require(\'crocks/helpers/propOr\')\n\nconst data = {\n  tax: .084,\n  sub: 34.97\n}\n\n// add :: Number -> Number -> Number\nconst add =\n  x => y => x + y\n\n// multiply :: Number -> Number -> Number\nconst multiply =\n  x => y => x * y\n\n// round :: Number -> Number\nconst round =\n  x => Math.round(x * 100) / 100\n\n// getKey :: String -> State Object Number\nconst getKey = key =>\n  get(propOr(0, key))\n\n// updateKey :: String -> a -> State Object ()\nconst updateKey = key => val =>\n  modify(assoc(key, val))\n\n// addToSub :: Number -> String Object Number\nconst addToSub = x =>\n  getKey(\'sub\')\n    .map(add(x))\n\nconst calcTax =\n  getKey(\'tax\')\n    .map(multiply)\n    .ap(getKey(\'sub\'))\n\n// applyTax :: State Object ()\nconst applyTax =\n  calcTax\n    .chain(addToSub)\n    .map(round)\n    .chain(updateKey(\'total\'))\n\napplyTax\n  .execWith(data)\n//=> { tax: 0.084, sub: 34.07, total: 37.91 }', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'const Pred = require(\'crocks/Pred\')\n\nconst or = require(\'crocks/logic/or\')\nconst not = require(\'crocks/logic/not\')\nconst filter = require(\'crocks/pointfree/filter\')\n\nconst isEven =\n  x => !(x % 2)\n\n// isOdd :: Pred Number\nconst isOdd =\n  Pred(not(isEven))\n\n// lt20 :: Pred Number\nconst lt20 =\n  Pred(x => x < 20)\n\n// gt5 :: Pred Number\nconst gt5 =\n  Pred(x => x > 5)\n\n// inRange :: Pred Number\nconst inRange =\n  lt20.concat(gt5)\n\n// isOddInRange :: Pred Number\nconst isOddInRange =\n  isOdd.concat(inRange)\n\n// isValid :: Pred Number\nconst isValid =\n  Pred(or(isEven, isOddInRange))\n\n// data :: [ Number ]\nconst data =\n[ 1, 4, 12, 19, 32, 99, 76, 7 ]\n\nisOdd\n  .runWith(5)\n//=> true\n\nisOdd\n  .runWith(8)\n//=> false\n\nfilter(isOdd, data)\n//=> [ 1, 19, 99, 7 ]\n\nfilter(lt20, data)\n//=> [ 1, 4, 12, 19, 7 ]\n\nfilter(gt5, data)\n//=> [ 12, 19, 32, 99, 76, 7 ]\n\nfilter(inRange, data)\n//=> [ 12, 19, 7 ]\n\nfilter(isOddInRange, data)\n//=> [ 19, 7 ]\n\nfilter(isEven, data)\n// [ 4, 12, 32, 76 ]\n\nfilter(isValid, data)\n//=> [ 4, 12, 19, 32, 76, 7 ]', mode: 'javascript'}, null, opt_ijData);
       ie_open('h4');
-        itext('chain');
+        ie_open('a', null, null,
+            'id', 'contramap',
+            'href', '#contramap');
+          itext('contramap');
+        ie_close('a');
       ie_close('h4');
-      $templateAlias2({code: 'State s a ~> (a -> State s b) -> State s b', mode: 'haskell'}, null, opt_ijData);
+      $templateAlias2({code: 'Pred a ~> (b -> a) -> Pred b', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
-        itext('As a means to combine stateful computations, ');
+        itext('While the output of a ');
         ie_open('code');
-          itext('chain');
+          itext('Pred');
         ie_close('code');
-        itext(' is used to sequence state transactions that either read from or write to the state. ');
+        itext(' is fixed to ');
         ie_open('code');
-          itext('chain');
+          itext('Boolean');
         ie_close('code');
-        itext(' takes a unary function that must return a new ');
+        itext(', the input can vary type and value. This allows a given ');
         ie_open('code');
-          itext('State');
+          itext('Pred');
         ie_close('code');
-        itext(' instance. ');
+        itext(' to be adapted by mapping on the input, before it hits the wrapped predicate function. Using ');
         ie_open('code');
-          itext('chain');
+          itext('contramap');
         ie_close('code');
-        itext(' returns a new');
-        ie_open('code');
-          itext('State');
-        ie_close('code');
-        itext(' instance that will apply the computation when run.');
+        itext(', functions are lifted, mapping the input to now accept the type of the input of the given function.');
       ie_close('p');
-      $templateAlias2({code: 'const { get, modify } = require(\'crocks/State\')\n\n// add :: Number -> State Number ()\nconst add = x =>\n  modify(y => x + y)\n\n// multiply :: Number -> State Number ()\nconst multiply = x =>\n  modify(y => x * y)\n\n// double :: () -> State Number ()\nconst double = () =>\n  get()\n    .chain(add)\n\n// square :: () -> State Number ()\nconst square = () =>\n  get()\n    .chain(multiply)\n\nadd(10)\n  .execWith(10)\n//=> 20\n\nadd(10)\n  .chain(double)\n  .execWith(10)\n//=> 40\n\nadd(10)\n  .chain(square)\n  .execWith(10)\n//=> 400\n\nadd(10)\n  .chain(double)\n  .chain(square)\n  .execWith(10)\n//=> 1600', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'const Pred = require(\'crocks/Pred\')\nconst contramap = require(\'crocks/pointfree/contramap\')\nconst propOr = require(\'crocks/helpers/propOr\')\n\n// Length :: String | Function | Array\n// length :: Length -> Number\nconst length =\n  propOr(0, \'length\')\n\n// gt5 :: Pred Number\nconst gt5 =\n  Pred(x => x > 5)\n\n// lengthGt5 :: Pred Length\nconst validLength =\n  contramap(length, gt5)\n\n// validItemLength :: Pred Object\nconst validItemLength =\n  contramap(propOr(null, \'item\'), validLength)\n\ngt5\n  .runWith(5)\n//=> false\n\ngt5\n  .runWith(10)\n//=> true\n\nvalidLength\n  .runWith([ 1, 2, 3, 4, 5, 6 ])\n//=> true\n\nvalidLength\n  .runWith(null)\n//=> false\n\nvalidLength\n  .runWith(\'1234\')\n//=> false\n\nvalidItemLength\n  .runWith({ item: \'this is an item\' })\n//=> true', mode: 'javascript'}, null, opt_ijData);
       ie_open('h4');
-        itext('runWith');
+        ie_open('a', null, null,
+            'id', 'valueof',
+            'href', '#valueof');
+          itext('valueOf');
+        ie_close('a');
       ie_close('h4');
-      $templateAlias2({code: 'State s a ~> s -> Pair a s', mode: 'haskell'}, null, opt_ijData);
+      $templateAlias2({code: 'Pred a ~> () -> a -> Boolean', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
         ie_open('code');
-          itext('State');
+          itext('valueOf');
         ie_close('code');
-        itext(' is a lazy datatype that requires a value for it\'s state portion to be run. A given ');
+        itext(' is used on all ');
         ie_open('code');
-          itext('State');
+          itext('crocks');
         ie_close('code');
-        itext(' instance provides a ');
+        itext(' ');
+        ie_open('code');
+          itext('Monoid');
+        ie_close('code');
+        itext('s as a means of extraction. While the extraction is available, types that implement ');
+        ie_open('code');
+          itext('valueOf');
+        ie_close('code');
+        itext(' are not necessarily a');
+        ie_open('code');
+          itext('Comonad');
+        ie_close('code');
+        itext('. This function is used primarily for convenience for some of the helper functions that ship with ');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext('.');
+      ie_close('p');
+      ie_open('p');
+        itext('Calling ');
+        ie_open('code');
+          itext('valueOf');
+        ie_close('code');
+        itext(' on a ');
+        ie_open('code');
+          itext('Pred');
+        ie_close('code');
+        itext(' instance will result in the underlying predicate function. Most of the time this will not be required when working with ');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext('because all ');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext(' functions that take a predicate function can also take a');
+        ie_open('code');
+          itext('Pred');
+        ie_close('code');
+        itext(' instance.');
+      ie_close('p');
+      $templateAlias2({code: 'const Pred = require(\'crocks/Pred\')\n\nconst isArray = require(\'crocks/predicates/isArray\')\nconst isString = require(\'crocks/predicates/isString\')\nconst equals = require(\'crocks/pointfree/equals\')\nconst or = require(\'crocks/logic/or\')\n\n// lengthIsThree :: Pred a\nconst lengthIsThree =\n  Pred(equals(3))\n    .contramap(x => x.length)\n\n// pred :: Pred a\nconst pred =\n  Pred(or(isArray, isString))\n    .concat(lengthIsThree)\n\n// fn :: a -> Boolean\nconst fn =\n  pred.valueOf()\n\npred\n  .runWith(null)\n//=> false\n\npred\n  .runWith([ 1, 2, 3 ])\n//=> true\n\npred\n  .runWith(\'This is fun\')\n//=> true\n\nfn(null)          // false\nfn([ 1, 2, 3 ])   // true\nfn(\'This is fun\') // true\nfn([])            // false\nfn(\'\')            // false', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'runwith',
+            'href', '#runwith');
+          itext('runWith');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Pred a ~> a -> Boolean', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        itext('As ');
+        ie_open('code');
+          itext('Pred');
+        ie_close('code');
+        itext(' wraps a predicate function, it needs a mean to run it with some value to test against the predicate. ');
+        ie_open('code');
+          itext('Pred');
+        ie_close('code');
+        itext(' instances provide a method called');
         ie_open('code');
           itext('runWith');
         ie_close('code');
-        itext(' method that accepts a value to run the instance with. The value must be a member of the type that the given ');
-        ie_open('code');
-          itext('State');
-        ie_close('code');
-        itext(' instance is fixed to in it\'s state portion, ');
-        ie_open('code');
-          itext('s');
-        ie_close('code');
-        itext('.');
+        itext(' that will accept the value to be tested and then runs it through the predicate returning the result.');
       ie_close('p');
       ie_open('p');
-        itext('When called, ');
+        itext('Most of the time this function is not used while working with other predicate functions in ');
         ie_open('code');
-          itext('runWith');
+          itext('crocks');
         ie_close('code');
-        itext(' will run the state transition with the given value as the initial state and will return the resulting ');
+        itext(', as all functions that take a predicate function also take a ');
         ie_open('code');
-          itext('Pair');
+          itext('Pred');
         ie_close('code');
-        itext(' with the resultant in the');
-        ie_open('code');
-          itext('fst');
-        ie_close('code');
-        itext(' (first) and the state in the ');
-        ie_open('code');
-          itext('snd');
-        ie_close('code');
-        itext(' (second).');
+        itext(' instance. It does come in handy though when supplying predicates to other libraries.');
       ie_close('p');
-      $templateAlias2({code: 'const State = require(\'crocks/State\')\nconst { get, put } = State\n\nconst K = require(\'crocks/combinators/constant\')\n\n// swap :: s -> s -> State s s\nconst swap = x => old =>\n  put(x)\n    .chain(K(State.of(old)))\n\n//update :: s -> State s s\nconst update = x =>\n  get()\n    .chain(swap(x))\n\nupdate(45)\n  .runWith(100)\n//=> Pair(100, 45)', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        itext('evalWith');
-      ie_close('h4');
-      $templateAlias2({code: 'State s a ~> s -> a', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        ie_open('code');
-          itext('State');
-        ie_close('code');
-        itext(' is a lazy datatype that requires a value for it\'s state portion to be run. A given ');
-        ie_open('code');
-          itext('State');
-        ie_close('code');
-        itext(' instance provides an ');
-        ie_open('code');
-          itext('evalWith');
-        ie_close('code');
-        itext(' method that accepts a value to run the instance with. The value must be a member of the type that the given ');
-        ie_open('code');
-          itext('State');
-        ie_close('code');
-        itext(' instance is fixed to in it\'s state portion, ');
-        ie_open('code');
-          itext('s');
-        ie_close('code');
-        itext('.');
-      ie_close('p');
-      ie_open('p');
-        itext('When called, ');
-        ie_open('code');
-          itext('evalWith');
-        ie_close('code');
-        itext(' will run the state transition with the given value as the initial state and will return the resulting resultant discarding the state portion.');
-      ie_close('p');
-      $templateAlias2({code: 'const State = require(\'crocks/State\')\nconst { get } = State\n\nconst concat = require(\'crocks/pointfree/concat\')\nconst flip = require(\'crocks/combinators/flip\')\nconst liftA2 = require(\'crocks/helpers/liftA2\')\nconst map = require(\'crocks/pointfree/map\')\nconst propOr = require(\'crocks/helpers/propOr\')\n\nconst name = {\n  first: \'Franklin\',\n  last: \'Jennings\'\n}\n\n// getLast :: State Object String\nconst getFirst =\n  get(propOr(\'\', \'first\'))\n\n// getLast :: State Object String\nconst getLast =\n  get(propOr(\'\', \'last\'))\n\n// inner :: Functor f => f a -> f [ a ]\nconst inner =\n  map(Array.of)\n\n// combineNames :: State Object [ String ]\nconst combineNames = liftA2(\n  flip(concat),\n  inner(getFirst),\n  inner(getLast)\n)\n\ncombineNames\n  .evalWith(name)\n//=> [ \'Franklin\', \'Jennings\' ]', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        itext('execWith');
-      ie_close('h4');
-      $templateAlias2({code: 'State s a ~> s -> s', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        ie_open('code');
-          itext('State');
-        ie_close('code');
-        itext(' is a lazy datatype that requires a value for it\'s state portion to be run. A given ');
-        ie_open('code');
-          itext('State');
-        ie_close('code');
-        itext(' instance provides an ');
-        ie_open('code');
-          itext('execWith');
-        ie_close('code');
-        itext(' method that accepts a value to run the instance with. The value must be a member of the type that the given ');
-        ie_open('code');
-          itext('State');
-        ie_close('code');
-        itext(' instance is fixed to in it\'s state portion, ');
-        ie_open('code');
-          itext('s');
-        ie_close('code');
-        itext('.');
-      ie_close('p');
-      ie_open('p');
-        itext('When called, ');
-        ie_open('code');
-          itext('execWith');
-        ie_close('code');
-        itext(' will run the state transition with the given value as the initial state and will return the resulting state, discarding the resultant portion.');
-      ie_close('p');
-      $templateAlias2({code: 'const { modify } = require(\'crocks/State\')\n\nconst compose = require(\'crocks/helpers/compose\')\nconst concat = require(\'crocks/pointfree/concat\')\n\n// toUpper :: String -> String\nconst toUpper =\n  x => x.toUpperCase()\n\n// exclaim :: String -> String\nconst exclaim =\n  concat(\'!!!\')\n\n// yell :: State String ()\nconst yell = modify(\n  compose(exclaim, toUpper)\n)\n\nyell\n  .execWith(\'nice\')\n//=> \'NICE!!!\'', mode: 'javascript'}, null, opt_ijData);
-    ie_close('article');
-    ie_open('article', null, null,
-        'id', 'pointfree');
-      ie_open('h2');
-        itext('Pointfree Functions');
-      ie_close('h2');
-      ie_open('h4');
-        itext('evalWith ');
-        ie_open('em');
-          itext('(pointfree)');
-        ie_close('em');
-      ie_close('h4');
-      $templateAlias2({code: 'evalWith :: s -> State s a -> a', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('The ');
-        ie_open('code');
-          itext('evalWith');
-        ie_close('code');
-        itext(' pointfree function can be employed to execute the');
-        ie_open('a', null, null,
-            'href', '#evalwith');
-          ie_open('code');
-            itext('evalWith');
-          ie_close('code');
-        ie_close('a');
-        itext(' method on a given ');
-        ie_open('code');
-          itext('State');
-        ie_close('code');
-        itext(' instance. This function is typically used at the edge of a program where all the side-effects typically reside.');
-      ie_close('p');
-      ie_open('p');
-        itext('As all this function does is return the result of applying a given initial state to the ');
-        ie_open('a', null, null,
-            'href', '#evalwith');
-          ie_open('code');
-            itext('evalWith');
-          ie_close('code');
-        ie_close('a');
-        itext(' method to the provided ');
-        ie_open('code');
-          itext('State');
-        ie_close('code');
-        itext(' instance, it will also return the resulting resultant, throwing away the resulting state.');
-      ie_close('p');
-      $templateAlias2({code: 'const { get } = require(\'crocks/State\')\n\nconst evalWith = require(\'crocks/State/evalWith\')\n\nconst compose = require(\'crocks/helpers/compose\')\nconst curry = require(\'crocks/helpers/curry\')\nconst flip = require(\'crocks/combinators/flip\')\n\n// addToState :: Number -> State Number Number\nconst addToState =\n  x => get(y => x + y)\n\n// add :: Number -> Number -> Number\nconst add = curry(\n  compose(flip(evalWith), addToState)\n)\n\n// add10 :: Number -> Number\nconst add10 =\n  add(10)\n\nadd10(32)\n//=> 42\n\nadd(1295, 42)\n// 1337', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        itext('execWith ');
-        ie_open('em');
-          itext('(pointfree)');
-        ie_close('em');
-      ie_close('h4');
-      $templateAlias2({code: 'execWith :: s -> State s a -> s', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('The ');
-        ie_open('code');
-          itext('execWith');
-        ie_close('code');
-        itext(' pointfree function can be employed to execute the');
-        ie_open('a', null, null,
-            'href', '#execwith');
-          ie_open('code');
-            itext('execWith');
-          ie_close('code');
-        ie_close('a');
-        itext(' method on a given ');
-        ie_open('code');
-          itext('State');
-        ie_close('code');
-        itext(' instance. This function is typically used at the edge of a program where all the side-effects typically reside.');
-      ie_close('p');
-      ie_open('p');
-        itext('As all this function does is return the result of applying a given initial state to the ');
-        ie_open('a', null, null,
-            'href', '#execwith');
-          ie_open('code');
-            itext('execWith');
-          ie_close('code');
-        ie_close('a');
-        itext(' method to the provided ');
-        ie_open('code');
-          itext('State');
-        ie_close('code');
-        itext(' instance, it will also return the resulting state, throwing away the resulting resultant.');
-      ie_close('p');
-      $templateAlias2({code: 'const State = require(\'crocks/State\')\nconst { modify } = State\n\nconst execWith = require(\'crocks/State/execWith\')\n\nconst curry = require(\'crocks/helpers/curry\')\nconst isSameType = require(\'crocks/predicates/isSameType\')\nconst mapProps = require(\'crocks/helpers/mapProps\')\nconst when = require(\'crocks/logic/when\')\n\n// middleware :: Object -> State Object | Object -> Object\nconst middleware = curry(\n  s => when(isSameType(State), execWith(s))\n)\n\n// incValue :: State Object ()\nconst incValue =\n  modify(mapProps({ value: x => x + 1 }))\n\nmiddleware({ value: 10 }, incValue)\n//=> { value: 11 }\n\nmiddleware({ value: 10 }, { value: 32 })\n//=> { value: 32 }', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'const Pred = require(\'crocks/Pred\')\n\nconst hasProp = require(\'crocks/predicates/hasProp\')\nconst equals = require(\'crocks/pointfree/equals\')\nconst flip = require(\'crocks/combinators/flip\')\nconst runWith = require(\'crocks/pointfree/runWith\')\n\n// trueBlue :: Pred Object\nconst trueBlue =\n  Pred(equals(true))\n    .contramap(({ blue }) => blue)\n\n// isValid :: Pred a\nconst isValid =\n  Pred(hasProp(\'blue\'))\n    .concat(trueBlue)\n\n// checkValid :: a -> Boolean\nconst checkValid =\n  flip(runWith, isValid)\n\ncheckValid(null)            //=> false\ncheckValid([ 1, 2, 3 ])     //=> false\ncheckValid({ blue: 32 })    //=> false\ncheckValid({ blue: true })  //=> true', mode: 'javascript'}, null, opt_ijData);
     ie_close('article');
     ie_open('input', null, null,
         'type', 'hidden',
@@ -29005,11 +28772,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'value', opt_data.site.title);
     ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({content: param734}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param483}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'eHyed.render';
+  $render.soyTemplateName = 'JPMLJ.render';
 }
 
 exports.render.params = ["page","site"];
@@ -29019,14 +28786,16 @@ return exports;
 
 });
 
-class eHyed extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(eHyed, templates);
+class JPMLJ extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(JPMLJ, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
 
 
 /***/ }),
+/* 220 */,
+/* 221 */,
 /* 222 */,
 /* 223 */,
 /* 224 */,
@@ -29044,9 +28813,7 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(eHyed, templates);
 /* 236 */,
 /* 237 */,
 /* 238 */,
-/* 239 */,
-/* 240 */,
-/* 241 */
+/* 239 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29082,9 +28849,9 @@ __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _StateSoy = __webpack_require__(221);
+var _PredSoy = __webpack_require__(219);
 
-var _StateSoy2 = _interopRequireDefault(_StateSoy);
+var _PredSoy2 = _interopRequireDefault(_PredSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -29094,23 +28861,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var eHyed = function (_Component) {
-  _inherits(eHyed, _Component);
+var JPMLJ = function (_Component) {
+  _inherits(JPMLJ, _Component);
 
-  function eHyed() {
-    _classCallCheck(this, eHyed);
+  function JPMLJ() {
+    _classCallCheck(this, JPMLJ);
 
-    return _possibleConstructorReturn(this, (eHyed.__proto__ || Object.getPrototypeOf(eHyed)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (JPMLJ.__proto__ || Object.getPrototypeOf(JPMLJ)).apply(this, arguments));
   }
 
-  return eHyed;
+  return JPMLJ;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(eHyed, _StateSoy2.default);
+_metalSoy2.default.register(JPMLJ, _PredSoy2.default);
 
-exports.default = eHyed;
+exports.default = JPMLJ;
 
 /***/ })
-],[241]);
+],[239]);

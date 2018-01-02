@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([2,20,21,22],[
+webpackJsonppageComponent([4,21,22,23],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -28364,13 +28364,12 @@ exports.default = parseFromAnchor;
 /* 230 */,
 /* 231 */,
 /* 232 */,
-/* 233 */,
-/* 234 */
+/* 233 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tOXSW", function() { return tOXSW; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "rKxqN", function() { return rKxqN; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28382,15 +28381,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var templates;
 goog.loadModule(function(exports) {
 
-// This file was automatically generated from index.soy.
+// This file was automatically generated from All.soy.
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace tOXSW.
+ * @fileoverview Templates in namespace rKxqN.
  * @public
  */
 
-goog.module('tOXSW.incrementaldom');
+goog.module('rKxqN.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28411,6 +28410,8 @@ var ie_open_end = IncrementalDom.elementOpenEnd;
 var itext = IncrementalDom.text;
 var iattr = IncrementalDom.attr;
 
+var $templateAlias2 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('ElectricCode.incrementaldom', 'render');
+
 var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('guide.incrementaldom', 'render');
 
 
@@ -28422,313 +28423,218 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var param1435 = function() {
-    ie_open('h3');
-      itext('Monoids');
-    ie_close('h3');
+  var param1327 = function() {
+    $templateAlias2({code: 'All Boolean', mode: 'haskell'}, null, opt_ijData);
     ie_open('p');
-      itext('Each ');
+      ie_open('code');
+        itext('All');
+      ie_close('code');
+      itext(' is a ');
       ie_open('code');
         itext('Monoid');
       ie_close('code');
-      itext(' provides a means to represent a binary operation and is usually locked down to a specific type. These are great when you need to combine a list of values down to one value. In this library, any ADT that provides both an');
+      itext(' that will combine two values of any type using logical conjunction (AND) on their coerced ');
       ie_open('code');
-        itext('empty');
+        itext('Boolean');
       ie_close('code');
-      itext(' and ');
+      itext(' values, mapping truth-y values to');
       ie_open('code');
-        itext('concat');
+        itext('true');
       ie_close('code');
-      itext(' function can be used as a ');
+      itext(' and false-y values to ');
       ie_open('code');
-        itext('Monoid');
+        itext('false');
       ie_close('code');
-      itext('. There are a few of the');
-      ie_open('a', null, null,
-          'href', '#crocks');
+      itext('.');
+    ie_close('p');
+    $templateAlias2({code: 'const All = require(\'crocks/All\')\n\nconst mconcat = require(\'crocks/helpers/mconcat\')\n\nconst trueNum = All(13)\nconst falseNum = All(0)\nconst trueString = All(\'So true\')\n\ntrueNum.concat(falseNum)\n//=> All false\n\ntrueNum.concat(trueString)\n//=> All true\n\nconst allGood =\n  mconcat(All)\n\nallGood([ 1, 5, 89 ])\n//=> All true\n\nallGood([ \'nice\', \'00\', null ])\n//=> All false', mode: 'javascript'}, null, opt_ijData);
+    ie_open('article', null, null,
+        'id', 'topic-implements');
+      ie_open('h2');
+        ie_open('a', null, null,
+            'id', 'implements',
+            'href', '#implements');
+          itext('Implements');
+        ie_close('a');
+      ie_close('h2');
+      ie_open('p');
+        ie_open('code');
+          itext('Semigroup');
+        ie_close('code');
+        itext(', ');
+        ie_open('code');
+          itext('Monoid');
+        ie_close('code');
+      ie_close('p');
+    ie_close('article');
+    ie_open('article', null, null,
+        'id', 'topic-constructor');
+      ie_open('h2');
+        ie_open('a', null, null,
+            'id', 'constructor-methods',
+            'href', '#constructor-methods');
+          itext('Constructor Methods');
+        ie_close('a');
+      ie_close('h2');
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'empty',
+            'href', '#empty');
+          itext('empty');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'All.empty :: () -> All', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        ie_open('code');
+          itext('empty');
+        ie_close('code');
+        itext(' provides the identity for the ');
+        ie_open('code');
+          itext('Monoid');
+        ie_close('code');
+        itext(' in that when the value it provides is ');
+        ie_open('code');
+          itext('concat');
+        ie_close('code');
+        itext('ed to any other value, it will return the other value. In the case of ');
+        ie_open('code');
+          itext('All');
+        ie_close('code');
+        itext(' the result of ');
+        ie_open('code');
+          itext('empty');
+        ie_close('code');
+        itext(' is ');
+        ie_open('code');
+          itext('true');
+        ie_close('code');
+        itext('. ');
+        ie_open('code');
+          itext('empty');
+        ie_close('code');
+        itext(' is available on both the Constructor and the Instance for convenience.');
+      ie_close('p');
+      $templateAlias2({code: 'const All = require(\'crocks/All\')\n\nAll.empty() //=> All true\n\nAll(true).concat(All.empty())   //=> All true\nAll(false).concat(All.empty())  //=> All false', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'type',
+            'href', '#type');
+          itext('type');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'All.type :: () -> String', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        ie_open('code');
+          itext('type');
+        ie_close('code');
+        itext(' provides a string representation of the type name for a given type in');
         ie_open('code');
           itext('crocks');
         ie_close('code');
-      ie_close('a');
-      itext(' that are also monoidial, so be on the look out for those as well. All ');
-      ie_open('code');
-        itext('Monoids');
-      ie_close('code');
-      itext(' work with the point-free functions ');
-      ie_open('a', null, null,
-          'href', '#mconcat');
+        itext('. While it is used mostly internally for law validation, it can be useful to the end user for debugging and building out custom types based on the standard ');
         ie_open('code');
-          itext('mconcat');
+          itext('crocks');
         ie_close('code');
-      ie_close('a');
-      itext(',');
-      ie_open('a', null, null,
-          'href', '#mreduce');
+        itext(' types. While type comparisons can easily be done manually by calling ');
         ie_open('code');
-          itext('mreduce');
+          itext('type');
         ie_close('code');
-      ie_close('a');
-      itext(', ');
-      ie_open('a', null, null,
-          'href', '#mconcatmap');
+        itext(' on a given type, using the ');
         ie_open('code');
-          itext('mconcatMap');
+          itext('isSameType');
         ie_close('code');
-      ie_close('a');
-      itext(' and');
-      ie_open('a', null, null,
-          'href', '#mreducemap');
+        itext(' function hides much of the boilerplate. ');
         ie_open('code');
-          itext('mreduceMap');
+          itext('type');
         ie_close('code');
-      ie_close('a');
-      itext('.');
-    ie_close('p');
-    ie_open('p');
-      itext('All ');
-      ie_open('code');
-        itext('Monoids');
-      ie_close('code');
-      itext(' provide ');
-      ie_open('code');
-        itext('empty');
-      ie_close('code');
-      itext(' and ');
-      ie_open('code');
-        itext('type');
-      ie_close('code');
-      itext(' function on their Constructors as well as the following Instance Functions: inspect, ');
-      ie_open('code');
-        itext('type');
-      ie_close('code');
-      itext(', ');
-      ie_open('code');
-        itext('valueOf');
-      ie_close('code');
-      itext(', ');
-      ie_open('code');
-        itext('empty');
-      ie_close('code');
-      itext(' and');
-      ie_open('code');
-        itext('concat');
-      ie_close('code');
-      itext('.');
-    ie_close('p');
-    ie_open('table');
-      ie_open('thead');
-        ie_open('tr');
-          ie_open('th');
-            itext('Monoid');
-          ie_close('th');
-          ie_open('th');
-            itext('Type');
-          ie_close('th');
-          ie_open('th');
-            itext('Operation');
-          ie_close('th');
-          ie_open('th');
-            itext('Empty (Identity)');
-          ie_close('th');
-        ie_close('tr');
-      ie_close('thead');
-      ie_open('tbody');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('All');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td');
-            itext('Boolean');
-          ie_close('td');
-          ie_open('td');
-            itext('Logical AND');
-          ie_close('td');
-          ie_open('td');
-            ie_open('code');
-              itext('true');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('Any');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td');
-            itext('Boolean');
-          ie_close('td');
-          ie_open('td');
-            itext('Logical OR');
-          ie_close('td');
-          ie_open('td');
-            ie_open('code');
-              itext('false');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('Assign');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td');
-            itext('Object');
-          ie_close('td');
-          ie_open('td');
-            ie_open('code');
-              itext('Object.assign');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td');
-            ie_open('code');
-              itext('{}');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('Endo');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td');
-            itext('Function');
-          ie_close('td');
-          ie_open('td');
-            ie_open('code');
-              itext('compose');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td');
-            ie_open('code');
-              itext('identity');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('First');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td');
-            itext('Maybe');
-          ie_close('td');
-          ie_open('td');
-            itext('First ');
-            ie_open('code');
-              itext('Just');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td');
-            ie_open('code');
-              itext('Nothing');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('Last');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td');
-            itext('Maybe');
-          ie_close('td');
-          ie_open('td');
-            itext('Last ');
-            ie_open('code');
-              itext('Just');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td');
-            ie_open('code');
-              itext('Nothing');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('Max');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td');
-            itext('Number');
-          ie_close('td');
-          ie_open('td');
-            ie_open('code');
-              itext('Math.max');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td');
-            ie_open('code');
-              itext('-Infinity');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('Min');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td');
-            itext('Number');
-          ie_close('td');
-          ie_open('td');
-            ie_open('code');
-              itext('Math.min');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td');
-            ie_open('code');
-              itext('Infinity');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('Prod');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td');
-            itext('Number');
-          ie_close('td');
-          ie_open('td');
-            itext('Multiplication');
-          ie_close('td');
-          ie_open('td');
-            ie_open('code');
-              itext('1');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('Sum');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td');
-            itext('Number');
-          ie_close('td');
-          ie_open('td');
-            itext('Addition');
-          ie_close('td');
-          ie_open('td');
-            ie_open('code');
-              itext('0');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-      ie_close('tbody');
-    ie_close('table');
+        itext(' is available on both the Constructor and the Instance for convenience.');
+      ie_close('p');
+      $templateAlias2({code: 'const All = require(\'crocks/All\')\n\nconst Maybe = require(\'crocks/Maybe\')\nconst isSameType = require(\'crocks/predicates/isSameType\')\n\nAll.type() //=>  "All"\n\nisSameType(All, All(3))           //=> true\nisSameType(All, All)              //=> true\nisSameType(All, Maybe.Just(\'3\'))  //=> false\nisSameType(All(false), Maybe)     //=> false', mode: 'javascript'}, null, opt_ijData);
+    ie_close('article');
+    ie_open('article', null, null,
+        'id', 'topic-instance');
+      ie_open('h2');
+        ie_open('a', null, null,
+            'id', 'instance-methods',
+            'href', '#instance-methods');
+          itext('Instance Methods');
+        ie_close('a');
+      ie_close('h2');
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'concat',
+            'href', '#concat');
+          itext('concat');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'All ~> All -> All', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        ie_open('code');
+          itext('concat');
+        ie_close('code');
+        itext(' is used to combine (2) ');
+        ie_open('code');
+          itext('Semigroup');
+        ie_close('code');
+        itext('s of the same type under an operation specified by the ');
+        ie_open('code');
+          itext('Semigroup');
+        ie_close('code');
+        itext('. In the case of ');
+        ie_open('code');
+          itext('All');
+        ie_close('code');
+        itext(', it will combine the two using logical AND (conjunction).');
+      ie_close('p');
+      $templateAlias2({code: 'const All = require(\'crocks/All\')\n\nAll(true).concat(All(true))   //=> All true\nAll(true).concat(All(false))  //=> All false\nAll(false).concat(All(true))  //=> All false\nAll(false).concat(All(false)) //=> All false', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'valueof',
+            'href', '#valueof');
+          itext('valueOf');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'All ~> () -> Boolean', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        ie_open('code');
+          itext('valueOf');
+        ie_close('code');
+        itext(' is used on all ');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext(' ');
+        ie_open('code');
+          itext('Monoid');
+        ie_close('code');
+        itext('s as a means of extraction. While the extraction is available, types that implement ');
+        ie_open('code');
+          itext('valueOf');
+        ie_close('code');
+        itext(' are not necessarily a');
+        ie_open('code');
+          itext('Comonad');
+        ie_close('code');
+        itext('. This function is used primarily for convenience for some of the helper functions that ship with ');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext('. Calling ');
+        ie_open('code');
+          itext('valueOf');
+        ie_close('code');
+        itext(' on an ');
+        ie_open('code');
+          itext('All');
+        ie_close('code');
+        itext(' instance will result in the underlying ');
+        ie_open('code');
+          itext('Boolean');
+        ie_close('code');
+        itext(' value.');
+      ie_close('p');
+      $templateAlias2({code: 'const All = require(\'crocks/All\')\n\nAll(0).value()          //=> false\nAll(\'string\').valueOf() //=> true\n\n//=> false\nAll(true)\n  .concat(\'\')\n  .valueOf()', mode: 'javascript'}, null, opt_ijData);
+    ie_close('article');
     ie_open('input', null, null,
         'type', 'hidden',
         'value', opt_data.page.title);
@@ -28738,11 +28644,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'value', opt_data.site.title);
     ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({content: param1435}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param1327}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'tOXSW.render';
+  $render.soyTemplateName = 'rKxqN.render';
 }
 
 exports.render.params = ["page","site"];
@@ -28752,14 +28658,15 @@ return exports;
 
 });
 
-class tOXSW extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(tOXSW, templates);
+class rKxqN extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(rKxqN, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
 
 
 /***/ }),
+/* 234 */,
 /* 235 */,
 /* 236 */,
 /* 237 */,
@@ -28777,7 +28684,8 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(tOXSW, templates);
 /* 249 */,
 /* 250 */,
 /* 251 */,
-/* 252 */
+/* 252 */,
+/* 253 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28813,9 +28721,9 @@ __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _indexSoy = __webpack_require__(234);
+var _AllSoy = __webpack_require__(233);
 
-var _indexSoy2 = _interopRequireDefault(_indexSoy);
+var _AllSoy2 = _interopRequireDefault(_AllSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28825,23 +28733,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var tOXSW = function (_Component) {
-  _inherits(tOXSW, _Component);
+var rKxqN = function (_Component) {
+  _inherits(rKxqN, _Component);
 
-  function tOXSW() {
-    _classCallCheck(this, tOXSW);
+  function rKxqN() {
+    _classCallCheck(this, rKxqN);
 
-    return _possibleConstructorReturn(this, (tOXSW.__proto__ || Object.getPrototypeOf(tOXSW)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (rKxqN.__proto__ || Object.getPrototypeOf(rKxqN)).apply(this, arguments));
   }
 
-  return tOXSW;
+  return rKxqN;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(tOXSW, _indexSoy2.default);
+_metalSoy2.default.register(rKxqN, _AllSoy2.default);
 
-exports.default = tOXSW;
+exports.default = rKxqN;
 
 /***/ })
-],[252]);
+],[253]);

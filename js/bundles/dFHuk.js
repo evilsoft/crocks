@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([8,20,21,22],[
+webpackJsonppageComponent([17,21,22,23],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -28351,20 +28351,12 @@ exports.default = parseFromAnchor;
 /* 217 */,
 /* 218 */,
 /* 219 */,
-/* 220 */,
-/* 221 */,
-/* 222 */,
-/* 223 */,
-/* 224 */,
-/* 225 */,
-/* 226 */,
-/* 227 */,
-/* 228 */
+/* 220 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PqxFz", function() { return PqxFz; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dFHuk", function() { return dFHuk; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28376,15 +28368,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var templates;
 goog.loadModule(function(exports) {
 
-// This file was automatically generated from predicate-functions.soy.
+// This file was automatically generated from Reader.soy.
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace PqxFz.
+ * @fileoverview Templates in namespace dFHuk.
  * @public
  */
 
-goog.module('PqxFz.incrementaldom');
+goog.module('dFHuk.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28405,7 +28397,9 @@ var ie_open_end = IncrementalDom.elementOpenEnd;
 var itext = IncrementalDom.text;
 var iattr = IncrementalDom.attr;
 
-var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('notopic.incrementaldom', 'render');
+var $templateAlias2 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('ElectricCode.incrementaldom', 'render');
+
+var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('guide.incrementaldom', 'render');
 
 
 /**
@@ -28416,465 +28410,336 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var param1286 = function() {
+  var param561 = function() {
+    $templateAlias2({code: 'Reader e a', mode: 'haskell'}, null, opt_ijData);
     ie_open('p');
-      itext('All functions in this group have a signature of ');
       ie_open('code');
-        itext('* -> Boolean');
+        itext('Reader');
       ie_close('code');
-      itext(' and are used with the many predicate based functions that ship with ');
+      itext(' is a lazy Product Type that enables the  composition of computations that depend on a shared environment ');
       ie_open('code');
-        itext('crocks');
+        itext('(e -> a)');
       ie_close('code');
-      itext(', like');
-      ie_open('a', null, null,
-          'href', '#safe');
-        ie_open('code');
-          itext('safe');
-        ie_close('code');
-      ie_close('a');
-      itext(', ');
-      ie_open('a', null, null,
-          'href', '#ifelse');
-        ie_open('code');
-          itext('ifElse');
-        ie_close('code');
-      ie_close('a');
-      itext(' and ');
+      itext('. The left portion, the ');
       ie_open('code');
-        itext('filter');
+        itext('e');
       ie_close('code');
-      itext(' to name a few. They also fit naturally with the ');
+      itext(' must be fixed to a type for all related computations. The right portion ');
       ie_open('code');
-        itext('Pred');
+        itext('a');
       ie_close('code');
-      itext(' ADT. All predicate functions can be referenced from');
-      ie_open('code');
-        itext('crocks/predicates');
-      ie_close('code');
-      itext('.');
+      itext(' can vary in its type.');
     ie_close('p');
     ie_open('p');
-      itext('Below is a list of all the current predicates that are included with a description of their truth:');
+      itext('As ');
+      ie_open('code');
+        itext('Reader');
+      ie_close('code');
+      itext(' is lazy, wrapping a function of the form ');
+      ie_open('code');
+        itext('(e -> a)');
+      ie_close('code');
+      itext(', nothing is executed until it is run with an environment. ');
+      ie_open('code');
+        itext('Reader');
+      ie_close('code');
+      itext(' provides a method on it\'s instance that will take an environment called ');
+      ie_open('a', null, null,
+          'href', '#runwith');
+        ie_open('code');
+          itext('runWith');
+        ie_close('code');
+      ie_close('a');
+      itext(' that will run the instance with a given environment.');
     ie_close('p');
-    ie_open('ul');
-      ie_open('li');
+    ie_open('p');
+      itext('Not only is ');
+      ie_open('code');
+        itext('Reader');
+      ie_close('code');
+      itext('\'s environment fixed to a type, but it should be immutable for the "life" computation. If a referential type is used as the environment great care should be taken to not modify the value of the environment.');
+    ie_close('p');
+    $templateAlias2({code: 'const Reader = require(\'crocks/Reader\')\nconst { ask } = Reader\n\nconst concat = require(\'crocks/pointfree/concat\')\n\n// greet :: String -> Reader String String\nconst greet = greeting =>\n  Reader(name => `${greeting}, ${name}`)\n\n// addFarewell :: String -> Reader String String\nconst addFarewell = farewell => str =>\n  ask(env => `${str}${farewell} ${env}`)\n\n// flow :: Reader String String\nconst flow =\n  greet(\'Hola\')\n    .map(concat(\'...\'))\n    .chain(addFarewell(\'See Ya\'))\n\nflow\n  .runWith(\'Thomas\')\n// => Hola, Thomas...See Ya Thomas\n\nflow\n  .runWith(\'Jenny\')\n// => Hola, Jenny...See Ya Jenny', mode: 'javascript'}, null, opt_ijData);
+    ie_open('article', null, null,
+        'id', 'topic-implements');
+      ie_open('h2');
+        ie_open('a', null, null,
+            'id', 'implements',
+            'href', '#implements');
+          itext('Implements');
+        ie_close('a');
+      ie_close('h2');
+      ie_open('p');
         ie_open('code');
-          itext('hasProp :: (String | Number) -> a -> Boolean');
-        ie_close('code');
-        itext(': An ');
-        ie_open('code');
-          itext('Array');
-        ie_close('code');
-        itext(' or ');
-        ie_open('code');
-          itext('Object');
-        ie_close('code');
-        itext(' that contains the provided index or key');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isAlt :: a -> Boolean');
-        ie_close('code');
-        itext(': an ADT that provides ');
-        ie_open('code');
-          itext('map');
-        ie_close('code');
-        itext(' and ');
-        ie_open('code');
-          itext('alt');
-        ie_close('code');
-        itext(' methods');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isAlternative :: a -> Boolean');
-        ie_close('code');
-        itext(': an ADT that provides ');
-        ie_open('code');
-          itext('alt');
+          itext('Functor');
         ie_close('code');
         itext(', ');
         ie_open('code');
-          itext('zero');
+          itext('Apply');
         ie_close('code');
         itext(', ');
         ie_open('code');
-          itext('map');
+          itext('Chain');
         ie_close('code');
         itext(', ');
         ie_open('code');
-          itext('ap');
+          itext('Applicative');
         ie_close('code');
         itext(', ');
         ie_open('code');
-          itext('chain');
+          itext('Monad');
         ie_close('code');
-        itext(' and ');
+      ie_close('p');
+    ie_close('article');
+    ie_open('article', null, null,
+        'id', 'topic-constructor');
+      ie_open('h2');
+        ie_open('a', null, null,
+            'id', 'constructor-methods',
+            'href', '#constructor-methods');
+          itext('Constructor Methods');
+        ie_close('a');
+      ie_close('h2');
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'ask',
+            'href', '#ask');
+          itext('ask');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Reader.ask :: () -> Reader e e\nReader.ask :: (e -> b) -> Reader e b', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        itext('A construction helper that returns a ');
+        ie_open('code');
+          itext('Reader');
+        ie_close('code');
+        itext(' with the environment on the right portion of the ');
+        ie_open('code');
+          itext('Reader');
+        ie_close('code');
+        itext('. ');
+        ie_open('code');
+          itext('ask');
+        ie_close('code');
+        itext(' can take a function, that can be used to map the environment to a different type or value.');
+      ie_close('p');
+      $templateAlias2({code: 'const Reader = require(\'crocks/Reader\')\nconst { ask } = Reader\n\n// add :: Number -> Number -> Number\nconst add =\n  x => y => x + y\n\n// Typical constructor\nReader(add(10))\n  .runWith(56)\n//=> 66\n\n// Using `ask` with no function\n// (identity on environment)\nask()\n  .runWith(56)\n//=> 56\n\n// Using `ask` with a function\n// (map environment before deposit)\nask(add(10))\n  .runWith(56)\n//=> 66', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'of',
+            'href', '#of');
+          itext('of');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Reader.of :: a -> Reader e a', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
         ie_open('code');
           itext('of');
         ie_close('code');
-        itext('methods');
-      ie_close('li');
-      ie_open('li');
+        itext(' is used to construct a ');
         ie_open('code');
-          itext('isApplicative :: a -> Boolean');
+          itext('Reader');
         ie_close('code');
-        itext(': an ADT that provides ');
-        ie_open('code');
-          itext('map');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('ap');
-        ie_close('code');
-        itext(' and ');
+        itext(' with the right portion populated with it\'s argument. ');
         ie_open('code');
           itext('of');
         ie_close('code');
-        itext(' methods');
-      ie_close('li');
-      ie_open('li');
+        itext(' essentially will lift a value of type ');
         ie_open('code');
-          itext('isApply :: a -> Boolean');
+          itext('a');
         ie_close('code');
-        itext(': an ADT that provides ');
+        itext(' into a ');
         ie_open('code');
-          itext('map');
+          itext('Reader');
         ie_close('code');
-        itext(' and ');
+        itext(', giving back a ');
         ie_open('code');
-          itext('ap');
+          itext('Reader');
         ie_close('code');
-        itext(' methods');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isArray :: a -> Boolean');
-        ie_close('code');
-        itext(': Array');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isBifunctor :: a -> Boolean');
-        ie_close('code');
-        itext(': an ADT that provides ');
-        ie_open('code');
-          itext('map');
-        ie_close('code');
-        itext(' and ');
-        ie_open('code');
-          itext('bimap');
-        ie_close('code');
-        itext(' methods');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isBoolean :: a -> Boolean');
-        ie_close('code');
-        itext(': Boolean');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isCategory :: a -> Boolean');
-        ie_close('code');
-        itext(': an ADT that provides ');
-        ie_open('code');
-          itext('id');
-        ie_close('code');
-        itext(' and ');
-        ie_open('code');
-          itext('compose');
-        ie_close('code');
-        itext(' methods');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isChain :: a -> Boolean');
-        ie_close('code');
-        itext(': an ADT that provides ');
-        ie_open('code');
-          itext('map');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('ap');
-        ie_close('code');
-        itext(' and ');
-        ie_open('code');
-          itext('chain');
-        ie_close('code');
-        itext(' methods');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isContravariant : a -> Boolean');
-        ie_close('code');
-        itext(': an ADT that provides ');
-        ie_open('code');
-          itext('contramap');
-        ie_close('code');
-        itext(' method');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isDefined :: a -> Boolean');
-        ie_close('code');
-        itext(': Every value that is not ');
-        ie_open('code');
-          itext('undefined');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('null');
-        ie_close('code');
-        itext(' included');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isEmpty :: a -> Boolean');
-        ie_close('code');
-        itext(': Empty Object, Array or String');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isExtend :: a -> Boolean');
-        ie_close('code');
-        itext(': an ADT that provides ');
-        ie_open('code');
-          itext('map');
-        ie_close('code');
-        itext(' and ');
-        ie_open('code');
-          itext('extend');
-        ie_close('code');
-        itext(' methods');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isFoldable :: a -> Boolean');
-        ie_close('code');
-        itext(': Array, List or any structure with a ');
-        ie_open('code');
-          itext('reduce');
-        ie_close('code');
-        itext(' method');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isFunction :: a -> Boolean');
-        ie_close('code');
-        itext(': Function');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isFunctor :: a -> Boolean');
-        ie_close('code');
-        itext(': an ADT that provides a ');
-        ie_open('code');
-          itext('map');
-        ie_close('code');
-        itext(' method');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isInteger :: a -> Boolean');
-        ie_close('code');
-        itext(': Integer');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isMonad :: a -> Boolean');
-        ie_close('code');
-        itext(': an ADT that provides ');
-        ie_open('code');
-          itext('map');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('ap');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('chain');
-        ie_close('code');
-        itext(' and ');
+        itext(' that is "pointed" to the specific value provided. ');
         ie_open('code');
           itext('of');
         ie_close('code');
-        itext(' methods');
-      ie_close('li');
-      ie_open('li');
+        itext(' makes for a wonderful starting point for some of the more complicated flows.');
+      ie_close('p');
+      $templateAlias2({code: 'const Reader = require(\'crocks/Reader\')\nconst { ask } = Reader\n\nconst objOf = require(\'crocks/helpers/objOf\')\nconst thrush = require(\'crocks/combinators/reverseApply\')\n\n// add :: Number -> Number -> Number\nconst add =\n  x => y => x + y\n\nReader.of(34)\n  .map(add(6))\n  .runWith()\n//=> 40\n\nReader.of(\'Bobby\')\n  .map(objOf(\'name\'))\n  .runWith()\n//=> { name: \'Bobby\' }\n\nReader.of(57)\n  .chain(x => ask(add).map(thrush(x)))\n  .runWith(43)\n//=> 100', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'type',
+            'href', '#type');
+          itext('type');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Reader.type :: () -> String', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
         ie_open('code');
-          itext('isMonoid :: a -> Boolean');
+          itext('type');
         ie_close('code');
-        itext(': an ADT that provides ');
+        itext(' provides a string representation of the type name for a given type in');
         ie_open('code');
-          itext('concat');
+          itext('crocks');
         ie_close('code');
-        itext(' and ');
+        itext('. While it is used mostly internally for law validation, it can be useful to the end user for debugging and building out custom types based on the standard');
         ie_open('code');
-          itext('empty');
+          itext('crocks');
         ie_close('code');
-        itext(' methods');
-      ie_close('li');
-      ie_open('li');
+        itext(' types. While type comparisons can easily be done manually by calling');
         ie_open('code');
-          itext('isNil :: a -> Boolean');
+          itext('type');
         ie_close('code');
-        itext(': ');
+        itext(' on a given type, using the ');
         ie_open('code');
-          itext('undefined');
+          itext('isSameType');
         ie_close('code');
-        itext(' or ');
+        itext(' function hides much of the boilerplate. ');
         ie_open('code');
-          itext('null');
+          itext('type');
         ie_close('code');
-        itext(' or ');
+        itext(' is available on both the Constructor and the Instance for convenience.');
+      ie_close('p');
+      $templateAlias2({code: 'const Reader = require(\'crocks/Reader\')\nconst Identity = require(\'crocks/Identity\')\n\nconst I = require(\'crocks/combinators/identity\')\nconst isSameType = require(\'crocks/predicates/isSameType\')\n\nReader.type() //=> \'Reader\'\n\nisSameType(Reader, Reader.of(76))   //=> true\nisSameType(Reader, Reader)          //=> true\nisSameType(Reader, Identity(0))     //=> false\nisSameType(Reader(I), Identity)     //=> false', mode: 'javascript'}, null, opt_ijData);
+    ie_close('article');
+    ie_open('article', null, null,
+        'id', 'topic-instance');
+      ie_open('h2');
+        ie_open('a', null, null,
+            'id', 'instance-methods',
+            'href', '#instance-methods');
+          itext('Instance Methods');
+        ie_close('a');
+      ie_close('h2');
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'map',
+            'href', '#map');
+          itext('map');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Reader e a ~> (a -> b) -> Reader e b', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        itext('While the left side, or the environment, of the ');
         ie_open('code');
-          itext('NaN');
+          itext('Reader');
         ie_close('code');
-      ie_close('li');
-      ie_open('li');
+        itext(' must always be fixed to the same type, the right side, or value, of the ');
         ie_open('code');
-          itext('isNumber :: a -> Boolean');
+          itext('Reader');
         ie_close('code');
-        itext(': ');
-        ie_open('code');
-          itext('Number');
-        ie_close('code');
-        itext(' that is not a ');
-        ie_open('code');
-          itext('NaN');
-        ie_close('code');
-        itext(' value, ');
-        ie_open('code');
-          itext('Infinity');
-        ie_close('code');
-        itext(' included');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isObject :: a -> Boolean');
-        ie_close('code');
-        itext(': Plain Old Javascript Object (POJO)');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isPlus :: a -> Boolean');
-        ie_close('code');
-        itext(': an ADT that provides ');
+        itext(' may vary. Using ');
         ie_open('code');
           itext('map');
         ie_close('code');
-        itext(', ');
+        itext('allows a function to be lifted into the ');
         ie_open('code');
-          itext('alt');
+          itext('Reader');
         ie_close('code');
-        itext(' and ');
+        itext(', mapping the result into the result of the lifted function.');
+      ie_close('p');
+      $templateAlias2({code: 'const Reader = require(\'crocks/Reader\')\nconst { ask } = Reader\n\nconst assign = require(\'crocks/helpers/assign\')\nconst B = require(\'crocks/combinators/composeB\')\nconst objOf = require(\'crocks/helpers/objOf\')\nconst option = require(\'crocks/pointfree/option\')\nconst prop = require(\'crocks/Maybe/prop\')\n\n// length :: Array -> Number\nconst length =\n  x => x.length\n\nask()\n  .map(length)\n  .runWith([ 1, 2, 3 ])\n//=> 3\n\n// propOr :: (String, a) -> b -> a\nconst propOr = (key, def) =>\n  B(option(def), prop(key))\n\n// lengthObj :: Array -> Object\nconst lengthObj =\n  B(objOf(\'length\'), length)\n\n// addLength :: Object -> Redaer Array Object\nconst addLength = x =>\n  ask(propOr(\'list\', []))\n    .map(B(assign(x), lengthObj))\n\nReader.of({ num: 27 })\n  .chain(addLength)\n  .runWith({ list: [ 1, 2, 3 ] })\n//=> { length: 3, num: 27 }', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'ap',
+            'href', '#ap');
+          itext('ap');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Reader e (a -> b) ~> Reader e a -> Reader e b', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
         ie_open('code');
-          itext('zero');
+          itext('ap');
         ie_close('code');
-        itext(' methods');
-      ie_close('li');
-      ie_open('li');
+        itext(' allows for values wrapped in a ');
         ie_open('code');
-          itext('isProfunctor : a -> Boolean');
+          itext('Reader');
         ie_close('code');
-        itext(': an ADT that provides ');
+        itext(' to be applied to functions also wrapped in a ');
         ie_open('code');
-          itext('map');
+          itext('Reader');
         ie_close('code');
-        itext(', ');
+        itext('. In order to use ');
         ie_open('code');
-          itext('contramap');
+          itext('ap');
         ie_close('code');
-        itext(' and ');
+        itext(', the ');
         ie_open('code');
-          itext('promap');
+          itext('Reader');
         ie_close('code');
-        itext(' methods');
-      ie_close('li');
-      ie_open('li');
+        itext(' must contain a function as its value. Under the hood, ');
         ie_open('code');
-          itext('isPromise :: a -> Boolean');
+          itext('ap');
         ie_close('code');
-        itext(': an object implementing ');
+        itext(' unwraps both the function and the value to be applied and applies the value to the function. Finally it will wrap the result of that application back into a ');
         ie_open('code');
-          itext('then');
+          itext('Reader');
         ie_close('code');
-        itext(' and ');
+        itext('. It is required that the inner function is curried.');
+      ie_close('p');
+      $templateAlias2({code: 'const Reader = require(\'crocks/Reader\')\nconst { ask } = Reader\n\nconst B = require(\'crocks/combinators/composeB\')\nconst assign = require(\'crocks/helpers/assign\')\nconst liftA2 = require(\'crocks/helpers/liftA2\')\nconst objOf = require(\'crocks/helpers/objOf\')\n\n// namePart :: Number -> String -> String\nconst namePart = indx => x =>\n  x.split(\' \')[indx] || \'\'\n\n// combine :: Object -> Reader Object\nconst combine =\n  x => ask(assign(x))\n\n// full :: Reader Object\nconst full =\n  ask(({ full }) => full)\n\n// first :: Reader Object\nconst first =\n  full\n    .map(B(objOf(\'first\'), namePart(0)))\n\n// last :: Reader Object\nconst last =\n  full\n    .map(B(objOf(\'last\'), namePart(1)))\n\n// fluent style\nReader.of(assign)\n  .ap(first)\n  .ap(last)\n  .chain(combine)\n  .runWith({ full: \'Mary Jones\' })\n//=> { full: \'Mary Jones\', first: \'Mary\', last: \'Jones\' }\n\n// liftAssign :: Reader Object -> Reader Object -> Reader Object\nconst liftAssign =\n  liftA2(assign)\n\n// using a lift function\nliftAssign(first, last)\n  .chain(combine)\n  .runWith({ full: \'Tom Jennings\' })\n//=> { full: \'Tom Jennings\', first: \'Tom\', last: \'Jennings\' }', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'chain',
+            'href', '#chain');
+          itext('chain');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Reader e a ~> (a -> Reader e b) -> Reader e b', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        itext('One of the ways ');
         ie_open('code');
-          itext('catch');
+          itext('Monad');
         ie_close('code');
-      ie_close('li');
-      ie_open('li');
+        itext('s like ');
         ie_open('code');
-          itext('isSame :: a -> b -> Boolean');
+          itext('Reader');
         ie_close('code');
-        itext(': same value or reference, use ');
+        itext(' are able to be combined and have their effects applied, is by using the ');
         ie_open('code');
-          itext('equals');
+          itext('chain');
         ie_close('code');
-        itext(' for value equality');
-      ie_close('li');
-      ie_open('li');
+        itext(' method. In the case of ');
         ie_open('code');
-          itext('isSameType :: a -> b -> Boolean');
+          itext('Reader');
         ie_close('code');
-        itext(': Constructor matches a values type, or two values types match');
-      ie_close('li');
-      ie_open('li');
+        itext(', the effect is to read in and make available the shared environment. ');
         ie_open('code');
-          itext('isSemigroup :: a -> Boolean');
+          itext('chain');
         ie_close('code');
-        itext(': an ADT that provides a ');
+        itext(' expects a function that will take any ');
         ie_open('code');
-          itext('concat');
+          itext('a');
         ie_close('code');
-        itext(' method');
-      ie_close('li');
-      ie_open('li');
+        itext(' and return a new ');
         ie_open('code');
-          itext('isSemigroupoid :: a -> Boolean');
+          itext('Reader');
         ie_close('code');
-        itext(': an ADT that provides a ');
+        itext(' with a value of ');
         ie_open('code');
-          itext('compose');
+          itext('b');
         ie_close('code');
-        itext(' method');
-      ie_close('li');
-      ie_open('li');
+        itext('.');
+      ie_close('p');
+      $templateAlias2({code: 'const Reader = require(\'crocks/Reader\')\nconst { ask } = Reader\n\nconst B = require(\'crocks/combinators/composeB\')\nconst option = require(\'crocks/pointfree/option\')\nconst prop = require(\'crocks/Maybe/prop\')\n\n// multiply :: Number -> Number -> Number\nconst multiply =\n  x => y => x * y\n\n// add :: Number -> Number -> Number\nconst add  =\n  x => y => x + y\n\n// propOr :: (String, a) -> b -> a\nconst propOr = (key, def) =>\n  B(option(def), prop(key))\n\n// applyScale :: Number -> Reader Object Number\nconst applyScale = x =>\n  ask(propOr(\'scale\', 1))\n    .map(multiply(x))\n\n// applyScale :: Number -> Reader Object Number\nconst applyOffset = x =>\n  ask(propOr(\'offset\', 0))\n    .map(add(x))\n\n// applyTransforms :: Number -> Reader Object Number\nconst applyTransform = x =>\n  Reader.of(x)\n    .chain(applyOffset)\n    .chain(applyScale)\n\napplyTransform(45)\n  .runWith({})\n//=> 45\n\napplyTransform(45)\n  .runWith({ offset: 20 })\n//=> 65\n\napplyTransform(45)\n  .runWith({ scale: 2 })\n//=> 90\n\napplyTransform(45)\n  .runWith({ scale: 2, offset: 20 })\n//=> 130', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'runwith',
+            'href', '#runwith');
+          itext('runWith');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Reader e a ~> e -> a', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        itext('As ');
         ie_open('code');
-          itext('isSetoid :: a -> Boolean');
+          itext('Reader');
         ie_close('code');
-        itext(': an ADT that provides an ');
+        itext(' is a lazy datatype that requires a shared environment to run, it\'s instance provides a ');
         ie_open('code');
-          itext('equals');
+          itext('runWith');
         ie_close('code');
-        itext(' method');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isString :: a -> Boolean');
-        ie_close('code');
-        itext(': String');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isTraversable :: a -> Boolean');
-        ie_close('code');
-        itext(': an ADT that provides ');
-        ie_open('code');
-          itext('map');
-        ie_close('code');
-        itext(' and ');
-        ie_open('code');
-          itext('traverse');
-        ie_close('code');
-        itext(' methods');
-      ie_close('li');
-    ie_close('ul');
+        itext(' method that takes in an environment and returns the result of the computation.');
+      ie_close('p');
+      $templateAlias2({code: 'const { ask } = require(\'crocks/Reader\')\nconst Pair = require(\'crocks/Pair\')\n\nconst fst = require(\'crocks/Pair/fst\')\nconst liftA2 = require(\'crocks/helpers/liftA2\')\nconst snd = require(\'crocks/Pair/snd\')\n\n// data :: Pair Number Number\nconst data =\n  Pair(20, 45)\n\n// getCorrect :: Reader (Pair Number Number) Number\nconst getCorrect =\n  ask(fst)\n\n// getTotal :: Reader (Pair Number Number) Number\nconst getTotal =\n  ask(snd)\n\n// divide :: Number -> Number -> Number\nconst divide =\n  x => y => x / y\n\n// formatPercent :: Number -> String\nconst formatPercent =\n  x => `${Math.floor(x * 1000) / 10}%`\n\n// calcPercent :: Reader (Pair Number Number) String\nconst calcPercent =\n  liftA2(divide, getCorrect, getTotal)\n    .map(formatPercent)\n\ncalcPercent\n  .runWith(data)\n//=. \'44.4%\'', mode: 'javascript'}, null, opt_ijData);
+    ie_close('article');
     ie_open('input', null, null,
         'type', 'hidden',
         'value', opt_data.page.title);
@@ -28884,11 +28749,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'value', opt_data.site.title);
     ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({content: param1286}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param561}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'PqxFz.render';
+  $render.soyTemplateName = 'dFHuk.render';
 }
 
 exports.render.params = ["page","site"];
@@ -28898,14 +28763,22 @@ return exports;
 
 });
 
-class PqxFz extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(PqxFz, templates);
+class dFHuk extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(dFHuk, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
 
 
 /***/ }),
+/* 221 */,
+/* 222 */,
+/* 223 */,
+/* 224 */,
+/* 225 */,
+/* 226 */,
+/* 227 */,
+/* 228 */,
 /* 229 */,
 /* 230 */,
 /* 231 */,
@@ -28919,10 +28792,7 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(PqxFz, templates);
 /* 239 */,
 /* 240 */,
 /* 241 */,
-/* 242 */,
-/* 243 */,
-/* 244 */,
-/* 245 */
+/* 242 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28958,9 +28828,9 @@ __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _predicateFunctionsSoy = __webpack_require__(228);
+var _ReaderSoy = __webpack_require__(220);
 
-var _predicateFunctionsSoy2 = _interopRequireDefault(_predicateFunctionsSoy);
+var _ReaderSoy2 = _interopRequireDefault(_ReaderSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28970,23 +28840,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var PqxFz = function (_Component) {
-  _inherits(PqxFz, _Component);
+var dFHuk = function (_Component) {
+  _inherits(dFHuk, _Component);
 
-  function PqxFz() {
-    _classCallCheck(this, PqxFz);
+  function dFHuk() {
+    _classCallCheck(this, dFHuk);
 
-    return _possibleConstructorReturn(this, (PqxFz.__proto__ || Object.getPrototypeOf(PqxFz)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (dFHuk.__proto__ || Object.getPrototypeOf(dFHuk)).apply(this, arguments));
   }
 
-  return PqxFz;
+  return dFHuk;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(PqxFz, _predicateFunctionsSoy2.default);
+_metalSoy2.default.register(dFHuk, _ReaderSoy2.default);
 
-exports.default = PqxFz;
+exports.default = dFHuk;
 
 /***/ })
-],[245]);
+],[242]);

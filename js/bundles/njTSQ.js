@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([5,20,21,22],[
+webpackJsonppageComponent([4,20,21,22],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -28362,12 +28362,13 @@ exports.default = parseFromAnchor;
 /* 228 */,
 /* 229 */,
 /* 230 */,
-/* 231 */
+/* 231 */,
+/* 232 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pageDocsIndex", function() { return pageDocsIndex; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "njTSQ", function() { return njTSQ; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28379,15 +28380,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var templates;
 goog.loadModule(function(exports) {
 
-// This file was automatically generated from index.soy.
+// This file was automatically generated from All.soy.
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace pageDocsIndex.
+ * @fileoverview Templates in namespace njTSQ.
  * @public
  */
 
-goog.module('pageDocsIndex.incrementaldom');
+goog.module('njTSQ.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28408,11 +28409,9 @@ var ie_open_end = IncrementalDom.elementOpenEnd;
 var itext = IncrementalDom.text;
 var iattr = IncrementalDom.attr;
 
-var $templateAlias3 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('ElectricSearchAutocomplete.incrementaldom', 'render');
+var $templateAlias2 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('ElectricCode.incrementaldom', 'render');
 
-var $templateAlias2 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('Sidebar.incrementaldom', 'render');
-
-var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('Topbar.incrementaldom', 'render');
+var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('guide.incrementaldom', 'render');
 
 
 /**
@@ -28423,159 +28422,221 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  ie_open('div', null, null,
-      'class', 'main');
-    ie_open('main', null, null,
-        'class', 'content');
-      ie_open('div', null, null,
-          'class', 'docs');
-        $templateAlias1({items: opt_data.site.topbar, style: 'topbar-light topbar-docs', logo: {text: opt_data.site.title, icon: opt_data.site.icon}}, null, opt_ijData);
-        $templateAlias2({section: opt_data.site.index.children['docs'], site: opt_data.site}, null, opt_ijData);
-        $topics(opt_data, null, opt_ijData);
-      ie_close('div');
-    ie_close('main');
-  ie_close('div');
+  var param1319 = function() {
+    $templateAlias2({code: 'All Boolean', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      ie_open('code');
+        itext('All');
+      ie_close('code');
+      itext(' is a ');
+      ie_open('code');
+        itext('Monoid');
+      ie_close('code');
+      itext(' that will combine two values of any type using logical conjunction (AND) on their coerced ');
+      ie_open('code');
+        itext('Boolean');
+      ie_close('code');
+      itext(' values, mapping truth-y values to');
+      ie_open('code');
+        itext('true');
+      ie_close('code');
+      itext(' and false-y values to ');
+      ie_open('code');
+        itext('false');
+      ie_close('code');
+      itext('.');
+    ie_close('p');
+    $templateAlias2({code: 'const All = require(\'crocks/All\')\n\nconst mconcat = require(\'crocks/helpers/mconcat\')\n\nconst trueNum = All(13)\nconst falseNum = All(0)\nconst trueString = All(\'So true\')\n\ntrueNum.concat(falseNum)\n//=> All false\n\ntrueNum.concat(trueString)\n//=> All true\n\nconst allGood =\n  mconcat(All)\n\nallGood([ 1, 5, 89 ])\n//=> All true\n\nallGood([ \'nice\', \'00\', null ])\n//=> All false', mode: 'javascript'}, null, opt_ijData);
+    ie_open('article', null, null,
+        'id', 'implements');
+      ie_open('h2');
+        itext('Implements');
+      ie_close('h2');
+      ie_open('p');
+        ie_open('code');
+          itext('Semigroup');
+        ie_close('code');
+        itext(', ');
+        ie_open('code');
+          itext('Monoid');
+        ie_close('code');
+      ie_close('p');
+    ie_close('article');
+    ie_open('article', null, null,
+        'id', 'constructor');
+      ie_open('h2');
+        itext('Constructor Methods');
+      ie_close('h2');
+      ie_open('h4');
+        itext('empty');
+      ie_close('h4');
+      $templateAlias2({code: 'All.empty :: () -> All', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        ie_open('code');
+          itext('empty');
+        ie_close('code');
+        itext(' provides the identity for the ');
+        ie_open('code');
+          itext('Monoid');
+        ie_close('code');
+        itext(' in that when the value it provides is ');
+        ie_open('code');
+          itext('concat');
+        ie_close('code');
+        itext('ed to any other value, it will return the other value. In the case of ');
+        ie_open('code');
+          itext('All');
+        ie_close('code');
+        itext(' the result of ');
+        ie_open('code');
+          itext('empty');
+        ie_close('code');
+        itext(' is ');
+        ie_open('code');
+          itext('true');
+        ie_close('code');
+        itext('. ');
+        ie_open('code');
+          itext('empty');
+        ie_close('code');
+        itext(' is available on both the Constructor and the Instance for convenience.');
+      ie_close('p');
+      $templateAlias2({code: 'const All = require(\'crocks/All\')\n\nAll.empty() //=> All true\n\nAll(true).concat(All.empty())   //=> All true\nAll(false).concat(All.empty())  //=> All false', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        itext('type');
+      ie_close('h4');
+      $templateAlias2({code: 'All.type :: () -> String', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        ie_open('code');
+          itext('type');
+        ie_close('code');
+        itext(' provides a string representation of the type name for a given type in');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext('. While it is used mostly internally for law validation, it can be useful to the end user for debugging and building out custom types based on the standard ');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext(' types. While type comparisons can easily be done manually by calling ');
+        ie_open('code');
+          itext('type');
+        ie_close('code');
+        itext(' on a given type, using the ');
+        ie_open('code');
+          itext('isSameType');
+        ie_close('code');
+        itext(' function hides much of the boilerplate. ');
+        ie_open('code');
+          itext('type');
+        ie_close('code');
+        itext(' is available on both the Constructor and the Instance for convenience.');
+      ie_close('p');
+      $templateAlias2({code: 'const All = require(\'crocks/All\')\n\nconst Maybe = require(\'crocks/Maybe\')\nconst isSameType = require(\'crocks/predicates/isSameType\')\n\nAll.type() //=>  "All"\n\nisSameType(All, All(3))           //=> true\nisSameType(All, All)              //=> true\nisSameType(All, Maybe.Just(\'3\'))  //=> false\nisSameType(All(false), Maybe)     //=> false', mode: 'javascript'}, null, opt_ijData);
+    ie_close('article');
+    ie_open('article', null, null,
+        'id', 'instance');
+      ie_open('h2');
+        itext('Instance Methods');
+      ie_close('h2');
+      ie_open('h4');
+        itext('concat');
+      ie_close('h4');
+      $templateAlias2({code: 'All ~> All -> All', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        ie_open('code');
+          itext('concat');
+        ie_close('code');
+        itext(' is used to combine (2) ');
+        ie_open('code');
+          itext('Semigroup');
+        ie_close('code');
+        itext('s of the same type under an operation specified by the ');
+        ie_open('code');
+          itext('Semigroup');
+        ie_close('code');
+        itext('. In the case of ');
+        ie_open('code');
+          itext('All');
+        ie_close('code');
+        itext(', it will combine the two using logical AND (conjunction).');
+      ie_close('p');
+      $templateAlias2({code: 'const All = require(\'crocks/All\')\n\nAll(true).concat(All(true))   //=> All true\nAll(true).concat(All(false))  //=> All false\nAll(false).concat(All(true))  //=> All false\nAll(false).concat(All(false)) //=> All false', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        itext('valueOf');
+      ie_close('h4');
+      $templateAlias2({code: 'All ~> () -> Boolean', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        ie_open('code');
+          itext('valueOf');
+        ie_close('code');
+        itext(' is used on all ');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext(' ');
+        ie_open('code');
+          itext('Monoid');
+        ie_close('code');
+        itext('s as a means of extraction. While the extraction is available, types that implement ');
+        ie_open('code');
+          itext('valueOf');
+        ie_close('code');
+        itext(' are not necessarily a');
+        ie_open('code');
+          itext('Comonad');
+        ie_close('code');
+        itext('. This function is used primarily for convenience for some of the helper functions that ship with ');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext('. Calling ');
+        ie_open('code');
+          itext('valueOf');
+        ie_close('code');
+        itext(' on an ');
+        ie_open('code');
+          itext('All');
+        ie_close('code');
+        itext(' instance will result in the underlying ');
+        ie_open('code');
+          itext('Boolean');
+        ie_close('code');
+        itext(' value.');
+      ie_close('p');
+      $templateAlias2({code: 'const All = require(\'crocks/All\')\n\nAll(0).value()          //=> false\nAll(\'string\').valueOf() //=> true\n\n//=> false\nAll(true)\n  .concat(\'\')\n  .valueOf()', mode: 'javascript'}, null, opt_ijData);
+    ie_close('article');
+    ie_open('input', null, null,
+        'type', 'hidden',
+        'value', opt_data.page.title);
+    ie_close('input');
+    ie_open('input', null, null,
+        'type', 'hidden',
+        'value', opt_data.site.title);
+    ie_close('input');
+  };
+  $templateAlias1(soy.$$assignDefaults({content: param1319}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'pageDocsIndex.render';
+  $render.soyTemplateName = 'njTSQ.render';
 }
 
-
-/**
- * @param {Object<string, *>=} opt_data
- * @param {(null|undefined)=} opt_ignored
- * @param {Object<string, *>=} opt_ijData
- * @return {void}
- * @suppress {checkTypes}
- */
-function $topics(opt_data, opt_ignored, opt_ijData) {
-  var $$temp;
-  ie_open('div', null, null,
-      'class', 'sidebar-offset');
-    ie_open('div', null, null,
-        'class', 'container-hybrid docs-home-top');
-      ie_open('div', null, null,
-          'class', 'row');
-        ie_open('div', null, null,
-            'class', 'col-xs-16');
-          ie_open('h1', null, null,
-              'class', 'docs-home-top-title');
-            itext('Docs');
-          ie_close('h1');
-          ie_open('p', null, null,
-              'class', 'docs-home-top-description');
-            itext('Start learning how to leverage the power of ');
-            var dyn14 = opt_data.site.title;
-            if (typeof dyn14 == 'function') dyn14(); else if (dyn14 != null) itext(dyn14);
-            itext('.');
-          ie_close('p');
-        ie_close('div');
-      ie_close('div');
-      ie_open('div', null, null,
-          'class', 'row');
-        ie_open('div', null, null,
-            'class', 'container-hybrid docs-home-top-form');
-          ie_open('form', null, null,
-              'action', '/docs/search.html',
-              'method', 'GET',
-              'enctype', 'multipart/form-data');
-            ie_open('div', null, null,
-                'class', 'row');
-              ie_open('div', null, null,
-                  'class', 'col-xs-14 col-xs-offset-1 col-md-10 col-md-offset-3 col-lg-6 col-lg-offset-5');
-                ie_open('div', null, null,
-                    'class', 'search');
-                  $templateAlias3({dataURL: (($$temp = opt_data.site.basePath) == null ? '' : $$temp) + '/site.json', maxResults: 3, path: '/docs/', placeholder: 'Search Docs'}, null, opt_ijData);
-                ie_close('div');
-              ie_close('div');
-            ie_close('div');
-          ie_close('form');
-        ie_close('div');
-      ie_close('div');
-    ie_close('div');
-    ie_open('div', null, null,
-        'class', 'docs-home-topics');
-      ie_open('div', null, null,
-          'class', 'container-hybrid');
-        ie_open('div', null, null,
-            'class', 'row');
-          ie_open('div', null, null,
-              'class', 'col-xs-14 col-xs-offset-1 ');
-            ie_open('section', null, null,
-                'class', 'docs-home-middle');
-              ie_open('h2', null, null,
-                  'class', 'docs-home-middle-subtitle');
-                itext('Choose a Guide');
-              ie_close('h2');
-              ie_open('p', null, null,
-                  'class', 'docs-home-middle-description');
-                itext('Each one provide step by step coverage for every core feature.');
-              ie_close('p');
-            ie_close('section');
-          ie_close('div');
-        ie_close('div');
-        ie_open('div', null, null,
-            'class', 'row');
-          ie_open('div', null, null,
-              'class', 'col-md-12 col-md-offset-2 col-xs-16');
-            ie_open('div', null, null,
-                'class', 'row');
-              var childIdList265 = opt_data.page.childIds;
-              var childIdListLen265 = childIdList265.length;
-              for (var childIdIndex265 = 0; childIdIndex265 < childIdListLen265; childIdIndex265++) {
-                var childIdData265 = childIdList265[childIdIndex265];
-                var topic__soy255 = opt_data.page.children[childIdData265];
-                if (! topic__soy255.hidden) {
-                  ie_open('div', null, null,
-                      'class', 'col-md-8 col-md-offset-0 col-xs-14 col-xs-offset-1');
-                    ie_open('a', null, null,
-                        'class', 'topic radial-out',
-                        'href', topic__soy255.url);
-                      ie_open('div', null, null,
-                          'class', 'topic-icon');
-                        ie_void('span', null, null,
-                            'class', 'icon-16-' + topic__soy255.icon);
-                      ie_close('div');
-                      ie_open('h3', null, null,
-                          'class', 'topic-title');
-                        var dyn15 = topic__soy255.title;
-                        if (typeof dyn15 == 'function') dyn15(); else if (dyn15 != null) itext(dyn15);
-                      ie_close('h3');
-                    ie_close('a');
-                  ie_close('div');
-                }
-              }
-            ie_close('div');
-          ie_close('div');
-        ie_close('div');
-      ie_close('div');
-    ie_close('div');
-  ie_close('div');
-}
-exports.topics = $topics;
-if (goog.DEBUG) {
-  $topics.soyTemplateName = 'pageDocsIndex.topics';
-}
-
-exports.render.params = ["site"];
-exports.render.types = {"site":"any"};
-exports.topics.params = ["page","site"];
-exports.topics.types = {"page":"any","site":"any"};
+exports.render.params = ["page","site"];
+exports.render.types = {"page":"any","site":"any"};
 templates = exports;
 return exports;
 
 });
 
-class pageDocsIndex extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(pageDocsIndex, templates);
+class njTSQ extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(njTSQ, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
 
 
 /***/ }),
-/* 232 */,
 /* 233 */,
 /* 234 */,
 /* 235 */,
@@ -28594,10 +28655,7 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(pageDocsIndex, templa
 /* 248 */,
 /* 249 */,
 /* 250 */,
-/* 251 */,
-/* 252 */,
-/* 253 */,
-/* 254 */
+/* 251 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28633,9 +28691,9 @@ __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _indexSoy = __webpack_require__(231);
+var _AllSoy = __webpack_require__(232);
 
-var _indexSoy2 = _interopRequireDefault(_indexSoy);
+var _AllSoy2 = _interopRequireDefault(_AllSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28645,23 +28703,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var pageDocsIndex = function (_Component) {
-  _inherits(pageDocsIndex, _Component);
+var njTSQ = function (_Component) {
+  _inherits(njTSQ, _Component);
 
-  function pageDocsIndex() {
-    _classCallCheck(this, pageDocsIndex);
+  function njTSQ() {
+    _classCallCheck(this, njTSQ);
 
-    return _possibleConstructorReturn(this, (pageDocsIndex.__proto__ || Object.getPrototypeOf(pageDocsIndex)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (njTSQ.__proto__ || Object.getPrototypeOf(njTSQ)).apply(this, arguments));
   }
 
-  return pageDocsIndex;
+  return njTSQ;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(pageDocsIndex, _indexSoy2.default);
+_metalSoy2.default.register(njTSQ, _AllSoy2.default);
 
-exports.default = pageDocsIndex;
+exports.default = njTSQ;
 
 /***/ })
-],[254]);
+],[251]);

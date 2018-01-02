@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([4,13,14,15],[
+webpackJsonppageComponent([19,20,21,22],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1847,7 +1847,7 @@ function loadLocale(name) {
         try {
             oldLocale = globalLocale._abbr;
             var aliasedRequire = require;
-            __webpack_require__(147)("./" + name);
+            __webpack_require__(148)("./" + name);
             getSetGlobalLocale(oldLocale);
         } catch (e) {}
     }
@@ -4539,7 +4539,7 @@ return hooks;
 
 })));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(148)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(149)(module)))
 
 /***/ }),
 /* 1 */,
@@ -4558,27 +4558,27 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ElectricUpdates = exports.ElectricSearchBase = exports.ElectricSearchAutocomplete = exports.ElectricSearch = exports.ElectricReadingProgress = exports.ElectricNavigation = exports.ElectricCodeTabs = exports.ElectricCode = undefined;
 
-var _ElectricCode = __webpack_require__(149);
+var _ElectricCode = __webpack_require__(150);
 
 var _ElectricCode2 = _interopRequireDefault(_ElectricCode);
 
-var _ElectricCodeTabs = __webpack_require__(150);
+var _ElectricCodeTabs = __webpack_require__(151);
 
 var _ElectricCodeTabs2 = _interopRequireDefault(_ElectricCodeTabs);
 
-var _ElectricNavigation = __webpack_require__(151);
+var _ElectricNavigation = __webpack_require__(152);
 
 var _ElectricNavigation2 = _interopRequireDefault(_ElectricNavigation);
 
-var _ElectricReadingProgress = __webpack_require__(152);
+var _ElectricReadingProgress = __webpack_require__(153);
 
 var _ElectricReadingProgress2 = _interopRequireDefault(_ElectricReadingProgress);
 
-var _ElectricSearch = __webpack_require__(153);
+var _ElectricSearch = __webpack_require__(154);
 
 var _ElectricSearch2 = _interopRequireDefault(_ElectricSearch);
 
-var _ElectricSearchAutocomplete = __webpack_require__(154);
+var _ElectricSearchAutocomplete = __webpack_require__(155);
 
 var _ElectricSearchAutocomplete2 = _interopRequireDefault(_ElectricSearchAutocomplete);
 
@@ -4586,7 +4586,7 @@ var _ElectricSearchBase = __webpack_require__(10);
 
 var _ElectricSearchBase2 = _interopRequireDefault(_ElectricSearchBase);
 
-var _ElectricUpdates = __webpack_require__(155);
+var _ElectricUpdates = __webpack_require__(156);
 
 var _ElectricUpdates2 = _interopRequireDefault(_ElectricUpdates);
 
@@ -5548,7 +5548,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Position = exports.Geometry = exports.Align = undefined;
 
-var _Align = __webpack_require__(181);
+var _Align = __webpack_require__(182);
 
 var _Align2 = _interopRequireDefault(_Align);
 
@@ -17823,7 +17823,7 @@ var _metalToggler = __webpack_require__(130);
 
 var _metalToggler2 = _interopRequireDefault(_metalToggler);
 
-var _Sidebar = __webpack_require__(144);
+var _Sidebar = __webpack_require__(145);
 
 var _Sidebar2 = _interopRequireDefault(_Sidebar);
 
@@ -17889,7 +17889,7 @@ var _metalSoy = __webpack_require__(2);
 
 var _metalSoy2 = _interopRequireDefault(_metalSoy);
 
-var _SocialButtons = __webpack_require__(145);
+var _SocialButtons = __webpack_require__(146);
 
 var _SocialButtons2 = _interopRequireDefault(_SocialButtons);
 
@@ -17953,7 +17953,7 @@ var _moment2 = _interopRequireDefault(_moment);
 
 var _metalDom = __webpack_require__(4);
 
-var _TutorialTimer = __webpack_require__(146);
+var _TutorialTimer = __webpack_require__(147);
 
 var _TutorialTimer2 = _interopRequireDefault(_TutorialTimer);
 
@@ -18066,7 +18066,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _metal = __webpack_require__(3);
 
-var _metalUri = __webpack_require__(194);
+var _metalUri = __webpack_require__(195);
 
 var _metalUri2 = _interopRequireDefault(_metalUri);
 
@@ -18443,7 +18443,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.AutocompleteBase = exports.Autocomplete = undefined;
 
-var _Autocomplete = __webpack_require__(172);
+var _Autocomplete = __webpack_require__(173);
 
 var _Autocomplete2 = _interopRequireDefault(_Autocomplete);
 
@@ -19019,9 +19019,8 @@ function $guide(opt_data, opt_ignored, opt_ijData) {
           'class', 'container-hybrid');
         ie_open('h1', null, null,
             'class', 'title');
-          var dyn2 = opt_data.page.title;
-          if (typeof dyn2 == 'function') dyn2(); else if (dyn2 != null) itext(dyn2);
-          itext(' Guide');
+          var dyn0 = opt_data.page.title;
+          if (typeof dyn0 == 'function') dyn0(); else if (dyn0 != null) itext(dyn0);
         ie_close('h1');
       ie_close('div');
     ie_close('header');
@@ -19033,8 +19032,8 @@ function $guide(opt_data, opt_ignored, opt_ijData) {
             'class', 'docs-content col-xs-16 col-md-9');
           ie_open('div', null, null,
               'class', 'guide-content');
-            var dyn3 = opt_data.content;
-            if (typeof dyn3 == 'function') dyn3(); else if (dyn3 != null) itext(dyn3);
+            var dyn1 = opt_data.content;
+            if (typeof dyn1 == 'function') dyn1(); else if (dyn1 != null) itext(dyn1);
           ie_close('div');
           if (opt_data.site.githubRepo) {
             $contribute(opt_data, null, opt_ijData);
@@ -19174,8 +19173,8 @@ function $render(opt_data, opt_ignored, opt_ijData) {
     ie_open('main', null, null,
         'class', 'content');
       $templateAlias1({items: opt_data.site.topbar, style: 'topbar-light', logo: {text: opt_data.site.title, icon: opt_data.site.icon, href: opt_data.site.basePath}}, null, opt_ijData);
-      var dyn4 = opt_data.content;
-      if (typeof dyn4 == 'function') dyn4(); else if (dyn4 != null) itext(dyn4);
+      var dyn2 = opt_data.content;
+      if (typeof dyn2 == 'function') dyn2(); else if (dyn2 != null) itext(dyn2);
     ie_close('main');
   ie_close('div');
 }
@@ -19200,6 +19199,184 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(main, templates);
 
 /***/ }),
 /* 141 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "notopic", function() { return notopic; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_metal_soy__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_metal_soy___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_metal_soy__);
+/* jshint ignore:start */
+
+
+var templates;
+goog.loadModule(function(exports) {
+
+// This file was automatically generated from notopic.soy.
+// Please don't edit this file by hand.
+
+/**
+ * @fileoverview Templates in namespace notopic.
+ * @public
+ */
+
+goog.module('notopic.incrementaldom');
+
+/** @suppress {extraRequire} */
+var soy = goog.require('soy');
+/** @suppress {extraRequire} */
+var soydata = goog.require('soydata');
+/** @suppress {extraRequire} */
+goog.require('goog.i18n.bidi');
+/** @suppress {extraRequire} */
+goog.require('goog.asserts');
+/** @suppress {extraRequire} */
+goog.require('goog.string');
+var IncrementalDom = goog.require('incrementaldom');
+var ie_open = IncrementalDom.elementOpen;
+var ie_close = IncrementalDom.elementClose;
+var ie_void = IncrementalDom.elementVoid;
+var ie_open_start = IncrementalDom.elementOpenStart;
+var ie_open_end = IncrementalDom.elementOpenEnd;
+var itext = IncrementalDom.text;
+var iattr = IncrementalDom.attr;
+
+var $templateAlias2 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('Sidebar.incrementaldom', 'render');
+
+var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('Topbar.incrementaldom', 'render');
+
+
+/**
+ * @param {Object<string, *>=} opt_data
+ * @param {(null|undefined)=} opt_ignored
+ * @param {Object<string, *>=} opt_ijData
+ * @return {void}
+ * @suppress {checkTypes}
+ */
+function $render(opt_data, opt_ignored, opt_ijData) {
+  ie_open('div', null, null,
+      'class', 'main');
+    ie_open('main', null, null,
+        'class', 'guide');
+      ie_open('div', null, null,
+          'class', 'docs');
+        $templateAlias1({items: opt_data.site.topbar, style: 'topbar-light topbar-docs', logo: {text: opt_data.site.title, icon: opt_data.site.icon, href: opt_data.site.basePath}}, null, opt_ijData);
+        $templateAlias2({section: opt_data.site.index.children['docs'], site: opt_data.site}, null, opt_ijData);
+        $notopic(opt_data, null, opt_ijData);
+      ie_close('div');
+    ie_close('main');
+  ie_close('div');
+}
+exports.render = $render;
+if (goog.DEBUG) {
+  $render.soyTemplateName = 'notopic.render';
+}
+
+
+/**
+ * @param {Object<string, *>=} opt_data
+ * @param {(null|undefined)=} opt_ignored
+ * @param {Object<string, *>=} opt_ijData
+ * @return {void}
+ * @suppress {checkTypes}
+ */
+function $notopic(opt_data, opt_ignored, opt_ijData) {
+  ie_open('div', null, null,
+      'class', 'sidebar-offset');
+    ie_open('header', null, null,
+        'class', 'guide-header');
+      ie_open('div', null, null,
+          'class', 'container-hybrid');
+        ie_open('h1', null, null,
+            'class', 'title');
+          var dyn3 = opt_data.page.title;
+          if (typeof dyn3 == 'function') dyn3(); else if (dyn3 != null) itext(dyn3);
+        ie_close('h1');
+      ie_close('div');
+    ie_close('header');
+    ie_open('div', null, null,
+        'class', 'container-hybrid');
+      ie_open('div', null, null,
+          'class', 'docs-guide row');
+        ie_open('div', null, null,
+            'class', 'docs-content col-xs-16 col-md-12');
+          ie_open('div', null, null,
+              'class', 'guide-content');
+            var dyn4 = opt_data.content;
+            if (typeof dyn4 == 'function') dyn4(); else if (dyn4 != null) itext(dyn4);
+          ie_close('div');
+          if (opt_data.site.githubRepo) {
+            $contribute(opt_data, null, opt_ijData);
+          }
+        ie_close('div');
+      ie_close('div');
+    ie_close('div');
+  ie_close('div');
+}
+exports.notopic = $notopic;
+if (goog.DEBUG) {
+  $notopic.soyTemplateName = 'notopic.notopic';
+}
+
+
+/**
+ * @param {Object<string, *>=} opt_data
+ * @param {(null|undefined)=} opt_ignored
+ * @param {Object<string, *>=} opt_ijData
+ * @return {void}
+ * @suppress {checkTypes}
+ */
+function $contribute(opt_data, opt_ignored, opt_ijData) {
+  ie_open('div', null, null,
+      'class', 'contribute');
+    ie_open('div', null, null,
+        'class', 'contribute-img');
+      ie_void('span', null, null,
+          'class', 'icon-16-github');
+    ie_close('div');
+    ie_open('div', null, null,
+        'class', 'contribute-text');
+      ie_open('p');
+        itext('Contribute on Github! ');
+        ie_open('a', null, null,
+            'href', 'https://github.com/' + opt_data.site.githubRepo + '/tree/master/docs/' + opt_data.page.srcFilePath,
+            'class', 'contribute-link',
+            'target', '_blank');
+          itext('Edit this section');
+        ie_close('a');
+        itext('.');
+      ie_close('p');
+    ie_close('div');
+  ie_close('div');
+}
+exports.contribute = $contribute;
+if (goog.DEBUG) {
+  $contribute.soyTemplateName = 'notopic.contribute';
+}
+
+exports.render.params = ["page","site"];
+exports.render.types = {"page":"any","site":"any"};
+exports.notopic.params = ["page","site","content"];
+exports.notopic.types = {"page":"any","site":"any","content":"any"};
+exports.contribute.params = ["page","site"];
+exports.contribute.types = {"page":"any","site":"any"};
+templates = exports;
+return exports;
+
+});
+
+class notopic extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(notopic, templates);
+
+/* harmony default export */ __webpack_exports__["default"] = (templates);
+/* jshint ignore:end */
+
+
+/***/ }),
+/* 142 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -19326,12 +19503,12 @@ if (goog.DEBUG) {
 function $footerButtons(opt_data, opt_ignored, opt_ijData) {
   ie_open('div', null, null,
       'class', 'tutorial-page-nav');
-    var tutorialObject__soy100 = opt_data.site.index.children['tutorials'].children[opt_data.page.parentId];
-    if (opt_data.page.weight < tutorialObject__soy100.childIds.length) {
+    var tutorialObject__soy104 = opt_data.site.index.children['tutorials'].children[opt_data.page.parentId];
+    if (opt_data.page.weight < tutorialObject__soy104.childIds.length) {
       if (opt_data.page.buttonTitle) {
-        var nextPageUrl__soy105 = tutorialObject__soy100.children[tutorialObject__soy100.childIds[opt_data.page.weight]].url;
+        var nextPageUrl__soy109 = tutorialObject__soy104.children[tutorialObject__soy104.childIds[opt_data.page.weight]].url;
         ie_open('a', null, null,
-            'href', nextPageUrl__soy105,
+            'href', nextPageUrl__soy109,
             'class', 'btn btn-accent btn-sm');
           var dyn7 = opt_data.page.buttonTitle;
           if (typeof dyn7 == 'function') dyn7(); else if (dyn7 != null) itext(dyn7);
@@ -19375,7 +19552,7 @@ if (goog.DEBUG) {
  * @return {void}
  * @suppress {checkTypes}
  */
-function __deltemplate_s120_88c0813b(opt_data, opt_ignored, opt_ijData) {
+function __deltemplate_s124_88c0813b(opt_data, opt_ignored, opt_ijData) {
   ie_open('a', null, null,
       'class', 'sidebar-link' + (opt_data.page.active ? ' sidebar-link-selected' : ''),
       'href', opt_data.page.url,
@@ -19396,11 +19573,11 @@ function __deltemplate_s120_88c0813b(opt_data, opt_ignored, opt_ijData) {
         'class', 'after');
   ie_close('a');
 }
-exports.__deltemplate_s120_88c0813b = __deltemplate_s120_88c0813b;
+exports.__deltemplate_s124_88c0813b = __deltemplate_s124_88c0813b;
 if (goog.DEBUG) {
-  __deltemplate_s120_88c0813b.soyTemplateName = 'tutorial.__deltemplate_s120_88c0813b';
+  __deltemplate_s124_88c0813b.soyTemplateName = 'tutorial.__deltemplate_s124_88c0813b';
 }
-soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'tutorial', 0, __deltemplate_s120_88c0813b);
+soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'tutorial', 0, __deltemplate_s124_88c0813b);
 
 exports.render.params = ["content","elementClasses","page","site"];
 exports.render.types = {"content":"any","elementClasses":"any","page":"any","site":"any"};
@@ -19423,7 +19600,7 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(tutorial, templates);
 
 
 /***/ }),
-/* 142 */
+/* 143 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19434,31 +19611,31 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ElectricUpdates = exports.ElectricSearchAutocomplete = exports.ElectricSearch = exports.ElectricReadingProgress = exports.ElectricNavigation = exports.ElectricCode = exports.ElectricAPIAutocomplete = undefined;
 
-var _ElectricAPIAutocomplete = __webpack_require__(156);
+var _ElectricAPIAutocomplete = __webpack_require__(157);
 
 var _ElectricAPIAutocomplete2 = _interopRequireDefault(_ElectricAPIAutocomplete);
 
-var _ElectricCode = __webpack_require__(157);
+var _ElectricCode = __webpack_require__(158);
 
 var _ElectricCode2 = _interopRequireDefault(_ElectricCode);
 
-var _ElectricNavigation = __webpack_require__(159);
+var _ElectricNavigation = __webpack_require__(160);
 
 var _ElectricNavigation2 = _interopRequireDefault(_ElectricNavigation);
 
-var _ElectricReadingProgress = __webpack_require__(161);
+var _ElectricReadingProgress = __webpack_require__(162);
 
 var _ElectricReadingProgress2 = _interopRequireDefault(_ElectricReadingProgress);
 
-var _ElectricSearch = __webpack_require__(163);
+var _ElectricSearch = __webpack_require__(164);
 
 var _ElectricSearch2 = _interopRequireDefault(_ElectricSearch);
 
-var _ElectricSearchAutocomplete = __webpack_require__(165);
+var _ElectricSearchAutocomplete = __webpack_require__(166);
 
 var _ElectricSearchAutocomplete2 = _interopRequireDefault(_ElectricSearchAutocomplete);
 
-var _ElectricUpdates = __webpack_require__(167);
+var _ElectricUpdates = __webpack_require__(168);
 
 var _ElectricUpdates2 = _interopRequireDefault(_ElectricUpdates);
 
@@ -19474,7 +19651,7 @@ exports.ElectricUpdates = _ElectricUpdates2.default;
 exports.default = _ElectricNavigation2.default;
 
 /***/ }),
-/* 143 */
+/* 144 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19495,13 +19672,13 @@ var _metalSoy = __webpack_require__(2);
 
 var _metalSoy2 = _interopRequireDefault(_metalSoy);
 
-var _metalToggler = __webpack_require__(170);
+var _metalToggler = __webpack_require__(171);
 
 var _metalToggler2 = _interopRequireDefault(_metalToggler);
 
 var _metalState = __webpack_require__(5);
 
-var _TopbarSoy = __webpack_require__(169);
+var _TopbarSoy = __webpack_require__(170);
 
 var _TopbarSoy2 = _interopRequireDefault(_TopbarSoy);
 
@@ -19606,7 +19783,7 @@ exports.Topbar = Topbar;
 exports.default = Topbar;
 
 /***/ }),
-/* 144 */
+/* 145 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -19707,7 +19884,7 @@ if (goog.DEBUG) {
  * @return {void}
  * @suppress {checkTypes}
  */
-function __deltemplate_s147_d34389eb(opt_data, opt_ignored, opt_ijData) {
+function __deltemplate_s173_d34389eb(opt_data, opt_ignored, opt_ijData) {
   ie_open('a', null, null,
       'class', 'sidebar-link ' + (opt_data.page.active ? 'sidebar-link-selected' : ''),
       'href', opt_data.page.url);
@@ -19716,16 +19893,16 @@ function __deltemplate_s147_d34389eb(opt_data, opt_ignored, opt_ijData) {
           'class', 'sidebar-icon icon-16-' + opt_data.page.icon);
     }
     ie_open('span');
-      var dyn10 = opt_data.page.title;
-      if (typeof dyn10 == 'function') dyn10(); else if (dyn10 != null) itext(dyn10);
+      var dyn12 = opt_data.page.title;
+      if (typeof dyn12 == 'function') dyn12(); else if (dyn12 != null) itext(dyn12);
     ie_close('span');
   ie_close('a');
 }
-exports.__deltemplate_s147_d34389eb = __deltemplate_s147_d34389eb;
+exports.__deltemplate_s173_d34389eb = __deltemplate_s173_d34389eb;
 if (goog.DEBUG) {
-  __deltemplate_s147_d34389eb.soyTemplateName = 'Sidebar.__deltemplate_s147_d34389eb';
+  __deltemplate_s173_d34389eb.soyTemplateName = 'Sidebar.__deltemplate_s173_d34389eb';
 }
-soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'sidebar', 0, __deltemplate_s147_d34389eb);
+soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'sidebar', 0, __deltemplate_s173_d34389eb);
 
 exports.render.params = ["section","site"];
 exports.render.types = {"section":"any","site":"any"};
@@ -19742,7 +19919,7 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(Sidebar, templates);
 
 
 /***/ }),
-/* 145 */
+/* 146 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -19852,7 +20029,7 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(SocialButtons, templa
 
 
 /***/ }),
-/* 146 */
+/* 147 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -19914,8 +20091,8 @@ function $render(opt_data, opt_ignored, opt_ijData) {
       ie_void('span', null, null,
           'class', 'icon icon-16-clock');
       itext(' ');
-      var dyn11 = opt_data.time;
-      if (typeof dyn11 == 'function') dyn11(); else if (dyn11 != null) itext(dyn11);
+      var dyn13 = opt_data.time;
+      if (typeof dyn13 == 'function') dyn13(); else if (dyn13 != null) itext(dyn13);
     }
   ie_close('p');
 }
@@ -19939,7 +20116,7 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(TutorialTimer, templa
 
 
 /***/ }),
-/* 147 */
+/* 148 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
@@ -20196,10 +20373,10 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 147;
+webpackContext.id = 148;
 
 /***/ }),
-/* 148 */
+/* 149 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -20227,7 +20404,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 149 */
+/* 150 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20239,7 +20416,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _metalClipboard = __webpack_require__(174);
+var _metalClipboard = __webpack_require__(175);
 
 var _metalClipboard2 = _interopRequireDefault(_metalClipboard);
 
@@ -20247,7 +20424,7 @@ var _metalComponent = __webpack_require__(1);
 
 var _metalComponent2 = _interopRequireDefault(_metalComponent);
 
-var _metalTooltip = __webpack_require__(191);
+var _metalTooltip = __webpack_require__(192);
 
 var _metalTooltip2 = _interopRequireDefault(_metalTooltip);
 
@@ -20310,7 +20487,7 @@ var ElectricCode = function (_Component) {
 exports.default = ElectricCode;
 
 /***/ }),
-/* 150 */
+/* 151 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20322,7 +20499,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _metalTabs = __webpack_require__(189);
+var _metalTabs = __webpack_require__(190);
 
 var _metalTabs2 = _interopRequireDefault(_metalTabs);
 
@@ -20495,7 +20672,7 @@ window.ElectricCodeTabs = ElectricCodeTabs;
 exports.default = ElectricCodeTabs;
 
 /***/ }),
-/* 151 */
+/* 152 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20541,7 +20718,7 @@ var ElectricNavigation = function (_Component) {
 exports.default = ElectricNavigation;
 
 /***/ }),
-/* 152 */
+/* 153 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20553,7 +20730,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _metalAffix = __webpack_require__(171);
+var _metalAffix = __webpack_require__(172);
 
 var _metalAffix2 = _interopRequireDefault(_metalAffix);
 
@@ -20569,7 +20746,7 @@ var _metalDom = __webpack_require__(4);
 
 var _metalDom2 = _interopRequireDefault(_metalDom);
 
-var _metalReadingProgress = __webpack_require__(182);
+var _metalReadingProgress = __webpack_require__(183);
 
 var _metalReadingProgress2 = _interopRequireDefault(_metalReadingProgress);
 
@@ -20680,7 +20857,7 @@ ElectricReadingProgress.STATE = {
 exports.default = ElectricReadingProgress;
 
 /***/ }),
-/* 153 */
+/* 154 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20753,7 +20930,7 @@ ElectricSearch.STATE = {
 exports.default = ElectricSearch;
 
 /***/ }),
-/* 154 */
+/* 155 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20852,7 +21029,7 @@ var ElectricSearchAutocomplete = function (_ElectricSearchBase) {
 exports.default = ElectricSearchAutocomplete;
 
 /***/ }),
-/* 155 */
+/* 156 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20909,7 +21086,7 @@ ElectricUpdates.STATE = {
 exports.default = ElectricUpdates;
 
 /***/ }),
-/* 156 */
+/* 157 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21089,7 +21266,7 @@ ElectricAPIAutocomplete.STATE = {
 exports.default = ElectricAPIAutocomplete;
 
 /***/ }),
-/* 157 */
+/* 158 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21105,7 +21282,7 @@ var _metalSoy2 = _interopRequireDefault(_metalSoy);
 
 var _electricBaseComponents = __webpack_require__(6);
 
-var _ElectricCode = __webpack_require__(158);
+var _ElectricCode = __webpack_require__(159);
 
 var _ElectricCode2 = _interopRequireDefault(_ElectricCode);
 
@@ -21116,7 +21293,7 @@ _metalSoy2.default.register(_electricBaseComponents.ElectricCode, _ElectricCode2
 exports.default = _electricBaseComponents.ElectricCode;
 
 /***/ }),
-/* 158 */
+/* 159 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21226,7 +21403,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 159 */
+/* 160 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21250,7 +21427,7 @@ var _electricBaseComponents = __webpack_require__(6);
 
 var _electricBaseComponents2 = _interopRequireDefault(_electricBaseComponents);
 
-var _ElectricNavigation = __webpack_require__(160);
+var _ElectricNavigation = __webpack_require__(161);
 
 var _ElectricNavigation2 = _interopRequireDefault(_ElectricNavigation);
 
@@ -21304,7 +21481,7 @@ _metalSoy2.default.register(ElectricNavigation, _ElectricNavigation2.default);
 exports.default = ElectricNavigation;
 
 /***/ }),
-/* 160 */
+/* 161 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21464,7 +21641,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 161 */
+/* 162 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21480,7 +21657,7 @@ var _metalSoy2 = _interopRequireDefault(_metalSoy);
 
 var _electricBaseComponents = __webpack_require__(6);
 
-var _ElectricReadingProgress = __webpack_require__(162);
+var _ElectricReadingProgress = __webpack_require__(163);
 
 var _ElectricReadingProgress2 = _interopRequireDefault(_ElectricReadingProgress);
 
@@ -21491,7 +21668,7 @@ _metalSoy2.default.register(_electricBaseComponents.ElectricReadingProgress, _El
 exports.default = _electricBaseComponents.ElectricReadingProgress;
 
 /***/ }),
-/* 162 */
+/* 163 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21594,7 +21771,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 163 */
+/* 164 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21610,7 +21787,7 @@ var _metalSoy2 = _interopRequireDefault(_metalSoy);
 
 var _electricBaseComponents = __webpack_require__(6);
 
-var _ElectricSearch = __webpack_require__(164);
+var _ElectricSearch = __webpack_require__(165);
 
 var _ElectricSearch2 = _interopRequireDefault(_ElectricSearch);
 
@@ -21621,7 +21798,7 @@ _metalSoy2.default.register(_electricBaseComponents.ElectricSearch, _ElectricSea
 exports.default = _electricBaseComponents.ElectricSearch;
 
 /***/ }),
-/* 164 */
+/* 165 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21815,7 +21992,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 165 */
+/* 166 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21831,7 +22008,7 @@ var _metalSoy2 = _interopRequireDefault(_metalSoy);
 
 var _electricBaseComponents = __webpack_require__(6);
 
-var _ElectricSearchAutocomplete = __webpack_require__(166);
+var _ElectricSearchAutocomplete = __webpack_require__(167);
 
 var _ElectricSearchAutocomplete2 = _interopRequireDefault(_ElectricSearchAutocomplete);
 
@@ -21842,7 +22019,7 @@ _metalSoy2.default.register(_electricBaseComponents.ElectricSearchAutocomplete, 
 exports.default = _electricBaseComponents.ElectricSearchAutocomplete;
 
 /***/ }),
-/* 166 */
+/* 167 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21952,7 +22129,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 167 */
+/* 168 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21968,7 +22145,7 @@ var _metalSoy2 = _interopRequireDefault(_metalSoy);
 
 var _electricBaseComponents = __webpack_require__(6);
 
-var _ElectricUpdates = __webpack_require__(168);
+var _ElectricUpdates = __webpack_require__(169);
 
 var _ElectricUpdates2 = _interopRequireDefault(_ElectricUpdates);
 
@@ -21979,7 +22156,7 @@ _metalSoy2.default.register(_electricBaseComponents.ElectricUpdates, _ElectricUp
 exports.default = _electricBaseComponents.ElectricUpdates;
 
 /***/ }),
-/* 168 */
+/* 169 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22190,7 +22367,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 169 */
+/* 170 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22413,7 +22590,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 170 */
+/* 171 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22749,7 +22926,7 @@ exports.Toggler = Toggler;
 exports.default = Toggler;
 
 /***/ }),
-/* 171 */
+/* 172 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22952,7 +23129,7 @@ Affix.STATE = {
 exports.default = Affix;
 
 /***/ }),
-/* 172 */
+/* 173 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22970,7 +23147,7 @@ var _metal = __webpack_require__(3);
 
 var _metal2 = _interopRequireDefault(_metal);
 
-var _metalDebounce = __webpack_require__(175);
+var _metalDebounce = __webpack_require__(176);
 
 var _metalDebounce2 = _interopRequireDefault(_metalDebounce);
 
@@ -22990,9 +23167,9 @@ var _metalSoy = __webpack_require__(2);
 
 var _metalSoy2 = _interopRequireDefault(_metalSoy);
 
-__webpack_require__(177);
+__webpack_require__(178);
 
-var _AutocompleteSoy = __webpack_require__(173);
+var _AutocompleteSoy = __webpack_require__(174);
 
 var _AutocompleteSoy2 = _interopRequireDefault(_AutocompleteSoy);
 
@@ -23390,7 +23567,7 @@ Autocomplete.STATE = {
 exports.default = Autocomplete;
 
 /***/ }),
-/* 173 */
+/* 174 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23495,7 +23672,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 174 */
+/* 175 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23849,7 +24026,7 @@ ClipboardAction.STATE = {
 exports.default = Clipboard;
 
 /***/ }),
-/* 175 */
+/* 176 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23887,7 +24064,7 @@ exports.cancelDebounce = cancelDebounce;
 exports.debounce = debounce;
 
 /***/ }),
-/* 176 */
+/* 177 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24160,7 +24337,7 @@ KeyboardFocusManager.REF_REGEX = /.+-(\d+)$/;
 exports.default = KeyboardFocusManager;
 
 /***/ }),
-/* 177 */
+/* 178 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24186,9 +24363,9 @@ var _metalSoy = __webpack_require__(2);
 
 var _metalSoy2 = _interopRequireDefault(_metalSoy);
 
-__webpack_require__(179);
+__webpack_require__(180);
 
-var _ListSoy = __webpack_require__(178);
+var _ListSoy = __webpack_require__(179);
 
 var _ListSoy2 = _interopRequireDefault(_ListSoy);
 
@@ -24280,7 +24457,7 @@ List.STATE = {
 exports.default = List;
 
 /***/ }),
-/* 178 */
+/* 179 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24412,7 +24589,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 179 */
+/* 180 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24434,7 +24611,7 @@ var _metalSoy = __webpack_require__(2);
 
 var _metalSoy2 = _interopRequireDefault(_metalSoy);
 
-var _ListItemSoy = __webpack_require__(180);
+var _ListItemSoy = __webpack_require__(181);
 
 var _ListItemSoy2 = _interopRequireDefault(_ListItemSoy);
 
@@ -24521,7 +24698,7 @@ ListItem.STATE = {
 exports.default = ListItem;
 
 /***/ }),
-/* 180 */
+/* 181 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24682,7 +24859,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 181 */
+/* 182 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24939,7 +25116,7 @@ Align.Left = Align.LeftCenter;
 exports.default = Align;
 
 /***/ }),
-/* 182 */
+/* 183 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24951,7 +25128,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _metal = __webpack_require__(3);
 
-var _ReadingProgress = __webpack_require__(183);
+var _ReadingProgress = __webpack_require__(184);
 
 var _ReadingProgress2 = _interopRequireDefault(_ReadingProgress);
 
@@ -24959,7 +25136,7 @@ var _metalComponent = __webpack_require__(1);
 
 var _metalComponent2 = _interopRequireDefault(_metalComponent);
 
-var _ReadingProgressTracker = __webpack_require__(184);
+var _ReadingProgressTracker = __webpack_require__(185);
 
 var _ReadingProgressTracker2 = _interopRequireDefault(_ReadingProgressTracker);
 
@@ -25130,7 +25307,7 @@ ReadingProgress.STATE = {
 exports.default = ReadingProgress;
 
 /***/ }),
-/* 183 */
+/* 184 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25270,7 +25447,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 184 */
+/* 185 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25288,7 +25465,7 @@ var _metalDom = __webpack_require__(4);
 
 var _metalDom2 = _interopRequireDefault(_metalDom);
 
-var _metalScrollspy = __webpack_require__(185);
+var _metalScrollspy = __webpack_require__(186);
 
 var _metalScrollspy2 = _interopRequireDefault(_metalScrollspy);
 
@@ -25439,7 +25616,7 @@ ReadingProgressTracker.STATE = {
 exports.default = ReadingProgressTracker;
 
 /***/ }),
-/* 185 */
+/* 186 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25791,7 +25968,7 @@ Scrollspy.STATE = {
 exports.default = Scrollspy;
 
 /***/ }),
-/* 186 */
+/* 187 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26001,7 +26178,7 @@ var MultiMap = function (_Disposable) {
 exports.default = MultiMap;
 
 /***/ }),
-/* 187 */
+/* 188 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26260,7 +26437,7 @@ var assertChildHasNoParent = function assertChildHasNoParent(child) {
 exports.default = TreeNode;
 
 /***/ }),
-/* 188 */
+/* 189 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26271,11 +26448,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.TreeNode = exports.MultiMap = undefined;
 
-var _MultiMap = __webpack_require__(186);
+var _MultiMap = __webpack_require__(187);
 
 var _MultiMap2 = _interopRequireDefault(_MultiMap);
 
-var _TreeNode = __webpack_require__(187);
+var _TreeNode = __webpack_require__(188);
 
 var _TreeNode2 = _interopRequireDefault(_TreeNode);
 
@@ -26285,7 +26462,7 @@ exports.MultiMap = _MultiMap2.default;
 exports.TreeNode = _TreeNode2.default;
 
 /***/ }),
-/* 189 */
+/* 190 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26301,7 +26478,7 @@ var _metal = __webpack_require__(3);
 
 var _metal2 = _interopRequireDefault(_metal);
 
-var _TabsSoy = __webpack_require__(190);
+var _TabsSoy = __webpack_require__(191);
 
 var _TabsSoy2 = _interopRequireDefault(_TabsSoy);
 
@@ -26309,7 +26486,7 @@ var _metalComponent = __webpack_require__(1);
 
 var _metalComponent2 = _interopRequireDefault(_metalComponent);
 
-var _metalKeyboardFocus = __webpack_require__(176);
+var _metalKeyboardFocus = __webpack_require__(177);
 
 var _metalKeyboardFocus2 = _interopRequireDefault(_metalKeyboardFocus);
 
@@ -26641,7 +26818,7 @@ Tabs.STATE = {
 exports.default = Tabs;
 
 /***/ }),
-/* 190 */
+/* 191 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26776,7 +26953,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 191 */
+/* 192 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26799,11 +26976,11 @@ var _metalSoy = __webpack_require__(2);
 
 var _metalSoy2 = _interopRequireDefault(_metalSoy);
 
-var _TooltipBase2 = __webpack_require__(193);
+var _TooltipBase2 = __webpack_require__(194);
 
 var _TooltipBase3 = _interopRequireDefault(_TooltipBase2);
 
-var _TooltipSoy = __webpack_require__(192);
+var _TooltipSoy = __webpack_require__(193);
 
 var _TooltipSoy2 = _interopRequireDefault(_TooltipSoy);
 
@@ -26879,7 +27056,7 @@ exports.Tooltip = Tooltip;
 exports.TooltipBase = _TooltipBase3.default;
 
 /***/ }),
-/* 192 */
+/* 193 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27000,7 +27177,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 193 */
+/* 194 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27395,7 +27572,7 @@ TooltipBase.PositionClasses = ['top', 'right', 'bottom', 'left'];
 exports.default = TooltipBase;
 
 /***/ }),
-/* 194 */
+/* 195 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27411,11 +27588,11 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _metal = __webpack_require__(3);
 
-var _parse = __webpack_require__(195);
+var _parse = __webpack_require__(196);
 
 var _parse2 = _interopRequireDefault(_parse);
 
-var _metalStructs = __webpack_require__(188);
+var _metalStructs = __webpack_require__(189);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28036,7 +28213,7 @@ Uri.RANDOM_PARAM = 'zx';
 exports.default = Uri;
 
 /***/ }),
-/* 195 */
+/* 196 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28048,7 +28225,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _metal = __webpack_require__(3);
 
-var _parseFromAnchor = __webpack_require__(196);
+var _parseFromAnchor = __webpack_require__(197);
 
 var _parseFromAnchor2 = _interopRequireDefault(_parseFromAnchor);
 
@@ -28084,7 +28261,7 @@ function parse(opt_uri) {
 exports.default = parse;
 
 /***/ }),
-/* 196 */
+/* 197 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28152,7 +28329,6 @@ function parseFromAnchor(opt_uri) {
 exports.default = parseFromAnchor;
 
 /***/ }),
-/* 197 */,
 /* 198 */,
 /* 199 */,
 /* 200 */,
@@ -28172,19 +28348,12 @@ exports.default = parseFromAnchor;
 /* 214 */,
 /* 215 */,
 /* 216 */,
-/* 217 */,
-/* 218 */,
-/* 219 */,
-/* 220 */,
-/* 221 */,
-/* 222 */,
-/* 223 */,
-/* 224 */
+/* 217 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tVpxj", function() { return tVpxj; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "jwUBL", function() { return jwUBL; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28196,15 +28365,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var templates;
 goog.loadModule(function(exports) {
 
-// This file was automatically generated from transformation-functions.soy.
+// This file was automatically generated from Arrow.soy.
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace tVpxj.
+ * @fileoverview Templates in namespace jwUBL.
  * @public
  */
 
-goog.module('tVpxj.incrementaldom');
+goog.module('jwUBL.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28238,807 +28407,387 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var param698 = function() {
-    ie_open('h3');
-      itext('Transformation Functions');
-    ie_close('h3');
+  var param287 = function() {
+    $templateAlias2({code: 'Arrow a b', mode: 'haskell'}, null, opt_ijData);
     ie_open('p');
-      itext('Transformation functions are mostly used to reduce unwanted nesting of similar types. Take for example the following structure:');
+      ie_open('code');
+        itext('Arrow');
+      ie_close('code');
+      itext(' is a ');
+      ie_open('code');
+        itext('Profunctor');
+      ie_close('code');
+      itext(' that lifts a function of type ');
+      ie_open('code');
+        itext('a -> b');
+      ie_close('code');
+      itext(' and allows for lazy execution of the function. ');
+      ie_open('code');
+        itext('Arrow');
+      ie_close('code');
+      itext(' can be considered a ');
+      ie_open('code');
+        itext('Strong Profunctor');
+      ie_close('code');
+      itext('if the underlying data running throw the ');
+      ie_open('code');
+        itext('Arrow');
+      ie_close('code');
+      itext(' is a ');
+      ie_open('code');
+        itext('Pair');
+      ie_close('code');
+      itext(', typically in the form of ');
+      ie_open('code');
+        itext('Arrow (Pair a c) (Pair b d)');
+      ie_close('code');
+      itext('. This will allow you to split execution into two distinct paths, applying ');
+      ie_open('code');
+        itext('Arrow');
+      ie_close('code');
+      itext(' to a specific path. The parameters of');
+      ie_open('code');
+        itext('Arrow');
+      ie_close('code');
+      itext(' represent the function that it wraps, with the input being on the left, and the output on the right. When an ');
+      ie_open('code');
+        itext('Arrow');
+      ie_close('code');
+      itext(' wraps an endomorphism, the signature typically represents both the input and output.');
     ie_close('p');
-    $templateAlias2({code: 'const data =\n  Either.of(Maybe.of(3))  // Right Just 3\n\n// mapping on the inner Maybe is tedious at best\ndata\n  .map(map(x => x + 1))   // Right Just 4\n  .map(map(x => x * 10))  // Right Just 40\n\n// and extraction...super gross\ndata\n  .either(identity, identity)  // Just 3\n  .option(0)                   // 3\n\n// or\ndata\n  .either(option(0), option(0))  // 3', mode: 'javascript'}, null, opt_ijData);
-    ie_open('p');
-      itext('The transformation functions, that ship with ');
-      ie_open('code');
-        itext('crocks');
-      ie_close('code');
-      itext(', provide a means for dealing with this. Using them effectively, can turn the above code into something more like this:');
-    ie_close('p');
-    $templateAlias2({code: 'const data =\n  Either.of(Maybe.of(3))      // Right Just 3\n    .chain(maybeToEither(0))  // Right 3\n\n// mapping on a single Either, much better\ndata\n  .map(x => x + 1)  // Right 4\n  .map(x => x * 10) // Right 40\n\n// no need to default the Left case anymore\ndata\n  .either(identity, identity) // 3\n\n// effects of the inner type are applied immediately\nconst nested =\n  Either.of(Maybe.Nothing) // Right Nothing\n\nconst unnested =\n  nested\n    .chain(maybeToEither(0))  // Left 0\n\n// Always maps, although the inner Maybe skips\nnested\n  .map(map(x => x + 1))        // Right Nothing (runs mapping)\n  .map(map(x => x * 10))       // Right Nothing (runs mapping)\n  .either(identity, identity)  // Nothing\n  .option(0)                   // 0\n\n// Never maps on a Left, just skips it\nunnested\n  .map(x => x + 1)             // Left 0 (skips mapping)\n  .map(x => x * 10)            // Left 0 (skips mapping)\n  .either(identity, identity)  // 0', mode: 'javascript'}, null, opt_ijData);
-    ie_open('p');
-      itext('Not all types can be transformed to and from each other. Some of them are lazy and/or asynchronous, or are just too far removed. Also, some transformations will result in a loss of information. Moving from an ');
-      ie_open('code');
-        itext('Either');
-      ie_close('code');
-      itext(' to a ');
-      ie_open('code');
-        itext('Maybe');
-      ie_close('code');
-      itext(', for instance, would lose the ');
-      ie_open('code');
-        itext('Left');
-      ie_close('code');
-      itext(' value of ');
-      ie_open('code');
-        itext('Either');
-      ie_close('code');
-      itext(' as a ');
-      ie_open('code');
-        itext('Maybe');
-      ie_close('code');
-      itext('\'s first parameter (');
-      ie_open('code');
-        itext('Nothing');
-      ie_close('code');
-      itext(') is fixed at ');
-      ie_open('code');
-        itext('Unit');
-      ie_close('code');
-      itext('. Conversely, if you move the other way around, from a ');
-      ie_open('code');
-        itext('Maybe');
-      ie_close('code');
-      itext(' to an ');
-      ie_open('code');
-        itext('Either');
-      ie_close('code');
-      itext(' you must provide a default ');
-      ie_open('code');
-        itext('Left');
-      ie_close('code');
-      itext(' value. Which means, if the inner ');
-      ie_open('code');
-        itext('Maybe');
-      ie_close('code');
-      itext(' results in a ');
-      ie_open('code');
-        itext('Nothing');
-      ie_close('code');
-      itext(', it will map to ');
-      ie_open('code');
-        itext('Left');
-      ie_close('code');
-      itext(' of your provided value. As such, not all of these functions are guaranteed isomorphic. With some types you just cannot go back and forth and expect to retain information.');
-    ie_close('p');
-    ie_open('p');
-      itext('Each function provides two signatures, one for if a Function is used for the second argument and another if the source ADT is passed instead. Although it may seem strange, this provides some flexibility on how to apply the transformation. The ADT version is great for squishing an already nested type or to perform the transformation in a composition. While the Function version can be used to extend an existing function without having to explicitly compose it. Both versions can be seen here:');
-    ie_close('p');
-    $templateAlias2({code: '// Avoid nesting\n// inc :: a -> Maybe Number\nconst inc =\n  safeLift(isNumber, x => x + 1)\n\n// using Function signature\n// asyncInc :: a -> Async Number Number\nconst asyncInc =\n  maybeToAsync(0, inc)\n\n// using ADT signature to compose (extending functions)\n// asyncInc :: a -> Async Number Number\nconst anotherInc =\n  compose(maybeToAsync(0), inc)\n\n// resolveValue :: a -> Async _ a\nconst resolveValue =\n  Async.Resolved\n\nresolveValue(3)                          // Resolved 3\n  .chain(asyncInc)                       // Resolved 4\n  .chain(anotherInc)                     // Resolved 5\n  .chain(compose(maybeToAsync(20), inc)) // Resolved 6\n\nresolveValue(\'oops\')                     // Resolved \'oops\'\n  .chain(asyncInc)                       // Rejected 0\n  .chain(anotherInc)                     // Rejected 0\n  .chain(compose(maybeToAsync(20), inc)) // Rejected 0\n\n// Squash existing nesting\n// Just Right \'nice\'\nconst good =\n  Maybe.of(Either.Right(\'nice\'))\n\n// Just Left \'not so nice\'\nconst bad =\n  Maybe.of(Either.Left(\'not so nice\'))\n\ngood\n  .chain(eitherToMaybe) // Just \'nice\'\n\nbad\n  .chain(eitherToMaybe) // Nothing', mode: 'javascript'}, null, opt_ijData);
-    ie_open('h4');
-      itext('Transformation Signatures');
-    ie_close('h4');
-    ie_open('table');
-      ie_open('thead');
-        ie_open('tr');
-          ie_open('th');
-            itext('Transform');
-          ie_close('th');
-          ie_open('th', null, null,
-              'style', 'text-align:left');
-            itext('ADT signature');
-          ie_close('th');
-          ie_open('th', null, null,
-              'style', 'text-align:left');
-            itext('Function Signature');
-          ie_close('th');
-          ie_open('th', null, null,
-              'style', 'text-align:left');
-            itext('Location');
-          ie_close('th');
-        ie_close('tr');
-      ie_close('thead');
-      ie_open('tbody');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('arrayToList');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('[ a ] -> List a');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('(a -> [ b ]) -> a -> List b');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/List');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('eitherToAsync');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('Either e a -> Async e a');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('(a -> Either e b) -> a -> Async e b');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/Async');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('eitherToFirst');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('Either b a -> First a');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('(a -> Either c b) -> a -> First b');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/First');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('eitherToLast');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('Either b a -> Last a');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('(a -> Either c b) -> a -> Last b');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/Last');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('eitherToMaybe');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('Either b a -> Maybe a');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('(a -> Either c b) -> a -> Maybe b');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/Maybe');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('eitherToResult');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('Either e a -> Result e a');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('(a -> Either e b) -> a -> Result e b');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/Result');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('firstToAsync');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('e -> First a -> Async e a');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('e -> (a -> First b) -> a -> Async e b');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/Async');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('firstToEither');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('c -> First a -> Either c a');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('c -> (a -> First b) -> a -> Either c b');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/Either');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('firstToLast');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('First a -> Last a');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('(a -> First b) -> a -> Last b');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/Last');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('firstToMaybe');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('First a -> Maybe a');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('(a -> First b) -> a -> Maybe b');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/Maybe');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('firstToResult');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('c -> First a -> Result c a');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('c -> (a -> First b) -> a -> Result c b');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/Result');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('lastToAsync');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('e -> Last a -> Async e a');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('e -> (a -> Last b) -> a -> Async e b');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/Async');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('lastToEither');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('c -> Last a -> Either c a');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('c -> (a -> Last b) -> a -> Either c b');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/Either');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('lastToFirst');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('Last a -> First a');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('(a -> Last b) -> a -> First b');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/First');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('lastToMaybe');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('Last a -> Maybe a');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('(a -> Last b) -> a -> Maybe b');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/Maybe');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('lastToResult');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('c -> Last a -> Result c a');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('c -> (a -> Last b) -> a -> Result c b');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/Result');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('listToArray');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('List a -> [ a ]');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('(a -> List b) -> a -> [ b ]');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/List');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('maybeToAsync');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('e -> Maybe a -> Async e a');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('e -> (a -> Maybe b) -> a -> Async e b');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/Async');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('maybeToEither');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('c -> Maybe a -> Either c a');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('c -> (a -> Maybe b) -> a -> Either c b');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/Either');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('maybeToFirst');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('Maybe a -> First a');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('(a -> Maybe b) -> a -> First b');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/First');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('maybeToLast');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('Maybe a -> Last a');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('(a -> Maybe b) -> a -> Last b');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/Last');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('maybeToResult');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('c -> Maybe a -> Result c a');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('c -> (a -> Maybe b) -> a -> Result c b');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/Result');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('resultToAsync');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('Result e a -> Async e a');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('(a -> Result e b) -> a -> Async e b');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/Async');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('resultToEither');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('Result e a -> Either e a');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('(a -> Result e b) -> a -> Either e b');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/Either');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('resultToFirst');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('Result e a -> First a');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('(a -> Result e b) -> a -> First b');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/First');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('resultToLast');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('Result e a -> Last a');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('(a -> Result e b) -> a -> Last b');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/Last');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('resultToMaybe');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('Result e a -> Maybe a');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('(a -> Result e b) -> a -> Maybe b');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/Maybe');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('writerToPair');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('Writer m a -> Pair m a');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('(a -> Writer m b) -> a -> Pair m b');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/Pair');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-      ie_close('tbody');
-    ie_close('table');
+    $templateAlias2({code: 'const Arrow = require(\'crocks/Arrow\')\n\nconst chain = require(\'crocks/pointfree/chain\')\nconst compose = require(\'crocks/helpers/compose\')\nconst isString = require(\'crocks/predicates/isString\')\nconst option = require(\'crocks/pointfree/option\')\nconst prop = require(\'crocks/Maybe/prop\')\nconst safe = require(\'crocks/Maybe/safe\')\n\n// arrUpper :: Arrow String\nconst arrUpper =\n  Arrow(str => str.toUpperCase())\n\narrUpper\n  .runWith(\'nice\')\n//=> \'NICE\'\n\n// getName :: a -> String\nconst getName = compose(\n  option(\'no name\'),\n  chain(safe(isString)),\n  prop(\'name\')\n)\n\n// arrUpperName :: Arrow a String\nconst arrUpperName =\n  arrUpper\n    .contramap(getName)\n\narrUpperName\n  .runWith({ name: \'joey\' })\n//=> \'JOEY\'\n\narrUpperName\n  .runWith({ age: 23 })\n//=> \'NO NAME\'\n\narrUpperName\n  .runWith({ name: false })\n//=> \'NO NAME\'', mode: 'javascript'}, null, opt_ijData);
+    ie_open('article', null, null,
+        'id', 'implements');
+      ie_open('h2');
+        itext('Implements');
+      ie_close('h2');
+      ie_open('p');
+        ie_open('code');
+          itext('Semigroupoid');
+        ie_close('code');
+        itext(', ');
+        ie_open('code');
+          itext('Category');
+        ie_close('code');
+        itext(', ');
+        ie_open('code');
+          itext('Functor');
+        ie_close('code');
+        itext(', ');
+        ie_open('code');
+          itext('Contravariant');
+        ie_close('code');
+        itext(', ');
+        ie_open('code');
+          itext('Profunctor');
+        ie_close('code');
+      ie_close('p');
+    ie_close('article');
+    ie_open('article', null, null,
+        'id', 'constructor');
+      ie_open('h2');
+        itext('Constructor Methods');
+      ie_close('h2');
+      ie_open('h4');
+        itext('id');
+      ie_close('h4');
+      $templateAlias2({code: 'Arrow.id :: () -> Arrow a', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        ie_open('code');
+          itext('id');
+        ie_close('code');
+        itext(' provides the identity for the ');
+        ie_open('code');
+          itext('Arrow');
+        ie_close('code');
+        itext(' in that when it is composed to either the left or right side of a given function, it will essentially result in a morphism that is, for all intents and purposes, the given function. For ');
+        ie_open('code');
+          itext('Arrow');
+        ie_close('code');
+        itext(',');
+        ie_open('code');
+          itext('id');
+        ie_close('code');
+        itext(' is the simple ');
+        ie_open('code');
+          itext('identity');
+        ie_close('code');
+        itext(' function that echoes it\'s given argument (');
+        ie_open('code');
+          itext('x => x');
+        ie_close('code');
+        itext('). As a convenience, ');
+        ie_open('code');
+          itext('id');
+        ie_close('code');
+        itext(' is also available on the ');
+        ie_open('code');
+          itext('Arrow');
+        ie_close('code');
+        itext(' instance.');
+      ie_close('p');
+      $templateAlias2({code: 'const Arrow = require(\'crocks/Arrow\')\n\n// arrId :: Arrow a\nconst id = Arrow.id()\n\n// arrow :: Arrow a String\nconst arrow =\n  Arrow(x => x.toString())\n\n// left :: Arrow a String\nconst left =\n  id.compose(arrow)\n\n// right :: Arrow a String\nconst right =\n  arrow.compose(id)\n\nright.runWith(12) //=> \'12\'\nleft.runWith(12)  //=> \'12\'', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        itext('type');
+      ie_close('h4');
+      $templateAlias2({code: 'Arrow.type :: () -> String', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        ie_open('code');
+          itext('type');
+        ie_close('code');
+        itext(' provides a string representation of the type name for a given type in');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext('. While it is used mostly internally for law validation, it can be useful to the end user for debugging and building out custom types based on the standard');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext(' types. While type comparisons can easily be done manually by calling');
+        ie_open('code');
+          itext('type');
+        ie_close('code');
+        itext(' on a given type, using the ');
+        ie_open('code');
+          itext('isSameType');
+        ie_close('code');
+        itext(' function hides much of the boilerplate. ');
+        ie_open('code');
+          itext('type');
+        ie_close('code');
+        itext(' is available on both the Constructor and the Instance for convenience.');
+      ie_close('p');
+      $templateAlias2({code: 'const Arrow = require(\'crocks/Arrow\')\nconst Identity = require(\'crocks/Identity\')\n\nconst I = require(\'crocks/combinators/identity\')\nconst isSameType = require(\'crocks/predicates/isSameType\')\n\nArrow.type() //=> "Arrow"\n\nisSameType(Arrow, Arrow(x => x + 3))  //=> true\nisSameType(Arrow, Arrow)              //=> true\nisSameType(Arrow, Identity(0))        //=> false\nisSameType(Arrow(I), Identity)        //=> false', mode: 'javascript'}, null, opt_ijData);
+    ie_close('article');
+    ie_open('article', null, null,
+        'id', 'instance');
+      ie_open('h2');
+        itext('Instance Methods');
+      ie_close('h2');
+      ie_open('h4');
+        itext('both');
+      ie_close('h4');
+      $templateAlias2({code: 'Pair p => Arrow a b ~> () -> Arrow (p a a) (p b b)', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        ie_open('code');
+          itext('both');
+        ie_close('code');
+        itext(' allows for the mode of a given ');
+        ie_open('code');
+          itext('Arrow');
+        ie_close('code');
+        itext(' to switch to a manner that applies itself to both slots of a ');
+        ie_open('code');
+          itext('Pair');
+        ie_close('code');
+        itext(' that is passed through the ');
+        ie_open('code');
+          itext('Arrow');
+        ie_close('code');
+        itext('. As noted in the type signature, ');
+        ie_open('code');
+          itext('both');
+        ie_close('code');
+        itext(' will give back an ');
+        ie_open('code');
+          itext('Arrow');
+        ie_close('code');
+        itext(' has a new signature that utilizes a ');
+        ie_open('code');
+          itext('Pair');
+        ie_close('code');
+        itext(' on both sides.');
+      ie_close('p');
+      $templateAlias2({code: 'const Arrow = require(\'crocks/Arrow\')\nconst Pair = require(\'crocks/Pair\')\n\nconst merge = require(\'crocks/Pair/merge\')\n\n// double :: Number -> Number\nconst double =\n  x => x * 2\n\n// add :: (Number, Number) -> Number\nconst add =\n  (x, y) => x + y\n\n// arrDouble :: Arrow Number\nconst arrDouble =\n  Arrow(double)\n\n// arrDoubleAndAdd :: Arrow (Pair Number Number) Number\nconst arrDoubleAndAdd =\n  arrDouble\n    .both()\n    .map(merge(add))\n\narrDouble\n  .runWith(200)  //=> 400\n\narrDoubleAndAdd\n  .runWith(Pair(200, 10))  //=> 420', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        itext('compose');
+      ie_close('h4');
+      $templateAlias2({code: 'Arrow a b ~> Arrow b c -> Arrow a c', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        ie_open('code');
+          itext('compose');
+        ie_close('code');
+        itext(' allows you to compose (2) ');
+        ie_open('code');
+          itext('Arrow');
+        ie_close('code');
+        itext('s together, resulting in a new');
+        ie_open('code');
+          itext('Arrow');
+        ie_close('code');
+        itext(' that is the result of the composition.');
+      ie_close('p');
+      $templateAlias2({code: 'const Arrow = require(\'crocks/Arrow\')\n\nconst filter = require(\'crocks/pointfree/filter\')\nconst map = require(\'crocks/pointfree/map\')\n\n// arrFilterEven :: Arrow [ Number ]\nconst arrFilterEven =\n  Arrow(filter(x => !(x % 2)))\n\n// arrDoubleNumbers :: Arrow [ Number ]\nconst arrDoubleNumbers =\n  Arrow(map(x => x * 2))\n\n// arrLength :: Arrow [ a ] -> Number\nconst arrLength =\n  Arrow(x => x.length)\n\n// arrDoubleEven :: Arrow [ Number ]\nconst arrDoubleEven =\n  arrFilterEven\n    .compose(arrDoubleNumbers)\n\n// arrEvenCount :: Arrow [ Number ] Number\nconst arrEvenCount =\n  arrFilterEven\n    .compose(arrLength)\n\n// data :: [ Number ]\nconst data =\n  [ 12, 2, 36, 35 ]\n\narrDoubleEven\n  .runWith(data)\n//=> [ 24, 4, 72 ]\n\narrEvenCount\n  .runWith(data)\n//=> 3', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        itext('contramap');
+      ie_close('h4');
+      $templateAlias2({code: 'Arrow a b ~> (c -> a) -> Arrow c b', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        itext('When using ');
+        ie_open('code');
+          itext('contramap');
+        ie_close('code');
+        itext(' on an ');
+        ie_open('code');
+          itext('Arrow');
+        ie_close('code');
+        itext(', a function can be lifted that will map a given type into the type required for the original ');
+        ie_open('code');
+          itext('Arrow');
+        ie_close('code');
+        itext('\'s input. This allows for "adaption" of given ');
+        ie_open('code');
+          itext('Arrow');
+        ie_close('code');
+        itext('\'s input for better reuse. The resulting type of the lifted function must match the input type of the ');
+        ie_open('code');
+          itext('Arrow');
+        ie_close('code');
+        itext('.');
+      ie_close('p');
+      $templateAlias2({code: 'const Arrow = require(\'crocks/Arrow\')\n\nconst chain = require(\'crocks/pointfree/chain\')\nconst compose = require(\'crocks/helpers/compose\')\nconst isNumber = require(\'crocks/predicates/isNumber\')\nconst option = require(\'crocks/pointfree/option\')\nconst prop = require(\'crocks/Maybe/prop\')\nconst safe = require(\'crocks/Maybe/safe\')\n\n// getValue :: (String, Number) -> a -> Number\nconst getValue = (key, def) => compose(\n  option(def),\n  chain(safe(isNumber)),\n  prop(key)\n)\n\n// arrAdd10 :: Arrow Number\nconst arrAdd10 =\n  Arrow(x => x + 10)\n\n// arrAdd10Value :: Arrow Object Number\nconst arrAdd10Value =\n  arrAdd10\n    .contramap(getValue(\'value\', 0))\n\narrAdd10\n  .runWith(23)\n//=> 33\n\narrAdd10Value\n  .runWith({ value: 23 })\n  //=> 33\n\narrAdd10Value\n  .runWith({ value: \'23\' })\n  //=> 10\n\narrAdd10Value\n  .runWith({ num: \'23\' })\n//=> 10', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        itext('first');
+      ie_close('h4');
+      $templateAlias2({code: 'Pair p => Arrow a b ~> () -> Arrow (p a c) (p b c)', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        itext('When calling ');
+        ie_open('code');
+          itext('first');
+        ie_close('code');
+        itext(' on an ');
+        ie_open('code');
+          itext('Arrow');
+        ie_close('code');
+        itext(', a new ');
+        ie_open('code');
+          itext('Arrow');
+        ie_close('code');
+        itext(' is returned that will expect a ');
+        ie_open('code');
+          itext('Pair');
+        ie_close('code');
+        itext(' with the original input type in the first slot of the ');
+        ie_open('code');
+          itext('Pair');
+        ie_close('code');
+        itext('. When run, the ');
+        ie_open('code');
+          itext('Arrow');
+        ie_close('code');
+        itext(' will only be applied to the first slot in the ');
+        ie_open('code');
+          itext('Pair');
+        ie_close('code');
+        itext(', leaving the second slot untouched.');
+      ie_close('p');
+      $templateAlias2({code: 'const Arrow = require(\'crocks/Arrow\')\nconst branch = require(\'crocks/Pair/branch\')\n\n// arrToUpper :: Arrow String\nconst arrToUpper =\n  Arrow(x => x.toUpperCase())\n\narrToUpper\n  .runWith(\'burrito bounce\')\n//=> \'BURRITO BOUNCE\'\n\n// join :: Pair String -> Object\nconst join = p => ({\n  original: p.snd(),\n  result: p.fst()\n})\n\n// flow :: Arrow String Object\nconst flow =\n  arrToUpper\n    .first()\n    .promap(branch, join)\n\nflow\n  .runWith(\'taco time\')\n//=> { original: \'taco time\', result: \'TACO TIME\' }', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        itext('map');
+      ie_close('h4');
+      $templateAlias2({code: 'Arrow a b ~> (b -> c) -> Arrow a c', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        ie_open('code');
+          itext('map');
+        ie_close('code');
+        itext(' allows a function to be lifted that will map the right side of the');
+        ie_open('code');
+          itext('Arrow');
+        ie_close('code');
+        itext('. Where ');
+        ie_open('code');
+          itext('contramap');
+        ie_close('code');
+        itext(' is used to map the input, ');
+        ie_open('code');
+          itext('map');
+        ie_close('code');
+        itext(' maps the result of the ');
+        ie_open('code');
+          itext('Arrow');
+        ie_close('code');
+        itext(', allowing the result to be "adapted" or modified. The input type to the lifted function must match the result the ');
+        ie_open('code');
+          itext('Arrow');
+        ie_close('code');
+        itext('.');
+      ie_close('p');
+      $templateAlias2({code: 'const Arrow = require(\'crocks/Arrow\')\n\nconst B = require(\'crocks/combinators/composeB\')\n\n// arrFullScale :: Arrow Number\nconst arrFullScale =\n  Arrow(x => 20 * Math.log10(Math.abs(x)))\n\narrFullScale\n  .runWith(-0.35)\n//=> -9.118639112994488\n\n// round :: Number -> Number\nconst round =\n  x => Math.floor(x * 100) / 100\n\n// stringRep :: Number -> String\nconst stringRep =\n  x => `${x} dBFS`\n\n// Arrow :: Number String\nconst arrStringFS =\n  arrFullScale\n    .map(B(stringRep, round))\n\narrStringFS\n  .runWith(0.35)\n//=> \'-9.12 dbFS\'', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        itext('promap');
+      ie_close('h4');
+      $templateAlias2({code: 'Arrow a b ~> ((c -> a), (b -> d)) -> Arrow c d', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        ie_open('code');
+          itext('promap');
+        ie_close('code');
+        itext(' can be used to adapt BOTH ends of an ');
+        ie_open('code');
+          itext('Arrow');
+        ie_close('code');
+        itext(' allowing for existing');
+        ie_open('code');
+          itext('Arrow');
+        ie_close('code');
+        itext('s to be reused in places in a flow where the types do not line up. It combines both ');
+        ie_open('code');
+          itext('map');
+        ie_close('code');
+        itext(' and ');
+        ie_open('code');
+          itext('conramap');
+        ie_close('code');
+        itext(' into one operation. Just pass the ');
+        ie_open('code');
+          itext('contramap');
+        ie_close('code');
+        itext('function as the first argument and the ');
+        ie_open('code');
+          itext('map');
+        ie_close('code');
+        itext(' function as the second.');
+      ie_close('p');
+      $templateAlias2({code: 'const Arrow = require(\'crocks/Arrow\')\n\nconst chain = require(\'crocks/pointfree/chain\')\nconst compose = require(\'crocks/helpers/compose\')\nconst isString = require(\'crocks/predicates/isString\')\nconst objOf = require(\'crocks/helpers/objOf\')\nconst option = require(\'crocks/pointfree/option\')\nconst prop = require(\'crocks/Maybe/prop\')\nconst safe = require(\'crocks/Maybe/safe\')\n\n// upperFirst :: String -> String\nconst upperFirst = x =>\n  x.charAt(0)\n    .toUpperCase()\n    .concat(x.slice(1).toLowerCase())\n\n// arrTitleize :: Arrow String\nconst arrTitleize =\n  Arrow(x => x.split(\' \').map(upperFirst).join(\' \'))\n\narrTitleize\n  .runWith(\'tHis is siLLy\')\n//=> \'This Is Silly\'\n\n// stringProp :: String -> Object -> String\nconst stringProp = key => compose(\n  option(\'\'),\n  chain(safe(isString)),\n  prop(key)\n)\n\n// arrTitleObject :: Arrow Object\nconst arrTitleObject =\n  arrTitleize\n    .promap(stringProp(\'title\'), objOf(\'title\'))\n\narrTitleObject\n  .runWith({ title: \'SaY wHaT!?!\' })\n// { title: \'Say What!?!\' }\n\narrTitleObject\n  .runWith({ title: true })\n// { title: \'\' }', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        itext('runWith');
+      ie_close('h4');
+      $templateAlias2({code: 'Arrow a b ~> a -> b', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        ie_open('code');
+          itext('Arrow');
+        ie_close('code');
+        itext('s are lazy to make combining and extending them easy. Once you have your final computation built out and you are ready to execute it, all you have to do is call ');
+        ie_open('code');
+          itext('runWith');
+        ie_close('code');
+        itext(' on it, passing in the argument you what to run it with.');
+      ie_close('p');
+      $templateAlias2({code: 'const Arrow = require(\'crocks/Arrow\')\nconst Sum = require(\'crocks/Sum\')\n\nconst branch = require(\'crocks/Pair/branch\')\nconst merge = require(\'crocks/Pair/merge\')\nconst mreduce = require(\'crocks/helpers/mreduce\')\n\n// data :: [ Number ]\nconst data =\n  [ 35, 60, 22, 100 ]\n\n// arrLength :: Arrow [ a ] Number\nconst arrLength =\n  Arrow(x => x.length)\n\narrLength\n  .runWith(data)\n//=> 4\n\n// arrSum :: Arrow [ Number ] Number\nconst arrSum =\n  Arrow(mreduce(Sum))\n\narrSum\n  .runWith(data)\n//=> 217\n\n// arrAvgList :: Arrow [ Number ] Number\nconst arrAvgList =\n  arrSum.first()\n    .compose(arrLength.second())\n    .promap(branch, merge((x, y) => x / y))\n\narrAvgList\n  .runWith(data)\n//=> 54.25', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        itext('second');
+      ie_close('h4');
+      $templateAlias2({code: 'Pair p => Arrow a b ~> () -> Arrow (p c a) (p c b)', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        itext('Used to apply a given ');
+        ie_open('code');
+          itext('Arrow');
+        ie_close('code');
+        itext(' over the second slot of a ');
+        ie_open('code');
+          itext('Pair');
+        ie_close('code');
+        itext(', leaving the first slot untouched. The input to the ');
+        ie_open('code');
+          itext('Arrow');
+        ie_close('code');
+        itext(' must match the expected type on the second slot of the incoming ');
+        ie_open('code');
+          itext('Pair');
+        ie_close('code');
+        itext('.');
+      ie_close('p');
+      $templateAlias2({code: 'const Arrow = require(\'crocks/Arrow\')\n\nconst assign = require(\'crocks/helpers/assign\')\nconst branch = require(\'crocks/Pair/branch\')\nconst merge = require(\'crocks/Pair/merge\')\nconst objOf = require(\'crocks/helpers/objOf\')\n\n// names :: Object\nconst names = {\n  first: \'Joey\',\n  last: \'Fella\'\n}\n\n// arrFull :: Arrow Object\nconst arrFull =\n  Arrow(({ first, last }) => `${first} ${last}`)\n    .map(objOf(\'full\'))\n//=> { full: \'Joey Fella\' }\n\n// arrAddFull :: Arrow Object\nconst arrAddFull =\n  arrFull\n    .second()\n    .promap(branch, merge(assign))\n\narrAddFull\n  .runWith(names)\n//=> { full: \'Joey Fella\', first: \'Joey\', last: \'Fella\' }', mode: 'javascript'}, null, opt_ijData);
+    ie_close('article');
     ie_open('input', null, null,
         'type', 'hidden',
         'value', opt_data.page.title);
@@ -29048,11 +28797,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'value', opt_data.site.title);
     ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({content: param698}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param287}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'tVpxj.render';
+  $render.soyTemplateName = 'jwUBL.render';
 }
 
 exports.render.params = ["page","site"];
@@ -29062,14 +28811,21 @@ return exports;
 
 });
 
-class tVpxj extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(tVpxj, templates);
+class jwUBL extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(jwUBL, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
 
 
 /***/ }),
+/* 218 */,
+/* 219 */,
+/* 220 */,
+/* 221 */,
+/* 222 */,
+/* 223 */,
+/* 224 */,
 /* 225 */,
 /* 226 */,
 /* 227 */,
@@ -29082,7 +28838,13 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(tVpxj, templates);
 /* 234 */,
 /* 235 */,
 /* 236 */,
-/* 237 */
+/* 237 */,
+/* 238 */,
+/* 239 */,
+/* 240 */,
+/* 241 */,
+/* 242 */,
+/* 243 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29100,9 +28862,9 @@ var _metalSoy = __webpack_require__(2);
 
 var _metalSoy2 = _interopRequireDefault(_metalSoy);
 
-__webpack_require__(142);
-
 __webpack_require__(143);
+
+__webpack_require__(144);
 
 __webpack_require__(139);
 
@@ -29110,15 +28872,17 @@ __webpack_require__(140);
 
 __webpack_require__(141);
 
+__webpack_require__(142);
+
 __webpack_require__(131);
 
 __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _transformationFunctionsSoy = __webpack_require__(224);
+var _ArrowSoy = __webpack_require__(217);
 
-var _transformationFunctionsSoy2 = _interopRequireDefault(_transformationFunctionsSoy);
+var _ArrowSoy2 = _interopRequireDefault(_ArrowSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -29128,23 +28892,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var tVpxj = function (_Component) {
-  _inherits(tVpxj, _Component);
+var jwUBL = function (_Component) {
+  _inherits(jwUBL, _Component);
 
-  function tVpxj() {
-    _classCallCheck(this, tVpxj);
+  function jwUBL() {
+    _classCallCheck(this, jwUBL);
 
-    return _possibleConstructorReturn(this, (tVpxj.__proto__ || Object.getPrototypeOf(tVpxj)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (jwUBL.__proto__ || Object.getPrototypeOf(jwUBL)).apply(this, arguments));
   }
 
-  return tVpxj;
+  return jwUBL;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(tVpxj, _transformationFunctionsSoy2.default);
+_metalSoy2.default.register(jwUBL, _ArrowSoy2.default);
 
-exports.default = tVpxj;
+exports.default = jwUBL;
 
 /***/ })
-],[237]);
+],[243]);

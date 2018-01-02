@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([15],{
+webpackJsonppageComponent([22],{
 
 /***/ 132:
 /***/ (function(module, exports, __webpack_require__) {
@@ -21,7 +21,7 @@ var _metalSoy = __webpack_require__(2);
 
 var _metalSoy2 = _interopRequireDefault(_metalSoy);
 
-var _SocialButtons = __webpack_require__(145);
+var _SocialButtons = __webpack_require__(146);
 
 var _SocialButtons2 = _interopRequireDefault(_SocialButtons);
 
@@ -60,7 +60,7 @@ exports.default = SocialButtons;
 
 /***/ }),
 
-/***/ 145:
+/***/ 146:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

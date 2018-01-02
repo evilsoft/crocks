@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([8,13,14,15],[
+webpackJsonppageComponent([9,20,21,22],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1847,7 +1847,7 @@ function loadLocale(name) {
         try {
             oldLocale = globalLocale._abbr;
             var aliasedRequire = require;
-            __webpack_require__(147)("./" + name);
+            __webpack_require__(148)("./" + name);
             getSetGlobalLocale(oldLocale);
         } catch (e) {}
     }
@@ -4539,7 +4539,7 @@ return hooks;
 
 })));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(148)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(149)(module)))
 
 /***/ }),
 /* 1 */,
@@ -4558,27 +4558,27 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ElectricUpdates = exports.ElectricSearchBase = exports.ElectricSearchAutocomplete = exports.ElectricSearch = exports.ElectricReadingProgress = exports.ElectricNavigation = exports.ElectricCodeTabs = exports.ElectricCode = undefined;
 
-var _ElectricCode = __webpack_require__(149);
+var _ElectricCode = __webpack_require__(150);
 
 var _ElectricCode2 = _interopRequireDefault(_ElectricCode);
 
-var _ElectricCodeTabs = __webpack_require__(150);
+var _ElectricCodeTabs = __webpack_require__(151);
 
 var _ElectricCodeTabs2 = _interopRequireDefault(_ElectricCodeTabs);
 
-var _ElectricNavigation = __webpack_require__(151);
+var _ElectricNavigation = __webpack_require__(152);
 
 var _ElectricNavigation2 = _interopRequireDefault(_ElectricNavigation);
 
-var _ElectricReadingProgress = __webpack_require__(152);
+var _ElectricReadingProgress = __webpack_require__(153);
 
 var _ElectricReadingProgress2 = _interopRequireDefault(_ElectricReadingProgress);
 
-var _ElectricSearch = __webpack_require__(153);
+var _ElectricSearch = __webpack_require__(154);
 
 var _ElectricSearch2 = _interopRequireDefault(_ElectricSearch);
 
-var _ElectricSearchAutocomplete = __webpack_require__(154);
+var _ElectricSearchAutocomplete = __webpack_require__(155);
 
 var _ElectricSearchAutocomplete2 = _interopRequireDefault(_ElectricSearchAutocomplete);
 
@@ -4586,7 +4586,7 @@ var _ElectricSearchBase = __webpack_require__(10);
 
 var _ElectricSearchBase2 = _interopRequireDefault(_ElectricSearchBase);
 
-var _ElectricUpdates = __webpack_require__(155);
+var _ElectricUpdates = __webpack_require__(156);
 
 var _ElectricUpdates2 = _interopRequireDefault(_ElectricUpdates);
 
@@ -5548,7 +5548,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Position = exports.Geometry = exports.Align = undefined;
 
-var _Align = __webpack_require__(181);
+var _Align = __webpack_require__(182);
 
 var _Align2 = _interopRequireDefault(_Align);
 
@@ -17823,7 +17823,7 @@ var _metalToggler = __webpack_require__(130);
 
 var _metalToggler2 = _interopRequireDefault(_metalToggler);
 
-var _Sidebar = __webpack_require__(144);
+var _Sidebar = __webpack_require__(145);
 
 var _Sidebar2 = _interopRequireDefault(_Sidebar);
 
@@ -17889,7 +17889,7 @@ var _metalSoy = __webpack_require__(2);
 
 var _metalSoy2 = _interopRequireDefault(_metalSoy);
 
-var _SocialButtons = __webpack_require__(145);
+var _SocialButtons = __webpack_require__(146);
 
 var _SocialButtons2 = _interopRequireDefault(_SocialButtons);
 
@@ -17953,7 +17953,7 @@ var _moment2 = _interopRequireDefault(_moment);
 
 var _metalDom = __webpack_require__(4);
 
-var _TutorialTimer = __webpack_require__(146);
+var _TutorialTimer = __webpack_require__(147);
 
 var _TutorialTimer2 = _interopRequireDefault(_TutorialTimer);
 
@@ -18066,7 +18066,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _metal = __webpack_require__(3);
 
-var _metalUri = __webpack_require__(194);
+var _metalUri = __webpack_require__(195);
 
 var _metalUri2 = _interopRequireDefault(_metalUri);
 
@@ -18443,7 +18443,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.AutocompleteBase = exports.Autocomplete = undefined;
 
-var _Autocomplete = __webpack_require__(172);
+var _Autocomplete = __webpack_require__(173);
 
 var _Autocomplete2 = _interopRequireDefault(_Autocomplete);
 
@@ -19019,9 +19019,8 @@ function $guide(opt_data, opt_ignored, opt_ijData) {
           'class', 'container-hybrid');
         ie_open('h1', null, null,
             'class', 'title');
-          var dyn2 = opt_data.page.title;
-          if (typeof dyn2 == 'function') dyn2(); else if (dyn2 != null) itext(dyn2);
-          itext(' Guide');
+          var dyn0 = opt_data.page.title;
+          if (typeof dyn0 == 'function') dyn0(); else if (dyn0 != null) itext(dyn0);
         ie_close('h1');
       ie_close('div');
     ie_close('header');
@@ -19033,8 +19032,8 @@ function $guide(opt_data, opt_ignored, opt_ijData) {
             'class', 'docs-content col-xs-16 col-md-9');
           ie_open('div', null, null,
               'class', 'guide-content');
-            var dyn3 = opt_data.content;
-            if (typeof dyn3 == 'function') dyn3(); else if (dyn3 != null) itext(dyn3);
+            var dyn1 = opt_data.content;
+            if (typeof dyn1 == 'function') dyn1(); else if (dyn1 != null) itext(dyn1);
           ie_close('div');
           if (opt_data.site.githubRepo) {
             $contribute(opt_data, null, opt_ijData);
@@ -19174,8 +19173,8 @@ function $render(opt_data, opt_ignored, opt_ijData) {
     ie_open('main', null, null,
         'class', 'content');
       $templateAlias1({items: opt_data.site.topbar, style: 'topbar-light', logo: {text: opt_data.site.title, icon: opt_data.site.icon, href: opt_data.site.basePath}}, null, opt_ijData);
-      var dyn4 = opt_data.content;
-      if (typeof dyn4 == 'function') dyn4(); else if (dyn4 != null) itext(dyn4);
+      var dyn2 = opt_data.content;
+      if (typeof dyn2 == 'function') dyn2(); else if (dyn2 != null) itext(dyn2);
     ie_close('main');
   ie_close('div');
 }
@@ -19200,6 +19199,184 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(main, templates);
 
 /***/ }),
 /* 141 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "notopic", function() { return notopic; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_metal_soy__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_metal_soy___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_metal_soy__);
+/* jshint ignore:start */
+
+
+var templates;
+goog.loadModule(function(exports) {
+
+// This file was automatically generated from notopic.soy.
+// Please don't edit this file by hand.
+
+/**
+ * @fileoverview Templates in namespace notopic.
+ * @public
+ */
+
+goog.module('notopic.incrementaldom');
+
+/** @suppress {extraRequire} */
+var soy = goog.require('soy');
+/** @suppress {extraRequire} */
+var soydata = goog.require('soydata');
+/** @suppress {extraRequire} */
+goog.require('goog.i18n.bidi');
+/** @suppress {extraRequire} */
+goog.require('goog.asserts');
+/** @suppress {extraRequire} */
+goog.require('goog.string');
+var IncrementalDom = goog.require('incrementaldom');
+var ie_open = IncrementalDom.elementOpen;
+var ie_close = IncrementalDom.elementClose;
+var ie_void = IncrementalDom.elementVoid;
+var ie_open_start = IncrementalDom.elementOpenStart;
+var ie_open_end = IncrementalDom.elementOpenEnd;
+var itext = IncrementalDom.text;
+var iattr = IncrementalDom.attr;
+
+var $templateAlias2 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('Sidebar.incrementaldom', 'render');
+
+var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('Topbar.incrementaldom', 'render');
+
+
+/**
+ * @param {Object<string, *>=} opt_data
+ * @param {(null|undefined)=} opt_ignored
+ * @param {Object<string, *>=} opt_ijData
+ * @return {void}
+ * @suppress {checkTypes}
+ */
+function $render(opt_data, opt_ignored, opt_ijData) {
+  ie_open('div', null, null,
+      'class', 'main');
+    ie_open('main', null, null,
+        'class', 'guide');
+      ie_open('div', null, null,
+          'class', 'docs');
+        $templateAlias1({items: opt_data.site.topbar, style: 'topbar-light topbar-docs', logo: {text: opt_data.site.title, icon: opt_data.site.icon, href: opt_data.site.basePath}}, null, opt_ijData);
+        $templateAlias2({section: opt_data.site.index.children['docs'], site: opt_data.site}, null, opt_ijData);
+        $notopic(opt_data, null, opt_ijData);
+      ie_close('div');
+    ie_close('main');
+  ie_close('div');
+}
+exports.render = $render;
+if (goog.DEBUG) {
+  $render.soyTemplateName = 'notopic.render';
+}
+
+
+/**
+ * @param {Object<string, *>=} opt_data
+ * @param {(null|undefined)=} opt_ignored
+ * @param {Object<string, *>=} opt_ijData
+ * @return {void}
+ * @suppress {checkTypes}
+ */
+function $notopic(opt_data, opt_ignored, opt_ijData) {
+  ie_open('div', null, null,
+      'class', 'sidebar-offset');
+    ie_open('header', null, null,
+        'class', 'guide-header');
+      ie_open('div', null, null,
+          'class', 'container-hybrid');
+        ie_open('h1', null, null,
+            'class', 'title');
+          var dyn3 = opt_data.page.title;
+          if (typeof dyn3 == 'function') dyn3(); else if (dyn3 != null) itext(dyn3);
+        ie_close('h1');
+      ie_close('div');
+    ie_close('header');
+    ie_open('div', null, null,
+        'class', 'container-hybrid');
+      ie_open('div', null, null,
+          'class', 'docs-guide row');
+        ie_open('div', null, null,
+            'class', 'docs-content col-xs-16 col-md-12');
+          ie_open('div', null, null,
+              'class', 'guide-content');
+            var dyn4 = opt_data.content;
+            if (typeof dyn4 == 'function') dyn4(); else if (dyn4 != null) itext(dyn4);
+          ie_close('div');
+          if (opt_data.site.githubRepo) {
+            $contribute(opt_data, null, opt_ijData);
+          }
+        ie_close('div');
+      ie_close('div');
+    ie_close('div');
+  ie_close('div');
+}
+exports.notopic = $notopic;
+if (goog.DEBUG) {
+  $notopic.soyTemplateName = 'notopic.notopic';
+}
+
+
+/**
+ * @param {Object<string, *>=} opt_data
+ * @param {(null|undefined)=} opt_ignored
+ * @param {Object<string, *>=} opt_ijData
+ * @return {void}
+ * @suppress {checkTypes}
+ */
+function $contribute(opt_data, opt_ignored, opt_ijData) {
+  ie_open('div', null, null,
+      'class', 'contribute');
+    ie_open('div', null, null,
+        'class', 'contribute-img');
+      ie_void('span', null, null,
+          'class', 'icon-16-github');
+    ie_close('div');
+    ie_open('div', null, null,
+        'class', 'contribute-text');
+      ie_open('p');
+        itext('Contribute on Github! ');
+        ie_open('a', null, null,
+            'href', 'https://github.com/' + opt_data.site.githubRepo + '/tree/master/docs/' + opt_data.page.srcFilePath,
+            'class', 'contribute-link',
+            'target', '_blank');
+          itext('Edit this section');
+        ie_close('a');
+        itext('.');
+      ie_close('p');
+    ie_close('div');
+  ie_close('div');
+}
+exports.contribute = $contribute;
+if (goog.DEBUG) {
+  $contribute.soyTemplateName = 'notopic.contribute';
+}
+
+exports.render.params = ["page","site"];
+exports.render.types = {"page":"any","site":"any"};
+exports.notopic.params = ["page","site","content"];
+exports.notopic.types = {"page":"any","site":"any","content":"any"};
+exports.contribute.params = ["page","site"];
+exports.contribute.types = {"page":"any","site":"any"};
+templates = exports;
+return exports;
+
+});
+
+class notopic extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(notopic, templates);
+
+/* harmony default export */ __webpack_exports__["default"] = (templates);
+/* jshint ignore:end */
+
+
+/***/ }),
+/* 142 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -19326,12 +19503,12 @@ if (goog.DEBUG) {
 function $footerButtons(opt_data, opt_ignored, opt_ijData) {
   ie_open('div', null, null,
       'class', 'tutorial-page-nav');
-    var tutorialObject__soy100 = opt_data.site.index.children['tutorials'].children[opt_data.page.parentId];
-    if (opt_data.page.weight < tutorialObject__soy100.childIds.length) {
+    var tutorialObject__soy104 = opt_data.site.index.children['tutorials'].children[opt_data.page.parentId];
+    if (opt_data.page.weight < tutorialObject__soy104.childIds.length) {
       if (opt_data.page.buttonTitle) {
-        var nextPageUrl__soy105 = tutorialObject__soy100.children[tutorialObject__soy100.childIds[opt_data.page.weight]].url;
+        var nextPageUrl__soy109 = tutorialObject__soy104.children[tutorialObject__soy104.childIds[opt_data.page.weight]].url;
         ie_open('a', null, null,
-            'href', nextPageUrl__soy105,
+            'href', nextPageUrl__soy109,
             'class', 'btn btn-accent btn-sm');
           var dyn7 = opt_data.page.buttonTitle;
           if (typeof dyn7 == 'function') dyn7(); else if (dyn7 != null) itext(dyn7);
@@ -19375,7 +19552,7 @@ if (goog.DEBUG) {
  * @return {void}
  * @suppress {checkTypes}
  */
-function __deltemplate_s120_88c0813b(opt_data, opt_ignored, opt_ijData) {
+function __deltemplate_s124_88c0813b(opt_data, opt_ignored, opt_ijData) {
   ie_open('a', null, null,
       'class', 'sidebar-link' + (opt_data.page.active ? ' sidebar-link-selected' : ''),
       'href', opt_data.page.url,
@@ -19396,11 +19573,11 @@ function __deltemplate_s120_88c0813b(opt_data, opt_ignored, opt_ijData) {
         'class', 'after');
   ie_close('a');
 }
-exports.__deltemplate_s120_88c0813b = __deltemplate_s120_88c0813b;
+exports.__deltemplate_s124_88c0813b = __deltemplate_s124_88c0813b;
 if (goog.DEBUG) {
-  __deltemplate_s120_88c0813b.soyTemplateName = 'tutorial.__deltemplate_s120_88c0813b';
+  __deltemplate_s124_88c0813b.soyTemplateName = 'tutorial.__deltemplate_s124_88c0813b';
 }
-soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'tutorial', 0, __deltemplate_s120_88c0813b);
+soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'tutorial', 0, __deltemplate_s124_88c0813b);
 
 exports.render.params = ["content","elementClasses","page","site"];
 exports.render.types = {"content":"any","elementClasses":"any","page":"any","site":"any"};
@@ -19423,7 +19600,7 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(tutorial, templates);
 
 
 /***/ }),
-/* 142 */
+/* 143 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19434,31 +19611,31 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ElectricUpdates = exports.ElectricSearchAutocomplete = exports.ElectricSearch = exports.ElectricReadingProgress = exports.ElectricNavigation = exports.ElectricCode = exports.ElectricAPIAutocomplete = undefined;
 
-var _ElectricAPIAutocomplete = __webpack_require__(156);
+var _ElectricAPIAutocomplete = __webpack_require__(157);
 
 var _ElectricAPIAutocomplete2 = _interopRequireDefault(_ElectricAPIAutocomplete);
 
-var _ElectricCode = __webpack_require__(157);
+var _ElectricCode = __webpack_require__(158);
 
 var _ElectricCode2 = _interopRequireDefault(_ElectricCode);
 
-var _ElectricNavigation = __webpack_require__(159);
+var _ElectricNavigation = __webpack_require__(160);
 
 var _ElectricNavigation2 = _interopRequireDefault(_ElectricNavigation);
 
-var _ElectricReadingProgress = __webpack_require__(161);
+var _ElectricReadingProgress = __webpack_require__(162);
 
 var _ElectricReadingProgress2 = _interopRequireDefault(_ElectricReadingProgress);
 
-var _ElectricSearch = __webpack_require__(163);
+var _ElectricSearch = __webpack_require__(164);
 
 var _ElectricSearch2 = _interopRequireDefault(_ElectricSearch);
 
-var _ElectricSearchAutocomplete = __webpack_require__(165);
+var _ElectricSearchAutocomplete = __webpack_require__(166);
 
 var _ElectricSearchAutocomplete2 = _interopRequireDefault(_ElectricSearchAutocomplete);
 
-var _ElectricUpdates = __webpack_require__(167);
+var _ElectricUpdates = __webpack_require__(168);
 
 var _ElectricUpdates2 = _interopRequireDefault(_ElectricUpdates);
 
@@ -19474,7 +19651,7 @@ exports.ElectricUpdates = _ElectricUpdates2.default;
 exports.default = _ElectricNavigation2.default;
 
 /***/ }),
-/* 143 */
+/* 144 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19495,13 +19672,13 @@ var _metalSoy = __webpack_require__(2);
 
 var _metalSoy2 = _interopRequireDefault(_metalSoy);
 
-var _metalToggler = __webpack_require__(170);
+var _metalToggler = __webpack_require__(171);
 
 var _metalToggler2 = _interopRequireDefault(_metalToggler);
 
 var _metalState = __webpack_require__(5);
 
-var _TopbarSoy = __webpack_require__(169);
+var _TopbarSoy = __webpack_require__(170);
 
 var _TopbarSoy2 = _interopRequireDefault(_TopbarSoy);
 
@@ -19606,7 +19783,7 @@ exports.Topbar = Topbar;
 exports.default = Topbar;
 
 /***/ }),
-/* 144 */
+/* 145 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -19707,7 +19884,7 @@ if (goog.DEBUG) {
  * @return {void}
  * @suppress {checkTypes}
  */
-function __deltemplate_s147_d34389eb(opt_data, opt_ignored, opt_ijData) {
+function __deltemplate_s173_d34389eb(opt_data, opt_ignored, opt_ijData) {
   ie_open('a', null, null,
       'class', 'sidebar-link ' + (opt_data.page.active ? 'sidebar-link-selected' : ''),
       'href', opt_data.page.url);
@@ -19716,16 +19893,16 @@ function __deltemplate_s147_d34389eb(opt_data, opt_ignored, opt_ijData) {
           'class', 'sidebar-icon icon-16-' + opt_data.page.icon);
     }
     ie_open('span');
-      var dyn10 = opt_data.page.title;
-      if (typeof dyn10 == 'function') dyn10(); else if (dyn10 != null) itext(dyn10);
+      var dyn12 = opt_data.page.title;
+      if (typeof dyn12 == 'function') dyn12(); else if (dyn12 != null) itext(dyn12);
     ie_close('span');
   ie_close('a');
 }
-exports.__deltemplate_s147_d34389eb = __deltemplate_s147_d34389eb;
+exports.__deltemplate_s173_d34389eb = __deltemplate_s173_d34389eb;
 if (goog.DEBUG) {
-  __deltemplate_s147_d34389eb.soyTemplateName = 'Sidebar.__deltemplate_s147_d34389eb';
+  __deltemplate_s173_d34389eb.soyTemplateName = 'Sidebar.__deltemplate_s173_d34389eb';
 }
-soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'sidebar', 0, __deltemplate_s147_d34389eb);
+soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'sidebar', 0, __deltemplate_s173_d34389eb);
 
 exports.render.params = ["section","site"];
 exports.render.types = {"section":"any","site":"any"};
@@ -19742,7 +19919,7 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(Sidebar, templates);
 
 
 /***/ }),
-/* 145 */
+/* 146 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -19852,7 +20029,7 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(SocialButtons, templa
 
 
 /***/ }),
-/* 146 */
+/* 147 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -19914,8 +20091,8 @@ function $render(opt_data, opt_ignored, opt_ijData) {
       ie_void('span', null, null,
           'class', 'icon icon-16-clock');
       itext(' ');
-      var dyn11 = opt_data.time;
-      if (typeof dyn11 == 'function') dyn11(); else if (dyn11 != null) itext(dyn11);
+      var dyn13 = opt_data.time;
+      if (typeof dyn13 == 'function') dyn13(); else if (dyn13 != null) itext(dyn13);
     }
   ie_close('p');
 }
@@ -19939,7 +20116,7 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(TutorialTimer, templa
 
 
 /***/ }),
-/* 147 */
+/* 148 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
@@ -20196,10 +20373,10 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 147;
+webpackContext.id = 148;
 
 /***/ }),
-/* 148 */
+/* 149 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -20227,7 +20404,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 149 */
+/* 150 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20239,7 +20416,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _metalClipboard = __webpack_require__(174);
+var _metalClipboard = __webpack_require__(175);
 
 var _metalClipboard2 = _interopRequireDefault(_metalClipboard);
 
@@ -20247,7 +20424,7 @@ var _metalComponent = __webpack_require__(1);
 
 var _metalComponent2 = _interopRequireDefault(_metalComponent);
 
-var _metalTooltip = __webpack_require__(191);
+var _metalTooltip = __webpack_require__(192);
 
 var _metalTooltip2 = _interopRequireDefault(_metalTooltip);
 
@@ -20310,7 +20487,7 @@ var ElectricCode = function (_Component) {
 exports.default = ElectricCode;
 
 /***/ }),
-/* 150 */
+/* 151 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20322,7 +20499,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _metalTabs = __webpack_require__(189);
+var _metalTabs = __webpack_require__(190);
 
 var _metalTabs2 = _interopRequireDefault(_metalTabs);
 
@@ -20495,7 +20672,7 @@ window.ElectricCodeTabs = ElectricCodeTabs;
 exports.default = ElectricCodeTabs;
 
 /***/ }),
-/* 151 */
+/* 152 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20541,7 +20718,7 @@ var ElectricNavigation = function (_Component) {
 exports.default = ElectricNavigation;
 
 /***/ }),
-/* 152 */
+/* 153 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20553,7 +20730,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _metalAffix = __webpack_require__(171);
+var _metalAffix = __webpack_require__(172);
 
 var _metalAffix2 = _interopRequireDefault(_metalAffix);
 
@@ -20569,7 +20746,7 @@ var _metalDom = __webpack_require__(4);
 
 var _metalDom2 = _interopRequireDefault(_metalDom);
 
-var _metalReadingProgress = __webpack_require__(182);
+var _metalReadingProgress = __webpack_require__(183);
 
 var _metalReadingProgress2 = _interopRequireDefault(_metalReadingProgress);
 
@@ -20680,7 +20857,7 @@ ElectricReadingProgress.STATE = {
 exports.default = ElectricReadingProgress;
 
 /***/ }),
-/* 153 */
+/* 154 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20753,7 +20930,7 @@ ElectricSearch.STATE = {
 exports.default = ElectricSearch;
 
 /***/ }),
-/* 154 */
+/* 155 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20852,7 +21029,7 @@ var ElectricSearchAutocomplete = function (_ElectricSearchBase) {
 exports.default = ElectricSearchAutocomplete;
 
 /***/ }),
-/* 155 */
+/* 156 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20909,7 +21086,7 @@ ElectricUpdates.STATE = {
 exports.default = ElectricUpdates;
 
 /***/ }),
-/* 156 */
+/* 157 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21089,7 +21266,7 @@ ElectricAPIAutocomplete.STATE = {
 exports.default = ElectricAPIAutocomplete;
 
 /***/ }),
-/* 157 */
+/* 158 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21105,7 +21282,7 @@ var _metalSoy2 = _interopRequireDefault(_metalSoy);
 
 var _electricBaseComponents = __webpack_require__(6);
 
-var _ElectricCode = __webpack_require__(158);
+var _ElectricCode = __webpack_require__(159);
 
 var _ElectricCode2 = _interopRequireDefault(_ElectricCode);
 
@@ -21116,7 +21293,7 @@ _metalSoy2.default.register(_electricBaseComponents.ElectricCode, _ElectricCode2
 exports.default = _electricBaseComponents.ElectricCode;
 
 /***/ }),
-/* 158 */
+/* 159 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21226,7 +21403,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 159 */
+/* 160 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21250,7 +21427,7 @@ var _electricBaseComponents = __webpack_require__(6);
 
 var _electricBaseComponents2 = _interopRequireDefault(_electricBaseComponents);
 
-var _ElectricNavigation = __webpack_require__(160);
+var _ElectricNavigation = __webpack_require__(161);
 
 var _ElectricNavigation2 = _interopRequireDefault(_ElectricNavigation);
 
@@ -21304,7 +21481,7 @@ _metalSoy2.default.register(ElectricNavigation, _ElectricNavigation2.default);
 exports.default = ElectricNavigation;
 
 /***/ }),
-/* 160 */
+/* 161 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21464,7 +21641,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 161 */
+/* 162 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21480,7 +21657,7 @@ var _metalSoy2 = _interopRequireDefault(_metalSoy);
 
 var _electricBaseComponents = __webpack_require__(6);
 
-var _ElectricReadingProgress = __webpack_require__(162);
+var _ElectricReadingProgress = __webpack_require__(163);
 
 var _ElectricReadingProgress2 = _interopRequireDefault(_ElectricReadingProgress);
 
@@ -21491,7 +21668,7 @@ _metalSoy2.default.register(_electricBaseComponents.ElectricReadingProgress, _El
 exports.default = _electricBaseComponents.ElectricReadingProgress;
 
 /***/ }),
-/* 162 */
+/* 163 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21594,7 +21771,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 163 */
+/* 164 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21610,7 +21787,7 @@ var _metalSoy2 = _interopRequireDefault(_metalSoy);
 
 var _electricBaseComponents = __webpack_require__(6);
 
-var _ElectricSearch = __webpack_require__(164);
+var _ElectricSearch = __webpack_require__(165);
 
 var _ElectricSearch2 = _interopRequireDefault(_ElectricSearch);
 
@@ -21621,7 +21798,7 @@ _metalSoy2.default.register(_electricBaseComponents.ElectricSearch, _ElectricSea
 exports.default = _electricBaseComponents.ElectricSearch;
 
 /***/ }),
-/* 164 */
+/* 165 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21815,7 +21992,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 165 */
+/* 166 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21831,7 +22008,7 @@ var _metalSoy2 = _interopRequireDefault(_metalSoy);
 
 var _electricBaseComponents = __webpack_require__(6);
 
-var _ElectricSearchAutocomplete = __webpack_require__(166);
+var _ElectricSearchAutocomplete = __webpack_require__(167);
 
 var _ElectricSearchAutocomplete2 = _interopRequireDefault(_ElectricSearchAutocomplete);
 
@@ -21842,7 +22019,7 @@ _metalSoy2.default.register(_electricBaseComponents.ElectricSearchAutocomplete, 
 exports.default = _electricBaseComponents.ElectricSearchAutocomplete;
 
 /***/ }),
-/* 166 */
+/* 167 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21952,7 +22129,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 167 */
+/* 168 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21968,7 +22145,7 @@ var _metalSoy2 = _interopRequireDefault(_metalSoy);
 
 var _electricBaseComponents = __webpack_require__(6);
 
-var _ElectricUpdates = __webpack_require__(168);
+var _ElectricUpdates = __webpack_require__(169);
 
 var _ElectricUpdates2 = _interopRequireDefault(_ElectricUpdates);
 
@@ -21979,7 +22156,7 @@ _metalSoy2.default.register(_electricBaseComponents.ElectricUpdates, _ElectricUp
 exports.default = _electricBaseComponents.ElectricUpdates;
 
 /***/ }),
-/* 168 */
+/* 169 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22190,7 +22367,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 169 */
+/* 170 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22413,7 +22590,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 170 */
+/* 171 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22749,7 +22926,7 @@ exports.Toggler = Toggler;
 exports.default = Toggler;
 
 /***/ }),
-/* 171 */
+/* 172 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22952,7 +23129,7 @@ Affix.STATE = {
 exports.default = Affix;
 
 /***/ }),
-/* 172 */
+/* 173 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22970,7 +23147,7 @@ var _metal = __webpack_require__(3);
 
 var _metal2 = _interopRequireDefault(_metal);
 
-var _metalDebounce = __webpack_require__(175);
+var _metalDebounce = __webpack_require__(176);
 
 var _metalDebounce2 = _interopRequireDefault(_metalDebounce);
 
@@ -22990,9 +23167,9 @@ var _metalSoy = __webpack_require__(2);
 
 var _metalSoy2 = _interopRequireDefault(_metalSoy);
 
-__webpack_require__(177);
+__webpack_require__(178);
 
-var _AutocompleteSoy = __webpack_require__(173);
+var _AutocompleteSoy = __webpack_require__(174);
 
 var _AutocompleteSoy2 = _interopRequireDefault(_AutocompleteSoy);
 
@@ -23390,7 +23567,7 @@ Autocomplete.STATE = {
 exports.default = Autocomplete;
 
 /***/ }),
-/* 173 */
+/* 174 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23495,7 +23672,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 174 */
+/* 175 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23849,7 +24026,7 @@ ClipboardAction.STATE = {
 exports.default = Clipboard;
 
 /***/ }),
-/* 175 */
+/* 176 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23887,7 +24064,7 @@ exports.cancelDebounce = cancelDebounce;
 exports.debounce = debounce;
 
 /***/ }),
-/* 176 */
+/* 177 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24160,7 +24337,7 @@ KeyboardFocusManager.REF_REGEX = /.+-(\d+)$/;
 exports.default = KeyboardFocusManager;
 
 /***/ }),
-/* 177 */
+/* 178 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24186,9 +24363,9 @@ var _metalSoy = __webpack_require__(2);
 
 var _metalSoy2 = _interopRequireDefault(_metalSoy);
 
-__webpack_require__(179);
+__webpack_require__(180);
 
-var _ListSoy = __webpack_require__(178);
+var _ListSoy = __webpack_require__(179);
 
 var _ListSoy2 = _interopRequireDefault(_ListSoy);
 
@@ -24280,7 +24457,7 @@ List.STATE = {
 exports.default = List;
 
 /***/ }),
-/* 178 */
+/* 179 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24412,7 +24589,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 179 */
+/* 180 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24434,7 +24611,7 @@ var _metalSoy = __webpack_require__(2);
 
 var _metalSoy2 = _interopRequireDefault(_metalSoy);
 
-var _ListItemSoy = __webpack_require__(180);
+var _ListItemSoy = __webpack_require__(181);
 
 var _ListItemSoy2 = _interopRequireDefault(_ListItemSoy);
 
@@ -24521,7 +24698,7 @@ ListItem.STATE = {
 exports.default = ListItem;
 
 /***/ }),
-/* 180 */
+/* 181 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24682,7 +24859,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 181 */
+/* 182 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24939,7 +25116,7 @@ Align.Left = Align.LeftCenter;
 exports.default = Align;
 
 /***/ }),
-/* 182 */
+/* 183 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24951,7 +25128,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _metal = __webpack_require__(3);
 
-var _ReadingProgress = __webpack_require__(183);
+var _ReadingProgress = __webpack_require__(184);
 
 var _ReadingProgress2 = _interopRequireDefault(_ReadingProgress);
 
@@ -24959,7 +25136,7 @@ var _metalComponent = __webpack_require__(1);
 
 var _metalComponent2 = _interopRequireDefault(_metalComponent);
 
-var _ReadingProgressTracker = __webpack_require__(184);
+var _ReadingProgressTracker = __webpack_require__(185);
 
 var _ReadingProgressTracker2 = _interopRequireDefault(_ReadingProgressTracker);
 
@@ -25130,7 +25307,7 @@ ReadingProgress.STATE = {
 exports.default = ReadingProgress;
 
 /***/ }),
-/* 183 */
+/* 184 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25270,7 +25447,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 184 */
+/* 185 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25288,7 +25465,7 @@ var _metalDom = __webpack_require__(4);
 
 var _metalDom2 = _interopRequireDefault(_metalDom);
 
-var _metalScrollspy = __webpack_require__(185);
+var _metalScrollspy = __webpack_require__(186);
 
 var _metalScrollspy2 = _interopRequireDefault(_metalScrollspy);
 
@@ -25439,7 +25616,7 @@ ReadingProgressTracker.STATE = {
 exports.default = ReadingProgressTracker;
 
 /***/ }),
-/* 185 */
+/* 186 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25791,7 +25968,7 @@ Scrollspy.STATE = {
 exports.default = Scrollspy;
 
 /***/ }),
-/* 186 */
+/* 187 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26001,7 +26178,7 @@ var MultiMap = function (_Disposable) {
 exports.default = MultiMap;
 
 /***/ }),
-/* 187 */
+/* 188 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26260,7 +26437,7 @@ var assertChildHasNoParent = function assertChildHasNoParent(child) {
 exports.default = TreeNode;
 
 /***/ }),
-/* 188 */
+/* 189 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26271,11 +26448,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.TreeNode = exports.MultiMap = undefined;
 
-var _MultiMap = __webpack_require__(186);
+var _MultiMap = __webpack_require__(187);
 
 var _MultiMap2 = _interopRequireDefault(_MultiMap);
 
-var _TreeNode = __webpack_require__(187);
+var _TreeNode = __webpack_require__(188);
 
 var _TreeNode2 = _interopRequireDefault(_TreeNode);
 
@@ -26285,7 +26462,7 @@ exports.MultiMap = _MultiMap2.default;
 exports.TreeNode = _TreeNode2.default;
 
 /***/ }),
-/* 189 */
+/* 190 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26301,7 +26478,7 @@ var _metal = __webpack_require__(3);
 
 var _metal2 = _interopRequireDefault(_metal);
 
-var _TabsSoy = __webpack_require__(190);
+var _TabsSoy = __webpack_require__(191);
 
 var _TabsSoy2 = _interopRequireDefault(_TabsSoy);
 
@@ -26309,7 +26486,7 @@ var _metalComponent = __webpack_require__(1);
 
 var _metalComponent2 = _interopRequireDefault(_metalComponent);
 
-var _metalKeyboardFocus = __webpack_require__(176);
+var _metalKeyboardFocus = __webpack_require__(177);
 
 var _metalKeyboardFocus2 = _interopRequireDefault(_metalKeyboardFocus);
 
@@ -26641,7 +26818,7 @@ Tabs.STATE = {
 exports.default = Tabs;
 
 /***/ }),
-/* 190 */
+/* 191 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26776,7 +26953,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 191 */
+/* 192 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26799,11 +26976,11 @@ var _metalSoy = __webpack_require__(2);
 
 var _metalSoy2 = _interopRequireDefault(_metalSoy);
 
-var _TooltipBase2 = __webpack_require__(193);
+var _TooltipBase2 = __webpack_require__(194);
 
 var _TooltipBase3 = _interopRequireDefault(_TooltipBase2);
 
-var _TooltipSoy = __webpack_require__(192);
+var _TooltipSoy = __webpack_require__(193);
 
 var _TooltipSoy2 = _interopRequireDefault(_TooltipSoy);
 
@@ -26879,7 +27056,7 @@ exports.Tooltip = Tooltip;
 exports.TooltipBase = _TooltipBase3.default;
 
 /***/ }),
-/* 192 */
+/* 193 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27000,7 +27177,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 193 */
+/* 194 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27395,7 +27572,7 @@ TooltipBase.PositionClasses = ['top', 'right', 'bottom', 'left'];
 exports.default = TooltipBase;
 
 /***/ }),
-/* 194 */
+/* 195 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27411,11 +27588,11 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _metal = __webpack_require__(3);
 
-var _parse = __webpack_require__(195);
+var _parse = __webpack_require__(196);
 
 var _parse2 = _interopRequireDefault(_parse);
 
-var _metalStructs = __webpack_require__(188);
+var _metalStructs = __webpack_require__(189);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28036,7 +28213,7 @@ Uri.RANDOM_PARAM = 'zx';
 exports.default = Uri;
 
 /***/ }),
-/* 195 */
+/* 196 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28048,7 +28225,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _metal = __webpack_require__(3);
 
-var _parseFromAnchor = __webpack_require__(196);
+var _parseFromAnchor = __webpack_require__(197);
 
 var _parseFromAnchor2 = _interopRequireDefault(_parseFromAnchor);
 
@@ -28084,7 +28261,7 @@ function parse(opt_uri) {
 exports.default = parse;
 
 /***/ }),
-/* 196 */
+/* 197 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28152,7 +28329,6 @@ function parseFromAnchor(opt_uri) {
 exports.default = parseFromAnchor;
 
 /***/ }),
-/* 197 */,
 /* 198 */,
 /* 199 */,
 /* 200 */,
@@ -28175,12 +28351,19 @@ exports.default = parseFromAnchor;
 /* 217 */,
 /* 218 */,
 /* 219 */,
-/* 220 */
+/* 220 */,
+/* 221 */,
+/* 222 */,
+/* 223 */,
+/* 224 */,
+/* 225 */,
+/* 226 */,
+/* 227 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ozPJF", function() { return ozPJF; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "kSaqg", function() { return kSaqg; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28192,15 +28375,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var templates;
 goog.loadModule(function(exports) {
 
-// This file was automatically generated from logic-functions.soy.
+// This file was automatically generated from pointfree-functions.soy.
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace ozPJF.
+ * @fileoverview Templates in namespace kSaqg.
  * @public
  */
 
-goog.module('ozPJF.incrementaldom');
+goog.module('kSaqg.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28223,7 +28406,7 @@ var iattr = IncrementalDom.attr;
 
 var $templateAlias2 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('ElectricCode.incrementaldom', 'render');
 
-var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('guide.incrementaldom', 'render');
+var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('notopic.incrementaldom', 'render');
 
 
 /**
@@ -28234,180 +28417,1805 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var param627 = function() {
-    ie_open('h3');
-      itext('Logic Functions');
-    ie_close('h3');
+  var param1272 = function() {
     ie_open('p');
-      itext('The functions in this section are used to represent logical branching in a declarative manner. Each of these functions require either ');
-      ie_open('code');
-        itext('Pred');
-      ie_close('code');
-      itext('s or predicate functions in their input. Since these functions work with ');
-      ie_open('code');
-        itext('Pred');
-      ie_close('code');
-      itext('s and predicate functions, rather than values, this allows for composeable, "lazy" evaluation. All logic functions can be referenced from ');
-      ie_open('code');
-        itext('crocks/logic');
-      ie_close('code');
+      itext('While it can seem natural to work with all these containers in a fluent fashion, it can get cumbersome and hard to get a lot of reuse out of. A way to really get the most out of reusability in Javascript is to take what is called a point-free approach. Below is a small code same to contrast the difference between the two calling styles:');
     ie_close('p');
-    ie_open('h4');
-      itext('and');
-    ie_close('h4');
-    $templateAlias2({code: 'and :: ((a -> Boolean) | Pred) -> ((a -> Boolean) | Pred) -> a -> Boolean', mode: 'haskell'}, null, opt_ijData);
+    $templateAlias2({code: 'const crocks = require(\'crocks\')\n\nconst {\n  compose, map, safe, isInteger\n} = crocks // map is the point-free function\n\n// isEven :: Integer -> Boolean\nconst isEven =\n  x => (x % 2) === 0\n\n// maybeInt :: a -> Maybe Integer\nconst maybeInt =\n  safe(isInteger)\n\n// fluentIsEven :: a -> Maybe Boolean\nconst fluentIsEven = data =>\n  maybeInt(data)\n    .map(isEven)\n\n// pointfreeIsEven :: a -> Maybe Boolean\nconst pointfreeIsEven =\n  compose(map(isEven), maybeInt)', mode: 'javascript'}, null, opt_ijData);
     ie_open('p');
-      itext('Say you have two predicate functions or ');
-      ie_open('code');
-        itext('Pred');
-      ie_close('code');
-      itext('s and would like to combine them into one predicate over conjunction, well you came to the right place, ');
-      ie_open('code');
-        itext('and');
-      ie_close('code');
-      itext('accepts either predicate functions or ');
-      ie_open('code');
-        itext('Pred');
-      ie_close('code');
-      itext('s and will return you a function ready to take a value. Once that value is passed, it will run it through both of the predicates and return the result of combining it over a ');
-      ie_open('code');
-        itext('logical and');
-      ie_close('code');
-      itext('. This is super helpful combined with ');
-      ie_open('code');
-        itext('or');
-      ie_close('code');
-      itext(' for putting together reusable, complex predicates. As they follow the general form of ');
-      ie_open('code');
-        itext('(a -> Boolean)');
-      ie_close('code');
-      itext(' they are easily combined with other logic functions.');
-    ie_close('p');
-    ie_open('h4');
-      itext('ifElse');
-    ie_close('h4');
-    $templateAlias2({code: 'ifElse :: ((a -> Boolean) | Pred) -> (* -> a) -> (* -> a) -> * -> a', mode: 'haskell'}, null, opt_ijData);
-    ie_open('p');
-      itext('Whenever you need to modify a value based some condition and want a functional way to do it without some imperative ');
-      ie_open('code');
-        itext('if');
-      ie_close('code');
-      itext(' statement, then reach for ');
-      ie_open('code');
-        itext('ifElse');
-      ie_close('code');
-      itext('. This function take a predicate (some function that returns a Boolean) and two functions. The first is what is executed when the predicate is true, the second on a false condition. This will return a function ready to take a value to run through the predicate. After the value is evaluated, it will be ran through it\'s corresponding function, returning the result as the final result. This function comes in really handy when creating lifting functions for Sum Types (like');
-      ie_open('code');
-        itext('Either');
-      ie_close('code');
-      itext(' or ');
-      ie_open('code');
-        itext('Maybe');
-      ie_close('code');
-      itext(').');
-    ie_close('p');
-    ie_open('h4');
-      itext('not');
-    ie_close('h4');
-    $templateAlias2({code: 'not :: ((a -> Boolean) | Pred) -> a -> Boolean', mode: 'haskell'}, null, opt_ijData);
-    ie_open('p');
-      itext('When you need to negate a predicate function or a ');
-      ie_open('code');
-        itext('Pred');
-      ie_close('code');
-      itext(', but want a new predicate function that does the negation, then ');
-      ie_open('code');
-        itext('not');
-      ie_close('code');
-      itext(' is going to get you what you need. Using ');
-      ie_open('code');
-        itext('not');
-      ie_close('code');
-      itext(' will allow you to stay as declarative as possible. Just pass ');
-      ie_open('code');
-        itext('not');
-      ie_close('code');
-      itext(' your predicate function or a ');
-      ie_open('code');
-        itext('Pred');
-      ie_close('code');
-      itext(', and it will give you back a predicate function ready for insertion into your flow. All predicate based functions in ');
+      itext('These functions provide a very clean way to build out very simple functions and compose them all together to compose a more complicated flow. Each point-free function provided in ');
       ie_open('code');
         itext('crocks');
       ie_close('code');
-      itext(' take either a ');
+      itext(' is "auto-curried" and follows a "data-last" pattern in the order of how it receives it\'s arguments. Typically the most stable of the arguments comes first, moving all the way to the least stable argument (which usually is the data flowing through your composition). Below lists the provided functions and the data types they work with (');
       ie_open('code');
-        itext('Pred');
+        itext('m');
       ie_close('code');
-      itext(' or predicate function, so it should be easy to swap between the two.');
+      itext(' refers to an accepted Datatype):');
     ie_close('p');
-    ie_open('h4');
-      itext('or');
-    ie_close('h4');
-    $templateAlias2({code: 'or :: ((a -> Boolean) | Pred) -> ((a -> Boolean) | Pred) -> a -> Boolean', mode: 'haskell'}, null, opt_ijData);
-    ie_open('p');
-      itext('Say you have two predicate functions or ');
-      ie_open('code');
-        itext('Pred');
-      ie_close('code');
-      itext('s and would like to combine them into one predicate over disjunction, look no further, ');
-      ie_open('code');
-        itext('or');
-      ie_close('code');
-      itext(' accepts either predicate functions or ');
-      ie_open('code');
-        itext('Pred');
-      ie_close('code');
-      itext('s and will return you a function ready to take a value. Once that value is passed, it will run it through both of the predicates and return the result of combining it over a ');
-      ie_open('code');
-        itext('logical or');
-      ie_close('code');
-      itext('. This is super helpful combined with ');
-      ie_open('code');
-        itext('and');
-      ie_close('code');
-      itext(' for putting together reusable, complex predicates. As they follow the general form of ');
-      ie_open('code');
-        itext('(a -> Boolean)');
-      ie_close('code');
-      itext(' they are easily combined with other logic functions.');
-    ie_close('p');
-    ie_open('h4');
-      itext('unless');
-    ie_close('h4');
-    $templateAlias2({code: 'unless :: ((a -> Boolean) | Pred) -> (a -> a) -> a -> a', mode: 'haskell'}, null, opt_ijData);
-    ie_open('p');
-      itext('There may come a time when you need to adjust a value when a condition is false, that is where ');
-      ie_open('code');
-        itext('unless');
-      ie_close('code');
-      itext(' can come into play. Just provide a predicate function (a function that returns a Boolean) and a function to apply your desired modification. This will get you back a function that when you pass it a value, it will evaluate it and if false, will run your value through the provided function. Either the original or modified value will be returned depending on the result of the predicate. Check out ');
-      ie_open('a', null, null,
-          'href', '#when');
-        ie_open('code');
-          itext('when');
-        ie_close('code');
-      ie_close('a');
-      itext(' for a negated version of this function.');
-    ie_close('p');
-    ie_open('h4');
-      itext('when');
-    ie_close('h4');
-    $templateAlias2({code: 'when :: ((a -> Boolean) | Pred) -> (a -> a) -> a -> a', mode: 'haskell'}, null, opt_ijData);
-    ie_open('p');
-      itext('There may come a time when you need to adjust a value when a condition is true, that is where ');
-      ie_open('code');
-        itext('when');
-      ie_close('code');
-      itext(' can come into play. Just provide a predicate function (a function that returns a Boolean) and a function to apply your desired modification. This will get you back a function that when you pass it a value, it will evaluate it and if true, will run your value through the provided function. Either the original or modified value will be returned depending on the result of the predicate. Check out ');
-      ie_open('a', null, null,
-          'href', '#unless');
-        ie_open('code');
-          itext('unless');
-        ie_close('code');
-      ie_close('a');
-      itext(' for a negated version of this function.');
-    ie_close('p');
+    ie_open('h5');
+      itext('Signatures');
+    ie_close('h5');
+    ie_open('table');
+      ie_open('thead');
+        ie_open('tr');
+          ie_open('th');
+            itext('Function');
+          ie_close('th');
+          ie_open('th', null, null,
+              'style', 'text-align:left');
+            itext('Signature');
+          ie_close('th');
+          ie_open('th', null, null,
+              'style', 'text-align:left');
+            itext('Location');
+          ie_close('th');
+        ie_close('tr');
+      ie_close('thead');
+      ie_open('tbody');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('alt');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('m a -> m a -> m a');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/pointfree');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('ap');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('m a -> m (a -> b) -> m b');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/pointfree');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('bimap');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('(a -> c) -> (b -> d) -> m a b -> m c d');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/pointfree');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('both');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('m (a -> b) -> m (Pair a a -> Pair b b)');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/pointfree');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('chain');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('(a -> m b) -> m a -> m b');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/pointfree');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('coalesce');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('(a -> c) -> (b -> c) -> m a b -> m _ c');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/pointfree');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('concat');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('m a -> m a -> m a');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/pointfree');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('cons');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('a -> m a -> m a');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/pointfree');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('contramap');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('(b -> a) -> m a -> m b');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/pointfree');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('either');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('(a -> c) -> (b -> c) -> m a b -> c');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/pointfree');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('empty');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('m -> m');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/pointfree');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('equals');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('m -> m -> Boolean');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/pointfree');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('evalWith');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('a -> m -> b');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/State');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('execWith');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('a -> m -> b');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/State');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('extend');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('(m a -> b) -> m a -> m b');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/pointfree');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('filter');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('((a -> Boolean) | Pred a) -> m a -> m a');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/pointfree');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('first');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('m (a -> b) -> m (Pair a c -> Pair b c)');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/pointfree');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('fold');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('Semigroup s => m s -> s');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/pointfree');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('fst');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('m a b -> a');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/Pair');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('head');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('m a -> Maybe a');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/pointfree');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('log');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('m a b -> a');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/Writer');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('map');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('(a -> b) -> m a -> m b');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/pointfree');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('merge');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('(a -> b -> c) -> m a b -> c');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/Pair');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('option');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('a -> m a -> a');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/pointfree');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('promap');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('(c -> a) -> (b -> d) -> m a b -> m c d');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/pointfree');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('read');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('m a b -> Pair a b');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/Writer');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('reduce');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('(b -> a -> b) -> b -> m a -> b');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/pointfree');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('reject');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('((a -> Boolean) | Pred a) -> m a -> m a');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/pointfree');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('run');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('m a -> b');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/pointfree');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('runWith');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('a -> m -> b');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/pointfree');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('second');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('m (a -> b) -> m (Pair c a -> Pair c b)');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/pointfree');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('sequence');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('Applicative f => (b -> f b) -> m (f a) -> f (m a)');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/pointfree');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('snd');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('m a b -> b');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/Pair');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('swap');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('(c -> d) -> (a -> b) -> m c a -> m b d');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/pointfree');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('tail');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('m a -> Maybe (m a)');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/pointfree');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('traverse');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('Applicative f => (c -> f c) -> (a -> f b) -> m (f a) -> f (m b)');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/pointfree');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('valueOf');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('m a -> a');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/pointfree');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+      ie_close('tbody');
+    ie_close('table');
+    ie_open('h5');
+      itext('Datatypes');
+    ie_close('h5');
+    ie_open('table');
+      ie_open('thead');
+        ie_open('tr');
+          ie_open('th');
+            itext('Function');
+          ie_close('th');
+          ie_open('th', null, null,
+              'style', 'text-align:left');
+            itext('Datatypes');
+          ie_close('th');
+        ie_close('tr');
+      ie_close('thead');
+      ie_open('tbody');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('alt');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('Async');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Either');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Maybe');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Result');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('ap');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('Array');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Async');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Const');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Either');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Identity');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('IO');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('List');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Maybe');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Pair');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Reader');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Result');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('State');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Unit');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Writer');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('bimap');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('Async');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Either');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Pair');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Result');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('both');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('Arrow');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Function');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Star');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('chain');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('Array');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Async');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Const');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Either');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Identity');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('IO');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('List');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Maybe');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Pair');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Reader');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Result');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('State');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Unit');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Writer');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('coalesce');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('Async');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Either');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Maybe');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Result');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('concat');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('All');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Any');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Array');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Assign');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Const');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Either');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Endo');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('First');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Identity');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Last');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('List');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Max');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Maybe');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Min');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Pair');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Pred');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Prod');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Result');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('String');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Sum');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Unit');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('cons');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('Array');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('List');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('contramap');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('Arrow');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Pred');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Star');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('either');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('Either');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Maybe');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Result');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('empty');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('All');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Any');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Array');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Assign');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Endo');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('First');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Last');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('List');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Max');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Min');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Object');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Pred');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Prod');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('String');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Sum');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Unit');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('evalWith');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('State');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('execWith');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('State');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('extend');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('Pair');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('filter');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('Array');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('List');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Object');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('first');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('Arrow');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Function');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Star');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('fold');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('Array');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('List');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('fst');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('Pair');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('head');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('Array');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('List');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('String');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('log');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('Writer');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('map');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('Async');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Array');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Arrow');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Const');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Either');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Function');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Identity');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('IO');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('List');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Maybe');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Object');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Pair');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Reader');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Result');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Star');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('State');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Unit');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Writer');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('merge');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('Pair');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('option');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('First');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Last');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Maybe');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('promap');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('Arrow');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Star');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('read');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('Writer');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('reduce');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('Array');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('List');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('reject');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('Array');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('List');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Object');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('run');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('IO');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('runWith');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('Arrow');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Endo');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Pred');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Reader');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Star');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('State');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('second');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('Arrow');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Function');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Star');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('sequence');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('Array');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Either');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Identity');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('List');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Maybe');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Result');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('snd');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('Pair');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('swap');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('Async');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Either');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Pair');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Result');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('tail');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('Array');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('List');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('String');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('traverse');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('Array');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Either');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Identity');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('List');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Maybe');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Result');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('valueOf');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('All');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Any');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Assign');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Const');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Endo');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('First');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Identity');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Last');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Max');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Min');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Pred');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Prod');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Sum');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Unit');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Writer');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+      ie_close('tbody');
+    ie_close('table');
     ie_open('input', null, null,
         'type', 'hidden',
         'value', opt_data.page.title);
@@ -28417,11 +30225,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'value', opt_data.site.title);
     ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({content: param627}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param1272}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'ozPJF.render';
+  $render.soyTemplateName = 'kSaqg.render';
 }
 
 exports.render.params = ["page","site"];
@@ -28431,21 +30239,14 @@ return exports;
 
 });
 
-class ozPJF extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(ozPJF, templates);
+class kSaqg extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(kSaqg, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
 
 
 /***/ }),
-/* 221 */,
-/* 222 */,
-/* 223 */,
-/* 224 */,
-/* 225 */,
-/* 226 */,
-/* 227 */,
 /* 228 */,
 /* 229 */,
 /* 230 */,
@@ -28453,7 +30254,19 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(ozPJF, templates);
 /* 232 */,
 /* 233 */,
 /* 234 */,
-/* 235 */
+/* 235 */,
+/* 236 */,
+/* 237 */,
+/* 238 */,
+/* 239 */,
+/* 240 */,
+/* 241 */,
+/* 242 */,
+/* 243 */,
+/* 244 */,
+/* 245 */,
+/* 246 */,
+/* 247 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28471,9 +30284,9 @@ var _metalSoy = __webpack_require__(2);
 
 var _metalSoy2 = _interopRequireDefault(_metalSoy);
 
-__webpack_require__(142);
-
 __webpack_require__(143);
+
+__webpack_require__(144);
 
 __webpack_require__(139);
 
@@ -28481,15 +30294,17 @@ __webpack_require__(140);
 
 __webpack_require__(141);
 
+__webpack_require__(142);
+
 __webpack_require__(131);
 
 __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _logicFunctionsSoy = __webpack_require__(220);
+var _pointfreeFunctionsSoy = __webpack_require__(227);
 
-var _logicFunctionsSoy2 = _interopRequireDefault(_logicFunctionsSoy);
+var _pointfreeFunctionsSoy2 = _interopRequireDefault(_pointfreeFunctionsSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28499,23 +30314,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var ozPJF = function (_Component) {
-  _inherits(ozPJF, _Component);
+var kSaqg = function (_Component) {
+  _inherits(kSaqg, _Component);
 
-  function ozPJF() {
-    _classCallCheck(this, ozPJF);
+  function kSaqg() {
+    _classCallCheck(this, kSaqg);
 
-    return _possibleConstructorReturn(this, (ozPJF.__proto__ || Object.getPrototypeOf(ozPJF)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (kSaqg.__proto__ || Object.getPrototypeOf(kSaqg)).apply(this, arguments));
   }
 
-  return ozPJF;
+  return kSaqg;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(ozPJF, _logicFunctionsSoy2.default);
+_metalSoy2.default.register(kSaqg, _pointfreeFunctionsSoy2.default);
 
-exports.default = ozPJF;
+exports.default = kSaqg;
 
 /***/ })
-],[235]);
+],[247]);

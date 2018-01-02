@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([5,13,14,15],[
+webpackJsonppageComponent([13,20,21,22],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1847,7 +1847,7 @@ function loadLocale(name) {
         try {
             oldLocale = globalLocale._abbr;
             var aliasedRequire = require;
-            __webpack_require__(147)("./" + name);
+            __webpack_require__(148)("./" + name);
             getSetGlobalLocale(oldLocale);
         } catch (e) {}
     }
@@ -4539,7 +4539,7 @@ return hooks;
 
 })));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(148)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(149)(module)))
 
 /***/ }),
 /* 1 */,
@@ -4558,27 +4558,27 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ElectricUpdates = exports.ElectricSearchBase = exports.ElectricSearchAutocomplete = exports.ElectricSearch = exports.ElectricReadingProgress = exports.ElectricNavigation = exports.ElectricCodeTabs = exports.ElectricCode = undefined;
 
-var _ElectricCode = __webpack_require__(149);
+var _ElectricCode = __webpack_require__(150);
 
 var _ElectricCode2 = _interopRequireDefault(_ElectricCode);
 
-var _ElectricCodeTabs = __webpack_require__(150);
+var _ElectricCodeTabs = __webpack_require__(151);
 
 var _ElectricCodeTabs2 = _interopRequireDefault(_ElectricCodeTabs);
 
-var _ElectricNavigation = __webpack_require__(151);
+var _ElectricNavigation = __webpack_require__(152);
 
 var _ElectricNavigation2 = _interopRequireDefault(_ElectricNavigation);
 
-var _ElectricReadingProgress = __webpack_require__(152);
+var _ElectricReadingProgress = __webpack_require__(153);
 
 var _ElectricReadingProgress2 = _interopRequireDefault(_ElectricReadingProgress);
 
-var _ElectricSearch = __webpack_require__(153);
+var _ElectricSearch = __webpack_require__(154);
 
 var _ElectricSearch2 = _interopRequireDefault(_ElectricSearch);
 
-var _ElectricSearchAutocomplete = __webpack_require__(154);
+var _ElectricSearchAutocomplete = __webpack_require__(155);
 
 var _ElectricSearchAutocomplete2 = _interopRequireDefault(_ElectricSearchAutocomplete);
 
@@ -4586,7 +4586,7 @@ var _ElectricSearchBase = __webpack_require__(10);
 
 var _ElectricSearchBase2 = _interopRequireDefault(_ElectricSearchBase);
 
-var _ElectricUpdates = __webpack_require__(155);
+var _ElectricUpdates = __webpack_require__(156);
 
 var _ElectricUpdates2 = _interopRequireDefault(_ElectricUpdates);
 
@@ -5548,7 +5548,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Position = exports.Geometry = exports.Align = undefined;
 
-var _Align = __webpack_require__(181);
+var _Align = __webpack_require__(182);
 
 var _Align2 = _interopRequireDefault(_Align);
 
@@ -17823,7 +17823,7 @@ var _metalToggler = __webpack_require__(130);
 
 var _metalToggler2 = _interopRequireDefault(_metalToggler);
 
-var _Sidebar = __webpack_require__(144);
+var _Sidebar = __webpack_require__(145);
 
 var _Sidebar2 = _interopRequireDefault(_Sidebar);
 
@@ -17889,7 +17889,7 @@ var _metalSoy = __webpack_require__(2);
 
 var _metalSoy2 = _interopRequireDefault(_metalSoy);
 
-var _SocialButtons = __webpack_require__(145);
+var _SocialButtons = __webpack_require__(146);
 
 var _SocialButtons2 = _interopRequireDefault(_SocialButtons);
 
@@ -17953,7 +17953,7 @@ var _moment2 = _interopRequireDefault(_moment);
 
 var _metalDom = __webpack_require__(4);
 
-var _TutorialTimer = __webpack_require__(146);
+var _TutorialTimer = __webpack_require__(147);
 
 var _TutorialTimer2 = _interopRequireDefault(_TutorialTimer);
 
@@ -18066,7 +18066,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _metal = __webpack_require__(3);
 
-var _metalUri = __webpack_require__(194);
+var _metalUri = __webpack_require__(195);
 
 var _metalUri2 = _interopRequireDefault(_metalUri);
 
@@ -18443,7 +18443,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.AutocompleteBase = exports.Autocomplete = undefined;
 
-var _Autocomplete = __webpack_require__(172);
+var _Autocomplete = __webpack_require__(173);
 
 var _Autocomplete2 = _interopRequireDefault(_Autocomplete);
 
@@ -19019,9 +19019,8 @@ function $guide(opt_data, opt_ignored, opt_ijData) {
           'class', 'container-hybrid');
         ie_open('h1', null, null,
             'class', 'title');
-          var dyn2 = opt_data.page.title;
-          if (typeof dyn2 == 'function') dyn2(); else if (dyn2 != null) itext(dyn2);
-          itext(' Guide');
+          var dyn0 = opt_data.page.title;
+          if (typeof dyn0 == 'function') dyn0(); else if (dyn0 != null) itext(dyn0);
         ie_close('h1');
       ie_close('div');
     ie_close('header');
@@ -19033,8 +19032,8 @@ function $guide(opt_data, opt_ignored, opt_ijData) {
             'class', 'docs-content col-xs-16 col-md-9');
           ie_open('div', null, null,
               'class', 'guide-content');
-            var dyn3 = opt_data.content;
-            if (typeof dyn3 == 'function') dyn3(); else if (dyn3 != null) itext(dyn3);
+            var dyn1 = opt_data.content;
+            if (typeof dyn1 == 'function') dyn1(); else if (dyn1 != null) itext(dyn1);
           ie_close('div');
           if (opt_data.site.githubRepo) {
             $contribute(opt_data, null, opt_ijData);
@@ -19174,8 +19173,8 @@ function $render(opt_data, opt_ignored, opt_ijData) {
     ie_open('main', null, null,
         'class', 'content');
       $templateAlias1({items: opt_data.site.topbar, style: 'topbar-light', logo: {text: opt_data.site.title, icon: opt_data.site.icon, href: opt_data.site.basePath}}, null, opt_ijData);
-      var dyn4 = opt_data.content;
-      if (typeof dyn4 == 'function') dyn4(); else if (dyn4 != null) itext(dyn4);
+      var dyn2 = opt_data.content;
+      if (typeof dyn2 == 'function') dyn2(); else if (dyn2 != null) itext(dyn2);
     ie_close('main');
   ie_close('div');
 }
@@ -19200,6 +19199,184 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(main, templates);
 
 /***/ }),
 /* 141 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "notopic", function() { return notopic; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_metal_soy__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_metal_soy___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_metal_soy__);
+/* jshint ignore:start */
+
+
+var templates;
+goog.loadModule(function(exports) {
+
+// This file was automatically generated from notopic.soy.
+// Please don't edit this file by hand.
+
+/**
+ * @fileoverview Templates in namespace notopic.
+ * @public
+ */
+
+goog.module('notopic.incrementaldom');
+
+/** @suppress {extraRequire} */
+var soy = goog.require('soy');
+/** @suppress {extraRequire} */
+var soydata = goog.require('soydata');
+/** @suppress {extraRequire} */
+goog.require('goog.i18n.bidi');
+/** @suppress {extraRequire} */
+goog.require('goog.asserts');
+/** @suppress {extraRequire} */
+goog.require('goog.string');
+var IncrementalDom = goog.require('incrementaldom');
+var ie_open = IncrementalDom.elementOpen;
+var ie_close = IncrementalDom.elementClose;
+var ie_void = IncrementalDom.elementVoid;
+var ie_open_start = IncrementalDom.elementOpenStart;
+var ie_open_end = IncrementalDom.elementOpenEnd;
+var itext = IncrementalDom.text;
+var iattr = IncrementalDom.attr;
+
+var $templateAlias2 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('Sidebar.incrementaldom', 'render');
+
+var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('Topbar.incrementaldom', 'render');
+
+
+/**
+ * @param {Object<string, *>=} opt_data
+ * @param {(null|undefined)=} opt_ignored
+ * @param {Object<string, *>=} opt_ijData
+ * @return {void}
+ * @suppress {checkTypes}
+ */
+function $render(opt_data, opt_ignored, opt_ijData) {
+  ie_open('div', null, null,
+      'class', 'main');
+    ie_open('main', null, null,
+        'class', 'guide');
+      ie_open('div', null, null,
+          'class', 'docs');
+        $templateAlias1({items: opt_data.site.topbar, style: 'topbar-light topbar-docs', logo: {text: opt_data.site.title, icon: opt_data.site.icon, href: opt_data.site.basePath}}, null, opt_ijData);
+        $templateAlias2({section: opt_data.site.index.children['docs'], site: opt_data.site}, null, opt_ijData);
+        $notopic(opt_data, null, opt_ijData);
+      ie_close('div');
+    ie_close('main');
+  ie_close('div');
+}
+exports.render = $render;
+if (goog.DEBUG) {
+  $render.soyTemplateName = 'notopic.render';
+}
+
+
+/**
+ * @param {Object<string, *>=} opt_data
+ * @param {(null|undefined)=} opt_ignored
+ * @param {Object<string, *>=} opt_ijData
+ * @return {void}
+ * @suppress {checkTypes}
+ */
+function $notopic(opt_data, opt_ignored, opt_ijData) {
+  ie_open('div', null, null,
+      'class', 'sidebar-offset');
+    ie_open('header', null, null,
+        'class', 'guide-header');
+      ie_open('div', null, null,
+          'class', 'container-hybrid');
+        ie_open('h1', null, null,
+            'class', 'title');
+          var dyn3 = opt_data.page.title;
+          if (typeof dyn3 == 'function') dyn3(); else if (dyn3 != null) itext(dyn3);
+        ie_close('h1');
+      ie_close('div');
+    ie_close('header');
+    ie_open('div', null, null,
+        'class', 'container-hybrid');
+      ie_open('div', null, null,
+          'class', 'docs-guide row');
+        ie_open('div', null, null,
+            'class', 'docs-content col-xs-16 col-md-12');
+          ie_open('div', null, null,
+              'class', 'guide-content');
+            var dyn4 = opt_data.content;
+            if (typeof dyn4 == 'function') dyn4(); else if (dyn4 != null) itext(dyn4);
+          ie_close('div');
+          if (opt_data.site.githubRepo) {
+            $contribute(opt_data, null, opt_ijData);
+          }
+        ie_close('div');
+      ie_close('div');
+    ie_close('div');
+  ie_close('div');
+}
+exports.notopic = $notopic;
+if (goog.DEBUG) {
+  $notopic.soyTemplateName = 'notopic.notopic';
+}
+
+
+/**
+ * @param {Object<string, *>=} opt_data
+ * @param {(null|undefined)=} opt_ignored
+ * @param {Object<string, *>=} opt_ijData
+ * @return {void}
+ * @suppress {checkTypes}
+ */
+function $contribute(opt_data, opt_ignored, opt_ijData) {
+  ie_open('div', null, null,
+      'class', 'contribute');
+    ie_open('div', null, null,
+        'class', 'contribute-img');
+      ie_void('span', null, null,
+          'class', 'icon-16-github');
+    ie_close('div');
+    ie_open('div', null, null,
+        'class', 'contribute-text');
+      ie_open('p');
+        itext('Contribute on Github! ');
+        ie_open('a', null, null,
+            'href', 'https://github.com/' + opt_data.site.githubRepo + '/tree/master/docs/' + opt_data.page.srcFilePath,
+            'class', 'contribute-link',
+            'target', '_blank');
+          itext('Edit this section');
+        ie_close('a');
+        itext('.');
+      ie_close('p');
+    ie_close('div');
+  ie_close('div');
+}
+exports.contribute = $contribute;
+if (goog.DEBUG) {
+  $contribute.soyTemplateName = 'notopic.contribute';
+}
+
+exports.render.params = ["page","site"];
+exports.render.types = {"page":"any","site":"any"};
+exports.notopic.params = ["page","site","content"];
+exports.notopic.types = {"page":"any","site":"any","content":"any"};
+exports.contribute.params = ["page","site"];
+exports.contribute.types = {"page":"any","site":"any"};
+templates = exports;
+return exports;
+
+});
+
+class notopic extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(notopic, templates);
+
+/* harmony default export */ __webpack_exports__["default"] = (templates);
+/* jshint ignore:end */
+
+
+/***/ }),
+/* 142 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -19326,12 +19503,12 @@ if (goog.DEBUG) {
 function $footerButtons(opt_data, opt_ignored, opt_ijData) {
   ie_open('div', null, null,
       'class', 'tutorial-page-nav');
-    var tutorialObject__soy100 = opt_data.site.index.children['tutorials'].children[opt_data.page.parentId];
-    if (opt_data.page.weight < tutorialObject__soy100.childIds.length) {
+    var tutorialObject__soy104 = opt_data.site.index.children['tutorials'].children[opt_data.page.parentId];
+    if (opt_data.page.weight < tutorialObject__soy104.childIds.length) {
       if (opt_data.page.buttonTitle) {
-        var nextPageUrl__soy105 = tutorialObject__soy100.children[tutorialObject__soy100.childIds[opt_data.page.weight]].url;
+        var nextPageUrl__soy109 = tutorialObject__soy104.children[tutorialObject__soy104.childIds[opt_data.page.weight]].url;
         ie_open('a', null, null,
-            'href', nextPageUrl__soy105,
+            'href', nextPageUrl__soy109,
             'class', 'btn btn-accent btn-sm');
           var dyn7 = opt_data.page.buttonTitle;
           if (typeof dyn7 == 'function') dyn7(); else if (dyn7 != null) itext(dyn7);
@@ -19375,7 +19552,7 @@ if (goog.DEBUG) {
  * @return {void}
  * @suppress {checkTypes}
  */
-function __deltemplate_s120_88c0813b(opt_data, opt_ignored, opt_ijData) {
+function __deltemplate_s124_88c0813b(opt_data, opt_ignored, opt_ijData) {
   ie_open('a', null, null,
       'class', 'sidebar-link' + (opt_data.page.active ? ' sidebar-link-selected' : ''),
       'href', opt_data.page.url,
@@ -19396,11 +19573,11 @@ function __deltemplate_s120_88c0813b(opt_data, opt_ignored, opt_ijData) {
         'class', 'after');
   ie_close('a');
 }
-exports.__deltemplate_s120_88c0813b = __deltemplate_s120_88c0813b;
+exports.__deltemplate_s124_88c0813b = __deltemplate_s124_88c0813b;
 if (goog.DEBUG) {
-  __deltemplate_s120_88c0813b.soyTemplateName = 'tutorial.__deltemplate_s120_88c0813b';
+  __deltemplate_s124_88c0813b.soyTemplateName = 'tutorial.__deltemplate_s124_88c0813b';
 }
-soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'tutorial', 0, __deltemplate_s120_88c0813b);
+soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'tutorial', 0, __deltemplate_s124_88c0813b);
 
 exports.render.params = ["content","elementClasses","page","site"];
 exports.render.types = {"content":"any","elementClasses":"any","page":"any","site":"any"};
@@ -19423,7 +19600,7 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(tutorial, templates);
 
 
 /***/ }),
-/* 142 */
+/* 143 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19434,31 +19611,31 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ElectricUpdates = exports.ElectricSearchAutocomplete = exports.ElectricSearch = exports.ElectricReadingProgress = exports.ElectricNavigation = exports.ElectricCode = exports.ElectricAPIAutocomplete = undefined;
 
-var _ElectricAPIAutocomplete = __webpack_require__(156);
+var _ElectricAPIAutocomplete = __webpack_require__(157);
 
 var _ElectricAPIAutocomplete2 = _interopRequireDefault(_ElectricAPIAutocomplete);
 
-var _ElectricCode = __webpack_require__(157);
+var _ElectricCode = __webpack_require__(158);
 
 var _ElectricCode2 = _interopRequireDefault(_ElectricCode);
 
-var _ElectricNavigation = __webpack_require__(159);
+var _ElectricNavigation = __webpack_require__(160);
 
 var _ElectricNavigation2 = _interopRequireDefault(_ElectricNavigation);
 
-var _ElectricReadingProgress = __webpack_require__(161);
+var _ElectricReadingProgress = __webpack_require__(162);
 
 var _ElectricReadingProgress2 = _interopRequireDefault(_ElectricReadingProgress);
 
-var _ElectricSearch = __webpack_require__(163);
+var _ElectricSearch = __webpack_require__(164);
 
 var _ElectricSearch2 = _interopRequireDefault(_ElectricSearch);
 
-var _ElectricSearchAutocomplete = __webpack_require__(165);
+var _ElectricSearchAutocomplete = __webpack_require__(166);
 
 var _ElectricSearchAutocomplete2 = _interopRequireDefault(_ElectricSearchAutocomplete);
 
-var _ElectricUpdates = __webpack_require__(167);
+var _ElectricUpdates = __webpack_require__(168);
 
 var _ElectricUpdates2 = _interopRequireDefault(_ElectricUpdates);
 
@@ -19474,7 +19651,7 @@ exports.ElectricUpdates = _ElectricUpdates2.default;
 exports.default = _ElectricNavigation2.default;
 
 /***/ }),
-/* 143 */
+/* 144 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19495,13 +19672,13 @@ var _metalSoy = __webpack_require__(2);
 
 var _metalSoy2 = _interopRequireDefault(_metalSoy);
 
-var _metalToggler = __webpack_require__(170);
+var _metalToggler = __webpack_require__(171);
 
 var _metalToggler2 = _interopRequireDefault(_metalToggler);
 
 var _metalState = __webpack_require__(5);
 
-var _TopbarSoy = __webpack_require__(169);
+var _TopbarSoy = __webpack_require__(170);
 
 var _TopbarSoy2 = _interopRequireDefault(_TopbarSoy);
 
@@ -19606,7 +19783,7 @@ exports.Topbar = Topbar;
 exports.default = Topbar;
 
 /***/ }),
-/* 144 */
+/* 145 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -19707,7 +19884,7 @@ if (goog.DEBUG) {
  * @return {void}
  * @suppress {checkTypes}
  */
-function __deltemplate_s147_d34389eb(opt_data, opt_ignored, opt_ijData) {
+function __deltemplate_s173_d34389eb(opt_data, opt_ignored, opt_ijData) {
   ie_open('a', null, null,
       'class', 'sidebar-link ' + (opt_data.page.active ? 'sidebar-link-selected' : ''),
       'href', opt_data.page.url);
@@ -19716,16 +19893,16 @@ function __deltemplate_s147_d34389eb(opt_data, opt_ignored, opt_ijData) {
           'class', 'sidebar-icon icon-16-' + opt_data.page.icon);
     }
     ie_open('span');
-      var dyn10 = opt_data.page.title;
-      if (typeof dyn10 == 'function') dyn10(); else if (dyn10 != null) itext(dyn10);
+      var dyn12 = opt_data.page.title;
+      if (typeof dyn12 == 'function') dyn12(); else if (dyn12 != null) itext(dyn12);
     ie_close('span');
   ie_close('a');
 }
-exports.__deltemplate_s147_d34389eb = __deltemplate_s147_d34389eb;
+exports.__deltemplate_s173_d34389eb = __deltemplate_s173_d34389eb;
 if (goog.DEBUG) {
-  __deltemplate_s147_d34389eb.soyTemplateName = 'Sidebar.__deltemplate_s147_d34389eb';
+  __deltemplate_s173_d34389eb.soyTemplateName = 'Sidebar.__deltemplate_s173_d34389eb';
 }
-soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'sidebar', 0, __deltemplate_s147_d34389eb);
+soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'sidebar', 0, __deltemplate_s173_d34389eb);
 
 exports.render.params = ["section","site"];
 exports.render.types = {"section":"any","site":"any"};
@@ -19742,7 +19919,7 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(Sidebar, templates);
 
 
 /***/ }),
-/* 145 */
+/* 146 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -19852,7 +20029,7 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(SocialButtons, templa
 
 
 /***/ }),
-/* 146 */
+/* 147 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -19914,8 +20091,8 @@ function $render(opt_data, opt_ignored, opt_ijData) {
       ie_void('span', null, null,
           'class', 'icon icon-16-clock');
       itext(' ');
-      var dyn11 = opt_data.time;
-      if (typeof dyn11 == 'function') dyn11(); else if (dyn11 != null) itext(dyn11);
+      var dyn13 = opt_data.time;
+      if (typeof dyn13 == 'function') dyn13(); else if (dyn13 != null) itext(dyn13);
     }
   ie_close('p');
 }
@@ -19939,7 +20116,7 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(TutorialTimer, templa
 
 
 /***/ }),
-/* 147 */
+/* 148 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
@@ -20196,10 +20373,10 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 147;
+webpackContext.id = 148;
 
 /***/ }),
-/* 148 */
+/* 149 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -20227,7 +20404,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 149 */
+/* 150 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20239,7 +20416,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _metalClipboard = __webpack_require__(174);
+var _metalClipboard = __webpack_require__(175);
 
 var _metalClipboard2 = _interopRequireDefault(_metalClipboard);
 
@@ -20247,7 +20424,7 @@ var _metalComponent = __webpack_require__(1);
 
 var _metalComponent2 = _interopRequireDefault(_metalComponent);
 
-var _metalTooltip = __webpack_require__(191);
+var _metalTooltip = __webpack_require__(192);
 
 var _metalTooltip2 = _interopRequireDefault(_metalTooltip);
 
@@ -20310,7 +20487,7 @@ var ElectricCode = function (_Component) {
 exports.default = ElectricCode;
 
 /***/ }),
-/* 150 */
+/* 151 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20322,7 +20499,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _metalTabs = __webpack_require__(189);
+var _metalTabs = __webpack_require__(190);
 
 var _metalTabs2 = _interopRequireDefault(_metalTabs);
 
@@ -20495,7 +20672,7 @@ window.ElectricCodeTabs = ElectricCodeTabs;
 exports.default = ElectricCodeTabs;
 
 /***/ }),
-/* 151 */
+/* 152 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20541,7 +20718,7 @@ var ElectricNavigation = function (_Component) {
 exports.default = ElectricNavigation;
 
 /***/ }),
-/* 152 */
+/* 153 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20553,7 +20730,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _metalAffix = __webpack_require__(171);
+var _metalAffix = __webpack_require__(172);
 
 var _metalAffix2 = _interopRequireDefault(_metalAffix);
 
@@ -20569,7 +20746,7 @@ var _metalDom = __webpack_require__(4);
 
 var _metalDom2 = _interopRequireDefault(_metalDom);
 
-var _metalReadingProgress = __webpack_require__(182);
+var _metalReadingProgress = __webpack_require__(183);
 
 var _metalReadingProgress2 = _interopRequireDefault(_metalReadingProgress);
 
@@ -20680,7 +20857,7 @@ ElectricReadingProgress.STATE = {
 exports.default = ElectricReadingProgress;
 
 /***/ }),
-/* 153 */
+/* 154 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20753,7 +20930,7 @@ ElectricSearch.STATE = {
 exports.default = ElectricSearch;
 
 /***/ }),
-/* 154 */
+/* 155 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20852,7 +21029,7 @@ var ElectricSearchAutocomplete = function (_ElectricSearchBase) {
 exports.default = ElectricSearchAutocomplete;
 
 /***/ }),
-/* 155 */
+/* 156 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20909,7 +21086,7 @@ ElectricUpdates.STATE = {
 exports.default = ElectricUpdates;
 
 /***/ }),
-/* 156 */
+/* 157 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21089,7 +21266,7 @@ ElectricAPIAutocomplete.STATE = {
 exports.default = ElectricAPIAutocomplete;
 
 /***/ }),
-/* 157 */
+/* 158 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21105,7 +21282,7 @@ var _metalSoy2 = _interopRequireDefault(_metalSoy);
 
 var _electricBaseComponents = __webpack_require__(6);
 
-var _ElectricCode = __webpack_require__(158);
+var _ElectricCode = __webpack_require__(159);
 
 var _ElectricCode2 = _interopRequireDefault(_ElectricCode);
 
@@ -21116,7 +21293,7 @@ _metalSoy2.default.register(_electricBaseComponents.ElectricCode, _ElectricCode2
 exports.default = _electricBaseComponents.ElectricCode;
 
 /***/ }),
-/* 158 */
+/* 159 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21226,7 +21403,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 159 */
+/* 160 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21250,7 +21427,7 @@ var _electricBaseComponents = __webpack_require__(6);
 
 var _electricBaseComponents2 = _interopRequireDefault(_electricBaseComponents);
 
-var _ElectricNavigation = __webpack_require__(160);
+var _ElectricNavigation = __webpack_require__(161);
 
 var _ElectricNavigation2 = _interopRequireDefault(_ElectricNavigation);
 
@@ -21304,7 +21481,7 @@ _metalSoy2.default.register(ElectricNavigation, _ElectricNavigation2.default);
 exports.default = ElectricNavigation;
 
 /***/ }),
-/* 160 */
+/* 161 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21464,7 +21641,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 161 */
+/* 162 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21480,7 +21657,7 @@ var _metalSoy2 = _interopRequireDefault(_metalSoy);
 
 var _electricBaseComponents = __webpack_require__(6);
 
-var _ElectricReadingProgress = __webpack_require__(162);
+var _ElectricReadingProgress = __webpack_require__(163);
 
 var _ElectricReadingProgress2 = _interopRequireDefault(_ElectricReadingProgress);
 
@@ -21491,7 +21668,7 @@ _metalSoy2.default.register(_electricBaseComponents.ElectricReadingProgress, _El
 exports.default = _electricBaseComponents.ElectricReadingProgress;
 
 /***/ }),
-/* 162 */
+/* 163 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21594,7 +21771,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 163 */
+/* 164 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21610,7 +21787,7 @@ var _metalSoy2 = _interopRequireDefault(_metalSoy);
 
 var _electricBaseComponents = __webpack_require__(6);
 
-var _ElectricSearch = __webpack_require__(164);
+var _ElectricSearch = __webpack_require__(165);
 
 var _ElectricSearch2 = _interopRequireDefault(_ElectricSearch);
 
@@ -21621,7 +21798,7 @@ _metalSoy2.default.register(_electricBaseComponents.ElectricSearch, _ElectricSea
 exports.default = _electricBaseComponents.ElectricSearch;
 
 /***/ }),
-/* 164 */
+/* 165 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21815,7 +21992,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 165 */
+/* 166 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21831,7 +22008,7 @@ var _metalSoy2 = _interopRequireDefault(_metalSoy);
 
 var _electricBaseComponents = __webpack_require__(6);
 
-var _ElectricSearchAutocomplete = __webpack_require__(166);
+var _ElectricSearchAutocomplete = __webpack_require__(167);
 
 var _ElectricSearchAutocomplete2 = _interopRequireDefault(_ElectricSearchAutocomplete);
 
@@ -21842,7 +22019,7 @@ _metalSoy2.default.register(_electricBaseComponents.ElectricSearchAutocomplete, 
 exports.default = _electricBaseComponents.ElectricSearchAutocomplete;
 
 /***/ }),
-/* 166 */
+/* 167 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21952,7 +22129,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 167 */
+/* 168 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21968,7 +22145,7 @@ var _metalSoy2 = _interopRequireDefault(_metalSoy);
 
 var _electricBaseComponents = __webpack_require__(6);
 
-var _ElectricUpdates = __webpack_require__(168);
+var _ElectricUpdates = __webpack_require__(169);
 
 var _ElectricUpdates2 = _interopRequireDefault(_ElectricUpdates);
 
@@ -21979,7 +22156,7 @@ _metalSoy2.default.register(_electricBaseComponents.ElectricUpdates, _ElectricUp
 exports.default = _electricBaseComponents.ElectricUpdates;
 
 /***/ }),
-/* 168 */
+/* 169 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22190,7 +22367,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 169 */
+/* 170 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22413,7 +22590,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 170 */
+/* 171 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22749,7 +22926,7 @@ exports.Toggler = Toggler;
 exports.default = Toggler;
 
 /***/ }),
-/* 171 */
+/* 172 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22952,7 +23129,7 @@ Affix.STATE = {
 exports.default = Affix;
 
 /***/ }),
-/* 172 */
+/* 173 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22970,7 +23147,7 @@ var _metal = __webpack_require__(3);
 
 var _metal2 = _interopRequireDefault(_metal);
 
-var _metalDebounce = __webpack_require__(175);
+var _metalDebounce = __webpack_require__(176);
 
 var _metalDebounce2 = _interopRequireDefault(_metalDebounce);
 
@@ -22990,9 +23167,9 @@ var _metalSoy = __webpack_require__(2);
 
 var _metalSoy2 = _interopRequireDefault(_metalSoy);
 
-__webpack_require__(177);
+__webpack_require__(178);
 
-var _AutocompleteSoy = __webpack_require__(173);
+var _AutocompleteSoy = __webpack_require__(174);
 
 var _AutocompleteSoy2 = _interopRequireDefault(_AutocompleteSoy);
 
@@ -23390,7 +23567,7 @@ Autocomplete.STATE = {
 exports.default = Autocomplete;
 
 /***/ }),
-/* 173 */
+/* 174 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23495,7 +23672,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 174 */
+/* 175 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23849,7 +24026,7 @@ ClipboardAction.STATE = {
 exports.default = Clipboard;
 
 /***/ }),
-/* 175 */
+/* 176 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23887,7 +24064,7 @@ exports.cancelDebounce = cancelDebounce;
 exports.debounce = debounce;
 
 /***/ }),
-/* 176 */
+/* 177 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24160,7 +24337,7 @@ KeyboardFocusManager.REF_REGEX = /.+-(\d+)$/;
 exports.default = KeyboardFocusManager;
 
 /***/ }),
-/* 177 */
+/* 178 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24186,9 +24363,9 @@ var _metalSoy = __webpack_require__(2);
 
 var _metalSoy2 = _interopRequireDefault(_metalSoy);
 
-__webpack_require__(179);
+__webpack_require__(180);
 
-var _ListSoy = __webpack_require__(178);
+var _ListSoy = __webpack_require__(179);
 
 var _ListSoy2 = _interopRequireDefault(_ListSoy);
 
@@ -24280,7 +24457,7 @@ List.STATE = {
 exports.default = List;
 
 /***/ }),
-/* 178 */
+/* 179 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24412,7 +24589,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 179 */
+/* 180 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24434,7 +24611,7 @@ var _metalSoy = __webpack_require__(2);
 
 var _metalSoy2 = _interopRequireDefault(_metalSoy);
 
-var _ListItemSoy = __webpack_require__(180);
+var _ListItemSoy = __webpack_require__(181);
 
 var _ListItemSoy2 = _interopRequireDefault(_ListItemSoy);
 
@@ -24521,7 +24698,7 @@ ListItem.STATE = {
 exports.default = ListItem;
 
 /***/ }),
-/* 180 */
+/* 181 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24682,7 +24859,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 181 */
+/* 182 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24939,7 +25116,7 @@ Align.Left = Align.LeftCenter;
 exports.default = Align;
 
 /***/ }),
-/* 182 */
+/* 183 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24951,7 +25128,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _metal = __webpack_require__(3);
 
-var _ReadingProgress = __webpack_require__(183);
+var _ReadingProgress = __webpack_require__(184);
 
 var _ReadingProgress2 = _interopRequireDefault(_ReadingProgress);
 
@@ -24959,7 +25136,7 @@ var _metalComponent = __webpack_require__(1);
 
 var _metalComponent2 = _interopRequireDefault(_metalComponent);
 
-var _ReadingProgressTracker = __webpack_require__(184);
+var _ReadingProgressTracker = __webpack_require__(185);
 
 var _ReadingProgressTracker2 = _interopRequireDefault(_ReadingProgressTracker);
 
@@ -25130,7 +25307,7 @@ ReadingProgress.STATE = {
 exports.default = ReadingProgress;
 
 /***/ }),
-/* 183 */
+/* 184 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25270,7 +25447,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 184 */
+/* 185 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25288,7 +25465,7 @@ var _metalDom = __webpack_require__(4);
 
 var _metalDom2 = _interopRequireDefault(_metalDom);
 
-var _metalScrollspy = __webpack_require__(185);
+var _metalScrollspy = __webpack_require__(186);
 
 var _metalScrollspy2 = _interopRequireDefault(_metalScrollspy);
 
@@ -25439,7 +25616,7 @@ ReadingProgressTracker.STATE = {
 exports.default = ReadingProgressTracker;
 
 /***/ }),
-/* 185 */
+/* 186 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25791,7 +25968,7 @@ Scrollspy.STATE = {
 exports.default = Scrollspy;
 
 /***/ }),
-/* 186 */
+/* 187 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26001,7 +26178,7 @@ var MultiMap = function (_Disposable) {
 exports.default = MultiMap;
 
 /***/ }),
-/* 187 */
+/* 188 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26260,7 +26437,7 @@ var assertChildHasNoParent = function assertChildHasNoParent(child) {
 exports.default = TreeNode;
 
 /***/ }),
-/* 188 */
+/* 189 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26271,11 +26448,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.TreeNode = exports.MultiMap = undefined;
 
-var _MultiMap = __webpack_require__(186);
+var _MultiMap = __webpack_require__(187);
 
 var _MultiMap2 = _interopRequireDefault(_MultiMap);
 
-var _TreeNode = __webpack_require__(187);
+var _TreeNode = __webpack_require__(188);
 
 var _TreeNode2 = _interopRequireDefault(_TreeNode);
 
@@ -26285,7 +26462,7 @@ exports.MultiMap = _MultiMap2.default;
 exports.TreeNode = _TreeNode2.default;
 
 /***/ }),
-/* 189 */
+/* 190 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26301,7 +26478,7 @@ var _metal = __webpack_require__(3);
 
 var _metal2 = _interopRequireDefault(_metal);
 
-var _TabsSoy = __webpack_require__(190);
+var _TabsSoy = __webpack_require__(191);
 
 var _TabsSoy2 = _interopRequireDefault(_TabsSoy);
 
@@ -26309,7 +26486,7 @@ var _metalComponent = __webpack_require__(1);
 
 var _metalComponent2 = _interopRequireDefault(_metalComponent);
 
-var _metalKeyboardFocus = __webpack_require__(176);
+var _metalKeyboardFocus = __webpack_require__(177);
 
 var _metalKeyboardFocus2 = _interopRequireDefault(_metalKeyboardFocus);
 
@@ -26641,7 +26818,7 @@ Tabs.STATE = {
 exports.default = Tabs;
 
 /***/ }),
-/* 190 */
+/* 191 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26776,7 +26953,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 191 */
+/* 192 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26799,11 +26976,11 @@ var _metalSoy = __webpack_require__(2);
 
 var _metalSoy2 = _interopRequireDefault(_metalSoy);
 
-var _TooltipBase2 = __webpack_require__(193);
+var _TooltipBase2 = __webpack_require__(194);
 
 var _TooltipBase3 = _interopRequireDefault(_TooltipBase2);
 
-var _TooltipSoy = __webpack_require__(192);
+var _TooltipSoy = __webpack_require__(193);
 
 var _TooltipSoy2 = _interopRequireDefault(_TooltipSoy);
 
@@ -26879,7 +27056,7 @@ exports.Tooltip = Tooltip;
 exports.TooltipBase = _TooltipBase3.default;
 
 /***/ }),
-/* 192 */
+/* 193 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27000,7 +27177,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 193 */
+/* 194 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27395,7 +27572,7 @@ TooltipBase.PositionClasses = ['top', 'right', 'bottom', 'left'];
 exports.default = TooltipBase;
 
 /***/ }),
-/* 194 */
+/* 195 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27411,11 +27588,11 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _metal = __webpack_require__(3);
 
-var _parse = __webpack_require__(195);
+var _parse = __webpack_require__(196);
 
 var _parse2 = _interopRequireDefault(_parse);
 
-var _metalStructs = __webpack_require__(188);
+var _metalStructs = __webpack_require__(189);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28036,7 +28213,7 @@ Uri.RANDOM_PARAM = 'zx';
 exports.default = Uri;
 
 /***/ }),
-/* 195 */
+/* 196 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28048,7 +28225,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _metal = __webpack_require__(3);
 
-var _parseFromAnchor = __webpack_require__(196);
+var _parseFromAnchor = __webpack_require__(197);
 
 var _parseFromAnchor2 = _interopRequireDefault(_parseFromAnchor);
 
@@ -28084,7 +28261,7 @@ function parse(opt_uri) {
 exports.default = parse;
 
 /***/ }),
-/* 196 */
+/* 197 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28152,7 +28329,6 @@ function parseFromAnchor(opt_uri) {
 exports.default = parseFromAnchor;
 
 /***/ }),
-/* 197 */,
 /* 198 */,
 /* 199 */,
 /* 200 */,
@@ -28183,7 +28359,7 @@ exports.default = parseFromAnchor;
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "lTFWS", function() { return lTFWS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "kkEnj", function() { return kkEnj; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28195,15 +28371,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var templates;
 goog.loadModule(function(exports) {
 
-// This file was automatically generated from predicate-functions.soy.
+// This file was automatically generated from combinators.soy.
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace lTFWS.
+ * @fileoverview Templates in namespace kkEnj.
  * @public
  */
 
-goog.module('lTFWS.incrementaldom');
+goog.module('kkEnj.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28224,7 +28400,9 @@ var ie_open_end = IncrementalDom.elementOpenEnd;
 var itext = IncrementalDom.text;
 var iattr = IncrementalDom.attr;
 
-var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('guide.incrementaldom', 'render');
+var $templateAlias2 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('ElectricCode.incrementaldom', 'render');
+
+var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('notopic.incrementaldom', 'render');
 
 
 /**
@@ -28235,457 +28413,141 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var param689 = function() {
-    ie_open('h3');
-      itext('Predicate Functions');
-    ie_close('h3');
+  var param891 = function() {
+    ie_open('h4');
+      itext('applyTo');
+    ie_close('h4');
     ie_open('p');
-      itext('All functions in this group have a signature of ');
       ie_open('code');
-        itext('* -> Boolean');
+        itext('crocks/combinators/applyTo');
       ie_close('code');
-      itext(' and are used with the many predicate based functions that ship with ');
-      ie_open('code');
-        itext('crocks');
-      ie_close('code');
-      itext(', like');
-      ie_open('a', null, null,
-          'href', '#safe');
-        ie_open('code');
-          itext('safe');
-        ie_close('code');
-      ie_close('a');
-      itext(', ');
-      ie_open('a', null, null,
-          'href', '#ifelse');
-        ie_open('code');
-          itext('ifElse');
-        ie_close('code');
-      ie_close('a');
-      itext(' and ');
-      ie_open('code');
-        itext('filter');
-      ie_close('code');
-      itext(' to name a few. They also fit naturally with the ');
-      ie_open('code');
-        itext('Pred');
-      ie_close('code');
-      itext(' ADT. All predicate functions can be referenced from');
-      ie_open('code');
-        itext('crocks/predicates');
-      ie_close('code');
-      itext(' Below is a list of all the current predicates that are included with a description of their truth:');
     ie_close('p');
-    ie_open('ul');
-      ie_open('li');
-        ie_open('code');
-          itext('hasProp :: (String | Number) -> a -> Boolean');
-        ie_close('code');
-        itext(': An Array or Object that contains the provided index or key');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isAlt :: a -> Boolean');
-        ie_close('code');
-        itext(': an ADT that provides ');
-        ie_open('code');
-          itext('map');
-        ie_close('code');
-        itext(' and ');
-        ie_open('code');
-          itext('alt');
-        ie_close('code');
-        itext(' functions');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isAlternative :: a -> Boolean');
-        ie_close('code');
-        itext(': an ADT that provides ');
-        ie_open('code');
-          itext('alt');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('zero');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('map');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('ap');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('chain');
-        ie_close('code');
-        itext(' and ');
-        ie_open('code');
-          itext('of');
-        ie_close('code');
-        itext(' functions');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isApplicative :: a -> Boolean');
-        ie_close('code');
-        itext(': an ADT that provides ');
-        ie_open('code');
-          itext('map');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('ap');
-        ie_close('code');
-        itext(' and ');
-        ie_open('code');
-          itext('of');
-        ie_close('code');
-        itext(' functions');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isApply :: a -> Boolean');
-        ie_close('code');
-        itext(': an ADT that provides ');
-        ie_open('code');
-          itext('map');
-        ie_close('code');
-        itext(' and ');
-        ie_open('code');
-          itext('ap');
-        ie_close('code');
-        itext(' functions');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isArray :: a -> Boolean');
-        ie_close('code');
-        itext(': Array');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isBifunctor :: a -> Boolean');
-        ie_close('code');
-        itext(': an ADT that provides ');
-        ie_open('code');
-          itext('map');
-        ie_close('code');
-        itext(' and ');
-        ie_open('code');
-          itext('bimap');
-        ie_close('code');
-        itext(' functions');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isBoolean :: a -> Boolean');
-        ie_close('code');
-        itext(': Boolean');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isCategory :: a -> Boolean');
-        ie_close('code');
-        itext(': an ADT that provides ');
-        ie_open('code');
-          itext('id');
-        ie_close('code');
-        itext(' and ');
+    $templateAlias2({code: 'applyTo :: (a -> b) -> a -> b', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('Seems really silly, but is quite useful for a lot of things. It takes a function and a value and then returns the result of that function with the argument applied.');
+    ie_close('p');
+    ie_open('h4');
+      itext('composeB');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/combinators/composeB');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'composeB :: (b -> c) -> (a -> b) -> a -> c', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('Provides a means to describe a composition between two functions. it takes two functions and a value. Given ');
+      ie_open('code');
+        itext('composeB(f, g)');
+      ie_close('code');
+      itext(', which is read ');
+      ie_open('code');
+        itext('f');
+      ie_close('code');
+      itext(' after ');
+      ie_open('code');
+        itext('g');
+      ie_close('code');
+      itext(', it will return a function that will take value ');
+      ie_open('code');
+        itext('a');
+      ie_close('code');
+      itext(' and apply it to ');
+      ie_open('code');
+        itext('g');
+      ie_close('code');
+      itext(', passing the result as an argument to ');
+      ie_open('code');
+        itext('f');
+      ie_close('code');
+      itext(', and will finally return the result of ');
+      ie_open('code');
+        itext('f');
+      ie_close('code');
+      itext('. (This allows only two functions, if you want to avoid things like:');
+      ie_open('code');
+        itext('composeB(composeB(f, g), composeB(h, i))');
+      ie_close('code');
+      itext(' then check out');
+      ie_open('a', null, null,
+          'href', 'helpers.html#compose');
         ie_open('code');
           itext('compose');
         ie_close('code');
-        itext(' functions');
-      ie_close('li');
-      ie_open('li');
+      ie_close('a');
+      itext('.)');
+    ie_close('p');
+    ie_open('h4');
+      itext('constant');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/combinators/constant');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'constant :: a -> _ -> a', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('This is a very handy dandy function, used a lot. Pass it any value and it will give you back a function that will return that same value no matter what you pass it.');
+    ie_close('p');
+    ie_open('h4');
+      itext('flip');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/combinators/flip');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'flip :: (a -> b -> c) -> b -> a -> c', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('This little function just takes a function and returns a function that takes the first two parameters in reverse. One can compose flip calls down the line to flip all, or some of the other parameters if there are more than two. Mix and match to your heart\'s desire.');
+    ie_close('p');
+    ie_open('h4');
+      itext('identity');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/combinators/identity');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'identity ::  a -> a', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('This function and ');
+      ie_open('a', null, null,
+          'href', '#constant');
         ie_open('code');
-          itext('isChain :: a -> Boolean');
+          itext('constant');
         ie_close('code');
-        itext(': an ADT that provides ');
-        ie_open('code');
-          itext('map');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('ap');
-        ie_close('code');
-        itext(' and ');
-        ie_open('code');
-          itext('chain');
-        ie_close('code');
-        itext(' functions');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isContravariant : a -> Boolean');
-        ie_close('code');
-        itext(': an ADT that provides ');
-        ie_open('code');
-          itext('contramap');
-        ie_close('code');
-        itext(' function');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isDefined :: a -> Boolean');
-        ie_close('code');
-        itext(': Every value that is not ');
-        ie_open('code');
-          itext('undefined');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('null');
-        ie_close('code');
-        itext(' included');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isEmpty :: a -> Boolean');
-        ie_close('code');
-        itext(': Empty Object, Array or String');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isExtend :: a -> Boolean');
-        ie_close('code');
-        itext(': an ADT that provides ');
-        ie_open('code');
-          itext('map');
-        ie_close('code');
-        itext(' and ');
-        ie_open('code');
-          itext('extend');
-        ie_close('code');
-        itext(' functions');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isFoldable :: a -> Boolean');
-        ie_close('code');
-        itext(': Array, List or any structure with a ');
-        ie_open('code');
-          itext('reduce');
-        ie_close('code');
-        itext(' function');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isFunction :: a -> Boolean');
-        ie_close('code');
-        itext(': Function');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isFunctor :: a -> Boolean');
-        ie_close('code');
-        itext(': an ADT that provides a ');
-        ie_open('code');
-          itext('map');
-        ie_close('code');
-        itext(' function');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isInteger :: a -> Boolean');
-        ie_close('code');
-        itext(': Integer');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isMonad :: a -> Boolean');
-        ie_close('code');
-        itext(': an ADT that provides ');
-        ie_open('code');
-          itext('map');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('ap');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('chain');
-        ie_close('code');
-        itext(' and ');
-        ie_open('code');
-          itext('of');
-        ie_close('code');
-        itext(' functions');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isMonoid :: a -> Boolean');
-        ie_close('code');
-        itext(': an ADT that provides ');
-        ie_open('code');
-          itext('concat');
-        ie_close('code');
-        itext(' and ');
-        ie_open('code');
-          itext('empty');
-        ie_close('code');
-        itext(' functions');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isNil :: a -> Boolean');
-        ie_close('code');
-        itext(': ');
-        ie_open('code');
-          itext('undefined');
-        ie_close('code');
-        itext(' or ');
-        ie_open('code');
-          itext('null');
-        ie_close('code');
-        itext(' or ');
-        ie_open('code');
-          itext('NaN');
-        ie_close('code');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isNumber :: a -> Boolean');
-        ie_close('code');
-        itext(': ');
-        ie_open('code');
-          itext('Number');
-        ie_close('code');
-        itext(' that is not a ');
-        ie_open('code');
-          itext('NaN');
-        ie_close('code');
-        itext(' value, ');
-        ie_open('code');
-          itext('Infinity');
-        ie_close('code');
-        itext(' included');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isObject :: a -> Boolean');
-        ie_close('code');
-        itext(': Plain Old Javascript Object (POJO)');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isPlus :: a -> Boolean');
-        ie_close('code');
-        itext(': an ADT that provides ');
-        ie_open('code');
-          itext('map');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('alt');
-        ie_close('code');
-        itext(' and ');
-        ie_open('code');
-          itext('zero');
-        ie_close('code');
-        itext(' functions');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isProfunctor : a -> Boolean');
-        ie_close('code');
-        itext(': an ADT that provides ');
-        ie_open('code');
-          itext('map');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('contramap');
-        ie_close('code');
-        itext(' and ');
-        ie_open('code');
-          itext('promap');
-        ie_close('code');
-        itext(' functions');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isPromise :: a -> Boolean');
-        ie_close('code');
-        itext(': an object implementing ');
-        ie_open('code');
-          itext('then');
-        ie_close('code');
-        itext(' and ');
-        ie_open('code');
-          itext('catch');
-        ie_close('code');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isSame :: a -> b -> Boolean');
-        ie_close('code');
-        itext(': same value or reference, use ');
-        ie_open('code');
-          itext('equals');
-        ie_close('code');
-        itext(' for value equality');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isSameType :: a -> b -> Boolean');
-        ie_close('code');
-        itext(': Constructor matches a values type, or two values types match');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isSemigroup :: a -> Boolean');
-        ie_close('code');
-        itext(': an ADT that provides a ');
-        ie_open('code');
-          itext('concat');
-        ie_close('code');
-        itext(' function');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isSemigroupoid :: a -> Boolean');
-        ie_close('code');
-        itext(': an ADT that provides a ');
-        ie_open('code');
-          itext('compose');
-        ie_close('code');
-        itext(' function');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isSetoid :: a -> Boolean');
-        ie_close('code');
-        itext(': an ADT that provides an ');
-        ie_open('code');
-          itext('equals');
-        ie_close('code');
-        itext(' function');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isString :: a -> Boolean');
-        ie_close('code');
-        itext(': String');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isTraversable :: a -> Boolean');
-        ie_close('code');
-        itext(': an ADT that provides ');
-        ie_open('code');
-          itext('map');
-        ie_close('code');
-        itext(' and ');
-        ie_open('code');
-          itext('traverse');
-        ie_close('code');
-        itext(' functions');
-      ie_close('li');
-    ie_close('ul');
+      ie_close('a');
+      itext(' are the workhorses of writing code with this library. It quite simply is just a function that when you pass it something, it returns that thing right back to you. So simple, I will leave it as an exercise to reason about why this is so powerful and important.');
+    ie_close('p');
+    ie_open('h4');
+      itext('reverseApply');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/combinators/reverseApply');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'reverseApply :: a -> (a -> b) -> b', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('Ever run into a situation where you have a value but do not have a function to apply it to? Well this little bird, named Thrush, is there to help out. Just give it a value and it will give you back a function ready to take a function. Once that function is provided, it will return the result of applying your value to that function.');
+    ie_close('p');
+    ie_open('h4');
+      itext('substitution');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/combinators/substitution');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'substitution :: (a -> b -> c) -> (a -> b) -> a -> c', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('While it a complicated little bugger, it can come in very handy from time to time. In it\'s first two arguments it takes functions. The first must be binary and the second unary. That will return you a function that is ready to take some value. Once supplied the fun starts, it will pass the ');
+      ie_open('code');
+        itext('a');
+      ie_close('code');
+      itext(' to the first argument of both functions, and the result of the second function to the second parameter of the first function. Finally after all that juggling, it will return the result of that first function. When used with partial application on that first parameter, a whole new world of combinatory madness is presented!');
+    ie_close('p');
     ie_open('input', null, null,
         'type', 'hidden',
         'value', opt_data.page.title);
@@ -28695,11 +28557,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'value', opt_data.site.title);
     ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({content: param689}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param891}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'lTFWS.render';
+  $render.soyTemplateName = 'kkEnj.render';
 }
 
 exports.render.params = ["page","site"];
@@ -28709,8 +28571,8 @@ return exports;
 
 });
 
-class lTFWS extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(lTFWS, templates);
+class kkEnj extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(kkEnj, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
@@ -28726,7 +28588,22 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(lTFWS, templates);
 /* 230 */,
 /* 231 */,
 /* 232 */,
-/* 233 */
+/* 233 */,
+/* 234 */,
+/* 235 */,
+/* 236 */,
+/* 237 */,
+/* 238 */,
+/* 239 */,
+/* 240 */,
+/* 241 */,
+/* 242 */,
+/* 243 */,
+/* 244 */,
+/* 245 */,
+/* 246 */,
+/* 247 */,
+/* 248 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28744,9 +28621,9 @@ var _metalSoy = __webpack_require__(2);
 
 var _metalSoy2 = _interopRequireDefault(_metalSoy);
 
-__webpack_require__(142);
-
 __webpack_require__(143);
+
+__webpack_require__(144);
 
 __webpack_require__(139);
 
@@ -28754,15 +28631,17 @@ __webpack_require__(140);
 
 __webpack_require__(141);
 
+__webpack_require__(142);
+
 __webpack_require__(131);
 
 __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _predicateFunctionsSoy = __webpack_require__(223);
+var _combinatorsSoy = __webpack_require__(223);
 
-var _predicateFunctionsSoy2 = _interopRequireDefault(_predicateFunctionsSoy);
+var _combinatorsSoy2 = _interopRequireDefault(_combinatorsSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28772,23 +28651,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var lTFWS = function (_Component) {
-  _inherits(lTFWS, _Component);
+var kkEnj = function (_Component) {
+  _inherits(kkEnj, _Component);
 
-  function lTFWS() {
-    _classCallCheck(this, lTFWS);
+  function kkEnj() {
+    _classCallCheck(this, kkEnj);
 
-    return _possibleConstructorReturn(this, (lTFWS.__proto__ || Object.getPrototypeOf(lTFWS)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (kkEnj.__proto__ || Object.getPrototypeOf(kkEnj)).apply(this, arguments));
   }
 
-  return lTFWS;
+  return kkEnj;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(lTFWS, _predicateFunctionsSoy2.default);
+_metalSoy2.default.register(kkEnj, _combinatorsSoy2.default);
 
-exports.default = lTFWS;
+exports.default = kkEnj;
 
 /***/ })
-],[233]);
+],[248]);

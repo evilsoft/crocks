@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([9,13,14,15],[
+webpackJsonppageComponent([17,20,21,22],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1847,7 +1847,7 @@ function loadLocale(name) {
         try {
             oldLocale = globalLocale._abbr;
             var aliasedRequire = require;
-            __webpack_require__(147)("./" + name);
+            __webpack_require__(148)("./" + name);
             getSetGlobalLocale(oldLocale);
         } catch (e) {}
     }
@@ -4539,7 +4539,7 @@ return hooks;
 
 })));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(148)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(149)(module)))
 
 /***/ }),
 /* 1 */,
@@ -4558,27 +4558,27 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ElectricUpdates = exports.ElectricSearchBase = exports.ElectricSearchAutocomplete = exports.ElectricSearch = exports.ElectricReadingProgress = exports.ElectricNavigation = exports.ElectricCodeTabs = exports.ElectricCode = undefined;
 
-var _ElectricCode = __webpack_require__(149);
+var _ElectricCode = __webpack_require__(150);
 
 var _ElectricCode2 = _interopRequireDefault(_ElectricCode);
 
-var _ElectricCodeTabs = __webpack_require__(150);
+var _ElectricCodeTabs = __webpack_require__(151);
 
 var _ElectricCodeTabs2 = _interopRequireDefault(_ElectricCodeTabs);
 
-var _ElectricNavigation = __webpack_require__(151);
+var _ElectricNavigation = __webpack_require__(152);
 
 var _ElectricNavigation2 = _interopRequireDefault(_ElectricNavigation);
 
-var _ElectricReadingProgress = __webpack_require__(152);
+var _ElectricReadingProgress = __webpack_require__(153);
 
 var _ElectricReadingProgress2 = _interopRequireDefault(_ElectricReadingProgress);
 
-var _ElectricSearch = __webpack_require__(153);
+var _ElectricSearch = __webpack_require__(154);
 
 var _ElectricSearch2 = _interopRequireDefault(_ElectricSearch);
 
-var _ElectricSearchAutocomplete = __webpack_require__(154);
+var _ElectricSearchAutocomplete = __webpack_require__(155);
 
 var _ElectricSearchAutocomplete2 = _interopRequireDefault(_ElectricSearchAutocomplete);
 
@@ -4586,7 +4586,7 @@ var _ElectricSearchBase = __webpack_require__(10);
 
 var _ElectricSearchBase2 = _interopRequireDefault(_ElectricSearchBase);
 
-var _ElectricUpdates = __webpack_require__(155);
+var _ElectricUpdates = __webpack_require__(156);
 
 var _ElectricUpdates2 = _interopRequireDefault(_ElectricUpdates);
 
@@ -5548,7 +5548,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Position = exports.Geometry = exports.Align = undefined;
 
-var _Align = __webpack_require__(181);
+var _Align = __webpack_require__(182);
 
 var _Align2 = _interopRequireDefault(_Align);
 
@@ -17823,7 +17823,7 @@ var _metalToggler = __webpack_require__(130);
 
 var _metalToggler2 = _interopRequireDefault(_metalToggler);
 
-var _Sidebar = __webpack_require__(144);
+var _Sidebar = __webpack_require__(145);
 
 var _Sidebar2 = _interopRequireDefault(_Sidebar);
 
@@ -17889,7 +17889,7 @@ var _metalSoy = __webpack_require__(2);
 
 var _metalSoy2 = _interopRequireDefault(_metalSoy);
 
-var _SocialButtons = __webpack_require__(145);
+var _SocialButtons = __webpack_require__(146);
 
 var _SocialButtons2 = _interopRequireDefault(_SocialButtons);
 
@@ -17953,7 +17953,7 @@ var _moment2 = _interopRequireDefault(_moment);
 
 var _metalDom = __webpack_require__(4);
 
-var _TutorialTimer = __webpack_require__(146);
+var _TutorialTimer = __webpack_require__(147);
 
 var _TutorialTimer2 = _interopRequireDefault(_TutorialTimer);
 
@@ -18066,7 +18066,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _metal = __webpack_require__(3);
 
-var _metalUri = __webpack_require__(194);
+var _metalUri = __webpack_require__(195);
 
 var _metalUri2 = _interopRequireDefault(_metalUri);
 
@@ -18443,7 +18443,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.AutocompleteBase = exports.Autocomplete = undefined;
 
-var _Autocomplete = __webpack_require__(172);
+var _Autocomplete = __webpack_require__(173);
 
 var _Autocomplete2 = _interopRequireDefault(_Autocomplete);
 
@@ -19019,9 +19019,8 @@ function $guide(opt_data, opt_ignored, opt_ijData) {
           'class', 'container-hybrid');
         ie_open('h1', null, null,
             'class', 'title');
-          var dyn2 = opt_data.page.title;
-          if (typeof dyn2 == 'function') dyn2(); else if (dyn2 != null) itext(dyn2);
-          itext(' Guide');
+          var dyn0 = opt_data.page.title;
+          if (typeof dyn0 == 'function') dyn0(); else if (dyn0 != null) itext(dyn0);
         ie_close('h1');
       ie_close('div');
     ie_close('header');
@@ -19033,8 +19032,8 @@ function $guide(opt_data, opt_ignored, opt_ijData) {
             'class', 'docs-content col-xs-16 col-md-9');
           ie_open('div', null, null,
               'class', 'guide-content');
-            var dyn3 = opt_data.content;
-            if (typeof dyn3 == 'function') dyn3(); else if (dyn3 != null) itext(dyn3);
+            var dyn1 = opt_data.content;
+            if (typeof dyn1 == 'function') dyn1(); else if (dyn1 != null) itext(dyn1);
           ie_close('div');
           if (opt_data.site.githubRepo) {
             $contribute(opt_data, null, opt_ijData);
@@ -19174,8 +19173,8 @@ function $render(opt_data, opt_ignored, opt_ijData) {
     ie_open('main', null, null,
         'class', 'content');
       $templateAlias1({items: opt_data.site.topbar, style: 'topbar-light', logo: {text: opt_data.site.title, icon: opt_data.site.icon, href: opt_data.site.basePath}}, null, opt_ijData);
-      var dyn4 = opt_data.content;
-      if (typeof dyn4 == 'function') dyn4(); else if (dyn4 != null) itext(dyn4);
+      var dyn2 = opt_data.content;
+      if (typeof dyn2 == 'function') dyn2(); else if (dyn2 != null) itext(dyn2);
     ie_close('main');
   ie_close('div');
 }
@@ -19200,6 +19199,184 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(main, templates);
 
 /***/ }),
 /* 141 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "notopic", function() { return notopic; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_metal_soy__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_metal_soy___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_metal_soy__);
+/* jshint ignore:start */
+
+
+var templates;
+goog.loadModule(function(exports) {
+
+// This file was automatically generated from notopic.soy.
+// Please don't edit this file by hand.
+
+/**
+ * @fileoverview Templates in namespace notopic.
+ * @public
+ */
+
+goog.module('notopic.incrementaldom');
+
+/** @suppress {extraRequire} */
+var soy = goog.require('soy');
+/** @suppress {extraRequire} */
+var soydata = goog.require('soydata');
+/** @suppress {extraRequire} */
+goog.require('goog.i18n.bidi');
+/** @suppress {extraRequire} */
+goog.require('goog.asserts');
+/** @suppress {extraRequire} */
+goog.require('goog.string');
+var IncrementalDom = goog.require('incrementaldom');
+var ie_open = IncrementalDom.elementOpen;
+var ie_close = IncrementalDom.elementClose;
+var ie_void = IncrementalDom.elementVoid;
+var ie_open_start = IncrementalDom.elementOpenStart;
+var ie_open_end = IncrementalDom.elementOpenEnd;
+var itext = IncrementalDom.text;
+var iattr = IncrementalDom.attr;
+
+var $templateAlias2 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('Sidebar.incrementaldom', 'render');
+
+var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('Topbar.incrementaldom', 'render');
+
+
+/**
+ * @param {Object<string, *>=} opt_data
+ * @param {(null|undefined)=} opt_ignored
+ * @param {Object<string, *>=} opt_ijData
+ * @return {void}
+ * @suppress {checkTypes}
+ */
+function $render(opt_data, opt_ignored, opt_ijData) {
+  ie_open('div', null, null,
+      'class', 'main');
+    ie_open('main', null, null,
+        'class', 'guide');
+      ie_open('div', null, null,
+          'class', 'docs');
+        $templateAlias1({items: opt_data.site.topbar, style: 'topbar-light topbar-docs', logo: {text: opt_data.site.title, icon: opt_data.site.icon, href: opt_data.site.basePath}}, null, opt_ijData);
+        $templateAlias2({section: opt_data.site.index.children['docs'], site: opt_data.site}, null, opt_ijData);
+        $notopic(opt_data, null, opt_ijData);
+      ie_close('div');
+    ie_close('main');
+  ie_close('div');
+}
+exports.render = $render;
+if (goog.DEBUG) {
+  $render.soyTemplateName = 'notopic.render';
+}
+
+
+/**
+ * @param {Object<string, *>=} opt_data
+ * @param {(null|undefined)=} opt_ignored
+ * @param {Object<string, *>=} opt_ijData
+ * @return {void}
+ * @suppress {checkTypes}
+ */
+function $notopic(opt_data, opt_ignored, opt_ijData) {
+  ie_open('div', null, null,
+      'class', 'sidebar-offset');
+    ie_open('header', null, null,
+        'class', 'guide-header');
+      ie_open('div', null, null,
+          'class', 'container-hybrid');
+        ie_open('h1', null, null,
+            'class', 'title');
+          var dyn3 = opt_data.page.title;
+          if (typeof dyn3 == 'function') dyn3(); else if (dyn3 != null) itext(dyn3);
+        ie_close('h1');
+      ie_close('div');
+    ie_close('header');
+    ie_open('div', null, null,
+        'class', 'container-hybrid');
+      ie_open('div', null, null,
+          'class', 'docs-guide row');
+        ie_open('div', null, null,
+            'class', 'docs-content col-xs-16 col-md-12');
+          ie_open('div', null, null,
+              'class', 'guide-content');
+            var dyn4 = opt_data.content;
+            if (typeof dyn4 == 'function') dyn4(); else if (dyn4 != null) itext(dyn4);
+          ie_close('div');
+          if (opt_data.site.githubRepo) {
+            $contribute(opt_data, null, opt_ijData);
+          }
+        ie_close('div');
+      ie_close('div');
+    ie_close('div');
+  ie_close('div');
+}
+exports.notopic = $notopic;
+if (goog.DEBUG) {
+  $notopic.soyTemplateName = 'notopic.notopic';
+}
+
+
+/**
+ * @param {Object<string, *>=} opt_data
+ * @param {(null|undefined)=} opt_ignored
+ * @param {Object<string, *>=} opt_ijData
+ * @return {void}
+ * @suppress {checkTypes}
+ */
+function $contribute(opt_data, opt_ignored, opt_ijData) {
+  ie_open('div', null, null,
+      'class', 'contribute');
+    ie_open('div', null, null,
+        'class', 'contribute-img');
+      ie_void('span', null, null,
+          'class', 'icon-16-github');
+    ie_close('div');
+    ie_open('div', null, null,
+        'class', 'contribute-text');
+      ie_open('p');
+        itext('Contribute on Github! ');
+        ie_open('a', null, null,
+            'href', 'https://github.com/' + opt_data.site.githubRepo + '/tree/master/docs/' + opt_data.page.srcFilePath,
+            'class', 'contribute-link',
+            'target', '_blank');
+          itext('Edit this section');
+        ie_close('a');
+        itext('.');
+      ie_close('p');
+    ie_close('div');
+  ie_close('div');
+}
+exports.contribute = $contribute;
+if (goog.DEBUG) {
+  $contribute.soyTemplateName = 'notopic.contribute';
+}
+
+exports.render.params = ["page","site"];
+exports.render.types = {"page":"any","site":"any"};
+exports.notopic.params = ["page","site","content"];
+exports.notopic.types = {"page":"any","site":"any","content":"any"};
+exports.contribute.params = ["page","site"];
+exports.contribute.types = {"page":"any","site":"any"};
+templates = exports;
+return exports;
+
+});
+
+class notopic extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(notopic, templates);
+
+/* harmony default export */ __webpack_exports__["default"] = (templates);
+/* jshint ignore:end */
+
+
+/***/ }),
+/* 142 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -19326,12 +19503,12 @@ if (goog.DEBUG) {
 function $footerButtons(opt_data, opt_ignored, opt_ijData) {
   ie_open('div', null, null,
       'class', 'tutorial-page-nav');
-    var tutorialObject__soy100 = opt_data.site.index.children['tutorials'].children[opt_data.page.parentId];
-    if (opt_data.page.weight < tutorialObject__soy100.childIds.length) {
+    var tutorialObject__soy104 = opt_data.site.index.children['tutorials'].children[opt_data.page.parentId];
+    if (opt_data.page.weight < tutorialObject__soy104.childIds.length) {
       if (opt_data.page.buttonTitle) {
-        var nextPageUrl__soy105 = tutorialObject__soy100.children[tutorialObject__soy100.childIds[opt_data.page.weight]].url;
+        var nextPageUrl__soy109 = tutorialObject__soy104.children[tutorialObject__soy104.childIds[opt_data.page.weight]].url;
         ie_open('a', null, null,
-            'href', nextPageUrl__soy105,
+            'href', nextPageUrl__soy109,
             'class', 'btn btn-accent btn-sm');
           var dyn7 = opt_data.page.buttonTitle;
           if (typeof dyn7 == 'function') dyn7(); else if (dyn7 != null) itext(dyn7);
@@ -19375,7 +19552,7 @@ if (goog.DEBUG) {
  * @return {void}
  * @suppress {checkTypes}
  */
-function __deltemplate_s120_88c0813b(opt_data, opt_ignored, opt_ijData) {
+function __deltemplate_s124_88c0813b(opt_data, opt_ignored, opt_ijData) {
   ie_open('a', null, null,
       'class', 'sidebar-link' + (opt_data.page.active ? ' sidebar-link-selected' : ''),
       'href', opt_data.page.url,
@@ -19396,11 +19573,11 @@ function __deltemplate_s120_88c0813b(opt_data, opt_ignored, opt_ijData) {
         'class', 'after');
   ie_close('a');
 }
-exports.__deltemplate_s120_88c0813b = __deltemplate_s120_88c0813b;
+exports.__deltemplate_s124_88c0813b = __deltemplate_s124_88c0813b;
 if (goog.DEBUG) {
-  __deltemplate_s120_88c0813b.soyTemplateName = 'tutorial.__deltemplate_s120_88c0813b';
+  __deltemplate_s124_88c0813b.soyTemplateName = 'tutorial.__deltemplate_s124_88c0813b';
 }
-soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'tutorial', 0, __deltemplate_s120_88c0813b);
+soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'tutorial', 0, __deltemplate_s124_88c0813b);
 
 exports.render.params = ["content","elementClasses","page","site"];
 exports.render.types = {"content":"any","elementClasses":"any","page":"any","site":"any"};
@@ -19423,7 +19600,7 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(tutorial, templates);
 
 
 /***/ }),
-/* 142 */
+/* 143 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19434,31 +19611,31 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ElectricUpdates = exports.ElectricSearchAutocomplete = exports.ElectricSearch = exports.ElectricReadingProgress = exports.ElectricNavigation = exports.ElectricCode = exports.ElectricAPIAutocomplete = undefined;
 
-var _ElectricAPIAutocomplete = __webpack_require__(156);
+var _ElectricAPIAutocomplete = __webpack_require__(157);
 
 var _ElectricAPIAutocomplete2 = _interopRequireDefault(_ElectricAPIAutocomplete);
 
-var _ElectricCode = __webpack_require__(157);
+var _ElectricCode = __webpack_require__(158);
 
 var _ElectricCode2 = _interopRequireDefault(_ElectricCode);
 
-var _ElectricNavigation = __webpack_require__(159);
+var _ElectricNavigation = __webpack_require__(160);
 
 var _ElectricNavigation2 = _interopRequireDefault(_ElectricNavigation);
 
-var _ElectricReadingProgress = __webpack_require__(161);
+var _ElectricReadingProgress = __webpack_require__(162);
 
 var _ElectricReadingProgress2 = _interopRequireDefault(_ElectricReadingProgress);
 
-var _ElectricSearch = __webpack_require__(163);
+var _ElectricSearch = __webpack_require__(164);
 
 var _ElectricSearch2 = _interopRequireDefault(_ElectricSearch);
 
-var _ElectricSearchAutocomplete = __webpack_require__(165);
+var _ElectricSearchAutocomplete = __webpack_require__(166);
 
 var _ElectricSearchAutocomplete2 = _interopRequireDefault(_ElectricSearchAutocomplete);
 
-var _ElectricUpdates = __webpack_require__(167);
+var _ElectricUpdates = __webpack_require__(168);
 
 var _ElectricUpdates2 = _interopRequireDefault(_ElectricUpdates);
 
@@ -19474,7 +19651,7 @@ exports.ElectricUpdates = _ElectricUpdates2.default;
 exports.default = _ElectricNavigation2.default;
 
 /***/ }),
-/* 143 */
+/* 144 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19495,13 +19672,13 @@ var _metalSoy = __webpack_require__(2);
 
 var _metalSoy2 = _interopRequireDefault(_metalSoy);
 
-var _metalToggler = __webpack_require__(170);
+var _metalToggler = __webpack_require__(171);
 
 var _metalToggler2 = _interopRequireDefault(_metalToggler);
 
 var _metalState = __webpack_require__(5);
 
-var _TopbarSoy = __webpack_require__(169);
+var _TopbarSoy = __webpack_require__(170);
 
 var _TopbarSoy2 = _interopRequireDefault(_TopbarSoy);
 
@@ -19606,7 +19783,7 @@ exports.Topbar = Topbar;
 exports.default = Topbar;
 
 /***/ }),
-/* 144 */
+/* 145 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -19707,7 +19884,7 @@ if (goog.DEBUG) {
  * @return {void}
  * @suppress {checkTypes}
  */
-function __deltemplate_s147_d34389eb(opt_data, opt_ignored, opt_ijData) {
+function __deltemplate_s173_d34389eb(opt_data, opt_ignored, opt_ijData) {
   ie_open('a', null, null,
       'class', 'sidebar-link ' + (opt_data.page.active ? 'sidebar-link-selected' : ''),
       'href', opt_data.page.url);
@@ -19716,16 +19893,16 @@ function __deltemplate_s147_d34389eb(opt_data, opt_ignored, opt_ijData) {
           'class', 'sidebar-icon icon-16-' + opt_data.page.icon);
     }
     ie_open('span');
-      var dyn10 = opt_data.page.title;
-      if (typeof dyn10 == 'function') dyn10(); else if (dyn10 != null) itext(dyn10);
+      var dyn12 = opt_data.page.title;
+      if (typeof dyn12 == 'function') dyn12(); else if (dyn12 != null) itext(dyn12);
     ie_close('span');
   ie_close('a');
 }
-exports.__deltemplate_s147_d34389eb = __deltemplate_s147_d34389eb;
+exports.__deltemplate_s173_d34389eb = __deltemplate_s173_d34389eb;
 if (goog.DEBUG) {
-  __deltemplate_s147_d34389eb.soyTemplateName = 'Sidebar.__deltemplate_s147_d34389eb';
+  __deltemplate_s173_d34389eb.soyTemplateName = 'Sidebar.__deltemplate_s173_d34389eb';
 }
-soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'sidebar', 0, __deltemplate_s147_d34389eb);
+soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'sidebar', 0, __deltemplate_s173_d34389eb);
 
 exports.render.params = ["section","site"];
 exports.render.types = {"section":"any","site":"any"};
@@ -19742,7 +19919,7 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(Sidebar, templates);
 
 
 /***/ }),
-/* 145 */
+/* 146 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -19852,7 +20029,7 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(SocialButtons, templa
 
 
 /***/ }),
-/* 146 */
+/* 147 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -19914,8 +20091,8 @@ function $render(opt_data, opt_ignored, opt_ijData) {
       ie_void('span', null, null,
           'class', 'icon icon-16-clock');
       itext(' ');
-      var dyn11 = opt_data.time;
-      if (typeof dyn11 == 'function') dyn11(); else if (dyn11 != null) itext(dyn11);
+      var dyn13 = opt_data.time;
+      if (typeof dyn13 == 'function') dyn13(); else if (dyn13 != null) itext(dyn13);
     }
   ie_close('p');
 }
@@ -19939,7 +20116,7 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(TutorialTimer, templa
 
 
 /***/ }),
-/* 147 */
+/* 148 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
@@ -20196,10 +20373,10 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 147;
+webpackContext.id = 148;
 
 /***/ }),
-/* 148 */
+/* 149 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -20227,7 +20404,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 149 */
+/* 150 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20239,7 +20416,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _metalClipboard = __webpack_require__(174);
+var _metalClipboard = __webpack_require__(175);
 
 var _metalClipboard2 = _interopRequireDefault(_metalClipboard);
 
@@ -20247,7 +20424,7 @@ var _metalComponent = __webpack_require__(1);
 
 var _metalComponent2 = _interopRequireDefault(_metalComponent);
 
-var _metalTooltip = __webpack_require__(191);
+var _metalTooltip = __webpack_require__(192);
 
 var _metalTooltip2 = _interopRequireDefault(_metalTooltip);
 
@@ -20310,7 +20487,7 @@ var ElectricCode = function (_Component) {
 exports.default = ElectricCode;
 
 /***/ }),
-/* 150 */
+/* 151 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20322,7 +20499,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _metalTabs = __webpack_require__(189);
+var _metalTabs = __webpack_require__(190);
 
 var _metalTabs2 = _interopRequireDefault(_metalTabs);
 
@@ -20495,7 +20672,7 @@ window.ElectricCodeTabs = ElectricCodeTabs;
 exports.default = ElectricCodeTabs;
 
 /***/ }),
-/* 151 */
+/* 152 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20541,7 +20718,7 @@ var ElectricNavigation = function (_Component) {
 exports.default = ElectricNavigation;
 
 /***/ }),
-/* 152 */
+/* 153 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20553,7 +20730,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _metalAffix = __webpack_require__(171);
+var _metalAffix = __webpack_require__(172);
 
 var _metalAffix2 = _interopRequireDefault(_metalAffix);
 
@@ -20569,7 +20746,7 @@ var _metalDom = __webpack_require__(4);
 
 var _metalDom2 = _interopRequireDefault(_metalDom);
 
-var _metalReadingProgress = __webpack_require__(182);
+var _metalReadingProgress = __webpack_require__(183);
 
 var _metalReadingProgress2 = _interopRequireDefault(_metalReadingProgress);
 
@@ -20680,7 +20857,7 @@ ElectricReadingProgress.STATE = {
 exports.default = ElectricReadingProgress;
 
 /***/ }),
-/* 153 */
+/* 154 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20753,7 +20930,7 @@ ElectricSearch.STATE = {
 exports.default = ElectricSearch;
 
 /***/ }),
-/* 154 */
+/* 155 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20852,7 +21029,7 @@ var ElectricSearchAutocomplete = function (_ElectricSearchBase) {
 exports.default = ElectricSearchAutocomplete;
 
 /***/ }),
-/* 155 */
+/* 156 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20909,7 +21086,7 @@ ElectricUpdates.STATE = {
 exports.default = ElectricUpdates;
 
 /***/ }),
-/* 156 */
+/* 157 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21089,7 +21266,7 @@ ElectricAPIAutocomplete.STATE = {
 exports.default = ElectricAPIAutocomplete;
 
 /***/ }),
-/* 157 */
+/* 158 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21105,7 +21282,7 @@ var _metalSoy2 = _interopRequireDefault(_metalSoy);
 
 var _electricBaseComponents = __webpack_require__(6);
 
-var _ElectricCode = __webpack_require__(158);
+var _ElectricCode = __webpack_require__(159);
 
 var _ElectricCode2 = _interopRequireDefault(_ElectricCode);
 
@@ -21116,7 +21293,7 @@ _metalSoy2.default.register(_electricBaseComponents.ElectricCode, _ElectricCode2
 exports.default = _electricBaseComponents.ElectricCode;
 
 /***/ }),
-/* 158 */
+/* 159 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21226,7 +21403,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 159 */
+/* 160 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21250,7 +21427,7 @@ var _electricBaseComponents = __webpack_require__(6);
 
 var _electricBaseComponents2 = _interopRequireDefault(_electricBaseComponents);
 
-var _ElectricNavigation = __webpack_require__(160);
+var _ElectricNavigation = __webpack_require__(161);
 
 var _ElectricNavigation2 = _interopRequireDefault(_ElectricNavigation);
 
@@ -21304,7 +21481,7 @@ _metalSoy2.default.register(ElectricNavigation, _ElectricNavigation2.default);
 exports.default = ElectricNavigation;
 
 /***/ }),
-/* 160 */
+/* 161 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21464,7 +21641,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 161 */
+/* 162 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21480,7 +21657,7 @@ var _metalSoy2 = _interopRequireDefault(_metalSoy);
 
 var _electricBaseComponents = __webpack_require__(6);
 
-var _ElectricReadingProgress = __webpack_require__(162);
+var _ElectricReadingProgress = __webpack_require__(163);
 
 var _ElectricReadingProgress2 = _interopRequireDefault(_ElectricReadingProgress);
 
@@ -21491,7 +21668,7 @@ _metalSoy2.default.register(_electricBaseComponents.ElectricReadingProgress, _El
 exports.default = _electricBaseComponents.ElectricReadingProgress;
 
 /***/ }),
-/* 162 */
+/* 163 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21594,7 +21771,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 163 */
+/* 164 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21610,7 +21787,7 @@ var _metalSoy2 = _interopRequireDefault(_metalSoy);
 
 var _electricBaseComponents = __webpack_require__(6);
 
-var _ElectricSearch = __webpack_require__(164);
+var _ElectricSearch = __webpack_require__(165);
 
 var _ElectricSearch2 = _interopRequireDefault(_ElectricSearch);
 
@@ -21621,7 +21798,7 @@ _metalSoy2.default.register(_electricBaseComponents.ElectricSearch, _ElectricSea
 exports.default = _electricBaseComponents.ElectricSearch;
 
 /***/ }),
-/* 164 */
+/* 165 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21815,7 +21992,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 165 */
+/* 166 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21831,7 +22008,7 @@ var _metalSoy2 = _interopRequireDefault(_metalSoy);
 
 var _electricBaseComponents = __webpack_require__(6);
 
-var _ElectricSearchAutocomplete = __webpack_require__(166);
+var _ElectricSearchAutocomplete = __webpack_require__(167);
 
 var _ElectricSearchAutocomplete2 = _interopRequireDefault(_ElectricSearchAutocomplete);
 
@@ -21842,7 +22019,7 @@ _metalSoy2.default.register(_electricBaseComponents.ElectricSearchAutocomplete, 
 exports.default = _electricBaseComponents.ElectricSearchAutocomplete;
 
 /***/ }),
-/* 166 */
+/* 167 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21952,7 +22129,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 167 */
+/* 168 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21968,7 +22145,7 @@ var _metalSoy2 = _interopRequireDefault(_metalSoy);
 
 var _electricBaseComponents = __webpack_require__(6);
 
-var _ElectricUpdates = __webpack_require__(168);
+var _ElectricUpdates = __webpack_require__(169);
 
 var _ElectricUpdates2 = _interopRequireDefault(_ElectricUpdates);
 
@@ -21979,7 +22156,7 @@ _metalSoy2.default.register(_electricBaseComponents.ElectricUpdates, _ElectricUp
 exports.default = _electricBaseComponents.ElectricUpdates;
 
 /***/ }),
-/* 168 */
+/* 169 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22190,7 +22367,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 169 */
+/* 170 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22413,7 +22590,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 170 */
+/* 171 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22749,7 +22926,7 @@ exports.Toggler = Toggler;
 exports.default = Toggler;
 
 /***/ }),
-/* 171 */
+/* 172 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22952,7 +23129,7 @@ Affix.STATE = {
 exports.default = Affix;
 
 /***/ }),
-/* 172 */
+/* 173 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22970,7 +23147,7 @@ var _metal = __webpack_require__(3);
 
 var _metal2 = _interopRequireDefault(_metal);
 
-var _metalDebounce = __webpack_require__(175);
+var _metalDebounce = __webpack_require__(176);
 
 var _metalDebounce2 = _interopRequireDefault(_metalDebounce);
 
@@ -22990,9 +23167,9 @@ var _metalSoy = __webpack_require__(2);
 
 var _metalSoy2 = _interopRequireDefault(_metalSoy);
 
-__webpack_require__(177);
+__webpack_require__(178);
 
-var _AutocompleteSoy = __webpack_require__(173);
+var _AutocompleteSoy = __webpack_require__(174);
 
 var _AutocompleteSoy2 = _interopRequireDefault(_AutocompleteSoy);
 
@@ -23390,7 +23567,7 @@ Autocomplete.STATE = {
 exports.default = Autocomplete;
 
 /***/ }),
-/* 173 */
+/* 174 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23495,7 +23672,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 174 */
+/* 175 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23849,7 +24026,7 @@ ClipboardAction.STATE = {
 exports.default = Clipboard;
 
 /***/ }),
-/* 175 */
+/* 176 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23887,7 +24064,7 @@ exports.cancelDebounce = cancelDebounce;
 exports.debounce = debounce;
 
 /***/ }),
-/* 176 */
+/* 177 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24160,7 +24337,7 @@ KeyboardFocusManager.REF_REGEX = /.+-(\d+)$/;
 exports.default = KeyboardFocusManager;
 
 /***/ }),
-/* 177 */
+/* 178 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24186,9 +24363,9 @@ var _metalSoy = __webpack_require__(2);
 
 var _metalSoy2 = _interopRequireDefault(_metalSoy);
 
-__webpack_require__(179);
+__webpack_require__(180);
 
-var _ListSoy = __webpack_require__(178);
+var _ListSoy = __webpack_require__(179);
 
 var _ListSoy2 = _interopRequireDefault(_ListSoy);
 
@@ -24280,7 +24457,7 @@ List.STATE = {
 exports.default = List;
 
 /***/ }),
-/* 178 */
+/* 179 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24412,7 +24589,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 179 */
+/* 180 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24434,7 +24611,7 @@ var _metalSoy = __webpack_require__(2);
 
 var _metalSoy2 = _interopRequireDefault(_metalSoy);
 
-var _ListItemSoy = __webpack_require__(180);
+var _ListItemSoy = __webpack_require__(181);
 
 var _ListItemSoy2 = _interopRequireDefault(_ListItemSoy);
 
@@ -24521,7 +24698,7 @@ ListItem.STATE = {
 exports.default = ListItem;
 
 /***/ }),
-/* 180 */
+/* 181 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24682,7 +24859,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 181 */
+/* 182 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24939,7 +25116,7 @@ Align.Left = Align.LeftCenter;
 exports.default = Align;
 
 /***/ }),
-/* 182 */
+/* 183 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24951,7 +25128,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _metal = __webpack_require__(3);
 
-var _ReadingProgress = __webpack_require__(183);
+var _ReadingProgress = __webpack_require__(184);
 
 var _ReadingProgress2 = _interopRequireDefault(_ReadingProgress);
 
@@ -24959,7 +25136,7 @@ var _metalComponent = __webpack_require__(1);
 
 var _metalComponent2 = _interopRequireDefault(_metalComponent);
 
-var _ReadingProgressTracker = __webpack_require__(184);
+var _ReadingProgressTracker = __webpack_require__(185);
 
 var _ReadingProgressTracker2 = _interopRequireDefault(_ReadingProgressTracker);
 
@@ -25130,7 +25307,7 @@ ReadingProgress.STATE = {
 exports.default = ReadingProgress;
 
 /***/ }),
-/* 183 */
+/* 184 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25270,7 +25447,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 184 */
+/* 185 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25288,7 +25465,7 @@ var _metalDom = __webpack_require__(4);
 
 var _metalDom2 = _interopRequireDefault(_metalDom);
 
-var _metalScrollspy = __webpack_require__(185);
+var _metalScrollspy = __webpack_require__(186);
 
 var _metalScrollspy2 = _interopRequireDefault(_metalScrollspy);
 
@@ -25439,7 +25616,7 @@ ReadingProgressTracker.STATE = {
 exports.default = ReadingProgressTracker;
 
 /***/ }),
-/* 185 */
+/* 186 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25791,7 +25968,7 @@ Scrollspy.STATE = {
 exports.default = Scrollspy;
 
 /***/ }),
-/* 186 */
+/* 187 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26001,7 +26178,7 @@ var MultiMap = function (_Disposable) {
 exports.default = MultiMap;
 
 /***/ }),
-/* 187 */
+/* 188 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26260,7 +26437,7 @@ var assertChildHasNoParent = function assertChildHasNoParent(child) {
 exports.default = TreeNode;
 
 /***/ }),
-/* 188 */
+/* 189 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26271,11 +26448,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.TreeNode = exports.MultiMap = undefined;
 
-var _MultiMap = __webpack_require__(186);
+var _MultiMap = __webpack_require__(187);
 
 var _MultiMap2 = _interopRequireDefault(_MultiMap);
 
-var _TreeNode = __webpack_require__(187);
+var _TreeNode = __webpack_require__(188);
 
 var _TreeNode2 = _interopRequireDefault(_TreeNode);
 
@@ -26285,7 +26462,7 @@ exports.MultiMap = _MultiMap2.default;
 exports.TreeNode = _TreeNode2.default;
 
 /***/ }),
-/* 189 */
+/* 190 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26301,7 +26478,7 @@ var _metal = __webpack_require__(3);
 
 var _metal2 = _interopRequireDefault(_metal);
 
-var _TabsSoy = __webpack_require__(190);
+var _TabsSoy = __webpack_require__(191);
 
 var _TabsSoy2 = _interopRequireDefault(_TabsSoy);
 
@@ -26309,7 +26486,7 @@ var _metalComponent = __webpack_require__(1);
 
 var _metalComponent2 = _interopRequireDefault(_metalComponent);
 
-var _metalKeyboardFocus = __webpack_require__(176);
+var _metalKeyboardFocus = __webpack_require__(177);
 
 var _metalKeyboardFocus2 = _interopRequireDefault(_metalKeyboardFocus);
 
@@ -26641,7 +26818,7 @@ Tabs.STATE = {
 exports.default = Tabs;
 
 /***/ }),
-/* 190 */
+/* 191 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26776,7 +26953,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 191 */
+/* 192 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26799,11 +26976,11 @@ var _metalSoy = __webpack_require__(2);
 
 var _metalSoy2 = _interopRequireDefault(_metalSoy);
 
-var _TooltipBase2 = __webpack_require__(193);
+var _TooltipBase2 = __webpack_require__(194);
 
 var _TooltipBase3 = _interopRequireDefault(_TooltipBase2);
 
-var _TooltipSoy = __webpack_require__(192);
+var _TooltipSoy = __webpack_require__(193);
 
 var _TooltipSoy2 = _interopRequireDefault(_TooltipSoy);
 
@@ -26879,7 +27056,7 @@ exports.Tooltip = Tooltip;
 exports.TooltipBase = _TooltipBase3.default;
 
 /***/ }),
-/* 192 */
+/* 193 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27000,7 +27177,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 193 */
+/* 194 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27395,7 +27572,7 @@ TooltipBase.PositionClasses = ['top', 'right', 'bottom', 'left'];
 exports.default = TooltipBase;
 
 /***/ }),
-/* 194 */
+/* 195 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27411,11 +27588,11 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _metal = __webpack_require__(3);
 
-var _parse = __webpack_require__(195);
+var _parse = __webpack_require__(196);
 
 var _parse2 = _interopRequireDefault(_parse);
 
-var _metalStructs = __webpack_require__(188);
+var _metalStructs = __webpack_require__(189);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28036,7 +28213,7 @@ Uri.RANDOM_PARAM = 'zx';
 exports.default = Uri;
 
 /***/ }),
-/* 195 */
+/* 196 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28048,7 +28225,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _metal = __webpack_require__(3);
 
-var _parseFromAnchor = __webpack_require__(196);
+var _parseFromAnchor = __webpack_require__(197);
 
 var _parseFromAnchor2 = _interopRequireDefault(_parseFromAnchor);
 
@@ -28084,7 +28261,7 @@ function parse(opt_uri) {
 exports.default = parse;
 
 /***/ }),
-/* 196 */
+/* 197 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28152,7 +28329,6 @@ function parseFromAnchor(opt_uri) {
 exports.default = parseFromAnchor;
 
 /***/ }),
-/* 197 */,
 /* 198 */,
 /* 199 */,
 /* 200 */,
@@ -28179,7 +28355,7 @@ exports.default = parseFromAnchor;
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NtvCs", function() { return NtvCs; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DGgYA", function() { return DGgYA; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28191,15 +28367,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var templates;
 goog.loadModule(function(exports) {
 
-// This file was automatically generated from index.soy.
+// This file was automatically generated from Pred.soy.
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace NtvCs.
+ * @fileoverview Templates in namespace DGgYA.
  * @public
  */
 
-goog.module('NtvCs.incrementaldom');
+goog.module('DGgYA.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28220,6 +28396,8 @@ var ie_open_end = IncrementalDom.elementOpenEnd;
 var itext = IncrementalDom.text;
 var iattr = IncrementalDom.attr;
 
+var $templateAlias2 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('ElectricCode.incrementaldom', 'render');
+
 var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('guide.incrementaldom', 'render');
 
 
@@ -28231,116 +28409,324 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var param618 = function() {
+  var param483 = function() {
+    $templateAlias2({code: 'Pred a Boolean', mode: 'haskell'}, null, opt_ijData);
     ie_open('p');
-      itext('There are (8) classifications of "things" included in this library:');
+      itext('Defined as a Monoidal Contravariant datatype, ');
+      ie_open('code');
+        itext('Pred');
+      ie_close('code');
+      itext(' wraps a predicate function of the form ');
+      ie_open('code');
+        itext('(a -> Boolean)');
+      ie_close('code');
+      itext('.');
     ie_close('p');
-    ie_open('ul');
-      ie_open('li');
-        ie_open('p');
-          ie_open('a', null, null,
-              'href', 'crocks.html');
-            itext('Crocks');
-          ie_close('a');
-          itext(': These are the ADTs that this library is centered around. They are all ');
-          ie_open('code');
-            itext('Functor');
-          ie_close('code');
-          itext(' based Data Types that provide different computational contexts for working in a more declarative, functional flow. For the most part, a majority of the other bits in ');
-          ie_open('code');
-            itext('crocks');
-          ie_close('code');
-          itext(' exist to serve these ADTs.');
-        ie_close('p');
-      ie_close('li');
-      ie_open('li');
-        ie_open('p');
-          ie_open('a', null, null,
-              'href', 'monoids.html');
-            itext('Monoids');
-          ie_close('a');
-          itext(': These helpful ADTs are in a class of their own, not really ');
-          ie_open('code');
-            itext('Functor');
-          ie_close('code');
-          itext('s in their own right (although some can be), they are still very useful in our everyday programming needs. Ever need to Sum a list of Numbers or mix a mess of objects together? This is were you will find the ADTs you need to do that.');
-        ie_close('p');
-      ie_close('li');
-      ie_open('li');
-        ie_open('p');
-          ie_open('a', null, null,
-              'href', 'combinators.html');
-            itext('Combinators');
-          ie_close('a');
-          itext(': A collection of functions that are used for working with other functions. These do things like compose (2) functions together, or flip arguments on a function. They typically either take a function, return a function or a bit a both. These are considered the glue that holds the mighty house of ');
-          ie_open('code');
-            itext('crocks');
-          ie_close('code');
-          itext(' together and a valuable aid in writing reusable code.');
-        ie_close('p');
-      ie_close('li');
-      ie_open('li');
-        ie_open('p');
-          ie_open('a', null, null,
-              'href', 'helpers.html');
-            itext('Helper Functions');
-          ie_close('a');
-          itext(': All other support functions that are either convenient versions of combinators or not even combinators at all cover this group.');
-        ie_close('p');
-      ie_close('li');
-      ie_open('li');
-        ie_open('p');
-          ie_open('a', null, null,
-              'href', 'logic-functions.html');
-            itext('Logic Functions');
-          ie_close('a');
-          itext(': A helpful collection of Logic based combinators. All of these functions work with predicate functions and let you combine them in some very interesting ways.');
-        ie_close('p');
-      ie_close('li');
-      ie_open('li');
-        ie_open('p');
-          ie_open('a', null, null,
-              'href', 'predicate-functions.html');
-            itext('Predicate Functions');
-          ie_close('a');
-          itext(': A helpful collection of predicate functions to get you started.');
-        ie_close('p');
-      ie_close('li');
-      ie_open('li');
-        ie_open('p');
-          ie_open('a', null, null,
-              'href', 'pointfree-functions.html');
-            itext('Point-free Functions');
-          ie_close('a');
-          itext(': Wanna use these ADTs in a way that you never have to reference the actual data being worked on? Well here is where you will find all of these functions to do that. For every algebra available on both the ');
-          ie_open('code');
-            itext('Crocks');
-          ie_close('code');
-          itext(' and ');
-          ie_open('code');
-            itext('Monoids');
-          ie_close('code');
-          itext(' there is a function here.');
-        ie_close('p');
-      ie_close('li');
-      ie_open('li');
-        ie_open('p');
-          ie_open('a', null, null,
-              'href', 'transformation-functions.html');
-            itext('Transformation Functions');
-          ie_close('a');
-          itext(': All the functions found here are used to transform from one type to another, naturally. These come are handy in situations where you have functions that return one type (like an');
-          ie_open('code');
-            itext('Either');
-          ie_close('code');
-          itext('), but are working in a context of another (say ');
-          ie_open('code');
-            itext('Maybe');
-          ie_close('code');
-          itext('). You would like to compose these, but in doing so will result in a nesting that you will need to account for for the rest of your flow.');
-        ie_close('p');
-      ie_close('li');
-    ie_close('ul');
+    ie_open('p');
+      itext('The far right parameter of ');
+      ie_open('code');
+        itext('Pred');
+      ie_close('code');
+      itext(' is always fixed to the type of ');
+      ie_open('code');
+        itext('Boolean');
+      ie_close('code');
+      itext(', so the result of the wrapped predicate function can never be mapped. While the right parameter is fixed, the input to the predicate can vary.');
+    ie_close('p');
+    ie_open('p');
+      itext('Another property of ');
+      ie_open('code');
+        itext('Pred');
+      ie_close('code');
+      itext(' instances is that they can be combined using their Monodial interface. Combining instances will result in a new instance that returns the result of each ');
+      ie_open('code');
+        itext('Pred');
+      ie_close('code');
+      itext(' under logical conjunction.');
+    ie_close('p');
+    ie_open('p');
+      itext('As ');
+      ie_open('code');
+        itext('Pred');
+      ie_close('code');
+      itext(' wraps a function, it is lazy and will not execute until its argument is satisfied. A given instance is run but calling the ');
+      ie_open('a', null, null,
+          'href', '#runwith');
+        ie_open('code');
+          itext('runWith');
+        ie_close('code');
+      ie_close('a');
+      itext('method, supplying it the argument to test.');
+    ie_close('p');
+    ie_open('p');
+      itext('One of the features of ');
+      ie_open('code');
+        itext('crocks');
+      ie_close('code');
+      itext(' is the ability to use both normal predicate functions and ');
+      ie_open('code');
+        itext('Pred');
+      ie_close('code');
+      itext(' instances interchangeably. For any ');
+      ie_open('code');
+        itext('crocks');
+      ie_close('code');
+      itext(' function that takes a predicate, either a predicate function or a ');
+      ie_open('code');
+        itext('Pred');
+      ie_close('code');
+      itext(' instance can be used.');
+    ie_close('p');
+    ie_open('p');
+      itext('This implementation of ');
+      ie_open('code');
+        itext('Pred');
+      ie_close('code');
+      itext(' was heavily inspired by ');
+      ie_open('a', null, null,
+          'href', 'https://medium.com/@drboolean/monoidal-contravariant-functors-are-actually-useful-1032211045c4#.polugsx2a');
+        itext('this article');
+      ie_close('a');
+      itext('.');
+    ie_close('p');
+    $templateAlias2({code: 'const Pred = require(\'crocks/Pred\')\n\nconst isNumber = require(\'crocks/predicates/isNumber\')\nconst propOr = require(\'crocks/helpers/propOr\')\nconst filter = require(\'crocks/pointfree/filter\')\n\n// largeNumber :: Pred Number\nconst largeNumber =\n  Pred(isNumber)\n    .concat(Pred(x => x > 100))\n\n// largeItem :: Pred Object\nconst largeItem =\n  largeNumber\n    .contramap(propOr(null, \'item\'))\n\nlargeNumber\n  .runWith(45)\n//=> false\n\nlargeNumber\n  .runWith(175)\n//=> true\n\nlargeItem\n  .runWith({ item: 190 })\n//=> true\n\nlargeItem\n  .runWith({ item: 9 })\n//=> false\n\nlargeItem\n  .runWith(9)\n//=> false\n\nfilter(largeNumber, [ 200, 375, 15 ])\n//=> [ 200, 375 ]', mode: 'javascript'}, null, opt_ijData);
+    ie_open('article', null, null,
+        'id', 'implements');
+      ie_open('h2');
+        itext('Implements');
+      ie_close('h2');
+      ie_open('p');
+        ie_open('code');
+          itext('Semigroup');
+        ie_close('code');
+        itext(', ');
+        ie_open('code');
+          itext('Monoid');
+        ie_close('code');
+        itext(', ');
+        ie_open('code');
+          itext('Contravariant');
+        ie_close('code');
+      ie_close('p');
+    ie_close('article');
+    ie_open('article', null, null,
+        'id', 'constructor');
+      ie_open('h2');
+        itext('Constructor Methods');
+      ie_close('h2');
+      ie_open('h4');
+        itext('empty');
+      ie_close('h4');
+      $templateAlias2({code: 'Pred.empty :: () -> Pred a', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        ie_open('code');
+          itext('empty');
+        ie_close('code');
+        itext(' provides the identity for the ');
+        ie_open('code');
+          itext('Monoid');
+        ie_close('code');
+        itext(' in that when the value it provides is ');
+        ie_open('code');
+          itext('concat');
+        ie_close('code');
+        itext('ed to any other value, it will return the other value. In the case of ');
+        ie_open('code');
+          itext('Pred');
+        ie_close('code');
+        itext(' the result of ');
+        ie_open('code');
+          itext('empty');
+        ie_close('code');
+        itext(' is a ');
+        ie_open('code');
+          itext('Pred');
+        ie_close('code');
+        itext(' that will always return');
+        ie_open('code');
+          itext('true');
+        ie_close('code');
+        itext('. ');
+        ie_open('code');
+          itext('empty');
+        ie_close('code');
+        itext(' is available on both the Constructor and the Instance for convenience.');
+      ie_close('p');
+      $templateAlias2({code: 'const Pred = require(\'crocks/Pred\')\n\nconst isEmpty = require(\'crocks/predicates/isEmpty\')\nconst not = require(\'crocks/logic/not\')\n\n// empty :: Pred a\nconst empty =\n  Pred.empty()\n\n// notEmpty :: Pred a\nconst notEmpty =\n  Pred(not(isEmpty))\n\nempty\n  .runWith(\'\')\n//=> true\n\nnotEmpty\n  .concat(empty)\n  .runWith([])\n//=> false\n\nnotEmpty\n  .concat(empty)\n  .runWith([ 1, 2, 3 ])\n//=> true\n\nempty\n  .concat(notEmpty)\n  .runWith(\'\')\n//=> false\n\nempty\n  .concat(notEmpty)\n  .runWith(\'123\')\n//=> true', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        itext('type');
+      ie_close('h4');
+      $templateAlias2({code: 'Pred.type :: () -> String', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        ie_open('code');
+          itext('type');
+        ie_close('code');
+        itext(' provides a string representation of the type name for a given type in');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext('. While it is used mostly internally for law validation, it can be useful to the end user for debugging and building out custom types based on the standard ');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext(' types. While type comparisons can easily be done manually by calling ');
+        ie_open('code');
+          itext('type');
+        ie_close('code');
+        itext(' on a given type, using the ');
+        ie_open('code');
+          itext('isSameType');
+        ie_close('code');
+        itext(' function hides much of the boilerplate. ');
+        ie_open('code');
+          itext('type');
+        ie_close('code');
+        itext(' is available on both the Constructor and the Instance for convenience.');
+      ie_close('p');
+      $templateAlias2({code: 'const Pred = require(\'crocks/Pred\')\n\nconst Maybe = require(\'crocks/Maybe\')\nconst isNil = require(\'crocks/predicates/isEmpty\')\nconst isSameType = require(\'crocks/predicates/isSameType\')\n\nPred.type()   //=>  "Pred"\n\nisSameType(Pred, Pred(isNil))    //=> true\nisSameType(Pred, Pred)           //=> true\nisSameType(Pred, Maybe.Just(4))  //=> false\nisSameType(Pred(isNil), Maybe)   //=> false', mode: 'javascript'}, null, opt_ijData);
+    ie_close('article');
+    ie_open('article', null, null,
+        'id', 'instance');
+      ie_open('h2');
+        itext('Instance Methods');
+      ie_close('h2');
+      ie_open('h4');
+        itext('concat');
+      ie_close('h4');
+      $templateAlias2({code: 'Pred a ~> Pred a -> Pred a', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        ie_open('code');
+          itext('concat');
+        ie_close('code');
+        itext(' is used to combine (2) ');
+        ie_open('code');
+          itext('Semigroup');
+        ie_close('code');
+        itext('s of the same type under an operation specified by the ');
+        ie_open('code');
+          itext('Semigroup');
+        ie_close('code');
+        itext('. In the case of ');
+        ie_open('code');
+          itext('Pred');
+        ie_close('code');
+        itext(', the results of both');
+        ie_open('code');
+          itext('Preds');
+        ie_close('code');
+        itext('s are combined under logical conjunction.');
+      ie_close('p');
+      $templateAlias2({code: 'const Pred = require(\'crocks/Pred\')\n\nconst or = require(\'crocks/logic/or\')\nconst not = require(\'crocks/logic/not\')\nconst filter = require(\'crocks/pointfree/filter\')\n\nconst isEven =\n  x => !(x % 2)\n\n// isOdd :: Pred Number\nconst isOdd =\n  Pred(not(isEven))\n\n// lt20 :: Pred Number\nconst lt20 =\n  Pred(x => x < 20)\n\n// gt5 :: Pred Number\nconst gt5 =\n  Pred(x => x > 5)\n\n// inRange :: Pred Number\nconst inRange =\n  lt20.concat(gt5)\n\n// isOddInRange :: Pred Number\nconst isOddInRange =\n  isOdd.concat(inRange)\n\n// isValid :: Pred Number\nconst isValid =\n  Pred(or(isEven, isOddInRange))\n\n// data :: [ Number ]\nconst data =\n[ 1, 4, 12, 19, 32, 99, 76, 7 ]\n\nisOdd\n  .runWith(5)\n//=> true\n\nisOdd\n  .runWith(8)\n//=> false\n\nfilter(isOdd, data)\n//=> [ 1, 19, 99, 7 ]\n\nfilter(lt20, data)\n//=> [ 1, 4, 12, 19, 7 ]\n\nfilter(gt5, data)\n//=> [ 12, 19, 32, 99, 76, 7 ]\n\nfilter(inRange, data)\n//=> [ 12, 19, 7 ]\n\nfilter(isOddInRange, data)\n//=> [ 19, 7 ]\n\nfilter(isEven, data)\n// [ 4, 12, 32, 76 ]\n\nfilter(isValid, data)\n//=> [ 4, 12, 19, 32, 76, 7 ]', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        itext('contramap');
+      ie_close('h4');
+      $templateAlias2({code: 'Pred a ~> (b -> a) -> Pred b', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        itext('While the output of a ');
+        ie_open('code');
+          itext('Pred');
+        ie_close('code');
+        itext(' is fixed to ');
+        ie_open('code');
+          itext('Boolean');
+        ie_close('code');
+        itext(', the input can vary type and value. This allows a given ');
+        ie_open('code');
+          itext('Pred');
+        ie_close('code');
+        itext(' to be adapted by mapping on the input, before it hits the wrapped predicate function. Using ');
+        ie_open('code');
+          itext('contramap');
+        ie_close('code');
+        itext(', functions are lifted, mapping the input to now accept the type of the input of the given function.');
+      ie_close('p');
+      $templateAlias2({code: 'const Pred = require(\'crocks/Pred\')\nconst contramap = require(\'crocks/pointfree/contramap\')\nconst propOr = require(\'crocks/helpers/propOr\')\n\n// Length :: String | Function | Array\n// length :: Length -> Number\nconst length =\n  propOr(0, \'length\')\n\n// gt5 :: Pred Number\nconst gt5 =\n  Pred(x => x > 5)\n\n// lengthGt5 :: Pred Length\nconst validLength =\n  contramap(length, gt5)\n\n// validItemLength :: Pred Object\nconst validItemLength =\n  contramap(propOr(null, \'item\'), validLength)\n\ngt5\n  .runWith(5)\n//=> false\n\ngt5\n  .runWith(10)\n//=> true\n\nvalidLength\n  .runWith([ 1, 2, 3, 4, 5, 6 ])\n//=> true\n\nvalidLength\n  .runWith(null)\n//=> false\n\nvalidLength\n  .runWith(\'1234\')\n//=> false\n\nvalidItemLength\n  .runWith({ item: \'this is an item\' })\n//=> true', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        itext('valueOf');
+      ie_close('h4');
+      $templateAlias2({code: 'Pred a ~> () -> a -> Boolean', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        ie_open('code');
+          itext('valueOf');
+        ie_close('code');
+        itext(' is used on all ');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext(' ');
+        ie_open('code');
+          itext('Monoid');
+        ie_close('code');
+        itext('s as a means of extraction. While the extraction is available, types that implement ');
+        ie_open('code');
+          itext('valueOf');
+        ie_close('code');
+        itext(' are not necessarily a');
+        ie_open('code');
+          itext('Comonad');
+        ie_close('code');
+        itext('. This function is used primarily for convenience for some of the helper functions that ship with ');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext('.');
+      ie_close('p');
+      ie_open('p');
+        itext('Calling ');
+        ie_open('code');
+          itext('valueOf');
+        ie_close('code');
+        itext(' on a ');
+        ie_open('code');
+          itext('Pred');
+        ie_close('code');
+        itext(' instance will result in the underlying predicate function. Most of the time this will not be required when working with ');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext('because all ');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext(' functions that take a predicate function can also take a');
+        ie_open('code');
+          itext('Pred');
+        ie_close('code');
+        itext(' instance.');
+      ie_close('p');
+      $templateAlias2({code: 'const Pred = require(\'crocks/Pred\')\n\nconst isArray = require(\'crocks/predicates/isArray\')\nconst isString = require(\'crocks/predicates/isString\')\nconst equals = require(\'crocks/pointfree/equals\')\nconst or = require(\'crocks/logic/or\')\n\n// lengthIsThree :: Pred a\nconst lengthIsThree =\n  Pred(equals(3))\n    .contramap(x => x.length)\n\n// pred :: Pred a\nconst pred =\n  Pred(or(isArray, isString))\n    .concat(lengthIsThree)\n\n// fn :: a -> Boolean\nconst fn =\n  pred.valueOf()\n\npred\n  .runWith(null)\n//=> false\n\npred\n  .runWith([ 1, 2, 3 ])\n//=> true\n\npred\n  .runWith(\'This is fun\')\n//=> true\n\nfn(null)          // false\nfn([ 1, 2, 3 ])   // true\nfn(\'This is fun\') // true\nfn([])            // false\nfn(\'\')            // false', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        itext('runWith');
+      ie_close('h4');
+      $templateAlias2({code: 'Pred a ~> a -> Boolean', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        itext('As ');
+        ie_open('code');
+          itext('Pred');
+        ie_close('code');
+        itext(' wraps a predicate function, it needs a mean to run it with some value to test against the predicate. ');
+        ie_open('code');
+          itext('Pred');
+        ie_close('code');
+        itext(' instances provide a method called');
+        ie_open('code');
+          itext('runWith');
+        ie_close('code');
+        itext(' that will accept the value to be tested and then runs it through the predicate returning the result.');
+      ie_close('p');
+      ie_open('p');
+        itext('Most of the time this function is not used while working with other predicate functions in ');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext(', as all functions that take a predicate function also take a ');
+        ie_open('code');
+          itext('Pred');
+        ie_close('code');
+        itext(' instance. It does come in handy though when supplying predicates to other libraries.');
+      ie_close('p');
+      $templateAlias2({code: 'const Pred = require(\'crocks/Pred\')\n\nconst hasProp = require(\'crocks/predicates/hasProp\')\nconst equals = require(\'crocks/pointfree/equals\')\nconst flip = require(\'crocks/combinators/flip\')\nconst runWith = require(\'crocks/pointfree/runWith\')\n\n// trueBlue :: Pred Object\nconst trueBlue =\n  Pred(equals(true))\n    .contramap(({ blue }) => blue)\n\n// isValid :: Pred a\nconst isValid =\n  Pred(hasProp(\'blue\'))\n    .concat(trueBlue)\n\n// checkValid :: a -> Boolean\nconst checkValid =\n  flip(runWith, isValid)\n\ncheckValid(null)            //=> false\ncheckValid([ 1, 2, 3 ])     //=> false\ncheckValid({ blue: 32 })    //=> false\ncheckValid({ blue: true })  //=> true', mode: 'javascript'}, null, opt_ijData);
+    ie_close('article');
     ie_open('input', null, null,
         'type', 'hidden',
         'value', opt_data.page.title);
@@ -28350,11 +28736,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'value', opt_data.site.title);
     ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({content: param618}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param483}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'NtvCs.render';
+  $render.soyTemplateName = 'DGgYA.render';
 }
 
 exports.render.params = ["page","site"];
@@ -28364,8 +28750,8 @@ return exports;
 
 });
 
-class NtvCs extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(NtvCs, templates);
+class DGgYA extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(DGgYA, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
@@ -28381,7 +28767,16 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(NtvCs, templates);
 /* 226 */,
 /* 227 */,
 /* 228 */,
-/* 229 */
+/* 229 */,
+/* 230 */,
+/* 231 */,
+/* 232 */,
+/* 233 */,
+/* 234 */,
+/* 235 */,
+/* 236 */,
+/* 237 */,
+/* 238 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28399,9 +28794,9 @@ var _metalSoy = __webpack_require__(2);
 
 var _metalSoy2 = _interopRequireDefault(_metalSoy);
 
-__webpack_require__(142);
-
 __webpack_require__(143);
+
+__webpack_require__(144);
 
 __webpack_require__(139);
 
@@ -28409,15 +28804,17 @@ __webpack_require__(140);
 
 __webpack_require__(141);
 
+__webpack_require__(142);
+
 __webpack_require__(131);
 
 __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _indexSoy = __webpack_require__(219);
+var _PredSoy = __webpack_require__(219);
 
-var _indexSoy2 = _interopRequireDefault(_indexSoy);
+var _PredSoy2 = _interopRequireDefault(_PredSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28427,23 +28824,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var NtvCs = function (_Component) {
-  _inherits(NtvCs, _Component);
+var DGgYA = function (_Component) {
+  _inherits(DGgYA, _Component);
 
-  function NtvCs() {
-    _classCallCheck(this, NtvCs);
+  function DGgYA() {
+    _classCallCheck(this, DGgYA);
 
-    return _possibleConstructorReturn(this, (NtvCs.__proto__ || Object.getPrototypeOf(NtvCs)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (DGgYA.__proto__ || Object.getPrototypeOf(DGgYA)).apply(this, arguments));
   }
 
-  return NtvCs;
+  return DGgYA;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(NtvCs, _indexSoy2.default);
+_metalSoy2.default.register(DGgYA, _PredSoy2.default);
 
-exports.default = NtvCs;
+exports.default = DGgYA;
 
 /***/ })
-],[229]);
+],[238]);

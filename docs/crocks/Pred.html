@@ -1,0 +1,252 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta content="minimum-scale=1.0, width=device-width" name="viewport"><meta name="description" content="Pred Crock"><title>Pred - Crocks</title><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Roboto+Mono"><!-- inject:css --><link rel="stylesheet" href="/crocks/vendor/galano/galano.css"><link rel="stylesheet" href="/crocks/vendor/icon-12/icon-12.css"><link rel="stylesheet" href="/crocks/vendor/icon-16/icon-16.css"><link rel="stylesheet" href="/crocks/vendor/senna/senna.css"><link rel="stylesheet" href="/crocks/vendor/codemirror/lib/codemirror.css"><link rel="stylesheet" href="/crocks/vendor/codemirror/theme/blackboard.css"><!-- endinject --><!-- inject:js --><script src="/crocks/js/bundles/shared.electric.js"></script><script src="/crocks/vendor/senna/senna.js"></script><script src="/crocks/vendor/codemirror/lib/codemirror.js"></script><script src="/crocks/vendor/codemirror/mode/haskell/haskell.js"></script><script src="/crocks/vendor/codemirror/mode/javascript/javascript.js"></script><!-- endinject --><link rel="icon" href="/crocks/images/favicon.ico" type="image/x-icon"><link rel="stylesheet" href="/crocks/styles/main.css"></head><body data-senna><div data-senna-surface id="wrapper"><div class="senna-loading-bar"></div><!-- inject:metal:js --><div id="pageComponent"><div class="main"><main class="guide"><div class="docs"><nav class="topbar topbar-light topbar-docs"><div class="topbar-logo"><a class="topbar-logo-link" href="/crocks"><span class="topbar-logo-icon icon-16-loop"></span><h3 class="topbar-logo-text">Crocks</h3></a></div><nav class="topbar-menu"><button class="topbar-toggle">Menu</button><ul class="topbar-list"><li class="topbar-item"><a class="topbar-link topbar-link-selected" href="/crocks/docs/" target="undefined"><span>Documentation</span></a></li></ul></nav></nav><nav class="sidebar"><a class="sidebar-header toggler-header-collapsed"><span class="sidebar-icon icon-16-menu"></span><span>Docs Menu</span><span class="sidebar-icon-right"><span class="icon-12-arrow-down-short"></span><span class="icon-12-arrow-up-short"></span></span></a><div class="sidebar-toggler-content toggler-collapsed"><div class="sidebar-search"><div class="page-autocomplete"><div class="form-group"><div class="input-inner-addon input-inner-addon-right"><input autocomplete="off" class="form-control" name="q" placeholder="Search Docs" ref="input" required type="text" ><span class="input-inner-icon-helper icon-16-magnifier"></span></div></div></div></div><nav class=""><ul class="sidebar-list sidebar-list-1"><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/getting-started.html"><span class="sidebar-icon icon-16-arrow-right-rod"></span><span>Getting Started</span></a></li><li class="sidebar-item active"><a class="sidebar-link sidebar-link-selected" href="/crocks/docs/crocks/"><span class="sidebar-icon icon-16-code-file"></span><span>Crocks</span></a><nav class=""><ul class="sidebar-list sidebar-list-1"><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/crocks/Arrow.html"><span>Arrow</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/crocks/Equiv.html"><span>Equiv</span></a></li><li class="sidebar-item active"><a class="sidebar-link sidebar-link-selected" href="/crocks/docs/crocks/Pred.html"><span>Pred</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/crocks/Reader.html"><span>Reader</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/crocks/State.html"><span>State</span></a></li></ul></nav></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/monoids/"><span class="sidebar-icon icon-16-code-file"></span><span>Monoids</span></a><nav class=""><ul class="sidebar-list sidebar-list-1"><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/monoids/All.html"><span>All</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/monoids/Any.html"><span>Any</span></a></li></ul></nav></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/functions/"><span class="sidebar-icon icon-16-code-file"></span><span>Functions</span></a><nav class=""><ul class="sidebar-list sidebar-list-1"><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/functions/combinators.html"><span>Combinators</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/functions/helpers.html"><span>Helpers</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/functions/logic-functions.html"><span>Logic Functions</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/functions/predicate-functions.html"><span>Predicate Functions</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/functions/pointfree-functions.html"><span>Point-free Functions</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/functions/transformation-functions.html"><span>Transformation Functions</span></a></li></ul></nav></li></ul></nav></div></nav><div class="sidebar-offset"><header class="guide-header"><div class="container-hybrid"><h1 class="title">Pred</h1></div></header><div class="container-hybrid"><div class="docs-guide row"><div class="docs-content col-xs-16 col-md-9"><div class="guide-content"><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">Pred a Boolean</code></pre></div><p>Defined as a Monoidal Contravariant datatype, <code>Pred</code> wraps a predicate function of the form <code>(a -&gt; Boolean)</code>.</p><p>The far right parameter of <code>Pred</code> is always fixed to the type of <code>Boolean</code>, so the result of the wrapped predicate function can never be mapped. While the right parameter is fixed, the input to the predicate can vary.</p><p>Another property of <code>Pred</code> instances is that they can be combined using their Monodial interface. Combining instances will result in a new instance that returns the result of each <code>Pred</code> under logical conjunction.</p><p>As <code>Pred</code> wraps a function, it is lazy and will not execute until its argument is satisfied. A given instance is run but calling the <a href="#runwith"><code>runWith</code></a>method, supplying it the argument to test.</p><p>One of the features of <code>crocks</code> is the ability to use both normal predicate functions and <code>Pred</code> instances interchangeably. For any <code>crocks</code> function that takes a predicate, either a predicate function or a <code>Pred</code> instance can be used.</p><p>This implementation of <code>Pred</code> was heavily inspired by <a href="https://medium.com/@drboolean/monoidal-contravariant-functors-are-actually-useful-1032211045c4#.polugsx2a">this article</a>.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">const Pred = require(&#39;crocks/Pred&#39;)
+
+const isNumber = require(&#39;crocks/predicates/isNumber&#39;)
+const propOr = require(&#39;crocks/helpers/propOr&#39;)
+const filter = require(&#39;crocks/pointfree/filter&#39;)
+
+// largeNumber :: Pred Number
+const largeNumber =
+  Pred(isNumber)
+    .concat(Pred(x =&gt; x &gt; 100))
+
+// largeItem :: Pred Object
+const largeItem =
+  largeNumber
+    .contramap(propOr(null, &#39;item&#39;))
+
+largeNumber
+  .runWith(45)
+//=&gt; false
+
+largeNumber
+  .runWith(175)
+//=&gt; true
+
+largeItem
+  .runWith({ item: 190 })
+//=&gt; true
+
+largeItem
+  .runWith({ item: 9 })
+//=&gt; false
+
+largeItem
+  .runWith(9)
+//=&gt; false
+
+filter(largeNumber, [ 200, 375, 15 ])
+//=&gt; [ 200, 375 ]</code></pre></div><article id="implements"><h2>Implements</h2><p><code>Semigroup</code>, <code>Monoid</code>, <code>Contravariant</code></p></article><article id="constructor"><h2>Constructor Methods</h2><h4>empty</h4><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">Pred.empty :: () -&gt; Pred a</code></pre></div><p><code>empty</code> provides the identity for the <code>Monoid</code> in that when the value it provides is <code>concat</code>ed to any other value, it will return the other value. In the case of <code>Pred</code> the result of <code>empty</code> is a <code>Pred</code> that will always return<code>true</code>. <code>empty</code> is available on both the Constructor and the Instance for convenience.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">const Pred = require(&#39;crocks/Pred&#39;)
+
+const isEmpty = require(&#39;crocks/predicates/isEmpty&#39;)
+const not = require(&#39;crocks/logic/not&#39;)
+
+// empty :: Pred a
+const empty =
+  Pred.empty()
+
+// notEmpty :: Pred a
+const notEmpty =
+  Pred(not(isEmpty))
+
+empty
+  .runWith(&#39;&#39;)
+//=&gt; true
+
+notEmpty
+  .concat(empty)
+  .runWith([])
+//=&gt; false
+
+notEmpty
+  .concat(empty)
+  .runWith([ 1, 2, 3 ])
+//=&gt; true
+
+empty
+  .concat(notEmpty)
+  .runWith(&#39;&#39;)
+//=&gt; false
+
+empty
+  .concat(notEmpty)
+  .runWith(&#39;123&#39;)
+//=&gt; true</code></pre></div><h4>type</h4><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">Pred.type :: () -&gt; String</code></pre></div><p><code>type</code> provides a string representation of the type name for a given type in<code>crocks</code>. While it is used mostly internally for law validation, it can be useful to the end user for debugging and building out custom types based on the standard <code>crocks</code> types. While type comparisons can easily be done manually by calling <code>type</code> on a given type, using the <code>isSameType</code> function hides much of the boilerplate. <code>type</code> is available on both the Constructor and the Instance for convenience.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">const Pred = require(&#39;crocks/Pred&#39;)
+
+const Maybe = require(&#39;crocks/Maybe&#39;)
+const isNil = require(&#39;crocks/predicates/isEmpty&#39;)
+const isSameType = require(&#39;crocks/predicates/isSameType&#39;)
+
+Pred.type()   //=&gt;  &quot;Pred&quot;
+
+isSameType(Pred, Pred(isNil))    //=&gt; true
+isSameType(Pred, Pred)           //=&gt; true
+isSameType(Pred, Maybe.Just(4))  //=&gt; false
+isSameType(Pred(isNil), Maybe)   //=&gt; false</code></pre></div></article><article id="instance"><h2>Instance Methods</h2><h4>concat</h4><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">Pred a ~&gt; Pred a -&gt; Pred a</code></pre></div><p><code>concat</code> is used to combine (2) <code>Semigroup</code>s of the same type under an operation specified by the <code>Semigroup</code>. In the case of <code>Pred</code>, the results of both<code>Preds</code>s are combined under logical conjunction.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">const Pred = require(&#39;crocks/Pred&#39;)
+
+const or = require(&#39;crocks/logic/or&#39;)
+const not = require(&#39;crocks/logic/not&#39;)
+const filter = require(&#39;crocks/pointfree/filter&#39;)
+
+const isEven =
+  x =&gt; !(x % 2)
+
+// isOdd :: Pred Number
+const isOdd =
+  Pred(not(isEven))
+
+// lt20 :: Pred Number
+const lt20 =
+  Pred(x =&gt; x &lt; 20)
+
+// gt5 :: Pred Number
+const gt5 =
+  Pred(x =&gt; x &gt; 5)
+
+// inRange :: Pred Number
+const inRange =
+  lt20.concat(gt5)
+
+// isOddInRange :: Pred Number
+const isOddInRange =
+  isOdd.concat(inRange)
+
+// isValid :: Pred Number
+const isValid =
+  Pred(or(isEven, isOddInRange))
+
+// data :: [ Number ]
+const data =
+[ 1, 4, 12, 19, 32, 99, 76, 7 ]
+
+isOdd
+  .runWith(5)
+//=&gt; true
+
+isOdd
+  .runWith(8)
+//=&gt; false
+
+filter(isOdd, data)
+//=&gt; [ 1, 19, 99, 7 ]
+
+filter(lt20, data)
+//=&gt; [ 1, 4, 12, 19, 7 ]
+
+filter(gt5, data)
+//=&gt; [ 12, 19, 32, 99, 76, 7 ]
+
+filter(inRange, data)
+//=&gt; [ 12, 19, 7 ]
+
+filter(isOddInRange, data)
+//=&gt; [ 19, 7 ]
+
+filter(isEven, data)
+// [ 4, 12, 32, 76 ]
+
+filter(isValid, data)
+//=&gt; [ 4, 12, 19, 32, 76, 7 ]</code></pre></div><h4>contramap</h4><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">Pred a ~&gt; (b -&gt; a) -&gt; Pred b</code></pre></div><p>While the output of a <code>Pred</code> is fixed to <code>Boolean</code>, the input can vary type and value. This allows a given <code>Pred</code> to be adapted by mapping on the input, before it hits the wrapped predicate function. Using <code>contramap</code>, functions are lifted, mapping the input to now accept the type of the input of the given function.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">const Pred = require(&#39;crocks/Pred&#39;)
+const contramap = require(&#39;crocks/pointfree/contramap&#39;)
+const propOr = require(&#39;crocks/helpers/propOr&#39;)
+
+// Length :: String | Function | Array
+// length :: Length -&gt; Number
+const length =
+  propOr(0, &#39;length&#39;)
+
+// gt5 :: Pred Number
+const gt5 =
+  Pred(x =&gt; x &gt; 5)
+
+// lengthGt5 :: Pred Length
+const validLength =
+  contramap(length, gt5)
+
+// validItemLength :: Pred Object
+const validItemLength =
+  contramap(propOr(null, &#39;item&#39;), validLength)
+
+gt5
+  .runWith(5)
+//=&gt; false
+
+gt5
+  .runWith(10)
+//=&gt; true
+
+validLength
+  .runWith([ 1, 2, 3, 4, 5, 6 ])
+//=&gt; true
+
+validLength
+  .runWith(null)
+//=&gt; false
+
+validLength
+  .runWith(&#39;1234&#39;)
+//=&gt; false
+
+validItemLength
+  .runWith({ item: &#39;this is an item&#39; })
+//=&gt; true</code></pre></div><h4>valueOf</h4><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">Pred a ~&gt; () -&gt; a -&gt; Boolean</code></pre></div><p><code>valueOf</code> is used on all <code>crocks</code> <code>Monoid</code>s as a means of extraction. While the extraction is available, types that implement <code>valueOf</code> are not necessarily a<code>Comonad</code>. This function is used primarily for convenience for some of the helper functions that ship with <code>crocks</code>.</p><p>Calling <code>valueOf</code> on a <code>Pred</code> instance will result in the underlying predicate function. Most of the time this will not be required when working with <code>crocks</code>because all <code>crocks</code> functions that take a predicate function can also take a<code>Pred</code> instance.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">const Pred = require(&#39;crocks/Pred&#39;)
+
+const isArray = require(&#39;crocks/predicates/isArray&#39;)
+const isString = require(&#39;crocks/predicates/isString&#39;)
+const equals = require(&#39;crocks/pointfree/equals&#39;)
+const or = require(&#39;crocks/logic/or&#39;)
+
+// lengthIsThree :: Pred a
+const lengthIsThree =
+  Pred(equals(3))
+    .contramap(x =&gt; x.length)
+
+// pred :: Pred a
+const pred =
+  Pred(or(isArray, isString))
+    .concat(lengthIsThree)
+
+// fn :: a -&gt; Boolean
+const fn =
+  pred.valueOf()
+
+pred
+  .runWith(null)
+//=&gt; false
+
+pred
+  .runWith([ 1, 2, 3 ])
+//=&gt; true
+
+pred
+  .runWith(&#39;This is fun&#39;)
+//=&gt; true
+
+fn(null)          // false
+fn([ 1, 2, 3 ])   // true
+fn(&#39;This is fun&#39;) // true
+fn([])            // false
+fn(&#39;&#39;)            // false</code></pre></div><h4>runWith</h4><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">Pred a ~&gt; a -&gt; Boolean</code></pre></div><p>As <code>Pred</code> wraps a predicate function, it needs a mean to run it with some value to test against the predicate. <code>Pred</code> instances provide a method called<code>runWith</code> that will accept the value to be tested and then runs it through the predicate returning the result.</p><p>Most of the time this function is not used while working with other predicate functions in <code>crocks</code>, as all functions that take a predicate function also take a <code>Pred</code> instance. It does come in handy though when supplying predicates to other libraries.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">const Pred = require(&#39;crocks/Pred&#39;)
+
+const hasProp = require(&#39;crocks/predicates/hasProp&#39;)
+const equals = require(&#39;crocks/pointfree/equals&#39;)
+const flip = require(&#39;crocks/combinators/flip&#39;)
+const runWith = require(&#39;crocks/pointfree/runWith&#39;)
+
+// trueBlue :: Pred Object
+const trueBlue =
+  Pred(equals(true))
+    .contramap(({ blue }) =&gt; blue)
+
+// isValid :: Pred a
+const isValid =
+  Pred(hasProp(&#39;blue&#39;))
+    .concat(trueBlue)
+
+// checkValid :: a -&gt; Boolean
+const checkValid =
+  flip(runWith, isValid)
+
+checkValid(null)            //=&gt; false
+checkValid([ 1, 2, 3 ])     //=&gt; false
+checkValid({ blue: 32 })    //=&gt; false
+checkValid({ blue: true })  //=&gt; true</code></pre></div></article><input type="hidden" value="Pred"><input type="hidden" value="Crocks"></div><div class="contribute"><div class="contribute-img"><span class="icon-16-github"></span></div><div class="contribute-text"><p>Contribute on Github! <a href="https://github.com/evilsoft/crocks/tree/master/docs/src/pages/docs/crocks/Pred.md" class="contribute-link" target="_blank">Edit this section</a>.</p></div></div></div><nav class="col-xs-16 col-md-offset-2 col-md-5"><div class="docs-nav-container"><div class="affix-top docs-nav"><div ref="readingContainer"></div></div></div></nav></div></div></div></div></main></div></div><script src="/crocks/js/bundles/DGgYA.js"></script><script>var data = JSON.parse('{\x22pageLocation\x22:\x22index.children.docs.children.crocks.children.Pred\x22,\x22site\x22:{\x22title\x22:\x22Crocks\x22,\x22githubRepo\x22:\x22evilsoft\/crocks\x22,\x22googleAnalytics\x22:\x22UA-37033501-5\x22,\x22icon\x22:\x22icon-16-loop\x22,\x22index\x22:{\x22title\x22:\x22Home\x22,\x22description\x22:\x22A collection of well known Monadic Containers for your utter enjoyment.\x22,\x22srcFilePath\x22:\x22src\/pages\/index.soy\x22,\x22id\x22:\x22pages\x22,\x22location\x22:\x22\/.\/\x22,\x22url\x22:\x22\/crocks\/.\/\x22,\x22children\x22:{\x22docs\x22:{\x22children\x22:{\x22getting-started\x22:{\x22title\x22:\x22Getting Started\x22,\x22description\x22:\x22Getting started with a Crocks.\x22,\x22icon\x22:\x22arrow-right-rod\x22,\x22layout\x22:\x22guide\x22,\x22weight\x22:1,\x22srcFilePath\x22:\x22src\/pages\/docs\/getting-started.md\x22,\x22id\x22:\x22getting-started\x22,\x22location\x22:\x22\/docs\/getting-started.html\x22,\x22url\x22:\x22\/crocks\/docs\/getting-started.html\x22},\x22search\x22:{\x22title\x22:\x22Search\x22,\x22description\x22:\x22Find what you\x27re looking for in the documentation.\x22,\x22hidden\x22:true,\x22srcFilePath\x22:\x22src\/pages\/docs\/search.soy\x22,\x22id\x22:\x22search\x22,\x22location\x22:\x22\/docs\/search.html\x22,\x22url\x22:\x22\/crocks\/docs\/search.html\x22},\x22crocks\x22:{\x22children\x22:{\x22Arrow\x22:{\x22title\x22:\x22Arrow\x22,\x22description\x22:\x22Arrow Crock\x22,\x22layout\x22:\x22guide\x22,\x22weight\x22:10,\x22srcFilePath\x22:\x22src\/pages\/docs\/crocks\/Arrow.md\x22,\x22id\x22:\x22Arrow\x22,\x22location\x22:\x22\/docs\/crocks\/Arrow.html\x22,\x22url\x22:\x22\/crocks\/docs\/crocks\/Arrow.html\x22},\x22Equiv\x22:{\x22title\x22:\x22Equiv\x22,\x22description\x22:\x22Equiv Crock\x22,\x22layout\x22:\x22guide\x22,\x22weight\x22:50,\x22srcFilePath\x22:\x22src\/pages\/docs\/crocks\/Equiv.md\x22,\x22id\x22:\x22Equiv\x22,\x22location\x22:\x22\/docs\/crocks\/Equiv.html\x22,\x22url\x22:\x22\/crocks\/docs\/crocks\/Equiv.html\x22},\x22Pred\x22:{\x22title\x22:\x22Pred\x22,\x22description\x22:\x22Pred Crock\x22,\x22layout\x22:\x22guide\x22,\x22weight\x22:100,\x22srcFilePath\x22:\x22src\/pages\/docs\/crocks\/Pred.md\x22,\x22id\x22:\x22Pred\x22,\x22location\x22:\x22\/docs\/crocks\/Pred.html\x22,\x22url\x22:\x22\/crocks\/docs\/crocks\/Pred.html\x22,\x22active\x22:true},\x22Reader\x22:{\x22title\x22:\x22Reader\x22,\x22description\x22:\x22Reader Crock\x22,\x22layout\x22:\x22guide\x22,\x22weight\x22:110,\x22srcFilePath\x22:\x22src\/pages\/docs\/crocks\/Reader.md\x22,\x22id\x22:\x22Reader\x22,\x22location\x22:\x22\/docs\/crocks\/Reader.html\x22,\x22url\x22:\x22\/crocks\/docs\/crocks\/Reader.html\x22},\x22State\x22:{\x22title\x22:\x22State\x22,\x22description\x22:\x22State Crock\x22,\x22layout\x22:\x22guide\x22,\x22weight\x22:130,\x22srcFilePath\x22:\x22src\/pages\/docs\/crocks\/State.md\x22,\x22id\x22:\x22State\x22,\x22location\x22:\x22\/docs\/crocks\/State.html\x22,\x22url\x22:\x22\/crocks\/docs\/crocks\/State.html\x22}},\x22title\x22:\x22Crocks\x22,\x22description\x22:\x22Crocks API\x22,\x22layout\x22:\x22notopic\x22,\x22icon\x22:\x22code-file\x22,\x22weight\x22:2,\x22srcFilePath\x22:\x22src\/pages\/docs\/crocks\/index.md\x22,\x22id\x22:\x22crocks\x22,\x22location\x22:\x22\/docs\/crocks\/\x22,\x22url\x22:\x22\/crocks\/docs\/crocks\/\x22,\x22childIds\x22:[\x22Arrow\x22,\x22Equiv\x22,\x22Pred\x22,\x22Reader\x22,\x22State\x22],\x22active\x22:true},\x22functions\x22:{\x22children\x22:{\x22combinators\x22:{\x22description\x22:\x22Combinators API\x22,\x22layout\x22:\x22notopic\x22,\x22title\x22:\x22Combinators\x22,\x22weight\x22:1,\x22srcFilePath\x22:\x22src\/pages\/docs\/functions\/combinators.md\x22,\x22id\x22:\x22combinators\x22,\x22location\x22:\x22\/docs\/functions\/combinators.html\x22,\x22url\x22:\x22\/crocks\/docs\/functions\/combinators.html\x22},\x22helpers\x22:{\x22title\x22:\x22Helpers\x22,\x22description\x22:\x22Helper functions\x22,\x22layout\x22:\x22notopic\x22,\x22weight\x22:2,\x22srcFilePath\x22:\x22src\/pages\/docs\/functions\/helpers.md\x22,\x22id\x22:\x22helpers\x22,\x22location\x22:\x22\/docs\/functions\/helpers.html\x22,\x22url\x22:\x22\/crocks\/docs\/functions\/helpers.html\x22},\x22logic-functions\x22:{\x22description\x22:\x22Logic Functions API\x22,\x22layout\x22:\x22notopic\x22,\x22title\x22:\x22Logic Functions\x22,\x22weight\x22:3,\x22srcFilePath\x22:\x22src\/pages\/docs\/functions\/logic-functions.md\x22,\x22id\x22:\x22logic-functions\x22,\x22location\x22:\x22\/docs\/functions\/logic-functions.html\x22,\x22url\x22:\x22\/crocks\/docs\/functions\/logic-functions.html\x22},\x22pointfree-functions\x22:{\x22title\x22:\x22Point-free Functions\x22,\x22description\x22:\x22Point-free Functions API\x22,\x22layout\x22:\x22notopic\x22,\x22weight\x22:5,\x22srcFilePath\x22:\x22src\/pages\/docs\/functions\/pointfree-functions.md\x22,\x22id\x22:\x22pointfree-functions\x22,\x22location\x22:\x22\/docs\/functions\/pointfree-functions.html\x22,\x22url\x22:\x22\/crocks\/docs\/functions\/pointfree-functions.html\x22},\x22predicate-functions\x22:{\x22description\x22:\x22Predicate Functions API\x22,\x22layout\x22:\x22notopic\x22,\x22title\x22:\x22Predicate Functions\x22,\x22weight\x22:4,\x22srcFilePath\x22:\x22src\/pages\/docs\/functions\/predicate-functions.md\x22,\x22id\x22:\x22predicate-functions\x22,\x22location\x22:\x22\/docs\/functions\/predicate-functions.html\x22,\x22url\x22:\x22\/crocks\/docs\/functions\/predicate-functions.html\x22},\x22transformation-functions\x22:{\x22title\x22:\x22Transformation Functions\x22,\x22description\x22:\x22Transformation Functions API\x22,\x22layout\x22:\x22notopic\x22,\x22weight\x22:6,\x22srcFilePath\x22:\x22src\/pages\/docs\/functions\/transformation-functions.md\x22,\x22id\x22:\x22transformation-functions\x22,\x22location\x22:\x22\/docs\/functions\/transformation-functions.html\x22,\x22url\x22:\x22\/crocks\/docs\/functions\/transformation-functions.html\x22}},\x22title\x22:\x22Functions\x22,\x22description\x22:\x22functions\x22,\x22layout\x22:\x22notopic\x22,\x22icon\x22:\x22code-file\x22,\x22weight\x22:4,\x22srcFilePath\x22:\x22src\/pages\/docs\/functions\/index.md\x22,\x22id\x22:\x22functions\x22,\x22location\x22:\x22\/docs\/functions\/\x22,\x22url\x22:\x22\/crocks\/docs\/functions\/\x22,\x22childIds\x22:[\x22combinators\x22,\x22helpers\x22,\x22logic-functions\x22,\x22predicate-functions\x22,\x22pointfree-functions\x22,\x22transformation-functions\x22]},\x22monoids\x22:{\x22children\x22:{\x22All\x22:{\x22title\x22:\x22All\x22,\x22description\x22:\x22All Monoid\x22,\x22layout\x22:\x22guide\x22,\x22weight\x22:10,\x22srcFilePath\x22:\x22src\/pages\/docs\/monoids\/All.md\x22,\x22id\x22:\x22All\x22,\x22location\x22:\x22\/docs\/monoids\/All.html\x22,\x22url\x22:\x22\/crocks\/docs\/monoids\/All.html\x22},\x22Any\x22:{\x22title\x22:\x22Any\x22,\x22description\x22:\x22Any Monoid\x22,\x22layout\x22:\x22guide\x22,\x22weight\x22:20,\x22srcFilePath\x22:\x22src\/pages\/docs\/monoids\/Any.md\x22,\x22id\x22:\x22Any\x22,\x22location\x22:\x22\/docs\/monoids\/Any.html\x22,\x22url\x22:\x22\/crocks\/docs\/monoids\/Any.html\x22}},\x22title\x22:\x22Monoids\x22,\x22description\x22:\x22Monoids API\x22,\x22layout\x22:\x22guide\x22,\x22icon\x22:\x22code-file\x22,\x22weight\x22:3,\x22srcFilePath\x22:\x22src\/pages\/docs\/monoids\/index.md\x22,\x22id\x22:\x22monoids\x22,\x22location\x22:\x22\/docs\/monoids\/\x22,\x22url\x22:\x22\/crocks\/docs\/monoids\/\x22,\x22childIds\x22:[\x22All\x22,\x22Any\x22]}},\x22title\x22:\x22Documentation\x22,\x22description\x22:\x22Everything you need to know to get started.\x22,\x22srcFilePath\x22:\x22src\/pages\/docs\/index.soy\x22,\x22id\x22:\x22docs\x22,\x22location\x22:\x22\/docs\/\x22,\x22url\x22:\x22\/crocks\/docs\/\x22,\x22childIds\x22:[\x22getting-started\x22,\x22crocks\x22,\x22monoids\x22,\x22functions\x22,\x22search\x22],\x22active\x22:true}},\x22childIds\x22:[\x22docs\x22]},\x22basePath\x22:\x22\/crocks\x22,\x22topbar\x22:[{\x22href\x22:\x22\/crocks\/docs\/\x22,\x22label\x22:\x22Documentation\x22,\x22selected\x22:true}]}}'); if (window.electricPageComponent) {window.electricPageComponent.dispose();}var getByPath = function(obj, path) {path = path.split('.'); for (var i = 0; i < path.length; i++) {obj = obj[path[i]];}; return obj;}; if (window.pageComponent) {var page = getByPath(data.site, data.pageLocation); if (page) {window.electricPageComponent = pageComponent.default.render(pageComponent.default, {element: '#pageComponent > *', page: page, site: data.site});}if (window.runCodeMirror) {runCodeMirror();}}</script><!-- endinject --></div><!-- inject:vendor:js --><script>CodeMirror.defaults.lineNumbers = true; CodeMirror.defaults.matchBrackets = true; CodeMirror.defaults.readOnly = true; CodeMirror.defaults.tabindex = -1; CodeMirror.defaults.tabSize = 2; CodeMirror.defaults.theme = 'blackboard'; CodeMirror.defaults.viewportMargin = Infinity; var REGEX_LB = /&#123;/g; var REGEX_RB = /&#125;/g; function runCodeMirror() {var code = document.querySelectorAll('.code'); for (var i = 0; i < code.length; i++) {var text = code[i].innerText .replace(REGEX_LB, '{') .replace(REGEX_RB, '}'); var editor = CodeMirror(function(elt) {var preEl = code[i].parentNode; preEl.parentNode.appendChild(elt);}, {mode: code[i].getAttribute('data-mode') || '', value: text});}if (window.ElectricCodeTabs) {new window.ElectricCodeTabs();}}runCodeMirror(); function runGoogleAnalytics(path) {if (typeof ga === 'function') {ga('set', 'page', path); ga('send', 'pageview');}}document.addEventListener('DOMContentLoaded', function() {if (typeof senna !== 'undefined') {var app = senna.dataAttributeHandler.getApp(); app.on('endNavigate', function(event) {runGoogleAnalytics(event.path);});}}); (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga'); ga('create', 'UA-37033501-5', 'auto'); ga('send', 'pageview');</script><!-- endinject --></body></html>

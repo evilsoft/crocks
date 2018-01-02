@@ -1,0 +1,328 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta content="minimum-scale=1.0, width=device-width" name="viewport"><meta name="description" content="Arrow Crock"><title>Arrow - Crocks</title><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Roboto+Mono"><!-- inject:css --><link rel="stylesheet" href="/crocks/vendor/galano/galano.css"><link rel="stylesheet" href="/crocks/vendor/icon-12/icon-12.css"><link rel="stylesheet" href="/crocks/vendor/icon-16/icon-16.css"><link rel="stylesheet" href="/crocks/vendor/senna/senna.css"><link rel="stylesheet" href="/crocks/vendor/codemirror/lib/codemirror.css"><link rel="stylesheet" href="/crocks/vendor/codemirror/theme/blackboard.css"><!-- endinject --><!-- inject:js --><script src="/crocks/js/bundles/shared.electric.js"></script><script src="/crocks/vendor/senna/senna.js"></script><script src="/crocks/vendor/codemirror/lib/codemirror.js"></script><script src="/crocks/vendor/codemirror/mode/haskell/haskell.js"></script><script src="/crocks/vendor/codemirror/mode/javascript/javascript.js"></script><!-- endinject --><link rel="icon" href="/crocks/images/favicon.ico" type="image/x-icon"><link rel="stylesheet" href="/crocks/styles/main.css"></head><body data-senna><div data-senna-surface id="wrapper"><div class="senna-loading-bar"></div><!-- inject:metal:js --><div id="pageComponent"><div class="main"><main class="guide"><div class="docs"><nav class="topbar topbar-light topbar-docs"><div class="topbar-logo"><a class="topbar-logo-link" href="/crocks"><span class="topbar-logo-icon icon-16-loop"></span><h3 class="topbar-logo-text">Crocks</h3></a></div><nav class="topbar-menu"><button class="topbar-toggle">Menu</button><ul class="topbar-list"><li class="topbar-item"><a class="topbar-link topbar-link-selected" href="/crocks/docs/" target="undefined"><span>Documentation</span></a></li></ul></nav></nav><nav class="sidebar"><a class="sidebar-header toggler-header-collapsed"><span class="sidebar-icon icon-16-menu"></span><span>Docs Menu</span><span class="sidebar-icon-right"><span class="icon-12-arrow-down-short"></span><span class="icon-12-arrow-up-short"></span></span></a><div class="sidebar-toggler-content toggler-collapsed"><div class="sidebar-search"><div class="page-autocomplete"><div class="form-group"><div class="input-inner-addon input-inner-addon-right"><input autocomplete="off" class="form-control" name="q" placeholder="Search Docs" ref="input" required type="text" ><span class="input-inner-icon-helper icon-16-magnifier"></span></div></div></div></div><nav class=""><ul class="sidebar-list sidebar-list-1"><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/getting-started.html"><span class="sidebar-icon icon-16-arrow-right-rod"></span><span>Getting Started</span></a></li><li class="sidebar-item active"><a class="sidebar-link sidebar-link-selected" href="/crocks/docs/crocks/"><span class="sidebar-icon icon-16-code-file"></span><span>Crocks</span></a><nav class=""><ul class="sidebar-list sidebar-list-1"><li class="sidebar-item active"><a class="sidebar-link sidebar-link-selected" href="/crocks/docs/crocks/Arrow.html"><span>Arrow</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/crocks/Equiv.html"><span>Equiv</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/crocks/Pred.html"><span>Pred</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/crocks/Reader.html"><span>Reader</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/crocks/State.html"><span>State</span></a></li></ul></nav></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/monoids/"><span class="sidebar-icon icon-16-code-file"></span><span>Monoids</span></a><nav class=""><ul class="sidebar-list sidebar-list-1"><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/monoids/All.html"><span>All</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/monoids/Any.html"><span>Any</span></a></li></ul></nav></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/functions/"><span class="sidebar-icon icon-16-code-file"></span><span>Functions</span></a><nav class=""><ul class="sidebar-list sidebar-list-1"><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/functions/combinators.html"><span>Combinators</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/functions/helpers.html"><span>Helpers</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/functions/logic-functions.html"><span>Logic Functions</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/functions/predicate-functions.html"><span>Predicate Functions</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/functions/pointfree-functions.html"><span>Point-free Functions</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/functions/transformation-functions.html"><span>Transformation Functions</span></a></li></ul></nav></li></ul></nav></div></nav><div class="sidebar-offset"><header class="guide-header"><div class="container-hybrid"><h1 class="title">Arrow</h1></div></header><div class="container-hybrid"><div class="docs-guide row"><div class="docs-content col-xs-16 col-md-9"><div class="guide-content"><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">Arrow a b</code></pre></div><p><code>Arrow</code> is a <code>Profunctor</code> that lifts a function of type <code>a -&gt; b</code> and allows for lazy execution of the function. <code>Arrow</code> can be considered a <code>Strong Profunctor</code>if the underlying data running throw the <code>Arrow</code> is a <code>Pair</code>, typically in the form of <code>Arrow (Pair a c) (Pair b d)</code>. This will allow you to split execution into two distinct paths, applying <code>Arrow</code> to a specific path. The parameters of<code>Arrow</code> represent the function that it wraps, with the input being on the left, and the output on the right. When an <code>Arrow</code> wraps an endomorphism, the signature typically represents both the input and output.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">const Arrow = require(&#39;crocks/Arrow&#39;)
+
+const chain = require(&#39;crocks/pointfree/chain&#39;)
+const compose = require(&#39;crocks/helpers/compose&#39;)
+const isString = require(&#39;crocks/predicates/isString&#39;)
+const option = require(&#39;crocks/pointfree/option&#39;)
+const prop = require(&#39;crocks/Maybe/prop&#39;)
+const safe = require(&#39;crocks/Maybe/safe&#39;)
+
+// arrUpper :: Arrow String
+const arrUpper =
+  Arrow(str =&gt; str.toUpperCase())
+
+arrUpper
+  .runWith(&#39;nice&#39;)
+//=&gt; &#39;NICE&#39;
+
+// getName :: a -&gt; String
+const getName = compose(
+  option(&#39;no name&#39;),
+  chain(safe(isString)),
+  prop(&#39;name&#39;)
+)
+
+// arrUpperName :: Arrow a String
+const arrUpperName =
+  arrUpper
+    .contramap(getName)
+
+arrUpperName
+  .runWith({ name: &#39;joey&#39; })
+//=&gt; &#39;JOEY&#39;
+
+arrUpperName
+  .runWith({ age: 23 })
+//=&gt; &#39;NO NAME&#39;
+
+arrUpperName
+  .runWith({ name: false })
+//=&gt; &#39;NO NAME&#39;</code></pre></div><article id="implements"><h2>Implements</h2><p><code>Semigroupoid</code>, <code>Category</code>, <code>Functor</code>, <code>Contravariant</code>, <code>Profunctor</code></p></article><article id="constructor"><h2>Constructor Methods</h2><h4>id</h4><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">Arrow.id :: () -&gt; Arrow a</code></pre></div><p><code>id</code> provides the identity for the <code>Arrow</code> in that when it is composed to either the left or right side of a given function, it will essentially result in a morphism that is, for all intents and purposes, the given function. For <code>Arrow</code>,<code>id</code> is the simple <code>identity</code> function that echoes it's given argument (<code>x =&gt; x</code>). As a convenience, <code>id</code> is also available on the <code>Arrow</code> instance.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">const Arrow = require(&#39;crocks/Arrow&#39;)
+
+// arrId :: Arrow a
+const id = Arrow.id()
+
+// arrow :: Arrow a String
+const arrow =
+  Arrow(x =&gt; x.toString())
+
+// left :: Arrow a String
+const left =
+  id.compose(arrow)
+
+// right :: Arrow a String
+const right =
+  arrow.compose(id)
+
+right.runWith(12) //=&gt; &#39;12&#39;
+left.runWith(12)  //=&gt; &#39;12&#39;</code></pre></div><h4>type</h4><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">Arrow.type :: () -&gt; String</code></pre></div><p><code>type</code> provides a string representation of the type name for a given type in<code>crocks</code>. While it is used mostly internally for law validation, it can be useful to the end user for debugging and building out custom types based on the standard<code>crocks</code> types. While type comparisons can easily be done manually by calling<code>type</code> on a given type, using the <code>isSameType</code> function hides much of the boilerplate. <code>type</code> is available on both the Constructor and the Instance for convenience.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">const Arrow = require(&#39;crocks/Arrow&#39;)
+const Identity = require(&#39;crocks/Identity&#39;)
+
+const I = require(&#39;crocks/combinators/identity&#39;)
+const isSameType = require(&#39;crocks/predicates/isSameType&#39;)
+
+Arrow.type() //=&gt; &quot;Arrow&quot;
+
+isSameType(Arrow, Arrow(x =&gt; x + 3))  //=&gt; true
+isSameType(Arrow, Arrow)              //=&gt; true
+isSameType(Arrow, Identity(0))        //=&gt; false
+isSameType(Arrow(I), Identity)        //=&gt; false</code></pre></div></article><article id="instance"><h2>Instance Methods</h2><h4>both</h4><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">Pair p =&gt; Arrow a b ~&gt; () -&gt; Arrow (p a a) (p b b)</code></pre></div><p><code>both</code> allows for the mode of a given <code>Arrow</code> to switch to a manner that applies itself to both slots of a <code>Pair</code> that is passed through the <code>Arrow</code>. As noted in the type signature, <code>both</code> will give back an <code>Arrow</code> has a new signature that utilizes a <code>Pair</code> on both sides.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">const Arrow = require(&#39;crocks/Arrow&#39;)
+const Pair = require(&#39;crocks/Pair&#39;)
+
+const merge = require(&#39;crocks/Pair/merge&#39;)
+
+// double :: Number -&gt; Number
+const double =
+  x =&gt; x * 2
+
+// add :: (Number, Number) -&gt; Number
+const add =
+  (x, y) =&gt; x + y
+
+// arrDouble :: Arrow Number
+const arrDouble =
+  Arrow(double)
+
+// arrDoubleAndAdd :: Arrow (Pair Number Number) Number
+const arrDoubleAndAdd =
+  arrDouble
+    .both()
+    .map(merge(add))
+
+arrDouble
+  .runWith(200)  //=&gt; 400
+
+arrDoubleAndAdd
+  .runWith(Pair(200, 10))  //=&gt; 420</code></pre></div><h4>compose</h4><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">Arrow a b ~&gt; Arrow b c -&gt; Arrow a c</code></pre></div><p><code>compose</code> allows you to compose (2) <code>Arrow</code>s together, resulting in a new<code>Arrow</code> that is the result of the composition.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">const Arrow = require(&#39;crocks/Arrow&#39;)
+
+const filter = require(&#39;crocks/pointfree/filter&#39;)
+const map = require(&#39;crocks/pointfree/map&#39;)
+
+// arrFilterEven :: Arrow [ Number ]
+const arrFilterEven =
+  Arrow(filter(x =&gt; !(x % 2)))
+
+// arrDoubleNumbers :: Arrow [ Number ]
+const arrDoubleNumbers =
+  Arrow(map(x =&gt; x * 2))
+
+// arrLength :: Arrow [ a ] -&gt; Number
+const arrLength =
+  Arrow(x =&gt; x.length)
+
+// arrDoubleEven :: Arrow [ Number ]
+const arrDoubleEven =
+  arrFilterEven
+    .compose(arrDoubleNumbers)
+
+// arrEvenCount :: Arrow [ Number ] Number
+const arrEvenCount =
+  arrFilterEven
+    .compose(arrLength)
+
+// data :: [ Number ]
+const data =
+  [ 12, 2, 36, 35 ]
+
+arrDoubleEven
+  .runWith(data)
+//=&gt; [ 24, 4, 72 ]
+
+arrEvenCount
+  .runWith(data)
+//=&gt; 3</code></pre></div><h4>contramap</h4><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">Arrow a b ~&gt; (c -&gt; a) -&gt; Arrow c b</code></pre></div><p>When using <code>contramap</code> on an <code>Arrow</code>, a function can be lifted that will map a given type into the type required for the original <code>Arrow</code>'s input. This allows for &quot;adaption&quot; of given <code>Arrow</code>'s input for better reuse. The resulting type of the lifted function must match the input type of the <code>Arrow</code>.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">const Arrow = require(&#39;crocks/Arrow&#39;)
+
+const chain = require(&#39;crocks/pointfree/chain&#39;)
+const compose = require(&#39;crocks/helpers/compose&#39;)
+const isNumber = require(&#39;crocks/predicates/isNumber&#39;)
+const option = require(&#39;crocks/pointfree/option&#39;)
+const prop = require(&#39;crocks/Maybe/prop&#39;)
+const safe = require(&#39;crocks/Maybe/safe&#39;)
+
+// getValue :: (String, Number) -&gt; a -&gt; Number
+const getValue = (key, def) =&gt; compose(
+  option(def),
+  chain(safe(isNumber)),
+  prop(key)
+)
+
+// arrAdd10 :: Arrow Number
+const arrAdd10 =
+  Arrow(x =&gt; x + 10)
+
+// arrAdd10Value :: Arrow Object Number
+const arrAdd10Value =
+  arrAdd10
+    .contramap(getValue(&#39;value&#39;, 0))
+
+arrAdd10
+  .runWith(23)
+//=&gt; 33
+
+arrAdd10Value
+  .runWith({ value: 23 })
+  //=&gt; 33
+
+arrAdd10Value
+  .runWith({ value: &#39;23&#39; })
+  //=&gt; 10
+
+arrAdd10Value
+  .runWith({ num: &#39;23&#39; })
+//=&gt; 10</code></pre></div><h4>first</h4><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">Pair p =&gt; Arrow a b ~&gt; () -&gt; Arrow (p a c) (p b c)</code></pre></div><p>When calling <code>first</code> on an <code>Arrow</code>, a new <code>Arrow</code> is returned that will expect a <code>Pair</code> with the original input type in the first slot of the <code>Pair</code>. When run, the <code>Arrow</code> will only be applied to the first slot in the <code>Pair</code>, leaving the second slot untouched.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">const Arrow = require(&#39;crocks/Arrow&#39;)
+const branch = require(&#39;crocks/Pair/branch&#39;)
+
+// arrToUpper :: Arrow String
+const arrToUpper =
+  Arrow(x =&gt; x.toUpperCase())
+
+arrToUpper
+  .runWith(&#39;burrito bounce&#39;)
+//=&gt; &#39;BURRITO BOUNCE&#39;
+
+// join :: Pair String -&gt; Object
+const join = p =&gt; ({
+  original: p.snd(),
+  result: p.fst()
+})
+
+// flow :: Arrow String Object
+const flow =
+  arrToUpper
+    .first()
+    .promap(branch, join)
+
+flow
+  .runWith(&#39;taco time&#39;)
+//=&gt; { original: &#39;taco time&#39;, result: &#39;TACO TIME&#39; }</code></pre></div><h4>map</h4><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">Arrow a b ~&gt; (b -&gt; c) -&gt; Arrow a c</code></pre></div><p><code>map</code> allows a function to be lifted that will map the right side of the<code>Arrow</code>. Where <code>contramap</code> is used to map the input, <code>map</code> maps the result of the <code>Arrow</code>, allowing the result to be &quot;adapted&quot; or modified. The input type to the lifted function must match the result the <code>Arrow</code>.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">const Arrow = require(&#39;crocks/Arrow&#39;)
+
+const B = require(&#39;crocks/combinators/composeB&#39;)
+
+// arrFullScale :: Arrow Number
+const arrFullScale =
+  Arrow(x =&gt; 20 * Math.log10(Math.abs(x)))
+
+arrFullScale
+  .runWith(-0.35)
+//=&gt; -9.118639112994488
+
+// round :: Number -&gt; Number
+const round =
+  x =&gt; Math.floor(x * 100) / 100
+
+// stringRep :: Number -&gt; String
+const stringRep =
+  x =&gt; `${x} dBFS`
+
+// Arrow :: Number String
+const arrStringFS =
+  arrFullScale
+    .map(B(stringRep, round))
+
+arrStringFS
+  .runWith(0.35)
+//=&gt; &#39;-9.12 dbFS&#39;</code></pre></div><h4>promap</h4><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">Arrow a b ~&gt; ((c -&gt; a), (b -&gt; d)) -&gt; Arrow c d</code></pre></div><p><code>promap</code> can be used to adapt BOTH ends of an <code>Arrow</code> allowing for existing<code>Arrow</code>s to be reused in places in a flow where the types do not line up. It combines both <code>map</code> and <code>conramap</code> into one operation. Just pass the <code>contramap</code>function as the first argument and the <code>map</code> function as the second.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">const Arrow = require(&#39;crocks/Arrow&#39;)
+
+const chain = require(&#39;crocks/pointfree/chain&#39;)
+const compose = require(&#39;crocks/helpers/compose&#39;)
+const isString = require(&#39;crocks/predicates/isString&#39;)
+const objOf = require(&#39;crocks/helpers/objOf&#39;)
+const option = require(&#39;crocks/pointfree/option&#39;)
+const prop = require(&#39;crocks/Maybe/prop&#39;)
+const safe = require(&#39;crocks/Maybe/safe&#39;)
+
+// upperFirst :: String -&gt; String
+const upperFirst = x =&gt;
+  x.charAt(0)
+    .toUpperCase()
+    .concat(x.slice(1).toLowerCase())
+
+// arrTitleize :: Arrow String
+const arrTitleize =
+  Arrow(x =&gt; x.split(&#39; &#39;).map(upperFirst).join(&#39; &#39;))
+
+arrTitleize
+  .runWith(&#39;tHis is siLLy&#39;)
+//=&gt; &#39;This Is Silly&#39;
+
+// stringProp :: String -&gt; Object -&gt; String
+const stringProp = key =&gt; compose(
+  option(&#39;&#39;),
+  chain(safe(isString)),
+  prop(key)
+)
+
+// arrTitleObject :: Arrow Object
+const arrTitleObject =
+  arrTitleize
+    .promap(stringProp(&#39;title&#39;), objOf(&#39;title&#39;))
+
+arrTitleObject
+  .runWith({ title: &#39;SaY wHaT!?!&#39; })
+// { title: &#39;Say What!?!&#39; }
+
+arrTitleObject
+  .runWith({ title: true })
+// { title: &#39;&#39; }</code></pre></div><h4>runWith</h4><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">Arrow a b ~&gt; a -&gt; b</code></pre></div><p><code>Arrow</code>s are lazy to make combining and extending them easy. Once you have your final computation built out and you are ready to execute it, all you have to do is call <code>runWith</code> on it, passing in the argument you what to run it with.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">const Arrow = require(&#39;crocks/Arrow&#39;)
+const Sum = require(&#39;crocks/Sum&#39;)
+
+const branch = require(&#39;crocks/Pair/branch&#39;)
+const merge = require(&#39;crocks/Pair/merge&#39;)
+const mreduce = require(&#39;crocks/helpers/mreduce&#39;)
+
+// data :: [ Number ]
+const data =
+  [ 35, 60, 22, 100 ]
+
+// arrLength :: Arrow [ a ] Number
+const arrLength =
+  Arrow(x =&gt; x.length)
+
+arrLength
+  .runWith(data)
+//=&gt; 4
+
+// arrSum :: Arrow [ Number ] Number
+const arrSum =
+  Arrow(mreduce(Sum))
+
+arrSum
+  .runWith(data)
+//=&gt; 217
+
+// arrAvgList :: Arrow [ Number ] Number
+const arrAvgList =
+  arrSum.first()
+    .compose(arrLength.second())
+    .promap(branch, merge((x, y) =&gt; x / y))
+
+arrAvgList
+  .runWith(data)
+//=&gt; 54.25</code></pre></div><h4>second</h4><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">Pair p =&gt; Arrow a b ~&gt; () -&gt; Arrow (p c a) (p c b)</code></pre></div><p>Used to apply a given <code>Arrow</code> over the second slot of a <code>Pair</code>, leaving the first slot untouched. The input to the <code>Arrow</code> must match the expected type on the second slot of the incoming <code>Pair</code>.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">const Arrow = require(&#39;crocks/Arrow&#39;)
+
+const assign = require(&#39;crocks/helpers/assign&#39;)
+const branch = require(&#39;crocks/Pair/branch&#39;)
+const merge = require(&#39;crocks/Pair/merge&#39;)
+const objOf = require(&#39;crocks/helpers/objOf&#39;)
+
+// names :: Object
+const names = {
+  first: &#39;Joey&#39;,
+  last: &#39;Fella&#39;
+}
+
+// arrFull :: Arrow Object
+const arrFull =
+  Arrow(({ first, last }) =&gt; `${first} ${last}`)
+    .map(objOf(&#39;full&#39;))
+//=&gt; { full: &#39;Joey Fella&#39; }
+
+// arrAddFull :: Arrow Object
+const arrAddFull =
+  arrFull
+    .second()
+    .promap(branch, merge(assign))
+
+arrAddFull
+  .runWith(names)
+//=&gt; { full: &#39;Joey Fella&#39;, first: &#39;Joey&#39;, last: &#39;Fella&#39; }</code></pre></div></article><input type="hidden" value="Arrow"><input type="hidden" value="Crocks"></div><div class="contribute"><div class="contribute-img"><span class="icon-16-github"></span></div><div class="contribute-text"><p>Contribute on Github! <a href="https://github.com/evilsoft/crocks/tree/master/docs/src/pages/docs/crocks/Arrow.md" class="contribute-link" target="_blank">Edit this section</a>.</p></div></div></div><nav class="col-xs-16 col-md-offset-2 col-md-5"><div class="docs-nav-container"><div class="affix-top docs-nav"><div ref="readingContainer"></div></div></div></nav></div></div></div></div></main></div></div><script src="/crocks/js/bundles/jwUBL.js"></script><script>var data = JSON.parse('{\x22pageLocation\x22:\x22index.children.docs.children.crocks.children.Arrow\x22,\x22site\x22:{\x22title\x22:\x22Crocks\x22,\x22githubRepo\x22:\x22evilsoft\/crocks\x22,\x22googleAnalytics\x22:\x22UA-37033501-5\x22,\x22icon\x22:\x22icon-16-loop\x22,\x22index\x22:{\x22title\x22:\x22Home\x22,\x22description\x22:\x22A collection of well known Monadic Containers for your utter enjoyment.\x22,\x22srcFilePath\x22:\x22src\/pages\/index.soy\x22,\x22id\x22:\x22pages\x22,\x22location\x22:\x22\/.\/\x22,\x22url\x22:\x22\/crocks\/.\/\x22,\x22children\x22:{\x22docs\x22:{\x22children\x22:{\x22getting-started\x22:{\x22title\x22:\x22Getting Started\x22,\x22description\x22:\x22Getting started with a Crocks.\x22,\x22icon\x22:\x22arrow-right-rod\x22,\x22layout\x22:\x22guide\x22,\x22weight\x22:1,\x22srcFilePath\x22:\x22src\/pages\/docs\/getting-started.md\x22,\x22id\x22:\x22getting-started\x22,\x22location\x22:\x22\/docs\/getting-started.html\x22,\x22url\x22:\x22\/crocks\/docs\/getting-started.html\x22},\x22search\x22:{\x22title\x22:\x22Search\x22,\x22description\x22:\x22Find what you\x27re looking for in the documentation.\x22,\x22hidden\x22:true,\x22srcFilePath\x22:\x22src\/pages\/docs\/search.soy\x22,\x22id\x22:\x22search\x22,\x22location\x22:\x22\/docs\/search.html\x22,\x22url\x22:\x22\/crocks\/docs\/search.html\x22},\x22crocks\x22:{\x22children\x22:{\x22Arrow\x22:{\x22title\x22:\x22Arrow\x22,\x22description\x22:\x22Arrow Crock\x22,\x22layout\x22:\x22guide\x22,\x22weight\x22:10,\x22srcFilePath\x22:\x22src\/pages\/docs\/crocks\/Arrow.md\x22,\x22id\x22:\x22Arrow\x22,\x22location\x22:\x22\/docs\/crocks\/Arrow.html\x22,\x22url\x22:\x22\/crocks\/docs\/crocks\/Arrow.html\x22,\x22active\x22:true},\x22Equiv\x22:{\x22title\x22:\x22Equiv\x22,\x22description\x22:\x22Equiv Crock\x22,\x22layout\x22:\x22guide\x22,\x22weight\x22:50,\x22srcFilePath\x22:\x22src\/pages\/docs\/crocks\/Equiv.md\x22,\x22id\x22:\x22Equiv\x22,\x22location\x22:\x22\/docs\/crocks\/Equiv.html\x22,\x22url\x22:\x22\/crocks\/docs\/crocks\/Equiv.html\x22},\x22Pred\x22:{\x22title\x22:\x22Pred\x22,\x22description\x22:\x22Pred Crock\x22,\x22layout\x22:\x22guide\x22,\x22weight\x22:100,\x22srcFilePath\x22:\x22src\/pages\/docs\/crocks\/Pred.md\x22,\x22id\x22:\x22Pred\x22,\x22location\x22:\x22\/docs\/crocks\/Pred.html\x22,\x22url\x22:\x22\/crocks\/docs\/crocks\/Pred.html\x22},\x22Reader\x22:{\x22title\x22:\x22Reader\x22,\x22description\x22:\x22Reader Crock\x22,\x22layout\x22:\x22guide\x22,\x22weight\x22:110,\x22srcFilePath\x22:\x22src\/pages\/docs\/crocks\/Reader.md\x22,\x22id\x22:\x22Reader\x22,\x22location\x22:\x22\/docs\/crocks\/Reader.html\x22,\x22url\x22:\x22\/crocks\/docs\/crocks\/Reader.html\x22},\x22State\x22:{\x22title\x22:\x22State\x22,\x22description\x22:\x22State Crock\x22,\x22layout\x22:\x22guide\x22,\x22weight\x22:130,\x22srcFilePath\x22:\x22src\/pages\/docs\/crocks\/State.md\x22,\x22id\x22:\x22State\x22,\x22location\x22:\x22\/docs\/crocks\/State.html\x22,\x22url\x22:\x22\/crocks\/docs\/crocks\/State.html\x22}},\x22title\x22:\x22Crocks\x22,\x22description\x22:\x22Crocks API\x22,\x22layout\x22:\x22notopic\x22,\x22icon\x22:\x22code-file\x22,\x22weight\x22:2,\x22srcFilePath\x22:\x22src\/pages\/docs\/crocks\/index.md\x22,\x22id\x22:\x22crocks\x22,\x22location\x22:\x22\/docs\/crocks\/\x22,\x22url\x22:\x22\/crocks\/docs\/crocks\/\x22,\x22childIds\x22:[\x22Arrow\x22,\x22Equiv\x22,\x22Pred\x22,\x22Reader\x22,\x22State\x22],\x22active\x22:true},\x22functions\x22:{\x22children\x22:{\x22combinators\x22:{\x22description\x22:\x22Combinators API\x22,\x22layout\x22:\x22notopic\x22,\x22title\x22:\x22Combinators\x22,\x22weight\x22:1,\x22srcFilePath\x22:\x22src\/pages\/docs\/functions\/combinators.md\x22,\x22id\x22:\x22combinators\x22,\x22location\x22:\x22\/docs\/functions\/combinators.html\x22,\x22url\x22:\x22\/crocks\/docs\/functions\/combinators.html\x22},\x22helpers\x22:{\x22title\x22:\x22Helpers\x22,\x22description\x22:\x22Helper functions\x22,\x22layout\x22:\x22notopic\x22,\x22weight\x22:2,\x22srcFilePath\x22:\x22src\/pages\/docs\/functions\/helpers.md\x22,\x22id\x22:\x22helpers\x22,\x22location\x22:\x22\/docs\/functions\/helpers.html\x22,\x22url\x22:\x22\/crocks\/docs\/functions\/helpers.html\x22},\x22logic-functions\x22:{\x22description\x22:\x22Logic Functions API\x22,\x22layout\x22:\x22notopic\x22,\x22title\x22:\x22Logic Functions\x22,\x22weight\x22:3,\x22srcFilePath\x22:\x22src\/pages\/docs\/functions\/logic-functions.md\x22,\x22id\x22:\x22logic-functions\x22,\x22location\x22:\x22\/docs\/functions\/logic-functions.html\x22,\x22url\x22:\x22\/crocks\/docs\/functions\/logic-functions.html\x22},\x22pointfree-functions\x22:{\x22title\x22:\x22Point-free Functions\x22,\x22description\x22:\x22Point-free Functions API\x22,\x22layout\x22:\x22notopic\x22,\x22weight\x22:5,\x22srcFilePath\x22:\x22src\/pages\/docs\/functions\/pointfree-functions.md\x22,\x22id\x22:\x22pointfree-functions\x22,\x22location\x22:\x22\/docs\/functions\/pointfree-functions.html\x22,\x22url\x22:\x22\/crocks\/docs\/functions\/pointfree-functions.html\x22},\x22predicate-functions\x22:{\x22description\x22:\x22Predicate Functions API\x22,\x22layout\x22:\x22notopic\x22,\x22title\x22:\x22Predicate Functions\x22,\x22weight\x22:4,\x22srcFilePath\x22:\x22src\/pages\/docs\/functions\/predicate-functions.md\x22,\x22id\x22:\x22predicate-functions\x22,\x22location\x22:\x22\/docs\/functions\/predicate-functions.html\x22,\x22url\x22:\x22\/crocks\/docs\/functions\/predicate-functions.html\x22},\x22transformation-functions\x22:{\x22title\x22:\x22Transformation Functions\x22,\x22description\x22:\x22Transformation Functions API\x22,\x22layout\x22:\x22notopic\x22,\x22weight\x22:6,\x22srcFilePath\x22:\x22src\/pages\/docs\/functions\/transformation-functions.md\x22,\x22id\x22:\x22transformation-functions\x22,\x22location\x22:\x22\/docs\/functions\/transformation-functions.html\x22,\x22url\x22:\x22\/crocks\/docs\/functions\/transformation-functions.html\x22}},\x22title\x22:\x22Functions\x22,\x22description\x22:\x22functions\x22,\x22layout\x22:\x22notopic\x22,\x22icon\x22:\x22code-file\x22,\x22weight\x22:4,\x22srcFilePath\x22:\x22src\/pages\/docs\/functions\/index.md\x22,\x22id\x22:\x22functions\x22,\x22location\x22:\x22\/docs\/functions\/\x22,\x22url\x22:\x22\/crocks\/docs\/functions\/\x22,\x22childIds\x22:[\x22combinators\x22,\x22helpers\x22,\x22logic-functions\x22,\x22predicate-functions\x22,\x22pointfree-functions\x22,\x22transformation-functions\x22]},\x22monoids\x22:{\x22children\x22:{\x22All\x22:{\x22title\x22:\x22All\x22,\x22description\x22:\x22All Monoid\x22,\x22layout\x22:\x22guide\x22,\x22weight\x22:10,\x22srcFilePath\x22:\x22src\/pages\/docs\/monoids\/All.md\x22,\x22id\x22:\x22All\x22,\x22location\x22:\x22\/docs\/monoids\/All.html\x22,\x22url\x22:\x22\/crocks\/docs\/monoids\/All.html\x22},\x22Any\x22:{\x22title\x22:\x22Any\x22,\x22description\x22:\x22Any Monoid\x22,\x22layout\x22:\x22guide\x22,\x22weight\x22:20,\x22srcFilePath\x22:\x22src\/pages\/docs\/monoids\/Any.md\x22,\x22id\x22:\x22Any\x22,\x22location\x22:\x22\/docs\/monoids\/Any.html\x22,\x22url\x22:\x22\/crocks\/docs\/monoids\/Any.html\x22}},\x22title\x22:\x22Monoids\x22,\x22description\x22:\x22Monoids API\x22,\x22layout\x22:\x22guide\x22,\x22icon\x22:\x22code-file\x22,\x22weight\x22:3,\x22srcFilePath\x22:\x22src\/pages\/docs\/monoids\/index.md\x22,\x22id\x22:\x22monoids\x22,\x22location\x22:\x22\/docs\/monoids\/\x22,\x22url\x22:\x22\/crocks\/docs\/monoids\/\x22,\x22childIds\x22:[\x22All\x22,\x22Any\x22]}},\x22title\x22:\x22Documentation\x22,\x22description\x22:\x22Everything you need to know to get started.\x22,\x22srcFilePath\x22:\x22src\/pages\/docs\/index.soy\x22,\x22id\x22:\x22docs\x22,\x22location\x22:\x22\/docs\/\x22,\x22url\x22:\x22\/crocks\/docs\/\x22,\x22childIds\x22:[\x22getting-started\x22,\x22crocks\x22,\x22monoids\x22,\x22functions\x22,\x22search\x22],\x22active\x22:true}},\x22childIds\x22:[\x22docs\x22]},\x22basePath\x22:\x22\/crocks\x22,\x22topbar\x22:[{\x22href\x22:\x22\/crocks\/docs\/\x22,\x22label\x22:\x22Documentation\x22,\x22selected\x22:true}]}}'); if (window.electricPageComponent) {window.electricPageComponent.dispose();}var getByPath = function(obj, path) {path = path.split('.'); for (var i = 0; i < path.length; i++) {obj = obj[path[i]];}; return obj;}; if (window.pageComponent) {var page = getByPath(data.site, data.pageLocation); if (page) {window.electricPageComponent = pageComponent.default.render(pageComponent.default, {element: '#pageComponent > *', page: page, site: data.site});}if (window.runCodeMirror) {runCodeMirror();}}</script><!-- endinject --></div><!-- inject:vendor:js --><script>CodeMirror.defaults.lineNumbers = true; CodeMirror.defaults.matchBrackets = true; CodeMirror.defaults.readOnly = true; CodeMirror.defaults.tabindex = -1; CodeMirror.defaults.tabSize = 2; CodeMirror.defaults.theme = 'blackboard'; CodeMirror.defaults.viewportMargin = Infinity; var REGEX_LB = /&#123;/g; var REGEX_RB = /&#125;/g; function runCodeMirror() {var code = document.querySelectorAll('.code'); for (var i = 0; i < code.length; i++) {var text = code[i].innerText .replace(REGEX_LB, '{') .replace(REGEX_RB, '}'); var editor = CodeMirror(function(elt) {var preEl = code[i].parentNode; preEl.parentNode.appendChild(elt);}, {mode: code[i].getAttribute('data-mode') || '', value: text});}if (window.ElectricCodeTabs) {new window.ElectricCodeTabs();}}runCodeMirror(); function runGoogleAnalytics(path) {if (typeof ga === 'function') {ga('set', 'page', path); ga('send', 'pageview');}}document.addEventListener('DOMContentLoaded', function() {if (typeof senna !== 'undefined') {var app = senna.dataAttributeHandler.getApp(); app.on('endNavigate', function(event) {runGoogleAnalytics(event.path);});}}); (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga'); ga('create', 'UA-37033501-5', 'auto'); ga('send', 'pageview');</script><!-- endinject --></body></html>

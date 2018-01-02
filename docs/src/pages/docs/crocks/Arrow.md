@@ -12,11 +12,13 @@ Arrow a b
 `Arrow` is a `Profunctor` that lifts a function of type `a -> b` and allows for
 lazy execution of the function. `Arrow` can be considered a `Strong Profunctor`
 if the underlying data running throw the `Arrow` is a `Pair`, typically in the
-form of `Arrow (Pair a c) (Pair b d)`. This will allow you to split execution
-into two distinct paths, applying `Arrow` to a specific path. The parameters of
-`Arrow` represent the function that it wraps, with the input being on the left,
-and the output on the right. When an `Arrow` wraps an endomorphism, the signature
-typically represents both the input and output.
+form of `Arrow (Pair a c) (Pair b d)`.
+
+This will allow you to split execution into two distinct paths, applying `Arrow`
+to a specific path. The parameters of `Arrow` represent the function that it
+wraps, with the input being on the left, and the output on the right. When an
+`Arrow` wraps an endomorphism, the signature typically represents both the input
+and output.
 
 ```javascript
 const Arrow = require('crocks/Arrow')
@@ -61,14 +63,14 @@ arrUpperName
 //=> 'NO NAME'
 ```
 
-<article id="implements">
+<article id="topic-implements">
 
 ## Implements
 `Semigroupoid`, `Category`, `Functor`, `Contravariant`, `Profunctor`
 
 </article>
 
-<article id="constructor">
+<article id="topic-constructor">
 
 ## Constructor Methods
 
@@ -136,7 +138,7 @@ isSameType(Arrow(I), Identity)        //=> false
 
 </article>
 
-<article id="instance">
+<article id="topic-instance">
 
 ## Instance Methods
 

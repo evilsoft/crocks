@@ -39,14 +39,14 @@ anyNumber([ true, 'string' ])
 //=> Any false
 ```
 
-<article id="implements">
+<article id="topic-implements">
 
 ## Implements
 `Semigroup`, `Monoid`
 
 </article>
 
-<article id="constructor">
+<article id="topic-constructor">
 
 ## Constructor Methods
 
@@ -101,7 +101,7 @@ isSameType(Any, Assign({ food: 'always' }))
 
 </article>
 
-<article id="instance">
+<article id="topic-instance">
 
 ## Instance Methods
 

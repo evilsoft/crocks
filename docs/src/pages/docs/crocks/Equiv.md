@@ -17,8 +17,8 @@ some powerful results.
 
 While the far right parameter is always fixed to `Boolean` it cannot be
 Covariant, but is Contravariant allowing both inputs to vary in their type.
-`Equiv` is also a `Monoid` and will concat the results of (2) `Equiv`s under
-logical conjunction, with it's empty value always returning `true`.
+`Equiv` is also a [`Monoid`][monoids] and will concat the results of (2) `Equiv`s
+under logical conjunction, with it's empty value always returning `true`.
 
 As `Equiv` wraps a function, it is lazy and a given instance will not produce
 a result until both arguments are satisfied. A given instance can be run by
@@ -51,14 +51,14 @@ eq.contramap(length)
 //=> false
 ```
 
-<article id="implements">
+<article id="topic-implements">
 
 ## Implements
 `Semigroup`, `Monoid`, `Contravariant`
 
 </article>
 
-<article id="constructor">
+<article id="topic-constructor">
 
 ## Constructor Methods
 
@@ -130,7 +130,7 @@ isSameType(Equiv(equals), Endo)     //=> false
 
 </article>
 
-<article id="instance">
+<article id="topic-instance">
 
 ## Instance Methods
 
@@ -370,3 +370,5 @@ bothBig
 ```
 
 </article>
+
+[monoids]: ../monoids/index.html

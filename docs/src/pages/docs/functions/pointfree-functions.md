@@ -54,14 +54,15 @@ accepted Datatype):
 | `both` | `m (a -> b) -> m (Pair a a -> Pair b b)` | `crocks/pointfree` |
 | `chain` | `(a -> m b) -> m a -> m b` | `crocks/pointfree` |
 | `coalesce` | `(a -> c) -> (b -> c) -> m a b -> m _ c` | `crocks/pointfree` |
+| `compareWith` | `a -> a -> m a -> b` | `crocks/pointfree` |
 | `concat` | `m a -> m a -> m a` | `crocks/pointfree` |
 | `cons` | `a -> m a -> m a` | `crocks/pointfree` |
 | `contramap` | `(b -> a) -> m a -> m b` | `crocks/pointfree` |
 | `either` | `(a -> c) -> (b -> c) -> m a b -> c` | `crocks/pointfree` |
 | `empty` | `m -> m` | `crocks/pointfree` |
 | `equals` | `m -> m -> Boolean` | `crocks/pointfree` |
-| `evalWith` | `a -> m -> b` | `crocks/State` |
-| `execWith` | `a -> m -> b` | `crocks/State` |
+| [`evalWith`][eval] | `s -> m -> a` | `crocks/State` |
+| [`execWith`][exec] | `s -> m -> s` | `crocks/State` |
 | `extend` | `(m a -> b) -> m a -> m b` | `crocks/pointfree` |
 | `filter` | <code>((a -> Boolean) &#124; Pred a) -> m a -> m a</code> | `crocks/pointfree` |
 | `first` | `m (a -> b) -> m (Pair a c -> Pair b c)` | `crocks/pointfree` |
@@ -90,38 +91,82 @@ accepted Datatype):
 | Function | Datatypes |
 |---|:---|
 | `alt` | `Async`, `Either`, `Maybe`, `Result` |
-| `ap` | `Array`, `Async`, `Const`, `Either`, `Identity`, `IO`, `List`, `Maybe`, `Pair`, `Reader`, `Result`, `State`, `Unit`, `Writer` |
+| `ap` | `Array`, `Async`, `Const`, `Either`, `Identity`, `IO`, `List`, `Maybe`, `Pair`, [`Reader`][reader-ap], `Result`, [`State`][state-ap], `Unit`, `Writer` |
 | `bimap` | `Async`, `Either`, `Pair`, `Result` |
-| `both` | `Arrow`, `Function`, `Star` |
-| `chain` | `Array`, `Async`, `Const`, `Either`, `Identity`, `IO`, `List`, `Maybe`, `Pair`, `Reader`, `Result`, `State`, `Unit`, `Writer` |
+| `both` | [`Arrow`][arrow-both], `Function`, `Star` |
+| `chain` | `Array`, `Async`, `Const`, `Either`, `Identity`, `IO`, `List`, `Maybe`, `Pair`, [`Reader`][reader-chain], `Result`, [`State`][state-chain], `Unit`, `Writer` |
 | `coalesce` | `Async`, `Either`, `Maybe`, `Result` |
-| `concat` | `All`, `Any`, `Array`, `Assign`, `Const`, `Either`, `Endo`, `First`, `Identity`, `Last`, `List`, `Max`, `Maybe`, `Min`, `Pair`, `Pred`, `Prod`, `Result`, `String`, `Sum`, `Unit` |
+| `compareWith` | [`Equiv`][equiv-compare] |
+| `concat` | [`All`][all-concat], [`Any`][any-concat], `Array`, `Assign`, `Const`, `Either`, `Endo`, [`Equiv`][equiv-concat], `First`, `Identity`, `Last`, `List`, `Max`, `Maybe`, `Min`, `Pair`, [`Pred`][pred-concat], `Prod`, `Result`, `String`, `Sum`, `Unit` |
 | `cons` | `Array`, `List` |
-| `contramap` | `Arrow`, `Pred`, `Star` |
+| `contramap` | [`Arrow`][arrow-contra], [`Equiv`][equiv-contra], [`Pred`][pred-contra], `Star` |
 | `either` | `Either`, `Maybe`, `Result` |
-| `empty` | `All`, `Any`, `Array`, `Assign`, `Endo`, `First`, `Last`, `List`, `Max`, `Min`, `Object`, `Pred`, `Prod`, `String`, `Sum`, `Unit` |
-| `evalWith` | `State` |
-| `execWith` | `State` |
+| `empty` | [`All`][all-empty], [`Any`][any-empty], `Array`, `Assign`, `Endo`, [`Equiv`][equiv-empty], `First`, `Last`, `List`, `Max`, `Min`, `Object`, [`Pred`][pred-empty], `Prod`, `String`, `Sum`, `Unit` |
+| [`evalWith`][eval] | [`State`][state-eval] |
+| [`execWith`][exec] | [`State`][state-exec] |
 | `extend` | `Pair` |
 | `filter` | `Array`, `List`, `Object` |
-| `first` | `Arrow`, `Function`, `Star` |
+| `first` | [`Arrow`][arrow-first], `Function`, `Star` |
 | `fold` | `Array`, `List` |
 | `fst` | `Pair` |
 | `head` | `Array`, `List`, `String` |
 | `log` | `Writer` |
-| `map` | `Async`, `Array`, `Arrow`, `Const`, `Either`, `Function`, `Identity`, `IO`, `List`, `Maybe`, `Object`, `Pair`, `Reader`, `Result`, `Star`, `State`, `Unit`, `Writer` |
+| `map` | `Async`, `Array`, [`Arrow`][arrow-map], `Const`, `Either`, `Function`, `Identity`, `IO`, `List`, `Maybe`, `Object`, `Pair`, [`Reader`][reader-map], `Result`, `Star`, [`State`][state-map], `Unit`, `Writer` |
 | `merge` | `Pair` |
 | `option` | `First`, `Last`, `Maybe` |
-| `promap` | `Arrow`, `Star` |
+| `promap` | [`Arrow`][arrow-pro], `Star` |
 | `read` | `Writer` |
 | `reduce` | `Array`, `List` |
 | `reject` | `Array`, `List`, `Object` |
 | `run` | `IO` |
-| `runWith` | `Arrow`, `Endo`, `Pred`, `Reader`, `Star`, `State` |
-| `second` | `Arrow`, `Function`, `Star` |
+| `runWith` | [`Arrow`][arrow-run], `Endo`, [`Pred`][pred-run], [`Reader`][reader-run], `Star`, [`State`][state-run] |
+| `second` | [`Arrow`][arrow-second], `Function`, `Star` |
 | `sequence` | `Array`, `Either`, `Identity`, `List`, `Maybe`, `Result` |
 | `snd` | `Pair` |
 | `swap` | `Async`, `Either`, `Pair`, `Result` |
 | `tail` | `Array`, `List`, `String` |
 | `traverse` | `Array`, `Either`, `Identity`, `List`, `Maybe`, `Result` |
-| `valueOf` | `All`, `Any`, `Assign`, `Const`, `Endo`, `First`, `Identity`, `Last`, `Max`, `Min`, `Pred`, `Prod`, `Sum`, `Unit`, `Writer` |
+| `valueOf` | [`All`][all-value], [`Any`][any-value], `Assign`, `Const`, `Endo`, [`Equiv`][equiv-value], `First`, `Identity`, `Last`, `Max`, `Min`, [`Pred`][pred-value], `Prod`, `Sum`, `Unit`, `Writer` |
+
+[all-concat]: ../monoids/all.html#concat
+[all-empty]: ../monoids/all.html#empty
+[all-value]: ../monoids/all.html#valueof
+
+[any-concat]: ../monoids/any.html#concat
+[any-empty]: ../monoids/any.html#empty
+[any-value]: ../monoids/any.html#valueof
+
+[arrow-both]: ../crocks/arrow.html#both
+[arrow-contra]: ../crocks/arrow.html#contramap
+[arrow-first]: ../crocks/arrow.html#first
+[arrow-map]: ../crocks/arrow.html#map
+[arrow-pro]: ../crocks/arrow.html#promap
+[arrow-run]: ../crocks/arrow.html#runwith
+[arrow-second]: ../crocks/arrow.html#second
+
+[equiv-compare]: ../crocks/equiv.html#comparewith
+[equiv-concat]: ../crocks/equiv.html#concat
+[equiv-contra]: ../crocks/equiv.html#contramap
+[equiv-empty]: ../crocks/equiv.html#empty
+[equiv-value]: ../crocks/equiv.html#valueof
+
+[pred-concat]: ../crocks/pred.html#concat
+[pred-contra]: ../crocks/pred.html#contramap
+[pred-empty]: ../crocks/pred.html#empty
+[pred-run]: ../crocks/pred.html#runwith
+[pred-value]: ../crocks/pred.html#valueof
+
+[reader-ap]: ../crocks/reader.html#ap
+[reader-chain]: ../crocks/reader.html#chain
+[reader-map]: ../crocks/reader.html#map
+[reader-run]: ../crocks/reader.html#runwith
+
+[state-ap]: ../crocks/state.html#ap
+[state-chain]: ../crocks/state.html#chain
+[state-eval]: ../crocks/state.html#evalwith
+[state-exec]: ../crocks/state.html#execwith
+[state-map]: ../crocks/state.html#map
+[state-run]: ../crocks/state.html#runwith
+
+[exec]: ../crocks/state.html#execwith-pointfree
+[eval]: ../crocks/state.html#evalwith-pointfree

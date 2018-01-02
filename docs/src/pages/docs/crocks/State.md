@@ -2,7 +2,7 @@
 title: "State"
 description: "State Crock"
 layout: "guide"
-weight: 130
+weight: 140
 ---
 
 ```haskell
@@ -76,14 +76,14 @@ get(toUpper)
 //=> 'nice'
 ```
 
-<article id="implements">
+<article id="topic-implements">
 
 ## Implements
 `Functor`, `Apply`, `Chain`, `Applicative`, `Monad`
 
 </article>
 
-<article id="constructor">
+<article id="topic-constructor">
 
 ## Constructor Methods
 
@@ -292,7 +292,7 @@ isSameType(State.of(false), Reader)   //=> false
 
 </article>
 
-<article id="instance">
+<article id="topic-instance">
 
 ## Instance Methods
 
@@ -603,7 +603,7 @@ yell
 
 </article>
 
-<article id="pointfree">
+<article id="topic-pointfree">
 
 ## Pointfree Functions
 

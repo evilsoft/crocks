@@ -71,14 +71,14 @@ filter(largeNumber, [ 200, 375, 15 ])
 //=> [ 200, 375 ]
 ```
 
-<article id="implements">
+<article id="topic-implements">
 
 ## Implements
 `Semigroup`, `Monoid`, `Contravariant`
 
 </article>
 
-<article id="constructor">
+<article id="topic-constructor">
 
 ## Constructor Methods
 
@@ -162,7 +162,7 @@ isSameType(Pred(isNil), Maybe)   //=> false
 
 </article>
 
-<article id="instance">
+<article id="topic-instance">
 
 ## Instance Methods
 

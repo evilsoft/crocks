@@ -38,14 +38,14 @@ allGood([ 'nice', '00', null ])
 //=> All false
 ```
 
-<article id="implements">
+<article id="topic-implements">
 
 ## Implements
 `Semigroup`, `Monoid`
 
 </article>
 
-<article id="constructor">
+<article id="topic-constructor">
 
 ## Constructor Methods
 
@@ -97,7 +97,7 @@ isSameType(All(false), Maybe)     //=> false
 
 </article>
 
-<article id="instance">
+<article id="topic-instance">
 
 ## Instance Methods
 

@@ -1,6 +1,7 @@
 'use strict';
 
 var marble = require('marble');
+var slugify = require('markdown-slug');
 
 module.exports = {
   basePath: '/crocks',
@@ -17,8 +18,21 @@ module.exports = {
     }
   },
   markdownOptions: {
-    html: true,
-    linkify: true
+    html: true
+  },
+  markdownRenderer: function(md) {
+
+    // add links to headers
+    md.renderer.rules.heading_open = function(t, idx) {
+      var slug = slugify(t[idx + 1].content)
+      return '<h' + t[idx].hLevel + '><a id="'+ slug + '"href="#' + slug + '">'
+    }
+
+    md.renderer.rules.heading_close = function(t, idx) {
+      return '</a></h' + t[idx].hLevel+ '>'
+    }
+
+    return md
   },
   metalComponents: [
     'electric-marble-components',

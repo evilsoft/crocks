@@ -6,10 +6,10 @@ weight: 4
 ---
 
 All functions in this group have a signature of `* -> Boolean` and are used with
-the many predicate based functions that ship with `crocks`, like
-[`safe`](#safe), [`ifElse`](#ifelse) and `filter` to name a few. They also fit
-naturally with the `Pred` ADT. All predicate functions can be referenced from
-`crocks/predicates`.
+the many predicate based functions that ship with `crocks`,
+like [`safe`][safe], [`ifElse`][ifelse] and `filter` to name a few. They also
+fit naturally with the [`Pred`][pred] ADT. All predicate functions can be referenced
+from `crocks/predicates`.
 
 Below is a list of all the current predicates that are included with a
 description of their truth:
@@ -47,3 +47,7 @@ description of their truth:
 * `isSetoid :: a -> Boolean`: an ADT that provides an `equals` method
 * `isString :: a -> Boolean`: String
 * `isTraversable :: a -> Boolean`: an ADT that provides `map` and `traverse` methods
+
+[pred]: ../crocks/Pred.html
+[ifelse]: logic-functions.html#ifelse
+[safe]: helpers.html#safe

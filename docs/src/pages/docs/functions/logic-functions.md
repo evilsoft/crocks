@@ -12,9 +12,11 @@ functions, rather than values, this allows for composeable, "lazy" evaluation.
 All logic functions can be referenced from `crocks/logic`
 
 #### and
+
 ```haskell
-and :: ((a -> Boolean) | Pred) -> ((a -> Boolean) | Pred) -> a -> Boolean
+and :: ((a -> Boolean) | Pred a) -> ((a -> Boolean) | Pred a) -> a -> Boolean
 ```
+
 Say you have two predicate functions or `Pred`s and would like to combine them
 into one predicate over conjunction, well you came to the right place, `and`
 accepts either predicate functions or `Pred`s and will return you a function
@@ -25,9 +27,11 @@ predicates. As they follow the general form of `(a -> Boolean)` they are easily
 combined with other logic functions.
 
 #### ifElse
+
 ```haskell
-ifElse :: ((a -> Boolean) | Pred) -> (* -> a) -> (* -> a) -> * -> a
+ifElse :: ((a -> Boolean) | Pred a) -> (a -> b) -> (a -> b) -> a -> b
 ```
+
 Whenever you need to modify a value based some condition and want a functional
 way to do it without some imperative `if` statement, then reach for `ifElse`.
 This function take a predicate (some function that returns a Boolean) and two
@@ -42,6 +46,7 @@ comes in really handy when creating lifting functions for Sum Types (like
 ```haskell
 not :: ((a -> Boolean) | Pred) -> a -> Boolean
 ```
+
 When you need to negate a predicate function or a `Pred`, but want a new
 predicate function that does the negation, then `not` is going to get you what
 you need. Using `not` will allow you to stay as declarative as possible. Just
@@ -51,9 +56,11 @@ functions in `crocks` take either a `Pred` or predicate function, so it should
 be easy to swap between the two.
 
 #### or
+
 ```haskell
 or :: ((a -> Boolean) | Pred) -> ((a -> Boolean) | Pred) -> a -> Boolean
 ```
+
 Say you have two predicate functions or `Pred`s and would like to combine them
 into one predicate over disjunction, look no further, `or` accepts either
 predicate functions or `Pred`s and will return you a function ready to take a
@@ -64,9 +71,11 @@ follow the general form of `(a -> Boolean)` they are easily combined with other
 logic functions.
 
 #### unless
+
 ```haskell
 unless :: ((a -> Boolean) | Pred) -> (a -> a) -> a -> a
 ```
+
 There may come a time when you need to adjust a value when a condition is false,
 that is where `unless` can come into play. Just provide a predicate function (a
 function that returns a Boolean) and a function to apply your desired
@@ -77,9 +86,11 @@ the result of the predicate. Check out [`when`](#when) for a negated version of
 this function.
 
 #### when
+
 ```haskell
 when :: ((a -> Boolean) | Pred) -> (a -> a) -> a -> a
 ```
+
 There may come a time when you need to adjust a value when a condition is true,
 that is where `when` can come into play. Just provide a predicate function (a
 function that returns a Boolean) and a function to apply your desired

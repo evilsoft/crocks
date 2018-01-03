@@ -628,7 +628,7 @@ mapProps(mapping, {
 #### mapReduce
 `crocks/helpers/mapReduce`
 ```haskell
-mapReduce :: Foldable f => (a -> b) -> (c -> b -> c) -> c -> f a
+mapReduce :: Foldable f => (a -> b) -> (c -> b -> c) -> f a -> c
 ```
 Sometimes you need the power provided by [`mreduceMap`](#mreducemap) but you do
 not have a `Monoid` to lift into. `mapReduce` provides the same power, but with

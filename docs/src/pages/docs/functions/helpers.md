@@ -78,7 +78,7 @@ values into a single value.
 `crocks/helpers/compose`
 
 ```haskell
-compose :: ((y -> z), (x -> y), ..., (a -> b)) -> a -> z
+compose :: ((y -> z), ..., (a -> b)) -> a -> z
 ```
 While the [`composeB`](combinators.html#composeb) can be used to create a
 composition of two functions, there are times when you want to compose an entire
@@ -92,7 +92,7 @@ then, I would recommend reaching for [`pipe`](#pipe).
 `crocks/helpers/composeK`
 
 ```haskell
-composeK :: Chain m => ((y -> m z), (x -> m y), ..., (a -> m b)) -> a -> m z
+composeK :: Chain m => ((y -> m z), ..., (a -> m b)) -> a -> m z
 ```
 There are many times that, when working with the various `crocks`, our flows are
 just a series of `chain`s. Due to some neat properties with types that provide a
@@ -150,6 +150,7 @@ const flow = composeK(
 flow(data)
 // => Just 'fa'
 ```
+
 As demonstrated in the above example, this function more closely resembles flows
 that are using a more pointfree style of coding. As with the other composition
 functions in `crocks`, a [`pipeK`](#pipek) function is provided for flows that
@@ -160,7 +161,7 @@ make more sense expressed in a left-to-right style.
 `crocks/helpers/composeP`
 
 ```haskell
-composeP :: Promise p => ((y -> p z c), (x -> p y c), ..., (a -> p b c)) -> a -> p z c
+composeP :: Promise p => ((y -> p z c), ..., (a -> p b c)) -> a -> p z c
 ```
 
 When working with `Promise`s, it is common place to create chains on a
@@ -184,6 +185,7 @@ const { composeP } = crocks
 const promFunc =
   composeP(doAnother, doSomething, promiseSomething)
 ```
+
 Due to the nature of the `then` function, only the head of your composition
 needs to return a `Promise`. This will create a function that takes a value,
 which is passed through your chain, returning a `Promise` which can be extended.
@@ -196,8 +198,9 @@ If you would like to provide your functions in a left-to-right manner, check out
 `crocks/helpers/composeS`
 
 ```haskell
-composeS :: Semigroupoid s => (s y z, s x y, ..., s a b) -> s a z
+composeS :: Semigroupoid s => (s y z, ..., s a b) -> s a z
 ```
+
 When working with things like `Arrow` and `Star` there will come a point when
 you would like to compose them like you would any `Function`. That is where
 `composeS` comes in handy. Just pass it the `Semigroupoid`s you want to compose
@@ -240,6 +243,7 @@ composeS(double, avg)
 ```haskell
 curry :: ((a, b, ...) -> z) -> a -> b -> ... -> z
 ```
+
 Pass this function a function and it will return you a function that can be
 called in any form that you require until all arguments have been provided. For
 example if you pass a function: `f : (a, b, c) -> d` you get back a function
@@ -254,6 +258,7 @@ on functions for maximum re-usability.
 ```haskell
 defaultProps :: Object -> Object -> Object
 ```
+
 Picture this, you have an `Object` and you want to make sure that some
 properties are set with a given default value. When the need for this type of
 operation presents itself, `defaultProps` can come to your aid. Just pass it an
@@ -274,6 +279,7 @@ in either `Object`.
 ```haskell
 defaultTo :: a -> b -> a
 ```
+
 With things like `null`, `undefined` and `NaN` showing up all over the place, it
 can be hard to keep your expected types inline without resorting to nesting in a
 `Maybe` with functions like [`safe`](#safe). If you want to specifically guard
@@ -292,6 +298,7 @@ As a `b` can be an `a` as well.
 ```haskell
 dissoc :: String -> Object -> Object
 ```
+
 While [`assoc`](#assoc) can be used to associate a given key-value pair to a
 given `Object`, `dissoc` does the opposite. Just pass `dissoc` a `String` key
 and the `Object` you wish to dissociate that key from and you will get back a
@@ -307,6 +314,7 @@ fanout :: (a -> b) -> (a -> c) -> (a -> Pair b c)
 fanout :: Arrow a b -> Arrow a c -> Arrow a (Pair b c)
 fanout :: Monad m => Star a (m b) -> Star a (m c) -> Star a (m (Pair b c))
 ```
+
 There are may times that you need to keep some running or persistent state while
 performing a given computation. A common way to do this is to take the input to
 the computation and branch it into a `Pair` and perform different operations on
@@ -322,8 +330,9 @@ to the first portion of the underlying `Pair` and the second on the second.
 `crocks/helpers/fromPairs`
 
 ```haskell
-fromPairs :: [ (Pair String a) ] | List (Pair String a) -> Object
+fromPairs :: Foldable f => f (Pair String a) -> Object
 ```
+
 As an inverse to [`toPairs`](#topairs), `fromPairs` takes either an `Array` or
 `List` of key-value `Pair`s and constructs an `Object` from it. The `Pair` must
 contain a `String` in the `fst` and any type of value in the `snd`. The `fst`
@@ -348,6 +357,7 @@ liftA2 :: Applicative m => (a -> b -> c) -> m a -> m b -> m c
 ```haskell
 liftA3 :: Applicative m => (a -> b -> c -> d) -> m a -> m b -> m c -> m d
 ```
+
 Ever see yourself wanting to `map` a binary or trinary function, but `map` only
 allows unary functions? Both of these functions allow you to pass in your
 function as well as the number of `Applicatives` (containers that provide both
@@ -360,6 +370,7 @@ function as well as the number of `Applicatives` (containers that provide both
 ```haskell
 mapProps :: { (* -> *) } -> Object -> Object
 ```
+
 Would like to map specific keys in an Object with a specific function? Just
 bring in `mapProps` and pass it an `Object` with the functions you want to apply
 on the keys you want them associated to. When the resulting function receives an
@@ -412,8 +423,9 @@ mapProps(mapping, {
 `crocks/helpers/mapReduce`
 
 ```haskell
-mapReduce :: Foldable f => (a -> b) -> (c -> b -> c) -> c -> f a
+mapReduce :: Foldable f => (a -> b) -> (c -> b -> c) -> f a -> c
 ```
+
 Sometimes you need the power provided by [`mreduceMap`](#mreducemap) but you do
 not have a `Monoid` to lift into. `mapReduce` provides the same power, but with
 the flexibility of using functions to lift and combine. `mapReduce` takes a
@@ -449,7 +461,7 @@ safeMax(data)
 `crocks/helpers/mconcat`
 
 ```haskell
-mconcat :: Monoid m => m -> ([ a ] | List a) -> m a
+mconcat :: Monoid m, Foldable f => m -> f a -> m a
 ```
 
 #### mreduce
@@ -457,8 +469,9 @@ mconcat :: Monoid m => m -> ([ a ] | List a) -> m a
 `crocks/helpers/mreduce`
 
 ```haskell
-mreduce :: Monoid m => m -> ([ a ] | List a) -> a
+mreduce :: Monoid m, Foldable f => m -> f a -> a
 ```
+
 These two functions are very handy for combining an entire `List` or `Array` of
 values by providing a [`Monoid`](../monoids/index.html) and your collection of
 values. The difference between the two is that `mconcat` returns the result
@@ -470,7 +483,7 @@ inside the [`Monoid`](../monoids/index.html) used to combine them. Where
 `crocks/helpers/mconcatMap`
 
 ```haskell
-mconcatMap :: Monoid m => m -> (b -> a) -> ([ b ] | List b) -> m a
+mconcatMap :: Monoid m, Foldable f => m -> (b -> a) -> f b -> m a
 ```
 
 #### mreduceMap
@@ -478,8 +491,9 @@ mconcatMap :: Monoid m => m -> (b -> a) -> ([ b ] | List b) -> m a
 `crocks/helpers/mreduceMap`
 
 ```haskell
-mreduceMap :: Monoid m => m -> (b -> a) -> ([ b ] | List b) -> a
+mreduceMap :: Monoid m, Foldable f => m -> (b -> a) -> f b -> a
 ```
+
 There comes a time where the values you have in a `List` or an `Array` are not
 in the type that is needed for the [`Monoid`](../monoids/index.html) you want to
 combine with. These two functions can be used to `map` some transforming
@@ -496,8 +510,9 @@ returns the bare value itself.
 `crocks/helpers/nAry`
 
 ```haskell
-nAry :: Number -> (* -> a) -> * -> * -> a
+nAry :: Number -> (* -> a) -> * -> a
 ```
+
 When using functions like `Math.max` or `Object.assign` that take as many
 arguments as you can throw at them, it makes it hard to `curry` them in a
 reasonable manner. `nAry` can make things a little nicer for functions like
@@ -517,6 +532,7 @@ arguments to the inner function. Unary and binary functions are so common that
 ```haskell
 objOf :: String -> a -> Object
 ```
+
 If you ever find yourself in a situation where you have a key and a value and
 just want to combine the two into an `Object`, then it sounds like `objOf` is
 the function for you. Just pass it a `String` for the key and any type of value,
@@ -529,8 +545,9 @@ yourself constantly concatenating the result of this function into another
 `crocks/helpers/omit`
 
 ```haskell
-omit :: ([ String ] | List String) -> Object -> Object
+omit :: Foldable f => f String -> Object -> Object
 ```
+
 Sometimes you just want to strip `Object`s of unwanted properties by key. Using
 `omit` will help you get that done. Just pass it a `Foldable` structure with a
 series of `String`s as keys and then pass it an `Object` and you will get back
@@ -547,6 +564,7 @@ white-list properties rather than reject them, take a look at [`pick`](#pick).
 ```haskell
 once :: ((*) -> a) -> ((*) -> a)
 ```
+
 There are times in Javascript development where you only want to call a function
 once and memo-ize the first result for every subsequent call to that function.
 Just pass the function you want guarded to `once` and you will get back a
@@ -559,6 +577,7 @@ function with the expected guarantees.
 ```haskell
 partial :: ((* -> c), *) -> * -> c
 ```
+
 There are many times when using functions from non-functional libraries or from
 built-in JS functions, where it does not make sense to wrap it in a
 [`curry`](#curry). You just want to partially apply some arguments to it and get
@@ -585,8 +604,9 @@ map(max10, data)
 `crocks/helpers/pick`
 
 ```haskell
-pick :: ([ String ] | List String) -> Object -> Object
+pick :: Foldable f => f String -> Object -> Object
 ```
+
 When dealing with `Object`s, sometimes it is necessary to only let some of the
 key-value pairs on an object through. Think of `pick` as a sort of white-list or
 filter for `Object` properties. Pass it a `Foldable` structure of `String`s that
@@ -601,8 +621,9 @@ black-listing properties, have a look at [`omit`](#omit).
 `crocks/helpers/pipe`
 
 ```haskell
-pipe :: ((a -> b), (b -> c), ..., (y -> z)) -> a -> z
+pipe :: ((a -> b), ..., (y -> z)) -> a -> z
 ```
+
 If you find yourself not able to come to terms with doing the typical
 right-to-left composition, then `crocks` provides a means to accommodate you.
 This function does the same thing as [`compose`](#compose), the only difference
@@ -613,8 +634,9 @@ is it allows you define your flows in a left-to-right manner.
 `crocks/helpers/pipeK`
 
 ```haskell
-pipeK :: Chain m => ((a -> m b), (b -> m c), ..., (y -> m z)) -> a -> m z
+pipeK :: Chain m => ((a -> m b), ..., (y -> m z)) -> a -> m z
 ```
+
 Like [`composeK`](#composek), you can remove much of the boilerplate when
 chaining together a series of functions with the signature:
 `Chain m => a -> m b`. The difference between the two functions is, while
@@ -657,8 +679,9 @@ chainPipe(0).log()
 `crocks/helpers/pipeP`
 
 ```haskell
-pipeP :: Promise p => ((a -> p b d), (b -> p c d), ..., (y -> p z d)) -> a -> p z d
+pipeP :: Promise p => ((a -> p b d), ..., (y -> p z d)) -> a -> p z d
 ```
+
 Like the [`composeP`](#composep) function, `pipeP` will let you remove the
 standard boilerplate that comes with working with `Promise` chains. The only
 difference between `pipeP` and [`composeP`](#composep) is that it takes its
@@ -681,8 +704,9 @@ const promPipe =
 `crocks/helpers/pipeS`
 
 ```haskell
-pipeS :: Semigroupoid s => (s a b, s b c, ..., s y z) -> s a z
+pipeS :: Semigroupoid s => (s a b, ..., s y z) -> s a z
 ```
+
 While `Star`s and `Arrow`s come in very handy at times, the only thing that
 could make them better is to compose them . With `pipeS` you can do just that
 with any `Semigroupoid`. Just like with [`composeS`](#composes), you just pass
@@ -730,6 +754,7 @@ flow('string', 100).runWith(data)
 ```haskell
 prop :: (String | Integer) -> a -> Maybe b
 ```
+
 If you want some safety around pulling a value out of an Object or Array with a
 single key or index, you can always reach for `prop`. Well, as long as you are
 working with non-nested data that is. Just tell `prop` either the key or index
@@ -772,8 +797,9 @@ get()
 `crocks/Maybe/propPath`
 
 ```haskell
-propPath :: [ String | Integer ] -> a -> Maybe b
+propPath :: Foldable f => f (String | Integer) -> a -> Maybe b
 ```
+
 While [`prop`](#prop) is good for simple, single-level structures, there may
 come a time when you have to work with nested POJOs or Arrays. When you run into
 this situation, just pull in `propPath` and pass it a left-to-right traversal
@@ -788,8 +814,9 @@ But if at any point that path "breaks" it will give you back a `Nothing`.
 `crocks/helpers/propPathOr`
 
 ```haskell
-propPathOr :: a -> [ String | Integer ] -> b -> c
+propPathOr :: Foldable f => a -> f (String | Integer) -> b -> c
 ```
+
 While [`propOr`](#propor) is good for simple, single-level structures, there may
 come a time when you have to work with nested POJOs or Arrays. When you run into
 this situation, just pull in `propPathOr` and pass it a left-to-right traversal
@@ -821,6 +848,7 @@ get()
 ```haskell
 safe :: ((a -> Boolean) | Pred) -> a -> Maybe a
 ```
+
 When using a `Maybe`, it is a common practice to lift into a `Just` or a
 `Nothing` depending on a condition on the value to be lifted.  It is so common
 that it warrants a function, and that function is called `safe`. Provide a
@@ -835,6 +863,7 @@ true and a `Nothing` if false.
 ```haskell
 safeLift :: ((a -> Boolean) | Pred) -> (a -> b) -> a -> Maybe b
 ```
+
 While [`safe`](#safe) is used to lift a value into a `Maybe`, you can reach for
 `safeLift` when you want to run a function in the safety of the `Maybe` context.
 Just like [`safe`](#safe), you pass it either a `Pred` or a predicate function
@@ -850,6 +879,7 @@ function over the result.
 ```haskell
 tap :: (a -> b) -> a -> a
 ```
+
 It is hard knowing what is going on inside of some of these ADTs or your
 wonderful function compositions. Debugging can get messy when you need to insert
 a side-effect into your flow for introspection purposes. With `tap`, you can
@@ -865,6 +895,7 @@ exercise some discipline here to not mutate.
 ```haskell
 toPairs :: Object -> List (Pair String a)
 ```
+
 When dealing with `Object`s, sometimes it makes more sense to work in a
 `Foldable` structure like a `List` of key-value `Pair`s. `toPairs` provides a
 means to take an object and give you back a `List` of `Pairs` that have a
@@ -881,6 +912,7 @@ to this function named [`fromPairs`](#frompairs).
 ```haskell
 tryCatch :: (a -> b) -> a -> Result e b
 ```
+
 Typical try-catch blocks are very imperative in their usage. This `tryCatch`
 function provides a means of capturing that imperative nature in a simple
 declarative style. Pass it a function that could fail and it will return you
@@ -895,6 +927,7 @@ wrapped in an `Result.Err` if it fails.
 ```haskell
 unary :: (* -> b) -> a -> b
 ```
+
 If you every need to lock down a given function to just one argument, then look
 no further than `unary`. Just pass it a function of any arity, and you will get
 back another function that will only apply (1) argument to given function, no

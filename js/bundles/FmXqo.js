@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([20,21,22,23],[
+webpackJsonppageComponent([10,21,22,23],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -28348,12 +28348,22 @@ exports.default = parseFromAnchor;
 /* 214 */,
 /* 215 */,
 /* 216 */,
-/* 217 */
+/* 217 */,
+/* 218 */,
+/* 219 */,
+/* 220 */,
+/* 221 */,
+/* 222 */,
+/* 223 */,
+/* 224 */,
+/* 225 */,
+/* 226 */,
+/* 227 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RgiCU", function() { return RgiCU; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FmXqo", function() { return FmXqo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28365,15 +28375,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var templates;
 goog.loadModule(function(exports) {
 
-// This file was automatically generated from Arrow.soy.
+// This file was automatically generated from logic-functions.soy.
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace RgiCU.
+ * @fileoverview Templates in namespace FmXqo.
  * @public
  */
 
-goog.module('RgiCU.incrementaldom');
+goog.module('FmXqo.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28396,7 +28406,7 @@ var iattr = IncrementalDom.attr;
 
 var $templateAlias2 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('ElectricCode.incrementaldom', 'render');
 
-var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('guide.incrementaldom', 'render');
+var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('notopic.incrementaldom', 'render');
 
 
 /**
@@ -28407,442 +28417,201 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var param287 = function() {
-    $templateAlias2({code: 'Arrow a b', mode: 'haskell'}, null, opt_ijData);
+  var param1241 = function() {
     ie_open('p');
+      itext('The functions in this section are used to represent logical branching in a declarative manner. Each of these functions require either ');
       ie_open('code');
-        itext('Arrow');
+        itext('Pred');
       ie_close('code');
-      itext(' is a ');
+      itext('s or predicate functions in their input. Since these functions work with ');
       ie_open('code');
-        itext('Profunctor');
+        itext('Pred');
       ie_close('code');
-      itext(' that lifts a function of type ');
+      itext('s and predicate functions, rather than values, this allows for composeable, "lazy" evaluation. All logic functions can be referenced from ');
       ie_open('code');
-        itext('a -> b');
+        itext('crocks/logic');
       ie_close('code');
-      itext(' and allows for lazy execution of the function. ');
-      ie_open('code');
-        itext('Arrow');
-      ie_close('code');
-      itext(' can be considered a ');
-      ie_open('code');
-        itext('Strong Profunctor');
-      ie_close('code');
-      itext('if the underlying data running throw the ');
-      ie_open('code');
-        itext('Arrow');
-      ie_close('code');
-      itext(' is a ');
-      ie_open('code');
-        itext('Pair');
-      ie_close('code');
-      itext(', typically in the form of ');
-      ie_open('code');
-        itext('Arrow (Pair a c) (Pair b d)');
-      ie_close('code');
-      itext('.');
     ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'and',
+          'href', '#and');
+        itext('and');
+      ie_close('a');
+    ie_close('h4');
+    $templateAlias2({code: 'and :: ((a -> Boolean) | Pred a) -> ((a -> Boolean) | Pred a) -> a -> Boolean', mode: 'haskell'}, null, opt_ijData);
     ie_open('p');
-      itext('This will allow you to split execution into two distinct paths, applying ');
+      itext('Say you have two predicate functions or ');
       ie_open('code');
-        itext('Arrow');
+        itext('Pred');
       ie_close('code');
-      itext('to a specific path. The parameters of ');
+      itext('s and would like to combine them into one predicate over conjunction, well you came to the right place, ');
       ie_open('code');
-        itext('Arrow');
+        itext('and');
       ie_close('code');
-      itext(' represent the function that it wraps, with the input being on the left, and the output on the right. When an');
+      itext('accepts either predicate functions or ');
       ie_open('code');
-        itext('Arrow');
+        itext('Pred');
       ie_close('code');
-      itext(' wraps an endomorphism, the signature typically represents both the input and output.');
+      itext('s and will return you a function ready to take a value. Once that value is passed, it will run it through both of the predicates and return the result of combining it over a ');
+      ie_open('code');
+        itext('logical and');
+      ie_close('code');
+      itext('. This is super helpful combined with ');
+      ie_open('code');
+        itext('or');
+      ie_close('code');
+      itext(' for putting together reusable, complex predicates. As they follow the general form of ');
+      ie_open('code');
+        itext('(a -> Boolean)');
+      ie_close('code');
+      itext(' they are easily combined with other logic functions.');
     ie_close('p');
-    $templateAlias2({code: 'const Arrow = require(\'crocks/Arrow\')\n\nconst chain = require(\'crocks/pointfree/chain\')\nconst compose = require(\'crocks/helpers/compose\')\nconst isString = require(\'crocks/predicates/isString\')\nconst option = require(\'crocks/pointfree/option\')\nconst prop = require(\'crocks/Maybe/prop\')\nconst safe = require(\'crocks/Maybe/safe\')\n\n// arrUpper :: Arrow String\nconst arrUpper =\n  Arrow(str => str.toUpperCase())\n\narrUpper\n  .runWith(\'nice\')\n//=> \'NICE\'\n\n// getName :: a -> String\nconst getName = compose(\n  option(\'no name\'),\n  chain(safe(isString)),\n  prop(\'name\')\n)\n\n// arrUpperName :: Arrow a String\nconst arrUpperName =\n  arrUpper\n    .contramap(getName)\n\narrUpperName\n  .runWith({ name: \'joey\' })\n//=> \'JOEY\'\n\narrUpperName\n  .runWith({ age: 23 })\n//=> \'NO NAME\'\n\narrUpperName\n  .runWith({ name: false })\n//=> \'NO NAME\'', mode: 'javascript'}, null, opt_ijData);
-    ie_open('article', null, null,
-        'id', 'topic-implements');
-      ie_open('h2');
-        ie_open('a', null, null,
-            'id', 'implements',
-            'href', '#implements');
-          itext('Implements');
-        ie_close('a');
-      ie_close('h2');
-      ie_open('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'ifelse',
+          'href', '#ifelse');
+        itext('ifElse');
+      ie_close('a');
+    ie_close('h4');
+    $templateAlias2({code: 'ifElse :: ((a -> Boolean) | Pred a) -> (a -> b) -> (a -> b) -> a -> b', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('Whenever you need to modify a value based some condition and want a functional way to do it without some imperative ');
+      ie_open('code');
+        itext('if');
+      ie_close('code');
+      itext(' statement, then reach for ');
+      ie_open('code');
+        itext('ifElse');
+      ie_close('code');
+      itext('. This function take a predicate (some function that returns a Boolean) and two functions. The first is what is executed when the predicate is true, the second on a false condition. This will return a function ready to take a value to run through the predicate. After the value is evaluated, it will be ran through it\'s corresponding function, returning the result as the final result. This function comes in really handy when creating lifting functions for Sum Types (like');
+      ie_open('code');
+        itext('Either');
+      ie_close('code');
+      itext(' or ');
+      ie_open('code');
+        itext('Maybe');
+      ie_close('code');
+      itext(').');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'not',
+          'href', '#not');
+        itext('not');
+      ie_close('a');
+    ie_close('h4');
+    $templateAlias2({code: 'not :: ((a -> Boolean) | Pred) -> a -> Boolean', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('When you need to negate a predicate function or a ');
+      ie_open('code');
+        itext('Pred');
+      ie_close('code');
+      itext(', but want a new predicate function that does the negation, then ');
+      ie_open('code');
+        itext('not');
+      ie_close('code');
+      itext(' is going to get you what you need. Using ');
+      ie_open('code');
+        itext('not');
+      ie_close('code');
+      itext(' will allow you to stay as declarative as possible. Just pass ');
+      ie_open('code');
+        itext('not');
+      ie_close('code');
+      itext(' your predicate function or a ');
+      ie_open('code');
+        itext('Pred');
+      ie_close('code');
+      itext(', and it will give you back a predicate function ready for insertion into your flow. All predicate based functions in ');
+      ie_open('code');
+        itext('crocks');
+      ie_close('code');
+      itext(' take either a ');
+      ie_open('code');
+        itext('Pred');
+      ie_close('code');
+      itext(' or predicate function, so it should be easy to swap between the two.');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'or',
+          'href', '#or');
+        itext('or');
+      ie_close('a');
+    ie_close('h4');
+    $templateAlias2({code: 'or :: ((a -> Boolean) | Pred) -> ((a -> Boolean) | Pred) -> a -> Boolean', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('Say you have two predicate functions or ');
+      ie_open('code');
+        itext('Pred');
+      ie_close('code');
+      itext('s and would like to combine them into one predicate over disjunction, look no further, ');
+      ie_open('code');
+        itext('or');
+      ie_close('code');
+      itext(' accepts either predicate functions or ');
+      ie_open('code');
+        itext('Pred');
+      ie_close('code');
+      itext('s and will return you a function ready to take a value. Once that value is passed, it will run it through both of the predicates and return the result of combining it over a ');
+      ie_open('code');
+        itext('logical or');
+      ie_close('code');
+      itext('. This is super helpful combined with ');
+      ie_open('code');
+        itext('and');
+      ie_close('code');
+      itext(' for putting together reusable, complex predicates. As they follow the general form of ');
+      ie_open('code');
+        itext('(a -> Boolean)');
+      ie_close('code');
+      itext(' they are easily combined with other logic functions.');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'unless',
+          'href', '#unless');
+        itext('unless');
+      ie_close('a');
+    ie_close('h4');
+    $templateAlias2({code: 'unless :: ((a -> Boolean) | Pred) -> (a -> a) -> a -> a', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('There may come a time when you need to adjust a value when a condition is false, that is where ');
+      ie_open('code');
+        itext('unless');
+      ie_close('code');
+      itext(' can come into play. Just provide a predicate function (a function that returns a Boolean) and a function to apply your desired modification. This will get you back a function that when you pass it a value, it will evaluate it and if false, will run your value through the provided function. Either the original or modified value will be returned depending on the result of the predicate. Check out ');
+      ie_open('a', null, null,
+          'href', '#when');
         ie_open('code');
-          itext('Semigroupoid');
+          itext('when');
         ie_close('code');
-        itext(', ');
+      ie_close('a');
+      itext(' for a negated version of this function.');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'when',
+          'href', '#when');
+        itext('when');
+      ie_close('a');
+    ie_close('h4');
+    $templateAlias2({code: 'when :: ((a -> Boolean) | Pred) -> (a -> a) -> a -> a', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('There may come a time when you need to adjust a value when a condition is true, that is where ');
+      ie_open('code');
+        itext('when');
+      ie_close('code');
+      itext(' can come into play. Just provide a predicate function (a function that returns a Boolean) and a function to apply your desired modification. This will get you back a function that when you pass it a value, it will evaluate it and if true, will run your value through the provided function. Either the original or modified value will be returned depending on the result of the predicate. Check out ');
+      ie_open('a', null, null,
+          'href', '#unless');
         ie_open('code');
-          itext('Category');
+          itext('unless');
         ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('Functor');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('Contravariant');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('Profunctor');
-        ie_close('code');
-      ie_close('p');
-    ie_close('article');
-    ie_open('article', null, null,
-        'id', 'topic-constructor');
-      ie_open('h2');
-        ie_open('a', null, null,
-            'id', 'constructor-methods',
-            'href', '#constructor-methods');
-          itext('Constructor Methods');
-        ie_close('a');
-      ie_close('h2');
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'id',
-            'href', '#id');
-          itext('id');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Arrow.id :: () -> Arrow a', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        ie_open('code');
-          itext('id');
-        ie_close('code');
-        itext(' provides the identity for the ');
-        ie_open('code');
-          itext('Arrow');
-        ie_close('code');
-        itext(' in that when it is composed to either the left or right side of a given function, it will essentially result in a morphism that is, for all intents and purposes, the given function. For ');
-        ie_open('code');
-          itext('Arrow');
-        ie_close('code');
-        itext(',');
-        ie_open('code');
-          itext('id');
-        ie_close('code');
-        itext(' is the simple ');
-        ie_open('code');
-          itext('identity');
-        ie_close('code');
-        itext(' function that echoes it\'s given argument (');
-        ie_open('code');
-          itext('x => x');
-        ie_close('code');
-        itext('). As a convenience, ');
-        ie_open('code');
-          itext('id');
-        ie_close('code');
-        itext(' is also available on the ');
-        ie_open('code');
-          itext('Arrow');
-        ie_close('code');
-        itext(' instance.');
-      ie_close('p');
-      $templateAlias2({code: 'const Arrow = require(\'crocks/Arrow\')\n\n// arrId :: Arrow a\nconst id = Arrow.id()\n\n// arrow :: Arrow a String\nconst arrow =\n  Arrow(x => x.toString())\n\n// left :: Arrow a String\nconst left =\n  id.compose(arrow)\n\n// right :: Arrow a String\nconst right =\n  arrow.compose(id)\n\nright.runWith(12) //=> \'12\'\nleft.runWith(12)  //=> \'12\'', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'type',
-            'href', '#type');
-          itext('type');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Arrow.type :: () -> String', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        ie_open('code');
-          itext('type');
-        ie_close('code');
-        itext(' provides a string representation of the type name for a given type in');
-        ie_open('code');
-          itext('crocks');
-        ie_close('code');
-        itext('. While it is used mostly internally for law validation, it can be useful to the end user for debugging and building out custom types based on the standard');
-        ie_open('code');
-          itext('crocks');
-        ie_close('code');
-        itext(' types. While type comparisons can easily be done manually by calling');
-        ie_open('code');
-          itext('type');
-        ie_close('code');
-        itext(' on a given type, using the ');
-        ie_open('code');
-          itext('isSameType');
-        ie_close('code');
-        itext(' function hides much of the boilerplate. ');
-        ie_open('code');
-          itext('type');
-        ie_close('code');
-        itext(' is available on both the Constructor and the Instance for convenience.');
-      ie_close('p');
-      $templateAlias2({code: 'const Arrow = require(\'crocks/Arrow\')\nconst Identity = require(\'crocks/Identity\')\n\nconst I = require(\'crocks/combinators/identity\')\nconst isSameType = require(\'crocks/predicates/isSameType\')\n\nArrow.type() //=> "Arrow"\n\nisSameType(Arrow, Arrow(x => x + 3))  //=> true\nisSameType(Arrow, Arrow)              //=> true\nisSameType(Arrow, Identity(0))        //=> false\nisSameType(Arrow(I), Identity)        //=> false', mode: 'javascript'}, null, opt_ijData);
-    ie_close('article');
-    ie_open('article', null, null,
-        'id', 'topic-instance');
-      ie_open('h2');
-        ie_open('a', null, null,
-            'id', 'instance-methods',
-            'href', '#instance-methods');
-          itext('Instance Methods');
-        ie_close('a');
-      ie_close('h2');
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'both',
-            'href', '#both');
-          itext('both');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Pair p => Arrow a b ~> () -> Arrow (p a a) (p b b)', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        ie_open('code');
-          itext('both');
-        ie_close('code');
-        itext(' allows for the mode of a given ');
-        ie_open('code');
-          itext('Arrow');
-        ie_close('code');
-        itext(' to switch to a manner that applies itself to both slots of a ');
-        ie_open('code');
-          itext('Pair');
-        ie_close('code');
-        itext(' that is passed through the ');
-        ie_open('code');
-          itext('Arrow');
-        ie_close('code');
-        itext('. As noted in the type signature, ');
-        ie_open('code');
-          itext('both');
-        ie_close('code');
-        itext(' will give back an ');
-        ie_open('code');
-          itext('Arrow');
-        ie_close('code');
-        itext(' has a new signature that utilizes a ');
-        ie_open('code');
-          itext('Pair');
-        ie_close('code');
-        itext(' on both sides.');
-      ie_close('p');
-      $templateAlias2({code: 'const Arrow = require(\'crocks/Arrow\')\nconst Pair = require(\'crocks/Pair\')\n\nconst merge = require(\'crocks/Pair/merge\')\n\n// double :: Number -> Number\nconst double =\n  x => x * 2\n\n// add :: (Number, Number) -> Number\nconst add =\n  (x, y) => x + y\n\n// arrDouble :: Arrow Number\nconst arrDouble =\n  Arrow(double)\n\n// arrDoubleAndAdd :: Arrow (Pair Number Number) Number\nconst arrDoubleAndAdd =\n  arrDouble\n    .both()\n    .map(merge(add))\n\narrDouble\n  .runWith(200)  //=> 400\n\narrDoubleAndAdd\n  .runWith(Pair(200, 10))  //=> 420', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'compose',
-            'href', '#compose');
-          itext('compose');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Arrow a b ~> Arrow b c -> Arrow a c', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        ie_open('code');
-          itext('compose');
-        ie_close('code');
-        itext(' allows you to compose (2) ');
-        ie_open('code');
-          itext('Arrow');
-        ie_close('code');
-        itext('s together, resulting in a new');
-        ie_open('code');
-          itext('Arrow');
-        ie_close('code');
-        itext(' that is the result of the composition.');
-      ie_close('p');
-      $templateAlias2({code: 'const Arrow = require(\'crocks/Arrow\')\n\nconst filter = require(\'crocks/pointfree/filter\')\nconst map = require(\'crocks/pointfree/map\')\n\n// arrFilterEven :: Arrow [ Number ]\nconst arrFilterEven =\n  Arrow(filter(x => !(x % 2)))\n\n// arrDoubleNumbers :: Arrow [ Number ]\nconst arrDoubleNumbers =\n  Arrow(map(x => x * 2))\n\n// arrLength :: Arrow [ a ] -> Number\nconst arrLength =\n  Arrow(x => x.length)\n\n// arrDoubleEven :: Arrow [ Number ]\nconst arrDoubleEven =\n  arrFilterEven\n    .compose(arrDoubleNumbers)\n\n// arrEvenCount :: Arrow [ Number ] Number\nconst arrEvenCount =\n  arrFilterEven\n    .compose(arrLength)\n\n// data :: [ Number ]\nconst data =\n  [ 12, 2, 36, 35 ]\n\narrDoubleEven\n  .runWith(data)\n//=> [ 24, 4, 72 ]\n\narrEvenCount\n  .runWith(data)\n//=> 3', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'contramap',
-            'href', '#contramap');
-          itext('contramap');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Arrow a b ~> (c -> a) -> Arrow c b', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('When using ');
-        ie_open('code');
-          itext('contramap');
-        ie_close('code');
-        itext(' on an ');
-        ie_open('code');
-          itext('Arrow');
-        ie_close('code');
-        itext(', a function can be lifted that will map a given type into the type required for the original ');
-        ie_open('code');
-          itext('Arrow');
-        ie_close('code');
-        itext('\'s input. This allows for "adaption" of given ');
-        ie_open('code');
-          itext('Arrow');
-        ie_close('code');
-        itext('\'s input for better reuse. The resulting type of the lifted function must match the input type of the ');
-        ie_open('code');
-          itext('Arrow');
-        ie_close('code');
-        itext('.');
-      ie_close('p');
-      $templateAlias2({code: 'const Arrow = require(\'crocks/Arrow\')\n\nconst chain = require(\'crocks/pointfree/chain\')\nconst compose = require(\'crocks/helpers/compose\')\nconst isNumber = require(\'crocks/predicates/isNumber\')\nconst option = require(\'crocks/pointfree/option\')\nconst prop = require(\'crocks/Maybe/prop\')\nconst safe = require(\'crocks/Maybe/safe\')\n\n// getValue :: (String, Number) -> a -> Number\nconst getValue = (key, def) => compose(\n  option(def),\n  chain(safe(isNumber)),\n  prop(key)\n)\n\n// arrAdd10 :: Arrow Number\nconst arrAdd10 =\n  Arrow(x => x + 10)\n\n// arrAdd10Value :: Arrow Object Number\nconst arrAdd10Value =\n  arrAdd10\n    .contramap(getValue(\'value\', 0))\n\narrAdd10\n  .runWith(23)\n//=> 33\n\narrAdd10Value\n  .runWith({ value: 23 })\n  //=> 33\n\narrAdd10Value\n  .runWith({ value: \'23\' })\n  //=> 10\n\narrAdd10Value\n  .runWith({ num: \'23\' })\n//=> 10', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'first',
-            'href', '#first');
-          itext('first');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Pair p => Arrow a b ~> () -> Arrow (p a c) (p b c)', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('When calling ');
-        ie_open('code');
-          itext('first');
-        ie_close('code');
-        itext(' on an ');
-        ie_open('code');
-          itext('Arrow');
-        ie_close('code');
-        itext(', a new ');
-        ie_open('code');
-          itext('Arrow');
-        ie_close('code');
-        itext(' is returned that will expect a ');
-        ie_open('code');
-          itext('Pair');
-        ie_close('code');
-        itext(' with the original input type in the first slot of the ');
-        ie_open('code');
-          itext('Pair');
-        ie_close('code');
-        itext('. When run, the ');
-        ie_open('code');
-          itext('Arrow');
-        ie_close('code');
-        itext(' will only be applied to the first slot in the ');
-        ie_open('code');
-          itext('Pair');
-        ie_close('code');
-        itext(', leaving the second slot untouched.');
-      ie_close('p');
-      $templateAlias2({code: 'const Arrow = require(\'crocks/Arrow\')\nconst branch = require(\'crocks/Pair/branch\')\n\n// arrToUpper :: Arrow String\nconst arrToUpper =\n  Arrow(x => x.toUpperCase())\n\narrToUpper\n  .runWith(\'burrito bounce\')\n//=> \'BURRITO BOUNCE\'\n\n// join :: Pair String -> Object\nconst join = p => ({\n  original: p.snd(),\n  result: p.fst()\n})\n\n// flow :: Arrow String Object\nconst flow =\n  arrToUpper\n    .first()\n    .promap(branch, join)\n\nflow\n  .runWith(\'taco time\')\n//=> { original: \'taco time\', result: \'TACO TIME\' }', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'map',
-            'href', '#map');
-          itext('map');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Arrow a b ~> (b -> c) -> Arrow a c', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        ie_open('code');
-          itext('map');
-        ie_close('code');
-        itext(' allows a function to be lifted that will map the right side of the');
-        ie_open('code');
-          itext('Arrow');
-        ie_close('code');
-        itext('. Where ');
-        ie_open('code');
-          itext('contramap');
-        ie_close('code');
-        itext(' is used to map the input, ');
-        ie_open('code');
-          itext('map');
-        ie_close('code');
-        itext(' maps the result of the ');
-        ie_open('code');
-          itext('Arrow');
-        ie_close('code');
-        itext(', allowing the result to be "adapted" or modified. The input type to the lifted function must match the result the ');
-        ie_open('code');
-          itext('Arrow');
-        ie_close('code');
-        itext('.');
-      ie_close('p');
-      $templateAlias2({code: 'const Arrow = require(\'crocks/Arrow\')\n\nconst B = require(\'crocks/combinators/composeB\')\n\n// arrFullScale :: Arrow Number\nconst arrFullScale =\n  Arrow(x => 20 * Math.log10(Math.abs(x)))\n\narrFullScale\n  .runWith(-0.35)\n//=> -9.118639112994488\n\n// round :: Number -> Number\nconst round =\n  x => Math.floor(x * 100) / 100\n\n// stringRep :: Number -> String\nconst stringRep =\n  x => `${x} dBFS`\n\n// Arrow :: Number String\nconst arrStringFS =\n  arrFullScale\n    .map(B(stringRep, round))\n\narrStringFS\n  .runWith(0.35)\n//=> \'-9.12 dbFS\'', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'promap',
-            'href', '#promap');
-          itext('promap');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Arrow a b ~> ((c -> a), (b -> d)) -> Arrow c d', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        ie_open('code');
-          itext('promap');
-        ie_close('code');
-        itext(' can be used to adapt BOTH ends of an ');
-        ie_open('code');
-          itext('Arrow');
-        ie_close('code');
-        itext(' allowing for existing');
-        ie_open('code');
-          itext('Arrow');
-        ie_close('code');
-        itext('s to be reused in places in a flow where the types do not line up. It combines both ');
-        ie_open('code');
-          itext('map');
-        ie_close('code');
-        itext(' and ');
-        ie_open('code');
-          itext('conramap');
-        ie_close('code');
-        itext(' into one operation. Just pass the ');
-        ie_open('code');
-          itext('contramap');
-        ie_close('code');
-        itext('function as the first argument and the ');
-        ie_open('code');
-          itext('map');
-        ie_close('code');
-        itext(' function as the second.');
-      ie_close('p');
-      $templateAlias2({code: 'const Arrow = require(\'crocks/Arrow\')\n\nconst chain = require(\'crocks/pointfree/chain\')\nconst compose = require(\'crocks/helpers/compose\')\nconst isString = require(\'crocks/predicates/isString\')\nconst objOf = require(\'crocks/helpers/objOf\')\nconst option = require(\'crocks/pointfree/option\')\nconst prop = require(\'crocks/Maybe/prop\')\nconst safe = require(\'crocks/Maybe/safe\')\n\n// upperFirst :: String -> String\nconst upperFirst = x =>\n  x.charAt(0)\n    .toUpperCase()\n    .concat(x.slice(1).toLowerCase())\n\n// arrTitleize :: Arrow String\nconst arrTitleize =\n  Arrow(x => x.split(\' \').map(upperFirst).join(\' \'))\n\narrTitleize\n  .runWith(\'tHis is siLLy\')\n//=> \'This Is Silly\'\n\n// stringProp :: String -> Object -> String\nconst stringProp = key => compose(\n  option(\'\'),\n  chain(safe(isString)),\n  prop(key)\n)\n\n// arrTitleObject :: Arrow Object\nconst arrTitleObject =\n  arrTitleize\n    .promap(stringProp(\'title\'), objOf(\'title\'))\n\narrTitleObject\n  .runWith({ title: \'SaY wHaT!?!\' })\n// { title: \'Say What!?!\' }\n\narrTitleObject\n  .runWith({ title: true })\n// { title: \'\' }', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'runwith',
-            'href', '#runwith');
-          itext('runWith');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Arrow a b ~> a -> b', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        ie_open('code');
-          itext('Arrow');
-        ie_close('code');
-        itext('s are lazy to make combining and extending them easy. Once you have your final computation built out and you are ready to execute it, all you have to do is call ');
-        ie_open('code');
-          itext('runWith');
-        ie_close('code');
-        itext(' on it, passing in the argument you what to run it with.');
-      ie_close('p');
-      $templateAlias2({code: 'const Arrow = require(\'crocks/Arrow\')\nconst Sum = require(\'crocks/Sum\')\n\nconst branch = require(\'crocks/Pair/branch\')\nconst merge = require(\'crocks/Pair/merge\')\nconst mreduce = require(\'crocks/helpers/mreduce\')\n\n// data :: [ Number ]\nconst data =\n  [ 35, 60, 22, 100 ]\n\n// arrLength :: Arrow [ a ] Number\nconst arrLength =\n  Arrow(x => x.length)\n\narrLength\n  .runWith(data)\n//=> 4\n\n// arrSum :: Arrow [ Number ] Number\nconst arrSum =\n  Arrow(mreduce(Sum))\n\narrSum\n  .runWith(data)\n//=> 217\n\n// arrAvgList :: Arrow [ Number ] Number\nconst arrAvgList =\n  arrSum.first()\n    .compose(arrLength.second())\n    .promap(branch, merge((x, y) => x / y))\n\narrAvgList\n  .runWith(data)\n//=> 54.25', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'second',
-            'href', '#second');
-          itext('second');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Pair p => Arrow a b ~> () -> Arrow (p c a) (p c b)', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('Used to apply a given ');
-        ie_open('code');
-          itext('Arrow');
-        ie_close('code');
-        itext(' over the second slot of a ');
-        ie_open('code');
-          itext('Pair');
-        ie_close('code');
-        itext(', leaving the first slot untouched. The input to the ');
-        ie_open('code');
-          itext('Arrow');
-        ie_close('code');
-        itext(' must match the expected type on the second slot of the incoming ');
-        ie_open('code');
-          itext('Pair');
-        ie_close('code');
-        itext('.');
-      ie_close('p');
-      $templateAlias2({code: 'const Arrow = require(\'crocks/Arrow\')\n\nconst assign = require(\'crocks/helpers/assign\')\nconst branch = require(\'crocks/Pair/branch\')\nconst merge = require(\'crocks/Pair/merge\')\nconst objOf = require(\'crocks/helpers/objOf\')\n\n// names :: Object\nconst names = {\n  first: \'Joey\',\n  last: \'Fella\'\n}\n\n// arrFull :: Arrow Object\nconst arrFull =\n  Arrow(({ first, last }) => `${first} ${last}`)\n    .map(objOf(\'full\'))\n//=> { full: \'Joey Fella\' }\n\n// arrAddFull :: Arrow Object\nconst arrAddFull =\n  arrFull\n    .second()\n    .promap(branch, merge(assign))\n\narrAddFull\n  .runWith(names)\n//=> { full: \'Joey Fella\', first: \'Joey\', last: \'Fella\' }', mode: 'javascript'}, null, opt_ijData);
-    ie_close('article');
+      ie_close('a');
+      itext(' for a negated version of this function.');
+    ie_close('p');
     ie_open('input', null, null,
         'type', 'hidden',
         'value', opt_data.page.title);
@@ -28852,11 +28621,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'value', opt_data.site.title);
     ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({content: param287}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param1241}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'RgiCU.render';
+  $render.soyTemplateName = 'FmXqo.render';
 }
 
 exports.render.params = ["page","site"];
@@ -28866,24 +28635,14 @@ return exports;
 
 });
 
-class RgiCU extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(RgiCU, templates);
+class FmXqo extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(FmXqo, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
 
 
 /***/ }),
-/* 218 */,
-/* 219 */,
-/* 220 */,
-/* 221 */,
-/* 222 */,
-/* 223 */,
-/* 224 */,
-/* 225 */,
-/* 226 */,
-/* 227 */,
 /* 228 */,
 /* 229 */,
 /* 230 */,
@@ -28896,7 +28655,12 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(RgiCU, templates);
 /* 237 */,
 /* 238 */,
 /* 239 */,
-/* 240 */
+/* 240 */,
+/* 241 */,
+/* 242 */,
+/* 243 */,
+/* 244 */,
+/* 245 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28932,9 +28696,9 @@ __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _ArrowSoy = __webpack_require__(217);
+var _logicFunctionsSoy = __webpack_require__(227);
 
-var _ArrowSoy2 = _interopRequireDefault(_ArrowSoy);
+var _logicFunctionsSoy2 = _interopRequireDefault(_logicFunctionsSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28944,23 +28708,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var RgiCU = function (_Component) {
-  _inherits(RgiCU, _Component);
+var FmXqo = function (_Component) {
+  _inherits(FmXqo, _Component);
 
-  function RgiCU() {
-    _classCallCheck(this, RgiCU);
+  function FmXqo() {
+    _classCallCheck(this, FmXqo);
 
-    return _possibleConstructorReturn(this, (RgiCU.__proto__ || Object.getPrototypeOf(RgiCU)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (FmXqo.__proto__ || Object.getPrototypeOf(FmXqo)).apply(this, arguments));
   }
 
-  return RgiCU;
+  return FmXqo;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(RgiCU, _ArrowSoy2.default);
+_metalSoy2.default.register(FmXqo, _logicFunctionsSoy2.default);
 
-exports.default = RgiCU;
+exports.default = FmXqo;
 
 /***/ })
-],[240]);
+],[245]);

@@ -28360,7 +28360,7 @@ exports.default = parseFromAnchor;
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ITISY", function() { return ITISY; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PhkdG", function() { return PhkdG; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28376,11 +28376,11 @@ goog.loadModule(function(exports) {
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace ITISY.
+ * @fileoverview Templates in namespace PhkdG.
  * @public
  */
 
-goog.module('ITISY.incrementaldom');
+goog.module('PhkdG.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28498,7 +28498,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         itext('crocks/combinators/constant');
       ie_close('code');
     ie_close('p');
-    $templateAlias2({code: 'constant :: a -> _ -> a', mode: 'haskell'}, null, opt_ijData);
+    $templateAlias2({code: 'constant :: a -> () -> a', mode: 'haskell'}, null, opt_ijData);
     ie_open('p');
       itext('This is a very handy dandy function, used a lot. Pass it any value and it will give you back a function that will return that same value no matter what you pass it.');
     ie_close('p');
@@ -28590,7 +28590,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'ITISY.render';
+  $render.soyTemplateName = 'PhkdG.render';
 }
 
 exports.render.params = ["page","site"];
@@ -28600,8 +28600,8 @@ return exports;
 
 });
 
-class ITISY extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(ITISY, templates);
+class PhkdG extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(PhkdG, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
@@ -28677,23 +28677,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var ITISY = function (_Component) {
-  _inherits(ITISY, _Component);
+var PhkdG = function (_Component) {
+  _inherits(PhkdG, _Component);
 
-  function ITISY() {
-    _classCallCheck(this, ITISY);
+  function PhkdG() {
+    _classCallCheck(this, PhkdG);
 
-    return _possibleConstructorReturn(this, (ITISY.__proto__ || Object.getPrototypeOf(ITISY)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (PhkdG.__proto__ || Object.getPrototypeOf(PhkdG)).apply(this, arguments));
   }
 
-  return ITISY;
+  return PhkdG;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(ITISY, _combinatorsSoy2.default);
+_metalSoy2.default.register(PhkdG, _combinatorsSoy2.default);
 
-exports.default = ITISY;
+exports.default = PhkdG;
 
 /***/ })
 ],[246]);

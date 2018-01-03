@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([13,21,22,23],[
+webpackJsonppageComponent([19,21,22,23],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19884,7 +19884,7 @@ if (goog.DEBUG) {
  * @return {void}
  * @suppress {checkTypes}
  */
-function __deltemplate_s173_d34389eb(opt_data, opt_ignored, opt_ijData) {
+function __deltemplate_s151_d34389eb(opt_data, opt_ignored, opt_ijData) {
   ie_open('a', null, null,
       'class', 'sidebar-link ' + (opt_data.page.active ? 'sidebar-link-selected' : ''),
       'href', opt_data.page.url);
@@ -19893,16 +19893,16 @@ function __deltemplate_s173_d34389eb(opt_data, opt_ignored, opt_ijData) {
           'class', 'sidebar-icon icon-16-' + opt_data.page.icon);
     }
     ie_open('span');
-      var dyn12 = opt_data.page.title;
-      if (typeof dyn12 == 'function') dyn12(); else if (dyn12 != null) itext(dyn12);
+      var dyn10 = opt_data.page.title;
+      if (typeof dyn10 == 'function') dyn10(); else if (dyn10 != null) itext(dyn10);
     ie_close('span');
   ie_close('a');
 }
-exports.__deltemplate_s173_d34389eb = __deltemplate_s173_d34389eb;
+exports.__deltemplate_s151_d34389eb = __deltemplate_s151_d34389eb;
 if (goog.DEBUG) {
-  __deltemplate_s173_d34389eb.soyTemplateName = 'Sidebar.__deltemplate_s173_d34389eb';
+  __deltemplate_s151_d34389eb.soyTemplateName = 'Sidebar.__deltemplate_s151_d34389eb';
 }
-soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'sidebar', 0, __deltemplate_s173_d34389eb);
+soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'sidebar', 0, __deltemplate_s151_d34389eb);
 
 exports.render.params = ["section","site"];
 exports.render.types = {"section":"any","site":"any"};
@@ -20091,8 +20091,8 @@ function $render(opt_data, opt_ignored, opt_ijData) {
       ie_void('span', null, null,
           'class', 'icon icon-16-clock');
       itext(' ');
-      var dyn13 = opt_data.time;
-      if (typeof dyn13 == 'function') dyn13(); else if (dyn13 != null) itext(dyn13);
+      var dyn11 = opt_data.time;
+      if (typeof dyn11 == 'function') dyn11(); else if (dyn11 != null) itext(dyn11);
     }
   ie_close('p');
 }
@@ -28349,18 +28349,12 @@ exports.default = parseFromAnchor;
 /* 215 */,
 /* 216 */,
 /* 217 */,
-/* 218 */,
-/* 219 */,
-/* 220 */,
-/* 221 */,
-/* 222 */,
-/* 223 */,
-/* 224 */
+/* 218 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PhkdG", function() { return PhkdG; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DyxhS", function() { return DyxhS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28372,15 +28366,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var templates;
 goog.loadModule(function(exports) {
 
-// This file was automatically generated from combinators.soy.
+// This file was automatically generated from Equiv.soy.
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace PhkdG.
+ * @fileoverview Templates in namespace DyxhS.
  * @public
  */
 
-goog.module('PhkdG.incrementaldom');
+goog.module('DyxhS.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28403,7 +28397,7 @@ var iattr = IncrementalDom.attr;
 
 var $templateAlias2 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('ElectricCode.incrementaldom', 'render');
 
-var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('notopic.incrementaldom', 'render');
+var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('guide.incrementaldom', 'render');
 
 
 /**
@@ -28414,169 +28408,321 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var param899 = function() {
-    ie_open('h4');
-      ie_open('a', null, null,
-          'id', 'applyto',
-          'href', '#applyto');
-        itext('applyTo');
-      ie_close('a');
-    ie_close('h4');
+  var param405 = function() {
+    $templateAlias2({code: 'Equiv a a Boolean', mode: 'haskell'}, null, opt_ijData);
     ie_open('p');
+      itext('Defined as a Monoidal Contravariant datatype, ');
       ie_open('code');
-        itext('crocks/combinators/applyTo');
+        itext('Equiv');
       ie_close('code');
+      itext(' can be used to test equivalence between (2) values of a given type. It does this by wrapping a binary equivalence function of the form ');
+      ie_open('code');
+        itext('(a, a) -> Boolean');
+      ie_close('code');
+      itext('. Most of the time strict equality is used, but other functions of the required form can provide some powerful results.');
     ie_close('p');
-    $templateAlias2({code: 'applyTo :: (a -> b) -> a -> b', mode: 'haskell'}, null, opt_ijData);
     ie_open('p');
-      itext('Seems really silly, but is quite useful for a lot of things. It takes a function and a value and then returns the result of that function with the argument applied.');
-    ie_close('p');
-    ie_open('h4');
+      itext('While the far right parameter is always fixed to ');
+      ie_open('code');
+        itext('Boolean');
+      ie_close('code');
+      itext(' it cannot be Covariant, but is Contravariant allowing both inputs to vary in their type.');
+      ie_open('code');
+        itext('Equiv');
+      ie_close('code');
+      itext(' is also a ');
       ie_open('a', null, null,
-          'id', 'composeb',
-          'href', '#composeb');
-        itext('composeB');
-      ie_close('a');
-    ie_close('h4');
-    ie_open('p');
-      ie_open('code');
-        itext('crocks/combinators/composeB');
-      ie_close('code');
-    ie_close('p');
-    $templateAlias2({code: 'composeB :: (b -> c) -> (a -> b) -> a -> c', mode: 'haskell'}, null, opt_ijData);
-    ie_open('p');
-      itext('Provides a means to describe a composition between two functions. it takes two functions and a value. Given ');
-      ie_open('code');
-        itext('composeB(f, g)');
-      ie_close('code');
-      itext(', which is read ');
-      ie_open('code');
-        itext('f');
-      ie_close('code');
-      itext(' after ');
-      ie_open('code');
-        itext('g');
-      ie_close('code');
-      itext(', it will return a function that will take value ');
-      ie_open('code');
-        itext('a');
-      ie_close('code');
-      itext(' and apply it to ');
-      ie_open('code');
-        itext('g');
-      ie_close('code');
-      itext(', passing the result as an argument to ');
-      ie_open('code');
-        itext('f');
-      ie_close('code');
-      itext(', and will finally return the result of ');
-      ie_open('code');
-        itext('f');
-      ie_close('code');
-      itext('. (This allows only two functions, if you want to avoid things like:');
-      ie_open('code');
-        itext('composeB(composeB(f, g), composeB(h, i))');
-      ie_close('code');
-      itext(' then check out');
-      ie_open('a', null, null,
-          'href', 'helpers.html#compose');
+          'href', '../monoids/index.html');
         ie_open('code');
-          itext('compose');
+          itext('Monoid');
         ie_close('code');
       ie_close('a');
-      itext('.)');
-    ie_close('p');
-    ie_open('h4');
-      ie_open('a', null, null,
-          'id', 'constant',
-          'href', '#constant');
-        itext('constant');
-      ie_close('a');
-    ie_close('h4');
-    ie_open('p');
+      itext(' and will concat the results of (2) ');
       ie_open('code');
-        itext('crocks/combinators/constant');
+        itext('Equiv');
       ie_close('code');
-    ie_close('p');
-    $templateAlias2({code: 'constant :: a -> () -> a', mode: 'haskell'}, null, opt_ijData);
-    ie_open('p');
-      itext('This is a very handy dandy function, used a lot. Pass it any value and it will give you back a function that will return that same value no matter what you pass it.');
-    ie_close('p');
-    ie_open('h4');
-      ie_open('a', null, null,
-          'id', 'flip',
-          'href', '#flip');
-        itext('flip');
-      ie_close('a');
-    ie_close('h4');
-    ie_open('p');
+      itext('s under logical conjunction, with it\'s empty value always returning ');
       ie_open('code');
-        itext('crocks/combinators/flip');
+        itext('true');
       ie_close('code');
+      itext('.');
     ie_close('p');
-    $templateAlias2({code: 'flip :: (a -> b -> c) -> b -> a -> c', mode: 'haskell'}, null, opt_ijData);
     ie_open('p');
-      itext('This little function just takes a function and returns a function that takes the first two parameters in reverse. One can compose flip calls down the line to flip all, or some of the other parameters if there are more than two. Mix and match to your heart\'s desire.');
-    ie_close('p');
-    ie_open('h4');
-      ie_open('a', null, null,
-          'id', 'identity',
-          'href', '#identity');
-        itext('identity');
-      ie_close('a');
-    ie_close('h4');
-    ie_open('p');
+      itext('As ');
       ie_open('code');
-        itext('crocks/combinators/identity');
+        itext('Equiv');
       ie_close('code');
-    ie_close('p');
-    $templateAlias2({code: 'identity ::  a -> a', mode: 'haskell'}, null, opt_ijData);
-    ie_open('p');
-      itext('This function and ');
+      itext(' wraps a function, it is lazy and a given instance will not produce a result until both arguments are satisfied. A given instance can be run by calling the method ');
       ie_open('a', null, null,
-          'href', '#constant');
+          'href', '#comparewith');
         ie_open('code');
-          itext('constant');
+          itext('compareWith');
         ie_close('code');
       ie_close('a');
-      itext(' are the workhorses of writing code with this library. It quite simply is just a function that when you pass it something, it returns that thing right back to you. So simple, I will leave it as an exercise to reason about why this is so powerful and important.');
+      itext(', providing both values for comparison.');
     ie_close('p');
-    ie_open('h4');
-      ie_open('a', null, null,
-          'id', 'reverseapply',
-          'href', '#reverseapply');
-        itext('reverseApply');
-      ie_close('a');
-    ie_close('h4');
-    ie_open('p');
-      ie_open('code');
-        itext('crocks/combinators/reverseApply');
-      ie_close('code');
-    ie_close('p');
-    $templateAlias2({code: 'reverseApply :: a -> (a -> b) -> b', mode: 'haskell'}, null, opt_ijData);
-    ie_open('p');
-      itext('Ever run into a situation where you have a value but do not have a function to apply it to? Well this little bird, named Thrush, is there to help out. Just give it a value and it will give you back a function ready to take a function. Once that function is provided, it will return the result of applying your value to that function.');
-    ie_close('p');
-    ie_open('h4');
-      ie_open('a', null, null,
-          'id', 'substitution',
-          'href', '#substitution');
-        itext('substitution');
-      ie_close('a');
-    ie_close('h4');
-    ie_open('p');
-      ie_open('code');
-        itext('crocks/combinators/substitution');
-      ie_close('code');
-    ie_close('p');
-    $templateAlias2({code: 'substitution :: (a -> b -> c) -> (a -> b) -> a -> c', mode: 'haskell'}, null, opt_ijData);
-    ie_open('p');
-      itext('While it a complicated little bugger, it can come in very handy from time to time. In it\'s first two arguments it takes functions. The first must be binary and the second unary. That will return you a function that is ready to take some value. Once supplied the fun starts, it will pass the ');
-      ie_open('code');
-        itext('a');
-      ie_close('code');
-      itext(' to the first argument of both functions, and the result of the second function to the second parameter of the first function. Finally after all that juggling, it will return the result of that first function. When used with partial application on that first parameter, a whole new world of combinatory madness is presented!');
-    ie_close('p');
+    $templateAlias2({code: 'const Equiv = require(\'crocks/Equiv\')\n\nconst equals = require(\'crocks/pointfree/equals\')\n\n// toString :: a -> String\nconst toString =\n  x => x.toString()\n\n// length :: a -> Number\nconst length = x =>\n  x && x.length ? x.length : 0\n\n// eq :: Equiv a a\nconst eq =\n  Equiv(equals)\n\neq.contramap(toString)\n  .compareWith(\'123\', 123)\n//=> true\n\neq.contramap(length)\n  .compareWith([ 1, 2, 3 ], [ \'a\', \'b\' ])\n//=> false', mode: 'javascript'}, null, opt_ijData);
+    ie_open('article', null, null,
+        'id', 'topic-implements');
+      ie_open('h2');
+        ie_open('a', null, null,
+            'id', 'implements',
+            'href', '#implements');
+          itext('Implements');
+        ie_close('a');
+      ie_close('h2');
+      ie_open('p');
+        ie_open('code');
+          itext('Semigroup');
+        ie_close('code');
+        itext(', ');
+        ie_open('code');
+          itext('Monoid');
+        ie_close('code');
+        itext(', ');
+        ie_open('code');
+          itext('Contravariant');
+        ie_close('code');
+      ie_close('p');
+    ie_close('article');
+    ie_open('article', null, null,
+        'id', 'topic-constructor');
+      ie_open('h2');
+        ie_open('a', null, null,
+            'id', 'constructor-methods',
+            'href', '#constructor-methods');
+          itext('Constructor Methods');
+        ie_close('a');
+      ie_close('h2');
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'empty',
+            'href', '#empty');
+          itext('empty');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Equiv.empty :: () -> Equiv a a', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        ie_open('code');
+          itext('empty');
+        ie_close('code');
+        itext(' provides the identity for the ');
+        ie_open('code');
+          itext('Monoid');
+        ie_close('code');
+        itext(' in that when the value it provides is ');
+        ie_open('code');
+          itext('concat');
+        ie_close('code');
+        itext('ed to any other value, it will return the other value. In the case of ');
+        ie_open('code');
+          itext('Equiv');
+        ie_close('code');
+        itext(' the result of ');
+        ie_open('code');
+          itext('empty');
+        ie_close('code');
+        itext(' is an ');
+        ie_open('code');
+          itext('Equiv');
+        ie_close('code');
+        itext(' that will always return');
+        ie_open('code');
+          itext('true');
+        ie_close('code');
+        itext('. ');
+        ie_open('code');
+          itext('empty');
+        ie_close('code');
+        itext(' is available on both the Constructor and the Instance for convenience.');
+      ie_close('p');
+      $templateAlias2({code: 'const Equiv = require(\'crocks/Equiv\')\n\nconst equals = require(\'crocks/pointfree/equals\')\n\nconst eq =\n  Equiv(equals)\n\nconst empty =\n  Equiv.empty()\n\neq\n  .concat(empty)\n  .compareWith({ a: 32 }, { a: 32 })\n//=> true\n\nempty\n  .concat(eq)\n  .compareWith({ a: 32 }, { a: 32 })\n//=> true\n\nempty\n  .concat(eq)\n  .compareWith({ a: 32, b: 19 }, { a: 32 })\n//=> false', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'type',
+            'href', '#type');
+          itext('type');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Equiv.type :: () -> String', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        ie_open('code');
+          itext('type');
+        ie_close('code');
+        itext(' provides a string representation of the type name for a given type in');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext('. While it is used mostly internally for law validation, it can be useful to the end user for debugging and building out custom types based on the standard ');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext(' types. While type comparisons can easily be done manually by calling ');
+        ie_open('code');
+          itext('type');
+        ie_close('code');
+        itext(' on a given type, using the ');
+        ie_open('code');
+          itext('isSameType');
+        ie_close('code');
+        itext(' function hides much of the boilerplate. ');
+        ie_open('code');
+          itext('type');
+        ie_close('code');
+        itext(' is available on both the Constructor and the Instance for convenience.');
+      ie_close('p');
+      $templateAlias2({code: 'const Equiv = require(\'crocks/Equiv\')\n\nconst Endo = require(\'crocks/Endo\')\nconst equals = require(\'crocks/pointfree/equals\')\nconst isSameType = require(\'crocks/predicates/isSameType\')\n\nEquiv.type() //=>  "Equiv"\n\nisSameType(Equiv, Equiv(equals))    //=> true\nisSameType(Equiv, Equiv)            //=> true\nisSameType(Equiv, Endo(x => x * 2)) //=> false\nisSameType(Equiv(equals), Endo)     //=> false', mode: 'javascript'}, null, opt_ijData);
+    ie_close('article');
+    ie_open('article', null, null,
+        'id', 'topic-instance');
+      ie_open('h2');
+        ie_open('a', null, null,
+            'id', 'instance-methods',
+            'href', '#instance-methods');
+          itext('Instance Methods');
+        ie_close('a');
+      ie_close('h2');
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'concat',
+            'href', '#concat');
+          itext('concat');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Equiv a a ~> Equiv a a -> Equiv a a', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        ie_open('code');
+          itext('concat');
+        ie_close('code');
+        itext(' is used to combine (2) ');
+        ie_open('code');
+          itext('Semigroup');
+        ie_close('code');
+        itext('s of the same type under an operation specified by the ');
+        ie_open('code');
+          itext('Semigroup');
+        ie_close('code');
+        itext('. In the case of ');
+        ie_open('code');
+          itext('Equiv');
+        ie_close('code');
+        itext(', the results of both');
+        ie_open('code');
+          itext('Equiv');
+        ie_close('code');
+        itext('s are combined under logical conjunction.');
+      ie_close('p');
+      $templateAlias2({code: 'const Equiv = require(\'crocks/Equiv\')\n\nconst compareWith = require(\'crocks/pointfree/compareWith\')\nconst equals = require(\'crocks/pointfree/equals\')\nconst isSameType = require(\'crocks/predicates/isSameType\')\nconst propOr = require(\'crocks/helpers/propOr\')\n\n// objLength :: Object -> Number\nconst objLength =\n  x => Object.keys(x).length\n\n// eq :: Equiv a a\nconst eq =\n  Equiv(equals)\n\n// sameType :: Equiv a a\nconst sameType =\n  Equiv(isSameType)\n\n// sameType :: Equiv Object Object\nconst length =\n  eq.contramap(objLength)\n\n// sameType :: Equiv a a\nconst sameTypeProp = key =>\n  sameType.contramap(propOr(null, key))\n\n// run :: Equiv Object Object\nconst run = compareWith(\n  { a: 19, b: \'string\' },\n  { a: 32, c: false }\n)\n\nrun(length)\n//=> true\n\nrun(sameTypeProp(\'a\'))\n//=> true\n\nrun(sameTypeProp(\'b\'))\n//=> false\n\nrun(\n  sameTypeProp(\'a\')\n    .concat(length)\n)\n// true\n\nrun(\n  sameTypeProp(\'b\')\n    .concat(length)\n)\n// false', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'contramap',
+            'href', '#contramap');
+          itext('contramap');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Equiv a a ~> (b -> a) -> Equiv b b', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        itext('The far right parameter of ');
+        ie_open('code');
+          itext('Equiv');
+        ie_close('code');
+        itext(' fixed to ');
+        ie_open('code');
+          itext('Boolean');
+        ie_close('code');
+        itext(' which means we cannot map the value as expected. However the left two parameters can vary, although they must vary in the same manner.');
+      ie_close('p');
+      ie_open('p');
+        itext('This is where ');
+        ie_open('code');
+          itext('contramap');
+        ie_close('code');
+        itext(' comes into play as it can be used to adapt an ');
+        ie_open('code');
+          itext('Equiv');
+        ie_close('code');
+        itext('of a given type to accept a different type or modify the value. Provide it a function that has a return type that matches the input types of the ');
+        ie_open('code');
+          itext('Equiv');
+        ie_close('code');
+        itext('. This will return a new ');
+        ie_open('code');
+          itext('Equiv');
+        ie_close('code');
+        itext(' matching the input type of the provided function.');
+      ie_close('p');
+      $templateAlias2({code: 'const Equiv = require(\'crocks/Equiv\')\n\nconst equals = require(\'crocks/pointfree/equals\')\n\n// length :: String -> Number\nconst length =\n  x => x.length\n\n// eq :: Equiv a a\nconst eq =\n  Equiv(equals)\n\n// sameLength :: Equiv String String\nconst sameLength =\n  eq.contramap(length)\n\n// sameAmplitude :: Equiv Float Float\nconst sameAmplitude =\n  eq.contramap(Math.abs)\n\nsameAmplitude\n  .compareWith(-0.5011, 0.5011)\n//=> true\n\nsameAmplitude\n  .compareWith(-0.755, 0.8023)\n//=> false\n\nsameLength\n  .compareWith(\'aBcD\', \'1234\')\n//=> true\n\nsameLength\n  .compareWith(\'AB\', \'ABC\')\n//=> false', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'valueof',
+            'href', '#valueof');
+          itext('valueOf');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Equiv a a ~> () -> a -> a -> Boolean', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        ie_open('code');
+          itext('valueOf');
+        ie_close('code');
+        itext(' is used on all ');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext(' ');
+        ie_open('code');
+          itext('Monoid');
+        ie_close('code');
+        itext('s as a means of extraction. While the extraction is available, types that implement ');
+        ie_open('code');
+          itext('valueOf');
+        ie_close('code');
+        itext(' are not necessarily a');
+        ie_open('code');
+          itext('Comonad');
+        ie_close('code');
+        itext('. This function is used primarily for convenience for some of the helper functions that ship with ');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext('. Calling ');
+        ie_open('code');
+          itext('valueOf');
+        ie_close('code');
+        itext(' on an ');
+        ie_open('code');
+          itext('Equiv');
+        ie_close('code');
+        itext('instance will result in the underlying curried equivalence function.');
+      ie_close('p');
+      $templateAlias2({code: 'const Equiv = require(\'crocks/Equiv\')\n\nconst compose = require(\'crocks/helpers/compose\')\nconst equals = require(\'crocks/pointfree/equals\')\nconst propOr = require(\'crocks/helpers/propOr\')\n\n// toLower :: String -> String\nconst toLower =\n  x => x.toLowerCase()\n\n// length :: String -> String\nconst length =\n  x => x.length\n\n// lowerName :: Object -> String\nconst lowerName =\n  compose(toLower, propOr(\'\', \'name\'))\n\n// itemsLen :: Object -> Number\nconst itemsLen =\n  compose(length, propOr(\'\', \'items\'))\n\n// eq :: Equiv a a\nconst eq =\n  Equiv(equals)\n\n// checkName :: Equiv Object Object\nconst checkName =\n  eq.contramap(lowerName)\n\n// checkName :: Equiv Object Object\nconst checkItems =\n  eq.contramap(itemsLen)\n\n// test :: Object -> Object -> Boolean\nconst test =\n  checkName\n    .concat(checkItems)\n    .valueOf()\n\ntest(\n  { name: \'Bob\', items: [ 1, 2, 4 ] },\n  { name: \'bOb\', items: [ 9, 12, 9 ] }\n)\n//=> true', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'comparewith',
+            'href', '#comparewith');
+          itext('compareWith');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Equiv a a ~> a -> a -> Boolean', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        itext('As ');
+        ie_open('code');
+          itext('Equiv');
+        ie_close('code');
+        itext(' wraps a function, it needs a means to be run with two values for comparison. Instances provide a curried method called ');
+        ie_open('code');
+          itext('compareWith');
+        ie_close('code');
+        itext(' that takes two values for comparison and will run them through the equivalence function, returning the resulting ');
+        ie_open('code');
+          itext('Boolean');
+        ie_close('code');
+        itext('.');
+      ie_close('p');
+      ie_open('p');
+        itext('Due to the laziness of this type, complicated comparisons can be built out from combining and mapping smaller, simpler units of equivalence comparison.');
+      ie_close('p');
+      $templateAlias2({code: 'const Equiv = require(\'crocks/Equiv\')\n\n// both :: Equiv Boolean Boolean\nconst both =\n  Equiv((x, y) => x && y)\n\n// isEven :: Number -> Boolean\nconst isEven =\n  x => x % 2 === 0\n\n// isBig :: Number -> Boolean\nconst isBig =\n  x => x > 10\n\n// bothEven :: Equiv Number Number\nconst bothEven =\n  both.contramap(isEven)\n\n// bothBig :: Equiv Number Number\nconst bothBig =\n  both.contramap(isBig)\n\nbothEven\n  .compareWith(12, 20)\n//=> true\n\nbothEven\n  .compareWith(17, 20)\n//=> false\n\nbothBig\n  .compareWith(17)(20)\n//=> true\n\nbothBig\n  .compareWith(7)(20)\n//=> false\n\nbothBig\n  .concat(bothEven)\n  .compareWith(8)(54)\n//=> false', mode: 'javascript'}, null, opt_ijData);
+    ie_close('article');
     ie_open('input', null, null,
         'type', 'hidden',
         'value', opt_data.page.title);
@@ -28586,11 +28732,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'value', opt_data.site.title);
     ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({content: param899}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param405}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'PhkdG.render';
+  $render.soyTemplateName = 'DyxhS.render';
 }
 
 exports.render.params = ["page","site"];
@@ -28600,14 +28746,20 @@ return exports;
 
 });
 
-class PhkdG extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(PhkdG, templates);
+class DyxhS extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(DyxhS, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
 
 
 /***/ }),
+/* 219 */,
+/* 220 */,
+/* 221 */,
+/* 222 */,
+/* 223 */,
+/* 224 */,
 /* 225 */,
 /* 226 */,
 /* 227 */,
@@ -28621,15 +28773,7 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(PhkdG, templates);
 /* 235 */,
 /* 236 */,
 /* 237 */,
-/* 238 */,
-/* 239 */,
-/* 240 */,
-/* 241 */,
-/* 242 */,
-/* 243 */,
-/* 244 */,
-/* 245 */,
-/* 246 */
+/* 238 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28665,9 +28809,9 @@ __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _combinatorsSoy = __webpack_require__(224);
+var _EquivSoy = __webpack_require__(218);
 
-var _combinatorsSoy2 = _interopRequireDefault(_combinatorsSoy);
+var _EquivSoy2 = _interopRequireDefault(_EquivSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28677,23 +28821,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var PhkdG = function (_Component) {
-  _inherits(PhkdG, _Component);
+var DyxhS = function (_Component) {
+  _inherits(DyxhS, _Component);
 
-  function PhkdG() {
-    _classCallCheck(this, PhkdG);
+  function DyxhS() {
+    _classCallCheck(this, DyxhS);
 
-    return _possibleConstructorReturn(this, (PhkdG.__proto__ || Object.getPrototypeOf(PhkdG)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (DyxhS.__proto__ || Object.getPrototypeOf(DyxhS)).apply(this, arguments));
   }
 
-  return PhkdG;
+  return DyxhS;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(PhkdG, _combinatorsSoy2.default);
+_metalSoy2.default.register(DyxhS, _EquivSoy2.default);
 
-exports.default = PhkdG;
+exports.default = DyxhS;
 
 /***/ })
-],[246]);
+],[238]);

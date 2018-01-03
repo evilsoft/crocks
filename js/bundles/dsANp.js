@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([6,21,22,23],[
+webpackJsonppageComponent([13,21,22,23],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19884,7 +19884,7 @@ if (goog.DEBUG) {
  * @return {void}
  * @suppress {checkTypes}
  */
-function __deltemplate_s173_d34389eb(opt_data, opt_ignored, opt_ijData) {
+function __deltemplate_s151_d34389eb(opt_data, opt_ignored, opt_ijData) {
   ie_open('a', null, null,
       'class', 'sidebar-link ' + (opt_data.page.active ? 'sidebar-link-selected' : ''),
       'href', opt_data.page.url);
@@ -19893,16 +19893,16 @@ function __deltemplate_s173_d34389eb(opt_data, opt_ignored, opt_ijData) {
           'class', 'sidebar-icon icon-16-' + opt_data.page.icon);
     }
     ie_open('span');
-      var dyn12 = opt_data.page.title;
-      if (typeof dyn12 == 'function') dyn12(); else if (dyn12 != null) itext(dyn12);
+      var dyn10 = opt_data.page.title;
+      if (typeof dyn10 == 'function') dyn10(); else if (dyn10 != null) itext(dyn10);
     ie_close('span');
   ie_close('a');
 }
-exports.__deltemplate_s173_d34389eb = __deltemplate_s173_d34389eb;
+exports.__deltemplate_s151_d34389eb = __deltemplate_s151_d34389eb;
 if (goog.DEBUG) {
-  __deltemplate_s173_d34389eb.soyTemplateName = 'Sidebar.__deltemplate_s173_d34389eb';
+  __deltemplate_s151_d34389eb.soyTemplateName = 'Sidebar.__deltemplate_s151_d34389eb';
 }
-soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'sidebar', 0, __deltemplate_s173_d34389eb);
+soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'sidebar', 0, __deltemplate_s151_d34389eb);
 
 exports.render.params = ["section","site"];
 exports.render.types = {"section":"any","site":"any"};
@@ -20091,8 +20091,8 @@ function $render(opt_data, opt_ignored, opt_ijData) {
       ie_void('span', null, null,
           'class', 'icon icon-16-clock');
       itext(' ');
-      var dyn13 = opt_data.time;
-      if (typeof dyn13 == 'function') dyn13(); else if (dyn13 != null) itext(dyn13);
+      var dyn11 = opt_data.time;
+      if (typeof dyn11 == 'function') dyn11(); else if (dyn11 != null) itext(dyn11);
     }
   ie_close('p');
 }
@@ -28355,19 +28355,12 @@ exports.default = parseFromAnchor;
 /* 221 */,
 /* 222 */,
 /* 223 */,
-/* 224 */,
-/* 225 */,
-/* 226 */,
-/* 227 */,
-/* 228 */,
-/* 229 */,
-/* 230 */,
-/* 231 */
+/* 224 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sGGgc", function() { return sGGgc; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dsANp", function() { return dsANp; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28379,15 +28372,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var templates;
 goog.loadModule(function(exports) {
 
-// This file was automatically generated from getting-started.soy.
+// This file was automatically generated from combinators.soy.
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace sGGgc.
+ * @fileoverview Templates in namespace dsANp.
  * @public
  */
 
-goog.module('sGGgc.incrementaldom');
+goog.module('dsANp.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28410,7 +28403,7 @@ var iattr = IncrementalDom.attr;
 
 var $templateAlias2 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('ElectricCode.incrementaldom', 'render');
 
-var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('guide.incrementaldom', 'render');
+var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('notopic.incrementaldom', 'render');
 
 
 /**
@@ -28421,115 +28414,169 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var param211 = function() {
-    ie_open('article', null, null,
-        'id', 'installation');
-      ie_open('h2');
-        ie_open('a', null, null,
-            'id', 'installation',
-            'href', '#installation');
-          itext('Installation');
-        ie_close('a');
-      ie_close('h2');
-      ie_open('p');
+  var param899 = function() {
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'applyto',
+          'href', '#applyto');
+        itext('applyTo');
+      ie_close('a');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/combinators/applyTo');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'applyTo :: (a -> b) -> a -> b', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('Seems really silly, but is quite useful for a lot of things. It takes a function and a value and then returns the result of that function with the argument applied.');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'composeb',
+          'href', '#composeb');
+        itext('composeB');
+      ie_close('a');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/combinators/composeB');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'composeB :: (b -> c) -> (a -> b) -> a -> c', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('Provides a means to describe a composition between two functions. it takes two functions and a value. Given ');
+      ie_open('code');
+        itext('composeB(f, g)');
+      ie_close('code');
+      itext(', which is read ');
+      ie_open('code');
+        itext('f');
+      ie_close('code');
+      itext(' after ');
+      ie_open('code');
+        itext('g');
+      ie_close('code');
+      itext(', it will return a function that will take value ');
+      ie_open('code');
+        itext('a');
+      ie_close('code');
+      itext(' and apply it to ');
+      ie_open('code');
+        itext('g');
+      ie_close('code');
+      itext(', passing the result as an argument to ');
+      ie_open('code');
+        itext('f');
+      ie_close('code');
+      itext(', and will finally return the result of ');
+      ie_open('code');
+        itext('f');
+      ie_close('code');
+      itext('. (This allows only two functions, if you want to avoid things like:');
+      ie_open('code');
+        itext('composeB(composeB(f, g), composeB(h, i))');
+      ie_close('code');
+      itext(' then check out');
+      ie_open('a', null, null,
+          'href', 'helpers.html#compose');
         ie_open('code');
-          itext('crocks');
+          itext('compose');
         ie_close('code');
-        itext(' is available from ');
+      ie_close('a');
+      itext('.)');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'constant',
+          'href', '#constant');
+        itext('constant');
+      ie_close('a');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/combinators/constant');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'constant :: a -> () -> a', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('This is a very handy dandy function, used a lot. Pass it any value and it will give you back a function that will return that same value no matter what you pass it.');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'flip',
+          'href', '#flip');
+        itext('flip');
+      ie_close('a');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/combinators/flip');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'flip :: (a -> b -> c) -> b -> a -> c', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('This little function just takes a function and returns a function that takes the first two parameters in reverse. One can compose flip calls down the line to flip all, or some of the other parameters if there are more than two. Mix and match to your heart\'s desire.');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'identity',
+          'href', '#identity');
+        itext('identity');
+      ie_close('a');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/combinators/identity');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'identity ::  a -> a', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('This function and ');
+      ie_open('a', null, null,
+          'href', '#constant');
         ie_open('code');
-          itext('npm');
+          itext('constant');
         ie_close('code');
-        itext(' and is just a shell command away. All you need to do is run the following to save it as a dependency in your current project folder:');
-      ie_close('p');
-      $templateAlias2({code: '$ npm install crocks -S', mode: 'text'}, null, opt_ijData);
-      ie_open('p');
-        itext('This will pull down ');
-        ie_open('code');
-          itext('crocks');
-        ie_close('code');
-        itext(' into your project\'s ');
-        ie_open('code');
-          itext('node_modules');
-        ie_close('code');
-        itext(' folder and can be accessed by adding something like the following in the file that needs it:');
-      ie_close('p');
-      $templateAlias2({code: '// node require syntax\nconst crocks = require(\'crocks\')\n\n// Javascript modules (if you are transpiling)\nimport crocks from \'crocks\'', mode: 'javascript'}, null, opt_ijData);
-    ie_close('article');
-    ie_open('article', null, null,
-        'id', 'import-only-what-you-need');
-      ie_open('h2');
-        ie_open('a', null, null,
-            'id', 'import-only-what-you-need',
-            'href', '#import-only-what-you-need');
-          itext('Import only what you need');
-        ie_close('a');
-      ie_close('h2');
-      ie_open('p');
-        itext('This lib ');
-        ie_open('em');
-          itext('should');
-        ie_close('em');
-        itext(' work, with no additional compilation in all current browsers (Edge, Safari, Chrome, Firefox), if it does not, please file an issue as I really, really want it to.');
-      ie_close('p');
-      ie_open('p');
-        itext('There is a lot to this library, and as such it may not be desired to bring in the entire library when bundling for a library or a frontend application. If this is the case, the code is organized in a manner groups all types in functions that construct those type in their own folders. The general purpose functions are spread across the following folders: ');
-        ie_open('code');
-          itext('combinators');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('helpers');
-        ie_close('code');
-        itext(',');
-        ie_open('code');
-          itext('logic');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('pointfree');
-        ie_close('code');
-        itext(' and ');
-        ie_open('code');
-          itext('predicates');
-        ie_close('code');
-        itext('.');
-      ie_close('p');
-      ie_open('p');
-        itext('To access the types, just reference the folder like: ');
-        ie_open('code');
-          itext('crocks/Maybe');
-        ie_close('code');
-        itext(', or');
-        ie_open('code');
-          itext('crocks/Result');
-        ie_close('code');
-        itext('. If you want to access a function that constructs a given type, reference it by name, like: ');
-        ie_open('code');
-          itext('crocks/Maybe/safe');
-        ie_close('code');
-        itext(' or ');
-        ie_open('code');
-          itext('crocks/Result/tryCatch');
-        ie_close('code');
-        itext('. This organization helps ensure that you only include what you need.');
-      ie_close('p');
-      ie_open('p');
-        itext('Another thing to note is, if you are transpiling, then destructuring in your');
-        ie_open('code');
-          itext('import');
-        ie_close('code');
-        itext(' statement is not going to work as you are thinking (maybe if you are using ');
-        ie_open('code');
-          itext('babel');
-        ie_close('code');
-        itext(', but this will be broken once modules are available in node, so be careful). Basically you should not do this, as ');
-        ie_open('code');
-          itext('crocks');
-        ie_close('code');
-        itext(' will not be set up for it until modules are available in node:');
-      ie_close('p');
-      $templateAlias2({code: '// Nope! Nope! Nope!:\nimport { Maybe, compose, curry, map } from \'crocks\'\n\n// instead do something like this:\nimport crocks from \'crocks\'\nconst { Maybe, compose, curry, map } = crocks\n\n// do not wanna bring all of crocks into your bundle?\n// I feel ya, all try this:\n\nimport Maybe from \'crocks/Maybe\'\nimport compose from \'crock/helpers/compose\'\nimport curry from \'crocks/helpers/curry\'\nimport map from \'crocks/pointfree/map\'\n\n// you can of course do the same with require statements:\nconst All = require(\'crocks/All\')\n...', mode: 'javascript'}, null, opt_ijData);
-    ie_close('article');
+      ie_close('a');
+      itext(' are the workhorses of writing code with this library. It quite simply is just a function that when you pass it something, it returns that thing right back to you. So simple, I will leave it as an exercise to reason about why this is so powerful and important.');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'reverseapply',
+          'href', '#reverseapply');
+        itext('reverseApply');
+      ie_close('a');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/combinators/reverseApply');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'reverseApply :: a -> (a -> b) -> b', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('Ever run into a situation where you have a value but do not have a function to apply it to? Well this little bird, named Thrush, is there to help out. Just give it a value and it will give you back a function ready to take a function. Once that function is provided, it will return the result of applying your value to that function.');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'substitution',
+          'href', '#substitution');
+        itext('substitution');
+      ie_close('a');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/combinators/substitution');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'substitution :: (a -> b -> c) -> (a -> b) -> a -> c', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('While it a complicated little bugger, it can come in very handy from time to time. In it\'s first two arguments it takes functions. The first must be binary and the second unary. That will return you a function that is ready to take some value. Once supplied the fun starts, it will pass the ');
+      ie_open('code');
+        itext('a');
+      ie_close('code');
+      itext(' to the first argument of both functions, and the result of the second function to the second parameter of the first function. Finally after all that juggling, it will return the result of that first function. When used with partial application on that first parameter, a whole new world of combinatory madness is presented!');
+    ie_close('p');
     ie_open('input', null, null,
         'type', 'hidden',
         'value', opt_data.page.title);
@@ -28539,11 +28586,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'value', opt_data.site.title);
     ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({content: param211}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param899}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'sGGgc.render';
+  $render.soyTemplateName = 'dsANp.render';
 }
 
 exports.render.params = ["page","site"];
@@ -28553,14 +28600,21 @@ return exports;
 
 });
 
-class sGGgc extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(sGGgc, templates);
+class dsANp extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(dsANp, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
 
 
 /***/ }),
+/* 225 */,
+/* 226 */,
+/* 227 */,
+/* 228 */,
+/* 229 */,
+/* 230 */,
+/* 231 */,
 /* 232 */,
 /* 233 */,
 /* 234 */,
@@ -28577,16 +28631,7 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(sGGgc, templates);
 /* 245 */,
 /* 246 */,
 /* 247 */,
-/* 248 */,
-/* 249 */,
-/* 250 */,
-/* 251 */,
-/* 252 */,
-/* 253 */,
-/* 254 */,
-/* 255 */,
-/* 256 */,
-/* 257 */
+/* 248 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28622,9 +28667,9 @@ __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _gettingStartedSoy = __webpack_require__(231);
+var _combinatorsSoy = __webpack_require__(224);
 
-var _gettingStartedSoy2 = _interopRequireDefault(_gettingStartedSoy);
+var _combinatorsSoy2 = _interopRequireDefault(_combinatorsSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28634,23 +28679,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var sGGgc = function (_Component) {
-  _inherits(sGGgc, _Component);
+var dsANp = function (_Component) {
+  _inherits(dsANp, _Component);
 
-  function sGGgc() {
-    _classCallCheck(this, sGGgc);
+  function dsANp() {
+    _classCallCheck(this, dsANp);
 
-    return _possibleConstructorReturn(this, (sGGgc.__proto__ || Object.getPrototypeOf(sGGgc)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (dsANp.__proto__ || Object.getPrototypeOf(dsANp)).apply(this, arguments));
   }
 
-  return sGGgc;
+  return dsANp;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(sGGgc, _gettingStartedSoy2.default);
+_metalSoy2.default.register(dsANp, _combinatorsSoy2.default);
 
-exports.default = sGGgc;
+exports.default = dsANp;
 
 /***/ })
-],[257]);
+],[248]);

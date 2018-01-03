@@ -128,45 +128,45 @@ accepted Datatype):
 | `traverse` | `Array`, `Either`, `Identity`, `List`, `Maybe`, `Result` |
 | `valueOf` | [`All`][all-value], [`Any`][any-value], `Assign`, `Const`, `Endo`, [`Equiv`][equiv-value], `First`, `Identity`, `Last`, `Max`, `Min`, [`Pred`][pred-value], `Prod`, `Sum`, `Unit`, `Writer` |
 
-[all-concat]: ../monoids/all.html#concat
-[all-empty]: ../monoids/all.html#empty
-[all-value]: ../monoids/all.html#valueof
+[all-concat]: ../monoids/All.html#concat
+[all-empty]: ../monoids/All.html#empty
+[all-value]: ../monoids/All.html#valueof
 
-[any-concat]: ../monoids/any.html#concat
-[any-empty]: ../monoids/any.html#empty
-[any-value]: ../monoids/any.html#valueof
+[any-concat]: ../monoids/Any.html#concat
+[any-empty]: ../monoids/Any.html#empty
+[any-value]: ../monoids/Any.html#valueof
 
-[arrow-both]: ../crocks/arrow.html#both
-[arrow-contra]: ../crocks/arrow.html#contramap
-[arrow-first]: ../crocks/arrow.html#first
-[arrow-map]: ../crocks/arrow.html#map
-[arrow-pro]: ../crocks/arrow.html#promap
-[arrow-run]: ../crocks/arrow.html#runwith
-[arrow-second]: ../crocks/arrow.html#second
+[arrow-both]: ../crocks/Arrow.html#both
+[arrow-contra]: ../crocks/Arrow.html#contramap
+[arrow-first]: ../crocks/Arrow.html#first
+[arrow-map]: ../crocks/Arrow.html#map
+[arrow-pro]: ../crocks/Arrow.html#promap
+[arrow-run]: ../crocks/Arrow.html#runwith
+[arrow-second]: ../crocks/Arrow.html#second
 
-[equiv-compare]: ../crocks/equiv.html#comparewith
-[equiv-concat]: ../crocks/equiv.html#concat
-[equiv-contra]: ../crocks/equiv.html#contramap
-[equiv-empty]: ../crocks/equiv.html#empty
-[equiv-value]: ../crocks/equiv.html#valueof
+[equiv-compare]: ../crocks/Equiv.html#comparewith
+[equiv-concat]: ../crocks/Equiv.html#concat
+[equiv-contra]: ../crocks/Equiv.html#contramap
+[equiv-empty]: ../crocks/Equiv.html#empty
+[equiv-value]: ../crocks/Equiv.html#valueof
 
-[pred-concat]: ../crocks/pred.html#concat
-[pred-contra]: ../crocks/pred.html#contramap
-[pred-empty]: ../crocks/pred.html#empty
-[pred-run]: ../crocks/pred.html#runwith
-[pred-value]: ../crocks/pred.html#valueof
+[pred-concat]: ../crocks/Pred.html#concat
+[pred-contra]: ../crocks/Pred.html#contramap
+[pred-empty]: ../crocks/Pred.html#empty
+[pred-run]: ../crocks/Pred.html#runwith
+[pred-value]: ../crocks/Pred.html#valueof
 
-[reader-ap]: ../crocks/reader.html#ap
-[reader-chain]: ../crocks/reader.html#chain
-[reader-map]: ../crocks/reader.html#map
-[reader-run]: ../crocks/reader.html#runwith
+[reader-ap]: ../crocks/Reader.html#ap
+[reader-chain]: ../crocks/Reader.html#chain
+[reader-map]: ../crocks/Reader.html#map
+[reader-run]: ../crocks/Reader.html#runwith
 
-[state-ap]: ../crocks/state.html#ap
-[state-chain]: ../crocks/state.html#chain
-[state-eval]: ../crocks/state.html#evalwith
-[state-exec]: ../crocks/state.html#execwith
-[state-map]: ../crocks/state.html#map
-[state-run]: ../crocks/state.html#runwith
+[state-ap]: ../crocks/State.html#ap
+[state-chain]: ../crocks/State.html#chain
+[state-eval]: ../crocks/State.html#evalwith
+[state-exec]: ../crocks/State.html#execwith
+[state-map]: ../crocks/State.html#map
+[state-run]: ../crocks/State.html#runwith
 
-[exec]: ../crocks/state.html#execwith-pointfree
-[eval]: ../crocks/state.html#evalwith-pointfree
+[exec]: ../crocks/State.html#execwith-pointfree
+[eval]: ../crocks/State.html#evalwith-pointfree

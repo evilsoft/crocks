@@ -19,7 +19,7 @@ function maybeToFirst(maybe) {
       const m = maybe(x)
 
       if(!isSameType(Maybe, m)) {
-        throw new TypeError('maybeToFirst: Maybe returing function required')
+        throw new TypeError('maybeToFirst: Maybe returning function required')
       }
 
       return applyTransform(m)
@@ -30,7 +30,7 @@ function maybeToFirst(maybe) {
     return applyTransform(maybe)
   }
 
-  throw new TypeError('maybeToFirst: Maybe or Maybe returing function required')
+  throw new TypeError('maybeToFirst: Maybe or Maybe returning function required')
 }
 
 module.exports = curry(maybeToFirst)

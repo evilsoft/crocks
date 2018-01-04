@@ -19,7 +19,7 @@ function eitherToFirst(either) {
       const m = either(x)
 
       if(!isSameType(Either, m)) {
-        throw new TypeError('eitherToFirst: Either returing function required')
+        throw new TypeError('eitherToFirst: Either returning function required')
       }
 
       return applyTransform(m)
@@ -30,7 +30,7 @@ function eitherToFirst(either) {
     return applyTransform(either)
   }
 
-  throw new TypeError('eitherToFirst: Either or Either returing function required')
+  throw new TypeError('eitherToFirst: Either or Either returning function required')
 }
 
 module.exports = curry(eitherToFirst)

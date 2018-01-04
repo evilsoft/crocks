@@ -24,7 +24,7 @@ function firstToEither(left, first) {
       const m = first(x)
 
       if(!isSameType(First, m)) {
-        throw new TypeError('firstToEither: First returing function required for second argument')
+        throw new TypeError('firstToEither: First returning function required for second argument')
       }
 
       return applyTransform(left, m)
@@ -35,7 +35,7 @@ function firstToEither(left, first) {
     return applyTransform(left, first)
   }
 
-  throw new TypeError('firstToEither: First or First returing function required for second argument')
+  throw new TypeError('firstToEither: First or First returning function required for second argument')
 }
 
 module.exports = curry(firstToEither)

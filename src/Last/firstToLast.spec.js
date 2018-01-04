@@ -18,7 +18,7 @@ test('firstToLast transform', t => {
 
   t.ok(isFunction(firstToLast), 'is a function')
 
-  const err = /firstToLast: First or First returing function required/
+  const err = /firstToLast: First or First returning function required/
   t.throws(f(undefined), err, 'throws if arg is undefined')
   t.throws(f(null), err, 'throws if arg is null')
   t.throws(f(0), err, 'throws if arg is a falsey number')
@@ -57,7 +57,7 @@ test('firstToLast with First returning function', t => {
 
   const f = bindFunc(firstToLast(identity))
 
-  const err = /firstToLast: First returing function required/
+  const err = /firstToLast: First returning function required/
   t.throws(f(undefined), err, 'throws if function returns undefined')
   t.throws(f(null), err, 'throws if function returns null')
   t.throws(f(0), err, 'throws if function returns a falsey number')

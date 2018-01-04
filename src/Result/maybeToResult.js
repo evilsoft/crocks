@@ -24,7 +24,7 @@ function maybeToResult(left, maybe) {
       const m = maybe(x)
 
       if(!isSameType(Maybe, m)) {
-        throw new TypeError('maybeToResult: Maybe returing function required for second argument')
+        throw new TypeError('maybeToResult: Maybe returning function required for second argument')
       }
 
       return applyTransform(left, m)
@@ -35,7 +35,7 @@ function maybeToResult(left, maybe) {
     return applyTransform(left, maybe)
   }
 
-  throw new TypeError('maybeToResult: Maybe or Maybe returing function required for second argument')
+  throw new TypeError('maybeToResult: Maybe or Maybe returning function required for second argument')
 }
 
 module.exports = curry(maybeToResult)

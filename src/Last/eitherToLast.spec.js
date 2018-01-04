@@ -17,7 +17,7 @@ test('eitherToLast transform', t => {
 
   t.ok(isFunction(eitherToLast), 'is a function')
 
-  const err = /eitherToLast: Either or Either returing function required/
+  const err = /eitherToLast: Either or Either returning function required/
   t.throws(f(undefined), err, 'throws if arg is undefined')
   t.throws(f(null), err, 'throws if arg is null')
   t.throws(f(0), err, 'throws if arg is a falsey number')
@@ -56,7 +56,7 @@ test('eitherToLast with Either returning function', t => {
 
   const f = bindFunc(eitherToLast(identity))
 
-  const err = /eitherToLast: Either returing function required/
+  const err = /eitherToLast: Either returning function required/
   t.throws(f(undefined), err, 'throws if function returns undefined')
   t.throws(f(null), err, 'throws if function returns null')
   t.throws(f(0), err, 'throws if function returns a falsey number')

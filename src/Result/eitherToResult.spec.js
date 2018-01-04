@@ -19,7 +19,7 @@ test('eitherToResult transform', t => {
 
   t.ok(isFunction(eitherToResult), 'is a function')
 
-  const err = /eitherToResult: Either or Either returing function required/
+  const err = /eitherToResult: Either or Either returning function required/
   t.throws(f(undefined), err, 'throws if arg is undefined')
   t.throws(f(null), err, 'throws if arg is null')
   t.throws(f(0), err, 'throws if arg is a falsey number')
@@ -58,7 +58,7 @@ test('eitherToResult with Result returning function', t => {
 
   const f = bindFunc(eitherToResult(identity))
 
-  const err = /eitherToResult: Either returing function required/
+  const err = /eitherToResult: Either returning function required/
   t.throws(f(undefined), err, 'throws if function returns undefined')
   t.throws(f(null), err, 'throws if function returns null')
   t.throws(f(0), err, 'throws if function returns a falsey number')

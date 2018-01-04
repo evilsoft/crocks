@@ -19,7 +19,7 @@ function resultToLast(result) {
       const m = result(x)
 
       if(!isSameType(Result, m)) {
-        throw new TypeError('resultToLast: Result returing function required')
+        throw new TypeError('resultToLast: Result returning function required')
       }
 
       return applyTransform(m)
@@ -30,7 +30,7 @@ function resultToLast(result) {
     return applyTransform(result)
   }
 
-  throw new TypeError('resultToLast: Result or Result returing function required')
+  throw new TypeError('resultToLast: Result or Result returning function required')
 }
 
 module.exports = curry(resultToLast)

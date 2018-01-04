@@ -24,7 +24,7 @@ function firstToResult(left, first) {
       const m = first(x)
 
       if(!isSameType(First, m)) {
-        throw new TypeError('firstToResult: First returing function required for second argument')
+        throw new TypeError('firstToResult: First returning function required for second argument')
       }
 
       return applyTransform(left, m)
@@ -35,7 +35,7 @@ function firstToResult(left, first) {
     return applyTransform(left, first)
   }
 
-  throw new TypeError('firstToResult: First or First returing function required for second argument')
+  throw new TypeError('firstToResult: First or First returning function required for second argument')
 }
 
 module.exports = curry(firstToResult)

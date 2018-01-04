@@ -19,7 +19,7 @@ function eitherToMaybe(either) {
       const m = either(x)
 
       if(!isSameType(Either, m)) {
-        throw new TypeError('eitherToMaybe: Either returing function required')
+        throw new TypeError('eitherToMaybe: Either returning function required')
       }
 
       return applyTransform(m)
@@ -30,7 +30,7 @@ function eitherToMaybe(either) {
     return applyTransform(either)
   }
 
-  throw new TypeError('eitherToMaybe: Either or Either returing function required')
+  throw new TypeError('eitherToMaybe: Either or Either returning function required')
 }
 
 module.exports = curry(eitherToMaybe)

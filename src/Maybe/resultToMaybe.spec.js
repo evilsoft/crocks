@@ -18,7 +18,7 @@ test('resultToMaybe transform', t => {
 
   t.ok(isFunction(resultToMaybe), 'is a function')
 
-  const err = /resultToMaybe: Result or Result returing function required/
+  const err = /resultToMaybe: Result or Result returning function required/
   t.throws(f(undefined), err, 'throws if arg is undefined')
   t.throws(f(null), err, 'throws if arg is null')
   t.throws(f(0), err, 'throws if arg is a falsey number')
@@ -57,7 +57,7 @@ test('resultToMaybe with Result returning function', t => {
 
   const f = bindFunc(resultToMaybe(identity))
 
-  const err = /resultToMaybe: Result returing function required/
+  const err = /resultToMaybe: Result returning function required/
   t.throws(f(undefined), err, 'throws if function returns undefined')
   t.throws(f(null), err, 'throws if function returns null')
   t.throws(f(0), err, 'throws if function returns a falsey number')

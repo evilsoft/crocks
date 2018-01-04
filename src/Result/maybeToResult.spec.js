@@ -19,7 +19,7 @@ test('maybeToResult transform', t => {
 
   t.ok(isFunction(maybeToResult), 'is a function')
 
-  const err = /maybeToResult: Maybe or Maybe returing function required for second argument/
+  const err = /maybeToResult: Maybe or Maybe returning function required for second argument/
   t.throws(f(x, undefined), err, 'throws if second arg is undefined')
   t.throws(f(x, null), err, 'throws if second arg is null')
   t.throws(f(x, 0), err, 'throws if second arg is a falsey number')
@@ -58,7 +58,7 @@ test('maybeToResult with Maybe returning function', t => {
 
   const f = bindFunc(maybeToResult(none, identity))
 
-  const err = /maybeToResult: Maybe returing function required for second argument/
+  const err = /maybeToResult: Maybe returning function required for second argument/
   t.throws(f(undefined), err, 'throws if function returns undefined')
   t.throws(f(null), err, 'throws if function returns null')
   t.throws(f(0), err, 'throws if function returns a falsey number')

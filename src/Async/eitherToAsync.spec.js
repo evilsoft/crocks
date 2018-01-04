@@ -20,7 +20,7 @@ test('eitherToAsync transform', t => {
 
   t.ok(isFunction(eitherToAsync), 'is a function')
 
-  const err = /eitherToAsync: Either or Either returing function required/
+  const err = /eitherToAsync: Either or Either returning function required/
   t.throws(f(undefined), err, 'throws if arg is undefined')
   t.throws(f(null), err, 'throws if arg is null')
   t.throws(f(0), err, 'throws if arg is a falsey number')
@@ -65,7 +65,7 @@ test('eitherToAsync with Either returning function', t => {
 
   const f = bindFunc(eitherToAsync(identity))
 
-  const err = /eitherToAsync: Either returing function required/
+  const err = /eitherToAsync: Either returning function required/
   t.throws(f(undefined), err, 'throws if function returns undefined')
   t.throws(f(null), err, 'throws if function returns null')
   t.throws(f(0), err, 'throws if function returns a falsey number')

@@ -18,7 +18,7 @@ function writerToPair(writer) {
       const m = writer(x)
 
       if(!isWriter(m)) {
-        throw new TypeError('writerToPair: Writer returing function required')
+        throw new TypeError('writerToPair: Writer returning function required')
       }
 
       return applyTransform(m)
@@ -29,7 +29,7 @@ function writerToPair(writer) {
     return applyTransform(writer)
   }
 
-  throw new TypeError('writerToPair: Writer or Writer returing function required')
+  throw new TypeError('writerToPair: Writer or Writer returning function required')
 }
 
 module.exports = curry(writerToPair)

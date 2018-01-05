@@ -1,4 +1,27 @@
 # Change Log for `crocks`
+v0.8.3 -- January 4, 2018
+--
+### Additions
+* Github Pages Documentation
+* READMES:
+  * `State`
+* All ADTs:
+  * Add `constructor` property to all ADT instances.
+
+### Bug fixes
+* Correct spelling from 'returing' to 'returning' for a majority of the errors
+
+### Pull Requests
+* [#168 - Add constructor to instances to comply](https://github.com/evilsoft/crocks/pull/168)
+* [#170 - Add linting for the READMEs](https://github.com/evilsoft/crocks/pull/170)
+* [#165 - Improve documentation layout using electric.js](https://github.com/evilsoft/crocks/pull/165)
+* [#172 - Some small tweaks to the build system for the Docs](https://github.com/evilsoft/crocks/pull/172)
+* [#171 - Add State Docs](https://github.com/evilsoft/crocks/pull/171)
+* [#173 - Expand on the Documentation a bit](https://github.com/evilsoft/crocks/pull/173)
+* [#174 - Add Github style header links](https://github.com/evilsoft/crocks/pull/174)
+* [#175 - Index and Cross Reference Function Documentation](https://github.com/evilsoft/crocks/pull/175)
+* [#176 - Correct casing for Point-free links in Docs](https://github.com/evilsoft/crocks/pull/176)
+* [#178 - Fix spelling of returing to returning](https://github.com/evilsoft/crocks/pull/178)
 
 v0.8.2 -- December 22, 2017
 --

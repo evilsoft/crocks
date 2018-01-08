@@ -1,0 +1,70 @@
+{
+  "projectName": "crocks",
+  "projectOwner": "evilsoft",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "evilsoft",
+      "name": "Ian Hofmann-Hicks",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/3665793?v=4",
+      "profile": "https://github.com/evilsoft",
+      "contributions": [
+        "code",
+        "doc",
+        "video"
+      ]
+    },
+    {
+      "login": "rstegg",
+      "name": "Ryan",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/19234385?v=4",
+      "profile": "https://github.com/rstegg",
+      "contributions": [
+        "code",
+        "bug"
+      ]
+    },
+    {
+      "login": "avanslaars",
+      "name": "Andrew Van Slaars",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/1271181?v=4",
+      "profile": "http://vanslaars.io",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "HenriqueLimas",
+      "name": "Henrique Limas",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/2222191?v=4",
+      "profile": "https://github.com/HenriqueLimas",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    },
+    {
+      "login": "rpearce",
+      "name": "Robert Pearce",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/592876?v=4",
+      "profile": "https://robertwpearce.com",
+      "contributions": [
+        "bug",
+        "code"
+      ]
+    },
+    {
+      "login": "flintinatux",
+      "name": "Scott McCormack",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/888052?v=4",
+      "profile": "https://github.com/flintinatux",
+      "contributions": [
+        "bug"
+      ]
+    }
+  ]
+}

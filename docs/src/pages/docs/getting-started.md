@@ -32,49 +32,174 @@ import crocks from 'crocks'
 
 <article id="import-only-what-you-need">
 
-## Import only what you need
-
-This lib *should* work, with no additional compilation in all current browsers
-(Edge, Safari, Chrome, Firefox), if it does not, please file an issue as I
-really, really want it to. 
+## Import only what's needed
 
 There is a lot to this library, and as such it may not be desired to bring in
-the entire library when bundling for a library or a frontend application. If
-this is the case, the code is organized in a manner groups all types in
-functions that construct those type in their own folders. The general purpose
-functions are spread across the following folders: `combinators`, `helpers`,
-`logic`, `pointfree` and `predicates`.
+the whole thing when bundling for a library or frontend application. If
+this is the case, the code is organized in a manner that groups all functions
+that return or construct a given ADT into their respective folders. While
+general purpose functions are spread across the following
+folders: `combinators`, `helpers`, `logic`, `pointfree` and `predicates`.
 
 To access the types, just reference the folder like: `crocks/Maybe`, or
 `crocks/Result`. If you want to access a function that constructs a given type,
 reference it by name, like: `crocks/Maybe/safe` or `crocks/Result/tryCatch`.
 This organization helps ensure that you only include what you need.
 
-Another thing to note is, if you are transpiling, then destructuring in your
-`import` statement is not going to work as you are thinking (maybe if you are
-using `babel`, but this will be broken once modules are available in node, so
-be careful). Basically you should not do this, as `crocks` will not be set up
-for it until modules are available in node:
+### Entire library (CommonJS)
 
 ```javascript
-// Nope! Nope! Nope!:
-import { Maybe, compose, curry, map } from 'crocks'
+// namespace entire suite to crocks variable
+const crocks = require('crocks')
 
-// instead do something like this:
+// pluck anything that does not require name-spacing
+const { safe, isNumber } = crocks
+
+// still requires entire object, but removes name-spacing
+const { and, liftA2 } = require('crocks')
+
+// divide :: Number -> Number
+const divide =
+  x => y => x / y
+
+// safeNumber :: a -> Maybe Number
+const safeNumber =
+  safe(isNumber)
+
+// notZero :: a -> Maybe Number
+const notZero = safe(
+  and(isNumber, x => x !== 0)
+)
+
+// safeDivide:: a -> Maybe Number
+const safeDivide = crocks.curry(
+  (x, y) => liftA2(divide, safeNumber(x), notZero(y))
+)
+
+safeDivide(20, 0)
+//=> Nothing
+
+safeDivide(20, 5)
+//=> Just 4
+
+safeDivide('number', 5)
+//=> Nothing
+```
+
+### Entire library (JS Modules)
+
+```javascript
+// namespace entire suite to crocks variable
 import crocks from 'crocks'
-const { Maybe, compose, curry, map } = crocks
 
-// do not wanna bring all of crocks into your bundle?
-// I feel ya, all try this:
+// still imports entire object, but removes name-spacing
+import { and, liftA2 }  from 'crocks'
 
-import Maybe from 'crocks/Maybe'
-import compose from 'crock/helpers/compose'
+// pluck anything that does not require name-spacing
+const { safe, isNumber } = crocks
+
+// divide :: Number -> Number
+const divide =
+  x => y => x / y
+
+// safeNumber :: a -> Maybe Number
+const safeNumber =
+  safe(isNumber)
+
+// notZero :: a -> Maybe Number
+const notZero = safe(
+  and(isNumber, x => x !== 0)
+)
+
+// safeDivide:: a -> Maybe Number
+const safeDivide = crocks.curry(
+  (x, y) => liftA2(divide, safeNumber(x), notZero(y))
+)
+
+safeDivide(20, 0)
+//=> Nothing
+
+safeDivide(20, 5)
+//=> Just 4
+
+safeDivide('number', 5)
+//=> Nothing
+```
+
+### Single entities (CommonJS)
+
+```javascript
+// require in each entity directly
+const and = require('crocks/logic/and')
+const curry = require('crocks/helpers/curry')
+const isNumber = require('crocks/predicates/isNumber')
+const liftA2 = require('crocks/helpers/liftA2')
+const safe = require('crocks/Maybe/safe')
+
+// divide :: Number -> Number
+const divide =
+  x => y => x / y
+
+// safeNumber :: a -> Maybe Number
+const safeNumber =
+  safe(isNumber)
+
+// notZero :: a -> Maybe Number
+const notZero = safe(
+  and(isNumber, x => x !== 0)
+)
+
+// safeDivide:: a -> Maybe Number
+const safeDivide = curry(
+  (x, y) => liftA2(divide, safeNumber(x), notZero(y))
+)
+
+safeDivide(20, 0)
+//=> Nothing
+
+safeDivide(20, 5)
+//=> Just 4
+
+safeDivide('number', 5)
+//=> Nothing
+```
+
+### Single entities (JS Modules)
+
+```javascript
+// import in each entity directly
+import and from 'crocks/logic/and'
 import curry from 'crocks/helpers/curry'
-import map from 'crocks/pointfree/map'
+import isNumber from 'crocks/predicates/isNumber'
+import liftA2 from 'crocks/helpers/liftA2'
+import safe from 'crocks/Maybe/safe'
 
-// you can of course do the same with require statements:
-const All = require('crocks/All')
-...
+// divide :: Number -> Number
+const divide =
+  x => y => x / y
+
+// safeNumber :: a -> Maybe Number
+const safeNumber =
+  safe(isNumber)
+
+// notZero :: a -> Maybe Number
+const notZero = safe(
+  and(isNumber, x => x !== 0)
+)
+
+// safeDivide:: a -> Maybe Number
+const safeDivide = curry(
+  (x, y) => liftA2(divide, safeNumber(x), notZero(y))
+)
+
+safeDivide(20, 0)
+//=> Nothing
+
+safeDivide(20, 5)
+//=> Just 4
+
+safeDivide('number', 5)
+//=> Nothing
 ```
 
 </article>

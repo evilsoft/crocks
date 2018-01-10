@@ -2,9 +2,8 @@
 ```haskell
 Assign Object
 ```
-`Assign` is a `Monoid` that will combine two objects using `Object.assign` on
-their `Object` values, merging and overwriting new values for values that are
-not undefined.
+`Assign` is a `Monoid` that will combine (2) objects under assignment using
+`Object.assign` on the (2) `Object`s.
 
 ```js
 const Assign = require('crocks/Assign')
@@ -12,7 +11,8 @@ const Assign = require('crocks/Assign')
 const first = { name: 'Bob' }
 const last = { lastName: 'Smith' }
 
-Assign(first).concat(last)
+Assign(first)
+  .concat(Assign(last))
 //=> Assign { name: 'Bob', lastName: 'Smith' }
 
 ```
@@ -69,12 +69,14 @@ const myData =
   Assign({ name: 'Joe', age: 41 })
 
 myData.type()
-//=> 'Assign'
+//=> "Assign"
 
 isSameType(Sum, myData)
 //=> false
+
 isSameType(Maybe, myData)
 //=> false
+
 isSameType(Assign, myData)
 //=> true
 ```
@@ -88,7 +90,7 @@ Assign ~> Assign -> Assign
 
 `concat` is used to combine (2) `Semigroup`s of the same type under an
 operation specified by the `Semigroup`. In the case of `Assign`, it will
-combine two objects, overwriting the first `Object`'s previous values with
+combine (2) objects, overwriting the first `Object`'s previous values with
 the values of the second `Object`.
 
 ```js
@@ -120,7 +122,7 @@ Assign ~> () -> Object
 While the extraction is available, types that implement `valueOf` are
 not necessarily a `Comonad`. This function is used primarily for convenience
 for some of the helper functions that ship with `crocks`. Calling `valueOf`
-on an `Assign` instance will result in the underlying `Object` value.
+on an `Assign` instance will result in the underlying `Object`.
 
 ```js
 const Assign = require('crocks/Assign')

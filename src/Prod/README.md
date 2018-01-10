@@ -2,7 +2,7 @@
 ```haskell
 Prod Number
 ```
-`Prod` is a `Monoid` that will combine two numbers using Multiplication.
+`Prod` is a `Monoid` that will combine (2) `Number`s under multiplication.
 
 ```js
 const Prod = require('crocks/Prod')
@@ -59,6 +59,10 @@ Prod.empty()
 Prod(4)
   .concat(Prod.empty())
 //=> Prod 4
+
+Prod.empty()
+  .concat(Prod(4))
+//=> Prod 4
 ```
 
 
@@ -90,6 +94,9 @@ isSameType(Sum, prod5)
 
 isSameType(Prod, prod5)
 //=> true
+
+isSameType(Prod.empty(), prod5)
+//=> true
 ```
 
 ## Instance Methods
@@ -100,8 +107,8 @@ Prod ~> Prod -> Prod
 ```
 
 `concat` is used to combine (2) `Semigroup`s of the same type under an
-operation specified by the `Semigroup`. In the case of `Prod`, it will multiply
-the two `Number`s.
+operation specified by the `Semigroup`. In the case of `Prod`, `concat` will
+multiply the (2) `Number`s.
 
 ```js
 const Prod = require('crocks/Prod')
@@ -132,7 +139,7 @@ Prod ~> () -> Number
 the extraction is available, types that implement `valueOf` are not necessarily
 a `Comonad`. This function is used primarily for convenience for some of the
 helper functions that ship with `crocks`. Calling `valueOf` on a `Prod`
-instance will result in the underlying `Number` value.
+instance will result in the underlying `Number`.
 
 ```js
 const Prod = require('crocks/Prod')

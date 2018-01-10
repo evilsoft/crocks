@@ -2,7 +2,7 @@
 ```haskell
 Sum Number
 ```
-`Sum` is a `Monoid` that will combine two numbers using Addition.
+`Sum` is a `Monoid` that will combine (2) `Number`s under addition.
 
 ```js
 const Sum = require('crocks/Sum')
@@ -16,10 +16,10 @@ mconcat(Sum, [ 5, 2 ])
 //=> Sum 7
 
 Sum(10)
-  .concat(10)
+  .concat(Sum(10))
 //=> Sum 20
 
-// mapToSumByTen :: [ Number ] -> Sum
+// sumByTen :: [ Number ] -> Sum
 const sumByTen =
   mconcatMap(Sum, x => x * 10)
 
@@ -54,6 +54,9 @@ Sum.empty()
 
 Sum(4)
   .concat(Sum.empty())
+
+Sum.empty()
+  .concat(Sum(4))
 //=> Sum 4
 ```
 
@@ -85,6 +88,9 @@ isSameType(Sum, sum5)
 
 isSameType(Prod, sum5)
 //=> false
+
+isSameType(Sum.empty(), sum5)
+//=> true
 ```
 
 ## Instance Methods
@@ -127,7 +133,7 @@ Sum ~> () -> Number
 extraction is available, types that implement `valueOf` are not necessarily a
 `Comonad`. This function is used primarily for convenience for some of the
 helper functions that ship with `crocks`. Calling `valueOf` on a `Sum` instance
-will result in the underlying `Number` value.
+will result in the underlying `Number`.
 
 ```js
 const Sum = require('crocks/Sum')

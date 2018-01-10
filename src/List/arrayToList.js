@@ -18,14 +18,14 @@ function arrayToList(array) {
       const g = array(x)
 
       if(!isArray(g)) {
-        throw new TypeError('arrayToList: Array returing function required')
+        throw new TypeError('arrayToList: Array returning function required')
       }
 
       return List.fromArray(g)
     }
   }
 
-  throw new TypeError('arrayToList: Array or Array returing function required')
+  throw new TypeError('arrayToList: Array or Array returning function required')
 }
 
 module.exports = curry(arrayToList)

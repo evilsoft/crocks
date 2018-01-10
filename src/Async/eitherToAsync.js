@@ -19,7 +19,7 @@ function eitherToAsync(either) {
       const m = either(x)
 
       if(!isSameType(Either, m)) {
-        throw new TypeError('eitherToAsync: Either returing function required')
+        throw new TypeError('eitherToAsync: Either returning function required')
       }
 
       return applyTransform(m)
@@ -30,7 +30,7 @@ function eitherToAsync(either) {
     return applyTransform(either)
   }
 
-  throw new TypeError('eitherToAsync: Either or Either returing function required')
+  throw new TypeError('eitherToAsync: Either or Either returning function required')
 }
 
 module.exports = curry(eitherToAsync)

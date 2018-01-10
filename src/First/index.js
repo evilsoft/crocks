@@ -47,7 +47,8 @@ function First(x) {
 
   return {
     concat, empty, inspect,
-    option, type, valueOf
+    option, type, valueOf,
+    constructor: First
   }
 }
 

@@ -1,4 +1,52 @@
 # Change Log for `crocks`
+v0.8.3 -- January 4, 2018
+--
+### Additions
+* Github Pages Documentation
+* READMES:
+  * `State`
+* All ADTs:
+  * Add `constructor` property to all ADT instances.
+
+### Bug fixes
+* Correct spelling from 'returing' to 'returning' for a majority of the errors
+
+### Pull Requests
+* [#168 - Add constructor to instances to comply](https://github.com/evilsoft/crocks/pull/168)
+* [#170 - Add linting for the READMEs](https://github.com/evilsoft/crocks/pull/170)
+* [#165 - Improve documentation layout using electric.js](https://github.com/evilsoft/crocks/pull/165)
+* [#172 - Some small tweaks to the build system for the Docs](https://github.com/evilsoft/crocks/pull/172)
+* [#171 - Add State Docs](https://github.com/evilsoft/crocks/pull/171)
+* [#173 - Expand on the Documentation a bit](https://github.com/evilsoft/crocks/pull/173)
+* [#174 - Add Github style header links](https://github.com/evilsoft/crocks/pull/174)
+* [#175 - Index and Cross Reference Function Documentation](https://github.com/evilsoft/crocks/pull/175)
+* [#176 - Correct casing for Point-free links in Docs](https://github.com/evilsoft/crocks/pull/176)
+* [#178 - Fix spelling of returing to returning](https://github.com/evilsoft/crocks/pull/178)
+
+v0.8.2 -- December 22, 2017
+--
+### Additions
+* READMES:
+  * `Equiv`
+  * `Pred`
+  * `Reader`
+  * `ReaderT`
+* Crocks:
+  * `Equiv`
+  * `ReaderT`
+* Helpers:
+  * `propOr`
+  * `propPathOr`
+
+### Bug fixes
+* `propPath` would throw when it encountered `NaN` or `null` values in the path
+
+### Pull Requests
+* [#156 - Add `ReaderT` and Documentation for both `Reader` and `ReaderT`](https://github.com/evilsoft/crocks/pull/156)
+* [#158 - Add `propOr` and `propPathOr` and Documentation for both](https://github.com/evilsoft/crocks/pull/158)
+* [#160 - `propPath` will no longer throw with `NaN` and `null` values.](https://github.com/evilsoft/crocks/pull/160)
+* [#161 - Add the `Equiv` datatype](https://github.com/evilsoft/crocks/pull/161)
+* [#166 - Add Documentation for the `Pred` datatype](https://github.com/evilsoft/crocks/pull/166)
 
 v0.8.1 -- November 14, 2017
 --
@@ -10,8 +58,7 @@ v0.8.1 -- November 14, 2017
 * `runWith` on `State` did not report an error unless one of the
   methods were called. Now it throws if the result is not a `Pair`
   for all calls to `runWith`
-* Update path on branch helper on README to point to location
-un `Pair`
+* Update path on branch helper on README to point to location in `Pair`
 
 
 ### Pull Requests

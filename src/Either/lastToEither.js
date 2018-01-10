@@ -24,7 +24,7 @@ function lastToEither(left, last) {
       const m = last(x)
 
       if(!isSameType(Last, m)) {
-        throw new TypeError('lastToEither: Last returing function required for second argument')
+        throw new TypeError('lastToEither: Last returning function required for second argument')
       }
 
       return applyTransform(left, m)
@@ -35,7 +35,7 @@ function lastToEither(left, last) {
     return applyTransform(left, last)
   }
 
-  throw new TypeError('lastToEither: Last or Last returing function required for second argument')
+  throw new TypeError('lastToEither: Last or Last returning function required for second argument')
 }
 
 module.exports = curry(lastToEither)

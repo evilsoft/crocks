@@ -24,7 +24,7 @@ function lastToAsync(left, last) {
       const m = last(x)
 
       if(!isSameType(Last, m)) {
-        throw new TypeError('lastToAsync: Last returing function required for second argument')
+        throw new TypeError('lastToAsync: Last returning function required for second argument')
       }
 
       return applyTransform(left, m)
@@ -35,7 +35,7 @@ function lastToAsync(left, last) {
     return applyTransform(left, last)
   }
 
-  throw new TypeError('lastToAsync: Last or Last returing function required for second argument')
+  throw new TypeError('lastToAsync: Last or Last returning function required for second argument')
 }
 
 module.exports = curry(lastToAsync)

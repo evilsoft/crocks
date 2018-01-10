@@ -19,7 +19,7 @@ test('firstToResult transform', t => {
 
   t.ok(isFunction(firstToResult), 'is a function')
 
-  const err = /firstToResult: First or First returing function required for second argument/
+  const err = /firstToResult: First or First returning function required for second argument/
   t.throws(f(x, undefined), err, 'throws if second arg is undefined')
   t.throws(f(x, null), err, 'throws if second arg is null')
   t.throws(f(x, 0), err, 'throws if second arg is a falsey number')
@@ -58,7 +58,7 @@ test('firstToResult with First returning function', t => {
 
   const f = bindFunc(firstToResult(none, identity))
 
-  const err = /firstToResult: First returing function required for second argument/
+  const err = /firstToResult: First returning function required for second argument/
   t.throws(f(undefined), err, 'throws if function returns undefined')
   t.throws(f(null), err, 'throws if function returns null')
   t.throws(f(0), err, 'throws if function returns a falsey number')

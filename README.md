@@ -140,6 +140,7 @@ will return the `Writer` Constructor for your `Writer` using that specific
 | `Async` | `Rejected`, `Resolved`, `all`, `fromNode`, `fromPromise`, `of` | `alt`, `ap`, `bimap`, `chain`, `coalesce`, `fork`, `map`, `of`, `swap`, `toPromise` |
 | `Const` | -- | `ap`, `chain`, `concat`, `equals`, `map`, `valueOf` |
 | `Either` | `Left`, `Right`, `of`| `alt`, `ap`, `bimap`, `chain`, `coalesce`, `concat`, `either`, `equals`, `map`, `of`, `sequence`, `swap`, `traverse` |
+| `Equiv`  | `empty` | `concat`, `contramap`, `empty`, `compareWith`, `valueOf` |
 | `Identity` | `of` | `ap`, `chain`, `concat`, `equals`, `map`, `of`, `sequence`, `traverse`, `valueOf` |
 | `IO` | `of` | `ap`, `chain`, `map`, `of`, `run` |
 | `List` |  `empty`, `fromArray`, `of` | `ap`, `chain`, `concat`, `cons`, `empty`, `equals`, `filter`, `head`, `map`, `of`, `reduce`, `reject`, `sequence`, `tail`, `toArray`, `traverse`, `valueOf` |
@@ -627,7 +628,7 @@ mapProps(mapping, {
 #### mapReduce
 `crocks/helpers/mapReduce`
 ```haskell
-mapReduce :: Foldable f => (a -> b) -> (c -> b -> c) -> c -> f a
+mapReduce :: Foldable f => (a -> b) -> (c -> b -> c) -> f a -> c
 ```
 Sometimes you need the power provided by [`mreduceMap`](#mreducemap) but you do
 not have a `Monoid` to lift into. `mapReduce` provides the same power, but with
@@ -907,7 +908,7 @@ flow('string', 100).runWith(data)
 #### prop
 `crocks/Maybe/prop`
 ```haskell
-prop :: (String | Number) -> a -> Maybe b
+prop :: (String | Integer) -> a -> Maybe b
 ```
 If you want some safety around pulling a value out of an Object or Array with a
 single key or index, you can always reach for `prop`. Well, as long as you are
@@ -916,10 +917,38 @@ you are interested in, and you will get back a function that will take anything
 and return a `Just` with the wrapped value if the key/index exists. If the
 key/index does not exist however, you will get back a `Nothing`.
 
+#### propOr
+`crocks/helpers/propOr`
+```haskell
+propOr :: a -> (String | Integer) -> b -> c
+```
+
+If you want some safety around pulling a value out of an Object or Array with a
+single key or index, you can always reach for `propOr`. Well, as long as you are
+working with non-nested data that is. Just tell `propOr` either the key or index
+you are interested in, and you will get back a function that will take anything
+and return the wrapped value if the key/index exists. If the key/index does not
+exist however, you will get back a default value.
+
+```js
+const { get } = require('crocks/State')
+const propOr = require('crocks/helpers/propOr')
+
+const data = { foo: 'bar' }
+
+get()
+  .map(propOr('default', 'foo'))
+  .evalWith(data) // bar
+
+get()
+  .map(propOr('default', 'baz'))
+  .evalWith(data) // default
+```
+
 #### propPath
 `crocks/Maybe/propPath`
 ```haskell
-propPath :: [ String | Number ] -> a -> Maybe b
+propPath :: [ String | Integer ] -> a -> Maybe b
 ```
 While [`prop`](#prop) is good for simple, single-level structures, there may
 come a time when you have to work with nested POJOs or Arrays. When you run into
@@ -929,6 +958,35 @@ kick you back a function that behaves just like [`prop`](#prop). You pass it
 some data, and it will attempt to resolve your provided path. If the path is
 valid, it will return the value residing there (`null` included!) in a `Just`.
 But if at any point that path "breaks" it will give you back a `Nothing`.
+
+#### propPathOr
+`crocks/helpers/propPathOr`
+```haskell
+propPathOr :: a -> [ String | Integer ] -> b -> c
+```
+While [`propOr`](#propor) is good for simple, single-level structures, there may
+come a time when you have to work with nested POJOs or Arrays. When you run into
+this situation, just pull in `propPathOr` and pass it a left-to-right traversal
+path of keys, indices or a combination of both (gross...but possible). This will
+kick you back a function that behaves just like [`propOr`](#propor). You pass it
+some data, and it will attempt to resolve your provided path. If the path is
+valid, it will return the value. But if at any point that path "breaks" it will
+give you back the default value.
+
+```js
+const { get } = require('crocks/State')
+const propPathOr = require('crocks/helpers/propPathOr')
+
+const data = { foo: { bar: 'bar' }, baz: null }
+
+get()
+  .map(propPathOr('default', ['foo', 'bar']))
+  .evalWith(data) // bar
+
+get()
+  .map(propPathOr('default', ['baz', 'tommy']))
+  .evalWith(data) // default
+```
 
 #### safe
 `crocks/Maybe/safe`
@@ -1195,6 +1253,7 @@ accepted Datatype):
 | `both` | `m (a -> b) -> m (Pair a a -> Pair b b)` | `crocks/pointfree` |
 | `chain` | `(a -> m b) -> m a -> m b` | `crocks/pointfree` |
 | `coalesce` | `(a -> c) -> (b -> c) -> m a b -> m _ c` | `crocks/pointfree` |
+| `compareWith` | `a -> a -> m a -> Boolean` | `crocks/pointfree` |
 | `concat` | `m a -> m a -> m a` | `crocks/pointfree` |
 | `cons` | `a -> m a -> m a` | `crocks/pointfree` |
 | `contramap` | `(b -> a) -> m a -> m b` | `crocks/pointfree` |

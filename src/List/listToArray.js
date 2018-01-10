@@ -15,7 +15,7 @@ function listToArray(list) {
       const m = list(x)
 
       if(!isSameType(List, m)) {
-        throw new TypeError('listToArray: List returing function required')
+        throw new TypeError('listToArray: List returning function required')
       }
 
       return m.toArray()
@@ -26,7 +26,7 @@ function listToArray(list) {
     return list.toArray()
   }
 
-  throw new TypeError('listToArray: List or List returing function required')
+  throw new TypeError('listToArray: List or List returning function required')
 }
 
 module.exports = curry(listToArray)

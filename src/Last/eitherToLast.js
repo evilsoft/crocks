@@ -19,7 +19,7 @@ function eitherToLast(either) {
       const m = either(x)
 
       if(!isSameType(Either, m)) {
-        throw new TypeError('eitherToLast: Either returing function required')
+        throw new TypeError('eitherToLast: Either returning function required')
       }
 
       return applyTransform(m)
@@ -30,7 +30,7 @@ function eitherToLast(either) {
     return applyTransform(either)
   }
 
-  throw new TypeError('eitherToLast: Either or Either returing function required')
+  throw new TypeError('eitherToLast: Either or Either returning function required')
 }
 
 module.exports = curry(eitherToLast)

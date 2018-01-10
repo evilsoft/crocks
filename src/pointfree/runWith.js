@@ -6,7 +6,7 @@ const isFunction = require('../core/isFunction')
 
 function runWith(x, m) {
   if(!(m && isFunction(m.runWith))) {
-    throw new TypeError('runWith: Arrow, Reader, Star or State required for second argument')
+    throw new TypeError('runWith: Arrow, Endo, Pred, Reader, Star or State required for second argument')
   }
 
   return m.runWith(x)

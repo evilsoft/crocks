@@ -17,6 +17,8 @@ test('Last', t => {
   t.ok(isFunction(Last), 'is a function')
   t.ok(isObject(Last(0)), 'returns an object')
 
+  t.equals(Last(0).constructor, Last, 'provides TypeRep on constructor')
+
   t.ok(isFunction(Last.empty), 'provides an empty function')
   t.ok(isFunction(Last.type), 'provides a type function')
 

@@ -1,0 +1,12 @@
+{namespace TutorialTimer}
+
+/**
+ * @param? time
+ */
+{template .render}
+  <p class="tutorial-time-remaining">
+    {if $time}
+      <span class="icon icon-16-clock"></span> {$time}
+    {/if}
+  </p>
+{/template}

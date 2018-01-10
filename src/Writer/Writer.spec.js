@@ -47,6 +47,8 @@ test('Writer', t => {
   t.ok(isFunction(Writer), 'is a function')
   t.ok(isObject(w), 'returns an object')
 
+  t.equals(Writer(0, 0).constructor, Writer, 'provides TypeRep on constructor')
+
   t.ok(isFunction(Writer.of), 'provides an of function')
   t.ok(isFunction(Writer.type), 'provides a type function')
 

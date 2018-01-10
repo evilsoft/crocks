@@ -1,5 +1,6 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
+/** @author Henrique Limas */
 
 const combinators = {
   applyTo: require('./combinators/applyTo'),
@@ -16,6 +17,7 @@ const crocks = {
   Async: require('./Async'),
   Const: require('./Const'),
   Either: require('./Either'),
+  Equiv: require('./Equiv'),
   Identity: require('./Identity'),
   IO: require('./IO'),
   List: require('./List'),
@@ -23,6 +25,7 @@ const crocks = {
   Pair: require('./Pair'),
   Pred: require('./Pred'),
   Reader: require('./Reader'),
+  ReaderT: require('./Reader/ReaderT'),
   Result: require('./Result'),
   Star: require('./Star'),
   State: require('./State'),
@@ -65,6 +68,8 @@ const helpers = {
   pipeS: require('./helpers/pipeS'),
   prop: require('./Maybe/prop'),
   propPath: require('./Maybe/propPath'),
+  propOr: require('./helpers/propOr'),
+  propPathOr: require('./helpers/propPathOr'),
   safe: require('./Maybe/safe'),
   safeLift: require('./Maybe/safeLift'),
   tap: require('./helpers/tap'),
@@ -103,6 +108,7 @@ const pointfree = {
   both: require('./pointfree/both'),
   chain: require('./pointfree/chain'),
   coalesce: require('./pointfree/coalesce'),
+  compareWith: require('./pointfree/compareWith'),
   concat: require('./pointfree/concat'),
   cons: require('./pointfree/cons'),
   contramap: require('./pointfree/contramap'),

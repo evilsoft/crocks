@@ -19,7 +19,7 @@ function resultToMaybe(result) {
       const m = result(x)
 
       if(!isSameType(Result, m)) {
-        throw new TypeError('resultToMaybe: Result returing function required')
+        throw new TypeError('resultToMaybe: Result returning function required')
       }
 
       return applyTransform(m)
@@ -30,7 +30,7 @@ function resultToMaybe(result) {
     return applyTransform(result)
   }
 
-  throw new TypeError('resultToMaybe: Result or Result returing function required')
+  throw new TypeError('resultToMaybe: Result or Result returning function required')
 }
 
 module.exports = curry(resultToMaybe)

@@ -18,7 +18,7 @@ function lastToMaybe(last) {
       const m = last(x)
 
       if(!isSameType(Last, m)) {
-        throw new TypeError('lastToMaybe: Last returing function required')
+        throw new TypeError('lastToMaybe: Last returning function required')
       }
 
       return applyTransform(m)
@@ -29,7 +29,7 @@ function lastToMaybe(last) {
     return applyTransform(last)
   }
 
-  throw new TypeError('lastToMaybe: Last or Last returing function required')
+  throw new TypeError('lastToMaybe: Last or Last returning function required')
 }
 
 module.exports = curry(lastToMaybe)

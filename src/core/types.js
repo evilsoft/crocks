@@ -11,6 +11,7 @@ const _types = {
   'Const': () => 'Const',
   'Either': () => 'Either',
   'Endo': () => 'Endo',
+  'Equiv': () => 'Equiv',
   'First': () => 'First',
   'Identity': () => 'Identity',
   'IO': () => 'IO',
@@ -30,7 +31,6 @@ const _types = {
   'Unit': () => 'Unit',
   'Writer': () => 'Writer',
 }
-
 
 const type =
   type => _types[type] || _types['unk']

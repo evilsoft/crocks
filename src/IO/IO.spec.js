@@ -25,6 +25,8 @@ test('IO', t => {
   t.ok(isFunction(IO), 'is a function')
   t.ok(isObject(m), 'returns an object')
 
+  t.equals(IO(unit).constructor, IO, 'provides TypeRep on constructor')
+
   t.ok(isFunction(IO.of), 'provides an of function')
   t.ok(isFunction(IO.type), 'provides a type function')
 

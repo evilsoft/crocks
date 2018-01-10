@@ -19,7 +19,7 @@ function lastToFirst(last) {
       const m = last(x)
 
       if(!isSameType(Last, m)) {
-        throw new TypeError('lastToFirst: Last returing function required')
+        throw new TypeError('lastToFirst: Last returning function required')
       }
 
       return applyTransform(m)
@@ -30,7 +30,7 @@ function lastToFirst(last) {
     return applyTransform(last)
   }
 
-  throw new TypeError('lastToFirst: Last or Last returing function required')
+  throw new TypeError('lastToFirst: Last or Last returning function required')
 }
 
 module.exports = curry(lastToFirst)

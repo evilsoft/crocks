@@ -49,7 +49,9 @@ function Last(x) {
   }
 
   return {
-    concat, empty, inspect, option, type, valueOf
+    concat, empty, inspect,
+    option, type, valueOf,
+    constructor: Last
   }
 }
 

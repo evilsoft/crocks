@@ -28,6 +28,8 @@ test('List', t => {
   t.ok(isFunction(List), 'is a function')
   t.ok(isObject(List([])), 'returns an object')
 
+  t.equals(List([]).constructor, List, 'provides TypeRep on constructor')
+
   t.ok(isFunction(List.of), 'provides an of function')
   t.ok(isFunction(List.fromArray), 'provides a fromArray function')
   t.ok(isFunction(List.type), 'provides a type function')

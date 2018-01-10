@@ -1,0 +1,19 @@
+{
+  "private": true,
+  "name": "crocks",
+  "version": "0.0.0",
+  "scripts": {
+    "start": "electric run --env dev",
+    "docs:build": "electric build",
+    "docs:deploy": "electric deploy"
+  },
+  "devDependencies": {
+    "electric-cli": "^2.2.0",
+    "electric-marble-components": "^3.0.0",
+    "marble": "~3.1.3",
+    "marble-topbar": "^1.0.0",
+    "markdown-slug": "^0.1.1",
+    "markdown-toc": "^1.2.0",
+    "moment": "^2.19.2"
+  }
+}

@@ -18,7 +18,7 @@ test('resultToLast transform', t => {
 
   t.ok(isFunction(resultToLast), 'is a function')
 
-  const err = /resultToLast: Result or Result returing function required/
+  const err = /resultToLast: Result or Result returning function required/
   t.throws(f(undefined), err, 'throws if arg is undefined')
   t.throws(f(null), err, 'throws if arg is null')
   t.throws(f(0), err, 'throws if arg is a falsey number')
@@ -57,7 +57,7 @@ test('resultToLast with Result returning function', t => {
 
   const f = bindFunc(resultToLast(identity))
 
-  const err = /resultToLast: Result returing function required/
+  const err = /resultToLast: Result returning function required/
   t.throws(f(undefined), err, 'throws if function returns undefined')
   t.throws(f(null), err, 'throws if function returns null')
   t.throws(f(0), err, 'throws if function returns a falsey number')

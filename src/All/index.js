@@ -36,7 +36,11 @@ function All(b) {
     return All(m.valueOf() && valueOf())
   }
 
-  return { inspect, valueOf, type, concat, empty }
+  return {
+    inspect, valueOf,
+    type, concat, empty,
+    constructor: All
+  }
 }
 
 All['@@implements'] = _implements(

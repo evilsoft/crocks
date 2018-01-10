@@ -24,7 +24,7 @@ function lastToResult(left, last) {
       const m = last(x)
 
       if(!isSameType(Last, m)) {
-        throw new TypeError('lastToResult: Last returing function required for second argument')
+        throw new TypeError('lastToResult: Last returning function required for second argument')
       }
 
       return applyTransform(left, m)
@@ -35,7 +35,7 @@ function lastToResult(left, last) {
     return applyTransform(left, last)
   }
 
-  throw new TypeError('lastToResult: Last or Last returing function required for second argument')
+  throw new TypeError('lastToResult: Last or Last returning function required for second argument')
 }
 
 module.exports = curry(lastToResult)

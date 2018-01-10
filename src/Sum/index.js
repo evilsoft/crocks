@@ -36,7 +36,11 @@ function Sum(n) {
     return Sum(x + m.valueOf())
   }
 
-  return { inspect, valueOf, type, concat, empty }
+  return {
+    inspect, valueOf, type,
+    concat, empty,
+    constructor: Sum
+  }
 }
 
 Sum['@@implements'] = _implements(

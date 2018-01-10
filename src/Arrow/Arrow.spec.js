@@ -28,6 +28,8 @@ test('Arrow', t => {
 
   t.ok(isObject(Arrow(unit)), 'returns an object')
 
+  t.equals(Arrow(unit).constructor, Arrow, 'provides TypeRep on constructor')
+
   const err = /Arrow: Function required/
   t.throws(Arrow, err, 'throws with nothing')
   t.throws(a(undefined), err, 'throws with undefined')

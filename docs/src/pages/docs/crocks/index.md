@@ -1,0 +1,96 @@
+---
+title: "Crocks"
+description: "Crocks API"
+layout: "notopic"
+icon: "code-file"
+weight: 2
+---
+
+### Crocks
+The `crocks` are the heart and soul of this library. This is where you will find
+all your favorite ADT's you have grown to love. They include gems such as:
+`Maybe`, `Either` and `IO`, to name a few. The are usually just a simple
+constructor that takes either a function or value (depending on the type)
+and will return you a "container" that wraps whatever you passed it. Each
+container provides a variety of functions that act as the operations you can do
+on the contained value. There are many types that share the same function names,
+but what they do from type to type may vary.  Every Crock provides type function
+on the Constructor and both inspect and type functions on their Instances.
+
+| Crock | Constructor | Instance |
+|---|:---|:---|
+| [`Arrow`][arrow] | [`id`][arrow-id] | [`both`][arrow-both], [`compose`][arrow-compose], [`contramap`][arrow-contra],[`first`][arrow-first], [`map`][arrow-map], [`promap`][arrow-promap], [`runWith`][arrow-runwith], [`second`][arrow-second] |
+| `Async` | `Rejected`, `Resolved`, `all`, `fromNode`, `fromPromise`, `of` | `alt`, `ap`, `bimap`, `chain`, `coalesce`, `fork`, `map`, `of`, `swap`, `toPromise` |
+| `Const` | -- | `ap`, `chain`, `concat`, `equals`, `map`, `valueOf` |
+| `Either` | `Left`, `Right`, `of`| `alt`, `ap`, `bimap`, `chain`, `coalesce`, `concat`, `either`, `equals`, `map`, `of`, `sequence`, `swap`, `traverse` |
+| [`Equiv`][equiv] | [`empty`][equiv-empty] | [`concat`][equiv-concat], [`contramap`][equiv-contra], [`compareWith`][equiv-compare], [`valueOf`][equiv-value] |
+| `Identity` | `of` | `ap`, `chain`, `concat`, `equals`, `map`, `of`, `sequence`, `traverse`, `valueOf` |
+| `IO` | `of` | `ap`, `chain`, `map`, `of`, `run` |
+| `List` |  `empty`, `fromArray`, `of` | `ap`, `chain`, `concat`, `cons`, `empty`, `equals`, `filter`, `head`, `map`, `of`, `reduce`, `reject`, `sequence`, `tail`, `toArray`, `traverse`, `valueOf` |
+| `Maybe` | `Nothing`, `Just`, `of`, `zero` | `alt`, `ap`, `chain`, `coalesce`, `concat`, `equals`, `either`, `map`, `of`, `option`, `sequence`, `traverse`, `zero` |
+| `Pair` | --- | `ap`, `bimap`, `chain`, `concat`, `equals`, `extend`, `fst`, `map`, `merge`, `of`, `snd`, `swap`, `toArray` |
+| [`Pred`][pred] * | [`empty`][pred-empty] | [`concat`][pred-concat], [`contramap`][pred-contra], [`runWith`][pred-run], [`valueOf`][pred-value] |
+| [`Reader`][reader] | [`ask`][reader-ask], [`of`][reader-of] | [`ap`][reader-ap], [`chain`][reader-chain], [`map`][reader-map], [`runWith`][reader-run] |
+| [`ReaderT`][readert] | [`ask`][readert-ask], [`lift`][readert-lift], [`liftFn`][readert-liftfn], [`of`][readert-of] | [`ap`][readert-ap], [`chain`][readert-chain], [`map`][readert-map], [`runWith`][readert-run] |
+| `Result` | `Err`, `Ok`, `of`| `alt`, `ap`, `bimap`, `chain`, `coalesce`, `concat`, `either`, `equals`, `map`, `of`, `sequence`, `swap`, `traverse` |
+| `Star` | `id` | `both`, `compose`, `contramap`, `map`, `promap`, `runWith` |
+| [`State`][state] | [`get`][state-get], [`modify`][state-modify], [`of`][state-of], [`put`][state-put] | [`ap`][state-ap], [`chain`][state-chain], [`evalWith`][state-eval], [`execWith`][state-exec], [`map`][state-map], [`runWith`][state-run] |
+| `Unit` | `empty`, `of` | `ap`, `chain`, `concat`, `empty`, `equals`, `map`, `of`, `valueOf` |
+| `Writer`| `of` | `ap`, `chain`, `equals`, `log`, `map`, `of`, `read`, `valueOf` |
+
+\* based on [this article](https://medium.com/@drboolean/monoidal-contravariant-functors-are-actually-useful-1032211045c4#.polugsx2a)
+
+[arrow]: Arrow.html
+[arrow-id]: Arrow.html#id
+[arrow-both]: Arrow.html#both
+[arrow-compose]: Arrow.html#compose
+[arrow-contra]: Arrow.html#contramap
+[arrow-first]: Arrow.html#first
+[arrow-map]: Arrow.html#map
+[arrow-promap]: Arrow.html#promap
+[arrow-runwith]: Arrow.html#runwith
+[arrow-second]: Arrow.html#second
+
+[equiv]: Equiv.html
+[equiv-empty]: Equiv.html#empty
+[equiv-concat]: Equiv.html#concat
+[equiv-contra]: Equiv.html#contramap
+[equiv-compare]: Equiv.html#comparewith
+[equiv-value]: Equiv.html#valueof
+
+[pred]: Pred.html
+[pred-empty]: Pred.html#empty
+[pred-concat]: Pred.html#concat
+[pred-contra]: Pred.html#contramap
+[pred-run]: Pred.html#runwith
+[pred-value]: Pred.html#valueof
+
+[reader]: Reader.html
+[reader-ask]: Reader.html#ask
+[reader-of]: Reader.html#of
+[reader-ap]: Reader.html#ap
+[reader-chain]: Reader.html#chain
+[reader-map]: Reader.html#map
+[reader-run]: Reader.html#runwith
+
+[readert]: ReaderT.html
+[readert-ask]: ReaderT.html#ask
+[readert-lift]: ReaderT.html#lift
+[readert-liftfn]: ReaderT.html#liftfn
+[readert-of]: ReaderT.html#of
+[readert-ap]: ReaderT.html#ap
+[readert-chain]: ReaderT.html#chain
+[readert-map]: ReaderT.html#map
+[readert-run]: ReaderT.html#runwith
+
+[state]: State.html
+[state-get]: State.html#get
+[state-modify]: State.html#modify
+[state-put]: State.html#put
+[state-of]: State.html#of
+[state-ap]: State.html#ap
+[state-chain]: State.html#chain
+[state-map]: State.html#map
+[state-run]: State.html#runwith
+[state-eval]: State.html#evalwith
+[state-exec]: State.html#execwith

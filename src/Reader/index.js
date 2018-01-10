@@ -48,7 +48,15 @@ function Reader(runWith) {
       throw new TypeError('Reader.ap: Reader required')
     }
 
-    return chain(f => m.map(f))
+    return Reader(function(e) {
+      const fn = runWith(e)
+
+      if(!isFunction(fn)) {
+        throw new TypeError('Reader.ap: Wrapped function must return a function')
+      }
+
+      return m.map(fn).runWith(e)
+    })
   }
 
   function chain(fn) {
@@ -68,8 +76,9 @@ function Reader(runWith) {
   }
 
   return {
-    inspect, runWith, type,
-    map, ap, chain, of
+    inspect, runWith, type, map,
+    ap, chain, of,
+    constructor: Reader
   }
 }
 

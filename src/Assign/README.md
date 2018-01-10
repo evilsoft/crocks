@@ -2,17 +2,18 @@
 ```haskell
 Assign Object
 ```
-`Assign` is a `Monoid` that will combine two objects using `Object.assign` on their `Object` values, merging and overwriting new values for values that are not undefined.
+`Assign` is a `Monoid` that will combine two objects using `Object.assign` on
+their `Object` values, merging and overwriting new values for values that are
+not undefined.
 
 ```js
 const Assign = require('crocks/Assign')
 
-const first = { name: "Bob" }
-const last = { lastName: "Smith" }
+const first = { name: 'Bob' }
+const last = { lastName: 'Smith' }
 
-const person =
-  Assign(first).concat(last)
-//=> Assign { name: "Bob", lastName: "Smith" }
+Assign(first).concat(last)
+//=> Assign { name: 'Bob', lastName: 'Smith' }
 
 ```
 ## Implements
@@ -25,13 +26,19 @@ const person =
 Assign.empty :: () -> Assign
 ```
 
-`empty` provides the identity for the `Monoid` in that when the value it provides is `concat`ed to object other value, it will return the other value. In the case of `Assign` the result of `empty` is `{}`. `empty` is available on both the Constructor and the Instance for convenience.
+`empty` provides the identity for the `Monoid` in that when the value it
+provides is `concat`ed to object other value, it will return the other value.
+In the case of `Assign` the result of `empty` is `{}`. `empty` is available on
+both the Constructor and the Instance for convenience.
+
 ```js
+const Assign = require('crocks/Assign')
+
 Assign.empty()
 //=> Assign {}
 
 Assign({})
-  .concat(Assign.empty())        
+  .concat(Assign.empty())
 //=> Assign {}
 
 Assign({ a: 1 })
@@ -44,7 +51,13 @@ Assign({ a: 1 })
 Assign.type :: () -> String
 ```
 
-`type` provides a string representation of the type name for a given type in `crocks`. While it is used mostly internally for law validation, it can be useful to the end user for debugging and building out custom types based on the standard `crocks` types. While type comparisons can easily be done manually by calling `type` on a given type, using the `isSameType` function hides much of the boilerplate. `type` is available on both the Constructor and the Instance for convenience.
+`type` provides a string representation of the type name for a given type in
+`crocks`. While it is used mostly internally for law validation, it can be
+useful to the end user for debugging and building out custom types based on the
+standard `crocks` types. While type comparisons can easily be done manually by
+calling `type` on a given type, using the `isSameType` function hides much of
+the boilerplate. `type` is available on both the Constructor and the Instance
+for convenience.
 
 ```js
 const Assign = require('crocks/Assign')
@@ -56,7 +69,7 @@ const myData =
   Assign({ name: 'Joe', age: 41 })
 
 myData.type()
-//=>  "Assign"
+//=> 'Assign'
 
 isSameType(Sum, myData)
 //=> false
@@ -73,9 +86,14 @@ isSameType(Assign, myData)
 Assign ~> Assign -> Assign
 ```
 
-`concat` is used to combine (2) `Semigroup`s of the same type under an operation specified by the `Semigroup`. In the case of `Assign`, it will combine two objects, overwriting the first `Object`'s previous values with the values of the second `Object`.
+`concat` is used to combine (2) `Semigroup`s of the same type under an
+operation specified by the `Semigroup`. In the case of `Assign`, it will
+combine two objects, overwriting the first `Object`'s previous values with
+the values of the second `Object`.
 
 ```js
+const Assign = require('crocks/Assign')
+
 Assign({})
   .concat(Assign({}))
 //=> Assign {}
@@ -98,9 +116,15 @@ Assign({ b: 4 })
 Assign ~> () -> Object
 ```
 
-`valueOf` is used on all `crocks` `Monoid`s as a means of extraction. While the extraction is available, types that implement `valueOf` are not necessarily a `Comonad`. This function is used primarily for convenience for some of the helper functions that ship with `crocks`. Calling `valueOf` on an `Assign` instance will result in the underlying `Object` value.
+`valueOf` is used on all `crocks` `Monoid`s as a means of extraction.
+While the extraction is available, types that implement `valueOf` are
+not necessarily a `Comonad`. This function is used primarily for convenience
+for some of the helper functions that ship with `crocks`. Calling `valueOf`
+on an `Assign` instance will result in the underlying `Object` value.
 
 ```js
+const Assign = require('crocks/Assign')
+
 Assign({})
   .valueOf()
 //=> {}

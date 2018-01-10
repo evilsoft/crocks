@@ -6,7 +6,8 @@ Prod Number
 
 ```js
 const Prod = require('crocks/Prod')
-const mconcatMap = require('crocks/helpers/mconcat')
+const compose = require('crocks/helpers/compose')
+const concat = require('crocks/pointfree/concat')
 
 const emptyProd = Prod.empty()
 const tenProd = Prod(10)
@@ -41,8 +42,13 @@ double(11)
 Prod.empty :: () -> Prod
 ```
 
-`empty` provides the identity for the `Monoid` in that when the value it provides is `concat`ed to object other value, it will return the other value. In the case of `Prod` the result of `empty` is `1`. `empty` is available on both the Constructor and the Instance for convenience.
+`empty` provides the identity for the `Monoid` in that when the value it
+provides is `concat`ed to object other value, it will return the other value.
+In the case of `Prod` the result of `empty` is `1`. `empty` is available on
+both the Constructor and the Instance for convenience.
 ```js
+const Prod = require('crocks/Prod')
+
 Prod.empty()
 //=> Prod 1
 
@@ -61,7 +67,13 @@ Prod(4)
 Prod.type :: () -> String
 ```
 
-`type` provides a string representation of the type name for a given type in `crocks`. While it is used mostly internally for law validation, it can be useful to the end user for debugging and building out custom types based on the standard `crocks` types. While type comparisons can easily be done manually by calling `type` on a given type, using the `isSameType` function hides much of the boilerplate. `type` is available on both the Constructor and the Instance for convenience.
+`type` provides a string representation of the type name for a given type in
+`crocks`. While it is used mostly internally for law validation, it can be
+useful to the end user for debugging and building out custom types based on
+the standard `crocks` types. While type comparisons can easily be done manually
+by calling `type` on a given type, using the `isSameType` function hides much
+of the boilerplate. `type` is available on both the Constructor and the
+Instance for convenience.
 
 ```js
 const Prod = require('crocks/Prod')
@@ -87,9 +99,13 @@ isSameType(Prod, prod5)
 Prod ~> Prod -> Prod
 ```
 
-`concat` is used to combine (2) `Semigroup`s of the same type under an operation specified by the `Semigroup`. In the case of `Prod`, it will multiply the two `Number`s.
+`concat` is used to combine (2) `Semigroup`s of the same type under an
+operation specified by the `Semigroup`. In the case of `Prod`, it will multiply
+the two `Number`s.
 
 ```js
+const Prod = require('crocks/Prod')
+
 Prod(5)
   .concat(Prod(4))
 //=> Prod 20
@@ -112,9 +128,15 @@ Prod.empty()
 Prod ~> () -> Number
 ```
 
-`valueOf` is used on all `crocks` `Monoid`s as a means of extraction. While the extraction is available, types that implement `valueOf` are not necessarily a `Comonad`. This function is used primarily for convenience for some of the helper functions that ship with `crocks`. Calling `valueOf` on a `Prod` instance will result in the underlying `Number` value.
+`valueOf` is used on all `crocks` `Monoid`s as a means of extraction. While
+the extraction is available, types that implement `valueOf` are not necessarily
+a `Comonad`. This function is used primarily for convenience for some of the
+helper functions that ship with `crocks`. Calling `valueOf` on a `Prod`
+instance will result in the underlying `Number` value.
 
 ```js
+const Prod = require('crocks/Prod')
+
 Prod.empty()
   .valueOf()
 //=> 1
@@ -124,7 +146,7 @@ Prod(4)
 //=> 4
 
 Prod(34)
- .concat(21)
- .valueOf()
+  .concat(21)
+  .valueOf()
 //=> 714
 ```

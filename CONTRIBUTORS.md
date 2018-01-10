@@ -15,7 +15,7 @@ you so desire.
 Once everything is pulled down, you will want to install the development
 dependencies by running the following in the project folder:
 
-```bash
+```
 $ npm run setup
 ```
 
@@ -81,3 +81,38 @@ following in the project folder:
 ```
 $ npm test
 ```
+
+### Working on Documentation
+The system used by `crocks` to build the documentation
+is [`electric.js`][electric]. The src for the documentation can be
+found [in this folder][docs-loc]. To add documentation just add a markdown or
+soy file within that directory structure where the file should reside.
+
+When linking between files, make sure to match the case of the files in your
+links. While case does not matter on OSX or Windows, the documentation runs on
+a linux instance in it's production environment.
+
+While putting together the documentation you plan to submit for review, it can
+be helpful to use the built in build system to verify your work as you go. In
+order to use the included build system, the latest JavaSDK needs to be available
+on your system.
+
+By running the following command, you can access a server that will build out the
+documentation as you make changes, available
+at [http://localhost:8888](http://localhost:8888):
+
+```
+$ npm run docs:dev
+```
+
+### Building TOC for README.md
+When updates are done to the main `README.md` file, then the Table of Contents for
+that file needs to be updated. Anytime changes are made to the `README.md` file
+make sure to run the following before committing changes:
+
+```
+$ npm run doctoc
+```
+
+[electric]: https://electricjs.com/
+[docs-loc]: https://github.com/evilsoft/crocks/tree/master/docs/src/pages/docs

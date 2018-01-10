@@ -127,6 +127,4 @@ Any('string').valueOf() //=> true
 Any(45)
   .concat('')
   .valueOf()
-=======
->>>>>>> Add Assign, Prod, Sum docs
 ```

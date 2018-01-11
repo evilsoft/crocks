@@ -6,7 +6,6 @@ icon: "code-file"
 weight: 2
 ---
 
-### Crocks
 The `crocks` are the heart and soul of this library. This is where you will find
 all your favorite ADT's you have grown to love. They include gems such as:
 `Maybe`, `Either` and `IO`, to name a few. The are usually just a simple

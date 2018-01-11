@@ -1,4 +1,9 @@
-# Assign
+---
+title: "Assign"
+description: "Assign Monoid"
+layout: "guide"
+weight: 30
+---
 
 ```haskell
 Assign Object
@@ -18,13 +23,19 @@ Assign(first)
 //=> Assign { name: 'Bob', lastName: 'Smith' }
 ```
 
+<article id="topic-implements">
+
 ## Implements
 
 `Semigroup`, `Monoid`
 
+</article>
+
+<article id="topic-constructor">
+
 ## Constructor Methods
 
-### empty
+#### empty
 
 ```haskell
 Assign.empty :: () -> Assign
@@ -50,7 +61,7 @@ Assign({ a: 1 })
 //=> Assign { a: 1 }
 ```
 
-### type
+#### type
 
 ```haskell
 Assign.type :: () -> String
@@ -86,9 +97,13 @@ isSameType(Assign, myData)
 //=> true
 ```
 
+</article>
+
+<article id="topic-instance">
+
 ## Instance Methods
 
-### concat
+#### concat
 
 ```haskell
 Assign ~> Assign -> Assign
@@ -119,7 +134,7 @@ Assign({ b: 4 })
 //=> Assign { b: 4, a: 1 }
 ```
 
-### valueOf
+#### valueOf
 
 ```haskell
 Assign ~> () -> Object
@@ -147,3 +162,5 @@ Assign({ a: 1 })
   .valueOf()
 //=> { a: 1, b: 25 }
 ```
+
+</article>

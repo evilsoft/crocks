@@ -1,4 +1,9 @@
-# Sum
+---
+title: "Sum"
+description: "Sum Monoid"
+layout: "guide"
+weight: 100
+---
 
 ```haskell
 Sum Number
@@ -29,9 +34,15 @@ sumByTen([ 2, 2 ])
 //=> Sum 40
 ```
 
+<article id="topic-implements">
+
 ## Implements
 
 `Semigroup`, `Monoid`
+
+</article>
+
+<article id="topic-constructor">
 
 ## Constructor Methods
 
@@ -98,6 +109,10 @@ isSameType(Sum.empty(), sum5)
 //=> true
 ```
 
+</article>
+
+<article id="topic-instance">
+
 ## Instance Methods
 
 ### concat
@@ -158,3 +173,5 @@ Sum(34)
   .valueOf()
 //=> 55
 ```
+
+</article>

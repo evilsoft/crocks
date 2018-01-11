@@ -63,6 +63,7 @@ eq.contramap(length)
 ## Constructor Methods
 
 #### empty
+
 ```haskell
 Equiv.empty :: () -> Equiv a a
 ```
@@ -101,6 +102,7 @@ empty
 ```
 
 #### type
+
 ```haskell
 Equiv.type :: () -> String
 ```
@@ -135,6 +137,7 @@ isSameType(Equiv(equals), Endo)     //=> false
 ## Instance Methods
 
 #### concat
+
 ```haskell
 Equiv a a ~> Equiv a a -> Equiv a a
 ```
@@ -200,6 +203,7 @@ run(
 ```
 
 #### contramap
+
 ```haskell
 Equiv a a ~> (b -> a) -> Equiv b b
 ```
@@ -253,6 +257,7 @@ sameLength
 ```
 
 #### valueOf
+
 ```haskell
 Equiv a a ~> () -> a -> a -> Boolean
 ```
@@ -312,6 +317,7 @@ test(
 ```
 
 #### compareWith
+
 ```haskell
 Equiv a a ~> a -> a -> Boolean
 ```

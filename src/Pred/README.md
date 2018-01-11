@@ -1,7 +1,9 @@
 # Pred
+
 ```haskell
 Pred a Boolean
 ```
+
 Defined as a Monoidal Contravariant datatype, `Pred` wraps a predicate function
 of the form `(a -> Boolean)`.
 
@@ -23,7 +25,7 @@ takes a predicate, either a predicate function or a `Pred` instance can be used.
 
 This implementation of `Pred` was heavily inspired by [this article](https://medium.com/@drboolean/monoidal-contravariant-functors-are-actually-useful-1032211045c4#.polugsx2a).
 
-```js
+```javascript
 const Pred = require('crocks/Pred')
 
 const isNumber = require('crocks/predicates/isNumber')
@@ -65,11 +67,13 @@ filter(largeNumber, [ 200, 375, 15 ])
 ```
 
 ## Implements
+
 `Semigroup`, `Monoid`, `Contravariant`
 
 ## Constructor Methods
 
 ### empty
+
 ```haskell
 Pred.empty :: () -> Pred a
 ```
@@ -80,7 +84,7 @@ the case of `Pred` the result of `empty` is a `Pred` that will always return
 `true`. `empty` is available on both the Constructor and the Instance for
 convenience.
 
-```js
+```javascript
 const Pred = require('crocks/Pred')
 
 const isEmpty = require('crocks/predicates/isEmpty')
@@ -120,6 +124,7 @@ empty
 ```
 
 ### type
+
 ```haskell
 Pred.type :: () -> String
 ```
@@ -132,7 +137,7 @@ calling `type` on a given type, using the `isSameType` function hides much of
 the boilerplate. `type` is available on both the Constructor and the Instance
 for convenience.
 
-```js
+```javascript
 const Pred = require('crocks/Pred')
 
 const Maybe = require('crocks/Maybe')
@@ -150,6 +155,7 @@ isSameType(Pred(isNil), Maybe)   //=> false
 ## Instance Methods
 
 ### concat
+
 ```haskell
 Pred a ~> Pred a -> Pred a
 ```
@@ -158,7 +164,7 @@ Pred a ~> Pred a -> Pred a
 specified by the `Semigroup`. In the case of `Pred`, the results of both
 `Preds`s are combined under logical conjunction.
 
-```js
+```javascript
 const Pred = require('crocks/Pred')
 
 const or = require('crocks/logic/or')
@@ -227,6 +233,7 @@ filter(isValid, data)
 ```
 
 ### contramap
+
 ```haskell
 Pred a ~> (b -> a) -> Pred b
 ```
@@ -236,7 +243,7 @@ value. This allows a given `Pred` to be adapted by mapping on the input, before
 it hits the wrapped predicate function. Using `contramap`, functions are lifted,
 mapping the input to now accept the type of the input of the given function.
 
-```js
+```javascript
 const Pred = require('crocks/Pred')
 const contramap = require('crocks/pointfree/contramap')
 const propOr = require('crocks/helpers/propOr')
@@ -284,6 +291,7 @@ validItemLength
 ```
 
 ### valueOf
+
 ```haskell
 Pred a ~> () -> a -> Boolean
 ```
@@ -298,7 +306,7 @@ function. Most of the time this will not be required when working with `crocks`
 because all `crocks` functions that take a predicate function can also take a
 `Pred` instance.
 
-```js
+```javascript
 const Pred = require('crocks/Pred')
 
 const isArray = require('crocks/predicates/isArray')
@@ -340,6 +348,7 @@ fn('')            // false
 ```
 
 ### runWith
+
 ```haskell
 Pred a ~> a -> Boolean
 ```
@@ -354,7 +363,7 @@ functions in `crocks`, as all functions that take a predicate function also
 take a `Pred` instance. It does come in handy though when supplying predicates
 to other libraries.
 
-```js
+```javascript
 const Pred = require('crocks/Pred')
 
 const hasProp = require('crocks/predicates/hasProp')

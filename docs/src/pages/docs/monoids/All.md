@@ -69,6 +69,7 @@ All(false).concat(All.empty())  //=> All false
 ```
 
 #### type
+
 ```haskell
 All.type :: () -> String
 ```
@@ -102,6 +103,7 @@ isSameType(All(false), Maybe)     //=> false
 ## Instance Methods
 
 #### concat
+
 ```haskell
 All ~> All -> All
 ```

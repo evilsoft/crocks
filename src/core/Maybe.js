@@ -37,6 +37,14 @@ const _of =
 const _zero =
   compose(Maybe, Nothing)
 
+function runSequence(x) {
+  if(!isApplicative(x)) {
+    throw new TypeError('Maybe.sequence: Must wrap an Applicative')
+  }
+
+  return x.map(Maybe.of)
+}
+
 function Maybe(u) {
   if(!arguments.length) {
     throw new TypeError('Maybe: Must wrap something, try using Nothing or Just constructors')
@@ -124,6 +132,7 @@ function Maybe(u) {
     if(!isFunction(fn)) {
       throw new TypeError('Maybe.ap: Wrapped value must be a function')
     }
+
     else if(!isSameType(Maybe, m)) {
       throw new TypeError('Maybe.ap: Maybe required')
     }
@@ -146,14 +155,6 @@ function Maybe(u) {
     }
 
     return m
-  }
-
-  function runSequence(x) {
-    if(!isApplicative(x)) {
-      throw new TypeError('Maybe.sequence: Must wrap an Applicative')
-    }
-
-    return x.map(Maybe.of)
   }
 
   function sequence(af) {

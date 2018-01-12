@@ -52,6 +52,7 @@ function Identity(x) {
     if(!isFunction(x)) {
       throw new TypeError('Identity.ap: Wrapped value must be a function')
     }
+
     else if(!isSameType(Identity, m)) {
       throw new TypeError('Identity.ap: Identity required')
     }
@@ -77,6 +78,7 @@ function Identity(x) {
     if(!isFunction(af)) {
       throw new TypeError('Identity.sequence: Applicative Function required')
     }
+
     else if(!isApplicative(x)) {
       throw new TypeError('Identity.sequence: Must wrap an Applicative')
     }

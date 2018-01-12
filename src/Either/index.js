@@ -137,11 +137,15 @@ function Either(u) {
     if(!either(constant(true), isFunction)) {
       throw new TypeError('Either.ap: Wrapped value must be a function')
     }
+
     else if(!either(constant(true), constant(isSameType(Either, m)))) {
       throw new TypeError('Either.ap: Either required')
     }
 
-    return chain(fn => m.map(fn))
+    return either(
+      Either.Left,
+      fn => m.map(fn)
+    )
   }
 
   function chain(fn) {

@@ -1,12 +1,14 @@
  # All
+
 ```haskell
 All Boolean
 ```
+
 `All` is a `Monoid` that will combine two values of any type using logical
 conjunction (AND) on their coerced `Boolean` values, mapping truth-y values to
 `true` and false-y values to `false`.
 
-```js
+```javascript
 const All = require('crocks/All')
 
 const mconcat = require('crocks/helpers/mconcat')
@@ -32,11 +34,13 @@ allGood([ 'nice', '00', null ])
 ```
 
 ## Implements
+
 `Semigroup`, `Monoid`
 
 ## Constructor Methods
 
 ### empty
+
 ```haskell
 All.empty :: () -> All
 ```
@@ -46,7 +50,7 @@ provides is `concat`ed to any other value, it will return the other value. In
 the case of `All` the result of `empty` is `true`. `empty` is available on both
 the Constructor and the Instance for convenience.
 
-```js
+```javascript
 const All = require('crocks/All')
 
 All.empty() //=> All true
@@ -57,6 +61,7 @@ All(false).concat(All.empty())  //=> All false
 
 
 ### type
+
 ```haskell
 All.type :: () -> String
 ```
@@ -69,7 +74,7 @@ calling `type` on a given type, using the `isSameType` function hides much of
 the boilerplate. `type` is available on both the Constructor and the Instance
 for convenience.
 
-```js
+```javascript
 const All = require('crocks/All')
 
 const Maybe = require('crocks/Maybe')
@@ -86,6 +91,7 @@ isSameType(All(false), Maybe)     //=> false
 ## Instance Methods
 
 ### concat
+
 ```haskell
 All ~> All -> All
 ```
@@ -94,7 +100,7 @@ All ~> All -> All
 specified by the `Semigroup`. In the case of `All`, it will combine the two
 using logical AND (conjunction).
 
-```js
+```javascript
 const All = require('crocks/All')
 
 All(true).concat(All(true))   //=> All true
@@ -104,6 +110,7 @@ All(false).concat(All(false)) //=> All false
 ```
 
 ### valueOf
+
 ```haskell
 All ~> () -> Boolean
 ```
@@ -114,7 +121,7 @@ extraction is available, types that implement `valueOf` are not necessarily a
 helper functions that ship with `crocks`. Calling `valueOf` on an `All` instance
 will result in the underlying `Boolean` value.
 
-```js
+```javascript
 const All = require('crocks/All')
 
 All(0).value()          //=> false

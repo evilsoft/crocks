@@ -1,4 +1,5 @@
 # Equiv
+
 ```haskell
 Equiv a a Boolean
 ```
@@ -19,7 +20,7 @@ a result until both arguments are satisfied. A given instance can be run by
 calling the method [`compareWith`](#comparewith), providing both values for
 comparison.
 
-```js
+```javascript
 const Equiv = require('crocks/Equiv')
 
 const equals = require('crocks/pointfree/equals')
@@ -46,11 +47,13 @@ eq.contramap(length)
 ```
 
 ## Implements
+
 `Semigroup`, `Monoid`, `Contravariant`
 
 ## Constructor Methods
 
 ### empty
+
 ```haskell
 Equiv.empty :: () -> Equiv a a
 ```
@@ -61,7 +64,7 @@ the case of `Equiv` the result of `empty` is an `Equiv` that will always return
 `true`. `empty` is available on both the Constructor and the Instance for
 convenience.
 
-```js
+```javascript
 const Equiv = require('crocks/Equiv')
 
 const equals = require('crocks/pointfree/equals')
@@ -89,6 +92,7 @@ empty
 ```
 
 ### type
+
 ```haskell
 Equiv.type :: () -> String
 ```
@@ -101,7 +105,7 @@ calling `type` on a given type, using the `isSameType` function hides much of
 the boilerplate. `type` is available on both the Constructor and the Instance
 for convenience.
 
-```js
+```javascript
 const Equiv = require('crocks/Equiv')
 
 const Endo = require('crocks/Endo')
@@ -119,6 +123,7 @@ isSameType(Equiv(equals), Endo)     //=> false
 ## Instance Methods
 
 ### concat
+
 ```haskell
 Equiv a a ~> Equiv a a -> Equiv a a
 ```
@@ -127,7 +132,7 @@ Equiv a a ~> Equiv a a -> Equiv a a
 specified by the `Semigroup`. In the case of `Equiv`, the results of both
 `Equiv`s are combined under logical conjunction.
 
-```js
+```javascript
 const Equiv = require('crocks/Equiv')
 
 const compareWith = require('crocks/pointfree/compareWith')
@@ -184,6 +189,7 @@ run(
 ```
 
 ### contramap
+
 ```haskell
 Equiv a a ~> (b -> a) -> Equiv b b
 ```
@@ -198,7 +204,7 @@ function that has a return type that matches the input types of the `Equiv`.
 This will return a new `Equiv` matching the input type of the provided
 function.
 
-```js
+```javascript
 const Equiv = require('crocks/Equiv')
 
 const equals = require('crocks/pointfree/equals')
@@ -237,6 +243,7 @@ sameLength
 ```
 
 ### valueOf
+
 ```haskell
 Equiv a a ~> () -> a -> a -> Boolean
 ```
@@ -247,7 +254,7 @@ extraction is available, types that implement `valueOf` are not necessarily a
 helper functions that ship with `crocks`. Calling `valueOf` on an `Equiv`
 instance will result in the underlying curried equivalence function.
 
-```js
+```javascript
 const Equiv = require('crocks/Equiv')
 
 const compose = require('crocks/helpers/compose')
@@ -296,6 +303,7 @@ test(
 ```
 
 ### compareWith
+
 ```haskell
 Equiv a a ~> a -> a -> Boolean
 ```
@@ -308,7 +316,7 @@ returning the resulting `Boolean`.
 Due to the laziness of this type, complicated comparisons can be built out from
 combining and mapping smaller, simpler units of equivalence comparison.
 
-```js
+```javascript
 const Equiv = require('crocks/Equiv')
 
 // both :: Equiv Boolean Boolean

@@ -1,4 +1,9 @@
-# Prod
+---
+title: "Prod"
+description: "Prod Monoid"
+layout: "guide"
+weight: 90
+---
 
 ```haskell
 Prod Number
@@ -34,9 +39,15 @@ double(11)
 //=> Prod 22
 ```
 
+<article id="topic-implements">
+
 ## Implements
 
 `Semigroup`, `Monoid`
+
+</article>
+
+<article id="topic-constructor">
 
 ## Constructor Methods
 
@@ -104,6 +115,10 @@ isSameType(Prod.empty(), prod5)
 //=> true
 ```
 
+</article>
+
+<article id="topic-instance">
+
 ## Instance Methods
 
 ### concat
@@ -164,3 +179,5 @@ Prod(34)
   .valueOf()
 //=> 714
 ```
+
+</article>

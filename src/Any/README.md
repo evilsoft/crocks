@@ -1,12 +1,14 @@
 # Any
+
 ```haskell
 Any Boolean
 ```
+
 `Any` is a `Monoid` that will combine two values of any type using logical
 disjunction (OR) on their coerced `Boolean` values, mapping truth-y values to
 `true` and false-y values to `false`.
 
-```js
+```javascript
 const Any = require('crocks/Any')
 
 const isNumber = require('crocks/predicates/isNumber')
@@ -33,11 +35,13 @@ anyNumber([ true, 'string' ])
 ```
 
 ## Implements
+
 `Semigroup`, `Monoid`
 
 ## Constructor Methods
 
 ### empty
+
 ```haskell
 Any.empty :: () -> Any
 ```
@@ -47,7 +51,7 @@ provides is `concat`ed to any other value, it will return the other value. In
 the case of `Any` the result of `empty` is `false`. `empty` is available on both
 the Constructor and the Instance for convenience.
 
-```js
+```javascript
 const Any = require('crocks/Any')
 
 Any.empty() //=> Any false
@@ -58,6 +62,7 @@ Any(false).concat(Any.empty())  //=> Any false
 
 
 ### type
+
 ```haskell
 Any.type :: () -> String
 ```
@@ -70,7 +75,7 @@ calling `type` on a given type, using the `isSameType` function hides much of
 the boilerplate. `type` is available on both the Constructor and the Instance
 for convenience.
 
-```js
+```javascript
 const Any = require('crocks/Any')
 
 const Assign = require('crocks/Assign')
@@ -89,6 +94,7 @@ isSameType(Any, Assign({ food: 'always' }))
 ## Instance Methods
 
 ### concat
+
 ```haskell
 Any ~> Any -> Any
 ```
@@ -97,7 +103,7 @@ Any ~> Any -> Any
 specified by the `Semigroup`. In the case of `Any`, it will combine the two
 using logical OR (disjunction).
 
-```js
+```javascript
 const Any = require('crocks/Any')
 
 Any(true).concat(Any(true))   //=> Any true
@@ -107,6 +113,7 @@ Any(false).concat(Any(false)) //=> Any false
 ```
 
 ### valueOf
+
 ```haskell
 Any ~> () -> Boolean
 ```
@@ -117,7 +124,7 @@ extraction is available, types that implement `valueOf` are not necessarily a
 helper functions that ship with `crocks`. Calling `value` on an `Any` instance
 will result in the underlying `Boolean` value.
 
-```js
+```javascript
 const Any = require('crocks/Any')
 
 Any(0).valueOf()        //=> false

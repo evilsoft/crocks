@@ -1,7 +1,9 @@
 # State
+
 ```haskell
 State s a
 ```
+
 `State` is an Algebraic Data Type that abstracts away the associated state
 management that comes with stateful computations.`State` is parameterized by
 two types, a state `s` and a resultant `a`. The resultant portion may vary it's
@@ -23,7 +25,7 @@ the values from the `Pair` and discarding the unwanted portion.
 [`evalWith`](#evalwith) used when the resultant is wanted, while
 [`execWith`](#execwith) is used to pull the state.
 
-```js
+```javascript
 const State = require('crocks/State')
 const { get, put } = State
 
@@ -70,11 +72,13 @@ get(toUpper)
 ```
 
 ## Implements
+
 `Functor`, `Apply`, `Chain`, `Applicative`, `Monad`
 
 ## Constructor Methods
 
 ### get
+
 ```haskell
 State.get :: () -> State s s
 State.get :: (s -> a) -> State s a
@@ -89,7 +93,7 @@ provided for the argument, the state will be applied to the resultant as is. The
 state will be mapped over any provided function that takes the same type as the
 state, with the result deposited in the resultant.
 
-```js
+```javascript
 const { get } = require('crocks/State')
 
 const chain = require('crocks/pointfree/chain')
@@ -127,6 +131,7 @@ get()
 ```
 
 ### modify
+
 ```haskell
 State.modify :: (s -> s) -> State s ()
 ```
@@ -138,7 +143,7 @@ portion. Great care should be taken to not use functions that will change the
 type of the state as it may not be expected in other stateful computations and
 can result in hard to track down bugs.
 
-```js
+```javascript
 const { modify } = require('crocks/State')
 
 const mapProps = require('crocks/helpers/mapProps')
@@ -169,6 +174,7 @@ addValue(5)
 ```
 
 ### put
+
 ```haskell
 State.put :: s -> State s ()
 ```
@@ -184,7 +190,7 @@ fixed for all related functions. Changing the type of the state portion may
 result in hard to debug bugs and destroys the relationship between stateful
 computations.
 
-```js
+```javascript
 const { put } = require('crocks/State')
 
 const compose = require('crocks/helpers/compose')
@@ -219,6 +225,7 @@ heckYeah
 ```
 
 ### of
+
 ```haskell
 State.of :: a -> State s a
 ```
@@ -231,7 +238,7 @@ resultant in the same way [`put`](#put) is used to replace the state. Many times
 with [`put`](#put) and [`modify`](#modify) to replace the `Unit` the resultant
 is set to for those construction helpers.
 
-```js
+```javascript
 const State = require('crocks/State')
 const { get, put } = State
 
@@ -250,6 +257,7 @@ State.of('hotness')
 ```
 
 ### type
+
 ```haskell
 State.type :: () -> String
 ```
@@ -262,7 +270,7 @@ calling `type` on a given type, using the `isSameType` function hides much of
 the boilerplate. `type` is available on both the Constructor and the Instance
 for convenience.
 
-```js
+```javascript
 const State = require('crocks/State')
 
 const Reader = require('crocks/Reader')
@@ -280,6 +288,7 @@ isSameType(State.of(false), Reader)   //=> false
 ## Instance Methods
 
 ### map
+
 ```haskell
 State s a ~> (a -> b) -> State s b
 ```
@@ -299,7 +308,7 @@ Due to the composition law associated with `map`, successive `map`s can be
 composed together using function composition. This will give the same results
 but will only map the value once, instead of once for every mapping.
 
-```js
+```javascript
 const { get } = require('crocks/State')
 
 const compose = require('crocks/helpers/compose')
@@ -338,6 +347,7 @@ getNum
 ```
 
 ### ap
+
 ```haskell
 State s (a -> b) ~> State s a -> State s b
 ```
@@ -352,7 +362,7 @@ When used with curried, polyadic functions, multiple stateful computations can
 be combined using the lifted function as a means to combine each of the
 instances' resultants.
 
-```js
+```javascript
 const { get, modify } = require('crocks/State')
 
 const assoc = require('crocks/helpers/assoc')
@@ -406,6 +416,7 @@ applyTax
 ```
 
 ### chain
+
 ```haskell
 State s a ~> (a -> State s b) -> State s b
 ```
@@ -415,7 +426,7 @@ state transactions that either read from or write to the state. `chain` takes
 a unary function that must return a new `State` instance. `chain` returns a new
 `State` instance that will apply the computation when run.
 
-```js
+```javascript
 const { get, modify } = require('crocks/State')
 
 // add :: Number -> State Number ()
@@ -458,6 +469,7 @@ add(10)
 ```
 
 ### runWith
+
 ```haskell
 State s a ~> s -> Pair a s
 ```
@@ -472,7 +484,7 @@ initial state and will return the resulting `Pair` with the resultant in the
 `fst` (first) and the state in the `snd` (second).
 
 
-```js
+```javascript
 const State = require('crocks/State')
 const { get, put } = State
 
@@ -494,6 +506,7 @@ update(45)
 ```
 
 ### evalWith
+
 ```haskell
 State s a ~> s -> a
 ```
@@ -507,7 +520,7 @@ When called, `evalWith` will run the state transition with the given value as
 the initial state and will return the resulting resultant discarding the state
 portion.
 
-```js
+```javascript
 const State = require('crocks/State')
 const { get } = State
 
@@ -547,6 +560,7 @@ combineNames
 ```
 
 ### execWith
+
 ```haskell
 State s a ~> s -> s
 ```
@@ -560,7 +574,7 @@ When called, `execWith` will run the state transition with the given value as
 the initial state and will return the resulting state, discarding the resultant
 portion.
 
-```js
+```javascript
 const { modify } = require('crocks/State')
 
 const compose = require('crocks/helpers/compose')
@@ -588,6 +602,7 @@ Pointfree Functions
 ---
 
 ### evalWith *(pointfree)*
+
 ```haskell
 evalWith :: s -> State s a -> a
 ```
@@ -602,7 +617,7 @@ to the [`evalWith`](#evalwith) method to the provided `State` instance, it will
 also return the resulting resultant, throwing away the resulting state.
 
 
-```js
+```javascript
 const { get } = require('crocks/State')
 
 const evalWith = require('crocks/State/evalWith')
@@ -632,6 +647,7 @@ add(1295, 42)
 ```
 
 ### execWith *(pointfree)*
+
 ```haskell
 execWith :: s -> State s a -> s
 ```
@@ -645,7 +661,7 @@ As all this function does is return the result of applying a given initial state
 to the [`execWith`](#execwith) method to the provided `State` instance, it will
 also return the resulting state, throwing away the resulting resultant.
 
-```js
+```javascript
 const State = require('crocks/State')
 const { modify } = State
 

@@ -1,7 +1,9 @@
  # Reader
+
 ```haskell
 Reader e a
 ```
+
 `Reader` is a lazy Product Type that enables the  composition of computations
 that depend on a shared environment `(e -> a)`. The left portion, the `e` must
 be fixed to a type for all related computations. The right portion `a` can vary
@@ -16,7 +18,7 @@ Not only is `Reader`'s environment fixed to a type, but it should be immutable
 for the "life" computation. If a referential type is used as the environment
 great care should be taken to not modify the value of the environment.
 
-```js
+```javascript
 const Reader = require('crocks/Reader')
 const { ask } = Reader
 
@@ -46,11 +48,13 @@ flow
 ```
 
 ## Implements
+
 `Functor`, `Apply`, `Chain`, `Applicative`, `Monad`
 
 ## Constructor Methods
 
 ### ask
+
 ```haskell
 Reader.ask :: () -> Reader e e
 Reader.ask :: (e -> b) -> Reader e b
@@ -60,7 +64,7 @@ A construction helper that returns a `Reader` with the environment on the right
 portion of the `Reader`. `ask` can take a function, that can be used to map the
 environment to a different type or value.
 
-```js
+```javascript
 const Reader = require('crocks/Reader')
 const { ask } = Reader
 
@@ -87,6 +91,7 @@ ask(add(10))
 ```
 
 ### of
+
 ```haskell
 Reader.of :: a -> Reader e a
 ```
@@ -96,7 +101,7 @@ argument. `of` essentially will lift a value of type `a` into a `Reader`, giving
 back a `Reader` that is "pointed" to the specific value provided. `of` makes
 for a wonderful starting point for some of the more complicated flows.
 
-```js
+```javascript
 const Reader = require('crocks/Reader')
 const { ask } = Reader
 
@@ -124,6 +129,7 @@ Reader.of(57)
 ```
 
 ### type
+
 ```haskell
 Reader.type :: () -> String
 ```
@@ -136,7 +142,7 @@ to the end user for debugging and building out custom types based on the standar
 boilerplate. `type` is available on both the Constructor and the Instance for
 convenience.
 
-```js
+```javascript
 const Reader = require('crocks/Reader')
 const Identity = require('crocks/Identity')
 
@@ -154,6 +160,7 @@ isSameType(Reader(I), Identity)     //=> false
 ## Instance Methods
 
 ### map
+
 ```haskell
 Reader e a ~> (a -> b) -> Reader e b
 ```
@@ -163,7 +170,7 @@ to the same type, the right side, or value, of the `Reader` may vary. Using `map
 allows a function to be lifted into the `Reader`, mapping the result into the
 result of the lifted function.
 
-```js
+```javascript
 const Reader = require('crocks/Reader')
 const { ask } = Reader
 
@@ -202,6 +209,7 @@ Reader.of({ num: 27 })
 ```
 
 ### ap
+
 ```haskell
 Reader e (a -> b) ~> Reader e a -> Reader e b
 ```
@@ -213,7 +221,7 @@ and the value to be applied and applies the value to the function. Finally it
 will wrap the result of that application back into a `Reader`. It is required
 that the inner function is curried.
 
-```js
+```javascript
 const Reader = require('crocks/Reader')
 const { ask } = Reader
 
@@ -264,6 +272,7 @@ liftAssign(first, last)
 ```
 
 ### chain
+
 ```haskell
 Reader e a ~> (a -> Reader e b) -> Reader e b
 ```
@@ -273,7 +282,7 @@ effects applied, is by using the `chain` method. In the case of `Reader`, the
 effect is to read in and make available the shared environment. `chain` expects
 a function that will take any `a` and return a new `Reader` with a value of `b`.
 
-```js
+```javascript
 const Reader = require('crocks/Reader')
 const { ask } = Reader
 
@@ -327,6 +336,7 @@ applyTransform(45)
 ```
 
 ### runWith
+
 ```haskell
 Reader e a ~> e -> a
 ```
@@ -335,7 +345,7 @@ As `Reader` is a lazy datatype that requires a shared environment to run, it's
 instance provides a `runWith` method that takes in an environment and returns
 the result of the computation.
 
-```js
+```javascript
 const { ask } = require('crocks/Reader')
 const Pair = require('crocks/Pair')
 
@@ -377,6 +387,7 @@ Monad Transformer
 ---
 
 ## ReaderT
+
 ```haskell
 Monad m => ReaderT e (m a)
 ```
@@ -391,6 +402,7 @@ being wrapped.
 ### Constructor Methods
 
 #### ask
+
 ```haskell
 ReaderT.ask :: Monad m => () -> ReaderT e (m e)
 ReaderT.ask :: Monad m => (e -> a) -> ReaderT e (m a)
@@ -402,7 +414,7 @@ environment to a different type or value. When using the function version, the
 function must return the type of the `Monad` the `ReaderT` wraps, which in turn
 will be wrapped in another
 
-```js
+```javascript
 const ReaderT = require('crocks/Reader/ReaderT')
 const Maybe = require('crocks/Maybe')
 
@@ -443,6 +455,7 @@ ask(add(10))
 ```
 
 #### lift
+
 ```haskell
 ReaderT.lift :: Monad m => m a -> ReaderT e (m a)
 ```
@@ -455,7 +468,7 @@ Although, [`liftFn`](#liftfn) can be used to remove the composition boilerplate
 and promote and `a -> m b` function.
 
 <!-- eslint-disable no-console -->
-```js
+```javascript
 const ReaderT = require('crocks/Reader/ReaderT')
 const Async = require('crocks/Async')
 
@@ -506,6 +519,7 @@ runAndLog(envReject, 'Sammy')
 ```
 
 #### liftFn
+
 ```haskell
 ReaderT.liftFn :: Monad m => (a -> m b) -> a -> ReaderT e (m b)
 ```
@@ -515,7 +529,7 @@ function, where `m` is the underlying `Monad` of a `ReaderT`. This allows for
 the removal of composition boilerplate that results from using the
 [`lift`](#lift) helper.
 
-```js
+```javascript
 const ReaderT = require('crocks/Reader/ReaderT')
 const Either = require('crocks/Either')
 
@@ -553,6 +567,7 @@ add20
 ```
 
 #### of
+
 ```haskell
 ReaderT.of :: Monad m => a -> ReaderT e (m a)
 ```
@@ -561,7 +576,7 @@ Lifts a value into a `ReaderT` using the `of` method of the underlying `Monad`.
 `of` will disregard the environment and points the right portion to the provided
 value.
 
-```js
+```javascript
 const ReaderT = require('../crocks/src/Reader/ReaderT')
 
 const Maybe = require('crocks/Maybe')
@@ -590,6 +605,7 @@ StateReader.of(0)
 ### Instance Methods
 
 #### map
+
 ```haskell
 Monad m => ReaderT e (m a) ~> (a -> b) -> ReaderT e (m b)
 ```
@@ -599,7 +615,7 @@ Provides a means for lifting a normal javascript function into the underlying
 This method will ignore the outer `ReaderT`, and be applied directly to the
 underlying `Monad`.
 
-```js
+```javascript
 const ReaderT = require('crocks/Reader/ReaderT')
 const Maybe = require('crocks/Maybe')
 
@@ -636,6 +652,7 @@ envToUpper
 ```
 
 #### ap
+
 ```haskell
 Monad m => ReaderT e (m (a -> b)) ~> ReaderT e (m a) -> ReaderT e (m b)
 ```
@@ -644,7 +661,7 @@ Applies wrapped functions to the provided value, using the `ap` of the
 underlying `Monad`. A `ReaderT` of the underlying `Monad` must be provided,
 which allows access to the environment.  
 
-```js
+```javascript
 const Pair = require('crocks/Pair')
 const ReaderT = require('crocks/Reader/ReaderT')
 const Result = require('crocks/Result')
@@ -707,6 +724,7 @@ liftA2(add, first, second)
 ```
 
 #### chain
+
 ```haskell
 Monad m => ReaderT e (m a) ~> Reader e (a -> ReaderT e (m b)) -> ReaderT e (m b)
 ```
@@ -715,7 +733,7 @@ Can be used to apply the effects of the underlying `Monad` with the benefit of
 being able to read from the environment. This method only accepts functions
 of the form `Monad m => a -> ReaderT e (m b)`.
 
-```js
+```javascript
 const ReaderT = require('../crocks/src/Reader/ReaderT')
 const Maybe = require('crocks/Maybe')
 const prop = require('crocks/Maybe/prop')
@@ -766,6 +784,7 @@ getLastName
 ```
 
 ### runWith
+
 ```haskell
 Monad m => ReaderT e (m a) ~> e -> m a
 ```
@@ -774,7 +793,7 @@ In order to unwrap the underlying `Monad`, `ReaderT` needs to be ran with a
 given environment. A `ReaderT` instance comes equipped with a `runWith` method
 that accepts an environment and returns the resulting `Monad`.
 
-```js
+```javascript
 const ReaderT = require('../crocks/src/Reader/ReaderT')
 const Maybe = require('crocks/Maybe')
 

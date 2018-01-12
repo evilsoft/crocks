@@ -1,7 +1,9 @@
  # Arrow
+
 ```haskell
 Arrow a b
 ```
+
 `Arrow` is a `Profunctor` that lifts a function of type `a -> b` and allows for
 lazy execution of the function. `Arrow` can be considered a `Strong Profunctor`
 if the underlying data running throw the `Arrow` is a `Pair`, typically in the
@@ -11,7 +13,7 @@ into two distinct paths, applying `Arrow` to a specific path. The parameters of
 and the output on the right. When an `Arrow` wraps an endomorphism, the signature
 typically represents both the input and output.
 
-```js
+```javascript
 const Arrow = require('crocks/Arrow')
 
 const chain = require('crocks/pointfree/chain')
@@ -55,11 +57,13 @@ arrUpperName
 ```
 
 ## Implements
+
 `Semigroupoid`, `Category`, `Functor`, `Contravariant`, `Profunctor`
 
 ## Constructor Methods
 
 ### id
+
 ```haskell
 Arrow.id :: () -> Arrow a
 ```
@@ -70,7 +74,7 @@ morphism that is, for all intents and purposes, the given function. For `Arrow`,
 `id` is the simple `identity` function that echoes it's given argument
 (`x => x`). As a convenience, `id` is also available on the `Arrow` instance.
 
-```js
+```javascript
 const Arrow = require('crocks/Arrow')
 
 // arrId :: Arrow a
@@ -92,8 +96,8 @@ right.runWith(12) //=> '12'
 left.runWith(12)  //=> '12'
 ```
 
-
 ### type
+
 ```haskell
 Arrow.type :: () -> String
 ```
@@ -106,7 +110,7 @@ to the end user for debugging and building out custom types based on the standar
 boilerplate. `type` is available on both the Constructor and the Instance for
 convenience.
 
-```js
+```javascript
 const Arrow = require('crocks/Arrow')
 const Identity = require('crocks/Identity')
 
@@ -124,6 +128,7 @@ isSameType(Arrow(I), Identity)        //=> false
 ## Instance Methods
 
 ### both
+
 ```haskell
 Pair p => Arrow a b ~> () -> Arrow (p a a) (p b b)
 ```
@@ -133,7 +138,7 @@ itself to both slots of a `Pair` that is passed through the `Arrow`. As noted in
 the type signature, `both` will give back an `Arrow` has a new signature that
 utilizes a `Pair` on both sides.
 
-```js
+```javascript
 const Arrow = require('crocks/Arrow')
 const Pair = require('crocks/Pair')
 
@@ -165,13 +170,15 @@ arrDoubleAndAdd
 ```
 
 ### compose
+
 ```haskell
 Arrow a b ~> Arrow b c -> Arrow a c
 ```
+
 `compose` allows you to compose (2) `Arrow`s together, resulting in a new
 `Arrow` that is the result of the composition.
 
-```js
+```javascript
 const Arrow = require('crocks/Arrow')
 
 const filter = require('crocks/pointfree/filter')
@@ -213,6 +220,7 @@ arrEvenCount
 ```
 
 ### contramap
+
 ```haskell
 Arrow a b ~> (c -> a) -> Arrow c b
 ```
@@ -222,7 +230,7 @@ given type into the type required for the original `Arrow`'s input. This allows
 for "adaption" of given `Arrow`'s input for better reuse. The resulting type of
 the lifted function must match the input type of the `Arrow`.
 
-```js
+```javascript
 const Arrow = require('crocks/Arrow')
 
 const chain = require('crocks/pointfree/chain')
@@ -266,6 +274,7 @@ arrAdd10Value
 ```
 
 ### first
+
 ```haskell
 Pair p => Arrow a b ~> () -> Arrow (p a c) (p b c)
 ```
@@ -275,7 +284,7 @@ a `Pair` with the original input type in the first slot of the `Pair`. When run,
 the `Arrow` will only be applied to the first slot in the `Pair`, leaving
 the second slot untouched.
 
-```js
+```javascript
 const Arrow = require('crocks/Arrow')
 const branch = require('crocks/Pair/branch')
 
@@ -305,6 +314,7 @@ flow
 ```
 
 ### map
+
 ```haskell
 Arrow a b ~> (b -> c) -> Arrow a c
 ```
@@ -314,7 +324,7 @@ Arrow a b ~> (b -> c) -> Arrow a c
 of the `Arrow`, allowing the result to be "adapted" or modified. The input type
 to the lifted function must match the result the `Arrow`.
 
-```js
+```javascript
 const Arrow = require('crocks/Arrow')
 
 const B = require('crocks/combinators/composeB')
@@ -346,6 +356,7 @@ arrStringFS
 ```
 
 ### promap
+
 ```haskell
 Arrow a b ~> ((c -> a), (b -> d)) -> Arrow c d
 ```
@@ -355,7 +366,7 @@ Arrow a b ~> ((c -> a), (b -> d)) -> Arrow c d
 combines both `map` and `conramap` into one operation. Just pass the `contramap`
 function as the first argument and the `map` function as the second.
 
-```js
+```javascript
 const Arrow = require('crocks/Arrow')
 
 const chain = require('crocks/pointfree/chain')
@@ -402,6 +413,7 @@ arrTitleObject
 ```
 
 ### runWith
+
 ```haskell
 Arrow a b ~> a -> b
 ```
@@ -410,7 +422,7 @@ Arrow a b ~> a -> b
 final computation built out and you are ready to execute it, all you have to
 do is call `runWith` on it, passing in the argument you what to run it with.
 
-```js
+```javascript
 const Arrow = require('crocks/Arrow')
 const Sum = require('crocks/Sum')
 
@@ -450,6 +462,7 @@ arrAvgList
 ```
 
 ### second
+
 ```haskell
 Pair p => Arrow a b ~> () -> Arrow (p c a) (p c b)
 ```
@@ -458,7 +471,7 @@ Used to apply a given `Arrow` over the second slot of a `Pair`, leaving the
 first slot untouched. The input to the `Arrow` must match the expected type on
 the second slot of the incoming `Pair`.
 
-```js
+```javascript
 const Arrow = require('crocks/Arrow')
 
 const assign = require('crocks/helpers/assign')

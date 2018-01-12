@@ -88,6 +88,7 @@ get(toUpper)
 ## Constructor Methods
 
 #### get
+
 ```haskell
 State.get :: () -> State s s
 State.get :: (s -> a) -> State s a
@@ -140,6 +141,7 @@ get()
 ```
 
 #### modify
+
 ```haskell
 State.modify :: (s -> s) -> State s ()
 ```
@@ -182,6 +184,7 @@ addValue(5)
 ```
 
 #### put
+
 ```haskell
 State.put :: s -> State s ()
 ```
@@ -232,6 +235,7 @@ heckYeah
 ```
 
 #### of
+
 ```haskell
 State.of :: a -> State s a
 ```
@@ -263,6 +267,7 @@ State.of('hotness')
 ```
 
 #### type
+
 ```haskell
 State.type :: () -> String
 ```
@@ -297,6 +302,7 @@ isSameType(State.of(false), Reader)   //=> false
 ## Instance Methods
 
 #### map
+
 ```haskell
 State s a ~> (a -> b) -> State s b
 ```
@@ -355,6 +361,7 @@ getNum
 ```
 
 #### ap
+
 ```haskell
 State s (a -> b) ~> State s a -> State s b
 ```
@@ -423,6 +430,7 @@ applyTax
 ```
 
 #### chain
+
 ```haskell
 State s a ~> (a -> State s b) -> State s b
 ```
@@ -475,6 +483,7 @@ add(10)
 ```
 
 #### runWith
+
 ```haskell
 State s a ~> s -> Pair a s
 ```
@@ -511,6 +520,7 @@ update(45)
 ```
 
 #### evalWith
+
 ```haskell
 State s a ~> s -> a
 ```
@@ -564,6 +574,7 @@ combineNames
 ```
 
 #### execWith
+
 ```haskell
 State s a ~> s -> s
 ```
@@ -608,6 +619,9 @@ yell
 ## Pointfree Functions
 
 #### evalWith *(pointfree)*
+
+`crocks/State/evalWith`
+
 ```haskell
 evalWith :: s -> State s a -> a
 ```
@@ -652,6 +666,9 @@ add(1295, 42)
 ```
 
 #### execWith *(pointfree)*
+
+`crocks/State/execWith`
+
 ```haskell
 execWith :: s -> State s a -> s
 ```

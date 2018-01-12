@@ -42,6 +42,7 @@ anyNumber([ true, 'string' ])
 <article id="topic-implements">
 
 ## Implements
+
 `Semigroup`, `Monoid`
 
 </article>
@@ -51,6 +52,7 @@ anyNumber([ true, 'string' ])
 ## Constructor Methods
 
 #### empty
+
 ```haskell
 Any.empty :: () -> Any
 ```
@@ -69,8 +71,8 @@ Any(true).concat(Any.empty())   //=> Any true
 Any(false).concat(Any.empty())  //=> Any false
 ```
 
-
 #### type
+
 ```haskell
 Any.type :: () -> String
 ```
@@ -106,6 +108,7 @@ isSameType(Any, Assign({ food: 'always' }))
 ## Instance Methods
 
 #### concat
+
 ```haskell
 Any ~> Any -> Any
 ```
@@ -124,6 +127,7 @@ Any(false).concat(Any(false)) //=> Any false
 ```
 
 #### valueOf
+
 ```haskell
 Any ~> () -> Boolean
 ```

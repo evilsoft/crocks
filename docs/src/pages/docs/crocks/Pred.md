@@ -83,6 +83,7 @@ filter(largeNumber, [ 200, 375, 15 ])
 ## Constructor Methods
 
 #### empty
+
 ```haskell
 Pred.empty :: () -> Pred a
 ```
@@ -133,6 +134,7 @@ empty
 ```
 
 #### type
+
 ```haskell
 Pred.type :: () -> String
 ```
@@ -167,6 +169,7 @@ isSameType(Pred(isNil), Maybe)   //=> false
 ## Instance Methods
 
 #### concat
+
 ```haskell
 Pred a ~> Pred a -> Pred a
 ```
@@ -244,6 +247,7 @@ filter(isValid, data)
 ```
 
 #### contramap
+
 ```haskell
 Pred a ~> (b -> a) -> Pred b
 ```
@@ -301,6 +305,7 @@ validItemLength
 ```
 
 #### valueOf
+
 ```haskell
 Pred a ~> () -> a -> Boolean
 ```
@@ -357,6 +362,7 @@ fn('')            // false
 ```
 
 #### runWith
+
 ```haskell
 Pred a ~> a -> Boolean
 ```

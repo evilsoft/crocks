@@ -9,6 +9,7 @@ const curry = require('./curry')
 const _compose = curry(require('./compose'))
 const isFunction = require('./isFunction')
 const isObject = require('./isObject')
+const isSameType = require('./isSameType')
 const unit = require('./_unit')
 
 const Maybe = require('./Maybe')
@@ -611,6 +612,14 @@ test('List sequence functionality', t => {
   t.equal(m.type(), 'MockCrock', 'Provides an outer type of MockCrock')
   t.equal(m.valueOf().type(), 'List', 'Provides an inner type of List')
   t.same(m.valueOf().valueOf(), [ x ], 'inner List contains original inner value')
+
+  const ar = x => [ x ]
+  const arM = List.of([ x ]).sequence(ar)
+
+  t.ok(isSameType(Array, arM), 'Provides an outer type of Array')
+  t.ok(isSameType(List, arM[0]), 'Provides an inner type of List')
+  t.same(arM[0].valueOf(), [ x ], 'inner List contains original inner value')
+
   t.end()
 })
 
@@ -657,5 +666,13 @@ test('List traverse functionality', t => {
   t.equal(m.type(), 'MockCrock', 'Provides an outer type of MockCrock')
   t.equal(m.valueOf().type(), 'List', 'Provides an inner type of List')
   t.same(m.valueOf().valueOf(), [ x ], 'inner List contains original inner value')
+
+  const ar = x => [ x ]
+  const arM = List.of(x).traverse(ar, ar)
+
+  t.ok(isSameType(Array, arM), 'Provides an outer type of Array')
+  t.ok(isSameType(List, arM[0]), 'Provides an inner type of List')
+  t.same(arM[0].valueOf(), [ x ], 'inner List contains original inner value')
+
   t.end()
 })

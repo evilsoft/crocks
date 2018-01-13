@@ -6,7 +6,9 @@ const _implements = require('./implements')
 const _inspect = require('./inspect')
 const type = require('./types').type('List')
 
-const isApplicative = require('./isApplicative')
+const array = require('./array')
+
+const isApply = require('./isApply')
 const isArray = require('./isArray')
 const isEmpty = require('./isEmpty')
 const isFunction = require('./isFunction')
@@ -37,27 +39,33 @@ function fromArray(xs) {
   return xs.reduce((res, x) => res.concat(List.of(x)), List.empty())
 }
 
+function applyTraverse(x, y) {
+  if(isArray(x)) {
+    return array.ap(x, array.map(v => _concat(List.of(v)), y))
+  }
+
+  return y
+    .map(v => _concat(List.of(v)))
+    .ap(x)
+}
+
 function runSequence(acc, x) {
-  if(!isApplicative(x)) {
+  if(!((isApply(acc) || isArray(acc)) && isSameType(acc, x))) {
     throw new TypeError('List.sequence: Must wrap Applicatives')
   }
 
-  return x
-    .map(v => _concat(List.of(v)))
-    .ap(acc)
+  return applyTraverse(acc, x)
 }
 
 function runTraverse(f) {
   return function(acc, x) {
     const m = f(x)
 
-    if(!isApplicative(acc) || !isApplicative(m)) {
+    if(!((isApply(acc) || isArray(acc)) && isSameType(acc, m))) {
       throw new TypeError('List.traverse: Both functions must return an Applicative')
     }
 
-    return m
-      .map(v => _concat(List.of(v)))
-      .ap(acc)
+    return applyTraverse(acc, m)
   }
 }
 

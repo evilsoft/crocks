@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-rm -rf node_modules && npm i
-cd docs && rm -rf node_modules && npm i
+rm -rf node_modules && npm i --no-save
+cd docs && rm -rf node_modules && npm i --no-save
 

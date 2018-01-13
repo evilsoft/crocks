@@ -9,7 +9,8 @@ const _inspect = require('../core/inspect')
 const type = require('../core/types').type('Result')
 
 const compose = require('../core/compose')
-const isApplicative = require('../core/isApplicative')
+const isApply = require('../core/isApply')
+const isArray = require('../core/isArray')
 const isFunction = require('../core/isFunction')
 const isSameType = require('../core/isSameType')
 const isSemigroup = require('../core/isSemigroup')
@@ -38,11 +39,11 @@ const concatAltErr =
   r => l => Result.Err(isSemigroup(r) && isSameType(l, r) ? l.concat(r) : r)
 
 function runSequence(x) {
-  if(!isApplicative(x)) {
+  if(!(isApply(x) || isArray(x))) {
     throw new TypeError('Result.sequence: Must wrap an Applicative')
   }
 
-  return x.map(Result.of)
+  return x.map(v => Result.of(v))
 }
 
 function Result(u) {
@@ -190,13 +191,13 @@ function Result(u) {
 
     const m = either(compose(af, Result.Err), f)
 
-    if(!isApplicative(m)) {
+    if(!(isApply(m) || isArray(m))) {
       throw new TypeError('Result.traverse: Both functions must return an Applicative')
     }
 
     return either(
       constant(m),
-      constant(m.map(Result.Ok))
+      constant(m.map(v => Result.Ok(v)))
     )
   }
 

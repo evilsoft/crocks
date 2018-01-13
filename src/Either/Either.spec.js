@@ -807,6 +807,17 @@ test('Either sequence functionality', t => {
   t.equal(l.valueOf().type(), 'Either', 'Provides an inner type of Either')
   t.equal(l.valueOf().either(identity, constant(0)), 'Left', 'Either contains original Left value')
 
+  const arR = Right([ x ]).sequence(x => [ x ])
+  const arL = Left('Left').sequence(x => [ x ])
+
+  t.ok(isSameType(Array, arR), 'Provides an outer type of Array')
+  t.ok(isSameType(Either, arR[0]), 'Provides an inner type of Either')
+  t.equal(arR[0].either(constant(0), identity), x, 'Either contains original inner value')
+
+  t.ok(isSameType(Array, arL), 'Provides an outer type of Array')
+  t.ok(isSameType(Either, arL[0]), 'Provides an inner type of Either')
+  t.equal(arL[0].either(identity, constant(0)), 'Left', 'Either contains original Left value')
+
   t.end()
 })
 
@@ -889,6 +900,18 @@ test('Either traverse functionality', t => {
   t.equal(l.type(), 'MockCrock', 'Provides an outer type of MockCrock')
   t.equal(l.valueOf().type(), 'Either', 'Provides an inner type of Either')
   t.equal(l.valueOf().either(identity, constant(0)), 'Left', 'Either contains original Left value')
+
+  const ar = x => [ x ]
+  const arR = Right(x).traverse(ar, ar)
+  const arL = Left('Left').traverse(ar, ar)
+
+  t.ok(isSameType(Array, arR), 'Provides an outer type of Array')
+  t.ok(isSameType(Either, arR[0]), 'Provides an inner type of Either')
+  t.equal(arR[0].either(constant(0), identity), x, 'Either contains original inner value')
+
+  t.ok(isSameType(Array, arL), 'Provides an outer type of Array')
+  t.ok(isSameType(Either, arL[0]), 'Provides an inner type of Either')
+  t.equal(arL[0].either(identity, constant(0)), 'Left', 'Either contains original Left value')
 
   t.end()
 })

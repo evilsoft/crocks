@@ -599,7 +599,8 @@ test('Maybe sequence errors', t => {
 })
 
 test('Maybe sequence functionality', t => {
-  const x = [ 'a' ]
+  const x = 97
+
   const s = Maybe.Just(MockCrock(x)).sequence(MockCrock.of)
   const n = Maybe.Nothing().sequence(MockCrock.of)
 
@@ -610,6 +611,18 @@ test('Maybe sequence functionality', t => {
   t.equal(n.type(), 'MockCrock', 'Provides an outer type of MockCrock')
   t.equal(n.valueOf().type(), 'Maybe', 'Provides an inner type of Maybe')
   t.equal(n.valueOf().option('Nothing'), 'Nothing', 'Reports as a Nothing')
+
+  const ar = x => [ x ]
+  const arS = Maybe.Just([ x ]).sequence(ar)
+  const arN = Maybe.Nothing().sequence(ar)
+
+  t.ok(isSameType(Array, arS), 'Provides an outer type of Array')
+  t.ok(isSameType(Maybe, arS[0]), 'Provides an inner type of Maybe')
+  t.same(arS[0].option('Nothing'), x, 'Maybe contains original inner value')
+
+  t.ok(isSameType(Array, arN), 'Provides an outer type of MockCrock')
+  t.ok(isSameType(Maybe, arN[0]), 'Provides an inner type of Maybe')
+  t.equal(arN[0].option('Nothing'), 'Nothing', 'Reports as a Nothing')
 
   t.end()
 })
@@ -689,6 +702,18 @@ test('Maybe traverse functionality', t => {
   t.equal(l.type(), 'MockCrock', 'Provides an outer type of MockCrock')
   t.equal(l.valueOf().type(), 'Maybe', 'Provides an inner type of Maybe')
   t.equal(l.valueOf().option('Nothing'), 'Nothing', 'Maybe is a Nothing')
+
+  const ar = x => [ x ]
+  const arS = Maybe.Just(x).traverse(ar, ar)
+  const arN = Maybe.Nothing().traverse(ar, ar)
+
+  t.ok(isSameType(Array, arS), 'Provides an outer type of Array')
+  t.ok(isSameType(Maybe, arS[0]), 'Provides an inner type of Maybe')
+  t.same(arS[0].option('Nothing'), x, 'Maybe contains original inner value')
+
+  t.ok(isSameType(Array, arN), 'Provides an outer type of MockCrock')
+  t.ok(isSameType(Maybe, arN[0]), 'Provides an inner type of Maybe')
+  t.equal(arN[0].option('Nothing'), 'Nothing', 'Reports as a Nothing')
 
   t.end()
 })

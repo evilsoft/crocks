@@ -1,7 +1,7 @@
 {
   "name": "crocks",
   "version": "0.8.3",
-  "description": "A collection of well known Monadic Containers for your utter enjoyment.",
+  "description": "A collection of well known Algebraic Datatypes for your utter enjoyment.",
   "main": "./index.js",
   "scripts": {
     "contributors:add": "all-contributors add",

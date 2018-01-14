@@ -1,9 +1,10 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isApplicative = require('./isApplicative')
+const isApply = require('./isApply')
 const isArray = require('./isArray')
 const isFunction = require('./isFunction')
+const isSameType = require('./isSameType')
 
 const identity = x => x
 
@@ -14,8 +15,12 @@ function runTraverse(name, fn) {
   return function(acc, x) {
     const m = fn(x)
 
-    if(!isApplicative(acc) || !isApplicative(m)) {
+    if(!((isApply(acc) || isArray(acc)) && isSameType(acc, m))) {
       throw new TypeError(`Array.${name}: Must wrap Applicatives`)
+    }
+
+    if(isArray(m)) {
+      return ap(acc, map(v => concat([ v ]), m))
     }
 
     return m

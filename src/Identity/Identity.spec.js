@@ -373,12 +373,19 @@ test('Identity sequence errors', t => {
 })
 
 test('Identity sequence functionality', t => {
-  const x = true
+  const x = 97
   const m = Identity(MockCrock(x)).sequence(MockCrock.of)
 
   t.equal(m.type(), 'MockCrock', 'Provides an outer type of MockCrock')
   t.equal(m.valueOf().type(), 'Identity', 'Provides an inner type of Identity')
   t.equal(m.valueOf().valueOf(), x, 'Identity contains original inner value')
+
+  const ar = x => [ x ]
+  const arM = Identity([ x ]).sequence(ar)
+
+  t.ok(isSameType(Array, arM), 'Provides an outer type of Array')
+  t.ok(isSameType(Identity, arM[0]), 'Provides an inner type of Identity')
+  t.equal(arM[0].valueOf(), x, 'Identity contains original inner value')
 
   t.end()
 })
@@ -421,7 +428,6 @@ test('Identity traverse errors', t => {
   t.throws(noApply(false), noAp, 'throws when second argument returns false')
   t.throws(noApply(true), noAp, 'throws when second argument returns true')
   t.throws(noApply({}), noAp, 'throws when second argument returns an object')
-  t.throws(noApply([]), noAp, 'throws when second argument returns an array')
   t.throws(noApply(unit), noAp, 'throws when second argument returns function')
 
   t.doesNotThrow(trav(unit, MockCrock), 'requires an Applicative returning function in second arg and function in first arg')
@@ -437,6 +443,13 @@ test('Identity traverse functionality', t => {
   t.equal(m.type(), 'MockCrock', 'Provides an outer type of MockCrock')
   t.equal(m.valueOf().type(), 'Identity', 'Provides an inner type of Identity')
   t.equal(m.valueOf().valueOf(), x, 'Identity contains original inner value')
+
+  const ar = x => [ x ]
+  const arM = Identity(x).traverse(ar, ar)
+
+  t.ok(isSameType(Array, arM), 'Provides an outer type of Array')
+  t.ok(isSameType(Identity, arM[0]), 'Provides an inner type of Identity')
+  t.equal(arM[0].valueOf(), x, 'Identity contains original inner value')
 
   t.end()
 })

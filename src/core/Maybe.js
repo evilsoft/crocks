@@ -9,7 +9,8 @@ const _inspect = require('./inspect')
 const type = require('./types').type('Maybe')
 
 const compose = require('./compose')
-const isApplicative = require('./isApplicative')
+const isApply = require('./isApply')
+const isArray = require('./isArray')
 const isFunction = require('./isFunction')
 const isSameType = require('./isSameType')
 
@@ -38,11 +39,11 @@ const _zero =
   compose(Maybe, Nothing)
 
 function runSequence(x) {
-  if(!isApplicative(x)) {
+  if(!(isApply(x) || isArray(x))) {
     throw new TypeError('Maybe.sequence: Must wrap an Applicative')
   }
 
-  return x.map(Maybe.of)
+  return x.map(v => Maybe.of(v))
 }
 
 function Maybe(u) {
@@ -175,13 +176,13 @@ function Maybe(u) {
 
     const m = either(compose(af, Maybe.Nothing), f)
 
-    if(!isApplicative(m)) {
+    if(!(isApply(m) || isArray(m))) {
       throw new TypeError('Maybe.traverse: Both functions must return an Applicative')
     }
 
     return either(
       constant(m),
-      constant(m.map(Maybe))
+      constant(m.map(v => Maybe(v)))
     )
   }
 

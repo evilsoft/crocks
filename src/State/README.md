@@ -77,7 +77,7 @@ get(toUpper)
 
 ## Constructor Methods
 
-### get
+#### get
 
 ```haskell
 State.get :: () -> State s s
@@ -130,7 +130,7 @@ get()
 //=> Pair(0, { string: '47'})
 ```
 
-### modify
+#### modify
 
 ```haskell
 State.modify :: (s -> s) -> State s ()
@@ -173,7 +173,7 @@ addValue(5)
 //=> {}
 ```
 
-### put
+#### put
 
 ```haskell
 State.put :: s -> State s ()
@@ -224,7 +224,7 @@ heckYeah
 // Pair((), '')
 ```
 
-### of
+#### of
 
 ```haskell
 State.of :: a -> State s a
@@ -256,7 +256,7 @@ State.of('hotness')
 //=> Pair('crusty', 'hotness')
 ```
 
-### type
+#### type
 
 ```haskell
 State.type :: () -> String
@@ -287,7 +287,7 @@ isSameType(State.of(false), Reader)   //=> false
 
 ## Instance Methods
 
-### map
+#### map
 
 ```haskell
 State s a ~> (a -> b) -> State s b
@@ -346,7 +346,7 @@ getNum
 //=> { result: 42 }
 ```
 
-### ap
+#### ap
 
 ```haskell
 State s (a -> b) ~> State s a -> State s b
@@ -415,7 +415,7 @@ applyTax
 //=> { tax: 0.084, sub: 34.07, total: 37.91 }
 ```
 
-### chain
+#### chain
 
 ```haskell
 State s a ~> (a -> State s b) -> State s b
@@ -468,7 +468,7 @@ add(10)
 //=> 1600
 ```
 
-### runWith
+#### runWith
 
 ```haskell
 State s a ~> s -> Pair a s
@@ -505,7 +505,7 @@ update(45)
 //=> Pair(100, 45)
 ```
 
-### evalWith
+#### evalWith
 
 ```haskell
 State s a ~> s -> a
@@ -559,7 +559,7 @@ combineNames
 //=> [ 'Franklin', 'Jennings' ]
 ```
 
-### execWith
+#### execWith
 
 ```haskell
 State s a ~> s -> s
@@ -601,7 +601,7 @@ yell
 Pointfree Functions
 ---
 
-### evalWith *(pointfree)*
+#### evalWith *(pointfree)*
 
 ```haskell
 evalWith :: s -> State s a -> a
@@ -646,7 +646,7 @@ add(1295, 42)
 // 1337
 ```
 
-### execWith *(pointfree)*
+#### execWith *(pointfree)*
 
 ```haskell
 execWith :: s -> State s a -> s

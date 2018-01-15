@@ -53,7 +53,7 @@ flow
 
 ## Constructor Methods
 
-### ask
+#### ask
 
 ```haskell
 Reader.ask :: () -> Reader e e
@@ -90,7 +90,7 @@ ask(add(10))
 //=> 66
 ```
 
-### of
+#### of
 
 ```haskell
 Reader.of :: a -> Reader e a
@@ -128,7 +128,7 @@ Reader.of(57)
 //=> 100
 ```
 
-### type
+#### type
 
 ```haskell
 Reader.type :: () -> String
@@ -159,7 +159,7 @@ isSameType(Reader(I), Identity)     //=> false
 
 ## Instance Methods
 
-### map
+#### map
 
 ```haskell
 Reader e a ~> (a -> b) -> Reader e b
@@ -208,7 +208,7 @@ Reader.of({ num: 27 })
 //=> { length: 3, num: 27 }
 ```
 
-### ap
+#### ap
 
 ```haskell
 Reader e (a -> b) ~> Reader e a -> Reader e b
@@ -271,7 +271,7 @@ liftAssign(first, last)
 //=> { full: 'Tom Jennings', first: 'Tom', last: 'Jennings' }
 ```
 
-### chain
+#### chain
 
 ```haskell
 Reader e a ~> (a -> Reader e b) -> Reader e b
@@ -335,7 +335,7 @@ applyTransform(45)
 //=> 130
 ```
 
-### runWith
+#### runWith
 
 ```haskell
 Reader e a ~> e -> a
@@ -783,7 +783,7 @@ getLastName
 //=> Nothing
 ```
 
-### runWith
+#### runWith
 
 ```haskell
 Monad m => ReaderT e (m a) ~> e -> m a

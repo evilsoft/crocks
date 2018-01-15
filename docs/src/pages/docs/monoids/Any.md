@@ -9,7 +9,7 @@ weight: 20
 Any Boolean
 ```
 
-`Any` is a `Monoid` that will combine two values of any type using logical
+`Any` is a `Monoid` that will combine (2) values of any type using logical
 disjunction (OR) on their coerced `Boolean` values, mapping truth-y values to
 `true` and false-y values to `false`.
 
@@ -114,7 +114,7 @@ Any ~> Any -> Any
 ```
 
 `concat` is used to combine (2) `Semigroup`s of the same type under an operation
-specified by the `Semigroup`. In the case of `Any`, it will combine the two
+specified by the `Semigroup`. In the case of `Any`, it will combine the (2)
 using logical OR (disjunction).
 
 ```javascript
@@ -135,7 +135,7 @@ Any ~> () -> Boolean
 `valueOf` is used on all `crocks` `Monoid`s as a means of extraction. While the
 extraction is available, types that implement `valueOf` are not necessarily a
 `Comonad`. This function is used primarily for convenience for some of the
-helper functions that ship with `crocks`. Calling `value` on an `Any` instance
+helper functions that ship with `crocks`. Calling `valueOf` on an `Any` instance
 will result in the underlying `Boolean` value.
 
 ```javascript

@@ -40,7 +40,7 @@ double(11)
 
 ## Constructor Methods
 
-### empty
+#### empty
 
 ```haskell
 Prod.empty :: () -> Prod
@@ -70,7 +70,7 @@ Prod.empty()
 //=> Prod 4
 ```
 
-### type
+#### type
 
 ```haskell
 Prod.type :: () -> String
@@ -106,7 +106,7 @@ isSameType(Prod.empty(), prod5)
 
 ## Instance Methods
 
-### concat
+#### concat
 
 ```haskell
 Prod ~> Prod -> Prod
@@ -136,7 +136,7 @@ Prod.empty()
 //=> Prod 3
 ```
 
-### valueOf
+#### valueOf
 
 ```haskell
 Prod ~> () -> Number

@@ -62,7 +62,7 @@ arrUpperName
 
 ## Constructor Methods
 
-### id
+#### id
 
 ```haskell
 Arrow.id :: () -> Arrow a
@@ -96,7 +96,7 @@ right.runWith(12) //=> '12'
 left.runWith(12)  //=> '12'
 ```
 
-### type
+#### type
 
 ```haskell
 Arrow.type :: () -> String
@@ -127,7 +127,7 @@ isSameType(Arrow(I), Identity)        //=> false
 
 ## Instance Methods
 
-### both
+#### both
 
 ```haskell
 Pair p => Arrow a b ~> () -> Arrow (p a a) (p b b)
@@ -169,7 +169,7 @@ arrDoubleAndAdd
   .runWith(Pair(200, 10))  //=> 420
 ```
 
-### compose
+#### compose
 
 ```haskell
 Arrow a b ~> Arrow b c -> Arrow a c
@@ -219,7 +219,7 @@ arrEvenCount
 //=> 3
 ```
 
-### contramap
+#### contramap
 
 ```haskell
 Arrow a b ~> (c -> a) -> Arrow c b
@@ -273,7 +273,7 @@ arrAdd10Value
 //=> 10
 ```
 
-### first
+#### first
 
 ```haskell
 Pair p => Arrow a b ~> () -> Arrow (p a c) (p b c)
@@ -313,7 +313,7 @@ flow
 //=> { original: 'taco time', result: 'TACO TIME' }
 ```
 
-### map
+#### map
 
 ```haskell
 Arrow a b ~> (b -> c) -> Arrow a c
@@ -355,7 +355,7 @@ arrStringFS
 //=> '-9.12 dbFS'
 ```
 
-### promap
+#### promap
 
 ```haskell
 Arrow a b ~> ((c -> a), (b -> d)) -> Arrow c d
@@ -412,7 +412,7 @@ arrTitleObject
 // { title: '' }
 ```
 
-### runWith
+#### runWith
 
 ```haskell
 Arrow a b ~> a -> b
@@ -461,7 +461,7 @@ arrAvgList
 //=> 54.25
 ```
 
-### second
+#### second
 
 ```haskell
 Pair p => Arrow a b ~> () -> Arrow (p c a) (p c b)

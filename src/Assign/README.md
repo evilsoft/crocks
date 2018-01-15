@@ -24,7 +24,7 @@ Assign(first)
 
 ## Constructor Methods
 
-### empty
+#### empty
 
 ```haskell
 Assign.empty :: () -> Assign
@@ -50,7 +50,7 @@ Assign({ a: 1 })
 //=> Assign { a: 1 }
 ```
 
-### type
+#### type
 
 ```haskell
 Assign.type :: () -> String
@@ -88,7 +88,7 @@ isSameType(Assign, myData)
 
 ## Instance Methods
 
-### concat
+#### concat
 
 ```haskell
 Assign ~> Assign -> Assign
@@ -119,7 +119,7 @@ Assign({ b: 4 })
 //=> Assign { b: 4, a: 1 }
 ```
 
-### valueOf
+#### valueOf
 
 ```haskell
 Assign ~> () -> Object

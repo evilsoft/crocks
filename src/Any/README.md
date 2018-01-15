@@ -4,7 +4,7 @@
 Any Boolean
 ```
 
-`Any` is a `Monoid` that will combine two values of any type using logical
+`Any` is a `Monoid` that will combine (2) values of any type using logical
 disjunction (OR) on their coerced `Boolean` values, mapping truth-y values to
 `true` and false-y values to `false`.
 
@@ -40,7 +40,7 @@ anyNumber([ true, 'string' ])
 
 ## Constructor Methods
 
-### empty
+#### empty
 
 ```haskell
 Any.empty :: () -> Any
@@ -61,7 +61,7 @@ Any(false).concat(Any.empty())  //=> Any false
 ```
 
 
-### type
+#### type
 
 ```haskell
 Any.type :: () -> String
@@ -93,14 +93,14 @@ isSameType(Any, Assign({ food: 'always' }))
 
 ## Instance Methods
 
-### concat
+#### concat
 
 ```haskell
 Any ~> Any -> Any
 ```
 
 `concat` is used to combine (2) `Semigroup`s of the same type under an operation
-specified by the `Semigroup`. In the case of `Any`, it will combine the two
+specified by the `Semigroup`. In the case of `Any`, it will combine the (2)
 using logical OR (disjunction).
 
 ```javascript
@@ -112,7 +112,7 @@ Any(false).concat(Any(true))  //=> Any true
 Any(false).concat(Any(false)) //=> Any false
 ```
 
-### valueOf
+#### valueOf
 
 ```haskell
 Any ~> () -> Boolean
@@ -121,7 +121,7 @@ Any ~> () -> Boolean
 `valueOf` is used on all `crocks` `Monoid`s as a means of extraction. While the
 extraction is available, types that implement `valueOf` are not necessarily a
 `Comonad`. This function is used primarily for convenience for some of the
-helper functions that ship with `crocks`. Calling `value` on an `Any` instance
+helper functions that ship with `crocks`. Calling `valueOf` on an `Any` instance
 will result in the underlying `Boolean` value.
 
 ```javascript

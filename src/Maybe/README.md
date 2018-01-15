@@ -4,13 +4,13 @@
 Maybe a = Nothing | Just a
 ```
 
-Defined as a Sum Type with it's Left side fixed to `()` (`Nothing`), `Maybe` is
+Defined as a Sum Type with its left side fixed to `()` (`Nothing`), `Maybe` is
 well suited for capturing disjunction when the cause of the "error" case does
 not need to be communicated. For example, providing default values on specific
 conditions.
 
 A `Maybe` represents disjunction by using (2) constructors, `Nothing` or `Just`.
-A `Just` instance represents the truth case while, `Nothing` is considered
+A `Just` instance represents the truth case while `Nothing` is considered
 false. With the exception of [`coalesce`](#coalesce), all `Maybe` returning
 methods on an instance will be applied to a `Just` returning the result. If an
 instance is a `Nothing`, then all application is skipped and another `Nothing`
@@ -126,8 +126,8 @@ Maybe.Just :: a -> Maybe a
 ```
 
 Used to construct a `Just` instance that represents the "true" portion of a
-disjunction or a valid value. `Just` will wrap any given value in a `Just`,
-which signals the validity of the wrapped value.
+disjunction or a valid value.  `Just` will wrap any given value in
+a `Just`, signalling the validity of the wrapped value.
 
 ```javascript
 const { Just, Nothing } = require('crocks/Maybe')
@@ -165,10 +165,11 @@ Maybe.of :: a -> Maybe a
 ```
 
 Used to wrap any value into a `Maybe` as a `Just`, `of` is used mostly by
-helper functions that work "generically" with `Applicative` or `Monad` types
-instances. When working specifically with the `Maybe` type, the [`Just`](#just)
-constructor should be used. Reach for `of` when working with functions that will
-work with ANY `Applicative`/`Monad`.
+helper functions that work "generically" with instances of
+either `Applicative` or `Monad`. When working specifically with
+the `Maybe` type, the [`Just`](#just) constructor should be used. Reach
+for `of` when working with functions that will work with
+ANY `Applicative`/`Monad`.
 
 ```javascript
 const Maybe = require('crocks/Maybe')
@@ -393,10 +394,10 @@ sumList([ 'three', 4, 'five' ])
 Maybe a ~> (a -> b) -> Maybe b
 ```
 
-Used to apply transformations to values in the safely of a `Maybe`, `map` takes
+Used to apply transformations to values in the safety of a `Maybe`, `map` takes
 a function that it will lift into the context of the `Maybe` and apply to it
-the wrapped value. When ran on a `Just` instance, `map` will wrapped value to
-the provided function and return the result in a new `Just` instance.
+the wrapped value. When ran on a `Just` instance, `map` will apply the wrapped
+value to the provided function and return the result in a new `Just` instance.
 
 
 ```javascript
@@ -566,6 +567,7 @@ Just('hello')
 Maybe.of(add)
   .ap(Just(29))
   .ap(Nothing())
+//=> Nothing
 
 fullName({ first: 'Joey', last: 'Fella' })
 //=> Just "Joey Fella"

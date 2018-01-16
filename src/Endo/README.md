@@ -7,8 +7,8 @@ Endo a
 `Endo` is a `Monoid` that will combine (2) functions that have matching domains
 and codomains (endofunctions) under function composition. Due to the nature
 of `Endo` wrapping a function, the underlying value can either be extracted
-using [`valueOf`](#valueof) like any other `Monoid` or can be executed using
-directly using [`runWith`](#runWith), supplying the input.
+using [`valueOf`](#valueof) like any other `Monoid` or can be executed directly
+using [`runWith`](#runWith), supplying the input.
 
 ```javascript
 const Endo = require('crocks/Endo')
@@ -61,7 +61,7 @@ Endo.empty :: () -> Endo a
 `empty` provides the identity for the `Monoid` in that when the value it
 provides is `concat`ed to any other value, it will return the other value. In
 the case of `Endo` the result of `empty` is the identity function, which echos
-it's input. `empty` is available on both the Constructor and the Instance for
+its input. `empty` is available on both the Constructor and the Instance for
 convenience.
 
 ```javascript
@@ -213,8 +213,8 @@ fn([])
 Endo a ~> a -> a
 ```
 
-`Endo` wraps a function and as such, it's underlying endofunction can be run
-while inside of an `Endo` by calling `runWith`. Providing a valid value  of the
+`Endo` wraps a function and as such, its underlying endofunction can be run
+while inside of an `Endo` by calling `runWith`. Providing a valid value of the
 same type required by the function, `runWith` will execute the underlying
 function and return the result.
 

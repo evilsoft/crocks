@@ -72,7 +72,7 @@ need to account for for the rest of your flow.
 | [`liftA2`][lifta2] | `Applicative m => (a -> b -> c) -> m a -> m b -> m c` | `crocks/helpers/liftA2` |
 | [`liftA3`][lifta3] | `Applicative m => (a -> b -> c -> d) -> m a -> m b -> m c -> m d` | `crocks/helpers/liftA3` |
 | [`mapProps`][mapprops] | `Object -> Object -> Object` | `crocks/helpers/mapProps` |
-| [`mapReduce`][mapreduce] | `Foldable f => (a -> b) -> (c -> b -> c) -> f a -> c` | `crocks/helpers/mapReduce` |
+| [`mapReduce`][mapreduce] | `Foldable f => (a -> b) -> (c -> b -> c) -> c -> f a -> c` | `crocks/helpers/mapReduce` |
 | [`mconcat`][mconcat] | `Monoid m, Foldable f => m -> f a -> m a` | `crocks/helpers/mconcat` |
 | [`mconcatMap`][mconcatmap] | `Monoid m, Foldable f => m -> (b -> a) -> f b -> m a` | `crocks/helpers/mconcatMap` |
 | [`mreduce`][mreduce] | `Monoid m, Foldable f => m -> f a -> a` | `crocks/helpers/mreduce` |

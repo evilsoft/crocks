@@ -54,7 +54,8 @@
       "profile": "https://robertwpearce.com",
       "contributions": [
         "bug",
-        "code"
+        "code",
+        "review"
       ]
     },
     {
@@ -64,6 +65,15 @@
       "profile": "https://github.com/flintinatux",
       "contributions": [
         "bug"
+      ]
+    },
+    {
+      "login": "foxdonut",
+      "name": "Fred Daoud",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/1706600?v=4",
+      "profile": "http://www.fdaoud.com",
+      "contributions": [
+        "review"
       ]
     }
   ]

@@ -423,7 +423,7 @@ mapProps(mapping, {
 `crocks/helpers/mapReduce`
 
 ```haskell
-mapReduce :: Foldable f => (a -> b) -> (c -> b -> c) -> f a -> c
+mapReduce :: Foldable f => (a -> b) -> (c -> b -> c) -> c -> f a -> c
 ```
 
 Sometimes you need the power provided by [`mreduceMap`](#mreducemap) but you do
@@ -846,7 +846,7 @@ get()
 `crocks/Maybe/safe`
 
 ```haskell
-safe :: ((a -> Boolean) | Pred) -> a -> Maybe a
+safe :: ((a -> Boolean) | Pred) -> b -> Maybe a
 ```
 
 When using a `Maybe`, it is a common practice to lift into a `Just` or a
@@ -861,7 +861,7 @@ true and a `Nothing` if false.
 `crocks/Maybe/safeLift`
 
 ```haskell
-safeLift :: ((a -> Boolean) | Pred) -> (a -> b) -> a -> Maybe b
+safeLift :: ((c -> Boolean) | Pred) -> (a -> b) -> c -> Maybe b
 ```
 
 While [`safe`](#safe) is used to lift a value into a `Maybe`, you can reach for

@@ -9,7 +9,7 @@ weight: 10
 All Boolean
 ```
 
-`All` is a `Monoid` that will combine two values of any type using logical
+`All` is a `Monoid` that will combine (2) values of any type using logical
 conjunction (AND) on their coerced `Boolean` values, mapping truth-y values to
 `true` and false-y values to `false`.
 
@@ -109,7 +109,7 @@ All ~> All -> All
 ```
 
 `concat` is used to combine (2) `Semigroup`s of the same type under an operation
-specified by the `Semigroup`. In the case of `All`, it will combine the two
+specified by the `Semigroup`. In the case of `All`, it will combine the (2)
 using logical AND (conjunction).
 
 ```javascript
@@ -136,7 +136,7 @@ will result in the underlying `Boolean` value.
 ```javascript
 const All = require('crocks/All')
 
-All(0).value()          //=> false
+All(0).valueOf()          //=> false
 All('string').valueOf() //=> true
 
 //=> false

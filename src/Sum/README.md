@@ -35,7 +35,7 @@ sumByTen([ 2, 2 ])
 
 ## Constructor Methods
 
-### empty
+#### empty
 
 ```haskell
 Sum.empty :: () -> Sum
@@ -64,7 +64,7 @@ Sum.empty()
 //=> Sum 4
 ```
 
-### type
+#### type
 
 ```haskell
 Sum.type :: () -> String
@@ -100,7 +100,7 @@ isSameType(Sum.empty(), sum5)
 
 ## Instance Methods
 
-### concat
+#### concat
 
 ```haskell
 Sum ~> Sum -> Sum
@@ -130,7 +130,7 @@ Sum(1)
 //=> Sum 4
 ```
 
-### valueOf
+#### valueOf
 
 ```haskell
 Sum ~> () -> Number

@@ -4,7 +4,7 @@
 All Boolean
 ```
 
-`All` is a `Monoid` that will combine two values of any type using logical
+`All` is a `Monoid` that will combine (2) values of any type using logical
 conjunction (AND) on their coerced `Boolean` values, mapping truth-y values to
 `true` and false-y values to `false`.
 
@@ -39,7 +39,7 @@ allGood([ 'nice', '00', null ])
 
 ## Constructor Methods
 
-### empty
+#### empty
 
 ```haskell
 All.empty :: () -> All
@@ -59,8 +59,7 @@ All(true).concat(All.empty())   //=> All true
 All(false).concat(All.empty())  //=> All false
 ```
 
-
-### type
+#### type
 
 ```haskell
 All.type :: () -> String
@@ -90,14 +89,14 @@ isSameType(All(false), Maybe)     //=> false
 
 ## Instance Methods
 
-### concat
+#### concat
 
 ```haskell
 All ~> All -> All
 ```
 
 `concat` is used to combine (2) `Semigroup`s of the same type under an operation
-specified by the `Semigroup`. In the case of `All`, it will combine the two
+specified by the `Semigroup`. In the case of `All`, it will combine the (2)
 using logical AND (conjunction).
 
 ```javascript
@@ -109,7 +108,7 @@ All(false).concat(All(true))  //=> All false
 All(false).concat(All(false)) //=> All false
 ```
 
-### valueOf
+#### valueOf
 
 ```haskell
 All ~> () -> Boolean
@@ -124,7 +123,7 @@ will result in the underlying `Boolean` value.
 ```javascript
 const All = require('crocks/All')
 
-All(0).value()          //=> false
+All(0).valueOf()          //=> false
 All('string').valueOf() //=> true
 
 //=> false

@@ -25,7 +25,7 @@ as the following Instance Functions: `inspect`, `type`, `valueOf`, `empty` and
 | [`All`][All] | Boolean | Logical AND | `true` |
 | [`Any`][Any] | Boolean | Logical OR | `false` |
 | [`Assign`][Assign] | Object | `Object.assign` | `{lb}{rb}` |
-| `Endo` | Function | `compose` | `identity` |
+| [`Endo`][Endo] | Function | `compose` | `identity` |
 | `First` | Maybe | First `Just` | `Nothing` |
 | `Last` | Maybe | Last `Just` | `Nothing` |
 | `Max` | Number | `Math.max` | `-Infinity` |
@@ -42,5 +42,6 @@ as the following Instance Functions: `inspect`, `type`, `valueOf`, `empty` and
 [All]: All.html
 [Any]: Any.html
 [Assign]: Assign.html
+[Endo]: Endo.html
 [Prod]: Prod.html
 [Sum]: Sum.html

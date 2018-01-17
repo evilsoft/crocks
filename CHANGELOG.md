@@ -1,4 +1,30 @@
 # Change Log for `crocks`
+
+v0.8.4 -- January 17, 2018
+--
+### Additions
+* READMES:  * `Assign`
+  * `Endo`
+  * `Maybe`
+  * `Prod`
+  * `Sum`
+
+### Bug fixes
+* Traversable types can now accept `Array` as its `Applicative`
+
+### Pull Requests
+* [#155 - Add Assign, Prod, Sum docs](https://github.com/evilsoft/crocks/pull/155)
+* [#179 - Clean up Docs/Readme and Implement all-collaborators](https://github.com/evilsoft/crocks/pull/179)
+* [#180 - More Documentation Cleanup](https://github.com/evilsoft/crocks/pull/180)
+* [#182 - Better Error Specs for some of the ADTs](https://github.com/evilsoft/crocks/pull/182)
+* [#184 - Accept Array as the Applicative for Traversable Types](https://github.com/evilsoft/crocks/pull/184)
+* [#183 - Writing changes to docs index](https://github.com/evilsoft/crocks/pull/183)
+* [#186 - Clean up heading on existing READMEs](https://github.com/evilsoft/crocks/pull/186)
+* [#187 - Add Documentation for `Endo`](https://github.com/evilsoft/crocks/pull/187)
+* [#185 - Add `Maybe` Documentation](https://github.com/evilsoft/crocks/pull/185)
+* [#188 - Add `Endo` and `Maybe` to the documentation](https://github.com/evilsoft/crocks/pull/188)
+
+
 v0.8.3 -- January 4, 2018
 --
 ### Additions

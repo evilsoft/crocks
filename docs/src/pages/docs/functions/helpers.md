@@ -282,7 +282,7 @@ defaultTo :: a -> b -> a
 
 With things like `null`, `undefined` and `NaN` showing up all over the place, it
 can be hard to keep your expected types inline without resorting to nesting in a
-`Maybe` with functions like [`safe`](#safe). If you want to specifically guard
+`Maybe` with functions like [`safe`][safe]. If you want to specifically guard
 for `null`, `undefined` and `NaN` and get things defaulted into the expected
 type, then `defaultTo` should work for you. Just pass it what you would like
 your default value to be and then the value you want guarded, and you will get
@@ -747,21 +747,6 @@ flow('string', 100).runWith(data)
 // => Nothing
 ```
 
-#### prop
-
-`crocks/Maybe/prop`
-
-```haskell
-prop :: (String | Integer) -> a -> Maybe b
-```
-
-If you want some safety around pulling a value out of an Object or Array with a
-single key or index, you can always reach for `prop`. Well, as long as you are
-working with non-nested data that is. Just tell `prop` either the key or index
-you are interested in, and you will get back a function that will take anything
-and return a `Just` with the wrapped value if the key/index exists. If the
-key/index does not exist however, you will get back a `Nothing`.
-
 #### propOr
 
 `crocks/helpers/propOr`
@@ -791,23 +776,6 @@ get()
   .map(propOr('default', 'baz'))
   .evalWith(data) // default
 ```
-
-#### propPath
-
-`crocks/Maybe/propPath`
-
-```haskell
-propPath :: Foldable f => f (String | Integer) -> a -> Maybe b
-```
-
-While [`prop`](#prop) is good for simple, single-level structures, there may
-come a time when you have to work with nested POJOs or Arrays. When you run into
-this situation, just pull in `propPath` and pass it a left-to-right traversal
-path of keys, indices or a combination of both (gross...but possible). This will
-kick you back a function that behaves just like [`prop`](#prop). You pass it
-some data, and it will attempt to resolve your provided path. If the path is
-valid, it will return the value residing there (`null` included!) in a `Just`.
-But if at any point that path "breaks" it will give you back a `Nothing`.
 
 #### propPathOr
 
@@ -840,37 +808,6 @@ get()
   .map(propPathOr('default', ['baz', 'tommy']))
   .evalWith(data) // default
 ```
-
-#### safe
-
-`crocks/Maybe/safe`
-
-```haskell
-safe :: ((a -> Boolean) | Pred) -> b -> Maybe a
-```
-
-When using a `Maybe`, it is a common practice to lift into a `Just` or a
-`Nothing` depending on a condition on the value to be lifted.  It is so common
-that it warrants a function, and that function is called `safe`. Provide a
-predicate (a function that returns a Boolean) and a value to be lifted. The
-value will be evaluated against the predicate, and will lift it into a `Just` if
-true and a `Nothing` if false.
-
-#### safeLift
-
-`crocks/Maybe/safeLift`
-
-```haskell
-safeLift :: ((c -> Boolean) | Pred) -> (a -> b) -> c -> Maybe b
-```
-
-While [`safe`](#safe) is used to lift a value into a `Maybe`, you can reach for
-`safeLift` when you want to run a function in the safety of the `Maybe` context.
-Just like [`safe`](#safe), you pass it either a `Pred` or a predicate function
-to determine if you get a `Just` or a `Nothing`, but then instead of a value,
-you pass it a unary function. `safeLift` will then give you back a new function
-that will first lift its argument into a `Maybe` and then maps your original
-function over the result.
 
 #### tap
 
@@ -948,3 +885,5 @@ things. A common use for it is as a default `noop` as it is a function that does
 nothing and returns `undefined`. You can also use it in a pointed fashion to
 represent some special value for a given type. This pointed use is the heart and
 soul of the infamous `Maybe` type.
+
+[safe]: ../crocks/Maybe.html#safe

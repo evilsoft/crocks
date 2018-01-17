@@ -26,7 +26,7 @@ on the Constructor and both inspect and type functions on their Instances.
 | `Identity` | `of` | `ap`, `chain`, `concat`, `equals`, `map`, `of`, `sequence`, `traverse`, `valueOf` |
 | `IO` | `of` | `ap`, `chain`, `map`, `of`, `run` |
 | `List` |  `empty`, `fromArray`, `of` | `ap`, `chain`, `concat`, `cons`, `empty`, `equals`, `filter`, `head`, `map`, `of`, `reduce`, `reject`, `sequence`, `tail`, `toArray`, `traverse`, `valueOf` |
-| `Maybe` | `Nothing`, `Just`, `of`, `zero` | `alt`, `ap`, `chain`, `coalesce`, `concat`, `equals`, `either`, `map`, `of`, `option`, `sequence`, `traverse`, `zero` |
+| [`Maybe`][maybe] | [`Nothing`][maybe-nothing], [`Just`][maybe-just], [`of`][maybe-of], [`zero`][maybe-zero] | [`alt`][maybe-alt], [`ap`][maybe-ap], [`chain`][maybe-chain], [`coalesce`][maybe-coalesce], [`concat`][maybe-concat], [`equals`][maybe-equals], [`either`][maybe-either], [`map`][maybe-map], [`of`][maybe-of], [`option`][maybe-option], [`sequence`][maybe-sequence], [`traverse`][maybe-traverse], [`zero`][maybe-zero] |
 | `Pair` | --- | `ap`, `bimap`, `chain`, `concat`, `equals`, `extend`, `fst`, `map`, `merge`, `of`, `snd`, `swap`, `toArray` |
 | [`Pred`][pred] * | [`empty`][pred-empty] | [`concat`][pred-concat], [`contramap`][pred-contra], [`runWith`][pred-run], [`valueOf`][pred-value] |
 | [`Reader`][reader] | [`ask`][reader-ask], [`of`][reader-of] | [`ap`][reader-ap], [`chain`][reader-chain], [`map`][reader-map], [`runWith`][reader-run] |
@@ -63,6 +63,24 @@ on the Constructor and both inspect and type functions on their Instances.
 [pred-contra]: Pred.html#contramap
 [pred-run]: Pred.html#runwith
 [pred-value]: Pred.html#valueof
+
+[maybe]: Maybe.html
+[maybe-nothing]: Maybe.html#nothing
+[maybe-just]: Maybe.html#just
+[maybe-of]: Maybe.html#of
+[maybe-zero]: Maybe.html#zero
+[maybe-alt]: Maybe.html#alt
+[maybe-ap]: Maybe.html#ap
+[maybe-chain]: Maybe.html#chain
+[maybe-coalesce]: Maybe.html#coalesce
+[maybe-concat]: Maybe.html#concat
+[maybe-equals]: Maybe.html#equals
+[maybe-either]: Maybe.html#either
+[maybe-map]: Maybe.html#map
+[maybe-option]: Maybe.html#option
+[maybe-sequence]: Maybe.html#sequence
+[maybe-traverse]: Maybe.html#traverse
+[maybe-zero]: Maybe.html#zero
 
 [reader]: Reader.html
 [reader-ask]: Reader.html#ask

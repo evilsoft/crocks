@@ -161,12 +161,12 @@ type: `Pred a` and vice-versa
 [pipek]: helpers.html#pipek
 [pipep]: helpers.html#pipep
 [pipes]: helpers.html#pipes
-[prop]: helpers.html#prop
+[prop]: ../crocks/Maybe.html#prop
 [propor]: helpers.html#propor
-[proppath]: helpers.html#proppath
+[proppath]: ../crocks/Maybe.html#proppath
 [proppathor]: helpers.html#proppathor
-[safe]: helpers.html#safe
-[safelift]: helpers.html#safelift
+[safe]: ../crocks/Maybe.html#safe
+[safelift]: ../crocks/Maybe.html#safelift
 [tap]: helpers.html#tap
 [topairs]: helpers.html#topairs
 [trycatch]: helpers.html#trycatch

@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([0,26,27,28],[
+webpackJsonppageComponent([17,26,27,28],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -28356,29 +28356,12 @@ exports.default = parseFromAnchor;
 /* 222 */,
 /* 223 */,
 /* 224 */,
-/* 225 */,
-/* 226 */,
-/* 227 */,
-/* 228 */,
-/* 229 */,
-/* 230 */,
-/* 231 */,
-/* 232 */,
-/* 233 */,
-/* 234 */,
-/* 235 */,
-/* 236 */,
-/* 237 */,
-/* 238 */,
-/* 239 */,
-/* 240 */,
-/* 241 */,
-/* 242 */
+/* 225 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pageIndex", function() { return pageIndex; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ejTKl", function() { return ejTKl; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28390,15 +28373,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var templates;
 goog.loadModule(function(exports) {
 
-// This file was automatically generated from index.soy.
+// This file was automatically generated from combinators.soy.
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace pageIndex.
+ * @fileoverview Templates in namespace ejTKl.
  * @public
  */
 
-goog.module('pageIndex.incrementaldom');
+goog.module('ejTKl.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28419,7 +28402,9 @@ var ie_open_end = IncrementalDom.elementOpenEnd;
 var itext = IncrementalDom.text;
 var iattr = IncrementalDom.attr;
 
-var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('main.incrementaldom', 'render');
+var $templateAlias2 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('ElectricCode.incrementaldom', 'render');
+
+var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('notopic.incrementaldom', 'render');
 
 
 /**
@@ -28430,340 +28415,217 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var param138 = function() {
-    $header(opt_data, null, opt_ijData);
-    $why(null, null, opt_ijData);
-    $highlights(null, null, opt_ijData);
-    $footer(null, null, opt_ijData);
+  var param302 = function() {
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'applyto',
+          'href', '#applyto');
+        itext('applyTo');
+      ie_close('a');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/combinators/applyTo');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'applyTo :: (a -> b) -> a -> b', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('Seems really silly, but is quite useful for a lot of things. It takes a function and a value and then returns the result of that function with the argument applied.');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'composeb',
+          'href', '#composeb');
+        itext('composeB');
+      ie_close('a');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/combinators/composeB');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'composeB :: (b -> c) -> (a -> b) -> a -> c', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('Provides a means to describe a composition between two functions. it takes two functions and a value. Given ');
+      ie_open('code');
+        itext('composeB(f, g)');
+      ie_close('code');
+      itext(', which is read ');
+      ie_open('code');
+        itext('f');
+      ie_close('code');
+      itext(' after ');
+      ie_open('code');
+        itext('g');
+      ie_close('code');
+      itext(', it will return a function that will take value ');
+      ie_open('code');
+        itext('a');
+      ie_close('code');
+      itext(' and apply it to ');
+      ie_open('code');
+        itext('g');
+      ie_close('code');
+      itext(', passing the result as an argument to ');
+      ie_open('code');
+        itext('f');
+      ie_close('code');
+      itext(', and will finally return the result of ');
+      ie_open('code');
+        itext('f');
+      ie_close('code');
+      itext('. (This allows only two functions, if you want to avoid things like:');
+      ie_open('code');
+        itext('composeB(composeB(f, g), composeB(h, i))');
+      ie_close('code');
+      itext(' then check out');
+      ie_open('a', null, null,
+          'href', 'helpers.html#compose');
+        ie_open('code');
+          itext('compose');
+        ie_close('code');
+      ie_close('a');
+      itext('.)');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'constant',
+          'href', '#constant');
+        itext('constant');
+      ie_close('a');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/combinators/constant');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'constant :: a -> () -> a', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('This is a very handy dandy function, used a lot. Pass it any value and it will give you back a function that will return that same value no matter what you pass it.');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'flip',
+          'href', '#flip');
+        itext('flip');
+      ie_close('a');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/combinators/flip');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'flip :: (a -> b -> c) -> b -> a -> c', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('This little function just takes a function and returns a function that takes the first two parameters in reverse. One can compose flip calls down the line to flip all, or some of the other parameters if there are more than two. Mix and match to your heart\'s desire.');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'identity',
+          'href', '#identity');
+        itext('identity');
+      ie_close('a');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/combinators/identity');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'identity ::  a -> a', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('This function and ');
+      ie_open('a', null, null,
+          'href', '#constant');
+        ie_open('code');
+          itext('constant');
+        ie_close('code');
+      ie_close('a');
+      itext(' are the workhorses of writing code with this library. It quite simply is just a function that when you pass it something, it returns that thing right back to you. So simple, I will leave it as an exercise to reason about why this is so powerful and important.');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'reverseapply',
+          'href', '#reverseapply');
+        itext('reverseApply');
+      ie_close('a');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/combinators/reverseApply');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'reverseApply :: a -> (a -> b) -> b', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('Ever run into a situation where you have a value but do not have a function to apply it to? Well this little bird, named Thrush, is there to help out. Just give it a value and it will give you back a function ready to take a function. Once that function is provided, it will return the result of applying your value to that function.');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'substitution',
+          'href', '#substitution');
+        itext('substitution');
+      ie_close('a');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/combinators/substitution');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'substitution :: (a -> b -> c) -> (a -> b) -> a -> c', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('While it a complicated little bugger, it can come in very handy from time to time. In it\'s first two arguments it takes functions. The first must be binary and the second unary. That will return you a function that is ready to take some value. Once supplied the fun starts, it will pass the ');
+      ie_open('code');
+        itext('a');
+      ie_close('code');
+      itext(' to the first argument of both functions, and the result of the second function to the second parameter of the first function. Finally after all that juggling, it will return the result of that first function. When used with partial application on that first parameter, a whole new world of combinatory madness is presented!');
+    ie_close('p');
+    ie_open('input', null, null,
+        'type', 'hidden',
+        'value', opt_data.page.title);
+    ie_close('input');
+    ie_open('input', null, null,
+        'type', 'hidden',
+        'value', opt_data.site.title);
+    ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({content: param138}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param302}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'pageIndex.render';
+  $render.soyTemplateName = 'ejTKl.render';
 }
 
-
-/**
- * @param {Object<string, *>=} opt_data
- * @param {(null|undefined)=} opt_ignored
- * @param {Object<string, *>=} opt_ijData
- * @return {void}
- * @suppress {checkTypes}
- */
-function $header(opt_data, opt_ignored, opt_ijData) {
-  ie_open('header', null, null,
-      'class', 'header');
-    ie_open('div', null, null,
-        'class', 'container');
-      ie_open('h1', null, null,
-          'class', 'header-title');
-        var dyn10 = opt_data.site.title;
-        if (typeof dyn10 == 'function') dyn10(); else if (dyn10 != null) itext(dyn10);
-      ie_close('h1');
-      ie_open('h2', null, null,
-          'class', 'header-subtitle');
-        var dyn11 = opt_data.site.index.description;
-        if (typeof dyn11 == 'function') dyn11(); else if (dyn11 != null) itext(dyn11);
-      ie_close('h2');
-      ie_open('div', null, null,
-          'class', 'header-cta');
-        ie_open('a', null, null,
-            'href', 'docs/getting-started.html',
-            'class', 'btn btn-accent');
-          itext('Get Started');
-        ie_close('a');
-      ie_close('div');
-    ie_close('div');
-    ie_open('p', null, null,
-        'class', 'gh-btns');
-      ie_void('iframe', null, null,
-          'src', '//ghbtns.com/github-btn.html?user=evilsoft&repo=crocks&type=watch&count=true&size=large',
-          'allowtransparency', 'true',
-          'frameborder', '0',
-          'scrolling', '0',
-          'width', '150',
-          'height', '30');
-      ie_void('iframe', null, null,
-          'src', '//ghbtns.com/github-btn.html?user=evilsoft&repo=crocks&type=fork&count=true&size=large',
-          'allowtransparency', 'true',
-          'frameborder', '0',
-          'scrolling', '0',
-          'width', '150',
-          'height', '30');
-    ie_close('p');
-  ie_close('header');
-}
-exports.header = $header;
-if (goog.DEBUG) {
-  $header.soyTemplateName = 'pageIndex.header';
-}
-
-
-/**
- * @param {Object<string, *>=} opt_data
- * @param {(null|undefined)=} opt_ignored
- * @param {Object<string, *>=} opt_ijData
- * @return {void}
- * @suppress {checkTypes}
- */
-function $why(opt_data, opt_ignored, opt_ijData) {
-  ie_open('article', null, null,
-      'class', 'about');
-    ie_open('div', null, null,
-        'class', 'container');
-      ie_open('div', null, null,
-          'class', 'row');
-        ie_open('div', null, null,
-            'class', 'col-md-12 col-md-offset-2');
-          ie_open('h3', null, null,
-              'class', 'about-title');
-            itext('Why?');
-          ie_close('h3');
-          ie_open('p', null, null,
-              'class', 'about-description');
-            itext('Because Functional Programming! Crocks curates and provides a common interface between each data type (where possible of course), not forgetting all of the helper functions necessary to hit the ground running.');
-          ie_close('p');
-        ie_close('div');
-      ie_close('div');
-    ie_close('div');
-  ie_close('article');
-}
-exports.why = $why;
-if (goog.DEBUG) {
-  $why.soyTemplateName = 'pageIndex.why';
-}
-
-
-/**
- * @param {Object<string, *>=} opt_data
- * @param {(null|undefined)=} opt_ignored
- * @param {Object<string, *>=} opt_ijData
- * @return {void}
- * @suppress {checkTypes}
- */
-function $features(opt_data, opt_ignored, opt_ijData) {
-  ie_open('div', null, null,
-      'class', 'features');
-    ie_open('div', null, null,
-        'class', 'container');
-      ie_open('div', null, null,
-          'class', 'row');
-        ie_open('section', null, null,
-            'class', 'feature col-md-4 col-md-offset-2');
-          ie_open('div', null, null,
-              'class', 'feature-graphic');
-            ie_void('span', null, null,
-                'class', 'icon-16-bullhorn');
-          ie_close('div');
-          ie_open('h3', null, null,
-              'class', 'feature-title');
-            itext('Heading');
-          ie_close('h3');
-          ie_open('p', null, null,
-              'class', 'feature-description');
-            itext('Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros praesent commodo.');
-          ie_close('p');
-        ie_close('section');
-        ie_open('section', null, null,
-            'class', 'feature col-md-4');
-          ie_open('div', null, null,
-              'class', 'feature-graphic');
-            ie_void('span', null, null,
-                'class', 'icon-16-lock');
-          ie_close('div');
-          ie_open('h3', null, null,
-              'class', 'feature-title');
-            itext('Heading');
-          ie_close('h3');
-          ie_open('p', null, null,
-              'class', 'feature-description');
-            itext('Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros praesent commodo.');
-          ie_close('p');
-        ie_close('section');
-        ie_open('section', null, null,
-            'class', 'feature col-md-4');
-          ie_open('div', null, null,
-              'class', 'feature-graphic');
-            ie_void('span', null, null,
-                'class', 'icon-16-calendar');
-          ie_close('div');
-          ie_open('h3', null, null,
-              'class', 'feature-title');
-            itext('Heading');
-          ie_close('h3');
-          ie_open('p', null, null,
-              'class', 'feature-description');
-            itext('Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros praesent commodo.');
-          ie_close('p');
-        ie_close('section');
-      ie_close('div');
-    ie_close('div');
-  ie_close('div');
-}
-exports.features = $features;
-if (goog.DEBUG) {
-  $features.soyTemplateName = 'pageIndex.features';
-}
-
-
-/**
- * @param {Object<string, *>=} opt_data
- * @param {(null|undefined)=} opt_ignored
- * @param {Object<string, *>=} opt_ijData
- * @return {void}
- * @suppress {checkTypes}
- */
-function $highlights(opt_data, opt_ignored, opt_ijData) {
-  ie_open('div', null, null,
-      'class', 'highlights');
-    ie_open('div', null, null,
-        'class', 'container');
-      ie_open('section', null, null,
-          'class', 'highlight row');
-        ie_open('div', null, null,
-            'class', 'col-md-6 col-md-offset-2');
-          ie_open('h4', null, null,
-              'class', 'highlight-title');
-            itext('Work in a more declarative, functional flow.');
-          ie_close('h4');
-          ie_open('p', null, null,
-              'class', 'highlight-description');
-            itext('The data types provided in Crocks allow you to remove large swaths of imparative boilerplate, allowing you to think of your code in terms of what it does and not how it does it.');
-          ie_close('p');
-        ie_close('div');
-        ie_open('div', null, null,
-            'class', 'col-md-5 col-md-offset-1');
-          ie_open('div', null, null,
-              'class', 'highlight-graphic');
-            ie_void('span', null, null,
-                'class', 'icon-16-balloon-topic');
-          ie_close('div');
-        ie_close('div');
-      ie_close('section');
-      ie_open('section', null, null,
-          'class', 'highlight row');
-        ie_open('div', null, null,
-            'class', 'col-md-6 col-md-push-9');
-          ie_open('h4', null, null,
-              'class', 'highlight-title');
-            itext('Use a collection of popular Algebraic Data Types (ADTs)');
-          ie_close('h4');
-          ie_open('p', null, null,
-              'class', 'highlight-description');
-            itext('Have you ever heard of Maybe, Either, or, heck, even IO? These are just a few of the ADTs which Crocks brings to the table.');
-          ie_close('p');
-        ie_close('div');
-        ie_open('div', null, null,
-            'class', 'col-md-5 col-md-offset-2 col-md-pull-6');
-          ie_open('div', null, null,
-              'class', 'highlight-graphic');
-            ie_void('span', null, null,
-                'class', 'icon-16-menu');
-          ie_close('div');
-        ie_close('div');
-      ie_close('section');
-      ie_open('section', null, null,
-          'class', 'highlight row');
-        ie_open('div', null, null,
-            'class', 'col-md-6 col-md-offset-2');
-          ie_open('h4', null, null,
-              'class', 'highlight-title');
-            itext('Combine a list of values down to one value');
-          ie_close('h4');
-          ie_open('p', null, null,
-              'class', 'highlight-description');
-            itext('Crocks provides a large variety of Monoids, which are ADTs that represent a binary operation and are usually locked down it to a specific type. These are great when you need to combine two things into one under a specific operation.');
-          ie_close('p');
-        ie_close('div');
-        ie_open('div', null, null,
-            'class', 'col-md-5 col-md-offset-1');
-          ie_open('div', null, null,
-              'class', 'highlight-graphic');
-            ie_void('span', null, null,
-                'class', 'icon-16-org_chart');
-          ie_close('div');
-        ie_close('div');
-      ie_close('section');
-    ie_close('div');
-  ie_close('div');
-}
-exports.highlights = $highlights;
-if (goog.DEBUG) {
-  $highlights.soyTemplateName = 'pageIndex.highlights';
-}
-
-
-/**
- * @param {Object<string, *>=} opt_data
- * @param {(null|undefined)=} opt_ignored
- * @param {Object<string, *>=} opt_ijData
- * @return {void}
- * @suppress {checkTypes}
- */
-function $footer(opt_data, opt_ignored, opt_ijData) {
-  ie_open('footer', null, null,
-      'class', 'footer');
-    ie_open('div', null, null,
-        'class', 'container');
-      ie_open('div', null, null,
-          'class', 'row');
-        ie_open('p', null, null,
-            'class', 'footer-description col-md-3 col-md-offset-2');
-          ie_open('a', null, null,
-              'href', 'https://github.com/evilsoft/crocks');
-            itext('Crocks');
-          ie_close('a');
-        ie_close('p');
-        ie_open('p', null, null,
-            'class', 'footer-description col-md-4');
-          ie_open('a', null, null,
-              'href', 'https://github.com/evilsoft/crocks/blob/master/LICENSE');
-            itext('Distributed under ISC License');
-          ie_close('a');
-        ie_close('p');
-        ie_open('p', null, null,
-            'class', 'footer-description col-md-5');
-          itext('Found an issue with the docs? Report it ');
-          ie_open('a', null, null,
-              'href', 'https://github.com/evilsoft/crocks/issues/new');
-            itext('here');
-          ie_close('a');
-        ie_close('p');
-      ie_close('div');
-    ie_close('div');
-  ie_close('footer');
-}
-exports.footer = $footer;
-if (goog.DEBUG) {
-  $footer.soyTemplateName = 'pageIndex.footer';
-}
-
-exports.render.params = ["site"];
-exports.render.types = {"site":"any"};
-exports.header.params = ["site"];
-exports.header.types = {"site":"any"};
-exports.why.params = [];
-exports.why.types = {};
-exports.features.params = [];
-exports.features.types = {};
-exports.highlights.params = [];
-exports.highlights.types = {};
-exports.footer.params = [];
-exports.footer.types = {};
+exports.render.params = ["page","site"];
+exports.render.types = {"page":"any","site":"any"};
 templates = exports;
 return exports;
 
 });
 
-class pageIndex extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(pageIndex, templates);
+class ejTKl extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(ejTKl, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
 
 
 /***/ }),
+/* 226 */,
+/* 227 */,
+/* 228 */,
+/* 229 */,
+/* 230 */,
+/* 231 */,
+/* 232 */,
+/* 233 */,
+/* 234 */,
+/* 235 */,
+/* 236 */,
+/* 237 */,
+/* 238 */,
+/* 239 */,
+/* 240 */,
+/* 241 */,
+/* 242 */,
 /* 243 */,
 /* 244 */,
 /* 245 */,
@@ -28777,19 +28639,7 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(pageIndex, templates)
 /* 253 */,
 /* 254 */,
 /* 255 */,
-/* 256 */,
-/* 257 */,
-/* 258 */,
-/* 259 */,
-/* 260 */,
-/* 261 */,
-/* 262 */,
-/* 263 */,
-/* 264 */,
-/* 265 */,
-/* 266 */,
-/* 267 */,
-/* 268 */
+/* 256 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28825,9 +28675,9 @@ __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _indexSoy = __webpack_require__(242);
+var _combinatorsSoy = __webpack_require__(225);
 
-var _indexSoy2 = _interopRequireDefault(_indexSoy);
+var _combinatorsSoy2 = _interopRequireDefault(_combinatorsSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28837,23 +28687,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var pageIndex = function (_Component) {
-  _inherits(pageIndex, _Component);
+var ejTKl = function (_Component) {
+  _inherits(ejTKl, _Component);
 
-  function pageIndex() {
-    _classCallCheck(this, pageIndex);
+  function ejTKl() {
+    _classCallCheck(this, ejTKl);
 
-    return _possibleConstructorReturn(this, (pageIndex.__proto__ || Object.getPrototypeOf(pageIndex)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (ejTKl.__proto__ || Object.getPrototypeOf(ejTKl)).apply(this, arguments));
   }
 
-  return pageIndex;
+  return ejTKl;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(pageIndex, _indexSoy2.default);
+_metalSoy2.default.register(ejTKl, _combinatorsSoy2.default);
 
-exports.default = pageIndex;
+exports.default = ejTKl;
 
 /***/ })
-],[268]);
+],[256]);

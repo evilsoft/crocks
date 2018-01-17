@@ -1,0 +1,838 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta content="minimum-scale=1.0, width=device-width" name="viewport"><meta name="description" content="Maybe Crock"><title>Maybe - Crocks</title><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Roboto+Mono"><!-- inject:css --><link rel="stylesheet" href="/crocks/vendor/icon-12/icon-12.css"><link rel="stylesheet" href="/crocks/vendor/galano/galano.css"><link rel="stylesheet" href="/crocks/vendor/icon-16/icon-16.css"><link rel="stylesheet" href="/crocks/vendor/senna/senna.css"><link rel="stylesheet" href="/crocks/vendor/codemirror/lib/codemirror.css"><link rel="stylesheet" href="/crocks/vendor/codemirror/theme/blackboard.css"><!-- endinject --><!-- inject:js --><script src="/crocks/js/bundles/shared.electric.js"></script><script src="/crocks/vendor/senna/senna.js"></script><script src="/crocks/vendor/codemirror/lib/codemirror.js"></script><script src="/crocks/vendor/codemirror/mode/haskell/haskell.js"></script><script src="/crocks/vendor/codemirror/mode/javascript/javascript.js"></script><!-- endinject --><link rel="icon" href="/crocks/images/favicon.ico" type="image/x-icon"><link rel="stylesheet" href="/crocks/styles/main.css"></head><body data-senna><div data-senna-surface id="wrapper"><div class="senna-loading-bar"></div><!-- inject:metal:js --><div id="pageComponent"><div class="main"><main class="guide"><div class="docs"><nav class="topbar topbar-light topbar-docs"><div class="topbar-logo"><a class="topbar-logo-link" href="/crocks"><span class="topbar-logo-icon icon-16-loop"></span><h3 class="topbar-logo-text">Crocks</h3></a></div><nav class="topbar-menu"><button class="topbar-toggle">Menu</button><ul class="topbar-list"><li class="topbar-item"><a class="topbar-link topbar-link-selected" href="/crocks/docs/" target="undefined"><span>Documentation</span></a></li></ul></nav></nav><nav class="sidebar"><a class="sidebar-header toggler-header-collapsed"><span class="sidebar-icon icon-16-menu"></span><span>Docs Menu</span><span class="sidebar-icon-right"><span class="icon-12-arrow-down-short"></span><span class="icon-12-arrow-up-short"></span></span></a><div class="sidebar-toggler-content toggler-collapsed"><div class="sidebar-search"><div class="page-autocomplete"><div class="form-group"><div class="input-inner-addon input-inner-addon-right"><input autocomplete="off" class="form-control" name="q" placeholder="Search Docs" ref="input" required type="text" ><span class="input-inner-icon-helper icon-16-magnifier"></span></div></div></div></div><nav class=""><ul class="sidebar-list sidebar-list-1"><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/getting-started.html"><span class="sidebar-icon icon-16-arrow-right-rod"></span><span>Getting Started</span></a></li><li class="sidebar-item active"><a class="sidebar-link sidebar-link-selected" href="/crocks/docs/crocks/"><span class="sidebar-icon icon-16-code-file"></span><span>Crocks</span></a><nav class=""><ul class="sidebar-list sidebar-list-1"><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/crocks/Arrow.html"><span>Arrow</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/crocks/Equiv.html"><span>Equiv</span></a></li><li class="sidebar-item active"><a class="sidebar-link sidebar-link-selected" href="/crocks/docs/crocks/Maybe.html"><span>Maybe</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/crocks/Pred.html"><span>Pred</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/crocks/Reader.html"><span>Reader</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/crocks/ReaderT.html"><span>ReaderT</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/crocks/State.html"><span>State</span></a></li></ul></nav></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/monoids/"><span class="sidebar-icon icon-16-code-file"></span><span>Monoids</span></a><nav class=""><ul class="sidebar-list sidebar-list-1"><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/monoids/All.html"><span>All</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/monoids/Any.html"><span>Any</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/monoids/Assign.html"><span>Assign</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/monoids/Endo.html"><span>Endo</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/monoids/Prod.html"><span>Prod</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/monoids/Sum.html"><span>Sum</span></a></li></ul></nav></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/functions/"><span class="sidebar-icon icon-16-code-file"></span><span>Functions</span></a><nav class=""><ul class="sidebar-list sidebar-list-1"><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/functions/combinators.html"><span>Combinators</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/functions/helpers.html"><span>Helpers</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/functions/logic-functions.html"><span>Logic Functions</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/functions/predicate-functions.html"><span>Predicate Functions</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/functions/pointfree-functions.html"><span>Point-free Functions</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/functions/transformation-functions.html"><span>Transformation Functions</span></a></li></ul></nav></li></ul></nav></div></nav><div class="sidebar-offset"><header class="guide-header"><div class="container-hybrid"><h1 class="title">Maybe</h1></div></header><div class="container-hybrid"><div class="docs-guide row"><div class="docs-content col-xs-16 col-md-9"><div class="guide-content"><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">Maybe a = Nothing | Just a</code></pre></div><p>Defined as a Sum Type with its left side fixed to <code>()</code> (<code>Nothing</code>), <code>Maybe</code> is well suited for capturing disjunction when the cause of the &quot;error&quot; case does not need to be communicated. For example, providing default values on specific conditions.</p><p>A <code>Maybe</code> represents disjunction by using (2) constructors, <code>Nothing</code> or <code>Just</code>. A <code>Just</code> instance represents the truth case while <code>Nothing</code> is considered false. With the exception of <a href="#coalesce"><code>coalesce</code></a>, all <code>Maybe</code> returning methods on an instance will be applied to a <code>Just</code> returning the result. If an instance is a <code>Nothing</code>, then all application is skipped and another <code>Nothing</code>is returned.</p><p>It is recommended to use the available <a href="#just"><code>Just</code></a> and <a href="#nothing"><code>Nothing</code></a>constructors to construct <code>Maybe</code> instances in most cases. You can use the<code>Maybe</code> constructor to construct a <code>Just</code>, but it may read better to just use<code>Just</code>.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">const { Just, Nothing } = require(&#39;crocks/Maybe&#39;)
+
+const chain = require(&#39;crocks/pointfree/chain&#39;)
+const compose = require(&#39;crocks/helpers/compose&#39;)
+const ifElse = require(&#39;crocks/logic/ifElse&#39;)
+const isNumber = require(&#39;crocks/predicates/isNumber&#39;)
+
+// gt5 :: Number -&gt; Boolean
+const gt5 =
+  x =&gt; x &gt; 5
+
+// safe :: (a -&gt; Boolean) -&gt; a -&gt; Maybe b
+const safe = pred =&gt;
+  ifElse(pred, Just, Nothing)
+
+// safeNumber :: a -&gt; Maybe Number
+const safeNumber =
+  safe(isNumber)
+
+// maybeBig :: Number -&gt; Maybe Number
+const maybeBig =
+  safe(gt5)
+
+// bigNumber :: a -&gt; Maybe Number
+const bigNumber = compose(
+  chain(maybeBig), safeNumber
+)
+
+safeNumber(45)
+//=&gt; Just 45
+
+safeNumber(&#39;99&#39;)
+//=&gt; Nothing
+
+maybeBig(99)
+//=&gt; Just 99
+
+maybeBig(2)
+//=&gt; Nothing
+
+bigNumber(34)
+//=&gt; Just 34
+
+bigNumber(&#39;string&#39;)
+//=&gt; Nothing
+
+bigNumber(3)
+//=&gt; Nothing</code></pre></div><article id="topic-implements"><h2><a id="implements"href="#implements">Implements</a></h2><p><code>Setoid</code>, <code>Semigroup</code>, <code>Functor</code>, <code>Alt</code>, <code>Plus</code>, <code>Apply</code>, <code>Traversable</code>,<code>Chain</code>, <code>Applicative</code>, <code>Alternative</code>, <code>Monad</code></p></article><article id="topic-constructor"><h2><a id="constructor-methods"href="#constructor-methods">Constructor Methods</a></h2><h4><a id="nothing"href="#nothing">Nothing</a></h4><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">Maybe.Nothing :: () -&gt; Maybe a</code></pre></div><p>Used to construct a <code>Nothing</code> instance that represents the &quot;false&quot; portion of a disjunction. When an instance is a <code>Nothing</code>, most <code>Maybe</code> returning methods will just return another <code>Nothing</code>. Anything passed to the constructor will be thrown out and mapped to <code>()</code>.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">const { Just, Nothing } = require(&#39;crocks/Maybe&#39;)
+
+const chain = require(&#39;crocks/pointfree/chain&#39;)
+const isNumber = require(&#39;crocks/predicates/isNumber&#39;)
+const safeLift = require(&#39;crocks/Maybe/safeLift&#39;)
+
+// add10 :: Number -&gt; Number
+const add10 =
+  x =&gt; x + 10
+
+// safeAdd10 :: a -&gt; Maybe Number
+const safeAdd10 =
+  safeLift(isNumber, add10)
+
+Just(23)
+  .map(add10)
+//=&gt; Just 33
+
+Nothing(23)
+  .map(add10)
+//=&gt; Nothing
+
+chain(safeAdd10, Just(10))
+//=&gt; Just 20
+
+chain(safeAdd10, Nothing())
+//=&gt; Nothing</code></pre></div><h4><a id="just"href="#just">Just</a></h4><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">Maybe.Just :: a -&gt; Maybe a</code></pre></div><p>Used to construct a <code>Just</code> instance that represents the &quot;true&quot; portion of a disjunction or a valid value.  <code>Just</code> will wrap any given value in a <code>Just</code>, signalling the validity of the wrapped value.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">const { Just, Nothing } = require(&#39;crocks/Maybe&#39;)
+
+const compose = require(&#39;crocks/helpers/compose&#39;)
+const ifElse = require(&#39;crocks/logic/ifElse&#39;)
+const isString = require(&#39;crocks/predicates/isString&#39;)
+const map = require(&#39;crocks/pointfree/map&#39;)
+
+// toUpper :: String -&gt; String
+const toUpper =
+  x =&gt; x.toUpperCase()
+
+// safe :: (a -&gt; Boolean) -&gt; a -&gt; Maybe a
+const safe =
+  pred =&gt; ifElse(pred, Just, Nothing)
+
+// safeShout :: a -&gt; Maybe String
+const safeShout = compose(
+  map(toUpper),
+  safe(isString)
+)
+
+safeShout(45)
+//=&gt; Nothing
+
+safeShout(&#39;Hey there!&#39;)
+//=&gt; Just &quot;HEY THERE!&quot;</code></pre></div><h4><a id="of"href="#of">of</a></h4><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">Maybe.of :: a -&gt; Maybe a</code></pre></div><p>Used to wrap any value into a <code>Maybe</code> as a <code>Just</code>, <code>of</code> is used mostly by helper functions that work &quot;generically&quot; with instances of either <code>Applicative</code> or <code>Monad</code>. When working specifically with the <code>Maybe</code> type, the <a href="#just"><code>Just</code></a> constructor should be used. Reach for <code>of</code> when working with functions that will work with ANY <code>Applicative</code>/<code>Monad</code>.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">const Maybe = require(&#39;crocks/Maybe&#39;)
+const { Just } = Maybe
+
+const curry = require(&#39;crocks/helpers/curry&#39;)
+const isString = require(&#39;crocks/predicates/isString&#39;)
+const safe = require(&#39;crocks/Maybe/safe&#39;)
+
+Maybe(35)
+//=&gt; Just 35
+
+Just(35)
+//=&gt; Just 35
+
+Maybe.of(35)
+//=&gt; Just 35
+
+const safeString =
+  safe(isString)
+
+// lift2 :: Applicative m =&gt; (a -&gt; b -&gt; c) -&gt; m a -&gt; m b -&gt; m c
+const lift2 = curry(
+  (fn, x, y) =&gt; x.of(fn).ap(x).ap(y)
+)
+
+// join :: Applicative m =&gt; m String -&gt; m String -&gt; m String
+const join =
+  lift2(a =&gt; b =&gt; `${a} ${b}`)
+
+join(safeString(&#39;Brad&#39;), safeString(&#39;Pitt&#39;))
+//=&gt; Just &quot;Brad Pitt&quot;
+
+join(safeString(34), safeString(&#39;Pitt&#39;))
+//=&gt; Nothing</code></pre></div><h4><a id="zero"href="#zero">zero</a></h4><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">Maybe.zero :: () -&gt; Maybe a</code></pre></div><p>When working with <code>Alt</code>s, <code>zero</code> provides a sort of <code>empty</code> or identity for<code>Maybe</code> when used with <a href="#alt"><code>alt</code></a>. <code>zero</code> takes no arguments and returns a<code>Nothing</code> instance. Just like an <code>empty</code> method on a given <code>Monoid</code>, <code>zero</code>can be used to fold a collection of <code>Alt</code>s under <code>alt</code>.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">const { Nothing, Just, zero } = require(&#39;crocks/Maybe&#39;)
+
+const alt = require(&#39;crocks/pointfree/alt&#39;)
+const flip = require(&#39;crocks/combinators/flip&#39;)
+const isNumber = require(&#39;crocks/predicates/isNumber&#39;)
+const mapReduce = require(&#39;crocks/helpers/mapReduce&#39;)
+const safe = require(&#39;crocks/Maybe/safe&#39;)
+
+// firstValid :: [ * ] -&gt; Maybe Number
+const firstValid =
+  mapReduce(safe(isNumber), flip(alt), zero())
+
+Just(33)
+  .alt(zero())
+//=&gt; Just 33
+
+zero()
+  .alt(Just(33))
+//=&gt; Just 33
+
+Nothing()
+  .alt(zero())
+//=&gt; Nothing
+
+zero()
+  .alt(Nothing())
+//=&gt; Nothing
+
+firstValid([ null, &#39;nope&#39;, 10, 45 ])
+//=&gt; Just 10
+
+firstValid([ 75, null, &#39;nope&#39; ])
+//=&gt; Just 75
+
+firstValid([ null, undefined, &#39;wrong&#39; ])
+//=&gt; Nothing</code></pre></div><h4><a id="type"href="#type">type</a></h4><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">Maybe.type :: () -&gt; String</code></pre></div><p><code>type</code> provides a string representation of the type name for a given type in<code>crocks</code>. While it is used mostly internally for law validation, it can be useful to the end user for debugging and building out custom types based on the standard <code>crocks</code> types. While type comparisons can easily be done manually by calling <code>type</code> on a given type, using the <code>isSameType</code> function hides much of the boilerplate. <code>type</code> is available on both the Constructor and the Instance for convenience.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">const Maybe = require(&#39;crocks/Maybe&#39;)
+const { Just, Nothing } = Maybe
+
+const Any = require(&#39;crocks/Any&#39;)
+const isSameType = require(&#39;crocks/predicates/isSameType&#39;)
+
+Maybe.type() //=&gt;  &quot;Maybe&quot;
+
+isSameType(Maybe, Nothing())      //=&gt; true
+isSameType(Maybe, Just(3))        //=&gt; true
+isSameType(Nothing(), Just(23))   //=&gt; true
+isSameType(Maybe, Any(true))      //=&gt; false
+isSameType(Maybe(null), Any)      //=&gt; false</code></pre></div></article><article id="topic-instance"><h2><a id="instance-methods"href="#instance-methods">Instance Methods</a></h2><h4><a id="equals"href="#equals">equals</a></h4><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">Maybe a ~&gt; b -&gt; Boolean</code></pre></div><p>Used to compare the underlying values of (2) <code>Maybe</code> instances for equality by value, <code>equals</code> takes any given argument and returns <code>true</code> if the passed arguments is a <code>Maybe</code> with an underlying value equal to the underlying value of the <code>Maybe</code> the method is being called on. If the passed argument is not a <code>Maybe</code> or the underlying values are not equal, <code>equals</code> will return <code>false</code>.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">const { Nothing, Just } = require(&#39;crocks/Maybe&#39;)
+
+const equals = require(&#39;crocks/pointfree/equals&#39;)
+
+Just(33)
+  .equals(Just(33))
+//=&gt; true
+
+Nothing()
+  .equals(Nothing())
+//=&gt; true
+
+Nothing()
+  .equals(Just(33))
+//=&gt; false
+
+// by value, not reference for most types
+Just({ a: 86, b: true })
+  .equals(Just({ a: 86, b: true }))
+//=&gt; true
+
+equals(Just(95), 95)
+//=&gt; false
+
+equals(undefined, Nothing())
+//=&gt; false
+
+equals(Just([ 2, 3 ]), Just([ 2, 3 ]))
+//=&gt; true</code></pre></div><h4><a id="concat"href="#concat">concat</a></h4><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">Semigroup s =&gt; Maybe s ~&gt; Maybe s -&gt; Maybe s</code></pre></div><p>When an underlying value of a given <code>Maybe</code> is fixed to a <code>Semigroup</code>, <code>concat</code>can be used to concat another <code>Maybe</code> instance with an underlying <code>Semigroup</code>of the same type. Expecting a <code>Maybe</code> wrapping a <code>Semigroup</code> of the same type,<code>concat</code> will give back a new <code>Maybe</code> instance wrapping the result of combining the (2) underlying <code>Semigroup</code>s. When called on a <code>Nothing</code> instance, <code>concat</code>will return a <code>Nothing</code>.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">const { Nothing, Just } = require(&#39;crocks/Maybe&#39;)
+const Sum = require(&#39;crocks/Sum&#39;)
+
+const compose = require(&#39;crocks/helpers/compose&#39;)
+const concat = require(&#39;crocks/pointfree/concat&#39;)
+const flip = require(&#39;crocks/combinators/flip&#39;)
+const isNumber = require(&#39;crocks/predicates/isNumber&#39;)
+const map = require(&#39;crocks/pointfree/map&#39;)
+const mapReduce = require(&#39;crocks/helpers/mapReduce&#39;)
+const safeLift = require(&#39;crocks/Maybe/safeLift&#39;)
+const valueOf = require(&#39;crocks/pointfree/valueOf&#39;)
+
+// safeSum :: a -&gt; Maybe Sum
+const safeSum =
+  safeLift(isNumber, Sum)
+
+// empty :: Maybe Sum
+const empty =
+  Just(Sum.empty())
+
+// sumList :: [ * ] -&gt; Maybe Number
+const sumList = compose(
+  map(valueOf),
+  mapReduce(safeSum, flip(concat), empty)
+)
+
+Just([ 34 ])
+  .concat(Just([ 92 ]))
+//=&gt; Just [ 34, 92 ]
+
+Just([ 34 ])
+  .concat(Nothing())
+//=&gt; Nothing
+
+sumList([ 3, 4, 5 ])
+//=&gt; Just 12
+
+sumList([ &#39;three&#39;, 4, &#39;five&#39; ])
+//=&gt; Nothing</code></pre></div><h4><a id="map"href="#map">map</a></h4><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">Maybe a ~&gt; (a -&gt; b) -&gt; Maybe b</code></pre></div><p>Used to apply transformations to values in the safety of a <code>Maybe</code>, <code>map</code> takes a function that it will lift into the context of the <code>Maybe</code> and apply to it the wrapped value. When ran on a <code>Just</code> instance, <code>map</code> will apply the wrapped value to the provided function and return the result in a new <code>Just</code> instance.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">const { Nothing, Just } = require(&#39;crocks/Maybe&#39;)
+
+const assign = require(&#39;crocks/helpers/assign&#39;)
+const compose = require(&#39;crocks/helpers/compose&#39;)
+const isObject = require(&#39;crocks/predicates/isObject&#39;)
+const isString = require(&#39;crocks/predicates/isString&#39;)
+const map = require(&#39;crocks/pointfree/map&#39;)
+const safe = require(&#39;crocks/Maybe/safe&#39;)
+
+// add10 :: Number -&gt; Number
+const add10 =
+  x =&gt; x + 10
+
+// toUpper :: String -&gt; String
+const toUpper = x =&gt;
+  x.toUpperCase()
+
+// safeObj :: a -&gt; Maybe Object
+const safeObj =
+  safe(isObject)
+
+// shout :: a -&gt; Maybe String
+const shout = x =&gt;
+  safe(isString, x)
+    .map(toUpper)
+
+// setProcessed :: a -&gt; Maybe Object
+const setProcessed = compose(
+  map(assign({ processed: true })),
+  safeObj
+)
+
+Just(0)
+  .map(add10)
+//=&gt; Just 10
+
+Nothing()
+  .map(add10)
+//=&gt; Nothing
+
+shout(&#39;good news&#39;)
+//=&gt; Just &quot;GOOD NEWS&quot;
+
+shout(33)
+//=&gt; Nothing
+
+setProcessed({ cheese: true })
+//=&gt; Just { cheese: true, processed: true }
+
+setProcessed(null)
+//=&gt; Nothing</code></pre></div><h4><a id="alt"href="#alt">alt</a></h4><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">Maybe a ~&gt; Maybe a -&gt; Maybe a</code></pre></div><p>Providing a means for a fallback or alternative value, <code>alt</code> combines (2)<code>Maybe</code> instances and will return the first <code>Just</code> it encounters or <code>Nothing</code>if it does not have a <code>Just</code>. This can be used in conjunction with<a href="#zero"><code>zero</code></a> to return the first valid value in contained in a <code>Foldable</code>structure.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">const { zero, Nothing, Just } = require(&#39;crocks/Maybe&#39;)
+
+const alt = require(&#39;crocks/pointfree/alt&#39;)
+const isArray = require(&#39;crocks/predicates/isArray&#39;)
+const flip = require(&#39;crocks/combinators/flip&#39;)
+const mapReduce = require(&#39;crocks/helpers/mapReduce&#39;)
+const safe = require(&#39;crocks/Maybe/safe&#39;)
+
+// firstArray :: Foldable f =&gt; f * -&gt; Maybe Array
+const firstArray =
+  mapReduce(safe(isArray), flip(alt), zero())
+
+Nothing()
+  .alt(Just(33))
+//=&gt; Just 33
+
+Just(42)
+  .alt(Nothing())
+  .alt(Just(99))
+//=&gt; Just 42
+
+firstArray([ &#39;Not Array&#39;, null, [ 2, 3, 4 ], [ 1, 2 ] ])
+//=&gt; Just [ 2, 3, 4 ]
+
+firstArray([ null, 5, &#39;76&#39; ])
+//=&gt; Nothing</code></pre></div><h4><a id="ap"href="#ap">ap</a></h4><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">Maybe (a -&gt; b) ~&gt; Maybe a -&gt; Maybe b</code></pre></div><p>Short for apply, <code>ap</code> is used to apply a <code>Maybe</code> instance containing a value to another <code>Maybe</code> instance that contains a function, resulting in new <code>Maybe</code>instance with the result. <code>ap</code> requires that it is called on an <code>instance</code> that is either a <code>Nothing</code> or a <code>Just</code> that wraps a curried polyadic function.</p><p>When either <code>Maybe</code> is a <code>Nothing</code>, <code>ap</code> will return a <code>Nothing</code>. This can be used to safely combine multiple values under a given combination function. If any of the inputs results in a <code>Nothing</code> than they will never be applied to the function and not provide exceptions or unexpected results.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">const Maybe = require(&#39;crocks/Maybe&#39;)
+const { Nothing, Just } =  Maybe
+
+const compose = require(&#39;crocks/helpers/compose&#39;)
+const chain = require(&#39;crocks/pointfree/chain&#39;)
+const curry = require(&#39;crocks/helpers/curry&#39;)
+const fanout = require(&#39;crocks/helpers/fanout&#39;)
+const isString = require(&#39;crocks/predicates/isString&#39;)
+const liftA2 = require(&#39;crocks/helpers/liftA2&#39;)
+const merge = require(&#39;crocks/Pair/merge&#39;)
+const prop = require(&#39;crocks/Maybe/prop&#39;)
+const safe = require(&#39;crocks/Maybe/safe&#39;)
+
+// add :: Number -&gt; Number -&gt; Number
+const add =
+  x =&gt; y =&gt; x + y
+
+// joinWith :: String -&gt; String -&gt; String -&gt; String
+const joinWith = curry(
+  (del, x, y) =&gt; x + del + y
+)
+
+// stringProp :: String -&gt; a -&gt; Maybe String
+const stringProp = key =&gt; compose(
+  chain(safe(isString)),
+  prop(key)
+)
+
+// getNames :: a -&gt; Pair (Maybe String) (Maybe String)
+const getNames = fanout(
+  stringProp(&#39;first&#39;),
+  stringProp(&#39;last&#39;)
+)
+
+// joinNames :: Pair (Maybe String) (Maybe String) -&gt; Maybe String
+const joinNames =
+  merge(liftA2(joinWith(&#39; &#39;)))
+
+// fullName :: a -&gt; Maybe String
+const fullName =
+  compose(joinNames, getNames)
+
+Maybe.of(add)
+  .ap(Just(5))
+  .ap(Just(27))
+//=&gt; Just 32
+
+Just(&#39;hello&#39;)
+  .map(joinWith(&#39; -- &#39;))
+  .ap(Just(&#39;friend&#39;))
+//=&gt; Just &quot;hello -- friend&quot;
+
+Maybe.of(add)
+  .ap(Just(29))
+  .ap(Nothing())
+//=&gt; Nothing
+
+fullName({ first: &#39;Joey&#39;, last: &#39;Fella&#39; })
+//=&gt; Just &quot;Joey Fella&quot;
+
+fullName(null)
+//=&gt; Nothing
+
+fullName({ first: &#39;Lizzy&#39; })
+//=&gt; Nothing</code></pre></div><h4><a id="sequence"href="#sequence">sequence</a></h4><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">Applicative f =&gt; Maybe (f a) ~&gt; (a -&gt; f a) -&gt; f (Maybe a)</code></pre></div><p>When an instance of <code>Maybe</code> wraps a possible <code>Applicative</code> instance, <code>sequence</code>can be used to &quot;swap&quot; the &quot;type sequence&quot;. <code>sequence</code> requires that the <code>of</code>, or <code>Applicative</code> function of the wrapped <code>Applicative</code> instance is provided for the case of when the <code>Maybe</code> instance is a <code>Nothing</code>. <code>sequence</code> can be derived from <a href="#traverse"><code>traverse</code></a> by passing it an <code>identity</code> function (<code>x =&gt; x</code>).</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">const { Nothing, Just } = require(&#39;crocks/Maybe&#39;)
+
+const Identity = require(&#39;crocks/Identity&#39;)
+const sequence = require(&#39;crocks/pointfree/sequence&#39;)
+
+
+// seqId :: Maybe Identity a -&gt; Identity Maybe a
+const seqId =
+  sequence(Identity.of)
+
+seqId(Just(Identity(34)))
+//=&gt; Identity Just 34
+
+seqId(Nothing())
+//=&gt; Identity Nothing</code></pre></div><h4><a id="traverse"href="#traverse">traverse</a></h4><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">Applicative f =&gt; Maybe a ~&gt; ((a -&gt; f a), (a -&gt; f b)) -&gt; f Maybe b</code></pre></div><p>Used to apply the &quot;effect&quot; of an <code>Applicative</code> to a value inside of a <code>Maybe</code>,<code>traverse</code>, combines both the &quot;effects&quot; of the <code>Applicative</code> and the <code>Maybe</code> by returning a new instance of the <code>Applicative</code> wrapping the result of the<code>Applicative</code>s &quot;effect&quot; on the value in the <code>Maybe</code>.</p><p><code>traverse</code> requires the <code>of</code> function of the target <code>Applicative</code> and a function that is used to apply the <code>Applicative</code> to the value inside of the <code>Maybe</code>. Both functions must return an instance of the <code>Applicative</code>.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">const IO = require(&#39;crocks/IO&#39;)
+
+const compose = require(&#39;crocks/helpers/compose&#39;)
+const isNumber = require(&#39;crocks/predicates/isNumber&#39;)
+const safe = require(&#39;crocks/Maybe/safe&#39;)
+const traverse = require(&#39;crocks/pointfree/traverse&#39;)
+
+let someGlobal = 10
+
+// addToGlobal :: Number -&gt; IO Number
+const addToGlobal = x =&gt; IO(function() {
+  someGlobal = someGlobal + x
+  return someGlobal
+})
+
+// safeAddToGlobal :: a -&gt; IO (Maybe Number)
+const safeAddToGlobal = compose(
+  traverse(IO.of, addToGlobal),
+  safe(isNumber)
+)
+
+safeAddToGlobal(32)
+  .run()
+//=&gt; Just 42
+//someGlobal =&gt; 42
+
+safeAddToGlobal(undefined)
+  .run()
+//=&gt; Nothing
+//someGlobal =&gt; 42</code></pre></div><h4><a id="chain"href="#chain">chain</a></h4><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">Maybe a ~&gt; (a -&gt; Maybe b) -&gt; Maybe b</code></pre></div><p>Combining a sequential series of transformations that capture disjunction can be accomplished with <code>chain</code>. <code>chain</code> expects a unary, <code>Maybe</code> returning function as its argument. When invoked on a <code>Nothing</code>, <code>chain</code> will not run the function, but will instead return another <code>Nothing</code>. When called on a <code>Just</code> however, the inner value will be passed to provided function, returning the result as the new instance.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">const { Nothing, Just } = require(&#39;crocks/Maybe&#39;)
+
+const chain = require(&#39;crocks/pointfree/chain&#39;)
+const compose = require(&#39;crocks/helpers/compose&#39;)
+const isNumber = require(&#39;crocks/predicates/isNumber&#39;)
+const isString = require(&#39;crocks/predicates/isString&#39;)
+const prop = require(&#39;crocks/Maybe/prop&#39;)
+const safe = require(&#39;crocks/Maybe/safe&#39;)
+const safeLift = require(&#39;crocks/Maybe/safeLift&#39;)
+
+// double :: Number -&gt; Number
+const double =
+  x =&gt; x + x
+
+// chainNumber :: Maybe a -&gt; Maybe Number
+const chainNumber =
+  chain(safe(isNumber))
+
+// doubleValue :: a -&gt; Maybe Number
+const doubleValue = compose(
+  chain(safeLift(isNumber, double)),
+  prop(&#39;value&#39;)
+)
+
+chainNumber(Just(45))
+//=&gt; Just 45
+
+chainNumber(Nothing())
+//=&gt; Nothing
+
+Just(45)
+  .chain(safe(isString))
+//=&gt; Nothing
+
+doubleValue(undefined)
+//=&gt; Nothing
+
+doubleValue({ value: &#39;45&#39; })
+//=&gt; Nothing
+
+doubleValue({ number: 45 })
+//=&gt; Nothing
+
+doubleValue({ value: 45 })
+//=&gt; Just 90</code></pre></div><h4><a id="coalesce"href="#coalesce">coalesce</a></h4><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">Maybe a ~&gt; ((() -&gt; b), (a -&gt; b))) -&gt; Maybe b</code></pre></div><p>When one would like to <a href="#option"><code>option</code></a> a <code>Maybe</code> but would like to remain within a <code>Maybe</code> type, <code>coalesce</code> can be used. <code>coalesce</code> expects (2) functions for it's inputs.</p><p>The first function is used when invoked on a <code>Nothing</code> and will return a <code>Just</code>instance wrapping the result of the function. The second function is used when<code>coalesce</code> is invoked on a <code>Just</code> and is used to map the original value, returning a new <code>Just</code> instance wrapping the result of the second function.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">const { Nothing, Just } = require(&#39;crocks/Maybe&#39;)
+
+const compose = require(&#39;crocks/helpers/compose&#39;)
+const composeK = require(&#39;crocks/helpers/composeK&#39;)
+const coalesce = require(&#39;crocks/pointfree/coalesce&#39;)
+const constant = require(&#39;crocks/combinators/constant&#39;)
+const identity = require(&#39;crocks/combinators/identity&#39;)
+const isString = require(&#39;crocks/predicates/isString&#39;)
+const map = require(&#39;crocks/pointfree/map&#39;)
+const objOf = require(&#39;crocks/helpers/objOf&#39;)
+const prop = require(&#39;crocks/Maybe/prop&#39;)
+const safe = require(&#39;crocks/Maybe/safe&#39;)
+
+// shout :: String -&gt; String
+const shout =
+  x =&gt; x.toUpperCase()
+
+// defaultString :: Maybe String -&gt; Maybe String
+const defaultString =
+  coalesce(constant(&#39;&#39;), identity)
+
+// shoutOut :: String -&gt; Object
+const shoutOut = compose(
+  objOf(&#39;shout&#39;),
+  shout
+)
+
+// stringValue :: a -&gt; Maybe String
+const stringValue = composeK(
+  safe(isString),
+  prop(&#39;value&#39;)
+)
+
+// shoutValue :: a -&gt; Maybe Object
+const shoutValue = compose(
+  map(shoutOut),
+  defaultString,
+  stringValue
+)
+
+Just(76)
+  .coalesce(constant(0), identity)
+//=&gt; Just 76
+
+Nothing()
+  .coalesce(constant(0), identity)
+//=&gt; Just 0
+
+shoutValue({ value: &#39;hello&#39; })
+//=&gt; Just { shout: &#39;HELLO&#39; }
+
+shoutValue(undefined)
+//=&gt; Just { shout: &#39;&#39; }
+
+shoutValue({ value: 49 })
+//=&gt; Just { shout: &#39;&#39; }
+
+shoutValue({})
+//=&gt; Just { shout: &#39;&#39; }</code></pre></div><h4><a id="option"href="#option">option</a></h4><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">Maybe a ~&gt; a -&gt; a</code></pre></div><p>Used as the primary way to &quot;fold&quot; a value out of a <code>Maybe</code>, <code>option</code> expects a default value. The default value provided will be returned when <code>option</code> is invoked on a <code>Nothing</code> instance. When invoked on a <code>Just</code>, the underlying value is returned, discarding the provided default value. <code>option</code> is typically ran at the &quot;edge&quot; of a flow, to provide default values for complicated representations of disjunction.</p><p>When the need to immediately map the result of optioning a <code>Maybe</code> arises, then <a href="#either"><code>either</code></a> may be employed to combine it in one operation.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">const { Nothing, Just } = require(&#39;crocks/Maybe&#39;)
+
+Nothing()
+  .option(0)
+//=&gt; 0
+
+Just(99)
+  .option(0)
+//=&gt; 99</code></pre></div><h4><a id="either"href="#either">either</a></h4><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">Maybe a ~&gt; ((() -&gt; b), (a -&gt; b)) -&gt; b</code></pre></div><p>Used to provide a means to map a given <code>Maybe</code> instance while optioning out the wrapped value. <a href="#option"><code>option</code></a> can handle most cases for optioning <code>Maybe</code>, but does not provide a means to map a given value at the time of optioning. <code>either</code> expects (2) functions as its arguments. The first is a pointed function that will be used when invoked on a <code>Nothing</code>. While the second will map the value wrapped in a given <code>Just</code> and return the result of that mapping.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">const { Nothing, Just } = require(&#39;crocks/Maybe&#39;)
+
+const either = require(&#39;crocks/pointfree/either&#39;)
+
+// wrap :: a -&gt; [ a ]
+const wrap =
+  x =&gt; [ x ]
+
+// empty :: () -&gt; [ a ]
+const empty =
+  () =&gt; []
+
+// toArray :: Maybe a -&gt; [ a ]
+const toArray =
+  either(empty, wrap)
+
+toArray(Just(56))
+//=&gt; [ 56 ]
+
+toArray(Nothing())
+//=&gt; []</code></pre></div></article><article id="topic-helpers"><h2><a id="helper-functions"href="#helper-functions">Helper Functions</a></h2><h4><a id="prop"href="#prop">prop</a></h4><p><code>crocks/Maybe/prop</code></p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">prop :: (String | Integer) -&gt; a -&gt; Maybe b</code></pre></div><p>If you want some safety around pulling a value out of an <code>Object</code> or <code>Array</code>with a single key or index, you can always reach for <code>prop</code>. Well, as long as you are working with non-nested data that is. Just tell <code>prop</code> either the key or index you are interested in, and you will get back a function that will take anything and return a <code>Just</code> with the wrapped value if the key/index exists. If the key/index does not exist however, you will get back a <code>Nothing</code>.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">const composeK = require(&#39;crocks/helpers/composeK&#39;)
+const prop = require(&#39;crocks/Maybe/prop&#39;)
+
+// getValue :: a -&gt; Maybe b
+const getValue =
+  prop(&#39;value&#39;)
+
+// getHead :: a -&gt; Maybe b
+const getHead =
+  prop(0)
+
+// getFirstValue :: a -&gt; Maybe b
+const getFirstValue = composeK(
+  getHead,
+  getValue
+)
+
+getValue({ some: false })
+//=&gt; Nothing
+
+getValue(undefined)
+//=&gt; Nothing
+
+getValue({ value: &#39;correct&#39; })
+//=&gt; Just &quot;correct&quot;
+
+getFirstValue({ value: [] })
+//=&gt; Nothing
+
+getFirstValue({ value: 84 })
+//=&gt; Nothing
+
+getFirstValue(null)
+//=&gt; Nothing
+
+getFirstValue({ value: [ &#39;a&#39;, &#39;b&#39; ] })
+//=&gt; Just &quot;a&quot;</code></pre></div><h4><a id="proppath"href="#proppath">propPath</a></h4><p><code>crocks/Maybe/propPath</code></p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">propPath :: Foldable f =&gt; f (String | Integer) -&gt; a -&gt; Maybe b</code></pre></div><p>While <a href="#prop"><code>prop</code></a> is good for simple, single-level structures, there may come a time when you have to work with nested POJOs or Arrays. When you run into this situation, just pull in <code>propPath</code> and pass it a left-to-right traversal path of keys, indices or a combination of both (gross...but possible). This will kick you back a function that behaves just like <a href="#prop"><code>prop</code></a>. You pass it some data, and it will attempt to resolve your provided path. If the path is valid, it will return the value residing there (<code>null</code> included!) in a <code>Just</code>. But if at any point that path &quot;breaks&quot; it will give you back a <code>Nothing</code>.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">const composeK = require(&#39;crocks/helpers/composeK&#39;)
+const isString = require(&#39;crocks/predicates/isString&#39;)
+const propPath = require(&#39;crocks/Maybe/propPath&#39;)
+const safe = require(&#39;crocks/Maybe/safe&#39;)
+
+// getFirstValue :: a -&gt; Maybe b
+const getFirstValue =
+  propPath([ &#39;value&#39;, 0 ])
+
+// getStringFirst :: a -&gt; Maybe String
+const getStringFirst = composeK(
+  safe(isString),
+  getFirstValue
+)
+
+getFirstValue({ value: [] })
+//=&gt; Nothing
+
+getFirstValue({ value: 84 })
+//=&gt; Nothing
+
+getFirstValue(undefined)
+//=&gt; Nothing
+
+getFirstValue({ value: [ &#39;a&#39;, &#39;b&#39; ] })
+//=&gt; Just &quot;a&quot;
+
+getStringFirst(false)
+//=&gt; Nothing
+
+getStringFirst({ towel: true })
+//=&gt; Nothing
+
+getStringFirst({ value: [ 0, 54 ] })
+//=&gt; Nothing
+
+getStringFirst({ value: [ &#39;nice&#39;, &#39;jobb&#39; ] })
+//=&gt; Just &quot;nice&quot;</code></pre></div><h4><a id="safe"href="#safe">safe</a></h4><p><code>crocks/Maybe/safe</code></p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">safe :: ((b -&gt; Boolean) | Pred) -&gt; b -&gt; Maybe a</code></pre></div><p>When using a <code>Maybe</code>, it is a common practice to lift into a <code>Just</code> or a<code>Nothing</code> depending on a condition on the value to be lifted.  It is so common that it warrants a function, and that function is called <code>safe</code>. Provide a predicate (a function that returns a Boolean) and a value to be lifted. The value will be evaluated against the predicate, and will lift it into a <code>Just</code> if true and a <code>Nothing</code> if false.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">const Pred = require(&#39;crocks/Pred&#39;)
+
+const isArray = require(&#39;crocks/predicates/isArray&#39;)
+const safe = require(&#39;crocks/Maybe/safe&#39;)
+
+// length :: Array -&gt; Number
+const length =
+  x =&gt; x.length
+
+// lte2 :: Number -&gt; Boolean
+const lte2 =
+  x =&gt; x &lt;= 2
+
+// isSmall :: Pred a
+const isSmall =
+  Pred(isArray)
+    .concat(Pred(lte2).contramap(length))
+
+safe(lte2, 87)
+//=&gt; Nothing
+
+safe(lte2, 1)
+//=&gt; Just 1
+
+safe(isArray, {})
+//=&gt; Nothing
+
+safe(isArray, [ 1, 2, 3 ])
+//=&gt; Just [ 1, 2, 3 ]
+
+safe(isSmall, [ 1, 2, 3 ])
+//=&gt; Nothing
+
+safe(isSmall, { ar: [ 1, 2, 3 ] })
+//=&gt; Nothing
+
+safe(isSmall, null)
+//=&gt; Nothing
+
+safe(isSmall, [ 1, 2 ])
+//=&gt; Just [ 1, 2 ]</code></pre></div><h4><a id="safelift"href="#safelift">safeLift</a></h4><p><code>crocks/Maybe/safeLift</code></p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">safeLift :: ((c -&gt; Boolean) | Pred) -&gt; (a -&gt; b) -&gt; c -&gt; Maybe b</code></pre></div><p>While <a href="#safe"><code>safe</code></a> is used to lift a value into a <code>Maybe</code>, you can reach for<code>safeLift</code> when you want to run a function in the safety of the <code>Maybe</code> context. Just like <a href="#safe"><code>safe</code></a>, you pass it either a <code>Pred</code> or a predicate function to determine if you get a <code>Just</code> or a <code>Nothing</code>, but then instead of a value, you pass it a unary function. <code>safeLift</code> will then give you back a new function that will first lift its argument into a <code>Maybe</code> and then maps your original function over the result.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">const Pred = require(&#39;crocks/Pred&#39;)
+
+const isNumber = require(&#39;crocks/predicates/isNumber&#39;)
+const safeLift = require(&#39;crocks/Maybe/safeLift&#39;)
+
+// doubleOf :: Number -&gt; Number
+const doubleOf =
+  x =&gt; x * 2
+
+// halfOf :: Number -&gt; Number
+const halfOf =
+  x =&gt; x / 2
+
+// gt100 :: Number -&gt; Boolean
+const gt100 =
+  x =&gt; x &gt; 100
+
+// safeDouble :: a -&gt; Maybe Number
+const safeDouble =
+  safeLift(isNumber, doubleOf)
+
+// isLargeNumber :: Pred a
+const isLargeNumber =
+  Pred(isNumber)
+    .concat(Pred(gt100))
+
+// halfLarge :: a -&gt; Maybe Number
+const halfLarge =
+  safeLift(isLargeNumber, halfOf)
+
+safeDouble(null)
+// Nothing
+
+safeDouble(&#39;33&#39;)
+// Nothing
+
+safeDouble(33)
+// Just 66
+
+halfLarge(&#39;1000&#39;)
+// Nothing
+
+halfLarge(100)
+// Nothing
+
+halfLarge(false)
+// Nothing
+
+halfLarge(786)
+// Just 383
+
+halfLarge(100)
+// Nothing
+
+halfLarge(false)
+// Nothing</code></pre></div></article><article id="topic-transformation"><h2><a id="transformation-functions"href="#transformation-functions">Transformation Functions</a></h2><h4><a id="eithertomaybe"href="#eithertomaybe">eitherToMaybe</a></h4><p><code>crocks/Maybe/eitherToMaybe</code></p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">eitherToMaybe :: Either b a -&gt; Maybe a
+eitherToMaybe :: (a -&gt; Either c b) -&gt; a -&gt; Maybe b</code></pre></div><p>Used to transform a given <code>Either</code> instance to a <code>Maybe</code>instance, <code>eitherToMaybe</code> will turn a <code>Right</code> instance into a <code>Just</code> wrapping the original value contained in the <code>Right</code>. All <code>Left</code> instances will map to a <code>Nothing</code>, mapping the originally contained value to a <code>Unit</code>. Values on the<code>Left</code> will be lost and as such this transformation is considered lossy in that regard.</p><p>Like all <code>crocks</code> transformation functions, <code>eitherToMaybe</code> has (2) possible signatures and will behave differently when passed either an <code>Either</code> instance or a function that returns an instance of <code>Either</code>. When passed the instance, a transformed <code>Maybe</code> is returned. When passed an <code>Either</code> returning function, a function will be returned that takes a given value and returns a <code>Maybe</code>.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">const { Nothing, Just } = require(&#39;crocks/Maybe&#39;)
+const { Left, Right } = require(&#39;crocks/Either&#39;)
+const eitherToMaybe = require(&#39;crocks/Maybe/eitherToMaybe&#39;)
+
+const constant = require(&#39;crocks/combinators/constant&#39;)
+const ifElse = require(&#39;crocks/logic/ifElse&#39;)
+const isNumber = require(&#39;crocks/predicates/isNumber&#39;)
+
+// someNumber :: a -&gt; Either String Number
+const someNumber = ifElse(
+  isNumber,
+  Right,
+  constant(Left(&#39;Nope&#39;))
+)
+
+eitherToMaybe(Left(56))
+//=&gt; Nothing
+
+eitherToMaybe(Right(&#39;correct&#39;))
+//=&gt; Just &quot;correct&quot;
+
+Just(&#39;ten&#39;)
+  .chain(eitherToMaybe(someNumber))
+//=&gt; Nothing
+
+Nothing()
+  .chain(eitherToMaybe(someNumber))
+//=&gt; Nothing
+
+Just(99)
+  .chain(eitherToMaybe(someNumber))
+//=&gt; Just 99</code></pre></div><h4><a id="firsttomaybe"href="#firsttomaybe">firstToMaybe</a></h4><p><code>crocks/Maybe/firstToMaybe</code></p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">firstToMaybe :: First a -&gt; Maybe a
+firstToMaybe :: (a -&gt; First b) -&gt; a -&gt; Maybe b</code></pre></div><p>Used to transform a given <code>First</code> instance to a <code>Maybe</code>instance, <code>firstToMaybe</code> will turn a non-empty instance into a <code>Just</code> wrapping the original value contained within the <code>First</code>. All empty instances will map to a <code>Nothing</code>.</p><p>Like all <code>crocks</code> transformation functions, <code>firstToMaybe</code> has (2) possible signatures and will behave differently when passed either a <code>First</code> instance or a function that returns an instance of <code>First</code>. When passed the instance, a transformed <code>Maybe</code> is returned. When passed a <code>First</code> returning function, a function will be returned that takes a given value and returns a <code>Maybe</code>.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">const { Nothing, Just } = require(&#39;crocks/Maybe&#39;)
+const First = require(&#39;crocks/First&#39;)
+const firstToMaybe = require(&#39;crocks/Maybe/firstToMaybe&#39;)
+
+const mconcat = require(&#39;crocks/helpers/mconcat&#39;)
+
+// firstValue :: [ a ] -&gt; First a
+const firstValue =
+  mconcat(First)
+
+firstToMaybe(First.empty())
+//=&gt; Nothing
+
+firstToMaybe(First(&#39;winner&#39;))
+//=&gt; Just &quot;Winner&quot;
+
+Nothing()
+  .chain(firstToMaybe(firstValue))
+//=&gt; Nothing
+
+Just([])
+  .chain(firstToMaybe(firstValue))
+//=&gt; Nothing
+
+Just([ &#39;first&#39;, &#39;second&#39;, &#39;third&#39; ])
+  .chain(firstToMaybe(firstValue))
+//=&gt; Just &quot;first&quot;</code></pre></div><h4><a id="lasttomaybe"href="#lasttomaybe">lastToMaybe</a></h4><p><code>crocks/Maybe/lastToMaybe</code></p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">lastToMaybe :: Last a -&gt; Maybe a
+lastToMaybe :: (a -&gt; Last b) -&gt; a -&gt; Maybe b</code></pre></div><p>Used to transform a given <code>Last</code> instance to a <code>Maybe</code> instance, <code>lastToMaybe</code>will turn a non-empty instance into a <code>Just</code> wrapping the original value contained within the <code>Last</code>. All empty instances will map to a <code>Nothing</code>.</p><p>Like all <code>crocks</code> transformation functions, <code>lastToMaybe</code> has (2) possible signatures and will behave differently when passed either a <code>Last</code> instance or a function that returns an instance of <code>Last</code>. When passed the instance, a transformed <code>Maybe</code> is returned. When passed a <code>Last</code> returning function, a function will be returned that takes a given value and returns a <code>Maybe</code>.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">const { Nothing, Just } = require(&#39;crocks/Maybe&#39;)
+const Last = require(&#39;crocks/Last&#39;)
+const lastToMaybe = require(&#39;crocks/Maybe/lastToMaybe&#39;)
+
+const mconcat = require(&#39;crocks/helpers/mconcat&#39;)
+
+// lastValue :: [ a ] -&gt; Last a
+const lastValue =
+  mconcat(Last)
+
+lastToMaybe(Last.empty())
+//=&gt; Nothing
+
+lastToMaybe(Last(&#39;the end&#39;))
+//=&gt; Just &quot;the end&quot;
+
+Nothing()
+  .chain(lastToMaybe(lastValue))
+//=&gt; Nothing
+
+Just([])
+  .chain(lastToMaybe(lastValue))
+//=&gt; Nothing
+
+Just([ &#39;first&#39;, &#39;second&#39;, &#39;third&#39; ])
+  .chain(lastToMaybe(lastValue))
+//=&gt; Just &quot;third&quot;</code></pre></div><h4><a id="resulttomaybe"href="#resulttomaybe">resultToMaybe</a></h4><p><code>crocks/Maybe/resultToMaybe</code></p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">resultToMaybe :: Result e a -&gt; Maybe a
+resultToMaybe :: (a -&gt; Result e b) -&gt; a -&gt; Maybe b</code></pre></div><p>Used to transform a given <code>Result</code> instance to a <code>Maybe</code>instance, <code>resultToMaybe</code> will turn an <code>Ok</code> instance into a <code>Just</code> wrapping the original value contained in the <code>Ok</code>. All <code>Err</code> instances will map to a <code>Nothing</code>, mapping the originally contained value to a <code>Unit</code>. Values on the<code>Err</code> will be lost and as such this transformation is considered lossy in that regard.</p><p>Like all <code>crocks</code> transformation functions, <code>resultToMaybe</code> has (2) possible signatures and will behave differently when passed either an <code>Result</code> instance or a function that returns an instance of <code>Result</code>. When passed the instance, a transformed <code>Maybe</code> is returned. When passed a <code>Result</code> returning function, a function will be returned that takes a given value and returns a <code>Maybe</code>.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">const { Nothing, Just } = require(&#39;crocks/Maybe&#39;)
+const { Err, Ok } = require(&#39;crocks/Result&#39;)
+const resultToMaybe = require(&#39;crocks/Maybe/resultToMaybe&#39;)
+
+const identity = require(&#39;crocks/combinators/identity&#39;)
+const tryCatch = require(&#39;crocks/Result/tryCatch&#39;)
+
+function datErrTho() {
+  throw new Error(&#39;something amiss&#39;)
+}
+
+resultToMaybe(Err(&#39;this is bad&#39;))
+//=&gt; Nothing
+
+resultToMaybe(Ok(&#39;this is great&#39;))
+//=&gt; Just &quot;this is great&quot;
+
+Nothing()
+  .chain(resultToMaybe(identity))
+//=&gt; Nothing
+
+Just(&#39;so good&#39;)
+  .chain(resultToMaybe(tryCatch(datErrTho)))
+//=&gt; Nothing
+
+Just(&#39;so good&#39;)
+  .chain(resultToMaybe(Ok))
+//=&gt; Just &quot;so good&quot;</code></pre></div></article><input type="hidden" value="Maybe"><input type="hidden" value="Crocks"></div><div class="contribute"><div class="contribute-img"><span class="icon-16-github"></span></div><div class="contribute-text"><p>Contribute on Github! <a href="https://github.com/evilsoft/crocks/tree/master/docs/src/pages/docs/crocks/Maybe.md" class="contribute-link" target="_blank">Edit this section</a>.</p></div></div></div><nav class="col-xs-16 col-md-offset-2 col-md-5"><div class="docs-nav-container"><div class="affix-top docs-nav"><div ref="readingContainer"></div></div></div></nav></div></div></div></div></main></div></div><script src="/crocks/js/bundles/VYVsc.js"></script><script>var data = JSON.parse('{\x22pageLocation\x22:\x22index.children.docs.children.crocks.children.Maybe\x22,\x22site\x22:{\x22title\x22:\x22Crocks\x22,\x22githubRepo\x22:\x22evilsoft\/crocks\x22,\x22googleAnalytics\x22:\x22UA-37033501-5\x22,\x22icon\x22:\x22icon-16-loop\x22,\x22index\x22:{\x22title\x22:\x22Home\x22,\x22description\x22:\x22A collection of well known Algebraic Data Types for your utter enjoyment.\x22,\x22srcFilePath\x22:\x22src\/pages\/index.soy\x22,\x22id\x22:\x22pages\x22,\x22location\x22:\x22\/.\/\x22,\x22url\x22:\x22\/crocks\/.\/\x22,\x22children\x22:{\x22docs\x22:{\x22children\x22:{\x22getting-started\x22:{\x22title\x22:\x22Getting Started\x22,\x22description\x22:\x22Getting started with a Crocks.\x22,\x22icon\x22:\x22arrow-right-rod\x22,\x22layout\x22:\x22guide\x22,\x22weight\x22:1,\x22srcFilePath\x22:\x22src\/pages\/docs\/getting-started.md\x22,\x22id\x22:\x22getting-started\x22,\x22location\x22:\x22\/docs\/getting-started.html\x22,\x22url\x22:\x22\/crocks\/docs\/getting-started.html\x22},\x22search\x22:{\x22title\x22:\x22Search\x22,\x22description\x22:\x22Find what you\x27re looking for in the documentation.\x22,\x22hidden\x22:true,\x22srcFilePath\x22:\x22src\/pages\/docs\/search.soy\x22,\x22id\x22:\x22search\x22,\x22location\x22:\x22\/docs\/search.html\x22,\x22url\x22:\x22\/crocks\/docs\/search.html\x22},\x22crocks\x22:{\x22children\x22:{\x22Arrow\x22:{\x22title\x22:\x22Arrow\x22,\x22description\x22:\x22Arrow Crock\x22,\x22layout\x22:\x22guide\x22,\x22weight\x22:10,\x22srcFilePath\x22:\x22src\/pages\/docs\/crocks\/Arrow.md\x22,\x22id\x22:\x22Arrow\x22,\x22location\x22:\x22\/docs\/crocks\/Arrow.html\x22,\x22url\x22:\x22\/crocks\/docs\/crocks\/Arrow.html\x22},\x22Equiv\x22:{\x22title\x22:\x22Equiv\x22,\x22description\x22:\x22Equiv Crock\x22,\x22layout\x22:\x22guide\x22,\x22weight\x22:50,\x22srcFilePath\x22:\x22src\/pages\/docs\/crocks\/Equiv.md\x22,\x22id\x22:\x22Equiv\x22,\x22location\x22:\x22\/docs\/crocks\/Equiv.html\x22,\x22url\x22:\x22\/crocks\/docs\/crocks\/Equiv.html\x22},\x22Maybe\x22:{\x22title\x22:\x22Maybe\x22,\x22description\x22:\x22Maybe Crock\x22,\x22layout\x22:\x22guide\x22,\x22weight\x22:90,\x22srcFilePath\x22:\x22src\/pages\/docs\/crocks\/Maybe.md\x22,\x22id\x22:\x22Maybe\x22,\x22location\x22:\x22\/docs\/crocks\/Maybe.html\x22,\x22url\x22:\x22\/crocks\/docs\/crocks\/Maybe.html\x22,\x22active\x22:true},\x22Pred\x22:{\x22title\x22:\x22Pred\x22,\x22description\x22:\x22Pred Crock\x22,\x22layout\x22:\x22guide\x22,\x22weight\x22:100,\x22srcFilePath\x22:\x22src\/pages\/docs\/crocks\/Pred.md\x22,\x22id\x22:\x22Pred\x22,\x22location\x22:\x22\/docs\/crocks\/Pred.html\x22,\x22url\x22:\x22\/crocks\/docs\/crocks\/Pred.html\x22},\x22Reader\x22:{\x22title\x22:\x22Reader\x22,\x22description\x22:\x22Reader Crock\x22,\x22layout\x22:\x22guide\x22,\x22weight\x22:110,\x22srcFilePath\x22:\x22src\/pages\/docs\/crocks\/Reader.md\x22,\x22id\x22:\x22Reader\x22,\x22location\x22:\x22\/docs\/crocks\/Reader.html\x22,\x22url\x22:\x22\/crocks\/docs\/crocks\/Reader.html\x22},\x22ReaderT\x22:{\x22title\x22:\x22ReaderT\x22,\x22description\x22:\x22Reader Monad Transformer Crock\x22,\x22layout\x22:\x22guide\x22,\x22weight\x22:120,\x22srcFilePath\x22:\x22src\/pages\/docs\/crocks\/ReaderT.md\x22,\x22id\x22:\x22ReaderT\x22,\x22location\x22:\x22\/docs\/crocks\/ReaderT.html\x22,\x22url\x22:\x22\/crocks\/docs\/crocks\/ReaderT.html\x22},\x22State\x22:{\x22title\x22:\x22State\x22,\x22description\x22:\x22State Crock\x22,\x22layout\x22:\x22guide\x22,\x22weight\x22:140,\x22srcFilePath\x22:\x22src\/pages\/docs\/crocks\/State.md\x22,\x22id\x22:\x22State\x22,\x22location\x22:\x22\/docs\/crocks\/State.html\x22,\x22url\x22:\x22\/crocks\/docs\/crocks\/State.html\x22}},\x22title\x22:\x22Crocks\x22,\x22description\x22:\x22Crocks API\x22,\x22layout\x22:\x22notopic\x22,\x22icon\x22:\x22code-file\x22,\x22weight\x22:2,\x22srcFilePath\x22:\x22src\/pages\/docs\/crocks\/index.md\x22,\x22id\x22:\x22crocks\x22,\x22location\x22:\x22\/docs\/crocks\/\x22,\x22url\x22:\x22\/crocks\/docs\/crocks\/\x22,\x22childIds\x22:[\x22Arrow\x22,\x22Equiv\x22,\x22Maybe\x22,\x22Pred\x22,\x22Reader\x22,\x22ReaderT\x22,\x22State\x22],\x22active\x22:true},\x22functions\x22:{\x22children\x22:{\x22combinators\x22:{\x22description\x22:\x22Combinators API\x22,\x22layout\x22:\x22notopic\x22,\x22title\x22:\x22Combinators\x22,\x22weight\x22:1,\x22srcFilePath\x22:\x22src\/pages\/docs\/functions\/combinators.md\x22,\x22id\x22:\x22combinators\x22,\x22location\x22:\x22\/docs\/functions\/combinators.html\x22,\x22url\x22:\x22\/crocks\/docs\/functions\/combinators.html\x22},\x22helpers\x22:{\x22title\x22:\x22Helpers\x22,\x22description\x22:\x22Helper functions\x22,\x22layout\x22:\x22notopic\x22,\x22weight\x22:2,\x22srcFilePath\x22:\x22src\/pages\/docs\/functions\/helpers.md\x22,\x22id\x22:\x22helpers\x22,\x22location\x22:\x22\/docs\/functions\/helpers.html\x22,\x22url\x22:\x22\/crocks\/docs\/functions\/helpers.html\x22},\x22logic-functions\x22:{\x22description\x22:\x22Logic Functions API\x22,\x22layout\x22:\x22notopic\x22,\x22title\x22:\x22Logic Functions\x22,\x22weight\x22:3,\x22srcFilePath\x22:\x22src\/pages\/docs\/functions\/logic-functions.md\x22,\x22id\x22:\x22logic-functions\x22,\x22location\x22:\x22\/docs\/functions\/logic-functions.html\x22,\x22url\x22:\x22\/crocks\/docs\/functions\/logic-functions.html\x22},\x22pointfree-functions\x22:{\x22title\x22:\x22Point-free Functions\x22,\x22description\x22:\x22Point-free Functions API\x22,\x22layout\x22:\x22notopic\x22,\x22weight\x22:5,\x22srcFilePath\x22:\x22src\/pages\/docs\/functions\/pointfree-functions.md\x22,\x22id\x22:\x22pointfree-functions\x22,\x22location\x22:\x22\/docs\/functions\/pointfree-functions.html\x22,\x22url\x22:\x22\/crocks\/docs\/functions\/pointfree-functions.html\x22},\x22predicate-functions\x22:{\x22description\x22:\x22Predicate Functions API\x22,\x22layout\x22:\x22notopic\x22,\x22title\x22:\x22Predicate Functions\x22,\x22weight\x22:4,\x22srcFilePath\x22:\x22src\/pages\/docs\/functions\/predicate-functions.md\x22,\x22id\x22:\x22predicate-functions\x22,\x22location\x22:\x22\/docs\/functions\/predicate-functions.html\x22,\x22url\x22:\x22\/crocks\/docs\/functions\/predicate-functions.html\x22},\x22transformation-functions\x22:{\x22title\x22:\x22Transformation Functions\x22,\x22description\x22:\x22Transformation Functions API\x22,\x22layout\x22:\x22notopic\x22,\x22weight\x22:6,\x22srcFilePath\x22:\x22src\/pages\/docs\/functions\/transformation-functions.md\x22,\x22id\x22:\x22transformation-functions\x22,\x22location\x22:\x22\/docs\/functions\/transformation-functions.html\x22,\x22url\x22:\x22\/crocks\/docs\/functions\/transformation-functions.html\x22}},\x22title\x22:\x22Functions\x22,\x22description\x22:\x22functions\x22,\x22layout\x22:\x22notopic\x22,\x22icon\x22:\x22code-file\x22,\x22weight\x22:4,\x22srcFilePath\x22:\x22src\/pages\/docs\/functions\/index.md\x22,\x22id\x22:\x22functions\x22,\x22location\x22:\x22\/docs\/functions\/\x22,\x22url\x22:\x22\/crocks\/docs\/functions\/\x22,\x22childIds\x22:[\x22combinators\x22,\x22helpers\x22,\x22logic-functions\x22,\x22predicate-functions\x22,\x22pointfree-functions\x22,\x22transformation-functions\x22]},\x22monoids\x22:{\x22children\x22:{\x22All\x22:{\x22title\x22:\x22All\x22,\x22description\x22:\x22All Monoid\x22,\x22layout\x22:\x22guide\x22,\x22weight\x22:10,\x22srcFilePath\x22:\x22src\/pages\/docs\/monoids\/All.md\x22,\x22id\x22:\x22All\x22,\x22location\x22:\x22\/docs\/monoids\/All.html\x22,\x22url\x22:\x22\/crocks\/docs\/monoids\/All.html\x22},\x22Any\x22:{\x22title\x22:\x22Any\x22,\x22description\x22:\x22Any Monoid\x22,\x22layout\x22:\x22guide\x22,\x22weight\x22:20,\x22srcFilePath\x22:\x22src\/pages\/docs\/monoids\/Any.md\x22,\x22id\x22:\x22Any\x22,\x22location\x22:\x22\/docs\/monoids\/Any.html\x22,\x22url\x22:\x22\/crocks\/docs\/monoids\/Any.html\x22},\x22Assign\x22:{\x22title\x22:\x22Assign\x22,\x22description\x22:\x22Assign Monoid\x22,\x22layout\x22:\x22guide\x22,\x22weight\x22:30,\x22srcFilePath\x22:\x22src\/pages\/docs\/monoids\/Assign.md\x22,\x22id\x22:\x22Assign\x22,\x22location\x22:\x22\/docs\/monoids\/Assign.html\x22,\x22url\x22:\x22\/crocks\/docs\/monoids\/Assign.html\x22},\x22Endo\x22:{\x22title\x22:\x22Endo\x22,\x22description\x22:\x22Endo Monoid\x22,\x22layout\x22:\x22guide\x22,\x22weight\x22:40,\x22srcFilePath\x22:\x22src\/pages\/docs\/monoids\/Endo.md\x22,\x22id\x22:\x22Endo\x22,\x22location\x22:\x22\/docs\/monoids\/Endo.html\x22,\x22url\x22:\x22\/crocks\/docs\/monoids\/Endo.html\x22},\x22Prod\x22:{\x22title\x22:\x22Prod\x22,\x22description\x22:\x22Prod Monoid\x22,\x22layout\x22:\x22guide\x22,\x22weight\x22:90,\x22srcFilePath\x22:\x22src\/pages\/docs\/monoids\/Prod.md\x22,\x22id\x22:\x22Prod\x22,\x22location\x22:\x22\/docs\/monoids\/Prod.html\x22,\x22url\x22:\x22\/crocks\/docs\/monoids\/Prod.html\x22},\x22Sum\x22:{\x22title\x22:\x22Sum\x22,\x22description\x22:\x22Sum Monoid\x22,\x22layout\x22:\x22guide\x22,\x22weight\x22:100,\x22srcFilePath\x22:\x22src\/pages\/docs\/monoids\/Sum.md\x22,\x22id\x22:\x22Sum\x22,\x22location\x22:\x22\/docs\/monoids\/Sum.html\x22,\x22url\x22:\x22\/crocks\/docs\/monoids\/Sum.html\x22}},\x22title\x22:\x22Monoids\x22,\x22description\x22:\x22Monoids API\x22,\x22layout\x22:\x22notopic\x22,\x22icon\x22:\x22code-file\x22,\x22weight\x22:3,\x22srcFilePath\x22:\x22src\/pages\/docs\/monoids\/index.md\x22,\x22id\x22:\x22monoids\x22,\x22location\x22:\x22\/docs\/monoids\/\x22,\x22url\x22:\x22\/crocks\/docs\/monoids\/\x22,\x22childIds\x22:[\x22All\x22,\x22Any\x22,\x22Assign\x22,\x22Endo\x22,\x22Prod\x22,\x22Sum\x22]}},\x22title\x22:\x22Documentation\x22,\x22description\x22:\x22Everything you need to know to get started.\x22,\x22srcFilePath\x22:\x22src\/pages\/docs\/index.soy\x22,\x22id\x22:\x22docs\x22,\x22location\x22:\x22\/docs\/\x22,\x22url\x22:\x22\/crocks\/docs\/\x22,\x22childIds\x22:[\x22getting-started\x22,\x22crocks\x22,\x22monoids\x22,\x22functions\x22,\x22search\x22],\x22active\x22:true}},\x22childIds\x22:[\x22docs\x22]},\x22basePath\x22:\x22\/crocks\x22,\x22topbar\x22:[{\x22href\x22:\x22\/crocks\/docs\/\x22,\x22label\x22:\x22Documentation\x22,\x22selected\x22:true}]}}'); if (window.electricPageComponent) {window.electricPageComponent.dispose();}var getByPath = function(obj, path) {path = path.split('.'); for (var i = 0; i < path.length; i++) {obj = obj[path[i]];}; return obj;}; if (window.pageComponent) {var page = getByPath(data.site, data.pageLocation); if (page) {window.electricPageComponent = pageComponent.default.render(pageComponent.default, {element: '#pageComponent > *', page: page, site: data.site});}if (window.runCodeMirror) {runCodeMirror();}}</script><!-- endinject --></div><!-- inject:vendor:js --><script>CodeMirror.defaults.lineNumbers = true; CodeMirror.defaults.matchBrackets = true; CodeMirror.defaults.readOnly = true; CodeMirror.defaults.tabindex = -1; CodeMirror.defaults.tabSize = 2; CodeMirror.defaults.theme = 'blackboard'; CodeMirror.defaults.viewportMargin = Infinity; var REGEX_LB = /&#123;/g; var REGEX_RB = /&#125;/g; function runCodeMirror() {var code = document.querySelectorAll('.code'); for (var i = 0; i < code.length; i++) {var text = code[i].innerText .replace(REGEX_LB, '{') .replace(REGEX_RB, '}'); var editor = CodeMirror(function(elt) {var preEl = code[i].parentNode; preEl.parentNode.appendChild(elt);}, {mode: code[i].getAttribute('data-mode') || '', value: text});}if (window.ElectricCodeTabs) {new window.ElectricCodeTabs();}}runCodeMirror(); function runGoogleAnalytics(path) {if (typeof ga === 'function') {ga('set', 'page', path); ga('send', 'pageview');}}document.addEventListener('DOMContentLoaded', function() {if (typeof senna !== 'undefined') {var app = senna.dataAttributeHandler.getApp(); app.on('endNavigate', function(event) {runGoogleAnalytics(event.path);});}}); (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga'); ga('create', 'UA-37033501-5', 'auto'); ga('send', 'pageview');</script><!-- endinject --></body></html>

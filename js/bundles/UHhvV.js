@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([0,26,27,28],[
+webpackJsonppageComponent([18,26,27,28],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -28355,30 +28355,12 @@ exports.default = parseFromAnchor;
 /* 221 */,
 /* 222 */,
 /* 223 */,
-/* 224 */,
-/* 225 */,
-/* 226 */,
-/* 227 */,
-/* 228 */,
-/* 229 */,
-/* 230 */,
-/* 231 */,
-/* 232 */,
-/* 233 */,
-/* 234 */,
-/* 235 */,
-/* 236 */,
-/* 237 */,
-/* 238 */,
-/* 239 */,
-/* 240 */,
-/* 241 */,
-/* 242 */
+/* 224 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pageIndex", function() { return pageIndex; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UHhvV", function() { return UHhvV; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28394,11 +28376,11 @@ goog.loadModule(function(exports) {
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace pageIndex.
+ * @fileoverview Templates in namespace UHhvV.
  * @public
  */
 
-goog.module('pageIndex.incrementaldom');
+goog.module('UHhvV.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28419,7 +28401,7 @@ var ie_open_end = IncrementalDom.elementOpenEnd;
 var itext = IncrementalDom.text;
 var iattr = IncrementalDom.attr;
 
-var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('main.incrementaldom', 'render');
+var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('notopic.incrementaldom', 'render');
 
 
 /**
@@ -28430,366 +28412,1264 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var param138 = function() {
-    $header(opt_data, null, opt_ijData);
-    $why(null, null, opt_ijData);
-    $highlights(null, null, opt_ijData);
-    $footer(null, null, opt_ijData);
+  var param1571 = function() {
+    ie_open('p');
+      itext('The ');
+      ie_open('code');
+        itext('crocks');
+      ie_close('code');
+      itext(' are the heart and soul of this library. This is where you will find all your favorite ADT\'s you have grown to love. They include gems such as:');
+      ie_open('code');
+        itext('Maybe');
+      ie_close('code');
+      itext(', ');
+      ie_open('code');
+        itext('Either');
+      ie_close('code');
+      itext(' and ');
+      ie_open('code');
+        itext('IO');
+      ie_close('code');
+      itext(', to name a few. The are usually just a simple constructor that takes either a function or value (depending on the type) and will return you a "container" that wraps whatever you passed it. Each container provides a variety of functions that act as the operations you can do on the contained value. There are many types that share the same function names, but what they do from type to type may vary.  Every Crock provides type function on the Constructor and both inspect and type functions on their Instances.');
+    ie_close('p');
+    ie_open('table');
+      ie_open('thead');
+        ie_open('tr');
+          ie_open('th');
+            itext('Crock');
+          ie_close('th');
+          ie_open('th', null, null,
+              'style', 'text-align:left');
+            itext('Constructor');
+          ie_close('th');
+          ie_open('th', null, null,
+              'style', 'text-align:left');
+            itext('Instance');
+          ie_close('th');
+        ie_close('tr');
+      ie_close('thead');
+      ie_open('tbody');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('a', null, null,
+                'href', 'Arrow.html');
+              ie_open('code');
+                itext('Arrow');
+              ie_close('code');
+            ie_close('a');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('a', null, null,
+                'href', 'Arrow.html#id');
+              ie_open('code');
+                itext('id');
+              ie_close('code');
+            ie_close('a');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('a', null, null,
+                'href', 'Arrow.html#both');
+              ie_open('code');
+                itext('both');
+              ie_close('code');
+            ie_close('a');
+            itext(', ');
+            ie_open('a', null, null,
+                'href', 'Arrow.html#compose');
+              ie_open('code');
+                itext('compose');
+              ie_close('code');
+            ie_close('a');
+            itext(', ');
+            ie_open('a', null, null,
+                'href', 'Arrow.html#contramap');
+              ie_open('code');
+                itext('contramap');
+              ie_close('code');
+            ie_close('a');
+            itext(',');
+            ie_open('a', null, null,
+                'href', 'Arrow.html#first');
+              ie_open('code');
+                itext('first');
+              ie_close('code');
+            ie_close('a');
+            itext(', ');
+            ie_open('a', null, null,
+                'href', 'Arrow.html#map');
+              ie_open('code');
+                itext('map');
+              ie_close('code');
+            ie_close('a');
+            itext(', ');
+            ie_open('a', null, null,
+                'href', 'Arrow.html#promap');
+              ie_open('code');
+                itext('promap');
+              ie_close('code');
+            ie_close('a');
+            itext(', ');
+            ie_open('a', null, null,
+                'href', 'Arrow.html#runwith');
+              ie_open('code');
+                itext('runWith');
+              ie_close('code');
+            ie_close('a');
+            itext(', ');
+            ie_open('a', null, null,
+                'href', 'Arrow.html#second');
+              ie_open('code');
+                itext('second');
+              ie_close('code');
+            ie_close('a');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('Async');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('Rejected');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Resolved');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('all');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('fromNode');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('fromPromise');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('of');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('alt');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('ap');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('bimap');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('chain');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('coalesce');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('fork');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('map');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('of');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('swap');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('toPromise');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('Const');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            itext('--');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('ap');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('chain');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('concat');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('equals');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('map');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('valueOf');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('Either');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('Left');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Right');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('of');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('alt');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('ap');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('bimap');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('chain');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('coalesce');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('concat');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('either');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('equals');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('map');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('of');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('sequence');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('swap');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('traverse');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('a', null, null,
+                'href', 'Equiv.html');
+              ie_open('code');
+                itext('Equiv');
+              ie_close('code');
+            ie_close('a');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('a', null, null,
+                'href', 'Equiv.html#empty');
+              ie_open('code');
+                itext('empty');
+              ie_close('code');
+            ie_close('a');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('a', null, null,
+                'href', 'Equiv.html#concat');
+              ie_open('code');
+                itext('concat');
+              ie_close('code');
+            ie_close('a');
+            itext(', ');
+            ie_open('a', null, null,
+                'href', 'Equiv.html#contramap');
+              ie_open('code');
+                itext('contramap');
+              ie_close('code');
+            ie_close('a');
+            itext(', ');
+            ie_open('a', null, null,
+                'href', 'Equiv.html#comparewith');
+              ie_open('code');
+                itext('compareWith');
+              ie_close('code');
+            ie_close('a');
+            itext(', ');
+            ie_open('a', null, null,
+                'href', 'Equiv.html#valueof');
+              ie_open('code');
+                itext('valueOf');
+              ie_close('code');
+            ie_close('a');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('Identity');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('of');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('ap');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('chain');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('concat');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('equals');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('map');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('of');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('sequence');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('traverse');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('valueOf');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('IO');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('of');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('ap');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('chain');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('map');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('of');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('run');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('List');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('empty');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('fromArray');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('of');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('ap');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('chain');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('concat');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('cons');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('empty');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('equals');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('filter');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('head');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('map');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('of');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('reduce');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('reject');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('sequence');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('tail');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('toArray');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('traverse');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('valueOf');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('a', null, null,
+                'href', 'Maybe.html');
+              ie_open('code');
+                itext('Maybe');
+              ie_close('code');
+            ie_close('a');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('a', null, null,
+                'href', 'Maybe.html#nothing');
+              ie_open('code');
+                itext('Nothing');
+              ie_close('code');
+            ie_close('a');
+            itext(', ');
+            ie_open('a', null, null,
+                'href', 'Maybe.html#just');
+              ie_open('code');
+                itext('Just');
+              ie_close('code');
+            ie_close('a');
+            itext(', ');
+            ie_open('a', null, null,
+                'href', 'Maybe.html#of');
+              ie_open('code');
+                itext('of');
+              ie_close('code');
+            ie_close('a');
+            itext(', ');
+            ie_open('a', null, null,
+                'href', 'Maybe.html#zero');
+              ie_open('code');
+                itext('zero');
+              ie_close('code');
+            ie_close('a');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('a', null, null,
+                'href', 'Maybe.html#alt');
+              ie_open('code');
+                itext('alt');
+              ie_close('code');
+            ie_close('a');
+            itext(', ');
+            ie_open('a', null, null,
+                'href', 'Maybe.html#ap');
+              ie_open('code');
+                itext('ap');
+              ie_close('code');
+            ie_close('a');
+            itext(', ');
+            ie_open('a', null, null,
+                'href', 'Maybe.html#chain');
+              ie_open('code');
+                itext('chain');
+              ie_close('code');
+            ie_close('a');
+            itext(', ');
+            ie_open('a', null, null,
+                'href', 'Maybe.html#coalesce');
+              ie_open('code');
+                itext('coalesce');
+              ie_close('code');
+            ie_close('a');
+            itext(', ');
+            ie_open('a', null, null,
+                'href', 'Maybe.html#concat');
+              ie_open('code');
+                itext('concat');
+              ie_close('code');
+            ie_close('a');
+            itext(', ');
+            ie_open('a', null, null,
+                'href', 'Maybe.html#equals');
+              ie_open('code');
+                itext('equals');
+              ie_close('code');
+            ie_close('a');
+            itext(', ');
+            ie_open('a', null, null,
+                'href', 'Maybe.html#either');
+              ie_open('code');
+                itext('either');
+              ie_close('code');
+            ie_close('a');
+            itext(', ');
+            ie_open('a', null, null,
+                'href', 'Maybe.html#map');
+              ie_open('code');
+                itext('map');
+              ie_close('code');
+            ie_close('a');
+            itext(', ');
+            ie_open('a', null, null,
+                'href', 'Maybe.html#of');
+              ie_open('code');
+                itext('of');
+              ie_close('code');
+            ie_close('a');
+            itext(', ');
+            ie_open('a', null, null,
+                'href', 'Maybe.html#option');
+              ie_open('code');
+                itext('option');
+              ie_close('code');
+            ie_close('a');
+            itext(', ');
+            ie_open('a', null, null,
+                'href', 'Maybe.html#sequence');
+              ie_open('code');
+                itext('sequence');
+              ie_close('code');
+            ie_close('a');
+            itext(', ');
+            ie_open('a', null, null,
+                'href', 'Maybe.html#traverse');
+              ie_open('code');
+                itext('traverse');
+              ie_close('code');
+            ie_close('a');
+            itext(', ');
+            ie_open('a', null, null,
+                'href', 'Maybe.html#zero');
+              ie_open('code');
+                itext('zero');
+              ie_close('code');
+            ie_close('a');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('Pair');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            itext('---');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('ap');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('bimap');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('chain');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('concat');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('equals');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('extend');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('fst');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('map');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('merge');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('of');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('snd');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('swap');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('toArray');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('a', null, null,
+                'href', 'Pred.html');
+              ie_open('code');
+                itext('Pred');
+              ie_close('code');
+            ie_close('a');
+            itext(' *');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('a', null, null,
+                'href', 'Pred.html#empty');
+              ie_open('code');
+                itext('empty');
+              ie_close('code');
+            ie_close('a');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('a', null, null,
+                'href', 'Pred.html#concat');
+              ie_open('code');
+                itext('concat');
+              ie_close('code');
+            ie_close('a');
+            itext(', ');
+            ie_open('a', null, null,
+                'href', 'Pred.html#contramap');
+              ie_open('code');
+                itext('contramap');
+              ie_close('code');
+            ie_close('a');
+            itext(', ');
+            ie_open('a', null, null,
+                'href', 'Pred.html#runwith');
+              ie_open('code');
+                itext('runWith');
+              ie_close('code');
+            ie_close('a');
+            itext(', ');
+            ie_open('a', null, null,
+                'href', 'Pred.html#valueof');
+              ie_open('code');
+                itext('valueOf');
+              ie_close('code');
+            ie_close('a');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('a', null, null,
+                'href', 'Reader.html');
+              ie_open('code');
+                itext('Reader');
+              ie_close('code');
+            ie_close('a');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('a', null, null,
+                'href', 'Reader.html#ask');
+              ie_open('code');
+                itext('ask');
+              ie_close('code');
+            ie_close('a');
+            itext(', ');
+            ie_open('a', null, null,
+                'href', 'Reader.html#of');
+              ie_open('code');
+                itext('of');
+              ie_close('code');
+            ie_close('a');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('a', null, null,
+                'href', 'Reader.html#ap');
+              ie_open('code');
+                itext('ap');
+              ie_close('code');
+            ie_close('a');
+            itext(', ');
+            ie_open('a', null, null,
+                'href', 'Reader.html#chain');
+              ie_open('code');
+                itext('chain');
+              ie_close('code');
+            ie_close('a');
+            itext(', ');
+            ie_open('a', null, null,
+                'href', 'Reader.html#map');
+              ie_open('code');
+                itext('map');
+              ie_close('code');
+            ie_close('a');
+            itext(', ');
+            ie_open('a', null, null,
+                'href', 'Reader.html#runwith');
+              ie_open('code');
+                itext('runWith');
+              ie_close('code');
+            ie_close('a');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('a', null, null,
+                'href', 'ReaderT.html');
+              ie_open('code');
+                itext('ReaderT');
+              ie_close('code');
+            ie_close('a');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('a', null, null,
+                'href', 'ReaderT.html#ask');
+              ie_open('code');
+                itext('ask');
+              ie_close('code');
+            ie_close('a');
+            itext(', ');
+            ie_open('a', null, null,
+                'href', 'ReaderT.html#lift');
+              ie_open('code');
+                itext('lift');
+              ie_close('code');
+            ie_close('a');
+            itext(', ');
+            ie_open('a', null, null,
+                'href', 'ReaderT.html#liftfn');
+              ie_open('code');
+                itext('liftFn');
+              ie_close('code');
+            ie_close('a');
+            itext(', ');
+            ie_open('a', null, null,
+                'href', 'ReaderT.html#of');
+              ie_open('code');
+                itext('of');
+              ie_close('code');
+            ie_close('a');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('a', null, null,
+                'href', 'ReaderT.html#ap');
+              ie_open('code');
+                itext('ap');
+              ie_close('code');
+            ie_close('a');
+            itext(', ');
+            ie_open('a', null, null,
+                'href', 'ReaderT.html#chain');
+              ie_open('code');
+                itext('chain');
+              ie_close('code');
+            ie_close('a');
+            itext(', ');
+            ie_open('a', null, null,
+                'href', 'ReaderT.html#map');
+              ie_open('code');
+                itext('map');
+              ie_close('code');
+            ie_close('a');
+            itext(', ');
+            ie_open('a', null, null,
+                'href', 'ReaderT.html#runwith');
+              ie_open('code');
+                itext('runWith');
+              ie_close('code');
+            ie_close('a');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('Result');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('Err');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('Ok');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('of');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('alt');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('ap');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('bimap');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('chain');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('coalesce');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('concat');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('either');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('equals');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('map');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('of');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('sequence');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('swap');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('traverse');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('Star');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('id');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('both');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('compose');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('contramap');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('map');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('promap');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('runWith');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('a', null, null,
+                'href', 'State.html');
+              ie_open('code');
+                itext('State');
+              ie_close('code');
+            ie_close('a');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('a', null, null,
+                'href', 'State.html#get');
+              ie_open('code');
+                itext('get');
+              ie_close('code');
+            ie_close('a');
+            itext(', ');
+            ie_open('a', null, null,
+                'href', 'State.html#modify');
+              ie_open('code');
+                itext('modify');
+              ie_close('code');
+            ie_close('a');
+            itext(', ');
+            ie_open('a', null, null,
+                'href', 'State.html#of');
+              ie_open('code');
+                itext('of');
+              ie_close('code');
+            ie_close('a');
+            itext(', ');
+            ie_open('a', null, null,
+                'href', 'State.html#put');
+              ie_open('code');
+                itext('put');
+              ie_close('code');
+            ie_close('a');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('a', null, null,
+                'href', 'State.html#ap');
+              ie_open('code');
+                itext('ap');
+              ie_close('code');
+            ie_close('a');
+            itext(', ');
+            ie_open('a', null, null,
+                'href', 'State.html#chain');
+              ie_open('code');
+                itext('chain');
+              ie_close('code');
+            ie_close('a');
+            itext(', ');
+            ie_open('a', null, null,
+                'href', 'State.html#evalwith');
+              ie_open('code');
+                itext('evalWith');
+              ie_close('code');
+            ie_close('a');
+            itext(', ');
+            ie_open('a', null, null,
+                'href', 'State.html#execwith');
+              ie_open('code');
+                itext('execWith');
+              ie_close('code');
+            ie_close('a');
+            itext(', ');
+            ie_open('a', null, null,
+                'href', 'State.html#map');
+              ie_open('code');
+                itext('map');
+              ie_close('code');
+            ie_close('a');
+            itext(', ');
+            ie_open('a', null, null,
+                'href', 'State.html#runwith');
+              ie_open('code');
+                itext('runWith');
+              ie_close('code');
+            ie_close('a');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('Unit');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('empty');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('of');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('ap');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('chain');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('concat');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('empty');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('equals');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('map');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('of');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('valueOf');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('Writer');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('of');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('ap');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('chain');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('equals');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('log');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('map');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('of');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('read');
+            ie_close('code');
+            itext(', ');
+            ie_open('code');
+              itext('valueOf');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+      ie_close('tbody');
+    ie_close('table');
+    ie_open('p');
+      itext('* based on ');
+      ie_open('a', null, null,
+          'href', 'https://medium.com/@drboolean/monoidal-contravariant-functors-are-actually-useful-1032211045c4#.polugsx2a');
+        itext('this article');
+      ie_close('a');
+    ie_close('p');
+    ie_open('input', null, null,
+        'type', 'hidden',
+        'value', opt_data.page.title);
+    ie_close('input');
+    ie_open('input', null, null,
+        'type', 'hidden',
+        'value', opt_data.site.title);
+    ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({content: param138}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param1571}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'pageIndex.render';
+  $render.soyTemplateName = 'UHhvV.render';
 }
 
-
-/**
- * @param {Object<string, *>=} opt_data
- * @param {(null|undefined)=} opt_ignored
- * @param {Object<string, *>=} opt_ijData
- * @return {void}
- * @suppress {checkTypes}
- */
-function $header(opt_data, opt_ignored, opt_ijData) {
-  ie_open('header', null, null,
-      'class', 'header');
-    ie_open('div', null, null,
-        'class', 'container');
-      ie_open('h1', null, null,
-          'class', 'header-title');
-        var dyn10 = opt_data.site.title;
-        if (typeof dyn10 == 'function') dyn10(); else if (dyn10 != null) itext(dyn10);
-      ie_close('h1');
-      ie_open('h2', null, null,
-          'class', 'header-subtitle');
-        var dyn11 = opt_data.site.index.description;
-        if (typeof dyn11 == 'function') dyn11(); else if (dyn11 != null) itext(dyn11);
-      ie_close('h2');
-      ie_open('div', null, null,
-          'class', 'header-cta');
-        ie_open('a', null, null,
-            'href', 'docs/getting-started.html',
-            'class', 'btn btn-accent');
-          itext('Get Started');
-        ie_close('a');
-      ie_close('div');
-    ie_close('div');
-    ie_open('p', null, null,
-        'class', 'gh-btns');
-      ie_void('iframe', null, null,
-          'src', '//ghbtns.com/github-btn.html?user=evilsoft&repo=crocks&type=watch&count=true&size=large',
-          'allowtransparency', 'true',
-          'frameborder', '0',
-          'scrolling', '0',
-          'width', '150',
-          'height', '30');
-      ie_void('iframe', null, null,
-          'src', '//ghbtns.com/github-btn.html?user=evilsoft&repo=crocks&type=fork&count=true&size=large',
-          'allowtransparency', 'true',
-          'frameborder', '0',
-          'scrolling', '0',
-          'width', '150',
-          'height', '30');
-    ie_close('p');
-  ie_close('header');
-}
-exports.header = $header;
-if (goog.DEBUG) {
-  $header.soyTemplateName = 'pageIndex.header';
-}
-
-
-/**
- * @param {Object<string, *>=} opt_data
- * @param {(null|undefined)=} opt_ignored
- * @param {Object<string, *>=} opt_ijData
- * @return {void}
- * @suppress {checkTypes}
- */
-function $why(opt_data, opt_ignored, opt_ijData) {
-  ie_open('article', null, null,
-      'class', 'about');
-    ie_open('div', null, null,
-        'class', 'container');
-      ie_open('div', null, null,
-          'class', 'row');
-        ie_open('div', null, null,
-            'class', 'col-md-12 col-md-offset-2');
-          ie_open('h3', null, null,
-              'class', 'about-title');
-            itext('Why?');
-          ie_close('h3');
-          ie_open('p', null, null,
-              'class', 'about-description');
-            itext('Because Functional Programming! Crocks curates and provides a common interface between each data type (where possible of course), not forgetting all of the helper functions necessary to hit the ground running.');
-          ie_close('p');
-        ie_close('div');
-      ie_close('div');
-    ie_close('div');
-  ie_close('article');
-}
-exports.why = $why;
-if (goog.DEBUG) {
-  $why.soyTemplateName = 'pageIndex.why';
-}
-
-
-/**
- * @param {Object<string, *>=} opt_data
- * @param {(null|undefined)=} opt_ignored
- * @param {Object<string, *>=} opt_ijData
- * @return {void}
- * @suppress {checkTypes}
- */
-function $features(opt_data, opt_ignored, opt_ijData) {
-  ie_open('div', null, null,
-      'class', 'features');
-    ie_open('div', null, null,
-        'class', 'container');
-      ie_open('div', null, null,
-          'class', 'row');
-        ie_open('section', null, null,
-            'class', 'feature col-md-4 col-md-offset-2');
-          ie_open('div', null, null,
-              'class', 'feature-graphic');
-            ie_void('span', null, null,
-                'class', 'icon-16-bullhorn');
-          ie_close('div');
-          ie_open('h3', null, null,
-              'class', 'feature-title');
-            itext('Heading');
-          ie_close('h3');
-          ie_open('p', null, null,
-              'class', 'feature-description');
-            itext('Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros praesent commodo.');
-          ie_close('p');
-        ie_close('section');
-        ie_open('section', null, null,
-            'class', 'feature col-md-4');
-          ie_open('div', null, null,
-              'class', 'feature-graphic');
-            ie_void('span', null, null,
-                'class', 'icon-16-lock');
-          ie_close('div');
-          ie_open('h3', null, null,
-              'class', 'feature-title');
-            itext('Heading');
-          ie_close('h3');
-          ie_open('p', null, null,
-              'class', 'feature-description');
-            itext('Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros praesent commodo.');
-          ie_close('p');
-        ie_close('section');
-        ie_open('section', null, null,
-            'class', 'feature col-md-4');
-          ie_open('div', null, null,
-              'class', 'feature-graphic');
-            ie_void('span', null, null,
-                'class', 'icon-16-calendar');
-          ie_close('div');
-          ie_open('h3', null, null,
-              'class', 'feature-title');
-            itext('Heading');
-          ie_close('h3');
-          ie_open('p', null, null,
-              'class', 'feature-description');
-            itext('Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros praesent commodo.');
-          ie_close('p');
-        ie_close('section');
-      ie_close('div');
-    ie_close('div');
-  ie_close('div');
-}
-exports.features = $features;
-if (goog.DEBUG) {
-  $features.soyTemplateName = 'pageIndex.features';
-}
-
-
-/**
- * @param {Object<string, *>=} opt_data
- * @param {(null|undefined)=} opt_ignored
- * @param {Object<string, *>=} opt_ijData
- * @return {void}
- * @suppress {checkTypes}
- */
-function $highlights(opt_data, opt_ignored, opt_ijData) {
-  ie_open('div', null, null,
-      'class', 'highlights');
-    ie_open('div', null, null,
-        'class', 'container');
-      ie_open('section', null, null,
-          'class', 'highlight row');
-        ie_open('div', null, null,
-            'class', 'col-md-6 col-md-offset-2');
-          ie_open('h4', null, null,
-              'class', 'highlight-title');
-            itext('Work in a more declarative, functional flow.');
-          ie_close('h4');
-          ie_open('p', null, null,
-              'class', 'highlight-description');
-            itext('The data types provided in Crocks allow you to remove large swaths of imparative boilerplate, allowing you to think of your code in terms of what it does and not how it does it.');
-          ie_close('p');
-        ie_close('div');
-        ie_open('div', null, null,
-            'class', 'col-md-5 col-md-offset-1');
-          ie_open('div', null, null,
-              'class', 'highlight-graphic');
-            ie_void('span', null, null,
-                'class', 'icon-16-balloon-topic');
-          ie_close('div');
-        ie_close('div');
-      ie_close('section');
-      ie_open('section', null, null,
-          'class', 'highlight row');
-        ie_open('div', null, null,
-            'class', 'col-md-6 col-md-push-9');
-          ie_open('h4', null, null,
-              'class', 'highlight-title');
-            itext('Use a collection of popular Algebraic Data Types (ADTs)');
-          ie_close('h4');
-          ie_open('p', null, null,
-              'class', 'highlight-description');
-            itext('Have you ever heard of Maybe, Either, or, heck, even IO? These are just a few of the ADTs which Crocks brings to the table.');
-          ie_close('p');
-        ie_close('div');
-        ie_open('div', null, null,
-            'class', 'col-md-5 col-md-offset-2 col-md-pull-6');
-          ie_open('div', null, null,
-              'class', 'highlight-graphic');
-            ie_void('span', null, null,
-                'class', 'icon-16-menu');
-          ie_close('div');
-        ie_close('div');
-      ie_close('section');
-      ie_open('section', null, null,
-          'class', 'highlight row');
-        ie_open('div', null, null,
-            'class', 'col-md-6 col-md-offset-2');
-          ie_open('h4', null, null,
-              'class', 'highlight-title');
-            itext('Combine a list of values down to one value');
-          ie_close('h4');
-          ie_open('p', null, null,
-              'class', 'highlight-description');
-            itext('Crocks provides a large variety of Monoids, which are ADTs that represent a binary operation and are usually locked down it to a specific type. These are great when you need to combine two things into one under a specific operation.');
-          ie_close('p');
-        ie_close('div');
-        ie_open('div', null, null,
-            'class', 'col-md-5 col-md-offset-1');
-          ie_open('div', null, null,
-              'class', 'highlight-graphic');
-            ie_void('span', null, null,
-                'class', 'icon-16-org_chart');
-          ie_close('div');
-        ie_close('div');
-      ie_close('section');
-    ie_close('div');
-  ie_close('div');
-}
-exports.highlights = $highlights;
-if (goog.DEBUG) {
-  $highlights.soyTemplateName = 'pageIndex.highlights';
-}
-
-
-/**
- * @param {Object<string, *>=} opt_data
- * @param {(null|undefined)=} opt_ignored
- * @param {Object<string, *>=} opt_ijData
- * @return {void}
- * @suppress {checkTypes}
- */
-function $footer(opt_data, opt_ignored, opt_ijData) {
-  ie_open('footer', null, null,
-      'class', 'footer');
-    ie_open('div', null, null,
-        'class', 'container');
-      ie_open('div', null, null,
-          'class', 'row');
-        ie_open('p', null, null,
-            'class', 'footer-description col-md-3 col-md-offset-2');
-          ie_open('a', null, null,
-              'href', 'https://github.com/evilsoft/crocks');
-            itext('Crocks');
-          ie_close('a');
-        ie_close('p');
-        ie_open('p', null, null,
-            'class', 'footer-description col-md-4');
-          ie_open('a', null, null,
-              'href', 'https://github.com/evilsoft/crocks/blob/master/LICENSE');
-            itext('Distributed under ISC License');
-          ie_close('a');
-        ie_close('p');
-        ie_open('p', null, null,
-            'class', 'footer-description col-md-5');
-          itext('Found an issue with the docs? Report it ');
-          ie_open('a', null, null,
-              'href', 'https://github.com/evilsoft/crocks/issues/new');
-            itext('here');
-          ie_close('a');
-        ie_close('p');
-      ie_close('div');
-    ie_close('div');
-  ie_close('footer');
-}
-exports.footer = $footer;
-if (goog.DEBUG) {
-  $footer.soyTemplateName = 'pageIndex.footer';
-}
-
-exports.render.params = ["site"];
-exports.render.types = {"site":"any"};
-exports.header.params = ["site"];
-exports.header.types = {"site":"any"};
-exports.why.params = [];
-exports.why.types = {};
-exports.features.params = [];
-exports.features.types = {};
-exports.highlights.params = [];
-exports.highlights.types = {};
-exports.footer.params = [];
-exports.footer.types = {};
+exports.render.params = ["page","site"];
+exports.render.types = {"page":"any","site":"any"};
 templates = exports;
 return exports;
 
 });
 
-class pageIndex extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(pageIndex, templates);
+class UHhvV extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(UHhvV, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
 
 
 /***/ }),
+/* 225 */,
+/* 226 */,
+/* 227 */,
+/* 228 */,
+/* 229 */,
+/* 230 */,
+/* 231 */,
+/* 232 */,
+/* 233 */,
+/* 234 */,
+/* 235 */,
+/* 236 */,
+/* 237 */,
+/* 238 */,
+/* 239 */,
+/* 240 */,
+/* 241 */,
+/* 242 */,
 /* 243 */,
 /* 244 */,
-/* 245 */,
-/* 246 */,
-/* 247 */,
-/* 248 */,
-/* 249 */,
-/* 250 */,
-/* 251 */,
-/* 252 */,
-/* 253 */,
-/* 254 */,
-/* 255 */,
-/* 256 */,
-/* 257 */,
-/* 258 */,
-/* 259 */,
-/* 260 */,
-/* 261 */,
-/* 262 */,
-/* 263 */,
-/* 264 */,
-/* 265 */,
-/* 266 */,
-/* 267 */,
-/* 268 */
+/* 245 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28825,7 +29705,7 @@ __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _indexSoy = __webpack_require__(242);
+var _indexSoy = __webpack_require__(224);
 
 var _indexSoy2 = _interopRequireDefault(_indexSoy);
 
@@ -28837,23 +29717,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var pageIndex = function (_Component) {
-  _inherits(pageIndex, _Component);
+var UHhvV = function (_Component) {
+  _inherits(UHhvV, _Component);
 
-  function pageIndex() {
-    _classCallCheck(this, pageIndex);
+  function UHhvV() {
+    _classCallCheck(this, UHhvV);
 
-    return _possibleConstructorReturn(this, (pageIndex.__proto__ || Object.getPrototypeOf(pageIndex)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (UHhvV.__proto__ || Object.getPrototypeOf(UHhvV)).apply(this, arguments));
   }
 
-  return pageIndex;
+  return UHhvV;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(pageIndex, _indexSoy2.default);
+_metalSoy2.default.register(UHhvV, _indexSoy2.default);
 
-exports.default = pageIndex;
+exports.default = UHhvV;
 
 /***/ })
-],[268]);
+],[245]);

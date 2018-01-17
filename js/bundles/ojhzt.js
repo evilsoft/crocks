@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([6,21,22,23],[
+webpackJsonppageComponent([3,26,27,28],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19884,7 +19884,7 @@ if (goog.DEBUG) {
  * @return {void}
  * @suppress {checkTypes}
  */
-function __deltemplate_s151_d34389eb(opt_data, opt_ignored, opt_ijData) {
+function __deltemplate_s173_d34389eb(opt_data, opt_ignored, opt_ijData) {
   ie_open('a', null, null,
       'class', 'sidebar-link ' + (opt_data.page.active ? 'sidebar-link-selected' : ''),
       'href', opt_data.page.url);
@@ -19893,16 +19893,16 @@ function __deltemplate_s151_d34389eb(opt_data, opt_ignored, opt_ijData) {
           'class', 'sidebar-icon icon-16-' + opt_data.page.icon);
     }
     ie_open('span');
-      var dyn10 = opt_data.page.title;
-      if (typeof dyn10 == 'function') dyn10(); else if (dyn10 != null) itext(dyn10);
+      var dyn12 = opt_data.page.title;
+      if (typeof dyn12 == 'function') dyn12(); else if (dyn12 != null) itext(dyn12);
     ie_close('span');
   ie_close('a');
 }
-exports.__deltemplate_s151_d34389eb = __deltemplate_s151_d34389eb;
+exports.__deltemplate_s173_d34389eb = __deltemplate_s173_d34389eb;
 if (goog.DEBUG) {
-  __deltemplate_s151_d34389eb.soyTemplateName = 'Sidebar.__deltemplate_s151_d34389eb';
+  __deltemplate_s173_d34389eb.soyTemplateName = 'Sidebar.__deltemplate_s173_d34389eb';
 }
-soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'sidebar', 0, __deltemplate_s151_d34389eb);
+soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'sidebar', 0, __deltemplate_s173_d34389eb);
 
 exports.render.params = ["section","site"];
 exports.render.types = {"section":"any","site":"any"};
@@ -20091,8 +20091,8 @@ function $render(opt_data, opt_ignored, opt_ijData) {
       ie_void('span', null, null,
           'class', 'icon icon-16-clock');
       itext(' ');
-      var dyn11 = opt_data.time;
-      if (typeof dyn11 == 'function') dyn11(); else if (dyn11 != null) itext(dyn11);
+      var dyn13 = opt_data.time;
+      if (typeof dyn13 == 'function') dyn13(); else if (dyn13 != null) itext(dyn13);
     }
   ie_close('p');
 }
@@ -28362,12 +28362,20 @@ exports.default = parseFromAnchor;
 /* 228 */,
 /* 229 */,
 /* 230 */,
-/* 231 */
+/* 231 */,
+/* 232 */,
+/* 233 */,
+/* 234 */,
+/* 235 */,
+/* 236 */,
+/* 237 */,
+/* 238 */,
+/* 239 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "zwgkn", function() { return zwgkn; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ojhzt", function() { return ojhzt; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28379,15 +28387,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var templates;
 goog.loadModule(function(exports) {
 
-// This file was automatically generated from getting-started.soy.
+// This file was automatically generated from Sum.soy.
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace zwgkn.
+ * @fileoverview Templates in namespace ojhzt.
  * @public
  */
 
-goog.module('zwgkn.incrementaldom');
+goog.module('ojhzt.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28421,114 +28429,213 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var param211 = function() {
+  var param1880 = function() {
+    $templateAlias2({code: 'Sum Number', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      ie_open('code');
+        itext('Sum');
+      ie_close('code');
+      itext(' is a ');
+      ie_open('code');
+        itext('Monoid');
+      ie_close('code');
+      itext(' that will combine (2) ');
+      ie_open('code');
+        itext('Number');
+      ie_close('code');
+      itext('s under addition.');
+    ie_close('p');
+    $templateAlias2({code: 'const Sum = require(\'crocks/Sum\')\nconst mconcat = require(\'crocks/helpers/mconcat\')\nconst mconcatMap = require(\'crocks/helpers/mconcatMap\')\n\nSum(13)\n//=> Sum 13\n\nmconcat(Sum, [ 5, 2 ])\n//=> Sum 7\n\nSum(10)\n  .concat(Sum(10))\n//=> Sum 20\n\n// sumByTen :: [ Number ] -> Sum\nconst sumByTen =\n  mconcatMap(Sum, x => x * 10)\n\nsumByTen([ 2, 2 ])\n//=> Sum 40', mode: 'javascript'}, null, opt_ijData);
     ie_open('article', null, null,
-        'id', 'installation');
+        'id', 'topic-implements');
       ie_open('h2');
         ie_open('a', null, null,
-            'id', 'installation',
-            'href', '#installation');
-          itext('Installation');
+            'id', 'implements',
+            'href', '#implements');
+          itext('Implements');
         ie_close('a');
       ie_close('h2');
       ie_open('p');
         ie_open('code');
-          itext('crocks');
+          itext('Semigroup');
         ie_close('code');
-        itext(' is available from ');
+        itext(', ');
         ie_open('code');
-          itext('npm');
+          itext('Monoid');
         ie_close('code');
-        itext(' and is just a shell command away. All you need to do is run the following to save it as a dependency in your current project folder:');
       ie_close('p');
-      $templateAlias2({code: '$ npm install crocks -S', mode: 'text'}, null, opt_ijData);
-      ie_open('p');
-        itext('This will pull down ');
-        ie_open('code');
-          itext('crocks');
-        ie_close('code');
-        itext(' into your project\'s ');
-        ie_open('code');
-          itext('node_modules');
-        ie_close('code');
-        itext(' folder and can be accessed by adding something like the following in the file that needs it:');
-      ie_close('p');
-      $templateAlias2({code: '// node require syntax\nconst crocks = require(\'crocks\')\n\n// Javascript modules (if you are transpiling)\nimport crocks from \'crocks\'', mode: 'javascript'}, null, opt_ijData);
     ie_close('article');
     ie_open('article', null, null,
-        'id', 'import-only-what-you-need');
+        'id', 'topic-constructor');
       ie_open('h2');
         ie_open('a', null, null,
-            'id', 'import-only-what-you-need',
-            'href', '#import-only-what-you-need');
-          itext('Import only what you need');
+            'id', 'constructor-methods',
+            'href', '#constructor-methods');
+          itext('Constructor Methods');
         ie_close('a');
       ie_close('h2');
+      ie_open('h3');
+        ie_open('a', null, null,
+            'id', 'empty',
+            'href', '#empty');
+          itext('empty');
+        ie_close('a');
+      ie_close('h3');
+      $templateAlias2({code: 'Sum.empty :: () -> Sum', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
-        itext('This lib ');
-        ie_open('em');
-          itext('should');
-        ie_close('em');
-        itext(' work, with no additional compilation in all current browsers (Edge, Safari, Chrome, Firefox), if it does not, please file an issue as I really, really want it to.');
+        ie_open('code');
+          itext('empty');
+        ie_close('code');
+        itext(' provides the identity for the ');
+        ie_open('code');
+          itext('Monoid');
+        ie_close('code');
+        itext(' in that when the value it provides is ');
+        ie_open('code');
+          itext('concat');
+        ie_close('code');
+        itext('ed to any other value, it will return the other value. In the case of ');
+        ie_open('code');
+          itext('Sum');
+        ie_close('code');
+        itext(' the result of ');
+        ie_open('code');
+          itext('empty');
+        ie_close('code');
+        itext(' is ');
+        ie_open('code');
+          itext('0');
+        ie_close('code');
+        itext('. ');
+        ie_open('code');
+          itext('empty');
+        ie_close('code');
+        itext(' is available on both the Constructor and the Instance for convenience.');
       ie_close('p');
+      $templateAlias2({code: 'const Sum = require(\'crocks/Sum\')\n\nSum.empty()\n//=> Sum 0\n\nSum.empty()\n  .concat(Sum.empty())\n//=> Sum 0\n\nSum(4)\n  .concat(Sum.empty())\n\nSum.empty()\n  .concat(Sum(4))\n//=> Sum 4', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h3');
+        ie_open('a', null, null,
+            'id', 'type',
+            'href', '#type');
+          itext('type');
+        ie_close('a');
+      ie_close('h3');
+      $templateAlias2({code: 'Sum.type :: () -> String', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
-        itext('There is a lot to this library, and as such it may not be desired to bring in the entire library when bundling for a library or a frontend application. If this is the case, the code is organized in a manner groups all types in functions that construct those type in their own folders. The general purpose functions are spread across the following folders: ');
         ie_open('code');
-          itext('combinators');
+          itext('type');
         ie_close('code');
-        itext(', ');
+        itext(' provides a string representation of the type name for a given type in');
         ie_open('code');
-          itext('helpers');
+          itext('crocks');
         ie_close('code');
-        itext(',');
+        itext('. While it is used mostly internally for law validation, it can be useful to the end user for debugging and building out custom types based on the standard ');
         ie_open('code');
-          itext('logic');
+          itext('crocks');
         ie_close('code');
-        itext(', ');
+        itext(' types. While type comparisons can easily be done manually by calling ');
         ie_open('code');
-          itext('pointfree');
+          itext('type');
         ie_close('code');
-        itext(' and ');
+        itext(' on a given type, using the ');
         ie_open('code');
-          itext('predicates');
+          itext('isSameType');
+        ie_close('code');
+        itext(' function hides much of the boilerplate. ');
+        ie_open('code');
+          itext('type');
+        ie_close('code');
+        itext(' is available on both the Constructor and the Instance for convenience.');
+      ie_close('p');
+      $templateAlias2({code: 'const Sum = require(\'crocks/Sum\')\nconst Prod = require(\'crocks/Prod\')\nconst isSameType = require(\'crocks/predicates/isSameType\')\n\nconst sum5 = Sum(5)\n\nsum5.type()\n//=> "Sum"\n\nisSameType(Sum, sum5)\n//=> true\n\nisSameType(Prod, sum5)\n//=> false\n\nisSameType(Sum.empty(), sum5)\n//=> true', mode: 'javascript'}, null, opt_ijData);
+    ie_close('article');
+    ie_open('article', null, null,
+        'id', 'topic-instance');
+      ie_open('h2');
+        ie_open('a', null, null,
+            'id', 'instance-methods',
+            'href', '#instance-methods');
+          itext('Instance Methods');
+        ie_close('a');
+      ie_close('h2');
+      ie_open('h3');
+        ie_open('a', null, null,
+            'id', 'concat',
+            'href', '#concat');
+          itext('concat');
+        ie_close('a');
+      ie_close('h3');
+      $templateAlias2({code: 'Sum ~> Sum -> Sum', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        ie_open('code');
+          itext('concat');
+        ie_close('code');
+        itext(' is used to combine (2) ');
+        ie_open('code');
+          itext('Semigroup');
+        ie_close('code');
+        itext('s of the same type under an operation specified by the ');
+        ie_open('code');
+          itext('Semigroup');
+        ie_close('code');
+        itext('. In the case of ');
+        ie_open('code');
+          itext('Sum');
+        ie_close('code');
+        itext(', it will add the (2) ');
+        ie_open('code');
+          itext('Number');
+        ie_close('code');
+        itext('s.');
+      ie_close('p');
+      $templateAlias2({code: 'const Sum = require(\'crocks/Sum\')\n\nSum(5)\n  .concat(Sum(4))\n//=> Sum 9\n\nSum(45)\n  .concat(Sum(32))\n//=> Sum 77\n\nSum(1000)\n  .concat(Sum(Infinity))\n//=> Sum Infinity\n\nSum(1)\n  .concat(Sum(3))\n//=> Sum 4', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h3');
+        ie_open('a', null, null,
+            'id', 'valueof',
+            'href', '#valueof');
+          itext('valueOf');
+        ie_close('a');
+      ie_close('h3');
+      $templateAlias2({code: 'Sum ~> () -> Number', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        ie_open('code');
+          itext('valueOf');
+        ie_close('code');
+        itext(' is used on all ');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext(' ');
+        ie_open('code');
+          itext('Monoid');
+        ie_close('code');
+        itext('s as a means of extraction. While the extraction is available, types that implement ');
+        ie_open('code');
+          itext('valueOf');
+        ie_close('code');
+        itext(' are not necessarily a');
+        ie_open('code');
+          itext('Comonad');
+        ie_close('code');
+        itext('. This function is used primarily for convenience for some of the helper functions that ship with ');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext('. Calling ');
+        ie_open('code');
+          itext('valueOf');
+        ie_close('code');
+        itext(' on a ');
+        ie_open('code');
+          itext('Sum');
+        ie_close('code');
+        itext(' instance will result in the underlying ');
+        ie_open('code');
+          itext('Number');
         ie_close('code');
         itext('.');
       ie_close('p');
-      ie_open('p');
-        itext('To access the types, just reference the folder like: ');
-        ie_open('code');
-          itext('crocks/Maybe');
-        ie_close('code');
-        itext(', or');
-        ie_open('code');
-          itext('crocks/Result');
-        ie_close('code');
-        itext('. If you want to access a function that constructs a given type, reference it by name, like: ');
-        ie_open('code');
-          itext('crocks/Maybe/safe');
-        ie_close('code');
-        itext(' or ');
-        ie_open('code');
-          itext('crocks/Result/tryCatch');
-        ie_close('code');
-        itext('. This organization helps ensure that you only include what you need.');
-      ie_close('p');
-      ie_open('p');
-        itext('Another thing to note is, if you are transpiling, then destructuring in your');
-        ie_open('code');
-          itext('import');
-        ie_close('code');
-        itext(' statement is not going to work as you are thinking (maybe if you are using ');
-        ie_open('code');
-          itext('babel');
-        ie_close('code');
-        itext(', but this will be broken once modules are available in node, so be careful). Basically you should not do this, as ');
-        ie_open('code');
-          itext('crocks');
-        ie_close('code');
-        itext(' will not be set up for it until modules are available in node:');
-      ie_close('p');
-      $templateAlias2({code: '// Nope! Nope! Nope!:\nimport { Maybe, compose, curry, map } from \'crocks\'\n\n// instead do something like this:\nimport crocks from \'crocks\'\nconst { Maybe, compose, curry, map } = crocks\n\n// do not wanna bring all of crocks into your bundle?\n// I feel ya, all try this:\n\nimport Maybe from \'crocks/Maybe\'\nimport compose from \'crock/helpers/compose\'\nimport curry from \'crocks/helpers/curry\'\nimport map from \'crocks/pointfree/map\'\n\n// you can of course do the same with require statements:\nconst All = require(\'crocks/All\')\n...', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'const Sum = require(\'crocks/Sum\')\n\nSum(4)\n  .valueOf()\n//=> 4\n\nSum.empty()\n  .valueOf()\n//=> 0\n\nSum(34)\n  .concat(21)\n  .valueOf()\n//=> 55', mode: 'javascript'}, null, opt_ijData);
     ie_close('article');
     ie_open('input', null, null,
         'type', 'hidden',
@@ -28539,11 +28646,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'value', opt_data.site.title);
     ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({content: param211}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param1880}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'zwgkn.render';
+  $render.soyTemplateName = 'ojhzt.render';
 }
 
 exports.render.params = ["page","site"];
@@ -28553,22 +28660,14 @@ return exports;
 
 });
 
-class zwgkn extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(zwgkn, templates);
+class ojhzt extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(ojhzt, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
 
 
 /***/ }),
-/* 232 */,
-/* 233 */,
-/* 234 */,
-/* 235 */,
-/* 236 */,
-/* 237 */,
-/* 238 */,
-/* 239 */,
 /* 240 */,
 /* 241 */,
 /* 242 */,
@@ -28586,7 +28685,15 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(zwgkn, templates);
 /* 254 */,
 /* 255 */,
 /* 256 */,
-/* 257 */
+/* 257 */,
+/* 258 */,
+/* 259 */,
+/* 260 */,
+/* 261 */,
+/* 262 */,
+/* 263 */,
+/* 264 */,
+/* 265 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28622,9 +28729,9 @@ __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _gettingStartedSoy = __webpack_require__(231);
+var _SumSoy = __webpack_require__(239);
 
-var _gettingStartedSoy2 = _interopRequireDefault(_gettingStartedSoy);
+var _SumSoy2 = _interopRequireDefault(_SumSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28634,23 +28741,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var zwgkn = function (_Component) {
-  _inherits(zwgkn, _Component);
+var ojhzt = function (_Component) {
+  _inherits(ojhzt, _Component);
 
-  function zwgkn() {
-    _classCallCheck(this, zwgkn);
+  function ojhzt() {
+    _classCallCheck(this, ojhzt);
 
-    return _possibleConstructorReturn(this, (zwgkn.__proto__ || Object.getPrototypeOf(zwgkn)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (ojhzt.__proto__ || Object.getPrototypeOf(ojhzt)).apply(this, arguments));
   }
 
-  return zwgkn;
+  return ojhzt;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(zwgkn, _gettingStartedSoy2.default);
+_metalSoy2.default.register(ojhzt, _SumSoy2.default);
 
-exports.default = zwgkn;
+exports.default = ojhzt;
 
 /***/ })
-],[257]);
+],[265]);

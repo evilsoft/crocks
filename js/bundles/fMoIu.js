@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([0,26,27,28],[
+webpackJsonppageComponent([21,26,27,28],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -28352,33 +28352,12 @@ exports.default = parseFromAnchor;
 /* 218 */,
 /* 219 */,
 /* 220 */,
-/* 221 */,
-/* 222 */,
-/* 223 */,
-/* 224 */,
-/* 225 */,
-/* 226 */,
-/* 227 */,
-/* 228 */,
-/* 229 */,
-/* 230 */,
-/* 231 */,
-/* 232 */,
-/* 233 */,
-/* 234 */,
-/* 235 */,
-/* 236 */,
-/* 237 */,
-/* 238 */,
-/* 239 */,
-/* 240 */,
-/* 241 */,
-/* 242 */
+/* 221 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pageIndex", function() { return pageIndex; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fMoIu", function() { return fMoIu; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28390,15 +28369,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var templates;
 goog.loadModule(function(exports) {
 
-// This file was automatically generated from index.soy.
+// This file was automatically generated from Reader.soy.
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace pageIndex.
+ * @fileoverview Templates in namespace fMoIu.
  * @public
  */
 
-goog.module('pageIndex.incrementaldom');
+goog.module('fMoIu.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28419,7 +28398,9 @@ var ie_open_end = IncrementalDom.elementOpenEnd;
 var itext = IncrementalDom.text;
 var iattr = IncrementalDom.attr;
 
-var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('main.incrementaldom', 'render');
+var $templateAlias2 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('ElectricCode.incrementaldom', 'render');
+
+var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('guide.incrementaldom', 'render');
 
 
 /**
@@ -28430,366 +28411,393 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var param138 = function() {
-    $header(opt_data, null, opt_ijData);
-    $why(null, null, opt_ijData);
-    $highlights(null, null, opt_ijData);
-    $footer(null, null, opt_ijData);
+  var param1242 = function() {
+    $templateAlias2({code: 'Reader e a', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      ie_open('code');
+        itext('Reader');
+      ie_close('code');
+      itext(' is a lazy Product Type that enables the  composition of computations that depend on a shared environment ');
+      ie_open('code');
+        itext('(e -> a)');
+      ie_close('code');
+      itext('. The left portion, the ');
+      ie_open('code');
+        itext('e');
+      ie_close('code');
+      itext(' must be fixed to a type for all related computations. The right portion ');
+      ie_open('code');
+        itext('a');
+      ie_close('code');
+      itext(' can vary in its type.');
+    ie_close('p');
+    ie_open('p');
+      itext('As ');
+      ie_open('code');
+        itext('Reader');
+      ie_close('code');
+      itext(' is lazy, wrapping a function of the form ');
+      ie_open('code');
+        itext('(e -> a)');
+      ie_close('code');
+      itext(', nothing is executed until it is run with an environment. ');
+      ie_open('code');
+        itext('Reader');
+      ie_close('code');
+      itext(' provides a method on it\'s instance that will take an environment called ');
+      ie_open('a', null, null,
+          'href', '#runwith');
+        ie_open('code');
+          itext('runWith');
+        ie_close('code');
+      ie_close('a');
+      itext(' that will run the instance with a given environment.');
+    ie_close('p');
+    ie_open('p');
+      itext('Not only is ');
+      ie_open('code');
+        itext('Reader');
+      ie_close('code');
+      itext('\'s environment fixed to a type, but it should be immutable for the "life" computation. If a referential type is used as the environment great care should be taken to not modify the value of the environment.');
+    ie_close('p');
+    $templateAlias2({code: 'const Reader = require(\'crocks/Reader\')\nconst { ask } = Reader\n\nconst concat = require(\'crocks/pointfree/concat\')\n\n// greet :: String -> Reader String String\nconst greet = greeting =>\n  Reader(name => `${greeting}, ${name}`)\n\n// addFarewell :: String -> Reader String String\nconst addFarewell = farewell => str =>\n  ask(env => `${str}${farewell} ${env}`)\n\n// flow :: Reader String String\nconst flow =\n  greet(\'Hola\')\n    .map(concat(\'...\'))\n    .chain(addFarewell(\'See Ya\'))\n\nflow\n  .runWith(\'Thomas\')\n// => Hola, Thomas...See Ya Thomas\n\nflow\n  .runWith(\'Jenny\')\n// => Hola, Jenny...See Ya Jenny', mode: 'javascript'}, null, opt_ijData);
+    ie_open('article', null, null,
+        'id', 'topic-implements');
+      ie_open('h2');
+        ie_open('a', null, null,
+            'id', 'implements',
+            'href', '#implements');
+          itext('Implements');
+        ie_close('a');
+      ie_close('h2');
+      ie_open('p');
+        ie_open('code');
+          itext('Functor');
+        ie_close('code');
+        itext(', ');
+        ie_open('code');
+          itext('Apply');
+        ie_close('code');
+        itext(', ');
+        ie_open('code');
+          itext('Chain');
+        ie_close('code');
+        itext(', ');
+        ie_open('code');
+          itext('Applicative');
+        ie_close('code');
+        itext(', ');
+        ie_open('code');
+          itext('Monad');
+        ie_close('code');
+      ie_close('p');
+    ie_close('article');
+    ie_open('article', null, null,
+        'id', 'topic-constructor');
+      ie_open('h2');
+        ie_open('a', null, null,
+            'id', 'constructor-methods',
+            'href', '#constructor-methods');
+          itext('Constructor Methods');
+        ie_close('a');
+      ie_close('h2');
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'ask',
+            'href', '#ask');
+          itext('ask');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Reader.ask :: () -> Reader e e\nReader.ask :: (e -> b) -> Reader e b', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        itext('A construction helper that returns a ');
+        ie_open('code');
+          itext('Reader');
+        ie_close('code');
+        itext(' with the environment on the right portion of the ');
+        ie_open('code');
+          itext('Reader');
+        ie_close('code');
+        itext('. ');
+        ie_open('code');
+          itext('ask');
+        ie_close('code');
+        itext(' can take a function, that can be used to map the environment to a different type or value.');
+      ie_close('p');
+      $templateAlias2({code: 'const Reader = require(\'crocks/Reader\')\nconst { ask } = Reader\n\n// add :: Number -> Number -> Number\nconst add =\n  x => y => x + y\n\n// Typical constructor\nReader(add(10))\n  .runWith(56)\n//=> 66\n\n// Using `ask` with no function\n// (identity on environment)\nask()\n  .runWith(56)\n//=> 56\n\n// Using `ask` with a function\n// (map environment before deposit)\nask(add(10))\n  .runWith(56)\n//=> 66', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'of',
+            'href', '#of');
+          itext('of');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Reader.of :: a -> Reader e a', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        ie_open('code');
+          itext('of');
+        ie_close('code');
+        itext(' is used to construct a ');
+        ie_open('code');
+          itext('Reader');
+        ie_close('code');
+        itext(' with the right portion populated with it\'s argument. ');
+        ie_open('code');
+          itext('of');
+        ie_close('code');
+        itext(' essentially will lift a value of type ');
+        ie_open('code');
+          itext('a');
+        ie_close('code');
+        itext(' into a ');
+        ie_open('code');
+          itext('Reader');
+        ie_close('code');
+        itext(', giving back a ');
+        ie_open('code');
+          itext('Reader');
+        ie_close('code');
+        itext(' that is "pointed" to the specific value provided. ');
+        ie_open('code');
+          itext('of');
+        ie_close('code');
+        itext(' makes for a wonderful starting point for some of the more complicated flows.');
+      ie_close('p');
+      $templateAlias2({code: 'const Reader = require(\'crocks/Reader\')\nconst { ask } = Reader\n\nconst objOf = require(\'crocks/helpers/objOf\')\nconst thrush = require(\'crocks/combinators/reverseApply\')\n\n// add :: Number -> Number -> Number\nconst add =\n  x => y => x + y\n\nReader.of(34)\n  .map(add(6))\n  .runWith()\n//=> 40\n\nReader.of(\'Bobby\')\n  .map(objOf(\'name\'))\n  .runWith()\n//=> { name: \'Bobby\' }\n\nReader.of(57)\n  .chain(x => ask(add).map(thrush(x)))\n  .runWith(43)\n//=> 100', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'type',
+            'href', '#type');
+          itext('type');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Reader.type :: () -> String', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        ie_open('code');
+          itext('type');
+        ie_close('code');
+        itext(' provides a string representation of the type name for a given type in');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext('. While it is used mostly internally for law validation, it can be useful to the end user for debugging and building out custom types based on the standard');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext(' types. While type comparisons can easily be done manually by calling');
+        ie_open('code');
+          itext('type');
+        ie_close('code');
+        itext(' on a given type, using the ');
+        ie_open('code');
+          itext('isSameType');
+        ie_close('code');
+        itext(' function hides much of the boilerplate. ');
+        ie_open('code');
+          itext('type');
+        ie_close('code');
+        itext(' is available on both the Constructor and the Instance for convenience.');
+      ie_close('p');
+      $templateAlias2({code: 'const Reader = require(\'crocks/Reader\')\nconst Identity = require(\'crocks/Identity\')\n\nconst I = require(\'crocks/combinators/identity\')\nconst isSameType = require(\'crocks/predicates/isSameType\')\n\nReader.type() //=> \'Reader\'\n\nisSameType(Reader, Reader.of(76))   //=> true\nisSameType(Reader, Reader)          //=> true\nisSameType(Reader, Identity(0))     //=> false\nisSameType(Reader(I), Identity)     //=> false', mode: 'javascript'}, null, opt_ijData);
+    ie_close('article');
+    ie_open('article', null, null,
+        'id', 'topic-instance');
+      ie_open('h2');
+        ie_open('a', null, null,
+            'id', 'instance-methods',
+            'href', '#instance-methods');
+          itext('Instance Methods');
+        ie_close('a');
+      ie_close('h2');
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'map',
+            'href', '#map');
+          itext('map');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Reader e a ~> (a -> b) -> Reader e b', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        itext('While the left side, or the environment, of the ');
+        ie_open('code');
+          itext('Reader');
+        ie_close('code');
+        itext(' must always be fixed to the same type, the right side, or value, of the ');
+        ie_open('code');
+          itext('Reader');
+        ie_close('code');
+        itext(' may vary. Using ');
+        ie_open('code');
+          itext('map');
+        ie_close('code');
+        itext('allows a function to be lifted into the ');
+        ie_open('code');
+          itext('Reader');
+        ie_close('code');
+        itext(', mapping the result into the result of the lifted function.');
+      ie_close('p');
+      $templateAlias2({code: 'const Reader = require(\'crocks/Reader\')\nconst { ask } = Reader\n\nconst assign = require(\'crocks/helpers/assign\')\nconst B = require(\'crocks/combinators/composeB\')\nconst objOf = require(\'crocks/helpers/objOf\')\nconst option = require(\'crocks/pointfree/option\')\nconst prop = require(\'crocks/Maybe/prop\')\n\n// length :: Array -> Number\nconst length =\n  x => x.length\n\nask()\n  .map(length)\n  .runWith([ 1, 2, 3 ])\n//=> 3\n\n// propOr :: (String, a) -> b -> a\nconst propOr = (key, def) =>\n  B(option(def), prop(key))\n\n// lengthObj :: Array -> Object\nconst lengthObj =\n  B(objOf(\'length\'), length)\n\n// addLength :: Object -> Redaer Array Object\nconst addLength = x =>\n  ask(propOr(\'list\', []))\n    .map(B(assign(x), lengthObj))\n\nReader.of({ num: 27 })\n  .chain(addLength)\n  .runWith({ list: [ 1, 2, 3 ] })\n//=> { length: 3, num: 27 }', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'ap',
+            'href', '#ap');
+          itext('ap');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Reader e (a -> b) ~> Reader e a -> Reader e b', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        ie_open('code');
+          itext('ap');
+        ie_close('code');
+        itext(' allows for values wrapped in a ');
+        ie_open('code');
+          itext('Reader');
+        ie_close('code');
+        itext(' to be applied to functions also wrapped in a ');
+        ie_open('code');
+          itext('Reader');
+        ie_close('code');
+        itext('. In order to use ');
+        ie_open('code');
+          itext('ap');
+        ie_close('code');
+        itext(', the ');
+        ie_open('code');
+          itext('Reader');
+        ie_close('code');
+        itext(' must contain a function as its value. Under the hood, ');
+        ie_open('code');
+          itext('ap');
+        ie_close('code');
+        itext(' unwraps both the function and the value to be applied and applies the value to the function. Finally it will wrap the result of that application back into a ');
+        ie_open('code');
+          itext('Reader');
+        ie_close('code');
+        itext('. It is required that the inner function is curried.');
+      ie_close('p');
+      $templateAlias2({code: 'const Reader = require(\'crocks/Reader\')\nconst { ask } = Reader\n\nconst B = require(\'crocks/combinators/composeB\')\nconst assign = require(\'crocks/helpers/assign\')\nconst liftA2 = require(\'crocks/helpers/liftA2\')\nconst objOf = require(\'crocks/helpers/objOf\')\n\n// namePart :: Number -> String -> String\nconst namePart = indx => x =>\n  x.split(\' \')[indx] || \'\'\n\n// combine :: Object -> Reader Object\nconst combine =\n  x => ask(assign(x))\n\n// full :: Reader Object\nconst full =\n  ask(({ full }) => full)\n\n// first :: Reader Object\nconst first =\n  full\n    .map(B(objOf(\'first\'), namePart(0)))\n\n// last :: Reader Object\nconst last =\n  full\n    .map(B(objOf(\'last\'), namePart(1)))\n\n// fluent style\nReader.of(assign)\n  .ap(first)\n  .ap(last)\n  .chain(combine)\n  .runWith({ full: \'Mary Jones\' })\n//=> { full: \'Mary Jones\', first: \'Mary\', last: \'Jones\' }\n\n// liftAssign :: Reader Object -> Reader Object -> Reader Object\nconst liftAssign =\n  liftA2(assign)\n\n// using a lift function\nliftAssign(first, last)\n  .chain(combine)\n  .runWith({ full: \'Tom Jennings\' })\n//=> { full: \'Tom Jennings\', first: \'Tom\', last: \'Jennings\' }', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'chain',
+            'href', '#chain');
+          itext('chain');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Reader e a ~> (a -> Reader e b) -> Reader e b', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        itext('One of the ways ');
+        ie_open('code');
+          itext('Monad');
+        ie_close('code');
+        itext('s like ');
+        ie_open('code');
+          itext('Reader');
+        ie_close('code');
+        itext(' are able to be combined and have their effects applied, is by using the ');
+        ie_open('code');
+          itext('chain');
+        ie_close('code');
+        itext(' method. In the case of ');
+        ie_open('code');
+          itext('Reader');
+        ie_close('code');
+        itext(', the effect is to read in and make available the shared environment. ');
+        ie_open('code');
+          itext('chain');
+        ie_close('code');
+        itext(' expects a function that will take any ');
+        ie_open('code');
+          itext('a');
+        ie_close('code');
+        itext(' and return a new ');
+        ie_open('code');
+          itext('Reader');
+        ie_close('code');
+        itext(' with a value of ');
+        ie_open('code');
+          itext('b');
+        ie_close('code');
+        itext('.');
+      ie_close('p');
+      $templateAlias2({code: 'const Reader = require(\'crocks/Reader\')\nconst { ask } = Reader\n\nconst B = require(\'crocks/combinators/composeB\')\nconst option = require(\'crocks/pointfree/option\')\nconst prop = require(\'crocks/Maybe/prop\')\n\n// multiply :: Number -> Number -> Number\nconst multiply =\n  x => y => x * y\n\n// add :: Number -> Number -> Number\nconst add  =\n  x => y => x + y\n\n// propOr :: (String, a) -> b -> a\nconst propOr = (key, def) =>\n  B(option(def), prop(key))\n\n// applyScale :: Number -> Reader Object Number\nconst applyScale = x =>\n  ask(propOr(\'scale\', 1))\n    .map(multiply(x))\n\n// applyScale :: Number -> Reader Object Number\nconst applyOffset = x =>\n  ask(propOr(\'offset\', 0))\n    .map(add(x))\n\n// applyTransforms :: Number -> Reader Object Number\nconst applyTransform = x =>\n  Reader.of(x)\n    .chain(applyOffset)\n    .chain(applyScale)\n\napplyTransform(45)\n  .runWith({})\n//=> 45\n\napplyTransform(45)\n  .runWith({ offset: 20 })\n//=> 65\n\napplyTransform(45)\n  .runWith({ scale: 2 })\n//=> 90\n\napplyTransform(45)\n  .runWith({ scale: 2, offset: 20 })\n//=> 130', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'runwith',
+            'href', '#runwith');
+          itext('runWith');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Reader e a ~> e -> a', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        itext('As ');
+        ie_open('code');
+          itext('Reader');
+        ie_close('code');
+        itext(' is a lazy datatype that requires a shared environment to run, it\'s instance provides a ');
+        ie_open('code');
+          itext('runWith');
+        ie_close('code');
+        itext(' method that takes in an environment and returns the result of the computation.');
+      ie_close('p');
+      $templateAlias2({code: 'const { ask } = require(\'crocks/Reader\')\nconst Pair = require(\'crocks/Pair\')\n\nconst fst = require(\'crocks/Pair/fst\')\nconst liftA2 = require(\'crocks/helpers/liftA2\')\nconst snd = require(\'crocks/Pair/snd\')\n\n// data :: Pair Number Number\nconst data =\n  Pair(20, 45)\n\n// getCorrect :: Reader (Pair Number Number) Number\nconst getCorrect =\n  ask(fst)\n\n// getTotal :: Reader (Pair Number Number) Number\nconst getTotal =\n  ask(snd)\n\n// divide :: Number -> Number -> Number\nconst divide =\n  x => y => x / y\n\n// formatPercent :: Number -> String\nconst formatPercent =\n  x => `${Math.floor(x * 1000) / 10}%`\n\n// calcPercent :: Reader (Pair Number Number) String\nconst calcPercent =\n  liftA2(divide, getCorrect, getTotal)\n    .map(formatPercent)\n\ncalcPercent\n  .runWith(data)\n//=. \'44.4%\'', mode: 'javascript'}, null, opt_ijData);
+    ie_close('article');
+    ie_open('input', null, null,
+        'type', 'hidden',
+        'value', opt_data.page.title);
+    ie_close('input');
+    ie_open('input', null, null,
+        'type', 'hidden',
+        'value', opt_data.site.title);
+    ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({content: param138}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param1242}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'pageIndex.render';
+  $render.soyTemplateName = 'fMoIu.render';
 }
 
-
-/**
- * @param {Object<string, *>=} opt_data
- * @param {(null|undefined)=} opt_ignored
- * @param {Object<string, *>=} opt_ijData
- * @return {void}
- * @suppress {checkTypes}
- */
-function $header(opt_data, opt_ignored, opt_ijData) {
-  ie_open('header', null, null,
-      'class', 'header');
-    ie_open('div', null, null,
-        'class', 'container');
-      ie_open('h1', null, null,
-          'class', 'header-title');
-        var dyn10 = opt_data.site.title;
-        if (typeof dyn10 == 'function') dyn10(); else if (dyn10 != null) itext(dyn10);
-      ie_close('h1');
-      ie_open('h2', null, null,
-          'class', 'header-subtitle');
-        var dyn11 = opt_data.site.index.description;
-        if (typeof dyn11 == 'function') dyn11(); else if (dyn11 != null) itext(dyn11);
-      ie_close('h2');
-      ie_open('div', null, null,
-          'class', 'header-cta');
-        ie_open('a', null, null,
-            'href', 'docs/getting-started.html',
-            'class', 'btn btn-accent');
-          itext('Get Started');
-        ie_close('a');
-      ie_close('div');
-    ie_close('div');
-    ie_open('p', null, null,
-        'class', 'gh-btns');
-      ie_void('iframe', null, null,
-          'src', '//ghbtns.com/github-btn.html?user=evilsoft&repo=crocks&type=watch&count=true&size=large',
-          'allowtransparency', 'true',
-          'frameborder', '0',
-          'scrolling', '0',
-          'width', '150',
-          'height', '30');
-      ie_void('iframe', null, null,
-          'src', '//ghbtns.com/github-btn.html?user=evilsoft&repo=crocks&type=fork&count=true&size=large',
-          'allowtransparency', 'true',
-          'frameborder', '0',
-          'scrolling', '0',
-          'width', '150',
-          'height', '30');
-    ie_close('p');
-  ie_close('header');
-}
-exports.header = $header;
-if (goog.DEBUG) {
-  $header.soyTemplateName = 'pageIndex.header';
-}
-
-
-/**
- * @param {Object<string, *>=} opt_data
- * @param {(null|undefined)=} opt_ignored
- * @param {Object<string, *>=} opt_ijData
- * @return {void}
- * @suppress {checkTypes}
- */
-function $why(opt_data, opt_ignored, opt_ijData) {
-  ie_open('article', null, null,
-      'class', 'about');
-    ie_open('div', null, null,
-        'class', 'container');
-      ie_open('div', null, null,
-          'class', 'row');
-        ie_open('div', null, null,
-            'class', 'col-md-12 col-md-offset-2');
-          ie_open('h3', null, null,
-              'class', 'about-title');
-            itext('Why?');
-          ie_close('h3');
-          ie_open('p', null, null,
-              'class', 'about-description');
-            itext('Because Functional Programming! Crocks curates and provides a common interface between each data type (where possible of course), not forgetting all of the helper functions necessary to hit the ground running.');
-          ie_close('p');
-        ie_close('div');
-      ie_close('div');
-    ie_close('div');
-  ie_close('article');
-}
-exports.why = $why;
-if (goog.DEBUG) {
-  $why.soyTemplateName = 'pageIndex.why';
-}
-
-
-/**
- * @param {Object<string, *>=} opt_data
- * @param {(null|undefined)=} opt_ignored
- * @param {Object<string, *>=} opt_ijData
- * @return {void}
- * @suppress {checkTypes}
- */
-function $features(opt_data, opt_ignored, opt_ijData) {
-  ie_open('div', null, null,
-      'class', 'features');
-    ie_open('div', null, null,
-        'class', 'container');
-      ie_open('div', null, null,
-          'class', 'row');
-        ie_open('section', null, null,
-            'class', 'feature col-md-4 col-md-offset-2');
-          ie_open('div', null, null,
-              'class', 'feature-graphic');
-            ie_void('span', null, null,
-                'class', 'icon-16-bullhorn');
-          ie_close('div');
-          ie_open('h3', null, null,
-              'class', 'feature-title');
-            itext('Heading');
-          ie_close('h3');
-          ie_open('p', null, null,
-              'class', 'feature-description');
-            itext('Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros praesent commodo.');
-          ie_close('p');
-        ie_close('section');
-        ie_open('section', null, null,
-            'class', 'feature col-md-4');
-          ie_open('div', null, null,
-              'class', 'feature-graphic');
-            ie_void('span', null, null,
-                'class', 'icon-16-lock');
-          ie_close('div');
-          ie_open('h3', null, null,
-              'class', 'feature-title');
-            itext('Heading');
-          ie_close('h3');
-          ie_open('p', null, null,
-              'class', 'feature-description');
-            itext('Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros praesent commodo.');
-          ie_close('p');
-        ie_close('section');
-        ie_open('section', null, null,
-            'class', 'feature col-md-4');
-          ie_open('div', null, null,
-              'class', 'feature-graphic');
-            ie_void('span', null, null,
-                'class', 'icon-16-calendar');
-          ie_close('div');
-          ie_open('h3', null, null,
-              'class', 'feature-title');
-            itext('Heading');
-          ie_close('h3');
-          ie_open('p', null, null,
-              'class', 'feature-description');
-            itext('Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros praesent commodo.');
-          ie_close('p');
-        ie_close('section');
-      ie_close('div');
-    ie_close('div');
-  ie_close('div');
-}
-exports.features = $features;
-if (goog.DEBUG) {
-  $features.soyTemplateName = 'pageIndex.features';
-}
-
-
-/**
- * @param {Object<string, *>=} opt_data
- * @param {(null|undefined)=} opt_ignored
- * @param {Object<string, *>=} opt_ijData
- * @return {void}
- * @suppress {checkTypes}
- */
-function $highlights(opt_data, opt_ignored, opt_ijData) {
-  ie_open('div', null, null,
-      'class', 'highlights');
-    ie_open('div', null, null,
-        'class', 'container');
-      ie_open('section', null, null,
-          'class', 'highlight row');
-        ie_open('div', null, null,
-            'class', 'col-md-6 col-md-offset-2');
-          ie_open('h4', null, null,
-              'class', 'highlight-title');
-            itext('Work in a more declarative, functional flow.');
-          ie_close('h4');
-          ie_open('p', null, null,
-              'class', 'highlight-description');
-            itext('The data types provided in Crocks allow you to remove large swaths of imparative boilerplate, allowing you to think of your code in terms of what it does and not how it does it.');
-          ie_close('p');
-        ie_close('div');
-        ie_open('div', null, null,
-            'class', 'col-md-5 col-md-offset-1');
-          ie_open('div', null, null,
-              'class', 'highlight-graphic');
-            ie_void('span', null, null,
-                'class', 'icon-16-balloon-topic');
-          ie_close('div');
-        ie_close('div');
-      ie_close('section');
-      ie_open('section', null, null,
-          'class', 'highlight row');
-        ie_open('div', null, null,
-            'class', 'col-md-6 col-md-push-9');
-          ie_open('h4', null, null,
-              'class', 'highlight-title');
-            itext('Use a collection of popular Algebraic Data Types (ADTs)');
-          ie_close('h4');
-          ie_open('p', null, null,
-              'class', 'highlight-description');
-            itext('Have you ever heard of Maybe, Either, or, heck, even IO? These are just a few of the ADTs which Crocks brings to the table.');
-          ie_close('p');
-        ie_close('div');
-        ie_open('div', null, null,
-            'class', 'col-md-5 col-md-offset-2 col-md-pull-6');
-          ie_open('div', null, null,
-              'class', 'highlight-graphic');
-            ie_void('span', null, null,
-                'class', 'icon-16-menu');
-          ie_close('div');
-        ie_close('div');
-      ie_close('section');
-      ie_open('section', null, null,
-          'class', 'highlight row');
-        ie_open('div', null, null,
-            'class', 'col-md-6 col-md-offset-2');
-          ie_open('h4', null, null,
-              'class', 'highlight-title');
-            itext('Combine a list of values down to one value');
-          ie_close('h4');
-          ie_open('p', null, null,
-              'class', 'highlight-description');
-            itext('Crocks provides a large variety of Monoids, which are ADTs that represent a binary operation and are usually locked down it to a specific type. These are great when you need to combine two things into one under a specific operation.');
-          ie_close('p');
-        ie_close('div');
-        ie_open('div', null, null,
-            'class', 'col-md-5 col-md-offset-1');
-          ie_open('div', null, null,
-              'class', 'highlight-graphic');
-            ie_void('span', null, null,
-                'class', 'icon-16-org_chart');
-          ie_close('div');
-        ie_close('div');
-      ie_close('section');
-    ie_close('div');
-  ie_close('div');
-}
-exports.highlights = $highlights;
-if (goog.DEBUG) {
-  $highlights.soyTemplateName = 'pageIndex.highlights';
-}
-
-
-/**
- * @param {Object<string, *>=} opt_data
- * @param {(null|undefined)=} opt_ignored
- * @param {Object<string, *>=} opt_ijData
- * @return {void}
- * @suppress {checkTypes}
- */
-function $footer(opt_data, opt_ignored, opt_ijData) {
-  ie_open('footer', null, null,
-      'class', 'footer');
-    ie_open('div', null, null,
-        'class', 'container');
-      ie_open('div', null, null,
-          'class', 'row');
-        ie_open('p', null, null,
-            'class', 'footer-description col-md-3 col-md-offset-2');
-          ie_open('a', null, null,
-              'href', 'https://github.com/evilsoft/crocks');
-            itext('Crocks');
-          ie_close('a');
-        ie_close('p');
-        ie_open('p', null, null,
-            'class', 'footer-description col-md-4');
-          ie_open('a', null, null,
-              'href', 'https://github.com/evilsoft/crocks/blob/master/LICENSE');
-            itext('Distributed under ISC License');
-          ie_close('a');
-        ie_close('p');
-        ie_open('p', null, null,
-            'class', 'footer-description col-md-5');
-          itext('Found an issue with the docs? Report it ');
-          ie_open('a', null, null,
-              'href', 'https://github.com/evilsoft/crocks/issues/new');
-            itext('here');
-          ie_close('a');
-        ie_close('p');
-      ie_close('div');
-    ie_close('div');
-  ie_close('footer');
-}
-exports.footer = $footer;
-if (goog.DEBUG) {
-  $footer.soyTemplateName = 'pageIndex.footer';
-}
-
-exports.render.params = ["site"];
-exports.render.types = {"site":"any"};
-exports.header.params = ["site"];
-exports.header.types = {"site":"any"};
-exports.why.params = [];
-exports.why.types = {};
-exports.features.params = [];
-exports.features.types = {};
-exports.highlights.params = [];
-exports.highlights.types = {};
-exports.footer.params = [];
-exports.footer.types = {};
+exports.render.params = ["page","site"];
+exports.render.types = {"page":"any","site":"any"};
 templates = exports;
 return exports;
 
 });
 
-class pageIndex extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(pageIndex, templates);
+class fMoIu extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(fMoIu, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
 
 
 /***/ }),
+/* 222 */,
+/* 223 */,
+/* 224 */,
+/* 225 */,
+/* 226 */,
+/* 227 */,
+/* 228 */,
+/* 229 */,
+/* 230 */,
+/* 231 */,
+/* 232 */,
+/* 233 */,
+/* 234 */,
+/* 235 */,
+/* 236 */,
+/* 237 */,
+/* 238 */,
+/* 239 */,
+/* 240 */,
+/* 241 */,
+/* 242 */,
 /* 243 */,
 /* 244 */,
 /* 245 */,
 /* 246 */,
-/* 247 */,
-/* 248 */,
-/* 249 */,
-/* 250 */,
-/* 251 */,
-/* 252 */,
-/* 253 */,
-/* 254 */,
-/* 255 */,
-/* 256 */,
-/* 257 */,
-/* 258 */,
-/* 259 */,
-/* 260 */,
-/* 261 */,
-/* 262 */,
-/* 263 */,
-/* 264 */,
-/* 265 */,
-/* 266 */,
-/* 267 */,
-/* 268 */
+/* 247 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28825,9 +28833,9 @@ __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _indexSoy = __webpack_require__(242);
+var _ReaderSoy = __webpack_require__(221);
 
-var _indexSoy2 = _interopRequireDefault(_indexSoy);
+var _ReaderSoy2 = _interopRequireDefault(_ReaderSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28837,23 +28845,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var pageIndex = function (_Component) {
-  _inherits(pageIndex, _Component);
+var fMoIu = function (_Component) {
+  _inherits(fMoIu, _Component);
 
-  function pageIndex() {
-    _classCallCheck(this, pageIndex);
+  function fMoIu() {
+    _classCallCheck(this, fMoIu);
 
-    return _possibleConstructorReturn(this, (pageIndex.__proto__ || Object.getPrototypeOf(pageIndex)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (fMoIu.__proto__ || Object.getPrototypeOf(fMoIu)).apply(this, arguments));
   }
 
-  return pageIndex;
+  return fMoIu;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(pageIndex, _indexSoy2.default);
+_metalSoy2.default.register(fMoIu, _ReaderSoy2.default);
 
-exports.default = pageIndex;
+exports.default = fMoIu;
 
 /***/ })
-],[268]);
+],[247]);

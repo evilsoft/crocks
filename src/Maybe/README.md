@@ -127,7 +127,7 @@ Maybe.Just :: a -> Maybe a
 
 Used to construct a `Just` instance that represents the "true" portion of a
 disjunction or a valid value.  `Just` will wrap any given value in
-a `Just`, signalling the validity of the wrapped value.
+a `Just`, signaling the validity of the wrapped value.
 
 ```javascript
 const { Just, Nothing } = require('crocks/Maybe')
@@ -368,7 +368,6 @@ Used to apply transformations to values in the safety of a `Maybe`, `map` takes
 a function that it will lift into the context of the `Maybe` and apply to it
 the wrapped value. When ran on a `Just` instance, `map` will apply the wrapped
 value to the provided function and return the result in a new `Just` instance.
-
 
 ```javascript
 const { Nothing, Just } = require('crocks/Maybe')

@@ -16,7 +16,8 @@ function liftA2(fn, x, y) {
   if(!isFunction(fn)) {
     throw new TypeError('liftA2: Function required for first argument')
   }
-  else if(!((isApply(x) || isArray(x)) && isSameType(x, y))) {
+
+  if(!((isApply(x) || isArray(x)) && isSameType(x, y))) {
     throw new TypeError('liftA2: Applys of same type required for last two arguments')
   }
 

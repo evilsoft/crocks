@@ -57,7 +57,7 @@ need to account for for the rest of your flow.
 |:---|:---|:---|
 | [`assign`][assign] | `Object -> Object -> Object` | `crocks/helpers/assign` |
 | [`assoc`][assoc] | `String -> a -> Object -> Object` | `crocks/helpers/assoc` |
-| [`binary`][binary] | `(* -> c) -> a -> b -> c` | `crocks/helpers/binary` |
+| [`binary`][binary] | `((*) -> c) -> a -> b -> c` | `crocks/helpers/binary` |
 | [`branch`][branch] | `a -> Pair a a` | `crocks/Pair/branch` |
 | [`compose`][compose] | `((y -> z), ..., (a -> b)) -> a -> z` | `crocks/helpers/compose` |
 | [`composeK`][composek] | `Chain m => ((y -> m z), ..., (a -> m b)) -> a -> m z` | `crocks/helpers/composeK` |
@@ -71,17 +71,18 @@ need to account for for the rest of your flow.
 | [`fromPairs`][frompairs] | `Foldable f => f (Pair String a) -> Object` | `crocks/helpers/fromPairs` |
 | [`liftA2`][lifta2] | `Applicative m => (a -> b -> c) -> m a -> m b -> m c` | `crocks/helpers/liftA2` |
 | [`liftA3`][lifta3] | `Applicative m => (a -> b -> c -> d) -> m a -> m b -> m c -> m d` | `crocks/helpers/liftA3` |
+| [`liftN`][liftn] | `Applicative m => Number -> ((*) -> a) -> (*m) -> m a` | `crocks/helpers/liftN` |
 | [`mapProps`][mapprops] | `Object -> Object -> Object` | `crocks/helpers/mapProps` |
 | [`mapReduce`][mapreduce] | `Foldable f => (a -> b) -> (c -> b -> c) -> c -> f a -> c` | `crocks/helpers/mapReduce` |
 | [`mconcat`][mconcat] | `Monoid m, Foldable f => m -> f a -> m a` | `crocks/helpers/mconcat` |
 | [`mconcatMap`][mconcatmap] | `Monoid m, Foldable f => m -> (b -> a) -> f b -> m a` | `crocks/helpers/mconcatMap` |
 | [`mreduce`][mreduce] | `Monoid m, Foldable f => m -> f a -> a` | `crocks/helpers/mreduce` |
 | [`mreduceMap`][mreducemap] | `Monoid m, Foldable f => m -> (b -> a) -> f b -> a` | `crocks/helpers/mreduceMap` |
-| [`nAry`][nary] | `Number -> (* -> a) -> * -> a` | `crocks/helpers/nAry` |
+| [`nAry`][nary] | `Number -> ((*) -> a) -> (*) -> a` | `crocks/helpers/nAry` |
 | [`objOf`][objof] | `String -> a -> Object` | `crocks/helpers/objOf` |
 | [`omit`][omit] | `Foldable f => f String -> Object -> Object` | `crocks/helpers/omit` |
 | [`once`][once] | `((*) -> a) -> ((*) -> a)` | `crocks/helpers/once` |
-| [`partial`][partial] | `((* -> c), *) -> * -> c` | `crocks/helpers/partial` |
+| [`partial`][partial] | `(((*) -> c), *) -> (*) -> c` | `crocks/helpers/partial` |
 | [`pick`][pick] | `Foldable f => f String -> Object -> Object` | `crocks/helpers/pick` |
 | [`pipe`][pipe] | `((a -> b), ..., (y -> z)) -> a -> z` | `crocks/helpers/pipe` |
 | [`pipeK`][pipek] | `Chain m => ((a -> m b), ..., (y -> m z)) -> a -> m z` | `crocks/helpers/pipeK` |
@@ -96,7 +97,7 @@ need to account for for the rest of your flow.
 | [`tap`][tap] | `(a -> b) -> a -> a` | `crocks/helpers/tap` |
 | [`toPairs`][topairs] | `Object -> List (Pair String a)` | `crocks/Pair/toPairs` |
 | [`tryCatch`][trycatch] | `(a -> b) -> a -> Result e b` | `crocks/Result/tryCatch` |
-| [`unary`][unary] | `(* -> b) -> a -> b` | `crocks/helpers/unary` |
+| [`unary`][unary] | `((*) -> b) -> a -> b` | `crocks/helpers/unary` |
 | [`unit`][unit] | `() -> undefined` | `crocks/helpers/unit` |
 
 ## Logic
@@ -145,6 +146,7 @@ type: `Pred a` and vice-versa
 [frompairs]: helpers.html#frompairs
 [lifta2]: helpers.html#lifta2
 [lifta3]: helpers.html#lifta3
+[liftn]: helpers.html#liftn
 [mapprops]: helpers.html#mapprops
 [mapreduce]: helpers.html#mapreduce
 [mconcat]: helpers.html#mconcat

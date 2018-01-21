@@ -43,7 +43,7 @@ just want to create an `Object` and not concatenate it to another `Object`,
 
 `crocks/helpers/binary`
 ```haskell
-binary :: (* -> c) -> a -> b -> c
+binary :: ((*) -> c) -> a -> b -> c
 ```
 With all the different functions out there in the real world, sometimes it is
 nice to restrict them to a specific -arity to work with your all your wonderful
@@ -360,8 +360,100 @@ liftA3 :: Applicative m => (a -> b -> c -> d) -> m a -> m b -> m c -> m d
 
 Ever see yourself wanting to `map` a binary or trinary function, but `map` only
 allows unary functions? Both of these functions allow you to pass in your
-function as well as the number of `Applicatives` (containers that provide both
+function as well as the number of `Applicative`s (containers that provide both
 `of` and `ap` functions) you need to get the mapping you are looking for.
+
+#### liftN
+
+`crocks/helpers/liftN`
+
+```haskell
+liftN :: Applicative m => Number -> ((*) -> a) -> (*m) -> m a
+```
+
+While [`liftA2`](#lifta2) and [`liftA3`](#lifta3) will handle a majority of
+the functions we tend to encounter, many cases arise when we want to deal with
+functions of a greater arity. In those cases, `liftN` will allow the lifting of
+function of any size arity.
+
+`liftN` takes a `Number` that specifies the arity of the function to be lifted,
+followed by the function itself and finally the required number
+of `Applicative` instances of the same type to be applied to the target
+function.
+
+In most cases, there is no need to explicitly curry the target function. This
+function operates in the same vein as [`nAry`](#nary) and as such manually
+curried functions (i.e. `x => y => x + y`) will need to be explicitly curried
+using [`curry`](#curry) to ensure proper application of the arguments.
+
+```javascript
+const compose = require('crocks/helpers/compose')
+const curry = require('crocks/helpers/curry')
+const liftN = require('crocks/helpers/liftN')
+const isNumber = require('crocks/predicates/isNumber')
+const isString = require('crocks/predicates/isString')
+const map = require('crocks/pointfree/map')
+const safe = require('crocks/Maybe/safe')
+
+// apply :: (((*) -> b), [ a ]) -> b
+const apply = fn => xs =>
+  fn.apply(null, xs)
+
+// join :: String -> String -> String
+const join =
+  x => y => `${x} ${y}`
+
+// safeString :: a -> Maybe String
+const safeString =
+  safe(isString)
+
+// sumArgs :: (* Number) -> Number
+const sumArgs =
+  (...args) => args.reduce((x, y) => x + y, 0)
+
+// max :: Applicative m => [ m Number ] -> m Number
+const max =
+  apply(liftN(4, Math.max))
+
+// sum :: Applicative m => [ m Number ] -> m Number
+const sum =
+  apply(liftN(4, sumArgs))
+
+// apJoin :: Applicative m => [ m String ] -> m String
+const apJoin =
+  liftN(2, curry(join))
+
+// good :: [ Number ]
+const good =
+  [ 45, 54, 96, 99 ]
+
+// bad :: [ String ]
+const bad =
+  [ 'one', 'two', 'three', 'four' ]
+
+// arMax :: [ Number ] -> [ Number ]
+const arMax =
+  compose(max, map(Array.of))
+
+// safeSum :: Maybe Number -> Maybe Number
+const safeSum =
+  compose(sum, map(safe(isNumber)))
+
+arMax(good)
+//=> [ 99 ]
+
+safeSum(good)
+//=> Just 294
+
+safeSum(bad)
+//=> Nothing
+
+apJoin(safeString('Joey'), safeString('Fella'))
+//=> Just "Joey Fella"
+
+apJoin(safeString(9), safeString('Fella'))
+//=> Nothing
+```
 
 #### mapProps
 
@@ -510,7 +602,7 @@ returns the bare value itself.
 `crocks/helpers/nAry`
 
 ```haskell
-nAry :: Number -> (* -> a) -> * -> a
+nAry :: Number -> ((*) -> a) -> (*) -> a
 ```
 
 When using functions like `Math.max` or `Object.assign` that take as many
@@ -575,7 +667,7 @@ function with the expected guarantees.
 `crocks/helpers/partial`
 
 ```haskell
-partial :: ((* -> c), *) -> * -> c
+partial :: (((*) -> c), *) -> (*) -> c
 ```
 
 There are many times when using functions from non-functional libraries or from
@@ -862,7 +954,7 @@ wrapped in an `Result.Err` if it fails.
 `crocks/helpers/unary`
 
 ```haskell
-unary :: (* -> b) -> a -> b
+unary :: ((*) -> b) -> a -> b
 ```
 
 If you every need to lock down a given function to just one argument, then look

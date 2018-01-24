@@ -85,8 +85,8 @@ function _Writer(Monoid) {
     }
 
     return {
-      inspect, read, valueOf,
-      log, type, equals, map,
+      inspect, toString: inspect, read,
+      valueOf, log, type, equals, map,
       ap, of, chain,
       constructor: Writer
     }

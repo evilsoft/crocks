@@ -187,9 +187,10 @@ function Maybe(u) {
   }
 
   return {
-    inspect, either, option, type,
-    concat, equals, coalesce, map, alt,
-    zero, ap, of, chain, sequence, traverse,
+    inspect, toString: inspect, either,
+    option, type, concat, equals, coalesce,
+    map, alt, zero, ap, of, chain, sequence,
+    traverse,
     constructor: Maybe
   }
 }

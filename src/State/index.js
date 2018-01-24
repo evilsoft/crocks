@@ -112,8 +112,9 @@ function State(fn) {
   }
 
   return {
-    runWith, execWith, evalWith, inspect,
-    type, map, ap, chain, of,
+    inspect, toString: inspect, runWith,
+    execWith, evalWith, type, map, ap,
+    chain, of,
     constructor: State
   }
 }

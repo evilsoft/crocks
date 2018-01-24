@@ -81,7 +81,10 @@ test('Either inspect', t => {
   const r = Either.Right(1)
 
   t.ok(isFunction(l.inspect), 'Left provides an inspect function')
+  t.equal(l.inspect, l.toString, 'Left toString is the same function as inspect')
+
   t.ok(isFunction(r.inspect), 'Right provides an inpsect function')
+  t.equal(r.inspect, r.toString, 'Right toString is the same function as inspect')
 
   t.equal(l.inspect(), 'Left 0', 'Left returns inspect string')
   t.equal(r.inspect(), 'Right 1', 'Right returns inspect string')

@@ -37,8 +37,8 @@ function Any(b) {
   }
 
   return {
-    inspect, valueOf, type,
-    concat, empty,
+    inspect, toString: inspect,
+    valueOf, type, concat, empty,
     constructor: Any
   }
 }

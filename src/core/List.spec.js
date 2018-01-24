@@ -94,6 +94,7 @@ test('List inspect', t => {
   const m = List([ 1, true, 'string' ])
 
   t.ok(isFunction(m.inspect), 'provides an inpsect function')
+  t.equal(m.inspect, m.toString, 'toString is the same function as inspect')
   t.equal(m.inspect(), 'List [ 1, true, "string" ]', 'returns inspect string')
 
   t.end()

@@ -248,6 +248,7 @@ test('Async inspect', t => {
   const a = Async(unit)
 
   t.ok(isFunction(a.inspect), 'provides an inspect function')
+  t.equal(a.inspect, a.toString, 'toString is the same function as inspect')
   t.equals(a.inspect(), 'Async Function', 'returns the expected result')
 
   t.end()

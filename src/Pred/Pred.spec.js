@@ -58,6 +58,7 @@ test('Pred inspect', t => {
   const m = Pred(unit)
 
   t.ok(isFunction(m.inspect), 'provides an inpsect function')
+  t.equal(m.inspect, m.toString, 'toString is the same function as inspect')
   t.equal(m.inspect(), 'Pred Function', 'returns inspect string')
 
   t.end()

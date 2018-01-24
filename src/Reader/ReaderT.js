@@ -110,8 +110,9 @@ function _ReaderT(Monad) {
     }
 
     return {
-      type, inspect, runWith,
-      of, map, ap, chain
+      inspect, toString: inspect, type,
+      runWith, of, map, ap, chain,
+      constructor: ReaderT
     }
   }
 

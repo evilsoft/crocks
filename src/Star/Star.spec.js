@@ -94,6 +94,7 @@ test('Star inspect', t => {
   const a = Star(unit)
 
   t.ok(isFunction(a.inspect), 'provides an inspect function')
+  t.equal(a.inspect, a.toString, 'toString is the same function as inspect')
   t.equal(a.inspect(), 'Star( MockCrock ) Function', 'returns inspect string')
 
   t.end()

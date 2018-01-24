@@ -52,8 +52,9 @@ function Equiv(compare) {
   }
 
   return {
-    inspect, type, compareWith, valueOf,
-    contramap, concat, empty,
+    inspect, toString: inspect, type,
+    compareWith, valueOf, contramap,
+    concat, empty,
     constructor: Equiv
   }
 }

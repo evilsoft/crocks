@@ -37,8 +37,8 @@ function Sum(n) {
   }
 
   return {
-    inspect, valueOf, type,
-    concat, empty,
+    inspect, toString: inspect, valueOf,
+    type, concat, empty,
     constructor: Sum
   }
 }

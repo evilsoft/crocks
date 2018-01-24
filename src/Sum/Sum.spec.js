@@ -52,6 +52,7 @@ test('Sum inspect', t => {
   const m = Sum(90)
 
   t.ok(isFunction(m.inspect), 'provides an inspect function')
+  t.equal(m.inspect, m.toString, 'toString is the same function as inspect')
   t.equal(m.inspect(), 'Sum 90', 'returns inspect string')
 
   t.end()

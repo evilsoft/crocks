@@ -202,9 +202,10 @@ function Result(u) {
   }
 
   return {
-    inspect, equals, type, either, concat,
-    swap, coalesce, map, bimap, alt, ap,
-    chain, of, sequence, traverse,
+    inspect, toString: inspect, equals,
+    type, either, concat, swap, coalesce,
+    map, bimap, alt, ap, chain, of, sequence,
+    traverse,
     constructor: Result
   }
 }

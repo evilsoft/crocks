@@ -53,6 +53,7 @@ test('All inspect', t => {
   const m = All(0)
 
   t.ok(isFunction(m.inspect), 'provides an inspect function')
+  t.equal(m.inspect, m.toString, 'toString is the same function as inspect')
   t.equal(m.inspect(), 'All false', 'returns inspect string')
 
   t.end()

@@ -85,8 +85,8 @@ function Arrow(runWith) {
   }
 
   return {
-    inspect, type, runWith,
-    id, compose, map, contramap,
+    inspect, toString: inspect, type,
+    runWith, id, compose, map, contramap,
     promap, first, second, both,
     constructor: Arrow
   }

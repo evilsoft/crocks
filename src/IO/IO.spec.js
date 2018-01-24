@@ -63,6 +63,7 @@ test('IO inspect', t => {
   const m = IO(unit)
 
   t.ok(isFunction(m.inspect), 'provides an inpsect function')
+  t.equal(m.inspect, m.toString, 'toString is the same function as inspect')
   t.equal(m.inspect(), 'IO Function', 'returns inspect string')
 
   t.end()

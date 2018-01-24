@@ -57,8 +57,8 @@ function Const(x) {
   }
 
   return {
-    inspect, valueOf, type, equals,
-    concat, map, ap, chain,
+    inspect, toString: inspect, valueOf,
+    type, equals, concat, map, ap, chain,
     constructor: Const
   }
 }

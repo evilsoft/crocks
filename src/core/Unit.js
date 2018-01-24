@@ -62,8 +62,9 @@ function Unit() {
   }
 
   return {
-    inspect, valueOf, type, equals,
-    concat, empty, map, ap, of, chain,
+    inspect, toString: inspect, valueOf,
+    type, equals, concat, empty, map, ap,
+    of, chain,
     constructor: Unit
   }
 }

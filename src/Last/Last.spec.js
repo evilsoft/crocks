@@ -43,6 +43,8 @@ test('Last inspect', t => {
   const nothing = Last(Maybe.Nothing())
 
   t.ok(isFunction(val.inspect), 'provides an inspect function')
+  t.equal(val.inspect, val.toString, 'toString is the same function as inspect')
+
   t.equal(val.inspect(), 'Last( Just 0 )', 'returns inspect string for value construction')
   t.equal(just.inspect(), 'Last( Just 1 )', 'returns inspect string for value construction')
   t.equal(nothing.inspect(), 'Last( Nothing )', 'returns inspect string for value construction')

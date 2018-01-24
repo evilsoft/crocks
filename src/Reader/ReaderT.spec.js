@@ -46,6 +46,7 @@ test('ReaderT', t => {
 
   t.ok(isFunction(ReaderMock), 'is a function')
   t.ok(isObject(r), 'returns an object')
+  t.equals(r.constructor, ReaderMock, 'provides TypeRep on constructor')
 
   t.ok(isFunction(ReaderMock.of), 'provides an of function')
   t.ok(isFunction(ReaderMock.type), 'provides a type function')
@@ -84,6 +85,7 @@ test('ReaderT inspect', t => {
   const m = ReaderMock(unit)
 
   t.ok(isFunction(m.inspect), 'provides an inspect function')
+  t.equal(m.inspect, m.toString, 'toString is the same function as inspect')
   t.equal(m.inspect(), 'Reader( MockCrock ) Function', 'returns inspect string')
 
   t.end()

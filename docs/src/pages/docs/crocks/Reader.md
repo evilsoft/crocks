@@ -137,35 +137,6 @@ Reader.of(57)
 //=> 100
 ```
 
-#### type
-
-```haskell
-Reader.type :: () -> String
-```
-
-`type` provides a string representation of the type name for a given type in
-`crocks`. While it is used mostly internally for law validation, it can be useful
-to the end user for debugging and building out custom types based on the standard
-`crocks` types. While type comparisons can easily be done manually by calling
-`type` on a given type, using the `isSameType` function hides much of the
-boilerplate. `type` is available on both the Constructor and the Instance for
-convenience.
-
-```javascript
-const Reader = require('crocks/Reader')
-const Identity = require('crocks/Identity')
-
-const I = require('crocks/combinators/identity')
-const isSameType = require('crocks/predicates/isSameType')
-
-Reader.type() //=> 'Reader'
-
-isSameType(Reader, Reader.of(76))   //=> true
-isSameType(Reader, Reader)          //=> true
-isSameType(Reader, Identity(0))     //=> false
-isSameType(Reader(I), Identity)     //=> false
-```
-
 </article>
 
 <article id="topic-instance">

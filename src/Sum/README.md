@@ -64,40 +64,6 @@ Sum.empty()
 //=> Sum 4
 ```
 
-#### type
-
-```haskell
-Sum.type :: () -> String
-```
-
-`type` provides a string representation of the type name for a given type in
-`crocks`. While it is used mostly internally for law validation, it can be
-useful to the end user for debugging and building out custom types based on the
-standard `crocks` types. While type comparisons can easily be done manually by
-calling `type` on a given type, using the `isSameType` function hides much of
-the boilerplate. `type` is available on both the Constructor and the Instance
-for convenience.
-
-```javascript
-const Sum = require('crocks/Sum')
-const Prod = require('crocks/Prod')
-const isSameType = require('crocks/predicates/isSameType')
-
-const sum5 = Sum(5)
-
-sum5.type()
-//=> "Sum"
-
-isSameType(Sum, sum5)
-//=> true
-
-isSameType(Prod, sum5)
-//=> false
-
-isSameType(Sum.empty(), sum5)
-//=> true
-```
-
 ## Instance Methods
 
 #### concat

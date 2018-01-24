@@ -70,40 +70,6 @@ Prod.empty()
 //=> Prod 4
 ```
 
-#### type
-
-```haskell
-Prod.type :: () -> String
-```
-
-`type` provides a string representation of the type name for a given type in
-`crocks`. While it is used mostly internally for law validation, it can be
-useful to the end user for debugging and building out custom types based on
-the standard `crocks` types. While type comparisons can easily be done manually
-by calling `type` on a given type, using the `isSameType` function hides much
-of the boilerplate. `type` is available on both the Constructor and the
-Instance for convenience.
-
-```javascript
-const Prod = require('crocks/Prod')
-const Sum = require('crocks/Sum')
-const isSameType = require('crocks/predicates/isSameType')
-
-const prod5 = Prod(5)
-
-prod5.type()
-//=> "Prod"
-
-isSameType(Sum, prod5)
-//=> false
-
-isSameType(Prod, prod5)
-//=> true
-
-isSameType(Prod.empty(), prod5)
-//=> true
-```
-
 ## Instance Methods
 
 #### concat

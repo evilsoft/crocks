@@ -13,8 +13,7 @@ constructor that takes either a function or value (depending on the type)
 and will return you a "container" that wraps whatever you passed it. Each
 container provides a variety of functions that act as the operations you can do
 on the contained value. There are many types that share the same function names,
-but what they do from type to type may vary.  Every Crock provides type function
-on the Constructor and both inspect and type functions on their Instances.
+but what they do from type to type may vary.
 
 | Crock | Constructor | Instance |
 |---|:---|:---|

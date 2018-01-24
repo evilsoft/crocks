@@ -133,35 +133,6 @@ empty
 //=> true
 ```
 
-#### type
-
-```haskell
-Pred.type :: () -> String
-```
-
-`type` provides a string representation of the type name for a given type in
-`crocks`. While it is used mostly internally for law validation, it can be
-useful to the end user for debugging and building out custom types based on the
-standard `crocks` types. While type comparisons can easily be done manually by
-calling `type` on a given type, using the `isSameType` function hides much of
-the boilerplate. `type` is available on both the Constructor and the Instance
-for convenience.
-
-```javascript
-const Pred = require('crocks/Pred')
-
-const Maybe = require('crocks/Maybe')
-const isNil = require('crocks/predicates/isEmpty')
-const isSameType = require('crocks/predicates/isSameType')
-
-Pred.type()   //=>  "Pred"
-
-isSameType(Pred, Pred(isNil))    //=> true
-isSameType(Pred, Pred)           //=> true
-isSameType(Pred, Maybe.Just(4))  //=> false
-isSameType(Pred(isNil), Maybe)   //=> false
-```
-
 </article>
 
 <article id="topic-instance">

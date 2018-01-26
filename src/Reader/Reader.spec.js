@@ -66,6 +66,7 @@ test('Reader inspect', t => {
   const m = Reader(unit)
 
   t.ok(isFunction(m.inspect), 'provides an inspect function')
+  t.equal(m.inspect, m.toString, 'toString is the same function as inspect')
   t.equal(m.inspect(), 'Reader Function', 'returns inspect string')
 
   t.end()

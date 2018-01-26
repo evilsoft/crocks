@@ -64,6 +64,7 @@ test('Arrow inspect', t => {
   const a = Arrow(unit)
 
   t.ok(isFunction(a.inspect), 'provides an inspect function')
+  t.equal(a.inspect, a.toString, 'toString is the same function as inspect')
   t.equal(a.inspect(), 'Arrow Function', 'returns inspect string')
 
   t.end()

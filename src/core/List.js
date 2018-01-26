@@ -231,9 +231,9 @@ function List(x) {
   }
 
   return {
-    inspect, valueOf, toArray, head, tail, cons,
-    type, equals, concat, empty, reduce, fold,
-    filter, reject, map, ap, of, chain,
+    inspect, toString: inspect, valueOf, toArray,
+    head, tail, cons, type, equals, concat, empty,
+    reduce, fold, filter, reject, map, ap, of, chain,
     sequence, traverse,
     constructor: List
   }

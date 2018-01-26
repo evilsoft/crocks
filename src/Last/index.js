@@ -49,8 +49,8 @@ function Last(x) {
   }
 
   return {
-    concat, empty, inspect,
-    option, type, valueOf,
+    inspect, toString: inspect, concat,
+    empty, option, type, valueOf,
     constructor: Last
   }
 }

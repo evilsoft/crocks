@@ -236,9 +236,10 @@ function Async(fn, parentCancel) {
   }
 
   return {
-    fork, toPromise, inspect, type,
-    swap, coalesce, map, bimap, alt,
-    ap, chain, of,
+    fork, toPromise, inspect,
+    toString: inspect, type,
+    swap, coalesce, map, bimap,
+    alt, ap, chain, of,
     constructor: Async
   }
 }

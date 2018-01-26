@@ -53,6 +53,7 @@ test('Any inspect', t => {
   const m = Any(1)
 
   t.ok(isFunction(m.inspect), 'provides an inspect function')
+  t.equal(m.inspect, m.toString, 'toString is the same function as inspect')
   t.equal(m.inspect(), 'Any true', 'returns inspect string')
 
   t.end()

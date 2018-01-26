@@ -53,6 +53,7 @@ test('Pair inspect', t => {
   const m = Pair(0, 'nice')
 
   t.ok(isFunction(m.inspect), 'provides an inpsect function')
+  t.equal(m.inspect, m.toString, 'toString is the same function as inspect')
   t.equal(m.inspect(), 'Pair( 0, "nice" )', 'returns inspect string')
 
   t.end()

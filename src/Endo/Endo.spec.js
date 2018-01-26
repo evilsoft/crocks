@@ -54,6 +54,7 @@ test('Endo inspect', t => {
   const m = Endo(identity)
 
   t.ok(isFunction(m.inspect), 'provides an inspect function')
+  t.equal(m.inspect, m.toString, 'toString is the same function as inspect')
   t.equal(m.inspect(), 'Endo Function', 'returns inspect string')
 
   t.end()

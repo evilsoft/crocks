@@ -81,7 +81,10 @@ test('Result inspect', t => {
   const r = Result.Ok(1)
 
   t.ok(isFunction(l.inspect), 'Err provides an inspect function')
+  t.equal(l.inspect, l.toString, 'toString is the same function as inspect')
+
   t.ok(isFunction(r.inspect), 'Ok provides an inspect function')
+  t.equal(r.inspect, r.toString, 'toString is the same function as inspect')
 
   t.equal(l.inspect(), 'Err 0', 'Err returns inspect string')
   t.equal(r.inspect(), 'Ok 1', 'Ok returns inspect string')

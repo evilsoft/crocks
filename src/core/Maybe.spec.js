@@ -66,7 +66,10 @@ test('Maybe inspect', t => {
   const n = Maybe.Nothing()
 
   t.ok(isFunction(m.inspect), 'Just provides an inspect function')
+  t.equal(m.inspect, m.toString, 'toString is the same function as inspect')
   t.ok(isFunction(n.inspect), 'Nothing provides an inspect function')
+  t.equal(n.inspect, n.toString, 'toString is the same function as inspect')
+
   t.equal(m.inspect(), 'Just "great"', 'returns inspect string')
   t.equal(n.inspect(), 'Nothing', 'Nothing returns inspect string')
 

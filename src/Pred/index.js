@@ -46,8 +46,8 @@ function Pred(pred) {
   }
 
   return {
-    runWith, inspect, type, valueOf,
-    empty, concat, contramap,
+    inspect, toString: inspect, runWith,
+    type, valueOf, empty, concat, contramap,
     constructor: Pred
   }
 }

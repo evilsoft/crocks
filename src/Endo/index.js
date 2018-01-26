@@ -35,8 +35,9 @@ function Endo(runWith) {
   }
 
   return {
-    inspect, valueOf, type,
-    concat, empty, runWith,
+    inspect, toString: inspect,
+    valueOf, type, concat, empty,
+    runWith,
     constructor: Endo
   }
 }

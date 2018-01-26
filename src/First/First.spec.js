@@ -45,6 +45,8 @@ test('First inspect', t => {
   const nothing = First(Maybe.Nothing())
 
   t.ok(isFunction(val.inspect), 'provides an inspect function')
+  t.equal(val.inspect, val.toString, 'toString is the same function as inspect')
+
   t.equal(val.inspect(), 'First( Just 0 )', 'returns inspect string for value construction')
   t.equal(just.inspect(), 'First( Just 1 )', 'returns inspect string for value construction')
   t.equal(nothing.inspect(), 'First( Nothing )', 'returns inspect string for value construction')

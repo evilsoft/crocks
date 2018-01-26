@@ -148,9 +148,10 @@ function Pair(l, r) {
   }
 
   return {
-    inspect, fst, snd, toArray, type,
-    merge, equals, concat, swap, map,
-    bimap, ap, chain, extend,
+    inspect, toString: inspect, fst,
+    snd, toArray, type, merge, equals,
+    concat, swap, map, bimap, ap, chain,
+    extend,
     constructor: Pair
   }
 }

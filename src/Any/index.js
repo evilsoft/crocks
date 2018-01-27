@@ -1,9 +1,12 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
+const VERSION = 1
+
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
 const type = require('../core/types').type('Any')
+const _type = require('../core/types').typeFn(type(), VERSION)
 
 const isFunction = require('../core/isFunction')
 const isNil = require('../core/isNil')
@@ -39,6 +42,7 @@ function Any(b) {
   return {
     inspect, toString: inspect,
     valueOf, type, concat, empty,
+    '@@type': _type,
     constructor: Any
   }
 }
@@ -49,5 +53,6 @@ Any['@@implements'] = _implements(
 
 Any.empty = _empty
 Any.type  = type
+Any['@@type'] = _type
 
 module.exports = Any

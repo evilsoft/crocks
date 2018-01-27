@@ -1,9 +1,12 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
+const VERSION = 1
+
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
 const type = require('../core/types').type('Async')
+const _type = require('../core/types').typeFn(type(), VERSION)
 
 const array = require('../core/array')
 const compose = require('../core/compose')
@@ -240,12 +243,14 @@ function Async(fn, parentCancel) {
     toString: inspect, type,
     swap, coalesce, map, bimap,
     alt, ap, chain, of,
+    '@@type': _type,
     constructor: Async
   }
 }
 
-Async.type = type
 Async.of = _of
+Async.type = type
+Async['@@type'] = _type
 
 Async.Rejected = Rejected
 Async.Resolved = _of

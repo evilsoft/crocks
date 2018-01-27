@@ -1,9 +1,12 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
+const VERSION = 1
+
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
 const type = require('../core/types').type('Reader')
+const _type = require('../core/types').typeFn(type(), VERSION)
 
 const compose = require('../core/compose')
 const isFunction = require('../core/isFunction')
@@ -78,13 +81,15 @@ function Reader(runWith) {
   return {
     inspect, toString: inspect, runWith,
     type, map, ap, chain, of,
+    '@@type': _type,
     constructor: Reader
   }
 }
 
 Reader.of = _of
-Reader.type = type
 Reader.ask = ask
+Reader.type = type
+Reader['@@type'] = _type
 
 Reader['@@implements'] = _implements(
   [ 'ap', 'chain', 'map', 'of' ]

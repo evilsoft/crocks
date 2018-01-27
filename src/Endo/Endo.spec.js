@@ -24,6 +24,7 @@ test('Endo', t => {
 
   t.ok(isFunction(Endo.empty), 'provides an empty function')
   t.ok(isFunction(Endo.type), 'provides a type function')
+  t.ok(isFunction(Endo['@@type']), 'provides a @@type function')
 
   const err = /Endo: Function value required/
   t.throws(Endo, err, 'throws with nothing')
@@ -94,6 +95,16 @@ test('Endo type', t => {
 
   t.equal(m.type, Endo.type, 'static and instance versions are the same')
   t.equal(m.type(), 'Endo', 'reports Endo')
+
+  t.end()
+})
+
+test('Endo @@type', t => {
+  const m = Endo(identity)
+  t.ok(isFunction(m['@@type']), 'is a function')
+
+  t.equal(m['@@type'], Endo['@@type'], 'static and instance versions are the same')
+  t.equal(m['@@type'](), 'crocks/Endo@1', 'reports crocks/Endo@1')
 
   t.end()
 })

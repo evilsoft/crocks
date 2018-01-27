@@ -1,10 +1,14 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
+const VERSION = 1
+
 const _equals = require('../core/equals')
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
 const __type = require('../core/types').type('Writer')
+const _typeFn = require('../core/types').typeFn(__type(), VERSION)
+
 const Pair = require('../core/Pair')
 
 const isFunction = require('../core/isFunction')
@@ -22,7 +26,10 @@ function _Writer(Monoid) {
     x => Writer(Monoid.empty().valueOf(), x)
 
   const _type =
-    () => `${__type()}( ${Monoid.type()} )`
+    constant(`${__type()}( ${Monoid.type()} )`)
+
+  const typeFn =
+    constant(`${_typeFn()}( ${Monoid['@@type']()} )`)
 
   function Writer(entry, val) {
     if(arguments.length !== 2) {
@@ -88,15 +95,14 @@ function _Writer(Monoid) {
       inspect, toString: inspect, read,
       valueOf, log, type, equals, map,
       ap, of, chain,
+      '@@type': typeFn,
       constructor: Writer
     }
   }
 
-  Writer.of =
-    _of
-
-  Writer.type =
-    _type
+  Writer.of = _of
+  Writer.type = _type
+  Writer['@@type'] = typeFn
 
   Writer['@@implements'] = _implements(
     [ 'ap', 'chain', 'equals', 'map', 'of' ]

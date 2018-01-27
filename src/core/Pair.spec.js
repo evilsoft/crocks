@@ -27,6 +27,7 @@ test('Pair core', t => {
   t.equals(Pair(0, 0).constructor, Pair, 'provides TypeRep on constructor')
 
   t.ok(isFunction(Pair.type), 'provides a type function')
+  t.ok(isFunction(Pair['@@type']), 'provides a @@type function')
 
   const err = /Pair: Must provide a first and second value/
   t.throws(m(), err, 'throws with no parameters')
@@ -62,8 +63,21 @@ test('Pair inspect', t => {
 test('Pair type', t => {
   const p = Pair(0, 0)
 
-  t.ok(isFunction(p.type), 'provides a type function')
+  t.ok(isFunction(p.type), 'is a function')
+
+  t.equal(p.type, Pair.type, 'static and instance versions are the same')
   t.equal(p.type(), 'Pair', 'type returns Pair')
+
+  t.end()
+})
+
+test('Pair @@type', t => {
+  const p = Pair(0, 0)
+
+  t.ok(isFunction(p['@@type']), 'is a function')
+
+  t.equal(p['@@type'], Pair['@@type'], 'static and instance versions are the same')
+  t.equal(p['@@type'](), 'crocks/Pair@1', 'type returns crocks/Pair@1')
 
   t.end()
 })

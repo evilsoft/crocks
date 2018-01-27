@@ -1,11 +1,14 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
+const VERSION = 1
+
 const _equals = require('../core/equals')
 const _implements = require('../core/implements')
 const _innerConcat = require('../core/innerConcat')
 const _inspect = require('../core/inspect')
 const type = require('../core/types').type('Identity')
+const _type = require('../core/types').typeFn(type(), VERSION)
 
 const isArray = require('../core/isArray')
 const isApply = require('../core/isApply')
@@ -105,12 +108,14 @@ function Identity(x) {
     inspect, toString: inspect, valueOf,
     type, equals, concat, map, ap, of,
     chain, sequence, traverse,
+    '@@type': _type,
     constructor: Identity
   }
 }
 
 Identity.of = _of
 Identity.type = type
+Identity['@@type'] = _type
 
 Identity['@@implements'] = _implements(
   [ 'ap', 'chain', 'concat', 'equals', 'map', 'of', 'traverse' ]

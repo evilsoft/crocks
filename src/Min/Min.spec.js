@@ -15,10 +15,11 @@ test('Min', t => {
   const m = bindFunc(Min)
 
   t.ok(isFunction(Min), 'is a function')
+  t.ok(isObject(Min(0)), 'returns an object')
 
   t.ok(isFunction(Min.empty), 'provides an empty function')
   t.ok(isFunction(Min.type), 'provides a type function')
-  t.ok(isObject(Min(0)), 'returns an object')
+  t.ok(isFunction(Min['@@type']), 'provides a @@type function')
 
   t.equals(Min(0).constructor, Min, 'provides TypeRep on constructor')
 
@@ -73,10 +74,21 @@ test('Min valueOf', t => {
 })
 
 test('Min type', t => {
-  t.ok(isFunction(Min(0).type), 'is a function')
+  const m = Min(0)
 
-  t.equal(Min(0).type, Min.type, 'static and instance versions are the same')
-  t.equal(Min(0).type(), 'Min', 'reports Min')
+  t.ok(isFunction(m.type), 'is a function')
+  t.equal(m.type, Min.type, 'static and instance versions are the same')
+  t.equal(m.type(), 'Min', 'reports Min')
+
+  t.end()
+})
+
+test('Min @@type', t => {
+  const m = Min(0)
+
+  t.ok(isFunction(m['@@type']), 'is a function')
+  t.equal(m['@@type'], Min['@@type'], 'static and instance versions are the same')
+  t.equal(m['@@type'](), 'crocks/Min@1', 'reports crocks/Min@1')
 
   t.end()
 })

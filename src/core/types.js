@@ -38,6 +38,11 @@ const type =
 const proxy =
   t => ({ type: type(t) })
 
+const typeFn = (t, ver) => {
+  const typeStr = type(t)()
+  return () => `crocks/${typeStr}@${ver || 0}`
+}
+
 module.exports = {
-  proxy, type
+  proxy, type, typeFn
 }

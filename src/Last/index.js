@@ -1,9 +1,12 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
+const VERSION = 1
+
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
 const type = require('../core/types').type('Last')
+const _type = require('../core/types').typeFn(type(), VERSION)
 
 const isSameType = require('../core/isSameType')
 
@@ -51,6 +54,7 @@ function Last(x) {
   return {
     inspect, toString: inspect, concat,
     empty, option, type, valueOf,
+    '@@type': _type,
     constructor: Last
   }
 }
@@ -59,10 +63,8 @@ Last['@@implements'] = _implements(
   [ 'concat', 'empty' ]
 )
 
-Last.empty =
-  _empty
-
-Last.type =
-  type
+Last.empty = _empty
+Last.type = type
+Last['@@type'] = _type
 
 module.exports = Last

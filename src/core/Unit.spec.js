@@ -27,8 +27,9 @@ test('Unit', t => {
 
   t.equals(Unit(false).constructor, Unit, 'provides TypeRep on constructor')
 
-  t.ok(isFunction(Unit.type), 'provides a type function')
   t.ok(isFunction(Unit.empty), 'provides an empty function')
+  t.ok(isFunction(Unit.type), 'provides a type function')
+  t.ok(isFunction(Unit['@@type']), 'provides a @@type function')
 
   t.doesNotThrow(Unit, 'allows no parameters')
 
@@ -62,8 +63,19 @@ test('Unit inspect', t => {
 test('Unit type', t => {
   const m = Unit(0)
 
-  t.ok(isFunction(m.type), 'provides a type function')
+  t.ok(isFunction(m.type), 'is a function')
+  t.equal(m.type, Unit.type, 'static and instance versions are the same')
   t.equal(m.type(), 'Unit', 'type returns Unit')
+
+  t.end()
+})
+
+test('Unit @@type', t => {
+  const m = Unit(0)
+
+  t.ok(isFunction(m['@@type']), 'is a function')
+  t.equal(m['@@type'], Unit['@@type'], 'static and instance versions are the same')
+  t.equal(m['@@type'](), 'crocks/Unit@1', 'type returns crocks/Unit@1')
 
   t.end()
 })

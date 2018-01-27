@@ -1,8 +1,11 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
+const VERSION = 1
+
 const _implements = require('./implements')
 const type = require('./types').type('Unit')
+const _type = require('./types').typeFn(type(), VERSION)
 
 const isFunction = require('./isFunction')
 const isSameType = require('./isSameType')
@@ -65,13 +68,15 @@ function Unit() {
     inspect, toString: inspect, valueOf,
     type, equals, concat, empty, map, ap,
     of, chain,
+    '@@type': _type,
     constructor: Unit
   }
 }
 
-Unit.type = type
 Unit.of = _of
 Unit.empty = _empty
+Unit.type = type
+Unit['@@type'] = _type
 
 Unit['@@implements'] = _implements(
   [ 'ap', 'chain', 'concat', 'empty', 'equals', 'map', 'of' ]

@@ -1,9 +1,12 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
+const VERSION = 1
+
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
 const type = require('../core/types').type('Arrow')
+const _type = require('../core/types').typeFn(type(), VERSION)
 
 const isFunction = require('../core/isFunction')
 const isSameType = require('../core/isSameType')
@@ -88,12 +91,14 @@ function Arrow(runWith) {
     inspect, toString: inspect, type,
     runWith, id, compose, map, contramap,
     promap, first, second, both,
+    '@@type': _type,
     constructor: Arrow
   }
 }
 
 Arrow.id = _id
 Arrow.type = type
+Arrow['@@type'] = _type
 
 Arrow['@@implements'] = _implements(
   [ 'compose', 'contramap', 'id', 'map', 'promap' ]

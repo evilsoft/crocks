@@ -15,10 +15,11 @@ test('Max', t => {
   const m = bindFunc(Max)
 
   t.ok(isFunction(Max), 'is a function')
+  t.ok(isObject(Max(0)), 'returns an object')
 
   t.ok(isFunction(Max.empty), 'provides an empty function')
   t.ok(isFunction(Max.type), 'provides a type function')
-  t.ok(isObject(Max(0)), 'returns an object')
+  t.ok(isFunction(Max['@@type']), 'provides a @@type function')
 
   t.equals(Max(0).constructor, Max, 'provides TypeRep on constructor')
 
@@ -73,10 +74,21 @@ test('Max valueOf', t => {
 })
 
 test('Max type', t => {
-  t.ok(isFunction(Max(0).type), 'is a function')
+  const m = Max(0)
 
-  t.equal(Max(0).type, Max.type, 'static and instance versions are the same')
-  t.equal(Max(0).type(), 'Max', 'reports Max')
+  t.ok(isFunction(m.type), 'is a function')
+  t.equal(m.type, Max.type, 'static and instance versions are the same')
+  t.equal(m.type(), 'Max', 'reports Max')
+
+  t.end()
+})
+
+test('Max @@type', t => {
+  const m = Max(0)
+
+  t.ok(isFunction(m['@@type']), 'is a function')
+  t.equal(m['@@type'], Max['@@type'], 'static and instance versions are the same')
+  t.equal(m['@@type'](), 'crocks/Max@1', 'reports crocks/Max@1')
 
   t.end()
 })

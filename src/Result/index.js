@@ -1,12 +1,15 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
+const VERSION = 1
+
 const _defineUnion = require('../core/defineUnion')
 const _equals = require('../core/equals')
 const _implements = require('../core/implements')
 const _innerConcat = require('../core/innerConcat')
 const _inspect = require('../core/inspect')
 const type = require('../core/types').type('Result')
+const _type = require('../core/types').typeFn(type(), VERSION)
 
 const compose = require('../core/compose')
 const isApply = require('../core/isApply')
@@ -206,12 +209,14 @@ function Result(u) {
     type, either, concat, swap, coalesce,
     map, bimap, alt, ap, chain, of, sequence,
     traverse,
+    '@@type': _type,
     constructor: Result
   }
 }
 
 Result.of = _of
 Result.type = type
+Result['@@type'] = _type
 
 Result['@@implements'] = _implements(
   [ 'alt', 'ap', 'bimap', 'chain', 'concat', 'equals', 'map', 'of', 'traverse' ]

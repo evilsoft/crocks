@@ -1,10 +1,13 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
+const VERSION = 1
+
 const _equals = require('./equals')
 const _implements = require('./implements')
 const _inspect = require('./inspect')
 const type = require('./types').type('List')
+const _type = require('./types').typeFn(type(), VERSION)
 
 const array = require('./array')
 
@@ -235,18 +238,15 @@ function List(x) {
     head, tail, cons, type, equals, concat, empty,
     reduce, fold, filter, reject, map, ap, of, chain,
     sequence, traverse,
+    '@@type': _type,
     constructor: List
   }
 }
 
-List.type =
-  type
-
-List.of =
-  _of
-
-List.empty =
-  _empty
+List.of = _of
+List.empty = _empty
+List.type = type
+List['@@type'] = _type
 
 List.fromArray =
   fromArray

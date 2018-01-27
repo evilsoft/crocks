@@ -1,10 +1,13 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
+const VERSION = 1
+
 const _equals = require('../core/equals')
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
 const type = require('../core/types').type('Const')
+const _type = require('../core/types').typeFn(type(), VERSION)
 
 const isFunction = require('../core/isFunction')
 const isSameType = require('../core/isSameType')
@@ -59,12 +62,13 @@ function Const(x) {
   return {
     inspect, toString: inspect, valueOf,
     type, equals, concat, map, ap, chain,
+    '@@type': _type,
     constructor: Const
   }
 }
 
-Const.type =
-  type
+Const.type = type
+Const['@@type'] = _type
 
 Const['@@implements'] = _implements(
   [ 'ap', 'chain', 'concat', 'equals', 'map' ]

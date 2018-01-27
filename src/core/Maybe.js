@@ -1,12 +1,15 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
+const VERSION = 1
+
 const _defineUnion = require('./defineUnion')
 const _equals = require('./equals')
 const _implements = require('./implements')
 const _innerConcat = require('./innerConcat')
 const _inspect = require('./inspect')
 const type = require('./types').type('Maybe')
+const _type = require('./types').typeFn(type(), VERSION)
 
 const compose = require('./compose')
 const isApply = require('./isApply')
@@ -191,18 +194,15 @@ function Maybe(u) {
     option, type, concat, equals, coalesce,
     map, alt, zero, ap, of, chain, sequence,
     traverse,
+    '@@type': _type,
     constructor: Maybe
   }
 }
 
-Maybe.of =
-  _of
-
-Maybe.type =
-  type
-
-Maybe.zero =
-  _zero
+Maybe.of = _of
+Maybe.zero = _zero
+Maybe.type = type
+Maybe['@@type'] = _type
 
 Maybe['@@implements'] = _implements(
   [ 'alt', 'ap', 'chain', 'concat', 'equals', 'map', 'of', 'traverse', 'zero' ]

@@ -18,11 +18,11 @@ test('Pred', t => {
   const p = bindFunc(Pred)
 
   t.ok(isFunction(Pred), 'is a function')
-
-  t.ok(isFunction(Pred.type), 'provides a type function')
-  t.ok(isFunction(Pred.empty), 'provides an empty function')
-
   t.ok(isObject(Pred(unit)), 'returns an object')
+
+  t.ok(isFunction(Pred.empty), 'provides an empty function')
+  t.ok(isFunction(Pred.type), 'provides a type function')
+  t.ok(isFunction(Pred['@@type']), 'provides a @@type function')
 
   t.equals(Pred(unit).constructor, Pred, 'provides TypeRep on constructor')
 
@@ -65,8 +65,21 @@ test('Pred inspect', t => {
 })
 
 test('Pred type', t => {
-  t.equal(Pred(unit).type(), 'Pred', 'type returns Pred')
-  t.equal(Pred(unit).type(), Pred.type(), 'constructor and instance return same value')
+  const m = Pred(unit)
+
+  t.ok(isFunction(m.type), 'is a function')
+  t.equal(m.type, Pred.type, 'static and instance versions are the same')
+  t.equal(m.type(), 'Pred', 'type returns Pred')
+
+  t.end()
+})
+
+test('Pred @@type', t => {
+  const m = Pred(unit)
+
+  t.ok(isFunction(m['@@type']), 'is a function')
+  t.equal(m['@@type'], Pred['@@type'], 'static and instance versions are the same')
+  t.equal(m['@@type'](), 'crocks/Pred@1', 'reports crocks/Pred@1')
 
   t.end()
 })

@@ -51,6 +51,7 @@ test('Writer', t => {
 
   t.ok(isFunction(Writer.of), 'provides an of function')
   t.ok(isFunction(Writer.type), 'provides a type function')
+  t.ok(isFunction(Writer['@@type']), 'provides a @@type function')
 
   t.throws(f(), TypeError, 'throws with no parameters')
   t.throws(f(0), TypeError, 'throws with one parameter')
@@ -84,7 +85,19 @@ test('Writer type', t => {
   const m = Writer(0, 0)
 
   t.ok(isFunction(m.type), 'is a function')
+  t.equal(Writer.type, m.type, 'static and instance versions are the same')
   t.equal(m.type(), 'Writer( Last )', 'returns Writer with Monoid Type')
+
+  t.end()
+})
+
+test('Writer @@type', t => {
+  const m = Writer(0, 0)
+
+  t.ok(isFunction(m['@@type']), 'is a function')
+  t.equal(Writer['@@type'], m['@@type'], 'static and instance versions are the same')
+  t.equal(m['@@type'](), 'crocks/Writer@1( crocks/Last@1 )', 'returns crocks/Writer@1 with Monoid Type')
+
   t.end()
 })
 

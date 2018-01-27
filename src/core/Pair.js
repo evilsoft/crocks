@@ -1,10 +1,13 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
+const VERSION = 1
+
 const _equals = require('./equals')
 const _implements = require('./implements')
 const _inspect = require('./inspect')
 const type = require('./types').type('Pair')
+const _type = require('./types').typeFn(type(), VERSION)
 
 const isFunction = require('./isFunction')
 const isSameType = require('./isSameType')
@@ -152,12 +155,13 @@ function Pair(l, r) {
     snd, toArray, type, merge, equals,
     concat, swap, map, bimap, ap, chain,
     extend,
+    '@@type': _type,
     constructor: Pair
   }
 }
 
-Pair.type =
-  type
+Pair.type = type
+Pair['@@type'] = _type
 
 Pair['@@implements'] = _implements(
   [ 'ap', 'bimap', 'chain', 'concat', 'extend', 'equals', 'map' ]

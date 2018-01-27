@@ -1,6 +1,8 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
+const VERSION = 1
+
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
 
@@ -9,6 +11,7 @@ const isFunction = require('../core/isFunction')
 const isSameType = require('../core/isSameType')
 
 const type = require('../core/types').type('Equiv')
+const _type = require('../core/types').typeFn(type(), VERSION)
 
 const _empty =
   () => Equiv(() => true)
@@ -55,12 +58,14 @@ function Equiv(compare) {
     inspect, toString: inspect, type,
     compareWith, valueOf, contramap,
     concat, empty,
+    '@@type': _type,
     constructor: Equiv
   }
 }
 
-Equiv.type = type
 Equiv.empty = _empty
+Equiv.type = type
+Equiv['@@type'] = _type
 
 Equiv['@@implements'] = _implements(
   [ 'concat', 'contramap', 'empty' ]

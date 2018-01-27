@@ -1,9 +1,12 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
+const VERSION = 1
+
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
 const type = require('../core/types').type('Endo')
+const _type = require('../core/types').typeFn(type(), VERSION)
 
 const compose = require('../core/compose')
 const isFunction = require('../core/isFunction')
@@ -38,6 +41,7 @@ function Endo(runWith) {
     inspect, toString: inspect,
     valueOf, type, concat, empty,
     runWith,
+    '@@type': _type,
     constructor: Endo
   }
 }
@@ -48,6 +52,7 @@ Endo['@@implements'] = _implements(
 
 Endo.empty = _empty
 Endo.type = type
+Endo['@@type'] = _type
 
 module.exports = Endo
 

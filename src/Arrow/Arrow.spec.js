@@ -23,8 +23,9 @@ test('Arrow', t => {
 
   t.ok(isFunction(Arrow), 'is a function')
 
-  t.ok(isFunction(Arrow.type), 'provides a type function')
   t.ok(isFunction(Arrow.id), 'provides an id function')
+  t.ok(isFunction(Arrow.type), 'provides a type function')
+  t.ok(isFunction(Arrow['@@type']), 'provides a @@type function')
 
   t.ok(isObject(Arrow(unit)), 'returns an object')
 
@@ -76,6 +77,17 @@ test('Arrow type', t => {
 
   t.equal(a.type, Arrow.type, 'static and instance versions are the same')
   t.equal(a.type(), 'Arrow', 'reports Arrow')
+
+  t.end()
+})
+
+test('Arrow @@type', t => {
+  const a = Arrow(unit)
+
+  t.ok(isFunction(a['@@type']), 'is a function')
+
+  t.equal(a['@@type'], Arrow['@@type'], 'static and instance versions are the same')
+  t.equal(a['@@type'](), 'crocks/Arrow@1', 'reports crocks/Arrow@1')
 
   t.end()
 })

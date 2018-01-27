@@ -21,6 +21,7 @@ test('Prod', t => {
 
   t.ok(isFunction(Prod.empty), 'provides an empty function')
   t.ok(isFunction(Prod.type), 'provides a type function')
+  t.ok(isFunction(Prod['@@type']), 'provides a @@type function')
 
   t.throws(s(), TypeError, 'throws with nothing')
   t.throws(s(identity), TypeError, 'throws with a function')
@@ -73,10 +74,21 @@ test('Prod valueOf', t => {
 })
 
 test('Prod type', t => {
-  t.ok(isFunction(Prod(0).type), 'is a function')
+  const m = Prod(0)
 
-  t.equal(Prod(0).type, Prod.type, 'static and instance versions are the same')
-  t.equal(Prod(0).type(), 'Prod', 'reports Prod')
+  t.ok(isFunction(m.type), 'is a function')
+  t.equal(m.type, Prod.type, 'static and instance versions are the same')
+  t.equal(m.type(), 'Prod', 'reports Prod')
+
+  t.end()
+})
+
+test('Prod @@type', t => {
+  const m = Prod(0)
+
+  t.ok(isFunction(m['@@type']), 'is a function')
+  t.equal(m['@@type'], Prod['@@type'], 'static and instance versions are the same')
+  t.equal(m['@@type'](), 'crocks/Prod@1', 'reports crocks/Prod@1')
 
   t.end()
 })

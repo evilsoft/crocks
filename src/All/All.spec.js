@@ -21,6 +21,7 @@ test('All', t => {
 
   t.ok(isFunction(All.empty), 'provides an empty function')
   t.ok(isFunction(All.type), 'provides a type function')
+  t.ok(isFunction(All['@@type']), 'provides a @@type function')
 
   const err = /All: Non-function value required/
   t.throws(All, err, 'throws with nothing')
@@ -77,9 +78,21 @@ test('All valueOf', t => {
 })
 
 test('All type', t => {
-  t.ok(isFunction(All(0).type), 'is a function')
-  t.equal(All.type, All(0).type, 'is the same function as the static type')
-  t.equal(All(0).type(), 'All', 'reports All')
+  const m = All(0)
+
+  t.ok(isFunction(m.type), 'is a function')
+  t.equal(All.type, m.type, 'static and instance versions are the same')
+  t.equal(m.type(), 'All', 'reports All')
+
+  t.end()
+})
+
+test('All @@type', t => {
+  const m = All(0)
+
+  t.ok(isFunction(m['@@type']), 'is a function')
+  t.equal(All['@@type'], m['@@type'], 'static and instance versions are the same')
+  t.equal(m['@@type'](), 'crocks/All@1', 'reports crocks/All@1')
 
   t.end()
 })

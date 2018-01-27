@@ -4,6 +4,7 @@ const _equals = require('../core/equals')
 const constant = x => () => x
 
 const _type = constant('MockCrock')
+const typeFn = constant('crocks/MockCrock@1')
 const _of   = x => MockCrock(x)
 
 function MockCrock(x) {
@@ -21,12 +22,14 @@ function MockCrock(x) {
   return {
     valueOf, type, map, ap,
     chain, of, sequence,
+    '@@type': typeFn,
     traverse, equals
   }
 }
 
-MockCrock.type  = _type
-MockCrock.of    = _of
+MockCrock.of = _of
+MockCrock.type = _type
+MockCrock['@@type'] = typeFn
 
 MockCrock['@@implements'] = _implements(
   [ 'ap', 'chain', 'equals', 'map', 'of', 'traverse' ]

@@ -1,9 +1,12 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
+const VERSION = 1
+
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
 const type = require('../core/types').type('IO')
+const _type = require('../core/types').typeFn(type(), VERSION)
 
 const compose = require('../core/compose')
 const isFunction = require('../core/isFunction')
@@ -58,12 +61,14 @@ function IO(run) {
   return {
     inspect, toString: inspect, run,
     type, map, ap, of, chain,
+    '@@type': _type,
     constructor: IO
   }
 }
 
 IO.of = _of
 IO.type = type
+IO['@@type'] = _type
 
 IO['@@implements'] = _implements(
   [ 'ap', 'chain', 'map', 'of' ]

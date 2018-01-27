@@ -1,9 +1,12 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
+const VERSION = 1
+
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
 const _type = require('../core/types').type('Star')
+const __type = require('../core/types').typeFn(_type(), VERSION)
 
 const array = require('../core/array')
 const isFunction = require('../core/isFunction')
@@ -29,8 +32,14 @@ function _Star(Monad) {
   const innerType =
     Monad.type()
 
+  const innerFullType =
+    Monad['@@type']()
+
   const outerType =
     `${_type()}( ${innerType} )`
+
+  const typeFn =
+    () => `${__type()}( ${innerFullType} )`
 
   const type =
     () => outerType
@@ -163,12 +172,14 @@ function _Star(Monad) {
       inspect, toString: inspect, type,
       runWith, id, compose, map, contramap,
       promap, first, second, both,
+      '@@type': typeFn,
       constructor: Star
     }
   }
 
   Star.id = _id
   Star.type = type
+  Star['@@type'] = typeFn
 
   Star['@@implements'] = _implements(
     [ 'compose', 'contramap', 'id', 'map', 'promap' ]

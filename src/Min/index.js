@@ -1,9 +1,12 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
+const VERSION = 1
+
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
 const type = require('../core/types').type('Min')
+const _type = require('../core/types').typeFn(type(), VERSION)
 
 const isNil = require('../core/isNil')
 const isNumber = require('../core/isNumber')
@@ -39,6 +42,7 @@ function Min(n) {
   return {
     inspect, toString: inspect, valueOf,
     type, concat, empty,
+    '@@type': _type,
     constructor: Min
   }
 }
@@ -49,5 +53,6 @@ Min['@@implements'] = _implements(
 
 Min.empty = _empty
 Min.type = type
+Min['@@type'] = _type
 
 module.exports = Min

@@ -24,12 +24,12 @@ test('Star', t => {
   const a = bindFunc(_Star)
 
   t.ok(isFunction(_Star), 'is a function')
+  t.ok(isObject(Star(unit)), 'returns an object')
 
   t.ok(isFunction(Star.type), 'provides a type function')
+  t.ok(isFunction(Star['@@type']), 'provides a @@type function')
 
   t.equals(Star(unit).constructor, Star, 'provides TypeRep on constructor')
-
-  t.ok(isObject(Star(unit)), 'returns an object')
 
   const err = /Star: Monad required for construction/
   t.throws(a(), err, 'throws with nothing')
@@ -55,8 +55,9 @@ test('Star construction', t => {
 
   t.ok(isFunction(Star), 'Constructor returns a function')
 
-  t.ok(isFunction(Star.type), 'provides a type function')
   t.ok(isFunction(Star.id), 'provides an id function')
+  t.ok(isFunction(Star.type), 'provides a type function')
+  t.ok(isFunction(Star['@@type']), 'provides a @@type function')
 
   t.ok(isObject(Star(unit)), 'returns an object')
 
@@ -101,11 +102,21 @@ test('Star inspect', t => {
 })
 
 test('Star type', t => {
-  const a = Star(unit)
-  t.ok(isFunction(a.type), 'is a function')
+  const m = Star(unit)
 
-  t.equal(a.type, Star.type, 'static and instance versions are the same')
-  t.equal(a.type(), 'Star( MockCrock )', 'reports Star with embeded type')
+  t.ok(isFunction(m.type), 'is a function')
+  t.equal(m.type, Star.type, 'static and instance versions are the same')
+  t.equal(m.type(), 'Star( MockCrock )', 'reports Star with embeded type')
+
+  t.end()
+})
+
+test('Star @@type', t => {
+  const m = Star(unit)
+
+  t.ok(isFunction(m['@@type']), 'is a function')
+  t.equal(m['@@type'], Star['@@type'], 'static and instance versions are the same')
+  t.equal(m['@@type'](), 'crocks/Star@1( crocks/MockCrock@1 )', 'reports crocks/Star@1 with embeded type')
 
   t.end()
 })

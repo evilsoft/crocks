@@ -28,6 +28,7 @@ test('Async', t => {
 
   t.ok(isFunction(Async.of), 'provides an of function')
   t.ok(isFunction(Async.type), 'provides a type function')
+  t.ok(isFunction(Async['@@type']), 'provides a @@type function')
 
   t.equals(Async.Resolved(3).constructor, Async, 'provides TypeRep on constructor on Resolved')
   t.equals(Async.Rejected(3).constructor, Async, 'provides TypeRep on constructor on Rejected')
@@ -255,7 +256,19 @@ test('Async inspect', t => {
 })
 
 test('Async type', t => {
+  t.ok(isFunction(Async(unit).type), 'is a function')
+
+  t.equal(Async(unit).type, Async.type, 'static and instance versions are the same')
   t.equal(Async(unit).type(), 'Async', 'returns Async')
+
+  t.end()
+})
+
+test('Async @@type', t => {
+  t.ok(isFunction(Async(unit)['@@type']), 'is a function')
+
+  t.equal(Async(unit)['@@type'], Async['@@type'], 'static and instance versions are the same')
+  t.equal(Async(unit)['@@type'](), 'crocks/Async@1', 'returns Async')
 
   t.end()
 })

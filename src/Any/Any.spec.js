@@ -21,6 +21,7 @@ test('Any', t => {
 
   t.ok(isFunction(Any.empty), 'provides an empty function')
   t.ok(isFunction(Any.type), 'provides a type function')
+  t.ok(isFunction(Any['@@type']), 'provides a @@type function')
 
   const err = /Any: Non-function value required/
   t.throws(Any, err, 'throws with nothing')
@@ -81,6 +82,15 @@ test('Any type', t => {
 
   t.equal(Any(0).type, Any.type, 'static and instance versions are the same')
   t.equal(Any(0).type(), 'Any', 'reports Any')
+
+  t.end()
+})
+
+test('Any @@type', t => {
+  t.ok(isFunction(Any(0)['@@type']), 'is a function')
+
+  t.equal(Any['@@type'], Any(0)['@@type'], 'static and instance versions are the same')
+  t.equal(Any(0)['@@type'](), 'crocks/Any@1', 'reports crocks/Any@1')
 
   t.end()
 })

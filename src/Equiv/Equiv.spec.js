@@ -22,8 +22,9 @@ test('Equiv', t => {
 
   t.ok(isFunction(Equiv), 'is a function')
 
-  t.ok(isFunction(Equiv.type), 'provides a type function')
   t.ok(isFunction(Equiv.empty), 'provides an empty function')
+  t.ok(isFunction(Equiv.type), 'provides a type function')
+  t.ok(isFunction(Equiv['@@type']), 'provides a @@type function')
 
   t.ok(isObject(Equiv(isSame)), 'returns an object')
 
@@ -68,8 +69,23 @@ test('Equiv inspect', t => {
 })
 
 test('Equiv type', t => {
-  t.equal(Equiv(isSame).type(), 'Equiv', 'type returns Equiv')
-  t.equal(Equiv(isSame).type(), Equiv.type(), 'constructor and instance return same value')
+  const m = Equiv(isSame)
+
+  t.ok(isFunction(m.type), 'is a function')
+
+  t.equal(m.type, Equiv.type, 'static and instance versions are the same')
+  t.equal(m.type(), 'Equiv', 'type returns Equiv')
+
+  t.end()
+})
+
+test('Equiv @@type', t => {
+  const m = Equiv(isSame)
+
+  t.ok(isFunction(m['@@type']), 'is a function')
+
+  t.equal(m['@@type'], Equiv['@@type'], 'static and instance versions are the same')
+  t.equal(m['@@type'](), 'crocks/Equiv@1', 'type returns crocks/Equiv@1')
 
   t.end()
 })

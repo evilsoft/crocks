@@ -26,10 +26,11 @@ test('State', t => {
   t.equals(State(unit).constructor, State, 'provides TypeRep on constructor')
 
   t.ok(isFunction(State.of), 'provides an of function')
-  t.ok(isFunction(State.type), 'provides a type function')
   t.ok(isFunction(State.get), 'provides a get function')
   t.ok(isFunction(State.put), 'provides a put function')
   t.ok(isFunction(State.modify), 'provides a modify function')
+  t.ok(isFunction(State.type), 'provides a type function')
+  t.ok(isFunction(State['@@type']), 'provides a @@type function')
 
   const err = /State: Must wrap a function in the form \(s -> Pair a s\)/
   t.throws(s(), err, 'throws with no parameters')
@@ -72,7 +73,22 @@ test('State inspect', t => {
 })
 
 test('State type', t => {
-  t.equal(State(unit).type(), 'State', 'type returns State')
+  const m = State(unit)
+
+  t.ok(isFunction(m.type), 'is a function')
+  t.equal(State.type, m.type, 'static and instance versions are the same')
+  t.equal(m.type(), 'State', 'type returns State')
+
+  t.end()
+})
+
+test('State @@type', t => {
+  const m = State(unit)
+
+  t.ok(isFunction(m['@@type']), 'is a function')
+  t.equal(State['@@type'], m['@@type'], 'static and instance versions are the same')
+  t.equal(m['@@type'](), 'crocks/State@1', 'reports crocks/State@1')
+
   t.end()
 })
 

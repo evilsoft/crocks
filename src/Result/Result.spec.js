@@ -34,9 +34,10 @@ test('Result', t => {
   t.equals(Result.Err(true).constructor, Result, 'provides TypeRep on constructor for Err')
 
   t.ok(isFunction(Result.of), 'provides an of function')
-  t.ok(isFunction(Result.type), 'provides a type function')
   t.ok(isFunction(Result.Err), 'provides an Err function')
   t.ok(isFunction(Result.Ok), 'provides an Ok function')
+  t.ok(isFunction(Result.type), 'provides a type function')
+  t.ok(isFunction(Result['@@type']), 'provides a @@type function')
 
   const err = /Result: Must wrap something, try using Err or Ok constructors/
   t.throws(Result, err, 'throws with no parameters')
@@ -93,7 +94,38 @@ test('Result inspect', t => {
 })
 
 test('Result type', t => {
-  t.equal(Result(0).type(), 'Result', 'type returns Result')
+  const { Err, Ok } = Result
+
+  const m = Ok(0)
+  const e = Err(0)
+
+  t.ok(isFunction(m.type), 'is a function on Ok')
+  t.ok(isFunction(e.type), 'is a function on Err')
+
+  t.equal(Result.type, m.type, 'static and instance versions are the same for Ok')
+  t.equal(Result.type, e.type, 'static and instance versions are the same for Err')
+
+  t.equal(m.type(), 'Result', 'reports Result for Ok')
+  t.equal(e.type(), 'Result', 'reports Result for Err')
+
+  t.end()
+})
+
+test('Result @@type', t => {
+  const { Err, Ok } = Result
+
+  const m = Ok(0)
+  const e = Err(0)
+
+  t.ok(isFunction(m['@@type']), 'is a function on Ok')
+  t.ok(isFunction(e['@@type']), 'is a function on Err')
+
+  t.equal(Result['@@type'], m['@@type'], 'static and instance versions are the same for Ok')
+  t.equal(Result['@@type'], e['@@type'], 'static and instance versions are the same for Err')
+
+  t.equal(m['@@type'](), 'crocks/Result@1', 'reports crocks/Result@1 for Ok')
+  t.equal(e['@@type'](), 'crocks/Result@1', 'reports crocks/Result@1 for Err')
+
   t.end()
 })
 

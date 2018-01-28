@@ -1,9 +1,12 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
+const VERSION = 1
+
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
 const type = require('../core/types').type('State')
+const _type = require('../core/types').typeFn(type(), VERSION)
 
 const Pair = require('../core/Pair')
 const Unit = require('../core/Unit')
@@ -115,18 +118,21 @@ function State(fn) {
     inspect, toString: inspect, runWith,
     execWith, evalWith, type, map, ap,
     chain, of,
+    '@@type': _type,
     constructor: State
   }
 }
 
 State.of = _of
-State.type = type
 State.get = get
 
 State.modify = modify
 
 State.put =
   x => modify(() => (x))
+
+State.type = type
+State['@@type'] = _type
 
 State['@@implements'] = _implements(
   [ 'ap', 'chain', 'map', 'of' ]

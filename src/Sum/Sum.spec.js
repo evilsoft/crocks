@@ -21,6 +21,7 @@ test('Sum', t => {
 
   t.ok(isFunction(Sum.empty), 'provides an empty function')
   t.ok(isFunction(Sum.type), 'provides a type function')
+  t.ok(isFunction(Sum['@@type']), 'provides a @@type function')
 
   t.throws(Sum, TypeError, 'throws with nothing')
   t.throws(s(identity), TypeError, 'throws with a function')
@@ -73,10 +74,21 @@ test('Sum valueOf', t => {
 })
 
 test('Sum type', t => {
-  t.ok(isFunction(Sum(0).type), 'is a function')
+  const m = Sum(0)
 
-  t.equal(Sum(0).type, Sum.type, 'static and instance versions are the same')
-  t.equal(Sum(0).type(), 'Sum', 'reports Sum')
+  t.ok(isFunction(m.type), 'is a function')
+  t.equal(m.type, Sum.type, 'static and instance versions are the same')
+  t.equal(m.type(), 'Sum', 'reports Sum')
+
+  t.end()
+})
+
+test('Sum @@type', t => {
+  const m = Sum(0)
+
+  t.ok(isFunction(m['@@type']), 'is a function')
+  t.equal(m['@@type'], Sum['@@type'], 'static and instance versions are the same')
+  t.equal(m['@@type'](), 'crocks/Sum@1', 'reports crocks/Sum@1')
 
   t.end()
 })

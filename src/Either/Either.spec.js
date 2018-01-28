@@ -34,9 +34,10 @@ test('Either', t => {
   t.equals(Either.Left(0).constructor, Either, 'provides TypeRep on constructor for Left')
 
   t.ok(isFunction(Either.of), 'provides an of function')
-  t.ok(isFunction(Either.type), 'provides a type function')
   t.ok(isFunction(Either.Left), 'provides a Left function')
   t.ok(isFunction(Either.Right), 'provides a Right function')
+  t.ok(isFunction(Either.type), 'provides a type function')
+  t.ok(isFunction(Either['@@type']), 'provides a @@type function')
 
   const err = /Either: Must wrap something, try using Left or Right constructors/
   t.throws(Either, err, 'throws with no parameters')
@@ -93,7 +94,32 @@ test('Either inspect', t => {
 })
 
 test('Either type', t => {
-  t.equal(Either(0).type(), 'Either', 'type returns Either')
+  const { Left, Right } = Either
+
+  t.ok(isFunction(Right(0).type), 'is a function on Right')
+  t.ok(isFunction(Left(0).type), 'is a function on Left')
+
+  t.equal(Right(0).type, Either.type, 'static and instance versions are the same for Right')
+  t.equal(Left(0).type, Either.type, 'static and instance versions are the same for Left')
+
+  t.equal(Right(0).type(), 'Either', 'type returns Either for Right')
+  t.equal(Left(0).type(), 'Either', 'type returns Either for Left')
+
+  t.end()
+})
+
+test('Either @@type', t => {
+  const { Left, Right } = Either
+
+  t.ok(isFunction(Right(0)['@@type']), 'is a function on Right')
+  t.ok(isFunction(Left(0)['@@type']), 'is a function on Left')
+
+  t.equal(Right(0)['@@type'], Either['@@type'], 'static and instance versions are the same for Right')
+  t.equal(Left(0)['@@type'], Either['@@type'], 'static and instance versions are the same for Left')
+
+  t.equal(Right(0)['@@type'](), 'crocks/Either@1', 'returns crocks/Either@1 for Right')
+  t.equal(Left(0)['@@type'](), 'crocks/Either@1', 'returns crocks/Either@1 for Left')
+
   t.end()
 })
 

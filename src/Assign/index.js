@@ -1,10 +1,14 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
+const VERSION = 1
+
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
 const _object = require('../core/object')
+
 const type = require('../core/types').type('Assign')
+const _type = require('../core/types').typeFn(type(), VERSION)
 
 const isNil = require('../core/isNil')
 const isObject = require('../core/isObject')
@@ -40,6 +44,7 @@ function Assign(o) {
   return {
     inspect, toString: inspect,
     valueOf, type, concat, empty,
+    '@@type': _type,
     constructor: Assign
   }
 }
@@ -48,10 +53,8 @@ Assign['@@implements'] = _implements(
   [ 'concat', 'empty' ]
 )
 
-Assign.empty =
-  _empty
-
-Assign.type =
-  type
+Assign.empty = _empty
+Assign.type = type
+Assign['@@type'] = _type
 
 module.exports = Assign

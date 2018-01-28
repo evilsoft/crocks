@@ -29,9 +29,9 @@ test('Reader', t => {
   t.equals(Reader(unit).constructor, Reader, 'provides TypeRep on constructor')
 
   t.ok(isFunction(Reader.of), 'provides an of function')
-  t.ok(isFunction(Reader.type), 'provides a type function')
   t.ok(isFunction(Reader.ask), 'provides an ask function')
-
+  t.ok(isFunction(Reader.type), 'provides a type function')
+  t.ok(isFunction(Reader['@@type']), 'provides a @@type function')
 
   const err = /Reader: Must wrap a function/
   t.throws(r(), err, 'throws with no parameters')
@@ -73,7 +73,20 @@ test('Reader inspect', t => {
 })
 
 test('Reader type', t => {
-  t.equal(Reader(unit).type(), 'Reader', 'type returns Reader')
+  const m = Reader(unit)
+
+  t.ok(isFunction(m.type), 'is a function')
+  t.equal(Reader.type, m.type, 'static and instance versions are the same')
+  t.equal(m.type(), 'Reader', 'type returns Reader')
+  t.end()
+})
+
+test('Reader @@type', t => {
+  const m = Reader(unit)
+
+  t.ok(isFunction(m['@@type']), 'is a function')
+  t.equal(Reader['@@type'], m['@@type'], 'static and instance versions are the same')
+  t.equal(m['@@type'](), 'crocks/Reader@1', 'type returns crocks/Reader@1')
   t.end()
 })
 

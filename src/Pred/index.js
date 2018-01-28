@@ -1,9 +1,12 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
+const VERSION = 1
+
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
 const type = require('../core/types').type('Pred')
+const _type = require('../core/types').typeFn(type(), VERSION)
 
 const compose = require('../core/compose')
 const isFunction = require('../core/isFunction')
@@ -48,12 +51,14 @@ function Pred(pred) {
   return {
     inspect, toString: inspect, runWith,
     type, valueOf, empty, concat, contramap,
+    '@@type': _type,
     constructor: Pred
   }
 }
 
 Pred.empty = _empty
 Pred.type = type
+Pred['@@type'] = _type
 
 Pred['@@implements'] = _implements(
   [ 'concat', 'contramap', 'empty' ]

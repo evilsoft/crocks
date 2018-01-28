@@ -30,6 +30,7 @@ test('Identity', t => {
 
   t.ok(isFunction(Identity.of), 'provides an of function')
   t.ok(isFunction(Identity.type), 'provides a type function')
+  t.ok(isFunction(Identity['@@type']), 'provides a @@type function')
 
   const err = /Identity: Must wrap something/
   t.throws(Identity, err, 'throws with no parameters')
@@ -65,7 +66,19 @@ test('Identity type', t => {
   const m = Identity(0)
 
   t.ok(isFunction(m.type), 'provides a type function')
+  t.equal(Identity.type, m.type, 'is the same function as the static type')
   t.equal(m.type(), 'Identity', 'type returns Identity')
+
+  t.end()
+})
+
+test('Identity @@type', t => {
+  const m = Identity(0)
+
+  t.ok(isFunction(m['@@type']), 'provides a @@type function')
+  t.equal(Identity['@@type'], m['@@type'], 'static and instance versions are the same')
+  t.equal(m['@@type'](), 'crocks/Identity@1', '@@type returns Identity')
+
   t.end()
 })
 

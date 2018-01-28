@@ -29,6 +29,7 @@ test('IO', t => {
 
   t.ok(isFunction(IO.of), 'provides an of function')
   t.ok(isFunction(IO.type), 'provides a type function')
+  t.ok(isFunction(IO['@@type']), 'provides a @@type function')
 
   t.throws(io(), TypeError, 'throws with no parameters')
 
@@ -70,7 +71,22 @@ test('IO inspect', t => {
 })
 
 test('IO type', t => {
-  t.equal(IO(unit).type(), 'IO', 'type returns IO')
+  const m = IO(unit)
+
+  t.ok(isFunction(m.type), 'is a function')
+  t.equal(IO.type, m.type, 'static and instance versions are the same')
+  t.equal(m.type(), 'IO', 'reports IO')
+
+  t.end()
+})
+
+test('IO @@type', t => {
+  const m = IO(unit)
+
+  t.ok(isFunction(m['@@type']), 'is a function')
+  t.equal(IO['@@type'], m['@@type'], 'static and instance versions are the same')
+  t.equal(m['@@type'](), 'crocks/IO@1', 'reports crocks/IO@1')
+
   t.end()
 })
 

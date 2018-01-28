@@ -1,12 +1,15 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
+const VERSION = 1
+
 const _defineUnion = require('../core/defineUnion')
 const _equals = require('../core/equals')
 const _implements = require('../core/implements')
 const _innerConcat = require('../core/innerConcat')
 const _inspect = require('../core/inspect')
 const type = require('../core/types').type('Either')
+const _type = require('../core/types').typeFn(type(), VERSION)
 
 const compose = require('../core/compose')
 const isArray = require('../core/isArray')
@@ -196,12 +199,14 @@ function Either(u) {
     type, concat, swap, coalesce, equals,
     map, bimap, alt, ap, of, chain, sequence,
     traverse,
+    '@@type': _type,
     constructor: Either
   }
 }
 
 Either.of   = _of
 Either.type = type
+Either['@@type'] = _type
 
 Either['@@implements'] = _implements(
   [ 'alt', 'ap', 'bimap', 'chain', 'concat', 'equals', 'map', 'of', 'traverse' ]

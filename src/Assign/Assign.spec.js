@@ -21,6 +21,7 @@ test('Assign', t => {
 
   t.ok(isFunction(Assign.empty), 'provides an empty function')
   t.ok(isFunction(Assign.type), 'provides a type function')
+  t.ok(isFunction(Assign['@@type']), 'provides a @@type function')
 
   t.throws(Assign, TypeError, 'throws with nothing')
   t.throws(a(identity), TypeError, 'throws with a function')
@@ -77,6 +78,15 @@ test('Assign type', t => {
 
   t.equal(Assign({}).type, Assign.type, 'static and instance versions are the same')
   t.equal(Assign({}).type(), 'Assign', 'reports Assign')
+
+  t.end()
+})
+
+test('Assign @@type', t => {
+  t.ok(isFunction(Assign({})['@@type']), 'is a function')
+
+  t.equal(Assign({})['@@type'], Assign['@@type'], 'static and instance versions are the same')
+  t.equal(Assign({})['@@type'](), 'crocks/Assign@1', 'reports crocks/Assign@1')
 
   t.end()
 })

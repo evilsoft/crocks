@@ -22,6 +22,7 @@ test('Const', t => {
   t.ok(isObject(m), 'returns an object')
 
   t.ok(isFunction(Const.type), 'provides a type function')
+  t.ok(isFunction(Const['@@type']), 'provides a @@type function')
 
   t.equals(Const(true).constructor, Const, 'provides TypeRep on constructor')
 
@@ -57,6 +58,16 @@ test('Const type', t => {
 
   t.ok(isFunction(m.type), 'provides a type function')
   t.equal(m.type(), 'Const', 'type returns Const')
+
+  t.end()
+})
+
+test('Const @@type', t => {
+  const m = Const(0)
+
+  t.ok(isFunction(m['@@type']), 'provides a @@type function')
+  t.equal(m['@@type'], Const['@@type'], 'static and instance versions are the same')
+  t.equal(m['@@type'](), 'crocks/Const@1', 'type returns crocks/Const@1')
 
   t.end()
 })

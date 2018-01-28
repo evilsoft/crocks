@@ -34,6 +34,7 @@ test('List', t => {
   t.ok(isFunction(List.of), 'provides an of function')
   t.ok(isFunction(List.fromArray), 'provides a fromArray function')
   t.ok(isFunction(List.type), 'provides a type function')
+  t.ok(isFunction(List['@@type']), 'provides a @@type function')
 
   const err = /List: List must wrap something/
   t.throws(List, err, 'throws with no parameters')
@@ -84,7 +85,7 @@ test('List fromArray', t => {
 
   const data = [ [ 2, 1 ], 'a' ]
 
-  t.equal(List.fromArray([ 0 ]).type(), 'List', 'returns a List')
+  t.ok(isSameType(List, List.fromArray([ 0 ])), 'returns a List')
   t.same(List.fromArray(data).valueOf(), data, 'wraps the value passed into List in an array')
 
   t.end()
@@ -101,7 +102,24 @@ test('List inspect', t => {
 })
 
 test('List type', t => {
-  t.equal(List([]).type(), 'List', 'returns List')
+  const m = List([])
+
+  t.ok(isFunction(m.type), 'is a function')
+
+  t.equal(m.type, List.type, 'static and instance versions are the same')
+  t.equal(m.type(), 'List', 'returns List')
+
+  t.end()
+})
+
+test('List @@type', t => {
+  const m = List([])
+
+  t.ok(isFunction(m['@@type']), 'is a function')
+
+  t.equal(m['@@type'], List['@@type'], 'static and instance versions are the same')
+  t.equal(m['@@type'](), 'crocks/List@1', 'returns crocks/List@1')
+
   t.end()
 })
 
@@ -112,9 +130,9 @@ test('List head', t => {
 
   t.ok(isFunction(two.head), 'Provides a head Function')
 
-  t.equal(empty.head().type(), Maybe.type(), 'empty List returns a Maybe')
-  t.equal(one.head().type(), Maybe.type(), 'one element List returns a Maybe')
-  t.equal(two.head().type(), Maybe.type(), 'two element List returns a Maybe')
+  t.ok(isSameType(Maybe, empty.head()), 'empty List returns a Maybe')
+  t.ok(isSameType(Maybe, one.head()), 'one element List returns a Maybe')
+  t.ok(isSameType(Maybe, two.head()), 'two element List returns a Maybe')
 
   t.equal(empty.head().option('Nothing'), 'Nothing', 'empty List returns a Nothing')
   t.equal(one.head().option('Nothing'), 1, 'one element List returns a `Just 1`')

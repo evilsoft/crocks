@@ -1,9 +1,12 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
+const VERSION = 1
+
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
 const type = require('../core/types').type('First')
+const _type = require('../core/types').typeFn(type(), VERSION)
 
 const isSameType = require('../core/isSameType')
 
@@ -49,6 +52,7 @@ function First(x) {
     inspect, toString: inspect,
     concat, empty, option, type,
     valueOf,
+    '@@type': _type,
     constructor: First
   }
 }
@@ -59,5 +63,6 @@ First['@@implements'] = _implements(
 
 First.empty = _empty
 First.type = type
+First['@@type'] = _type
 
 module.exports = First

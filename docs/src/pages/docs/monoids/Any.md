@@ -71,36 +71,6 @@ Any(true).concat(Any.empty())   //=> Any true
 Any(false).concat(Any.empty())  //=> Any false
 ```
 
-#### type
-
-```haskell
-Any.type :: () -> String
-```
-
-`type` provides a string representation of the type name for a given type in
-`crocks`. While it is used mostly internally for law validation, it can be
-useful to the end user for debugging and building out custom types based on the
-standard `crocks` types. While type comparisons can easily be done manually by
-calling `type` on a given type, using the `isSameType` function hides much of
-the boilerplate. `type` is available on both the Constructor and the Instance
-for convenience.
-
-```javascript
-const Any = require('crocks/Any')
-
-const Assign = require('crocks/Assign')
-const isSameType = require('crocks/predicates/isSameType')
-
-Any.type() //=>  "Any"
-
-isSameType(Any, Any(3))         //=> true
-isSameType(Any, Any)            //=> true
-isSameType(Any(false), Assign)  //=> false
-
-isSameType(Any, Assign({ food: 'always' }))
-//=> false
-```
-
 </article>
 
 <article id="topic-instance">

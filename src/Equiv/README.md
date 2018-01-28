@@ -91,35 +91,6 @@ empty
 //=> false
 ```
 
-#### type
-
-```haskell
-Equiv.type :: () -> String
-```
-
-`type` provides a string representation of the type name for a given type in
-`crocks`. While it is used mostly internally for law validation, it can be
-useful to the end user for debugging and building out custom types based on the
-standard `crocks` types. While type comparisons can easily be done manually by
-calling `type` on a given type, using the `isSameType` function hides much of
-the boilerplate. `type` is available on both the Constructor and the Instance
-for convenience.
-
-```javascript
-const Equiv = require('crocks/Equiv')
-
-const Endo = require('crocks/Endo')
-const equals = require('crocks/pointfree/equals')
-const isSameType = require('crocks/predicates/isSameType')
-
-Equiv.type() //=>  "Equiv"
-
-isSameType(Equiv, Equiv(equals))    //=> true
-isSameType(Equiv, Equiv)            //=> true
-isSameType(Equiv, Endo(x => x * 2)) //=> false
-isSameType(Equiv(equals), Endo)     //=> false
-```
-
 ## Instance Methods
 
 #### concat

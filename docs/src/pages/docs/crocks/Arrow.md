@@ -108,36 +108,6 @@ right.runWith(12) //=> '12'
 left.runWith(12)  //=> '12'
 ```
 
-
-#### type
-
-```haskell
-Arrow.type :: () -> String
-```
-
-`type` provides a string representation of the type name for a given type in
-`crocks`. While it is used mostly internally for law validation, it can be useful
-to the end user for debugging and building out custom types based on the standard
-`crocks` types. While type comparisons can easily be done manually by calling
-`type` on a given type, using the `isSameType` function hides much of the
-boilerplate. `type` is available on both the Constructor and the Instance for
-convenience.
-
-```javascript
-const Arrow = require('crocks/Arrow')
-const Identity = require('crocks/Identity')
-
-const I = require('crocks/combinators/identity')
-const isSameType = require('crocks/predicates/isSameType')
-
-Arrow.type() //=> "Arrow"
-
-isSameType(Arrow, Arrow(x => x + 3))  //=> true
-isSameType(Arrow, Arrow)              //=> true
-isSameType(Arrow, Identity(0))        //=> false
-isSameType(Arrow(I), Identity)        //=> false
-```
-
 </article>
 
 <article id="topic-instance">

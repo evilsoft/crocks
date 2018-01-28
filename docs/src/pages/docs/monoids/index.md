@@ -16,9 +16,8 @@ as well.
 All `Monoids` work with the following helper functions
 [mconcat][mconcat], [mreduce][mreduce], [mconcatMap][mconcatmap] and [mreduceMap][mreducemap].
 
-All `Monoids` provide `empty` and `type` functions on their Constructors as well
-as the following Instance Functions: `inspect`, `type`, `valueOf`, `empty` and
-`concat`.
+All `Monoids` provide `empty` functions on their Constructors as well
+as the following Instance Functions: `valueOf`, `empty` and `concat`.
 
 | Monoid | Type | Operation | Empty (Identity) |
 |---|---|---|---|

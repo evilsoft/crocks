@@ -7,7 +7,7 @@ First a = First (Maybe a)
 `First` is a `Monoid` that will always return the first, non-empty value when
 (2) `First` instances are combined. `First` is able to be a `Monoid` because
 it implements a `Maybe` under the hood. The use of the `Maybe` allows for an
-empty to be represented with a `Nothing`.
+[`empty`][#empty] `First` to be represented with a `Nothing`.
 
 `First` can be constructed with either a value or a `Maybe` instance. Any value
 passed to the constructor will be wrapped in a `Just` to represent a non-empty
@@ -127,11 +127,11 @@ First a ~> a -> a
 ```
 
 `First` wraps an underlying `Maybe` which provides the ability to option out
-a value in the case of an empty instance. Just like `option` on a `Maybe`
-instance, it takes a value as its argument. When run on an empty instance,
-the provided default will be returned. If `option` is run on a non-empty
-instance however, the wrapped value will be extracted not only from the
-`Last` but also from the underlying `Just`.
+a value in the case of an [`empty`](#empty) instance. Just like `option` on
+a `Maybe` instance, it takes a value as its argument. When run on
+an [`empty`](#empty) instance, the provided default will be returned.
+If `option` is run on a non-empty instance however, the wrapped value will be
+extracted not only from the `Last` but also from the underlying `Just`.
 
 If the underlying `Maybe` is desired, the [`valueOf`](#valueof) method can be
 used and will return the `Maybe` instead.
@@ -222,7 +222,7 @@ eitherToFirst :: (a -> Either c b) -> a -> First b
 Used to transform a given `Either` instance to a `First`
 instance, `eitherToFirst` will turn a `Right` instance into a non-empty `First`,
 wrapping the original value contained in the `Right`. All `Left` instances will
-map to an empty `First`, mapping the originally contained value to a `Unit`.
+map to an [`empty`](#empty) `First`, mapping the originally contained value to a `Unit`.
 Values on the `Left` will be lost and as such this transformation is considered
 lossy in that regard.
 
@@ -258,6 +258,7 @@ const firstNumber = mapReduce(
   First.empty()
 )
 
+// "Bad Times" is lost, mapped to Nothing
 eitherToFirst(Left('Bad Times'))
 //=> First( Nothing )
 
@@ -282,8 +283,8 @@ lastToFirst :: (a -> Last b) -> a -> First b
 
 Used to transform a given `Last` instance to a `First` instance, `lastToFirst`
 will turn a non-empty instance into a non-empty `First` wrapping the original
-value contained within the `Last`. All empty instances will map to an empty
-`First`.
+value contained within the `Last`. All [`empty`](#empty) instances will map
+to an [`empty`](#empty) `First`.
 
 Like all `crocks` transformation functions, `lastToFirst` has (2) possible
 signatures and will behave differently when passed either a `Last` instance
@@ -335,7 +336,7 @@ maybeToFirst :: (a -> Maybe b) -> a -> First b
 Used to transform a given `Maybe` instance to a `First`
 instance, `maybeToFirst` will turn a `Just` into a non-empty `First` instance,
 wrapping the original value contained within the `First`.
-All `Nothing` instances will map to an empty `First` instance.
+All `Nothing` instances will map to an [`empty`](#empty) `First` instance.
 
 This function is available mostly for completion sake, as `First` can always
 take a `Maybe` as its argument during construction. So while there is not a
@@ -406,9 +407,9 @@ resultToFirst :: (a -> Result e b) -> a -> First b
 Used to transform a given `Result` instance to a `First` instance,
 `resultToFirst` will turn an `Ok` instance into a non-empty `First`,
 wrapping the original value contained in the `Ok`. All `Err` instances will map
-to an empty `First`, mapping the originally contained value to a `Unit`. Values
-on the `Err` will be lost and as such this transformation is considered lossy in
-that regard.
+to an [`empty`](#empty) `First`, mapping the originally contained value to
+a `Unit`. Values on the `Err` will be lost and as such this transformation is
+considered lossy in that regard.
 
 Like all `crocks` transformation functions, `resultToFirst` has (2) possible
 signatures and will behave differently when passed either an `Result` instance
@@ -435,6 +436,7 @@ function onlyNums(x) {
 const firstNum =
   resultToFirst(tryCatch(onlyNums))
 
+// "this is bad" is lost, mapped to Nothing
 resultToFirst(Err('this is bad'))
 //=> Nothing
 

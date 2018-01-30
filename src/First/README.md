@@ -12,7 +12,7 @@ empty to be represented with a `Nothing`.
 `First` can be constructed with either a value or a `Maybe` instance. Any value
 passed to the constructor will be wrapped in a `Just` to represent a non-empty
 instance of `First`. Any `Maybe` passed to the constructor will be lifted as
-is, allowing the ability to "choose" an value based on some disjunction.
+is, allowing the ability to "choose" a value based on some disjunction.
 
 While most `Monoid`s only provide a [`valueOf`](#valueof) function used for
 extraction, `Last` takes advantage of its underlying `Maybe` to provide an
@@ -42,7 +42,7 @@ const chooseFirst =
   mconcatMap(First, safe(isValid))
 
 chooseFirst([ 21, 45, 2, 22, 19 ])
-  .valueOf(0)
+  .valueOf()
 //=> Just 2
 
 chooseFirst([ 'a', 'b', 'c' ])
@@ -93,7 +93,7 @@ First a ~> First a -> First a
 
 `concat` is used to combine (2) `Semigroup`s of the same type under an operation
 specified by the `Semigroup`. In the case of `First`, it will always provide the
-first non-empty value. Any subsequent non-empty values will be thrown away, and
+first non-empty value. Any subsequent non-empty values will be thrown away and
 will always result in the first non-empty value.
 
 ```javascript
@@ -127,11 +127,11 @@ First a ~> a -> a
 ```
 
 `First` wraps an underlying `Maybe` which provides the ability to option out
-a value in the case as of an empty instance. Just like `option` on a `Maybe`
+a value in the case of an empty instance. Just like `option` on a `Maybe`
 instance, it takes a value as its argument. When run on an empty instance,
 the provided default will be returned. If `option` is run on a non-empty
 instance however, the wrapped value will be extracted not only from the
-`Last`, but also from the underlying `Just`.
+`Last` but also from the underlying `Just`.
 
 If the underlying `Maybe` is desired, the [`valueOf`](#valueof) method can be
 used and will return the `Maybe` instead.
@@ -220,7 +220,7 @@ eitherToFirst :: (a -> Either c b) -> a -> First b
 ```
 
 Used to transform a given `Either` instance to a `First`
-instance, `eitherToFirst` will turn a `Right` instance into a non-empty `First`
+instance, `eitherToFirst` will turn a `Right` instance into a non-empty `First`,
 wrapping the original value contained in the `Right`. All `Left` instances will
 map to an empty `First`, mapping the originally contained value to a `Unit`.
 Values on the `Left` will be lost and as such this transformation is considered

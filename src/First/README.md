@@ -7,7 +7,7 @@ First a = First (Maybe a)
 `First` is a `Monoid` that will always return the first, non-empty value when
 (2) `First` instances are combined. `First` is able to be a `Monoid` because
 it implements a `Maybe` under the hood. The use of the `Maybe` allows for an
-[`empty`][#empty] `First` to be represented with a `Nothing`.
+[`empty`](#empty) `First` to be represented with a `Nothing`.
 
 `First` can be constructed with either a value or a `Maybe` instance. Any value
 passed to the constructor will be wrapped in a `Just` to represent a non-empty

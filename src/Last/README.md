@@ -7,7 +7,7 @@ Last a = Last (Maybe a)
 `Last` is a `Monoid` that will always return the last, non-empty value when
 (2) `Last` instances are combined. `Last` is able to be a `Monoid` because
 it implements a `Maybe` under the hood. The use of the `Maybe` allows for an
-[`empty`][#empty] `Last` to be represented with a `Nothing`.
+[`empty`](#empty) `Last` to be represented with a `Nothing`.
 
 `Last` can be constructed with either a value or a `Maybe` instance. Any value
 passed to the constructor will be wrapped in a `Just` to represent a non-empty
@@ -93,7 +93,7 @@ Last a ~> Last a -> Last a
 
 `concat` is used to combine (2) `Semigroup`s of the same type under an operation
 specified by the `Semigroup`. In the case of `Last`, it will always provide the
-last non-empty value. Any subsequent non-empty values will be thrown away and
+last non-empty value. All previous non-empty values will be thrown away and
 will always result in the last non-empty value.
 
 ```javascript
@@ -301,11 +301,11 @@ const isString = require('crocks/predicates/isString')
 const mconcatMap = require('crocks/helpers/mconcatMap')
 const safe = require('crocks/Maybe/safe')
 
-// lastString :: [ a ] -> Last String
+// firstString :: [ a ] -> First String
 const firstString =
   mconcatMap(First, safe(isString))
 
-// unfixFirstString :: [ a ] -> First String
+// unfixFirstString :: [ a ] -> Last String
 const unfixFirstString =
   firstToLast(firstString)
 
@@ -314,6 +314,9 @@ firstToLast(First.empty())
 
 firstToLast(First(false))
 //=> Last( Just false )
+
+unfixFirstString([ 'one', 2, 'Three', 4 ])
+//=> Last( Just "one" )
 
 unfixFirstString([ 'one', 2, 'Three', 4 ])
   .concat(Last('another string'))
@@ -382,8 +385,8 @@ Last(Just(99))
 Last(Nothing())
 //=> Last( Nothing )
 
-lastNumVal({ val: 97 })
-  .concat(Last(80))
+Last(Just(80))
+  .concat(lastNumVal({ val: 97 }))
 //=> Last( Just 97 )
 
 lastNumVal({ val: 97 })

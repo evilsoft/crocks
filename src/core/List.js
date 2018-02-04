@@ -22,8 +22,8 @@ const predOrFunc = require('./predOrFunc')
 const not =
   fn => x => !fn(x)
 
-const _concat =
-  x => m => m.concat(x)
+const _prepend =
+  x => m => x.concat(m)
 
 const { Nothing, Just } = require('./Maybe')
 
@@ -44,11 +44,11 @@ function fromArray(xs) {
 
 function applyTraverse(x, y) {
   if(isArray(x)) {
-    return array.ap(x, array.map(v => _concat(List.of(v)), y))
+    return array.ap(x, array.map(v => _prepend(List.of(v)), y))
   }
 
   return y
-    .map(v => _concat(List.of(v)))
+    .map(v => _prepend(List.of(v)))
     .ap(x)
 }
 
@@ -139,6 +139,14 @@ function List(x) {
     return xs.reduce(fn, i)
   }
 
+  function reduceRight(fn, i) {
+    if(!isFunction(fn)) {
+      throw new TypeError('List.reduceRight: Function required for first argument')
+    }
+
+    return xs.reduceRight(fn, i)
+  }
+
   function fold() {
     if(isEmpty(xs)) {
       throw new TypeError('List.fold: List must contain at least one Semigroup')
@@ -216,7 +224,7 @@ function List(x) {
       throw new TypeError('List.sequence: Applicative Function required')
     }
 
-    return reduce(
+    return reduceRight(
       runSequence,
       af(List.empty())
     )
@@ -227,7 +235,7 @@ function List(x) {
       throw new TypeError('List.traverse: Applicative returning functions required for both arguments')
     }
 
-    return reduce(
+    return reduceRight(
       runTraverse(f),
       af(List.empty())
     )
@@ -236,8 +244,8 @@ function List(x) {
   return {
     inspect, toString: inspect, valueOf, toArray,
     head, tail, cons, type, equals, concat, empty,
-    reduce, fold, filter, reject, map, ap, of, chain,
-    sequence, traverse,
+    reduce, reduceRight, fold, filter, reject, map,
+    ap, of, chain, sequence, traverse,
     '@@type': _type,
     constructor: List
   }

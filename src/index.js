@@ -131,6 +131,7 @@ const pointfree = {
   promap: require('./pointfree/promap'),
   read: require('./Writer/read'),
   reduce: require('./pointfree/reduce'),
+  reduceRight: require('./pointfree/reduceRight'),
   reject: require('./pointfree/reject'),
   run: require('./pointfree/run'),
   runWith: require('./pointfree/runWith'),

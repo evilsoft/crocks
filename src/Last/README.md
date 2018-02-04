@@ -31,7 +31,7 @@ const safe = require('crocks/Maybe/safe')
 
 // isEven :: Number -> Boolean
 const isEven =
-  x => !(x % 2)
+  x => x % 2 === 0
 
 // isValid :: a -> Boolean
 const isValid =

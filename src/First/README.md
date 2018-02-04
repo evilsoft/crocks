@@ -7,7 +7,7 @@ First a = First (Maybe a)
 `First` is a `Monoid` that will always return the first, non-empty value when
 (2) `First` instances are combined. `First` is able to be a `Monoid` because
 it implements a `Maybe` under the hood. The use of the `Maybe` allows for an
-[`empty`][#empty] `First` to be represented with a `Nothing`.
+[`empty`](#empty) `First` to be represented with a `Nothing`.
 
 `First` can be constructed with either a value or a `Maybe` instance. Any value
 passed to the constructor will be wrapped in a `Just` to represent a non-empty
@@ -15,7 +15,7 @@ instance of `First`. Any `Maybe` passed to the constructor will be lifted as
 is, allowing the ability to "choose" a value based on some disjunction.
 
 While most `Monoid`s only provide a [`valueOf`](#valueof) function used for
-extraction, `Last` takes advantage of its underlying `Maybe` to provide an
+extraction, `First` takes advantage of its underlying `Maybe` to provide an
 additional [`option`](#option) method. Using [`valueOf`](#valueof) will extract
 the underlying `Maybe`, while [`option`](#option) will extract the underlying
 value in the `Maybe`, using the provided default value when the underlying
@@ -131,7 +131,7 @@ a value in the case of an [`empty`](#empty) instance. Just like `option` on
 a `Maybe` instance, it takes a value as its argument. When run on
 an [`empty`](#empty) instance, the provided default will be returned.
 If `option` is run on a non-empty instance however, the wrapped value will be
-extracted not only from the `Last` but also from the underlying `Just`.
+extracted not only from the `First` but also from the underlying `Just`.
 
 If the underlying `Maybe` is desired, the [`valueOf`](#valueof) method can be
 used and will return the `Maybe` instead.
@@ -366,7 +366,7 @@ const numVal = compose(
   prop('val')
 )
 
-// numVal :: a -> First Number
+// firstNumVal :: a -> First Number
 const firstNumVal =
   maybeToFirst(numVal)
 
@@ -438,10 +438,10 @@ const firstNum =
 
 // "this is bad" is lost, mapped to Nothing
 resultToFirst(Err('this is bad'))
-//=> Nothing
+//=> First( Nothing )
 
 resultToFirst(Ok('this is great'))
-//=> Just "this is great"
+//=> First( Just "this is great" )
 
 firstNum(90)
   .concat(First(0))

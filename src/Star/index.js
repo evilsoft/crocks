@@ -172,6 +172,11 @@ function _Star(Monad) {
       inspect, toString: inspect, type,
       runWith, id, compose, map, contramap,
       promap, first, second, both,
+      'fantasy-land/id': id,
+      'fantasy-land/compose': compose,
+      'fantasy-land/contramap': contramap,
+      'fantasy-land/map': map,
+      'fantasy-land/promap': promap,
       '@@type': typeFn,
       constructor: Star
     }
@@ -179,6 +184,8 @@ function _Star(Monad) {
 
   Star.id = _id
   Star.type = type
+
+  Star['fantasy-land/id'] = _id
   Star['@@type'] = typeFn
 
   Star['@@implements'] = _implements(

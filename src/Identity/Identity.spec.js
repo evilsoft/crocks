@@ -38,6 +38,20 @@ test('Identity', t => {
   t.end()
 })
 
+test('Identity fantasy-land api', t => {
+  const m = Identity(identity)
+
+  t.equals(Identity['fantasy-land/of'], Identity.of, 'is same function as public constructor of')
+
+  t.equals(m['fantasy-land/of'], m.of, 'is same function as public instance of')
+  t.equals(m['fantasy-land/equals'], m.equals, 'is same function as public instance equals')
+  t.equals(m['fantasy-land/concat'], m.concat, 'is same function as public instance concat')
+  t.equals(m['fantasy-land/map'], m.map, 'is same function as public instance map')
+  t.equals(m['fantasy-land/chain'], m.chain, 'is same function as public instance chain')
+
+  t.end()
+})
+
 test('Identity @@implements', t => {
   const f = Identity['@@implements']
 

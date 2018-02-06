@@ -49,6 +49,18 @@ test('IO', t => {
   t.end()
 })
 
+test('IO fantasy-land api', t => {
+  const m = IO(identity)
+
+  t.equals(IO['fantasy-land/of'], IO.of, 'is same function as public constructor of')
+
+  t.equals(m['fantasy-land/of'], m.of, 'is same function as public instance of')
+  t.equals(m['fantasy-land/map'], m.map, 'is same function as public instance map')
+  t.equals(m['fantasy-land/chain'], m.chain, 'is same function as public instance chain')
+
+  t.end()
+})
+
 test('IO @@implements', t => {
   const f = IO['@@implements']
 

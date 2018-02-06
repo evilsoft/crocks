@@ -81,6 +81,9 @@ function Reader(runWith) {
   return {
     inspect, toString: inspect, runWith,
     type, map, ap, chain, of,
+    'fantasy-land/of': of,
+    'fantasy-land/map': map,
+    'fantasy-land/chain': chain,
     '@@type': _type,
     constructor: Reader
   }
@@ -89,6 +92,8 @@ function Reader(runWith) {
 Reader.of = _of
 Reader.ask = ask
 Reader.type = type
+
+Reader['fantasy-land/of'] = _of
 Reader['@@type'] = _type
 
 Reader['@@implements'] = _implements(

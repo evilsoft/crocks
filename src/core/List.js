@@ -246,6 +246,13 @@ function List(x) {
     head, tail, cons, type, equals, concat, empty,
     reduce, reduceRight, fold, filter, reject, map,
     ap, of, chain, sequence, traverse,
+    'fantasy-land/of': of,
+    'fantasy-land/equals': equals,
+    'fantasy-land/concat': concat,
+    'fantasy-land/empty': empty,
+    'fantasy-land/map': map,
+    'fantasy-land/chain': chain,
+    'fantasy-land/reduce': reduce,
     '@@type': _type,
     constructor: List
   }
@@ -254,6 +261,9 @@ function List(x) {
 List.of = _of
 List.empty = _empty
 List.type = type
+
+List['fantasy-land/of'] = _of
+List['fantasy-land/empty'] = _empty
 List['@@type'] = _type
 
 List.fromArray =

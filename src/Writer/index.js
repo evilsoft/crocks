@@ -95,6 +95,10 @@ function _Writer(Monoid) {
       inspect, toString: inspect, read,
       valueOf, log, type, equals, map,
       ap, of, chain,
+      'fantasy-land/of': of,
+      'fantasy-land/equals': equals,
+      'fantasy-land/map': map,
+      'fantasy-land/chain': chain,
       '@@type': typeFn,
       constructor: Writer
     }
@@ -102,6 +106,8 @@ function _Writer(Monoid) {
 
   Writer.of = _of
   Writer.type = _type
+
+  Writer['fantasy-land/of'] = _of
   Writer['@@type'] = typeFn
 
   Writer['@@implements'] = _implements(

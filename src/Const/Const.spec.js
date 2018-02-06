@@ -31,6 +31,17 @@ test('Const', t => {
   t.end()
 })
 
+test('Const fantasy-land api', t => {
+  const m = Const('always')
+
+  t.equals(m['fantasy-land/equals'], m.equals, 'is same function as public instance equals')
+  t.equals(m['fantasy-land/concat'], m.concat, 'is same function as public instance concat')
+  t.equals(m['fantasy-land/map'], m.map, 'is same function as public instance map')
+  t.equals(m['fantasy-land/chain'], m.chain, 'is same function as public instance chain')
+
+  t.end()
+})
+
 test('Const @@implements', t => {
   const f = Const['@@implements']
 

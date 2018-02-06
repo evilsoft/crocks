@@ -46,6 +46,32 @@ test('Maybe', t => {
   t.end()
 })
 
+test('Maybe fantasy-land api', t => {
+  const n = Maybe.Nothing()
+  const j = Maybe.Just('')
+
+  t.equals(Maybe['fantasy-land/zero'], Maybe.zero, 'is same function as public constructor zero')
+  t.equals(Maybe['fantasy-land/of'], Maybe.of, 'is same function as public constructor of')
+
+  t.equals(n['fantasy-land/zero'], n.zero, 'is same function as public nothing instance zero')
+  t.equals(n['fantasy-land/of'], n.of, 'is same function as public nothing instance of')
+  t.equals(n['fantasy-land/equals'], n.equals, 'is same function as nothing public instance equals')
+  t.equals(n['fantasy-land/alt'], n.alt, 'is same function as public nothing instance alt')
+  t.equals(n['fantasy-land/concat'], n.concat, 'is same function as public nothing instance concat')
+  t.equals(n['fantasy-land/map'], n.map, 'is same function as public nothing instance map')
+  t.equals(n['fantasy-land/chain'], n.chain, 'is same function as public nothing instance chain')
+
+  t.equals(j['fantasy-land/zero'], j.zero, 'is same function as public instance zero')
+  t.equals(j['fantasy-land/of'], j.of, 'is same function as public instance of')
+  t.equals(j['fantasy-land/equals'], j.equals, 'is same function as public just instance equals')
+  t.equals(j['fantasy-land/alt'], j.alt, 'is same function as public just instance alt')
+  t.equals(j['fantasy-land/concat'], j.concat, 'is same function as public just instance concat')
+  t.equals(j['fantasy-land/map'], j.map, 'is same function as public just instance map')
+  t.equals(j['fantasy-land/chain'], j.chain, 'is same function as public just instance chain')
+
+  t.end()
+})
+
 test('Maybe @@implements', t => {
   const f = Maybe['@@implements']
 

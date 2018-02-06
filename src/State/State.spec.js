@@ -51,6 +51,18 @@ test('State', t => {
   t.end()
 })
 
+test('State fantasy-land api', t => {
+  const m = State(identity)
+
+  t.equals(State['fantasy-land/of'], State.of, 'is same function as public constructor of')
+
+  t.equals(m['fantasy-land/of'], m.of, 'is same function as public instance of')
+  t.equals(m['fantasy-land/map'], m.map, 'is same function as public instance map')
+  t.equals(m['fantasy-land/chain'], m.chain, 'is same function as public instance chain')
+
+  t.end()
+})
+
 test('State @@implements', t => {
   const f = State['@@implements']
 

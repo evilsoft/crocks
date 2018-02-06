@@ -44,6 +44,18 @@ test('Pred', t => {
   t.end()
 })
 
+test('Pred fantasy-land api', t => {
+  const m = Pred(identity)
+
+  t.equals(Pred['fantasy-land/empty'], Pred.empty, 'is same function as public constructor empty')
+
+  t.equals(m['fantasy-land/empty'], m.empty, 'is same function as public instance empty')
+  t.equals(m['fantasy-land/concat'], m.concat, 'is same function as public instance concat')
+  t.equals(m['fantasy-land/contramap'], m.contramap, 'is same function as public instance contramap')
+
+  t.end()
+})
+
 test('Pred @@implements', t => {
   const f = Pred['@@implements']
 

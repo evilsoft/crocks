@@ -58,6 +58,9 @@ function Equiv(compare) {
     inspect, toString: inspect, type,
     compareWith, valueOf, contramap,
     concat, empty,
+    'fantasy-land/empty': empty,
+    'fantasy-land/concat': concat,
+    'fantasy-land/contramap': contramap,
     '@@type': _type,
     constructor: Equiv
   }
@@ -65,6 +68,8 @@ function Equiv(compare) {
 
 Equiv.empty = _empty
 Equiv.type = type
+
+Equiv['fantasy-land/empty'] = _empty
 Equiv['@@type'] = _type
 
 Equiv['@@implements'] = _implements(

@@ -41,6 +41,8 @@ function Endo(runWith) {
     inspect, toString: inspect,
     valueOf, type, concat, empty,
     runWith,
+    'fantasy-land/empty': empty,
+    'fantasy-land/concat': concat,
     '@@type': _type,
     constructor: Endo
   }
@@ -52,6 +54,8 @@ Endo['@@implements'] = _implements(
 
 Endo.empty = _empty
 Endo.type = type
+
+Endo['fantasy-land/empty'] = _empty
 Endo['@@type'] = _type
 
 module.exports = Endo

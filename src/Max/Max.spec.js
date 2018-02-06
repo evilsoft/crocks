@@ -40,6 +40,17 @@ test('Max', t => {
   t.end()
 })
 
+test('Max fantasy-land api', t => {
+  const m = Max(99)
+
+  t.equals(Max['fantasy-land/empty'], Max.empty, 'is same function as public constructor empty')
+
+  t.equals(m['fantasy-land/empty'], m.empty, 'is same function as public instance empty')
+  t.equals(m['fantasy-land/concat'], m.concat, 'is same function as public instance concat')
+
+  t.end()
+})
+
 test('Max @@implements', t => {
   const f = Max['@@implements']
 

@@ -42,6 +42,8 @@ function Min(n) {
   return {
     inspect, toString: inspect, valueOf,
     type, concat, empty,
+    'fantasy-land/empty': empty,
+    'fantasy-land/concat': concat,
     '@@type': _type,
     constructor: Min
   }
@@ -53,6 +55,8 @@ Min['@@implements'] = _implements(
 
 Min.empty = _empty
 Min.type = type
+
+Min['fantasy-land/empty'] = _empty
 Min['@@type'] = _type
 
 module.exports = Min

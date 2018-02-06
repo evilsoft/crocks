@@ -42,6 +42,8 @@ function Max(n) {
   return {
     inspect, toString: inspect, valueOf,
     type, concat, empty,
+    'fantasy-land/empty': empty,
+    'fantasy-land/concat': concat,
     '@@type': _type,
     constructor: Max
   }
@@ -53,6 +55,8 @@ Max['@@implements'] = _implements(
 
 Max.empty = _empty
 Max.type = type
+
+Max['fantasy-land/empty'] = _empty
 Max['@@type'] = _type
 
 module.exports = Max

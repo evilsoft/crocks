@@ -42,6 +42,8 @@ function Sum(n) {
   return {
     inspect, toString: inspect, valueOf,
     type, concat, empty,
+    'fantasy-land/empty': empty,
+    'fantasy-land/concat': concat,
     '@@type': _type,
     constructor: Sum
   }
@@ -53,6 +55,8 @@ Sum['@@implements'] = _implements(
 
 Sum.empty = _empty
 Sum.type = type
+
+Sum['fantasy-land/empty'] = _empty
 Sum['@@type'] = _type
 
 module.exports = Sum

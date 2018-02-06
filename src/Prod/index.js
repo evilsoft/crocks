@@ -42,6 +42,8 @@ function Prod(n) {
   return {
     inspect, toString: inspect, valueOf,
     type, concat, empty,
+    'fantasy-land/empty': empty,
+    'fantasy-land/concat': concat,
     '@@type': _type,
     constructor: Prod
   }
@@ -53,6 +55,8 @@ Prod['@@implements'] = _implements(
 
 Prod.empty = _empty
 Prod.type = type
+
+Prod['fantasy-land/empty'] = _empty
 Prod['@@type'] = _type
 
 module.exports = Prod

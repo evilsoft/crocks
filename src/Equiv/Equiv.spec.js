@@ -48,6 +48,18 @@ test('Equiv', t => {
   t.end()
 })
 
+test('Equiv fantasy-land api', t => {
+  const m = Equiv(identity)
+
+  t.equals(Equiv['fantasy-land/empty'], Equiv.empty, 'is same function as public constructor empty')
+
+  t.equals(m['fantasy-land/empty'], m.empty, 'is same function as public instance empty')
+  t.equals(m['fantasy-land/concat'], m.concat, 'is same function as public instance concat')
+  t.equals(m['fantasy-land/contramap'], m.contramap, 'is same function as public instance contramap')
+
+  t.end()
+})
+
 test('Equiv @@implements', t => {
   const f = Equiv['@@implements']
 

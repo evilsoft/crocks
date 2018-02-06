@@ -108,6 +108,11 @@ function Identity(x) {
     inspect, toString: inspect, valueOf,
     type, equals, concat, map, ap, of,
     chain, sequence, traverse,
+    'fantasy-land/of': of,
+    'fantasy-land/equals': equals,
+    'fantasy-land/concat': concat,
+    'fantasy-land/map': map,
+    'fantasy-land/chain': chain,
     '@@type': _type,
     constructor: Identity
   }
@@ -115,6 +120,8 @@ function Identity(x) {
 
 Identity.of = _of
 Identity.type = type
+
+Identity['fantasy-land/of'] = _of
 Identity['@@type'] = _type
 
 Identity['@@implements'] = _implements(

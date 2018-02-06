@@ -68,6 +68,12 @@ function Unit() {
     inspect, toString: inspect, valueOf,
     type, equals, concat, empty, map, ap,
     of, chain,
+    'fantasy-land/of': of,
+    'fantasy-land/empty': empty,
+    'fantasy-land/equals': equals,
+    'fantasy-land/concat': concat,
+    'fantasy-land/map': map,
+    'fantasy-land/chain': chain,
     '@@type': _type,
     constructor: Unit
   }
@@ -76,6 +82,9 @@ function Unit() {
 Unit.of = _of
 Unit.empty = _empty
 Unit.type = type
+
+Unit['fantasy-land/of'] = _of
+Unit['fantasy-land/empty'] = _empty
 Unit['@@type'] = _type
 
 Unit['@@implements'] = _implements(

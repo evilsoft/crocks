@@ -42,6 +42,17 @@ test('Endo', t => {
   t.end()
 })
 
+test('Endo fantasy-land api', t => {
+  const m = Endo(identity)
+
+  t.equals(Endo['fantasy-land/empty'], Endo.empty, 'is same function as public constructor empty')
+
+  t.equals(m['fantasy-land/empty'], m.empty, 'is same function as public instance empty')
+  t.equals(m['fantasy-land/concat'], m.concat, 'is same function as public instance concat')
+
+  t.end()
+})
+
 test('Endo @@implements', t => {
   const f = Endo['@@implements']
 

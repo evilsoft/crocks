@@ -155,6 +155,12 @@ function Pair(l, r) {
     snd, toArray, type, merge, equals,
     concat, swap, map, bimap, ap, chain,
     extend,
+    'fantasy-land/equals': equals,
+    'fantasy-land/concat': concat,
+    'fantasy-land/map': map,
+    'fantasy-land/bimap': bimap,
+    'fantasy-land/chain': chain,
+    'fantasy-land/extend': extend,
     '@@type': _type,
     constructor: Pair
   }

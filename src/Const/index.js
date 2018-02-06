@@ -62,6 +62,10 @@ function Const(x) {
   return {
     inspect, toString: inspect, valueOf,
     type, equals, concat, map, ap, chain,
+    'fantasy-land/equals': equals,
+    'fantasy-land/concat': concat,
+    'fantasy-land/map': map,
+    'fantasy-land/chain': chain,
     '@@type': _type,
     constructor: Const
   }

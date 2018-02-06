@@ -41,7 +41,7 @@
   "bugs": {
     "url": "https://github.com/evilsoft/crocks/issues"
   },
-  "homepage": "https://github.com/evilsoft/crocks#readme",
+  "homepage": "https://evilsoft.github.io/crocks",
   "nyc": {
     "check-coverage": true,
     "lines": 100,

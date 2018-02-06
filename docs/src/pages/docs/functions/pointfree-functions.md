@@ -76,6 +76,7 @@ accepted Datatype):
 | `promap` | `(c -> a) -> (b -> d) -> m a b -> m c d` | `crocks/pointfree` |
 | `read` | `m a b -> Pair a b` | `crocks/Writer` |
 | `reduce` | `(b -> a -> b) -> b -> m a -> b` | `crocks/pointfree` |
+| `reduceRight` | `(b -> a -> b) -> b -> m a -> b` | `crocks/pointfree` |
 | `reject` | <code>((a -> Boolean) &#124; Pred a) -> m a -> m a</code> | `crocks/pointfree` |
 | `run` | `m a -> b` | `crocks/pointfree` |
 | `runWith` | `a -> m -> b` | `crocks/pointfree` |
@@ -117,6 +118,7 @@ accepted Datatype):
 | `promap` | [`Arrow`][arrow-pro], `Star` |
 | `read` | `Writer` |
 | `reduce` | `Array`, `List` |
+| `reduceRight` | `Array`, `List` |
 | `reject` | `Array`, `List`, `Object` |
 | `run` | `IO` |
 | `runWith` | [`Arrow`][arrow-run], [`Endo`][endo-run], [`Pred`][pred-run], [`Reader`][reader-run], `Star`, [`State`][state-run] |

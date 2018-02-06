@@ -319,6 +319,33 @@ test('List reduce functionality', t => {
   t.end()
 })
 
+test('List reduceRight errors', t => {
+  const reduce = bindFunc(List([ 1, 2 ]).reduceRight)
+
+  const err = /List.reduceRight: Function required for first argument/
+  t.throws(reduce(undefined, 0), err, 'throws with undefined in the first argument')
+  t.throws(reduce(null, 0), err, 'throws with null in the first argument')
+  t.throws(reduce(0, 0), err, 'throws with falsey number in the first argument')
+  t.throws(reduce(1, 0), err, 'throws with truthy number in the first argument')
+  t.throws(reduce('', 0), err, 'throws with falsey string in the first argument')
+  t.throws(reduce('string', 0), err, 'throws with truthy string in the first argument')
+  t.throws(reduce(false, 0), err, 'throws with false in the first argument')
+  t.throws(reduce(true, 0), err, 'throws with true in the first argument')
+  t.throws(reduce({}, 0), err, 'throws with an object in the first argument')
+  t.throws(reduce([], 0), err, 'throws with an array in the first argument')
+
+  t.end()
+})
+
+test('List reduceRight functionality', t => {
+  const f = (y, x) => y.concat(x)
+  const m = List([ '1', '2', '3' ])
+
+  t.equal(m.reduceRight(f, '4'), '4321', 'reduces as expected')
+
+  t.end()
+})
+
 test('List fold errors', t => {
   const f = bindFunc(x => List(x).fold())
 

@@ -9,7 +9,7 @@ const isSameType = require('./isSameType')
 const identity = x => x
 
 const concat =
-  x => m => m.concat(x)
+  x => m => x.concat(m)
 
 function runTraverse(name, fn) {
   return function(acc, x) {
@@ -56,11 +56,11 @@ function chain(f, m) {
 }
 
 function sequence(af, m) {
-  return m.reduce(runTraverse('sequence', identity), af([]))
+  return m.reduceRight(runTraverse('sequence', identity), af([]))
 }
 
 function traverse(af, fn, m) {
-  return m.reduce(runTraverse('traverse', fn), af([]))
+  return m.reduceRight(runTraverse('traverse', fn), af([]))
 }
 
 module.exports = {

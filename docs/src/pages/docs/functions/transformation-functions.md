@@ -137,30 +137,30 @@ bad
 |---|:---|:---|:---|
 | `arrayToList` | `[ a ] -> List a` | `(a -> [ b ]) -> a -> List b` | `crocks/List` |
 | `eitherToAsync` | `Either e a -> Async e a` | `(a -> Either e b) -> a -> Async e b` | `crocks/Async` |
-| `eitherToFirst` | `Either b a -> First a` | `(a -> Either c b) -> a -> First b` | `crocks/First` |
-| `eitherToLast` | `Either b a -> Last a` | `(a -> Either c b) -> a -> Last b` | `crocks/Last` |
+| [`eitherToFirst`][either-first] | `Either b a -> First a` | `(a -> Either c b) -> a -> First b` | `crocks/First` |
+| [`eitherToLast`][either-last] | `Either b a -> Last a` | `(a -> Either c b) -> a -> Last b` | `crocks/Last` |
 | [`eitherToMaybe`][either-maybe] | `Either b a -> Maybe a` | `(a -> Either c b) -> a -> Maybe b` | `crocks/Maybe` |
 | `eitherToResult` | `Either e a -> Result e a` | `(a -> Either e b) -> a -> Result e b` | `crocks/Result` |
 | `firstToAsync` | `e -> First a -> Async e a` | `e -> (a -> First b) -> a -> Async e b` | `crocks/Async` |
 | `firstToEither` | `c -> First a -> Either c a` | `c -> (a -> First b) -> a -> Either c b` | `crocks/Either` |
-| `firstToLast` | `First a -> Last a` | `(a -> First b) -> a -> Last b` | `crocks/Last` |
+| [`firstToLast`][first-last] | `First a -> Last a` | `(a -> First b) -> a -> Last b` | `crocks/Last` |
 | [`firstToMaybe`][first-maybe] | `First a -> Maybe a` | `(a -> First b) -> a -> Maybe b` | `crocks/Maybe` |
 | `firstToResult` | `c -> First a -> Result c a` | `c -> (a -> First b) -> a -> Result c b` | `crocks/Result` |
 | `lastToAsync` | `e -> Last a -> Async e a` | `e -> (a -> Last b) -> a -> Async e b` | `crocks/Async` |
 | `lastToEither` | `c -> Last a -> Either c a` | `c -> (a -> Last b) -> a -> Either c b` | `crocks/Either` |
-| `lastToFirst` | `Last a -> First a` | `(a -> Last b) -> a -> First b` | `crocks/First` |
+| [`lastToFirst`][last-first] | `Last a -> First a` | `(a -> Last b) -> a -> First b` | `crocks/First` |
 | [`lastToMaybe`][last-maybe] | `Last a -> Maybe a` | `(a -> Last b) -> a -> Maybe b` | `crocks/Maybe` |
 | `lastToResult` | `c -> Last a -> Result c a` | `c -> (a -> Last b) -> a -> Result c b` | `crocks/Result` |
 | `listToArray` | `List a -> [ a ]` | `(a -> List b) -> a -> [ b ]` | `crocks/List` |
 | `maybeToAsync` | `e -> Maybe a -> Async e a` | `e -> (a -> Maybe b) -> a -> Async e b` | `crocks/Async` |
 | `maybeToEither` | `c -> Maybe a -> Either c a` | `c -> (a -> Maybe b) -> a -> Either c b` | `crocks/Either` |
-| `maybeToFirst` | `Maybe a -> First a` | `(a -> Maybe b) -> a -> First b` | `crocks/First` |
-| `maybeToLast` | `Maybe a -> Last a` | `(a -> Maybe b) -> a -> Last b` | `crocks/Last` |
+| [`maybeToFirst`][maybe-first] | `Maybe a -> First a` | `(a -> Maybe b) -> a -> First b` | `crocks/First` |
+| [`maybeToLast`][maybe-last] | `Maybe a -> Last a` | `(a -> Maybe b) -> a -> Last b` | `crocks/Last` |
 | `maybeToResult` | `c -> Maybe a -> Result c a` | `c -> (a -> Maybe b) -> a -> Result c b` | `crocks/Result` |
 | `resultToAsync` | `Result e a -> Async e a` | `(a -> Result e b) -> a -> Async e b` | `crocks/Async` |
 | `resultToEither` | `Result e a -> Either e a` | `(a -> Result e b) -> a -> Either e b` | `crocks/Either` |
-| `resultToFirst` | `Result e a -> First a` | `(a -> Result e b) -> a -> First b` | `crocks/First` |
-| `resultToLast` | `Result e a -> Last a` | `(a -> Result e b) -> a -> Last b` | `crocks/Last` |
+| [`resultToFirst`][result-first] | `Result e a -> First a` | `(a -> Result e b) -> a -> First b` | `crocks/First` |
+| [`resultToLast`][result-last] | `Result e a -> Last a` | `(a -> Result e b) -> a -> Last b` | `crocks/Last` |
 | [`resultToMaybe`][result-maybe] | `Result e a -> Maybe a` | `(a -> Result e b) -> a -> Maybe b` | `crocks/Maybe` |
 | `writerToPair` | `Writer m a -> Pair m a` | `(a -> Writer m b) -> a -> Pair m b` | `crocks/Pair` |
 
@@ -168,3 +168,14 @@ bad
 [first-maybe]: ../crocks/Maybe.html#firsttomaybe
 [last-maybe]: ../crocks/Maybe.html#lasttomaybe
 [result-maybe]: ../crocks/Maybe.html#resulttomaybe
+
+[either-first]: ../monoids/First.html#eithertofirst
+[last-first]: ../monoids/First.html#lasttofirst
+[maybe-first]: ../monoids/First.html#maybetofirst
+[result-first]: ../monoids/First.html#resulttofirst
+
+[either-last]: ../monoids/Last.html#eithertolast
+[first-last]: ../monoids/Last.html#firsttolast
+[maybe-last]: ../monoids/Last.html#maybetolast
+[result-last]: ../monoids/Last.html#resulttolast
+

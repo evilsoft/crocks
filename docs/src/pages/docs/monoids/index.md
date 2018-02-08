@@ -25,8 +25,8 @@ as the following Instance Functions: `valueOf`, `empty` and `concat`.
 | [`Any`][Any] | Boolean | Logical OR | `false` |
 | [`Assign`][Assign] | Object | `Object.assign` | `{lb}{rb}` |
 | [`Endo`][Endo] | Function | `compose` | `identity` |
-| `First` | Maybe | First `Just` | `Nothing` |
-| `Last` | Maybe | Last `Just` | `Nothing` |
+| [`First`][First] | [`Maybe`][Maybe] | `First` [`Just`][just] | [`Nothing`][nothing] |
+| [`Last`][Last] | [`Maybe`][Maybe] | `Last` [`Just`][just] | [`Nothing`][nothing] |
 | `Max` | Number | `Math.max` | `-Infinity` |
 | `Min` | Number | `Math.min` | `Infinity` |
 | [`Prod`][Prod] | Number | Multiplication | `1` |
@@ -38,9 +38,15 @@ as the following Instance Functions: `valueOf`, `empty` and `concat`.
 [mconcatMap]: ../functions/helpers.html#mconcatmap
 [mreduceMap]: ../functions/helpers.html#mreducemap
 
+[Maybe]: ../crocks/Maybe.html
+[just]: ../crocks/Maybe.html#just
+[nothing]: ../crocks/Maybe.html#nothing
+
 [All]: All.html
 [Any]: Any.html
 [Assign]: Assign.html
 [Endo]: Endo.html
+[First]: First.html
+[Last]: Last.html
 [Prod]: Prod.html
 [Sum]: Sum.html

@@ -243,6 +243,11 @@ function Async(fn, parentCancel) {
     toString: inspect, type,
     swap, coalesce, map, bimap,
     alt, ap, chain, of,
+    'fantasy-land/of': of,
+    'fantasy-land/alt': alt,
+    'fantasy-land/bimap': bimap,
+    'fantasy-land/map': map,
+    'fantasy-land/chain': chain,
     '@@type': _type,
     constructor: Async
   }
@@ -250,6 +255,8 @@ function Async(fn, parentCancel) {
 
 Async.of = _of
 Async.type = type
+
+Async['fantasy-land/of'] = _of
 Async['@@type'] = _type
 
 Async.Rejected = Rejected

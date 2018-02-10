@@ -91,6 +91,11 @@ function Arrow(runWith) {
     inspect, toString: inspect, type,
     runWith, id, compose, map, contramap,
     promap, first, second, both,
+    'fantasy-land/id': id,
+    'fantasy-land/compose': compose,
+    'fantasy-land/contramap': contramap,
+    'fantasy-land/map': map,
+    'fantasy-land/promap': promap,
     '@@type': _type,
     constructor: Arrow
   }
@@ -98,6 +103,8 @@ function Arrow(runWith) {
 
 Arrow.id = _id
 Arrow.type = type
+
+Arrow['fantasy-land/id'] = _id
 Arrow['@@type'] = _type
 
 Arrow['@@implements'] = _implements(

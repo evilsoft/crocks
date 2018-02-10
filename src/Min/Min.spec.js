@@ -40,6 +40,17 @@ test('Min', t => {
   t.end()
 })
 
+test('Min fantasy-land api', t => {
+  const m = Min(0)
+
+  t.equals(Min['fantasy-land/empty'], Min.empty, 'is same function as public constructor empty')
+
+  t.equals(m['fantasy-land/empty'], m.empty, 'is same function as public instance empty')
+  t.equals(m['fantasy-land/concat'], m.concat, 'is same function as public instance concat')
+
+  t.end()
+})
+
 test('Min @@implements', t => {
   const f = Min['@@implements']
 

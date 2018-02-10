@@ -112,6 +112,9 @@ function _ReaderT(Monad) {
     return {
       inspect, toString: inspect, type,
       runWith, of, map, ap, chain,
+      'fantasy-land/of': of,
+      'fantasy-land/map': map,
+      'fantasy-land/chain': chain,
       constructor: ReaderT
     }
   }
@@ -121,6 +124,8 @@ function _ReaderT(Monad) {
   ReaderT.ask = ask
   ReaderT.lift = lift
   ReaderT.liftFn = curry(liftFn)
+
+  ReaderT['fantasy-land/of'] = of
 
   ReaderT['@@implements'] = _implements(
     [ 'ap', 'chain', 'map', 'of' ]

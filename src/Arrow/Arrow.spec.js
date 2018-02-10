@@ -49,6 +49,20 @@ test('Arrow', t => {
   t.end()
 })
 
+test('Arrow fantasy-land api', t => {
+  const m = Arrow(identity)
+
+  t.equals(Arrow['fantasy-land/id'], Arrow.id, 'is same function as public constructor id')
+
+  t.equals(m['fantasy-land/id'], m.id, 'is same function as public instance id')
+  t.equals(m['fantasy-land/compose'], m.compose, 'is same function as public instance compose')
+  t.equals(m['fantasy-land/contramap'], m.contramap, 'is same function as public instance contramap')
+  t.equals(m['fantasy-land/map'], m.map, 'is same function as public instance map')
+  t.equals(m['fantasy-land/promap'], m.promap, 'is same function as public instance promap')
+
+  t.end()
+})
+
 test('Arrow @@implements', t => {
   const f = Arrow['@@implements']
 

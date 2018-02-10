@@ -79,6 +79,20 @@ test('Star construction', t => {
   t.end()
 })
 
+test('Star fantasy-land api', t => {
+  const m = Star(identity)
+
+  t.equals(Star['fantasy-land/id'], Star.id, 'is same function as public constructor id')
+
+  t.equals(m['fantasy-land/id'], m.id, 'is same function as public instance id')
+  t.equals(m['fantasy-land/compose'], m.compose, 'is same function as public instance compose')
+  t.equals(m['fantasy-land/contramap'], m.contramap, 'is same function as public instance contramap')
+  t.equals(m['fantasy-land/map'], m.map, 'is same function as public instance map')
+  t.equals(m['fantasy-land/promap'], m.promap, 'is same function as public instance promap')
+
+  t.end()
+})
+
 test('Star @@implements', t => {
   const f = Star['@@implements']
 

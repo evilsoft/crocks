@@ -199,6 +199,13 @@ function Either(u) {
     type, concat, swap, coalesce, equals,
     map, bimap, alt, ap, of, chain, sequence,
     traverse,
+    'fantasy-land/of': of,
+    'fantasy-land/equals': equals,
+    'fantasy-land/alt': alt,
+    'fantasy-land/bimap': bimap,
+    'fantasy-land/concat': concat,
+    'fantasy-land/map': map,
+    'fantasy-land/chain': chain,
     '@@type': _type,
     constructor: Either
   }
@@ -206,6 +213,8 @@ function Either(u) {
 
 Either.of   = _of
 Either.type = type
+
+Either['fantasy-land/of'] = _of
 Either['@@type'] = _type
 
 Either['@@implements'] = _implements(

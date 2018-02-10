@@ -118,6 +118,9 @@ function State(fn) {
     inspect, toString: inspect, runWith,
     execWith, evalWith, type, map, ap,
     chain, of,
+    'fantasy-land/of': of,
+    'fantasy-land/map': map,
+    'fantasy-land/chain': chain,
     '@@type': _type,
     constructor: State
   }
@@ -132,6 +135,8 @@ State.put =
   x => modify(() => (x))
 
 State.type = type
+
+State['fantasy-land/of'] = _of
 State['@@type'] = _type
 
 State['@@implements'] = _implements(

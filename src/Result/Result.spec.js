@@ -45,6 +45,31 @@ test('Result', t => {
   t.end()
 })
 
+test('Result fantasy-land api', t => {
+  const e = Result.Err('')
+  const o = Result.Ok('')
+
+  t.equals(Result['fantasy-land/of'], Result.of, 'is same function as public constructor of')
+
+  t.equals(e['fantasy-land/of'], e.of, 'is same function as public err instance of')
+  t.equals(e['fantasy-land/equals'], e.equals, 'is same function as public err instance equals')
+  t.equals(e['fantasy-land/alt'], e.alt, 'is same function as public err instance alt')
+  t.equals(e['fantasy-land/bimap'], e.bimap, 'is same function as public err instance bimap')
+  t.equals(e['fantasy-land/concat'], e.concat, 'is same function as public err instance concat')
+  t.equals(e['fantasy-land/map'], e.map, 'is same function as public err instance map')
+  t.equals(e['fantasy-land/chain'], e.chain, 'is same function as public err instance chain')
+
+  t.equals(o['fantasy-land/of'], o.of, 'is same function as public ok instance of')
+  t.equals(o['fantasy-land/equals'], o.equals, 'is same function as public ok instance equals')
+  t.equals(o['fantasy-land/alt'], o.alt, 'is same function as public ok instance alt')
+  t.equals(o['fantasy-land/bimap'], o.bimap, 'is same function as public ok instance bimap')
+  t.equals(o['fantasy-land/concat'], o.concat, 'is same function as public ok instance concat')
+  t.equals(o['fantasy-land/map'], o.map, 'is same function as public ok instance map')
+  t.equals(o['fantasy-land/chain'], o.chain, 'is same function as public ok instance chain')
+
+  t.end()
+})
+
 test('Result @@implements', t => {
   const f = Result['@@implements']
 

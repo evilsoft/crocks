@@ -70,6 +70,18 @@ test('ReaderT', t => {
   t.end()
 })
 
+test('ReaderMock fantasy-land api', t => {
+  const m = ReaderMock(identity)
+
+  t.equals(ReaderMock['fantasy-land/of'], ReaderMock.of, 'is same function as public constructor of')
+
+  t.equals(m['fantasy-land/of'], m.of, 'is same function as public instance of')
+  t.equals(m['fantasy-land/map'], m.map, 'is same function as public instance map')
+  t.equals(m['fantasy-land/chain'], m.chain, 'is same function as public instance chain')
+
+  t.end()
+})
+
 test('ReaderT @@implements', t => {
   const f = ReaderMock['@@implements']
 

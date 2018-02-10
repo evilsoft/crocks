@@ -45,6 +45,31 @@ test('Either', t => {
   t.end()
 })
 
+test('Either fantasy-land api', t => {
+  const l = Either.Left('')
+  const r = Either.Right('')
+
+  t.equals(Either['fantasy-land/of'], Either.of, 'is same function as public constructor of')
+
+  t.equals(l['fantasy-land/of'], l.of, 'is same function as public left instance of')
+  t.equals(l['fantasy-land/equals'], l.equals, 'is same function as public left instance equals')
+  t.equals(l['fantasy-land/alt'], l.alt, 'is same function as public left instance alt')
+  t.equals(l['fantasy-land/bimap'], l.bimap, 'is same function as public left instance bimap')
+  t.equals(l['fantasy-land/concat'], l.concat, 'is same function as public left instance concat')
+  t.equals(l['fantasy-land/map'], l.map, 'is same function as public left instance map')
+  t.equals(l['fantasy-land/chain'], l.chain, 'is same function as public left instance chain')
+
+  t.equals(r['fantasy-land/of'], r.of, 'is same function as public right instance of')
+  t.equals(r['fantasy-land/equals'], r.equals, 'is same function as public right instance equals')
+  t.equals(r['fantasy-land/alt'], r.alt, 'is same function as public right instance alt')
+  t.equals(r['fantasy-land/bimap'], r.bimap, 'is same function as public right instance bimap')
+  t.equals(r['fantasy-land/concat'], r.concat, 'is same function as public right instance concat')
+  t.equals(r['fantasy-land/map'], r.map, 'is same function as public right instance map')
+  t.equals(r['fantasy-land/chain'], r.chain, 'is same function as public right instance chain')
+
+  t.end()
+})
+
 test('Either @@implements', t => {
   const f = Either['@@implements']
 

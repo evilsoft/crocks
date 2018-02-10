@@ -41,6 +41,17 @@ test('Any', t => {
   t.end()
 })
 
+test('Any fantasy-land api', t => {
+  const m = Any(true)
+
+  t.equals(Any['fantasy-land/empty'], Any.empty, 'is same function as public constructor empty')
+
+  t.equals(m['fantasy-land/empty'], m.empty, 'is same function as public instance empty')
+  t.equals(m['fantasy-land/concat'], m.concat, 'is same function as public instance concat')
+
+  t.end()
+})
+
 test('Any @@implements', t => {
   const f = Any['@@implements']
 

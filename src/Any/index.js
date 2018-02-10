@@ -43,6 +43,8 @@ function Any(b) {
     inspect, toString: inspect,
     valueOf, type, concat, empty,
     '@@type': _type,
+    'fantasy-land/concat': concat,
+    'fantasy-land/empty': empty,
     constructor: Any
   }
 }
@@ -53,6 +55,8 @@ Any['@@implements'] = _implements(
 
 Any.empty = _empty
 Any.type  = type
+
+Any['fantasy-land/empty'] = _empty
 Any['@@type'] = _type
 
 module.exports = Any

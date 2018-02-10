@@ -194,6 +194,13 @@ function Maybe(u) {
     option, type, concat, equals, coalesce,
     map, alt, zero, ap, of, chain, sequence,
     traverse,
+    'fantasy-land/zero': zero,
+    'fantasy-land/of': of,
+    'fantasy-land/equals': equals,
+    'fantasy-land/alt': alt,
+    'fantasy-land/concat': concat,
+    'fantasy-land/map': map,
+    'fantasy-land/chain': chain,
     '@@type': _type,
     constructor: Maybe
   }
@@ -202,6 +209,9 @@ function Maybe(u) {
 Maybe.of = _of
 Maybe.zero = _zero
 Maybe.type = type
+
+Maybe['fantasy-land/of'] = _of
+Maybe['fantasy-land/zero'] = _zero
 Maybe['@@type'] = _type
 
 Maybe['@@implements'] = _implements(

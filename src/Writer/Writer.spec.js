@@ -59,6 +59,19 @@ test('Writer', t => {
   t.end()
 })
 
+test('Writer fantasy-land api', t => {
+  const m = Writer(0, 0)
+
+  t.equals(Writer['fantasy-land/of'], Writer.of, 'is same function as public constructor of')
+
+  t.equals(m['fantasy-land/of'], m.of, 'is same function as public instance of')
+  t.equals(m['fantasy-land/equals'], m.equals, 'is same function as public instance equals')
+  t.equals(m['fantasy-land/map'], m.map, 'is same function as public instance map')
+  t.equals(m['fantasy-land/chain'], m.chain, 'is same function as public instance chain')
+
+  t.end()
+})
+
 test('Writer @@implements', t => {
   const f = Writer['@@implements']
 

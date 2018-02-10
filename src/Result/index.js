@@ -209,6 +209,13 @@ function Result(u) {
     type, either, concat, swap, coalesce,
     map, bimap, alt, ap, chain, of, sequence,
     traverse,
+    'fantasy-land/of': of,
+    'fantasy-land/equals': equals,
+    'fantasy-land/alt': alt,
+    'fantasy-land/bimap': bimap,
+    'fantasy-land/concat': concat,
+    'fantasy-land/map': map,
+    'fantasy-land/chain': chain,
     '@@type': _type,
     constructor: Result
   }
@@ -216,6 +223,8 @@ function Result(u) {
 
 Result.of = _of
 Result.type = type
+
+Result['fantasy-land/of'] = _of
 Result['@@type'] = _type
 
 Result['@@implements'] = _implements(

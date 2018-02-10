@@ -53,6 +53,23 @@ test('List', t => {
   t.end()
 })
 
+test('List fantasy-land api', t => {
+  const m = List('value')
+
+  t.equals(List['fantasy-land/of'], List.of, 'is same function as public constructor of')
+  t.equals(List['fantasy-land/empty'], List.empty, 'is same function as public constructor empty')
+
+  t.equals(m['fantasy-land/of'], m.of, 'is same function as public instance of')
+  t.equals(m['fantasy-land/equals'], m.equals, 'is same function as public instance equals')
+  t.equals(m['fantasy-land/concat'], m.concat, 'is same function as public instance concat')
+  t.equals(m['fantasy-land/empty'], m.empty, 'is same function as public instance empty')
+  t.equals(m['fantasy-land/map'], m.map, 'is same function as public instance map')
+  t.equals(m['fantasy-land/chain'], m.chain, 'is same function as public instance chain')
+  t.equals(m['fantasy-land/reduce'], m.reduce, 'is same function as public instance reduce')
+
+  t.end()
+})
+
 test('List @@implements', t => {
   const f = List['@@implements']
 

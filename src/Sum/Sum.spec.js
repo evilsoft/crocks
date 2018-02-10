@@ -40,6 +40,17 @@ test('Sum', t => {
   t.end()
 })
 
+test('Sum fantasy-land api', t => {
+  const m = Sum(99)
+
+  t.equals(Sum['fantasy-land/empty'], Sum.empty, 'is same function as public constructor empty')
+
+  t.equals(m['fantasy-land/empty'], m.empty, 'is same function as public instance empty')
+  t.equals(m['fantasy-land/concat'], m.concat, 'is same function as public instance concat')
+
+  t.end()
+})
+
 test('Sum @@implements', t => {
   const f = Sum['@@implements']
 

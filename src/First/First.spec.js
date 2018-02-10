@@ -31,6 +31,17 @@ test('First', t => {
   t.end()
 })
 
+test('First fantasy-land api', t => {
+  const m = First(10)
+
+  t.equals(First['fantasy-land/empty'], First.empty, 'is same function as public constructor empty')
+
+  t.equals(m['fantasy-land/empty'], m.empty, 'is same function as public instance empty')
+  t.equals(m['fantasy-land/concat'], m.concat, 'is same function as public instance concat')
+
+  t.end()
+})
+
 test('First @@implements', t => {
   const f = First['@@implements']
 

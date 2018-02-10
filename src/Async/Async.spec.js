@@ -53,6 +53,27 @@ test('Async', t => {
   t.end()
 })
 
+test('Arrow fantasy-land api', t => {
+  const rej = Async.Rejected('')
+  const res = Async.Resolved('')
+
+  t.equals(Async['fantasy-land/of'], Async.of, 'is same function as public constructor of')
+
+  t.equals(rej['fantasy-land/of'], rej.of, 'is same function as public rejected instance of')
+  t.equals(rej['fantasy-land/alt'], rej.alt, 'is same function as public rejected instance alt')
+  t.equals(rej['fantasy-land/bimap'], rej.bimap, 'is same function as public rejected instance bimap')
+  t.equals(rej['fantasy-land/map'], rej.map, 'is same function as public rejected instance map')
+  t.equals(rej['fantasy-land/chain'], rej.chain, 'is same function as public rejected instance chain')
+
+  t.equals(res['fantasy-land/of'], res.of, 'is same function as public resolved instance of')
+  t.equals(res['fantasy-land/alt'], res.alt, 'is same function as public resolved instance alt')
+  t.equals(res['fantasy-land/bimap'], res.bimap, 'is same function as public resolved instance bimap')
+  t.equals(res['fantasy-land/map'], res.map, 'is same function as public resolved instance map')
+  t.equals(res['fantasy-land/chain'], res.chain, 'is same function as public resolved instance chain')
+
+  t.end()
+})
+
 test('Async @@implements', t => {
   const f = Async['@@implements']
 

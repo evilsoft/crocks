@@ -36,6 +36,21 @@ test('Unit', t => {
   t.end()
 })
 
+test('Unit fantasy-land api', t => {
+  const m = Unit()
+
+  t.equals(Unit['fantasy-land/of'], Unit.of, 'is same function as public constructor of')
+  t.equals(Unit['fantasy-land/empty'], Unit.empty, 'is same function as public constructor empty')
+
+  t.equals(m['fantasy-land/equals'], m.equals, 'is same function as public instance equals')
+  t.equals(m['fantasy-land/empty'], m.empty, 'is same function as public instance empty')
+  t.equals(m['fantasy-land/concat'], m.concat, 'is same function as public instance concat')
+  t.equals(m['fantasy-land/map'], m.map, 'is same function as public instance map')
+  t.equals(m['fantasy-land/chain'], m.chain, 'is same function as public instance chain')
+
+  t.end()
+})
+
 test('Unit @@implements', t => {
   const f = Unit['@@implements']
 

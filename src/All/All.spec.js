@@ -41,6 +41,17 @@ test('All', t => {
   t.end()
 })
 
+test('All fantasy-land api', t => {
+  const m = All(true)
+
+  t.equals(All['fantasy-land/empty'], All.empty, 'is same function as public constructor empty')
+
+  t.equals(m['fantasy-land/empty'], m.empty, 'is same function as public instance empty')
+  t.equals(m['fantasy-land/concat'], m.concat, 'is same function as public instance concat')
+
+  t.end()
+})
+
 test('All @@implements', t => {
   const f = All['@@implements']
 

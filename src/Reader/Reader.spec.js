@@ -51,6 +51,18 @@ test('Reader', t => {
   t.end()
 })
 
+test('Reader fantasy-land api', t => {
+  const m = Reader(identity)
+
+  t.equals(Reader['fantasy-land/of'], Reader.of, 'is same function as public constructor of')
+
+  t.equals(m['fantasy-land/of'], m.of, 'is same function as public instance of')
+  t.equals(m['fantasy-land/map'], m.map, 'is same function as public instance map')
+  t.equals(m['fantasy-land/chain'], m.chain, 'is same function as public instance chain')
+
+  t.end()
+})
+
 test('Reader @@implements', t => {
   const f = Reader['@@implements']
 

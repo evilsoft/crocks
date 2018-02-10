@@ -43,6 +43,8 @@ function All(b) {
     inspect, toString: inspect,
     valueOf, type, concat, empty,
     '@@type': _type,
+    'fantasy-land/concat': concat,
+    'fantasy-land/empty': empty,
     constructor: All
   }
 }
@@ -53,6 +55,8 @@ All['@@implements'] = _implements(
 
 All.empty = _empty
 All.type = type
+
+All['fantasy-land/empty'] = _empty
 All['@@type'] = _type
 
 module.exports = All

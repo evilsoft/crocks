@@ -51,6 +51,9 @@ function Pred(pred) {
   return {
     inspect, toString: inspect, runWith,
     type, valueOf, empty, concat, contramap,
+    'fantasy-land/empty': empty,
+    'fantasy-land/concat': concat,
+    'fantasy-land/contramap': contramap,
     '@@type': _type,
     constructor: Pred
   }
@@ -58,6 +61,8 @@ function Pred(pred) {
 
 Pred.empty = _empty
 Pred.type = type
+
+Pred['fantasy-land/empty'] = _empty
 Pred['@@type'] = _type
 
 Pred['@@implements'] = _implements(

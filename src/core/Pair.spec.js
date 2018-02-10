@@ -36,6 +36,19 @@ test('Pair core', t => {
   t.end()
 })
 
+test('Pair fantasy-land api', t => {
+  const m = Pair(3, 3)
+
+  t.equals(m['fantasy-land/equals'], m.equals, 'is same function as public instance equals')
+  t.equals(m['fantasy-land/concat'], m.concat, 'is same function as public instance concat')
+  t.equals(m['fantasy-land/map'], m.map, 'is same function as public instance map')
+  t.equals(m['fantasy-land/bimap'], m.bimap, 'is same function as public instance bimap')
+  t.equals(m['fantasy-land/chain'], m.chain, 'is same function as public instance chain')
+  t.equals(m['fantasy-land/extend'], m.extend, 'is same function as public instance extend')
+
+  t.end()
+})
+
 test('Pair @@implements', t => {
   const f = Pair['@@implements']
 

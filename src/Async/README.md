@@ -13,7 +13,8 @@ that can be composed together.
 Depending on your needs, an `Async` can be constructed in a variety of ways. The
 typical closely resembles how a `Promise` is constructed with one major
 difference, the arguments used in the function that is passed to the `Promise`
-constructor are reversed in an `Async`.
+constructor are reversed in an `Async` to match the order in which Async is
+parameterized.
 
 There are many ways to represent asynchronous operations in JavaScript, and as
 such, the libraries available to us in our ecosystem provide different means
@@ -1335,7 +1336,7 @@ const tryCatch = require('crocks/Result/tryCatch')
 const log = label => x =>
   (console.log(`${label}:`, x), x)
 
-// notNumber :: a -> a
+// notNumber :: a -> Number
 function notNumber(x) {
   if (!isNumber(x)) {
     throw new TypeError('Must be a Number')

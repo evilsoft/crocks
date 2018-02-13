@@ -15,7 +15,7 @@ typical closely resembles how a `Promise` is constructed with one major
 difference, the arguments used in the function that is passed to the `Promise`
 constructor are reversed in an `Async`.
 
-There are many way to represent asynchronous operations in JavaScript, and as
+There are many ways to represent asynchronous operations in JavaScript, and as
 such, the libraries available to us in our ecosystem provide different means
 to take advantage of these operations. The two most common use
 either `Promise` returning functions or allow for the Continuation Passing Style
@@ -91,7 +91,7 @@ getById(5)
   .fork(log('rej'), log('res'))
 //=> rej: "id: 5 -- Not Found"
 
-// cancel :: () => ()
+// cancel :: () -> ()
 const cancel = getById(1).fork(
   log('rej'),
   log('res'),
@@ -888,9 +888,9 @@ single argument the value the `Async` was resolved with.
 
 The second signature is used when any cleanup needs to be performed after a
 given `Async` is cancelled by having the function returned from `fork` called.
-The first to arguments to the signature are the same as the more common
+The first (2) arguments to the signature are the same as the more common
 signature described above, but takes an addition function that can be used
-for "cleanup" after cancellation. When all in-flight computations settle, the
+for "clean up" after cancellation. When all in-flight computations settle, the
 function provided will be silently executed.
 
 <!-- eslint-disable no-console -->
@@ -1157,7 +1157,7 @@ transformation, `lastToAsync` takes a default `Rejected` value as the first
 argument. This value will be wrapped in a resulting `Rejected` instance, in the
 case of empty.
 
-Like all `crocks` transformation functions, `firstToAsync` has (2) possible
+Like all `crocks` transformation functions, `lastToAsync` has (2) possible
 signatures and will behave differently when passed either a `Last` instance
 or a function that returns an instance of `Last`. When passed the instance,
 a transformed `Async` is returned. When passed a `Last` returning function,

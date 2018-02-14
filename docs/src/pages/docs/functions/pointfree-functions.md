@@ -91,12 +91,12 @@ accepted Datatype):
 ##### Datatypes
 | Function | Datatypes |
 |---|:---|
-| `alt` | `Async`, `Either`, [`Maybe`][maybe-alt], `Result` |
-| `ap` | `Array`, `Async`, `Const`, `Either`, `Identity`, `IO`, `List`, [`Maybe`][maybe-ap], `Pair`, [`Reader`][reader-ap], `Result`, [`State`][state-ap], `Unit`, `Writer` |
-| `bimap` | `Async`, `Either`, `Pair`, `Result` |
+| `alt` | [`Async`][async-alt], `Either`, [`Maybe`][maybe-alt], `Result` |
+| `ap` | `Array`, [`Async`][async-ap], `Const`, `Either`, `Identity`, `IO`, `List`, [`Maybe`][maybe-ap], `Pair`, [`Reader`][reader-ap], `Result`, [`State`][state-ap], `Unit`, `Writer` |
+| `bimap` | [`Async`][async-bimap], `Either`, `Pair`, `Result` |
 | `both` | [`Arrow`][arrow-both], `Function`, `Star` |
-| `chain` | `Array`, `Async`, `Const`, `Either`, `Identity`, `IO`, `List`, [`Maybe`][maybe-chain], `Pair`, [`Reader`][reader-chain], `Result`, [`State`][state-chain], `Unit`, `Writer` |
-| `coalesce` | `Async`, `Either`, [`Maybe`][maybe-coalesce], `Result` |
+| `chain` | `Array`, [`Async`][async-chain], `Const`, `Either`, `Identity`, `IO`, `List`, [`Maybe`][maybe-chain], `Pair`, [`Reader`][reader-chain], `Result`, [`State`][state-chain], `Unit`, `Writer` |
+| `coalesce` | [`Async`][async-coalesce], `Either`, [`Maybe`][maybe-coalesce], `Result` |
 | `compareWith` | [`Equiv`][equiv-compare] |
 | `concat` | [`All`][all-concat], [`Any`][any-concat], `Array`, [`Assign`][assign-concat], `Const`, `Either`, [`Endo`][endo-concat], [`Equiv`][equiv-concat], [`First`][first-concat], `Identity`, [`Last`][last-concat], `List`, `Max`, [`Maybe`][maybe-concat], `Min`, `Pair`, [`Pred`][pred-concat], [`Prod`][prod-concat], `Result`, `String`, [`Sum`][sum-concat], `Unit` |
 | `cons` | `Array`, `List` |
@@ -112,7 +112,7 @@ accepted Datatype):
 | `fst` | `Pair` |
 | `head` | `Array`, `List`, `String` |
 | `log` | `Writer` |
-| `map` | `Async`, `Array`, [`Arrow`][arrow-map], `Const`, `Either`, `Function`, `Identity`, `IO`, `List`, [`Maybe`][maybe-map], `Object`, `Pair`, [`Reader`][reader-map], `Result`, `Star`, [`State`][state-map], `Unit`, `Writer` |
+| `map` | [`Async`][async-map], `Array`, [`Arrow`][arrow-map], `Const`, `Either`, `Function`, `Identity`, `IO`, `List`, [`Maybe`][maybe-map], `Object`, `Pair`, [`Reader`][reader-map], `Result`, `Star`, [`State`][state-map], `Unit`, `Writer` |
 | `merge` | `Pair` |
 | `option` | [`First`][first-option], [`Last`][last-option], [`Maybe`][maybe-option] |
 | `promap` | [`Arrow`][arrow-pro], `Star` |
@@ -125,7 +125,7 @@ accepted Datatype):
 | `second` | [`Arrow`][arrow-second], `Function`, `Star` |
 | `sequence` | `Array`, `Either`, `Identity`, `List`, [`Maybe`][maybe-sequence], `Result` |
 | `snd` | `Pair` |
-| `swap` | `Async`, `Either`, `Pair`, `Result` |
+| `swap` | [`Async`][async-swap], `Either`, `Pair`, `Result` |
 | `tail` | `Array`, `List`, `String` |
 | `traverse` | `Array`, `Either`, `Identity`, `List`, [`Maybe`][maybe-traverse], `Result` |
 | `valueOf` | [`All`][all-value], [`Any`][any-value], [`Assign`][assign-value], `Const`, [`Endo`][endo-value], [`Equiv`][equiv-value], [`First`][first-value], `Identity`, [`Last`][last-value], `Max`, `Min`, [`Pred`][pred-value], [`Prod`][prod-value], [`Sum`][sum-value], `Unit`, `Writer` |
@@ -149,6 +149,14 @@ accepted Datatype):
 [arrow-pro]: ../crocks/Arrow.html#promap
 [arrow-run]: ../crocks/Arrow.html#runwith
 [arrow-second]: ../crocks/Arrow.html#second
+
+[async-alt]: ../crocks/Async.html#alt
+[async-ap]: ../crocks/Async.html#ap
+[async-bimap]: ../crocks/Async.html#bimap
+[async-chain]: ../crocks/Async.html#chain
+[async-coalesce]: ../crocks/Async.html#coalesce
+[async-map]: ../crocks/Async.html#map
+[async-swap]: ../crocks/Async.html#swap
 
 [endo-concat]: ../monoids/Endo.html#concat
 [endo-empty]: ../monoids/Endo.html#empty

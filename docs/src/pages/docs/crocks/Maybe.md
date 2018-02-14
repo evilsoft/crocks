@@ -138,7 +138,7 @@ Maybe.Just :: a -> Maybe a
 
 Used to construct a `Just` instance that represents the "true" portion of a
 disjunction or a valid value.  `Just` will wrap any given value in
-a `Just`, signalling the validity of the wrapped value.
+a `Just`, signaling the validity of the wrapped value.
 
 ```javascript
 const { Just, Nothing } = require('crocks/Maybe')

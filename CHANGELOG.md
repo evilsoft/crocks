@@ -1,9 +1,42 @@
 # Change Log for `crocks`
 
+v0.8.5 -- February 14, 2018
+--
+### Additions
+* READMES:
+  * `First`
+  * `Last`
+  * `Async`
+* Helpers:
+  * `liftN`
+* Methods:
+  * `@@type` to all types
+  * `toString` to all types
+  * `reduceRight` to `List`
+  * Add fantasy-land methods except for `traverse` and
+
+### Bug fixes
+* Change composition order on `Traversable`s to allow from proper application
+
+### Pull Requests
+* [#190 - Add the `liftN` helper function](https://github.com/evilsoft/crocks/pull/190)
+* [#191 - Add Tutorial Post from Robert Pearce](https://github.com/evilsoft/crocks/pull/191)
+* [#192 - Add `toString` to all ADTs for those without `inspect`](https://github.com/evilsoft/crocks/pull/192)
+* [#193 - Remove mention of the type method from Documentation](https://github.com/evilsoft/crocks/pull/193)
+* [#194 - Add `@@type` to all ADTs](https://github.com/evilsoft/crocks/pull/194)
+* [#195 - Add `First` documentation](https://github.com/evilsoft/crocks/pull/195)
+* [#197 - Add `Last` Documentation](https://github.com/evilsoft/crocks/pull/197)
+* [#198 - Apply traversals in the proper order, add `reduceRight` to `List`](https://github.com/evilsoft/crocks/pull/198)
+* [#199 - Add First and Last monoids to documentation](https://github.com/evilsoft/crocks/pull/199)
+* [#200 - Add Fantasy Land Prefixed Method Names](https://github.com/evilsoft/crocks/pull/200)
+* [#204 - Add `Async` Documentation](https://github.com/evilsoft/crocks/pull/204)
+* [#210 - Add Async crock to Documentation](https://github.com/evilsoft/crocks/pull/210)
+
 v0.8.4 -- January 17, 2018
 --
 ### Additions
-* READMES:  * `Assign`
+* READMES:
+  * `Assign`
   * `Endo`
   * `Maybe`
   * `Prod`

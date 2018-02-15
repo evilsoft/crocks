@@ -1,4 +1,9 @@
-# Async
+---
+title: "Async"
+description: "Async Crock"
+layout: "guide"
+weight: 20
+---
 
 ```haskell
 Async e a = Rejected e | Resolved a
@@ -28,23 +33,21 @@ called [`fromPromise`](#frompromise) and [`fromNode`](#fromnode).
 
 `Async` instances wrap asynchronous functions and are considered lazy, in that
 they will not run or execute until needed. This typically happens at an edge in
-a program and is done by executing the `fork` method available on the instance,
+a program and is done by executing the [`fork`](#fork) method available on the instance,
 which takes (2) functions as its arguments.
 
-The first function passed to `fork` will be called on a `Rejected` instance and
-passed the value the `Async` was rejected with. The second function is called
-when `fork` is invoked on a `Resolved` instance receiving the value
-the `Async` was resolved with.
+The first function passed to [`fork`](#fork) will be called on a [`Rejected`](#rejected) instance
+and passed the value the `Async` was rejected with. The second function is called
+when [`fork`](#fork) is invoked on a [`Resolved`](#resolved) instance receiving the
+value the `Async` was resolved with.
 
 At times, in a given environment, it may not be feasible to run an asynchronous
-flow to completion. To address when these use cases pop up, the `fork` function
+flow to completion. To address when these use cases pop up, the [`fork`](#fork) function
 will return a function that ignores its arguments and returns a `Unit`. When
 this function is called, `Async` will finish running the current "in flight"
 computation to completion, but will cease all remaining execution. Cancellation
 with `Async` is total and will cancel silently, without notification.
 
-<!-- eslint-disable no-console -->
-<!-- eslint-disable no-sequences -->
 ```javascript
 const Async = require('crocks/Async')
 
@@ -118,8 +121,14 @@ Async
 //=> rej:  "id: 14 -- Not Found"
 ```
 
+<article id="topic-implements">
+
 ## Implements
 `Functor`, `Alt`,  `Bifunctor`, `Apply`, `Chain`, `Applicative`, `Monad`
+
+</article>
+
+<article id="topic-constructor">
 
 ## Constructor Methods
 
@@ -135,7 +144,7 @@ value, will return a new `Rejected` instance, wrapping the provided value.
 
 When an instance is `Rejected`, most `Async` returning methods on the instance
 will return another `Rejected` instance. This is in contrast to a
-javascript `Promise`, that will continue on a `Resolved` path after
+javascript `Promise`, that will continue on a [`Resolved`](#resolved) path after
 a `catch`. This behavior of `Promise`s provide challenges when constructing
 complicated (or even some simple) `Promise` chains that may fail at various
 steps along the chain.
@@ -145,8 +154,6 @@ type of a `Rejected` fixed to a type for a given flow. Given that `Async` is
 a `Bifunctor`, it is easy to make sure you get the type you need at the edge
 by leaning on [`bimap`](#bimap) to "square things up".
 
-<!-- eslint-disable no-console -->
-<!-- eslint-disable no-sequences -->
 ```javascript
 const Async = require('crocks/Async')
 const { Rejected } = Async
@@ -182,8 +189,6 @@ portion of the disjunction. `Resolved` will wrap any given value passed to this
 constructor in the `Resolved` instance it returns, signaling the validity of the
 wrapped value.
 
-<!-- eslint-disable no-console -->
-<!-- eslint-disable no-sequences -->
 ```javascript
 const Async = require('crocks/Async')
 const { Resolved } = Async
@@ -218,11 +223,9 @@ Used to turn an "eager" `Promise` returning function, into a function that takes
 the same arguments but returns a "lazy" `Async` instance instead. Due to the
 lazy nature of `Async`, any curried interface will not be respected on the
 provided function. This can be solved by wrapping the resulting function
-with `nAry`, which will provide a curried function that will return the
+with [`nAry`][nary], which will provide a curried function that will return the
 desired `Async`.
 
-<!-- eslint-disable no-console -->
-<!-- eslint-disable no-sequences -->
 ```javascript
 const { fromPromise } = require('crocks/Async')
 
@@ -287,8 +290,8 @@ function.
 
 When the provided function is called, it returns a "lazy" `Async`. When the
 resulting instance is forked, if the `err` is a non-null value then the
-instance will be `Rejected` with the `err` value. When the `err` is null, then
-the instance will become `Resolved` with the `data` value.
+instance will be [`Rejected`](#rejected) with the `err` value. When the `err` is null, then
+the instance will become [`Resolved`](#resolved) with the `data` value.
 
 There are some libraries whose functions are methods on some stateful object.
 As such, the need for binding may arise. `fromNode` provides a second, optional
@@ -296,10 +299,8 @@ argument that takes the context that will be used to bind the function being
 wrapped.
 
 Like [`fromPromise`](#frompromise), any curried interface will not be respected.
-If a curried interface is needed then `nAry` can be used.
+If a curried interface is needed then [`nAry`][nary] can be used.
 
-<!-- eslint-disable no-console -->
-<!-- eslint-disable no-sequences -->
 ```javascript
 const { fromNode } = require('crocks/Async')
 
@@ -365,13 +366,11 @@ asynchronous operations need to be run in parallel. `all` takes an `Array` of
 `Async` instances that, when forked, will execute each instance in the
 provided `Array` in parallel.
 
-If any of the instances result in a `Rejected` state, the entire flow will
-be `Rejected` with value of the first `Rejected` instance. If all
-instances `Resolve`, then the entire instance is `Resolved` with
-an `Array` containing all `Resolved` values in their provided order.
+If any of the instances result in a [`Rejected`](#rejected) state, the entire flow will
+be [`Rejected`](#rejected) with value of the first [`Rejected`](#rejected) instance. If all
+instances resolve, then the entire instance is [`Resolved`](#resolved) with
+an `Array` containing all [`Resolved`](#resolved) values in their provided order.
 
-<!-- eslint-disable no-console -->
-<!-- eslint-disable no-sequences -->
 ```javascript
 const { all, Rejected, Resolved } = require('../crocks/src/Async')
 
@@ -394,15 +393,13 @@ all([ Resolved(1), Rejected(2), Rejected(3) ])
 Async.of :: a -> Async e a
 ```
 
-Used to wrap any value into an `Async` as a `Resolved` instance, `of` is
+Used to wrap any value into an `Async` as a [`Resolved`](#resolved) instance, `of` is
 used mostly by helper functions that work "generically" with instances of
 either `Applicative` or `Monad`. When working specifically with
 the `Async` type, the [`Resolved`](#resolved) constructor should be
 used. Reach for `of` when working with functions that will work with
 ANY `Applicative`/`Monad`.
 
-<!-- eslint-disable no-console -->
-<!-- eslint-disable no-sequences -->
 ```javascript
 const Async = require('../crocks/src/Async')
 const { Resolved } = Async
@@ -424,6 +421,10 @@ Async((rej, res) => res('U Wut M8'))
 //=> res: "U Wut M8"
 ```
 
+</article>
+
+<article id="topic-instance">
+
 ## Instance Methods
 
 #### map
@@ -432,14 +433,12 @@ Async((rej, res) => res('U Wut M8'))
 Async e a ~> (a -> b) -> Async e b
 ```
 
-Used to apply transformations to `Resolved` values of an `Async`, `map` takes
+Used to apply transformations to [`Resolved`](#resolved) values of an `Async`, `map` takes
 a function that it will lift into the context of the `Async` and apply to it
-the wrapped value. When ran on a `Resolved` instance, `map` will apply the
+the wrapped value. When ran on a [`Resolved`](#resolved) instance, `map` will apply the
 wrapped value to the provided function and return the result in a
-new `Resolved` instance.
+new [`Resolved`](#resolved) instance.
 
-<!-- eslint-disable no-console -->
-<!-- eslint-disable no-sequences -->
 ```javascript
 const { Rejected, Resolved } = require('crocks/Async')
 
@@ -499,11 +498,9 @@ Async e a ~> Async e a -> Async e a
 ```
 
 Providing a means for a fallback or alternative value, `alt` combines (2)
-`Async` instances and will return the first `Resolved` instance it encounters
-or the last `Rejected` instance if it does not encounter a `Resolved` instance.
+`Async` instances and will return the first [`Resolved`](#resolved) instance it encounters
+or the last [`Rejected`](#rejected) instance if it does not encounter a [`Resolved`](#resolved) instance.
 
-<!-- eslint-disable no-console -->
-<!-- eslint-disable no-sequences -->
 ```javascript
 const { Rejected, Resolved } = require('crocks/Async')
 
@@ -535,20 +532,18 @@ Rejected('First Reject')
 Async e a ~> ((e -> b), (a -> c)) -> Async b c
 ```
 
-Both `Rejected` and `Resolved` values can vary in their type, although most of
-the time, focus on mapping values is placed on the `Resolved` portion. When the
-requirement or need to map the `Rejected` portion arises, `bimap` can be
+Both [`Rejected`](#rejected) and [`Resolved`](#resolved) values can vary in their type, although most of
+the time, focus on mapping values is placed on the [`Resolved`](#resolved) portion. When the
+requirement or need to map the [`Rejected`](#rejected) portion arises, `bimap` can be
 used.
 
 `bimap` takes (2) functions as its arguments. The first function is used
-to map a `Rejected` instance, while the second maps a `Resolved` instance.
+to map a [`Rejected`](#rejected) instance, while the second maps a [`Resolved`](#resolved) instance.
 While `bimap` requires that both possible instances are to be mapped, if the
-desire to map only the `Rejected` portion, an `identity` function can be
-provided to the second argument. This will leave all `Resolved` instance values
+desire to map only the [`Rejected`](#rejected) portion, an [`identity`][identity] function can be
+provided to the second argument. This will leave all [`Resolved`](#resolved) instance values
 untouched.
 
-<!-- eslint-disable no-console -->
-<!-- eslint-disable no-sequences -->
 ```javascript
 const { Rejected, Resolved } = require('crocks/Async')
 
@@ -597,20 +592,18 @@ Async e (a -> b) ~> Async e a -> Async e b
 Short for apply, `ap` is used to apply an `Async` instance containing a value
 to another `Async` instance that contains a function, resulting in
 new `Async` instance with the result. `ap` requires that it is called on
-an instance that is either `Rejected` or `Resolved` that wraps a curried
+an instance that is either [`Rejected`](#rejected) or [`Resolved`](#resolved) that wraps a curried
 polyadic function.
 
-When either `Async` is `Rejected`, `ap` will return a `Rejected` instance, that
-wraps the value of the original `Rejected` instance. This can be used to safely
+When either `Async` is [`Rejected`](#rejected), `ap` will return a [`Rejected`](#rejected) instance, that
+wraps the value of the original [`Rejected`](#rejected) instance. This can be used to safely
 combine multiple values under a given combination function. If any of the inputs
-result in a `Rejected` than they will never be applied to the function and will
+result in a [`Rejected`](#rejected) than they will never be applied to the function and will
 not result in undesired exceptions or results.
 
 When [`fork`](#fork)ed, all `Async`s chained with multiple `ap` invocations
 will be executed concurrently.
 
-<!-- eslint-disable no-console -->
-<!-- eslint-disable no-sequences -->
 ```javascript
 const Async = require('crocks/Async')
 const { Rejected, Resolved } = Async
@@ -673,14 +666,12 @@ Async e a ~> (a -> Async e b) -> Async e b
 
 Combining a sequential series of transformations that capture disjunction can be
 accomplished with `chain`. `chain` expects a unary, `Async` returning function
-as its argument. When invoked on a `Rejected` instance , `chain` will not run
-the function, but will instead return another `Rejected` instance wrapping the
-original `Rejected` value. When called on a `Resolved` instance however, the
+as its argument. When invoked on a [`Rejected`](#rejected) instance , `chain` will not run
+the function, but will instead return another [`Rejected`](#rejected) instance wrapping the
+original [`Rejected`](#rejected) value. When called on a [`Resolved`](#resolved) instance however, the
 inner value will be passed to provided function, returning the result as the
 new instance.
 
-<!-- eslint-disable no-console -->
-<!-- eslint-disable no-sequences -->
 ```javascript
 const Async = require('crocks/Async')
 const { Rejected, Resolved } = Async
@@ -746,19 +737,17 @@ getTwo(76)
 ```haskell
 Async e a ~> ((e -> b), (a -> b))) -> Async e b
 ```
-Used as a means to apply a computation to a `Resolved` instance and then map
-any `Rejected` value while transforming it to a `Resolved` to continue
+Used as a means to apply a computation to a [`Resolved`](#resolved) instance and then map
+any [`Rejected`](#rejected) value while transforming it to a [`Resolved`](#resolved) to continue
 computation. `coalesce` on an `Async` can be used to model the all too
 familiar, and more imperative `if/else` flow in a more declarative manner.
 
-The first function is used when invoked on a `Rejected` instance and will
-return a `Resolved` instance wrapping the result of the function. The second
-function is used when `coalesce` is invoked on a `Resolved` instance and is used
-to map the original value, returning a new `Resolved` instance wrapping the
+The first function is used when invoked on a [`Rejected`](#rejected) instance and will
+return a [`Resolved`](#resolved) instance wrapping the result of the function. The second
+function is used when `coalesce` is invoked on a [`Resolved`](#resolved) instance and is used
+to map the original value, returning a new [`Resolved`](#resolved) instance wrapping the
 result of the second function.
 
-<!-- eslint-disable no-console -->
-<!-- eslint-disable no-sequences -->
 ```javascript
 const Async = require('crocks/Async')
 const { Rejected, Resolved } = Async
@@ -792,14 +781,12 @@ resolve(Rejected('Rejected'))
 Async e a ~> ((e -> b), (a -> c)) -> Async c b
 ```
 
-Used to map the value of a `Rejected` into a `Resolved` or a `Resolved` to
-a `Rejected`, `swap` takes (2) functions as its arguments. The first function
-is used to map the expected `Rejected` value into a `Resolved`, while the
-second goes from `Resolved` to `Rejected`. If no mapping is required on either,
-then `identity` functions can be used in one or both arguments.
+Used to map the value of a [`Rejected`](#rejected) into a [`Resolved`](#resolved) or a [`Resolved`](#resolved) to
+a [`Rejected`](#rejected), `swap` takes (2) functions as its arguments. The first function
+is used to map the expected [`Rejected`](#rejected) value into a [`Resolved`](#resolved), while the
+second goes from [`Resolved`](#resolved) to [`Rejected`](#rejected). If no mapping is required on either,
+then [`identity`][identity] functions can be used in one or both arguments.
 
-<!-- eslint-disable no-console -->
-<!-- eslint-disable no-sequences -->
 ```javascript
 const Async = require('crocks/Async')
 const { Rejected, Resolved } = Async
@@ -883,9 +870,9 @@ both return a function that can be used for cancellation of a given instance.
 
 The first and more common signature takes (2) functions that will have their
 return values ignored. The first function will be run in the event of the
-`Async` instance settling on `Rejected` and will receive as its single argument
+`Async` instance settling on [`Rejected`](#rejected) and will receive as its single argument
 the value or "cause" of rejection. The second function provided will be executed
-in the case of the instance settling on `Resolved` and will receive as its
+in the case of the instance settling on [`Resolved`](#resolved) and will receive as its
 single argument the value the `Async` was resolved with.
 
 The second signature is used when any cleanup needs to be performed after a
@@ -895,8 +882,6 @@ signature described above, but takes an addition function that can be used
 for "clean up" after cancellation. When all in-flight computations settle, the
 function provided will be silently executed.
 
-<!-- eslint-disable no-console -->
-<!-- eslint-disable no-sequences -->
 ```javascript
 const Async = require('crocks/Async')
 
@@ -951,8 +936,6 @@ internally and return a `Promise` that will be in-flight. This comes in handy
 for integration with other `Promise` based libraries that are utilized in a
 given application, program or flow.
 
-<!-- eslint-disable no-console -->
-<!-- eslint-disable no-sequences -->
 ```javascript
 const { Rejected, Resolved } = require('crocks/Async')
 
@@ -973,6 +956,10 @@ Rejected('rejected')
 //=> rej: rejected
 ```
 
+</article>
+
+<article id="topic-transformation">
+
 ## Transformation Functions
 
 #### eitherToAsync
@@ -986,9 +973,9 @@ eitherToAsync :: (a -> Either c b) -> a -> Async c b
 
 Used to transform a given `Either` instance to
 an `Async` instance, `eitherToAsync` will turn a `Right` instance into
-a `Resolved` instance wrapping the original value contained in the
+a [`Resolved`](#resolved) instance wrapping the original value contained in the
 original `Right`. If a `Left` is provided, then `eitherToAsync` will return
-a `Rejected` instance, wrapping the original `Left` value.
+a [`Rejected`](#rejected) instance, wrapping the original `Left` value.
 
 Like all `crocks` transformation functions, `eitherToAsync` has (2) possible
 signatures and will behave differently when passed either an `Either` instance
@@ -996,8 +983,6 @@ or a function that returns an instance of `Either`. When passed the instance,
 a transformed `Async` is returned. When passed an `Either` returning function,
 a function will be returned that takes a given value and returns an `Async`.
 
-<!-- eslint-disable no-console -->
-<!-- eslint-disable no-sequences -->
 ```javascript
 const { Resolved } = require('crocks/Async')
 const { Left, Right } = require('crocks/Either')
@@ -1060,25 +1045,23 @@ firstToAsync :: e -> First a -> Async e a
 firstToAsync :: e -> (a -> First b) -> a -> Async e b
 ```
 
-Used to transform a given `First` instance to
-an `Async` instance, `firstToAsync` will turn a non-empty `First` instance into
-a `Resolved` instance wrapping the original value contained in the
+Used to transform a given [`First`][first] instance to
+an `Async` instance, `firstToAsync` will turn a non-empty [`First`][first] instance into
+a [`Resolved`](#resolved) instance wrapping the original value contained in the
 original non-empty.
 
-The `First` datatype is based on a `Maybe` and as such its left or empty value
+The [`First`][first] datatype is based on a [`Maybe`][maybe] and as such its left or empty value
 is fixed to a `()` type. As a means to allow for convenient
-transformation, `firstToAsync` takes a default `Rejected` value as the first
-argument. This value will be wrapped in a resulting `Rejected` instance in the
+transformation, `firstToAsync` takes a default [`Rejected`](#rejected) value as the first
+argument. This value will be wrapped in a resulting [`Rejected`](#rejected) instance in the
 case of empty.
 
 Like all `crocks` transformation functions, `firstToAsync` has (2) possible
-signatures and will behave differently when passed either a `First` instance
-or a function that returns an instance of `First`. When passed the instance,
-a transformed `Async` is returned. When passed a `First` returning function,
+signatures and will behave differently when passed either a [`First`][first] instance
+or a function that returns an instance of [`First`][first]. When passed the instance,
+a transformed `Async` is returned. When passed a [`First`][first] returning function,
 a function will be returned that takes a given value and returns an `Async`.
 
-<!-- eslint-disable no-console -->
-<!-- eslint-disable no-sequences -->
 ```javascript
 const { Resolved } = require('crocks/Async')
 const First = require('crocks/First')
@@ -1148,25 +1131,23 @@ lastToAsync :: e -> Last a -> Async e a
 lastToAsync :: e -> (a -> Last b) -> a -> Async e b
 ```
 
-Used to transform a given `Last` instance to
-an `Async` instance, `lastToAsync` will turn a non-empty `Last` instance into
-a `Resolved` instance wrapping the original value contained in the
+Used to transform a given [`Last`][last] instance to
+an `Async` instance, `lastToAsync` will turn a non-empty [`Last`][last] instance into
+a [`Resolved`](#resolved) instance wrapping the original value contained in the
 original non-empty.
 
-The `Last` datatype is based on a `Maybe` and as such its left or empty value
+The [`Last`][last] datatype is based on a [`Maybe`][maybe] and as such its left or empty value
 is fixed to a `()` type. As a means to allow for convenient
-transformation, `lastToAsync` takes a default `Rejected` value as the first
-argument. This value will be wrapped in a resulting `Rejected` instance, in the
+transformation, `lastToAsync` takes a default [`Rejected`](#rejected) value as the first
+argument. This value will be wrapped in a resulting [`Rejected`](#rejected) instance, in the
 case of empty.
 
 Like all `crocks` transformation functions, `lastToAsync` has (2) possible
-signatures and will behave differently when passed either a `Last` instance
-or a function that returns an instance of `Last`. When passed the instance,
-a transformed `Async` is returned. When passed a `Last` returning function,
+signatures and will behave differently when passed either a [`Last`][last] instance
+or a function that returns an instance of [`Last`][last]. When passed the instance,
+a transformed `Async` is returned. When passed a [`Last`][last] returning function,
 a function will be returned that takes a given value and returns an `Async`.
 
-<!-- eslint-disable no-console -->
-<!-- eslint-disable no-sequences -->
 ```javascript
 const { Resolved } = require('crocks/Async')
 const Last = require('crocks/Last')
@@ -1236,25 +1217,23 @@ maybeToAsync :: e -> Maybe a -> Async e a
 maybeToAsync :: e -> (a -> Maybe b) -> a -> Async e b
 ```
 
-Used to transform a given `Maybe` instance to
-an `Async` instance, `maybeToAsync` will turn a `Just` instance into
-a `Resolved` instance wrapping the original value contained in the
-original `Just`.
+Used to transform a given [`Maybe`][maybe] instance to
+an `Async` instance, `maybeToAsync` will turn a [`Just`][just] instance into
+a [`Resolved`](#resolved) instance wrapping the original value contained in the
+original [`Just`][just].
 
-A `Nothing` instance is fixed to a `()` type and as such can only ever contain
+A [`Nothing`][nothing] instance is fixed to a `()` type and as such can only ever contain
 a value of `undefined`. As a means to allow for convenient
-transformation, `maybeToAsync` takes a default `Rejected` value as the first
-argument. This value will be wrapped in a resulting `Rejected` instance, in the
-case of `Nothing`.
+transformation, `maybeToAsync` takes a default [`Rejected`](#rejected) value as the first
+argument. This value will be wrapped in a resulting [`Rejected`](#rejected) instance, in the
+case of [`Nothing`][nothing].
 
 Like all `crocks` transformation functions, `maybeToAsync` has (2) possible
-signatures and will behave differently when passed either a `Maybe` instance
-or a function that returns an instance of `Maybe`. When passed the instance,
-a transformed `Async` is returned. When passed a `Maybe` returning function,
+signatures and will behave differently when passed either a [`Maybe`][maybe] instance
+or a function that returns an instance of [`Maybe`][maybe]. When passed the instance,
+a transformed `Async` is returned. When passed a [`Maybe`][maybe] returning function,
 a function will be returned that takes a given value and returns an `Async`.
 
-<!-- eslint-disable no-console -->
-<!-- eslint-disable no-sequences -->
 ```javascript
 const { Resolved } = require('crocks/Async')
 const { Nothing, Just } = require('crocks/Maybe')
@@ -1311,9 +1290,9 @@ resultToAsync :: (a -> Result c b) -> a -> Result c b
 
 Used to transform a given `Result` instance to
 an `Async` instance, `resultToAsync` will turn an `Ok` instance into
-a `Resolved` instance wrapping the original value contained in the
+a [`Resolved`](#resolved) instance wrapping the original value contained in the
 original `Ok`. If an `Err` is provided, then `resultToAsync` will return
-a `Rejected` instance, wrapping the original `Err` value.
+a [`Rejected`](#rejected) instance, wrapping the original `Err` value.
 
 Like all `crocks` transformation functions, `resultToAsync` has (2) possible
 signatures and will behave differently when passed either a `Result` instance
@@ -1321,8 +1300,6 @@ or a function that returns an instance of `Result`. When passed the instance,
 a transformed `Async` is returned. When passed a `Result` returning function,
 a function will be returned that takes a given value and returns an `Async`.
 
-<!-- eslint-disable no-console -->
-<!-- eslint-disable no-sequences -->
 ```javascript
 const { Resolved } = require('crocks/Async')
 const { Err, Ok } = require('crocks/Result')
@@ -1369,3 +1346,13 @@ Resolved('103')
   .fork(log('rej'), log('res'))
 //=> rej: "Must be a Number"
 ```
+
+</article>
+
+[nary]: ../functions/helpers.html#nary
+[identity]: ../functions/combinators.html#identity
+[first]: ../monoids/First.html
+[last]: ../monoids/Last.html
+[maybe]: ../crocks/Maybe.html
+[just]: ../crocks/Maybe.html#just
+[nothing]: ../crocks/Maybe.html#nothing

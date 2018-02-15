@@ -13,7 +13,7 @@ test('propPathOr function', t => {
 
   t.ok(isFunction(propPathOr), 'is a function')
 
-  const err = /propPathOr: Array of strings or integers required for second argument/
+  const err = /propPath(Or)?: Array of strings or integers required for (first|second) argument/
   t.throws(p(def, undefined, {}), err, 'throws with undefined in second argument')
   t.throws(p(def, null, {}), err, 'throws with null in second argument')
   t.throws(p(def, 0, {}), err, 'throws with falsey number in second argument')
@@ -66,6 +66,10 @@ test('propPathOr function', t => {
   t.equals(fn(undefined), def, 'returns the default value when data is undefined')
   t.equals(fn(null), def, 'returns the default value when data is null')
   t.equals(fn(NaN), def, 'returns the default value when data is NaN')
+
+  const objDefault =  { b: 1 }
+
+  t.equals(propPathOr(objDefault, [ 'a', 'b' ], { c: { b: 2 } }), objDefault, 'returns the default value when default is an object that has the same property as a nested property in target')
 
   t.end()
 })

@@ -1,14 +1,13 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Henrique Limas */
 
+const constant = require('../combinators/constant')
 const curry = require('../core/curry')
-const isArray = require('../core/isArray')
-const isInteger = require('../core/isInteger')
-const isNil= require('../core/isNil')
-const isString = require('../core/isString')
-
-const lift = (x, def) =>
-  isNil(x) ? def : x
+const either = require('../pointfree/either')
+const identity = require('../combinators/identity')
+const isArray = require('../predicates/isArray')
+const isNil = require('../predicates/isNil')
+const propPath = require('../Maybe/propPath')
 
 // propPathOr : a -> [ String | Integer ] -> b -> c
 function propPathOr(def, keys, target) {
@@ -20,13 +19,8 @@ function propPathOr(def, keys, target) {
     return def
   }
 
-  return keys.reduce((target, key) => {
-    if(!(isString(key) || isInteger(key))) {
-      throw new TypeError('propPathOr: Array of strings or integers required for second argument')
-    }
-
-    return lift(target[key], def)
-  }, target)
+  return either(constant(def), identity, propPath(keys, target))
 }
 
 module.exports = curry(propPathOr)
+

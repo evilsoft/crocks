@@ -132,7 +132,7 @@ test('array chain functionality', t => {
 test('array sequence errors', t => {
   const seq = bindFunc(x => sequence(MockCrock.of, [ x ]))
 
-  const err = /Array.sequence: Must wrap Applicatives/
+  const err = /Array.sequence: Must wrap Applys/
   t.throws(seq(undefined), err, 'throws with undefined')
   t.throws(seq(null), err, 'throws with null')
   t.throws(seq(0), err, 'throws falsey with number')
@@ -144,7 +144,7 @@ test('array sequence errors', t => {
   t.throws(seq([]), err, 'throws with an array')
   t.throws(seq({}), err, 'throws with an object')
 
-  t.doesNotThrow(seq(MockCrock(2)), 'allows an Applicative returning function')
+  t.doesNotThrow(seq(MockCrock(2)), 'allows an Apply returning function')
 
   t.end()
 })
@@ -170,11 +170,11 @@ test('array sequence functionality', t => {
 test('array traverse errors', t => {
   const trav = bindFunc((af, fn, x) => traverse(af, fn, [ x ]))
 
-  const noAppl = /Array.traverse: Must wrap Applicatives/
+  const noAppl = /Array.traverse: Must wrap Applys/
   t.throws(trav(constant(undefined), MockCrock, 2), noAppl, 'throws when first function returns non-applicative')
   t.throws(trav(MockCrock, constant([ 99 ]), 2), noAppl, 'throws when second function returns a different type')
 
-  t.doesNotThrow(trav(MockCrock, MockCrock, 2), 'allows Applicative returning functions')
+  t.doesNotThrow(trav(MockCrock, MockCrock, 2), 'allows Apply returning functions')
 
   t.end()
 })

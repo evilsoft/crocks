@@ -13,7 +13,7 @@ v0.8.5 -- February 14, 2018
   * `@@type` to all types
   * `toString` to all types
   * `reduceRight` to `List`
-  * Add fantasy-land methods except for `traverse` and
+  * Add fantasy-land methods except for `traverse` and `ap`
 
 ### Bug fixes
 * Change composition order on `Traversable`s to allow from proper application

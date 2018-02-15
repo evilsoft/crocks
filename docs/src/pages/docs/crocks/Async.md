@@ -676,6 +676,7 @@ new instance.
 const Async = require('crocks/Async')
 const { Rejected, Resolved } = Async
 
+const chain = require('crocks/pointfree/chain')
 const compose = require('crocks/helpers/compose')
 const composeK = require('crocks/helpers/composeK')
 const constant = require('crocks/combinators/constant')
@@ -704,10 +705,10 @@ const lookup = compose(
 )
 
 // fake :: String -> Async String Object
-const fake = composeK(
-  lookup,
-  safe(test(/^file-(a|b|c)/)),
-  safe(isString)
+const fake = compose(
+  chain(lookup),
+  chain(safe(test(/^file-(a|b|c)/))),
+  chain(safe(isString))
 )
 
 fake('file-a')

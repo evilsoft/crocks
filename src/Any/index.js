@@ -7,6 +7,7 @@ const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
 const type = require('../core/types').type('Any')
 const _type = require('../core/types').typeFn(type(), VERSION)
+const fl = require('../core/flNames')
 
 const isFunction = require('../core/isFunction')
 const isNil = require('../core/isNil')
@@ -42,9 +43,9 @@ function Any(b) {
   return {
     inspect, toString: inspect,
     valueOf, type, concat, empty,
-    '@@type': _type,
-    'fantasy-land/concat': concat,
-    'fantasy-land/empty': empty,
+    ['@@type']: _type,
+    [fl.concat]: concat,
+    [fl.empty]: empty,
     constructor: Any
   }
 }
@@ -56,7 +57,7 @@ Any['@@implements'] = _implements(
 Any.empty = _empty
 Any.type  = type
 
-Any['fantasy-land/empty'] = _empty
+Any[fl.empty] = _empty
 Any['@@type'] = _type
 
 module.exports = Any

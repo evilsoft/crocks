@@ -7,6 +7,7 @@ const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
 const type = require('../core/types').type('Max')
 const _type = require('../core/types').typeFn(type(), VERSION)
+const fl = require('../core/flNames')
 
 const isNil = require('../core/isNil')
 const isNumber = require('../core/isNumber')
@@ -42,9 +43,9 @@ function Max(n) {
   return {
     inspect, toString: inspect, valueOf,
     type, concat, empty,
-    'fantasy-land/empty': empty,
-    'fantasy-land/concat': concat,
-    '@@type': _type,
+    [fl.empty]: empty,
+    [fl.concat]: concat,
+    ['@@type']: _type,
     constructor: Max
   }
 }
@@ -56,7 +57,7 @@ Max['@@implements'] = _implements(
 Max.empty = _empty
 Max.type = type
 
-Max['fantasy-land/empty'] = _empty
+Max[fl.empty] = _empty
 Max['@@type'] = _type
 
 module.exports = Max

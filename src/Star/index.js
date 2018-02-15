@@ -7,6 +7,7 @@ const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
 const _type = require('../core/types').type('Star')
 const __type = require('../core/types').typeFn(_type(), VERSION)
+const fl = require('../core/flNames')
 
 const array = require('../core/array')
 const isFunction = require('../core/isFunction')
@@ -172,12 +173,12 @@ function _Star(Monad) {
       inspect, toString: inspect, type,
       runWith, id, compose, map, contramap,
       promap, first, second, both,
-      'fantasy-land/id': id,
-      'fantasy-land/compose': compose,
-      'fantasy-land/contramap': contramap,
-      'fantasy-land/map': map,
-      'fantasy-land/promap': promap,
-      '@@type': typeFn,
+      [fl.id]: id,
+      [fl.compose]: compose,
+      [fl.contramap]: contramap,
+      [fl.map]: map,
+      [fl.promap]: promap,
+      ['@@type']: typeFn,
       constructor: Star
     }
   }
@@ -185,7 +186,7 @@ function _Star(Monad) {
   Star.id = _id
   Star.type = type
 
-  Star['fantasy-land/id'] = _id
+  Star[fl.id] = _id
   Star['@@type'] = typeFn
 
   Star['@@implements'] = _implements(

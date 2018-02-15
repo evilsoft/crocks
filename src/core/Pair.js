@@ -8,6 +8,7 @@ const _implements = require('./implements')
 const _inspect = require('./inspect')
 const type = require('./types').type('Pair')
 const _type = require('./types').typeFn(type(), VERSION)
+const fl = require('./flNames')
 
 const isFunction = require('./isFunction')
 const isSameType = require('./isSameType')
@@ -155,13 +156,13 @@ function Pair(l, r) {
     snd, toArray, type, merge, equals,
     concat, swap, map, bimap, ap, chain,
     extend,
-    'fantasy-land/equals': equals,
-    'fantasy-land/concat': concat,
-    'fantasy-land/map': map,
-    'fantasy-land/bimap': bimap,
-    'fantasy-land/chain': chain,
-    'fantasy-land/extend': extend,
-    '@@type': _type,
+    [fl.equals]: equals,
+    [fl.concat]: concat,
+    [fl.map]: map,
+    [fl.bimap]: bimap,
+    [fl.chain]: chain,
+    [fl.extend]: extend,
+    ['@@type']: _type,
     constructor: Pair
   }
 }

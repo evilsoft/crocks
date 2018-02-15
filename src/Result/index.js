@@ -10,6 +10,7 @@ const _innerConcat = require('../core/innerConcat')
 const _inspect = require('../core/inspect')
 const type = require('../core/types').type('Result')
 const _type = require('../core/types').typeFn(type(), VERSION)
+const fl = require('../core/flNames')
 
 const compose = require('../core/compose')
 const isApply = require('../core/isApply')
@@ -209,14 +210,14 @@ function Result(u) {
     type, either, concat, swap, coalesce,
     map, bimap, alt, ap, chain, of, sequence,
     traverse,
-    'fantasy-land/of': of,
-    'fantasy-land/equals': equals,
-    'fantasy-land/alt': alt,
-    'fantasy-land/bimap': bimap,
-    'fantasy-land/concat': concat,
-    'fantasy-land/map': map,
-    'fantasy-land/chain': chain,
-    '@@type': _type,
+    [fl.of]: of,
+    [fl.equals]: equals,
+    [fl.alt]: alt,
+    [fl.bimap]: bimap,
+    [fl.concat]: concat,
+    [fl.map]: map,
+    [fl.chain]: chain,
+    ['@@type']: _type,
     constructor: Result
   }
 }
@@ -224,7 +225,7 @@ function Result(u) {
 Result.of = _of
 Result.type = type
 
-Result['fantasy-land/of'] = _of
+Result[fl.of] = _of
 Result['@@type'] = _type
 
 Result['@@implements'] = _implements(

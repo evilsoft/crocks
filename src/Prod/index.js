@@ -7,6 +7,7 @@ const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
 const type = require('../core/types').type('Prod')
 const _type = require('../core/types').typeFn(type(), VERSION)
+const fl = require('../core/flNames')
 
 const isNil = require('../core/isNil')
 const isNumber = require('../core/isNumber')
@@ -42,9 +43,9 @@ function Prod(n) {
   return {
     inspect, toString: inspect, valueOf,
     type, concat, empty,
-    'fantasy-land/empty': empty,
-    'fantasy-land/concat': concat,
-    '@@type': _type,
+    [fl.empty]: empty,
+    [fl.concat]: concat,
+    ['@@type']: _type,
     constructor: Prod
   }
 }
@@ -56,7 +57,7 @@ Prod['@@implements'] = _implements(
 Prod.empty = _empty
 Prod.type = type
 
-Prod['fantasy-land/empty'] = _empty
+Prod[fl.empty] = _empty
 Prod['@@type'] = _type
 
 module.exports = Prod

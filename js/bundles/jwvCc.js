@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([4,26,27,28],[
+webpackJsonppageComponent([26,29,30,31],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -28350,31 +28350,12 @@ exports.default = parseFromAnchor;
 /* 216 */,
 /* 217 */,
 /* 218 */,
-/* 219 */,
-/* 220 */,
-/* 221 */,
-/* 222 */,
-/* 223 */,
-/* 224 */,
-/* 225 */,
-/* 226 */,
-/* 227 */,
-/* 228 */,
-/* 229 */,
-/* 230 */,
-/* 231 */,
-/* 232 */,
-/* 233 */,
-/* 234 */,
-/* 235 */,
-/* 236 */,
-/* 237 */,
-/* 238 */
+/* 219 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LnXkv", function() { return LnXkv; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "jwvCc", function() { return jwvCc; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28386,15 +28367,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var templates;
 goog.loadModule(function(exports) {
 
-// This file was automatically generated from Prod.soy.
+// This file was automatically generated from Equiv.soy.
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace LnXkv.
+ * @fileoverview Templates in namespace jwvCc.
  * @public
  */
 
-goog.module('LnXkv.incrementaldom');
+goog.module('jwvCc.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28428,23 +28409,60 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var param1822 = function() {
-    $templateAlias2({code: 'Prod Number', mode: 'haskell'}, null, opt_ijData);
+  var param628 = function() {
+    $templateAlias2({code: 'Equiv a a Boolean', mode: 'haskell'}, null, opt_ijData);
     ie_open('p');
+      itext('Defined as a Monoidal Contravariant datatype, ');
       ie_open('code');
-        itext('Prod');
+        itext('Equiv');
       ie_close('code');
-      itext(' is a ');
+      itext(' can be used to test equivalence between (2) values of a given type. It does this by wrapping a binary equivalence function of the form ');
       ie_open('code');
-        itext('Monoid');
+        itext('(a, a) -> Boolean');
       ie_close('code');
-      itext(' that will combine (2) ');
-      ie_open('code');
-        itext('Number');
-      ie_close('code');
-      itext('s under multiplication.');
+      itext('. Most of the time strict equality is used, but other functions of the required form can provide some powerful results.');
     ie_close('p');
-    $templateAlias2({code: 'const Prod = require(\'crocks/Prod\')\nconst compose = require(\'crocks/helpers/compose\')\nconst concat = require(\'crocks/pointfree/concat\')\n\nconst emptyProd = Prod.empty()\nconst tenProd = Prod(10)\nconst hundredProd = Prod(100)\n\nemptyProd\n  .concat(emptyProd)\n//=> Prod 1\n\ntenProd\n  .concat(hundredProd)\n//=> Prod 1000\n\n// prodBy2 :: Number -> Prod\nconst double =\n  compose(concat(Prod(2)), Prod)\n\ndouble(4)\n//=> Prod 8\n\ndouble(11)\n//=> Prod 22', mode: 'javascript'}, null, opt_ijData);
+    ie_open('p');
+      itext('While the far right parameter is always fixed to ');
+      ie_open('code');
+        itext('Boolean');
+      ie_close('code');
+      itext(' it cannot be Covariant, but is Contravariant allowing both inputs to vary in their type.');
+      ie_open('code');
+        itext('Equiv');
+      ie_close('code');
+      itext(' is also a ');
+      ie_open('a', null, null,
+          'href', '../monoids/index.html');
+        ie_open('code');
+          itext('Monoid');
+        ie_close('code');
+      ie_close('a');
+      itext(' and will concat the results of (2) ');
+      ie_open('code');
+        itext('Equiv');
+      ie_close('code');
+      itext('s under logical conjunction, with it\'s empty value always returning ');
+      ie_open('code');
+        itext('true');
+      ie_close('code');
+      itext('.');
+    ie_close('p');
+    ie_open('p');
+      itext('As ');
+      ie_open('code');
+        itext('Equiv');
+      ie_close('code');
+      itext(' wraps a function, it is lazy and a given instance will not produce a result until both arguments are satisfied. A given instance can be run by calling the method ');
+      ie_open('a', null, null,
+          'href', '#comparewith');
+        ie_open('code');
+          itext('compareWith');
+        ie_close('code');
+      ie_close('a');
+      itext(', providing both values for comparison.');
+    ie_close('p');
+    $templateAlias2({code: 'const Equiv = require(\'crocks/Equiv\')\n\nconst equals = require(\'crocks/pointfree/equals\')\n\n// toString :: a -> String\nconst toString =\n  x => x.toString()\n\n// length :: a -> Number\nconst length = x =>\n  x && x.length ? x.length : 0\n\n// eq :: Equiv a a\nconst eq =\n  Equiv(equals)\n\neq.contramap(toString)\n  .compareWith(\'123\', 123)\n//=> true\n\neq.contramap(length)\n  .compareWith([ 1, 2, 3 ], [ \'a\', \'b\' ])\n//=> false', mode: 'javascript'}, null, opt_ijData);
     ie_open('article', null, null,
         'id', 'topic-implements');
       ie_open('h2');
@@ -28462,6 +28480,10 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_open('code');
           itext('Monoid');
         ie_close('code');
+        itext(', ');
+        ie_open('code');
+          itext('Contravariant');
+        ie_close('code');
       ie_close('p');
     ie_close('article');
     ie_open('article', null, null,
@@ -28473,14 +28495,14 @@ function $render(opt_data, opt_ignored, opt_ijData) {
           itext('Constructor Methods');
         ie_close('a');
       ie_close('h2');
-      ie_open('h3');
+      ie_open('h4');
         ie_open('a', null, null,
             'id', 'empty',
             'href', '#empty');
           itext('empty');
         ie_close('a');
-      ie_close('h3');
-      $templateAlias2({code: 'Prod.empty :: () -> Prod', mode: 'haskell'}, null, opt_ijData);
+      ie_close('h4');
+      $templateAlias2({code: 'Equiv.empty :: () -> Equiv a a', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
         ie_open('code');
           itext('empty');
@@ -28493,17 +28515,21 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_open('code');
           itext('concat');
         ie_close('code');
-        itext('ed to object other value, it will return the other value. In the case of ');
+        itext('ed to any other value, it will return the other value. In the case of ');
         ie_open('code');
-          itext('Prod');
+          itext('Equiv');
         ie_close('code');
         itext(' the result of ');
         ie_open('code');
           itext('empty');
         ie_close('code');
-        itext(' is ');
+        itext(' is an ');
         ie_open('code');
-          itext('1');
+          itext('Equiv');
+        ie_close('code');
+        itext(' that will always return');
+        ie_open('code');
+          itext('true');
         ie_close('code');
         itext('. ');
         ie_open('code');
@@ -28511,42 +28537,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_close('code');
         itext(' is available on both the Constructor and the Instance for convenience.');
       ie_close('p');
-      $templateAlias2({code: 'const Prod = require(\'crocks/Prod\')\n\nProd.empty()\n//=> Prod 1\n\nProd.empty()\n  .concat(Prod.empty())\n//=> Prod 1\n\nProd(4)\n  .concat(Prod.empty())\n//=> Prod 4\n\nProd.empty()\n  .concat(Prod(4))\n//=> Prod 4', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h3');
-        ie_open('a', null, null,
-            'id', 'type',
-            'href', '#type');
-          itext('type');
-        ie_close('a');
-      ie_close('h3');
-      $templateAlias2({code: 'Prod.type :: () -> String', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        ie_open('code');
-          itext('type');
-        ie_close('code');
-        itext(' provides a string representation of the type name for a given type in');
-        ie_open('code');
-          itext('crocks');
-        ie_close('code');
-        itext('. While it is used mostly internally for law validation, it can be useful to the end user for debugging and building out custom types based on the standard ');
-        ie_open('code');
-          itext('crocks');
-        ie_close('code');
-        itext(' types. While type comparisons can easily be done manually by calling ');
-        ie_open('code');
-          itext('type');
-        ie_close('code');
-        itext(' on a given type, using the ');
-        ie_open('code');
-          itext('isSameType');
-        ie_close('code');
-        itext(' function hides much of the boilerplate. ');
-        ie_open('code');
-          itext('type');
-        ie_close('code');
-        itext(' is available on both the Constructor and the Instance for convenience.');
-      ie_close('p');
-      $templateAlias2({code: 'const Prod = require(\'crocks/Prod\')\nconst Sum = require(\'crocks/Sum\')\nconst isSameType = require(\'crocks/predicates/isSameType\')\n\nconst prod5 = Prod(5)\n\nprod5.type()\n//=> "Prod"\n\nisSameType(Sum, prod5)\n//=> false\n\nisSameType(Prod, prod5)\n//=> true\n\nisSameType(Prod.empty(), prod5)\n//=> true', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'const Equiv = require(\'crocks/Equiv\')\n\nconst equals = require(\'crocks/pointfree/equals\')\n\nconst eq =\n  Equiv(equals)\n\nconst empty =\n  Equiv.empty()\n\neq\n  .concat(empty)\n  .compareWith({ a: 32 }, { a: 32 })\n//=> true\n\nempty\n  .concat(eq)\n  .compareWith({ a: 32 }, { a: 32 })\n//=> true\n\nempty\n  .concat(eq)\n  .compareWith({ a: 32, b: 19 }, { a: 32 })\n//=> false', mode: 'javascript'}, null, opt_ijData);
     ie_close('article');
     ie_open('article', null, null,
         'id', 'topic-instance');
@@ -28557,14 +28548,14 @@ function $render(opt_data, opt_ignored, opt_ijData) {
           itext('Instance Methods');
         ie_close('a');
       ie_close('h2');
-      ie_open('h3');
+      ie_open('h4');
         ie_open('a', null, null,
             'id', 'concat',
             'href', '#concat');
           itext('concat');
         ie_close('a');
-      ie_close('h3');
-      $templateAlias2({code: 'Prod ~> Prod -> Prod', mode: 'haskell'}, null, opt_ijData);
+      ie_close('h4');
+      $templateAlias2({code: 'Equiv a a ~> Equiv a a -> Equiv a a', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
         ie_open('code');
           itext('concat');
@@ -28579,27 +28570,62 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_close('code');
         itext('. In the case of ');
         ie_open('code');
-          itext('Prod');
+          itext('Equiv');
         ie_close('code');
-        itext(', ');
+        itext(', the results of both');
         ie_open('code');
-          itext('concat');
+          itext('Equiv');
         ie_close('code');
-        itext(' will multiply the (2) ');
-        ie_open('code');
-          itext('Number');
-        ie_close('code');
-        itext('s.');
+        itext('s are combined under logical conjunction.');
       ie_close('p');
-      $templateAlias2({code: 'const Prod = require(\'crocks/Prod\')\n\nProd(5)\n  .concat(Prod(4))\n//=> Prod 20\n\nProd(45)\n  .concat(Prod(32))\n//=> Prod 1440\n\nProd(1000)\n  .concat(Prod(Infinity))\n//=> Prod Infinity\n\nProd.empty()\n  .concat(Prod(3))\n//=> Prod 3', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h3');
+      $templateAlias2({code: 'const Equiv = require(\'crocks/Equiv\')\n\nconst compareWith = require(\'crocks/pointfree/compareWith\')\nconst equals = require(\'crocks/pointfree/equals\')\nconst isSameType = require(\'crocks/predicates/isSameType\')\nconst propOr = require(\'crocks/helpers/propOr\')\n\n// objLength :: Object -> Number\nconst objLength =\n  x => Object.keys(x).length\n\n// eq :: Equiv a a\nconst eq =\n  Equiv(equals)\n\n// sameType :: Equiv a a\nconst sameType =\n  Equiv(isSameType)\n\n// sameType :: Equiv Object Object\nconst length =\n  eq.contramap(objLength)\n\n// sameType :: Equiv a a\nconst sameTypeProp = key =>\n  sameType.contramap(propOr(null, key))\n\n// run :: Equiv Object Object\nconst run = compareWith(\n  { a: 19, b: \'string\' },\n  { a: 32, c: false }\n)\n\nrun(length)\n//=> true\n\nrun(sameTypeProp(\'a\'))\n//=> true\n\nrun(sameTypeProp(\'b\'))\n//=> false\n\nrun(\n  sameTypeProp(\'a\')\n    .concat(length)\n)\n// true\n\nrun(\n  sameTypeProp(\'b\')\n    .concat(length)\n)\n// false', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'contramap',
+            'href', '#contramap');
+          itext('contramap');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Equiv a a ~> (b -> a) -> Equiv b b', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        itext('The far right parameter of ');
+        ie_open('code');
+          itext('Equiv');
+        ie_close('code');
+        itext(' fixed to ');
+        ie_open('code');
+          itext('Boolean');
+        ie_close('code');
+        itext(' which means we cannot map the value as expected. However the left two parameters can vary, although they must vary in the same manner.');
+      ie_close('p');
+      ie_open('p');
+        itext('This is where ');
+        ie_open('code');
+          itext('contramap');
+        ie_close('code');
+        itext(' comes into play as it can be used to adapt an ');
+        ie_open('code');
+          itext('Equiv');
+        ie_close('code');
+        itext('of a given type to accept a different type or modify the value. Provide it a function that has a return type that matches the input types of the ');
+        ie_open('code');
+          itext('Equiv');
+        ie_close('code');
+        itext('. This will return a new ');
+        ie_open('code');
+          itext('Equiv');
+        ie_close('code');
+        itext(' matching the input type of the provided function.');
+      ie_close('p');
+      $templateAlias2({code: 'const Equiv = require(\'crocks/Equiv\')\n\nconst equals = require(\'crocks/pointfree/equals\')\n\n// length :: String -> Number\nconst length =\n  x => x.length\n\n// eq :: Equiv a a\nconst eq =\n  Equiv(equals)\n\n// sameLength :: Equiv String String\nconst sameLength =\n  eq.contramap(length)\n\n// sameAmplitude :: Equiv Float Float\nconst sameAmplitude =\n  eq.contramap(Math.abs)\n\nsameAmplitude\n  .compareWith(-0.5011, 0.5011)\n//=> true\n\nsameAmplitude\n  .compareWith(-0.755, 0.8023)\n//=> false\n\nsameLength\n  .compareWith(\'aBcD\', \'1234\')\n//=> true\n\nsameLength\n  .compareWith(\'AB\', \'ABC\')\n//=> false', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
         ie_open('a', null, null,
             'id', 'valueof',
             'href', '#valueof');
           itext('valueOf');
         ie_close('a');
-      ie_close('h3');
-      $templateAlias2({code: 'Prod ~> () -> Number', mode: 'haskell'}, null, opt_ijData);
+      ie_close('h4');
+      $templateAlias2({code: 'Equiv a a ~> () -> a -> a -> Boolean', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
         ie_open('code');
           itext('valueOf');
@@ -28616,7 +28642,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_open('code');
           itext('valueOf');
         ie_close('code');
-        itext(' are not necessarily a ');
+        itext(' are not necessarily a');
         ie_open('code');
           itext('Comonad');
         ie_close('code');
@@ -28628,17 +28654,40 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_open('code');
           itext('valueOf');
         ie_close('code');
-        itext(' on a ');
+        itext(' on an ');
         ie_open('code');
-          itext('Prod');
+          itext('Equiv');
         ie_close('code');
-        itext('instance will result in the underlying ');
+        itext('instance will result in the underlying curried equivalence function.');
+      ie_close('p');
+      $templateAlias2({code: 'const Equiv = require(\'crocks/Equiv\')\n\nconst compose = require(\'crocks/helpers/compose\')\nconst equals = require(\'crocks/pointfree/equals\')\nconst propOr = require(\'crocks/helpers/propOr\')\n\n// toLower :: String -> String\nconst toLower =\n  x => x.toLowerCase()\n\n// length :: String -> String\nconst length =\n  x => x.length\n\n// lowerName :: Object -> String\nconst lowerName =\n  compose(toLower, propOr(\'\', \'name\'))\n\n// itemsLen :: Object -> Number\nconst itemsLen =\n  compose(length, propOr(\'\', \'items\'))\n\n// eq :: Equiv a a\nconst eq =\n  Equiv(equals)\n\n// checkName :: Equiv Object Object\nconst checkName =\n  eq.contramap(lowerName)\n\n// checkName :: Equiv Object Object\nconst checkItems =\n  eq.contramap(itemsLen)\n\n// test :: Object -> Object -> Boolean\nconst test =\n  checkName\n    .concat(checkItems)\n    .valueOf()\n\ntest(\n  { name: \'Bob\', items: [ 1, 2, 4 ] },\n  { name: \'bOb\', items: [ 9, 12, 9 ] }\n)\n//=> true', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'comparewith',
+            'href', '#comparewith');
+          itext('compareWith');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Equiv a a ~> a -> a -> Boolean', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        itext('As ');
         ie_open('code');
-          itext('Number');
+          itext('Equiv');
+        ie_close('code');
+        itext(' wraps a function, it needs a means to be run with two values for comparison. Instances provide a curried method called ');
+        ie_open('code');
+          itext('compareWith');
+        ie_close('code');
+        itext(' that takes two values for comparison and will run them through the equivalence function, returning the resulting ');
+        ie_open('code');
+          itext('Boolean');
         ie_close('code');
         itext('.');
       ie_close('p');
-      $templateAlias2({code: 'const Prod = require(\'crocks/Prod\')\n\nProd.empty()\n  .valueOf()\n//=> 1\n\nProd(4)\n  .valueOf()\n//=> 4\n\nProd(34)\n  .concat(21)\n  .valueOf()\n//=> 714', mode: 'javascript'}, null, opt_ijData);
+      ie_open('p');
+        itext('Due to the laziness of this type, complicated comparisons can be built out from combining and mapping smaller, simpler units of equivalence comparison.');
+      ie_close('p');
+      $templateAlias2({code: 'const Equiv = require(\'crocks/Equiv\')\n\n// both :: Equiv Boolean Boolean\nconst both =\n  Equiv((x, y) => x && y)\n\n// isEven :: Number -> Boolean\nconst isEven =\n  x => x % 2 === 0\n\n// isBig :: Number -> Boolean\nconst isBig =\n  x => x > 10\n\n// bothEven :: Equiv Number Number\nconst bothEven =\n  both.contramap(isEven)\n\n// bothBig :: Equiv Number Number\nconst bothBig =\n  both.contramap(isBig)\n\nbothEven\n  .compareWith(12, 20)\n//=> true\n\nbothEven\n  .compareWith(17, 20)\n//=> false\n\nbothBig\n  .compareWith(17)(20)\n//=> true\n\nbothBig\n  .compareWith(7)(20)\n//=> false\n\nbothBig\n  .concat(bothEven)\n  .compareWith(8)(54)\n//=> false', mode: 'javascript'}, null, opt_ijData);
     ie_close('article');
     ie_open('input', null, null,
         'type', 'hidden',
@@ -28649,11 +28698,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'value', opt_data.site.title);
     ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({content: param1822}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param628}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'LnXkv.render';
+  $render.soyTemplateName = 'jwvCc.render';
 }
 
 exports.render.params = ["page","site"];
@@ -28663,14 +28712,33 @@ return exports;
 
 });
 
-class LnXkv extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(LnXkv, templates);
+class jwvCc extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(jwvCc, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
 
 
 /***/ }),
+/* 220 */,
+/* 221 */,
+/* 222 */,
+/* 223 */,
+/* 224 */,
+/* 225 */,
+/* 226 */,
+/* 227 */,
+/* 228 */,
+/* 229 */,
+/* 230 */,
+/* 231 */,
+/* 232 */,
+/* 233 */,
+/* 234 */,
+/* 235 */,
+/* 236 */,
+/* 237 */,
+/* 238 */,
 /* 239 */,
 /* 240 */,
 /* 241 */,
@@ -28684,16 +28752,7 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(LnXkv, templates);
 /* 249 */,
 /* 250 */,
 /* 251 */,
-/* 252 */,
-/* 253 */,
-/* 254 */,
-/* 255 */,
-/* 256 */,
-/* 257 */,
-/* 258 */,
-/* 259 */,
-/* 260 */,
-/* 261 */
+/* 252 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28729,9 +28788,9 @@ __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _ProdSoy = __webpack_require__(238);
+var _EquivSoy = __webpack_require__(219);
 
-var _ProdSoy2 = _interopRequireDefault(_ProdSoy);
+var _EquivSoy2 = _interopRequireDefault(_EquivSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28741,23 +28800,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var LnXkv = function (_Component) {
-  _inherits(LnXkv, _Component);
+var jwvCc = function (_Component) {
+  _inherits(jwvCc, _Component);
 
-  function LnXkv() {
-    _classCallCheck(this, LnXkv);
+  function jwvCc() {
+    _classCallCheck(this, jwvCc);
 
-    return _possibleConstructorReturn(this, (LnXkv.__proto__ || Object.getPrototypeOf(LnXkv)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (jwvCc.__proto__ || Object.getPrototypeOf(jwvCc)).apply(this, arguments));
   }
 
-  return LnXkv;
+  return jwvCc;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(LnXkv, _ProdSoy2.default);
+_metalSoy2.default.register(jwvCc, _EquivSoy2.default);
 
-exports.default = LnXkv;
+exports.default = jwvCc;
 
 /***/ })
-],[261]);
+],[252]);

@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([12,26,27,28],[
+webpackJsonppageComponent([5,29,30,31],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -28361,12 +28361,22 @@ exports.default = parseFromAnchor;
 /* 227 */,
 /* 228 */,
 /* 229 */,
-/* 230 */
+/* 230 */,
+/* 231 */,
+/* 232 */,
+/* 233 */,
+/* 234 */,
+/* 235 */,
+/* 236 */,
+/* 237 */,
+/* 238 */,
+/* 239 */,
+/* 240 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fFqoF", function() { return fFqoF; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PPWgl", function() { return PPWgl; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28378,15 +28388,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var templates;
 goog.loadModule(function(exports) {
 
-// This file was automatically generated from predicate-functions.soy.
+// This file was automatically generated from Last.soy.
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace fFqoF.
+ * @fileoverview Templates in namespace PPWgl.
  * @public
  */
 
-goog.module('fFqoF.incrementaldom');
+goog.module('PPWgl.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28407,7 +28417,9 @@ var ie_open_end = IncrementalDom.elementOpenEnd;
 var itext = IncrementalDom.text;
 var iattr = IncrementalDom.attr;
 
-var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('notopic.incrementaldom', 'render');
+var $templateAlias2 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('ElectricCode.incrementaldom', 'render');
+
+var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('guide.incrementaldom', 'render');
 
 
 /**
@@ -28418,468 +28430,824 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var param677 = function() {
+  var param2048 = function() {
+    $templateAlias2({code: 'Last a = Last (Maybe a)', mode: 'haskell'}, null, opt_ijData);
     ie_open('p');
-      itext('All functions in this group have a signature of ');
       ie_open('code');
-        itext('* -> Boolean');
+        itext('Last');
       ie_close('code');
-      itext(' and are used with the many predicate based functions that ship with ');
+      itext(' is a ');
       ie_open('code');
-        itext('crocks');
+        itext('Monoid');
       ie_close('code');
-      itext(', like ');
+      itext(' that will always return the last, non-empty value when (2) ');
+      ie_open('code');
+        itext('Last');
+      ie_close('code');
+      itext(' instances are combined. ');
+      ie_open('code');
+        itext('Last');
+      ie_close('code');
+      itext(' is able to be a ');
+      ie_open('code');
+        itext('Monoid');
+      ie_close('code');
+      itext(' because it implements a ');
       ie_open('a', null, null,
-          'href', 'helpers.html#safe');
+          'href', '../crocks/Maybe.html');
         ie_open('code');
-          itext('safe');
+          itext('Maybe');
         ie_close('code');
       ie_close('a');
-      itext(', ');
+      itext(' under the hood. The use of the ');
       ie_open('a', null, null,
-          'href', 'logic-functions.html#ifelse');
+          'href', '../crocks/Maybe.html');
         ie_open('code');
-          itext('ifElse');
+          itext('Maybe');
         ie_close('code');
       ie_close('a');
-      itext(' and ');
+      itext(' allows for an');
+      ie_open('a', null, null,
+          'href', '#empty');
+        ie_open('code');
+          itext('empty');
+        ie_close('code');
+      ie_close('a');
+      itext(' ');
       ie_open('code');
-        itext('filter');
+        itext('Last');
       ie_close('code');
-      itext(' to name a few. They also fit naturally with the ');
-      ie_open('a', null, null,
-          'href', '../crocks/Pred.html');
-        ie_open('code');
-          itext('Pred');
-        ie_close('code');
-      ie_close('a');
-      itext(' ADT. All predicate functions can be referenced from ');
+      itext(' to be represented with a ');
       ie_open('code');
-        itext('crocks/predicates');
+        itext('Nothing');
       ie_close('code');
       itext('.');
     ie_close('p');
     ie_open('p');
-      itext('Below is a list of all the current predicates that are included with a description of their truth:');
+      ie_open('code');
+        itext('Last');
+      ie_close('code');
+      itext(' can be constructed with either a value or a ');
+      ie_open('a', null, null,
+          'href', '../crocks/Maybe.html');
+        ie_open('code');
+          itext('Maybe');
+        ie_close('code');
+      ie_close('a');
+      itext(' instance. Any value passed to the constructor will be wrapped in a ');
+      ie_open('a', null, null,
+          'href', '../crocks/Maybe.html#just');
+        ie_open('code');
+          itext('Just');
+        ie_close('code');
+      ie_close('a');
+      itext(' to represent a non-empty instance of ');
+      ie_open('code');
+        itext('Last');
+      ie_close('code');
+      itext('. Any ');
+      ie_open('a', null, null,
+          'href', '../crocks/Maybe.html');
+        ie_open('code');
+          itext('Maybe');
+        ie_close('code');
+      ie_close('a');
+      itext(' passed to the constructor will be lifted as is, allowing the ability to "choose" a value based on some disjunction.');
     ie_close('p');
-    ie_open('ul');
-      ie_open('li');
+    ie_open('p');
+      itext('While most ');
+      ie_open('code');
+        itext('Monoid');
+      ie_close('code');
+      itext('s only provide a ');
+      ie_open('a', null, null,
+          'href', '#valueof');
         ie_open('code');
-          itext('hasProp :: (String | Number) -> a -> Boolean');
+          itext('valueOf');
         ie_close('code');
-        itext(': An ');
+      ie_close('a');
+      itext(' function used for extraction, ');
+      ie_open('code');
+        itext('Last');
+      ie_close('code');
+      itext(' takes advantage of its underlying ');
+      ie_open('a', null, null,
+          'href', '../crocks/Maybe.html');
         ie_open('code');
-          itext('Array');
+          itext('Maybe');
         ie_close('code');
-        itext(' or ');
+      ie_close('a');
+      itext(' to provide an additional ');
+      ie_open('a', null, null,
+          'href', '#option');
         ie_open('code');
-          itext('Object');
+          itext('option');
         ie_close('code');
-        itext(' that contains the provided index or key');
-      ie_close('li');
-      ie_open('li');
+      ie_close('a');
+      itext(' method. Using ');
+      ie_open('a', null, null,
+          'href', '#valueof');
         ie_open('code');
-          itext('isAlt :: a -> Boolean');
+          itext('valueOf');
         ie_close('code');
-        itext(': an ADT that provides ');
+      ie_close('a');
+      itext(' will extract the underlying ');
+      ie_open('a', null, null,
+          'href', '../crocks/Maybe.html');
         ie_open('code');
-          itext('map');
+          itext('Maybe');
         ie_close('code');
-        itext(' and ');
+      ie_close('a');
+      itext(', while ');
+      ie_open('a', null, null,
+          'href', '#option');
         ie_open('code');
-          itext('alt');
+          itext('option');
         ie_close('code');
-        itext(' methods');
-      ie_close('li');
-      ie_open('li');
+      ie_close('a');
+      itext(' will extract the underlying value in the ');
+      ie_open('a', null, null,
+          'href', '../crocks/Maybe.html');
         ie_open('code');
-          itext('isAlternative :: a -> Boolean');
+          itext('Maybe');
         ie_close('code');
-        itext(': an ADT that provides ');
+      ie_close('a');
+      itext(', using the provided default value when the underlying');
+      ie_open('a', null, null,
+          'href', '../crocks/Maybe.html');
         ie_open('code');
-          itext('alt');
+          itext('Maybe');
         ie_close('code');
-        itext(', ');
+      ie_close('a');
+      itext(' is a ');
+      ie_open('a', null, null,
+          'href', '../crocks/Maybe.html#nothing');
         ie_open('code');
-          itext('zero');
+          itext('Nothing');
         ie_close('code');
-        itext(', ');
+      ie_close('a');
+      itext(' instance.');
+    ie_close('p');
+    $templateAlias2({code: 'const Last = require(\'crocks/Last\')\n\nconst and = require(\'crocks/logic/and\')\nconst isNumber = require(\'crocks/predicates/isNumber\')\nconst mconcatMap = require(\'crocks/helpers/mconcatMap\')\nconst safe = require(\'crocks/Maybe/safe\')\n\n// isEven :: Number -> Boolean\nconst isEven =\n  x => x % 2 === 0\n\n// isValid :: a -> Boolean\nconst isValid =\n  and(isNumber, isEven)\n\n// chooseLast :: [ * ] -> Last Number\nconst chooseLast =\n  mconcatMap(Last, safe(isValid))\n\nchooseLast([ 21, 45, 2, 22, 19 ])\n  .valueOf()\n//=> Just 22\n\nchooseLast([ \'a\', \'b\', \'c\' ])\n  .option(\'\')\n//=> ""', mode: 'javascript'}, null, opt_ijData);
+    ie_open('article', null, null,
+        'id', 'topic-implements');
+      ie_open('h2');
+        ie_open('a', null, null,
+            'id', 'implements',
+            'href', '#implements');
+          itext('Implements');
+        ie_close('a');
+      ie_close('h2');
+      ie_open('p');
         ie_open('code');
-          itext('map');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('ap');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('chain');
-        ie_close('code');
-        itext(' and ');
-        ie_open('code');
-          itext('of');
-        ie_close('code');
-        itext('methods');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isApplicative :: a -> Boolean');
-        ie_close('code');
-        itext(': an ADT that provides ');
-        ie_open('code');
-          itext('map');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('ap');
-        ie_close('code');
-        itext(' and ');
-        ie_open('code');
-          itext('of');
-        ie_close('code');
-        itext(' methods');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isApply :: a -> Boolean');
-        ie_close('code');
-        itext(': an ADT that provides ');
-        ie_open('code');
-          itext('map');
-        ie_close('code');
-        itext(' and ');
-        ie_open('code');
-          itext('ap');
-        ie_close('code');
-        itext(' methods');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isArray :: a -> Boolean');
-        ie_close('code');
-        itext(': Array');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isBifunctor :: a -> Boolean');
-        ie_close('code');
-        itext(': an ADT that provides ');
-        ie_open('code');
-          itext('map');
-        ie_close('code');
-        itext(' and ');
-        ie_open('code');
-          itext('bimap');
-        ie_close('code');
-        itext(' methods');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isBoolean :: a -> Boolean');
-        ie_close('code');
-        itext(': Boolean');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isCategory :: a -> Boolean');
-        ie_close('code');
-        itext(': an ADT that provides ');
-        ie_open('code');
-          itext('id');
-        ie_close('code');
-        itext(' and ');
-        ie_open('code');
-          itext('compose');
-        ie_close('code');
-        itext(' methods');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isChain :: a -> Boolean');
-        ie_close('code');
-        itext(': an ADT that provides ');
-        ie_open('code');
-          itext('map');
+          itext('Semigroup');
         ie_close('code');
         itext(', ');
         ie_open('code');
-          itext('ap');
+          itext('Monoid');
         ie_close('code');
-        itext(' and ');
-        ie_open('code');
-          itext('chain');
-        ie_close('code');
-        itext(' methods');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isContravariant : a -> Boolean');
-        ie_close('code');
-        itext(': an ADT that provides ');
-        ie_open('code');
-          itext('contramap');
-        ie_close('code');
-        itext(' method');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isDefined :: a -> Boolean');
-        ie_close('code');
-        itext(': Every value that is not ');
-        ie_open('code');
-          itext('undefined');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('null');
-        ie_close('code');
-        itext(' included');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isEmpty :: a -> Boolean');
-        ie_close('code');
-        itext(': Empty Object, Array or String');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isExtend :: a -> Boolean');
-        ie_close('code');
-        itext(': an ADT that provides ');
-        ie_open('code');
-          itext('map');
-        ie_close('code');
-        itext(' and ');
-        ie_open('code');
-          itext('extend');
-        ie_close('code');
-        itext(' methods');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isFoldable :: a -> Boolean');
-        ie_close('code');
-        itext(': Array, List or any structure with a ');
-        ie_open('code');
-          itext('reduce');
-        ie_close('code');
-        itext(' method');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isFunction :: a -> Boolean');
-        ie_close('code');
-        itext(': Function');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isFunctor :: a -> Boolean');
-        ie_close('code');
-        itext(': an ADT that provides a ');
-        ie_open('code');
-          itext('map');
-        ie_close('code');
-        itext(' method');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isInteger :: a -> Boolean');
-        ie_close('code');
-        itext(': Integer');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isMonad :: a -> Boolean');
-        ie_close('code');
-        itext(': an ADT that provides ');
-        ie_open('code');
-          itext('map');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('ap');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('chain');
-        ie_close('code');
-        itext(' and ');
-        ie_open('code');
-          itext('of');
-        ie_close('code');
-        itext(' methods');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isMonoid :: a -> Boolean');
-        ie_close('code');
-        itext(': an ADT that provides ');
-        ie_open('code');
-          itext('concat');
-        ie_close('code');
-        itext(' and ');
+      ie_close('p');
+    ie_close('article');
+    ie_open('article', null, null,
+        'id', 'topic-constructor');
+      ie_open('h2');
+        ie_open('a', null, null,
+            'id', 'constructor-methods',
+            'href', '#constructor-methods');
+          itext('Constructor Methods');
+        ie_close('a');
+      ie_close('h2');
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'empty',
+            'href', '#empty');
+          itext('empty');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Last.empty :: () -> Last a', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
         ie_open('code');
           itext('empty');
         ie_close('code');
-        itext(' methods');
-      ie_close('li');
-      ie_open('li');
+        itext(' provides the identity for the ');
         ie_open('code');
-          itext('isNil :: a -> Boolean');
+          itext('Monoid');
         ie_close('code');
-        itext(': ');
-        ie_open('code');
-          itext('undefined');
-        ie_close('code');
-        itext(' or ');
-        ie_open('code');
-          itext('null');
-        ie_close('code');
-        itext(' or ');
-        ie_open('code');
-          itext('NaN');
-        ie_close('code');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isNumber :: a -> Boolean');
-        ie_close('code');
-        itext(': ');
-        ie_open('code');
-          itext('Number');
-        ie_close('code');
-        itext(' that is not a ');
-        ie_open('code');
-          itext('NaN');
-        ie_close('code');
-        itext(' value, ');
-        ie_open('code');
-          itext('Infinity');
-        ie_close('code');
-        itext(' included');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isObject :: a -> Boolean');
-        ie_close('code');
-        itext(': Plain Old Javascript Object (POJO)');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isPlus :: a -> Boolean');
-        ie_close('code');
-        itext(': an ADT that provides ');
-        ie_open('code');
-          itext('map');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('alt');
-        ie_close('code');
-        itext(' and ');
-        ie_open('code');
-          itext('zero');
-        ie_close('code');
-        itext(' methods');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isProfunctor : a -> Boolean');
-        ie_close('code');
-        itext(': an ADT that provides ');
-        ie_open('code');
-          itext('map');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('contramap');
-        ie_close('code');
-        itext(' and ');
-        ie_open('code');
-          itext('promap');
-        ie_close('code');
-        itext(' methods');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isPromise :: a -> Boolean');
-        ie_close('code');
-        itext(': an object implementing ');
-        ie_open('code');
-          itext('then');
-        ie_close('code');
-        itext(' and ');
-        ie_open('code');
-          itext('catch');
-        ie_close('code');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isSame :: a -> b -> Boolean');
-        ie_close('code');
-        itext(': same value or reference, use ');
-        ie_open('code');
-          itext('equals');
-        ie_close('code');
-        itext(' for value equality');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isSameType :: a -> b -> Boolean');
-        ie_close('code');
-        itext(': Constructor matches a values type, or two values types match');
-      ie_close('li');
-      ie_open('li');
-        ie_open('code');
-          itext('isSemigroup :: a -> Boolean');
-        ie_close('code');
-        itext(': an ADT that provides a ');
+        itext(' in that when the value it provides is ');
         ie_open('code');
           itext('concat');
         ie_close('code');
-        itext(' method');
-      ie_close('li');
-      ie_open('li');
+        itext('ed to any other value, it will return the other value. In the case of ');
         ie_open('code');
-          itext('isSemigroupoid :: a -> Boolean');
+          itext('Last');
         ie_close('code');
-        itext(': an ADT that provides a ');
+        itext(' the result of ');
         ie_open('code');
-          itext('compose');
+          itext('empty');
         ie_close('code');
-        itext(' method');
-      ie_close('li');
-      ie_open('li');
+        itext(' is ');
+        ie_open('a', null, null,
+            'href', '../crocks/Maybe.html#nothing');
+          ie_open('code');
+            itext('Nothing');
+          ie_close('code');
+        ie_close('a');
+        itext('. ');
         ie_open('code');
-          itext('isSetoid :: a -> Boolean');
+          itext('empty');
         ie_close('code');
-        itext(': an ADT that provides an ');
+        itext(' is available on both the Constructor and the Instance for convenience.');
+      ie_close('p');
+      $templateAlias2({code: 'const Last = require(\'crocks/Last\')\nconst { empty } = Last\n\nempty()\n//=> Last( Nothing )\n\nLast(3)\n  .concat(empty())\n//=> Last( Just 3 )\n\nempty()\n  .concat(Last(3))\n//=> Last( Just 3 )', mode: 'javascript'}, null, opt_ijData);
+    ie_close('article');
+    ie_open('article', null, null,
+        'id', 'topic-instance');
+      ie_open('h2');
+        ie_open('a', null, null,
+            'id', 'instance-methods',
+            'href', '#instance-methods');
+          itext('Instance Methods');
+        ie_close('a');
+      ie_close('h2');
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'concat',
+            'href', '#concat');
+          itext('concat');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Last a ~> Last a -> Last a', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
         ie_open('code');
-          itext('equals');
+          itext('concat');
         ie_close('code');
-        itext(' method');
-      ie_close('li');
-      ie_open('li');
+        itext(' is used to combine (2) ');
         ie_open('code');
-          itext('isString :: a -> Boolean');
+          itext('Semigroup');
         ie_close('code');
-        itext(': String');
-      ie_close('li');
-      ie_open('li');
+        itext('s of the same type under an operation specified by the ');
         ie_open('code');
-          itext('isTraversable :: a -> Boolean');
+          itext('Semigroup');
         ie_close('code');
-        itext(': an ADT that provides ');
+        itext('. In the case of ');
         ie_open('code');
-          itext('map');
+          itext('Last');
         ie_close('code');
-        itext(' and ');
+        itext(', it will always provide the last non-empty value. All previous non-empty values will be thrown away and will always result in the last non-empty value.');
+      ie_close('p');
+      $templateAlias2({code: 'const Last = require(\'crocks/Last\')\nconst concat = require(\'crocks/pointfree/concat\')\n\nconst a = Last(\'a\')\nconst b = Last(\'b\')\nconst c = Last(\'c\')\n\na.concat(b)\n//=> Last( Just "b" )\n\nb.concat(a)\n//=> Last( Just "a" )\n\nconcat(c, concat(b, a))\n//=> Last( Just "c" )\n\nconcat(concat(c, b), a)\n//=> Last( Just "c" )\n\nconcat(concat(a, b), c)\n//=> Last( Just "a" )', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'option',
+            'href', '#option');
+          itext('option');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Last a ~> a -> a', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
         ie_open('code');
-          itext('traverse');
+          itext('Last');
         ie_close('code');
-        itext(' methods');
-      ie_close('li');
-    ie_close('ul');
+        itext(' wraps an underlying ');
+        ie_open('a', null, null,
+            'href', '../crocks/Maybe.html');
+          ie_open('code');
+            itext('Maybe');
+          ie_close('code');
+        ie_close('a');
+        itext(' which provides the ability to option out a value in the case of an ');
+        ie_open('a', null, null,
+            'href', '#empty');
+          ie_open('code');
+            itext('empty');
+          ie_close('code');
+        ie_close('a');
+        itext(' instance. Just like ');
+        ie_open('a', null, null,
+            'href', '../crocks/Maybe.html#option');
+          ie_open('code');
+            itext('option');
+          ie_close('code');
+        ie_close('a');
+        itext(' on a ');
+        ie_open('a', null, null,
+            'href', '../crocks/Maybe.html');
+          ie_open('code');
+            itext('Maybe');
+          ie_close('code');
+        ie_close('a');
+        itext(' instance, it takes a value as its argument. When run on an ');
+        ie_open('a', null, null,
+            'href', '#empty');
+          ie_open('code');
+            itext('empty');
+          ie_close('code');
+        ie_close('a');
+        itext(' instance, the provided default will be returned. If ');
+        ie_open('code');
+          itext('option');
+        ie_close('code');
+        itext(' is run on a non-empty instance however, the wrapped value will be extracted not only from the ');
+        ie_open('code');
+          itext('Last');
+        ie_close('code');
+        itext(' but also from the underlying ');
+        ie_open('a', null, null,
+            'href', '../crocks/Maybe.html#just');
+          ie_open('code');
+            itext('Just');
+          ie_close('code');
+        ie_close('a');
+        itext('.');
+      ie_close('p');
+      ie_open('p');
+        itext('If the underlying ');
+        ie_open('a', null, null,
+            'href', '../crocks/Maybe.html');
+          ie_open('code');
+            itext('Maybe');
+          ie_close('code');
+        ie_close('a');
+        itext(' is desired, the ');
+        ie_open('a', null, null,
+            'href', '#valueof');
+          ie_open('code');
+            itext('valueOf');
+          ie_close('code');
+        ie_close('a');
+        itext(' method can be used and will return the ');
+        ie_open('a', null, null,
+            'href', '../crocks/Maybe.html');
+          ie_open('code');
+            itext('Maybe');
+          ie_close('code');
+        ie_close('a');
+        itext(' instead.');
+      ie_close('p');
+      $templateAlias2({code: 'const Last = require(\'crocks/Last\')\n\nconst compose = require(\'crocks/helpers/compose\')\nconst chain = require(\'crocks/pointfree/chain\')\nconst isString = require(\'crocks/predicates/isString\')\nconst mconcatMap = require(\'crocks/helpers/mconcatMap\')\nconst prop = require(\'crocks/Maybe/prop\')\nconst safe = require(\'crocks/Maybe/safe\')\n\n// stringVal :: a -> Maybe String\nconst stringVal = compose(\n  chain(safe(isString)),\n  prop(\'val\')\n)\n\n// lastValid :: [ a ] -> Last String\nconst lastValid =\n  mconcatMap(Last, stringVal)\n\n// good :: [ Object ]\nconst good =\n  [ { val: 23 }, { val: \'string\' }, { val: \'23\' } ]\n\n// bad :: [ Object ]\nconst bad =\n  [ { val: 23 }, { val: null }, {} ]\n\nlastValid(good)\n  .option(\'\')\n//=> "23"\n\nlastValid(bad)\n  .option(\'\')\n//=> ""', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'valueof',
+            'href', '#valueof');
+          itext('valueOf');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Last a ~> () -> Maybe a', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        ie_open('code');
+          itext('valueOf');
+        ie_close('code');
+        itext(' is used on all ');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext(' ');
+        ie_open('code');
+          itext('Monoid');
+        ie_close('code');
+        itext('s as a means of extraction. While the extraction is available, types that implement ');
+        ie_open('code');
+          itext('valueOf');
+        ie_close('code');
+        itext(' are not necessarily a');
+        ie_open('code');
+          itext('Comonad');
+        ie_close('code');
+        itext('. This function is used primarily for convenience for some of the helper functions that ship with ');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext('. Calling ');
+        ie_open('code');
+          itext('valueOf');
+        ie_close('code');
+        itext(' on a ');
+        ie_open('code');
+          itext('Last');
+        ie_close('code');
+        itext(' instance will result in the underlying ');
+        ie_open('a', null, null,
+            'href', '../crocks/Maybe.html');
+          ie_open('code');
+            itext('Maybe');
+          ie_close('code');
+        ie_close('a');
+        itext('.');
+      ie_close('p');
+      $templateAlias2({code: 'const Last = require(\'crocks/Last\')\n\nconst { Nothing } = require(\'crocks/Maybe\')\nconst valueOf = require(\'crocks/pointfree/valueOf\')\n\nvalueOf(Last(56))\n//=> Just 56\n\nvalueOf(Last.empty())\n//=> Nothing\n\nLast(37)\n  .concat(Last(99))\n  .valueOf()\n//=> Just 99\n\nLast(Nothing())\n  .concat(Last.empty())\n  .valueOf()\n//=> Nothing', mode: 'javascript'}, null, opt_ijData);
+    ie_close('article');
+    ie_open('article', null, null,
+        'id', 'topic-transformation');
+      ie_open('h2');
+        ie_open('a', null, null,
+            'id', 'transformation-functions',
+            'href', '#transformation-functions');
+          itext('Transformation Functions');
+        ie_close('a');
+      ie_close('h2');
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'eithertolast',
+            'href', '#eithertolast');
+          itext('eitherToLast');
+        ie_close('a');
+      ie_close('h4');
+      ie_open('p');
+        ie_open('code');
+          itext('crocks/Last/eitherToLast');
+        ie_close('code');
+      ie_close('p');
+      $templateAlias2({code: 'eitherToLast :: Either b a -> Last a\neitherToLast :: (a -> Either c b) -> a -> Last b', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        itext('Used to transform a given ');
+        ie_open('code');
+          itext('Either');
+        ie_close('code');
+        itext(' instance to a ');
+        ie_open('code');
+          itext('Last');
+        ie_close('code');
+        itext('instance, ');
+        ie_open('code');
+          itext('eitherToLast');
+        ie_close('code');
+        itext(' will turn a ');
+        ie_open('code');
+          itext('Right');
+        ie_close('code');
+        itext(' instance into a non-empty ');
+        ie_open('code');
+          itext('Last');
+        ie_close('code');
+        itext(', wrapping the original value contained in the ');
+        ie_open('code');
+          itext('Right');
+        ie_close('code');
+        itext('. All ');
+        ie_open('code');
+          itext('Left');
+        ie_close('code');
+        itext(' instances will map to an ');
+        ie_open('a', null, null,
+            'href', '#empty');
+          ie_open('code');
+            itext('empty');
+          ie_close('code');
+        ie_close('a');
+        itext(' ');
+        ie_open('code');
+          itext('Last');
+        ie_close('code');
+        itext(', mapping the originally contained value to a ');
+        ie_open('code');
+          itext('Unit');
+        ie_close('code');
+        itext('. Values on the ');
+        ie_open('code');
+          itext('Left');
+        ie_close('code');
+        itext(' will be lost and as such this transformation is considered lossy in that regard.');
+      ie_close('p');
+      ie_open('p');
+        itext('Like all ');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext(' transformation functions, ');
+        ie_open('code');
+          itext('eitherToLast');
+        ie_close('code');
+        itext(' has (2) possible signatures and will behave differently when passed either an ');
+        ie_open('code');
+          itext('Either');
+        ie_close('code');
+        itext(' instance or a function that returns an instance of ');
+        ie_open('code');
+          itext('Either');
+        ie_close('code');
+        itext('. When passed the instance, a transformed ');
+        ie_open('code');
+          itext('Last');
+        ie_close('code');
+        itext(' is returned. When passed an ');
+        ie_open('code');
+          itext('Either');
+        ie_close('code');
+        itext(' returning function, a function will be returned that takes a given value and returns a ');
+        ie_open('code');
+          itext('Last');
+        ie_close('code');
+        itext('.');
+      ie_close('p');
+      $templateAlias2({code: 'const Last = require(\'crocks/Last\')\nconst { Left, Right } = require(\'crocks/Either\')\nconst eitherToLast = require(\'crocks/Last/eitherToLast\')\n\nconst concat = require(\'crocks/pointfree/concat\')\nconst constant = require(\'crocks/combinators/constant\')\nconst flip = require(\'crocks/combinators/flip\')\nconst ifElse = require(\'crocks/logic/ifElse\')\nconst isNumber = require(\'crocks/predicates/isNumber\')\nconst mapReduce = require(\'crocks/helpers/mapReduce\')\n\n// someNumber :: a -> Either String Number\nconst someNumber = ifElse(\n  isNumber,\n  Right,\n  constant(Left(\'Nope\'))\n)\n\n// lastNumber :: [ a ] -> Last Number\nconst lastNumber = mapReduce(\n  eitherToLast(someNumber),\n  flip(concat),\n  Last.empty()\n)\n\n// "Bad Times" is lost, mapped to Nothing\neitherToLast(Left(\'Bad Times\'))\n//=> Last( Nothing )\n\neitherToLast(Right(\'correct\'))\n//=> Last( Just "correct" )\n\nlastNumber([ \'string\', null, 34, 76 ])\n//=> Last( Just 76 )\n\nlastNumber([ \'string\', null, true ])\n//=> Last( Nothing )', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'firsttolast',
+            'href', '#firsttolast');
+          itext('firstToLast');
+        ie_close('a');
+      ie_close('h4');
+      ie_open('p');
+        ie_open('code');
+          itext('crocks/Last/firstToLast');
+        ie_close('code');
+      ie_close('p');
+      $templateAlias2({code: 'firstToLast :: First a -> Last a\nfirstToLast :: (a -> First b) -> a -> Last b', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        itext('Used to transform a given ');
+        ie_open('code');
+          itext('First');
+        ie_close('code');
+        itext(' instance to a ');
+        ie_open('code');
+          itext('Last');
+        ie_close('code');
+        itext(' instance, ');
+        ie_open('code');
+          itext('firstToLast');
+        ie_close('code');
+        itext('will turn a non-empty instance into a non-empty ');
+        ie_open('code');
+          itext('Last');
+        ie_close('code');
+        itext(' wrapping the original value contained within the ');
+        ie_open('code');
+          itext('First');
+        ie_close('code');
+        itext('. All ');
+        ie_open('a', null, null,
+            'href', '#empty');
+          ie_open('code');
+            itext('empty');
+          ie_close('code');
+        ie_close('a');
+        itext(' instances will map to an ');
+        ie_open('a', null, null,
+            'href', '#empty');
+          ie_open('code');
+            itext('empty');
+          ie_close('code');
+        ie_close('a');
+        itext(' ');
+        ie_open('code');
+          itext('Last');
+        ie_close('code');
+        itext('.');
+      ie_close('p');
+      ie_open('p');
+        itext('Like all ');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext(' transformation functions, ');
+        ie_open('code');
+          itext('firstToLast');
+        ie_close('code');
+        itext(' has (2) possible signatures and will behave differently when passed either a ');
+        ie_open('code');
+          itext('First');
+        ie_close('code');
+        itext(' instance or a function that returns an instance of ');
+        ie_open('code');
+          itext('First');
+        ie_close('code');
+        itext('. When passed the instance, a transformed ');
+        ie_open('code');
+          itext('Last');
+        ie_close('code');
+        itext(' is returned. When passed a ');
+        ie_open('code');
+          itext('First');
+        ie_close('code');
+        itext(' returning function, a function will be returned that takes a given value and returns a ');
+        ie_open('code');
+          itext('Last');
+        ie_close('code');
+        itext('.');
+      ie_close('p');
+      $templateAlias2({code: 'const Last  = require(\'crocks/Last\')\nconst First = require(\'crocks/First\')\nconst firstToLast = require(\'crocks/Last/firstToLast\')\n\nconst isString = require(\'crocks/predicates/isString\')\nconst mconcatMap = require(\'crocks/helpers/mconcatMap\')\nconst safe = require(\'crocks/Maybe/safe\')\n\n// firstString :: [ a ] -> First String\nconst firstString =\n  mconcatMap(First, safe(isString))\n\n// unfixFirstString :: [ a ] -> Last String\nconst unfixFirstString =\n  firstToLast(firstString)\n\nfirstToLast(First.empty())\n//=> Last( Nothing )\n\nfirstToLast(First(false))\n//=> Last( Just false )\n\nunfixFirstString([ \'one\', 2, \'Three\', 4 ])\n//=> Last( Just "one" )\n\nunfixFirstString([ \'one\', 2, \'Three\', 4 ])\n  .concat(Last(\'another string\'))\n//=> Last( Just "another string" )\n\nunfixFirstString([ 1, 2, 3, 4 ])\n  .concat(Last(\'Last String\'))\n//=> Last( Just "Last String" )', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'maybetolast',
+            'href', '#maybetolast');
+          itext('maybeToLast');
+        ie_close('a');
+      ie_close('h4');
+      ie_open('p');
+        ie_open('code');
+          itext('crocks/Last/maybeToLast');
+        ie_close('code');
+      ie_close('p');
+      $templateAlias2({code: 'maybeToLast :: Maybe a -> Last a\nmaybeToLast :: (a -> Maybe b) -> a -> Last b', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        itext('Used to transform a given ');
+        ie_open('a', null, null,
+            'href', '../crocks/Maybe.html');
+          ie_open('code');
+            itext('Maybe');
+          ie_close('code');
+        ie_close('a');
+        itext(' instance to a ');
+        ie_open('code');
+          itext('Last');
+        ie_close('code');
+        itext(' instance, ');
+        ie_open('code');
+          itext('maybeToLast');
+        ie_close('code');
+        itext('will turn a ');
+        ie_open('a', null, null,
+            'href', '../crocks/Maybe.html#just');
+          ie_open('code');
+            itext('Just');
+          ie_close('code');
+        ie_close('a');
+        itext(' into a non-empty ');
+        ie_open('code');
+          itext('Last');
+        ie_close('code');
+        itext(' instance, wrapping the original value contained within the ');
+        ie_open('code');
+          itext('Last');
+        ie_close('code');
+        itext('. All ');
+        ie_open('a', null, null,
+            'href', '../crocks/Maybe.html#nothing');
+          ie_open('code');
+            itext('Nothing');
+          ie_close('code');
+        ie_close('a');
+        itext(' instances will map to an ');
+        ie_open('a', null, null,
+            'href', '#empty');
+          ie_open('code');
+            itext('empty');
+          ie_close('code');
+        ie_close('a');
+        itext(' ');
+        ie_open('code');
+          itext('Last');
+        ie_close('code');
+        itext(' instance.');
+      ie_close('p');
+      ie_open('p');
+        itext('This function is available mostly for completion sake, as ');
+        ie_open('code');
+          itext('Last');
+        ie_close('code');
+        itext(' can always take a ');
+        ie_open('a', null, null,
+            'href', '../crocks/Maybe.html');
+          ie_open('code');
+            itext('Maybe');
+          ie_close('code');
+        ie_close('a');
+        itext(' as its argument during construction. So while there is not a real need for this to be used for transforming instances, it can come in handy for lifting ');
+        ie_open('a', null, null,
+            'href', '../crocks/Maybe.html');
+          ie_open('code');
+            itext('Maybe');
+          ie_close('code');
+        ie_close('a');
+        itext(' returning functions.');
+      ie_close('p');
+      ie_open('p');
+        itext('Like all ');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext(' transformation functions, ');
+        ie_open('code');
+          itext('maybeToLast');
+        ie_close('code');
+        itext(' has (2) possible signatures and will behave differently when passed either a ');
+        ie_open('a', null, null,
+            'href', '../crocks/Maybe.html');
+          ie_open('code');
+            itext('Maybe');
+          ie_close('code');
+        ie_close('a');
+        itext(' instance or a function that returns an instance of ');
+        ie_open('a', null, null,
+            'href', '../crocks/Maybe.html');
+          ie_open('code');
+            itext('Maybe');
+          ie_close('code');
+        ie_close('a');
+        itext('. When passed the instance, a transformed ');
+        ie_open('code');
+          itext('Last');
+        ie_close('code');
+        itext(' is returned. When passed a ');
+        ie_open('a', null, null,
+            'href', '../crocks/Maybe.html');
+          ie_open('code');
+            itext('Maybe');
+          ie_close('code');
+        ie_close('a');
+        itext(' returning function, a function will be returned that takes a given value and returns a ');
+        ie_open('code');
+          itext('Last');
+        ie_close('code');
+        itext('.');
+      ie_close('p');
+      $templateAlias2({code: 'const Last = require(\'crocks/Last\')\nconst { Nothing, Just } = require(\'crocks/Maybe\')\nconst maybeToLast = require(\'crocks/Last/maybeToLast\')\n\nconst chain = require(\'crocks/pointfree/chain\')\nconst compose = require(\'crocks/helpers/compose\')\nconst isNumber = require(\'crocks/predicates/isNumber\')\nconst prop = require(\'crocks/Maybe/prop\')\nconst safe = require(\'crocks/Maybe/safe\')\n\n// numVal :: a -> Maybe Number\nconst numVal = compose(\n  chain(safe(isNumber)),\n  prop(\'val\')\n)\n\n// lastNumVal :: a -> Last Number\nconst lastNumVal =\n  maybeToLast(numVal)\n\nmaybeToLast(Just(99))\n//=> Last( Just 99 )\n\nmaybeToLast(Nothing())\n//=> Last( Nothing )\n\nLast(Just(99))\n//=> Last( Just 99 )\n\nLast(Nothing())\n//=> Last( Nothing )\n\nLast(Just(80))\n  .concat(lastNumVal({ val: 97 }))\n//=> Last( Just 97 )\n\nlastNumVal({ val: 97 })\n  .concat(Last(80))\n//=> Last( Just 80 )\n\nlastNumVal(null)\n  .concat(Last(80))\n//=> Last( Just 80 )', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'resulttolast',
+            'href', '#resulttolast');
+          itext('resultToLast');
+        ie_close('a');
+      ie_close('h4');
+      ie_open('p');
+        ie_open('code');
+          itext('crocks/Last/resultToLast');
+        ie_close('code');
+      ie_close('p');
+      $templateAlias2({code: 'resultToLast :: Result e a -> Last a\nresultToLast :: (a -> Result e b) -> a -> Last b', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        itext('Used to transform a given ');
+        ie_open('code');
+          itext('Result');
+        ie_close('code');
+        itext(' instance to a ');
+        ie_open('code');
+          itext('Last');
+        ie_close('code');
+        itext(' instance,');
+        ie_open('code');
+          itext('resultToLast');
+        ie_close('code');
+        itext(' will turn an ');
+        ie_open('code');
+          itext('Ok');
+        ie_close('code');
+        itext(' instance into a non-empty ');
+        ie_open('code');
+          itext('Last');
+        ie_close('code');
+        itext(', wrapping the original value contained in the ');
+        ie_open('code');
+          itext('Ok');
+        ie_close('code');
+        itext('. All ');
+        ie_open('code');
+          itext('Err');
+        ie_close('code');
+        itext(' instances will map to an ');
+        ie_open('a', null, null,
+            'href', '#empty');
+          ie_open('code');
+            itext('empty');
+          ie_close('code');
+        ie_close('a');
+        itext(' ');
+        ie_open('code');
+          itext('Last');
+        ie_close('code');
+        itext(', mapping the originally contained value to a ');
+        ie_open('code');
+          itext('Unit');
+        ie_close('code');
+        itext('. Values on the ');
+        ie_open('code');
+          itext('Err');
+        ie_close('code');
+        itext(' will be lost and as such this transformation is considered lossy in that regard.');
+      ie_close('p');
+      ie_open('p');
+        itext('Like all ');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext(' transformation functions, ');
+        ie_open('code');
+          itext('resultToLast');
+        ie_close('code');
+        itext(' has (2) possible signatures and will behave differently when passed either an ');
+        ie_open('code');
+          itext('Result');
+        ie_close('code');
+        itext(' instance or a function that returns an instance of ');
+        ie_open('code');
+          itext('Result');
+        ie_close('code');
+        itext('. When passed the instance, a transformed ');
+        ie_open('code');
+          itext('Last');
+        ie_close('code');
+        itext(' is returned. When passed a ');
+        ie_open('code');
+          itext('Result');
+        ie_close('code');
+        itext(' returning function, a function will be returned that takes a given value and returns a ');
+        ie_open('code');
+          itext('Last');
+        ie_close('code');
+        itext('.');
+      ie_close('p');
+      $templateAlias2({code: 'const Last = require(\'crocks/Last\')\nconst { Err, Ok } = require(\'crocks/Result\')\nconst resultToLast = require(\'crocks/Last/resultToLast\')\n\nconst isNumber = require(\'crocks/predicates/isNumber\')\nconst tryCatch = require(\'crocks/Result/tryCatch\')\n\nfunction onlyNums(x) {\n  if(!isNumber(x)) {\n    throw new Error(\'something amiss\')\n  }\n  return x\n}\n\n// lastNum :: a -> Last Number\nconst lastNum =\n  resultToLast(tryCatch(onlyNums))\n\n// "this is bad" is lost, mapped to Nothing\nresultToLast(Err(\'this is bad\'))\n//=> Last( Nothing )\n\nresultToLast(Ok(\'this is great\'))\n//=> Last( Just "this is great" )\n\nlastNum(90)\n  .concat(Last(0))\n//=> Last( Just 0 )\n\nlastNum(null)\n  .concat(Last(0))\n//=> Last( Just 0 )', mode: 'javascript'}, null, opt_ijData);
+    ie_close('article');
     ie_open('input', null, null,
         'type', 'hidden',
         'value', opt_data.page.title);
@@ -28889,11 +29257,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'value', opt_data.site.title);
     ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({content: param677}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param2048}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'fFqoF.render';
+  $render.soyTemplateName = 'PPWgl.render';
 }
 
 exports.render.params = ["page","site"];
@@ -28903,24 +29271,14 @@ return exports;
 
 });
 
-class fFqoF extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(fFqoF, templates);
+class PPWgl extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(PPWgl, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
 
 
 /***/ }),
-/* 231 */,
-/* 232 */,
-/* 233 */,
-/* 234 */,
-/* 235 */,
-/* 236 */,
-/* 237 */,
-/* 238 */,
-/* 239 */,
-/* 240 */,
 /* 241 */,
 /* 242 */,
 /* 243 */,
@@ -28937,7 +29295,16 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(fFqoF, templates);
 /* 254 */,
 /* 255 */,
 /* 256 */,
-/* 257 */
+/* 257 */,
+/* 258 */,
+/* 259 */,
+/* 260 */,
+/* 261 */,
+/* 262 */,
+/* 263 */,
+/* 264 */,
+/* 265 */,
+/* 266 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28973,9 +29340,9 @@ __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _predicateFunctionsSoy = __webpack_require__(230);
+var _LastSoy = __webpack_require__(240);
 
-var _predicateFunctionsSoy2 = _interopRequireDefault(_predicateFunctionsSoy);
+var _LastSoy2 = _interopRequireDefault(_LastSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28985,23 +29352,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var fFqoF = function (_Component) {
-  _inherits(fFqoF, _Component);
+var PPWgl = function (_Component) {
+  _inherits(PPWgl, _Component);
 
-  function fFqoF() {
-    _classCallCheck(this, fFqoF);
+  function PPWgl() {
+    _classCallCheck(this, PPWgl);
 
-    return _possibleConstructorReturn(this, (fFqoF.__proto__ || Object.getPrototypeOf(fFqoF)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (PPWgl.__proto__ || Object.getPrototypeOf(PPWgl)).apply(this, arguments));
   }
 
-  return fFqoF;
+  return PPWgl;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(fFqoF, _predicateFunctionsSoy2.default);
+_metalSoy2.default.register(PPWgl, _LastSoy2.default);
 
-exports.default = fFqoF;
+exports.default = PPWgl;
 
 /***/ })
-],[257]);
+],[266]);

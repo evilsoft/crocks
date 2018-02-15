@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([5,26,27,28],[
+webpackJsonppageComponent([4,29,30,31],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -28368,12 +28368,16 @@ exports.default = parseFromAnchor;
 /* 234 */,
 /* 235 */,
 /* 236 */,
-/* 237 */
+/* 237 */,
+/* 238 */,
+/* 239 */,
+/* 240 */,
+/* 241 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RciNO", function() { return RciNO; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "qymVH", function() { return qymVH; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28385,15 +28389,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var templates;
 goog.loadModule(function(exports) {
 
-// This file was automatically generated from Endo.soy.
+// This file was automatically generated from Prod.soy.
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace RciNO.
+ * @fileoverview Templates in namespace qymVH.
  * @public
  */
 
-goog.module('RciNO.incrementaldom');
+goog.module('qymVH.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28427,41 +28431,23 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var param1754 = function() {
-    $templateAlias2({code: 'Endo a', mode: 'haskell'}, null, opt_ijData);
+  var param2146 = function() {
+    $templateAlias2({code: 'Prod Number', mode: 'haskell'}, null, opt_ijData);
     ie_open('p');
       ie_open('code');
-        itext('Endo');
+        itext('Prod');
       ie_close('code');
       itext(' is a ');
       ie_open('code');
         itext('Monoid');
       ie_close('code');
-      itext(' that will combine (2) functions that have matching domains and codomains (endofunctions) under function composition. Due to the nature of ');
+      itext(' that will combine (2) ');
       ie_open('code');
-        itext('Endo');
+        itext('Number');
       ie_close('code');
-      itext(' wrapping a function, the underlying value can either be extracted using ');
-      ie_open('a', null, null,
-          'href', '#valueof');
-        ie_open('code');
-          itext('valueOf');
-        ie_close('code');
-      ie_close('a');
-      itext(' like any other ');
-      ie_open('code');
-        itext('Monoid');
-      ie_close('code');
-      itext(' or can be executed directly using ');
-      ie_open('a', null, null,
-          'href', '#runWith');
-        ie_open('code');
-          itext('runWith');
-        ie_close('code');
-      ie_close('a');
-      itext(', supplying the input.');
+      itext('s under multiplication.');
     ie_close('p');
-    $templateAlias2({code: 'const Endo = require(\'crocks/Endo\')\n\nconst curry = require(\'crocks/helpers/curry\')\nconst mconcat = require(\'crocks/helpers/mconcat\')\nconst valueOf = require(\'crocks/pointfree/valueOf\')\n\n// add :: Number -> Number -> Number\nconst add =\n  x => y => x + y\n\n// multiply :: Number -> Number -> Number\nconst multiply =\n  x => y => x * y\n\n// runEndo :: Endo a -> a -> a\nconst runEndo =\n  curry(valueOf)\n\n// flow :: Endo Number\nconst addAndDouble =\n  Endo(add(10))\n    .concat(Endo(multiply(2)))\n\n// always10 :: Endo Number\nconst always10 =\n  mconcat(Endo, [ add(100), multiply(0), add(10) ])\n\nrunEndo(addAndDouble, 5)\n//=> 30\n\nalways10\n  .runWith(75)\n//=> 10', mode: 'javascript'}, null, opt_ijData);
+    $templateAlias2({code: 'const Prod = require(\'crocks/Prod\')\nconst compose = require(\'crocks/helpers/compose\')\nconst concat = require(\'crocks/pointfree/concat\')\n\nconst emptyProd = Prod.empty()\nconst tenProd = Prod(10)\nconst hundredProd = Prod(100)\n\nemptyProd\n  .concat(emptyProd)\n//=> Prod 1\n\ntenProd\n  .concat(hundredProd)\n//=> Prod 1000\n\n// prodBy2 :: Number -> Prod\nconst double =\n  compose(concat(Prod(2)), Prod)\n\ndouble(4)\n//=> Prod 8\n\ndouble(11)\n//=> Prod 22', mode: 'javascript'}, null, opt_ijData);
     ie_open('article', null, null,
         'id', 'topic-implements');
       ie_open('h2');
@@ -28490,14 +28476,14 @@ function $render(opt_data, opt_ignored, opt_ijData) {
           itext('Constructor Methods');
         ie_close('a');
       ie_close('h2');
-      ie_open('h4');
+      ie_open('h3');
         ie_open('a', null, null,
             'id', 'empty',
             'href', '#empty');
           itext('empty');
         ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Endo.empty :: () -> Endo a', mode: 'haskell'}, null, opt_ijData);
+      ie_close('h3');
+      $templateAlias2({code: 'Prod.empty :: () -> Prod', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
         ie_open('code');
           itext('empty');
@@ -28510,56 +28496,25 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_open('code');
           itext('concat');
         ie_close('code');
-        itext('ed to any other value, it will return the other value. In the case of ');
+        itext('ed to object other value, it will return the other value. In the case of ');
         ie_open('code');
-          itext('Endo');
+          itext('Prod');
         ie_close('code');
         itext(' the result of ');
         ie_open('code');
           itext('empty');
         ie_close('code');
-        itext(' is the identity function, which echos its input. ');
+        itext(' is ');
+        ie_open('code');
+          itext('1');
+        ie_close('code');
+        itext('. ');
         ie_open('code');
           itext('empty');
         ie_close('code');
         itext(' is available on both the Constructor and the Instance for convenience.');
       ie_close('p');
-      $templateAlias2({code: 'const Endo = require(\'crocks/Endo\')\n\nconst runWith = require(\'crocks/pointfree/runWith\')\n\n// empty :: Endo a\nconst empty = Endo.empty()\n\n// toUpper :: Endo String\nconst toUpper =\n  Endo(x => x.toUpperCase())\n\n// runNice :: Endo String -> String\nconst runNice =\n  runWith(\'nice\')\n\nrunNice(empty.concat(toUpper))\n//=> "NICE"\n\nrunNice(toUpper.concat(empty))\n//=> "NICE"', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'type',
-            'href', '#type');
-          itext('type');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Endo.type :: () -> String', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        ie_open('code');
-          itext('type');
-        ie_close('code');
-        itext(' provides a string representation of the type name for a given type in');
-        ie_open('code');
-          itext('crocks');
-        ie_close('code');
-        itext('. While it is used mostly internally for law validation, it can be useful to the end user for debugging and building out custom types based on the standard ');
-        ie_open('code');
-          itext('crocks');
-        ie_close('code');
-        itext(' types. While type comparisons can easily be done manually by calling ');
-        ie_open('code');
-          itext('type');
-        ie_close('code');
-        itext(' on a given type, using the ');
-        ie_open('code');
-          itext('isSameType');
-        ie_close('code');
-        itext(' function hides much of the boilerplate. ');
-        ie_open('code');
-          itext('type');
-        ie_close('code');
-        itext(' is available on both the Constructor and the Instance for convenience.');
-      ie_close('p');
-      $templateAlias2({code: 'const Endo = require(\'crocks/Endo\')\nconst Maybe = require(\'crocks/Maybe\')\n\nconst constant = require(\'crocks/combinators/constant\')\nconst identity = require(\'crocks/combinators/identity\')\nconst isSameType = require(\'crocks/predicates/isSameType\')\n\nEndo.type() //=>  "Endo"\n\nisSameType(Endo, Endo(identity))              //=> true\nisSameType(Endo(identity), Endo(constant(3))) //=> true\nisSameType(Endo(identity), Maybe)             //=> false', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'const Prod = require(\'crocks/Prod\')\n\nProd.empty()\n//=> Prod 1\n\nProd.empty()\n  .concat(Prod.empty())\n//=> Prod 1\n\nProd(4)\n  .concat(Prod.empty())\n//=> Prod 4\n\nProd.empty()\n  .concat(Prod(4))\n//=> Prod 4', mode: 'javascript'}, null, opt_ijData);
     ie_close('article');
     ie_open('article', null, null,
         'id', 'topic-instance');
@@ -28570,14 +28525,14 @@ function $render(opt_data, opt_ignored, opt_ijData) {
           itext('Instance Methods');
         ie_close('a');
       ie_close('h2');
-      ie_open('h4');
+      ie_open('h3');
         ie_open('a', null, null,
             'id', 'concat',
             'href', '#concat');
           itext('concat');
         ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Endo a ~> Endo a -> Endo a', mode: 'haskell'}, null, opt_ijData);
+      ie_close('h3');
+      $templateAlias2({code: 'Prod ~> Prod -> Prod', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
         ie_open('code');
           itext('concat');
@@ -28592,19 +28547,27 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_close('code');
         itext('. In the case of ');
         ie_open('code');
-          itext('Endo');
+          itext('Prod');
         ie_close('code');
-        itext(', it will combine (2) endofunctions under function composition.');
+        itext(', ');
+        ie_open('code');
+          itext('concat');
+        ie_close('code');
+        itext(' will multiply the (2) ');
+        ie_open('code');
+          itext('Number');
+        ie_close('code');
+        itext('s.');
       ie_close('p');
-      $templateAlias2({code: 'const Endo = require(\'crocks/Endo\')\n\nconst assoc = require(\'crocks/helpers/assoc\')\nconst mapProps = require(\'crocks/helpers/mapProps\')\nconst objOf = require(\'crocks/helpers/objOf\')\n\n// inc :: Number -> Number\nconst inc =\n  x => x + 1\n\n// incValue :: Endo Object\nconst incValue =\n  Endo(mapProps({ value: inc }))\n\n// addDone :: Endo Object\nconst addDone =\n  Endo(assoc(\'done\', true))\n\n// finish :: Endo Object\nconst packResults =\n  Endo(objOf(\'results\'))\n\n// finish :: Endo Object\nconst finish =\n  incValue.concat(addDone)\n\nfinish.runWith({ value: 99 })\n//=> { value: 100, done: true }\n\nfinish\n  .concat(packResults)\n  .runWith({ value: 99 })\n//=> { results: { value: 100, done: true } }', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
+      $templateAlias2({code: 'const Prod = require(\'crocks/Prod\')\n\nProd(5)\n  .concat(Prod(4))\n//=> Prod 20\n\nProd(45)\n  .concat(Prod(32))\n//=> Prod 1440\n\nProd(1000)\n  .concat(Prod(Infinity))\n//=> Prod Infinity\n\nProd.empty()\n  .concat(Prod(3))\n//=> Prod 3', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h3');
         ie_open('a', null, null,
             'id', 'valueof',
             'href', '#valueof');
           itext('valueOf');
         ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Endo a ~> () -> (a -> a)', mode: 'haskell'}, null, opt_ijData);
+      ie_close('h3');
+      $templateAlias2({code: 'Prod ~> () -> Number', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
         ie_open('code');
           itext('valueOf');
@@ -28621,7 +28584,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_open('code');
           itext('valueOf');
         ie_close('code');
-        itext(' are not necessarily a');
+        itext(' are not necessarily a ');
         ie_open('code');
           itext('Comonad');
         ie_close('code');
@@ -28633,40 +28596,17 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_open('code');
           itext('valueOf');
         ie_close('code');
-        itext(' on an ');
+        itext(' on a ');
         ie_open('code');
-          itext('Endo');
+          itext('Prod');
         ie_close('code');
-        itext(' instance will result in the underlying endofunction.');
+        itext('instance will result in the underlying ');
+        ie_open('code');
+          itext('Number');
+        ie_close('code');
+        itext('.');
       ie_close('p');
-      $templateAlias2({code: 'const Endo = require(\'crocks/Endo\')\n\nconst filter = require(\'crocks/pointfree/filter\')\nconst map = require(\'crocks/pointfree/map\')\nconst mconcat = require(\'crocks/helpers/mconcat\')\n\n// lt10 :: [ Number ] -> [ Number ]\nconst lt10 =\n  filter(x => x < 10)\n\n// double :: [ Number ] -> [ Number ]\nconst double =\n  map(x => x * 2)\n\n// buildEndo :: [ (a -> a) ] -> Endo a\nconst buildEndo =\n  mconcat(Endo)\n\n// fn :: [ Number ] -> [ Number ]\nconst fn =\n  buildEndo([ lt10, double ])\n    .valueOf()\n\nfn([ 12, 5, 3, 90 ])\n//=> [ 10, 6 ]\n\nfn([])\n//=> []', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'runwith',
-            'href', '#runwith');
-          itext('runWith');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Endo a ~> a -> a', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        ie_open('code');
-          itext('Endo');
-        ie_close('code');
-        itext(' wraps a function and as such, its underlying endofunction can be run while inside of an ');
-        ie_open('code');
-          itext('Endo');
-        ie_close('code');
-        itext(' by calling ');
-        ie_open('code');
-          itext('runWith');
-        ie_close('code');
-        itext('. Providing a valid value of the same type required by the function, ');
-        ie_open('code');
-          itext('runWith');
-        ie_close('code');
-        itext(' will execute the underlying function and return the result.');
-      ie_close('p');
-      $templateAlias2({code: 'const Endo = require(\'crocks/Endo\')\n\nconst filter = require(\'crocks/pointfree/filter\')\nconst map = require(\'crocks/pointfree/map\')\nconst mconcat = require(\'crocks/helpers/mconcat\')\n\n// lt10 :: [ Number ] -> [ Number ]\nconst lt10 =\n  filter(x => x < 10)\n\n// double :: [ Number ] -> [ Number ]\nconst double =\n  map(x => x * 2)\n\n// buildEndo :: [ (a -> a) ] -> Endo a\nconst flow =\n  mconcat(Endo, [ lt10, double ])\n\nflow\n  .runWith([ 12, 5, 3, 90 ])\n//=> [ 10, 6 ]\n\nflow\n  .runWith([])\n//=> []', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'const Prod = require(\'crocks/Prod\')\n\nProd.empty()\n  .valueOf()\n//=> 1\n\nProd(4)\n  .valueOf()\n//=> 4\n\nProd(34)\n  .concat(21)\n  .valueOf()\n//=> 714', mode: 'javascript'}, null, opt_ijData);
     ie_close('article');
     ie_open('input', null, null,
         'type', 'hidden',
@@ -28677,11 +28617,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'value', opt_data.site.title);
     ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({content: param1754}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param2146}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'RciNO.render';
+  $render.soyTemplateName = 'qymVH.render';
 }
 
 exports.render.params = ["page","site"];
@@ -28691,18 +28631,14 @@ return exports;
 
 });
 
-class RciNO extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(RciNO, templates);
+class qymVH extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(qymVH, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
 
 
 /***/ }),
-/* 238 */,
-/* 239 */,
-/* 240 */,
-/* 241 */,
 /* 242 */,
 /* 243 */,
 /* 244 */,
@@ -28724,7 +28660,15 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(RciNO, templates);
 /* 260 */,
 /* 261 */,
 /* 262 */,
-/* 263 */
+/* 263 */,
+/* 264 */,
+/* 265 */,
+/* 266 */,
+/* 267 */,
+/* 268 */,
+/* 269 */,
+/* 270 */,
+/* 271 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28760,9 +28704,9 @@ __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _EndoSoy = __webpack_require__(237);
+var _ProdSoy = __webpack_require__(241);
 
-var _EndoSoy2 = _interopRequireDefault(_EndoSoy);
+var _ProdSoy2 = _interopRequireDefault(_ProdSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28772,23 +28716,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var RciNO = function (_Component) {
-  _inherits(RciNO, _Component);
+var qymVH = function (_Component) {
+  _inherits(qymVH, _Component);
 
-  function RciNO() {
-    _classCallCheck(this, RciNO);
+  function qymVH() {
+    _classCallCheck(this, qymVH);
 
-    return _possibleConstructorReturn(this, (RciNO.__proto__ || Object.getPrototypeOf(RciNO)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (qymVH.__proto__ || Object.getPrototypeOf(qymVH)).apply(this, arguments));
   }
 
-  return RciNO;
+  return qymVH;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(RciNO, _EndoSoy2.default);
+_metalSoy2.default.register(qymVH, _ProdSoy2.default);
 
-exports.default = RciNO;
+exports.default = qymVH;
 
 /***/ })
-],[263]);
+],[271]);

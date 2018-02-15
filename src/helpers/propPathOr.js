@@ -17,7 +17,7 @@ function propPathOr(def, keys, target) {
     return def
   }
 
-  return keys.reduce((target, key) => {
+  const value = keys.reduce((target, key) => {
     if (isNil(target)) {
       return target
     }
@@ -27,7 +27,9 @@ function propPathOr(def, keys, target) {
     }
 
     return target[key]
-  }, target) || def
+  }, target)
+
+  return isNil(value) ? def : value
 }
 
 module.exports = curry(propPathOr)

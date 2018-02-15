@@ -70,6 +70,7 @@ test('propPathOr function', t => {
   const objDefault =  { b: 1 }
 
   t.equals(propPathOr(objDefault, [ 'a', 'b' ], { c: { b: 2 } }), objDefault, 'returns the default value when default is an object that has the same property as a nested property in target')
+  t.equals(propPathOr(1, [ 'a' ], { a: 0 } ), 0, 'returns found falsy value')
 
   t.end()
 })

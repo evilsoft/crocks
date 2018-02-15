@@ -2,8 +2,9 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const _implements = require('../core/implements')
-const _type = require('../core/types').type('Reader')()
 const _inspect = require('../core/inspect')
+const _type = require('../core/types').type('Reader')()
+const fl = require('../core/flNames')
 
 const curry = require('../core/curry')
 const isFunction = require('../core/isFunction')
@@ -112,9 +113,9 @@ function _ReaderT(Monad) {
     return {
       inspect, toString: inspect, type,
       runWith, of, map, ap, chain,
-      'fantasy-land/of': of,
-      'fantasy-land/map': map,
-      'fantasy-land/chain': chain,
+      [fl.of]: of,
+      [fl.map]: map,
+      [fl.chain]: chain,
       constructor: ReaderT
     }
   }
@@ -125,7 +126,7 @@ function _ReaderT(Monad) {
   ReaderT.lift = lift
   ReaderT.liftFn = curry(liftFn)
 
-  ReaderT['fantasy-land/of'] = of
+  ReaderT[fl.of] = of
 
   ReaderT['@@implements'] = _implements(
     [ 'ap', 'chain', 'map', 'of' ]

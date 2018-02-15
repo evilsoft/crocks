@@ -7,6 +7,7 @@ const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
 const type = require('../core/types').type('Reader')
 const _type = require('../core/types').typeFn(type(), VERSION)
+const fl = require('../core/flNames')
 
 const compose = require('../core/compose')
 const isFunction = require('../core/isFunction')
@@ -81,10 +82,10 @@ function Reader(runWith) {
   return {
     inspect, toString: inspect, runWith,
     type, map, ap, chain, of,
-    'fantasy-land/of': of,
-    'fantasy-land/map': map,
-    'fantasy-land/chain': chain,
-    '@@type': _type,
+    [fl.of]: of,
+    [fl.map]: map,
+    [fl.chain]: chain,
+    ['@@type']: _type,
     constructor: Reader
   }
 }
@@ -93,7 +94,7 @@ Reader.of = _of
 Reader.ask = ask
 Reader.type = type
 
-Reader['fantasy-land/of'] = _of
+Reader[fl.of] = _of
 Reader['@@type'] = _type
 
 Reader['@@implements'] = _implements(

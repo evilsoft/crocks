@@ -7,6 +7,7 @@ const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
 const type = require('../core/types').type('Arrow')
 const _type = require('../core/types').typeFn(type(), VERSION)
+const fl = require('../core/flNames')
 
 const isFunction = require('../core/isFunction')
 const isSameType = require('../core/isSameType')
@@ -91,12 +92,12 @@ function Arrow(runWith) {
     inspect, toString: inspect, type,
     runWith, id, compose, map, contramap,
     promap, first, second, both,
-    'fantasy-land/id': id,
-    'fantasy-land/compose': compose,
-    'fantasy-land/contramap': contramap,
-    'fantasy-land/map': map,
-    'fantasy-land/promap': promap,
-    '@@type': _type,
+    [fl.id]: id,
+    [fl.compose]: compose,
+    [fl.contramap]: contramap,
+    [fl.map]: map,
+    [fl.promap]: promap,
+    ['@@type']: _type,
     constructor: Arrow
   }
 }
@@ -104,7 +105,7 @@ function Arrow(runWith) {
 Arrow.id = _id
 Arrow.type = type
 
-Arrow['fantasy-land/id'] = _id
+Arrow[fl.id] = _id
 Arrow['@@type'] = _type
 
 Arrow['@@implements'] = _implements(

@@ -7,6 +7,7 @@ const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
 const type = require('../core/types').type('Pred')
 const _type = require('../core/types').typeFn(type(), VERSION)
+const fl = require('../core/flNames')
 
 const compose = require('../core/compose')
 const isFunction = require('../core/isFunction')
@@ -51,10 +52,10 @@ function Pred(pred) {
   return {
     inspect, toString: inspect, runWith,
     type, valueOf, empty, concat, contramap,
-    'fantasy-land/empty': empty,
-    'fantasy-land/concat': concat,
-    'fantasy-land/contramap': contramap,
-    '@@type': _type,
+    [fl.empty]: empty,
+    [fl.concat]: concat,
+    [fl.contramap]: contramap,
+    ['@@type']: _type,
     constructor: Pred
   }
 }
@@ -62,7 +63,7 @@ function Pred(pred) {
 Pred.empty = _empty
 Pred.type = type
 
-Pred['fantasy-land/empty'] = _empty
+Pred[fl.empty] = _empty
 Pred['@@type'] = _type
 
 Pred['@@implements'] = _implements(

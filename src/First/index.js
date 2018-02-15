@@ -7,6 +7,7 @@ const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
 const type = require('../core/types').type('First')
 const _type = require('../core/types').typeFn(type(), VERSION)
+const fl = require('../core/flNames')
 
 const isSameType = require('../core/isSameType')
 
@@ -52,9 +53,9 @@ function First(x) {
     inspect, toString: inspect,
     concat, empty, option, type,
     valueOf,
-    'fantasy-land/empty': _empty,
-    'fantasy-land/concat': concat,
-    '@@type': _type,
+    [fl.empty]: _empty,
+    [fl.concat]: concat,
+    ['@@type']: _type,
     constructor: First
   }
 }
@@ -66,7 +67,7 @@ First['@@implements'] = _implements(
 First.empty = _empty
 First.type = type
 
-First['fantasy-land/empty'] = _empty
+First[fl.empty] = _empty
 First['@@type'] = _type
 
 module.exports = First

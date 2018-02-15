@@ -7,6 +7,7 @@ const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
 const type = require('../core/types').type('State')
 const _type = require('../core/types').typeFn(type(), VERSION)
+const fl = require('../core/flNames')
 
 const Pair = require('../core/Pair')
 const Unit = require('../core/Unit')
@@ -118,10 +119,10 @@ function State(fn) {
     inspect, toString: inspect, runWith,
     execWith, evalWith, type, map, ap,
     chain, of,
-    'fantasy-land/of': of,
-    'fantasy-land/map': map,
-    'fantasy-land/chain': chain,
-    '@@type': _type,
+    [fl.of]: of,
+    [fl.map]: map,
+    [fl.chain]: chain,
+    ['@@type']: _type,
     constructor: State
   }
 }
@@ -136,7 +137,7 @@ State.put =
 
 State.type = type
 
-State['fantasy-land/of'] = _of
+State[fl.of] = _of
 State['@@type'] = _type
 
 State['@@implements'] = _implements(

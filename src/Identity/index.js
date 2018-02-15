@@ -9,6 +9,7 @@ const _innerConcat = require('../core/innerConcat')
 const _inspect = require('../core/inspect')
 const type = require('../core/types').type('Identity')
 const _type = require('../core/types').typeFn(type(), VERSION)
+const fl = require('../core/flNames')
 
 const isArray = require('../core/isArray')
 const isApply = require('../core/isApply')
@@ -108,12 +109,12 @@ function Identity(x) {
     inspect, toString: inspect, valueOf,
     type, equals, concat, map, ap, of,
     chain, sequence, traverse,
-    'fantasy-land/of': of,
-    'fantasy-land/equals': equals,
-    'fantasy-land/concat': concat,
-    'fantasy-land/map': map,
-    'fantasy-land/chain': chain,
-    '@@type': _type,
+    [fl.of]: of,
+    [fl.equals]: equals,
+    [fl.concat]: concat,
+    [fl.map]: map,
+    [fl.chain]: chain,
+    ['@@type']: _type,
     constructor: Identity
   }
 }
@@ -121,7 +122,7 @@ function Identity(x) {
 Identity.of = _of
 Identity.type = type
 
-Identity['fantasy-land/of'] = _of
+Identity[fl.of] = _of
 Identity['@@type'] = _type
 
 Identity['@@implements'] = _implements(

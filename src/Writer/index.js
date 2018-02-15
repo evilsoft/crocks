@@ -8,6 +8,7 @@ const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
 const __type = require('../core/types').type('Writer')
 const _typeFn = require('../core/types').typeFn(__type(), VERSION)
+const fl = require('../core/flNames')
 
 const Pair = require('../core/Pair')
 
@@ -95,11 +96,11 @@ function _Writer(Monoid) {
       inspect, toString: inspect, read,
       valueOf, log, type, equals, map,
       ap, of, chain,
-      'fantasy-land/of': of,
-      'fantasy-land/equals': equals,
-      'fantasy-land/map': map,
-      'fantasy-land/chain': chain,
-      '@@type': typeFn,
+      [fl.of]: of,
+      [fl.equals]: equals,
+      [fl.map]: map,
+      [fl.chain]: chain,
+      ['@@type']: typeFn,
       constructor: Writer
     }
   }
@@ -107,7 +108,7 @@ function _Writer(Monoid) {
   Writer.of = _of
   Writer.type = _type
 
-  Writer['fantasy-land/of'] = _of
+  Writer[fl.of] = _of
   Writer['@@type'] = typeFn
 
   Writer['@@implements'] = _implements(

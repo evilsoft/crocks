@@ -7,6 +7,7 @@ const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
 const type = require('../core/types').type('IO')
 const _type = require('../core/types').typeFn(type(), VERSION)
+const fl = require('../core/flNames')
 
 const compose = require('../core/compose')
 const isFunction = require('../core/isFunction')
@@ -61,10 +62,10 @@ function IO(run) {
   return {
     inspect, toString: inspect, run,
     type, map, ap, of, chain,
-    'fantasy-land/of': of,
-    'fantasy-land/map': map,
-    'fantasy-land/chain': chain,
-    '@@type': _type,
+    [fl.of]: of,
+    [fl.map]: map,
+    [fl.chain]: chain,
+    ['@@type']: _type,
     constructor: IO
   }
 }
@@ -72,7 +73,7 @@ function IO(run) {
 IO.of = _of
 IO.type = type
 
-IO['fantasy-land/of'] = _of
+IO[fl.of] = _of
 IO['@@type'] = _type
 
 IO['@@implements'] = _implements(

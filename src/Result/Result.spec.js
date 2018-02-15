@@ -837,7 +837,7 @@ test('Result sequence errors', t => {
   const oSeqBad = bindFunc(Result.Ok(0).sequence)
   const eSeqBad = bindFunc(Result.Err(0).sequence)
 
-  const noFunc = /Result.sequence: Applicative returning function required/
+  const noFunc = /Result.sequence: Apply returning function required/
   t.throws(oSeq(undefined), noFunc, 'Ok throws with undefined')
   t.throws(oSeq(null), noFunc, 'Ok throws with null')
   t.throws(oSeq(0), noFunc, 'Ok throws falsey with number')
@@ -860,10 +860,10 @@ test('Result sequence errors', t => {
   t.throws(eSeq([]), noFunc, 'Err throws with an array')
   t.throws(eSeq({}), noFunc, 'Err throws with an object')
 
-  const noApplicative = /Result.sequence: Must wrap an Applicative/
-  t.throws(oSeqBad(unit), noApplicative, 'Ok without wrapping Applicative throws')
+  const noApply = /Result.sequence: Must wrap an Apply/
+  t.throws(oSeqBad(unit), noApply, 'Ok without wrapping Apply throws')
 
-  t.doesNotThrow(eSeqBad(unit), 'allows Err without wrapping Applicative')
+  t.doesNotThrow(eSeqBad(unit), 'allows Err without wrapping Apply')
 
   t.end()
 })
@@ -906,7 +906,7 @@ test('Result traverse errors', t => {
 
   const f = x => MockCrock(x)
 
-  const noFunc = /Result.traverse: Applicative returning functions required for both arguments/
+  const noFunc = /Result.traverse: Apply returning functions required for both arguments/
   t.throws(otrav(undefined, unit), noFunc, 'Ok throws with undefined in first argument')
   t.throws(otrav(null, unit), noFunc, 'Ok throws with null in first argument')
   t.throws(otrav(0, unit), noFunc, 'Ok throws falsey with number in first argument')
@@ -951,9 +951,9 @@ test('Result traverse errors', t => {
   t.throws(etrav(unit, []), noFunc, 'Err throws with an array in second argument')
   t.throws(etrav(unit, {}), noFunc, 'Err throws with an object in second argument')
 
-  const noApplicative = /Result.traverse: Both functions must return an Applicative/
-  t.throws(otrav(unit, unit), noApplicative, 'Ok throws when first function does not return an Applicaitve')
-  t.throws(etrav(unit, unit), noApplicative, 'Err throws when second function does not return an Applicaitve')
+  const noApply = /Result.traverse: Both functions must return an Apply/
+  t.throws(otrav(unit, unit), noApply, 'Ok throws when first function does not return an Applicaitve')
+  t.throws(etrav(unit, unit), noApply, 'Err throws when second function does not return an Applicaitve')
 
   t.end()
 })

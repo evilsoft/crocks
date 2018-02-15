@@ -44,7 +44,7 @@ const concatAltErr =
 
 function runSequence(x) {
   if(!(isApply(x) || isArray(x))) {
-    throw new TypeError('Result.sequence: Must wrap an Applicative')
+    throw new TypeError('Result.sequence: Must wrap an Apply')
   }
 
   return x.map(v => Result.of(v))
@@ -180,7 +180,7 @@ function Result(u) {
 
   function sequence(af) {
     if(!isFunction(af)) {
-      throw new TypeError('Result.sequence: Applicative returning function required')
+      throw new TypeError('Result.sequence: Apply returning function required')
     }
 
     return either(
@@ -188,15 +188,16 @@ function Result(u) {
       runSequence
     )
   }
+
   function traverse(af, f) {
     if(!isFunction(f) || !isFunction(af)) {
-      throw new TypeError('Result.traverse: Applicative returning functions required for both arguments')
+      throw new TypeError('Result.traverse: Apply returning functions required for both arguments')
     }
 
     const m = either(compose(af, Result.Err), f)
 
     if(!(isApply(m) || isArray(m))) {
-      throw new TypeError('Result.traverse: Both functions must return an Applicative')
+      throw new TypeError('Result.traverse: Both functions must return an Apply')
     }
 
     return either(

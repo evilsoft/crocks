@@ -380,7 +380,7 @@ test('Identity sequence errors', t => {
   const seq = bindFunc(Identity(MockCrock(32)).sequence)
   const seqBad = bindFunc(Identity(0).sequence)
 
-  const noFunc = /Identity.sequence: Applicative Function required/
+  const noFunc = /Identity.sequence: Apply function required/
   t.throws(seq(undefined), noFunc, 'throws with undefined')
   t.throws(seq(null), noFunc, 'throws with null')
   t.throws(seq(0), noFunc, 'throws falsey with number')
@@ -394,8 +394,8 @@ test('Identity sequence errors', t => {
 
   t.doesNotThrow(seq(unit), 'allows a function')
 
-  const noAp = /Identity.sequence: Must wrap an Applicative/
-  t.throws(seqBad(unit), noAp, 'wrapping non-Applicative throws')
+  const noAp = /Identity.sequence: Must wrap an Apply/
+  t.throws(seqBad(unit), noAp, 'wrapping non-Apply throws')
 
   t.end()
 })
@@ -421,7 +421,7 @@ test('Identity sequence functionality', t => {
 test('Identity traverse errors', t => {
   const trav = bindFunc(Identity(32).traverse)
 
-  const noFunc = /Identity.traverse: Applicative returning functions required for both arguments/
+  const noFunc = /Identity.traverse: Apply returning functions required for both arguments/
   t.throws(trav(undefined, MockCrock), noFunc, 'throws with undefined in first argument')
   t.throws(trav(null, MockCrock), noFunc, 'throws with null in first argument')
   t.throws(trav(0, MockCrock), noFunc, 'throws falsey with number in first argument')
@@ -446,7 +446,7 @@ test('Identity traverse errors', t => {
 
   const noApply = bindFunc(x => Identity.of(x).traverse(MockCrock.of, identity))
 
-  const noAp = /Identity.traverse: Both functions must return an Applicative/
+  const noAp = /Identity.traverse: Both functions must return an Apply/
   t.throws(noApply(undefined), noAp, 'throws when second argument returns undefined')
   t.throws(noApply(null), noAp, 'throws when second argument returns null')
   t.throws(noApply(0), noAp, 'throws when second argument returns falsey number')
@@ -458,7 +458,7 @@ test('Identity traverse errors', t => {
   t.throws(noApply({}), noAp, 'throws when second argument returns an object')
   t.throws(noApply(unit), noAp, 'throws when second argument returns function')
 
-  t.doesNotThrow(trav(unit, MockCrock), 'requires an Applicative returning function in second arg and function in first arg')
+  t.doesNotThrow(trav(unit, MockCrock), 'requires an Apply returning function in second arg and function in first arg')
 
   t.end()
 })

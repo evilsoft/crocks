@@ -8,7 +8,7 @@ const isFunction = require('../core/isFunction')
 
 function sequence(af, m) {
   if(!isFunction(af)) {
-    throw new TypeError('sequence: Applicative function required for first argument')
+    throw new TypeError('sequence: Apply function required for first argument')
   }
 
   if((m && isFunction(m.sequence))) {

@@ -44,7 +44,7 @@ const _zero =
 
 function runSequence(x) {
   if(!(isApply(x) || isArray(x))) {
-    throw new TypeError('Maybe.sequence: Must wrap an Applicative')
+    throw new TypeError('Maybe.sequence: Must wrap an Apply')
   }
 
   return x.map(v => Maybe.of(v))
@@ -164,7 +164,7 @@ function Maybe(u) {
 
   function sequence(af) {
     if(!isFunction(af)) {
-      throw new TypeError('Maybe.sequence: Applicative returning function required')
+      throw new TypeError('Maybe.sequence: Apply returning function required')
     }
 
     return either(
@@ -175,13 +175,13 @@ function Maybe(u) {
 
   function traverse(af, f) {
     if(!isFunction(f) || !isFunction(af)) {
-      throw new TypeError('Maybe.traverse: Applicative returning functions required for both arguments')
+      throw new TypeError('Maybe.traverse: Apply returning functions required for both arguments')
     }
 
     const m = either(compose(af, Maybe.Nothing), f)
 
     if(!(isApply(m) || isArray(m))) {
-      throw new TypeError('Maybe.traverse: Both functions must return an Applicative')
+      throw new TypeError('Maybe.traverse: Both functions must return an Apply')
     }
 
     return either(

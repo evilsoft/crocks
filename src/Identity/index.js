@@ -81,11 +81,11 @@ function Identity(x) {
 
   function sequence(af) {
     if(!isFunction(af)) {
-      throw new TypeError('Identity.sequence: Applicative Function required')
+      throw new TypeError('Identity.sequence: Apply function required')
     }
 
     else if(!(isApply(x) || isArray(x))) {
-      throw new TypeError('Identity.sequence: Must wrap an Applicative')
+      throw new TypeError('Identity.sequence: Must wrap an Apply')
     }
 
     return x.map(v => Identity(v))
@@ -93,13 +93,13 @@ function Identity(x) {
 
   function traverse(af, f) {
     if(!isFunction(f) || !isFunction(af)) {
-      throw new TypeError('Identity.traverse: Applicative returning functions required for both arguments')
+      throw new TypeError('Identity.traverse: Apply returning functions required for both arguments')
     }
 
     const m = f(x)
 
     if(!(isApply(m) || isArray(m))) {
-      throw new TypeError('Identity.traverse: Both functions must return an Applicative')
+      throw new TypeError('Identity.traverse: Both functions must return an Apply')
     }
 
     return m.map(v => Identity(v))

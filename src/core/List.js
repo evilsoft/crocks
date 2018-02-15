@@ -55,7 +55,7 @@ function applyTraverse(x, y) {
 
 function runSequence(acc, x) {
   if(!((isApply(acc) || isArray(acc)) && isSameType(acc, x))) {
-    throw new TypeError('List.sequence: Must wrap Applicatives')
+    throw new TypeError('List.sequence: Must wrap Apply')
   }
 
   return applyTraverse(acc, x)
@@ -66,7 +66,7 @@ function runTraverse(f) {
     const m = f(x)
 
     if(!((isApply(acc) || isArray(acc)) && isSameType(acc, m))) {
-      throw new TypeError('List.traverse: Both functions must return an Applicative')
+      throw new TypeError('List.traverse: Both functions must return an Apply')
     }
 
     return applyTraverse(acc, m)
@@ -222,7 +222,7 @@ function List(x) {
 
   function sequence(af) {
     if(!isFunction(af)) {
-      throw new TypeError('List.sequence: Applicative Function required')
+      throw new TypeError('List.sequence: Apply Function required')
     }
 
     return reduceRight(
@@ -233,7 +233,7 @@ function List(x) {
 
   function traverse(af, f) {
     if(!isFunction(f) || !isFunction(af)) {
-      throw new TypeError('List.traverse: Applicative returning functions required for both arguments')
+      throw new TypeError('List.traverse: Apply returning functions required for both arguments')
     }
 
     return reduceRight(

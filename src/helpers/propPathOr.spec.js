@@ -13,7 +13,7 @@ test('propPathOr function', t => {
 
   t.ok(isFunction(propPathOr), 'is a function')
 
-  const err = /propPath(Or)?: Array of strings or integers required for (first|second) argument/
+  const err = /propPathOr: Array of strings or integers required for second argument/
   t.throws(p(def, undefined, {}), err, 'throws with undefined in second argument')
   t.throws(p(def, null, {}), err, 'throws with null in second argument')
   t.throws(p(def, 0, {}), err, 'throws with falsey number in second argument')

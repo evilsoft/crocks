@@ -7,6 +7,7 @@ const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
 const type = require('../core/types').type('Endo')
 const _type = require('../core/types').typeFn(type(), VERSION)
+const fl = require('../core/flNames')
 
 const compose = require('../core/compose')
 const isFunction = require('../core/isFunction')
@@ -41,9 +42,9 @@ function Endo(runWith) {
     inspect, toString: inspect,
     valueOf, type, concat, empty,
     runWith,
-    'fantasy-land/empty': empty,
-    'fantasy-land/concat': concat,
-    '@@type': _type,
+    [fl.empty]: empty,
+    [fl.concat]: concat,
+    ['@@type']: _type,
     constructor: Endo
   }
 }
@@ -55,7 +56,7 @@ Endo['@@implements'] = _implements(
 Endo.empty = _empty
 Endo.type = type
 
-Endo['fantasy-land/empty'] = _empty
+Endo[fl.empty] = _empty
 Endo['@@type'] = _type
 
 module.exports = Endo

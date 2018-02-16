@@ -10,6 +10,7 @@ const _innerConcat = require('./innerConcat')
 const _inspect = require('./inspect')
 const type = require('./types').type('Maybe')
 const _type = require('./types').typeFn(type(), VERSION)
+const fl = require('./flNames')
 
 const compose = require('./compose')
 const isApply = require('./isApply')
@@ -43,7 +44,7 @@ const _zero =
 
 function runSequence(x) {
   if(!(isApply(x) || isArray(x))) {
-    throw new TypeError('Maybe.sequence: Must wrap an Applicative')
+    throw new TypeError('Maybe.sequence: Must wrap an Apply')
   }
 
   return x.map(v => Maybe.of(v))
@@ -163,7 +164,7 @@ function Maybe(u) {
 
   function sequence(af) {
     if(!isFunction(af)) {
-      throw new TypeError('Maybe.sequence: Applicative returning function required')
+      throw new TypeError('Maybe.sequence: Apply returning function required')
     }
 
     return either(
@@ -174,13 +175,13 @@ function Maybe(u) {
 
   function traverse(af, f) {
     if(!isFunction(f) || !isFunction(af)) {
-      throw new TypeError('Maybe.traverse: Applicative returning functions required for both arguments')
+      throw new TypeError('Maybe.traverse: Apply returning functions required for both arguments')
     }
 
     const m = either(compose(af, Maybe.Nothing), f)
 
     if(!(isApply(m) || isArray(m))) {
-      throw new TypeError('Maybe.traverse: Both functions must return an Applicative')
+      throw new TypeError('Maybe.traverse: Both functions must return an Apply')
     }
 
     return either(
@@ -194,14 +195,14 @@ function Maybe(u) {
     option, type, concat, equals, coalesce,
     map, alt, zero, ap, of, chain, sequence,
     traverse,
-    'fantasy-land/zero': zero,
-    'fantasy-land/of': of,
-    'fantasy-land/equals': equals,
-    'fantasy-land/alt': alt,
-    'fantasy-land/concat': concat,
-    'fantasy-land/map': map,
-    'fantasy-land/chain': chain,
-    '@@type': _type,
+    [fl.zero]: zero,
+    [fl.of]: of,
+    [fl.equals]: equals,
+    [fl.alt]: alt,
+    [fl.concat]: concat,
+    [fl.map]: map,
+    [fl.chain]: chain,
+    ['@@type']: _type,
     constructor: Maybe
   }
 }
@@ -210,8 +211,8 @@ Maybe.of = _of
 Maybe.zero = _zero
 Maybe.type = type
 
-Maybe['fantasy-land/of'] = _of
-Maybe['fantasy-land/zero'] = _zero
+Maybe[fl.of] = _of
+Maybe[fl.zero] = _zero
 Maybe['@@type'] = _type
 
 Maybe['@@implements'] = _implements(

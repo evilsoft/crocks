@@ -8,6 +8,7 @@ const _implements = require('./implements')
 const _inspect = require('./inspect')
 const type = require('./types').type('List')
 const _type = require('./types').typeFn(type(), VERSION)
+const fl = require('./flNames')
 
 const array = require('./array')
 
@@ -54,7 +55,7 @@ function applyTraverse(x, y) {
 
 function runSequence(acc, x) {
   if(!((isApply(acc) || isArray(acc)) && isSameType(acc, x))) {
-    throw new TypeError('List.sequence: Must wrap Applicatives')
+    throw new TypeError('List.sequence: Must wrap Apply')
   }
 
   return applyTraverse(acc, x)
@@ -65,7 +66,7 @@ function runTraverse(f) {
     const m = f(x)
 
     if(!((isApply(acc) || isArray(acc)) && isSameType(acc, m))) {
-      throw new TypeError('List.traverse: Both functions must return an Applicative')
+      throw new TypeError('List.traverse: Both functions must return an Apply')
     }
 
     return applyTraverse(acc, m)
@@ -221,7 +222,7 @@ function List(x) {
 
   function sequence(af) {
     if(!isFunction(af)) {
-      throw new TypeError('List.sequence: Applicative Function required')
+      throw new TypeError('List.sequence: Apply Function required')
     }
 
     return reduceRight(
@@ -232,7 +233,7 @@ function List(x) {
 
   function traverse(af, f) {
     if(!isFunction(f) || !isFunction(af)) {
-      throw new TypeError('List.traverse: Applicative returning functions required for both arguments')
+      throw new TypeError('List.traverse: Apply returning functions required for both arguments')
     }
 
     return reduceRight(
@@ -246,14 +247,14 @@ function List(x) {
     head, tail, cons, type, equals, concat, empty,
     reduce, reduceRight, fold, filter, reject, map,
     ap, of, chain, sequence, traverse,
-    'fantasy-land/of': of,
-    'fantasy-land/equals': equals,
-    'fantasy-land/concat': concat,
-    'fantasy-land/empty': empty,
-    'fantasy-land/map': map,
-    'fantasy-land/chain': chain,
-    'fantasy-land/reduce': reduce,
-    '@@type': _type,
+    [fl.of]: of,
+    [fl.equals]: equals,
+    [fl.concat]: concat,
+    [fl.empty]: empty,
+    [fl.map]: map,
+    [fl.chain]: chain,
+    [fl.reduce]: reduce,
+    ['@@type']: _type,
     constructor: List
   }
 }
@@ -262,8 +263,8 @@ List.of = _of
 List.empty = _empty
 List.type = type
 
-List['fantasy-land/of'] = _of
-List['fantasy-land/empty'] = _empty
+List[fl.of] = _of
+List[fl.empty] = _empty
 List['@@type'] = _type
 
 List.fromArray =

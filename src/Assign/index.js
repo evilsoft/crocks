@@ -9,6 +9,7 @@ const _object = require('../core/object')
 
 const type = require('../core/types').type('Assign')
 const _type = require('../core/types').typeFn(type(), VERSION)
+const fl = require('../core/flNames')
 
 const isNil = require('../core/isNil')
 const isObject = require('../core/isObject')
@@ -44,9 +45,9 @@ function Assign(o) {
   return {
     inspect, toString: inspect,
     valueOf, type, concat, empty,
-    'fantasy-land/empty': empty,
-    'fantasy-land/concat': concat,
-    '@@type': _type,
+    [fl.empty]: empty,
+    [fl.concat]: concat,
+    ['@@type']: _type,
     constructor: Assign
   }
 }
@@ -58,7 +59,7 @@ Assign['@@implements'] = _implements(
 Assign.empty = _empty
 Assign.type = type
 
-Assign['fantasy-land/empty'] = _empty
+Assign[fl.empty] = _empty
 Assign['@@type'] = _type
 
 module.exports = Assign

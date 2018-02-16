@@ -7,6 +7,7 @@ const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
 const type = require('../core/types').type('Last')
 const _type = require('../core/types').typeFn(type(), VERSION)
+const fl = require('../core/flNames')
 
 const isSameType = require('../core/isSameType')
 
@@ -54,9 +55,9 @@ function Last(x) {
   return {
     inspect, toString: inspect, concat,
     empty, option, type, valueOf,
-    'fantasy-land/empty': empty,
-    'fantasy-land/concat': concat,
-    '@@type': _type,
+    [fl.empty]: empty,
+    [fl.concat]: concat,
+    ['@@type']: _type,
     constructor: Last
   }
 }
@@ -68,7 +69,7 @@ Last['@@implements'] = _implements(
 Last.empty = _empty
 Last.type = type
 
-Last['fantasy-land/empty'] = _empty
+Last[fl.empty] = _empty
 Last['@@type'] = _type
 
 module.exports = Last

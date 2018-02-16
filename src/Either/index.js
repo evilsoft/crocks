@@ -10,6 +10,7 @@ const _innerConcat = require('../core/innerConcat')
 const _inspect = require('../core/inspect')
 const type = require('../core/types').type('Either')
 const _type = require('../core/types').typeFn(type(), VERSION)
+const fl = require('../core/flNames')
 
 const compose = require('../core/compose')
 const isArray = require('../core/isArray')
@@ -35,7 +36,7 @@ const _of =
 
 function runSequence(x) {
   if(!(isApply(x) || isArray(x))) {
-    throw new TypeError('Either.sequence: Must wrap an Applicative')
+    throw new TypeError('Either.sequence: Must wrap an Apply')
   }
 
   return x.map(v => Either.of(v))
@@ -168,7 +169,7 @@ function Either(u) {
 
   function sequence(af) {
     if(!isFunction(af)) {
-      throw new TypeError('Either.sequence: Applicative returning function required')
+      throw new TypeError('Either.sequence: Apply returning function required')
     }
 
     return either(
@@ -179,13 +180,13 @@ function Either(u) {
 
   function traverse(af, f) {
     if(!isFunction(f) || !isFunction(af)) {
-      throw new TypeError('Either.traverse: Applicative returning functions required for both arguments')
+      throw new TypeError('Either.traverse: Apply returning functions required for both arguments')
     }
 
     const m = either(compose(af, Either.Left), f)
 
     if(!(isApply(m) || isArray(m))) {
-      throw new TypeError('Either.traverse: Both functions must return an Applicative')
+      throw new TypeError('Either.traverse: Both functions must return an Apply')
     }
 
     return either(
@@ -199,14 +200,14 @@ function Either(u) {
     type, concat, swap, coalesce, equals,
     map, bimap, alt, ap, of, chain, sequence,
     traverse,
-    'fantasy-land/of': of,
-    'fantasy-land/equals': equals,
-    'fantasy-land/alt': alt,
-    'fantasy-land/bimap': bimap,
-    'fantasy-land/concat': concat,
-    'fantasy-land/map': map,
-    'fantasy-land/chain': chain,
-    '@@type': _type,
+    [fl.of]: of,
+    [fl.equals]: equals,
+    [fl.alt]: alt,
+    [fl.bimap]: bimap,
+    [fl.concat]: concat,
+    [fl.map]: map,
+    [fl.chain]: chain,
+    ['@@type']: _type,
     constructor: Either
   }
 }
@@ -214,7 +215,7 @@ function Either(u) {
 Either.of   = _of
 Either.type = type
 
-Either['fantasy-land/of'] = _of
+Either[fl.of] = _of
 Either['@@type'] = _type
 
 Either['@@implements'] = _implements(

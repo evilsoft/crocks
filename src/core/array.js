@@ -16,7 +16,7 @@ function runTraverse(name, fn) {
     const m = fn(x)
 
     if(!((isApply(acc) || isArray(acc)) && isSameType(acc, m))) {
-      throw new TypeError(`Array.${name}: Must wrap Applicatives`)
+      throw new TypeError(`Array.${name}: Must wrap Applys`)
     }
 
     if(isArray(m)) {

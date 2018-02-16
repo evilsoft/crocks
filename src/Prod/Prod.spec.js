@@ -23,14 +23,15 @@ test('Prod', t => {
   t.ok(isFunction(Prod.type), 'provides a type function')
   t.ok(isFunction(Prod['@@type']), 'provides a @@type function')
 
-  t.throws(s(), TypeError, 'throws with nothing')
-  t.throws(s(identity), TypeError, 'throws with a function')
-  t.throws(s(''), TypeError, 'throws with falsey string')
-  t.throws(s('string'), TypeError, 'throws with truthy string')
-  t.throws(s(false), TypeError, 'throws with false')
-  t.throws(s(true), TypeError, 'throws with true')
-  t.throws(s([]), TypeError, 'throws with an array')
-  t.throws(s({}), TypeError, 'throws with an object')
+  const err = /Prod: Numeric value required/
+  t.throws(s(), err, 'throws with nothing')
+  t.throws(s(identity), err, 'throws with a function')
+  t.throws(s(''), err, 'throws with falsey string')
+  t.throws(s('string'), err, 'throws with truthy string')
+  t.throws(s(false), err, 'throws with false')
+  t.throws(s(true), err, 'throws with true')
+  t.throws(s([]), err, 'throws with an array')
+  t.throws(s({}), err, 'throws with an object')
 
   t.doesNotThrow(s(undefined), 'allows undefined')
   t.doesNotThrow(s(null), 'allows null')
@@ -131,17 +132,18 @@ test('Prod concat functionality', t => {
 
   const cat = bindFunc(a.concat)
 
-  t.throws(cat(undefined), TypeError, 'throws with undefined')
-  t.throws(cat(null), TypeError, 'throws with null')
-  t.throws(cat(0), TypeError, 'throws with falsey number')
-  t.throws(cat(1), TypeError, 'throws with truthy number')
-  t.throws(cat(''), TypeError, 'throws with falsey string')
-  t.throws(cat('string'), TypeError, 'throws with truthy string')
-  t.throws(cat(false), TypeError, 'throws with false')
-  t.throws(cat(true), TypeError, 'throws with true')
-  t.throws(cat([]), TypeError, 'throws with an array')
-  t.throws(cat({}), TypeError, 'throws with an object')
-  t.throws(cat(notProd), TypeError, 'throws with non-Prod')
+  const err = /Prod.concat: Prod required/
+  t.throws(cat(undefined), err, 'throws with undefined')
+  t.throws(cat(null), err, 'throws with null')
+  t.throws(cat(0), err, 'throws with falsey number')
+  t.throws(cat(1), err, 'throws with truthy number')
+  t.throws(cat(''), err, 'throws with falsey string')
+  t.throws(cat('string'), err, 'throws with truthy string')
+  t.throws(cat(false), err, 'throws with false')
+  t.throws(cat(true), err, 'throws with true')
+  t.throws(cat([]), err, 'throws with an array')
+  t.throws(cat({}), err, 'throws with an object')
+  t.throws(cat(notProd), err, 'throws with non-Prod')
 
   t.equals(a.concat(b).valueOf(), (x * y), 'Multiplies wrapped values as expected')
 

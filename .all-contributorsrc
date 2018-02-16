@@ -25,7 +25,8 @@
       "profile": "https://github.com/rstegg",
       "contributions": [
         "code",
-        "bug"
+        "bug",
+        "review"
       ]
     },
     {
@@ -44,7 +45,8 @@
       "profile": "https://github.com/HenriqueLimas",
       "contributions": [
         "code",
-        "doc"
+        "doc",
+        "review"
       ]
     },
     {
@@ -73,6 +75,15 @@
       "name": "Fred Daoud",
       "avatar_url": "https://avatars3.githubusercontent.com/u/1706600?v=4",
       "profile": "http://www.fdaoud.com",
+      "contributions": [
+        "review"
+      ]
+    },
+    {
+      "login": "karthikiyengar",
+      "name": "Karthik Iyengar",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/8260207?v=4",
+      "profile": "https://github.com/karthikiyengar",
       "contributions": [
         "review"
       ]

@@ -808,7 +808,7 @@ test('Either sequence errors', t => {
   const rseqBad = bindFunc(Either.Right(0).sequence)
   const lseqBad = bindFunc(Either.Left(0).sequence)
 
-  const err = /Either.sequence: Applicative returning function required/
+  const err = /Either.sequence: Apply returning function required/
 
   t.throws(rseq(undefined), err, 'Right throws with undefined')
   t.throws(rseq(null), err, 'Right throws with null')
@@ -836,10 +836,10 @@ test('Either sequence errors', t => {
 
   t.doesNotThrow(lseq(unit), 'Left allows a function')
 
-  const noAp = /Either.sequence: Must wrap an Applicative/
-  t.throws(rseqBad(unit), noAp, 'Right without wrapping Applicative throws')
+  const noAp = /Either.sequence: Must wrap an Apply/
+  t.throws(rseqBad(unit), noAp, 'Right without wrapping Apply throws')
 
-  t.doesNotThrow(lseqBad(unit), 'allows Left without wrapping Applicative')
+  t.doesNotThrow(lseqBad(unit), 'allows Left without wrapping Apply')
 
   t.end()
 })
@@ -881,7 +881,7 @@ test('Either traverse errors', t => {
 
   const f = x => MockCrock(x)
 
-  const noFunc = /Either.traverse: Applicative returning functions required for both arguments/
+  const noFunc = /Either.traverse: Apply returning functions required for both arguments/
   t.throws(rtrav(undefined, unit), noFunc, 'Right throws with undefined in first argument')
   t.throws(rtrav(null, unit), noFunc, 'Right throws with null in first argument')
   t.throws(rtrav(0, unit), noFunc, 'Right throws falsey with number in first argument')
@@ -904,7 +904,7 @@ test('Either traverse errors', t => {
   t.throws(rtrav(f, []), noFunc, 'Right throws with an array in second argument')
   t.throws(rtrav(f, {}), noFunc, 'Right throws with an object in second argument')
 
-  t.doesNotThrow(rtrav(unit, f), 'Right requires an Applicative returning function in second argument')
+  t.doesNotThrow(rtrav(unit, f), 'Right requires an Apply returning function in second argument')
 
   t.throws(ltrav(undefined, MockCrock), noFunc, 'Left throws with undefined in first argument')
   t.throws(ltrav(null, MockCrock), noFunc, 'Left throws with null in first argument')
@@ -928,11 +928,11 @@ test('Either traverse errors', t => {
   t.throws(ltrav(unit, []), noFunc, 'Left throws with an array in second argument')
   t.throws(ltrav(unit, {}), noFunc, 'Left throws with an object in second argument')
 
-  const noAp = /Either.traverse: Both functions must return an Applicative/
-  t.throws(rtrav(unit, unit), noAp, 'Right throws when first function does not return an Applicaitve')
-  t.throws(ltrav(unit, unit), noAp, 'Left throws when second function does not return an Applicaitve')
+  const noAp = /Either.traverse: Both functions must return an Apply/
+  t.throws(rtrav(unit, unit), noAp, 'Right throws when first function does not return an Apply')
+  t.throws(ltrav(unit, unit), noAp, 'Left throws when second function does not return an Apply')
 
-  t.doesNotThrow(ltrav(MockCrock, unit), 'Left requires an Applicative returning function in the first arg')
+  t.doesNotThrow(ltrav(MockCrock, unit), 'Left requires an Apply returning function in the first arg')
 
   t.end()
 })

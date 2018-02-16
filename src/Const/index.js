@@ -8,6 +8,7 @@ const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
 const type = require('../core/types').type('Const')
 const _type = require('../core/types').typeFn(type(), VERSION)
+const fl = require('../core/flNames')
 
 const isFunction = require('../core/isFunction')
 const isSameType = require('../core/isSameType')
@@ -62,11 +63,11 @@ function Const(x) {
   return {
     inspect, toString: inspect, valueOf,
     type, equals, concat, map, ap, chain,
-    'fantasy-land/equals': equals,
-    'fantasy-land/concat': concat,
-    'fantasy-land/map': map,
-    'fantasy-land/chain': chain,
-    '@@type': _type,
+    [fl.equals]: equals,
+    [fl.concat]: concat,
+    [fl.map]: map,
+    [fl.chain]: chain,
+    ['@@type']: _type,
     constructor: Const
   }
 }

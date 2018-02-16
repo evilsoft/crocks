@@ -649,7 +649,7 @@ test('List sequence errors', t => {
   const seq = bindFunc(List.of(MockCrock(2)).sequence)
   const seqBad = bindFunc(List.of(0).sequence)
 
-  const err = /List.sequence: Applicative Function required/
+  const err = /List.sequence: Apply Function required/
   t.throws(seq(undefined), err, 'throws with undefined')
   t.throws(seq(null), err, 'throws with null')
   t.throws(seq(0), err, 'throws falsey with number')
@@ -660,10 +660,10 @@ test('List sequence errors', t => {
   t.throws(seq(true), err, 'throws with true')
   t.throws(seq([]), err, 'throws with an array')
   t.throws(seq({}), err, 'throws with an object')
-  t.doesNotThrow(seq(MockCrock), 'allows an Applicative returning function')
+  t.doesNotThrow(seq(MockCrock), 'allows an Apply returning function')
 
-  const noAppl = /List.sequence: Must wrap Applicatives/
-  t.throws(seqBad(unit), noAppl, 'wrapping non-Applicative throws')
+  const noAppl = /List.sequence: Must wrap Apply/
+  t.throws(seqBad(unit), noAppl, 'wrapping non-Apply throws')
 
   t.end()
 })
@@ -689,7 +689,7 @@ test('List sequence functionality', t => {
 test('List traverse errors', t => {
   const trav = bindFunc(List.of(2).traverse)
 
-  const noFunc = /List.traverse: Applicative returning functions required for both arguments/
+  const noFunc = /List.traverse: Apply returning functions required for both arguments/
   t.throws(trav(undefined, MockCrock), noFunc, 'throws with undefined in first argument')
   t.throws(trav(null, MockCrock), noFunc, 'throws with null in first argument')
   t.throws(trav(0, MockCrock), noFunc, 'throws falsey with number in first argument')
@@ -712,11 +712,11 @@ test('List traverse errors', t => {
   t.throws(trav(MockCrock, []), noFunc, 'throws with an array in second argument')
   t.throws(trav(MockCrock, {}), noFunc, 'throws with an object in second argument')
 
-  const noAppl = /List.traverse: Both functions must return an Applicative/
+  const noAppl = /List.traverse: Both functions must return an Apply/
   t.throws(trav(unit, MockCrock), noAppl, 'throws with non-Appicative returning function in first argument')
   t.throws(trav(MockCrock, unit), noAppl, 'throws with non-Appicative returning function in second argument')
 
-  t.doesNotThrow(trav(MockCrock, MockCrock), 'allows Applicative returning functions')
+  t.doesNotThrow(trav(MockCrock, MockCrock), 'allows Apply returning functions')
 
   t.end()
 })

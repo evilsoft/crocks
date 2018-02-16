@@ -12,6 +12,7 @@ const isSameType = require('../core/isSameType')
 
 const type = require('../core/types').type('Equiv')
 const _type = require('../core/types').typeFn(type(), VERSION)
+const fl = require('../core/flNames')
 
 const _empty =
   () => Equiv(() => true)
@@ -58,10 +59,10 @@ function Equiv(compare) {
     inspect, toString: inspect, type,
     compareWith, valueOf, contramap,
     concat, empty,
-    'fantasy-land/empty': empty,
-    'fantasy-land/concat': concat,
-    'fantasy-land/contramap': contramap,
-    '@@type': _type,
+    [fl.empty]: empty,
+    [fl.concat]: concat,
+    [fl.contramap]: contramap,
+    ['@@type']: _type,
     constructor: Equiv
   }
 }
@@ -69,7 +70,7 @@ function Equiv(compare) {
 Equiv.empty = _empty
 Equiv.type = type
 
-Equiv['fantasy-land/empty'] = _empty
+Equiv[fl.empty] = _empty
 Equiv['@@type'] = _type
 
 Equiv['@@implements'] = _implements(

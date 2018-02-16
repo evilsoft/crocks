@@ -1,6 +1,6 @@
 {
   "name": "crocks",
-  "version": "0.8.4",
+  "version": "0.8.5",
   "description": "A collection of well known Algebraic Datatypes for your utter enjoyment.",
   "main": "./index.js",
   "scripts": {

@@ -8,7 +8,7 @@ weight: 2
 
 The `crocks` are the heart and soul of this library. This is where you will find
 all your favorite ADT's you have grown to love. They include gems such as:
-`Maybe`, `Either` and `IO`, to name a few. The are usually just a simple
+[`Maybe`][maybe], `Either` and `IO`, to name a few. The are usually just a simple
 constructor that takes either a function or value (depending on the type)
 and will return you a "container" that wraps whatever you passed it. Each
 container provides a variety of functions that act as the operations you can do
@@ -18,7 +18,7 @@ but what they do from type to type may vary.
 | Crock | Constructor | Instance |
 |---|:---|:---|
 | [`Arrow`][arrow] | [`id`][arrow-id] | [`both`][arrow-both], [`compose`][arrow-compose], [`contramap`][arrow-contra],[`first`][arrow-first], [`map`][arrow-map], [`promap`][arrow-promap], [`runWith`][arrow-runwith], [`second`][arrow-second] |
-| `Async` | `Rejected`, `Resolved`, `all`, `fromNode`, `fromPromise`, `of` | `alt`, `ap`, `bimap`, `chain`, `coalesce`, `fork`, `map`, `of`, `swap`, `toPromise` |
+| [`Async`][async] | [`Rejected`][async-rejected], [`Resolved`][async-resolved], [`all`][async-all], [`fromNode`][async-fromnode], [`fromPromise`][async-frompromise], [`of`][async-of] | [`alt`][async-alt], [`ap`][async-ap], [`bimap`][async-bimap], [`chain`][async-chain], [`coalesce`][async-coalesce], [`fork`][async-fork], [`map`][async-map], [`of`][async-of], [`swap`][async-swap], [`toPromise`][async-topromise] |
 | `Const` | -- | `ap`, `chain`, `concat`, `equals`, `map`, `valueOf` |
 | `Either` | `Left`, `Right`, `of`| `alt`, `ap`, `bimap`, `chain`, `coalesce`, `concat`, `either`, `equals`, `map`, `of`, `sequence`, `swap`, `traverse` |
 | [`Equiv`][equiv] | [`empty`][equiv-empty] | [`concat`][equiv-concat], [`contramap`][equiv-contra], [`compareWith`][equiv-compare], [`valueOf`][equiv-value] |
@@ -26,7 +26,7 @@ but what they do from type to type may vary.
 | `IO` | `of` | `ap`, `chain`, `map`, `of`, `run` |
 | `List` |  `empty`, `fromArray`, `of` | `ap`, `chain`, `concat`, `cons`, `empty`, `equals`, `filter`, `head`, `map`, `of`, `reduce`, `reduceRight`, `reject`, `sequence`, `tail`, `toArray`, `traverse`, `valueOf` |
 | [`Maybe`][maybe] | [`Nothing`][maybe-nothing], [`Just`][maybe-just], [`of`][maybe-of], [`zero`][maybe-zero] | [`alt`][maybe-alt], [`ap`][maybe-ap], [`chain`][maybe-chain], [`coalesce`][maybe-coalesce], [`concat`][maybe-concat], [`equals`][maybe-equals], [`either`][maybe-either], [`map`][maybe-map], [`of`][maybe-of], [`option`][maybe-option], [`sequence`][maybe-sequence], [`traverse`][maybe-traverse], [`zero`][maybe-zero] |
-| `Pair` | --- | `ap`, `bimap`, `chain`, `concat`, `equals`, `extend`, `fst`, `map`, `merge`, `of`, `snd`, `swap`, `toArray` |
+| `Pair` | --- | `ap`, `bimap`, `chain`, `concat`, `equals`, `extend`, `fst`, `map`, `merge`, `of`, `sequence`, `snd`, `swap`, `traverse`, `toArray` |
 | [`Pred`][pred] * | [`empty`][pred-empty] | [`concat`][pred-concat], [`contramap`][pred-contra], [`runWith`][pred-run], [`valueOf`][pred-value] |
 | [`Reader`][reader] | [`ask`][reader-ask], [`of`][reader-of] | [`ap`][reader-ap], [`chain`][reader-chain], [`map`][reader-map], [`runWith`][reader-run] |
 | [`ReaderT`][readert] | [`ask`][readert-ask], [`lift`][readert-lift], [`liftFn`][readert-liftfn], [`of`][readert-of] | [`ap`][readert-ap], [`chain`][readert-chain], [`map`][readert-map], [`runWith`][readert-run] |
@@ -48,6 +48,24 @@ but what they do from type to type may vary.
 [arrow-promap]: Arrow.html#promap
 [arrow-runwith]: Arrow.html#runwith
 [arrow-second]: Arrow.html#second
+
+[async]: Async.html
+[async-rejected]: Async.html#rejected
+[async-resolved]: Async.html#resolved
+[async-all]: Async.html#all
+[async-fromnode]: Async.html#fromnode
+[async-frompromise]: Async.html#frompromise
+[async-of]: Async.html#of
+[async-alt]: Async.html#alt
+[async-ap]: Async.html#ap
+[async-bimap]: Async.html#bimap
+[async-chain]: Async.html#chain
+[async-coalesce]: Async.html#coalesce
+[async-fork]: Async.html#fork
+[async-map]: Async.html#map
+[async-of]: Async.html#of
+[async-swap]: Async.html#swap
+[async-topromise]: Async.html#topromise
 
 [equiv]: Equiv.html
 [equiv-empty]: Equiv.html#empty

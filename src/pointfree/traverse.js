@@ -8,11 +8,11 @@ const isFunction = require('../core/isFunction')
 
 function traverse(af, fn, m) {
   if(!isFunction(af)) {
-    throw new TypeError('traverse: Applicative function required for first argument')
+    throw new TypeError('traverse: Apply function required for first argument')
   }
 
   if(!isFunction(fn)) {
-    throw new TypeError('traverse: Applicative returning function required for second argument')
+    throw new TypeError('traverse: Apply returning function required for second argument')
   }
 
   if((m && isFunction(m.traverse))) {

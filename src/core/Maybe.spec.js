@@ -627,7 +627,7 @@ test('Maybe sequence errors', t => {
 
   const seqNothing = bindFunc(Maybe.Nothing().sequence)
 
-  const noFunc = /Maybe.sequence: Applicative returning function required/
+  const noFunc = /Maybe.sequence: Apply returning function required/
   t.throws(seq(undefined), noFunc, 'throws with undefined')
   t.throws(seq(null), noFunc, 'throws with null')
   t.throws(seq(0), noFunc, 'throws falsey with number')
@@ -641,10 +641,10 @@ test('Maybe sequence errors', t => {
 
   t.doesNotThrow(seq(unit), 'allows a function')
 
-  const noAp = /Maybe.sequence: Must wrap an Applicative/
-  t.throws(seqBad(unit), noAp, 'wrapping non-Applicative throws')
+  const noAp = /Maybe.sequence: Must wrap an Apply/
+  t.throws(seqBad(unit), noAp, 'wrapping non-Apply throws')
 
-  t.doesNotThrow(seqNothing(unit), 'allows Nothing with non-Applicative wrapped')
+  t.doesNotThrow(seqNothing(unit), 'allows Nothing with non-Apply wrapped')
 
   t.end()
 })
@@ -682,7 +682,7 @@ test('Maybe traverse errors', t => {
   const rtrav = bindFunc(Maybe.Just(0).traverse)
   const ltrav = bindFunc(Maybe.Nothing().traverse)
 
-  const err = /Maybe.traverse: Applicative returning functions required for both arguments/
+  const err = /Maybe.traverse: Apply returning functions required for both arguments/
   t.throws(rtrav(undefined, MockCrock), err, 'Just throws with undefined in first argument')
   t.throws(rtrav(null, MockCrock), err, 'Just throws with null in first argument')
   t.throws(rtrav(0, MockCrock), err, 'Just throws falsey with number in first argument')
@@ -706,7 +706,7 @@ test('Maybe traverse errors', t => {
   t.throws(rtrav(MockCrock, {}), err, 'Just throws with an object in second argument')
 
 
-  t.doesNotThrow(rtrav(unit, MockCrock), 'Just requires an Applicative returning function in second argument')
+  t.doesNotThrow(rtrav(unit, MockCrock), 'Just requires an Apply returning function in second argument')
 
   t.throws(ltrav(undefined, MockCrock), err, 'Nothing throws with undefined in first argument')
   t.throws(ltrav(null, MockCrock), err, 'Nothing throws with null in first argument')
@@ -730,11 +730,11 @@ test('Maybe traverse errors', t => {
   t.throws(ltrav(MockCrock, []), err, 'Nothing throws with an array in second argument')
   t.throws(ltrav(MockCrock, {}), err, 'Nothing throws with an object in second argument')
 
-  const noAp = /Maybe.traverse: Both functions must return an Applicative/
+  const noAp = /Maybe.traverse: Both functions must return an Apply/
   t.throws(rtrav(unit, unit), noAp, 'Just throws when first function does not return an Applicaitve')
   t.throws(ltrav(unit, unit), noAp, 'Nothing throws when first function does not return an Applicaitve')
 
-  t.doesNotThrow(ltrav(MockCrock, unit), 'Nothing requires an Applicative returning function in the first arg')
+  t.doesNotThrow(ltrav(MockCrock, unit), 'Nothing requires an Apply returning function in the first arg')
 
   t.end()
 })

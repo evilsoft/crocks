@@ -1,14 +1,17 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const VERSION = 1
+const VERSION = 2
 
 const _equals = require('./equals')
 const _implements = require('./implements')
 const _inspect = require('./inspect')
 const type = require('./types').type('Pair')
 const _type = require('./types').typeFn(type(), VERSION)
+const fl = require('./flNames')
 
+const isApply = require('./isApply')
+const isArray = require('./isArray')
 const isFunction = require('./isFunction')
 const isSameType = require('./isSameType')
 const isSemigroup = require('./isSemigroup')
@@ -142,6 +145,33 @@ function Pair(l, r) {
     )
   }
 
+  function sequence(af) {
+    if(!isFunction(af)) {
+      throw new TypeError('Pair.sequence: Apply returning function required')
+    }
+
+    if(!(isApply(r) || isArray(r))) {
+      throw new TypeError('Pair.sequence: Must wrap an Apply in the second')
+    }
+
+    return r.map(v => Pair(l, v))
+
+  }
+
+  function traverse(af, f) {
+    if(!isFunction(f) || !isFunction(af)) {
+      throw new TypeError('Pair.traverse: Apply returning functions required for both arguments')
+    }
+
+    const m = f(r)
+
+    if(!(isApply(m) || isArray(m))) {
+      throw new TypeError('Pair.traverse: Both functions must return an Apply of the same type')
+    }
+
+    return m.map(v => Pair(l, v))
+  }
+
   function extend(fn) {
     if(!isFunction(fn)) {
       throw new TypeError('Pair.extend: Function required')
@@ -154,14 +184,14 @@ function Pair(l, r) {
     inspect, toString: inspect, fst,
     snd, toArray, type, merge, equals,
     concat, swap, map, bimap, ap, chain,
-    extend,
-    'fantasy-land/equals': equals,
-    'fantasy-land/concat': concat,
-    'fantasy-land/map': map,
-    'fantasy-land/bimap': bimap,
-    'fantasy-land/chain': chain,
-    'fantasy-land/extend': extend,
-    '@@type': _type,
+    sequence, traverse, extend,
+    [fl.equals]: equals,
+    [fl.concat]: concat,
+    [fl.map]: map,
+    [fl.bimap]: bimap,
+    [fl.chain]: chain,
+    [fl.extend]: extend,
+    ['@@type']: _type,
     constructor: Pair
   }
 }
@@ -170,7 +200,7 @@ Pair.type = type
 Pair['@@type'] = _type
 
 Pair['@@implements'] = _implements(
-  [ 'ap', 'bimap', 'chain', 'concat', 'extend', 'equals', 'map' ]
+  [ 'ap', 'bimap', 'chain', 'concat', 'extend', 'equals', 'map', 'traverse' ]
 )
 
 module.exports = Pair

@@ -5,6 +5,7 @@ const bindFunc = helpers.bindFunc
 
 const isFunction = require('../core/isFunction')
 const isObject = require('../core/isObject')
+const isString = require('../core/isString')
 
 const constant = x => () => x
 const identity = x => x
@@ -19,7 +20,7 @@ test('Max', t => {
 
   t.ok(isFunction(Max.empty), 'provides an empty function')
   t.ok(isFunction(Max.type), 'provides a type function')
-  t.ok(isFunction(Max['@@type']), 'provides a @@type function')
+  t.ok(isString(Max['@@type']), 'provides a @@type string')
 
   t.equals(Max(0).constructor, Max, 'provides TypeRep on constructor')
 
@@ -98,9 +99,8 @@ test('Max type', t => {
 test('Max @@type', t => {
   const m = Max(0)
 
-  t.ok(isFunction(m['@@type']), 'is a function')
   t.equal(m['@@type'], Max['@@type'], 'static and instance versions are the same')
-  t.equal(m['@@type'](), 'crocks/Max@1', 'reports crocks/Max@1')
+  t.equal(m['@@type'], 'crocks/Max@1', 'reports crocks/Max@1')
 
   t.end()
 })

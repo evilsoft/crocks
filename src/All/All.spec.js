@@ -5,6 +5,7 @@ const bindFunc = helpers.bindFunc
 
 const isFunction = require('../core/isFunction')
 const isObject = require('../core/isObject')
+const isString = require('../core/isString')
 
 const All = require('.')
 
@@ -21,7 +22,7 @@ test('All', t => {
 
   t.ok(isFunction(All.empty), 'provides an empty function')
   t.ok(isFunction(All.type), 'provides a type function')
-  t.ok(isFunction(All['@@type']), 'provides a @@type function')
+  t.ok(isString(All['@@type']), 'provides a @@type string')
 
   const err = /All: Non-function value required/
   t.throws(All, err, 'throws with nothing')
@@ -101,9 +102,8 @@ test('All type', t => {
 test('All @@type', t => {
   const m = All(0)
 
-  t.ok(isFunction(m['@@type']), 'is a function')
   t.equal(All['@@type'], m['@@type'], 'static and instance versions are the same')
-  t.equal(m['@@type'](), 'crocks/All@1', 'reports crocks/All@1')
+  t.equal(m['@@type'], 'crocks/All@1', 'reports crocks/All@1')
 
   t.end()
 })

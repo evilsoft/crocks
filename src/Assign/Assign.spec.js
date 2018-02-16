@@ -5,6 +5,7 @@ const bindFunc = helpers.bindFunc
 
 const isFunction = require('../core/isFunction')
 const isObject = require('../core/isObject')
+const isString = require('../core/isString')
 
 const Assign = require('.')
 
@@ -21,7 +22,7 @@ test('Assign', t => {
 
   t.ok(isFunction(Assign.empty), 'provides an empty function')
   t.ok(isFunction(Assign.type), 'provides a type function')
-  t.ok(isFunction(Assign['@@type']), 'provides a @@type function')
+  t.ok(isString(Assign['@@type']), 'provides a @@type string')
 
   const err = /Assign: Object required/
   t.throws(Assign, err, 'throws with nothing')
@@ -95,10 +96,8 @@ test('Assign type', t => {
 })
 
 test('Assign @@type', t => {
-  t.ok(isFunction(Assign({})['@@type']), 'is a function')
-
   t.equal(Assign({})['@@type'], Assign['@@type'], 'static and instance versions are the same')
-  t.equal(Assign({})['@@type'](), 'crocks/Assign@1', 'reports crocks/Assign@1')
+  t.equal(Assign({})['@@type'], 'crocks/Assign@1', 'reports crocks/Assign@1')
 
   t.end()
 })

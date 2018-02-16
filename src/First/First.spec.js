@@ -6,6 +6,7 @@ const bindFunc = helpers.bindFunc
 const isFunction = require('../core/isFunction')
 const isObject = require('../core/isObject')
 const isSameType = require('../core/isSameType')
+const isString = require('../core/isString')
 
 const Maybe = require('../core/Maybe')
 const First = require('.')
@@ -23,7 +24,7 @@ test('First', t => {
 
   t.ok(isFunction(First.empty), 'provides an empty function')
   t.ok(isFunction(First.type), 'provides a type function')
-  t.ok(isFunction(First['@@type']), 'provides a @@type function')
+  t.ok(isString(First['@@type']), 'provides a @@type string')
 
   const err = /First: Requires one argument/
   t.throws(First, err, 'throws when passed nothing')
@@ -97,9 +98,8 @@ test('First type', t => {
 test('First type', t => {
   const m = First(0)
 
-  t.ok(isFunction(m['@@type']), 'is a function')
   t.equal(First['@@type'], m['@@type'], 'static and instance versions are the same')
-  t.equal(m['@@type'](), 'crocks/First@1', 'reports crocks/First@1')
+  t.equal(m['@@type'], 'crocks/First@1', 'reports crocks/First@1')
 
   t.end()
 })

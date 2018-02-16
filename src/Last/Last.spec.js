@@ -7,6 +7,7 @@ const Maybe = require('../core/Maybe')
 const isFunction = require('../core/isFunction')
 const isObject = require('../core/isObject')
 const isSameType = require('../core/isSameType')
+const isString = require('../core/isString')
 
 const constant = x => () => x
 const extract = m => m.option('empty')
@@ -21,7 +22,7 @@ test('Last', t => {
 
   t.ok(isFunction(Last.empty), 'provides an empty function')
   t.ok(isFunction(Last.type), 'provides a type function')
-  t.ok(isFunction(Last['@@type']), 'provides a @@type function')
+  t.ok(isString(Last['@@type']), 'provides a @@type string')
 
   const err = /Last: Requires one argument/
   t.throws(Last, err, 'throws when passed nothing')
@@ -95,9 +96,8 @@ test('Last type', t => {
 test('Last @@type', t => {
   const m = Last(0)
 
-  t.ok(isFunction(m['@@type']), 'is a function')
   t.equal(Last['@@type'], m['@@type'], 'static and instance versions are the same')
-  t.equal(m['@@type'](), 'crocks/Last@1', 'reports crocks/Last@1')
+  t.equal(m['@@type'], 'crocks/Last@1', 'reports crocks/Last@1')
 
   t.end()
 })

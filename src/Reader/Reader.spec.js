@@ -9,6 +9,7 @@ const compose = curry(require('../core/compose'))
 const isFunction = require('../core/isFunction')
 const isObject = require('../core/isObject')
 const isSameType = require('../core/isSameType')
+const isString = require('../core/isString')
 const unit = require('../core/_unit')
 
 const constant = x => () => x
@@ -31,7 +32,7 @@ test('Reader', t => {
   t.ok(isFunction(Reader.of), 'provides an of function')
   t.ok(isFunction(Reader.ask), 'provides an ask function')
   t.ok(isFunction(Reader.type), 'provides a type function')
-  t.ok(isFunction(Reader['@@type']), 'provides a @@type function')
+  t.ok(isString(Reader['@@type']), 'provides a @@type string')
 
   const err = /Reader: Must wrap a function/
   t.throws(r(), err, 'throws with no parameters')
@@ -96,9 +97,8 @@ test('Reader type', t => {
 test('Reader @@type', t => {
   const m = Reader(unit)
 
-  t.ok(isFunction(m['@@type']), 'is a function')
   t.equal(Reader['@@type'], m['@@type'], 'static and instance versions are the same')
-  t.equal(m['@@type'](), 'crocks/Reader@1', 'type returns crocks/Reader@1')
+  t.equal(m['@@type'], 'crocks/Reader@1', 'type returns crocks/Reader@1')
   t.end()
 })
 

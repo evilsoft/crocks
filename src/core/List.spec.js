@@ -10,6 +10,7 @@ const _compose = curry(require('./compose'))
 const isFunction = require('./isFunction')
 const isObject = require('./isObject')
 const isSameType = require('./isSameType')
+const isString = require('./isString')
 const unit = require('./_unit')
 
 const Maybe = require('./Maybe')
@@ -34,7 +35,7 @@ test('List', t => {
   t.ok(isFunction(List.of), 'provides an of function')
   t.ok(isFunction(List.fromArray), 'provides a fromArray function')
   t.ok(isFunction(List.type), 'provides a type function')
-  t.ok(isFunction(List['@@type']), 'provides a @@type function')
+  t.ok(isString(List['@@type']), 'provides a @@type string')
 
   const err = /List: List must wrap something/
   t.throws(List, err, 'throws with no parameters')
@@ -132,10 +133,8 @@ test('List type', t => {
 test('List @@type', t => {
   const m = List([])
 
-  t.ok(isFunction(m['@@type']), 'is a function')
-
   t.equal(m['@@type'], List['@@type'], 'static and instance versions are the same')
-  t.equal(m['@@type'](), 'crocks/List@1', 'returns crocks/List@1')
+  t.equal(m['@@type'], 'crocks/List@1', 'returns crocks/List@1')
 
   t.end()
 })

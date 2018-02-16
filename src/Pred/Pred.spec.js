@@ -7,6 +7,7 @@ const bindFunc = helpers.bindFunc
 const compose = require('../core/compose')
 const isFunction = require('../core/isFunction')
 const isObject = require('../core/isObject')
+const isString  = require('../core/isString')
 const unit = require('../core/_unit')
 
 const constant = x => () => x
@@ -22,7 +23,7 @@ test('Pred', t => {
 
   t.ok(isFunction(Pred.empty), 'provides an empty function')
   t.ok(isFunction(Pred.type), 'provides a type function')
-  t.ok(isFunction(Pred['@@type']), 'provides a @@type function')
+  t.ok(isString(Pred['@@type']), 'provides a @@type string')
 
   t.equals(Pred(unit).constructor, Pred, 'provides TypeRep on constructor')
 
@@ -89,9 +90,8 @@ test('Pred type', t => {
 test('Pred @@type', t => {
   const m = Pred(unit)
 
-  t.ok(isFunction(m['@@type']), 'is a function')
   t.equal(m['@@type'], Pred['@@type'], 'static and instance versions are the same')
-  t.equal(m['@@type'](), 'crocks/Pred@1', 'reports crocks/Pred@1')
+  t.equal(m['@@type'], 'crocks/Pred@1', 'reports crocks/Pred@1')
 
   t.end()
 })

@@ -7,6 +7,7 @@ const bindFunc = helpers.bindFunc
 
 const isFunction = require('./isFunction')
 const isObject = require('./isObject')
+const isString = require('./isString')
 
 const curry = require('./curry')
 const compose = curry(require('./compose'))
@@ -29,7 +30,7 @@ test('Unit', t => {
 
   t.ok(isFunction(Unit.empty), 'provides an empty function')
   t.ok(isFunction(Unit.type), 'provides a type function')
-  t.ok(isFunction(Unit['@@type']), 'provides a @@type function')
+  t.ok(isString(Unit['@@type']), 'provides a @@type string')
 
   t.doesNotThrow(Unit, 'allows no parameters')
 
@@ -88,9 +89,8 @@ test('Unit type', t => {
 test('Unit @@type', t => {
   const m = Unit(0)
 
-  t.ok(isFunction(m['@@type']), 'is a function')
   t.equal(m['@@type'], Unit['@@type'], 'static and instance versions are the same')
-  t.equal(m['@@type'](), 'crocks/Unit@1', 'type returns crocks/Unit@1')
+  t.equal(m['@@type'], 'crocks/Unit@1', 'type returns crocks/Unit@1')
 
   t.end()
 })

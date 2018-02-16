@@ -7,8 +7,9 @@ const bindFunc = helpers.bindFunc
 const List = require('../core/List')
 const curry = require('../core/curry')
 const compose = curry(require('../core/compose'))
-const isObject = require('../core/isObject')
 const isFunction = require('../core/isFunction')
+const isObject = require('../core/isObject')
+const isString = require('../core/isString')
 const unit = require('../core/_unit')
 
 const constant = x => () => x
@@ -28,7 +29,7 @@ test('Async', t => {
 
   t.ok(isFunction(Async.of), 'provides an of function')
   t.ok(isFunction(Async.type), 'provides a type function')
-  t.ok(isFunction(Async['@@type']), 'provides a @@type function')
+  t.ok(isString(Async['@@type']), 'provides a @@type string')
 
   t.equals(Async.Resolved(3).constructor, Async, 'provides TypeRep on constructor on Resolved')
   t.equals(Async.Rejected(3).constructor, Async, 'provides TypeRep on constructor on Rejected')
@@ -290,10 +291,8 @@ test('Async type', t => {
 })
 
 test('Async @@type', t => {
-  t.ok(isFunction(Async(unit)['@@type']), 'is a function')
-
   t.equal(Async(unit)['@@type'], Async['@@type'], 'static and instance versions are the same')
-  t.equal(Async(unit)['@@type'](), 'crocks/Async@1', 'returns Async')
+  t.equal(Async(unit)['@@type'], 'crocks/Async@1', 'returns Async')
 
   t.end()
 })

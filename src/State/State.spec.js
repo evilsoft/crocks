@@ -8,8 +8,9 @@ const Pair = require('../core/Pair')
 const Unit = require('../core/Unit')
 const curry = require('../core/curry')
 const compose = curry(require('../core/compose'))
-const isObject = require('../core/isObject')
 const isFunction = require('../core/isFunction')
+const isObject = require('../core/isObject')
+const isString  = require('../core/isString')
 const unit = require('../core/_unit')
 
 const identity = x => x
@@ -30,7 +31,7 @@ test('State', t => {
   t.ok(isFunction(State.put), 'provides a put function')
   t.ok(isFunction(State.modify), 'provides a modify function')
   t.ok(isFunction(State.type), 'provides a type function')
-  t.ok(isFunction(State['@@type']), 'provides a @@type function')
+  t.ok(isString(State['@@type']), 'provides a @@type string')
 
   const err = /State: Must wrap a function in the form \(s -> Pair a s\)/
   t.throws(s(), err, 'throws with no parameters')
@@ -97,9 +98,8 @@ test('State type', t => {
 test('State @@type', t => {
   const m = State(unit)
 
-  t.ok(isFunction(m['@@type']), 'is a function')
   t.equal(State['@@type'], m['@@type'], 'static and instance versions are the same')
-  t.equal(m['@@type'](), 'crocks/State@1', 'reports crocks/State@1')
+  t.equal(m['@@type'], 'crocks/State@1', 'reports crocks/State@1')
 
   t.end()
 })

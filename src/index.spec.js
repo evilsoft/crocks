@@ -347,7 +347,6 @@ test('entry', t => {
   t.equal(crocks.hasProp, hasProp, 'provides the hasProp predicate')
   t.equal(crocks.propEq, propEq, 'provides the propEq predicate')
   t.equal(crocks.propPathEq, propPathEq, 'provides the propEq predicate')
-  t.equal(crocks.hasProp, hasProp, 'provides the hasProp predicate')
   t.equal(crocks.isAlt, isAlt, 'provides the isAlt predicate')
   t.equal(crocks.isAlternative, isAlternative, 'provides the isAlternative predicate')
   t.equal(crocks.isApply, isApply, 'provides the isApply predicate')

@@ -13,10 +13,6 @@ function propPathOr(def, keys, target) {
     throw new TypeError('propPathOr: Array of strings or integers required for second argument')
   }
 
-  if(isNil(target)) {
-    return def
-  }
-
   const value = keys.reduce((target, key) => {
     if (isNil(target)) {
       return target

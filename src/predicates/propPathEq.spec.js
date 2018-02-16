@@ -10,7 +10,7 @@ const bindFunc = helpers.bindFunc
 
 const propPathEq = require('./propPathEq')
 
-test.only('propPathEq function', t => {
+test('propPathEq function', t => {
   const p = bindFunc(propPathEq)
 
   t.ok(isFunction(propPathEq), 'is a function')

@@ -146,6 +146,8 @@ const pointfree = {
 
 const predicates = {
   hasProp: require('./predicates/hasProp'),
+  propEq: require('./predicates/propEq'),
+  propPathEq: require('./predicates/propPathEq'),
   isAlt: require('./predicates/isAlt'),
   isAlternative: require('./predicates/isAlternative'),
   isApplicative: require('./predicates/isApplicative'),

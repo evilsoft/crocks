@@ -123,11 +123,11 @@ accepted Datatype):
 | `run` | `IO` |
 | `runWith` | [`Arrow`][arrow-run], [`Endo`][endo-run], [`Pred`][pred-run], [`Reader`][reader-run], `Star`, [`State`][state-run] |
 | `second` | [`Arrow`][arrow-second], `Function`, `Star` |
-| `sequence` | `Array`, `Either`, `Identity`, `List`, [`Maybe`][maybe-sequence], `Result` |
+| `sequence` | `Array`, `Either`, `Identity`, `List`, [`Maybe`][maybe-sequence], `Pair`, `Result` |
 | `snd` | `Pair` |
 | `swap` | [`Async`][async-swap], `Either`, `Pair`, `Result` |
 | `tail` | `Array`, `List`, `String` |
-| `traverse` | `Array`, `Either`, `Identity`, `List`, [`Maybe`][maybe-traverse], `Result` |
+| `traverse` | `Array`, `Either`, `Identity`, `List`, [`Maybe`][maybe-traverse], `Pair`, `Result` |
 | `valueOf` | [`All`][all-value], [`Any`][any-value], [`Assign`][assign-value], `Const`, [`Endo`][endo-value], [`Equiv`][equiv-value], [`First`][first-value], `Identity`, [`Last`][last-value], `Max`, `Min`, [`Pred`][pred-value], [`Prod`][prod-value], [`Sum`][sum-value], `Unit`, `Writer` |
 
 [all-concat]: ../monoids/All.html#concat

@@ -4,10 +4,13 @@ const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
 
+const MockCrock = require('../test/MockCrock')
+
 const curry = require('./curry')
 const compose = curry(require('./compose'))
 const isFunction = require('./isFunction')
 const isObject = require('./isObject')
+const isSameType = require('./isSameType')
 const unit = require('./_unit')
 
 const identity = x => x
@@ -59,6 +62,7 @@ test('Pair @@implements', t => {
   t.equal(f('equals'), true, 'implements equals func')
   t.equal(f('extend'), true, 'implements extend func')
   t.equal(f('map'), true, 'implements map func')
+  t.equal(f('traverse'), true, 'implements traverse func')
 
   t.end()
 })
@@ -90,7 +94,7 @@ test('Pair @@type', t => {
   t.ok(isFunction(p['@@type']), 'is a function')
 
   t.equal(p['@@type'], Pair['@@type'], 'static and instance versions are the same')
-  t.equal(p['@@type'](), 'crocks/Pair@1', 'type returns crocks/Pair@1')
+  t.equal(p['@@type'](), 'crocks/Pair@2', 'type returns crocks/Pair@2')
 
   t.end()
 })
@@ -497,6 +501,104 @@ test('Pair chain properties (Chain)', t => {
   const b = x => Pair([ 'a' ], x).chain(y => f(y).chain(g))
 
   t.same(extract(a(10)), extract(b(10)), 'assosiativity')
+
+  t.end()
+})
+
+test('Pair sequence errors', t => {
+  const seq = bindFunc(Pair([], MockCrock({ something: true })).sequence)
+  const seqBad = bindFunc(Pair([], '').sequence)
+
+  const noFunc = /Pair.sequence: Apply returning function required/
+  t.throws(seq(undefined), noFunc, 'throws with undefined')
+  t.throws(seq(null), noFunc, 'throws with null')
+  t.throws(seq(0), noFunc, 'throws falsey with number')
+  t.throws(seq(1), noFunc, 'throws truthy with number')
+  t.throws(seq(''), noFunc, 'throws falsey with string')
+  t.throws(seq('string'), noFunc, 'throws with truthy string')
+  t.throws(seq(false), noFunc, 'throws with false')
+  t.throws(seq(true), noFunc, 'throws with true')
+  t.throws(seq([]), noFunc, 'throws with an array')
+  t.throws(seq({}), noFunc, 'throws with an object')
+
+  t.doesNotThrow(seq(unit), 'allows a function')
+
+  const noAp = /Pair.sequence: Must wrap an Apply in the second/
+  t.throws(seqBad(unit), noAp, 'wrapping non-Apply throws')
+
+  t.end()
+})
+
+test('Pair sequence functionality', t => {
+  const x = 'nice-show'
+
+  const s = Pair([], MockCrock(x)).sequence(MockCrock.of)
+
+  t.ok(isSameType(MockCrock, s), 'Provides an outer type of MockCrock')
+  t.ok(isSameType(Pair, s.valueOf()), 'Provides an inner type of Pair')
+  t.same(s.valueOf().snd(), x, 'Pair contains original inner value')
+
+  const ar = x => [ x ]
+  const arS = Pair([], [ x ]).sequence(ar)
+
+  t.ok(isSameType(Array, arS), 'Provides an outer type of Array')
+  t.ok(isSameType(Pair, arS[0]), 'Provides an inner type of Pair')
+  t.same(arS[0].snd(), x, 'Pair contains original inner value')
+
+  t.end()
+})
+
+test('Pair traverse errors', t => {
+  const traverse = bindFunc(Pair([], 0).traverse)
+
+  const err = /Pair.traverse: Apply returning functions required for both arguments/
+  t.throws(traverse(undefined, MockCrock), err, 'throws with undefined in first argument')
+  t.throws(traverse(null, MockCrock), err, 'throws with null in first argument')
+  t.throws(traverse(0, MockCrock), err, 'throws falsey with number in first argument')
+  t.throws(traverse(1, MockCrock), err, 'throws truthy with number in first argument')
+  t.throws(traverse('', MockCrock), err, 'throws falsey with string in first argument')
+  t.throws(traverse('string', MockCrock), err, 'throws with truthy string in first argument')
+  t.throws(traverse(false, MockCrock), err, 'throws with false in first argument')
+  t.throws(traverse(true, MockCrock), err, 'throws with true in first argument')
+  t.throws(traverse([], MockCrock), err, 'throws with an array in first argument')
+  t.throws(traverse({}, MockCrock), err, 'throws with an object in first argument')
+
+  t.throws(traverse(MockCrock, undefined), err, 'throws with undefined in second argument')
+  t.throws(traverse(MockCrock, null), err, 'throws with null in second argument')
+  t.throws(traverse(MockCrock, 0), err, 'throws falsey with number in second argument')
+  t.throws(traverse(MockCrock, 1), err, 'throws truthy with number in second argument')
+  t.throws(traverse(MockCrock, ''), err, 'throws falsey with string in second argument')
+  t.throws(traverse(MockCrock, 'string'), err, 'throws with truthy string in second argument')
+  t.throws(traverse(MockCrock, false), err, 'throws with false in second argument')
+  t.throws(traverse(MockCrock, true), err, 'throws with true in second argument')
+  t.throws(traverse(MockCrock, []), err, 'throws with an array in second argument')
+  t.throws(traverse(MockCrock, {}), err, 'throws with an object in second argument')
+
+  t.doesNotThrow(traverse(unit, MockCrock), 'requires an Applicative returning function in second argument')
+
+  const noAp = /Pair.traverse: Both functions must return an Apply of the same type/
+  t.throws(traverse(unit, unit), noAp, 'throws when first function does not return an Applicaitve')
+
+  t.end()
+})
+
+test('Pair traverse functionality', t => {
+  const x = 'green'
+  const f = x => MockCrock(x)
+
+  const p = Pair([], x).traverse(f, MockCrock)
+
+  t.ok(isSameType(MockCrock, p), 'Provides an outer type of MockCrock')
+  t.ok(isSameType(Pair, p.valueOf()), 'Provides an inner type of Pair')
+  t.equal(p.valueOf().snd(), x, 'Pair contains original inner value')
+
+
+  const ar = x => [ x ]
+  const arS = Pair([], x).traverse(ar, ar)
+
+  t.ok(isSameType(Array, arS), 'Provides an outer type of Array')
+  t.ok(isSameType(Pair, arS[0]), 'Provides an inner type of Pair')
+  t.same(arS[0].snd(), x, 'Pair contains original inner value')
 
   t.end()
 })

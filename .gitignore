@@ -8,6 +8,8 @@ coverage
 
 *.log
 
+.settings.json
+.vscode
 .DS_Store
 .DS_Store?
 .Spotlight-V100

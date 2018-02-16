@@ -25,7 +25,7 @@ test('propPath function', t => {
 
   t.throws(p([ undefined ], {}), err, 'throws with an array of undefined in first argument')
   t.throws(p([ null ], {}), err, 'throws with array of null in first argument')
-  t.throws(p(false, {}), err, 'throws with an arrau of false in first argument')
+  t.throws(p(false, {}), err, 'throws with an array of false in first argument')
   t.throws(p(true, {}), err, 'throws with an array of true in first argument')
   t.throws(p([ {} ], {}), err, 'throws with an array of objects in first argument')
   t.throws(p([ [ 'key' ] ], {}), err, 'throws with a nested array in first argument')

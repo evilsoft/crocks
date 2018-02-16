@@ -8,7 +8,7 @@ const unit = require('../core/_unit')
 
 const propEq = require('./propEq')
 
-test.only('propEq function', t => {
+test('propEq function', t => {
   const f = bindFunc(propEq)
 
   t.ok(isFunction(propEq), 'is a function')

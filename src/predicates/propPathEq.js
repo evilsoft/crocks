@@ -13,7 +13,7 @@ const { Just, Nothing } = Maybe
 
 const lift = x => (!isNil(x) ? Just(x) : Nothing())
 
-// propPathEq :: [ String | Number ] -> a -> Object -> Boolean
+// propPathEq :: [String | Number] -> a -> Object -> Boolean
 function propPathEq(path, key, target) {
   if (!isArray(path)) {
     throw new TypeError(

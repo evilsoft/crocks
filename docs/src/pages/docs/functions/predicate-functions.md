@@ -14,7 +14,9 @@ from `crocks/predicates`.
 Below is a list of all the current predicates that are included with a
 description of their truth:
 
-* `hasProp :: (String | Number) -> a -> Boolean`: An `Array` or `Object` that contains the provided index or key
+* `hasProp :: (String | Number) -> a -> Boolean`: an `Array` or `Object` that contains the provided index or key
+* `propEq: (String | Number) -> a -> Object -> Boolean`: an `Object` that contains the provided key
+* `propPathEq :: [String | Number] -> a -> Object -> Boolean`: an `Object` that contains the provided key in the provided traversal path
 * `isAlt :: a -> Boolean`: an ADT that provides `map` and `alt` methods
 * `isAlternative :: a -> Boolean`: an ADT that provides `alt`, `zero`, `map`, `ap`, `chain` and `of`methods
 * `isApplicative :: a -> Boolean`: an ADT that provides `map`, `ap` and `of` methods

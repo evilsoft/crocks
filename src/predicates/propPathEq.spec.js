@@ -39,13 +39,15 @@ test('propPathEq function', t => {
   t.ok(p([ 'life', 0, 'on', 1, 'mars' ], val, {}), 'accepts a array of strings and numbers in the first argument')
 
 
-  const obj = { some: { key: 5 } }
+  const obj = { some: { key: 5, hah: null } }
   const goodPath = [ 'some', 'key' ]
+  const nullPath = [ 'some', 'hah' ]
   const badPath = [ 'this', 'is', 'really', 'bad' ]
 
   t.equals(propPathEq(goodPath, Just(5), obj), true, 'returns true on correct path')
   t.equals(propPathEq(badPath, Just(5), obj), false, 'returns false on incorrect path')
-  t.equals(propPathEq(badPath, 5, obj), false, 'returns false on when value is not a Maybe')
+  t.equals(propPathEq(nullPath, null, obj), false, 'returns false when comparing with a null value present at the path')
+  t.equals(propPathEq(badPath, 5, obj), false, 'returns false on when a Maybe is found instead of a plain key')
   t.equals(propPathEq(badPath, Nothing(), obj), true, 'returns true on Nothing matches')
   t.end()
 })

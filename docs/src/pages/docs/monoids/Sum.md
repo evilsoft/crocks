@@ -69,6 +69,7 @@ Sum.empty()
 
 Sum(4)
   .concat(Sum.empty())
+//=> Sum 4
 
 Sum.empty()
   .concat(Sum(4))
@@ -135,7 +136,7 @@ Sum.empty()
 //=> 0
 
 Sum(34)
-  .concat(21)
+  .concat(Sum(21))
   .valueOf()
 //=> 55
 ```

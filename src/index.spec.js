@@ -139,8 +139,6 @@ const valueOf = require('./pointfree/valueOf')
 
 // predicates
 const hasProp = require('./predicates/hasProp')
-const propEq = require('./predicates/propEq')
-const propPathEq = require('./predicates/propPathEq')
 const isAlt = require('./predicates/isAlt')
 const isAlternative = require('./predicates/isAlternative')
 const isApplicative = require('./predicates/isApplicative')
@@ -173,6 +171,8 @@ const isSemigroupoid = require('./predicates/isSemigroupoid')
 const isSetoid = require('./predicates/isSetoid')
 const isString = require('./predicates/isString')
 const isTraversable = require('./predicates/isTraversable')
+const propEq = require('./predicates/propEq')
+const propPathEq = require('./predicates/propPathEq')
 
 // transforms
 const arrayToList = require('./List/arrayToList')
@@ -345,8 +345,6 @@ test('entry', t => {
 
   // predicates
   t.equal(crocks.hasProp, hasProp, 'provides the hasProp predicate')
-  t.equal(crocks.propEq, propEq, 'provides the propEq predicate')
-  t.equal(crocks.propPathEq, propPathEq, 'provides the propEq predicate')
   t.equal(crocks.isAlt, isAlt, 'provides the isAlt predicate')
   t.equal(crocks.isAlternative, isAlternative, 'provides the isAlternative predicate')
   t.equal(crocks.isApply, isApply, 'provides the isApply predicate')
@@ -379,6 +377,8 @@ test('entry', t => {
   t.equal(crocks.isSetoid, isSetoid, 'provides the isSetoid predicate')
   t.equal(crocks.isString, isString, 'provides the isString predicate')
   t.equal(crocks.isTraversable, isTraversable, 'provides the isTraversable predicate')
+  t.equal(crocks.propEq, propEq, 'provides the propEq predicate')
+  t.equal(crocks.propPathEq, propPathEq, 'provides the propEq predicate')
 
   // transforms
   t.equal(crocks.arrayToList, arrayToList, 'provides the arrayToList transform')

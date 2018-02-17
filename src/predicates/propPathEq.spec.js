@@ -1,10 +1,7 @@
 const test = require('tape')
 const helpers = require('../test/helpers')
-const Maybe = require('../core/Maybe')
 const isFunction = require('../core/isFunction')
 const unit = require('../core/_unit')
-
-const { Just, Nothing } = Maybe
 
 const bindFunc = helpers.bindFunc
 
@@ -16,7 +13,8 @@ test('propPathEq function', t => {
   t.ok(isFunction(propPathEq), 'is a function')
 
   const err = /propPathEq: Array of strings or integers required for first argument/
-  const val = Just(5)
+  const val = 5
+
   t.throws(p(undefined, val, {}), err, 'throws with undefined in first argument')
   t.throws(p(null, val, {}), err, 'throws with null in first argument')
   t.throws(p(0, val, {}), err, 'throws with falsey number in first argument')
@@ -34,20 +32,22 @@ test('propPathEq function', t => {
   t.throws(p(true, val, {}), err, 'throws with an array of true in first argument')
   t.throws(p([ val, {} ], val, {}), err, 'throws with an array of objects in first argument')
   t.throws(p([ [ 'key' ] ], val, {}), err, 'throws with a nested array in first argument')
-  t.throws(p([ 'some', 'key', null, 5 ], val, {}), err, 'throws with unexpected input beyond first index in first argument')
-  t.ok(p([ 'life', 'on', 'mars' ], val, {}), 'accepts an array of strings in the first argument')
-  t.ok(p([ 'life', 0, 'on', 1, 'mars' ], val, {}), 'accepts a array of strings and numbers in the first argument')
+  t.throws(p([ 'some', null, 5 ], val, { some: { key: 5 } }), err, 'throws with unexpected input beyond first index in first argument')
 
-
-  const obj = { some: { key: 5, hah: null } }
+  const obj = { some: { key: val, null: null, nan: NaN, undefined: undefined } }
   const goodPath = [ 'some', 'key' ]
-  const nullPath = [ 'some', 'hah' ]
   const badPath = [ 'this', 'is', 'really', 'bad' ]
 
-  t.equals(propPathEq(goodPath, Just(5), obj), true, 'returns true on correct path')
-  t.equals(propPathEq(badPath, Just(5), obj), false, 'returns false on incorrect path')
-  t.equals(propPathEq(nullPath, null, obj), false, 'returns false when comparing with a null value present at the path')
-  t.equals(propPathEq(badPath, 5, obj), false, 'returns false on when a Maybe is found instead of a plain key')
-  t.equals(propPathEq(badPath, Nothing(), obj), true, 'returns true on Nothing matches')
+  t.equals(propPathEq(goodPath, val, obj), true, 'returns true on correct path')
+  t.equals(propPathEq([ 'some', 'null' ], null, obj), true, 'returns true when comparing to null values that are present')
+  t.equals(propPathEq([ 'some', 'nan' ], NaN, obj), true, 'returns true when comparing to NaN values that are present')
+  t.equals(propPathEq([ 'some', 'undefined' ], undefined, obj), true, 'returns true when comparing to undefined values that are present')
+  t.equals(propPathEq([ 'some', 'wrong', null, {}, [] ], undefined, { some: NaN }), true, 'returns true when comparing early-exited paths with an undefined')
+
+  t.equals(propPathEq(badPath, val, obj), false, 'returns false on incorrect path')
+  t.equals(propPathEq([ 'some', 'undefined' ], NaN, obj), false, 'returns false for falsey matches (nan)')
+  t.equals(propPathEq([ 'some', 'null' ], NaN, obj), false, 'returns false for falsey matches (null)')
+  t.equals(propPathEq([ 'some', 'undefined' ], null, obj), false, 'returns false for falsey matches (undefined)')
+
   t.end()
 })

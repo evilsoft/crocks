@@ -146,8 +146,6 @@ const pointfree = {
 
 const predicates = {
   hasProp: require('./predicates/hasProp'),
-  propEq: require('./predicates/propEq'),
-  propPathEq: require('./predicates/propPathEq'),
   isAlt: require('./predicates/isAlt'),
   isAlternative: require('./predicates/isAlternative'),
   isApplicative: require('./predicates/isApplicative'),
@@ -179,7 +177,9 @@ const predicates = {
   isSemigroupoid: require('./predicates/isSemigroupoid'),
   isSetoid: require('./predicates/isSetoid'),
   isString: require('./predicates/isString'),
-  isTraversable: require('./predicates/isTraversable')
+  isTraversable: require('./predicates/isTraversable'),
+  propEq: require('./predicates/propEq'),
+  propPathEq: require('./predicates/propPathEq'),
 }
 
 const transforms = {

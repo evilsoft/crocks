@@ -7,26 +7,25 @@ const isInteger = require('../core/isInteger')
 const isNil= require('../core/isNil')
 const isString = require('../core/isString')
 
-const lift = (x, def) =>
-  isNil(x) ? def : x
-
 // propPathOr : a -> [ String | Integer ] -> b -> c
 function propPathOr(def, keys, target) {
   if(!isArray(keys)) {
     throw new TypeError('propPathOr: Array of strings or integers required for second argument')
   }
 
-  if(isNil(target)) {
-    return def
-  }
+  const value = keys.reduce((target, key) => {
+    if (isNil(target)) {
+      return target
+    }
 
-  return keys.reduce((target, key) => {
     if(!(isString(key) || isInteger(key))) {
       throw new TypeError('propPathOr: Array of strings or integers required for second argument')
     }
 
-    return lift(target[key], def)
+    return target[key]
   }, target)
+
+  return isNil(value) ? def : value
 }
 
 module.exports = curry(propPathOr)

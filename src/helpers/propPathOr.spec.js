@@ -67,5 +67,10 @@ test('propPathOr function', t => {
   t.equals(fn(null), def, 'returns the default value when data is null')
   t.equals(fn(NaN), def, 'returns the default value when data is NaN')
 
+  const objDefault =  { b: 1 }
+
+  t.equals(propPathOr(objDefault, [ 'a', 'b' ], { c: { b: 2 } }), objDefault, 'returns the default value when default is an object that has the same property as a nested property in target')
+  t.equals(propPathOr(1, [ 'a' ], { a: 0 } ), 0, 'returns found falsy value')
+
   t.end()
 })

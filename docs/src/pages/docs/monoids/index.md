@@ -28,7 +28,7 @@ as the following Instance Functions: `valueOf`, `empty` and `concat`.
 | [`First`][First] | [`Maybe`][Maybe] | `First` [`Just`][just] | [`Nothing`][nothing] |
 | [`Last`][Last] | [`Maybe`][Maybe] | `Last` [`Just`][just] | [`Nothing`][nothing] |
 | [`Max`][Max] | Number | `Math.max` | `-Infinity` |
-| [`Min`][`Min`] | Number | `Math.min` | `Infinity` |
+| [`Min`][Min] | Number | `Math.min` | `Infinity` |
 | [`Prod`][Prod] | Number | Multiplication | `1` |
 | [`Sum`][Sum] | Number | Addition | `0` |
 

@@ -126,7 +126,7 @@ Prod(4)
 //=> 4
 
 Prod(34)
-  .concat(21)
+  .concat(Prod(21))
   .valueOf()
 //=> 714
 ```

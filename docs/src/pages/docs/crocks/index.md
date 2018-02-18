@@ -26,7 +26,7 @@ but what they do from type to type may vary.
 | `IO` | `of` | `ap`, `chain`, `map`, `of`, `run` |
 | `List` |  `empty`, `fromArray`, `of` | `ap`, `chain`, `concat`, `cons`, `empty`, `equals`, `filter`, `head`, `map`, `of`, `reduce`, `reduceRight`, `reject`, `sequence`, `tail`, `toArray`, `traverse`, `valueOf` |
 | [`Maybe`][maybe] | [`Nothing`][maybe-nothing], [`Just`][maybe-just], [`of`][maybe-of], [`zero`][maybe-zero] | [`alt`][maybe-alt], [`ap`][maybe-ap], [`chain`][maybe-chain], [`coalesce`][maybe-coalesce], [`concat`][maybe-concat], [`equals`][maybe-equals], [`either`][maybe-either], [`map`][maybe-map], [`of`][maybe-of], [`option`][maybe-option], [`sequence`][maybe-sequence], [`traverse`][maybe-traverse], [`zero`][maybe-zero] |
-| `Pair` | --- | `ap`, `bimap`, `chain`, `concat`, `equals`, `extend`, `fst`, `map`, `merge`, `of`, `sequence`, `snd`, `swap`, `traverse`, `toArray` |
+| [`Pair`][pair] | --- | [`ap`][pair-ap], [`bimap`][pair-bimap], [`chain`][pair-chain], [`concat`][pair-concat], [`equals`][pair-equals], [`extend`][pair-extend], [`fst`][pair-fst], [`map`][pair-map], [`merge`][pair-merge], [`sequence`][pair-sequence], [`snd`][pair-snd], [`swap`][pair-swap], [`traverse`][pair-traverse], [`toArray`][pair-toarray] |
 | [`Pred`][pred] * | [`empty`][pred-empty] | [`concat`][pred-concat], [`contramap`][pred-contra], [`runWith`][pred-run], [`valueOf`][pred-value] |
 | [`Reader`][reader] | [`ask`][reader-ask], [`of`][reader-of] | [`ap`][reader-ap], [`chain`][reader-chain], [`map`][reader-map], [`runWith`][reader-run] |
 | [`ReaderT`][readert] | [`ask`][readert-ask], [`lift`][readert-lift], [`liftFn`][readert-liftfn], [`of`][readert-of] | [`ap`][readert-ap], [`chain`][readert-chain], [`map`][readert-map], [`runWith`][readert-run] |
@@ -81,6 +81,22 @@ but what they do from type to type may vary.
 [equiv-contra]: Equiv.html#contramap
 [equiv-compare]: Equiv.html#comparewith
 [equiv-value]: Equiv.html#valueof
+
+[pair]: Pair.html
+[pair-ap]: Pair.html#ap
+[pair-bimap]: Pair.html#bimap
+[pair-chain]: Pair.html#chain
+[pair-concat]: Pair.html#concat
+[pair-equals]: Pair.html#equals
+[pair-extend]: Pair.html#extend
+[pair-fst]: Pair.html#fst
+[pair-map]: Pair.html#map
+[pair-merge]: Pair.html#merge
+[pair-sequence]: Pair.html#sequence
+[pair-snd]: Pair.html#snd
+[pair-swap]: Pair.html#swap
+[pair-traverse]: Pair.html#traverse
+[pair-toarray]: Pair.html#toarray
 
 [pred]: Pred.html
 [pred-empty]: Pred.html#empty

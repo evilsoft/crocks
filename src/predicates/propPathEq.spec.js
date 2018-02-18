@@ -26,14 +26,6 @@ test('propPathEq function', t => {
   t.throws(p(unit, val, {}), err, 'throws with function in third argument')
   t.throws(p({}, {}, val, {}), err, 'throws with an object in first argument')
 
-  t.throws(p([ undefined ], val, {}), err, 'throws with an array of undefined in first argument')
-  t.throws(p([ null ], val, {}), err, 'throws with array of null in first argument')
-  t.throws(p(false, val, {}), err, 'throws with an array of false in first argument')
-  t.throws(p(true, val, {}), err, 'throws with an array of true in first argument')
-  t.throws(p([ val, {} ], val, {}), err, 'throws with an array of objects in first argument')
-  t.throws(p([ [ 'key' ] ], val, {}), err, 'throws with a nested array in first argument')
-  t.throws(p([ 'some', null, 5 ], val, { some: { key: 5 } }), err, 'throws with unexpected input beyond first index in first argument')
-
   const obj = { some: { key: val, null: null, nan: NaN, undefined: undefined } }
   const goodPath = [ 'some', 'key' ]
   const badPath = [ 'this', 'is', 'really', 'bad' ]

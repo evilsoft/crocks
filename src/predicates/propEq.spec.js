@@ -16,15 +16,6 @@ test('propEq function', t => {
 
   t.ok(isFunction(propEq), 'is a function')
 
-  const err1 = /propEq: Number or String required for first argument/
-  t.throws(f(undefined, val, {}), err1, 'throws with undefined in first argument')
-  t.throws(f(null, val, {}), err1, 'throws with null in first argument')
-  t.throws(f(false, val, {}), err1, 'throws with false in first argument')
-  t.throws(f(true, val, {}), err1, 'throws with true number in first argument')
-  t.throws(f({}, val, {}), err1, 'throws with object in first argument')
-  t.throws(f([], val, {}), err1, 'throws with array in first argument')
-  t.throws(f(unit, val, {}), err1, 'throws with function in first argument')
-
   const err3 = /propEq: Object required for third argument/
   t.throws(f(key, val, undefined), err3, 'throws with undefined in third argument')
   t.throws(f(key, val, null), err3, 'throws with null in third argument')
@@ -38,6 +29,13 @@ test('propEq function', t => {
   t.equals(propEq(key, val, { [key]: undefined }), false, 'returns false when value does not exist on object')
   t.equals(propEq(key, '5', { [key]: 5 }), false, 'returns false for truthy string')
   t.equals(propEq(key, 5, { [key]: '5' }), false, 'returns false for truthy number')
+  t.equals(propEq(undefined, val, {}), false, 'returns false with undefined in first argument')
+  t.equals(propEq(null, val, {}), false, 'returns false with null in first argument')
+  t.equals(propEq(false, val, {}), false, 'returns false with false in first argument')
+  t.equals(propEq(true, val, {}), false, 'returns false with true number in first argument')
+  t.equals(propEq({}, val, {}), false, 'returns false with object in first argument')
+  t.equals(propEq([], val, {}), false, 'returns false with array in first argument')
+  t.equals(propEq(unit, val, {}), false, 'returns false with function in first argument')
 
   t.equals(propEq(key, 42, { [key]: 42 }), true, 'returns true when value exists on object')
   t.equals(propEq(key, [ 1, 2, null, obj ], { [key]: [ 1, 2, null, obj ] }), true, 'returns true when a deep matching array exists on object')

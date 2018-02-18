@@ -88,6 +88,16 @@
         "review",
         "code"
       ]
+    },
+    {
+      "login": "jonwhelan",
+      "name": "Jon Whelan",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/7376957?v=4",
+      "profile": "https://github.com/jonwhelan",
+      "contributions": [
+        "bug",
+        "code"
+      ]
     }
   ]
 }

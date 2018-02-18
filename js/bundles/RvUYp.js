@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([25,29,30,31],[
+webpackJsonppageComponent([16,31,32,33],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -28351,12 +28351,23 @@ exports.default = parseFromAnchor;
 /* 217 */,
 /* 218 */,
 /* 219 */,
-/* 220 */
+/* 220 */,
+/* 221 */,
+/* 222 */,
+/* 223 */,
+/* 224 */,
+/* 225 */,
+/* 226 */,
+/* 227 */,
+/* 228 */,
+/* 229 */,
+/* 230 */,
+/* 231 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WYjVj", function() { return WYjVj; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RvUYp", function() { return RvUYp; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28368,15 +28379,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var templates;
 goog.loadModule(function(exports) {
 
-// This file was automatically generated from Maybe.soy.
+// This file was automatically generated from predicate-functions.soy.
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace WYjVj.
+ * @fileoverview Templates in namespace RvUYp.
  * @public
  */
 
-goog.module('WYjVj.incrementaldom');
+goog.module('RvUYp.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28397,9 +28408,7 @@ var ie_open_end = IncrementalDom.elementOpenEnd;
 var itext = IncrementalDom.text;
 var iattr = IncrementalDom.attr;
 
-var $templateAlias2 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('ElectricCode.incrementaldom', 'render');
-
-var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('guide.incrementaldom', 'render');
+var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('notopic.incrementaldom', 'render');
 
 
 /**
@@ -28410,1462 +28419,488 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var param696 = function() {
-    $templateAlias2({code: 'Maybe a = Nothing | Just a', mode: 'haskell'}, null, opt_ijData);
+  var param1715 = function() {
     ie_open('p');
-      itext('Defined as a Sum Type with its left side fixed to ');
+      itext('All functions in this group have a signature of ');
       ie_open('code');
-        itext('()');
+        itext('* -> Boolean');
       ie_close('code');
-      itext(' (');
+      itext(' and are used with the many predicate based functions that ship with ');
       ie_open('code');
-        itext('Nothing');
+        itext('crocks');
       ie_close('code');
-      itext('), ');
-      ie_open('code');
-        itext('Maybe');
-      ie_close('code');
-      itext(' is well suited for capturing disjunction when the cause of the "error" case does not need to be communicated. For example, providing default values on specific conditions.');
-    ie_close('p');
-    ie_open('p');
-      itext('A ');
-      ie_open('code');
-        itext('Maybe');
-      ie_close('code');
-      itext(' represents disjunction by using (2) constructors, ');
-      ie_open('code');
-        itext('Nothing');
-      ie_close('code');
-      itext(' or ');
-      ie_open('code');
-        itext('Just');
-      ie_close('code');
-      itext('. A ');
-      ie_open('code');
-        itext('Just');
-      ie_close('code');
-      itext(' instance represents the truth case while ');
-      ie_open('code');
-        itext('Nothing');
-      ie_close('code');
-      itext(' is considered false. With the exception of ');
+      itext(', like ');
       ie_open('a', null, null,
-          'href', '#coalesce');
+          'href', 'helpers.html#safe');
         ie_open('code');
-          itext('coalesce');
+          itext('safe');
         ie_close('code');
       ie_close('a');
-      itext(', all ');
-      ie_open('code');
-        itext('Maybe');
-      ie_close('code');
-      itext(' returning methods on an instance will be applied to a ');
-      ie_open('code');
-        itext('Just');
-      ie_close('code');
-      itext(' returning the result. If an instance is a ');
-      ie_open('code');
-        itext('Nothing');
-      ie_close('code');
-      itext(', then all application is skipped and another ');
-      ie_open('code');
-        itext('Nothing');
-      ie_close('code');
-      itext('is returned.');
-    ie_close('p');
-    ie_open('p');
-      itext('It is recommended to use the available ');
+      itext(', ');
       ie_open('a', null, null,
-          'href', '#just');
+          'href', 'logic-functions.html#ifelse');
         ie_open('code');
-          itext('Just');
+          itext('ifElse');
         ie_close('code');
       ie_close('a');
       itext(' and ');
+      ie_open('code');
+        itext('filter');
+      ie_close('code');
+      itext(' to name a few. They also fit naturally with the ');
       ie_open('a', null, null,
-          'href', '#nothing');
-        ie_open('code');
-          itext('Nothing');
-        ie_close('code');
-      ie_close('a');
-      itext('constructors to construct ');
-      ie_open('code');
-        itext('Maybe');
-      ie_close('code');
-      itext(' instances in most cases. You can use the');
-      ie_open('code');
-        itext('Maybe');
-      ie_close('code');
-      itext(' constructor to construct a ');
-      ie_open('code');
-        itext('Just');
-      ie_close('code');
-      itext(', but it may read better to just use');
-      ie_open('code');
-        itext('Just');
-      ie_close('code');
-      itext('.');
-    ie_close('p');
-    $templateAlias2({code: 'const { Just, Nothing } = require(\'crocks/Maybe\')\n\nconst chain = require(\'crocks/pointfree/chain\')\nconst compose = require(\'crocks/helpers/compose\')\nconst ifElse = require(\'crocks/logic/ifElse\')\nconst isNumber = require(\'crocks/predicates/isNumber\')\n\n// gt5 :: Number -> Boolean\nconst gt5 =\n  x => x > 5\n\n// safe :: (a -> Boolean) -> a -> Maybe b\nconst safe = pred =>\n  ifElse(pred, Just, Nothing)\n\n// safeNumber :: a -> Maybe Number\nconst safeNumber =\n  safe(isNumber)\n\n// maybeBig :: Number -> Maybe Number\nconst maybeBig =\n  safe(gt5)\n\n// bigNumber :: a -> Maybe Number\nconst bigNumber = compose(\n  chain(maybeBig), safeNumber\n)\n\nsafeNumber(45)\n//=> Just 45\n\nsafeNumber(\'99\')\n//=> Nothing\n\nmaybeBig(99)\n//=> Just 99\n\nmaybeBig(2)\n//=> Nothing\n\nbigNumber(34)\n//=> Just 34\n\nbigNumber(\'string\')\n//=> Nothing\n\nbigNumber(3)\n//=> Nothing', mode: 'javascript'}, null, opt_ijData);
-    ie_open('article', null, null,
-        'id', 'topic-implements');
-      ie_open('h2');
-        ie_open('a', null, null,
-            'id', 'implements',
-            'href', '#implements');
-          itext('Implements');
-        ie_close('a');
-      ie_close('h2');
-      ie_open('p');
-        ie_open('code');
-          itext('Setoid');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('Semigroup');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('Functor');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('Alt');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('Plus');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('Apply');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('Traversable');
-        ie_close('code');
-        itext(',');
-        ie_open('code');
-          itext('Chain');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('Applicative');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('Alternative');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('Monad');
-        ie_close('code');
-      ie_close('p');
-    ie_close('article');
-    ie_open('article', null, null,
-        'id', 'topic-constructor');
-      ie_open('h2');
-        ie_open('a', null, null,
-            'id', 'constructor-methods',
-            'href', '#constructor-methods');
-          itext('Constructor Methods');
-        ie_close('a');
-      ie_close('h2');
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'nothing',
-            'href', '#nothing');
-          itext('Nothing');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Maybe.Nothing :: () -> Maybe a', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('Used to construct a ');
-        ie_open('code');
-          itext('Nothing');
-        ie_close('code');
-        itext(' instance that represents the "false" portion of a disjunction. When an instance is a ');
-        ie_open('code');
-          itext('Nothing');
-        ie_close('code');
-        itext(', most ');
-        ie_open('code');
-          itext('Maybe');
-        ie_close('code');
-        itext(' returning methods will just return another ');
-        ie_open('code');
-          itext('Nothing');
-        ie_close('code');
-        itext('. Anything passed to the constructor will be thrown out and mapped to ');
-        ie_open('code');
-          itext('()');
-        ie_close('code');
-        itext('.');
-      ie_close('p');
-      $templateAlias2({code: 'const { Just, Nothing } = require(\'crocks/Maybe\')\n\nconst chain = require(\'crocks/pointfree/chain\')\nconst isNumber = require(\'crocks/predicates/isNumber\')\nconst safeLift = require(\'crocks/Maybe/safeLift\')\n\n// add10 :: Number -> Number\nconst add10 =\n  x => x + 10\n\n// safeAdd10 :: a -> Maybe Number\nconst safeAdd10 =\n  safeLift(isNumber, add10)\n\nJust(23)\n  .map(add10)\n//=> Just 33\n\nNothing(23)\n  .map(add10)\n//=> Nothing\n\nchain(safeAdd10, Just(10))\n//=> Just 20\n\nchain(safeAdd10, Nothing())\n//=> Nothing', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'just',
-            'href', '#just');
-          itext('Just');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Maybe.Just :: a -> Maybe a', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('Used to construct a ');
-        ie_open('code');
-          itext('Just');
-        ie_close('code');
-        itext(' instance that represents the "true" portion of a disjunction or a valid value.  ');
-        ie_open('code');
-          itext('Just');
-        ie_close('code');
-        itext(' will wrap any given value in a ');
-        ie_open('code');
-          itext('Just');
-        ie_close('code');
-        itext(', signaling the validity of the wrapped value.');
-      ie_close('p');
-      $templateAlias2({code: 'const { Just, Nothing } = require(\'crocks/Maybe\')\n\nconst compose = require(\'crocks/helpers/compose\')\nconst ifElse = require(\'crocks/logic/ifElse\')\nconst isString = require(\'crocks/predicates/isString\')\nconst map = require(\'crocks/pointfree/map\')\n\n// toUpper :: String -> String\nconst toUpper =\n  x => x.toUpperCase()\n\n// safe :: (a -> Boolean) -> a -> Maybe a\nconst safe =\n  pred => ifElse(pred, Just, Nothing)\n\n// safeShout :: a -> Maybe String\nconst safeShout = compose(\n  map(toUpper),\n  safe(isString)\n)\n\nsafeShout(45)\n//=> Nothing\n\nsafeShout(\'Hey there!\')\n//=> Just "HEY THERE!"', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'of',
-            'href', '#of');
-          itext('of');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Maybe.of :: a -> Maybe a', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('Used to wrap any value into a ');
-        ie_open('code');
-          itext('Maybe');
-        ie_close('code');
-        itext(' as a ');
-        ie_open('code');
-          itext('Just');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('of');
-        ie_close('code');
-        itext(' is used mostly by helper functions that work "generically" with instances of either ');
-        ie_open('code');
-          itext('Applicative');
-        ie_close('code');
-        itext(' or ');
-        ie_open('code');
-          itext('Monad');
-        ie_close('code');
-        itext('. When working specifically with the ');
-        ie_open('code');
-          itext('Maybe');
-        ie_close('code');
-        itext(' type, the ');
-        ie_open('a', null, null,
-            'href', '#just');
-          ie_open('code');
-            itext('Just');
-          ie_close('code');
-        ie_close('a');
-        itext(' constructor should be used. Reach for ');
-        ie_open('code');
-          itext('of');
-        ie_close('code');
-        itext(' when working with functions that will work with ANY ');
-        ie_open('code');
-          itext('Applicative');
-        ie_close('code');
-        itext('/');
-        ie_open('code');
-          itext('Monad');
-        ie_close('code');
-        itext('.');
-      ie_close('p');
-      $templateAlias2({code: 'const Maybe = require(\'crocks/Maybe\')\nconst { Just } = Maybe\n\nconst curry = require(\'crocks/helpers/curry\')\nconst isString = require(\'crocks/predicates/isString\')\nconst safe = require(\'crocks/Maybe/safe\')\n\nMaybe(35)\n//=> Just 35\n\nJust(35)\n//=> Just 35\n\nMaybe.of(35)\n//=> Just 35\n\nconst safeString =\n  safe(isString)\n\n// lift2 :: Applicative m => (a -> b -> c) -> m a -> m b -> m c\nconst lift2 = curry(\n  (fn, x, y) => x.of(fn).ap(x).ap(y)\n)\n\n// join :: Applicative m => m String -> m String -> m String\nconst join =\n  lift2(a => b => `${a} ${b}`)\n\njoin(safeString(\'Brad\'), safeString(\'Pitt\'))\n//=> Just "Brad Pitt"\n\njoin(safeString(34), safeString(\'Pitt\'))\n//=> Nothing', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'zero',
-            'href', '#zero');
-          itext('zero');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Maybe.zero :: () -> Maybe a', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('When working with ');
-        ie_open('code');
-          itext('Alt');
-        ie_close('code');
-        itext('s, ');
-        ie_open('code');
-          itext('zero');
-        ie_close('code');
-        itext(' provides a sort of ');
-        ie_open('code');
-          itext('empty');
-        ie_close('code');
-        itext(' or identity for');
-        ie_open('code');
-          itext('Maybe');
-        ie_close('code');
-        itext(' when used with ');
-        ie_open('a', null, null,
-            'href', '#alt');
-          ie_open('code');
-            itext('alt');
-          ie_close('code');
-        ie_close('a');
-        itext('. ');
-        ie_open('code');
-          itext('zero');
-        ie_close('code');
-        itext(' takes no arguments and returns a');
-        ie_open('code');
-          itext('Nothing');
-        ie_close('code');
-        itext(' instance. Just like an ');
-        ie_open('code');
-          itext('empty');
-        ie_close('code');
-        itext(' method on a given ');
-        ie_open('code');
-          itext('Monoid');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('zero');
-        ie_close('code');
-        itext('can be used to fold a collection of ');
-        ie_open('code');
-          itext('Alt');
-        ie_close('code');
-        itext('s under ');
-        ie_open('code');
-          itext('alt');
-        ie_close('code');
-        itext('.');
-      ie_close('p');
-      $templateAlias2({code: 'const { Nothing, Just, zero } = require(\'crocks/Maybe\')\n\nconst alt = require(\'crocks/pointfree/alt\')\nconst flip = require(\'crocks/combinators/flip\')\nconst isNumber = require(\'crocks/predicates/isNumber\')\nconst mapReduce = require(\'crocks/helpers/mapReduce\')\nconst safe = require(\'crocks/Maybe/safe\')\n\n// firstValid :: [ * ] -> Maybe Number\nconst firstValid =\n  mapReduce(safe(isNumber), flip(alt), zero())\n\nJust(33)\n  .alt(zero())\n//=> Just 33\n\nzero()\n  .alt(Just(33))\n//=> Just 33\n\nNothing()\n  .alt(zero())\n//=> Nothing\n\nzero()\n  .alt(Nothing())\n//=> Nothing\n\nfirstValid([ null, \'nope\', 10, 45 ])\n//=> Just 10\n\nfirstValid([ 75, null, \'nope\' ])\n//=> Just 75\n\nfirstValid([ null, undefined, \'wrong\' ])\n//=> Nothing', mode: 'javascript'}, null, opt_ijData);
-    ie_close('article');
-    ie_open('article', null, null,
-        'id', 'topic-instance');
-      ie_open('h2');
-        ie_open('a', null, null,
-            'id', 'instance-methods',
-            'href', '#instance-methods');
-          itext('Instance Methods');
-        ie_close('a');
-      ie_close('h2');
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'equals',
-            'href', '#equals');
-          itext('equals');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Maybe a ~> b -> Boolean', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('Used to compare the underlying values of (2) ');
-        ie_open('code');
-          itext('Maybe');
-        ie_close('code');
-        itext(' instances for equality by value, ');
-        ie_open('code');
-          itext('equals');
-        ie_close('code');
-        itext(' takes any given argument and returns ');
-        ie_open('code');
-          itext('true');
-        ie_close('code');
-        itext(' if the passed arguments is a ');
-        ie_open('code');
-          itext('Maybe');
-        ie_close('code');
-        itext(' with an underlying value equal to the underlying value of the ');
-        ie_open('code');
-          itext('Maybe');
-        ie_close('code');
-        itext(' the method is being called on. If the passed argument is not a ');
-        ie_open('code');
-          itext('Maybe');
-        ie_close('code');
-        itext(' or the underlying values are not equal, ');
-        ie_open('code');
-          itext('equals');
-        ie_close('code');
-        itext(' will return ');
-        ie_open('code');
-          itext('false');
-        ie_close('code');
-        itext('.');
-      ie_close('p');
-      $templateAlias2({code: 'const { Nothing, Just } = require(\'crocks/Maybe\')\n\nconst equals = require(\'crocks/pointfree/equals\')\n\nJust(33)\n  .equals(Just(33))\n//=> true\n\nNothing()\n  .equals(Nothing())\n//=> true\n\nNothing()\n  .equals(Just(33))\n//=> false\n\n// by value, not reference for most types\nJust({ a: 86, b: true })\n  .equals(Just({ a: 86, b: true }))\n//=> true\n\nequals(Just(95), 95)\n//=> false\n\nequals(undefined, Nothing())\n//=> false\n\nequals(Just([ 2, 3 ]), Just([ 2, 3 ]))\n//=> true', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'concat',
-            'href', '#concat');
-          itext('concat');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Semigroup s => Maybe s ~> Maybe s -> Maybe s', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('When an underlying value of a given ');
-        ie_open('code');
-          itext('Maybe');
-        ie_close('code');
-        itext(' is fixed to a ');
-        ie_open('code');
-          itext('Semigroup');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('concat');
-        ie_close('code');
-        itext('can be used to concat another ');
-        ie_open('code');
-          itext('Maybe');
-        ie_close('code');
-        itext(' instance with an underlying ');
-        ie_open('code');
-          itext('Semigroup');
-        ie_close('code');
-        itext('of the same type. Expecting a ');
-        ie_open('code');
-          itext('Maybe');
-        ie_close('code');
-        itext(' wrapping a ');
-        ie_open('code');
-          itext('Semigroup');
-        ie_close('code');
-        itext(' of the same type,');
-        ie_open('code');
-          itext('concat');
-        ie_close('code');
-        itext(' will give back a new ');
-        ie_open('code');
-          itext('Maybe');
-        ie_close('code');
-        itext(' instance wrapping the result of combining the (2) underlying ');
-        ie_open('code');
-          itext('Semigroup');
-        ie_close('code');
-        itext('s. When called on a ');
-        ie_open('code');
-          itext('Nothing');
-        ie_close('code');
-        itext(' instance, ');
-        ie_open('code');
-          itext('concat');
-        ie_close('code');
-        itext('will return a ');
-        ie_open('code');
-          itext('Nothing');
-        ie_close('code');
-        itext('.');
-      ie_close('p');
-      $templateAlias2({code: 'const { Nothing, Just } = require(\'crocks/Maybe\')\nconst Sum = require(\'crocks/Sum\')\n\nconst compose = require(\'crocks/helpers/compose\')\nconst concat = require(\'crocks/pointfree/concat\')\nconst flip = require(\'crocks/combinators/flip\')\nconst isNumber = require(\'crocks/predicates/isNumber\')\nconst map = require(\'crocks/pointfree/map\')\nconst mapReduce = require(\'crocks/helpers/mapReduce\')\nconst safeLift = require(\'crocks/Maybe/safeLift\')\nconst valueOf = require(\'crocks/pointfree/valueOf\')\n\n// safeSum :: a -> Maybe Sum\nconst safeSum =\n  safeLift(isNumber, Sum)\n\n// empty :: Maybe Sum\nconst empty =\n  Just(Sum.empty())\n\n// sumList :: [ * ] -> Maybe Number\nconst sumList = compose(\n  map(valueOf),\n  mapReduce(safeSum, flip(concat), empty)\n)\n\nJust([ 34 ])\n  .concat(Just([ 92 ]))\n//=> Just [ 34, 92 ]\n\nJust([ 34 ])\n  .concat(Nothing())\n//=> Nothing\n\nsumList([ 3, 4, 5 ])\n//=> Just 12\n\nsumList([ \'three\', 4, \'five\' ])\n//=> Nothing', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'map',
-            'href', '#map');
-          itext('map');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Maybe a ~> (a -> b) -> Maybe b', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('Used to apply transformations to values in the safety of a ');
-        ie_open('code');
-          itext('Maybe');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('map');
-        ie_close('code');
-        itext(' takes a function that it will lift into the context of the ');
-        ie_open('code');
-          itext('Maybe');
-        ie_close('code');
-        itext(' and apply to it the wrapped value. When ran on a ');
-        ie_open('code');
-          itext('Just');
-        ie_close('code');
-        itext(' instance, ');
-        ie_open('code');
-          itext('map');
-        ie_close('code');
-        itext(' will apply the wrapped value to the provided function and return the result in a new ');
-        ie_open('code');
-          itext('Just');
-        ie_close('code');
-        itext(' instance.');
-      ie_close('p');
-      $templateAlias2({code: 'const { Nothing, Just } = require(\'crocks/Maybe\')\n\nconst assign = require(\'crocks/helpers/assign\')\nconst compose = require(\'crocks/helpers/compose\')\nconst isObject = require(\'crocks/predicates/isObject\')\nconst isString = require(\'crocks/predicates/isString\')\nconst map = require(\'crocks/pointfree/map\')\nconst safe = require(\'crocks/Maybe/safe\')\n\n// add10 :: Number -> Number\nconst add10 =\n  x => x + 10\n\n// toUpper :: String -> String\nconst toUpper = x =>\n  x.toUpperCase()\n\n// safeObj :: a -> Maybe Object\nconst safeObj =\n  safe(isObject)\n\n// shout :: a -> Maybe String\nconst shout = x =>\n  safe(isString, x)\n    .map(toUpper)\n\n// setProcessed :: a -> Maybe Object\nconst setProcessed = compose(\n  map(assign({ processed: true })),\n  safeObj\n)\n\nJust(0)\n  .map(add10)\n//=> Just 10\n\nNothing()\n  .map(add10)\n//=> Nothing\n\nshout(\'good news\')\n//=> Just "GOOD NEWS"\n\nshout(33)\n//=> Nothing\n\nsetProcessed({ cheese: true })\n//=> Just { cheese: true, processed: true }\n\nsetProcessed(null)\n//=> Nothing', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'alt',
-            'href', '#alt');
-          itext('alt');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Maybe a ~> Maybe a -> Maybe a', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('Providing a means for a fallback or alternative value, ');
-        ie_open('code');
-          itext('alt');
-        ie_close('code');
-        itext(' combines (2)');
-        ie_open('code');
-          itext('Maybe');
-        ie_close('code');
-        itext(' instances and will return the first ');
-        ie_open('code');
-          itext('Just');
-        ie_close('code');
-        itext(' it encounters or ');
-        ie_open('code');
-          itext('Nothing');
-        ie_close('code');
-        itext('if it does not have a ');
-        ie_open('code');
-          itext('Just');
-        ie_close('code');
-        itext('. This can be used in conjunction with');
-        ie_open('a', null, null,
-            'href', '#zero');
-          ie_open('code');
-            itext('zero');
-          ie_close('code');
-        ie_close('a');
-        itext(' to return the first valid value in contained in a ');
-        ie_open('code');
-          itext('Foldable');
-        ie_close('code');
-        itext('structure.');
-      ie_close('p');
-      $templateAlias2({code: 'const { zero, Nothing, Just } = require(\'crocks/Maybe\')\n\nconst alt = require(\'crocks/pointfree/alt\')\nconst isArray = require(\'crocks/predicates/isArray\')\nconst flip = require(\'crocks/combinators/flip\')\nconst mapReduce = require(\'crocks/helpers/mapReduce\')\nconst safe = require(\'crocks/Maybe/safe\')\n\n// firstArray :: Foldable f => f * -> Maybe Array\nconst firstArray =\n  mapReduce(safe(isArray), flip(alt), zero())\n\nNothing()\n  .alt(Just(33))\n//=> Just 33\n\nJust(42)\n  .alt(Nothing())\n  .alt(Just(99))\n//=> Just 42\n\nfirstArray([ \'Not Array\', null, [ 2, 3, 4 ], [ 1, 2 ] ])\n//=> Just [ 2, 3, 4 ]\n\nfirstArray([ null, 5, \'76\' ])\n//=> Nothing', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'ap',
-            'href', '#ap');
-          itext('ap');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Maybe (a -> b) ~> Maybe a -> Maybe b', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('Short for apply, ');
-        ie_open('code');
-          itext('ap');
-        ie_close('code');
-        itext(' is used to apply a ');
-        ie_open('code');
-          itext('Maybe');
-        ie_close('code');
-        itext(' instance containing a value to another ');
-        ie_open('code');
-          itext('Maybe');
-        ie_close('code');
-        itext(' instance that contains a function, resulting in new ');
-        ie_open('code');
-          itext('Maybe');
-        ie_close('code');
-        itext('instance with the result. ');
-        ie_open('code');
-          itext('ap');
-        ie_close('code');
-        itext(' requires that it is called on an ');
-        ie_open('code');
-          itext('instance');
-        ie_close('code');
-        itext(' that is either a ');
-        ie_open('code');
-          itext('Nothing');
-        ie_close('code');
-        itext(' or a ');
-        ie_open('code');
-          itext('Just');
-        ie_close('code');
-        itext(' that wraps a curried polyadic function.');
-      ie_close('p');
-      ie_open('p');
-        itext('When either ');
-        ie_open('code');
-          itext('Maybe');
-        ie_close('code');
-        itext(' is a ');
-        ie_open('code');
-          itext('Nothing');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('ap');
-        ie_close('code');
-        itext(' will return a ');
-        ie_open('code');
-          itext('Nothing');
-        ie_close('code');
-        itext('. This can be used to safely combine multiple values under a given combination function. If any of the inputs results in a ');
-        ie_open('code');
-          itext('Nothing');
-        ie_close('code');
-        itext(' than they will never be applied to the function and not provide exceptions or unexpected results.');
-      ie_close('p');
-      $templateAlias2({code: 'const Maybe = require(\'crocks/Maybe\')\nconst { Nothing, Just } =  Maybe\n\nconst compose = require(\'crocks/helpers/compose\')\nconst chain = require(\'crocks/pointfree/chain\')\nconst curry = require(\'crocks/helpers/curry\')\nconst fanout = require(\'crocks/helpers/fanout\')\nconst isString = require(\'crocks/predicates/isString\')\nconst liftA2 = require(\'crocks/helpers/liftA2\')\nconst merge = require(\'crocks/Pair/merge\')\nconst prop = require(\'crocks/Maybe/prop\')\nconst safe = require(\'crocks/Maybe/safe\')\n\n// add :: Number -> Number -> Number\nconst add =\n  x => y => x + y\n\n// joinWith :: String -> String -> String -> String\nconst joinWith = curry(\n  (del, x, y) => x + del + y\n)\n\n// stringProp :: String -> a -> Maybe String\nconst stringProp = key => compose(\n  chain(safe(isString)),\n  prop(key)\n)\n\n// getNames :: a -> Pair (Maybe String) (Maybe String)\nconst getNames = fanout(\n  stringProp(\'first\'),\n  stringProp(\'last\')\n)\n\n// joinNames :: Pair (Maybe String) (Maybe String) -> Maybe String\nconst joinNames =\n  merge(liftA2(joinWith(\' \')))\n\n// fullName :: a -> Maybe String\nconst fullName =\n  compose(joinNames, getNames)\n\nMaybe.of(add)\n  .ap(Just(5))\n  .ap(Just(27))\n//=> Just 32\n\nJust(\'hello\')\n  .map(joinWith(\' -- \'))\n  .ap(Just(\'friend\'))\n//=> Just "hello -- friend"\n\nMaybe.of(add)\n  .ap(Just(29))\n  .ap(Nothing())\n//=> Nothing\n\nfullName({ first: \'Joey\', last: \'Fella\' })\n//=> Just "Joey Fella"\n\nfullName(null)\n//=> Nothing\n\nfullName({ first: \'Lizzy\' })\n//=> Nothing', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'sequence',
-            'href', '#sequence');
-          itext('sequence');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Applicative f => Maybe (f a) ~> (a -> f a) -> f (Maybe a)', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('When an instance of ');
-        ie_open('code');
-          itext('Maybe');
-        ie_close('code');
-        itext(' wraps a possible ');
-        ie_open('code');
-          itext('Applicative');
-        ie_close('code');
-        itext(' instance, ');
-        ie_open('code');
-          itext('sequence');
-        ie_close('code');
-        itext('can be used to "swap" the "type sequence". ');
-        ie_open('code');
-          itext('sequence');
-        ie_close('code');
-        itext(' requires that the ');
-        ie_open('code');
-          itext('of');
-        ie_close('code');
-        itext(', or ');
-        ie_open('code');
-          itext('Applicative');
-        ie_close('code');
-        itext(' function of the wrapped ');
-        ie_open('code');
-          itext('Applicative');
-        ie_close('code');
-        itext(' instance is provided for the case of when the ');
-        ie_open('code');
-          itext('Maybe');
-        ie_close('code');
-        itext(' instance is a ');
-        ie_open('code');
-          itext('Nothing');
-        ie_close('code');
-        itext('. ');
-        ie_open('code');
-          itext('sequence');
-        ie_close('code');
-        itext(' can be derived from ');
-        ie_open('a', null, null,
-            'href', '#traverse');
-          ie_open('code');
-            itext('traverse');
-          ie_close('code');
-        ie_close('a');
-        itext(' by passing it an ');
-        ie_open('code');
-          itext('identity');
-        ie_close('code');
-        itext(' function (');
-        ie_open('code');
-          itext('x => x');
-        ie_close('code');
-        itext(').');
-      ie_close('p');
-      $templateAlias2({code: 'const { Nothing, Just } = require(\'crocks/Maybe\')\n\nconst Identity = require(\'crocks/Identity\')\nconst sequence = require(\'crocks/pointfree/sequence\')\n\n\n// seqId :: Maybe Identity a -> Identity Maybe a\nconst seqId =\n  sequence(Identity.of)\n\nseqId(Just(Identity(34)))\n//=> Identity Just 34\n\nseqId(Nothing())\n//=> Identity Nothing', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'traverse',
-            'href', '#traverse');
-          itext('traverse');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Applicative f => Maybe a ~> ((a -> f a), (a -> f b)) -> f Maybe b', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('Used to apply the "effect" of an ');
-        ie_open('code');
-          itext('Applicative');
-        ie_close('code');
-        itext(' to a value inside of a ');
-        ie_open('code');
-          itext('Maybe');
-        ie_close('code');
-        itext(',');
-        ie_open('code');
-          itext('traverse');
-        ie_close('code');
-        itext(', combines both the "effects" of the ');
-        ie_open('code');
-          itext('Applicative');
-        ie_close('code');
-        itext(' and the ');
-        ie_open('code');
-          itext('Maybe');
-        ie_close('code');
-        itext(' by returning a new instance of the ');
-        ie_open('code');
-          itext('Applicative');
-        ie_close('code');
-        itext(' wrapping the result of the');
-        ie_open('code');
-          itext('Applicative');
-        ie_close('code');
-        itext('s "effect" on the value in the ');
-        ie_open('code');
-          itext('Maybe');
-        ie_close('code');
-        itext('.');
-      ie_close('p');
-      ie_open('p');
-        ie_open('code');
-          itext('traverse');
-        ie_close('code');
-        itext(' requires the ');
-        ie_open('code');
-          itext('of');
-        ie_close('code');
-        itext(' function of the target ');
-        ie_open('code');
-          itext('Applicative');
-        ie_close('code');
-        itext(' and a function that is used to apply the ');
-        ie_open('code');
-          itext('Applicative');
-        ie_close('code');
-        itext(' to the value inside of the ');
-        ie_open('code');
-          itext('Maybe');
-        ie_close('code');
-        itext('. Both functions must return an instance of the ');
-        ie_open('code');
-          itext('Applicative');
-        ie_close('code');
-        itext('.');
-      ie_close('p');
-      $templateAlias2({code: 'const IO = require(\'crocks/IO\')\n\nconst compose = require(\'crocks/helpers/compose\')\nconst isNumber = require(\'crocks/predicates/isNumber\')\nconst safe = require(\'crocks/Maybe/safe\')\nconst traverse = require(\'crocks/pointfree/traverse\')\n\nlet someGlobal = 10\n\n// addToGlobal :: Number -> IO Number\nconst addToGlobal = x => IO(function() {\n  someGlobal = someGlobal + x\n  return someGlobal\n})\n\n// safeAddToGlobal :: a -> IO (Maybe Number)\nconst safeAddToGlobal = compose(\n  traverse(IO.of, addToGlobal),\n  safe(isNumber)\n)\n\nsafeAddToGlobal(32)\n  .run()\n//=> Just 42\n//someGlobal => 42\n\nsafeAddToGlobal(undefined)\n  .run()\n//=> Nothing\n//someGlobal => 42', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'chain',
-            'href', '#chain');
-          itext('chain');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Maybe a ~> (a -> Maybe b) -> Maybe b', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('Combining a sequential series of transformations that capture disjunction can be accomplished with ');
-        ie_open('code');
-          itext('chain');
-        ie_close('code');
-        itext('. ');
-        ie_open('code');
-          itext('chain');
-        ie_close('code');
-        itext(' expects a unary, ');
-        ie_open('code');
-          itext('Maybe');
-        ie_close('code');
-        itext(' returning function as its argument. When invoked on a ');
-        ie_open('code');
-          itext('Nothing');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('chain');
-        ie_close('code');
-        itext(' will not run the function, but will instead return another ');
-        ie_open('code');
-          itext('Nothing');
-        ie_close('code');
-        itext('. When called on a ');
-        ie_open('code');
-          itext('Just');
-        ie_close('code');
-        itext(' however, the inner value will be passed to provided function, returning the result as the new instance.');
-      ie_close('p');
-      $templateAlias2({code: 'const { Nothing, Just } = require(\'crocks/Maybe\')\n\nconst chain = require(\'crocks/pointfree/chain\')\nconst compose = require(\'crocks/helpers/compose\')\nconst isNumber = require(\'crocks/predicates/isNumber\')\nconst isString = require(\'crocks/predicates/isString\')\nconst prop = require(\'crocks/Maybe/prop\')\nconst safe = require(\'crocks/Maybe/safe\')\nconst safeLift = require(\'crocks/Maybe/safeLift\')\n\n// double :: Number -> Number\nconst double =\n  x => x + x\n\n// chainNumber :: Maybe a -> Maybe Number\nconst chainNumber =\n  chain(safe(isNumber))\n\n// doubleValue :: a -> Maybe Number\nconst doubleValue = compose(\n  chain(safeLift(isNumber, double)),\n  prop(\'value\')\n)\n\nchainNumber(Just(45))\n//=> Just 45\n\nchainNumber(Nothing())\n//=> Nothing\n\nJust(45)\n  .chain(safe(isString))\n//=> Nothing\n\ndoubleValue(undefined)\n//=> Nothing\n\ndoubleValue({ value: \'45\' })\n//=> Nothing\n\ndoubleValue({ number: 45 })\n//=> Nothing\n\ndoubleValue({ value: 45 })\n//=> Just 90', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'coalesce',
-            'href', '#coalesce');
-          itext('coalesce');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Maybe a ~> ((() -> b), (a -> b))) -> Maybe b', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('When one would like to ');
-        ie_open('a', null, null,
-            'href', '#option');
-          ie_open('code');
-            itext('option');
-          ie_close('code');
-        ie_close('a');
-        itext(' a ');
-        ie_open('code');
-          itext('Maybe');
-        ie_close('code');
-        itext(' but would like to remain within a ');
-        ie_open('code');
-          itext('Maybe');
-        ie_close('code');
-        itext(' type, ');
-        ie_open('code');
-          itext('coalesce');
-        ie_close('code');
-        itext(' can be used. ');
-        ie_open('code');
-          itext('coalesce');
-        ie_close('code');
-        itext(' expects (2) functions for it\'s inputs.');
-      ie_close('p');
-      ie_open('p');
-        itext('The first function is used when invoked on a ');
-        ie_open('code');
-          itext('Nothing');
-        ie_close('code');
-        itext(' and will return a ');
-        ie_open('code');
-          itext('Just');
-        ie_close('code');
-        itext('instance wrapping the result of the function. The second function is used when');
-        ie_open('code');
-          itext('coalesce');
-        ie_close('code');
-        itext(' is invoked on a ');
-        ie_open('code');
-          itext('Just');
-        ie_close('code');
-        itext(' and is used to map the original value, returning a new ');
-        ie_open('code');
-          itext('Just');
-        ie_close('code');
-        itext(' instance wrapping the result of the second function.');
-      ie_close('p');
-      $templateAlias2({code: 'const { Nothing, Just } = require(\'crocks/Maybe\')\n\nconst compose = require(\'crocks/helpers/compose\')\nconst composeK = require(\'crocks/helpers/composeK\')\nconst coalesce = require(\'crocks/pointfree/coalesce\')\nconst constant = require(\'crocks/combinators/constant\')\nconst identity = require(\'crocks/combinators/identity\')\nconst isString = require(\'crocks/predicates/isString\')\nconst map = require(\'crocks/pointfree/map\')\nconst objOf = require(\'crocks/helpers/objOf\')\nconst prop = require(\'crocks/Maybe/prop\')\nconst safe = require(\'crocks/Maybe/safe\')\n\n// shout :: String -> String\nconst shout =\n  x => x.toUpperCase()\n\n// defaultString :: Maybe String -> Maybe String\nconst defaultString =\n  coalesce(constant(\'\'), identity)\n\n// shoutOut :: String -> Object\nconst shoutOut = compose(\n  objOf(\'shout\'),\n  shout\n)\n\n// stringValue :: a -> Maybe String\nconst stringValue = composeK(\n  safe(isString),\n  prop(\'value\')\n)\n\n// shoutValue :: a -> Maybe Object\nconst shoutValue = compose(\n  map(shoutOut),\n  defaultString,\n  stringValue\n)\n\nJust(76)\n  .coalesce(constant(0), identity)\n//=> Just 76\n\nNothing()\n  .coalesce(constant(0), identity)\n//=> Just 0\n\nshoutValue({ value: \'hello\' })\n//=> Just { shout: \'HELLO\' }\n\nshoutValue(undefined)\n//=> Just { shout: \'\' }\n\nshoutValue({ value: 49 })\n//=> Just { shout: \'\' }\n\nshoutValue({})\n//=> Just { shout: \'\' }', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'option',
-            'href', '#option');
-          itext('option');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Maybe a ~> a -> a', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('Used as the primary way to "fold" a value out of a ');
-        ie_open('code');
-          itext('Maybe');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('option');
-        ie_close('code');
-        itext(' expects a default value. The default value provided will be returned when ');
-        ie_open('code');
-          itext('option');
-        ie_close('code');
-        itext(' is invoked on a ');
-        ie_open('code');
-          itext('Nothing');
-        ie_close('code');
-        itext(' instance. When invoked on a ');
-        ie_open('code');
-          itext('Just');
-        ie_close('code');
-        itext(', the underlying value is returned, discarding the provided default value. ');
-        ie_open('code');
-          itext('option');
-        ie_close('code');
-        itext(' is typically ran at the "edge" of a flow, to provide default values for complicated representations of disjunction.');
-      ie_close('p');
-      ie_open('p');
-        itext('When the need to immediately map the result of optioning a ');
-        ie_open('code');
-          itext('Maybe');
-        ie_close('code');
-        itext(' arises, then ');
-        ie_open('a', null, null,
-            'href', '#either');
-          ie_open('code');
-            itext('either');
-          ie_close('code');
-        ie_close('a');
-        itext(' may be employed to combine it in one operation.');
-      ie_close('p');
-      $templateAlias2({code: 'const { Nothing, Just } = require(\'crocks/Maybe\')\n\nNothing()\n  .option(0)\n//=> 0\n\nJust(99)\n  .option(0)\n//=> 99', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'either',
-            'href', '#either');
-          itext('either');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Maybe a ~> ((() -> b), (a -> b)) -> b', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('Used to provide a means to map a given ');
-        ie_open('code');
-          itext('Maybe');
-        ie_close('code');
-        itext(' instance while optioning out the wrapped value. ');
-        ie_open('a', null, null,
-            'href', '#option');
-          ie_open('code');
-            itext('option');
-          ie_close('code');
-        ie_close('a');
-        itext(' can handle most cases for optioning ');
-        ie_open('code');
-          itext('Maybe');
-        ie_close('code');
-        itext(', but does not provide a means to map a given value at the time of optioning. ');
-        ie_open('code');
-          itext('either');
-        ie_close('code');
-        itext(' expects (2) functions as its arguments. The first is a pointed function that will be used when invoked on a ');
-        ie_open('code');
-          itext('Nothing');
-        ie_close('code');
-        itext('. While the second will map the value wrapped in a given ');
-        ie_open('code');
-          itext('Just');
-        ie_close('code');
-        itext(' and return the result of that mapping.');
-      ie_close('p');
-      $templateAlias2({code: 'const { Nothing, Just } = require(\'crocks/Maybe\')\n\nconst either = require(\'crocks/pointfree/either\')\n\n// wrap :: a -> [ a ]\nconst wrap =\n  x => [ x ]\n\n// empty :: () -> [ a ]\nconst empty =\n  () => []\n\n// toArray :: Maybe a -> [ a ]\nconst toArray =\n  either(empty, wrap)\n\ntoArray(Just(56))\n//=> [ 56 ]\n\ntoArray(Nothing())\n//=> []', mode: 'javascript'}, null, opt_ijData);
-    ie_close('article');
-    ie_open('article', null, null,
-        'id', 'topic-helpers');
-      ie_open('h2');
-        ie_open('a', null, null,
-            'id', 'helper-functions',
-            'href', '#helper-functions');
-          itext('Helper Functions');
-        ie_close('a');
-      ie_close('h2');
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'prop',
-            'href', '#prop');
-          itext('prop');
-        ie_close('a');
-      ie_close('h4');
-      ie_open('p');
-        ie_open('code');
-          itext('crocks/Maybe/prop');
-        ie_close('code');
-      ie_close('p');
-      $templateAlias2({code: 'prop :: (String | Integer) -> a -> Maybe b', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('If you want some safety around pulling a value out of an ');
-        ie_open('code');
-          itext('Object');
-        ie_close('code');
-        itext(' or ');
-        ie_open('code');
-          itext('Array');
-        ie_close('code');
-        itext('with a single key or index, you can always reach for ');
-        ie_open('code');
-          itext('prop');
-        ie_close('code');
-        itext('. Well, as long as you are working with non-nested data that is. Just tell ');
-        ie_open('code');
-          itext('prop');
-        ie_close('code');
-        itext(' either the key or index you are interested in, and you will get back a function that will take anything and return a ');
-        ie_open('code');
-          itext('Just');
-        ie_close('code');
-        itext(' with the wrapped value if the key/index exists. If the key/index does not exist however, you will get back a ');
-        ie_open('code');
-          itext('Nothing');
-        ie_close('code');
-        itext('.');
-      ie_close('p');
-      $templateAlias2({code: 'const composeK = require(\'crocks/helpers/composeK\')\nconst prop = require(\'crocks/Maybe/prop\')\n\n// getValue :: a -> Maybe b\nconst getValue =\n  prop(\'value\')\n\n// getHead :: a -> Maybe b\nconst getHead =\n  prop(0)\n\n// getFirstValue :: a -> Maybe b\nconst getFirstValue = composeK(\n  getHead,\n  getValue\n)\n\ngetValue({ some: false })\n//=> Nothing\n\ngetValue(undefined)\n//=> Nothing\n\ngetValue({ value: \'correct\' })\n//=> Just "correct"\n\ngetFirstValue({ value: [] })\n//=> Nothing\n\ngetFirstValue({ value: 84 })\n//=> Nothing\n\ngetFirstValue(null)\n//=> Nothing\n\ngetFirstValue({ value: [ \'a\', \'b\' ] })\n//=> Just "a"', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'proppath',
-            'href', '#proppath');
-          itext('propPath');
-        ie_close('a');
-      ie_close('h4');
-      ie_open('p');
-        ie_open('code');
-          itext('crocks/Maybe/propPath');
-        ie_close('code');
-      ie_close('p');
-      $templateAlias2({code: 'propPath :: Foldable f => f (String | Integer) -> a -> Maybe b', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('While ');
-        ie_open('a', null, null,
-            'href', '#prop');
-          ie_open('code');
-            itext('prop');
-          ie_close('code');
-        ie_close('a');
-        itext(' is good for simple, single-level structures, there may come a time when you have to work with nested POJOs or Arrays. When you run into this situation, just pull in ');
-        ie_open('code');
-          itext('propPath');
-        ie_close('code');
-        itext(' and pass it a left-to-right traversal path of keys, indices or a combination of both (gross...but possible). This will kick you back a function that behaves just like ');
-        ie_open('a', null, null,
-            'href', '#prop');
-          ie_open('code');
-            itext('prop');
-          ie_close('code');
-        ie_close('a');
-        itext('. You pass it some data, and it will attempt to resolve your provided path. If the path is valid, it will return the value residing there (');
-        ie_open('code');
-          itext('null');
-        ie_close('code');
-        itext(' included!) in a ');
-        ie_open('code');
-          itext('Just');
-        ie_close('code');
-        itext('. But if at any point that path "breaks" it will give you back a ');
-        ie_open('code');
-          itext('Nothing');
-        ie_close('code');
-        itext('.');
-      ie_close('p');
-      $templateAlias2({code: 'const composeK = require(\'crocks/helpers/composeK\')\nconst isString = require(\'crocks/predicates/isString\')\nconst propPath = require(\'crocks/Maybe/propPath\')\nconst safe = require(\'crocks/Maybe/safe\')\n\n// getFirstValue :: a -> Maybe b\nconst getFirstValue =\n  propPath([ \'value\', 0 ])\n\n// getStringFirst :: a -> Maybe String\nconst getStringFirst = composeK(\n  safe(isString),\n  getFirstValue\n)\n\ngetFirstValue({ value: [] })\n//=> Nothing\n\ngetFirstValue({ value: 84 })\n//=> Nothing\n\ngetFirstValue(undefined)\n//=> Nothing\n\ngetFirstValue({ value: [ \'a\', \'b\' ] })\n//=> Just "a"\n\ngetStringFirst(false)\n//=> Nothing\n\ngetStringFirst({ towel: true })\n//=> Nothing\n\ngetStringFirst({ value: [ 0, 54 ] })\n//=> Nothing\n\ngetStringFirst({ value: [ \'nice\', \'jobb\' ] })\n//=> Just "nice"', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'safe',
-            'href', '#safe');
-          itext('safe');
-        ie_close('a');
-      ie_close('h4');
-      ie_open('p');
-        ie_open('code');
-          itext('crocks/Maybe/safe');
-        ie_close('code');
-      ie_close('p');
-      $templateAlias2({code: 'safe :: ((b -> Boolean) | Pred) -> b -> Maybe a', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('When using a ');
-        ie_open('code');
-          itext('Maybe');
-        ie_close('code');
-        itext(', it is a common practice to lift into a ');
-        ie_open('code');
-          itext('Just');
-        ie_close('code');
-        itext(' or a');
-        ie_open('code');
-          itext('Nothing');
-        ie_close('code');
-        itext(' depending on a condition on the value to be lifted.  It is so common that it warrants a function, and that function is called ');
-        ie_open('code');
-          itext('safe');
-        ie_close('code');
-        itext('. Provide a predicate (a function that returns a Boolean) and a value to be lifted. The value will be evaluated against the predicate, and will lift it into a ');
-        ie_open('code');
-          itext('Just');
-        ie_close('code');
-        itext(' if true and a ');
-        ie_open('code');
-          itext('Nothing');
-        ie_close('code');
-        itext(' if false.');
-      ie_close('p');
-      $templateAlias2({code: 'const Pred = require(\'crocks/Pred\')\n\nconst isArray = require(\'crocks/predicates/isArray\')\nconst safe = require(\'crocks/Maybe/safe\')\n\n// length :: Array -> Number\nconst length =\n  x => x.length\n\n// lte2 :: Number -> Boolean\nconst lte2 =\n  x => x <= 2\n\n// isSmall :: Pred a\nconst isSmall =\n  Pred(isArray)\n    .concat(Pred(lte2).contramap(length))\n\nsafe(lte2, 87)\n//=> Nothing\n\nsafe(lte2, 1)\n//=> Just 1\n\nsafe(isArray, {})\n//=> Nothing\n\nsafe(isArray, [ 1, 2, 3 ])\n//=> Just [ 1, 2, 3 ]\n\nsafe(isSmall, [ 1, 2, 3 ])\n//=> Nothing\n\nsafe(isSmall, { ar: [ 1, 2, 3 ] })\n//=> Nothing\n\nsafe(isSmall, null)\n//=> Nothing\n\nsafe(isSmall, [ 1, 2 ])\n//=> Just [ 1, 2 ]', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'safelift',
-            'href', '#safelift');
-          itext('safeLift');
-        ie_close('a');
-      ie_close('h4');
-      ie_open('p');
-        ie_open('code');
-          itext('crocks/Maybe/safeLift');
-        ie_close('code');
-      ie_close('p');
-      $templateAlias2({code: 'safeLift :: ((c -> Boolean) | Pred) -> (a -> b) -> c -> Maybe b', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('While ');
-        ie_open('a', null, null,
-            'href', '#safe');
-          ie_open('code');
-            itext('safe');
-          ie_close('code');
-        ie_close('a');
-        itext(' is used to lift a value into a ');
-        ie_open('code');
-          itext('Maybe');
-        ie_close('code');
-        itext(', you can reach for');
-        ie_open('code');
-          itext('safeLift');
-        ie_close('code');
-        itext(' when you want to run a function in the safety of the ');
-        ie_open('code');
-          itext('Maybe');
-        ie_close('code');
-        itext(' context. Just like ');
-        ie_open('a', null, null,
-            'href', '#safe');
-          ie_open('code');
-            itext('safe');
-          ie_close('code');
-        ie_close('a');
-        itext(', you pass it either a ');
+          'href', '../crocks/Pred.html');
         ie_open('code');
           itext('Pred');
         ie_close('code');
-        itext(' or a predicate function to determine if you get a ');
+      ie_close('a');
+      itext(' ADT. All predicate functions can be referenced from ');
+      ie_open('code');
+        itext('crocks/predicates');
+      ie_close('code');
+      itext('.');
+    ie_close('p');
+    ie_open('p');
+      itext('Below is a list of all the current predicates that are included with a description of their truth:');
+    ie_close('p');
+    ie_open('ul');
+      ie_open('li');
         ie_open('code');
-          itext('Just');
+          itext('hasProp :: (String | Number) -> a -> Boolean');
         ie_close('code');
-        itext(' or a ');
+        itext(': an ');
         ie_open('code');
-          itext('Nothing');
+          itext('Array');
         ie_close('code');
-        itext(', but then instead of a value, you pass it a unary function. ');
+        itext(' or ');
         ie_open('code');
-          itext('safeLift');
+          itext('Object');
         ie_close('code');
-        itext(' will then give you back a new function that will first lift its argument into a ');
+        itext(' that contains the provided index or key');
+      ie_close('li');
+      ie_open('li');
         ie_open('code');
-          itext('Maybe');
+          itext('isAlt :: a -> Boolean');
         ie_close('code');
-        itext(' and then maps your original function over the result.');
-      ie_close('p');
-      $templateAlias2({code: 'const Pred = require(\'crocks/Pred\')\n\nconst isNumber = require(\'crocks/predicates/isNumber\')\nconst safeLift = require(\'crocks/Maybe/safeLift\')\n\n// doubleOf :: Number -> Number\nconst doubleOf =\n  x => x * 2\n\n// halfOf :: Number -> Number\nconst halfOf =\n  x => x / 2\n\n// gt100 :: Number -> Boolean\nconst gt100 =\n  x => x > 100\n\n// safeDouble :: a -> Maybe Number\nconst safeDouble =\n  safeLift(isNumber, doubleOf)\n\n// isLargeNumber :: Pred a\nconst isLargeNumber =\n  Pred(isNumber)\n    .concat(Pred(gt100))\n\n// halfLarge :: a -> Maybe Number\nconst halfLarge =\n  safeLift(isLargeNumber, halfOf)\n\nsafeDouble(null)\n// Nothing\n\nsafeDouble(\'33\')\n// Nothing\n\nsafeDouble(33)\n// Just 66\n\nhalfLarge(\'1000\')\n// Nothing\n\nhalfLarge(100)\n// Nothing\n\nhalfLarge(false)\n// Nothing\n\nhalfLarge(786)\n// Just 383\n\nhalfLarge(100)\n// Nothing\n\nhalfLarge(false)\n// Nothing', mode: 'javascript'}, null, opt_ijData);
-    ie_close('article');
-    ie_open('article', null, null,
-        'id', 'topic-transformation');
-      ie_open('h2');
-        ie_open('a', null, null,
-            'id', 'transformation-functions',
-            'href', '#transformation-functions');
-          itext('Transformation Functions');
-        ie_close('a');
-      ie_close('h2');
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'eithertomaybe',
-            'href', '#eithertomaybe');
-          itext('eitherToMaybe');
-        ie_close('a');
-      ie_close('h4');
-      ie_open('p');
+        itext(': an ADT that provides ');
         ie_open('code');
-          itext('crocks/Maybe/eitherToMaybe');
+          itext('map');
         ie_close('code');
-      ie_close('p');
-      $templateAlias2({code: 'eitherToMaybe :: Either b a -> Maybe a\neitherToMaybe :: (a -> Either c b) -> a -> Maybe b', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('Used to transform a given ');
+        itext(' and ');
         ie_open('code');
-          itext('Either');
+          itext('alt');
         ie_close('code');
-        itext(' instance to a ');
+        itext(' methods');
+      ie_close('li');
+      ie_open('li');
         ie_open('code');
-          itext('Maybe');
+          itext('isAlternative :: a -> Boolean');
         ie_close('code');
-        itext('instance, ');
+        itext(': an ADT that provides ');
         ie_open('code');
-          itext('eitherToMaybe');
+          itext('alt');
         ie_close('code');
-        itext(' will turn a ');
+        itext(', ');
         ie_open('code');
-          itext('Right');
+          itext('zero');
         ie_close('code');
-        itext(' instance into a ');
+        itext(', ');
         ie_open('code');
-          itext('Just');
+          itext('map');
         ie_close('code');
-        itext(' wrapping the original value contained in the ');
+        itext(', ');
         ie_open('code');
-          itext('Right');
+          itext('ap');
         ie_close('code');
-        itext('. All ');
+        itext(', ');
         ie_open('code');
-          itext('Left');
+          itext('chain');
         ie_close('code');
-        itext(' instances will map to a ');
+        itext(' and ');
         ie_open('code');
-          itext('Nothing');
+          itext('of');
         ie_close('code');
-        itext(', mapping the originally contained value to a ');
+        itext('methods');
+      ie_close('li');
+      ie_open('li');
         ie_open('code');
-          itext('Unit');
+          itext('isApplicative :: a -> Boolean');
         ie_close('code');
-        itext('. Values on the');
+        itext(': an ADT that provides ');
         ie_open('code');
-          itext('Left');
+          itext('map');
         ie_close('code');
-        itext(' will be lost and as such this transformation is considered lossy in that regard.');
-      ie_close('p');
-      ie_open('p');
-        itext('Like all ');
+        itext(', ');
         ie_open('code');
-          itext('crocks');
+          itext('ap');
         ie_close('code');
-        itext(' transformation functions, ');
+        itext(' and ');
         ie_open('code');
-          itext('eitherToMaybe');
+          itext('of');
         ie_close('code');
-        itext(' has (2) possible signatures and will behave differently when passed either an ');
+        itext(' methods');
+      ie_close('li');
+      ie_open('li');
         ie_open('code');
-          itext('Either');
+          itext('isApply :: a -> Boolean');
         ie_close('code');
-        itext(' instance or a function that returns an instance of ');
+        itext(': an ADT that provides ');
         ie_open('code');
-          itext('Either');
+          itext('map');
         ie_close('code');
-        itext('. When passed the instance, a transformed ');
+        itext(' and ');
         ie_open('code');
-          itext('Maybe');
+          itext('ap');
         ie_close('code');
-        itext(' is returned. When passed an ');
+        itext(' methods');
+      ie_close('li');
+      ie_open('li');
         ie_open('code');
-          itext('Either');
+          itext('isArray :: a -> Boolean');
         ie_close('code');
-        itext(' returning function, a function will be returned that takes a given value and returns a ');
+        itext(': Array');
+      ie_close('li');
+      ie_open('li');
         ie_open('code');
-          itext('Maybe');
+          itext('isBifunctor :: a -> Boolean');
         ie_close('code');
-        itext('.');
-      ie_close('p');
-      $templateAlias2({code: 'const { Nothing, Just } = require(\'crocks/Maybe\')\nconst { Left, Right } = require(\'crocks/Either\')\nconst eitherToMaybe = require(\'crocks/Maybe/eitherToMaybe\')\n\nconst constant = require(\'crocks/combinators/constant\')\nconst ifElse = require(\'crocks/logic/ifElse\')\nconst isNumber = require(\'crocks/predicates/isNumber\')\n\n// someNumber :: a -> Either String Number\nconst someNumber = ifElse(\n  isNumber,\n  Right,\n  constant(Left(\'Nope\'))\n)\n\neitherToMaybe(Left(56))\n//=> Nothing\n\neitherToMaybe(Right(\'correct\'))\n//=> Just "correct"\n\nJust(\'ten\')\n  .chain(eitherToMaybe(someNumber))\n//=> Nothing\n\nNothing()\n  .chain(eitherToMaybe(someNumber))\n//=> Nothing\n\nJust(99)\n  .chain(eitherToMaybe(someNumber))\n//=> Just 99', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'firsttomaybe',
-            'href', '#firsttomaybe');
-          itext('firstToMaybe');
-        ie_close('a');
-      ie_close('h4');
-      ie_open('p');
+        itext(': an ADT that provides ');
         ie_open('code');
-          itext('crocks/Maybe/firstToMaybe');
+          itext('map');
         ie_close('code');
-      ie_close('p');
-      $templateAlias2({code: 'firstToMaybe :: First a -> Maybe a\nfirstToMaybe :: (a -> First b) -> a -> Maybe b', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('Used to transform a given ');
+        itext(' and ');
         ie_open('code');
-          itext('First');
+          itext('bimap');
         ie_close('code');
-        itext(' instance to a ');
+        itext(' methods');
+      ie_close('li');
+      ie_open('li');
         ie_open('code');
-          itext('Maybe');
+          itext('isBoolean :: a -> Boolean');
         ie_close('code');
-        itext('instance, ');
+        itext(': Boolean');
+      ie_close('li');
+      ie_open('li');
         ie_open('code');
-          itext('firstToMaybe');
+          itext('isCategory :: a -> Boolean');
         ie_close('code');
-        itext(' will turn a non-empty instance into a ');
+        itext(': an ADT that provides ');
         ie_open('code');
-          itext('Just');
+          itext('id');
         ie_close('code');
-        itext(' wrapping the original value contained within the ');
+        itext(' and ');
         ie_open('code');
-          itext('First');
+          itext('compose');
         ie_close('code');
-        itext('. All empty instances will map to a ');
+        itext(' methods');
+      ie_close('li');
+      ie_open('li');
         ie_open('code');
-          itext('Nothing');
+          itext('isChain :: a -> Boolean');
         ie_close('code');
-        itext('.');
-      ie_close('p');
-      ie_open('p');
-        itext('Like all ');
+        itext(': an ADT that provides ');
         ie_open('code');
-          itext('crocks');
+          itext('map');
         ie_close('code');
-        itext(' transformation functions, ');
+        itext(', ');
         ie_open('code');
-          itext('firstToMaybe');
+          itext('ap');
         ie_close('code');
-        itext(' has (2) possible signatures and will behave differently when passed either a ');
+        itext(' and ');
         ie_open('code');
-          itext('First');
+          itext('chain');
         ie_close('code');
-        itext(' instance or a function that returns an instance of ');
+        itext(' methods');
+      ie_close('li');
+      ie_open('li');
         ie_open('code');
-          itext('First');
+          itext('isContravariant : a -> Boolean');
         ie_close('code');
-        itext('. When passed the instance, a transformed ');
+        itext(': an ADT that provides ');
         ie_open('code');
-          itext('Maybe');
+          itext('contramap');
         ie_close('code');
-        itext(' is returned. When passed a ');
+        itext(' method');
+      ie_close('li');
+      ie_open('li');
         ie_open('code');
-          itext('First');
+          itext('isDefined :: a -> Boolean');
         ie_close('code');
-        itext(' returning function, a function will be returned that takes a given value and returns a ');
+        itext(': Every value that is not ');
         ie_open('code');
-          itext('Maybe');
+          itext('undefined');
         ie_close('code');
-        itext('.');
-      ie_close('p');
-      $templateAlias2({code: 'const { Nothing, Just } = require(\'crocks/Maybe\')\nconst First = require(\'crocks/First\')\nconst firstToMaybe = require(\'crocks/Maybe/firstToMaybe\')\n\nconst mconcat = require(\'crocks/helpers/mconcat\')\n\n// firstValue :: [ a ] -> First a\nconst firstValue =\n  mconcat(First)\n\nfirstToMaybe(First.empty())\n//=> Nothing\n\nfirstToMaybe(First(\'winner\'))\n//=> Just "Winner"\n\nNothing()\n  .chain(firstToMaybe(firstValue))\n//=> Nothing\n\nJust([])\n  .chain(firstToMaybe(firstValue))\n//=> Nothing\n\nJust([ \'first\', \'second\', \'third\' ])\n  .chain(firstToMaybe(firstValue))\n//=> Just "first"', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'lasttomaybe',
-            'href', '#lasttomaybe');
-          itext('lastToMaybe');
-        ie_close('a');
-      ie_close('h4');
-      ie_open('p');
+        itext(', ');
         ie_open('code');
-          itext('crocks/Maybe/lastToMaybe');
+          itext('null');
         ie_close('code');
-      ie_close('p');
-      $templateAlias2({code: 'lastToMaybe :: Last a -> Maybe a\nlastToMaybe :: (a -> Last b) -> a -> Maybe b', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('Used to transform a given ');
+        itext(' included');
+      ie_close('li');
+      ie_open('li');
         ie_open('code');
-          itext('Last');
+          itext('isEmpty :: a -> Boolean');
         ie_close('code');
-        itext(' instance to a ');
+        itext(': Empty Object, Array or String');
+      ie_close('li');
+      ie_open('li');
         ie_open('code');
-          itext('Maybe');
+          itext('isExtend :: a -> Boolean');
         ie_close('code');
-        itext(' instance, ');
+        itext(': an ADT that provides ');
         ie_open('code');
-          itext('lastToMaybe');
+          itext('map');
         ie_close('code');
-        itext('will turn a non-empty instance into a ');
+        itext(' and ');
         ie_open('code');
-          itext('Just');
+          itext('extend');
         ie_close('code');
-        itext(' wrapping the original value contained within the ');
+        itext(' methods');
+      ie_close('li');
+      ie_open('li');
         ie_open('code');
-          itext('Last');
+          itext('isFoldable :: a -> Boolean');
         ie_close('code');
-        itext('. All empty instances will map to a ');
+        itext(': Array, List or any structure with a ');
         ie_open('code');
-          itext('Nothing');
+          itext('reduce');
         ie_close('code');
-        itext('.');
-      ie_close('p');
-      ie_open('p');
-        itext('Like all ');
+        itext(' method');
+      ie_close('li');
+      ie_open('li');
         ie_open('code');
-          itext('crocks');
+          itext('isFunction :: a -> Boolean');
         ie_close('code');
-        itext(' transformation functions, ');
+        itext(': Function');
+      ie_close('li');
+      ie_open('li');
         ie_open('code');
-          itext('lastToMaybe');
+          itext('isFunctor :: a -> Boolean');
         ie_close('code');
-        itext(' has (2) possible signatures and will behave differently when passed either a ');
+        itext(': an ADT that provides a ');
         ie_open('code');
-          itext('Last');
+          itext('map');
         ie_close('code');
-        itext(' instance or a function that returns an instance of ');
+        itext(' method');
+      ie_close('li');
+      ie_open('li');
         ie_open('code');
-          itext('Last');
+          itext('isInteger :: a -> Boolean');
         ie_close('code');
-        itext('. When passed the instance, a transformed ');
+        itext(': Integer');
+      ie_close('li');
+      ie_open('li');
         ie_open('code');
-          itext('Maybe');
+          itext('isMonad :: a -> Boolean');
         ie_close('code');
-        itext(' is returned. When passed a ');
+        itext(': an ADT that provides ');
         ie_open('code');
-          itext('Last');
+          itext('map');
         ie_close('code');
-        itext(' returning function, a function will be returned that takes a given value and returns a ');
+        itext(', ');
         ie_open('code');
-          itext('Maybe');
+          itext('ap');
         ie_close('code');
-        itext('.');
-      ie_close('p');
-      $templateAlias2({code: 'const { Nothing, Just } = require(\'crocks/Maybe\')\nconst Last = require(\'crocks/Last\')\nconst lastToMaybe = require(\'crocks/Maybe/lastToMaybe\')\n\nconst mconcat = require(\'crocks/helpers/mconcat\')\n\n// lastValue :: [ a ] -> Last a\nconst lastValue =\n  mconcat(Last)\n\nlastToMaybe(Last.empty())\n//=> Nothing\n\nlastToMaybe(Last(\'the end\'))\n//=> Just "the end"\n\nNothing()\n  .chain(lastToMaybe(lastValue))\n//=> Nothing\n\nJust([])\n  .chain(lastToMaybe(lastValue))\n//=> Nothing\n\nJust([ \'first\', \'second\', \'third\' ])\n  .chain(lastToMaybe(lastValue))\n//=> Just "third"', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'resulttomaybe',
-            'href', '#resulttomaybe');
-          itext('resultToMaybe');
-        ie_close('a');
-      ie_close('h4');
-      ie_open('p');
+        itext(', ');
         ie_open('code');
-          itext('crocks/Maybe/resultToMaybe');
+          itext('chain');
         ie_close('code');
-      ie_close('p');
-      $templateAlias2({code: 'resultToMaybe :: Result e a -> Maybe a\nresultToMaybe :: (a -> Result e b) -> a -> Maybe b', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('Used to transform a given ');
+        itext(' and ');
         ie_open('code');
-          itext('Result');
+          itext('of');
         ie_close('code');
-        itext(' instance to a ');
+        itext(' methods');
+      ie_close('li');
+      ie_open('li');
         ie_open('code');
-          itext('Maybe');
+          itext('isMonoid :: a -> Boolean');
         ie_close('code');
-        itext('instance, ');
+        itext(': an ADT that provides ');
         ie_open('code');
-          itext('resultToMaybe');
+          itext('concat');
         ie_close('code');
-        itext(' will turn an ');
+        itext(' and ');
         ie_open('code');
-          itext('Ok');
+          itext('empty');
         ie_close('code');
-        itext(' instance into a ');
+        itext(' methods');
+      ie_close('li');
+      ie_open('li');
         ie_open('code');
-          itext('Just');
+          itext('isNil :: a -> Boolean');
         ie_close('code');
-        itext(' wrapping the original value contained in the ');
+        itext(': ');
         ie_open('code');
-          itext('Ok');
+          itext('undefined');
         ie_close('code');
-        itext('. All ');
+        itext(' or ');
         ie_open('code');
-          itext('Err');
+          itext('null');
         ie_close('code');
-        itext(' instances will map to a ');
+        itext(' or ');
         ie_open('code');
-          itext('Nothing');
+          itext('NaN');
         ie_close('code');
-        itext(', mapping the originally contained value to a ');
+      ie_close('li');
+      ie_open('li');
         ie_open('code');
-          itext('Unit');
+          itext('isNumber :: a -> Boolean');
         ie_close('code');
-        itext('. Values on the');
+        itext(': ');
         ie_open('code');
-          itext('Err');
+          itext('Number');
         ie_close('code');
-        itext(' will be lost and as such this transformation is considered lossy in that regard.');
-      ie_close('p');
-      ie_open('p');
-        itext('Like all ');
+        itext(' that is not a ');
         ie_open('code');
-          itext('crocks');
+          itext('NaN');
         ie_close('code');
-        itext(' transformation functions, ');
+        itext(' value, ');
         ie_open('code');
-          itext('resultToMaybe');
+          itext('Infinity');
         ie_close('code');
-        itext(' has (2) possible signatures and will behave differently when passed either an ');
+        itext(' included');
+      ie_close('li');
+      ie_open('li');
         ie_open('code');
-          itext('Result');
+          itext('isObject :: a -> Boolean');
         ie_close('code');
-        itext(' instance or a function that returns an instance of ');
+        itext(': Plain Old Javascript Object (POJO)');
+      ie_close('li');
+      ie_open('li');
         ie_open('code');
-          itext('Result');
+          itext('isPlus :: a -> Boolean');
         ie_close('code');
-        itext('. When passed the instance, a transformed ');
+        itext(': an ADT that provides ');
         ie_open('code');
-          itext('Maybe');
+          itext('map');
         ie_close('code');
-        itext(' is returned. When passed a ');
+        itext(', ');
         ie_open('code');
-          itext('Result');
+          itext('alt');
         ie_close('code');
-        itext(' returning function, a function will be returned that takes a given value and returns a ');
+        itext(' and ');
         ie_open('code');
-          itext('Maybe');
+          itext('zero');
         ie_close('code');
-        itext('.');
-      ie_close('p');
-      $templateAlias2({code: 'const { Nothing, Just } = require(\'crocks/Maybe\')\nconst { Err, Ok } = require(\'crocks/Result\')\nconst resultToMaybe = require(\'crocks/Maybe/resultToMaybe\')\n\nconst identity = require(\'crocks/combinators/identity\')\nconst tryCatch = require(\'crocks/Result/tryCatch\')\n\nfunction datErrTho() {\n  throw new Error(\'something amiss\')\n}\n\nresultToMaybe(Err(\'this is bad\'))\n//=> Nothing\n\nresultToMaybe(Ok(\'this is great\'))\n//=> Just "this is great"\n\nNothing()\n  .chain(resultToMaybe(identity))\n//=> Nothing\n\nJust(\'so good\')\n  .chain(resultToMaybe(tryCatch(datErrTho)))\n//=> Nothing\n\nJust(\'so good\')\n  .chain(resultToMaybe(Ok))\n//=> Just "so good"', mode: 'javascript'}, null, opt_ijData);
-    ie_close('article');
+        itext(' methods');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isProfunctor : a -> Boolean');
+        ie_close('code');
+        itext(': an ADT that provides ');
+        ie_open('code');
+          itext('map');
+        ie_close('code');
+        itext(', ');
+        ie_open('code');
+          itext('contramap');
+        ie_close('code');
+        itext(' and ');
+        ie_open('code');
+          itext('promap');
+        ie_close('code');
+        itext(' methods');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isPromise :: a -> Boolean');
+        ie_close('code');
+        itext(': an object implementing ');
+        ie_open('code');
+          itext('then');
+        ie_close('code');
+        itext(' and ');
+        ie_open('code');
+          itext('catch');
+        ie_close('code');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isSame :: a -> b -> Boolean');
+        ie_close('code');
+        itext(': same value or reference, use ');
+        ie_open('code');
+          itext('equals');
+        ie_close('code');
+        itext(' for value equality');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isSameType :: a -> b -> Boolean');
+        ie_close('code');
+        itext(': Constructor matches a values type, or two values types match');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isSemigroup :: a -> Boolean');
+        ie_close('code');
+        itext(': an ADT that provides a ');
+        ie_open('code');
+          itext('concat');
+        ie_close('code');
+        itext(' method');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isSemigroupoid :: a -> Boolean');
+        ie_close('code');
+        itext(': an ADT that provides a ');
+        ie_open('code');
+          itext('compose');
+        ie_close('code');
+        itext(' method');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isSetoid :: a -> Boolean');
+        ie_close('code');
+        itext(': an ADT that provides an ');
+        ie_open('code');
+          itext('equals');
+        ie_close('code');
+        itext(' method');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isString :: a -> Boolean');
+        ie_close('code');
+        itext(': String');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isTraversable :: a -> Boolean');
+        ie_close('code');
+        itext(': an ADT that provides ');
+        ie_open('code');
+          itext('map');
+        ie_close('code');
+        itext(' and ');
+        ie_open('code');
+          itext('traverse');
+        ie_close('code');
+        itext(' methods');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('propEq: (String | Number) -> a -> Object -> Boolean');
+        ie_close('code');
+        itext(': an ');
+        ie_open('code');
+          itext('Object');
+        ie_close('code');
+        itext(' that contains the provided key');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('propPathEq :: [String | Number] -> a -> Object -> Boolean');
+        ie_close('code');
+        itext(': an ');
+        ie_open('code');
+          itext('Object');
+        ie_close('code');
+        itext(' that contains the provided key in the provided traversal path');
+      ie_close('li');
+    ie_close('ul');
     ie_open('input', null, null,
         'type', 'hidden',
         'value', opt_data.page.title);
@@ -29875,11 +28910,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'value', opt_data.site.title);
     ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({content: param696}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param1715}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'WYjVj.render';
+  $render.soyTemplateName = 'RvUYp.render';
 }
 
 exports.render.params = ["page","site"];
@@ -29889,25 +28924,14 @@ return exports;
 
 });
 
-class WYjVj extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(WYjVj, templates);
+class RvUYp extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(RvUYp, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
 
 
 /***/ }),
-/* 221 */,
-/* 222 */,
-/* 223 */,
-/* 224 */,
-/* 225 */,
-/* 226 */,
-/* 227 */,
-/* 228 */,
-/* 229 */,
-/* 230 */,
-/* 231 */,
 /* 232 */,
 /* 233 */,
 /* 234 */,
@@ -29925,7 +28949,18 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(WYjVj, templates);
 /* 246 */,
 /* 247 */,
 /* 248 */,
-/* 249 */
+/* 249 */,
+/* 250 */,
+/* 251 */,
+/* 252 */,
+/* 253 */,
+/* 254 */,
+/* 255 */,
+/* 256 */,
+/* 257 */,
+/* 258 */,
+/* 259 */,
+/* 260 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29961,9 +28996,9 @@ __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _MaybeSoy = __webpack_require__(220);
+var _predicateFunctionsSoy = __webpack_require__(231);
 
-var _MaybeSoy2 = _interopRequireDefault(_MaybeSoy);
+var _predicateFunctionsSoy2 = _interopRequireDefault(_predicateFunctionsSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -29973,23 +29008,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var WYjVj = function (_Component) {
-  _inherits(WYjVj, _Component);
+var RvUYp = function (_Component) {
+  _inherits(RvUYp, _Component);
 
-  function WYjVj() {
-    _classCallCheck(this, WYjVj);
+  function RvUYp() {
+    _classCallCheck(this, RvUYp);
 
-    return _possibleConstructorReturn(this, (WYjVj.__proto__ || Object.getPrototypeOf(WYjVj)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (RvUYp.__proto__ || Object.getPrototypeOf(RvUYp)).apply(this, arguments));
   }
 
-  return WYjVj;
+  return RvUYp;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(WYjVj, _MaybeSoy2.default);
+_metalSoy2.default.register(RvUYp, _predicateFunctionsSoy2.default);
 
-exports.default = WYjVj;
+exports.default = RvUYp;
 
 /***/ })
-],[249]);
+],[260]);

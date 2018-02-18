@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([10,29,30,31],[
+webpackJsonppageComponent([11,31,32,33],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -28366,12 +28366,13 @@ exports.default = parseFromAnchor;
 /* 232 */,
 /* 233 */,
 /* 234 */,
-/* 235 */
+/* 235 */,
+/* 236 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Zfbka", function() { return Zfbka; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dwQaQ", function() { return dwQaQ; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28383,15 +28384,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var templates;
 goog.loadModule(function(exports) {
 
-// This file was automatically generated from All.soy.
+// This file was automatically generated from Any.soy.
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace Zfbka.
+ * @fileoverview Templates in namespace dwQaQ.
  * @public
  */
 
-goog.module('Zfbka.incrementaldom');
+goog.module('dwQaQ.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28425,17 +28426,17 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var param1748 = function() {
-    $templateAlias2({code: 'All Boolean', mode: 'haskell'}, null, opt_ijData);
+  var param1796 = function() {
+    $templateAlias2({code: 'Any Boolean', mode: 'haskell'}, null, opt_ijData);
     ie_open('p');
       ie_open('code');
-        itext('All');
+        itext('Any');
       ie_close('code');
       itext(' is a ');
       ie_open('code');
         itext('Monoid');
       ie_close('code');
-      itext(' that will combine (2) values of any type using logical conjunction (AND) on their coerced ');
+      itext(' that will combine (2) values of any type using logical disjunction (OR) on their coerced ');
       ie_open('code');
         itext('Boolean');
       ie_close('code');
@@ -28449,7 +28450,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
       ie_close('code');
       itext('.');
     ie_close('p');
-    $templateAlias2({code: 'const All = require(\'crocks/All\')\n\nconst mconcat = require(\'crocks/helpers/mconcat\')\n\nconst trueNum = All(13)\nconst falseNum = All(0)\nconst trueString = All(\'So true\')\n\ntrueNum.concat(falseNum)\n//=> All false\n\ntrueNum.concat(trueString)\n//=> All true\n\nconst allGood =\n  mconcat(All)\n\nallGood([ 1, 5, 89 ])\n//=> All true\n\nallGood([ \'nice\', \'00\', null ])\n//=> All false', mode: 'javascript'}, null, opt_ijData);
+    $templateAlias2({code: 'const Any = require(\'crocks/Any\')\n\nconst isNumber = require(\'crocks/predicates/isNumber\')\nconst mconcatMap = require(\'crocks/helpers/mconcat\')\n\nconst trueString = Any(\'string\')\nconst falseString = Any(\'\')\nconst object = Any({ nice: true })\n\ntrueString.concat(falseString)\n//=> Any false\n\ntrueString.concat(object)\n//=> Any true\n\nconst anyNumber =\n  mconcatMap(Any, isNumber)\n\nanyNumber([ \'string\', 3 ])\n//=> Any true\n\nanyNumber([ true, \'string\' ])\n//=> Any false', mode: 'javascript'}, null, opt_ijData);
     ie_open('article', null, null,
         'id', 'topic-implements');
       ie_open('h2');
@@ -28485,7 +28486,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
           itext('empty');
         ie_close('a');
       ie_close('h4');
-      $templateAlias2({code: 'All.empty :: () -> All', mode: 'haskell'}, null, opt_ijData);
+      $templateAlias2({code: 'Any.empty :: () -> Any', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
         ie_open('code');
           itext('empty');
@@ -28500,7 +28501,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_close('code');
         itext('ed to any other value, it will return the other value. In the case of ');
         ie_open('code');
-          itext('All');
+          itext('Any');
         ie_close('code');
         itext(' the result of ');
         ie_open('code');
@@ -28508,7 +28509,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_close('code');
         itext(' is ');
         ie_open('code');
-          itext('true');
+          itext('false');
         ie_close('code');
         itext('. ');
         ie_open('code');
@@ -28516,7 +28517,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_close('code');
         itext(' is available on both the Constructor and the Instance for convenience.');
       ie_close('p');
-      $templateAlias2({code: 'const All = require(\'crocks/All\')\n\nAll.empty() //=> All true\n\nAll(true).concat(All.empty())   //=> All true\nAll(false).concat(All.empty())  //=> All false', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'const Any = require(\'crocks/Any\')\n\nAny.empty() //=> Any false\n\nAny(true).concat(Any.empty())   //=> Any true\nAny(false).concat(Any.empty())  //=> Any false', mode: 'javascript'}, null, opt_ijData);
     ie_close('article');
     ie_open('article', null, null,
         'id', 'topic-instance');
@@ -28534,7 +28535,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
           itext('concat');
         ie_close('a');
       ie_close('h4');
-      $templateAlias2({code: 'All ~> All -> All', mode: 'haskell'}, null, opt_ijData);
+      $templateAlias2({code: 'Any ~> Any -> Any', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
         ie_open('code');
           itext('concat');
@@ -28549,11 +28550,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_close('code');
         itext('. In the case of ');
         ie_open('code');
-          itext('All');
+          itext('Any');
         ie_close('code');
-        itext(', it will combine the (2) using logical AND (conjunction).');
+        itext(', it will combine the (2) using logical OR (disjunction).');
       ie_close('p');
-      $templateAlias2({code: 'const All = require(\'crocks/All\')\n\nAll(true).concat(All(true))   //=> All true\nAll(true).concat(All(false))  //=> All false\nAll(false).concat(All(true))  //=> All false\nAll(false).concat(All(false)) //=> All false', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'const Any = require(\'crocks/Any\')\n\nAny(true).concat(Any(true))   //=> Any true\nAny(true).concat(Any(false))  //=> Any true\nAny(false).concat(Any(true))  //=> Any true\nAny(false).concat(Any(false)) //=> Any false', mode: 'javascript'}, null, opt_ijData);
       ie_open('h4');
         ie_open('a', null, null,
             'id', 'valueof',
@@ -28561,7 +28562,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
           itext('valueOf');
         ie_close('a');
       ie_close('h4');
-      $templateAlias2({code: 'All ~> () -> Boolean', mode: 'haskell'}, null, opt_ijData);
+      $templateAlias2({code: 'Any ~> () -> Boolean', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
         ie_open('code');
           itext('valueOf');
@@ -28592,7 +28593,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_close('code');
         itext(' on an ');
         ie_open('code');
-          itext('All');
+          itext('Any');
         ie_close('code');
         itext(' instance will result in the underlying ');
         ie_open('code');
@@ -28600,7 +28601,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_close('code');
         itext(' value.');
       ie_close('p');
-      $templateAlias2({code: 'const All = require(\'crocks/All\')\n\nAll(0).valueOf()          //=> false\nAll(\'string\').valueOf() //=> true\n\n//=> false\nAll(true)\n  .concat(\'\')\n  .valueOf()', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'const Any = require(\'crocks/Any\')\n\nAny(0).valueOf()        //=> false\nAny(\'string\').valueOf() //=> true\n\n//=> true\nAny(45)\n  .concat(\'\')\n  .valueOf()', mode: 'javascript'}, null, opt_ijData);
     ie_close('article');
     ie_open('input', null, null,
         'type', 'hidden',
@@ -28611,11 +28612,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'value', opt_data.site.title);
     ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({content: param1748}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param1796}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'Zfbka.render';
+  $render.soyTemplateName = 'dwQaQ.render';
 }
 
 exports.render.params = ["page","site"];
@@ -28625,15 +28626,14 @@ return exports;
 
 });
 
-class Zfbka extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(Zfbka, templates);
+class dwQaQ extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(dwQaQ, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
 
 
 /***/ }),
-/* 236 */,
 /* 237 */,
 /* 238 */,
 /* 239 */,
@@ -28665,7 +28665,11 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(Zfbka, templates);
 /* 265 */,
 /* 266 */,
 /* 267 */,
-/* 268 */
+/* 268 */,
+/* 269 */,
+/* 270 */,
+/* 271 */,
+/* 272 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28701,9 +28705,9 @@ __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _AllSoy = __webpack_require__(235);
+var _AnySoy = __webpack_require__(236);
 
-var _AllSoy2 = _interopRequireDefault(_AllSoy);
+var _AnySoy2 = _interopRequireDefault(_AnySoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28713,23 +28717,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Zfbka = function (_Component) {
-  _inherits(Zfbka, _Component);
+var dwQaQ = function (_Component) {
+  _inherits(dwQaQ, _Component);
 
-  function Zfbka() {
-    _classCallCheck(this, Zfbka);
+  function dwQaQ() {
+    _classCallCheck(this, dwQaQ);
 
-    return _possibleConstructorReturn(this, (Zfbka.__proto__ || Object.getPrototypeOf(Zfbka)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (dwQaQ.__proto__ || Object.getPrototypeOf(dwQaQ)).apply(this, arguments));
   }
 
-  return Zfbka;
+  return dwQaQ;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(Zfbka, _AllSoy2.default);
+_metalSoy2.default.register(dwQaQ, _AnySoy2.default);
 
-exports.default = Zfbka;
+exports.default = dwQaQ;
 
 /***/ })
-],[268]);
+],[272]);

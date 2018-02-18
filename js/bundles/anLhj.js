@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([22,29,30,31],[
+webpackJsonppageComponent([28,31,32,33],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -28350,16 +28350,12 @@ exports.default = parseFromAnchor;
 /* 216 */,
 /* 217 */,
 /* 218 */,
-/* 219 */,
-/* 220 */,
-/* 221 */,
-/* 222 */,
-/* 223 */
+/* 219 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "lgEXX", function() { return lgEXX; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "anLhj", function() { return anLhj; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28371,15 +28367,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var templates;
 goog.loadModule(function(exports) {
 
-// This file was automatically generated from ReaderT.soy.
+// This file was automatically generated from Equiv.soy.
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace lgEXX.
+ * @fileoverview Templates in namespace anLhj.
  * @public
  */
 
-goog.module('lgEXX.incrementaldom');
+goog.module('anLhj.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28413,50 +28409,60 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var param1090 = function() {
-    $templateAlias2({code: 'Monad m => ReaderT e (m a)', mode: 'haskell'}, null, opt_ijData);
+  var param628 = function() {
+    $templateAlias2({code: 'Equiv a a Boolean', mode: 'haskell'}, null, opt_ijData);
     ie_open('p');
+      itext('Defined as a Monoidal Contravariant datatype, ');
       ie_open('code');
-        itext('ReaderT');
+        itext('Equiv');
       ie_close('code');
-      itext(' is a ');
+      itext(' can be used to test equivalence between (2) values of a given type. It does this by wrapping a binary equivalence function of the form ');
       ie_open('code');
-        itext('Monad Transformer');
+        itext('(a, a) -> Boolean');
       ie_close('code');
-      itext(' that wraps a given ');
-      ie_open('code');
-        itext('Monad');
-      ie_close('code');
-      itext(' with a ');
-      ie_open('code');
-        itext('Reader');
-      ie_close('code');
-      itext('. This allows the interface of a ');
-      ie_open('code');
-        itext('Reader');
-      ie_close('code');
-      itext(' that enables the  composition of computations that depend on a shared environment ');
-      ie_open('code');
-        itext('(e -> a)');
-      ie_close('code');
-      itext(', but provides a way to abstract a means the ');
-      ie_open('code');
-        itext('Reader');
-      ie_close('code');
-      itext(' portion, when combining ');
-      ie_open('code');
-        itext('ReaderT');
-      ie_close('code');
-      itext('s of the same type. All ');
-      ie_open('code');
-        itext('ReaderT');
-      ie_close('code');
-      itext('s must provide the constructor of the target ');
-      ie_open('code');
-        itext('Monad');
-      ie_close('code');
-      itext(' that is being wrapped.');
+      itext('. Most of the time strict equality is used, but other functions of the required form can provide some powerful results.');
     ie_close('p');
+    ie_open('p');
+      itext('While the far right parameter is always fixed to ');
+      ie_open('code');
+        itext('Boolean');
+      ie_close('code');
+      itext(' it cannot be Covariant, but is Contravariant allowing both inputs to vary in their type.');
+      ie_open('code');
+        itext('Equiv');
+      ie_close('code');
+      itext(' is also a ');
+      ie_open('a', null, null,
+          'href', '../monoids/index.html');
+        ie_open('code');
+          itext('Monoid');
+        ie_close('code');
+      ie_close('a');
+      itext(' and will concat the results of (2) ');
+      ie_open('code');
+        itext('Equiv');
+      ie_close('code');
+      itext('s under logical conjunction, with it\'s empty value always returning ');
+      ie_open('code');
+        itext('true');
+      ie_close('code');
+      itext('.');
+    ie_close('p');
+    ie_open('p');
+      itext('As ');
+      ie_open('code');
+        itext('Equiv');
+      ie_close('code');
+      itext(' wraps a function, it is lazy and a given instance will not produce a result until both arguments are satisfied. A given instance can be run by calling the method ');
+      ie_open('a', null, null,
+          'href', '#comparewith');
+        ie_open('code');
+          itext('compareWith');
+        ie_close('code');
+      ie_close('a');
+      itext(', providing both values for comparison.');
+    ie_close('p');
+    $templateAlias2({code: 'const Equiv = require(\'crocks/Equiv\')\n\nconst equals = require(\'crocks/pointfree/equals\')\n\n// toString :: a -> String\nconst toString =\n  x => x.toString()\n\n// length :: a -> Number\nconst length = x =>\n  x && x.length ? x.length : 0\n\n// eq :: Equiv a a\nconst eq =\n  Equiv(equals)\n\neq.contramap(toString)\n  .compareWith(\'123\', 123)\n//=> true\n\neq.contramap(length)\n  .compareWith([ 1, 2, 3 ], [ \'a\', \'b\' ])\n//=> false', mode: 'javascript'}, null, opt_ijData);
     ie_open('article', null, null,
         'id', 'topic-implements');
       ie_open('h2');
@@ -28468,23 +28474,15 @@ function $render(opt_data, opt_ignored, opt_ijData) {
       ie_close('h2');
       ie_open('p');
         ie_open('code');
-          itext('Functor');
+          itext('Semigroup');
         ie_close('code');
         itext(', ');
         ie_open('code');
-          itext('Apply');
+          itext('Monoid');
         ie_close('code');
         itext(', ');
         ie_open('code');
-          itext('Chain');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('Applicative');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('Monad');
+          itext('Contravariant');
         ie_close('code');
       ie_close('p');
     ie_close('article');
@@ -28499,154 +28497,47 @@ function $render(opt_data, opt_ignored, opt_ijData) {
       ie_close('h2');
       ie_open('h4');
         ie_open('a', null, null,
-            'id', 'ask',
-            'href', '#ask');
-          itext('ask');
+            'id', 'empty',
+            'href', '#empty');
+          itext('empty');
         ie_close('a');
       ie_close('h4');
-      $templateAlias2({code: 'ReaderT.ask :: Monad m => () -> ReaderT e (m e)\nReaderT.ask :: Monad m => (e -> a) -> ReaderT e (m a)', mode: 'haskell'}, null, opt_ijData);
+      $templateAlias2({code: 'Equiv.empty :: () -> Equiv a a', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
-        itext('A construction helper that returns a ');
         ie_open('code');
-          itext('ReaderT');
+          itext('empty');
         ie_close('code');
-        itext(' with environment on the right portion of the ');
+        itext(' provides the identity for the ');
         ie_open('code');
-          itext('Reader');
+          itext('Monoid');
+        ie_close('code');
+        itext(' in that when the value it provides is ');
+        ie_open('code');
+          itext('concat');
+        ie_close('code');
+        itext('ed to any other value, it will return the other value. In the case of ');
+        ie_open('code');
+          itext('Equiv');
+        ie_close('code');
+        itext(' the result of ');
+        ie_open('code');
+          itext('empty');
+        ie_close('code');
+        itext(' is an ');
+        ie_open('code');
+          itext('Equiv');
+        ie_close('code');
+        itext(' that will always return');
+        ie_open('code');
+          itext('true');
         ie_close('code');
         itext('. ');
         ie_open('code');
-          itext('ask');
+          itext('empty');
         ie_close('code');
-        itext(' can take a function, that can be used to map the environment to a different type or value. When using the function version, the function must return the type of the ');
-        ie_open('code');
-          itext('Monad');
-        ie_close('code');
-        itext(' the ');
-        ie_open('code');
-          itext('ReaderT');
-        ie_close('code');
-        itext(' wraps, which in turn will be wrapped in another');
+        itext(' is available on both the Constructor and the Instance for convenience.');
       ie_close('p');
-      $templateAlias2({code: 'const ReaderT = require(\'crocks/Reader/ReaderT\')\nconst Maybe = require(\'crocks/Maybe\')\n\nconst safe = require(\'crocks/Maybe/safe\')\nconst isNumber = require(\'crocks/predicates/isNumber\')\n\nconst MaybeReader = ReaderT(Maybe)\nconst { ask } = MaybeReader\n\n// add :: Number -> Number -> Number\nconst add =\n  x => y => x + y\n\n// Typical Constructor\nMaybeReader(safe(isNumber))\n  .runWith(76)\n//=> Just 76\n\nMaybeReader(safe(isNumber))\n  .runWith(\'76\')\n//=> Nothing\n\n// Using `ask` with no function\n// (identity on environment)\nask()\n  .runWith(76)\n//=> Just 76\n\nask()\n  .runWith(\'76\')\n//=> Just \'76\'\n\n// Using `ask` with a function\n// (map environment before deposit)\nask(add(10))\n  .runWith(76)\n//=> Just 86', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'lift',
-            'href', '#lift');
-          itext('lift');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'ReaderT.lift :: Monad m => m a -> ReaderT e (m a)', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('Used to promote an instance of a given ');
-        ie_open('code');
-          itext('Monad');
-        ie_close('code');
-        itext(' into a ');
-        ie_open('code');
-          itext('ReaderT');
-        ie_close('code');
-        itext(' of that ');
-        ie_open('code');
-          itext('Monad');
-        ie_close('code');
-        itext('s type. This can be used to lift a pointed instance of the underlying ');
-        ie_open('code');
-          itext('Monad');
-        ie_close('code');
-        itext('. When mixed with composition, ');
-        ie_open('code');
-          itext('lift');
-        ie_close('code');
-        itext(' can be used to promote functions that take the form of ');
-        ie_open('code');
-          itext('a -> m b');
-        ie_close('code');
-        itext(' into a function that can be ');
-        ie_open('code');
-          itext('chain');
-        ie_close('code');
-        itext('ed with the ');
-        ie_open('code');
-          itext('ReaderT');
-        ie_close('code');
-        itext('. Although, ');
-        ie_open('a', null, null,
-            'href', '#liftfn');
-          ie_open('code');
-            itext('liftFn');
-          ie_close('code');
-        ie_close('a');
-        itext(' can be used to remove the composition boilerplate and promote and ');
-        ie_open('code');
-          itext('a -> m b');
-        ie_close('code');
-        itext(' function.');
-      ie_close('p');
-      $templateAlias2({code: 'const ReaderT = require(\'crocks/Reader/ReaderT\')\nconst Async = require(\'crocks/Async\')\n\nconst compose = require(\'crocks/helpers/compose\')\nconst curry = require(\'crocks/helpers/curry\')\nconst flip = require(\'crocks/combinators/flip\')\nconst runWith = require(\'crocks/pointfree/runWith\')\nconst tap = require(\'crocks/helpers/tap\')\n\nconst AsyncReader = ReaderT(Async)\n\nconst { ask, lift } = AsyncReader\nconst { Rejected } = Async\n\n// log :: String -> a -> ()\nconst log = label =>\n  console.log.bind(console, label + \':\')\n\n// forkLog :: Async a b -> Async a b\nconst forkLog = tap(\n  m => m.fork(log(\'rej\'), log(\'res\'))\n)\n\n// runAndLog :: e -> ReaderT e (Async a b) -> Async a b\nconst runAndLog = curry(\n  x => compose(forkLog, flip(runWith, x))\n)\n\n// instance :: ReaderT e (Async String a)\nconst instance =\n  lift(Rejected(\'Always Rejected\'))\n\nrunAndLog(instance, \'Thomas\')\n//=> rej: Always Rejected\n\n// Using in a composition\n// rejectWith :: a -> ReaderT e (Async a b)\nconst rejectWith =\n  compose(lift, Rejected)\n\n// envReject :: ReadetT e (Async e b)\nconst envReject =\n  ask()\n    .chain(rejectWith)\n\nrunAndLog(envReject, \'Sammy\')\n//=> rej: Sammy', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'liftfn',
-            'href', '#liftfn');
-          itext('liftFn');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'ReaderT.liftFn :: Monad m => (a -> m b) -> a -> ReaderT e (m b)', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('Used to transform a given function in the form of ');
-        ie_open('code');
-          itext('a -> m b');
-        ie_close('code');
-        itext(' into a lifted function, where ');
-        ie_open('code');
-          itext('m');
-        ie_close('code');
-        itext(' is the underlying ');
-        ie_open('code');
-          itext('Monad');
-        ie_close('code');
-        itext(' of a ');
-        ie_open('code');
-          itext('ReaderT');
-        ie_close('code');
-        itext('. This allows for the removal of composition boilerplate that results from using the');
-        ie_open('a', null, null,
-            'href', '#lift');
-          ie_open('code');
-            itext('lift');
-          ie_close('code');
-        ie_close('a');
-        itext(' helper.');
-      ie_close('p');
-      $templateAlias2({code: 'const ReaderT = require(\'crocks/Reader/ReaderT\')\nconst Either = require(\'crocks/Either\')\n\nconst ifElse = require(\'crocks/logic/ifElse\')\n\nconst EitherReader = ReaderT(Either)\n\nconst { ask, liftFn } = EitherReader\nconst { Left, Right } = Either\n\n// gte :: Number -> Number -> Either String Number\nconst gte = x => ifElse(\n  n => n >= x,\n  Right,\n  n => Left(`${n} is not gte to ${x}`)\n)\n\n// gte10 :: Number -> Either String Number\nconst gte10 =\n  gte(10)\n\n// add20 :: ReaderT Number (Either String Number)\nconst add20 =\n  ask()\n    .chain(liftFn(gte10))\n    .map(n => n + 20)\n\nadd20\n  .runWith(30)\n//=> Right 50\n\nadd20\n  .runWith(9)\n//=> Left "9 is not gte to 10"', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'of',
-            'href', '#of');
-          itext('of');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'ReaderT.of :: Monad m => a -> ReaderT e (m a)', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('Lifts a value into a ');
-        ie_open('code');
-          itext('ReaderT');
-        ie_close('code');
-        itext(' using the ');
-        ie_open('code');
-          itext('of');
-        ie_close('code');
-        itext(' method of the underlying ');
-        ie_open('code');
-          itext('Monad');
-        ie_close('code');
-        itext('.');
-        ie_open('code');
-          itext('of');
-        ie_close('code');
-        itext(' will disregard the environment and points the right portion to the provided value.');
-      ie_close('p');
-      $templateAlias2({code: 'const ReaderT = require(\'../crocks/src/Reader/ReaderT\')\n\nconst Maybe = require(\'crocks/Maybe\')\nconst Either = require(\'crocks/Either\')\nconst State = require(\'crocks/State\')\n\nconst MaybeReader = ReaderT(Maybe)\nconst EitherReader = ReaderT(Either)\nconst StateReader = ReaderT(State)\n\nMaybeReader.of(\'yep\')\n  .map(x => x.toUpperCase())\n  .runWith(23)\n//=> Just "YEP"\n\nEitherReader.of(43)\n  .runWith(23)\n//=> Right 43\n\nStateReader.of(0)\n  .runWith(23)\n  .runWith(42)\n//=> Pair(0, 42)', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'const Equiv = require(\'crocks/Equiv\')\n\nconst equals = require(\'crocks/pointfree/equals\')\n\nconst eq =\n  Equiv(equals)\n\nconst empty =\n  Equiv.empty()\n\neq\n  .concat(empty)\n  .compareWith({ a: 32 }, { a: 32 })\n//=> true\n\nempty\n  .concat(eq)\n  .compareWith({ a: 32 }, { a: 32 })\n//=> true\n\nempty\n  .concat(eq)\n  .compareWith({ a: 32, b: 19 }, { a: 32 })\n//=> false', mode: 'javascript'}, null, opt_ijData);
     ie_close('article');
     ie_open('article', null, null,
         'id', 'topic-instance');
@@ -28659,112 +28550,144 @@ function $render(opt_data, opt_ignored, opt_ijData) {
       ie_close('h2');
       ie_open('h4');
         ie_open('a', null, null,
-            'id', 'map',
-            'href', '#map');
-          itext('map');
+            'id', 'concat',
+            'href', '#concat');
+          itext('concat');
         ie_close('a');
       ie_close('h4');
-      $templateAlias2({code: 'Monad m => ReaderT e (m a) ~> (a -> b) -> ReaderT e (m b)', mode: 'haskell'}, null, opt_ijData);
+      $templateAlias2({code: 'Equiv a a ~> Equiv a a -> Equiv a a', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
-        itext('Provides a means for lifting a normal javascript function into the underlying');
         ie_open('code');
-          itext('Monad');
+          itext('concat');
         ie_close('code');
-        itext(', allowing the innermost value of the underlying ');
+        itext(' is used to combine (2) ');
         ie_open('code');
-          itext('Monad');
+          itext('Semigroup');
         ie_close('code');
-        itext(' to be mapped. This method will ignore the outer ');
+        itext('s of the same type under an operation specified by the ');
         ie_open('code');
-          itext('ReaderT');
+          itext('Semigroup');
         ie_close('code');
-        itext(', and be applied directly to the underlying ');
+        itext('. In the case of ');
         ie_open('code');
-          itext('Monad');
+          itext('Equiv');
+        ie_close('code');
+        itext(', the results of both');
+        ie_open('code');
+          itext('Equiv');
+        ie_close('code');
+        itext('s are combined under logical conjunction.');
+      ie_close('p');
+      $templateAlias2({code: 'const Equiv = require(\'crocks/Equiv\')\n\nconst compareWith = require(\'crocks/pointfree/compareWith\')\nconst equals = require(\'crocks/pointfree/equals\')\nconst isSameType = require(\'crocks/predicates/isSameType\')\nconst propOr = require(\'crocks/helpers/propOr\')\n\n// objLength :: Object -> Number\nconst objLength =\n  x => Object.keys(x).length\n\n// eq :: Equiv a a\nconst eq =\n  Equiv(equals)\n\n// sameType :: Equiv a a\nconst sameType =\n  Equiv(isSameType)\n\n// sameType :: Equiv Object Object\nconst length =\n  eq.contramap(objLength)\n\n// sameType :: Equiv a a\nconst sameTypeProp = key =>\n  sameType.contramap(propOr(null, key))\n\n// run :: Equiv Object Object\nconst run = compareWith(\n  { a: 19, b: \'string\' },\n  { a: 32, c: false }\n)\n\nrun(length)\n//=> true\n\nrun(sameTypeProp(\'a\'))\n//=> true\n\nrun(sameTypeProp(\'b\'))\n//=> false\n\nrun(\n  sameTypeProp(\'a\')\n    .concat(length)\n)\n// true\n\nrun(\n  sameTypeProp(\'b\')\n    .concat(length)\n)\n// false', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'contramap',
+            'href', '#contramap');
+          itext('contramap');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Equiv a a ~> (b -> a) -> Equiv b b', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        itext('The far right parameter of ');
+        ie_open('code');
+          itext('Equiv');
+        ie_close('code');
+        itext(' fixed to ');
+        ie_open('code');
+          itext('Boolean');
+        ie_close('code');
+        itext(' which means we cannot map the value as expected. However the left two parameters can vary, although they must vary in the same manner.');
+      ie_close('p');
+      ie_open('p');
+        itext('This is where ');
+        ie_open('code');
+          itext('contramap');
+        ie_close('code');
+        itext(' comes into play as it can be used to adapt an ');
+        ie_open('code');
+          itext('Equiv');
+        ie_close('code');
+        itext('of a given type to accept a different type or modify the value. Provide it a function that has a return type that matches the input types of the ');
+        ie_open('code');
+          itext('Equiv');
+        ie_close('code');
+        itext('. This will return a new ');
+        ie_open('code');
+          itext('Equiv');
+        ie_close('code');
+        itext(' matching the input type of the provided function.');
+      ie_close('p');
+      $templateAlias2({code: 'const Equiv = require(\'crocks/Equiv\')\n\nconst equals = require(\'crocks/pointfree/equals\')\n\n// length :: String -> Number\nconst length =\n  x => x.length\n\n// eq :: Equiv a a\nconst eq =\n  Equiv(equals)\n\n// sameLength :: Equiv String String\nconst sameLength =\n  eq.contramap(length)\n\n// sameAmplitude :: Equiv Float Float\nconst sameAmplitude =\n  eq.contramap(Math.abs)\n\nsameAmplitude\n  .compareWith(-0.5011, 0.5011)\n//=> true\n\nsameAmplitude\n  .compareWith(-0.755, 0.8023)\n//=> false\n\nsameLength\n  .compareWith(\'aBcD\', \'1234\')\n//=> true\n\nsameLength\n  .compareWith(\'AB\', \'ABC\')\n//=> false', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'valueof',
+            'href', '#valueof');
+          itext('valueOf');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Equiv a a ~> () -> a -> a -> Boolean', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        ie_open('code');
+          itext('valueOf');
+        ie_close('code');
+        itext(' is used on all ');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext(' ');
+        ie_open('code');
+          itext('Monoid');
+        ie_close('code');
+        itext('s as a means of extraction. While the extraction is available, types that implement ');
+        ie_open('code');
+          itext('valueOf');
+        ie_close('code');
+        itext(' are not necessarily a');
+        ie_open('code');
+          itext('Comonad');
+        ie_close('code');
+        itext('. This function is used primarily for convenience for some of the helper functions that ship with ');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext('. Calling ');
+        ie_open('code');
+          itext('valueOf');
+        ie_close('code');
+        itext(' on an ');
+        ie_open('code');
+          itext('Equiv');
+        ie_close('code');
+        itext('instance will result in the underlying curried equivalence function.');
+      ie_close('p');
+      $templateAlias2({code: 'const Equiv = require(\'crocks/Equiv\')\n\nconst compose = require(\'crocks/helpers/compose\')\nconst equals = require(\'crocks/pointfree/equals\')\nconst propOr = require(\'crocks/helpers/propOr\')\n\n// toLower :: String -> String\nconst toLower =\n  x => x.toLowerCase()\n\n// length :: String -> String\nconst length =\n  x => x.length\n\n// lowerName :: Object -> String\nconst lowerName =\n  compose(toLower, propOr(\'\', \'name\'))\n\n// itemsLen :: Object -> Number\nconst itemsLen =\n  compose(length, propOr(\'\', \'items\'))\n\n// eq :: Equiv a a\nconst eq =\n  Equiv(equals)\n\n// checkName :: Equiv Object Object\nconst checkName =\n  eq.contramap(lowerName)\n\n// checkName :: Equiv Object Object\nconst checkItems =\n  eq.contramap(itemsLen)\n\n// test :: Object -> Object -> Boolean\nconst test =\n  checkName\n    .concat(checkItems)\n    .valueOf()\n\ntest(\n  { name: \'Bob\', items: [ 1, 2, 4 ] },\n  { name: \'bOb\', items: [ 9, 12, 9 ] }\n)\n//=> true', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'comparewith',
+            'href', '#comparewith');
+          itext('compareWith');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Equiv a a ~> a -> a -> Boolean', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        itext('As ');
+        ie_open('code');
+          itext('Equiv');
+        ie_close('code');
+        itext(' wraps a function, it needs a means to be run with two values for comparison. Instances provide a curried method called ');
+        ie_open('code');
+          itext('compareWith');
+        ie_close('code');
+        itext(' that takes two values for comparison and will run them through the equivalence function, returning the resulting ');
+        ie_open('code');
+          itext('Boolean');
         ie_close('code');
         itext('.');
       ie_close('p');
-      $templateAlias2({code: 'const ReaderT = require(\'crocks/Reader/ReaderT\')\nconst Maybe = require(\'crocks/Maybe\')\n\nconst isString = require(\'crocks/predicates/isString\')\nconst safe = require(\'crocks/Maybe/safe\')\n\nconst MaybeReader =\n  ReaderT(Maybe)\n\nconst { ask, liftFn } = MaybeReader\n\n// maybeString :: a -> Maybe String\nconst maybeString =\n  safe(isString)\n\n// toUpper :: String -> String\nconst toUpper =\n  x => x.toUpperCase()\n\n// envToUpper :: ReaderT e (Maybe String)\nconst envToUpper =\n  ask()\n    .chain(liftFn(maybeString))\n    .map(toUpper)\n\nenvToUpper\n  .runWith(4)\n//=> Nothing\n\nenvToUpper\n  .runWith(\'hola\')\n//=> Just "HOLA"', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'ap',
-            'href', '#ap');
-          itext('ap');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Monad m => ReaderT e (m (a -> b)) ~> ReaderT e (m a) -> ReaderT e (m b)', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
-        itext('Applies wrapped functions to the provided value, using the ');
-        ie_open('code');
-          itext('ap');
-        ie_close('code');
-        itext(' of the underlying ');
-        ie_open('code');
-          itext('Monad');
-        ie_close('code');
-        itext('. A ');
-        ie_open('code');
-          itext('ReaderT');
-        ie_close('code');
-        itext(' of the underlying ');
-        ie_open('code');
-          itext('Monad');
-        ie_close('code');
-        itext(' must be provided, which allows access to the environment.');
+        itext('Due to the laziness of this type, complicated comparisons can be built out from combining and mapping smaller, simpler units of equivalence comparison.');
       ie_close('p');
-      $templateAlias2({code: 'const Pair = require(\'crocks/Pair\')\nconst ReaderT = require(\'crocks/Reader/ReaderT\')\nconst Result = require(\'crocks/Result\')\n\nconst fst = require(\'crocks/Pair/fst\')\nconst snd = require(\'crocks/Pair/snd\')\n\nconst ifElse = require(\'crocks/logic/ifElse\')\nconst isNumber = require(\'crocks/predicates/isNumber\')\nconst liftA2 = require(\'crocks/helpers/liftA2\')\n\nconst { Err, Ok } = Result\n\nconst ResultReader =\n  ReaderT(Result)\n\nconst { ask, liftFn } = ResultReader\n\n// add :: Number -> Number -> Number\nconst add =\n  x => y => x + y\n\n// makeError :: a -> Result [ String ] b\nconst makeErr =\n  x => Err([ `${x} is not a Number` ])\n\n// isValid :: a -> ReaderT e (Result [ String ] Number)\nconst isValid = liftFn(\n  ifElse(isNumber, Ok, makeErr)\n)\n\n// first :: ReaderT (Pair a b) (Result [ String ] Number)\nconst first =\n  ask(fst)\n    .chain(isValid)\n\n// second :: ReaderT (Pair a b) (Result [ String ] Number)\nconst second =\n  ask(snd)\n    .chain(isValid)\n\n// Using a fluent style with of\nResultReader.of(add)\n  .ap(first)\n  .ap(second)\n  .runWith(Pair(34, 21))\n//=> Ok 55\n\n// Using a fluent style with map\nfirst\n  .map(add)\n  .ap(second)\n  .runWith(Pair(true, 21))\n//=> Err [ "true is not a Number" ]\n\n// Using liftA2\nliftA2(add, first, second)\n  .runWith(Pair(\'Bob\', \'Jones\'))\n//=> Err [ \'Bob is not a Number\', \'Jones is not a Number\' ]', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'chain',
-            'href', '#chain');
-          itext('chain');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Monad m => ReaderT e (m a) ~> Reader e (a -> ReaderT e (m b)) -> ReaderT e (m b)', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('Can be used to apply the effects of the underlying ');
-        ie_open('code');
-          itext('Monad');
-        ie_close('code');
-        itext(' with the benefit of being able to read from the environment. This method only accepts functions of the form ');
-        ie_open('code');
-          itext('Monad m => a -> ReaderT e (m b)');
-        ie_close('code');
-        itext('.');
-      ie_close('p');
-      $templateAlias2({code: 'const ReaderT = require(\'../crocks/src/Reader/ReaderT\')\nconst Maybe = require(\'crocks/Maybe\')\nconst prop = require(\'crocks/Maybe/prop\')\n\nconst MaybeReader =\n  ReaderT(Maybe)\n\nconst { ask, liftFn } = MaybeReader\n\n// readProp :: String -> b -> ReaderT e (Maybe a)\nconst readProp = key =>\n  liftFn(prop(key))\n\n// getName :: ReaderT e (Maybe a)\nconst getName =\n  ask()\n    .chain(readProp(\'name\'))\n\n// getFirstName :: ReaderT e (Maybe a)\nconst getFirstName =\n  getName\n    .chain(readProp(\'first\'))\n\n// getLastName :: ReaderT e (Maybe a)\nconst getLastName =\n  getName\n    .chain(readProp(\'last\'))\n\n// person :: Object\nconst person = {\n  name: {\n    first: \'Hazel\',\n    middle: \'Anne\'\n  }\n}\n\ngetFirstName\n  .runWith(person)\n//=> Just "Hazel"\n\ngetLastName\n  .runWith(person)\n//=> Nothing\n\ngetLastName\n  .runWith(10)\n//=> Nothing', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'runwith',
-            'href', '#runwith');
-          itext('runWith');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Monad m => ReaderT e (m a) ~> e -> m a', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('In order to unwrap the underlying ');
-        ie_open('code');
-          itext('Monad');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('ReaderT');
-        ie_close('code');
-        itext(' needs to be ran with a given environment. A ');
-        ie_open('code');
-          itext('ReaderT');
-        ie_close('code');
-        itext(' instance comes equipped with a ');
-        ie_open('code');
-          itext('runWith');
-        ie_close('code');
-        itext(' method that accepts an environment and returns the resulting ');
-        ie_open('code');
-          itext('Monad');
-        ie_close('code');
-        itext('.');
-      ie_close('p');
-      $templateAlias2({code: 'const ReaderT = require(\'../crocks/src/Reader/ReaderT\')\nconst Maybe = require(\'crocks/Maybe\')\n\nconst MaybeReader = ReaderT(Maybe)\nconst { ask, liftFn } = MaybeReader\n\nconst prop = require(\'crocks/Maybe/prop\')\n\n// data :: Object\nconst data = {\n  animals: [\n    \'tiger\', \'muskrat\', \'mouse\'\n  ]\n}\n\n// length :: Array -> Number\nconst length =\n  x => x.length\n\n// getProp :: String -> ReaderT Object (Maybe [])\nconst getProp = key =>\n  ask()\n    .chain(liftFn(prop(key)))\n\ngetProp(\'animals\')\n  .map(length)\n  .runWith(data)\n//=> Just 3', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'const Equiv = require(\'crocks/Equiv\')\n\n// both :: Equiv Boolean Boolean\nconst both =\n  Equiv((x, y) => x && y)\n\n// isEven :: Number -> Boolean\nconst isEven =\n  x => x % 2 === 0\n\n// isBig :: Number -> Boolean\nconst isBig =\n  x => x > 10\n\n// bothEven :: Equiv Number Number\nconst bothEven =\n  both.contramap(isEven)\n\n// bothBig :: Equiv Number Number\nconst bothBig =\n  both.contramap(isBig)\n\nbothEven\n  .compareWith(12, 20)\n//=> true\n\nbothEven\n  .compareWith(17, 20)\n//=> false\n\nbothBig\n  .compareWith(17)(20)\n//=> true\n\nbothBig\n  .compareWith(7)(20)\n//=> false\n\nbothBig\n  .concat(bothEven)\n  .compareWith(8)(54)\n//=> false', mode: 'javascript'}, null, opt_ijData);
     ie_close('article');
     ie_open('input', null, null,
         'type', 'hidden',
@@ -28775,11 +28698,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'value', opt_data.site.title);
     ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({content: param1090}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param628}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'lgEXX.render';
+  $render.soyTemplateName = 'anLhj.render';
 }
 
 exports.render.params = ["page","site"];
@@ -28789,14 +28712,18 @@ return exports;
 
 });
 
-class lgEXX extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(lgEXX, templates);
+class anLhj extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(anLhj, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
 
 
 /***/ }),
+/* 220 */,
+/* 221 */,
+/* 222 */,
+/* 223 */,
 /* 224 */,
 /* 225 */,
 /* 226 */,
@@ -28826,7 +28753,8 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(lgEXX, templates);
 /* 250 */,
 /* 251 */,
 /* 252 */,
-/* 253 */
+/* 253 */,
+/* 254 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28862,9 +28790,9 @@ __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _ReaderTSoy = __webpack_require__(223);
+var _EquivSoy = __webpack_require__(219);
 
-var _ReaderTSoy2 = _interopRequireDefault(_ReaderTSoy);
+var _EquivSoy2 = _interopRequireDefault(_EquivSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28874,23 +28802,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var lgEXX = function (_Component) {
-  _inherits(lgEXX, _Component);
+var anLhj = function (_Component) {
+  _inherits(anLhj, _Component);
 
-  function lgEXX() {
-    _classCallCheck(this, lgEXX);
+  function anLhj() {
+    _classCallCheck(this, anLhj);
 
-    return _possibleConstructorReturn(this, (lgEXX.__proto__ || Object.getPrototypeOf(lgEXX)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (anLhj.__proto__ || Object.getPrototypeOf(anLhj)).apply(this, arguments));
   }
 
-  return lgEXX;
+  return anLhj;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(lgEXX, _ReaderTSoy2.default);
+_metalSoy2.default.register(anLhj, _EquivSoy2.default);
 
-exports.default = lgEXX;
+exports.default = anLhj;
 
 /***/ })
-],[253]);
+],[254]);

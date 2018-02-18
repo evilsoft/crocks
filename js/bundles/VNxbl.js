@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([19,29,30,31],[
+webpackJsonppageComponent([26,31,32,33],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -28352,17 +28352,12 @@ exports.default = parseFromAnchor;
 /* 218 */,
 /* 219 */,
 /* 220 */,
-/* 221 */,
-/* 222 */,
-/* 223 */,
-/* 224 */,
-/* 225 */,
-/* 226 */
+/* 221 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sGJYd", function() { return sGJYd; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VNxbl", function() { return VNxbl; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28374,15 +28369,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var templates;
 goog.loadModule(function(exports) {
 
-// This file was automatically generated from combinators.soy.
+// This file was automatically generated from Pred.soy.
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace sGJYd.
+ * @fileoverview Templates in namespace VNxbl.
  * @public
  */
 
-goog.module('sGJYd.incrementaldom');
+goog.module('VNxbl.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28405,7 +28400,7 @@ var iattr = IncrementalDom.attr;
 
 var $templateAlias2 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('ElectricCode.incrementaldom', 'render');
 
-var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('notopic.incrementaldom', 'render');
+var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('guide.incrementaldom', 'render');
 
 
 /**
@@ -28416,169 +28411,325 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var param1330 = function() {
-    ie_open('h4');
-      ie_open('a', null, null,
-          'id', 'applyto',
-          'href', '#applyto');
-        itext('applyTo');
-      ie_close('a');
-    ie_close('h4');
+  var param944 = function() {
+    $templateAlias2({code: 'Pred a Boolean', mode: 'haskell'}, null, opt_ijData);
     ie_open('p');
+      itext('Defined as a Monoidal Contravariant datatype, ');
       ie_open('code');
-        itext('crocks/combinators/applyTo');
+        itext('Pred');
       ie_close('code');
+      itext(' wraps a predicate function of the form ');
+      ie_open('code');
+        itext('(a -> Boolean)');
+      ie_close('code');
+      itext('.');
     ie_close('p');
-    $templateAlias2({code: 'applyTo :: (a -> b) -> a -> b', mode: 'haskell'}, null, opt_ijData);
     ie_open('p');
-      itext('Seems really silly, but is quite useful for a lot of things. It takes a function and a value and then returns the result of that function with the argument applied.');
+      itext('The far right parameter of ');
+      ie_open('code');
+        itext('Pred');
+      ie_close('code');
+      itext(' is always fixed to the type of ');
+      ie_open('code');
+        itext('Boolean');
+      ie_close('code');
+      itext(', so the result of the wrapped predicate function can never be mapped. While the right parameter is fixed, the input to the predicate can vary.');
     ie_close('p');
-    ie_open('h4');
-      ie_open('a', null, null,
-          'id', 'composeb',
-          'href', '#composeb');
-        itext('composeB');
-      ie_close('a');
-    ie_close('h4');
     ie_open('p');
+      itext('Another property of ');
       ie_open('code');
-        itext('crocks/combinators/composeB');
+        itext('Pred');
       ie_close('code');
+      itext(' instances is that they can be combined using their Monodial interface. Combining instances will result in a new instance that returns the result of each ');
+      ie_open('code');
+        itext('Pred');
+      ie_close('code');
+      itext(' under logical conjunction.');
     ie_close('p');
-    $templateAlias2({code: 'composeB :: (b -> c) -> (a -> b) -> a -> c', mode: 'haskell'}, null, opt_ijData);
     ie_open('p');
-      itext('Provides a means to describe a composition between two functions. it takes two functions and a value. Given ');
+      itext('As ');
       ie_open('code');
-        itext('composeB(f, g)');
+        itext('Pred');
       ie_close('code');
-      itext(', which is read ');
-      ie_open('code');
-        itext('f');
-      ie_close('code');
-      itext(' after ');
-      ie_open('code');
-        itext('g');
-      ie_close('code');
-      itext(', it will return a function that will take value ');
-      ie_open('code');
-        itext('a');
-      ie_close('code');
-      itext(' and apply it to ');
-      ie_open('code');
-        itext('g');
-      ie_close('code');
-      itext(', passing the result as an argument to ');
-      ie_open('code');
-        itext('f');
-      ie_close('code');
-      itext(', and will finally return the result of ');
-      ie_open('code');
-        itext('f');
-      ie_close('code');
-      itext('. (This allows only two functions, if you want to avoid things like:');
-      ie_open('code');
-        itext('composeB(composeB(f, g), composeB(h, i))');
-      ie_close('code');
-      itext(' then check out');
+      itext(' wraps a function, it is lazy and will not execute until its argument is satisfied. A given instance is run but calling the ');
       ie_open('a', null, null,
-          'href', 'helpers.html#compose');
+          'href', '#runwith');
         ie_open('code');
-          itext('compose');
+          itext('runWith');
         ie_close('code');
       ie_close('a');
-      itext('.)');
+      itext('method, supplying it the argument to test.');
     ie_close('p');
-    ie_open('h4');
-      ie_open('a', null, null,
-          'id', 'constant',
-          'href', '#constant');
-        itext('constant');
-      ie_close('a');
-    ie_close('h4');
     ie_open('p');
+      itext('One of the features of ');
       ie_open('code');
-        itext('crocks/combinators/constant');
+        itext('crocks');
       ie_close('code');
-    ie_close('p');
-    $templateAlias2({code: 'constant :: a -> () -> a', mode: 'haskell'}, null, opt_ijData);
-    ie_open('p');
-      itext('This is a very handy dandy function, used a lot. Pass it any value and it will give you back a function that will return that same value no matter what you pass it.');
-    ie_close('p');
-    ie_open('h4');
-      ie_open('a', null, null,
-          'id', 'flip',
-          'href', '#flip');
-        itext('flip');
-      ie_close('a');
-    ie_close('h4');
-    ie_open('p');
+      itext(' is the ability to use both normal predicate functions and ');
       ie_open('code');
-        itext('crocks/combinators/flip');
+        itext('Pred');
       ie_close('code');
-    ie_close('p');
-    $templateAlias2({code: 'flip :: (a -> b -> c) -> b -> a -> c', mode: 'haskell'}, null, opt_ijData);
-    ie_open('p');
-      itext('This little function just takes a function and returns a function that takes the first two parameters in reverse. One can compose flip calls down the line to flip all, or some of the other parameters if there are more than two. Mix and match to your heart\'s desire.');
-    ie_close('p');
-    ie_open('h4');
-      ie_open('a', null, null,
-          'id', 'identity',
-          'href', '#identity');
-        itext('identity');
-      ie_close('a');
-    ie_close('h4');
-    ie_open('p');
+      itext(' instances interchangeably. For any ');
       ie_open('code');
-        itext('crocks/combinators/identity');
+        itext('crocks');
       ie_close('code');
+      itext(' function that takes a predicate, either a predicate function or a ');
+      ie_open('code');
+        itext('Pred');
+      ie_close('code');
+      itext(' instance can be used.');
     ie_close('p');
-    $templateAlias2({code: 'identity ::  a -> a', mode: 'haskell'}, null, opt_ijData);
     ie_open('p');
-      itext('This function and ');
+      itext('This implementation of ');
+      ie_open('code');
+        itext('Pred');
+      ie_close('code');
+      itext(' was heavily inspired by ');
       ie_open('a', null, null,
-          'href', '#constant');
+          'href', 'https://medium.com/@drboolean/monoidal-contravariant-functors-are-actually-useful-1032211045c4#.polugsx2a');
+        itext('this article');
+      ie_close('a');
+      itext('.');
+    ie_close('p');
+    $templateAlias2({code: 'const Pred = require(\'crocks/Pred\')\n\nconst isNumber = require(\'crocks/predicates/isNumber\')\nconst propOr = require(\'crocks/helpers/propOr\')\nconst filter = require(\'crocks/pointfree/filter\')\n\n// largeNumber :: Pred Number\nconst largeNumber =\n  Pred(isNumber)\n    .concat(Pred(x => x > 100))\n\n// largeItem :: Pred Object\nconst largeItem =\n  largeNumber\n    .contramap(propOr(null, \'item\'))\n\nlargeNumber\n  .runWith(45)\n//=> false\n\nlargeNumber\n  .runWith(175)\n//=> true\n\nlargeItem\n  .runWith({ item: 190 })\n//=> true\n\nlargeItem\n  .runWith({ item: 9 })\n//=> false\n\nlargeItem\n  .runWith(9)\n//=> false\n\nfilter(largeNumber, [ 200, 375, 15 ])\n//=> [ 200, 375 ]', mode: 'javascript'}, null, opt_ijData);
+    ie_open('article', null, null,
+        'id', 'topic-implements');
+      ie_open('h2');
+        ie_open('a', null, null,
+            'id', 'implements',
+            'href', '#implements');
+          itext('Implements');
+        ie_close('a');
+      ie_close('h2');
+      ie_open('p');
         ie_open('code');
-          itext('constant');
+          itext('Semigroup');
         ie_close('code');
-      ie_close('a');
-      itext(' are the workhorses of writing code with this library. It quite simply is just a function that when you pass it something, it returns that thing right back to you. So simple, I will leave it as an exercise to reason about why this is so powerful and important.');
-    ie_close('p');
-    ie_open('h4');
-      ie_open('a', null, null,
-          'id', 'reverseapply',
-          'href', '#reverseapply');
-        itext('reverseApply');
-      ie_close('a');
-    ie_close('h4');
-    ie_open('p');
-      ie_open('code');
-        itext('crocks/combinators/reverseApply');
-      ie_close('code');
-    ie_close('p');
-    $templateAlias2({code: 'reverseApply :: a -> (a -> b) -> b', mode: 'haskell'}, null, opt_ijData);
-    ie_open('p');
-      itext('Ever run into a situation where you have a value but do not have a function to apply it to? Well this little bird, named Thrush, is there to help out. Just give it a value and it will give you back a function ready to take a function. Once that function is provided, it will return the result of applying your value to that function.');
-    ie_close('p');
-    ie_open('h4');
-      ie_open('a', null, null,
-          'id', 'substitution',
-          'href', '#substitution');
-        itext('substitution');
-      ie_close('a');
-    ie_close('h4');
-    ie_open('p');
-      ie_open('code');
-        itext('crocks/combinators/substitution');
-      ie_close('code');
-    ie_close('p');
-    $templateAlias2({code: 'substitution :: (a -> b -> c) -> (a -> b) -> a -> c', mode: 'haskell'}, null, opt_ijData);
-    ie_open('p');
-      itext('While it a complicated little bugger, it can come in very handy from time to time. In it\'s first two arguments it takes functions. The first must be binary and the second unary. That will return you a function that is ready to take some value. Once supplied the fun starts, it will pass the ');
-      ie_open('code');
-        itext('a');
-      ie_close('code');
-      itext(' to the first argument of both functions, and the result of the second function to the second parameter of the first function. Finally after all that juggling, it will return the result of that first function. When used with partial application on that first parameter, a whole new world of combinatory madness is presented!');
-    ie_close('p');
+        itext(', ');
+        ie_open('code');
+          itext('Monoid');
+        ie_close('code');
+        itext(', ');
+        ie_open('code');
+          itext('Contravariant');
+        ie_close('code');
+      ie_close('p');
+    ie_close('article');
+    ie_open('article', null, null,
+        'id', 'topic-constructor');
+      ie_open('h2');
+        ie_open('a', null, null,
+            'id', 'constructor-methods',
+            'href', '#constructor-methods');
+          itext('Constructor Methods');
+        ie_close('a');
+      ie_close('h2');
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'empty',
+            'href', '#empty');
+          itext('empty');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Pred.empty :: () -> Pred a', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        ie_open('code');
+          itext('empty');
+        ie_close('code');
+        itext(' provides the identity for the ');
+        ie_open('code');
+          itext('Monoid');
+        ie_close('code');
+        itext(' in that when the value it provides is ');
+        ie_open('code');
+          itext('concat');
+        ie_close('code');
+        itext('ed to any other value, it will return the other value. In the case of ');
+        ie_open('code');
+          itext('Pred');
+        ie_close('code');
+        itext(' the result of ');
+        ie_open('code');
+          itext('empty');
+        ie_close('code');
+        itext(' is a ');
+        ie_open('code');
+          itext('Pred');
+        ie_close('code');
+        itext(' that will always return');
+        ie_open('code');
+          itext('true');
+        ie_close('code');
+        itext('. ');
+        ie_open('code');
+          itext('empty');
+        ie_close('code');
+        itext(' is available on both the Constructor and the Instance for convenience.');
+      ie_close('p');
+      $templateAlias2({code: 'const Pred = require(\'crocks/Pred\')\n\nconst isEmpty = require(\'crocks/predicates/isEmpty\')\nconst not = require(\'crocks/logic/not\')\n\n// empty :: Pred a\nconst empty =\n  Pred.empty()\n\n// notEmpty :: Pred a\nconst notEmpty =\n  Pred(not(isEmpty))\n\nempty\n  .runWith(\'\')\n//=> true\n\nnotEmpty\n  .concat(empty)\n  .runWith([])\n//=> false\n\nnotEmpty\n  .concat(empty)\n  .runWith([ 1, 2, 3 ])\n//=> true\n\nempty\n  .concat(notEmpty)\n  .runWith(\'\')\n//=> false\n\nempty\n  .concat(notEmpty)\n  .runWith(\'123\')\n//=> true', mode: 'javascript'}, null, opt_ijData);
+    ie_close('article');
+    ie_open('article', null, null,
+        'id', 'topic-instance');
+      ie_open('h2');
+        ie_open('a', null, null,
+            'id', 'instance-methods',
+            'href', '#instance-methods');
+          itext('Instance Methods');
+        ie_close('a');
+      ie_close('h2');
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'concat',
+            'href', '#concat');
+          itext('concat');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Pred a ~> Pred a -> Pred a', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        ie_open('code');
+          itext('concat');
+        ie_close('code');
+        itext(' is used to combine (2) ');
+        ie_open('code');
+          itext('Semigroup');
+        ie_close('code');
+        itext('s of the same type under an operation specified by the ');
+        ie_open('code');
+          itext('Semigroup');
+        ie_close('code');
+        itext('. In the case of ');
+        ie_open('code');
+          itext('Pred');
+        ie_close('code');
+        itext(', the results of both');
+        ie_open('code');
+          itext('Preds');
+        ie_close('code');
+        itext('s are combined under logical conjunction.');
+      ie_close('p');
+      $templateAlias2({code: 'const Pred = require(\'crocks/Pred\')\n\nconst or = require(\'crocks/logic/or\')\nconst not = require(\'crocks/logic/not\')\nconst filter = require(\'crocks/pointfree/filter\')\n\nconst isEven =\n  x => !(x % 2)\n\n// isOdd :: Pred Number\nconst isOdd =\n  Pred(not(isEven))\n\n// lt20 :: Pred Number\nconst lt20 =\n  Pred(x => x < 20)\n\n// gt5 :: Pred Number\nconst gt5 =\n  Pred(x => x > 5)\n\n// inRange :: Pred Number\nconst inRange =\n  lt20.concat(gt5)\n\n// isOddInRange :: Pred Number\nconst isOddInRange =\n  isOdd.concat(inRange)\n\n// isValid :: Pred Number\nconst isValid =\n  Pred(or(isEven, isOddInRange))\n\n// data :: [ Number ]\nconst data =\n[ 1, 4, 12, 19, 32, 99, 76, 7 ]\n\nisOdd\n  .runWith(5)\n//=> true\n\nisOdd\n  .runWith(8)\n//=> false\n\nfilter(isOdd, data)\n//=> [ 1, 19, 99, 7 ]\n\nfilter(lt20, data)\n//=> [ 1, 4, 12, 19, 7 ]\n\nfilter(gt5, data)\n//=> [ 12, 19, 32, 99, 76, 7 ]\n\nfilter(inRange, data)\n//=> [ 12, 19, 7 ]\n\nfilter(isOddInRange, data)\n//=> [ 19, 7 ]\n\nfilter(isEven, data)\n// [ 4, 12, 32, 76 ]\n\nfilter(isValid, data)\n//=> [ 4, 12, 19, 32, 76, 7 ]', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'contramap',
+            'href', '#contramap');
+          itext('contramap');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Pred a ~> (b -> a) -> Pred b', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        itext('While the output of a ');
+        ie_open('code');
+          itext('Pred');
+        ie_close('code');
+        itext(' is fixed to ');
+        ie_open('code');
+          itext('Boolean');
+        ie_close('code');
+        itext(', the input can vary type and value. This allows a given ');
+        ie_open('code');
+          itext('Pred');
+        ie_close('code');
+        itext(' to be adapted by mapping on the input, before it hits the wrapped predicate function. Using ');
+        ie_open('code');
+          itext('contramap');
+        ie_close('code');
+        itext(', functions are lifted, mapping the input to now accept the type of the input of the given function.');
+      ie_close('p');
+      $templateAlias2({code: 'const Pred = require(\'crocks/Pred\')\nconst contramap = require(\'crocks/pointfree/contramap\')\nconst propOr = require(\'crocks/helpers/propOr\')\n\n// Length :: String | Function | Array\n// length :: Length -> Number\nconst length =\n  propOr(0, \'length\')\n\n// gt5 :: Pred Number\nconst gt5 =\n  Pred(x => x > 5)\n\n// lengthGt5 :: Pred Length\nconst validLength =\n  contramap(length, gt5)\n\n// validItemLength :: Pred Object\nconst validItemLength =\n  contramap(propOr(null, \'item\'), validLength)\n\ngt5\n  .runWith(5)\n//=> false\n\ngt5\n  .runWith(10)\n//=> true\n\nvalidLength\n  .runWith([ 1, 2, 3, 4, 5, 6 ])\n//=> true\n\nvalidLength\n  .runWith(null)\n//=> false\n\nvalidLength\n  .runWith(\'1234\')\n//=> false\n\nvalidItemLength\n  .runWith({ item: \'this is an item\' })\n//=> true', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'valueof',
+            'href', '#valueof');
+          itext('valueOf');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Pred a ~> () -> a -> Boolean', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        ie_open('code');
+          itext('valueOf');
+        ie_close('code');
+        itext(' is used on all ');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext(' ');
+        ie_open('code');
+          itext('Monoid');
+        ie_close('code');
+        itext('s as a means of extraction. While the extraction is available, types that implement ');
+        ie_open('code');
+          itext('valueOf');
+        ie_close('code');
+        itext(' are not necessarily a');
+        ie_open('code');
+          itext('Comonad');
+        ie_close('code');
+        itext('. This function is used primarily for convenience for some of the helper functions that ship with ');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext('.');
+      ie_close('p');
+      ie_open('p');
+        itext('Calling ');
+        ie_open('code');
+          itext('valueOf');
+        ie_close('code');
+        itext(' on a ');
+        ie_open('code');
+          itext('Pred');
+        ie_close('code');
+        itext(' instance will result in the underlying predicate function. Most of the time this will not be required when working with ');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext('because all ');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext(' functions that take a predicate function can also take a');
+        ie_open('code');
+          itext('Pred');
+        ie_close('code');
+        itext(' instance.');
+      ie_close('p');
+      $templateAlias2({code: 'const Pred = require(\'crocks/Pred\')\n\nconst isArray = require(\'crocks/predicates/isArray\')\nconst isString = require(\'crocks/predicates/isString\')\nconst equals = require(\'crocks/pointfree/equals\')\nconst or = require(\'crocks/logic/or\')\n\n// lengthIsThree :: Pred a\nconst lengthIsThree =\n  Pred(equals(3))\n    .contramap(x => x.length)\n\n// pred :: Pred a\nconst pred =\n  Pred(or(isArray, isString))\n    .concat(lengthIsThree)\n\n// fn :: a -> Boolean\nconst fn =\n  pred.valueOf()\n\npred\n  .runWith(null)\n//=> false\n\npred\n  .runWith([ 1, 2, 3 ])\n//=> true\n\npred\n  .runWith(\'This is fun\')\n//=> true\n\nfn(null)          // false\nfn([ 1, 2, 3 ])   // true\nfn(\'This is fun\') // true\nfn([])            // false\nfn(\'\')            // false', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'runwith',
+            'href', '#runwith');
+          itext('runWith');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Pred a ~> a -> Boolean', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        itext('As ');
+        ie_open('code');
+          itext('Pred');
+        ie_close('code');
+        itext(' wraps a predicate function, it needs a mean to run it with some value to test against the predicate. ');
+        ie_open('code');
+          itext('Pred');
+        ie_close('code');
+        itext(' instances provide a method called');
+        ie_open('code');
+          itext('runWith');
+        ie_close('code');
+        itext(' that will accept the value to be tested and then runs it through the predicate returning the result.');
+      ie_close('p');
+      ie_open('p');
+        itext('Most of the time this function is not used while working with other predicate functions in ');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext(', as all functions that take a predicate function also take a ');
+        ie_open('code');
+          itext('Pred');
+        ie_close('code');
+        itext(' instance. It does come in handy though when supplying predicates to other libraries.');
+      ie_close('p');
+      $templateAlias2({code: 'const Pred = require(\'crocks/Pred\')\n\nconst hasProp = require(\'crocks/predicates/hasProp\')\nconst equals = require(\'crocks/pointfree/equals\')\nconst flip = require(\'crocks/combinators/flip\')\nconst runWith = require(\'crocks/pointfree/runWith\')\n\n// trueBlue :: Pred Object\nconst trueBlue =\n  Pred(equals(true))\n    .contramap(({ blue }) => blue)\n\n// isValid :: Pred a\nconst isValid =\n  Pred(hasProp(\'blue\'))\n    .concat(trueBlue)\n\n// checkValid :: a -> Boolean\nconst checkValid =\n  flip(runWith, isValid)\n\ncheckValid(null)            //=> false\ncheckValid([ 1, 2, 3 ])     //=> false\ncheckValid({ blue: 32 })    //=> false\ncheckValid({ blue: true })  //=> true', mode: 'javascript'}, null, opt_ijData);
+    ie_close('article');
     ie_open('input', null, null,
         'type', 'hidden',
         'value', opt_data.page.title);
@@ -28588,11 +28739,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'value', opt_data.site.title);
     ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({content: param1330}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param944}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'sGJYd.render';
+  $render.soyTemplateName = 'VNxbl.render';
 }
 
 exports.render.params = ["page","site"];
@@ -28602,14 +28753,19 @@ return exports;
 
 });
 
-class sGJYd extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(sGJYd, templates);
+class VNxbl extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(VNxbl, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
 
 
 /***/ }),
+/* 222 */,
+/* 223 */,
+/* 224 */,
+/* 225 */,
+/* 226 */,
 /* 227 */,
 /* 228 */,
 /* 229 */,
@@ -28636,16 +28792,7 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(sGJYd, templates);
 /* 250 */,
 /* 251 */,
 /* 252 */,
-/* 253 */,
-/* 254 */,
-/* 255 */,
-/* 256 */,
-/* 257 */,
-/* 258 */,
-/* 259 */,
-/* 260 */,
-/* 261 */,
-/* 262 */
+/* 253 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28681,9 +28828,9 @@ __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _combinatorsSoy = __webpack_require__(226);
+var _PredSoy = __webpack_require__(221);
 
-var _combinatorsSoy2 = _interopRequireDefault(_combinatorsSoy);
+var _PredSoy2 = _interopRequireDefault(_PredSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28693,23 +28840,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var sGJYd = function (_Component) {
-  _inherits(sGJYd, _Component);
+var VNxbl = function (_Component) {
+  _inherits(VNxbl, _Component);
 
-  function sGJYd() {
-    _classCallCheck(this, sGJYd);
+  function VNxbl() {
+    _classCallCheck(this, VNxbl);
 
-    return _possibleConstructorReturn(this, (sGJYd.__proto__ || Object.getPrototypeOf(sGJYd)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (VNxbl.__proto__ || Object.getPrototypeOf(VNxbl)).apply(this, arguments));
   }
 
-  return sGJYd;
+  return VNxbl;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(sGJYd, _combinatorsSoy2.default);
+_metalSoy2.default.register(VNxbl, _PredSoy2.default);
 
-exports.default = sGJYd;
+exports.default = VNxbl;
 
 /***/ })
-],[262]);
+],[253]);

@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([12,29,30,31],[
+webpackJsonppageComponent([3,31,32,33],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -28364,12 +28364,23 @@ exports.default = parseFromAnchor;
 /* 230 */,
 /* 231 */,
 /* 232 */,
-/* 233 */
+/* 233 */,
+/* 234 */,
+/* 235 */,
+/* 236 */,
+/* 237 */,
+/* 238 */,
+/* 239 */,
+/* 240 */,
+/* 241 */,
+/* 242 */,
+/* 243 */,
+/* 244 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MVDrI", function() { return MVDrI; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "JocMV", function() { return JocMV; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28381,15 +28392,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var templates;
 goog.loadModule(function(exports) {
 
-// This file was automatically generated from getting-started.soy.
+// This file was automatically generated from Sum.soy.
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace MVDrI.
+ * @fileoverview Templates in namespace JocMV.
  * @public
  */
 
-goog.module('MVDrI.incrementaldom');
+goog.module('JocMV.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28423,123 +28434,178 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var param211 = function() {
+  var param2290 = function() {
+    $templateAlias2({code: 'Sum Number', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      ie_open('code');
+        itext('Sum');
+      ie_close('code');
+      itext(' is a ');
+      ie_open('code');
+        itext('Monoid');
+      ie_close('code');
+      itext(' that will combine (2) ');
+      ie_open('code');
+        itext('Number');
+      ie_close('code');
+      itext('s under addition.');
+    ie_close('p');
+    $templateAlias2({code: 'const Sum = require(\'crocks/Sum\')\nconst mconcat = require(\'crocks/helpers/mconcat\')\nconst mconcatMap = require(\'crocks/helpers/mconcatMap\')\n\nSum(13)\n//=> Sum 13\n\nmconcat(Sum, [ 5, 2 ])\n//=> Sum 7\n\nSum(10)\n  .concat(Sum(10))\n//=> Sum 20\n\n// sumByTen :: [ Number ] -> Sum\nconst sumByTen =\n  mconcatMap(Sum, x => x * 10)\n\nsumByTen([ 2, 2 ])\n//=> Sum 40', mode: 'javascript'}, null, opt_ijData);
     ie_open('article', null, null,
-        'id', 'installation');
+        'id', 'topic-implements');
       ie_open('h2');
         ie_open('a', null, null,
-            'id', 'installation',
-            'href', '#installation');
-          itext('Installation');
+            'id', 'implements',
+            'href', '#implements');
+          itext('Implements');
         ie_close('a');
       ie_close('h2');
       ie_open('p');
         ie_open('code');
-          itext('crocks');
+          itext('Semigroup');
         ie_close('code');
-        itext(' is available from ');
+        itext(', ');
         ie_open('code');
-          itext('npm');
+          itext('Monoid');
         ie_close('code');
-        itext(' and is just a shell command away. All you need to do is run the following to save it as a dependency in your current project folder:');
       ie_close('p');
-      $templateAlias2({code: '$ npm install crocks -S', mode: 'text'}, null, opt_ijData);
-      ie_open('p');
-        itext('This will pull down ');
-        ie_open('code');
-          itext('crocks');
-        ie_close('code');
-        itext(' into your project\'s ');
-        ie_open('code');
-          itext('node_modules');
-        ie_close('code');
-        itext(' folder and can be accessed by adding something like the following in the file that needs it:');
-      ie_close('p');
-      $templateAlias2({code: '// node require syntax\nconst crocks = require(\'crocks\')\n\n// Javascript modules (if you are transpiling)\nimport crocks from \'crocks\'', mode: 'javascript'}, null, opt_ijData);
     ie_close('article');
     ie_open('article', null, null,
-        'id', 'import-only-what-you-need');
+        'id', 'topic-constructor');
       ie_open('h2');
         ie_open('a', null, null,
-            'id', 'import-only-whats-needed',
-            'href', '#import-only-whats-needed');
-          itext('Import only what\'s needed');
+            'id', 'constructor-methods',
+            'href', '#constructor-methods');
+          itext('Constructor Methods');
         ie_close('a');
       ie_close('h2');
+      ie_open('h3');
+        ie_open('a', null, null,
+            'id', 'empty',
+            'href', '#empty');
+          itext('empty');
+        ie_close('a');
+      ie_close('h3');
+      $templateAlias2({code: 'Sum.empty :: () -> Sum', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
-        itext('There is a lot to this library, and as such it may not be desired to bring in the whole thing when bundling for a library or frontend application. If this is the case, the code is organized in a manner that groups all functions that return or construct a given ADT into their respective folders. While general purpose functions are spread across the following folders: ');
         ie_open('code');
-          itext('combinators');
+          itext('empty');
         ie_close('code');
-        itext(', ');
+        itext(' provides the identity for the ');
         ie_open('code');
-          itext('helpers');
+          itext('Monoid');
         ie_close('code');
-        itext(', ');
+        itext(' in that when the value it provides is ');
         ie_open('code');
-          itext('logic');
+          itext('concat');
         ie_close('code');
-        itext(', ');
+        itext('ed to any other value, it will return the other value. In the case of ');
         ie_open('code');
-          itext('pointfree');
+          itext('Sum');
         ie_close('code');
-        itext(' and ');
+        itext(' the result of ');
         ie_open('code');
-          itext('predicates');
+          itext('empty');
+        ie_close('code');
+        itext(' is ');
+        ie_open('code');
+          itext('0');
+        ie_close('code');
+        itext('. ');
+        ie_open('code');
+          itext('empty');
+        ie_close('code');
+        itext(' is available on both the Constructor and the Instance for convenience.');
+      ie_close('p');
+      $templateAlias2({code: 'const Sum = require(\'crocks/Sum\')\n\nSum.empty()\n//=> Sum 0\n\nSum.empty()\n  .concat(Sum.empty())\n//=> Sum 0\n\nSum(4)\n  .concat(Sum.empty())\n//=> Sum 4\n\nSum.empty()\n  .concat(Sum(4))\n//=> Sum 4', mode: 'javascript'}, null, opt_ijData);
+    ie_close('article');
+    ie_open('article', null, null,
+        'id', 'topic-instance');
+      ie_open('h2');
+        ie_open('a', null, null,
+            'id', 'instance-methods',
+            'href', '#instance-methods');
+          itext('Instance Methods');
+        ie_close('a');
+      ie_close('h2');
+      ie_open('h3');
+        ie_open('a', null, null,
+            'id', 'concat',
+            'href', '#concat');
+          itext('concat');
+        ie_close('a');
+      ie_close('h3');
+      $templateAlias2({code: 'Sum ~> Sum -> Sum', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        ie_open('code');
+          itext('concat');
+        ie_close('code');
+        itext(' is used to combine (2) ');
+        ie_open('code');
+          itext('Semigroup');
+        ie_close('code');
+        itext('s of the same type under an operation specified by the ');
+        ie_open('code');
+          itext('Semigroup');
+        ie_close('code');
+        itext('. In the case of ');
+        ie_open('code');
+          itext('Sum');
+        ie_close('code');
+        itext(', it will add the (2) ');
+        ie_open('code');
+          itext('Number');
+        ie_close('code');
+        itext('s.');
+      ie_close('p');
+      $templateAlias2({code: 'const Sum = require(\'crocks/Sum\')\n\nSum(5)\n  .concat(Sum(4))\n//=> Sum 9\n\nSum(45)\n  .concat(Sum(32))\n//=> Sum 77\n\nSum(1000)\n  .concat(Sum(Infinity))\n//=> Sum Infinity\n\nSum(1)\n  .concat(Sum(3))\n//=> Sum 4', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h3');
+        ie_open('a', null, null,
+            'id', 'valueof',
+            'href', '#valueof');
+          itext('valueOf');
+        ie_close('a');
+      ie_close('h3');
+      $templateAlias2({code: 'Sum ~> () -> Number', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        ie_open('code');
+          itext('valueOf');
+        ie_close('code');
+        itext(' is used on all ');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext(' ');
+        ie_open('code');
+          itext('Monoid');
+        ie_close('code');
+        itext('s as a means of extraction. While the extraction is available, types that implement ');
+        ie_open('code');
+          itext('valueOf');
+        ie_close('code');
+        itext(' are not necessarily a');
+        ie_open('code');
+          itext('Comonad');
+        ie_close('code');
+        itext('. This function is used primarily for convenience for some of the helper functions that ship with ');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext('. Calling ');
+        ie_open('code');
+          itext('valueOf');
+        ie_close('code');
+        itext(' on a ');
+        ie_open('code');
+          itext('Sum');
+        ie_close('code');
+        itext(' instance will result in the underlying ');
+        ie_open('code');
+          itext('Number');
         ie_close('code');
         itext('.');
       ie_close('p');
-      ie_open('p');
-        itext('To access the types, just reference the folder like: ');
-        ie_open('code');
-          itext('crocks/Maybe');
-        ie_close('code');
-        itext(', or');
-        ie_open('code');
-          itext('crocks/Result');
-        ie_close('code');
-        itext('. If you want to access a function that constructs a given type, reference it by name, like: ');
-        ie_open('code');
-          itext('crocks/Maybe/safe');
-        ie_close('code');
-        itext(' or ');
-        ie_open('code');
-          itext('crocks/Result/tryCatch');
-        ie_close('code');
-        itext('. This organization helps ensure that you only include what you need.');
-      ie_close('p');
-      ie_open('h3');
-        ie_open('a', null, null,
-            'id', 'entire-library-commonjs',
-            'href', '#entire-library-commonjs');
-          itext('Entire library (CommonJS)');
-        ie_close('a');
-      ie_close('h3');
-      $templateAlias2({code: '// namespace entire suite to crocks variable\nconst crocks = require(\'crocks\')\n\n// pluck anything that does not require name-spacing\nconst { safe, isNumber } = crocks\n\n// still requires entire object, but removes name-spacing\nconst { and, liftA2 } = require(\'crocks\')\n\n// divide :: Number -> Number\nconst divide =\n  x => y => x / y\n\n// safeNumber :: a -> Maybe Number\nconst safeNumber =\n  safe(isNumber)\n\n// notZero :: a -> Maybe Number\nconst notZero = safe(\n  and(isNumber, x => x !== 0)\n)\n\n// safeDivide:: a -> Maybe Number\nconst safeDivide = crocks.curry(\n  (x, y) => liftA2(divide, safeNumber(x), notZero(y))\n)\n\nsafeDivide(20, 0)\n//=> Nothing\n\nsafeDivide(20, 5)\n//=> Just 4\n\nsafeDivide(\'number\', 5)\n//=> Nothing', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h3');
-        ie_open('a', null, null,
-            'id', 'entire-library-js-modules',
-            'href', '#entire-library-js-modules');
-          itext('Entire library (JS Modules)');
-        ie_close('a');
-      ie_close('h3');
-      $templateAlias2({code: '// namespace entire suite to crocks variable\nimport crocks from \'crocks\'\n\n// still imports entire object, but removes name-spacing\nimport { and, liftA2 }  from \'crocks\'\n\n// pluck anything that does not require name-spacing\nconst { safe, isNumber } = crocks\n\n// divide :: Number -> Number\nconst divide =\n  x => y => x / y\n\n// safeNumber :: a -> Maybe Number\nconst safeNumber =\n  safe(isNumber)\n\n// notZero :: a -> Maybe Number\nconst notZero = safe(\n  and(isNumber, x => x !== 0)\n)\n\n// safeDivide:: a -> Maybe Number\nconst safeDivide = crocks.curry(\n  (x, y) => liftA2(divide, safeNumber(x), notZero(y))\n)\n\nsafeDivide(20, 0)\n//=> Nothing\n\nsafeDivide(20, 5)\n//=> Just 4\n\nsafeDivide(\'number\', 5)\n//=> Nothing', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h3');
-        ie_open('a', null, null,
-            'id', 'single-entities-commonjs',
-            'href', '#single-entities-commonjs');
-          itext('Single entities (CommonJS)');
-        ie_close('a');
-      ie_close('h3');
-      $templateAlias2({code: '// require in each entity directly\nconst and = require(\'crocks/logic/and\')\nconst curry = require(\'crocks/helpers/curry\')\nconst isNumber = require(\'crocks/predicates/isNumber\')\nconst liftA2 = require(\'crocks/helpers/liftA2\')\nconst safe = require(\'crocks/Maybe/safe\')\n\n// divide :: Number -> Number\nconst divide =\n  x => y => x / y\n\n// safeNumber :: a -> Maybe Number\nconst safeNumber =\n  safe(isNumber)\n\n// notZero :: a -> Maybe Number\nconst notZero = safe(\n  and(isNumber, x => x !== 0)\n)\n\n// safeDivide:: a -> Maybe Number\nconst safeDivide = curry(\n  (x, y) => liftA2(divide, safeNumber(x), notZero(y))\n)\n\nsafeDivide(20, 0)\n//=> Nothing\n\nsafeDivide(20, 5)\n//=> Just 4\n\nsafeDivide(\'number\', 5)\n//=> Nothing', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h3');
-        ie_open('a', null, null,
-            'id', 'single-entities-js-modules',
-            'href', '#single-entities-js-modules');
-          itext('Single entities (JS Modules)');
-        ie_close('a');
-      ie_close('h3');
-      $templateAlias2({code: '// import in each entity directly\nimport and from \'crocks/logic/and\'\nimport curry from \'crocks/helpers/curry\'\nimport isNumber from \'crocks/predicates/isNumber\'\nimport liftA2 from \'crocks/helpers/liftA2\'\nimport safe from \'crocks/Maybe/safe\'\n\n// divide :: Number -> Number\nconst divide =\n  x => y => x / y\n\n// safeNumber :: a -> Maybe Number\nconst safeNumber =\n  safe(isNumber)\n\n// notZero :: a -> Maybe Number\nconst notZero = safe(\n  and(isNumber, x => x !== 0)\n)\n\n// safeDivide:: a -> Maybe Number\nconst safeDivide = curry(\n  (x, y) => liftA2(divide, safeNumber(x), notZero(y))\n)\n\nsafeDivide(20, 0)\n//=> Nothing\n\nsafeDivide(20, 5)\n//=> Just 4\n\nsafeDivide(\'number\', 5)\n//=> Nothing', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'const Sum = require(\'crocks/Sum\')\n\nSum(4)\n  .valueOf()\n//=> 4\n\nSum.empty()\n  .valueOf()\n//=> 0\n\nSum(34)\n  .concat(Sum(21))\n  .valueOf()\n//=> 55', mode: 'javascript'}, null, opt_ijData);
     ie_close('article');
     ie_open('input', null, null,
         'type', 'hidden',
@@ -28550,11 +28616,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'value', opt_data.site.title);
     ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({content: param211}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param2290}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'MVDrI.render';
+  $render.soyTemplateName = 'JocMV.render';
 }
 
 exports.render.params = ["page","site"];
@@ -28564,27 +28630,38 @@ return exports;
 
 });
 
-class MVDrI extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(MVDrI, templates);
+class JocMV extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(JocMV, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
 
 
 /***/ }),
-/* 234 */,
-/* 235 */,
-/* 236 */,
-/* 237 */,
-/* 238 */,
-/* 239 */,
-/* 240 */,
-/* 241 */,
-/* 242 */,
-/* 243 */,
-/* 244 */,
 /* 245 */,
-/* 246 */
+/* 246 */,
+/* 247 */,
+/* 248 */,
+/* 249 */,
+/* 250 */,
+/* 251 */,
+/* 252 */,
+/* 253 */,
+/* 254 */,
+/* 255 */,
+/* 256 */,
+/* 257 */,
+/* 258 */,
+/* 259 */,
+/* 260 */,
+/* 261 */,
+/* 262 */,
+/* 263 */,
+/* 264 */,
+/* 265 */,
+/* 266 */,
+/* 267 */,
+/* 268 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28620,9 +28697,9 @@ __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _gettingStartedSoy = __webpack_require__(233);
+var _SumSoy = __webpack_require__(244);
 
-var _gettingStartedSoy2 = _interopRequireDefault(_gettingStartedSoy);
+var _SumSoy2 = _interopRequireDefault(_SumSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28632,23 +28709,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var MVDrI = function (_Component) {
-  _inherits(MVDrI, _Component);
+var JocMV = function (_Component) {
+  _inherits(JocMV, _Component);
 
-  function MVDrI() {
-    _classCallCheck(this, MVDrI);
+  function JocMV() {
+    _classCallCheck(this, JocMV);
 
-    return _possibleConstructorReturn(this, (MVDrI.__proto__ || Object.getPrototypeOf(MVDrI)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (JocMV.__proto__ || Object.getPrototypeOf(JocMV)).apply(this, arguments));
   }
 
-  return MVDrI;
+  return JocMV;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(MVDrI, _gettingStartedSoy2.default);
+_metalSoy2.default.register(JocMV, _SumSoy2.default);
 
-exports.default = MVDrI;
+exports.default = JocMV;
 
 /***/ })
-],[246]);
+],[268]);

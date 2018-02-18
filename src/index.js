@@ -177,7 +177,9 @@ const predicates = {
   isSemigroupoid: require('./predicates/isSemigroupoid'),
   isSetoid: require('./predicates/isSetoid'),
   isString: require('./predicates/isString'),
-  isTraversable: require('./predicates/isTraversable')
+  isTraversable: require('./predicates/isTraversable'),
+  propEq: require('./predicates/propEq'),
+  propPathEq: require('./predicates/propPathEq'),
 }
 
 const transforms = {

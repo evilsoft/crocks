@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([12,31,32,33],[
+webpackJsonppageComponent([26,31,32,33],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -28352,26 +28352,12 @@ exports.default = parseFromAnchor;
 /* 218 */,
 /* 219 */,
 /* 220 */,
-/* 221 */,
-/* 222 */,
-/* 223 */,
-/* 224 */,
-/* 225 */,
-/* 226 */,
-/* 227 */,
-/* 228 */,
-/* 229 */,
-/* 230 */,
-/* 231 */,
-/* 232 */,
-/* 233 */,
-/* 234 */,
-/* 235 */
+/* 221 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BATEl", function() { return BATEl; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ytgOU", function() { return ytgOU; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28383,15 +28369,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var templates;
 goog.loadModule(function(exports) {
 
-// This file was automatically generated from All.soy.
+// This file was automatically generated from Pred.soy.
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace BATEl.
+ * @fileoverview Templates in namespace ytgOU.
  * @public
  */
 
-goog.module('BATEl.incrementaldom');
+goog.module('ytgOU.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28425,31 +28411,87 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var param1748 = function() {
-    $templateAlias2({code: 'All Boolean', mode: 'haskell'}, null, opt_ijData);
+  var param944 = function() {
+    $templateAlias2({code: 'Pred a Boolean', mode: 'haskell'}, null, opt_ijData);
     ie_open('p');
+      itext('Defined as a Monoidal Contravariant datatype, ');
       ie_open('code');
-        itext('All');
+        itext('Pred');
       ie_close('code');
-      itext(' is a ');
+      itext(' wraps a predicate function of the form ');
       ie_open('code');
-        itext('Monoid');
-      ie_close('code');
-      itext(' that will combine (2) values of any type using logical conjunction (AND) on their coerced ');
-      ie_open('code');
-        itext('Boolean');
-      ie_close('code');
-      itext(' values, mapping truth-y values to');
-      ie_open('code');
-        itext('true');
-      ie_close('code');
-      itext(' and false-y values to ');
-      ie_open('code');
-        itext('false');
+        itext('(a -> Boolean)');
       ie_close('code');
       itext('.');
     ie_close('p');
-    $templateAlias2({code: 'const All = require(\'crocks/All\')\n\nconst mconcat = require(\'crocks/helpers/mconcat\')\n\nconst trueNum = All(13)\nconst falseNum = All(0)\nconst trueString = All(\'So true\')\n\ntrueNum.concat(falseNum)\n//=> All false\n\ntrueNum.concat(trueString)\n//=> All true\n\nconst allGood =\n  mconcat(All)\n\nallGood([ 1, 5, 89 ])\n//=> All true\n\nallGood([ \'nice\', \'00\', null ])\n//=> All false', mode: 'javascript'}, null, opt_ijData);
+    ie_open('p');
+      itext('The far right parameter of ');
+      ie_open('code');
+        itext('Pred');
+      ie_close('code');
+      itext(' is always fixed to the type of ');
+      ie_open('code');
+        itext('Boolean');
+      ie_close('code');
+      itext(', so the result of the wrapped predicate function can never be mapped. While the right parameter is fixed, the input to the predicate can vary.');
+    ie_close('p');
+    ie_open('p');
+      itext('Another property of ');
+      ie_open('code');
+        itext('Pred');
+      ie_close('code');
+      itext(' instances is that they can be combined using their Monodial interface. Combining instances will result in a new instance that returns the result of each ');
+      ie_open('code');
+        itext('Pred');
+      ie_close('code');
+      itext(' under logical conjunction.');
+    ie_close('p');
+    ie_open('p');
+      itext('As ');
+      ie_open('code');
+        itext('Pred');
+      ie_close('code');
+      itext(' wraps a function, it is lazy and will not execute until its argument is satisfied. A given instance is run but calling the ');
+      ie_open('a', null, null,
+          'href', '#runwith');
+        ie_open('code');
+          itext('runWith');
+        ie_close('code');
+      ie_close('a');
+      itext('method, supplying it the argument to test.');
+    ie_close('p');
+    ie_open('p');
+      itext('One of the features of ');
+      ie_open('code');
+        itext('crocks');
+      ie_close('code');
+      itext(' is the ability to use both normal predicate functions and ');
+      ie_open('code');
+        itext('Pred');
+      ie_close('code');
+      itext(' instances interchangeably. For any ');
+      ie_open('code');
+        itext('crocks');
+      ie_close('code');
+      itext(' function that takes a predicate, either a predicate function or a ');
+      ie_open('code');
+        itext('Pred');
+      ie_close('code');
+      itext(' instance can be used.');
+    ie_close('p');
+    ie_open('p');
+      itext('This implementation of ');
+      ie_open('code');
+        itext('Pred');
+      ie_close('code');
+      itext(' was heavily inspired by ');
+      ie_open('a', null, null,
+          'href', 'https://medium.com/@drboolean/monoidal-contravariant-functors-are-actually-useful-1032211045c4#.polugsx2a');
+        itext('this article');
+      ie_close('a');
+      itext('.');
+    ie_close('p');
+    $templateAlias2({code: 'const Pred = require(\'crocks/Pred\')\n\nconst isNumber = require(\'crocks/predicates/isNumber\')\nconst propOr = require(\'crocks/helpers/propOr\')\nconst filter = require(\'crocks/pointfree/filter\')\n\n// largeNumber :: Pred Number\nconst largeNumber =\n  Pred(isNumber)\n    .concat(Pred(x => x > 100))\n\n// largeItem :: Pred Object\nconst largeItem =\n  largeNumber\n    .contramap(propOr(null, \'item\'))\n\nlargeNumber\n  .runWith(45)\n//=> false\n\nlargeNumber\n  .runWith(175)\n//=> true\n\nlargeItem\n  .runWith({ item: 190 })\n//=> true\n\nlargeItem\n  .runWith({ item: 9 })\n//=> false\n\nlargeItem\n  .runWith(9)\n//=> false\n\nfilter(largeNumber, [ 200, 375, 15 ])\n//=> [ 200, 375 ]', mode: 'javascript'}, null, opt_ijData);
     ie_open('article', null, null,
         'id', 'topic-implements');
       ie_open('h2');
@@ -28466,6 +28508,10 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         itext(', ');
         ie_open('code');
           itext('Monoid');
+        ie_close('code');
+        itext(', ');
+        ie_open('code');
+          itext('Contravariant');
         ie_close('code');
       ie_close('p');
     ie_close('article');
@@ -28485,7 +28531,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
           itext('empty');
         ie_close('a');
       ie_close('h4');
-      $templateAlias2({code: 'All.empty :: () -> All', mode: 'haskell'}, null, opt_ijData);
+      $templateAlias2({code: 'Pred.empty :: () -> Pred a', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
         ie_open('code');
           itext('empty');
@@ -28500,13 +28546,17 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_close('code');
         itext('ed to any other value, it will return the other value. In the case of ');
         ie_open('code');
-          itext('All');
+          itext('Pred');
         ie_close('code');
         itext(' the result of ');
         ie_open('code');
           itext('empty');
         ie_close('code');
-        itext(' is ');
+        itext(' is a ');
+        ie_open('code');
+          itext('Pred');
+        ie_close('code');
+        itext(' that will always return');
         ie_open('code');
           itext('true');
         ie_close('code');
@@ -28516,7 +28566,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_close('code');
         itext(' is available on both the Constructor and the Instance for convenience.');
       ie_close('p');
-      $templateAlias2({code: 'const All = require(\'crocks/All\')\n\nAll.empty() //=> All true\n\nAll(true).concat(All.empty())   //=> All true\nAll(false).concat(All.empty())  //=> All false', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'const Pred = require(\'crocks/Pred\')\n\nconst isEmpty = require(\'crocks/predicates/isEmpty\')\nconst not = require(\'crocks/logic/not\')\n\n// empty :: Pred a\nconst empty =\n  Pred.empty()\n\n// notEmpty :: Pred a\nconst notEmpty =\n  Pred(not(isEmpty))\n\nempty\n  .runWith(\'\')\n//=> true\n\nnotEmpty\n  .concat(empty)\n  .runWith([])\n//=> false\n\nnotEmpty\n  .concat(empty)\n  .runWith([ 1, 2, 3 ])\n//=> true\n\nempty\n  .concat(notEmpty)\n  .runWith(\'\')\n//=> false\n\nempty\n  .concat(notEmpty)\n  .runWith(\'123\')\n//=> true', mode: 'javascript'}, null, opt_ijData);
     ie_close('article');
     ie_open('article', null, null,
         'id', 'topic-instance');
@@ -28534,7 +28584,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
           itext('concat');
         ie_close('a');
       ie_close('h4');
-      $templateAlias2({code: 'All ~> All -> All', mode: 'haskell'}, null, opt_ijData);
+      $templateAlias2({code: 'Pred a ~> Pred a -> Pred a', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
         ie_open('code');
           itext('concat');
@@ -28549,11 +28599,43 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_close('code');
         itext('. In the case of ');
         ie_open('code');
-          itext('All');
+          itext('Pred');
         ie_close('code');
-        itext(', it will combine the (2) using logical AND (conjunction).');
+        itext(', the results of both');
+        ie_open('code');
+          itext('Preds');
+        ie_close('code');
+        itext('s are combined under logical conjunction.');
       ie_close('p');
-      $templateAlias2({code: 'const All = require(\'crocks/All\')\n\nAll(true).concat(All(true))   //=> All true\nAll(true).concat(All(false))  //=> All false\nAll(false).concat(All(true))  //=> All false\nAll(false).concat(All(false)) //=> All false', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'const Pred = require(\'crocks/Pred\')\n\nconst or = require(\'crocks/logic/or\')\nconst not = require(\'crocks/logic/not\')\nconst filter = require(\'crocks/pointfree/filter\')\n\nconst isEven =\n  x => !(x % 2)\n\n// isOdd :: Pred Number\nconst isOdd =\n  Pred(not(isEven))\n\n// lt20 :: Pred Number\nconst lt20 =\n  Pred(x => x < 20)\n\n// gt5 :: Pred Number\nconst gt5 =\n  Pred(x => x > 5)\n\n// inRange :: Pred Number\nconst inRange =\n  lt20.concat(gt5)\n\n// isOddInRange :: Pred Number\nconst isOddInRange =\n  isOdd.concat(inRange)\n\n// isValid :: Pred Number\nconst isValid =\n  Pred(or(isEven, isOddInRange))\n\n// data :: [ Number ]\nconst data =\n[ 1, 4, 12, 19, 32, 99, 76, 7 ]\n\nisOdd\n  .runWith(5)\n//=> true\n\nisOdd\n  .runWith(8)\n//=> false\n\nfilter(isOdd, data)\n//=> [ 1, 19, 99, 7 ]\n\nfilter(lt20, data)\n//=> [ 1, 4, 12, 19, 7 ]\n\nfilter(gt5, data)\n//=> [ 12, 19, 32, 99, 76, 7 ]\n\nfilter(inRange, data)\n//=> [ 12, 19, 7 ]\n\nfilter(isOddInRange, data)\n//=> [ 19, 7 ]\n\nfilter(isEven, data)\n// [ 4, 12, 32, 76 ]\n\nfilter(isValid, data)\n//=> [ 4, 12, 19, 32, 76, 7 ]', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'contramap',
+            'href', '#contramap');
+          itext('contramap');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Pred a ~> (b -> a) -> Pred b', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        itext('While the output of a ');
+        ie_open('code');
+          itext('Pred');
+        ie_close('code');
+        itext(' is fixed to ');
+        ie_open('code');
+          itext('Boolean');
+        ie_close('code');
+        itext(', the input can vary type and value. This allows a given ');
+        ie_open('code');
+          itext('Pred');
+        ie_close('code');
+        itext(' to be adapted by mapping on the input, before it hits the wrapped predicate function. Using ');
+        ie_open('code');
+          itext('contramap');
+        ie_close('code');
+        itext(', functions are lifted, mapping the input to now accept the type of the input of the given function.');
+      ie_close('p');
+      $templateAlias2({code: 'const Pred = require(\'crocks/Pred\')\nconst contramap = require(\'crocks/pointfree/contramap\')\nconst propOr = require(\'crocks/helpers/propOr\')\n\n// Length :: String | Function | Array\n// length :: Length -> Number\nconst length =\n  propOr(0, \'length\')\n\n// gt5 :: Pred Number\nconst gt5 =\n  Pred(x => x > 5)\n\n// lengthGt5 :: Pred Length\nconst validLength =\n  contramap(length, gt5)\n\n// validItemLength :: Pred Object\nconst validItemLength =\n  contramap(propOr(null, \'item\'), validLength)\n\ngt5\n  .runWith(5)\n//=> false\n\ngt5\n  .runWith(10)\n//=> true\n\nvalidLength\n  .runWith([ 1, 2, 3, 4, 5, 6 ])\n//=> true\n\nvalidLength\n  .runWith(null)\n//=> false\n\nvalidLength\n  .runWith(\'1234\')\n//=> false\n\nvalidItemLength\n  .runWith({ item: \'this is an item\' })\n//=> true', mode: 'javascript'}, null, opt_ijData);
       ie_open('h4');
         ie_open('a', null, null,
             'id', 'valueof',
@@ -28561,7 +28643,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
           itext('valueOf');
         ie_close('a');
       ie_close('h4');
-      $templateAlias2({code: 'All ~> () -> Boolean', mode: 'haskell'}, null, opt_ijData);
+      $templateAlias2({code: 'Pred a ~> () -> a -> Boolean', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
         ie_open('code');
           itext('valueOf');
@@ -28586,21 +28668,67 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_open('code');
           itext('crocks');
         ie_close('code');
-        itext('. Calling ');
+        itext('.');
+      ie_close('p');
+      ie_open('p');
+        itext('Calling ');
         ie_open('code');
           itext('valueOf');
         ie_close('code');
-        itext(' on an ');
+        itext(' on a ');
         ie_open('code');
-          itext('All');
+          itext('Pred');
         ie_close('code');
-        itext(' instance will result in the underlying ');
+        itext(' instance will result in the underlying predicate function. Most of the time this will not be required when working with ');
         ie_open('code');
-          itext('Boolean');
+          itext('crocks');
         ie_close('code');
-        itext(' value.');
+        itext('because all ');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext(' functions that take a predicate function can also take a');
+        ie_open('code');
+          itext('Pred');
+        ie_close('code');
+        itext(' instance.');
       ie_close('p');
-      $templateAlias2({code: 'const All = require(\'crocks/All\')\n\nAll(0).valueOf()          //=> false\nAll(\'string\').valueOf() //=> true\n\n//=> false\nAll(true)\n  .concat(\'\')\n  .valueOf()', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'const Pred = require(\'crocks/Pred\')\n\nconst isArray = require(\'crocks/predicates/isArray\')\nconst isString = require(\'crocks/predicates/isString\')\nconst equals = require(\'crocks/pointfree/equals\')\nconst or = require(\'crocks/logic/or\')\n\n// lengthIsThree :: Pred a\nconst lengthIsThree =\n  Pred(equals(3))\n    .contramap(x => x.length)\n\n// pred :: Pred a\nconst pred =\n  Pred(or(isArray, isString))\n    .concat(lengthIsThree)\n\n// fn :: a -> Boolean\nconst fn =\n  pred.valueOf()\n\npred\n  .runWith(null)\n//=> false\n\npred\n  .runWith([ 1, 2, 3 ])\n//=> true\n\npred\n  .runWith(\'This is fun\')\n//=> true\n\nfn(null)          // false\nfn([ 1, 2, 3 ])   // true\nfn(\'This is fun\') // true\nfn([])            // false\nfn(\'\')            // false', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'runwith',
+            'href', '#runwith');
+          itext('runWith');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Pred a ~> a -> Boolean', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        itext('As ');
+        ie_open('code');
+          itext('Pred');
+        ie_close('code');
+        itext(' wraps a predicate function, it needs a mean to run it with some value to test against the predicate. ');
+        ie_open('code');
+          itext('Pred');
+        ie_close('code');
+        itext(' instances provide a method called');
+        ie_open('code');
+          itext('runWith');
+        ie_close('code');
+        itext(' that will accept the value to be tested and then runs it through the predicate returning the result.');
+      ie_close('p');
+      ie_open('p');
+        itext('Most of the time this function is not used while working with other predicate functions in ');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext(', as all functions that take a predicate function also take a ');
+        ie_open('code');
+          itext('Pred');
+        ie_close('code');
+        itext(' instance. It does come in handy though when supplying predicates to other libraries.');
+      ie_close('p');
+      $templateAlias2({code: 'const Pred = require(\'crocks/Pred\')\n\nconst hasProp = require(\'crocks/predicates/hasProp\')\nconst equals = require(\'crocks/pointfree/equals\')\nconst flip = require(\'crocks/combinators/flip\')\nconst runWith = require(\'crocks/pointfree/runWith\')\n\n// trueBlue :: Pred Object\nconst trueBlue =\n  Pred(equals(true))\n    .contramap(({ blue }) => blue)\n\n// isValid :: Pred a\nconst isValid =\n  Pred(hasProp(\'blue\'))\n    .concat(trueBlue)\n\n// checkValid :: a -> Boolean\nconst checkValid =\n  flip(runWith, isValid)\n\ncheckValid(null)            //=> false\ncheckValid([ 1, 2, 3 ])     //=> false\ncheckValid({ blue: 32 })    //=> false\ncheckValid({ blue: true })  //=> true', mode: 'javascript'}, null, opt_ijData);
     ie_close('article');
     ie_open('input', null, null,
         'type', 'hidden',
@@ -28611,11 +28739,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'value', opt_data.site.title);
     ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({content: param1748}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param944}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'BATEl.render';
+  $render.soyTemplateName = 'ytgOU.render';
 }
 
 exports.render.params = ["page","site"];
@@ -28625,14 +28753,28 @@ return exports;
 
 });
 
-class BATEl extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(BATEl, templates);
+class ytgOU extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(ytgOU, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
 
 
 /***/ }),
+/* 222 */,
+/* 223 */,
+/* 224 */,
+/* 225 */,
+/* 226 */,
+/* 227 */,
+/* 228 */,
+/* 229 */,
+/* 230 */,
+/* 231 */,
+/* 232 */,
+/* 233 */,
+/* 234 */,
+/* 235 */,
 /* 236 */,
 /* 237 */,
 /* 238 */,
@@ -28654,15 +28796,7 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(BATEl, templates);
 /* 254 */,
 /* 255 */,
 /* 256 */,
-/* 257 */,
-/* 258 */,
-/* 259 */,
-/* 260 */,
-/* 261 */,
-/* 262 */,
-/* 263 */,
-/* 264 */,
-/* 265 */
+/* 257 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28698,9 +28832,9 @@ __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _AllSoy = __webpack_require__(235);
+var _PredSoy = __webpack_require__(221);
 
-var _AllSoy2 = _interopRequireDefault(_AllSoy);
+var _PredSoy2 = _interopRequireDefault(_PredSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28710,23 +28844,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var BATEl = function (_Component) {
-  _inherits(BATEl, _Component);
+var ytgOU = function (_Component) {
+  _inherits(ytgOU, _Component);
 
-  function BATEl() {
-    _classCallCheck(this, BATEl);
+  function ytgOU() {
+    _classCallCheck(this, ytgOU);
 
-    return _possibleConstructorReturn(this, (BATEl.__proto__ || Object.getPrototypeOf(BATEl)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (ytgOU.__proto__ || Object.getPrototypeOf(ytgOU)).apply(this, arguments));
   }
 
-  return BATEl;
+  return ytgOU;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(BATEl, _AllSoy2.default);
+_metalSoy2.default.register(ytgOU, _PredSoy2.default);
 
-exports.default = BATEl;
+exports.default = ytgOU;
 
 /***/ })
-],[265]);
+],[257]);

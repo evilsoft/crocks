@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([6,31,32,33],[
+webpackJsonppageComponent([12,31,32,33],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -28366,18 +28366,12 @@ exports.default = parseFromAnchor;
 /* 232 */,
 /* 233 */,
 /* 234 */,
-/* 235 */,
-/* 236 */,
-/* 237 */,
-/* 238 */,
-/* 239 */,
-/* 240 */,
-/* 241 */
+/* 235 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "gQbCK", function() { return gQbCK; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cUHal", function() { return cUHal; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28389,15 +28383,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var templates;
 goog.loadModule(function(exports) {
 
-// This file was automatically generated from Max.soy.
+// This file was automatically generated from All.soy.
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace gQbCK.
+ * @fileoverview Templates in namespace cUHal.
  * @public
  */
 
-goog.module('gQbCK.incrementaldom');
+goog.module('cUHal.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28431,23 +28425,31 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var param2146 = function() {
-    $templateAlias2({code: 'Max Number', mode: 'haskell'}, null, opt_ijData);
+  var param1748 = function() {
+    $templateAlias2({code: 'All Boolean', mode: 'haskell'}, null, opt_ijData);
     ie_open('p');
       ie_open('code');
-        itext('Max');
+        itext('All');
       ie_close('code');
       itext(' is a ');
       ie_open('code');
         itext('Monoid');
       ie_close('code');
-      itext(' that will combines (2) ');
+      itext(' that will combine (2) values of any type using logical conjunction (AND) on their coerced ');
       ie_open('code');
-        itext('Number');
+        itext('Boolean');
       ie_close('code');
-      itext('s, resulting in the largest of the two.');
+      itext(' values, mapping truth-y values to');
+      ie_open('code');
+        itext('true');
+      ie_close('code');
+      itext(' and false-y values to ');
+      ie_open('code');
+        itext('false');
+      ie_close('code');
+      itext('.');
     ie_close('p');
-    $templateAlias2({code: 'const Max = require(\'crocks/Max\')\nconst mconcat = require(\'crocks/helpers/mconcat\')\n\nMax(76)\n//=> Max 76\n\nmconcat(Max, [ 95, 102, 56 ])\n//=> Max 102\n\nMax(100)\n  .concat(Max(10))\n//=> Max 100\n\nMax.empty()\n  .concat(Max(100))\n//=> Max 100', mode: 'javascript'}, null, opt_ijData);
+    $templateAlias2({code: 'const All = require(\'crocks/All\')\n\nconst mconcat = require(\'crocks/helpers/mconcat\')\n\nconst trueNum = All(13)\nconst falseNum = All(0)\nconst trueString = All(\'So true\')\n\ntrueNum.concat(falseNum)\n//=> All false\n\ntrueNum.concat(trueString)\n//=> All true\n\nconst allGood =\n  mconcat(All)\n\nallGood([ 1, 5, 89 ])\n//=> All true\n\nallGood([ \'nice\', \'00\', null ])\n//=> All false', mode: 'javascript'}, null, opt_ijData);
     ie_open('article', null, null,
         'id', 'topic-implements');
       ie_open('h2');
@@ -28483,7 +28485,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
           itext('empty');
         ie_close('a');
       ie_close('h4');
-      $templateAlias2({code: 'Max.empty :: () -> Max', mode: 'haskell'}, null, opt_ijData);
+      $templateAlias2({code: 'All.empty :: () -> All', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
         ie_open('code');
           itext('empty');
@@ -28498,7 +28500,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_close('code');
         itext('ed to any other value, it will return the other value. In the case of ');
         ie_open('code');
-          itext('Max');
+          itext('All');
         ie_close('code');
         itext(' the result of ');
         ie_open('code');
@@ -28506,7 +28508,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_close('code');
         itext(' is ');
         ie_open('code');
-          itext('-Infinity');
+          itext('true');
         ie_close('code');
         itext('. ');
         ie_open('code');
@@ -28514,7 +28516,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_close('code');
         itext(' is available on both the Constructor and the Instance for convenience.');
       ie_close('p');
-      $templateAlias2({code: 'const Max = require(\'crocks/Max\')\n\nMax.empty()\n//=> Max -Infinity\n\nMax.empty()\n  .concat(Max.empty())\n//=> Max -Infinity\n\nMax(32)\n  .concat(Max.empty())\n//=> Max 32\n\nMax.empty()\n  .concat(Max(34))\n//=> Max 34', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'const All = require(\'crocks/All\')\n\nAll.empty() //=> All true\n\nAll(true).concat(All.empty())   //=> All true\nAll(false).concat(All.empty())  //=> All false', mode: 'javascript'}, null, opt_ijData);
     ie_close('article');
     ie_open('article', null, null,
         'id', 'topic-instance');
@@ -28532,7 +28534,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
           itext('concat');
         ie_close('a');
       ie_close('h4');
-      $templateAlias2({code: 'Max ~> Max -> Max', mode: 'haskell'}, null, opt_ijData);
+      $templateAlias2({code: 'All ~> All -> All', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
         ie_open('code');
           itext('concat');
@@ -28547,15 +28549,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_close('code');
         itext('. In the case of ');
         ie_open('code');
-          itext('Max');
+          itext('All');
         ie_close('code');
-        itext(', it will result in the largest of the (2) ');
-        ie_open('code');
-          itext('Number');
-        ie_close('code');
-        itext('s.');
+        itext(', it will combine the (2) using logical AND (conjunction).');
       ie_close('p');
-      $templateAlias2({code: 'const Max = require(\'crocks/Max\')\n\nMax(23)\n  .concat(Max(13))\n//=> Max 23\n\nMax(-23)\n  .concat(Max(-32))\n//=> Max -23\n\nMax.empty()\n  .concat(Max(Infinity))\n//=> Max Infinity', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'const All = require(\'crocks/All\')\n\nAll(true).concat(All(true))   //=> All true\nAll(true).concat(All(false))  //=> All false\nAll(false).concat(All(true))  //=> All false\nAll(false).concat(All(false)) //=> All false', mode: 'javascript'}, null, opt_ijData);
       ie_open('h4');
         ie_open('a', null, null,
             'id', 'valueof',
@@ -28563,7 +28561,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
           itext('valueOf');
         ie_close('a');
       ie_close('h4');
-      $templateAlias2({code: 'Max ~> () -> Number', mode: 'haskell'}, null, opt_ijData);
+      $templateAlias2({code: 'All ~> () -> Boolean', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
         ie_open('code');
           itext('valueOf');
@@ -28592,17 +28590,17 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_open('code');
           itext('valueOf');
         ie_close('code');
-        itext(' on a ');
+        itext(' on an ');
         ie_open('code');
-          itext('Max');
+          itext('All');
         ie_close('code');
         itext(' instance will result in the underlying ');
         ie_open('code');
-          itext('Number');
+          itext('Boolean');
         ie_close('code');
-        itext('.');
+        itext(' value.');
       ie_close('p');
-      $templateAlias2({code: 'const Max = require(\'crocks/Max\')\n\nMax(4)\n  .valueOf()\n//=> 4\n\nMax.empty()\n  .valueOf()\n//=> -Infinity\n\nMax(34)\n  .concat(Max(21))\n  .valueOf()\n//=> 34', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'const All = require(\'crocks/All\')\n\nAll(0).valueOf()          //=> false\nAll(\'string\').valueOf() //=> true\n\n//=> false\nAll(true)\n  .concat(\'\')\n  .valueOf()', mode: 'javascript'}, null, opt_ijData);
     ie_close('article');
     ie_open('input', null, null,
         'type', 'hidden',
@@ -28613,11 +28611,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'value', opt_data.site.title);
     ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({content: param2146}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param1748}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'gQbCK.render';
+  $render.soyTemplateName = 'cUHal.render';
 }
 
 exports.render.params = ["page","site"];
@@ -28627,14 +28625,20 @@ return exports;
 
 });
 
-class gQbCK extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(gQbCK, templates);
+class cUHal extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(cUHal, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
 
 
 /***/ }),
+/* 236 */,
+/* 237 */,
+/* 238 */,
+/* 239 */,
+/* 240 */,
+/* 241 */,
 /* 242 */,
 /* 243 */,
 /* 244 */,
@@ -28661,12 +28665,7 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(gQbCK, templates);
 /* 265 */,
 /* 266 */,
 /* 267 */,
-/* 268 */,
-/* 269 */,
-/* 270 */,
-/* 271 */,
-/* 272 */,
-/* 273 */
+/* 268 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28702,9 +28701,9 @@ __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _MaxSoy = __webpack_require__(241);
+var _AllSoy = __webpack_require__(235);
 
-var _MaxSoy2 = _interopRequireDefault(_MaxSoy);
+var _AllSoy2 = _interopRequireDefault(_AllSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28714,23 +28713,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var gQbCK = function (_Component) {
-  _inherits(gQbCK, _Component);
+var cUHal = function (_Component) {
+  _inherits(cUHal, _Component);
 
-  function gQbCK() {
-    _classCallCheck(this, gQbCK);
+  function cUHal() {
+    _classCallCheck(this, cUHal);
 
-    return _possibleConstructorReturn(this, (gQbCK.__proto__ || Object.getPrototypeOf(gQbCK)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (cUHal.__proto__ || Object.getPrototypeOf(cUHal)).apply(this, arguments));
   }
 
-  return gQbCK;
+  return cUHal;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(gQbCK, _MaxSoy2.default);
+_metalSoy2.default.register(cUHal, _AllSoy2.default);
 
-exports.default = gQbCK;
+exports.default = cUHal;
 
 /***/ })
-],[273]);
+],[268]);

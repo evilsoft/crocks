@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([24,31,32,33],[
+webpackJsonppageComponent([18,31,32,33],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -28354,12 +28354,18 @@ exports.default = parseFromAnchor;
 /* 220 */,
 /* 221 */,
 /* 222 */,
-/* 223 */
+/* 223 */,
+/* 224 */,
+/* 225 */,
+/* 226 */,
+/* 227 */,
+/* 228 */,
+/* 229 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GgbEq", function() { return GgbEq; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "YeuKS", function() { return YeuKS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28371,15 +28377,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var templates;
 goog.loadModule(function(exports) {
 
-// This file was automatically generated from ReaderT.soy.
+// This file was automatically generated from logic-functions.soy.
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace GgbEq.
+ * @fileoverview Templates in namespace YeuKS.
  * @public
  */
 
-goog.module('GgbEq.incrementaldom');
+goog.module('YeuKS.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28402,7 +28408,7 @@ var iattr = IncrementalDom.attr;
 
 var $templateAlias2 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('ElectricCode.incrementaldom', 'render');
 
-var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('guide.incrementaldom', 'render');
+var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('notopic.incrementaldom', 'render');
 
 
 /**
@@ -28413,359 +28419,201 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var param1090 = function() {
-    $templateAlias2({code: 'Monad m => ReaderT e (m a)', mode: 'haskell'}, null, opt_ijData);
+  var param1662 = function() {
     ie_open('p');
+      itext('The functions in this section are used to represent logical branching in a declarative manner. Each of these functions require either ');
       ie_open('code');
-        itext('ReaderT');
+        itext('Pred');
       ie_close('code');
-      itext(' is a ');
+      itext('s or predicate functions in their input. Since these functions work with ');
       ie_open('code');
-        itext('Monad Transformer');
+        itext('Pred');
       ie_close('code');
-      itext(' that wraps a given ');
+      itext('s and predicate functions, rather than values, this allows for composeable, "lazy" evaluation. All logic functions can be referenced from ');
       ie_open('code');
-        itext('Monad');
+        itext('crocks/logic');
       ie_close('code');
-      itext(' with a ');
-      ie_open('code');
-        itext('Reader');
-      ie_close('code');
-      itext('. This allows the interface of a ');
-      ie_open('code');
-        itext('Reader');
-      ie_close('code');
-      itext(' that enables the  composition of computations that depend on a shared environment ');
-      ie_open('code');
-        itext('(e -> a)');
-      ie_close('code');
-      itext(', but provides a way to abstract a means the ');
-      ie_open('code');
-        itext('Reader');
-      ie_close('code');
-      itext(' portion, when combining ');
-      ie_open('code');
-        itext('ReaderT');
-      ie_close('code');
-      itext('s of the same type. All ');
-      ie_open('code');
-        itext('ReaderT');
-      ie_close('code');
-      itext('s must provide the constructor of the target ');
-      ie_open('code');
-        itext('Monad');
-      ie_close('code');
-      itext(' that is being wrapped.');
     ie_close('p');
-    ie_open('article', null, null,
-        'id', 'topic-implements');
-      ie_open('h2');
-        ie_open('a', null, null,
-            'id', 'implements',
-            'href', '#implements');
-          itext('Implements');
-        ie_close('a');
-      ie_close('h2');
-      ie_open('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'and',
+          'href', '#and');
+        itext('and');
+      ie_close('a');
+    ie_close('h4');
+    $templateAlias2({code: 'and :: ((a -> Boolean) | Pred a) -> ((a -> Boolean) | Pred a) -> a -> Boolean', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('Say you have two predicate functions or ');
+      ie_open('code');
+        itext('Pred');
+      ie_close('code');
+      itext('s and would like to combine them into one predicate over conjunction, well you came to the right place, ');
+      ie_open('code');
+        itext('and');
+      ie_close('code');
+      itext('accepts either predicate functions or ');
+      ie_open('code');
+        itext('Pred');
+      ie_close('code');
+      itext('s and will return you a function ready to take a value. Once that value is passed, it will run it through both of the predicates and return the result of combining it over a ');
+      ie_open('code');
+        itext('logical and');
+      ie_close('code');
+      itext('. This is super helpful combined with ');
+      ie_open('code');
+        itext('or');
+      ie_close('code');
+      itext(' for putting together reusable, complex predicates. As they follow the general form of ');
+      ie_open('code');
+        itext('(a -> Boolean)');
+      ie_close('code');
+      itext(' they are easily combined with other logic functions.');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'ifelse',
+          'href', '#ifelse');
+        itext('ifElse');
+      ie_close('a');
+    ie_close('h4');
+    $templateAlias2({code: 'ifElse :: ((a -> Boolean) | Pred a) -> (a -> b) -> (a -> b) -> a -> b', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('Whenever you need to modify a value based some condition and want a functional way to do it without some imperative ');
+      ie_open('code');
+        itext('if');
+      ie_close('code');
+      itext(' statement, then reach for ');
+      ie_open('code');
+        itext('ifElse');
+      ie_close('code');
+      itext('. This function take a predicate (some function that returns a Boolean) and two functions. The first is what is executed when the predicate is true, the second on a false condition. This will return a function ready to take a value to run through the predicate. After the value is evaluated, it will be ran through it\'s corresponding function, returning the result as the final result. This function comes in really handy when creating lifting functions for Sum Types (like');
+      ie_open('code');
+        itext('Either');
+      ie_close('code');
+      itext(' or ');
+      ie_open('code');
+        itext('Maybe');
+      ie_close('code');
+      itext(').');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'not',
+          'href', '#not');
+        itext('not');
+      ie_close('a');
+    ie_close('h4');
+    $templateAlias2({code: 'not :: ((a -> Boolean) | Pred) -> a -> Boolean', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('When you need to negate a predicate function or a ');
+      ie_open('code');
+        itext('Pred');
+      ie_close('code');
+      itext(', but want a new predicate function that does the negation, then ');
+      ie_open('code');
+        itext('not');
+      ie_close('code');
+      itext(' is going to get you what you need. Using ');
+      ie_open('code');
+        itext('not');
+      ie_close('code');
+      itext(' will allow you to stay as declarative as possible. Just pass ');
+      ie_open('code');
+        itext('not');
+      ie_close('code');
+      itext(' your predicate function or a ');
+      ie_open('code');
+        itext('Pred');
+      ie_close('code');
+      itext(', and it will give you back a predicate function ready for insertion into your flow. All predicate based functions in ');
+      ie_open('code');
+        itext('crocks');
+      ie_close('code');
+      itext(' take either a ');
+      ie_open('code');
+        itext('Pred');
+      ie_close('code');
+      itext(' or predicate function, so it should be easy to swap between the two.');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'or',
+          'href', '#or');
+        itext('or');
+      ie_close('a');
+    ie_close('h4');
+    $templateAlias2({code: 'or :: ((a -> Boolean) | Pred) -> ((a -> Boolean) | Pred) -> a -> Boolean', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('Say you have two predicate functions or ');
+      ie_open('code');
+        itext('Pred');
+      ie_close('code');
+      itext('s and would like to combine them into one predicate over disjunction, look no further, ');
+      ie_open('code');
+        itext('or');
+      ie_close('code');
+      itext(' accepts either predicate functions or ');
+      ie_open('code');
+        itext('Pred');
+      ie_close('code');
+      itext('s and will return you a function ready to take a value. Once that value is passed, it will run it through both of the predicates and return the result of combining it over a ');
+      ie_open('code');
+        itext('logical or');
+      ie_close('code');
+      itext('. This is super helpful combined with ');
+      ie_open('code');
+        itext('and');
+      ie_close('code');
+      itext(' for putting together reusable, complex predicates. As they follow the general form of ');
+      ie_open('code');
+        itext('(a -> Boolean)');
+      ie_close('code');
+      itext(' they are easily combined with other logic functions.');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'unless',
+          'href', '#unless');
+        itext('unless');
+      ie_close('a');
+    ie_close('h4');
+    $templateAlias2({code: 'unless :: ((a -> Boolean) | Pred) -> (a -> a) -> a -> a', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('There may come a time when you need to adjust a value when a condition is false, that is where ');
+      ie_open('code');
+        itext('unless');
+      ie_close('code');
+      itext(' can come into play. Just provide a predicate function (a function that returns a Boolean) and a function to apply your desired modification. This will get you back a function that when you pass it a value, it will evaluate it and if false, will run your value through the provided function. Either the original or modified value will be returned depending on the result of the predicate. Check out ');
+      ie_open('a', null, null,
+          'href', '#when');
         ie_open('code');
-          itext('Functor');
+          itext('when');
         ie_close('code');
-        itext(', ');
+      ie_close('a');
+      itext(' for a negated version of this function.');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'when',
+          'href', '#when');
+        itext('when');
+      ie_close('a');
+    ie_close('h4');
+    $templateAlias2({code: 'when :: ((a -> Boolean) | Pred) -> (a -> a) -> a -> a', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('There may come a time when you need to adjust a value when a condition is true, that is where ');
+      ie_open('code');
+        itext('when');
+      ie_close('code');
+      itext(' can come into play. Just provide a predicate function (a function that returns a Boolean) and a function to apply your desired modification. This will get you back a function that when you pass it a value, it will evaluate it and if true, will run your value through the provided function. Either the original or modified value will be returned depending on the result of the predicate. Check out ');
+      ie_open('a', null, null,
+          'href', '#unless');
         ie_open('code');
-          itext('Apply');
+          itext('unless');
         ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('Chain');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('Applicative');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('Monad');
-        ie_close('code');
-      ie_close('p');
-    ie_close('article');
-    ie_open('article', null, null,
-        'id', 'topic-constructor');
-      ie_open('h2');
-        ie_open('a', null, null,
-            'id', 'constructor-methods',
-            'href', '#constructor-methods');
-          itext('Constructor Methods');
-        ie_close('a');
-      ie_close('h2');
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'ask',
-            'href', '#ask');
-          itext('ask');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'ReaderT.ask :: Monad m => () -> ReaderT e (m e)\nReaderT.ask :: Monad m => (e -> a) -> ReaderT e (m a)', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('A construction helper that returns a ');
-        ie_open('code');
-          itext('ReaderT');
-        ie_close('code');
-        itext(' with environment on the right portion of the ');
-        ie_open('code');
-          itext('Reader');
-        ie_close('code');
-        itext('. ');
-        ie_open('code');
-          itext('ask');
-        ie_close('code');
-        itext(' can take a function, that can be used to map the environment to a different type or value. When using the function version, the function must return the type of the ');
-        ie_open('code');
-          itext('Monad');
-        ie_close('code');
-        itext(' the ');
-        ie_open('code');
-          itext('ReaderT');
-        ie_close('code');
-        itext(' wraps, which in turn will be wrapped in another');
-      ie_close('p');
-      $templateAlias2({code: 'const ReaderT = require(\'crocks/Reader/ReaderT\')\nconst Maybe = require(\'crocks/Maybe\')\n\nconst safe = require(\'crocks/Maybe/safe\')\nconst isNumber = require(\'crocks/predicates/isNumber\')\n\nconst MaybeReader = ReaderT(Maybe)\nconst { ask } = MaybeReader\n\n// add :: Number -> Number -> Number\nconst add =\n  x => y => x + y\n\n// Typical Constructor\nMaybeReader(safe(isNumber))\n  .runWith(76)\n//=> Just 76\n\nMaybeReader(safe(isNumber))\n  .runWith(\'76\')\n//=> Nothing\n\n// Using `ask` with no function\n// (identity on environment)\nask()\n  .runWith(76)\n//=> Just 76\n\nask()\n  .runWith(\'76\')\n//=> Just \'76\'\n\n// Using `ask` with a function\n// (map environment before deposit)\nask(add(10))\n  .runWith(76)\n//=> Just 86', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'lift',
-            'href', '#lift');
-          itext('lift');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'ReaderT.lift :: Monad m => m a -> ReaderT e (m a)', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('Used to promote an instance of a given ');
-        ie_open('code');
-          itext('Monad');
-        ie_close('code');
-        itext(' into a ');
-        ie_open('code');
-          itext('ReaderT');
-        ie_close('code');
-        itext(' of that ');
-        ie_open('code');
-          itext('Monad');
-        ie_close('code');
-        itext('s type. This can be used to lift a pointed instance of the underlying ');
-        ie_open('code');
-          itext('Monad');
-        ie_close('code');
-        itext('. When mixed with composition, ');
-        ie_open('code');
-          itext('lift');
-        ie_close('code');
-        itext(' can be used to promote functions that take the form of ');
-        ie_open('code');
-          itext('a -> m b');
-        ie_close('code');
-        itext(' into a function that can be ');
-        ie_open('code');
-          itext('chain');
-        ie_close('code');
-        itext('ed with the ');
-        ie_open('code');
-          itext('ReaderT');
-        ie_close('code');
-        itext('. Although, ');
-        ie_open('a', null, null,
-            'href', '#liftfn');
-          ie_open('code');
-            itext('liftFn');
-          ie_close('code');
-        ie_close('a');
-        itext(' can be used to remove the composition boilerplate and promote and ');
-        ie_open('code');
-          itext('a -> m b');
-        ie_close('code');
-        itext(' function.');
-      ie_close('p');
-      $templateAlias2({code: 'const ReaderT = require(\'crocks/Reader/ReaderT\')\nconst Async = require(\'crocks/Async\')\n\nconst compose = require(\'crocks/helpers/compose\')\nconst curry = require(\'crocks/helpers/curry\')\nconst flip = require(\'crocks/combinators/flip\')\nconst runWith = require(\'crocks/pointfree/runWith\')\nconst tap = require(\'crocks/helpers/tap\')\n\nconst AsyncReader = ReaderT(Async)\n\nconst { ask, lift } = AsyncReader\nconst { Rejected } = Async\n\n// log :: String -> a -> ()\nconst log = label =>\n  console.log.bind(console, label + \':\')\n\n// forkLog :: Async a b -> Async a b\nconst forkLog = tap(\n  m => m.fork(log(\'rej\'), log(\'res\'))\n)\n\n// runAndLog :: e -> ReaderT e (Async a b) -> Async a b\nconst runAndLog = curry(\n  x => compose(forkLog, flip(runWith, x))\n)\n\n// instance :: ReaderT e (Async String a)\nconst instance =\n  lift(Rejected(\'Always Rejected\'))\n\nrunAndLog(instance, \'Thomas\')\n//=> rej: Always Rejected\n\n// Using in a composition\n// rejectWith :: a -> ReaderT e (Async a b)\nconst rejectWith =\n  compose(lift, Rejected)\n\n// envReject :: ReadetT e (Async e b)\nconst envReject =\n  ask()\n    .chain(rejectWith)\n\nrunAndLog(envReject, \'Sammy\')\n//=> rej: Sammy', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'liftfn',
-            'href', '#liftfn');
-          itext('liftFn');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'ReaderT.liftFn :: Monad m => (a -> m b) -> a -> ReaderT e (m b)', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('Used to transform a given function in the form of ');
-        ie_open('code');
-          itext('a -> m b');
-        ie_close('code');
-        itext(' into a lifted function, where ');
-        ie_open('code');
-          itext('m');
-        ie_close('code');
-        itext(' is the underlying ');
-        ie_open('code');
-          itext('Monad');
-        ie_close('code');
-        itext(' of a ');
-        ie_open('code');
-          itext('ReaderT');
-        ie_close('code');
-        itext('. This allows for the removal of composition boilerplate that results from using the');
-        ie_open('a', null, null,
-            'href', '#lift');
-          ie_open('code');
-            itext('lift');
-          ie_close('code');
-        ie_close('a');
-        itext(' helper.');
-      ie_close('p');
-      $templateAlias2({code: 'const ReaderT = require(\'crocks/Reader/ReaderT\')\nconst Either = require(\'crocks/Either\')\n\nconst ifElse = require(\'crocks/logic/ifElse\')\n\nconst EitherReader = ReaderT(Either)\n\nconst { ask, liftFn } = EitherReader\nconst { Left, Right } = Either\n\n// gte :: Number -> Number -> Either String Number\nconst gte = x => ifElse(\n  n => n >= x,\n  Right,\n  n => Left(`${n} is not gte to ${x}`)\n)\n\n// gte10 :: Number -> Either String Number\nconst gte10 =\n  gte(10)\n\n// add20 :: ReaderT Number (Either String Number)\nconst add20 =\n  ask()\n    .chain(liftFn(gte10))\n    .map(n => n + 20)\n\nadd20\n  .runWith(30)\n//=> Right 50\n\nadd20\n  .runWith(9)\n//=> Left "9 is not gte to 10"', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'of',
-            'href', '#of');
-          itext('of');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'ReaderT.of :: Monad m => a -> ReaderT e (m a)', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('Lifts a value into a ');
-        ie_open('code');
-          itext('ReaderT');
-        ie_close('code');
-        itext(' using the ');
-        ie_open('code');
-          itext('of');
-        ie_close('code');
-        itext(' method of the underlying ');
-        ie_open('code');
-          itext('Monad');
-        ie_close('code');
-        itext('.');
-        ie_open('code');
-          itext('of');
-        ie_close('code');
-        itext(' will disregard the environment and points the right portion to the provided value.');
-      ie_close('p');
-      $templateAlias2({code: 'const ReaderT = require(\'../crocks/src/Reader/ReaderT\')\n\nconst Maybe = require(\'crocks/Maybe\')\nconst Either = require(\'crocks/Either\')\nconst State = require(\'crocks/State\')\n\nconst MaybeReader = ReaderT(Maybe)\nconst EitherReader = ReaderT(Either)\nconst StateReader = ReaderT(State)\n\nMaybeReader.of(\'yep\')\n  .map(x => x.toUpperCase())\n  .runWith(23)\n//=> Just "YEP"\n\nEitherReader.of(43)\n  .runWith(23)\n//=> Right 43\n\nStateReader.of(0)\n  .runWith(23)\n  .runWith(42)\n//=> Pair(0, 42)', mode: 'javascript'}, null, opt_ijData);
-    ie_close('article');
-    ie_open('article', null, null,
-        'id', 'topic-instance');
-      ie_open('h2');
-        ie_open('a', null, null,
-            'id', 'instance-methods',
-            'href', '#instance-methods');
-          itext('Instance Methods');
-        ie_close('a');
-      ie_close('h2');
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'map',
-            'href', '#map');
-          itext('map');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Monad m => ReaderT e (m a) ~> (a -> b) -> ReaderT e (m b)', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('Provides a means for lifting a normal javascript function into the underlying');
-        ie_open('code');
-          itext('Monad');
-        ie_close('code');
-        itext(', allowing the innermost value of the underlying ');
-        ie_open('code');
-          itext('Monad');
-        ie_close('code');
-        itext(' to be mapped. This method will ignore the outer ');
-        ie_open('code');
-          itext('ReaderT');
-        ie_close('code');
-        itext(', and be applied directly to the underlying ');
-        ie_open('code');
-          itext('Monad');
-        ie_close('code');
-        itext('.');
-      ie_close('p');
-      $templateAlias2({code: 'const ReaderT = require(\'crocks/Reader/ReaderT\')\nconst Maybe = require(\'crocks/Maybe\')\n\nconst isString = require(\'crocks/predicates/isString\')\nconst safe = require(\'crocks/Maybe/safe\')\n\nconst MaybeReader =\n  ReaderT(Maybe)\n\nconst { ask, liftFn } = MaybeReader\n\n// maybeString :: a -> Maybe String\nconst maybeString =\n  safe(isString)\n\n// toUpper :: String -> String\nconst toUpper =\n  x => x.toUpperCase()\n\n// envToUpper :: ReaderT e (Maybe String)\nconst envToUpper =\n  ask()\n    .chain(liftFn(maybeString))\n    .map(toUpper)\n\nenvToUpper\n  .runWith(4)\n//=> Nothing\n\nenvToUpper\n  .runWith(\'hola\')\n//=> Just "HOLA"', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'ap',
-            'href', '#ap');
-          itext('ap');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Monad m => ReaderT e (m (a -> b)) ~> ReaderT e (m a) -> ReaderT e (m b)', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('Applies wrapped functions to the provided value, using the ');
-        ie_open('code');
-          itext('ap');
-        ie_close('code');
-        itext(' of the underlying ');
-        ie_open('code');
-          itext('Monad');
-        ie_close('code');
-        itext('. A ');
-        ie_open('code');
-          itext('ReaderT');
-        ie_close('code');
-        itext(' of the underlying ');
-        ie_open('code');
-          itext('Monad');
-        ie_close('code');
-        itext(' must be provided, which allows access to the environment.');
-      ie_close('p');
-      $templateAlias2({code: 'const Pair = require(\'crocks/Pair\')\nconst ReaderT = require(\'crocks/Reader/ReaderT\')\nconst Result = require(\'crocks/Result\')\n\nconst fst = require(\'crocks/Pair/fst\')\nconst snd = require(\'crocks/Pair/snd\')\n\nconst ifElse = require(\'crocks/logic/ifElse\')\nconst isNumber = require(\'crocks/predicates/isNumber\')\nconst liftA2 = require(\'crocks/helpers/liftA2\')\n\nconst { Err, Ok } = Result\n\nconst ResultReader =\n  ReaderT(Result)\n\nconst { ask, liftFn } = ResultReader\n\n// add :: Number -> Number -> Number\nconst add =\n  x => y => x + y\n\n// makeError :: a -> Result [ String ] b\nconst makeErr =\n  x => Err([ `${x} is not a Number` ])\n\n// isValid :: a -> ReaderT e (Result [ String ] Number)\nconst isValid = liftFn(\n  ifElse(isNumber, Ok, makeErr)\n)\n\n// first :: ReaderT (Pair a b) (Result [ String ] Number)\nconst first =\n  ask(fst)\n    .chain(isValid)\n\n// second :: ReaderT (Pair a b) (Result [ String ] Number)\nconst second =\n  ask(snd)\n    .chain(isValid)\n\n// Using a fluent style with of\nResultReader.of(add)\n  .ap(first)\n  .ap(second)\n  .runWith(Pair(34, 21))\n//=> Ok 55\n\n// Using a fluent style with map\nfirst\n  .map(add)\n  .ap(second)\n  .runWith(Pair(true, 21))\n//=> Err [ "true is not a Number" ]\n\n// Using liftA2\nliftA2(add, first, second)\n  .runWith(Pair(\'Bob\', \'Jones\'))\n//=> Err [ \'Bob is not a Number\', \'Jones is not a Number\' ]', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'chain',
-            'href', '#chain');
-          itext('chain');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Monad m => ReaderT e (m a) ~> Reader e (a -> ReaderT e (m b)) -> ReaderT e (m b)', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('Can be used to apply the effects of the underlying ');
-        ie_open('code');
-          itext('Monad');
-        ie_close('code');
-        itext(' with the benefit of being able to read from the environment. This method only accepts functions of the form ');
-        ie_open('code');
-          itext('Monad m => a -> ReaderT e (m b)');
-        ie_close('code');
-        itext('.');
-      ie_close('p');
-      $templateAlias2({code: 'const ReaderT = require(\'../crocks/src/Reader/ReaderT\')\nconst Maybe = require(\'crocks/Maybe\')\nconst prop = require(\'crocks/Maybe/prop\')\n\nconst MaybeReader =\n  ReaderT(Maybe)\n\nconst { ask, liftFn } = MaybeReader\n\n// readProp :: String -> b -> ReaderT e (Maybe a)\nconst readProp = key =>\n  liftFn(prop(key))\n\n// getName :: ReaderT e (Maybe a)\nconst getName =\n  ask()\n    .chain(readProp(\'name\'))\n\n// getFirstName :: ReaderT e (Maybe a)\nconst getFirstName =\n  getName\n    .chain(readProp(\'first\'))\n\n// getLastName :: ReaderT e (Maybe a)\nconst getLastName =\n  getName\n    .chain(readProp(\'last\'))\n\n// person :: Object\nconst person = {\n  name: {\n    first: \'Hazel\',\n    middle: \'Anne\'\n  }\n}\n\ngetFirstName\n  .runWith(person)\n//=> Just "Hazel"\n\ngetLastName\n  .runWith(person)\n//=> Nothing\n\ngetLastName\n  .runWith(10)\n//=> Nothing', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'runwith',
-            'href', '#runwith');
-          itext('runWith');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Monad m => ReaderT e (m a) ~> e -> m a', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('In order to unwrap the underlying ');
-        ie_open('code');
-          itext('Monad');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('ReaderT');
-        ie_close('code');
-        itext(' needs to be ran with a given environment. A ');
-        ie_open('code');
-          itext('ReaderT');
-        ie_close('code');
-        itext(' instance comes equipped with a ');
-        ie_open('code');
-          itext('runWith');
-        ie_close('code');
-        itext(' method that accepts an environment and returns the resulting ');
-        ie_open('code');
-          itext('Monad');
-        ie_close('code');
-        itext('.');
-      ie_close('p');
-      $templateAlias2({code: 'const ReaderT = require(\'../crocks/src/Reader/ReaderT\')\nconst Maybe = require(\'crocks/Maybe\')\n\nconst MaybeReader = ReaderT(Maybe)\nconst { ask, liftFn } = MaybeReader\n\nconst prop = require(\'crocks/Maybe/prop\')\n\n// data :: Object\nconst data = {\n  animals: [\n    \'tiger\', \'muskrat\', \'mouse\'\n  ]\n}\n\n// length :: Array -> Number\nconst length =\n  x => x.length\n\n// getProp :: String -> ReaderT Object (Maybe [])\nconst getProp = key =>\n  ask()\n    .chain(liftFn(prop(key)))\n\ngetProp(\'animals\')\n  .map(length)\n  .runWith(data)\n//=> Just 3', mode: 'javascript'}, null, opt_ijData);
-    ie_close('article');
+      ie_close('a');
+      itext(' for a negated version of this function.');
+    ie_close('p');
     ie_open('input', null, null,
         'type', 'hidden',
         'value', opt_data.page.title);
@@ -28775,11 +28623,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'value', opt_data.site.title);
     ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({content: param1090}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param1662}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'GgbEq.render';
+  $render.soyTemplateName = 'YeuKS.render';
 }
 
 exports.render.params = ["page","site"];
@@ -28789,20 +28637,14 @@ return exports;
 
 });
 
-class GgbEq extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(GgbEq, templates);
+class YeuKS extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(YeuKS, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
 
 
 /***/ }),
-/* 224 */,
-/* 225 */,
-/* 226 */,
-/* 227 */,
-/* 228 */,
-/* 229 */,
 /* 230 */,
 /* 231 */,
 /* 232 */,
@@ -28823,7 +28665,21 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(GgbEq, templates);
 /* 247 */,
 /* 248 */,
 /* 249 */,
-/* 250 */
+/* 250 */,
+/* 251 */,
+/* 252 */,
+/* 253 */,
+/* 254 */,
+/* 255 */,
+/* 256 */,
+/* 257 */,
+/* 258 */,
+/* 259 */,
+/* 260 */,
+/* 261 */,
+/* 262 */,
+/* 263 */,
+/* 264 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28859,9 +28715,9 @@ __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _ReaderTSoy = __webpack_require__(223);
+var _logicFunctionsSoy = __webpack_require__(229);
 
-var _ReaderTSoy2 = _interopRequireDefault(_ReaderTSoy);
+var _logicFunctionsSoy2 = _interopRequireDefault(_logicFunctionsSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28871,23 +28727,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var GgbEq = function (_Component) {
-  _inherits(GgbEq, _Component);
+var YeuKS = function (_Component) {
+  _inherits(YeuKS, _Component);
 
-  function GgbEq() {
-    _classCallCheck(this, GgbEq);
+  function YeuKS() {
+    _classCallCheck(this, YeuKS);
 
-    return _possibleConstructorReturn(this, (GgbEq.__proto__ || Object.getPrototypeOf(GgbEq)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (YeuKS.__proto__ || Object.getPrototypeOf(YeuKS)).apply(this, arguments));
   }
 
-  return GgbEq;
+  return YeuKS;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(GgbEq, _ReaderTSoy2.default);
+_metalSoy2.default.register(YeuKS, _logicFunctionsSoy2.default);
 
-exports.default = GgbEq;
+exports.default = YeuKS;
 
 /***/ })
-],[250]);
+],[264]);

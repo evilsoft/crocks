@@ -1,5 +1,37 @@
 # Change Log for `crocks`
 
+v0.8.6 -- February 18, 2018
+--
+### Additions
+* READMES:
+  * `Max`
+  * `Min`
+* Predicates:
+  * `propEq`
+  * `propPathEq`
+* Methods:
+  * `sequence` to `Pair`
+  * `traverse` to `Pair`
+  * `reduceRight` to `List`
+  * Add fantasy-land methods except for `traverse` and `ap`
+
+### Bug fixes
+* Stop traversing in `propPathOr` when default is an `Object` matching the path.
+
+### Pull Requests
+* [#216 - Add karthikiyengar as contributor for PR review](https://github.com/evilsoft/crocks/pull/216)
+* [#214 - Move Fantasy-Land method name into one place](https://github.com/evilsoft/crocks/pull/214)
+* [#213 - Update Error specs for the remaining Monoids](https://github.com/evilsoft/crocks/pull/213)
+* [#212 - Update `traverse` and `sequence` Errors to signal for `Apply` and not `Applicative`](https://github.com/evilsoft/crocks/pull/212)
+* [#211 - Add `sequence` and `traverse` to `Pair`](https://github.com/evilsoft/crocks/pull/211)
+* [#217 - Fix issue in propPathOr if default value is an object](https://github.com/evilsoft/crocks/pull/217)
+* [#220 - Add Max Documentation](https://github.com/evilsoft/crocks/pull/220)
+* [#221 - Add Min Documentation](https://github.com/evilsoft/crocks/pull/221)
+* [#222 - Clean up Prod and Sum Docs](https://github.com/evilsoft/crocks/pull/222)
+* [#219 - Added `propEq` and `propPathEq`](https://github.com/evilsoft/crocks/pull/219)
+* [#223 - Add `Max` and `Min` Monoids to the docs](https://github.com/evilsoft/crocks/pull/223)
+* [#224 - Add jonwhelan as contributor for PR Code and Bug Reporting](https://github.com/evilsoft/crocks/pull/224)
+
 v0.8.5 -- February 14, 2018
 --
 ### Additions

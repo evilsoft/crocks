@@ -1,21 +1,19 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
-/** @author Karthik Iyengar (karthikiyengar) */
-/** @author Ian Hofmann-Hicks */
+/** @author Ian Hofmann-Hicks (evil) */
 
 const curry = require('../core/curry')
-const equals = require('../core/equals')
 const isArray = require('../core/isArray')
 const isDefined = require('../core/isDefined')
-const isEmpty  = require('../core/isEmpty')
+const isEmpty = require('../core/isEmpty')
 const isInteger = require('../core/isInteger')
 const isNil = require('../core/isNil')
 const isString = require('../core/isString')
 
-// propPathEq :: [ String | Number ] -> a -> Object -> Boolean
-function propPathEq(keys, value, target) {
+// hasPropPath : [ String | Integer ] -> a -> Boolean
+function hasPropPath(keys, target) {
   if(!isArray(keys)) {
     throw new TypeError(
-      'propPathEq: Array of Non-empty Strings or Integers required for first argument'
+      'hasPropPath: Array of Non-empty Strings or Integers required for first argument'
     )
   }
 
@@ -23,24 +21,25 @@ function propPathEq(keys, value, target) {
     return false
   }
 
-  let acc = target
+  let value = target
   for(let i = 0; i < keys.length; i++) {
     const key = keys[i]
 
     if(!((isString(key) && !isEmpty(key)) || isInteger(key))) {
       throw new TypeError(
-        'propPathEq: Array of Non-empty Strings or Integers required for first argument'
+        'hasPropPath: Array of Non-empty Strings or Integers required for first argument'
       )
     }
 
-    acc = acc[key]
+    value = value[key]
 
-    if(!isDefined(acc)) {
+    if(!isDefined(value)) {
       return false
     }
   }
 
-  return equals(acc, value)
+
+  return true
 }
 
-module.exports = curry(propPathEq)
+module.exports = curry(hasPropPath)

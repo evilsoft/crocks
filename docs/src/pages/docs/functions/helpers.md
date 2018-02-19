@@ -851,22 +851,37 @@ If you want some safety around pulling a value out of an Object or Array with a
 single key or index, you can always reach for `propOr`. Well, as long as you are
 working with non-nested data that is. Just tell `propOr` either the key or index
 you are interested in, and you will get back a function that will take anything
-and return the wrapped value if the key/index exists. If the key/index does not
-exist however, you will get back a default value.
+and return the wrapped value if the key/index is defined. If the key/index is not
+defined however, you will get back the provided default value.
 
 ```javascript
-const { get } = require('crocks/State')
 const propOr = require('crocks/helpers/propOr')
 
-const data = { foo: 'bar' }
+const data = {
+  foo: 'bar',
+  null: null,
+  nan: NaN,
+  undef: undefined
+}
 
-get()
-  .map(propOr('default', 'foo'))
-  .evalWith(data) // bar
+// def :: (String | Integer) -> a -> b
+const def =
+  propOr('default')
 
-get()
-  .map(propOr('default', 'baz'))
-  .evalWith(data) // default
+def('foo', data)
+//=> "bar"
+
+def('null', data)
+//=> null
+
+def('nan', data)
+//=> NaN
+
+def('baz', data)
+//=> "default"
+
+def('undef', data)
+//=> "default"
 ```
 
 #### propPathOr
@@ -887,18 +902,39 @@ valid, it will return the value. But if at any point that path "breaks" it will
 give you back the default value.
 
 ```javascript
-const { get } = require('crocks/State')
 const propPathOr = require('crocks/helpers/propPathOr')
 
-const data = { foo: { bar: 'bar' }, baz: null }
+const data = {
+  foo: {
+    bar: 'bar',
+    null: null,
+    nan: NaN,
+    undef: undefined
+  },
+  arr: [ 1, 2 ]
+}
 
-get()
-  .map(propPathOr('default', ['foo', 'bar']))
-  .evalWith(data) // bar
+// def :: [ String | Integer ] -> a -> b
+const def =
+  propPathOr('default')
 
-get()
-  .map(propPathOr('default', ['baz', 'tommy']))
-  .evalWith(data) // default
+def([ 'foo', 'bar' ], data)
+//=> "bar"
+
+def([ 'baz', 'tommy' ], data)
+//=> "default"
+
+def([ 'foo', 'null' ], data)
+//=> null
+
+def([ 'foo', 'nan' ], data)
+//=> NaN
+
+def([ 'foo', 'undef' ], data)
+//=> "default"
+
+def([ 'arr', 'length' ], data)
+//=> 2
 ```
 
 #### tap

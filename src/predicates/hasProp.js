@@ -2,16 +2,25 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const curry = require('../core/curry')
-const isString = require('../core/isString')
+const isDefined = require('../core/isDefined')
+const isEmpty = require('../core/isEmpty')
 const isInteger = require('../core/isInteger')
+const isNil = require('../core/isNil')
+const isString = require('../core/isString')
 
-// hasProp : (String | Number) -> a -> Boolean
+// hasProp : (String | Integer) -> a -> Boolean
 function hasProp(key, x) {
-  if(!(isString(key) || isInteger(key))) {
-    throw new TypeError('hasProp: Number or String required for first argument')
+  if(!((isString(key) && !isEmpty(key)) || isInteger(key))) {
+    throw new TypeError(
+      'hasProp: Non-empty String or Integer required for first argument'
+    )
   }
 
-  return (!!x && x[key] !== undefined)
+  if(isNil(x)) {
+    return false
+  }
+
+  return isDefined(x[key])
 }
 
 module.exports = curry(hasProp)

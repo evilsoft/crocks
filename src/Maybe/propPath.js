@@ -1,33 +1,42 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const Maybe = require('../core/Maybe')
-const { Nothing, Just } = Maybe
+const { Nothing, Just } = require('../core/Maybe')
 
 const curry = require('../core/curry')
 const isArray = require('../core/isArray')
+const isDefined = require('../core/isDefined')
+const isEmpty = require('../core/isEmpty')
 const isInteger = require('../core/isInteger')
-const isNil= require('../core/isNil')
+const isNil = require('../core/isNil')
 const isString = require('../core/isString')
-
-const lift = x =>
-  !isNil(x) ? Just(x) : Nothing()
 
 // propPath : [ String | Integer ] -> a -> Maybe b
 function propPath(keys, target) {
   if(!isArray(keys)) {
-    throw new TypeError('propPath: Array of strings or integers required for first argument')
+    throw new TypeError('propPath: Array of Non-empty Strings or Integers required for first argument')
   }
 
   if(isNil(target)) {
     return Nothing()
   }
-  return keys.reduce((maybe, key) => {
-    if(!(isString(key) || isInteger(key))) {
-      throw new TypeError('propPath: Array of strings or integers required for first argument')
+
+  let value = target
+  for(let i = 0; i < keys.length; i++) {
+    const key = keys[i]
+
+    if(!((isString(key) && !isEmpty(key)) || isInteger(key))) {
+      throw new TypeError('propPath: Array of Non-empty Strings or Integers required for first argument')
     }
-    return maybe.chain(x => lift(x[key]))
-  }, Maybe.of(target))
+
+    value = value[key]
+
+    if(!isDefined(value)) {
+      return Nothing()
+    }
+  }
+
+  return Just(value)
 }
 
 module.exports = curry(propPath)

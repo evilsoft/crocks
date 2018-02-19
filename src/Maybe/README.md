@@ -845,8 +845,8 @@ If you want some safety around pulling a value out of an `Object` or `Array`
 with a single key or index, you can always reach for `prop`. Well, as long
 as you are working with non-nested data that is. Just tell `prop` either the key
 or index you are interested in, and you will get back a function that will take
-anything and return a `Just` with the wrapped value if the key/index exists. If
-the key/index does not exist however, you will get back a `Nothing`.
+anything and return a `Just` with the wrapped value if the key/index is defined.
+If the key/index is not defined, you will get back a `Nothing`.
 
 ```javascript
 const composeK = require('crocks/helpers/composeK')
@@ -902,8 +902,8 @@ this situation, just pull in `propPath` and pass it a left-to-right traversal
 path of keys, indices or a combination of both (gross...but possible). This will
 kick you back a function that behaves just like [`prop`](#prop). You pass it
 some data, and it will attempt to resolve your provided path. If the path is
-valid, it will return the value residing there (`null` included!) in a `Just`.
-But if at any point that path "breaks" it will give you back a `Nothing`.
+valid, it will return the value residing there (`null` and `NaN` included!) in
+a `Just`. But if at any point that path "breaks" it will give you back a `Nothing`.
 
 ```javascript
 const composeK = require('crocks/helpers/composeK')

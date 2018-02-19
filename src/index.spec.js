@@ -139,6 +139,7 @@ const valueOf = require('./pointfree/valueOf')
 
 // predicates
 const hasProp = require('./predicates/hasProp')
+const hasPropPath = require('./predicates/hasPropPath')
 const isAlt = require('./predicates/isAlt')
 const isAlternative = require('./predicates/isAlternative')
 const isApplicative = require('./predicates/isApplicative')
@@ -345,6 +346,7 @@ test('entry', t => {
 
   // predicates
   t.equal(crocks.hasProp, hasProp, 'provides the hasProp predicate')
+  t.equal(crocks.hasPropPath, hasPropPath, 'provides the hasPropPath predicate')
   t.equal(crocks.isAlt, isAlt, 'provides the isAlt predicate')
   t.equal(crocks.isAlternative, isAlternative, 'provides the isAlternative predicate')
   t.equal(crocks.isApply, isApply, 'provides the isApply predicate')

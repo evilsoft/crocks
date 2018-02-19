@@ -7,7 +7,6 @@ const composeB = require('./combinators/composeB')
 const constant = require('./combinators/constant')
 const flip = require('./combinators/flip')
 const identity = require('./combinators/identity')
-const reverseApply = require('./combinators/reverseApply')
 const substitution = require('./combinators/substitution')
 
 // crocks
@@ -208,12 +207,11 @@ test('entry', t => {
   t.equal(crocks.toString(), '[object Object]', 'is an object')
 
   // combinators
-  t.equal(crocks.applyTo, applyTo, 'provides the A combinator (applyTo)')
+  t.equal(crocks.applyTo, applyTo, 'provides the T combinator (applyTo)')
   t.equal(crocks.composeB, composeB, 'provides the B combinator (composeB)')
   t.equal(crocks.constant, constant, 'provides the K combinator (constant)')
   t.equal(crocks.flip, flip, 'provides the C combinator (flip)')
   t.equal(crocks.identity, identity, 'provides the I combinator (identity)')
-  t.equal(crocks.reverseApply, reverseApply, 'provides the T combinator (reverseApply)')
   t.equal(crocks.substitution, substitution, 'provides the S combinator (substitution)')
 
   // crocks

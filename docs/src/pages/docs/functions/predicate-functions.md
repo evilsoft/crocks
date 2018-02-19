@@ -2,7 +2,7 @@
 description: "Predicate Functions API"
 layout: "notopic"
 title: "Predicate Functions"
-weight: 4
+weight: 40
 ---
 
 All functions in this group have a signature of `* -> Boolean` and are used with

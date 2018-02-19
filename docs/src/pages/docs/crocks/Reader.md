@@ -115,7 +115,7 @@ const Reader = require('crocks/Reader')
 const { ask } = Reader
 
 const objOf = require('crocks/helpers/objOf')
-const thrush = require('crocks/combinators/reverseApply')
+const thrush = require('crocks/combinators/applyTo')
 
 // add :: Number -> Number -> Number
 const add =

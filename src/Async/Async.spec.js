@@ -14,7 +14,7 @@ const unit = require('../core/_unit')
 const constant = x => () => x
 const identity = x => x
 
-const reverseApply =
+const applyTo =
   x => fn => fn(x)
 
 const Async = require('.')
@@ -869,7 +869,7 @@ test('Async of properties (Applicative)', t => {
   const bInterRes = sinon.spy()
 
   m.ap(Async.of(3)).fork(unit, aInterRes)
-  Async.of(reverseApply(3)).ap(m).fork(unit, bInterRes)
+  Async.of(applyTo(3)).ap(m).fork(unit, bInterRes)
 
   t.same(aInterRes.args[0], bInterRes.args[0], 'interchange')
 

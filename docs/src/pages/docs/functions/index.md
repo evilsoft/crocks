@@ -3,7 +3,7 @@ title: "Functions"
 description: "functions"
 layout: "notopic"
 icon: "code-file"
-weight: 4
+weight: 40
 ---
 
 There are (6) function classifications included in this library:
@@ -43,12 +43,11 @@ need to account for for the rest of your flow.
 
 | Function | Signature | Location |
 |:---|:---|:---|
-| [`applyTo`][applyto] | `(a -> b) -> a -> b` | `crocks/combinators/applyTo` |
+| [`applyto`][applyto] | `a -> (a -> b) -> b` | `crocks/combinators/applyTo` |
 | [`composeB`][composeb] | `(b -> c) -> (a -> b) -> a -> c` | `crocks/combinators/composeB` |
 | [`constant`][constant] | `a -> () -> a` | `crocks/combinators/constant` |
 | [`flip`][flip] | `(a -> b -> c) -> b -> a -> c` | `crocks/combinators/flip` |
 | [`identity`][identity] | `a -> a` | `crocks/combinators/identity` |
-| [`reverseApply`][reverseapply] | `a -> (a -> b) -> b` | `crocks/combinators/reverseApply` |
 | [`substitution`][substitution] | `(a -> b -> c) -> (a -> b) -> a -> c` | `crocks/combinators/substitution` |
 
 ## Helpers
@@ -116,18 +115,15 @@ type: `Pred a` and vice-versa
 | [`unless`][unless] | `(a -> Boolean) -> (a -> a) -> a -> a` | `crocks/logic/unless` |
 | [`when`][when] | `(a -> Boolean) -> (a -> a) -> a -> a` | `crocks/logic/when` |
 
-
 [monoids]: ../monoids/index.html
 [crocks]: ../crocks/index.html
 [pred]: ../crocks/Pred.html
-
 
 [applyto]: combinators.html#applyto
 [composeb]: combinators.html#composeb
 [constant]: combinators.html#constant
 [flip]: combinators.html#flip
 [identity]: combinators.html#identity
-[reverseapply]: combinators.html#reverseapply
 [substitution]: combinators.html#substitution
 
 [assign]: helpers.html#assign

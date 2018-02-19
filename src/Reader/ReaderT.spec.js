@@ -12,7 +12,7 @@ const isObject = require('../core/isObject')
 const isSameType = require('../core/isSameType')
 const unit = require('../core/_unit')
 
-const reverseApply =
+const applyTo =
   x => fn => fn(x)
 
 const identity = x => x
@@ -379,7 +379,7 @@ test('ReaderT of properties (Applicative)', t => {
   )
 
   const a = x => m.ap(ReaderMock.of(x))
-  const b = x => ReaderMock.of(reverseApply(x)).ap(m)
+  const b = x => ReaderMock.of(applyTo(x)).ap(m)
 
   t.equal(a(3).runWith(e).valueOf(), b(3).runWith(e).valueOf(), 'interchange')
 

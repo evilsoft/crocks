@@ -14,7 +14,7 @@ const unit = require('./_unit')
 
 const identity = x => x
 
-const reverseApply =
+const applyTo =
   x => fn => fn(x)
 
 const Unit = require('./Unit')
@@ -298,7 +298,7 @@ test('Unit of properties (Applicative)', t => {
   t.equal(m.ap(Unit.of(3)).valueOf(), Unit.of(identity(3)).valueOf(), 'homomorphism')
 
   const a = x => m.ap(Unit.of(x))
-  const b = x => Unit.of(reverseApply(x)).ap(m)
+  const b = x => Unit.of(applyTo(x)).ap(m)
 
   t.equal(a(3).valueOf(), b(3).valueOf(), 'interchange')
 

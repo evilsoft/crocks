@@ -19,7 +19,7 @@ const identity = x => x
 const either =
   (f, g) => m => m.either(f, g)
 
-const reverseApply =
+const applyTo =
   x => fn => fn(x)
 
 const Result = require('.')
@@ -736,7 +736,7 @@ test('Result of properties (Applicative)', t => {
   )
 
   const a = x => r.ap(Result.of(x))
-  const b = x => Result.of(reverseApply(x)).ap(r)
+  const b = x => Result.of(applyTo(x)).ap(r)
 
   t.equal(
     a(3).either(constant(0),identity),

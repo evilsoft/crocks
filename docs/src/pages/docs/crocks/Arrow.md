@@ -349,7 +349,7 @@ Arrow a b ~> ((c -> a), (b -> d)) -> Arrow c d
 
 `promap` can be used to adapt BOTH ends of an `Arrow` allowing for existing
 `Arrow`s to be reused in places in a flow where the types do not line up. It
-combines both `map` and `conramap` into one operation. Just pass the `contramap`
+combines both `map` and `contramap` into one operation. Just pass the `contramap`
 function as the first argument and the `map` function as the second.
 
 ```javascript

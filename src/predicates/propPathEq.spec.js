@@ -8,53 +8,101 @@ const bindFunc = helpers.bindFunc
 const propPathEq = require('./propPathEq')
 
 test('propPathEq function', t => {
+  const fn = propPathEq([ 'a' ])
+  const empty = propPathEq([])
 
   t.ok(isFunction(propPathEq), 'is a function')
 
-  const val = 5
+  t.equals(fn(undefined, undefined), false, 'returns false with undefined as third argument')
+  t.equals(fn(null, null), false, 'returns false with null as third argument')
+  t.equals(fn(NaN, NaN), false, 'returns false with NaN as third argument')
 
-  const p = bindFunc(propPathEq)
+  t.equals(empty(undefined, undefined), false, 'returns false with empty array on undefined')
+  t.equals(empty(null, null), false, 'returns false with empty array on null')
+  t.equals(empty(NaN, NaN), false, 'returns false with empty array on NaN')
+
+  t.end()
+})
+
+test('propPathEq errors', t => {
+  const fn = bindFunc(x => propPathEq(x, null, {}))
 
   const err = /propPathEq: Array of Non-empty Strings or Integers required for first argument/
-  t.throws(p(undefined, {}, {}), err, 'throws with undefined in first argument')
-  t.throws(p(null, {}, {}), err, 'throws with null in first argument')
-  t.throws(p(0, {}, {}), err, 'throws with falsey number in first argument')
-  t.throws(p(1, {}, {}), err, 'throws with truthy number in first argument')
-  t.throws(p('', {}, {}), err, 'throws with falsey string in first argument')
-  t.throws(p('string', {}, {}), err, 'throws with truthy string in first argument')
-  t.throws(p(false, {}, {}), err, 'throws with false in first argument')
-  t.throws(p(true, {}, {}), err, 'throws with true in first argument')
-  t.throws(p(unit, {}, {}), err, 'throws with function in first argument')
-  t.throws(p({}, {}, {}), err, 'throws with an object in first argument')
+  t.throws(fn(undefined), err, 'throws with undefined in first argument')
+  t.throws(fn(null), err, 'throws with null in first argument')
+  t.throws(fn(0), err, 'throws with falsey number in first argument')
+  t.throws(fn(1), err, 'throws with truthy number in first argument')
+  t.throws(fn(''), err, 'throws with falsey string in first argument')
+  t.throws(fn('string'), err, 'throws with truthy string in first argument')
+  t.throws(fn(false), err, 'throws with false in first argument')
+  t.throws(fn(true), err, 'throws with true in first argument')
+  t.throws(fn(unit), err, 'throws with function in first argument')
+  t.throws(fn({}), err, 'throws with an object in first argument')
 
-  t.throws(p([ undefined ], {}, {}), err, 'throws with undefined in first argument array')
-  t.throws(p([ null ], {}, {}), err, 'throws with null in first argument array')
-  t.throws(p([ NaN ], {}, {}), err, 'throws with NaN in first argument array')
-  t.throws(p([ false ], {}, {}), err, 'throws with false in first argument array')
-  t.throws(p([ true ], {}, {}), err, 'throws with true in first argument array')
-  t.throws(p([ 1.2345 ], {}, {}), err, 'throws with float in first argument array')
-  t.throws(p([ '' ], {}, {}), err, 'throws with empty string in first argument array')
-  t.throws(p([ unit ], {}, {}), err, 'throws with function in first argument array')
-  t.throws(p([ [] ], {}, {}), err, 'throws with Array in first argument array')
-  t.throws(p([ {} ], {}, {}), err, 'throws with Object in first argument array')
+  t.throws(fn([ undefined ]), err, 'throws with undefined in first argument array')
+  t.throws(fn([ null ]), err, 'throws with null in first argument array')
+  t.throws(fn([ NaN ]), err, 'throws with NaN in first argument array')
+  t.throws(fn([ false ]), err, 'throws with false in first argument array')
+  t.throws(fn([ true ]), err, 'throws with true in first argument array')
+  t.throws(fn([ 1.2345 ]), err, 'throws with float in first argument array')
+  t.throws(fn([ '' ]), err, 'throws with empty string in first argument array')
+  t.throws(fn([ unit ]), err, 'throws with function in first argument array')
+  t.throws(fn([ [] ]), err, 'throws with Array in first argument array')
+  t.throws(fn([ {} ]), err, 'throws with Object in first argument array')
 
-  const obj = { some: { key: val, null: null, nan: NaN, undefined: undefined } }
+  t.end()
+})
 
-  const goodPath = [ 'some', 'key' ]
-  const badPath = [ 'this', 'is', 'really', 'bad' ]
+test('propPathEq object traversal', t => {
+  const fn = propPathEq([ 'a', 'b' ])
+  const empty = propPathEq([])
 
-  t.equals(propPathEq(goodPath, val, obj), true, 'returns true on correct path')
-  t.equals(propPathEq([ 'some', 'null' ], null, obj), true, 'returns true when comparing to null values that are present')
-  t.equals(propPathEq([ 'some', 'nan' ], NaN, obj), true, 'returns true when comparing to NaN values that are present')
+  t.equals(fn('', { a: { b: '' } }), true, 'returns true when keypath found and values are equal')
+  t.equals(fn(null, { a: { b: null } }), true, 'returns true when comparing to null values that are present')
+  t.equals(fn(NaN, { a: { b: NaN } }), true, 'returns true when comparing to NaN values that are present')
+  t.equals(empty({ a: 23 }, { a: 23 }), true, 'returns true when value matchs object to traverse when path is empty')
 
-  t.equals(propPathEq(badPath, val, obj), false, 'returns false on incorrect path')
-  t.equals(propPathEq([ 'some', 'undefined' ], NaN, obj), false, 'returns false for falsey matches (nan)')
-  t.equals(propPathEq([ 'some', 'null' ], NaN, obj), false, 'returns false for falsey matches (null)')
-  t.equals(propPathEq([ 'some', 'undefined' ], undefined, obj), false, 'returns false when comparing to undefined values that are present')
-  t.equals(propPathEq([ 'some', 'wrong', null, {}, [] ], undefined, { some: NaN }), false, 'returns false when comparing early-exited paths with an undefined')
-  t.equals(propPathEq([ 'a' ], val, undefined), false, 'returns false with undefined as third argument')
-  t.equals(propPathEq([ 'a' ], val, null), false, 'returns false with null as third argument')
-  t.equals(propPathEq([ 'a' ], val, NaN), false, 'returns false with NaN as third argument')
+  t.equals(fn(true, { a: { c: true } }), false, 'returns false when keypath not found')
+  t.equals(fn('0', { a: { b: 0 } }), false, 'returns false when keypath is found and values are not equal')
+  t.equals(fn(undefined, { a: { b: undefined } }), false, 'returns false when comparing undefined values that are present')
+  t.equals(empty(23, { a: 23 }), false, 'returns false when value does not match object to traverse when path is empty')
+
+  t.equals(fn(undefined, { a: undefined }), false, 'returns false when undefined in keypath')
+  t.equals(fn(null, { a: null }), false, 'returns false when null in keypath')
+  t.equals(fn(NaN, { a: NaN }), false, 'returns false when NaN in keypath')
+
+  t.end()
+})
+
+test('propPathEq array traversal', t => {
+  const fn = propPathEq([ 1, '0' ])
+  const empty = propPathEq([])
+
+  t.equals(fn('', [ false, [ '' ] ]), true, 'returns true when keypath found and values are equal')
+  t.equals(fn(null, [ '', [ null ] ]), true, 'returns true when comparing to null values that are present')
+  t.equals(fn(NaN, [ '', [ NaN ] ]), true, 'returns true when comparing to NaN values that are present')
+  t.equals(empty([ [ null ] ], [ [ null ] ]), true, 'returns true when value matchs array to traverse when path is empty')
+
+  t.equals(fn('string', [ 'string' ]), false, 'returns false when keypath not found')
+  t.equals(fn('1', [ true, [ 1 ] ]), false, 'returns false when keypath is found and values are not equal')
+  t.equals(fn(undefined, [ 1, [ undefined ] ]), false, 'returns false when compairing undefined values that are present')
+  t.equals(empty(23, [ 23 ]), false, 'returns false when value does not match array to traverse when path is empty')
+
+  t.equals(fn(undefined, [ 1, undefined ]), false, 'returns false when undefined in keypath')
+  t.equals(fn(null, [ true, null ]), false, 'returns false when null in keypath')
+  t.equals(fn(undefined, [ '45', [ undefined ] ]), false, 'returns false when comparing undefined values that are present')
+
+  t.end()
+})
+
+test('propPathEq mixed traversal', t => {
+  const value = 'bubbles'
+
+  const fn = propPathEq([ 'a', 1 ], value)
+
+  t.equals(fn({ a: [ 0, value ] }), true, 'returns false when found with mixed path and values are equal')
+  t.equals(fn({ a: [ value, 42 ] }), false, 'returns false when found with mixed path and values are not equal')
+  t.equals(fn({ c: [ value ] }), false, 'returns false when not found with mixed path')
 
   t.end()
 })

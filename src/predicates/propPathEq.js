@@ -19,7 +19,7 @@ function propPathEq(keys, value, target) {
     )
   }
 
-  if (isNil(target)) {
+  if(isNil(target)) {
     return false
   }
 
@@ -31,6 +31,10 @@ function propPathEq(keys, value, target) {
       throw new TypeError(
         'propPathEq: Array of Non-empty Strings or Integers required for first argument'
       )
+    }
+
+    if(isNil(acc)) {
+      return false
     }
 
     acc = acc[key]

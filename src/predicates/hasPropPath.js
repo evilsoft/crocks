@@ -17,11 +17,12 @@ function hasPropPath(keys, target) {
     )
   }
 
-  if (isNil(target)) {
+  if(isNil(target)) {
     return false
   }
 
   let value = target
+
   for(let i = 0; i < keys.length; i++) {
     const key = keys[i]
 
@@ -31,13 +32,16 @@ function hasPropPath(keys, target) {
       )
     }
 
+    if(isNil(value)) {
+      return false
+    }
+
     value = value[key]
 
     if(!isDefined(value)) {
       return false
     }
   }
-
 
   return true
 }

@@ -7,12 +7,19 @@ const unit = require('../core/_unit')
 const propEq = require('./propEq')
 
 test('propEq function', t => {
-  const key = 'something'
-  const val = 'thirty-six'
-
-  const fn = bindFunc(x => propEq(x, val, key))
+  const fn = propEq('a')
 
   t.ok(isFunction(propEq), 'is a function')
+
+  t.equals(fn(null, null), false, 'returns false when target is null')
+  t.equals(fn(NaN, NaN), false, 'returns false when target is NaN')
+  t.equals(fn(undefined, undefined), false, 'returns false when target is undefined')
+
+  t.end()
+})
+
+test('propEq errors', t => {
+  const fn = bindFunc(x => propEq(x, 'val', 'key'))
 
   const err = /propEq: Non-empty String or Integer required for first argument/
   t.throws(fn(undefined), err, 'throws with undefined as first argument')
@@ -26,29 +33,36 @@ test('propEq function', t => {
   t.throws(fn([]), err, 'throws with Array as first argument')
   t.throws(fn(unit), err, 'throws with Function as first argument')
 
-  t.equals(propEq(key, val, null), false, 'returns false when target is null')
-  t.equals(propEq(key, val, NaN), false, 'returns false when target is NaN')
-  t.equals(propEq(key, val, undefined), false, 'returns false when target is undefined')
+  t.end()
+})
 
-  t.equals(propEq(key, val, {}), false, 'returns false when value does not exist on object')
-  t.equals(propEq(key, true, { [key]: false }), false, 'returns false when values are not equal')
-  t.equals(propEq(key, undefined, { [key]: undefined }), false, 'returns false when undefined compared')
+test('propEq object traversal', t => {
+  const fn = propEq('a')
 
-  t.equals(propEq(key, 42, { [key]: 42 }), true, 'returns true when value exists on object')
-  t.equals(propEq(key, null, { [key]: null }), true, 'returns true when null compared')
-  t.equals(propEq(key, NaN, { [key]: NaN }), true, 'returns true when NaN compared')
-  t.equals(propEq(key, { a: 32 }, { [key]: { a: 32 } }), true, 'returns true when a deep matching object exists on object')
+  t.equals(fn({ b: 32 }, { a: { b: 32 } }), true, 'returns true when value exists on object')
+  t.equals(fn(null, { a: null }), true, 'returns true when null compared')
+  t.equals(fn(NaN, { a: NaN }), true, 'returns true when NaN compared')
 
-  const arr = [ 97, null, NaN, undefined, { a: [ 'string' ] } ]
+  t.equals(fn(3, { b: 3 }), false, 'returns false when value does not exist on object')
+  t.equals(fn(true, { a: false }), false, 'returns false when values are not equal')
+  t.equals(fn(undefined, { a: undefined }), false, 'returns false when undefined compared')
 
-  t.equals(propEq(5, val, arr), false, 'returns false when value does not exist on object')
-  t.equals(propEq(0, '97', arr), false, 'returns false when values are not equal')
-  t.equals(propEq(3, undefined, arr), false, 'returns false when undefined compared')
+  t.end()
+})
 
-  t.equals(propEq(0, 97, arr), true, 'returns true when value exists on object')
-  t.equals(propEq(1, null, arr), true, 'returns true when null compared')
-  t.equals(propEq(2, NaN, arr), true, 'returns true when NaN compared')
-  t.equals(propEq(4, { a: [ 'string' ] }, arr), true, 'returns true when a deep matching object exists on object')
+test('propEq array traversal', t => {
+  const fn = propEq(1)
+  const string = propEq('1')
+
+  t.equals(fn(false, [ undefined, false ]), true, 'returns true when index found is equal to value')
+  t.equals(string(false, [ undefined, false ]), true, 'returns true when string index found is equal to value')
+  t.equals(fn({ a: [ undefined ] }, [ false, { a: [ undefined ] } ]), true, 'returns true when a deep matching object exists on object')
+  t.equals(fn(null, [ 0, null ]), true, 'returns true when found null compared')
+  t.equals(fn(NaN, [ '', NaN ]), true, 'returns true when found NaN compared')
+
+  t.equals(fn('', [ '' ]), false, 'returns false when value does not exist on object')
+  t.equals(fn('97', [ false, 97 ]), false, 'returns false when values are not equal')
+  t.equals(fn(undefined, [ NaN, undefined ]), false, 'returns false when undefined compared')
 
   t.end()
 })

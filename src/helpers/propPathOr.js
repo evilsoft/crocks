@@ -32,6 +32,10 @@ function propPathOr(def, keys, target) {
       )
     }
 
+    if(isNil(value)) {
+      return def
+    }
+
     value = value[key]
 
     if(!isDefined(value)) {

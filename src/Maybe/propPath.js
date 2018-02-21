@@ -29,6 +29,10 @@ function propPath(keys, target) {
       throw new TypeError('propPath: Array of Non-empty Strings or Integers required for first argument')
     }
 
+    if(isNil(value)) {
+      return Nothing()
+    }
+
     value = value[key]
 
     if(!isDefined(value)) {

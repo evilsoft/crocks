@@ -60,7 +60,6 @@ test('propPathEq object traversal', t => {
   t.equals(fn('', { a: { b: '' } }), true, 'returns true when keypath found and values are equal')
   t.equals(fn(null, { a: { b: null } }), true, 'returns true when comparing to null values that are present')
   t.equals(fn(NaN, { a: { b: NaN } }), true, 'returns true when comparing to NaN values that are present')
-  t.equals(empty({ a: 23 }, { a: 23 }), true, 'returns true when value matchs object to traverse when path is empty')
 
   t.equals(fn(true, { a: { c: true } }), false, 'returns false when keypath not found')
   t.equals(fn('0', { a: { b: 0 } }), false, 'returns false when keypath is found and values are not equal')
@@ -70,6 +69,8 @@ test('propPathEq object traversal', t => {
   t.equals(fn(undefined, { a: undefined }), false, 'returns false when undefined in keypath')
   t.equals(fn(null, { a: null }), false, 'returns false when null in keypath')
   t.equals(fn(NaN, { a: NaN }), false, 'returns false when NaN in keypath')
+
+  t.equals(empty({ a: 23 }, { a: 23 }), true, 'returns true when value matchs object to traverse when path is empty')
 
   t.end()
 })

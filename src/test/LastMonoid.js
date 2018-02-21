@@ -13,7 +13,7 @@ function LastMonoid(x) {
     concat: identity,
     valueOf: constant(x),
     type: _type,
-    '@@type': typeString
+    ['@@type']: typeString
   }
 }
 

@@ -22,7 +22,7 @@ function MockCrock(x) {
   return {
     valueOf, type, map, ap,
     chain, of, sequence,
-    '@@type': typeString,
+    ['@@type']: typeString,
     traverse, equals
   }
 }

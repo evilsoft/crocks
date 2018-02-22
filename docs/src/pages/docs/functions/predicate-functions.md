@@ -14,7 +14,8 @@ from `crocks/predicates`.
 Below is a list of all the current predicates that are included with a
 description of their truth:
 
-* `hasProp :: (String | Number) -> a -> Boolean`: an `Array` or `Object` that contains the provided index or key
+* `hasProp :: (String | Integer) -> a -> Boolean`: an `Array` or `Object` that contains the provided index or key
+* `hasPropPath :: [ String | Integer ] -> a -> Boolean`: an `Array` or `Object` that contains the provided index path
 * `isAlt :: a -> Boolean`: an ADT that provides `map` and `alt` methods
 * `isAlternative :: a -> Boolean`: an ADT that provides `alt`, `zero`, `map`, `ap`, `chain` and `of`methods
 * `isApplicative :: a -> Boolean`: an ADT that provides `map`, `ap` and `of` methods
@@ -47,8 +48,8 @@ description of their truth:
 * `isSetoid :: a -> Boolean`: an ADT that provides an `equals` method
 * `isString :: a -> Boolean`: String
 * `isTraversable :: a -> Boolean`: an ADT that provides `map` and `traverse` methods
-* `propEq: (String | Number) -> a -> Object -> Boolean`: an `Object` that contains the provided key
-* `propPathEq :: [String | Number] -> a -> Object -> Boolean`: an `Object` that contains the provided key in the provided traversal path
+* `propEq: (String | Interger) -> a -> Object -> Boolean`: an `Object` that contains the provided key
+* `propPathEq :: [ String | Integer ] -> a -> Object -> Boolean`: an `Object` that contains the provided key in the provided traversal path
 
 [pred]: ../crocks/Pred.html
 [ifelse]: logic-functions.html#ifelse

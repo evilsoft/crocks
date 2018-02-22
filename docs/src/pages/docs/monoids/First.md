@@ -206,7 +206,8 @@ a `First` instance will result in the underlying [`Maybe`][maybe].
 ```javascript
 import First from 'crocks/First'
 
-import { Nothing } from 'crocks/Maybe'
+import Maybe from 'crocks/Maybe'
+const { Nothing } = Maybe 
 import valueOf from 'crocks/pointfree/valueOf'
 
 valueOf(First(56))
@@ -256,7 +257,8 @@ a function will be returned that takes a given value and returns a `First`.
 
 ```javascript
 import First from 'crocks/First'
-import { Left, Right } from 'crocks/Either'
+import Either from 'crocks/Either'
+const { Left, Right } = Either 
 import eitherToFirst from 'crocks/First/eitherToFirst'
 
 import concat from 'crocks/pointfree/concat'
@@ -375,7 +377,8 @@ takes a given value and returns a `First`.
 
 ```javascript
 import First from 'crocks/First'
-import { Nothing, Just } from 'crocks/Maybe'
+import Maybe from 'crocks/Maybe'
+const { Nothing, Just } = Maybe 
 import maybeToFirst from 'crocks/First/maybeToFirst'
 
 import chain from 'crocks/pointfree/chain'
@@ -443,7 +446,8 @@ a function will be returned that takes a given value and returns a `First`.
 
 ```javascript
 import First from 'crocks/First'
-import { Err, Ok } from 'crocks/Result'
+import Result from 'crocks/Result'
+const { Err, Ok } = Result 
 import resultToFirst from 'crocks/First/resultToFirst'
 
 import isNumber from 'crocks/predicates/isNumber'

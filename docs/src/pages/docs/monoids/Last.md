@@ -203,7 +203,8 @@ will result in the underlying [`Maybe`][maybe].
 ```javascript
 import Last from 'crocks/Last'
 
-import { Nothing } from 'crocks/Maybe'
+import Maybe from 'crocks/Maybe'
+const { Nothing } = Maybe
 import valueOf from 'crocks/pointfree/valueOf'
 
 valueOf(Last(56))
@@ -253,7 +254,8 @@ a function will be returned that takes a given value and returns a `Last`.
 
 ```javascript
 import Last from 'crocks/Last'
-import { Left, Right } from 'crocks/Either'
+import Either from 'crocks/Either'
+const { Left, Right } = Either
 import eitherToLast from 'crocks/Last/eitherToLast'
 
 import concat from 'crocks/pointfree/concat'
@@ -373,7 +375,8 @@ a function will be returned that takes a given value and returns a `Last`.
 
 ```javascript
 import Last from 'crocks/Last'
-import { Nothing, Just } from 'crocks/Maybe'
+import Maybe from 'crocks/Maybe'
+const { Nothing, Just } = Maybe
 import maybeToLast from 'crocks/Last/maybeToLast'
 
 import chain from 'crocks/pointfree/chain'
@@ -441,7 +444,8 @@ a function will be returned that takes a given value and returns a `Last`.
 
 ```javascript
 import Last from 'crocks/Last'
-import { Err, Ok } from 'crocks/Result'
+import Result from 'crocks/Result'
+const { Err, Ok } = Result
 import resultToLast from 'crocks/Last/resultToLast'
 
 import isNumber from 'crocks/predicates/isNumber'

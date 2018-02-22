@@ -330,7 +330,8 @@ instance provides a `runWith` method that takes in an environment and returns
 the result of the computation.
 
 ```javascript
-import { ask } from 'crocks/Reader'
+import Reader from 'crocks/Reader'
+const { ask } = Reader
 import Pair from 'crocks/Pair'
 
 import fst from 'crocks/Pair/fst'

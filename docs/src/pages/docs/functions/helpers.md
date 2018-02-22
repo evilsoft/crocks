@@ -527,11 +527,12 @@ finally a `Foldable` structure of data. Once all arguments are provided,
 function, before sending it to the second argument of your reduction function.
 
 ```javascript
-import  Max from 'crocks/Max'
-import { Nothing } from 'crocks/Maybe'
-import  isNumber from 'crocks/predicates/isNumber'
-import  mapReduce from 'crocks/helpers/mapReduce'
-import  safeLift from 'crocks/Maybe/safeLift'
+import Max from 'crocks/Max'
+import Maybe from 'crocks/Maybe'
+const { Nothing } = Maybe
+import isNumber from 'crocks/predicates/isNumber'
+import mapReduce from 'crocks/helpers/mapReduce'
+import safeLift from 'crocks/Maybe/safeLift'
 
 const data =
   [ '100', null, 3, true, 1 ]

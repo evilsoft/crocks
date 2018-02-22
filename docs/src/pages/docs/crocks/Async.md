@@ -227,7 +227,8 @@ with [`nAry`][nary], which will provide a curried function that will return the
 desired `Async`.
 
 ```javascript
-import { fromPromise } from 'crocks/Async'
+import Async from 'crocks/Async'
+const { fromPromise } = Async
 
 import ifElse from 'crocks/logic/ifElse'
 import isNumber from 'crocks/predicates/isNumber'
@@ -302,7 +303,8 @@ Like [`fromPromise`](#frompromise), any curried interface will not be respected.
 If a curried interface is needed then [`nAry`][nary] can be used.
 
 ```javascript
-import { fromNode } from 'crocks/Async'
+import Async from 'crocks/Async'
+const { fromNode } = Async
 
 import curry from 'crocks/helpers/curry'
 import isNumber from 'crocks/predicates/isNumber'
@@ -372,7 +374,8 @@ instances resolve, then the entire instance is [`Resolved`](#resolved) with
 an `Array` containing all [`Resolved`](#resolved) values in their provided order.
 
 ```javascript
-import { all, Rejected, Resolved } from '../crocks/src/Async'
+import Async from '../crocks/src/Async'
+const { all, Rejected, Resolved } = Async
 
 // log :: String -> a -> a
 const log = label => x =>
@@ -440,7 +443,8 @@ wrapped value to the provided function and return the result in a
 new [`Resolved`](#resolved) instance.
 
 ```javascript
-import { Rejected, Resolved } from 'crocks/Async'
+import Async from 'crocks/Async'
+const { Rejected, Resolved } = Async
 
 import and from 'crocks/logic/and'
 import compose from 'crocks/helpers/compose'
@@ -502,7 +506,8 @@ Providing a means for a fallback or alternative value, `alt` combines (2)
 or the last [`Rejected`](#rejected) instance if it does not encounter a [`Resolved`](#resolved) instance.
 
 ```javascript
-import { Rejected, Resolved } from 'crocks/Async'
+import Async from 'crocks/Async'
+const { Rejected, Resolved } = Async
 
 // log :: String -> a -> a
 const log = label => x =>
@@ -545,7 +550,8 @@ provided to the second argument. This will leave all [`Resolved`](#resolved) ins
 untouched.
 
 ```javascript
-import { Rejected, Resolved } from 'crocks/Async'
+import Async from 'crocks/Async'
+const { Rejected, Resolved } = Async
 
 import assoc from 'crocks/helpers/assoc'
 import bimap from 'crocks/pointfree/bimap'
@@ -937,7 +943,8 @@ for integration with other `Promise` based libraries that are utilized in a
 given application, program or flow.
 
 ```javascript
-import { Rejected, Resolved } from 'crocks/Async'
+import Async from 'crocks/Async'
+const { Rejected, Resolved } = Async
 
 // log :: String -> a -> a
 const log = label => x =>
@@ -984,8 +991,10 @@ a transformed `Async` is returned. When passed an `Either` returning function,
 a function will be returned that takes a given value and returns an `Async`.
 
 ```javascript
-import { Resolved } from 'crocks/Async'
-import { Left, Right } from 'crocks/Either'
+import Async from 'crocks/Async'
+const { Resolved } = Async
+import Either from 'crocks/Either'
+const { Left, Right } = Either
 
 import eitherToAsync from 'crocks/Async/eitherToAsync'
 
@@ -1063,7 +1072,8 @@ a transformed `Async` is returned. When passed a [`First`][first] returning func
 a function will be returned that takes a given value and returns an `Async`.
 
 ```javascript
-import { Resolved } from 'crocks/Async'
+import Async from 'crocks/Async'
+const { Resolved } = Async
 import First from 'crocks/First'
 
 import firstToAsync from 'crocks/Async/firstToAsync'
@@ -1149,7 +1159,8 @@ a transformed `Async` is returned. When passed a [`Last`][last] returning functi
 a function will be returned that takes a given value and returns an `Async`.
 
 ```javascript
-import { Resolved } from 'crocks/Async'
+import Async from 'crocks/Async'
+const { Resolved } = Async
 import Last from 'crocks/Last'
 
 import lastToAsync from 'crocks/Async/lastToAsync'
@@ -1235,8 +1246,10 @@ a transformed `Async` is returned. When passed a [`Maybe`][maybe] returning func
 a function will be returned that takes a given value and returns an `Async`.
 
 ```javascript
-import { Resolved } from 'crocks/Async'
-import { Nothing, Just } from 'crocks/Maybe'
+import Async from 'crocks/Async'
+const { Resolved } = Async
+import Maybe from 'crocks/Maybe'
+const { Nothing, Just } = Maybe
 
 import maybeToAsync from 'crocks/Async/maybeToAsync'
 
@@ -1301,8 +1314,10 @@ a transformed `Async` is returned. When passed a `Result` returning function,
 a function will be returned that takes a given value and returns an `Async`.
 
 ```javascript
-import { Resolved } from 'crocks/Async'
-import { Err, Ok } from 'crocks/Result'
+import Async from 'crocks/Async'
+const { Resolved } = Async
+import Result from 'crocks/Result'
+const { Err, Ok }  = Result
 
 import resultToAsync from 'crocks/Async/resultToAsync'
 

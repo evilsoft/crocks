@@ -22,7 +22,8 @@ constructors to construct `Maybe` instances in most cases. You can use the
 `Just`.
 
 ```javascript
-import { Left, Right } from 'crocks/Maybe'
+import Maybe from 'crocks/Maybe'
+const { Just, Nothing } = Maybe
 
 import chain from 'crocks/pointfree/chain'
 import compose from 'crocks/helpers/compose'
@@ -90,7 +91,8 @@ will just return another `Nothing`. Anything passed to the constructor will
 be thrown out and mapped to `()`.
 
 ```javascript
-import { Left, Right } from 'crocks/Maybe'
+import Maybe from 'crocks/Maybe'
+const { Just, Nothing } = Maybe
 
 import chain from 'crocks/pointfree/chain'
 import isNumber from 'crocks/predicates/isNumber'
@@ -130,7 +132,8 @@ disjunction or a valid value.  `Just` will wrap any given value in
 a `Just`, signaling the validity of the wrapped value.
 
 ```javascript
-import { Left, Right } from 'crocks/Maybe'
+import Maybe from 'crocks/Maybe'
+const { Just, Nothing } = Maybe
 
 import compose from 'crocks/helpers/compose'
 import ifElse from 'crocks/logic/ifElse'
@@ -172,7 +175,8 @@ for `of` when working with functions that will work with
 ANY `Applicative`/`Monad`.
 
 ```javascript
-import { Just } from 'crocks/Maybe'
+import Maybe from 'crocks/Maybe'
+const { Just } = Maybe
 
 import curry from 'crocks/helpers/curry'
 import isString from 'crocks/predicates/isString'
@@ -218,7 +222,8 @@ When working with `Alt`s, `zero` provides a sort of `empty` or identity for
 can be used to fold a collection of `Alt`s under `alt`.
 
 ```javascript
-import { Left, Right } from 'crocks/Maybe'
+import Maybe from 'crocks/Maybe'
+const { Nothing, Just, zero } = Maybe
 
 import alt from 'crocks/pointfree/alt'
 import flip from 'crocks/combinators/flip'
@@ -271,7 +276,8 @@ of the `Maybe` the method is being called on. If the passed argument is not
 a `Maybe` or the underlying values are not equal, `equals` will return `false`.
 
 ```javascript
-import { Left, Right } from 'crocks/Maybe'
+import Maybe from 'crocks/Maybe'
+const { Nothing, Just } = Maybe
 
 import equals from 'crocks/pointfree/equals'
 
@@ -316,7 +322,8 @@ the (2) underlying `Semigroup`s. When called on a `Nothing` instance, `concat`
 will return a `Nothing`.
 
 ```javascript
-import { Nothing, Just } from 'crocks/Maybe'
+import Maybe from 'crocks/Maybe'
+const { Nothing, Just } = Maybe
 import Sum from 'crocks/Sum'
 
 import compose from 'crocks/helpers/compose'
@@ -369,7 +376,8 @@ the wrapped value. When ran on a `Just` instance, `map` will apply the wrapped
 value to the provided function and return the result in a new `Just` instance.
 
 ```javascript
-import { Nothing, Just } from 'crocks/Maybe'
+import Maybe from 'crocks/Maybe'
+const { Nothing, Just } = Maybe
 
 import assign from 'crocks/helpers/assign'
 import compose from 'crocks/helpers/compose'
@@ -435,7 +443,8 @@ if it does not have a `Just`. This can be used in conjunction with
 structure.
 
 ```javascript
-import { zero, Nothing, Just } from 'crocks/Maybe'
+import Maybe from 'crocks/Maybe'
+const { zero, Nothing, Just } = Maybe
 
 import alt from 'crocks/pointfree/alt'
 import isArray from 'crocks/predicates/isArray'
@@ -480,7 +489,8 @@ any of the inputs results in a `Nothing` than they will never be applied to
 the function and not provide exceptions or unexpected results.
 
 ```javascript
-import { Nothing, Just } from 'crocks/Maybe'
+import Maybe from 'crocks/Maybe'
+const { Nothing, Just } =  Maybe
 
 import compose from 'crocks/helpers/compose'
 import chain from 'crocks/pointfree/chain'
@@ -559,7 +569,8 @@ the case of when the `Maybe` instance is a `Nothing`. `sequence` can be derived
 from [`traverse`](#traverse) by passing it an `identity` function (`x => x`).
 
 ```javascript
-import { Left, Right } from 'crocks/Maybe'
+import Maybe from 'crocks/Maybe'
+const { Nothing, Just } = Maybe
 
 import Identity from 'crocks/Identity'
 import sequence from 'crocks/pointfree/sequence'
@@ -638,7 +649,8 @@ inner value will be passed to provided function, returning the result as the
 new instance.
 
 ```javascript
-import { Left, Right } from 'crocks/Maybe'
+import Maybe from 'crocks/Maybe'
+const { Nothing, Just } = Maybe
 
 import chain from 'crocks/pointfree/chain'
 import compose from 'crocks/helpers/compose'
@@ -701,7 +713,8 @@ instance wrapping the result of the function. The second function is used when
 returning a new `Just` instance wrapping the result of the second function.
 
 ```javascript
-import { Nothing, Just } from 'crocks/Maybe'
+import Maybe from 'crocks/Maybe'
+const { Nothing, Just } = Maybe
 
 import compose from 'crocks/helpers/compose'
 import composeK from 'crocks/helpers/composeK'
@@ -779,7 +792,8 @@ When the need to immediately map the result of optioning a `Maybe` arises,
 then [`either`](#either) may be employed to combine it in one operation.
 
 ```javascript
-import { Left, Right } from 'crocks/Maybe'
+import Maybe from 'crocks/Maybe'
+const { Nothing, Just } = Maybe
 
 Nothing()
   .option(0)
@@ -806,7 +820,8 @@ mapping.
 
 
 ```javascript
-import { Left, Right } from 'crocks/Maybe'
+import Maybe from 'crocks/Maybe'
+const { Nothing, Just } = Maybe
 
 import either from 'crocks/pointfree/either'
 
@@ -1103,8 +1118,10 @@ a transformed `Maybe` is returned. When passed an `Either` returning function,
 a function will be returned that takes a given value and returns a `Maybe`.
 
 ```javascript
-import { Left, Right } from 'crocks/Maybe'
-import { Left, Right } from 'crocks/Either'
+import Maybe from 'crocks/Maybe'
+const { Nothing, Just } = Maybe
+import Either from 'crocks/Either'
+const { Left, Right } = Either
 import eitherToMaybe from 'crocks/Maybe/eitherToMaybe'
 
 import constant from 'crocks/combinators/constant'
@@ -1158,7 +1175,8 @@ a transformed `Maybe` is returned. When passed a `First` returning function,
 a function will be returned that takes a given value and returns a `Maybe`.
 
 ```javascript
-import { Nothing, Just } from 'crocks/Maybe'
+import Maybe from 'crocks/Maybe'
+const { Nothing, Just } = Maybe
 import First from 'crocks/First'
 import firstToMaybe from 'crocks/Maybe/firstToMaybe'
 
@@ -1207,7 +1225,8 @@ a transformed `Maybe` is returned. When passed a `Last` returning function,
 a function will be returned that takes a given value and returns a `Maybe`.
 
 ```javascript
-import { Nothing, Just } from 'crocks/Maybe'
+import Maybe from 'crocks/Maybe'
+const { Nothing, Just } = Maybe
 import Last from 'crocks/Last'
 import lastToMaybe from 'crocks/Maybe/lastToMaybe'
 
@@ -1259,8 +1278,10 @@ a transformed `Maybe` is returned. When passed a `Result` returning function,
 a function will be returned that takes a given value and returns a `Maybe`.
 
 ```javascript
-import { Nothing, Just } from 'crocks/Maybe'
-import { Err, Ok } from 'crocks/Result'
+import Maybe from 'crocks/Maybe'
+const { Nothing, Just } = Maybe
+import Result from 'crocks/Result'
+const { Err, Ok } = Result
 import resultToMaybe from 'crocks/Maybe/resultToMaybe'
 
 import identity from 'crocks/combinators/identity'

@@ -19,7 +19,8 @@ for the "life" computation. If a referential type is used as the environment
 great care should be taken to not modify the value of the environment.
 
 ```javascript
-import { ask } from 'crocks/Reader'
+import Reader from 'crocks/Reader'
+const { ask } = Reader
 
 import concat from 'crocks/pointfree/concat'
 
@@ -316,7 +317,8 @@ instance provides a `runWith` method that takes in an environment and returns
 the result of the computation.
 
 ```javascript
-import { ask } from 'crocks/Reader'
+import Reader from 'crocks/Reader'
+const { ask } = Reader
 import Pair from 'crocks/Pair'
 
 import fst from 'crocks/Pair/fst'

@@ -68,7 +68,8 @@ the case of `First` the result of `empty` is `Nothing`. `empty` is available
 on both the Constructor and the Instance for convenience.
 
 ```javascript
-import { empty } from 'crocks/First'
+import First from 'crocks/First'
+const { empty } = First
 
 First.empty()
 //=> First( Nothing )
@@ -187,7 +188,8 @@ a `First` instance will result in the underlying `Maybe`.
 ```javascript
 import First from 'crocks/First'
 
-import { Nothing } from 'crocks/Maybe'
+import Maybe from 'crocks/Maybe'
+const { Nothing } = Maybe
 import valueOf from 'crocks/pointfree/valueOf'
 
 valueOf(First(56))
@@ -233,7 +235,8 @@ a function will be returned that takes a given value and returns a `First`.
 
 ```javascript
 import First from 'crocks/First'
-import { Left, Right } from 'crocks/Either'
+import Either from 'crocks/Either'
+const { Left, Right } = Either
 import eitherToFirst from 'crocks/First/eitherToFirst'
 
 import concat from 'crocks/pointfree/concat'
@@ -350,7 +353,8 @@ a function will be returned that takes a given value and returns a `First`.
 
 ```javascript
 import First from 'crocks/First'
-import { Nothing, Just } from 'crocks/Maybe'
+import Maybe from 'crocks/Maybe'
+const { Nothing, Just } = Maybe
 import maybeToFirst from 'crocks/First/maybeToFirst'
 
 import chain from 'crocks/pointfree/chain'
@@ -418,7 +422,8 @@ a function will be returned that takes a given value and returns a `First`.
 
 ```javascript
 import First from 'crocks/First'
-import { Err, Ok } from 'crocks/Result'
+import Result from 'crocks/Result'
+const { Err, Ok } = Result
 import resultToFirst from 'crocks/First/resultToFirst'
 
 import isNumber from 'crocks/predicates/isNumber'

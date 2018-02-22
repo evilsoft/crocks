@@ -148,7 +148,8 @@ by leaning on [`bimap`](#bimap) to "square things up".
 <!-- eslint-disable no-console -->
 <!-- eslint-disable no-sequences -->
 ```javascript
-import { Rejected } from 'crocks/Async'
+import Async from 'crocks/Async'
+const { Rejected } = Async
 
 // log :: String -> a -> a
 const log = label => x =>
@@ -184,7 +185,8 @@ wrapped value.
 <!-- eslint-disable no-console -->
 <!-- eslint-disable no-sequences -->
 ```javascript
-import { Resolved } from 'crocks/Async'
+import Async from 'crocks/Async'
+const { Resolved } = Async
 
 // log :: String -> a -> a
 const log = label => x =>
@@ -222,7 +224,8 @@ desired `Async`.
 <!-- eslint-disable no-console -->
 <!-- eslint-disable no-sequences -->
 ```javascript
-import { fromPromise } from 'crocks/Async'
+import Async from 'crocks/Async'
+const { fromPromise } = Async
 
 import ifElse from 'crocks/logic/ifElse'
 import isNumber from 'crocks/predicates/isNumber'
@@ -299,7 +302,8 @@ If a curried interface is needed then `nAry` can be used.
 <!-- eslint-disable no-console -->
 <!-- eslint-disable no-sequences -->
 ```javascript
-import { Rejected, Resolved } from 'crocks/Async'
+import Async from 'crocks/Async'
+const { fromNode } = Async
 
 import curry from 'crocks/helpers/curry'
 import isNumber from 'crocks/predicates/isNumber'
@@ -371,7 +375,8 @@ an `Array` containing all `Resolved` values in their provided order.
 <!-- eslint-disable no-console -->
 <!-- eslint-disable no-sequences -->
 ```javascript
-import { Rejected, Resolved } from '../crocks/src/Async'
+import Async from '../crocks/src/Async'
+const { all, Rejected, Resolved } = Async
 
 // log :: String -> a -> a
 const log = label => x =>
@@ -402,7 +407,8 @@ ANY `Applicative`/`Monad`.
 <!-- eslint-disable no-console -->
 <!-- eslint-disable no-sequences -->
 ```javascript
-import { Resolved } from '../crocks/src/Async'
+import Async from '../crocks/src/Async'
+const { Resolved } = Async
 
 // log :: String -> a -> a
 const log = label => x =>
@@ -438,7 +444,8 @@ new `Resolved` instance.
 <!-- eslint-disable no-console -->
 <!-- eslint-disable no-sequences -->
 ```javascript
-import { Rejected, Resolved } from 'crocks/Async'
+import Async from 'crocks/Async'
+const { Rejected, Resolved } = Async
 
 import and from 'crocks/logic/and'
 import compose from 'crocks/helpers/compose'
@@ -502,7 +509,8 @@ or the last `Rejected` instance if it does not encounter a `Resolved` instance.
 <!-- eslint-disable no-console -->
 <!-- eslint-disable no-sequences -->
 ```javascript
-import { Rejected, Resolved } from 'crocks/Async'
+import Async from 'crocks/Async'
+const { Rejected, Resolved } = Async
 
 // log :: String -> a -> a
 const log = label => x =>
@@ -547,7 +555,8 @@ untouched.
 <!-- eslint-disable no-console -->
 <!-- eslint-disable no-sequences -->
 ```javascript
-import { Rejected, Resolved } from 'crocks/Async'
+import Async from 'crocks/Async'
+const { Rejected, Resolved } = Async
 
 import assoc from 'crocks/helpers/assoc'
 import bimap from 'crocks/pointfree/bimap'
@@ -609,7 +618,8 @@ will be executed concurrently.
 <!-- eslint-disable no-console -->
 <!-- eslint-disable no-sequences -->
 ```javascript
-import { Rejected, Resolved } from 'crocks/Async'
+import Async from 'crocks/Async'
+const { Rejected, Resolved } = Async
 
 import liftA2 from 'crocks/helpers/liftA2'
 
@@ -678,7 +688,8 @@ new instance.
 <!-- eslint-disable no-console -->
 <!-- eslint-disable no-sequences -->
 ```javascript
-import { Rejected, Resolved } from 'crocks/Async'
+import Async from 'crocks/Async'
+const { Rejected, Resolved } = Async
 
 import chain from 'crocks/pointfree/chain'
 import compose from 'crocks/helpers/compose'
@@ -755,7 +766,8 @@ result of the second function.
 <!-- eslint-disable no-console -->
 <!-- eslint-disable no-sequences -->
 ```javascript
-import { Rejected, Resolved } from 'crocks/Async'
+import Async from 'crocks/Async'
+const { Rejected, Resolved } = Async
 
 import coalesce from 'crocks/pointfree/coalesce'
 
@@ -795,7 +807,8 @@ then `identity` functions can be used in one or both arguments.
 <!-- eslint-disable no-console -->
 <!-- eslint-disable no-sequences -->
 ```javascript
-import { Rejected, Resolved } from 'crocks/Async'
+import Async from 'crocks/Async'
+const { Rejected, Resolved } = Async
 
 import compose from 'crocks/helpers/compose'
 import identity from 'crocks/combinators/identity'
@@ -947,7 +960,8 @@ given application, program or flow.
 <!-- eslint-disable no-console -->
 <!-- eslint-disable no-sequences -->
 ```javascript
-import { Rejected, Resolved } from 'crocks/Async'
+import Async from 'crocks/Async'
+const { Rejected, Resolved } = Async
 
 // log :: String -> a -> a
 const log = label => x =>
@@ -992,8 +1006,10 @@ a function will be returned that takes a given value and returns an `Async`.
 <!-- eslint-disable no-console -->
 <!-- eslint-disable no-sequences -->
 ```javascript
-import { Resolved } from 'crocks/Async'
-import { Left, Right } from 'crocks/Either'
+import Async from 'crocks/Async'
+const { Resolved } = Async
+import Either from 'crocks/Either'
+const { Left, Right } = Either
 
 import eitherToAsync from 'crocks/Async/eitherToAsync'
 
@@ -1073,7 +1089,8 @@ a function will be returned that takes a given value and returns an `Async`.
 <!-- eslint-disable no-console -->
 <!-- eslint-disable no-sequences -->
 ```javascript
-import { Resolved } from 'crocks/Async'
+import Async from 'crocks/Async'
+const { Resolved } = Async
 import First from 'crocks/First'
 
 import firstToAsync from 'crocks/Async/firstToAsync'
@@ -1161,7 +1178,8 @@ a function will be returned that takes a given value and returns an `Async`.
 <!-- eslint-disable no-console -->
 <!-- eslint-disable no-sequences -->
 ```javascript
-import { Resolved } from 'crocks/Async'
+import Async from 'crocks/Async'
+const { Resolved } = Async
 import Last from 'crocks/Last'
 
 import lastToAsync from 'crocks/Async/lastToAsync'
@@ -1249,8 +1267,10 @@ a function will be returned that takes a given value and returns an `Async`.
 <!-- eslint-disable no-console -->
 <!-- eslint-disable no-sequences -->
 ```javascript
-import { Resolved } from 'crocks/Async'
-import { Nothing, Just } from 'crocks/Maybe'
+import Async from 'crocks/Async'
+const { Resolved } = Async
+import Maybe from 'crocks/Maybe'
+const { Nothing, Just } = Maybe
 
 import maybeToAsync from 'crocks/Async/maybeToAsync'
 
@@ -1317,8 +1337,10 @@ a function will be returned that takes a given value and returns an `Async`.
 <!-- eslint-disable no-console -->
 <!-- eslint-disable no-sequences -->
 ```javascript
-import { Resolved } from 'crocks/Async'
-import { Err, Ok } from 'crocks/Result'
+import Async from 'crocks/Async'
+const { Resolved } = Async
+import Result from 'crocks/Result'
+const { Err, Ok } = Result
 
 import resultToAsync from 'crocks/Async/resultToAsync'
 

@@ -10,6 +10,7 @@ const compose = curry(require('../core/compose'))
 const isFunction = require('../core/isFunction')
 const isObject = require('../core/isObject')
 const isSameType = require('../core/isSameType')
+const isString = require('../core/isString')
 const unit = require('../core/_unit')
 
 const reverseApply =
@@ -53,6 +54,7 @@ test('ReaderT', t => {
   t.ok(isFunction(ReaderMock.ask), 'provides an ask function')
   t.ok(isFunction(ReaderMock.lift), 'provides a lift function')
   t.ok(isFunction(ReaderMock.liftFn), 'provides a liftFn function')
+  t.ok(isString(r['@@type']), 'provides a @@type string')
 
   const err = /Reader\( MockCrock \): MockCrock returning function required/
   t.throws(f(), err, 'throws with no arguments')
@@ -105,6 +107,15 @@ test('ReaderT inspect', t => {
 
 test('ReaderT type', t => {
   t.equal(ReaderMock(unit).type(), 'Reader( MockCrock )', 'type returns Reader( innerType )')
+
+  t.end()
+})
+
+test('ReaderT @@type', t => {
+  const m = ReaderMock(unit)
+
+  t.equal(ReaderMock['@@type'], m['@@type'], 'static and instance versions are the same')
+  t.equal(m['@@type'], 'crocks/Reader@1( crocks/MockCrock@1 )', 'type returns crocks/Reader@1( crocks/MockCrock@1 )')
 
   t.end()
 })

@@ -6,6 +6,7 @@ const bindFunc = helpers.bindFunc
 
 const _compose = require('../core/compose')
 const isFunction = require('../core/isFunction')
+const isString = require('../core/isString')
 const isObject = require('../core/isObject')
 const unit = require('../core/_unit')
 
@@ -25,7 +26,7 @@ test('Arrow', t => {
 
   t.ok(isFunction(Arrow.id), 'provides an id function')
   t.ok(isFunction(Arrow.type), 'provides a type function')
-  t.ok(isFunction(Arrow['@@type']), 'provides a @@type function')
+  t.ok(isString(Arrow['@@type']), 'provides a @@type string')
 
   t.ok(isObject(Arrow(unit)), 'returns an object')
 
@@ -98,10 +99,8 @@ test('Arrow type', t => {
 test('Arrow @@type', t => {
   const a = Arrow(unit)
 
-  t.ok(isFunction(a['@@type']), 'is a function')
-
   t.equal(a['@@type'], Arrow['@@type'], 'static and instance versions are the same')
-  t.equal(a['@@type'](), 'crocks/Arrow@1', 'reports crocks/Arrow@1')
+  t.equal(a['@@type'], 'crocks/Arrow@1', 'reports crocks/Arrow@1')
 
   t.end()
 })

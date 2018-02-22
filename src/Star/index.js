@@ -34,13 +34,13 @@ function _Star(Monad) {
     Monad.type()
 
   const innerFullType =
-    Monad['@@type']()
+    Monad['@@type']
 
   const outerType =
     `${_type()}( ${innerType} )`
 
-  const typeFn =
-    () => `${__type()}( ${innerFullType} )`
+  const typeString =
+    `${__type}( ${innerFullType} )`
 
   const type =
     () => outerType
@@ -178,7 +178,7 @@ function _Star(Monad) {
       [fl.contramap]: contramap,
       [fl.map]: map,
       [fl.promap]: promap,
-      ['@@type']: typeFn,
+      ['@@type']: typeString,
       constructor: Star
     }
   }
@@ -187,7 +187,7 @@ function _Star(Monad) {
   Star.type = type
 
   Star[fl.id] = _id
-  Star['@@type'] = typeFn
+  Star['@@type'] = typeString
 
   Star['@@implements'] = _implements(
     [ 'compose', 'contramap', 'id', 'map', 'promap' ]

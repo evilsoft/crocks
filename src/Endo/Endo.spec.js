@@ -7,6 +7,7 @@ const bindFunc = helpers.bindFunc
 const compose = require('../core/compose')
 const isFunction = require('../core/isFunction')
 const isObject = require('../core/isObject')
+const isString = require('../core/isString')
 const isSameType = require('../core/isSameType')
 
 const constant = x => () => x
@@ -24,7 +25,7 @@ test('Endo', t => {
 
   t.ok(isFunction(Endo.empty), 'provides an empty function')
   t.ok(isFunction(Endo.type), 'provides a type function')
-  t.ok(isFunction(Endo['@@type']), 'provides a @@type function')
+  t.ok(isString(Endo['@@type']), 'provides a @@type string')
 
   const err = /Endo: Function value required/
   t.throws(Endo, err, 'throws with nothing')
@@ -112,10 +113,9 @@ test('Endo type', t => {
 
 test('Endo @@type', t => {
   const m = Endo(identity)
-  t.ok(isFunction(m['@@type']), 'is a function')
 
   t.equal(m['@@type'], Endo['@@type'], 'static and instance versions are the same')
-  t.equal(m['@@type'](), 'crocks/Endo@1', 'reports crocks/Endo@1')
+  t.equal(m['@@type'], 'crocks/Endo@1', 'reports crocks/Endo@1')
 
   t.end()
 })

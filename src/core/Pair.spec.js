@@ -11,6 +11,7 @@ const compose = curry(require('./compose'))
 const isFunction = require('./isFunction')
 const isObject = require('./isObject')
 const isSameType = require('./isSameType')
+const isString = require('./isString')
 const unit = require('./_unit')
 
 const identity = x => x
@@ -30,7 +31,7 @@ test('Pair core', t => {
   t.equals(Pair(0, 0).constructor, Pair, 'provides TypeRep on constructor')
 
   t.ok(isFunction(Pair.type), 'provides a type function')
-  t.ok(isFunction(Pair['@@type']), 'provides a @@type function')
+  t.ok(isString(Pair['@@type']), 'provides a @@type string')
 
   const err = /Pair: Must provide a first and second value/
   t.throws(m(), err, 'throws with no parameters')
@@ -91,10 +92,8 @@ test('Pair type', t => {
 test('Pair @@type', t => {
   const p = Pair(0, 0)
 
-  t.ok(isFunction(p['@@type']), 'is a function')
-
   t.equal(p['@@type'], Pair['@@type'], 'static and instance versions are the same')
-  t.equal(p['@@type'](), 'crocks/Pair@2', 'type returns crocks/Pair@2')
+  t.equal(p['@@type'], 'crocks/Pair@2', 'type returns crocks/Pair@2')
 
   t.end()
 })

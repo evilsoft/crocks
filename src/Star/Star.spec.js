@@ -9,6 +9,7 @@ const _compose = require('../core/compose')
 const isFunction = require('../core/isFunction')
 const isObject = require('../core/isObject')
 const isSameType = require('../core/isSameType')
+const isString = require('../core/isString')
 const unit = require('../core/_unit')
 
 const Pair = require('../core/Pair')
@@ -27,7 +28,7 @@ test('Star', t => {
   t.ok(isObject(Star(unit)), 'returns an object')
 
   t.ok(isFunction(Star.type), 'provides a type function')
-  t.ok(isFunction(Star['@@type']), 'provides a @@type function')
+  t.ok(isString(Star['@@type']), 'provides a @@type string')
 
   t.equals(Star(unit).constructor, Star, 'provides TypeRep on constructor')
 
@@ -57,7 +58,7 @@ test('Star construction', t => {
 
   t.ok(isFunction(Star.id), 'provides an id function')
   t.ok(isFunction(Star.type), 'provides a type function')
-  t.ok(isFunction(Star['@@type']), 'provides a @@type function')
+  t.ok(isString(Star['@@type']), 'provides a @@type string')
 
   t.ok(isObject(Star(unit)), 'returns an object')
 
@@ -128,9 +129,8 @@ test('Star type', t => {
 test('Star @@type', t => {
   const m = Star(unit)
 
-  t.ok(isFunction(m['@@type']), 'is a function')
   t.equal(m['@@type'], Star['@@type'], 'static and instance versions are the same')
-  t.equal(m['@@type'](), 'crocks/Star@1( crocks/MockCrock@1 )', 'reports crocks/Star@1 with embeded type')
+  t.equal(m['@@type'], 'crocks/Star@1( crocks/MockCrock@1 )', 'reports crocks/Star@1 with embeded type')
 
   t.end()
 })

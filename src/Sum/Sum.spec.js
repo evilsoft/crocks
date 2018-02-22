@@ -5,6 +5,7 @@ const bindFunc = helpers.bindFunc
 
 const isFunction = require('../core/isFunction')
 const isObject = require('../core/isObject')
+const isString  = require('../core/isString')
 
 const constant = x => () => x
 const identity = x => x
@@ -21,7 +22,7 @@ test('Sum', t => {
 
   t.ok(isFunction(Sum.empty), 'provides an empty function')
   t.ok(isFunction(Sum.type), 'provides a type function')
-  t.ok(isFunction(Sum['@@type']), 'provides a @@type function')
+  t.ok(isString(Sum['@@type']), 'provides a @@type string')
 
   const err = /Sum: Numeric value required/
   t.throws(Sum, err, 'throws with nothing')
@@ -98,9 +99,8 @@ test('Sum type', t => {
 test('Sum @@type', t => {
   const m = Sum(0)
 
-  t.ok(isFunction(m['@@type']), 'is a function')
   t.equal(m['@@type'], Sum['@@type'], 'static and instance versions are the same')
-  t.equal(m['@@type'](), 'crocks/Sum@1', 'reports crocks/Sum@1')
+  t.equal(m['@@type'], 'crocks/Sum@1', 'reports crocks/Sum@1')
 
   t.end()
 })

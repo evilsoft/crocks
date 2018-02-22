@@ -10,6 +10,7 @@ const compose = curry(require('../core/compose'))
 const isArray = require('../core/isArray')
 const isFunction = require('../core/isFunction')
 const isObject = require('../core/isObject')
+const isString = require('../core/isString')
 const isSameType = require('../core/isSameType')
 const unit = require('../core/_unit')
 
@@ -37,7 +38,7 @@ test('Either', t => {
   t.ok(isFunction(Either.Left), 'provides a Left function')
   t.ok(isFunction(Either.Right), 'provides a Right function')
   t.ok(isFunction(Either.type), 'provides a type function')
-  t.ok(isFunction(Either['@@type']), 'provides a @@type function')
+  t.ok(isString(Either['@@type']), 'provides a @@type string')
 
   const err = /Either: Must wrap something, try using Left or Right constructors/
   t.throws(Either, err, 'throws with no parameters')
@@ -136,14 +137,11 @@ test('Either type', t => {
 test('Either @@type', t => {
   const { Left, Right } = Either
 
-  t.ok(isFunction(Right(0)['@@type']), 'is a function on Right')
-  t.ok(isFunction(Left(0)['@@type']), 'is a function on Left')
-
   t.equal(Right(0)['@@type'], Either['@@type'], 'static and instance versions are the same for Right')
   t.equal(Left(0)['@@type'], Either['@@type'], 'static and instance versions are the same for Left')
 
-  t.equal(Right(0)['@@type'](), 'crocks/Either@1', 'returns crocks/Either@1 for Right')
-  t.equal(Left(0)['@@type'](), 'crocks/Either@1', 'returns crocks/Either@1 for Left')
+  t.equal(Right(0)['@@type'], 'crocks/Either@1', 'returns crocks/Either@1 for Right')
+  t.equal(Left(0)['@@type'], 'crocks/Either@1', 'returns crocks/Either@1 for Left')
 
   t.end()
 })

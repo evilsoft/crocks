@@ -11,6 +11,7 @@ const isArray = require('./isArray')
 const isFunction = require('./isFunction')
 const isObject = require('./isObject')
 const isSameType = require('./isSameType')
+const isString = require('./isString')
 const unit = require('./_unit')
 
 const constant = x => () => x
@@ -38,7 +39,7 @@ test('Maybe', t => {
   t.ok(isFunction(Maybe.Nothing), 'provides a Nothing constructor')
   t.ok(isFunction(Maybe.Just), 'provides a Just constructor')
   t.ok(isFunction(Maybe.type), 'provides a type function')
-  t.ok(isFunction(Maybe['@@type']), 'provides a @@type function')
+  t.ok(isString(Maybe['@@type']), 'provides a @@type string')
 
   const err = /Maybe: Must wrap something, try using Nothing or Just constructors/
   t.throws(Maybe, err, 'throws with no parameters')
@@ -120,13 +121,11 @@ test('Maybe type', t => {
 test('Maybe @@type', t => {
   const { Just, Nothing } = Maybe
 
-  t.ok(isFunction(Maybe(0)['@@type']), 'is a function')
-
   t.equal(Just(0)['@@type'], Maybe['@@type'], 'static and instance versions are the same for Just')
   t.equal(Nothing(0)['@@type'], Maybe['@@type'], 'static and instance versions are the same for Nothing')
 
-  t.equal(Just(0)['@@type'](), 'crocks/Maybe@1', 'type returns crocks/Maybe@1 for Just')
-  t.equal(Nothing()['@@type'](), 'crocks/Maybe@1', 'type returns crocks/Maybe@1 for Nothing')
+  t.equal(Just(0)['@@type'], 'crocks/Maybe@1', 'type returns crocks/Maybe@1 for Just')
+  t.equal(Nothing()['@@type'], 'crocks/Maybe@1', 'type returns crocks/Maybe@1 for Nothing')
 
   t.end()
 })

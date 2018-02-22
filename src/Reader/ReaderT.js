@@ -1,9 +1,12 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
+const VERSION = 1
+
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
 const _type = require('../core/types').type('Reader')()
+const _typeString = require('../core/types').typeFn(_type, VERSION)
 const fl = require('../core/flNames')
 
 const curry = require('../core/curry')
@@ -18,6 +21,9 @@ function _ReaderT(Monad) {
 
   const type =
     () => `${_type}( ${Monad.type()} )`
+
+  const typeString =
+    `${_typeString}( ${Monad['@@type']} )`
 
   const of =
     x => ReaderT(() => Monad.of(x))
@@ -116,6 +122,7 @@ function _ReaderT(Monad) {
       [fl.of]: of,
       [fl.map]: map,
       [fl.chain]: chain,
+      ['@@type']: typeString,
       constructor: ReaderT
     }
   }
@@ -127,6 +134,7 @@ function _ReaderT(Monad) {
   ReaderT.liftFn = curry(liftFn)
 
   ReaderT[fl.of] = of
+  ReaderT['@@type'] = typeString
 
   ReaderT['@@implements'] = _implements(
     [ 'ap', 'chain', 'map', 'of' ]

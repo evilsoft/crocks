@@ -26,7 +26,8 @@ the values from the `Pair` and discarding the unwanted portion.
 [`execWith`](#execwith) is used to pull the state.
 
 ```javascript
-import { get, put } from 'crocks/State'
+import State from 'crocks/State'
+const { get, put } = State
 
 import Pair from 'crocks/Pair'
 import constant from 'crocks/combinators/constant'
@@ -93,7 +94,8 @@ state will be mapped over any provided function that takes the same type as the
 state, with the result deposited in the resultant.
 
 ```javascript
-import { get } from 'crocks/State'
+import State from 'crocks/State'
+const { get } = State
 
 import chain from 'crocks/pointfree/chain'
 import compose from 'crocks/helpers/compose'
@@ -143,7 +145,8 @@ type of the state as it may not be expected in other stateful computations and
 can result in hard to track down bugs.
 
 ```javascript
-import { modify } from 'crocks/State'
+import State from 'crocks/State'
+const { modify } = State
 
 import mapProps from 'crocks/helpers/mapProps'
 
@@ -190,7 +193,8 @@ result in hard to debug bugs and destroys the relationship between stateful
 computations.
 
 ```javascript
-import { put } from 'crocks/State'
+import State from 'crocks/State'
+const { put } = State
 
 import compose from 'crocks/helpers/compose'
 import isString from 'crocks/predicates/isString'
@@ -238,7 +242,8 @@ with [`put`](#put) and [`modify`](#modify) to replace the `Unit` the resultant
 is set to for those construction helpers.
 
 ```javascript
-import { get, put } from 'crocks/State'
+import State from 'crocks/State'
+const { get, put } = State
 
 // updatePop :: String -> State String String
 const updatePop = x =>
@@ -278,7 +283,8 @@ composed together using function composition. This will give the same results
 but will only map the value once, instead of once for every mapping.
 
 ```javascript
-import { get } from 'crocks/State'
+import State from 'crocks/State'
+const { get } = State
 
 import compose from 'crocks/helpers/compose'
 import objOf from 'crocks/helpers/objOf'
@@ -332,7 +338,8 @@ be combined using the lifted function as a means to combine each of the
 instances' resultants.
 
 ```javascript
-import { get, modify } from 'crocks/State'
+import State from 'crocks/State'
+const { get, modify } = State
 
 import assoc from 'crocks/helpers/assoc'
 import propOr from 'crocks/helpers/propOr'
@@ -396,7 +403,8 @@ a unary function that must return a new `State` instance. `chain` returns a new
 `State` instance that will apply the computation when run.
 
 ```javascript
-import { get, modify } from 'crocks/State'
+import State from 'crocks/State'
+const { get, modify } = State
 
 // add :: Number -> State Number ()
 const add = x =>
@@ -454,7 +462,8 @@ initial state and will return the resulting `Pair` with the resultant in the
 
 
 ```javascript
-import { get, put } from 'crocks/State'
+import State from 'crocks/State'
+const { get, put } = State
 
 import K from 'crocks/combinators/constant'
 
@@ -489,7 +498,8 @@ the initial state and will return the resulting resultant discarding the state
 portion.
 
 ```javascript
-import { get } from 'crocks/State'
+import State from 'crocks/State'
+const { get } = State
 
 import concat from 'crocks/pointfree/concat'
 import flip from 'crocks/combinators/flip'
@@ -542,7 +552,8 @@ the initial state and will return the resulting state, discarding the resultant
 portion.
 
 ```javascript
-import { modify } from 'crocks/State'
+import State from 'crocks/State'
+const { modify } = State
 
 import compose from 'crocks/helpers/compose'
 import concat from 'crocks/pointfree/concat'
@@ -585,7 +596,8 @@ also return the resulting resultant, throwing away the resulting state.
 
 
 ```javascript
-import { get } from 'crocks/State'
+import State from 'crocks/State'
+const { get } = State
 
 import evalWith from 'crocks/State/evalWith'
 
@@ -629,7 +641,8 @@ to the [`execWith`](#execwith) method to the provided `State` instance, it will
 also return the resulting state, throwing away the resulting resultant.
 
 ```javascript
-import { modify } from 'crocks/State'
+import State from 'crocks/State'
+const { modify } = State
 
 import execWith from 'crocks/State/execWith'
 

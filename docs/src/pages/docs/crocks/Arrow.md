@@ -306,7 +306,7 @@ Arrow a b ~> (b -> c) -> Arrow a c
 ```
 
 `map` allows a function to be lifted that will map the right side of the
-`Arrow`. Where `contramap` is used to map the input, `map` maps the result
+`Arrow`. Where [`contramap`](#contramap) is used to map the input, `map` maps the result
 of the `Arrow`, allowing the result to be "adapted" or modified. The input type
 to the lifted function must match the result the `Arrow`.
 
@@ -349,8 +349,9 @@ Arrow a b ~> ((c -> a), (b -> d)) -> Arrow c d
 
 `promap` can be used to adapt BOTH ends of an `Arrow` allowing for existing
 `Arrow`s to be reused in places in a flow where the types do not line up. It
-combines both `map` and `conramap` into one operation. Just pass the `contramap`
-function as the first argument and the `map` function as the second.
+combines both [`map`](#map) and [`contramap`](#contramap) into one operation. 
+Just pass the function for [`contramap`](#contramap) as the first argument 
+and the function [`map`](#map) as the second.
 
 ```javascript
 import Arrow from 'crocks/Arrow'

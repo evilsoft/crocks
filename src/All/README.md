@@ -9,9 +9,9 @@ conjunction (AND) on their coerced `Boolean` values, mapping truth-y values to
 `true` and false-y values to `false`.
 
 ```javascript
-const All = require('crocks/All')
+import All from 'crocks/All'
 
-const mconcat = require('crocks/helpers/mconcat')
+import mconcat from 'crocks/helpers/mconcat'
 
 const trueNum = All(13)
 const falseNum = All(0)
@@ -51,7 +51,7 @@ the case of `All` the result of `empty` is `true`. `empty` is available on both
 the Constructor and the Instance for convenience.
 
 ```javascript
-const All = require('crocks/All')
+import All from 'crocks/All'
 
 All.empty() //=> All true
 
@@ -72,7 +72,7 @@ specified by the `Semigroup`. In the case of `All`, it will combine the (2)
 using logical AND (conjunction).
 
 ```javascript
-const All = require('crocks/All')
+import All from 'crocks/All'
 
 All(true).concat(All(true))   //=> All true
 All(true).concat(All(false))  //=> All false
@@ -93,7 +93,7 @@ helper functions that ship with `crocks`. Calling `valueOf` on an `All` instance
 will result in the underlying `Boolean` value.
 
 ```javascript
-const All = require('crocks/All')
+import All from 'crocks/All'
 
 All(0).valueOf()          //=> false
 All('string').valueOf() //=> true

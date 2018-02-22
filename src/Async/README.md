@@ -46,16 +46,16 @@ with `Async` is total and will cancel silently, without notification.
 <!-- eslint-disable no-console -->
 <!-- eslint-disable no-sequences -->
 ```javascript
-const Async = require('crocks/Async')
+import Async from 'crocks/Async'
 
-const maybeToAsync = require('crocks/Async/maybeToAsync')
+import maybeToAsync from 'crocks/Async/maybeToAsync'
 
-const First = require('crocks/First')
-const equals = require('crocks/pointfree/equals')
-const map = require('crocks/pointfree/map')
-const mreduceMap = require('crocks/helpers/mreduceMap')
-const pick = require('crocks/helpers/pick')
-const safe = require('crocks/Maybe/safe')
+import First from 'crocks/First'
+import equals from 'crocks/pointfree/equals'
+import map from 'crocks/pointfree/map'
+import mreduceMap from 'crocks/helpers/mreduceMap'
+import pick from 'crocks/helpers/pick'
+import safe from 'crocks/Maybe/safe'
 
 // log :: String -> a -> a
 const log = label => x =>
@@ -148,8 +148,7 @@ by leaning on [`bimap`](#bimap) to "square things up".
 <!-- eslint-disable no-console -->
 <!-- eslint-disable no-sequences -->
 ```javascript
-const Async = require('crocks/Async')
-const { Rejected } = Async
+import { Rejected } from 'crocks/Async'
 
 // log :: String -> a -> a
 const log = label => x =>
@@ -185,8 +184,7 @@ wrapped value.
 <!-- eslint-disable no-console -->
 <!-- eslint-disable no-sequences -->
 ```javascript
-const Async = require('crocks/Async')
-const { Resolved } = Async
+import { Resolved } from 'crocks/Async'
 
 // log :: String -> a -> a
 const log = label => x =>
@@ -224,11 +222,11 @@ desired `Async`.
 <!-- eslint-disable no-console -->
 <!-- eslint-disable no-sequences -->
 ```javascript
-const { fromPromise } = require('crocks/Async')
+import { fromPromise } from 'crocks/Async'
 
-const ifElse = require('crocks/logic/ifElse')
-const isNumber = require('crocks/predicates/isNumber')
-const nAry = require('crocks/helpers/nAry')
+import ifElse from 'crocks/logic/ifElse'
+import isNumber from 'crocks/predicates/isNumber'
+import nAry from 'crocks/helpers/nAry'
 
 // log :: String -> a -> a
 const log = label => x =>
@@ -301,12 +299,12 @@ If a curried interface is needed then `nAry` can be used.
 <!-- eslint-disable no-console -->
 <!-- eslint-disable no-sequences -->
 ```javascript
-const { fromNode } = require('crocks/Async')
+import { Rejected, Resolved } from 'crocks/Async'
 
-const curry = require('crocks/helpers/curry')
-const isNumber = require('crocks/predicates/isNumber')
-const nAry = require('crocks/helpers/nAry')
-const partial = require('crocks/helpers/partial')
+import curry from 'crocks/helpers/curry'
+import isNumber from 'crocks/predicates/isNumber'
+import nAry from 'crocks/helpers/nAry'
+import partial from 'crocks/helpers/partial'
 
 // log :: String -> a -> a
 const log = curry(label => x =>
@@ -373,7 +371,7 @@ an `Array` containing all `Resolved` values in their provided order.
 <!-- eslint-disable no-console -->
 <!-- eslint-disable no-sequences -->
 ```javascript
-const { all, Rejected, Resolved } = require('../crocks/src/Async')
+import { Rejected, Resolved } from '../crocks/src/Async'
 
 // log :: String -> a -> a
 const log = label => x =>
@@ -404,8 +402,7 @@ ANY `Applicative`/`Monad`.
 <!-- eslint-disable no-console -->
 <!-- eslint-disable no-sequences -->
 ```javascript
-const Async = require('../crocks/src/Async')
-const { Resolved } = Async
+import { Resolved } from '../crocks/src/Async'
 
 // log :: String -> a -> a
 const log = label => x =>
@@ -441,14 +438,14 @@ new `Resolved` instance.
 <!-- eslint-disable no-console -->
 <!-- eslint-disable no-sequences -->
 ```javascript
-const { Rejected, Resolved } = require('crocks/Async')
+import { Rejected, Resolved } from 'crocks/Async'
 
-const and = require('crocks/logic/and')
-const compose = require('crocks/helpers/compose')
-const constant = require('crocks/combinators/constant')
-const ifElse = require('crocks/logic/ifElse')
-const isNumber = require('crocks/predicates/isNumber')
-const map = require('crocks/pointfree/map')
+import and from 'crocks/logic/and'
+import compose from 'crocks/helpers/compose'
+import constant from 'crocks/combinators/constant'
+import ifElse from 'crocks/logic/ifElse'
+import isNumber from 'crocks/predicates/isNumber'
+import map from 'crocks/pointfree/map'
 
 // log :: String -> a -> a
 const log = label => x =>
@@ -505,7 +502,7 @@ or the last `Rejected` instance if it does not encounter a `Resolved` instance.
 <!-- eslint-disable no-console -->
 <!-- eslint-disable no-sequences -->
 ```javascript
-const { Rejected, Resolved } = require('crocks/Async')
+import { Rejected, Resolved } from 'crocks/Async'
 
 // log :: String -> a -> a
 const log = label => x =>
@@ -550,12 +547,12 @@ untouched.
 <!-- eslint-disable no-console -->
 <!-- eslint-disable no-sequences -->
 ```javascript
-const { Rejected, Resolved } = require('crocks/Async')
+import { Rejected, Resolved } from 'crocks/Async'
 
-const assoc = require('crocks/helpers/assoc')
-const bimap = require('crocks/pointfree/bimap')
-const compose = require('crocks/helpers/compose')
-const objOf = require('crocks/helpers/objOf')
+import assoc from 'crocks/helpers/assoc'
+import bimap from 'crocks/pointfree/bimap'
+import compose from 'crocks/helpers/compose'
+import objOf from 'crocks/helpers/objOf'
 
 // log :: String -> a -> a
 const log = label => x =>
@@ -612,10 +609,9 @@ will be executed concurrently.
 <!-- eslint-disable no-console -->
 <!-- eslint-disable no-sequences -->
 ```javascript
-const Async = require('crocks/Async')
-const { Rejected, Resolved } = Async
+import { Rejected, Resolved } from 'crocks/Async'
 
-const liftA2 = require('crocks/helpers/liftA2')
+import liftA2 from 'crocks/helpers/liftA2'
 
 // log :: String -> a -> a
 const log = label => x =>
@@ -682,18 +678,17 @@ new instance.
 <!-- eslint-disable no-console -->
 <!-- eslint-disable no-sequences -->
 ```javascript
-const Async = require('crocks/Async')
-const { Rejected, Resolved } = Async
+import { Rejected, Resolved } from 'crocks/Async'
 
-const chain = require('crocks/pointfree/chain')
-const compose = require('crocks/helpers/compose')
-const composeK = require('crocks/helpers/composeK')
-const constant = require('crocks/combinators/constant')
-const flip = require('crocks/combinators/flip')
-const ifElse = require('crocks/logic/ifElse')
-const isString = require('crocks/predicates/isString')
-const prop = require('crocks/Maybe/prop')
-const maybeToAsync = require('crocks/Async/maybeToAsync')
+import chain from 'crocks/pointfree/chain'
+import compose from 'crocks/helpers/compose'
+import composeK from 'crocks/helpers/composeK'
+import constant from 'crocks/combinators/constant'
+import flip from 'crocks/combinators/flip'
+import ifElse from 'crocks/logic/ifElse'
+import isString from 'crocks/predicates/isString'
+import prop from 'crocks/Maybe/prop'
+import maybeToAsync from 'crocks/Async/maybeToAsync'
 
 // log :: String -> a -> a
 const log = label => x =>
@@ -760,10 +755,9 @@ result of the second function.
 <!-- eslint-disable no-console -->
 <!-- eslint-disable no-sequences -->
 ```javascript
-const Async = require('crocks/Async')
-const { Rejected, Resolved } = Async
+import { Rejected, Resolved } from 'crocks/Async'
 
-const coalesce = require('crocks/pointfree/coalesce')
+import coalesce from 'crocks/pointfree/coalesce'
 
 // log :: String -> a -> a
 const log = label => x =>
@@ -801,12 +795,11 @@ then `identity` functions can be used in one or both arguments.
 <!-- eslint-disable no-console -->
 <!-- eslint-disable no-sequences -->
 ```javascript
-const Async = require('crocks/Async')
-const { Rejected, Resolved } = Async
+import { Rejected, Resolved } from 'crocks/Async'
 
-const compose = require('crocks/helpers/compose')
-const identity = require('crocks/combinators/identity')
-const swap = require('crocks/pointfree/swap')
+import compose from 'crocks/helpers/compose'
+import identity from 'crocks/combinators/identity'
+import swap from 'crocks/pointfree/swap'
 
 // log :: String -> a -> a
 const log = label => x =>
@@ -898,9 +891,9 @@ function provided will be silently executed.
 <!-- eslint-disable no-console -->
 <!-- eslint-disable no-sequences -->
 ```javascript
-const Async = require('crocks/Async')
+import Async from 'crocks/Async'
 
-const compose = require('crocks/helpers/compose')
+import compose from 'crocks/helpers/compose'
 
 // log :: String -> a -> a
 const log = label => x =>
@@ -954,7 +947,7 @@ given application, program or flow.
 <!-- eslint-disable no-console -->
 <!-- eslint-disable no-sequences -->
 ```javascript
-const { Rejected, Resolved } = require('crocks/Async')
+import { Rejected, Resolved } from 'crocks/Async'
 
 // log :: String -> a -> a
 const log = label => x =>
@@ -999,14 +992,14 @@ a function will be returned that takes a given value and returns an `Async`.
 <!-- eslint-disable no-console -->
 <!-- eslint-disable no-sequences -->
 ```javascript
-const { Resolved } = require('crocks/Async')
-const { Left, Right } = require('crocks/Either')
+import { Resolved } from 'crocks/Async'
+import { Left, Right } from 'crocks/Either'
 
-const eitherToAsync = require('crocks/Async/eitherToAsync')
+import eitherToAsync from 'crocks/Async/eitherToAsync'
 
-const and = require('crocks/logic/and')
-const ifElse = require('crocks/logic/ifElse')
-const isNumber = require('crocks/predicates/isNumber')
+import and from 'crocks/logic/and'
+import ifElse from 'crocks/logic/ifElse'
+import isNumber from 'crocks/predicates/isNumber'
 
 // log :: String -> a -> a
 const log = label => x =>
@@ -1080,15 +1073,15 @@ a function will be returned that takes a given value and returns an `Async`.
 <!-- eslint-disable no-console -->
 <!-- eslint-disable no-sequences -->
 ```javascript
-const { Resolved } = require('crocks/Async')
-const First = require('crocks/First')
+import { Resolved } from 'crocks/Async'
+import First from 'crocks/First'
 
-const firstToAsync = require('crocks/Async/firstToAsync')
+import firstToAsync from 'crocks/Async/firstToAsync'
 
-const Pred = require('crocks/Pred')
-const isString = require('crocks/predicates/isString')
-const mconcatMap = require('crocks/helpers/mconcatMap')
-const safe = require('crocks/Maybe/safe')
+import Pred from 'crocks/Pred'
+import isString from 'crocks/predicates/isString'
+import mconcatMap from 'crocks/helpers/mconcatMap'
+import safe from 'crocks/Maybe/safe'
 
 // log :: String -> a -> a
 const log = label => x =>
@@ -1168,15 +1161,15 @@ a function will be returned that takes a given value and returns an `Async`.
 <!-- eslint-disable no-console -->
 <!-- eslint-disable no-sequences -->
 ```javascript
-const { Resolved } = require('crocks/Async')
-const Last = require('crocks/Last')
+import { Resolved } from 'crocks/Async'
+import Last from 'crocks/Last'
 
-const lastToAsync = require('crocks/Async/lastToAsync')
+import lastToAsync from 'crocks/Async/lastToAsync'
 
-const Pred = require('crocks/Pred')
-const isString = require('crocks/predicates/isString')
-const mconcatMap = require('crocks/helpers/mconcatMap')
-const safe = require('crocks/Maybe/safe')
+import Pred from 'crocks/Pred'
+import isString from 'crocks/predicates/isString'
+import mconcatMap from 'crocks/helpers/mconcatMap'
+import safe from 'crocks/Maybe/safe'
 
 // log :: String -> a -> a
 const log = label => x =>
@@ -1256,16 +1249,16 @@ a function will be returned that takes a given value and returns an `Async`.
 <!-- eslint-disable no-console -->
 <!-- eslint-disable no-sequences -->
 ```javascript
-const { Resolved } = require('crocks/Async')
-const { Nothing, Just } = require('crocks/Maybe')
+import { Resolved } from 'crocks/Async'
+import { Nothing, Just } from 'crocks/Maybe'
 
-const maybeToAsync = require('crocks/Async/maybeToAsync')
+import maybeToAsync from 'crocks/Async/maybeToAsync'
 
-const and = require('crocks/logic/and')
-const isEmpty = require('crocks/predicates/isEmpty')
-const isArray = require('crocks/predicates/isArray')
-const not = require('crocks/logic/not')
-const safe = require('crocks/Maybe/safe')
+import and from 'crocks/logic/and'
+import isEmpty from 'crocks/predicates/isEmpty'
+import isArray from 'crocks/predicates/isArray'
+import not from 'crocks/logic/not'
+import safe from 'crocks/Maybe/safe'
 
 // log :: String -> a -> a
 const log = label => x =>
@@ -1324,14 +1317,14 @@ a function will be returned that takes a given value and returns an `Async`.
 <!-- eslint-disable no-console -->
 <!-- eslint-disable no-sequences -->
 ```javascript
-const { Resolved } = require('crocks/Async')
-const { Err, Ok } = require('crocks/Result')
+import { Resolved } from 'crocks/Async'
+import { Err, Ok } from 'crocks/Result'
 
-const resultToAsync = require('crocks/Async/resultToAsync')
+import resultToAsync from 'crocks/Async/resultToAsync'
 
-const identity = require('crocks/combinators/identity')
-const isNumber = require('crocks/predicates/isNumber')
-const tryCatch = require('crocks/Result/tryCatch')
+import identity from 'crocks/combinators/identity'
+import isNumber from 'crocks/predicates/isNumber'
+import tryCatch from 'crocks/Result/tryCatch'
 
 // log :: String -> a -> a
 const log = label => x =>

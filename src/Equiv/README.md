@@ -21,9 +21,9 @@ calling the method [`compareWith`](#comparewith), providing both values for
 comparison.
 
 ```javascript
-const Equiv = require('crocks/Equiv')
+import Equiv from 'crocks/Equiv'
 
-const equals = require('crocks/pointfree/equals')
+import equals from 'crocks/pointfree/equals'
 
 // toString :: a -> String
 const toString =
@@ -65,9 +65,9 @@ the case of `Equiv` the result of `empty` is an `Equiv` that will always return
 convenience.
 
 ```javascript
-const Equiv = require('crocks/Equiv')
+import Equiv from 'crocks/Equiv'
 
-const equals = require('crocks/pointfree/equals')
+import equals from 'crocks/pointfree/equals'
 
 const eq =
   Equiv(equals)
@@ -104,12 +104,12 @@ specified by the `Semigroup`. In the case of `Equiv`, the results of both
 `Equiv`s are combined under logical conjunction.
 
 ```javascript
-const Equiv = require('crocks/Equiv')
+import Equiv from 'crocks/Equiv'
 
-const compareWith = require('crocks/pointfree/compareWith')
-const equals = require('crocks/pointfree/equals')
-const isSameType = require('crocks/predicates/isSameType')
-const propOr = require('crocks/helpers/propOr')
+import compareWith from 'crocks/pointfree/compareWith'
+import equals from 'crocks/pointfree/equals'
+import isSameType from 'crocks/predicates/isSameType'
+import propOr from 'crocks/helpers/propOr'
 
 // objLength :: Object -> Number
 const objLength =
@@ -176,9 +176,9 @@ This will return a new `Equiv` matching the input type of the provided
 function.
 
 ```javascript
-const Equiv = require('crocks/Equiv')
+import Equiv from 'crocks/Equiv'
 
-const equals = require('crocks/pointfree/equals')
+import equals from 'crocks/pointfree/equals'
 
 // length :: String -> Number
 const length =
@@ -226,11 +226,11 @@ helper functions that ship with `crocks`. Calling `valueOf` on an `Equiv`
 instance will result in the underlying curried equivalence function.
 
 ```javascript
-const Equiv = require('crocks/Equiv')
+import Equiv from 'crocks/Equiv'
 
-const compose = require('crocks/helpers/compose')
-const equals = require('crocks/pointfree/equals')
-const propOr = require('crocks/helpers/propOr')
+import compose from 'crocks/helpers/compose'
+import equals from 'crocks/pointfree/equals'
+import propOr from 'crocks/helpers/propOr'
 
 // toLower :: String -> String
 const toLower =
@@ -288,7 +288,7 @@ Due to the laziness of this type, complicated comparisons can be built out from
 combining and mapping smaller, simpler units of equivalence comparison.
 
 ```javascript
-const Equiv = require('crocks/Equiv')
+import Equiv from 'crocks/Equiv'
 
 // both :: Equiv Boolean Boolean
 const both =

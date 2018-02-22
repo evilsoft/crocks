@@ -8,7 +8,7 @@ Assign Object
 `Object.assign` on the (2) `Object`s.
 
 ```javascript
-const Assign = require('crocks/Assign')
+import Assign from 'crocks/Assign'
 
 const first = { name: 'Bob' }
 const last = { lastName: 'Smith' }
@@ -36,7 +36,7 @@ In the case of `Assign` the result of `empty` is an empty `Object`. `empty` is
 available on both the Constructor and the Instance for convenience.
 
 ```javascript
-const Assign = require('crocks/Assign')
+import Assign from 'crocks/Assign'
 
 Assign.empty()
 //=> Assign {}
@@ -64,7 +64,7 @@ combine (2) objects, overwriting the first `Object`'s previous values with
 the values of the second `Object`.
 
 ```javascript
-const Assign = require('crocks/Assign')
+import Assign from 'crocks/Assign'
 
 Assign({})
   .concat(Assign({}))
@@ -96,7 +96,7 @@ for some of the helper functions that ship with `crocks`. Calling `valueOf`
 on an `Assign` instance will result in the underlying `Object`.
 
 ```javascript
-const Assign = require('crocks/Assign')
+import Assign from 'crocks/Assign'
 
 Assign({})
   .valueOf()

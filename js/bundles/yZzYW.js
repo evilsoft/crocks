@@ -28367,7 +28367,7 @@ exports.default = parseFromAnchor;
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TWCOf", function() { return TWCOf; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "yZzYW", function() { return yZzYW; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28383,11 +28383,11 @@ goog.loadModule(function(exports) {
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace TWCOf.
+ * @fileoverview Templates in namespace yZzYW.
  * @public
  */
 
-goog.module('TWCOf.incrementaldom');
+goog.module('yZzYW.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28419,7 +28419,7 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var param1715 = function() {
+  var param682 = function() {
     ie_open('p');
       itext('All functions in this group have a signature of ');
       ie_open('code');
@@ -28466,7 +28466,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
     ie_open('ul');
       ie_open('li');
         ie_open('code');
-          itext('hasProp :: (String | Number) -> a -> Boolean');
+          itext('hasProp :: (String | Integer) -> a -> Boolean');
         ie_close('code');
         itext(': an ');
         ie_open('code');
@@ -28477,6 +28477,20 @@ function $render(opt_data, opt_ignored, opt_ijData) {
           itext('Object');
         ie_close('code');
         itext(' that contains the provided index or key');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('hasPropPath :: [ String | Integer ] -> a -> Boolean');
+        ie_close('code');
+        itext(': an ');
+        ie_open('code');
+          itext('Array');
+        ie_close('code');
+        itext(' or ');
+        ie_open('code');
+          itext('Object');
+        ie_close('code');
+        itext(' that contains the provided index path');
       ie_close('li');
       ie_open('li');
         ie_open('code');
@@ -28882,7 +28896,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
       ie_close('li');
       ie_open('li');
         ie_open('code');
-          itext('propEq: (String | Number) -> a -> Object -> Boolean');
+          itext('propEq: (String | Interger) -> a -> Object -> Boolean');
         ie_close('code');
         itext(': an ');
         ie_open('code');
@@ -28892,7 +28906,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
       ie_close('li');
       ie_open('li');
         ie_open('code');
-          itext('propPathEq :: [String | Number] -> a -> Object -> Boolean');
+          itext('propPathEq :: [ String | Integer ] -> a -> Object -> Boolean');
         ie_close('code');
         itext(': an ');
         ie_open('code');
@@ -28910,11 +28924,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'value', opt_data.site.title);
     ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({content: param1715}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param682}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'TWCOf.render';
+  $render.soyTemplateName = 'yZzYW.render';
 }
 
 exports.render.params = ["page","site"];
@@ -28924,8 +28938,8 @@ return exports;
 
 });
 
-class TWCOf extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(TWCOf, templates);
+class yZzYW extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(yZzYW, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
@@ -29011,23 +29025,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var TWCOf = function (_Component) {
-  _inherits(TWCOf, _Component);
+var yZzYW = function (_Component) {
+  _inherits(yZzYW, _Component);
 
-  function TWCOf() {
-    _classCallCheck(this, TWCOf);
+  function yZzYW() {
+    _classCallCheck(this, yZzYW);
 
-    return _possibleConstructorReturn(this, (TWCOf.__proto__ || Object.getPrototypeOf(TWCOf)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (yZzYW.__proto__ || Object.getPrototypeOf(yZzYW)).apply(this, arguments));
   }
 
-  return TWCOf;
+  return yZzYW;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(TWCOf, _predicateFunctionsSoy2.default);
+_metalSoy2.default.register(yZzYW, _predicateFunctionsSoy2.default);
 
-exports.default = TWCOf;
+exports.default = yZzYW;
 
 /***/ })
 ],[263]);

@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([6,31,32,33],[
+webpackJsonppageComponent([10,31,32,33],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -28368,16 +28368,12 @@ exports.default = parseFromAnchor;
 /* 234 */,
 /* 235 */,
 /* 236 */,
-/* 237 */,
-/* 238 */,
-/* 239 */,
-/* 240 */,
-/* 241 */
+/* 237 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WYVsD", function() { return WYVsD; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hGtUm", function() { return hGtUm; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28389,15 +28385,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var templates;
 goog.loadModule(function(exports) {
 
-// This file was automatically generated from Max.soy.
+// This file was automatically generated from Assign.soy.
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace WYVsD.
+ * @fileoverview Templates in namespace hGtUm.
  * @public
  */
 
-goog.module('WYVsD.incrementaldom');
+goog.module('hGtUm.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28431,23 +28427,27 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var param2146 = function() {
-    $templateAlias2({code: 'Max Number', mode: 'haskell'}, null, opt_ijData);
+  var param1839 = function() {
+    $templateAlias2({code: 'Assign Object', mode: 'haskell'}, null, opt_ijData);
     ie_open('p');
       ie_open('code');
-        itext('Max');
+        itext('Assign');
       ie_close('code');
       itext(' is a ');
       ie_open('code');
         itext('Monoid');
       ie_close('code');
-      itext(' that will combines (2) ');
+      itext(' that will combine (2) objects under assignment using');
       ie_open('code');
-        itext('Number');
+        itext('Object.assign');
       ie_close('code');
-      itext('s, resulting in the largest of the two.');
+      itext(' on the (2) ');
+      ie_open('code');
+        itext('Object');
+      ie_close('code');
+      itext('s.');
     ie_close('p');
-    $templateAlias2({code: 'const Max = require(\'crocks/Max\')\nconst mconcat = require(\'crocks/helpers/mconcat\')\n\nMax(76)\n//=> Max 76\n\nmconcat(Max, [ 95, 102, 56 ])\n//=> Max 102\n\nMax(100)\n  .concat(Max(10))\n//=> Max 100\n\nMax.empty()\n  .concat(Max(100))\n//=> Max 100', mode: 'javascript'}, null, opt_ijData);
+    $templateAlias2({code: 'const Assign = require(\'crocks/Assign\')\n\nconst first = { name: \'Bob\' }\nconst last = { lastName: \'Smith\' }\n\nAssign(first)\n  .concat(Assign(last))\n//=> Assign { name: \'Bob\', lastName: \'Smith\' }', mode: 'javascript'}, null, opt_ijData);
     ie_open('article', null, null,
         'id', 'topic-implements');
       ie_open('h2');
@@ -28483,7 +28483,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
           itext('empty');
         ie_close('a');
       ie_close('h4');
-      $templateAlias2({code: 'Max.empty :: () -> Max', mode: 'haskell'}, null, opt_ijData);
+      $templateAlias2({code: 'Assign.empty :: () -> Assign', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
         ie_open('code');
           itext('empty');
@@ -28496,17 +28496,17 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_open('code');
           itext('concat');
         ie_close('code');
-        itext('ed to any other value, it will return the other value. In the case of ');
+        itext('ed to object other value, it will return the other value. In the case of ');
         ie_open('code');
-          itext('Max');
+          itext('Assign');
         ie_close('code');
         itext(' the result of ');
         ie_open('code');
           itext('empty');
         ie_close('code');
-        itext(' is ');
+        itext(' is an empty ');
         ie_open('code');
-          itext('-Infinity');
+          itext('Object');
         ie_close('code');
         itext('. ');
         ie_open('code');
@@ -28514,7 +28514,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_close('code');
         itext(' is available on both the Constructor and the Instance for convenience.');
       ie_close('p');
-      $templateAlias2({code: 'const Max = require(\'crocks/Max\')\n\nMax.empty()\n//=> Max -Infinity\n\nMax.empty()\n  .concat(Max.empty())\n//=> Max -Infinity\n\nMax(32)\n  .concat(Max.empty())\n//=> Max 32\n\nMax.empty()\n  .concat(Max(34))\n//=> Max 34', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'const Assign = require(\'crocks/Assign\')\n\nAssign.empty()\n//=> Assign {}\n\nAssign({})\n  .concat(Assign.empty())\n//=> Assign {}\n\nAssign({ a: 1 })\n  .concat(Assign.empty())\n//=> Assign { a: 1 }', mode: 'javascript'}, null, opt_ijData);
     ie_close('article');
     ie_open('article', null, null,
         'id', 'topic-instance');
@@ -28532,7 +28532,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
           itext('concat');
         ie_close('a');
       ie_close('h4');
-      $templateAlias2({code: 'Max ~> Max -> Max', mode: 'haskell'}, null, opt_ijData);
+      $templateAlias2({code: 'Assign ~> Assign -> Assign', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
         ie_open('code');
           itext('concat');
@@ -28547,15 +28547,19 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_close('code');
         itext('. In the case of ');
         ie_open('code');
-          itext('Max');
+          itext('Assign');
         ie_close('code');
-        itext(', it will result in the largest of the (2) ');
+        itext(', it will combine (2) objects, overwriting the first ');
         ie_open('code');
-          itext('Number');
+          itext('Object');
         ie_close('code');
-        itext('s.');
+        itext('\'s previous values with the values of the second ');
+        ie_open('code');
+          itext('Object');
+        ie_close('code');
+        itext('.');
       ie_close('p');
-      $templateAlias2({code: 'const Max = require(\'crocks/Max\')\n\nMax(23)\n  .concat(Max(13))\n//=> Max 23\n\nMax(-23)\n  .concat(Max(-32))\n//=> Max -23\n\nMax.empty()\n  .concat(Max(Infinity))\n//=> Max Infinity', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'const Assign = require(\'crocks/Assign\')\n\nAssign({})\n  .concat(Assign({}))\n//=> Assign {}\n\nAssign({ a: 1 })\n  .concat(Assign({ b: 2 }))\n//=> Assign { a: 1, b: 2 }\n\nAssign({ a: 1, b: 2 })\n  .concat(Assign({ a: 3, b: 4 }))\n//=> Assign { a: 3, b: 4 }\n\nAssign({ b: 4 })\n  .concat(Assign({ a: 1 }))\n//=> Assign { b: 4, a: 1 }', mode: 'javascript'}, null, opt_ijData);
       ie_open('h4');
         ie_open('a', null, null,
             'id', 'valueof',
@@ -28563,7 +28567,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
           itext('valueOf');
         ie_close('a');
       ie_close('h4');
-      $templateAlias2({code: 'Max ~> () -> Number', mode: 'haskell'}, null, opt_ijData);
+      $templateAlias2({code: 'Assign ~> () -> Object', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
         ie_open('code');
           itext('valueOf');
@@ -28580,7 +28584,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_open('code');
           itext('valueOf');
         ie_close('code');
-        itext(' are not necessarily a');
+        itext(' are not necessarily a ');
         ie_open('code');
           itext('Comonad');
         ie_close('code');
@@ -28592,17 +28596,17 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_open('code');
           itext('valueOf');
         ie_close('code');
-        itext(' on a ');
+        itext('on an ');
         ie_open('code');
-          itext('Max');
+          itext('Assign');
         ie_close('code');
         itext(' instance will result in the underlying ');
         ie_open('code');
-          itext('Number');
+          itext('Object');
         ie_close('code');
         itext('.');
       ie_close('p');
-      $templateAlias2({code: 'const Max = require(\'crocks/Max\')\n\nMax(4)\n  .valueOf()\n//=> 4\n\nMax.empty()\n  .valueOf()\n//=> -Infinity\n\nMax(34)\n  .concat(Max(21))\n  .valueOf()\n//=> 34', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'const Assign = require(\'crocks/Assign\')\n\nAssign({})\n  .valueOf()\n//=> {}\n\nAssign({ a: 1 })\n  .valueOf()\n//=> { a: 1 }\n\nAssign({ a: 1 })\n  .concat({ b: 25 })\n  .valueOf()\n//=> { a: 1, b: 25 }', mode: 'javascript'}, null, opt_ijData);
     ie_close('article');
     ie_open('input', null, null,
         'type', 'hidden',
@@ -28613,11 +28617,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'value', opt_data.site.title);
     ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({content: param2146}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param1839}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'WYVsD.render';
+  $render.soyTemplateName = 'hGtUm.render';
 }
 
 exports.render.params = ["page","site"];
@@ -28627,14 +28631,18 @@ return exports;
 
 });
 
-class WYVsD extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(WYVsD, templates);
+class hGtUm extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(hGtUm, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
 
 
 /***/ }),
+/* 238 */,
+/* 239 */,
+/* 240 */,
+/* 241 */,
 /* 242 */,
 /* 243 */,
 /* 244 */,
@@ -28660,7 +28668,12 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(WYVsD, templates);
 /* 264 */,
 /* 265 */,
 /* 266 */,
-/* 267 */
+/* 267 */,
+/* 268 */,
+/* 269 */,
+/* 270 */,
+/* 271 */,
+/* 272 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28696,9 +28709,9 @@ __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _MaxSoy = __webpack_require__(241);
+var _AssignSoy = __webpack_require__(237);
 
-var _MaxSoy2 = _interopRequireDefault(_MaxSoy);
+var _AssignSoy2 = _interopRequireDefault(_AssignSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28708,23 +28721,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var WYVsD = function (_Component) {
-  _inherits(WYVsD, _Component);
+var hGtUm = function (_Component) {
+  _inherits(hGtUm, _Component);
 
-  function WYVsD() {
-    _classCallCheck(this, WYVsD);
+  function hGtUm() {
+    _classCallCheck(this, hGtUm);
 
-    return _possibleConstructorReturn(this, (WYVsD.__proto__ || Object.getPrototypeOf(WYVsD)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (hGtUm.__proto__ || Object.getPrototypeOf(hGtUm)).apply(this, arguments));
   }
 
-  return WYVsD;
+  return hGtUm;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(WYVsD, _MaxSoy2.default);
+_metalSoy2.default.register(hGtUm, _AssignSoy2.default);
 
-exports.default = WYVsD;
+exports.default = hGtUm;
 
 /***/ })
-],[267]);
+],[272]);

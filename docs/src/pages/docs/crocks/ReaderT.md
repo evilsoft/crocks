@@ -41,11 +41,11 @@ function must return the type of the `Monad` the `ReaderT` wraps, which in turn
 will be wrapped in another
 
 ```javascript
-const ReaderT = require('crocks/Reader/ReaderT')
-const Maybe = require('crocks/Maybe')
+import ReaderT from 'crocks/Reader/ReaderT'
+import Maybe from 'crocks/Maybe'
 
-const safe = require('crocks/Maybe/safe')
-const isNumber = require('crocks/predicates/isNumber')
+import safe from 'crocks/Maybe/safe'
+import isNumber from 'crocks/predicates/isNumber'
 
 const MaybeReader = ReaderT(Maybe)
 const { ask } = MaybeReader
@@ -93,14 +93,14 @@ Although, [`liftFn`](#liftfn) can be used to remove the composition boilerplate
 and promote and `a -> m b` function.
 
 ```javascript
-const ReaderT = require('crocks/Reader/ReaderT')
-const Async = require('crocks/Async')
+import ReaderT from 'crocks/Reader/ReaderT'
+import Async from 'crocks/Async'
 
-const compose = require('crocks/helpers/compose')
-const curry = require('crocks/helpers/curry')
-const flip = require('crocks/combinators/flip')
-const runWith = require('crocks/pointfree/runWith')
-const tap = require('crocks/helpers/tap')
+import compose from 'crocks/helpers/compose'
+import curry from 'crocks/helpers/curry'
+import flip from 'crocks/combinators/flip'
+import runWith from 'crocks/pointfree/runWith'
+import tap from 'crocks/helpers/tap'
 
 const AsyncReader = ReaderT(Async)
 
@@ -153,10 +153,10 @@ the removal of composition boilerplate that results from using the
 [`lift`](#lift) helper.
 
 ```javascript
-const ReaderT = require('crocks/Reader/ReaderT')
-const Either = require('crocks/Either')
+import ReaderT from 'crocks/Reader/ReaderT'
+import Either from 'crocks/Either'
 
-const ifElse = require('crocks/logic/ifElse')
+import ifElse from 'crocks/logic/ifElse'
 
 const EitherReader = ReaderT(Either)
 
@@ -199,11 +199,11 @@ Lifts a value into a `ReaderT` using the `of` method of the underlying `Monad`.
 value.
 
 ```javascript
-const ReaderT = require('../crocks/src/Reader/ReaderT')
+import ReaderT from '../crocks/src/Reader/ReaderT'
 
-const Maybe = require('crocks/Maybe')
-const Either = require('crocks/Either')
-const State = require('crocks/State')
+import Maybe from 'crocks/Maybe'
+import Either from 'crocks/Either'
+import State from 'crocks/State'
 
 const MaybeReader = ReaderT(Maybe)
 const EitherReader = ReaderT(Either)
@@ -241,11 +241,11 @@ This method will ignore the outer `ReaderT`, and be applied directly to the
 underlying `Monad`.
 
 ```javascript
-const ReaderT = require('crocks/Reader/ReaderT')
-const Maybe = require('crocks/Maybe')
+import ReaderT from 'crocks/Reader/ReaderT'
+import Maybe from 'crocks/Maybe'
 
-const isString = require('crocks/predicates/isString')
-const safe = require('crocks/Maybe/safe')
+import isString from 'crocks/predicates/isString'
+import safe from 'crocks/Maybe/safe'
 
 const MaybeReader =
   ReaderT(Maybe)
@@ -286,16 +286,16 @@ underlying `Monad`. A `ReaderT` of the underlying `Monad` must be provided,
 which allows access to the environment.
 
 ```javascript
-const Pair = require('crocks/Pair')
-const ReaderT = require('crocks/Reader/ReaderT')
-const Result = require('crocks/Result')
+import Pair from 'crocks/Pair'
+import ReaderT from 'crocks/Reader/ReaderT'
+import Result from 'crocks/Result'
 
-const fst = require('crocks/Pair/fst')
-const snd = require('crocks/Pair/snd')
+import fst from 'crocks/Pair/fst'
+import snd from 'crocks/Pair/snd'
 
-const ifElse = require('crocks/logic/ifElse')
-const isNumber = require('crocks/predicates/isNumber')
-const liftA2 = require('crocks/helpers/liftA2')
+import ifElse from 'crocks/logic/ifElse'
+import isNumber from 'crocks/predicates/isNumber'
+import liftA2 from 'crocks/helpers/liftA2'
 
 const { Err, Ok } = Result
 
@@ -357,9 +357,9 @@ being able to read from the environment. This method only accepts functions
 of the form `Monad m => a -> ReaderT e (m b)`.
 
 ```javascript
-const ReaderT = require('../crocks/src/Reader/ReaderT')
-const Maybe = require('crocks/Maybe')
-const prop = require('crocks/Maybe/prop')
+import ReaderT from '../crocks/src/Reader/ReaderT'
+import Maybe from 'crocks/Maybe'
+import prop from 'crocks/Maybe/prop'
 
 const MaybeReader =
   ReaderT(Maybe)
@@ -416,13 +416,13 @@ given environment. A `ReaderT` instance comes equipped with a `runWith` method
 that accepts an environment and returns the resulting `Monad`.
 
 ```javascript
-const ReaderT = require('../crocks/src/Reader/ReaderT')
-const Maybe = require('crocks/Maybe')
+import ReaderT from '../crocks/src/Reader/ReaderT'
+import Maybe from 'crocks/Maybe'
 
 const MaybeReader = ReaderT(Maybe)
 const { ask, liftFn } = MaybeReader
 
-const prop = require('crocks/Maybe/prop')
+import prop from 'crocks/Maybe/prop'
 
 // data :: Object
 const data = {

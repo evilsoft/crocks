@@ -12,7 +12,7 @@ approach. Below is a small code same to contrast the difference between the two
 calling styles:
 
 ```javascript
-const crocks = require('crocks')
+import crocks from 'crocks'
 
 const {
   compose, map, safe, isInteger

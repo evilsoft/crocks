@@ -211,9 +211,9 @@ to represent your flow in a more left-to-right manner, then [`pipeS`](#pipes) is
 provided for such things.
 
 ```javascript
-const {
+import {
   Arrow, bimap, branch, composeS, merge, mreduce, Sum
-} = require('crocks')
+} from 'crocks'
 
 const length =
   xs => xs.length
@@ -387,13 +387,13 @@ curried functions (i.e. `x => y => x + y`) will need to be explicitly curried
 using [`curry`](#curry) to ensure proper application of the arguments.
 
 ```javascript
-const compose = require('crocks/helpers/compose')
-const curry = require('crocks/helpers/curry')
-const liftN = require('crocks/helpers/liftN')
-const isNumber = require('crocks/predicates/isNumber')
-const isString = require('crocks/predicates/isString')
-const map = require('crocks/pointfree/map')
-const safe = require('crocks/Maybe/safe')
+import compose from 'crocks/helpers/compose'
+import curry from 'crocks/helpers/curry'
+import liftN from 'crocks/helpers/liftN'
+import isNumber from 'crocks/predicates/isNumber'
+import isString from 'crocks/predicates/isString'
+import map from 'crocks/pointfree/map'
+import safe from 'crocks/Maybe/safe'
 
 // apply :: (((*) -> b), [ a ]) -> b
 const apply = fn => xs =>
@@ -476,7 +476,7 @@ provided mapping function.
 of the original `Object` is know.
 
 ```javascript
-const mapProps = require('crocks/helpers/mapProps')
+import mapProps from 'crocks/helpers/mapProps'
 
 const add =
   x => y => x + y
@@ -527,11 +527,11 @@ finally a `Foldable` structure of data. Once all arguments are provided,
 function, before sending it to the second argument of your reduction function.
 
 ```javascript
-const  Max = require('crocks/Max')
-const { Nothing } = require('crocks/Maybe')
-const  isNumber = require('crocks/predicates/isNumber')
-const  mapReduce = require('crocks/helpers/mapReduce')
-const  safeLift = require('crocks/Maybe/safeLift')
+import  Max from 'crocks/Max'
+import { Nothing } from 'crocks/Maybe'
+import  isNumber from 'crocks/predicates/isNumber'
+import  mapReduce from 'crocks/helpers/mapReduce'
+import  safeLift from 'crocks/Maybe/safeLift'
 
 const data =
   [ '100', null, 3, true, 1 ]
@@ -679,7 +679,7 @@ arguments to it. You will get back a curried function that is ready to accept
 the rest of the arguments.
 
 ```javascript
-const { map, partial } = require('crocks')
+import { map, partial } from 'crocks'
 
 const max10 =
   partial(Math.min, 10)
@@ -736,7 +736,7 @@ chaining together a series of functions with the signature:
 functions left-to-right.
 
 ```javascript
-const { curry, List, Writer } = require('../crocks')
+import { curry, List, Writer } from '../crocks'
 
 const OpWriter =
   Writer(List)
@@ -808,9 +808,9 @@ with them all composed together. The only difference between the two, is that
 the opposite.
 
 ```javascript
-const {
+import {
   curry, isNumber, pipeS, prop, safeLift, Star
-} = require('../crocks')
+} from '../crocks'
 
 const add = curry(
   (x, y) => x + y
@@ -855,7 +855,7 @@ and return the wrapped value if the key/index is defined. If the key/index is no
 defined however, you will get back the provided default value.
 
 ```javascript
-const propOr = require('crocks/helpers/propOr')
+import propOr from 'crocks/helpers/propOr'
 
 const data = {
   foo: 'bar',
@@ -902,7 +902,7 @@ valid, it will return the value. But if at any point that path "breaks" it will
 give you back the default value.
 
 ```javascript
-const propPathOr = require('crocks/helpers/propPathOr')
+import propPathOr from 'crocks/helpers/propPathOr'
 
 const data = {
   foo: {

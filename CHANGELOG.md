@@ -1,5 +1,39 @@
 # Change Log for `crocks`
 
+v0.9.0 -- February 21, 2018
+--
+### Breaking
+* Removed original `applyTo` combinator that was the A combinator.
+* Renamed `reverseApply` to `applyTo` for the T or `thrush` combinator.
+* Changed Sanctuary `@@type` on all types from a function `() -> String` to a `String` property on type constructors and instances.
+* Updated the following for a consistent experience for each:
+  * `predicates/hasProp`
+  * `predicates/propEq`
+  * `predicates/propPathEq`
+  * `helpers/propOr`
+  * `helpers/propPathOr`
+  * `Maybe/prop`
+  * `Maybe/propPath`
+
+ Each will now do the following:
+   * For predicates, failure cases result in a `false`.
+   * For helpers, failure case will return the default value provided.
+   * for Maybe functions failure case results in a `Nothing`
+   * Act as identity when an empty array is passed in (all path based functions)
+   * Throws unless `String` or `Integer` is provided for key names or in a key path.
+   * Throws if empty `String` is found in a key name or key path.
+   * Allows anything as the "data" but will default to a failure case if `null`, `undefined` or `NaN` is passed in. All other types traverse as normal.
+   * Will exit with a failure on path functions if `null`, `undefined` or `NaN` values are encountered during a traversal. (ex, `[ 'a', 'b' ]` on `{ a: null }`)
+
+### Additions
+* Predicates:
+  * `hasPropPath`
+
+### Pull Requests
+* [#218 - move over to sanctuary string types](https://github.com/evilsoft/crocks/pull/218)
+* [#225 - All Object Traversal Functions Behave the Same](https://github.com/evilsoft/crocks/pull/225)
+* [#226 - Remove original `applyTo` and replace with `thrush](https://github.com/evilsoft/crocks/pull/226)
+
 v0.8.6 -- February 18, 2018
 --
 ### Additions

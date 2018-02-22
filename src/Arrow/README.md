@@ -7,11 +7,13 @@ Arrow a b
 `Arrow` is a `Profunctor` that lifts a function of type `a -> b` and allows for
 lazy execution of the function. `Arrow` can be considered a `Strong Profunctor`
 if the underlying data running throw the `Arrow` is a `Pair`, typically in the
-form of `Arrow (Pair a c) (Pair b d)`. This will allow you to split execution
-into two distinct paths, applying `Arrow` to a specific path. The parameters of
-`Arrow` represent the function that it wraps, with the input being on the left,
-and the output on the right. When an `Arrow` wraps an endomorphism, the signature
-typically represents both the input and output.
+form of `Arrow (Pair a c) (Pair b d)`. 
+
+This will allow you to split execution into two distinct paths, applying `Arrow`
+to a specific path. The parameters of `Arrow` represent the function that it
+wraps, with the input being on the left, and the output on the right. When an
+`Arrow` wraps an endomorphism, the signature typically represents both the input
+and output.
 
 ```javascript
 const Arrow = require('crocks/Arrow')
@@ -291,7 +293,7 @@ Arrow a b ~> (b -> c) -> Arrow a c
 ```
 
 `map` allows a function to be lifted that will map the right side of the
-`Arrow`. Where `contramap` is used to map the input, `map` maps the result
+`Arrow`. Where [`contramap`](#contramap) is used to map the input, `map` maps the result
 of the `Arrow`, allowing the result to be "adapted" or modified. The input type
 to the lifted function must match the result the `Arrow`.
 
@@ -334,8 +336,9 @@ Arrow a b ~> ((c -> a), (b -> d)) -> Arrow c d
 
 `promap` can be used to adapt BOTH ends of an `Arrow` allowing for existing
 `Arrow`s to be reused in places in a flow where the types do not line up. It
-combines both `map` and `conramap` into one operation. Just pass the `contramap`
-function as the first argument and the `map` function as the second.
+combines both [`map`](#map) and [`contramap`](#contramap) into one operation. 
+Just pass the function for [`contramap`](#contramap) as the first argument 
+and the function [`map`](#map) as the second.
 
 ```javascript
 const Arrow = require('crocks/Arrow')

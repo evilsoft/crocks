@@ -14,7 +14,7 @@ const unit = require('../core/_unit')
 const constant = x => () => x
 const identity = x => x
 
-const reverseApply =
+const applyTo =
   x => fn => fn(x)
 
 const IO = require('.')
@@ -214,7 +214,7 @@ test('IO of properties (Applicative)', t => {
   t.equal(m.ap(IO.of(3)).run(), IO.of(identity(3)).run(), 'homomorphism')
 
   const a = x => m.ap(IO.of(x))
-  const b = x => IO.of(reverseApply(x)).ap(m)
+  const b = x => IO.of(applyTo(x)).ap(m)
 
   t.equal(a(3).run(), b(3).run(), 'interchange')
 

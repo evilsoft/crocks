@@ -16,7 +16,7 @@ const unit = require('../core/_unit')
 
 const identity = x => x
 
-const reverseApply =
+const applyTo =
   x => fn => fn(x)
 
 const _Writer = require('.')
@@ -309,7 +309,7 @@ test('Writer of properties (Applicative)', t => {
   t.equal(m.ap(Writer.of(3)).valueOf(), Writer.of(identity(3)).valueOf(), 'homomorphism')
 
   const a = x => m.ap(Writer.of(x))
-  const b = x => Writer.of(reverseApply(x)).ap(m)
+  const b = x => Writer.of(applyTo(x)).ap(m)
 
   t.equal(a(3).valueOf(), b(3).valueOf(), 'interchange')
 

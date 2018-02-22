@@ -2,7 +2,7 @@
 description: "Combinators API"
 layout: "notopic"
 title: "Combinators"
-weight: 1
+weight: 10
 ---
 
 #### applyTo
@@ -10,12 +10,14 @@ weight: 1
 `crocks/combinators/applyTo`
 
 ```haskell
-applyTo :: (a -> b) -> a -> b
+applyTo :: a -> (a -> b) -> b
 ```
 
-Seems really silly, but is quite useful for a lot of things. It takes a function
-and a value and then returns the result of that function with the argument
-applied.
+Ever run into a situation where you have a value but do not have a function to
+apply it to? Well this little bird, named Thrush, is there to help out. Just
+give it a value and it will give you back a function ready to take a function.
+Once that function is provided, it will return the result of applying your value
+to that function.
 
 #### composeB
 
@@ -70,20 +72,6 @@ This function and [`constant`](#constant) are the workhorses of writing code
 with this library. It quite simply is just a function that when you pass it
 something, it returns that thing right back to you. So simple, I will leave it
 as an exercise to reason about why this is so powerful and important.
-
-#### reverseApply
-
-`crocks/combinators/reverseApply`
-
-```haskell
-reverseApply :: a -> (a -> b) -> b
-```
-
-Ever run into a situation where you have a value but do not have a function to
-apply it to? Well this little bird, named Thrush, is there to help out. Just
-give it a value and it will give you back a function ready to take a function.
-Once that function is provided, it will return the result of applying your value
-to that function.
 
 #### substitution
 

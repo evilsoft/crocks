@@ -19,7 +19,7 @@ const Pred = require('../Pred')
 const constant = x => () => x
 const identity = x => x
 
-const reverseApply =
+const applyTo =
   x => fn => fn(x)
 
 const List = require('./List')
@@ -577,7 +577,7 @@ test('List of properties (Applicative)', t => {
   t.same(m.ap(List.of(3)).valueOf(), List.of(identity(3)).valueOf(), 'homomorphism')
 
   const a = x => m.ap(List.of(x))
-  const b = x => List.of(reverseApply(x)).ap(m)
+  const b = x => List.of(applyTo(x)).ap(m)
 
   t.same(a(3).valueOf(), b(3).valueOf(), 'interchange')
 

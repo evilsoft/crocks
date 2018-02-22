@@ -4,14 +4,14 @@
 const curry = require('../core/curry')
 const isFunction = require('../core/isFunction')
 
-// Applicator
-// applyTo :: (a -> b) -> a -> b
-function applyTo(fn, x) {
-  if(!isFunction(fn)) {
-    throw new TypeError('applyTo: Function required for first argument')
+// Application (Thrush)
+// applyTo :: a -> (a -> b) -> b
+function applyTo(x, f) {
+  if(!isFunction(f)) {
+    throw new TypeError('applyTo: Function required for second argument')
   }
 
-  return fn(x)
+  return f(x)
 }
 
 module.exports = curry(applyTo)

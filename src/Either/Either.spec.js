@@ -17,7 +17,7 @@ const unit = require('../core/_unit')
 const either =
   (f, g) => m => m.either(f, g)
 
-const reverseApply =
+const applyTo =
   x => fn => fn(x)
 
 const constant = x => () => x
@@ -701,7 +701,7 @@ test('Either of properties (Applicative)', t => {
   )
 
   const a = x => r.ap(Either.of(x))
-  const b = x => Either.of(reverseApply(x)).ap(r)
+  const b = x => Either.of(applyTo(x)).ap(r)
 
   t.equal(
     a(3).either(constant(0),identity),

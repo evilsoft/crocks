@@ -15,7 +15,7 @@ const unit = require('../core/_unit')
 const constant = x => () => x
 const identity = x => x
 
-const reverseApply =
+const applyTo =
   x => fn => fn(x)
 
 const Reader = require('.')
@@ -288,7 +288,7 @@ test('Reader of properties (Applicative)', t => {
   t.equal(m.ap(Reader.of(3)).runWith(e), Reader.of(identity(3)).runWith(e), 'homomorphism')
 
   const a = x => m.ap(Reader.of(x))
-  const b = x => Reader.of(reverseApply(x)).ap(m)
+  const b = x => Reader.of(applyTo(x)).ap(m)
 
   t.equal(a(3).runWith(e), b(3).runWith(e), 'interchange')
 

@@ -2,7 +2,7 @@
 title: "Point-free Functions"
 description: "Point-free Functions API"
 layout: "notopic"
-weight: 5
+weight: 50
 ---
 
 While it can seem natural to work with all these containers in a fluent fashion,

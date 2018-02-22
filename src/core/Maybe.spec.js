@@ -20,7 +20,7 @@ const identity = x => x
 const either =
   (f, g) => m => m.either(f, g)
 
-const reverseApply =
+const applyTo =
   x => fn => fn(x)
 
 const Maybe = require('./Maybe')
@@ -557,7 +557,7 @@ test('Maybe of properties (Applicative)', t => {
   )
 
   const a = x => m.ap(Maybe.of(x))
-  const b = x => Maybe.of(reverseApply(x)).ap(m)
+  const b = x => Maybe.of(applyTo(x)).ap(m)
 
   t.equal(a(3).option('Nothing'), b(3).option('Other'), 'interchange Just')
 

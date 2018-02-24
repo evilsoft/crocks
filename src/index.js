@@ -5,10 +5,22 @@
 const combinators = require('./combinators')
 const helpers = require('./helpers')
 const logic = require('./logic')
-const monoids = require('./monoids')
 const pointfree = require('./pointfree')
 const predicates = require('./predicates')
 const transforms = require('./transforms')
+
+const monoids = {
+  All: require('./All'),
+  Any: require('./Any'),
+  Assign: require('./Assign'),
+  Endo: require('./Endo'),
+  First: require('./First'),
+  Last: require('./Last'),
+  Max: require('./Max'),
+  Min: require('./Min'),
+  Prod: require('./Prod'),
+  Sum: require('./Sum'),
+}
 
 const crocks = {
   Arrow: require('./Arrow'),

@@ -19,6 +19,7 @@ module.exports = {
     "computed-property-spacing": [ "error", "never" ],
     "curly": [ "error", "all" ],
     "eqeqeq": [ "error", "always" ],
+    "eol-last": [ "error", "always" ],
     "func-call-spacing": [ "error", "never" ],
     "indent": [ "error", 2 ],
     "linebreak-style": [ "error", "unix" ],

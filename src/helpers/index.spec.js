@@ -92,4 +92,4 @@ test('helpers entry', t => {
   t.equal(unit, unit, 'provides the unit helper')
 
   t.end()
-})  
+})

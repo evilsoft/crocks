@@ -21,7 +21,7 @@ module.exports = {
     "eqeqeq": [ "error", "always" ],
     "func-call-spacing": [ "error", "never" ],
     "indent": [ "error", 2 ],
-    "linebreak-style": [ "error", "unix" ],
+    "linebreak-style": 0,
     "no-else-return": [ "error" ],
     "no-empty-function": [ "error" ],
     "no-lone-blocks": [ "error" ],

@@ -29,7 +29,7 @@ const _types = {
   'State': () => 'State',
   'Sum': () => 'Sum',
   'Unit': () => 'Unit',
-  'Writer': () => 'Writer',
+  'Writer': () => 'Writer'
 }
 
 const type =

@@ -34,5 +34,5 @@ module.exports = {
   isString: require('./isString'),
   isTraversable: require('./isTraversable'),
   propEq: require('./propEq'),
-  propPathEq: require('./propPathEq'),
+  propPathEq: require('./propPathEq')
 }

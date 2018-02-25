@@ -6,6 +6,6 @@ module.exports = {
     filename: 'crocks.js',
     path: path.resolve(__dirname, 'build', 'dist'),
     library: 'crocks',
-    libraryTarget: 'umd',
+    libraryTarget: 'umd'
   }
 }

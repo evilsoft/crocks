@@ -19,7 +19,7 @@ const monoids = {
   Max: require('./Max'),
   Min: require('./Min'),
   Prod: require('./Prod'),
-  Sum: require('./Sum'),
+  Sum: require('./Sum')
 }
 
 const crocks = {

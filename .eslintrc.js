@@ -16,6 +16,7 @@ module.exports = {
     "arrow-spacing": [ "error" ],
     "block-spacing": [ "error" ],
     "camelcase": [ "error" ],
+    "comma-dangle": [ "error", "never" ],
     "computed-property-spacing": [ "error", "never" ],
     "curly": [ "error", "all" ],
     "eqeqeq": [ "error", "always" ],

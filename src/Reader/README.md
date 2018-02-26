@@ -20,9 +20,10 @@ great care should be taken to not modify the value of the environment.
 
 ```javascript
 import Reader from 'crocks/Reader'
-const { ask } = Reader
 
 import concat from 'crocks/pointfree/concat'
+
+const { ask } = Reader
 
 // greet :: String -> Reader String String
 const greet = greeting =>
@@ -66,6 +67,7 @@ environment to a different type or value.
 
 ```javascript
 import Reader from 'crocks/Reader'
+
 const { ask } = Reader
 
 // add :: Number -> Number -> Number
@@ -103,10 +105,11 @@ for a wonderful starting point for some of the more complicated flows.
 
 ```javascript
 import Reader from 'crocks/Reader'
-const { ask } = Reader
 
 import objOf from 'crocks/helpers/objOf'
 import thrush from 'crocks/combinators/applyTo'
+
+const { ask } = Reader
 
 // add :: Number -> Number -> Number
 const add =
@@ -143,13 +146,14 @@ result of the lifted function.
 
 ```javascript
 import Reader from 'crocks/Reader'
-const { ask } = Reader
 
 import assign from 'crocks/helpers/assign'
 import B from 'crocks/combinators/composeB'
 import objOf from 'crocks/helpers/objOf'
 import option from 'crocks/pointfree/option'
 import prop from 'crocks/Maybe/prop'
+
+const { ask } = Reader
 
 // length :: Array -> Number
 const length =
@@ -194,12 +198,13 @@ that the inner function is curried.
 
 ```javascript
 import Reader from 'crocks/Reader'
-const { ask } = Reader
 
 import B from 'crocks/combinators/composeB'
 import assign from 'crocks/helpers/assign'
 import liftA2 from 'crocks/helpers/liftA2'
 import objOf from 'crocks/helpers/objOf'
+
+const { ask } = Reader
 
 // namePart :: Number -> String -> String
 const namePart = indx => x =>
@@ -255,11 +260,12 @@ a function that will take any `a` and return a new `Reader` with a value of `b`.
 
 ```javascript
 import Reader from 'crocks/Reader'
-const { ask } = Reader
 
 import B from 'crocks/combinators/composeB'
 import option from 'crocks/pointfree/option'
 import prop from 'crocks/Maybe/prop'
+
+const { ask } = Reader
 
 // multiply :: Number -> Number -> Number
 const multiply =
@@ -318,12 +324,13 @@ the result of the computation.
 
 ```javascript
 import Reader from 'crocks/Reader'
-const { ask } = Reader
 import Pair from 'crocks/Pair'
 
 import fst from 'crocks/Pair/fst'
 import liftA2 from 'crocks/helpers/liftA2'
 import snd from 'crocks/Pair/snd'
+
+const { ask } = Reader
 
 // data :: Pair Number Number
 const data =
@@ -769,10 +776,10 @@ that accepts an environment and returns the resulting `Monad`.
 import ReaderT from 'crocks/Reader/ReaderT'
 import Maybe from 'crocks/Maybe'
 
-const MaybeReader = ReaderT(Maybe)
-const { ask, liftFn } = MaybeReader
-
 import prop from 'crocks/Maybe/prop'
+
+const { ask, liftFn } = MaybeReader
+const MaybeReader = ReaderT(Maybe)
 
 // data :: Object
 const data = {

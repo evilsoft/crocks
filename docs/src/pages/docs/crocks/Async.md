@@ -156,6 +156,7 @@ by leaning on [`bimap`](#bimap) to "square things up".
 
 ```javascript
 import Async from 'crocks/Async'
+
 const { Rejected } = Async
 
 // log :: String -> a -> a
@@ -191,6 +192,7 @@ wrapped value.
 
 ```javascript
 import Async from 'crocks/Async'
+
 const { Resolved } = Async
 
 // log :: String -> a -> a
@@ -228,11 +230,12 @@ desired `Async`.
 
 ```javascript
 import Async from 'crocks/Async'
-const { fromPromise } = Async
 
 import ifElse from 'crocks/logic/ifElse'
 import isNumber from 'crocks/predicates/isNumber'
 import nAry from 'crocks/helpers/nAry'
+
+const { fromPromise } = Async
 
 // log :: String -> a -> a
 const log = label => x =>
@@ -304,12 +307,13 @@ If a curried interface is needed then [`nAry`][nary] can be used.
 
 ```javascript
 import Async from 'crocks/Async'
-const { fromNode } = Async
 
 import curry from 'crocks/helpers/curry'
 import isNumber from 'crocks/predicates/isNumber'
 import nAry from 'crocks/helpers/nAry'
 import partial from 'crocks/helpers/partial'
+
+const { fromNode } = Async
 
 // log :: String -> a -> a
 const log = curry(label => x =>
@@ -375,6 +379,7 @@ an `Array` containing all [`Resolved`](#resolved) values in their provided order
 
 ```javascript
 import Async from 'crocks/Async'
+
 const { all, Rejected, Resolved } = Async
 
 // log :: String -> a -> a
@@ -405,6 +410,7 @@ ANY `Applicative`/`Monad`.
 
 ```javascript
 import Async from 'crocks/Async'
+
 const { Resolved } = Async
 
 // log :: String -> a -> a
@@ -444,7 +450,6 @@ new [`Resolved`](#resolved) instance.
 
 ```javascript
 import Async from 'crocks/Async'
-const { Rejected, Resolved } = Async
 
 import and from 'crocks/logic/and'
 import compose from 'crocks/helpers/compose'
@@ -452,6 +457,8 @@ import constant from 'crocks/combinators/constant'
 import ifElse from 'crocks/logic/ifElse'
 import isNumber from 'crocks/predicates/isNumber'
 import map from 'crocks/pointfree/map'
+
+const { Rejected, Resolved } = Async
 
 // log :: String -> a -> a
 const log = label => x =>
@@ -507,6 +514,7 @@ or the last [`Rejected`](#rejected) instance if it does not encounter a [`Resolv
 
 ```javascript
 import Async from 'crocks/Async'
+
 const { Rejected, Resolved } = Async
 
 // log :: String -> a -> a
@@ -551,12 +559,13 @@ untouched.
 
 ```javascript
 import Async from 'crocks/Async'
-const { Rejected, Resolved } = Async
 
 import assoc from 'crocks/helpers/assoc'
 import bimap from 'crocks/pointfree/bimap'
 import compose from 'crocks/helpers/compose'
 import objOf from 'crocks/helpers/objOf'
+
+const { Rejected, Resolved } = Async
 
 // log :: String -> a -> a
 const log = label => x =>
@@ -612,9 +621,10 @@ will be executed concurrently.
 
 ```javascript
 import Async from 'crocks/Async'
-const { Rejected, Resolved } = Async
 
 import liftA2 from 'crocks/helpers/liftA2'
+
+const { Rejected, Resolved } = Async
 
 // log :: String -> a -> a
 const log = label => x =>
@@ -680,7 +690,6 @@ new instance.
 
 ```javascript
 import Async from 'crocks/Async'
-const { Rejected, Resolved } = Async
 
 import chain from 'crocks/pointfree/chain'
 import compose from 'crocks/helpers/compose'
@@ -691,6 +700,8 @@ import ifElse from 'crocks/logic/ifElse'
 import isString from 'crocks/predicates/isString'
 import prop from 'crocks/Maybe/prop'
 import maybeToAsync from 'crocks/Async/maybeToAsync'
+
+const { Rejected, Resolved } = Async
 
 // log :: String -> a -> a
 const log = label => x =>
@@ -756,9 +767,10 @@ result of the second function.
 
 ```javascript
 import Async from 'crocks/Async'
-const { Rejected, Resolved } = Async
 
 import coalesce from 'crocks/pointfree/coalesce'
+
+const { Rejected, Resolved } = Async
 
 // log :: String -> a -> a
 const log = label => x =>
@@ -795,11 +807,12 @@ then [`identity`][identity] functions can be used in one or both arguments.
 
 ```javascript
 import Async from 'crocks/Async'
-const { Rejected, Resolved } = Async
 
 import compose from 'crocks/helpers/compose'
 import identity from 'crocks/combinators/identity'
 import swap from 'crocks/pointfree/swap'
+
+const { Rejected, Resolved } = Async
 
 // log :: String -> a -> a
 const log = label => x =>
@@ -944,6 +957,7 @@ given application, program or flow.
 
 ```javascript
 import Async from 'crocks/Async'
+
 const { Rejected, Resolved } = Async
 
 // log :: String -> a -> a
@@ -992,15 +1006,16 @@ a function will be returned that takes a given value and returns an `Async`.
 
 ```javascript
 import Async from 'crocks/Async'
-const { Resolved } = Async
 import Either from 'crocks/Either'
-const { Left, Right } = Either
 
 import eitherToAsync from 'crocks/Async/eitherToAsync'
 
 import and from 'crocks/logic/and'
 import ifElse from 'crocks/logic/ifElse'
 import isNumber from 'crocks/predicates/isNumber'
+
+const { Resolved } = Async
+const { Left, Right } = Either
 
 // log :: String -> a -> a
 const log = label => x =>
@@ -1073,7 +1088,6 @@ a function will be returned that takes a given value and returns an `Async`.
 
 ```javascript
 import Async from 'crocks/Async'
-const { Resolved } = Async
 import First from 'crocks/First'
 
 import firstToAsync from 'crocks/Async/firstToAsync'
@@ -1082,6 +1096,8 @@ import Pred from 'crocks/Pred'
 import isString from 'crocks/predicates/isString'
 import mconcatMap from 'crocks/helpers/mconcatMap'
 import safe from 'crocks/Maybe/safe'
+
+const { Resolved } = Async
 
 // log :: String -> a -> a
 const log = label => x =>
@@ -1160,7 +1176,6 @@ a function will be returned that takes a given value and returns an `Async`.
 
 ```javascript
 import Async from 'crocks/Async'
-const { Resolved } = Async
 import Last from 'crocks/Last'
 
 import lastToAsync from 'crocks/Async/lastToAsync'
@@ -1169,6 +1184,8 @@ import Pred from 'crocks/Pred'
 import isString from 'crocks/predicates/isString'
 import mconcatMap from 'crocks/helpers/mconcatMap'
 import safe from 'crocks/Maybe/safe'
+
+const { Resolved } = Async
 
 // log :: String -> a -> a
 const log = label => x =>
@@ -1247,9 +1264,7 @@ a function will be returned that takes a given value and returns an `Async`.
 
 ```javascript
 import Async from 'crocks/Async'
-const { Resolved } = Async
 import Maybe from 'crocks/Maybe'
-const { Nothing, Just } = Maybe
 
 import maybeToAsync from 'crocks/Async/maybeToAsync'
 
@@ -1258,6 +1273,9 @@ import isEmpty from 'crocks/predicates/isEmpty'
 import isArray from 'crocks/predicates/isArray'
 import not from 'crocks/logic/not'
 import safe from 'crocks/Maybe/safe'
+
+const { Resolved } = Async
+const { Nothing, Just } = Maybe
 
 // log :: String -> a -> a
 const log = label => x =>
@@ -1315,15 +1333,18 @@ a function will be returned that takes a given value and returns an `Async`.
 
 ```javascript
 import Async from 'crocks/Async'
-const { Resolved } = Async
+
 import Result from 'crocks/Result'
-const { Err, Ok }  = Result
 
 import resultToAsync from 'crocks/Async/resultToAsync'
 
 import identity from 'crocks/combinators/identity'
 import isNumber from 'crocks/predicates/isNumber'
 import tryCatch from 'crocks/Result/tryCatch'
+
+const { Resolved } = Async
+
+const { Err, Ok }  = Result
 
 // log :: String -> a -> a
 const log = label => x =>

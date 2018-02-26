@@ -212,6 +212,7 @@ provided for such things.
 
 ```javascript
 import crocks from 'crocks'
+
 const {
   Arrow, bimap, branch, composeS, merge, mreduce, Sum
 } = crocks
@@ -530,10 +531,11 @@ function, before sending it to the second argument of your reduction function.
 ```javascript
 import Max from 'crocks/Max'
 import Maybe from 'crocks/Maybe'
-const { Nothing } = Maybe
 import isNumber from 'crocks/predicates/isNumber'
 import mapReduce from 'crocks/helpers/mapReduce'
 import safeLift from 'crocks/Maybe/safeLift'
+
+const { Nothing } = Maybe
 
 const data =
   [ '100', null, 3, true, 1 ]
@@ -682,6 +684,7 @@ the rest of the arguments.
 
 ```javascript
 import crocks from 'crocks'
+
 const { map, partial } = crocks
 
 const max10 =
@@ -740,6 +743,7 @@ functions left-to-right.
 
 ```javascript
 import crocks from 'crocks'
+
 const { curry, List, Writer } = crocks
 
 const OpWriter =

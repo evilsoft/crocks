@@ -32,11 +32,11 @@ the values from the `Pair` and discarding the unwanted portion.
 
 ```javascript
 import State from 'crocks/State'
-const { get, put } = State
 
 import Pair from 'crocks/Pair'
 import constant from 'crocks/combinators/constant'
 
+const { get, put } = State
 
 // toUpper :: String -> String
 const toUpper =
@@ -105,7 +105,6 @@ state, with the result deposited in the resultant.
 
 ```javascript
 import State from 'crocks/State'
-const { get } = State
 
 import chain from 'crocks/pointfree/chain'
 import compose from 'crocks/helpers/compose'
@@ -113,6 +112,8 @@ import isNumber from 'crocks/predicates/isNumber'
 import option from 'crocks/pointfree/option'
 import prop from 'crocks/Maybe/prop'
 import safe from 'crocks/Maybe/safe'
+
+const { get } = State
 
 // propOr :: (String, (b -> Boolean), a) -> Object -> c
 const propOr = (key, pred, def) =>
@@ -156,9 +157,10 @@ can result in hard to track down bugs.
 
 ```javascript
 import State from 'crocks/State'
-const { modify } = State
 
 import mapProps from 'crocks/helpers/mapProps'
+
+const { modify } = State
 
 // add :: Number -> Number -> Number
 const add =
@@ -204,12 +206,13 @@ computations.
 
 ```javascript
 import State from 'crocks/State'
-const { put } = State
 
 import compose from 'crocks/helpers/compose'
 import isString from 'crocks/predicates/isString'
 import option from 'crocks/pointfree/option'
 import safe from 'crocks/Maybe/safe'
+
+const { put } = State
 
 // safeString :: a -> String
 const safeString =
@@ -253,6 +256,7 @@ is set to for those construction helpers.
 
 ```javascript
 import State from 'crocks/State'
+
 const { get, put } = State
 
 // updatePop :: String -> State String String
@@ -298,11 +302,12 @@ but will only map the value once, instead of once for every mapping.
 
 ```javascript
 import State from 'crocks/State'
-const { get } = State
 
 import compose from 'crocks/helpers/compose'
 import objOf from 'crocks/helpers/objOf'
 import propOr from 'crocks/helpers/propOr'
+
+const { get } = State
 
 // add :: Number -> Number -> Number
 const add =
@@ -353,10 +358,11 @@ instances' resultants.
 
 ```javascript
 import State from 'crocks/State'
-const { get, modify } = State
 
 import assoc from 'crocks/helpers/assoc'
 import propOr from 'crocks/helpers/propOr'
+
+const { get, modify } = State
 
 const data = {
   tax: .084,
@@ -418,6 +424,7 @@ a unary function that must return a new `State` instance. `chain` returns a new
 
 ```javascript
 import State from 'crocks/State'
+
 const { get, modify } = State
 
 // add :: Number -> State Number ()
@@ -477,9 +484,10 @@ initial state and will return the resulting `Pair` with the resultant in the
 
 ```javascript
 import State from 'crocks/State'
-const { get, put } = State
 
 import K from 'crocks/combinators/constant'
+
+const { get, put } = State
 
 // swap :: s -> s -> State s s
 const swap = x => old =>
@@ -513,13 +521,14 @@ portion.
 
 ```javascript
 import State from 'crocks/State'
-const { get } = State
 
 import concat from 'crocks/pointfree/concat'
 import flip from 'crocks/combinators/flip'
 import liftA2 from 'crocks/helpers/liftA2'
 import map from 'crocks/pointfree/map'
 import propOr from 'crocks/helpers/propOr'
+
+const { get } = State
 
 const name = {
   first: 'Franklin',
@@ -567,10 +576,11 @@ portion.
 
 ```javascript
 import State from 'crocks/State'
-const { modify } = State
 
 import compose from 'crocks/helpers/compose'
 import concat from 'crocks/pointfree/concat'
+
+const { modify } = State
 
 // toUpper :: String -> String
 const toUpper =
@@ -616,13 +626,14 @@ also return the resulting resultant, throwing away the resulting state.
 
 ```javascript
 import State from 'crocks/State'
-const { get } = State
 
 import evalWith from 'crocks/State/evalWith'
 
 import compose from 'crocks/helpers/compose'
 import curry from 'crocks/helpers/curry'
 import flip from 'crocks/combinators/flip'
+
+const { get } = State
 
 // addToState :: Number -> State Number Number
 const addToState =
@@ -663,7 +674,6 @@ also return the resulting state, throwing away the resulting resultant.
 
 ```javascript
 import State from 'crocks/State'
-const { modify } = State
 
 import execWith from 'crocks/State/execWith'
 
@@ -671,6 +681,8 @@ import curry from 'crocks/helpers/curry'
 import isSameType from 'crocks/predicates/isSameType'
 import mapProps from 'crocks/helpers/mapProps'
 import when from 'crocks/logic/when'
+
+const { modify } = State
 
 // middleware :: Object -> State Object | Object -> Object
 const middleware = curry(

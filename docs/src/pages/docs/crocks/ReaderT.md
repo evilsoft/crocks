@@ -419,10 +419,10 @@ that accepts an environment and returns the resulting `Monad`.
 import ReaderT from 'crocks/Reader/ReaderT'
 import Maybe from 'crocks/Maybe'
 
+import prop from 'crocks/Maybe/prop'
+
 const MaybeReader = ReaderT(Maybe)
 const { ask, liftFn } = MaybeReader
-
-import prop from 'crocks/Maybe/prop'
 
 // data :: Object
 const data = {

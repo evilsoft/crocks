@@ -28,12 +28,13 @@ constructors to construct `Maybe` instances in most cases. You can use the
 
 ```javascript
 import Maybe from 'crocks/Maybe'
-const { Just, Nothing } = Maybe
 
 import chain from 'crocks/pointfree/chain'
 import compose from 'crocks/helpers/compose'
 import ifElse from 'crocks/logic/ifElse'
 import isNumber from 'crocks/predicates/isNumber'
+
+const { Just, Nothing } = Maybe
 
 // gt5 :: Number -> Boolean
 const gt5 =
@@ -103,11 +104,12 @@ be thrown out and mapped to `()`.
 
 ```javascript
 import Maybe from 'crocks/Maybe'
-const { Just, Nothing } = Maybe
 
 import chain from 'crocks/pointfree/chain'
 import isNumber from 'crocks/predicates/isNumber'
 import safeLift from 'crocks/Maybe/safeLift'
+
+const { Just, Nothing } = Maybe
 
 // add10 :: Number -> Number
 const add10 =
@@ -144,12 +146,13 @@ a `Just`, signaling the validity of the wrapped value.
 
 ```javascript
 import Maybe from 'crocks/Maybe'
-const { Just, Nothing } = Maybe
 
 import compose from 'crocks/helpers/compose'
 import ifElse from 'crocks/logic/ifElse'
 import isString from 'crocks/predicates/isString'
 import map from 'crocks/pointfree/map'
+
+const { Just, Nothing } = Maybe
 
 // toUpper :: String -> String
 const toUpper =
@@ -187,11 +190,12 @@ ANY `Applicative`/`Monad`.
 
 ```javascript
 import Maybe from 'crocks/Maybe'
-const { Just } = Maybe
 
 import curry from 'crocks/helpers/curry'
 import isString from 'crocks/predicates/isString'
 import safe from 'crocks/Maybe/safe'
+
+const { Just } = Maybe
 
 Maybe(35)
 //=> Just 35
@@ -234,13 +238,14 @@ can be used to fold a collection of `Alt`s under `alt`.
 
 ```javascript
 import Maybe from 'crocks/Maybe'
-const { Nothing, Just, zero } = Maybe
 
 import alt from 'crocks/pointfree/alt'
 import flip from 'crocks/combinators/flip'
 import isNumber from 'crocks/predicates/isNumber'
 import mapReduce from 'crocks/helpers/mapReduce'
 import safe from 'crocks/Maybe/safe'
+
+const { Nothing, Just, zero } = Maybe
 
 // firstValid :: [ * ] -> Maybe Number
 const firstValid =
@@ -292,9 +297,10 @@ a `Maybe` or the underlying values are not equal, `equals` will return `false`.
 
 ```javascript
 import Maybe from 'crocks/Maybe'
-const { Nothing, Just } = Maybe
 
 import equals from 'crocks/pointfree/equals'
+
+const { Nothing, Just } = Maybe
 
 Just(33)
   .equals(Just(33))
@@ -338,7 +344,7 @@ will return a `Nothing`.
 
 ```javascript
 import Maybe from 'crocks/Maybe'
-const { Nothing, Just } = Maybe
+
 import Sum from 'crocks/Sum'
 
 import compose from 'crocks/helpers/compose'
@@ -349,6 +355,8 @@ import map from 'crocks/pointfree/map'
 import mapReduce from 'crocks/helpers/mapReduce'
 import safeLift from 'crocks/Maybe/safeLift'
 import valueOf from 'crocks/pointfree/valueOf'
+
+const { Nothing, Just } = Maybe
 
 // safeSum :: a -> Maybe Sum
 const safeSum =
@@ -393,7 +401,6 @@ value to the provided function and return the result in a new `Just` instance.
 
 ```javascript
 import Maybe from 'crocks/Maybe'
-const { Nothing, Just } = Maybe
 
 import assign from 'crocks/helpers/assign'
 import compose from 'crocks/helpers/compose'
@@ -401,6 +408,8 @@ import isObject from 'crocks/predicates/isObject'
 import isString from 'crocks/predicates/isString'
 import map from 'crocks/pointfree/map'
 import safe from 'crocks/Maybe/safe'
+
+const { Nothing, Just } = Maybe
 
 // add10 :: Number -> Number
 const add10 =
@@ -460,13 +469,14 @@ structure.
 
 ```javascript
 import Maybe from 'crocks/Maybe'
-const { zero, Nothing, Just } = Maybe
 
 import alt from 'crocks/pointfree/alt'
 import isArray from 'crocks/predicates/isArray'
 import flip from 'crocks/combinators/flip'
 import mapReduce from 'crocks/helpers/mapReduce'
 import safe from 'crocks/Maybe/safe'
+
+const { zero, Nothing, Just } = Maybe
 
 // firstArray :: Foldable f => f * -> Maybe Array
 const firstArray =
@@ -506,7 +516,6 @@ the function and not provide exceptions or unexpected results.
 
 ```javascript
 import Maybe from 'crocks/Maybe'
-const { Nothing, Just } =  Maybe
 
 import compose from 'crocks/helpers/compose'
 import chain from 'crocks/pointfree/chain'
@@ -517,6 +526,8 @@ import liftA2 from 'crocks/helpers/liftA2'
 import merge from 'crocks/Pair/merge'
 import prop from 'crocks/Maybe/prop'
 import safe from 'crocks/Maybe/safe'
+
+const { Nothing, Just } =  Maybe
 
 // add :: Number -> Number -> Number
 const add =
@@ -586,11 +597,11 @@ from [`traverse`](#traverse) by passing it an `identity` function (`x => x`).
 
 ```javascript
 import Maybe from 'crocks/Maybe'
-const { Nothing, Just } = Maybe
 
 import Identity from 'crocks/Identity'
 import sequence from 'crocks/pointfree/sequence'
 
+const { Nothing, Just } = Maybe
 
 // seqId :: Maybe Identity a -> Identity Maybe a
 const seqId =
@@ -666,7 +677,6 @@ new instance.
 
 ```javascript
 import Maybe from 'crocks/Maybe'
-const { Nothing, Just } = Maybe
 
 import chain from 'crocks/pointfree/chain'
 import compose from 'crocks/helpers/compose'
@@ -675,6 +685,8 @@ import isString from 'crocks/predicates/isString'
 import prop from 'crocks/Maybe/prop'
 import safe from 'crocks/Maybe/safe'
 import safeLift from 'crocks/Maybe/safeLift'
+
+const { Nothing, Just } = Maybe
 
 // double :: Number -> Number
 const double =
@@ -730,7 +742,6 @@ returning a new `Just` instance wrapping the result of the second function.
 
 ```javascript
 import Maybe from 'crocks/Maybe'
-const { Nothing, Just } = Maybe
 
 import compose from 'crocks/helpers/compose'
 import composeK from 'crocks/helpers/composeK'
@@ -742,6 +753,8 @@ import map from 'crocks/pointfree/map'
 import objOf from 'crocks/helpers/objOf'
 import prop from 'crocks/Maybe/prop'
 import safe from 'crocks/Maybe/safe'
+
+const { Nothing, Just } = Maybe
 
 // shout :: String -> String
 const shout =
@@ -809,6 +822,7 @@ then [`either`](#either) may be employed to combine it in one operation.
 
 ```javascript
 import Maybe from 'crocks/Maybe'
+
 const { Nothing, Just } = Maybe
 
 Nothing()
@@ -837,9 +851,10 @@ mapping.
 
 ```javascript
 import Maybe from 'crocks/Maybe'
-const { Nothing, Just } = Maybe
 
 import either from 'crocks/pointfree/either'
+
+const { Nothing, Just } = Maybe
 
 // wrap :: a -> [ a ]
 const wrap =
@@ -1143,14 +1158,18 @@ a function will be returned that takes a given value and returns a `Maybe`.
 
 ```javascript
 import Maybe from 'crocks/Maybe'
-const { Nothing, Just } = Maybe
+
 import Either from 'crocks/Either'
-const { Left, Right } = Either
+
 import eitherToMaybe from 'crocks/Maybe/eitherToMaybe'
 
 import constant from 'crocks/combinators/constant'
 import ifElse from 'crocks/logic/ifElse'
 import isNumber from 'crocks/predicates/isNumber'
+
+const { Nothing, Just } = Maybe
+
+const { Left, Right } = Either
 
 // someNumber :: a -> Either String Number
 const someNumber = ifElse(
@@ -1200,11 +1219,13 @@ a function will be returned that takes a given value and returns a `Maybe`.
 
 ```javascript
 import Maybe from 'crocks/Maybe'
-const { Nothing, Just } = Maybe
+
 import First from 'crocks/First'
 import firstToMaybe from 'crocks/Maybe/firstToMaybe'
 
 import mconcat from 'crocks/helpers/mconcat'
+
+const { Nothing, Just } = Maybe
 
 // firstValue :: [ a ] -> First a
 const firstValue =
@@ -1250,11 +1271,13 @@ a function will be returned that takes a given value and returns a `Maybe`.
 
 ```javascript
 import Maybe from 'crocks/Maybe'
-const { Nothing, Just } = Maybe
+
 import Last from 'crocks/Last'
 import lastToMaybe from 'crocks/Maybe/lastToMaybe'
 
 import mconcat from 'crocks/helpers/mconcat'
+
+const { Nothing, Just } = Maybe
 
 // lastValue :: [ a ] -> Last a
 const lastValue =
@@ -1303,13 +1326,17 @@ a function will be returned that takes a given value and returns a `Maybe`.
 
 ```javascript
 import Maybe from 'crocks/Maybe'
-const { Nothing, Just } = Maybe
+
 import Result from 'crocks/Result'
-const { Err, Ok } = Result
+
 import resultToMaybe from 'crocks/Maybe/resultToMaybe'
 
 import identity from 'crocks/combinators/identity'
 import tryCatch from 'crocks/Result/tryCatch'
+
+const { Nothing, Just } = Maybe
+
+const { Err, Ok } = Result
 
 function datErrTho() {
   throw new Error('something amiss')

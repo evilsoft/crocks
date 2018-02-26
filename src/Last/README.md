@@ -69,6 +69,7 @@ on both the Constructor and the Instance for convenience.
 
 ```javascript
 import Last from 'crocks/Last'
+
 const { empty } = Last
 
 empty()
@@ -189,8 +190,10 @@ will result in the underlying `Maybe`.
 import Last from 'crocks/Last'
 
 import Maybe from 'crocks/Maybe'
-const { Nothing } = Maybe
+
 import valueOf from 'crocks/pointfree/valueOf'
+
+const { Nothing } = Maybe
 
 valueOf(Last(56))
 //=> Just 56
@@ -236,7 +239,7 @@ a function will be returned that takes a given value and returns a `Last`.
 ```javascript
 import Last from 'crocks/Last'
 import Either from 'crocks/Either'
-const { Left, Right } = Either
+
 import eitherToLast from 'crocks/Last/eitherToLast'
 
 import concat from 'crocks/pointfree/concat'
@@ -245,6 +248,8 @@ import flip from 'crocks/combinators/flip'
 import ifElse from 'crocks/logic/ifElse'
 import isNumber from 'crocks/predicates/isNumber'
 import mapReduce from 'crocks/helpers/mapReduce'
+
+const { Left, Right } = Either
 
 // someNumber :: a -> Either String Number
 const someNumber = ifElse(
@@ -357,7 +362,7 @@ a function will be returned that takes a given value and returns a `Last`.
 ```javascript
 import Last from 'crocks/Last'
 import Maybe from 'crocks/Maybe'
-const { Nothing, Just } = Maybe
+
 import maybeToLast from 'crocks/Last/maybeToLast'
 
 import chain from 'crocks/pointfree/chain'
@@ -365,6 +370,8 @@ import compose from 'crocks/helpers/compose'
 import isNumber from 'crocks/predicates/isNumber'
 import prop from 'crocks/Maybe/prop'
 import safe from 'crocks/Maybe/safe'
+
+const { Nothing, Just } = Maybe
 
 // numVal :: a -> Maybe Number
 const numVal = compose(
@@ -426,11 +433,13 @@ a function will be returned that takes a given value and returns a `Last`.
 ```javascript
 import Last from 'crocks/Last'
 import Result from 'crocks/Result'
-const { Err, Ok } = Result
+
 import resultToLast from 'crocks/Last/resultToLast'
 
 import isNumber from 'crocks/predicates/isNumber'
 import tryCatch from 'crocks/Result/tryCatch'
+
+const { Err, Ok } = Result
 
 function onlyNums(x) {
   if(!isNumber(x)) {

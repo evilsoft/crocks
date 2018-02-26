@@ -53,7 +53,7 @@ test('object map functionality', t => {
     c: 0, d: 1,
     e: '', f: 'string',
     g: false, h: true,
-    i: {}, j: [],
+    i: {}, j: []
   }
 
 

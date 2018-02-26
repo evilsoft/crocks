@@ -549,7 +549,7 @@ Lifts a value into a `ReaderT` using the `of` method of the underlying `Monad`.
 value.
 
 ```javascript
-import ReaderT from '../crocks/src/Reader/ReaderT'
+import ReaderT from 'crocks/Reader/ReaderT'
 
 import Maybe from 'crocks/Maybe'
 import Either from 'crocks/Either'
@@ -706,7 +706,7 @@ being able to read from the environment. This method only accepts functions
 of the form `Monad m => a -> ReaderT e (m b)`.
 
 ```javascript
-import ReaderT from '../crocks/src/Reader/ReaderT'
+import ReaderT from 'crocks/Reader/ReaderT'
 import Maybe from 'crocks/Maybe'
 import prop from 'crocks/Maybe/prop'
 
@@ -766,7 +766,7 @@ given environment. A `ReaderT` instance comes equipped with a `runWith` method
 that accepts an environment and returns the resulting `Monad`.
 
 ```javascript
-import ReaderT from '../crocks/src/Reader/ReaderT'
+import ReaderT from 'crocks/Reader/ReaderT'
 import Maybe from 'crocks/Maybe'
 
 const MaybeReader = ReaderT(Maybe)

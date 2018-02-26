@@ -211,9 +211,10 @@ to represent your flow in a more left-to-right manner, then [`pipeS`](#pipes) is
 provided for such things.
 
 ```javascript
-import {
+import crocks from 'crocks'
+const {
   Arrow, bimap, branch, composeS, merge, mreduce, Sum
-} from 'crocks'
+} = crocks
 
 const length =
   xs => xs.length
@@ -680,7 +681,8 @@ arguments to it. You will get back a curried function that is ready to accept
 the rest of the arguments.
 
 ```javascript
-import { map, partial } from 'crocks'
+import crocks from 'crocks'
+const { map, partial } = crocks
 
 const max10 =
   partial(Math.min, 10)
@@ -737,7 +739,8 @@ chaining together a series of functions with the signature:
 functions left-to-right.
 
 ```javascript
-import { curry, List, Writer } from '../crocks'
+import crocks from 'crocks'
+const { curry, List, Writer } = crocks
 
 const OpWriter =
   Writer(List)
@@ -811,7 +814,7 @@ the opposite.
 ```javascript
 import {
   curry, isNumber, pipeS, prop, safeLift, Star
-} from '../crocks'
+} from 'crocks'
 
 const add = curry(
   (x, y) => x + y

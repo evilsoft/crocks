@@ -374,7 +374,7 @@ instances resolve, then the entire instance is [`Resolved`](#resolved) with
 an `Array` containing all [`Resolved`](#resolved) values in their provided order.
 
 ```javascript
-import Async from '../crocks/src/Async'
+import Async from 'crocks/Async'
 const { all, Rejected, Resolved } = Async
 
 // log :: String -> a -> a
@@ -404,7 +404,7 @@ used. Reach for `of` when working with functions that will work with
 ANY `Applicative`/`Monad`.
 
 ```javascript
-import Async from '../crocks/src/Async'
+import Async from 'crocks/Async'
 const { Resolved } = Async
 
 // log :: String -> a -> a

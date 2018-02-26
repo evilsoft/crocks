@@ -375,7 +375,7 @@ an `Array` containing all `Resolved` values in their provided order.
 <!-- eslint-disable no-console -->
 <!-- eslint-disable no-sequences -->
 ```javascript
-import Async from '../crocks/src/Async'
+import Async from 'crocks/Async'
 const { all, Rejected, Resolved } = Async
 
 // log :: String -> a -> a
@@ -407,7 +407,7 @@ ANY `Applicative`/`Monad`.
 <!-- eslint-disable no-console -->
 <!-- eslint-disable no-sequences -->
 ```javascript
-import Async from '../crocks/src/Async'
+import Async from 'crocks/Async'
 const { Resolved } = Async
 
 // log :: String -> a -> a

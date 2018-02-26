@@ -25,9 +25,10 @@ great care should be taken to not modify the value of the environment.
 
 ```javascript
 import Reader from 'crocks/Reader'
-const { ask } = Reader
 
 import concat from 'crocks/pointfree/concat'
+
+const { ask } = Reader
 
 // greet :: String -> Reader String String
 const greet = greeting =>

@@ -1053,6 +1053,64 @@ safe(isSmall, [ 1, 2 ])
 //=> Just [ 1, 2 ]
 ```
 
+#### safeAfter
+
+`crocks/Maybe/safeAfter`
+
+```haskell
+safeAfter :: ((b -> Boolean) | Pred) -> (a -> b) -> a -> Maybe b
+```
+
+Often times, you might want to lift the result of a function into a `Maybe` based
+on some predicate. Similar to [`safe`](#safe), you pass either a `Pred` or a 
+predicate function, along with a unary function. `safeAfter` then gives you a new function, 
+which when invoked evaluates the predicate against the result of executing 
+the unary function. This result is then lifted into a `Just` if the predicate evaluates 
+to `true`, or a `Nothing` if it returns `false`
+
+```javascript
+import Pred from 'crocks/Pred'
+
+import isEmpty from 'crocks/predicates/isEmpty'
+import safeLift from 'crocks/Maybe/safeLift'
+import not from 'crocks/logic/not'
+import map from 'crocks/pointfree/map'
+import prop from 'crocks/Maybe/prop'
+
+const gte18 = x => x >= 18
+const gte40 = x => x >= 40
+
+const canDrinkBeer = compose(option(false), map(gte18), prop('age'))
+const canRetire = compose(option(false), map(gte40), prop('age'))
+
+const people = [
+  { name: 'John', plays: 'Guitar', age: 21 }, 
+  { name: 'George', plays: 'Guitar', age: 11 },
+  { name: 'Paul', plays: 'Bass', age: 17 },
+  { name: 'Ringo', plays: 'Drums', age: 25 },
+]
+
+safeAfter(isEmpty, filter(canDrinkBeer))(people)
+//=> Just([{ name: 'John', plays: 'Guitar', age: 21 }, { name: 'Ringo', plays: 'Drums', age: 25 }])
+
+safeAfter(isEmpty, filter(canRetire))(people)
+//=> Nothing
+
+
+// canDrinkAndRock :: Pred a
+const canDrinkAndRock = Pred(canDrinkBeer)
+  .concat(Pred(propEq('plays', 'Guitar')))
+
+const gt2 = x => x.length >= 2
+safeAfter(gt2, filter(canDrinkAndRock))(people)
+//=> Nothing
+
+const isNotEmpty = not(isEmpty)
+safeAfter(isNotEmpty, filter(canDrinkAndRock))(people)
+//=> Just([{ name: 'John', plays: 'Guitar', age: 21 }])
+
+```
+
 #### safeLift
 
 `crocks/Maybe/safeLift`

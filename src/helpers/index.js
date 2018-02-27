@@ -37,6 +37,7 @@ module.exports = {
   propOr: require('./propOr'),
   propPathOr: require('./propPathOr'),
   safe: require('../Maybe/safe'),
+  safeAfter: require('../Maybe/safeAfter'),
   safeLift: require('../Maybe/safeLift'),
   tap: require('./tap'),
   toPairs: require('../Pair/toPairs'),

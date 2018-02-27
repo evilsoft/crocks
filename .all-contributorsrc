@@ -107,6 +107,7 @@
       "profile": "http://bennypowers.com",
       "contributions": [
         "doc"
+      ]
     },
     {
       "login": "dalefrancis88",
@@ -116,6 +117,16 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "premithk",
+      "name": "Premith",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/7926867?v=4",
+      "profile": "https://github.com/premithk",
+      "contributions": [
+        "doc"
+      ]
     }
-  ]
+  ],
+  "repoType": "github"
 }

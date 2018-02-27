@@ -1051,10 +1051,14 @@ to `true`, or a `Nothing` if it returns `false`
 import Pred from 'crocks/Pred'
 
 import isEmpty from 'crocks/predicates/isEmpty'
-import safeLift from 'crocks/Maybe/safeLift'
 import not from 'crocks/logic/not'
 import map from 'crocks/pointfree/map'
+import option from 'crocks/pointfree/option'
+import filter from 'crocks/pointfree/filter'
+import safeAfter from 'crocks/Maybe/safeAfter'
+import compose from 'crocks/helpers/compose'
 import prop from 'crocks/Maybe/prop'
+import propEq from 'crocks/predicates/propEq'
 
 const gte18 = x => x >= 18
 const gte40 = x => x >= 40
@@ -1063,10 +1067,10 @@ const canDrinkBeer = compose(option(false), map(gte18), prop('age'))
 const canRetire = compose(option(false), map(gte40), prop('age'))
 
 const people = [
-  { name: 'John', plays: 'Guitar', age: 21 }, 
+  { name: 'John', plays: 'Guitar', age: 21 },
   { name: 'George', plays: 'Guitar', age: 11 },
   { name: 'Paul', plays: 'Bass', age: 17 },
-  { name: 'Ringo', plays: 'Drums', age: 25 },
+  { name: 'Ringo', plays: 'Drums', age: 25 }
 ]
 
 safeAfter(isEmpty, filter(canDrinkBeer))(people)

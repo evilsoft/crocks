@@ -49,16 +49,16 @@ computation to completion, but will cease all remaining execution. Cancellation
 with `Async` is total and will cancel silently, without notification.
 
 ```javascript
-const Async = require('crocks/Async')
+import Async from 'crocks/Async'
 
-const maybeToAsync = require('crocks/Async/maybeToAsync')
+import maybeToAsync from 'crocks/Async/maybeToAsync'
 
-const First = require('crocks/First')
-const equals = require('crocks/pointfree/equals')
-const map = require('crocks/pointfree/map')
-const mreduceMap = require('crocks/helpers/mreduceMap')
-const pick = require('crocks/helpers/pick')
-const safe = require('crocks/Maybe/safe')
+import First from 'crocks/First'
+import equals from 'crocks/pointfree/equals'
+import map from 'crocks/pointfree/map'
+import mreduceMap from 'crocks/helpers/mreduceMap'
+import pick from 'crocks/helpers/pick'
+import safe from 'crocks/Maybe/safe'
 
 // log :: String -> a -> a
 const log = label => x =>
@@ -155,7 +155,8 @@ a `Bifunctor`, it is easy to make sure you get the type you need at the edge
 by leaning on [`bimap`](#bimap) to "square things up".
 
 ```javascript
-const Async = require('crocks/Async')
+import Async from 'crocks/Async'
+
 const { Rejected } = Async
 
 // log :: String -> a -> a
@@ -190,7 +191,8 @@ constructor in the `Resolved` instance it returns, signaling the validity of the
 wrapped value.
 
 ```javascript
-const Async = require('crocks/Async')
+import Async from 'crocks/Async'
+
 const { Resolved } = Async
 
 // log :: String -> a -> a
@@ -227,11 +229,13 @@ with [`nAry`][nary], which will provide a curried function that will return the
 desired `Async`.
 
 ```javascript
-const { fromPromise } = require('crocks/Async')
+import Async from 'crocks/Async'
 
-const ifElse = require('crocks/logic/ifElse')
-const isNumber = require('crocks/predicates/isNumber')
-const nAry = require('crocks/helpers/nAry')
+import ifElse from 'crocks/logic/ifElse'
+import isNumber from 'crocks/predicates/isNumber'
+import nAry from 'crocks/helpers/nAry'
+
+const { fromPromise } = Async
 
 // log :: String -> a -> a
 const log = label => x =>
@@ -302,12 +306,14 @@ Like [`fromPromise`](#frompromise), any curried interface will not be respected.
 If a curried interface is needed then [`nAry`][nary] can be used.
 
 ```javascript
-const { fromNode } = require('crocks/Async')
+import Async from 'crocks/Async'
 
-const curry = require('crocks/helpers/curry')
-const isNumber = require('crocks/predicates/isNumber')
-const nAry = require('crocks/helpers/nAry')
-const partial = require('crocks/helpers/partial')
+import curry from 'crocks/helpers/curry'
+import isNumber from 'crocks/predicates/isNumber'
+import nAry from 'crocks/helpers/nAry'
+import partial from 'crocks/helpers/partial'
+
+const { fromNode } = Async
 
 // log :: String -> a -> a
 const log = curry(label => x =>
@@ -372,7 +378,9 @@ instances resolve, then the entire instance is [`Resolved`](#resolved) with
 an `Array` containing all [`Resolved`](#resolved) values in their provided order.
 
 ```javascript
-const { all, Rejected, Resolved } = require('../crocks/src/Async')
+import Async from 'crocks/Async'
+
+const { all, Rejected, Resolved } = Async
 
 // log :: String -> a -> a
 const log = label => x =>
@@ -401,7 +409,8 @@ used. Reach for `of` when working with functions that will work with
 ANY `Applicative`/`Monad`.
 
 ```javascript
-const Async = require('../crocks/src/Async')
+import Async from 'crocks/Async'
+
 const { Resolved } = Async
 
 // log :: String -> a -> a
@@ -440,14 +449,16 @@ wrapped value to the provided function and return the result in a
 new [`Resolved`](#resolved) instance.
 
 ```javascript
-const { Rejected, Resolved } = require('crocks/Async')
+import Async from 'crocks/Async'
 
-const and = require('crocks/logic/and')
-const compose = require('crocks/helpers/compose')
-const constant = require('crocks/combinators/constant')
-const ifElse = require('crocks/logic/ifElse')
-const isNumber = require('crocks/predicates/isNumber')
-const map = require('crocks/pointfree/map')
+import and from 'crocks/logic/and'
+import compose from 'crocks/helpers/compose'
+import constant from 'crocks/combinators/constant'
+import ifElse from 'crocks/logic/ifElse'
+import isNumber from 'crocks/predicates/isNumber'
+import map from 'crocks/pointfree/map'
+
+const { Rejected, Resolved } = Async
 
 // log :: String -> a -> a
 const log = label => x =>
@@ -502,7 +513,9 @@ Providing a means for a fallback or alternative value, `alt` combines (2)
 or the last [`Rejected`](#rejected) instance if it does not encounter a [`Resolved`](#resolved) instance.
 
 ```javascript
-const { Rejected, Resolved } = require('crocks/Async')
+import Async from 'crocks/Async'
+
+const { Rejected, Resolved } = Async
 
 // log :: String -> a -> a
 const log = label => x =>
@@ -545,12 +558,14 @@ provided to the second argument. This will leave all [`Resolved`](#resolved) ins
 untouched.
 
 ```javascript
-const { Rejected, Resolved } = require('crocks/Async')
+import Async from 'crocks/Async'
 
-const assoc = require('crocks/helpers/assoc')
-const bimap = require('crocks/pointfree/bimap')
-const compose = require('crocks/helpers/compose')
-const objOf = require('crocks/helpers/objOf')
+import assoc from 'crocks/helpers/assoc'
+import bimap from 'crocks/pointfree/bimap'
+import compose from 'crocks/helpers/compose'
+import objOf from 'crocks/helpers/objOf'
+
+const { Rejected, Resolved } = Async
 
 // log :: String -> a -> a
 const log = label => x =>
@@ -605,10 +620,11 @@ When [`fork`](#fork)ed, all `Async`s chained with multiple `ap` invocations
 will be executed concurrently.
 
 ```javascript
-const Async = require('crocks/Async')
-const { Rejected, Resolved } = Async
+import Async from 'crocks/Async'
 
-const liftA2 = require('crocks/helpers/liftA2')
+import liftA2 from 'crocks/helpers/liftA2'
+
+const { Rejected, Resolved } = Async
 
 // log :: String -> a -> a
 const log = label => x =>
@@ -673,18 +689,19 @@ inner value will be passed to provided function, returning the result as the
 new instance.
 
 ```javascript
-const Async = require('crocks/Async')
-const { Rejected, Resolved } = Async
+import Async from 'crocks/Async'
 
-const chain = require('crocks/pointfree/chain')
-const compose = require('crocks/helpers/compose')
-const composeK = require('crocks/helpers/composeK')
-const constant = require('crocks/combinators/constant')
-const flip = require('crocks/combinators/flip')
-const ifElse = require('crocks/logic/ifElse')
-const isString = require('crocks/predicates/isString')
-const prop = require('crocks/Maybe/prop')
-const maybeToAsync = require('crocks/Async/maybeToAsync')
+import chain from 'crocks/pointfree/chain'
+import compose from 'crocks/helpers/compose'
+import composeK from 'crocks/helpers/composeK'
+import constant from 'crocks/combinators/constant'
+import flip from 'crocks/combinators/flip'
+import ifElse from 'crocks/logic/ifElse'
+import isString from 'crocks/predicates/isString'
+import prop from 'crocks/Maybe/prop'
+import maybeToAsync from 'crocks/Async/maybeToAsync'
+
+const { Rejected, Resolved } = Async
 
 // log :: String -> a -> a
 const log = label => x =>
@@ -749,10 +766,11 @@ to map the original value, returning a new [`Resolved`](#resolved) instance wrap
 result of the second function.
 
 ```javascript
-const Async = require('crocks/Async')
-const { Rejected, Resolved } = Async
+import Async from 'crocks/Async'
 
-const coalesce = require('crocks/pointfree/coalesce')
+import coalesce from 'crocks/pointfree/coalesce'
+
+const { Rejected, Resolved } = Async
 
 // log :: String -> a -> a
 const log = label => x =>
@@ -788,12 +806,13 @@ second goes from [`Resolved`](#resolved) to [`Rejected`](#rejected). If no mappi
 then [`identity`][identity] functions can be used in one or both arguments.
 
 ```javascript
-const Async = require('crocks/Async')
-const { Rejected, Resolved } = Async
+import Async from 'crocks/Async'
 
-const compose = require('crocks/helpers/compose')
-const identity = require('crocks/combinators/identity')
-const swap = require('crocks/pointfree/swap')
+import compose from 'crocks/helpers/compose'
+import identity from 'crocks/combinators/identity'
+import swap from 'crocks/pointfree/swap'
+
+const { Rejected, Resolved } = Async
 
 // log :: String -> a -> a
 const log = label => x =>
@@ -883,9 +902,9 @@ for "clean up" after cancellation. When all in-flight computations settle, the
 function provided will be silently executed.
 
 ```javascript
-const Async = require('crocks/Async')
+import Async from 'crocks/Async'
 
-const compose = require('crocks/helpers/compose')
+import compose from 'crocks/helpers/compose'
 
 // log :: String -> a -> a
 const log = label => x =>
@@ -937,7 +956,9 @@ for integration with other `Promise` based libraries that are utilized in a
 given application, program or flow.
 
 ```javascript
-const { Rejected, Resolved } = require('crocks/Async')
+import Async from 'crocks/Async'
+
+const { Rejected, Resolved } = Async
 
 // log :: String -> a -> a
 const log = label => x =>
@@ -984,14 +1005,17 @@ a transformed `Async` is returned. When passed an `Either` returning function,
 a function will be returned that takes a given value and returns an `Async`.
 
 ```javascript
-const { Resolved } = require('crocks/Async')
-const { Left, Right } = require('crocks/Either')
+import Async from 'crocks/Async'
+import Either from 'crocks/Either'
 
-const eitherToAsync = require('crocks/Async/eitherToAsync')
+import eitherToAsync from 'crocks/Async/eitherToAsync'
 
-const and = require('crocks/logic/and')
-const ifElse = require('crocks/logic/ifElse')
-const isNumber = require('crocks/predicates/isNumber')
+import and from 'crocks/logic/and'
+import ifElse from 'crocks/logic/ifElse'
+import isNumber from 'crocks/predicates/isNumber'
+
+const { Resolved } = Async
+const { Left, Right } = Either
 
 // log :: String -> a -> a
 const log = label => x =>
@@ -1063,15 +1087,17 @@ a transformed `Async` is returned. When passed a [`First`][first] returning func
 a function will be returned that takes a given value and returns an `Async`.
 
 ```javascript
-const { Resolved } = require('crocks/Async')
-const First = require('crocks/First')
+import Async from 'crocks/Async'
+import First from 'crocks/First'
 
-const firstToAsync = require('crocks/Async/firstToAsync')
+import firstToAsync from 'crocks/Async/firstToAsync'
 
-const Pred = require('crocks/Pred')
-const isString = require('crocks/predicates/isString')
-const mconcatMap = require('crocks/helpers/mconcatMap')
-const safe = require('crocks/Maybe/safe')
+import Pred from 'crocks/Pred'
+import isString from 'crocks/predicates/isString'
+import mconcatMap from 'crocks/helpers/mconcatMap'
+import safe from 'crocks/Maybe/safe'
+
+const { Resolved } = Async
 
 // log :: String -> a -> a
 const log = label => x =>
@@ -1149,15 +1175,17 @@ a transformed `Async` is returned. When passed a [`Last`][last] returning functi
 a function will be returned that takes a given value and returns an `Async`.
 
 ```javascript
-const { Resolved } = require('crocks/Async')
-const Last = require('crocks/Last')
+import Async from 'crocks/Async'
+import Last from 'crocks/Last'
 
-const lastToAsync = require('crocks/Async/lastToAsync')
+import lastToAsync from 'crocks/Async/lastToAsync'
 
-const Pred = require('crocks/Pred')
-const isString = require('crocks/predicates/isString')
-const mconcatMap = require('crocks/helpers/mconcatMap')
-const safe = require('crocks/Maybe/safe')
+import Pred from 'crocks/Pred'
+import isString from 'crocks/predicates/isString'
+import mconcatMap from 'crocks/helpers/mconcatMap'
+import safe from 'crocks/Maybe/safe'
+
+const { Resolved } = Async
 
 // log :: String -> a -> a
 const log = label => x =>
@@ -1235,16 +1263,19 @@ a transformed `Async` is returned. When passed a [`Maybe`][maybe] returning func
 a function will be returned that takes a given value and returns an `Async`.
 
 ```javascript
-const { Resolved } = require('crocks/Async')
-const { Nothing, Just } = require('crocks/Maybe')
+import Async from 'crocks/Async'
+import Maybe from 'crocks/Maybe'
 
-const maybeToAsync = require('crocks/Async/maybeToAsync')
+import maybeToAsync from 'crocks/Async/maybeToAsync'
 
-const and = require('crocks/logic/and')
-const isEmpty = require('crocks/predicates/isEmpty')
-const isArray = require('crocks/predicates/isArray')
-const not = require('crocks/logic/not')
-const safe = require('crocks/Maybe/safe')
+import and from 'crocks/logic/and'
+import isEmpty from 'crocks/predicates/isEmpty'
+import isArray from 'crocks/predicates/isArray'
+import not from 'crocks/logic/not'
+import safe from 'crocks/Maybe/safe'
+
+const { Resolved } = Async
+const { Nothing, Just } = Maybe
 
 // log :: String -> a -> a
 const log = label => x =>
@@ -1301,14 +1332,19 @@ a transformed `Async` is returned. When passed a `Result` returning function,
 a function will be returned that takes a given value and returns an `Async`.
 
 ```javascript
-const { Resolved } = require('crocks/Async')
-const { Err, Ok } = require('crocks/Result')
+import Async from 'crocks/Async'
 
-const resultToAsync = require('crocks/Async/resultToAsync')
+import Result from 'crocks/Result'
 
-const identity = require('crocks/combinators/identity')
-const isNumber = require('crocks/predicates/isNumber')
-const tryCatch = require('crocks/Result/tryCatch')
+import resultToAsync from 'crocks/Async/resultToAsync'
+
+import identity from 'crocks/combinators/identity'
+import isNumber from 'crocks/predicates/isNumber'
+import tryCatch from 'crocks/Result/tryCatch'
+
+const { Resolved } = Async
+
+const { Err, Ok }  = Result
 
 // log :: String -> a -> a
 const log = label => x =>

@@ -11,11 +11,12 @@ const compose = curry(require('../core/compose'))
 const isFunction = require('../core/isFunction')
 const isObject = require('../core/isObject')
 const isSameType = require('../core/isSameType')
+const isString = require('../core/isString')
 const unit = require('../core/_unit')
 
 const identity = x => x
 
-const reverseApply =
+const applyTo =
   x => fn => fn(x)
 
 const _Writer = require('.')
@@ -51,7 +52,7 @@ test('Writer', t => {
 
   t.ok(isFunction(Writer.of), 'provides an of function')
   t.ok(isFunction(Writer.type), 'provides a type function')
-  t.ok(isFunction(Writer['@@type']), 'provides a @@type function')
+  t.ok(isString(Writer['@@type']), 'provides a @@type string')
 
   t.throws(f(), TypeError, 'throws with no parameters')
   t.throws(f(0), TypeError, 'throws with one parameter')
@@ -107,9 +108,8 @@ test('Writer type', t => {
 test('Writer @@type', t => {
   const m = Writer(0, 0)
 
-  t.ok(isFunction(m['@@type']), 'is a function')
   t.equal(Writer['@@type'], m['@@type'], 'static and instance versions are the same')
-  t.equal(m['@@type'](), 'crocks/Writer@1( crocks/Last@1 )', 'returns crocks/Writer@1 with Monoid Type')
+  t.equal(m['@@type'], 'crocks/Writer@1( crocks/Last@1 )', 'returns crocks/Writer@1 with Monoid Type')
 
   t.end()
 })
@@ -309,7 +309,7 @@ test('Writer of properties (Applicative)', t => {
   t.equal(m.ap(Writer.of(3)).valueOf(), Writer.of(identity(3)).valueOf(), 'homomorphism')
 
   const a = x => m.ap(Writer.of(x))
-  const b = x => Writer.of(reverseApply(x)).ap(m)
+  const b = x => Writer.of(applyTo(x)).ap(m)
 
   t.equal(a(3).valueOf(), b(3).valueOf(), 'interchange')
 

@@ -94,7 +94,7 @@ test('typeFn function ', t => {
   const { typeFn } = _types
 
   const fn =
-    (x, v) => typeFn(x, v)()
+    (x, v) => typeFn(x, v)
 
   t.equals(fn('All'), 'crocks/All@0', 'returns `crocks/All@0` for key `All` with no version')
   t.equals(fn('All', 1), 'crocks/All@1', 'returns `crocks/All@1` for key `All` with a version of 1')

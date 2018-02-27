@@ -26,11 +26,11 @@ takes a predicate, either a predicate function or a `Pred` instance can be used.
 This implementation of `Pred` was heavily inspired by [this article](https://medium.com/@drboolean/monoidal-contravariant-functors-are-actually-useful-1032211045c4#.polugsx2a).
 
 ```javascript
-const Pred = require('crocks/Pred')
+import Pred from 'crocks/Pred'
 
-const isNumber = require('crocks/predicates/isNumber')
-const propOr = require('crocks/helpers/propOr')
-const filter = require('crocks/pointfree/filter')
+import isNumber from 'crocks/predicates/isNumber'
+import propOr from 'crocks/helpers/propOr'
+import filter from 'crocks/pointfree/filter'
 
 // largeNumber :: Pred Number
 const largeNumber =
@@ -85,10 +85,10 @@ the case of `Pred` the result of `empty` is a `Pred` that will always return
 convenience.
 
 ```javascript
-const Pred = require('crocks/Pred')
+import Pred from 'crocks/Pred'
 
-const isEmpty = require('crocks/predicates/isEmpty')
-const not = require('crocks/logic/not')
+import isEmpty from 'crocks/predicates/isEmpty'
+import not from 'crocks/logic/not'
 
 // empty :: Pred a
 const empty =
@@ -136,11 +136,11 @@ specified by the `Semigroup`. In the case of `Pred`, the results of both
 `Preds`s are combined under logical conjunction.
 
 ```javascript
-const Pred = require('crocks/Pred')
+import Pred from 'crocks/Pred'
 
-const or = require('crocks/logic/or')
-const not = require('crocks/logic/not')
-const filter = require('crocks/pointfree/filter')
+import or from 'crocks/logic/or'
+import not from 'crocks/logic/not'
+import filter from 'crocks/pointfree/filter'
 
 const isEven =
   x => !(x % 2)
@@ -215,9 +215,9 @@ it hits the wrapped predicate function. Using `contramap`, functions are lifted,
 mapping the input to now accept the type of the input of the given function.
 
 ```javascript
-const Pred = require('crocks/Pred')
-const contramap = require('crocks/pointfree/contramap')
-const propOr = require('crocks/helpers/propOr')
+import Pred from 'crocks/Pred'
+import contramap from 'crocks/pointfree/contramap'
+import propOr from 'crocks/helpers/propOr'
 
 // Length :: String | Function | Array
 // length :: Length -> Number
@@ -278,12 +278,12 @@ because all `crocks` functions that take a predicate function can also take a
 `Pred` instance.
 
 ```javascript
-const Pred = require('crocks/Pred')
+import Pred from 'crocks/Pred'
 
-const isArray = require('crocks/predicates/isArray')
-const isString = require('crocks/predicates/isString')
-const equals = require('crocks/pointfree/equals')
-const or = require('crocks/logic/or')
+import isArray from 'crocks/predicates/isArray'
+import isString from 'crocks/predicates/isString'
+import equals from 'crocks/pointfree/equals'
+import or from 'crocks/logic/or'
 
 // lengthIsThree :: Pred a
 const lengthIsThree =
@@ -335,12 +335,12 @@ take a `Pred` instance. It does come in handy though when supplying predicates
 to other libraries.
 
 ```javascript
-const Pred = require('crocks/Pred')
+import Pred from 'crocks/Pred'
 
-const hasProp = require('crocks/predicates/hasProp')
-const equals = require('crocks/pointfree/equals')
-const flip = require('crocks/combinators/flip')
-const runWith = require('crocks/pointfree/runWith')
+import hasProp from 'crocks/predicates/hasProp'
+import equals from 'crocks/pointfree/equals'
+import flip from 'crocks/combinators/flip'
+import runWith from 'crocks/pointfree/runWith'
 
 // trueBlue :: Pred Object
 const trueBlue =

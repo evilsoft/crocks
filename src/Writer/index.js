@@ -6,8 +6,8 @@ const VERSION = 1
 const _equals = require('../core/equals')
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
-const __type = require('../core/types').type('Writer')
-const _typeFn = require('../core/types').typeFn(__type(), VERSION)
+const __type = require('../core/types').type('Writer')()
+const _typeString = require('../core/types').typeFn(__type, VERSION)
 const fl = require('../core/flNames')
 
 const Pair = require('../core/Pair')
@@ -27,10 +27,10 @@ function _Writer(Monoid) {
     x => Writer(Monoid.empty().valueOf(), x)
 
   const _type =
-    constant(`${__type()}( ${Monoid.type()} )`)
+    constant(`${__type}( ${Monoid.type()} )`)
 
-  const typeFn =
-    constant(`${_typeFn()}( ${Monoid['@@type']()} )`)
+  const typeString =
+    `${_typeString}( ${Monoid['@@type']} )`
 
   function Writer(entry, val) {
     if(arguments.length !== 2) {
@@ -100,7 +100,7 @@ function _Writer(Monoid) {
       [fl.equals]: equals,
       [fl.map]: map,
       [fl.chain]: chain,
-      ['@@type']: typeFn,
+      ['@@type']: typeString,
       constructor: Writer
     }
   }
@@ -109,7 +109,7 @@ function _Writer(Monoid) {
   Writer.type = _type
 
   Writer[fl.of] = _of
-  Writer['@@type'] = typeFn
+  Writer['@@type'] = typeString
 
   Writer['@@implements'] = _implements(
     [ 'ap', 'chain', 'equals', 'map', 'of' ]

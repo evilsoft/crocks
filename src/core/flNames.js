@@ -16,5 +16,5 @@ module.exports = {
   of: 'fantasy-land/of',
   promap: 'fantasy-land/promap',
   reduce: 'fantasy-land/reduce',
-  zero: 'fantasy-land/zero',
+  zero: 'fantasy-land/zero'
 }

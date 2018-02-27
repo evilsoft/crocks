@@ -16,11 +16,11 @@ using [`valueOf`](#valueof) like any other `Monoid` or can be executed directly
 using [`runWith`](#runWith), supplying the input.
 
 ```javascript
-const Endo = require('crocks/Endo')
+import Endo from 'crocks/Endo'
 
-const curry = require('crocks/helpers/curry')
-const mconcat = require('crocks/helpers/mconcat')
-const valueOf = require('crocks/pointfree/valueOf')
+import curry from 'crocks/helpers/curry'
+import mconcat from 'crocks/helpers/mconcat'
+import valueOf from 'crocks/pointfree/valueOf'
 
 // add :: Number -> Number -> Number
 const add =
@@ -76,9 +76,9 @@ its input. `empty` is available on both the Constructor and the Instance for
 convenience.
 
 ```javascript
-const Endo = require('crocks/Endo')
+import Endo from 'crocks/Endo'
 
-const runWith = require('crocks/pointfree/runWith')
+import runWith from 'crocks/pointfree/runWith'
 
 // empty :: Endo a
 const empty = Endo.empty()
@@ -115,11 +115,11 @@ specified by the `Semigroup`. In the case of `Endo`, it will combine (2)
 endofunctions under function composition.
 
 ```javascript
-const Endo = require('crocks/Endo')
+import Endo from 'crocks/Endo'
 
-const assoc = require('crocks/helpers/assoc')
-const mapProps = require('crocks/helpers/mapProps')
-const objOf = require('crocks/helpers/objOf')
+import assoc from 'crocks/helpers/assoc'
+import mapProps from 'crocks/helpers/mapProps'
+import objOf from 'crocks/helpers/objOf'
 
 // inc :: Number -> Number
 const inc =
@@ -163,11 +163,11 @@ helper functions that ship with `crocks`. Calling `valueOf` on
 an `Endo` instance will result in the underlying endofunction.
 
 ```javascript
-const Endo = require('crocks/Endo')
+import Endo from 'crocks/Endo'
 
-const filter = require('crocks/pointfree/filter')
-const map = require('crocks/pointfree/map')
-const mconcat = require('crocks/helpers/mconcat')
+import filter from 'crocks/pointfree/filter'
+import map from 'crocks/pointfree/map'
+import mconcat from 'crocks/helpers/mconcat'
 
 // lt10 :: [ Number ] -> [ Number ]
 const lt10 =
@@ -205,11 +205,11 @@ same type required by the function, `runWith` will execute the underlying
 function and return the result.
 
 ```javascript
-const Endo = require('crocks/Endo')
+import Endo from 'crocks/Endo'
 
-const filter = require('crocks/pointfree/filter')
-const map = require('crocks/pointfree/map')
-const mconcat = require('crocks/helpers/mconcat')
+import filter from 'crocks/pointfree/filter'
+import map from 'crocks/pointfree/map'
+import mconcat from 'crocks/helpers/mconcat'
 
 // lt10 :: [ Number ] -> [ Number ]
 const lt10 =

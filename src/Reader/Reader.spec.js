@@ -9,12 +9,13 @@ const compose = curry(require('../core/compose'))
 const isFunction = require('../core/isFunction')
 const isObject = require('../core/isObject')
 const isSameType = require('../core/isSameType')
+const isString = require('../core/isString')
 const unit = require('../core/_unit')
 
 const constant = x => () => x
 const identity = x => x
 
-const reverseApply =
+const applyTo =
   x => fn => fn(x)
 
 const Reader = require('.')
@@ -31,7 +32,7 @@ test('Reader', t => {
   t.ok(isFunction(Reader.of), 'provides an of function')
   t.ok(isFunction(Reader.ask), 'provides an ask function')
   t.ok(isFunction(Reader.type), 'provides a type function')
-  t.ok(isFunction(Reader['@@type']), 'provides a @@type function')
+  t.ok(isString(Reader['@@type']), 'provides a @@type string')
 
   const err = /Reader: Must wrap a function/
   t.throws(r(), err, 'throws with no parameters')
@@ -96,9 +97,8 @@ test('Reader type', t => {
 test('Reader @@type', t => {
   const m = Reader(unit)
 
-  t.ok(isFunction(m['@@type']), 'is a function')
   t.equal(Reader['@@type'], m['@@type'], 'static and instance versions are the same')
-  t.equal(m['@@type'](), 'crocks/Reader@1', 'type returns crocks/Reader@1')
+  t.equal(m['@@type'], 'crocks/Reader@1', 'type returns crocks/Reader@1')
   t.end()
 })
 
@@ -288,7 +288,7 @@ test('Reader of properties (Applicative)', t => {
   t.equal(m.ap(Reader.of(3)).runWith(e), Reader.of(identity(3)).runWith(e), 'homomorphism')
 
   const a = x => m.ap(Reader.of(x))
-  const b = x => Reader.of(reverseApply(x)).ap(m)
+  const b = x => Reader.of(applyTo(x)).ap(m)
 
   t.equal(a(3).runWith(e), b(3).runWith(e), 'interchange')
 

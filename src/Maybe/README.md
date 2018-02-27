@@ -22,12 +22,14 @@ constructors to construct `Maybe` instances in most cases. You can use the
 `Just`.
 
 ```javascript
-const { Just, Nothing } = require('crocks/Maybe')
+import Maybe from 'crocks/Maybe'
 
-const chain = require('crocks/pointfree/chain')
-const compose = require('crocks/helpers/compose')
-const ifElse = require('crocks/logic/ifElse')
-const isNumber = require('crocks/predicates/isNumber')
+import chain from 'crocks/pointfree/chain'
+import compose from 'crocks/helpers/compose'
+import ifElse from 'crocks/logic/ifElse'
+import isNumber from 'crocks/predicates/isNumber'
+
+const { Just, Nothing } = Maybe
 
 // gt5 :: Number -> Boolean
 const gt5 =
@@ -90,11 +92,13 @@ will just return another `Nothing`. Anything passed to the constructor will
 be thrown out and mapped to `()`.
 
 ```javascript
-const { Just, Nothing } = require('crocks/Maybe')
+import Maybe from 'crocks/Maybe'
 
-const chain = require('crocks/pointfree/chain')
-const isNumber = require('crocks/predicates/isNumber')
-const safeLift = require('crocks/Maybe/safeLift')
+import chain from 'crocks/pointfree/chain'
+import isNumber from 'crocks/predicates/isNumber'
+import safeLift from 'crocks/Maybe/safeLift'
+
+const { Just, Nothing } = Maybe
 
 // add10 :: Number -> Number
 const add10 =
@@ -130,12 +134,14 @@ disjunction or a valid value.  `Just` will wrap any given value in
 a `Just`, signaling the validity of the wrapped value.
 
 ```javascript
-const { Just, Nothing } = require('crocks/Maybe')
+import Maybe from 'crocks/Maybe'
 
-const compose = require('crocks/helpers/compose')
-const ifElse = require('crocks/logic/ifElse')
-const isString = require('crocks/predicates/isString')
-const map = require('crocks/pointfree/map')
+import compose from 'crocks/helpers/compose'
+import ifElse from 'crocks/logic/ifElse'
+import isString from 'crocks/predicates/isString'
+import map from 'crocks/pointfree/map'
+
+const { Just, Nothing } = Maybe
 
 // toUpper :: String -> String
 const toUpper =
@@ -172,12 +178,13 @@ for `of` when working with functions that will work with
 ANY `Applicative`/`Monad`.
 
 ```javascript
-const Maybe = require('crocks/Maybe')
-const { Just } = Maybe
+import Maybe from 'crocks/Maybe'
 
-const curry = require('crocks/helpers/curry')
-const isString = require('crocks/predicates/isString')
-const safe = require('crocks/Maybe/safe')
+import curry from 'crocks/helpers/curry'
+import isString from 'crocks/predicates/isString'
+import safe from 'crocks/Maybe/safe'
+
+const { Just } = Maybe
 
 Maybe(35)
 //=> Just 35
@@ -219,13 +226,15 @@ When working with `Alt`s, `zero` provides a sort of `empty` or identity for
 can be used to fold a collection of `Alt`s under `alt`.
 
 ```javascript
-const { Nothing, Just, zero } = require('crocks/Maybe')
+import Maybe from 'crocks/Maybe'
 
-const alt = require('crocks/pointfree/alt')
-const flip = require('crocks/combinators/flip')
-const isNumber = require('crocks/predicates/isNumber')
-const mapReduce = require('crocks/helpers/mapReduce')
-const safe = require('crocks/Maybe/safe')
+import alt from 'crocks/pointfree/alt'
+import flip from 'crocks/combinators/flip'
+import isNumber from 'crocks/predicates/isNumber'
+import mapReduce from 'crocks/helpers/mapReduce'
+import safe from 'crocks/Maybe/safe'
+
+const { Nothing, Just, zero } = Maybe
 
 // firstValid :: [ * ] -> Maybe Number
 const firstValid =
@@ -272,9 +281,11 @@ of the `Maybe` the method is being called on. If the passed argument is not
 a `Maybe` or the underlying values are not equal, `equals` will return `false`.
 
 ```javascript
-const { Nothing, Just } = require('crocks/Maybe')
+import Maybe from 'crocks/Maybe'
 
-const equals = require('crocks/pointfree/equals')
+import equals from 'crocks/pointfree/equals'
+
+const { Nothing, Just } = Maybe
 
 Just(33)
   .equals(Just(33))
@@ -317,17 +328,19 @@ the (2) underlying `Semigroup`s. When called on a `Nothing` instance, `concat`
 will return a `Nothing`.
 
 ```javascript
-const { Nothing, Just } = require('crocks/Maybe')
-const Sum = require('crocks/Sum')
+import Maybe from 'crocks/Maybe'
+import Sum from 'crocks/Sum'
 
-const compose = require('crocks/helpers/compose')
-const concat = require('crocks/pointfree/concat')
-const flip = require('crocks/combinators/flip')
-const isNumber = require('crocks/predicates/isNumber')
-const map = require('crocks/pointfree/map')
-const mapReduce = require('crocks/helpers/mapReduce')
-const safeLift = require('crocks/Maybe/safeLift')
-const valueOf = require('crocks/pointfree/valueOf')
+import compose from 'crocks/helpers/compose'
+import concat from 'crocks/pointfree/concat'
+import flip from 'crocks/combinators/flip'
+import isNumber from 'crocks/predicates/isNumber'
+import map from 'crocks/pointfree/map'
+import mapReduce from 'crocks/helpers/mapReduce'
+import safeLift from 'crocks/Maybe/safeLift'
+import valueOf from 'crocks/pointfree/valueOf'
+
+const { Nothing, Just } = Maybe
 
 // safeSum :: a -> Maybe Sum
 const safeSum =
@@ -370,14 +383,16 @@ the wrapped value. When ran on a `Just` instance, `map` will apply the wrapped
 value to the provided function and return the result in a new `Just` instance.
 
 ```javascript
-const { Nothing, Just } = require('crocks/Maybe')
+import Maybe from 'crocks/Maybe'
 
-const assign = require('crocks/helpers/assign')
-const compose = require('crocks/helpers/compose')
-const isObject = require('crocks/predicates/isObject')
-const isString = require('crocks/predicates/isString')
-const map = require('crocks/pointfree/map')
-const safe = require('crocks/Maybe/safe')
+import assign from 'crocks/helpers/assign'
+import compose from 'crocks/helpers/compose'
+import isObject from 'crocks/predicates/isObject'
+import isString from 'crocks/predicates/isString'
+import map from 'crocks/pointfree/map'
+import safe from 'crocks/Maybe/safe'
+
+const { Nothing, Just } = Maybe
 
 // add10 :: Number -> Number
 const add10 =
@@ -436,13 +451,15 @@ if it does not have a `Just`. This can be used in conjunction with
 structure.
 
 ```javascript
-const { zero, Nothing, Just } = require('crocks/Maybe')
+import Maybe from 'crocks/Maybe'
 
-const alt = require('crocks/pointfree/alt')
-const isArray = require('crocks/predicates/isArray')
-const flip = require('crocks/combinators/flip')
-const mapReduce = require('crocks/helpers/mapReduce')
-const safe = require('crocks/Maybe/safe')
+import alt from 'crocks/pointfree/alt'
+import isArray from 'crocks/predicates/isArray'
+import flip from 'crocks/combinators/flip'
+import mapReduce from 'crocks/helpers/mapReduce'
+import safe from 'crocks/Maybe/safe'
+
+const { zero, Nothing, Just } = Maybe
 
 // firstArray :: Foldable f => f * -> Maybe Array
 const firstArray =
@@ -481,18 +498,19 @@ any of the inputs results in a `Nothing` than they will never be applied to
 the function and not provide exceptions or unexpected results.
 
 ```javascript
-const Maybe = require('crocks/Maybe')
-const { Nothing, Just } =  Maybe
+import Maybe from 'crocks/Maybe'
 
-const compose = require('crocks/helpers/compose')
-const chain = require('crocks/pointfree/chain')
-const curry = require('crocks/helpers/curry')
-const fanout = require('crocks/helpers/fanout')
-const isString = require('crocks/predicates/isString')
-const liftA2 = require('crocks/helpers/liftA2')
-const merge = require('crocks/Pair/merge')
-const prop = require('crocks/Maybe/prop')
-const safe = require('crocks/Maybe/safe')
+import compose from 'crocks/helpers/compose'
+import chain from 'crocks/pointfree/chain'
+import curry from 'crocks/helpers/curry'
+import fanout from 'crocks/helpers/fanout'
+import isString from 'crocks/predicates/isString'
+import liftA2 from 'crocks/helpers/liftA2'
+import merge from 'crocks/Pair/merge'
+import prop from 'crocks/Maybe/prop'
+import safe from 'crocks/Maybe/safe'
+
+const { Nothing, Just } =  Maybe
 
 // add :: Number -> Number -> Number
 const add =
@@ -561,11 +579,12 @@ the case of when the `Maybe` instance is a `Nothing`. `sequence` can be derived
 from [`traverse`](#traverse) by passing it an `identity` function (`x => x`).
 
 ```javascript
-const { Nothing, Just } = require('crocks/Maybe')
+import Maybe from 'crocks/Maybe'
 
-const Identity = require('crocks/Identity')
-const sequence = require('crocks/pointfree/sequence')
+import Identity from 'crocks/Identity'
+import sequence from 'crocks/pointfree/sequence'
 
+const { Nothing, Just } = Maybe
 
 // seqId :: Maybe Identity a -> Identity Maybe a
 const seqId =
@@ -594,12 +613,12 @@ that is used to apply the `Applicative` to the value inside of the `Maybe`. Both
 functions must return an instance of the `Applicative`.
 
 ```javascript
-const IO = require('crocks/IO')
+import IO from 'crocks/IO'
 
-const compose = require('crocks/helpers/compose')
-const isNumber = require('crocks/predicates/isNumber')
-const safe = require('crocks/Maybe/safe')
-const traverse = require('crocks/pointfree/traverse')
+import compose from 'crocks/helpers/compose'
+import isNumber from 'crocks/predicates/isNumber'
+import safe from 'crocks/Maybe/safe'
+import traverse from 'crocks/pointfree/traverse'
 
 let someGlobal = 10
 
@@ -640,15 +659,17 @@ inner value will be passed to provided function, returning the result as the
 new instance.
 
 ```javascript
-const { Nothing, Just } = require('crocks/Maybe')
+import Maybe from 'crocks/Maybe'
 
-const chain = require('crocks/pointfree/chain')
-const compose = require('crocks/helpers/compose')
-const isNumber = require('crocks/predicates/isNumber')
-const isString = require('crocks/predicates/isString')
-const prop = require('crocks/Maybe/prop')
-const safe = require('crocks/Maybe/safe')
-const safeLift = require('crocks/Maybe/safeLift')
+import chain from 'crocks/pointfree/chain'
+import compose from 'crocks/helpers/compose'
+import isNumber from 'crocks/predicates/isNumber'
+import isString from 'crocks/predicates/isString'
+import prop from 'crocks/Maybe/prop'
+import safe from 'crocks/Maybe/safe'
+import safeLift from 'crocks/Maybe/safeLift'
+
+const { Nothing, Just } = Maybe
 
 // double :: Number -> Number
 const double =
@@ -703,18 +724,20 @@ instance wrapping the result of the function. The second function is used when
 returning a new `Just` instance wrapping the result of the second function.
 
 ```javascript
-const { Nothing, Just } = require('crocks/Maybe')
+import Maybe from 'crocks/Maybe'
 
-const compose = require('crocks/helpers/compose')
-const composeK = require('crocks/helpers/composeK')
-const coalesce = require('crocks/pointfree/coalesce')
-const constant = require('crocks/combinators/constant')
-const identity = require('crocks/combinators/identity')
-const isString = require('crocks/predicates/isString')
-const map = require('crocks/pointfree/map')
-const objOf = require('crocks/helpers/objOf')
-const prop = require('crocks/Maybe/prop')
-const safe = require('crocks/Maybe/safe')
+import compose from 'crocks/helpers/compose'
+import composeK from 'crocks/helpers/composeK'
+import coalesce from 'crocks/pointfree/coalesce'
+import constant from 'crocks/combinators/constant'
+import identity from 'crocks/combinators/identity'
+import isString from 'crocks/predicates/isString'
+import map from 'crocks/pointfree/map'
+import objOf from 'crocks/helpers/objOf'
+import prop from 'crocks/Maybe/prop'
+import safe from 'crocks/Maybe/safe'
+
+const { Nothing, Just } = Maybe
 
 // shout :: String -> String
 const shout =
@@ -781,7 +804,9 @@ When the need to immediately map the result of optioning a `Maybe` arises,
 then [`either`](#either) may be employed to combine it in one operation.
 
 ```javascript
-const { Nothing, Just } = require('crocks/Maybe')
+import Maybe from 'crocks/Maybe'
+
+const { Nothing, Just } = Maybe
 
 Nothing()
   .option(0)
@@ -808,9 +833,11 @@ mapping.
 
 
 ```javascript
-const { Nothing, Just } = require('crocks/Maybe')
+import Maybe from 'crocks/Maybe'
 
-const either = require('crocks/pointfree/either')
+import either from 'crocks/pointfree/either'
+
+const { Nothing, Just } = Maybe
 
 // wrap :: a -> [ a ]
 const wrap =
@@ -845,12 +872,12 @@ If you want some safety around pulling a value out of an `Object` or `Array`
 with a single key or index, you can always reach for `prop`. Well, as long
 as you are working with non-nested data that is. Just tell `prop` either the key
 or index you are interested in, and you will get back a function that will take
-anything and return a `Just` with the wrapped value if the key/index exists. If
-the key/index does not exist however, you will get back a `Nothing`.
+anything and return a `Just` with the wrapped value if the key/index is defined.
+If the key/index is not defined, you will get back a `Nothing`.
 
 ```javascript
-const composeK = require('crocks/helpers/composeK')
-const prop = require('crocks/Maybe/prop')
+import composeK from 'crocks/helpers/composeK'
+import prop from 'crocks/Maybe/prop'
 
 // getValue :: a -> Maybe b
 const getValue =
@@ -902,14 +929,14 @@ this situation, just pull in `propPath` and pass it a left-to-right traversal
 path of keys, indices or a combination of both (gross...but possible). This will
 kick you back a function that behaves just like [`prop`](#prop). You pass it
 some data, and it will attempt to resolve your provided path. If the path is
-valid, it will return the value residing there (`null` included!) in a `Just`.
-But if at any point that path "breaks" it will give you back a `Nothing`.
+valid, it will return the value residing there (`null` and `NaN` included!) in
+a `Just`. But if at any point that path "breaks" it will give you back a `Nothing`.
 
 ```javascript
-const composeK = require('crocks/helpers/composeK')
-const isString = require('crocks/predicates/isString')
-const propPath = require('crocks/Maybe/propPath')
-const safe = require('crocks/Maybe/safe')
+import composeK from 'crocks/helpers/composeK'
+import isString from 'crocks/predicates/isString'
+import propPath from 'crocks/Maybe/propPath'
+import safe from 'crocks/Maybe/safe'
 
 // getFirstValue :: a -> Maybe b
 const getFirstValue =
@@ -962,10 +989,10 @@ value will be evaluated against the predicate, and will lift it into a `Just` if
 true and a `Nothing` if false.
 
 ```javascript
-const Pred = require('crocks/Pred')
+import Pred from 'crocks/Pred'
 
-const isArray = require('crocks/predicates/isArray')
-const safe = require('crocks/Maybe/safe')
+import isArray from 'crocks/predicates/isArray'
+import safe from 'crocks/Maybe/safe'
 
 // length :: Array -> Number
 const length =
@@ -1022,10 +1049,10 @@ that will first lift its argument into a `Maybe` and then maps your original
 function over the result.
 
 ```javascript
-const Pred = require('crocks/Pred')
+import Pred from 'crocks/Pred'
 
-const isNumber = require('crocks/predicates/isNumber')
-const safeLift = require('crocks/Maybe/safeLift')
+import isNumber from 'crocks/predicates/isNumber'
+import safeLift from 'crocks/Maybe/safeLift'
 
 // doubleOf :: Number -> Number
 const doubleOf =
@@ -1105,13 +1132,18 @@ a transformed `Maybe` is returned. When passed an `Either` returning function,
 a function will be returned that takes a given value and returns a `Maybe`.
 
 ```javascript
-const { Nothing, Just } = require('crocks/Maybe')
-const { Left, Right } = require('crocks/Either')
-const eitherToMaybe = require('crocks/Maybe/eitherToMaybe')
+import Maybe from 'crocks/Maybe'
+import Either from 'crocks/Either'
 
-const constant = require('crocks/combinators/constant')
-const ifElse = require('crocks/logic/ifElse')
-const isNumber = require('crocks/predicates/isNumber')
+import eitherToMaybe from 'crocks/Maybe/eitherToMaybe'
+
+import constant from 'crocks/combinators/constant'
+import ifElse from 'crocks/logic/ifElse'
+import isNumber from 'crocks/predicates/isNumber'
+
+const { Nothing, Just } = Maybe
+
+const { Left, Right } = Either
 
 // someNumber :: a -> Either String Number
 const someNumber = ifElse(
@@ -1160,11 +1192,14 @@ a transformed `Maybe` is returned. When passed a `First` returning function,
 a function will be returned that takes a given value and returns a `Maybe`.
 
 ```javascript
-const { Nothing, Just } = require('crocks/Maybe')
-const First = require('crocks/First')
-const firstToMaybe = require('crocks/Maybe/firstToMaybe')
+import Maybe from 'crocks/Maybe'
 
-const mconcat = require('crocks/helpers/mconcat')
+import First from 'crocks/First'
+import firstToMaybe from 'crocks/Maybe/firstToMaybe'
+
+import mconcat from 'crocks/helpers/mconcat'
+
+const { Nothing, Just } = Maybe
 
 // firstValue :: [ a ] -> First a
 const firstValue =
@@ -1209,11 +1244,14 @@ a transformed `Maybe` is returned. When passed a `Last` returning function,
 a function will be returned that takes a given value and returns a `Maybe`.
 
 ```javascript
-const { Nothing, Just } = require('crocks/Maybe')
-const Last = require('crocks/Last')
-const lastToMaybe = require('crocks/Maybe/lastToMaybe')
+import Maybe from 'crocks/Maybe'
 
-const mconcat = require('crocks/helpers/mconcat')
+import Last from 'crocks/Last'
+import lastToMaybe from 'crocks/Maybe/lastToMaybe'
+
+import mconcat from 'crocks/helpers/mconcat'
+
+const { Nothing, Just } = Maybe
 
 // lastValue :: [ a ] -> Last a
 const lastValue =
@@ -1261,12 +1299,17 @@ a transformed `Maybe` is returned. When passed a `Result` returning function,
 a function will be returned that takes a given value and returns a `Maybe`.
 
 ```javascript
-const { Nothing, Just } = require('crocks/Maybe')
-const { Err, Ok } = require('crocks/Result')
-const resultToMaybe = require('crocks/Maybe/resultToMaybe')
+import Maybe from 'crocks/Maybe'
+import Result from 'crocks/Result'
 
-const identity = require('crocks/combinators/identity')
-const tryCatch = require('crocks/Result/tryCatch')
+import resultToMaybe from 'crocks/Maybe/resultToMaybe'
+
+import identity from 'crocks/combinators/identity'
+import tryCatch from 'crocks/Result/tryCatch'
+
+const { Nothing, Just } = Maybe
+
+const { Err, Ok } = Result
 
 function datErrTho() {
   throw new Error('something amiss')

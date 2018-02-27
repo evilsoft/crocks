@@ -1,32 +1,49 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Henrique Limas */
+/** @author Ian Hofmann-Hicks */
 
 const curry = require('../core/curry')
 const isArray = require('../core/isArray')
+const isEmpty = require('../core/isEmpty')
 const isInteger = require('../core/isInteger')
-const isNil= require('../core/isNil')
+const isDefined = require('../core/isDefined')
+const isNil = require('../core/isNil')
 const isString = require('../core/isString')
-
-const lift = (x, def) =>
-  isNil(x) ? def : x
 
 // propPathOr : a -> [ String | Integer ] -> b -> c
 function propPathOr(def, keys, target) {
   if(!isArray(keys)) {
-    throw new TypeError('propPathOr: Array of strings or integers required for second argument')
+    throw new TypeError(
+      'propPathOr: Array of Non-empty Strings or Integers required for second argument'
+    )
   }
 
   if(isNil(target)) {
     return def
   }
 
-  return keys.reduce((target, key) => {
-    if(!(isString(key) || isInteger(key))) {
-      throw new TypeError('propPathOr: Array of strings or integers required for second argument')
+  let value = target
+  for(let i = 0; i < keys.length; i++) {
+    const key = keys[i]
+
+    if(!((isString(key) && !isEmpty(key)) || isInteger(key))) {
+      throw new TypeError(
+        'propPathOr: Array of Non-empty Strings or Integers required for second argument'
+      )
     }
 
-    return lift(target[key], def)
-  }, target)
+    if(isNil(value)) {
+      return def
+    }
+
+    value = value[key]
+
+    if(!isDefined(value)) {
+      return def
+    }
+  }
+
+  return value
 }
 
 module.exports = curry(propPathOr)

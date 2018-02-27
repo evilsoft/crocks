@@ -12,9 +12,9 @@ Prod Number
 `Prod` is a `Monoid` that will combine (2) `Number`s under multiplication.
 
 ```javascript
-const Prod = require('crocks/Prod')
-const compose = require('crocks/helpers/compose')
-const concat = require('crocks/pointfree/concat')
+import Prod from 'crocks/Prod'
+import compose from 'crocks/helpers/compose'
+import concat from 'crocks/pointfree/concat'
 
 const emptyProd = Prod.empty()
 const tenProd = Prod(10)
@@ -63,7 +63,7 @@ In the case of `Prod` the result of `empty` is `1`. `empty` is available on
 both the Constructor and the Instance for convenience.
 
 ```javascript
-const Prod = require('crocks/Prod')
+import Prod from 'crocks/Prod'
 
 Prod.empty()
 //=> Prod 1
@@ -98,7 +98,7 @@ operation specified by the `Semigroup`. In the case of `Prod`, `concat` will
 multiply the (2) `Number`s.
 
 ```javascript
-const Prod = require('crocks/Prod')
+import Prod from 'crocks/Prod'
 
 Prod(5)
   .concat(Prod(4))
@@ -130,7 +130,7 @@ helper functions that ship with `crocks`. Calling `valueOf` on a `Prod`
 instance will result in the underlying `Number`.
 
 ```javascript
-const Prod = require('crocks/Prod')
+import Prod from 'crocks/Prod'
 
 Prod.empty()
   .valueOf()
@@ -141,7 +141,7 @@ Prod(4)
 //=> 4
 
 Prod(34)
-  .concat(21)
+  .concat(Prod(21))
   .valueOf()
 //=> 714
 ```

@@ -29,7 +29,7 @@ const _types = {
   'State': () => 'State',
   'Sum': () => 'Sum',
   'Unit': () => 'Unit',
-  'Writer': () => 'Writer',
+  'Writer': () => 'Writer'
 }
 
 const type =
@@ -40,7 +40,7 @@ const proxy =
 
 const typeFn = (t, ver) => {
   const typeStr = type(t)()
-  return () => `crocks/${typeStr}@${ver || 0}`
+  return `crocks/${typeStr}@${ver || 0}`
 }
 
 module.exports = {

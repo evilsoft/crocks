@@ -11,11 +11,12 @@ const isArray = require('../core/isArray')
 const isFunction = require('../core/isFunction')
 const isObject = require('../core/isObject')
 const isSameType = require('../core/isSameType')
+const isString = require('../core/isString')
 const unit = require('../core/_unit')
 
 const identity = x => x
 
-const reverseApply =
+const applyTo =
   x => fn => fn(x)
 
 const Identity = require('.')
@@ -30,7 +31,7 @@ test('Identity', t => {
 
   t.ok(isFunction(Identity.of), 'provides an of function')
   t.ok(isFunction(Identity.type), 'provides a type function')
-  t.ok(isFunction(Identity['@@type']), 'provides a @@type function')
+  t.ok(isString(Identity['@@type']), 'provides a @@type string')
 
   const err = /Identity: Must wrap something/
   t.throws(Identity, err, 'throws with no parameters')
@@ -89,9 +90,8 @@ test('Identity type', t => {
 test('Identity @@type', t => {
   const m = Identity(0)
 
-  t.ok(isFunction(m['@@type']), 'provides a @@type function')
   t.equal(Identity['@@type'], m['@@type'], 'static and instance versions are the same')
-  t.equal(m['@@type'](), 'crocks/Identity@1', '@@type returns Identity')
+  t.equal(m['@@type'], 'crocks/Identity@1', '@@type returns Identity')
 
   t.end()
 })
@@ -318,7 +318,7 @@ test('Identity of properties (Applicative)', t => {
   t.equal(m.ap(Identity.of(3)).valueOf(), Identity.of(identity(3)).valueOf(), 'homomorphism')
 
   const a = x => m.ap(Identity.of(x))
-  const b = x => Identity.of(reverseApply(x)).ap(m)
+  const b = x => Identity.of(applyTo(x)).ap(m)
 
   t.equal(a(3).valueOf(), b(3).valueOf(), 'interchange')
 

@@ -10,6 +10,7 @@ const _compose = curry(require('./compose'))
 const isFunction = require('./isFunction')
 const isObject = require('./isObject')
 const isSameType = require('./isSameType')
+const isString = require('./isString')
 const unit = require('./_unit')
 
 const Maybe = require('./Maybe')
@@ -18,7 +19,7 @@ const Pred = require('../Pred')
 const constant = x => () => x
 const identity = x => x
 
-const reverseApply =
+const applyTo =
   x => fn => fn(x)
 
 const List = require('./List')
@@ -34,7 +35,7 @@ test('List', t => {
   t.ok(isFunction(List.of), 'provides an of function')
   t.ok(isFunction(List.fromArray), 'provides a fromArray function')
   t.ok(isFunction(List.type), 'provides a type function')
-  t.ok(isFunction(List['@@type']), 'provides a @@type function')
+  t.ok(isString(List['@@type']), 'provides a @@type string')
 
   const err = /List: List must wrap something/
   t.throws(List, err, 'throws with no parameters')
@@ -132,10 +133,8 @@ test('List type', t => {
 test('List @@type', t => {
   const m = List([])
 
-  t.ok(isFunction(m['@@type']), 'is a function')
-
   t.equal(m['@@type'], List['@@type'], 'static and instance versions are the same')
-  t.equal(m['@@type'](), 'crocks/List@1', 'returns crocks/List@1')
+  t.equal(m['@@type'], 'crocks/List@1', 'returns crocks/List@1')
 
   t.end()
 })
@@ -578,7 +577,7 @@ test('List of properties (Applicative)', t => {
   t.same(m.ap(List.of(3)).valueOf(), List.of(identity(3)).valueOf(), 'homomorphism')
 
   const a = x => m.ap(List.of(x))
-  const b = x => List.of(reverseApply(x)).ap(m)
+  const b = x => List.of(applyTo(x)).ap(m)
 
   t.same(a(3).valueOf(), b(3).valueOf(), 'interchange')
 

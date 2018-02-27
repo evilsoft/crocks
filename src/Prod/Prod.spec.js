@@ -5,6 +5,7 @@ const bindFunc = helpers.bindFunc
 
 const isFunction = require('../core/isFunction')
 const isObject = require('../core/isObject')
+const isString = require('../core/isString')
 
 const constant = x => () => x
 const identity = x => x
@@ -21,7 +22,7 @@ test('Prod', t => {
 
   t.ok(isFunction(Prod.empty), 'provides an empty function')
   t.ok(isFunction(Prod.type), 'provides a type function')
-  t.ok(isFunction(Prod['@@type']), 'provides a @@type function')
+  t.ok(isString(Prod['@@type']), 'provides a @@type string')
 
   const err = /Prod: Numeric value required/
   t.throws(s(), err, 'throws with nothing')
@@ -98,9 +99,8 @@ test('Prod type', t => {
 test('Prod @@type', t => {
   const m = Prod(0)
 
-  t.ok(isFunction(m['@@type']), 'is a function')
   t.equal(m['@@type'], Prod['@@type'], 'static and instance versions are the same')
-  t.equal(m['@@type'](), 'crocks/Prod@1', 'reports crocks/Prod@1')
+  t.equal(m['@@type'], 'crocks/Prod@1', 'reports crocks/Prod@1')
 
   t.end()
 })

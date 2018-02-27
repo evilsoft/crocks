@@ -2,7 +2,7 @@
 title: "Transformation Functions"
 description: "Transformation Functions API"
 layout: "notopic"
-weight: 6
+weight: 60
 ---
 
 Transformation functions are mostly used to reduce unwanted nesting of similar

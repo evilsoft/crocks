@@ -7,8 +7,9 @@ const bindFunc = helpers.bindFunc
 
 const curry = require('../core/curry')
 const compose = curry(require('../core/compose'))
-const isObject = require('../core/isObject')
 const isFunction  = require('../core/isFunction')
+const isObject = require('../core/isObject')
+const isString = require('../core/isString')
 const unit = require('../core/_unit')
 
 const Const = require('.')
@@ -22,7 +23,7 @@ test('Const', t => {
   t.ok(isObject(m), 'returns an object')
 
   t.ok(isFunction(Const.type), 'provides a type function')
-  t.ok(isFunction(Const['@@type']), 'provides a @@type function')
+  t.ok(isString(Const['@@type']), 'provides a @@type string')
 
   t.equals(Const(true).constructor, Const, 'provides TypeRep on constructor')
 
@@ -76,9 +77,8 @@ test('Const type', t => {
 test('Const @@type', t => {
   const m = Const(0)
 
-  t.ok(isFunction(m['@@type']), 'provides a @@type function')
   t.equal(m['@@type'], Const['@@type'], 'static and instance versions are the same')
-  t.equal(m['@@type'](), 'crocks/Const@1', 'type returns crocks/Const@1')
+  t.equal(m['@@type'], 'crocks/Const@1', 'type returns crocks/Const@1')
 
   t.end()
 })

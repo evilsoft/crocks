@@ -2,7 +2,7 @@
 description: "Logic Functions API"
 layout: "notopic"
 title: "Logic Functions"
-weight: 3
+weight: 30
 ---
 
 The functions in this section are used to represent logical branching in a

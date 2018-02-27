@@ -2,7 +2,7 @@
 title: "Point-free Functions"
 description: "Point-free Functions API"
 layout: "notopic"
-weight: 5
+weight: 50
 ---
 
 While it can seem natural to work with all these containers in a fluent fashion,
@@ -12,7 +12,7 @@ approach. Below is a small code same to contrast the difference between the two
 calling styles:
 
 ```javascript
-const crocks = require('crocks')
+import crocks from 'crocks'
 
 const {
   compose, map, safe, isInteger
@@ -98,11 +98,11 @@ accepted Datatype):
 | `chain` | `Array`, [`Async`][async-chain], `Const`, `Either`, `Identity`, `IO`, `List`, [`Maybe`][maybe-chain], `Pair`, [`Reader`][reader-chain], `Result`, [`State`][state-chain], `Unit`, `Writer` |
 | `coalesce` | [`Async`][async-coalesce], `Either`, [`Maybe`][maybe-coalesce], `Result` |
 | `compareWith` | [`Equiv`][equiv-compare] |
-| `concat` | [`All`][all-concat], [`Any`][any-concat], `Array`, [`Assign`][assign-concat], `Const`, `Either`, [`Endo`][endo-concat], [`Equiv`][equiv-concat], [`First`][first-concat], `Identity`, [`Last`][last-concat], `List`, `Max`, [`Maybe`][maybe-concat], `Min`, `Pair`, [`Pred`][pred-concat], [`Prod`][prod-concat], `Result`, `String`, [`Sum`][sum-concat], `Unit` |
+| `concat` | [`All`][all-concat], [`Any`][any-concat], `Array`, [`Assign`][assign-concat], `Const`, `Either`, [`Endo`][endo-concat], [`Equiv`][equiv-concat], [`First`][first-concat], `Identity`, [`Last`][last-concat], `List`, [`Max`][max-concat], [`Maybe`][maybe-concat], [`Min`][min-concat], `Pair`, [`Pred`][pred-concat], [`Prod`][prod-concat], `Result`, `String`, [`Sum`][sum-concat], `Unit` |
 | `cons` | `Array`, `List` |
 | `contramap` | [`Arrow`][arrow-contra], [`Equiv`][equiv-contra], [`Pred`][pred-contra], `Star` |
 | `either` | `Either`, [`Maybe`][maybe-either], `Result` |
-| `empty` | [`All`][all-empty], [`Any`][any-empty], `Array`, [`Assign`][assign-empty], [`Endo`][endo-empty], [`Equiv`][equiv-empty], [`First`][first-empty], [`Last`][last-empty], `List`, `Max`, `Min`, `Object`, [`Pred`][pred-empty], [`Prod`][prod-empty], `String`, [`Sum`][sum-empty], `Unit` |
+| `empty` | [`All`][all-empty], [`Any`][any-empty], `Array`, [`Assign`][assign-empty], [`Endo`][endo-empty], [`Equiv`][equiv-empty], [`First`][first-empty], [`Last`][last-empty], `List`, [`Max`][max-empty], [`Min`][min-empty], `Object`, [`Pred`][pred-empty], [`Prod`][prod-empty], `String`, [`Sum`][sum-empty], `Unit` |
 | [`evalWith`][eval] | [`State`][state-eval] |
 | [`execWith`][exec] | [`State`][state-exec] |
 | `extend` | `Pair` |
@@ -128,7 +128,7 @@ accepted Datatype):
 | `swap` | [`Async`][async-swap], `Either`, `Pair`, `Result` |
 | `tail` | `Array`, `List`, `String` |
 | `traverse` | `Array`, `Either`, `Identity`, `List`, [`Maybe`][maybe-traverse], `Pair`, `Result` |
-| `valueOf` | [`All`][all-value], [`Any`][any-value], [`Assign`][assign-value], `Const`, [`Endo`][endo-value], [`Equiv`][equiv-value], [`First`][first-value], `Identity`, [`Last`][last-value], `Max`, `Min`, [`Pred`][pred-value], [`Prod`][prod-value], [`Sum`][sum-value], `Unit`, `Writer` |
+| `valueOf` | [`All`][all-value], [`Any`][any-value], [`Assign`][assign-value], `Const`, [`Endo`][endo-value], [`Equiv`][equiv-value], [`First`][first-value], `Identity`, [`Last`][last-value], [`Max`][max-value], [`Min`][min-value], [`Pred`][pred-value], [`Prod`][prod-value], [`Sum`][sum-value], `Unit`, `Writer` |
 
 [all-concat]: ../monoids/All.html#concat
 [all-empty]: ../monoids/All.html#empty
@@ -179,6 +179,10 @@ accepted Datatype):
 [last-option]: ../monoids/Last.html#option
 [last-value]: ../monoids/Last.html#valueof
 
+[max-concat]: ../monoids/Max.html#concat
+[max-empty]: ../monoids/Max.html#empty
+[max-value]: ../monoids/Max.html#valueof
+
 [maybe-alt]: ../crocks/Maybe.html#alt
 [maybe-ap]: ../crocks/Maybe.html#ap
 [maybe-chain]: ../crocks/Maybe.html#chain
@@ -189,6 +193,10 @@ accepted Datatype):
 [maybe-option]: ../crocks/Maybe.html#option
 [maybe-sequence]: ../crocks/Maybe.html#sequence
 [maybe-traverse]: ../crocks/Maybe.html#traverse
+
+[min-concat]: ../monoids/Min.html#concat
+[min-empty]: ../monoids/Min.html#empty
+[min-value]: ../monoids/Min.html#valueof
 
 [pred-concat]: ../crocks/Pred.html#concat
 [pred-contra]: ../crocks/Pred.html#contramap

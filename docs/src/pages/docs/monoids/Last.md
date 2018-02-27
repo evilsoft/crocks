@@ -27,12 +27,12 @@ value in the [`Maybe`][maybe], using the provided default value when the underly
 [`Maybe`][maybe] is a [`Nothing`][nothing] instance.
 
 ```javascript
-const Last = require('crocks/Last')
+import Last from 'crocks/Last'
 
-const and = require('crocks/logic/and')
-const isNumber = require('crocks/predicates/isNumber')
-const mconcatMap = require('crocks/helpers/mconcatMap')
-const safe = require('crocks/Maybe/safe')
+import and from 'crocks/logic/and'
+import isNumber from 'crocks/predicates/isNumber'
+import mconcatMap from 'crocks/helpers/mconcatMap'
+import safe from 'crocks/Maybe/safe'
 
 // isEven :: Number -> Boolean
 const isEven =
@@ -79,7 +79,8 @@ the case of `Last` the result of `empty` is [`Nothing`][nothing]. `empty` is ava
 on both the Constructor and the Instance for convenience.
 
 ```javascript
-const Last = require('crocks/Last')
+import Last from 'crocks/Last'
+
 const { empty } = Last
 
 empty()
@@ -112,8 +113,8 @@ last non-empty value. All previous non-empty values will be thrown away and
 will always result in the last non-empty value.
 
 ```javascript
-const Last = require('crocks/Last')
-const concat = require('crocks/pointfree/concat')
+import Last from 'crocks/Last'
+import concat from 'crocks/pointfree/concat'
 
 const a = Last('a')
 const b = Last('b')
@@ -152,14 +153,14 @@ If the underlying [`Maybe`][maybe] is desired, the [`valueOf`](#valueof) method 
 used and will return the [`Maybe`][maybe] instead.
 
 ```javascript
-const Last = require('crocks/Last')
+import Last from 'crocks/Last'
 
-const compose = require('crocks/helpers/compose')
-const chain = require('crocks/pointfree/chain')
-const isString = require('crocks/predicates/isString')
-const mconcatMap = require('crocks/helpers/mconcatMap')
-const prop = require('crocks/Maybe/prop')
-const safe = require('crocks/Maybe/safe')
+import compose from 'crocks/helpers/compose'
+import chain from 'crocks/pointfree/chain'
+import isString from 'crocks/predicates/isString'
+import mconcatMap from 'crocks/helpers/mconcatMap'
+import prop from 'crocks/Maybe/prop'
+import safe from 'crocks/Maybe/safe'
 
 // stringVal :: a -> Maybe String
 const stringVal = compose(
@@ -201,10 +202,12 @@ helper functions that ship with `crocks`. Calling `valueOf` on a `Last` instance
 will result in the underlying [`Maybe`][maybe].
 
 ```javascript
-const Last = require('crocks/Last')
+import Last from 'crocks/Last'
 
-const { Nothing } = require('crocks/Maybe')
-const valueOf = require('crocks/pointfree/valueOf')
+import Maybe from 'crocks/Maybe'
+import valueOf from 'crocks/pointfree/valueOf'
+
+const { Nothing } = Maybe
 
 valueOf(Last(56))
 //=> Just 56
@@ -252,16 +255,18 @@ a transformed `Last` is returned. When passed an `Either` returning function,
 a function will be returned that takes a given value and returns a `Last`.
 
 ```javascript
-const Last = require('crocks/Last')
-const { Left, Right } = require('crocks/Either')
-const eitherToLast = require('crocks/Last/eitherToLast')
+import Last from 'crocks/Last'
+import Either from 'crocks/Either'
+import eitherToLast from 'crocks/Last/eitherToLast'
 
-const concat = require('crocks/pointfree/concat')
-const constant = require('crocks/combinators/constant')
-const flip = require('crocks/combinators/flip')
-const ifElse = require('crocks/logic/ifElse')
-const isNumber = require('crocks/predicates/isNumber')
-const mapReduce = require('crocks/helpers/mapReduce')
+import concat from 'crocks/pointfree/concat'
+import constant from 'crocks/combinators/constant'
+import flip from 'crocks/combinators/flip'
+import ifElse from 'crocks/logic/ifElse'
+import isNumber from 'crocks/predicates/isNumber'
+import mapReduce from 'crocks/helpers/mapReduce'
+
+const { Left, Right } = Either
 
 // someNumber :: a -> Either String Number
 const someNumber = ifElse(
@@ -312,13 +317,13 @@ a transformed `Last` is returned. When passed a `First` returning function,
 a function will be returned that takes a given value and returns a `Last`.
 
 ```javascript
-const Last  = require('crocks/Last')
-const First = require('crocks/First')
-const firstToLast = require('crocks/Last/firstToLast')
+import Last  from 'crocks/Last'
+import First from 'crocks/First'
+import firstToLast from 'crocks/Last/firstToLast'
 
-const isString = require('crocks/predicates/isString')
-const mconcatMap = require('crocks/helpers/mconcatMap')
-const safe = require('crocks/Maybe/safe')
+import isString from 'crocks/predicates/isString'
+import mconcatMap from 'crocks/helpers/mconcatMap'
+import safe from 'crocks/Maybe/safe'
 
 // firstString :: [ a ] -> First String
 const firstString =
@@ -372,15 +377,17 @@ a transformed `Last` is returned. When passed a [`Maybe`][maybe] returning funct
 a function will be returned that takes a given value and returns a `Last`.
 
 ```javascript
-const Last = require('crocks/Last')
-const { Nothing, Just } = require('crocks/Maybe')
-const maybeToLast = require('crocks/Last/maybeToLast')
+import Last from 'crocks/Last'
+import Maybe from 'crocks/Maybe'
+import maybeToLast from 'crocks/Last/maybeToLast'
 
-const chain = require('crocks/pointfree/chain')
-const compose = require('crocks/helpers/compose')
-const isNumber = require('crocks/predicates/isNumber')
-const prop = require('crocks/Maybe/prop')
-const safe = require('crocks/Maybe/safe')
+import chain from 'crocks/pointfree/chain'
+import compose from 'crocks/helpers/compose'
+import isNumber from 'crocks/predicates/isNumber'
+import prop from 'crocks/Maybe/prop'
+import safe from 'crocks/Maybe/safe'
+
+const { Nothing, Just } = Maybe
 
 // numVal :: a -> Maybe Number
 const numVal = compose(
@@ -440,12 +447,14 @@ a transformed `Last` is returned. When passed a `Result` returning function,
 a function will be returned that takes a given value and returns a `Last`.
 
 ```javascript
-const Last = require('crocks/Last')
-const { Err, Ok } = require('crocks/Result')
-const resultToLast = require('crocks/Last/resultToLast')
+import Last from 'crocks/Last'
+import Result from 'crocks/Result'
+import resultToLast from 'crocks/Last/resultToLast'
 
-const isNumber = require('crocks/predicates/isNumber')
-const tryCatch = require('crocks/Result/tryCatch')
+import isNumber from 'crocks/predicates/isNumber'
+import tryCatch from 'crocks/Result/tryCatch'
+
+const { Err, Ok } = Result
 
 function onlyNums(x) {
   if(!isNumber(x)) {

@@ -3,14 +3,27 @@
 
 const curry = require('../core/curry')
 const equals = require('../core/equals')
-const isObject = require('../core/isObject')
+const isDefined = require('../core/isDefined')
+const isEmpty = require('../core/isEmpty')
+const isInteger = require('../core/isInteger')
+const isNil = require('../core/isNil')
+const isString = require('../core/isString')
 
-// propEq: (String | Number) -> a -> Object -> Boolean
+// propEq: (String | Integer) -> a -> b -> Boolean
 function propEq(key, value, x) {
-  if (!isObject(x)) {
-    throw new TypeError('propEq: Object required for third argument')
+  if(!((isString(key) && !isEmpty(key)) || isInteger(key))) {
+    throw new TypeError(
+      'propEq: Non-empty String or Integer required for first argument'
+    )
   }
-  return equals(x[key], value)
+
+  if(isNil(x)) {
+    return false
+  }
+
+  const target = x[key]
+
+  return isDefined(target) && equals(target, value)
 }
 
 module.exports = curry(propEq)

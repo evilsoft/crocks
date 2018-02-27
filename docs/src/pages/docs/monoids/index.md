@@ -27,8 +27,8 @@ as the following Instance Functions: `valueOf`, `empty` and `concat`.
 | [`Endo`][Endo] | Function | `compose` | `identity` |
 | [`First`][First] | [`Maybe`][Maybe] | `First` [`Just`][just] | [`Nothing`][nothing] |
 | [`Last`][Last] | [`Maybe`][Maybe] | `Last` [`Just`][just] | [`Nothing`][nothing] |
-| `Max` | Number | `Math.max` | `-Infinity` |
-| `Min` | Number | `Math.min` | `Infinity` |
+| [`Max`][Max] | Number | `Math.max` | `-Infinity` |
+| [`Min`][Min] | Number | `Math.min` | `Infinity` |
 | [`Prod`][Prod] | Number | Multiplication | `1` |
 | [`Sum`][Sum] | Number | Addition | `0` |
 
@@ -48,5 +48,7 @@ as the following Instance Functions: `valueOf`, `empty` and `concat`.
 [Endo]: Endo.html
 [First]: First.html
 [Last]: Last.html
+[Max]: Max.html
+[Min]: Min.html
 [Prod]: Prod.html
 [Sum]: Sum.html

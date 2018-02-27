@@ -1,0 +1,8 @@
+{
+    "files.exclude": {
+        "node_modules": true
+    },
+    "files.insertFinalNewline": true,
+    "files.eol": "\n",
+    "editor.tabSize": 2
+}

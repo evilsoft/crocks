@@ -7,6 +7,7 @@ const bindFunc = helpers.bindFunc
 const compose = require('../core/compose')
 const isFunction = require('../core/isFunction')
 const isObject = require('../core/isObject')
+const isString = require('../core/isString')
 const unit = require('../core/_unit')
 
 const constant = x => () => x
@@ -24,7 +25,7 @@ test('Equiv', t => {
 
   t.ok(isFunction(Equiv.empty), 'provides an empty function')
   t.ok(isFunction(Equiv.type), 'provides a type function')
-  t.ok(isFunction(Equiv['@@type']), 'provides a @@type function')
+  t.ok(isString(Equiv['@@type']), 'provides a @@type string')
 
   t.ok(isObject(Equiv(isSame)), 'returns an object')
 
@@ -94,10 +95,8 @@ test('Equiv type', t => {
 test('Equiv @@type', t => {
   const m = Equiv(isSame)
 
-  t.ok(isFunction(m['@@type']), 'is a function')
-
   t.equal(m['@@type'], Equiv['@@type'], 'static and instance versions are the same')
-  t.equal(m['@@type'](), 'crocks/Equiv@1', 'type returns crocks/Equiv@1')
+  t.equal(m['@@type'], 'crocks/Equiv@1', 'type returns crocks/Equiv@1')
 
   t.end()
 })

@@ -2,7 +2,7 @@
 title: "Helpers"
 description: "Helper functions"
 layout: "notopic"
-weight: 2
+weight: 20
 ---
 
 #### assign
@@ -211,9 +211,11 @@ to represent your flow in a more left-to-right manner, then [`pipeS`](#pipes) is
 provided for such things.
 
 ```javascript
+import crocks from 'crocks'
+
 const {
   Arrow, bimap, branch, composeS, merge, mreduce, Sum
-} = require('crocks')
+} = crocks
 
 const length =
   xs => xs.length
@@ -387,13 +389,13 @@ curried functions (i.e. `x => y => x + y`) will need to be explicitly curried
 using [`curry`](#curry) to ensure proper application of the arguments.
 
 ```javascript
-const compose = require('crocks/helpers/compose')
-const curry = require('crocks/helpers/curry')
-const liftN = require('crocks/helpers/liftN')
-const isNumber = require('crocks/predicates/isNumber')
-const isString = require('crocks/predicates/isString')
-const map = require('crocks/pointfree/map')
-const safe = require('crocks/Maybe/safe')
+import compose from 'crocks/helpers/compose'
+import curry from 'crocks/helpers/curry'
+import liftN from 'crocks/helpers/liftN'
+import isNumber from 'crocks/predicates/isNumber'
+import isString from 'crocks/predicates/isString'
+import map from 'crocks/pointfree/map'
+import safe from 'crocks/Maybe/safe'
 
 // apply :: (((*) -> b), [ a ]) -> b
 const apply = fn => xs =>
@@ -476,7 +478,7 @@ provided mapping function.
 of the original `Object` is know.
 
 ```javascript
-const mapProps = require('crocks/helpers/mapProps')
+import mapProps from 'crocks/helpers/mapProps'
 
 const add =
   x => y => x + y
@@ -527,11 +529,13 @@ finally a `Foldable` structure of data. Once all arguments are provided,
 function, before sending it to the second argument of your reduction function.
 
 ```javascript
-const  Max = require('crocks/Max')
-const { Nothing } = require('crocks/Maybe')
-const  isNumber = require('crocks/predicates/isNumber')
-const  mapReduce = require('crocks/helpers/mapReduce')
-const  safeLift = require('crocks/Maybe/safeLift')
+import Max from 'crocks/Max'
+import Maybe from 'crocks/Maybe'
+import isNumber from 'crocks/predicates/isNumber'
+import mapReduce from 'crocks/helpers/mapReduce'
+import safeLift from 'crocks/Maybe/safeLift'
+
+const { Nothing } = Maybe
 
 const data =
   [ '100', null, 3, true, 1 ]
@@ -679,7 +683,9 @@ arguments to it. You will get back a curried function that is ready to accept
 the rest of the arguments.
 
 ```javascript
-const { map, partial } = require('crocks')
+import crocks from 'crocks'
+
+const { map, partial } = crocks
 
 const max10 =
   partial(Math.min, 10)
@@ -736,7 +742,9 @@ chaining together a series of functions with the signature:
 functions left-to-right.
 
 ```javascript
-const { curry, List, Writer } = require('../crocks')
+import crocks from 'crocks'
+
+const { curry, List, Writer } = crocks
 
 const OpWriter =
   Writer(List)
@@ -808,9 +816,9 @@ with them all composed together. The only difference between the two, is that
 the opposite.
 
 ```javascript
-const {
+import {
   curry, isNumber, pipeS, prop, safeLift, Star
-} = require('../crocks')
+} from 'crocks'
 
 const add = curry(
   (x, y) => x + y
@@ -851,22 +859,37 @@ If you want some safety around pulling a value out of an Object or Array with a
 single key or index, you can always reach for `propOr`. Well, as long as you are
 working with non-nested data that is. Just tell `propOr` either the key or index
 you are interested in, and you will get back a function that will take anything
-and return the wrapped value if the key/index exists. If the key/index does not
-exist however, you will get back a default value.
+and return the wrapped value if the key/index is defined. If the key/index is not
+defined however, you will get back the provided default value.
 
 ```javascript
-const { get } = require('crocks/State')
-const propOr = require('crocks/helpers/propOr')
+import propOr from 'crocks/helpers/propOr'
 
-const data = { foo: 'bar' }
+const data = {
+  foo: 'bar',
+  null: null,
+  nan: NaN,
+  undef: undefined
+}
 
-get()
-  .map(propOr('default', 'foo'))
-  .evalWith(data) // bar
+// def :: (String | Integer) -> a -> b
+const def =
+  propOr('default')
 
-get()
-  .map(propOr('default', 'baz'))
-  .evalWith(data) // default
+def('foo', data)
+//=> "bar"
+
+def('null', data)
+//=> null
+
+def('nan', data)
+//=> NaN
+
+def('baz', data)
+//=> "default"
+
+def('undef', data)
+//=> "default"
 ```
 
 #### propPathOr
@@ -887,18 +910,39 @@ valid, it will return the value. But if at any point that path "breaks" it will
 give you back the default value.
 
 ```javascript
-const { get } = require('crocks/State')
-const propPathOr = require('crocks/helpers/propPathOr')
+import propPathOr from 'crocks/helpers/propPathOr'
 
-const data = { foo: { bar: 'bar' }, baz: null }
+const data = {
+  foo: {
+    bar: 'bar',
+    null: null,
+    nan: NaN,
+    undef: undefined
+  },
+  arr: [ 1, 2 ]
+}
 
-get()
-  .map(propPathOr('default', ['foo', 'bar']))
-  .evalWith(data) // bar
+// def :: [ String | Integer ] -> a -> b
+const def =
+  propPathOr('default')
 
-get()
-  .map(propPathOr('default', ['baz', 'tommy']))
-  .evalWith(data) // default
+def([ 'foo', 'bar' ], data)
+//=> "bar"
+
+def([ 'baz', 'tommy' ], data)
+//=> "default"
+
+def([ 'foo', 'null' ], data)
+//=> null
+
+def([ 'foo', 'nan' ], data)
+//=> NaN
+
+def([ 'foo', 'undef' ], data)
+//=> "default"
+
+def([ 'arr', 'length' ], data)
+//=> 2
 ```
 
 #### tap

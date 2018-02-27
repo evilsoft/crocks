@@ -1,5 +1,71 @@
 # Change Log for `crocks`
 
+v0.9.0 -- February 21, 2018
+--
+### Breaking
+* Removed original `applyTo` combinator that was the A combinator.
+* Renamed `reverseApply` to `applyTo` for the T or `thrush` combinator.
+* Changed Sanctuary `@@type` on all types from a function `() -> String` to a `String` property on type constructors and instances.
+* Updated the following for a consistent experience for each:
+  * `predicates/hasProp`
+  * `predicates/propEq`
+  * `predicates/propPathEq`
+  * `helpers/propOr`
+  * `helpers/propPathOr`
+  * `Maybe/prop`
+  * `Maybe/propPath`
+
+ Each will now do the following:
+   * For predicates, failure cases result in a `false`.
+   * For helpers, failure case will return the default value provided.
+   * for Maybe functions failure case results in a `Nothing`
+   * Act as identity when an empty array is passed in (all path based functions)
+   * Throws unless `String` or `Integer` is provided for key names or in a key path.
+   * Throws if empty `String` is found in a key name or key path.
+   * Allows anything as the "data" but will default to a failure case if `null`, `undefined` or `NaN` is passed in. All other types traverse as normal.
+   * Will exit with a failure on path functions if `null`, `undefined` or `NaN` values are encountered during a traversal. (ex, `[ 'a', 'b' ]` on `{ a: null }`)
+
+### Additions
+* Predicates:
+  * `hasPropPath`
+
+### Pull Requests
+* [#218 - move over to sanctuary string types](https://github.com/evilsoft/crocks/pull/218)
+* [#225 - All Object Traversal Functions Behave the Same](https://github.com/evilsoft/crocks/pull/225)
+* [#226 - Remove original `applyTo` and replace with `thrush](https://github.com/evilsoft/crocks/pull/226)
+
+v0.8.6 -- February 18, 2018
+--
+### Additions
+* READMES:
+  * `Max`
+  * `Min`
+* Predicates:
+  * `propEq`
+  * `propPathEq`
+* Methods:
+  * `sequence` to `Pair`
+  * `traverse` to `Pair`
+  * `reduceRight` to `List`
+  * Add fantasy-land methods except for `traverse` and `ap`
+
+### Bug fixes
+* Stop traversing in `propPathOr` when default is an `Object` matching the path.
+
+### Pull Requests
+* [#216 - Add karthikiyengar as contributor for PR review](https://github.com/evilsoft/crocks/pull/216)
+* [#214 - Move Fantasy-Land method name into one place](https://github.com/evilsoft/crocks/pull/214)
+* [#213 - Update Error specs for the remaining Monoids](https://github.com/evilsoft/crocks/pull/213)
+* [#212 - Update `traverse` and `sequence` Errors to signal for `Apply` and not `Applicative`](https://github.com/evilsoft/crocks/pull/212)
+* [#211 - Add `sequence` and `traverse` to `Pair`](https://github.com/evilsoft/crocks/pull/211)
+* [#217 - Fix issue in propPathOr if default value is an object](https://github.com/evilsoft/crocks/pull/217)
+* [#220 - Add Max Documentation](https://github.com/evilsoft/crocks/pull/220)
+* [#221 - Add Min Documentation](https://github.com/evilsoft/crocks/pull/221)
+* [#222 - Clean up Prod and Sum Docs](https://github.com/evilsoft/crocks/pull/222)
+* [#219 - Added `propEq` and `propPathEq`](https://github.com/evilsoft/crocks/pull/219)
+* [#223 - Add `Max` and `Min` Monoids to the docs](https://github.com/evilsoft/crocks/pull/223)
+* [#224 - Add jonwhelan as contributor for PR Code and Bug Reporting](https://github.com/evilsoft/crocks/pull/224)
+
 v0.8.5 -- February 14, 2018
 --
 ### Additions

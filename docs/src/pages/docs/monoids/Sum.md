@@ -12,9 +12,9 @@ Sum Number
 `Sum` is a `Monoid` that will combine (2) `Number`s under addition.
 
 ```javascript
-const Sum = require('crocks/Sum')
-const mconcat = require('crocks/helpers/mconcat')
-const mconcatMap = require('crocks/helpers/mconcatMap')
+import Sum from 'crocks/Sum'
+import mconcat from 'crocks/helpers/mconcat'
+import mconcatMap from 'crocks/helpers/mconcatMap'
 
 Sum(13)
 //=> Sum 13
@@ -58,7 +58,7 @@ the case of `Sum` the result of `empty` is `0`. `empty` is available on both
 the Constructor and the Instance for convenience.
 
 ```javascript
-const Sum = require('crocks/Sum')
+import Sum from 'crocks/Sum'
 
 Sum.empty()
 //=> Sum 0
@@ -69,6 +69,7 @@ Sum.empty()
 
 Sum(4)
   .concat(Sum.empty())
+//=> Sum 4
 
 Sum.empty()
   .concat(Sum(4))
@@ -92,7 +93,7 @@ operation specified by the `Semigroup`. In the case of `Sum`, it will add the
 (2) `Number`s.
 
 ```javascript
-const Sum = require('crocks/Sum')
+import Sum from 'crocks/Sum'
 
 Sum(5)
   .concat(Sum(4))
@@ -124,7 +125,7 @@ helper functions that ship with `crocks`. Calling `valueOf` on a `Sum` instance
 will result in the underlying `Number`.
 
 ```javascript
-const Sum = require('crocks/Sum')
+import Sum from 'crocks/Sum'
 
 Sum(4)
   .valueOf()
@@ -135,7 +136,7 @@ Sum.empty()
 //=> 0
 
 Sum(34)
-  .concat(21)
+  .concat(Sum(21))
   .valueOf()
 //=> 55
 ```

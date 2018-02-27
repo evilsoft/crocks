@@ -8,12 +8,13 @@ const curry = require('../core/curry')
 const compose = curry(require('../core/compose'))
 const isFunction = require('../core/isFunction')
 const isObject = require('../core/isObject')
+const isString = require('../core/isString')
 const unit = require('../core/_unit')
 
 const constant = x => () => x
 const identity = x => x
 
-const reverseApply =
+const applyTo =
   x => fn => fn(x)
 
 const IO = require('.')
@@ -29,7 +30,7 @@ test('IO', t => {
 
   t.ok(isFunction(IO.of), 'provides an of function')
   t.ok(isFunction(IO.type), 'provides a type function')
-  t.ok(isFunction(IO['@@type']), 'provides a @@type function')
+  t.ok(isString(IO['@@type']), 'provides a @@type string')
 
   t.throws(io(), TypeError, 'throws with no parameters')
 
@@ -95,9 +96,8 @@ test('IO type', t => {
 test('IO @@type', t => {
   const m = IO(unit)
 
-  t.ok(isFunction(m['@@type']), 'is a function')
   t.equal(IO['@@type'], m['@@type'], 'static and instance versions are the same')
-  t.equal(m['@@type'](), 'crocks/IO@1', 'reports crocks/IO@1')
+  t.equal(m['@@type'], 'crocks/IO@1', 'reports crocks/IO@1')
 
   t.end()
 })
@@ -214,7 +214,7 @@ test('IO of properties (Applicative)', t => {
   t.equal(m.ap(IO.of(3)).run(), IO.of(identity(3)).run(), 'homomorphism')
 
   const a = x => m.ap(IO.of(x))
-  const b = x => IO.of(reverseApply(x)).ap(m)
+  const b = x => IO.of(applyTo(x)).ap(m)
 
   t.equal(a(3).run(), b(3).run(), 'interchange')
 

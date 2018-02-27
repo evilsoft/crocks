@@ -1,4 +1,5 @@
 const test = require('tape')
+const sinon = require('sinon')
 const Pred = require('../Pred')
 const isFunction = require('../core/isFunction')
 const unit = require('../core/_unit')
@@ -7,7 +8,9 @@ const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
 
-test.only('safeAfter function', (t) => {
+const identity = f => f
+
+test('safeAfter function', (t) => {
   const f = bindFunc(safeAfter)
 
   const err = /safeAfter: Pred or predicate function required for first argument/
@@ -37,6 +40,53 @@ test.only('safeAfter function', (t) => {
 
   t.doesNotThrow(f(unit, unit), 'allows a function in first argument')
   t.doesNotThrow(f(Pred(unit), unit), 'allows a Pred in first argument')
+
+  t.end()
+})
+
+test('safeAfter predicate function', (t) => {
+  const pred = sinon.spy(x => !!x)
+  const fn = sinon.spy(identity)
+
+  const f = safeAfter(pred, fn)
+  const fResult = f(false).option('nothing')
+
+  t.ok(fn.calledOnce, 'calls the result function')
+  t.ok(pred.calledOnce, 'calls the predicate function once')
+  t.ok(pred.calledWith(false), 'calls the predicate function with resultant value')
+  t.equals(fResult, 'nothing', 'returns a Nothing when predicate is a false')
+
+  pred.reset(); fn.reset()
+
+  const tResult = f('just').option('nothing')
+  t.ok(fn.calledOnce, 'calls the result function once')
+  t.ok(pred.calledOnce, 'calls the predicate function once')
+  t.ok(pred.calledWith('just'), 'calls the predicate function with the resultant value')
+  t.equals(tResult, 'just', 'returns the resultant value in a Just when predicate is true')
+
+  t.end()
+})
+
+test('safeAfter Pred', (t) => {
+  const predFn = sinon.spy(x => !!x)
+  const pred = Pred(predFn)
+  const fn = sinon.spy(identity)
+
+  const f = safeAfter(pred, fn)
+  const fResult = f(false).option('nothing')
+
+  t.ok(fn.calledOnce, 'calls the result function')
+  t.ok(predFn.calledOnce, 'calls the predicate function once')
+  t.ok(predFn.calledWith(false), 'calls the predicate function with resultant value')
+  t.equals(fResult, 'nothing', 'returns a Nothing when predicate is a false')
+
+  predFn.reset(); fn.reset()
+
+  const tResult = f('just').option('nothing')
+  t.ok(fn.calledOnce, 'calls the result function once')
+  t.ok(predFn.calledOnce, 'calls the predicate function once')
+  t.ok(predFn.calledWith('just'), 'calls the predicate function with the resultant value')
+  t.equals(tResult, 'just', 'returns the resultant value in a Just when predicate is true')
 
   t.end()
 })

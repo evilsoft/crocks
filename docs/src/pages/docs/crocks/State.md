@@ -31,12 +31,12 @@ the values from the `Pair` and discarding the unwanted portion.
 [`execWith`](#execwith) is used to pull the state.
 
 ```javascript
-const State = require('crocks/State')
+import State from 'crocks/State'
+
+import Pair from 'crocks/Pair'
+import constant from 'crocks/combinators/constant'
+
 const { get, put } = State
-
-const Pair = require('crocks/Pair')
-const constant = require('crocks/combinators/constant')
-
 
 // toUpper :: String -> String
 const toUpper =
@@ -104,14 +104,16 @@ state will be mapped over any provided function that takes the same type as the
 state, with the result deposited in the resultant.
 
 ```javascript
-const { get } = require('crocks/State')
+import State from 'crocks/State'
 
-const chain = require('crocks/pointfree/chain')
-const compose = require('crocks/helpers/compose')
-const isNumber = require('crocks/predicates/isNumber')
-const option = require('crocks/pointfree/option')
-const prop = require('crocks/Maybe/prop')
-const safe = require('crocks/Maybe/safe')
+import chain from 'crocks/pointfree/chain'
+import compose from 'crocks/helpers/compose'
+import isNumber from 'crocks/predicates/isNumber'
+import option from 'crocks/pointfree/option'
+import prop from 'crocks/Maybe/prop'
+import safe from 'crocks/Maybe/safe'
+
+const { get } = State
 
 // propOr :: (String, (b -> Boolean), a) -> Object -> c
 const propOr = (key, pred, def) =>
@@ -154,9 +156,11 @@ type of the state as it may not be expected in other stateful computations and
 can result in hard to track down bugs.
 
 ```javascript
-const { modify } = require('crocks/State')
+import State from 'crocks/State'
 
-const mapProps = require('crocks/helpers/mapProps')
+import mapProps from 'crocks/helpers/mapProps'
+
+const { modify } = State
 
 // add :: Number -> Number -> Number
 const add =
@@ -201,12 +205,14 @@ result in hard to debug bugs and destroys the relationship between stateful
 computations.
 
 ```javascript
-const { put } = require('crocks/State')
+import State from 'crocks/State'
 
-const compose = require('crocks/helpers/compose')
-const isString = require('crocks/predicates/isString')
-const option = require('crocks/pointfree/option')
-const safe = require('crocks/Maybe/safe')
+import compose from 'crocks/helpers/compose'
+import isString from 'crocks/predicates/isString'
+import option from 'crocks/pointfree/option'
+import safe from 'crocks/Maybe/safe'
+
+const { put } = State
 
 // safeString :: a -> String
 const safeString =
@@ -249,7 +255,8 @@ with [`put`](#put) and [`modify`](#modify) to replace the `Unit` the resultant
 is set to for those construction helpers.
 
 ```javascript
-const State = require('crocks/State')
+import State from 'crocks/State'
+
 const { get, put } = State
 
 // updatePop :: String -> State String String
@@ -294,11 +301,13 @@ composed together using function composition. This will give the same results
 but will only map the value once, instead of once for every mapping.
 
 ```javascript
-const { get } = require('crocks/State')
+import State from 'crocks/State'
 
-const compose = require('crocks/helpers/compose')
-const objOf = require('crocks/helpers/objOf')
-const propOr = require('crocks/helpers/propOr')
+import compose from 'crocks/helpers/compose'
+import objOf from 'crocks/helpers/objOf'
+import propOr from 'crocks/helpers/propOr'
+
+const { get } = State
 
 // add :: Number -> Number -> Number
 const add =
@@ -348,10 +357,12 @@ be combined using the lifted function as a means to combine each of the
 instances' resultants.
 
 ```javascript
-const { get, modify } = require('crocks/State')
+import State from 'crocks/State'
 
-const assoc = require('crocks/helpers/assoc')
-const propOr = require('crocks/helpers/propOr')
+import assoc from 'crocks/helpers/assoc'
+import propOr from 'crocks/helpers/propOr'
+
+const { get, modify } = State
 
 const data = {
   tax: .084,
@@ -412,7 +423,9 @@ a unary function that must return a new `State` instance. `chain` returns a new
 `State` instance that will apply the computation when run.
 
 ```javascript
-const { get, modify } = require('crocks/State')
+import State from 'crocks/State'
+
+const { get, modify } = State
 
 // add :: Number -> State Number ()
 const add = x =>
@@ -470,10 +483,11 @@ initial state and will return the resulting `Pair` with the resultant in the
 
 
 ```javascript
-const State = require('crocks/State')
-const { get, put } = State
+import State from 'crocks/State'
 
-const K = require('crocks/combinators/constant')
+import K from 'crocks/combinators/constant'
+
+const { get, put } = State
 
 // swap :: s -> s -> State s s
 const swap = x => old =>
@@ -506,14 +520,15 @@ the initial state and will return the resulting resultant discarding the state
 portion.
 
 ```javascript
-const State = require('crocks/State')
-const { get } = State
+import State from 'crocks/State'
 
-const concat = require('crocks/pointfree/concat')
-const flip = require('crocks/combinators/flip')
-const liftA2 = require('crocks/helpers/liftA2')
-const map = require('crocks/pointfree/map')
-const propOr = require('crocks/helpers/propOr')
+import concat from 'crocks/pointfree/concat'
+import flip from 'crocks/combinators/flip'
+import liftA2 from 'crocks/helpers/liftA2'
+import map from 'crocks/pointfree/map'
+import propOr from 'crocks/helpers/propOr'
+
+const { get } = State
 
 const name = {
   first: 'Franklin',
@@ -560,10 +575,12 @@ the initial state and will return the resulting state, discarding the resultant
 portion.
 
 ```javascript
-const { modify } = require('crocks/State')
+import State from 'crocks/State'
 
-const compose = require('crocks/helpers/compose')
-const concat = require('crocks/pointfree/concat')
+import compose from 'crocks/helpers/compose'
+import concat from 'crocks/pointfree/concat'
+
+const { modify } = State
 
 // toUpper :: String -> String
 const toUpper =
@@ -608,13 +625,15 @@ also return the resulting resultant, throwing away the resulting state.
 
 
 ```javascript
-const { get } = require('crocks/State')
+import State from 'crocks/State'
 
-const evalWith = require('crocks/State/evalWith')
+import evalWith from 'crocks/State/evalWith'
 
-const compose = require('crocks/helpers/compose')
-const curry = require('crocks/helpers/curry')
-const flip = require('crocks/combinators/flip')
+import compose from 'crocks/helpers/compose'
+import curry from 'crocks/helpers/curry'
+import flip from 'crocks/combinators/flip'
+
+const { get } = State
 
 // addToState :: Number -> State Number Number
 const addToState =
@@ -654,15 +673,16 @@ to the [`execWith`](#execwith) method to the provided `State` instance, it will
 also return the resulting state, throwing away the resulting resultant.
 
 ```javascript
-const State = require('crocks/State')
+import State from 'crocks/State'
+
+import execWith from 'crocks/State/execWith'
+
+import curry from 'crocks/helpers/curry'
+import isSameType from 'crocks/predicates/isSameType'
+import mapProps from 'crocks/helpers/mapProps'
+import when from 'crocks/logic/when'
+
 const { modify } = State
-
-const execWith = require('crocks/State/execWith')
-
-const curry = require('crocks/helpers/curry')
-const isSameType = require('crocks/predicates/isSameType')
-const mapProps = require('crocks/helpers/mapProps')
-const when = require('crocks/logic/when')
 
 // middleware :: Object -> State Object | Object -> Object
 const middleware = curry(

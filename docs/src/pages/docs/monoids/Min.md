@@ -13,8 +13,8 @@ Min Number
 of the two.
 
 ```javascript
-const Min = require('crocks/Min')
-const mconcat = require('crocks/helpers/mconcat')
+import Min from 'crocks/Min'
+import mconcat from 'crocks/helpers/mconcat'
 
 Min(76)
 //=> Min 76
@@ -55,7 +55,7 @@ the case of `Min` the result of `empty` is `Infinity`. `empty` is available on
 both the Constructor and the Instance for convenience.
 
 ```javascript
-const Min = require('crocks/Min')
+import Min from 'crocks/Min'
 
 Min.empty()
 //=> Min Infinity
@@ -90,7 +90,7 @@ operation specified by the `Semigroup`. In the case of `Min`, it will result
 in the smallest of the (2) `Number`s.
 
 ```javascript
-const Min = require('crocks/Min')
+import Min from 'crocks/Min'
 
 Min(50)
   .concat(Min(24))
@@ -118,7 +118,7 @@ helper functions that ship with `crocks`. Calling `valueOf` on a `Min` instance
 will result in the underlying `Number`.
 
 ```javascript
-const Min = require('crocks/Min')
+import Min from 'crocks/Min'
 
 Min(33)
   .valueOf()

@@ -8,8 +8,8 @@ Max Number
 of the two.
 
 ```javascript
-const Max = require('crocks/Max')
-const mconcat = require('crocks/helpers/mconcat')
+import Max from 'crocks/Max'
+import mconcat from 'crocks/helpers/mconcat'
 
 Max(76)
 //=> Max 76
@@ -44,7 +44,7 @@ the case of `Max` the result of `empty` is `-Infinity`. `empty` is available on
 both the Constructor and the Instance for convenience.
 
 ```javascript
-const Max = require('crocks/Max')
+import Max from 'crocks/Max'
 
 Max.empty()
 //=> Max -Infinity
@@ -75,7 +75,7 @@ operation specified by the `Semigroup`. In the case of `Max`, it will result
 in the largest of the (2) `Number`s.
 
 ```javascript
-const Max = require('crocks/Max')
+import Max from 'crocks/Max'
 
 Max(23)
   .concat(Max(13))
@@ -103,7 +103,7 @@ helper functions that ship with `crocks`. Calling `valueOf` on a `Max` instance
 will result in the underlying `Number`.
 
 ```javascript
-const Max = require('crocks/Max')
+import Max from 'crocks/Max'
 
 Max(4)
   .valueOf()

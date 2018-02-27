@@ -24,10 +24,11 @@ for the "life" computation. If a referential type is used as the environment
 great care should be taken to not modify the value of the environment.
 
 ```javascript
-const Reader = require('crocks/Reader')
-const { ask } = Reader
+import Reader from 'crocks/Reader'
 
-const concat = require('crocks/pointfree/concat')
+import concat from 'crocks/pointfree/concat'
+
+const { ask } = Reader
 
 // greet :: String -> Reader String String
 const greet = greeting =>
@@ -74,7 +75,8 @@ portion of the `Reader`. `ask` can take a function, that can be used to map the
 environment to a different type or value.
 
 ```javascript
-const Reader = require('crocks/Reader')
+import Reader from 'crocks/Reader'
+
 const { ask } = Reader
 
 // add :: Number -> Number -> Number
@@ -111,11 +113,12 @@ back a `Reader` that is "pointed" to the specific value provided. `of` makes
 for a wonderful starting point for some of the more complicated flows.
 
 ```javascript
-const Reader = require('crocks/Reader')
-const { ask } = Reader
+import Reader from 'crocks/Reader'
 
-const objOf = require('crocks/helpers/objOf')
-const thrush = require('crocks/combinators/applyTo')
+import objOf from 'crocks/helpers/objOf'
+import thrush from 'crocks/combinators/applyTo'
+
+const { ask } = Reader
 
 // add :: Number -> Number -> Number
 const add =
@@ -155,14 +158,15 @@ allows a function to be lifted into the `Reader`, mapping the result into the
 result of the lifted function.
 
 ```javascript
-const Reader = require('crocks/Reader')
-const { ask } = Reader
+import Reader from 'crocks/Reader'
 
-const assign = require('crocks/helpers/assign')
-const B = require('crocks/combinators/composeB')
-const objOf = require('crocks/helpers/objOf')
-const option = require('crocks/pointfree/option')
-const prop = require('crocks/Maybe/prop')
+import assign from 'crocks/helpers/assign'
+import B from 'crocks/combinators/composeB'
+import objOf from 'crocks/helpers/objOf'
+import option from 'crocks/pointfree/option'
+import prop from 'crocks/Maybe/prop'
+
+const { ask } = Reader
 
 // length :: Array -> Number
 const length =
@@ -206,13 +210,14 @@ will wrap the result of that application back into a `Reader`. It is required
 that the inner function is curried.
 
 ```javascript
-const Reader = require('crocks/Reader')
-const { ask } = Reader
+import Reader from 'crocks/Reader'
 
-const B = require('crocks/combinators/composeB')
-const assign = require('crocks/helpers/assign')
-const liftA2 = require('crocks/helpers/liftA2')
-const objOf = require('crocks/helpers/objOf')
+import B from 'crocks/combinators/composeB'
+import assign from 'crocks/helpers/assign'
+import liftA2 from 'crocks/helpers/liftA2'
+import objOf from 'crocks/helpers/objOf'
+
+const { ask } = Reader
 
 // namePart :: Number -> String -> String
 const namePart = indx => x =>
@@ -267,12 +272,13 @@ effect is to read in and make available the shared environment. `chain` expects
 a function that will take any `a` and return a new `Reader` with a value of `b`.
 
 ```javascript
-const Reader = require('crocks/Reader')
-const { ask } = Reader
+import Reader from 'crocks/Reader'
 
-const B = require('crocks/combinators/composeB')
-const option = require('crocks/pointfree/option')
-const prop = require('crocks/Maybe/prop')
+import B from 'crocks/combinators/composeB'
+import option from 'crocks/pointfree/option'
+import prop from 'crocks/Maybe/prop'
+
+const { ask } = Reader
 
 // multiply :: Number -> Number -> Number
 const multiply =
@@ -330,12 +336,14 @@ instance provides a `runWith` method that takes in an environment and returns
 the result of the computation.
 
 ```javascript
-const { ask } = require('crocks/Reader')
-const Pair = require('crocks/Pair')
+import Reader from 'crocks/Reader'
+import Pair from 'crocks/Pair'
 
-const fst = require('crocks/Pair/fst')
-const liftA2 = require('crocks/helpers/liftA2')
-const snd = require('crocks/Pair/snd')
+import fst from 'crocks/Pair/fst'
+import liftA2 from 'crocks/helpers/liftA2'
+import snd from 'crocks/Pair/snd'
+
+const { ask } = Reader
 
 // data :: Pair Number Number
 const data =

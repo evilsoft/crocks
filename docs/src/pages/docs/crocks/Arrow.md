@@ -21,14 +21,14 @@ wraps, with the input being on the left, and the output on the right. When an
 and output.
 
 ```javascript
-const Arrow = require('crocks/Arrow')
+import Arrow from 'crocks/Arrow'
 
-const chain = require('crocks/pointfree/chain')
-const compose = require('crocks/helpers/compose')
-const isString = require('crocks/predicates/isString')
-const option = require('crocks/pointfree/option')
-const prop = require('crocks/Maybe/prop')
-const safe = require('crocks/Maybe/safe')
+import chain from 'crocks/pointfree/chain'
+import compose from 'crocks/helpers/compose'
+import isString from 'crocks/predicates/isString'
+import option from 'crocks/pointfree/option'
+import prop from 'crocks/Maybe/prop'
+import safe from 'crocks/Maybe/safe'
 
 // arrUpper :: Arrow String
 const arrUpper =
@@ -87,7 +87,7 @@ morphism that is, for all intents and purposes, the given function. For `Arrow`,
 (`x => x`). As a convenience, `id` is also available on the `Arrow` instance.
 
 ```javascript
-const Arrow = require('crocks/Arrow')
+import Arrow from 'crocks/Arrow'
 
 // arrId :: Arrow a
 const id = Arrow.id()
@@ -126,10 +126,10 @@ the type signature, `both` will give back an `Arrow` has a new signature that
 utilizes a `Pair` on both sides.
 
 ```javascript
-const Arrow = require('crocks/Arrow')
-const Pair = require('crocks/Pair')
+import Arrow from 'crocks/Arrow'
+import Pair from 'crocks/Pair'
 
-const merge = require('crocks/Pair/merge')
+import merge from 'crocks/Pair/merge'
 
 // double :: Number -> Number
 const double =
@@ -165,10 +165,10 @@ Arrow a b ~> Arrow b c -> Arrow a c
 `Arrow` that is the result of the composition.
 
 ```javascript
-const Arrow = require('crocks/Arrow')
+import Arrow from 'crocks/Arrow'
 
-const filter = require('crocks/pointfree/filter')
-const map = require('crocks/pointfree/map')
+import filter from 'crocks/pointfree/filter'
+import map from 'crocks/pointfree/map'
 
 // arrFilterEven :: Arrow [ Number ]
 const arrFilterEven =
@@ -217,14 +217,14 @@ for "adaption" of given `Arrow`'s input for better reuse. The resulting type of
 the lifted function must match the input type of the `Arrow`.
 
 ```javascript
-const Arrow = require('crocks/Arrow')
+import Arrow from 'crocks/Arrow'
 
-const chain = require('crocks/pointfree/chain')
-const compose = require('crocks/helpers/compose')
-const isNumber = require('crocks/predicates/isNumber')
-const option = require('crocks/pointfree/option')
-const prop = require('crocks/Maybe/prop')
-const safe = require('crocks/Maybe/safe')
+import chain from 'crocks/pointfree/chain'
+import compose from 'crocks/helpers/compose'
+import isNumber from 'crocks/predicates/isNumber'
+import option from 'crocks/pointfree/option'
+import prop from 'crocks/Maybe/prop'
+import safe from 'crocks/Maybe/safe'
 
 // getValue :: (String, Number) -> a -> Number
 const getValue = (key, def) => compose(
@@ -271,8 +271,8 @@ the `Arrow` will only be applied to the first slot in the `Pair`, leaving
 the second slot untouched.
 
 ```javascript
-const Arrow = require('crocks/Arrow')
-const branch = require('crocks/Pair/branch')
+import Arrow from 'crocks/Arrow'
+import branch from 'crocks/Pair/branch'
 
 // arrToUpper :: Arrow String
 const arrToUpper =
@@ -311,9 +311,9 @@ of the `Arrow`, allowing the result to be "adapted" or modified. The input type
 to the lifted function must match the result the `Arrow`.
 
 ```javascript
-const Arrow = require('crocks/Arrow')
+import Arrow from 'crocks/Arrow'
 
-const B = require('crocks/combinators/composeB')
+import B from 'crocks/combinators/composeB'
 
 // arrFullScale :: Arrow Number
 const arrFullScale =
@@ -354,15 +354,15 @@ Just pass the function for [`contramap`](#contramap) as the first argument
 and the function [`map`](#map) as the second.
 
 ```javascript
-const Arrow = require('crocks/Arrow')
+import Arrow from 'crocks/Arrow'
 
-const chain = require('crocks/pointfree/chain')
-const compose = require('crocks/helpers/compose')
-const isString = require('crocks/predicates/isString')
-const objOf = require('crocks/helpers/objOf')
-const option = require('crocks/pointfree/option')
-const prop = require('crocks/Maybe/prop')
-const safe = require('crocks/Maybe/safe')
+import chain from 'crocks/pointfree/chain'
+import compose from 'crocks/helpers/compose'
+import isString from 'crocks/predicates/isString'
+import objOf from 'crocks/helpers/objOf'
+import option from 'crocks/pointfree/option'
+import prop from 'crocks/Maybe/prop'
+import safe from 'crocks/Maybe/safe'
 
 // upperFirst :: String -> String
 const upperFirst = x =>
@@ -410,12 +410,12 @@ final computation built out and you are ready to execute it, all you have to
 do is call `runWith` on it, passing in the argument you what to run it with.
 
 ```javascript
-const Arrow = require('crocks/Arrow')
-const Sum = require('crocks/Sum')
+import Arrow from 'crocks/Arrow'
+import Sum from 'crocks/Sum'
 
-const branch = require('crocks/Pair/branch')
-const merge = require('crocks/Pair/merge')
-const mreduce = require('crocks/helpers/mreduce')
+import branch from 'crocks/Pair/branch'
+import merge from 'crocks/Pair/merge'
+import mreduce from 'crocks/helpers/mreduce'
 
 // data :: [ Number ]
 const data =
@@ -459,12 +459,12 @@ first slot untouched. The input to the `Arrow` must match the expected type on
 the second slot of the incoming `Pair`.
 
 ```javascript
-const Arrow = require('crocks/Arrow')
+import Arrow from 'crocks/Arrow'
 
-const assign = require('crocks/helpers/assign')
-const branch = require('crocks/Pair/branch')
-const merge = require('crocks/Pair/merge')
-const objOf = require('crocks/helpers/objOf')
+import assign from 'crocks/helpers/assign'
+import branch from 'crocks/Pair/branch'
+import merge from 'crocks/Pair/merge'
+import objOf from 'crocks/helpers/objOf'
 
 // names :: Object
 const names = {

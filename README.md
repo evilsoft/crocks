@@ -278,6 +278,10 @@ Thanks goes to these wonderful people ([emoji key][emojis]):
 #### Tutorial rpearce
 * [Ramda Chops: Function Currying](https://robertwpearce.com/blog/ramda-chops-function-currying.html)
 
+### Examples
+#### Example dbagia
+* [React Declarative Form Generator](https://github.com/dbagia/declarative-form-generator)
+
 [crock-docs]: https://evilsoft.github.io/crocks/docs/crocks/
 [monoid-docs]: https://evilsoft.github.io/crocks/docs/monoids/
 [combinator-docs]: https://evilsoft.github.io/crocks/docs/functions/#combinators

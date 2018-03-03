@@ -11,7 +11,9 @@ const predOrFunc = require('../core/predOrFunc')
 // and : (a -> Boolean) | Pred -> (a -> Boolean) | Pred -> a -> Boolean
 function and(f, g) {
   if(!((isFunction(f) || isSameType(Pred, f)) && (isFunction(g) || isSameType(Pred, g)))) {
-    throw new TypeError('and: Preds or predicate functions required for first two arguments')
+    throw new TypeError(
+      'and: Preds or predicate functions required for first two arguments'
+    )
   }
 
   return x => !!(predOrFunc(f, x) && predOrFunc(g, x))

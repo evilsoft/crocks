@@ -7,8 +7,10 @@ const isFunction = require('../core/isFunction')
 // Substitution (Starling)
 // substitution : (a -> b -> c) -> (a -> b) -> a -> c
 function substitution(f, g, x) {
-  if(!isFunction(f) || !isFunction(g)) {
-    throw new TypeError('substitution: Functions required for first two arguments')
+  if(!(isFunction(f) && isFunction(g))) {
+    throw new TypeError(
+      'substitution: Functions required for first two arguments'
+    )
   }
 
   return curry(f)(x, g(x))

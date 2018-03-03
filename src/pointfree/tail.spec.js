@@ -17,14 +17,15 @@ test('tail pointfree', t => {
 
   t.ok(isFunction(tail), 'is a function')
 
-  t.throws(f(undefined), TypeError, 'throws when arg is undefined')
-  t.throws(f(null), TypeError, 'throws when arg is null')
-  t.throws(f(0), TypeError, 'throws when arg is falsey number')
-  t.throws(f(1), TypeError, 'throws when arg is truthy number')
-  t.throws(f(false), TypeError, 'throws when arg is false')
-  t.throws(f(true), TypeError, 'throws when arg is true')
-  t.throws(f({}), TypeError, 'throws when arg is an object without head')
-  t.throws(f(unit), TypeError, 'throws when arg is function')
+  const err = /tail: Array, String or List required/
+  t.throws(f(undefined), err, 'throws when arg is undefined')
+  t.throws(f(null), err, 'throws when arg is null')
+  t.throws(f(0), err, 'throws when arg is falsey number')
+  t.throws(f(1), err, 'throws when arg is truthy number')
+  t.throws(f(false), err, 'throws when arg is false')
+  t.throws(f(true), err, 'throws when arg is true')
+  t.throws(f({}), err, 'throws when arg is an object without head')
+  t.throws(f(unit), err, 'throws when arg is function')
 
   t.end()
 })

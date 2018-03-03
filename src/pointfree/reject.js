@@ -17,7 +17,9 @@ const not =
 // reject : Foldable f => (a -> Boolean) -> f a -> f a
 function reject(pred, m) {
   if(!(isFunction(pred) || isSameType(Pred, pred))) {
-    throw new TypeError('reject: Pred or predicate function required for first argument')
+    throw new TypeError(
+      'reject: Pred or predicate function required for first argument'
+    )
   }
 
   const fn =

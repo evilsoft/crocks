@@ -8,8 +8,10 @@ const isFunction = require('../core/isFunction')
 // Composition (Bluebird)
 // composeB :: (b -> c) -> (a -> b) -> a -> c
 function composeB(f, g) {
-  if(!isFunction(f) || !isFunction(g)) {
-    throw new TypeError('composeB: Functions required for first two arguments')
+  if(!(isFunction(f) && isFunction(g))) {
+    throw new TypeError(
+      'composeB: Functions required for first two arguments'
+    )
   }
 
   return compose(f, g)

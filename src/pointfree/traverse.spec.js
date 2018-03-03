@@ -85,7 +85,7 @@ test('traverse with Array', t => {
 
   t.equal(outer.type(), 'MockCrock', 'outer container is a MockCrock')
   t.ok(isArray(inner), 'inner container is an Array')
-  t.same((inner), [ 14, 25 ], 'mapping/lifting function applied to every element')
+  t.same(inner, [ 14, 25 ], 'mapping/lifting function applied to every element')
 
   t.end()
 })

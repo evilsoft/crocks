@@ -11,19 +11,19 @@ const predOrFunc = require('../core/predOrFunc')
 // unless : (a -> Boolean) | Pred -> (a -> b) -> a | b
 function unless(pred, f) {
   if(!(isFunction(pred) || isSameType(Pred, pred))) {
-    throw new TypeError('unless: Pred or predicate function required for first argument')
+    throw new TypeError(
+      'unless: Pred or predicate function required for first argument'
+    )
   }
 
   if(!isFunction(f)) {
-    throw new TypeError('unless: Function required for second argument')
+    throw new TypeError(
+      'unless: Function required for second argument'
+    )
   }
 
-  return function(x) {
-    if(!predOrFunc(pred, x)) {
-      return f(x)
-    }
-    return x
-  }
+  return x =>
+    !predOrFunc(pred, x) ? f(x) : x
 }
 
 module.exports = curry(unless)

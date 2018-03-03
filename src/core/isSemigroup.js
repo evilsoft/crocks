@@ -7,7 +7,7 @@ const hasAlg = require('./hasAlg')
 // isSemigroup : a -> Boolean
 function isSemigroup(m) {
   return isString(m)
-    || (!!m && hasAlg('concat', m))
+    || !!m && hasAlg('concat', m)
 }
 
 module.exports = isSemigroup

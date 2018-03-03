@@ -10,7 +10,7 @@ function objOf(key, value) {
     throw new TypeError('objOf: Non-empty String required for first argument')
   }
 
-  return ({ [key]: value })
+  return { [key]: value }
 }
 
 module.exports = curry(objOf)

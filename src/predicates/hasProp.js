@@ -10,7 +10,7 @@ const isString = require('../core/isString')
 
 // hasProp : (String | Integer) -> a -> Boolean
 function hasProp(key, x) {
-  if(!((isString(key) && !isEmpty(key)) || isInteger(key))) {
+  if(!(isString(key) && !isEmpty(key) || isInteger(key))) {
     throw new TypeError(
       'hasProp: Non-empty String or Integer required for first argument'
     )

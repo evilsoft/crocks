@@ -10,7 +10,9 @@ const constant = x => () => x
 // tap : (a -> b) -> a -> a
 function tap(fn, x) {
   if(!isFunction(fn)) {
-    throw new TypeError('tap: Function required for first argument')
+    throw new TypeError(
+      'tap: Function required for first argument'
+    )
   }
 
   return compose(constant(x), fn)(x)

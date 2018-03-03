@@ -5,16 +5,17 @@ const isArray = require('../core/isArray')
 const isFunction = require('../core/isFunction')
 const isString = require('../core/isString')
 
-const M = require('../core/Maybe')
+const { Nothing, Just } = require('../core/Maybe')
 
 function head(m) {
-  if(isFunction(m.head)) {
+  if(m && isFunction(m.head)) {
     return m.head()
   }
-  else if(isArray(m) || isString(m)) {
+
+  if(isArray(m) || isString(m)) {
     return !m.length
-      ? M.Nothing()
-      : M.Just(m[0])
+      ? Nothing()
+      : Just(m[0])
   }
 
   throw new TypeError('head: Array, String or List required')

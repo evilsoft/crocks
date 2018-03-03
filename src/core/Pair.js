@@ -96,7 +96,7 @@ function Pair(l, r) {
   }
 
   function ap(m) {
-    if(!(isSameType(Pair, m))) {
+    if(!isSameType(Pair, m)) {
       throw new TypeError('Pair.ap: Pair required')
     }
 
@@ -129,7 +129,7 @@ function Pair(l, r) {
 
     const m = fn(snd())
 
-    if(!(isSameType(Pair, m))) {
+    if(!isSameType(Pair, m)) {
       throw new TypeError('Pair.chain: Function must return a Pair')
     }
 

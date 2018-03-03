@@ -133,7 +133,7 @@ State.get = get
 State.modify = modify
 
 State.put =
-  x => modify(() => (x))
+  x => modify(() => x)
 
 State.type = type
 

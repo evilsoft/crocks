@@ -17,10 +17,12 @@ function fold(m) {
     if(isEmpty(m)) {
       throw new TypeError('fold: Non-empty Foldable with at least one Semigroup is required')
     }
+
     if(m.length === 1) {
       if(!isSemigroup(m[0])) {
         throw new TypeError('fold: Foldable must contain Semigroups of the same type')
       }
+
       return m[0]
     }
 

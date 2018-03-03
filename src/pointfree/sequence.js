@@ -11,11 +11,11 @@ function sequence(af, m) {
     throw new TypeError('sequence: Apply function required for first argument')
   }
 
-  if((m && isFunction(m.sequence))) {
+  if(m && isFunction(m.sequence)) {
     return m.sequence(af)
   }
 
-  if((isArray(m))) {
+  if(isArray(m)) {
     return array.sequence(af, m)
   }
 

@@ -11,7 +11,9 @@ const predOrFunc = require('../core/predOrFunc')
 // not : (a -> Boolean) | Pred -> a -> Boolean
 function not(pred, x) {
   if(!(isFunction(pred) || isSameType(Pred, pred))) {
-    throw new TypeError('not: Pred or predicate function required for first argument')
+    throw new TypeError(
+      'not: Pred or predicate function required for first argument'
+    )
   }
 
   return !predOrFunc(pred, x)

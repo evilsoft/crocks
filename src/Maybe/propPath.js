@@ -25,7 +25,7 @@ function propPath(keys, target) {
   for(let i = 0; i < keys.length; i++) {
     const key = keys[i]
 
-    if(!((isString(key) && !isEmpty(key)) || isInteger(key))) {
+    if(!(isString(key) && !isEmpty(key) || isInteger(key))) {
       throw new TypeError('propPath: Array of Non-empty Strings or Integers required for first argument')
     }
 

@@ -124,8 +124,8 @@ test('Maybe @@type', t => {
   t.equal(Just(0)['@@type'], Maybe['@@type'], 'static and instance versions are the same for Just')
   t.equal(Nothing(0)['@@type'], Maybe['@@type'], 'static and instance versions are the same for Nothing')
 
-  t.equal(Just(0)['@@type'], 'crocks/Maybe@1', 'type returns crocks/Maybe@1 for Just')
-  t.equal(Nothing()['@@type'], 'crocks/Maybe@1', 'type returns crocks/Maybe@1 for Nothing')
+  t.equal(Just(0)['@@type'], 'crocks/Maybe@2', 'type returns crocks/Maybe@2 for Just')
+  t.equal(Nothing()['@@type'], 'crocks/Maybe@2', 'type returns crocks/Maybe@2 for Nothing')
 
   t.end()
 })
@@ -626,7 +626,7 @@ test('Maybe sequence errors', t => {
 
   const seqNothing = bindFunc(Maybe.Nothing().sequence)
 
-  const noFunc = /Maybe.sequence: Apply returning function required/
+  const noFunc = /Maybe.sequence: Applicative TypeRep or Apply returning function required/
   t.throws(seq(undefined), noFunc, 'throws with undefined')
   t.throws(seq(null), noFunc, 'throws with null')
   t.throws(seq(0), noFunc, 'throws falsey with number')
@@ -648,18 +648,19 @@ test('Maybe sequence errors', t => {
   t.end()
 })
 
-test('Maybe sequence functionality', t => {
+test('Maybe sequence with Apply function', t => {
   const x = 97
+  const f = x => MockCrock(x)
 
-  const s = Maybe.Just(MockCrock(x)).sequence(MockCrock.of)
-  const n = Maybe.Nothing().sequence(MockCrock.of)
+  const s = Maybe.Just(MockCrock(x)).sequence(f)
+  const n = Maybe.Nothing().sequence(f)
 
-  t.equal(s.type(), 'MockCrock', 'Provides an outer type of MockCrock')
-  t.equal(s.valueOf().type(), 'Maybe', 'Provides an inner type of Maybe')
+  t.ok(isSameType(MockCrock, s), 'Provides an outer type of MockCrock')
+  t.ok(isSameType(Maybe, s.valueOf()), 'Provides an inner type of Maybe')
   t.same(s.valueOf().option('Nothing'), x, 'Maybe contains original inner value')
 
-  t.equal(n.type(), 'MockCrock', 'Provides an outer type of MockCrock')
-  t.equal(n.valueOf().type(), 'Maybe', 'Provides an inner type of Maybe')
+  t.ok(isSameType(MockCrock, n), 'Provides an outer type of MockCrock')
+  t.ok(isSameType(Maybe, n.valueOf()), 'Provides an inner type of Maybe')
   t.equal(n.valueOf().option('Nothing'), 'Nothing', 'Reports as a Nothing')
 
   const ar = x => [ x ]
@@ -677,93 +678,128 @@ test('Maybe sequence functionality', t => {
   t.end()
 })
 
-test('Maybe traverse errors', t => {
-  const rtrav = bindFunc(Maybe.Just(0).traverse)
-  const ltrav = bindFunc(Maybe.Nothing().traverse)
+test('Maybe sequence with Applicative TypeRep', t => {
+  const x = 'happyJoy'
 
-  const err = /Maybe.traverse: Apply returning functions required for both arguments/
-  t.throws(rtrav(undefined, MockCrock), err, 'Just throws with undefined in first argument')
-  t.throws(rtrav(null, MockCrock), err, 'Just throws with null in first argument')
-  t.throws(rtrav(0, MockCrock), err, 'Just throws falsey with number in first argument')
-  t.throws(rtrav(1, MockCrock), err, 'Just throws truthy with number in first argument')
-  t.throws(rtrav('', MockCrock), err, 'Just throws falsey with string in first argument')
-  t.throws(rtrav('string', MockCrock), err, 'Just throws with truthy string in first argument')
-  t.throws(rtrav(false, MockCrock), err, 'Just throws with false in first argument')
-  t.throws(rtrav(true, MockCrock), err, 'Just throws with true in first argument')
-  t.throws(rtrav([], MockCrock), err, 'Just throws with an array in first argument')
-  t.throws(rtrav({}, MockCrock), err, 'Just throws with an object in first argument')
+  const s = Maybe.Just(MockCrock(x)).sequence(MockCrock)
+  const n = Maybe.Nothing().sequence(MockCrock)
 
-  t.throws(rtrav(MockCrock, undefined), err, 'Just throws with undefined in second argument')
-  t.throws(rtrav(MockCrock, null), err, 'Just throws with null in second argument')
-  t.throws(rtrav(MockCrock, 0), err, 'Just throws falsey with number in second argument')
-  t.throws(rtrav(MockCrock, 1), err, 'Just throws truthy with number in second argument')
-  t.throws(rtrav(MockCrock, ''), err, 'Just throws falsey with string in second argument')
-  t.throws(rtrav(MockCrock, 'string'), err, 'Just throws with truthy string in second argument')
-  t.throws(rtrav(MockCrock, false), err, 'Just throws with false in second argument')
-  t.throws(rtrav(MockCrock, true), err, 'Just throws with true in second argument')
-  t.throws(rtrav(MockCrock, []), err, 'Just throws with an array in second argument')
-  t.throws(rtrav(MockCrock, {}), err, 'Just throws with an object in second argument')
+  t.ok(isSameType(MockCrock, s), 'Provides an outer type of MockCrock')
+  t.ok(isSameType(Maybe, s.valueOf()), 'Provides an inner type of Maybe')
+  t.same(s.valueOf().option('Nothing'), x, 'Maybe contains original inner value')
 
-
-  t.doesNotThrow(rtrav(unit, MockCrock), 'Just requires an Apply returning function in second argument')
-
-  t.throws(ltrav(undefined, MockCrock), err, 'Nothing throws with undefined in first argument')
-  t.throws(ltrav(null, MockCrock), err, 'Nothing throws with null in first argument')
-  t.throws(ltrav(0, MockCrock), err, 'Nothing throws with falsey number in first argument')
-  t.throws(ltrav(1, MockCrock), err, 'Nothing throws with truthy number in first argument')
-  t.throws(ltrav('', MockCrock), err, 'Nothing throws with falsey string in first argument')
-  t.throws(ltrav('string', MockCrock), err, 'Nothing throws with truthy string in first argument')
-  t.throws(ltrav(false, MockCrock), err, 'Nothing throws with false in first argument')
-  t.throws(ltrav(true, MockCrock), err, 'Nothing throws with true in first argument')
-  t.throws(ltrav([], MockCrock), err, 'Nothing throws with an array in first argument')
-  t.throws(ltrav({}, MockCrock), err, 'Nothing throws with an object in first argument')
-
-  t.throws(ltrav(MockCrock, undefined), err, 'Nothing throws with undefined in second argument')
-  t.throws(ltrav(MockCrock, null), err, 'Nothing throws with null in second argument')
-  t.throws(ltrav(MockCrock, 0), err, 'Nothing throws falsey with number in second argument')
-  t.throws(ltrav(MockCrock, 1), err, 'Nothing throws truthy with number in second argument')
-  t.throws(ltrav(MockCrock, ''), err, 'Nothing throws falsey with string in second argument')
-  t.throws(ltrav(MockCrock, 'string'), err, 'Nothing throws with truthy string in second argument')
-  t.throws(ltrav(MockCrock, false), err, 'Nothing throws with false in second argument')
-  t.throws(ltrav(MockCrock, true), err, 'Nothing throws with true in second argument')
-  t.throws(ltrav(MockCrock, []), err, 'Nothing throws with an array in second argument')
-  t.throws(ltrav(MockCrock, {}), err, 'Nothing throws with an object in second argument')
-
-  const noAp = /Maybe.traverse: Both functions must return an Apply/
-  t.throws(rtrav(unit, unit), noAp, 'Just throws when first function does not return an Applicaitve')
-  t.throws(ltrav(unit, unit), noAp, 'Nothing throws when first function does not return an Applicaitve')
-
-  t.doesNotThrow(ltrav(MockCrock, unit), 'Nothing requires an Apply returning function in the first arg')
+  t.ok(isSameType(MockCrock, n), 'Provides an outer type of MockCrock')
+  t.ok(isSameType(Maybe, n.valueOf()), 'Provides an inner type of Maybe')
+  t.equal(n.valueOf().option('Nothing'), 'Nothing', 'Reports as a Nothing')
 
   t.end()
 })
 
-test('Maybe traverse functionality', t => {
+test('Maybe traverse errors', t => {
+  const rtrav = bindFunc(Maybe.Just(0).traverse)
+  const ltrav = bindFunc(Maybe.Nothing().traverse)
+
+  const first = /Maybe.traverse: Applicative TypeRep or Apply returning function required for first argument/
+  const second = /Maybe.traverse: Apply returning function required for second argument/
+
+  t.throws(rtrav(undefined, MockCrock), first, 'Just throws with undefined in first argument')
+  t.throws(rtrav(null, MockCrock), first, 'Just throws with null in first argument')
+  t.throws(rtrav(0, MockCrock), first, 'Just throws falsey with number in first argument')
+  t.throws(rtrav(1, MockCrock), first, 'Just throws truthy with number in first argument')
+  t.throws(rtrav('', MockCrock), first, 'Just throws falsey with string in first argument')
+  t.throws(rtrav('string', MockCrock), first, 'Just throws with truthy string in first argument')
+  t.throws(rtrav(false, MockCrock), first, 'Just throws with false in first argument')
+  t.throws(rtrav(true, MockCrock), first, 'Just throws with true in first argument')
+  t.throws(rtrav([], MockCrock), first, 'Just throws with an array in first argument')
+  t.throws(rtrav({}, MockCrock), first, 'Just throws with an object in first argument')
+
+  t.throws(rtrav(MockCrock, undefined), second, 'Just throws with undefined in second argument')
+  t.throws(rtrav(MockCrock, null), second, 'Just throws with null in second argument')
+  t.throws(rtrav(MockCrock, 0), second, 'Just throws falsey with number in second argument')
+  t.throws(rtrav(MockCrock, 1), second, 'Just throws truthy with number in second argument')
+  t.throws(rtrav(MockCrock, ''), second, 'Just throws falsey with string in second argument')
+  t.throws(rtrav(MockCrock, 'string'), second, 'Just throws with truthy string in second argument')
+  t.throws(rtrav(MockCrock, false), second, 'Just throws with false in second argument')
+  t.throws(rtrav(MockCrock, true), second, 'Just throws with true in second argument')
+  t.throws(rtrav(MockCrock, []), second, 'Just throws with an array in second argument')
+  t.throws(rtrav(MockCrock, {}), second, 'Just throws with an object in second argument')
+
+  t.throws(ltrav(undefined, MockCrock), first, 'Nothing throws with undefined in first argument')
+  t.throws(ltrav(null, MockCrock), first, 'Nothing throws with null in first argument')
+  t.throws(ltrav(0, MockCrock), first, 'Nothing throws with falsey number in first argument')
+  t.throws(ltrav(1, MockCrock), first, 'Nothing throws with truthy number in first argument')
+  t.throws(ltrav('', MockCrock), first, 'Nothing throws with falsey string in first argument')
+  t.throws(ltrav('string', MockCrock), first, 'Nothing throws with truthy string in first argument')
+  t.throws(ltrav(false, MockCrock), first, 'Nothing throws with false in first argument')
+  t.throws(ltrav(true, MockCrock), first, 'Nothing throws with true in first argument')
+  t.throws(ltrav([], MockCrock), first, 'Nothing throws with an array in first argument')
+  t.throws(ltrav({}, MockCrock), first, 'Nothing throws with an object in first argument')
+
+  t.throws(ltrav(MockCrock, undefined), second, 'Nothing throws with undefined in second argument')
+  t.throws(ltrav(MockCrock, null), second, 'Nothing throws with null in second argument')
+  t.throws(ltrav(MockCrock, 0), second, 'Nothing throws falsey with number in second argument')
+  t.throws(ltrav(MockCrock, 1), second, 'Nothing throws truthy with number in second argument')
+  t.throws(ltrav(MockCrock, ''), second, 'Nothing throws falsey with string in second argument')
+  t.throws(ltrav(MockCrock, 'string'), second, 'Nothing throws with truthy string in second argument')
+  t.throws(ltrav(MockCrock, false), second, 'Nothing throws with false in second argument')
+  t.throws(ltrav(MockCrock, true), second, 'Nothing throws with true in second argument')
+  t.throws(ltrav(MockCrock, []), second, 'Nothing throws with an array in second argument')
+  t.throws(ltrav(MockCrock, {}), second, 'Nothing throws with an object in second argument')
+
+  const noAp = /Maybe.traverse: Both functions must return an Apply of the same type/
+  t.throws(rtrav(unit, unit), noAp, 'Just throws when first function does not return an Applicative')
+  t.throws(ltrav(unit, unit), noAp, 'Nothing throws when first function does not return an Applicative')
+
+  t.end()
+})
+
+test('Maybe traverse with Apply function', t => {
   const x = 'bubbles'
+  const res = 'result'
   const f = x => MockCrock(x)
+  const fn = m => constant(m(res))
 
-  const r = Maybe.Just(x).traverse(f, MockCrock)
-  const l = Maybe.Nothing().traverse(f, MockCrock)
+  const r = Maybe.Just(x).traverse(f, fn(MockCrock))
+  const l = Maybe.Nothing().traverse(f, fn(MockCrock))
 
-  t.equal(r.type(), 'MockCrock', 'Provides an outer type of MockCrock')
-  t.equal(r.valueOf().type(), 'Maybe', 'Provides an inner type of Maybe')
-  t.equal(r.valueOf().option('Nothing'), x, 'Maybe contains original inner value')
+  t.ok(isSameType(MockCrock, r), 'Just provides an outer type of MockCrock')
+  t.ok(isSameType(Maybe, r.valueOf()), 'Just provides an inner type of Maybe')
+  t.equal(r.valueOf().option('Nothing'), res, 'Maybe contains transformed value')
 
-  t.equal(l.type(), 'MockCrock', 'Provides an outer type of MockCrock')
-  t.equal(l.valueOf().type(), 'Maybe', 'Provides an inner type of Maybe')
+  t.ok(isSameType(MockCrock, l), 'Nothing provides an outer type of MockCrock')
+  t.ok(isSameType(Maybe, l.valueOf()), 'Nothing provides an inner type of Maybe')
   t.equal(l.valueOf().option('Nothing'), 'Nothing', 'Maybe is a Nothing')
 
   const ar = x => [ x ]
-  const arS = Maybe.Just(x).traverse(ar, ar)
-  const arN = Maybe.Nothing().traverse(ar, ar)
+  const arS = Maybe.Just(x).traverse(ar, fn(ar))
+  const arN = Maybe.Nothing().traverse(ar, fn(ar))
 
-  t.ok(isSameType(Array, arS), 'Provides an outer type of Array')
-  t.ok(isSameType(Maybe, arS[0]), 'Provides an inner type of Maybe')
-  t.same(arS[0].option('Nothing'), x, 'Maybe contains original inner value')
+  t.ok(isSameType(Array, arS), 'Just provides an outer type of Array')
+  t.ok(isSameType(Maybe, arS[0]), 'Just provides an inner type of Maybe')
+  t.same(arS[0].option('Nothing'), res, 'Maybe contains transformed value')
 
-  t.ok(isSameType(Array, arN), 'Provides an outer type of MockCrock')
-  t.ok(isSameType(Maybe, arN[0]), 'Provides an inner type of Maybe')
+  t.ok(isSameType(Array, arN), 'Nothing provides an outer type of MockCrock')
+  t.ok(isSameType(Maybe, arN[0]), 'Nothing provides an inner type of Maybe')
   t.equal(arN[0].option('Nothing'), 'Nothing', 'Reports as a Nothing')
+
+  t.end()
+})
+
+test('Maybe traverse with Applicative TypeRep', t => {
+  const x = 'bubbles'
+  const res = 'result'
+  const fn = constant(MockCrock(res))
+
+  const r = Maybe.Just(x).traverse(MockCrock, fn)
+  const l = Maybe.Nothing().traverse(MockCrock, fn)
+
+  t.ok(isSameType(MockCrock, r), 'Just provides an outer type of MockCrock')
+  t.ok(isSameType(Maybe, r.valueOf()), 'Just provides an inner type of Maybe')
+  t.equal(r.valueOf().option('Nothing'), res, 'Maybe contains transformed value')
+
+  t.ok(isSameType(MockCrock, l), 'Nothing provides an outer type of MockCrock')
+  t.ok(isSameType(Maybe, l.valueOf()), 'Nothing provides an inner type of Maybe')
+  t.equal(l.valueOf().option('Nothing'), 'Nothing', 'Maybe is a Nothing')
 
   t.end()
 })

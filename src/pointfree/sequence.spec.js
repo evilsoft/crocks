@@ -7,6 +7,7 @@ const bindFunc = helpers.bindFunc
 
 const isArray = require('../core/isArray')
 const isFunction = require('../core/isFunction')
+const isSameType = require('../core/isSameType')
 const unit = require('../core/_unit')
 
 const constant = x => () => x
@@ -20,7 +21,7 @@ test('sequence pointfree', t => {
 
   t.ok(isFunction(seq), 'is a function')
 
-  const err = /sequence: Apply function required for first argument/
+  const err = /sequence: Applicative TypeRep or Apply returning function required for first argument/
   t.throws(seq(undefined, m), err, 'throws if first arg is undefined')
   t.throws(seq(null, m), err, 'throws if first arg is null')
   t.throws(seq(0, m), err, 'throws if first arg is a falsey number')
@@ -43,9 +44,6 @@ test('sequence pointfree', t => {
   t.throws(seq(unit, true), noTrav, 'throws if second arg is true')
   t.throws(seq(unit, {}), noTrav, 'throws if second arg is an object')
 
-  t.doesNotThrow(seq(unit, m), 'allows a function and Traverable')
-  t.doesNotThrow(seq(unit, []), 'allows a function and an Array')
-
   t.end()
 })
 
@@ -66,7 +64,7 @@ test('sequence with Array', t => {
   const outer = sequence(MockCrock.of, [ MockCrock(12), MockCrock(23) ])
   const inner = outer.valueOf()
 
-  t.equal(outer.type(), 'MockCrock', 'outer container is a MockCrock')
+  t.ok(isSameType(MockCrock, outer), 'outer container is a MockCrock')
   t.ok(isArray(inner), 'inner container is an Array')
   t.equal(inner.length, 2, 'inner array maintains structure')
 

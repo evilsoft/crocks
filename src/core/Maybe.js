@@ -1,7 +1,7 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const VERSION = 1
+const VERSION = 2
 
 const _defineUnion = require('./defineUnion')
 const _equals = require('./equals')
@@ -12,7 +12,9 @@ const type = require('./types').type('Maybe')
 const _type = require('./types').typeFn(type(), VERSION)
 const fl = require('./flNames')
 
+const apOrFunc = require('./apOrFunc')
 const compose = require('./compose')
+const isApplicative = require('./isApplicative')
 const isApply = require('./isApply')
 const isArray = require('./isArray')
 const isFunction = require('./isFunction')
@@ -44,10 +46,12 @@ const _zero =
 
 function runSequence(x) {
   if(!(isApply(x) || isArray(x))) {
-    throw new TypeError('Maybe.sequence: Must wrap an Apply')
+    throw new TypeError(
+      'Maybe.sequence: Must wrap an Apply'
+    )
   }
 
-  return x.map(v => Maybe.of(v))
+  return x.map(_of)
 }
 
 function Maybe(u) {
@@ -162,10 +166,15 @@ function Maybe(u) {
     return m
   }
 
-  function sequence(af) {
-    if(!isFunction(af)) {
-      throw new TypeError('Maybe.sequence: Apply returning function required')
+  function sequence(f) {
+    if(!(isApplicative(f) || isFunction(f))) {
+      throw new TypeError(
+        'Maybe.sequence: Applicative TypeRep or Apply returning function required'
+      )
     }
+
+    const af =
+      apOrFunc(f)
 
     return either(
       compose(af, Maybe.Nothing),
@@ -173,20 +182,34 @@ function Maybe(u) {
     )
   }
 
-  function traverse(af, f) {
-    if(!isFunction(f) || !isFunction(af)) {
-      throw new TypeError('Maybe.traverse: Apply returning functions required for both arguments')
+  function traverse(f, fn) {
+    if(!(isApplicative(f) || isFunction(f))) {
+      throw new TypeError(
+        'Maybe.traverse: Applicative TypeRep or Apply returning function required for first argument'
+      )
     }
 
-    const m = either(compose(af, Maybe.Nothing), f)
+    if(!isFunction(fn)) {
+      throw new TypeError(
+        'Maybe.traverse: Apply returning function required for second argument'
+      )
+    }
+
+    const af =
+      apOrFunc(f)
+
+    const m =
+      either(compose(af, Maybe.Nothing), fn)
 
     if(!(isApply(m) || isArray(m))) {
-      throw new TypeError('Maybe.traverse: Both functions must return an Apply')
+      throw new TypeError(
+        'Maybe.traverse: Both functions must return an Apply of the same type'
+      )
     }
 
     return either(
       constant(m),
-      constant(m.map(v => Maybe(v)))
+      constant(m.map(_of))
     )
   }
 

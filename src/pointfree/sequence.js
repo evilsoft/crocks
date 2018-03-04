@@ -4,11 +4,14 @@
 const array = require('../core/array')
 const curry = require('../core/curry')
 const isArray = require('../core/isArray')
+const isApplicative = require('../core/isApplicative')
 const isFunction = require('../core/isFunction')
 
 function sequence(af, m) {
-  if(!isFunction(af)) {
-    throw new TypeError('sequence: Apply function required for first argument')
+  if(!(isApplicative(af) || isFunction(af))) {
+    throw new TypeError(
+      'sequence: Applicative TypeRep or Apply returning function required for first argument'
+    )
   }
 
   if(m && isFunction(m.sequence)) {

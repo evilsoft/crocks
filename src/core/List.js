@@ -1,7 +1,7 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const VERSION = 1
+const VERSION = 2
 
 const _equals = require('./equals')
 const _implements = require('./implements')
@@ -12,6 +12,8 @@ const fl = require('./flNames')
 
 const array = require('./array')
 
+const apOrFunc = require('./apOrFunc')
+const isApplicative = require('./isApplicative')
 const isApply = require('./isApply')
 const isArray = require('./isArray')
 const isEmpty = require('./isEmpty')
@@ -55,7 +57,9 @@ function applyTraverse(x, y) {
 
 function runSequence(acc, x) {
   if(!((isApply(acc) || isArray(acc)) && isSameType(acc, x))) {
-    throw new TypeError('List.sequence: Must wrap Apply')
+    throw new TypeError(
+      'List.sequence: Must wrap Applys of the same type'
+    )
   }
 
   return applyTraverse(acc, x)
@@ -66,7 +70,7 @@ function runTraverse(f) {
     const m = f(x)
 
     if(!((isApply(acc) || isArray(acc)) && isSameType(acc, m))) {
-      throw new TypeError('List.traverse: Both functions must return an Apply')
+      throw new TypeError('List.traverse: Both functions must return an Apply of the same type')
     }
 
     return applyTraverse(acc, m)
@@ -78,7 +82,8 @@ function List(x) {
     throw new TypeError('List: List must wrap something')
   }
 
-  const xs = isArray(x) ? x.slice() : [ x ]
+  const xs =
+    isArray(x) ? x.slice() : [ x ]
 
   function flatMap(fn) {
     return function(y, x) {
@@ -220,10 +225,15 @@ function List(x) {
     return List(xs.reduce(flatMap(fn), []))
   }
 
-  function sequence(af) {
-    if(!isFunction(af)) {
-      throw new TypeError('List.sequence: Apply Function required')
+  function sequence(f) {
+    if(!(isApplicative(f) || isFunction(f))) {
+      throw new TypeError(
+        'List.sequence: Applicative TypeRep or Apply returning function required'
+      )
     }
+
+    const af =
+      apOrFunc(f)
 
     return reduceRight(
       runSequence,
@@ -231,13 +241,24 @@ function List(x) {
     )
   }
 
-  function traverse(af, f) {
-    if(!isFunction(f) || !isFunction(af)) {
-      throw new TypeError('List.traverse: Apply returning functions required for both arguments')
+  function traverse(f, fn) {
+    if(!(isApplicative(f) || isFunction(f))) {
+      throw new TypeError(
+        'List.traverse: Applicative TypeRep or Apply returning function required for first argument'
+      )
     }
 
+    if(!isFunction(fn)) {
+      throw new TypeError(
+        'List.traverse: Apply returning functions required for second argument'
+      )
+    }
+
+    const af =
+      apOrFunc(f)
+
     return reduceRight(
-      runTraverse(f),
+      runTraverse(fn),
       af(List.empty())
     )
   }

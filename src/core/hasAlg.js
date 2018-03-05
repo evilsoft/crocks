@@ -4,6 +4,6 @@
 const isFunction = require('./isFunction')
 
 const hasAlg = (alg, m) =>
-  isFunction(m[alg]) || (isFunction(m['@@implements']) && !!m['@@implements'](alg))
+  isFunction(m[alg]) || isFunction(m['@@implements']) && !!m['@@implements'](alg)
 
 module.exports = hasAlg

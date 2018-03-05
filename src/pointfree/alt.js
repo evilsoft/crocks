@@ -8,7 +8,9 @@ const isSameType = require('../core/isSameType')
 // alt : Alt m => m a -> m a -> m a
 function alt(m, x) {
   if(!(isAlt(m) && isSameType(m, x))) {
-    throw new TypeError('alt: Both arguments must be Alts of the same type')
+    throw new TypeError(
+      'alt: Both arguments must be Alts of the same type'
+    )
   }
 
   return x.alt(m)

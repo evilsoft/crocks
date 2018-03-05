@@ -11,10 +11,13 @@ const predOrFunc = require('../core/predOrFunc')
 // or : (a -> Boolean) | Pred -> (a -> Boolean) | Pred -> a -> Boolean
 function or(f, g) {
   if(!((isFunction(f) || isSameType(Pred, f)) && (isFunction(g) || isSameType(Pred, g)))) {
-    throw new TypeError('or: Preds or predicate functions required for first two arguments')
+    throw new TypeError(
+      'or: Preds or predicate functions required for first two arguments'
+    )
   }
 
-  return x => !!(predOrFunc(f, x) || predOrFunc(g, x))
+  return x =>
+    !!(predOrFunc(f, x) || predOrFunc(g, x))
 }
 
 module.exports = curry(or)

@@ -5,11 +5,16 @@ const curry = require('../core/curry')
 const isFunction = require('../core/isFunction')
 
 function either(lf, rf, m) {
-  if(!isFunction(lf) || !isFunction(rf)) {
-    throw new TypeError('either: First two arguments must be functions')
+  if(!(isFunction(lf) && isFunction(rf))) {
+    throw new TypeError(
+      'either: First two arguments must be functions'
+    )
   }
-  else if(!(m && isFunction(m.either))) {
-    throw new TypeError('either: Last argument must be an Either or Maybe')
+
+  if(!(m && isFunction(m.either))) {
+    throw new TypeError(
+      'either: Last argument must be an Either or Maybe'
+    )
   }
 
   return m.either(lf, rf)

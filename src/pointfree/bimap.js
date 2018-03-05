@@ -2,14 +2,20 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const curry = require('../core/curry')
+const isBifunctor = require('../core/isBifunctor')
 const isFunction = require('../core/isFunction')
 
 function bimap(f, g, m) {
-  if(!isFunction(f) || !isFunction(g)) {
-    throw new TypeError('bimap: Function required for first two arguments')
+  if(!(isFunction(f) &&  isFunction(g))) {
+    throw new TypeError(
+      'bimap: Functions required for first two arguments'
+    )
   }
-  else if(!isFunction(m.bimap)) {
-    throw new TypeError('bimap: Bifunctor required for third argument')
+
+  if(!isBifunctor(m)) {
+    throw new TypeError(
+      'bimap: Bifunctor required for third argument'
+    )
   }
 
   return m.bimap(f, g)

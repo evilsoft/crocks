@@ -13,16 +13,17 @@ test('once helper', t => {
 
   t.ok(isFunction(once), 'is a function')
 
-  t.throws(f(undefined), 'throws with undefined')
-  t.throws(f(null), 'throws with null')
-  t.throws(f(0), 'throws with falsey number')
-  t.throws(f(1), 'throws with truthy number')
-  t.throws(f(''), 'throws with falsey string')
-  t.throws(f('string'), 'throws with truthy string')
-  t.throws(f(false), 'throws with false')
-  t.throws(f(true), 'throws with true')
-  t.throws(f({}), 'throws with an object')
-  t.throws(f([]), 'throws with an array')
+  const err = /once: Function required/
+  t.throws(f(undefined), err, 'throws with undefined')
+  t.throws(f(null), err, 'throws with null')
+  t.throws(f(0), err, 'throws with falsey number')
+  t.throws(f(1), err, 'throws with truthy number')
+  t.throws(f(''), err, 'throws with falsey string')
+  t.throws(f('string'), err, 'throws with truthy string')
+  t.throws(f(false), err, 'throws with false')
+  t.throws(f(true), err, 'throws with true')
+  t.throws(f({}), err, 'throws with an object')
+  t.throws(f([]), err, 'throws with an array')
 
   t.doesNotThrow(f(unit), 'allows a function')
 

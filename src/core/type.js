@@ -9,7 +9,7 @@ function type(x) {
       return x.type()
     }
   }
-  return ({}).toString.call(x).slice(8, -1)
+  return {}.toString.call(x).slice(8, -1)
 }
 
 module.exports = type

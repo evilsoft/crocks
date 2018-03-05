@@ -18,17 +18,18 @@ test('run pointfree', t => {
 
   t.ok(isFunction(run), 'is a function')
 
-  t.throws(f(undefined), TypeError, 'throws if passed undefined')
-  t.throws(f(null), TypeError, 'throws if passed null')
-  t.throws(f(0), TypeError, 'throws if passed a falsey number')
-  t.throws(f(1), TypeError, 'throws if passed a truthy number')
-  t.throws(f(''), TypeError, 'throws if passed a falsey string')
-  t.throws(f('string'), TypeError, 'throws if passed a truthy string')
-  t.throws(f(false), TypeError, 'throws if passed false')
-  t.throws(f(true), TypeError, 'throws if passed true')
-  t.throws(f([]), TypeError, 'throws if passed an array')
-  t.throws(f({}), TypeError, 'throws if passed an object')
-  t.throws(f(unit), TypeError, 'throws if passed a function')
+  const err = /run: IO required/
+  t.throws(f(undefined), err, 'throws if passed undefined')
+  t.throws(f(null), err, 'throws if passed null')
+  t.throws(f(0), err, 'throws if passed a falsey number')
+  t.throws(f(1), err, 'throws if passed a truthy number')
+  t.throws(f(''), err, 'throws if passed a falsey string')
+  t.throws(f('string'), err, 'throws if passed a truthy string')
+  t.throws(f(false), err, 'throws if passed false')
+  t.throws(f(true), err, 'throws if passed true')
+  t.throws(f([]), err, 'throws if passed an array')
+  t.throws(f({}), err, 'throws if passed an object')
+  t.throws(f(unit), err, 'throws if passed a function')
 
   const result = run(m)
 

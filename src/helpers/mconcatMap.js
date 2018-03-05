@@ -8,20 +8,26 @@ const isFunction = require('../core/isFunction')
 const isMonoid = require('../core/isMonoid')
 
 // mconcatMap : Monoid M => M -> (b -> a) -> ([ b ] | List b) -> M a
-function mconcatMap(M, f, xs) {
-  if(!(M && isMonoid(M))) {
-    throw new TypeError('mconcatMap: Monoid required for first argument')
+function mconcatMap(m, f, xs) {
+  if(!isMonoid(m)) {
+    throw new TypeError(
+      'mconcatMap: Monoid required for first argument'
+    )
   }
 
   if(!isFunction(f)) {
-    throw new TypeError('mconcatMap: Function required for second argument')
+    throw new TypeError(
+      'mconcatMap: Function required for second argument'
+    )
   }
 
-  if(!(isFoldable(xs))) {
-    throw new TypeError('mconcatMap: Foldable required for third argument')
+  if(!isFoldable(xs)) {
+    throw new TypeError(
+      'mconcatMap: Foldable required for third argument'
+    )
   }
 
-  return _mconcatMap(M, f, xs)
+  return _mconcatMap(m, f, xs)
 }
 
 module.exports = curry(mconcatMap)

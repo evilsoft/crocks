@@ -29,7 +29,7 @@ function Arrow(runWith) {
     _id
 
   function compose(m) {
-    if(!(isSameType(Arrow, m))) {
+    if(!isSameType(Arrow, m)) {
       throw new TypeError('Arrow.compose: Arrow required')
     }
 
@@ -62,7 +62,7 @@ function Arrow(runWith) {
 
   function first() {
     return Arrow(function(x) {
-      if(!(isSameType(Pair, x))) {
+      if(!isSameType(Pair, x)) {
         throw TypeError('Arrow.first: Pair required for inner argument')
       }
       return x.bimap(runWith, x => x)
@@ -71,7 +71,7 @@ function Arrow(runWith) {
 
   function second() {
     return Arrow(function(x) {
-      if(!(isSameType(Pair, x))) {
+      if(!isSameType(Pair, x)) {
         throw TypeError('Arrow.second: Pair required for inner argument')
       }
 
@@ -81,7 +81,7 @@ function Arrow(runWith) {
 
   function both() {
     return Arrow(function(x) {
-      if(!(isSameType(Pair, x))) {
+      if(!isSameType(Pair, x)) {
         throw TypeError('Arrow.both: Pair required for inner argument')
       }
       return x.bimap(runWith, runWith)

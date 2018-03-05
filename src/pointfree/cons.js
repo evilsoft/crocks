@@ -6,7 +6,7 @@ const isArray = require('../core/isArray')
 const isFunction = require('../core/isFunction')
 
 function cons(x, m) {
-  if(isFunction(m.cons)) {
+  if(m && isFunction(m.cons)) {
     return m.cons(x)
   }
   else if(isArray(m)) {

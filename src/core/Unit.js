@@ -34,7 +34,7 @@ function Unit() {
     _empty
 
   function concat(m) {
-    if(!(isSameType(Unit, m))) {
+    if(!isSameType(Unit, m)) {
       throw new TypeError('Unit.concat: Unit required')
     }
 

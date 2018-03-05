@@ -15,11 +15,11 @@ function traverse(af, fn, m) {
     throw new TypeError('traverse: Apply returning function required for second argument')
   }
 
-  if((m && isFunction(m.traverse))) {
+  if(m && isFunction(m.traverse)) {
     return m.traverse(af, fn)
   }
 
-  if((isArray(m))) {
+  if(isArray(m)) {
     return array.traverse(af, fn, m)
   }
 

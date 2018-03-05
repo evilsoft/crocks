@@ -12,7 +12,7 @@ function second(m) {
   if(isFunction(m)) {
     return function(x) {
       if(!isSameType(Pair, x)) {
-        throw new TypeError('first: Pair required as input')
+        throw new TypeError('second: Pair required as input')
       }
 
       return x.bimap(identity, m)

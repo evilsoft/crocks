@@ -5,14 +5,19 @@ const curry = require('../core/curry')
 const isFunction = require('../core/isFunction')
 
 function swap(f, g, m) {
-  if(!isFunction(f) || !isFunction(g)) {
-    throw new TypeError('swap: Function required for first two arguments')
-  }
-  else if(!isFunction(m.swap)) {
-    throw new TypeError('swap: Either or Pair required for third arguments')
+  if(!(isFunction(f) && isFunction(g))) {
+    throw new TypeError(
+      'swap: Function required for first two arguments'
+    )
   }
 
-  return m.swap(f, g)
+  if(m && isFunction(m.swap)) {
+    return m.swap(f, g)
+  }
+
+  throw new TypeError(
+    'swap: Async, Either, Pair or Result required for third arguments'
+  )
 }
 
 module.exports = curry(swap)

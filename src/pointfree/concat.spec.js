@@ -15,14 +15,14 @@ test('concat pointfree', t => {
   t.ok(isFunction(concat), 'is a function')
 
   const err = /concat: Semigroups of the same type required both arguments/
-  t.throws(f('', undefined), TypeError, 'throws if second arg is undefined')
-  t.throws(f('', null), TypeError, 'throws if second arg is null')
-  t.throws(f('', 0), TypeError, 'throws if second arg is falsey number')
-  t.throws(f('', 1), TypeError, 'throws if second arg is truthy number')
-  t.throws(f('', false), TypeError, 'throws if second arg is false')
-  t.throws(f('', true), TypeError, 'throws if second arg is true')
-  t.throws(f('', {}), TypeError, 'throws if second arg is true')
-  t.throws(f('', unit), TypeError, 'throws if second arg is function')
+  t.throws(f('', undefined), err, 'throws if second arg is undefined')
+  t.throws(f('', null), err, 'throws if second arg is null')
+  t.throws(f('', 0), err, 'throws if second arg is falsey number')
+  t.throws(f('', 1), err, 'throws if second arg is truthy number')
+  t.throws(f('', false), err, 'throws if second arg is false')
+  t.throws(f('', true), err, 'throws if second arg is true')
+  t.throws(f('', {}), err, 'throws if second arg is true')
+  t.throws(f('', unit), err, 'throws if second arg is function')
 
   t.throws(f([], ''), err, 'throws when semigroups differ')
 

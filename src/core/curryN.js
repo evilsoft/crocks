@@ -9,7 +9,7 @@ function curryN(n, fn) {
     const remaining =
        Math.floor(n) - args.length
 
-    return (remaining > 0)
+    return remaining > 0
       ? curryN(remaining, Function.bind.apply(fn, [ null ].concat(args)))
       : fn.apply(null, args.slice(0, n))
   }

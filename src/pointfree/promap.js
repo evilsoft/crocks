@@ -6,11 +6,13 @@ const curry = require('../core/curry')
 const isFunction = require('../core/isFunction')
 
 function promap(l, r, m) {
-  if(!isFunction(l) || !isFunction(r)) {
-    throw new TypeError('promap: Functions required for first two arguments')
+  if(!(isFunction(l) && isFunction(r))) {
+    throw new TypeError(
+      'promap: Functions required for first two arguments'
+    )
   }
 
-  if(isFunction(m)){
+  if(isFunction(m)) {
     return compose(compose(r, m), l)
   }
 
@@ -18,7 +20,9 @@ function promap(l, r, m) {
     return m.promap(l, r)
   }
 
-  throw new TypeError('promap: Function or Profunctor required for third argument')
+  throw new TypeError(
+    'promap: Function or Profunctor required for third argument'
+  )
 }
 
 module.exports = curry(promap)

@@ -11,8 +11,8 @@ function isSameType(x, y) {
   const tY = type(y)
 
   return tX === tY
-    || (isFunction(x) && x.name === tY)
-    || (isFunction(y) && y.name === tX)
+    || isFunction(x) && x.name === tY
+    || isFunction(y) && y.name === tX
 }
 
 module.exports = curry(isSameType)

@@ -68,7 +68,7 @@ test('sequence with Array', t => {
 
   t.equal(outer.type(), 'MockCrock', 'outer container is a MockCrock')
   t.ok(isArray(inner), 'inner container is an Array')
-  t.equal((inner.length), 2, 'inner array maintains structure')
+  t.equal(inner.length, 2, 'inner array maintains structure')
 
   t.end()
 })

@@ -145,7 +145,7 @@ test('Prod concat functionality', t => {
   t.throws(cat({}), err, 'throws with an object')
   t.throws(cat(notProd), err, 'throws with non-Prod')
 
-  t.equals(a.concat(b).valueOf(), (x * y), 'Multiplies wrapped values as expected')
+  t.equals(a.concat(b).valueOf(), x * y, 'Multiplies wrapped values as expected')
 
   t.end()
 })

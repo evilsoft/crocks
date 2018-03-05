@@ -8,7 +8,9 @@ const isFunction = require('../core/isFunction')
 //  flip :: (a -> b -> c) -> b -> a -> c
 function flip(f, x, y) {
   if(!isFunction(f)) {
-    throw new TypeError('flip: Function required for first argument')
+    throw new TypeError(
+      'flip: Function required for first argument'
+    )
   }
 
   return curry(f)(y, x)

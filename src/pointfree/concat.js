@@ -9,7 +9,9 @@ const isString = require('../core/isString')
 
 function concat(x, m) {
   if(!(isSemigroup(m) && isSameType(x, m))) {
-    throw new TypeError('concat: Semigroups of the same type required both arguments')
+    throw new TypeError(
+      'concat: Semigroups of the same type required both arguments'
+    )
   }
 
   if(isString(m)) {

@@ -15,6 +15,7 @@ function filter(pred, m) {
   if(!(isFunction(pred) || isSameType(Pred, pred))) {
     throw new TypeError('filter: Pred or predicate function required for first argument')
   }
+
   const fn =
     x => predOrFunc(pred, x)
 

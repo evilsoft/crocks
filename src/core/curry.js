@@ -18,7 +18,7 @@ function curry(fn) {
       return curry(Function.bind.apply(fn, [ null ].concat(args)))
     }
 
-    const val = (args.length === fn.length)
+    const val = args.length === fn.length
       ? fn.apply(null, args)
       : args.reduce(applyCurry, fn)
 

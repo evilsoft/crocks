@@ -29,7 +29,9 @@ function fanout(fst, snd) {
       .contramap(x => Pair(x, x))
   }
 
-  throw new TypeError('fanout: Arrows, Functions or Stars of the same type required for both arguments')
+  throw new TypeError(
+    'fanout: Arrows, Functions or Stars of the same type required for both arguments'
+  )
 }
 
 module.exports = curry(fanout)

@@ -16,16 +16,17 @@ test('cons pointfree', t => {
 
   t.ok(isFunction(cons), 'is a function')
 
-  t.throws(f(0, undefined), TypeError, 'throws when second arg is undefined')
-  t.throws(f(0, null), TypeError, 'throws when second arg is null')
-  t.throws(f(0, 0), TypeError, 'throws when second arg is falsey number')
-  t.throws(f(0, 1), TypeError, 'throws when second arg is truthy number')
-  t.throws(f(0, ''), TypeError, 'throws when second arg is falsey string')
-  t.throws(f(0, 'string'), TypeError, 'throws when second arg is truthy string')
-  t.throws(f(0, false), TypeError, 'throws when second arg is false')
-  t.throws(f(0, true), TypeError, 'throws when second arg is true')
-  t.throws(f(0, {}), TypeError, 'throws when second arg is true')
-  t.throws(f(0, unit), TypeError, 'throws when second arg is function')
+  const err = /cons: List or Array required for second argument/
+  t.throws(f(0, undefined), err, 'throws when second arg is undefined')
+  t.throws(f(0, null), err, 'throws when second arg is null')
+  t.throws(f(0, 0), err, 'throws when second arg is falsey number')
+  t.throws(f(0, 1), err, 'throws when second arg is truthy number')
+  t.throws(f(0, ''), err, 'throws when second arg is falsey string')
+  t.throws(f(0, 'string'), err, 'throws when second arg is truthy string')
+  t.throws(f(0, false), err, 'throws when second arg is false')
+  t.throws(f(0, true), err, 'throws when second arg is true')
+  t.throws(f(0, {}), err, 'throws when second arg is true')
+  t.throws(f(0, unit), err, 'throws when second arg is function')
 
   t.end()
 })

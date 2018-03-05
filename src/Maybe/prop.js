@@ -11,7 +11,7 @@ const { Nothing, Just } = require('../core/Maybe')
 
 // prop : (String | Integer) -> a -> Maybe b
 function prop(key, target) {
-  if(!((isString(key) && !isEmpty(key)) || isInteger(key))) {
+  if(!(isString(key) && !isEmpty(key) || isInteger(key))) {
     throw new TypeError('prop: Non-empty String or Integer required for first argument')
   }
 

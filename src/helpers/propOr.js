@@ -11,7 +11,7 @@ const isString = require('../core/isString')
 
 // propOr : a -> String | Integer -> b -> c
 function propOr(def, key, target) {
-  if(!((isString(key) && !isEmpty(key)) || isInteger(key))) {
+  if(!(isString(key) && !isEmpty(key) || isInteger(key))) {
     throw new TypeError('propOr: Non-empty String or Integer required for second argument')
   }
 

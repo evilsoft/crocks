@@ -11,7 +11,7 @@ const isString = require('../core/isString')
 
 // propEq: (String | Integer) -> a -> b -> Boolean
 function propEq(key, value, x) {
-  if(!((isString(key) && !isEmpty(key)) || isInteger(key))) {
+  if(!(isString(key) && !isEmpty(key) || isInteger(key))) {
     throw new TypeError(
       'propEq: Non-empty String or Integer required for first argument'
     )

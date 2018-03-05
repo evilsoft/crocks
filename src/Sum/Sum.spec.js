@@ -145,7 +145,7 @@ test('Sum concat functionality', t => {
   t.throws(cat({}), err, 'throws with an object')
   t.throws(cat(notSum), err, 'throws with non-Sum')
 
-  t.equals(a.concat(b).valueOf(), (x + y), 'sums wrapped values as expected')
+  t.equals(a.concat(b).valueOf(), x + y, 'sums wrapped values as expected')
 
   t.end()
 })

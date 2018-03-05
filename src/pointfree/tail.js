@@ -2,17 +2,21 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const isFunction = require('../core/isFunction')
+const isNil = require('../core/isNil')
 
-const M = require('../core/Maybe')
+const { Nothing, Just } = require('../core/Maybe')
 
 function tail(m) {
-  if(isFunction(m.tail)) {
-    return m.tail()
-  }
-  else if(isFunction(m.slice)) {
-    return m.length < 2
-      ? M.Nothing()
-      : M.Just(m.slice(1))
+  if(!isNil(m)) {
+    if(isFunction(m.tail)) {
+      return m.tail()
+    }
+
+    if(isFunction(m.slice)) {
+      return m.length < 2
+        ? Nothing()
+        : Just(m.slice(1))
+    }
   }
 
   throw new TypeError('tail: Array, String or List required')

@@ -10,11 +10,15 @@ const isSameType = require('../core/isSameType')
 // ifElse : (a -> Boolean) | Pred -> (a -> b) -> (a -> c) -> a -> (a | c)
 function ifElse(pred, f, g) {
   if(!(isFunction(pred) || isSameType(Pred, pred))) {
-    throw new TypeError('ifElse: Pred or predicate function required for first argument')
+    throw new TypeError(
+      'ifElse: Pred or predicate function required for first argument'
+    )
   }
 
-  if(!isFunction(f) || !isFunction(g)) {
-    throw new TypeError('ifElse: Functions required for second and third arguments')
+  if(!(isFunction(f) && isFunction(g))) {
+    throw new TypeError(
+      'ifElse: Functions required for second and third arguments'
+    )
   }
 
   const func =

@@ -81,11 +81,11 @@ accepted Datatype):
 | `run` | `m a -> b` | `crocks/pointfree` |
 | `runWith` | `a -> m -> b` | `crocks/pointfree` |
 | `second` | `m (a -> b) -> m (Pair c a -> Pair c b)` | `crocks/pointfree` |
-| `sequence` | `Applicative f => (b -> f b) -> m (f a) -> f (m a)` | `crocks/pointfree` |
+| `sequence` | <code>Applicative TypeRep t, Apply f => (t &#124; (b -> f b)) -> m (f a) -> f (m a)</code> | `crocks/pointfree` |
 | `snd` | `m a b -> b` | `crocks/Pair` |
 | `swap` | `(c -> d) -> (a -> b) -> m c a -> m b d` | `crocks/pointfree` |
 | `tail` | `m a -> Maybe (m a)` | `crocks/pointfree` |
-| `traverse` | `Applicative f => (c -> f c) -> (a -> f b) -> m (f a) -> f (m b)` | `crocks/pointfree` |
+| `traverse` | <code>Applicative TypeRep t, Apply f => (t &#124; (c -> f c)) -> (a -> f b) -> m (f a) -> f (m b)</code> | `crocks/pointfree` |
 | `valueOf` | `m a -> a` | `crocks/pointfree` |
 
 ##### Datatypes

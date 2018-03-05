@@ -569,14 +569,16 @@ fullName({ first: 'Lizzy' })
 #### sequence
 
 ```haskell
-Applicative f => Maybe (f a) ~> (a -> f a) -> f (Maybe a)
+Applicative TypeRep t, Apply f => Maybe (f a) ~> (t | (a -> f a)) -> f (Maybe a)
 ```
 
-When an instance of `Maybe` wraps a possible `Applicative` instance, `sequence`
-can be used to "swap" the "type sequence". `sequence` requires that the `of`,
-or `Applicative` function of the wrapped `Applicative` instance is provided for
-the case of when the `Maybe` instance is a `Nothing`. `sequence` can be derived
-from [`traverse`](#traverse) by passing it an `identity` function (`x => x`).
+When an instance of `Maybe` wraps an `Apply` instance, `sequence` can be used to
+swap the type sequence. `sequence` requires either an `Applicative TypeRep` or
+an `Apply` returning function is provided for its argument. This will be used in
+the case that the `Maybe` instance is a `Nothing`.
+
+`sequence` can be derived from [`traverse`](#traverse) by passing it an
+`identity` function (`x => x`).
 
 ```javascript
 import Maybe from 'crocks/Maybe'
@@ -588,7 +590,7 @@ const { Nothing, Just } = Maybe
 
 // seqId :: Maybe Identity a -> Identity Maybe a
 const seqId =
-  sequence(Identity.of)
+  sequence(Identity)
 
 seqId(Just(Identity(34)))
 //=> Identity Just 34
@@ -600,17 +602,19 @@ seqId(Nothing())
 #### traverse
 
 ```haskell
-Applicative f => Maybe a ~> ((a -> f a), (a -> f b)) -> f Maybe b
+Applicative TypeRep t, Apply f => Maybe a ~> ((t | (b -> f b)), (a -> f b)) -> f Maybe b
 ```
 
-Used to apply the "effect" of an `Applicative` to a value inside of a `Maybe`,
-`traverse`, combines both the "effects" of the `Applicative` and the `Maybe` by
-returning a new instance of the `Applicative` wrapping the result of the
-`Applicative`s "effect" on the value in the `Maybe`.
+Used to apply the "effect" of an `Apply` to a value inside of a `Maybe`,
+`traverse` combines both the "effects" of the `Apply` and the `Maybe` by
+returning a new instance of the `Apply`, wrapping the result of the
+`Apply`s "effect" on the value in the `Maybe`.
 
-`traverse` requires the `of` function of the target `Applicative` and a function
-that is used to apply the `Applicative` to the value inside of the `Maybe`. Both
-functions must return an instance of the `Applicative`.
+`traverse` requires either an `Applicative TypeRep` or an `Apply` returning
+function as its first argument and a function that is used to apply the "effect"
+of the target  `Apply` to the value inside of the `Maybe`. This will be used in
+the case that the `Maybe` instance is a `Nothing`. Both arguments must provide
+an instance of the target `Apply`.
 
 ```javascript
 import IO from 'crocks/IO'
@@ -620,6 +624,7 @@ import isNumber from 'crocks/predicates/isNumber'
 import safe from 'crocks/Maybe/safe'
 import traverse from 'crocks/pointfree/traverse'
 
+// someGlobal :: Number
 let someGlobal = 10
 
 // addToGlobal :: Number -> IO Number
@@ -630,7 +635,7 @@ const addToGlobal = x => IO(function() {
 
 // safeAddToGlobal :: a -> IO (Maybe Number)
 const safeAddToGlobal = compose(
-  traverse(IO.of, addToGlobal),
+  traverse(IO, addToGlobal),
   safe(isNumber)
 )
 

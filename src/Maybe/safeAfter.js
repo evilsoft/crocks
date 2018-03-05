@@ -3,6 +3,7 @@ const Maybe = require('../core/Maybe')
 
 const curry = require('../core/curry')
 const isFunction = require('../core/isFunction')
+const predOrFunc = require('../core/predOrFunc')
 const isSameType = require('../core/isSameType')
 const { Just, Nothing } = Maybe
 
@@ -14,12 +15,10 @@ function safeAfter(pred, fn) {
   if(!isFunction(fn)) {
     throw new TypeError('safeAfter: Function required for second argument')
   }
-  const predFn =
-    isFunction(pred) ? pred : pred.runWith
 
   return x => {
     const result = fn(x)
-    return predFn(result)
+    return predOrFunc(pred, result)
       ? Just(result)
       : Nothing()
   }

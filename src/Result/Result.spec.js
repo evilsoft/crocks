@@ -146,8 +146,8 @@ test('Result @@type', t => {
   t.equal(Result['@@type'], m['@@type'], 'static and instance versions are the same for Ok')
   t.equal(Result['@@type'], e['@@type'], 'static and instance versions are the same for Err')
 
-  t.equal(m['@@type'], 'crocks/Result@1', 'reports crocks/Result@1 for Ok')
-  t.equal(e['@@type'], 'crocks/Result@1', 'reports crocks/Result@1 for Err')
+  t.equal(m['@@type'], 'crocks/Result@2', 'reports crocks/Result@2 for Ok')
+  t.equal(e['@@type'], 'crocks/Result@2', 'reports crocks/Result@2 for Err')
 
   t.end()
 })
@@ -833,9 +833,8 @@ test('Result sequence errors', t => {
   const eSeq = bindFunc(Result.Err('Err').sequence)
 
   const oSeqBad = bindFunc(Result.Ok(0).sequence)
-  const eSeqBad = bindFunc(Result.Err(0).sequence)
 
-  const noFunc = /Result.sequence: Apply returning function required/
+  const noFunc = /Result.sequence: Applicative TypeRep or Apply returning function required/
   t.throws(oSeq(undefined), noFunc, 'Ok throws with undefined')
   t.throws(oSeq(null), noFunc, 'Ok throws with null')
   t.throws(oSeq(0), noFunc, 'Ok throws falsey with number')
@@ -861,19 +860,18 @@ test('Result sequence errors', t => {
   const noApply = /Result.sequence: Must wrap an Apply/
   t.throws(oSeqBad(unit), noApply, 'Ok without wrapping Apply throws')
 
-  t.doesNotThrow(eSeqBad(unit), 'allows Err without wrapping Apply')
-
   t.end()
 })
 
-test('Result sequence functionality', t => {
+test('Result sequence with Apply function', t => {
   const Ok = Result.Ok
   const Err = Result.Err
 
   const x = 284
+  const fn = x => MockCrock(x)
 
-  const o = Ok(MockCrock(x)).sequence(MockCrock.of)
-  const e = Err('Err').sequence(MockCrock.of)
+  const o = Ok(MockCrock(x)).sequence(fn)
+  const e = Err('Err').sequence(fn)
 
   t.ok(isSameType(MockCrock, o), 'Provides an outer type of MockCrock')
   t.ok(isSameType(Result, o.valueOf()), 'Provides an inner type of Result')
@@ -898,77 +896,101 @@ test('Result sequence functionality', t => {
   t.end()
 })
 
+test('Result sequence with Applicative TypeRep', t => {
+  const Ok = Result.Ok
+  const Err = Result.Err
+
+  const x = 'string'
+
+  const o = Ok(MockCrock(x)).sequence(MockCrock)
+  const e = Err('Err').sequence(MockCrock)
+
+  t.ok(isSameType(MockCrock, o), 'Provides an outer type of MockCrock')
+  t.ok(isSameType(Result, o.valueOf()), 'Provides an inner type of Result')
+  t.equal(o.valueOf().either(constant(0), identity), x, 'Result contains original inner value')
+
+  t.ok(isSameType(MockCrock, e), 'Provides an outer type of MockCrock')
+  t.ok(isSameType(Result, e.valueOf()), 'Provides an inner type of Result')
+  t.equal(e.valueOf().either(identity, constant(0)), 'Err', 'Result contains original Err value')
+
+  t.end()
+})
+
 test('Result traverse errors', t => {
   const otrav = bindFunc(Result.Ok(0).traverse)
   const etrav = bindFunc(Result.Err('Err').traverse)
 
   const f = x => MockCrock(x)
 
-  const noFunc = /Result.traverse: Apply returning functions required for both arguments/
-  t.throws(otrav(undefined, unit), noFunc, 'Ok throws with undefined in first argument')
-  t.throws(otrav(null, unit), noFunc, 'Ok throws with null in first argument')
-  t.throws(otrav(0, unit), noFunc, 'Ok throws falsey with number in first argument')
-  t.throws(otrav(1, unit), noFunc, 'Ok throws truthy with number in first argument')
-  t.throws(otrav('', unit), noFunc, 'Ok throws falsey with string in first argument')
-  t.throws(otrav('string', unit), noFunc, 'Ok throws with truthy string in first argument')
-  t.throws(otrav(false, unit), noFunc, 'Ok throws with false in first argument')
-  t.throws(otrav(true, unit), noFunc, 'Ok throws with true in first argument')
-  t.throws(otrav([], unit), noFunc, 'Ok throws with an array in first argument')
-  t.throws(otrav({}, unit), noFunc, 'Ok throws with an object in first argument')
+  const first = /Result.traverse: Applicative TypeRep of Apply returning function required for first argument/
+  const last = /Result.traverse: Apply returning functions required for both arguments/
 
-  t.throws(otrav(f, undefined), noFunc, 'Ok throws with undefined in second argument')
-  t.throws(otrav(f, null), noFunc, 'Ok throws with null in second argument')
-  t.throws(otrav(f, 0), noFunc, 'Ok throws falsey with number in second argument')
-  t.throws(otrav(f, 1), noFunc, 'Ok throws truthy with number in second argument')
-  t.throws(otrav(f, ''), noFunc, 'Ok throws falsey with string in second argument')
-  t.throws(otrav(f, 'string'), noFunc, 'Ok throws with truthy string in second argument')
-  t.throws(otrav(f, false), noFunc, 'Ok throws with false in second argument')
-  t.throws(otrav(f, true), noFunc, 'Ok throws with true in second argument')
-  t.throws(otrav(f, []), noFunc, 'Ok throws with an array in second argument')
-  t.throws(otrav(f, {}), noFunc, 'Ok throws with an object in second argument')
+  t.throws(otrav(undefined, unit), first, 'Ok throws with undefined in first argument')
+  t.throws(otrav(null, unit), first, 'Ok throws with null in first argument')
+  t.throws(otrav(0, unit), first, 'Ok throws falsey with number in first argument')
+  t.throws(otrav(1, unit), first, 'Ok throws truthy with number in first argument')
+  t.throws(otrav('', unit), first, 'Ok throws falsey with string in first argument')
+  t.throws(otrav('string', unit), first, 'Ok throws with truthy string in first argument')
+  t.throws(otrav(false, unit), first, 'Ok throws with false in first argument')
+  t.throws(otrav(true, unit), first, 'Ok throws with true in first argument')
+  t.throws(otrav([], unit), first, 'Ok throws with an array in first argument')
+  t.throws(otrav({}, unit), first, 'Ok throws with an object in first argument')
 
-  t.throws(etrav(undefined, MockCrock), noFunc, 'Err throws with undefined in first argument')
-  t.throws(etrav(null, MockCrock), noFunc, 'Err throws with null in first argument')
-  t.throws(etrav(0, MockCrock), noFunc, 'Err throws with falsey number in first argument')
-  t.throws(etrav(1, MockCrock), noFunc, 'Err throws with truthy number in first argument')
-  t.throws(etrav('', MockCrock), noFunc, 'Err throws with falsey string in first argument')
-  t.throws(etrav('string', MockCrock), noFunc, 'Err throws with truthy string in first argument')
-  t.throws(etrav(false, MockCrock), noFunc, 'Err throws with false in first argument')
-  t.throws(etrav(true, MockCrock), noFunc, 'Err throws with true in first argument')
-  t.throws(etrav([], MockCrock), noFunc, 'Err throws with an array in first argument')
-  t.throws(etrav({}, MockCrock), noFunc, 'Err throws with an object in first argument')
+  t.throws(otrav(f, undefined), last, 'Ok throws with undefined in second argument')
+  t.throws(otrav(f, null), last, 'Ok throws with null in second argument')
+  t.throws(otrav(f, 0), last, 'Ok throws falsey with number in second argument')
+  t.throws(otrav(f, 1), last, 'Ok throws truthy with number in second argument')
+  t.throws(otrav(f, ''), last, 'Ok throws falsey with string in second argument')
+  t.throws(otrav(f, 'string'), last, 'Ok throws with truthy string in second argument')
+  t.throws(otrav(f, false), last, 'Ok throws with false in second argument')
+  t.throws(otrav(f, true), last, 'Ok throws with true in second argument')
+  t.throws(otrav(f, []), last, 'Ok throws with an array in second argument')
+  t.throws(otrav(f, {}), last, 'Ok throws with an object in second argument')
 
-  t.throws(etrav(unit, undefined), noFunc, 'Err throws with undefined in second argument')
-  t.throws(etrav(unit, null), noFunc, 'Err throws with null in second argument')
-  t.throws(etrav(unit, 0), noFunc, 'Err throws falsey with number in second argument')
-  t.throws(etrav(unit, 1), noFunc, 'Err throws truthy with number in second argument')
-  t.throws(etrav(unit, ''), noFunc, 'Err throws falsey with string in second argument')
-  t.throws(etrav(unit, 'string'), noFunc, 'Err throws with truthy string in second argument')
-  t.throws(etrav(unit, false), noFunc, 'Err throws with false in second argument')
-  t.throws(etrav(unit, true), noFunc, 'Err throws with true in second argument')
-  t.throws(etrav(unit, []), noFunc, 'Err throws with an array in second argument')
-  t.throws(etrav(unit, {}), noFunc, 'Err throws with an object in second argument')
+  t.throws(etrav(undefined, MockCrock), first, 'Err throws with undefined in first argument')
+  t.throws(etrav(null, MockCrock), first, 'Err throws with null in first argument')
+  t.throws(etrav(0, MockCrock), first, 'Err throws with falsey number in first argument')
+  t.throws(etrav(1, MockCrock), first, 'Err throws with truthy number in first argument')
+  t.throws(etrav('', MockCrock), first, 'Err throws with falsey string in first argument')
+  t.throws(etrav('string', MockCrock), first, 'Err throws with truthy string in first argument')
+  t.throws(etrav(false, MockCrock), first, 'Err throws with false in first argument')
+  t.throws(etrav(true, MockCrock), first, 'Err throws with true in first argument')
+  t.throws(etrav([], MockCrock), first, 'Err throws with an array in first argument')
+  t.throws(etrav({}, MockCrock), first, 'Err throws with an object in first argument')
 
-  const noApply = /Result.traverse: Both functions must return an Apply/
-  t.throws(otrav(unit, unit), noApply, 'Ok throws when first function does not return an Applicaitve')
-  t.throws(etrav(unit, unit), noApply, 'Err throws when second function does not return an Applicaitve')
+  t.throws(etrav(unit, undefined), last, 'Err throws with undefined in second argument')
+  t.throws(etrav(unit, null), last, 'Err throws with null in second argument')
+  t.throws(etrav(unit, 0), last, 'Err throws falsey with number in second argument')
+  t.throws(etrav(unit, 1), last, 'Err throws truthy with number in second argument')
+  t.throws(etrav(unit, ''), last, 'Err throws falsey with string in second argument')
+  t.throws(etrav(unit, 'string'), last, 'Err throws with truthy string in second argument')
+  t.throws(etrav(unit, false), last, 'Err throws with false in second argument')
+  t.throws(etrav(unit, true), last, 'Err throws with true in second argument')
+  t.throws(etrav(unit, []), last, 'Err throws with an array in second argument')
+  t.throws(etrav(unit, {}), last, 'Err throws with an object in second argument')
+
+  const noApply = /Result.traverse: Both functions must return an Apply of the same type/
+  t.throws(otrav(unit, unit), noApply, 'Ok throws when first function does not return an Applicative')
+  t.throws(etrav(unit, unit), noApply, 'Err throws when second function does not return an Applicative')
 
   t.end()
 })
 
-test('Result traverse functionality', t => {
+test('Result traverse with Apply function', t => {
   const Ok = Result.Ok
   const Err = Result.Err
 
   const x = 98
+  const res = 'result'
+  const fn = constant(MockCrock(res))
 
-  const f = MockCrock
-  const r = Ok(x).traverse(f, MockCrock)
-  const l = Err('Err').traverse(f, MockCrock)
+  const f = x => MockCrock(x)
+  const r = Ok(x).traverse(f, fn)
+  const l = Err('Err').traverse(f, fn)
 
   t.ok(isSameType(MockCrock, r), 'Provides an outer type of MockCrock')
   t.ok(isSameType(Result, r.valueOf()), 'Provides an inner type of Result')
-  t.equal(r.valueOf().either(constant(0), identity), x, 'Result contains original inner value')
+  t.equal(r.valueOf().either(constant(0), identity), res, 'Result contains transformed value')
 
   t.ok(isSameType(MockCrock, l), 'Provides an outer type of MockCrock')
   t.ok(isSameType(Result, l.valueOf()), 'Provides an inner type of Result')
@@ -985,6 +1007,28 @@ test('Result traverse functionality', t => {
   t.ok(isSameType(Array, arE), 'Provides an outer type of Array')
   t.ok(isSameType(Result, arE[0]), 'Provides an inner type of Result')
   t.equal(arE[0].either(identity, constant(0)), 'Err', 'Result contains original Err value')
+
+  t.end()
+})
+
+test('Result traverse with Applicative TypeRep', t => {
+  const Ok = Result.Ok
+  const Err = Result.Err
+
+  const x = 98
+  const res = false
+  const fn = constant(MockCrock(res))
+
+  const r = Ok(x).traverse(MockCrock, fn)
+  const l = Err('Err').traverse(MockCrock, fn)
+
+  t.ok(isSameType(MockCrock, r), 'Provides an outer type of MockCrock')
+  t.ok(isSameType(Result, r.valueOf()), 'Provides an inner type of Result')
+  t.equal(r.valueOf().either(constant(0), identity), res, 'Result contains transformed value')
+
+  t.ok(isSameType(MockCrock, l), 'Provides an outer type of MockCrock')
+  t.ok(isSameType(Result, l.valueOf()), 'Provides an inner type of Result')
+  t.equal(l.valueOf().either(identity, constant(0)), 'Err', 'Result contains original Err value')
 
   t.end()
 })

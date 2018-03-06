@@ -1,7 +1,7 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const VERSION = 1
+const VERSION = 2
 
 const _equals = require('../core/equals')
 const _implements = require('../core/implements')
@@ -13,6 +13,7 @@ const fl = require('../core/flNames')
 
 const isArray = require('../core/isArray')
 const isApply = require('../core/isApply')
+const isApplicative = require('../core/isApplicative')
 const isFunction = require('../core/isFunction')
 const isSameType = require('../core/isSameType')
 
@@ -79,30 +80,42 @@ function Identity(x) {
     return m
   }
 
-  function sequence(af) {
-    if(!isFunction(af)) {
-      throw new TypeError('Identity.sequence: Apply function required')
+  function sequence(f) {
+    if(!(isApplicative(f) || isFunction(f))) {
+      throw new TypeError(
+        'Identity.sequence: Applicative TypeRep or Apply returning function required'
+      )
     }
 
-    else if(!(isApply(x) || isArray(x))) {
+    if(!(isApply(x) || isArray(x))) {
       throw new TypeError('Identity.sequence: Must wrap an Apply')
     }
 
-    return x.map(v => Identity(v))
+    return x.map(_of)
   }
 
-  function traverse(af, f) {
-    if(!isFunction(f) || !isFunction(af)) {
-      throw new TypeError('Identity.traverse: Apply returning functions required for both arguments')
+  function traverse(f, fn) {
+    if(!(isApplicative(f) || isFunction(f))) {
+      throw new TypeError(
+        'Identity.traverse: Applicative TypeRep or Apply returning function required for first argument'
+      )
     }
 
-    const m = f(x)
+    if(!isFunction(fn)) {
+      throw new TypeError(
+        'Identity.traverse: Apply returning functions required for second argument'
+      )
+    }
+
+    const m = fn(x)
 
     if(!(isApply(m) || isArray(m))) {
-      throw new TypeError('Identity.traverse: Both functions must return an Apply')
+      throw new TypeError(
+        'Identity.traverse: Both functions must return an Apply of the same type'
+      )
     }
 
-    return m.map(v => Identity(v))
+    return m.map(_of)
   }
 
   return {

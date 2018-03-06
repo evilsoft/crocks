@@ -140,8 +140,8 @@ test('Either @@type', t => {
   t.equal(Right(0)['@@type'], Either['@@type'], 'static and instance versions are the same for Right')
   t.equal(Left(0)['@@type'], Either['@@type'], 'static and instance versions are the same for Left')
 
-  t.equal(Right(0)['@@type'], 'crocks/Either@1', 'returns crocks/Either@1 for Right')
-  t.equal(Left(0)['@@type'], 'crocks/Either@1', 'returns crocks/Either@1 for Left')
+  t.equal(Right(0)['@@type'], 'crocks/Either@2', 'returns crocks/Either@2 for Right')
+  t.equal(Left(0)['@@type'], 'crocks/Either@2', 'returns crocks/Either@2 for Left')
 
   t.end()
 })
@@ -804,9 +804,8 @@ test('Either sequence errors', t => {
   const lseq = bindFunc(Either.Left('Left').sequence)
 
   const rseqBad = bindFunc(Either.Right(0).sequence)
-  const lseqBad = bindFunc(Either.Left(0).sequence)
 
-  const err = /Either.sequence: Apply returning function required/
+  const err = /Either.sequence: Applicative TypeRep or Apply returning function required/
 
   t.throws(rseq(undefined), err, 'Right throws with undefined')
   t.throws(rseq(null), err, 'Right throws with null')
@@ -819,8 +818,6 @@ test('Either sequence errors', t => {
   t.throws(rseq([]), err, 'Right throws with an array')
   t.throws(rseq({}), err, 'Right throws with an object')
 
-  t.doesNotThrow(rseq(unit), 'Right allows a function')
-
   t.throws(lseq(undefined), err, 'Left throws with undefined')
   t.throws(lseq(null), err, 'Left throws with null')
   t.throws(lseq(0), err, 'Left throws with falsey number')
@@ -832,35 +829,33 @@ test('Either sequence errors', t => {
   t.throws(lseq([]), err, 'Left throws with an array')
   t.throws(lseq({}), err, 'Left throws with an object')
 
-  t.doesNotThrow(lseq(unit), 'Left allows a function')
-
   const noAp = /Either.sequence: Must wrap an Apply/
   t.throws(rseqBad(unit), noAp, 'Right without wrapping Apply throws')
-
-  t.doesNotThrow(lseqBad(unit), 'allows Left without wrapping Apply')
 
   t.end()
 })
 
-test('Either sequence functionality', t => {
+test('Either sequence with Apply function', t => {
   const Right = Either.Right
   const Left = Either.Left
 
   const x = 284
 
-  const r = Right(MockCrock(x)).sequence(MockCrock.of)
-  const l = Left('Left').sequence(MockCrock.of)
+  const f = x => MockCrock(x)
+  const r = Right(MockCrock(x)).sequence(f)
+  const l = Left('Left').sequence(f)
 
-  t.equal(r.type(), 'MockCrock', 'Provides an outer type of MockCrock')
-  t.equal(r.valueOf().type(), 'Either', 'Provides an inner type of Either')
+  t.ok(isSameType(MockCrock, r), 'Provides an outer type of MockCrock')
+  t.ok(isSameType(Either, r.valueOf()), 'Provides an inner type of Either')
   t.equal(r.valueOf().either(constant(0), identity), x, 'Either contains original inner value')
 
-  t.equal(l.type(), 'MockCrock', 'Provides an outer type of MockCrock')
-  t.equal(l.valueOf().type(), 'Either', 'Provides an inner type of Either')
+  t.ok(isSameType(MockCrock, l), 'MockCrock', 'Provides an outer type of MockCrock')
+  t.ok(isSameType(Either, l.valueOf()), 'Provides an inner type of Either')
   t.equal(l.valueOf().either(identity, constant(0)), 'Left', 'Either contains original Left value')
 
-  const arR = Right([ x ]).sequence(x => [ x ])
-  const arL = Left('Left').sequence(x => [ x ])
+  const ar = x => [ x ]
+  const arR = Right([ x ]).sequence(ar)
+  const arL = Left('Left').sequence(ar)
 
   t.ok(isSameType(Array, arR), 'Provides an outer type of Array')
   t.ok(isSameType(Either, arR[0]), 'Provides an inner type of Either')
@@ -873,23 +868,46 @@ test('Either sequence functionality', t => {
   t.end()
 })
 
+test('Either sequence with Applicative TypeRep', t => {
+  const Right = Either.Right
+  const Left = Either.Left
+
+  const x = 284
+
+  const m = MockCrock
+  const r = Right(MockCrock(x)).sequence(m)
+  const l = Left('Left').sequence(m)
+
+  t.ok(isSameType(MockCrock, r), 'Provides an outer type of MockCrock')
+  t.ok(isSameType(Either, r.valueOf()), 'Provides an inner type of Either')
+  t.equal(r.valueOf().either(constant(0), identity), x, 'Either contains original inner value')
+
+  t.ok(isSameType(MockCrock, l), 'MockCrock', 'Provides an outer type of MockCrock')
+  t.ok(isSameType(Either, l.valueOf()), 'Provides an inner type of Either')
+  t.equal(l.valueOf().either(identity, constant(0)), 'Left', 'Either contains original Left value')
+
+  t.end()
+})
+
 test('Either traverse errors', t => {
   const rtrav = bindFunc(Either.Right(0).traverse)
   const ltrav = bindFunc(Either.Left('Left').traverse)
 
   const f = x => MockCrock(x)
 
-  const noFunc = /Either.traverse: Apply returning functions required for both arguments/
-  t.throws(rtrav(undefined, unit), noFunc, 'Right throws with undefined in first argument')
-  t.throws(rtrav(null, unit), noFunc, 'Right throws with null in first argument')
-  t.throws(rtrav(0, unit), noFunc, 'Right throws falsey with number in first argument')
-  t.throws(rtrav(1, unit), noFunc, 'Right throws truthy with number in first argument')
-  t.throws(rtrav('', unit), noFunc, 'Right throws falsey with string in first argument')
-  t.throws(rtrav('string', unit), noFunc, 'Right throws with truthy string in first argument')
-  t.throws(rtrav(false, unit), noFunc, 'Right throws with false in first argument')
-  t.throws(rtrav(true, unit), noFunc, 'Right throws with true in first argument')
-  t.throws(rtrav([], unit), noFunc, 'Right throws with an array in first argument')
-  t.throws(rtrav({}, unit), noFunc, 'Right throws with an object in first argument')
+  const noFirstAp = /Either.traverse: Applicative TypeRep or Apply returning function required for first argument/
+  const noFunc = /Either.traverse: Apply returning function required for second argument/
+
+  t.throws(rtrav(undefined, unit), noFirstAp, 'Right throws with undefined in first argument')
+  t.throws(rtrav(null, unit), noFirstAp, 'Right throws with null in first argument')
+  t.throws(rtrav(0, unit), noFirstAp, 'Right throws falsey with number in first argument')
+  t.throws(rtrav(1, unit), noFirstAp, 'Right throws truthy with number in first argument')
+  t.throws(rtrav('', unit), noFirstAp, 'Right throws falsey with string in first argument')
+  t.throws(rtrav('string', unit), noFirstAp, 'Right throws with truthy string in first argument')
+  t.throws(rtrav(false, unit), noFirstAp, 'Right throws with false in first argument')
+  t.throws(rtrav(true, unit), noFirstAp, 'Right throws with true in first argument')
+  t.throws(rtrav([], unit), noFirstAp, 'Right throws with an array in first argument')
+  t.throws(rtrav({}, unit), noFirstAp, 'Right throws with an object in first argument')
 
   t.throws(rtrav(f, undefined), noFunc, 'Right throws with undefined in second argument')
   t.throws(rtrav(f, null), noFunc, 'Right throws with null in second argument')
@@ -902,18 +920,16 @@ test('Either traverse errors', t => {
   t.throws(rtrav(f, []), noFunc, 'Right throws with an array in second argument')
   t.throws(rtrav(f, {}), noFunc, 'Right throws with an object in second argument')
 
-  t.doesNotThrow(rtrav(unit, f), 'Right requires an Apply returning function in second argument')
-
-  t.throws(ltrav(undefined, MockCrock), noFunc, 'Left throws with undefined in first argument')
-  t.throws(ltrav(null, MockCrock), noFunc, 'Left throws with null in first argument')
-  t.throws(ltrav(0, MockCrock), noFunc, 'Left throws with falsey number in first argument')
-  t.throws(ltrav(1, MockCrock), noFunc, 'Left throws with truthy number in first argument')
-  t.throws(ltrav('', MockCrock), noFunc, 'Left throws with falsey string in first argument')
-  t.throws(ltrav('string', MockCrock), noFunc, 'Left throws with truthy string in first argument')
-  t.throws(ltrav(false, MockCrock), noFunc, 'Left throws with false in first argument')
-  t.throws(ltrav(true, MockCrock), noFunc, 'Left throws with true in first argument')
-  t.throws(ltrav([], MockCrock), noFunc, 'Left throws with an array in first argument')
-  t.throws(ltrav({}, MockCrock), noFunc, 'Left throws with an object in first argument')
+  t.throws(ltrav(undefined, MockCrock), noFirstAp, 'Left throws with undefined in first argument')
+  t.throws(ltrav(null, MockCrock), noFirstAp, 'Left throws with null in first argument')
+  t.throws(ltrav(0, MockCrock), noFirstAp, 'Left throws with falsey number in first argument')
+  t.throws(ltrav(1, MockCrock), noFirstAp, 'Left throws with truthy number in first argument')
+  t.throws(ltrav('', MockCrock), noFirstAp, 'Left throws with falsey string in first argument')
+  t.throws(ltrav('string', MockCrock), noFirstAp, 'Left throws with truthy string in first argument')
+  t.throws(ltrav(false, MockCrock), noFirstAp, 'Left throws with false in first argument')
+  t.throws(ltrav(true, MockCrock), noFirstAp, 'Left throws with true in first argument')
+  t.throws(ltrav([], MockCrock), noFirstAp, 'Left throws with an array in first argument')
+  t.throws(ltrav({}, MockCrock), noFirstAp, 'Left throws with an object in first argument')
 
   t.throws(ltrav(unit, undefined), noFunc, 'Left throws with undefined in second argument')
   t.throws(ltrav(unit, null), noFunc, 'Left throws with null in second argument')
@@ -926,44 +942,67 @@ test('Either traverse errors', t => {
   t.throws(ltrav(unit, []), noFunc, 'Left throws with an array in second argument')
   t.throws(ltrav(unit, {}), noFunc, 'Left throws with an object in second argument')
 
-  const noAp = /Either.traverse: Both functions must return an Apply/
+  const noAp = /Either.traverse: Both functions must return an Apply of the same type/
   t.throws(rtrav(unit, unit), noAp, 'Right throws when first function does not return an Apply')
   t.throws(ltrav(unit, unit), noAp, 'Left throws when second function does not return an Apply')
-
-  t.doesNotThrow(ltrav(MockCrock, unit), 'Left requires an Apply returning function in the first arg')
 
   t.end()
 })
 
-test('Either traverse functionality', t => {
+test('Either traverse with Apply function', t => {
   const Right = Either.Right
   const Left = Either.Left
 
   const x = 98
+  const res = 'result'
+  const f = x => MockCrock(x)
+  const fn = m => constant(m(res))
 
-  const f = MockCrock
-  const r = Right(x).traverse(f, MockCrock)
-  const l = Left('Left').traverse(f, MockCrock)
+  const r = Right(x).traverse(f, fn(MockCrock))
+  const l = Left('Left').traverse(f, fn(MockCrock))
 
-  t.equal(r.type(), 'MockCrock', 'Provides an outer type of MockCrock')
-  t.equal(r.valueOf().type(), 'Either', 'Provides an inner type of Either')
-  t.equal(r.valueOf().either(constant(0), identity), x, 'Either contains original inner value')
+  t.ok(isSameType(MockCrock, r), 'Provides an outer type of MockCrock')
+  t.ok(isSameType(Either, r.valueOf()), 'Provides an inner type of Either')
+  t.equal(r.valueOf().either(constant(0), identity), res, 'Either contains transformed inner value')
 
-  t.equal(l.type(), 'MockCrock', 'Provides an outer type of MockCrock')
-  t.equal(l.valueOf().type(), 'Either', 'Provides an inner type of Either')
+  t.ok(isSameType(MockCrock, l), 'Provides an outer type of MockCrock')
+  t.ok(isSameType(Either, l.valueOf()), 'Provides an inner type of Either')
   t.equal(l.valueOf().either(identity, constant(0)), 'Left', 'Either contains original Left value')
 
   const ar = x => [ x ]
-  const arR = Right(x).traverse(ar, ar)
-  const arL = Left('Left').traverse(ar, ar)
+  const arR = Right(x).traverse(ar, fn(ar))
+  const arL = Left('Left').traverse(ar, fn(ar))
 
   t.ok(isSameType(Array, arR), 'Provides an outer type of Array')
   t.ok(isSameType(Either, arR[0]), 'Provides an inner type of Either')
-  t.equal(arR[0].either(constant(0), identity), x, 'Either contains original inner value')
+  t.equal(arR[0].either(constant(0), identity), res, 'Either contains transformed value')
 
   t.ok(isSameType(Array, arL), 'Provides an outer type of Array')
   t.ok(isSameType(Either, arL[0]), 'Provides an inner type of Either')
   t.equal(arL[0].either(identity, constant(0)), 'Left', 'Either contains original Left value')
+
+  t.end()
+})
+
+test('Either traverse with Applicative TypeRep', t => {
+  const Right = Either.Right
+  const Left = Either.Left
+
+  const x = 98
+  const res = 'result'
+  const fn = constant(MockCrock(res))
+
+  const m = MockCrock
+  const r = Right(x).traverse(m, fn)
+  const l = Left('Left').traverse(m, fn)
+
+  t.ok(isSameType(MockCrock, r), 'Provides an outer type of MockCrock')
+  t.ok(isSameType(Either, r.valueOf()), 'Provides an inner type of Either')
+  t.equal(r.valueOf().either(constant(0), identity), res, 'Either contains transformed value')
+
+  t.ok(isSameType(MockCrock, l), 'Provides an outer type of MockCrock')
+  t.ok(isSameType(Either, l.valueOf()), 'Provides an inner type of Either')
+  t.equal(l.valueOf().either(identity, constant(0)), 'Left', 'Either contains original Left value')
 
   t.end()
 })

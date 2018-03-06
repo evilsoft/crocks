@@ -1,7 +1,7 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const VERSION = 1
+const VERSION = 2
 
 const _defineUnion = require('../core/defineUnion')
 const _equals = require('../core/equals')
@@ -12,13 +12,16 @@ const type = require('../core/types').type('Either')
 const _type = require('../core/types').typeFn(type(), VERSION)
 const fl = require('../core/flNames')
 
+const apOrFunc = require('../core/apOrFunc')
 const compose = require('../core/compose')
 const isArray = require('../core/isArray')
+const isApplicative = require('../core/isApplicative')
 const isApply = require('../core/isApply')
 const isFunction = require('../core/isFunction')
 const isSameType = require('../core/isSameType')
 
-const constant = x => () => x
+const constant =
+  x => () => x
 
 const _either =
   _defineUnion({ Left: [ 'a' ], Right: [ 'b' ] })
@@ -39,7 +42,7 @@ function runSequence(x) {
     throw new TypeError('Either.sequence: Must wrap an Apply')
   }
 
-  return x.map(v => Either.of(v))
+  return x.map(_of)
 }
 
 function Either(u) {
@@ -167,10 +170,15 @@ function Either(u) {
     return m
   }
 
-  function sequence(af) {
-    if(!isFunction(af)) {
-      throw new TypeError('Either.sequence: Apply returning function required')
+  function sequence(f) {
+    if(!(isApplicative(f) || isFunction(f))) {
+      throw new TypeError(
+        'Either.sequence: Applicative TypeRep or Apply returning function required'
+      )
     }
+
+    const af =
+      apOrFunc(f)
 
     return either(
       compose(af, Either.Left),
@@ -178,20 +186,34 @@ function Either(u) {
     )
   }
 
-  function traverse(af, f) {
-    if(!isFunction(f) || !isFunction(af)) {
-      throw new TypeError('Either.traverse: Apply returning functions required for both arguments')
+  function traverse(f, fn) {
+    if(!(isApplicative(f) || isFunction(f))) {
+      throw new TypeError(
+        'Either.traverse: Applicative TypeRep or Apply returning function required for first argument'
+      )
     }
 
-    const m = either(compose(af, Either.Left), f)
+    if(!isFunction(fn)) {
+      throw new TypeError(
+        'Either.traverse: Apply returning function required for second argument'
+      )
+    }
+
+    const af =
+      apOrFunc(f)
+
+    const m =
+      either(compose(af, Either.Left), fn)
 
     if(!(isApply(m) || isArray(m))) {
-      throw new TypeError('Either.traverse: Both functions must return an Apply')
+      throw new TypeError(
+        'Either.traverse: Both functions must return an Apply of the same type'
+      )
     }
 
     return either(
       constant(m),
-      constant(m.map(v => Either.of(v)))
+      constant(m.map(_of))
     )
   }
 

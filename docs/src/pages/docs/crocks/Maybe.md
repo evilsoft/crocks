@@ -1053,6 +1053,85 @@ safe(isSmall, [ 1, 2 ])
 //=> Just [ 1, 2 ]
 ```
 
+#### safeAfter
+
+`crocks/Maybe/safeAfter`
+
+```haskell
+safeAfter :: ((b -> Boolean) | Pred) -> (a -> b) -> a -> Maybe b
+```
+
+Many times, you might want to lift the result of a function into a `Maybe` based
+on some predicate. This may be because some parts of our code might return unsafe values for 
+further computations we may like to perform. Similar to [`safe`](#safe), you pass either a 
+`Pred` or a predicate function, along with a unary function. `safeAfter` then gives you a new 
+function, which when invoked evaluates the predicate against the result of executing 
+the unary function. This result is then lifted into a `Just` if the predicate evaluates 
+to `true`, or a `Nothing` if it returns `false`
+
+```javascript
+import Pred from 'crocks/Pred'
+import curry from 'crocks/helpers/curry'
+import isDefined from 'crocks/predicates/isDefined'
+import isNumber from 'crocks/predicates/isNumber'
+import safeAfter from 'crocks/Maybe/safeAfter'
+
+// prop :: String -> Object -> a | undefined
+const prop = curry(
+  (key, x) => x[key]
+)
+
+// divide :: Number -> Number -> Number
+const divide = curry(
+  (x, y) => x / y
+)
+
+// safeDivide :: Number -> Number -> Maybe FiniteNumber
+const safeDivide = curry(
+  x => safeAfter(isFinite, divide(x))
+)
+
+// isValid :: Pred a
+const isValid =
+  Pred(isDefined)
+    .concat(Pred(isNumber))
+
+// safePropNumber :: String -> Object -> Maybe Number
+const validProp = curry(
+  key => safeAfter(isValid, prop(key))
+)
+
+divide(3, 0)
+//=> Infinity
+
+safeDivide(3, 0)
+//=> Nothing
+
+divide(3, 1)
+//=> 3
+
+safeDivide(3, 1)
+//=> Just 3
+
+prop('a', { b: 32 })
+//=> undefined
+
+prop('a', { a: 'thirty-two' })
+//=> 'thirty-two'
+
+prop('a', { a: 32 })
+//=> 32
+
+validProp('a', { a: 'thirty-two' })
+//=> Nothing
+
+validProp('a', { b: 32 })
+//=> Nothing
+
+validProp('a', { a: 32 })
+//=> Just 32
+```
+
 #### safeLift
 
 `crocks/Maybe/safeLift`

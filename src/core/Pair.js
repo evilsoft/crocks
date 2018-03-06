@@ -1,7 +1,7 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const VERSION = 2
+const VERSION = 3
 
 const _equals = require('./equals')
 const _implements = require('./implements')
@@ -10,6 +10,7 @@ const type = require('./types').type('Pair')
 const _type = require('./types').typeFn(type(), VERSION)
 const fl = require('./flNames')
 
+const isApplicative = require('./isApplicative')
 const isApply = require('./isApply')
 const isArray = require('./isArray')
 const isFunction = require('./isFunction')
@@ -145,28 +146,41 @@ function Pair(l, r) {
     )
   }
 
-  function sequence(af) {
-    if(!isFunction(af)) {
-      throw new TypeError('Pair.sequence: Apply returning function required')
+  function sequence(f) {
+    if(!(isApplicative(f) || isFunction(f))) {
+      throw new TypeError(
+        'Pair.sequence: Applicative TypeRep or Apply returning function required'
+      )
     }
 
     if(!(isApply(r) || isArray(r))) {
-      throw new TypeError('Pair.sequence: Must wrap an Apply in the second')
+      throw new TypeError(
+        'Pair.sequence: Must wrap an Apply in the second'
+      )
     }
 
     return r.map(v => Pair(l, v))
-
   }
 
-  function traverse(af, f) {
-    if(!isFunction(f) || !isFunction(af)) {
-      throw new TypeError('Pair.traverse: Apply returning functions required for both arguments')
+  function traverse(f, fn) {
+    if(!(isApplicative(f) || isFunction(f))) {
+      throw new TypeError(
+        'Pair.traverse: Applicative TypeRep or Apply returning function required for first argument'
+      )
     }
 
-    const m = f(r)
+    if(!isFunction(fn)) {
+      throw new TypeError(
+        'Pair.traverse: Apply returning function required for second argument'
+      )
+    }
+
+    const m = fn(r)
 
     if(!(isApply(m) || isArray(m))) {
-      throw new TypeError('Pair.traverse: Both functions must return an Apply of the same type')
+      throw new TypeError(
+        'Pair.traverse: Both functions must return an Apply of the same type'
+      )
     }
 
     return m.map(v => Pair(l, v))

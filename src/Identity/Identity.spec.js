@@ -14,10 +14,14 @@ const isSameType = require('../core/isSameType')
 const isString = require('../core/isString')
 const unit = require('../core/_unit')
 
-const identity = x => x
-
 const applyTo =
   x => fn => fn(x)
+
+const constant =
+  x => () => x
+
+const identity =
+  x => x
 
 const Identity = require('.')
 
@@ -91,7 +95,7 @@ test('Identity @@type', t => {
   const m = Identity(0)
 
   t.equal(Identity['@@type'], m['@@type'], 'static and instance versions are the same')
-  t.equal(m['@@type'], 'crocks/Identity@1', '@@type returns Identity')
+  t.equal(m['@@type'], 'crocks/Identity@2', '@@type returns crocks/Identity@2')
 
   t.end()
 })
@@ -380,7 +384,7 @@ test('Identity sequence errors', t => {
   const seq = bindFunc(Identity(MockCrock(32)).sequence)
   const seqBad = bindFunc(Identity(0).sequence)
 
-  const noFunc = /Identity.sequence: Apply function required/
+  const noFunc = /Identity.sequence: Applicative TypeRep or Apply returning function required/
   t.throws(seq(undefined), noFunc, 'throws with undefined')
   t.throws(seq(null), noFunc, 'throws with null')
   t.throws(seq(0), noFunc, 'throws falsey with number')
@@ -392,20 +396,19 @@ test('Identity sequence errors', t => {
   t.throws(seq([]), noFunc, 'throws with an array')
   t.throws(seq({}), noFunc, 'throws with an object')
 
-  t.doesNotThrow(seq(unit), 'allows a function')
-
   const noAp = /Identity.sequence: Must wrap an Apply/
   t.throws(seqBad(unit), noAp, 'wrapping non-Apply throws')
 
   t.end()
 })
 
-test('Identity sequence functionality', t => {
+test('Identity sequence with Apply function', t => {
   const x = 97
-  const m = Identity(MockCrock(x)).sequence(MockCrock.of)
+  const f = x => MockCrock(x)
+  const m = Identity(MockCrock(x)).sequence(f)
 
-  t.equal(m.type(), 'MockCrock', 'Provides an outer type of MockCrock')
-  t.equal(m.valueOf().type(), 'Identity', 'Provides an inner type of Identity')
+  t.ok(isSameType(MockCrock, m), 'Provides an outer type of MockCrock')
+  t.ok(isSameType(Identity, m.valueOf()), 'Provides an inner type of Identity')
   t.equal(m.valueOf().valueOf(), x, 'Identity contains original inner value')
 
   const ar = x => [ x ]
@@ -418,35 +421,47 @@ test('Identity sequence functionality', t => {
   t.end()
 })
 
+test('Identity sequence with Applicative TypeRep', t => {
+  const x = 'reaper'
+  const m = Identity(MockCrock(x)).sequence(MockCrock)
+
+  t.ok(isSameType(MockCrock, m), 'Provides an outer type of MockCrock')
+  t.ok(isSameType(Identity, m.valueOf()), 'Provides an inner type of Identity')
+  t.equal(m.valueOf().valueOf(), x, 'Identity contains original inner value')
+
+  t.end()
+})
+
 test('Identity traverse errors', t => {
   const trav = bindFunc(Identity(32).traverse)
 
-  const noFunc = /Identity.traverse: Apply returning functions required for both arguments/
-  t.throws(trav(undefined, MockCrock), noFunc, 'throws with undefined in first argument')
-  t.throws(trav(null, MockCrock), noFunc, 'throws with null in first argument')
-  t.throws(trav(0, MockCrock), noFunc, 'throws falsey with number in first argument')
-  t.throws(trav(1, MockCrock), noFunc, 'throws truthy with number in first argument')
-  t.throws(trav('', MockCrock), noFunc, 'throws falsey with string in first argument')
-  t.throws(trav('string', MockCrock), noFunc, 'throws with truthy string in first argument')
-  t.throws(trav(false, MockCrock), noFunc, 'throws with false in first argument')
-  t.throws(trav(true, MockCrock), noFunc, 'throws with true in first argument')
-  t.throws(trav([], MockCrock), noFunc, 'throws with an array in first argument')
-  t.throws(trav({}, MockCrock), noFunc, 'throws with an object in first argument')
+  const first = /Identity.traverse: Applicative TypeRep or Apply returning function required for first argument/
+  t.throws(trav(undefined, MockCrock), first, 'throws with undefined in first argument')
+  t.throws(trav(null, MockCrock), first, 'throws with null in first argument')
+  t.throws(trav(0, MockCrock), first, 'throws falsey with number in first argument')
+  t.throws(trav(1, MockCrock), first, 'throws truthy with number in first argument')
+  t.throws(trav('', MockCrock), first, 'throws falsey with string in first argument')
+  t.throws(trav('string', MockCrock), first, 'throws with truthy string in first argument')
+  t.throws(trav(false, MockCrock), first, 'throws with false in first argument')
+  t.throws(trav(true, MockCrock), first, 'throws with true in first argument')
+  t.throws(trav([], MockCrock), first, 'throws with an array in first argument')
+  t.throws(trav({}, MockCrock), first, 'throws with an object in first argument')
 
-  t.throws(trav(MockCrock, undefined), noFunc, 'throws with undefined in second argument')
-  t.throws(trav(MockCrock, null), noFunc, 'throws with null in second argument')
-  t.throws(trav(MockCrock, 0), noFunc, 'throws falsey with number in second argument')
-  t.throws(trav(MockCrock, 1), noFunc, 'throws truthy with number in second argument')
-  t.throws(trav(MockCrock, ''), noFunc, 'throws falsey with string in second argument')
-  t.throws(trav(MockCrock, 'string'), noFunc, 'throws with truthy string in second argument')
-  t.throws(trav(MockCrock, false), noFunc, 'throws with false in second argument')
-  t.throws(trav(MockCrock, true), noFunc, 'throws with true in second argument')
-  t.throws(trav(MockCrock, []), noFunc, 'throws with an array in second argument')
-  t.throws(trav(MockCrock, {}), noFunc, 'throws with an object in second argument')
+  const second = /Identity.traverse: Apply returning functions required for second argument/
+  t.throws(trav(MockCrock, undefined), second, 'throws with undefined in second argument')
+  t.throws(trav(MockCrock, null), second, 'throws with null in second argument')
+  t.throws(trav(MockCrock, 0), second, 'throws falsey with number in second argument')
+  t.throws(trav(MockCrock, 1), second, 'throws truthy with number in second argument')
+  t.throws(trav(MockCrock, ''), second, 'throws falsey with string in second argument')
+  t.throws(trav(MockCrock, 'string'), second, 'throws with truthy string in second argument')
+  t.throws(trav(MockCrock, false), second, 'throws with false in second argument')
+  t.throws(trav(MockCrock, true), second, 'throws with true in second argument')
+  t.throws(trav(MockCrock, []), second, 'throws with an array in second argument')
+  t.throws(trav(MockCrock, {}), second, 'throws with an object in second argument')
 
   const noApply = bindFunc(x => Identity.of(x).traverse(MockCrock.of, identity))
 
-  const noAp = /Identity.traverse: Both functions must return an Apply/
+  const noAp = /Identity.traverse: Both functions must return an Apply of the same type/
   t.throws(noApply(undefined), noAp, 'throws when second argument returns undefined')
   t.throws(noApply(null), noAp, 'throws when second argument returns null')
   t.throws(noApply(0), noAp, 'throws when second argument returns falsey number')
@@ -458,26 +473,41 @@ test('Identity traverse errors', t => {
   t.throws(noApply({}), noAp, 'throws when second argument returns an object')
   t.throws(noApply(unit), noAp, 'throws when second argument returns function')
 
-  t.doesNotThrow(trav(unit, MockCrock), 'requires an Apply returning function in second arg and function in first arg')
+  t.end()
+})
+
+test('Identity traverse with Apply function', t => {
+  const x = true
+  const res = 'result'
+  const f = x => MockCrock(x)
+  const fn = m => constant(m(res))
+
+  const m = Identity(x).traverse(f, fn(MockCrock))
+
+  t.ok(isSameType(MockCrock, m), 'Provides an outer type of MockCrock')
+  t.ok(isSameType(Identity, m.valueOf()), 'Provides an inner type of Identity')
+  t.equal(m.valueOf().valueOf(), res, 'Identity contains transformed value')
+
+  const ar = x => [ x ]
+  const arM = Identity(x).traverse(ar, fn(ar))
+
+  t.ok(isSameType(Array, arM), 'Provides an outer type of Array')
+  t.ok(isSameType(Identity, arM[0]), 'Provides an inner type of Identity')
+  t.equal(arM[0].valueOf(), res, 'Identity contains transformed value')
 
   t.end()
 })
 
-test('Identity traverse functionality', t => {
+test('Identity traverse with Applicative TypeRep', t => {
   const x = true
-  const f = x => MockCrock(x)
-  const m = Identity(x).traverse(f, MockCrock)
+  const res = 'result'
+  const fn = constant(MockCrock(res))
 
-  t.equal(m.type(), 'MockCrock', 'Provides an outer type of MockCrock')
-  t.equal(m.valueOf().type(), 'Identity', 'Provides an inner type of Identity')
-  t.equal(m.valueOf().valueOf(), x, 'Identity contains original inner value')
+  const m = Identity(x).traverse(MockCrock, fn)
 
-  const ar = x => [ x ]
-  const arM = Identity(x).traverse(ar, ar)
-
-  t.ok(isSameType(Array, arM), 'Provides an outer type of Array')
-  t.ok(isSameType(Identity, arM[0]), 'Provides an inner type of Identity')
-  t.equal(arM[0].valueOf(), x, 'Identity contains original inner value')
+  t.ok(isSameType(MockCrock, m), 'Provides an outer type of MockCrock')
+  t.ok(isSameType(Identity, m.valueOf()), 'Provides an inner type of Identity')
+  t.equal(m.valueOf().valueOf(), res, 'Identity contains transformed value')
 
   t.end()
 })

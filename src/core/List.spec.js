@@ -134,7 +134,7 @@ test('List @@type', t => {
   const m = List([])
 
   t.equal(m['@@type'], List['@@type'], 'static and instance versions are the same')
-  t.equal(m['@@type'], 'crocks/List@1', 'returns crocks/List@1')
+  t.equal(m['@@type'], 'crocks/List@2', 'returns crocks/List@2')
 
   t.end()
 })
@@ -648,7 +648,7 @@ test('List sequence errors', t => {
   const seq = bindFunc(List.of(MockCrock(2)).sequence)
   const seqBad = bindFunc(List.of(0).sequence)
 
-  const err = /List.sequence: Apply Function required/
+  const err = /List.sequence: Applicative TypeRep or Apply returning function required/
   t.throws(seq(undefined), err, 'throws with undefined')
   t.throws(seq(null), err, 'throws with null')
   t.throws(seq(0), err, 'throws falsey with number')
@@ -659,20 +659,20 @@ test('List sequence errors', t => {
   t.throws(seq(true), err, 'throws with true')
   t.throws(seq([]), err, 'throws with an array')
   t.throws(seq({}), err, 'throws with an object')
-  t.doesNotThrow(seq(MockCrock), 'allows an Apply returning function')
 
-  const noAppl = /List.sequence: Must wrap Apply/
+  const noAppl = /List.sequence: Must wrap Applys of the same type/
   t.throws(seqBad(unit), noAppl, 'wrapping non-Apply throws')
 
   t.end()
 })
 
-test('List sequence functionality', t => {
+test('List sequence with Apply function', t => {
   const x = 'string'
-  const m = List.of(MockCrock(x)).sequence(MockCrock.of)
+  const fn = x => MockCrock(x)
+  const m = List.of(MockCrock(x)).sequence(fn)
 
-  t.equal(m.type(), 'MockCrock', 'Provides an outer type of MockCrock')
-  t.equal(m.valueOf().type(), 'List', 'Provides an inner type of List')
+  t.ok(isSameType(MockCrock, m), 'Provides an outer type of MockCrock')
+  t.ok(isSameType(List, m.valueOf()), 'Provides an inner type of List')
   t.same(m.valueOf().valueOf(), [ x ], 'inner List contains original inner value')
 
   const ar = x => [ x ]
@@ -685,56 +685,83 @@ test('List sequence functionality', t => {
   t.end()
 })
 
-test('List traverse errors', t => {
-  const trav = bindFunc(List.of(2).traverse)
+test('List sequence with Applicative TypeRep', t => {
+  const x = 'string'
+  const m = List.of(MockCrock(x)).sequence(MockCrock)
 
-  const noFunc = /List.traverse: Apply returning functions required for both arguments/
-  t.throws(trav(undefined, MockCrock), noFunc, 'throws with undefined in first argument')
-  t.throws(trav(null, MockCrock), noFunc, 'throws with null in first argument')
-  t.throws(trav(0, MockCrock), noFunc, 'throws falsey with number in first argument')
-  t.throws(trav(1, MockCrock), noFunc, 'throws truthy with number in first argument')
-  t.throws(trav('', MockCrock), noFunc, 'throws falsey with string in first argument')
-  t.throws(trav('string', MockCrock), noFunc, 'throws with truthy string in first argument')
-  t.throws(trav(false, MockCrock), noFunc, 'throws with false in first argument')
-  t.throws(trav(true, MockCrock), noFunc, 'throws with true in first argument')
-  t.throws(trav([], MockCrock), noFunc, 'throws with an array in first argument')
-  t.throws(trav({}, MockCrock), noFunc, 'throws with an object in first argument')
-
-  t.throws(trav(MockCrock, undefined), noFunc, 'throws with undefined in second argument')
-  t.throws(trav(MockCrock, null), noFunc, 'throws with null in second argument')
-  t.throws(trav(MockCrock, 0), noFunc, 'throws falsey with number in second argument')
-  t.throws(trav(MockCrock, 1), noFunc, 'throws truthy with number in second argument')
-  t.throws(trav(MockCrock, ''), noFunc, 'throws falsey with string in second argument')
-  t.throws(trav(MockCrock, 'string'), noFunc, 'throws with truthy string in second argument')
-  t.throws(trav(MockCrock, false), noFunc, 'throws with false in second argument')
-  t.throws(trav(MockCrock, true), noFunc, 'throws with true in second argument')
-  t.throws(trav(MockCrock, []), noFunc, 'throws with an array in second argument')
-  t.throws(trav(MockCrock, {}), noFunc, 'throws with an object in second argument')
-
-  const noAppl = /List.traverse: Both functions must return an Apply/
-  t.throws(trav(unit, MockCrock), noAppl, 'throws with non-Appicative returning function in first argument')
-  t.throws(trav(MockCrock, unit), noAppl, 'throws with non-Appicative returning function in second argument')
-
-  t.doesNotThrow(trav(MockCrock, MockCrock), 'allows Apply returning functions')
+  t.ok(isSameType(MockCrock, m), 'Provides an outer type of MockCrock')
+  t.ok(isSameType(List, m.valueOf()), 'Provides an inner type of List')
+  t.same(m.valueOf().valueOf(), [ x ], 'inner List contains original inner value')
 
   t.end()
 })
 
-test('List traverse functionality', t => {
-  const x = 'string'
-  const f = x => MockCrock(x)
-  const m = List.of(x).traverse(f, MockCrock.of)
+test('List traverse errors', t => {
+  const trav = bindFunc(List.of(2).traverse)
 
-  t.equal(m.type(), 'MockCrock', 'Provides an outer type of MockCrock')
-  t.equal(m.valueOf().type(), 'List', 'Provides an inner type of List')
-  t.same(m.valueOf().valueOf(), [ x ], 'inner List contains original inner value')
+  const first = /List.traverse: Applicative TypeRep or Apply returning function required for first argument/
+  t.throws(trav(undefined, MockCrock), first, 'throws with undefined in first argument')
+  t.throws(trav(null, MockCrock), first, 'throws with null in first argument')
+  t.throws(trav(0, MockCrock), first, 'throws falsey with number in first argument')
+  t.throws(trav(1, MockCrock), first, 'throws truthy with number in first argument')
+  t.throws(trav('', MockCrock), first, 'throws falsey with string in first argument')
+  t.throws(trav('string', MockCrock), first, 'throws with truthy string in first argument')
+  t.throws(trav(false, MockCrock), first, 'throws with false in first argument')
+  t.throws(trav(true, MockCrock), first, 'throws with true in first argument')
+  t.throws(trav([], MockCrock), first, 'throws with an array in first argument')
+  t.throws(trav({}, MockCrock), first, 'throws with an object in first argument')
+
+  const second = /List.traverse: Apply returning functions required for second argument/
+  t.throws(trav(MockCrock, undefined), second, 'throws with undefined in second argument')
+  t.throws(trav(MockCrock, null), second, 'throws with null in second argument')
+  t.throws(trav(MockCrock, 0), second, 'throws falsey with number in second argument')
+  t.throws(trav(MockCrock, 1), second, 'throws truthy with number in second argument')
+  t.throws(trav(MockCrock, ''), second, 'throws falsey with string in second argument')
+  t.throws(trav(MockCrock, 'string'), second, 'throws with truthy string in second argument')
+  t.throws(trav(MockCrock, false), second, 'throws with false in second argument')
+  t.throws(trav(MockCrock, true), second, 'throws with true in second argument')
+  t.throws(trav(MockCrock, []), second, 'throws with an array in second argument')
+  t.throws(trav(MockCrock, {}), second, 'throws with an object in second argument')
+
+  const noAppl = /List.traverse: Both functions must return an Apply of the same type/
+  t.throws(trav(unit, MockCrock), noAppl, 'throws with non-Appicative returning function in first argument')
+  t.throws(trav(MockCrock, unit), noAppl, 'throws with non-Appicative returning function in second argument')
+
+  t.end()
+})
+
+test('List traverse with Apply function', t => {
+  const x = 'string'
+  const res = 'result'
+  const f = x => MockCrock(x)
+  const fn = m => constant(m(res))
+
+  const m = List.of(x).traverse(f, fn(MockCrock))
+
+  t.ok(isSameType(MockCrock, m), 'Provides an outer type of MockCrock')
+  t.ok(isSameType(List, m.valueOf()), 'Provides an inner type of List')
+  t.same(m.valueOf().valueOf(), [ res ], 'inner List contains transformed value')
 
   const ar = x => [ x ]
-  const arM = List.of(x).traverse(ar, ar)
+  const arM = List.of(x).traverse(ar, fn(ar))
 
   t.ok(isSameType(Array, arM), 'Provides an outer type of Array')
   t.ok(isSameType(List, arM[0]), 'Provides an inner type of List')
-  t.same(arM[0].valueOf(), [ x ], 'inner List contains original inner value')
+  t.same(arM[0].valueOf(), [ res ], 'inner List contains transformed value')
+
+  t.end()
+})
+
+test('List traverse with Applicative TypeRep', t => {
+  const x = 'string'
+  const res = 'result'
+  const fn = constant(MockCrock(res))
+
+  const m = List.of(x).traverse(MockCrock, fn)
+
+  t.ok(isSameType(MockCrock, m), 'Provides an outer type of MockCrock')
+  t.ok(isSameType(List, m.valueOf()), 'Provides an inner type of List')
+  t.same(m.valueOf().valueOf(), [ res ], 'inner List contains transformed value')
 
   t.end()
 })

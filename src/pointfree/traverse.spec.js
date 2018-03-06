@@ -7,6 +7,7 @@ const bindFunc = helpers.bindFunc
 
 const isArray = require('../core/isArray')
 const isFunction = require('../core/isFunction')
+const isSameType = require('../core/isSameType')
 const unit = require('../core/_unit')
 
 const constant = x => () => x
@@ -21,7 +22,7 @@ test('traverse pointfree', t => {
 
   t.ok(isFunction(traverse), 'is a function')
 
-  const err = /traverse: Apply function required for first argument/
+  const err = /traverse: Applicative TypeRep or Apply returning function required for first argument/
   t.throws(trav(undefined, unit, m), err, 'throws if first arg is undefined')
   t.throws(trav(null, unit, m), err, 'throws if first arg is null')
   t.throws(trav(0, unit, m), err, 'throws if first arg is a falsey number')
@@ -56,10 +57,6 @@ test('traverse pointfree', t => {
   t.throws(trav(unit, unit, true), noTrav, 'throws if third arg is true')
   t.throws(trav(unit, unit, {}), noTrav, 'throws if third arg is an object')
 
-  t.doesNotThrow(trav(unit, unit, m), 'allows two functions and a Traverable')
-  t.doesNotThrow(trav(unit, unit, []), 'allows two functions and an Array')
-  t.doesNotThrow(trav(MockCrock.of, MockCrock.of, [ 1, 2, 3 ]), 'allows two applicative returning functions and an Array ')
-
   t.end()
 })
 
@@ -83,7 +80,7 @@ test('traverse with Array', t => {
   const outer = traverse(MockCrock.of, f, [ 12, 23 ])
   const inner = outer.valueOf()
 
-  t.equal(outer.type(), 'MockCrock', 'outer container is a MockCrock')
+  t.ok(isSameType(MockCrock, outer), 'outer container is a MockCrock')
   t.ok(isArray(inner), 'inner container is an Array')
   t.same(inner, [ 14, 25 ], 'mapping/lifting function applied to every element')
 

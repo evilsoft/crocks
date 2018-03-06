@@ -5,6 +5,7 @@ const isApply = require('./isApply')
 const isArray = require('./isArray')
 const isFunction = require('./isFunction')
 const isSameType = require('./isSameType')
+const apOrFunc = require('./apOrFunc')
 
 const identity = x => x
 
@@ -16,7 +17,7 @@ function runTraverse(name, fn) {
     const m = fn(x)
 
     if(!((isApply(acc) || isArray(acc)) && isSameType(acc, m))) {
-      throw new TypeError(`Array.${name}: Must wrap Applys`)
+      throw new TypeError(`Array.${name}: Must wrap Applys of the same type`)
     }
 
     if(isArray(m)) {
@@ -55,11 +56,13 @@ function chain(f, m) {
   }, [])
 }
 
-function sequence(af, m) {
-  return m.reduceRight(runTraverse('sequence', identity), af([]))
+function sequence(f, m) {
+  const fn = apOrFunc(f)
+  return m.reduceRight(runTraverse('sequence', identity), fn([]))
 }
 
-function traverse(af, fn, m) {
+function traverse(f, fn, m) {
+  const af = apOrFunc(f)
   return m.reduceRight(runTraverse('traverse', fn), af([]))
 }
 

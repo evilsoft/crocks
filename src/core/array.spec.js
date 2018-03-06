@@ -130,28 +130,27 @@ test('array chain functionality', t => {
 })
 
 test('array sequence errors', t => {
-  const seq = bindFunc(x => sequence(MockCrock.of, [ x ]))
+  const fn = bindFunc(x => sequence(MockCrock.of, [ x ]))
 
-  const err = /Array.sequence: Must wrap Applys/
-  t.throws(seq(undefined), err, 'throws with undefined')
-  t.throws(seq(null), err, 'throws with null')
-  t.throws(seq(0), err, 'throws falsey with number')
-  t.throws(seq(1), err, 'throws truthy with number')
-  t.throws(seq(''), err, 'throws falsey with string')
-  t.throws(seq('string'), err, 'throws with truthy string')
-  t.throws(seq(false), err, 'throws with false')
-  t.throws(seq(true), err, 'throws with true')
-  t.throws(seq([]), err, 'throws with an array')
-  t.throws(seq({}), err, 'throws with an object')
-
-  t.doesNotThrow(seq(MockCrock(2)), 'allows an Apply returning function')
+  const err = /Array.sequence: Must wrap Applys of the same type/
+  t.throws(fn(undefined), err, 'throws with undefined')
+  t.throws(fn(null), err, 'throws with null')
+  t.throws(fn(0), err, 'throws falsey with number')
+  t.throws(fn(1), err, 'throws truthy with number')
+  t.throws(fn(''), err, 'throws falsey with string')
+  t.throws(fn('string'), err, 'throws with truthy string')
+  t.throws(fn(false), err, 'throws with false')
+  t.throws(fn(true), err, 'throws with true')
+  t.throws(fn([]), err, 'throws with an array')
+  t.throws(fn({}), err, 'throws with an object')
 
   t.end()
 })
 
-test('array sequence functionality', t => {
+test('array sequence with Apply function', t => {
   const x = 'string'
-  const m = sequence(MockCrock.of, [ MockCrock(x) ])
+  const f = x => MockCrock(x)
+  const m = sequence(f, [ MockCrock(x) ])
 
   t.ok(isSameType(MockCrock, m), 'Provides an outer type of MockCrock')
   t.ok(isSameType(Array, m.valueOf()), 'Provides an inner type of array')
@@ -167,32 +166,59 @@ test('array sequence functionality', t => {
   t.end()
 })
 
-test('array traverse errors', t => {
-  const trav = bindFunc((af, fn, x) => traverse(af, fn, [ x ]))
+test('array sequence with Applicative TypeRep', t => {
+  const x = 'string'
+  const m = sequence(MockCrock, [ MockCrock(x) ])
 
-  const noAppl = /Array.traverse: Must wrap Applys/
-  t.throws(trav(constant(undefined), MockCrock, 2), noAppl, 'throws when first function returns non-applicative')
-  t.throws(trav(MockCrock, constant([ 99 ]), 2), noAppl, 'throws when second function returns a different type')
-
-  t.doesNotThrow(trav(MockCrock, MockCrock, 2), 'allows Apply returning functions')
+  t.ok(isSameType(MockCrock, m), 'Provides an outer type of MockCrock')
+  t.ok(isSameType(Array, m.valueOf()), 'Provides an inner type of array')
+  t.same(m.valueOf()[0], x, 'inner List contains original inner value')
 
   t.end()
 })
 
-test('List traverse functionality', t => {
+test('array traverse errors', t => {
+  const trav = bindFunc((af, fn, x) => traverse(af, fn, [ x ]))
+
+  const err = /Array.traverse: Must wrap Applys of the same type/
+  t.throws(trav(constant(undefined), MockCrock, 2), err, 'throws when first function returns non-applicative')
+  t.throws(trav(MockCrock, constant([ 99 ]), 2), err, 'throws when second function returns a different type')
+
+  t.end()
+})
+
+test('array traverse with Apply function', t => {
   const x = 'string'
-  const m = traverse(MockCrock.of, MockCrock, [ x ])
+  const res = 'result'
+  const f = x => MockCrock(x)
+  const fn = m => constant(m(res))
+
+  const m = traverse(f, fn(MockCrock), [ x ])
 
   t.ok(isSameType(MockCrock, m), 'Provides an outer type of MockCrock')
   t.ok(isSameType(Array, m.valueOf), 'Provides an inner type of Array')
-  t.same(m.valueOf()[0], x, 'inner array contains original inner value')
+  t.same(m.valueOf()[0], res, 'inner array contains original inner value')
 
-  const ar = x => [ x ]
-  const arM = traverse(ar, ar, [ x ])
+  const ar = Array.of
+  const arM = traverse(ar, fn(ar), [ x ])
 
   t.ok(isSameType(Array, arM), 'Provides an outer type of Array')
   t.ok(isSameType(Array, arM[0]), 'Provides an inner type of Array')
-  t.same(arM[0][0], x, 'inner array contains original inner value')
+  t.same(arM[0][0], res, 'inner array contains original inner value')
+
+  t.end()
+})
+
+test('array traverse with Applicative TypeRep', t => {
+  const x = 'string'
+  const res = 'result'
+  const fn = constant(MockCrock(res))
+
+  const m = traverse(MockCrock, fn, [ x ])
+
+  t.ok(isSameType(MockCrock, m), 'Provides an outer type of MockCrock')
+  t.ok(isSameType(Array, m.valueOf), 'Provides an inner type of Array')
+  t.same(m.valueOf()[0], res, 'inner array contains original inner value')
 
   t.end()
 })

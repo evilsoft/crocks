@@ -92,6 +92,7 @@ need to account for for the rest of your flow.
 | [`propPath`][proppath] | <code>Foldable f => f (String &#124; Integer) -> a -> Maybe b</code> | `crocks/Maybe/propPath` |
 | [`propPathOr`][proppathor] | <code>Foldable f => a -> f (String &#124; Integer) -> b -> c</code> | `crocks/helpers/propPathOr` |
 | [`safe`][safe] | <code>((a -> Boolean) &#124; Pred) -> a -> Maybe a</code> | `crocks/Maybe/safe` |
+| [`safeAfter`][safeafter] | <code>safeAfter :: ((b -> Boolean) &#124; Pred) -> (a -> b) -> a -> Maybe b</code> | `crocks/Maybe/safeAfter` |
 | [`safeLift`][safelift] | <code>((a -> Boolean) &#124; Pred) -> (a -> b) -> a -> Maybe b</code> | `crocks/Maybe/safeLift` |
 | [`tap`][tap] | `(a -> b) -> a -> a` | `crocks/helpers/tap` |
 | [`toPairs`][topairs] | `Object -> List (Pair String a)` | `crocks/Pair/toPairs` |
@@ -164,6 +165,7 @@ type: `Pred a` and vice-versa
 [proppath]: ../crocks/Maybe.html#proppath
 [proppathor]: helpers.html#proppathor
 [safe]: ../crocks/Maybe.html#safe
+[safeafter]: ../crocks/Maybe.html#safeafter
 [safelift]: ../crocks/Maybe.html#safelift
 [tap]: helpers.html#tap
 [topairs]: helpers.html#topairs

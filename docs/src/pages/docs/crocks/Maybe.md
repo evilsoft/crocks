@@ -1005,8 +1005,8 @@ safe :: ((b -> Boolean) | Pred) -> b -> Maybe a
 When using a `Maybe`, it is a common practice to lift into a `Just` or a
 `Nothing` depending on a condition on the value to be lifted.  It is so common
 that it warrants a function, and that function is called `safe`. Provide a
-predicate (a function that returns a Boolean) and a value to be lifted. The
-value will be evaluated against the predicate, and will lift it into a `Just` if
+predicate (a function that returns a Boolean) or a [`Pred`][pred] datatypea and the value
+to be lifted. The value will be evaluated against the predicate, and will lift it into a `Just` if
 true and a `Nothing` if false.
 
 ```javascript
@@ -1062,10 +1062,10 @@ safeAfter :: ((b -> Boolean) | Pred) -> (a -> b) -> a -> Maybe b
 ```
 
 Many times, you might want to lift the result of a function into a `Maybe` based
-on some predicate. This may be because some parts of our code might return unsafe values for 
-further computations we may like to perform. Similar to [`safe`](#safe), you pass either a 
-`Pred` or a predicate function, along with a unary function. `safeAfter` then gives you a new 
-function, which when invoked evaluates the predicate against the result of executing 
+on some predicate. This may be because some parts of our code might return unsafe values for
+further computations we may like to perform. Similar to [`safe`](#safe), you pass either a
+[`Pred`][pred] or a predicate function, along with a unary function. `safeAfter` then gives
+you a new  function, which when invoked evaluates the predicate against the result of executing
 the unary function. This result is then lifted into a `Just` if the predicate evaluates 
 to `true`, or a `Nothing` if it returns `false`
 
@@ -1142,7 +1142,7 @@ safeLift :: ((c -> Boolean) | Pred) -> (a -> b) -> c -> Maybe b
 
 While [`safe`](#safe) is used to lift a value into a `Maybe`, you can reach for
 `safeLift` when you want to run a function in the safety of the `Maybe` context.
-Just like [`safe`](#safe), you pass it either a `Pred` or a predicate function
+Just like [`safe`](#safe), you pass it either a [`Pred`][pred] or a predicate function
 to determine if you get a `Just` or a `Nothing`, but then instead of a value,
 you pass it a unary function. `safeLift` will then give you back a new function
 that will first lift its argument into a `Maybe` and then maps your original
@@ -1441,3 +1441,5 @@ Just('so good')
 ```
 
 </article>
+
+[pred]: ../Pred.html

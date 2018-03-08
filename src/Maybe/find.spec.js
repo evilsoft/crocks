@@ -24,6 +24,8 @@ test('find is protected', t => {
   t.throws(fn('string'), err, 'throws if foldable is truthy string')
   t.throws(fn(false), err, 'throws if arg is false')
   t.throws(fn(true), err, 'throws if arg is true')
+  t.throws(fn({}), err, 'throws if arg is empty POJO')
+  t.throws(fn({ hi: 'there' }), err, 'throws if arg is non-empty POJO')
 
   t.end()
 })

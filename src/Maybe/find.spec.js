@@ -16,11 +16,10 @@ test('find is protected', t => {
   const err = /find: Function required for first argument/
 
   t.throws(fn(undefined), err, 'throws if foldable is undefined')
-  t.throws(fn(2), err, 'throws if foldable is number')
-  t.throws(fn('hello'), err, 'throws if foldable is string')
   t.throws(fn(null), err, 'throws if foldable is null')
-  t.throws(fn(0), err, 'throws if foldable is falsey')
-  t.throws(fn(1), err, 'throws if foldable is truthy')
+  t.throws(fn(0), err, 'throws if foldable is falsey number')
+  t.throws(fn(1), err, 'throws if foldable is truthy number')
+  t.throws(fn(NaN), err, 'throws if foldable is NaN')
   t.throws(fn(''), err, 'throws if foldable is falsey string')
   t.throws(fn('string'), err, 'throws if foldable is truthy string')
   t.throws(fn(false), err, 'throws if arg is false')

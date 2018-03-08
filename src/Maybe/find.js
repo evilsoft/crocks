@@ -3,13 +3,11 @@
 
 const curry = require('../core/curry')
 const Maybe = require('./index')
-const resultToMaybe = require('./resultToMaybe')
+const safe = require('./safe')
 
 const isNil = require('../core/isNil')
 const isFunction = require('../core/isFunction')
-const filter = require('../pointfree/filter')
-const tryCatch = require('../Result/tryCatch')
-const compose = require('../core/compose')
+const isFoldable = require('../core/isFoldable')
 
 // find :: Foldable f => ((a -> Boolean) | Pred) -> f a -> Maybe a
 function find(fn, foldable) {
@@ -17,13 +15,13 @@ function find(fn, foldable) {
     throw new TypeError('find: Function required for first argument')
   }
 
-  if(isNil(foldable)) {
+  if(isNil(foldable) && !isFoldable(foldable)) {
     return Maybe.Nothing()
   }
 
-  const tryCatchAsMaybe = compose(resultToMaybe, tryCatch)
-
-  return tryCatchAsMaybe(() => filter(fn, foldable))()
+  return foldable
+    .map(safe(fn))
+    .reduce((acc, cur) => acc.alt(cur), Maybe.zero())
 }
 
 module.exports = curry(find)

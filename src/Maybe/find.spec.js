@@ -3,7 +3,11 @@ const test = require('tape')
 const isFunction = require('../core/isFunction')
 
 const find = require('./find')
+
 const helpers = require('../test/helpers')
+
+const List = require('../core/List')
+const { fromArray } = List
 
 const bindFunc = helpers.bindFunc
 
@@ -12,6 +16,8 @@ test('find is protected', t => {
   const err = /find: Function required for first argument/
 
   t.throws(fn(undefined), err, 'throws if foldable is undefined')
+  t.throws(fn(2), err, 'throws if foldable is number')
+  t.throws(fn('hello'), err, 'throws if foldable is string')
   t.throws(fn(null), err, 'throws if foldable is null')
   t.throws(fn(0), err, 'throws if foldable is falsey')
   t.throws(fn(1), err, 'throws if foldable is truthy')
@@ -26,7 +32,9 @@ test('find is protected', t => {
 test('find works as expected', t => {
   t.ok(isFunction(find), 'is a function')
 
-  t.ok(isFunction(find(() => true, []).either), 'returns a Maybe for valid value')
+  t.ok(isFunction(find(() => true, undefined).either), 'returns a Maybe for undefined value')
+  t.ok(isFunction(find(() => true, []).either), 'returns a Maybe for array value')
+  t.ok(isFunction(find(() => true, fromArray([])).either), 'returns a Maybe for List value')
 
   t.equal(find(() => true, undefined).either(() => 'Nothing', x => x), 'Nothing', 'returns a Nothing for undefined value')
   t.equal(find(x => x > 3, [ 1, 2, 3, 4, 5, 6 ]).either(() => 'Nothing', x => x), 4, 'returns the correct value')

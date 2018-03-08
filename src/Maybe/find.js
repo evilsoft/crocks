@@ -3,11 +3,14 @@
 
 const curry = require('../core/curry')
 const Maybe = require('./index')
-const safe = require('./safe')
+const predOrFunc = require('../core/predOrFunc')
 
 const isNil = require('../core/isNil')
 const isFunction = require('../core/isFunction')
 const isFoldable = require('../core/isFoldable')
+
+const accumulator = fn => (acc, cur) =>
+  !acc.found && predOrFunc(fn, cur) ? { found: true, value: cur } : acc
 
 // find :: Foldable f => ((a -> Boolean) | Pred) -> f a -> Maybe a
 function find(fn, foldable) {
@@ -19,9 +22,9 @@ function find(fn, foldable) {
     return Maybe.Nothing()
   }
 
-  return foldable
-    .map(safe(fn))
-    .reduce((acc, cur) => acc.alt(cur), Maybe.zero())
+  const result = foldable.reduce(accumulator(fn), { found: false, value: undefined })
+
+  return result.found ? Maybe.Just(result.value) : Maybe.Nothing()
 }
 
 module.exports = curry(find)

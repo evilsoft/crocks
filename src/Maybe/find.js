@@ -2,7 +2,9 @@
 /** @author Dale Francis (dalefrancis88) */
 
 const curry = require('../core/curry')
-const { Nothing, resultToMaybe } = require('../core/Maybe')
+const Maybe = require('./index')
+const resultToMaybe = require('./resultToMaybe')
+
 const isNil = require('../core/isNil')
 const isFunction = require('../core/isFunction')
 const filter = require('../pointfree/filter')
@@ -16,7 +18,7 @@ function find(fn, foldable) {
   }
 
   if(isNil(foldable)) {
-    return Nothing()
+    return Maybe.Nothing()
   }
 
   const tryCatchAsMaybe = compose(resultToMaybe, tryCatch)

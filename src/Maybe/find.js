@@ -1,11 +1,10 @@
-/** @license ISC License (c) copyright 2017 original and current authors */
+/** @license ISC License (c) copyright 2018 original and current authors */
 /** @author Dale Francis (dalefrancis88) */
 
 const curry = require('../core/curry')
-const Maybe = require('./index')
+const { Just, Nothing } = require('.')
 const predOrFunc = require('../core/predOrFunc')
 
-const isNil = require('../core/isNil')
 const isFunction = require('../core/isFunction')
 const isFoldable = require('../core/isFoldable')
 
@@ -15,16 +14,16 @@ const accumulator = fn => (acc, cur) =>
 // find :: Foldable f => ((a -> Boolean) | Pred) -> f a -> Maybe a
 function find(fn, foldable) {
   if(!isFunction(fn)) {
-    throw new TypeError('find: Function required for first argument')
+    throw new TypeError('find: Pred or a predicate function is required for first argument')
   }
 
-  if(isNil(foldable) && !isFoldable(foldable)) {
-    return Maybe.Nothing()
+  if(!isFoldable(foldable)) {
+    throw new TypeError('find: Foldable required for second argument')
   }
 
-  const result = foldable.reduce(accumulator(fn), { found: false, value: undefined })
+  const result = foldable.reduce(accumulator(fn), { found: false })
 
-  return result.found ? Maybe.Just(result.value) : Maybe.Nothing()
+  return result.found ? Just(result.value) : Nothing()
 }
 
 module.exports = curry(find)

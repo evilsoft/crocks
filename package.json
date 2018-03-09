@@ -18,7 +18,7 @@
     "docs:deploy": "cd docs && npm run docs:deploy",
     "lint": "eslint --ext .md,.js .",
     "spec:coverage": "nyc npm run spec:build",
-    "spec:dev": "nodemon -q -e js -w src -x 'npm run spec:src -s | tap-spec'",
+    "spec:dev": "nodemon -q -e js -w src -x \"npm run spec:src -s | tap-spec\"",
     "spec:build": "npm run build && tape build/**/*.spec.js build/*.spec.js",
     "spec:src": "tape src/**/*.spec.js src/*.spec.js",
     "test": "npm run lint && npm run spec:coverage",

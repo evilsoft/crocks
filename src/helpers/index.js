@@ -12,6 +12,7 @@ module.exports = {
   defaultTo: require('./defaultTo'),
   dissoc: require('./dissoc'),
   fanout: require('./fanout'),
+  find: require('../Maybe/find'),
   fromPairs: require('./fromPairs'),
   liftA2: require('./liftA2'),
   liftA3: require('./liftA3'),

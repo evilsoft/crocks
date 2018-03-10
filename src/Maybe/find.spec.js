@@ -1,12 +1,12 @@
 const test = require('tape')
 
 const isFunction = require('../core/isFunction')
-
+const Pred = require('../Pred')
 const find = require('./find')
-
 const helpers = require('../test/helpers')
-
 const List = require('../core/List')
+const isNumber = require('../core/isNumber')
+
 const { fromArray } = List
 
 const bindFunc = helpers.bindFunc
@@ -49,16 +49,24 @@ test('find is protected from bad foldable', t => {
   t.end()
 })
 
+test('find works with predicates', t => {
+  const largeNumber = Pred(isNumber).concat(Pred(x => x > 100))
+
+  t.equal(find(largeNumber, [ 10, '12', 150, 200, 2000 ]).option(0), 150, 'works with predicates')
+
+  t.end()
+})
+
 test('find works as expected', t => {
   t.ok(isFunction(find), 'is a function')
 
   t.ok(isFunction(find(() => true, []).either), 'returns a Maybe for array value')
   t.ok(isFunction(find(() => true, fromArray([])).either), 'returns a Maybe for List value')
 
-  t.equal(find(x => x > 3, [ 1, 2, 3, 4, 5, 6 ]).either(() => 'Nothing', x => x), 4, 'returns the correct value')
+  t.equal(find(x => x > 3, [ 1, 2, 3, 4, 5, 6 ]).option('Nothing'), 4, 'returns the correct value')
 
-  t.equal(find(x => x > 3, [ 0, null, undefined, 4, 5, 6 ]).either(() => 'Nothing', x => x), 4, 'handles bad values in foldable')
-  t.equal(find(x => x > 6, [ 1, 2, 3, 4, 5, 6 ]).either(() => 'Nothing', x => x), 'Nothing', 'returns nothing when value is not found')
+  t.equal(find(x => x > 3, [ 0, null, undefined, 4, 5, 6 ]).option('Nothing'), 4, 'handles bad values in foldable')
+  t.equal(find(x => x > 6, [ 1, 2, 3, 4, 5, 6 ]).option('Nothing'), 'Nothing', 'returns nothing when value is not found')
 
   t.end()
 })

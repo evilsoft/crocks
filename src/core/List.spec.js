@@ -693,6 +693,12 @@ test('List sequence with Applicative TypeRep', t => {
   t.ok(isSameType(List, m.valueOf()), 'Provides an inner type of List')
   t.same(m.valueOf().valueOf(), [ x ], 'inner List contains original inner value')
 
+  const ar = List.of([ x ]).sequence(Array)
+
+  t.ok(isSameType(Array, ar), 'Provides an outer type of Array')
+  t.ok(isSameType(List, ar[0]), 'Provides an inner type of List')
+  t.same(ar[0].valueOf(), [ x ], 'inner List contains original inner value')
+
   t.end()
 })
 
@@ -755,13 +761,20 @@ test('List traverse with Apply function', t => {
 test('List traverse with Applicative TypeRep', t => {
   const x = 'string'
   const res = 'result'
-  const fn = constant(MockCrock(res))
+  const fn = m => constant(m(res))
 
-  const m = List.of(x).traverse(MockCrock, fn)
+  const m = List.of(x).traverse(MockCrock, fn(MockCrock))
 
   t.ok(isSameType(MockCrock, m), 'Provides an outer type of MockCrock')
   t.ok(isSameType(List, m.valueOf()), 'Provides an inner type of List')
   t.same(m.valueOf().valueOf(), [ res ], 'inner List contains transformed value')
+
+  const ar = x => [ x ]
+  const arM = List.of(x).traverse(Array, fn(ar))
+
+  t.ok(isSameType(Array, arM), 'Provides an outer type of Array')
+  t.ok(isSameType(List, arM[0]), 'Provides an inner type of List')
+  t.same(arM[0].valueOf(), [ res ], 'inner List contains transformed value')
 
   t.end()
 })

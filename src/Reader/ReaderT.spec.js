@@ -235,7 +235,6 @@ test('ReaderT liftFn function', t => {
   t.throws(fn([], 0), err, 'throws with an array')
   t.throws(fn({}, 0), err, 'throws with an object')
 
-
   const f =
     x => ReaderMock.liftFn(identity, x).runWith(0)
 

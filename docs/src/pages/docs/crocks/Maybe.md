@@ -894,18 +894,23 @@ toArray(Nothing())
 ```haskell
 find :: Foldable f => ((a -> Boolean) | Pred) -> f a -> Maybe a
 ```
-Using a provided predicate function or a [`Pred`][pred] datatype, `find` takes a `Foldable` instance and  executes for every value in the `Foldable`, skippy empty indexs. `find` then returns the first value it finds that passes the predicate. If found, `find` returns the value in a [`Just`][just], otherwise a [`Nothing`][nothing] is returned.
+
+Using a provided predicate function or a `Pred` datatype, `find` takes a 
+`Foldable` instance and executes for every value in the `Foldable`, skipping
+empty indexes. `find` then returns the first value it finds that passes the 
+predicate. If found, `find` returns the value in a `Just`, otherwise a `Nothing` 
+is returned.
 
 ```javascript
 import find from 'crocks/Maybe/find'
 import Pred from 'crocks/Pred'
 import isNumber from 'crocks/predicates/isNumber'
 
-// isEven :: Number -> Bool
+// isEven :: Number -> Boolean
 const isEven =
   x => x % 2 === 0
 
-// largeNumber :: a -> Bool
+// largeNumber :: Pred a
 const largeNumber =
   Pred(isNumber)
     .concat(Pred(x => x > 100))

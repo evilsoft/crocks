@@ -166,7 +166,6 @@ test('Async fromPromise resolution', t => {
   const rej = y => x => t.equal(x, y, 'rejects a rejected Promise')
   const res = y => x => t.equal(x, y, 'resolves a resolved Promise')
 
-
   Async.fromPromise(rejProm)(val).fork(rej(val), res(val))
   Async.fromPromise(resProm)(val).fork(rej(val), res(val))
 })
@@ -544,7 +543,6 @@ test('Async coalesce', t => {
 
   t.ok(rej.calledWith('was rejected'), 'resolves a rejected, applying left coalesce function')
   t.ok(res.calledWith('was resolved'), 'resolves a resolved, applying right coalesce function')
-
 
   t.end()
 })

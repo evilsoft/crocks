@@ -605,7 +605,6 @@ test('Pair traverse with Apply function', t => {
   t.ok(isSameType(Pair, p.valueOf()), 'Provides an inner type of Pair')
   t.equal(p.valueOf().snd(), res, 'Pair contains transformed value')
 
-
   const ar = x => [ x ]
   const arS = Pair([], x).traverse(ar, fn(ar))
 

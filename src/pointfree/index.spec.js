@@ -42,7 +42,6 @@ const tail = require('./tail')
 const traverse = require('./traverse')
 const valueOf = require('./valueOf')
 
-
 test('pointfree entry', t => {
   t.equal(index.alt, alt, 'provides the alt pointfree')
   t.equal(index.ap, ap, 'provides the ap pointfree')

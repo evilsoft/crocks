@@ -53,44 +53,50 @@ test('find is protected from bad foldable', t => {
 })
 
 test('find works with predicates', t => {
-  const largeNumber = Pred(isNumber).concat(Pred(x => x > 100))
-  const nonBoolPred =
-    x => Pred(constant(x))
-  const findWrapPred =
-    (fn, foldable) => find(Pred(fn), foldable)
+  const largeNumber =
+    Pred(isNumber).concat(Pred(x => x > 100))
+
+  const wrapPred =
+    fn => find(Pred(fn))
+
+  const gt3 =
+    wrapPred(x => x > 3)
+
+  const isTrue =
+    wrapPred(constant(true))
 
   t.equal(find(largeNumber, [ 10, '12', 150, 200, 2000 ]).option(0), 150, 'works with predicates')
-
-  t.equals(find(nonBoolPred(undefined), []).option('Nothing'), 'Nothing', 'returns false when wrapped function returns undefined')
-
-  t.ok(isSameType(Maybe, findWrapPred(() => true, [])), 'returns a Maybe for array value')
-  t.ok(isSameType(Maybe, findWrapPred(() => true, fromArray([]))), 'returns a Maybe for List value')
-
-  t.equal(findWrapPred(x => x > 3, [ 1, 2, 3, 4, 5, 6 ]).option('Nothing'), 4, 'returns the correct value')
-
-  t.equal(findWrapPred(x => x > 3, [ 0, null, undefined, 4, 5, 6 ]).option('Nothing'), 4, 'handles bad values in foldable')
-  t.equal(findWrapPred(x => x > 6, [ 1, 2, 3, 4, 5, 6 ]).option('Nothing'), 'Nothing', 'returns nothing when value is not found')
-  t.equal(findWrapPred(() => true, []).option('Nothing'), 'Nothing', 'returns a Nothing when there are no items ([])')
-  t.equal(findWrapPred(() => true, new Array()).option('Nothing'), 'Nothing', 'returns a Nothing when there are no items (Array)')
-  t.equal(findWrapPred(() => true, fromArray([])).option('Nothing'), 'Nothing', 'returns a Nothing when there are no items (List)')
-
+  t.ok(isSameType(Maybe, isTrue([])), 'returns a Maybe for array value')
+  t.ok(isSameType(Maybe, isTrue(fromArray([]))), 'returns a Maybe for List value')
+  t.equal(gt3([ 1, 2, 3, 4, 5, 6 ]).option('Nothing'), 4, 'returns the correct value')
+  t.equal(gt3([ 0, null, undefined, 4, 5, 6 ]).option('Nothing'), 4, 'handles bad values in foldable')
+  t.equal(gt3([ 1, 2, 3 ]).option('Nothing'), 'Nothing', 'returns nothing when value is not found')
+  t.equal(isTrue([]).option('Nothing'), 'Nothing', 'returns a Nothing when there are no items ([])')
+  t.equal(isTrue(new Array()).option('Nothing'), 'Nothing', 'returns a Nothing when there are no items (Array)')
+  t.equal(isTrue(fromArray([])).option('Nothing'), 'Nothing', 'returns a Nothing when there are no items (List)')
 
   t.end()
 })
 
 test('find works as expected', t => {
+  const gt3 =
+    find(x => x > 3)
+
+  const isTrue =
+    find(constant(true))
+
   t.ok(isFunction(find), 'is a function')
 
-  t.ok(isSameType(Maybe, find(() => true, [])), 'returns a Maybe for array value')
-  t.ok(isSameType(Maybe, find(() => true, fromArray([]))), 'returns a Maybe for List value')
+  t.ok(isSameType(Maybe, isTrue([])), 'returns a Maybe for array value')
+  t.ok(isSameType(Maybe, isTrue(fromArray([]))), 'returns a Maybe for List value')
 
-  t.equal(find(x => x > 3, [ 1, 2, 3, 4, 5, 6 ]).option('Nothing'), 4, 'returns the correct value')
+  t.equal(gt3([ 1, 2, 3, 4, 5, 6 ]).option('Nothing'), 4, 'returns the correct value')
 
-  t.equal(find(x => x > 3, [ 0, null, undefined, 4, 5, 6 ]).option('Nothing'), 4, 'handles bad values in foldable')
-  t.equal(find(x => x > 6, [ 1, 2, 3, 4, 5, 6 ]).option('Nothing'), 'Nothing', 'returns nothing when value is not found')
-  t.equal(find(() => true, []).option('Nothing'), 'Nothing', 'returns a Nothing when there are no items ([])')
-  t.equal(find(() => true, new Array()).option('Nothing'), 'Nothing', 'returns a Nothing when there are no items (Array)')
-  t.equal(find(() => true, fromArray([])).option('Nothing'), 'Nothing', 'returns a Nothing when there are no items (List)')
+  t.equal(gt3([ 0, null, undefined, 4, 5, 6 ]).option('Nothing'), 4, 'handles bad values in foldable')
+  t.equal(gt3([ 1, 2, 3 ]).option('Nothing'), 'Nothing', 'returns nothing when value is not found')
+  t.equal(isTrue([]).option('Nothing'), 'Nothing', 'returns a Nothing when there are no items ([])')
+  t.equal(isTrue(new Array()).option('Nothing'), 'Nothing', 'returns a Nothing when there are no items (Array)')
+  t.equal(isTrue(fromArray([])).option('Nothing'), 'Nothing', 'returns a Nothing when there are no items (List)')
 
   t.end()
 })

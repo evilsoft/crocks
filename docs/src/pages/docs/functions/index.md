@@ -141,6 +141,7 @@ type: `Pred a` and vice-versa
 [defaultto]: helpers.html#defaultto
 [dissoc]: helpers.html#dissoc
 [fanout]: helpers.html#fanout
+[find]: ../crocks/Maybe.html#find
 [frompairs]: helpers.html#frompairs
 [lifta2]: helpers.html#lifta2
 [lifta3]: helpers.html#lifta3

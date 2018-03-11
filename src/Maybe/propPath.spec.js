@@ -95,7 +95,6 @@ test('propPath array traversal', t => {
   t.equals(fn([ null ]), 'nothing', 'returns a Nothing with null in keypath')
   t.equals(fn([ NaN ]), 'nothing', 'returns a Nothing with NaN in keypath')
 
-
   t.same(empty([ [ 23 ] ]), [ [ 23 ] ], 'returns a Just with original value when an empty array is provided as path')
 
   t.end()
@@ -107,7 +106,6 @@ test('propPath mixed traversal', t => {
 
   t.equals(fn([ { a: '' } ]), '', 'allows for traversal with a mixed path on a mixed structure')
   t.equals(fn([ { b: '' } ]), 'nothing', 'returns Nothin when not found with mixed path')
-
 
   t.end()
 })

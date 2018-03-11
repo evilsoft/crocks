@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "scripts": {
     "start": "electric run --env dev",
+    "preinstall": "rimraf node_modules",
     "docs:build": "electric build",
     "docs:deploy": "electric deploy"
   },

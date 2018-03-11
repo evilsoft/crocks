@@ -2,10 +2,11 @@
 /** @author Dale Francis (dalefrancis88) */
 
 const Pred = require('./types').proxy('Pred')
+
 const isFunction = require('./isFunction')
 const isSameType = require('./isSameType')
 
-// isPredOrFunc :: (func | pred) -> bool
+// isPredOrFunc :: ((a -> b) | pred) -> bool
 const isPredOrFunc = predOrFunc =>
   !!predOrFunc && (isFunction(predOrFunc) || isSameType(Pred, predOrFunc))
 

@@ -3,11 +3,11 @@ const test = require('tape')
 const Pred = require('../Pred')
 const isNumber = require('./isNumber')
 const unit = require('./_unit')
+const isPredOrFunc = require('./isPredOrFunc')
+
 const isLargeNumber =
   Pred(isNumber)
     .concat(Pred(x => x > 100))
-
-const isPredOrFunc = require('./isPredOrFunc')
 
 test('isPredOrFunc core', t => {
   t.equal(typeof isPredOrFunc, 'function', 'is a function')

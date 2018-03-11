@@ -18,6 +18,7 @@ const isApply = require('./isApply')
 const isArray = require('./isArray')
 const isEmpty = require('./isEmpty')
 const isFunction = require('./isFunction')
+const isPredOrFunc = require('./isPredOrFunc')
 const isSameType = require('./isSameType')
 const isSemigroup = require('./isSemigroup')
 const predOrFunc = require('./predOrFunc')
@@ -29,8 +30,6 @@ const _prepend =
   x => m => x.concat(m)
 
 const { Nothing, Just } = require('./Maybe')
-
-const Pred = require('./types').proxy('Pred')
 
 const _of =
   x => List([ x ])
@@ -172,7 +171,7 @@ function List(x) {
   }
 
   function filter(pred) {
-    if(!(isFunction(pred) || isSameType(Pred, pred))) {
+    if(!isPredOrFunc(pred)) {
       throw new TypeError('List.filter: Pred or predicate function required')
     }
 
@@ -183,7 +182,7 @@ function List(x) {
   }
 
   function reject(pred) {
-    if(!(isFunction(pred) || isSameType(Pred, pred))) {
+    if(!isPredOrFunc(pred)) {
       throw new TypeError('List.reject: Pred or predicate function required')
     }
 

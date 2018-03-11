@@ -1425,10 +1425,7 @@ Just('so good')
 ```haskell
 find :: Foldable f => ((a -> Boolean) | Pred) -> f a -> Maybe a
 ```
-Used to take a foldable and a function or predicate and searchs through it
-to find the first item that returns true when passed to the func or predicate.
-If true is returned then the final result will be a `Just` of that value but
-if no value is found then it will return a `Nothing`.
+Using a provided predicate function or a `Pred` datatype, `find` takes a `Foldable` instance and  executes for every value in the `Foldable`, skippy empty indexs. `find` then returns the first value it finds that passes the predicate. If found, `find` returns the value in a `Just`, otherwise a `Nothing` is returned.
 
 ```javascript
 import find from 'crocks/Maybe/find'
@@ -1436,20 +1433,20 @@ import Pred from 'crocks/Pred'
 import isNumber from 'crocks/predicates/isNumber'
 
 // isEven :: Number -> Bool
-const isEven = x => x % 2 === 0
+const isEven =
+  x => x % 2 === 0
 
 // largeNumber :: a -> Bool
-const largeNumber = Pred(isNumber).concat(Pred(x => x > 100))
-
-
+const largeNumber =
+  Pred(isNumber)
+    .concat(Pred(x => x > 100))
 
 find(largeNumber, [ 10, '12', 150, 200, 2000 ])
-// => Just 150
+//=> Just 150
 
 find(largeNumber, [ 1, 2, 3, 4, 5 ])
-// => Nothing
+//=> Nothing
 
 find(isEven, [ 1, 2, 3, 4, 5 ])
-// => Just 2
-
+//=> Just 2
 ```

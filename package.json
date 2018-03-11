@@ -6,9 +6,7 @@
   "scripts": {
     "contributors:add": "all-contributors add",
     "contributors:generate": "all-contributors generate",
-    "setup": "npm i",
-    "preinstall": "rimraf node_modules",
-    "postinstall": "cd ./docs && npm i",
+    "setup": "node ./bin/setup.js",
     "precommit": "lint-staged",
     "preversion": "npm run build",
     "postpublish": "npm run docs:deploy",

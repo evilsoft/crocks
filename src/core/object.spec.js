@@ -56,7 +56,6 @@ test('object map functionality', t => {
     i: {}, j: []
   }
 
-
   t.same(map(identity, m), m, 'allows all values types')
 
   t.end()

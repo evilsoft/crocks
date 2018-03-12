@@ -67,6 +67,7 @@ need to account for for the rest of your flow.
 | [`defaultTo`][defaultto] | `a -> b -> a` | `crocks/helpers/defaultTo` |
 | [`dissoc`][dissoc] | `String -> Object -> Object` | `crocks/helpers/dissoc` |
 | [`fanout`][fanout] | `(a -> b) -> (a -> c) -> (a -> Pair b c)` | `crocks/helpers/fanout` |
+| [`find`][find] | `Foldable f => ((a -> Boolean) | Pred) -> f a -> Maybe a` | `crocks/helpers/find` |
 | [`fromPairs`][frompairs] | `Foldable f => f (Pair String a) -> Object` | `crocks/helpers/fromPairs` |
 | [`liftA2`][lifta2] | `Applicative m => (a -> b -> c) -> m a -> m b -> m c` | `crocks/helpers/liftA2` |
 | [`liftA3`][lifta3] | `Applicative m => (a -> b -> c -> d) -> m a -> m b -> m c -> m d` | `crocks/helpers/liftA3` |
@@ -140,6 +141,7 @@ type: `Pred a` and vice-versa
 [defaultto]: helpers.html#defaultto
 [dissoc]: helpers.html#dissoc
 [fanout]: helpers.html#fanout
+[find]: ../crocks/Maybe.html#find
 [frompairs]: helpers.html#frompairs
 [lifta2]: helpers.html#lifta2
 [lifta3]: helpers.html#lifta3

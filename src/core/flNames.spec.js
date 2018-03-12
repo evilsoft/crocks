@@ -2,7 +2,6 @@ const test = require('tape')
 
 const methods = require('./flNames')
 
-
 test('flMethods', t => {
   t.equals(methods.alt, 'fantasy-land/alt', 'provides alt')
   t.equals(methods.bimap, 'fantasy-land/bimap', 'provides bimap')

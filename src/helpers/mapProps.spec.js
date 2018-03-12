@@ -32,7 +32,6 @@ test('mapProps errors', t => {
   t.throws(m({}, true), noObjs, 'throws with true as second')
   t.throws(m({}, []), noObjs, 'throws with array as second')
 
-
   const noFunc = /mapProps: Object of functions required for first argument/
   t.throws(m({ a: '33' }, { a: 'apples' }), noFunc, 'throws when first argument does not contain a function')
 

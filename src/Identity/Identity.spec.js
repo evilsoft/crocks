@@ -429,6 +429,12 @@ test('Identity sequence with Applicative TypeRep', t => {
   t.ok(isSameType(Identity, m.valueOf()), 'Provides an inner type of Identity')
   t.equal(m.valueOf().valueOf(), x, 'Identity contains original inner value')
 
+  const arM = Identity([ x ]).sequence(Array)
+
+  t.ok(isSameType(Array, arM), 'Provides an outer type of Array')
+  t.ok(isSameType(Identity, arM[0]), 'Provides an inner type of Identity')
+  t.equal(arM[0].valueOf(), x, 'Identity contains original inner value')
+
   t.end()
 })
 
@@ -501,13 +507,20 @@ test('Identity traverse with Apply function', t => {
 test('Identity traverse with Applicative TypeRep', t => {
   const x = true
   const res = 'result'
-  const fn = constant(MockCrock(res))
+  const fn = m => constant(m(res))
 
-  const m = Identity(x).traverse(MockCrock, fn)
+  const m = Identity(x).traverse(MockCrock, fn(MockCrock))
 
   t.ok(isSameType(MockCrock, m), 'Provides an outer type of MockCrock')
   t.ok(isSameType(Identity, m.valueOf()), 'Provides an inner type of Identity')
   t.equal(m.valueOf().valueOf(), res, 'Identity contains transformed value')
+
+  const ar = x => [ x ]
+  const arM = Identity(x).traverse(Array, fn(ar))
+
+  t.ok(isSameType(Array, arM), 'Provides an outer type of Array')
+  t.ok(isSameType(Identity, arM[0]), 'Provides an inner type of Identity')
+  t.equal(arM[0].valueOf(), res, 'Identity contains transformed value')
 
   t.end()
 })

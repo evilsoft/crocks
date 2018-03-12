@@ -174,6 +174,12 @@ test('array sequence with Applicative TypeRep', t => {
   t.ok(isSameType(Array, m.valueOf()), 'Provides an inner type of array')
   t.same(m.valueOf()[0], x, 'inner List contains original inner value')
 
+  const arM = sequence(Array, [ [ x ] ])
+
+  t.ok(isSameType(Array, arM), 'Provides an outer type of Array')
+  t.ok(isSameType(Array, arM[0]), 'Provides an inner type of Array')
+  t.same(arM[0][0], x, 'inner array contains original inner value')
+
   t.end()
 })
 
@@ -212,13 +218,20 @@ test('array traverse with Apply function', t => {
 test('array traverse with Applicative TypeRep', t => {
   const x = 'string'
   const res = 'result'
-  const fn = constant(MockCrock(res))
+  const fn = m => constant(m(res))
 
-  const m = traverse(MockCrock, fn, [ x ])
+  const m = traverse(MockCrock, fn(MockCrock), [ x ])
 
   t.ok(isSameType(MockCrock, m), 'Provides an outer type of MockCrock')
   t.ok(isSameType(Array, m.valueOf), 'Provides an inner type of Array')
   t.same(m.valueOf()[0], res, 'inner array contains original inner value')
+
+  const ar = Array.of
+  const arM = traverse(Array, fn(ar), [ x ])
+
+  t.ok(isSameType(Array, arM), 'Provides an outer type of Array')
+  t.ok(isSameType(Array, arM[0]), 'Provides an inner type of Array')
+  t.same(arM[0][0], res, 'inner array contains original inner value')
 
   t.end()
 })

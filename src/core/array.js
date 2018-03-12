@@ -7,7 +7,8 @@ const isFunction = require('./isFunction')
 const isSameType = require('./isSameType')
 const apOrFunc = require('./apOrFunc')
 
-const identity = x => x
+const identity =
+  x => x
 
 const concat =
   x => m => x.concat(m)

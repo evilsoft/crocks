@@ -913,6 +913,17 @@ test('Result sequence with Applicative TypeRep', t => {
   t.ok(isSameType(Result, e.valueOf()), 'Provides an inner type of Result')
   t.equal(e.valueOf().either(identity, constant(0)), 'Err', 'Result contains original Err value')
 
+  const arO = Ok([ x ]).sequence(Array)
+  const arE = Err('Err').sequence(Array)
+
+  t.ok(isSameType(Array, arO), 'Provides an outer type of Array')
+  t.ok(isSameType(Result, arO[0]), 'Provides an inner type of Result')
+  t.equal(arO[0].either(constant(0), identity), x, 'Result contains original inner value')
+
+  t.ok(isSameType(Array, arE), 'Provides an outer type of Array')
+  t.ok(isSameType(Result, arE[0]), 'Provides an inner type of Result')
+  t.equal(arE[0].either(identity, constant(0)), 'Err', 'Result contains original Err value')
+
   t.end()
 })
 
@@ -982,11 +993,11 @@ test('Result traverse with Apply function', t => {
 
   const x = 98
   const res = 'result'
-  const fn = constant(MockCrock(res))
+  const fn = m => constant(m(res))
 
   const f = x => MockCrock(x)
-  const r = Ok(x).traverse(f, fn)
-  const l = Err('Err').traverse(f, fn)
+  const r = Ok(x).traverse(f, fn(MockCrock))
+  const l = Err('Err').traverse(f, fn(MockCrock))
 
   t.ok(isSameType(MockCrock, r), 'Provides an outer type of MockCrock')
   t.ok(isSameType(Result, r.valueOf()), 'Provides an inner type of Result')
@@ -997,12 +1008,12 @@ test('Result traverse with Apply function', t => {
   t.equal(l.valueOf().either(identity, constant(0)), 'Err', 'Result contains original Err value')
 
   const ar = x => [ x ]
-  const arO = Ok(x).traverse(ar, ar)
-  const arE = Err('Err').traverse(ar, ar)
+  const arO = Ok(x).traverse(ar, fn(ar))
+  const arE = Err('Err').traverse(ar, fn(ar))
 
   t.ok(isSameType(Array, arO), 'Provides an outer type of Array')
   t.ok(isSameType(Result, arO[0]), 'Provides an inner type of Result')
-  t.equal(arO[0].either(constant(0), identity), x, 'Result contains original inner value')
+  t.equal(arO[0].either(constant(0), identity), res, 'Result contains original inner value')
 
   t.ok(isSameType(Array, arE), 'Provides an outer type of Array')
   t.ok(isSameType(Result, arE[0]), 'Provides an inner type of Result')
@@ -1017,10 +1028,10 @@ test('Result traverse with Applicative TypeRep', t => {
 
   const x = 98
   const res = false
-  const fn = constant(MockCrock(res))
+  const fn = m => constant(m(res))
 
-  const r = Ok(x).traverse(MockCrock, fn)
-  const l = Err('Err').traverse(MockCrock, fn)
+  const r = Ok(x).traverse(MockCrock, fn(MockCrock))
+  const l = Err('Err').traverse(MockCrock, fn(MockCrock))
 
   t.ok(isSameType(MockCrock, r), 'Provides an outer type of MockCrock')
   t.ok(isSameType(Result, r.valueOf()), 'Provides an inner type of Result')
@@ -1029,6 +1040,18 @@ test('Result traverse with Applicative TypeRep', t => {
   t.ok(isSameType(MockCrock, l), 'Provides an outer type of MockCrock')
   t.ok(isSameType(Result, l.valueOf()), 'Provides an inner type of Result')
   t.equal(l.valueOf().either(identity, constant(0)), 'Err', 'Result contains original Err value')
+
+  const ar = x => [ x ]
+  const arO = Ok(x).traverse(Array, fn(ar))
+  const arE = Err('Err').traverse(Array, fn(ar))
+
+  t.ok(isSameType(Array, arO), 'Provides an outer type of Array')
+  t.ok(isSameType(Result, arO[0]), 'Provides an inner type of Result')
+  t.equal(arO[0].either(constant(0), identity), res, 'Result contains original inner value')
+
+  t.ok(isSameType(Array, arE), 'Provides an outer type of Array')
+  t.ok(isSameType(Result, arE[0]), 'Provides an inner type of Result')
+  t.equal(arE[0].either(identity, constant(0)), 'Err', 'Result contains original Err value')
 
   t.end()
 })

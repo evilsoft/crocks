@@ -882,9 +882,20 @@ test('Either sequence with Applicative TypeRep', t => {
   t.ok(isSameType(Either, r.valueOf()), 'Provides an inner type of Either')
   t.equal(r.valueOf().either(constant(0), identity), x, 'Either contains original inner value')
 
-  t.ok(isSameType(MockCrock, l), 'MockCrock', 'Provides an outer type of MockCrock')
+  t.ok(isSameType(MockCrock, l), 'Provides an outer type of MockCrock')
   t.ok(isSameType(Either, l.valueOf()), 'Provides an inner type of Either')
   t.equal(l.valueOf().either(identity, constant(0)), 'Left', 'Either contains original Left value')
+
+  const arR = Right([ x ]).sequence(Array)
+  const arL = Left('Left').sequence(Array)
+
+  t.ok(isSameType(Array, arR), 'Provides an outer type of Array')
+  t.ok(isSameType(Either, arR[0]), 'Provides an inner type of Either')
+  t.equal(arR[0].either(constant(0), identity), x, 'Either contains original inner value')
+
+  t.ok(isSameType(Array, arL), 'Provides an outer type of Array')
+  t.ok(isSameType(Either, arL[0]), 'Provides an inner type of Either')
+  t.equal(arL[0].either(identity, constant(0)), 'Left', 'Either contains original Left value')
 
   t.end()
 })
@@ -950,8 +961,7 @@ test('Either traverse errors', t => {
 })
 
 test('Either traverse with Apply function', t => {
-  const Right = Either.Right
-  const Left = Either.Left
+  const { Left, Right } = Either
 
   const x = 98
   const res = 'result'
@@ -985,16 +995,15 @@ test('Either traverse with Apply function', t => {
 })
 
 test('Either traverse with Applicative TypeRep', t => {
-  const Right = Either.Right
-  const Left = Either.Left
+  const { Left, Right } = Either
 
   const x = 98
   const res = 'result'
-  const fn = constant(MockCrock(res))
+  const fn = m => constant(m(res))
 
   const m = MockCrock
-  const r = Right(x).traverse(m, fn)
-  const l = Left('Left').traverse(m, fn)
+  const r = Right(x).traverse(m, fn(MockCrock))
+  const l = Left('Left').traverse(m, fn(MockCrock))
 
   t.ok(isSameType(MockCrock, r), 'Provides an outer type of MockCrock')
   t.ok(isSameType(Either, r.valueOf()), 'Provides an inner type of Either')
@@ -1003,6 +1012,18 @@ test('Either traverse with Applicative TypeRep', t => {
   t.ok(isSameType(MockCrock, l), 'Provides an outer type of MockCrock')
   t.ok(isSameType(Either, l.valueOf()), 'Provides an inner type of Either')
   t.equal(l.valueOf().either(identity, constant(0)), 'Left', 'Either contains original Left value')
+
+  const ar = x => [ x ]
+  const arR = Right(x).traverse(Array, fn(ar))
+  const arL = Left('Left').traverse(Array, fn(ar))
+
+  t.ok(isSameType(Array, arR), 'Provides an outer type of Array')
+  t.ok(isSameType(Either, arR[0]), 'Provides an inner type of Either')
+  t.equal(arR[0].either(constant(0), identity), res, 'Either contains transformed value')
+
+  t.ok(isSameType(Array, arL), 'Provides an outer type of Array')
+  t.ok(isSameType(Either, arL[0]), 'Provides an inner type of Either')
+  t.equal(arL[0].either(identity, constant(0)), 'Left', 'Either contains original Left value')
 
   t.end()
 })

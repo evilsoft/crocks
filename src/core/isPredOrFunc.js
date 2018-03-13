@@ -8,6 +8,6 @@ const isSameType = require('./isSameType')
 
 // isPredOrFunc :: ((a -> b) | pred) -> bool
 const isPredOrFunc = predOrFunc =>
-  !!predOrFunc && (isFunction(predOrFunc) || isSameType(Pred, predOrFunc))
+  isFunction(predOrFunc) || isSameType(Pred, predOrFunc)
 
 module.exports = isPredOrFunc

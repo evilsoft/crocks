@@ -1,16 +1,13 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const Pred = require('../core/types').proxy('Pred')
-
 const curry = require('../core/curry')
-const isFunction = require('../core/isFunction')
-const isSameType = require('../core/isSameType')
+const isPredOrFunc = require('../core/isPredOrFunc')
 const predOrFunc = require('../core/predOrFunc')
 
 // not : (a -> Boolean) | Pred -> a -> Boolean
 function not(pred, x) {
-  if(!(isFunction(pred) || isSameType(Pred, pred))) {
+  if(!isPredOrFunc(pred)) {
     throw new TypeError(
       'not: Pred or predicate function required for first argument'
     )

@@ -692,6 +692,17 @@ test('Maybe sequence with Applicative TypeRep', t => {
   t.ok(isSameType(Maybe, n.valueOf()), 'Provides an inner type of Maybe')
   t.equal(n.valueOf().option('Nothing'), 'Nothing', 'Reports as a Nothing')
 
+  const arS = Maybe.Just([ x ]).sequence(Array)
+  const arN = Maybe.Nothing().sequence(Array)
+
+  t.ok(isSameType(Array, arS), 'Provides an outer type of Array')
+  t.ok(isSameType(Maybe, arS[0]), 'Provides an inner type of Maybe')
+  t.same(arS[0].option('Nothing'), x, 'Maybe contains original inner value')
+
+  t.ok(isSameType(Array, arN), 'Provides an outer type of MockCrock')
+  t.ok(isSameType(Maybe, arN[0]), 'Provides an inner type of Maybe')
+  t.equal(arN[0].option('Nothing'), 'Nothing', 'Reports as a Nothing')
+
   t.end()
 })
 
@@ -788,10 +799,10 @@ test('Maybe traverse with Apply function', t => {
 test('Maybe traverse with Applicative TypeRep', t => {
   const x = 'bubbles'
   const res = 'result'
-  const fn = constant(MockCrock(res))
+  const fn = m => constant(m(res))
 
-  const r = Maybe.Just(x).traverse(MockCrock, fn)
-  const l = Maybe.Nothing().traverse(MockCrock, fn)
+  const r = Maybe.Just(x).traverse(MockCrock, fn(MockCrock))
+  const l = Maybe.Nothing().traverse(MockCrock, fn(MockCrock))
 
   t.ok(isSameType(MockCrock, r), 'Just provides an outer type of MockCrock')
   t.ok(isSameType(Maybe, r.valueOf()), 'Just provides an inner type of Maybe')
@@ -800,6 +811,18 @@ test('Maybe traverse with Applicative TypeRep', t => {
   t.ok(isSameType(MockCrock, l), 'Nothing provides an outer type of MockCrock')
   t.ok(isSameType(Maybe, l.valueOf()), 'Nothing provides an inner type of Maybe')
   t.equal(l.valueOf().option('Nothing'), 'Nothing', 'Maybe is a Nothing')
+
+  const ar = x => [ x ]
+  const arS = Maybe.Just(x).traverse(Array, fn(ar))
+  const arN = Maybe.Nothing().traverse(Array, fn(ar))
+
+  t.ok(isSameType(Array, arS), 'Just provides an outer type of Array')
+  t.ok(isSameType(Maybe, arS[0]), 'Just provides an inner type of Maybe')
+  t.same(arS[0].option('Nothing'), res, 'Maybe contains transformed value')
+
+  t.ok(isSameType(Array, arN), 'Nothing provides an outer type of MockCrock')
+  t.ok(isSameType(Maybe, arN[0]), 'Nothing provides an inner type of Maybe')
+  t.equal(arN[0].option('Nothing'), 'Nothing', 'Reports as a Nothing')
 
   t.end()
 })

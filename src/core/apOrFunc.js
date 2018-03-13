@@ -2,8 +2,11 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const isApplicative = require('./isApplicative')
+const isTypeRepOf = require('./isTypeRepOf')
 
 const apOrFunc = af => x =>
-  isApplicative(af) ? af.of(x) : af(x)
+  isApplicative(af)
+    ? af.of(x)
+    : isTypeRepOf(Array, af) ? [ x ] : af(x)
 
 module.exports = apOrFunc

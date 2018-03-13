@@ -1,13 +1,11 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const Pred = require('../core/types').proxy('Pred')
-
 const curry = require('../core/curry')
 const isArray = require('../core/isArray')
+const isPredOrFunc = require('../core/isPredOrFunc')
 const isFunction = require('../core/isFunction')
 const isObject = require('../core/isObject')
-const isSameType = require('../core/isSameType')
 const object = require('../core/object')
 const predOrFunc = require('../core/predOrFunc')
 
@@ -16,7 +14,7 @@ const not =
 
 // reject : Foldable f => (a -> Boolean) -> f a -> f a
 function reject(pred, m) {
-  if(!(isFunction(pred) || isSameType(Pred, pred))) {
+  if(!isPredOrFunc(pred)) {
     throw new TypeError(
       'reject: Pred or predicate function required for first argument'
     )

@@ -557,6 +557,12 @@ test('Pair sequence with Applicative TypeRep', t => {
   t.ok(isSameType(Pair, s.valueOf()), 'Provides an inner type of Pair')
   t.same(s.valueOf().snd(), x, 'Pair contains original inner value')
 
+  const arS = Pair([], [ x ]).sequence(Array)
+
+  t.ok(isSameType(Array, arS), 'Provides an outer type of Array')
+  t.ok(isSameType(Pair, arS[0]), 'Provides an inner type of Pair')
+  t.same(arS[0].snd(), x, 'Pair contains original inner value')
+
   t.end()
 })
 
@@ -605,7 +611,6 @@ test('Pair traverse with Apply function', t => {
   t.ok(isSameType(Pair, p.valueOf()), 'Provides an inner type of Pair')
   t.equal(p.valueOf().snd(), res, 'Pair contains transformed value')
 
-
   const ar = x => [ x ]
   const arS = Pair([], x).traverse(ar, fn(ar))
 
@@ -619,13 +624,20 @@ test('Pair traverse with Apply function', t => {
 test('Pair traverse with Applicative TypeRep', t => {
   const x = 'blue'
   const res = 'result'
-  const fn = constant(MockCrock(res))
+  const fn = m => constant(m(res))
 
-  const p = Pair([], x).traverse(MockCrock, fn)
+  const p = Pair([], x).traverse(MockCrock, fn(MockCrock))
 
   t.ok(isSameType(MockCrock, p), 'Provides an outer type of MockCrock')
   t.ok(isSameType(Pair, p.valueOf()), 'Provides an inner type of Pair')
   t.equal(p.valueOf().snd(), res, 'Pair contains transformed value')
+
+  const ar = x => [ x ]
+  const arS = Pair([], x).traverse(Array, fn(ar))
+
+  t.ok(isSameType(Array, arS), 'Provides an outer type of Array')
+  t.ok(isSameType(Pair, arS[0]), 'Provides an inner type of Pair')
+  t.same(arS[0].snd(), res, 'Pair contains transformed value')
 
   t.end()
 })

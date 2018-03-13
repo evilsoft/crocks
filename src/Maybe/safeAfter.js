@@ -1,15 +1,13 @@
-const Pred = require('../core/types').proxy('Pred')
-const Maybe = require('../core/Maybe')
+const { Just, Nothing } = require('../core/Maybe')
 
 const curry = require('../core/curry')
+const isPredOrFunc = require('../core/isPredOrFunc')
 const isFunction = require('../core/isFunction')
 const predOrFunc = require('../core/predOrFunc')
-const isSameType = require('../core/isSameType')
-const { Just, Nothing } = Maybe
 
 // safeAfter :: ((b -> Boolean) | Pred) -> (a -> b) -> a -> Maybe b
 function safeAfter(pred, fn) {
-  if(!(isFunction(pred) || isSameType(Pred, pred))) {
+  if(!isPredOrFunc(pred)) {
     throw new TypeError('safeAfter: Pred or predicate function required for first argument')
   }
   if(!isFunction(fn)) {

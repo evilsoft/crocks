@@ -136,6 +136,15 @@
       "contributions": [
         "example"
       ]
+    },
+    {
+      "login": "ximenean",
+      "name": "Andrew Jones",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/5243925?v=4",
+      "profile": "https://github.com/ximenean",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "repoType": "github"

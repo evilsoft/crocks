@@ -86,7 +86,7 @@ Const ~> Const -> Const
 #### chain
 
 ```haskell
-Min ~> () -> Number
+Const ~> (a -> b) -> Const
 ```
 
 ```javascript
@@ -95,16 +95,16 @@ Min ~> () -> Number
 #### concat
 
 ```haskell
-Min ~> () -> Number
+Const ~> Const -> Const
 ```
 
 ```javascript
 ```
 
-#### equal
+#### equals
 
 ```haskell
-Min ~> () -> Number
+Const ~> Const -> Boolean
 ```
 
 ```javascript
@@ -113,7 +113,7 @@ Min ~> () -> Number
 #### map
 
 ```haskell
-Min ~> () -> Number
+Const ~> (a -> b) -> Const
 ```
 
 ```javascript

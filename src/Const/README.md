@@ -8,7 +8,7 @@ weight: 80
 ```haskell
 Const c _
 ```
-`Const` a unary function which creates a simple Product type which evaluates to
+`Const` a unary function which creates a simple Product type that evaluates to
 `c` for all inputs ignoring its right side. 
 `Const` is a `chainable` that will take any value `c` and regardless of the 
 function called on it will return a new `Const` with the value `c`.
@@ -66,7 +66,7 @@ resetField(changed)
 ## Implements
 
 ```javascript
-// TBD methods " 'ap', 'chain', 'concat', 'equals', 'map'  "
+// TBD - methods are " 'ap', 'chain', 'concat', 'equals', 'map'  "
 ```
 </article>
 
@@ -77,19 +77,55 @@ resetField(changed)
 #### ap
 
 ```haskell
-Const ~> Const -> Const
+Const (a -> b) ~> Const a -> Const (a -> b)
 ```
 
+Short for apply, `ap` is normally used to apply a `Const` instance containing a 
+value to another `Const` instance that contains a function, resulting in new 
+`Const` instance with the result. However, due to the unique nature of `Const`
+the function will remain the active value in the `Const`.
+
 ```javascript
+import { Const } from 'crocks'
+
+// prod :: Number -> Number -> Number
+const prod = x => y => x * y
+
+// Const -> Const
+Const(prod)
+  .ap(Const(5))
+  .ap(Const(27))
+//=> Const prod
 ```
 
 #### chain
 
 ```haskell
-Const ~> (a -> b) -> Const
+Const a ~> (a -> Const b) -> Const a
 ```
 
+Combining a sequential series of transformations that capture disjunction can 
+beaccomplished with `chain`. `chain` expects a unary, `Const` returning 
+function as its argument. When invoked the inner value will not be passed to 
+provided function. A new `Const` will be returned with the same inner value.
+
 ```javascript
+import { Const, compose } from 'crocks'
+
+// prod :: Number -> Number -> Number
+const prod = x => y => x * y
+
+const doubleAndFreeze =
+  compose(Const, prod(2))
+
+doubleAndFreeze(7)
+//=> Const 14
+
+Const('initial')
+  .map(x => x + x)
+  .chain(doubleAndFreeze)
+//=> Const 'initial'
+
 ```
 
 #### concat

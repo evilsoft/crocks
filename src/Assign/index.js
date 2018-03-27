@@ -6,6 +6,7 @@ const VERSION = 1
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
 const _object = require('../core/object')
+const _equals = require('../core/equals')
 
 const type = require('../core/types').type('Assign')
 const _type = require('../core/types').typeFn(type(), VERSION)
@@ -34,6 +35,10 @@ function Assign(o) {
   const inspect =
     () => `Assign${_inspect(valueOf())}`
 
+  const equals =
+    m => isSameType(Assign, m)
+      && _equals(x, m.valueOf())
+
   function concat(m) {
     if(!isSameType(Assign, m)) {
       throw new TypeError('Assign.concat: Assign required')
@@ -44,7 +49,8 @@ function Assign(o) {
 
   return {
     inspect, toString: inspect,
-    valueOf, type, concat, empty,
+    valueOf, equals, type, concat, empty,
+    [fl.equals]: equals,
     [fl.empty]: empty,
     [fl.concat]: concat,
     ['@@type']: _type,
@@ -53,7 +59,7 @@ function Assign(o) {
 }
 
 Assign['@@implements'] = _implements(
-  [ 'concat', 'empty' ]
+  [ 'concat', 'empty', 'equals' ]
 )
 
 Assign.empty = _empty

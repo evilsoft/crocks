@@ -1,4 +1,5 @@
 const test = require('tape')
+const MockCrock = require('../test/MockCrock')
 const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
@@ -49,6 +50,7 @@ test('Assign fantasy-land api', t => {
 
   t.equals(m['fantasy-land/empty'], m.empty, 'is same function as public instance empty')
   t.equals(m['fantasy-land/concat'], m.concat, 'is same function as public instance concat')
+  t.equals(m['fantasy-land/equals'], m.equals, 'is same function as public instance concat')
 
   t.end()
 })
@@ -58,7 +60,7 @@ test('Assign @@implements', t => {
 
   t.equal(f('concat'), true, 'implements concat func')
   t.equal(f('empty'), true, 'implements empty func')
-
+  t.equal(f('equals'), true, 'implements equals')
   t.end()
 })
 
@@ -98,6 +100,21 @@ test('Assign type', t => {
 test('Assign @@type', t => {
   t.equal(Assign({})['@@type'], Assign['@@type'], 'static and instance versions are the same')
   t.equal(Assign({})['@@type'], 'crocks/Assign@1', 'reports crocks/Assign@1')
+
+  t.end()
+})
+
+test('Assign equals properties (Setoid)', t => {
+  const a = Assign({ a: 5 })
+  const b = Assign({ a: 5 })
+  const c = Assign({ a: 'not' })
+  const d = Assign({ a: 5 })
+
+  t.ok(isFunction(Assign({}).equals), 'provides an equals function')
+  t.equal(a.equals(a), true, 'reflexivity')
+  t.equal(a.equals(b), b.equals(a), 'symmetry (equal)')
+  t.equal(a.equals(c), c.equals(a), 'symmetry (!equal)')
+  t.equal(a.equals(b) && b.equals(d), a.equals(d), 'transitivity')
 
   t.end()
 })
@@ -173,6 +190,22 @@ test('Assign empty functionality', t => {
 
   t.equal(x.type(), 'Assign', 'provides an Assign')
   t.same(x.valueOf(), {}, 'wraps an empty object')
+
+  t.end()
+})
+
+test('Assign equals functionality', t => {
+  const a = Assign({ a: { b: 10 } })
+  const b = Assign({ a: { b: 10 } })
+  const c = Assign({})
+
+  const value = {}
+  const nonAssign = MockCrock(value)
+
+  t.equal(a.equals(c), false, 'returns false when 2 Assigns are not equal')
+  t.equal(a.equals(b), true, 'returns true when 2 Assigns are equal')
+  t.equal(a.equals(nonAssign), false, 'returns false when passed a non-Assign')
+  t.equal(c.equals(value), false, 'returns false when passed a simple value')
 
   t.end()
 })

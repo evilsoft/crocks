@@ -5,6 +5,7 @@ const VERSION = 1
 
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
+const _equals = require('../core/equals')
 const type = require('../core/types').type('All')
 const _type = require('../core/types').typeFn(type(), VERSION)
 const fl = require('../core/flNames')
@@ -29,6 +30,10 @@ function All(b) {
   const empty =
     _empty
 
+  const equals =
+    m => isSameType(All, m)
+      && _equals(x, m.valueOf())
+
   const inspect =
     () => `All${_inspect(valueOf())}`
 
@@ -42,8 +47,9 @@ function All(b) {
 
   return {
     inspect, toString: inspect,
-    valueOf, type, concat, empty,
+    valueOf, type, concat, empty, equals,
     ['@@type']: _type,
+    [fl.equals]: equals,
     [fl.concat]: concat,
     [fl.empty]: empty,
     constructor: All
@@ -51,7 +57,7 @@ function All(b) {
 }
 
 All['@@implements'] = _implements(
-  [ 'concat', 'empty' ]
+  [ 'concat', 'empty', 'equals' ]
 )
 
 All.empty = _empty

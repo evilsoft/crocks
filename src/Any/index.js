@@ -5,6 +5,7 @@ const VERSION = 1
 
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
+const _equals = require('../core/equals')
 const type = require('../core/types').type('Any')
 const _type = require('../core/types').typeFn(type(), VERSION)
 const fl = require('../core/flNames')
@@ -32,6 +33,10 @@ function Any(b) {
   const inspect =
     () => `Any${_inspect(valueOf())}`
 
+  const equals =
+    m => isSameType(Any, m)
+      && _equals(x, m.valueOf())
+
   function concat(m) {
     if(!isSameType(Any, m)) {
       throw new TypeError('Any.concat: Any required')
@@ -41,17 +46,18 @@ function Any(b) {
   }
 
   return {
-    inspect, toString: inspect,
+    inspect, toString: inspect, equals,
     valueOf, type, concat, empty,
     ['@@type']: _type,
     [fl.concat]: concat,
     [fl.empty]: empty,
+    [fl.equals]: equals,
     constructor: Any
   }
 }
 
 Any['@@implements'] = _implements(
-  [ 'concat', 'empty' ]
+  [ 'concat', 'empty', 'equals' ]
 )
 
 Any.empty = _empty

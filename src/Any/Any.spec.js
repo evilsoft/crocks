@@ -1,4 +1,5 @@
 const test = require('tape')
+const MockCrock = require('../test/MockCrock')
 const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
@@ -49,6 +50,7 @@ test('Any fantasy-land api', t => {
 
   t.equals(m['fantasy-land/empty'], m.empty, 'is same function as public instance empty')
   t.equals(m['fantasy-land/concat'], m.concat, 'is same function as public instance concat')
+  t.equals(m['fantasy-land/equals'], m.equals, 'is same function as public instance concat')
 
   t.end()
 })
@@ -58,6 +60,7 @@ test('Any @@implements', t => {
 
   t.equal(f('concat'), true, 'implements concat func')
   t.equal(f('empty'), true, 'implements empty func')
+  t.equal(f('equals'), true, 'implements equals')
 
   t.end()
 })
@@ -163,11 +166,42 @@ test('Any empty properties (Monoid)', t => {
   t.end()
 })
 
+test('Any equals properties (Setoid)', t => {
+  const a = Any(true)
+  const b = Any(true)
+  const c = Any(false)
+  const d = Any(true)
+
+  t.ok(isFunction(Any({}).equals), 'provides an equals function')
+  t.equal(a.equals(a), true, 'reflexivity')
+  t.equal(a.equals(b), b.equals(a), 'symmetry (equal)')
+  t.equal(a.equals(c), c.equals(a), 'symmetry (!equal)')
+  t.equal(a.equals(b) && b.equals(d), a.equals(d), 'transitivity')
+
+  t.end()
+})
+
 test('Any empty functionality', t => {
   const x = Any(0).empty()
 
   t.equal(x.type(), 'Any', 'provides an Any')
   t.equal(x.valueOf(), false, 'wraps a false value')
+
+  t.end()
+})
+
+test('Any equals functionality', t => {
+  const a = Any(true)
+  const b = Any(true)
+  const c = Any(false)
+
+  const value = {}
+  const nonAny = MockCrock(value)
+
+  t.equal(a.equals(c), false, 'returns false when 2 Any are not equal')
+  t.equal(a.equals(b), true, 'returns true when 2 Any are equal')
+  t.equal(a.equals(nonAny), false, 'returns false when passed a non-Any')
+  t.equal(c.equals(value), false, 'returns false when passed a simple value')
 
   t.end()
 })

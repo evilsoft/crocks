@@ -202,11 +202,11 @@ test('Max equals functionality', t => {
   const c = Max(5)
 
   const value = 5
-  const nonAssign = MockCrock(value)
+  const nonMax = MockCrock(value)
 
-  t.equal(a.equals(c), false, 'returns false when 2 Assigns are not equal')
-  t.equal(a.equals(b), true, 'returns true when 2 Assigns are equal')
-  t.equal(a.equals(nonAssign), false, 'returns false when passed a non-Assign')
+  t.equal(a.equals(c), false, 'returns false when 2 Maxs are not equal')
+  t.equal(a.equals(b), true, 'returns true when 2 Maxs are equal')
+  t.equal(a.equals(nonMax), false, 'returns false when passed a non-Max')
   t.equal(c.equals(value), false, 'returns false when passed a simple value')
 
   t.end()

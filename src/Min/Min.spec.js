@@ -202,11 +202,11 @@ test('Min equals functionality', t => {
   const c = Min(5)
 
   const value = 5
-  const nonAssign = MockCrock(value)
+  const nonMin = MockCrock(value)
 
-  t.equal(a.equals(c), false, 'returns false when 2 Assigns are not equal')
-  t.equal(a.equals(b), true, 'returns true when 2 Assigns are equal')
-  t.equal(a.equals(nonAssign), false, 'returns false when passed a non-Assign')
+  t.equal(a.equals(c), false, 'returns false when 2 Mins are not equal')
+  t.equal(a.equals(b), true, 'returns true when 2 Mins are equal')
+  t.equal(a.equals(nonMin), false, 'returns false when passed a non-Min')
   t.equal(c.equals(value), false, 'returns false when passed a simple value')
 
   t.end()

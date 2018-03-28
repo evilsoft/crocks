@@ -1,4 +1,5 @@
 const test= require('tape')
+const MockCrock = require('../test/MockCrock')
 const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
@@ -49,6 +50,7 @@ test('Prod fantasy-land api', t => {
 
   t.equals(m['fantasy-land/empty'], m.empty, 'is same function as public instance empty')
   t.equals(m['fantasy-land/concat'], m.concat, 'is same function as public instance concat')
+  t.equals(m['fantasy-land/equals'], m.equals, 'is same function as public instance equals')
 
   t.end()
 })
@@ -58,6 +60,7 @@ test('Prod @@implements', t => {
 
   t.equal(f('concat'), true, 'implements concat func')
   t.equal(f('empty'), true, 'implements empty func')
+  t.equal(f('equals'), true, 'implements equals')
 
   t.end()
 })
@@ -101,6 +104,21 @@ test('Prod @@type', t => {
 
   t.equal(m['@@type'], Prod['@@type'], 'static and instance versions are the same')
   t.equal(m['@@type'], 'crocks/Prod@1', 'reports crocks/Prod@1')
+
+  t.end()
+})
+
+test('Prod equals properties (Setoid)', t => {
+  const a = Prod(4)
+  const b = Prod(4)
+  const c = Prod(3)
+  const d = Prod(4)
+
+  t.ok(isFunction(Prod(4).equals), 'provides an equals function')
+  t.equal(a.equals(a), true, 'reflexivity')
+  t.equal(a.equals(b), b.equals(a), 'symmetry (equal)')
+  t.equal(a.equals(c), c.equals(a), 'symmetry (!equal)')
+  t.equal(a.equals(b) && b.equals(d), a.equals(d), 'transitivity')
 
   t.end()
 })
@@ -174,6 +192,22 @@ test('Prod empty functionality', t => {
 
   t.equal(x.type(), 'Prod', 'provides a Prod')
   t.equal(x.valueOf(), 1, 'wraps a 1')
+
+  t.end()
+})
+
+test('Prod equals functionality', t => {
+  const a = Prod(4)
+  const b = Prod(4)
+  const c = Prod(5)
+
+  const value = 5
+  const nonSum = MockCrock(value)
+
+  t.equal(a.equals(c), false, 'returns false when 2 Prods are not equal')
+  t.equal(a.equals(b), true, 'returns true when 2 Prods are equal')
+  t.equal(a.equals(nonSum), false, 'returns false when passed a non-Prod')
+  t.equal(c.equals(value), false, 'returns false when passed a simple value')
 
   t.end()
 })

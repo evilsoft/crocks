@@ -5,6 +5,7 @@ const VERSION = 1
 
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
+const _equals = require('../core/equals')
 const type = require('../core/types').type('Min')
 const _type = require('../core/types').typeFn(type(), VERSION)
 const fl = require('../core/flNames')
@@ -32,6 +33,10 @@ function Min(n) {
   const inspect =
     () => `Min${_inspect(valueOf())}`
 
+  const equals =
+    m => isSameType(Min, m)
+      && _equals(x, m.valueOf())
+
   function concat(m) {
     if(!isSameType(Min, m)) {
       throw new TypeError('Min.concat: Min required')
@@ -41,8 +46,9 @@ function Min(n) {
   }
 
   return {
-    inspect, toString: inspect, valueOf,
+    inspect, toString: inspect, valueOf, equals,
     type, concat, empty,
+    [fl.equals]: equals,
     [fl.empty]: empty,
     [fl.concat]: concat,
     ['@@type']: _type,
@@ -51,7 +57,7 @@ function Min(n) {
 }
 
 Min['@@implements'] = _implements(
-  [ 'concat', 'empty' ]
+  [ 'equals', 'concat', 'empty' ]
 )
 
 Min.empty = _empty

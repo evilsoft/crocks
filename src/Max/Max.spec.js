@@ -1,4 +1,5 @@
 const test = require('tape')
+const MockCrock = require('../test/MockCrock')
 const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
@@ -49,6 +50,7 @@ test('Max fantasy-land api', t => {
 
   t.equals(m['fantasy-land/empty'], m.empty, 'is same function as public instance empty')
   t.equals(m['fantasy-land/concat'], m.concat, 'is same function as public instance concat')
+  t.equals(m['fantasy-land/equals'], m.equals, 'is same function as public instance equals')
 
   t.end()
 })
@@ -58,6 +60,7 @@ test('Max @@implements', t => {
 
   t.equal(f('concat'), true, 'implements concat func')
   t.equal(f('empty'), true, 'implements empty func')
+  t.equal(f('equals'), true, 'implements equals')
 
   t.end()
 })
@@ -101,6 +104,21 @@ test('Max @@type', t => {
 
   t.equal(m['@@type'], Max['@@type'], 'static and instance versions are the same')
   t.equal(m['@@type'], 'crocks/Max@1', 'reports crocks/Max@1')
+
+  t.end()
+})
+
+test('Max equals properties (Setoid)', t => {
+  const a = Max(4)
+  const b = Max(4)
+  const c = Max(3)
+  const d = Max(4)
+
+  t.ok(isFunction(Max(4).equals), 'provides an equals function')
+  t.equal(a.equals(a), true, 'reflexivity')
+  t.equal(a.equals(b), b.equals(a), 'symmetry (equal)')
+  t.equal(a.equals(c), c.equals(a), 'symmetry (!equal)')
+  t.equal(a.equals(b) && b.equals(d), a.equals(d), 'transitivity')
 
   t.end()
 })
@@ -174,6 +192,22 @@ test('Max empty functionality', t => {
 
   t.equal(x.type(), 'Max', 'provides a Max')
   t.equal(x.valueOf(), -Infinity, 'wraps a -Infinity')
+
+  t.end()
+})
+
+test('Max equals functionality', t => {
+  const a = Max(4)
+  const b = Max(4)
+  const c = Max(5)
+
+  const value = 5
+  const nonAssign = MockCrock(value)
+
+  t.equal(a.equals(c), false, 'returns false when 2 Assigns are not equal')
+  t.equal(a.equals(b), true, 'returns true when 2 Assigns are equal')
+  t.equal(a.equals(nonAssign), false, 'returns false when passed a non-Assign')
+  t.equal(c.equals(value), false, 'returns false when passed a simple value')
 
   t.end()
 })

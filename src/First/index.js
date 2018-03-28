@@ -5,6 +5,7 @@ const VERSION = 1
 
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
+const _equals = require('../core/equals')
 const type = require('../core/types').type('First')
 const _type = require('../core/types').typeFn(type(), VERSION)
 const fl = require('../core/flNames')
@@ -30,6 +31,10 @@ function First(x) {
   const inspect =
     () => `First(${_inspect(maybe)} )`
 
+  const equals =
+  m => isSameType(First, m)
+    && _equals(maybe, m.valueOf())
+
   const valueOf =
     () => maybe
 
@@ -50,9 +55,10 @@ function First(x) {
   }
 
   return {
-    inspect, toString: inspect,
+    inspect, toString: inspect, equals,
     concat, empty, option, type,
     valueOf,
+    [fl.equals]: equals,
     [fl.empty]: _empty,
     [fl.concat]: concat,
     ['@@type']: _type,
@@ -61,7 +67,7 @@ function First(x) {
 }
 
 First['@@implements'] = _implements(
-  [ 'concat', 'empty' ]
+  [ 'equals', 'concat', 'empty' ]
 )
 
 First.empty = _empty

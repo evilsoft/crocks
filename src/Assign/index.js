@@ -48,8 +48,8 @@ function Assign(o) {
   }
 
   return {
-    inspect, toString: inspect,
-    valueOf, equals, type, concat, empty,
+    inspect, toString: inspect, valueOf,
+    equals, type, concat, empty,
     [fl.equals]: equals,
     [fl.empty]: empty,
     [fl.concat]: concat,
@@ -59,7 +59,7 @@ function Assign(o) {
 }
 
 Assign['@@implements'] = _implements(
-  [ 'concat', 'empty', 'equals' ]
+  [ 'equals', 'concat', 'empty' ]
 )
 
 Assign.empty = _empty

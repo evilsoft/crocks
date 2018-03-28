@@ -55,9 +55,8 @@ function First(x) {
   }
 
   return {
-    inspect, toString: inspect, equals,
-    concat, empty, option, type,
-    valueOf,
+    inspect, toString: inspect, valueOf,
+    equals, concat, empty, option, type,
     [fl.equals]: equals,
     [fl.empty]: _empty,
     [fl.concat]: concat,

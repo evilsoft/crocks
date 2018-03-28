@@ -46,8 +46,8 @@ function Min(n) {
   }
 
   return {
-    inspect, toString: inspect, valueOf, equals,
-    type, concat, empty,
+    inspect, toString: inspect, valueOf,
+    equals, type, concat, empty,
     [fl.equals]: equals,
     [fl.empty]: empty,
     [fl.concat]: concat,

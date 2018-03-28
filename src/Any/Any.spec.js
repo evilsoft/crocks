@@ -198,8 +198,8 @@ test('Any equals functionality', t => {
   const value = {}
   const nonAny = MockCrock(value)
 
-  t.equal(a.equals(c), false, 'returns false when 2 Any are not equal')
-  t.equal(a.equals(b), true, 'returns true when 2 Any are equal')
+  t.equal(a.equals(c), false, 'returns false when 2 Anys are not equal')
+  t.equal(a.equals(b), true, 'returns true when 2 Anys are equal')
   t.equal(a.equals(nonAny), false, 'returns false when passed a non-Any')
   t.equal(c.equals(value), false, 'returns false when passed a simple value')
 

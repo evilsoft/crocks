@@ -46,18 +46,18 @@ function Any(b) {
   }
 
   return {
-    inspect, toString: inspect, equals,
-    valueOf, type, concat, empty,
+    inspect, toString: inspect, valueOf,
+    equals, type, concat, empty,
     ['@@type']: _type,
+    [fl.equals]: equals,
     [fl.concat]: concat,
     [fl.empty]: empty,
-    [fl.equals]: equals,
     constructor: Any
   }
 }
 
 Any['@@implements'] = _implements(
-  [ 'concat', 'empty', 'equals' ]
+  [ 'equals', 'concat', 'empty' ]
 )
 
 Any.empty = _empty

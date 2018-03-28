@@ -46,8 +46,8 @@ function All(b) {
   }
 
   return {
-    inspect, toString: inspect,
-    valueOf, type, concat, empty, equals,
+    inspect, toString: inspect, valueOf,
+    equals, type, concat, empty,
     ['@@type']: _type,
     [fl.equals]: equals,
     [fl.concat]: concat,
@@ -57,7 +57,7 @@ function All(b) {
 }
 
 All['@@implements'] = _implements(
-  [ 'concat', 'empty', 'equals' ]
+  [ 'equals', 'concat', 'empty' ]
 )
 
 All.empty = _empty

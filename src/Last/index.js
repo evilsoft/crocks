@@ -58,8 +58,8 @@ function Last(x) {
   }
 
   return {
-    inspect, toString: inspect, concat, equals,
-    empty, option, type, valueOf,
+    inspect, toString: inspect, concat,
+    equals, empty, option, type, valueOf,
     [fl.equals]: equals,
     [fl.empty]: empty,
     [fl.concat]: concat,

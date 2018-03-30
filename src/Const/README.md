@@ -6,14 +6,14 @@ weight: 80
 ---
 
 ```haskell
-Const c _
+Const c a
 ```
 `Const` a unary function which creates a simple Product type that evaluates to
 `c` for all inputs ignoring its right side. 
 `Const` is a `chainable` that will take any value `c` and regardless of the 
 function called on it will return a new `Const` with the value `c`.
 
-### Contrived Examples
+### Example
 ```javascript
 import Const from 'crocks/Const'
 
@@ -27,16 +27,21 @@ days.map(Const).reduce((acc, c) => acc.concat(c))
 
 Const(100)
   .concat(Const(10))
-//=> Min 100
+//=> Const 100
 
 Const('Hello')
   .map(x => x + x)
 //=> Const 'Hello'
 ```
 
-### Real-world example
+### Example 2
 ```javascript
-const { Pair, Const, compose, extend, fst, valueOf } = require('crocks')
+import Const from 'crocks/Const'
+import Pair from 'crocks/Pair'
+import compose from 'crocks/helpers/compose'
+import extend from 'crocks/pointfree/extend'
+import fst from 'crocks/Pair/fst'
+import valueOf from 'crocks/pointfree/valueOf'
 
 // toLower :: String -> String
 const toLower =
@@ -74,10 +79,37 @@ resetField(changed)
 
 ## Instance Methods
 
+#### equals
+
+```haskell
+Const c a ~> b -> Boolean
+```
+
+```javascript
+```
+
+#### concat
+
+```haskell
+Const c a ~> Const c a -> Const c a
+```
+
+```javascript
+```
+
+#### map
+
+```haskell
+Const c a ~> (a -> b) -> Const c b
+```
+
+```javascript
+```
+
 #### ap
 
 ```haskell
-Const (a -> b) ~> Const a -> Const (a -> b)
+Const c (a -> b) ~> Const c a -> Const c b
 ```
 
 Short for apply, `ap` is normally used to apply a `Const` instance containing a 
@@ -101,11 +133,11 @@ Const(prod)
 #### chain
 
 ```haskell
-Const a ~> (a -> Const b) -> Const a
+Const c a ~> (a -> Const c b) -> Const c b
 ```
 
 Combining a sequential series of transformations that capture disjunction can 
-beaccomplished with `chain`. `chain` expects a unary, `Const` returning 
+be accomplished with `chain`. `chain` expects a unary, `Const` returning 
 function as its argument. When invoked the inner value will not be passed to 
 provided function. A new `Const` will be returned with the same inner value.
 
@@ -126,33 +158,6 @@ Const('initial')
   .chain(doubleAndFreeze)
 //=> Const 'initial'
 
-```
-
-#### concat
-
-```haskell
-Const ~> Const -> Const
-```
-
-```javascript
-```
-
-#### equals
-
-```haskell
-Const ~> Const -> Boolean
-```
-
-```javascript
-```
-
-#### map
-
-```haskell
-Const ~> (a -> b) -> Const
-```
-
-```javascript
 ```
 
 </article>

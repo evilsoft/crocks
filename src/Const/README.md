@@ -85,7 +85,23 @@ resetField(changed)
 Const c a ~> b -> Boolean
 ```
 
+Used to compare the underlying values of (2) `Const` instances for equality by
+value, `equals` takes any given argument and returns `true` if the passed
+arguments is a `Const` with an underlying `left` value equal to the underlying value
+of the `Const` the method is being called on. If the passed argument is not
+a `Const` or the underlying values are not equal, `equals` will return `false`.
+
 ```javascript
+import { Const } from 'crocks'
+
+const two = Const(2)
+const four = Const(4)
+
+two.equals(four)
+//=> false
+
+two.equals(Const(2))
+//=> Const 2
 ```
 
 #### concat
@@ -94,7 +110,18 @@ Const c a ~> b -> Boolean
 Const c a ~> Const c a -> Const c a
 ```
 
+`concat` is used to combine (2) `Semigroup`s of the same type under an operation
+specified by the `Semigroup`. In the case of `Const`, it will return a new
+`Const` instance with the original value.
+
 ```javascript
+import { Const } from 'crocks'
+
+const two = Const(2)
+const four = Const(4)
+
+two.concat(four)
+//=> Const 2
 ```
 
 #### map
@@ -157,7 +184,5 @@ Const('initial')
   .map(x => x + x)
   .chain(doubleAndFreeze)
 //=> Const 'initial'
-
 ```
-
 </article>

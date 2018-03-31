@@ -8,10 +8,10 @@ weight: 80
 ```haskell
 Const c a
 ```
-`Const` a unary function which creates a simple Product type that evaluates to
-`c` for all inputs ignoring its right side. 
+`Const` is a function that takes a single value and returns a `Product` type
+that ignores its right side. 
 `Const` is a `chainable` that will take any value `c` and regardless of the 
-function called on it will return a new `Const` with the value `c`.
+method called on it will return a new `Const` with the value `c`.
 
 ### Example
 ```javascript
@@ -33,46 +33,11 @@ Const('Hello')
   .map(x => x + x)
 //=> Const 'Hello'
 ```
-
-### Example 2
-```javascript
-import Const from 'crocks/Const'
-import Pair from 'crocks/Pair'
-import compose from 'crocks/helpers/compose'
-import extend from 'crocks/pointfree/extend'
-import fst from 'crocks/Pair/fst'
-import valueOf from 'crocks/pointfree/valueOf'
-
-// toLower :: String -> String
-const toLower =
-  x => x.toLowerCase()
-
-// Field :: Pair (Const a) a
-// updateField :: a -> Field
-const updateField =
-  value => Pair(Const(value), value)
-
-// updateField :: Field -> Field
-const resetField =
-  extend(compose(valueOf, fst))
-
-const changed =
-  updateField('Joey')
-    .map(toLower)
-    .chain(updateField)
-//=> Pair( Const "Joey", "joey" )
-
-resetField(changed)
-//=> Pair( Const "Joey", "Joey" )
-```
-
 <article id="topic-implements">
 
 ## Implements
+`Functor`, `Apply`, `Chain`
 
-```javascript
-// TBD - methods are " 'ap', 'chain', 'concat', 'equals', 'map'  "
-```
 </article>
 
 <article id="topic-instance">
@@ -101,7 +66,7 @@ two.equals(four)
 //=> false
 
 two.equals(Const(2))
-//=> Const 2
+//=> True
 ```
 
 #### concat
@@ -115,13 +80,27 @@ specified by the `Semigroup`. In the case of `Const`, it will return a new
 `Const` instance with the original value.
 
 ```javascript
-import { Const } from 'crocks'
+import { Const, concat, map } from 'crocks'
 
-const two = Const(2)
-const four = Const(4)
+const account1 = { firstName: 'John', lastName: 'Doe', achievments: [ '112', '232', '154' ] }
+const account2 = { firstName: 'Jon', lastName: 'Doe', achievments: [ '767', '989' ] }
 
-two.concat(four)
-//=> Const 2
+const constMerge = xs =>
+  map(Const, xs)
+    .reduce(concat)
+    .valueOf()
+
+const reduceAccounts = (acc, cur) => ({
+  firstName: constMerge([ cur.firstName, acc.firstName ]),
+  lastName: constMerge([ cur.lastName, acc.lastName ]),
+  achievments: concat(cur.achievments, acc.achievments)
+})
+
+const mergeAccounts = accounts =>
+  accounts
+    .reduce(reduceAccounts)
+
+mergeAccounts([ account1, account2 ])
 ```
 
 #### map
@@ -130,7 +109,13 @@ two.concat(four)
 Const c a ~> (a -> b) -> Const c b
 ```
 
+In a `Product` type the left side is always fixed and the right side is mapped.
+Due to the unique property of `Const` any function that is passed in to `map`
+will be validated but it will not be evaluated. `map` will return a new `const`
+with the same left value.
+
 ```javascript
+
 ```
 
 #### ap
@@ -169,20 +154,33 @@ function as its argument. When invoked the inner value will not be passed to
 provided function. A new `Const` will be returned with the same inner value.
 
 ```javascript
-import { Const, compose } from 'crocks'
+import Const from 'crocks/Const'
+import Pair from 'crocks/Pair'
+import compose from 'crocks/helpers/compose'
+import extend from 'crocks/pointfree/extend'
+import fst from 'crocks/Pair/fst'
+import valueOf from 'crocks/pointfree/valueOf'
 
-// prod :: Number -> Number -> Number
-const prod = x => y => x * y
+// toLower :: String -> String
+const toLower =
+  x => x.toLowerCase()
 
-const doubleAndFreeze =
-  compose(Const, prod(2))
+// Field :: Pair (Const a) a
+// updateField :: a -> Field
+const updateField =
+  value => Pair(Const(value), value)
 
-doubleAndFreeze(7)
-//=> Const 14
+// updateField :: Field -> Field
+const resetField =
+  extend(compose(valueOf, fst))
 
-Const('initial')
-  .map(x => x + x)
-  .chain(doubleAndFreeze)
-//=> Const 'initial'
+const changed =
+  updateField('Joey')
+    .map(toLower)
+    .chain(updateField)
+//=> Pair( Const "Joey", "joey" )
+
+resetField(changed)
+//=> Pair( Const "Joey", "Joey" )
 ```
 </article>

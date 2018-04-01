@@ -19,7 +19,7 @@ but what they do from type to type may vary.
 |---|:---|:---|
 | [`Arrow`][arrow] | [`id`][arrow-id] | [`both`][arrow-both], [`compose`][arrow-compose], [`contramap`][arrow-contra],[`first`][arrow-first], [`map`][arrow-map], [`promap`][arrow-promap], [`runWith`][arrow-runwith], [`second`][arrow-second] |
 | [`Async`][async] | [`Rejected`][async-rejected], [`Resolved`][async-resolved], [`all`][async-all], [`fromNode`][async-fromnode], [`fromPromise`][async-frompromise], [`of`][async-of] | [`alt`][async-alt], [`ap`][async-ap], [`bimap`][async-bimap], [`chain`][async-chain], [`coalesce`][async-coalesce], [`fork`][async-fork], [`map`][async-map], [`of`][async-of], [`swap`][async-swap], [`toPromise`][async-topromise] |
-| `Const` | -- | `ap`, `chain`, `concat`, `equals`, `map`, `valueOf` |
+| [`Const`][const] | -- | [`ap`][const-ap], [`chain`][const-chain], [`concat`][const-concat], [`equals`][const-equals], [`map`][const-map], [`valueOf`][const-valueof] |
 | `Either` | `Left`, `Right`, `of`| `alt`, `ap`, `bimap`, `chain`, `coalesce`, `concat`, `either`, `equals`, `map`, `of`, `sequence`, `swap`, `traverse` |
 | [`Equiv`][equiv] | [`empty`][equiv-empty] | [`concat`][equiv-concat], [`contramap`][equiv-contra], [`compareWith`][equiv-compare], [`valueOf`][equiv-value] |
 | `Identity` | `of` | `ap`, `chain`, `concat`, `equals`, `map`, `of`, `sequence`, `traverse`, `valueOf` |
@@ -66,6 +66,14 @@ but what they do from type to type may vary.
 [async-of]: Async.html#of
 [async-swap]: Async.html#swap
 [async-topromise]: Async.html#topromise
+
+[const]: Const.html
+[const-equals]: Const.html#equals
+[const-concat]: Const.html#concat
+[const-map]: Const.html#map
+[const-ap]: Const.html#ap
+[const-chain]: Const.html#chain
+[const-valueof]: Const.html#value0f
 
 [equiv]: Equiv.html
 [equiv-empty]: Equiv.html#empty

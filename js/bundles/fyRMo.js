@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([10,31,32,33],[
+webpackJsonppageComponent([3,31,32,33],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -28368,12 +28368,19 @@ exports.default = parseFromAnchor;
 /* 234 */,
 /* 235 */,
 /* 236 */,
-/* 237 */
+/* 237 */,
+/* 238 */,
+/* 239 */,
+/* 240 */,
+/* 241 */,
+/* 242 */,
+/* 243 */,
+/* 244 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hGtUm", function() { return hGtUm; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fyRMo", function() { return fyRMo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28385,15 +28392,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var templates;
 goog.loadModule(function(exports) {
 
-// This file was automatically generated from Assign.soy.
+// This file was automatically generated from Sum.soy.
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace hGtUm.
+ * @fileoverview Templates in namespace fyRMo.
  * @public
  */
 
-goog.module('hGtUm.incrementaldom');
+goog.module('fyRMo.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28427,27 +28434,23 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var param1839 = function() {
-    $templateAlias2({code: 'Assign Object', mode: 'haskell'}, null, opt_ijData);
+  var param2305 = function() {
+    $templateAlias2({code: 'Sum Number', mode: 'haskell'}, null, opt_ijData);
     ie_open('p');
       ie_open('code');
-        itext('Assign');
+        itext('Sum');
       ie_close('code');
       itext(' is a ');
       ie_open('code');
         itext('Monoid');
       ie_close('code');
-      itext(' that will combine (2) objects under assignment using');
+      itext(' that will combine (2) ');
       ie_open('code');
-        itext('Object.assign');
+        itext('Number');
       ie_close('code');
-      itext(' on the (2) ');
-      ie_open('code');
-        itext('Object');
-      ie_close('code');
-      itext('s.');
+      itext('s under addition.');
     ie_close('p');
-    $templateAlias2({code: 'const Assign = require(\'crocks/Assign\')\n\nconst first = { name: \'Bob\' }\nconst last = { lastName: \'Smith\' }\n\nAssign(first)\n  .concat(Assign(last))\n//=> Assign { name: \'Bob\', lastName: \'Smith\' }', mode: 'javascript'}, null, opt_ijData);
+    $templateAlias2({code: 'import Sum from \'crocks/Sum\'\nimport mconcat from \'crocks/helpers/mconcat\'\nimport mconcatMap from \'crocks/helpers/mconcatMap\'\n\nSum(13)\n//=> Sum 13\n\nmconcat(Sum, [ 5, 2 ])\n//=> Sum 7\n\nSum(10)\n  .concat(Sum(10))\n//=> Sum 20\n\n// sumByTen :: [ Number ] -> Sum\nconst sumByTen =\n  mconcatMap(Sum, x => x * 10)\n\nsumByTen([ 2, 2 ])\n//=> Sum 40', mode: 'javascript'}, null, opt_ijData);
     ie_open('article', null, null,
         'id', 'topic-implements');
       ie_open('h2');
@@ -28476,14 +28479,14 @@ function $render(opt_data, opt_ignored, opt_ijData) {
           itext('Constructor Methods');
         ie_close('a');
       ie_close('h2');
-      ie_open('h4');
+      ie_open('h3');
         ie_open('a', null, null,
             'id', 'empty',
             'href', '#empty');
           itext('empty');
         ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Assign.empty :: () -> Assign', mode: 'haskell'}, null, opt_ijData);
+      ie_close('h3');
+      $templateAlias2({code: 'Sum.empty :: () -> Sum', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
         ie_open('code');
           itext('empty');
@@ -28496,17 +28499,17 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_open('code');
           itext('concat');
         ie_close('code');
-        itext('ed to object other value, it will return the other value. In the case of ');
+        itext('ed to any other value, it will return the other value. In the case of ');
         ie_open('code');
-          itext('Assign');
+          itext('Sum');
         ie_close('code');
         itext(' the result of ');
         ie_open('code');
           itext('empty');
         ie_close('code');
-        itext(' is an empty ');
+        itext(' is ');
         ie_open('code');
-          itext('Object');
+          itext('0');
         ie_close('code');
         itext('. ');
         ie_open('code');
@@ -28514,7 +28517,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_close('code');
         itext(' is available on both the Constructor and the Instance for convenience.');
       ie_close('p');
-      $templateAlias2({code: 'const Assign = require(\'crocks/Assign\')\n\nAssign.empty()\n//=> Assign {}\n\nAssign({})\n  .concat(Assign.empty())\n//=> Assign {}\n\nAssign({ a: 1 })\n  .concat(Assign.empty())\n//=> Assign { a: 1 }', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'import Sum from \'crocks/Sum\'\n\nSum.empty()\n//=> Sum 0\n\nSum.empty()\n  .concat(Sum.empty())\n//=> Sum 0\n\nSum(4)\n  .concat(Sum.empty())\n//=> Sum 4\n\nSum.empty()\n  .concat(Sum(4))\n//=> Sum 4', mode: 'javascript'}, null, opt_ijData);
     ie_close('article');
     ie_open('article', null, null,
         'id', 'topic-instance');
@@ -28525,14 +28528,14 @@ function $render(opt_data, opt_ignored, opt_ijData) {
           itext('Instance Methods');
         ie_close('a');
       ie_close('h2');
-      ie_open('h4');
+      ie_open('h3');
         ie_open('a', null, null,
             'id', 'concat',
             'href', '#concat');
           itext('concat');
         ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Assign ~> Assign -> Assign', mode: 'haskell'}, null, opt_ijData);
+      ie_close('h3');
+      $templateAlias2({code: 'Sum ~> Sum -> Sum', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
         ie_open('code');
           itext('concat');
@@ -28547,27 +28550,23 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_close('code');
         itext('. In the case of ');
         ie_open('code');
-          itext('Assign');
+          itext('Sum');
         ie_close('code');
-        itext(', it will combine (2) objects, overwriting the first ');
+        itext(', it will add the (2) ');
         ie_open('code');
-          itext('Object');
+          itext('Number');
         ie_close('code');
-        itext('\'s previous values with the values of the second ');
-        ie_open('code');
-          itext('Object');
-        ie_close('code');
-        itext('.');
+        itext('s.');
       ie_close('p');
-      $templateAlias2({code: 'const Assign = require(\'crocks/Assign\')\n\nAssign({})\n  .concat(Assign({}))\n//=> Assign {}\n\nAssign({ a: 1 })\n  .concat(Assign({ b: 2 }))\n//=> Assign { a: 1, b: 2 }\n\nAssign({ a: 1, b: 2 })\n  .concat(Assign({ a: 3, b: 4 }))\n//=> Assign { a: 3, b: 4 }\n\nAssign({ b: 4 })\n  .concat(Assign({ a: 1 }))\n//=> Assign { b: 4, a: 1 }', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
+      $templateAlias2({code: 'import Sum from \'crocks/Sum\'\n\nSum(5)\n  .concat(Sum(4))\n//=> Sum 9\n\nSum(45)\n  .concat(Sum(32))\n//=> Sum 77\n\nSum(1000)\n  .concat(Sum(Infinity))\n//=> Sum Infinity\n\nSum(1)\n  .concat(Sum(3))\n//=> Sum 4', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h3');
         ie_open('a', null, null,
             'id', 'valueof',
             'href', '#valueof');
           itext('valueOf');
         ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Assign ~> () -> Object', mode: 'haskell'}, null, opt_ijData);
+      ie_close('h3');
+      $templateAlias2({code: 'Sum ~> () -> Number', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
         ie_open('code');
           itext('valueOf');
@@ -28584,7 +28583,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_open('code');
           itext('valueOf');
         ie_close('code');
-        itext(' are not necessarily a ');
+        itext(' are not necessarily a');
         ie_open('code');
           itext('Comonad');
         ie_close('code');
@@ -28596,17 +28595,17 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_open('code');
           itext('valueOf');
         ie_close('code');
-        itext('on an ');
+        itext(' on a ');
         ie_open('code');
-          itext('Assign');
+          itext('Sum');
         ie_close('code');
         itext(' instance will result in the underlying ');
         ie_open('code');
-          itext('Object');
+          itext('Number');
         ie_close('code');
         itext('.');
       ie_close('p');
-      $templateAlias2({code: 'const Assign = require(\'crocks/Assign\')\n\nAssign({})\n  .valueOf()\n//=> {}\n\nAssign({ a: 1 })\n  .valueOf()\n//=> { a: 1 }\n\nAssign({ a: 1 })\n  .concat({ b: 25 })\n  .valueOf()\n//=> { a: 1, b: 25 }', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'import Sum from \'crocks/Sum\'\n\nSum(4)\n  .valueOf()\n//=> 4\n\nSum.empty()\n  .valueOf()\n//=> 0\n\nSum(34)\n  .concat(Sum(21))\n  .valueOf()\n//=> 55', mode: 'javascript'}, null, opt_ijData);
     ie_close('article');
     ie_open('input', null, null,
         'type', 'hidden',
@@ -28617,11 +28616,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'value', opt_data.site.title);
     ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({content: param1839}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param2305}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'hGtUm.render';
+  $render.soyTemplateName = 'fyRMo.render';
 }
 
 exports.render.params = ["page","site"];
@@ -28631,21 +28630,14 @@ return exports;
 
 });
 
-class hGtUm extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(hGtUm, templates);
+class fyRMo extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(fyRMo, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
 
 
 /***/ }),
-/* 238 */,
-/* 239 */,
-/* 240 */,
-/* 241 */,
-/* 242 */,
-/* 243 */,
-/* 244 */,
 /* 245 */,
 /* 246 */,
 /* 247 */,
@@ -28672,8 +28664,7 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(hGtUm, templates);
 /* 268 */,
 /* 269 */,
 /* 270 */,
-/* 271 */,
-/* 272 */
+/* 271 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28709,9 +28700,9 @@ __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _AssignSoy = __webpack_require__(237);
+var _SumSoy = __webpack_require__(244);
 
-var _AssignSoy2 = _interopRequireDefault(_AssignSoy);
+var _SumSoy2 = _interopRequireDefault(_SumSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28721,23 +28712,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var hGtUm = function (_Component) {
-  _inherits(hGtUm, _Component);
+var fyRMo = function (_Component) {
+  _inherits(fyRMo, _Component);
 
-  function hGtUm() {
-    _classCallCheck(this, hGtUm);
+  function fyRMo() {
+    _classCallCheck(this, fyRMo);
 
-    return _possibleConstructorReturn(this, (hGtUm.__proto__ || Object.getPrototypeOf(hGtUm)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (fyRMo.__proto__ || Object.getPrototypeOf(fyRMo)).apply(this, arguments));
   }
 
-  return hGtUm;
+  return fyRMo;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(hGtUm, _AssignSoy2.default);
+_metalSoy2.default.register(fyRMo, _SumSoy2.default);
 
-exports.default = hGtUm;
+exports.default = fyRMo;
 
 /***/ })
-],[272]);
+],[271]);

@@ -28513,7 +28513,7 @@ function $topics(opt_data, opt_ignored, opt_ijData) {
               ie_close('h2');
               ie_open('p', null, null,
                   'class', 'docs-home-middle-description');
-                itext('Each one provide step by step coverage for every core feature.');
+                itext('Each one provides step by step coverage for every core feature.');
               ie_close('p');
             ie_close('section');
           ie_close('div');

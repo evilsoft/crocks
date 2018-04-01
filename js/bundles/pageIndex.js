@@ -28634,7 +28634,7 @@ function $highlights(opt_data, opt_ignored, opt_ijData) {
           ie_close('h4');
           ie_open('p', null, null,
               'class', 'highlight-description');
-            itext('The data types provided in Crocks allow you to remove large swaths of imparative boilerplate, allowing you to think of your code in terms of what it does and not how it does it.');
+            itext('The data types provided in Crocks allow you to remove large swaths of imperative boilerplate, allowing you to think of your code in terms of what it does and not how it does it.');
           ie_close('p');
         ie_close('div');
         ie_open('div', null, null,

@@ -1,6 +1,6 @@
 # Change Log for `crocks`
 
-v0.9.1 -- April 1, 2018
+v0.9.2 -- April 1, 2018
 --
 ### Additions
 * Helpers:

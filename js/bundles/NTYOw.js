@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([18,31,32,33],[
+webpackJsonppageComponent([9,31,32,33],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -28360,12 +28360,21 @@ exports.default = parseFromAnchor;
 /* 226 */,
 /* 227 */,
 /* 228 */,
-/* 229 */
+/* 229 */,
+/* 230 */,
+/* 231 */,
+/* 232 */,
+/* 233 */,
+/* 234 */,
+/* 235 */,
+/* 236 */,
+/* 237 */,
+/* 238 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "rfwMQ", function() { return rfwMQ; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NTYOw", function() { return NTYOw; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28377,15 +28386,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var templates;
 goog.loadModule(function(exports) {
 
-// This file was automatically generated from logic-functions.soy.
+// This file was automatically generated from Endo.soy.
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace rfwMQ.
+ * @fileoverview Templates in namespace NTYOw.
  * @public
  */
 
-goog.module('rfwMQ.incrementaldom');
+goog.module('NTYOw.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28408,7 +28417,7 @@ var iattr = IncrementalDom.attr;
 
 var $templateAlias2 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('ElectricCode.incrementaldom', 'render');
 
-var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('notopic.incrementaldom', 'render');
+var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('guide.incrementaldom', 'render');
 
 
 /**
@@ -28419,201 +28428,212 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var param1677 = function() {
+  var param1907 = function() {
+    $templateAlias2({code: 'Endo a', mode: 'haskell'}, null, opt_ijData);
     ie_open('p');
-      itext('The functions in this section are used to represent logical branching in a declarative manner. Each of these functions require either ');
       ie_open('code');
-        itext('Pred');
+        itext('Endo');
       ie_close('code');
-      itext('s or predicate functions in their input. Since these functions work with ');
+      itext(' is a ');
       ie_open('code');
-        itext('Pred');
+        itext('Monoid');
       ie_close('code');
-      itext('s and predicate functions, rather than values, this allows for composeable, "lazy" evaluation. All logic functions can be referenced from ');
+      itext(' that will combine (2) functions that have matching domains and codomains (endofunctions) under function composition. Due to the nature of ');
       ie_open('code');
-        itext('crocks/logic');
+        itext('Endo');
       ie_close('code');
-    ie_close('p');
-    ie_open('h4');
+      itext(' wrapping a function, the underlying value can either be extracted using ');
       ie_open('a', null, null,
-          'id', 'and',
-          'href', '#and');
-        itext('and');
-      ie_close('a');
-    ie_close('h4');
-    $templateAlias2({code: 'and :: ((a -> Boolean) | Pred a) -> ((a -> Boolean) | Pred a) -> a -> Boolean', mode: 'haskell'}, null, opt_ijData);
-    ie_open('p');
-      itext('Say you have two predicate functions or ');
-      ie_open('code');
-        itext('Pred');
-      ie_close('code');
-      itext('s and would like to combine them into one predicate over conjunction, well you came to the right place, ');
-      ie_open('code');
-        itext('and');
-      ie_close('code');
-      itext('accepts either predicate functions or ');
-      ie_open('code');
-        itext('Pred');
-      ie_close('code');
-      itext('s and will return you a function ready to take a value. Once that value is passed, it will run it through both of the predicates and return the result of combining it over a ');
-      ie_open('code');
-        itext('logical and');
-      ie_close('code');
-      itext('. This is super helpful combined with ');
-      ie_open('code');
-        itext('or');
-      ie_close('code');
-      itext(' for putting together reusable, complex predicates. As they follow the general form of ');
-      ie_open('code');
-        itext('(a -> Boolean)');
-      ie_close('code');
-      itext(' they are easily combined with other logic functions.');
-    ie_close('p');
-    ie_open('h4');
-      ie_open('a', null, null,
-          'id', 'ifelse',
-          'href', '#ifelse');
-        itext('ifElse');
-      ie_close('a');
-    ie_close('h4');
-    $templateAlias2({code: 'ifElse :: ((a -> Boolean) | Pred a) -> (a -> b) -> (a -> b) -> a -> b', mode: 'haskell'}, null, opt_ijData);
-    ie_open('p');
-      itext('Whenever you need to modify a value based some condition and want a functional way to do it without some imperative ');
-      ie_open('code');
-        itext('if');
-      ie_close('code');
-      itext(' statement, then reach for ');
-      ie_open('code');
-        itext('ifElse');
-      ie_close('code');
-      itext('. This function take a predicate (some function that returns a Boolean) and two functions. The first is what is executed when the predicate is true, the second on a false condition. This will return a function ready to take a value to run through the predicate. After the value is evaluated, it will be ran through it\'s corresponding function, returning the result as the final result. This function comes in really handy when creating lifting functions for Sum Types (like');
-      ie_open('code');
-        itext('Either');
-      ie_close('code');
-      itext(' or ');
-      ie_open('code');
-        itext('Maybe');
-      ie_close('code');
-      itext(').');
-    ie_close('p');
-    ie_open('h4');
-      ie_open('a', null, null,
-          'id', 'not',
-          'href', '#not');
-        itext('not');
-      ie_close('a');
-    ie_close('h4');
-    $templateAlias2({code: 'not :: ((a -> Boolean) | Pred) -> a -> Boolean', mode: 'haskell'}, null, opt_ijData);
-    ie_open('p');
-      itext('When you need to negate a predicate function or a ');
-      ie_open('code');
-        itext('Pred');
-      ie_close('code');
-      itext(', but want a new predicate function that does the negation, then ');
-      ie_open('code');
-        itext('not');
-      ie_close('code');
-      itext(' is going to get you what you need. Using ');
-      ie_open('code');
-        itext('not');
-      ie_close('code');
-      itext(' will allow you to stay as declarative as possible. Just pass ');
-      ie_open('code');
-        itext('not');
-      ie_close('code');
-      itext(' your predicate function or a ');
-      ie_open('code');
-        itext('Pred');
-      ie_close('code');
-      itext(', and it will give you back a predicate function ready for insertion into your flow. All predicate based functions in ');
-      ie_open('code');
-        itext('crocks');
-      ie_close('code');
-      itext(' take either a ');
-      ie_open('code');
-        itext('Pred');
-      ie_close('code');
-      itext(' or predicate function, so it should be easy to swap between the two.');
-    ie_close('p');
-    ie_open('h4');
-      ie_open('a', null, null,
-          'id', 'or',
-          'href', '#or');
-        itext('or');
-      ie_close('a');
-    ie_close('h4');
-    $templateAlias2({code: 'or :: ((a -> Boolean) | Pred) -> ((a -> Boolean) | Pred) -> a -> Boolean', mode: 'haskell'}, null, opt_ijData);
-    ie_open('p');
-      itext('Say you have two predicate functions or ');
-      ie_open('code');
-        itext('Pred');
-      ie_close('code');
-      itext('s and would like to combine them into one predicate over disjunction, look no further, ');
-      ie_open('code');
-        itext('or');
-      ie_close('code');
-      itext(' accepts either predicate functions or ');
-      ie_open('code');
-        itext('Pred');
-      ie_close('code');
-      itext('s and will return you a function ready to take a value. Once that value is passed, it will run it through both of the predicates and return the result of combining it over a ');
-      ie_open('code');
-        itext('logical or');
-      ie_close('code');
-      itext('. This is super helpful combined with ');
-      ie_open('code');
-        itext('and');
-      ie_close('code');
-      itext(' for putting together reusable, complex predicates. As they follow the general form of ');
-      ie_open('code');
-        itext('(a -> Boolean)');
-      ie_close('code');
-      itext(' they are easily combined with other logic functions.');
-    ie_close('p');
-    ie_open('h4');
-      ie_open('a', null, null,
-          'id', 'unless',
-          'href', '#unless');
-        itext('unless');
-      ie_close('a');
-    ie_close('h4');
-    $templateAlias2({code: 'unless :: ((a -> Boolean) | Pred) -> (a -> a) -> a -> a', mode: 'haskell'}, null, opt_ijData);
-    ie_open('p');
-      itext('There may come a time when you need to adjust a value when a condition is false, that is where ');
-      ie_open('code');
-        itext('unless');
-      ie_close('code');
-      itext(' can come into play. Just provide a predicate function (a function that returns a Boolean) and a function to apply your desired modification. This will get you back a function that when you pass it a value, it will evaluate it and if false, will run your value through the provided function. Either the original or modified value will be returned depending on the result of the predicate. Check out ');
-      ie_open('a', null, null,
-          'href', '#when');
+          'href', '#valueof');
         ie_open('code');
-          itext('when');
+          itext('valueOf');
         ie_close('code');
       ie_close('a');
-      itext(' for a negated version of this function.');
-    ie_close('p');
-    ie_open('h4');
-      ie_open('a', null, null,
-          'id', 'when',
-          'href', '#when');
-        itext('when');
-      ie_close('a');
-    ie_close('h4');
-    $templateAlias2({code: 'when :: ((a -> Boolean) | Pred) -> (a -> a) -> a -> a', mode: 'haskell'}, null, opt_ijData);
-    ie_open('p');
-      itext('There may come a time when you need to adjust a value when a condition is true, that is where ');
+      itext(' like any other ');
       ie_open('code');
-        itext('when');
+        itext('Monoid');
       ie_close('code');
-      itext(' can come into play. Just provide a predicate function (a function that returns a Boolean) and a function to apply your desired modification. This will get you back a function that when you pass it a value, it will evaluate it and if true, will run your value through the provided function. Either the original or modified value will be returned depending on the result of the predicate. Check out ');
+      itext(' or can be executed directly using ');
       ie_open('a', null, null,
-          'href', '#unless');
+          'href', '#runWith');
         ie_open('code');
-          itext('unless');
+          itext('runWith');
         ie_close('code');
       ie_close('a');
-      itext(' for a negated version of this function.');
+      itext(', supplying the input.');
     ie_close('p');
+    $templateAlias2({code: 'import Endo from \'crocks/Endo\'\n\nimport curry from \'crocks/helpers/curry\'\nimport mconcat from \'crocks/helpers/mconcat\'\nimport valueOf from \'crocks/pointfree/valueOf\'\n\n// add :: Number -> Number -> Number\nconst add =\n  x => y => x + y\n\n// multiply :: Number -> Number -> Number\nconst multiply =\n  x => y => x * y\n\n// runEndo :: Endo a -> a -> a\nconst runEndo =\n  curry(valueOf)\n\n// flow :: Endo Number\nconst addAndDouble =\n  Endo(add(10))\n    .concat(Endo(multiply(2)))\n\n// always10 :: Endo Number\nconst always10 =\n  mconcat(Endo, [ add(100), multiply(0), add(10) ])\n\nrunEndo(addAndDouble, 5)\n//=> 30\n\nalways10\n  .runWith(75)\n//=> 10', mode: 'javascript'}, null, opt_ijData);
+    ie_open('article', null, null,
+        'id', 'topic-implements');
+      ie_open('h2');
+        ie_open('a', null, null,
+            'id', 'implements',
+            'href', '#implements');
+          itext('Implements');
+        ie_close('a');
+      ie_close('h2');
+      ie_open('p');
+        ie_open('code');
+          itext('Semigroup');
+        ie_close('code');
+        itext(', ');
+        ie_open('code');
+          itext('Monoid');
+        ie_close('code');
+      ie_close('p');
+    ie_close('article');
+    ie_open('article', null, null,
+        'id', 'topic-constructor');
+      ie_open('h2');
+        ie_open('a', null, null,
+            'id', 'constructor-methods',
+            'href', '#constructor-methods');
+          itext('Constructor Methods');
+        ie_close('a');
+      ie_close('h2');
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'empty',
+            'href', '#empty');
+          itext('empty');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Endo.empty :: () -> Endo a', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        ie_open('code');
+          itext('empty');
+        ie_close('code');
+        itext(' provides the identity for the ');
+        ie_open('code');
+          itext('Monoid');
+        ie_close('code');
+        itext(' in that when the value it provides is ');
+        ie_open('code');
+          itext('concat');
+        ie_close('code');
+        itext('ed to any other value, it will return the other value. In the case of ');
+        ie_open('code');
+          itext('Endo');
+        ie_close('code');
+        itext(' the result of ');
+        ie_open('code');
+          itext('empty');
+        ie_close('code');
+        itext(' is the identity function, which echos its input. ');
+        ie_open('code');
+          itext('empty');
+        ie_close('code');
+        itext(' is available on both the Constructor and the Instance for convenience.');
+      ie_close('p');
+      $templateAlias2({code: 'import Endo from \'crocks/Endo\'\n\nimport runWith from \'crocks/pointfree/runWith\'\n\n// empty :: Endo a\nconst empty = Endo.empty()\n\n// toUpper :: Endo String\nconst toUpper =\n  Endo(x => x.toUpperCase())\n\n// runNice :: Endo String -> String\nconst runNice =\n  runWith(\'nice\')\n\nrunNice(empty.concat(toUpper))\n//=> "NICE"\n\nrunNice(toUpper.concat(empty))\n//=> "NICE"', mode: 'javascript'}, null, opt_ijData);
+    ie_close('article');
+    ie_open('article', null, null,
+        'id', 'topic-instance');
+      ie_open('h2');
+        ie_open('a', null, null,
+            'id', 'instance-methods',
+            'href', '#instance-methods');
+          itext('Instance Methods');
+        ie_close('a');
+      ie_close('h2');
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'concat',
+            'href', '#concat');
+          itext('concat');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Endo a ~> Endo a -> Endo a', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        ie_open('code');
+          itext('concat');
+        ie_close('code');
+        itext(' is used to combine (2) ');
+        ie_open('code');
+          itext('Semigroup');
+        ie_close('code');
+        itext('s of the same type under an operation specified by the ');
+        ie_open('code');
+          itext('Semigroup');
+        ie_close('code');
+        itext('. In the case of ');
+        ie_open('code');
+          itext('Endo');
+        ie_close('code');
+        itext(', it will combine (2) endofunctions under function composition.');
+      ie_close('p');
+      $templateAlias2({code: 'import Endo from \'crocks/Endo\'\n\nimport assoc from \'crocks/helpers/assoc\'\nimport mapProps from \'crocks/helpers/mapProps\'\nimport objOf from \'crocks/helpers/objOf\'\n\n// inc :: Number -> Number\nconst inc =\n  x => x + 1\n\n// incValue :: Endo Object\nconst incValue =\n  Endo(mapProps({ value: inc }))\n\n// addDone :: Endo Object\nconst addDone =\n  Endo(assoc(\'done\', true))\n\n// finish :: Endo Object\nconst packResults =\n  Endo(objOf(\'results\'))\n\n// finish :: Endo Object\nconst finish =\n  incValue.concat(addDone)\n\nfinish.runWith({ value: 99 })\n//=> { value: 100, done: true }\n\nfinish\n  .concat(packResults)\n  .runWith({ value: 99 })\n//=> { results: { value: 100, done: true } }', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'valueof',
+            'href', '#valueof');
+          itext('valueOf');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Endo a ~> () -> (a -> a)', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        ie_open('code');
+          itext('valueOf');
+        ie_close('code');
+        itext(' is used on all ');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext(' ');
+        ie_open('code');
+          itext('Monoid');
+        ie_close('code');
+        itext('s as a means of extraction. While the extraction is available, types that implement ');
+        ie_open('code');
+          itext('valueOf');
+        ie_close('code');
+        itext(' are not necessarily a');
+        ie_open('code');
+          itext('Comonad');
+        ie_close('code');
+        itext('. This function is used primarily for convenience for some of the helper functions that ship with ');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext('. Calling ');
+        ie_open('code');
+          itext('valueOf');
+        ie_close('code');
+        itext(' on an ');
+        ie_open('code');
+          itext('Endo');
+        ie_close('code');
+        itext(' instance will result in the underlying endofunction.');
+      ie_close('p');
+      $templateAlias2({code: 'import Endo from \'crocks/Endo\'\n\nimport filter from \'crocks/pointfree/filter\'\nimport map from \'crocks/pointfree/map\'\nimport mconcat from \'crocks/helpers/mconcat\'\n\n// lt10 :: [ Number ] -> [ Number ]\nconst lt10 =\n  filter(x => x < 10)\n\n// double :: [ Number ] -> [ Number ]\nconst double =\n  map(x => x * 2)\n\n// buildEndo :: [ (a -> a) ] -> Endo a\nconst buildEndo =\n  mconcat(Endo)\n\n// fn :: [ Number ] -> [ Number ]\nconst fn =\n  buildEndo([ lt10, double ])\n    .valueOf()\n\nfn([ 12, 5, 3, 90 ])\n//=> [ 10, 6 ]\n\nfn([])\n//=> []', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'runwith',
+            'href', '#runwith');
+          itext('runWith');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Endo a ~> a -> a', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        ie_open('code');
+          itext('Endo');
+        ie_close('code');
+        itext(' wraps a function and as such, its underlying endofunction can be run while inside of an ');
+        ie_open('code');
+          itext('Endo');
+        ie_close('code');
+        itext(' by calling ');
+        ie_open('code');
+          itext('runWith');
+        ie_close('code');
+        itext('. Providing a valid value of the same type required by the function, ');
+        ie_open('code');
+          itext('runWith');
+        ie_close('code');
+        itext(' will execute the underlying function and return the result.');
+      ie_close('p');
+      $templateAlias2({code: 'import Endo from \'crocks/Endo\'\n\nimport filter from \'crocks/pointfree/filter\'\nimport map from \'crocks/pointfree/map\'\nimport mconcat from \'crocks/helpers/mconcat\'\n\n// lt10 :: [ Number ] -> [ Number ]\nconst lt10 =\n  filter(x => x < 10)\n\n// double :: [ Number ] -> [ Number ]\nconst double =\n  map(x => x * 2)\n\n// buildEndo :: [ (a -> a) ] -> Endo a\nconst flow =\n  mconcat(Endo, [ lt10, double ])\n\nflow\n  .runWith([ 12, 5, 3, 90 ])\n//=> [ 10, 6 ]\n\nflow\n  .runWith([])\n//=> []', mode: 'javascript'}, null, opt_ijData);
+    ie_close('article');
     ie_open('input', null, null,
         'type', 'hidden',
         'value', opt_data.page.title);
@@ -28623,11 +28643,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'value', opt_data.site.title);
     ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({content: param1677}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param1907}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'rfwMQ.render';
+  $render.soyTemplateName = 'NTYOw.render';
 }
 
 exports.render.params = ["page","site"];
@@ -28637,23 +28657,14 @@ return exports;
 
 });
 
-class rfwMQ extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(rfwMQ, templates);
+class NTYOw extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(NTYOw, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
 
 
 /***/ }),
-/* 230 */,
-/* 231 */,
-/* 232 */,
-/* 233 */,
-/* 234 */,
-/* 235 */,
-/* 236 */,
-/* 237 */,
-/* 238 */,
 /* 239 */,
 /* 240 */,
 /* 241 */,
@@ -28678,7 +28689,12 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(rfwMQ, templates);
 /* 260 */,
 /* 261 */,
 /* 262 */,
-/* 263 */
+/* 263 */,
+/* 264 */,
+/* 265 */,
+/* 266 */,
+/* 267 */,
+/* 268 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28714,9 +28730,9 @@ __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _logicFunctionsSoy = __webpack_require__(229);
+var _EndoSoy = __webpack_require__(238);
 
-var _logicFunctionsSoy2 = _interopRequireDefault(_logicFunctionsSoy);
+var _EndoSoy2 = _interopRequireDefault(_EndoSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28726,23 +28742,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var rfwMQ = function (_Component) {
-  _inherits(rfwMQ, _Component);
+var NTYOw = function (_Component) {
+  _inherits(NTYOw, _Component);
 
-  function rfwMQ() {
-    _classCallCheck(this, rfwMQ);
+  function NTYOw() {
+    _classCallCheck(this, NTYOw);
 
-    return _possibleConstructorReturn(this, (rfwMQ.__proto__ || Object.getPrototypeOf(rfwMQ)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (NTYOw.__proto__ || Object.getPrototypeOf(NTYOw)).apply(this, arguments));
   }
 
-  return rfwMQ;
+  return NTYOw;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(rfwMQ, _logicFunctionsSoy2.default);
+_metalSoy2.default.register(NTYOw, _EndoSoy2.default);
 
-exports.default = rfwMQ;
+exports.default = NTYOw;
 
 /***/ })
-],[263]);
+],[268]);

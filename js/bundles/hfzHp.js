@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([21,31,32,33],[
+webpackJsonppageComponent([16,31,32,33],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -28357,12 +28357,17 @@ exports.default = parseFromAnchor;
 /* 223 */,
 /* 224 */,
 /* 225 */,
-/* 226 */
+/* 226 */,
+/* 227 */,
+/* 228 */,
+/* 229 */,
+/* 230 */,
+/* 231 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "zPuPG", function() { return zPuPG; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hfzHp", function() { return hfzHp; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28374,15 +28379,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var templates;
 goog.loadModule(function(exports) {
 
-// This file was automatically generated from combinators.soy.
+// This file was automatically generated from predicate-functions.soy.
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace zPuPG.
+ * @fileoverview Templates in namespace hfzHp.
  * @public
  */
 
-goog.module('zPuPG.incrementaldom');
+goog.module('hfzHp.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28403,8 +28408,6 @@ var ie_open_end = IncrementalDom.elementOpenEnd;
 var itext = IncrementalDom.text;
 var iattr = IncrementalDom.attr;
 
-var $templateAlias2 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('ElectricCode.incrementaldom', 'render');
-
 var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('notopic.incrementaldom', 'render');
 
 
@@ -28416,153 +28419,502 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var param1350 = function() {
-    ie_open('h4');
+  var param1730 = function() {
+    ie_open('p');
+      itext('All functions in this group have a signature of ');
+      ie_open('code');
+        itext('* -> Boolean');
+      ie_close('code');
+      itext(' and are used with the many predicate based functions that ship with ');
+      ie_open('code');
+        itext('crocks');
+      ie_close('code');
+      itext(', like ');
       ie_open('a', null, null,
-          'id', 'applyto',
-          'href', '#applyto');
-        itext('applyTo');
+          'href', 'helpers.html#safe');
+        ie_open('code');
+          itext('safe');
+        ie_close('code');
       ie_close('a');
-    ie_close('h4');
-    ie_open('p');
-      ie_open('code');
-        itext('crocks/combinators/applyTo');
-      ie_close('code');
-    ie_close('p');
-    $templateAlias2({code: 'applyTo :: a -> (a -> b) -> b', mode: 'haskell'}, null, opt_ijData);
-    ie_open('p');
-      itext('Ever run into a situation where you have a value but do not have a function to apply it to? Well this little bird, named Thrush, is there to help out. Just give it a value and it will give you back a function ready to take a function. Once that function is provided, it will return the result of applying your value to that function.');
-    ie_close('p');
-    ie_open('h4');
+      itext(', ');
       ie_open('a', null, null,
-          'id', 'composeb',
-          'href', '#composeb');
-        itext('composeB');
+          'href', 'logic-functions.html#ifelse');
+        ie_open('code');
+          itext('ifElse');
+        ie_close('code');
       ie_close('a');
-    ie_close('h4');
-    ie_open('p');
+      itext(' and ');
       ie_open('code');
-        itext('crocks/combinators/composeB');
+        itext('filter');
       ie_close('code');
-    ie_close('p');
-    $templateAlias2({code: 'composeB :: (b -> c) -> (a -> b) -> a -> c', mode: 'haskell'}, null, opt_ijData);
-    ie_open('p');
-      itext('Provides a means to describe a composition between two functions. it takes two functions and a value. Given ');
-      ie_open('code');
-        itext('composeB(f, g)');
-      ie_close('code');
-      itext(', which is read ');
-      ie_open('code');
-        itext('f');
-      ie_close('code');
-      itext(' after ');
-      ie_open('code');
-        itext('g');
-      ie_close('code');
-      itext(', it will return a function that will take value ');
-      ie_open('code');
-        itext('a');
-      ie_close('code');
-      itext(' and apply it to ');
-      ie_open('code');
-        itext('g');
-      ie_close('code');
-      itext(', passing the result as an argument to ');
-      ie_open('code');
-        itext('f');
-      ie_close('code');
-      itext(', and will finally return the result of ');
-      ie_open('code');
-        itext('f');
-      ie_close('code');
-      itext('. (This allows only two functions, if you want to avoid things like:');
-      ie_open('code');
-        itext('composeB(composeB(f, g), composeB(h, i))');
-      ie_close('code');
-      itext(' then check out');
+      itext(' to name a few. They also fit naturally with the ');
       ie_open('a', null, null,
-          'href', 'helpers.html#compose');
+          'href', '../crocks/Pred.html');
+        ie_open('code');
+          itext('Pred');
+        ie_close('code');
+      ie_close('a');
+      itext(' ADT. All predicate functions can be referenced from ');
+      ie_open('code');
+        itext('crocks/predicates');
+      ie_close('code');
+      itext('.');
+    ie_close('p');
+    ie_open('p');
+      itext('Below is a list of all the current predicates that are included with a description of their truth:');
+    ie_close('p');
+    ie_open('ul');
+      ie_open('li');
+        ie_open('code');
+          itext('hasProp :: (String | Integer) -> a -> Boolean');
+        ie_close('code');
+        itext(': an ');
+        ie_open('code');
+          itext('Array');
+        ie_close('code');
+        itext(' or ');
+        ie_open('code');
+          itext('Object');
+        ie_close('code');
+        itext(' that contains the provided index or key');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('hasPropPath :: [ String | Integer ] -> a -> Boolean');
+        ie_close('code');
+        itext(': an ');
+        ie_open('code');
+          itext('Array');
+        ie_close('code');
+        itext(' or ');
+        ie_open('code');
+          itext('Object');
+        ie_close('code');
+        itext(' that contains the provided index path');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isAlt :: a -> Boolean');
+        ie_close('code');
+        itext(': an ADT that provides ');
+        ie_open('code');
+          itext('map');
+        ie_close('code');
+        itext(' and ');
+        ie_open('code');
+          itext('alt');
+        ie_close('code');
+        itext(' methods');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isAlternative :: a -> Boolean');
+        ie_close('code');
+        itext(': an ADT that provides ');
+        ie_open('code');
+          itext('alt');
+        ie_close('code');
+        itext(', ');
+        ie_open('code');
+          itext('zero');
+        ie_close('code');
+        itext(', ');
+        ie_open('code');
+          itext('map');
+        ie_close('code');
+        itext(', ');
+        ie_open('code');
+          itext('ap');
+        ie_close('code');
+        itext(', ');
+        ie_open('code');
+          itext('chain');
+        ie_close('code');
+        itext(' and ');
+        ie_open('code');
+          itext('of');
+        ie_close('code');
+        itext('methods');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isApplicative :: a -> Boolean');
+        ie_close('code');
+        itext(': an ADT that provides ');
+        ie_open('code');
+          itext('map');
+        ie_close('code');
+        itext(', ');
+        ie_open('code');
+          itext('ap');
+        ie_close('code');
+        itext(' and ');
+        ie_open('code');
+          itext('of');
+        ie_close('code');
+        itext(' methods');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isApply :: a -> Boolean');
+        ie_close('code');
+        itext(': an ADT that provides ');
+        ie_open('code');
+          itext('map');
+        ie_close('code');
+        itext(' and ');
+        ie_open('code');
+          itext('ap');
+        ie_close('code');
+        itext(' methods');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isArray :: a -> Boolean');
+        ie_close('code');
+        itext(': Array');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isBifunctor :: a -> Boolean');
+        ie_close('code');
+        itext(': an ADT that provides ');
+        ie_open('code');
+          itext('map');
+        ie_close('code');
+        itext(' and ');
+        ie_open('code');
+          itext('bimap');
+        ie_close('code');
+        itext(' methods');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isBoolean :: a -> Boolean');
+        ie_close('code');
+        itext(': Boolean');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isCategory :: a -> Boolean');
+        ie_close('code');
+        itext(': an ADT that provides ');
+        ie_open('code');
+          itext('id');
+        ie_close('code');
+        itext(' and ');
         ie_open('code');
           itext('compose');
         ie_close('code');
-      ie_close('a');
-      itext('.)');
-    ie_close('p');
-    ie_open('h4');
-      ie_open('a', null, null,
-          'id', 'constant',
-          'href', '#constant');
-        itext('constant');
-      ie_close('a');
-    ie_close('h4');
-    ie_open('p');
-      ie_open('code');
-        itext('crocks/combinators/constant');
-      ie_close('code');
-    ie_close('p');
-    $templateAlias2({code: 'constant :: a -> () -> a', mode: 'haskell'}, null, opt_ijData);
-    ie_open('p');
-      itext('This is a very handy dandy function, used a lot. Pass it any value and it will give you back a function that will return that same value no matter what you pass it.');
-    ie_close('p');
-    ie_open('h4');
-      ie_open('a', null, null,
-          'id', 'flip',
-          'href', '#flip');
-        itext('flip');
-      ie_close('a');
-    ie_close('h4');
-    ie_open('p');
-      ie_open('code');
-        itext('crocks/combinators/flip');
-      ie_close('code');
-    ie_close('p');
-    $templateAlias2({code: 'flip :: (a -> b -> c) -> b -> a -> c', mode: 'haskell'}, null, opt_ijData);
-    ie_open('p');
-      itext('This little function just takes a function and returns a function that takes the first two parameters in reverse. One can compose flip calls down the line to flip all, or some of the other parameters if there are more than two. Mix and match to your heart\'s desire.');
-    ie_close('p');
-    ie_open('h4');
-      ie_open('a', null, null,
-          'id', 'identity',
-          'href', '#identity');
-        itext('identity');
-      ie_close('a');
-    ie_close('h4');
-    ie_open('p');
-      ie_open('code');
-        itext('crocks/combinators/identity');
-      ie_close('code');
-    ie_close('p');
-    $templateAlias2({code: 'identity ::  a -> a', mode: 'haskell'}, null, opt_ijData);
-    ie_open('p');
-      itext('This function and ');
-      ie_open('a', null, null,
-          'href', '#constant');
+        itext(' methods');
+      ie_close('li');
+      ie_open('li');
         ie_open('code');
-          itext('constant');
+          itext('isChain :: a -> Boolean');
         ie_close('code');
-      ie_close('a');
-      itext(' are the workhorses of writing code with this library. It quite simply is just a function that when you pass it something, it returns that thing right back to you. So simple, I will leave it as an exercise to reason about why this is so powerful and important.');
-    ie_close('p');
-    ie_open('h4');
-      ie_open('a', null, null,
-          'id', 'substitution',
-          'href', '#substitution');
-        itext('substitution');
-      ie_close('a');
-    ie_close('h4');
-    ie_open('p');
-      ie_open('code');
-        itext('crocks/combinators/substitution');
-      ie_close('code');
-    ie_close('p');
-    $templateAlias2({code: 'substitution :: (a -> b -> c) -> (a -> b) -> a -> c', mode: 'haskell'}, null, opt_ijData);
-    ie_open('p');
-      itext('While it a complicated little bugger, it can come in very handy from time to time. In it\'s first two arguments it takes functions. The first must be binary and the second unary. That will return you a function that is ready to take some value. Once supplied the fun starts, it will pass the ');
-      ie_open('code');
-        itext('a');
-      ie_close('code');
-      itext(' to the first argument of both functions, and the result of the second function to the second parameter of the first function. Finally after all that juggling, it will return the result of that first function. When used with partial application on that first parameter, a whole new world of combinatory madness is presented!');
-    ie_close('p');
+        itext(': an ADT that provides ');
+        ie_open('code');
+          itext('map');
+        ie_close('code');
+        itext(', ');
+        ie_open('code');
+          itext('ap');
+        ie_close('code');
+        itext(' and ');
+        ie_open('code');
+          itext('chain');
+        ie_close('code');
+        itext(' methods');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isContravariant : a -> Boolean');
+        ie_close('code');
+        itext(': an ADT that provides ');
+        ie_open('code');
+          itext('contramap');
+        ie_close('code');
+        itext(' method');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isDefined :: a -> Boolean');
+        ie_close('code');
+        itext(': Every value that is not ');
+        ie_open('code');
+          itext('undefined');
+        ie_close('code');
+        itext(', ');
+        ie_open('code');
+          itext('null');
+        ie_close('code');
+        itext(' included');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isEmpty :: a -> Boolean');
+        ie_close('code');
+        itext(': Empty Object, Array or String');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isExtend :: a -> Boolean');
+        ie_close('code');
+        itext(': an ADT that provides ');
+        ie_open('code');
+          itext('map');
+        ie_close('code');
+        itext(' and ');
+        ie_open('code');
+          itext('extend');
+        ie_close('code');
+        itext(' methods');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isFoldable :: a -> Boolean');
+        ie_close('code');
+        itext(': Array, List or any structure with a ');
+        ie_open('code');
+          itext('reduce');
+        ie_close('code');
+        itext(' method');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isFunction :: a -> Boolean');
+        ie_close('code');
+        itext(': Function');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isFunctor :: a -> Boolean');
+        ie_close('code');
+        itext(': an ADT that provides a ');
+        ie_open('code');
+          itext('map');
+        ie_close('code');
+        itext(' method');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isInteger :: a -> Boolean');
+        ie_close('code');
+        itext(': Integer');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isMonad :: a -> Boolean');
+        ie_close('code');
+        itext(': an ADT that provides ');
+        ie_open('code');
+          itext('map');
+        ie_close('code');
+        itext(', ');
+        ie_open('code');
+          itext('ap');
+        ie_close('code');
+        itext(', ');
+        ie_open('code');
+          itext('chain');
+        ie_close('code');
+        itext(' and ');
+        ie_open('code');
+          itext('of');
+        ie_close('code');
+        itext(' methods');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isMonoid :: a -> Boolean');
+        ie_close('code');
+        itext(': an ADT that provides ');
+        ie_open('code');
+          itext('concat');
+        ie_close('code');
+        itext(' and ');
+        ie_open('code');
+          itext('empty');
+        ie_close('code');
+        itext(' methods');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isNil :: a -> Boolean');
+        ie_close('code');
+        itext(': ');
+        ie_open('code');
+          itext('undefined');
+        ie_close('code');
+        itext(' or ');
+        ie_open('code');
+          itext('null');
+        ie_close('code');
+        itext(' or ');
+        ie_open('code');
+          itext('NaN');
+        ie_close('code');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isNumber :: a -> Boolean');
+        ie_close('code');
+        itext(': ');
+        ie_open('code');
+          itext('Number');
+        ie_close('code');
+        itext(' that is not a ');
+        ie_open('code');
+          itext('NaN');
+        ie_close('code');
+        itext(' value, ');
+        ie_open('code');
+          itext('Infinity');
+        ie_close('code');
+        itext(' included');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isObject :: a -> Boolean');
+        ie_close('code');
+        itext(': Plain Old Javascript Object (POJO)');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isPlus :: a -> Boolean');
+        ie_close('code');
+        itext(': an ADT that provides ');
+        ie_open('code');
+          itext('map');
+        ie_close('code');
+        itext(', ');
+        ie_open('code');
+          itext('alt');
+        ie_close('code');
+        itext(' and ');
+        ie_open('code');
+          itext('zero');
+        ie_close('code');
+        itext(' methods');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isProfunctor : a -> Boolean');
+        ie_close('code');
+        itext(': an ADT that provides ');
+        ie_open('code');
+          itext('map');
+        ie_close('code');
+        itext(', ');
+        ie_open('code');
+          itext('contramap');
+        ie_close('code');
+        itext(' and ');
+        ie_open('code');
+          itext('promap');
+        ie_close('code');
+        itext(' methods');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isPromise :: a -> Boolean');
+        ie_close('code');
+        itext(': an object implementing ');
+        ie_open('code');
+          itext('then');
+        ie_close('code');
+        itext(' and ');
+        ie_open('code');
+          itext('catch');
+        ie_close('code');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isSame :: a -> b -> Boolean');
+        ie_close('code');
+        itext(': same value or reference, use ');
+        ie_open('code');
+          itext('equals');
+        ie_close('code');
+        itext(' for value equality');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isSameType :: a -> b -> Boolean');
+        ie_close('code');
+        itext(': Constructor matches a values type, or two values types match');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isSemigroup :: a -> Boolean');
+        ie_close('code');
+        itext(': an ADT that provides a ');
+        ie_open('code');
+          itext('concat');
+        ie_close('code');
+        itext(' method');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isSemigroupoid :: a -> Boolean');
+        ie_close('code');
+        itext(': an ADT that provides a ');
+        ie_open('code');
+          itext('compose');
+        ie_close('code');
+        itext(' method');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isSetoid :: a -> Boolean');
+        ie_close('code');
+        itext(': an ADT that provides an ');
+        ie_open('code');
+          itext('equals');
+        ie_close('code');
+        itext(' method');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isString :: a -> Boolean');
+        ie_close('code');
+        itext(': String');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('isTraversable :: a -> Boolean');
+        ie_close('code');
+        itext(': an ADT that provides ');
+        ie_open('code');
+          itext('map');
+        ie_close('code');
+        itext(' and ');
+        ie_open('code');
+          itext('traverse');
+        ie_close('code');
+        itext(' methods');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('propEq: (String | Interger) -> a -> Object -> Boolean');
+        ie_close('code');
+        itext(': an ');
+        ie_open('code');
+          itext('Object');
+        ie_close('code');
+        itext(' that contains the provided key');
+      ie_close('li');
+      ie_open('li');
+        ie_open('code');
+          itext('propPathEq :: [ String | Integer ] -> a -> Object -> Boolean');
+        ie_close('code');
+        itext(': an ');
+        ie_open('code');
+          itext('Object');
+        ie_close('code');
+        itext(' that contains the provided key in the provided traversal path');
+      ie_close('li');
+    ie_close('ul');
     ie_open('input', null, null,
         'type', 'hidden',
         'value', opt_data.page.title);
@@ -28572,11 +28924,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'value', opt_data.site.title);
     ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({content: param1350}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param1730}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'zPuPG.render';
+  $render.soyTemplateName = 'hfzHp.render';
 }
 
 exports.render.params = ["page","site"];
@@ -28586,19 +28938,14 @@ return exports;
 
 });
 
-class zPuPG extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(zPuPG, templates);
+class hfzHp extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(hfzHp, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
 
 
 /***/ }),
-/* 227 */,
-/* 228 */,
-/* 229 */,
-/* 230 */,
-/* 231 */,
 /* 232 */,
 /* 233 */,
 /* 234 */,
@@ -28630,8 +28977,7 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(zPuPG, templates);
 /* 260 */,
 /* 261 */,
 /* 262 */,
-/* 263 */,
-/* 264 */
+/* 263 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28667,9 +29013,9 @@ __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _combinatorsSoy = __webpack_require__(226);
+var _predicateFunctionsSoy = __webpack_require__(231);
 
-var _combinatorsSoy2 = _interopRequireDefault(_combinatorsSoy);
+var _predicateFunctionsSoy2 = _interopRequireDefault(_predicateFunctionsSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28679,23 +29025,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var zPuPG = function (_Component) {
-  _inherits(zPuPG, _Component);
+var hfzHp = function (_Component) {
+  _inherits(hfzHp, _Component);
 
-  function zPuPG() {
-    _classCallCheck(this, zPuPG);
+  function hfzHp() {
+    _classCallCheck(this, hfzHp);
 
-    return _possibleConstructorReturn(this, (zPuPG.__proto__ || Object.getPrototypeOf(zPuPG)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (hfzHp.__proto__ || Object.getPrototypeOf(hfzHp)).apply(this, arguments));
   }
 
-  return zPuPG;
+  return hfzHp;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(zPuPG, _combinatorsSoy2.default);
+_metalSoy2.default.register(hfzHp, _predicateFunctionsSoy2.default);
 
-exports.default = zPuPG;
+exports.default = hfzHp;
 
 /***/ })
-],[264]);
+],[263]);

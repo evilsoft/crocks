@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([28,31,32,33],[
+webpackJsonppageComponent([18,31,32,33],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -28350,12 +28350,22 @@ exports.default = parseFromAnchor;
 /* 216 */,
 /* 217 */,
 /* 218 */,
-/* 219 */
+/* 219 */,
+/* 220 */,
+/* 221 */,
+/* 222 */,
+/* 223 */,
+/* 224 */,
+/* 225 */,
+/* 226 */,
+/* 227 */,
+/* 228 */,
+/* 229 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SOZMz", function() { return SOZMz; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fPbAR", function() { return fPbAR; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28367,15 +28377,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var templates;
 goog.loadModule(function(exports) {
 
-// This file was automatically generated from Equiv.soy.
+// This file was automatically generated from logic-functions.soy.
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace SOZMz.
+ * @fileoverview Templates in namespace fPbAR.
  * @public
  */
 
-goog.module('SOZMz.incrementaldom');
+goog.module('fPbAR.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28398,7 +28408,7 @@ var iattr = IncrementalDom.attr;
 
 var $templateAlias2 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('ElectricCode.incrementaldom', 'render');
 
-var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('guide.incrementaldom', 'render');
+var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('notopic.incrementaldom', 'render');
 
 
 /**
@@ -28409,286 +28419,201 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var param628 = function() {
-    $templateAlias2({code: 'Equiv a a Boolean', mode: 'haskell'}, null, opt_ijData);
+  var param1677 = function() {
     ie_open('p');
-      itext('Defined as a Monoidal Contravariant datatype, ');
+      itext('The functions in this section are used to represent logical branching in a declarative manner. Each of these functions require either ');
       ie_open('code');
-        itext('Equiv');
+        itext('Pred');
       ie_close('code');
-      itext(' can be used to test equivalence between (2) values of a given type. It does this by wrapping a binary equivalence function of the form ');
+      itext('s or predicate functions in their input. Since these functions work with ');
       ie_open('code');
-        itext('(a, a) -> Boolean');
+        itext('Pred');
       ie_close('code');
-      itext('. Most of the time strict equality is used, but other functions of the required form can provide some powerful results.');
+      itext('s and predicate functions, rather than values, this allows for composeable, "lazy" evaluation. All logic functions can be referenced from ');
+      ie_open('code');
+        itext('crocks/logic');
+      ie_close('code');
     ie_close('p');
-    ie_open('p');
-      itext('While the far right parameter is always fixed to ');
-      ie_open('code');
-        itext('Boolean');
-      ie_close('code');
-      itext(' it cannot be Covariant, but is Contravariant allowing both inputs to vary in their type.');
-      ie_open('code');
-        itext('Equiv');
-      ie_close('code');
-      itext(' is also a ');
+    ie_open('h4');
       ie_open('a', null, null,
-          'href', '../monoids/index.html');
+          'id', 'and',
+          'href', '#and');
+        itext('and');
+      ie_close('a');
+    ie_close('h4');
+    $templateAlias2({code: 'and :: ((a -> Boolean) | Pred a) -> ((a -> Boolean) | Pred a) -> a -> Boolean', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('Say you have two predicate functions or ');
+      ie_open('code');
+        itext('Pred');
+      ie_close('code');
+      itext('s and would like to combine them into one predicate over conjunction, well you came to the right place, ');
+      ie_open('code');
+        itext('and');
+      ie_close('code');
+      itext('accepts either predicate functions or ');
+      ie_open('code');
+        itext('Pred');
+      ie_close('code');
+      itext('s and will return you a function ready to take a value. Once that value is passed, it will run it through both of the predicates and return the result of combining it over a ');
+      ie_open('code');
+        itext('logical and');
+      ie_close('code');
+      itext('. This is super helpful combined with ');
+      ie_open('code');
+        itext('or');
+      ie_close('code');
+      itext(' for putting together reusable, complex predicates. As they follow the general form of ');
+      ie_open('code');
+        itext('(a -> Boolean)');
+      ie_close('code');
+      itext(' they are easily combined with other logic functions.');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'ifelse',
+          'href', '#ifelse');
+        itext('ifElse');
+      ie_close('a');
+    ie_close('h4');
+    $templateAlias2({code: 'ifElse :: ((a -> Boolean) | Pred a) -> (a -> b) -> (a -> b) -> a -> b', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('Whenever you need to modify a value based some condition and want a functional way to do it without some imperative ');
+      ie_open('code');
+        itext('if');
+      ie_close('code');
+      itext(' statement, then reach for ');
+      ie_open('code');
+        itext('ifElse');
+      ie_close('code');
+      itext('. This function take a predicate (some function that returns a Boolean) and two functions. The first is what is executed when the predicate is true, the second on a false condition. This will return a function ready to take a value to run through the predicate. After the value is evaluated, it will be ran through it\'s corresponding function, returning the result as the final result. This function comes in really handy when creating lifting functions for Sum Types (like');
+      ie_open('code');
+        itext('Either');
+      ie_close('code');
+      itext(' or ');
+      ie_open('code');
+        itext('Maybe');
+      ie_close('code');
+      itext(').');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'not',
+          'href', '#not');
+        itext('not');
+      ie_close('a');
+    ie_close('h4');
+    $templateAlias2({code: 'not :: ((a -> Boolean) | Pred) -> a -> Boolean', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('When you need to negate a predicate function or a ');
+      ie_open('code');
+        itext('Pred');
+      ie_close('code');
+      itext(', but want a new predicate function that does the negation, then ');
+      ie_open('code');
+        itext('not');
+      ie_close('code');
+      itext(' is going to get you what you need. Using ');
+      ie_open('code');
+        itext('not');
+      ie_close('code');
+      itext(' will allow you to stay as declarative as possible. Just pass ');
+      ie_open('code');
+        itext('not');
+      ie_close('code');
+      itext(' your predicate function or a ');
+      ie_open('code');
+        itext('Pred');
+      ie_close('code');
+      itext(', and it will give you back a predicate function ready for insertion into your flow. All predicate based functions in ');
+      ie_open('code');
+        itext('crocks');
+      ie_close('code');
+      itext(' take either a ');
+      ie_open('code');
+        itext('Pred');
+      ie_close('code');
+      itext(' or predicate function, so it should be easy to swap between the two.');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'or',
+          'href', '#or');
+        itext('or');
+      ie_close('a');
+    ie_close('h4');
+    $templateAlias2({code: 'or :: ((a -> Boolean) | Pred) -> ((a -> Boolean) | Pred) -> a -> Boolean', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('Say you have two predicate functions or ');
+      ie_open('code');
+        itext('Pred');
+      ie_close('code');
+      itext('s and would like to combine them into one predicate over disjunction, look no further, ');
+      ie_open('code');
+        itext('or');
+      ie_close('code');
+      itext(' accepts either predicate functions or ');
+      ie_open('code');
+        itext('Pred');
+      ie_close('code');
+      itext('s and will return you a function ready to take a value. Once that value is passed, it will run it through both of the predicates and return the result of combining it over a ');
+      ie_open('code');
+        itext('logical or');
+      ie_close('code');
+      itext('. This is super helpful combined with ');
+      ie_open('code');
+        itext('and');
+      ie_close('code');
+      itext(' for putting together reusable, complex predicates. As they follow the general form of ');
+      ie_open('code');
+        itext('(a -> Boolean)');
+      ie_close('code');
+      itext(' they are easily combined with other logic functions.');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'unless',
+          'href', '#unless');
+        itext('unless');
+      ie_close('a');
+    ie_close('h4');
+    $templateAlias2({code: 'unless :: ((a -> Boolean) | Pred) -> (a -> a) -> a -> a', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('There may come a time when you need to adjust a value when a condition is false, that is where ');
+      ie_open('code');
+        itext('unless');
+      ie_close('code');
+      itext(' can come into play. Just provide a predicate function (a function that returns a Boolean) and a function to apply your desired modification. This will get you back a function that when you pass it a value, it will evaluate it and if false, will run your value through the provided function. Either the original or modified value will be returned depending on the result of the predicate. Check out ');
+      ie_open('a', null, null,
+          'href', '#when');
         ie_open('code');
-          itext('Monoid');
+          itext('when');
         ie_close('code');
       ie_close('a');
-      itext(' and will concat the results of (2) ');
-      ie_open('code');
-        itext('Equiv');
-      ie_close('code');
-      itext('s under logical conjunction, with it\'s empty value always returning ');
-      ie_open('code');
-        itext('true');
-      ie_close('code');
-      itext('.');
+      itext(' for a negated version of this function.');
     ie_close('p');
-    ie_open('p');
-      itext('As ');
-      ie_open('code');
-        itext('Equiv');
-      ie_close('code');
-      itext(' wraps a function, it is lazy and a given instance will not produce a result until both arguments are satisfied. A given instance can be run by calling the method ');
+    ie_open('h4');
       ie_open('a', null, null,
-          'href', '#comparewith');
+          'id', 'when',
+          'href', '#when');
+        itext('when');
+      ie_close('a');
+    ie_close('h4');
+    $templateAlias2({code: 'when :: ((a -> Boolean) | Pred) -> (a -> a) -> a -> a', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('There may come a time when you need to adjust a value when a condition is true, that is where ');
+      ie_open('code');
+        itext('when');
+      ie_close('code');
+      itext(' can come into play. Just provide a predicate function (a function that returns a Boolean) and a function to apply your desired modification. This will get you back a function that when you pass it a value, it will evaluate it and if true, will run your value through the provided function. Either the original or modified value will be returned depending on the result of the predicate. Check out ');
+      ie_open('a', null, null,
+          'href', '#unless');
         ie_open('code');
-          itext('compareWith');
+          itext('unless');
         ie_close('code');
       ie_close('a');
-      itext(', providing both values for comparison.');
+      itext(' for a negated version of this function.');
     ie_close('p');
-    $templateAlias2({code: 'import Equiv from \'crocks/Equiv\'\n\nimport equals from \'crocks/pointfree/equals\'\n\n// toString :: a -> String\nconst toString =\n  x => x.toString()\n\n// length :: a -> Number\nconst length = x =>\n  x && x.length ? x.length : 0\n\n// eq :: Equiv a a\nconst eq =\n  Equiv(equals)\n\neq.contramap(toString)\n  .compareWith(\'123\', 123)\n//=> true\n\neq.contramap(length)\n  .compareWith([ 1, 2, 3 ], [ \'a\', \'b\' ])\n//=> false', mode: 'javascript'}, null, opt_ijData);
-    ie_open('article', null, null,
-        'id', 'topic-implements');
-      ie_open('h2');
-        ie_open('a', null, null,
-            'id', 'implements',
-            'href', '#implements');
-          itext('Implements');
-        ie_close('a');
-      ie_close('h2');
-      ie_open('p');
-        ie_open('code');
-          itext('Semigroup');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('Monoid');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('Contravariant');
-        ie_close('code');
-      ie_close('p');
-    ie_close('article');
-    ie_open('article', null, null,
-        'id', 'topic-constructor');
-      ie_open('h2');
-        ie_open('a', null, null,
-            'id', 'constructor-methods',
-            'href', '#constructor-methods');
-          itext('Constructor Methods');
-        ie_close('a');
-      ie_close('h2');
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'empty',
-            'href', '#empty');
-          itext('empty');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Equiv.empty :: () -> Equiv a a', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        ie_open('code');
-          itext('empty');
-        ie_close('code');
-        itext(' provides the identity for the ');
-        ie_open('code');
-          itext('Monoid');
-        ie_close('code');
-        itext(' in that when the value it provides is ');
-        ie_open('code');
-          itext('concat');
-        ie_close('code');
-        itext('ed to any other value, it will return the other value. In the case of ');
-        ie_open('code');
-          itext('Equiv');
-        ie_close('code');
-        itext(' the result of ');
-        ie_open('code');
-          itext('empty');
-        ie_close('code');
-        itext(' is an ');
-        ie_open('code');
-          itext('Equiv');
-        ie_close('code');
-        itext(' that will always return');
-        ie_open('code');
-          itext('true');
-        ie_close('code');
-        itext('. ');
-        ie_open('code');
-          itext('empty');
-        ie_close('code');
-        itext(' is available on both the Constructor and the Instance for convenience.');
-      ie_close('p');
-      $templateAlias2({code: 'import Equiv from \'crocks/Equiv\'\n\nimport equals from \'crocks/pointfree/equals\'\n\nconst eq =\n  Equiv(equals)\n\nconst empty =\n  Equiv.empty()\n\neq\n  .concat(empty)\n  .compareWith({ a: 32 }, { a: 32 })\n//=> true\n\nempty\n  .concat(eq)\n  .compareWith({ a: 32 }, { a: 32 })\n//=> true\n\nempty\n  .concat(eq)\n  .compareWith({ a: 32, b: 19 }, { a: 32 })\n//=> false', mode: 'javascript'}, null, opt_ijData);
-    ie_close('article');
-    ie_open('article', null, null,
-        'id', 'topic-instance');
-      ie_open('h2');
-        ie_open('a', null, null,
-            'id', 'instance-methods',
-            'href', '#instance-methods');
-          itext('Instance Methods');
-        ie_close('a');
-      ie_close('h2');
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'concat',
-            'href', '#concat');
-          itext('concat');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Equiv a a ~> Equiv a a -> Equiv a a', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        ie_open('code');
-          itext('concat');
-        ie_close('code');
-        itext(' is used to combine (2) ');
-        ie_open('code');
-          itext('Semigroup');
-        ie_close('code');
-        itext('s of the same type under an operation specified by the ');
-        ie_open('code');
-          itext('Semigroup');
-        ie_close('code');
-        itext('. In the case of ');
-        ie_open('code');
-          itext('Equiv');
-        ie_close('code');
-        itext(', the results of both');
-        ie_open('code');
-          itext('Equiv');
-        ie_close('code');
-        itext('s are combined under logical conjunction.');
-      ie_close('p');
-      $templateAlias2({code: 'import Equiv from \'crocks/Equiv\'\n\nimport compareWith from \'crocks/pointfree/compareWith\'\nimport equals from \'crocks/pointfree/equals\'\nimport isSameType from \'crocks/predicates/isSameType\'\nimport propOr from \'crocks/helpers/propOr\'\n\n// objLength :: Object -> Number\nconst objLength =\n  x => Object.keys(x).length\n\n// eq :: Equiv a a\nconst eq =\n  Equiv(equals)\n\n// sameType :: Equiv a a\nconst sameType =\n  Equiv(isSameType)\n\n// sameType :: Equiv Object Object\nconst length =\n  eq.contramap(objLength)\n\n// sameType :: Equiv a a\nconst sameTypeProp = key =>\n  sameType.contramap(propOr(null, key))\n\n// run :: Equiv Object Object\nconst run = compareWith(\n  { a: 19, b: \'string\' },\n  { a: 32, c: false }\n)\n\nrun(length)\n//=> true\n\nrun(sameTypeProp(\'a\'))\n//=> true\n\nrun(sameTypeProp(\'b\'))\n//=> false\n\nrun(\n  sameTypeProp(\'a\')\n    .concat(length)\n)\n// true\n\nrun(\n  sameTypeProp(\'b\')\n    .concat(length)\n)\n// false', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'contramap',
-            'href', '#contramap');
-          itext('contramap');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Equiv a a ~> (b -> a) -> Equiv b b', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('The far right parameter of ');
-        ie_open('code');
-          itext('Equiv');
-        ie_close('code');
-        itext(' fixed to ');
-        ie_open('code');
-          itext('Boolean');
-        ie_close('code');
-        itext(' which means we cannot map the value as expected. However the left two parameters can vary, although they must vary in the same manner.');
-      ie_close('p');
-      ie_open('p');
-        itext('This is where ');
-        ie_open('code');
-          itext('contramap');
-        ie_close('code');
-        itext(' comes into play as it can be used to adapt an ');
-        ie_open('code');
-          itext('Equiv');
-        ie_close('code');
-        itext('of a given type to accept a different type or modify the value. Provide it a function that has a return type that matches the input types of the ');
-        ie_open('code');
-          itext('Equiv');
-        ie_close('code');
-        itext('. This will return a new ');
-        ie_open('code');
-          itext('Equiv');
-        ie_close('code');
-        itext(' matching the input type of the provided function.');
-      ie_close('p');
-      $templateAlias2({code: 'import Equiv from \'crocks/Equiv\'\n\nimport equals from \'crocks/pointfree/equals\'\n\n// length :: String -> Number\nconst length =\n  x => x.length\n\n// eq :: Equiv a a\nconst eq =\n  Equiv(equals)\n\n// sameLength :: Equiv String String\nconst sameLength =\n  eq.contramap(length)\n\n// sameAmplitude :: Equiv Float Float\nconst sameAmplitude =\n  eq.contramap(Math.abs)\n\nsameAmplitude\n  .compareWith(-0.5011, 0.5011)\n//=> true\n\nsameAmplitude\n  .compareWith(-0.755, 0.8023)\n//=> false\n\nsameLength\n  .compareWith(\'aBcD\', \'1234\')\n//=> true\n\nsameLength\n  .compareWith(\'AB\', \'ABC\')\n//=> false', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'valueof',
-            'href', '#valueof');
-          itext('valueOf');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Equiv a a ~> () -> a -> a -> Boolean', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        ie_open('code');
-          itext('valueOf');
-        ie_close('code');
-        itext(' is used on all ');
-        ie_open('code');
-          itext('crocks');
-        ie_close('code');
-        itext(' ');
-        ie_open('code');
-          itext('Monoid');
-        ie_close('code');
-        itext('s as a means of extraction. While the extraction is available, types that implement ');
-        ie_open('code');
-          itext('valueOf');
-        ie_close('code');
-        itext(' are not necessarily a');
-        ie_open('code');
-          itext('Comonad');
-        ie_close('code');
-        itext('. This function is used primarily for convenience for some of the helper functions that ship with ');
-        ie_open('code');
-          itext('crocks');
-        ie_close('code');
-        itext('. Calling ');
-        ie_open('code');
-          itext('valueOf');
-        ie_close('code');
-        itext(' on an ');
-        ie_open('code');
-          itext('Equiv');
-        ie_close('code');
-        itext('instance will result in the underlying curried equivalence function.');
-      ie_close('p');
-      $templateAlias2({code: 'import Equiv from \'crocks/Equiv\'\n\nimport compose from \'crocks/helpers/compose\'\nimport equals from \'crocks/pointfree/equals\'\nimport propOr from \'crocks/helpers/propOr\'\n\n// toLower :: String -> String\nconst toLower =\n  x => x.toLowerCase()\n\n// length :: String -> String\nconst length =\n  x => x.length\n\n// lowerName :: Object -> String\nconst lowerName =\n  compose(toLower, propOr(\'\', \'name\'))\n\n// itemsLen :: Object -> Number\nconst itemsLen =\n  compose(length, propOr(\'\', \'items\'))\n\n// eq :: Equiv a a\nconst eq =\n  Equiv(equals)\n\n// checkName :: Equiv Object Object\nconst checkName =\n  eq.contramap(lowerName)\n\n// checkName :: Equiv Object Object\nconst checkItems =\n  eq.contramap(itemsLen)\n\n// test :: Object -> Object -> Boolean\nconst test =\n  checkName\n    .concat(checkItems)\n    .valueOf()\n\ntest(\n  { name: \'Bob\', items: [ 1, 2, 4 ] },\n  { name: \'bOb\', items: [ 9, 12, 9 ] }\n)\n//=> true', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'comparewith',
-            'href', '#comparewith');
-          itext('compareWith');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Equiv a a ~> a -> a -> Boolean', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('As ');
-        ie_open('code');
-          itext('Equiv');
-        ie_close('code');
-        itext(' wraps a function, it needs a means to be run with two values for comparison. Instances provide a curried method called ');
-        ie_open('code');
-          itext('compareWith');
-        ie_close('code');
-        itext(' that takes two values for comparison and will run them through the equivalence function, returning the resulting ');
-        ie_open('code');
-          itext('Boolean');
-        ie_close('code');
-        itext('.');
-      ie_close('p');
-      ie_open('p');
-        itext('Due to the laziness of this type, complicated comparisons can be built out from combining and mapping smaller, simpler units of equivalence comparison.');
-      ie_close('p');
-      $templateAlias2({code: 'import Equiv from \'crocks/Equiv\'\n\n// both :: Equiv Boolean Boolean\nconst both =\n  Equiv((x, y) => x && y)\n\n// isEven :: Number -> Boolean\nconst isEven =\n  x => x % 2 === 0\n\n// isBig :: Number -> Boolean\nconst isBig =\n  x => x > 10\n\n// bothEven :: Equiv Number Number\nconst bothEven =\n  both.contramap(isEven)\n\n// bothBig :: Equiv Number Number\nconst bothBig =\n  both.contramap(isBig)\n\nbothEven\n  .compareWith(12, 20)\n//=> true\n\nbothEven\n  .compareWith(17, 20)\n//=> false\n\nbothBig\n  .compareWith(17)(20)\n//=> true\n\nbothBig\n  .compareWith(7)(20)\n//=> false\n\nbothBig\n  .concat(bothEven)\n  .compareWith(8)(54)\n//=> false', mode: 'javascript'}, null, opt_ijData);
-    ie_close('article');
     ie_open('input', null, null,
         'type', 'hidden',
         'value', opt_data.page.title);
@@ -28698,11 +28623,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'value', opt_data.site.title);
     ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({content: param628}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param1677}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'SOZMz.render';
+  $render.soyTemplateName = 'fPbAR.render';
 }
 
 exports.render.params = ["page","site"];
@@ -28712,24 +28637,14 @@ return exports;
 
 });
 
-class SOZMz extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(SOZMz, templates);
+class fPbAR extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(fPbAR, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
 
 
 /***/ }),
-/* 220 */,
-/* 221 */,
-/* 222 */,
-/* 223 */,
-/* 224 */,
-/* 225 */,
-/* 226 */,
-/* 227 */,
-/* 228 */,
-/* 229 */,
 /* 230 */,
 /* 231 */,
 /* 232 */,
@@ -28753,7 +28668,16 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(SOZMz, templates);
 /* 250 */,
 /* 251 */,
 /* 252 */,
-/* 253 */
+/* 253 */,
+/* 254 */,
+/* 255 */,
+/* 256 */,
+/* 257 */,
+/* 258 */,
+/* 259 */,
+/* 260 */,
+/* 261 */,
+/* 262 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28789,9 +28713,9 @@ __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _EquivSoy = __webpack_require__(219);
+var _logicFunctionsSoy = __webpack_require__(229);
 
-var _EquivSoy2 = _interopRequireDefault(_EquivSoy);
+var _logicFunctionsSoy2 = _interopRequireDefault(_logicFunctionsSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28801,23 +28725,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var SOZMz = function (_Component) {
-  _inherits(SOZMz, _Component);
+var fPbAR = function (_Component) {
+  _inherits(fPbAR, _Component);
 
-  function SOZMz() {
-    _classCallCheck(this, SOZMz);
+  function fPbAR() {
+    _classCallCheck(this, fPbAR);
 
-    return _possibleConstructorReturn(this, (SOZMz.__proto__ || Object.getPrototypeOf(SOZMz)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (fPbAR.__proto__ || Object.getPrototypeOf(fPbAR)).apply(this, arguments));
   }
 
-  return SOZMz;
+  return fPbAR;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(SOZMz, _EquivSoy2.default);
+_metalSoy2.default.register(fPbAR, _logicFunctionsSoy2.default);
 
-exports.default = SOZMz;
+exports.default = fPbAR;
 
 /***/ })
-],[253]);
+],[262]);

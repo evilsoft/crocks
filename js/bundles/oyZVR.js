@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([11,31,32,33],[
+webpackJsonppageComponent([4,31,32,33],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -28367,12 +28367,19 @@ exports.default = parseFromAnchor;
 /* 233 */,
 /* 234 */,
 /* 235 */,
-/* 236 */
+/* 236 */,
+/* 237 */,
+/* 238 */,
+/* 239 */,
+/* 240 */,
+/* 241 */,
+/* 242 */,
+/* 243 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "YyoKc", function() { return YyoKc; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "oyZVR", function() { return oyZVR; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28384,15 +28391,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var templates;
 goog.loadModule(function(exports) {
 
-// This file was automatically generated from Any.soy.
+// This file was automatically generated from Prod.soy.
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace YyoKc.
+ * @fileoverview Templates in namespace oyZVR.
  * @public
  */
 
-goog.module('YyoKc.incrementaldom');
+goog.module('oyZVR.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28426,31 +28433,23 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var param1811 = function() {
-    $templateAlias2({code: 'Any Boolean', mode: 'haskell'}, null, opt_ijData);
+  var param2257 = function() {
+    $templateAlias2({code: 'Prod Number', mode: 'haskell'}, null, opt_ijData);
     ie_open('p');
       ie_open('code');
-        itext('Any');
+        itext('Prod');
       ie_close('code');
       itext(' is a ');
       ie_open('code');
         itext('Monoid');
       ie_close('code');
-      itext(' that will combine (2) values of any type using logical disjunction (OR) on their coerced ');
+      itext(' that will combine (2) ');
       ie_open('code');
-        itext('Boolean');
+        itext('Number');
       ie_close('code');
-      itext(' values, mapping truth-y values to');
-      ie_open('code');
-        itext('true');
-      ie_close('code');
-      itext(' and false-y values to ');
-      ie_open('code');
-        itext('false');
-      ie_close('code');
-      itext('.');
+      itext('s under multiplication.');
     ie_close('p');
-    $templateAlias2({code: 'import Any from \'crocks/Any\'\n\nimport isNumber from \'crocks/predicates/isNumber\'\nimport mconcatMap from \'crocks/helpers/mconcat\'\n\nconst trueString = Any(\'string\')\nconst falseString = Any(\'\')\nconst object = Any({ nice: true })\n\ntrueString.concat(falseString)\n//=> Any false\n\ntrueString.concat(object)\n//=> Any true\n\nconst anyNumber =\n  mconcatMap(Any, isNumber)\n\nanyNumber([ \'string\', 3 ])\n//=> Any true\n\nanyNumber([ true, \'string\' ])\n//=> Any false', mode: 'javascript'}, null, opt_ijData);
+    $templateAlias2({code: 'import Prod from \'crocks/Prod\'\nimport compose from \'crocks/helpers/compose\'\nimport concat from \'crocks/pointfree/concat\'\n\nconst emptyProd = Prod.empty()\nconst tenProd = Prod(10)\nconst hundredProd = Prod(100)\n\nemptyProd\n  .concat(emptyProd)\n//=> Prod 1\n\ntenProd\n  .concat(hundredProd)\n//=> Prod 1000\n\n// prodBy2 :: Number -> Prod\nconst double =\n  compose(concat(Prod(2)), Prod)\n\ndouble(4)\n//=> Prod 8\n\ndouble(11)\n//=> Prod 22', mode: 'javascript'}, null, opt_ijData);
     ie_open('article', null, null,
         'id', 'topic-implements');
       ie_open('h2');
@@ -28479,14 +28478,14 @@ function $render(opt_data, opt_ignored, opt_ijData) {
           itext('Constructor Methods');
         ie_close('a');
       ie_close('h2');
-      ie_open('h4');
+      ie_open('h3');
         ie_open('a', null, null,
             'id', 'empty',
             'href', '#empty');
           itext('empty');
         ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Any.empty :: () -> Any', mode: 'haskell'}, null, opt_ijData);
+      ie_close('h3');
+      $templateAlias2({code: 'Prod.empty :: () -> Prod', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
         ie_open('code');
           itext('empty');
@@ -28499,9 +28498,9 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_open('code');
           itext('concat');
         ie_close('code');
-        itext('ed to any other value, it will return the other value. In the case of ');
+        itext('ed to object other value, it will return the other value. In the case of ');
         ie_open('code');
-          itext('Any');
+          itext('Prod');
         ie_close('code');
         itext(' the result of ');
         ie_open('code');
@@ -28509,7 +28508,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_close('code');
         itext(' is ');
         ie_open('code');
-          itext('false');
+          itext('1');
         ie_close('code');
         itext('. ');
         ie_open('code');
@@ -28517,7 +28516,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_close('code');
         itext(' is available on both the Constructor and the Instance for convenience.');
       ie_close('p');
-      $templateAlias2({code: 'import Any from \'crocks/Any\'\n\nAny.empty() //=> Any false\n\nAny(true).concat(Any.empty())   //=> Any true\nAny(false).concat(Any.empty())  //=> Any false', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'import Prod from \'crocks/Prod\'\n\nProd.empty()\n//=> Prod 1\n\nProd.empty()\n  .concat(Prod.empty())\n//=> Prod 1\n\nProd(4)\n  .concat(Prod.empty())\n//=> Prod 4\n\nProd.empty()\n  .concat(Prod(4))\n//=> Prod 4', mode: 'javascript'}, null, opt_ijData);
     ie_close('article');
     ie_open('article', null, null,
         'id', 'topic-instance');
@@ -28528,14 +28527,14 @@ function $render(opt_data, opt_ignored, opt_ijData) {
           itext('Instance Methods');
         ie_close('a');
       ie_close('h2');
-      ie_open('h4');
+      ie_open('h3');
         ie_open('a', null, null,
             'id', 'concat',
             'href', '#concat');
           itext('concat');
         ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Any ~> Any -> Any', mode: 'haskell'}, null, opt_ijData);
+      ie_close('h3');
+      $templateAlias2({code: 'Prod ~> Prod -> Prod', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
         ie_open('code');
           itext('concat');
@@ -28550,19 +28549,27 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_close('code');
         itext('. In the case of ');
         ie_open('code');
-          itext('Any');
+          itext('Prod');
         ie_close('code');
-        itext(', it will combine the (2) using logical OR (disjunction).');
+        itext(', ');
+        ie_open('code');
+          itext('concat');
+        ie_close('code');
+        itext(' will multiply the (2) ');
+        ie_open('code');
+          itext('Number');
+        ie_close('code');
+        itext('s.');
       ie_close('p');
-      $templateAlias2({code: 'import Any from \'crocks/Any\'\n\nAny(true).concat(Any(true))   //=> Any true\nAny(true).concat(Any(false))  //=> Any true\nAny(false).concat(Any(true))  //=> Any true\nAny(false).concat(Any(false)) //=> Any false', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
+      $templateAlias2({code: 'import Prod from \'crocks/Prod\'\n\nProd(5)\n  .concat(Prod(4))\n//=> Prod 20\n\nProd(45)\n  .concat(Prod(32))\n//=> Prod 1440\n\nProd(1000)\n  .concat(Prod(Infinity))\n//=> Prod Infinity\n\nProd.empty()\n  .concat(Prod(3))\n//=> Prod 3', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h3');
         ie_open('a', null, null,
             'id', 'valueof',
             'href', '#valueof');
           itext('valueOf');
         ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Any ~> () -> Boolean', mode: 'haskell'}, null, opt_ijData);
+      ie_close('h3');
+      $templateAlias2({code: 'Prod ~> () -> Number', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
         ie_open('code');
           itext('valueOf');
@@ -28579,7 +28586,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_open('code');
           itext('valueOf');
         ie_close('code');
-        itext(' are not necessarily a');
+        itext(' are not necessarily a ');
         ie_open('code');
           itext('Comonad');
         ie_close('code');
@@ -28591,17 +28598,17 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_open('code');
           itext('valueOf');
         ie_close('code');
-        itext(' on an ');
+        itext(' on a ');
         ie_open('code');
-          itext('Any');
+          itext('Prod');
         ie_close('code');
-        itext(' instance will result in the underlying ');
+        itext('instance will result in the underlying ');
         ie_open('code');
-          itext('Boolean');
+          itext('Number');
         ie_close('code');
-        itext(' value.');
+        itext('.');
       ie_close('p');
-      $templateAlias2({code: 'import Any from \'crocks/Any\'\n\nAny(0).valueOf()        //=> false\nAny(\'string\').valueOf() //=> true\n\n//=> true\nAny(45)\n  .concat(\'\')\n  .valueOf()', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'import Prod from \'crocks/Prod\'\n\nProd.empty()\n  .valueOf()\n//=> 1\n\nProd(4)\n  .valueOf()\n//=> 4\n\nProd(34)\n  .concat(Prod(21))\n  .valueOf()\n//=> 714', mode: 'javascript'}, null, opt_ijData);
     ie_close('article');
     ie_open('input', null, null,
         'type', 'hidden',
@@ -28612,11 +28619,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'value', opt_data.site.title);
     ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({content: param1811}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param2257}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'YyoKc.render';
+  $render.soyTemplateName = 'oyZVR.render';
 }
 
 exports.render.params = ["page","site"];
@@ -28626,21 +28633,14 @@ return exports;
 
 });
 
-class YyoKc extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(YyoKc, templates);
+class oyZVR extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(oyZVR, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
 
 
 /***/ }),
-/* 237 */,
-/* 238 */,
-/* 239 */,
-/* 240 */,
-/* 241 */,
-/* 242 */,
-/* 243 */,
 /* 244 */,
 /* 245 */,
 /* 246 */,
@@ -28666,7 +28666,11 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(YyoKc, templates);
 /* 266 */,
 /* 267 */,
 /* 268 */,
-/* 269 */
+/* 269 */,
+/* 270 */,
+/* 271 */,
+/* 272 */,
+/* 273 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28702,9 +28706,9 @@ __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _AnySoy = __webpack_require__(236);
+var _ProdSoy = __webpack_require__(243);
 
-var _AnySoy2 = _interopRequireDefault(_AnySoy);
+var _ProdSoy2 = _interopRequireDefault(_ProdSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28714,23 +28718,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var YyoKc = function (_Component) {
-  _inherits(YyoKc, _Component);
+var oyZVR = function (_Component) {
+  _inherits(oyZVR, _Component);
 
-  function YyoKc() {
-    _classCallCheck(this, YyoKc);
+  function oyZVR() {
+    _classCallCheck(this, oyZVR);
 
-    return _possibleConstructorReturn(this, (YyoKc.__proto__ || Object.getPrototypeOf(YyoKc)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (oyZVR.__proto__ || Object.getPrototypeOf(oyZVR)).apply(this, arguments));
   }
 
-  return YyoKc;
+  return oyZVR;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(YyoKc, _AnySoy2.default);
+_metalSoy2.default.register(oyZVR, _ProdSoy2.default);
 
-exports.default = YyoKc;
+exports.default = oyZVR;
 
 /***/ })
-],[269]);
+],[273]);

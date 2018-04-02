@@ -123,6 +123,22 @@ test('Max equals properties (Setoid)', t => {
   t.end()
 })
 
+test('Max equals functionality', t => {
+  const a = Max(4)
+  const b = Max(4)
+  const c = Max(5)
+
+  const value = 5
+  const nonMax = MockCrock(value)
+
+  t.equal(a.equals(c), false, 'returns false when 2 Maxs are not equal')
+  t.equal(a.equals(b), true, 'returns true when 2 Maxs are equal')
+  t.equal(a.equals(nonMax), false, 'returns false when passed a non-Max')
+  t.equal(c.equals(value), false, 'returns false when passed a simple value')
+
+  t.end()
+})
+
 test('Max concat properties (Semigroup)', t => {
   const a = Max(45)
   const b = Max(20)
@@ -192,22 +208,6 @@ test('Max empty functionality', t => {
 
   t.equal(x.type(), 'Max', 'provides a Max')
   t.equal(x.valueOf(), -Infinity, 'wraps a -Infinity')
-
-  t.end()
-})
-
-test('Max equals functionality', t => {
-  const a = Max(4)
-  const b = Max(4)
-  const c = Max(5)
-
-  const value = 5
-  const nonMax = MockCrock(value)
-
-  t.equal(a.equals(c), false, 'returns false when 2 Maxs are not equal')
-  t.equal(a.equals(b), true, 'returns true when 2 Maxs are equal')
-  t.equal(a.equals(nonMax), false, 'returns false when passed a non-Max')
-  t.equal(c.equals(value), false, 'returns false when passed a simple value')
 
   t.end()
 })

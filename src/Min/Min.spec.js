@@ -123,6 +123,22 @@ test('Min equals properties (Setoid)', t => {
   t.end()
 })
 
+test('Min equals functionality', t => {
+  const a = Min(4)
+  const b = Min(4)
+  const c = Min(5)
+
+  const value = 5
+  const nonMin = MockCrock(value)
+
+  t.equal(a.equals(c), false, 'returns false when 2 Mins are not equal')
+  t.equal(a.equals(b), true, 'returns true when 2 Mins are equal')
+  t.equal(a.equals(nonMin), false, 'returns false when passed a non-Min')
+  t.equal(c.equals(value), false, 'returns false when passed a simple value')
+
+  t.end()
+})
+
 test('Min concat properties (Semigroup)', t => {
   const a = Min(45)
   const b = Min(20)
@@ -196,18 +212,3 @@ test('Min empty functionality', t => {
   t.end()
 })
 
-test('Min equals functionality', t => {
-  const a = Min(4)
-  const b = Min(4)
-  const c = Min(5)
-
-  const value = 5
-  const nonMin = MockCrock(value)
-
-  t.equal(a.equals(c), false, 'returns false when 2 Mins are not equal')
-  t.equal(a.equals(b), true, 'returns true when 2 Mins are equal')
-  t.equal(a.equals(nonMin), false, 'returns false when passed a non-Min')
-  t.equal(c.equals(value), false, 'returns false when passed a simple value')
-
-  t.end()
-})

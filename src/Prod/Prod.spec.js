@@ -123,6 +123,22 @@ test('Prod equals properties (Setoid)', t => {
   t.end()
 })
 
+test('Prod equals functionality', t => {
+  const a = Prod(4)
+  const b = Prod(4)
+  const c = Prod(5)
+
+  const value = 5
+  const nonSum = MockCrock(value)
+
+  t.equal(a.equals(c), false, 'returns false when 2 Prods are not equal')
+  t.equal(a.equals(b), true, 'returns true when 2 Prods are equal')
+  t.equal(a.equals(nonSum), false, 'returns false when passed a non-Prod')
+  t.equal(c.equals(value), false, 'returns false when passed a simple value')
+
+  t.end()
+})
+
 test('Prod concat properties (Semigroup)', t => {
   const a = Prod(45)
   const b = Prod(20)
@@ -192,22 +208,6 @@ test('Prod empty functionality', t => {
 
   t.equal(x.type(), 'Prod', 'provides a Prod')
   t.equal(x.valueOf(), 1, 'wraps a 1')
-
-  t.end()
-})
-
-test('Prod equals functionality', t => {
-  const a = Prod(4)
-  const b = Prod(4)
-  const c = Prod(5)
-
-  const value = 5
-  const nonSum = MockCrock(value)
-
-  t.equal(a.equals(c), false, 'returns false when 2 Prods are not equal')
-  t.equal(a.equals(b), true, 'returns true when 2 Prods are equal')
-  t.equal(a.equals(nonSum), false, 'returns false when passed a non-Prod')
-  t.equal(c.equals(value), false, 'returns false when passed a simple value')
 
   t.end()
 })

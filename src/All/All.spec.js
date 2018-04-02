@@ -178,21 +178,6 @@ test('All equals properties (Setoid)', t => {
   t.end()
 })
 
-test('All empty properties (Monoid)', t => {
-  const m = All(3)
-
-  t.ok(isFunction(m.concat), 'provides a concat function')
-  t.ok(isFunction(m.empty), 'provides an empty function')
-
-  const right = m.concat(m.empty())
-  const left = m.empty().concat(m)
-
-  t.equal(right.valueOf(), m.valueOf(), 'right identity')
-  t.equal(left.valueOf(), m.valueOf(), 'left identity')
-
-  t.end()
-})
-
 test('All equals functionality', t => {
   const a = All(true)
   const b = All(true)
@@ -205,6 +190,21 @@ test('All equals functionality', t => {
   t.equal(a.equals(b), true, 'returns true when 2 Alls are equal')
   t.equal(a.equals(nonAll), false, 'returns false when passed a non-All')
   t.equal(c.equals(value), false, 'returns false when passed a simple value')
+
+  t.end()
+})
+
+test('All empty properties (Monoid)', t => {
+  const m = All(3)
+
+  t.ok(isFunction(m.concat), 'provides a concat function')
+  t.ok(isFunction(m.empty), 'provides an empty function')
+
+  const right = m.concat(m.empty())
+  const left = m.empty().concat(m)
+
+  t.equal(right.valueOf(), m.valueOf(), 'right identity')
+  t.equal(left.valueOf(), m.valueOf(), 'left identity')
 
   t.end()
 })

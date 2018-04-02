@@ -159,6 +159,22 @@ test('First equals properties (Setoid)', t => {
   t.end()
 })
 
+test('First equals functionality', t => {
+  const a = First(3)
+  const b = First(3)
+  const c = First(5)
+
+  const value = {}
+  const nonFirst = MockCrock(value)
+
+  t.equal(a.equals(c), false, 'returns false when 2 Firsts are not equal')
+  t.equal(a.equals(b), true, 'returns true when 2 Firsts are equal')
+  t.equal(a.equals(nonFirst), false, 'returns false when passed a non-First')
+  t.equal(c.equals(value), false, 'returns false when passed a simple value')
+
+  t.end()
+})
+
 test('First concat properties (Semigroup)', t => {
   const a = First(0)
   const b = First(1)
@@ -194,22 +210,6 @@ test('First empty properties (Monoid)', t => {
 
   t.equal(extract(right), extract(m), 'right identity')
   t.equal(extract(left), extract(m), 'left identity')
-
-  t.end()
-})
-
-test('First equals functionality', t => {
-  const a = First(3)
-  const b = First(3)
-  const c = First(5)
-
-  const value = {}
-  const nonFirst = MockCrock(value)
-
-  t.equal(a.equals(c), false, 'returns false when 2 Firsts are not equal')
-  t.equal(a.equals(b), true, 'returns true when 2 Firsts are equal')
-  t.equal(a.equals(nonFirst), false, 'returns false when passed a non-First')
-  t.equal(c.equals(value), false, 'returns false when passed a simple value')
 
   t.end()
 })

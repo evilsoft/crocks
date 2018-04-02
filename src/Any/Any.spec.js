@@ -181,15 +181,6 @@ test('Any equals properties (Setoid)', t => {
   t.end()
 })
 
-test('Any empty functionality', t => {
-  const x = Any(0).empty()
-
-  t.equal(x.type(), 'Any', 'provides an Any')
-  t.equal(x.valueOf(), false, 'wraps a false value')
-
-  t.end()
-})
-
 test('Any equals functionality', t => {
   const a = Any(true)
   const b = Any(true)
@@ -202,6 +193,15 @@ test('Any equals functionality', t => {
   t.equal(a.equals(b), true, 'returns true when 2 Anys are equal')
   t.equal(a.equals(nonAny), false, 'returns false when passed a non-Any')
   t.equal(c.equals(value), false, 'returns false when passed a simple value')
+
+  t.end()
+})
+
+test('Any empty functionality', t => {
+  const x = Any(0).empty()
+
+  t.equal(x.type(), 'Any', 'provides an Any')
+  t.equal(x.valueOf(), false, 'wraps a false value')
 
   t.end()
 })

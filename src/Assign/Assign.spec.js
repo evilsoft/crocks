@@ -119,6 +119,22 @@ test('Assign equals properties (Setoid)', t => {
   t.end()
 })
 
+test('Assign equals functionality', t => {
+  const a = Assign({ a: { b: 10 } })
+  const b = Assign({ a: { b: 10 } })
+  const c = Assign({})
+
+  const value = {}
+  const nonAssign = MockCrock(value)
+
+  t.equal(a.equals(c), false, 'returns false when 2 Assigns are not equal')
+  t.equal(a.equals(b), true, 'returns true when 2 Assigns are equal')
+  t.equal(a.equals(nonAssign), false, 'returns false when passed a non-Assign')
+  t.equal(c.equals(value), false, 'returns false when passed a simple value')
+
+  t.end()
+})
+
 test('Assign concat properties (Semigroup)', t => {
   const a = Assign({ value: 'a' })
   const b = Assign({ value: 'b' })
@@ -190,22 +206,6 @@ test('Assign empty functionality', t => {
 
   t.equal(x.type(), 'Assign', 'provides an Assign')
   t.same(x.valueOf(), {}, 'wraps an empty object')
-
-  t.end()
-})
-
-test('Assign equals functionality', t => {
-  const a = Assign({ a: { b: 10 } })
-  const b = Assign({ a: { b: 10 } })
-  const c = Assign({})
-
-  const value = {}
-  const nonAssign = MockCrock(value)
-
-  t.equal(a.equals(c), false, 'returns false when 2 Assigns are not equal')
-  t.equal(a.equals(b), true, 'returns true when 2 Assigns are equal')
-  t.equal(a.equals(nonAssign), false, 'returns false when passed a non-Assign')
-  t.equal(c.equals(value), false, 'returns false when passed a simple value')
 
   t.end()
 })

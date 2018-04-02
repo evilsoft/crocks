@@ -123,6 +123,22 @@ test('Sum equals properties (Setoid)', t => {
   t.end()
 })
 
+test('Sum equals functionality', t => {
+  const a = Sum(4)
+  const b = Sum(4)
+  const c = Sum(5)
+
+  const value = 5
+  const nonSum = MockCrock(value)
+
+  t.equal(a.equals(c), false, 'returns false when 2 Sums are not equal')
+  t.equal(a.equals(b), true, 'returns true when 2 Sums are equal')
+  t.equal(a.equals(nonSum), false, 'returns false when passed a non-Sum')
+  t.equal(c.equals(value), false, 'returns false when passed a simple value')
+
+  t.end()
+})
+
 test('Sum concat properties (Semigroup)', t => {
   const a = Sum(45)
   const b = Sum(20)
@@ -192,22 +208,6 @@ test('Sum empty functionality', t => {
 
   t.equal(x.type(), 'Sum', 'provides a Sum')
   t.equal(x.valueOf(), 0, 'wraps a 0')
-
-  t.end()
-})
-
-test('Sum equals functionality', t => {
-  const a = Sum(4)
-  const b = Sum(4)
-  const c = Sum(5)
-
-  const value = 5
-  const nonSum = MockCrock(value)
-
-  t.equal(a.equals(c), false, 'returns false when 2 Sums are not equal')
-  t.equal(a.equals(b), true, 'returns true when 2 Sums are equal')
-  t.equal(a.equals(nonSum), false, 'returns false when passed a non-Sum')
-  t.equal(c.equals(value), false, 'returns false when passed a simple value')
 
   t.end()
 })

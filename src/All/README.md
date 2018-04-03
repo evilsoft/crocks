@@ -3,9 +3,12 @@
 ```haskell
 All Boolean
 ```
-<details>
-  <summary>Breakdown</summary>
-  The Monoid <code> All </code> outputs type <code> Boolean </code>
+<details style="margin:30px">
+  <summary style="margin-bottom:15px">Breakdown</summary>
+  <dl>
+    <dt><code>All</code></dt><dd>The Monoid container</dd>
+    <dt><code>Boolean</code></dt><dd>The contained type</dd>
+  </dl>
 </details>
 
 `All` is a `Monoid` that will combine (2) values of any type using logical
@@ -48,6 +51,14 @@ allGood([ 'nice', '00', null ])
 ```haskell
 All.empty :: () -> All
 ```
+<details style="margin:30px">
+  <summary style="margin-bottom:15px">Breakdown</summary>
+  <dl>
+    <dt><code>All.empty()</code></dt><dd>The constructor function</dd>
+    <dt><code>All</code></dt><dd>The output type</dd>
+  </dl>
+</details>
+
 <details>
   <summary>Breakdown</summary>
   The constructor <code> All.empty() </code> outputs type <code> All </code>
@@ -74,9 +85,12 @@ All(false).concat(All.empty())  //=> All false
 ```haskell
 All ~> All -> All
 ```
-<details>
-  <summary>Breakdown</summary>
-  <code> All.concat </code> inputs type <code> All </code> and outputs type <code> All </code>
+<details style="margin:30px">
+  <summary style="margin-bottom:15px">Breakdown</summary>
+  <dl>
+    <dt><code>All</code></dt><dd>The input type</dd>
+    <dt><code>All</code></dt><dd>The output type</dd>
+  </dl>
 </details>
 
 `concat` is used to combine (2) `Semigroup`s of the same type under an operation
@@ -97,10 +111,6 @@ All(false).concat(All(false)) //=> All false
 ```haskell
 All ~> () -> Boolean
 ```
-<details>
-  <summary>Breakdown</summary>
-  <code> All.valueOf() </code> outputs type <code> Boolean </code>
-</details>
 
 `valueOf` is used on all `crocks` `Monoid`s as a means of extraction. While the
 extraction is available, types that implement `valueOf` are not necessarily a

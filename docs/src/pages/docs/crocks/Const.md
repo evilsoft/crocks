@@ -16,6 +16,11 @@ method called on it will return a new `Const` with the value `c`.
 ### Example
 ```javascript
 import Const from 'crocks/Const'
+import Pair from 'crocks/Pair'
+import compose from 'crocks/helpers/compose'
+import extend from 'crocks/pointfree/extend'
+import fst from 'crocks/Pair/fst'
+import valueOf from 'crocks/pointfree/valueOf'
 
 Const('Hello World')
 //=> Const 'Hello World'
@@ -29,9 +34,28 @@ Const(100)
   .concat(Const(10))
 //=> Const 100
 
-Const('Hello')
-  .map(x => x + x)
-//=> Const 'Hello'
+// toLower :: String -> String
+const toLower =
+  x => x.toLowerCase()
+
+// Field :: Pair (Const a) a
+// updateField :: a -> Field
+const updateField =
+  value => Pair(Const(value), value)
+
+// updateField :: Field -> Field
+const resetField =
+  extend(compose(valueOf, fst))
+
+const changed =
+  updateField('Joey')
+    .map(toLower)
+    .chain(updateField)
+//=> Pair( Const "Joey", "joey" )
+
+resetField(changed)
+//=> Pair( Const "Joey", "Joey" )
+
 ```
 <article id="topic-implements">
 
@@ -159,34 +183,12 @@ function as its argument. When invoked the inner value will not be passed to
 provided function. A new `Const` will be returned with the same inner value.
 
 ```javascript
-import Const from 'crocks/Const'
-import Pair from 'crocks/Pair'
-import compose from 'crocks/helpers/compose'
-import extend from 'crocks/pointfree/extend'
-import fst from 'crocks/Pair/fst'
-import valueOf from 'crocks/pointfree/valueOf'
+import { Const } from 'crocks'
 
-// toLower :: String -> String
-const toLower =
-  x => x.toLowerCase()
+Const('initial')
+  .chain(x => Const(x.fakeProperty))
+//=> Const 'initial'
 
-// Field :: Pair (Const a) a
-// updateField :: a -> Field
-const updateField =
-  value => Pair(Const(value), value)
-
-// updateField :: Field -> Field
-const resetField =
-  extend(compose(valueOf, fst))
-
-const changed =
-  updateField('Joey')
-    .map(toLower)
-    .chain(updateField)
-//=> Pair( Const "Joey", "joey" )
-
-resetField(changed)
-//=> Pair( Const "Joey", "Joey" )
 ```
 
 #### valueOf

@@ -3,13 +3,14 @@
 ```haskell
 All Boolean
 ```
-<details style="margin:30px">
-  <summary style="margin-bottom:15px">Breakdown</summary>
+<details>
+  <summary>Breakdown</summary>
   <dl>
     <dt><code>All</code></dt><dd>The Monoid container</dd>
     <dt><code>Boolean</code></dt><dd>The contained type</dd>
   </dl>
 </details>
+<br>
 
 `All` is a `Monoid` that will combine (2) values of any type using logical
 conjunction (AND) on their coerced `Boolean` values, mapping truth-y values to
@@ -51,18 +52,14 @@ allGood([ 'nice', '00', null ])
 ```haskell
 All.empty :: () -> All
 ```
-<details style="margin:30px">
-  <summary style="margin-bottom:15px">Breakdown</summary>
+<details>
+  <summary>Breakdown</summary>
   <dl>
     <dt><code>All.empty()</code></dt><dd>The constructor function</dd>
     <dt><code>All</code></dt><dd>The output type</dd>
   </dl>
 </details>
-
-<details>
-  <summary>Breakdown</summary>
-  The constructor <code> All.empty() </code> outputs type <code> All </code>
-</details>
+<br>
 
 `empty` provides the identity for the `Monoid` in that when the value it
 provides is `concat`ed to any other value, it will return the other value. In
@@ -85,13 +82,14 @@ All(false).concat(All.empty())  //=> All false
 ```haskell
 All ~> All -> All
 ```
-<details style="margin:30px">
-  <summary style="margin-bottom:15px">Breakdown</summary>
+<details>
+  <summary>Breakdown</summary>
   <dl>
     <dt><code>All</code></dt><dd>The input type</dd>
     <dt><code>All</code></dt><dd>The output type</dd>
   </dl>
 </details>
+<br>
 
 `concat` is used to combine (2) `Semigroup`s of the same type under an operation
 specified by the `Semigroup`. In the case of `All`, it will combine the (2)

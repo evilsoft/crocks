@@ -47,7 +47,6 @@ All.empty :: () -> All
 <details>
   <summary>Breakdown</summary>
   <dl>
-    <dt><code>All.empty()</code></dt><dd>The constructor function</dd>
     <dt>result</dt><dd><code>All</code> wrapping <code>true</code></dd>
   </dl>
 </details>

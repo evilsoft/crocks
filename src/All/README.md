@@ -3,14 +3,6 @@
 ```haskell
 All Boolean
 ```
-<details>
-  <summary>Breakdown</summary>
-  <dl>
-    <dt><code>All</code></dt><dd>The Monoid container</dd>
-    <dt><code>Boolean</code></dt><dd>The contained type</dd>
-  </dl>
-</details>
-<br>
 
 `All` is a `Monoid` that will combine (2) values of any type using logical
 conjunction (AND) on their coerced `Boolean` values, mapping truth-y values to
@@ -56,7 +48,7 @@ All.empty :: () -> All
   <summary>Breakdown</summary>
   <dl>
     <dt><code>All.empty()</code></dt><dd>The constructor function</dd>
-    <dt><code>All</code></dt><dd>The output type</dd>
+    <dt>result</dt><dd><code>All</code> wrapping <code>true</code></dd>
   </dl>
 </details>
 <br>
@@ -85,8 +77,8 @@ All ~> All -> All
 <details>
   <summary>Breakdown</summary>
   <dl>
-    <dt><code>All</code></dt><dd>The input type</dd>
-    <dt><code>All</code></dt><dd>The output type</dd>
+    <dt>value</dt><dd>Value to concat</dd>
+    <dt>result</dt><dd><code>All</code> wrapping the concatenated values</dd>
   </dl>
 </details>
 <br>

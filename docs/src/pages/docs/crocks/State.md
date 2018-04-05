@@ -2,7 +2,7 @@
 title: "State"
 description: "State Crock"
 layout: "guide"
-tags: ["ap", "chain", "evalwith", "execwith", "map", "runwith"]
+tags: ["evalwith", "execwith"]
 weight: 140
 ---
 

@@ -2,7 +2,7 @@
 title: "Maybe"
 description: "Maybe Crock"
 layout: "guide"
-tags: ["alt", "ap", "chain", "coalesce", "concat", "equals", "either", "map", "of", "option", "sequence", "traverse", "zero"]
+tags: ["find", "prop", "proppath", "safe", "safeafter", "safelift", "eithertomaybe", "firsttomaybe", "lasttomaybe", "resulttomaybe"]
 weight: 90
 ---
 

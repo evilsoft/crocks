@@ -2,7 +2,6 @@
 title: "ReaderT"
 description: "Reader Monad Transformer Crock"
 layout: "guide"
-tags: ["ap", "chain", "map", "runwith"]
 weight: 120
 ---
 

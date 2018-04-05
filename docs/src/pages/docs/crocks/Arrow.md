@@ -2,7 +2,6 @@
 title: "Arrow"
 description: "Arrow Crock"
 layout: "guide"
-tags: ["both", "compose", "contramap", "first", "map", "promap", "runwith", "second"]
 weight: 10
 ---
 

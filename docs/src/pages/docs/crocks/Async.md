@@ -2,7 +2,7 @@
 title: "Async"
 description: "Async Crock"
 layout: "guide"
-tags: ["alt", "ap", "bimap", "chain", "coalesce", "fork", "map", "of", "swap", "topromise"]
+tags: ["eithertoasync", "firsttoasync", "lasttoasync", "maybetoasync", "resulttoasync"]
 weight: 20
 ---
 

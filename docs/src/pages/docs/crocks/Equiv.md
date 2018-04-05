@@ -2,7 +2,6 @@
 title: "Equiv"
 description: "Equiv Crock"
 layout: "guide"
-tags: ["concat", "contramap", "comparewith"]
 weight: 50
 ---
 

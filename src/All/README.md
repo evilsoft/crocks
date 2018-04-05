@@ -4,6 +4,20 @@
 All Boolean
 ```
 
+## Constructor
+
+```haskell
+All :: a -> All Boolean
+```
+<details>
+  <summary>Breakdown</summary>
+  <dl>
+    <dt>value</dt><dd>Value to wrap</dd>
+    <dt>result</dt><dd><code>All</code> wrapping the coerced `Boolean` value</dd>
+  </dl>
+</details>
+<br>
+
 `All` is a `Monoid` that will combine (2) values of any type using logical
 conjunction (AND) on their coerced `Boolean` values, mapping truth-y values to
 `true` and false-y values to `false`.

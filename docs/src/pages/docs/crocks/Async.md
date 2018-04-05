@@ -2,7 +2,7 @@
 title: "Async"
 description: "Async Crock"
 layout: "guide"
-tags: ["eithertoasync", "firsttoasync", "lasttoasync", "maybetoasync", "resulttoasync"]
+functions: ["eithertoasync", "firsttoasync", "lasttoasync", "maybetoasync", "resulttoasync"]
 weight: 20
 ---
 

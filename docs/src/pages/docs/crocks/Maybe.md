@@ -2,7 +2,7 @@
 title: "Maybe"
 description: "Maybe Crock"
 layout: "guide"
-tags: ["find", "prop", "proppath", "safe", "safeafter", "safelift", "eithertomaybe", "firsttomaybe", "lasttomaybe", "resulttomaybe"]
+functions: ["find", "prop", "proppath", "safe", "safeafter", "safelift", "eithertomaybe", "firsttomaybe", "lasttomaybe", "resulttomaybe"]
 weight: 90
 ---
 

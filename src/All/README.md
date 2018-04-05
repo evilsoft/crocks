@@ -47,6 +47,7 @@ All.empty :: () -> All
 <details>
   <summary>Breakdown</summary>
   <dl>
+    <dt>unit</dt><dd>Nothing, any passed in parameters are ignored</dd>
     <dt>result</dt><dd><code>All</code> wrapping <code>true</code></dd>
   </dl>
 </details>

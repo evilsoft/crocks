@@ -2,8 +2,11 @@
 title: "Transformation Functions"
 description: "Transformation Functions API"
 layout: "notopic"
+tags: ["arraytolist", "eithertoasync", "eithertofirst", "eithertolast", "eithertomaybe", "eithertoresult", "firsttoasync", "firsttoeither", "firsttolast", "firsttomaybe", "firsttoresult", "lasttoasync", "lasttoeither", "lasttofirst", "lasttomaybe", "lasttoresult", "listtoarray", "maybetoasync", "maybetoeither", "maybetofirst","maybetolast", "maybetoresult", "resulttoasync", "resulttoeither", "resulttofirst", "resulttolast", "resulttomaybe", "writertopair"]
 weight: 60
 ---
+
+
 
 Transformation functions are mostly used to reduce unwanted nesting of similar
 types. Take for example the following structure:
@@ -184,4 +187,3 @@ bad
 [first-last]: ../monoids/Last.html#firsttolast
 [maybe-last]: ../monoids/Last.html#maybetolast
 [result-last]: ../monoids/Last.html#resulttolast
-

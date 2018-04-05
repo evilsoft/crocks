@@ -2,6 +2,7 @@
 description: "Logic Functions API"
 layout: "notopic"
 title: "Logic Functions"
+tags: ["and", "ifelse", "not", "or", "unless", "when"]
 weight: 30
 ---
 

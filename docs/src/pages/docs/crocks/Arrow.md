@@ -2,6 +2,7 @@
 title: "Arrow"
 description: "Arrow Crock"
 layout: "guide"
+tags: ["both", "compose", "contramap", "first", "map", "promap", "runwith", "second"]
 weight: 10
 ---
 
@@ -349,8 +350,8 @@ Arrow a b ~> ((c -> a), (b -> d)) -> Arrow c d
 
 `promap` can be used to adapt BOTH ends of an `Arrow` allowing for existing
 `Arrow`s to be reused in places in a flow where the types do not line up. It
-combines both [`map`](#map) and [`contramap`](#contramap) into one operation. 
-Just pass the function for [`contramap`](#contramap) as the first argument 
+combines both [`map`](#map) and [`contramap`](#contramap) into one operation.
+Just pass the function for [`contramap`](#contramap) as the first argument
 and the function [`map`](#map) as the second.
 
 ```javascript

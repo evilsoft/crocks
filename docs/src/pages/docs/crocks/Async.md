@@ -2,6 +2,7 @@
 title: "Async"
 description: "Async Crock"
 layout: "guide"
+tags: ["alt", "ap", "bimap", "chain", "coalesce", "fork", "map", "of", "swap", "topromise"]
 weight: 20
 ---
 

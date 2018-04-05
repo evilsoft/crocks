@@ -2,6 +2,7 @@
 title: "Pred"
 description: "Pred Crock"
 layout: "guide"
+tags: ["concat", "contramap", "runwith"]
 weight: 100
 ---
 

@@ -2,6 +2,7 @@
 description: "Combinators API"
 layout: "notopic"
 title: "Combinators"
+functions: ["applyto", "composeb", "constant", "flip", "identity", "substitution"]
 weight: 10
 ---
 

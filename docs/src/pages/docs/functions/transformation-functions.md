@@ -2,6 +2,7 @@
 title: "Transformation Functions"
 description: "Transformation Functions API"
 layout: "notopic"
+functions: ["arraytolist", "eithertoasync", "eithertofirst", "eithertolast", "eithertomaybe", "eithertoresult", "firsttoasync", "firsttoeither", "firsttolast", "firsttomaybe", "firsttoresult", "lasttoasync", "lasttoeither", "lasttofirst", "lasttomaybe", "lasttoresult", "listtoarray", "maybetoasync", "maybetoeither", "maybetofirst","maybetolast", "maybetoresult", "resulttoasync", "resulttoeither", "resulttofirst", "resulttolast", "resulttomaybe", "writertopair"]
 weight: 60
 ---
 
@@ -184,4 +185,3 @@ bad
 [first-last]: ../monoids/Last.html#firsttolast
 [maybe-last]: ../monoids/Last.html#maybetolast
 [result-last]: ../monoids/Last.html#resulttolast
-

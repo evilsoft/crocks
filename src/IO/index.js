@@ -1,7 +1,7 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const VERSION = 1
+const VERSION = 2
 
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
@@ -27,44 +27,57 @@ function IO(run) {
   const inspect =
     () => `IO${_inspect(run)}`
 
-  function map(fn) {
-    if(!isFunction(fn)) {
-      throw new TypeError('IO.map: Function required')
-    }
+  function map(method) {
+    return function(fn) {
+      if(!isFunction(fn)) {
+        throw new TypeError(`IO.${method}: Function required`)
+      }
 
-    return IO(compose(fn, run))
+      return IO(compose(fn, run))
+    }
   }
 
   function ap(m) {
     if(!isSameType(IO, m)) {
       throw new TypeError('IO.ap: IO required')
     }
-
-    return chain(f => m.map(f))
-  }
-
-  function chain(fn) {
-    if(!isFunction(fn)) {
-      throw new TypeError('IO.chain: Function required')
-    }
-
-    return IO(function() {
-      const m = fn(run())
-
-      if(!isSameType(IO, m)) {
-        throw new TypeError('IO.chain: Function must return an IO')
+    return IO(() => {
+      const fn = run()
+      if(!isFunction(fn)) {
+        throw new TypeError('IO.ap: Wrapped value must be a function')
       }
 
-      return m.run()
+      return m.map(fn).run()
     })
+
+  }
+
+  function chain(method) {
+    return function(fn) {
+      if(!isFunction(fn)) {
+        throw new TypeError(`IO.${method}: Function required`)
+      }
+
+      return IO(function() {
+        const m = fn(run())
+
+        if(!isSameType(IO, m)) {
+          throw new TypeError(`IO.${method}: Function must return an IO`)
+        }
+
+        return m.run()
+      })
+    }
   }
 
   return {
-    inspect, toString: inspect, run,
-    type, map, ap, of, chain,
+    inspect, toString: inspect,
+    run, type, ap, of,
+    map: map('map'),
+    chain: chain('chain'),
     [fl.of]: of,
-    [fl.map]: map,
-    [fl.chain]: chain,
+    [fl.map]: map(fl.map),
+    [fl.chain]: chain(fl.chain),
     ['@@type']: _type,
     constructor: IO
   }

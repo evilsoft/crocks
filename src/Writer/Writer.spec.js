@@ -14,6 +14,8 @@ const isSameType = require('../core/isSameType')
 const isString = require('../core/isString')
 const unit = require('../core/_unit')
 
+const fl = require('../core/flNames')
+
 const identity = x => x
 
 const applyTo =
@@ -25,19 +27,21 @@ const Writer = _Writer(Last)
 test('Writer construction', t => {
   const w = bindFunc(_Writer)
 
-  t.throws(w(undefined), TypeError, 'throws with undefined')
-  t.throws(w(null), TypeError, 'throws with null')
-  t.throws(w(0), TypeError, 'throws with falsey number')
-  t.throws(w(1), TypeError, 'throws with truthy number')
-  t.throws(w(''), TypeError, 'throws with falsey string')
-  t.throws(w('string'), TypeError, 'throws with truthy string')
-  t.throws(w(false), TypeError, 'throws with false')
-  t.throws(w(true), TypeError, 'throws with true')
-  t.throws(w([]), TypeError, 'throws with an array')
-  t.throws(w({}), TypeError, 'throws with an object')
-  t.throws(w(unit), TypeError, 'throws with a function')
+  const err = /Writer: Monoid required for construction/
+  t.throws(w(undefined), err, 'throws with undefined')
+  t.throws(w(null), err, 'throws with null')
+  t.throws(w(0), err, 'throws with falsey number')
+  t.throws(w(1), err, 'throws with truthy number')
+  t.throws(w(''), err, 'throws with falsey string')
+  t.throws(w('string'), err, 'throws with truthy string')
+  t.throws(w(false), err, 'throws with false')
+  t.throws(w(true), err, 'throws with true')
+  t.throws(w([]), err, 'throws with an array')
+  t.throws(w({}), err, 'throws with an object')
+  t.throws(w(unit), err, 'throws with a function')
 
   t.doesNotThrow(w(Last), 'allows a Monoid')
+
   t.end()
 })
 
@@ -54,8 +58,9 @@ test('Writer', t => {
   t.ok(isFunction(Writer.type), 'provides a type function')
   t.ok(isString(Writer['@@type']), 'provides a @@type string')
 
-  t.throws(f(), TypeError, 'throws with no parameters')
-  t.throws(f(0), TypeError, 'throws with one parameter')
+  const err = /Writer: Log entry and a value required/
+  t.throws(f(), err, 'throws with no parameters')
+  t.throws(f(0), err, 'throws with one parameter')
 
   t.end()
 })
@@ -63,12 +68,12 @@ test('Writer', t => {
 test('Writer fantasy-land api', t => {
   const m = Writer(0, 0)
 
-  t.equals(Writer['fantasy-land/of'], Writer.of, 'is same function as public constructor of')
+  t.ok(isFunction(Writer[fl.of]), 'provides of function on constructor')
 
-  t.equals(m['fantasy-land/of'], m.of, 'is same function as public instance of')
-  t.equals(m['fantasy-land/equals'], m.equals, 'is same function as public instance equals')
-  t.equals(m['fantasy-land/map'], m.map, 'is same function as public instance map')
-  t.equals(m['fantasy-land/chain'], m.chain, 'is same function as public instance chain')
+  t.ok(isFunction(m[fl.of]), 'provides of method on instance')
+  t.ok(isFunction(m[fl.equals]), 'provides equals method on instance')
+  t.ok(isFunction(m[fl.map]), 'provides map method on instance')
+  t.ok(isFunction(m[fl.chain]), 'provides chain method on instance')
 
   t.end()
 })
@@ -109,7 +114,7 @@ test('Writer @@type', t => {
   const m = Writer(0, 0)
 
   t.equal(Writer['@@type'], m['@@type'], 'static and instance versions are the same')
-  t.equal(m['@@type'], 'crocks/Writer@1( crocks/Last@1 )', 'returns crocks/Writer@1 with Monoid Type')
+  t.equal(m['@@type'], 'crocks/Writer@2( crocks/Last@1 )', 'returns crocks/Writer@2 with Monoid Type')
 
   t.end()
 })
@@ -183,16 +188,37 @@ test('Writer equals properties (Setoid)', t => {
 test('Writer map errors', t => {
   const map = bindFunc(Writer(0, 0).map)
 
-  t.throws(map(undefined), TypeError, 'throws with undefined')
-  t.throws(map(null), TypeError, 'throws with null')
-  t.throws(map(0), TypeError, 'throws with falsey number')
-  t.throws(map(1), TypeError, 'throws with truthy number')
-  t.throws(map(''), TypeError, 'throws with falsey string')
-  t.throws(map('string'), TypeError, 'throws with truthy string')
-  t.throws(map(false), TypeError, 'throws with false')
-  t.throws(map(true), TypeError, 'throws with true')
-  t.throws(map([]), TypeError, 'throws with an array')
-  t.throws(map({}), TypeError, 'throws with an object')
+  const err = /Writer.map: Function required/
+  t.throws(map(undefined), err, 'throws with undefined')
+  t.throws(map(null), err, 'throws with null')
+  t.throws(map(0), err, 'throws with falsey number')
+  t.throws(map(1), err, 'throws with truthy number')
+  t.throws(map(''), err, 'throws with falsey string')
+  t.throws(map('string'), err, 'throws with truthy string')
+  t.throws(map(false), err, 'throws with false')
+  t.throws(map(true), err, 'throws with true')
+  t.throws(map([]), err, 'throws with an array')
+  t.throws(map({}), err, 'throws with an object')
+
+  t.doesNotThrow(map(unit), 'allows a function')
+
+  t.end()
+})
+
+test('Writer map fantasy-land errors', t => {
+  const map = bindFunc(Writer(0, 0)[fl.map])
+
+  const err = /Writer.fantasy-land\/map: Function required/
+  t.throws(map(undefined), err, 'throws with undefined')
+  t.throws(map(null), err, 'throws with null')
+  t.throws(map(0), err, 'throws with falsey number')
+  t.throws(map(1), err, 'throws with truthy number')
+  t.throws(map(''), err, 'throws with falsey string')
+  t.throws(map('string'), err, 'throws with truthy string')
+  t.throws(map(false), err, 'throws with false')
+  t.throws(map(true), err, 'throws with true')
+  t.throws(map([]), err, 'throws with an array')
+  t.throws(map({}), err, 'throws with an object')
 
   t.doesNotThrow(map(unit), 'allows a function')
 
@@ -232,31 +258,38 @@ test('Writer map properties (Functor)', t => {
 
 test('Writer ap errors', t => {
   const m = { type: () => 'Writer...Not' }
-  const w = Writer(0, 0)
-  const ap = bindFunc(Writer(0, unit).ap)
 
-  t.throws(Writer(0, undefined).ap.bind(null, w), TypeError, 'throws when wrapped value is undefined')
-  t.throws(Writer(0, null).ap.bind(null, w), TypeError, 'throws when wrapped value is null')
-  t.throws(Writer(0, 0).ap.bind(null, w), TypeError, 'throws when wrapped value is a falsey number')
-  t.throws(Writer(0, 1).ap.bind(null, w), TypeError, 'throws when wrapped value is a truthy number')
-  t.throws(Writer(0, '').ap.bind(null, w), TypeError, 'throws when wrapped value is a falsey string')
-  t.throws(Writer(0, 'string').ap.bind(null, w), TypeError, 'throws when wrapped value is a truthy string')
-  t.throws(Writer(0, false).ap.bind(null, w), TypeError, 'throws when wrapped value is false')
-  t.throws(Writer(0, true).ap.bind(null, w), TypeError, 'throws when wrapped value is true')
-  t.throws(Writer(0, []).ap.bind(null, w), TypeError, 'throws when wrapped value is an array')
-  t.throws(Writer(0, {}).ap.bind(null, w), TypeError, 'throws when wrapped value is an object')
+  const ap =
+    bindFunc(Writer(0, unit).ap)
 
-  t.throws(ap(undefined), TypeError, 'throws with undefined')
-  t.throws(ap(null), TypeError, 'throws with null')
-  t.throws(ap(0), TypeError, 'throws with falsey number')
-  t.throws(ap(1), TypeError, 'throws with truthy number')
-  t.throws(ap(''), TypeError, 'throws with falsey string')
-  t.throws(ap('string'), TypeError, 'throws with truthy string')
-  t.throws(ap(false), TypeError, 'throws with false')
-  t.throws(ap(true), TypeError, 'throws with true')
-  t.throws(ap([]), TypeError, 'throws with an array')
-  t.throws(ap({}), TypeError, 'throws with an object')
-  t.throws(ap(m), TypeError, 'throws with Non-Writer')
+  const wrapAp = bindFunc(
+    x => Writer(0, x).ap(Writer(0, 0))
+  )
+
+  const noFunc = /Writer.ap: Wrapped value must be a function/
+  t.throws(wrapAp(undefined), noFunc, 'throws when wrapped value is undefined')
+  t.throws(wrapAp(null), noFunc, 'throws when wrapped value is null')
+  t.throws(wrapAp(0), noFunc, 'throws when wrapped value is a falsey number')
+  t.throws(wrapAp(1), noFunc, 'throws when wrapped value is a truthy number')
+  t.throws(wrapAp(''), noFunc, 'throws when wrapped value is a falsey string')
+  t.throws(wrapAp('string'), noFunc, 'throws when wrapped value is a truthy string')
+  t.throws(wrapAp(false), noFunc, 'throws when wrapped value is false')
+  t.throws(wrapAp(true), noFunc, 'throws when wrapped value is true')
+  t.throws(wrapAp([]), noFunc, 'throws when wrapped value is an array')
+  t.throws(wrapAp({}), noFunc, 'throws when wrapped value is an object')
+
+  const err = /Writer.ap: Writer required/
+  t.throws(ap(undefined), err, 'throws with undefined')
+  t.throws(ap(null), err, 'throws with null')
+  t.throws(ap(0), err, 'throws with falsey number')
+  t.throws(ap(1), err, 'throws with truthy number')
+  t.throws(ap(''), err, 'throws with falsey string')
+  t.throws(ap('string'), err, 'throws with truthy string')
+  t.throws(ap(false), err, 'throws with false')
+  t.throws(ap(true), err, 'throws with true')
+  t.throws(ap([]), err, 'throws with an array')
+  t.throws(ap({}), err, 'throws with an object')
+  t.throws(ap(m), err, 'throws with Non-Writer')
 
   t.doesNotThrow(ap(Writer(0, 0)), 'allows a Writer')
 
@@ -321,17 +354,45 @@ test('Writer chain errors', t => {
   const chain = bindFunc(m.chain)
   const fn = x => Writer(0, x)
 
-  t.throws(chain(undefined), TypeError, 'throws with undefined')
-  t.throws(chain(null), TypeError, 'throws with null')
-  t.throws(chain(0), TypeError, 'throws with falsey number')
-  t.throws(chain(1), TypeError, 'throws with truthy number')
-  t.throws(chain(''), TypeError, 'throws with falsey string')
-  t.throws(chain('string'), TypeError, 'throws with truthy string')
-  t.throws(chain(false), TypeError, 'throws with false')
-  t.throws(chain(true), TypeError, 'throws with true')
-  t.throws(chain([]), TypeError, 'throws with an array')
-  t.throws(chain({}), TypeError, 'throws with an object')
-  t.throws(chain(unit), TypeError, 'throws with non-Writer returning function')
+  const err = /Writer.chain: Function required/
+  t.throws(chain(undefined), err, 'throws with undefined')
+  t.throws(chain(null), err, 'throws with null')
+  t.throws(chain(0), err, 'throws with falsey number')
+  t.throws(chain(1), err, 'throws with truthy number')
+  t.throws(chain(''), err, 'throws with falsey string')
+  t.throws(chain('string'), err, 'throws with truthy string')
+  t.throws(chain(false), err, 'throws with false')
+  t.throws(chain(true), err, 'throws with true')
+  t.throws(chain([]), err, 'throws with an array')
+  t.throws(chain({}), err, 'throws with an object')
+
+  const noWriter = /Writer.chain: Function must return a Writer/
+  t.throws(chain(unit), noWriter, 'throws with non-Writer returning function')
+
+  t.doesNotThrow(chain(fn), 'allows a Writer returning function')
+
+  t.end()
+})
+
+test('Writer chain fantasy-land errors', t => {
+  const m = Writer(0, 0)
+  const chain = bindFunc(m[fl.chain])
+  const fn = x => Writer(0, x)
+
+  const err = /Writer.fantasy-land\/chain: Function required/
+  t.throws(chain(undefined), err, 'throws with undefined')
+  t.throws(chain(null), err, 'throws with null')
+  t.throws(chain(0), err, 'throws with falsey number')
+  t.throws(chain(1), err, 'throws with truthy number')
+  t.throws(chain(''), err, 'throws with falsey string')
+  t.throws(chain('string'), err, 'throws with truthy string')
+  t.throws(chain(false), err, 'throws with false')
+  t.throws(chain(true), err, 'throws with true')
+  t.throws(chain([]), err, 'throws with an array')
+  t.throws(chain({}), err, 'throws with an object')
+
+  const noWriter = /Writer.fantasy-land\/chain: Function must return a Writer/
+  t.throws(chain(unit), noWriter, 'throws with non-Writer returning function')
 
   t.doesNotThrow(chain(fn), 'allows a Writer returning function')
 

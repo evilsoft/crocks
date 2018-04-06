@@ -10,6 +10,8 @@ const isObject = require('../core/isObject')
 const isString  = require('../core/isString')
 const unit = require('../core/_unit')
 
+const fl = require('../core/flNames')
+
 const constant = x => () => x
 const identity = x => x
 
@@ -48,11 +50,11 @@ test('Pred', t => {
 test('Pred fantasy-land api', t => {
   const m = Pred(identity)
 
-  t.equals(Pred['fantasy-land/empty'], Pred.empty, 'is same function as public constructor empty')
+  t.ok(isFunction(Pred[fl.empty]), 'provides empty function on constructor')
 
-  t.equals(m['fantasy-land/empty'], m.empty, 'is same function as public instance empty')
-  t.equals(m['fantasy-land/concat'], m.concat, 'is same function as public instance concat')
-  t.equals(m['fantasy-land/contramap'], m.contramap, 'is same function as public instance contramap')
+  t.ok(isFunction(m[fl.empty]), 'provides empty method on instance')
+  t.ok(isFunction(m[fl.concat]), 'provides concat method on instance')
+  t.ok(isFunction(m[fl.contramap]), 'provides contramap method on instance')
 
   t.end()
 })
@@ -91,7 +93,7 @@ test('Pred @@type', t => {
   const m = Pred(unit)
 
   t.equal(m['@@type'], Pred['@@type'], 'static and instance versions are the same')
-  t.equal(m['@@type'], 'crocks/Pred@1', 'reports crocks/Pred@1')
+  t.equal(m['@@type'], 'crocks/Pred@2', 'reports crocks/Pred@2')
 
   t.end()
 })
@@ -153,6 +155,26 @@ test('Pred contramap errors', t => {
   t.end()
 })
 
+test('Pred contramap fantasy-land errors', t => {
+  const cmap = bindFunc(Pred(unit)[fl.contramap])
+
+  const err = /Pred.fantasy-land\/contramap: Function required/
+  t.throws(cmap(undefined), err, 'throws with undefined')
+  t.throws(cmap(null), err, 'throws with null')
+  t.throws(cmap(0), err, 'throws with falsey number')
+  t.throws(cmap(1), err, 'throws with truthy number')
+  t.throws(cmap(''), err, 'throws with falsey string')
+  t.throws(cmap('string'), err, 'throws with truthy string')
+  t.throws(cmap(false), err, 'throws with false')
+  t.throws(cmap(true), err, 'throws with true')
+  t.throws(cmap([]), err, 'throws with an array')
+  t.throws(cmap({}), err, 'throws with an object')
+
+  t.doesNotThrow(cmap(unit), 'allows functions')
+
+  t.end()
+})
+
 test('Pred contramap functionality', t => {
   const spy = sinon.spy(identity)
   const x = 23
@@ -186,10 +208,8 @@ test('Pred contramap properties (Contra Functor)', t => {
   t.end()
 })
 
-test('Pred concat functionality', t => {
+test('Pred concat errors', t => {
   const a = Pred(constant(true))
-  const b = Pred(constant(false))
-
   const notPred = { type: constant('Pred...Not') }
 
   const cat = bindFunc(a.concat)
@@ -206,6 +226,35 @@ test('Pred concat functionality', t => {
   t.throws(cat([]), err, 'throws with an array')
   t.throws(cat({}), err, 'throws with an object')
   t.throws(cat(notPred), err, 'throws when passed non-Pred')
+
+  t.end()
+})
+
+test('Pred concat fantasy-land errors', t => {
+  const a = Pred(constant(true))
+  const notPred = { type: constant('Pred...Not') }
+
+  const cat = bindFunc(a[fl.concat])
+
+  const err = /Pred.fantasy-land\/concat: Pred required/
+  t.throws(cat(undefined), err, 'throws with undefined')
+  t.throws(cat(null), err, 'throws with null')
+  t.throws(cat(0), err, 'throws with falsey number')
+  t.throws(cat(1), err, 'throws with truthy number')
+  t.throws(cat(''), err, 'throws with falsey string')
+  t.throws(cat('string'), err, 'throws with truthy string')
+  t.throws(cat(false), err, 'throws with false')
+  t.throws(cat(true), err, 'throws with true')
+  t.throws(cat([]), err, 'throws with an array')
+  t.throws(cat({}), err, 'throws with an object')
+  t.throws(cat(notPred), err, 'throws when passed non-Pred')
+
+  t.end()
+})
+
+test('Pred concat functionality', t => {
+  const a = Pred(constant(true))
+  const b = Pred(constant(false))
 
   t.equal(a.concat(a).runWith(), true, 'true to true reports true')
   t.equal(a.concat(b).runWith(), false, 'true to false reports false')

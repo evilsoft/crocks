@@ -37,20 +37,23 @@ function Prod(n) {
     m => isSameType(Prod, m)
       && _equals(x, m.valueOf())
 
-  function concat(m) {
-    if(!isSameType(Prod, m)) {
-      throw new TypeError('Prod.concat: Prod required')
-    }
+  function concat(method) {
+    return function(m) {
+      if(!isSameType(Prod, m)) {
+        throw new TypeError(`Prod.${method}: Prod required`)
+      }
 
-    return Prod(x * m.valueOf())
+      return Prod(x * m.valueOf())
+    }
   }
 
   return {
-    inspect, toString: inspect, valueOf,
-    equals, type, concat, empty,
+    inspect, toString: inspect,
+    equals, valueOf, type, empty,
+    concat: concat('concat'),
     [fl.equals]: equals,
     [fl.empty]: empty,
-    [fl.concat]: concat,
+    [fl.concat]: concat(fl.concat),
     ['@@type']: _type,
     constructor: Prod
   }

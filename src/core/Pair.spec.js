@@ -14,6 +14,8 @@ const isSameType = require('./isSameType')
 const isString = require('./isString')
 const unit = require('./_unit')
 
+const fl = require('./flNames')
+
 const identity = x => x
 
 const merge =
@@ -46,12 +48,12 @@ test('Pair core', t => {
 test('Pair fantasy-land api', t => {
   const m = Pair(3, 3)
 
-  t.equals(m['fantasy-land/equals'], m.equals, 'is same function as public instance equals')
-  t.equals(m['fantasy-land/concat'], m.concat, 'is same function as public instance concat')
-  t.equals(m['fantasy-land/map'], m.map, 'is same function as public instance map')
-  t.equals(m['fantasy-land/bimap'], m.bimap, 'is same function as public instance bimap')
-  t.equals(m['fantasy-land/chain'], m.chain, 'is same function as public instance chain')
-  t.equals(m['fantasy-land/extend'], m.extend, 'is same function as public instance extend')
+  t.ok(isFunction(m[fl.equals]), 'provides equals method on instance')
+  t.ok(isFunction(m[fl.concat]), 'provides concat method on instance')
+  t.ok(isFunction(m[fl.map]), 'provides map method on instance')
+  t.ok(isFunction(m[fl.bimap]), 'provides bimap method on instance')
+  t.ok(isFunction(m[fl.chain]), 'provides chain method on instance')
+  t.ok(isFunction(m[fl.extend]), 'provides extend method on instance')
 
   t.end()
 })
@@ -96,7 +98,7 @@ test('Pair @@type', t => {
   const p = Pair(0, 0)
 
   t.equal(p['@@type'], Pair['@@type'], 'static and instance versions are the same')
-  t.equal(p['@@type'], 'crocks/Pair@3', 'type returns crocks/Pair@3')
+  t.equal(p['@@type'], 'crocks/Pair@4', 'type returns crocks/Pair@4')
 
   t.end()
 })
@@ -204,6 +206,20 @@ test('Pair concat errors', t => {
   t.end()
 })
 
+test('Pair concat fantasy-land errors', t => {
+  const bad = bindFunc(Pair(0, 0)[fl.concat])
+  const good = bindFunc(Pair([], 'string')[fl.concat])
+
+  const noPair = /Pair.fantasy-land\/concat: Pair required/
+  t.throws(good([]), noPair, 'throws when Non-Pair passed')
+
+  const err = /Pair.fantasy-land\/concat: Both Pairs must contain Semigroups of the same type/
+  t.throws(bad(Pair([], [])), err, 'throws when left Pair does not contain Semigroups')
+  t.throws(good(Pair(0, 0)), err, 'throws when right Pair does not contain Semigroups')
+
+  t.end()
+})
+
 test('Pair concat functionality', t => {
   const m = Pair([ 1 ], '1')
   const n = Pair([ 2 ], '2')
@@ -270,6 +286,26 @@ test('Pair map errors', t => {
   const map = bindFunc(Pair(0, 'gibbles').map)
 
   const err = /Pair.map: Function required/
+  t.throws(map(undefined), err, 'throws with undefined')
+  t.throws(map(null), err, 'throws with null')
+  t.throws(map(0), err, 'throws with falsey number')
+  t.throws(map(1), err, 'throws with truthy number')
+  t.throws(map(''), err, 'throws with falsey string')
+  t.throws(map('string'), err, 'throws with truthy string')
+  t.throws(map(false), err, 'throws with false')
+  t.throws(map(true), err, 'throws with true')
+  t.throws(map([]), err, 'throws with an array')
+  t.throws(map({}), err, 'throws with object')
+
+  t.doesNotThrow(map(unit), 'allows a function')
+
+  t.end()
+})
+
+test('Pair map fantasy-land errors', t => {
+  const map = bindFunc(Pair(0, 'gibbles')[fl.map])
+
+  const err = /Pair.fantasy-land\/map: Function required/
   t.throws(map(undefined), err, 'throws with undefined')
   t.throws(map(null), err, 'throws with null')
   t.throws(map(0), err, 'throws with falsey number')
@@ -489,6 +525,37 @@ test('Pair chain errors', t => {
   t.end()
 })
 
+test('Pair chain fantasy-land errors', t => {
+  const badChain = bindFunc(Pair(0, 0)[fl.chain])
+  const chain = bindFunc(Pair([], 0)[fl.chain])
+
+  const badFn = () => Pair(0, 0)
+  const fn = () => Pair([], 0)
+
+  const noSemi = /Pair.fantasy-land\/chain: Semigroups of the same type required for first values/
+  t.throws(badChain(unit), noSemi, 'throws if wrapped first value is not a Semigroup')
+  t.throws(chain(badFn), noSemi, 'throws if monadic function returns a Pair with a non-Semigroup as first value')
+
+  const noPair = /Pair.fantasy-land\/chain: Function must return a Pair/
+  t.throws(chain(unit), noPair, 'throws with non-Pair returning function')
+
+  const err = /Pair.fantasy-land\/chain: Function required/
+  t.throws(chain(undefined), err, 'throws with undefined')
+  t.throws(chain(null), err, 'throws with null')
+  t.throws(chain(0), err, 'throws with falsey number')
+  t.throws(chain(1), err, 'throws with truthy number')
+  t.throws(chain(''), err, 'throws with falsey string')
+  t.throws(chain('string'), err, 'throws with truthy string')
+  t.throws(chain(false), err, 'throws with false')
+  t.throws(chain(true), err, 'throws with true')
+  t.throws(chain([]), err, 'throws with an array')
+  t.throws(chain({}), err, 'throws with an object')
+
+  t.doesNotThrow(chain(fn), 'allows Pair returning function')
+
+  t.end()
+})
+
 test('Pair chain properties (Chain)', t => {
   const extract =
     merge((x, y) => [ x, y ])
@@ -646,6 +713,25 @@ test('Pair extend errors', t => {
   const extend = bindFunc(Pair(0, 'gibbles').extend)
 
   const err = /Pair.extend: Function required/
+  t.throws(extend(undefined), err, 'throws with undefined')
+  t.throws(extend(null), err, 'throws with null')
+  t.throws(extend(0), err, 'throws with falsey number')
+  t.throws(extend(1), err, 'throws with truthy number')
+  t.throws(extend(''), err, 'throws with falsey string')
+  t.throws(extend('string'), err, 'throws with truthy string')
+  t.throws(extend(false), err, 'throws with false')
+  t.throws(extend(true), err, 'throws with true')
+  t.throws(extend([]), err, 'throws with an array')
+  t.throws(extend({}), err, 'throws with object')
+
+  t.doesNotThrow(extend(unit), 'allows a function')
+  t.end()
+})
+
+test('Pair extend fantasy-land errors', t => {
+  const extend = bindFunc(Pair(0, 'gibbles')[fl.extend])
+
+  const err = /Pair.fantasy-land\/extend: Function required/
   t.throws(extend(undefined), err, 'throws with undefined')
   t.throws(extend(null), err, 'throws with null')
   t.throws(extend(0), err, 'throws with falsey number')

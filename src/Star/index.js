@@ -1,7 +1,7 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const VERSION = 1
+const VERSION = 2
 
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
@@ -56,68 +56,76 @@ function _Star(Monad) {
     const id =
       _id
 
-    function compose(s) {
-      if(!isSameType(Star, s)) {
-        throw new TypeError(`${outerType}.compose: ${outerType} required`)
-      }
-
-      return Star(function(x) {
-        const m = runWith(x)
-
-        if(!isSameType(Monad, m)) {
-          throw new TypeError(`${outerType}.compose: Computations must return a type of ${innerType}`)
+    function compose(method) {
+      return function(s) {
+        if(!isSameType(Star, s)) {
+          throw new TypeError(`${outerType}.${method}: ${outerType} required`)
         }
 
-        return m.chain(function(val) {
-          const inner = s.runWith(val)
+        return Star(function(x) {
+          const m = runWith(x)
 
-          if(!isSameType(m, inner)) {
-            throw new TypeError(`${outerType}.compose: Both computations must return a type of ${innerType}`)
+          if(!isSameType(Monad, m)) {
+            throw new TypeError(`${outerType}.${method}: Computations must return a type of ${innerType}`)
           }
 
-          return inner
+          return m.chain(function(val) {
+            const inner = s.runWith(val)
+
+            if(!isSameType(m, inner)) {
+              throw new TypeError(`${outerType}.${method}: Both computations must return a type of ${innerType}`)
+            }
+
+            return inner
+          })
         })
-      })
+      }
     }
 
-    function map(fn) {
-      if(!isFunction(fn)) {
-        throw new TypeError(`${outerType}.map: Function required`)
-      }
-
-      return Star(function(x) {
-        const m = runWith(x)
-
-        if(!isSameType(Monad, m)) {
-          throw new TypeError(`${outerType}.map: Computations must return a type of ${innerType}`)
+    function map(method) {
+      return function(fn) {
+        if(!isFunction(fn)) {
+          throw new TypeError(`${outerType}.${method}: Function required`)
         }
 
-        return m.map(fn)
-      })
+        return Star(function(x) {
+          const m = runWith(x)
+
+          if(!isSameType(Monad, m)) {
+            throw new TypeError(`${outerType}.${method}: Computations must return a type of ${innerType}`)
+          }
+
+          return m.map(fn)
+        })
+      }
     }
 
-    function contramap(fn) {
-      if(!isFunction(fn)) {
-        throw new TypeError(`${outerType}.contramap: Function required`)
-      }
-
-      return Star(x => runWith(fn(x)))
-    }
-
-    function promap(l, r) {
-      if(!isFunction(l) || !isFunction(r)) {
-        throw new TypeError(`${outerType}.promap: Functions required for both arguments`)
-      }
-
-      return Star(function(x) {
-        const m = runWith(l(x))
-
-        if(!isSameType(Monad, m)) {
-          throw new TypeError(`${outerType}.promap: Computation must return a type of ${innerType}`)
+    function contramap(method) {
+      return function(fn) {
+        if(!isFunction(fn)) {
+          throw new TypeError(`${outerType}.${method}: Function required`)
         }
 
-        return m.map(r)
-      })
+        return Star(x => runWith(fn(x)))
+      }
+    }
+
+    function promap(method) {
+      return function(l, r) {
+        if(!isFunction(l) || !isFunction(r)) {
+          throw new TypeError(`${outerType}.${method}: Functions required for both arguments`)
+        }
+
+        return Star(function(x) {
+          const m = runWith(l(x))
+
+          if(!isSameType(Monad, m)) {
+            throw new TypeError(`${outerType}.${method}: Computation must return a type of ${innerType}`)
+          }
+
+          return m.map(r)
+        })
+      }
     }
 
     function first() {
@@ -171,13 +179,16 @@ function _Star(Monad) {
 
     return {
       inspect, toString: inspect, type,
-      runWith, id, compose, map, contramap,
-      promap, first, second, both,
+      runWith, id, first, second, both,
+      compose: compose('compose'),
+      contramap: contramap('contramap'),
+      map: map('map'),
+      promap: promap('promap'),
       [fl.id]: id,
-      [fl.compose]: compose,
-      [fl.contramap]: contramap,
-      [fl.map]: map,
-      [fl.promap]: promap,
+      [fl.compose]: compose(fl.compose),
+      [fl.contramap]: contramap(fl.contramap),
+      [fl.map]: map(fl.map),
+      [fl.promap]: promap(fl.promap),
       ['@@type']: typeString,
       constructor: Star
     }

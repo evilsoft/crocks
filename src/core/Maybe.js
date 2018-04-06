@@ -1,7 +1,7 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const VERSION = 2
+const VERSION = 3
 
 const _defineUnion = require('./defineUnion')
 const _equals = require('./equals')
@@ -94,15 +94,17 @@ function Maybe(u) {
     }, x)
   }
 
-  function concat(m) {
-    if(!isSameType(Maybe, m)) {
-      throw new TypeError('Maybe.concat: Maybe of Semigroup required')
-    }
+  function concat(method) {
+    return function(m) {
+      if(!isSameType(Maybe, m)) {
+        throw new TypeError(`Maybe.${method}: Maybe of Semigroup required`)
+      }
 
-    return either(
-      Maybe.Nothing,
-      _innerConcat(Maybe, m)
-    )
+      return either(
+        Maybe.Nothing,
+        _innerConcat(`Maybe.${method}`, m)
+      )
+    }
   }
 
   function coalesce(f, g) {
@@ -113,26 +115,30 @@ function Maybe(u) {
     return Maybe.Just(either(f, g))
   }
 
-  function map(fn) {
-    if(!isFunction(fn)) {
-      throw new TypeError('Maybe.map: Function required')
-    }
+  function map(method) {
+    return function(fn) {
+      if(!isFunction(fn)) {
+        throw new TypeError(`Maybe.${method}: Function required`)
+      }
 
-    return either(
-      Maybe.Nothing,
-      compose(Maybe.Just, fn)
-    )
+      return either(
+        Maybe.Nothing,
+        compose(Maybe.Just, fn)
+      )
+    }
   }
 
-  function alt(m) {
-    if(!isSameType(Maybe, m)) {
-      throw new TypeError('Maybe.alt: Maybe required')
-    }
+  function alt(method) {
+    return function(m) {
+      if(!isSameType(Maybe, m)) {
+        throw new TypeError(`Maybe.${method}: Maybe required`)
+      }
 
-    return either(
-      constant(m),
-      Maybe.Just
-    )
+      return either(
+        constant(m),
+        Maybe.Just
+      )
+    }
   }
 
   function ap(m) {
@@ -152,18 +158,20 @@ function Maybe(u) {
     )
   }
 
-  function chain(fn) {
-    if(!isFunction(fn)) {
-      throw new TypeError('Maybe.chain: Function required')
+  function chain(method) {
+    return function(fn) {
+      if(!isFunction(fn)) {
+        throw new TypeError(`Maybe.${method}: Function required`)
+      }
+
+      const m = either(Maybe.Nothing, fn)
+
+      if(!isSameType(Maybe, m)) {
+        throw new TypeError(`Maybe.${method}: Function must return a Maybe`)
+      }
+
+      return m
     }
-
-    const m = either(Maybe.Nothing, fn)
-
-    if(!isSameType(Maybe, m)) {
-      throw new TypeError('Maybe.chain: Function must return a Maybe')
-    }
-
-    return m
   }
 
   function sequence(f) {
@@ -215,16 +223,20 @@ function Maybe(u) {
 
   return {
     inspect, toString: inspect, either,
-    option, type, concat, equals, coalesce,
-    map, alt, zero, ap, of, chain, sequence,
+    option, type, equals, coalesce,
+    zero, ap, of, sequence,
     traverse,
+    alt: alt('alt'),
+    chain: chain('chain'),
+    concat: concat('concat'),
+    map: map('map'),
     [fl.zero]: zero,
     [fl.of]: of,
     [fl.equals]: equals,
-    [fl.alt]: alt,
-    [fl.concat]: concat,
-    [fl.map]: map,
-    [fl.chain]: chain,
+    [fl.alt]: alt(fl.alt),
+    [fl.concat]: concat(fl.concat),
+    [fl.map]: map(fl.map),
+    [fl.chain]: chain(fl.chain),
     ['@@type']: _type,
     constructor: Maybe
   }

@@ -37,20 +37,23 @@ function All(b) {
   const inspect =
     () => `All${_inspect(valueOf())}`
 
-  function concat(m) {
-    if(!isSameType(All, m)) {
-      throw new TypeError('All.concat: All required')
-    }
+  function concat(method) {
+    return function(m) {
+      if(!isSameType(All, m)) {
+        throw new TypeError(`All.${method}: All required`)
+      }
 
-    return All(m.valueOf() && valueOf())
+      return All(m.valueOf() && valueOf())
+    }
   }
 
   return {
-    inspect, toString: inspect, valueOf,
-    equals, type, concat, empty,
+    inspect, toString: inspect,
+    equals, valueOf, type, empty,
     ['@@type']: _type,
+    concat: concat('concat'),
     [fl.equals]: equals,
-    [fl.concat]: concat,
+    [fl.concat]: concat(fl.concat),
     [fl.empty]: empty,
     constructor: All
   }

@@ -13,6 +13,8 @@ const isObject = require('../core/isObject')
 const isString  = require('../core/isString')
 const unit = require('../core/_unit')
 
+const fl = require('../core/flNames')
+
 const identity = x => x
 
 const State = require('.')
@@ -55,11 +57,11 @@ test('State', t => {
 test('State fantasy-land api', t => {
   const m = State(identity)
 
-  t.equals(State['fantasy-land/of'], State.of, 'is same function as public constructor of')
+  t.ok(isFunction(State[fl.of]), 'provides of function on constructor')
 
-  t.equals(m['fantasy-land/of'], m.of, 'is same function as public instance of')
-  t.equals(m['fantasy-land/map'], m.map, 'is same function as public instance map')
-  t.equals(m['fantasy-land/chain'], m.chain, 'is same function as public instance chain')
+  t.ok(isFunction(m[fl.of]), 'provides of method on instance')
+  t.ok(isFunction(m[fl.map]), 'provides map method on instance')
+  t.ok(isFunction(m[fl.chain]), 'provides chain method on instance')
 
   t.end()
 })
@@ -99,7 +101,7 @@ test('State @@type', t => {
   const m = State(unit)
 
   t.equal(State['@@type'], m['@@type'], 'static and instance versions are the same')
-  t.equal(m['@@type'], 'crocks/State@1', 'reports crocks/State@1')
+  t.equal(m['@@type'], 'crocks/State@2', 'reports crocks/State@2')
 
   t.end()
 })
@@ -301,11 +303,34 @@ test('State map errors', t => {
   t.doesNotThrow(map(unit), 'allows a function')
 
   const m = bindFunc(State(identity).map(x => x + 1).runWith)
-  const n = bindFunc(State(x => Pair(x, x)).map(x => x + 1).runWith)
 
   const noPair = /State.map: Must wrap a function in the form \(s -> Pair a s\)/
   t.throws(m(3), noPair, 'throws when wrapped function is not (s -> (a, s))')
-  t.doesNotThrow(n(3), 'throws when wrapped function is not (s -> (a, s))')
+
+  t.end()
+})
+
+test('State map fantasy-land errors', t => {
+  const map = bindFunc(State(unit)[fl.map])
+
+  const err = /State.fantasy-land\/map: Function required/
+  t.throws(map(undefined), err, 'throws with undefined')
+  t.throws(map(null), err, 'throws with null')
+  t.throws(map(0), err, 'throws with falsey number')
+  t.throws(map(1), err, 'throws with truthy number')
+  t.throws(map(''), err, 'throws with falsey string')
+  t.throws(map('string'), err, 'throws with truthy string')
+  t.throws(map(false), err, 'throws with false')
+  t.throws(map(true), err, 'throws with true')
+  t.throws(map([]), err, 'throws with an array')
+  t.throws(map({}), err, 'throws with an object')
+
+  t.doesNotThrow(map(unit), 'allows a function')
+
+  const m = bindFunc(State(identity)[fl.map](x => x + 1).runWith)
+
+  const noPair = /State.fantasy-land\/map: Must wrap a function in the form \(s -> Pair a s\)/
+  t.throws(m(3), noPair, 'throws when wrapped function is not (s -> (a, s))')
 
   t.end()
 })
@@ -485,6 +510,57 @@ test('State chain errors', t => {
   const noState = bindFunc(State(() => Pair(0, 0)).chain(identity).runWith)
 
   const noStateErr = /State.chain: Function must return another State/
+  t.throws(noState(undefined), noStateErr, 'throws when chain function returns undefined')
+  t.throws(noState(null), noStateErr, 'throws when chain function returns null')
+  t.throws(noState(0), noStateErr, 'throws when chain function returns falsey number')
+  t.throws(noState(1), noStateErr, 'throws when chain function returns truthy number')
+  t.throws(noState(''), noStateErr, 'throws when chain function returns falsey string')
+  t.throws(noState('string'), noStateErr, 'throws when chain function returns truthy string')
+  t.throws(noState(false), noStateErr, 'throws when chain function returns false')
+  t.throws(noState(true), noStateErr, 'throws when chain function returns true')
+  t.throws(noState([]), noStateErr, 'throws when chain function returns an array')
+  t.throws(noState({}), noStateErr, 'throws when chain function returns an object')
+  t.throws(noState(unit), noStateErr, 'throws when chain function returns a function')
+
+  t.end()
+})
+
+test('State chain fantasy-land errors', t => {
+  const chain = bindFunc(State(unit)[fl.chain])
+
+  const err = /State.fantasy-land\/chain: State returning function required/
+  t.throws(chain(undefined), err, 'throws with undefined')
+  t.throws(chain(null), err, 'throws with null')
+  t.throws(chain(0), err, 'throws with falsey number')
+  t.throws(chain(1), err, 'throws with truthy number')
+  t.throws(chain(''), err, 'throws with falsey string')
+  t.throws(chain('string'), err, 'throws with truthy string')
+  t.throws(chain(false), err, 'throws with false')
+  t.throws(chain(true), err, 'throws with true')
+  t.throws(chain([]), err, 'throws with an array')
+  t.throws(chain({}), err, 'throws with an object')
+
+  const f = x => State(y => Pair(x, y))
+  const m = State(identity)
+
+  const noPair = bindFunc(m[fl.chain](f).runWith)
+
+  const noPairErr = /State.fantasy-land\/chain: Must wrap a function in the form \(s -> Pair a s\)/
+  t.throws(noPair(undefined), noPairErr, 'throws when inner function returns undefined')
+  t.throws(noPair(null), noPairErr, 'throws when inner function returns null')
+  t.throws(noPair(0), noPairErr, 'throws when inner function returns falsey number')
+  t.throws(noPair(1), noPairErr, 'throws when inner function returns truthy number')
+  t.throws(noPair(''), noPairErr, 'throws when inner function returns falsey string')
+  t.throws(noPair('string'), noPairErr, 'throws when inner function returns truthy string')
+  t.throws(noPair(false), noPairErr, 'throws when inner function returns false')
+  t.throws(noPair(true), noPairErr, 'throws when inner function returns true')
+  t.throws(noPair([]), noPairErr, 'throws when inner function returns an array')
+  t.throws(noPair({}), noPairErr, 'throws when inner function returns an object')
+  t.throws(noPair(unit), noPairErr, 'throws when inner function returns a function')
+
+  const noState = bindFunc(State(() => Pair(0, 0))[fl.chain](identity).runWith)
+
+  const noStateErr = /State.fantasy-land\/chain: Function must return another State/
   t.throws(noState(undefined), noStateErr, 'throws when chain function returns undefined')
   t.throws(noState(null), noStateErr, 'throws when chain function returns null')
   t.throws(noState(0), noStateErr, 'throws when chain function returns falsey number')

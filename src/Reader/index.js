@@ -1,7 +1,7 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const VERSION = 1
+const VERSION = 2
 
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
@@ -39,12 +39,14 @@ function Reader(runWith) {
   const inspect =
     () => `Reader${_inspect(runWith)}`
 
-  function map(fn) {
-    if(!isFunction(fn)) {
-      throw new TypeError('Reader.map: Function required')
-    }
+  function map(method) {
+    return function(fn) {
+      if(!isFunction(fn)) {
+        throw new TypeError(`Reader.${method}: Function required`)
+      }
 
-    return Reader(compose(fn, runWith))
+      return Reader(compose(fn, runWith))
+    }
   }
 
   function ap(m) {
@@ -63,28 +65,32 @@ function Reader(runWith) {
     })
   }
 
-  function chain(fn) {
-    if(!isFunction(fn)) {
-      throw new TypeError('Reader.chain: Function required')
-    }
-
-    return Reader(function(e) {
-      const m = fn(runWith(e))
-
-      if(!isSameType(Reader, m)) {
-        throw new TypeError('Reader.chain: Function must return a Reader')
+  function chain(method) {
+    return function(fn) {
+      if(!isFunction(fn)) {
+        throw new TypeError(`Reader.${method}: Function required`)
       }
 
-      return m.runWith(e)
-    })
+      return Reader(function(e) {
+        const m = fn(runWith(e))
+
+        if(!isSameType(Reader, m)) {
+          throw new TypeError(`Reader.${method}: Function must return a Reader`)
+        }
+
+        return m.runWith(e)
+      })
+    }
   }
 
   return {
     inspect, toString: inspect, runWith,
-    type, map, ap, chain, of,
+    type, ap, of,
+    map: map('map'),
+    chain: chain('chain'),
     [fl.of]: of,
-    [fl.map]: map,
-    [fl.chain]: chain,
+    [fl.map]: map(fl.map),
+    [fl.chain]: chain(fl.chain),
     ['@@type']: _type,
     constructor: Reader
   }

@@ -8,6 +8,8 @@ const isFunction = require('../core/isFunction')
 const isObject = require('../core/isObject')
 const isString = require('../core/isString')
 
+const fl = require('../core/flNames')
+
 const Any = require('.')
 
 const constant = x => () => x
@@ -46,11 +48,11 @@ test('Any', t => {
 test('Any fantasy-land api', t => {
   const m = Any(true)
 
-  t.equals(Any['fantasy-land/empty'], Any.empty, 'is same function as public constructor empty')
+  t.ok(isFunction(Any[fl.empty]), 'provides empty function on constructor')
 
-  t.equals(m['fantasy-land/empty'], m.empty, 'is same function as public instance empty')
-  t.equals(m['fantasy-land/concat'], m.concat, 'is same function as public instance concat')
-  t.equals(m['fantasy-land/equals'], m.equals, 'is same function as public instance equals')
+  t.ok(isFunction(m[fl.empty]), 'provides empty method on instance')
+  t.ok(isFunction(m[fl.equals]), 'provides equals method on instance')
+  t.ok(isFunction(m[fl.concat]), 'provides concat method on instance')
 
   t.end()
 })
@@ -108,21 +110,6 @@ test('Any @@type', t => {
   t.end()
 })
 
-test('Any concat properties (Semigroup)', t => {
-  const a = Any(0)
-  const b = Any(true)
-  const c = Any('')
-
-  const left = a.concat(b).concat(c)
-  const right = a.concat(b.concat(c))
-
-  t.ok(isFunction(a.concat), 'provides a concat function')
-  t.equal(left.valueOf(), right.valueOf(), 'associativity')
-  t.equal(a.concat(b).type(), a.type(), 'returns an Any')
-
-  t.end()
-})
-
 test('Any concat functionality', t => {
   const a = Any(true)
   const b = Any(false)
@@ -147,6 +134,44 @@ test('Any concat functionality', t => {
   t.equal(a.concat(b).valueOf(), true, 'true to false reports true')
   t.equal(a.concat(a).valueOf(), true, 'true to true reports true')
   t.equal(b.concat(b).valueOf(), false, 'false to false reports false')
+
+  t.end()
+})
+
+test('Any concat fantasy-land errors', t => {
+  const a = Any(true)
+
+  const notAny = { type: constant('Any...Not') }
+
+  const cat = bindFunc(a[fl.concat])
+
+  const err = /Any.fantasy-land\/concat: Any required/
+  t.throws(cat(undefined), err, 'throws with undefined')
+  t.throws(cat(null), err, 'throws with null')
+  t.throws(cat(0), err, 'throws with falsey number')
+  t.throws(cat(1), err, 'throws with truthy number')
+  t.throws(cat(''), err, 'throws with falsey string')
+  t.throws(cat('string'), err, 'throws with truthy string')
+  t.throws(cat(false), err, 'throws with false')
+  t.throws(cat(true), err, 'throws with true')
+  t.throws(cat([]), err, 'throws with an array')
+  t.throws(cat({}), err, 'throws with an object')
+  t.throws(cat(notAny), err, 'throws with non-Any')
+
+  t.end()
+})
+
+test('Any concat properties (Semigroup)', t => {
+  const a = Any(0)
+  const b = Any(true)
+  const c = Any('')
+
+  const left = a.concat(b).concat(c)
+  const right = a.concat(b.concat(c))
+
+  t.ok(isFunction(a.concat), 'provides a concat function')
+  t.equal(left.valueOf(), right.valueOf(), 'associativity')
+  t.equal(a.concat(b).type(), a.type(), 'returns an Any')
 
   t.end()
 })

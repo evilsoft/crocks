@@ -37,20 +37,23 @@ function Max(n) {
     m => isSameType(Max, m)
       && _equals(x, m.valueOf())
 
-  function concat(m) {
-    if(!isSameType(Max, m)) {
-      throw new TypeError('Max.concat: Max requried')
-    }
+  function concat(method) {
+    return function(m) {
+      if(!isSameType(Max, m)) {
+        throw new TypeError(`Max.${method}: Max requried`)
+      }
 
-    return Max(Math.max(x, m.valueOf()))
+      return Max(Math.max(x, m.valueOf()))
+    }
   }
 
   return {
-    inspect, toString: inspect, valueOf,
-    equals, type, concat, empty,
+    inspect, toString: inspect,
+    equals, valueOf, type, empty,
+    concat: concat('concat'),
     [fl.equals]: equals,
     [fl.empty]: empty,
-    [fl.concat]: concat,
+    [fl.concat]: concat(fl.concat),
     ['@@type']: _type,
     constructor: Max
   }

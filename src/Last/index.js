@@ -41,28 +41,31 @@ function Last(x) {
   const option =
     maybe.option
 
-  function concat(m) {
-    if(!isSameType(Last, m)) {
-      throw new TypeError('Last.concat: Last required')
-    }
+  function concat(method) {
+    return function(m) {
+      if(!isSameType(Last, m)) {
+        throw new TypeError(`Last.${method}: Last required`)
+      }
 
-    const n =
-      m.valueOf().map(x => x)
+      const n =
+        m.valueOf().map(x => x)
 
-    return Last(
-      maybe.either(
-        () => n,
-        () => n.either(() => maybe, () => n)
+      return Last(
+        maybe.either(
+          () => n,
+          () => n.either(() => maybe, () => n)
+        )
       )
-    )
+    }
   }
 
   return {
-    inspect, toString: inspect, concat,
+    inspect, toString: inspect,
     equals, empty, option, type, valueOf,
+    concat: concat('concat'),
     [fl.equals]: equals,
     [fl.empty]: empty,
-    [fl.concat]: concat,
+    [fl.concat]: concat(fl.concat),
     ['@@type']: _type,
     constructor: Last
   }

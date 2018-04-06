@@ -13,6 +13,8 @@ const isSameType = require('./isSameType')
 const isString = require('./isString')
 const unit = require('./_unit')
 
+const fl = require('./flNames')
+
 const Maybe = require('./Maybe')
 const Pred = require('../Pred')
 
@@ -57,16 +59,16 @@ test('List', t => {
 test('List fantasy-land api', t => {
   const m = List('value')
 
-  t.equals(List['fantasy-land/of'], List.of, 'is same function as public constructor of')
-  t.equals(List['fantasy-land/empty'], List.empty, 'is same function as public constructor empty')
+  t.ok(isFunction(List[fl.empty]), 'provides empty function on constructor')
+  t.ok(isFunction(List[fl.of]), 'provides of function on constructor')
 
-  t.equals(m['fantasy-land/of'], m.of, 'is same function as public instance of')
-  t.equals(m['fantasy-land/equals'], m.equals, 'is same function as public instance equals')
-  t.equals(m['fantasy-land/concat'], m.concat, 'is same function as public instance concat')
-  t.equals(m['fantasy-land/empty'], m.empty, 'is same function as public instance empty')
-  t.equals(m['fantasy-land/map'], m.map, 'is same function as public instance map')
-  t.equals(m['fantasy-land/chain'], m.chain, 'is same function as public instance chain')
-  t.equals(m['fantasy-land/reduce'], m.reduce, 'is same function as public instance reduce')
+  t.ok(isFunction(m[fl.of]), 'provides of method on instance')
+  t.ok(isFunction(m[fl.empty]), 'provides empty method on instance')
+  t.ok(isFunction(m[fl.equals]), 'provides equals method on instance')
+  t.ok(isFunction(m[fl.concat]), 'provides concat method on instance')
+  t.ok(isFunction(m[fl.map]), 'provides map method on instance')
+  t.ok(isFunction(m[fl.chain]), 'provides chain method on instance')
+  t.ok(isFunction(m[fl.reduce]), 'provides reduce method on instance')
 
   t.end()
 })
@@ -134,7 +136,7 @@ test('List @@type', t => {
   const m = List([])
 
   t.equal(m['@@type'], List['@@type'], 'static and instance versions are the same')
-  t.equal(m['@@type'], 'crocks/List@2', 'returns crocks/List@2')
+  t.equal(m['@@type'], 'crocks/List@3', 'returns crocks/List@3')
 
   t.end()
 })
@@ -256,9 +258,8 @@ test('List concat properties (Semigroup)', t => {
   t.end()
 })
 
-test('List concat functionality', t => {
+test('List concat errors', t => {
   const a = List([ 1, 2 ])
-  const b = List([ 3, 4 ])
 
   const notList = { type: constant('List...Not') }
 
@@ -276,6 +277,36 @@ test('List concat functionality', t => {
   t.throws(cat([]), err, 'throws with an array')
   t.throws(cat({}), err, 'throws with an object')
   t.throws(cat(notList), err, 'throws when passed non-List')
+
+  t.end()
+})
+
+test('List concat fantasy-land errors', t => {
+  const a = List([ 1, 2 ])
+
+  const notList = { type: constant('List...Not') }
+
+  const cat = bindFunc(a[fl.concat])
+
+  const err = /List.fantasy-land\/concat: List required/
+  t.throws(cat(undefined), err, 'throws with undefined')
+  t.throws(cat(null), err, 'throws with null')
+  t.throws(cat(0), err, 'throws with falsey number')
+  t.throws(cat(1), err, 'throws with truthy number')
+  t.throws(cat(''), err, 'throws with falsey string')
+  t.throws(cat('string'), err, 'throws with truthy string')
+  t.throws(cat(false), err, 'throws with false')
+  t.throws(cat(true), err, 'throws with true')
+  t.throws(cat([]), err, 'throws with an array')
+  t.throws(cat({}), err, 'throws with an object')
+  t.throws(cat(notList), err, 'throws when passed non-List')
+
+  t.end()
+})
+
+test('List concat functionality', t => {
+  const a = List([ 1, 2 ])
+  const b = List([ 3, 4 ])
 
   t.same(a.concat(b).valueOf(), [ 1, 2, 3, 4 ], 'concats second to first')
   t.same(b.concat(a).valueOf(), [ 3, 4, 1, 2 ], 'concats first to second')
@@ -311,6 +342,24 @@ test('List reduce errors', t => {
   const reduce = bindFunc(List([ 1, 2 ]).reduce)
 
   const err = /List.reduce: Function required for first argument/
+  t.throws(reduce(undefined, 0), err, 'throws with undefined in the first argument')
+  t.throws(reduce(null, 0), err, 'throws with null in the first argument')
+  t.throws(reduce(0, 0), err, 'throws with falsey number in the first argument')
+  t.throws(reduce(1, 0), err, 'throws with truthy number in the first argument')
+  t.throws(reduce('', 0), err, 'throws with falsey string in the first argument')
+  t.throws(reduce('string', 0), err, 'throws with truthy string in the first argument')
+  t.throws(reduce(false, 0), err, 'throws with false in the first argument')
+  t.throws(reduce(true, 0), err, 'throws with true in the first argument')
+  t.throws(reduce({}, 0), err, 'throws with an object in the first argument')
+  t.throws(reduce([], 0), err, 'throws with an array in the first argument')
+
+  t.end()
+})
+
+test('List reduce fantasy-land errors', t => {
+  const reduce = bindFunc(List([ 1, 2 ])[fl.reduce])
+
+  const err = /List.fantasy-land\/reduce: Function required for first argument/
   t.throws(reduce(undefined, 0), err, 'throws with undefined in the first argument')
   t.throws(reduce(null, 0), err, 'throws with null in the first argument')
   t.throws(reduce(0, 0), err, 'throws with falsey number in the first argument')
@@ -485,6 +534,26 @@ test('List map errors', t => {
   t.end()
 })
 
+test('List map fantasy-land errors', t => {
+  const map = bindFunc(List([])[fl.map])
+
+  const err = /List.fantasy-land\/map: Function required/
+  t.throws(map(undefined), err, 'throws with undefined')
+  t.throws(map(null), err, 'throws with null')
+  t.throws(map(0), err, 'throws with falsey number')
+  t.throws(map(1), err, 'throws with truthy number')
+  t.throws(map(''), err, 'throws with falsey string')
+  t.throws(map('string'), err, 'throws with truthy string')
+  t.throws(map(false), err, 'throws with false')
+  t.throws(map(true), err, 'throws with true')
+  t.throws(map([]), err, 'throws with an array')
+  t.throws(map({}), err, 'throws with an object')
+
+  t.doesNotThrow(map(unit), 'allows a function')
+
+  t.end()
+})
+
 test('List map functionality', t => {
   const spy = sinon.spy(identity)
   const xs = [ 42 ]
@@ -601,6 +670,39 @@ test('List chain errors', t => {
   t.throws(chain({}), noFunc, 'throws with an object')
 
   const noList = /List.chain: Function must return a List/
+  t.throws(bad(undefined), noList, 'throws when function returns undefined')
+  t.throws(bad(null), noList, 'throws when function returns null')
+  t.throws(bad(0), noList, 'throws when function returns falsey number')
+  t.throws(bad(1), noList, 'throws when function returns truthy number')
+  t.throws(bad(''), noList, 'throws when function returns falsey string')
+  t.throws(bad('string'), noList, 'throws when function returns truthy string')
+  t.throws(bad(false), noList, 'throws when function returns false')
+  t.throws(bad(true), noList, 'throws when function returns true')
+  t.throws(bad([]), noList, 'throws when function returns an array')
+  t.throws(bad({}), noList, 'throws when function returns an object')
+  t.throws(bad(unit), noList, 'throws when function returns a function')
+  t.throws(bad(MockCrock), noList, 'throws when function a non-List ADT')
+
+  t.end()
+})
+
+test('List chain fantasy-land errors', t => {
+  const chain = bindFunc(List([ 0 ])[fl.chain])
+  const bad = bindFunc(x => List.of(x)[fl.chain](identity))
+
+  const noFunc = /List.fantasy-land\/chain: Function required/
+  t.throws(chain(undefined), noFunc, 'throws with undefined')
+  t.throws(chain(null), noFunc, 'throws with null')
+  t.throws(chain(0), noFunc, 'throw with falsey number')
+  t.throws(chain(1), noFunc, 'throws with truthy number')
+  t.throws(chain(''), noFunc, 'throws with falsey string')
+  t.throws(chain('string'), noFunc, 'throws with truthy string')
+  t.throws(chain(false), noFunc, 'throws with false')
+  t.throws(chain(true), noFunc, 'throws with true')
+  t.throws(chain([]), noFunc, 'throws with an array')
+  t.throws(chain({}), noFunc, 'throws with an object')
+
+  const noList = /List.fantasy-land\/chain: Function must return a List/
   t.throws(bad(undefined), noList, 'throws when function returns undefined')
   t.throws(bad(null), noList, 'throws when function returns null')
   t.throws(bad(0), noList, 'throws when function returns falsey number')

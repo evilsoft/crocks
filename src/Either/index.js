@@ -1,7 +1,7 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const VERSION = 2
+const VERSION = 3
 
 const _defineUnion = require('../core/defineUnion')
 const _equals = require('../core/equals')
@@ -81,15 +81,17 @@ function Either(u) {
     }, x)
   }
 
-  function concat(m) {
-    if(!isSameType(Either, m)) {
-      throw new TypeError('Either.concat: Either of Semigroup required')
-    }
+  function concat(method) {
+    return function(m) {
+      if(!isSameType(Either, m)) {
+        throw new TypeError(`Either.${method}: Either of Semigroup required`)
+      }
 
-    return either(
-      Either.Left,
-      _innerConcat(Either, m)
-    )
+      return either(
+        Either.Left,
+        _innerConcat(`Either.${method}`, m)
+      )
+    }
   }
 
   function swap(f, g) {
@@ -111,34 +113,40 @@ function Either(u) {
     return Either.Right(either(f, g))
   }
 
-  function map(fn) {
-    if(!isFunction(fn)) {
-      throw new TypeError('Either.map: Function required')
-    }
+  function map(method) {
+    return function(fn) {
+      if(!isFunction(fn)) {
+        throw new TypeError(`Either.${method}: Function required`)
+      }
 
-    return either(Either.Left, compose(Either.Right, fn))
+      return either(Either.Left, compose(Either.Right, fn))
+    }
   }
 
-  function bimap(f, g) {
-    if(!isFunction(f) || !isFunction(g)) {
-      throw new TypeError('Either.bimap: Requires both left and right functions')
-    }
+  function bimap(method) {
+    return function(f, g) {
+      if(!isFunction(f) || !isFunction(g)) {
+        throw new TypeError(`Either.${method}: Requires both left and right functions`)
+      }
 
-    return either(
-      compose(Either.Left, f),
-      compose(Either.Right, g)
-    )
+      return either(
+        compose(Either.Left, f),
+        compose(Either.Right, g)
+      )
+    }
   }
 
-  function alt(m) {
-    if(!isSameType(Either, m)) {
-      throw new TypeError('Either.alt: Either required')
-    }
+  function alt(method) {
+    return function(m) {
+      if(!isSameType(Either, m)) {
+        throw new TypeError(`Either.${method}: Either required`)
+      }
 
-    return either(
-      constant(m),
-      Either.Right
-    )
+      return either(
+        constant(m),
+        Either.Right
+      )
+    }
   }
 
   function ap(m) {
@@ -156,18 +164,20 @@ function Either(u) {
     )
   }
 
-  function chain(fn) {
-    if(!isFunction(fn)) {
-      throw new TypeError('Either.chain: Function required')
+  function chain(method) {
+    return function(fn) {
+      if(!isFunction(fn)) {
+        throw new TypeError(`Either.${method}: Function required`)
+      }
+
+      const m = either(Either.Left, fn)
+
+      if(!isSameType(Either, m)) {
+        throw new TypeError(`Either.${method}: Function must return an Either`)
+      }
+
+      return m
     }
-
-    const m = either(Either.Left, fn)
-
-    if(!isSameType(Either, m)) {
-      throw new TypeError('Either.chain: Function must return an Either')
-    }
-
-    return m
   }
 
   function sequence(f) {
@@ -219,16 +229,20 @@ function Either(u) {
 
   return {
     inspect, toString: inspect, either,
-    type, concat, swap, coalesce, equals,
-    map, bimap, alt, ap, of, chain, sequence,
-    traverse,
+    type, swap, coalesce, equals,
+    ap, of, sequence, traverse,
+    alt: alt('alt'),
+    bimap: bimap('bimap'),
+    concat: concat('concat'),
+    chain: chain('chain'),
+    map: map('map'),
     [fl.of]: of,
     [fl.equals]: equals,
-    [fl.alt]: alt,
-    [fl.bimap]: bimap,
-    [fl.concat]: concat,
-    [fl.map]: map,
-    [fl.chain]: chain,
+    [fl.alt]: alt(fl.alt),
+    [fl.bimap]: bimap(fl.bimap),
+    [fl.concat]: concat(fl.concat),
+    [fl.map]: map(fl.map),
+    [fl.chain]: chain(fl.chain),
     ['@@type']: _type,
     constructor: Either
   }

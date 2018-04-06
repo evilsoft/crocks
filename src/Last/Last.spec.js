@@ -1,4 +1,5 @@
 const test = require('tape')
+const MockCrock = require('../test/MockCrock')
 const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
@@ -37,6 +38,7 @@ test('Last fantasy-land api', t => {
 
   t.equals(m['fantasy-land/empty'], m.empty, 'is same function as public instance empty')
   t.equals(m['fantasy-land/concat'], m.concat, 'is same function as public instance concat')
+  t.equals(m['fantasy-land/equals'], m.equals, 'is same function as public instance equals')
 
   t.end()
 })
@@ -46,6 +48,7 @@ test('Last @@implements', t => {
 
   t.equal(f('concat'), true, 'implements concat func')
   t.equal(f('empty'), true, 'implements empty func')
+  t.equal(f('equals'), true, 'implements equals')
 
   t.end()
 })
@@ -136,6 +139,37 @@ test('Last concat functionality', t => {
   t.throws(cat(notLast), err, 'throws when passed non-Last')
 
   t.equal(extract(a.concat(b)), 'b', 'returns the last value concatted')
+
+  t.end()
+})
+
+test('Last equals properties (Setoid)', t => {
+  const a = Last(3)
+  const b = Last(3)
+  const c = Last(5)
+  const d = Last(3)
+
+  t.ok(isFunction(Last({}).equals), 'provides an equals function')
+  t.equal(a.equals(a), true, 'reflexivity')
+  t.equal(a.equals(b), b.equals(a), 'symmetry (equal)')
+  t.equal(a.equals(c), c.equals(a), 'symmetry (!equal)')
+  t.equal(a.equals(b) && b.equals(d), a.equals(d), 'transitivity')
+
+  t.end()
+})
+
+test('Last equals functionality', t => {
+  const a = Last(3)
+  const b = Last(3)
+  const c = Last(5)
+
+  const value = {}
+  const nonFirst = MockCrock(value)
+
+  t.equal(a.equals(c), false, 'returns false when 2 Firsts are not equal')
+  t.equal(a.equals(b), true, 'returns true when 2 Firsts are equal')
+  t.equal(a.equals(nonFirst), false, 'returns false when passed a non-First')
+  t.equal(c.equals(value), false, 'returns false when passed a simple value')
 
   t.end()
 })

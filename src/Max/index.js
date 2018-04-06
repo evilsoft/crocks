@@ -5,6 +5,7 @@ const VERSION = 1
 
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
+const _equals = require('../core/equals')
 const type = require('../core/types').type('Max')
 const _type = require('../core/types').typeFn(type(), VERSION)
 const fl = require('../core/flNames')
@@ -32,6 +33,10 @@ function Max(n) {
   const inspect =
     () => `Max${_inspect(valueOf())}`
 
+  const equals =
+    m => isSameType(Max, m)
+      && _equals(x, m.valueOf())
+
   function concat(m) {
     if(!isSameType(Max, m)) {
       throw new TypeError('Max.concat: Max requried')
@@ -42,7 +47,8 @@ function Max(n) {
 
   return {
     inspect, toString: inspect, valueOf,
-    type, concat, empty,
+    equals, type, concat, empty,
+    [fl.equals]: equals,
     [fl.empty]: empty,
     [fl.concat]: concat,
     ['@@type']: _type,
@@ -51,7 +57,7 @@ function Max(n) {
 }
 
 Max['@@implements'] = _implements(
-  [ 'concat', 'empty' ]
+  [ 'equals', 'concat', 'empty' ]
 )
 
 Max.empty = _empty

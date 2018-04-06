@@ -4,6 +4,20 @@
 All Boolean
 ```
 
+## Constructor
+
+```haskell
+All :: a -> All Boolean
+```
+<details>
+  <summary>Breakdown</summary>
+  <dl>
+    <dt>value</dt><dd>Value to wrap</dd>
+    <dt>result</dt><dd><code>All</code> wrapping the coerced `Boolean` value</dd>
+  </dl>
+</details>
+<br>
+
 `All` is a `Monoid` that will combine (2) values of any type using logical
 conjunction (AND) on their coerced `Boolean` values, mapping truth-y values to
 `true` and false-y values to `false`.
@@ -44,6 +58,14 @@ allGood([ 'nice', '00', null ])
 ```haskell
 All.empty :: () -> All
 ```
+<details>
+  <summary>Breakdown</summary>
+  <dl>
+    <dt>unit</dt><dd>Nothing, any passed in parameters are ignored</dd>
+    <dt>result</dt><dd><code>All</code> wrapping <code>true</code></dd>
+  </dl>
+</details>
+<br>
 
 `empty` provides the identity for the `Monoid` in that when the value it
 provides is `concat`ed to any other value, it will return the other value. In
@@ -66,6 +88,14 @@ All(false).concat(All.empty())  //=> All false
 ```haskell
 All ~> All -> All
 ```
+<details>
+  <summary>Breakdown</summary>
+  <dl>
+    <dt>value</dt><dd>Value to concat</dd>
+    <dt>result</dt><dd><code>All</code> wrapping the concatenated values</dd>
+  </dl>
+</details>
+<br>
 
 `concat` is used to combine (2) `Semigroup`s of the same type under an operation
 specified by the `Semigroup`. In the case of `All`, it will combine the (2)

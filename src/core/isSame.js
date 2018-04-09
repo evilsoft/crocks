@@ -1,8 +1,6 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const curry = require('./curry');
-
 // isSame : (a, b) -> Boolean
 function isSame(x, y) {
   if(x === y) {
@@ -12,4 +10,4 @@ function isSame(x, y) {
   return x !== x && y !== y
 }
 
-module.exports = curry(isSame)
+module.exports = isSame

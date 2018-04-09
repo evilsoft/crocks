@@ -1,7 +1,6 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const curry = require('./curry')
 const isFunction = require('./isFunction')
 const type = require('./type')
 
@@ -15,4 +14,4 @@ function isSameType(x, y) {
     || isFunction(y) && y.name === tX
 }
 
-module.exports = curry(isSameType)
+module.exports = isSameType

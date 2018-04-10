@@ -103,7 +103,7 @@ test('Sum @@type', t => {
   const m = Sum(0)
 
   t.equal(m['@@type'], Sum['@@type'], 'static and instance versions are the same')
-  t.equal(m['@@type'], 'crocks/Sum@1', 'reports crocks/Sum@1')
+  t.equal(m['@@type'], 'crocks/Sum@2', 'reports crocks/Sum@2')
 
   t.end()
 })

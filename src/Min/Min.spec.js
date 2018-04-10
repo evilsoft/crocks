@@ -103,7 +103,7 @@ test('Min @@type', t => {
   const m = Min(0)
 
   t.equal(m['@@type'], Min['@@type'], 'static and instance versions are the same')
-  t.equal(m['@@type'], 'crocks/Min@1', 'reports crocks/Min@1')
+  t.equal(m['@@type'], 'crocks/Min@2', 'reports crocks/Min@2')
 
   t.end()
 })

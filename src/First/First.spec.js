@@ -101,7 +101,7 @@ test('First type', t => {
   const m = First(0)
 
   t.equal(First['@@type'], m['@@type'], 'static and instance versions are the same')
-  t.equal(m['@@type'], 'crocks/First@1', 'reports crocks/First@1')
+  t.equal(m['@@type'], 'crocks/First@2', 'reports crocks/First@2')
 
   t.end()
 })

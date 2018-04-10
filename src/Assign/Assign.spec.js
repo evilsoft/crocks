@@ -99,7 +99,7 @@ test('Assign type', t => {
 
 test('Assign @@type', t => {
   t.equal(Assign({})['@@type'], Assign['@@type'], 'static and instance versions are the same')
-  t.equal(Assign({})['@@type'], 'crocks/Assign@1', 'reports crocks/Assign@1')
+  t.equal(Assign({})['@@type'], 'crocks/Assign@2', 'reports crocks/Assign@2')
 
   t.end()
 })

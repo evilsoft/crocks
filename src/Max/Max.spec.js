@@ -103,7 +103,7 @@ test('Max @@type', t => {
   const m = Max(0)
 
   t.equal(m['@@type'], Max['@@type'], 'static and instance versions are the same')
-  t.equal(m['@@type'], 'crocks/Max@1', 'reports crocks/Max@1')
+  t.equal(m['@@type'], 'crocks/Max@2', 'reports crocks/Max@2')
 
   t.end()
 })

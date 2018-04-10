@@ -103,7 +103,7 @@ test('Any type', t => {
 
 test('Any @@type', t => {
   t.equal(Any['@@type'], Any(0)['@@type'], 'static and instance versions are the same')
-  t.equal(Any(0)['@@type'], 'crocks/Any@1', 'reports crocks/Any@1')
+  t.equal(Any(0)['@@type'], 'crocks/Any@2', 'reports crocks/Any@2')
 
   t.end()
 })

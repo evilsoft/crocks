@@ -103,7 +103,7 @@ test('Prod @@type', t => {
   const m = Prod(0)
 
   t.equal(m['@@type'], Prod['@@type'], 'static and instance versions are the same')
-  t.equal(m['@@type'], 'crocks/Prod@1', 'reports crocks/Prod@1')
+  t.equal(m['@@type'], 'crocks/Prod@2', 'reports crocks/Prod@2')
 
   t.end()
 })

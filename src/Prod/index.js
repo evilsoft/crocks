@@ -1,10 +1,11 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const VERSION = 1
+const VERSION = 2
 
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
+const _equals = require('../core/equals')
 const type = require('../core/types').type('Prod')
 const _type = require('../core/types').typeFn(type(), VERSION)
 const fl = require('../core/flNames')
@@ -32,6 +33,10 @@ function Prod(n) {
   const inspect =
     () => `Prod${_inspect(valueOf())}`
 
+  const equals =
+    m => isSameType(Prod, m)
+      && _equals(x, m.valueOf())
+
   function concat(m) {
     if(!isSameType(Prod, m)) {
       throw new TypeError('Prod.concat: Prod required')
@@ -42,7 +47,8 @@ function Prod(n) {
 
   return {
     inspect, toString: inspect, valueOf,
-    type, concat, empty,
+    equals, type, concat, empty,
+    [fl.equals]: equals,
     [fl.empty]: empty,
     [fl.concat]: concat,
     ['@@type']: _type,
@@ -51,7 +57,7 @@ function Prod(n) {
 }
 
 Prod['@@implements'] = _implements(
-  [ 'concat', 'empty' ]
+  [ 'equals', 'concat', 'empty' ]
 )
 
 Prod.empty = _empty

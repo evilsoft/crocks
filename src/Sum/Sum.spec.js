@@ -1,4 +1,5 @@
 const test = require('tape')
+const MockCrock = require('../test/MockCrock')
 const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
@@ -49,6 +50,7 @@ test('Sum fantasy-land api', t => {
 
   t.equals(m['fantasy-land/empty'], m.empty, 'is same function as public instance empty')
   t.equals(m['fantasy-land/concat'], m.concat, 'is same function as public instance concat')
+  t.equals(m['fantasy-land/equals'], m.equals, 'is same function as public instance equals')
 
   t.end()
 })
@@ -58,6 +60,7 @@ test('Sum @@implements', t => {
 
   t.equal(f('concat'), true, 'implements concat func')
   t.equal(f('empty'), true, 'implements empty func')
+  t.equal(f('equals'), true, 'implements equals')
 
   t.end()
 })
@@ -100,7 +103,38 @@ test('Sum @@type', t => {
   const m = Sum(0)
 
   t.equal(m['@@type'], Sum['@@type'], 'static and instance versions are the same')
-  t.equal(m['@@type'], 'crocks/Sum@1', 'reports crocks/Sum@1')
+  t.equal(m['@@type'], 'crocks/Sum@2', 'reports crocks/Sum@2')
+
+  t.end()
+})
+
+test('Sum equals properties (Setoid)', t => {
+  const a = Sum(4)
+  const b = Sum(4)
+  const c = Sum(3)
+  const d = Sum(4)
+
+  t.ok(isFunction(Sum(4).equals), 'provides an equals function')
+  t.equal(a.equals(a), true, 'reflexivity')
+  t.equal(a.equals(b), b.equals(a), 'symmetry (equal)')
+  t.equal(a.equals(c), c.equals(a), 'symmetry (!equal)')
+  t.equal(a.equals(b) && b.equals(d), a.equals(d), 'transitivity')
+
+  t.end()
+})
+
+test('Sum equals functionality', t => {
+  const a = Sum(4)
+  const b = Sum(4)
+  const c = Sum(5)
+
+  const value = 5
+  const nonSum = MockCrock(value)
+
+  t.equal(a.equals(c), false, 'returns false when 2 Sums are not equal')
+  t.equal(a.equals(b), true, 'returns true when 2 Sums are equal')
+  t.equal(a.equals(nonSum), false, 'returns false when passed a non-Sum')
+  t.equal(c.equals(value), false, 'returns false when passed a simple value')
 
   t.end()
 })

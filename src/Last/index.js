@@ -1,10 +1,11 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const VERSION = 1
+const VERSION = 2
 
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
+const _equals = require('../core/equals')
 const type = require('../core/types').type('Last')
 const _type = require('../core/types').typeFn(type(), VERSION)
 const fl = require('../core/flNames')
@@ -33,6 +34,10 @@ function Last(x) {
   const inspect =
     () => `Last(${_inspect(maybe)} )`
 
+  const equals =
+  m => isSameType(Last, m)
+    && _equals(maybe, m.valueOf())
+
   const option =
     maybe.option
 
@@ -54,7 +59,8 @@ function Last(x) {
 
   return {
     inspect, toString: inspect, concat,
-    empty, option, type, valueOf,
+    equals, empty, option, type, valueOf,
+    [fl.equals]: equals,
     [fl.empty]: empty,
     [fl.concat]: concat,
     ['@@type']: _type,
@@ -63,7 +69,7 @@ function Last(x) {
 }
 
 Last['@@implements'] = _implements(
-  [ 'concat', 'empty' ]
+  [ 'equals', 'concat', 'empty' ]
 )
 
 Last.empty = _empty

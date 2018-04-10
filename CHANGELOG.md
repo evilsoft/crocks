@@ -1,5 +1,52 @@
 # Change Log for `crocks`
 
+v0.9.2 -- April 1, 2018
+--
+### Additions
+* Helpers:
+  * `Maybe/safeAfter`
+  * `Maybe/find`
+
+### Modifications
+* Update documentation to favor JS Modules
+* `sequence` and `traverse` allow for either an `Applicative` TypeRep or an
+`Apply` returning function. (methods and pointfree functions)
+* `sequence` and `traverse` allow for use of the `Array` constructor as a
+TypeRep for `Array`
+
+### Bug fixes
+* Throw a `crocks` error instead of a standard JavaScript error when the data
+is `null` or `undefined` in the following:
+  * `pointfree/bimap`
+  * `pointfree/coalesce`
+  * `pointfree/cons`
+  * `pointfree/head`
+  * `pointfree/swap`
+  * `pointfree/tail`
+
+### Development Changes
+* Better Development experience on Windows
+* Updated linting rules:
+  * Added `eol-last`
+  * Added `comma-dangle` (never)
+  * Added `no-extra-parens`
+  * Added `no-multiple-empty-lines` (no more than 1)
+* Update git file to use unix newlines.
+
+### Pull Requests
+* [#227 - Fix typos in Arrow docs](https://github.com/evilsoft/crocks/pull/227)
+* [#232 - Updates to cleaner imports to es6](https://github.com/evilsoft/crocks/pull/232)
+* [#235 - Fixed a typo](https://github.com/evilsoft/crocks/pull/235)
+* [#229 - DOCS: Converts CJS-style require calls to import statements](https://github.com/evilsoft/crocks/pull/229)
+* [#238 - Fix up Error specs and check for crocks errors in helper, pointfree and logic functions](https://github.com/evilsoft/crocks/pull/238)
+* [#241 - Added safeAfter to Maybe](https://github.com/evilsoft/crocks/pull/241)
+* [#239 - Allow `sequence` and `traverse` to accept an `Applicatve TypeRep`](https://github.com/evilsoft/crocks/pull/239)
+* [#242 - Add `find` function to `Maybe` namespace](https://github.com/evilsoft/crocks/pull/242)
+* [#243 - Allow Array Constructor as TypeRep for sequence and traverse](https://github.com/evilsoft/crocks/pull/243)
+* [#244 - Added new function to check for isPredOrFunc](https://github.com/evilsoft/crocks/pull/244)
+* [#247 - Git attribute added](https://github.com/evilsoft/crocks/pull/247)
+* [#249 - Typo fix](https://github.com/evilsoft/crocks/pull/249)
+
 v0.9.0 -- February 21, 2018
 --
 ### Breaking

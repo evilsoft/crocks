@@ -2,6 +2,7 @@
 title: "State"
 description: "State Crock"
 layout: "guide"
+functions: ["evalwith", "execwith"]
 weight: 140
 ---
 

@@ -2,6 +2,7 @@
 title: "Point-free Functions"
 description: "Point-free Functions API"
 layout: "notopic"
+functions: ["alt", "ap", "bimap", "both", "chain", "coalesce", "comparewith", "concat", "cons", "contramap", "either", "empty", "equals", "extend", "filter", "first", "fold", "head", "map", "option", "promap", "reduce", "reduceright", "run", "runwith", "second", "sequence", "swap", "tail", "traverse", "valueof"]
 weight: 50
 ---
 

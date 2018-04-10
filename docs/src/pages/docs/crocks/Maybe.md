@@ -2,6 +2,7 @@
 title: "Maybe"
 description: "Maybe Crock"
 layout: "guide"
+functions: ["find", "prop", "proppath", "safe", "safeafter", "safelift", "eithertomaybe", "firsttomaybe", "lasttomaybe", "resulttomaybe"]
 weight: 90
 ---
 
@@ -895,10 +896,10 @@ toArray(Nothing())
 find :: Foldable f => ((a -> Boolean) | Pred) -> f a -> Maybe a
 ```
 
-Using a provided predicate function or a `Pred` datatype, `find` takes a 
+Using a provided predicate function or a `Pred` datatype, `find` takes a
 `Foldable` instance and executes for every value in the `Foldable`, skipping
-empty indexes. `find` then returns the first value it finds that passes the 
-predicate. If found, `find` returns the value in a `Just`, otherwise a `Nothing` 
+empty indexes. `find` then returns the first value it finds that passes the
+predicate. If found, `find` returns the value in a `Just`, otherwise a `Nothing`
 is returned.
 
 ```javascript
@@ -1110,7 +1111,7 @@ on some predicate. This may be because some parts of our code might return unsaf
 further computations we may like to perform. Similar to [`safe`](#safe), you pass either a
 [`Pred`][pred] or a predicate function, along with a unary function. `safeAfter` then gives
 you a new  function, which when invoked evaluates the predicate against the result of executing
-the unary function. This result is then lifted into a `Just` if the predicate evaluates 
+the unary function. This result is then lifted into a `Just` if the predicate evaluates
 to `true`, or a `Nothing` if it returns `false`
 
 ```javascript

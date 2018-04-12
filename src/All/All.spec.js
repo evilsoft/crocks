@@ -1,4 +1,5 @@
 const test = require('tape')
+const MockCrock = require('../test/MockCrock')
 const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
@@ -49,6 +50,7 @@ test('All fantasy-land api', t => {
 
   t.equals(m['fantasy-land/empty'], m.empty, 'is same function as public instance empty')
   t.equals(m['fantasy-land/concat'], m.concat, 'is same function as public instance concat')
+  t.equals(m['fantasy-land/equals'], m.equals, 'is same function as public instance equals')
 
   t.end()
 })
@@ -58,6 +60,7 @@ test('All @@implements', t => {
 
   t.equal(f('concat'), true, 'implements concat func')
   t.equal(f('empty'), true, 'implements empty func')
+  t.equal(f('equals'), true, 'implements equals func')
 
   t.end()
 })
@@ -103,7 +106,7 @@ test('All @@type', t => {
   const m = All(0)
 
   t.equal(All['@@type'], m['@@type'], 'static and instance versions are the same')
-  t.equal(m['@@type'], 'crocks/All@1', 'reports crocks/All@1')
+  t.equal(m['@@type'], 'crocks/All@2', 'reports crocks/All@2')
 
   t.end()
 })
@@ -156,6 +159,37 @@ test('All empty functionality', t => {
 
   t.equal(x.type(), 'All', 'provides an All')
   t.equal(x.valueOf(), true, 'provides a true value')
+
+  t.end()
+})
+
+test('All equals properties (Setoid)', t => {
+  const a = All(true)
+  const b = All(true)
+  const c = All(false)
+  const d = All(true)
+
+  t.ok(isFunction(All(5).equals), 'provides an equals function')
+  t.equal(a.equals(a), true, 'reflexivity')
+  t.equal(a.equals(b), b.equals(a), 'symmetry (equal)')
+  t.equal(a.equals(c), c.equals(a), 'symmetry (!equal)')
+  t.equal(a.equals(b) && b.equals(d), a.equals(d), 'transitivity')
+
+  t.end()
+})
+
+test('All equals functionality', t => {
+  const a = All(true)
+  const b = All(true)
+  const c = All(false)
+
+  const value = {}
+  const nonAll = MockCrock(value)
+
+  t.equal(a.equals(c), false, 'returns false when 2 Alls are not equal')
+  t.equal(a.equals(b), true, 'returns true when 2 Alls are equal')
+  t.equal(a.equals(nonAll), false, 'returns false when passed a non-All')
+  t.equal(c.equals(value), false, 'returns false when passed a simple value')
 
   t.end()
 })

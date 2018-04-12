@@ -1,10 +1,11 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const VERSION = 1
+const VERSION = 2
 
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
+const _equals = require('../core/equals')
 const type = require('../core/types').type('First')
 const _type = require('../core/types').typeFn(type(), VERSION)
 const fl = require('../core/flNames')
@@ -30,6 +31,10 @@ function First(x) {
   const inspect =
     () => `First(${_inspect(maybe)} )`
 
+  const equals =
+  m => isSameType(First, m)
+    && _equals(maybe, m.valueOf())
+
   const valueOf =
     () => maybe
 
@@ -50,9 +55,9 @@ function First(x) {
   }
 
   return {
-    inspect, toString: inspect,
-    concat, empty, option, type,
-    valueOf,
+    inspect, toString: inspect, valueOf,
+    equals, concat, empty, option, type,
+    [fl.equals]: equals,
     [fl.empty]: _empty,
     [fl.concat]: concat,
     ['@@type']: _type,
@@ -61,7 +66,7 @@ function First(x) {
 }
 
 First['@@implements'] = _implements(
-  [ 'concat', 'empty' ]
+  [ 'equals', 'concat', 'empty' ]
 )
 
 First.empty = _empty

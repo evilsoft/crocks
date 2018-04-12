@@ -19865,7 +19865,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'class', 'sidebar-toggler-content toggler-collapsed');
       ie_open('div', null, null,
           'class', 'sidebar-search');
-        $templateAlias1({dataURL: (($$temp = opt_data.site.basePath) == null ? '' : $$temp) + '/site.json', maxResults: 3, path: '/docs/', placeholder: 'Search Docs'}, null, opt_ijData);
+        $templateAlias1({dataURL: (($$temp = opt_data.site.basePath) == null ? '' : $$temp) + '/site.json', maxResults: 3, path: '/docs/', fieldNames: ['title', 'description', 'functions'], placeholder: 'Search Docs'}, null, opt_ijData);
       ie_close('div');
       $templateAlias2({listClasses: 'sidebar-list sidebar-list-1', listItemClasses: 'sidebar-item', anchorVariant: 'sidebar', section: opt_data.section}, null, opt_ijData);
     ie_close('div');
@@ -19884,7 +19884,7 @@ if (goog.DEBUG) {
  * @return {void}
  * @suppress {checkTypes}
  */
-function __deltemplate_s173_d34389eb(opt_data, opt_ignored, opt_ijData) {
+function __deltemplate_s174_d34389eb(opt_data, opt_ignored, opt_ijData) {
   ie_open('a', null, null,
       'class', 'sidebar-link ' + (opt_data.page.active ? 'sidebar-link-selected' : ''),
       'href', opt_data.page.url);
@@ -19898,11 +19898,11 @@ function __deltemplate_s173_d34389eb(opt_data, opt_ignored, opt_ijData) {
     ie_close('span');
   ie_close('a');
 }
-exports.__deltemplate_s173_d34389eb = __deltemplate_s173_d34389eb;
+exports.__deltemplate_s174_d34389eb = __deltemplate_s174_d34389eb;
 if (goog.DEBUG) {
-  __deltemplate_s173_d34389eb.soyTemplateName = 'Sidebar.__deltemplate_s173_d34389eb';
+  __deltemplate_s174_d34389eb.soyTemplateName = 'Sidebar.__deltemplate_s174_d34389eb';
 }
-soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'sidebar', 0, __deltemplate_s173_d34389eb);
+soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'sidebar', 0, __deltemplate_s174_d34389eb);
 
 exports.render.params = ["section","site"];
 exports.render.types = {"section":"any","site":"any"};
@@ -28373,7 +28373,7 @@ exports.default = parseFromAnchor;
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dfRGC", function() { return dfRGC; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ZZMCc", function() { return ZZMCc; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28389,11 +28389,11 @@ goog.loadModule(function(exports) {
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace dfRGC.
+ * @fileoverview Templates in namespace ZZMCc.
  * @public
  */
 
-goog.module('dfRGC.incrementaldom');
+goog.module('ZZMCc.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28427,7 +28427,7 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var param1859 = function() {
+  var param1860 = function() {
     $templateAlias2({code: 'Assign Object', mode: 'haskell'}, null, opt_ijData);
     ie_open('p');
       ie_open('code');
@@ -28617,11 +28617,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'value', opt_data.site.title);
     ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({content: param1859}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param1860}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'dfRGC.render';
+  $render.soyTemplateName = 'ZZMCc.render';
 }
 
 exports.render.params = ["page","site"];
@@ -28631,8 +28631,8 @@ return exports;
 
 });
 
-class dfRGC extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(dfRGC, templates);
+class ZZMCc extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(ZZMCc, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
@@ -28670,10 +28670,7 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(dfRGC, templates);
 /* 266 */,
 /* 267 */,
 /* 268 */,
-/* 269 */,
-/* 270 */,
-/* 271 */,
-/* 272 */
+/* 269 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28721,23 +28718,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var dfRGC = function (_Component) {
-  _inherits(dfRGC, _Component);
+var ZZMCc = function (_Component) {
+  _inherits(ZZMCc, _Component);
 
-  function dfRGC() {
-    _classCallCheck(this, dfRGC);
+  function ZZMCc() {
+    _classCallCheck(this, ZZMCc);
 
-    return _possibleConstructorReturn(this, (dfRGC.__proto__ || Object.getPrototypeOf(dfRGC)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (ZZMCc.__proto__ || Object.getPrototypeOf(ZZMCc)).apply(this, arguments));
   }
 
-  return dfRGC;
+  return ZZMCc;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(dfRGC, _AssignSoy2.default);
+_metalSoy2.default.register(ZZMCc, _AssignSoy2.default);
 
-exports.default = dfRGC;
+exports.default = ZZMCc;
 
 /***/ })
-],[272]);
+],[269]);

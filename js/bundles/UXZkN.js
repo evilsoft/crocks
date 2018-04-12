@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([3,31,32,33],[
+webpackJsonppageComponent([6,31,32,33],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19865,7 +19865,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'class', 'sidebar-toggler-content toggler-collapsed');
       ie_open('div', null, null,
           'class', 'sidebar-search');
-        $templateAlias1({dataURL: (($$temp = opt_data.site.basePath) == null ? '' : $$temp) + '/site.json', maxResults: 3, path: '/docs/', placeholder: 'Search Docs'}, null, opt_ijData);
+        $templateAlias1({dataURL: (($$temp = opt_data.site.basePath) == null ? '' : $$temp) + '/site.json', maxResults: 3, path: '/docs/', fieldNames: ['title', 'description', 'functions'], placeholder: 'Search Docs'}, null, opt_ijData);
       ie_close('div');
       $templateAlias2({listClasses: 'sidebar-list sidebar-list-1', listItemClasses: 'sidebar-item', anchorVariant: 'sidebar', section: opt_data.section}, null, opt_ijData);
     ie_close('div');
@@ -19884,7 +19884,7 @@ if (goog.DEBUG) {
  * @return {void}
  * @suppress {checkTypes}
  */
-function __deltemplate_s173_d34389eb(opt_data, opt_ignored, opt_ijData) {
+function __deltemplate_s174_d34389eb(opt_data, opt_ignored, opt_ijData) {
   ie_open('a', null, null,
       'class', 'sidebar-link ' + (opt_data.page.active ? 'sidebar-link-selected' : ''),
       'href', opt_data.page.url);
@@ -19898,11 +19898,11 @@ function __deltemplate_s173_d34389eb(opt_data, opt_ignored, opt_ijData) {
     ie_close('span');
   ie_close('a');
 }
-exports.__deltemplate_s173_d34389eb = __deltemplate_s173_d34389eb;
+exports.__deltemplate_s174_d34389eb = __deltemplate_s174_d34389eb;
 if (goog.DEBUG) {
-  __deltemplate_s173_d34389eb.soyTemplateName = 'Sidebar.__deltemplate_s173_d34389eb';
+  __deltemplate_s174_d34389eb.soyTemplateName = 'Sidebar.__deltemplate_s174_d34389eb';
 }
-soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'sidebar', 0, __deltemplate_s173_d34389eb);
+soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'sidebar', 0, __deltemplate_s174_d34389eb);
 
 exports.render.params = ["section","site"];
 exports.render.types = {"section":"any","site":"any"};
@@ -28372,15 +28372,12 @@ exports.default = parseFromAnchor;
 /* 238 */,
 /* 239 */,
 /* 240 */,
-/* 241 */,
-/* 242 */,
-/* 243 */,
-/* 244 */
+/* 241 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tJBmf", function() { return tJBmf; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UXZkN", function() { return UXZkN; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28392,15 +28389,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var templates;
 goog.loadModule(function(exports) {
 
-// This file was automatically generated from Sum.soy.
+// This file was automatically generated from Max.soy.
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace tJBmf.
+ * @fileoverview Templates in namespace UXZkN.
  * @public
  */
 
-goog.module('tJBmf.incrementaldom');
+goog.module('UXZkN.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28434,23 +28431,23 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var param2305 = function() {
-    $templateAlias2({code: 'Sum Number', mode: 'haskell'}, null, opt_ijData);
+  var param2162 = function() {
+    $templateAlias2({code: 'Max Number', mode: 'haskell'}, null, opt_ijData);
     ie_open('p');
       ie_open('code');
-        itext('Sum');
+        itext('Max');
       ie_close('code');
       itext(' is a ');
       ie_open('code');
         itext('Monoid');
       ie_close('code');
-      itext(' that will combine (2) ');
+      itext(' that will combines (2) ');
       ie_open('code');
         itext('Number');
       ie_close('code');
-      itext('s under addition.');
+      itext('s, resulting in the largest of the two.');
     ie_close('p');
-    $templateAlias2({code: 'import Sum from \'crocks/Sum\'\nimport mconcat from \'crocks/helpers/mconcat\'\nimport mconcatMap from \'crocks/helpers/mconcatMap\'\n\nSum(13)\n//=> Sum 13\n\nmconcat(Sum, [ 5, 2 ])\n//=> Sum 7\n\nSum(10)\n  .concat(Sum(10))\n//=> Sum 20\n\n// sumByTen :: [ Number ] -> Sum\nconst sumByTen =\n  mconcatMap(Sum, x => x * 10)\n\nsumByTen([ 2, 2 ])\n//=> Sum 40', mode: 'javascript'}, null, opt_ijData);
+    $templateAlias2({code: 'import Max from \'crocks/Max\'\nimport mconcat from \'crocks/helpers/mconcat\'\n\nMax(76)\n//=> Max 76\n\nmconcat(Max, [ 95, 102, 56 ])\n//=> Max 102\n\nMax(100)\n  .concat(Max(10))\n//=> Max 100\n\nMax.empty()\n  .concat(Max(100))\n//=> Max 100', mode: 'javascript'}, null, opt_ijData);
     ie_open('article', null, null,
         'id', 'topic-implements');
       ie_open('h2');
@@ -28479,14 +28476,14 @@ function $render(opt_data, opt_ignored, opt_ijData) {
           itext('Constructor Methods');
         ie_close('a');
       ie_close('h2');
-      ie_open('h3');
+      ie_open('h4');
         ie_open('a', null, null,
             'id', 'empty',
             'href', '#empty');
           itext('empty');
         ie_close('a');
-      ie_close('h3');
-      $templateAlias2({code: 'Sum.empty :: () -> Sum', mode: 'haskell'}, null, opt_ijData);
+      ie_close('h4');
+      $templateAlias2({code: 'Max.empty :: () -> Max', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
         ie_open('code');
           itext('empty');
@@ -28501,7 +28498,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_close('code');
         itext('ed to any other value, it will return the other value. In the case of ');
         ie_open('code');
-          itext('Sum');
+          itext('Max');
         ie_close('code');
         itext(' the result of ');
         ie_open('code');
@@ -28509,7 +28506,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_close('code');
         itext(' is ');
         ie_open('code');
-          itext('0');
+          itext('-Infinity');
         ie_close('code');
         itext('. ');
         ie_open('code');
@@ -28517,7 +28514,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_close('code');
         itext(' is available on both the Constructor and the Instance for convenience.');
       ie_close('p');
-      $templateAlias2({code: 'import Sum from \'crocks/Sum\'\n\nSum.empty()\n//=> Sum 0\n\nSum.empty()\n  .concat(Sum.empty())\n//=> Sum 0\n\nSum(4)\n  .concat(Sum.empty())\n//=> Sum 4\n\nSum.empty()\n  .concat(Sum(4))\n//=> Sum 4', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'import Max from \'crocks/Max\'\n\nMax.empty()\n//=> Max -Infinity\n\nMax.empty()\n  .concat(Max.empty())\n//=> Max -Infinity\n\nMax(32)\n  .concat(Max.empty())\n//=> Max 32\n\nMax.empty()\n  .concat(Max(34))\n//=> Max 34', mode: 'javascript'}, null, opt_ijData);
     ie_close('article');
     ie_open('article', null, null,
         'id', 'topic-instance');
@@ -28528,14 +28525,14 @@ function $render(opt_data, opt_ignored, opt_ijData) {
           itext('Instance Methods');
         ie_close('a');
       ie_close('h2');
-      ie_open('h3');
+      ie_open('h4');
         ie_open('a', null, null,
             'id', 'concat',
             'href', '#concat');
           itext('concat');
         ie_close('a');
-      ie_close('h3');
-      $templateAlias2({code: 'Sum ~> Sum -> Sum', mode: 'haskell'}, null, opt_ijData);
+      ie_close('h4');
+      $templateAlias2({code: 'Max ~> Max -> Max', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
         ie_open('code');
           itext('concat');
@@ -28550,23 +28547,23 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_close('code');
         itext('. In the case of ');
         ie_open('code');
-          itext('Sum');
+          itext('Max');
         ie_close('code');
-        itext(', it will add the (2) ');
+        itext(', it will result in the largest of the (2) ');
         ie_open('code');
           itext('Number');
         ie_close('code');
         itext('s.');
       ie_close('p');
-      $templateAlias2({code: 'import Sum from \'crocks/Sum\'\n\nSum(5)\n  .concat(Sum(4))\n//=> Sum 9\n\nSum(45)\n  .concat(Sum(32))\n//=> Sum 77\n\nSum(1000)\n  .concat(Sum(Infinity))\n//=> Sum Infinity\n\nSum(1)\n  .concat(Sum(3))\n//=> Sum 4', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h3');
+      $templateAlias2({code: 'import Max from \'crocks/Max\'\n\nMax(23)\n  .concat(Max(13))\n//=> Max 23\n\nMax(-23)\n  .concat(Max(-32))\n//=> Max -23\n\nMax.empty()\n  .concat(Max(Infinity))\n//=> Max Infinity', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
         ie_open('a', null, null,
             'id', 'valueof',
             'href', '#valueof');
           itext('valueOf');
         ie_close('a');
-      ie_close('h3');
-      $templateAlias2({code: 'Sum ~> () -> Number', mode: 'haskell'}, null, opt_ijData);
+      ie_close('h4');
+      $templateAlias2({code: 'Max ~> () -> Number', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
         ie_open('code');
           itext('valueOf');
@@ -28597,7 +28594,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_close('code');
         itext(' on a ');
         ie_open('code');
-          itext('Sum');
+          itext('Max');
         ie_close('code');
         itext(' instance will result in the underlying ');
         ie_open('code');
@@ -28605,7 +28602,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_close('code');
         itext('.');
       ie_close('p');
-      $templateAlias2({code: 'import Sum from \'crocks/Sum\'\n\nSum(4)\n  .valueOf()\n//=> 4\n\nSum.empty()\n  .valueOf()\n//=> 0\n\nSum(34)\n  .concat(Sum(21))\n  .valueOf()\n//=> 55', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'import Max from \'crocks/Max\'\n\nMax(4)\n  .valueOf()\n//=> 4\n\nMax.empty()\n  .valueOf()\n//=> -Infinity\n\nMax(34)\n  .concat(Max(21))\n  .valueOf()\n//=> 34', mode: 'javascript'}, null, opt_ijData);
     ie_close('article');
     ie_open('input', null, null,
         'type', 'hidden',
@@ -28616,11 +28613,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'value', opt_data.site.title);
     ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({content: param2305}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param2162}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'tJBmf.render';
+  $render.soyTemplateName = 'UXZkN.render';
 }
 
 exports.render.params = ["page","site"];
@@ -28630,14 +28627,17 @@ return exports;
 
 });
 
-class tJBmf extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(tJBmf, templates);
+class UXZkN extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(UXZkN, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
 
 
 /***/ }),
+/* 242 */,
+/* 243 */,
+/* 244 */,
 /* 245 */,
 /* 246 */,
 /* 247 */,
@@ -28660,14 +28660,7 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(tJBmf, templates);
 /* 264 */,
 /* 265 */,
 /* 266 */,
-/* 267 */,
-/* 268 */,
-/* 269 */,
-/* 270 */,
-/* 271 */,
-/* 272 */,
-/* 273 */,
-/* 274 */
+/* 267 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28703,9 +28696,9 @@ __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _SumSoy = __webpack_require__(244);
+var _MaxSoy = __webpack_require__(241);
 
-var _SumSoy2 = _interopRequireDefault(_SumSoy);
+var _MaxSoy2 = _interopRequireDefault(_MaxSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28715,23 +28708,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var tJBmf = function (_Component) {
-  _inherits(tJBmf, _Component);
+var UXZkN = function (_Component) {
+  _inherits(UXZkN, _Component);
 
-  function tJBmf() {
-    _classCallCheck(this, tJBmf);
+  function UXZkN() {
+    _classCallCheck(this, UXZkN);
 
-    return _possibleConstructorReturn(this, (tJBmf.__proto__ || Object.getPrototypeOf(tJBmf)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (UXZkN.__proto__ || Object.getPrototypeOf(UXZkN)).apply(this, arguments));
   }
 
-  return tJBmf;
+  return UXZkN;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(tJBmf, _SumSoy2.default);
+_metalSoy2.default.register(UXZkN, _MaxSoy2.default);
 
-exports.default = tJBmf;
+exports.default = UXZkN;
 
 /***/ })
-],[274]);
+],[267]);

@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([28,31,32,33],[
+webpackJsonppageComponent([5,31,32,33],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19865,7 +19865,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'class', 'sidebar-toggler-content toggler-collapsed');
       ie_open('div', null, null,
           'class', 'sidebar-search');
-        $templateAlias1({dataURL: (($$temp = opt_data.site.basePath) == null ? '' : $$temp) + '/site.json', maxResults: 3, path: '/docs/', placeholder: 'Search Docs'}, null, opt_ijData);
+        $templateAlias1({dataURL: (($$temp = opt_data.site.basePath) == null ? '' : $$temp) + '/site.json', maxResults: 3, path: '/docs/', fieldNames: ['title', 'description', 'functions'], placeholder: 'Search Docs'}, null, opt_ijData);
       ie_close('div');
       $templateAlias2({listClasses: 'sidebar-list sidebar-list-1', listItemClasses: 'sidebar-item', anchorVariant: 'sidebar', section: opt_data.section}, null, opt_ijData);
     ie_close('div');
@@ -19884,7 +19884,7 @@ if (goog.DEBUG) {
  * @return {void}
  * @suppress {checkTypes}
  */
-function __deltemplate_s173_d34389eb(opt_data, opt_ignored, opt_ijData) {
+function __deltemplate_s174_d34389eb(opt_data, opt_ignored, opt_ijData) {
   ie_open('a', null, null,
       'class', 'sidebar-link ' + (opt_data.page.active ? 'sidebar-link-selected' : ''),
       'href', opt_data.page.url);
@@ -19898,11 +19898,11 @@ function __deltemplate_s173_d34389eb(opt_data, opt_ignored, opt_ijData) {
     ie_close('span');
   ie_close('a');
 }
-exports.__deltemplate_s173_d34389eb = __deltemplate_s173_d34389eb;
+exports.__deltemplate_s174_d34389eb = __deltemplate_s174_d34389eb;
 if (goog.DEBUG) {
-  __deltemplate_s173_d34389eb.soyTemplateName = 'Sidebar.__deltemplate_s173_d34389eb';
+  __deltemplate_s174_d34389eb.soyTemplateName = 'Sidebar.__deltemplate_s174_d34389eb';
 }
-soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'sidebar', 0, __deltemplate_s173_d34389eb);
+soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'sidebar', 0, __deltemplate_s174_d34389eb);
 
 exports.render.params = ["section","site"];
 exports.render.types = {"section":"any","site":"any"};
@@ -28350,12 +28350,35 @@ exports.default = parseFromAnchor;
 /* 216 */,
 /* 217 */,
 /* 218 */,
-/* 219 */
+/* 219 */,
+/* 220 */,
+/* 221 */,
+/* 222 */,
+/* 223 */,
+/* 224 */,
+/* 225 */,
+/* 226 */,
+/* 227 */,
+/* 228 */,
+/* 229 */,
+/* 230 */,
+/* 231 */,
+/* 232 */,
+/* 233 */,
+/* 234 */,
+/* 235 */,
+/* 236 */,
+/* 237 */,
+/* 238 */,
+/* 239 */,
+/* 240 */,
+/* 241 */,
+/* 242 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "vegIt", function() { return vegIt; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "zchHL", function() { return zchHL; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28367,15 +28390,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var templates;
 goog.loadModule(function(exports) {
 
-// This file was automatically generated from Equiv.soy.
+// This file was automatically generated from Min.soy.
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace vegIt.
+ * @fileoverview Templates in namespace zchHL.
  * @public
  */
 
-goog.module('vegIt.incrementaldom');
+goog.module('zchHL.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28409,60 +28432,23 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var param628 = function() {
-    $templateAlias2({code: 'Equiv a a Boolean', mode: 'haskell'}, null, opt_ijData);
+  var param2210 = function() {
+    $templateAlias2({code: 'Min Number', mode: 'haskell'}, null, opt_ijData);
     ie_open('p');
-      itext('Defined as a Monoidal Contravariant datatype, ');
       ie_open('code');
-        itext('Equiv');
+        itext('Min');
       ie_close('code');
-      itext(' can be used to test equivalence between (2) values of a given type. It does this by wrapping a binary equivalence function of the form ');
+      itext(' is a ');
       ie_open('code');
-        itext('(a, a) -> Boolean');
+        itext('Monoid');
       ie_close('code');
-      itext('. Most of the time strict equality is used, but other functions of the required form can provide some powerful results.');
+      itext(' that will combines (2) ');
+      ie_open('code');
+        itext('Number');
+      ie_close('code');
+      itext('s, resulting in the smallest of the two.');
     ie_close('p');
-    ie_open('p');
-      itext('While the far right parameter is always fixed to ');
-      ie_open('code');
-        itext('Boolean');
-      ie_close('code');
-      itext(' it cannot be Covariant, but is Contravariant allowing both inputs to vary in their type.');
-      ie_open('code');
-        itext('Equiv');
-      ie_close('code');
-      itext(' is also a ');
-      ie_open('a', null, null,
-          'href', '../monoids/index.html');
-        ie_open('code');
-          itext('Monoid');
-        ie_close('code');
-      ie_close('a');
-      itext(' and will concat the results of (2) ');
-      ie_open('code');
-        itext('Equiv');
-      ie_close('code');
-      itext('s under logical conjunction, with it\'s empty value always returning ');
-      ie_open('code');
-        itext('true');
-      ie_close('code');
-      itext('.');
-    ie_close('p');
-    ie_open('p');
-      itext('As ');
-      ie_open('code');
-        itext('Equiv');
-      ie_close('code');
-      itext(' wraps a function, it is lazy and a given instance will not produce a result until both arguments are satisfied. A given instance can be run by calling the method ');
-      ie_open('a', null, null,
-          'href', '#comparewith');
-        ie_open('code');
-          itext('compareWith');
-        ie_close('code');
-      ie_close('a');
-      itext(', providing both values for comparison.');
-    ie_close('p');
-    $templateAlias2({code: 'import Equiv from \'crocks/Equiv\'\n\nimport equals from \'crocks/pointfree/equals\'\n\n// toString :: a -> String\nconst toString =\n  x => x.toString()\n\n// length :: a -> Number\nconst length = x =>\n  x && x.length ? x.length : 0\n\n// eq :: Equiv a a\nconst eq =\n  Equiv(equals)\n\neq.contramap(toString)\n  .compareWith(\'123\', 123)\n//=> true\n\neq.contramap(length)\n  .compareWith([ 1, 2, 3 ], [ \'a\', \'b\' ])\n//=> false', mode: 'javascript'}, null, opt_ijData);
+    $templateAlias2({code: 'import Min from \'crocks/Min\'\nimport mconcat from \'crocks/helpers/mconcat\'\n\nMin(76)\n//=> Min 76\n\nmconcat(Min, [ 95, 12, 56 ])\n//=> Min 12\n\nMin(100)\n  .concat(Min(10))\n//=> Min 10\n\nMin.empty()\n  .concat(Min(100))\n//=> Min 100', mode: 'javascript'}, null, opt_ijData);
     ie_open('article', null, null,
         'id', 'topic-implements');
       ie_open('h2');
@@ -28479,10 +28465,6 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         itext(', ');
         ie_open('code');
           itext('Monoid');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('Contravariant');
         ie_close('code');
       ie_close('p');
     ie_close('article');
@@ -28502,7 +28484,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
           itext('empty');
         ie_close('a');
       ie_close('h4');
-      $templateAlias2({code: 'Equiv.empty :: () -> Equiv a a', mode: 'haskell'}, null, opt_ijData);
+      $templateAlias2({code: 'Min.empty :: () -> Min', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
         ie_open('code');
           itext('empty');
@@ -28517,19 +28499,15 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_close('code');
         itext('ed to any other value, it will return the other value. In the case of ');
         ie_open('code');
-          itext('Equiv');
+          itext('Min');
         ie_close('code');
         itext(' the result of ');
         ie_open('code');
           itext('empty');
         ie_close('code');
-        itext(' is an ');
+        itext(' is ');
         ie_open('code');
-          itext('Equiv');
-        ie_close('code');
-        itext(' that will always return');
-        ie_open('code');
-          itext('true');
+          itext('Infinity');
         ie_close('code');
         itext('. ');
         ie_open('code');
@@ -28537,7 +28515,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_close('code');
         itext(' is available on both the Constructor and the Instance for convenience.');
       ie_close('p');
-      $templateAlias2({code: 'import Equiv from \'crocks/Equiv\'\n\nimport equals from \'crocks/pointfree/equals\'\n\nconst eq =\n  Equiv(equals)\n\nconst empty =\n  Equiv.empty()\n\neq\n  .concat(empty)\n  .compareWith({ a: 32 }, { a: 32 })\n//=> true\n\nempty\n  .concat(eq)\n  .compareWith({ a: 32 }, { a: 32 })\n//=> true\n\nempty\n  .concat(eq)\n  .compareWith({ a: 32, b: 19 }, { a: 32 })\n//=> false', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'import Min from \'crocks/Min\'\n\nMin.empty()\n//=> Min Infinity\n\nMin.empty()\n  .concat(Min.empty())\n//=> Min Infinity\n\nMin(32)\n  .concat(Min.empty())\n//=> Min 32\n\nMin.empty()\n  .concat(Min(34))\n//=> Min 34', mode: 'javascript'}, null, opt_ijData);
     ie_close('article');
     ie_open('article', null, null,
         'id', 'topic-instance');
@@ -28555,7 +28533,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
           itext('concat');
         ie_close('a');
       ie_close('h4');
-      $templateAlias2({code: 'Equiv a a ~> Equiv a a -> Equiv a a', mode: 'haskell'}, null, opt_ijData);
+      $templateAlias2({code: 'Min ~> Min -> Min', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
         ie_open('code');
           itext('concat');
@@ -28570,54 +28548,15 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_close('code');
         itext('. In the case of ');
         ie_open('code');
-          itext('Equiv');
+          itext('Min');
         ie_close('code');
-        itext(', the results of both');
+        itext(', it will result in the smallest of the (2) ');
         ie_open('code');
-          itext('Equiv');
+          itext('Number');
         ie_close('code');
-        itext('s are combined under logical conjunction.');
+        itext('s.');
       ie_close('p');
-      $templateAlias2({code: 'import Equiv from \'crocks/Equiv\'\n\nimport compareWith from \'crocks/pointfree/compareWith\'\nimport equals from \'crocks/pointfree/equals\'\nimport isSameType from \'crocks/predicates/isSameType\'\nimport propOr from \'crocks/helpers/propOr\'\n\n// objLength :: Object -> Number\nconst objLength =\n  x => Object.keys(x).length\n\n// eq :: Equiv a a\nconst eq =\n  Equiv(equals)\n\n// sameType :: Equiv a a\nconst sameType =\n  Equiv(isSameType)\n\n// sameType :: Equiv Object Object\nconst length =\n  eq.contramap(objLength)\n\n// sameType :: Equiv a a\nconst sameTypeProp = key =>\n  sameType.contramap(propOr(null, key))\n\n// run :: Equiv Object Object\nconst run = compareWith(\n  { a: 19, b: \'string\' },\n  { a: 32, c: false }\n)\n\nrun(length)\n//=> true\n\nrun(sameTypeProp(\'a\'))\n//=> true\n\nrun(sameTypeProp(\'b\'))\n//=> false\n\nrun(\n  sameTypeProp(\'a\')\n    .concat(length)\n)\n// true\n\nrun(\n  sameTypeProp(\'b\')\n    .concat(length)\n)\n// false', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'contramap',
-            'href', '#contramap');
-          itext('contramap');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Equiv a a ~> (b -> a) -> Equiv b b', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('The far right parameter of ');
-        ie_open('code');
-          itext('Equiv');
-        ie_close('code');
-        itext(' fixed to ');
-        ie_open('code');
-          itext('Boolean');
-        ie_close('code');
-        itext(' which means we cannot map the value as expected. However the left two parameters can vary, although they must vary in the same manner.');
-      ie_close('p');
-      ie_open('p');
-        itext('This is where ');
-        ie_open('code');
-          itext('contramap');
-        ie_close('code');
-        itext(' comes into play as it can be used to adapt an ');
-        ie_open('code');
-          itext('Equiv');
-        ie_close('code');
-        itext('of a given type to accept a different type or modify the value. Provide it a function that has a return type that matches the input types of the ');
-        ie_open('code');
-          itext('Equiv');
-        ie_close('code');
-        itext('. This will return a new ');
-        ie_open('code');
-          itext('Equiv');
-        ie_close('code');
-        itext(' matching the input type of the provided function.');
-      ie_close('p');
-      $templateAlias2({code: 'import Equiv from \'crocks/Equiv\'\n\nimport equals from \'crocks/pointfree/equals\'\n\n// length :: String -> Number\nconst length =\n  x => x.length\n\n// eq :: Equiv a a\nconst eq =\n  Equiv(equals)\n\n// sameLength :: Equiv String String\nconst sameLength =\n  eq.contramap(length)\n\n// sameAmplitude :: Equiv Float Float\nconst sameAmplitude =\n  eq.contramap(Math.abs)\n\nsameAmplitude\n  .compareWith(-0.5011, 0.5011)\n//=> true\n\nsameAmplitude\n  .compareWith(-0.755, 0.8023)\n//=> false\n\nsameLength\n  .compareWith(\'aBcD\', \'1234\')\n//=> true\n\nsameLength\n  .compareWith(\'AB\', \'ABC\')\n//=> false', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'import Min from \'crocks/Min\'\n\nMin(50)\n  .concat(Min(24))\n//=> Min 24\n\nMin(-120)\n  .concat(Min(-50))\n//=> Min -120\n\nMin.empty()\n  .concat(Min(-Infinity))\n//=> Min -Infinity', mode: 'javascript'}, null, opt_ijData);
       ie_open('h4');
         ie_open('a', null, null,
             'id', 'valueof',
@@ -28625,7 +28564,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
           itext('valueOf');
         ie_close('a');
       ie_close('h4');
-      $templateAlias2({code: 'Equiv a a ~> () -> a -> a -> Boolean', mode: 'haskell'}, null, opt_ijData);
+      $templateAlias2({code: 'Min ~> () -> Number', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
         ie_open('code');
           itext('valueOf');
@@ -28654,40 +28593,17 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_open('code');
           itext('valueOf');
         ie_close('code');
-        itext(' on an ');
+        itext(' on a ');
         ie_open('code');
-          itext('Equiv');
+          itext('Min');
         ie_close('code');
-        itext('instance will result in the underlying curried equivalence function.');
-      ie_close('p');
-      $templateAlias2({code: 'import Equiv from \'crocks/Equiv\'\n\nimport compose from \'crocks/helpers/compose\'\nimport equals from \'crocks/pointfree/equals\'\nimport propOr from \'crocks/helpers/propOr\'\n\n// toLower :: String -> String\nconst toLower =\n  x => x.toLowerCase()\n\n// length :: String -> String\nconst length =\n  x => x.length\n\n// lowerName :: Object -> String\nconst lowerName =\n  compose(toLower, propOr(\'\', \'name\'))\n\n// itemsLen :: Object -> Number\nconst itemsLen =\n  compose(length, propOr(\'\', \'items\'))\n\n// eq :: Equiv a a\nconst eq =\n  Equiv(equals)\n\n// checkName :: Equiv Object Object\nconst checkName =\n  eq.contramap(lowerName)\n\n// checkName :: Equiv Object Object\nconst checkItems =\n  eq.contramap(itemsLen)\n\n// test :: Object -> Object -> Boolean\nconst test =\n  checkName\n    .concat(checkItems)\n    .valueOf()\n\ntest(\n  { name: \'Bob\', items: [ 1, 2, 4 ] },\n  { name: \'bOb\', items: [ 9, 12, 9 ] }\n)\n//=> true', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'comparewith',
-            'href', '#comparewith');
-          itext('compareWith');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Equiv a a ~> a -> a -> Boolean', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('As ');
+        itext(' instance will result in the underlying ');
         ie_open('code');
-          itext('Equiv');
-        ie_close('code');
-        itext(' wraps a function, it needs a means to be run with two values for comparison. Instances provide a curried method called ');
-        ie_open('code');
-          itext('compareWith');
-        ie_close('code');
-        itext(' that takes two values for comparison and will run them through the equivalence function, returning the resulting ');
-        ie_open('code');
-          itext('Boolean');
+          itext('Number');
         ie_close('code');
         itext('.');
       ie_close('p');
-      ie_open('p');
-        itext('Due to the laziness of this type, complicated comparisons can be built out from combining and mapping smaller, simpler units of equivalence comparison.');
-      ie_close('p');
-      $templateAlias2({code: 'import Equiv from \'crocks/Equiv\'\n\n// both :: Equiv Boolean Boolean\nconst both =\n  Equiv((x, y) => x && y)\n\n// isEven :: Number -> Boolean\nconst isEven =\n  x => x % 2 === 0\n\n// isBig :: Number -> Boolean\nconst isBig =\n  x => x > 10\n\n// bothEven :: Equiv Number Number\nconst bothEven =\n  both.contramap(isEven)\n\n// bothBig :: Equiv Number Number\nconst bothBig =\n  both.contramap(isBig)\n\nbothEven\n  .compareWith(12, 20)\n//=> true\n\nbothEven\n  .compareWith(17, 20)\n//=> false\n\nbothBig\n  .compareWith(17)(20)\n//=> true\n\nbothBig\n  .compareWith(7)(20)\n//=> false\n\nbothBig\n  .concat(bothEven)\n  .compareWith(8)(54)\n//=> false', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'import Min from \'crocks/Min\'\n\nMin(33)\n  .valueOf()\n//=> 33\n\nMin.empty()\n  .valueOf()\n//=> Infinity\n\nMin(35)\n  .concat(Min(20))\n  .valueOf()\n//=> 20', mode: 'javascript'}, null, opt_ijData);
     ie_close('article');
     ie_open('input', null, null,
         'type', 'hidden',
@@ -28698,11 +28614,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'value', opt_data.site.title);
     ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({content: param628}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param2210}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'vegIt.render';
+  $render.soyTemplateName = 'zchHL.render';
 }
 
 exports.render.params = ["page","site"];
@@ -28712,37 +28628,14 @@ return exports;
 
 });
 
-class vegIt extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(vegIt, templates);
+class zchHL extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(zchHL, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
 
 
 /***/ }),
-/* 220 */,
-/* 221 */,
-/* 222 */,
-/* 223 */,
-/* 224 */,
-/* 225 */,
-/* 226 */,
-/* 227 */,
-/* 228 */,
-/* 229 */,
-/* 230 */,
-/* 231 */,
-/* 232 */,
-/* 233 */,
-/* 234 */,
-/* 235 */,
-/* 236 */,
-/* 237 */,
-/* 238 */,
-/* 239 */,
-/* 240 */,
-/* 241 */,
-/* 242 */,
 /* 243 */,
 /* 244 */,
 /* 245 */,
@@ -28757,7 +28650,25 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(vegIt, templates);
 /* 254 */,
 /* 255 */,
 /* 256 */,
-/* 257 */
+/* 257 */,
+/* 258 */,
+/* 259 */,
+/* 260 */,
+/* 261 */,
+/* 262 */,
+/* 263 */,
+/* 264 */,
+/* 265 */,
+/* 266 */,
+/* 267 */,
+/* 268 */,
+/* 269 */,
+/* 270 */,
+/* 271 */,
+/* 272 */,
+/* 273 */,
+/* 274 */,
+/* 275 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28793,9 +28704,9 @@ __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _EquivSoy = __webpack_require__(219);
+var _MinSoy = __webpack_require__(242);
 
-var _EquivSoy2 = _interopRequireDefault(_EquivSoy);
+var _MinSoy2 = _interopRequireDefault(_MinSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28805,23 +28716,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var vegIt = function (_Component) {
-  _inherits(vegIt, _Component);
+var zchHL = function (_Component) {
+  _inherits(zchHL, _Component);
 
-  function vegIt() {
-    _classCallCheck(this, vegIt);
+  function zchHL() {
+    _classCallCheck(this, zchHL);
 
-    return _possibleConstructorReturn(this, (vegIt.__proto__ || Object.getPrototypeOf(vegIt)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (zchHL.__proto__ || Object.getPrototypeOf(zchHL)).apply(this, arguments));
   }
 
-  return vegIt;
+  return zchHL;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(vegIt, _EquivSoy2.default);
+_metalSoy2.default.register(zchHL, _MinSoy2.default);
 
-exports.default = vegIt;
+exports.default = zchHL;
 
 /***/ })
-],[257]);
+],[275]);

@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([5,31,32,33],[
+webpackJsonppageComponent([11,31,32,33],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19865,7 +19865,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'class', 'sidebar-toggler-content toggler-collapsed');
       ie_open('div', null, null,
           'class', 'sidebar-search');
-        $templateAlias1({dataURL: (($$temp = opt_data.site.basePath) == null ? '' : $$temp) + '/site.json', maxResults: 3, path: '/docs/', placeholder: 'Search Docs'}, null, opt_ijData);
+        $templateAlias1({dataURL: (($$temp = opt_data.site.basePath) == null ? '' : $$temp) + '/site.json', maxResults: 3, path: '/docs/', fieldNames: ['title', 'description', 'functions'], placeholder: 'Search Docs'}, null, opt_ijData);
       ie_close('div');
       $templateAlias2({listClasses: 'sidebar-list sidebar-list-1', listItemClasses: 'sidebar-item', anchorVariant: 'sidebar', section: opt_data.section}, null, opt_ijData);
     ie_close('div');
@@ -19884,7 +19884,7 @@ if (goog.DEBUG) {
  * @return {void}
  * @suppress {checkTypes}
  */
-function __deltemplate_s173_d34389eb(opt_data, opt_ignored, opt_ijData) {
+function __deltemplate_s174_d34389eb(opt_data, opt_ignored, opt_ijData) {
   ie_open('a', null, null,
       'class', 'sidebar-link ' + (opt_data.page.active ? 'sidebar-link-selected' : ''),
       'href', opt_data.page.url);
@@ -19898,11 +19898,11 @@ function __deltemplate_s173_d34389eb(opt_data, opt_ignored, opt_ijData) {
     ie_close('span');
   ie_close('a');
 }
-exports.__deltemplate_s173_d34389eb = __deltemplate_s173_d34389eb;
+exports.__deltemplate_s174_d34389eb = __deltemplate_s174_d34389eb;
 if (goog.DEBUG) {
-  __deltemplate_s173_d34389eb.soyTemplateName = 'Sidebar.__deltemplate_s173_d34389eb';
+  __deltemplate_s174_d34389eb.soyTemplateName = 'Sidebar.__deltemplate_s174_d34389eb';
 }
-soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'sidebar', 0, __deltemplate_s173_d34389eb);
+soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'sidebar', 0, __deltemplate_s174_d34389eb);
 
 exports.render.params = ["section","site"];
 exports.render.types = {"section":"any","site":"any"};
@@ -28367,18 +28367,12 @@ exports.default = parseFromAnchor;
 /* 233 */,
 /* 234 */,
 /* 235 */,
-/* 236 */,
-/* 237 */,
-/* 238 */,
-/* 239 */,
-/* 240 */,
-/* 241 */,
-/* 242 */
+/* 236 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WLcDy", function() { return WLcDy; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "gLxnT", function() { return gLxnT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28390,15 +28384,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var templates;
 goog.loadModule(function(exports) {
 
-// This file was automatically generated from Min.soy.
+// This file was automatically generated from Any.soy.
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace WLcDy.
+ * @fileoverview Templates in namespace gLxnT.
  * @public
  */
 
-goog.module('WLcDy.incrementaldom');
+goog.module('gLxnT.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28432,23 +28426,31 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var param2209 = function() {
-    $templateAlias2({code: 'Min Number', mode: 'haskell'}, null, opt_ijData);
+  var param1812 = function() {
+    $templateAlias2({code: 'Any Boolean', mode: 'haskell'}, null, opt_ijData);
     ie_open('p');
       ie_open('code');
-        itext('Min');
+        itext('Any');
       ie_close('code');
       itext(' is a ');
       ie_open('code');
         itext('Monoid');
       ie_close('code');
-      itext(' that will combines (2) ');
+      itext(' that will combine (2) values of any type using logical disjunction (OR) on their coerced ');
       ie_open('code');
-        itext('Number');
+        itext('Boolean');
       ie_close('code');
-      itext('s, resulting in the smallest of the two.');
+      itext(' values, mapping truth-y values to');
+      ie_open('code');
+        itext('true');
+      ie_close('code');
+      itext(' and false-y values to ');
+      ie_open('code');
+        itext('false');
+      ie_close('code');
+      itext('.');
     ie_close('p');
-    $templateAlias2({code: 'import Min from \'crocks/Min\'\nimport mconcat from \'crocks/helpers/mconcat\'\n\nMin(76)\n//=> Min 76\n\nmconcat(Min, [ 95, 12, 56 ])\n//=> Min 12\n\nMin(100)\n  .concat(Min(10))\n//=> Min 10\n\nMin.empty()\n  .concat(Min(100))\n//=> Min 100', mode: 'javascript'}, null, opt_ijData);
+    $templateAlias2({code: 'import Any from \'crocks/Any\'\n\nimport isNumber from \'crocks/predicates/isNumber\'\nimport mconcatMap from \'crocks/helpers/mconcat\'\n\nconst trueString = Any(\'string\')\nconst falseString = Any(\'\')\nconst object = Any({ nice: true })\n\ntrueString.concat(falseString)\n//=> Any false\n\ntrueString.concat(object)\n//=> Any true\n\nconst anyNumber =\n  mconcatMap(Any, isNumber)\n\nanyNumber([ \'string\', 3 ])\n//=> Any true\n\nanyNumber([ true, \'string\' ])\n//=> Any false', mode: 'javascript'}, null, opt_ijData);
     ie_open('article', null, null,
         'id', 'topic-implements');
       ie_open('h2');
@@ -28484,7 +28486,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
           itext('empty');
         ie_close('a');
       ie_close('h4');
-      $templateAlias2({code: 'Min.empty :: () -> Min', mode: 'haskell'}, null, opt_ijData);
+      $templateAlias2({code: 'Any.empty :: () -> Any', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
         ie_open('code');
           itext('empty');
@@ -28499,7 +28501,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_close('code');
         itext('ed to any other value, it will return the other value. In the case of ');
         ie_open('code');
-          itext('Min');
+          itext('Any');
         ie_close('code');
         itext(' the result of ');
         ie_open('code');
@@ -28507,7 +28509,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_close('code');
         itext(' is ');
         ie_open('code');
-          itext('Infinity');
+          itext('false');
         ie_close('code');
         itext('. ');
         ie_open('code');
@@ -28515,7 +28517,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_close('code');
         itext(' is available on both the Constructor and the Instance for convenience.');
       ie_close('p');
-      $templateAlias2({code: 'import Min from \'crocks/Min\'\n\nMin.empty()\n//=> Min Infinity\n\nMin.empty()\n  .concat(Min.empty())\n//=> Min Infinity\n\nMin(32)\n  .concat(Min.empty())\n//=> Min 32\n\nMin.empty()\n  .concat(Min(34))\n//=> Min 34', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'import Any from \'crocks/Any\'\n\nAny.empty() //=> Any false\n\nAny(true).concat(Any.empty())   //=> Any true\nAny(false).concat(Any.empty())  //=> Any false', mode: 'javascript'}, null, opt_ijData);
     ie_close('article');
     ie_open('article', null, null,
         'id', 'topic-instance');
@@ -28533,7 +28535,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
           itext('concat');
         ie_close('a');
       ie_close('h4');
-      $templateAlias2({code: 'Min ~> Min -> Min', mode: 'haskell'}, null, opt_ijData);
+      $templateAlias2({code: 'Any ~> Any -> Any', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
         ie_open('code');
           itext('concat');
@@ -28548,15 +28550,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_close('code');
         itext('. In the case of ');
         ie_open('code');
-          itext('Min');
+          itext('Any');
         ie_close('code');
-        itext(', it will result in the smallest of the (2) ');
-        ie_open('code');
-          itext('Number');
-        ie_close('code');
-        itext('s.');
+        itext(', it will combine the (2) using logical OR (disjunction).');
       ie_close('p');
-      $templateAlias2({code: 'import Min from \'crocks/Min\'\n\nMin(50)\n  .concat(Min(24))\n//=> Min 24\n\nMin(-120)\n  .concat(Min(-50))\n//=> Min -120\n\nMin.empty()\n  .concat(Min(-Infinity))\n//=> Min -Infinity', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'import Any from \'crocks/Any\'\n\nAny(true).concat(Any(true))   //=> Any true\nAny(true).concat(Any(false))  //=> Any true\nAny(false).concat(Any(true))  //=> Any true\nAny(false).concat(Any(false)) //=> Any false', mode: 'javascript'}, null, opt_ijData);
       ie_open('h4');
         ie_open('a', null, null,
             'id', 'valueof',
@@ -28564,7 +28562,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
           itext('valueOf');
         ie_close('a');
       ie_close('h4');
-      $templateAlias2({code: 'Min ~> () -> Number', mode: 'haskell'}, null, opt_ijData);
+      $templateAlias2({code: 'Any ~> () -> Boolean', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
         ie_open('code');
           itext('valueOf');
@@ -28593,17 +28591,17 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_open('code');
           itext('valueOf');
         ie_close('code');
-        itext(' on a ');
+        itext(' on an ');
         ie_open('code');
-          itext('Min');
+          itext('Any');
         ie_close('code');
         itext(' instance will result in the underlying ');
         ie_open('code');
-          itext('Number');
+          itext('Boolean');
         ie_close('code');
-        itext('.');
+        itext(' value.');
       ie_close('p');
-      $templateAlias2({code: 'import Min from \'crocks/Min\'\n\nMin(33)\n  .valueOf()\n//=> 33\n\nMin.empty()\n  .valueOf()\n//=> Infinity\n\nMin(35)\n  .concat(Min(20))\n  .valueOf()\n//=> 20', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'import Any from \'crocks/Any\'\n\nAny(0).valueOf()        //=> false\nAny(\'string\').valueOf() //=> true\n\n//=> true\nAny(45)\n  .concat(\'\')\n  .valueOf()', mode: 'javascript'}, null, opt_ijData);
     ie_close('article');
     ie_open('input', null, null,
         'type', 'hidden',
@@ -28614,11 +28612,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'value', opt_data.site.title);
     ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({content: param2209}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param1812}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'WLcDy.render';
+  $render.soyTemplateName = 'gLxnT.render';
 }
 
 exports.render.params = ["page","site"];
@@ -28628,14 +28626,20 @@ return exports;
 
 });
 
-class WLcDy extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(WLcDy, templates);
+class gLxnT extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(gLxnT, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
 
 
 /***/ }),
+/* 237 */,
+/* 238 */,
+/* 239 */,
+/* 240 */,
+/* 241 */,
+/* 242 */,
 /* 243 */,
 /* 244 */,
 /* 245 */,
@@ -28699,9 +28703,9 @@ __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _MinSoy = __webpack_require__(242);
+var _AnySoy = __webpack_require__(236);
 
-var _MinSoy2 = _interopRequireDefault(_MinSoy);
+var _AnySoy2 = _interopRequireDefault(_AnySoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28711,23 +28715,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var WLcDy = function (_Component) {
-  _inherits(WLcDy, _Component);
+var gLxnT = function (_Component) {
+  _inherits(gLxnT, _Component);
 
-  function WLcDy() {
-    _classCallCheck(this, WLcDy);
+  function gLxnT() {
+    _classCallCheck(this, gLxnT);
 
-    return _possibleConstructorReturn(this, (WLcDy.__proto__ || Object.getPrototypeOf(WLcDy)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (gLxnT.__proto__ || Object.getPrototypeOf(gLxnT)).apply(this, arguments));
   }
 
-  return WLcDy;
+  return gLxnT;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(WLcDy, _MinSoy2.default);
+_metalSoy2.default.register(gLxnT, _AnySoy2.default);
 
-exports.default = WLcDy;
+exports.default = gLxnT;
 
 /***/ })
 ],[270]);

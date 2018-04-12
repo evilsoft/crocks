@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([26,31,32,33],[
+webpackJsonppageComponent([15,31,32,33],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19865,7 +19865,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'class', 'sidebar-toggler-content toggler-collapsed');
       ie_open('div', null, null,
           'class', 'sidebar-search');
-        $templateAlias1({dataURL: (($$temp = opt_data.site.basePath) == null ? '' : $$temp) + '/site.json', maxResults: 3, path: '/docs/', placeholder: 'Search Docs'}, null, opt_ijData);
+        $templateAlias1({dataURL: (($$temp = opt_data.site.basePath) == null ? '' : $$temp) + '/site.json', maxResults: 3, path: '/docs/', fieldNames: ['title', 'description', 'functions'], placeholder: 'Search Docs'}, null, opt_ijData);
       ie_close('div');
       $templateAlias2({listClasses: 'sidebar-list sidebar-list-1', listItemClasses: 'sidebar-item', anchorVariant: 'sidebar', section: opt_data.section}, null, opt_ijData);
     ie_close('div');
@@ -19884,7 +19884,7 @@ if (goog.DEBUG) {
  * @return {void}
  * @suppress {checkTypes}
  */
-function __deltemplate_s173_d34389eb(opt_data, opt_ignored, opt_ijData) {
+function __deltemplate_s174_d34389eb(opt_data, opt_ignored, opt_ijData) {
   ie_open('a', null, null,
       'class', 'sidebar-link ' + (opt_data.page.active ? 'sidebar-link-selected' : ''),
       'href', opt_data.page.url);
@@ -19898,11 +19898,11 @@ function __deltemplate_s173_d34389eb(opt_data, opt_ignored, opt_ijData) {
     ie_close('span');
   ie_close('a');
 }
-exports.__deltemplate_s173_d34389eb = __deltemplate_s173_d34389eb;
+exports.__deltemplate_s174_d34389eb = __deltemplate_s174_d34389eb;
 if (goog.DEBUG) {
-  __deltemplate_s173_d34389eb.soyTemplateName = 'Sidebar.__deltemplate_s173_d34389eb';
+  __deltemplate_s174_d34389eb.soyTemplateName = 'Sidebar.__deltemplate_s174_d34389eb';
 }
-soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'sidebar', 0, __deltemplate_s173_d34389eb);
+soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'sidebar', 0, __deltemplate_s174_d34389eb);
 
 exports.render.params = ["section","site"];
 exports.render.types = {"section":"any","site":"any"};
@@ -28352,12 +28352,23 @@ exports.default = parseFromAnchor;
 /* 218 */,
 /* 219 */,
 /* 220 */,
-/* 221 */
+/* 221 */,
+/* 222 */,
+/* 223 */,
+/* 224 */,
+/* 225 */,
+/* 226 */,
+/* 227 */,
+/* 228 */,
+/* 229 */,
+/* 230 */,
+/* 231 */,
+/* 232 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NrVmq", function() { return NrVmq; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "eYhrn", function() { return eYhrn; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28369,15 +28380,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var templates;
 goog.loadModule(function(exports) {
 
-// This file was automatically generated from Pred.soy.
+// This file was automatically generated from transformation-functions.soy.
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace NrVmq.
+ * @fileoverview Templates in namespace eYhrn.
  * @public
  */
 
-goog.module('NrVmq.incrementaldom');
+goog.module('eYhrn.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28400,7 +28411,7 @@ var iattr = IncrementalDom.attr;
 
 var $templateAlias2 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('ElectricCode.incrementaldom', 'render');
 
-var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('guide.incrementaldom', 'render');
+var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('notopic.incrementaldom', 'render');
 
 
 /**
@@ -28411,325 +28422,859 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var param964 = function() {
-    $templateAlias2({code: 'Pred a Boolean', mode: 'haskell'}, null, opt_ijData);
+  var param1740 = function() {
     ie_open('p');
-      itext('Defined as a Monoidal Contravariant datatype, ');
-      ie_open('code');
-        itext('Pred');
-      ie_close('code');
-      itext(' wraps a predicate function of the form ');
-      ie_open('code');
-        itext('(a -> Boolean)');
-      ie_close('code');
-      itext('.');
+      itext('Transformation functions are mostly used to reduce unwanted nesting of similar types. Take for example the following structure:');
     ie_close('p');
+    $templateAlias2({code: 'const data =\n  Either.of(Maybe.of(3))  // Right Just 3\n\n// mapping on the inner Maybe is tedious at best\ndata\n  .map(map(x => x + 1))   // Right Just 4\n  .map(map(x => x * 10))  // Right Just 40\n\n// and extraction...super gross\ndata\n  .either(identity, identity)  // Just 3\n  .option(0)                   // 3\n\n// or\ndata\n  .either(option(0), option(0))  // 3', mode: 'javascript'}, null, opt_ijData);
     ie_open('p');
-      itext('The far right parameter of ');
-      ie_open('code');
-        itext('Pred');
-      ie_close('code');
-      itext(' is always fixed to the type of ');
-      ie_open('code');
-        itext('Boolean');
-      ie_close('code');
-      itext(', so the result of the wrapped predicate function can never be mapped. While the right parameter is fixed, the input to the predicate can vary.');
-    ie_close('p');
-    ie_open('p');
-      itext('Another property of ');
-      ie_open('code');
-        itext('Pred');
-      ie_close('code');
-      itext(' instances is that they can be combined using their Monodial interface. Combining instances will result in a new instance that returns the result of each ');
-      ie_open('code');
-        itext('Pred');
-      ie_close('code');
-      itext(' under logical conjunction.');
-    ie_close('p');
-    ie_open('p');
-      itext('As ');
-      ie_open('code');
-        itext('Pred');
-      ie_close('code');
-      itext(' wraps a function, it is lazy and will not execute until its argument is satisfied. A given instance is run but calling the ');
-      ie_open('a', null, null,
-          'href', '#runwith');
-        ie_open('code');
-          itext('runWith');
-        ie_close('code');
-      ie_close('a');
-      itext('method, supplying it the argument to test.');
-    ie_close('p');
-    ie_open('p');
-      itext('One of the features of ');
+      itext('The transformation functions, that ship with ');
       ie_open('code');
         itext('crocks');
       ie_close('code');
-      itext(' is the ability to use both normal predicate functions and ');
+      itext(', provide a means for dealing with this. Using them effectively, can turn the above code into something more like this:');
+    ie_close('p');
+    $templateAlias2({code: 'const data =\n  Either.of(Maybe.of(3))      // Right Just 3\n    .chain(maybeToEither(0))  // Right 3\n\n// mapping on a single Either, much better\ndata\n  .map(x => x + 1)  // Right 4\n  .map(x => x * 10) // Right 40\n\n// no need to default the Left case anymore\ndata\n  .either(identity, identity) // 3\n\n// effects of the inner type are applied immediately\nconst nested =\n  Either.of(Maybe.Nothing) // Right Nothing\n\nconst unnested =\n  nested\n    .chain(maybeToEither(0))  // Left 0\n\n// Always maps, although the inner Maybe skips\nnested\n  .map(map(x => x + 1))        // Right Nothing (runs mapping)\n  .map(map(x => x * 10))       // Right Nothing (runs mapping)\n  .either(identity, identity)  // Nothing\n  .option(0)                   // 0\n\n// Never maps on a Left, just skips it\nunnested\n  .map(x => x + 1)             // Left 0 (skips mapping)\n  .map(x => x * 10)            // Left 0 (skips mapping)\n  .either(identity, identity)  // 0', mode: 'javascript'}, null, opt_ijData);
+    ie_open('p');
+      itext('Not all types can be transformed to and from each other. Some of them are lazy and/or asynchronous, or are just too far removed. Also, some transformations will result in a loss of information. Moving from an ');
       ie_open('code');
-        itext('Pred');
+        itext('Either');
       ie_close('code');
-      itext(' instances interchangeably. For any ');
+      itext(' to a ');
       ie_open('code');
-        itext('crocks');
+        itext('Maybe');
       ie_close('code');
-      itext(' function that takes a predicate, either a predicate function or a ');
+      itext(', for instance, would lose the ');
       ie_open('code');
-        itext('Pred');
+        itext('Left');
       ie_close('code');
-      itext(' instance can be used.');
+      itext(' value of ');
+      ie_open('code');
+        itext('Either');
+      ie_close('code');
+      itext(' as a ');
+      ie_open('code');
+        itext('Maybe');
+      ie_close('code');
+      itext('\'s first parameter (');
+      ie_open('code');
+        itext('Nothing');
+      ie_close('code');
+      itext(') is fixed at ');
+      ie_open('code');
+        itext('Unit');
+      ie_close('code');
+      itext('. Conversely, if you move the other way around, from a ');
+      ie_open('code');
+        itext('Maybe');
+      ie_close('code');
+      itext(' to an ');
+      ie_open('code');
+        itext('Either');
+      ie_close('code');
+      itext(' you must provide a default ');
+      ie_open('code');
+        itext('Left');
+      ie_close('code');
+      itext(' value. Which means, if the inner ');
+      ie_open('code');
+        itext('Maybe');
+      ie_close('code');
+      itext(' results in a ');
+      ie_open('code');
+        itext('Nothing');
+      ie_close('code');
+      itext(', it will map to ');
+      ie_open('code');
+        itext('Left');
+      ie_close('code');
+      itext(' of your provided value. As such, not all of these functions are guaranteed isomorphic. With some types you just cannot go back and forth and expect to retain information.');
     ie_close('p');
     ie_open('p');
-      itext('This implementation of ');
-      ie_open('code');
-        itext('Pred');
-      ie_close('code');
-      itext(' was heavily inspired by ');
-      ie_open('a', null, null,
-          'href', 'https://medium.com/@drboolean/monoidal-contravariant-functors-are-actually-useful-1032211045c4#.polugsx2a');
-        itext('this article');
-      ie_close('a');
-      itext('.');
+      itext('Each function provides two signatures, one for if a Function is used for the second argument and another if the source ADT is passed instead. Although it may seem strange, this provides some flexibility on how to apply the transformation. The ADT version is great for squishing an already nested type or to perform the transformation in a composition. While the Function version can be used to extend an existing function without having to explicitly compose it. Both versions can be seen here:');
     ie_close('p');
-    $templateAlias2({code: 'import Pred from \'crocks/Pred\'\n\nimport isNumber from \'crocks/predicates/isNumber\'\nimport propOr from \'crocks/helpers/propOr\'\nimport filter from \'crocks/pointfree/filter\'\n\n// largeNumber :: Pred Number\nconst largeNumber =\n  Pred(isNumber)\n    .concat(Pred(x => x > 100))\n\n// largeItem :: Pred Object\nconst largeItem =\n  largeNumber\n    .contramap(propOr(null, \'item\'))\n\nlargeNumber\n  .runWith(45)\n//=> false\n\nlargeNumber\n  .runWith(175)\n//=> true\n\nlargeItem\n  .runWith({ item: 190 })\n//=> true\n\nlargeItem\n  .runWith({ item: 9 })\n//=> false\n\nlargeItem\n  .runWith(9)\n//=> false\n\nfilter(largeNumber, [ 200, 375, 15 ])\n//=> [ 200, 375 ]', mode: 'javascript'}, null, opt_ijData);
-    ie_open('article', null, null,
-        'id', 'topic-implements');
-      ie_open('h2');
-        ie_open('a', null, null,
-            'id', 'implements',
-            'href', '#implements');
-          itext('Implements');
-        ie_close('a');
-      ie_close('h2');
-      ie_open('p');
-        ie_open('code');
-          itext('Semigroup');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('Monoid');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('Contravariant');
-        ie_close('code');
-      ie_close('p');
-    ie_close('article');
-    ie_open('article', null, null,
-        'id', 'topic-constructor');
-      ie_open('h2');
-        ie_open('a', null, null,
-            'id', 'constructor-methods',
-            'href', '#constructor-methods');
-          itext('Constructor Methods');
-        ie_close('a');
-      ie_close('h2');
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'empty',
-            'href', '#empty');
-          itext('empty');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Pred.empty :: () -> Pred a', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        ie_open('code');
-          itext('empty');
-        ie_close('code');
-        itext(' provides the identity for the ');
-        ie_open('code');
-          itext('Monoid');
-        ie_close('code');
-        itext(' in that when the value it provides is ');
-        ie_open('code');
-          itext('concat');
-        ie_close('code');
-        itext('ed to any other value, it will return the other value. In the case of ');
-        ie_open('code');
-          itext('Pred');
-        ie_close('code');
-        itext(' the result of ');
-        ie_open('code');
-          itext('empty');
-        ie_close('code');
-        itext(' is a ');
-        ie_open('code');
-          itext('Pred');
-        ie_close('code');
-        itext(' that will always return');
-        ie_open('code');
-          itext('true');
-        ie_close('code');
-        itext('. ');
-        ie_open('code');
-          itext('empty');
-        ie_close('code');
-        itext(' is available on both the Constructor and the Instance for convenience.');
-      ie_close('p');
-      $templateAlias2({code: 'import Pred from \'crocks/Pred\'\n\nimport isEmpty from \'crocks/predicates/isEmpty\'\nimport not from \'crocks/logic/not\'\n\n// empty :: Pred a\nconst empty =\n  Pred.empty()\n\n// notEmpty :: Pred a\nconst notEmpty =\n  Pred(not(isEmpty))\n\nempty\n  .runWith(\'\')\n//=> true\n\nnotEmpty\n  .concat(empty)\n  .runWith([])\n//=> false\n\nnotEmpty\n  .concat(empty)\n  .runWith([ 1, 2, 3 ])\n//=> true\n\nempty\n  .concat(notEmpty)\n  .runWith(\'\')\n//=> false\n\nempty\n  .concat(notEmpty)\n  .runWith(\'123\')\n//=> true', mode: 'javascript'}, null, opt_ijData);
-    ie_close('article');
-    ie_open('article', null, null,
-        'id', 'topic-instance');
-      ie_open('h2');
-        ie_open('a', null, null,
-            'id', 'instance-methods',
-            'href', '#instance-methods');
-          itext('Instance Methods');
-        ie_close('a');
-      ie_close('h2');
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'concat',
-            'href', '#concat');
-          itext('concat');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Pred a ~> Pred a -> Pred a', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        ie_open('code');
-          itext('concat');
-        ie_close('code');
-        itext(' is used to combine (2) ');
-        ie_open('code');
-          itext('Semigroup');
-        ie_close('code');
-        itext('s of the same type under an operation specified by the ');
-        ie_open('code');
-          itext('Semigroup');
-        ie_close('code');
-        itext('. In the case of ');
-        ie_open('code');
-          itext('Pred');
-        ie_close('code');
-        itext(', the results of both');
-        ie_open('code');
-          itext('Preds');
-        ie_close('code');
-        itext('s are combined under logical conjunction.');
-      ie_close('p');
-      $templateAlias2({code: 'import Pred from \'crocks/Pred\'\n\nimport or from \'crocks/logic/or\'\nimport not from \'crocks/logic/not\'\nimport filter from \'crocks/pointfree/filter\'\n\nconst isEven =\n  x => !(x % 2)\n\n// isOdd :: Pred Number\nconst isOdd =\n  Pred(not(isEven))\n\n// lt20 :: Pred Number\nconst lt20 =\n  Pred(x => x < 20)\n\n// gt5 :: Pred Number\nconst gt5 =\n  Pred(x => x > 5)\n\n// inRange :: Pred Number\nconst inRange =\n  lt20.concat(gt5)\n\n// isOddInRange :: Pred Number\nconst isOddInRange =\n  isOdd.concat(inRange)\n\n// isValid :: Pred Number\nconst isValid =\n  Pred(or(isEven, isOddInRange))\n\n// data :: [ Number ]\nconst data =\n[ 1, 4, 12, 19, 32, 99, 76, 7 ]\n\nisOdd\n  .runWith(5)\n//=> true\n\nisOdd\n  .runWith(8)\n//=> false\n\nfilter(isOdd, data)\n//=> [ 1, 19, 99, 7 ]\n\nfilter(lt20, data)\n//=> [ 1, 4, 12, 19, 7 ]\n\nfilter(gt5, data)\n//=> [ 12, 19, 32, 99, 76, 7 ]\n\nfilter(inRange, data)\n//=> [ 12, 19, 7 ]\n\nfilter(isOddInRange, data)\n//=> [ 19, 7 ]\n\nfilter(isEven, data)\n// [ 4, 12, 32, 76 ]\n\nfilter(isValid, data)\n//=> [ 4, 12, 19, 32, 76, 7 ]', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'contramap',
-            'href', '#contramap');
-          itext('contramap');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Pred a ~> (b -> a) -> Pred b', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('While the output of a ');
-        ie_open('code');
-          itext('Pred');
-        ie_close('code');
-        itext(' is fixed to ');
-        ie_open('code');
-          itext('Boolean');
-        ie_close('code');
-        itext(', the input can vary type and value. This allows a given ');
-        ie_open('code');
-          itext('Pred');
-        ie_close('code');
-        itext(' to be adapted by mapping on the input, before it hits the wrapped predicate function. Using ');
-        ie_open('code');
-          itext('contramap');
-        ie_close('code');
-        itext(', functions are lifted, mapping the input to now accept the type of the input of the given function.');
-      ie_close('p');
-      $templateAlias2({code: 'import Pred from \'crocks/Pred\'\nimport contramap from \'crocks/pointfree/contramap\'\nimport propOr from \'crocks/helpers/propOr\'\n\n// Length :: String | Function | Array\n// length :: Length -> Number\nconst length =\n  propOr(0, \'length\')\n\n// gt5 :: Pred Number\nconst gt5 =\n  Pred(x => x > 5)\n\n// lengthGt5 :: Pred Length\nconst validLength =\n  contramap(length, gt5)\n\n// validItemLength :: Pred Object\nconst validItemLength =\n  contramap(propOr(null, \'item\'), validLength)\n\ngt5\n  .runWith(5)\n//=> false\n\ngt5\n  .runWith(10)\n//=> true\n\nvalidLength\n  .runWith([ 1, 2, 3, 4, 5, 6 ])\n//=> true\n\nvalidLength\n  .runWith(null)\n//=> false\n\nvalidLength\n  .runWith(\'1234\')\n//=> false\n\nvalidItemLength\n  .runWith({ item: \'this is an item\' })\n//=> true', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'valueof',
-            'href', '#valueof');
-          itext('valueOf');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Pred a ~> () -> a -> Boolean', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        ie_open('code');
-          itext('valueOf');
-        ie_close('code');
-        itext(' is used on all ');
-        ie_open('code');
-          itext('crocks');
-        ie_close('code');
-        itext(' ');
-        ie_open('code');
-          itext('Monoid');
-        ie_close('code');
-        itext('s as a means of extraction. While the extraction is available, types that implement ');
-        ie_open('code');
-          itext('valueOf');
-        ie_close('code');
-        itext(' are not necessarily a');
-        ie_open('code');
-          itext('Comonad');
-        ie_close('code');
-        itext('. This function is used primarily for convenience for some of the helper functions that ship with ');
-        ie_open('code');
-          itext('crocks');
-        ie_close('code');
-        itext('.');
-      ie_close('p');
-      ie_open('p');
-        itext('Calling ');
-        ie_open('code');
-          itext('valueOf');
-        ie_close('code');
-        itext(' on a ');
-        ie_open('code');
-          itext('Pred');
-        ie_close('code');
-        itext(' instance will result in the underlying predicate function. Most of the time this will not be required when working with ');
-        ie_open('code');
-          itext('crocks');
-        ie_close('code');
-        itext('because all ');
-        ie_open('code');
-          itext('crocks');
-        ie_close('code');
-        itext(' functions that take a predicate function can also take a');
-        ie_open('code');
-          itext('Pred');
-        ie_close('code');
-        itext(' instance.');
-      ie_close('p');
-      $templateAlias2({code: 'import Pred from \'crocks/Pred\'\n\nimport isArray from \'crocks/predicates/isArray\'\nimport isString from \'crocks/predicates/isString\'\nimport equals from \'crocks/pointfree/equals\'\nimport or from \'crocks/logic/or\'\n\n// lengthIsThree :: Pred a\nconst lengthIsThree =\n  Pred(equals(3))\n    .contramap(x => x.length)\n\n// pred :: Pred a\nconst pred =\n  Pred(or(isArray, isString))\n    .concat(lengthIsThree)\n\n// fn :: a -> Boolean\nconst fn =\n  pred.valueOf()\n\npred\n  .runWith(null)\n//=> false\n\npred\n  .runWith([ 1, 2, 3 ])\n//=> true\n\npred\n  .runWith(\'This is fun\')\n//=> true\n\nfn(null)          // false\nfn([ 1, 2, 3 ])   // true\nfn(\'This is fun\') // true\nfn([])            // false\nfn(\'\')            // false', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'runwith',
-            'href', '#runwith');
-          itext('runWith');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Pred a ~> a -> Boolean', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('As ');
-        ie_open('code');
-          itext('Pred');
-        ie_close('code');
-        itext(' wraps a predicate function, it needs a mean to run it with some value to test against the predicate. ');
-        ie_open('code');
-          itext('Pred');
-        ie_close('code');
-        itext(' instances provide a method called');
-        ie_open('code');
-          itext('runWith');
-        ie_close('code');
-        itext(' that will accept the value to be tested and then runs it through the predicate returning the result.');
-      ie_close('p');
-      ie_open('p');
-        itext('Most of the time this function is not used while working with other predicate functions in ');
-        ie_open('code');
-          itext('crocks');
-        ie_close('code');
-        itext(', as all functions that take a predicate function also take a ');
-        ie_open('code');
-          itext('Pred');
-        ie_close('code');
-        itext(' instance. It does come in handy though when supplying predicates to other libraries.');
-      ie_close('p');
-      $templateAlias2({code: 'import Pred from \'crocks/Pred\'\n\nimport hasProp from \'crocks/predicates/hasProp\'\nimport equals from \'crocks/pointfree/equals\'\nimport flip from \'crocks/combinators/flip\'\nimport runWith from \'crocks/pointfree/runWith\'\n\n// trueBlue :: Pred Object\nconst trueBlue =\n  Pred(equals(true))\n    .contramap(({ blue }) => blue)\n\n// isValid :: Pred a\nconst isValid =\n  Pred(hasProp(\'blue\'))\n    .concat(trueBlue)\n\n// checkValid :: a -> Boolean\nconst checkValid =\n  flip(runWith, isValid)\n\ncheckValid(null)            //=> false\ncheckValid([ 1, 2, 3 ])     //=> false\ncheckValid({ blue: 32 })    //=> false\ncheckValid({ blue: true })  //=> true', mode: 'javascript'}, null, opt_ijData);
-    ie_close('article');
+    $templateAlias2({code: '// Avoid nesting\n// inc :: a -> Maybe Number\nconst inc =\n  safeLift(isNumber, x => x + 1)\n\n// using Function signature\n// asyncInc :: a -> Async Number Number\nconst asyncInc =\n  maybeToAsync(0, inc)\n\n// using ADT signature to compose (extending functions)\n// asyncInc :: a -> Async Number Number\nconst anotherInc =\n  compose(maybeToAsync(0), inc)\n\n// resolveValue :: a -> Async _ a\nconst resolveValue =\n  Async.Resolved\n\nresolveValue(3)                          // Resolved 3\n  .chain(asyncInc)                       // Resolved 4\n  .chain(anotherInc)                     // Resolved 5\n  .chain(compose(maybeToAsync(20), inc)) // Resolved 6\n\nresolveValue(\'oops\')                     // Resolved \'oops\'\n  .chain(asyncInc)                       // Rejected 0\n  .chain(anotherInc)                     // Rejected 0\n  .chain(compose(maybeToAsync(20), inc)) // Rejected 0\n\n// Squash existing nesting\n// Just Right \'nice\'\nconst good =\n  Maybe.of(Either.Right(\'nice\'))\n\n// Just Left \'not so nice\'\nconst bad =\n  Maybe.of(Either.Left(\'not so nice\'))\n\ngood\n  .chain(eitherToMaybe) // Just \'nice\'\n\nbad\n  .chain(eitherToMaybe) // Nothing', mode: 'javascript'}, null, opt_ijData);
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'transformation-signatures',
+          'href', '#transformation-signatures');
+        itext('Transformation Signatures');
+      ie_close('a');
+    ie_close('h4');
+    ie_open('table');
+      ie_open('thead');
+        ie_open('tr');
+          ie_open('th');
+            itext('Transform');
+          ie_close('th');
+          ie_open('th', null, null,
+              'style', 'text-align:left');
+            itext('ADT signature');
+          ie_close('th');
+          ie_open('th', null, null,
+              'style', 'text-align:left');
+            itext('Function Signature');
+          ie_close('th');
+          ie_open('th', null, null,
+              'style', 'text-align:left');
+            itext('Location');
+          ie_close('th');
+        ie_close('tr');
+      ie_close('thead');
+      ie_open('tbody');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('arrayToList');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('[ a ] -> List a');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('(a -> [ b ]) -> a -> List b');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/List');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('a', null, null,
+                'href', '../crocks/Async.html#eithertoasync');
+              ie_open('code');
+                itext('eitherToAsync');
+              ie_close('code');
+            ie_close('a');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('Either e a -> Async e a');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('(a -> Either e b) -> a -> Async e b');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/Async');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('a', null, null,
+                'href', '../monoids/First.html#eithertofirst');
+              ie_open('code');
+                itext('eitherToFirst');
+              ie_close('code');
+            ie_close('a');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('Either b a -> First a');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('(a -> Either c b) -> a -> First b');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/First');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('a', null, null,
+                'href', '../monoids/Last.html#eithertolast');
+              ie_open('code');
+                itext('eitherToLast');
+              ie_close('code');
+            ie_close('a');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('Either b a -> Last a');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('(a -> Either c b) -> a -> Last b');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/Last');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('a', null, null,
+                'href', '../crocks/Maybe.html#eithertomaybe');
+              ie_open('code');
+                itext('eitherToMaybe');
+              ie_close('code');
+            ie_close('a');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('Either b a -> Maybe a');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('(a -> Either c b) -> a -> Maybe b');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/Maybe');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('eitherToResult');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('Either e a -> Result e a');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('(a -> Either e b) -> a -> Result e b');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/Result');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('a', null, null,
+                'href', '../crocks/Async.html#firsttoasync');
+              ie_open('code');
+                itext('firstToAsync');
+              ie_close('code');
+            ie_close('a');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('e -> First a -> Async e a');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('e -> (a -> First b) -> a -> Async e b');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/Async');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('firstToEither');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('c -> First a -> Either c a');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('c -> (a -> First b) -> a -> Either c b');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/Either');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('a', null, null,
+                'href', '../monoids/Last.html#firsttolast');
+              ie_open('code');
+                itext('firstToLast');
+              ie_close('code');
+            ie_close('a');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('First a -> Last a');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('(a -> First b) -> a -> Last b');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/Last');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('a', null, null,
+                'href', '../crocks/Maybe.html#firsttomaybe');
+              ie_open('code');
+                itext('firstToMaybe');
+              ie_close('code');
+            ie_close('a');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('First a -> Maybe a');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('(a -> First b) -> a -> Maybe b');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/Maybe');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('firstToResult');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('c -> First a -> Result c a');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('c -> (a -> First b) -> a -> Result c b');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/Result');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('a', null, null,
+                'href', '../crocks/Async.html#lasttoasync');
+              ie_open('code');
+                itext('lastToAsync');
+              ie_close('code');
+            ie_close('a');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('e -> Last a -> Async e a');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('e -> (a -> Last b) -> a -> Async e b');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/Async');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('lastToEither');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('c -> Last a -> Either c a');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('c -> (a -> Last b) -> a -> Either c b');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/Either');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('a', null, null,
+                'href', '../monoids/First.html#lasttofirst');
+              ie_open('code');
+                itext('lastToFirst');
+              ie_close('code');
+            ie_close('a');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('Last a -> First a');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('(a -> Last b) -> a -> First b');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/First');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('a', null, null,
+                'href', '../crocks/Maybe.html#lasttomaybe');
+              ie_open('code');
+                itext('lastToMaybe');
+              ie_close('code');
+            ie_close('a');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('Last a -> Maybe a');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('(a -> Last b) -> a -> Maybe b');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/Maybe');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('lastToResult');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('c -> Last a -> Result c a');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('c -> (a -> Last b) -> a -> Result c b');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/Result');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('listToArray');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('List a -> [ a ]');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('(a -> List b) -> a -> [ b ]');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/List');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('a', null, null,
+                'href', '../crocks/Async.html#maybetoasync');
+              ie_open('code');
+                itext('maybeToAsync');
+              ie_close('code');
+            ie_close('a');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('e -> Maybe a -> Async e a');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('e -> (a -> Maybe b) -> a -> Async e b');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/Async');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('maybeToEither');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('c -> Maybe a -> Either c a');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('c -> (a -> Maybe b) -> a -> Either c b');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/Either');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('a', null, null,
+                'href', '../monoids/First.html#maybetofirst');
+              ie_open('code');
+                itext('maybeToFirst');
+              ie_close('code');
+            ie_close('a');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('Maybe a -> First a');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('(a -> Maybe b) -> a -> First b');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/First');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('a', null, null,
+                'href', '../monoids/Last.html#maybetolast');
+              ie_open('code');
+                itext('maybeToLast');
+              ie_close('code');
+            ie_close('a');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('Maybe a -> Last a');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('(a -> Maybe b) -> a -> Last b');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/Last');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('maybeToResult');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('c -> Maybe a -> Result c a');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('c -> (a -> Maybe b) -> a -> Result c b');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/Result');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('a', null, null,
+                'href', '../crocks/Async.html#resulttoasync');
+              ie_open('code');
+                itext('resultToAsync');
+              ie_close('code');
+            ie_close('a');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('Result e a -> Async e a');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('(a -> Result e b) -> a -> Async e b');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/Async');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('resultToEither');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('Result e a -> Either e a');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('(a -> Result e b) -> a -> Either e b');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/Either');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('a', null, null,
+                'href', '../monoids/First.html#resulttofirst');
+              ie_open('code');
+                itext('resultToFirst');
+              ie_close('code');
+            ie_close('a');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('Result e a -> First a');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('(a -> Result e b) -> a -> First b');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/First');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('a', null, null,
+                'href', '../monoids/Last.html#resulttolast');
+              ie_open('code');
+                itext('resultToLast');
+              ie_close('code');
+            ie_close('a');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('Result e a -> Last a');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('(a -> Result e b) -> a -> Last b');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/Last');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('a', null, null,
+                'href', '../crocks/Maybe.html#resulttomaybe');
+              ie_open('code');
+                itext('resultToMaybe');
+              ie_close('code');
+            ie_close('a');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('Result e a -> Maybe a');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('(a -> Result e b) -> a -> Maybe b');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/Maybe');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+        ie_open('tr');
+          ie_open('td');
+            ie_open('code');
+              itext('writerToPair');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('Writer m a -> Pair m a');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('(a -> Writer m b) -> a -> Pair m b');
+            ie_close('code');
+          ie_close('td');
+          ie_open('td', null, null,
+              'style', 'text-align:left');
+            ie_open('code');
+              itext('crocks/Pair');
+            ie_close('code');
+          ie_close('td');
+        ie_close('tr');
+      ie_close('tbody');
+    ie_close('table');
     ie_open('input', null, null,
         'type', 'hidden',
         'value', opt_data.page.title);
@@ -28739,11 +29284,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'value', opt_data.site.title);
     ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({content: param964}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param1740}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'NrVmq.render';
+  $render.soyTemplateName = 'eYhrn.render';
 }
 
 exports.render.params = ["page","site"];
@@ -28753,25 +29298,14 @@ return exports;
 
 });
 
-class NrVmq extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(NrVmq, templates);
+class eYhrn extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(eYhrn, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
 
 
 /***/ }),
-/* 222 */,
-/* 223 */,
-/* 224 */,
-/* 225 */,
-/* 226 */,
-/* 227 */,
-/* 228 */,
-/* 229 */,
-/* 230 */,
-/* 231 */,
-/* 232 */,
 /* 233 */,
 /* 234 */,
 /* 235 */,
@@ -28789,7 +29323,19 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(NrVmq, templates);
 /* 247 */,
 /* 248 */,
 /* 249 */,
-/* 250 */
+/* 250 */,
+/* 251 */,
+/* 252 */,
+/* 253 */,
+/* 254 */,
+/* 255 */,
+/* 256 */,
+/* 257 */,
+/* 258 */,
+/* 259 */,
+/* 260 */,
+/* 261 */,
+/* 262 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28825,9 +29371,9 @@ __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _PredSoy = __webpack_require__(221);
+var _transformationFunctionsSoy = __webpack_require__(232);
 
-var _PredSoy2 = _interopRequireDefault(_PredSoy);
+var _transformationFunctionsSoy2 = _interopRequireDefault(_transformationFunctionsSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28837,23 +29383,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var NrVmq = function (_Component) {
-  _inherits(NrVmq, _Component);
+var eYhrn = function (_Component) {
+  _inherits(eYhrn, _Component);
 
-  function NrVmq() {
-    _classCallCheck(this, NrVmq);
+  function eYhrn() {
+    _classCallCheck(this, eYhrn);
 
-    return _possibleConstructorReturn(this, (NrVmq.__proto__ || Object.getPrototypeOf(NrVmq)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (eYhrn.__proto__ || Object.getPrototypeOf(eYhrn)).apply(this, arguments));
   }
 
-  return NrVmq;
+  return eYhrn;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(NrVmq, _PredSoy2.default);
+_metalSoy2.default.register(eYhrn, _transformationFunctionsSoy2.default);
 
-exports.default = NrVmq;
+exports.default = eYhrn;
 
 /***/ })
-],[250]);
+],[262]);

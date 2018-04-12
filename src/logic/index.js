@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   and: require('./and'),
   ifElse: require('./ifElse'),
   not: require('./not'),

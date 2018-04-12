@@ -1,10 +1,10 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isSameType = require('./isSameType')
-const isSame = require('./isSame')
-const hasAlg = require('./hasAlg')
-const type = require('./type')
+import isSameType from './isSameType.js'
+import isSame from './isSame.js'
+import hasAlg from './hasAlg.js'
+import type from './type.js'
 
 const comp = (a, b) =>
   a.valueOf() === b.valueOf()
@@ -57,4 +57,4 @@ function equals(a, b) {
   return (strats[type(a)] || comp)(a, b)
 }
 
-module.exports = equals
+export default equals

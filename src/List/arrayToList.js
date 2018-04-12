@@ -1,11 +1,11 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const List = require('.')
+import List from './index.js'
 
-const curry = require('../core/curry')
-const isArray = require('../core/isArray')
-const isFunction = require('../core/isFunction')
+import curry from '../core/curry.js'
+import isArray from '../core/isArray.js'
+import isFunction from '../core/isFunction.js'
 
 // arrayToList : [ a ] -> List a
 // arrayToList : (a -> [ b ]) -> a -> List b
@@ -28,4 +28,4 @@ function arrayToList(array) {
   throw new TypeError('arrayToList: Array or Array returning function required')
 }
 
-module.exports = curry(arrayToList)
+export default curry(arrayToList)

@@ -1,10 +1,10 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const curry = require('../core/curry')
-const isFoldable = require('../core/isFoldable')
-const isMonoid = require('../core/isMonoid')
-const mconcatMap = require('../core/mconcatMap')
+import curry from '../core/curry.js'
+import isFoldable from '../core/isFoldable.js'
+import isMonoid from '../core/isMonoid.js'
+import mconcatMap from '../core/mconcatMap.js'
 
 const identity = x => x
 
@@ -25,4 +25,4 @@ function mconcat(m, xs) {
   return mconcatMap(m, identity, xs)
 }
 
-module.exports = curry(mconcat)
+export default curry(mconcat)

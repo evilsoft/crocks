@@ -1,12 +1,13 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const Result = require('.')
-const Maybe = require('../core/types').proxy('Maybe')
+import Result from './index.js'
+import types from '../core/types.js'
+const Maybe = types.proxy('Maybe')
 
-const curry = require('../core/curry')
-const isFunction = require('../core/isFunction')
-const isSameType = require('../core/isSameType')
+import curry from '../core/curry.js'
+import isFunction from '../core/isFunction.js'
+import isSameType from '../core/isSameType.js'
 
 const constant = x => () => x
 
@@ -38,4 +39,4 @@ function maybeToResult(left, maybe) {
   throw new TypeError('maybeToResult: Maybe or Maybe returning function required for second argument')
 }
 
-module.exports = curry(maybeToResult)
+export default curry(maybeToResult)

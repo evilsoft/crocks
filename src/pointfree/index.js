@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   alt: require('./alt'),
   ap: require('./ap'),
   bimap: require('./bimap'),

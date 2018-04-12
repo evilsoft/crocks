@@ -1,7 +1,7 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isFunction = require('../core/isFunction')
+import isFunction from '../core/isFunction.js'
 
 function run(m) {
   if(!(m && isFunction(m.run))) {
@@ -11,4 +11,4 @@ function run(m) {
   return m.run()
 }
 
-module.exports = run
+export default run

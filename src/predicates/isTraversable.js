@@ -1,8 +1,8 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const hasAlg = require('../core/hasAlg')
-const isFunctor = require('../core/isFunctor')
+import hasAlg from '../core/hasAlg.js'
+import isFunctor from '../core/isFunctor.js'
 
 // isTraversable : a -> Boolean
 function isTraversable(m) {
@@ -10,4 +10,4 @@ function isTraversable(m) {
     && hasAlg('traverse', m)
 }
 
-module.exports = isTraversable
+export default isTraversable

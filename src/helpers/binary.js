@@ -1,8 +1,8 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const curryN = require('../core/curryN')
-const isFunction = require('../core/isFunction')
+import curryN from '../core/curryN.js'
+import isFunction from '../core/isFunction.js'
 
 // binary : (* -> c) -> a -> b -> c
 function binary(fn) {
@@ -13,4 +13,4 @@ function binary(fn) {
   return curryN(2, fn)
 }
 
-module.exports = binary
+export default binary

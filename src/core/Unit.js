@@ -3,13 +3,15 @@
 
 const VERSION = 1
 
-const _implements = require('./implements')
-const type = require('./types').type('Unit')
-const _type = require('./types').typeFn(type(), VERSION)
-const fl = require('./flNames')
+import _implements from './implements.js'
+import types from './types.js'
+const type = types.type('Unit')
+import _types from './types.js'
+const _type = _types.typeFn(type(), VERSION)
+import fl from './flNames.js'
 
-const isFunction = require('./isFunction')
-const isSameType = require('./isSameType')
+import isFunction from './isFunction.js'
+import isSameType from './isSameType.js'
 
 const _of =
   Unit
@@ -92,4 +94,4 @@ Unit['@@implements'] = _implements(
   [ 'ap', 'chain', 'concat', 'empty', 'equals', 'map', 'of' ]
 )
 
-module.exports = Unit
+export default Unit

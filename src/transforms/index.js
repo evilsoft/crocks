@@ -1,30 +1,59 @@
-module.exports = {
-  arrayToList: require('../List/arrayToList'),
-  eitherToAsync: require('../Async/eitherToAsync'),
-  eitherToFirst: require('../First/eitherToFirst'),
-  eitherToLast: require('../Last/eitherToLast'),
-  eitherToMaybe: require('../Maybe/eitherToMaybe'),
-  eitherToResult: require('../Result/eitherToResult'),
-  firstToAsync: require('../Async/firstToAsync'),
-  firstToEither: require('../Either/firstToEither'),
-  firstToLast: require('../Last/firstToLast'),
-  firstToMaybe: require('../Maybe/firstToMaybe'),
-  firstToResult: require('../Result/firstToResult'),
-  lastToAsync: require('../Async/lastToAsync'),
-  lastToEither: require('../Either/lastToEither'),
-  lastToFirst: require('../First/lastToFirst'),
-  lastToMaybe: require('../Maybe/lastToMaybe'),
-  lastToResult: require('../Result/lastToResult'),
-  listToArray: require('../List/listToArray'),
-  maybeToAsync: require('../Async/maybeToAsync'),
-  maybeToEither: require('../Either/maybeToEither'),
-  maybeToFirst: require('../First/maybeToFirst'),
-  maybeToLast: require('../Last/maybeToLast'),
-  maybeToResult: require('../Result/maybeToResult'),
-  resultToAsync: require('../Async/resultToAsync'),
-  resultToEither: require('../Either/resultToEither'),
-  resultToFirst: require('../First/resultToFirst'),
-  resultToLast: require('../Last/resultToLast'),
-  resultToMaybe: require('../Maybe/resultToMaybe'),
-  writerToPair: require('../Pair/writerToPair')
+import arrayToList from '../List/arrayToList.js'
+import eitherToAsync from '../Async/eitherToAsync.js'
+import eitherToFirst from '../First/eitherToFirst.js'
+import eitherToLast from '../Last/eitherToLast.js'
+import eitherToMaybe from '../Maybe/eitherToMaybe.js'
+import eitherToResult from '../Result/eitherToResult.js'
+import firstToAsync from '../Async/firstToAsync.js'
+import firstToEither from '../Either/firstToEither.js'
+import firstToLast from '../Last/firstToLast.js'
+import firstToMaybe from '../Maybe/firstToMaybe.js'
+import firstToResult from '../Result/firstToResult.js'
+import lastToAsync from '../Async/lastToAsync.js'
+import lastToEither from '../Either/lastToEither.js'
+import lastToFirst from '../First/lastToFirst.js'
+import lastToMaybe from '../Maybe/lastToMaybe.js'
+import lastToResult from '../Result/lastToResult.js'
+import listToArray from '../List/listToArray.js'
+import maybeToAsync from '../Async/maybeToAsync.js'
+import maybeToEither from '../Either/maybeToEither.js'
+import maybeToFirst from '../First/maybeToFirst.js'
+import maybeToLast from '../Last/maybeToLast.js'
+import maybeToResult from '../Result/maybeToResult.js'
+import resultToAsync from '../Async/resultToAsync.js'
+import resultToEither from '../Either/resultToEither.js'
+import resultToFirst from '../First/resultToFirst.js'
+import resultToLast from '../Last/resultToLast.js'
+import resultToMaybe from '../Maybe/resultToMaybe.js'
+import writerToPair from '../Pair/writerToPair.js'
+
+export default {
+  arrayToList,
+  eitherToAsync,
+  eitherToFirst,
+  eitherToLast,
+  eitherToMaybe,
+  eitherToResult,
+  firstToAsync,
+  firstToEither,
+  firstToLast,
+  firstToMaybe,
+  firstToResult,
+  lastToAsync,
+  lastToEither,
+  lastToFirst,
+  lastToMaybe,
+  lastToResult,
+  listToArray,
+  maybeToAsync,
+  maybeToEither,
+  maybeToFirst,
+  maybeToLast,
+  maybeToResult,
+  resultToAsync,
+  resultToEither,
+  resultToFirst,
+  resultToLast,
+  resultToMaybe,
+  writerToPair
 }

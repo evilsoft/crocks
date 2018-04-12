@@ -6,4 +6,4 @@
 const constant =
   x => () => x
 
-module.exports = constant
+export default constant

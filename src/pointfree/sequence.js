@@ -1,11 +1,11 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const array = require('../core/array')
-const curry = require('../core/curry')
-const isArray = require('../core/isArray')
-const isApplicative = require('../core/isApplicative')
-const isFunction = require('../core/isFunction')
+import array from '../core/array.js'
+import curry from '../core/curry.js'
+import isArray from '../core/isArray.js'
+import isApplicative from '../core/isApplicative.js'
+import isFunction from '../core/isFunction.js'
 
 function sequence(af, m) {
   if(!(isApplicative(af) || isFunction(af))) {
@@ -25,4 +25,4 @@ function sequence(af, m) {
   throw new TypeError('sequence: Traversable or Array required for second argument')
 }
 
-module.exports = curry(sequence)
+export default curry(sequence)

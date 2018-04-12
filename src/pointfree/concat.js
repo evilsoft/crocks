@@ -1,10 +1,10 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const curry = require('../core/curry')
-const isSameType = require('../core/isSameType')
-const isSemigroup = require('../core/isSemigroup')
-const isString = require('../core/isString')
+import curry from '../core/curry.js'
+import isSameType from '../core/isSameType.js'
+import isSemigroup from '../core/isSemigroup.js'
+import isString from '../core/isString.js'
 
 function concat(x, m) {
   if(!(isSemigroup(m) && isSameType(x, m))) {
@@ -20,4 +20,4 @@ function concat(x, m) {
   return m.concat(x)
 }
 
-module.exports = curry(concat)
+export default curry(concat)

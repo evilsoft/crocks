@@ -1,7 +1,7 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isNumber = require('./isNumber')
+import isNumber from './isNumber.js'
 
 // isInteger : a -> Boolean
 function isInteger(x) {
@@ -10,4 +10,4 @@ function isInteger(x) {
     && Math.floor(x) === x
 }
 
-module.exports = isInteger
+export default isInteger

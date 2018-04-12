@@ -2,10 +2,10 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const { Nothing, Just } = require('../core/Maybe')
-const predOrFunc = require('../core/predOrFunc')
+import predOrFunc from '../core/predOrFunc.js'
 
-const curry = require('../core/curry')
-const isPredOrFunc = require('../core/isPredOrFunc')
+import curry from '../core/curry.js'
+import isPredOrFunc from '../core/isPredOrFunc.js'
 
 // safe : ((a -> Boolean) | Pred) -> a -> Maybe a
 function safe(pred, x) {
@@ -18,4 +18,4 @@ function safe(pred, x) {
     : Nothing()
 }
 
-module.exports = curry(safe)
+export default curry(safe)

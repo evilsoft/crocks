@@ -1,11 +1,11 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const curry = require('../core/curry')
-const isFoldable = require('../core/isFoldable')
-const isFunction = require('../core/isFunction')
-const isMonoid = require('../core/isMonoid')
-const mconcatMap = require('../core/mconcatMap')
+import curry from '../core/curry.js'
+import isFoldable from '../core/isFoldable.js'
+import isFunction from '../core/isFunction.js'
+import isMonoid from '../core/isMonoid.js'
+import mconcatMap from '../core/mconcatMap.js'
 
 // mreduceMap :: Monoid M => M -> (b -> a) -> ( [ b ] | List b ) -> a
 function mreduceMap(m, f, xs) {
@@ -30,4 +30,4 @@ function mreduceMap(m, f, xs) {
   return mconcatMap(m, f, xs).valueOf()
 }
 
-module.exports = curry(mreduceMap)
+export default curry(mreduceMap)

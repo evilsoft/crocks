@@ -1,11 +1,11 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const compose = require('../core/compose')
-const curry = require('../core/curry')
-const isPredOrFunc = require('../core/isPredOrFunc')
-const isFunction = require('../core/isFunction')
-const safe = require('./safe')
+import compose from '../core/compose.js'
+import curry from '../core/curry.js'
+import isPredOrFunc from '../core/isPredOrFunc.js'
+import isFunction from '../core/isFunction.js'
+import safe from './safe.js'
 
 const map =
   fn => m => m.map(fn)
@@ -22,4 +22,4 @@ function safeLift(pred, fn) {
   return compose(map(fn), safe(pred))
 }
 
-module.exports = curry(safeLift)
+export default curry(safeLift)

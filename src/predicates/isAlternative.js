@@ -1,8 +1,8 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isApplicative = require('../core/isApplicative')
-const isPlus = require('../core/isPlus')
+import isApplicative from '../core/isApplicative.js'
+import isPlus from '../core/isPlus.js'
 
 // isAlternative : a -> Boolean
 function isAlternative(m) {
@@ -10,4 +10,4 @@ function isAlternative(m) {
     && isApplicative(m)
 }
 
-module.exports = isAlternative
+export default isAlternative

@@ -3,16 +3,17 @@
 
 const VERSION = 1
 
-const _implements = require('../core/implements')
-const _inspect = require('../core/inspect')
-const _type = require('../core/types').type('Reader')()
-const _typeString = require('../core/types').typeFn(_type, VERSION)
-const fl = require('../core/flNames')
+import _implements from '../core/implements.js'
+import _inspect from '../core/inspect.js'
+import types from '../core/types.js'
+const _type = types.type('Reader')()
+const _typeString = types.typeFn(_type, VERSION)
+import fl from '../core/flNames.js'
 
-const curry = require('../core/curry')
-const isFunction = require('../core/isFunction')
-const isMonad = require('../core/isMonad')
-const isSameType = require('../core/isSameType')
+import curry from '../core/curry.js'
+import isFunction from '../core/isFunction.js'
+import isMonad from '../core/isMonad.js'
+import isSameType from '../core/isSameType.js'
 
 function _ReaderT(Monad) {
   if(!isMonad(Monad)) {
@@ -143,4 +144,4 @@ function _ReaderT(Monad) {
   return ReaderT
 }
 
-module.exports = _ReaderT
+export default _ReaderT

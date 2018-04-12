@@ -1,11 +1,11 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const array = require('../core/array')
-const curry = require('../core/curry')
-const isApplicative = require('../core/isApplicative')
-const isArray = require('../core/isArray')
-const isFunction = require('../core/isFunction')
+import array from '../core/array.js'
+import curry from '../core/curry.js'
+import isApplicative from '../core/isApplicative.js'
+import isArray from '../core/isArray.js'
+import isFunction from '../core/isFunction.js'
 
 function traverse(af, fn, m) {
   if(!(isApplicative(af) || isFunction(af))) {
@@ -31,4 +31,4 @@ function traverse(af, fn, m) {
   throw new TypeError('traverse: Traversable or Array required for third argument')
 }
 
-module.exports = curry(traverse)
+export default curry(traverse)

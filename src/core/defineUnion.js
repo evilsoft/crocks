@@ -1,12 +1,12 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const curry = require('./curry')
-const isArray = require('./isArray')
-const isEmpty = require('./isEmpty')
-const isFunction = require('./isFunction')
-const isObject = require('./isObject')
-const isString = require('./isString')
+import curry from './curry.js'
+import isArray from './isArray.js'
+import isEmpty from './isEmpty.js'
+import isFunction from './isFunction.js'
+import isObject from './isObject.js'
+import isString from './isString.js'
 
 const constant = x => () => x
 
@@ -57,4 +57,4 @@ function defineUnion(defs) {
   }, { caseOf: curry(caseOf(defs)), includes: curry(includes(defs)) })
 }
 
-module.exports = defineUnion
+export default defineUnion

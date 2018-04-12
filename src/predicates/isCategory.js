@@ -1,8 +1,8 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const hasAlg = require('../core/hasAlg')
-const isSemigroupoid = require('../core/isSemigroupoid')
+import hasAlg from '../core/hasAlg.js'
+import isSemigroupoid from '../core/isSemigroupoid.js'
 
 // isCategory : a -> Boolean
 function isCategory(m) {
@@ -10,4 +10,4 @@ function isCategory(m) {
     && hasAlg('id', m)
 }
 
-module.exports = isCategory
+export default isCategory

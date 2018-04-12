@@ -1,9 +1,9 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const curry = require('../core/curry')
-const isFoldable = require('../core/isFoldable')
-const isFunction = require('../core/isFunction')
+import curry from '../core/curry.js'
+import isFoldable from '../core/isFoldable.js'
+import isFunction from '../core/isFunction.js'
 
 function reduce(fn, init, m) {
   if(!isFunction(fn)) {
@@ -21,4 +21,4 @@ function reduce(fn, init, m) {
   return m.reduce(fn, init)
 }
 
-module.exports = curry(reduce)
+export default curry(reduce)

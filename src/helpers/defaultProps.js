@@ -1,9 +1,9 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const curry = require('../core/curry')
-const isObject = require('../core/isObject')
-const object = require('../core/object')
+import curry from '../core/curry.js'
+import isObject from '../core/isObject.js'
+import object from '../core/object.js'
 
 // defaultProps : Object -> Object -> Object
 function defaultProps(x, m) {
@@ -14,4 +14,4 @@ function defaultProps(x, m) {
   return object.assign(m, x)
 }
 
-module.exports = curry(defaultProps)
+export default curry(defaultProps)

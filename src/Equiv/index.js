@@ -3,16 +3,17 @@
 
 const VERSION = 1
 
-const _implements = require('../core/implements')
-const _inspect = require('../core/inspect')
+import _implements from '../core/implements.js'
+import _inspect from '../core/inspect.js'
 
-const curry = require('../core/curry')
-const isFunction = require('../core/isFunction')
-const isSameType = require('../core/isSameType')
+import curry from '../core/curry.js'
+import isFunction from '../core/isFunction.js'
+import isSameType from '../core/isSameType.js'
 
-const type = require('../core/types').type('Equiv')
-const _type = require('../core/types').typeFn(type(), VERSION)
-const fl = require('../core/flNames')
+import types from '../core/types.js'
+const type = types.type('Equiv')
+const _type = types.typeFn(type(), VERSION)
+import fl from '../core/flNames.js'
 
 const _empty =
   () => Equiv(() => true)
@@ -77,4 +78,4 @@ Equiv['@@implements'] = _implements(
   [ 'concat', 'contramap', 'empty' ]
 )
 
-module.exports = Equiv
+export default Equiv

@@ -1,9 +1,9 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isArray = require('../core/isArray')
-const isFunction = require('../core/isFunction')
-const isString = require('../core/isString')
+import isArray from '../core/isArray.js'
+import isFunction from '../core/isFunction.js'
+import isString from '../core/isString.js'
 
 const { Nothing, Just } = require('../core/Maybe')
 
@@ -21,4 +21,4 @@ function head(m) {
   throw new TypeError('head: Array, String or List required')
 }
 
-module.exports = head
+export default head

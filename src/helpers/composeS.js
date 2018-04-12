@@ -1,8 +1,8 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isSameType = require('../core/isSameType')
-const isSemigroupoid = require('../core/isSemigroupoid')
+import isSameType from '../core/isSameType.js'
+import isSemigroupoid from '../core/isSemigroupoid.js'
 
 const err = 'composeS: Semigroupoids of the same type required'
 
@@ -35,4 +35,4 @@ function composeS(...args) {
   })
 }
 
-module.exports = composeS
+export default composeS

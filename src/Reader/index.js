@@ -3,15 +3,16 @@
 
 const VERSION = 1
 
-const _implements = require('../core/implements')
-const _inspect = require('../core/inspect')
-const type = require('../core/types').type('Reader')
-const _type = require('../core/types').typeFn(type(), VERSION)
-const fl = require('../core/flNames')
+import _implements from '../core/implements.js'
+import _inspect from '../core/inspect.js'
+import types from '../core/types.js'
+const type = types.type('Reader')
+const _type = types.typeFn(type(), VERSION)
+import fl from '../core/flNames.js'
 
-const compose = require('../core/compose')
-const isFunction = require('../core/isFunction')
-const isSameType = require('../core/isSameType')
+import compose from '../core/compose.js'
+import isFunction from '../core/isFunction.js'
+import isSameType from '../core/isSameType.js'
 
 const _of =
   x => Reader(() => x)
@@ -101,4 +102,4 @@ Reader['@@implements'] = _implements(
   [ 'ap', 'chain', 'map', 'of' ]
 )
 
-module.exports = Reader
+export default Reader

@@ -1,9 +1,9 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const curry = require('../core/curry')
-const isPredOrFunc = require('../core/isPredOrFunc')
-const predOrFunc = require('../core/predOrFunc')
+import curry from '../core/curry.js'
+import isPredOrFunc from '../core/isPredOrFunc.js'
+import predOrFunc from '../core/predOrFunc.js'
 
 // and : (a -> Boolean) | Pred -> (a -> Boolean) | Pred -> a -> Boolean
 function and(f, g) {
@@ -16,4 +16,4 @@ function and(f, g) {
   return x => !!(predOrFunc(f, x) && predOrFunc(g, x))
 }
 
-module.exports = curry(and)
+export default curry(and)

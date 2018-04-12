@@ -1,13 +1,13 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const curry = require('../core/curry')
-const isArray = require('../core/isArray')
-const isPredOrFunc = require('../core/isPredOrFunc')
-const isFunction = require('../core/isFunction')
-const isObject = require('../core/isObject')
-const object = require('../core/object')
-const predOrFunc = require('../core/predOrFunc')
+import curry from '../core/curry.js'
+import isArray from '../core/isArray.js'
+import isPredOrFunc from '../core/isPredOrFunc.js'
+import isFunction from '../core/isFunction.js'
+import isObject from '../core/isObject.js'
+import object from '../core/object.js'
+import predOrFunc from '../core/predOrFunc.js'
 
 const not =
   fn => x => !fn(x)
@@ -38,4 +38,4 @@ function reject(pred, m) {
   throw new TypeError('reject: Foldable or Object required for second argument')
 }
 
-module.exports = curry(reject)
+export default curry(reject)

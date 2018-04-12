@@ -1,8 +1,8 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const curry = require('../core/curry')
-const isString = require('../core/isString')
+import curry from '../core/curry.js'
+import isString from '../core/isString.js'
 const isObject  = require('../core/isObject')
 
 function applyDissoc(key, obj) {
@@ -27,4 +27,4 @@ function dissoc(key, obj) {
   return Object.keys(obj).reduce(applyDissoc(key, obj), {})
 }
 
-module.exports = curry(dissoc)
+export default curry(dissoc)

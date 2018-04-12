@@ -1,8 +1,8 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const curry = require('../core/curry')
-const isFunction = require('../core/isFunction')
+import curry from '../core/curry.js'
+import isFunction from '../core/isFunction.js'
 
 function merge(fn, m) {
   if(!isFunction(fn)) {
@@ -16,4 +16,4 @@ function merge(fn, m) {
   return m.merge(fn)
 }
 
-module.exports = curry(merge)
+export default curry(merge)

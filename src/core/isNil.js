@@ -8,4 +8,4 @@ function isNil(x) {
     || Number.isNaN(x)
 }
 
-module.exports = isNil
+export default isNil

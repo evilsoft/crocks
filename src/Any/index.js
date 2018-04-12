@@ -3,16 +3,17 @@
 
 const VERSION = 2
 
-const _implements = require('../core/implements')
-const _inspect = require('../core/inspect')
-const _equals = require('../core/equals')
-const type = require('../core/types').type('Any')
-const _type = require('../core/types').typeFn(type(), VERSION)
-const fl = require('../core/flNames')
+import _implements from '../core/implements.js'
+import _inspect from '../core/inspect.js'
+import _equals from '../core/equals.js'
+import types from '../core/types.js'
+const type = types.type('Any')
+const _type = types.typeFn(type(), VERSION)
+import fl from '../core/flNames.js'
 
-const isFunction = require('../core/isFunction')
-const isNil = require('../core/isNil')
-const isSameType = require('../core/isSameType')
+import isFunction from '../core/isFunction.js'
+import isNil from '../core/isNil.js'
+import isSameType from '../core/isSameType.js'
 
 const _empty =
   () => Any(false)
@@ -66,4 +67,4 @@ Any.type  = type
 Any[fl.empty] = _empty
 Any['@@type'] = _type
 
-module.exports = Any
+export default Any

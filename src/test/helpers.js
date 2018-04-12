@@ -26,7 +26,7 @@ function makeFake(algs) {
   return Fake
 }
 
-module.exports = {
+export default {
   bindFunc,
   makeFake
 }

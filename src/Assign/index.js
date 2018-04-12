@@ -3,18 +3,19 @@
 
 const VERSION = 2
 
-const _implements = require('../core/implements')
-const _inspect = require('../core/inspect')
-const _object = require('../core/object')
-const _equals = require('../core/equals')
+import _implements from '../core/implements.js'
+import _inspect from '../core/inspect.js'
+import _object from '../core/object.js'
+import _equals from '../core/equals.js'
 
-const type = require('../core/types').type('Assign')
-const _type = require('../core/types').typeFn(type(), VERSION)
-const fl = require('../core/flNames')
+import types from '../core/types.js'
+const type = types.type('Assign')
+const _type = types.typeFn(type(), VERSION)
+import fl from '../core/flNames.js'
 
-const isNil = require('../core/isNil')
-const isObject = require('../core/isObject')
-const isSameType = require('../core/isSameType')
+import isNil from '../core/isNil.js'
+import isObject from '../core/isObject.js'
+import isSameType from '../core/isSameType.js'
 
 const _empty =
   () => Assign({})
@@ -68,4 +69,4 @@ Assign.type = type
 Assign[fl.empty] = _empty
 Assign['@@type'] = _type
 
-module.exports = Assign
+export default Assign

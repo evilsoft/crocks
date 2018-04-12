@@ -1,12 +1,13 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const Result = require('.')
-const First = require('../core/types').proxy('First')
+import Result from './index.js'
+import types from '../core/types.js'
+const First = types.proxy('First')
 
-const curry = require('../core/curry')
-const isFunction = require('../core/isFunction')
-const isSameType = require('../core/isSameType')
+import curry from '../core/curry.js'
+import isFunction from '../core/isFunction.js'
+import isSameType from '../core/isSameType.js'
 
 const constant = x => () => x
 
@@ -38,4 +39,4 @@ function firstToResult(left, first) {
   throw new TypeError('firstToResult: First or First returning function required for second argument')
 }
 
-module.exports = curry(firstToResult)
+export default curry(firstToResult)

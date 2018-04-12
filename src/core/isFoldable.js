@@ -1,7 +1,7 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const hasAlg = require('./hasAlg')
+import hasAlg from './hasAlg.js'
 
 // isFoldable : a -> Boolean
 function isFoldable(m) {
@@ -9,4 +9,4 @@ function isFoldable(m) {
     && hasAlg('reduce', m)
 }
 
-module.exports = isFoldable
+export default isFoldable

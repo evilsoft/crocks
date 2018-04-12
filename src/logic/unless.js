@@ -1,10 +1,10 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const curry = require('../core/curry')
-const isPredOrFunc = require('../core/isPredOrFunc')
-const isFunction = require('../core/isFunction')
-const predOrFunc = require('../core/predOrFunc')
+import curry from '../core/curry.js'
+import isPredOrFunc from '../core/isPredOrFunc.js'
+import isFunction from '../core/isFunction.js'
+import predOrFunc from '../core/predOrFunc.js'
 
 // unless : (a -> Boolean) | Pred -> (a -> b) -> a | b
 function unless(pred, f) {
@@ -24,4 +24,4 @@ function unless(pred, f) {
     !predOrFunc(pred, x) ? f(x) : x
 }
 
-module.exports = curry(unless)
+export default curry(unless)

@@ -3,19 +3,20 @@
 
 const VERSION = 2
 
-const _equals = require('../core/equals')
-const _implements = require('../core/implements')
-const _innerConcat = require('../core/innerConcat')
-const _inspect = require('../core/inspect')
-const type = require('../core/types').type('Identity')
-const _type = require('../core/types').typeFn(type(), VERSION)
-const fl = require('../core/flNames')
+import _equals from '../core/equals.js'
+import _implements from '../core/implements.js'
+import _innerConcat from '../core/innerConcat.js'
+import _inspect from '../core/inspect.js'
+import types from '../core/types.js'
+const type = types.type('Identity')
+const _type = types.typeFn(type(), VERSION)
+import fl from '../core/flNames.js'
 
-const isArray = require('../core/isArray')
-const isApply = require('../core/isApply')
-const isApplicative = require('../core/isApplicative')
-const isFunction = require('../core/isFunction')
-const isSameType = require('../core/isSameType')
+import isArray from '../core/isArray.js'
+import isApply from '../core/isApply.js'
+import isApplicative from '../core/isApplicative.js'
+import isFunction from '../core/isFunction.js'
+import isSameType from '../core/isSameType.js'
 
 const _of =
   Identity
@@ -142,4 +143,4 @@ Identity['@@implements'] = _implements(
   [ 'ap', 'chain', 'concat', 'equals', 'map', 'of', 'traverse' ]
 )
 
-module.exports = Identity
+export default Identity

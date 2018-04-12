@@ -3,19 +3,20 @@
 
 const VERSION = 3
 
-const _equals = require('./equals')
-const _implements = require('./implements')
-const _inspect = require('./inspect')
-const type = require('./types').type('Pair')
-const _type = require('./types').typeFn(type(), VERSION)
-const fl = require('./flNames')
+import _equals from './equals.js'
+import _implements from './implements.js'
+import _inspect from './inspect.js'
+import types from './types.js'
+const type = types.type('Pair')
+const _type = types.typeFn(type(), VERSION)
+import fl from './flNames.js'
 
-const isApplicative = require('./isApplicative')
-const isApply = require('./isApply')
-const isArray = require('./isArray')
-const isFunction = require('./isFunction')
-const isSameType = require('./isSameType')
-const isSemigroup = require('./isSemigroup')
+import isApplicative from './isApplicative.js'
+import isApply from './isApply.js'
+import isArray from './isArray.js'
+import isFunction from './isFunction.js'
+import isSameType from './isSameType.js'
+import isSemigroup from './isSemigroup.js'
 
 function Pair(l, r) {
   if(arguments.length < 2) {
@@ -217,4 +218,4 @@ Pair['@@implements'] = _implements(
   [ 'ap', 'bimap', 'chain', 'concat', 'extend', 'equals', 'map', 'traverse' ]
 )
 
-module.exports = Pair
+export default Pair

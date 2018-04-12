@@ -1,11 +1,12 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const _chain = require('../core/array').chain
-const curry = require('../core/curry')
-const isArray = require('../core/isArray')
-const isChain = require('../core/isChain')
-const isFunction = require('../core/isFunction')
+import array from '../core/array.js'
+const { chain: _chain } = array
+import curry from '../core/curry.js'
+import isArray from '../core/isArray.js'
+import isChain from '../core/isChain.js'
+import isFunction from '../core/isFunction.js'
 
 // chain : Chain m => (a -> m b) -> m a -> m b
 function chain(fn, m) {
@@ -24,4 +25,4 @@ function chain(fn, m) {
   return m.chain(fn)
 }
 
-module.exports = curry(chain)
+export default curry(chain)

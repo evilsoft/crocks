@@ -1,7 +1,7 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isFunction = require('./isFunction')
+import isFunction from './isFunction.js'
 
 // isPromise : a -> Boolean
 function isPromise(p) {
@@ -10,4 +10,4 @@ function isPromise(p) {
     && isFunction(p.catch)
 }
 
-module.exports = isPromise
+export default isPromise

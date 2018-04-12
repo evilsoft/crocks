@@ -3,16 +3,17 @@
 
 const VERSION = 2
 
-const _implements = require('../core/implements')
-const _inspect = require('../core/inspect')
-const _equals = require('../core/equals')
-const type = require('../core/types').type('Max')
-const _type = require('../core/types').typeFn(type(), VERSION)
-const fl = require('../core/flNames')
+import _implements from '../core/implements.js'
+import _inspect from '../core/inspect.js'
+import _equals from '../core/equals.js'
+import types from '../core/types.js'
+const type = types.type('Max')
+const _type = types.typeFn(type(), VERSION)
+import fl from '../core/flNames.js'
 
-const isNil = require('../core/isNil')
-const isNumber = require('../core/isNumber')
-const isSameType = require('../core/isSameType')
+import isNil from '../core/isNil.js'
+import isNumber from '../core/isNumber.js'
+import isSameType from '../core/isSameType.js'
 
 const _empty =
   () => Max(-Infinity)
@@ -66,4 +67,4 @@ Max.type = type
 Max[fl.empty] = _empty
 Max['@@type'] = _type
 
-module.exports = Max
+export default Max

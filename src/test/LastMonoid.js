@@ -1,5 +1,5 @@
-const _implements = require('../core/implements')
-const _inspect = require('../core/inspect')
+import _implements from '../core/implements.js'
+import _inspect from '../core/inspect.js'
 
 const constant = x => () => x
 const identity = x => x
@@ -25,4 +25,4 @@ LastMonoid['@@implements'] = _implements(
   [ 'concat', 'empty' ]
 )
 
-module.exports = LastMonoid
+export default LastMonoid

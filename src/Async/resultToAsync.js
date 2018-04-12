@@ -1,12 +1,13 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const Async = require('.')
-const Result = require('../core/types').proxy('Result')
+import Async from './index.js'
+import types from '../core/types.js'
+const Result = types.proxy('Result')
 
-const curry = require('../core/curry')
-const isFunction = require('../core/isFunction')
-const isSameType = require('../core/isSameType')
+import curry from '../core/curry.js'
+import isFunction from '../core/isFunction.js'
+import isSameType from '../core/isSameType.js'
 
 const applyTransform = either =>
   either.either(Async.Rejected, Async.Resolved)
@@ -33,4 +34,4 @@ function resultToAsync(result) {
   throw new TypeError('resultToAsync: Result or Result returning function required')
 }
 
-module.exports = curry(resultToAsync)
+export default curry(resultToAsync)

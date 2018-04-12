@@ -6,4 +6,4 @@ function isString(x) {
   return typeof x === 'string'
 }
 
-module.exports = isString
+export default isString

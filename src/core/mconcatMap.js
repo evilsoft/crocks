@@ -1,7 +1,7 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const compose = require('./compose')
+import compose from './compose.js'
 
 const foldWith =
   m => (x, y) => x.concat(m(y))
@@ -11,4 +11,4 @@ function mconcatMap(M, f, xs) {
   return xs.reduce(foldWith(compose(M, f)), M.empty())
 }
 
-module.exports = mconcatMap
+export default mconcatMap

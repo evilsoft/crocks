@@ -83,6 +83,26 @@ Assign({ b: 4 })
 //=> Assign { b: 4, a: 1 }
 ```
 
+#### equals
+
+```haskell
+Assign a ~> b -> Boolean
+```
+
+Used to compare the underlying values of (2) `Assign` instances for equality by value, equals takes any given argument and returns `true` if the passed argument is a `Assign` with an underlying value equal to the underlying value of the `Assign` the method is being called on. If the passed argument is not a `Assign` or the underlying values are not equal, equals will return `false`.
+
+```javascript
+import Assign from 'crocks/Assign'
+
+Assign({ a: 5 })
+  .equals(Assign({ a: 5 }))
+//=> true
+
+Assign({ a: 5 })
+  .equals(Assign({ a: 15 }))
+//=> false
+```
+
 #### valueOf
 
 ```haskell

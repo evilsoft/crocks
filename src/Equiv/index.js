@@ -1,7 +1,7 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const VERSION = 1
+const VERSION = 2
 
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
@@ -35,33 +35,38 @@ function Equiv(compare) {
   const valueOf =
     () => compareWith
 
-  function contramap(fn) {
-    if(!isFunction(fn)) {
-      throw new TypeError('Equiv.contramap: Function required')
-    }
+  function contramap(method) {
+    return function(fn) {
+      if(!isFunction(fn)) {
+        throw new TypeError(`Equiv.${method}: Function required`)
+      }
 
-    return Equiv(
-      (x, y) => compareWith(fn(x), fn(y))
-    )
+      return Equiv(
+        (x, y) => compareWith(fn(x), fn(y))
+      )
+    }
   }
 
-  function concat(m) {
-    if(!isSameType(Equiv, m)) {
-      throw new TypeError('Equiv.concat: Equiv required')
-    }
+  function concat(method) {
+    return function(m) {
+      if(!isSameType(Equiv, m)) {
+        throw new TypeError(`Equiv.${method}: Equiv required`)
+      }
 
-    return Equiv((x, y) =>
-      compareWith(x, y) && m.compareWith(x, y)
-    )
+      return Equiv((x, y) =>
+        compareWith(x, y) && m.compareWith(x, y)
+      )
+    }
   }
 
   return {
     inspect, toString: inspect, type,
-    compareWith, valueOf, contramap,
-    concat, empty,
+    compareWith, valueOf, empty,
+    concat: concat('concat'),
+    contramap: contramap('contramap'),
     [fl.empty]: empty,
-    [fl.concat]: concat,
-    [fl.contramap]: contramap,
+    [fl.concat]: concat(fl.concat),
+    [fl.contramap]: contramap(fl.contramap),
     ['@@type']: _type,
     constructor: Equiv
   }

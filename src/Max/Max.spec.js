@@ -8,6 +8,8 @@ const isFunction = require('../core/isFunction')
 const isObject = require('../core/isObject')
 const isString = require('../core/isString')
 
+const fl = require('../core/flNames')
+
 const constant = x => () => x
 const identity = x => x
 
@@ -46,11 +48,11 @@ test('Max', t => {
 test('Max fantasy-land api', t => {
   const m = Max(99)
 
-  t.equals(Max['fantasy-land/empty'], Max.empty, 'is same function as public constructor empty')
+  t.ok(isFunction(Max[fl.empty]), 'provides empty function on constructor')
 
-  t.equals(m['fantasy-land/empty'], m.empty, 'is same function as public instance empty')
-  t.equals(m['fantasy-land/concat'], m.concat, 'is same function as public instance concat')
-  t.equals(m['fantasy-land/equals'], m.equals, 'is same function as public instance equals')
+  t.ok(isFunction(m[fl.empty]), 'provides empty method on instance')
+  t.ok(isFunction(m[fl.equals]), 'provides equals method on instance')
+  t.ok(isFunction(m[fl.concat]), 'provides concat method on instance')
 
   t.end()
 })
@@ -139,28 +141,8 @@ test('Max equals functionality', t => {
   t.end()
 })
 
-test('Max concat properties (Semigroup)', t => {
-  const a = Max(45)
-  const b = Max(20)
-  const c = Max(35)
-
-  const left = a.concat(b).concat(c)
-  const right = a.concat(b.concat(c))
-
-  t.ok(isFunction(Max(0).concat), 'is a function')
-
-  t.equal(left.valueOf(), right.valueOf(), 'associativity')
-  t.equal(a.concat(b).type(), a.type(), 'returns Semigroup of the same type')
-
-  t.end()
-})
-
-test('Max concat functionality', t => {
-  const x = 5
-  const y = 23
-
-  const a = Max(x)
-  const b = Max(y)
+test('Max concat errors', t => {
+  const a = Max(5)
 
   const notMax = { type: constant('Max...Not') }
 
@@ -179,7 +161,56 @@ test('Max concat functionality', t => {
   t.throws(cat({}), err, 'throws with an object')
   t.throws(cat(notMax), err, 'throws with non-Max')
 
+  t.end()
+})
+
+test('Max concat fantasy-land errors', t => {
+  const a = Max(5)
+
+  const notMax = { type: constant('Max...Not') }
+
+  const cat = bindFunc(a[fl.concat])
+
+  const err = /Max.fantasy-land\/concat: Max requried/
+  t.throws(cat(undefined), err, 'throws with undefined')
+  t.throws(cat(null), err, 'throws with null')
+  t.throws(cat(0), err, 'throws with falsey number')
+  t.throws(cat(1), err, 'throws with truthy number')
+  t.throws(cat(''), err, 'throws with falsey string')
+  t.throws(cat('string'), err, 'throws with truthy string')
+  t.throws(cat(false), err, 'throws with false')
+  t.throws(cat(true), err, 'throws with true')
+  t.throws(cat([]), err, 'throws with an array')
+  t.throws(cat({}), err, 'throws with an object')
+  t.throws(cat(notMax), err, 'throws with non-Max')
+
+  t.end()
+})
+
+test('Max concat functionality', t => {
+  const x = 5
+  const y = 23
+
+  const a = Max(x)
+  const b = Max(y)
+
   t.equals(a.concat(b).valueOf(), y, 'provides max wrapped values as expected')
+
+  t.end()
+})
+
+test('Max concat properties (Semigroup)', t => {
+  const a = Max(45)
+  const b = Max(20)
+  const c = Max(35)
+
+  const left = a.concat(b).concat(c)
+  const right = a.concat(b.concat(c))
+
+  t.ok(isFunction(Max(0).concat), 'is a function')
+
+  t.equal(left.valueOf(), right.valueOf(), 'associativity')
+  t.equal(a.concat(b).type(), a.type(), 'returns Semigroup of the same type')
 
   t.end()
 })

@@ -10,6 +10,8 @@ const isObject = require('../core/isObject')
 const isSameType = require('../core/isSameType')
 const isString = require('../core/isString')
 
+const fl = require('../core/flNames')
+
 const constant = x => () => x
 const extract = m => m.option('empty')
 
@@ -34,11 +36,11 @@ test('Last', t => {
 test('Last fantasy-land api', t => {
   const m = Last(false)
 
-  t.equals(Last['fantasy-land/empty'], Last.empty, 'is same function as public constructor empty')
+  t.ok(isFunction(Last[fl.empty]), 'provides empty function on constructor')
 
-  t.equals(m['fantasy-land/empty'], m.empty, 'is same function as public instance empty')
-  t.equals(m['fantasy-land/concat'], m.concat, 'is same function as public instance concat')
-  t.equals(m['fantasy-land/equals'], m.equals, 'is same function as public instance equals')
+  t.ok(isFunction(m[fl.empty]), 'provides empty method on instance')
+  t.ok(isFunction(m[fl.equals]), 'provides equals method on instance')
+  t.ok(isFunction(m[fl.concat]), 'provides concat method on instance')
 
   t.end()
 })
@@ -117,10 +119,8 @@ test('Last option', t => {
   t.end()
 })
 
-test('Last concat functionality', t => {
+test('Last concat errors', t => {
   const a = Last('a')
-  const b = Last('b')
-
   const notLast = { type: constant('Last...Not') }
 
   const cat = bindFunc(a.concat)
@@ -137,6 +137,35 @@ test('Last concat functionality', t => {
   t.throws(cat([]), err, 'throws with an array')
   t.throws(cat({}), err, 'throws with an object')
   t.throws(cat(notLast), err, 'throws when passed non-Last')
+
+  t.end()
+})
+
+test('Last concat fantasy-land errors', t => {
+  const a = Last('a')
+  const notLast = { type: constant('Last...Not') }
+
+  const cat = bindFunc(a[fl.concat])
+
+  const err = /Last.fantasy-land\/concat: Last required/
+  t.throws(cat(undefined), err, 'throws with undefined')
+  t.throws(cat(null), err, 'throws with null')
+  t.throws(cat(0), err, 'throws with falsey number')
+  t.throws(cat(1), err, 'throws with truthy number')
+  t.throws(cat(''), err, 'throws with falsey string')
+  t.throws(cat('string'), err, 'throws with truthy string')
+  t.throws(cat(false), err, 'throws with false')
+  t.throws(cat(true), err, 'throws with true')
+  t.throws(cat([]), err, 'throws with an array')
+  t.throws(cat({}), err, 'throws with an object')
+  t.throws(cat(notLast), err, 'throws when passed non-Last')
+
+  t.end()
+})
+
+test('Last concat functionality', t => {
+  const a = Last('a')
+  const b = Last('b')
 
   t.equal(extract(a.concat(b)), 'b', 'returns the last value concatted')
 

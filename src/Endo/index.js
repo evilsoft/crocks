@@ -1,7 +1,7 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const VERSION = 1
+const VERSION = 2
 
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
@@ -30,20 +30,22 @@ function Endo(runWith) {
   const inspect =
     () => `Endo${_inspect(valueOf())}`
 
-  function concat(m) {
-    if(!isSameType(Endo, m)) {
-      throw new TypeError('Endo.concat: Endo required')
-    }
+  function concat(method) {
+    return function(m) {
+      if(!isSameType(Endo, m)) {
+        throw new TypeError(`Endo.${method}: Endo required`)
+      }
 
-    return Endo(compose(m.valueOf(), valueOf()))
+      return Endo(compose(m.valueOf(), valueOf()))
+    }
   }
 
   return {
     inspect, toString: inspect,
-    valueOf, type, concat, empty,
-    runWith,
+    valueOf, type, empty, runWith,
+    concat: concat('concat'),
     [fl.empty]: empty,
-    [fl.concat]: concat,
+    [fl.concat]: concat(fl.concat),
     ['@@type']: _type,
     constructor: Endo
   }

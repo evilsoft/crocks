@@ -1,7 +1,7 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const VERSION = 2
+const VERSION = 3
 
 const _equals = require('../core/equals')
 const _implements = require('../core/implements')
@@ -38,20 +38,24 @@ function Identity(x) {
   const inspect =
     () => `Identity${_inspect(x)}`
 
-  function concat(m) {
-    if(!isSameType(Identity, m)) {
-      throw new TypeError('Identity.concat: Identity of Semigroup required')
-    }
+  function concat(method) {
+    return function(m) {
+      if(!isSameType(Identity, m)) {
+        throw new TypeError(`Identity.${method}: Identity of Semigroup required`)
+      }
 
-    return _innerConcat(Identity, m)(x)
+      return _innerConcat(`Identity.${method}`, m)(x)
+    }
   }
 
-  function map(fn) {
-    if(!isFunction(fn)) {
-      throw new TypeError('Identity.map: Function required')
-    }
+  function map(method) {
+    return function(fn) {
+      if(!isFunction(fn)) {
+        throw new TypeError(`Identity.${method}: Function required`)
+      }
 
-    return Identity(fn(x))
+      return Identity(fn(x))
+    }
   }
 
   function ap(m) {
@@ -66,18 +70,20 @@ function Identity(x) {
     return m.map(x)
   }
 
-  function chain(fn) {
-    if(!isFunction(fn)) {
-      throw new TypeError('Identity.chain: Function required')
+  function chain(method) {
+    return function(fn) {
+      if(!isFunction(fn)) {
+        throw new TypeError(`Identity.${method}: Function required`)
+      }
+
+      const m = fn(x)
+
+      if(!isSameType(Identity, m)) {
+        throw new TypeError(`Identity.${method}: Function must return an Identity`)
+      }
+
+      return m
     }
-
-    const m = fn(x)
-
-    if(!isSameType(Identity, m)) {
-      throw new TypeError('Identity.chain: Function must return an Identity')
-    }
-
-    return m
   }
 
   function sequence(f) {
@@ -120,13 +126,15 @@ function Identity(x) {
 
   return {
     inspect, toString: inspect, valueOf,
-    type, equals, concat, map, ap, of,
-    chain, sequence, traverse,
+    type, equals, ap, of, sequence, traverse,
+    concat: concat('concat'),
+    map: map('map'),
+    chain: chain('chain'),
     [fl.of]: of,
     [fl.equals]: equals,
-    [fl.concat]: concat,
-    [fl.map]: map,
-    [fl.chain]: chain,
+    [fl.concat]: concat(fl.concat),
+    [fl.map]: map(fl.map),
+    [fl.chain]: chain(fl.chain),
     ['@@type']: _type,
     constructor: Identity
   }

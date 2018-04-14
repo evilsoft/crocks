@@ -37,20 +37,23 @@ function Min(n) {
     m => isSameType(Min, m)
       && _equals(x, m.valueOf())
 
-  function concat(m) {
-    if(!isSameType(Min, m)) {
-      throw new TypeError('Min.concat: Min required')
-    }
+  function concat(method) {
+    return function(m) {
+      if(!isSameType(Min, m)) {
+        throw new TypeError(`Min.${method}: Min required`)
+      }
 
-    return Min(Math.min(x, m.valueOf()))
+      return Min(Math.min(x, m.valueOf()))
+    }
   }
 
   return {
-    inspect, toString: inspect, valueOf,
-    equals, type, concat, empty,
+    inspect, toString: inspect,
+    equals, valueOf, type, empty,
+    concat: concat('concat'),
     [fl.equals]: equals,
     [fl.empty]: empty,
-    [fl.concat]: concat,
+    [fl.concat]: concat(fl.concat),
     ['@@type']: _type,
     constructor: Min
   }

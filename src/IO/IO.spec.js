@@ -11,6 +11,8 @@ const isObject = require('../core/isObject')
 const isString = require('../core/isString')
 const unit = require('../core/_unit')
 
+const fl = require('../core/flNames')
+
 const constant = x => () => x
 const identity = x => x
 
@@ -53,11 +55,11 @@ test('IO', t => {
 test('IO fantasy-land api', t => {
   const m = IO(identity)
 
-  t.equals(IO['fantasy-land/of'], IO.of, 'is same function as public constructor of')
+  t.ok(isFunction(IO[fl.of]), 'provides of function on constructor')
 
-  t.equals(m['fantasy-land/of'], m.of, 'is same function as public instance of')
-  t.equals(m['fantasy-land/map'], m.map, 'is same function as public instance map')
-  t.equals(m['fantasy-land/chain'], m.chain, 'is same function as public instance chain')
+  t.ok(isFunction(m[fl.of]), 'provides of method on instance')
+  t.ok(isFunction(m[fl.map]), 'provides map method on instance')
+  t.ok(isFunction(m[fl.chain]), 'provides chain method on instance')
 
   t.end()
 })
@@ -97,7 +99,7 @@ test('IO @@type', t => {
   const m = IO(unit)
 
   t.equal(IO['@@type'], m['@@type'], 'static and instance versions are the same')
-  t.equal(m['@@type'], 'crocks/IO@1', 'reports crocks/IO@1')
+  t.equal(m['@@type'], 'crocks/IO@2', 'reports crocks/IO@2')
 
   t.end()
 })
@@ -117,16 +119,38 @@ test('IO run', t => {
 test('IO map errors', t => {
   const map = bindFunc(IO(unit).map)
 
-  t.throws(map(undefined), TypeError, 'throws with undefined')
-  t.throws(map(null), TypeError, 'throws with null')
-  t.throws(map(0), TypeError, 'throws with falsey number')
-  t.throws(map(1), TypeError, 'throws with truthy number')
-  t.throws(map(''), TypeError, 'throws with falsey string')
-  t.throws(map('string'), TypeError, 'throws with truthy string')
-  t.throws(map(false), TypeError, 'throws with false')
-  t.throws(map(true), TypeError, 'throws with true')
-  t.throws(map([]), TypeError, 'throws with an array')
-  t.throws(map({}), TypeError, 'throws with an object')
+  const err = /IO.map: Function required/
+  t.throws(map(undefined), err, 'throws with undefined')
+  t.throws(map(null), err, 'throws with null')
+  t.throws(map(0), err, 'throws with falsey number')
+  t.throws(map(1), err, 'throws with truthy number')
+  t.throws(map(''), err, 'throws with falsey string')
+  t.throws(map('string'), err, 'throws with truthy string')
+  t.throws(map(false), err, 'throws with false')
+  t.throws(map(true), err, 'throws with true')
+  t.throws(map([]), err, 'throws with an array')
+  t.throws(map({}), err, 'throws with an object')
+
+  t.doesNotThrow(map(unit), 'allows functions')
+
+  t.end()
+})
+
+test('IO map fantasy-land errors', t => {
+  const map = bindFunc(IO(unit)[fl.map])
+
+  const err = /IO.fantasy-land\/map: Function required/
+  t.throws(map(undefined), err, 'throws with undefined')
+  t.throws(map(null), err, 'throws with null')
+  t.throws(map(0), err, 'throws with falsey number')
+  t.throws(map(1), err, 'throws with truthy number')
+  t.throws(map(''), err, 'throws with falsey string')
+  t.throws(map('string'), err, 'throws with truthy string')
+  t.throws(map(false), err, 'throws with false')
+  t.throws(map(true), err, 'throws with true')
+  t.throws(map([]), err, 'throws with an array')
+  t.throws(map({}), err, 'throws with an object')
+
   t.doesNotThrow(map(unit), 'allows functions')
 
   t.end()
@@ -166,18 +190,38 @@ test('IO map properties (Functor)', t => {
 test('IO ap errors', t => {
   const m = { type: () => 'IO...Not' }
 
-  t.throws(IO(unit).ap.bind(null, undefined), TypeError, 'throws when passed undefined')
-  t.throws(IO(unit).ap.bind(null, null), TypeError, 'throws when passed null')
-  t.throws(IO(unit).ap.bind(null, 0), TypeError, 'throws when passed a falsey number')
-  t.throws(IO(unit).ap.bind(null, 1), TypeError, 'throws when passed a truthy number')
-  t.throws(IO(unit).ap.bind(null, ''), TypeError, 'throws when passed a falsey string')
-  t.throws(IO(unit).ap.bind(null, 'string'), TypeError, 'throws when passed a truthy string')
-  t.throws(IO(unit).ap.bind(null, false), TypeError, 'throws when passed false')
-  t.throws(IO(unit).ap.bind(null, true), TypeError, 'throws when passed true')
-  t.throws(IO(unit).ap.bind(null, []), TypeError, 'throws when passed an array')
-  t.throws(IO(unit).ap.bind(null, {}), TypeError, 'throws when passed an object')
+  const ap =
+    bindFunc(x => IO(unit).ap(x))
 
-  t.throws(IO(unit).ap.bind(null, m), TypeError, 'throws when container types differ')
+  const err = /IO.ap: IO required/
+  t.throws(ap(undefined), err, 'throws when passed undefined')
+  t.throws(ap(null), err, 'throws when passed null')
+  t.throws(ap(0), err, 'throws when passed a falsey number')
+  t.throws(ap(1), err, 'throws when passed a truthy number')
+  t.throws(ap(''), err, 'throws when passed a falsey string')
+  t.throws(ap('string'), err, 'throws when passed a truthy string')
+  t.throws(ap(false), err, 'throws when passed false')
+  t.throws(ap(true), err, 'throws when passed true')
+  t.throws(ap([]), err, 'throws when passed an array')
+  t.throws(ap({}), err, 'throws when passed an object')
+  t.throws(ap(identity), err, 'throws when passed a function')
+  t.throws(ap(m), err, 'throws when container types differ')
+
+  const wrap =
+    bindFunc(x => IO(constant(x)).ap(IO(identity)).run())
+
+  const noFunc = /IO.ap: Wrapped value must be a function/
+  t.throws(wrap(undefined), noFunc, 'throws when wrapping undefined')
+  t.throws(wrap(null), noFunc, 'throws when wrapping null')
+  t.throws(wrap(0), noFunc, 'throws when wrapping a falsey number')
+  t.throws(wrap(1), noFunc, 'throws when wrapping a truthy number')
+  t.throws(wrap(''), noFunc, 'throws when wrapping a falsey string')
+  t.throws(wrap('string'), noFunc, 'throws when wrapping a truthy string')
+  t.throws(wrap(false), noFunc, 'throws when wrapping false')
+  t.throws(wrap(true), noFunc, 'throws when wrapping true')
+  t.throws(wrap([]), noFunc, 'throws when wrapping an array')
+  t.throws(wrap({}), noFunc, 'throws when wrapping an object')
+  t.throws(wrap(m), noFunc, 'throws when container types differ')
 
   t.end()
 })
@@ -224,31 +268,67 @@ test('IO of properties (Applicative)', t => {
 test('IO chain errors', t => {
   const chain = bindFunc(IO(unit).chain)
 
-  t.throws(chain(undefined), TypeError, 'throws with undefined')
-  t.throws(chain(null), TypeError, 'throws null')
-  t.throws(chain(0), TypeError, 'throws with falsey number')
-  t.throws(chain(1), TypeError, 'throws with truthy number')
-  t.throws(chain(''), TypeError, 'throws with falsey string')
-  t.throws(chain('string'), TypeError, 'throws with truthy string')
-  t.throws(chain(false), TypeError, 'throws with false')
-  t.throws(chain(true), TypeError, 'throws with true')
-  t.throws(chain([]), TypeError, 'throws with an array')
-  t.throws(chain({}), TypeError, 'throws with an object')
+  const err = /IO.chain: Function required/
+  t.throws(chain(undefined), err, 'throws with undefined')
+  t.throws(chain(null), err, 'throws null')
+  t.throws(chain(0), err, 'throws with falsey number')
+  t.throws(chain(1), err, 'throws with truthy number')
+  t.throws(chain(''), err, 'throws with falsey string')
+  t.throws(chain('string'), err, 'throws with truthy string')
+  t.throws(chain(false), err, 'throws with false')
+  t.throws(chain(true), err, 'throws with true')
+  t.throws(chain([]), err, 'throws with an array')
+  t.throws(chain({}), err, 'throws with an object')
 
   const badRtn =
     bindFunc(x => IO(identity).chain(constant(x)).run())
 
-  t.throws(badRtn(undefined), TypeError, 'throws when function returns undefined')
-  t.throws(badRtn(null), TypeError, 'throws when function returns null')
-  t.throws(badRtn(0), TypeError, 'throws when function returns a falsey number')
-  t.throws(badRtn(1), TypeError, 'throws when function returns a truthy number')
-  t.throws(badRtn(''), TypeError, 'throws when function returns a falsey string')
-  t.throws(badRtn('string'), TypeError, 'throws when function returns a truthy string')
-  t.throws(badRtn(false), TypeError, 'throws when function returns false')
-  t.throws(badRtn(true), TypeError, 'throws when function returns true')
-  t.throws(badRtn([]), TypeError, 'throws when function returns an array')
-  t.throws(badRtn({}), TypeError, 'throws when function returns an object')
-  t.throws(badRtn(unit), TypeError, 'throws when function returns a function')
+  const noFunc = /IO.chain: Function must return an IO/
+  t.throws(badRtn(undefined), noFunc, 'throws when function returns undefined')
+  t.throws(badRtn(null), noFunc, 'throws when function returns null')
+  t.throws(badRtn(0), noFunc, 'throws when function returns a falsey number')
+  t.throws(badRtn(1), noFunc, 'throws when function returns a truthy number')
+  t.throws(badRtn(''), noFunc, 'throws when function returns a falsey string')
+  t.throws(badRtn('string'), noFunc, 'throws when function returns a truthy string')
+  t.throws(badRtn(false), noFunc, 'throws when function returns false')
+  t.throws(badRtn(true), noFunc, 'throws when function returns true')
+  t.throws(badRtn([]), noFunc, 'throws when function returns an array')
+  t.throws(badRtn({}), noFunc, 'throws when function returns an object')
+  t.throws(badRtn(unit), noFunc, 'throws when function returns a function')
+
+  t.end()
+})
+
+test('IO chain fantasy-land errors', t => {
+  const chain = bindFunc(IO(unit)[fl.chain])
+
+  const err = /IO.fantasy-land\/chain: Function required/
+  t.throws(chain(undefined), err, 'throws with undefined')
+  t.throws(chain(null), err, 'throws null')
+  t.throws(chain(0), err, 'throws with falsey number')
+  t.throws(chain(1), err, 'throws with truthy number')
+  t.throws(chain(''), err, 'throws with falsey string')
+  t.throws(chain('string'), err, 'throws with truthy string')
+  t.throws(chain(false), err, 'throws with false')
+  t.throws(chain(true), err, 'throws with true')
+  t.throws(chain([]), err, 'throws with an array')
+  t.throws(chain({}), err, 'throws with an object')
+
+  const badRtn =
+    bindFunc(x => IO(identity)[fl.chain](constant(x)).run())
+
+  const noIO = /IO.fantasy-land\/chain: Function must return an IO/
+  t.throws(badRtn(undefined), noIO, 'throws when function returns undefined')
+  t.throws(badRtn(null), noIO, 'throws when function returns null')
+  t.throws(badRtn(0), noIO, 'throws when function returns a falsey number')
+  t.throws(badRtn(1), noIO, 'throws when function returns a truthy number')
+  t.throws(badRtn(''), noIO, 'throws when function returns a falsey string')
+  t.throws(badRtn('string'), noIO, 'throws when function returns a truthy string')
+  t.throws(badRtn(false), noIO, 'throws when function returns false')
+  t.throws(badRtn(true), noIO, 'throws when function returns true')
+  t.throws(badRtn([]), noIO, 'throws when function returns an array')
+  t.throws(badRtn({}), noIO, 'throws when function returns an object')
+  t.throws(badRtn(unit), noIO, 'throws when function returns a function')
 
   t.end()
 })

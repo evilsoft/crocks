@@ -10,6 +10,8 @@ const isString = require('../core/isString')
 const isObject = require('../core/isObject')
 const unit = require('../core/_unit')
 
+const fl = require('../core/flNames')
+
 const Pair = require('../core/Pair')
 
 const constant = x => () => x
@@ -53,13 +55,13 @@ test('Arrow', t => {
 test('Arrow fantasy-land api', t => {
   const m = Arrow(identity)
 
-  t.equals(Arrow['fantasy-land/id'], Arrow.id, 'is same function as public constructor id')
+  t.ok(isFunction(Arrow[fl.id]), 'provides id function on constructor')
 
-  t.equals(m['fantasy-land/id'], m.id, 'is same function as public instance id')
-  t.equals(m['fantasy-land/compose'], m.compose, 'is same function as public instance compose')
-  t.equals(m['fantasy-land/contramap'], m.contramap, 'is same function as public instance contramap')
-  t.equals(m['fantasy-land/map'], m.map, 'is same function as public instance map')
-  t.equals(m['fantasy-land/promap'], m.promap, 'is same function as public instance promap')
+  t.ok(isFunction(m[fl.id]), 'provides id method on instance')
+  t.ok(isFunction(m[fl.compose]), 'provides compose method on instance')
+  t.ok(isFunction(m[fl.map]), 'provides map method on instance')
+  t.ok(isFunction(m[fl.contramap]), 'provides contramap method on instance')
+  t.ok(isFunction(m[fl.promap]), 'provides promap method on instance')
 
   t.end()
 })
@@ -100,7 +102,7 @@ test('Arrow @@type', t => {
   const a = Arrow(unit)
 
   t.equal(a['@@type'], Arrow['@@type'], 'static and instance versions are the same')
-  t.equal(a['@@type'], 'crocks/Arrow@1', 'reports crocks/Arrow@1')
+  t.equal(a['@@type'], 'crocks/Arrow@2', 'reports crocks/Arrow@2')
 
   t.end()
 })
@@ -147,6 +149,28 @@ test('Arrow compose functionality', t => {
   t.throws(cat(notArrow), err, 'throws with non-Arrow')
 
   t.same(a.compose(b).runWith(x), result, 'builds composition as expected')
+
+  t.end()
+})
+
+test('Arrow compose fantasy-land errors', t => {
+  const a = Arrow(unit)
+  const notArrow = { type: constant('Arrow...Not') }
+
+  const cat = bindFunc(a[fl.compose])
+
+  const err = /Arrow.fantasy-land\/compose: Arrow required/
+  t.throws(cat(undefined), err, 'throws with undefined')
+  t.throws(cat(null), err, 'throws with null')
+  t.throws(cat(0), err, 'throws with falsey number')
+  t.throws(cat(1), err, 'throws with truthy number')
+  t.throws(cat(''), err, 'throws with falsey string')
+  t.throws(cat('string'), err, 'throws with truthy string')
+  t.throws(cat(false), err, 'throws with false')
+  t.throws(cat(true), err, 'throws with true')
+  t.throws(cat([]), err, 'throws with an array')
+  t.throws(cat({}), err, 'throws with an object')
+  t.throws(cat(notArrow), err, 'throws with non-Arrow')
 
   t.end()
 })
@@ -199,6 +223,26 @@ test('Arrow map errors', t => {
   const map = bindFunc(Arrow(unit).map)
 
   const err = /Arrow.map: Function required/
+  t.throws(map(undefined), err, 'throws with undefined')
+  t.throws(map(null), err, 'throws with null')
+  t.throws(map(0), err, 'throws with falsey number')
+  t.throws(map(1), err, 'throws with truthy number')
+  t.throws(map(''), err, 'throws with falsey string')
+  t.throws(map('string'), err, 'throws with truthy string')
+  t.throws(map(false), err, 'throws with false')
+  t.throws(map(true), err, 'throws with true')
+  t.throws(map([]), err, 'throws with an array')
+  t.throws(map({}), err, 'throws with an object')
+
+  t.doesNotThrow(map(unit), 'allows functions')
+
+  t.end()
+})
+
+test('Arrow map fantasy-land errors', t => {
+  const map = bindFunc(Arrow(unit)[fl.map])
+
+  const err = /Arrow.fantasy-land\/map: Function required/
   t.throws(map(undefined), err, 'throws with undefined')
   t.throws(map(null), err, 'throws with null')
   t.throws(map(0), err, 'throws with falsey number')
@@ -268,6 +312,26 @@ test('Arrow contramap errors', t => {
   t.end()
 })
 
+test('Arrow contramap fantasy-land errors', t => {
+  const cmap = bindFunc(Arrow(unit)[fl.contramap])
+
+  const err = /Arrow.fantasy-land\/contramap: Function required/
+  t.throws(cmap(undefined), err, 'throws with undefined')
+  t.throws(cmap(null), err, 'throws with null')
+  t.throws(cmap(0), err, 'throws with falsey number')
+  t.throws(cmap(1), err, 'throws with truthy number')
+  t.throws(cmap(''), err, 'throws with falsey string')
+  t.throws(cmap('string'), err, 'throws with truthy string')
+  t.throws(cmap(false), err, 'throws with false')
+  t.throws(cmap(true), err, 'throws with true')
+  t.throws(cmap([]), err, 'throws with an array')
+  t.throws(cmap({}), err, 'throws with an object')
+
+  t.doesNotThrow(cmap(unit), 'allows functions')
+
+  t.end()
+})
+
 test('Arrow contramap functionality', t => {
   const spy = sinon.spy(identity)
   const x = 7
@@ -305,6 +369,37 @@ test('Arrow promap errors', t => {
   const promap = bindFunc(Arrow(unit).promap)
 
   const err = /Arrow.promap: Functions required for both arguments/
+  t.throws(promap(undefined, unit), err, 'throws with undefined as first argument')
+  t.throws(promap(null, unit), err, 'throws with null as first argument')
+  t.throws(promap(0, unit), err, 'throws with falsey number as first argument')
+  t.throws(promap(1, unit), err, 'throws with truthy number as first argument')
+  t.throws(promap('', unit), err, 'throws with falsey string as first argument')
+  t.throws(promap('string', unit), err, 'throws with truthy string as first argument')
+  t.throws(promap(false, unit), err, 'throws with false as first argument')
+  t.throws(promap(true, unit), err, 'throws with true as first argument')
+  t.throws(promap([], unit), err, 'throws with an array as first argument')
+  t.throws(promap({}, unit), err, 'throws with an object as first argument')
+
+  t.throws(promap(unit, undefined), err, 'throws with undefined as second argument')
+  t.throws(promap(unit, null), err, 'throws with null as second argument')
+  t.throws(promap(unit, 0), err, 'throws with falsey number as second argument')
+  t.throws(promap(unit, 1), err, 'throws with truthy number as second argument')
+  t.throws(promap(unit, ''), err, 'throws with falsey string as second argument')
+  t.throws(promap(unit, 'string'), err, 'throws with truthy string as second argument')
+  t.throws(promap(unit, false), err, 'throws with false as second argument')
+  t.throws(promap(unit, true), err, 'throws with true as second argument')
+  t.throws(promap(unit, []), err, 'throws with an array as second argument')
+  t.throws(promap(unit, {}), err, 'throws with an object as second argument')
+
+  t.doesNotThrow(promap(unit, unit), 'allows functions')
+
+  t.end()
+})
+
+test('Arrow promap fantasy-land errors', t => {
+  const promap = bindFunc(Arrow(unit)[fl.promap])
+
+  const err = /Arrow.fantasy-land\/promap: Functions required for both arguments/
   t.throws(promap(undefined, unit), err, 'throws with undefined as first argument')
   t.throws(promap(null, unit), err, 'throws with null as first argument')
   t.throws(promap(0, unit), err, 'throws with falsey number as first argument')

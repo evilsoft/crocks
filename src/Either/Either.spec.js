@@ -14,6 +14,8 @@ const isString = require('../core/isString')
 const isSameType = require('../core/isSameType')
 const unit = require('../core/_unit')
 
+const fl = require('../core/flNames')
+
 const either =
   (f, g) => m => m.either(f, g)
 
@@ -50,23 +52,23 @@ test('Either fantasy-land api', t => {
   const l = Either.Left('')
   const r = Either.Right('')
 
-  t.equals(Either['fantasy-land/of'], Either.of, 'is same function as public constructor of')
+  t.ok(isFunction(Either[fl.of]), 'provides of function on constructor')
 
-  t.equals(l['fantasy-land/of'], l.of, 'is same function as public left instance of')
-  t.equals(l['fantasy-land/equals'], l.equals, 'is same function as public left instance equals')
-  t.equals(l['fantasy-land/alt'], l.alt, 'is same function as public left instance alt')
-  t.equals(l['fantasy-land/bimap'], l.bimap, 'is same function as public left instance bimap')
-  t.equals(l['fantasy-land/concat'], l.concat, 'is same function as public left instance concat')
-  t.equals(l['fantasy-land/map'], l.map, 'is same function as public left instance map')
-  t.equals(l['fantasy-land/chain'], l.chain, 'is same function as public left instance chain')
+  t.ok(isFunction(l[fl.of]), 'provides of method on left instance')
+  t.ok(isFunction(l[fl.equals]), 'provides equals method on left instance')
+  t.ok(isFunction(l[fl.alt]), 'provides alt method on left instance')
+  t.ok(isFunction(l[fl.bimap]), 'provides bimap method on left instance')
+  t.ok(isFunction(l[fl.chain]), 'provides chain method on left instance')
+  t.ok(isFunction(l[fl.concat]), 'provides concat method on left instance')
+  t.ok(isFunction(l[fl.map]), 'provides map method on left instance')
 
-  t.equals(r['fantasy-land/of'], r.of, 'is same function as public right instance of')
-  t.equals(r['fantasy-land/equals'], r.equals, 'is same function as public right instance equals')
-  t.equals(r['fantasy-land/alt'], r.alt, 'is same function as public right instance alt')
-  t.equals(r['fantasy-land/bimap'], r.bimap, 'is same function as public right instance bimap')
-  t.equals(r['fantasy-land/concat'], r.concat, 'is same function as public right instance concat')
-  t.equals(r['fantasy-land/map'], r.map, 'is same function as public right instance map')
-  t.equals(r['fantasy-land/chain'], r.chain, 'is same function as public right instance chain')
+  t.ok(isFunction(r[fl.of]), 'provides of method on right instance')
+  t.ok(isFunction(r[fl.equals]), 'provides equals method on right instance')
+  t.ok(isFunction(r[fl.alt]), 'provides alt method on right instance')
+  t.ok(isFunction(r[fl.bimap]), 'provides bimap method on right instance')
+  t.ok(isFunction(r[fl.chain]), 'provides chain method on right instance')
+  t.ok(isFunction(r[fl.concat]), 'provides concat method on right instance')
+  t.ok(isFunction(r[fl.map]), 'provides map method on right instance')
 
   t.end()
 })
@@ -140,8 +142,8 @@ test('Either @@type', t => {
   t.equal(Right(0)['@@type'], Either['@@type'], 'static and instance versions are the same for Right')
   t.equal(Left(0)['@@type'], Either['@@type'], 'static and instance versions are the same for Left')
 
-  t.equal(Right(0)['@@type'], 'crocks/Either@2', 'returns crocks/Either@2 for Right')
-  t.equal(Left(0)['@@type'], 'crocks/Either@2', 'returns crocks/Either@2 for Left')
+  t.equal(Right(0)['@@type'], 'crocks/Either@3', 'returns crocks/Either@3 for Right')
+  t.equal(Left(0)['@@type'], 'crocks/Either@3', 'returns crocks/Either@3 for Left')
 
   t.end()
 })
@@ -318,6 +320,71 @@ test('Either concat errors', t => {
   t.end()
 })
 
+test('Either concat fantasy-land errors', t => {
+  const m = { type: () => 'Either...Not' }
+
+  const good = Either.Right([])
+
+  const f = bindFunc(Either.Right([])[fl.concat])
+
+  const nonEitherErr = /Either.fantasy-land\/concat: Either of Semigroup required/
+  t.throws(f(undefined), nonEitherErr, 'throws with undefined on Right')
+  t.throws(f(null), nonEitherErr, 'throws with null on Right')
+  t.throws(f(0), nonEitherErr, 'throws with falsey number on Right')
+  t.throws(f(1), nonEitherErr, 'throws with truthy number on Right')
+  t.throws(f(''), nonEitherErr, 'throws with falsey string on Right')
+  t.throws(f('string'), nonEitherErr, 'throws with truthy string on Right')
+  t.throws(f(false), nonEitherErr, 'throws with false on Right')
+  t.throws(f(true), nonEitherErr, 'throws with true on Right')
+  t.throws(f([]), nonEitherErr, 'throws with array on Right')
+  t.throws(f({}), nonEitherErr, 'throws with object on Right')
+  t.throws(f(m), nonEitherErr, 'throws with non-Either on Right')
+
+  const g = bindFunc(Either.Left(0)[fl.concat])
+
+  t.throws(g(undefined), nonEitherErr, 'throws with undefined on Left')
+  t.throws(g(null), nonEitherErr, 'throws with null on Left')
+  t.throws(g(0), nonEitherErr, 'throws with falsey number on Left')
+  t.throws(g(1), nonEitherErr, 'throws with truthy number on Left')
+  t.throws(g(''), nonEitherErr, 'throws with falsey string on Left')
+  t.throws(g('string'), nonEitherErr, 'throws with truthy string on Left')
+  t.throws(g(false), nonEitherErr, 'throws with false on Left')
+  t.throws(g(true), nonEitherErr, 'throws with true on Left')
+  t.throws(g([]), nonEitherErr, 'throws with array on Left')
+  t.throws(g({}), nonEitherErr, 'throws with object on Left')
+  t.throws(g(m), nonEitherErr, 'throws with non-Either on Left')
+
+  const innerErr = /Either.fantasy-land\/concat: Both containers must contain Semigroups of the same type/
+  const notSemiLeft = bindFunc(x => Either.Right(x)[fl.concat](good))
+
+  t.throws(notSemiLeft(undefined), innerErr, 'throws with undefined on left')
+  t.throws(notSemiLeft(null), innerErr, 'throws with null on left')
+  t.throws(notSemiLeft(0), innerErr, 'throws with falsey number on left')
+  t.throws(notSemiLeft(1), innerErr, 'throws with truthy number on left')
+  t.throws(notSemiLeft(''), innerErr, 'throws with falsey string on left')
+  t.throws(notSemiLeft('string'), innerErr, 'throws with truthy string on left')
+  t.throws(notSemiLeft(false), innerErr, 'throws with false on left')
+  t.throws(notSemiLeft(true), innerErr, 'throws with true on left')
+  t.throws(notSemiLeft({}), innerErr, 'throws with object on left')
+
+  const notSemiRight = bindFunc(x => good[fl.concat](Either.Right(x)))
+
+  t.throws(notSemiRight(undefined), innerErr, 'throws with undefined on right')
+  t.throws(notSemiRight(null), innerErr, 'throws with null on right')
+  t.throws(notSemiRight(0), innerErr, 'throws with falsey number on right')
+  t.throws(notSemiRight(1), innerErr, 'throws with truthy number on right')
+  t.throws(notSemiRight(''), innerErr, 'throws with falsey string on right')
+  t.throws(notSemiRight('string'), innerErr, 'throws with truthy string on right')
+  t.throws(notSemiRight(false), innerErr, 'throws with false on right')
+  t.throws(notSemiRight(true), innerErr, 'throws with true on right')
+  t.throws(notSemiRight({}), innerErr, 'throws with object on right')
+
+  const noMatch = bindFunc(() => good[fl.concat](Either.Right('')))
+  t.throws(noMatch({}), innerErr, 'throws with different semigroups')
+
+  t.end()
+})
+
 test('Either concat functionality', t => {
   const extract =
     either(identity, identity)
@@ -446,6 +513,40 @@ test('Either map errors', t => {
   t.end()
 })
 
+test('Either map fantasy-land errors', t => {
+  const rmap = bindFunc(Either.Right(0)[fl.map])
+  const lmap = bindFunc(Either.Left(0)[fl.map])
+
+  const err = /Either.fantasy-land\/map: Function required/
+  t.throws(rmap(undefined), err, 'right map throws with undefined')
+  t.throws(rmap(null), err, 'right map throws with null')
+  t.throws(rmap(0), err, 'right map throws with falsey number')
+  t.throws(rmap(1), err, 'right map throws with truthy number')
+  t.throws(rmap(''), err, 'right map throws with falsey string')
+  t.throws(rmap('string'), err, 'right map throws with truthy string')
+  t.throws(rmap(false), err, 'right map throws with false')
+  t.throws(rmap(true), err, 'right map throws with true')
+  t.throws(rmap([]), err, 'right map throws with an array')
+  t.throws(rmap({}), err, 'right map throws iwth object')
+
+  t.doesNotThrow(rmap(unit), 'right map does not throw when passed a function')
+
+  t.throws(lmap(undefined), err, 'left map throws with undefined')
+  t.throws(lmap(null), err, 'left map throws with null')
+  t.throws(lmap(0), err, 'left map throws with falsey number')
+  t.throws(lmap(1), err, 'left map throws with truthy number')
+  t.throws(lmap(''), err, 'left map throws with falsey string')
+  t.throws(lmap('string'), err, 'left map throws with truthy string')
+  t.throws(lmap(false), err, 'left map throws with false')
+  t.throws(lmap(true), err, 'left map throws with true')
+  t.throws(lmap([]), err, 'left map throws with an array')
+  t.throws(lmap({}), err, 'left map throws iwth object')
+
+  t.doesNotThrow(lmap(unit), 'left map does not throw when passed a function')
+
+  t.end()
+})
+
 test('Either map functionality', t => {
   const lspy = sinon.spy(identity)
   const rspy = sinon.spy(identity)
@@ -523,6 +624,37 @@ test('Either bimap errors', t => {
   t.end()
 })
 
+test('Either bimap fantasy-land errors', t => {
+  const bimap = bindFunc(Either.Right('popcorn')[fl.bimap])
+
+  const err = /Either.fantasy-land\/bimap: Requires both left and right functions/
+  t.throws(bimap(undefined, unit), err, 'throws with undefined in first argument')
+  t.throws(bimap(null, unit), err, 'throws with null in first argument')
+  t.throws(bimap(0, unit), err, 'throws with falsey number in first argument')
+  t.throws(bimap(1, unit), err, 'throws with truthy number in first argument')
+  t.throws(bimap('', unit), err, 'throws with falsey string in first argument')
+  t.throws(bimap('string', unit), err, 'throws with truthy string in first argument')
+  t.throws(bimap(false, unit), err, 'throws with false in first argument')
+  t.throws(bimap(true, unit), err, 'throws with true in first argument')
+  t.throws(bimap([], unit), err, 'throws with an array in first argument')
+  t.throws(bimap({}, unit), err, 'throws with object in first argument')
+
+  t.throws(bimap(unit, undefined), err, 'throws with undefined in second argument')
+  t.throws(bimap(unit, null), err, 'throws with null in second argument')
+  t.throws(bimap(unit, 0), err, 'throws with falsey number in second argument')
+  t.throws(bimap(unit, 1), err, 'throws with truthy number in second argument')
+  t.throws(bimap(unit, ''), err, 'throws with falsey string in second argument')
+  t.throws(bimap(unit, 'string'), err, 'throws with truthy string in second argument')
+  t.throws(bimap(unit, false), err, 'throws with false in second argument')
+  t.throws(bimap(unit, true), err, 'throws with true in second argument')
+  t.throws(bimap(unit, []), err, 'throws with an array in second argument')
+  t.throws(bimap(unit, {}), err, 'throws with object in second argument')
+
+  t.doesNotThrow(bimap(unit, unit), 'allows functions')
+
+  t.end()
+})
+
 test('Either bimap properties (Bifunctor)', t => {
   const f = x => x + 2
   const g = x => x * 2
@@ -568,6 +700,41 @@ test('Either alt errors', t => {
   t.throws(altRight(m), err, 'throws when container types differ on Right')
 
   const altLeft = bindFunc(Either.Left(0).alt)
+
+  t.throws(altLeft(undefined), err, 'throws when passed an undefined with Left')
+  t.throws(altLeft(null), err, 'throws when passed a null with Left')
+  t.throws(altLeft(0), err, 'throws when passed a falsey number with Left')
+  t.throws(altLeft(1), err, 'throws when passed a truthy number with Left')
+  t.throws(altLeft(''), err, 'throws when passed a falsey string with Left')
+  t.throws(altLeft('string'), err, 'throws when passed a truthy string with Left')
+  t.throws(altLeft(false), err, 'throws when passed false with Left')
+  t.throws(altLeft(true), err, 'throws when passed true with Left')
+  t.throws(altLeft([]), err, 'throws when passed an array with Left')
+  t.throws(altLeft({}), err, 'throws when passed an object with Left')
+  t.throws(altLeft(m), err, 'throws when container types differ on Left')
+
+  t.end()
+})
+
+test('Either alt fantasy-land errors', t => {
+  const m = { type: () => 'Either...Not' }
+
+  const altRight = bindFunc(Either.of(0)[fl.alt])
+
+  const err = /Either.fantasy-land\/alt: Either required/
+  t.throws(altRight(undefined), err, 'throws when passed an undefined with Right')
+  t.throws(altRight(null), err, 'throws when passed a null with Right')
+  t.throws(altRight(0), err, 'throws when passed a falsey number with Right')
+  t.throws(altRight(1), err, 'throws when passed a truthy number with Right')
+  t.throws(altRight(''), err, 'throws when passed a falsey string with Right')
+  t.throws(altRight('string'), err, 'throws when passed a truthy string with Right')
+  t.throws(altRight(false), err, 'throws when passed false with Right')
+  t.throws(altRight(true), err, 'throws when passed true with Right')
+  t.throws(altRight([]), err, 'throws when passed an array with Right')
+  t.throws(altRight({}), err, 'throws when passed an object with Right')
+  t.throws(altRight(m), err, 'throws when container types differ on Right')
+
+  const altLeft = bindFunc(Either.Left(0)[fl.alt])
 
   t.throws(altLeft(undefined), err, 'throws when passed an undefined with Left')
   t.throws(altLeft(null), err, 'throws when passed a null with Left')
@@ -744,6 +911,43 @@ test('Either chain errors', t => {
   t.doesNotThrow(lchain(unit), 'Left allows any function')
 
   const noEither = /Either.chain: Function must return an Either/
+  t.throws(rchain(unit), noEither, 'Right throws with a non Either returning function')
+
+  t.end()
+})
+
+test('Either chain fantasy-land errors', t => {
+  const rchain = bindFunc(Either.Right(0)[fl.chain])
+  const lchain = bindFunc(Either.Left(0)[fl.chain])
+
+  const noFunc = /Either.fantasy-land\/chain: Function required/
+  t.throws(rchain(undefined), noFunc, 'Right throws with undefined')
+  t.throws(rchain(null), noFunc, 'Right throws with null')
+  t.throws(rchain(0), noFunc, 'Right throws falsey with number')
+  t.throws(rchain(1), noFunc, 'Right throws truthy with number')
+  t.throws(rchain(''), noFunc, 'Right throws falsey with string')
+  t.throws(rchain('string'), noFunc, 'Right throws with truthy string')
+  t.throws(rchain(false), noFunc, 'Right throws with false')
+  t.throws(rchain(true), noFunc, 'Right throws with true')
+  t.throws(rchain([]), noFunc, 'Right throws with an array')
+  t.throws(rchain({}), noFunc, 'Right throws with an object')
+
+  t.doesNotThrow(rchain(Either.of), 'Right allows a function')
+
+  t.throws(lchain(undefined), noFunc, 'Left throws with undefined')
+  t.throws(lchain(null), noFunc, 'Left throws with null')
+  t.throws(lchain(0), noFunc, 'Left throws with falsey number')
+  t.throws(lchain(1), noFunc, 'Left throws with truthy number')
+  t.throws(lchain(''), noFunc, 'Left throws with falsey string')
+  t.throws(lchain('string'), noFunc, 'Left throws with truthy string')
+  t.throws(lchain(false), noFunc, 'Left throws with false')
+  t.throws(lchain(true), noFunc, 'Left throws with true')
+  t.throws(lchain([]), noFunc, 'Left throws with an array')
+  t.throws(lchain({}), noFunc, 'Left throws with an object')
+
+  t.doesNotThrow(lchain(unit), 'Left allows any function')
+
+  const noEither = /Either.fantasy-land\/chain: Function must return an Either/
   t.throws(rchain(unit), noEither, 'Right throws with a non Either returning function')
 
   t.end()

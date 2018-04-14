@@ -12,6 +12,8 @@ const isSameType = require('../core/isSameType')
 const isString = require('../core/isString')
 const unit = require('../core/_unit')
 
+const fl = require('../core/flNames')
+
 const Pair = require('../core/Pair')
 
 const constant = x => () => x
@@ -83,13 +85,13 @@ test('Star construction', t => {
 test('Star fantasy-land api', t => {
   const m = Star(identity)
 
-  t.equals(Star['fantasy-land/id'], Star.id, 'is same function as public constructor id')
+  t.ok(isFunction(Star[fl.id]), 'provides id function on constructor')
 
-  t.equals(m['fantasy-land/id'], m.id, 'is same function as public instance id')
-  t.equals(m['fantasy-land/compose'], m.compose, 'is same function as public instance compose')
-  t.equals(m['fantasy-land/contramap'], m.contramap, 'is same function as public instance contramap')
-  t.equals(m['fantasy-land/map'], m.map, 'is same function as public instance map')
-  t.equals(m['fantasy-land/promap'], m.promap, 'is same function as public instance promap')
+  t.ok(isFunction(m[fl.id]), 'provides id method on instance')
+  t.ok(isFunction(m[fl.compose]), 'provides compose method on instance')
+  t.ok(isFunction(m[fl.contramap]), 'provides contramap method on instance')
+  t.ok(isFunction(m[fl.map]), 'provides map method on instance')
+  t.ok(isFunction(m[fl.promap]), 'provides promap method on instance')
 
   t.end()
 })
@@ -130,7 +132,7 @@ test('Star @@type', t => {
   const m = Star(unit)
 
   t.equal(m['@@type'], Star['@@type'], 'static and instance versions are the same')
-  t.equal(m['@@type'], 'crocks/Star@1( crocks/MockCrock@1 )', 'reports crocks/Star@1 with embeded type')
+  t.equal(m['@@type'], 'crocks/Star@2( crocks/MockCrock@1 )', 'reports crocks/Star@2 with embeded type')
 
   t.end()
 })
@@ -149,7 +151,7 @@ test('Star runWith', t => {
   t.end()
 })
 
-test('Star compose functionality', t => {
+test('Star compose errors', t => {
   const f = x => MockCrock(x + 1)
 
   const a = Star(f)
@@ -200,6 +202,68 @@ test('Star compose functionality', t => {
   t.throws(noMonadSnd({}), noSnd, 'throws when second computation returns false')
   t.throws(noMonadSnd([]), noSnd, 'throws when second computation returns true')
   t.throws(noMonadSnd(notMock), noSnd, 'throws when second computation returns non-MockCrock')
+
+  t.end()
+})
+
+test('Star compose fantasy-land errors', t => {
+  const f = x => MockCrock(x + 1)
+
+  const a = Star(f)
+
+  const notStar = { type: constant('Star...Not') }
+  const notMock  = { type: constant('Mock...Not') }
+
+  const cat = bindFunc(a[fl.compose])
+
+  const noStar = /Star\( MockCrock \).fantasy-land\/compose: Star\( MockCrock \) required/
+  t.throws(cat(undefined), noStar, 'throws with undefined')
+  t.throws(cat(null), noStar, 'throws with null')
+  t.throws(cat(0), noStar, 'throws with falsey number')
+  t.throws(cat(1), noStar, 'throws with truthy number')
+  t.throws(cat(''), noStar, 'throws with falsey string')
+  t.throws(cat('string'), noStar, 'throws with truthy string')
+  t.throws(cat(false), noStar, 'throws with false')
+  t.throws(cat(true), noStar, 'throws with true')
+  t.throws(cat([]), noStar, 'throws with an array')
+  t.throws(cat({}), noStar, 'throws with an object')
+  t.throws(cat(notStar), noStar, 'throws with non-Star')
+
+  const noMonadFst = bindFunc(Star(identity)[fl.compose](a).runWith)
+
+  const noFst = /Star\( MockCrock \).fantasy-land\/compose: Computations must return a type of MockCrock/
+  t.throws(noMonadFst(undefined), noFst, 'throws when first computation returns undefined')
+  t.throws(noMonadFst(null), noFst, 'throws when first computation returns null')
+  t.throws(noMonadFst(0), noFst, 'throws when first computation returns falsey number')
+  t.throws(noMonadFst(1), noFst, 'throws when first computation returns truthy number')
+  t.throws(noMonadFst(''), noFst, 'throws when first computation returns falsey string')
+  t.throws(noMonadFst('string'), noFst, 'throws when first computation returns truthy string')
+  t.throws(noMonadFst(false), noFst, 'throws when first computation returns false')
+  t.throws(noMonadFst(true), noFst, 'throws when first computation returns true')
+  t.throws(noMonadFst({}), noFst, 'throws when first computation returns false')
+  t.throws(noMonadFst([]), noFst, 'throws when first computation returns true')
+
+  const noMonadSnd = bindFunc(x => a[fl.compose](Star(constant(x))).runWith(10))
+
+  const noSnd = /Star\( MockCrock \).fantasy-land\/compose: Both computations must return a type of MockCrock/
+  t.throws(noMonadSnd(undefined), noSnd, 'throws when second computation returns undefined')
+  t.throws(noMonadSnd(null), noSnd, 'throws when second computation returns null')
+  t.throws(noMonadSnd(0), noSnd, 'throws when second computation returns falsey number')
+  t.throws(noMonadSnd(1), noSnd, 'throws when second computation returns truthy number')
+  t.throws(noMonadSnd(''), noSnd, 'throws when second computation returns falsey string')
+  t.throws(noMonadSnd('string'), noSnd, 'throws when second computation returns truthy string')
+  t.throws(noMonadSnd(false), noSnd, 'throws when second computation returns false')
+  t.throws(noMonadSnd(true), noSnd, 'throws when second computation returns true')
+  t.throws(noMonadSnd({}), noSnd, 'throws when second computation returns false')
+  t.throws(noMonadSnd([]), noSnd, 'throws when second computation returns true')
+  t.throws(noMonadSnd(notMock), noSnd, 'throws when second computation returns non-MockCrock')
+
+  t.end()
+})
+
+test('Star compose functionality', t => {
+  const f = x => MockCrock(x + 1)
+  const a = Star(f)
 
   const x = 13
   const g = x => MockCrock(x * 10)
@@ -284,6 +348,31 @@ test('Star map errors', t => {
   t.end()
 })
 
+test('Star map fantasy-land errors', t => {
+  const map = bindFunc(Star(unit)[fl.map])
+
+  const err = /Star\( MockCrock \).fantasy-land\/map: Function required/
+  t.throws(map(undefined), err, 'throws with undefined')
+  t.throws(map(null), err, 'throws with null')
+  t.throws(map(0), err, 'throws with falsey number')
+  t.throws(map(1), err, 'throws with truthy number')
+  t.throws(map(''), err, 'throws with falsey string')
+  t.throws(map('string'), err, 'throws with truthy string')
+  t.throws(map(false), err, 'throws with false')
+  t.throws(map(true), err, 'throws with true')
+  t.throws(map([]), err, 'throws with an array')
+  t.throws(map({}), err, 'throws with an object')
+
+  t.doesNotThrow(map(unit), 'allows functions')
+
+  const runWith = bindFunc(Star(identity)[fl.map](identity).runWith)
+
+  const noMonad = /Star\( MockCrock \).fantasy-land\/map: Computations must return a type of MockCrock/
+  t.throws(runWith('silly'), noMonad, 'throws when inner function does not return a Functor')
+
+  t.end()
+})
+
 test('Star map functionality', t => {
   const x = 42
   const spy = sinon.spy(identity)
@@ -326,6 +415,26 @@ test('Star contramap errors', t => {
   const cmap = bindFunc(Star(unit).contramap)
 
   const err = /Star\( MockCrock \).contramap: Function required/
+  t.throws(cmap(undefined), err, 'throws with undefined')
+  t.throws(cmap(null), err, 'throws with null')
+  t.throws(cmap(0), err, 'throws with falsey number')
+  t.throws(cmap(1), err, 'throws with truthy number')
+  t.throws(cmap(''), err, 'throws with falsey string')
+  t.throws(cmap('string'), err, 'throws with truthy string')
+  t.throws(cmap(false), err, 'throws with false')
+  t.throws(cmap(true), err, 'throws with true')
+  t.throws(cmap([]), err, 'throws with an array')
+  t.throws(cmap({}), err, 'throws with an object')
+
+  t.doesNotThrow(cmap(unit), 'allows functions')
+
+  t.end()
+})
+
+test('Star contramap fantasy-land errors', t => {
+  const cmap = bindFunc(Star(unit)[fl.contramap])
+
+  const err = /Star\( MockCrock \).fantasy-land\/contramap: Function required/
   t.throws(cmap(undefined), err, 'throws with undefined')
   t.throws(cmap(null), err, 'throws with null')
   t.throws(cmap(0), err, 'throws with falsey number')
@@ -410,6 +519,42 @@ test('Star promap errors', t => {
   const runWith = bindFunc(Star(identity).promap(identity, identity).runWith)
 
   const err = /Star\( MockCrock \).promap: Computation must return a type of MockCrock/
+  t.throws(runWith('silly'), err, 'throws when inner function does not return a Monad')
+
+  t.end()
+})
+
+test('Star promap fantasy-land errors', t => {
+  const promap = bindFunc(Star(MockCrock)[fl.promap])
+
+  const noFuncs = /Star\( MockCrock \).fantasy-land\/promap: Functions required for both arguments/
+  t.throws(promap(undefined, unit), noFuncs, 'throws with undefined as first argument')
+  t.throws(promap(null, unit), noFuncs, 'throws with null as first argument')
+  t.throws(promap(0, unit), noFuncs, 'throws with falsey number as first argument')
+  t.throws(promap(1, unit), noFuncs, 'throws with truthy number as first argument')
+  t.throws(promap('', unit), noFuncs, 'throws with falsey string as first argument')
+  t.throws(promap('string', unit), noFuncs, 'throws with truthy string as first argument')
+  t.throws(promap(false, unit), noFuncs, 'throws with false as first argument')
+  t.throws(promap(true, unit), noFuncs, 'throws with true as first argument')
+  t.throws(promap([], unit), noFuncs, 'throws with an array as first argument')
+  t.throws(promap({}, unit), noFuncs, 'throws with an object as first argument')
+
+  t.throws(promap(unit, undefined), noFuncs, 'throws with undefined as second argument')
+  t.throws(promap(unit, null), noFuncs, 'throws with null as second argument')
+  t.throws(promap(unit, 0), noFuncs, 'throws with falsey number as second argument')
+  t.throws(promap(unit, 1), noFuncs, 'throws with truthy number as second argument')
+  t.throws(promap(unit, ''), noFuncs, 'throws with falsey string as second argument')
+  t.throws(promap(unit, 'string'), noFuncs, 'throws with truthy string as second argument')
+  t.throws(promap(unit, false), noFuncs, 'throws with false as second argument')
+  t.throws(promap(unit, true), noFuncs, 'throws with true as second argument')
+  t.throws(promap(unit, []), noFuncs, 'throws with an array as second argument')
+  t.throws(promap(unit, {}), noFuncs, 'throws with an object as second argument')
+
+  t.doesNotThrow(promap(unit, unit), 'allows functions')
+
+  const runWith = bindFunc(Star(identity)[fl.promap](identity, identity).runWith)
+
+  const err = /Star\( MockCrock \).fantasy-land\/promap: Computation must return a type of MockCrock/
   t.throws(runWith('silly'), err, 'throws when inner function does not return a Monad')
 
   t.end()

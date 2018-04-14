@@ -8,6 +8,8 @@ const isFunction = require('../core/isFunction')
 const isObject = require('../core/isObject')
 const isString = require('../core/isString')
 
+const fl = require('../core/flNames')
+
 const constant = x => () => x
 const identity = x => x
 
@@ -46,11 +48,11 @@ test('Min', t => {
 test('Min fantasy-land api', t => {
   const m = Min(0)
 
-  t.equals(Min['fantasy-land/empty'], Min.empty, 'is same function as public constructor empty')
+  t.ok(isFunction(Min[fl.empty]), 'provides empty function on constructor')
 
-  t.equals(m['fantasy-land/empty'], m.empty, 'is same function as public instance empty')
-  t.equals(m['fantasy-land/concat'], m.concat, 'is same function as public instance concat')
-  t.equals(m['fantasy-land/equals'], m.equals, 'is same function as public instance equals')
+  t.ok(isFunction(m[fl.empty]), 'provides empty method on instance')
+  t.ok(isFunction(m[fl.equals]), 'provides equals method on instance')
+  t.ok(isFunction(m[fl.concat]), 'provides concat method on instance')
 
   t.end()
 })
@@ -139,29 +141,8 @@ test('Min equals functionality', t => {
   t.end()
 })
 
-test('Min concat properties (Semigroup)', t => {
-  const a = Min(45)
-  const b = Min(20)
-  const c = Min(35)
-
-  const left = a.concat(b).concat(c)
-  const right = a.concat(b.concat(c))
-
-  t.ok(isFunction(Min(0).concat), 'is a function')
-
-  t.equal(left.valueOf(), right.valueOf(), 'associativity')
-  t.equal(a.concat(b).type(), a.type(), 'returns Semigroup of the same type')
-
-  t.end()
-})
-
-test('Min concat functionality', t => {
-  const x = 5
-  const y = 23
-
-  const a = Min(x)
-  const b = Min(y)
-
+test('Min concat errors', t => {
+  const a = Min(5)
   const notMin = { type: constant('Min...Not') }
 
   const cat = bindFunc(a.concat)
@@ -179,7 +160,55 @@ test('Min concat functionality', t => {
   t.throws(cat({}), err, 'throws with an object')
   t.throws(cat(notMin), err, 'throws with non-Min')
 
+  t.end()
+})
+
+test('Min concat fantasy-land errors', t => {
+  const a = Min(5)
+  const notMin = { type: constant('Min...Not') }
+
+  const cat = bindFunc(a[fl.concat])
+
+  const err = /Min.fantasy-land\/concat: Min required/
+  t.throws(cat(undefined), err, 'throws with undefined')
+  t.throws(cat(null), err, 'throws with null')
+  t.throws(cat(0), err, 'throws with falsey number')
+  t.throws(cat(1), err, 'throws with truthy number')
+  t.throws(cat(''), err, 'throws with falsey string')
+  t.throws(cat('string'), err, 'throws with truthy string')
+  t.throws(cat(false), err, 'throws with false')
+  t.throws(cat(true), err, 'throws with true')
+  t.throws(cat([]), err, 'throws with an array')
+  t.throws(cat({}), err, 'throws with an object')
+  t.throws(cat(notMin), err, 'throws with non-Min')
+
+  t.end()
+})
+
+test('Min concat functionality', t => {
+  const x = 5
+  const y = 23
+
+  const a = Min(x)
+  const b = Min(y)
+
   t.equals(a.concat(b).valueOf(), x, 'provides min of wrapped values as expected')
+
+  t.end()
+})
+
+test('Min concat properties (Semigroup)', t => {
+  const a = Min(45)
+  const b = Min(20)
+  const c = Min(35)
+
+  const left = a.concat(b).concat(c)
+  const right = a.concat(b.concat(c))
+
+  t.ok(isFunction(Min(0).concat), 'is a function')
+
+  t.equal(left.valueOf(), right.valueOf(), 'associativity')
+  t.equal(a.concat(b).type(), a.type(), 'returns Semigroup of the same type')
 
   t.end()
 })

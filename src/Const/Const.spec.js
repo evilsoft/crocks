@@ -12,6 +12,8 @@ const isObject = require('../core/isObject')
 const isString = require('../core/isString')
 const unit = require('../core/_unit')
 
+const fl = require('../core/flNames')
+
 const Const = require('.')
 
 const identity = x => x
@@ -35,10 +37,10 @@ test('Const', t => {
 test('Const fantasy-land api', t => {
   const m = Const('always')
 
-  t.equals(m['fantasy-land/equals'], m.equals, 'is same function as public instance equals')
-  t.equals(m['fantasy-land/concat'], m.concat, 'is same function as public instance concat')
-  t.equals(m['fantasy-land/map'], m.map, 'is same function as public instance map')
-  t.equals(m['fantasy-land/chain'], m.chain, 'is same function as public instance chain')
+  t.ok(isFunction(m[fl.equals]), 'provides equals method on instance')
+  t.ok(isFunction(m[fl.concat]), 'provides concat method on instance')
+  t.ok(isFunction(m[fl.map]), 'provides map method on instance')
+  t.ok(isFunction(m[fl.chain]), 'provides chain method on instance')
 
   t.end()
 })
@@ -78,7 +80,7 @@ test('Const @@type', t => {
   const m = Const(0)
 
   t.equal(m['@@type'], Const['@@type'], 'static and instance versions are the same')
-  t.equal(m['@@type'], 'crocks/Const@1', 'type returns crocks/Const@1')
+  t.equal(m['@@type'], 'crocks/Const@2', 'type returns crocks/Const@2')
 
   t.end()
 })
@@ -147,17 +149,18 @@ test('Const concat functionality', t => {
 
   const cat = bindFunc(a.concat)
 
-  t.throws(cat(undefined), TypeError, 'throws with undefined')
-  t.throws(cat(null), TypeError, 'throws with null')
-  t.throws(cat(0), TypeError, 'throws with falsey number')
-  t.throws(cat(1), TypeError, 'throws with truthy number')
-  t.throws(cat(''), TypeError, 'throws with falsey string')
-  t.throws(cat('string'), TypeError, 'throws with truthy string')
-  t.throws(cat(false), TypeError, 'throws with false')
-  t.throws(cat(true), TypeError, 'throws with true')
-  t.throws(cat([]), TypeError, 'throws with an array')
-  t.throws(cat({}), TypeError, 'throws with an object')
-  t.throws(cat(notConst), TypeError, 'throws when passed non-Const')
+  const err = /Const.concat: Const required/
+  t.throws(cat(undefined), err, 'throws with undefined')
+  t.throws(cat(null), err, 'throws with null')
+  t.throws(cat(0), err, 'throws with falsey number')
+  t.throws(cat(1), err, 'throws with truthy number')
+  t.throws(cat(''), err, 'throws with falsey string')
+  t.throws(cat('string'), err, 'throws with truthy string')
+  t.throws(cat(false), err, 'throws with false')
+  t.throws(cat(true), err, 'throws with true')
+  t.throws(cat([]), err, 'throws with an array')
+  t.throws(cat({}), err, 'throws with an object')
+  t.throws(cat(notConst), err, 'throws when passed non-Const')
 
   t.equal(a.concat(b).valueOf(), 89, 'reports first Const - a')
   t.equal(b.concat(a).valueOf(), false, 'reports first Const - b')
@@ -165,19 +168,63 @@ test('Const concat functionality', t => {
   t.end()
 })
 
+test('Const concat fantasy-land errors', t => {
+  const a = Const(89)
+  const notConst = MockCrock()
+
+  const cat = bindFunc(a[fl.concat])
+
+  const err = /Const.fantasy-land\/concat: Const required/
+  t.throws(cat(undefined), err, 'throws with undefined')
+  t.throws(cat(null), err, 'throws with null')
+  t.throws(cat(0), err, 'throws with falsey number')
+  t.throws(cat(1), err, 'throws with truthy number')
+  t.throws(cat(''), err, 'throws with falsey string')
+  t.throws(cat('string'), err, 'throws with truthy string')
+  t.throws(cat(false), err, 'throws with false')
+  t.throws(cat(true), err, 'throws with true')
+  t.throws(cat([]), err, 'throws with an array')
+  t.throws(cat({}), err, 'throws with an object')
+  t.throws(cat(notConst), err, 'throws when passed non-Const')
+
+  t.end()
+})
+
 test('Const map errors', t => {
   const map = bindFunc(Const(0).map)
 
-  t.throws(map(undefined), TypeError, 'throws when passed undefined')
-  t.throws(map(null), TypeError, 'throws when passed null')
-  t.throws(map(0), TypeError, 'throws when passed falsey number')
-  t.throws(map(1), TypeError, 'throws when passed truthy number')
-  t.throws(map(''), TypeError, 'throws when passed falsey string')
-  t.throws(map('string'), TypeError, 'throws when passed truthy string')
-  t.throws(map(false), TypeError, 'throws when passed false')
-  t.throws(map(true), TypeError, 'throws when passed true')
-  t.throws(map([]), TypeError, 'throws when passed an array')
-  t.throws(map({}), TypeError, 'throws when passed an object')
+  const err = /Const.map: Function required/
+  t.throws(map(undefined), err, 'throws when passed undefined')
+  t.throws(map(null), err, 'throws when passed null')
+  t.throws(map(0), err, 'throws when passed falsey number')
+  t.throws(map(1), err, 'throws when passed truthy number')
+  t.throws(map(''), err, 'throws when passed falsey string')
+  t.throws(map('string'), err, 'throws when passed truthy string')
+  t.throws(map(false), err, 'throws when passed false')
+  t.throws(map(true), err, 'throws when passed true')
+  t.throws(map([]), err, 'throws when passed an array')
+  t.throws(map({}), err, 'throws when passed an object')
+
+  t.doesNotThrow(map(unit))
+
+  t.end()
+})
+
+test('Const map fantasy-land errors', t => {
+  const map = bindFunc(Const(0)[fl.map])
+
+  const err = /Const.fantasy-land\/map: Function required/
+  t.throws(map(undefined), err, 'throws when passed undefined')
+  t.throws(map(null), err, 'throws when passed null')
+  t.throws(map(0), err, 'throws when passed falsey number')
+  t.throws(map(1), err, 'throws when passed truthy number')
+  t.throws(map(''), err, 'throws when passed falsey string')
+  t.throws(map('string'), err, 'throws when passed truthy string')
+  t.throws(map(false), err, 'throws when passed false')
+  t.throws(map(true), err, 'throws when passed true')
+  t.throws(map([]), err, 'throws when passed an array')
+  t.throws(map({}), err, 'throws when passed an object')
+
   t.doesNotThrow(map(unit))
 
   t.end()
@@ -214,18 +261,19 @@ test('Const ap errors', t => {
   const m = MockCrock('joy')
   const ap = bindFunc(Const(32).ap)
 
-  t.throws(ap(undefined), TypeError, 'throws when passed undefined')
-  t.throws(ap(null), TypeError, 'throws when passed null')
-  t.throws(ap(0), TypeError, 'throws when passed a falsey number')
-  t.throws(ap(1), TypeError, 'throws when passed a truthy number')
-  t.throws(ap(''), TypeError, 'throws when passed a falsey string')
-  t.throws(ap('string'), TypeError, 'throws when passed a truthy string')
-  t.throws(ap(false), TypeError, 'throws when passed false')
-  t.throws(ap(true), TypeError, 'throws when passed true')
-  t.throws(ap([]), TypeError, 'throws when passed an array')
-  t.throws(ap({}), TypeError, 'throws when passed an object')
+  const err = /Const.ap: Const required/
+  t.throws(ap(undefined), err, 'throws when passed undefined')
+  t.throws(ap(null), err, 'throws when passed null')
+  t.throws(ap(0), err, 'throws when passed a falsey number')
+  t.throws(ap(1), err, 'throws when passed a truthy number')
+  t.throws(ap(''), err, 'throws when passed a falsey string')
+  t.throws(ap('string'), err, 'throws when passed a truthy string')
+  t.throws(ap(false), err, 'throws when passed false')
+  t.throws(ap(true), err, 'throws when passed true')
+  t.throws(ap([]), err, 'throws when passed an array')
+  t.throws(ap({}), err, 'throws when passed an object')
 
-  t.throws(ap(m), TypeError, 'throws when container types differ')
+  t.throws(ap(m), err, 'throws when container types differ')
 
   t.end()
 })
@@ -247,16 +295,37 @@ test('Const ap properties (Apply)', t => {
 test('Const chain errors', t => {
   const chain = bindFunc(Const(0).chain)
 
-  t.throws(chain(undefined), TypeError, 'throws with undefined')
-  t.throws(chain(null), TypeError, 'throws with null')
-  t.throws(chain(0), TypeError, 'throws with falsey number')
-  t.throws(chain(1), TypeError, 'throws with truthy number')
-  t.throws(chain(''), TypeError, 'throws with falsey string')
-  t.throws(chain('string'), TypeError, 'throws with truthy string')
-  t.throws(chain(false), TypeError, 'throws with false')
-  t.throws(chain(true), TypeError, 'throws with true')
-  t.throws(chain([]), TypeError, 'throws with an array')
-  t.throws(chain({}), TypeError, 'throws with an object')
+  const err = /Const.chain: Function required/
+  t.throws(chain(undefined), err, 'throws with undefined')
+  t.throws(chain(null), err, 'throws with null')
+  t.throws(chain(0), err, 'throws with falsey number')
+  t.throws(chain(1), err, 'throws with truthy number')
+  t.throws(chain(''), err, 'throws with falsey string')
+  t.throws(chain('string'), err, 'throws with truthy string')
+  t.throws(chain(false), err, 'throws with false')
+  t.throws(chain(true), err, 'throws with true')
+  t.throws(chain([]), err, 'throws with an array')
+  t.throws(chain({}), err, 'throws with an object')
+
+  t.doesNotThrow(chain(unit), 'allows a function, of any kind')
+
+  t.end()
+})
+
+test('Const chain fantasy-land errors', t => {
+  const chain = bindFunc(Const(0)[fl.chain])
+
+  const err = /Const.fantasy-land\/chain: Function required/
+  t.throws(chain(undefined), err, 'throws with undefined')
+  t.throws(chain(null), err, 'throws with null')
+  t.throws(chain(0), err, 'throws with falsey number')
+  t.throws(chain(1), err, 'throws with truthy number')
+  t.throws(chain(''), err, 'throws with falsey string')
+  t.throws(chain('string'), err, 'throws with truthy string')
+  t.throws(chain(false), err, 'throws with false')
+  t.throws(chain(true), err, 'throws with true')
+  t.throws(chain([]), err, 'throws with an array')
+  t.throws(chain({}), err, 'throws with an object')
 
   t.doesNotThrow(chain(unit), 'allows a function, of any kind')
 

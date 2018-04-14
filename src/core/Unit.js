@@ -1,7 +1,7 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const VERSION = 1
+const VERSION = 2
 
 const _implements = require('./implements')
 const type = require('./types').type('Unit')
@@ -33,20 +33,24 @@ function Unit() {
   const empty =
     _empty
 
-  function concat(m) {
-    if(!isSameType(Unit, m)) {
-      throw new TypeError('Unit.concat: Unit required')
-    }
+  function concat(method) {
+    return function(m) {
+      if(!isSameType(Unit, m)) {
+        throw new TypeError(`Unit.${method}: Unit required`)
+      }
 
-    return Unit()
+      return Unit()
+    }
   }
 
-  function map(fn) {
-    if(!isFunction(fn)) {
-      throw new TypeError('Unit.map: Function required')
-    }
+  function map(method) {
+    return function(fn) {
+      if(!isFunction(fn)) {
+        throw new TypeError(`Unit.${method}: Function required`)
+      }
 
-    return Unit()
+      return Unit()
+    }
   }
 
   function ap(m) {
@@ -57,24 +61,28 @@ function Unit() {
     return Unit()
   }
 
-  function chain(fn) {
-    if(!isFunction(fn)) {
-      throw new TypeError('Unit.chain: Function required')
-    }
+  function chain(method) {
+    return function(fn) {
+      if(!isFunction(fn)) {
+        throw new TypeError(`Unit.${method}: Function required`)
+      }
 
-    return Unit()
+      return Unit()
+    }
   }
 
   return {
     inspect, toString: inspect, valueOf,
-    type, equals, concat, empty, map, ap,
-    of, chain,
+    type, equals, empty, ap, of,
+    concat: concat('concat'),
+    map: map('map'),
+    chain: chain('chain'),
     [fl.of]: of,
     [fl.empty]: empty,
     [fl.equals]: equals,
-    [fl.concat]: concat,
-    [fl.map]: map,
-    [fl.chain]: chain,
+    [fl.concat]: concat(fl.concat),
+    [fl.map]: map(fl.map),
+    [fl.chain]: chain(fl.chain),
     ['@@type']: _type,
     constructor: Unit
   }

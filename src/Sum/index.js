@@ -37,20 +37,23 @@ function Sum(n) {
     m => isSameType(Sum, m)
       && _equals(x, m.valueOf())
 
-  function concat(m) {
-    if(!isSameType(Sum, m)) {
-      throw new TypeError('Sum.concat: Sum required')
-    }
+  function concat(method) {
+    return function(m) {
+      if(!isSameType(Sum, m)) {
+        throw new TypeError(`Sum.${method}: Sum required`)
+      }
 
-    return Sum(x + m.valueOf())
+      return Sum(x + m.valueOf())
+    }
   }
 
   return {
     inspect, toString: inspect, valueOf,
-    equals, type, concat, empty,
+    equals, type, empty,
+    concat: concat('concat'),
     [fl.equals]: equals,
     [fl.empty]: empty,
-    [fl.concat]: concat,
+    [fl.concat]: concat(fl.concat),
     ['@@type']: _type,
     constructor: Sum
   }

@@ -12,6 +12,8 @@ const isSameType = require('../core/isSameType')
 const isString = require('../core/isString')
 const unit = require('../core/_unit')
 
+const fl = require('../core/flNames')
+
 const constant = x => () => x
 const identity = x => x
 
@@ -55,11 +57,11 @@ test('Reader', t => {
 test('Reader fantasy-land api', t => {
   const m = Reader(identity)
 
-  t.equals(Reader['fantasy-land/of'], Reader.of, 'is same function as public constructor of')
+  t.ok(isFunction(Reader[fl.of]), 'provides of function on constructor')
 
-  t.equals(m['fantasy-land/of'], m.of, 'is same function as public instance of')
-  t.equals(m['fantasy-land/map'], m.map, 'is same function as public instance map')
-  t.equals(m['fantasy-land/chain'], m.chain, 'is same function as public instance chain')
+  t.ok(isFunction(m[fl.of]), 'provides of method on instance')
+  t.ok(isFunction(m[fl.map]), 'provides map method on instance')
+  t.ok(isFunction(m[fl.chain]), 'provides chain method on instance')
 
   t.end()
 })
@@ -98,7 +100,8 @@ test('Reader @@type', t => {
   const m = Reader(unit)
 
   t.equal(Reader['@@type'], m['@@type'], 'static and instance versions are the same')
-  t.equal(m['@@type'], 'crocks/Reader@1', 'type returns crocks/Reader@1')
+  t.equal(m['@@type'], 'crocks/Reader@2', 'type returns crocks/Reader@2')
+
   t.end()
 })
 
@@ -163,6 +166,26 @@ test('Reader map errors', t => {
   const map = bindFunc(Reader(unit).map)
 
   const err = /Reader.map: Function required/
+  t.throws(map(undefined), err, 'throws with undefined')
+  t.throws(map(null), err, 'throws with null')
+  t.throws(map(0), err, 'throws with falsey number')
+  t.throws(map(1), err, 'throws with truthy number')
+  t.throws(map(''), err, 'throws with falsey string')
+  t.throws(map('string'), err, 'throws with truthy string')
+  t.throws(map(false), err, 'throws with false')
+  t.throws(map(true), err, 'throws with true')
+  t.throws(map([]), err, 'throws with an array')
+  t.throws(map({}), err, 'throws with an object')
+
+  t.doesNotThrow(map(unit), 'allows a function')
+
+  t.end()
+})
+
+test('Reader map fantasy-land errors', t => {
+  const map = bindFunc(Reader(unit)[fl.map])
+
+  const err = /Reader.fantasy-land\/map: Function required/
   t.throws(map(undefined), err, 'throws with undefined')
   t.throws(map(null), err, 'throws with null')
   t.throws(map(0), err, 'throws with falsey number')
@@ -314,6 +337,40 @@ test('Reader chain errors', t => {
     bindFunc(Reader(identity).chain(identity).runWith)
 
   const noReader = /Reader.chain: Function must return a Reader/
+  t.throws(badRtn(undefined), noReader, 'throws when function returns undefined')
+  t.throws(badRtn(null), noReader, 'throws when function returns null')
+  t.throws(badRtn(0), noReader, 'throws when function returns a falsey number')
+  t.throws(badRtn(1), noReader, 'throws when function returns a truthy number')
+  t.throws(badRtn(''), noReader, 'throws when function returns a falsey string')
+  t.throws(badRtn('string'), noReader, 'throws when function returns a truthy string')
+  t.throws(badRtn(false), noReader, 'throws when function returns false')
+  t.throws(badRtn(true), noReader, 'throws when function returns true')
+  t.throws(badRtn([]), noReader, 'throws when function returns an array')
+  t.throws(badRtn({}), noReader, 'throws when function returns an object')
+  t.throws(badRtn(unit), noReader, 'throws when function returns a function')
+
+  t.end()
+})
+
+test('Reader chain fantasy-land errors', t => {
+  const chain = bindFunc(Reader(unit)[fl.chain])
+
+  const noFunc = /Reader.fantasy-land\/chain: Function required/
+  t.throws(chain(undefined), noFunc, 'throws with undefined')
+  t.throws(chain(null), noFunc, 'throws null')
+  t.throws(chain(0), noFunc, 'throws with falsey number')
+  t.throws(chain(1), noFunc, 'throws with truthy number')
+  t.throws(chain(''), noFunc, 'throws with falsey string')
+  t.throws(chain('string'), noFunc, 'throws with truthy string')
+  t.throws(chain(false), noFunc, 'throws with false')
+  t.throws(chain(true), noFunc, 'throws with true')
+  t.throws(chain([]), noFunc, 'throws with an array')
+  t.throws(chain({}), noFunc, 'throws with an object')
+
+  const badRtn =
+    bindFunc(Reader(identity)[fl.chain](identity).runWith)
+
+  const noReader = /Reader.fantasy-land\/chain: Function must return a Reader/
   t.throws(badRtn(undefined), noReader, 'throws when function returns undefined')
   t.throws(badRtn(null), noReader, 'throws when function returns null')
   t.throws(badRtn(0), noReader, 'throws when function returns a falsey number')

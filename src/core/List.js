@@ -1,7 +1,7 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const VERSION = 2
+const VERSION = 3
 
 const _equals = require('./equals')
 const _implements = require('./implements')
@@ -84,12 +84,12 @@ function List(x) {
   const xs =
     isArray(x) ? x.slice() : [ x ]
 
-  function flatMap(fn) {
+  function flatMap(method, fn) {
     return function(y, x) {
       const m = fn(x)
 
       if(!isSameType(List, m)) {
-        throw new TypeError('List.chain: Function must return a List')
+        throw new TypeError(`List.${method}: Function must return a List`)
       }
 
       return y.concat(m.valueOf())
@@ -128,20 +128,24 @@ function List(x) {
     isSameType(List, m)
       && _equals(xs, m.valueOf())
 
-  function concat(m) {
-    if(!isSameType(List, m)) {
-      throw new TypeError('List.concat: List required')
-    }
+  function concat(method) {
+    return function(m) {
+      if(!isSameType(List, m)) {
+        throw new TypeError(`List.${method}: List required`)
+      }
 
-    return List(xs.concat(m.valueOf()))
+      return List(xs.concat(m.valueOf()))
+    }
   }
 
-  function reduce(fn, i) {
-    if(!isFunction(fn)) {
-      throw new TypeError('List.reduce: Function required for first argument')
-    }
+  function reduce(method) {
+    return function(fn, i) {
+      if(!isFunction(fn)) {
+        throw new TypeError(`List.${method}: Function required for first argument`)
+      }
 
-    return xs.reduce(fn, i)
+      return xs.reduce(fn, i)
+    }
   }
 
   function reduceRight(fn, i) {
@@ -175,9 +179,11 @@ function List(x) {
       throw new TypeError('List.filter: Pred or predicate function required')
     }
 
-    return reduce(
-      (x, y) => predOrFunc(pred, y) ? x.concat(x.of(y)) : x,
-      empty()
+    return List(
+      xs.reduce(
+        (x, y) => predOrFunc(pred, y) ? x.concat([ y ]) : x,
+        []
+      )
     )
   }
 
@@ -188,40 +194,50 @@ function List(x) {
 
     const fn = not(x => predOrFunc(pred, x))
 
-    return reduce(
-      (x, y) => fn(y) ? x.concat(x.of(y)) : x,
-      empty()
+    return List(
+      xs.reduce(
+        (x, y) => fn(y) ? x.concat([ y ]) : x,
+        []
+      )
     )
   }
 
-  function map(fn) {
-    if(!isFunction(fn)) {
-      throw new TypeError('List.map: Function required')
-    }
+  function map(method) {
+    return function(fn) {
+      if(!isFunction(fn)) {
+        throw new TypeError(`List.${method}: Function required`)
+      }
 
-    return List(xs.map(x => fn(x)))
+      return List(xs.map(x => fn(x)))
+    }
   }
 
   function ap(m) {
-    const allFuncs =
-      xs.reduce((b, i) => b && isFunction(i), true)
-
-    if(!allFuncs) {
-      throw new TypeError('List.ap: Wrapped values must all be functions')
-    }
-    else if(!isSameType(List, m)) {
+    if(!isSameType(List, m)) {
       throw new TypeError('List.ap: List required')
     }
 
-    return chain(fn => m.map(fn))
+    const ar = m.valueOf()
+
+    return List(
+      xs.reduce((acc, fn) => {
+        if(!isFunction(fn)) {
+          throw new TypeError('List.ap: Wrapped values must all be functions')
+        }
+
+        return acc.concat(ar.map(x => fn(x)))
+      }, [])
+    )
   }
 
-  function chain(fn) {
-    if(!isFunction(fn)) {
-      throw new TypeError('List.chain: Function required')
-    }
+  function chain(method) {
+    return function(fn) {
+      if(!isFunction(fn)) {
+        throw new TypeError(`List.${method}: Function required`)
+      }
 
-    return List(xs.reduce(flatMap(fn), []))
+      return List(xs.reduce(flatMap(method, fn), []))
+    }
   }
 
   function sequence(f) {
@@ -264,16 +280,20 @@ function List(x) {
 
   return {
     inspect, toString: inspect, valueOf, toArray,
-    head, tail, cons, type, equals, concat, empty,
-    reduce, reduceRight, fold, filter, reject, map,
-    ap, of, chain, sequence, traverse,
+    head, tail, cons, type, equals, empty,
+    reduceRight, fold, filter, reject,
+    ap, of, sequence, traverse,
+    concat: concat('concat'),
+    map: map('map'),
+    chain: chain('chain'),
+    reduce: reduce('reduce'),
     [fl.of]: of,
     [fl.equals]: equals,
-    [fl.concat]: concat,
+    [fl.concat]: concat(fl.concat),
     [fl.empty]: empty,
-    [fl.map]: map,
-    [fl.chain]: chain,
-    [fl.reduce]: reduce,
+    [fl.map]: map(fl.map),
+    [fl.chain]: chain(fl.chain),
+    [fl.reduce]: reduce(fl.reduce),
     ['@@type']: _type,
     constructor: List
   }

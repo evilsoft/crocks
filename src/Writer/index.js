@@ -1,7 +1,7 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const VERSION = 1
+const VERSION = 2
 
 const _equals = require('../core/equals')
 const _implements = require('../core/implements')
@@ -59,47 +59,57 @@ function _Writer(Monoid) {
     const read = () =>
       Pair(log(), val)
 
-    function map(fn) {
-      if(!isFunction(fn)) {
-        throw new TypeError('Writer.map: Function required')
-      }
+    function map(method) {
+      return function(fn) {
+        if(!isFunction(fn)) {
+          throw new TypeError(`Writer.${method}: Function required`)
+        }
 
-      return Writer(log().valueOf(), fn(valueOf()))
+        return Writer(log().valueOf(), fn(valueOf()))
+      }
     }
 
     function ap(m) {
-      if(!isFunction(valueOf())) {
+      if(!isFunction(val)) {
         throw new TypeError('Writer.ap: Wrapped value must be a function')
       }
-      else if(!isSameType(Writer, m)) {
+
+      if(!isSameType(Writer, m)) {
         throw new TypeError('Writer.ap: Writer required')
       }
 
-      return chain(fn => m.map(fn))
+      return Writer(
+        log().concat(m.log()).valueOf(),
+        val(m.valueOf())
+      )
     }
 
-    function chain(fn) {
-      if(!isFunction(fn)) {
-        throw new TypeError('Writer.chain: Function required')
+    function chain(method) {
+      return function(fn) {
+        if(!isFunction(fn)) {
+          throw new TypeError(`Writer.${method}: Function required`)
+        }
+
+        const w = fn(valueOf())
+
+        if(!isSameType(Writer, w)) {
+          throw new TypeError(`Writer.${method}: Function must return a Writer`)
+        }
+
+        return Writer(log().concat(w.log()).valueOf(), w.valueOf())
       }
-
-      const w = fn(valueOf())
-
-      if(!isSameType(Writer, w)) {
-        throw new TypeError('Writer.chain: Function must return a Writer')
-      }
-
-      return Writer(log().concat(w.log()).valueOf(), w.valueOf())
     }
 
     return {
       inspect, toString: inspect, read,
-      valueOf, log, type, equals, map,
-      ap, of, chain,
+      valueOf, log, type, equals,
+      ap, of,
+      chain: chain('chain'),
+      map: map('map'),
       [fl.of]: of,
       [fl.equals]: equals,
-      [fl.map]: map,
-      [fl.chain]: chain,
+      [fl.map]: map(fl.map),
+      [fl.chain]: chain(fl.chain),
       ['@@type']: typeString,
       constructor: Writer
     }

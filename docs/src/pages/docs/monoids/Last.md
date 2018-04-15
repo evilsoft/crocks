@@ -142,7 +142,11 @@ concat(concat(a, b), c)
 Last a ~> b -> Boolean
 ```
 
-Used to compare the underlying values of (2) `Last` instances for equality by value, equals takes any given argument and returns `true` if the passed argument is a `Last` with an underlying value equal to the underlying value of the `Last` the method is being called on. If the passed argument is not a `Last` or the underlying values are not equal, equals will return `false`.
+Used to compare the underlying values of (2) `Last` instances for equality by
+value, equals takes any given argument and returns `true` if the passed argument
+is a `Last` with an underlying value equal to the underlying value of
+the `Last` the method is being called on. If the passed argument is not
+a `Last` or the underlying values are not equal, equals will return `false`.
 
 ```javascript
 import Last from 'crocks/Last'

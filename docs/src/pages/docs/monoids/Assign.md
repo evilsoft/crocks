@@ -104,7 +104,11 @@ Assign({ b: 4 })
 Assign a ~> b -> Boolean
 ```
 
-Used to compare the underlying values of (2) `Assign` instances for equality by value, equals takes any given argument and returns `true` if the passed argument is a `Assign` with an underlying value equal to the underlying value of the `Assign` the method is being called on. If the passed argument is not a `Assign` or the underlying values are not equal, equals will return `false`.
+Used to compare the underlying values of (2) `Assign` instances for equality by
+value, equals takes any given argument and returns `true` if the passed argument
+is an `Assign` with an underlying value equal to the underlying value of
+the `Assign` the method is being called on. If the passed argument is not
+an `Assign` or the underlying values are not equal, equals will return `false`.
 
 ```javascript
 import Assign from 'crocks/Assign'

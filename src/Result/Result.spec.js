@@ -14,6 +14,8 @@ const isSameType = require('../core/isSameType')
 const isString = require('../core/isString')
 const unit = require('../core/_unit')
 
+const fl = require('../core/flNames')
+
 const constant = x => () => x
 const identity = x => x
 
@@ -50,23 +52,23 @@ test('Result fantasy-land api', t => {
   const e = Result.Err('')
   const o = Result.Ok('')
 
-  t.equals(Result['fantasy-land/of'], Result.of, 'is same function as public constructor of')
+  t.ok(isFunction(Result[fl.of]), 'provides of function on constructor')
 
-  t.equals(e['fantasy-land/of'], e.of, 'is same function as public err instance of')
-  t.equals(e['fantasy-land/equals'], e.equals, 'is same function as public err instance equals')
-  t.equals(e['fantasy-land/alt'], e.alt, 'is same function as public err instance alt')
-  t.equals(e['fantasy-land/bimap'], e.bimap, 'is same function as public err instance bimap')
-  t.equals(e['fantasy-land/concat'], e.concat, 'is same function as public err instance concat')
-  t.equals(e['fantasy-land/map'], e.map, 'is same function as public err instance map')
-  t.equals(e['fantasy-land/chain'], e.chain, 'is same function as public err instance chain')
+  t.ok(isFunction(e[fl.of]), 'provides of method on Err instance')
+  t.ok(isFunction(e[fl.equals]), 'provides equals method on Err instance')
+  t.ok(isFunction(e[fl.alt]), 'provides alt method on Err instance')
+  t.ok(isFunction(e[fl.bimap]), 'provides bimap method on Err instance')
+  t.ok(isFunction(e[fl.concat]), 'provides concat method on Err instance')
+  t.ok(isFunction(e[fl.map]), 'provides map method on Err instance')
+  t.ok(isFunction(e[fl.chain]), 'provides chain method on Err instance')
 
-  t.equals(o['fantasy-land/of'], o.of, 'is same function as public ok instance of')
-  t.equals(o['fantasy-land/equals'], o.equals, 'is same function as public ok instance equals')
-  t.equals(o['fantasy-land/alt'], o.alt, 'is same function as public ok instance alt')
-  t.equals(o['fantasy-land/bimap'], o.bimap, 'is same function as public ok instance bimap')
-  t.equals(o['fantasy-land/concat'], o.concat, 'is same function as public ok instance concat')
-  t.equals(o['fantasy-land/map'], o.map, 'is same function as public ok instance map')
-  t.equals(o['fantasy-land/chain'], o.chain, 'is same function as public ok instance chain')
+  t.ok(isFunction(o[fl.of]), 'provides of method on OK instance')
+  t.ok(isFunction(o[fl.equals]), 'provides equals method on OK instance')
+  t.ok(isFunction(o[fl.alt]), 'provides alt method on OK instance')
+  t.ok(isFunction(o[fl.bimap]), 'provides bimap method on OK instance')
+  t.ok(isFunction(o[fl.concat]), 'provides concat method on OK instance')
+  t.ok(isFunction(o[fl.map]), 'provides map method on OK instance')
+  t.ok(isFunction(o[fl.chain]), 'provides chain method on OK instance')
 
   t.end()
 })
@@ -146,8 +148,8 @@ test('Result @@type', t => {
   t.equal(Result['@@type'], m['@@type'], 'static and instance versions are the same for Ok')
   t.equal(Result['@@type'], e['@@type'], 'static and instance versions are the same for Err')
 
-  t.equal(m['@@type'], 'crocks/Result@2', 'reports crocks/Result@2 for Ok')
-  t.equal(e['@@type'], 'crocks/Result@2', 'reports crocks/Result@2 for Err')
+  t.equal(m['@@type'], 'crocks/Result@3', 'reports crocks/Result@3 for Ok')
+  t.equal(e['@@type'], 'crocks/Result@3', 'reports crocks/Result@3 for Err')
 
   t.end()
 })
@@ -210,6 +212,71 @@ test('Result concat errors', t => {
   t.throws(f(m), nonResultErr, 'throws with non-Result on Ok')
 
   const g = bindFunc(Result.Err(0).concat)
+
+  t.throws(g(undefined), nonResultErr, 'throws with undefined on Err')
+  t.throws(g(null), nonResultErr, 'throws with null on Err')
+  t.throws(g(0), nonResultErr, 'throws with falsey number on Err')
+  t.throws(g(1), nonResultErr, 'throws with truthy number on Err')
+  t.throws(g(''), nonResultErr, 'throws with falsey string on Err')
+  t.throws(g('string'), nonResultErr, 'throws with truthy string on Err')
+  t.throws(g(false), nonResultErr, 'throws with false on Err')
+  t.throws(g(true), nonResultErr, 'throws with true on Err')
+  t.throws(g([]), nonResultErr, 'throws with array on Err')
+  t.throws(g({}), nonResultErr, 'throws with object on Err')
+  t.throws(g(m), nonResultErr, 'throws with non-Result on Err')
+
+  const notSemiLeft = bindFunc(x => Result.Ok(x).concat(good))
+
+  const innerErr = /Result.concat: Both containers must contain Semigroups of the same type/
+  t.throws(notSemiLeft(undefined), innerErr, 'throws with undefined on left')
+  t.throws(notSemiLeft(null), innerErr, 'throws with null on left')
+  t.throws(notSemiLeft(0), innerErr, 'throws with falsey number on left')
+  t.throws(notSemiLeft(1), innerErr, 'throws with truthy number on left')
+  t.throws(notSemiLeft(''), innerErr, 'throws with falsey string on left')
+  t.throws(notSemiLeft('string'), innerErr, 'throws with truthy string on left')
+  t.throws(notSemiLeft(false), innerErr, 'throws with false on left')
+  t.throws(notSemiLeft(true), innerErr, 'throws with true on left')
+  t.throws(notSemiLeft({}), innerErr, 'throws with object on left')
+
+  const notSemiRight = bindFunc(x => good.concat(Result.Ok(x)))
+
+  t.throws(notSemiRight(undefined), innerErr, 'throws with undefined on right')
+  t.throws(notSemiRight(null), innerErr, 'throws with null on right')
+  t.throws(notSemiRight(0), innerErr, 'throws with falsey number on right')
+  t.throws(notSemiRight(1), innerErr, 'throws with truthy number on right')
+  t.throws(notSemiRight(''), innerErr, 'throws with falsey string on right')
+  t.throws(notSemiRight('string'), innerErr, 'throws with truthy string on right')
+  t.throws(notSemiRight(false), innerErr, 'throws with false on right')
+  t.throws(notSemiRight(true), innerErr, 'throws with true on right')
+  t.throws(notSemiRight({}), innerErr, 'throws with object on right')
+
+  const noMatch = bindFunc(() => good.concat(Result.Ok('')))
+  t.throws(noMatch({}), innerErr, 'throws with different semigroups')
+
+  t.end()
+})
+
+test('Result concat fantasy-land errors', t => {
+  const m = { type: () => 'Result...Not' }
+
+  const good = Result.Ok([])
+
+  const f = bindFunc(Result.Ok([])[fl.concat])
+
+  const nonResultErr = /Result.fantasy-land\/concat: Result of Semigroup required/
+  t.throws(f(undefined), nonResultErr, 'throws with undefined on Ok')
+  t.throws(f(null), nonResultErr, 'throws with null on Ok')
+  t.throws(f(0), nonResultErr, 'throws with falsey number on Ok')
+  t.throws(f(1), nonResultErr, 'throws with truthy number on Ok')
+  t.throws(f(''), nonResultErr, 'throws with falsey string on Ok')
+  t.throws(f('string'), nonResultErr, 'throws with truthy string on Ok')
+  t.throws(f(false), nonResultErr, 'throws with false on Ok')
+  t.throws(f(true), nonResultErr, 'throws with true on Ok')
+  t.throws(f([]), nonResultErr, 'throws with array on Ok')
+  t.throws(f({}), nonResultErr, 'throws with object on Ok')
+  t.throws(f(m), nonResultErr, 'throws with non-Result on Ok')
+
+  const g = bindFunc(Result.Err(0)[fl.concat])
 
   t.throws(g(undefined), nonResultErr, 'throws with undefined on Err')
   t.throws(g(null), nonResultErr, 'throws with null on Err')
@@ -422,7 +489,37 @@ test('Result map errors', t => {
   const rmap = bindFunc(Result.Ok(0).map)
   const lmap = bindFunc(Result.Err(0).map)
 
-  const err = /Result.map: function required/
+  const err = /Result.map: Function required/
+  t.throws(rmap(undefined), err, 'right map throws with undefined')
+  t.throws(rmap(null), err, 'right map throws with null')
+  t.throws(rmap(0), err, 'right map throws with falsey number')
+  t.throws(rmap(1), err, 'right map throws with truthy number')
+  t.throws(rmap(''), err, 'right map throws with falsey string')
+  t.throws(rmap('string'), err, 'right map throws with truthy string')
+  t.throws(rmap(false), err, 'right map throws with false')
+  t.throws(rmap(true), err, 'right map throws with true')
+  t.throws(rmap([]), err, 'right map throws with an array')
+  t.throws(rmap({}), err, 'right map throws iwth object')
+
+  t.throws(lmap(undefined), err, 'left map throws with undefined')
+  t.throws(lmap(null), err, 'left map throws with null')
+  t.throws(lmap(0), err, 'left map throws with falsey number')
+  t.throws(lmap(1), err, 'left map throws with truthy number')
+  t.throws(lmap(''), err, 'left map throws with falsey string')
+  t.throws(lmap('string'), err, 'left map throws with truthy string')
+  t.throws(lmap(false), err, 'left map throws with false')
+  t.throws(lmap(true), err, 'left map throws with true')
+  t.throws(lmap([]), err, 'left map throws with an array')
+  t.throws(lmap({}), err, 'left map throws iwth object')
+
+  t.end()
+})
+
+test('Result map fantasy-land errors', t => {
+  const rmap = bindFunc(Result.Ok(0)[fl.map])
+  const lmap = bindFunc(Result.Err(0)[fl.map])
+
+  const err = /Result.fantasy-land\/map: Function required/
   t.throws(rmap(undefined), err, 'right map throws with undefined')
   t.throws(rmap(null), err, 'right map throws with null')
   t.throws(rmap(0), err, 'right map throws with falsey number')
@@ -523,6 +620,35 @@ test('Result bimap errors', t => {
   t.end()
 })
 
+test('Result bimap fantasy-land errors', t => {
+  const bimap = bindFunc(Result.Ok('popcorn')[fl.bimap])
+
+  const err = /Result.fantasy-land\/bimap: Requires both left and right functions/
+  t.throws(bimap(undefined, unit), err, 'throws with undefined in first argument')
+  t.throws(bimap(null, unit), err, 'throws with null in first argument')
+  t.throws(bimap(0, unit), err, 'throws with falsey number in first argument')
+  t.throws(bimap(1, unit), err, 'throws with truthy number in first argument')
+  t.throws(bimap('', unit), err, 'throws with falsey string in first argument')
+  t.throws(bimap('string', unit), err, 'throws with truthy string in first argument')
+  t.throws(bimap(false, unit), err, 'throws with false in first argument')
+  t.throws(bimap(true, unit), err, 'throws with true in first argument')
+  t.throws(bimap([], unit), err, 'throws with an array in first argument')
+  t.throws(bimap({}, unit), err, 'throws with object in first argument')
+
+  t.throws(bimap(unit, undefined), err, 'throws with undefined in second argument')
+  t.throws(bimap(unit, null), err, 'throws with null in second argument')
+  t.throws(bimap(unit, 0), err, 'throws with falsey number in second argument')
+  t.throws(bimap(unit, 1), err, 'throws with truthy number in second argument')
+  t.throws(bimap(unit, ''), err, 'throws with falsey string in second argument')
+  t.throws(bimap(unit, 'string'), err, 'throws with truthy string in second argument')
+  t.throws(bimap(unit, false), err, 'throws with false in second argument')
+  t.throws(bimap(unit, true), err, 'throws with true in second argument')
+  t.throws(bimap(unit, []), err, 'throws with an array in second argument')
+  t.throws(bimap(unit, {}), err, 'throws with object in second argument')
+
+  t.end()
+})
+
 test('Result bimap properties (Bifunctor)', t => {
   const f = x => x + 2
   const g = x => x * 2
@@ -568,6 +694,41 @@ test('Result alt errors', t => {
   t.throws(altOk(m), err, 'throws when container types differ on Ok')
 
   const altErr = bindFunc(Result.Err(0).alt)
+
+  t.throws(altErr(undefined), err, 'throws when passed an undefined with Err')
+  t.throws(altErr(null), err, 'throws when passed a null with Err')
+  t.throws(altErr(0), err, 'throws when passed a falsey number with Err')
+  t.throws(altErr(1), err, 'throws when passed a truthy number with Err')
+  t.throws(altErr(''), err, 'throws when passed a falsey string with Err')
+  t.throws(altErr('string'), err, 'throws when passed a truthy string with Err')
+  t.throws(altErr(false), err, 'throws when passed false with Err')
+  t.throws(altErr(true), err, 'throws when passed true with Err')
+  t.throws(altErr([]), err, 'throws when passed an array with Err')
+  t.throws(altErr({}), err, 'throws when passed an object with Err')
+  t.throws(altErr(m), err, 'throws when container types differ on Err')
+
+  t.end()
+})
+
+test('Result alt fantasy-land errors', t => {
+  const m = { type: () => 'Result...Not' }
+
+  const altOk = bindFunc(Result.of(0)[fl.alt])
+
+  const err = /Result.fantasy-land\/alt: Result required/
+  t.throws(altOk(undefined), err, 'throws when passed an undefined with Ok')
+  t.throws(altOk(null), err, 'throws when passed a null with Ok')
+  t.throws(altOk(0), err, 'throws when passed a falsey number with Ok')
+  t.throws(altOk(1), err, 'throws when passed a truthy number with Ok')
+  t.throws(altOk(''), err, 'throws when passed a falsey string with Ok')
+  t.throws(altOk('string'), err, 'throws when passed a truthy string with Ok')
+  t.throws(altOk(false), err, 'throws when passed false with Ok')
+  t.throws(altOk(true), err, 'throws when passed true with Ok')
+  t.throws(altOk([]), err, 'throws when passed an array with Ok')
+  t.throws(altOk({}), err, 'throws when passed an object with Ok')
+  t.throws(altOk(m), err, 'throws when container types differ on Ok')
+
+  const altErr = bindFunc(Result.Err(0)[fl.alt])
 
   t.throws(altErr(undefined), err, 'throws when passed an undefined with Err')
   t.throws(altErr(null), err, 'throws when passed a null with Err')
@@ -773,6 +934,39 @@ test('Result chain errors', t => {
   t.throws(echain({}), err, 'Err throws with an object')
 
   const errNoResult = /Result.chain: Function must return a Result/
+  t.throws(ochain(unit), errNoResult, 'Ok throws with a non Result returning function')
+
+  t.end()
+})
+
+test('Result chain errors', t => {
+  const ochain = bindFunc(Result.Ok(0)[fl.chain])
+  const echain = bindFunc(Result.Err(0)[fl.chain])
+
+  const err = /Result.fantasy-land\/chain: Result returning function required/
+  t.throws(ochain(undefined), err, 'Ok throws with undefined')
+  t.throws(ochain(null), err, 'Ok throws with null')
+  t.throws(ochain(0), err, 'Ok throws falsey with number')
+  t.throws(ochain(1), err, 'Ok throws truthy with number')
+  t.throws(ochain(''), err, 'Ok throws falsey with string')
+  t.throws(ochain('string'), err, 'Ok throws with truthy string')
+  t.throws(ochain(false), err, 'Ok throws with false')
+  t.throws(ochain(true), err, 'Ok throws with true')
+  t.throws(ochain([]), err, 'Ok throws with an array')
+  t.throws(ochain({}), err, 'Ok throws with an object')
+
+  t.throws(echain(undefined), err, 'Err throws with undefined')
+  t.throws(echain(null), err, 'Err throws with null')
+  t.throws(echain(0), err, 'Err throws with falsey number')
+  t.throws(echain(1), err, 'Err throws with truthy number')
+  t.throws(echain(''), err, 'Err throws with falsey string')
+  t.throws(echain('string'), err, 'Err throws with truthy string')
+  t.throws(echain(false), err, 'Err throws with false')
+  t.throws(echain(true), err, 'Err throws with true')
+  t.throws(echain([]), err, 'Err throws with an array')
+  t.throws(echain({}), err, 'Err throws with an object')
+
+  const errNoResult = /Result.fantasy-land\/chain: Function must return a Result/
   t.throws(ochain(unit), errNoResult, 'Ok throws with a non Result returning function')
 
   t.end()

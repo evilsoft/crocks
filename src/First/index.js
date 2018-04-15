@@ -41,25 +41,28 @@ function First(x) {
   const option =
     maybe.option
 
-  function concat(m) {
-    if(!isSameType(First, m)) {
-      throw new TypeError('First.concat: First required')
+  function concat(method) {
+    return function(m) {
+      if(!isSameType(First, m)) {
+        throw new TypeError(`First.${method}: First required`)
+      }
+
+      const n =
+        m.valueOf().map(x => x)
+
+      return First(
+        maybe.either(() => n, Maybe.Just)
+      )
     }
-
-    const n =
-      m.valueOf().map(x => x)
-
-    return First(
-      maybe.either(() => n, Maybe.Just)
-    )
   }
 
   return {
-    inspect, toString: inspect, valueOf,
-    equals, concat, empty, option, type,
+    inspect, toString: inspect,
+    equals, empty, option, type, valueOf,
+    concat: concat('concat'),
     [fl.equals]: equals,
     [fl.empty]: _empty,
-    [fl.concat]: concat,
+    [fl.concat]: concat(fl.concat),
     ['@@type']: _type,
     constructor: First
   }

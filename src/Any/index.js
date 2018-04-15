@@ -37,20 +37,23 @@ function Any(b) {
     m => isSameType(Any, m)
       && _equals(x, m.valueOf())
 
-  function concat(m) {
-    if(!isSameType(Any, m)) {
-      throw new TypeError('Any.concat: Any required')
-    }
+  function concat(method) {
+    return function(m) {
+      if(!isSameType(Any, m)) {
+        throw new TypeError(`Any.${method}: Any required`)
+      }
 
-    return Any(m.valueOf() || valueOf())
+      return Any(m.valueOf() || valueOf())
+    }
   }
 
   return {
-    inspect, toString: inspect, valueOf,
-    equals, type, concat, empty,
+    inspect, toString: inspect,
+    equals, valueOf, type, empty,
     ['@@type']: _type,
+    concat: concat('concat'),
     [fl.equals]: equals,
-    [fl.concat]: concat,
+    [fl.concat]: concat(fl.concat),
     [fl.empty]: empty,
     constructor: Any
   }

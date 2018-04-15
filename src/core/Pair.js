@@ -1,7 +1,7 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const VERSION = 3
+const VERSION = 4
 
 const _equals = require('./equals')
 const _implements = require('./implements')
@@ -48,28 +48,30 @@ function Pair(l, r) {
       && _equals(m.snd(), snd())
   }
 
-  function concat(m) {
-    if(!(m && isSameType(Pair, m))) {
-      throw new TypeError('Pair.concat: Pair required')
+  function concat(method) {
+    return function(m) {
+      if(!isSameType(Pair, m)) {
+        throw new TypeError(`Pair.${method}: Pair required`)
+      }
+
+      const lf = fst()
+      const ls = snd()
+      const rf = m.fst()
+      const rs = m.snd()
+
+      if(!(isSemigroup(lf) && isSemigroup(ls))) {
+        throw new TypeError(`Pair.${method}: Both Pairs must contain Semigroups of the same type`)
+      }
+
+      if(!(isSameType(lf, rf) && isSameType(ls, rs))) {
+        throw new TypeError(`Pair.${method}: Both Pairs must contain Semigroups of the same type`)
+      }
+
+      return Pair(
+        lf.concat(rf),
+        ls.concat(rs)
+      )
     }
-
-    const lf = fst()
-    const ls = snd()
-    const rf = m.fst()
-    const rs = m.snd()
-
-    if(!(isSemigroup(lf) && isSemigroup(ls))) {
-      throw new TypeError('Pair.concat: Both Pairs must contain Semigroups of the same type')
-    }
-
-    if(!(isSameType(lf, rf) && isSameType(ls, rs))) {
-      throw new TypeError('Pair.concat: Both Pairs must contain Semigroups of the same type')
-    }
-
-    return Pair(
-      lf.concat(rf),
-      ls.concat(rs)
-    )
   }
 
   function swap(f, g) {
@@ -80,20 +82,24 @@ function Pair(l, r) {
     return Pair(g(r), f(l))
   }
 
-  function map(fn) {
-    if(!isFunction(fn)) {
-      throw new TypeError('Pair.map: Function required')
-    }
+  function map(method) {
+    return function(fn) {
+      if(!isFunction(fn)) {
+        throw new TypeError(`Pair.${method}: Function required`)
+      }
 
-    return Pair(l, fn(r))
+      return Pair(l, fn(r))
+    }
   }
 
-  function bimap(f, g) {
-    if(!isFunction(f) || !isFunction(g)) {
-      throw new TypeError('Pair.bimap: Function required for both arguments')
-    }
+  function bimap(method) {
+    return function(f, g) {
+      if(!isFunction(f) || !isFunction(g)) {
+        throw new TypeError(`Pair.${method}: Function required for both arguments`)
+      }
 
-    return Pair(f(l), g(r))
+      return Pair(f(l), g(r))
+    }
   }
 
   function ap(m) {
@@ -117,33 +123,35 @@ function Pair(l, r) {
     return Pair(l.concat(r), fn(m.snd()))
   }
 
-  function chain(fn) {
-    const l = fst()
+  function chain(method) {
+    return function(fn) {
+      const l = fst()
 
-    if(!isFunction(fn)) {
-      throw new TypeError('Pair.chain: Function required')
+      if(!isFunction(fn)) {
+        throw new TypeError(`Pair.${method}: Function required`)
+      }
+
+      if(!isSemigroup(l)) {
+        throw new TypeError(`Pair.${method}: Semigroups of the same type required for first values`)
+      }
+
+      const m = fn(snd())
+
+      if(!isSameType(Pair, m)) {
+        throw new TypeError(`Pair.${method}: Function must return a Pair`)
+      }
+
+      const r = m.fst()
+
+      if(!isSameType(l, r)) {
+        throw new TypeError(`Pair.${method}: Semigroups of the same type required for first values`)
+      }
+
+      return Pair(
+        l.concat(r),
+        m.snd()
+      )
     }
-
-    if(!isSemigroup(l)) {
-      throw new TypeError('Pair.chain: Semigroups of the same type required for first values')
-    }
-
-    const m = fn(snd())
-
-    if(!isSameType(Pair, m)) {
-      throw new TypeError('Pair.chain: Function must return a Pair')
-    }
-
-    const r = m.fst()
-
-    if(!isSameType(l, r)) {
-      throw new TypeError('Pair.chain: Semigroups of the same type required for first values')
-    }
-
-    return Pair(
-      l.concat(r),
-      m.snd()
-    )
   }
 
   function sequence(f) {
@@ -186,25 +194,31 @@ function Pair(l, r) {
     return m.map(v => Pair(l, v))
   }
 
-  function extend(fn) {
-    if(!isFunction(fn)) {
-      throw new TypeError('Pair.extend: Function required')
-    }
+  function extend(method) {
+    return function(fn) {
+      if(!isFunction(fn)) {
+        throw new TypeError(`Pair.${method}: Function required`)
+      }
 
-    return Pair(l, fn(Pair(l, r)))
+      return Pair(l, fn(Pair(l, r)))
+    }
   }
 
   return {
     inspect, toString: inspect, fst,
     snd, toArray, type, merge, equals,
-    concat, swap, map, bimap, ap, chain,
-    sequence, traverse, extend,
+    swap, ap, sequence, traverse,
+    concat: concat('concat'),
+    map: map('map'),
+    bimap: bimap('bimap'),
+    chain: chain('chain'),
+    extend: extend('extend'),
     [fl.equals]: equals,
-    [fl.concat]: concat,
-    [fl.map]: map,
+    [fl.concat]: concat(fl.concat),
+    [fl.map]: map(fl.map),
     [fl.bimap]: bimap,
-    [fl.chain]: chain,
-    [fl.extend]: extend,
+    [fl.chain]: chain(fl.chain),
+    [fl.extend]: extend(fl.extend),
     ['@@type']: _type,
     constructor: Pair
   }

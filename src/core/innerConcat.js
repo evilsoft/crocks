@@ -4,17 +4,15 @@
 const isSameType = require('./isSameType')
 const isSemigroup = require('./isSemigroup')
 
-function innerConcat(type, m) {
-  const t = type.type()
-
+function innerConcat(method, m) {
   return function(left) {
     if(!isSemigroup(left)) {
-      throw new TypeError(`${t}.concat: Both containers must contain Semigroups of the same type`)
+      throw new TypeError(`${method}: Both containers must contain Semigroups of the same type`)
     }
 
     return m.map(right => {
       if(!isSameType(left, right)) {
-        throw new TypeError(`${t}.concat: Both containers must contain Semigroups of the same type`)
+        throw new TypeError(`${method}: Both containers must contain Semigroups of the same type`)
       }
 
       return left.concat(right)

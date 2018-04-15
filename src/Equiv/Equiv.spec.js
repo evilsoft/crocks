@@ -10,6 +10,8 @@ const isObject = require('../core/isObject')
 const isString = require('../core/isString')
 const unit = require('../core/_unit')
 
+const fl = require('../core/flNames')
+
 const constant = x => () => x
 const identity = x => x
 
@@ -52,11 +54,11 @@ test('Equiv', t => {
 test('Equiv fantasy-land api', t => {
   const m = Equiv(identity)
 
-  t.equals(Equiv['fantasy-land/empty'], Equiv.empty, 'is same function as public constructor empty')
+  t.ok(isFunction(Equiv[fl.empty]), 'provides empty function on constructor')
 
-  t.equals(m['fantasy-land/empty'], m.empty, 'is same function as public instance empty')
-  t.equals(m['fantasy-land/concat'], m.concat, 'is same function as public instance concat')
-  t.equals(m['fantasy-land/contramap'], m.contramap, 'is same function as public instance contramap')
+  t.ok(isFunction(m[fl.empty]), 'provides empty method on instance')
+  t.ok(isFunction(m[fl.concat]), 'provides concat method on instance')
+  t.ok(isFunction(m[fl.contramap]), 'provides contramap method on instance')
 
   t.end()
 })
@@ -96,7 +98,7 @@ test('Equiv @@type', t => {
   const m = Equiv(isSame)
 
   t.equal(m['@@type'], Equiv['@@type'], 'static and instance versions are the same')
-  t.equal(m['@@type'], 'crocks/Equiv@1', 'type returns crocks/Equiv@1')
+  t.equal(m['@@type'], 'crocks/Equiv@2', 'type returns crocks/Equiv@2')
 
   t.end()
 })
@@ -141,6 +143,26 @@ test('Equiv contramap errors', t => {
   const cmap = bindFunc(Equiv(isSame).contramap)
 
   const err = /Equiv.contramap: Function required/
+  t.throws(cmap(undefined), err, 'throws with undefined')
+  t.throws(cmap(null), err, 'throws with null')
+  t.throws(cmap(0), err, 'throws with falsey number')
+  t.throws(cmap(1), err, 'throws with truthy number')
+  t.throws(cmap(''), err, 'throws with falsey string')
+  t.throws(cmap('string'), err, 'throws with truthy string')
+  t.throws(cmap(false), err, 'throws with false')
+  t.throws(cmap(true), err, 'throws with true')
+  t.throws(cmap([]), err, 'throws with an array')
+  t.throws(cmap({}), err, 'throws with an object')
+
+  t.doesNotThrow(cmap(unit), 'allows functions')
+
+  t.end()
+})
+
+test('Equiv contramap fantasy-land errors', t => {
+  const cmap = bindFunc(Equiv(isSame)[fl.contramap])
+
+  const err = /Equiv.fantasy-land\/contramap: Function required/
   t.throws(cmap(undefined), err, 'throws with undefined')
   t.throws(cmap(null), err, 'throws with null')
   t.throws(cmap(0), err, 'throws with falsey number')
@@ -207,9 +229,8 @@ test('Equiv contramap properties (Contra Functor)', t => {
   t.end()
 })
 
-test('Equiv concat functionality', t => {
+test('Equiv concat errors', t => {
   const a = Equiv(constant(true))
-  const b = Equiv(constant(false))
 
   const notEquiv = { type: constant('Equiv...Not') }
 
@@ -227,6 +248,36 @@ test('Equiv concat functionality', t => {
   t.throws(cat([]), err, 'throws with an array')
   t.throws(cat({}), err, 'throws with an object')
   t.throws(cat(notEquiv), err, 'throws when passed non-Equiv')
+
+  t.end()
+})
+
+test('Equiv concat fantasy-land errors', t => {
+  const a = Equiv(constant(true))
+
+  const notEquiv = { type: constant('Equiv...Not') }
+
+  const cat = bindFunc(a[fl.concat])
+
+  const err = /Equiv.fantasy-land\/concat: Equiv required/
+  t.throws(cat(undefined), err, 'throws with undefined')
+  t.throws(cat(null), err, 'throws with null')
+  t.throws(cat(0), err, 'throws with falsey number')
+  t.throws(cat(1), err, 'throws with truthy number')
+  t.throws(cat(''), err, 'throws with falsey string')
+  t.throws(cat('string'), err, 'throws with truthy string')
+  t.throws(cat(false), err, 'throws with false')
+  t.throws(cat(true), err, 'throws with true')
+  t.throws(cat([]), err, 'throws with an array')
+  t.throws(cat({}), err, 'throws with an object')
+  t.throws(cat(notEquiv), err, 'throws when passed non-Equiv')
+
+  t.end()
+})
+
+test('Equiv concat functionality', t => {
+  const a = Equiv(constant(true))
+  const b = Equiv(constant(false))
 
   t.equal(a.concat(a).compareWith(1, 1), true, 'true to true reports true')
   t.equal(a.concat(b).compareWith(1, 1), false, 'true to false reports false')

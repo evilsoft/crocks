@@ -14,6 +14,8 @@ const isSameType = require('../core/isSameType')
 const isString = require('../core/isString')
 const unit = require('../core/_unit')
 
+const fl = require('../core/flNames')
+
 const applyTo =
   x => fn => fn(x)
 
@@ -46,13 +48,13 @@ test('Identity', t => {
 test('Identity fantasy-land api', t => {
   const m = Identity(identity)
 
-  t.equals(Identity['fantasy-land/of'], Identity.of, 'is same function as public constructor of')
+  t.ok(isFunction(Identity[fl.of]), 'provides of function on constructor')
 
-  t.equals(m['fantasy-land/of'], m.of, 'is same function as public instance of')
-  t.equals(m['fantasy-land/equals'], m.equals, 'is same function as public instance equals')
-  t.equals(m['fantasy-land/concat'], m.concat, 'is same function as public instance concat')
-  t.equals(m['fantasy-land/map'], m.map, 'is same function as public instance map')
-  t.equals(m['fantasy-land/chain'], m.chain, 'is same function as public instance chain')
+  t.ok(isFunction(m[fl.of]), 'provides of method on instance')
+  t.ok(isFunction(m[fl.equals]), 'provides equals method on instance')
+  t.ok(isFunction(m[fl.concat]), 'provides concat method on instance')
+  t.ok(isFunction(m[fl.map]), 'provides map method on instance')
+  t.ok(isFunction(m[fl.chain]), 'provides chain method on instance')
 
   t.end()
 })
@@ -95,7 +97,7 @@ test('Identity @@type', t => {
   const m = Identity(0)
 
   t.equal(Identity['@@type'], m['@@type'], 'static and instance versions are the same')
-  t.equal(m['@@type'], 'crocks/Identity@2', '@@type returns crocks/Identity@2')
+  t.equal(m['@@type'], 'crocks/Identity@3', '@@type returns crocks/Identity@3')
 
   t.end()
 })
@@ -180,6 +182,45 @@ test('Identity concat errors', t => {
   t.end()
 })
 
+test('Identity concat fantasy-land errors', t => {
+  const m = { type: () => 'Identity...Not' }
+
+  const good = Identity([])
+
+  const f = bindFunc(Identity([])[fl.concat])
+
+  const nonIdentErr = /Identity.fantasy-land\/concat: Identity of Semigroup required/
+  t.throws(f(undefined), nonIdentErr, 'throws with undefined')
+  t.throws(f(null), nonIdentErr, 'throws with null')
+  t.throws(f(0), nonIdentErr, 'throws with falsey number')
+  t.throws(f(1), nonIdentErr, 'throws with truthy number')
+  t.throws(f(''), nonIdentErr, 'throws with falsey string')
+  t.throws(f('string'), nonIdentErr, 'throws with truthy string')
+  t.throws(f(false), nonIdentErr, 'throws with false')
+  t.throws(f(true), nonIdentErr, 'throws with true')
+  t.throws(f([]), nonIdentErr, 'throws with array')
+  t.throws(f({}), nonIdentErr, 'throws with object')
+  t.throws(f(m), nonIdentErr, 'throws with non-Identity')
+
+  const notSemi = bindFunc(x => Identity(x)[fl.concat](good))
+
+  const innerErr = /Identity.fantasy-land\/concat: Both containers must contain Semigroups of the same type/
+  t.throws(notSemi(undefined), innerErr, 'throws with undefined on left')
+  t.throws(notSemi(null), innerErr, 'throws with null on left')
+  t.throws(notSemi(0), innerErr, 'throws with falsey number on left')
+  t.throws(notSemi(1), innerErr, 'throws with truthy number on left')
+  t.throws(notSemi(''), innerErr, 'throws with falsey string on left')
+  t.throws(notSemi('string'), innerErr, 'throws with truthy string on left')
+  t.throws(notSemi(false), innerErr, 'throws with false on left')
+  t.throws(notSemi(true), innerErr, 'throws with true on left')
+  t.throws(notSemi({}), innerErr, 'throws with object on left')
+
+  const noMatch = bindFunc(() => good[fl.concat](Identity('')))
+  t.throws(noMatch({}), innerErr, 'throws with different semigroups')
+
+  t.end()
+})
+
 test('Identity concat functionality', t => {
   const a = Identity([ 1, 2 ])
   const b = Identity([ 4, 3 ])
@@ -215,6 +256,26 @@ test('Identity map errors', t => {
   const map = bindFunc(Identity(0).map)
 
   const err = /Identity.map: Function required/
+  t.throws(map(undefined), err, 'throws when passed undefined')
+  t.throws(map(null), err, 'throws when passed null')
+  t.throws(map(0), err, 'throws when passed falsey number')
+  t.throws(map(1), err, 'throws when passed truthy number')
+  t.throws(map(''), err, 'throws when passed falsey string')
+  t.throws(map('string'), err, 'throws when passed truthy string')
+  t.throws(map(false), err, 'throws when passed false')
+  t.throws(map(true), err, 'throws when passed true')
+  t.throws(map([]), err, 'throws when passed an array')
+  t.throws(map({}), err, 'throws when passed an object')
+
+  t.doesNotThrow(map(unit))
+
+  t.end()
+})
+
+test('Identity map fantasy-land errors', t => {
+  const map = bindFunc(Identity(0)[fl.map])
+
+  const err = /Identity.fantasy-land\/map: Function required/
   t.throws(map(undefined), err, 'throws when passed undefined')
   t.throws(map(null), err, 'throws when passed null')
   t.throws(map(0), err, 'throws when passed falsey number')
@@ -345,6 +406,29 @@ test('Identity chain errors', t => {
   t.throws(chain({}), noFunc, 'throws with an object')
 
   const noIdentity = /Identity.chain: Function must return an Identity/
+  t.throws(chain(unit), noIdentity, 'throws with a non-Identity returning function')
+
+  t.doesNotThrow(chain(Identity.of), 'allows an Identity returning function')
+
+  t.end()
+})
+
+test('Identity chain fantasy-land errors', t => {
+  const chain = bindFunc(Identity(0)[fl.chain])
+
+  const noFunc = /Identity.fantasy-land\/chain: Function required/
+  t.throws(chain(undefined), noFunc, 'throws with undefined')
+  t.throws(chain(null), noFunc, 'throws with null')
+  t.throws(chain(0), noFunc, 'throws with falsey number')
+  t.throws(chain(1), noFunc, 'throws with truthy number')
+  t.throws(chain(''), noFunc, 'throws with falsey string')
+  t.throws(chain('string'), noFunc, 'throws with truthy string')
+  t.throws(chain(false), noFunc, 'throws with false')
+  t.throws(chain(true), noFunc, 'throws with true')
+  t.throws(chain([]), noFunc, 'throws with an array')
+  t.throws(chain({}), noFunc, 'throws with an object')
+
+  const noIdentity = /Identity.fantasy-land\/chain: Function must return an Identity/
   t.throws(chain(unit), noIdentity, 'throws with a non-Identity returning function')
 
   t.doesNotThrow(chain(Identity.of), 'allows an Identity returning function')

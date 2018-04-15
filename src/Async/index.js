@@ -1,7 +1,7 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const VERSION = 1
+const VERSION = 2
 
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
@@ -83,7 +83,7 @@ function Async(fn, parentCancel) {
     throw new TypeError('Async: Function required')
   }
 
-  var cancelled
+  let cancelled = false
 
   const cancel = compose(
     () => { cancelled = true },
@@ -144,49 +144,56 @@ function Async(fn, parentCancel) {
     }, cancel)
   }
 
-  function map(fn) {
-    if(!isFunction(fn)) {
-      throw new TypeError('Async.map: Function required')
-    }
+  function map(method) {
+    return function(mapFn) {
+      if(!isFunction(mapFn)) {
+        throw new TypeError(`Async.${method}: Function required`)
+      }
 
-    return Async(function(reject, resolve) {
-      fork(reject, compose(resolve, fn))
-    }, cancel)
+      return Async(function(reject, resolve) {
+        fork(reject, compose(resolve, mapFn))
+      }, cancel)
+    }
   }
 
-  function bimap(l, r) {
-    if(!isFunction(l) || !isFunction(r)) {
-      throw new TypeError('Async.bimap: Functions required for both arguments')
-    }
+  function bimap(method) {
+    return function(l, r) {
+      if(!isFunction(l) || !isFunction(r)) {
+        throw new TypeError(`Async.${method}: Functions required for both arguments`)
+      }
 
-    return Async(function(reject, resolve) {
-      fork(
-        compose(reject, l),
-        compose(resolve, r)
-      )
-    }, cancel)
+      return Async(function(reject, resolve) {
+        fork(
+          compose(reject, l),
+          compose(resolve, r)
+        )
+      }, cancel)
+    }
   }
 
-  function alt(m) {
-    var innerCancel = unit
+  function alt(method) {
+    return function(m) {
+      let innerCancel = unit
 
-    if(!isSameType(Async, m)) {
-      throw new TypeError('Async.alt: Async required')
+      if(!isSameType(Async, m)) {
+        throw new TypeError(`Async.${method}: Async required`)
+      }
+
+      return Async((rej, res) => {
+        fork(
+          () => { innerCancel = m.fork(rej, res) },
+          res
+        )
+      }, once(() => innerCancel(cancel())))
     }
-
-    return Async((rej, res) => {
-      fork(
-        () => { innerCancel = m.fork(rej, res) },
-        res
-      )
-    }, once(() => innerCancel(cancel())))
   }
 
   function ap(m) {
-    var fn, value
-    var fnDone = false
-    var valueDone = false
-    var innerCancel = unit
+    let apFn = null
+    let value = null
+    let fnDone = false
+    let valueDone = false
+    let innerCancel = unit
 
     if(!isSameType(Async, m)) {
       throw new TypeError('Async.ap: Async required')
@@ -197,7 +204,7 @@ function Async(fn, parentCancel) {
 
       function resolveBoth() {
         if(fnDone && valueDone) {
-          compose(resolve, fn)(value)
+          compose(resolve, apFn)(value)
         }
       }
 
@@ -207,7 +214,7 @@ function Async(fn, parentCancel) {
         }
 
         fnDone = true
-        fn = f
+        apFn = f
         resolveBoth()
       })
 
@@ -219,36 +226,45 @@ function Async(fn, parentCancel) {
     }, once(() => { innerCancel(cancel()) }))
   }
 
-  function chain(fn) {
-    var innerCancel = unit
+  function chain(method) {
+    return function(mapFn) {
+      let innerCancel = unit
 
-    if(!isFunction(fn)) {
-      throw new TypeError('Async.chain: Async returning function required')
+      if(!isFunction(mapFn)) {
+        throw new TypeError(
+          `Async.${method}: Async returning function required`
+        )
+      }
+
+      return Async(function(reject, resolve) {
+        fork(reject, function(x) {
+          const m = mapFn(x)
+
+          if(!isSameType(Async, m)) {
+            throw new TypeError(
+              `Async.${method}: Function must return another Async`
+            )
+          }
+
+          innerCancel = m.fork(reject, resolve)
+        })
+      }, once(() =>  { innerCancel(cancel()) }))
     }
-
-    return Async(function(reject, resolve) {
-      fork(reject, function(x) {
-        const m = fn(x)
-
-        if(!isSameType(Async, m)) {
-          throw new TypeError('Async.chain: Function must return another Async')
-        }
-
-        innerCancel = m.fork(reject, resolve)
-      })
-    }, once(() =>  { innerCancel(cancel()) }))
   }
 
   return {
     fork, toPromise, inspect,
     toString: inspect, type,
-    swap, coalesce, map, bimap,
-    alt, ap, chain, of,
+    swap, coalesce, ap, of,
+    alt: alt('alt'),
+    bimap: bimap('bimap'),
+    map: map('map'),
+    chain: chain('chain'),
     [fl.of]: of,
-    [fl.alt]: alt,
-    [fl.bimap]: bimap,
-    [fl.map]: map,
-    [fl.chain]: chain,
+    [fl.alt]: alt(fl.alt),
+    [fl.bimap]: bimap(fl.bimap),
+    [fl.map]: map(fl.map),
+    [fl.chain]: chain(fl.chain),
     ['@@type']: _type,
     constructor: Async
   }

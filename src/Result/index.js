@@ -1,7 +1,7 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const VERSION = 2
+const VERSION = 3
 
 const _defineUnion = require('../core/defineUnion')
 const _equals = require('../core/equals')
@@ -89,15 +89,17 @@ function Result(u) {
     }, x)
   }
 
-  function concat(m) {
-    if(!isSameType(Result, m)) {
-      throw new TypeError('Result.concat: Result of Semigroup required')
-    }
+  function concat(method) {
+    return function(m) {
+      if(!isSameType(Result, m)) {
+        throw new TypeError(`Result.${method}: Result of Semigroup required`)
+      }
 
-    return either(
-      Result.Err,
-      _innerConcat(Result, m)
-    )
+      return either(
+        Result.Err,
+        _innerConcat(`Result.${method}`, m)
+      )
+    }
   }
 
   function swap(f, g) {
@@ -119,37 +121,43 @@ function Result(u) {
     return Result.Ok(either(f, g))
   }
 
-  function map(fn) {
-    if(!isFunction(fn)) {
-      throw new TypeError('Result.map: function required')
-    }
+  function map(method) {
+    return function(fn) {
+      if(!isFunction(fn)) {
+        throw new TypeError(`Result.${method}: Function required`)
+      }
 
-    return either(
-      Result.Err,
-      compose(Result.Ok, fn)
-    )
+      return either(
+        Result.Err,
+        compose(Result.Ok, fn)
+      )
+    }
   }
 
-  function bimap(f, g) {
-    if(!isFunction(f) || !isFunction(g)) {
-      throw new TypeError('Result.bimap: Requires both left and right functions')
-    }
+  function bimap(method) {
+    return function(f, g) {
+      if(!isFunction(f) || !isFunction(g)) {
+        throw new TypeError(`Result.${method}: Requires both left and right functions`)
+      }
 
-    return either(
-      compose(Result.Err, f),
-      compose(Result.Ok, g)
-    )
+      return either(
+        compose(Result.Err, f),
+        compose(Result.Ok, g)
+      )
+    }
   }
 
-  function alt(m) {
-    if(!isSameType(Result, m)) {
-      throw new TypeError('Result.alt: Result required')
-    }
+  function alt(method) {
+    return function(m) {
+      if(!isSameType(Result, m)) {
+        throw new TypeError(`Result.${method}: Result required`)
+      }
 
-    return m.either(
-      r => either(concatAltErr(r), Result.Ok),
-      r => either(() => Result.Ok(r), Result.Ok)
-    )
+      return m.either(
+        r => either(concatAltErr(r), Result.Ok),
+        r => either(() => Result.Ok(r), Result.Ok)
+      )
+    }
   }
 
   function ap(m) {
@@ -169,18 +177,20 @@ function Result(u) {
     )
   }
 
-  function chain(fn) {
-    if(!isFunction(fn)) {
-      throw new TypeError('Result.chain: Result returning function required')
+  function chain(method) {
+    return function(fn) {
+      if(!isFunction(fn)) {
+        throw new TypeError(`Result.${method}: Result returning function required`)
+      }
+
+      const m = either(Result.Err, fn)
+
+      if(!isSameType(Result, m)) {
+        throw new TypeError(`Result.${method}: Function must return a Result`)
+      }
+
+      return m
     }
-
-    const m = either(Result.Err, fn)
-
-    if(!isSameType(Result, m)) {
-      throw new TypeError('Result.chain: Function must return a Result')
-    }
-
-    return m
   }
 
   function sequence(f) {
@@ -229,16 +239,20 @@ function Result(u) {
 
   return {
     inspect, toString: inspect, equals,
-    type, either, concat, swap, coalesce,
-    map, bimap, alt, ap, chain, of, sequence,
-    traverse,
+    type, either, swap, coalesce,
+    ap, of, sequence, traverse,
+    alt: alt('alt'),
+    bimap: bimap('bimap'),
+    concat: concat('concat'),
+    map: map('map'),
+    chain: chain('chain'),
     [fl.of]: of,
     [fl.equals]: equals,
-    [fl.alt]: alt,
-    [fl.bimap]: bimap,
-    [fl.concat]: concat,
-    [fl.map]: map,
-    [fl.chain]: chain,
+    [fl.alt]: alt(fl.alt),
+    [fl.bimap]: bimap(fl.bimap),
+    [fl.concat]: concat(fl.concat),
+    [fl.map]: map(fl.map),
+    [fl.chain]: chain(fl.chain),
     ['@@type']: _type,
     constructor: Result
   }

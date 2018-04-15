@@ -1,7 +1,7 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const VERSION = 1
+const VERSION = 2
 
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
@@ -28,36 +28,47 @@ function Arrow(runWith) {
   const id =
     _id
 
-  function compose(m) {
-    if(!isSameType(Arrow, m)) {
-      throw new TypeError('Arrow.compose: Arrow required')
-    }
+  const _map = fn =>
+    Arrow(x => fn(runWith(x)))
 
-    return map(m.runWith)
+  function compose(method) {
+    return function(m) {
+      if(!isSameType(Arrow, m)) {
+        throw new TypeError(`Arrow.${method}: Arrow required`)
+      }
+
+      return _map(m.runWith)
+    }
   }
 
-  function map(fn) {
-    if(!isFunction(fn)) {
-      throw new TypeError('Arrow.map: Function required')
-    }
+  function map(method) {
+    return function(fn) {
+      if(!isFunction(fn)) {
+        throw new TypeError(`Arrow.${method}: Function required`)
+      }
 
-    return Arrow(x => fn(runWith(x)))
+      return _map(fn)
+    }
   }
 
-  function contramap(fn) {
-    if(!isFunction(fn)) {
-      throw new TypeError('Arrow.contramap: Function required')
-    }
+  function contramap(method) {
+    return function(fn) {
+      if(!isFunction(fn)) {
+        throw new TypeError(`Arrow.${method}: Function required`)
+      }
 
-    return Arrow(x => runWith(fn(x)))
+      return Arrow(x => runWith(fn(x)))
+    }
   }
 
-  function promap(l, r) {
-    if(!isFunction(l) || !isFunction(r)) {
-      throw new TypeError('Arrow.promap: Functions required for both arguments')
-    }
+  function promap(method) {
+    return function(l, r) {
+      if(!isFunction(l) || !isFunction(r)) {
+        throw new TypeError(`Arrow.${method}: Functions required for both arguments`)
+      }
 
-    return Arrow(x => r(runWith(l(x))))
+      return Arrow(x => r(runWith(l(x))))
+    }
   }
 
   function first() {
@@ -90,13 +101,16 @@ function Arrow(runWith) {
 
   return {
     inspect, toString: inspect, type,
-    runWith, id, compose, map, contramap,
-    promap, first, second, both,
+    runWith, id, first, second, both,
+    compose: compose('compose'),
+    map: map('map'),
+    contramap: contramap('contramap'),
+    promap: promap('promap'),
     [fl.id]: id,
-    [fl.compose]: compose,
-    [fl.contramap]: contramap,
-    [fl.map]: map,
-    [fl.promap]: promap,
+    [fl.compose]: compose(fl.compose),
+    [fl.map]: map(fl.map),
+    [fl.contramap]: contramap(fl.contramap),
+    [fl.promap]: promap(fl.promap),
     ['@@type']: _type,
     constructor: Arrow
   }

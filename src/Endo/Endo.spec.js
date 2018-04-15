@@ -10,6 +10,8 @@ const isObject = require('../core/isObject')
 const isString = require('../core/isString')
 const isSameType = require('../core/isSameType')
 
+const fl = require('../core/flNames')
+
 const constant = x => () => x
 const identity = x => x
 
@@ -46,10 +48,10 @@ test('Endo', t => {
 test('Endo fantasy-land api', t => {
   const m = Endo(identity)
 
-  t.equals(Endo['fantasy-land/empty'], Endo.empty, 'is same function as public constructor empty')
+  t.ok(isFunction(Endo[fl.empty]), 'provides empty function on constructor')
 
-  t.equals(m['fantasy-land/empty'], m.empty, 'is same function as public instance empty')
-  t.equals(m['fantasy-land/concat'], m.concat, 'is same function as public instance concat')
+  t.ok(isFunction(m[fl.empty]), 'provides empty method on instance')
+  t.ok(isFunction(m[fl.concat]), 'provides concat method on instance')
 
   t.end()
 })
@@ -115,7 +117,7 @@ test('Endo @@type', t => {
   const m = Endo(identity)
 
   t.equal(m['@@type'], Endo['@@type'], 'static and instance versions are the same')
-  t.equal(m['@@type'], 'crocks/Endo@1', 'reports crocks/Endo@1')
+  t.equal(m['@@type'], 'crocks/Endo@2', 'reports crocks/Endo@2')
 
   t.end()
 })
@@ -138,19 +140,11 @@ test('Endo concat properties (Semigroup)', t => {
   t.end()
 })
 
-test('Endo concat functionality', t => {
-  const concat = x => m => m.concat(x)
-  const f = concat('f')
-  const g = concat('g')
-
-  const result = compose(g, f)('')
-
-  const a = Endo(f)
-  const b = Endo(g)
+test('Endo concat errors', t => {
+  const m = Endo(identity)
+  const cat = bindFunc(m.concat)
 
   const notEndo = { type: constant('Endo...Not') }
-
-  const cat = bindFunc(a.concat)
 
   const err = /Endo.concat: Endo required/
   t.throws(cat(undefined), err, 'throws with undefined')
@@ -164,6 +158,41 @@ test('Endo concat functionality', t => {
   t.throws(cat([]), err, 'throws with an array')
   t.throws(cat({}), err, 'throws with an object')
   t.throws(cat(notEndo), err, 'throws with non-Endo')
+
+  t.end()
+})
+
+test('Endo concat fantasy-land errors', t => {
+  const m = Endo(identity)
+  const cat = bindFunc(m[fl.concat])
+
+  const notEndo = { type: constant('Endo...Not') }
+
+  const err = /Endo.fantasy-land\/concat: Endo required/
+  t.throws(cat(undefined), err, 'throws with undefined')
+  t.throws(cat(null), err, 'throws with null')
+  t.throws(cat(0), err, 'throws with falsey number')
+  t.throws(cat(1), err, 'throws with truthy number')
+  t.throws(cat(''), err, 'throws with falsey string')
+  t.throws(cat('string'), err, 'throws with truthy string')
+  t.throws(cat(false), err, 'throws with false')
+  t.throws(cat(true), err, 'throws with true')
+  t.throws(cat([]), err, 'throws with an array')
+  t.throws(cat({}), err, 'throws with an object')
+  t.throws(cat(notEndo), err, 'throws with non-Endo')
+
+  t.end()
+})
+
+test('Endo concat functionality', t => {
+  const concat = x => m => m.concat(x)
+  const f = concat('f')
+  const g = concat('g')
+
+  const result = compose(g, f)('')
+
+  const a = Endo(f)
+  const b = Endo(g)
 
   t.same(a.concat(b).runWith(''), result, 'merges values as expected')
 

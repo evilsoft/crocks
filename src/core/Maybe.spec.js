@@ -14,6 +14,8 @@ const isSameType = require('./isSameType')
 const isString = require('./isString')
 const unit = require('./_unit')
 
+const fl = require('./flNames')
+
 const constant = x => () => x
 const identity = x => x
 
@@ -51,24 +53,24 @@ test('Maybe fantasy-land api', t => {
   const n = Maybe.Nothing()
   const j = Maybe.Just('')
 
-  t.equals(Maybe['fantasy-land/zero'], Maybe.zero, 'is same function as public constructor zero')
-  t.equals(Maybe['fantasy-land/of'], Maybe.of, 'is same function as public constructor of')
+  t.ok(isFunction(Maybe[fl.zero]), 'provides zero function on constructor')
+  t.ok(isFunction(Maybe[fl.of]), 'provides of function on constructor')
 
-  t.equals(n['fantasy-land/zero'], n.zero, 'is same function as public nothing instance zero')
-  t.equals(n['fantasy-land/of'], n.of, 'is same function as public nothing instance of')
-  t.equals(n['fantasy-land/equals'], n.equals, 'is same function as nothing public instance equals')
-  t.equals(n['fantasy-land/alt'], n.alt, 'is same function as public nothing instance alt')
-  t.equals(n['fantasy-land/concat'], n.concat, 'is same function as public nothing instance concat')
-  t.equals(n['fantasy-land/map'], n.map, 'is same function as public nothing instance map')
-  t.equals(n['fantasy-land/chain'], n.chain, 'is same function as public nothing instance chain')
+  t.ok(isFunction(n[fl.zero]), 'provides zero method on Nothing instance')
+  t.ok(isFunction(n[fl.of]), 'provides of method on Nothing instance')
+  t.ok(isFunction(n[fl.equals]), 'provides equals method on Nothing instance')
+  t.ok(isFunction(n[fl.alt]), 'provides alt method on Nothing instance')
+  t.ok(isFunction(n[fl.concat]), 'provides concat method on Nothing instance')
+  t.ok(isFunction(n[fl.map]), 'provides map method on Nothing instance')
+  t.ok(isFunction(n[fl.chain]), 'provides chain method on Nothing instance')
 
-  t.equals(j['fantasy-land/zero'], j.zero, 'is same function as public instance zero')
-  t.equals(j['fantasy-land/of'], j.of, 'is same function as public instance of')
-  t.equals(j['fantasy-land/equals'], j.equals, 'is same function as public just instance equals')
-  t.equals(j['fantasy-land/alt'], j.alt, 'is same function as public just instance alt')
-  t.equals(j['fantasy-land/concat'], j.concat, 'is same function as public just instance concat')
-  t.equals(j['fantasy-land/map'], j.map, 'is same function as public just instance map')
-  t.equals(j['fantasy-land/chain'], j.chain, 'is same function as public just instance chain')
+  t.ok(isFunction(j[fl.zero]), 'provides zero method on Just instance')
+  t.ok(isFunction(j[fl.of]), 'provides of method on Just instance')
+  t.ok(isFunction(j[fl.equals]), 'provides equals method on Just instance')
+  t.ok(isFunction(j[fl.alt]), 'provides altmethod on Just instance')
+  t.ok(isFunction(j[fl.concat]), 'provides concat method on Just instance')
+  t.ok(isFunction(j[fl.map]), 'provides map method on Just instance')
+  t.ok(isFunction(j[fl.chain]), 'provides chain method on Just instance')
 
   t.end()
 })
@@ -124,8 +126,8 @@ test('Maybe @@type', t => {
   t.equal(Just(0)['@@type'], Maybe['@@type'], 'static and instance versions are the same for Just')
   t.equal(Nothing(0)['@@type'], Maybe['@@type'], 'static and instance versions are the same for Nothing')
 
-  t.equal(Just(0)['@@type'], 'crocks/Maybe@2', 'type returns crocks/Maybe@2 for Just')
-  t.equal(Nothing()['@@type'], 'crocks/Maybe@2', 'type returns crocks/Maybe@2 for Nothing')
+  t.equal(Just(0)['@@type'], 'crocks/Maybe@3', 'type returns crocks/Maybe@3 for Just')
+  t.equal(Nothing()['@@type'], 'crocks/Maybe@3', 'type returns crocks/Maybe@3 for Nothing')
 
   t.end()
 })
@@ -262,6 +264,57 @@ test('Maybe concat errors', t => {
   t.end()
 })
 
+test('Maybe concat fantasy-land errors', t => {
+  const m = { type: () => 'Maybe...Not' }
+
+  const good = Maybe.of([])
+
+  const f = bindFunc(Maybe.of([])[fl.concat])
+
+  const nonMaybeErr = /Maybe.fantasy-land\/concat: Maybe of Semigroup required/
+  t.throws(f(undefined), nonMaybeErr, 'throws with undefined')
+  t.throws(f(null), nonMaybeErr, 'throws with null')
+  t.throws(f(0), nonMaybeErr, 'throws with falsey number')
+  t.throws(f(1), nonMaybeErr, 'throws with truthy number')
+  t.throws(f(''), nonMaybeErr, 'throws with falsey string')
+  t.throws(f('string'), nonMaybeErr, 'throws with truthy string')
+  t.throws(f(false), nonMaybeErr, 'throws with false')
+  t.throws(f(true), nonMaybeErr, 'throws with true')
+  t.throws(f([]), nonMaybeErr, 'throws with array')
+  t.throws(f({}), nonMaybeErr, 'throws with object')
+  t.throws(f(m), nonMaybeErr, 'throws with non-Maybe')
+
+  const notSemiLeft = bindFunc(x => Maybe.of(x)[fl.concat](good))
+
+  const innerErr = /Maybe.fantasy-land\/concat: Both containers must contain Semigroups of the same type/
+  t.throws(notSemiLeft(undefined), innerErr, 'throws with undefined on left')
+  t.throws(notSemiLeft(null), innerErr, 'throws with null on left')
+  t.throws(notSemiLeft(0), innerErr, 'throws with falsey number on left')
+  t.throws(notSemiLeft(1), innerErr, 'throws with truthy number on left')
+  t.throws(notSemiLeft(''), innerErr, 'throws with falsey string on left')
+  t.throws(notSemiLeft('string'), innerErr, 'throws with truthy string on left')
+  t.throws(notSemiLeft(false), innerErr, 'throws with false on left')
+  t.throws(notSemiLeft(true), innerErr, 'throws with true on left')
+  t.throws(notSemiLeft({}), innerErr, 'throws with object on left')
+
+  const notSemiRight = bindFunc(x => good[fl.concat](Maybe.of(x)))
+
+  t.throws(notSemiRight(undefined), innerErr, 'throws with undefined on right')
+  t.throws(notSemiRight(null), innerErr, 'throws with null on right')
+  t.throws(notSemiRight(0), innerErr, 'throws with falsey number on right')
+  t.throws(notSemiRight(1), innerErr, 'throws with truthy number on right')
+  t.throws(notSemiRight(''), innerErr, 'throws with falsey string on right')
+  t.throws(notSemiRight('string'), innerErr, 'throws with truthy string on right')
+  t.throws(notSemiRight(false), innerErr, 'throws with false on right')
+  t.throws(notSemiRight(true), innerErr, 'throws with true on right')
+  t.throws(notSemiRight({}), innerErr, 'throws with object on right')
+
+  const noMatch = bindFunc(() => good[fl.concat](Maybe.of('')))
+  t.throws(noMatch({}), innerErr, 'throws with different semigroups')
+
+  t.end()
+})
+
 test('Maybe concat functionality', t => {
   const extract =
     either(constant('Nothing'), identity)
@@ -364,6 +417,28 @@ test('Maybe map errors', t => {
   t.end()
 })
 
+test('Maybe map fantasy-land errors', t => {
+  const m = { type: () => 'Maybe...Not' }
+  const map = bindFunc(Maybe.Just(0)[fl.map])
+
+  const err = /Maybe.fantasy-land\/map: Function required/
+  t.throws(map(undefined), err, 'throws with undefined')
+  t.throws(map(null), err, 'throws with null')
+  t.throws(map(0), err, 'throws with falsey number')
+  t.throws(map(1), err, 'throws with truthy number')
+  t.throws(map(''), err, 'throws with falsey string')
+  t.throws(map('string'), err, 'throws with truthy string')
+  t.throws(map(false), err, 'throws with false')
+  t.throws(map(true), err, 'throws with true')
+  t.throws(map([]), err, 'throws with an array')
+  t.throws(map({}), err, 'throws with object')
+  t.throws(map(m), err, 'throws with non-Maybe')
+
+  t.doesNotThrow(map(unit), 'allows a function')
+
+  t.end()
+})
+
 test('Maybe map functionality', t => {
   const spy = sinon.spy(identity)
 
@@ -420,6 +495,41 @@ test('Maybe alt errors', t => {
   t.throws(altJust(m), err, 'throws when container types differ on Just')
 
   const altNothing = bindFunc(Maybe.Nothing().alt)
+
+  t.throws(altNothing(undefined), err, 'throws when passed an undefined with Nothing')
+  t.throws(altNothing(null), err, 'throws when passed a null with Nothing')
+  t.throws(altNothing(0), err, 'throws when passed a falsey number with Nothing')
+  t.throws(altNothing(1), err, 'throws when passed a truthy number with Nothing')
+  t.throws(altNothing(''), err, 'throws when passed a falsey string with Nothing')
+  t.throws(altNothing('string'), err, 'throws when passed a truthy string with Nothing')
+  t.throws(altNothing(false), err, 'throws when passed false with Nothing')
+  t.throws(altNothing(true), err, 'throws when passed true with Nothing')
+  t.throws(altNothing([]), err, 'throws when passed an array with Nothing')
+  t.throws(altNothing({}), err, 'throws when passed an object with Nothing')
+  t.throws(altNothing(m), err, 'throws when container types differ on Nothing')
+
+  t.end()
+})
+
+test('Maybe alt fantasy-land errors', t => {
+  const m = { type: () => 'Maybe...Not' }
+
+  const altJust = bindFunc(Maybe.of(0)[fl.alt])
+
+  const err = /Maybe.fantasy-land\/alt: Maybe required/
+  t.throws(altJust(undefined), err, 'throws when passed an undefined with Just')
+  t.throws(altJust(null), err, 'throws when passed a null with Just')
+  t.throws(altJust(0), err, 'throws when passed a falsey number with Just')
+  t.throws(altJust(1), err, 'throws when passed a truthy number with Just')
+  t.throws(altJust(''), err, 'throws when passed a falsey string with Just')
+  t.throws(altJust('string'), err, 'throws when passed a truthy string with Just')
+  t.throws(altJust(false), err, 'throws when passed false with Just')
+  t.throws(altJust(true), err, 'throws when passed true with Just')
+  t.throws(altJust([]), err, 'throws when passed an array with Just')
+  t.throws(altJust({}), err, 'throws when passed an object with Just')
+  t.throws(altJust(m), err, 'throws when container types differ on Just')
+
+  const altNothing = bindFunc(Maybe.Nothing()[fl.alt])
 
   t.throws(altNothing(undefined), err, 'throws when passed an undefined with Nothing')
   t.throws(altNothing(null), err, 'throws when passed a null with Nothing')
@@ -580,6 +690,29 @@ test('Maybe chain errors', t => {
   t.throws(chain({}), noFunc, 'throws with an object')
 
   const noMaybe = /Maybe.chain: Function must return a Maybe/
+  t.throws(chain(unit), noMaybe, 'throws with a non-Maybe returning function')
+
+  t.doesNotThrow(chain(Maybe.of), 'allows a Maybe returning function')
+
+  t.end()
+})
+
+test('Maybe chain fantasy-land errors', t => {
+  const chain = bindFunc(Maybe(0)[fl.chain])
+
+  const noFunc = /Maybe.fantasy-land\/chain: Function required/
+  t.throws(chain(undefined), noFunc, 'throws with undefined')
+  t.throws(chain(null), noFunc, 'throws with null')
+  t.throws(chain(0), noFunc, 'throws with falsey number')
+  t.throws(chain(1), noFunc, 'throws with truthy number')
+  t.throws(chain(''), noFunc, 'throws with falsey string')
+  t.throws(chain('string'), noFunc, 'throws with truthy string')
+  t.throws(chain(false), noFunc, 'throws with false')
+  t.throws(chain(true), noFunc, 'throws with true')
+  t.throws(chain([]), noFunc, 'throws with an array')
+  t.throws(chain({}), noFunc, 'throws with an object')
+
+  const noMaybe = /Maybe.fantasy-land\/chain: Function must return a Maybe/
   t.throws(chain(unit), noMaybe, 'throws with a non-Maybe returning function')
 
   t.doesNotThrow(chain(Maybe.of), 'allows a Maybe returning function')

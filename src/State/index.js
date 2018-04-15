@@ -1,7 +1,7 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const VERSION = 1
+const VERSION = 2
 
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
@@ -70,15 +70,17 @@ function State(fn) {
     return pair.fst()
   }
 
-  function map(fn) {
-    if(!isFunction(fn)) {
-      throw new TypeError('State.map: Function required')
-    }
+  function map(method) {
+    return function(fn) {
+      if(!isFunction(fn)) {
+        throw new TypeError(`State.${method}: Function required`)
+      }
 
-    return State(s => {
-      const m = runWith(s, 'map')
-      return Pair(fn(m.fst()), m.snd())
-    })
+      return State(s => {
+        const m = runWith(s, method)
+        return Pair(fn(m.fst()), m.snd())
+      })
+    }
   }
 
   function ap(m) {
@@ -98,30 +100,33 @@ function State(fn) {
     })
   }
 
-  function chain(fn) {
-    if(!isFunction(fn)) {
-      throw new TypeError('State.chain: State returning function required')
-    }
-
-    return State(s => {
-      const pair = runWith(s, 'chain')
-      const m = fn(pair.fst())
-
-      if(!isSameType(State, m)) {
-        throw new TypeError('State.chain: Function must return another State')
+  function chain(method) {
+    return function(fn) {
+      if(!isFunction(fn)) {
+        throw new TypeError(`State.${method}: State returning function required`)
       }
 
-      return m.runWith(pair.snd())
-    })
+      return State(s => {
+        const pair = runWith(s, method)
+        const m = fn(pair.fst())
+
+        if(!isSameType(State, m)) {
+          throw new TypeError(`State.${method}: Function must return another State`)
+        }
+
+        return m.runWith(pair.snd())
+      })
+    }
   }
 
   return {
     inspect, toString: inspect, runWith,
-    execWith, evalWith, type, map, ap,
-    chain, of,
+    execWith, evalWith, type, ap, of,
+    map: map('map'),
+    chain: chain('chain'),
     [fl.of]: of,
-    [fl.map]: map,
-    [fl.chain]: chain,
+    [fl.map]: map(fl.map),
+    [fl.chain]: chain(fl.chain),
     ['@@type']: _type,
     constructor: State
   }

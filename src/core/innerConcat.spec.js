@@ -11,9 +11,9 @@ const isSameType = require('./isSameType')
 const innerConcat = require('./innerConcat')
 
 test('innerConcat errors', t => {
-  const err = /MockCrock.concat:/
+  const err = /MockCrock.concat: Both containers must contain Semigroups of the same type/
 
-  const outer = bindFunc(x => innerConcat(Mock, Mock.of(Last(4)))(x))
+  const outer = bindFunc(x => innerConcat('MockCrock.concat', Mock.of(Last(4)))(x))
 
   t.throws(outer(undefined), err, 'throws interpolated error when left container contains undefined')
   t.throws(outer(null), err, 'throws interpolated error when left container contains null')
@@ -35,7 +35,7 @@ test('innerConcat functionality', t => {
   const right = Last(val)
   const left = Last(99)
 
-  const fn = innerConcat(Mock, Mock.of(right))
+  const fn = innerConcat('Mock.concat', Mock.of(right))
   const res = fn(left)
 
   t.ok(isSameType(Mock, res), 'returns a container of the same type')

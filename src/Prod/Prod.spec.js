@@ -8,6 +8,8 @@ const isFunction = require('../core/isFunction')
 const isObject = require('../core/isObject')
 const isString = require('../core/isString')
 
+const fl = require('../core/flNames')
+
 const constant = x => () => x
 const identity = x => x
 
@@ -46,11 +48,11 @@ test('Prod', t => {
 test('Prod fantasy-land api', t => {
   const m = Prod(99)
 
-  t.equals(Prod['fantasy-land/empty'], Prod.empty, 'is same function as public constructor empty')
+  t.ok(isFunction(Prod[fl.empty]), 'provides empty function on constructor')
 
-  t.equals(m['fantasy-land/empty'], m.empty, 'is same function as public instance empty')
-  t.equals(m['fantasy-land/concat'], m.concat, 'is same function as public instance concat')
-  t.equals(m['fantasy-land/equals'], m.equals, 'is same function as public instance equals')
+  t.ok(isFunction(m[fl.empty]), 'provides empty method on instance')
+  t.ok(isFunction(m[fl.equals]), 'provides equals method on instance')
+  t.ok(isFunction(m[fl.concat]), 'provides concat method on instance')
 
   t.end()
 })
@@ -155,13 +157,8 @@ test('Prod concat properties (Semigroup)', t => {
   t.end()
 })
 
-test('Prod concat functionality', t => {
-  const x = 8
-  const y = 82
-
-  const a = Prod(x)
-  const b = Prod(y)
-
+test('Prod concat errors', t => {
+  const a = Prod(8)
   const notProd = { type: constant('Prod...Not') }
 
   const cat = bindFunc(a.concat)
@@ -178,6 +175,38 @@ test('Prod concat functionality', t => {
   t.throws(cat([]), err, 'throws with an array')
   t.throws(cat({}), err, 'throws with an object')
   t.throws(cat(notProd), err, 'throws with non-Prod')
+
+  t.end()
+})
+
+test('Prod concat fantasy-land errors', t => {
+  const a = Prod(8)
+  const notProd = { type: constant('Prod...Not') }
+
+  const cat = bindFunc(a[fl.concat])
+
+  const err = /Prod.fantasy-land\/concat: Prod required/
+  t.throws(cat(undefined), err, 'throws with undefined')
+  t.throws(cat(null), err, 'throws with null')
+  t.throws(cat(0), err, 'throws with falsey number')
+  t.throws(cat(1), err, 'throws with truthy number')
+  t.throws(cat(''), err, 'throws with falsey string')
+  t.throws(cat('string'), err, 'throws with truthy string')
+  t.throws(cat(false), err, 'throws with false')
+  t.throws(cat(true), err, 'throws with true')
+  t.throws(cat([]), err, 'throws with an array')
+  t.throws(cat({}), err, 'throws with an object')
+  t.throws(cat(notProd), err, 'throws with non-Prod')
+
+  t.end()
+})
+
+test('Prod concat functionality', t => {
+  const x = 8
+  const y = 82
+
+  const a = Prod(x)
+  const b = Prod(y)
 
   t.equals(a.concat(b).valueOf(), x * y, 'Multiplies wrapped values as expected')
 

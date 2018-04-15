@@ -8,6 +8,8 @@ const isFunction = require('../core/isFunction')
 const isObject = require('../core/isObject')
 const isString = require('../core/isString')
 
+const fl = require('../core/flNames')
+
 const All = require('.')
 
 const constant = x => () => x
@@ -46,11 +48,11 @@ test('All', t => {
 test('All fantasy-land api', t => {
   const m = All(true)
 
-  t.equals(All['fantasy-land/empty'], All.empty, 'is same function as public constructor empty')
+  t.ok(isFunction(All[fl.empty]), 'provides empty function on constructor')
 
-  t.equals(m['fantasy-land/empty'], m.empty, 'is same function as public instance empty')
-  t.equals(m['fantasy-land/concat'], m.concat, 'is same function as public instance concat')
-  t.equals(m['fantasy-land/equals'], m.equals, 'is same function as public instance equals')
+  t.ok(isFunction(m[fl.empty]), 'provides empty method on instance')
+  t.ok(isFunction(m[fl.equals]), 'provides equals method on instance')
+  t.ok(isFunction(m[fl.concat]), 'provides concat method on instance')
 
   t.end()
 })
@@ -135,6 +137,28 @@ test('All concat functionality', t => {
   t.equal(a.concat(a).valueOf(), true, 'true to true reports true')
   t.equal(a.concat(b).valueOf(), false, 'true to false reports false')
   t.equal(b.concat(b).valueOf(), false, 'false to false reports false')
+
+  t.end()
+})
+
+test('All concat fantasy-land errors', t => {
+  const a = All(true)
+  const notAll = { type: constant('All...Not') }
+
+  const cat = bindFunc(a[fl.concat])
+
+  const err = /All.fantasy-land\/concat: All required/
+  t.throws(cat(undefined), err, 'throws with undefined')
+  t.throws(cat(null), err, 'throws with null')
+  t.throws(cat(0), err, 'throws with falsey number')
+  t.throws(cat(1), err, 'throws with truthy number')
+  t.throws(cat(''), err, 'throws with falsey string')
+  t.throws(cat('string'), err, 'throws with truthy string')
+  t.throws(cat(false), err, 'throws with false')
+  t.throws(cat(true), err, 'throws with true')
+  t.throws(cat([]), err, 'throws with an array')
+  t.throws(cat({}), err, 'throws with an object')
+  t.throws(cat(notAll), err, 'throws when passed non-All')
 
   t.end()
 })

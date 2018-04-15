@@ -1,7 +1,7 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const VERSION = 1
+const VERSION = 2
 
 const _equals = require('../core/equals')
 const _implements = require('../core/implements')
@@ -28,20 +28,24 @@ function Const(x) {
   const valueOf =
     () => x
 
-  function concat(m) {
-    if(!isSameType(Const, m)) {
-      throw new TypeError('Const.concat: Const required')
-    }
+  function concat(method) {
+    return function(m) {
+      if(!isSameType(Const, m)) {
+        throw new TypeError(`Const.${method}: Const required`)
+      }
 
-    return Const(x)
+      return Const(x)
+    }
   }
 
-  function map(fn) {
-    if(!isFunction(fn)) {
-      throw new TypeError('Const.map: Function required')
-    }
+  function map(method) {
+    return function(fn) {
+      if(!isFunction(fn)) {
+        throw new TypeError(`Const.${method}: Function required`)
+      }
 
-    return Const(x)
+      return Const(x)
+    }
   }
 
   function ap(m) {
@@ -52,21 +56,26 @@ function Const(x) {
     return Const(x)
   }
 
-  function chain(fn) {
-    if(!isFunction(fn)) {
-      throw new TypeError('Const.chain: Function required')
-    }
+  function chain(method) {
+    return function(fn) {
+      if(!isFunction(fn)) {
+        throw new TypeError(`Const.${method}: Function required`)
+      }
 
-    return Const(x)
+      return Const(x)
+    }
   }
 
   return {
     inspect, toString: inspect, valueOf,
-    type, equals, concat, map, ap, chain,
+    type, equals, ap,
+    concat: concat('concat'),
+    map: map('map'),
+    chain: chain('chain'),
     [fl.equals]: equals,
-    [fl.concat]: concat,
-    [fl.map]: map,
-    [fl.chain]: chain,
+    [fl.concat]: concat(fl.concat),
+    [fl.map]: map(fl.map),
+    [fl.chain]: chain(fl.chain),
     ['@@type']: _type,
     constructor: Const
   }

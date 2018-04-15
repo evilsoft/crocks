@@ -12,6 +12,8 @@ const isObject = require('../core/isObject')
 const isString = require('../core/isString')
 const unit = require('../core/_unit')
 
+const fl = require('../core/flNames')
+
 const constant = x => () => x
 const identity = x => x
 
@@ -55,23 +57,23 @@ test('Async', t => {
   t.end()
 })
 
-test('Arrow fantasy-land api', t => {
+test('Async fantasy-land api', t => {
   const rej = Async.Rejected('')
   const res = Async.Resolved('')
 
-  t.equals(Async['fantasy-land/of'], Async.of, 'is same function as public constructor of')
+  t.ok(isFunction(Async[fl.of]), 'provides of function on constructor')
 
-  t.equals(rej['fantasy-land/of'], rej.of, 'is same function as public rejected instance of')
-  t.equals(rej['fantasy-land/alt'], rej.alt, 'is same function as public rejected instance alt')
-  t.equals(rej['fantasy-land/bimap'], rej.bimap, 'is same function as public rejected instance bimap')
-  t.equals(rej['fantasy-land/map'], rej.map, 'is same function as public rejected instance map')
-  t.equals(rej['fantasy-land/chain'], rej.chain, 'is same function as public rejected instance chain')
+  t.ok(isFunction(res[fl.of]), 'provides of method on resolved instance')
+  t.ok(isFunction(res[fl.alt]), 'provides alt method on resolved instance')
+  t.ok(isFunction(res[fl.bimap]), 'provides bimap method on resolved instance')
+  t.ok(isFunction(res[fl.map]), 'provides map method on resolved instance')
+  t.ok(isFunction(res[fl.chain]), 'provides chain method on resolved instance')
 
-  t.equals(res['fantasy-land/of'], res.of, 'is same function as public resolved instance of')
-  t.equals(res['fantasy-land/alt'], res.alt, 'is same function as public resolved instance alt')
-  t.equals(res['fantasy-land/bimap'], res.bimap, 'is same function as public resolved instance bimap')
-  t.equals(res['fantasy-land/map'], res.map, 'is same function as public resolved instance map')
-  t.equals(res['fantasy-land/chain'], res.chain, 'is same function as public resolved instance chain')
+  t.ok(isFunction(rej[fl.of]), 'provides of method on rejected instance')
+  t.ok(isFunction(rej[fl.alt]), 'provides empty method on rejected instance')
+  t.ok(isFunction(rej[fl.bimap]), 'provides bimap method on rejected instance')
+  t.ok(isFunction(rej[fl.map]), 'provides map method on rejected instance')
+  t.ok(isFunction(rej[fl.chain]), 'provides chain method on rejected instance')
 
   t.end()
 })
@@ -291,7 +293,7 @@ test('Async type', t => {
 
 test('Async @@type', t => {
   t.equal(Async(unit)['@@type'], Async['@@type'], 'static and instance versions are the same')
-  t.equal(Async(unit)['@@type'], 'crocks/Async@1', 'returns Async')
+  t.equal(Async(unit)['@@type'], 'crocks/Async@2', 'returns crocks/Async@2')
 
   t.end()
 })
@@ -567,6 +569,26 @@ test('Async map errors', t => {
   t.end()
 })
 
+test('Async map fantasy-land errors', t => {
+  const map = bindFunc(Async(unit)[fl.map])
+
+  const err = /Async.fantasy-land\/map: Function required/
+  t.throws(map(undefined), err, 'throws with undefined')
+  t.throws(map(null), err, 'throws with null')
+  t.throws(map(0), err, 'throws with falsey number')
+  t.throws(map(1), err, 'throws with truthy number')
+  t.throws(map(''), err, 'throws with falsey string')
+  t.throws(map('string'), err, 'throws with truthy string')
+  t.throws(map(false), err, 'throws with false')
+  t.throws(map(true), err, 'throws with true')
+  t.throws(map([]), err, 'throws with an array')
+  t.throws(map({}), err, 'throws iwth object')
+
+  t.doesNotThrow(map(unit), 'allows a function')
+
+  t.end()
+})
+
 test('Async map functionality', t => {
   const mapFn = sinon.spy()
 
@@ -608,6 +630,37 @@ test('Async bimap errors', t => {
   const bimap = bindFunc(Async(unit).bimap)
 
   const err = /Async.bimap: Functions required for both arguments/
+  t.throws(bimap(undefined, unit), err, 'throws with undefined in first argument')
+  t.throws(bimap(null, unit), err, 'throws with null in first argument')
+  t.throws(bimap(0, unit), err, 'throws with falsey number in first argument')
+  t.throws(bimap(1, unit), err, 'throws with truthy number in first argument')
+  t.throws(bimap('', unit), err, 'throws with falsey string in first argument')
+  t.throws(bimap('string', unit), err, 'throws with truthy string in first argument')
+  t.throws(bimap(false, unit), err, 'throws with false in first argument')
+  t.throws(bimap(true, unit), err, 'throws with true in first argument')
+  t.throws(bimap([], unit), err, 'throws with an array in first argument')
+  t.throws(bimap({}, unit), err, 'throws with object in first argument')
+
+  t.throws(bimap(unit, undefined), err, 'throws with undefined in second argument')
+  t.throws(bimap(unit, null), err, 'throws with null in second argument')
+  t.throws(bimap(unit, 0), err, 'throws with falsey number in second argument')
+  t.throws(bimap(unit, 1), err, 'throws with truthy number in second argument')
+  t.throws(bimap(unit, ''), err, 'throws with falsey string in second argument')
+  t.throws(bimap(unit, 'string'), err, 'throws with truthy string in second argument')
+  t.throws(bimap(unit, false), err, 'throws with false in second argument')
+  t.throws(bimap(unit, true), err, 'throws with true in second argument')
+  t.throws(bimap(unit, []), err, 'throws with an array in second argument')
+  t.throws(bimap(unit, {}), err, 'throws with object in second argument')
+
+  t.doesNotThrow(bimap(unit, unit), 'allows functions')
+
+  t.end()
+})
+
+test('Async bimap fantasy-land errors', t => {
+  const bimap = bindFunc(Async(unit)[fl.bimap])
+
+  const err = /Async.fantasy-land\/bimap: Functions required for both arguments/
   t.throws(bimap(undefined, unit), err, 'throws with undefined in first argument')
   t.throws(bimap(null, unit), err, 'throws with null in first argument')
   t.throws(bimap(0, unit), err, 'throws with falsey number in first argument')
@@ -728,6 +781,44 @@ test('Async alt errors', t => {
   t.throws(altRejected([]), err, 'throws when passed an array with Rejected')
   t.throws(altRejected({}), err, 'throws when passed an object with Rejected')
   t.throws(altRejected(m), err, 'throws when container types differ on Rejected')
+
+  t.end()
+})
+
+test('Async alt fantasy-land errors', t => {
+  const m = { type: () => 'Async...Not' }
+
+  const altResolved = bindFunc(Async.of(0)[fl.alt])
+
+  const err = /Async.fantasy-land\/alt: Async required/
+  t.throws(altResolved(undefined), err, 'throws when passed an undefined with Resolved')
+  t.throws(altResolved(null), err, 'throws when passed a null with Resolved')
+  t.throws(altResolved(0), err, 'throws when passed a falsey number with Resolved')
+  t.throws(altResolved(1), err, 'throws when passed a truthy number with Resolved')
+  t.throws(altResolved(''), err, 'throws when passed a falsey string with Resolved')
+  t.throws(altResolved('string'), err, 'throws when passed a truthy string with Resolved')
+  t.throws(altResolved(false), err, 'throws when passed false with Resolved')
+  t.throws(altResolved(true), err, 'throws when passed true with Resolved')
+  t.throws(altResolved([]), err, 'throws when passed an array with Resolved')
+  t.throws(altResolved({}), err, 'throws when passed an object with Resolved')
+  t.throws(altResolved(m), err, 'throws when container types differ on Resolved')
+
+  const altRejected = bindFunc(Async.Rejected(0)[fl.alt])
+
+  t.throws(altRejected(undefined), err, 'throws when passed an undefined with Rejected')
+  t.throws(altRejected(null), err, 'throws when passed a null with Rejected')
+  t.throws(altRejected(0), err, 'throws when passed a falsey number with Rejected')
+  t.throws(altRejected(1), err, 'throws when passed a truthy number with Rejected')
+  t.throws(altRejected(''), err, 'throws when passed a falsey string with Rejected')
+  t.throws(altRejected('string'), err, 'throws when passed a truthy string with Rejected')
+  t.throws(altRejected(false), err, 'throws when passed false with Rejected')
+  t.throws(altRejected(true), err, 'throws when passed true with Rejected')
+  t.throws(altRejected([]), err, 'throws when passed an array with Rejected')
+  t.throws(altRejected({}), err, 'throws when passed an object with Rejected')
+  t.throws(altRejected(m), err, 'throws when container types differ on Rejected')
+
+  t.doesNotThrow(altResolved(Async.of(0)), 'does not throw when passed an Async with Resolved')
+  t.doesNotThrow(altRejected(Async.of(0)), 'does not throw when passed an Async with Rejected')
 
   t.end()
 })
@@ -892,6 +983,30 @@ test('Async chain errors', t => {
   t.throws(Async.of(3).chain(unit).fork.bind(null, unit, unit), noAsync, 'throws with a non-Async returning function')
 
   t.doesNotThrow(Async.of(3).chain(Async.of).fork.bind(null, unit, unit), 'allows an Async returning function')
+
+  t.end()
+})
+
+test('Async chain fantasy-land errors', t => {
+  const chain = bindFunc(Async(unit)[fl.chain])
+
+  const err = /Async.fantasy-land\/chain: Async returning function required/
+  t.throws(chain(undefined), err, 'throws with undefined')
+  t.throws(chain(null), err, 'throws with null')
+  t.throws(chain(0), err, 'throws with falsey number')
+  t.throws(chain(1), err, 'throws with truthy number')
+  t.throws(chain(''), err, 'throws with falsey string')
+  t.throws(chain('string'), err, 'throws with truthy string')
+  t.throws(chain(false), err, 'throws with false')
+  t.throws(chain(true), err, 'throws with true')
+  t.throws(chain([]), err, 'throws with an array')
+  t.throws(chain({}), err, 'throws with an object')
+
+  const noAsync = /Async.fantasy-land\/chain: Function must return another Async/
+  t.throws(Async.of(3)[fl.chain](unit).fork.bind(null, unit, unit), noAsync, 'throws with a non-Async returning function')
+
+  t.doesNotThrow(Async.of(3)[fl.chain](Async.of).fork.bind(null, unit, unit), 'allows an Async returning function with Resolved')
+  t.doesNotThrow(Async.Rejected(3)[fl.chain](Async.of).fork.bind(null, unit, unit), 'allows an Async returning function with Rejected')
 
   t.end()
 })

@@ -1,12 +1,13 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const Last = require('.')
-const Maybe = require('../core/types').proxy('Maybe')
+import Last from './index.js'
+import types from '../core/types.js'
+const Maybe = types.proxy('Maybe')
 
-const curry = require('../core/curry')
-const isFunction = require('../core/isFunction')
-const isSameType = require('../core/isSameType')
+import curry from '../core/curry.js'
+import isFunction from '../core/isFunction.js'
+import isSameType from '../core/isSameType.js'
 
 const applyTransform = maybe =>
   Last(maybe)
@@ -33,4 +34,4 @@ function maybeToLast(maybe) {
   throw new TypeError('maybeToLast: Maybe or Maybe returning function required')
 }
 
-module.exports = curry(maybeToLast)
+export default curry(maybeToLast)

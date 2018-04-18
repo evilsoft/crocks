@@ -1,12 +1,12 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const array = require('../core/array')
-const curry = require('../core/curry')
-const isApply = require('../core/isApply')
-const isArray = require('../core/isArray')
-const isFunction = require('../core/isFunction')
-const isSameType = require('../core/isSameType')
+import array from '../core/array.js'
+import curry from '../core/curry.js'
+import isApply from '../core/isApply.js'
+import isArray from '../core/isArray.js'
+import isFunction from '../core/isFunction.js'
+import isSameType from '../core/isSameType.js'
 
 const map = array.map
 const ap = array.ap
@@ -27,4 +27,4 @@ function liftA3(fn, x, y, z) {
   return x.map(fn).ap(y).ap(z)
 }
 
-module.exports = curry(liftA3)
+export default curry(liftA3)

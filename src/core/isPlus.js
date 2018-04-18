@@ -1,8 +1,8 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const hasAlg = require('./hasAlg')
-const isAlt = require('./isAlt')
+import hasAlg from './hasAlg.js'
+import isAlt from './isAlt.js'
 
 // isPlus : a -> Boolean
 function isPlus(m) {
@@ -10,4 +10,4 @@ function isPlus(m) {
     && hasAlg('zero', m)
 }
 
-module.exports = isPlus
+export default isPlus

@@ -1,9 +1,9 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const hasAlg = require('../core/hasAlg')
-const isContravariant = require('../core/isContravariant')
-const isFunctor = require('../core/isFunctor')
+import hasAlg from '../core/hasAlg.js'
+import isContravariant from '../core/isContravariant.js'
+import isFunctor from '../core/isFunctor.js'
 
 // isProfunctor : a -> Boolean
 function isProfunctor(m) {
@@ -12,4 +12,4 @@ function isProfunctor(m) {
     && hasAlg('promap', m)
 }
 
-module.exports = isProfunctor
+export default isProfunctor

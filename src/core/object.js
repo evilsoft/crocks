@@ -33,7 +33,7 @@ function map(f, m) {
   }, {})
 }
 
-module.exports = {
+export default {
   assign,
   filter,
   map

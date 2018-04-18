@@ -9,4 +9,4 @@ function compose(f, g) {
   }
 }
 
-module.exports = compose
+export default compose

@@ -1,6 +1,7 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
-const isObject = require('./isObject')
+
+import isObject from './isObject.js'
 
 function isEmpty(x) {
   if(isObject(x)) {
@@ -14,4 +15,4 @@ function isEmpty(x) {
   return true
 }
 
-module.exports = isEmpty
+export default isEmpty

@@ -1,12 +1,13 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const Result = require('.')
-const Either = require('../core/types').proxy('Either')
+import Result from './index.js'
+import types from '../core/types.js'
+const Either = types.proxy('Either')
 
-const curry = require('../core/curry')
-const isFunction = require('../core/isFunction')
-const isSameType = require('../core/isSameType')
+import curry from '../core/curry.js'
+import isFunction from '../core/isFunction.js'
+import isSameType from '../core/isSameType.js'
 
 const applyTransform = either =>
   either.either(Result.Err, Result.Ok)
@@ -33,4 +34,4 @@ function eitherToResult(either) {
   throw new TypeError('eitherToResult: Either or Either returning function required')
 }
 
-module.exports = curry(eitherToResult)
+export default curry(eitherToResult)

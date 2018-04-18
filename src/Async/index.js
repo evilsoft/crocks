@@ -3,22 +3,23 @@
 
 const VERSION = 2
 
-const _implements = require('../core/implements')
-const _inspect = require('../core/inspect')
-const type = require('../core/types').type('Async')
-const _type = require('../core/types').typeFn(type(), VERSION)
-const fl = require('../core/flNames')
+import _implements from '../core/implements.js'
+import _inspect from '../core/inspect.js'
+import types from '../core/types.js'
+const type = types.type('Async')
+const _type = types.typeFn(type(), VERSION)
+import fl from '../core/flNames.js'
 
-const array = require('../core/array')
-const compose = require('../core/compose')
-const once = require('../core/once')
-const unit = require('../core/_unit')
+import array from '../core/array.js'
+import compose from '../core/compose.js'
+import once from '../core/once.js'
+import unit from '../core/_unit.js'
 
-const isArray = require('../core/isArray')
-const isFoldable = require('../core/isFoldable')
-const isFunction = require('../core/isFunction')
-const isPromise = require('../core/isPromise')
-const isSameType = require('../core/isSameType')
+import isArray from '../core/isArray.js'
+import isFoldable from '../core/isFoldable.js'
+import isFunction from '../core/isFunction.js'
+import isPromise from '../core/isPromise.js'
+import isSameType from '../core/isSameType.js'
 
 const allAsyncs = xs =>
   xs.reduce((acc, x) => acc && isSameType(Async, x), true)
@@ -288,4 +289,4 @@ Async['@@implements'] = _implements(
   [ 'alt', 'ap', 'bimap', 'chain', 'map', 'of' ]
 )
 
-module.exports = Async
+export default Async

@@ -43,6 +43,6 @@ const typeFn = (t, ver) => {
   return `crocks/${typeStr}@${ver || 0}`
 }
 
-module.exports = {
+export default {
   proxy, type, typeFn
 }

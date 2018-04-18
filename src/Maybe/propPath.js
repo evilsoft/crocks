@@ -3,13 +3,13 @@
 
 const { Nothing, Just } = require('../core/Maybe')
 
-const curry = require('../core/curry')
-const isArray = require('../core/isArray')
-const isDefined = require('../core/isDefined')
-const isEmpty = require('../core/isEmpty')
-const isInteger = require('../core/isInteger')
-const isNil = require('../core/isNil')
-const isString = require('../core/isString')
+import curry from '../core/curry.js'
+import isArray from '../core/isArray.js'
+import isDefined from '../core/isDefined.js'
+import isEmpty from '../core/isEmpty.js'
+import isInteger from '../core/isInteger.js'
+import isNil from '../core/isNil.js'
+import isString from '../core/isString.js'
 
 // propPath : [ String | Integer ] -> a -> Maybe b
 function propPath(keys, target) {
@@ -43,4 +43,4 @@ function propPath(keys, target) {
   return Just(value)
 }
 
-module.exports = curry(propPath)
+export default curry(propPath)

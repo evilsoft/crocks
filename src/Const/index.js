@@ -3,15 +3,16 @@
 
 const VERSION = 2
 
-const _equals = require('../core/equals')
-const _implements = require('../core/implements')
-const _inspect = require('../core/inspect')
-const type = require('../core/types').type('Const')
-const _type = require('../core/types').typeFn(type(), VERSION)
-const fl = require('../core/flNames')
+import _equals from '../core/equals.js'
+import _implements from '../core/implements.js'
+import _inspect from '../core/inspect.js'
+import types from '../core/types.js'
+const type = types.type('Const')
+const _type = types.typeFn(type(), VERSION)
+import fl from '../core/flNames.js'
 
-const isFunction = require('../core/isFunction')
-const isSameType = require('../core/isSameType')
+import isFunction from '../core/isFunction.js'
+import isSameType from '../core/isSameType.js'
 
 function Const(x) {
   if(!arguments.length) {
@@ -88,4 +89,4 @@ Const['@@implements'] = _implements(
   [ 'ap', 'chain', 'concat', 'equals', 'map' ]
 )
 
-module.exports = Const
+export default Const

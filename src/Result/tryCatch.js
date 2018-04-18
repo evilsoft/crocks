@@ -2,8 +2,8 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const { Err, Ok } = require('.')
-const curry = require('../core/curry')
-const isFunction = require('../core/isFunction')
+import curry from '../core/curry.js'
+import isFunction from '../core/isFunction.js'
 
 function tryCatch(fn) {
   if(!isFunction(fn)) {
@@ -16,4 +16,4 @@ function tryCatch(fn) {
   }
 }
 
-module.exports = curry(tryCatch)
+export default curry(tryCatch)

@@ -1,13 +1,13 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Karthik Iyengar (karthikiyengar) */
 
-const curry = require('../core/curry')
-const equals = require('../core/equals')
-const isDefined = require('../core/isDefined')
-const isEmpty = require('../core/isEmpty')
-const isInteger = require('../core/isInteger')
-const isNil = require('../core/isNil')
-const isString = require('../core/isString')
+import curry from '../core/curry.js'
+import equals from '../core/equals.js'
+import isDefined from '../core/isDefined.js'
+import isEmpty from '../core/isEmpty.js'
+import isInteger from '../core/isInteger.js'
+import isNil from '../core/isNil.js'
+import isString from '../core/isString.js'
 
 // propEq: (String | Integer) -> a -> b -> Boolean
 function propEq(key, value, x) {
@@ -26,4 +26,4 @@ function propEq(key, value, x) {
   return isDefined(target) && equals(target, value)
 }
 
-module.exports = curry(propEq)
+export default curry(propEq)

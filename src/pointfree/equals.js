@@ -1,12 +1,11 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const _equals = require('../core/equals')
-const curry = require('../core/curry')
+import _equals from '../core/equals.js'
+import curry from '../core/curry.js'
 
 function equals(x, y) {
   return _equals(x, y)
 }
 
-module.exports =
-  curry(equals)
+export default curry(equals)

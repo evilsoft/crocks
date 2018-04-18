@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   hasProp: require('./hasProp'),
   hasPropPath: require('./hasPropPath'),
   isAlt: require('./isAlt'),

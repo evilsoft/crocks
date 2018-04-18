@@ -3,16 +3,17 @@
 
 const VERSION = 2
 
-const _implements = require('../core/implements')
-const _inspect = require('../core/inspect')
-const type = require('../core/types').type('Arrow')
-const _type = require('../core/types').typeFn(type(), VERSION)
-const fl = require('../core/flNames')
+import _implements from '../core/implements.js'
+import _inspect from '../core/inspect.js'
+import types from '../core/types.js'
+const type = types.type('Arrow')
+const _type = types.typeFn(type(), VERSION)
+import fl from '../core/flNames.js'
 
-const isFunction = require('../core/isFunction')
-const isSameType = require('../core/isSameType')
+import isFunction from '../core/isFunction.js'
+import isSameType from '../core/isSameType.js'
 
-const Pair = require('../core/types').proxy('Pair')
+const Pair = types.proxy('Pair')
 
 const _id =
   () => Arrow(x => x)
@@ -126,4 +127,4 @@ Arrow['@@implements'] = _implements(
   [ 'compose', 'contramap', 'id', 'map', 'promap' ]
 )
 
-module.exports = Arrow
+export default Arrow

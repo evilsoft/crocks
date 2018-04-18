@@ -1,7 +1,7 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isFunction = require('../core/isFunction')
+import isFunction from '../core/isFunction.js'
 
 const err = 'pipe: Functions required'
 
@@ -34,4 +34,4 @@ function pipe(...fns) {
   return tail.reduce(applyPipe, head)
 }
 
-module.exports = pipe
+export default pipe

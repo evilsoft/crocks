@@ -1,9 +1,9 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const curry = require('../core/curry')
-const isBifunctor = require('../core/isBifunctor')
-const isFunction = require('../core/isFunction')
+import curry from '../core/curry.js'
+import isBifunctor from '../core/isBifunctor.js'
+import isFunction from '../core/isFunction.js'
 
 function bimap(f, g, m) {
   if(!(isFunction(f) &&  isFunction(g))) {
@@ -21,4 +21,4 @@ function bimap(f, g, m) {
   return m.bimap(f, g)
 }
 
-module.exports = curry(bimap)
+export default curry(bimap)

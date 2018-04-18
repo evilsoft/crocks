@@ -2,13 +2,13 @@
 /** @author Henrique Limas */
 /** @author Ian Hofmann-Hicks */
 
-const curry = require('../core/curry')
-const isArray = require('../core/isArray')
-const isEmpty = require('../core/isEmpty')
-const isInteger = require('../core/isInteger')
-const isDefined = require('../core/isDefined')
-const isNil = require('../core/isNil')
-const isString = require('../core/isString')
+import curry from '../core/curry.js'
+import isArray from '../core/isArray.js'
+import isEmpty from '../core/isEmpty.js'
+import isInteger from '../core/isInteger.js'
+import isDefined from '../core/isDefined.js'
+import isNil from '../core/isNil.js'
+import isString from '../core/isString.js'
 
 // propPathOr : a -> [ String | Integer ] -> b -> c
 function propPathOr(def, keys, target) {
@@ -46,4 +46,4 @@ function propPathOr(def, keys, target) {
   return value
 }
 
-module.exports = curry(propPathOr)
+export default curry(propPathOr)

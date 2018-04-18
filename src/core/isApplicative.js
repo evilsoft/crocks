@@ -1,8 +1,8 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const hasAlg = require('./hasAlg')
-const isApply = require('./isApply')
+import hasAlg from './hasAlg.js'
+import isApply from './isApply.js'
 
 // isApplicative : a -> Boolean
 function isApplicative(m) {
@@ -10,4 +10,4 @@ function isApplicative(m) {
     && hasAlg('of', m)
 }
 
-module.exports = isApplicative
+export default isApplicative

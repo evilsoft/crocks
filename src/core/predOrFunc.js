@@ -1,7 +1,7 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isFunction = require('./isFunction')
+import isFunction from './isFunction.js'
 
 function predOrFunc(pred, x) {
   if(isFunction(pred)) {
@@ -10,4 +10,4 @@ function predOrFunc(pred, x) {
   return pred.runWith(x)
 }
 
-module.exports = predOrFunc
+export default predOrFunc

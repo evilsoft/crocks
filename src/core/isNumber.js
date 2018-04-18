@@ -7,4 +7,4 @@ function isNumber(x) {
     && !isNaN(x)
 }
 
-module.exports = isNumber
+export default isNumber

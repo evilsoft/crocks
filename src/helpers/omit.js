@@ -1,8 +1,8 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const curry = require('../core/curry')
-const isFoldable = require('../core/isFoldable')
+import curry from '../core/curry.js'
+import isFoldable from '../core/isFoldable.js'
 const isObject  = require('../core/isObject')
 
 function omitKeys(keys, obj) {
@@ -25,4 +25,4 @@ function omit(keys, obj) {
   return Object.keys(obj).reduce(omitKeys(keys, obj), {})
 }
 
-module.exports = curry(omit)
+export default curry(omit)

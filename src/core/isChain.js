@@ -1,8 +1,8 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const hasAlg = require('./hasAlg')
-const isApply = require('./isApply')
+import hasAlg from './hasAlg.js'
+import isApply from './isApply.js'
 
 // isChain : a -> Boolean
 function isChain(m) {
@@ -10,4 +10,4 @@ function isChain(m) {
     && hasAlg('chain', m)
 }
 
-module.exports = isChain
+export default isChain

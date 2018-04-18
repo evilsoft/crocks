@@ -3,22 +3,23 @@
 
 const VERSION = 3
 
-const _defineUnion = require('./defineUnion')
-const _equals = require('./equals')
-const _implements = require('./implements')
-const _innerConcat = require('./innerConcat')
-const _inspect = require('./inspect')
-const type = require('./types').type('Maybe')
-const _type = require('./types').typeFn(type(), VERSION)
-const fl = require('./flNames')
+import _defineUnion from './defineUnion.js'
+import _equals from './equals.js'
+import _implements from './implements.js'
+import _innerConcat from './innerConcat.js'
+import _inspect from './inspect.js'
+import types from './types.js'
+const type = types.type('Maybe')
+const _type = types.typeFn(type(), VERSION)
+import fl from './flNames.js'
 
-const apOrFunc = require('./apOrFunc')
-const compose = require('./compose')
-const isApplicative = require('./isApplicative')
-const isApply = require('./isApply')
-const isArray = require('./isArray')
-const isFunction = require('./isFunction')
-const isSameType = require('./isSameType')
+import apOrFunc from './apOrFunc.js'
+import compose from './compose.js'
+import isApplicative from './isApplicative.js'
+import isApply from './isApply.js'
+import isArray from './isArray.js'
+import isFunction from './isFunction.js'
+import isSameType from './isSameType.js'
 
 const constant = x => () => x
 const identity = x => x
@@ -254,4 +255,4 @@ Maybe['@@implements'] = _implements(
   [ 'alt', 'ap', 'chain', 'concat', 'equals', 'map', 'of', 'traverse', 'zero' ]
 )
 
-module.exports = Maybe
+export default Maybe

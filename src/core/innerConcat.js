@@ -1,8 +1,8 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isSameType = require('./isSameType')
-const isSemigroup = require('./isSemigroup')
+import isSameType from './isSameType.js'
+import isSemigroup from './isSemigroup.js'
 
 function innerConcat(method, m) {
   return function(left) {
@@ -20,4 +20,4 @@ function innerConcat(method, m) {
   }
 }
 
-module.exports = innerConcat
+export default innerConcat

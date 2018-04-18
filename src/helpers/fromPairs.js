@@ -1,11 +1,12 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const Pair = require('../core/types').proxy('Pair')
+import types from '../core/types.js'
+const Pair = types.proxy('Pair')
 
-const isFoldable = require('../core/isFoldable')
-const isSameType = require('../core/isSameType')
-const isString = require('../core/isString')
+import isFoldable from '../core/isFoldable.js'
+import isSameType from '../core/isSameType.js'
+import isString from '../core/isString.js'
 
 function foldPairs(acc, pair) {
   if(!isSameType(Pair, pair)) {
@@ -33,4 +34,4 @@ function fromPairs(xs) {
   return xs.reduce(foldPairs, {})
 }
 
-module.exports = fromPairs
+export default fromPairs

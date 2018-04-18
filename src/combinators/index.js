@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   applyTo: require('./applyTo'),
   composeB: require('./composeB'),
   constant: require('./constant'),

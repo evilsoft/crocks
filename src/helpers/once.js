@@ -1,8 +1,8 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isFunction = require('../core/isFunction')
-const _once = require('../core/once')
+import isFunction from '../core/isFunction.js'
+import _once from '../core/once.js'
 
 // once : ((*) -> b) -> ((*) -> b)
 function once(fn) {
@@ -13,4 +13,4 @@ function once(fn) {
   return _once(fn)
 }
 
-module.exports = once
+export default once

@@ -3,25 +3,26 @@
 
 const VERSION = 3
 
-const _equals = require('./equals')
-const _implements = require('./implements')
-const _inspect = require('./inspect')
-const type = require('./types').type('List')
-const _type = require('./types').typeFn(type(), VERSION)
-const fl = require('./flNames')
+import _equals from './equals.js'
+import _implements from './implements.js'
+import _inspect from './inspect.js'
+import types from './types.js'
+const type = types.type('List')
+const _type = types.typeFn(type(), VERSION)
+import fl from './flNames.js'
 
-const array = require('./array')
+import array from './array.js'
 
-const apOrFunc = require('./apOrFunc')
-const isApplicative = require('./isApplicative')
-const isApply = require('./isApply')
-const isArray = require('./isArray')
-const isEmpty = require('./isEmpty')
-const isFunction = require('./isFunction')
-const isPredOrFunc = require('./isPredOrFunc')
-const isSameType = require('./isSameType')
-const isSemigroup = require('./isSemigroup')
-const predOrFunc = require('./predOrFunc')
+import apOrFunc from './apOrFunc.js'
+import isApplicative from './isApplicative.js'
+import isApply from './isApply.js'
+import isArray from './isArray.js'
+import isEmpty from './isEmpty.js'
+import isFunction from './isFunction.js'
+import isPredOrFunc from './isPredOrFunc.js'
+import isSameType from './isSameType.js'
+import isSemigroup from './isSemigroup.js'
+import predOrFunc from './predOrFunc.js'
 
 const not =
   fn => x => !fn(x)
@@ -29,7 +30,7 @@ const not =
 const _prepend =
   x => m => x.concat(m)
 
-const { Nothing, Just } = require('./Maybe')
+import { Nothing, Just } from './Maybe.js'
 
 const _of =
   x => List([ x ])
@@ -314,4 +315,4 @@ List['@@implements'] = _implements(
   [ 'ap', 'chain', 'concat', 'empty', 'equals', 'map', 'of', 'reduce', 'traverse' ]
 )
 
-module.exports = List
+export default List

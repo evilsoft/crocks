@@ -1,10 +1,10 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const Pair = require('../core/types').proxy('Pair')
+import Pair from '../core/types').proxy('Pair.js'
 
-const isFunction = require('../core/isFunction')
-const isSameType = require('../core/isSameType')
+import isFunction from '../core/isFunction.js'
+import isSameType from '../core/isSameType.js'
 
 const identity = x => x
 
@@ -26,4 +26,4 @@ function second(m) {
   throw new TypeError('second: Arrow, Function or Star required')
 }
 
-module.exports = second
+export default second

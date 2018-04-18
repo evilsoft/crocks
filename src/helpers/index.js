@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   assign: require('./assign'),
   assoc: require('./assoc'),
   binary: require('./binary'),

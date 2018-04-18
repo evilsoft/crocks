@@ -1,7 +1,7 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isFunction = require('./isFunction')
+import isFunction from './isFunction.js'
 
 function applyCurry(fn, arg) {
   if(!isFunction(fn)) { return fn }
@@ -30,4 +30,4 @@ function curry(fn) {
   }
 }
 
-module.exports = curry
+export default curry

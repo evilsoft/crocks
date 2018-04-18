@@ -1,10 +1,10 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isArray = require('./isArray')
-const isFunction = require('./isFunction')
-const isObject = require('./isObject')
-const isString = require('./isString')
+import isArray from './isArray.js'
+import isFunction from './isFunction.js'
+import isObject from './isObject.js'
+import isString from './isString.js'
 
 function arrayInspect(xs) {
   return xs.length
@@ -37,4 +37,4 @@ function inspect(x) {
   return ` ${x}`
 }
 
-module.exports = inspect
+export default inspect

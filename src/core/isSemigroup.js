@@ -1,8 +1,8 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isString = require('./isString')
-const hasAlg = require('./hasAlg')
+import isString from './isString.js'
+import hasAlg from './hasAlg.js'
 
 // isSemigroup : a -> Boolean
 function isSemigroup(m) {
@@ -10,4 +10,4 @@ function isSemigroup(m) {
     || !!m && hasAlg('concat', m)
 }
 
-module.exports = isSemigroup
+export default isSemigroup

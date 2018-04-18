@@ -1,7 +1,7 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isNil = require('../core/isNil')
+import isNil from '../core/isNil.js'
 
 function valueOf(m) {
   if(isNil(m)) {
@@ -11,4 +11,4 @@ function valueOf(m) {
   return m.valueOf()
 }
 
-module.exports = valueOf
+export default valueOf

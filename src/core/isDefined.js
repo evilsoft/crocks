@@ -5,4 +5,4 @@ function isDefined(x) {
   return x !== undefined
 }
 
-module.exports = isDefined
+export default isDefined

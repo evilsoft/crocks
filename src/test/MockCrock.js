@@ -1,5 +1,5 @@
-const _implements = require('../core/implements')
-const _equals = require('../core/equals')
+import _implements from '../core/implements.js'
+import _equals from '../core/equals.js'
 
 const constant = x => () => x
 
@@ -35,4 +35,4 @@ MockCrock['@@implements'] = _implements(
   [ 'ap', 'chain', 'equals', 'map', 'of', 'traverse' ]
 )
 
-module.exports = MockCrock
+export default MockCrock

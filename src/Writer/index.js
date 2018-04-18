@@ -3,18 +3,19 @@
 
 const VERSION = 2
 
-const _equals = require('../core/equals')
-const _implements = require('../core/implements')
-const _inspect = require('../core/inspect')
-const __type = require('../core/types').type('Writer')()
-const _typeString = require('../core/types').typeFn(__type, VERSION)
-const fl = require('../core/flNames')
+import _equals from '../core/equals.js'
+import _implements from '../core/implements.js'
+import _inspect from '../core/inspect.js'
+import types from '../core/types.js'
+const __type = types.type('Writer')()
+const _typeString = types.typeFn(__type, VERSION)
+import fl from '../core/flNames.js'
 
-const Pair = require('../core/Pair')
+import Pair from '../core/Pair.js'
 
-const isFunction = require('../core/isFunction')
-const isMonoid = require('../core/isMonoid')
-const isSameType = require('../core/isSameType')
+import isFunction from '../core/isFunction.js'
+import isMonoid from '../core/isMonoid.js'
+import isSameType from '../core/isSameType.js'
 
 const constant = x => () => x
 
@@ -128,4 +129,4 @@ function _Writer(Monoid) {
   return Writer
 }
 
-module.exports = _Writer
+export default _Writer

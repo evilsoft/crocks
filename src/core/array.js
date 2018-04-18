@@ -1,11 +1,11 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isApply = require('./isApply')
-const isArray = require('./isArray')
-const isFunction = require('./isFunction')
-const isSameType = require('./isSameType')
-const apOrFunc = require('./apOrFunc')
+import isApply from './isApply.js'
+import isArray from './isArray.js'
+import isFunction from './isFunction.js'
+import isSameType from './isSameType.js'
+import apOrFunc from './apOrFunc.js'
 
 const identity =
   x => x
@@ -67,6 +67,6 @@ function traverse(f, fn, m) {
   return m.reduceRight(runTraverse('traverse', fn), af([]))
 }
 
-module.exports = {
+export default {
   ap, chain, map, sequence, traverse
 }

@@ -10,4 +10,4 @@ function isSame(x, y) {
   return x !== x && y !== y
 }
 
-module.exports = isSame
+export default isSame

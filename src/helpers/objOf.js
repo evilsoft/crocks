@@ -1,8 +1,8 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const curry = require('../core/curry')
-const isString = require('../core/isString')
+import curry from '../core/curry.js'
+import isString from '../core/isString.js'
 
 // objOf : String -> a -> Object
 function objOf(key, value) {
@@ -13,4 +13,4 @@ function objOf(key, value) {
   return { [key]: value }
 }
 
-module.exports = curry(objOf)
+export default curry(objOf)

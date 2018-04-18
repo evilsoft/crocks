@@ -1,8 +1,8 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isChain = require('../core/isChain')
-const isFunction = require('../core/isFunction')
+import isChain from '../core/isChain.js'
+import isFunction from '../core/isFunction.js'
 
 const err = 'pipeK: Chain returning functions of the same type required'
 
@@ -33,4 +33,4 @@ function pipeK(head, ...fns) {
   }
 }
 
-module.exports = pipeK
+export default pipeK

@@ -1,11 +1,11 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isArray = require('../core/isArray')
-const isEmpty = require('../core/isEmpty')
-const isFunction = require('../core/isFunction')
-const isSameType = require('../core/isSameType')
-const isSemigroup = require('../core/isSemigroup')
+import isArray from '../core/isArray.js'
+import isEmpty from '../core/isEmpty.js'
+import isFunction from '../core/isFunction.js'
+import isSameType from '../core/isSameType.js'
+import isSemigroup from '../core/isSemigroup.js'
 
 // fold : Foldable f, Semigroup s => f s -> s
 function fold(m) {
@@ -37,4 +37,4 @@ function fold(m) {
   throw new TypeError('fold: Non-empty Foldable with at least one Semigroup is required')
 }
 
-module.exports = fold
+export default fold

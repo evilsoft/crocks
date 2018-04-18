@@ -3,22 +3,23 @@
 
 const VERSION = 3
 
-const _defineUnion = require('../core/defineUnion')
-const _equals = require('../core/equals')
-const _implements = require('../core/implements')
-const _innerConcat = require('../core/innerConcat')
-const _inspect = require('../core/inspect')
-const type = require('../core/types').type('Either')
-const _type = require('../core/types').typeFn(type(), VERSION)
-const fl = require('../core/flNames')
+import _defineUnion from '../core/defineUnion.js'
+import _equals from '../core/equals.js'
+import _implements from '../core/implements.js'
+import _innerConcat from '../core/innerConcat.js'
+import _inspect from '../core/inspect.js'
+import types from '../core/types.js'
+const type = types.type('Either')
+const _type = types.typeFn(type(), VERSION)
+import fl from '../core/flNames.js'
 
-const apOrFunc = require('../core/apOrFunc')
-const compose = require('../core/compose')
-const isArray = require('../core/isArray')
-const isApplicative = require('../core/isApplicative')
-const isApply = require('../core/isApply')
-const isFunction = require('../core/isFunction')
-const isSameType = require('../core/isSameType')
+import apOrFunc from '../core/apOrFunc.js'
+import compose from '../core/compose.js'
+import isArray from '../core/isArray.js'
+import isApplicative from '../core/isApplicative.js'
+import isApply from '../core/isApply.js'
+import isFunction from '../core/isFunction.js'
+import isSameType from '../core/isSameType.js'
 
 const constant =
   x => () => x
@@ -258,4 +259,4 @@ Either['@@implements'] = _implements(
   [ 'alt', 'ap', 'bimap', 'chain', 'concat', 'equals', 'map', 'of', 'traverse' ]
 )
 
-module.exports = Either
+export default Either

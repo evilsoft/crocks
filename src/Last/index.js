@@ -3,16 +3,17 @@
 
 const VERSION = 2
 
-const _implements = require('../core/implements')
-const _inspect = require('../core/inspect')
-const _equals = require('../core/equals')
-const type = require('../core/types').type('Last')
-const _type = require('../core/types').typeFn(type(), VERSION)
-const fl = require('../core/flNames')
+import _implements from '../core/implements.js'
+import _inspect from '../core/inspect.js'
+import _equals from '../core/equals.js'
+import types from '../core/types.js'
+const type = types.type('Last')
+const _type = types.typeFn(type(), VERSION)
+import fl from '../core/flNames.js'
 
-const isSameType = require('../core/isSameType')
+import isSameType from '../core/isSameType.js'
 
-const Maybe = require('../core/Maybe')
+import Maybe from '../core/Maybe.js'
 
 const _empty =
   () => Last(Maybe.Nothing())
@@ -81,4 +82,4 @@ Last.type = type
 Last[fl.empty] = _empty
 Last['@@type'] = _type
 
-module.exports = Last
+export default Last

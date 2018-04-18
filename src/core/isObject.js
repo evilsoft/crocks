@@ -9,4 +9,4 @@ function isObject(x) {
     && toString.call(x) === '[object Object]'
 }
 
-module.exports = isObject
+export default isObject

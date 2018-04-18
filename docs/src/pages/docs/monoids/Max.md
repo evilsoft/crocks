@@ -35,7 +35,7 @@ Max.empty()
 
 ## Implements
 
-`Semigroup`, `Monoid`
+`Setoid`, `Semigroup`, `Monoid`
 
 </article>
 
@@ -79,6 +79,30 @@ Max.empty()
 
 ## Instance Methods
 
+#### equals
+
+```haskell
+Max a ~> b -> Boolean
+```
+
+Used to compare the underlying values of (2) `Max` instances for equality by
+value, `equals` takes any given argument and returns `true` if the passed
+argument is a `Max` with an underlying value equal to the underlying value of
+the `Max` the method is being called on. If the passed argument is not
+a `Max` or the underlying values are not equal, `equals` will return `false`.
+
+```javascript
+import Max from 'crocks/Max'
+
+Max(5)
+  .equals(Max(5))
+//=> true
+
+Max(25)
+  .equals(Max(31))
+//=> false
+```
+
 #### concat
 
 ```haskell
@@ -103,30 +127,6 @@ Max(-23)
 Max.empty()
   .concat(Max(Infinity))
 //=> Max Infinity
-```
-
-#### equals
-
-```haskell
-Max a ~> b -> Boolean
-```
-
-Used to compare the underlying values of (2) `Max` instances for equality by
-value, equals takes any given argument and returns `true` if the passed
-argument is a `Max` with an underlying value equal to the underlying value of
-the `Max` the method is being called on. If the passed argument is not
-a `Max` or the underlying values are not equal, equals will return `false`.
-
-```javascript
-import Max from 'crocks/Max'
-
-Max(5)
-  .equals(Max(5))
-//=> true
-
-Max(25)
-  .equals(Max(31))
-//=> false
 ```
 
 #### valueOf

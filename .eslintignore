@@ -1,4 +1,19 @@
-node_modules
-build
-coverage
-docs
+/*
+
+!src
+!docs
+
+# check js on markdown for docs
+docs/*
+!docs/src
+docs/src/*
+!docs/src/pages
+docs/src/pages/*
+!docs/src/pages/docs
+docs/src/pages/docs/*
+
+# need to clean up functions
+#!docs/src/pages/docs/functions
+
+!docs/src/pages/docs/crocks
+!docs/src/pages/docs/monoids

@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([4,31,32,33],[
+webpackJsonppageComponent([18,31,32,33],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -28360,26 +28360,12 @@ exports.default = parseFromAnchor;
 /* 226 */,
 /* 227 */,
 /* 228 */,
-/* 229 */,
-/* 230 */,
-/* 231 */,
-/* 232 */,
-/* 233 */,
-/* 234 */,
-/* 235 */,
-/* 236 */,
-/* 237 */,
-/* 238 */,
-/* 239 */,
-/* 240 */,
-/* 241 */,
-/* 242 */,
-/* 243 */
+/* 229 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "gdeXe", function() { return gdeXe; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GlIMS", function() { return GlIMS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28391,15 +28377,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var templates;
 goog.loadModule(function(exports) {
 
-// This file was automatically generated from Prod.soy.
+// This file was automatically generated from logic-functions.soy.
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace gdeXe.
+ * @fileoverview Templates in namespace GlIMS.
  * @public
  */
 
-goog.module('gdeXe.incrementaldom');
+goog.module('GlIMS.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28422,7 +28408,7 @@ var iattr = IncrementalDom.attr;
 
 var $templateAlias2 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('ElectricCode.incrementaldom', 'render');
 
-var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('guide.incrementaldom', 'render');
+var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('notopic.incrementaldom', 'render');
 
 
 /**
@@ -28433,183 +28419,201 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var param2258 = function() {
-    $templateAlias2({code: 'Prod Number', mode: 'haskell'}, null, opt_ijData);
+  var param1678 = function() {
     ie_open('p');
+      itext('The functions in this section are used to represent logical branching in a declarative manner. Each of these functions require either ');
       ie_open('code');
-        itext('Prod');
+        itext('Pred');
       ie_close('code');
-      itext(' is a ');
+      itext('s or predicate functions in their input. Since these functions work with ');
       ie_open('code');
-        itext('Monoid');
+        itext('Pred');
       ie_close('code');
-      itext(' that will combine (2) ');
+      itext('s and predicate functions, rather than values, this allows for composeable, "lazy" evaluation. All logic functions can be referenced from ');
       ie_open('code');
-        itext('Number');
+        itext('crocks/logic');
       ie_close('code');
-      itext('s under multiplication.');
     ie_close('p');
-    $templateAlias2({code: 'import Prod from \'crocks/Prod\'\nimport compose from \'crocks/helpers/compose\'\nimport concat from \'crocks/pointfree/concat\'\n\nconst emptyProd = Prod.empty()\nconst tenProd = Prod(10)\nconst hundredProd = Prod(100)\n\nemptyProd\n  .concat(emptyProd)\n//=> Prod 1\n\ntenProd\n  .concat(hundredProd)\n//=> Prod 1000\n\n// prodBy2 :: Number -> Prod\nconst double =\n  compose(concat(Prod(2)), Prod)\n\ndouble(4)\n//=> Prod 8\n\ndouble(11)\n//=> Prod 22', mode: 'javascript'}, null, opt_ijData);
-    ie_open('article', null, null,
-        'id', 'topic-implements');
-      ie_open('h2');
-        ie_open('a', null, null,
-            'id', 'implements',
-            'href', '#implements');
-          itext('Implements');
-        ie_close('a');
-      ie_close('h2');
-      ie_open('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'and',
+          'href', '#and');
+        itext('and');
+      ie_close('a');
+    ie_close('h4');
+    $templateAlias2({code: 'and :: ((a -> Boolean) | Pred a) -> ((a -> Boolean) | Pred a) -> a -> Boolean', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('Say you have two predicate functions or ');
+      ie_open('code');
+        itext('Pred');
+      ie_close('code');
+      itext('s and would like to combine them into one predicate over conjunction, well you came to the right place, ');
+      ie_open('code');
+        itext('and');
+      ie_close('code');
+      itext('accepts either predicate functions or ');
+      ie_open('code');
+        itext('Pred');
+      ie_close('code');
+      itext('s and will return you a function ready to take a value. Once that value is passed, it will run it through both of the predicates and return the result of combining it over a ');
+      ie_open('code');
+        itext('logical and');
+      ie_close('code');
+      itext('. This is super helpful combined with ');
+      ie_open('code');
+        itext('or');
+      ie_close('code');
+      itext(' for putting together reusable, complex predicates. As they follow the general form of ');
+      ie_open('code');
+        itext('(a -> Boolean)');
+      ie_close('code');
+      itext(' they are easily combined with other logic functions.');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'ifelse',
+          'href', '#ifelse');
+        itext('ifElse');
+      ie_close('a');
+    ie_close('h4');
+    $templateAlias2({code: 'ifElse :: ((a -> Boolean) | Pred a) -> (a -> b) -> (a -> b) -> a -> b', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('Whenever you need to modify a value based some condition and want a functional way to do it without some imperative ');
+      ie_open('code');
+        itext('if');
+      ie_close('code');
+      itext(' statement, then reach for ');
+      ie_open('code');
+        itext('ifElse');
+      ie_close('code');
+      itext('. This function take a predicate (some function that returns a Boolean) and two functions. The first is what is executed when the predicate is true, the second on a false condition. This will return a function ready to take a value to run through the predicate. After the value is evaluated, it will be ran through it\'s corresponding function, returning the result as the final result. This function comes in really handy when creating lifting functions for Sum Types (like');
+      ie_open('code');
+        itext('Either');
+      ie_close('code');
+      itext(' or ');
+      ie_open('code');
+        itext('Maybe');
+      ie_close('code');
+      itext(').');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'not',
+          'href', '#not');
+        itext('not');
+      ie_close('a');
+    ie_close('h4');
+    $templateAlias2({code: 'not :: ((a -> Boolean) | Pred) -> a -> Boolean', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('When you need to negate a predicate function or a ');
+      ie_open('code');
+        itext('Pred');
+      ie_close('code');
+      itext(', but want a new predicate function that does the negation, then ');
+      ie_open('code');
+        itext('not');
+      ie_close('code');
+      itext(' is going to get you what you need. Using ');
+      ie_open('code');
+        itext('not');
+      ie_close('code');
+      itext(' will allow you to stay as declarative as possible. Just pass ');
+      ie_open('code');
+        itext('not');
+      ie_close('code');
+      itext(' your predicate function or a ');
+      ie_open('code');
+        itext('Pred');
+      ie_close('code');
+      itext(', and it will give you back a predicate function ready for insertion into your flow. All predicate based functions in ');
+      ie_open('code');
+        itext('crocks');
+      ie_close('code');
+      itext(' take either a ');
+      ie_open('code');
+        itext('Pred');
+      ie_close('code');
+      itext(' or predicate function, so it should be easy to swap between the two.');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'or',
+          'href', '#or');
+        itext('or');
+      ie_close('a');
+    ie_close('h4');
+    $templateAlias2({code: 'or :: ((a -> Boolean) | Pred) -> ((a -> Boolean) | Pred) -> a -> Boolean', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('Say you have two predicate functions or ');
+      ie_open('code');
+        itext('Pred');
+      ie_close('code');
+      itext('s and would like to combine them into one predicate over disjunction, look no further, ');
+      ie_open('code');
+        itext('or');
+      ie_close('code');
+      itext(' accepts either predicate functions or ');
+      ie_open('code');
+        itext('Pred');
+      ie_close('code');
+      itext('s and will return you a function ready to take a value. Once that value is passed, it will run it through both of the predicates and return the result of combining it over a ');
+      ie_open('code');
+        itext('logical or');
+      ie_close('code');
+      itext('. This is super helpful combined with ');
+      ie_open('code');
+        itext('and');
+      ie_close('code');
+      itext(' for putting together reusable, complex predicates. As they follow the general form of ');
+      ie_open('code');
+        itext('(a -> Boolean)');
+      ie_close('code');
+      itext(' they are easily combined with other logic functions.');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'unless',
+          'href', '#unless');
+        itext('unless');
+      ie_close('a');
+    ie_close('h4');
+    $templateAlias2({code: 'unless :: ((a -> Boolean) | Pred) -> (a -> a) -> a -> a', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('There may come a time when you need to adjust a value when a condition is false, that is where ');
+      ie_open('code');
+        itext('unless');
+      ie_close('code');
+      itext(' can come into play. Just provide a predicate function (a function that returns a Boolean) and a function to apply your desired modification. This will get you back a function that when you pass it a value, it will evaluate it and if false, will run your value through the provided function. Either the original or modified value will be returned depending on the result of the predicate. Check out ');
+      ie_open('a', null, null,
+          'href', '#when');
         ie_open('code');
-          itext('Semigroup');
+          itext('when');
         ie_close('code');
-        itext(', ');
+      ie_close('a');
+      itext(' for a negated version of this function.');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'when',
+          'href', '#when');
+        itext('when');
+      ie_close('a');
+    ie_close('h4');
+    $templateAlias2({code: 'when :: ((a -> Boolean) | Pred) -> (a -> a) -> a -> a', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('There may come a time when you need to adjust a value when a condition is true, that is where ');
+      ie_open('code');
+        itext('when');
+      ie_close('code');
+      itext(' can come into play. Just provide a predicate function (a function that returns a Boolean) and a function to apply your desired modification. This will get you back a function that when you pass it a value, it will evaluate it and if true, will run your value through the provided function. Either the original or modified value will be returned depending on the result of the predicate. Check out ');
+      ie_open('a', null, null,
+          'href', '#unless');
         ie_open('code');
-          itext('Monoid');
+          itext('unless');
         ie_close('code');
-      ie_close('p');
-    ie_close('article');
-    ie_open('article', null, null,
-        'id', 'topic-constructor');
-      ie_open('h2');
-        ie_open('a', null, null,
-            'id', 'constructor-methods',
-            'href', '#constructor-methods');
-          itext('Constructor Methods');
-        ie_close('a');
-      ie_close('h2');
-      ie_open('h3');
-        ie_open('a', null, null,
-            'id', 'empty',
-            'href', '#empty');
-          itext('empty');
-        ie_close('a');
-      ie_close('h3');
-      $templateAlias2({code: 'Prod.empty :: () -> Prod', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        ie_open('code');
-          itext('empty');
-        ie_close('code');
-        itext(' provides the identity for the ');
-        ie_open('code');
-          itext('Monoid');
-        ie_close('code');
-        itext(' in that when the value it provides is ');
-        ie_open('code');
-          itext('concat');
-        ie_close('code');
-        itext('ed to object other value, it will return the other value. In the case of ');
-        ie_open('code');
-          itext('Prod');
-        ie_close('code');
-        itext(' the result of ');
-        ie_open('code');
-          itext('empty');
-        ie_close('code');
-        itext(' is ');
-        ie_open('code');
-          itext('1');
-        ie_close('code');
-        itext('. ');
-        ie_open('code');
-          itext('empty');
-        ie_close('code');
-        itext(' is available on both the Constructor and the Instance for convenience.');
-      ie_close('p');
-      $templateAlias2({code: 'import Prod from \'crocks/Prod\'\n\nProd.empty()\n//=> Prod 1\n\nProd.empty()\n  .concat(Prod.empty())\n//=> Prod 1\n\nProd(4)\n  .concat(Prod.empty())\n//=> Prod 4\n\nProd.empty()\n  .concat(Prod(4))\n//=> Prod 4', mode: 'javascript'}, null, opt_ijData);
-    ie_close('article');
-    ie_open('article', null, null,
-        'id', 'topic-instance');
-      ie_open('h2');
-        ie_open('a', null, null,
-            'id', 'instance-methods',
-            'href', '#instance-methods');
-          itext('Instance Methods');
-        ie_close('a');
-      ie_close('h2');
-      ie_open('h3');
-        ie_open('a', null, null,
-            'id', 'concat',
-            'href', '#concat');
-          itext('concat');
-        ie_close('a');
-      ie_close('h3');
-      $templateAlias2({code: 'Prod ~> Prod -> Prod', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        ie_open('code');
-          itext('concat');
-        ie_close('code');
-        itext(' is used to combine (2) ');
-        ie_open('code');
-          itext('Semigroup');
-        ie_close('code');
-        itext('s of the same type under an operation specified by the ');
-        ie_open('code');
-          itext('Semigroup');
-        ie_close('code');
-        itext('. In the case of ');
-        ie_open('code');
-          itext('Prod');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('concat');
-        ie_close('code');
-        itext(' will multiply the (2) ');
-        ie_open('code');
-          itext('Number');
-        ie_close('code');
-        itext('s.');
-      ie_close('p');
-      $templateAlias2({code: 'import Prod from \'crocks/Prod\'\n\nProd(5)\n  .concat(Prod(4))\n//=> Prod 20\n\nProd(45)\n  .concat(Prod(32))\n//=> Prod 1440\n\nProd(1000)\n  .concat(Prod(Infinity))\n//=> Prod Infinity\n\nProd.empty()\n  .concat(Prod(3))\n//=> Prod 3', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h3');
-        ie_open('a', null, null,
-            'id', 'valueof',
-            'href', '#valueof');
-          itext('valueOf');
-        ie_close('a');
-      ie_close('h3');
-      $templateAlias2({code: 'Prod ~> () -> Number', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        ie_open('code');
-          itext('valueOf');
-        ie_close('code');
-        itext(' is used on all ');
-        ie_open('code');
-          itext('crocks');
-        ie_close('code');
-        itext(' ');
-        ie_open('code');
-          itext('Monoid');
-        ie_close('code');
-        itext('s as a means of extraction. While the extraction is available, types that implement ');
-        ie_open('code');
-          itext('valueOf');
-        ie_close('code');
-        itext(' are not necessarily a ');
-        ie_open('code');
-          itext('Comonad');
-        ie_close('code');
-        itext('. This function is used primarily for convenience for some of the helper functions that ship with ');
-        ie_open('code');
-          itext('crocks');
-        ie_close('code');
-        itext('. Calling ');
-        ie_open('code');
-          itext('valueOf');
-        ie_close('code');
-        itext(' on a ');
-        ie_open('code');
-          itext('Prod');
-        ie_close('code');
-        itext('instance will result in the underlying ');
-        ie_open('code');
-          itext('Number');
-        ie_close('code');
-        itext('.');
-      ie_close('p');
-      $templateAlias2({code: 'import Prod from \'crocks/Prod\'\n\nProd.empty()\n  .valueOf()\n//=> 1\n\nProd(4)\n  .valueOf()\n//=> 4\n\nProd(34)\n  .concat(Prod(21))\n  .valueOf()\n//=> 714', mode: 'javascript'}, null, opt_ijData);
-    ie_close('article');
+      ie_close('a');
+      itext(' for a negated version of this function.');
+    ie_close('p');
     ie_open('input', null, null,
         'type', 'hidden',
         'value', opt_data.page.title);
@@ -28619,11 +28623,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'value', opt_data.site.title);
     ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({content: param2258}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param1678}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'gdeXe.render';
+  $render.soyTemplateName = 'GlIMS.render';
 }
 
 exports.render.params = ["page","site"];
@@ -28633,14 +28637,28 @@ return exports;
 
 });
 
-class gdeXe extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(gdeXe, templates);
+class GlIMS extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(GlIMS, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
 
 
 /***/ }),
+/* 230 */,
+/* 231 */,
+/* 232 */,
+/* 233 */,
+/* 234 */,
+/* 235 */,
+/* 236 */,
+/* 237 */,
+/* 238 */,
+/* 239 */,
+/* 240 */,
+/* 241 */,
+/* 242 */,
+/* 243 */,
 /* 244 */,
 /* 245 */,
 /* 246 */,
@@ -28655,20 +28673,7 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(gdeXe, templates);
 /* 255 */,
 /* 256 */,
 /* 257 */,
-/* 258 */,
-/* 259 */,
-/* 260 */,
-/* 261 */,
-/* 262 */,
-/* 263 */,
-/* 264 */,
-/* 265 */,
-/* 266 */,
-/* 267 */,
-/* 268 */,
-/* 269 */,
-/* 270 */,
-/* 271 */
+/* 258 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28704,9 +28709,9 @@ __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _ProdSoy = __webpack_require__(243);
+var _logicFunctionsSoy = __webpack_require__(229);
 
-var _ProdSoy2 = _interopRequireDefault(_ProdSoy);
+var _logicFunctionsSoy2 = _interopRequireDefault(_logicFunctionsSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28716,23 +28721,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var gdeXe = function (_Component) {
-  _inherits(gdeXe, _Component);
+var GlIMS = function (_Component) {
+  _inherits(GlIMS, _Component);
 
-  function gdeXe() {
-    _classCallCheck(this, gdeXe);
+  function GlIMS() {
+    _classCallCheck(this, GlIMS);
 
-    return _possibleConstructorReturn(this, (gdeXe.__proto__ || Object.getPrototypeOf(gdeXe)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (GlIMS.__proto__ || Object.getPrototypeOf(GlIMS)).apply(this, arguments));
   }
 
-  return gdeXe;
+  return GlIMS;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(gdeXe, _ProdSoy2.default);
+_metalSoy2.default.register(GlIMS, _logicFunctionsSoy2.default);
 
-exports.default = gdeXe;
+exports.default = GlIMS;
 
 /***/ })
-],[271]);
+],[258]);

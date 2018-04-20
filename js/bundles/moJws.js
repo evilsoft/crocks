@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([21,31,32,33],[
+webpackJsonppageComponent([20,31,32,33],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -28357,12 +28357,13 @@ exports.default = parseFromAnchor;
 /* 223 */,
 /* 224 */,
 /* 225 */,
-/* 226 */
+/* 226 */,
+/* 227 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "zsKbe", function() { return zsKbe; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "moJws", function() { return moJws; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28374,15 +28375,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var templates;
 goog.loadModule(function(exports) {
 
-// This file was automatically generated from combinators.soy.
+// This file was automatically generated from helpers.soy.
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace zsKbe.
+ * @fileoverview Templates in namespace moJws.
  * @public
  */
 
-goog.module('zsKbe.incrementaldom');
+goog.module('moJws.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28416,152 +28417,1885 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var param1351 = function() {
+  var param1390 = function() {
     ie_open('h4');
       ie_open('a', null, null,
-          'id', 'applyto',
-          'href', '#applyto');
-        itext('applyTo');
+          'id', 'assign',
+          'href', '#assign');
+        itext('assign');
       ie_close('a');
     ie_close('h4');
     ie_open('p');
       ie_open('code');
-        itext('crocks/combinators/applyTo');
+        itext('crocks/helpers/assign');
       ie_close('code');
     ie_close('p');
-    $templateAlias2({code: 'applyTo :: a -> (a -> b) -> b', mode: 'haskell'}, null, opt_ijData);
+    $templateAlias2({code: 'assign :: Object -> Object -> Object', mode: 'haskell'}, null, opt_ijData);
     ie_open('p');
-      itext('Ever run into a situation where you have a value but do not have a function to apply it to? Well this little bird, named Thrush, is there to help out. Just give it a value and it will give you back a function ready to take a function. Once that function is provided, it will return the result of applying your value to that function.');
+      itext('When working with ');
+      ie_open('code');
+        itext('Object');
+      ie_close('code');
+      itext('s, a common operation is to combine (2) of them. This can be accomplished in ');
+      ie_open('code');
+        itext('crocks');
+      ie_close('code');
+      itext(' by reaching for ');
+      ie_open('code');
+        itext('assign');
+      ie_close('code');
+      itext('. Unlike the');
+      ie_open('code');
+        itext('Object.assign');
+      ie_close('code');
+      itext(' that ships with JavaScript, this ');
+      ie_open('code');
+        itext('assign');
+      ie_close('code');
+      itext(' will combine your');
+      ie_open('code');
+        itext('Object');
+      ie_close('code');
+      itext('s into a new shallow copy of their merger. ');
+      ie_open('code');
+        itext('assign');
+      ie_close('code');
+      itext(' only takes two arguments and will overwrite keys present in the second argument with values from the first. As with most of the ');
+      ie_open('code');
+        itext('crocks');
+      ie_close('code');
+      itext(' ');
+      ie_open('code');
+        itext('Object');
+      ie_close('code');
+      itext(' based functions, ');
+      ie_open('code');
+        itext('assign');
+      ie_close('code');
+      itext('will omit any key-value pairs that are ');
+      ie_open('code');
+        itext('undefined');
+      ie_close('code');
+      itext('. Check out a related function named ');
+      ie_open('a', null, null,
+          'href', '#defaultprops');
+        ie_open('code');
+          itext('defaultProps');
+        ie_close('code');
+      ie_close('a');
+      itext(' that will only assign values that are');
+      ie_open('code');
+        itext('undefined');
+      ie_close('code');
+      itext(' in the second argument.');
     ie_close('p');
     ie_open('h4');
       ie_open('a', null, null,
-          'id', 'composeb',
-          'href', '#composeb');
-        itext('composeB');
+          'id', 'assoc',
+          'href', '#assoc');
+        itext('assoc');
       ie_close('a');
     ie_close('h4');
     ie_open('p');
       ie_open('code');
-        itext('crocks/combinators/composeB');
+        itext('crocks/helpers/assoc');
       ie_close('code');
     ie_close('p');
-    $templateAlias2({code: 'composeB :: (b -> c) -> (a -> b) -> a -> c', mode: 'haskell'}, null, opt_ijData);
+    $templateAlias2({code: 'assoc :: String -> a -> Object -> Object', mode: 'haskell'}, null, opt_ijData);
     ie_open('p');
-      itext('Provides a means to describe a composition between two functions. it takes two functions and a value. Given ');
+      itext('There may come a time when you want to add a key-value pair to an ');
       ie_open('code');
-        itext('composeB(f, g)');
+        itext('Object');
       ie_close('code');
-      itext(', which is read ');
+      itext(' and want control over how the key and value are applied. That is where ');
       ie_open('code');
-        itext('f');
+        itext('assoc');
       ie_close('code');
-      itext(' after ');
+      itext(' can come to your aid. Just provide a ');
       ie_open('code');
-        itext('g');
+        itext('String');
       ie_close('code');
-      itext(', it will return a function that will take value ');
+      itext(' key and a value of any type to be associated to the key. Finally pass it any ');
+      ie_open('code');
+        itext('Object');
+      ie_close('code');
+      itext(' and you will get back a shallow copy with your key-value pair merged in. This will overwrite any exiting keys with new value specified. Used with ');
+      ie_open('a', null, null,
+          'href', 'combinators.html#flip');
+        ie_open('code');
+          itext('flip');
+        ie_close('code');
+      ie_close('a');
+      itext(', you can do some interesting things with this function, give it a play! If you just want to create an ');
+      ie_open('code');
+        itext('Object');
+      ie_close('code');
+      itext(' and not concatenate it to another ');
+      ie_open('code');
+        itext('Object');
+      ie_close('code');
+      itext(',');
+      ie_open('a', null, null,
+          'href', '#objof');
+        ie_open('code');
+          itext('objOf');
+        ie_close('code');
+      ie_close('a');
+      itext(' may be the function for you.');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'binary',
+          'href', '#binary');
+        itext('binary');
+      ie_close('a');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/helpers/binary');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'binary :: ((*) -> c) -> a -> b -> c', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('With all the different functions out there in the real world, sometimes it is nice to restrict them to a specific -arity to work with your all your wonderful compositions. When you want to restict any function of any arity to a simple binary function. Just pass your function to ');
+      ie_open('code');
+        itext('binary');
+      ie_close('code');
+      itext(' and you will get back a curried, binary function that will only apply (2) arguments to the inner function, ignoring any others. This works very well with functions like');
+      ie_open('code');
+        itext('Array.prototype.reduce');
+      ie_close('code');
+      itext(' where you may only care about the first 2 arguments. if you need to constrain to more than (2) arguments, then you will want to reach for  ');
+      ie_open('a', null, null,
+          'href', '#nary');
+        ie_open('code');
+          itext('nAry');
+        ie_close('code');
+      ie_close('a');
+      itext('. ');
+      ie_open('code');
+        itext('binary');
+      ie_close('code');
+      itext(' is basically syntactic sugar for ');
+      ie_open('code');
+        itext('nAry(2, fn)');
+      ie_close('code');
+      itext('. Also related is ');
+      ie_open('a', null, null,
+          'href', '#unary');
+        ie_open('code');
+          itext('unary');
+        ie_close('code');
+      ie_close('a');
+      itext(', which constrains to (1) argument.');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'branch',
+          'href', '#branch');
+        itext('branch');
+      ie_close('a');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/Pair/branch');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'branch :: a -> Pair a a', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('When you want to branch a computation into two parts, this is the function you want to reach for. All it does is let you pass in any ');
       ie_open('code');
         itext('a');
       ie_close('code');
-      itext(' and apply it to ');
+      itext(' and will return you a');
       ie_open('code');
-        itext('g');
+        itext('Pair');
       ie_close('code');
-      itext(', passing the result as an argument to ');
+      itext(' that has your value on both the first and second parameter. This allows you to work on the value in two separate computation paths. Be advised that this is Javascript and if ');
       ie_open('code');
-        itext('f');
+        itext('a');
       ie_close('code');
-      itext(', and will finally return the result of ');
+      itext(' is an object type (');
       ie_open('code');
-        itext('f');
+        itext('Object');
       ie_close('code');
-      itext('. (This allows only two functions, if you want to avoid things like:');
+      itext(', ');
       ie_open('code');
-        itext('composeB(composeB(f, g), composeB(h, i))');
+        itext('Array');
       ie_close('code');
-      itext(' then check out');
+      itext(', ');
+      ie_open('code');
+        itext('Date');
+      ie_close('code');
+      itext(', etc) they will reference each other.');
+    ie_close('p');
+    ie_open('p');
+      ie_open('strong');
+        itext('Pro-Tip');
+      ie_close('strong');
+      itext(': ');
+      ie_open('code');
+        itext('Pair');
+      ie_close('code');
+      itext(' provides a ');
+      ie_open('code');
+        itext('merge');
+      ie_close('code');
+      itext(' function that will let you fold the two values into a single value.');
+    ie_close('p');
+    ie_open('h4');
       ie_open('a', null, null,
-          'href', 'helpers.html#compose');
+          'id', 'compose',
+          'href', '#compose');
+        itext('compose');
+      ie_close('a');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/helpers/compose');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'compose :: ((y -> z), ..., (a -> b)) -> a -> z', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('While the ');
+      ie_open('a', null, null,
+          'href', 'combinators.html#composeb');
+        ie_open('code');
+          itext('composeB');
+        ie_close('code');
+      ie_close('a');
+      itext(' can be used to create a composition of two functions, there are times when you want to compose an entire flow together. That is where ');
+      ie_open('code');
+        itext('compose');
+      ie_close('code');
+      itext(' is useful. With ');
+      ie_open('code');
+        itext('compose');
+      ie_close('code');
+      itext(' you can create a right-to-left composition of functions. It will return you a function that represents your flow. Not really sold on writing flows from right-to-left? Well then, I would recommend reaching for ');
+      ie_open('a', null, null,
+          'href', '#pipe');
+        ie_open('code');
+          itext('pipe');
+        ie_close('code');
+      ie_close('a');
+      itext('.');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'composek',
+          'href', '#composek');
+        itext('composeK');
+      ie_close('a');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/helpers/composeK');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'composeK :: Chain m => ((y -> m z), ..., (a -> m b)) -> a -> m z', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('There are many times that, when working with the various ');
+      ie_open('code');
+        itext('crocks');
+      ie_close('code');
+      itext(', our flows are just a series of ');
+      ie_open('code');
+        itext('chain');
+      ie_close('code');
+      itext('s. Due to some neat properties with types that provide a');
+      ie_open('code');
+        itext('chain');
+      ie_close('code');
+      itext(' function, you can remove some boilerplate by reaching for ');
+      ie_open('code');
+        itext('composeK');
+      ie_close('code');
+      itext('. Just pass it the functions you would normally pass to ');
+      ie_open('code');
+        itext('chain');
+      ie_close('code');
+      itext(' and it will do all the boring hook up for you. Just like ');
+      ie_open('code');
+        itext('compose');
+      ie_close('code');
+      itext(', functions are applied right-to-left, so you can turn this:');
+    ie_close('p');
+    $templateAlias2({code: 'const { chain, compose, isObject, prop, safe } = crocks\n\nconst data = {\n  do: { re: { mi: \'fa\' } }\n}\n\n// fluent :: a -> Maybe b\nconst fluent = x =>\n  safe(isObject, x)\n    .chain(prop(\'do\'))\n    .chain(prop(\'re\'))\n    .chain(prop(\'mi\'))\n\nfluent(data)\n// => Just \'fa\'\n\n// pointfree :: a -> Maybe b\nconst pointfree = compose(\n  chain(prop(\'mi\')),\n  chain(prop(\'re\')),\n  chain(prop(\'do\')),\n  safe(isObject)\n)\n\npointfree(data)\n// => Just \'fa\'', mode: 'javascript'}, null, opt_ijData);
+    ie_open('p');
+      itext('into the more abbreviated form:');
+    ie_close('p');
+    $templateAlias2({code: 'const { composeK, isObject, prop, safe } = crocks\n\nconst data = {\n  do: { re: { mi: \'fa\' } }\n}\n\n// flow :: a -> Maybe b\nconst flow = composeK(\n  prop(\'mi\'),\n  prop(\'re\'),\n  prop(\'do\'),\n  safe(isObject)\n)\n\nflow(data)\n// => Just \'fa\'', mode: 'javascript'}, null, opt_ijData);
+    ie_open('p');
+      itext('As demonstrated in the above example, this function more closely resembles flows that are using a more pointfree style of coding. As with the other composition functions in ');
+      ie_open('code');
+        itext('crocks');
+      ie_close('code');
+      itext(', a ');
+      ie_open('a', null, null,
+          'href', '#pipek');
+        ie_open('code');
+          itext('pipeK');
+        ie_close('code');
+      ie_close('a');
+      itext(' function is provided for flows that make more sense expressed in a left-to-right style.');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'composep',
+          'href', '#composep');
+        itext('composeP');
+      ie_close('a');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/helpers/composeP');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'composeP :: Promise p => ((y -> p z c), ..., (a -> p b c)) -> a -> p z c', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('When working with ');
+      ie_open('code');
+        itext('Promise');
+      ie_close('code');
+      itext('s, it is common place to create chains on a');
+      ie_open('code');
+        itext('Promise');
+      ie_close('code');
+      itext('\'s ');
+      ie_open('code');
+        itext('then');
+      ie_close('code');
+      itext(' function:');
+    ie_close('p');
+    $templateAlias2({code: 'const promFunc = x =>\n  promiseSomething(x)\n    .then(doSomething)\n    .then(doAnother)', mode: 'javascript'}, null, opt_ijData);
+    ie_open('p');
+      itext('Doing this involves a lot of boilerplate and forces you into a fluent style, whether you want to be or not. Using ');
+      ie_open('code');
+        itext('composeP');
+      ie_close('code');
+      itext(' you have the option to compose a series of ');
+      ie_open('code');
+        itext('Promise');
+      ie_close('code');
+      itext(' returning functions like you would any other function composition, in a right-to-left fashion. Like so:');
+    ie_close('p');
+    $templateAlias2({code: 'const { composeP } = crocks\n\nconst promFunc =\n  composeP(doAnother, doSomething, promiseSomething)', mode: 'javascript'}, null, opt_ijData);
+    ie_open('p');
+      itext('Due to the nature of the ');
+      ie_open('code');
+        itext('then');
+      ie_close('code');
+      itext(' function, only the head of your composition needs to return a ');
+      ie_open('code');
+        itext('Promise');
+      ie_close('code');
+      itext('. This will create a function that takes a value, which is passed through your chain, returning a ');
+      ie_open('code');
+        itext('Promise');
+      ie_close('code');
+      itext(' which can be extended. This is only a ');
+      ie_open('code');
+        itext('then');
+      ie_close('code');
+      itext(' chain, it does not do anything with the ');
+      ie_open('code');
+        itext('catch');
+      ie_close('code');
+      itext(' function. If you would like to provide your functions in a left-to-right manner, check out');
+      ie_open('a', null, null,
+          'href', '#pipep');
+        itext('pipeP');
+      ie_close('a');
+      itext('.');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'composes',
+          'href', '#composes');
+        itext('composeS');
+      ie_close('a');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/helpers/composeS');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'composeS :: Semigroupoid s => (s y z, ..., s a b) -> s a z', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('When working with things like ');
+      ie_open('code');
+        itext('Arrow');
+      ie_close('code');
+      itext(' and ');
+      ie_open('code');
+        itext('Star');
+      ie_close('code');
+      itext(' there will come a point when you would like to compose them like you would any ');
+      ie_open('code');
+        itext('Function');
+      ie_close('code');
+      itext('. That is where');
+      ie_open('code');
+        itext('composeS');
+      ie_close('code');
+      itext(' comes in handy. Just pass it the ');
+      ie_open('code');
+        itext('Semigroupoid');
+      ie_close('code');
+      itext('s you want to compose and it will give you back a new ');
+      ie_open('code');
+        itext('Semigroupoid');
+      ie_close('code');
+      itext(' of the same type with all of the underlying functions composed and ready to be run. Like ');
+      ie_open('a', null, null,
+          'href', '#compose');
         ie_open('code');
           itext('compose');
         ie_close('code');
       ie_close('a');
-      itext('.)');
-    ie_close('p');
-    ie_open('h4');
-      ie_open('a', null, null,
-          'id', 'constant',
-          'href', '#constant');
-        itext('constant');
-      ie_close('a');
-    ie_close('h4');
-    ie_open('p');
+      itext(',');
       ie_open('code');
-        itext('crocks/combinators/constant');
+        itext('composeS');
       ie_close('code');
-    ie_close('p');
-    $templateAlias2({code: 'constant :: a -> () -> a', mode: 'haskell'}, null, opt_ijData);
-    ie_open('p');
-      itext('This is a very handy dandy function, used a lot. Pass it any value and it will give you back a function that will return that same value no matter what you pass it.');
-    ie_close('p');
-    ie_open('h4');
+      itext(' composes the functions in a right-to-left fashion. If you would like to represent your flow in a more left-to-right manner, then ');
       ie_open('a', null, null,
-          'id', 'flip',
-          'href', '#flip');
-        itext('flip');
-      ie_close('a');
-    ie_close('h4');
-    ie_open('p');
-      ie_open('code');
-        itext('crocks/combinators/flip');
-      ie_close('code');
-    ie_close('p');
-    $templateAlias2({code: 'flip :: (a -> b -> c) -> b -> a -> c', mode: 'haskell'}, null, opt_ijData);
-    ie_open('p');
-      itext('This little function just takes a function and returns a function that takes the first two parameters in reverse. One can compose flip calls down the line to flip all, or some of the other parameters if there are more than two. Mix and match to your heart\'s desire.');
-    ie_close('p');
-    ie_open('h4');
-      ie_open('a', null, null,
-          'id', 'identity',
-          'href', '#identity');
-        itext('identity');
-      ie_close('a');
-    ie_close('h4');
-    ie_open('p');
-      ie_open('code');
-        itext('crocks/combinators/identity');
-      ie_close('code');
-    ie_close('p');
-    $templateAlias2({code: 'identity ::  a -> a', mode: 'haskell'}, null, opt_ijData);
-    ie_open('p');
-      itext('This function and ');
-      ie_open('a', null, null,
-          'href', '#constant');
+          'href', '#pipes');
         ie_open('code');
-          itext('constant');
+          itext('pipeS');
         ie_close('code');
       ie_close('a');
-      itext(' are the workhorses of writing code with this library. It quite simply is just a function that when you pass it something, it returns that thing right back to you. So simple, I will leave it as an exercise to reason about why this is so powerful and important.');
+      itext(' is provided for such things.');
     ie_close('p');
+    $templateAlias2({code: 'import crocks from \'crocks\'\n\nconst {\n  Arrow, bimap, branch, composeS, merge, mreduce, Sum\n} = crocks\n\nconst length =\n  xs => xs.length\n\nconst divide =\n  (x, y) => x / y\n\nconst avg =\n  Arrow(bimap(mreduce(Sum), length))\n    .promap(branch, merge(divide))\n\nconst double =\n  Arrow(x => x * 2)\n\nconst data =\n  [ 34, 198, 3, 43, 92 ]\n\ncomposeS(double, avg)\n  .runWith(data)\n// => 148', mode: 'javascript'}, null, opt_ijData);
     ie_open('h4');
       ie_open('a', null, null,
-          'id', 'substitution',
-          'href', '#substitution');
-        itext('substitution');
+          'id', 'curry',
+          'href', '#curry');
+        itext('curry');
       ie_close('a');
     ie_close('h4');
     ie_open('p');
       ie_open('code');
-        itext('crocks/combinators/substitution');
+        itext('crocks/helpers/curry');
       ie_close('code');
     ie_close('p');
-    $templateAlias2({code: 'substitution :: (a -> b -> c) -> (a -> b) -> a -> c', mode: 'haskell'}, null, opt_ijData);
+    $templateAlias2({code: 'curry :: ((a, b, ...) -> z) -> a -> b -> ... -> z', mode: 'haskell'}, null, opt_ijData);
     ie_open('p');
-      itext('While it a complicated little bugger, it can come in very handy from time to time. In it\'s first two arguments it takes functions. The first must be binary and the second unary. That will return you a function that is ready to take some value. Once supplied the fun starts, it will pass the ');
+      itext('Pass this function a function and it will return you a function that can be called in any form that you require until all arguments have been provided. For example if you pass a function: ');
+      ie_open('code');
+        itext('f : (a, b, c) -> d');
+      ie_close('code');
+      itext(' you get back a function that can be called in any combination, such as: ');
+      ie_open('code');
+        itext('f(x, y, z)');
+      ie_close('code');
+      itext(', ');
+      ie_open('code');
+        itext('f(x)(y)(z)');
+      ie_close('code');
+      itext(',');
+      ie_open('code');
+        itext('f(x, y)(z)');
+      ie_close('code');
+      itext(', or even ');
+      ie_open('code');
+        itext('f(x)(y, z)');
+      ie_close('code');
+      itext('. This is great for doing partial application on functions for maximum re-usability.');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'defaultprops',
+          'href', '#defaultprops');
+        itext('defaultProps');
+      ie_close('a');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/helpers/defaultProps');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'defaultProps :: Object -> Object -> Object', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('Picture this, you have an ');
+      ie_open('code');
+        itext('Object');
+      ie_close('code');
+      itext(' and you want to make sure that some properties are set with a given default value. When the need for this type of operation presents itself, ');
+      ie_open('code');
+        itext('defaultProps');
+      ie_close('code');
+      itext(' can come to your aid. Just pass it an');
+      ie_open('code');
+        itext('Object');
+      ie_close('code');
+      itext(' that defines your defaults and then the ');
+      ie_open('code');
+        itext('Object');
+      ie_close('code');
+      itext(' your want to default those props on. If a key that is present on the defaults ');
+      ie_open('code');
+        itext('Object');
+      ie_close('code');
+      itext(' is not defined on your data, then the default value will be used. Otherwise, the value from your data will be used instead. You could just apply');
+      ie_open('a', null, null,
+          'href', 'combinators.html#flip');
+        ie_open('code');
+          itext('flip');
+        ie_close('code');
+      ie_close('a');
+      itext(' to the ');
+      ie_open('a', null, null,
+          'href', '#assign');
+        ie_open('code');
+          itext('assign');
+        ie_close('code');
+      ie_close('a');
+      itext(' function and get the same result, but having a function named ');
+      ie_open('code');
+        itext('defaultProps');
+      ie_close('code');
+      itext(' may be easier to read in code. As with most ');
+      ie_open('code');
+        itext('Object');
+      ie_close('code');
+      itext(' related functions in ');
+      ie_open('code');
+        itext('crocks');
+      ie_close('code');
+      itext(', ');
+      ie_open('code');
+        itext('defaultProps');
+      ie_close('code');
+      itext(' will return you a shallow copy of the result and not include any ');
+      ie_open('code');
+        itext('undefined');
+      ie_close('code');
+      itext(' values in either ');
+      ie_open('code');
+        itext('Object');
+      ie_close('code');
+      itext('.');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'defaultto',
+          'href', '#defaultto');
+        itext('defaultTo');
+      ie_close('a');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/helpers/defaultTo');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'defaultTo :: a -> b -> a', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('With things like ');
+      ie_open('code');
+        itext('null');
+      ie_close('code');
+      itext(', ');
+      ie_open('code');
+        itext('undefined');
+      ie_close('code');
+      itext(' and ');
+      ie_open('code');
+        itext('NaN');
+      ie_close('code');
+      itext(' showing up all over the place, it can be hard to keep your expected types inline without resorting to nesting in a');
+      ie_open('code');
+        itext('Maybe');
+      ie_close('code');
+      itext(' with functions like ');
+      ie_open('a', null, null,
+          'href', '../crocks/Maybe.html#safe');
+        ie_open('code');
+          itext('safe');
+        ie_close('code');
+      ie_close('a');
+      itext('. If you want to specifically guard for ');
+      ie_open('code');
+        itext('null');
+      ie_close('code');
+      itext(', ');
+      ie_open('code');
+        itext('undefined');
+      ie_close('code');
+      itext(' and ');
+      ie_open('code');
+        itext('NaN');
+      ie_close('code');
+      itext(' and get things defaulted into the expected type, then ');
+      ie_open('code');
+        itext('defaultTo');
+      ie_close('code');
+      itext(' should work for you. Just pass it what you would like your default value to be and then the value you want guarded, and you will get back either the default or the passed value, depending on if the passed value is');
+      ie_open('code');
+        itext('null');
+      ie_close('code');
+      itext(', ');
+      ie_open('code');
+        itext('undefined');
+      ie_close('code');
+      itext(' or ');
+      ie_open('code');
+        itext('NaN');
+      ie_close('code');
+      itext('. While this ');
+      ie_open('em');
+        itext('is');
+      ie_close('em');
+      itext(' JavaScript and you can return anything, it is suggested to stick to the signature and only let ');
       ie_open('code');
         itext('a');
       ie_close('code');
-      itext(' to the first argument of both functions, and the result of the second function to the second parameter of the first function. Finally after all that juggling, it will return the result of that first function. When used with partial application on that first parameter, a whole new world of combinatory madness is presented!');
+      itext('s through. As a ');
+      ie_open('code');
+        itext('b');
+      ie_close('code');
+      itext(' can be an ');
+      ie_open('code');
+        itext('a');
+      ie_close('code');
+      itext(' as well.');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'dissoc',
+          'href', '#dissoc');
+        itext('dissoc');
+      ie_close('a');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/helpers/dissoc');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'dissoc :: String -> Object -> Object', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('While ');
+      ie_open('a', null, null,
+          'href', '#assoc');
+        ie_open('code');
+          itext('assoc');
+        ie_close('code');
+      ie_close('a');
+      itext(' can be used to associate a given key-value pair to a given ');
+      ie_open('code');
+        itext('Object');
+      ie_close('code');
+      itext(', ');
+      ie_open('code');
+        itext('dissoc');
+      ie_close('code');
+      itext(' does the opposite. Just pass ');
+      ie_open('code');
+        itext('dissoc');
+      ie_close('code');
+      itext(' a ');
+      ie_open('code');
+        itext('String');
+      ie_close('code');
+      itext(' key and the ');
+      ie_open('code');
+        itext('Object');
+      ie_close('code');
+      itext(' you wish to dissociate that key from and you will get back a new, shallow copy of the ');
+      ie_open('code');
+        itext('Object');
+      ie_close('code');
+      itext(' sans your key. As with all the ');
+      ie_open('code');
+        itext('Object');
+      ie_close('code');
+      itext('functions, ');
+      ie_open('code');
+        itext('dissoc');
+      ie_close('code');
+      itext(' will remove any ');
+      ie_open('code');
+        itext('undefined');
+      ie_close('code');
+      itext(' values from the result.');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'fanout',
+          'href', '#fanout');
+        itext('fanout');
+      ie_close('a');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/helpers/fanout');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'fanout :: (a -> b) -> (a -> c) -> (a -> Pair b c)\nfanout :: Arrow a b -> Arrow a c -> Arrow a (Pair b c)\nfanout :: Monad m => Star a (m b) -> Star a (m c) -> Star a (m (Pair b c))', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('There are may times that you need to keep some running or persistent state while performing a given computation. A common way to do this is to take the input to the computation and branch it into a ');
+      ie_open('code');
+        itext('Pair');
+      ie_close('code');
+      itext(' and perform different operations on each version of the input. This is such a common pattern that it warrants the');
+      ie_open('code');
+        itext('fanout');
+      ie_close('code');
+      itext(' function to take care of the initial split and mapping. Just provide a pair of either simple functions or a pair of one of the computation types (');
+      ie_open('code');
+        itext('Arrow');
+      ie_close('code');
+      itext(' or ');
+      ie_open('code');
+        itext('Star');
+      ie_close('code');
+      itext('). You will get back something of the same type that is configured to split it\'s input into a pair and than apply the first Function/ADT to the first portion of the underlying ');
+      ie_open('code');
+        itext('Pair');
+      ie_close('code');
+      itext(' and the second on the second.');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'frompairs',
+          'href', '#frompairs');
+        itext('fromPairs');
+      ie_close('a');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/helpers/fromPairs');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'fromPairs :: Foldable f => f (Pair String a) -> Object', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('As an inverse to ');
+      ie_open('a', null, null,
+          'href', '#topairs');
+        ie_open('code');
+          itext('toPairs');
+        ie_close('code');
+      ie_close('a');
+      itext(', ');
+      ie_open('code');
+        itext('fromPairs');
+      ie_close('code');
+      itext(' takes either an ');
+      ie_open('code');
+        itext('Array');
+      ie_close('code');
+      itext(' or');
+      ie_open('code');
+        itext('List');
+      ie_close('code');
+      itext(' of key-value ');
+      ie_open('code');
+        itext('Pair');
+      ie_close('code');
+      itext('s and constructs an ');
+      ie_open('code');
+        itext('Object');
+      ie_close('code');
+      itext(' from it. The ');
+      ie_open('code');
+        itext('Pair');
+      ie_close('code');
+      itext(' must contain a ');
+      ie_open('code');
+        itext('String');
+      ie_close('code');
+      itext(' in the ');
+      ie_open('code');
+        itext('fst');
+      ie_close('code');
+      itext(' and any type of value in the ');
+      ie_open('code');
+        itext('snd');
+      ie_close('code');
+      itext('. The ');
+      ie_open('code');
+        itext('fst');
+      ie_close('code');
+      itext('will become the key for the value in the ');
+      ie_open('code');
+        itext('snd');
+      ie_close('code');
+      itext('. All primitive values are copied into the new ');
+      ie_open('code');
+        itext('Object');
+      ie_close('code');
+      itext(', while non-primitives are references to the original. If you provide an ');
+      ie_open('code');
+        itext('undefined');
+      ie_close('code');
+      itext(' values for the second, that ');
+      ie_open('code');
+        itext('Pair');
+      ie_close('code');
+      itext(' will not be represented in the resulting ');
+      ie_open('code');
+        itext('Object');
+      ie_close('code');
+      itext('. Also, when if multiple keys share the same name, that last value will be moved over.');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'lifta2',
+          'href', '#lifta2');
+        itext('liftA2');
+      ie_close('a');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/helpers/liftA2');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'liftA2 :: Applicative m => (a -> b -> c) -> m a -> m b -> m c', mode: 'haskell'}, null, opt_ijData);
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'lifta3',
+          'href', '#lifta3');
+        itext('liftA3');
+      ie_close('a');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/helpers/liftA3');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'liftA3 :: Applicative m => (a -> b -> c -> d) -> m a -> m b -> m c -> m d', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('Ever see yourself wanting to ');
+      ie_open('code');
+        itext('map');
+      ie_close('code');
+      itext(' a binary or trinary function, but ');
+      ie_open('code');
+        itext('map');
+      ie_close('code');
+      itext(' only allows unary functions? Both of these functions allow you to pass in your function as well as the number of ');
+      ie_open('code');
+        itext('Applicative');
+      ie_close('code');
+      itext('s (containers that provide both');
+      ie_open('code');
+        itext('of');
+      ie_close('code');
+      itext(' and ');
+      ie_open('code');
+        itext('ap');
+      ie_close('code');
+      itext(' functions) you need to get the mapping you are looking for.');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'liftn',
+          'href', '#liftn');
+        itext('liftN');
+      ie_close('a');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/helpers/liftN');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'liftN :: Applicative m => Number -> ((*) -> a) -> (*m) -> m a', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('While ');
+      ie_open('a', null, null,
+          'href', '#lifta2');
+        ie_open('code');
+          itext('liftA2');
+        ie_close('code');
+      ie_close('a');
+      itext(' and ');
+      ie_open('a', null, null,
+          'href', '#lifta3');
+        ie_open('code');
+          itext('liftA3');
+        ie_close('code');
+      ie_close('a');
+      itext(' will handle a majority of the functions we tend to encounter, many cases arise when we want to deal with functions of a greater arity. In those cases, ');
+      ie_open('code');
+        itext('liftN');
+      ie_close('code');
+      itext(' will allow the lifting of function of any size arity.');
+    ie_close('p');
+    ie_open('p');
+      ie_open('code');
+        itext('liftN');
+      ie_close('code');
+      itext(' takes a ');
+      ie_open('code');
+        itext('Number');
+      ie_close('code');
+      itext(' that specifies the arity of the function to be lifted, followed by the function itself and finally the required number of ');
+      ie_open('code');
+        itext('Applicative');
+      ie_close('code');
+      itext(' instances of the same type to be applied to the target function.');
+    ie_close('p');
+    ie_open('p');
+      itext('In most cases, there is no need to explicitly curry the target function. This function operates in the same vein as ');
+      ie_open('a', null, null,
+          'href', '#nary');
+        ie_open('code');
+          itext('nAry');
+        ie_close('code');
+      ie_close('a');
+      itext(' and as such manually curried functions (i.e. ');
+      ie_open('code');
+        itext('x => y => x + y');
+      ie_close('code');
+      itext(') will need to be explicitly curried using ');
+      ie_open('a', null, null,
+          'href', '#curry');
+        ie_open('code');
+          itext('curry');
+        ie_close('code');
+      ie_close('a');
+      itext(' to ensure proper application of the arguments.');
+    ie_close('p');
+    $templateAlias2({code: 'import compose from \'crocks/helpers/compose\'\nimport curry from \'crocks/helpers/curry\'\nimport liftN from \'crocks/helpers/liftN\'\nimport isNumber from \'crocks/predicates/isNumber\'\nimport isString from \'crocks/predicates/isString\'\nimport map from \'crocks/pointfree/map\'\nimport safe from \'crocks/Maybe/safe\'\n\n// apply :: (((*) -> b), [ a ]) -> b\nconst apply = fn => xs =>\n  fn.apply(null, xs)\n\n// join :: String -> String -> String\nconst join =\n  x => y => `${x} ${y}`\n\n// safeString :: a -> Maybe String\nconst safeString =\n  safe(isString)\n\n// sumArgs :: (* Number) -> Number\nconst sumArgs =\n  (...args) => args.reduce((x, y) => x + y, 0)\n\n// max :: Applicative m => [ m Number ] -> m Number\nconst max =\n  apply(liftN(4, Math.max))\n\n// sum :: Applicative m => [ m Number ] -> m Number\nconst sum =\n  apply(liftN(4, sumArgs))\n\n// apJoin :: Applicative m => [ m String ] -> m String\nconst apJoin =\n  liftN(2, curry(join))\n\n// good :: [ Number ]\nconst good =\n  [ 45, 54, 96, 99 ]\n\n// bad :: [ String ]\nconst bad =\n  [ \'one\', \'two\', \'three\', \'four\' ]\n\n// arMax :: [ Number ] -> [ Number ]\nconst arMax =\n  compose(max, map(Array.of))\n\n// safeSum :: Maybe Number -> Maybe Number\nconst safeSum =\n  compose(sum, map(safe(isNumber)))\n\narMax(good)\n//=> [ 99 ]\n\nsafeSum(good)\n//=> Just 294\n\nsafeSum(bad)\n//=> Nothing\n\napJoin(safeString(\'Joey\'), safeString(\'Fella\'))\n//=> Just "Joey Fella"\n\napJoin(safeString(9), safeString(\'Fella\'))\n//=> Nothing', mode: 'javascript'}, null, opt_ijData);
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'mapprops',
+          'href', '#mapprops');
+        itext('mapProps');
+      ie_close('a');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/helpers/mapProps');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'mapProps :: { (* -> *) } -> Object -> Object', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('Would like to map specific keys in an Object with a specific function? Just bring in ');
+      ie_open('code');
+        itext('mapProps');
+      ie_close('code');
+      itext(' and pass it an ');
+      ie_open('code');
+        itext('Object');
+      ie_close('code');
+      itext(' with the functions you want to apply on the keys you want them associated to. When the resulting function receives an');
+      ie_open('code');
+        itext('Object');
+      ie_close('code');
+      itext(', it will return a new ');
+      ie_open('code');
+        itext('Object');
+      ie_close('code');
+      itext(' with the keys mapped according to the mapping functions. All keys from the original ');
+      ie_open('code');
+        itext('Object');
+      ie_close('code');
+      itext(' that do not exist in the mapping ');
+      ie_open('code');
+        itext('Object');
+      ie_close('code');
+      itext(' will still exist untouched, but the keys with mapping functions with now contain the result of applying the original value to the provided mapping function.');
+    ie_close('p');
+    ie_open('p');
+      ie_open('code');
+        itext('mapProps');
+      ie_close('code');
+      itext(' also allows for mapping on nested ');
+      ie_open('code');
+        itext('Object');
+      ie_close('code');
+      itext('s for times when the shape of the original ');
+      ie_open('code');
+        itext('Object');
+      ie_close('code');
+      itext(' is know.');
+    ie_close('p');
+    $templateAlias2({code: 'import mapProps from \'crocks/helpers/mapProps\'\n\nconst add =\n  x => y => x + y\n\nconst toUpper =\n  x => x.toUpperCase()\n\nconst mapping = {\n  entry: toUpper,\n  fauna: {\n    unicorns: add(1),\n    elephants: add(-1)\n  },\n  flora: {\n    nariphon: add(10),\n    birch: add(1)\n  }\n}\n\nmapProps(mapping, {\n  entry: \'legend\',\n  fauna: {\n    unicorns: 10,\n    zombies: 3\n  },\n  other: {\n    hat: 2\n  }\n})\n\n//=> { entry: \'LEGEND\', fauna: { unicorns: 11, zombies: 3 }, other: { hat: 2} }', mode: 'javascript'}, null, opt_ijData);
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'mapreduce',
+          'href', '#mapreduce');
+        itext('mapReduce');
+      ie_close('a');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/helpers/mapReduce');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'mapReduce :: Foldable f => (a -> b) -> (c -> b -> c) -> c -> f a -> c', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('Sometimes you need the power provided by ');
+      ie_open('a', null, null,
+          'href', '#mreducemap');
+        ie_open('code');
+          itext('mreduceMap');
+        ie_close('code');
+      ie_close('a');
+      itext(' but you do not have a ');
+      ie_open('code');
+        itext('Monoid');
+      ie_close('code');
+      itext(' to lift into. ');
+      ie_open('code');
+        itext('mapReduce');
+      ie_close('code');
+      itext(' provides the same power, but with the flexibility of using functions to lift and combine. ');
+      ie_open('code');
+        itext('mapReduce');
+      ie_close('code');
+      itext(' takes a unary mapping function, a binary reduction function, the initial value and finally a ');
+      ie_open('code');
+        itext('Foldable');
+      ie_close('code');
+      itext(' structure of data. Once all arguments are provided,');
+      ie_open('code');
+        itext('mapReduce');
+      ie_close('code');
+      itext(' folds the provided data, by mapping each value through your mapping function, before sending it to the second argument of your reduction function.');
+    ie_close('p');
+    $templateAlias2({code: 'import Max from \'crocks/Max\'\nimport Maybe from \'crocks/Maybe\'\nimport isNumber from \'crocks/predicates/isNumber\'\nimport mapReduce from \'crocks/helpers/mapReduce\'\nimport safeLift from \'crocks/Maybe/safeLift\'\n\nconst { Nothing } = Maybe\n\nconst data =\n  [ \'100\', null, 3, true, 1 ]\n\nconst safeMax = mapReduce(\n  safeLift(isNumber, Max),\n  (y, x) => y.concat(x).alt(y).alt(x),\n  Nothing()\n)\n\nsafeMax(data)\n  .option(Max.empty())\n  .valueOf()\n// => 3', mode: 'javascript'}, null, opt_ijData);
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'mconcat',
+          'href', '#mconcat');
+        itext('mconcat');
+      ie_close('a');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/helpers/mconcat');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'mconcat :: Monoid m, Foldable f => m -> f a -> m a', mode: 'haskell'}, null, opt_ijData);
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'mreduce',
+          'href', '#mreduce');
+        itext('mreduce');
+      ie_close('a');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/helpers/mreduce');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'mreduce :: Monoid m, Foldable f => m -> f a -> a', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('These two functions are very handy for combining an entire ');
+      ie_open('code');
+        itext('List');
+      ie_close('code');
+      itext(' or ');
+      ie_open('code');
+        itext('Array');
+      ie_close('code');
+      itext(' of values by providing a ');
+      ie_open('a', null, null,
+          'href', '../monoids/index.html');
+        ie_open('code');
+          itext('Monoid');
+        ie_close('code');
+      ie_close('a');
+      itext(' and your collection of values. The difference between the two is that ');
+      ie_open('code');
+        itext('mconcat');
+      ie_close('code');
+      itext(' returns the result inside the ');
+      ie_open('a', null, null,
+          'href', '../monoids/index.html');
+        ie_open('code');
+          itext('Monoid');
+        ie_close('code');
+      ie_close('a');
+      itext(' used to combine them. Where');
+      ie_open('code');
+        itext('mreduce');
+      ie_close('code');
+      itext(' returns the bare value itself.');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'mconcatmap',
+          'href', '#mconcatmap');
+        itext('mconcatMap');
+      ie_close('a');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/helpers/mconcatMap');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'mconcatMap :: Monoid m, Foldable f => m -> (b -> a) -> f b -> m a', mode: 'haskell'}, null, opt_ijData);
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'mreducemap',
+          'href', '#mreducemap');
+        itext('mreduceMap');
+      ie_close('a');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/helpers/mreduceMap');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'mreduceMap :: Monoid m, Foldable f => m -> (b -> a) -> f b -> a', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('There comes a time where the values you have in a ');
+      ie_open('code');
+        itext('List');
+      ie_close('code');
+      itext(' or an ');
+      ie_open('code');
+        itext('Array');
+      ie_close('code');
+      itext(' are not in the type that is needed for the ');
+      ie_open('a', null, null,
+          'href', '../monoids/index.html');
+        ie_open('code');
+          itext('Monoid');
+        ie_close('code');
+      ie_close('a');
+      itext(' you want to combine with. These two functions can be used to ');
+      ie_open('code');
+        itext('map');
+      ie_close('code');
+      itext(' some transforming function from a given type into the type needed for the');
+      ie_open('a', null, null,
+          'href', '../monoids/index.html');
+        ie_open('code');
+          itext('Monoid');
+        ie_close('code');
+      ie_close('a');
+      itext('. In essence, this function will run each value through the function before it lifts the value into the');
+      ie_open('a', null, null,
+          'href', '../monoids/index.html');
+        ie_open('code');
+          itext('Monoid');
+        ie_close('code');
+      ie_close('a');
+      itext(', before ');
+      ie_open('code');
+        itext('concat');
+      ie_close('code');
+      itext(' is applied. The difference between the two is that ');
+      ie_open('code');
+        itext('mconcatMap');
+      ie_close('code');
+      itext(' returns the result inside the');
+      ie_open('a', null, null,
+          'href', '../monoids/index.html');
+        ie_open('code');
+          itext('Monoid');
+        ie_close('code');
+      ie_close('a');
+      itext(' used to combine them. Where ');
+      ie_open('code');
+        itext('mreduceMap');
+      ie_close('code');
+      itext('returns the bare value itself.');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'nary',
+          'href', '#nary');
+        itext('nAry');
+      ie_close('a');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/helpers/nAry');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'nAry :: Number -> ((*) -> a) -> (*) -> a', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('When using functions like ');
+      ie_open('code');
+        itext('Math.max');
+      ie_close('code');
+      itext(' or ');
+      ie_open('code');
+        itext('Object.assign');
+      ie_close('code');
+      itext(' that take as many arguments as you can throw at them, it makes it hard to ');
+      ie_open('code');
+        itext('curry');
+      ie_close('code');
+      itext(' them in a reasonable manner. ');
+      ie_open('code');
+        itext('nAry');
+      ie_close('code');
+      itext(' can make things a little nicer for functions like that. It can also be put to good use to limit a given function to a desired number of arguments to avoid accidentally supplying default arguments when you do not what them applied. First pass ');
+      ie_open('code');
+        itext('nAry');
+      ie_close('code');
+      itext(' the number of arguments you wish to limit the function to and then the function you wish to limit. ');
+      ie_open('code');
+        itext('nAry');
+      ie_close('code');
+      itext(' will give you back a curried function that will only apply the specified number of arguments to the inner function. Unary and binary functions are so common that');
+      ie_open('code');
+        itext('crocks');
+      ie_close('code');
+      itext(' provides specific functions for those cases: ');
+      ie_open('a', null, null,
+          'href', '#unary');
+        ie_open('code');
+          itext('unary');
+        ie_close('code');
+      ie_close('a');
+      itext(' and');
+      ie_open('a', null, null,
+          'href', '#binary');
+        ie_open('code');
+          itext('binary');
+        ie_close('code');
+      ie_close('a');
+      itext('.');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'objof',
+          'href', '#objof');
+        itext('objOf');
+      ie_close('a');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/helpers/objOf');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'objOf :: String -> a -> Object', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('If you ever find yourself in a situation where you have a key and a value and just want to combine the two into an ');
+      ie_open('code');
+        itext('Object');
+      ie_close('code');
+      itext(', then it sounds like ');
+      ie_open('code');
+        itext('objOf');
+      ie_close('code');
+      itext(' is the function for you. Just pass it a ');
+      ie_open('code');
+        itext('String');
+      ie_close('code');
+      itext(' for the key and any type of value, and you\'ll get back an ');
+      ie_open('code');
+        itext('Object');
+      ie_close('code');
+      itext(' that is composed of those two. If you find yourself constantly concatenating the result of this function into another');
+      ie_open('code');
+        itext('Object');
+      ie_close('code');
+      itext(', you may want to use ');
+      ie_open('a', null, null,
+          'href', '#assoc');
+        ie_open('code');
+          itext('assoc');
+        ie_close('code');
+      ie_close('a');
+      itext(' instead.');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'omit',
+          'href', '#omit');
+        itext('omit');
+      ie_close('a');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/helpers/omit');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'omit :: Foldable f => f String -> Object -> Object', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('Sometimes you just want to strip ');
+      ie_open('code');
+        itext('Object');
+      ie_close('code');
+      itext('s of unwanted properties by key. Using');
+      ie_open('code');
+        itext('omit');
+      ie_close('code');
+      itext(' will help you get that done. Just pass it a ');
+      ie_open('code');
+        itext('Foldable');
+      ie_close('code');
+      itext(' structure with a series of ');
+      ie_open('code');
+        itext('String');
+      ie_close('code');
+      itext('s as keys and then pass it an ');
+      ie_open('code');
+        itext('Object');
+      ie_close('code');
+      itext(' and you will get back not only a shallow copy, but also an ');
+      ie_open('code');
+        itext('Object');
+      ie_close('code');
+      itext(' free of any of those pesky');
+      ie_open('code');
+        itext('undefined');
+      ie_close('code');
+      itext(' values. You can think of ');
+      ie_open('code');
+        itext('omit');
+      ie_close('code');
+      itext(' as a way to black-list or reject');
+      ie_open('code');
+        itext('Object');
+      ie_close('code');
+      itext(' properties based on key names. This function ignores inherited properties and should only be used with POJOs. If you want to filter or white-list properties rather than reject them, take a look at ');
+      ie_open('a', null, null,
+          'href', '#pick');
+        ie_open('code');
+          itext('pick');
+        ie_close('code');
+      ie_close('a');
+      itext('.');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'once',
+          'href', '#once');
+        itext('once');
+      ie_close('a');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/helpers/once');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'once :: ((*) -> a) -> ((*) -> a)', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('There are times in Javascript development where you only want to call a function once and memo-ize the first result for every subsequent call to that function. Just pass the function you want guarded to ');
+      ie_open('code');
+        itext('once');
+      ie_close('code');
+      itext(' and you will get back a function with the expected guarantees.');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'partial',
+          'href', '#partial');
+        itext('partial');
+      ie_close('a');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/helpers/partial');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'partial :: (((*) -> c), *) -> (*) -> c', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('There are many times when using functions from non-functional libraries or from built-in JS functions, where it does not make sense to wrap it in a');
+      ie_open('a', null, null,
+          'href', '#curry');
+        ie_open('code');
+          itext('curry');
+        ie_close('code');
+      ie_close('a');
+      itext('. You just want to partially apply some arguments to it and get back a function ready to take the rest. That is a perfect opportunity to use');
+      ie_open('code');
+        itext('partial');
+      ie_close('code');
+      itext('. Just pass a function as the first argument and then apply any other arguments to it. You will get back a curried function that is ready to accept the rest of the arguments.');
+    ie_close('p');
+    $templateAlias2({code: 'import crocks from \'crocks\'\n\nconst { map, partial } = crocks\n\nconst max10 =\n  partial(Math.min, 10)\n\nconst data =\n  [ 13, 5, 13 ]\n\nmap(max10, data)\n// => [ 10, 5, 10]', mode: 'javascript'}, null, opt_ijData);
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'pick',
+          'href', '#pick');
+        itext('pick');
+      ie_close('a');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/helpers/pick');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'pick :: Foldable f => f String -> Object -> Object', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('When dealing with ');
+      ie_open('code');
+        itext('Object');
+      ie_close('code');
+      itext('s, sometimes it is necessary to only let some of the key-value pairs on an object through. Think of ');
+      ie_open('code');
+        itext('pick');
+      ie_close('code');
+      itext(' as a sort of white-list or filter for ');
+      ie_open('code');
+        itext('Object');
+      ie_close('code');
+      itext(' properties. Pass it a ');
+      ie_open('code');
+        itext('Foldable');
+      ie_close('code');
+      itext(' structure of ');
+      ie_open('code');
+        itext('String');
+      ie_close('code');
+      itext('s that are the keys you would like to pick off of your ');
+      ie_open('code');
+        itext('Object');
+      ie_close('code');
+      itext('. This will give you back a shallow copy of the key-value pairs you specified. This function will ignore inherited properties and should only be used with POJOs. Any ');
+      ie_open('code');
+        itext('undefined');
+      ie_close('code');
+      itext('values will not be copied over, although ');
+      ie_open('code');
+        itext('null');
+      ie_close('code');
+      itext(' values are allowed. For black-listing properties, have a look at ');
+      ie_open('a', null, null,
+          'href', '#omit');
+        ie_open('code');
+          itext('omit');
+        ie_close('code');
+      ie_close('a');
+      itext('.');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'pipe',
+          'href', '#pipe');
+        itext('pipe');
+      ie_close('a');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/helpers/pipe');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'pipe :: ((a -> b), ..., (y -> z)) -> a -> z', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('If you find yourself not able to come to terms with doing the typical right-to-left composition, then ');
+      ie_open('code');
+        itext('crocks');
+      ie_close('code');
+      itext(' provides a means to accommodate you. This function does the same thing as ');
+      ie_open('a', null, null,
+          'href', '#compose');
+        ie_open('code');
+          itext('compose');
+        ie_close('code');
+      ie_close('a');
+      itext(', the only difference is it allows you define your flows in a left-to-right manner.');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'pipek',
+          'href', '#pipek');
+        itext('pipeK');
+      ie_close('a');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/helpers/pipeK');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'pipeK :: Chain m => ((a -> m b), ..., (y -> m z)) -> a -> m z', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('Like ');
+      ie_open('a', null, null,
+          'href', '#composek');
+        ie_open('code');
+          itext('composeK');
+        ie_close('code');
+      ie_close('a');
+      itext(', you can remove much of the boilerplate when chaining together a series of functions with the signature:');
+      ie_open('code');
+        itext('Chain m => a -> m b');
+      ie_close('code');
+      itext('. The difference between the two functions is, while');
+      ie_open('a', null, null,
+          'href', '#composek');
+        ie_open('code');
+          itext('composeK');
+        ie_close('code');
+      ie_close('a');
+      itext(' is right-to-left, ');
+      ie_open('code');
+        itext('pipeK');
+      ie_close('code');
+      itext(' is the opposite, taking its functions left-to-right.');
+    ie_close('p');
+    $templateAlias2({code: 'import crocks from \'crocks\'\n\nconst { curry, List, Writer } = crocks\n\nconst OpWriter =\n  Writer(List)\n\nconst addLog = curry(\n  (x, y) => OpWriter(`adding ${x} to ${y}`, x + y)\n)\n\nconst scaleLog = curry(\n  (x, y) => OpWriter(`scaling ${y} by ${x}`, x * y)\n)\n\nconst fluent = x =>\n  OpWriter.of(x)\n    .chain(addLog(4))\n    .chain(scaleLog(3))\n\nfluent(0).log()\n// => List [ "adding 4 to 0", "scaling 4 by 3" ]\n\nconst chainPipe = pipeK(\n  addLog(4),\n  scaleLog(3)\n)\n\nchainPipe(0).log()\n// => List [ "adding 4 to 0", "scaling 4 by 3" ]', mode: 'javascript'}, null, opt_ijData);
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'pipep',
+          'href', '#pipep');
+        itext('pipeP');
+      ie_close('a');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/helpers/pipeP');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'pipeP :: Promise p => ((a -> p b d), ..., (y -> p z d)) -> a -> p z d', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('Like the ');
+      ie_open('a', null, null,
+          'href', '#composep');
+        ie_open('code');
+          itext('composeP');
+        ie_close('code');
+      ie_close('a');
+      itext(' function, ');
+      ie_open('code');
+        itext('pipeP');
+      ie_close('code');
+      itext(' will let you remove the standard boilerplate that comes with working with ');
+      ie_open('code');
+        itext('Promise');
+      ie_close('code');
+      itext(' chains. The only difference between ');
+      ie_open('code');
+        itext('pipeP');
+      ie_close('code');
+      itext(' and ');
+      ie_open('a', null, null,
+          'href', '#composep');
+        ie_open('code');
+          itext('composeP');
+        ie_close('code');
+      ie_close('a');
+      itext(' is that it takes its functions in a left-to-right order:');
+    ie_close('p');
+    $templateAlias2({code: 'const { pipeP } = crocks\n\nconst promFunc = x =>\n  promise(x)\n    .then(doSomething)\n    .then(doAnother)\n\nconst promPipe =\n  pipeP(proimse, doSomething, doAnother)', mode: 'javascript'}, null, opt_ijData);
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'pipes',
+          'href', '#pipes');
+        itext('pipeS');
+      ie_close('a');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/helpers/pipeS');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'pipeS :: Semigroupoid s => (s a b, ..., s y z) -> s a z', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('While ');
+      ie_open('code');
+        itext('Star');
+      ie_close('code');
+      itext('s and ');
+      ie_open('code');
+        itext('Arrow');
+      ie_close('code');
+      itext('s come in very handy at times, the only thing that could make them better is to compose them . With ');
+      ie_open('code');
+        itext('pipeS');
+      ie_close('code');
+      itext(' you can do just that with any ');
+      ie_open('code');
+        itext('Semigroupoid');
+      ie_close('code');
+      itext('. Just like with ');
+      ie_open('a', null, null,
+          'href', '#composes');
+        ie_open('code');
+          itext('composeS');
+        ie_close('code');
+      ie_close('a');
+      itext(', you just pass it ');
+      ie_open('code');
+        itext('Semigroupoid');
+      ie_close('code');
+      itext('s of the same type and you will get back another ');
+      ie_open('code');
+        itext('Semigroupoid');
+      ie_close('code');
+      itext('with them all composed together. The only difference between the two, is that');
+      ie_open('code');
+        itext('pipeS');
+      ie_close('code');
+      itext(' composes in a left-to-right fashion, while ');
+      ie_open('a', null, null,
+          'href', '#composes');
+        ie_open('code');
+          itext('composeS');
+        ie_close('code');
+      ie_close('a');
+      itext(' does the opposite.');
+    ie_close('p');
+    $templateAlias2({code: 'import {\n  curry, isNumber, pipeS, prop, safeLift, Star\n} from \'crocks\'\n\nconst add = curry(\n  (x, y) => x + y\n)\n\nconst pull =\n  x => Star(prop(x))\n\nconst safeAdd =\n  x => Star(safeLift(isNumber, add(x)))\n\nconst data = {\n  num: 56,\n  string: \'56\'\n}\n\nconst flow = (key, num) => pipeS(\n  pull(key),\n  safeAdd(num)\n)\n\nflow(\'num\', 10).runWith(data)\n// => Just 66\n\nflow(\'string\', 100).runWith(data)\n// => Nothing', mode: 'javascript'}, null, opt_ijData);
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'propor',
+          'href', '#propor');
+        itext('propOr');
+      ie_close('a');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/helpers/propOr');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'propOr :: a -> (String | Integer) -> b -> c', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('If you want some safety around pulling a value out of an Object or Array with a single key or index, you can always reach for ');
+      ie_open('code');
+        itext('propOr');
+      ie_close('code');
+      itext('. Well, as long as you are working with non-nested data that is. Just tell ');
+      ie_open('code');
+        itext('propOr');
+      ie_close('code');
+      itext(' either the key or index you are interested in, and you will get back a function that will take anything and return the wrapped value if the key/index is defined. If the key/index is not defined however, you will get back the provided default value.');
+    ie_close('p');
+    $templateAlias2({code: 'import propOr from \'crocks/helpers/propOr\'\n\nconst data = {\n  foo: \'bar\',\n  null: null,\n  nan: NaN,\n  undef: undefined\n}\n\n// def :: (String | Integer) -> a -> b\nconst def =\n  propOr(\'default\')\n\ndef(\'foo\', data)\n//=> "bar"\n\ndef(\'null\', data)\n//=> null\n\ndef(\'nan\', data)\n//=> NaN\n\ndef(\'baz\', data)\n//=> "default"\n\ndef(\'undef\', data)\n//=> "default"', mode: 'javascript'}, null, opt_ijData);
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'proppathor',
+          'href', '#proppathor');
+        itext('propPathOr');
+      ie_close('a');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/helpers/propPathOr');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'propPathOr :: Foldable f => a -> f (String | Integer) -> b -> c', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('While ');
+      ie_open('a', null, null,
+          'href', '#propor');
+        ie_open('code');
+          itext('propOr');
+        ie_close('code');
+      ie_close('a');
+      itext(' is good for simple, single-level structures, there may come a time when you have to work with nested POJOs or Arrays. When you run into this situation, just pull in ');
+      ie_open('code');
+        itext('propPathOr');
+      ie_close('code');
+      itext(' and pass it a left-to-right traversal path of keys, indices or a combination of both (gross...but possible). This will kick you back a function that behaves just like ');
+      ie_open('a', null, null,
+          'href', '#propor');
+        ie_open('code');
+          itext('propOr');
+        ie_close('code');
+      ie_close('a');
+      itext('. You pass it some data, and it will attempt to resolve your provided path. If the path is valid, it will return the value. But if at any point that path "breaks" it will give you back the default value.');
+    ie_close('p');
+    $templateAlias2({code: 'import propPathOr from \'crocks/helpers/propPathOr\'\n\nconst data = {\n  foo: {\n    bar: \'bar\',\n    null: null,\n    nan: NaN,\n    undef: undefined\n  },\n  arr: [ 1, 2 ]\n}\n\n// def :: [ String | Integer ] -> a -> b\nconst def =\n  propPathOr(\'default\')\n\ndef([ \'foo\', \'bar\' ], data)\n//=> "bar"\n\ndef([ \'baz\', \'tommy\' ], data)\n//=> "default"\n\ndef([ \'foo\', \'null\' ], data)\n//=> null\n\ndef([ \'foo\', \'nan\' ], data)\n//=> NaN\n\ndef([ \'foo\', \'undef\' ], data)\n//=> "default"\n\ndef([ \'arr\', \'length\' ], data)\n//=> 2', mode: 'javascript'}, null, opt_ijData);
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'tap',
+          'href', '#tap');
+        itext('tap');
+      ie_close('a');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/helpers/tap');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'tap :: (a -> b) -> a -> a', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('It is hard knowing what is going on inside of some of these ADTs or your wonderful function compositions. Debugging can get messy when you need to insert a side-effect into your flow for introspection purposes. With ');
+      ie_open('code');
+        itext('tap');
+      ie_close('code');
+      itext(', you can intervene in your otherwise pristine flow and make sure that the original value is passed along to the next step of your flow. This function does not guarantee immutability for reference types (');
+      ie_open('code');
+        itext('Objects');
+      ie_close('code');
+      itext(', ');
+      ie_open('code');
+        itext('Arrays');
+      ie_close('code');
+      itext(', etc), you will need to exercise some discipline here to not mutate.');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'topairs',
+          'href', '#topairs');
+        itext('toPairs');
+      ie_close('a');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/Pair/toPairs');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'toPairs :: Object -> List (Pair String a)', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('When dealing with ');
+      ie_open('code');
+        itext('Object');
+      ie_close('code');
+      itext('s, sometimes it makes more sense to work in a');
+      ie_open('code');
+        itext('Foldable');
+      ie_close('code');
+      itext(' structure like a ');
+      ie_open('code');
+        itext('List');
+      ie_close('code');
+      itext(' of key-value ');
+      ie_open('code');
+        itext('Pair');
+      ie_close('code');
+      itext('s. ');
+      ie_open('code');
+        itext('toPairs');
+      ie_close('code');
+      itext(' provides a means to take an object and give you back a ');
+      ie_open('code');
+        itext('List');
+      ie_close('code');
+      itext(' of ');
+      ie_open('code');
+        itext('Pairs');
+      ie_close('code');
+      itext(' that have a');
+      ie_open('code');
+        itext('String');
+      ie_close('code');
+      itext(' that represents the key in the ');
+      ie_open('code');
+        itext('fst');
+      ie_close('code');
+      itext(' and the value for that key in the');
+      ie_open('code');
+        itext('snd');
+      ie_close('code');
+      itext('. The primitive values are copied, while non-primitive values are references. Like most of the ');
+      ie_open('code');
+        itext('Object');
+      ie_close('code');
+      itext(' functions in ');
+      ie_open('code');
+        itext('crocks');
+      ie_close('code');
+      itext(', any keys with');
+      ie_open('code');
+        itext('undefined');
+      ie_close('code');
+      itext(' values will be omitted from the result. ');
+      ie_open('code');
+        itext('crocks');
+      ie_close('code');
+      itext(' provides an inverse to this function named ');
+      ie_open('a', null, null,
+          'href', '#frompairs');
+        ie_open('code');
+          itext('fromPairs');
+        ie_close('code');
+      ie_close('a');
+      itext('.');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'trycatch',
+          'href', '#trycatch');
+        itext('tryCatch');
+      ie_close('a');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/Result/tryCatch');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'tryCatch :: (a -> b) -> a -> Result e b', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('Typical try-catch blocks are very imperative in their usage. This ');
+      ie_open('code');
+        itext('tryCatch');
+      ie_close('code');
+      itext('function provides a means of capturing that imperative nature in a simple declarative style. Pass it a function that could fail and it will return you another function wrapping the first function. When called, the new function will either return the result in a ');
+      ie_open('code');
+        itext('Result.Ok');
+      ie_close('code');
+      itext(' if everything was good, or an error wrapped in an ');
+      ie_open('code');
+        itext('Result.Err');
+      ie_close('code');
+      itext(' if it fails.');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'unary',
+          'href', '#unary');
+        itext('unary');
+      ie_close('a');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/helpers/unary');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'unary :: ((*) -> b) -> a -> b', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('If you every need to lock down a given function to just one argument, then look no further than ');
+      ie_open('code');
+        itext('unary');
+      ie_close('code');
+      itext('. Just pass it a function of any arity, and you will get back another function that will only apply (1) argument to given function, no matter what is passed to it. ');
+      ie_open('code');
+        itext('unary');
+      ie_close('code');
+      itext(' is just syntactic sugar around');
+      ie_open('a', null, null,
+          'href', '#nary');
+        ie_open('code');
+          itext('nAry');
+        ie_close('code');
+      ie_close('a');
+      itext(' in the form of ');
+      ie_open('code');
+        itext('nAry(1, fn)');
+      ie_close('code');
+      itext(' as it is such a common case. Another common case is ');
+      ie_open('a', null, null,
+          'href', '#binary');
+        ie_open('code');
+          itext('binary');
+        ie_close('code');
+      ie_close('a');
+      itext(' which, as the name implies, only applies (2) arguments to a given function.');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'unit',
+          'href', '#unit');
+        itext('unit');
+      ie_close('a');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/helpers/unit');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'unit :: () -> undefined', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('While it seems like just a simple function, ');
+      ie_open('code');
+        itext('unit');
+      ie_close('code');
+      itext(' can be used for a number of things. A common use for it is as a default ');
+      ie_open('code');
+        itext('noop');
+      ie_close('code');
+      itext(' as it is a function that does nothing and returns ');
+      ie_open('code');
+        itext('undefined');
+      ie_close('code');
+      itext('. You can also use it in a pointed fashion to represent some special value for a given type. This pointed use is the heart and soul of the infamous ');
+      ie_open('code');
+        itext('Maybe');
+      ie_close('code');
+      itext(' type.');
     ie_close('p');
     ie_open('input', null, null,
         'type', 'hidden',
@@ -28572,11 +30306,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'value', opt_data.site.title);
     ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({content: param1351}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param1390}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'zsKbe.render';
+  $render.soyTemplateName = 'moJws.render';
 }
 
 exports.render.params = ["page","site"];
@@ -28586,15 +30320,14 @@ return exports;
 
 });
 
-class zsKbe extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(zsKbe, templates);
+class moJws extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(moJws, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
 
 
 /***/ }),
-/* 227 */,
 /* 228 */,
 /* 229 */,
 /* 230 */,
@@ -28630,8 +30363,7 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(zsKbe, templates);
 /* 260 */,
 /* 261 */,
 /* 262 */,
-/* 263 */,
-/* 264 */
+/* 263 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28667,9 +30399,9 @@ __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _combinatorsSoy = __webpack_require__(226);
+var _helpersSoy = __webpack_require__(227);
 
-var _combinatorsSoy2 = _interopRequireDefault(_combinatorsSoy);
+var _helpersSoy2 = _interopRequireDefault(_helpersSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28679,23 +30411,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var zsKbe = function (_Component) {
-  _inherits(zsKbe, _Component);
+var moJws = function (_Component) {
+  _inherits(moJws, _Component);
 
-  function zsKbe() {
-    _classCallCheck(this, zsKbe);
+  function moJws() {
+    _classCallCheck(this, moJws);
 
-    return _possibleConstructorReturn(this, (zsKbe.__proto__ || Object.getPrototypeOf(zsKbe)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (moJws.__proto__ || Object.getPrototypeOf(moJws)).apply(this, arguments));
   }
 
-  return zsKbe;
+  return moJws;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(zsKbe, _combinatorsSoy2.default);
+_metalSoy2.default.register(moJws, _helpersSoy2.default);
 
-exports.default = zsKbe;
+exports.default = moJws;
 
 /***/ })
-],[264]);
+],[263]);

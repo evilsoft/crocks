@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([14,31,32,33],[
+webpackJsonppageComponent([12,31,32,33],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -28364,12 +28364,14 @@ exports.default = parseFromAnchor;
 /* 230 */,
 /* 231 */,
 /* 232 */,
-/* 233 */
+/* 233 */,
+/* 234 */,
+/* 235 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WEoVj", function() { return WEoVj; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "atOxM", function() { return atOxM; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28381,15 +28383,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var templates;
 goog.loadModule(function(exports) {
 
-// This file was automatically generated from getting-started.soy.
+// This file was automatically generated from All.soy.
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace WEoVj.
+ * @fileoverview Templates in namespace atOxM.
  * @public
  */
 
-goog.module('WEoVj.incrementaldom');
+goog.module('atOxM.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28423,123 +28425,230 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var param212 = function() {
+  var param1764 = function() {
+    $templateAlias2({code: 'All Boolean', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      ie_open('code');
+        itext('All');
+      ie_close('code');
+      itext(' is a ');
+      ie_open('code');
+        itext('Monoid');
+      ie_close('code');
+      itext(' that will combine (2) values of any type using logical conjunction (AND) on their coerced ');
+      ie_open('code');
+        itext('Boolean');
+      ie_close('code');
+      itext(' values, mapping truth-y values to');
+      ie_open('code');
+        itext('true');
+      ie_close('code');
+      itext(' and false-y values to ');
+      ie_open('code');
+        itext('false');
+      ie_close('code');
+      itext('.');
+    ie_close('p');
+    $templateAlias2({code: 'import All from \'crocks/All\'\n\nimport mconcat from \'crocks/helpers/mconcat\'\n\nconst trueNum = All(13)\nconst falseNum = All(0)\nconst trueString = All(\'So true\')\n\ntrueNum.concat(falseNum)\n//=> All false\n\ntrueNum.concat(trueString)\n//=> All true\n\nconst allGood =\n  mconcat(All)\n\nallGood([ 1, 5, 89 ])\n//=> All true\n\nallGood([ \'nice\', \'00\', null ])\n//=> All false', mode: 'javascript'}, null, opt_ijData);
     ie_open('article', null, null,
-        'id', 'installation');
+        'id', 'topic-implements');
       ie_open('h2');
         ie_open('a', null, null,
-            'id', 'installation',
-            'href', '#installation');
-          itext('Installation');
+            'id', 'implements',
+            'href', '#implements');
+          itext('Implements');
         ie_close('a');
       ie_close('h2');
       ie_open('p');
         ie_open('code');
-          itext('crocks');
+          itext('Setoid');
         ie_close('code');
-        itext(' is available from ');
+        itext(', ');
         ie_open('code');
-          itext('npm');
+          itext('Semigroup');
         ie_close('code');
-        itext(' and is just a shell command away. All you need to do is run the following to save it as a dependency in your current project folder:');
+        itext(', ');
+        ie_open('code');
+          itext('Monoid');
+        ie_close('code');
       ie_close('p');
-      $templateAlias2({code: '$ npm install crocks -S', mode: 'text'}, null, opt_ijData);
-      ie_open('p');
-        itext('This will pull down ');
-        ie_open('code');
-          itext('crocks');
-        ie_close('code');
-        itext(' into your project\'s ');
-        ie_open('code');
-          itext('node_modules');
-        ie_close('code');
-        itext(' folder and can be accessed by adding something like the following in the file that needs it:');
-      ie_close('p');
-      $templateAlias2({code: '// node require syntax\nconst crocks = require(\'crocks\')\n\n// Javascript modules (if you are transpiling)\nimport crocks from \'crocks\'', mode: 'javascript'}, null, opt_ijData);
     ie_close('article');
     ie_open('article', null, null,
-        'id', 'import-only-what-you-need');
+        'id', 'topic-constructor');
       ie_open('h2');
         ie_open('a', null, null,
-            'id', 'import-only-whats-needed',
-            'href', '#import-only-whats-needed');
-          itext('Import only what\'s needed');
+            'id', 'constructor-methods',
+            'href', '#constructor-methods');
+          itext('Constructor Methods');
         ie_close('a');
       ie_close('h2');
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'empty',
+            'href', '#empty');
+          itext('empty');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'All.empty :: () -> All', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
-        itext('There is a lot to this library, and as such it may not be desired to bring in the whole thing when bundling for a library or frontend application. If this is the case, the code is organized in a manner that groups all functions that return or construct a given ADT into their respective folders. While general purpose functions are spread across the following folders: ');
         ie_open('code');
-          itext('combinators');
+          itext('empty');
         ie_close('code');
-        itext(', ');
+        itext(' provides the identity for the ');
         ie_open('code');
-          itext('helpers');
+          itext('Monoid');
         ie_close('code');
-        itext(', ');
+        itext(' in that when the value it provides is ');
         ie_open('code');
-          itext('logic');
+          itext('concat');
         ie_close('code');
-        itext(', ');
+        itext('ed to any other value, it will return the other value. In the case of ');
         ie_open('code');
-          itext('pointfree');
+          itext('All');
         ie_close('code');
-        itext(' and ');
+        itext(' the result of ');
         ie_open('code');
-          itext('predicates');
+          itext('empty');
+        ie_close('code');
+        itext(' is ');
+        ie_open('code');
+          itext('true');
+        ie_close('code');
+        itext('. ');
+        ie_open('code');
+          itext('empty');
+        ie_close('code');
+        itext(' is available on both the Constructor and the Instance for convenience.');
+      ie_close('p');
+      $templateAlias2({code: 'import All from \'crocks/All\'\n\nAll.empty() //=> All true\n\nAll(true).concat(All.empty())   //=> All true\nAll(false).concat(All.empty())  //=> All false', mode: 'javascript'}, null, opt_ijData);
+    ie_close('article');
+    ie_open('article', null, null,
+        'id', 'topic-instance');
+      ie_open('h2');
+        ie_open('a', null, null,
+            'id', 'instance-methods',
+            'href', '#instance-methods');
+          itext('Instance Methods');
+        ie_close('a');
+      ie_close('h2');
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'equals',
+            'href', '#equals');
+          itext('equals');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'All a ~> b -> Boolean', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        itext('Used to compare the underlying values of (2) ');
+        ie_open('code');
+          itext('All');
+        ie_close('code');
+        itext(' instances for equality by value, ');
+        ie_open('code');
+          itext('equals');
+        ie_close('code');
+        itext(' takes any given argument and returns ');
+        ie_open('code');
+          itext('true');
+        ie_close('code');
+        itext(' if the passed argument is an ');
+        ie_open('code');
+          itext('All');
+        ie_close('code');
+        itext(' with an underlying value equal to the underlying value of the ');
+        ie_open('code');
+          itext('All');
+        ie_close('code');
+        itext(' the method is being called on. If the passed argument is not an ');
+        ie_open('code');
+          itext('All');
+        ie_close('code');
+        itext(' or the underlying values are not equal, ');
+        ie_open('code');
+          itext('equals');
+        ie_close('code');
+        itext(' will return ');
+        ie_open('code');
+          itext('false');
         ie_close('code');
         itext('.');
       ie_close('p');
+      $templateAlias2({code: 'import All from \'crocks/All\'\n\nAll(true)\n  .equals(All(true))\n//=> true\n\nAll(true)\n  .equals(All(false))\n//=> false', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'concat',
+            'href', '#concat');
+          itext('concat');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'All ~> All -> All', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
-        itext('To access the types, just reference the folder like: ');
         ie_open('code');
-          itext('crocks/Maybe');
+          itext('concat');
         ie_close('code');
-        itext(', or');
+        itext(' is used to combine (2) ');
         ie_open('code');
-          itext('crocks/Result');
+          itext('Semigroup');
         ie_close('code');
-        itext('. If you want to access a function that constructs a given type, reference it by name, like: ');
+        itext('s of the same type under an operation specified by the ');
         ie_open('code');
-          itext('crocks/Maybe/safe');
+          itext('Semigroup');
         ie_close('code');
-        itext(' or ');
+        itext('. In the case of ');
         ie_open('code');
-          itext('crocks/Result/tryCatch');
+          itext('All');
         ie_close('code');
-        itext('. This organization helps ensure that you only include what you need.');
+        itext(', it will combine the (2) using logical AND (conjunction).');
       ie_close('p');
-      ie_open('h3');
+      $templateAlias2({code: 'import All from \'crocks/All\'\n\nAll(true).concat(All(true))   //=> All true\nAll(true).concat(All(false))  //=> All false\nAll(false).concat(All(true))  //=> All false\nAll(false).concat(All(false)) //=> All false', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
         ie_open('a', null, null,
-            'id', 'entire-library-commonjs',
-            'href', '#entire-library-commonjs');
-          itext('Entire library (CommonJS)');
+            'id', 'valueof',
+            'href', '#valueof');
+          itext('valueOf');
         ie_close('a');
-      ie_close('h3');
-      $templateAlias2({code: '// namespace entire suite to crocks variable\nconst crocks = require(\'crocks\')\n\n// pluck anything that does not require name-spacing\nconst { safe, isNumber } = crocks\n\n// still requires entire object, but removes name-spacing\nconst { and, liftA2 } = require(\'crocks\')\n\n// divide :: Number -> Number\nconst divide =\n  x => y => x / y\n\n// safeNumber :: a -> Maybe Number\nconst safeNumber =\n  safe(isNumber)\n\n// notZero :: a -> Maybe Number\nconst notZero = safe(\n  and(isNumber, x => x !== 0)\n)\n\n// safeDivide:: a -> Maybe Number\nconst safeDivide = crocks.curry(\n  (x, y) => liftA2(divide, safeNumber(x), notZero(y))\n)\n\nsafeDivide(20, 0)\n//=> Nothing\n\nsafeDivide(20, 5)\n//=> Just 4\n\nsafeDivide(\'number\', 5)\n//=> Nothing', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h3');
-        ie_open('a', null, null,
-            'id', 'entire-library-js-modules',
-            'href', '#entire-library-js-modules');
-          itext('Entire library (JS Modules)');
-        ie_close('a');
-      ie_close('h3');
-      $templateAlias2({code: '// namespace entire suite to crocks variable\nimport crocks from \'crocks\'\n\n// still imports entire object, but removes name-spacing\nimport { and, liftA2 }  from \'crocks\'\n\n// pluck anything that does not require name-spacing\nconst { safe, isNumber } = crocks\n\n// divide :: Number -> Number\nconst divide =\n  x => y => x / y\n\n// safeNumber :: a -> Maybe Number\nconst safeNumber =\n  safe(isNumber)\n\n// notZero :: a -> Maybe Number\nconst notZero = safe(\n  and(isNumber, x => x !== 0)\n)\n\n// safeDivide:: a -> Maybe Number\nconst safeDivide = crocks.curry(\n  (x, y) => liftA2(divide, safeNumber(x), notZero(y))\n)\n\nsafeDivide(20, 0)\n//=> Nothing\n\nsafeDivide(20, 5)\n//=> Just 4\n\nsafeDivide(\'number\', 5)\n//=> Nothing', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h3');
-        ie_open('a', null, null,
-            'id', 'single-entities-commonjs',
-            'href', '#single-entities-commonjs');
-          itext('Single entities (CommonJS)');
-        ie_close('a');
-      ie_close('h3');
-      $templateAlias2({code: '// require in each entity directly\nconst and = require(\'crocks/logic/and\')\nconst curry = require(\'crocks/helpers/curry\')\nconst isNumber = require(\'crocks/predicates/isNumber\')\nconst liftA2 = require(\'crocks/helpers/liftA2\')\nconst safe = require(\'crocks/Maybe/safe\')\n\n// divide :: Number -> Number\nconst divide =\n  x => y => x / y\n\n// safeNumber :: a -> Maybe Number\nconst safeNumber =\n  safe(isNumber)\n\n// notZero :: a -> Maybe Number\nconst notZero = safe(\n  and(isNumber, x => x !== 0)\n)\n\n// safeDivide:: a -> Maybe Number\nconst safeDivide = curry(\n  (x, y) => liftA2(divide, safeNumber(x), notZero(y))\n)\n\nsafeDivide(20, 0)\n//=> Nothing\n\nsafeDivide(20, 5)\n//=> Just 4\n\nsafeDivide(\'number\', 5)\n//=> Nothing', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h3');
-        ie_open('a', null, null,
-            'id', 'single-entities-js-modules',
-            'href', '#single-entities-js-modules');
-          itext('Single entities (JS Modules)');
-        ie_close('a');
-      ie_close('h3');
-      $templateAlias2({code: '// import in each entity directly\nimport and from \'crocks/logic/and\'\nimport curry from \'crocks/helpers/curry\'\nimport isNumber from \'crocks/predicates/isNumber\'\nimport liftA2 from \'crocks/helpers/liftA2\'\nimport safe from \'crocks/Maybe/safe\'\n\n// divide :: Number -> Number\nconst divide =\n  x => y => x / y\n\n// safeNumber :: a -> Maybe Number\nconst safeNumber =\n  safe(isNumber)\n\n// notZero :: a -> Maybe Number\nconst notZero = safe(\n  and(isNumber, x => x !== 0)\n)\n\n// safeDivide:: a -> Maybe Number\nconst safeDivide = curry(\n  (x, y) => liftA2(divide, safeNumber(x), notZero(y))\n)\n\nsafeDivide(20, 0)\n//=> Nothing\n\nsafeDivide(20, 5)\n//=> Just 4\n\nsafeDivide(\'number\', 5)\n//=> Nothing', mode: 'javascript'}, null, opt_ijData);
+      ie_close('h4');
+      $templateAlias2({code: 'All ~> () -> Boolean', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        ie_open('code');
+          itext('valueOf');
+        ie_close('code');
+        itext(' is used on all ');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext(' ');
+        ie_open('code');
+          itext('Monoid');
+        ie_close('code');
+        itext('s as a means of extraction. While the extraction is available, types that implement ');
+        ie_open('code');
+          itext('valueOf');
+        ie_close('code');
+        itext(' are not necessarily a');
+        ie_open('code');
+          itext('Comonad');
+        ie_close('code');
+        itext('. This function is used primarily for convenience for some of the helper functions that ship with ');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext('. Calling ');
+        ie_open('code');
+          itext('valueOf');
+        ie_close('code');
+        itext(' on an ');
+        ie_open('code');
+          itext('All');
+        ie_close('code');
+        itext(' instance will result in the underlying ');
+        ie_open('code');
+          itext('Boolean');
+        ie_close('code');
+        itext(' value.');
+      ie_close('p');
+      $templateAlias2({code: 'import All from \'crocks/All\'\n\nAll(0).valueOf()          //=> false\nAll(\'string\').valueOf() //=> true\n\n//=> false\nAll(true)\n  .concat(\'\')\n  .valueOf()', mode: 'javascript'}, null, opt_ijData);
     ie_close('article');
     ie_open('input', null, null,
         'type', 'hidden',
@@ -28550,11 +28659,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'value', opt_data.site.title);
     ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({content: param212}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param1764}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'WEoVj.render';
+  $render.soyTemplateName = 'atOxM.render';
 }
 
 exports.render.params = ["page","site"];
@@ -28564,16 +28673,14 @@ return exports;
 
 });
 
-class WEoVj extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(WEoVj, templates);
+class atOxM extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(atOxM, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
 
 
 /***/ }),
-/* 234 */,
-/* 235 */,
 /* 236 */,
 /* 237 */,
 /* 238 */,
@@ -28586,7 +28693,28 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(WEoVj, templates);
 /* 245 */,
 /* 246 */,
 /* 247 */,
-/* 248 */
+/* 248 */,
+/* 249 */,
+/* 250 */,
+/* 251 */,
+/* 252 */,
+/* 253 */,
+/* 254 */,
+/* 255 */,
+/* 256 */,
+/* 257 */,
+/* 258 */,
+/* 259 */,
+/* 260 */,
+/* 261 */,
+/* 262 */,
+/* 263 */,
+/* 264 */,
+/* 265 */,
+/* 266 */,
+/* 267 */,
+/* 268 */,
+/* 269 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28622,9 +28750,9 @@ __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _gettingStartedSoy = __webpack_require__(233);
+var _AllSoy = __webpack_require__(235);
 
-var _gettingStartedSoy2 = _interopRequireDefault(_gettingStartedSoy);
+var _AllSoy2 = _interopRequireDefault(_AllSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28634,23 +28762,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var WEoVj = function (_Component) {
-  _inherits(WEoVj, _Component);
+var atOxM = function (_Component) {
+  _inherits(atOxM, _Component);
 
-  function WEoVj() {
-    _classCallCheck(this, WEoVj);
+  function atOxM() {
+    _classCallCheck(this, atOxM);
 
-    return _possibleConstructorReturn(this, (WEoVj.__proto__ || Object.getPrototypeOf(WEoVj)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (atOxM.__proto__ || Object.getPrototypeOf(atOxM)).apply(this, arguments));
   }
 
-  return WEoVj;
+  return atOxM;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(WEoVj, _gettingStartedSoy2.default);
+_metalSoy2.default.register(atOxM, _AllSoy2.default);
 
-exports.default = WEoVj;
+exports.default = atOxM;
 
 /***/ })
-],[248]);
+],[269]);

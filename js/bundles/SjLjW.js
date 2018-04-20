@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([2,31,32,33],[
+webpackJsonppageComponent([5,31,32,33],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -28373,15 +28373,12 @@ exports.default = parseFromAnchor;
 /* 239 */,
 /* 240 */,
 /* 241 */,
-/* 242 */,
-/* 243 */,
-/* 244 */,
-/* 245 */
+/* 242 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hxcTu", function() { return hxcTu; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SjLjW", function() { return SjLjW; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28393,15 +28390,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var templates;
 goog.loadModule(function(exports) {
 
-// This file was automatically generated from index.soy.
+// This file was automatically generated from Min.soy.
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace hxcTu.
+ * @fileoverview Templates in namespace SjLjW.
  * @public
  */
 
-goog.module('hxcTu.incrementaldom');
+goog.module('SjLjW.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28422,7 +28419,9 @@ var ie_open_end = IncrementalDom.elementOpenEnd;
 var itext = IncrementalDom.text;
 var iattr = IncrementalDom.attr;
 
-var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('notopic.incrementaldom', 'render');
+var $templateAlias2 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('ElectricCode.incrementaldom', 'render');
+
+var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('guide.incrementaldom', 'render');
 
 
 /**
@@ -28433,353 +28432,227 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var param2354 = function() {
+  var param2270 = function() {
+    $templateAlias2({code: 'Min Number', mode: 'haskell'}, null, opt_ijData);
     ie_open('p');
-      itext('Each ');
+      ie_open('code');
+        itext('Min');
+      ie_close('code');
+      itext(' is a ');
       ie_open('code');
         itext('Monoid');
       ie_close('code');
-      itext(' provides a means to represent a binary operation and is usually locked down to a specific type. These are great when you need to combine a list of values down to one value. In this library, any ADT that provides both an');
+      itext(' that will combines (2) ');
       ie_open('code');
-        itext('empty');
+        itext('Number');
       ie_close('code');
-      itext(' and a ');
-      ie_open('code');
-        itext('concat');
-      ie_close('code');
-      itext(' function can be used as a ');
-      ie_open('code');
-        itext('Monoid');
-      ie_close('code');
-      itext('. There are a few of the ');
-      ie_open('a', null, null,
-          'href', '../crocks/index.html');
-        itext('crocks');
-      ie_close('a');
-      itext(' that are also monoidial, so be on the look out for those as well.');
+      itext('s, resulting in the smallest of the two.');
     ie_close('p');
-    ie_open('p');
-      itext('All ');
-      ie_open('code');
-        itext('Monoids');
-      ie_close('code');
-      itext(' work with the following helper functions');
-      ie_open('a', null, null,
-          'href', '../functions/helpers.html#mconcat');
-        itext('mconcat');
-      ie_close('a');
-      itext(', ');
-      ie_open('a', null, null,
-          'href', '../functions/helpers.html#mreduce');
-        itext('mreduce');
-      ie_close('a');
-      itext(', ');
-      ie_open('a', null, null,
-          'href', '../functions/helpers.html#mconcatmap');
-        itext('mconcatMap');
-      ie_close('a');
-      itext(' and ');
-      ie_open('a', null, null,
-          'href', '../functions/helpers.html#mreducemap');
-        itext('mreduceMap');
-      ie_close('a');
-      itext('.');
-    ie_close('p');
-    ie_open('p');
-      itext('All ');
-      ie_open('code');
-        itext('Monoids');
-      ie_close('code');
-      itext(' provide ');
-      ie_open('code');
-        itext('empty');
-      ie_close('code');
-      itext(' functions on their Constructors as well as the following Instance Functions: ');
-      ie_open('code');
-        itext('valueOf');
-      ie_close('code');
-      itext(', ');
-      ie_open('code');
-        itext('empty');
-      ie_close('code');
-      itext(' and ');
-      ie_open('code');
-        itext('concat');
-      ie_close('code');
-      itext('.');
-    ie_close('p');
-    ie_open('table');
-      ie_open('thead');
-        ie_open('tr');
-          ie_open('th');
-            itext('Monoid');
-          ie_close('th');
-          ie_open('th');
-            itext('Type');
-          ie_close('th');
-          ie_open('th');
-            itext('Operation');
-          ie_close('th');
-          ie_open('th');
-            itext('Empty (Identity)');
-          ie_close('th');
-        ie_close('tr');
-      ie_close('thead');
-      ie_open('tbody');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('a', null, null,
-                'href', 'All.html');
-              ie_open('code');
-                itext('All');
-              ie_close('code');
-            ie_close('a');
-          ie_close('td');
-          ie_open('td');
-            itext('Boolean');
-          ie_close('td');
-          ie_open('td');
-            itext('Logical AND');
-          ie_close('td');
-          ie_open('td');
-            ie_open('code');
-              itext('true');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('a', null, null,
-                'href', 'Any.html');
-              ie_open('code');
-                itext('Any');
-              ie_close('code');
-            ie_close('a');
-          ie_close('td');
-          ie_open('td');
-            itext('Boolean');
-          ie_close('td');
-          ie_open('td');
-            itext('Logical OR');
-          ie_close('td');
-          ie_open('td');
-            ie_open('code');
-              itext('false');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('a', null, null,
-                'href', 'Assign.html');
-              ie_open('code');
-                itext('Assign');
-              ie_close('code');
-            ie_close('a');
-          ie_close('td');
-          ie_open('td');
-            itext('Object');
-          ie_close('td');
-          ie_open('td');
-            ie_open('code');
-              itext('Object.assign');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td');
-            ie_open('code');
-              itext('{}');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('a', null, null,
-                'href', 'Endo.html');
-              ie_open('code');
-                itext('Endo');
-              ie_close('code');
-            ie_close('a');
-          ie_close('td');
-          ie_open('td');
-            itext('Function');
-          ie_close('td');
-          ie_open('td');
-            ie_open('code');
-              itext('compose');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td');
-            ie_open('code');
-              itext('identity');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('a', null, null,
-                'href', 'First.html');
-              ie_open('code');
-                itext('First');
-              ie_close('code');
-            ie_close('a');
-          ie_close('td');
-          ie_open('td');
-            ie_open('a', null, null,
-                'href', '../crocks/Maybe.html');
-              ie_open('code');
-                itext('Maybe');
-              ie_close('code');
-            ie_close('a');
-          ie_close('td');
-          ie_open('td');
-            ie_open('code');
-              itext('First');
-            ie_close('code');
-            itext(' ');
-            ie_open('a', null, null,
-                'href', '../crocks/Maybe.html#just');
-              ie_open('code');
-                itext('Just');
-              ie_close('code');
-            ie_close('a');
-          ie_close('td');
-          ie_open('td');
-            ie_open('a', null, null,
-                'href', '../crocks/Maybe.html#nothing');
-              ie_open('code');
-                itext('Nothing');
-              ie_close('code');
-            ie_close('a');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('a', null, null,
-                'href', 'Last.html');
-              ie_open('code');
-                itext('Last');
-              ie_close('code');
-            ie_close('a');
-          ie_close('td');
-          ie_open('td');
-            ie_open('a', null, null,
-                'href', '../crocks/Maybe.html');
-              ie_open('code');
-                itext('Maybe');
-              ie_close('code');
-            ie_close('a');
-          ie_close('td');
-          ie_open('td');
-            ie_open('code');
-              itext('Last');
-            ie_close('code');
-            itext(' ');
-            ie_open('a', null, null,
-                'href', '../crocks/Maybe.html#just');
-              ie_open('code');
-                itext('Just');
-              ie_close('code');
-            ie_close('a');
-          ie_close('td');
-          ie_open('td');
-            ie_open('a', null, null,
-                'href', '../crocks/Maybe.html#nothing');
-              ie_open('code');
-                itext('Nothing');
-              ie_close('code');
-            ie_close('a');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('a', null, null,
-                'href', 'Max.html');
-              ie_open('code');
-                itext('Max');
-              ie_close('code');
-            ie_close('a');
-          ie_close('td');
-          ie_open('td');
-            itext('Number');
-          ie_close('td');
-          ie_open('td');
-            ie_open('code');
-              itext('Math.max');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td');
-            ie_open('code');
-              itext('-Infinity');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('a', null, null,
-                'href', 'Min.html');
-              ie_open('code');
-                itext('Min');
-              ie_close('code');
-            ie_close('a');
-          ie_close('td');
-          ie_open('td');
-            itext('Number');
-          ie_close('td');
-          ie_open('td');
-            ie_open('code');
-              itext('Math.min');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td');
-            ie_open('code');
-              itext('Infinity');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('a', null, null,
-                'href', 'Prod.html');
-              ie_open('code');
-                itext('Prod');
-              ie_close('code');
-            ie_close('a');
-          ie_close('td');
-          ie_open('td');
-            itext('Number');
-          ie_close('td');
-          ie_open('td');
-            itext('Multiplication');
-          ie_close('td');
-          ie_open('td');
-            ie_open('code');
-              itext('1');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('a', null, null,
-                'href', 'Sum.html');
-              ie_open('code');
-                itext('Sum');
-              ie_close('code');
-            ie_close('a');
-          ie_close('td');
-          ie_open('td');
-            itext('Number');
-          ie_close('td');
-          ie_open('td');
-            itext('Addition');
-          ie_close('td');
-          ie_open('td');
-            ie_open('code');
-              itext('0');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-      ie_close('tbody');
-    ie_close('table');
+    $templateAlias2({code: 'import Min from \'crocks/Min\'\nimport mconcat from \'crocks/helpers/mconcat\'\n\nMin(76)\n//=> Min 76\n\nmconcat(Min, [ 95, 12, 56 ])\n//=> Min 12\n\nMin(100)\n  .concat(Min(10))\n//=> Min 10\n\nMin.empty()\n  .concat(Min(100))\n//=> Min 100', mode: 'javascript'}, null, opt_ijData);
+    ie_open('article', null, null,
+        'id', 'topic-implements');
+      ie_open('h2');
+        ie_open('a', null, null,
+            'id', 'implements',
+            'href', '#implements');
+          itext('Implements');
+        ie_close('a');
+      ie_close('h2');
+      ie_open('p');
+        ie_open('code');
+          itext('Setoid');
+        ie_close('code');
+        itext(', ');
+        ie_open('code');
+          itext('Semigroup');
+        ie_close('code');
+        itext(', ');
+        ie_open('code');
+          itext('Monoid');
+        ie_close('code');
+      ie_close('p');
+    ie_close('article');
+    ie_open('article', null, null,
+        'id', 'topic-constructor');
+      ie_open('h2');
+        ie_open('a', null, null,
+            'id', 'constructor-methods',
+            'href', '#constructor-methods');
+          itext('Constructor Methods');
+        ie_close('a');
+      ie_close('h2');
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'empty',
+            'href', '#empty');
+          itext('empty');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Min.empty :: () -> Min', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        ie_open('code');
+          itext('empty');
+        ie_close('code');
+        itext(' provides the identity for the ');
+        ie_open('code');
+          itext('Monoid');
+        ie_close('code');
+        itext(' in that when the value it provides is ');
+        ie_open('code');
+          itext('concat');
+        ie_close('code');
+        itext('ed to any other value, it will return the other value. In the case of ');
+        ie_open('code');
+          itext('Min');
+        ie_close('code');
+        itext(' the result of ');
+        ie_open('code');
+          itext('empty');
+        ie_close('code');
+        itext(' is ');
+        ie_open('code');
+          itext('Infinity');
+        ie_close('code');
+        itext('. ');
+        ie_open('code');
+          itext('empty');
+        ie_close('code');
+        itext(' is available on both the Constructor and the Instance for convenience.');
+      ie_close('p');
+      $templateAlias2({code: 'import Min from \'crocks/Min\'\n\nMin.empty()\n//=> Min Infinity\n\nMin.empty()\n  .concat(Min.empty())\n//=> Min Infinity\n\nMin(32)\n  .concat(Min.empty())\n//=> Min 32\n\nMin.empty()\n  .concat(Min(34))\n//=> Min 34', mode: 'javascript'}, null, opt_ijData);
+    ie_close('article');
+    ie_open('article', null, null,
+        'id', 'topic-instance');
+      ie_open('h2');
+        ie_open('a', null, null,
+            'id', 'instance-methods',
+            'href', '#instance-methods');
+          itext('Instance Methods');
+        ie_close('a');
+      ie_close('h2');
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'equals',
+            'href', '#equals');
+          itext('equals');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Min a ~> b -> Boolean', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        itext('Used to compare the underlying values of (2) ');
+        ie_open('code');
+          itext('Min');
+        ie_close('code');
+        itext(' instances for equality by value, ');
+        ie_open('code');
+          itext('equals');
+        ie_close('code');
+        itext(' takes any given argument and returns ');
+        ie_open('code');
+          itext('true');
+        ie_close('code');
+        itext(' if the passed argument is a ');
+        ie_open('code');
+          itext('Min');
+        ie_close('code');
+        itext(' with an underlying value equal to the underlying value of the ');
+        ie_open('code');
+          itext('Min');
+        ie_close('code');
+        itext(' the method is being called on. If the passed argument is not a ');
+        ie_open('code');
+          itext('Min');
+        ie_close('code');
+        itext(' or the underlying values are not equal, ');
+        ie_open('code');
+          itext('equals');
+        ie_close('code');
+        itext(' will return ');
+        ie_open('code');
+          itext('false');
+        ie_close('code');
+        itext('.');
+      ie_close('p');
+      $templateAlias2({code: 'import Min from \'crocks/Min\'\n\nMin(5)\n  .equals(Min(5))\n//=> true\n\nMin(25)\n  .equals(Min(31))\n//=> false', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'concat',
+            'href', '#concat');
+          itext('concat');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Min ~> Min -> Min', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        ie_open('code');
+          itext('concat');
+        ie_close('code');
+        itext(' is used to combine (2) ');
+        ie_open('code');
+          itext('Semigroup');
+        ie_close('code');
+        itext('s of the same type under an operation specified by the ');
+        ie_open('code');
+          itext('Semigroup');
+        ie_close('code');
+        itext('. In the case of ');
+        ie_open('code');
+          itext('Min');
+        ie_close('code');
+        itext(', it will result in the smallest of the (2) ');
+        ie_open('code');
+          itext('Number');
+        ie_close('code');
+        itext('s.');
+      ie_close('p');
+      $templateAlias2({code: 'import Min from \'crocks/Min\'\n\nMin(50)\n  .concat(Min(24))\n//=> Min 24\n\nMin(-120)\n  .concat(Min(-50))\n//=> Min -120\n\nMin.empty()\n  .concat(Min(-Infinity))\n//=> Min -Infinity', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'valueof',
+            'href', '#valueof');
+          itext('valueOf');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Min ~> () -> Number', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        ie_open('code');
+          itext('valueOf');
+        ie_close('code');
+        itext(' is used on all ');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext(' ');
+        ie_open('code');
+          itext('Monoid');
+        ie_close('code');
+        itext('s as a means of extraction. While the extraction is available, types that implement ');
+        ie_open('code');
+          itext('valueOf');
+        ie_close('code');
+        itext(' are not necessarily a');
+        ie_open('code');
+          itext('Comonad');
+        ie_close('code');
+        itext('. This function is used primarily for convenience for some of the helper functions that ship with ');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext('. Calling ');
+        ie_open('code');
+          itext('valueOf');
+        ie_close('code');
+        itext(' on a ');
+        ie_open('code');
+          itext('Min');
+        ie_close('code');
+        itext(' instance will result in the underlying ');
+        ie_open('code');
+          itext('Number');
+        ie_close('code');
+        itext('.');
+      ie_close('p');
+      $templateAlias2({code: 'import Min from \'crocks/Min\'\n\nMin(33)\n  .valueOf()\n//=> 33\n\nMin.empty()\n  .valueOf()\n//=> Infinity\n\nMin(35)\n  .concat(Min(20))\n  .valueOf()\n//=> 20', mode: 'javascript'}, null, opt_ijData);
+    ie_close('article');
     ie_open('input', null, null,
         'type', 'hidden',
         'value', opt_data.page.title);
@@ -28789,11 +28662,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'value', opt_data.site.title);
     ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({content: param2354}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param2270}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'hxcTu.render';
+  $render.soyTemplateName = 'SjLjW.render';
 }
 
 exports.render.params = ["page","site"];
@@ -28803,14 +28676,17 @@ return exports;
 
 });
 
-class hxcTu extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(hxcTu, templates);
+class SjLjW extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(SjLjW, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
 
 
 /***/ }),
+/* 243 */,
+/* 244 */,
+/* 245 */,
 /* 246 */,
 /* 247 */,
 /* 248 */,
@@ -28833,11 +28709,7 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(hxcTu, templates);
 /* 265 */,
 /* 266 */,
 /* 267 */,
-/* 268 */,
-/* 269 */,
-/* 270 */,
-/* 271 */,
-/* 272 */
+/* 268 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28873,9 +28745,9 @@ __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _indexSoy = __webpack_require__(245);
+var _MinSoy = __webpack_require__(242);
 
-var _indexSoy2 = _interopRequireDefault(_indexSoy);
+var _MinSoy2 = _interopRequireDefault(_MinSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28885,23 +28757,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var hxcTu = function (_Component) {
-  _inherits(hxcTu, _Component);
+var SjLjW = function (_Component) {
+  _inherits(SjLjW, _Component);
 
-  function hxcTu() {
-    _classCallCheck(this, hxcTu);
+  function SjLjW() {
+    _classCallCheck(this, SjLjW);
 
-    return _possibleConstructorReturn(this, (hxcTu.__proto__ || Object.getPrototypeOf(hxcTu)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (SjLjW.__proto__ || Object.getPrototypeOf(SjLjW)).apply(this, arguments));
   }
 
-  return hxcTu;
+  return SjLjW;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(hxcTu, _indexSoy2.default);
+_metalSoy2.default.register(SjLjW, _MinSoy2.default);
 
-exports.default = hxcTu;
+exports.default = SjLjW;
 
 /***/ })
-],[272]);
+],[268]);

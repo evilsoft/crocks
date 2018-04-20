@@ -1,5 +1,37 @@
 # Change Log for `crocks`
 
+v0.9.3 -- April 19, 2018
+--
+
+### Additions
+* Make the following `Monoid`s `Setoid`s by adding `equals`:
+  * `All`
+  * `Any`
+  * `Assign`
+  * `First`
+  * `Last`
+  * `Max`
+  * `Min`
+  * `Prod`
+  * `Sum`
+
+### Documentation
+* Improve search when searching through docs section
+* Remove legacy documentation READMES in favor of single source in docs
+
+### Modifications
+* Make `isSame` curried.
+* Differentiate error reporting between fluent style methods and fantasy land
+methods for all ADTs
+
+### Pull Requests
+* [#255 - Fix search in docs](https://github.com/evilsoft/crocks/pull/255)
+* [#258 - Add equals to most Monoids (without docs)](https://github.com/evilsoft/crocks/pull/258)
+* [#257 - fixes missing curry in isSame](https://github.com/evilsoft/crocks/pull/257)
+* [#260 - Add ability to report fluent style and fantasy-land errors](https://github.com/evilsoft/crocks/pull/260)
+* [#262 - Add docs for monoid equals property](https://github.com/evilsoft/crocks/pull/262)
+* [#263 - Move to one truth for documentation](https://github.com/evilsoft/crocks/pull/263)
+
 v0.9.2 -- April 1, 2018
 --
 ### Additions

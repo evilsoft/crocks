@@ -92,6 +92,8 @@ the form of `a -> m b` into a function that can be `chain`ed with the `ReaderT`.
 Although, [`liftFn`](#liftfn) can be used to remove the composition boilerplate
 and promote and `a -> m b` function.
 
+<!-- eslint-disable no-console -->
+
 ```javascript
 import ReaderT from 'crocks/Reader/ReaderT'
 import Async from 'crocks/Async'

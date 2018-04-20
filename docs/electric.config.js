@@ -21,6 +21,7 @@ module.exports = {
     html: true
   },
   markdownRenderer: function(md) {
+    const origHtmlblock = md.renderer.rules.htmlblock
 
     // add links to headers
     md.renderer.rules.heading_open = function(t, idx) {
@@ -30,6 +31,19 @@ module.exports = {
 
     md.renderer.rules.heading_close = function(t, idx) {
       return '</a></h' + t[idx].hLevel+ '>'
+    }
+
+    // Remove all html comments from markdown docs
+    // as they break. We use the comments for the linter
+    md.renderer.rules.htmlblock = function(t, idx) {
+      const content = t[idx].content
+
+      const htmlComment =
+        /<!--([^-]+|[-][^-]+)*-->/g
+
+      return htmlComment.test(content)
+        ? t[idx].content.replace(htmlComment, '')
+        : origHtmlblock(t, idx)
     }
 
     return md

@@ -49,6 +49,9 @@ this function is called, `Async` will finish running the current "in flight"
 computation to completion, but will cease all remaining execution. Cancellation
 with `Async` is total and will cancel silently, without notification.
 
+<!-- eslint-disable no-console -->
+<!-- eslint-disable no-sequences -->
+
 ```javascript
 import Async from 'crocks/Async'
 
@@ -155,6 +158,9 @@ type of a `Rejected` fixed to a type for a given flow. Given that `Async` is
 a `Bifunctor`, it is easy to make sure you get the type you need at the edge
 by leaning on [`bimap`](#bimap) to "square things up".
 
+<!-- eslint-disable no-console -->
+<!-- eslint-disable no-sequences -->
+
 ```javascript
 import Async from 'crocks/Async'
 
@@ -190,6 +196,9 @@ Used to construct a `Resolved` instance that represents the success or "true"
 portion of the disjunction. `Resolved` will wrap any given value passed to this
 constructor in the `Resolved` instance it returns, signaling the validity of the
 wrapped value.
+
+<!-- eslint-disable no-console -->
+<!-- eslint-disable no-sequences -->
 
 ```javascript
 import Async from 'crocks/Async'
@@ -228,6 +237,9 @@ lazy nature of `Async`, any curried interface will not be respected on the
 provided function. This can be solved by wrapping the resulting function
 with [`nAry`][nary], which will provide a curried function that will return the
 desired `Async`.
+
+<!-- eslint-disable no-console -->
+<!-- eslint-disable no-sequences -->
 
 ```javascript
 import Async from 'crocks/Async'
@@ -306,6 +318,9 @@ wrapped.
 Like [`fromPromise`](#frompromise), any curried interface will not be respected.
 If a curried interface is needed then [`nAry`][nary] can be used.
 
+<!-- eslint-disable no-console -->
+<!-- eslint-disable no-sequences -->
+
 ```javascript
 import Async from 'crocks/Async'
 
@@ -378,6 +393,9 @@ be [`Rejected`](#rejected) with value of the first [`Rejected`](#rejected) insta
 instances resolve, then the entire instance is [`Resolved`](#resolved) with
 an `Array` containing all [`Resolved`](#resolved) values in their provided order.
 
+<!-- eslint-disable no-console -->
+<!-- eslint-disable no-sequences -->
+
 ```javascript
 import Async from 'crocks/Async'
 
@@ -408,6 +426,9 @@ either `Applicative` or `Monad`. When working specifically with
 the `Async` type, the [`Resolved`](#resolved) constructor should be
 used. Reach for `of` when working with functions that will work with
 ANY `Applicative`/`Monad`.
+
+<!-- eslint-disable no-console -->
+<!-- eslint-disable no-sequences -->
 
 ```javascript
 import Async from 'crocks/Async'
@@ -448,6 +469,9 @@ a function that it will lift into the context of the `Async` and apply to it
 the wrapped value. When ran on a [`Resolved`](#resolved) instance, `map` will apply the
 wrapped value to the provided function and return the result in a
 new [`Resolved`](#resolved) instance.
+
+<!-- eslint-disable no-console -->
+<!-- eslint-disable no-sequences -->
 
 ```javascript
 import Async from 'crocks/Async'
@@ -513,6 +537,9 @@ Providing a means for a fallback or alternative value, `alt` combines (2)
 `Async` instances and will return the first [`Resolved`](#resolved) instance it encounters
 or the last [`Rejected`](#rejected) instance if it does not encounter a [`Resolved`](#resolved) instance.
 
+<!-- eslint-disable no-console -->
+<!-- eslint-disable no-sequences -->
+
 ```javascript
 import Async from 'crocks/Async'
 
@@ -557,6 +584,9 @@ While `bimap` requires that both possible instances are to be mapped, if the
 desire to map only the [`Rejected`](#rejected) portion, an [`identity`][identity] function can be
 provided to the second argument. This will leave all [`Resolved`](#resolved) instance values
 untouched.
+
+<!-- eslint-disable no-console -->
+<!-- eslint-disable no-sequences -->
 
 ```javascript
 import Async from 'crocks/Async'
@@ -619,6 +649,9 @@ not result in undesired exceptions or results.
 
 When [`fork`](#fork)ed, all `Async`s chained with multiple `ap` invocations
 will be executed concurrently.
+
+<!-- eslint-disable no-console -->
+<!-- eslint-disable no-sequences -->
 
 ```javascript
 import Async from 'crocks/Async'
@@ -688,6 +721,9 @@ the function, but will instead return another [`Rejected`](#rejected) instance w
 original [`Rejected`](#rejected) value. When called on a [`Resolved`](#resolved) instance however, the
 inner value will be passed to provided function, returning the result as the
 new instance.
+
+<!-- eslint-disable no-console -->
+<!-- eslint-disable no-sequences -->
 
 ```javascript
 import Async from 'crocks/Async'
@@ -766,6 +802,9 @@ function is used when `coalesce` is invoked on a [`Resolved`](#resolved) instanc
 to map the original value, returning a new [`Resolved`](#resolved) instance wrapping the
 result of the second function.
 
+<!-- eslint-disable no-console -->
+<!-- eslint-disable no-sequences -->
+
 ```javascript
 import Async from 'crocks/Async'
 
@@ -805,6 +844,9 @@ a [`Rejected`](#rejected), `swap` takes (2) functions as its arguments. The firs
 is used to map the expected [`Rejected`](#rejected) value into a [`Resolved`](#resolved), while the
 second goes from [`Resolved`](#resolved) to [`Rejected`](#rejected). If no mapping is required on either,
 then [`identity`][identity] functions can be used in one or both arguments.
+
+<!-- eslint-disable no-console -->
+<!-- eslint-disable no-sequences -->
 
 ```javascript
 import Async from 'crocks/Async'
@@ -902,6 +944,9 @@ signature described above, but takes an addition function that can be used
 for "clean up" after cancellation. When all in-flight computations settle, the
 function provided will be silently executed.
 
+<!-- eslint-disable no-console -->
+<!-- eslint-disable no-sequences -->
+
 ```javascript
 import Async from 'crocks/Async'
 
@@ -956,6 +1001,9 @@ internally and return a `Promise` that will be in-flight. This comes in handy
 for integration with other `Promise` based libraries that are utilized in a
 given application, program or flow.
 
+<!-- eslint-disable no-console -->
+<!-- eslint-disable no-sequences -->
+
 ```javascript
 import Async from 'crocks/Async'
 
@@ -1004,6 +1052,9 @@ signatures and will behave differently when passed either an `Either` instance
 or a function that returns an instance of `Either`. When passed the instance,
 a transformed `Async` is returned. When passed an `Either` returning function,
 a function will be returned that takes a given value and returns an `Async`.
+
+<!-- eslint-disable no-console -->
+<!-- eslint-disable no-sequences -->
 
 ```javascript
 import Async from 'crocks/Async'
@@ -1086,6 +1137,9 @@ signatures and will behave differently when passed either a [`First`][first] ins
 or a function that returns an instance of [`First`][first]. When passed the instance,
 a transformed `Async` is returned. When passed a [`First`][first] returning function,
 a function will be returned that takes a given value and returns an `Async`.
+
+<!-- eslint-disable no-console -->
+<!-- eslint-disable no-sequences -->
 
 ```javascript
 import Async from 'crocks/Async'
@@ -1175,6 +1229,9 @@ or a function that returns an instance of [`Last`][last]. When passed the instan
 a transformed `Async` is returned. When passed a [`Last`][last] returning function,
 a function will be returned that takes a given value and returns an `Async`.
 
+<!-- eslint-disable no-console -->
+<!-- eslint-disable no-sequences -->
+
 ```javascript
 import Async from 'crocks/Async'
 import Last from 'crocks/Last'
@@ -1263,6 +1320,9 @@ or a function that returns an instance of [`Maybe`][maybe]. When passed the inst
 a transformed `Async` is returned. When passed a [`Maybe`][maybe] returning function,
 a function will be returned that takes a given value and returns an `Async`.
 
+<!-- eslint-disable no-console -->
+<!-- eslint-disable no-sequences -->
+
 ```javascript
 import Async from 'crocks/Async'
 import Maybe from 'crocks/Maybe'
@@ -1331,6 +1391,9 @@ signatures and will behave differently when passed either a `Result` instance
 or a function that returns an instance of `Result`. When passed the instance,
 a transformed `Async` is returned. When passed a `Result` returning function,
 a function will be returned that takes a given value and returns an `Async`.
+
+<!-- eslint-disable no-console -->
+<!-- eslint-disable no-sequences -->
 
 ```javascript
 import Async from 'crocks/Async'

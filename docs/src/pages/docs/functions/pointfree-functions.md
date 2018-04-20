@@ -104,6 +104,7 @@ accepted Datatype):
 | `contramap` | [`Arrow`][arrow-contra], [`Equiv`][equiv-contra], [`Pred`][pred-contra], `Star` |
 | `either` | `Either`, [`Maybe`][maybe-either], `Result` |
 | `empty` | [`All`][all-empty], [`Any`][any-empty], `Array`, [`Assign`][assign-empty], [`Endo`][endo-empty], [`Equiv`][equiv-empty], [`First`][first-empty], [`Last`][last-empty], `List`, [`Max`][max-empty], [`Min`][min-empty], `Object`, [`Pred`][pred-empty], [`Prod`][prod-empty], `String`, [`Sum`][sum-empty], `Unit` |
+| `equals` | [`All`][all-equals], [`Any`][any-equals], `Array`, [`Assign`][assign-equals], `Boolean`, `Const`, `Either`, [`First`][first-equals], [`Last`][last-equals], `List`, [`Max`][max-equals], [`Maybe`][maybe-equals], [`Min`][min-equals], `Number`, `Object`, `Pair`, [`Prod`][prod-equals], `Result`, `String`, [`Sum`][sum-equals], `Unit`, `Writer` |
 | [`evalWith`][eval] | [`State`][state-eval] |
 | [`execWith`][exec] | [`State`][state-exec] |
 | `extend` | `Pair` |
@@ -133,14 +134,17 @@ accepted Datatype):
 
 [all-concat]: ../monoids/All.html#concat
 [all-empty]: ../monoids/All.html#empty
+[all-equals]: ../monoids/All.html#equals
 [all-value]: ../monoids/All.html#valueof
 
 [any-concat]: ../monoids/Any.html#concat
 [any-empty]: ../monoids/Any.html#empty
+[any-equals]: ../monoids/Any.html#equals
 [any-value]: ../monoids/Any.html#valueof
 
 [assign-concat]: ../monoids/Assign.html#concat
 [assign-empty]: ../monoids/Assign.html#empty
+[assign-equals]: ../monoids/Assign.html#equals
 [assign-value]: ../monoids/Assign.html#valueof
 
 [arrow-both]: ../crocks/Arrow.html#both
@@ -172,16 +176,19 @@ accepted Datatype):
 
 [first-concat]: ../monoids/First.html#concat
 [first-empty]: ../monoids/First.html#empty
+[first-equals]: ../monoids/First.html#equals
 [first-option]: ../monoids/First.html#option
 [first-value]: ../monoids/First.html#valueof
 
 [last-concat]: ../monoids/Last.html#concat
 [last-empty]: ../monoids/Last.html#empty
+[last-equals]: ../monoids/Last.html#equals
 [last-option]: ../monoids/Last.html#option
 [last-value]: ../monoids/Last.html#valueof
 
 [max-concat]: ../monoids/Max.html#concat
 [max-empty]: ../monoids/Max.html#empty
+[max-equals]: ../monoids/Max.html#equals
 [max-value]: ../monoids/Max.html#valueof
 
 [maybe-alt]: ../crocks/Maybe.html#alt
@@ -190,6 +197,7 @@ accepted Datatype):
 [maybe-coalesce]: ../crocks/Maybe.html#coalesce
 [maybe-concat]: ../crocks/Maybe.html#concat
 [maybe-either]: ../crocks/Maybe.html#either
+[maybe-equals]: ../crocks/Maybe.html#equals
 [maybe-map]: ../crocks/Maybe.html#map
 [maybe-option]: ../crocks/Maybe.html#option
 [maybe-sequence]: ../crocks/Maybe.html#sequence
@@ -197,6 +205,7 @@ accepted Datatype):
 
 [min-concat]: ../monoids/Min.html#concat
 [min-empty]: ../monoids/Min.html#empty
+[min-equals]: ../monoids/Min.html#equals
 [min-value]: ../monoids/Min.html#valueof
 
 [pred-concat]: ../crocks/Pred.html#concat
@@ -207,10 +216,12 @@ accepted Datatype):
 
 [prod-concat]: ../monoids/Prod.html#concat
 [prod-empty]: ../monoids/Prod.html#empty
+[prod-equals]: ../monoids/Prod.html#equals
 [prod-value]: ../monoids/Prod.html#valueof
 
 [sum-concat]: ../monoids/Sum.html#concat
 [sum-empty]: ../monoids/Sum.html#empty
+[sum-equals]: ../monoids/Sum.html#equals
 [sum-value]: ../monoids/Sum.html#valueof
 
 [reader-ap]: ../crocks/Reader.html#ap

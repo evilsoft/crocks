@@ -83,13 +83,6 @@ function Async(fn, parentCancel) {
     throw new TypeError('Async: Function required')
   }
 
-  let cancelled = false
-
-  const cancel = compose(
-    () => { cancelled = true },
-    isFunction(parentCancel) ? parentCancel : unit
-  )
-
   const of =
     _of
 
@@ -100,7 +93,14 @@ function Async(fn, parentCancel) {
     if(!isFunction(reject) || !isFunction(resolve)) {
       throw new TypeError('Async.fork: Reject and resolve functions required')
     }
+    
+    let cancelled = false
 
+    const cancel = compose(
+      () => { cancelled = true },
+      isFunction(parentCancel) ? parentCancel : unit
+    )
+    
     const forkCancel =
       isFunction(cleanup) ? cleanup : unit
 

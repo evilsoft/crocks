@@ -27,7 +27,9 @@ function inspect(x) {
   }
 
   if(isObject(x)) {
-    return ' {}'
+    return ` { ${Object.keys(x).reduce((acc, key) => {
+      return acc.concat([ `${key}:${inspect(x[key])}` ])
+    }, []).join(', ')} }`
   }
 
   if(isString(x)) {

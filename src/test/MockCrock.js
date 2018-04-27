@@ -1,4 +1,5 @@
 const _implements = require('../core/implements')
+const _inspect = require('../core/inspect')
 const _equals = require('../core/equals')
 
 const constant = x => () => x
@@ -16,6 +17,7 @@ function MockCrock(x) {
   const of        = _of
   const sequence  = () => x.map(MockCrock)
   const traverse  = (_, f) => f(x).map(MockCrock)
+  const inspect   = () => `Mock${_inspect(x)}`
   const equals =
     m => _equals(m.valueOf(), x)
 
@@ -23,7 +25,7 @@ function MockCrock(x) {
     valueOf, type, map, ap,
     chain, of, sequence,
     ['@@type']: typeString,
-    traverse, equals
+    traverse, inspect, equals
   }
 }
 

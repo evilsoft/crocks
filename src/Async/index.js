@@ -107,7 +107,7 @@ function Async(fn) {
     )
     const internalFn = isFunction(internal) ? internal : unit
 
-    return once(() => forkCancel(internalFn(cancel())))
+    return once(() => forkCancel(cancel(internalFn())))
   }
 
   function toPromise() {
@@ -176,11 +176,12 @@ function Async(fn) {
       }
 
       return Async((rej, res) => {
-        let cancel = fork(
+        let cancel = unit
+        cancel = fork(
           () => { cancel = m.fork(rej, res) },
           res
         )
-        return () => cancel()
+        return once(() => cancel())
       })
     }
   }
@@ -221,7 +222,7 @@ function Async(fn) {
         value = x
         resolveBoth()
       })
-      return () => cancel(fnCancel(valueCancel()))
+      return () => cancel(valueCancel(fnCancel()))
     })
   }
 
@@ -234,7 +235,8 @@ function Async(fn) {
       }
 
       return Async(function(reject, resolve) {
-        let cancel = fork(reject, function(x) {
+        let cancel = unit
+        cancel = fork(reject, function(x) {
           const m = mapFn(x)
 
           if(!isSameType(Async, m)) {
@@ -245,7 +247,7 @@ function Async(fn) {
 
           cancel = m.fork(reject, resolve)
         })
-        return () => cancel()
+        return once(() => cancel())
       })
     }
   }

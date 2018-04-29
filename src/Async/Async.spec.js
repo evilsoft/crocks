@@ -348,8 +348,8 @@ test('Async cancel chain cleanup functions', t => {
 
   const cancel =
     Async.of(0)
-      .chain(x => Async((_, res) => { res(x) }, resCleanUp))
-      .chain(x => Async(rej => { rej(x) }, rejCleanUp))
+      .chain(x => Async((_, res) => { res(x); return resCleanUp }))
+      .chain(x => Async(rej => { rej(x); return rejCleanUp }))
       .fork(unit, unit, forkCleanUp)
 
   cancel()
@@ -373,8 +373,8 @@ test('Async cancel ap cleanup functions', t => {
 
   const cancel =
     Async.of(x => y => [ x, y ])
-      .ap(Async((_, res) => { res(1) }, resCleanUp))
-      .ap(Async((_, rej) => { rej(1) }, rejCleanUp))
+      .ap(Async((_, res) => { res(1); return resCleanUp }))
+      .ap(Async((_, rej) => { rej(1); return rejCleanUp }))
       .fork(unit, unit, forkCleanUp)
 
   cancel()
@@ -398,8 +398,8 @@ test('Async cancel alt cleanup functions', t => {
 
   const cancel =
     Async.Rejected(0)
-      .alt(Async(rej => { rej(1) }, rejCleanUp))
-      .alt(Async((_, res) => { res(1) }, resCleanUp))
+      .alt(Async(rej => { rej(1); return rejCleanUp }))
+      .alt(Async((_, res) => { res(1); return resCleanUp }))
       .fork(unit, unit, forkCleanUp)
 
   cancel()

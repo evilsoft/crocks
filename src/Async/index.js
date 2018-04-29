@@ -177,11 +177,12 @@ function Async(fn) {
 
       return Async((rej, res) => {
         let cancel = unit
+        let innerCancel = unit
         cancel = fork(
-          () => { cancel = m.fork(rej, res) },
+          () => { innerCancel = m.fork(rej, res) },
           res
         )
-        return once(() => cancel())
+        return once(() => innerCancel(cancel()))
       })
     }
   }
@@ -236,6 +237,7 @@ function Async(fn) {
 
       return Async(function(reject, resolve) {
         let cancel = unit
+        let innerCancel = unit
         cancel = fork(reject, function(x) {
           const m = mapFn(x)
 
@@ -245,9 +247,9 @@ function Async(fn) {
             )
           }
 
-          cancel = m.fork(reject, resolve)
+          innerCancel = m.fork(reject, resolve)
         })
-        return once(() => cancel())
+        return once(() => innerCancel(cancel()))
       })
     }
   }

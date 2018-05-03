@@ -1,6 +1,7 @@
 var path = require('path')
 
 module.exports = {
+  mode: 'none',
   entry: './build/index.js',
   output: {
     filename: 'crocks.js',

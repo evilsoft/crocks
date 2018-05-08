@@ -277,6 +277,7 @@ Thanks goes to these wonderful people ([emoji key][emojis]):
 ### Tutorials
 #### Tutorial rpearce
 * [Ramda Chops: Function Currying](https://robertwpearce.com/blog/ramda-chops-function-currying.html)
+* [Safer JavaScript with the Maybe Type](https://egghead.io/courses/safer-javascript-with-the-maybe-type)
 
 ### Examples
 #### Example dbagia

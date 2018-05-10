@@ -26,7 +26,7 @@ There are many ways to represent asynchronous operations in JavaScript, and as
 such, the libraries available to us in our ecosystem provide different means
 to take advantage of these operations. The two most common use
 either `Promise` returning functions or allow for the Continuation Passing Style
-prevalent in the asynchronous function that ship with NodeJS. `Async` provides
+prevalent in the asynchronous functions that ship with NodeJS. `Async` provides
 (2) construction helpers that wrap functions using these styles of asynchronous
 processing and will give you back a function that takes the same arguments as
 the original and will return an `Async` instead. These functions are

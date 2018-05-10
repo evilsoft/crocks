@@ -24,7 +24,12 @@ to hit the ground running.
 - [What is Included?](#what-is-included)
 - [Contributors](#contributors)
   - [Course/Videos](#coursevideos)
-    - [Video Evilsoft](#video-evilsoft)
+    - [Video evilsoft](#video-evilsoft)
+    - [Video avanslaars](#video-avanslaars)
+  - [Tutorials](#tutorials)
+    - [Tutorial rpearce](#tutorial-rpearce)
+  - [Examples](#examples)
+    - [Example dbagia](#example-dbagia)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -266,6 +271,7 @@ Thanks goes to these wonderful people ([emoji key][emojis]):
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | [<img src="https://avatars0.githubusercontent.com/u/8260207?v=4" width="100px;"/><br /><sub><b>Karthik Iyengar</b></sub>](https://github.com/karthikiyengar)<br />[👀](#review-karthikiyengar "Reviewed Pull Requests") [💻](https://github.com/evilsoft/crocks/commits?author=karthikiyengar "Code") [📖](https://github.com/evilsoft/crocks/commits?author=karthikiyengar "Documentation") | [<img src="https://avatars1.githubusercontent.com/u/7376957?v=4" width="100px;"/><br /><sub><b>Jon Whelan</b></sub>](https://github.com/jonwhelan)<br />[🐛](https://github.com/evilsoft/crocks/issues?q=author%3Ajonwhelan "Bug reports") [💻](https://github.com/evilsoft/crocks/commits?author=jonwhelan "Code") | [<img src="https://avatars0.githubusercontent.com/u/1466420?v=4" width="100px;"/><br /><sub><b>Benny Powers</b></sub>](http://bennypowers.com)<br />[📖](https://github.com/evilsoft/crocks/commits?author=bennypowers "Documentation") [💻](https://github.com/evilsoft/crocks/commits?author=bennypowers "Code") [👀](#review-bennypowers "Reviewed Pull Requests") | [<img src="https://avatars0.githubusercontent.com/u/1909325?v=4" width="100px;"/><br /><sub><b>Dale Francis</b></sub>](https://github.com/dalefrancis88)<br />[💻](https://github.com/evilsoft/crocks/commits?author=dalefrancis88 "Code") [👀](#review-dalefrancis88 "Reviewed Pull Requests") | [<img src="https://avatars1.githubusercontent.com/u/7926867?v=4" width="100px;"/><br /><sub><b>Premith</b></sub>](https://github.com/premithk)<br />[📖](https://github.com/evilsoft/crocks/commits?author=premithk "Documentation") | [<img src="https://avatars0.githubusercontent.com/u/6302673?v=4" width="100px;"/><br /><sub><b>Dipen Bagia</b></sub>](https://github.com/dbagia)<br />[💡](#example-dbagia "Examples") | [<img src="https://avatars3.githubusercontent.com/u/5243925?v=4" width="100px;"/><br /><sub><b>Andrew Jones</b></sub>](https://github.com/ximenean)<br />[📖](https://github.com/evilsoft/crocks/commits?author=ximenean "Documentation") |
 | [<img src="https://avatars0.githubusercontent.com/u/4858051?v=4" width="100px;"/><br /><sub><b>W. K. Seymour III</b></sub>](https://github.com/wayneseymour)<br />[📖](https://github.com/evilsoft/crocks/commits?author=wayneseymour "Documentation") |
+| [<img src="https://avatars2.githubusercontent.com/u/11702749?v=4" width="100px;"/><br /><sub><b>Eliseu Benedito Codinhoto</b></sub>](https://youtube.com/euprogramadoroficial)<br />[📖](https://github.com/evilsoft/crocks/commits?author=zeucxb "Documentation") |
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 ### Course/Videos
@@ -274,6 +280,9 @@ Thanks goes to these wonderful people ([emoji key][emojis]):
 * [State Monad In Javascript (egghead.io)](https://egghead.io/courses/state-monad-in-javascript)
 * [Working With ADTs (YouTube)](https://www.youtube.com/playlist?list=PLjvgv-FpMo7XRVFZjZsWXJ5nVmRJ5a5Hv)
 * [Functional JS (YouTube)](https://www.youtube.com/playlist?list=PLjvgv-FpMo7XvlfO8YKiz4_onf8WonhiA)
+
+#### Video avanslaars
+* [Safer JavaScript with the Maybe Type](https://egghead.io/courses/safer-javascript-with-the-maybe-type)
 
 ### Tutorials
 #### Tutorial rpearce

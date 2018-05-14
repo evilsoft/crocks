@@ -35,7 +35,8 @@
       "avatar_url": "https://avatars0.githubusercontent.com/u/1271181?v=4",
       "profile": "http://vanslaars.io",
       "contributions": [
-        "doc"
+        "doc",
+        "video"
       ]
     },
     {
@@ -144,6 +145,24 @@
       "name": "Andrew Jones",
       "avatar_url": "https://avatars3.githubusercontent.com/u/5243925?v=4",
       "profile": "https://github.com/ximenean",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "wayneseymour",
+      "name": "W. K. Seymour III",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/4858051?v=4",
+      "profile": "https://github.com/wayneseymour",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "zeucxb",
+      "name": "Eliseu Benedito Codinhoto",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/11702749?v=4",
+      "profile": "https://youtube.com/euprogramadoroficial",
       "contributions": [
         "doc"
       ]

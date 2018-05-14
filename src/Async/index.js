@@ -78,17 +78,10 @@ function fromPromise(fn) {
   }
 }
 
-function Async(fn, parentCancel) {
+function Async(fn) {
   if(!isFunction(fn)) {
     throw new TypeError('Async: Function required')
   }
-
-  let cancelled = false
-
-  const cancel = compose(
-    () => { cancelled = true },
-    isFunction(parentCancel) ? parentCancel : unit
-  )
 
   const of =
     _of
@@ -101,15 +94,20 @@ function Async(fn, parentCancel) {
       throw new TypeError('Async.fork: Reject and resolve functions required')
     }
 
+    let cancelled = false
+
+    const cancel = () => { cancelled = true }
+
     const forkCancel =
       isFunction(cleanup) ? cleanup : unit
 
-    fn(
+    const internal = fn(
       x => cancelled ? unit() : reject(x),
       x => cancelled ? unit() : resolve(x)
     )
+    const internalFn = isFunction(internal) ? internal : unit
 
-    return once(compose(forkCancel, cancel))
+    return once(() => forkCancel(cancel(internalFn())))
   }
 
   function toPromise() {
@@ -124,11 +122,11 @@ function Async(fn, parentCancel) {
     }
 
     return Async(function(reject, resolve) {
-      fork(
+      return fork(
         compose(resolve, l),
         compose(reject, r)
       )
-    }, cancel)
+    })
   }
 
   function coalesce(l, r) {
@@ -137,11 +135,11 @@ function Async(fn, parentCancel) {
     }
 
     return Async(function(reject, resolve) {
-      fork(
+      return fork(
         compose(resolve, l),
         compose(resolve, r)
       )
-    }, cancel)
+    })
   }
 
   function map(method) {
@@ -151,8 +149,8 @@ function Async(fn, parentCancel) {
       }
 
       return Async(function(reject, resolve) {
-        fork(reject, compose(resolve, mapFn))
-      }, cancel)
+        return fork(reject, compose(resolve, mapFn))
+      })
     }
   }
 
@@ -163,52 +161,54 @@ function Async(fn, parentCancel) {
       }
 
       return Async(function(reject, resolve) {
-        fork(
+        return fork(
           compose(reject, l),
           compose(resolve, r)
         )
-      }, cancel)
+      })
     }
   }
 
   function alt(method) {
     return function(m) {
-      let innerCancel = unit
-
       if(!isSameType(Async, m)) {
         throw new TypeError(`Async.${method}: Async required`)
       }
 
       return Async((rej, res) => {
-        fork(
+        let cancel = unit
+        let innerCancel = unit
+        cancel = fork(
           () => { innerCancel = m.fork(rej, res) },
           res
         )
-      }, once(() => innerCancel(cancel())))
+        return once(() => innerCancel(cancel()))
+      })
     }
   }
 
   function ap(m) {
-    let apFn = null
-    let value = null
-    let fnDone = false
-    let valueDone = false
-    let innerCancel = unit
-
     if(!isSameType(Async, m)) {
       throw new TypeError('Async.ap: Async required')
     }
 
     return Async(function(reject, resolve) {
+      let apFn = null
+      let value = null
+      let fnDone = false
+      let valueDone = false
+      let canceled = false
+
+      const cancel = () => { canceled = true }
       const rejectOnce = once(reject)
 
       function resolveBoth() {
-        if(fnDone && valueDone) {
+        if(!canceled && fnDone && valueDone) {
           compose(resolve, apFn)(value)
         }
       }
 
-      fork(rejectOnce, function(f) {
+      const fnCancel = fork(rejectOnce, function(f) {
         if(!isFunction(f)) {
           throw new TypeError('Async.ap: Wrapped value must be a function')
         }
@@ -218,18 +218,17 @@ function Async(fn, parentCancel) {
         resolveBoth()
       })
 
-      innerCancel = m.fork(rejectOnce, x => {
+      const valueCancel = m.fork(rejectOnce, x => {
         valueDone = true
         value = x
         resolveBoth()
       })
-    }, once(() => { innerCancel(cancel()) }))
+      return () => cancel(valueCancel(fnCancel()))
+    })
   }
 
   function chain(method) {
     return function(mapFn) {
-      let innerCancel = unit
-
       if(!isFunction(mapFn)) {
         throw new TypeError(
           `Async.${method}: Async returning function required`
@@ -237,7 +236,9 @@ function Async(fn, parentCancel) {
       }
 
       return Async(function(reject, resolve) {
-        fork(reject, function(x) {
+        let cancel = unit
+        let innerCancel = unit
+        cancel = fork(reject, function(x) {
           const m = mapFn(x)
 
           if(!isSameType(Async, m)) {
@@ -248,7 +249,8 @@ function Async(fn, parentCancel) {
 
           innerCancel = m.fork(reject, resolve)
         })
-      }, once(() =>  { innerCancel(cancel()) }))
+        return once(() => innerCancel(cancel()))
+      })
     }
   }
 

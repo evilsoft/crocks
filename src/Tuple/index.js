@@ -7,45 +7,53 @@ const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
 const type = require('../core/types').type('Tuple')
 const _type = require('../core/types').typeFn(type(), VERSION)
+const fl = require('../core/flNames')
 
+const isFunction = require('../core/isFunction')
 const isInteger = require('../core/isInteger')
 
-function _Tuple(n, ...parts) {
-  const inspect = () => `Tuple(${parts.map(_inspect).join(',')} )`
+function _Tuple(n, values) {
+  if (n !== values.length) {
+    throw new TypeError(
+      `${n}-Tuple: Expected ${n} values, but got ${values.length}`
+    )
+  }
+
+  const inspect = () => `Tuple(${values.map(_inspect).join(',')} )`
+
+  function map(method) {
+    return function(fn) {
+      if (!isFunction(fn)) {
+        throw new TypeError(`Tuple.${method}: Function required`)
+      }
+      return Tuple(n)(
+        ...[
+          ...values.slice(0, values.length - 1),
+          fn(values[values.length - 1])
+        ]
+      )
+    }
+  }
+
   return {
     constructor: _Tuple,
-    inspect
+    inspect,
+    map: map('map'),
+    type,
+    [fl.map]: map(fl.map),
+    ['@@type']: _type,
+    toString: inspect
   }
 }
 
 function Tuple(n) {
-  if (!isInteger(n) || n < 1 || n > 10) {
+  if (!isInteger(n) || n < 1) {
     throw new TypeError('Tuple: Tuple size should be a number greater than 1')
   }
 
-  switch (n) {
-  case 1:
-    return a => _Tuple(n, a)
-  case 2:
-    return (a, b) => _Tuple(n, a, b)
-  case 3:
-    return (a, b, c) => _Tuple(n, a, b, c)
-  case 4:
-    return (a, b, c, d) => _Tuple(n, a, b, c, d)
-  case 5:
-    return (a, b, c, d, e) => _Tuple(n, a, b, c, d, e)
-  case 6:
-    return (a, b, c, d, e, f) => _Tuple(n, a, b, c, d, e, f)
-  case 7:
-    return (a, b, c, d, e, f, g) => _Tuple(n, a, b, c, d, e, f, g)
-  case 8:
-    return (a, b, c, d, e, f, g, h) => _Tuple(n, a, b, c, d, e, f, g, h)
-  case 9:
-    return (a, b, c, d, e, f, g, h, i) => _Tuple(n, a, b, c, d, e, f, g, h, i)
-  case 10:
-    return (a, b, c, d, e, f, g, h, i, j) =>
-      Tuple(n, a, b, c, d, e, f, g, h, i, j)
-  }
+  const fn = (...args) => _Tuple(n, args)
+  Object.defineProperty(fn, 'length', { value: n })
+  return fn
 }
 
 Tuple.type = type

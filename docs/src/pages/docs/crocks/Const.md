@@ -2,33 +2,40 @@
 title: "Const"
 description: "Const Monoid"
 layout: "guide"
-weight: 80
+weight: 30
 ---
 
 ```haskell
 Const c a
 ```
-`Const` is a function that takes a single value and returns a `Product` type
-that ignores its right side. 
-`Const` is a `chainable` that will take any value `c` and regardless of the 
-method called on it will return a new `Const` with the value `c`.
 
-### Example
+Const is a Product type the whose underlying left-most value is fixed to the
+value it was originally constructed with. This ensures that a desired value is
+immutable. While its right portion can still be mapped over, when observed, all
+information on the right will be discarded, leaving only the initial fixed
+value `c`.
+
 ```javascript
 import Const from 'crocks/Const'
 import Pair from 'crocks/Pair'
 import compose from 'crocks/helpers/compose'
+import concat from 'crocks/pointfree/concat'
 import extend from 'crocks/pointfree/extend'
+import flip from 'crocks/combinators/flip'
 import fst from 'crocks/Pair/fst'
 import valueOf from 'crocks/pointfree/valueOf'
 
 Const('Hello World')
 //=> Const 'Hello World'
 
-const days = [ 'Today', 'Tomorrow', 'Yesterday' ]
+// days :: [ String ]
+const days =
+  [ 'Today', 'Tomorrow', 'Yesterday' ]
 
-days.map(Const).reduce((acc, c) => acc.concat(c))
-//=> Const 'Today'
+days
+  .map(Const)
+  .reduce(flip(concat))
+//=> Const "Today"
 
 Const(100)
   .concat(Const(10))
@@ -55,12 +62,12 @@ const changed =
 
 resetField(changed)
 //=> Pair( Const "Joey", "Joey" )
-
 ```
+
 <article id="topic-implements">
 
 ## Implements
-`Functor`, `Apply`, `Chain`
+`Setoid`, `Semigroup`, `Functor`, `Apply`, `Chain`
 
 </article>
 
@@ -76,21 +83,21 @@ Const c a ~> b -> Boolean
 
 Used to compare the underlying values of (2) `Const` instances for equality by
 value, `equals` takes any given argument and returns `true` if the passed
-arguments is a `Const` with an underlying `left` value equal to the underlying value
-of the `Const` the method is being called on. If the passed argument is not
-a `Const` or the underlying values are not equal, `equals` will return `false`.
+arguments is a `Const` with an underlying `left` value equal to the underlying
+value of the `Const` the method is being called on. If the passed argument is
+not a `Const` or the underlying values are not equal, `equals` will
+return `false`.
 
 ```javascript
-import { Const } from 'crocks'
+import Const from 'crocks/Const'
 
-const two = Const(2)
-const four = Const(4)
-
-two.equals(four)
+Const(2)
+  .equals(Const(5))
 //=> false
 
-two.equals(Const(2))
-//=> True
+Const([ 1, 2, 3 ])
+  .equals(Const([ 1, 2, 3 ]))
+//=> true
 ```
 
 #### concat
@@ -104,27 +111,55 @@ specified by the `Semigroup`. In the case of `Const`, it will return a new
 `Const` instance with the original value.
 
 ```javascript
-import { Const, concat, map } from 'crocks'
+import Const from 'crocks/Const'
 
-const account1 = { firstName: 'John', lastName: 'Doe', achievments: [ '112', '232', '154' ] }
-const account2 = { firstName: 'Jon', lastName: 'Doe', achievments: [ '767', '989' ] }
+import concat from 'crocks/pointfree/concat'
+import map from 'crocks/pointfree/map'
 
+// Account :: {
+//   firstName: String,
+//   lastName: String,
+//   achievements: [ String ]
+// }
+
+// account1 :: Account
+const account1 = {
+  firstName: 'John',
+  lastName: 'Doe',
+  achievements: [ '232', '154' ]
+}
+
+// account2 :: Account
+const account2 = {
+  firstName: 'Joe',
+  lastName: 'Blow',
+  achievements: [ '989' ]
+}
+
+// constMerge :: [ a ] -> a
 const constMerge = xs =>
   map(Const, xs)
     .reduce(concat)
     .valueOf()
 
+// reduceAccounts :: (Account, Account) -> Account
 const reduceAccounts = (acc, cur) => ({
   firstName: constMerge([ cur.firstName, acc.firstName ]),
   lastName: constMerge([ cur.lastName, acc.lastName ]),
-  achievments: concat(cur.achievments, acc.achievments)
+  achievements: concat(cur.achievements, acc.achievements)
 })
 
+// mergeAccounts :: [ Account ] -> Account
 const mergeAccounts = accounts =>
   accounts
     .reduce(reduceAccounts)
 
 mergeAccounts([ account1, account2 ])
+//=> {
+//   firstName: "John",
+//   lastName: "Doe",
+//   achievements: [ '232', '154', '989' ]
+// }
 ```
 
 #### map
@@ -133,18 +168,21 @@ mergeAccounts([ account1, account2 ])
 Const c a ~> (a -> b) -> Const c b
 ```
 
-In a `Product` type the left side is always fixed and the right side is mapped.
-Due to the unique property of `Const` any function that is passed in to `map`
-will be validated but it will not be evaluated. `map` will return a new `const`
+Typically used to lift a function into the context of an ADT, but due to the
+unique behavior of `Const`, any function that is passed in to `map` will be
+validated but it will not be applied. `map` will return a new `Const`
 with the same left value.
 
 ```javascript
-import { Const } from 'crocks'
+import Const from 'crocks/Const'
+
+// toUpper :: String -> String
+const toUpper =
+  x => x.toUpperCase()
 
 Const('initial')
-  .map(x => x.fakeProperty)
-//=> Const 'initial'
-
+  .map(toUpper)
+//=> Const "initial"
 ```
 
 #### ap
@@ -153,22 +191,22 @@ Const('initial')
 Const c (a -> b) ~> Const c a -> Const c b
 ```
 
-Short for apply, `ap` is normally used to apply a `Const` instance containing a 
-value to another `Const` instance that contains a function, resulting in new 
+Short for apply, `ap` is normally used to apply a `Const` instance containing a
+value to another `Const` instance that contains a function, resulting in new
 `Const` instance with the result. However, due to the unique nature of `Const`
 the function will remain the active value in the `Const`.
 
 ```javascript
-import { Const } from 'crocks'
+import Const from 'crocks/Const'
 
 // prod :: Number -> Number -> Number
-const prod = x => y => x * y
+const prod =
+  x => y => x * y
 
-// Const -> Const
-Const(prod)
-  .ap(Const(5))
+Const(5)
+  .map(prod)
   .ap(Const(27))
-//=> Const prod
+//=> Const 5
 ```
 
 #### chain
@@ -177,18 +215,17 @@ Const(prod)
 Const c a ~> (a -> Const c b) -> Const c b
 ```
 
-Combining a sequential series of transformations that capture disjunction can 
-be accomplished with `chain`. `chain` expects a unary, `Const` returning 
-function as its argument. When invoked the inner value will not be passed to 
+Combining a sequential series of transformations that capture disjunction can
+be accomplished with `chain`. `chain` expects a unary, `Const` returning
+function as its argument. When invoked the inner value will not be passed to
 provided function. A new `Const` will be returned with the same inner value.
 
 ```javascript
-import { Const } from 'crocks'
+import Const from 'crocks/Const'
 
 Const('initial')
-  .chain(x => Const(x.fakeProperty))
+  .chain(x => Const(x.toUpperCase()))
 //=> Const 'initial'
-
 ```
 
 #### valueOf
@@ -203,7 +240,7 @@ with `crocks`. Calling `valueOf` on a `Const` instance will result in the
 underlying left value of the `Product` type.
 
 ```javascript
-import { Const } from 'crocks'
+import Const from 'crocks/Const'
 
 Const(33)
   .valueOf()
@@ -214,4 +251,5 @@ Const(35)
   .valueOf()
 //=> 35
 ```
+
 </article>

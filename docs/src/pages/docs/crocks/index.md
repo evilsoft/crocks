@@ -73,7 +73,7 @@ but what they do from type to type may vary.
 [const-map]: Const.html#map
 [const-ap]: Const.html#ap
 [const-chain]: Const.html#chain
-[const-valueof]: Const.html#value0f
+[const-valueof]: Const.html#valueof
 
 [equiv]: Equiv.html
 [equiv-empty]: Equiv.html#empty

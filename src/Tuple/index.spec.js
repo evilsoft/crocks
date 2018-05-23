@@ -1,7 +1,6 @@
 const test = require('tape')
 const fl = require('../core/flNames')
 const helpers = require('../test/helpers')
-
 const bindFunc = helpers.bindFunc
 
 const isFunction = require('./../core/isFunction')
@@ -156,5 +155,106 @@ test('Tuple mapAll functionality', t => {
   t.equal(n.project(2), 50, 'applies function to second value')
   t.equal(n.project(3), 40, 'applies function to third value')
 
+  t.end()
+})
+
+test('Tuple toArray', t => {
+  const m = Tuple(3)(34, 'string', 'bing')
+
+  t.ok(isFunction(m.toArray), 'provides a toArray function')
+  t.same(
+    m.toArray(),
+    [ 34, 'string', 'bing' ],
+    'returns an array with the Tuple\'s values'
+  )
+
+  t.end()
+})
+
+test('Concat functionality', t => {
+  const m = Tuple(2)([ 6 ], '2')
+  const n = Tuple(2)([ 12 ], '5')
+
+  t.same(m.concat(n).project(1), [ 6, 12 ], 'combines the first Semigroups')
+  t.same(m.concat(n).project(2), '25', 'combines the second Semigroups')
+
+  t.end()
+})
+
+test('Tuple concat errors', t => {
+  const bad = bindFunc(Tuple(3)(0, 0, {}).concat)
+  const good = bindFunc(Tuple(3)([], 'string', []).concat)
+  const noTuple = /3-Tuple.concat: Tuple Required/
+  t.throws(good([]), noTuple, 'throws when Non-Tuple passed')
+
+  const noLength = /3-Tuple.concat: Tuples should be of the same size/
+  t.throws(
+    good(Tuple(2)(1, 'string')),
+    noLength,
+    'throws when concating different length Tuples'
+  )
+
+  const noSemigroups = /3-Tuple.concat: Both Tuples must contain Semigroups of the same type/
+  t.throws(
+    bad(Tuple(3)([], [], [])),
+    noSemigroups,
+    'throws when left Tuple does not contain Semigroups'
+  )
+  t.throws(
+    good(Tuple(3)(0, 0, 0)),
+    noSemigroups,
+    'throws when right Tuple does not contain Semigroups'
+  )
+  t.throws(
+    good(Tuple(3)('string', 'string', [])),
+    noSemigroups,
+    'throws when Tuples contain different Semigroups'
+  )
+
+  t.end()
+})
+
+test('Tuple concat fantasy-land errors', t => {
+  const bad = bindFunc(Tuple(3)(0, 0, {})[fl.concat])
+  const good = bindFunc(Tuple(3)([], 'string', [])[fl.concat])
+  const noTuple = /3-Tuple.fantasy-land\/concat: Tuple Required/
+  t.throws(good([]), noTuple, 'throws when Non-Tuple passed')
+
+  const noLength = /3-Tuple.fantasy-land\/concat: Tuples should be of the same size/
+  t.throws(
+    good(Tuple(2)(1, 'string')),
+    noLength,
+    'throws when concating different length Tuples'
+  )
+
+  const noSemigroups = /3-Tuple.fantasy-land\/concat: Both Tuples must contain Semigroups of the same type/
+  t.throws(
+    bad(Tuple(3)([], [], [])),
+    noSemigroups,
+    'throws when left Tuple does not contain Semigroups'
+  )
+  t.throws(
+    good(Tuple(3)(0, 0, 0)),
+    noSemigroups,
+    'throws when right Tuple does not contain Semigroups'
+  )
+  t.throws(
+    good(Tuple(3)('string', 'string', [])),
+    noSemigroups,
+    'throws when Tuples contain different Semigroups'
+  )
+
+  t.end()
+})
+
+test('Tuple concat properties (Semigroup)', t => {
+  const a = Tuple(2)([ 1 ], '1')
+  const b = Tuple(2)([ 2 ], '2')
+  const c = Tuple(2)([ 3 ], '3')
+  const left = a.concat(b).concat(c)
+  const right = a.concat(b.concat(c))
+  t.ok(isFunction(Tuple(2)(0, 0).concat), 'is a function')
+  t.same(left.toArray(), right.toArray(), 'associativity')
+  t.equal(a.concat(b).type(), a.type(), 'returns Semigroup of the same type')
   t.end()
 })

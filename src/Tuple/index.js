@@ -11,6 +11,8 @@ const fl = require('../core/flNames')
 
 const isFunction = require('../core/isFunction')
 const isInteger = require('../core/isInteger')
+const isSameType = require('../core/isSameType')
+const isSemigroup = require('../core/isSemigroup')
 
 function _Tuple(n, args) {
   const parts = [].slice.call(args)
@@ -28,51 +30,85 @@ function _Tuple(n, args) {
         throw new TypeError(`${n}-Tuple.${method}: Function required`)
       }
       return Tuple(n)(
-        ...[ ...parts.slice(0, parts.length - 1), fn(parts[parts.length - 1]) ]
+        ...parts.slice(0, parts.length - 1).concat(fn(parts[parts.length - 1]))
       )
     }
   }
 
-  function mapAll(method) {
-    return function(...args) {
-      if (args.length !== parts.length) {
+  function concat(method) {
+    return function(t) {
+      if (!isSameType(Tuple, t)) {
+        throw new TypeError(`${n}-Tuple.${method}: Tuple Required`)
+      }
+      const a = t.toArray()
+      if (a.length !== n) {
         throw new TypeError(
-          `${n}-Tuple.${method}: Requires ${parts.length} functions`
+          `${n}-Tuple.${method}: Tuples should be of the same size`
         )
       }
-      return _Tuple(
-        n,
-        parts.map((v, i) => {
-          if (!isFunction(args[i])) {
+
+      return Tuple(n)(
+        ...parts.map((v, i, o) => {
+          if (!(isSemigroup(a[i]) && isSemigroup(o[i]))) {
             throw new TypeError(
-              `${n}-Tuple.${method}: Functions required for all arguments`
+              `${n}-Tuple.${method}: Both Tuples must contain Semigroups of the same type`
             )
           }
-          return args[i](v)
+
+          if (!isSameType(a[i], o[i])) {
+            throw new TypeError(
+              `${n}-Tuple.${method}: Both Tuples must contain Semigroups of the same type`
+            )
+          }
+          return o[i].concat(a[i])
         })
       )
     }
   }
 
-  function project(method) {
-    return function(index) {
-      if (!isInteger(index) || index < 1 || index > n) {
-        throw new TypeError(
-          `${n}-Tuple.${method}: Index should be an integer between 2 and ${n}`
-        )
-      }
-      return parts[index - 1]
+  function mapAll(...args) {
+    if (args.length !== parts.length) {
+      throw new TypeError(
+        `${n}-Tuple.mapAll: Requires ${parts.length} functions`
+      )
     }
+    return _Tuple(
+      n,
+      parts.map((v, i) => {
+        if (!isFunction(args[i])) {
+          throw new TypeError(
+            `${n}-Tuple.mapAll: Functions required for all arguments`
+          )
+        }
+        return args[i](v)
+      })
+    )
+  }
+
+  function project(index) {
+    if (!isInteger(index) || index < 1 || index > n) {
+      throw new TypeError(
+        `${n}-Tuple.project: Index should be an integer between 2 and ${n}`
+      )
+    }
+    return parts[index - 1]
+  }
+
+  function toArray() {
+    return parts.slice()
   }
 
   return {
     constructor: _Tuple,
     inspect,
-    project: project('project'),
+    project: project,
     map: map('map'),
-    mapAll: mapAll('mapAll'),
+    concat: concat('concat'),
+    mapAll: mapAll,
+    toArray,
     type,
     [fl.map]: map(fl.map),
+    [fl.concat]: concat(fl.concat),
     ['@@type']: _type,
     toString: inspect
   }
@@ -130,6 +166,6 @@ function Tuple(n) {
 Tuple.type = type
 Tuple['@@type'] = _type
 
-Tuple['@@implements'] = _implements([])
+Tuple['@@implements'] = _implements([ 'map', 'concat' ])
 
 module.exports = Tuple

@@ -126,3 +126,35 @@ test('Tuple map functionality', t => {
 
   t.end()
 })
+
+test('Tuple mapAll errors', t => {
+  const m = Tuple(3)(5, 45, 50)
+
+  const mapAll = bindFunc(m.mapAll)
+  const err1 = /3-Tuple.mapAll: Requires 3 functions/
+  const err2 = /3-Tuple.mapAll: Functions required for all arguments/
+
+  t.throws(
+    mapAll(identity, identity),
+    err1,
+    'throws with an invalid number of functions'
+  )
+  t.throws(
+    mapAll(identity, 5, identity),
+    err2,
+    'throws if all arguments are not functions'
+  )
+  t.end()
+})
+
+test('Tuple mapAll functionality', t => {
+  const m = Tuple(3)(5, 45, 50)
+  const n = m.mapAll(identity, x => x + 5, x => x - 10)
+
+  t.equal(m.map(identity).type(), 'Tuple', 'returns a Tuple')
+  t.equal(n.project(1), 5, 'applies function to first value')
+  t.equal(n.project(2), 50, 'applies function to second value')
+  t.equal(n.project(3), 40, 'applies function to third value')
+
+  t.end()
+})

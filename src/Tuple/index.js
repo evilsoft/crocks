@@ -33,6 +33,27 @@ function _Tuple(n, args) {
     }
   }
 
+  function mapAll(method) {
+    return function(...args) {
+      if (args.length !== parts.length) {
+        throw new TypeError(
+          `${n}-Tuple.${method}: Requires ${parts.length} functions`
+        )
+      }
+      return _Tuple(
+        n,
+        parts.map((v, i) => {
+          if (!isFunction(args[i])) {
+            throw new TypeError(
+              `${n}-Tuple.${method}: Functions required for all arguments`
+            )
+          }
+          return args[i](v)
+        })
+      )
+    }
+  }
+
   function project(method) {
     return function(index) {
       if (!isInteger(index) || index < 1 || index > n) {
@@ -49,6 +70,7 @@ function _Tuple(n, args) {
     inspect,
     project: project('project'),
     map: map('map'),
+    mapAll: mapAll('mapAll'),
     type,
     [fl.map]: map(fl.map),
     ['@@type']: _type,

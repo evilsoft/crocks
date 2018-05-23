@@ -12,32 +12,42 @@ const fl = require('../core/flNames')
 const isFunction = require('../core/isFunction')
 const isInteger = require('../core/isInteger')
 
-function _Tuple(n, values) {
-  if (n !== values.length) {
+function _Tuple(n, args) {
+  const parts = [].slice.call(args)
+  if (n !== parts.length) {
     throw new TypeError(
-      `${n}-Tuple: Expected ${n} values, but got ${values.length}`
+      `${n}-Tuple: Expected ${n} values, but got ${parts.length}`
     )
   }
 
-  const inspect = () => `Tuple(${values.map(_inspect).join(',')} )`
+  const inspect = () => `Tuple(${parts.map(_inspect).join(',')} )`
 
   function map(method) {
     return function(fn) {
       if (!isFunction(fn)) {
-        throw new TypeError(`Tuple.${method}: Function required`)
+        throw new TypeError(`${n}-Tuple.${method}: Function required`)
       }
       return Tuple(n)(
-        ...[
-          ...values.slice(0, values.length - 1),
-          fn(values[values.length - 1])
-        ]
+        ...[ ...parts.slice(0, parts.length - 1), fn(parts[parts.length - 1]) ]
       )
+    }
+  }
+
+  function project(method) {
+    return function(index) {
+      if (!isInteger(index) || index < 1 || index > n) {
+        throw new TypeError(
+          `${n}-Tuple.${method}: Index should be an integer between 2 and ${n}`
+        )
+      }
+      return parts[index - 1]
     }
   }
 
   return {
     constructor: _Tuple,
     inspect,
+    project: project('project'),
     map: map('map'),
     type,
     [fl.map]: map(fl.map),
@@ -47,13 +57,52 @@ function _Tuple(n, values) {
 }
 
 function Tuple(n) {
-  if (!isInteger(n) || n < 1) {
-    throw new TypeError('Tuple: Tuple size should be a number greater than 1')
+  if (!isInteger(n) || n < 1 || n > 10) {
+    throw new TypeError(
+      'Tuple: Tuple size should be a number greater than 1 and less than 10'
+    )
   }
 
-  const fn = (...args) => _Tuple(n, args)
-  Object.defineProperty(fn, 'length', { value: n })
-  return fn
+  /* eslint-disable */
+  switch (n) {
+    case 2:
+      return function(a, b) {
+        return _Tuple(n, arguments)
+      }
+    case 3:
+      return function(a, b, c) {
+        return _Tuple(n, arguments)
+      }
+    case 4:
+      return function(a, b, c, d) {
+        return _Tuple(n, arguments)
+      }
+    case 5:
+      return function(a, b, c, d, e) {
+        return _Tuple(n, arguments)
+      }
+    case 6:
+      return function(a, b, c, d, e, f) {
+        return _Tuple(n, arguments)
+      }
+    case 7:
+      return function(a, b, c, d, e, f, g) {
+        return _Tuple(n, arguments)
+      }
+    case 8:
+      return function(a, b, c, d, e, f, g, h) {
+        return _Tuple(n, arguments)
+      }
+    case 9:
+      return function(a, b, c, d, e, f, g, h, i) {
+        return _Tuple(n, arguments)
+      }
+    case 10:
+      return function(a, b, c, d, e, f, g, h, i, j) {
+        return _Tuple(n, arguments)
+      }
+  }
+  /* eslint-enable */
 }
 
 Tuple.type = type

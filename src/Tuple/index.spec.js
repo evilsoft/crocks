@@ -14,7 +14,7 @@ const identity = x => x
 test('Tuple', t => {
   const f = bindFunc(Tuple)
 
-  const noNum = /Tuple: Tuple size should be a number greater than 1/
+  const noNum = /Tuple: Tuple size should be a number greater than 1 and less than 10/
   t.ok(isFunction(Tuple), 'is a function')
 
   t.throws(f(undefined), noNum, 'throws with undefined as first arg')
@@ -27,10 +27,24 @@ test('Tuple', t => {
   t.throws(f([]), noNum, 'throws with array as first arg')
   t.throws(f(unit), noNum, 'throws with function as first arg')
   t.throws(f(-1), noNum, 'throws with a number less than 1')
+  t.throws(f(111), noNum, 'throws with a number greater than 10')
 
-  t.ok(isFunction(Tuple(2)), 'returns a function')
-  t.equals(Tuple(50).length, 50, 'returns a function of the correct length')
+  t.equals(Tuple.length, 1, 'constructor has a length of 1')
+  t.equals(Tuple(2).length, 2, 'returns a function with correct length (2)')
+  t.equals(Tuple(3).length, 3, 'returns a function with correct length (3)')
+  t.equals(Tuple(4).length, 4, 'returns a function with correct length (4)')
+  t.equals(Tuple(5).length, 5, 'returns a function with correct length (5)')
+  t.equals(Tuple(6).length, 6, 'returns a function with correct length (6)')
+  t.equals(Tuple(7).length, 7, 'returns a function with correct length (7)')
+  t.equals(Tuple(8).length, 8, 'returns a function with correct length (8)')
+  t.equals(Tuple(9).length, 9, 'returns a function with correct length (9)')
+  t.equals(Tuple(10).length, 10, 'returns a function with correct length (10)')
 
+  t.throws(
+    bindFunc(Tuple(3))(1, 2, 3, 4),
+    /3-Tuple: Expected 3 values, but got 4/,
+    'throws if invalid number of arguments'
+  )
   t.end()
 })
 
@@ -83,10 +97,32 @@ test('Tuple map fantasy-land errors', t => {
   t.end()
 })
 
+test('Tuple project', t => {
+  const tuple = Tuple(3)('zalgo', 'is', 'back')
+
+  t.ok(isFunction(tuple.project), 'is a function')
+
+  const project = bindFunc(tuple.project)
+  const err = /3-Tuple.project: Index should be an integer between 2 and 3/
+
+  t.throws(project(0), err, 'throws with index less than 2')
+  t.throws(project(6), err, 'throws with index less than tuple length')
+
+  t.same(tuple.project(1), 'zalgo', 'provides the first value')
+  t.same(tuple.project(2), 'is', 'provides the second value')
+  t.same(tuple.project(3), 'back', 'provides the third value')
+
+  t.end()
+})
+
 test('Tuple map functionality', t => {
   const m = Tuple(3)(5, 45, 50)
+  const n = m.map(x => x + 5)
 
   t.equal(m.map(identity).type(), 'Tuple', 'returns a Tuple')
+  t.equal(n.project(1), 5, 'Does not modify first value')
+  t.equal(n.project(2), 45, 'Does not modify second value')
+  t.equal(n.project(3), 55, 'applies function to third value')
 
   t.end()
 })

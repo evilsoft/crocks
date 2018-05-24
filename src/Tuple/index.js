@@ -132,22 +132,17 @@ function _Tuple(n) {
     }
 
     return {
-      constructor: Tuple,
-      inspect,
-      project: project,
+      inspect, toString: inspect, merge,
+      project, mapAll, toArray,
+      type, equals,
       map: map('map'),
       concat: concat('concat'),
-      mapAll: mapAll,
-      toArray,
-      type,
-      equals,
       [fl.map]: map(fl.map),
       [fl.concat]: concat(fl.concat),
       [fl.equals]: equals,
       ['@@type']: typeString,
       ['@@implements']: _implements([ 'map', 'concat', 'equals' ]),
-      toString: inspect,
-      merge
+      constructor: Tuple
     }
   }
 

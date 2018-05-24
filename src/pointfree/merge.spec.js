@@ -18,7 +18,7 @@ test('merge pointfree', t => {
 
   t.ok(isFunction(merge), 'is a function')
 
-  const noFunc = /merge: Binary function required for first argument/
+  const noFunc = /merge: Function required for first argument/
   t.throws(m(undefined, a), noFunc, 'throws if first arg is undefined')
   t.throws(m(null, a), noFunc, 'throws if first arg is null')
   t.throws(m(0, a), noFunc, 'throws if first arg is a falsey number')
@@ -30,7 +30,7 @@ test('merge pointfree', t => {
   t.throws(m([], a), noFunc, 'throws if first arg is an array')
   t.throws(m({}, a), noFunc, 'throws if first arg is an object')
 
-  const noPair = /merge: Pair required for second argument/
+  const noPair = /merge: Pair or Tuple required for second argument/
   t.throws(m(unit, undefined), noPair, 'throws if second arg is undefined')
   t.throws(m(unit, null), noPair, 'throws if second arg is null')
   t.throws(m(unit, 0), noPair, 'throws if second arg is a falsey number')

@@ -129,7 +129,7 @@ utilizes a `Pair` on both sides.
 import Arrow from 'crocks/Arrow'
 import Pair from 'crocks/Pair'
 
-import merge from 'crocks/Pair/merge'
+import merge from 'crocks/pointfree/merge'
 
 // double :: Number -> Number
 const double =
@@ -414,7 +414,7 @@ import Arrow from 'crocks/Arrow'
 import Sum from 'crocks/Sum'
 
 import branch from 'crocks/Pair/branch'
-import merge from 'crocks/Pair/merge'
+import merge from 'crocks/pointfree/merge'
 import mreduce from 'crocks/helpers/mreduce'
 
 // data :: [ Number ]
@@ -463,7 +463,7 @@ import Arrow from 'crocks/Arrow'
 
 import assign from 'crocks/helpers/assign'
 import branch from 'crocks/Pair/branch'
-import merge from 'crocks/Pair/merge'
+import merge from 'crocks/pointfree/merge'
 import objOf from 'crocks/helpers/objOf'
 
 // names :: Object

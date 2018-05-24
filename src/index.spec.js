@@ -26,6 +26,7 @@ const Reader = require('./Reader')
 const ReaderT = require('./Reader/ReaderT')
 const Star = require('./Star')
 const State = require('./State')
+const Tuple = require('./Tuple')
 const Unit = require('./Unit')
 const Writer = require('./Writer')
 
@@ -234,6 +235,7 @@ test('entry', t => {
   t.equal(crocks.ReaderT, ReaderT, 'provides the ReaderT crock')
   t.equal(crocks.Star, Star, 'provides the Star crock')
   t.equal(crocks.State, State, 'provides the State crock')
+  t.equal(crocks.Tuple, Tuple, 'provides the Unit crock')
   t.equal(crocks.Unit, Unit, 'provides the Unit crock')
   t.equal(crocks.Writer, Writer, 'provides the Writer crock')
 

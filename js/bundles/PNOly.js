@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([29,31,32,33],[
+webpackJsonppageComponent([31,33,34,35],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19884,7 +19884,7 @@ if (goog.DEBUG) {
  * @return {void}
  * @suppress {checkTypes}
  */
-function __deltemplate_s174_d34389eb(opt_data, opt_ignored, opt_ijData) {
+function __deltemplate_s152_d34389eb(opt_data, opt_ignored, opt_ijData) {
   ie_open('a', null, null,
       'class', 'sidebar-link ' + (opt_data.page.active ? 'sidebar-link-selected' : ''),
       'href', opt_data.page.url);
@@ -19893,16 +19893,16 @@ function __deltemplate_s174_d34389eb(opt_data, opt_ignored, opt_ijData) {
           'class', 'sidebar-icon icon-16-' + opt_data.page.icon);
     }
     ie_open('span');
-      var dyn12 = opt_data.page.title;
-      if (typeof dyn12 == 'function') dyn12(); else if (dyn12 != null) itext(dyn12);
+      var dyn10 = opt_data.page.title;
+      if (typeof dyn10 == 'function') dyn10(); else if (dyn10 != null) itext(dyn10);
     ie_close('span');
   ie_close('a');
 }
-exports.__deltemplate_s174_d34389eb = __deltemplate_s174_d34389eb;
+exports.__deltemplate_s152_d34389eb = __deltemplate_s152_d34389eb;
 if (goog.DEBUG) {
-  __deltemplate_s174_d34389eb.soyTemplateName = 'Sidebar.__deltemplate_s174_d34389eb';
+  __deltemplate_s152_d34389eb.soyTemplateName = 'Sidebar.__deltemplate_s152_d34389eb';
 }
-soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'sidebar', 0, __deltemplate_s174_d34389eb);
+soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'sidebar', 0, __deltemplate_s152_d34389eb);
 
 exports.render.params = ["section","site"];
 exports.render.types = {"section":"any","site":"any"};
@@ -20091,8 +20091,8 @@ function $render(opt_data, opt_ignored, opt_ijData) {
       ie_void('span', null, null,
           'class', 'icon icon-16-clock');
       itext(' ');
-      var dyn13 = opt_data.time;
-      if (typeof dyn13 == 'function') dyn13(); else if (dyn13 != null) itext(dyn13);
+      var dyn11 = opt_data.time;
+      if (typeof dyn11 == 'function') dyn11(); else if (dyn11 != null) itext(dyn11);
     }
   ie_close('p');
 }
@@ -28354,7 +28354,7 @@ exports.default = parseFromAnchor;
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RwevL", function() { return RwevL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PNOly", function() { return PNOly; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28370,11 +28370,11 @@ goog.loadModule(function(exports) {
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace RwevL.
+ * @fileoverview Templates in namespace PNOly.
  * @public
  */
 
-goog.module('RwevL.incrementaldom');
+goog.module('PNOly.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28445,7 +28445,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
       ie_open('code');
         itext('Promise');
       ie_close('code');
-      itext(' returning functions or allow for the Continuation Passing Style prevalent in the asynchronous function that ship with NodeJS. ');
+      itext(' returning functions or allow for the Continuation Passing Style prevalent in the asynchronous functions that ship with NodeJS. ');
       ie_open('code');
         itext('Async');
       ie_close('code');
@@ -28537,13 +28537,17 @@ function $render(opt_data, opt_ignored, opt_ijData) {
       ie_open('code');
         itext('Async');
       ie_close('code');
-      itext(' will finish running the current "in flight" computation to completion, but will cease all remaining execution. Cancellation with ');
+      itext(' will finish running the current "in flight" computation to completion, but will cease all remaining execution. Wrapped functions can return a function that will be called when an ');
+      ie_open('code');
+        itext('Async');
+      ie_close('code');
+      itext(' computation is cancelled, this can be used to clear timeouts or "in flight" xhr requests. Cancellation with ');
       ie_open('code');
         itext('Async');
       ie_close('code');
       itext(' is total and will cancel silently, without notification.');
     ie_close('p');
-    $templateAlias2({code: 'import Async from \'crocks/Async\'\n\nimport maybeToAsync from \'crocks/Async/maybeToAsync\'\n\nimport First from \'crocks/First\'\nimport equals from \'crocks/pointfree/equals\'\nimport map from \'crocks/pointfree/map\'\nimport mreduceMap from \'crocks/helpers/mreduceMap\'\nimport pick from \'crocks/helpers/pick\'\nimport safe from \'crocks/Maybe/safe\'\n\n// log :: String -> a -> a\nconst log = label => x =>\n  (console.log(`${label}:`, x), x)\n\n// propEq :: (String, a) -> Object -> Boolean\nconst propEq = (key, value) =>\n  x => equals(x[key], value)\n\n// findById :: Foldable f => (a -> Boolean) -> f a -> Maybe a\nconst findById = id =>\n  mreduceMap(First, safe(propEq(\'id\', id)))\n\n// getById :: Number -> Async String Object\nfunction getById(id) {\n  const data = [\n    { id: 1, name: \'Jimmothy Schmidt\', age: 24 },\n    { id: 2, name: \'Tori Blackwood\', age: 21 },\n    { id: 3, name: \'Joey Mc Carthy\', age: 27 }\n  ]\n\n  return Async(\n    (rej, res) => setTimeout(() => res(data), 1000)\n  ).chain(maybeToAsync(`id: ${id} -- Not Found`, findById(id)))\n}\n\ngetById(3)\n  .map(pick([ \'id\', \'name\' ]))\n  .fork(log(\'rej\'), log(\'res\'))\n//=> res: { id: 3, name: \'Joey Mc Carthy\' }\n\ngetById(5)\n  .map(pick([ \'id\', \'name\' ]))\n  .fork(log(\'rej\'), log(\'res\'))\n//=> rej: "id: 5 -- Not Found"\n\n// cancel :: () -> ()\nconst cancel = getById(1).fork(\n  log(\'rej\'),\n  log(\'res\'),\n  () => console.log(\'cancelled\')\n)\n\nsetTimeout(cancel, 500)\n//=> "cancelled"\n\nAsync\n  .all(map(getById, [ 1, 2 ]))\n  .map(map(pick([ \'id\', \'name\' ])))\n  .fork(log(\'rej\'), log(\'res\'))\n//=> res: [\n//=>   { id: 1, name: \'Jimmothy Schmidt\' },\n//=>   { id: 2, name: \'Tori Blackwood\' },\n//=> ]\n\nAsync\n  .all(map(getById, [ 3, 14 ]))\n  .map(map(pick([ \'id\', \'name\' ])))\n  .fork(log(\'rej\'), log(\'res\'))\n//=> rej:  "id: 14 -- Not Found"', mode: 'javascript'}, null, opt_ijData);
+    $templateAlias2({code: 'import Async from \'crocks/Async\'\n\nimport maybeToAsync from \'crocks/Async/maybeToAsync\'\n\nimport First from \'crocks/First\'\nimport equals from \'crocks/pointfree/equals\'\nimport map from \'crocks/pointfree/map\'\nimport mreduceMap from \'crocks/helpers/mreduceMap\'\nimport pick from \'crocks/helpers/pick\'\nimport safe from \'crocks/Maybe/safe\'\n\n// log :: String -> a -> a\nconst log = label => x =>\n  (console.log(`${label}:`, x), x)\n\n// propEq :: (String, a) -> Object -> Boolean\nconst propEq = (key, value) =>\n  x => equals(x[key], value)\n\n// findById :: Foldable f => (a -> Boolean) -> f a -> Maybe a\nconst findById = id =>\n  mreduceMap(First, safe(propEq(\'id\', id)))\n\n// getById :: Number -> Async String Object\nfunction getById(id) {\n  const data = [\n    { id: 1, name: \'Jimmothy Schmidt\', age: 24 },\n    { id: 2, name: \'Tori Blackwood\', age: 21 },\n    { id: 3, name: \'Joey Mc Carthy\', age: 27 }\n  ]\n\n  return Async(\n    (rej, res) => setTimeout(() => res(data), 1000)\n  ).chain(maybeToAsync(`id: ${id} -- Not Found`, findById(id)))\n}\n\ngetById(3)\n  .map(pick([ \'id\', \'name\' ]))\n  .fork(log(\'rej\'), log(\'res\'))\n//=> res: { id: 3, name: \'Joey Mc Carthy\' }\n\ngetById(5)\n  .map(pick([ \'id\', \'name\' ]))\n  .fork(log(\'rej\'), log(\'res\'))\n//=> rej: "id: 5 -- Not Found"\n\n// cancel :: () -> ()\nconst cancel = getById(1).fork(\n  log(\'rej\'),\n  log(\'res\'),\n  () => console.log(\'cancelled\')\n)\n\nsetTimeout(cancel, 500)\n//=> "cancelled"\n\nAsync\n  .all(map(getById, [ 1, 2 ]))\n  .map(map(pick([ \'id\', \'name\' ])))\n  .fork(log(\'rej\'), log(\'res\'))\n//=> res: [\n//=>   { id: 1, name: \'Jimmothy Schmidt\' },\n//=>   { id: 2, name: \'Tori Blackwood\' },\n//=> ]\n\nAsync\n  .all(map(getById, [ 3, 14 ]))\n  .map(map(pick([ \'id\', \'name\' ])))\n  .fork(log(\'rej\'), log(\'res\'))\n//=> rej:  "id: 14 -- Not Found"\n\nconst resolveAfter = (delay, value) =>\n  Async((rej, res) => {\n    const id = setTimeout(() => res(value), delay)\n    return () => clearTimeout(id)\n  })\n\nconst afterCancel = resolveAfter(10000, \'Delay Value\')\n  .fork(log(\'rej\'), log(\'res\'))\n\nafterCancel() // this clears the timeout', mode: 'javascript'}, null, opt_ijData);
     ie_open('article', null, null,
         'id', 'topic-implements');
       ie_open('h2');
@@ -30196,7 +30200,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'RwevL.render';
+  $render.soyTemplateName = 'PNOly.render';
 }
 
 exports.render.params = ["page","site"];
@@ -30206,8 +30210,8 @@ return exports;
 
 });
 
-class RwevL extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(RwevL, templates);
+class PNOly extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(PNOly, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
@@ -30248,8 +30252,7 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(RwevL, templates);
 /* 250 */,
 /* 251 */,
 /* 252 */,
-/* 253 */,
-/* 254 */
+/* 253 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30297,23 +30300,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var RwevL = function (_Component) {
-  _inherits(RwevL, _Component);
+var PNOly = function (_Component) {
+  _inherits(PNOly, _Component);
 
-  function RwevL() {
-    _classCallCheck(this, RwevL);
+  function PNOly() {
+    _classCallCheck(this, PNOly);
 
-    return _possibleConstructorReturn(this, (RwevL.__proto__ || Object.getPrototypeOf(RwevL)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (PNOly.__proto__ || Object.getPrototypeOf(PNOly)).apply(this, arguments));
   }
 
-  return RwevL;
+  return PNOly;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(RwevL, _AsyncSoy2.default);
+_metalSoy2.default.register(PNOly, _AsyncSoy2.default);
 
-exports.default = RwevL;
+exports.default = PNOly;
 
 /***/ })
-],[254]);
+],[253]);

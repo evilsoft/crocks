@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([1,33,34,35],[
+webpackJsonppageComponent([14,33,34,35],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -28366,25 +28366,12 @@ exports.default = parseFromAnchor;
 /* 232 */,
 /* 233 */,
 /* 234 */,
-/* 235 */,
-/* 236 */,
-/* 237 */,
-/* 238 */,
-/* 239 */,
-/* 240 */,
-/* 241 */,
-/* 242 */,
-/* 243 */,
-/* 244 */,
-/* 245 */,
-/* 246 */,
-/* 247 */,
-/* 248 */
+/* 235 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pageDocsSearch", function() { return pageDocsSearch; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "lZXkP", function() { return lZXkP; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28396,15 +28383,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var templates;
 goog.loadModule(function(exports) {
 
-// This file was automatically generated from search.soy.
+// This file was automatically generated from getting-started.soy.
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace pageDocsSearch.
+ * @fileoverview Templates in namespace lZXkP.
  * @public
  */
 
-goog.module('pageDocsSearch.incrementaldom');
+goog.module('lZXkP.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28425,11 +28412,9 @@ var ie_open_end = IncrementalDom.elementOpenEnd;
 var itext = IncrementalDom.text;
 var iattr = IncrementalDom.attr;
 
-var $templateAlias3 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('ElectricSearch.incrementaldom', 'render');
+var $templateAlias2 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('ElectricCode.incrementaldom', 'render');
 
-var $templateAlias2 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('Sidebar.incrementaldom', 'render');
-
-var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('main.incrementaldom', 'render');
+var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('guide.incrementaldom', 'render');
 
 
 /**
@@ -28440,65 +28425,168 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var $$temp;
-  var param287 = function() {
-    $templateAlias2({section: opt_data.site.index.children['docs'], site: opt_data.site}, null, opt_ijData);
-    ie_open('div', null, null,
-        'class', 'sidebar-offset');
-      ie_open('div', null, null,
-          'class', 'container-hybrid docs-home-top');
-        ie_open('div', null, null,
-            'class', 'row');
-          ie_open('div', null, null,
-              'class', 'col-xs-16');
-            ie_open('h1', null, null,
-                'class', 'docs-home-top-title');
-              ie_open('span');
-                itext('Electric');
-              ie_close('span');
-              itext(' Docs');
-            ie_close('h1');
-            ie_open('p', null, null,
-                'class', 'docs-home-top-description');
-              itext('Start learning how to leverage the power of ');
-              var dyn16 = opt_data.site.title;
-              if (typeof dyn16 == 'function') dyn16(); else if (dyn16 != null) itext(dyn16);
-              itext('.');
-            ie_close('p');
-          ie_close('div');
-        ie_close('div');
-        ie_open('div', null, null,
-            'class', 'row');
-          ie_open('div', null, null,
-              'class', 'container-hybrid');
-            $templateAlias3({action: '/docs/search.html', dataURL: (($$temp = opt_data.site.basePath) == null ? '' : $$temp) + '/site.json', path: '/docs/', placeholder: 'Search Docs'}, null, opt_ijData);
-          ie_close('div');
-        ie_close('div');
-      ie_close('div');
-    ie_close('div');
+  var param212 = function() {
+    ie_open('article', null, null,
+        'id', 'installation');
+      ie_open('h2');
+        ie_open('a', null, null,
+            'id', 'installation',
+            'href', '#installation');
+          itext('Installation');
+        ie_close('a');
+      ie_close('h2');
+      ie_open('p');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext(' is available from ');
+        ie_open('code');
+          itext('npm');
+        ie_close('code');
+        itext(' and is just a shell command away. All you need to do is run the following to save it as a dependency in your current project folder:');
+      ie_close('p');
+      $templateAlias2({code: '$ npm install crocks -S', mode: 'text'}, null, opt_ijData);
+      ie_open('p');
+        itext('This will pull down ');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext(' into your project\'s ');
+        ie_open('code');
+          itext('node_modules');
+        ie_close('code');
+        itext(' folder and can be accessed by adding something like the following in the file that needs it:');
+      ie_close('p');
+      $templateAlias2({code: '// node require syntax\nconst crocks = require(\'crocks\')\n\n// Javascript modules (if you are transpiling)\nimport crocks from \'crocks\'', mode: 'javascript'}, null, opt_ijData);
+    ie_close('article');
+    ie_open('article', null, null,
+        'id', 'import-only-what-you-need');
+      ie_open('h2');
+        ie_open('a', null, null,
+            'id', 'import-only-whats-needed',
+            'href', '#import-only-whats-needed');
+          itext('Import only what\'s needed');
+        ie_close('a');
+      ie_close('h2');
+      ie_open('p');
+        itext('There is a lot to this library, and as such it may not be desired to bring in the whole thing when bundling for a library or frontend application. If this is the case, the code is organized in a manner that groups all functions that return or construct a given ADT into their respective folders. While general purpose functions are spread across the following folders: ');
+        ie_open('code');
+          itext('combinators');
+        ie_close('code');
+        itext(', ');
+        ie_open('code');
+          itext('helpers');
+        ie_close('code');
+        itext(', ');
+        ie_open('code');
+          itext('logic');
+        ie_close('code');
+        itext(', ');
+        ie_open('code');
+          itext('pointfree');
+        ie_close('code');
+        itext(' and ');
+        ie_open('code');
+          itext('predicates');
+        ie_close('code');
+        itext('.');
+      ie_close('p');
+      ie_open('p');
+        itext('To access the types, just reference the folder like: ');
+        ie_open('code');
+          itext('crocks/Maybe');
+        ie_close('code');
+        itext(', or');
+        ie_open('code');
+          itext('crocks/Result');
+        ie_close('code');
+        itext('. If you want to access a function that constructs a given type, reference it by name, like: ');
+        ie_open('code');
+          itext('crocks/Maybe/safe');
+        ie_close('code');
+        itext(' or ');
+        ie_open('code');
+          itext('crocks/Result/tryCatch');
+        ie_close('code');
+        itext('. This organization helps ensure that you only include what you need.');
+      ie_close('p');
+      ie_open('h3');
+        ie_open('a', null, null,
+            'id', 'entire-library-commonjs',
+            'href', '#entire-library-commonjs');
+          itext('Entire library (CommonJS)');
+        ie_close('a');
+      ie_close('h3');
+      $templateAlias2({code: '// namespace entire suite to crocks variable\nconst crocks = require(\'crocks\')\n\n// pluck anything that does not require name-spacing\nconst { safe, isNumber } = crocks\n\n// still requires entire object, but removes name-spacing\nconst { and, liftA2 } = require(\'crocks\')\n\n// divide :: Number -> Number\nconst divide =\n  x => y => x / y\n\n// safeNumber :: a -> Maybe Number\nconst safeNumber =\n  safe(isNumber)\n\n// notZero :: a -> Maybe Number\nconst notZero = safe(\n  and(isNumber, x => x !== 0)\n)\n\n// safeDivide:: a -> Maybe Number\nconst safeDivide = crocks.curry(\n  (x, y) => liftA2(divide, safeNumber(x), notZero(y))\n)\n\nsafeDivide(20, 0)\n//=> Nothing\n\nsafeDivide(20, 5)\n//=> Just 4\n\nsafeDivide(\'number\', 5)\n//=> Nothing', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h3');
+        ie_open('a', null, null,
+            'id', 'entire-library-js-modules',
+            'href', '#entire-library-js-modules');
+          itext('Entire library (JS Modules)');
+        ie_close('a');
+      ie_close('h3');
+      $templateAlias2({code: '// namespace entire suite to crocks variable\nimport crocks from \'crocks\'\n\n// still imports entire object, but removes name-spacing\nimport { and, liftA2 }  from \'crocks\'\n\n// pluck anything that does not require name-spacing\nconst { safe, isNumber } = crocks\n\n// divide :: Number -> Number\nconst divide =\n  x => y => x / y\n\n// safeNumber :: a -> Maybe Number\nconst safeNumber =\n  safe(isNumber)\n\n// notZero :: a -> Maybe Number\nconst notZero = safe(\n  and(isNumber, x => x !== 0)\n)\n\n// safeDivide:: a -> Maybe Number\nconst safeDivide = crocks.curry(\n  (x, y) => liftA2(divide, safeNumber(x), notZero(y))\n)\n\nsafeDivide(20, 0)\n//=> Nothing\n\nsafeDivide(20, 5)\n//=> Just 4\n\nsafeDivide(\'number\', 5)\n//=> Nothing', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h3');
+        ie_open('a', null, null,
+            'id', 'single-entities-commonjs',
+            'href', '#single-entities-commonjs');
+          itext('Single entities (CommonJS)');
+        ie_close('a');
+      ie_close('h3');
+      $templateAlias2({code: '// require in each entity directly\nconst and = require(\'crocks/logic/and\')\nconst curry = require(\'crocks/helpers/curry\')\nconst isNumber = require(\'crocks/predicates/isNumber\')\nconst liftA2 = require(\'crocks/helpers/liftA2\')\nconst safe = require(\'crocks/Maybe/safe\')\n\n// divide :: Number -> Number\nconst divide =\n  x => y => x / y\n\n// safeNumber :: a -> Maybe Number\nconst safeNumber =\n  safe(isNumber)\n\n// notZero :: a -> Maybe Number\nconst notZero = safe(\n  and(isNumber, x => x !== 0)\n)\n\n// safeDivide:: a -> Maybe Number\nconst safeDivide = curry(\n  (x, y) => liftA2(divide, safeNumber(x), notZero(y))\n)\n\nsafeDivide(20, 0)\n//=> Nothing\n\nsafeDivide(20, 5)\n//=> Just 4\n\nsafeDivide(\'number\', 5)\n//=> Nothing', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h3');
+        ie_open('a', null, null,
+            'id', 'single-entities-js-modules',
+            'href', '#single-entities-js-modules');
+          itext('Single entities (JS Modules)');
+        ie_close('a');
+      ie_close('h3');
+      $templateAlias2({code: '// import in each entity directly\nimport and from \'crocks/logic/and\'\nimport curry from \'crocks/helpers/curry\'\nimport isNumber from \'crocks/predicates/isNumber\'\nimport liftA2 from \'crocks/helpers/liftA2\'\nimport safe from \'crocks/Maybe/safe\'\n\n// divide :: Number -> Number\nconst divide =\n  x => y => x / y\n\n// safeNumber :: a -> Maybe Number\nconst safeNumber =\n  safe(isNumber)\n\n// notZero :: a -> Maybe Number\nconst notZero = safe(\n  and(isNumber, x => x !== 0)\n)\n\n// safeDivide:: a -> Maybe Number\nconst safeDivide = curry(\n  (x, y) => liftA2(divide, safeNumber(x), notZero(y))\n)\n\nsafeDivide(20, 0)\n//=> Nothing\n\nsafeDivide(20, 5)\n//=> Just 4\n\nsafeDivide(\'number\', 5)\n//=> Nothing', mode: 'javascript'}, null, opt_ijData);
+    ie_close('article');
+    ie_open('input', null, null,
+        'type', 'hidden',
+        'value', opt_data.page.title);
+    ie_close('input');
+    ie_open('input', null, null,
+        'type', 'hidden',
+        'value', opt_data.site.title);
+    ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({elementClasses: 'docs', content: param287}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param212}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'pageDocsSearch.render';
+  $render.soyTemplateName = 'lZXkP.render';
 }
 
-exports.render.params = ["site"];
-exports.render.types = {"site":"any"};
+exports.render.params = ["page","site"];
+exports.render.types = {"page":"any","site":"any"};
 templates = exports;
 return exports;
 
 });
 
-class pageDocsSearch extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(pageDocsSearch, templates);
+class lZXkP extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(lZXkP, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
 
 
 /***/ }),
+/* 236 */,
+/* 237 */,
+/* 238 */,
+/* 239 */,
+/* 240 */,
+/* 241 */,
+/* 242 */,
+/* 243 */,
+/* 244 */,
+/* 245 */,
+/* 246 */,
+/* 247 */,
+/* 248 */,
 /* 249 */,
 /* 250 */,
 /* 251 */,
@@ -28518,20 +28606,7 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(pageDocsSearch, templ
 /* 265 */,
 /* 266 */,
 /* 267 */,
-/* 268 */,
-/* 269 */,
-/* 270 */,
-/* 271 */,
-/* 272 */,
-/* 273 */,
-/* 274 */,
-/* 275 */,
-/* 276 */,
-/* 277 */,
-/* 278 */,
-/* 279 */,
-/* 280 */,
-/* 281 */
+/* 268 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28567,9 +28642,9 @@ __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _searchSoy = __webpack_require__(248);
+var _gettingStartedSoy = __webpack_require__(235);
 
-var _searchSoy2 = _interopRequireDefault(_searchSoy);
+var _gettingStartedSoy2 = _interopRequireDefault(_gettingStartedSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28579,23 +28654,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var pageDocsSearch = function (_Component) {
-  _inherits(pageDocsSearch, _Component);
+var lZXkP = function (_Component) {
+  _inherits(lZXkP, _Component);
 
-  function pageDocsSearch() {
-    _classCallCheck(this, pageDocsSearch);
+  function lZXkP() {
+    _classCallCheck(this, lZXkP);
 
-    return _possibleConstructorReturn(this, (pageDocsSearch.__proto__ || Object.getPrototypeOf(pageDocsSearch)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (lZXkP.__proto__ || Object.getPrototypeOf(lZXkP)).apply(this, arguments));
   }
 
-  return pageDocsSearch;
+  return lZXkP;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(pageDocsSearch, _searchSoy2.default);
+_metalSoy2.default.register(lZXkP, _gettingStartedSoy2.default);
 
-exports.default = pageDocsSearch;
+exports.default = lZXkP;
 
 /***/ })
-],[281]);
+],[268]);

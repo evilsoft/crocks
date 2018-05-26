@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([9,31,32,33],[
+webpackJsonppageComponent([24,33,34,35],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19884,7 +19884,7 @@ if (goog.DEBUG) {
  * @return {void}
  * @suppress {checkTypes}
  */
-function __deltemplate_s174_d34389eb(opt_data, opt_ignored, opt_ijData) {
+function __deltemplate_s152_d34389eb(opt_data, opt_ignored, opt_ijData) {
   ie_open('a', null, null,
       'class', 'sidebar-link ' + (opt_data.page.active ? 'sidebar-link-selected' : ''),
       'href', opt_data.page.url);
@@ -19893,16 +19893,16 @@ function __deltemplate_s174_d34389eb(opt_data, opt_ignored, opt_ijData) {
           'class', 'sidebar-icon icon-16-' + opt_data.page.icon);
     }
     ie_open('span');
-      var dyn12 = opt_data.page.title;
-      if (typeof dyn12 == 'function') dyn12(); else if (dyn12 != null) itext(dyn12);
+      var dyn10 = opt_data.page.title;
+      if (typeof dyn10 == 'function') dyn10(); else if (dyn10 != null) itext(dyn10);
     ie_close('span');
   ie_close('a');
 }
-exports.__deltemplate_s174_d34389eb = __deltemplate_s174_d34389eb;
+exports.__deltemplate_s152_d34389eb = __deltemplate_s152_d34389eb;
 if (goog.DEBUG) {
-  __deltemplate_s174_d34389eb.soyTemplateName = 'Sidebar.__deltemplate_s174_d34389eb';
+  __deltemplate_s152_d34389eb.soyTemplateName = 'Sidebar.__deltemplate_s152_d34389eb';
 }
-soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'sidebar', 0, __deltemplate_s174_d34389eb);
+soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'sidebar', 0, __deltemplate_s152_d34389eb);
 
 exports.render.params = ["section","site"];
 exports.render.types = {"section":"any","site":"any"};
@@ -20091,8 +20091,8 @@ function $render(opt_data, opt_ignored, opt_ijData) {
       ie_void('span', null, null,
           'class', 'icon icon-16-clock');
       itext(' ');
-      var dyn13 = opt_data.time;
-      if (typeof dyn13 == 'function') dyn13(); else if (dyn13 != null) itext(dyn13);
+      var dyn11 = opt_data.time;
+      if (typeof dyn11 == 'function') dyn11(); else if (dyn11 != null) itext(dyn11);
     }
   ie_close('p');
 }
@@ -28356,25 +28356,12 @@ exports.default = parseFromAnchor;
 /* 222 */,
 /* 223 */,
 /* 224 */,
-/* 225 */,
-/* 226 */,
-/* 227 */,
-/* 228 */,
-/* 229 */,
-/* 230 */,
-/* 231 */,
-/* 232 */,
-/* 233 */,
-/* 234 */,
-/* 235 */,
-/* 236 */,
-/* 237 */,
-/* 238 */
+/* 225 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MkVPK", function() { return MkVPK; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "gTdWb", function() { return gTdWb; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28386,15 +28373,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var templates;
 goog.loadModule(function(exports) {
 
-// This file was automatically generated from Endo.soy.
+// This file was automatically generated from ReaderT.soy.
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace MkVPK.
+ * @fileoverview Templates in namespace gTdWb.
  * @public
  */
 
-goog.module('MkVPK.incrementaldom');
+goog.module('gTdWb.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28428,41 +28415,50 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var param1938 = function() {
-    $templateAlias2({code: 'Endo a', mode: 'haskell'}, null, opt_ijData);
+  var param1407 = function() {
+    $templateAlias2({code: 'Monad m => ReaderT e (m a)', mode: 'haskell'}, null, opt_ijData);
     ie_open('p');
       ie_open('code');
-        itext('Endo');
+        itext('ReaderT');
       ie_close('code');
       itext(' is a ');
       ie_open('code');
-        itext('Monoid');
+        itext('Monad Transformer');
       ie_close('code');
-      itext(' that will combine (2) functions that have matching domains and codomains (endofunctions) under function composition. Due to the nature of ');
+      itext(' that wraps a given ');
       ie_open('code');
-        itext('Endo');
+        itext('Monad');
       ie_close('code');
-      itext(' wrapping a function, the underlying value can either be extracted using ');
-      ie_open('a', null, null,
-          'href', '#valueof');
-        ie_open('code');
-          itext('valueOf');
-        ie_close('code');
-      ie_close('a');
-      itext(' like any other ');
+      itext(' with a ');
       ie_open('code');
-        itext('Monoid');
+        itext('Reader');
       ie_close('code');
-      itext(' or can be executed directly using ');
-      ie_open('a', null, null,
-          'href', '#runWith');
-        ie_open('code');
-          itext('runWith');
-        ie_close('code');
-      ie_close('a');
-      itext(', supplying the input.');
+      itext('. This allows the interface of a ');
+      ie_open('code');
+        itext('Reader');
+      ie_close('code');
+      itext(' that enables the  composition of computations that depend on a shared environment ');
+      ie_open('code');
+        itext('(e -> a)');
+      ie_close('code');
+      itext(', but provides a way to abstract a means the ');
+      ie_open('code');
+        itext('Reader');
+      ie_close('code');
+      itext(' portion, when combining ');
+      ie_open('code');
+        itext('ReaderT');
+      ie_close('code');
+      itext('s of the same type. All ');
+      ie_open('code');
+        itext('ReaderT');
+      ie_close('code');
+      itext('s must provide the constructor of the target ');
+      ie_open('code');
+        itext('Monad');
+      ie_close('code');
+      itext(' that is being wrapped.');
     ie_close('p');
-    $templateAlias2({code: 'import Endo from \'crocks/Endo\'\n\nimport curry from \'crocks/helpers/curry\'\nimport mconcat from \'crocks/helpers/mconcat\'\nimport valueOf from \'crocks/pointfree/valueOf\'\n\n// add :: Number -> Number -> Number\nconst add =\n  x => y => x + y\n\n// multiply :: Number -> Number -> Number\nconst multiply =\n  x => y => x * y\n\n// runEndo :: Endo a -> a -> a\nconst runEndo =\n  curry(valueOf)\n\n// flow :: Endo Number\nconst addAndDouble =\n  Endo(add(10))\n    .concat(Endo(multiply(2)))\n\n// always10 :: Endo Number\nconst always10 =\n  mconcat(Endo, [ add(100), multiply(0), add(10) ])\n\nrunEndo(addAndDouble, 5)\n//=> 30\n\nalways10\n  .runWith(75)\n//=> 10', mode: 'javascript'}, null, opt_ijData);
     ie_open('article', null, null,
         'id', 'topic-implements');
       ie_open('h2');
@@ -28474,11 +28470,23 @@ function $render(opt_data, opt_ignored, opt_ijData) {
       ie_close('h2');
       ie_open('p');
         ie_open('code');
-          itext('Semigroup');
+          itext('Functor');
         ie_close('code');
         itext(', ');
         ie_open('code');
-          itext('Monoid');
+          itext('Apply');
+        ie_close('code');
+        itext(', ');
+        ie_open('code');
+          itext('Chain');
+        ie_close('code');
+        itext(', ');
+        ie_open('code');
+          itext('Applicative');
+        ie_close('code');
+        itext(', ');
+        ie_open('code');
+          itext('Monad');
         ie_close('code');
       ie_close('p');
     ie_close('article');
@@ -28493,39 +28501,154 @@ function $render(opt_data, opt_ignored, opt_ijData) {
       ie_close('h2');
       ie_open('h4');
         ie_open('a', null, null,
-            'id', 'empty',
-            'href', '#empty');
-          itext('empty');
+            'id', 'ask',
+            'href', '#ask');
+          itext('ask');
         ie_close('a');
       ie_close('h4');
-      $templateAlias2({code: 'Endo.empty :: () -> Endo a', mode: 'haskell'}, null, opt_ijData);
+      $templateAlias2({code: 'ReaderT.ask :: Monad m => () -> ReaderT e (m e)\nReaderT.ask :: Monad m => (e -> a) -> ReaderT e (m a)', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
+        itext('A construction helper that returns a ');
         ie_open('code');
-          itext('empty');
+          itext('ReaderT');
         ie_close('code');
-        itext(' provides the identity for the ');
+        itext(' with environment on the right portion of the ');
         ie_open('code');
-          itext('Monoid');
+          itext('Reader');
         ie_close('code');
-        itext(' in that when the value it provides is ');
+        itext('. ');
         ie_open('code');
-          itext('concat');
+          itext('ask');
         ie_close('code');
-        itext('ed to any other value, it will return the other value. In the case of ');
+        itext(' can take a function, that can be used to map the environment to a different type or value. When using the function version, the function must return the type of the ');
         ie_open('code');
-          itext('Endo');
+          itext('Monad');
         ie_close('code');
-        itext(' the result of ');
+        itext(' the ');
         ie_open('code');
-          itext('empty');
+          itext('ReaderT');
         ie_close('code');
-        itext(' is the identity function, which echos its input. ');
-        ie_open('code');
-          itext('empty');
-        ie_close('code');
-        itext(' is available on both the Constructor and the Instance for convenience.');
+        itext(' wraps, which in turn will be wrapped in another');
       ie_close('p');
-      $templateAlias2({code: 'import Endo from \'crocks/Endo\'\n\nimport runWith from \'crocks/pointfree/runWith\'\n\n// empty :: Endo a\nconst empty = Endo.empty()\n\n// toUpper :: Endo String\nconst toUpper =\n  Endo(x => x.toUpperCase())\n\n// runNice :: Endo String -> String\nconst runNice =\n  runWith(\'nice\')\n\nrunNice(empty.concat(toUpper))\n//=> "NICE"\n\nrunNice(toUpper.concat(empty))\n//=> "NICE"', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'import ReaderT from \'crocks/Reader/ReaderT\'\nimport Maybe from \'crocks/Maybe\'\n\nimport safe from \'crocks/Maybe/safe\'\nimport isNumber from \'crocks/predicates/isNumber\'\n\nconst MaybeReader = ReaderT(Maybe)\nconst { ask } = MaybeReader\n\n// add :: Number -> Number -> Number\nconst add =\n  x => y => x + y\n\n// Typical Constructor\nMaybeReader(safe(isNumber))\n  .runWith(76)\n//=> Just 76\n\nMaybeReader(safe(isNumber))\n  .runWith(\'76\')\n//=> Nothing\n\n// Using `ask` with no function\n// (identity on environment)\nask()\n  .runWith(76)\n//=> Just 76\n\nask()\n  .runWith(\'76\')\n//=> Just \'76\'\n\n// Using `ask` with a function\n// (map environment before deposit)\nask(add(10))\n  .runWith(76)\n//=> Just 86', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'lift',
+            'href', '#lift');
+          itext('lift');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'ReaderT.lift :: Monad m => m a -> ReaderT e (m a)', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        itext('Used to promote an instance of a given ');
+        ie_open('code');
+          itext('Monad');
+        ie_close('code');
+        itext(' into a ');
+        ie_open('code');
+          itext('ReaderT');
+        ie_close('code');
+        itext(' of that ');
+        ie_open('code');
+          itext('Monad');
+        ie_close('code');
+        itext('s type. This can be used to lift a pointed instance of the underlying ');
+        ie_open('code');
+          itext('Monad');
+        ie_close('code');
+        itext('. When mixed with composition, ');
+        ie_open('code');
+          itext('lift');
+        ie_close('code');
+        itext(' can be used to promote functions that take the form of ');
+        ie_open('code');
+          itext('a -> m b');
+        ie_close('code');
+        itext(' into a function that can be ');
+        ie_open('code');
+          itext('chain');
+        ie_close('code');
+        itext('ed with the ');
+        ie_open('code');
+          itext('ReaderT');
+        ie_close('code');
+        itext('. Although, ');
+        ie_open('a', null, null,
+            'href', '#liftfn');
+          ie_open('code');
+            itext('liftFn');
+          ie_close('code');
+        ie_close('a');
+        itext(' can be used to remove the composition boilerplate and promote and ');
+        ie_open('code');
+          itext('a -> m b');
+        ie_close('code');
+        itext(' function.');
+      ie_close('p');
+      $templateAlias2({code: 'import ReaderT from \'crocks/Reader/ReaderT\'\nimport Async from \'crocks/Async\'\n\nimport compose from \'crocks/helpers/compose\'\nimport curry from \'crocks/helpers/curry\'\nimport flip from \'crocks/combinators/flip\'\nimport runWith from \'crocks/pointfree/runWith\'\nimport tap from \'crocks/helpers/tap\'\n\nconst AsyncReader = ReaderT(Async)\n\nconst { ask, lift } = AsyncReader\nconst { Rejected } = Async\n\n// log :: String -> a -> ()\nconst log = label =>\n  console.log.bind(console, label + \':\')\n\n// forkLog :: Async a b -> Async a b\nconst forkLog = tap(\n  m => m.fork(log(\'rej\'), log(\'res\'))\n)\n\n// runAndLog :: e -> ReaderT e (Async a b) -> Async a b\nconst runAndLog = curry(\n  x => compose(forkLog, flip(runWith, x))\n)\n\n// instance :: ReaderT e (Async String a)\nconst instance =\n  lift(Rejected(\'Always Rejected\'))\n\nrunAndLog(instance, \'Thomas\')\n//=> rej: Always Rejected\n\n// Using in a composition\n// rejectWith :: a -> ReaderT e (Async a b)\nconst rejectWith =\n  compose(lift, Rejected)\n\n// envReject :: ReadetT e (Async e b)\nconst envReject =\n  ask()\n    .chain(rejectWith)\n\nrunAndLog(envReject, \'Sammy\')\n//=> rej: Sammy', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'liftfn',
+            'href', '#liftfn');
+          itext('liftFn');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'ReaderT.liftFn :: Monad m => (a -> m b) -> a -> ReaderT e (m b)', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        itext('Used to transform a given function in the form of ');
+        ie_open('code');
+          itext('a -> m b');
+        ie_close('code');
+        itext(' into a lifted function, where ');
+        ie_open('code');
+          itext('m');
+        ie_close('code');
+        itext(' is the underlying ');
+        ie_open('code');
+          itext('Monad');
+        ie_close('code');
+        itext(' of a ');
+        ie_open('code');
+          itext('ReaderT');
+        ie_close('code');
+        itext('. This allows for the removal of composition boilerplate that results from using the');
+        ie_open('a', null, null,
+            'href', '#lift');
+          ie_open('code');
+            itext('lift');
+          ie_close('code');
+        ie_close('a');
+        itext(' helper.');
+      ie_close('p');
+      $templateAlias2({code: 'import ReaderT from \'crocks/Reader/ReaderT\'\nimport Either from \'crocks/Either\'\n\nimport ifElse from \'crocks/logic/ifElse\'\n\nconst EitherReader = ReaderT(Either)\n\nconst { ask, liftFn } = EitherReader\nconst { Left, Right } = Either\n\n// gte :: Number -> Number -> Either String Number\nconst gte = x => ifElse(\n  n => n >= x,\n  Right,\n  n => Left(`${n} is not gte to ${x}`)\n)\n\n// gte10 :: Number -> Either String Number\nconst gte10 =\n  gte(10)\n\n// add20 :: ReaderT Number (Either String Number)\nconst add20 =\n  ask()\n    .chain(liftFn(gte10))\n    .map(n => n + 20)\n\nadd20\n  .runWith(30)\n//=> Right 50\n\nadd20\n  .runWith(9)\n//=> Left "9 is not gte to 10"', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'of',
+            'href', '#of');
+          itext('of');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'ReaderT.of :: Monad m => a -> ReaderT e (m a)', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        itext('Lifts a value into a ');
+        ie_open('code');
+          itext('ReaderT');
+        ie_close('code');
+        itext(' using the ');
+        ie_open('code');
+          itext('of');
+        ie_close('code');
+        itext(' method of the underlying ');
+        ie_open('code');
+          itext('Monad');
+        ie_close('code');
+        itext('.');
+        ie_open('code');
+          itext('of');
+        ie_close('code');
+        itext(' will disregard the environment and points the right portion to the provided value.');
+      ie_close('p');
+      $templateAlias2({code: 'import ReaderT from \'crocks/Reader/ReaderT\'\n\nimport Maybe from \'crocks/Maybe\'\nimport Either from \'crocks/Either\'\nimport State from \'crocks/State\'\n\nconst MaybeReader = ReaderT(Maybe)\nconst EitherReader = ReaderT(Either)\nconst StateReader = ReaderT(State)\n\nMaybeReader.of(\'yep\')\n  .map(x => x.toUpperCase())\n  .runWith(23)\n//=> Just "YEP"\n\nEitherReader.of(43)\n  .runWith(23)\n//=> Right 43\n\nStateReader.of(0)\n  .runWith(23)\n  .runWith(42)\n//=> Pair(0, 42)', mode: 'javascript'}, null, opt_ijData);
     ie_close('article');
     ie_open('article', null, null,
         'id', 'topic-instance');
@@ -28538,74 +28661,80 @@ function $render(opt_data, opt_ignored, opt_ijData) {
       ie_close('h2');
       ie_open('h4');
         ie_open('a', null, null,
-            'id', 'concat',
-            'href', '#concat');
-          itext('concat');
+            'id', 'map',
+            'href', '#map');
+          itext('map');
         ie_close('a');
       ie_close('h4');
-      $templateAlias2({code: 'Endo a ~> Endo a -> Endo a', mode: 'haskell'}, null, opt_ijData);
+      $templateAlias2({code: 'Monad m => ReaderT e (m a) ~> (a -> b) -> ReaderT e (m b)', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
+        itext('Provides a means for lifting a normal javascript function into the underlying');
         ie_open('code');
-          itext('concat');
+          itext('Monad');
         ie_close('code');
-        itext(' is used to combine (2) ');
+        itext(', allowing the innermost value of the underlying ');
         ie_open('code');
-          itext('Semigroup');
+          itext('Monad');
         ie_close('code');
-        itext('s of the same type under an operation specified by the ');
+        itext(' to be mapped. This method will ignore the outer ');
         ie_open('code');
-          itext('Semigroup');
+          itext('ReaderT');
         ie_close('code');
-        itext('. In the case of ');
+        itext(', and be applied directly to the underlying ');
         ie_open('code');
-          itext('Endo');
+          itext('Monad');
         ie_close('code');
-        itext(', it will combine (2) endofunctions under function composition.');
+        itext('.');
       ie_close('p');
-      $templateAlias2({code: 'import Endo from \'crocks/Endo\'\n\nimport assoc from \'crocks/helpers/assoc\'\nimport mapProps from \'crocks/helpers/mapProps\'\nimport objOf from \'crocks/helpers/objOf\'\n\n// inc :: Number -> Number\nconst inc =\n  x => x + 1\n\n// incValue :: Endo Object\nconst incValue =\n  Endo(mapProps({ value: inc }))\n\n// addDone :: Endo Object\nconst addDone =\n  Endo(assoc(\'done\', true))\n\n// finish :: Endo Object\nconst packResults =\n  Endo(objOf(\'results\'))\n\n// finish :: Endo Object\nconst finish =\n  incValue.concat(addDone)\n\nfinish.runWith({ value: 99 })\n//=> { value: 100, done: true }\n\nfinish\n  .concat(packResults)\n  .runWith({ value: 99 })\n//=> { results: { value: 100, done: true } }', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'import ReaderT from \'crocks/Reader/ReaderT\'\nimport Maybe from \'crocks/Maybe\'\n\nimport isString from \'crocks/predicates/isString\'\nimport safe from \'crocks/Maybe/safe\'\n\nconst MaybeReader =\n  ReaderT(Maybe)\n\nconst { ask, liftFn } = MaybeReader\n\n// maybeString :: a -> Maybe String\nconst maybeString =\n  safe(isString)\n\n// toUpper :: String -> String\nconst toUpper =\n  x => x.toUpperCase()\n\n// envToUpper :: ReaderT e (Maybe String)\nconst envToUpper =\n  ask()\n    .chain(liftFn(maybeString))\n    .map(toUpper)\n\nenvToUpper\n  .runWith(4)\n//=> Nothing\n\nenvToUpper\n  .runWith(\'hola\')\n//=> Just "HOLA"', mode: 'javascript'}, null, opt_ijData);
       ie_open('h4');
         ie_open('a', null, null,
-            'id', 'valueof',
-            'href', '#valueof');
-          itext('valueOf');
+            'id', 'ap',
+            'href', '#ap');
+          itext('ap');
         ie_close('a');
       ie_close('h4');
-      $templateAlias2({code: 'Endo a ~> () -> (a -> a)', mode: 'haskell'}, null, opt_ijData);
+      $templateAlias2({code: 'Monad m => ReaderT e (m (a -> b)) ~> ReaderT e (m a) -> ReaderT e (m b)', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
+        itext('Applies wrapped functions to the provided value, using the ');
         ie_open('code');
-          itext('valueOf');
+          itext('ap');
         ie_close('code');
-        itext(' is used on all ');
+        itext(' of the underlying ');
         ie_open('code');
-          itext('crocks');
+          itext('Monad');
         ie_close('code');
-        itext(' ');
+        itext('. A ');
         ie_open('code');
-          itext('Monoid');
+          itext('ReaderT');
         ie_close('code');
-        itext('s as a means of extraction. While the extraction is available, types that implement ');
+        itext(' of the underlying ');
         ie_open('code');
-          itext('valueOf');
+          itext('Monad');
         ie_close('code');
-        itext(' are not necessarily a');
-        ie_open('code');
-          itext('Comonad');
-        ie_close('code');
-        itext('. This function is used primarily for convenience for some of the helper functions that ship with ');
-        ie_open('code');
-          itext('crocks');
-        ie_close('code');
-        itext('. Calling ');
-        ie_open('code');
-          itext('valueOf');
-        ie_close('code');
-        itext(' on an ');
-        ie_open('code');
-          itext('Endo');
-        ie_close('code');
-        itext(' instance will result in the underlying endofunction.');
+        itext(' must be provided, which allows access to the environment.');
       ie_close('p');
-      $templateAlias2({code: 'import Endo from \'crocks/Endo\'\n\nimport filter from \'crocks/pointfree/filter\'\nimport map from \'crocks/pointfree/map\'\nimport mconcat from \'crocks/helpers/mconcat\'\n\n// lt10 :: [ Number ] -> [ Number ]\nconst lt10 =\n  filter(x => x < 10)\n\n// double :: [ Number ] -> [ Number ]\nconst double =\n  map(x => x * 2)\n\n// buildEndo :: [ (a -> a) ] -> Endo a\nconst buildEndo =\n  mconcat(Endo)\n\n// fn :: [ Number ] -> [ Number ]\nconst fn =\n  buildEndo([ lt10, double ])\n    .valueOf()\n\nfn([ 12, 5, 3, 90 ])\n//=> [ 10, 6 ]\n\nfn([])\n//=> []', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'import Pair from \'crocks/Pair\'\nimport ReaderT from \'crocks/Reader/ReaderT\'\nimport Result from \'crocks/Result\'\n\nimport fst from \'crocks/Pair/fst\'\nimport snd from \'crocks/Pair/snd\'\n\nimport ifElse from \'crocks/logic/ifElse\'\nimport isNumber from \'crocks/predicates/isNumber\'\nimport liftA2 from \'crocks/helpers/liftA2\'\n\nconst { Err, Ok } = Result\n\nconst ResultReader =\n  ReaderT(Result)\n\nconst { ask, liftFn } = ResultReader\n\n// add :: Number -> Number -> Number\nconst add =\n  x => y => x + y\n\n// makeError :: a -> Result [ String ] b\nconst makeErr =\n  x => Err([ `${x} is not a Number` ])\n\n// isValid :: a -> ReaderT e (Result [ String ] Number)\nconst isValid = liftFn(\n  ifElse(isNumber, Ok, makeErr)\n)\n\n// first :: ReaderT (Pair a b) (Result [ String ] Number)\nconst first =\n  ask(fst)\n    .chain(isValid)\n\n// second :: ReaderT (Pair a b) (Result [ String ] Number)\nconst second =\n  ask(snd)\n    .chain(isValid)\n\n// Using a fluent style with of\nResultReader.of(add)\n  .ap(first)\n  .ap(second)\n  .runWith(Pair(34, 21))\n//=> Ok 55\n\n// Using a fluent style with map\nfirst\n  .map(add)\n  .ap(second)\n  .runWith(Pair(true, 21))\n//=> Err [ "true is not a Number" ]\n\n// Using liftA2\nliftA2(add, first, second)\n  .runWith(Pair(\'Bob\', \'Jones\'))\n//=> Err [ \'Bob is not a Number\', \'Jones is not a Number\' ]', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'chain',
+            'href', '#chain');
+          itext('chain');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Monad m => ReaderT e (m a) ~> Reader e (a -> ReaderT e (m b)) -> ReaderT e (m b)', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        itext('Can be used to apply the effects of the underlying ');
+        ie_open('code');
+          itext('Monad');
+        ie_close('code');
+        itext(' with the benefit of being able to read from the environment. This method only accepts functions of the form ');
+        ie_open('code');
+          itext('Monad m => a -> ReaderT e (m b)');
+        ie_close('code');
+        itext('.');
+      ie_close('p');
+      $templateAlias2({code: 'import ReaderT from \'crocks/Reader/ReaderT\'\nimport Maybe from \'crocks/Maybe\'\nimport prop from \'crocks/Maybe/prop\'\n\nconst MaybeReader =\n  ReaderT(Maybe)\n\nconst { ask, liftFn } = MaybeReader\n\n// readProp :: String -> b -> ReaderT e (Maybe a)\nconst readProp = key =>\n  liftFn(prop(key))\n\n// getName :: ReaderT e (Maybe a)\nconst getName =\n  ask()\n    .chain(readProp(\'name\'))\n\n// getFirstName :: ReaderT e (Maybe a)\nconst getFirstName =\n  getName\n    .chain(readProp(\'first\'))\n\n// getLastName :: ReaderT e (Maybe a)\nconst getLastName =\n  getName\n    .chain(readProp(\'last\'))\n\n// person :: Object\nconst person = {\n  name: {\n    first: \'Hazel\',\n    middle: \'Anne\'\n  }\n}\n\ngetFirstName\n  .runWith(person)\n//=> Just "Hazel"\n\ngetLastName\n  .runWith(person)\n//=> Nothing\n\ngetLastName\n  .runWith(10)\n//=> Nothing', mode: 'javascript'}, null, opt_ijData);
       ie_open('h4');
         ie_open('a', null, null,
             'id', 'runwith',
@@ -28613,26 +28742,31 @@ function $render(opt_data, opt_ignored, opt_ijData) {
           itext('runWith');
         ie_close('a');
       ie_close('h4');
-      $templateAlias2({code: 'Endo a ~> a -> a', mode: 'haskell'}, null, opt_ijData);
+      $templateAlias2({code: 'Monad m => ReaderT e (m a) ~> e -> m a', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
+        itext('In order to unwrap the underlying ');
         ie_open('code');
-          itext('Endo');
+          itext('Monad');
         ie_close('code');
-        itext(' wraps a function and as such, its underlying endofunction can be run while inside of an ');
+        itext(', ');
         ie_open('code');
-          itext('Endo');
+          itext('ReaderT');
         ie_close('code');
-        itext(' by calling ');
+        itext(' needs to be ran with a given environment. A ');
+        ie_open('code');
+          itext('ReaderT');
+        ie_close('code');
+        itext(' instance comes equipped with a ');
         ie_open('code');
           itext('runWith');
         ie_close('code');
-        itext('. Providing a valid value of the same type required by the function, ');
+        itext(' method that accepts an environment and returns the resulting ');
         ie_open('code');
-          itext('runWith');
+          itext('Monad');
         ie_close('code');
-        itext(' will execute the underlying function and return the result.');
+        itext('.');
       ie_close('p');
-      $templateAlias2({code: 'import Endo from \'crocks/Endo\'\n\nimport filter from \'crocks/pointfree/filter\'\nimport map from \'crocks/pointfree/map\'\nimport mconcat from \'crocks/helpers/mconcat\'\n\n// lt10 :: [ Number ] -> [ Number ]\nconst lt10 =\n  filter(x => x < 10)\n\n// double :: [ Number ] -> [ Number ]\nconst double =\n  map(x => x * 2)\n\n// buildEndo :: [ (a -> a) ] -> Endo a\nconst flow =\n  mconcat(Endo, [ lt10, double ])\n\nflow\n  .runWith([ 12, 5, 3, 90 ])\n//=> [ 10, 6 ]\n\nflow\n  .runWith([])\n//=> []', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'import ReaderT from \'crocks/Reader/ReaderT\'\nimport Maybe from \'crocks/Maybe\'\n\nimport prop from \'crocks/Maybe/prop\'\n\nconst MaybeReader = ReaderT(Maybe)\nconst { ask, liftFn } = MaybeReader\n\n// data :: Object\nconst data = {\n  animals: [\n    \'tiger\', \'muskrat\', \'mouse\'\n  ]\n}\n\n// length :: Array -> Number\nconst length =\n  x => x.length\n\n// getProp :: String -> ReaderT Object (Maybe [])\nconst getProp = key =>\n  ask()\n    .chain(liftFn(prop(key)))\n\ngetProp(\'animals\')\n  .map(length)\n  .runWith(data)\n//=> Just 3', mode: 'javascript'}, null, opt_ijData);
     ie_close('article');
     ie_open('input', null, null,
         'type', 'hidden',
@@ -28643,11 +28777,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'value', opt_data.site.title);
     ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({content: param1938}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param1407}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'MkVPK.render';
+  $render.soyTemplateName = 'gTdWb.render';
 }
 
 exports.render.params = ["page","site"];
@@ -28657,14 +28791,27 @@ return exports;
 
 });
 
-class MkVPK extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(MkVPK, templates);
+class gTdWb extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(gTdWb, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
 
 
 /***/ }),
+/* 226 */,
+/* 227 */,
+/* 228 */,
+/* 229 */,
+/* 230 */,
+/* 231 */,
+/* 232 */,
+/* 233 */,
+/* 234 */,
+/* 235 */,
+/* 236 */,
+/* 237 */,
+/* 238 */,
 /* 239 */,
 /* 240 */,
 /* 241 */,
@@ -28683,17 +28830,7 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(MkVPK, templates);
 /* 254 */,
 /* 255 */,
 /* 256 */,
-/* 257 */,
-/* 258 */,
-/* 259 */,
-/* 260 */,
-/* 261 */,
-/* 262 */,
-/* 263 */,
-/* 264 */,
-/* 265 */,
-/* 266 */,
-/* 267 */
+/* 257 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28729,9 +28866,9 @@ __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _EndoSoy = __webpack_require__(238);
+var _ReaderTSoy = __webpack_require__(225);
 
-var _EndoSoy2 = _interopRequireDefault(_EndoSoy);
+var _ReaderTSoy2 = _interopRequireDefault(_ReaderTSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28741,23 +28878,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var MkVPK = function (_Component) {
-  _inherits(MkVPK, _Component);
+var gTdWb = function (_Component) {
+  _inherits(gTdWb, _Component);
 
-  function MkVPK() {
-    _classCallCheck(this, MkVPK);
+  function gTdWb() {
+    _classCallCheck(this, gTdWb);
 
-    return _possibleConstructorReturn(this, (MkVPK.__proto__ || Object.getPrototypeOf(MkVPK)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (gTdWb.__proto__ || Object.getPrototypeOf(gTdWb)).apply(this, arguments));
   }
 
-  return MkVPK;
+  return gTdWb;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(MkVPK, _EndoSoy2.default);
+_metalSoy2.default.register(gTdWb, _ReaderTSoy2.default);
 
-exports.default = MkVPK;
+exports.default = gTdWb;
 
 /***/ })
-],[267]);
+],[257]);

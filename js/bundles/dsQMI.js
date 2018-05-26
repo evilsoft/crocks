@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([5,31,32,33],[
+webpackJsonppageComponent([9,33,34,35],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19884,7 +19884,7 @@ if (goog.DEBUG) {
  * @return {void}
  * @suppress {checkTypes}
  */
-function __deltemplate_s174_d34389eb(opt_data, opt_ignored, opt_ijData) {
+function __deltemplate_s152_d34389eb(opt_data, opt_ignored, opt_ijData) {
   ie_open('a', null, null,
       'class', 'sidebar-link ' + (opt_data.page.active ? 'sidebar-link-selected' : ''),
       'href', opt_data.page.url);
@@ -19893,16 +19893,16 @@ function __deltemplate_s174_d34389eb(opt_data, opt_ignored, opt_ijData) {
           'class', 'sidebar-icon icon-16-' + opt_data.page.icon);
     }
     ie_open('span');
-      var dyn12 = opt_data.page.title;
-      if (typeof dyn12 == 'function') dyn12(); else if (dyn12 != null) itext(dyn12);
+      var dyn10 = opt_data.page.title;
+      if (typeof dyn10 == 'function') dyn10(); else if (dyn10 != null) itext(dyn10);
     ie_close('span');
   ie_close('a');
 }
-exports.__deltemplate_s174_d34389eb = __deltemplate_s174_d34389eb;
+exports.__deltemplate_s152_d34389eb = __deltemplate_s152_d34389eb;
 if (goog.DEBUG) {
-  __deltemplate_s174_d34389eb.soyTemplateName = 'Sidebar.__deltemplate_s174_d34389eb';
+  __deltemplate_s152_d34389eb.soyTemplateName = 'Sidebar.__deltemplate_s152_d34389eb';
 }
-soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'sidebar', 0, __deltemplate_s174_d34389eb);
+soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'sidebar', 0, __deltemplate_s152_d34389eb);
 
 exports.render.params = ["section","site"];
 exports.render.types = {"section":"any","site":"any"};
@@ -20091,8 +20091,8 @@ function $render(opt_data, opt_ignored, opt_ijData) {
       ie_void('span', null, null,
           'class', 'icon icon-16-clock');
       itext(' ');
-      var dyn13 = opt_data.time;
-      if (typeof dyn13 == 'function') dyn13(); else if (dyn13 != null) itext(dyn13);
+      var dyn11 = opt_data.time;
+      if (typeof dyn11 == 'function') dyn11(); else if (dyn11 != null) itext(dyn11);
     }
   ie_close('p');
 }
@@ -28371,14 +28371,12 @@ exports.default = parseFromAnchor;
 /* 237 */,
 /* 238 */,
 /* 239 */,
-/* 240 */,
-/* 241 */,
-/* 242 */
+/* 240 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SjLjW", function() { return SjLjW; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dsQMI", function() { return dsQMI; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28390,15 +28388,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var templates;
 goog.loadModule(function(exports) {
 
-// This file was automatically generated from Min.soy.
+// This file was automatically generated from Endo.soy.
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace SjLjW.
+ * @fileoverview Templates in namespace dsQMI.
  * @public
  */
 
-goog.module('SjLjW.incrementaldom');
+goog.module('dsQMI.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28432,23 +28430,41 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var param2270 = function() {
-    $templateAlias2({code: 'Min Number', mode: 'haskell'}, null, opt_ijData);
+  var param2224 = function() {
+    $templateAlias2({code: 'Endo a', mode: 'haskell'}, null, opt_ijData);
     ie_open('p');
       ie_open('code');
-        itext('Min');
+        itext('Endo');
       ie_close('code');
       itext(' is a ');
       ie_open('code');
         itext('Monoid');
       ie_close('code');
-      itext(' that will combines (2) ');
+      itext(' that will combine (2) functions that have matching domains and codomains (endofunctions) under function composition. Due to the nature of ');
       ie_open('code');
-        itext('Number');
+        itext('Endo');
       ie_close('code');
-      itext('s, resulting in the smallest of the two.');
+      itext(' wrapping a function, the underlying value can either be extracted using ');
+      ie_open('a', null, null,
+          'href', '#valueof');
+        ie_open('code');
+          itext('valueOf');
+        ie_close('code');
+      ie_close('a');
+      itext(' like any other ');
+      ie_open('code');
+        itext('Monoid');
+      ie_close('code');
+      itext(' or can be executed directly using ');
+      ie_open('a', null, null,
+          'href', '#runWith');
+        ie_open('code');
+          itext('runWith');
+        ie_close('code');
+      ie_close('a');
+      itext(', supplying the input.');
     ie_close('p');
-    $templateAlias2({code: 'import Min from \'crocks/Min\'\nimport mconcat from \'crocks/helpers/mconcat\'\n\nMin(76)\n//=> Min 76\n\nmconcat(Min, [ 95, 12, 56 ])\n//=> Min 12\n\nMin(100)\n  .concat(Min(10))\n//=> Min 10\n\nMin.empty()\n  .concat(Min(100))\n//=> Min 100', mode: 'javascript'}, null, opt_ijData);
+    $templateAlias2({code: 'import Endo from \'crocks/Endo\'\n\nimport curry from \'crocks/helpers/curry\'\nimport mconcat from \'crocks/helpers/mconcat\'\nimport valueOf from \'crocks/pointfree/valueOf\'\n\n// add :: Number -> Number -> Number\nconst add =\n  x => y => x + y\n\n// multiply :: Number -> Number -> Number\nconst multiply =\n  x => y => x * y\n\n// runEndo :: Endo a -> a -> a\nconst runEndo =\n  curry(valueOf)\n\n// flow :: Endo Number\nconst addAndDouble =\n  Endo(add(10))\n    .concat(Endo(multiply(2)))\n\n// always10 :: Endo Number\nconst always10 =\n  mconcat(Endo, [ add(100), multiply(0), add(10) ])\n\nrunEndo(addAndDouble, 5)\n//=> 30\n\nalways10\n  .runWith(75)\n//=> 10', mode: 'javascript'}, null, opt_ijData);
     ie_open('article', null, null,
         'id', 'topic-implements');
       ie_open('h2');
@@ -28459,10 +28475,6 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_close('a');
       ie_close('h2');
       ie_open('p');
-        ie_open('code');
-          itext('Setoid');
-        ie_close('code');
-        itext(', ');
         ie_open('code');
           itext('Semigroup');
         ie_close('code');
@@ -28488,7 +28500,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
           itext('empty');
         ie_close('a');
       ie_close('h4');
-      $templateAlias2({code: 'Min.empty :: () -> Min', mode: 'haskell'}, null, opt_ijData);
+      $templateAlias2({code: 'Endo.empty :: () -> Endo a', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
         ie_open('code');
           itext('empty');
@@ -28503,23 +28515,19 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_close('code');
         itext('ed to any other value, it will return the other value. In the case of ');
         ie_open('code');
-          itext('Min');
+          itext('Endo');
         ie_close('code');
         itext(' the result of ');
         ie_open('code');
           itext('empty');
         ie_close('code');
-        itext(' is ');
-        ie_open('code');
-          itext('Infinity');
-        ie_close('code');
-        itext('. ');
+        itext(' is the identity function, which echos its input. ');
         ie_open('code');
           itext('empty');
         ie_close('code');
         itext(' is available on both the Constructor and the Instance for convenience.');
       ie_close('p');
-      $templateAlias2({code: 'import Min from \'crocks/Min\'\n\nMin.empty()\n//=> Min Infinity\n\nMin.empty()\n  .concat(Min.empty())\n//=> Min Infinity\n\nMin(32)\n  .concat(Min.empty())\n//=> Min 32\n\nMin.empty()\n  .concat(Min(34))\n//=> Min 34', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'import Endo from \'crocks/Endo\'\n\nimport runWith from \'crocks/pointfree/runWith\'\n\n// empty :: Endo a\nconst empty = Endo.empty()\n\n// toUpper :: Endo String\nconst toUpper =\n  Endo(x => x.toUpperCase())\n\n// runNice :: Endo String -> String\nconst runNice =\n  runWith(\'nice\')\n\nrunNice(empty.concat(toUpper))\n//=> "NICE"\n\nrunNice(toUpper.concat(empty))\n//=> "NICE"', mode: 'javascript'}, null, opt_ijData);
     ie_close('article');
     ie_open('article', null, null,
         'id', 'topic-instance');
@@ -28532,56 +28540,12 @@ function $render(opt_data, opt_ignored, opt_ijData) {
       ie_close('h2');
       ie_open('h4');
         ie_open('a', null, null,
-            'id', 'equals',
-            'href', '#equals');
-          itext('equals');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Min a ~> b -> Boolean', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('Used to compare the underlying values of (2) ');
-        ie_open('code');
-          itext('Min');
-        ie_close('code');
-        itext(' instances for equality by value, ');
-        ie_open('code');
-          itext('equals');
-        ie_close('code');
-        itext(' takes any given argument and returns ');
-        ie_open('code');
-          itext('true');
-        ie_close('code');
-        itext(' if the passed argument is a ');
-        ie_open('code');
-          itext('Min');
-        ie_close('code');
-        itext(' with an underlying value equal to the underlying value of the ');
-        ie_open('code');
-          itext('Min');
-        ie_close('code');
-        itext(' the method is being called on. If the passed argument is not a ');
-        ie_open('code');
-          itext('Min');
-        ie_close('code');
-        itext(' or the underlying values are not equal, ');
-        ie_open('code');
-          itext('equals');
-        ie_close('code');
-        itext(' will return ');
-        ie_open('code');
-          itext('false');
-        ie_close('code');
-        itext('.');
-      ie_close('p');
-      $templateAlias2({code: 'import Min from \'crocks/Min\'\n\nMin(5)\n  .equals(Min(5))\n//=> true\n\nMin(25)\n  .equals(Min(31))\n//=> false', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
             'id', 'concat',
             'href', '#concat');
           itext('concat');
         ie_close('a');
       ie_close('h4');
-      $templateAlias2({code: 'Min ~> Min -> Min', mode: 'haskell'}, null, opt_ijData);
+      $templateAlias2({code: 'Endo a ~> Endo a -> Endo a', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
         ie_open('code');
           itext('concat');
@@ -28596,15 +28560,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_close('code');
         itext('. In the case of ');
         ie_open('code');
-          itext('Min');
+          itext('Endo');
         ie_close('code');
-        itext(', it will result in the smallest of the (2) ');
-        ie_open('code');
-          itext('Number');
-        ie_close('code');
-        itext('s.');
+        itext(', it will combine (2) endofunctions under function composition.');
       ie_close('p');
-      $templateAlias2({code: 'import Min from \'crocks/Min\'\n\nMin(50)\n  .concat(Min(24))\n//=> Min 24\n\nMin(-120)\n  .concat(Min(-50))\n//=> Min -120\n\nMin.empty()\n  .concat(Min(-Infinity))\n//=> Min -Infinity', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'import Endo from \'crocks/Endo\'\n\nimport assoc from \'crocks/helpers/assoc\'\nimport mapProps from \'crocks/helpers/mapProps\'\nimport objOf from \'crocks/helpers/objOf\'\n\n// inc :: Number -> Number\nconst inc =\n  x => x + 1\n\n// incValue :: Endo Object\nconst incValue =\n  Endo(mapProps({ value: inc }))\n\n// addDone :: Endo Object\nconst addDone =\n  Endo(assoc(\'done\', true))\n\n// finish :: Endo Object\nconst packResults =\n  Endo(objOf(\'results\'))\n\n// finish :: Endo Object\nconst finish =\n  incValue.concat(addDone)\n\nfinish.runWith({ value: 99 })\n//=> { value: 100, done: true }\n\nfinish\n  .concat(packResults)\n  .runWith({ value: 99 })\n//=> { results: { value: 100, done: true } }', mode: 'javascript'}, null, opt_ijData);
       ie_open('h4');
         ie_open('a', null, null,
             'id', 'valueof',
@@ -28612,7 +28572,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
           itext('valueOf');
         ie_close('a');
       ie_close('h4');
-      $templateAlias2({code: 'Min ~> () -> Number', mode: 'haskell'}, null, opt_ijData);
+      $templateAlias2({code: 'Endo a ~> () -> (a -> a)', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
         ie_open('code');
           itext('valueOf');
@@ -28641,17 +28601,40 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_open('code');
           itext('valueOf');
         ie_close('code');
-        itext(' on a ');
+        itext(' on an ');
         ie_open('code');
-          itext('Min');
+          itext('Endo');
         ie_close('code');
-        itext(' instance will result in the underlying ');
-        ie_open('code');
-          itext('Number');
-        ie_close('code');
-        itext('.');
+        itext(' instance will result in the underlying endofunction.');
       ie_close('p');
-      $templateAlias2({code: 'import Min from \'crocks/Min\'\n\nMin(33)\n  .valueOf()\n//=> 33\n\nMin.empty()\n  .valueOf()\n//=> Infinity\n\nMin(35)\n  .concat(Min(20))\n  .valueOf()\n//=> 20', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'import Endo from \'crocks/Endo\'\n\nimport filter from \'crocks/pointfree/filter\'\nimport map from \'crocks/pointfree/map\'\nimport mconcat from \'crocks/helpers/mconcat\'\n\n// lt10 :: [ Number ] -> [ Number ]\nconst lt10 =\n  filter(x => x < 10)\n\n// double :: [ Number ] -> [ Number ]\nconst double =\n  map(x => x * 2)\n\n// buildEndo :: [ (a -> a) ] -> Endo a\nconst buildEndo =\n  mconcat(Endo)\n\n// fn :: [ Number ] -> [ Number ]\nconst fn =\n  buildEndo([ lt10, double ])\n    .valueOf()\n\nfn([ 12, 5, 3, 90 ])\n//=> [ 10, 6 ]\n\nfn([])\n//=> []', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'runwith',
+            'href', '#runwith');
+          itext('runWith');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Endo a ~> a -> a', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        ie_open('code');
+          itext('Endo');
+        ie_close('code');
+        itext(' wraps a function and as such, its underlying endofunction can be run while inside of an ');
+        ie_open('code');
+          itext('Endo');
+        ie_close('code');
+        itext(' by calling ');
+        ie_open('code');
+          itext('runWith');
+        ie_close('code');
+        itext('. Providing a valid value of the same type required by the function, ');
+        ie_open('code');
+          itext('runWith');
+        ie_close('code');
+        itext(' will execute the underlying function and return the result.');
+      ie_close('p');
+      $templateAlias2({code: 'import Endo from \'crocks/Endo\'\n\nimport filter from \'crocks/pointfree/filter\'\nimport map from \'crocks/pointfree/map\'\nimport mconcat from \'crocks/helpers/mconcat\'\n\n// lt10 :: [ Number ] -> [ Number ]\nconst lt10 =\n  filter(x => x < 10)\n\n// double :: [ Number ] -> [ Number ]\nconst double =\n  map(x => x * 2)\n\n// buildEndo :: [ (a -> a) ] -> Endo a\nconst flow =\n  mconcat(Endo, [ lt10, double ])\n\nflow\n  .runWith([ 12, 5, 3, 90 ])\n//=> [ 10, 6 ]\n\nflow\n  .runWith([])\n//=> []', mode: 'javascript'}, null, opt_ijData);
     ie_close('article');
     ie_open('input', null, null,
         'type', 'hidden',
@@ -28662,11 +28645,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'value', opt_data.site.title);
     ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({content: param2270}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param2224}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'SjLjW.render';
+  $render.soyTemplateName = 'dsQMI.render';
 }
 
 exports.render.params = ["page","site"];
@@ -28676,14 +28659,16 @@ return exports;
 
 });
 
-class SjLjW extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(SjLjW, templates);
+class dsQMI extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(dsQMI, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
 
 
 /***/ }),
+/* 241 */,
+/* 242 */,
 /* 243 */,
 /* 244 */,
 /* 245 */,
@@ -28709,7 +28694,15 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(SjLjW, templates);
 /* 265 */,
 /* 266 */,
 /* 267 */,
-/* 268 */
+/* 268 */,
+/* 269 */,
+/* 270 */,
+/* 271 */,
+/* 272 */,
+/* 273 */,
+/* 274 */,
+/* 275 */,
+/* 276 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28745,9 +28738,9 @@ __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _MinSoy = __webpack_require__(242);
+var _EndoSoy = __webpack_require__(240);
 
-var _MinSoy2 = _interopRequireDefault(_MinSoy);
+var _EndoSoy2 = _interopRequireDefault(_EndoSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28757,23 +28750,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var SjLjW = function (_Component) {
-  _inherits(SjLjW, _Component);
+var dsQMI = function (_Component) {
+  _inherits(dsQMI, _Component);
 
-  function SjLjW() {
-    _classCallCheck(this, SjLjW);
+  function dsQMI() {
+    _classCallCheck(this, dsQMI);
 
-    return _possibleConstructorReturn(this, (SjLjW.__proto__ || Object.getPrototypeOf(SjLjW)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (dsQMI.__proto__ || Object.getPrototypeOf(dsQMI)).apply(this, arguments));
   }
 
-  return SjLjW;
+  return dsQMI;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(SjLjW, _MinSoy2.default);
+_metalSoy2.default.register(dsQMI, _EndoSoy2.default);
 
-exports.default = SjLjW;
+exports.default = dsQMI;
 
 /***/ })
-],[268]);
+],[276]);

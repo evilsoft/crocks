@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([10,31,32,33],[
+webpackJsonppageComponent([12,33,34,35],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19884,7 +19884,7 @@ if (goog.DEBUG) {
  * @return {void}
  * @suppress {checkTypes}
  */
-function __deltemplate_s174_d34389eb(opt_data, opt_ignored, opt_ijData) {
+function __deltemplate_s152_d34389eb(opt_data, opt_ignored, opt_ijData) {
   ie_open('a', null, null,
       'class', 'sidebar-link ' + (opt_data.page.active ? 'sidebar-link-selected' : ''),
       'href', opt_data.page.url);
@@ -19893,16 +19893,16 @@ function __deltemplate_s174_d34389eb(opt_data, opt_ignored, opt_ijData) {
           'class', 'sidebar-icon icon-16-' + opt_data.page.icon);
     }
     ie_open('span');
-      var dyn12 = opt_data.page.title;
-      if (typeof dyn12 == 'function') dyn12(); else if (dyn12 != null) itext(dyn12);
+      var dyn10 = opt_data.page.title;
+      if (typeof dyn10 == 'function') dyn10(); else if (dyn10 != null) itext(dyn10);
     ie_close('span');
   ie_close('a');
 }
-exports.__deltemplate_s174_d34389eb = __deltemplate_s174_d34389eb;
+exports.__deltemplate_s152_d34389eb = __deltemplate_s152_d34389eb;
 if (goog.DEBUG) {
-  __deltemplate_s174_d34389eb.soyTemplateName = 'Sidebar.__deltemplate_s174_d34389eb';
+  __deltemplate_s152_d34389eb.soyTemplateName = 'Sidebar.__deltemplate_s152_d34389eb';
 }
-soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'sidebar', 0, __deltemplate_s174_d34389eb);
+soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'sidebar', 0, __deltemplate_s152_d34389eb);
 
 exports.render.params = ["section","site"];
 exports.render.types = {"section":"any","site":"any"};
@@ -20091,8 +20091,8 @@ function $render(opt_data, opt_ignored, opt_ijData) {
       ie_void('span', null, null,
           'class', 'icon icon-16-clock');
       itext(' ');
-      var dyn13 = opt_data.time;
-      if (typeof dyn13 == 'function') dyn13(); else if (dyn13 != null) itext(dyn13);
+      var dyn11 = opt_data.time;
+      if (typeof dyn11 == 'function') dyn11(); else if (dyn11 != null) itext(dyn11);
     }
   ie_close('p');
 }
@@ -28373,7 +28373,7 @@ exports.default = parseFromAnchor;
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "auTug", function() { return auTug; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "kMoKX", function() { return kMoKX; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28385,15 +28385,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var templates;
 goog.loadModule(function(exports) {
 
-// This file was automatically generated from Assign.soy.
+// This file was automatically generated from All.soy.
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace auTug.
+ * @fileoverview Templates in namespace kMoKX.
  * @public
  */
 
-goog.module('auTug.incrementaldom');
+goog.module('kMoKX.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28427,27 +28427,31 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var param1880 = function() {
-    $templateAlias2({code: 'Assign Object', mode: 'haskell'}, null, opt_ijData);
+  var param2050 = function() {
+    $templateAlias2({code: 'All Boolean', mode: 'haskell'}, null, opt_ijData);
     ie_open('p');
       ie_open('code');
-        itext('Assign');
+        itext('All');
       ie_close('code');
       itext(' is a ');
       ie_open('code');
         itext('Monoid');
       ie_close('code');
-      itext(' that will combine (2) objects under assignment using');
+      itext(' that will combine (2) values of any type using logical conjunction (AND) on their coerced ');
       ie_open('code');
-        itext('Object.assign');
+        itext('Boolean');
       ie_close('code');
-      itext(' on the (2) ');
+      itext(' values, mapping truth-y values to');
       ie_open('code');
-        itext('Object');
+        itext('true');
       ie_close('code');
-      itext('s.');
+      itext(' and false-y values to ');
+      ie_open('code');
+        itext('false');
+      ie_close('code');
+      itext('.');
     ie_close('p');
-    $templateAlias2({code: 'import Assign from \'crocks/Assign\'\n\nconst first = { name: \'Bob\' }\nconst last = { lastName: \'Smith\' }\n\nAssign(first)\n  .concat(Assign(last))\n//=> Assign { name: \'Bob\', lastName: \'Smith\' }', mode: 'javascript'}, null, opt_ijData);
+    $templateAlias2({code: 'import All from \'crocks/All\'\n\nimport mconcat from \'crocks/helpers/mconcat\'\n\nconst trueNum = All(13)\nconst falseNum = All(0)\nconst trueString = All(\'So true\')\n\ntrueNum.concat(falseNum)\n//=> All false\n\ntrueNum.concat(trueString)\n//=> All true\n\nconst allGood =\n  mconcat(All)\n\nallGood([ 1, 5, 89 ])\n//=> All true\n\nallGood([ \'nice\', \'00\', null ])\n//=> All false', mode: 'javascript'}, null, opt_ijData);
     ie_open('article', null, null,
         'id', 'topic-implements');
       ie_open('h2');
@@ -28487,7 +28491,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
           itext('empty');
         ie_close('a');
       ie_close('h4');
-      $templateAlias2({code: 'Assign.empty :: () -> Assign', mode: 'haskell'}, null, opt_ijData);
+      $templateAlias2({code: 'All.empty :: () -> All', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
         ie_open('code');
           itext('empty');
@@ -28500,17 +28504,17 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_open('code');
           itext('concat');
         ie_close('code');
-        itext('ed to object other value, it will return the other value. In the case of ');
+        itext('ed to any other value, it will return the other value. In the case of ');
         ie_open('code');
-          itext('Assign');
+          itext('All');
         ie_close('code');
         itext(' the result of ');
         ie_open('code');
           itext('empty');
         ie_close('code');
-        itext(' is an empty ');
+        itext(' is ');
         ie_open('code');
-          itext('Object');
+          itext('true');
         ie_close('code');
         itext('. ');
         ie_open('code');
@@ -28518,7 +28522,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_close('code');
         itext(' is available on both the Constructor and the Instance for convenience.');
       ie_close('p');
-      $templateAlias2({code: 'import Assign from \'crocks/Assign\'\n\nAssign.empty()\n//=> Assign {}\n\nAssign({})\n  .concat(Assign.empty())\n//=> Assign {}\n\nAssign({ a: 1 })\n  .concat(Assign.empty())\n//=> Assign { a: 1 }', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'import All from \'crocks/All\'\n\nAll.empty() //=> All true\n\nAll(true).concat(All.empty())   //=> All true\nAll(false).concat(All.empty())  //=> All false', mode: 'javascript'}, null, opt_ijData);
     ie_close('article');
     ie_open('article', null, null,
         'id', 'topic-instance');
@@ -28536,11 +28540,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
           itext('equals');
         ie_close('a');
       ie_close('h4');
-      $templateAlias2({code: 'Assign a ~> b -> Boolean', mode: 'haskell'}, null, opt_ijData);
+      $templateAlias2({code: 'All a ~> b -> Boolean', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
         itext('Used to compare the underlying values of (2) ');
         ie_open('code');
-          itext('Assign');
+          itext('All');
         ie_close('code');
         itext(' instances for equality by value, ');
         ie_open('code');
@@ -28552,15 +28556,15 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_close('code');
         itext(' if the passed argument is an ');
         ie_open('code');
-          itext('Assign');
+          itext('All');
         ie_close('code');
         itext(' with an underlying value equal to the underlying value of the ');
         ie_open('code');
-          itext('Assign');
+          itext('All');
         ie_close('code');
         itext(' the method is being called on. If the passed argument is not an ');
         ie_open('code');
-          itext('Assign');
+          itext('All');
         ie_close('code');
         itext(' or the underlying values are not equal, ');
         ie_open('code');
@@ -28572,7 +28576,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_close('code');
         itext('.');
       ie_close('p');
-      $templateAlias2({code: 'import Assign from \'crocks/Assign\'\n\nAssign({ a: 5 })\n  .equals(Assign({ a: 5 }))\n//=> true\n\nAssign({ a: 5 })\n  .equals(Assign({ a: 15 }))\n//=> false', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'import All from \'crocks/All\'\n\nAll(true)\n  .equals(All(true))\n//=> true\n\nAll(true)\n  .equals(All(false))\n//=> false', mode: 'javascript'}, null, opt_ijData);
       ie_open('h4');
         ie_open('a', null, null,
             'id', 'concat',
@@ -28580,7 +28584,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
           itext('concat');
         ie_close('a');
       ie_close('h4');
-      $templateAlias2({code: 'Assign ~> Assign -> Assign', mode: 'haskell'}, null, opt_ijData);
+      $templateAlias2({code: 'All ~> All -> All', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
         ie_open('code');
           itext('concat');
@@ -28595,19 +28599,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_close('code');
         itext('. In the case of ');
         ie_open('code');
-          itext('Assign');
+          itext('All');
         ie_close('code');
-        itext(', it will combine (2) objects, overwriting the first ');
-        ie_open('code');
-          itext('Object');
-        ie_close('code');
-        itext('\'s previous values with the values of the second ');
-        ie_open('code');
-          itext('Object');
-        ie_close('code');
-        itext('.');
+        itext(', it will combine the (2) using logical AND (conjunction).');
       ie_close('p');
-      $templateAlias2({code: 'import Assign from \'crocks/Assign\'\n\nAssign({})\n  .concat(Assign({}))\n//=> Assign {}\n\nAssign({ a: 1 })\n  .concat(Assign({ b: 2 }))\n//=> Assign { a: 1, b: 2 }\n\nAssign({ a: 1, b: 2 })\n  .concat(Assign({ a: 3, b: 4 }))\n//=> Assign { a: 3, b: 4 }\n\nAssign({ b: 4 })\n  .concat(Assign({ a: 1 }))\n//=> Assign { b: 4, a: 1 }', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'import All from \'crocks/All\'\n\nAll(true).concat(All(true))   //=> All true\nAll(true).concat(All(false))  //=> All false\nAll(false).concat(All(true))  //=> All false\nAll(false).concat(All(false)) //=> All false', mode: 'javascript'}, null, opt_ijData);
       ie_open('h4');
         ie_open('a', null, null,
             'id', 'valueof',
@@ -28615,7 +28611,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
           itext('valueOf');
         ie_close('a');
       ie_close('h4');
-      $templateAlias2({code: 'Assign ~> () -> Object', mode: 'haskell'}, null, opt_ijData);
+      $templateAlias2({code: 'All ~> () -> Boolean', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
         ie_open('code');
           itext('valueOf');
@@ -28632,7 +28628,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_open('code');
           itext('valueOf');
         ie_close('code');
-        itext(' are not necessarily a ');
+        itext(' are not necessarily a');
         ie_open('code');
           itext('Comonad');
         ie_close('code');
@@ -28644,17 +28640,17 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_open('code');
           itext('valueOf');
         ie_close('code');
-        itext('on an ');
+        itext(' on an ');
         ie_open('code');
-          itext('Assign');
+          itext('All');
         ie_close('code');
         itext(' instance will result in the underlying ');
         ie_open('code');
-          itext('Object');
+          itext('Boolean');
         ie_close('code');
-        itext('.');
+        itext(' value.');
       ie_close('p');
-      $templateAlias2({code: 'import Assign from \'crocks/Assign\'\n\nAssign({})\n  .valueOf()\n//=> {}\n\nAssign({ a: 1 })\n  .valueOf()\n//=> { a: 1 }\n\nAssign({ a: 1 })\n  .concat({ b: 25 })\n  .valueOf()\n//=> { a: 1, b: 25 }', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'import All from \'crocks/All\'\n\nAll(0).valueOf()          //=> false\nAll(\'string\').valueOf() //=> true\n\n//=> false\nAll(true)\n  .concat(\'\')\n  .valueOf()', mode: 'javascript'}, null, opt_ijData);
     ie_close('article');
     ie_open('input', null, null,
         'type', 'hidden',
@@ -28665,11 +28661,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'value', opt_data.site.title);
     ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({content: param1880}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param2050}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'auTug.render';
+  $render.soyTemplateName = 'kMoKX.render';
 }
 
 exports.render.params = ["page","site"];
@@ -28679,8 +28675,8 @@ return exports;
 
 });
 
-class auTug extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(auTug, templates);
+class kMoKX extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(kMoKX, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
@@ -28719,7 +28715,14 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(auTug, templates);
 /* 267 */,
 /* 268 */,
 /* 269 */,
-/* 270 */
+/* 270 */,
+/* 271 */,
+/* 272 */,
+/* 273 */,
+/* 274 */,
+/* 275 */,
+/* 276 */,
+/* 277 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28755,9 +28758,9 @@ __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _AssignSoy = __webpack_require__(237);
+var _AllSoy = __webpack_require__(237);
 
-var _AssignSoy2 = _interopRequireDefault(_AssignSoy);
+var _AllSoy2 = _interopRequireDefault(_AllSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28767,23 +28770,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var auTug = function (_Component) {
-  _inherits(auTug, _Component);
+var kMoKX = function (_Component) {
+  _inherits(kMoKX, _Component);
 
-  function auTug() {
-    _classCallCheck(this, auTug);
+  function kMoKX() {
+    _classCallCheck(this, kMoKX);
 
-    return _possibleConstructorReturn(this, (auTug.__proto__ || Object.getPrototypeOf(auTug)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (kMoKX.__proto__ || Object.getPrototypeOf(kMoKX)).apply(this, arguments));
   }
 
-  return auTug;
+  return kMoKX;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(auTug, _AssignSoy2.default);
+_metalSoy2.default.register(kMoKX, _AllSoy2.default);
 
-exports.default = auTug;
+exports.default = kMoKX;
 
 /***/ })
-],[270]);
+],[277]);

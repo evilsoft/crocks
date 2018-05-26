@@ -8,7 +8,7 @@ weight: 2
 
 The `crocks` are the heart and soul of this library. This is where you will find
 all your favorite ADT's you have grown to love. They include gems such as:
-[`Maybe`][maybe], `Either` and `IO`, to name a few. The are usually just a simple
+[`Maybe`][maybe], `Either` and `IO`, to name a few. They are usually just a simple
 constructor that takes either a function or value (depending on the type)
 and will return you a "container" that wraps whatever you passed it. Each
 container provides a variety of functions that act as the operations you can do

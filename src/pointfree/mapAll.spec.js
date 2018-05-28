@@ -14,6 +14,7 @@ const mapAll = require('./mapAll')
 
 test('mapAll pointfree', t => {
   const f = bindFunc(mapAll)
+  const g = bindFunc(mapAll(identity))
   const x = () => 'result'
   const m = { mapAll: sinon.spy(constant(x)) }
 
@@ -34,7 +35,21 @@ test('mapAll pointfree', t => {
   t.ok(isFunction(f(unit)), 'returns a function when passed a single function')
   t.ok(isFunction(f(unit, unit, unit)), 'returns a function when passed multiple functions')
 
+  const err1 = /mapAll: Tuple required/
+  t.throws(g(undefined), err1, 'throws if passed undefined')
+  t.throws(g(null), err1, 'throws if passed null')
+  t.throws(g(0), err1, 'throws if passed a falsey number')
+  t.throws(g(1), err1, 'throws if passed a truthy number')
+  t.throws(g(''), err1, 'throws if passed a falsey string')
+  t.throws(g('string'), err1, 'throws if passed a truthy string')
+  t.throws(g(false), err1, 'throws if passed false')
+  t.throws(g(true), err1, 'throws if passed true')
+  t.throws(g([]), err1, 'throws if passed an array')
+  t.throws(g({}), err1, 'throws if passed an object')
+  t.throws(g(unit), err1, 'throws if passed a function')
+
   mapAll(identity)(m)
+
   t.ok(m.mapAll.called, 'calls mapAll on the passed container')
 
   t.end()

@@ -8,17 +8,18 @@ const isFunction = require('../core/isFunction')
 const unit = require('../core/_unit')
 
 const constant = x => () => x
+const identity = x => x
 
-const project = require('./project')
+const mapAll = require('./mapAll')
 
-test('project pointfree', t => {
-  const f = bindFunc(project)
-  const x = 'result'
-  const m = { project: sinon.spy(constant(x)) }
+test('mapAll pointfree', t => {
+  const f = bindFunc(mapAll)
+  const x = () => 'result'
+  const m = { mapAll: sinon.spy(constant(x)) }
 
-  t.ok(isFunction(project), 'is a function')
+  t.ok(isFunction(mapAll), 'is a function')
 
-  const err = /project: Tuple required/
+  const err = /mapAll: All arguments must be Functions/
   t.throws(f(undefined), err, 'throws if passed undefined')
   t.throws(f(null), err, 'throws if passed null')
   t.throws(f(0), err, 'throws if passed a falsey number')
@@ -29,12 +30,12 @@ test('project pointfree', t => {
   t.throws(f(true), err, 'throws if passed true')
   t.throws(f([]), err, 'throws if passed an array')
   t.throws(f({}), err, 'throws if passed an object')
-  t.throws(f(unit), err, 'throws if passed a function')
 
-  const result = project(m)
+  t.ok(isFunction(f(unit)), 'returns a function when passed a single function')
+  t.ok(isFunction(f(unit, unit, unit)), 'returns a function when passed multiple functions')
 
-  t.ok(m.project.called, 'calls project on the passed container')
-  t.equal(result, x, 'returns the result of calling m.project')
+  mapAll(identity)(m)
+  t.ok(m.mapAll.called, 'calls mapAll on the passed container')
 
   t.end()
 })

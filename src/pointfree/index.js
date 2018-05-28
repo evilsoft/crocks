@@ -22,6 +22,7 @@ module.exports = {
   head: require('./head'),
   log: require('../Writer/log'),
   map: require('./map'),
+  mapAll: require('./mapAll'),
   merge: require('../pointfree/merge'),
   option: require('./option'),
   project: require('./project'),

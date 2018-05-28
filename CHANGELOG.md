@@ -1,5 +1,29 @@
 # Change Log for `crocks`
 
+v0.9.4 -- May 25, 2018
+--
+
+### Additions
+* Documentation:
+  * `Const`
+  * `Pair`
+
+### Modifications
+* `inspect` now displays key/value pairs for objects.
+* `Async` cancel works for flows that reuse instances.
+* Function provided to the default `Async` constructor can now return a function
+to be called when cancelled.
+
+### Pull Requests
+* [#265 - Make inspect method stringify objects](https://github.com/evilsoft/crocks/pull/265)
+* [#268 - Time to Upgrade](https://github.com/evilsoft/crocks/pull/268)
+* [#270 - Update Async.md](https://github.com/evilsoft/crocks/pull/270)
+* [#271 - Update README.md](https://github.com/evilsoft/crocks/pull/271)
+* [#266 - Initialize Async cancel state in call to fork](https://github.com/evilsoft/crocks/pull/266)
+* [#248 - Adding new md for Const](https://github.com/evilsoft/crocks/pull/248)
+* [#274 - Add Pair Documentation](https://github.com/evilsoft/crocks/pull/274)
+* [#273 - Update index.md](https://github.com/evilsoft/crocks/pull/273)
+
 v0.9.3 -- April 19, 2018
 --
 

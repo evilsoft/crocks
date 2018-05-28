@@ -57,23 +57,6 @@ if you need to constrain to more than (2) arguments, then you will want to reach
 for  [`nAry`](#nary). `binary` is basically syntactic sugar for `nAry(2, fn)`.
 Also related is [`unary`](#unary), which constrains to (1) argument.
 
-#### branch
-
-`crocks/Pair/branch`
-
-```haskell
-branch :: a -> Pair a a
-```
-When you want to branch a computation into two parts, this is the function you
-want to reach for. All it does is let you pass in any `a` and will return you a
-`Pair` that has your value on both the first and second parameter. This allows
-you to work on the value in two separate computation paths. Be advised that this
-is Javascript and if `a` is an object type (`Object`, `Array`, `Date`, etc) they
-will reference each other.
-
-**Pro-Tip**: `Pair` provides a `merge` function that will let you fold the two
-values into a single value.
-
 #### compose
 
 `crocks/helpers/compose`
@@ -336,7 +319,7 @@ to the first portion of the underlying `Pair` and the second on the second.
 fromPairs :: Foldable f => f (Pair String a) -> Object
 ```
 
-As an inverse to [`toPairs`](#topairs), `fromPairs` takes either an `Array` or
+As an inverse to [`toPairs`][topairs], `fromPairs` takes either an `Array` or
 `List` of key-value `Pair`s and constructs an `Object` from it. The `Pair` must
 contain a `String` in the `fst` and any type of value in the `snd`. The `fst`
 will become the key for the value in the `snd`. All primitive values are copied
@@ -962,23 +945,6 @@ is passed along to the next step of your flow. This function does not guarantee
 immutability for reference types (`Objects`, `Arrays`, etc), you will need to
 exercise some discipline here to not mutate.
 
-#### toPairs
-
-`crocks/Pair/toPairs`
-
-```haskell
-toPairs :: Object -> List (Pair String a)
-```
-
-When dealing with `Object`s, sometimes it makes more sense to work in a
-`Foldable` structure like a `List` of key-value `Pair`s. `toPairs` provides a
-means to take an object and give you back a `List` of `Pairs` that have a
-`String` that represents the key in the `fst` and the value for that key in the
-`snd`. The primitive values are copied, while non-primitive values are
-references. Like most of the `Object` functions in `crocks`, any keys with
-`undefined` values will be omitted from the result. `crocks` provides an inverse
-to this function named [`fromPairs`](#frompairs).
-
 #### tryCatch
 
 `crocks/Result/tryCatch`
@@ -1024,3 +990,4 @@ represent some special value for a given type. This pointed use is the heart and
 soul of the infamous `Maybe` type.
 
 [safe]: ../crocks/Maybe.html#safe
+[topairs]: ../crocks/Pair.html#topairs

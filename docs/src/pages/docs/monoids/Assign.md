@@ -31,6 +31,26 @@ Assign(first)
 
 </article>
 
+<article id="topic-construction">
+
+## Construction
+
+```haskell
+Assign :: Object -> Assign Object
+```
+
+`Assign` is constructed by calling the constructor with an `Object` instance,
+returning a new `Assign`, wrapping the reference to the provided `Object`.
+
+```javascript
+import Assign from 'crocks/Assign'
+
+Assign({ a: 123, b: false })
+//=> Assign({ a: 123, b: false })
+```
+
+</article>
+
 <article id="topic-constructor">
 
 ## Constructor Methods

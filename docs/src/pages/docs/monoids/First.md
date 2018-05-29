@@ -22,11 +22,12 @@ constructor will be lifted as is, allowing the ability to "choose" a value based
 on some disjunction.
 
 While most `Monoid`s only provide a [`valueOf`](#valueof) function used for
-extraction, `First` takes advantage of its underlying [`Maybe`][maybe] to provide an
-additional [`option`](#option) method. Using [`valueOf`](#valueof) will extract
-the underlying [`Maybe`][maybe], while [`option`](#option) will extract the underlying
-value in the[`Maybe`][maybe], using the provided default value when the underlying
-[`Maybe`][maybe] is a [`Nothing`][nothing] instance.
+extraction, `First` takes advantage of its underlying [`Maybe`][maybe] to
+provide an additional [`option`](#option) method.
+Using [`valueOf`](#valueof) will extract the underlying [`Maybe`][maybe],
+while [`option`](#option) will extract the underlying value in
+the [`Maybe`][maybe], using the provided default value when the
+underlying [`Maybe`][maybe] is a [`Nothing`][nothing] instance.
 
 ```javascript
 import First from 'crocks/First'
@@ -62,6 +63,45 @@ chooseFirst([ 'a', 'b', 'c' ])
 ## Implements
 
 `Setoid`, `Semigroup`, `Monoid`
+
+</article>
+
+<article id="topic-construction">
+
+## Construction
+
+```haskell
+First :: a -> First (Maybe a)
+First :: Maybe a -> First (Maybe a)
+```
+
+There are two ways to construct a `First` instance using the constructor. The
+first requires that you provide any value (excluding a `Maybe a`) and you will
+get back a new `First` instance, wrapping a `Just a`. All values provided, will
+become a `Just` of the provided type, unless a `Maybe a` is provided.
+
+The second way to construct a `First` is by providing a `Maybe a`. This allows
+the user to programmatically  provide an `empty` case to a given `First` by
+passing a `Nothing`.
+
+```javascript
+import First from 'crocks/First'
+import Maybe from 'crocks/Maybe'
+
+const { Just, Nothing } = Maybe
+
+First(Just(22))
+//=> First( Just 22 )
+
+First(Nothing())
+//=> First( Nothing )
+
+First(undefined)
+//=> First( Just undefined )
+
+First('string')
+//=> First( Just "string" )
+```
 
 </article>
 

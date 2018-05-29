@@ -45,6 +45,34 @@ allGood([ 'nice', '00', null ])
 
 </article>
 
+<article id="topic-construction">
+
+## Construction
+
+```haskell
+All :: a -> All Boolean
+```
+
+`All` is constructed by calling the constructor with any type `a`. This will
+return an `All` wrapping the provided value, coerced to a `Boolean`. For
+example, providing a non-zero `Number` will result in an `All(true)`. While
+passing a zero results in an `All(false)`.
+
+```javascript
+import All from 'crocks/All'
+
+All('')
+//=> All(false)
+
+All('string')
+//=> All(true)
+
+All({ a: 0 })
+//=> All(true)
+```
+
+</article>
+
 <article id="topic-constructor">
 
 ## Constructor Methods

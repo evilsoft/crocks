@@ -39,6 +39,41 @@ Max.empty()
 
 </article>
 
+<article id="topic-construction">
+
+## Construction
+
+```haskell
+Max :: Number -> Max Number
+```
+
+`Max` is a `Monoid` fixed to the type of `Number` and as such requires
+a `Number` instance to be passed to the constructor. A new `Max` instance is
+returned, wrapping the provided `Number`.
+
+The values `undefined`, `null` and `NaN` will map to the `empty` (`-Infinity`)
+instead of throwing a `TypeError`.
+
+```javascript
+import Max from 'crocks/Max'
+
+import equals from 'crocks/pointfree/equals'
+
+Max(99)
+//=> Max 99
+
+Max(Infinity)
+//=> Max Infinity
+
+Max(null)
+//=> Max -Infinity
+
+equals(Max(undefined), Max.empty())
+//=> true
+```
+
+</article>
+
 <article id="topic-constructor">
 
 ## Constructor Methods

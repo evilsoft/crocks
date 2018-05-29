@@ -63,6 +63,45 @@ chooseLast([ 'a', 'b', 'c' ])
 
 </article>
 
+<article id="topic-construction">
+
+## Construction
+
+```haskell
+Last :: a -> Last (Maybe a)
+Last :: Maybe a -> Last (Maybe a)
+```
+
+There are two ways to construct a `Last` instance using the constructor. The
+first requires that you provide any value (excluding a `Maybe a`) and will
+give back a new `Last` instance, wrapping a `Just a`. All values provided, will
+become a `Just` of the provided type, unless a `Maybe a` is provided.
+
+The second way to construct a `Last` is by providing a `Maybe a`. This allows
+the user to programmatically  provide an `empty` case to a given `Last` by
+passing a `Nothing`.
+
+```javascript
+import Last from 'crocks/Last'
+import Maybe from 'crocks/Maybe'
+
+const { Just, Nothing } = Maybe
+
+Last(Just([ 1, 2, 3 ]))
+//=> Last( Just [ 1, 2, 3 ] )
+
+Last(Nothing())
+//=> Last( Nothing )
+
+Last(null)
+//=> Last( Just null )
+
+Last(false)
+//=> Last( Just false )
+```
+
+</article>
+
 <article id="topic-constructor">
 
 ## Constructor Methods

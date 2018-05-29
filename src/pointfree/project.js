@@ -1,4 +1,4 @@
-/** @license ISC License (c) copyright 2016 original and current authors */
+/** @license ISC License (c) copyright 2018 original and current authors */
 /** @author Karthik Iyengar (karthikiyengar) */
 
 const isFunction = require('../core/isFunction')

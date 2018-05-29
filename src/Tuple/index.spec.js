@@ -18,12 +18,12 @@ test('Tuple core', t => {
   const x = Tuple(3)(0, 0, 0)
 
   t.ok(isFunction(Tuple), 'is a function')
+  t.ok(isString(Tuple['@@type']), 'provides a @@type string on the constructor')
+
   t.ok(isObject(x), 'returns an object')
-
-  t.ok(isFunction(x.constructor), 'provides TypeRep on constructor')
-
-  t.ok(isFunction(x.type), 'provides a type function')
-  t.ok(isString(x['@@type']), 'provides a @@type string')
+  t.ok(isFunction(x.constructor), 'provides TypeRep on instance')
+  t.ok(isFunction(x.type), 'provides a type function on the instance')
+  t.ok(isString(x['@@type']), 'provides a @@type string on the instance')
 
   t.end()
 })
@@ -81,7 +81,7 @@ test('Tuple fantasy-land api', t => {
 })
 
 test('Tuple @@implements', t => {
-  const f = Tuple(1)(0)['@@implements']
+  const f = Tuple['@@implements']
 
   t.equal(f('equals'), true, 'implements equals func')
   t.equal(f('map'), true, 'implements map func')
@@ -123,10 +123,10 @@ test('Tuple project', t => {
   t.ok(isFunction(tuple.project), 'is a function')
 
   const project = bindFunc(tuple.project)
-  const err = /3-Tuple.project: Index should be an integer between 2 and 3/
+  const err = /3-Tuple.project: Index should be an integer between 1 and 3/
 
-  t.throws(project(0), err, 'throws with index less than 2')
-  t.throws(project(6), err, 'throws with index less than tuple length')
+  t.throws(project(0), err, 'throws with index less than 1')
+  t.throws(project(6), err, 'throws with index more than tuple length')
 
   t.same(tuple.project(1), 'zalgo', 'provides the first value')
   t.same(tuple.project(2), 'is', 'provides the second value')
@@ -138,6 +138,7 @@ test('Tuple project', t => {
 test('Tuple map errors', t => {
   const map = bindFunc(Tuple(4)('zalgo', 'will', 'be', 'back').map)
   const err = /Tuple.map: Function required/
+
   t.throws(map(undefined), err, 'throws with undefined')
   t.throws(map(null), err, 'throws with null')
   t.throws(map(0), err, 'throws with falsey number')
@@ -259,6 +260,7 @@ test('Tuple concat errors', t => {
   const bad = bindFunc(Tuple(3)(0, 0, {}).concat)
   const good = bindFunc(Tuple(3)([], 'string', []).concat)
   const noTuple = /3-Tuple.concat: Tuple of the same length required/
+
   t.throws(good([]), noTuple, 'throws when Non-Tuple passed')
   t.throws(
     good(Tuple(2)(1, 'string')),
@@ -290,6 +292,7 @@ test('Tuple concat fantasy-land errors', t => {
   const bad = bindFunc(Tuple(3)(0, 0, {})[fl.concat])
   const good = bindFunc(Tuple(3)([], 'string', [])[fl.concat])
   const noTuple = /3-Tuple.fantasy-land\/concat: Tuple of the same length required/
+
   t.throws(good([]), noTuple, 'throws when Non-Tuple passed')
   t.throws(
     good(Tuple(2)(1, 'string')),
@@ -321,8 +324,10 @@ test('Tuple concat properties (Semigroup)', t => {
   const a = Tuple(2)([ 1 ], '1')
   const b = Tuple(2)([ 2 ], '2')
   const c = Tuple(2)([ 3 ], '3')
+
   const left = a.concat(b).concat(c)
   const right = a.concat(b.concat(c))
+
   t.ok(isFunction(Tuple(2)(0, 0).concat), 'is a function')
   t.same(left.toArray(), right.toArray(), 'associativity')
   t.equal(a.concat(b).type(), a.type(), 'returns Semigroup of the same type')

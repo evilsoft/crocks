@@ -11,7 +11,7 @@ const constant = x => () => x
 
 const project = require('./project')
 
-test('project pointfree', t => {
+test.only('project pointfree', t => {
   const f = bindFunc(project)
   const x = 'result'
   const m = { project: sinon.spy(constant(x)) }
@@ -19,21 +19,21 @@ test('project pointfree', t => {
   t.ok(isFunction(project), 'is a function')
 
   const err = /project: Tuple required/
-  t.throws(f(undefined), err, 'throws if passed undefined')
-  t.throws(f(null), err, 'throws if passed null')
-  t.throws(f(0), err, 'throws if passed a falsey number')
-  t.throws(f(1), err, 'throws if passed a truthy number')
-  t.throws(f(''), err, 'throws if passed a falsey string')
-  t.throws(f('string'), err, 'throws if passed a truthy string')
-  t.throws(f(false), err, 'throws if passed false')
-  t.throws(f(true), err, 'throws if passed true')
-  t.throws(f([]), err, 'throws if passed an array')
-  t.throws(f({}), err, 'throws if passed an object')
-  t.throws(f(unit), err, 'throws if passed a function')
+  t.throws(f(1, undefined), err, 'throws if passed undefined as the second argument')
+  t.throws(f(1, null), err, 'throws if passed null as the second argument')
+  t.throws(f(1, 0), err, 'throws if passed a falsey number as the second argument')
+  t.throws(f(1, 1), err, 'throws if passed a truthy number as the second argument')
+  t.throws(f(1, ''), err, 'throws if passed a falsey string as the second argument')
+  t.throws(f(1, 'string'), err, 'throws if passed a truthy string as the second argument')
+  t.throws(f(1, false), err, 'throws if passed false as the second argument')
+  t.throws(f(1, true), err, 'throws if passed true as the second argument')
+  t.throws(f(1, []), err, 'throws if passed an array as the second argument')
+  t.throws(f(1, {}), err, 'throws if passed an object as the second argument')
+  t.throws(f(1, unit), err, 'throws if passed a function as the second argument')
 
-  const result = project(m)
+  const result = project(5, m)
 
-  t.ok(m.project.called, 'calls project on the passed container')
+  t.ok(m.project.calledWith(5), 'calls project on the passed container with the passed value')
   t.equal(result, x, 'returns the result of calling m.project')
 
   t.end()

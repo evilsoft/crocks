@@ -2,13 +2,14 @@
 /** @author Karthik Iyengar (karthikiyengar) */
 
 const isFunction = require('../core/isFunction')
+const curry = require('../core/curry')
 
-function project(m) {
+function project(index, m) {
   if(!(m && isFunction(m.project))) {
     throw new TypeError('project: Tuple required')
   }
 
-  return m.project()
+  return m.project(index)
 }
 
-module.exports = project
+module.exports = curry(project)

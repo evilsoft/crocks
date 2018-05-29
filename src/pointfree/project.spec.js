@@ -11,7 +11,7 @@ const constant = x => () => x
 
 const project = require('./project')
 
-test.only('project pointfree', t => {
+test('project pointfree', t => {
   const f = bindFunc(project)
   const x = 'result'
   const m = { project: sinon.spy(constant(x)) }

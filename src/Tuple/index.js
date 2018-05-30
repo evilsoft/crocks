@@ -18,18 +18,26 @@ const isSemigroup = require('../core/isSemigroup')
 const constant = x => () => x
 
 function _Tuple(n) {
+  const type =
+    constant(`${n}-${_type()}`)
+
+  const withType = fn => {
+    fn.type = type
+    return fn
+  }
+
   /* eslint-disable no-unused-vars */
   switch (n) {
-  case 1: return function(a) { return Tuple(n, arguments) }
-  case 2: return function(a, b) { return Tuple(n, arguments) }
-  case 3: return function(a, b, c) { return Tuple(n, arguments) }
-  case 4: return function(a, b, c, d) { return Tuple(n, arguments) }
-  case 5: return function(a, b, c, d, e) { return Tuple(n, arguments) }
-  case 6: return function(a, b, c, d, e, f) { return Tuple(n, arguments) }
-  case 7: return function(a, b, c, d, e, f, g) { return Tuple(n, arguments) }
-  case 8: return function(a, b, c, d, e, f, g, h) { return Tuple(n, arguments) }
-  case 9: return function(a, b, c, d, e, f, g, h, i) { return Tuple(n, arguments) }
-  case 10: return function(a, b, c, d, e, f, g, h, i, j) { return Tuple(n, arguments) }
+  case 1: return withType(function(a) { return Tuple(n, arguments) })
+  case 2: return withType(function(a, b) { return Tuple(n, arguments) })
+  case 3: return withType(function(a, b, c) { return Tuple(n, arguments) })
+  case 4: return withType(function(a, b, c, d) { return Tuple(n, arguments) })
+  case 5: return withType(function(a, b, c, d, e) { return Tuple(n, arguments) })
+  case 6: return withType(function(a, b, c, d, e, f) { return Tuple(n, arguments) })
+  case 7: return withType(function(a, b, c, d, e, f, g) { return Tuple(n, arguments) })
+  case 8: return withType(function(a, b, c, d, e, f, g, h) { return Tuple(n, arguments) })
+  case 9: return withType(function(a, b, c, d, e, f, g, h, i) { return Tuple(n, arguments) })
+  case 10: return withType(function(a, b, c, d, e, f, g, h, i, j) { return Tuple(n, arguments) })
   default:
     throw new TypeError(
       'Tuple: Tuple size should be a number between 1 and 10'
@@ -37,7 +45,8 @@ function _Tuple(n) {
   }
   /* eslint-enable no-unused-vars */
 
-  function Tuple(n, [ ...parts ]) {
+  function Tuple(n, args) {
+    const parts = [].slice.call(args)
     if (n !== parts.length) {
       throw new TypeError(
         `${n}-Tuple: Expected ${n} values, but got ${parts.length}`
@@ -46,9 +55,6 @@ function _Tuple(n) {
 
     const inspect =
       () => `Tuple(${parts.map(_inspect).join(',')} )`
-
-    const type =
-      constant(`${n}-${_type()}`)
 
     function map(method) {
       return function(fn) {
@@ -101,10 +107,10 @@ function _Tuple(n) {
       return fn(...parts)
     }
 
-    function mapAll(...args) {
+    function nMap(...args) {
       if (args.length !== parts.length) {
         throw new TypeError(
-          `${n}-Tuple.mapAll: Requires ${parts.length} functions`
+          `${n}-Tuple.nMap: Requires ${parts.length} functions`
         )
       }
 
@@ -113,7 +119,7 @@ function _Tuple(n) {
         parts.map((v, i) => {
           if (!isFunction(args[i])) {
             throw new TypeError(
-              `${n}-Tuple.mapAll: Functions required for all arguments`
+              `${n}-Tuple.nMap: Functions required for all arguments`
             )
           }
           return args[i](v)
@@ -137,7 +143,7 @@ function _Tuple(n) {
 
     return {
       inspect, toString: inspect, merge,
-      project, mapAll, toArray,
+      project, nMap, toArray,
       type, equals,
       map: map('map'),
       concat: concat('concat'),

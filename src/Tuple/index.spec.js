@@ -58,6 +58,17 @@ test('Tuple', t => {
   t.equals(Tuple(9).length, 9, 'returns a function with correct length (9)')
   t.equals(Tuple(10).length, 10, 'returns a function with correct length (10)')
 
+  t.same(Tuple(1)(0).toArray(), [ 0 ], 'returns a Tuple with (1) element')
+  t.same(Tuple(2)(0, 0).toArray(), [ 0, 0 ], 'returns a Tuple with (2) elements')
+  t.same(Tuple(3)(0, 0, 0).toArray(), [ 0, 0, 0 ], 'returns a Tuple with (3) elements')
+  t.same(Tuple(4)(0, 0, 0, 0).toArray(), [ 0, 0, 0, 0 ], 'returns a Tuple with (4) elements')
+  t.same(Tuple(5)(0, 0, 0, 0, 0).toArray(), [ 0, 0, 0, 0, 0 ], 'returns a Tuple with (5) elements')
+  t.same(Tuple(6)(0, 0, 0, 0, 0, 0).toArray(), [ 0, 0, 0, 0, 0, 0 ], 'returns a Tuple with (6) elements')
+  t.same(Tuple(7)(0, 0, 0, 0, 0, 0, 0).toArray(), [ 0, 0, 0, 0, 0, 0, 0 ], 'returns a Tuple with (7) elements')
+  t.same(Tuple(8)(0, 0, 0, 0, 0, 0, 0, 0).toArray(), [ 0, 0, 0, 0, 0, 0, 0, 0 ], 'returns a Tuple with (8) elements')
+  t.same(Tuple(9)(0, 0, 0, 0, 0, 0, 0, 0, 0).toArray(), [ 0, 0, 0, 0, 0, 0, 0, 0, 0 ], 'returns a Tuple with (9) elements')
+  t.same(Tuple(10)(0, 0, 0, 0, 0, 0, 0, 0, 0, 0).toArray(), [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], 'returns a Tuple with (10) elements')
+
   t.throws(
     bindFunc(Tuple(3))(1, 2, 3, 4),
     /3-Tuple: Expected 3 values, but got 4/,
@@ -201,29 +212,29 @@ test('Tuple map properties (Functor)', t => {
   t.end()
 })
 
-test('Tuple mapAll errors', t => {
+test('Tuple nMap errors', t => {
   const m = Tuple(3)(5, 45, 50)
 
-  const mapAll = bindFunc(m.mapAll)
-  const err1 = /3-Tuple.mapAll: Requires 3 functions/
-  const err2 = /3-Tuple.mapAll: Functions required for all arguments/
+  const nMap = bindFunc(m.nMap)
+  const err1 = /3-Tuple.nMap: Requires 3 functions/
+  const err2 = /3-Tuple.nMap: Functions required for all arguments/
 
   t.throws(
-    mapAll(identity, identity),
+    nMap(identity, identity),
     err1,
     'throws with an invalid number of functions'
   )
   t.throws(
-    mapAll(identity, 5, identity),
+    nMap(identity, 5, identity),
     err2,
     'throws if all arguments are not functions'
   )
   t.end()
 })
 
-test('Tuple mapAll functionality', t => {
+test('Tuple nMap functionality', t => {
   const m = Tuple(3)(5, 45, 50)
-  const n = m.mapAll(identity, x => x + 5, x => x - 10)
+  const n = m.nMap(identity, x => x + 5, x => x - 10)
 
   t.equal(m.map(identity).type(), m.type(), 'returns a Tuple')
   t.equal(n.project(1), 5, 'applies function to first value')

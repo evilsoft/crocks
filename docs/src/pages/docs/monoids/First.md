@@ -75,14 +75,13 @@ First :: a -> First (Maybe a)
 First :: Maybe a -> First (Maybe a)
 ```
 
-There are two ways to construct a `First` instance using the constructor. The
-first requires that you provide any value (excluding a `Maybe a`) and you will
-get back a new `First` instance, wrapping a `Just a`. All values provided, will
-become a `Just` of the provided type, unless a `Maybe a` is provided.
+A `First` instance can be constructed by passing either a direct (unwrapped)
+value `a` or a `Maybe a` to the constructor. When a direct value is passed, the
+constructor will always wrap the value in a `Just` and return a
+new `First Just a` instance.
 
-The second way to construct a `First` is by providing a `Maybe a`. This allows
-the user to programmatically  provide an `empty` case to a given `First` by
-passing a `Nothing`.
+Alternatively, by passing a `Maybe a`, the user can programmatically provide an
+empty case to a given `First` by passing a `Nothing`.
 
 ```javascript
 import First from 'crocks/First'

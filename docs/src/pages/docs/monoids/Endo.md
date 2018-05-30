@@ -67,15 +67,15 @@ always10
 Endo :: (a -> a) -> Endo a
 ```
 
-`Endo` is constructed by passing the constructor an Endomorphism, or a
-JavaScript function in which the domain/codomain (src/target) are of the same
+`Endo` is constructed by passing the constructor an Endomorphism, which is a
+function in which the domain/codomain (src/target) are of the same
 type. For example a function that is `String -> String`.
 
 There is no type checking on the provided function, so some discipline on the
-part of the user is required to make sure the proper type is being used on all.
-Part of discipline this can be mitigated by using an Endomorphism of the type
-`Maybe a`. Then the supplied functions could do type checking and return
-`Nothing` if the types do not match up.
+part of the user is required to make sure the proper type is being used on in
+all cases. This can be partly mitigated by using an Endomorphism of the
+type `Maybe a`. Then the supplied functions could do type checking and
+return `Nothing` if the types do not match up.
 
 ```javascript
 import Endo from 'crocks/Endo'

@@ -39,8 +39,9 @@ Assign(first)
 Assign :: Object -> Assign Object
 ```
 
-`Assign` is constructed by calling the constructor with an `Object` instance,
-returning a new `Assign`, wrapping the reference to the provided `Object`.
+`Assign` is constructed by calling the constructor with an `Object` instance.
+This will return a new `Assign` instance, wrapping the reference to the
+provided `Object`.
 
 ```javascript
 import Assign from 'crocks/Assign'

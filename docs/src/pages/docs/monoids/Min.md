@@ -66,7 +66,7 @@ Min(-Infinity)
 //=> Min -Infinity
 
 Min(undefined)
-//=> Min -Infinity
+//=> Min Infinity
 
 equals(Min(NaN), Min.empty())
 //=> true

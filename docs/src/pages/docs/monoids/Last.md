@@ -72,14 +72,13 @@ Last :: a -> Last (Maybe a)
 Last :: Maybe a -> Last (Maybe a)
 ```
 
-There are two ways to construct a `Last` instance using the constructor. The
-first requires that you provide any value (excluding a `Maybe a`) and will
-give back a new `Last` instance, wrapping a `Just a`. All values provided, will
-become a `Just` of the provided type, unless a `Maybe a` is provided.
+A `Last` instance can be constructed by passing either a direct (unwrapped)
+value `a` or a `Maybe a` to the constructor. When a direct value is passed, the
+constructor will always wrap the value in a `Just` and return a
+new `Last Just a` instance.
 
-The second way to construct a `Last` is by providing a `Maybe a`. This allows
-the user to programmatically  provide an `empty` case to a given `Last` by
-passing a `Nothing`.
+Alternatively, by passing a `Maybe a`, the user can programmatically provide an
+empty case to a given `Last` by passing a `Nothing`.
 
 ```javascript
 import Last from 'crocks/Last'

@@ -19,6 +19,7 @@ test('Tuple core', t => {
 
   t.ok(isFunction(Tuple), 'is a function')
   t.ok(isString(Tuple['@@type']), 'provides a @@type string on the constructor')
+  t.ok(isFunction(Tuple(3).type), 'provides a type function on the instance constructor')
 
   t.ok(isObject(x), 'returns an object')
   t.ok(isFunction(x.constructor), 'provides TypeRep on instance')

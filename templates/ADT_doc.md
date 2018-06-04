@@ -21,6 +21,20 @@ weight: 10
 
 </article>
 
+<article id="topic-construction">
+
+## Construction
+
+```haskell
+```
+
+[ CONSTRUCTOR DESC]
+
+```javascript
+```
+
+</article>
+
 <article id="topic-constructor">
 
 ## Constructor Methods

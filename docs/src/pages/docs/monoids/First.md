@@ -22,11 +22,12 @@ constructor will be lifted as is, allowing the ability to "choose" a value based
 on some disjunction.
 
 While most `Monoid`s only provide a [`valueOf`](#valueof) function used for
-extraction, `First` takes advantage of its underlying [`Maybe`][maybe] to provide an
-additional [`option`](#option) method. Using [`valueOf`](#valueof) will extract
-the underlying [`Maybe`][maybe], while [`option`](#option) will extract the underlying
-value in the[`Maybe`][maybe], using the provided default value when the underlying
-[`Maybe`][maybe] is a [`Nothing`][nothing] instance.
+extraction, `First` takes advantage of its underlying [`Maybe`][maybe] to
+provide an additional [`option`](#option) method.
+Using [`valueOf`](#valueof) will extract the underlying [`Maybe`][maybe],
+while [`option`](#option) will extract the underlying value in
+the [`Maybe`][maybe], using the provided default value when the
+underlying [`Maybe`][maybe] is a [`Nothing`][nothing] instance.
 
 ```javascript
 import First from 'crocks/First'
@@ -62,6 +63,44 @@ chooseFirst([ 'a', 'b', 'c' ])
 ## Implements
 
 `Setoid`, `Semigroup`, `Monoid`
+
+</article>
+
+<article id="topic-construction">
+
+## Construction
+
+```haskell
+First :: a -> First (Maybe a)
+First :: Maybe a -> First (Maybe a)
+```
+
+A `First` instance can be constructed by passing either a direct (unwrapped)
+value `a` or a `Maybe a` to the constructor. When a direct value is passed, the
+constructor will always wrap the value in a `Just` and return a
+new `First Just a` instance.
+
+Alternatively, by passing a `Maybe a`, the user can programmatically provide an
+empty case to a given `First` by passing a `Nothing`.
+
+```javascript
+import First from 'crocks/First'
+import Maybe from 'crocks/Maybe'
+
+const { Just, Nothing } = Maybe
+
+First(Just(22))
+//=> First( Just 22 )
+
+First(Nothing())
+//=> First( Nothing )
+
+First(undefined)
+//=> First( Just undefined )
+
+First('string')
+//=> First( Just "string" )
+```
 
 </article>
 

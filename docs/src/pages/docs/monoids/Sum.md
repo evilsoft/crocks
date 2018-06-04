@@ -42,6 +42,41 @@ sumByTen([ 2, 2 ])
 
 </article>
 
+<article id="topic-construction">
+
+## Construction
+
+```haskell
+Sum :: Number -> Sum Number
+```
+
+`Sum` provides addition on `Number`s and needs to be constructed with
+a `Number` instance. Calling the constructor with a `Number`, results in a new
+`Sum` that wraps the provided `Number`.
+
+Passing `undefined`, `NaN` or `null` to the constructor will result in an
+`empty` instance, or an instance containing a `0`.
+
+```javascript
+import Sum from 'crocks/Sum'
+
+import equals from 'crocks/pointfree/equals'
+
+Sum(41)
+//=> Sum 41
+
+Sum(Infinity)
+//=> Sum Infinity
+
+Sum(NaN)
+//=> Sum 0
+
+equals(Sum(undefined), Sum.empty())
+//=> true
+```
+
+</article>
+
 <article id="topic-constructor">
 
 ## Constructor Methods

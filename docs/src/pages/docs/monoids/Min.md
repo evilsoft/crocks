@@ -39,6 +39,41 @@ Min.empty()
 
 </article>
 
+<article id="topic-construction">
+
+## Construction
+
+```haskell
+Min :: Number -> Min Number
+```
+
+`Min` is a `Monoid` fixed to the type of `Number` and as such requires
+a `Number` instance to be passed to the constructor. A new `Min` instance is
+returned, wrapping the provided `Number`.
+
+The values `undefined`, `null` and `NaN` will map to the `empty` (`Infinity`)
+instead of throwing a `TypeError`.
+
+```javascript
+import Min from 'crocks/Min'
+
+import equals from 'crocks/pointfree/equals'
+
+Min(42)
+//=> Min 42
+
+Min(-Infinity)
+//=> Min -Infinity
+
+Min(undefined)
+//=> Min Infinity
+
+equals(Min(NaN), Min.empty())
+//=> true
+```
+
+</article>
+
 <article id="topic-constructor">
 
 ## Constructor Methods

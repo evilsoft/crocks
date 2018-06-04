@@ -1390,7 +1390,7 @@ Resolved('')
 
 ```haskell
 resultToAsync :: Result b a -> Async b a
-resultToAsync :: (a -> Result c b) -> a -> Result c b
+resultToAsync :: (a -> Result c b) -> a -> Async c b
 ```
 
 Used to transform a given `Result` instance to

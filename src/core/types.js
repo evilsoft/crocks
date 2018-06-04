@@ -28,7 +28,7 @@ const _types = {
   'Star': () => 'Star',
   'State': () => 'State',
   'Sum': () => 'Sum',
-  'Tuple': () => 'Tuple',
+  'Tuple': (n) => `${n}-Tuple`,
   'Unit': () => 'Unit',
   'Writer': () => 'Writer'
 }
@@ -39,8 +39,8 @@ const type =
 const proxy =
   t => ({ type: type(t) })
 
-const typeFn = (t, ver) => {
-  const typeStr = type(t)()
+const typeFn = (t, ver, n) => {
+  const typeStr = type(t)(n)
   return `crocks/${typeStr}@${ver || 0}`
 }
 

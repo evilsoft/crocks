@@ -7,7 +7,7 @@ const _implements = require('../core/implements')
 const _equals = require('../core/equals')
 const _inspect = require('../core/inspect')
 const _type = require('../core/types').type('Tuple')
-const typeString = require('../core/types').typeFn(_type(), VERSION)
+const typeFn = require('../core/types').typeFn
 const fl = require('../core/flNames')
 
 const isFunction = require('../core/isFunction')
@@ -19,25 +19,29 @@ const constant = x => () => x
 
 function _Tuple(n) {
   const type =
-    constant(`${n}-${_type()}`)
+    constant(_type(n))
 
-  const withType = fn => {
+  const typeString = typeFn('Tuple', VERSION, n)
+
+  const withProps = fn => {
     fn.type = type
+    fn['@@type'] = typeString
+    fn['@@implements'] = _implements([ 'map', 'concat', 'equals' ])
     return fn
   }
 
   /* eslint-disable no-unused-vars */
   switch (n) {
-  case 1: return withType(function(a) { return Tuple(n, arguments) })
-  case 2: return withType(function(a, b) { return Tuple(n, arguments) })
-  case 3: return withType(function(a, b, c) { return Tuple(n, arguments) })
-  case 4: return withType(function(a, b, c, d) { return Tuple(n, arguments) })
-  case 5: return withType(function(a, b, c, d, e) { return Tuple(n, arguments) })
-  case 6: return withType(function(a, b, c, d, e, f) { return Tuple(n, arguments) })
-  case 7: return withType(function(a, b, c, d, e, f, g) { return Tuple(n, arguments) })
-  case 8: return withType(function(a, b, c, d, e, f, g, h) { return Tuple(n, arguments) })
-  case 9: return withType(function(a, b, c, d, e, f, g, h, i) { return Tuple(n, arguments) })
-  case 10: return withType(function(a, b, c, d, e, f, g, h, i, j) { return Tuple(n, arguments) })
+  case 1: return withProps(function(a) { return Tuple(n, arguments) })
+  case 2: return withProps(function(a, b) { return Tuple(n, arguments) })
+  case 3: return withProps(function(a, b, c) { return Tuple(n, arguments) })
+  case 4: return withProps(function(a, b, c, d) { return Tuple(n, arguments) })
+  case 5: return withProps(function(a, b, c, d, e) { return Tuple(n, arguments) })
+  case 6: return withProps(function(a, b, c, d, e, f) { return Tuple(n, arguments) })
+  case 7: return withProps(function(a, b, c, d, e, f, g) { return Tuple(n, arguments) })
+  case 8: return withProps(function(a, b, c, d, e, f, g, h) { return Tuple(n, arguments) })
+  case 9: return withProps(function(a, b, c, d, e, f, g, h, i) { return Tuple(n, arguments) })
+  case 10: return withProps(function(a, b, c, d, e, f, g, h, i, j) { return Tuple(n, arguments) })
   default:
     throw new TypeError(
       'Tuple: Tuple size should be a number between 1 and 10'
@@ -54,7 +58,7 @@ function _Tuple(n) {
     }
 
     const inspect =
-      () => `Tuple(${parts.map(_inspect).join(',')} )`
+      () => `${n}-Tuple(${parts.map(_inspect).join(',')} )`
 
     function map(method) {
       return function(fn) {
@@ -107,10 +111,10 @@ function _Tuple(n) {
       return fn(...parts)
     }
 
-    function nMap(...args) {
+    function nmap(...args) {
       if (args.length !== parts.length) {
         throw new TypeError(
-          `${n}-Tuple.nMap: Requires ${parts.length} functions`
+          `${n}-Tuple.nmap: Requires ${parts.length} functions`
         )
       }
 
@@ -119,7 +123,7 @@ function _Tuple(n) {
         parts.map((v, i) => {
           if (!isFunction(args[i])) {
             throw new TypeError(
-              `${n}-Tuple.nMap: Functions required for all arguments`
+              `${n}-Tuple.nmap: Functions required for all arguments`
             )
           }
           return args[i](v)
@@ -143,7 +147,7 @@ function _Tuple(n) {
 
     return {
       inspect, toString: inspect, merge,
-      project, nMap, toArray,
+      project, nmap, toArray,
       type, equals,
       map: map('map'),
       concat: concat('concat'),
@@ -155,8 +159,5 @@ function _Tuple(n) {
     }
   }
 }
-
-_Tuple['@@type'] = typeString
-_Tuple['@@implements'] = _implements([ 'map', 'concat', 'equals' ])
 
 module.exports = _Tuple

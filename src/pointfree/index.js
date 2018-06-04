@@ -21,7 +21,7 @@ module.exports = {
   fst: require('../Pair/fst'),
   head: require('./head'),
   log: require('../Writer/log'),
-  nMap: require('../Tuple/nMap'),
+  nmap: require('../Tuple/nmap'),
   map: require('./map'),
   merge: require('../pointfree/merge'),
   option: require('./option'),

@@ -13,19 +13,19 @@ function runMap(m, fns) {
   const n = fns.length
 
   if (!validTuple(n, m)) {
-    throw new TypeError(`nMap: ${n}-Tuple required`)
+    throw new TypeError(`nmap: ${n}-Tuple required`)
   }
 
   fns.forEach(fn => {
     if (!isFunction(fn)) {
-      throw new TypeError('nMap: Functions required')
+      throw new TypeError('nmap: Functions required')
     }
   })
 
-  return m.nMap(...fns)
+  return m.nmap(...fns)
 }
 
-function nMap(n) {
+function nmap(n) {
   switch (n) {
   case 1:
     return (a, m) =>
@@ -59,10 +59,10 @@ function nMap(n) {
       runMap(m, [ a, b, c, d, e, f, g, h, i, j ])
   default:
     throw new TypeError(
-      'nMap: Integer between 1 and 10 required for first argument'
+      'nmap: Integer between 1 and 10 required for first argument'
     )
   }
 }
 
 module.exports =
-  curry(nMap)
+  curry(nmap)

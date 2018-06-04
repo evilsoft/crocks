@@ -18,7 +18,7 @@ test('Tuple core', t => {
   const x = Tuple(3)(0, 0, 0)
 
   t.ok(isFunction(Tuple), 'is a function')
-  t.ok(isString(Tuple['@@type']), 'provides a @@type string on the constructor')
+  t.ok(isString(Tuple(3)['@@type']), 'provides a @@type string on the instance constructor')
   t.ok(isFunction(Tuple(3).type), 'provides a type function on the instance constructor')
 
   t.ok(isObject(x), 'returns an object')
@@ -93,7 +93,7 @@ test('Tuple fantasy-land api', t => {
 })
 
 test('Tuple @@implements', t => {
-  const f = Tuple['@@implements']
+  const f = Tuple(1)['@@implements']
 
   t.equal(f('equals'), true, 'implements equals func')
   t.equal(f('map'), true, 'implements map func')
@@ -107,7 +107,7 @@ test('Tuple inspect', t => {
 
   t.ok(isFunction(m.inspect), 'provides an inpsect function')
   t.equal(m.inspect, m.toString, 'toString is the same function as inspect')
-  t.equal(m.inspect(), 'Tuple( 0, "nice" )', 'returns inspect string')
+  t.equal(m.inspect(), '2-Tuple( 0, "nice" )', 'returns inspect string')
 
   t.end()
 })
@@ -124,7 +124,7 @@ test('Tuple type', t => {
 test('Tuple @@type', t => {
   const m = Tuple(1)( 0)
 
-  t.equal(m['@@type'], 'crocks/Tuple@1', 'returns crocks/Tuple@1 as Monoid Type')
+  t.equal(m['@@type'], 'crocks/1-Tuple@1', 'returns crocks/1-Tuple@1 as Monoid Type')
 
   t.end()
 })
@@ -213,29 +213,29 @@ test('Tuple map properties (Functor)', t => {
   t.end()
 })
 
-test('Tuple nMap errors', t => {
+test('Tuple nmap errors', t => {
   const m = Tuple(3)(5, 45, 50)
 
-  const nMap = bindFunc(m.nMap)
-  const err1 = /3-Tuple.nMap: Requires 3 functions/
-  const err2 = /3-Tuple.nMap: Functions required for all arguments/
+  const nmap = bindFunc(m.nmap)
+  const err1 = /3-Tuple.nmap: Requires 3 functions/
+  const err2 = /3-Tuple.nmap: Functions required for all arguments/
 
   t.throws(
-    nMap(identity, identity),
+    nmap(identity, identity),
     err1,
     'throws with an invalid number of functions'
   )
   t.throws(
-    nMap(identity, 5, identity),
+    nmap(identity, 5, identity),
     err2,
     'throws if all arguments are not functions'
   )
   t.end()
 })
 
-test('Tuple nMap functionality', t => {
+test('Tuple nmap functionality', t => {
   const m = Tuple(3)(5, 45, 50)
-  const n = m.nMap(identity, x => x + 5, x => x - 10)
+  const n = m.nmap(identity, x => x + 5, x => x - 10)
 
   t.equal(m.map(identity).type(), m.type(), 'returns a Tuple')
   t.equal(n.project(1), 5, 'applies function to first value')

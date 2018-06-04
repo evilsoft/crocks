@@ -47,6 +47,34 @@ anyNumber([ true, 'string' ])
 
 </article>
 
+<article id="topic-construction">
+
+## Construction
+
+```haskell
+Any :: a -> Any Boolean
+```
+
+`Any` is constructed by calling the constructor with any type `a`. This will
+return an `Any` wrapping the provided value, coerced to a `Boolean`. For
+example, providing an non-empty `String` will result in an `Any(true)`. While
+passing an empty `String` results in an `Any(false)`.
+
+```javascript
+import Any from 'crocks/Any'
+
+Any(0)
+//=> Any(false)
+
+Any(1)
+//=> Any(true)
+
+Any([])
+//=> Any(true)
+```
+
+</article>
+
 <article id="topic-constructor">
 
 ## Constructor Methods

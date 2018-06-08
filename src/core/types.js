@@ -39,8 +39,8 @@ const type =
 const proxy =
   t => ({ type: type(t) })
 
-const typeFn = (t, ver, n) => {
-  const typeStr = type(t)(n)
+const typeFn = (t, ver, ctx) => {
+  const typeStr = type(t)(ctx)
   return `crocks/${typeStr}@${ver || 0}`
 }
 

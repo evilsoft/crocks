@@ -18,11 +18,11 @@ function runMap(m, fns) {
 
   fns.forEach(fn => {
     if (!isFunction(fn)) {
-      throw new TypeError('nmap: Functions required')
+      throw new TypeError('nmap: Functions required for all arguments')
     }
   })
 
-  return m.nmap(...fns)
+  return m.mapAll(...fns)
 }
 
 function nmap(n) {

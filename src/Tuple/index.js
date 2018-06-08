@@ -111,10 +111,10 @@ function _Tuple(n) {
       return fn(...parts)
     }
 
-    function nmap(...args) {
+    function mapAll(...args) {
       if (args.length !== parts.length) {
         throw new TypeError(
-          `${n}-Tuple.nmap: Requires ${parts.length} functions`
+          `${n}-Tuple.mapAll: Requires ${parts.length} functions`
         )
       }
 
@@ -123,7 +123,7 @@ function _Tuple(n) {
         parts.map((v, i) => {
           if (!isFunction(args[i])) {
             throw new TypeError(
-              `${n}-Tuple.nmap: Functions required for all arguments`
+              `${n}-Tuple.mapAll: Functions required for all arguments`
             )
           }
           return args[i](v)
@@ -147,7 +147,7 @@ function _Tuple(n) {
 
     return {
       inspect, toString: inspect, merge,
-      project, nmap, toArray,
+      project, mapAll, toArray,
       type, equals,
       map: map('map'),
       concat: concat('concat'),

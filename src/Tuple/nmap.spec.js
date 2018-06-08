@@ -41,7 +41,7 @@ test('nmap pointfree', t => {
   const g = bindFunc(nmap(1))
   const h = bindFunc(nmap(3))
 
-  const noFunc = /nmap: Functions required/
+  const noFunc = /nmap: Functions required for all arguments/
   t.throws(g(undefined, p), noFunc, 'throws if passed undefined as mapping function')
   t.throws(g(null, p), noFunc, 'throws if passed null as mapping function')
   t.throws(g(0, p), noFunc, 'throws if passed a falsey number as mapping function')
@@ -84,10 +84,10 @@ test('nmap pointfree', t => {
   t.same(nmap(9, inc, inc, inc, inc, inc, inc, inc, inc, inc, branch(9, 0)).toArray(), Array(9).fill(1), 'maps a Tuple with (9) elements')
   t.same(nmap(10, inc, inc, inc, inc, inc, inc, inc, inc, inc, inc, branch(10, 0)).toArray(), Array(10).fill(1), 'maps a Tuple with (10) elements')
 
-  const m = { type: constant('3-Tuple'), nmap: sinon.spy(constant(x)) }
+  const m = { type: constant('3-Tuple'), mapAll: sinon.spy(constant(x)) }
 
   nmap(3)(identity, identity, identity, m)
-  t.ok(m.nmap.calledWith(identity, identity, identity), 'calls nmap on the passed container')
+  t.ok(m.mapAll.calledWith(identity, identity, identity), 'calls mapAll on the passed container')
 
   t.end()
 })

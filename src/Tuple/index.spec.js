@@ -103,21 +103,38 @@ test('Tuple @@implements', t => {
 })
 
 test('Tuple inspect', t => {
-  const m = Tuple(2)(0, 'nice')
+  const m = Tuple(1)(0)
 
   t.ok(isFunction(m.inspect), 'provides an inpsect function')
   t.equal(m.inspect, m.toString, 'toString is the same function as inspect')
-  t.equal(m.inspect(), '2-Tuple( 0, "nice" )', 'returns inspect string')
+
+  t.same(Tuple(1)(0).inspect(), '1-Tuple( 0 )', 'returns inspect string for a Tuple with (1) element')
+  t.same(Tuple(2)(0, 0).inspect(), '2-Tuple( 0, 0 )', 'returns inspect string for a Tuple with (2) elements')
+  t.same(Tuple(3)(0, 0, 0).inspect(), '3-Tuple( 0, 0, 0 )', 'returns inspect string for a Tuple with (3) elements')
+  t.same(Tuple(4)(0, 0, 0, 0).inspect(), '4-Tuple( 0, 0, 0, 0 )', 'returns inspect string for a Tuple with (4) elements')
+  t.same(Tuple(5)(0, 0, 0, 0, 0).inspect(), '5-Tuple( 0, 0, 0, 0, 0 )', 'returns inspect string for a Tuple with (5) elements')
+  t.same(Tuple(6)(0, 0, 0, 0, 0, 0).inspect(), '6-Tuple( 0, 0, 0, 0, 0, 0 )', 'returns inspect string for a Tuple with (6) elements')
+  t.same(Tuple(7)(0, 0, 0, 0, 0, 0, 0).inspect(), '7-Tuple( 0, 0, 0, 0, 0, 0, 0 )', 'returns inspect string for a Tuple with (7) elements')
+  t.same(Tuple(8)(0, 0, 0, 0, 0, 0, 0, 0).inspect(), '8-Tuple( 0, 0, 0, 0, 0, 0, 0, 0 )', 'returns inspect string for a Tuple with (8) elements')
+  t.same(Tuple(9)(0, 0, 0, 0, 0, 0, 0, 0, 0).inspect(), '9-Tuple( 0, 0, 0, 0, 0, 0, 0, 0, 0 )', 'returns inspect string for a Tuple with (9) elements')
+  t.same(Tuple(10)(0, 0, 0, 0, 0, 0, 0, 0, 0, 0).inspect(), '10-Tuple( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 )', 'returns inspect string for a Tuple with (10) elements')
 
   t.end()
 })
 
 test('Tuple type', t => {
-  const m = Tuple(1)(0)
+  t.ok(isFunction(Tuple(1)(0).type), 'is a function')
 
-  t.ok(isFunction(m.type), 'is a function')
-  t.equal(m.type(), '1-Tuple', 'returns number of elements and Tuple as type')
-
+  t.same(Tuple(1)(0).type(), '1-Tuple', 'returns 1-Tuple as the type for a Tuple with (1) element')
+  t.same(Tuple(2)(0, 0).type(), '2-Tuple', 'returns 2-Tuple as the type for a Tuple with (2) elements')
+  t.same(Tuple(3)(0, 0, 0).type(), '3-Tuple', 'returns 3-Tuple as the type for a Tuple with (3) elements')
+  t.same(Tuple(4)(0, 0, 0, 0).type(), '4-Tuple', 'returns 4-Tuple as the type for a Tuple with (4) elements')
+  t.same(Tuple(5)(0, 0, 0, 0, 0).type(), '5-Tuple', 'returns 5-Tuple as the type for a Tuple with (5) elements')
+  t.same(Tuple(6)(0, 0, 0, 0, 0, 0).type(), '6-Tuple', 'returns 6-Tuple as the type for a Tuple with (6) elements')
+  t.same(Tuple(7)(0, 0, 0, 0, 0, 0, 0).type(), '7-Tuple', 'returns 7-Tuple as the type for a Tuple with (7) elements')
+  t.same(Tuple(8)(0, 0, 0, 0, 0, 0, 0, 0).type(), '8-Tuple', 'returns 8-Tuple as the type for a Tuple with (8) elements')
+  t.same(Tuple(9)(0, 0, 0, 0, 0, 0, 0, 0, 0).type(), '9-Tuple', 'returns 9-Tuple as the type for a Tuple with (9) elements')
+  t.same(Tuple(10)(0, 0, 0, 0, 0, 0, 0, 0, 0, 0).type(), '10-Tuple', 'returns 10-Tuple as the type for a Tuple with (10) elements')
   t.end()
 })
 
@@ -130,19 +147,26 @@ test('Tuple @@type', t => {
 })
 
 test('Tuple project', t => {
-  const tuple = Tuple(3)('zalgo', 'is', 'back')
+  const tuple = Tuple(10)(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 
   t.ok(isFunction(tuple.project), 'is a function')
 
   const project = bindFunc(tuple.project)
-  const err = /3-Tuple.project: Index should be an integer between 1 and 3/
+  const err = /10-Tuple.project: Index should be an integer between 1 and 10/
 
   t.throws(project(0), err, 'throws with index less than 1')
-  t.throws(project(6), err, 'throws with index more than tuple length')
+  t.throws(project(11), err, 'throws with index more than tuple length')
 
-  t.same(tuple.project(1), 'zalgo', 'provides the first value')
-  t.same(tuple.project(2), 'is', 'provides the second value')
-  t.same(tuple.project(3), 'back', 'provides the third value')
+  t.same(tuple.project(1), 0, 'provides the first value')
+  t.same(tuple.project(2), 0, 'provides the second value')
+  t.same(tuple.project(3), 0, 'provides the third value')
+  t.same(tuple.project(4), 0, 'provides the fourth value')
+  t.same(tuple.project(5), 0, 'provides the fifth value')
+  t.same(tuple.project(6), 0, 'provides the sixth value')
+  t.same(tuple.project(7), 0, 'provides the seventh value')
+  t.same(tuple.project(8), 0, 'provides the eight value')
+  t.same(tuple.project(9), 0, 'provides the ninth value')
+  t.same(tuple.project(10), 0, 'provides the tenth value')
 
   t.end()
 })
@@ -213,29 +237,29 @@ test('Tuple map properties (Functor)', t => {
   t.end()
 })
 
-test('Tuple nmap errors', t => {
+test('Tuple mapAll errors', t => {
   const m = Tuple(3)(5, 45, 50)
 
-  const nmap = bindFunc(m.nmap)
-  const err1 = /3-Tuple.nmap: Requires 3 functions/
-  const err2 = /3-Tuple.nmap: Functions required for all arguments/
+  const mapAll = bindFunc(m.mapAll)
+  const err1 = /3-Tuple.mapAll: Requires 3 functions/
+  const err2 = /3-Tuple.mapAll: Functions required for all arguments/
 
   t.throws(
-    nmap(identity, identity),
+    mapAll(identity, identity),
     err1,
     'throws with an invalid number of functions'
   )
   t.throws(
-    nmap(identity, 5, identity),
+    mapAll(identity, 5, identity),
     err2,
     'throws if all arguments are not functions'
   )
   t.end()
 })
 
-test('Tuple nmap functionality', t => {
+test('Tuple mapAll functionality', t => {
   const m = Tuple(3)(5, 45, 50)
-  const n = m.nmap(identity, x => x + 5, x => x - 10)
+  const n = m.mapAll(identity, x => x + 5, x => x - 10)
 
   t.equal(m.map(identity).type(), m.type(), 'returns a Tuple')
   t.equal(n.project(1), 5, 'applies function to first value')

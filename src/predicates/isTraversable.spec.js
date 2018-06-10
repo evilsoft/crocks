@@ -27,8 +27,18 @@ test('isTraversable predicate function', t => {
   t.equal(isTraversable([]), false, 'returns false for an array')
   t.equal(isTraversable(identity), false, 'returns false for function')
 
-  t.equal(isTraversable(Fake), true, 'returns true when a Traversable Constructor is passed')
-  t.equal(isTraversable(fake), true, 'returns true when a Traversable is passed')
+  t.equal(isTraversable(Fake), true, 'returns true when Traversable Constructor is passed')
+  t.equal(isTraversable(fake), true, 'returns true when Traversable is passed')
+
+  t.end()
+})
+
+test('isTraversable fantasy-land', t => {
+  const Fake = makeFake([ 'map', 'traverse' ], true)
+  const fake = Fake()
+
+  t.equal(isTraversable(Fake), false, 'returns false when Traversable Constructor is passed')
+  t.equal(isTraversable(fake), false, 'returns false when Traversable is passed')
 
   t.end()
 })

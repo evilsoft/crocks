@@ -26,8 +26,9 @@ function makeFake(algs, useFl) {
   const hasAlg = contains(xs)
 
   const inst = xs.reduce((o, alg) => {
-    if(!isRepFunc(alg)) {
-      o[useFl ? fl[alg] : alg] = id
+    const fn = useFl ? fl[alg] : alg
+    if(!isRepFunc(alg) && fn) {
+      o[fn] = id
     }
 
     return o
@@ -43,8 +44,9 @@ function makeFake(algs, useFl) {
   inst.constructor = Fake
 
   return repFuncs.reduce((c, alg) => {
-    if(hasAlg(alg)) {
-      c[fl[alg]] = id
+    const fn = useFl ? fl[alg] : alg
+    if(hasAlg(alg) && fn) {
+      c[fn] = id
     }
     return c
   }, Fake)

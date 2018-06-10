@@ -39,6 +39,7 @@ const crocks = {
   Result: require('./Result'),
   Star: require('./Star'),
   State: require('./State'),
+  Tuple: require('./Tuple'),
   Unit: require('./Unit'),
   Writer: require('./Writer')
 }

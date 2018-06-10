@@ -524,7 +524,7 @@ import curry from 'crocks/helpers/curry'
 import fanout from 'crocks/helpers/fanout'
 import isString from 'crocks/predicates/isString'
 import liftA2 from 'crocks/helpers/liftA2'
-import merge from 'crocks/Pair/merge'
+import merge from 'crocks/pointfree/merge'
 import prop from 'crocks/Maybe/prop'
 import safe from 'crocks/Maybe/safe'
 

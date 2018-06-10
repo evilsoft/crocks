@@ -27,8 +27,18 @@ test('isMonoid core', t => {
   t.equal(isMonoid([]), false, 'returns false for an array')
   t.equal(isMonoid(identity), false, 'returns false for function')
 
-  t.equal(isMonoid(Fake), true, 'returns true when an Monoid Constructor is passed')
-  t.equal(isMonoid(fake), true, 'returns true when an Monoid is passed')
+  t.equal(isMonoid(Fake), true, 'returns true when Monoid Constructor is passed')
+  t.equal(isMonoid(fake), true, 'returns true when Monoid is passed')
+
+  t.end()
+})
+
+test('isMonoid fantasy-land', t => {
+  const Fake = makeFake([ 'concat', 'empty' ], true)
+  const fake = Fake()
+
+  t.equal(isMonoid(Fake), false, 'returns false when Monoid Constructor is passed')
+  t.equal(isMonoid(fake), true, 'returns true when Monoid is passed')
 
   t.end()
 })

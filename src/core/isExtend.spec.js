@@ -1,16 +1,17 @@
 const test = require('tape')
+const helpers = require('../test/helpers')
 
 const isFunction = require('./isFunction')
+
+const makeFake = helpers.makeFake
 
 const identity = x => x
 
 const isExtend = require('./isExtend')
 
 test('isExtend predicate function', t => {
-  const fake = {
-    map: identity,
-    extend: identity
-  }
+  const Fake = makeFake([ 'map', 'extend' ])
+  const fake = Fake()
 
   t.ok(isFunction(isExtend), 'is a function')
 
@@ -26,7 +27,18 @@ test('isExtend predicate function', t => {
   t.equal(isExtend([]), false, 'returns false for an array')
   t.equal(isExtend(identity), false, 'returns false for function')
 
-  t.equal(isExtend(fake), true, 'returns true when an Extend is passed')
+  t.equal(isExtend(Fake), true, 'returns true when Extend Constructor is passed')
+  t.equal(isExtend(fake), true, 'returns true when Extend is passed')
+
+  t.end()
+})
+
+test('isExtend fantasy-land', t => {
+  const Fake = makeFake([ 'map', 'extend' ], true)
+  const fake = Fake()
+
+  t.equal(isExtend(Fake), false, 'returns false when Extend Constructor is passed')
+  t.equal(isExtend(fake), true, 'returns true when Extend is passed')
 
   t.end()
 })

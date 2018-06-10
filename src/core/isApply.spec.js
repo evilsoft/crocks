@@ -25,8 +25,19 @@ test('isApply core', t => {
   t.equal(isApply([]), false, 'returns false for an array')
   t.equal(isApply(identity), false, 'returns false for function')
 
-  t.equal(isApply(Fake), true, 'returns true when an Apply Constructor is passed')
-  t.equal(isApply(fake), true, 'returns true when an Apply is passed')
+  t.equal(isApply(Fake), true, 'returns true when Apply Constructor is passed')
+  t.equal(isApply(fake), true, 'returns true when Apply is passed')
+
+  t.ok(isFunction(isApply))
+  t.end()
+})
+
+test('isApply fantasy-land', t => {
+  const Fake = makeFake([ 'ap', 'map' ], true)
+  const fake = Fake()
+
+  t.equal(isApply(Fake), false, 'returns false when Apply Constructor is passed')
+  t.equal(isApply(fake), true, 'returns true when Apply is passed')
 
   t.ok(isFunction(isApply))
   t.end()

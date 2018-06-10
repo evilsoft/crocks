@@ -27,8 +27,18 @@ test('isApplicative predicate function', t => {
   t.equal(isApplicative([]), false, 'returns false for an array')
   t.equal(isApplicative(identity), false, 'returns false for function')
 
-  t.equal(isApplicative(Fake), true, 'returns true when an Applicative Constructor is passed')
-  t.equal(isApplicative(fake), true, 'returns true when an Applicative is passed')
+  t.equal(isApplicative(Fake), true, 'returns true when Applicative Constructor is passed')
+  t.equal(isApplicative(fake), true, 'returns true when Applicative is passed')
+
+  t.end()
+})
+
+test('isApplicative fantasy-land', t => {
+  const Fake = makeFake([ 'ap', 'map', 'of' ], true)
+  const fake = Fake()
+
+  t.equal(isApplicative(Fake), false, 'returns false when Applicative Constructor is passed')
+  t.equal(isApplicative(fake), true, 'returns true when Applicative is passed')
 
   t.end()
 })

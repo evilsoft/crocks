@@ -28,8 +28,18 @@ test('isSemigroup core', t => {
   t.equal(isSemigroup('string'), true, 'returns true for truthy string')
   t.equal(isSemigroup([]), true, 'returns true for an array')
 
-  t.equal(isSemigroup(Fake), true, 'returns true when a Semigroup Constructor is passed')
-  t.equal(isSemigroup(fake), true, 'returns true when a Semigroup is passed')
+  t.equal(isSemigroup(Fake), true, 'returns true when Semigroup Constructor is passed')
+  t.equal(isSemigroup(fake), true, 'returns true when Semigroup is passed')
+
+  t.end()
+})
+
+test('isSemigroup fantasy-land', t => {
+  const Fake = makeFake([ 'concat' ], true)
+  const fake = Fake()
+
+  t.equal(isSemigroup(Fake), false, 'returns false when Semigroup Constructor is passed')
+  t.equal(isSemigroup(fake), true, 'returns true when Semigroup is passed')
 
   t.end()
 })

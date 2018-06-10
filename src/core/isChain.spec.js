@@ -25,9 +25,19 @@ test('isChain core', t => {
   t.equal(isChain([]), false, 'returns false for an array')
   t.equal(isChain(identity), false, 'returns false for function')
 
-  t.equal(isChain(Fake), true, 'returns true when a Chain Constructor is passed')
-  t.equal(isChain(fake), true, 'returns true when a Chain is passed')
+  t.equal(isChain(Fake), true, 'returns true when Chain Constructor is passed')
+  t.equal(isChain(fake), true, 'returns true when Chain is passed')
 
   t.ok(isFunction(isChain))
+  t.end()
+})
+
+test('isChain fantasy-land', t => {
+  const Fake = makeFake([ 'ap', 'chain', 'map' ], true)
+  const fake = Fake()
+
+  t.equal(isChain(Fake), false, 'returns false when Chain Constructor is passed')
+  t.equal(isChain(fake), true, 'returns true when Chain is passed')
+
   t.end()
 })

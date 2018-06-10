@@ -2,6 +2,7 @@ const test = require('tape')
 const sinon = require('sinon')
 
 const isFunction = require('./isFunction')
+const fl = require('./flNames')
 
 const constant = x => () => x
 const identity = x => x
@@ -17,6 +18,24 @@ test('hasAlg', t => {
   t.equal(hasAlg('contramap', inst), false, 'returns false when alg is not on the instance')
   t.equal(hasAlg('nope', inst), false, 'returns false when alg is not a function on the instance')
 
+  t.end()
+})
+
+test('hasAlg fantasy-land', t => {
+  const keys = Object.keys(fl)
+
+  t.plan(keys.length * 2)
+
+  keys.forEach(k => {
+    const inst = { [fl[k]]: identity }
+    const noFunc = { [fl[k]]: true }
+
+    t.ok(hasAlg(k, inst, `returns true for ${k}, when ${fl[k]} is a function`))
+    t.notOk(hasAlg(k, noFunc, `returns false for ${k}, when ${fl[k]} is not a function`))
+  })
+})
+
+test('hasAlg @@implements', t => {
   const arg = 'wut'
   const res = 'result'
   const func = sinon.spy(constant(res))

@@ -7,7 +7,7 @@ const isAlt = require('./isAlt')
 // isPlus : a -> Boolean
 function isPlus(m) {
   return isAlt(m)
-    && hasAlg('zero', m)
+    && (hasAlg('zero', m) || hasAlg('zero', m.constructor))
 }
 
 module.exports = isPlus

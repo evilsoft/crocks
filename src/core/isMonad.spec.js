@@ -27,8 +27,18 @@ test('isMonad predicate function', t => {
   t.equal(isMonad([]), false, 'returns false for an array')
   t.equal(isMonad(identity), false, 'returns false for function')
 
-  t.equal(isMonad(Fake), true, 'returns true when a Monad Constructor is passed')
-  t.equal(isMonad(fake), true, 'returns true when a Monad is passed')
+  t.equal(isMonad(Fake), true, 'returns true when Monad Constructor is passed')
+  t.equal(isMonad(fake), true, 'returns true when Monad is passed')
+
+  t.end()
+})
+
+test('isMonad fantasy-land', t => {
+  const Fake = makeFake([ 'ap', 'chain', 'map', 'of' ], true)
+  const fake = Fake()
+
+  t.equal(isMonad(Fake), false, 'returns false when Monad Constructor is passed')
+  t.equal(isMonad(fake), false , 'returns false when Monad is passed')
 
   t.end()
 })

@@ -27,8 +27,19 @@ test('isFoldable core', t => {
   t.equal(isFoldable(identity), false, 'returns false for function')
 
   t.equal(isFoldable([]), true, 'returns true for an array')
-  t.equal(isFoldable(Fake), true, 'returns true when a Foldable Constructor structure is passed')
-  t.equal(isFoldable(fake), true, 'returns true when a Foldable structure is passed')
+  t.equal(isFoldable(Fake), true, 'returns true when Foldable Constructor structure is passed')
+  t.equal(isFoldable(fake), true, 'returns true when Foldable structure is passed')
 
   t.end()
 })
+
+test('isFoldable fantasy-land', t => {
+  const Fake = makeFake([ 'reduce' ], true)
+  const fake = Fake()
+
+  t.equal(isFoldable(Fake), false, 'returns false when Foldable Constructor structure is passed')
+  t.equal(isFoldable(fake), true, 'returns true when Foldable structure is passed')
+
+  t.end()
+})
+

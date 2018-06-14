@@ -27,8 +27,18 @@ test('isAlt predicate function', t => {
   t.equal(isAlt([]), false, 'returns false for an array')
   t.equal(isAlt(identity), false, 'returns false for function')
 
-  t.equal(isAlt(Fake), true, 'returns true when an Alt Constuctor is passed')
-  t.equal(isAlt(fake), true, 'returns true when an Alt is passed')
+  t.equal(isAlt(Fake), true, 'returns true when Alt Constuctor is passed')
+  t.equal(isAlt(fake), true, 'returns true when Alt is passed')
+
+  t.end()
+})
+
+test('isAlt fantasy-land', t => {
+  const Fake = makeFake([ 'alt', 'map' ], true)
+  const fake = Fake()
+
+  t.equal(isAlt(Fake), false, 'returns false when Alt Constuctor is passed')
+  t.equal(isAlt(fake), true, 'returns true when Alt is passed')
 
   t.end()
 })

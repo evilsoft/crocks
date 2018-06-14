@@ -25,9 +25,19 @@ test('isBifunctor predicate function', t => {
   t.equal(isBifunctor([]), false, 'returns false for an array')
   t.equal(isBifunctor(identity), false, 'returns false for function')
 
-  t.equal(isBifunctor(Fake), true, 'returns true when a Bifunctor Constructor is passed')
-  t.equal(isBifunctor(fake), true, 'returns true when a Bifunctor is passed')
+  t.equal(isBifunctor(Fake), true, 'returns true when Bifunctor Constructor is passed')
+  t.equal(isBifunctor(fake), true, 'returns true when Bifunctor is passed')
 
   t.ok(isFunction(isBifunctor))
+  t.end()
+})
+
+test('isBifunctor fantasy-land', t => {
+  const Fake = makeFake([ 'bimap', 'map' ], true)
+  const fake = Fake()
+
+  t.equal(isBifunctor(Fake), false , 'returns false when Bifunctor Constructor is passed')
+  t.equal(isBifunctor(fake), true, 'returns true when Bifunctor is passed')
+
   t.end()
 })

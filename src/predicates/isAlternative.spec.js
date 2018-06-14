@@ -10,7 +10,7 @@ const identity = x => x
 const isAlternative = require('./isAlternative')
 
 test('isAlternative predicate function', t => {
-  const Fake = makeFake([ 'alt', 'ap', 'chain', 'map', 'of', 'zero' ])
+  const Fake = makeFake([ 'alt', 'ap', 'map', 'of', 'zero' ])
   const fake = Fake()
 
   t.ok(isFunction(isAlternative))
@@ -27,8 +27,18 @@ test('isAlternative predicate function', t => {
   t.equal(isAlternative([]), false, 'returns false for an array')
   t.equal(isAlternative(identity), false, 'returns false for function')
 
-  t.equal(isAlternative(Fake), true, 'returns true when an Alternative Constructor is passed')
-  t.equal(isAlternative(fake), true, 'returns true when an Alternative is passed')
+  t.equal(isAlternative(Fake), true, 'returns true when Alternative Constructor is passed')
+  t.equal(isAlternative(fake), true, 'returns true when Alternative is passed')
+
+  t.end()
+})
+
+test('isAlternative fantasy-land', t => {
+  const Fake = makeFake([ 'alt', 'ap', 'map', 'of', 'zero' ], true)
+  const fake = Fake()
+
+  t.equal(isAlternative(Fake), false, 'returns true when Alternative Constructor is passed')
+  t.equal(isAlternative(fake), false, 'returns false when Alternative is passed')
 
   t.end()
 })

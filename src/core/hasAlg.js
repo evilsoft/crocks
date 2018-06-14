@@ -2,8 +2,17 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const isFunction = require('./isFunction')
+const fl = require('./flNames')
+
+const check = (alg, m) =>
+  isFunction(m[fl[alg]]) || isFunction(m[alg])
+
+const checkRep = (alg, m) =>
+  !!m.constructor && isFunction(m.constructor[fl[alg]])
+    || isFunction(m.constructor[alg])
 
 const hasAlg = (alg, m) =>
-  isFunction(m[alg]) || isFunction(m['@@implements']) && !!m['@@implements'](alg)
+  !!m && (check(alg, m) || checkRep(alg, m))
+    || isFunction(m['@@implements']) && !!m['@@implements'](alg)
 
 module.exports = hasAlg

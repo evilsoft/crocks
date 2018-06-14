@@ -27,8 +27,18 @@ test('isPlus predicate function', t => {
   t.equal(isPlus([]), false, 'returns false for an array')
   t.equal(isPlus(identity), false, 'returns false for function')
 
-  t.equal(isPlus(Fake), true, 'returns true when a Plus Constructor is passed')
-  t.equal(isPlus(fake), true, 'returns true when a Plus is passed')
+  t.equal(isPlus(Fake), true, 'returns true when Plus Constructor is passed')
+  t.equal(isPlus(fake), true, 'returns true when Plus is passed')
+
+  t.end()
+})
+
+test('isPlus fantasy-land', t => {
+  const Fake = makeFake([ 'alt', 'map', 'zero' ], true)
+  const fake = Fake()
+
+  t.equal(isPlus(Fake), false, 'returns true when Plus Constructor is passed')
+  t.equal(isPlus(fake), true, 'returns true when Plus is passed')
 
   t.end()
 })

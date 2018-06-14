@@ -32,3 +32,13 @@ test('isCategory predicate function', t => {
 
   t.end()
 })
+
+test('isCategory fantasy-land', t => {
+  const Fake = makeFake([ 'compose', 'id' ], true)
+  const fake = Fake()
+
+  t.equal(isCategory(Fake), false, 'returns false when a Category Constructor is passed')
+  t.equal(isCategory(fake), true, 'returns true when a Category is passed')
+
+  t.end()
+})

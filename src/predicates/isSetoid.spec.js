@@ -32,3 +32,13 @@ test('isSetoid predicate function', t => {
 
   t.end()
 })
+
+test('isSetoid fantasy-land', t => {
+  const Fake = makeFake([ 'equals' ], true)
+  const fake = Fake()
+
+  t.equal(isSetoid(Fake), false, 'returns false when a Setoid Constructor is passed')
+  t.equal(isSetoid(fake), true, 'returns true when a Setoid is passed')
+
+  t.end()
+})

@@ -9,7 +9,7 @@ const identity = x => x
 
 const isSemigroupoid = require('./isSemigroupoid')
 
-test('isSemigroupoid predicate function', t => {
+test('isSemigroupoid predicate', t => {
   const Fake = makeFake([ 'compose' ])
   const fake = Fake()
 
@@ -27,8 +27,18 @@ test('isSemigroupoid predicate function', t => {
   t.equal(isSemigroupoid({}), false, 'returns false for an object')
   t.equal(isSemigroupoid(identity), false, 'returns false for function')
 
-  t.equal(isSemigroupoid(Fake), true, 'returns true when a Semigroupoid Constructor is passed')
-  t.equal(isSemigroupoid(fake), true, 'returns true when a Semigroupoid is passed')
+  t.equal(isSemigroupoid(Fake), true, 'returns true when Semigroupoid Constructor is passed')
+  t.equal(isSemigroupoid(fake), true, 'returns true when Semigroupoid is passed')
+
+  t.end()
+})
+
+test('isSemigroupoid fantasy-land', t => {
+  const Fake = makeFake([ 'compose' ], true)
+  const fake = Fake()
+
+  t.equal(isSemigroupoid(Fake), false, 'returns true when Semigroupoid Constructor is passed')
+  t.equal(isSemigroupoid(fake), true, 'returns true when Semigroupoid is passed')
 
   t.end()
 })

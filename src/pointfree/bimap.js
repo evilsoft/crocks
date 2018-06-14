@@ -19,7 +19,7 @@ function bimap(f, g, m) {
     )
   }
 
-  return (m[fl.bimap] || m.bimap).bind(m)(f, g)
+  return (m[fl.bimap] || m.bimap).call(m, f, g)
 }
 
 module.exports = curry(bimap)

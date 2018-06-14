@@ -19,7 +19,7 @@ function reduce(fn, init, m) {
     )
   }
 
-  return (m[fl.reduce] || m.reduce).bind(m)(fn, init)
+  return (m[fl.reduce] || m.reduce).call(m, fn, init)
 }
 
 module.exports = curry(reduce)

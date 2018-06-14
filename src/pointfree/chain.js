@@ -22,7 +22,7 @@ function chain(fn, m) {
     return _chain(fn, m)
   }
 
-  return (m[fl.chain] || m.chain).bind(m)(fn)
+  return (m[fl.chain] || m.chain).call(m, fn)
 }
 
 module.exports = curry(chain)

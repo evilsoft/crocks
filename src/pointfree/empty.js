@@ -7,11 +7,11 @@ const fl = require('../core/flNames')
 
 function empty(m) {
   if(m && hasAlg('empty', m)) {
-    return (m[fl.empty] || m.empty).bind(m)()
+    return (m[fl.empty] || m.empty).call(m)
   }
 
   if(m && hasAlg('empty', m.constructor)) {
-    return (m.constructor[fl.empty] || m.constructor.empty).bind(m)()
+    return (m.constructor[fl.empty] || m.constructor.empty).call(m)
   }
 
   if(isSameType([], m)) {

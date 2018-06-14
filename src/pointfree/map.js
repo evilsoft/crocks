@@ -6,6 +6,7 @@ const curry = require('../core/curry')
 const isArray = require('../core/isArray')
 const isObject = require('../core/isObject')
 const isFunction = require('../core/isFunction')
+const isFunctor= require('../core/isFunctor')
 
 const array = require('../core/array')
 const object = require('../core/object')
@@ -25,12 +26,8 @@ function map(fn, m) {
     return array.map(fn, m)
   }
 
-  if(m && isFunction(m[fl.map])) {
-    return m[fl.map](fn)
-  }
-
-  if(m && isFunction(m.map)) {
-    return m.map(fn)
+  if(m && isFunctor(m)) {
+    return (m[fl.map] || m.map).call(m, fn)
   }
 
   if(isObject(m)) {

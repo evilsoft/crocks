@@ -14,7 +14,7 @@ function alt(m, x) {
     )
   }
 
-  return (x[fl.alt] || x.alt).bind(x)(m)
+  return (x[fl.alt] || x.alt).call(x, m)
 }
 
 module.exports = curry(alt)

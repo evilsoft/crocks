@@ -19,7 +19,7 @@ function promap(l, r, m) {
   }
 
   if(isProfunctor(m)) {
-    return (m[fl.promap] || m.promap).bind(m)(l, r)
+    return (m[fl.promap] || m.promap).call(m, l, r)
   }
 
   throw new TypeError(

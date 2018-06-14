@@ -13,7 +13,7 @@ function concat(x, m) {
     )
   }
 
-  return (m[fl.concat] || m.concat).bind(m)(x)
+  return (m[fl.concat] || m.concat).call(m, x)
 }
 
 module.exports = curry(concat)

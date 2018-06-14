@@ -53,7 +53,7 @@ function equals(a, b) {
   }
 
   if(hasAlg('equals', a)) {
-    return (b[fl.equals] || b.equals).bind(b)(a)
+    return (b[fl.equals] || b.equals).call(b, a)
   }
 
   return (strats[type(a)] || comp)(a, b)

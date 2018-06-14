@@ -15,7 +15,7 @@ function extend(fn, m) {
     throw new TypeError('extend: Extend required for second argument')
   }
 
-  return (m[fl.extend] || m.extend).bind(m)(fn)
+  return (m[fl.extend] || m.extend).call(m, fn)
 }
 
 module.exports = curry(extend)

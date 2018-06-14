@@ -20,7 +20,7 @@ function contramap(fn, m) {
   }
 
   if(isContravariant(m)) {
-    return (m[fl.contramap] || m.contramap).bind(m)(fn)
+    return (m[fl.contramap] || m.contramap).call(m, fn)
   }
 
   throw new TypeError(

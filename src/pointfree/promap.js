@@ -3,7 +3,9 @@
 
 const compose = require('../core/compose')
 const curry = require('../core/curry')
+const fl = require('../core/flNames')
 const isFunction = require('../core/isFunction')
+const isProfunctor = require('../core/isProfunctor')
 
 function promap(l, r, m) {
   if(!(isFunction(l) && isFunction(r))) {
@@ -16,8 +18,8 @@ function promap(l, r, m) {
     return compose(compose(r, m), l)
   }
 
-  if(m && isFunction(m.promap)) {
-    return m.promap(l, r)
+  if(isProfunctor(m)) {
+    return (m[fl.promap] || m.promap).bind(m)(l, r)
   }
 
   throw new TypeError(

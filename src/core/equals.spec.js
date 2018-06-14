@@ -1,7 +1,16 @@
 const test = require('tape')
 const sinon = require('sinon')
 
+const fl = require('../core/flNames')
 const isFunction = require('./isFunction')
+
+const constant = x => () => x
+
+const mock = x => Object.assign({}, {
+  equals: sinon.spy(constant(null)),
+  type: constant('Setoid')
+}, x)
+
 const equals = require('./equals')
 
 test('equals', t => {
@@ -22,19 +31,31 @@ test('equals primatives', t => {
   t.end()
 })
 
-test('equals adts', t => {
-  const value = 'value'
-  const spy = sinon.spy(() => value)
+test('equals Setoid', t => {
+  const x = 'value'
 
-  const adt = () =>
-    ({ type: () => 'ADT', equals: spy })
-
-  const one = adt()
-  const two = adt()
+  const one = mock({ equals: sinon.spy(constant(x)) })
+  const two = mock({ equals: sinon.spy(constant(x)) })
   const result = equals(one, two)
 
-  t.ok(spy.calledWith(two), 'calls equals on first, passing in second')
-  t.equals(result, value, 'returns the result of first equals')
+  t.ok(two.equals.calledWith(one), 'calls equals on first, passing in second')
+  t.ok(two.equals.calledOn(two), 'binds equals to second argument')
+  t.equals(result, x, 'returns the result of second equals')
+
+  t.end()
+})
+
+test('equals Setoid (fantasy-land)', t => {
+  const x = 'value'
+
+  const one = mock({ [fl.equals]: sinon.spy(constant(null)) })
+  const two = mock({ [fl.equals]: sinon.spy(constant(x)) })
+  const result = equals(one, two)
+
+  t.ok(two[fl.equals].calledWith(one), 'calls fantasy-land/equals on first, passing in second')
+  t.ok(two[fl.equals].calledOn(two), 'binds fantasy-land/equals to second argument')
+  t.equals(result, x, 'returns the result of second fantasy-land/equals')
+  t.notOk(two.equals.called, 'does not call empty')
 
   t.end()
 })

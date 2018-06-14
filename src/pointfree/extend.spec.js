@@ -5,18 +5,21 @@ const helpers = require('../test/helpers')
 const bindFunc = helpers.bindFunc
 
 const isFunction = require('../core/isFunction')
+const fl = require('../core/flNames')
 const unit = require('../core/_unit')
 
-const identity = x => x
+const constant = x => () => x
 
-const mock =
-  x => Object.assign({}, x, { map: unit })
+const mock = x => Object.assign({}, {
+  extend: sinon.spy(),
+  map: unit
+}, x)
 
 const extend = require('./extend')
 
 test('extend pointfree', t => {
   const a = bindFunc(extend)
-  const m = mock({ extend: identity })
+  const m = mock({ extend: unit })
 
   t.ok(isFunction(extend), 'is a function')
 
@@ -33,27 +36,49 @@ test('extend pointfree', t => {
   t.throws(a({}, m), noFunc, 'throws if first arg is an object')
 
   const noExtend = /extend: Extend required for second argument/
-  t.throws(a(identity, undefined), noExtend, 'throws if second arg is undefined')
-  t.throws(a(identity, null), noExtend, 'throws if second arg is null')
-  t.throws(a(identity, 0), noExtend, 'throws if second arg is a falsey number')
-  t.throws(a(identity, 1), noExtend, 'throws if second arg is a truthy number')
-  t.throws(a(identity, ''), noExtend, 'throws if second arg is a falsey string')
-  t.throws(a(identity, 'string'), noExtend, 'throws if second arg is a truthy string')
-  t.throws(a(identity, false), noExtend, 'throws if second arg is false')
-  t.throws(a(identity, true), noExtend, 'throws if second arg is true')
-  t.throws(a(identity, []), noExtend, 'throws if second arg is an array')
-  t.throws(a(identity, {}), noExtend, 'throws if second arg is an object')
+  t.throws(a(unit, undefined), noExtend, 'throws if second arg is undefined')
+  t.throws(a(unit, null), noExtend, 'throws if second arg is null')
+  t.throws(a(unit, 0), noExtend, 'throws if second arg is a falsey number')
+  t.throws(a(unit, 1), noExtend, 'throws if second arg is a truthy number')
+  t.throws(a(unit, ''), noExtend, 'throws if second arg is a falsey string')
+  t.throws(a(unit, 'string'), noExtend, 'throws if second arg is a truthy string')
+  t.throws(a(unit, false), noExtend, 'throws if second arg is false')
+  t.throws(a(unit, true), noExtend, 'throws if second arg is true')
+  t.throws(a(unit, []), noExtend, 'throws if second arg is an array')
+  t.throws(a(unit, {}), noExtend, 'throws if second arg is an object')
 
   t.end()
 })
 
 test('extend with Extend', t => {
-  const f = identity
-  const m = mock({ extend: sinon.spy(identity) })
+  const x = 'result'
 
-  extend(f, m)
+  const m = mock({
+    extend: sinon.spy(constant(x))
+  })
 
-  t.ok(m.extend.calledWith(f), 'calls the extend function on the second arg passing in the first arg')
+  const result = extend(unit, m)
+
+  t.ok(m.extend.calledWith(unit), 'calls extend on the second passing the first')
+  t.ok(m.extend.calledOn(m), 'binds extend to second argument')
+  t.equal(result, x, 'returns the result of extend on second argument')
+
+  t.end()
+})
+
+test('extend with Extend (fantasy-land)', t => {
+  const x = 'result'
+
+  const m = mock({
+    [fl.extend]: sinon.spy(constant(x))
+  })
+
+  const result = extend(unit, m)
+
+  t.ok(m[fl.extend].calledWith(unit), 'calls fantasy-land/extend on the second passing the first')
+  t.ok(m[fl.extend].calledOn(m), 'binds fantasy-land/extend to second argument')
+  t.equal(result, x, 'returns the result of fantasy-land/extend on second argument')
+  t.notOk(m.extend.called, 'does not call extend')
 
   t.end()
 })

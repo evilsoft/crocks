@@ -4,10 +4,17 @@ const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
 
+const fl = require('../core/flNames')
 const isFunction = require('../core/isFunction')
 const unit = require('../core/_unit')
 
+const constant = x => () => x
 const identity = x => x
+
+const mock = x => Object.assign({}, {
+  map: unit,
+  bimap: sinon.spy()
+}, x)
 
 const bimap = require('./bimap')
 
@@ -54,15 +61,35 @@ test('bimap pointfree', t => {
   t.end()
 })
 
-test('bimap bifunctor', t => {
-  const m = {
-    map: unit,
-    bimap: sinon.spy(unit)
-  }
+test('bimap with Bifunctor', t => {
+  const x = 'result'
+  const m = mock({ bimap: sinon.spy(constant(x)) })
 
-  bimap(identity)(identity, m)
+  const f = x => identity(x)
+  const g = x => identity(x)
 
-  t.ok(m.bimap.calledWith(identity, identity), 'calls bimap on bifunctor, passing the function')
+  const result = bimap(f)(g, m)
+
+  t.ok(m.bimap.calledWith(f, g), 'calls bimap on third argument, passing the (2) functions')
+  t.ok(m.bimap.calledOn(m), 'binds bimap to third argument')
+  t.equal(result, x, 'returns the result of bimap on third argument')
+
+  t.end()
+})
+
+test('bimap with Bifunctor (fantasy-land)', t => {
+  const x = 'result'
+  const m = mock({ [fl.bimap]: sinon.spy(constant(x)) })
+
+  const f = x => identity(x)
+  const g = x => identity(x)
+
+  const result = bimap(f, g, m)
+
+  t.ok(m[fl.bimap].calledWith(f, g), 'calls fantasy-land/bimap on third argument, passing the (2) functions')
+  t.ok(m[fl.bimap].calledOn(m), 'binds fantasy-land/bimap to third argument')
+  t.equal(result, x, 'returns the result of fantasy-land/bimap on third argument')
+  t.notOk(m.bimap.called, 'does not call bimap on third argument')
 
   t.end()
 })

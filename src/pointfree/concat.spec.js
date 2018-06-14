@@ -1,11 +1,20 @@
 const test = require('tape')
+const sinon = require('sinon')
 const helpers = require('../test/helpers')
-const Last = require('../test/LastMonoid')
 
 const bindFunc = helpers.bindFunc
 
+const constant = x => () => x
+const identity = x => x
+
 const isFunction  = require('../core/isFunction')
 const unit = require('../core/_unit')
+const fl = require('../core/flNames')
+
+const mock = x => Object.assign({}, {
+  concat: sinon.spy(),
+  type: constant('Semigroup')
+}, x)
 
 const concat = require('./concat')
 
@@ -14,7 +23,7 @@ test('concat pointfree', t => {
 
   t.ok(isFunction(concat), 'is a function')
 
-  const err = /concat: Semigroups of the same type required both arguments/
+  const err = /concat: Semigroups of the same type required for both arguments/
   t.throws(f('', undefined), err, 'throws if second arg is undefined')
   t.throws(f('', null), err, 'throws if second arg is null')
   t.throws(f('', 0), err, 'throws if second arg is falsey number')
@@ -49,12 +58,31 @@ test('concat pointfree arrays', t => {
   t.end()
 })
 
-test('concat pointfree semigroup', t => {
-  const m = Last('1')
+test('concat with Semigroup', t => {
+  const x = 'result'
+  const s = mock({ concat: sinon.spy(constant(x)) })
+  const p = mock({ concat: identity })
 
-  const result = concat(Last('3'), m)
+  const result = concat(p, s)
 
-  t.equal(result.valueOf(), '3', 'concats semigroup as expected')
+  t.ok(s.concat.calledWith(p), 'calls concat on Semigroup, passing the first argument')
+  t.ok(s.concat.calledOn(s), 'binds concat to second argument')
+  t.equal(result, x, 'returns the result of concat on second argument')
+
+  t.end()
+})
+
+test('concat with Semigroup (fantasy-land)', t => {
+  const x = 'result'
+  const s = mock({ [fl.concat]: sinon.spy(constant(x)) })
+  const p = mock({ [fl.concat]: identity })
+
+  const result = concat(p, s)
+
+  t.ok(s[fl.concat].calledWith(p), 'calls fantasy-land/concat on Semigroup, passing the first argument')
+  t.ok(s[fl.concat].calledOn(s), 'binds fantasy-land/concat to second argument')
+  t.equal(result, x, 'returns the result of fantasy-land/concat on second argument')
+  t.notOk(s.concat.called, 'does not call concat on second argument')
 
   t.end()
 })

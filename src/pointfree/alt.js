@@ -2,6 +2,7 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const curry = require('../core/curry')
+const fl = require('../core/flNames')
 const isAlt = require('../core/isAlt')
 const isSameType = require('../core/isSameType')
 
@@ -13,7 +14,7 @@ function alt(m, x) {
     )
   }
 
-  return x.alt(m)
+  return (x[fl.alt] || x.alt).bind(x)(m)
 }
 
 module.exports = curry(alt)

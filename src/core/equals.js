@@ -5,6 +5,7 @@ const isSameType = require('./isSameType')
 const isSame = require('./isSame')
 const hasAlg = require('./hasAlg')
 const type = require('./type')
+const fl = require('./flNames')
 
 const comp = (a, b) =>
   a.valueOf() === b.valueOf()
@@ -52,8 +53,9 @@ function equals(a, b) {
   }
 
   if(hasAlg('equals', a)) {
-    return a.equals(b)
+    return (b[fl.equals] || b.equals).bind(b)(a)
   }
+
   return (strats[type(a)] || comp)(a, b)
 }
 

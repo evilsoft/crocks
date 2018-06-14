@@ -6,10 +6,16 @@ const bindFunc = helpers.bindFunc
 
 const isFunction = require('../core/isFunction')
 const unit = require('../core/_unit')
+const fl = require('../core/flNames')
 
+const constant = x => () => x
 const identity = x => x
 
 const contramap = require('./contramap')
+
+const mock = x => Object.assign({}, {
+  contramap: sinon.spy()
+}, x)
 
 test('contramap pointfree', t => {
   const m = bindFunc(contramap)
@@ -47,12 +53,36 @@ test('contramap pointfree', t => {
   t.end()
 })
 
-test('contramap contra functor', t => {
-  const m = { contramap: sinon.spy(unit) }
+test('contramap with Contravariant', t => {
+  const x = 'result'
 
-  contramap(identity, m)
+  const m = mock({
+    contramap: sinon.spy(constant(x))
+  })
 
-  t.ok(m.contramap.calledWith(identity), 'calls contramap on functor, passing the function')
+  const result = contramap(identity, m)
+
+  t.ok(m.contramap.calledWith(identity), 'calls contramap on second argument, passing the function')
+  t.ok(m.contramap.calledOn(m), 'binds contramap to second argument')
+  t.equal(result, x, 'returns the result of contramap on second argument')
+
+  t.end()
+})
+
+test('contramap with Contravariant (fantasy-land)', t => {
+  const x = 'result'
+
+  const m = mock({
+    [fl.contramap]: sinon.spy(constant(x))
+  })
+
+  const result = contramap(identity, m)
+
+  t.ok(m[fl.contramap].calledWith(identity), 'calls fantasy-land/contramap on second argument, passing function')
+  t.ok(m[fl.contramap].calledOn(m), 'binds fantasy-land/contramap to second argument')
+  t.equal(result, x, 'returns the result of fantasy-land/contramap on second argument')
+  t.notOk(m.contramap.called, 'does not call contramap on second argument')
+
   t.end()
 })
 

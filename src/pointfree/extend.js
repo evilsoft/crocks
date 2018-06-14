@@ -2,6 +2,7 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const curry = require('../core/curry')
+const fl = require('../core/flNames')
 const isExtend = require('../core/isExtend')
 const isFunction = require('../core/isFunction')
 
@@ -14,7 +15,7 @@ function extend(fn, m) {
     throw new TypeError('extend: Extend required for second argument')
   }
 
-  return m.extend(fn)
+  return (m[fl.extend] || m.extend).bind(m)(fn)
 }
 
 module.exports = curry(extend)

@@ -4,6 +4,7 @@
 const curry = require('../core/curry')
 const isFoldable = require('../core/isFoldable')
 const isFunction = require('../core/isFunction')
+const fl = require('../core/flNames')
 
 function reduce(fn, init, m) {
   if(!isFunction(fn)) {
@@ -18,7 +19,7 @@ function reduce(fn, init, m) {
     )
   }
 
-  return m.reduce(fn, init)
+  return (m[fl.reduce] || m.reduce).bind(m)(fn, init)
 }
 
 module.exports = curry(reduce)

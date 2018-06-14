@@ -4,6 +4,7 @@
 const curry = require('../core/curry')
 const isBifunctor = require('../core/isBifunctor')
 const isFunction = require('../core/isFunction')
+const fl = require('../core/flNames')
 
 function bimap(f, g, m) {
   if(!(isFunction(f) &&  isFunction(g))) {
@@ -18,7 +19,7 @@ function bimap(f, g, m) {
     )
   }
 
-  return m.bimap(f, g)
+  return (m[fl.bimap] || m.bimap).bind(m)(f, g)
 }
 
 module.exports = curry(bimap)

@@ -4,21 +4,23 @@ const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
 
+const fl = require('../core/flNames')
 const isFunction = require('../core/isFunction')
 const unit = require('../core/_unit')
 
 const constant = x => () => x
-const identity = x => x
 
-const mock = x => Object.assign({}, x, {
-  map: unit, type: constant('silly')
-})
+const mock = x => Object.assign({}, {
+  map: unit,
+  alt: sinon.spy(),
+  type: constant('Alt')
+}, x)
 
 const alt = require('./alt')
 
 test('alt pointfree', t => {
   const a = bindFunc(alt)
-  const m = mock({ alt: identity })
+  const m = mock({ alt: unit })
 
   t.ok(isFunction(alt), 'is a function')
 
@@ -49,12 +51,30 @@ test('alt pointfree', t => {
 })
 
 test('alt with Alt', t => {
-  const m = mock({ alt: sinon.spy(identity) })
-  const x = mock({ alt: sinon.spy(identity) })
+  const x = 'result'
+  const s = mock({ alt: sinon.spy(constant(x)) })
+  const p = mock({ alt: sinon.spy(unit) })
 
-  alt(m, x)
+  const result = alt(p, s)
 
-  t.ok(x.alt.calledWith(m), 'calls the alt function on the second arg passing in the first arg')
+  t.ok(s.alt.calledWith(p), 'calls alt on second argument passing in the first')
+  t.ok(s.alt.calledOn(s), 'binds alt to second argument')
+  t.equal(result, x, 'returns the result of alt on second argument')
+
+  t.end()
+})
+
+test('alt with Alt (fantasy-land)', t => {
+  const x = 'result'
+  const s = mock({ [fl.alt]: sinon.spy(constant(x)) })
+  const p = mock({ [fl.alt]: sinon.spy(unit) })
+
+  const result = alt(p, s)
+
+  t.ok(s[fl.alt].calledWith(p), 'calls fantasy-land/alt on second argument passing in the first')
+  t.ok(s[fl.alt].calledOn(s), 'binds fantasy-land/alt to second argument')
+  t.equal(result, x, 'returns the result of fantasy-land/alt on second argument')
+  t.notOk(s.alt.called, 'does not call alt on second argument')
 
   t.end()
 })

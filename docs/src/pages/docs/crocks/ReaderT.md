@@ -23,6 +23,47 @@ being wrapped.
 
 </article>
 
+<article id="topic-construction">
+
+## Construction
+
+```haskell
+ReaderT :: MonadTypeRep M, Monad m => M -> Reader(M) e (m a)
+```
+
+`ReaderT` is a type constructor that defines a unary function that takes a
+constructor, or TypeRep, of any `Monad` and returns a new constructor that
+can be used to construct `Reader` instances that fix the far right portion
+of the `Reader(M)` to the provided `Monad`.
+
+The `ReaderT` constructor can be thought of as a constructor that constructs
+a constructor.
+
+```javascript
+import ReaderT from 'crocks/Reader/ReaderT'
+
+import Maybe from 'crocks/Maybe'
+import Async from 'crocks/Async'
+
+// MaybeReader :: Reader(Maybe)
+const MaybeReader =
+  ReaderT(Maybe)
+
+// AsyncReader :: Reader(Async)
+const AsyncReader =
+  ReaderT(Async)
+
+MaybeReader.of('nice')
+  .runWith()
+//=> Just "nice"
+
+AsyncReader.of(true)
+  .runWith()
+//=> Async e Boolean
+```
+
+</article>
+
 <article id="topic-constructor">
 
 ## Constructor Methods

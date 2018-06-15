@@ -88,6 +88,52 @@ bigNumber(3)
 
 </article>
 
+<article id="topic-construction">
+
+## Construction
+
+```haskell
+Maybe :: a -> Maybe a
+```
+
+Most of the time construction of a `Maybe` is accomplished through the use
+of helper functions like [`safe`](#safe) or by employing one of the instance
+constructors, [`Just`](#just) or [`Nothing`](#nothing). This is due to the
+nature of `Maybe` and most other Sum Types.
+
+As a matter of consistency and completion, a `Maybe` instance can also be
+constructed using its TypeRep like any other type. The `Maybe` constructor is a
+unary function that accepts any type `a` and returns a `Just` instance, wrapping
+the value passed to its argument.
+
+```javascript
+import Maybe from 'crocks/Maybe'
+import equals from 'crocks/pointfree/equals'
+
+Maybe('some string')
+//=> Maybe String
+
+Maybe.of('some string')
+//=> Maybe String
+
+Maybe.Just('some string')
+//=> Maybe String
+
+equals(
+  Maybe.Just([ 1, 2, 3 ]),
+  Maybe.of([ 1, 2, 3 ])
+)
+//=> true
+
+equals(
+  Maybe.of({ a: 100 }),
+  Maybe({ a: 100 })
+)
+//=> true
+```
+
+</article>
+
 <article id="topic-constructor">
 
 ## Constructor Methods

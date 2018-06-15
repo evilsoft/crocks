@@ -71,6 +71,29 @@ resetField(changed)
 
 </article>
 
+<article id="topic-construction">
+
+## Construction
+
+```haskell
+Const :: c -> Const c a
+```
+
+The constructor for `Const` is a unary function that takes any type as its
+argument. Once constructed, the value will occupy the far left parameter `c`.
+
+```javascript
+import Const from 'crocks/Const'
+
+Const('always and forever')
+//=> Const String a
+
+Const(false)
+//=> Const Boolean a
+```
+
+</article>
+
 <article id="topic-instance">
 
 ## Instance Methods

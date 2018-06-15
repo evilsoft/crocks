@@ -81,6 +81,35 @@ average([ 9, 77, 34 ])
 
 </article>
 
+<article id="topic-construction">
+
+## Construction
+
+```haskell
+Pair :: (a, b) -> Pair a b
+```
+
+In order to construct a `Pair`, two values of any type are required by the
+constructor. The types of the arguments can, and often do, vary. All binary
+constructors in `crocks` are not curried by default, so both arguments must be
+provided at the same time in order to construct the `Pair`.
+
+Once both arguments are provided, the constructor will return a new `Pair`
+instance with the first argument in the left portion and the second argument
+in the right position.
+
+```javascript
+import Pair from 'crocks/Pair'
+
+Pair(34, false)
+//=> Pair Number Boolean
+
+Pair(34, Pair(true, 'string'))
+//=> Pair Number (Pair Boolean String)
+```
+
+</article>
+
 <article id="topic-instance">
 
 ## Instance Methods

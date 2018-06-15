@@ -153,6 +153,49 @@ afterCancel() // this clears the timeout
 
 </article>
 
+<article id="topic-construction">
+
+## Construction
+
+```haskell
+Async :: ((e -> (), a -> ()) -> ()) -> Async e a
+Async :: ((e -> (), a -> ()) -> (() -> ()) -> Async e a
+```
+
+There are (2) possible ways to construct an `Async`, depending on the need
+or ability to cancel a given `Async` in flight. Both methods of construction
+require a binary function that takes (2) unary functions.
+
+The first function is used to signal the rejection of a given `Async` and will
+settle on a `Rejected` instance wrapping whatever was passed to it function.
+The second function is used to settle the `Async` to a `Resolved` instance, also
+wrapping the value passed to the functions. These functions are provided by
+the `Async` and will return `undefined`.
+
+The (2) ways to construct an `Async` are characterized by the return of the
+function you are using to construct it. If anything other than a function is
+returned, then the value is ignored.
+
+If however a function is returned, then the function will be run when
+the `Async` is canceled while it is "in-flight". This function should be used to
+perform any cleanup required in the event of a cancellation. This cleanup
+function receives no input and ignores anything that may be returned.
+
+```javascript
+import Async from 'crocks/Async'
+
+Async((reject, resolve) => {
+  const token =
+    setTimeout(() => resolve('fired'), 1000)
+
+  // stop timer on cancel
+  return () => { clearTimeout(token) }
+})
+//=> Async e String
+```
+
+</article>
+
 <article id="topic-constructor">
 
 ## Constructor Methods
@@ -328,8 +371,8 @@ function.
 
 When the provided function is called, it returns a "lazy" `Async`. When the
 resulting instance is forked, if the `err` is a non-null value then the
-instance will be [`Rejected`](#rejected) with the `err` value. When the `err` is null, then
-the instance will become [`Resolved`](#resolved) with the `data` value.
+instance will be [`Rejected`](#rejected) with the `err` value. When the `err` is
+null, then the instance will become [`Resolved`](#resolved) with the `data` value.
 
 There are some libraries whose functions are methods on some stateful object.
 As such, the need for binding may arise. `fromNode` provides a second, optional

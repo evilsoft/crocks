@@ -59,6 +59,36 @@ flow
 
 </article>
 
+<article id="topic-construction">
+
+## Construction
+
+```haskell
+Reader :: (e -> a) -> Reader e a
+```
+
+The constructor for a `Reader` type is a unary function that requires another
+unary function as its input. After passing the constructor a function, it will
+return a new `Reader` instance. The left type is parameterized by the input, or
+domain, of the wrapped function. While the right type represents the result, or
+co-domain.
+
+The left type `e` represents a family of `Reader`s that can be combined and must
+be fixed to that type for all valid combination of instances.
+
+```javascript
+import Reader from 'crocks/Reader'
+import assoc from 'crocks/helpers/assoc'
+
+Reader(assoc('animal', 'cat'))
+//=> Reader Object Object
+
+Reader(x => x.length || 0)
+//=> Reader a Number
+```
+
+</article>
+
 <article id="topic-constructor">
 
 ## Constructor Methods

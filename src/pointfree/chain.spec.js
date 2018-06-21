@@ -6,20 +6,25 @@ const bindFunc = helpers.bindFunc
 
 const isFunction = require('../core/isFunction')
 const unit = require('../core/_unit')
+const fl = require('../core/flNames')
 
 const constant = x => () => x
-const identity = x => x
+
+const mock = x => Object.assign({}, {
+  ap: unit,
+  map: unit,
+  chain: sinon.spy()
+}, x)
 
 const chain = require('./chain')
 
 test('chain pointfree', t => {
   const c = bindFunc(chain)
   const x = 'result'
-  const m = {
-    ap: identity,
-    map: identity,
+
+  const m = mock({
     chain: sinon.spy(constant(x))
-  }
+  })
 
   t.ok(isFunction(chain), 'is a function')
 
@@ -57,18 +62,49 @@ test('chain pointfree', t => {
   t.throws(c(constant(true), [ 1 ]), noArray, 'throws when function returns true')
   t.throws(c(constant({}), [ 1 ]), noArray, 'throws when function returns an object')
 
-  t.doesNotThrow(c(unit, m), 'allows a function and Chain')
+  t.end()
+})
 
+test('chain with Chain', t => {
+  const x = 'result'
   const f = sinon.spy()
+
+  const m = mock({
+    chain: sinon.spy(constant(x))
+  })
+
   const res = chain(f, m)
 
+  chain(f, m)
+
   t.ok(m.chain.calledWith(f), 'calls chain on Chain, passing the function')
+  t.ok(m.chain.calledOn(m), 'binds chain to second argument')
   t.equal(res, x, 'returns the result of chain on Chain')
 
   t.end()
 })
 
-test('chain array', t => {
+test('chain with Chain (fantasy-land)', t => {
+  const x = 'result'
+  const f = sinon.spy()
+
+  const m = mock({
+    [fl.chain]: sinon.spy(constant(x))
+  })
+
+  const res = chain(f, m)
+
+  chain(f, m)
+
+  t.ok(m[fl.chain].calledWith(f), 'calls fantasy-land/chain on Chain, passing the function')
+  t.ok(m[fl.chain].calledOn(m), 'binds fantasy-land/chain to second argument')
+  t.equal(res, x, 'returns the result of fantasy-land/chain on Chain')
+  t.notOk(m.chain.called, 'does not call chain on second argument')
+
+  t.end()
+})
+
+test('chain with Array', t => {
   const f = x => [ x, x + 1 ]
   const x = [ 19 ]
 

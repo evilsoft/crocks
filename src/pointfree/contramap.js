@@ -4,6 +4,8 @@
 const compose = require('../core/compose')
 const curry = require('../core/curry')
 const isFunction = require('../core/isFunction')
+const isContravariant = require('../core/isContravariant')
+const fl = require('../core/flNames')
 
 // contramap : Functor f => (b -> a) -> f b -> f a
 function contramap(fn, m) {
@@ -17,9 +19,10 @@ function contramap(fn, m) {
     return compose(m, fn)
   }
 
-  if(m && isFunction(m.contramap)) {
-    return m.contramap(fn)
+  if(isContravariant(m)) {
+    return (m[fl.contramap] || m.contramap).call(m, fn)
   }
+
   throw new TypeError(
     'contramap: Function or Contavariant Functor of the same type required for second argument'
   )

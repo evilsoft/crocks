@@ -1,13 +1,16 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const array = require('../core/array')
 const compose = require('../core/compose')
 const curry = require('../core/curry')
 const isArray = require('../core/isArray')
 const isObject = require('../core/isObject')
 const isFunction = require('../core/isFunction')
+const isFunctor= require('../core/isFunctor')
+
+const array = require('../core/array')
 const object = require('../core/object')
+const fl = require('../core/flNames')
 
 // map : Functor f => (a -> b) -> f a -> f b
 function map(fn, m) {
@@ -23,8 +26,8 @@ function map(fn, m) {
     return array.map(fn, m)
   }
 
-  if(m && isFunction(m.map)) {
-    return m.map(fn)
+  if(m && isFunctor(m)) {
+    return (m[fl.map] || m.map).call(m, fn)
   }
 
   if(isObject(m)) {

@@ -5,30 +5,33 @@ const helpers = require('../test/helpers')
 const bindFunc = helpers.bindFunc
 
 const isFunction = require('../core/isFunction')
+const fl = require('../core/flNames')
 const unit = require('../core/_unit')
 
 const constant = x => () => x
+
+const mock = x => Object.assign({}, {
+  reduce: constant('Chain')
+}, x)
 
 const reduce = require('./reduce')
 
 test('reduce pointfree', t => {
   const r = bindFunc(reduce)
-  const x = 'result'
-  const m = { reduce: sinon.spy(constant(x)) }
 
   t.ok(isFunction(reduce), 'is a function')
 
   const err = /reduce: Function required for first argument/
-  t.throws(r(undefined, 0, m), err, 'throws if first arg is undefined')
-  t.throws(r(null, 0, m), err, 'throws if first arg is null')
-  t.throws(r(0, 0, m), err, 'throws if first arg is a falsey number')
-  t.throws(r(1, 0, m), err, 'throws if first arg is a truthy number')
-  t.throws(r('', 0, m), err, 'throws if first arg is a falsey string')
-  t.throws(r('string', 0, m), err, 'throws if first arg is a truthy string')
-  t.throws(r(false, 0, m), err, 'throws if first arg is false')
-  t.throws(r(true, 0, m), err, 'throws if first arg is true')
-  t.throws(r([], 0, m), err, 'throws if first arg is an array')
-  t.throws(r({}, 0, m), err, 'throws if first arg is an object')
+  t.throws(r(undefined, 0, []), err, 'throws if first arg is undefined')
+  t.throws(r(null, 0, []), err, 'throws if first arg is null')
+  t.throws(r(0, 0, []), err, 'throws if first arg is a falsey number')
+  t.throws(r(1, 0, []), err, 'throws if first arg is a truthy number')
+  t.throws(r('', 0, []), err, 'throws if first arg is a falsey string')
+  t.throws(r('string', 0, []), err, 'throws if first arg is a truthy string')
+  t.throws(r(false, 0, []), err, 'throws if first arg is false')
+  t.throws(r(true, 0, []), err, 'throws if first arg is true')
+  t.throws(r([], 0, []), err, 'throws if first arg is an array')
+  t.throws(r({}, 0, []), err, 'throws if first arg is an object')
 
   const second = /reduce: Foldable required for third argument/
   t.throws(r(unit, 0, undefined), second, 'throws if second arg is undefined')
@@ -41,14 +44,54 @@ test('reduce pointfree', t => {
   t.throws(r(unit, 0, true), second, 'throws if second arg is true')
   t.throws(r(unit, 0, {}), second, 'throws if second arg is an object')
 
-  t.doesNotThrow(r(unit, 0, m), 'allows a function and Foldable')
-  t.doesNotThrow(r(unit, 0, []), 'allows a function and an array (Foldable)')
+  t.end()
+})
 
+test('reduce with Array', t => {
   const f = sinon.spy()
-  const res = reduce(f, 0, m)
+  const x = 'result'
+  const base = [ null ]
 
-  t.ok(m.reduce.calledWith(f), 'calls reduce on container, passing the function')
-  t.equal(res, x, 'returns the result of reduce')
+  const target = (base.reduce = sinon.spy(constant(x)), base)
+  const result = reduce(f, 0, target)
+
+  t.ok(target.reduce.calledWith(f, 0), 'calls reduce on array, passing function and init')
+  t.ok(target.reduce.calledOn(target), 'binds reduce to third argument')
+  t.equal(result, x, 'returns the result of reduce')
+  t.end()
+})
+
+test('reduce with Foldable', t => {
+  const f = sinon.spy()
+  const x = 'result'
+
+  const m = mock({
+    reduce: sinon.spy(constant(x))
+  })
+
+  const result = reduce(f, 0, m)
+
+  t.ok(m.reduce.calledWith(f, 0), 'calls reduce on Foldable, passing function and init')
+  t.ok(m.reduce.calledOn(m), 'binds reduce to third argument')
+  t.equal(result, x, 'returns the result of reduce')
+
+  t.end()
+})
+
+test('reduce with Foldable (fantasy-land)', t => {
+  const f = sinon.spy()
+  const x = 'result'
+
+  const m = mock({
+    [fl.reduce]: sinon.spy(constant(x))
+  })
+
+  const result = reduce(f, 0, m)
+
+  t.ok(m[fl.reduce].calledWith(f, 0), 'calls fantasy-land/reduce on Foldable, passing function and init')
+  t.ok(m[fl.reduce].calledOn(m), 'binds fantasy-land/reduce to third argument')
+  t.equal(result, x, 'returns the result of fantasy-land/reduce')
+  t.notOk(m.reduce.called, 'does not call reduce on third argument')
 
   t.end()
 })

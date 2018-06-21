@@ -7,7 +7,7 @@ const isSemigroupoid = require('../core/isSemigroupoid')
 // isCategory : a -> Boolean
 function isCategory(m) {
   return isSemigroupoid(m)
-    && hasAlg('id', m)
+    && (hasAlg('id', m) || hasAlg('id', m.constructor))
 }
 
 module.exports = isCategory

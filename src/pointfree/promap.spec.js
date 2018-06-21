@@ -5,9 +5,17 @@ const helpers = require('../test/helpers')
 const bindFunc = helpers.bindFunc
 
 const isFunction = require('../core/isFunction')
+const fl = require('../core/flNames')
 const unit = require('../core/_unit')
 
+const constant = x => () => x
 const identity = x => x
+
+const mock = x => Object.assign({}, {
+  contramap: unit,
+  map: unit,
+  promap: sinon.spy()
+}, x)
 
 const promap = require('./promap')
 
@@ -55,12 +63,41 @@ test('promap pointfree', t => {
   t.end()
 })
 
-test('promap profunctor', t => {
-  const m = { promap: sinon.spy(unit) }
+test('promap Profunctor', t => {
+  const x = 'result'
 
-  promap(identity)(identity, m)
+  const m = mock({
+    promap: sinon.spy(constant(x))
+  })
 
-  t.ok(m.promap.calledWith(identity, identity), 'calls promap on profunctor, passing the function')
+  const f = constant('left')
+  const g = constant('right')
+
+  const result = promap(f)(g, m)
+
+  t.ok(m.promap.calledWith(f, g), 'calls promap on third, passing functions')
+  t.ok(m.promap.calledOn(m), 'binds promap to third argument')
+  t.equal(result, x, 'returns the result of promap on third argument')
+
+  t.end()
+})
+
+test('promap Profunctor (fantasy-land)', t => {
+  const x = 'result'
+
+  const m = mock({
+    [fl.promap]: sinon.spy(constant(x))
+  })
+
+  const f = constant('left')
+  const g = constant('right')
+
+  const result = promap(f)(g, m)
+
+  t.ok(m[fl.promap].calledWith(f, g), 'calls fantasy-land/promap on third, passing functions')
+  t.ok(m[fl.promap].calledOn(m), 'binds fanstay-land/promap to third argument')
+  t.equal(result, x, 'returns the result of fantasy-land/promap on third argument')
+  t.notOk(m.promap.called, 'does not call promap on third argument')
 
   t.end()
 })

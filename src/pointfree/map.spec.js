@@ -6,8 +6,14 @@ const bindFunc = helpers.bindFunc
 
 const isFunction = require('../core/isFunction')
 const unit = require('../core/_unit')
+const fl = require('../core/flNames')
 
+const constant = x => () => x
 const identity = x => x
+
+const mock = x => Object.assign({}, {
+  map: sinon.spy()
+}, x)
 
 const map = require('./map')
 
@@ -42,12 +48,36 @@ test('map pointfree', t => {
   t.end()
 })
 
-test('map functor', t => {
-  const m = { map: sinon.spy(unit) }
+test('map with Functor', t => {
+  const x = 'result'
 
-  map(identity)(m)
+  const m = mock({
+    map: sinon.spy(constant(x))
+  })
+
+  const result = map(identity)(m)
 
   t.ok(m.map.calledWith(identity), 'calls map on functor, passing the function')
+  t.ok(m.map.calledOn(m), 'binds map to second argument')
+  t.equal(result, x, 'returns the result of map on second argument')
+
+  t.end()
+})
+
+test('map with Functor (fantasy-land)', t => {
+  const x = 'result'
+
+  const m = mock({
+    [fl.map]: sinon.spy(constant(x))
+  })
+
+  const result = map(identity)(m)
+
+  t.ok(m[fl.map].calledWith(identity), 'calls fantasy-land/map on functor')
+  t.ok(m[fl.map].calledOn(m), 'binds fantasy-land/map to second argument')
+  t.equal(result, x, 'returns the result of fantasy-land/map on second argument')
+  t.notOk(m.map.called, 'does not call map on functor, when fantasy-land/map present')
+
   t.end()
 })
 

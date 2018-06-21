@@ -6,6 +6,7 @@ const curry = require('../core/curry')
 const isArray = require('../core/isArray')
 const isChain = require('../core/isChain')
 const isFunction = require('../core/isFunction')
+const fl = require('../core/flNames')
 
 // chain : Chain m => (a -> m b) -> m a -> m b
 function chain(fn, m) {
@@ -21,7 +22,7 @@ function chain(fn, m) {
     return _chain(fn, m)
   }
 
-  return m.chain(fn)
+  return (m[fl.chain] || m.chain).call(m, fn)
 }
 
 module.exports = curry(chain)

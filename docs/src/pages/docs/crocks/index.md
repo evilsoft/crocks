@@ -18,7 +18,7 @@ but what they do from type to type may vary.
 | Crock | Constructor | Instance |
 |---|:---|:---|
 | [`Arrow`][arrow] | [`id`][arrow-id] | [`both`][arrow-both], [`compose`][arrow-compose], [`contramap`][arrow-contra],[`first`][arrow-first], [`map`][arrow-map], [`promap`][arrow-promap], [`runWith`][arrow-runwith], [`second`][arrow-second] |
-| [`Async`][async] | [`Rejected`][async-rejected], [`Resolved`][async-resolved], [`all`][async-all], [`fromNode`][async-fromnode], [`fromPromise`][async-frompromise], [`of`][async-of] | [`alt`][async-alt], [`ap`][async-ap], [`bimap`][async-bimap], [`chain`][async-chain], [`coalesce`][async-coalesce], [`fork`][async-fork], [`map`][async-map], [`of`][async-of], [`swap`][async-swap], [`toPromise`][async-topromise] |
+| [`Async`][async] | [`Rejected`][async-rejected], [`Resolved`][async-resolved], [`all`][async-all], [`resolveAfter`][async-resolveAfter], [`rejectAfter`][async-rejectafter], [`fromNode`][async-fromnode], [`fromPromise`][async-frompromise], [`of`][async-of] | [`alt`][async-alt], [`ap`][async-ap], [`bimap`][async-bimap], [`chain`][async-chain], [`coalesce`][async-coalesce], [`race`][async-race], [`fork`][async-fork], [`map`][async-map], [`of`][async-of], [`swap`][async-swap], [`toPromise`][async-topromise] |
 | [`Const`][const] | -- | [`ap`][const-ap], [`chain`][const-chain], [`concat`][const-concat], [`equals`][const-equals], [`map`][const-map], [`valueOf`][const-valueof] |
 | `Either` | `Left`, `Right`, `of`| `alt`, `ap`, `bimap`, `chain`, `coalesce`, `concat`, `either`, `equals`, `map`, `of`, `sequence`, `swap`, `traverse` |
 | [`Equiv`][equiv] | [`empty`][equiv-empty] | [`concat`][equiv-concat], [`contramap`][equiv-contra], [`compareWith`][equiv-compare], [`valueOf`][equiv-value] |
@@ -53,6 +53,8 @@ but what they do from type to type may vary.
 [async-rejected]: Async.html#rejected
 [async-resolved]: Async.html#resolved
 [async-all]: Async.html#all
+[async-resolveafter]: Async.html#resolveafter
+[async-rejectafter]: Async.html#rejectafter
 [async-fromnode]: Async.html#fromnode
 [async-frompromise]: Async.html#frompromise
 [async-of]: Async.html#of
@@ -61,6 +63,7 @@ but what they do from type to type may vary.
 [async-bimap]: Async.html#bimap
 [async-chain]: Async.html#chain
 [async-coalesce]: Async.html#coalesce
+[async-race]: Async.html#race
 [async-fork]: Async.html#fork
 [async-map]: Async.html#map
 [async-of]: Async.html#of

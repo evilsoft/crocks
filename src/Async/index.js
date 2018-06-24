@@ -251,11 +251,13 @@ function Async(fn) {
       let value = null
       let fnDone = false
       let valueDone = false
+      let cancelled = false
 
+      const cancel = () => { cancelled = true }
       const rejectOnce = once(reject)
 
       function resolveBoth() {
-        if(fnDone && valueDone) {
+        if(!cancelled && fnDone && valueDone) {
           compose(resolve, apFn)(value)
         }
       }
@@ -276,7 +278,7 @@ function Async(fn) {
         resolveBoth()
       })
 
-      return () => { fnCancel(); valueCancel() }
+      return () => { fnCancel(); valueCancel(); cancel() }
     })
   }
 

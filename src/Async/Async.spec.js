@@ -39,8 +39,6 @@ test('Async', t => {
   t.ok(isFunction(Async.Resolved), 'provides a Resolved function')
   t.ok(isFunction(Async.Rejected), 'provides a Rejected function')
 
-  t.ok(isFunction(Async.fromPromise), 'provides a fromPromise function')
-
   const err = /Async: Function required/
   t.throws(Async, err, 'throws with no parameters')
   t.throws(a(undefined), err, 'throws with undefined')
@@ -272,6 +270,106 @@ test('Async all resolution with List', t => {
   Async.all(List([])).fork(rej(bad), empty([]))
 })
 
+test('Async rejectAfter errors', t => {
+  const rejectAfter = bindFunc(Async.rejectAfter)
+
+  const err = /Async.rejectAfter: Positive Integer required for first argument/
+  t.throws(rejectAfter(undefined), err, 'throws with undefined')
+  t.throws(rejectAfter(null), err, 'throws with null')
+  t.throws(rejectAfter(-1), err, 'throws with neg integer')
+  t.throws(rejectAfter(3.14), err, 'throws with float number')
+  t.throws(rejectAfter(''), err, 'throws with falsey string')
+  t.throws(rejectAfter('string'), err, 'throws with truthy string')
+  t.throws(rejectAfter(false), err, 'throws with false')
+  t.throws(rejectAfter(true), err, 'throws with true')
+  t.throws(rejectAfter({}), err, 'throws with an object')
+  t.throws(rejectAfter(unit), err, 'throws with a function')
+
+  t.end()
+})
+
+test('Async rejectAfter', t => {
+  t.plan(2)
+
+  const value = 'value'
+
+  t.ok(isFunction(Async.rejectAfter), 'provides a rejectAfter function on TypeRep')
+
+  Async.rejectAfter(0, value)
+    .fork(x => {
+      t.equals(x, value, 'rejects with the value')
+    }, unit)
+})
+
+test('Async rejectAfter cancellation', t => {
+  t.plan(2)
+
+  const value = 'value'
+
+  const res = sinon.spy(() => t.fail('resolve called'))
+  const rej = sinon.spy(() => t.fail('rejected called'))
+
+  const cancel = Async.rejectAfter(0, value)
+    .fork(rej, res)
+
+  cancel()
+
+  setTimeout(() => {
+    t.notOk(res.called, 'resolved is never called')
+    t.notOk(rej.called, 'rejected is never called')
+  }, 200)
+})
+
+test('Async resolveAfter errors', t => {
+  const resolveAfter = bindFunc(Async.resolveAfter)
+
+  const err = /Async.resolveAfter: Positive Integer required for first argument/
+  t.throws(resolveAfter(undefined), err, 'throws with undefined')
+  t.throws(resolveAfter(null), err, 'throws with null')
+  t.throws(resolveAfter(-1), err, 'throws with neg integer')
+  t.throws(resolveAfter(3.14), err, 'throws with float number')
+  t.throws(resolveAfter(''), err, 'throws with falsey string')
+  t.throws(resolveAfter('string'), err, 'throws with truthy string')
+  t.throws(resolveAfter(false), err, 'throws with false')
+  t.throws(resolveAfter(true), err, 'throws with true')
+  t.throws(resolveAfter({}), err, 'throws with an object')
+  t.throws(resolveAfter(unit), err, 'throws with a function')
+
+  t.end()
+})
+
+test('Async resolveAfter', t => {
+  t.plan(2)
+
+  const value = 42
+
+  t.ok(isFunction(Async.resolveAfter), 'provides a resolveAfter function on TypeRep')
+
+  Async.resolveAfter(0, value)
+    .fork(unit, x => {
+      t.equals(x, value, 'resolves with the value')
+    })
+})
+
+test('Async resolveAfter cancellation', t => {
+  t.plan(2)
+
+  const value = 'value'
+
+  const res = sinon.spy()
+  const rej = sinon.spy()
+
+  const cancel = Async.resolveAfter(0, value)
+    .fork(rej, res)
+
+  cancel()
+
+  setTimeout(() => {
+    t.notOk(res.called, 'resolved is never called')
+    t.notOk(rej.called, 'rejected is never called')
+  }, 200)
+})
+
 test('Async inspect', t => {
   const a = Async(unit)
 
@@ -293,7 +391,7 @@ test('Async type', t => {
 
 test('Async @@type', t => {
   t.equal(Async(unit)['@@type'], Async['@@type'], 'static and instance versions are the same')
-  t.equal(Async(unit)['@@type'], 'crocks/Async@2', 'returns crocks/Async@2')
+  t.equal(Async(unit)['@@type'], 'crocks/Async@3', 'returns crocks/Async@3')
 
   t.end()
 })
@@ -374,7 +472,7 @@ test('Async cancel ap cleanup functions', t => {
   const cancel =
     Async.of(x => y => [ x, y ])
       .ap(Async((_, res) => { res(1); return resCleanUp }))
-      .ap(Async((_, rej) => { rej(1); return rejCleanUp }))
+      .ap(Async(rej => { rej(1); return rejCleanUp }))
       .fork(unit, unit, forkCleanUp)
 
   cancel()
@@ -451,7 +549,7 @@ test('Async cancel cancellation', t => {
     t.notOk(map.called, 'does not run map')
     t.notOk(bimap.called, 'does not run bimap')
     t.notOk(chain.called, 'does not run chain')
-  })
+  }, 100)
 })
 
 test('Async toPromise', t => {
@@ -547,6 +645,80 @@ test('Async coalesce', t => {
   t.ok(res.calledWith('was resolved'), 'resolves a resolved, applying right coalesce function')
 
   t.end()
+})
+
+test('Async race errors', t => {
+  const race = bindFunc(Async(unit).race)
+
+  const err = /Async.race: Async required/
+  t.throws(race(null), err, 'throws with null')
+  t.throws(race(undefined), err, 'throws with undefined')
+  t.throws(race(0), err, 'throws with falsey number')
+  t.throws(race(1), err, 'throws with truthy number')
+  t.throws(race(''), err, 'throws with falsey string')
+  t.throws(race('string'), err, 'throws with truthy string')
+  t.throws(race(false), err, 'throws with false')
+  t.throws(race(true), err, 'throws with true')
+  t.throws(race({}), err, 'throws with object')
+  t.throws(race([]), err, 'throws with array')
+
+  t.end()
+})
+
+test('Async race', t => {
+  t.plan(9)
+
+  t.ok(isFunction(Async(unit).race), 'instance provides a race function')
+
+  const value = 'some value'
+  const another = 'another value'
+
+  const res = (t, v) => Async((_, r) => setTimeout(() => r(v), t))
+  const rej = (t, v) => Async(r => setTimeout(() => r(v), t))
+
+  const failRej = t.fail.bind(t, 'called reject')
+  const failRes = t.fail.bind(t, 'called resolve')
+
+  const testRej = v => x => t.equals(v, x, 'rejects with value')
+  const testRes = v => x => t.equals(v, x, 'resolves with value')
+
+  res(10, value).race(rej(20, value)).fork(failRej, testRes(value))
+  res(20, value).race(rej(10, value)).fork(testRej(value), failRes)
+
+  rej(10, value).race(res(20, value)).fork(testRej(value), failRes)
+  rej(20, value).race(res(10, value)).fork(failRej, testRes(value))
+
+  rej(10, value).race(rej(20, another)).fork(testRej(value), failRes)
+  rej(20, another).race(rej(10, value)).fork(testRej(value), failRes)
+
+  res(10, value).race(res(20, another)).fork(failRej, testRes(value))
+  res(20, another).race(res(10, value)).fork(failRej, testRes(value))
+})
+
+test('Async race cancelled', t => {
+  t.plan(5)
+
+  const firstCleanup = sinon.spy()
+  const secondCleanup = sinon.spy()
+  const forkCleanup = sinon.spy()
+
+  const fail = x => () => t.fail(`${x} called`)
+
+  const cancel =
+    Async((rej, res) => { setTimeout(res); return firstCleanup })
+      .race(Async(rej => { setTimeout(rej); return secondCleanup }))
+      .fork(fail('rejected'), fail('resolved'), forkCleanup)
+
+  cancel()
+
+  t.ok(secondCleanup.calledAfter(firstCleanup), 'second cleanup called after first')
+  t.ok(forkCleanup.calledAfter(secondCleanup), 'fork cleanup called after second')
+
+  cancel()
+
+  t.ok(firstCleanup.calledOnce, 'calls first cleanup only once')
+  t.ok(secondCleanup.calledOnce, 'calls second cleanup only once')
+  t.ok(forkCleanup.calledOnce, 'calls fork cleanup only once')
 })
 
 test('Async map errors', t => {

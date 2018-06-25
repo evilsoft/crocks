@@ -80,7 +80,7 @@ function fromPromise(fn) {
 }
 
 function rejectAfter(ms, value) {
-  if(!(isInteger(ms) && ms >=0)) {
+  if(!(isInteger(ms) && ms >= 0)) {
     throw new TypeError(
       'Async.rejectAfter: Positive Integer required for first argument'
     )
@@ -96,7 +96,7 @@ function rejectAfter(ms, value) {
 }
 
 function resolveAfter(ms, value) {
-  if(!(isInteger(ms) && ms >=0)) {
+  if(!(isInteger(ms) && ms >= 0)) {
     throw new TypeError(
       'Async.resolveAfter: Positive Integer required for first argument'
     )

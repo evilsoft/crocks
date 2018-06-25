@@ -1151,6 +1151,58 @@ Rejected('rejected')
 
 </article>
 
+<article id="topic-pointfree">
+
+## Pointfree Functions
+
+#### race (pointfree)
+
+`crocks/Async/race`
+
+```haskell
+race :: Async e a -> Async e a -> Async e a
+```
+
+The `race` pointfree function accepts (2) `Async` instances and will return
+a new `Async` instance that is the result of applying the first argument to
+the [`race`](#race) method on the second passed instance.
+
+<!-- eslint-disable no-console -->
+<!-- eslint-disable no-sequences -->
+
+```javascript
+import race from 'crocks/Async/race'
+import Async from 'crocks/Async'
+
+const { resolveAfter, rejectAfter } = Async
+
+// log :: String -> a -> a
+const log = label => x =>
+  (console.log(`${label}:`, x), x)
+
+// timeout :: Async Error a -> Async Error a
+const timeout =
+  race(rejectAfter(300, new Error('Request has timed out')))
+
+// fast :: Async e String
+const fast =
+  resolveAfter(150, 'All good')
+
+// slow :: Async e Boolean
+const slow =
+  resolveAfter(900, true)
+
+timeout(fast)
+  .fork(log('rejected'), log('resolved'))
+//=> resolved: "All good"
+
+timeout(slow)
+  .fork(log('rejected'), log('resolved'))
+//=> rejected: "Error: Request has timed out"
+```
+
+</article>
+
 <article id="topic-transformation">
 
 ## Transformation Functions

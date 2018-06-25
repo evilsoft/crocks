@@ -15,7 +15,9 @@ function fold(m) {
 
   if(isArray(m)) {
     if(isEmpty(m)) {
-      throw new TypeError('fold: Non-empty Foldable with at least one Semigroup is required')
+      throw new TypeError(
+        'fold: Non-empty Foldable with at least one Semigroup is required'
+      )
     }
 
     if(m.length === 1) {

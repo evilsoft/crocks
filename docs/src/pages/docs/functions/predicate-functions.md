@@ -49,7 +49,7 @@ description of their truth:
 * `isSetoid :: a -> Boolean`: an ADT that provides an `equals` method
 * `isString :: a -> Boolean`: String
 * `isTraversable :: a -> Boolean`: an ADT that provides `map` and `traverse` methods
-* `propEq: (String | Interger) -> a -> Object -> Boolean`: an `Object` that contains the provided key
+* `propEq: (String | Integer) -> a -> Object -> Boolean`: an `Object` that contains the provided key
 * `propPathEq :: [ String | Integer ] -> a -> Object -> Boolean`: an `Object` that contains the provided key in the provided traversal path
 
 [pred]: ../crocks/Pred.html

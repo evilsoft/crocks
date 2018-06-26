@@ -32,7 +32,7 @@ test('Tuple core', t => {
 test('Tuple', t => {
   const f = bindFunc(Tuple)
 
-  const noNum = /Tuple: Tuple size should be a number between 1 and 10/
+  const noNum = /Tuple: First argument must be an integer/
   t.ok(isFunction(Tuple), 'is a function')
 
   t.throws(f(undefined), noNum, 'throws with undefined as first arg')
@@ -45,7 +45,6 @@ test('Tuple', t => {
   t.throws(f([]), noNum, 'throws with array as first arg')
   t.throws(f(unit), noNum, 'throws with function as first arg')
   t.throws(f(-1), noNum, 'throws with a number less than 1')
-  t.throws(f(111), noNum, 'throws with a number greater than 10')
 
   t.equals(Tuple.length, 1, 'constructor has a length of 1')
   t.equals(Tuple(1).length, 1, 'returns a function with correct length (1)')
@@ -58,6 +57,7 @@ test('Tuple', t => {
   t.equals(Tuple(8).length, 8, 'returns a function with correct length (8)')
   t.equals(Tuple(9).length, 9, 'returns a function with correct length (9)')
   t.equals(Tuple(10).length, 10, 'returns a function with correct length (10)')
+  t.equals(Tuple(11).length, 11, 'returns a function with correct length (11+)')
 
   t.same(Tuple(1)(0).toArray(), [ 0 ], 'returns a Tuple with (1) element')
   t.same(Tuple(2)(0, 0).toArray(), [ 0, 0 ], 'returns a Tuple with (2) elements')
@@ -69,6 +69,7 @@ test('Tuple', t => {
   t.same(Tuple(8)(0, 0, 0, 0, 0, 0, 0, 0).toArray(), [ 0, 0, 0, 0, 0, 0, 0, 0 ], 'returns a Tuple with (8) elements')
   t.same(Tuple(9)(0, 0, 0, 0, 0, 0, 0, 0, 0).toArray(), [ 0, 0, 0, 0, 0, 0, 0, 0, 0 ], 'returns a Tuple with (9) elements')
   t.same(Tuple(10)(0, 0, 0, 0, 0, 0, 0, 0, 0, 0).toArray(), [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], 'returns a Tuple with (10) elements')
+  t.same(Tuple(11)(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0).toArray(), [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ], 'returns a Tuple with (11+) elements')
 
   t.throws(
     bindFunc(Tuple(3))(1, 2, 3, 4),
@@ -118,6 +119,7 @@ test('Tuple inspect', t => {
   t.same(Tuple(8)(0, 0, 0, 0, 0, 0, 0, 0).inspect(), '8-Tuple( 0, 0, 0, 0, 0, 0, 0, 0 )', 'returns inspect string for a Tuple with (8) elements')
   t.same(Tuple(9)(0, 0, 0, 0, 0, 0, 0, 0, 0).inspect(), '9-Tuple( 0, 0, 0, 0, 0, 0, 0, 0, 0 )', 'returns inspect string for a Tuple with (9) elements')
   t.same(Tuple(10)(0, 0, 0, 0, 0, 0, 0, 0, 0, 0).inspect(), '10-Tuple( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 )', 'returns inspect string for a Tuple with (10) elements')
+  t.same(Tuple(11)(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0).inspect(), '11-Tuple( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 )', 'returns inspect string for a Tuple with (11+) elements')
 
   t.end()
 })
@@ -135,6 +137,7 @@ test('Tuple type', t => {
   t.same(Tuple(8)(0, 0, 0, 0, 0, 0, 0, 0).type(), '8-Tuple', 'returns 8-Tuple as the type for a Tuple with (8) elements')
   t.same(Tuple(9)(0, 0, 0, 0, 0, 0, 0, 0, 0).type(), '9-Tuple', 'returns 9-Tuple as the type for a Tuple with (9) elements')
   t.same(Tuple(10)(0, 0, 0, 0, 0, 0, 0, 0, 0, 0).type(), '10-Tuple', 'returns 10-Tuple as the type for a Tuple with (10) elements')
+  t.same(Tuple(11)(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0).type(), '11-Tuple', 'returns 11-Tuple as the type for a Tuple with (11+) elements')
   t.end()
 })
 
@@ -147,15 +150,15 @@ test('Tuple @@type', t => {
 })
 
 test('Tuple project', t => {
-  const tuple = Tuple(10)(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+  const tuple = Tuple(11)(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 
   t.ok(isFunction(tuple.project), 'is a function')
 
   const project = bindFunc(tuple.project)
-  const err = /10-Tuple.project: Index should be an integer between 1 and 10/
+  const err = /11-Tuple.project: Index should be an integer between 1 and 11/
 
   t.throws(project(0), err, 'throws with index less than 1')
-  t.throws(project(11), err, 'throws with index more than tuple length')
+  t.throws(project(12), err, 'throws with index more than tuple length')
 
   t.same(tuple.project(1), 0, 'provides the first value')
   t.same(tuple.project(2), 0, 'provides the second value')
@@ -167,6 +170,7 @@ test('Tuple project', t => {
   t.same(tuple.project(8), 0, 'provides the eight value')
   t.same(tuple.project(9), 0, 'provides the ninth value')
   t.same(tuple.project(10), 0, 'provides the tenth value')
+  t.same(tuple.project(11), 0, 'provides the eleventh value')
 
   t.end()
 })

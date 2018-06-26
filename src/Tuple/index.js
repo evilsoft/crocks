@@ -18,6 +18,9 @@ const isSemigroup = require('../core/isSemigroup')
 const constant = x => () => x
 
 function _Tuple(n) {
+  if (!(isInteger(n) && n >= 1)) {
+    throw new TypeError('Tuple: First argument must be an integer')
+  }
   const type =
     constant(_type(n))
 
@@ -28,6 +31,12 @@ function _Tuple(n) {
     fn['@@type'] = typeString
     fn['@@implements'] = _implements([ 'map', 'concat', 'equals' ])
     return fn
+  }
+
+  const withLength = (n, fn) => {
+    return Object.defineProperty(fn, 'length', {
+      value: n
+    })
   }
 
   /* eslint-disable no-unused-vars */
@@ -42,10 +51,7 @@ function _Tuple(n) {
   case 8: return withProps(function(a, b, c, d, e, f, g, h) { return Tuple(n, arguments) })
   case 9: return withProps(function(a, b, c, d, e, f, g, h, i) { return Tuple(n, arguments) })
   case 10: return withProps(function(a, b, c, d, e, f, g, h, i, j) { return Tuple(n, arguments) })
-  default:
-    throw new TypeError(
-      'Tuple: Tuple size should be a number between 1 and 10'
-    )
+  default: return withLength(n, withProps(function(...parts) { return Tuple(n, parts) }))
   }
   /* eslint-enable no-unused-vars */
 

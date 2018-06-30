@@ -34,21 +34,27 @@ called [`fromPromise`](#frompromise) and [`fromNode`](#fromnode).
 
 `Async` instances wrap asynchronous functions and are considered lazy, in that
 they will not run or execute until needed. This typically happens at an edge in
-a program and is done by executing the [`fork`](#fork) method available on the instance,
-which takes (2) functions as its arguments.
+a program and is done by executing the [`fork`](#fork) method available on the
+instance, which takes (3) functions as its arguments.
 
-The first function passed to [`fork`](#fork) will be called on a [`Rejected`](#rejected) instance
-and passed the value the `Async` was rejected with. The second function is called
-when [`fork`](#fork) is invoked on a [`Resolved`](#resolved) instance receiving the
-value the `Async` was resolved with.
+The first function passed to [`fork`](#fork) will be called on
+a [`Rejected`](#rejected) instance and passed the value the `Async` was
+rejected with. The second function is called when [`fork`](#fork) is invoked on
+a [`Resolved`](#resolved) instance receiving the value the `Async` was resolved
+with. The final function is optional and does not need to be provided unless
+some clean up is required to happen in response to the cancellation of a
+forked `Async` flow. This third function takes no parameters and will ignore
+any value that is returned from it. This last function will only be called when
+the given flow is canceled by calling the function returned from crocks.
 
 At times, in a given environment, it may not be feasible to run an asynchronous
-flow to completion. To address when these use cases pop up, the [`fork`](#fork) function
-will return a function that ignores its arguments and returns a `Unit`. When
-this function is called, `Async` will finish running the current "in flight"
-computation to completion, but will cease all remaining execution. Wrapped functions can return
-a function that will be called when an `Async` computation is canceled, this can be used to
-clear timeouts or "in flight" XHR requests. Cancellation with `Async` is total and will cancel
+flow to completion. To address when these use cases pop up,
+the [`fork`](#fork) function will return a function that ignores its arguments
+and returns `undefined`. When this function is called, `Async` will finish
+running the current "in flight" computation to completion, but will cease all
+remaining execution. Wrapped functions can return a function that will be called
+when an `Async` computation is canceled, this can be used to clear timeouts or
+"in flight" XHR requests. Cancellation with `Async` is total and will cancel
 silently, without notification.
 
 <!-- eslint-disable no-console -->

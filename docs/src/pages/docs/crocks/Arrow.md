@@ -11,7 +11,7 @@ Arrow a b
 
 `Arrow` is a `Profunctor` that lifts a function of type `a -> b` and allows for
 lazy execution of the function. `Arrow` can be considered a `Strong Profunctor`
-if the underlying data running throw the `Arrow` is a `Pair`, typically in the
+if the underlying data running through the `Arrow` is a `Pair`, typically in the
 form of `Arrow (Pair a c) (Pair b d)`.
 
 This will allow you to split execution into two distinct paths, applying `Arrow`

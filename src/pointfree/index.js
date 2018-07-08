@@ -27,6 +27,7 @@ module.exports = {
   option: require('./option'),
   project: require('./project'),
   promap: require('./promap'),
+  race: require('../Async/race'),
   read: require('../Writer/read'),
   reduce: require('./reduce'),
   reduceRight: require('./reduceRight'),

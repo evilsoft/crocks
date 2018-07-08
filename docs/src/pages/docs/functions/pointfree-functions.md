@@ -75,6 +75,7 @@ accepted Datatype):
 | [`merge`][merge] | `(a -> b -> c) -> m a b -> c` | `crocks/Pair` |
 | `option` | `a -> m a -> a` | `crocks/pointfree` |
 | `promap` | `(c -> a) -> (b -> d) -> m a b -> m c d` | `crocks/pointfree` |
+| [`race`][race] | `m e a -> m e a -> m e a` | `crocks/Async` |
 | `read` | `m a b -> Pair a b` | `crocks/Writer` |
 | `reduce` | `(b -> a -> b) -> b -> m a -> b` | `crocks/pointfree` |
 | `reduceRight` | `(b -> a -> b) -> b -> m a -> b` | `crocks/pointfree` |
@@ -118,6 +119,7 @@ accepted Datatype):
 | [`merge`][merge] | [`Pair`][pair-merge] |
 | `option` | [`First`][first-option], [`Last`][last-option], [`Maybe`][maybe-option] |
 | `promap` | [`Arrow`][arrow-pro], `Star` |
+| [`race`][race] | [`Async`][async-race] |
 | `read` | `Writer` |
 | `reduce` | `Array`, `List` |
 | `reduceRight` | `Array`, `List` |
@@ -162,6 +164,7 @@ accepted Datatype):
 [async-coalesce]: ../crocks/Async.html#coalesce
 [async-map]: ../crocks/Async.html#map
 [async-swap]: ../crocks/Async.html#swap
+[async-race]: ../crocks/Async.html#race
 
 [const-ap]: ../crocks/Const.html#ap
 [const-chain]: ../crocks/Const.html#chain
@@ -263,3 +266,5 @@ accepted Datatype):
 [fst]: ../crocks/Pair.html#fst-pointfree
 [merge]: ../crocks/Pair.html#merge-pointfree
 [snd]: ../crocks/Pair.html#snd-pointfree
+
+[race]: ../crocks/Async.html#race-pointfree

@@ -1,7 +1,7 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const VERSION = 2
+const VERSION = 3
 
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
@@ -17,6 +17,7 @@ const unit = require('../core/_unit')
 const isArray = require('../core/isArray')
 const isFoldable = require('../core/isFoldable')
 const isFunction = require('../core/isFunction')
+const isInteger = require('../core/isInteger')
 const isPromise = require('../core/isPromise')
 const isSameType = require('../core/isSameType')
 
@@ -78,6 +79,38 @@ function fromPromise(fn) {
   }
 }
 
+function rejectAfter(ms, value) {
+  if(!(isInteger(ms) && ms >= 0)) {
+    throw new TypeError(
+      'Async.rejectAfter: Positive Integer required for first argument'
+    )
+  }
+
+  return Async(rej => {
+    const token = setTimeout(() => {
+      rej(value)
+    }, ms)
+
+    return () => { clearTimeout(token) }
+  })
+}
+
+function resolveAfter(ms, value) {
+  if(!(isInteger(ms) && ms >= 0)) {
+    throw new TypeError(
+      'Async.resolveAfter: Positive Integer required for first argument'
+    )
+  }
+
+  return Async((_, res) => {
+    const token = setTimeout(() => {
+      res(value)
+    }, ms)
+
+    return () => { clearTimeout(token) }
+  })
+}
+
 function Async(fn) {
   if(!isFunction(fn)) {
     throw new TypeError('Async: Function required')
@@ -105,6 +138,7 @@ function Async(fn) {
       x => cancelled ? unit() : reject(x),
       x => cancelled ? unit() : resolve(x)
     )
+
     const internalFn = isFunction(internal) ? internal : unit
 
     return once(() => forkCancel(cancel(internalFn())))
@@ -113,6 +147,26 @@ function Async(fn) {
   function toPromise() {
     return new Promise(function(resolve, reject) {
       fork(reject, resolve)
+    })
+  }
+
+  function race(m) {
+    if(!isSameType(Async, m)) {
+      throw new TypeError('Async.race: Async required')
+    }
+
+    return Async(function(reject, resolve) {
+      const settle = once(
+        (resolved, value) => resolved ? resolve(value) : reject(value)
+      )
+
+      const res = settle.bind(null, true)
+      const rej = settle.bind(null, false)
+
+      const cancelOne = fork(rej, res)
+      const cancelTwo = m.fork(rej, res)
+
+      return () => { cancelOne(); cancelTwo() }
     })
   }
 
@@ -197,13 +251,13 @@ function Async(fn) {
       let value = null
       let fnDone = false
       let valueDone = false
-      let canceled = false
+      let cancelled = false
 
-      const cancel = () => { canceled = true }
+      const cancel = () => { cancelled = true }
       const rejectOnce = once(reject)
 
       function resolveBoth() {
-        if(!canceled && fnDone && valueDone) {
+        if(!cancelled && fnDone && valueDone) {
           compose(resolve, apFn)(value)
         }
       }
@@ -223,7 +277,8 @@ function Async(fn) {
         value = x
         resolveBoth()
       })
-      return () => cancel(valueCancel(fnCancel()))
+
+      return () => { fnCancel(); valueCancel(); cancel() }
     })
   }
 
@@ -257,7 +312,8 @@ function Async(fn) {
   return {
     fork, toPromise, inspect,
     toString: inspect, type,
-    swap, coalesce, ap, of,
+    swap, race, coalesce, ap,
+    of,
     alt: alt('alt'),
     bimap: bimap('bimap'),
     map: map('map'),
@@ -285,6 +341,8 @@ Async.fromPromise = fromPromise
 Async.fromNode = fromNode
 
 Async.all = all
+Async.rejectAfter = rejectAfter
+Async.resolveAfter = resolveAfter
 
 Async['@@implements'] = _implements(
   [ 'alt', 'ap', 'bimap', 'chain', 'map', 'of' ]

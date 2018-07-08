@@ -19,7 +19,7 @@ that can be composed together.
 Depending on your needs, an `Async` can be constructed in a variety of ways. The
 typical closely resembles how a `Promise` is constructed with one major
 difference, the arguments used in the function that is passed to the `Promise`
-constructor are reversed in an `Async` to match the order in which Async is
+constructor are reversed in an `Async` to match the order in which `Async` is
 parameterized.
 
 There are many ways to represent asynchronous operations in JavaScript, and as
@@ -34,21 +34,27 @@ called [`fromPromise`](#frompromise) and [`fromNode`](#fromnode).
 
 `Async` instances wrap asynchronous functions and are considered lazy, in that
 they will not run or execute until needed. This typically happens at an edge in
-a program and is done by executing the [`fork`](#fork) method available on the instance,
-which takes (2) functions as its arguments.
+a program and is done by executing the [`fork`](#fork) method available on the
+instance, which takes (3) functions as its arguments.
 
-The first function passed to [`fork`](#fork) will be called on a [`Rejected`](#rejected) instance
-and passed the value the `Async` was rejected with. The second function is called
-when [`fork`](#fork) is invoked on a [`Resolved`](#resolved) instance receiving the
-value the `Async` was resolved with.
+The first function passed to [`fork`](#fork) will be called on
+a [`Rejected`](#rejected) instance and passed the value the `Async` was
+rejected with. The second function is called when [`fork`](#fork) is invoked on
+a [`Resolved`](#resolved) instance receiving the value the `Async` was resolved
+with. The final function is optional and does not need to be provided unless
+some clean up is required to happen in response to the cancellation of a
+forked `Async` flow. This third function takes no parameters and will ignore
+any value that is returned from it. This last function will only be called when
+the given flow is canceled by calling the function returned from crocks.
 
 At times, in a given environment, it may not be feasible to run an asynchronous
-flow to completion. To address when these use cases pop up, the [`fork`](#fork) function
-will return a function that ignores its arguments and returns a `Unit`. When
-this function is called, `Async` will finish running the current "in flight"
-computation to completion, but will cease all remaining execution. Wrapped functions can return 
-a function that will be called when an `Async` computation is cancelled, this can be used to 
-clear timeouts or "in flight" xhr requests. Cancellation with `Async` is total and will cancel 
+flow to completion. To address when these use cases pop up,
+the [`fork`](#fork) function will return a function that ignores its arguments
+and returns `undefined`. When this function is called, `Async` will finish
+running the current "in flight" computation to completion, but will cease all
+remaining execution. Wrapped functions can return a function that will be called
+when an `Async` computation is canceled, this can be used to clear timeouts or
+"in flight" XHR requests. Cancellation with `Async` is total and will cancel
 silently, without notification.
 
 <!-- eslint-disable no-console -->
@@ -105,11 +111,11 @@ getById(5)
 const cancel = getById(1).fork(
   log('rej'),
   log('res'),
-  () => console.log('cancelled')
+  () => console.log('canceled')
 )
 
 setTimeout(cancel, 500)
-//=> "cancelled"
+//=> "canceled"
 
 Async
   .all(map(getById, [ 1, 2 ]))
@@ -126,12 +132,14 @@ Async
   .fork(log('rej'), log('res'))
 //=> rej:  "id: 14 -- Not Found"
 
+// resolveAfter :: (Integer, a) -> Async e a
 const resolveAfter = (delay, value) =>
   Async((rej, res) => {
     const id = setTimeout(() => res(value), delay)
     return () => clearTimeout(id)
   })
 
+// afterCancel :: () -> ()
 const afterCancel = resolveAfter(10000, 'Delay Value')
   .fork(log('rej'), log('res'))
 
@@ -161,7 +169,7 @@ value, will return a new `Rejected` instance, wrapping the provided value.
 
 When an instance is `Rejected`, most `Async` returning methods on the instance
 will return another `Rejected` instance. This is in contrast to a
-javascript `Promise`, that will continue on a [`Resolved`](#resolved) path after
+JavaScript `Promise`, that will continue on a [`Resolved`](#resolved) path after
 a `catch`. This behavior of `Promise`s provide challenges when constructing
 complicated (or even some simple) `Promise` chains that may fail at various
 steps along the chain.
@@ -427,6 +435,72 @@ all([ Resolved(1), Rejected(2), Rejected(3) ])
 //=> rej: 2
 ```
 
+#### resolveAfter
+
+```haskell
+Async.resolveAfter :: (Integer, a) -> Async e a
+```
+
+Used to resolve a value after a specified number of milliseconds. This function
+takes a positive Integer as its first argument and a value to resolve with as
+its second. `resolveAfter` returns a new `Async` that will resolve a value
+after the specified interval has elapsed.
+
+<!-- eslint-disable no-console -->
+<!-- eslint-disable no-sequences -->
+
+```javascript
+import Async from 'crocks/Async'
+import curry from 'crocks/helpers/curry'
+
+// log :: String -> a -> a
+const log = label => x =>
+  (console.log(`${label}:`, x), x)
+
+// delay :: Integer -> a -> Async e a
+const delay = curry(
+  Async.resolveAfter
+)
+
+Async.of('late, but here')
+  .chain(delay(1000))
+  .fork(log('rejected'), log('resolved'))
+//=> resolved: "late, but here"
+```
+
+#### rejectAfter
+
+```haskell
+Async.rejectAfter :: (Integer, e) -> Async e a
+```
+
+Used to reject a value after a specified number of milliseconds. This function
+takes a positive Integer as its first argument and a value to reject with as
+its second. This can be used to reject and `Async` after a specified period
+of time. When used with [`race`](#race), the `Async` provided can be used
+to provide a time limit for a given `Async` task.
+
+<!-- eslint-disable no-console -->
+<!-- eslint-disable no-sequences -->
+
+```javascript
+import Async from 'crocks/Async'
+
+// log :: String -> a -> a
+const log = label => x =>
+  (console.log(`${label}:`, x), x)
+
+// resovle :: a -> Async e a
+const resolve = x => Async((rej, res) => {
+  setTimeout(() => res(x), 1000)
+})
+
+resolve('okay')
+  .race(Async.rejectAfter(500, 'not okay'))
+  .fork(log('reject'), log('resolve'))
+//=> reject: "not okay"
+```
+
 #### of
 
 ```haskell
@@ -547,8 +621,9 @@ Async e a ~> Async e a -> Async e a
 ```
 
 Providing a means for a fallback or alternative value, `alt` combines (2)
-`Async` instances and will return the first [`Resolved`](#resolved) instance it encounters
-or the last [`Rejected`](#rejected) instance if it does not encounter a [`Resolved`](#resolved) instance.
+`Async` instances and will return the first [`Resolved`](#resolved) instance
+it encounters or the last [`Rejected`](#rejected) instance if it does not
+encounter a [`Resolved`](#resolved) instance.
 
 <!-- eslint-disable no-console -->
 <!-- eslint-disable no-sequences -->
@@ -586,17 +661,18 @@ Rejected('First Reject')
 Async e a ~> ((e -> b), (a -> c)) -> Async b c
 ```
 
-Both [`Rejected`](#rejected) and [`Resolved`](#resolved) values can vary in their type, although most of
-the time, focus on mapping values is placed on the [`Resolved`](#resolved) portion. When the
-requirement or need to map the [`Rejected`](#rejected) portion arises, `bimap` can be
-used.
+Both [`Rejected`](#rejected) and [`Resolved`](#resolved) values can vary in
+their type, although most of the time, focus on mapping values is placed on
+the [`Resolved`](#resolved) portion. When the requirement or need to map
+the [`Rejected`](#rejected) portion arises, `bimap` can be used.
 
 `bimap` takes (2) functions as its arguments. The first function is used
-to map a [`Rejected`](#rejected) instance, while the second maps a [`Resolved`](#resolved) instance.
-While `bimap` requires that both possible instances are to be mapped, if the
-desire to map only the [`Rejected`](#rejected) portion, an [`identity`][identity] function can be
-provided to the second argument. This will leave all [`Resolved`](#resolved) instance values
-untouched.
+to map a [`Rejected`](#rejected) instance, while the second maps
+a [`Resolved`](#resolved) instance. While `bimap` requires that both possible
+instances are to be mapped, if the desire to map only
+the [`Rejected`](#rejected) portion, an [`identity`][identity] function can be
+provided to the second argument. This will leave
+all [`Resolved`](#resolved) instance values untouched.
 
 <!-- eslint-disable no-console -->
 <!-- eslint-disable no-sequences -->
@@ -931,6 +1007,46 @@ typeIso(Rejected('aaaaa'))
 //=> rej: "aaaaa"
 ```
 
+#### race
+
+```haskell
+Async e a ~> Async e a -> Async e a
+```
+
+Used to provide the first settled result between (2) `Async`s. Just pass `race`
+another `Async` and it will return new `Async`, that when forked, will run both
+`Async`s in parallel, returning the first of the two to settle. The result can
+either be rejected or resolved, based on the instance of the first settled
+result.
+
+<!-- eslint-disable no-console -->
+<!-- eslint-disable no-sequences -->
+
+```javascript
+import Async from '../crocks/src/Async'
+
+const { resolveAfter, rejectAfter } = Async
+
+// log :: String -> a -> a
+const log = label => x =>
+  (console.log(`${label}:`, x), x)
+
+resolveAfter(300, 'I win')
+  .race(resolveAfter(400, 'I lose'))
+  .fork(log('rejected'), log('resolved'))
+//=> resolved: "I win"
+
+rejectAfter(500, 'I lose')
+  .race(rejectAfter(300, 'I win'))
+  .fork(log('rejected'), log('resolved'))
+//=> rejected: "I win"
+
+resolveAfter(500, 'I lose')
+  .race(rejectAfter(300, 'I win'))
+  .fork(log('rejected'), log('resolved'))
+//=> rejected: "I win"
+```
+
 #### fork
 
 ```haskell
@@ -951,7 +1067,7 @@ in the case of the instance settling on [`Resolved`](#resolved) and will receive
 single argument the value the `Async` was resolved with.
 
 The second signature is used when any cleanup needs to be performed after a
-given `Async` is cancelled by having the function returned from `fork` called.
+given `Async` is canceled by having the function returned from `fork` called.
 The first (2) arguments to the signature are the same as the more common
 signature described above, but takes an addition function that can be used
 for "clean up" after cancellation. When all in-flight computations settle, the
@@ -1037,6 +1153,58 @@ Rejected('rejected')
   .then(log('res'))
   .catch(log('rej'))
 //=> rej: rejected
+```
+
+</article>
+
+<article id="topic-pointfree">
+
+## Pointfree Functions
+
+#### race (pointfree)
+
+`crocks/Async/race`
+
+```haskell
+race :: Async e a -> Async e a -> Async e a
+```
+
+The `race` pointfree function accepts (2) `Async` instances and will return
+a new `Async` instance that is the result of applying the first argument to
+the [`race`](#race) method on the second passed instance.
+
+<!-- eslint-disable no-console -->
+<!-- eslint-disable no-sequences -->
+
+```javascript
+import race from 'crocks/Async/race'
+import Async from 'crocks/Async'
+
+const { resolveAfter, rejectAfter } = Async
+
+// log :: String -> a -> a
+const log = label => x =>
+  (console.log(`${label}:`, x), x)
+
+// timeout :: Async Error a -> Async Error a
+const timeout =
+  race(rejectAfter(300, new Error('Request has timed out')))
+
+// fast :: Async e String
+const fast =
+  resolveAfter(150, 'All good')
+
+// slow :: Async e Boolean
+const slow =
+  resolveAfter(900, true)
+
+timeout(fast)
+  .fork(log('rejected'), log('resolved'))
+//=> resolved: "All good"
+
+timeout(slow)
+  .fork(log('rejected'), log('resolved'))
+//=> rejected: "Error: Request has timed out"
 ```
 
 </article>

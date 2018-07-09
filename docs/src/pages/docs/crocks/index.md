@@ -33,6 +33,7 @@ but what they do from type to type may vary.
 | `Result` | `Err`, `Ok`, `of`| `alt`, `ap`, `bimap`, `chain`, `coalesce`, `concat`, `either`, `equals`, `map`, `of`, `sequence`, `swap`, `traverse` |
 | `Star` | `id` | `both`, `compose`, `contramap`, `map`, `promap`, `runWith` |
 | [`State`][state] | [`get`][state-get], [`modify`][state-modify], [`of`][state-of], [`put`][state-put] | [`ap`][state-ap], [`chain`][state-chain], [`evalWith`][state-eval], [`execWith`][state-exec], [`map`][state-map], [`runWith`][state-run] |
+| [`Tuple`][tuple] | --- | [`concat`][tuple-concat], [`equals`][tuple-equals], [`map`][tuple-map], [`mapAll`][tuple-mapall], [`merge`][tuple-merge], [`project`][tuple-project], [`toArray`][tuple-toarray] |
 | `Unit` | `empty`, `of` | `ap`, `chain`, `concat`, `empty`, `equals`, `map`, `of`, `valueOf` |
 | `Writer`| `of` | `ap`, `chain`, `equals`, `log`, `map`, `of`, `read`, `valueOf` |
 
@@ -155,3 +156,12 @@ but what they do from type to type may vary.
 [state-run]: State.html#runwith
 [state-eval]: State.html#evalwith
 [state-exec]: State.html#execwith
+
+[tuple]: Tuple.html
+[tuple-concat]: Tuple.html#concat
+[tuple-equals]: Tuple.html#equals
+[tuple-map]: Tuple.html#map
+[tuple-mapall]: Tuple.html#mapall
+[tuple-merge]: Tuple.html#merge
+[tuple-project]: Tuple.html#project
+[tuple-toarray]: Tuple.html#toarray

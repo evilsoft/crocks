@@ -3,6 +3,7 @@
 
 const curry = require('../core/curry')
 const isFunction = require('../core/isFunction')
+const isInteger = require('../core/isInteger')
 const isSameType = require('../core/isSameType')
 const Tuple = require('./index')
 
@@ -11,7 +12,6 @@ const validTuple = (n, m) =>
 
 function runMap(m, fns) {
   const n = fns.length
-
   if (!validTuple(n, m)) {
     throw new TypeError(`nmap: ${n}-Tuple required`)
   }
@@ -25,7 +25,17 @@ function runMap(m, fns) {
   return m.mapAll(...fns)
 }
 
+const withLength = (n, fn) => {
+  return Object.defineProperty(fn, 'length', {
+    value: n
+  })
+}
+
 function nmap(n) {
+  if (!(isInteger(n) && n >= 1)) {
+    throw new TypeError('nmap: Integer required for first argument')
+  }
+
   switch (n) {
   case 1:
     return (a, m) =>
@@ -58,9 +68,10 @@ function nmap(n) {
     return (a, b, c, d, e, f, g, h, i, j, m) =>
       runMap(m, [ a, b, c, d, e, f, g, h, i, j ])
   default:
-    throw new TypeError(
-      'nmap: Integer between 1 and 10 required for first argument'
-    )
+    return withLength(n + 1, function() {
+      const parts = [].slice.call(arguments)
+      return runMap(parts[parts.length - 1], parts.slice(0, parts.length - 1))
+    })
   }
 }
 

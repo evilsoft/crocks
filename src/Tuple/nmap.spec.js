@@ -19,7 +19,7 @@ test('nmap pointfree', t => {
 
   t.ok(isFunction(nmap), 'is a function')
 
-  const badInt = /nmap: Integer between 1 and 10 required for first argument/
+  const badInt = /nmap: Integer required for first argument/
   t.throws(f(undefined), badInt, 'throws if passed undefined')
   t.throws(f(unit), badInt, 'throws if passed a function')
   t.throws(f(null), badInt, 'throws if passed null')
@@ -30,7 +30,6 @@ test('nmap pointfree', t => {
   t.throws(f([]), badInt, 'throws if passed an array')
   t.throws(f({}), badInt, 'throws if passed an object')
   t.throws(f(0), badInt, 'throws if passed a number less than 1')
-  t.throws(f(11), badInt, 'throws if passed a number greater than 10')
 
   t.ok(isFunction(f(unit)), 'returns a function when passed a single function')
   t.ok(isFunction(f(unit, unit, unit)), 'returns a function when passed multiple functions')
@@ -83,6 +82,7 @@ test('nmap pointfree', t => {
   t.same(nmap(8, inc, inc, inc, inc, inc, inc, inc, inc, branch(8, 0)).toArray(), Array(8).fill(1), 'maps a Tuple with (8) elements')
   t.same(nmap(9, inc, inc, inc, inc, inc, inc, inc, inc, inc, branch(9, 0)).toArray(), Array(9).fill(1), 'maps a Tuple with (9) elements')
   t.same(nmap(10, inc, inc, inc, inc, inc, inc, inc, inc, inc, inc, branch(10, 0)).toArray(), Array(10).fill(1), 'maps a Tuple with (10) elements')
+  t.same(nmap(11, inc, inc, inc, inc, inc, inc, inc, inc, inc, inc, inc, branch(11, 0)).toArray(), Array(11).fill(1), 'maps a Tuple with (11) elements')
 
   const m = { type: constant('3-Tuple'), mapAll: sinon.spy(constant(x)) }
 

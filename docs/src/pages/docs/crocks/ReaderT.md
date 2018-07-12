@@ -57,9 +57,10 @@ MaybeReader.of('nice')
   .runWith()
 //=> Just "nice"
 
+// AsyncReader e Boolean
 AsyncReader.of(true)
   .runWith()
-//=> Async e Boolean
+//=> Resolved Boolean
 ```
 
 </article>

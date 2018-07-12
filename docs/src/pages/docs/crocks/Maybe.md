@@ -15,7 +15,7 @@ well suited for capturing disjunction when the cause of the "error" case does
 not need to be communicated. For example, providing default values on specific
 conditions.
 
-A `Maybe` represents disjunction by using (2) constructors, `Nothing` or `Just`.
+A `Maybe` represents disjunction by using two constructors, `Nothing` or `Just`.
 A `Just` instance represents the truth case while `Nothing` is considered
 false. With the exception of [`coalesce`](#coalesce), all `Maybe` returning
 methods on an instance will be applied to a `Just` returning the result. If an
@@ -96,8 +96,8 @@ bigNumber(3)
 Maybe :: a -> Maybe a
 ```
 
-Most of the time construction of a `Maybe` is accomplished through the use
-of helper functions like [`safe`](#safe) or by employing one of the instance
+Most of the time, `Maybe` is constructed using helper functions
+like [`safe`](#safe) or by employing one of the instance
 constructors, [`Just`](#just) or [`Nothing`](#nothing). This is due to the
 nature of `Maybe` and most other Sum Types.
 
@@ -111,13 +111,31 @@ import Maybe from 'crocks/Maybe'
 import equals from 'crocks/pointfree/equals'
 
 Maybe('some string')
-//=> Maybe String
+//=> Just "some string"
+
+Maybe(null)
+//=> Just null
+
+Maybe(undefined)
+//=> Just undefined
 
 Maybe.of('some string')
-//=> Maybe String
+//=> Just "some string"
+
+Maybe.of(null)
+//=> Just null
+
+Maybe.of(undefined)
+//=> Just undefined
 
 Maybe.Just('some string')
-//=> Maybe String
+//=> Just "some string"
+
+Maybe.Just(null)
+//=> Just null
+
+Maybe.Just(undefined)
+//=> Just undefined
 
 equals(
   Maybe.Just([ 1, 2, 3 ]),
@@ -336,7 +354,7 @@ firstValid([ null, undefined, 'wrong' ])
 Maybe a ~> b -> Boolean
 ```
 
-Used to compare the underlying values of (2) `Maybe` instances for equality by
+Used to compare the underlying values of two `Maybe` instances for equality by
 value, `equals` takes any given argument and returns `true` if the passed
 arguments is a `Maybe` with an underlying value equal to the underlying value
 of the `Maybe` the method is being called on. If the passed argument is not
@@ -386,7 +404,7 @@ When an underlying value of a given `Maybe` is fixed to a `Semigroup`, `concat`
 can be used to concat another `Maybe` instance with an underlying `Semigroup`
 of the same type. Expecting a `Maybe` wrapping a `Semigroup` of the same type,
 `concat` will give back a new `Maybe` instance wrapping the result of combining
-the (2) underlying `Semigroup`s. When called on a `Nothing` instance, `concat`
+the two underlying `Semigroup`s. When called on a `Nothing` instance, `concat`
 will return a `Nothing`.
 
 ```javascript
@@ -508,7 +526,7 @@ setProcessed(null)
 Maybe a ~> Maybe a -> Maybe a
 ```
 
-Providing a means for a fallback or alternative value, `alt` combines (2)
+Providing a means for a fallback or alternative value, `alt` combines two
 `Maybe` instances and will return the first `Just` it encounters or `Nothing`
 if it does not have a `Just`. This can be used in conjunction with
 [`zero`](#zero) to return the first valid value in contained in a `Foldable`
@@ -784,7 +802,7 @@ Maybe a ~> ((() -> b), (a -> b))) -> Maybe b
 ```
 
 When one would like to [`option`](#option) a `Maybe` but would like to remain
-within a `Maybe` type, `coalesce` can be used. `coalesce` expects (2) functions
+within a `Maybe` type, `coalesce` can be used. `coalesce` expects two functions
 for it's inputs.
 
 The first function is used when invoked on a `Nothing` and will return a `Just`
@@ -895,7 +913,7 @@ Maybe a ~> ((() -> b), (a -> b)) -> b
 Used to provide a means to map a given `Maybe` instance while optioning out the
 wrapped value. [`option`](#option) can handle most cases for optioning `Maybe`,
 but does not provide a means to map a given value at the time of
-optioning. `either` expects (2) functions as its arguments. The first is a
+optioning. `either` expects two functions as its arguments. The first is a
 pointed function that will be used when invoked on a `Nothing`. While the second
 will map the value wrapped in a given `Just` and return the result of that
 mapping.
@@ -1320,7 +1338,7 @@ a `Nothing`, mapping the originally contained value to a `Unit`. Values on the
 `Left` will be lost and as such this transformation is considered lossy in
 that regard.
 
-Like all `crocks` transformation functions, `eitherToMaybe` has (2) possible
+Like all `crocks` transformation functions, `eitherToMaybe` has two possible
 signatures and will behave differently when passed either an `Either` instance
 or a function that returns an instance of `Either`. When passed the instance,
 a transformed `Maybe` is returned. When passed an `Either` returning function,
@@ -1381,7 +1399,7 @@ instance, `firstToMaybe` will turn a non-empty instance into a `Just` wrapping
 the original value contained within the `First`. All empty instances will map
 to a `Nothing`.
 
-Like all `crocks` transformation functions, `firstToMaybe` has (2) possible
+Like all `crocks` transformation functions, `firstToMaybe` has two possible
 signatures and will behave differently when passed either a `First` instance
 or a function that returns an instance of `First`. When passed the instance,
 a transformed `Maybe` is returned. When passed a `First` returning function,
@@ -1433,7 +1451,7 @@ Used to transform a given `Last` instance to a `Maybe` instance, `lastToMaybe`
 will turn a non-empty instance into a `Just` wrapping the original value
 contained within the `Last`. All empty instances will map to a `Nothing`.
 
-Like all `crocks` transformation functions, `lastToMaybe` has (2) possible
+Like all `crocks` transformation functions, `lastToMaybe` has two possible
 signatures and will behave differently when passed either a `Last` instance
 or a function that returns an instance of `Last`. When passed the instance,
 a transformed `Maybe` is returned. When passed a `Last` returning function,
@@ -1488,7 +1506,7 @@ a `Nothing`, mapping the originally contained value to a `Unit`. Values on the
 `Err` will be lost and as such this transformation is considered lossy in
 that regard.
 
-Like all `crocks` transformation functions, `resultToMaybe` has (2) possible
+Like all `crocks` transformation functions, `resultToMaybe` has two possible
 signatures and will behave differently when passed either an `Result` instance
 or a function that returns an instance of `Result`. When passed the instance,
 a transformed `Maybe` is returned. When passed a `Result` returning function,

@@ -79,17 +79,18 @@ resetField(changed)
 Const :: c -> Const c a
 ```
 
-The constructor for `Const` is a unary function that takes any type as its
-argument. Once constructed, the value will occupy the far left parameter `c`.
+The constructor for `Const` is a unary function that takes any value as its
+argument an results in a Product type whose underlying left-most value is fixed
+resulting in an immutable value.
 
 ```javascript
 import Const from 'crocks/Const'
 
 Const('always and forever')
-//=> Const String a
+//=> Const "always and forever"
 
 Const(false)
-//=> Const Boolean a
+//=> Const false
 ```
 
 </article>
@@ -104,7 +105,7 @@ Const(false)
 Const c a ~> b -> Boolean
 ```
 
-Used to compare the underlying values of (2) `Const` instances for equality by
+Used to compare the underlying values of two `Const` instances for equality by
 value, `equals` takes any given argument and returns `true` if the passed
 arguments is a `Const` with an underlying `left` value equal to the underlying
 value of the `Const` the method is being called on. If the passed argument is
@@ -129,7 +130,7 @@ Const([ 1, 2, 3 ])
 Const c a ~> Const c a -> Const c a
 ```
 
-`concat` is used to combine (2) `Semigroup`s of the same type under an operation
+`concat` is used to combine two `Semigroup`s of the same type under an operation
 specified by the `Semigroup`. In the case of `Const`, it will return a new
 `Const` instance with the original value.
 

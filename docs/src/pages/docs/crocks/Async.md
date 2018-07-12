@@ -27,7 +27,7 @@ such, the libraries available to us in our ecosystem provide different means
 to take advantage of these operations. The two most common use
 either `Promise` returning functions or allow for the Continuation Passing Style
 prevalent in the asynchronous functions that ship with NodeJS. `Async` provides
-(2) construction helpers that wrap functions using these styles of asynchronous
+two construction helpers that wrap functions using these styles of asynchronous
 processing and will give you back a function that takes the same arguments as
 the original and will return an `Async` instead. These functions are
 called [`fromPromise`](#frompromise) and [`fromNode`](#fromnode).
@@ -35,7 +35,7 @@ called [`fromPromise`](#frompromise) and [`fromNode`](#fromnode).
 `Async` instances wrap asynchronous functions and are considered lazy, in that
 they will not run or execute until needed. This typically happens at an edge in
 a program and is done by executing the [`fork`](#fork) method available on the
-instance, which takes (3) functions as its arguments.
+instance, which takes three functions as its arguments.
 
 The first function passed to [`fork`](#fork) will be called on
 a [`Rejected`](#rejected) instance and passed the value the `Async` was
@@ -162,17 +162,17 @@ Async :: ((e -> (), a -> ()) -> ()) -> Async e a
 Async :: ((e -> (), a -> ()) -> (() -> ()) -> Async e a
 ```
 
-There are (2) possible ways to construct an `Async`, depending on the need
+There are two possible ways to construct an `Async`, depending on the need
 or ability to cancel a given `Async` in flight. Both methods of construction
-require a binary function that takes (2) unary functions.
+require a binary function that takes two unary functions.
 
 The first function is used to signal the rejection of a given `Async` and will
-settle on a `Rejected` instance wrapping whatever was passed to it function.
+settle on a `Rejected` instance wrapping whatever was passed to the function.
 The second function is used to settle the `Async` to a `Resolved` instance, also
 wrapping the value passed to the functions. These functions are provided by
 the `Async` and will return `undefined`.
 
-The (2) ways to construct an `Async` are characterized by the return of the
+The two ways to construct an `Async` are characterized by the return of the
 function you are using to construct it. If anything other than a function is
 returned, then the value is ignored.
 
@@ -184,6 +184,7 @@ function receives no input and ignores anything that may be returned.
 ```javascript
 import Async from 'crocks/Async'
 
+// Async e String
 Async((reject, resolve) => {
   const token =
     setTimeout(() => resolve('fired'), 1000)
@@ -191,7 +192,7 @@ Async((reject, resolve) => {
   // stop timer on cancel
   return () => { clearTimeout(token) }
 })
-//=> Async e String
+//=> Resolved "fired"
 ```
 
 </article>
@@ -372,7 +373,7 @@ function.
 When the provided function is called, it returns a "lazy" `Async`. When the
 resulting instance is forked, if the `err` is a non-null value then the
 instance will be [`Rejected`](#rejected) with the `err` value. When the `err` is
-null, then the instance will become [`Resolved`](#resolved) with the `data` value.
+null, then the instance will be [`Resolved`](#resolved) with the `data` value.
 
 There are some libraries whose functions are methods on some stateful object.
 As such, the need for binding may arise. `fromNode` provides a second, optional
@@ -663,7 +664,7 @@ doubleValid('Too Silly')
 Async e a ~> Async e a -> Async e a
 ```
 
-Providing a means for a fallback or alternative value, `alt` combines (2)
+Providing a means for a fallback or alternative value, `alt` combines two
 `Async` instances and will return the first [`Resolved`](#resolved) instance
 it encounters or the last [`Rejected`](#rejected) instance if it does not
 encounter a [`Resolved`](#resolved) instance.
@@ -709,7 +710,7 @@ their type, although most of the time, focus on mapping values is placed on
 the [`Resolved`](#resolved) portion. When the requirement or need to map
 the [`Rejected`](#rejected) portion arises, `bimap` can be used.
 
-`bimap` takes (2) functions as its arguments. The first function is used
+`bimap` takes two functions as its arguments. The first function is used
 to map a [`Rejected`](#rejected) instance, while the second maps
 a [`Resolved`](#resolved) instance. While `bimap` requires that both possible
 instances are to be mapped, if the desire to map only
@@ -972,7 +973,7 @@ Async e a ~> ((e -> b), (a -> c)) -> Async c b
 ```
 
 Used to map the value of a [`Rejected`](#rejected) into a [`Resolved`](#resolved) or a [`Resolved`](#resolved) to
-a [`Rejected`](#rejected), `swap` takes (2) functions as its arguments. The first function
+a [`Rejected`](#rejected), `swap` takes two functions as its arguments. The first function
 is used to map the expected [`Rejected`](#rejected) value into a [`Resolved`](#resolved), while the
 second goes from [`Resolved`](#resolved) to [`Rejected`](#rejected). If no mapping is required on either,
 then [`identity`][identity] functions can be used in one or both arguments.
@@ -1056,7 +1057,7 @@ typeIso(Rejected('aaaaa'))
 Async e a ~> Async e a -> Async e a
 ```
 
-Used to provide the first settled result between (2) `Async`s. Just pass `race`
+Used to provide the first settled result between two `Async`s. Just pass `race`
 another `Async` and it will return new `Async`, that when forked, will run both
 `Async`s in parallel, returning the first of the two to settle. The result can
 either be rejected or resolved, based on the instance of the first settled
@@ -1098,11 +1099,11 @@ Async e a ~> ((e -> ()), (a -> ()), (() -> ())) -> (() -> ())
 ```
 
 The `Async` type is lazy and will not be executed until told to do so
-and `fork` is the primary method used for execution. `fork` implements (2)
+and `fork` is the primary method used for execution. `fork` implements two
 signatures depending on the need for clean up in the event of cancellation, but
 both return a function that can be used for cancellation of a given instance.
 
-The first and more common signature takes (2) functions that will have their
+The first and more common signature takes two functions that will have their
 return values ignored. The first function will be run in the event of the
 `Async` instance settling on [`Rejected`](#rejected) and will receive as its single argument
 the value or "cause" of rejection. The second function provided will be executed
@@ -1111,7 +1112,7 @@ single argument the value the `Async` was resolved with.
 
 The second signature is used when any cleanup needs to be performed after a
 given `Async` is canceled by having the function returned from `fork` called.
-The first (2) arguments to the signature are the same as the more common
+The first two arguments to the signature are the same as the more common
 signature described above, but takes an addition function that can be used
 for "clean up" after cancellation. When all in-flight computations settle, the
 function provided will be silently executed.
@@ -1212,7 +1213,7 @@ Rejected('rejected')
 race :: Async e a -> Async e a -> Async e a
 ```
 
-The `race` pointfree function accepts (2) `Async` instances and will return
+The `race` pointfree function accepts two `Async` instances and will return
 a new `Async` instance that is the result of applying the first argument to
 the [`race`](#race) method on the second passed instance.
 
@@ -1271,7 +1272,7 @@ a [`Resolved`](#resolved) instance wrapping the original value contained in the
 original `Right`. If a `Left` is provided, then `eitherToAsync` will return
 a [`Rejected`](#rejected) instance, wrapping the original `Left` value.
 
-Like all `crocks` transformation functions, `eitherToAsync` has (2) possible
+Like all `crocks` transformation functions, `eitherToAsync` has two possible
 signatures and will behave differently when passed either an `Either` instance
 or a function that returns an instance of `Either`. When passed the instance,
 a transformed `Async` is returned. When passed an `Either` returning function,
@@ -1356,7 +1357,7 @@ transformation, `firstToAsync` takes a default [`Rejected`](#rejected) value as 
 argument. This value will be wrapped in a resulting [`Rejected`](#rejected) instance in the
 case of empty.
 
-Like all `crocks` transformation functions, `firstToAsync` has (2) possible
+Like all `crocks` transformation functions, `firstToAsync` has two possible
 signatures and will behave differently when passed either a [`First`][first] instance
 or a function that returns an instance of [`First`][first]. When passed the instance,
 a transformed `Async` is returned. When passed a [`First`][first] returning function,
@@ -1447,7 +1448,7 @@ transformation, `lastToAsync` takes a default [`Rejected`](#rejected) value as t
 argument. This value will be wrapped in a resulting [`Rejected`](#rejected) instance, in the
 case of empty.
 
-Like all `crocks` transformation functions, `lastToAsync` has (2) possible
+Like all `crocks` transformation functions, `lastToAsync` has two possible
 signatures and will behave differently when passed either a [`Last`][last] instance
 or a function that returns an instance of [`Last`][last]. When passed the instance,
 a transformed `Async` is returned. When passed a [`Last`][last] returning function,
@@ -1538,7 +1539,7 @@ transformation, `maybeToAsync` takes a default [`Rejected`](#rejected) value as 
 argument. This value will be wrapped in a resulting [`Rejected`](#rejected) instance, in the
 case of [`Nothing`][nothing].
 
-Like all `crocks` transformation functions, `maybeToAsync` has (2) possible
+Like all `crocks` transformation functions, `maybeToAsync` has two possible
 signatures and will behave differently when passed either a [`Maybe`][maybe] instance
 or a function that returns an instance of [`Maybe`][maybe]. When passed the instance,
 a transformed `Async` is returned. When passed a [`Maybe`][maybe] returning function,
@@ -1610,7 +1611,7 @@ a [`Resolved`](#resolved) instance wrapping the original value contained in the
 original `Ok`. If an `Err` is provided, then `resultToAsync` will return
 a [`Rejected`](#rejected) instance, wrapping the original `Err` value.
 
-Like all `crocks` transformation functions, `resultToAsync` has (2) possible
+Like all `crocks` transformation functions, `resultToAsync` has two possible
 signatures and will behave differently when passed either a `Result` instance
 or a function that returns an instance of `Result`. When passed the instance,
 a transformed `Async` is returned. When passed a `Result` returning function,

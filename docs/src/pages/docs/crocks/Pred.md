@@ -98,11 +98,10 @@ import Pred from 'crocks/Pred'
 
 import and from 'crocks/logic/and'
 import isArray from 'crocks/predicates/isArray'
-import not from 'crocks/logic/not'
 
 // isEmpty :: a -> Boolean
 const isEmpty =
-  not(x => !!x.length)
+  x => !x.length
 
 // isEmptyArray :: a -> Boolean
 const isEmptyArray =
@@ -181,7 +180,7 @@ empty
 Pred a ~> Pred a -> Pred a
 ```
 
-`concat` is used to combine (2) `Semigroup`s of the same type under an operation
+`concat` is used to combine two `Semigroup`s of the same type under an operation
 specified by the `Semigroup`. In the case of `Pred`, the results of both
 `Preds`s are combined under logical conjunction.
 

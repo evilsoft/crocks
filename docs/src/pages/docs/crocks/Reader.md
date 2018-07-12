@@ -70,8 +70,8 @@ Reader :: (e -> a) -> Reader e a
 The constructor for a `Reader` type is a unary function that requires another
 unary function as its input. After passing the constructor a function, it will
 return a new `Reader` instance. The left type is parameterized by the input, or
-domain, of the wrapped function. While the right type represents the result, or
-co-domain.
+domain, of the wrapped function. While the right type represents the return
+value, or co-domain.
 
 The left type `e` represents a family of `Reader`s that can be combined and must
 be fixed to that type for all valid combination of instances.
@@ -80,11 +80,13 @@ be fixed to that type for all valid combination of instances.
 import Reader from 'crocks/Reader'
 import assoc from 'crocks/helpers/assoc'
 
+// Reader Object Object
 Reader(assoc('animal', 'cat'))
-//=> Reader Object Object
+//=> Reader (Object -> Object)
 
+// Reader a Number
 Reader(x => x.length || 0)
-//=> Reader a Number
+//=> Reader (a -> Number)
 ```
 
 </article>

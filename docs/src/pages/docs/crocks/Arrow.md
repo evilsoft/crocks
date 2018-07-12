@@ -78,7 +78,7 @@ arrUpperName
 Arrow :: (a -> b) -> Arrow a b
 ```
 
-An `Arrow` is constructed with a unary function from a type `(a -> b)`. The
+An `Arrow` is constructed with a unary function of type `(a -> b)`. The
 input, or domain, of the function is the left parameter in the type signature
 and the output, or co-domain, of the function represents the right.
 
@@ -95,8 +95,9 @@ const length = compose(
   prop('length')
 )
 
+// Arrow a Integer
 Arrow(length)
-//=> Arrow a Integer
+//=> Arrow (a -> Integer)
 ```
 
 </article>
@@ -197,7 +198,7 @@ arrDoubleAndAdd
 ```haskell
 Arrow a b ~> Arrow b c -> Arrow a c
 ```
-`compose` allows you to compose (2) `Arrow`s together, resulting in a new
+`compose` allows you to compose two `Arrow`s together, resulting in a new
 `Arrow` that is the result of the composition.
 
 ```javascript

@@ -10,12 +10,12 @@ weight: 100
 Pair a b
 ```
 
-`Pair` allows the ability to represent (2) distinct values of different types.
+`Pair` allows the ability to represent two distinct values of different types.
 Much like how `Either` is known as canonical Sum Type and defines the basis for
 all other Sum Types that ship with `crocks`, `Pair` is known as the canonical
 Product Type and also at the heart of all Product Types in `crocks`.
 
-As `Pair` is a `Bifunctor`, it can vary in each of the (2) types it represents.
+As `Pair` is a `Bifunctor`, it can vary in each of the two types it represents.
 When used as a normal `Functor`, `Pair` will always have a bias for the far
 right or second value, matching the pattern of the other ADTs in `crocks`. When
 mapped with a function, the function will only be applied to the second value,
@@ -81,17 +81,46 @@ average([ 9, 77, 34 ])
 
 </article>
 
+<article id="topic-construction">
+
+## Construction
+
+```haskell
+Pair :: (a, b) -> Pair a b
+```
+
+In order to construct a `Pair`, two values of any type are required by the
+constructor. The types of the arguments can, and often do, vary. None of the
+constructors in crocks are curried by default, so both arguments must be
+provided at the same time in order to construct the `Pair`.
+
+Once both arguments are provided, the constructor will return a new `Pair`
+instance with the first argument in the left portion and the second argument
+in the right position.
+
+```javascript
+import Pair from 'crocks/Pair'
+
+Pair(34, false)
+//=> Pair Number Boolean
+
+Pair(34, Pair(true, 'string'))
+//=> Pair Number (Pair Boolean String)
+```
+
+</article>
+
 <article id="topic-instance">
 
 ## Instance Methods
 
-#### equals
+#### twoals
 
 ```haskell
 Pair a b ~> c -> Boolean
 ```
 
-Used to compare the underlying values of (2) `Pair` instances for equality by
+Used to compare the underlying values of two `Pair` instances for equality by
 value. `equals` takes any given argument and returns `true` if the passed
 arguments is a `Pair` with an underlying values both in the first and second are
 equal to the underlying values in the first and second  of the `Maybe` the
@@ -237,7 +266,7 @@ first and second portions of the `Pair`. While [`map`](#map) can be used to
 apply these transformations, `bimap` allows for independent transformations
 on both sides, in parallel.
 
-`bimap` takes (2) mapping functions as its arguments. The first function is used
+`bimap` takes two mapping functions as its arguments. The first function is used
 to map the first, while the second maps the second. `Pair` only provides a
 means to map the second's value exclusively using [`map`](#map). If the need
 arises to map the first portion exclusively, use `bimap` passing the mapping
@@ -548,7 +577,7 @@ Pair a b ~> ((a -> c), (b -> d)) -> Pair d c
 ```
 
 Used to map the value of a `Pair`s first position into the second position and
-the second position into the first, `swap` takes (2) functions as its arguments.
+the second position into the first, `swap` takes two functions as its arguments.
 The first function is used to map the value in the first position to the second,
 while the second 'maps the second into the first'. If no mapping is required on
 either side, then [`identity`][identity] functions can be used in one or both arguments.
@@ -584,7 +613,7 @@ swapMap(m)
 Pair a b ~> () -> a
 ```
 
-`fst` is one of (2) projection methods used to extract the values contained in
+`fst` is one of two projection methods used to extract the values contained in
 a given `Pair` instance. `fst` takes nothing as its input and will unwrap and
 provide the value in the first position, throwing away the value in the second.
 [`snd`](#snd) is the other projection function provided and is used to extract
@@ -604,7 +633,7 @@ Pair('left', 'right')
 Pair a b ~> () -> b
 ```
 
-`snd` is one of (2) projection methods used to extract the values contained in
+`snd` is one of two projection methods used to extract the values contained in
 a given `Pair` instance. `snd` takes nothing as its input and will unwrap and
 provide the value in the second position, throwing away the value in the first.
 [`fst`](#fst) is the other projection function provided and is used to extract
@@ -869,7 +898,7 @@ merge :: ((a, b) -> c) -> Pair a b -> c
 ```
 
 The pointfree `merge` function allows the ability to fold out a new value, using
-a binary function to combine the two values into one. This function takes (2)
+a binary function to combine the two values into one. This function takes two
 arguments, with the first being a binary function used to combine a `Pair`s
 values and the second is the instance of `Pair` for the function to be applied.
 Like the method on `Pair`, this function will return the result of the provided
@@ -977,7 +1006,7 @@ Used to transform a `Writer` instance to a `Pair` instance,
 the `log` portion of the `Writer` in the first position and the `resultant`
 in the second.
 
-Like all `crocks` transformation functions, `writerToPair` has (2) possible
+Like all `crocks` transformation functions, `writerToPair` has two possible
 signatures and will behave differently when passed either a `Writer` instance
 or a function that returns an instance of `Writer`. When passed the instance,
 a `Pair` instance is returned. When passed a `Writer` returning function,

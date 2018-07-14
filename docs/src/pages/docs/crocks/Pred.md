@@ -78,6 +78,41 @@ filter(largeNumber, [ 200, 375, 15 ])
 
 </article>
 
+<article id="topic-construction">
+
+## Construction
+
+```haskell
+Pred :: (a -> Boolean) -> Pred a
+```
+
+The `Pred` constructor is a unary function that requires a unary predicate
+function as its sole argument. Once provided with its predicate function,
+the constructor will return a new `Pred` instance wrapping the predicate.
+
+If the function provided is not a predicate, then the resulting value will be
+coerced to a `Boolean`.
+
+```javascript
+import Pred from 'crocks/Pred'
+
+import and from 'crocks/logic/and'
+import isArray from 'crocks/predicates/isArray'
+
+// isEmpty :: a -> Boolean
+const isEmpty =
+  x => !x.length
+
+// isEmptyArray :: a -> Boolean
+const isEmptyArray =
+  and(isArray, isEmpty)
+
+Pred(isEmptyArray)
+//=> Pred a
+```
+
+</article>
+
 <article id="topic-constructor">
 
 ## Constructor Methods
@@ -145,7 +180,7 @@ empty
 Pred a ~> Pred a -> Pred a
 ```
 
-`concat` is used to combine (2) `Semigroup`s of the same type under an operation
+`concat` is used to combine two `Semigroup`s of the same type under an operation
 specified by the `Semigroup`. In the case of `Pred`, the results of both
 `Preds`s are combined under logical conjunction.
 

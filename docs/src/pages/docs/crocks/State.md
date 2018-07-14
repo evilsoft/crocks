@@ -27,7 +27,7 @@ given initial state. [`runWith`](#runwith) will return a `Pair a s` with the
 state `s` on the right and the resultant `a` on the left.
 
 The other two are used for extracting either the state or resultant, unwrapping
-the values from the `Pair` and discarding the unwanted portion.
+the values from the [`Pair`][pair] and discarding the unwanted portion.
 [`evalWith`](#evalwith) used when the resultant is wanted, while
 [`execWith`](#execwith) is used to pull the state.
 
@@ -81,6 +81,44 @@ get(toUpper)
 
 ## Implements
 `Functor`, `Apply`, `Chain`, `Applicative`, `Monad`
+
+</article>
+
+<article id="topic-construction">
+
+## Construction
+
+```haskell
+State :: (s -> Pair a s) -> State s a
+```
+
+Typically instances of `State` are constructed using the provided
+construction helpers like [`get`](#get) or [`put`](#put). While the provided
+helpers fit most situations, there are times where a `State` instance will need
+to be constructed "by-hand".
+
+An instance of `State` can be constructed by passing a unary function that takes
+some type `s` as its input and returns a [`Pair`][pair] with any type `a` in the
+first position and the same type `s` in second.
+
+While there is nothing that prevents the type `s` from varying, it is
+recommended to fix the type to a single type for all `State` instances that
+are used in a given flow.
+
+```javascript
+import Pair from 'crocks/Pair'
+import State from 'crocks/State'
+
+State(state => Pair(state, state))
+//=> State s s
+
+// increaseBy :: Number -> State Number Number
+const increaseBy = value =>
+  State(state => Pair(value, state + 1))
+
+increaseBy(5)
+//=> State Number Number
+```
 
 </article>
 
@@ -479,7 +517,7 @@ to run the instance with. The value must be a member of the type that the
 given `State` instance is fixed to in it's state portion, `s`.
 
 When called, `runWith` will run the state transition with the given value as the
-initial state and will return the resulting `Pair` with the resultant in the
+initial state and will return the resulting [`Pair`][pair] with the resultant in the
 `fst` (first) and the state in the `snd` (second).
 
 
@@ -702,3 +740,5 @@ middleware({ value: 10 }, { value: 32 })
 ```
 
 </article>
+
+[pair]: ../Pair.html

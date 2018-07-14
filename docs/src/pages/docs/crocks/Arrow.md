@@ -70,6 +70,38 @@ arrUpperName
 
 </article>
 
+<article id="topic-construction">
+
+## Construction
+
+```haskell
+Arrow :: (a -> b) -> Arrow a b
+```
+
+An `Arrow` is constructed with a unary function of type `(a -> b)`. The
+input, or domain, of the function is the left parameter in the type signature
+and the output, or co-domain, of the function represents the right.
+
+```javascript
+import Arrow from 'crocks/Arrow'
+
+import compose from 'crocks/helpers/compose'
+import option from 'crocks/pointfree/option'
+import prop from 'crocks/Maybe/prop'
+
+// length :: a -> Integer
+const length = compose(
+  option(0),
+  prop('length')
+)
+
+// Arrow a Integer
+Arrow(length)
+//=> Arrow (a -> Integer)
+```
+
+</article>
+
 <article id="topic-constructor">
 
 ## Constructor Methods
@@ -104,8 +136,11 @@ const left =
 const right =
   arrow.compose(id)
 
-right.runWith(12) //=> '12'
-left.runWith(12)  //=> '12'
+right.runWith(12)
+//=> '12'
+
+left.runWith(12)
+//=> '12'
 ```
 
 </article>
@@ -150,10 +185,12 @@ const arrDoubleAndAdd =
     .map(merge(add))
 
 arrDouble
-  .runWith(200)  //=> 400
+  .runWith(200)
+//=> 400
 
 arrDoubleAndAdd
-  .runWith(Pair(200, 10))  //=> 420
+  .runWith(Pair(200, 10))
+//=> 420
 ```
 
 #### compose
@@ -161,7 +198,7 @@ arrDoubleAndAdd
 ```haskell
 Arrow a b ~> Arrow b c -> Arrow a c
 ```
-`compose` allows you to compose (2) `Arrow`s together, resulting in a new
+`compose` allows you to compose two `Arrow`s together, resulting in a new
 `Arrow` that is the result of the composition.
 
 ```javascript
@@ -248,11 +285,11 @@ arrAdd10
 
 arrAdd10Value
   .runWith({ value: 23 })
-  //=> 33
+//=> 33
 
 arrAdd10Value
   .runWith({ value: '23' })
-  //=> 10
+//=> 10
 
 arrAdd10Value
   .runWith({ num: '23' })

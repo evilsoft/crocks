@@ -10,14 +10,14 @@ Equiv a a Boolean
 ```
 
 Defined as a Monoidal Contravariant datatype, `Equiv` can be used to test
-equivalence between (2) values of a given type. It does this by wrapping a
+equivalence between two values of a given type. It does this by wrapping a
 binary equivalence function of the form `(a, a) -> Boolean`. Most of the time
 strict equality is used, but other functions of the required form can provide
 some powerful results.
 
 While the far right parameter is always fixed to `Boolean` it cannot be
 Covariant, but is Contravariant allowing both inputs to vary in their type.
-`Equiv` is also a [`Monoid`][monoids] and will concat the results of (2) `Equiv`s
+`Equiv` is also a [`Monoid`][monoids] and will concat the results of two `Equiv`s
 under logical conjunction, with it's empty value always returning `true`.
 
 As `Equiv` wraps a function, it is lazy and a given instance will not produce
@@ -55,6 +55,40 @@ eq.contramap(length)
 
 ## Implements
 `Semigroup`, `Monoid`, `Contravariant`
+
+</article>
+
+<article id="topic-construction">
+
+## Construction
+
+```haskell
+Equiv :: ((a, a) -> Boolean)-> Equiv a a
+```
+
+The constructor for `Equiv` is a unary function that takes a binary predicate
+function as its argument. The binary function's arguments should be the same
+type, although a union of multiple types can be used.
+
+The `Equiv` type is parameterized by the inputs, or domain, of the function it
+was constructed with. If the function does not strictly return a `Boolean`, then
+the underlying result will be coerced to a `Boolean`.
+
+```javascript
+import Equiv from 'crocks/Equiv'
+
+// samePartition :: (a -> b) -> (a, a) -> Boolean
+const samePartition = fn => (x, y) =>
+  fn(x) === fn(y)
+
+// mod12 :: Integer -> Integer
+const mod12 =
+  x => x % 12
+
+// Equiv Integer Integer
+Equiv(samePartition(mod12))
+//=> Equiv (Integer, Integer) -> Boolean
+```
 
 </article>
 
@@ -113,7 +147,7 @@ empty
 Equiv a a ~> Equiv a a -> Equiv a a
 ```
 
-`concat` is used to combine (2) `Semigroup`s of the same type under an operation
+`concat` is used to combine two `Semigroup`s of the same type under an operation
 specified by the `Semigroup`. In the case of `Equiv`, the results of both
 `Equiv`s are combined under logical conjunction.
 

@@ -11,8 +11,6 @@ const constant = x => () => x
 const toPromise = require('./toPromise')
 
 test('toPromise pointfree', t => {
-  t.plan(13)
-
   const f = bindFunc(toPromise)
   const x = 1337
   const m = { toPromise: sinon.spy(constant(x)) }

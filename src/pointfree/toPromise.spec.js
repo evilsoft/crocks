@@ -1,18 +1,21 @@
 const test = require('tape')
+const sinon = require('sinon')
 const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
 
 const isFunction  = require('../core/isFunction')
 
-const Async = require('../Async')
+const constant = x => () => x
+
 const toPromise = require('./toPromise')
 
 test('toPromise pointfree', t => {
   t.plan(13)
 
   const f = bindFunc(toPromise)
-  const result = 1337
+  const x = 1337
+  const m = { toPromise: sinon.spy(constant(x)) }
 
   const err = /toPromise: Async required/
 
@@ -27,13 +30,10 @@ test('toPromise pointfree', t => {
   t.throws(f([]), err, 'throws if passed an array')
   t.throws(f({}), err, 'throws if passed an object')
 
-  const rej = y => x => t.equal(x, y, 'rejects a rejected Async')
-  const res = y => x => t.equal(x, y, 'resolves a resolved Async')
-
-  const testFunc = a => toPromise(a).then(res(result)).catch(rej(result))
-
   t.ok(isFunction(toPromise), 'is a function')
 
-  testFunc(Async.Rejected(result))
-  testFunc(Async.Resolved(result))
+  const result = toPromise(m)
+
+  t.ok(m.toPromise.called, 'calls toPromise on the passed in container')
+  t.equal(result, x, 'returns the result of calling toPromise')
 })

@@ -185,6 +185,24 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "michael-wolfenden",
+      "name": "Michael Wolfenden",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/780521?v=4",
+      "profile": "http://michael-wolfenden.github.io",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "JohanCodinha",
+      "name": "Johan Codinha",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/14071356?v=4",
+      "profile": "https://github.com/JohanCodinha",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "repoType": "github"

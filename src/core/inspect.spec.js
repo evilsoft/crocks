@@ -16,6 +16,7 @@ test('inspect internal function', t => {
   t.equal(inspect([ 1, 2 ]), ' [ 1, 2 ]', 'outputs as an array')
   t.equal(inspect(0), ' 0', 'outputs as a number')
   t.equal(inspect('string'), ' "string"', 'outputs as a string wrapped in quotes')
+  t.equal(inspect(Symbol('42')), ' Symbol(42)', 'outputs as a symbol')
   t.equal(inspect(true), ' true', 'outputs as a boolean')
   t.equals(inspect({ a: 5 }), ' { a: 5 }', 'outputs object contents')
   t.equals(inspect({ a: 5, b: { c: '5' } }), ' { a: 5, b: { c: "5" } }', 'outputs object contents (nested)')

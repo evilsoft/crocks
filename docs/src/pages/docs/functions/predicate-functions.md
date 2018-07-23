@@ -26,7 +26,7 @@ description of their truth:
 * `isBoolean :: a -> Boolean`: Boolean
 * `isCategory :: a -> Boolean`: an ADT that provides `id` and `compose` methods
 * `isChain :: a -> Boolean`: an ADT that provides `map`, `ap` and `chain` methods
-* `isContravariant : a -> Boolean`: an ADT that provides `contramap` method
+* `isContravariant :: a -> Boolean`: an ADT that provides `contramap` method
 * `isDefined :: a -> Boolean`: Every value that is not `undefined`, `null` included
 * `isEmpty :: a -> Boolean`: Empty Object, Array or String
 * `isExtend :: a -> Boolean`: an ADT that provides `map` and `extend` methods
@@ -40,7 +40,7 @@ description of their truth:
 * `isNumber :: a -> Boolean`: `Number` that is not a `NaN` value, `Infinity` included
 * `isObject :: a -> Boolean`: Plain Old Javascript Object (POJO)
 * `isPlus :: a -> Boolean`: an ADT that provides `map`, `alt` and `zero` methods
-* `isProfunctor : a -> Boolean`: an ADT that provides `map`, `contramap` and `promap` methods
+* `isProfunctor :: a -> Boolean`: an ADT that provides `map`, `contramap` and `promap` methods
 * `isPromise :: a -> Boolean`: an object implementing `then` and `catch`
 * `isSame :: a -> b -> Boolean`: same value or reference, use `equals` for value equality
 * `isSameType :: a -> b -> Boolean`: Constructor matches a values type, or two values types match
@@ -50,7 +50,7 @@ description of their truth:
 * `isString :: a -> Boolean`: String
 * `isSymbol :: a -> Boolean`: Symbol
 * `isTraversable :: a -> Boolean`: an ADT that provides `map` and `traverse` methods
-* `propEq: (String | Integer) -> a -> Object -> Boolean`: an `Object` that contains the provided key
+* `propEq :: (String | Integer) -> a -> Object -> Boolean`: an `Object` that contains the provided key
 * `propPathEq :: [ String | Integer ] -> a -> Object -> Boolean`: an `Object` that contains the provided key in the provided traversal path
 
 [pred]: ../crocks/Pred.html

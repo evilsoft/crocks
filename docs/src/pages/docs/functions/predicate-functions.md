@@ -48,6 +48,7 @@ description of their truth:
 * `isSemigroupoid :: a -> Boolean`: an ADT that provides a `compose` method
 * `isSetoid :: a -> Boolean`: an ADT that provides an `equals` method
 * `isString :: a -> Boolean`: String
+* `isSymbol :: a -> Boolean`: Symbol
 * `isTraversable :: a -> Boolean`: an ADT that provides `map` and `traverse` methods
 * `propEq: (String | Integer) -> a -> Object -> Boolean`: an `Object` that contains the provided key
 * `propPathEq :: [ String | Integer ] -> a -> Object -> Boolean`: an `Object` that contains the provided key in the provided traversal path

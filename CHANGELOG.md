@@ -1,5 +1,14 @@
 # Change Log for `crocks`
 
+v0.10.1 -- July 24, 2018
+--
+
+### Bug Fix
+* Fix up regression on `bimap` with `Pair` from last release
+
+### Pull Requests
+* [#300 - Fix up the Fantasy Land `bimap` method on `Pair`](https://github.com/evilsoft/crocks/pull/300)
+
 v0.10.0 -- July 24, 2018
 --
 

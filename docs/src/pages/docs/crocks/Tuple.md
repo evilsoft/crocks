@@ -212,14 +212,11 @@ Semigroup s1, s2 => 2-Tuple s1 s2 ~> 2-Tuple s1 s2 -> 2-Tuple s1 s2
 ...
 ```
 
-When a given `n-Tuple` contains `Semigroup` instances in all defined `n`
-positions. It can be concatenated with another `n-Tuple` instance containing
-instances of the same `Semigroup`s in the same positions as the `n-Tuple`
-instance it is being concatenated with.
-
-`concat` will be called on each contained `Semigroup` instance with the instance
-corresponding to the other `n-Tuple` instance. The result of each concatenation
-will be provided in a new `n-Tuple` instance of the same `Semigroup`s.
+Two instances of the same `n-Tuple` can be combined using concatenation, as
+long as both have instances of the same `Semigroup`s in the same
+position. `concat` will be called on each contained `Semigroup` instance with
+the instance corresponding to the other `n-Tuple` instance. The result of each
+concatenation will be provided in a new `n-Tuple` instance.
 
 ```javascript
 import Tuple from 'crocks/Tuple'
@@ -255,9 +252,8 @@ value. `map` takes a function `(a -> b)` and will return a
 new `n-Tuple` instance with the result of mapping the rightmost value from its
 original `a` type to the resulting `b`.
 
-This method will only apply to the rightmost value, if the need to map one or
-many of the values in the various other positions, [`mapAll`](#mapall) can be
-used.
+This method will only apply to the rightmost value. [`mapAll`](#mapall) can be
+used to map over all values in a given `n-Tuple`.
 
 ```javascript
 import Tuple from 'crocks/Tuple'

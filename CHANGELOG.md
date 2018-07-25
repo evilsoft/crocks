@@ -1,5 +1,52 @@
 # Change Log for `crocks`
 
+v0.10.0 -- July 24, 2018
+--
+
+### Breaking
+* Moved `merge` to `crocks/pointfree/merge` from `crocks/Pair/merge`
+
+### Additions
+* Types
+  * `Tuple`
+* Functions/Methods
+  * Add `nmap` Pointfree Function
+  * Add `race` method to `Async` type
+  * Add `rejectAfter` and `resolveAfter` `Async` construction helper functions
+  * Add `race` Pointfree Function
+* Documentation:
+  * Add a `Construction` to all data types
+  * `Tuple` Documentation
+
+### Modifications
+* Documentation
+  * `Async` documentation corrections.
+  * `Arrow` documentation corrections.
+  * Correct spelling of Integer throughout all documentation.
+  * Fix up colon notation on Predicate Functions
+* Functions  
+  * Modify Type Class based predicates to account for Fantasy-Land methods.
+  * Modify Type Class based Pointfree Function to account for Fantasy-Land methods.
+  * `constant` combinator is now curried.
+  * update `inspect` to account for `Symbol` values
+
+### Pull Requests
+* [#277 - update Async documentation](https://github.com/evilsoft/crocks/pull/277)
+* [#276 - Add construction section for all Monoids](https://github.com/evilsoft/crocks/pull/276)
+* [#275 - Add a Tuple Type](https://github.com/evilsoft/crocks/pull/275)
+* [#279 - Add Fantasy Land Compliance for Associated Predicates](https://github.com/evilsoft/crocks/pull/279)
+* [#280 - Add Fantasy Land Compliance for Pointfree Functions](https://github.com/evilsoft/crocks/pull/280)
+* [#283 - Constant should be Curried](https://github.com/evilsoft/crocks/pull/283)
+* [#284 - Support arbitrary length Tuples](https://github.com/evilsoft/crocks/pull/284)
+* [#287 - Interger -> Integer](https://github.com/evilsoft/crocks/pull/287)
+* [#282 - Add race and some construction helpers to Async](https://github.com/evilsoft/crocks/pull/282)
+* [#289 - Update Arrow.md](https://github.com/evilsoft/crocks/pull/289)
+* [#291 - Make nmap work with Tuples greater than size 10](https://github.com/evilsoft/crocks/pull/291)
+* [#290 - Add Construction section to all Crocks](https://github.com/evilsoft/crocks/pull/290)
+* [#298 - Support inspecting Symbols](https://github.com/evilsoft/crocks/pull/298)
+* [#299 - Normalize predicates docs colons](https://github.com/evilsoft/crocks/pull/299)
+* [#297 - Add Tuple documentation](https://github.com/evilsoft/crocks/pull/297)
+
 v0.9.4 -- May 25, 2018
 --
 

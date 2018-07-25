@@ -216,7 +216,7 @@ function Pair(l, r) {
     [fl.equals]: equals,
     [fl.concat]: concat(fl.concat),
     [fl.map]: map(fl.map),
-    [fl.bimap]: bimap,
+    [fl.bimap]: bimap(fl.bimap),
     [fl.chain]: chain(fl.chain),
     [fl.extend]: extend(fl.extend),
     ['@@type']: _type,

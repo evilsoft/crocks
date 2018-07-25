@@ -97,7 +97,7 @@ weight: 10
 ```haskell
 ```
 
-[POINTFREE FUNCTION NAME]
+[POINTFREE FUNCTION DESC]
 
 ```javascript
 ```

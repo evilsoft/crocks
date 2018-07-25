@@ -21,10 +21,12 @@ function _Tuple(n) {
   if (!(isInteger(n) && n >= 1)) {
     throw new TypeError('Tuple: First argument must be an integer')
   }
+
   const type =
     constant(_type(n))
 
-  const typeString = typeFn('Tuple', VERSION, n)
+  const typeString =
+    typeFn('Tuple', VERSION, n)
 
   const withProps = fn => {
     fn.type = type
@@ -63,8 +65,8 @@ function _Tuple(n) {
       )
     }
 
-    const inspect =
-      () => `${n}-Tuple(${parts.map(_inspect).join(',')} )`
+    const inspect = () =>
+      `${n}-Tuple(${parts.map(_inspect).join(',')} )`
 
     function map(method) {
       return function(fn) {

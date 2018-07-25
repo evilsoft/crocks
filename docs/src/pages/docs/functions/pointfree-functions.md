@@ -2,13 +2,13 @@
 title: "Point-free Functions"
 description: "Point-free Functions API"
 layout: "notopic"
-functions: ["alt", "ap", "bimap", "both", "chain", "coalesce", "comparewith", "concat", "cons", "contramap", "either", "empty", "equals", "extend", "filter", "first", "fold", "head", "map", "option", "promap", "reduce", "reduceright", "run", "runwith", "second", "sequence", "swap", "tail", "traverse", "valueof"]
+functions: ["alt", "ap", "bimap", "both", "chain", "coalesce", "comparewith", "concat", "cons", "contramap", "either", "empty", "equals", "extend", "filter", "first", "fold", "head", "map", "merge", "option", "promap", "race", "reduce", "reduceright", "run", "runwith", "second", "sequence", "swap", "tail", "traverse", "valueof"]
 weight: 50
 ---
 
 While it can seem natural to work with all these containers in a fluent fashion,
 it can get cumbersome and hard to get a lot of reuse out of. A way to really get
-the most out of reusability in Javascript is to take what is called a point-free
+the most out of re-usability in JavaScript is to take what is called a point-free
 approach. Below is a small code same to contrast the difference between the two
 calling styles:
 
@@ -72,7 +72,8 @@ accepted Datatype):
 | `head` | `m a -> Maybe a` | `crocks/pointfree` |
 | `log` | `m a b -> a` | `crocks/Writer` |
 | `map` | `(a -> b) -> m a -> m b` | `crocks/pointfree` |
-| [`merge`][merge] | `(a -> b -> c) -> m a b -> c` | `crocks/Pair` |
+| `merge` | `(a -> b -> c) -> m a b -> c` | `crocks/pointfree` |
+| [`nmap`][nmap] | `Integer -> ...(* -> *) m ...* -> m ...*` | `crocks/Tuple` |
 | `option` | `a -> m a -> a` | `crocks/pointfree` |
 | `promap` | `(c -> a) -> (b -> d) -> m a b -> m c d` | `crocks/pointfree` |
 | [`race`][race] | `m e a -> m e a -> m e a` | `crocks/Async` |
@@ -100,12 +101,12 @@ accepted Datatype):
 | `chain` | `Array`, [`Async`][async-chain], [`Const`][const-chain], `Either`, `Identity`, `IO`, `List`, [`Maybe`][maybe-chain], [`Pair`][pair-chain], [`Reader`][reader-chain], `Result`, [`State`][state-chain], `Unit`, `Writer` |
 | `coalesce` | [`Async`][async-coalesce], `Either`, [`Maybe`][maybe-coalesce], `Result` |
 | `compareWith` | [`Equiv`][equiv-compare] |
-| `concat` | [`All`][all-concat], [`Any`][any-concat], `Array`, [`Assign`][assign-concat], [`Const`][const-concat], `Either`, [`Endo`][endo-concat], [`Equiv`][equiv-concat], [`First`][first-concat], `Identity`, [`Last`][last-concat], `List`, [`Max`][max-concat], [`Maybe`][maybe-concat], [`Min`][min-concat], [`Pair`][pair-concat], [`Pred`][pred-concat], [`Prod`][prod-concat], `Result`, `String`, [`Sum`][sum-concat], `Unit` |
+| `concat` | [`All`][all-concat], [`Any`][any-concat], `Array`, [`Assign`][assign-concat], [`Const`][const-concat], `Either`, [`Endo`][endo-concat], [`Equiv`][equiv-concat], [`First`][first-concat], `Identity`, [`Last`][last-concat], `List`, [`Max`][max-concat], [`Maybe`][maybe-concat], [`Min`][min-concat], [`Pair`][pair-concat], [`Pred`][pred-concat], [`Prod`][prod-concat], `Result`, `String`, [`Sum`][sum-concat], [`Tuple`][tuple-concat], `Unit` |
 | `cons` | `Array`, `List` |
 | `contramap` | [`Arrow`][arrow-contra], [`Equiv`][equiv-contra], [`Pred`][pred-contra], `Star` |
 | `either` | `Either`, [`Maybe`][maybe-either], `Result` |
 | `empty` | [`All`][all-empty], [`Any`][any-empty], `Array`, [`Assign`][assign-empty], [`Endo`][endo-empty], [`Equiv`][equiv-empty], [`First`][first-empty], [`Last`][last-empty], `List`, [`Max`][max-empty], [`Min`][min-empty], `Object`, [`Pred`][pred-empty], [`Prod`][prod-empty], `String`, [`Sum`][sum-empty], `Unit` |
-| `equals` | [`All`][all-equals], [`Any`][any-equals], `Array`, [`Assign`][assign-equals], `Boolean`, [`Const`][const-equals], `Either`, [`First`][first-equals], [`Last`][last-equals], `List`, [`Max`][max-equals], [`Maybe`][maybe-equals], [`Min`][min-equals], `Number`, `Object`, [`Pair`][pair-equals], [`Prod`][prod-equals], `Result`, `String`, [`Sum`][sum-equals], `Unit`, `Writer` |
+| `equals` | [`All`][all-equals], [`Any`][any-equals], `Array`, [`Assign`][assign-equals], `Boolean`, [`Const`][const-equals], `Either`, [`First`][first-equals], [`Last`][last-equals], `List`, [`Max`][max-equals], [`Maybe`][maybe-equals], [`Min`][min-equals], `Number`, `Object`, [`Pair`][pair-equals], [`Prod`][prod-equals], `Result`, `String`, [`Sum`][sum-equals], [`Tuple`][tuple-equals], `Unit`, `Writer` |
 | [`evalWith`][eval] | [`State`][state-eval] |
 | [`execWith`][exec] | [`State`][state-exec] |
 | `extend` | [`Pair`][pair-extend] |
@@ -115,8 +116,8 @@ accepted Datatype):
 | [`fst`][fst] | [`Pair`][pair-fst] |
 | `head` | `Array`, `List`, `String` |
 | `log` | `Writer` |
-| `map` | [`Async`][async-map], `Array`, [`Arrow`][arrow-map], [`Const`][const-map], `Either`, `Function`, `Identity`, `IO`, `List`, [`Maybe`][maybe-map], `Object`, [`Pair`][pair-map], [`Reader`][reader-map], `Result`, `Star`, [`State`][state-map], `Unit`, `Writer` |
-| [`merge`][merge] | [`Pair`][pair-merge] |
+| `map` | [`Async`][async-map], `Array`, [`Arrow`][arrow-map], [`Const`][const-map], `Either`, `Function`, `Identity`, `IO`, `List`, [`Maybe`][maybe-map], `Object`, [`Pair`][pair-map], [`Reader`][reader-map], `Result`, `Star`, [`State`][state-map], [`Tuple`][tuple-map], `Unit`, `Writer` |
+| `merge` | [`Pair`][pair-merge], [`Tuple`][tuple-merge] |
 | `option` | [`First`][first-option], [`Last`][last-option], [`Maybe`][maybe-option] |
 | `promap` | [`Arrow`][arrow-pro], `Star` |
 | [`race`][race] | [`Async`][async-race] |
@@ -260,11 +261,16 @@ accepted Datatype):
 [state-map]: ../crocks/State.html#map
 [state-run]: ../crocks/State.html#runwith
 
+[tuple-concat]: ../crocks/Tuple.html#concat
+[tuple-equals]: ../crocks/Tuple.html#equals
+[tuple-map]: ../crocks/Tuple.html#map
+[tuple-merge]: ../crocks/Tuple.html#merge
+
 [exec]: ../crocks/State.html#execwith-pointfree
 [eval]: ../crocks/State.html#evalwith-pointfree
 
 [fst]: ../crocks/Pair.html#fst-pointfree
-[merge]: ../crocks/Pair.html#merge-pointfree
+[nmap]: ../crocks/Tuple.html#nmap
 [snd]: ../crocks/Pair.html#snd-pointfree
 
 [race]: ../crocks/Async.html#race-pointfree

@@ -2,7 +2,7 @@
 title: "Pair"
 description: "Canonical Product Type"
 layout: "guide"
-functions: ["branch", "fst", "merge", "snd", "topairs", "writertopair"]
+functions: ["branch", "fst", "snd", "topairs", "writertopair"]
 weight: 100
 ---
 
@@ -29,7 +29,7 @@ of the concatenation in the first position of the resulting `Pair`.
 
 A helpful benefit of the `Bifunctor` aspects `Pair` allows for defining parallel
 computations. There are many functions that ship with `crocks` that allow for
-parallelization such as [`branch`](#branch), [`merge`](#merge-pointfree) and
+parallelization such as [`branch`](#branch), `merge` and
 `fanout`. Using those helpers in conjunction with the ability to
 [`bimap`](#bimap) functions over a given `Pair`s values.
 
@@ -40,7 +40,7 @@ import bimap from 'crocks/pointfree/bimap'
 import branch from 'crocks/Pair/branch'
 import compose from 'crocks/helpers/compose'
 import mreduce from 'crocks/helpers/mreduce'
-import merge from 'crocks/Pair/merge'
+import merge from 'crocks/pointfree/merge'
 
 // negate :: a -> Boolean
 const negate =
@@ -114,7 +114,7 @@ Pair(34, Pair(true, 'string'))
 
 ## Instance Methods
 
-#### twoals
+#### equals
 
 ```haskell
 Pair a b ~> c -> Boolean
@@ -230,7 +230,7 @@ import Pair from 'crocks/Pair'
 
 import compose from 'crocks/helpers/compose'
 import map from 'crocks/pointfree/map'
-import merge from 'crocks/Pair/merge'
+import merge from 'crocks/pointfree/merge'
 import objOf from 'crocks/helpers/objOf'
 
 // length :: String -> Number
@@ -280,7 +280,7 @@ import compose from 'crocks/helpers/compose'
 import bimap from 'crocks/pointfree/bimap'
 import branch from 'crocks/Pair/branch'
 import identity from 'crocks/combinators/identity'
-import merge from 'crocks/Pair/merge'
+import merge from 'crocks/pointfree/merge'
 import mreduce from 'crocks/helpers/mreduce'
 
 // add10 :: Number -> Number
@@ -551,7 +551,7 @@ second position, while leaving the value in the first position untouched.
 import Pair from 'crocks/Pair'
 
 import extend from 'crocks/pointfree/extend'
-import merge from 'crocks/Pair/merge'
+import merge from 'crocks/pointfree/merge'
 import objOf from 'crocks/helpers/objOf'
 
 // name :: Pair String String
@@ -708,7 +708,7 @@ import Sum from 'crocks/Sum'
 
 import compose from 'crocks/helpers/compose'
 import fanout from 'crocks/helpers/fanout'
-import merge from 'crocks/Pair/merge'
+import merge from 'crocks/pointfree/merge'
 import mreduce from 'crocks/helpers/mreduce'
 
 // length :: [ a ] -> Integer
@@ -763,7 +763,7 @@ import branch from 'crocks/Pair/branch'
 import compose from 'crocks/helpers/compose'
 import curry from 'crocks/helpers/curry'
 import objOf from 'crocks/helpers/objOf'
-import merge from 'crocks/Pair/merge'
+import merge from 'crocks/pointfree/merge'
 
 // add10 :: Number -> Number
 const add10 =
@@ -810,7 +810,7 @@ to this function named [`fromPairs`][frompairs].
 ```javascript
 import compose from 'crocks/helpers/compose'
 import map from 'crocks/pointfree/map'
-import merge from 'crocks/Pair/merge'
+import merge from 'crocks/pointfree/merge'
 import toPairs from 'crocks/Pair/toPairs'
 
 // record :: Object
@@ -865,7 +865,7 @@ import Pair from 'crocks/Pair'
 import flip from 'crocks/combinators/flip'
 import fst from 'crocks/Pair/fst'
 import ifElse from 'crocks/logic/ifElse'
-import merge from 'crocks/Pair/merge'
+import merge from 'crocks/pointfree/merge'
 import snd from 'crocks/Pair/snd'
 
 // lte :: (Number, Number) -> Boolean
@@ -887,53 +887,6 @@ min(Pair(45, 22))
 
 min(Pair(100, 100))
 //=> 100
-```
-
-#### merge (pointfree)
-
-`crocks/Pair/merge`
-
-```haskell
-merge :: ((a, b) -> c) -> Pair a b -> c
-```
-
-The pointfree `merge` function allows the ability to fold out a new value, using
-a binary function to combine the two values into one. This function takes two
-arguments, with the first being a binary function used to combine a `Pair`s
-values and the second is the instance of `Pair` for the function to be applied.
-Like the method on `Pair`, this function will return the result of the provided
-binary function.
-
-```javascript
-import Pair from 'crocks/Pair'
-
-import assoc from 'crocks/helpers/assoc'
-import compose from 'crocks/helpers/compose'
-import curry from 'crocks/helpers/curry'
-import map from 'crocks/pointfree/map'
-import merge from 'crocks/Pair/merge'
-
-// mergeObj :: Pair String a -> Object -> Object
-const mergeObj =
-  merge(assoc)
-
-// inc :: Number -> Number
-const inc =
-  x => x + 1
-
-// incAssign :: Pair String Number -> Object -> Object
-const incAssign = curry(
-  compose(mergeObj, map(inc))
-)
-
-incAssign(Pair('apples', 5), {})
-// { apples: 6 }
-
-incAssign(
-  Pair('num', 57),
-  { string: 'a string' }
-)
-// { string: 'a string', num: 58 }
 ```
 
 #### snd (pointfree)

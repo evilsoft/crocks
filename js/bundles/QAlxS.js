@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([17,33,34,35],[
+webpackJsonppageComponent([21,34,35,36],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19884,7 +19884,7 @@ if (goog.DEBUG) {
  * @return {void}
  * @suppress {checkTypes}
  */
-function __deltemplate_s152_d34389eb(opt_data, opt_ignored, opt_ijData) {
+function __deltemplate_s174_d34389eb(opt_data, opt_ignored, opt_ijData) {
   ie_open('a', null, null,
       'class', 'sidebar-link ' + (opt_data.page.active ? 'sidebar-link-selected' : ''),
       'href', opt_data.page.url);
@@ -19893,16 +19893,16 @@ function __deltemplate_s152_d34389eb(opt_data, opt_ignored, opt_ijData) {
           'class', 'sidebar-icon icon-16-' + opt_data.page.icon);
     }
     ie_open('span');
-      var dyn10 = opt_data.page.title;
-      if (typeof dyn10 == 'function') dyn10(); else if (dyn10 != null) itext(dyn10);
+      var dyn12 = opt_data.page.title;
+      if (typeof dyn12 == 'function') dyn12(); else if (dyn12 != null) itext(dyn12);
     ie_close('span');
   ie_close('a');
 }
-exports.__deltemplate_s152_d34389eb = __deltemplate_s152_d34389eb;
+exports.__deltemplate_s174_d34389eb = __deltemplate_s174_d34389eb;
 if (goog.DEBUG) {
-  __deltemplate_s152_d34389eb.soyTemplateName = 'Sidebar.__deltemplate_s152_d34389eb';
+  __deltemplate_s174_d34389eb.soyTemplateName = 'Sidebar.__deltemplate_s174_d34389eb';
 }
-soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'sidebar', 0, __deltemplate_s152_d34389eb);
+soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'sidebar', 0, __deltemplate_s174_d34389eb);
 
 exports.render.params = ["section","site"];
 exports.render.types = {"section":"any","site":"any"};
@@ -20091,8 +20091,8 @@ function $render(opt_data, opt_ignored, opt_ijData) {
       ie_void('span', null, null,
           'class', 'icon icon-16-clock');
       itext(' ');
-      var dyn11 = opt_data.time;
-      if (typeof dyn11 == 'function') dyn11(); else if (dyn11 != null) itext(dyn11);
+      var dyn13 = opt_data.time;
+      if (typeof dyn13 == 'function') dyn13(); else if (dyn13 != null) itext(dyn13);
     }
   ie_close('p');
 }
@@ -28360,15 +28360,12 @@ exports.default = parseFromAnchor;
 /* 226 */,
 /* 227 */,
 /* 228 */,
-/* 229 */,
-/* 230 */,
-/* 231 */,
-/* 232 */
+/* 229 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HXuRQ", function() { return HXuRQ; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "QAlxS", function() { return QAlxS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28380,15 +28377,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var templates;
 goog.loadModule(function(exports) {
 
-// This file was automatically generated from pointfree-functions.soy.
+// This file was automatically generated from combinators.soy.
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace HXuRQ.
+ * @fileoverview Templates in namespace QAlxS.
  * @public
  */
 
-goog.module('HXuRQ.incrementaldom');
+goog.module('QAlxS.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28422,2350 +28419,153 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var param2003 = function() {
-    ie_open('p');
-      itext('While it can seem natural to work with all these containers in a fluent fashion, it can get cumbersome and hard to get a lot of reuse out of. A way to really get the most out of reusability in Javascript is to take what is called a point-free approach. Below is a small code same to contrast the difference between the two calling styles:');
-    ie_close('p');
-    $templateAlias2({code: 'import crocks from \'crocks\'\n\nconst {\n  compose, map, safe, isInteger\n} = crocks // map is the point-free function\n\n// isEven :: Integer -> Boolean\nconst isEven =\n  x => (x % 2) === 0\n\n// maybeInt :: a -> Maybe Integer\nconst maybeInt =\n  safe(isInteger)\n\n// fluentIsEven :: a -> Maybe Boolean\nconst fluentIsEven = data =>\n  maybeInt(data)\n    .map(isEven)\n\n// pointfreeIsEven :: a -> Maybe Boolean\nconst pointfreeIsEven =\n  compose(map(isEven), maybeInt)', mode: 'javascript'}, null, opt_ijData);
-    ie_open('p');
-      itext('These functions provide a very clean way to build out very simple functions and compose them all together to compose a more complicated flow. Each point-free function provided in ');
-      ie_open('code');
-        itext('crocks');
-      ie_close('code');
-      itext(' is "auto-curried" and follows a "data-last" pattern in the order of how it receives it\'s arguments. Typically the most stable of the arguments comes first, moving all the way to the least stable argument (which usually is the data flowing through your composition). Below lists the provided functions and the data types they work with (');
-      ie_open('code');
-        itext('m');
-      ie_close('code');
-      itext(' refers to an accepted Datatype):');
-    ie_close('p');
-    ie_open('h5');
+  var param1885 = function() {
+    ie_open('h4');
       ie_open('a', null, null,
-          'id', 'signatures',
-          'href', '#signatures');
-        itext('Signatures');
+          'id', 'applyto',
+          'href', '#applyto');
+        itext('applyTo');
       ie_close('a');
-    ie_close('h5');
-    ie_open('table');
-      ie_open('thead');
-        ie_open('tr');
-          ie_open('th');
-            itext('Function');
-          ie_close('th');
-          ie_open('th', null, null,
-              'style', 'text-align:left');
-            itext('Signature');
-          ie_close('th');
-          ie_open('th', null, null,
-              'style', 'text-align:left');
-            itext('Location');
-          ie_close('th');
-        ie_close('tr');
-      ie_close('thead');
-      ie_open('tbody');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('alt');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('m a -> m a -> m a');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/pointfree');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('ap');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('m a -> m (a -> b) -> m b');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/pointfree');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('bimap');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('(a -> c) -> (b -> d) -> m a b -> m c d');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/pointfree');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('both');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('m (a -> b) -> m (Pair a a -> Pair b b)');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/pointfree');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('chain');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('(a -> m b) -> m a -> m b');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/pointfree');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('coalesce');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('(a -> c) -> (b -> c) -> m a b -> m _ c');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/pointfree');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('compareWith');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('a -> a -> m a -> b');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/pointfree');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('concat');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('m a -> m a -> m a');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/pointfree');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('cons');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('a -> m a -> m a');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/pointfree');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('contramap');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('(b -> a) -> m a -> m b');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/pointfree');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('either');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('(a -> c) -> (b -> c) -> m a b -> c');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/pointfree');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('empty');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('m -> m');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/pointfree');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('equals');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('m -> m -> Boolean');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/pointfree');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('a', null, null,
-                'href', '../crocks/State.html#evalwith-pointfree');
-              ie_open('code');
-                itext('evalWith');
-              ie_close('code');
-            ie_close('a');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('s -> m -> a');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/State');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('a', null, null,
-                'href', '../crocks/State.html#execwith-pointfree');
-              ie_open('code');
-                itext('execWith');
-              ie_close('code');
-            ie_close('a');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('s -> m -> s');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/State');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('extend');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('(m a -> b) -> m a -> m b');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/pointfree');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('filter');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('((a -> Boolean) | Pred a) -> m a -> m a');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/pointfree');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('first');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('m (a -> b) -> m (Pair a c -> Pair b c)');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/pointfree');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('fold');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('Semigroup s => m s -> s');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/pointfree');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('a', null, null,
-                'href', '../crocks/Pair.html#fst-pointfree');
-              ie_open('code');
-                itext('fst');
-              ie_close('code');
-            ie_close('a');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('m a b -> a');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/Pair');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('head');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('m a -> Maybe a');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/pointfree');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('log');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('m a b -> a');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/Writer');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('map');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('(a -> b) -> m a -> m b');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/pointfree');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('a', null, null,
-                'href', '../crocks/Pair.html#merge-pointfree');
-              ie_open('code');
-                itext('merge');
-              ie_close('code');
-            ie_close('a');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('(a -> b -> c) -> m a b -> c');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/Pair');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('option');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('a -> m a -> a');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/pointfree');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('promap');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('(c -> a) -> (b -> d) -> m a b -> m c d');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/pointfree');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('read');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('m a b -> Pair a b');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/Writer');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('reduce');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('(b -> a -> b) -> b -> m a -> b');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/pointfree');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('reduceRight');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('(b -> a -> b) -> b -> m a -> b');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/pointfree');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('reject');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('((a -> Boolean) | Pred a) -> m a -> m a');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/pointfree');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('run');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('m a -> b');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/pointfree');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('runWith');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('a -> m -> b');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/pointfree');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('second');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('m (a -> b) -> m (Pair c a -> Pair c b)');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/pointfree');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('sequence');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('Applicative TypeRep t, Apply f => (t | (b -> f b)) -> m (f a) -> f (m a)');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/pointfree');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('a', null, null,
-                'href', '../crocks/Pair.html#snd-pointfree');
-              ie_open('code');
-                itext('snd');
-              ie_close('code');
-            ie_close('a');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('m a b -> b');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/Pair');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('swap');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('(c -> d) -> (a -> b) -> m c a -> m b d');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/pointfree');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('tail');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('m a -> Maybe (m a)');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/pointfree');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('traverse');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('Applicative TypeRep t, Apply f => (t | (c -> f c)) -> (a -> f b) -> m (f a) -> f (m b)');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/pointfree');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('valueOf');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('m a -> a');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('crocks/pointfree');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-      ie_close('tbody');
-    ie_close('table');
-    ie_open('h5');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/combinators/applyTo');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'applyTo :: a -> (a -> b) -> b', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('Ever run into a situation where you have a value but do not have a function to apply it to? Well this little bird, named Thrush, is there to help out. Just give it a value and it will give you back a function ready to take a function. Once that function is provided, it will return the result of applying your value to that function.');
+    ie_close('p');
+    ie_open('h4');
       ie_open('a', null, null,
-          'id', 'datatypes',
-          'href', '#datatypes');
-        itext('Datatypes');
+          'id', 'composeb',
+          'href', '#composeb');
+        itext('composeB');
       ie_close('a');
-    ie_close('h5');
-    ie_open('table');
-      ie_open('thead');
-        ie_open('tr');
-          ie_open('th');
-            itext('Function');
-          ie_close('th');
-          ie_open('th', null, null,
-              'style', 'text-align:left');
-            itext('Datatypes');
-          ie_close('th');
-        ie_close('tr');
-      ie_close('thead');
-      ie_open('tbody');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('alt');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('a', null, null,
-                'href', '../crocks/Async.html#alt');
-              ie_open('code');
-                itext('Async');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('code');
-              itext('Either');
-            ie_close('code');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../crocks/Maybe.html#alt');
-              ie_open('code');
-                itext('Maybe');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('code');
-              itext('Result');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('ap');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('Array');
-            ie_close('code');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../crocks/Async.html#ap');
-              ie_open('code');
-                itext('Async');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../crocks/Const.html#ap');
-              ie_open('code');
-                itext('Const');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('code');
-              itext('Either');
-            ie_close('code');
-            itext(', ');
-            ie_open('code');
-              itext('Identity');
-            ie_close('code');
-            itext(', ');
-            ie_open('code');
-              itext('IO');
-            ie_close('code');
-            itext(', ');
-            ie_open('code');
-              itext('List');
-            ie_close('code');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../crocks/Maybe.html#ap');
-              ie_open('code');
-                itext('Maybe');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../crocks/Pair.html#ap');
-              ie_open('code');
-                itext('Pair');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../crocks/Reader.html#ap');
-              ie_open('code');
-                itext('Reader');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('code');
-              itext('Result');
-            ie_close('code');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../crocks/State.html#ap');
-              ie_open('code');
-                itext('State');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('code');
-              itext('Unit');
-            ie_close('code');
-            itext(', ');
-            ie_open('code');
-              itext('Writer');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('bimap');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('a', null, null,
-                'href', '../crocks/Async.html#bimap');
-              ie_open('code');
-                itext('Async');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('code');
-              itext('Either');
-            ie_close('code');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../crocks/Pair.html#bimap');
-              ie_open('code');
-                itext('Pair');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('code');
-              itext('Result');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('both');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('a', null, null,
-                'href', '../crocks/Arrow.html#both');
-              ie_open('code');
-                itext('Arrow');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('code');
-              itext('Function');
-            ie_close('code');
-            itext(', ');
-            ie_open('code');
-              itext('Star');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('chain');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('Array');
-            ie_close('code');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../crocks/Async.html#chain');
-              ie_open('code');
-                itext('Async');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../crocks/Const.html#chain');
-              ie_open('code');
-                itext('Const');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('code');
-              itext('Either');
-            ie_close('code');
-            itext(', ');
-            ie_open('code');
-              itext('Identity');
-            ie_close('code');
-            itext(', ');
-            ie_open('code');
-              itext('IO');
-            ie_close('code');
-            itext(', ');
-            ie_open('code');
-              itext('List');
-            ie_close('code');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../crocks/Maybe.html#chain');
-              ie_open('code');
-                itext('Maybe');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../crocks/Pair.html#chain');
-              ie_open('code');
-                itext('Pair');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../crocks/Reader.html#chain');
-              ie_open('code');
-                itext('Reader');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('code');
-              itext('Result');
-            ie_close('code');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../crocks/State.html#chain');
-              ie_open('code');
-                itext('State');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('code');
-              itext('Unit');
-            ie_close('code');
-            itext(', ');
-            ie_open('code');
-              itext('Writer');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('coalesce');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('a', null, null,
-                'href', '../crocks/Async.html#coalesce');
-              ie_open('code');
-                itext('Async');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('code');
-              itext('Either');
-            ie_close('code');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../crocks/Maybe.html#coalesce');
-              ie_open('code');
-                itext('Maybe');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('code');
-              itext('Result');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('compareWith');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('a', null, null,
-                'href', '../crocks/Equiv.html#comparewith');
-              ie_open('code');
-                itext('Equiv');
-              ie_close('code');
-            ie_close('a');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('concat');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('a', null, null,
-                'href', '../monoids/All.html#concat');
-              ie_open('code');
-                itext('All');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../monoids/Any.html#concat');
-              ie_open('code');
-                itext('Any');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('code');
-              itext('Array');
-            ie_close('code');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../monoids/Assign.html#concat');
-              ie_open('code');
-                itext('Assign');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../crocks/Const.html#concat');
-              ie_open('code');
-                itext('Const');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('code');
-              itext('Either');
-            ie_close('code');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../monoids/Endo.html#concat');
-              ie_open('code');
-                itext('Endo');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../crocks/Equiv.html#concat');
-              ie_open('code');
-                itext('Equiv');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../monoids/First.html#concat');
-              ie_open('code');
-                itext('First');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('code');
-              itext('Identity');
-            ie_close('code');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../monoids/Last.html#concat');
-              ie_open('code');
-                itext('Last');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('code');
-              itext('List');
-            ie_close('code');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../monoids/Max.html#concat');
-              ie_open('code');
-                itext('Max');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../crocks/Maybe.html#concat');
-              ie_open('code');
-                itext('Maybe');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../monoids/Min.html#concat');
-              ie_open('code');
-                itext('Min');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../crocks/Pair.html#concat');
-              ie_open('code');
-                itext('Pair');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../crocks/Pred.html#concat');
-              ie_open('code');
-                itext('Pred');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../monoids/Prod.html#concat');
-              ie_open('code');
-                itext('Prod');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('code');
-              itext('Result');
-            ie_close('code');
-            itext(', ');
-            ie_open('code');
-              itext('String');
-            ie_close('code');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../monoids/Sum.html#concat');
-              ie_open('code');
-                itext('Sum');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('code');
-              itext('Unit');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('cons');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('Array');
-            ie_close('code');
-            itext(', ');
-            ie_open('code');
-              itext('List');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('contramap');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('a', null, null,
-                'href', '../crocks/Arrow.html#contramap');
-              ie_open('code');
-                itext('Arrow');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../crocks/Equiv.html#contramap');
-              ie_open('code');
-                itext('Equiv');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../crocks/Pred.html#contramap');
-              ie_open('code');
-                itext('Pred');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('code');
-              itext('Star');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('either');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('Either');
-            ie_close('code');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../crocks/Maybe.html#either');
-              ie_open('code');
-                itext('Maybe');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('code');
-              itext('Result');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('empty');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('a', null, null,
-                'href', '../monoids/All.html#empty');
-              ie_open('code');
-                itext('All');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../monoids/Any.html#empty');
-              ie_open('code');
-                itext('Any');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('code');
-              itext('Array');
-            ie_close('code');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../monoids/Assign.html#empty');
-              ie_open('code');
-                itext('Assign');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../monoids/Endo.html#empty');
-              ie_open('code');
-                itext('Endo');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../crocks/Equiv.html#empty');
-              ie_open('code');
-                itext('Equiv');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../monoids/First.html#empty');
-              ie_open('code');
-                itext('First');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../monoids/Last.html#empty');
-              ie_open('code');
-                itext('Last');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('code');
-              itext('List');
-            ie_close('code');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../monoids/Max.html#empty');
-              ie_open('code');
-                itext('Max');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../monoids/Min.html#empty');
-              ie_open('code');
-                itext('Min');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('code');
-              itext('Object');
-            ie_close('code');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../crocks/Pred.html#empty');
-              ie_open('code');
-                itext('Pred');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../monoids/Prod.html#empty');
-              ie_open('code');
-                itext('Prod');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('code');
-              itext('String');
-            ie_close('code');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../monoids/Sum.html#empty');
-              ie_open('code');
-                itext('Sum');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('code');
-              itext('Unit');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('equals');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('a', null, null,
-                'href', '../monoids/All.html#equals');
-              ie_open('code');
-                itext('All');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../monoids/Any.html#equals');
-              ie_open('code');
-                itext('Any');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('code');
-              itext('Array');
-            ie_close('code');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../monoids/Assign.html#equals');
-              ie_open('code');
-                itext('Assign');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('code');
-              itext('Boolean');
-            ie_close('code');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../crocks/Const.html#equals');
-              ie_open('code');
-                itext('Const');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('code');
-              itext('Either');
-            ie_close('code');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../monoids/First.html#equals');
-              ie_open('code');
-                itext('First');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../monoids/Last.html#equals');
-              ie_open('code');
-                itext('Last');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('code');
-              itext('List');
-            ie_close('code');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../monoids/Max.html#equals');
-              ie_open('code');
-                itext('Max');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../crocks/Maybe.html#equals');
-              ie_open('code');
-                itext('Maybe');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../monoids/Min.html#equals');
-              ie_open('code');
-                itext('Min');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('code');
-              itext('Number');
-            ie_close('code');
-            itext(', ');
-            ie_open('code');
-              itext('Object');
-            ie_close('code');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../crocks/Pair.html#equals');
-              ie_open('code');
-                itext('Pair');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../monoids/Prod.html#equals');
-              ie_open('code');
-                itext('Prod');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('code');
-              itext('Result');
-            ie_close('code');
-            itext(', ');
-            ie_open('code');
-              itext('String');
-            ie_close('code');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../monoids/Sum.html#equals');
-              ie_open('code');
-                itext('Sum');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('code');
-              itext('Unit');
-            ie_close('code');
-            itext(', ');
-            ie_open('code');
-              itext('Writer');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('a', null, null,
-                'href', '../crocks/State.html#evalwith-pointfree');
-              ie_open('code');
-                itext('evalWith');
-              ie_close('code');
-            ie_close('a');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('a', null, null,
-                'href', '../crocks/State.html#evalwith');
-              ie_open('code');
-                itext('State');
-              ie_close('code');
-            ie_close('a');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('a', null, null,
-                'href', '../crocks/State.html#execwith-pointfree');
-              ie_open('code');
-                itext('execWith');
-              ie_close('code');
-            ie_close('a');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('a', null, null,
-                'href', '../crocks/State.html#execwith');
-              ie_open('code');
-                itext('State');
-              ie_close('code');
-            ie_close('a');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('extend');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('a', null, null,
-                'href', '../crocks/Pair.html#extend');
-              ie_open('code');
-                itext('Pair');
-              ie_close('code');
-            ie_close('a');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('filter');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('Array');
-            ie_close('code');
-            itext(', ');
-            ie_open('code');
-              itext('List');
-            ie_close('code');
-            itext(', ');
-            ie_open('code');
-              itext('Object');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('first');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('a', null, null,
-                'href', '../crocks/Arrow.html#first');
-              ie_open('code');
-                itext('Arrow');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('code');
-              itext('Function');
-            ie_close('code');
-            itext(', ');
-            ie_open('code');
-              itext('Star');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('fold');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('Array');
-            ie_close('code');
-            itext(', ');
-            ie_open('code');
-              itext('List');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('a', null, null,
-                'href', '../crocks/Pair.html#fst-pointfree');
-              ie_open('code');
-                itext('fst');
-              ie_close('code');
-            ie_close('a');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('a', null, null,
-                'href', '../crocks/Pair.html#fst');
-              ie_open('code');
-                itext('Pair');
-              ie_close('code');
-            ie_close('a');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('head');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('Array');
-            ie_close('code');
-            itext(', ');
-            ie_open('code');
-              itext('List');
-            ie_close('code');
-            itext(', ');
-            ie_open('code');
-              itext('String');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('log');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('Writer');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('map');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('a', null, null,
-                'href', '../crocks/Async.html#map');
-              ie_open('code');
-                itext('Async');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('code');
-              itext('Array');
-            ie_close('code');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../crocks/Arrow.html#map');
-              ie_open('code');
-                itext('Arrow');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../crocks/Const.html#map');
-              ie_open('code');
-                itext('Const');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('code');
-              itext('Either');
-            ie_close('code');
-            itext(', ');
-            ie_open('code');
-              itext('Function');
-            ie_close('code');
-            itext(', ');
-            ie_open('code');
-              itext('Identity');
-            ie_close('code');
-            itext(', ');
-            ie_open('code');
-              itext('IO');
-            ie_close('code');
-            itext(', ');
-            ie_open('code');
-              itext('List');
-            ie_close('code');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../crocks/Maybe.html#map');
-              ie_open('code');
-                itext('Maybe');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('code');
-              itext('Object');
-            ie_close('code');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../crocks/Pair.html#map');
-              ie_open('code');
-                itext('Pair');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../crocks/Reader.html#map');
-              ie_open('code');
-                itext('Reader');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('code');
-              itext('Result');
-            ie_close('code');
-            itext(', ');
-            ie_open('code');
-              itext('Star');
-            ie_close('code');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../crocks/State.html#map');
-              ie_open('code');
-                itext('State');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('code');
-              itext('Unit');
-            ie_close('code');
-            itext(', ');
-            ie_open('code');
-              itext('Writer');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('a', null, null,
-                'href', '../crocks/Pair.html#merge-pointfree');
-              ie_open('code');
-                itext('merge');
-              ie_close('code');
-            ie_close('a');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('a', null, null,
-                'href', '../crocks/Pair.html#merge');
-              ie_open('code');
-                itext('Pair');
-              ie_close('code');
-            ie_close('a');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('option');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('a', null, null,
-                'href', '../monoids/First.html#option');
-              ie_open('code');
-                itext('First');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../monoids/Last.html#option');
-              ie_open('code');
-                itext('Last');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../crocks/Maybe.html#option');
-              ie_open('code');
-                itext('Maybe');
-              ie_close('code');
-            ie_close('a');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('promap');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('a', null, null,
-                'href', '../crocks/Arrow.html#promap');
-              ie_open('code');
-                itext('Arrow');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('code');
-              itext('Star');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('read');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('Writer');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('reduce');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('Array');
-            ie_close('code');
-            itext(', ');
-            ie_open('code');
-              itext('List');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('reduceRight');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('Array');
-            ie_close('code');
-            itext(', ');
-            ie_open('code');
-              itext('List');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('reject');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('Array');
-            ie_close('code');
-            itext(', ');
-            ie_open('code');
-              itext('List');
-            ie_close('code');
-            itext(', ');
-            ie_open('code');
-              itext('Object');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('run');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('IO');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('runWith');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('a', null, null,
-                'href', '../crocks/Arrow.html#runwith');
-              ie_open('code');
-                itext('Arrow');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../monoids/Endo.html#runwith');
-              ie_open('code');
-                itext('Endo');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../crocks/Pred.html#runwith');
-              ie_open('code');
-                itext('Pred');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../crocks/Reader.html#runwith');
-              ie_open('code');
-                itext('Reader');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('code');
-              itext('Star');
-            ie_close('code');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../crocks/State.html#runwith');
-              ie_open('code');
-                itext('State');
-              ie_close('code');
-            ie_close('a');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('second');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('a', null, null,
-                'href', '../crocks/Arrow.html#second');
-              ie_open('code');
-                itext('Arrow');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('code');
-              itext('Function');
-            ie_close('code');
-            itext(', ');
-            ie_open('code');
-              itext('Star');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('sequence');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('Array');
-            ie_close('code');
-            itext(', ');
-            ie_open('code');
-              itext('Either');
-            ie_close('code');
-            itext(', ');
-            ie_open('code');
-              itext('Identity');
-            ie_close('code');
-            itext(', ');
-            ie_open('code');
-              itext('List');
-            ie_close('code');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../crocks/Maybe.html#sequence');
-              ie_open('code');
-                itext('Maybe');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../crocks/Pair.html#sequence');
-              ie_open('code');
-                itext('Pair');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('code');
-              itext('Result');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('a', null, null,
-                'href', '../crocks/Pair.html#snd-pointfree');
-              ie_open('code');
-                itext('snd');
-              ie_close('code');
-            ie_close('a');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('a', null, null,
-                'href', '../crocks/Pair.html#snd');
-              ie_open('code');
-                itext('Pair');
-              ie_close('code');
-            ie_close('a');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('swap');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('a', null, null,
-                'href', '../crocks/Async.html#swap');
-              ie_open('code');
-                itext('Async');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('code');
-              itext('Either');
-            ie_close('code');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../crocks/Pair.html#swap');
-              ie_open('code');
-                itext('Pair');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('code');
-              itext('Result');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('tail');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('Array');
-            ie_close('code');
-            itext(', ');
-            ie_open('code');
-              itext('List');
-            ie_close('code');
-            itext(', ');
-            ie_open('code');
-              itext('String');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('traverse');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('code');
-              itext('Array');
-            ie_close('code');
-            itext(', ');
-            ie_open('code');
-              itext('Either');
-            ie_close('code');
-            itext(', ');
-            ie_open('code');
-              itext('Identity');
-            ie_close('code');
-            itext(', ');
-            ie_open('code');
-              itext('List');
-            ie_close('code');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../crocks/Maybe.html#traverse');
-              ie_open('code');
-                itext('Maybe');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../crocks/Pair.html#traverse');
-              ie_open('code');
-                itext('Pair');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('code');
-              itext('Result');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-        ie_open('tr');
-          ie_open('td');
-            ie_open('code');
-              itext('valueOf');
-            ie_close('code');
-          ie_close('td');
-          ie_open('td', null, null,
-              'style', 'text-align:left');
-            ie_open('a', null, null,
-                'href', '../monoids/All.html#valueof');
-              ie_open('code');
-                itext('All');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../monoids/Any.html#valueof');
-              ie_open('code');
-                itext('Any');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../monoids/Assign.html#valueof');
-              ie_open('code');
-                itext('Assign');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../crocks/Const.html#valueof');
-              ie_open('code');
-                itext('Const');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../monoids/Endo.html#valueof');
-              ie_open('code');
-                itext('Endo');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../crocks/Equiv.html#valueof');
-              ie_open('code');
-                itext('Equiv');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../monoids/First.html#valueof');
-              ie_open('code');
-                itext('First');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('code');
-              itext('Identity');
-            ie_close('code');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../monoids/Last.html#valueof');
-              ie_open('code');
-                itext('Last');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../monoids/Max.html#valueof');
-              ie_open('code');
-                itext('Max');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../monoids/Min.html#valueof');
-              ie_open('code');
-                itext('Min');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../crocks/Pred.html#valueof');
-              ie_open('code');
-                itext('Pred');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../monoids/Prod.html#valueof');
-              ie_open('code');
-                itext('Prod');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('a', null, null,
-                'href', '../monoids/Sum.html#valueof');
-              ie_open('code');
-                itext('Sum');
-              ie_close('code');
-            ie_close('a');
-            itext(', ');
-            ie_open('code');
-              itext('Unit');
-            ie_close('code');
-            itext(', ');
-            ie_open('code');
-              itext('Writer');
-            ie_close('code');
-          ie_close('td');
-        ie_close('tr');
-      ie_close('tbody');
-    ie_close('table');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/combinators/composeB');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'composeB :: (b -> c) -> (a -> b) -> a -> c', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('Provides a means to describe a composition between two functions. it takes two functions and a value. Given ');
+      ie_open('code');
+        itext('composeB(f, g)');
+      ie_close('code');
+      itext(', which is read ');
+      ie_open('code');
+        itext('f');
+      ie_close('code');
+      itext(' after ');
+      ie_open('code');
+        itext('g');
+      ie_close('code');
+      itext(', it will return a function that will take value ');
+      ie_open('code');
+        itext('a');
+      ie_close('code');
+      itext(' and apply it to ');
+      ie_open('code');
+        itext('g');
+      ie_close('code');
+      itext(', passing the result as an argument to ');
+      ie_open('code');
+        itext('f');
+      ie_close('code');
+      itext(', and will finally return the result of ');
+      ie_open('code');
+        itext('f');
+      ie_close('code');
+      itext('. (This allows only two functions, if you want to avoid things like:');
+      ie_open('code');
+        itext('composeB(composeB(f, g), composeB(h, i))');
+      ie_close('code');
+      itext(' then check out');
+      ie_open('a', null, null,
+          'href', 'helpers.html#compose');
+        ie_open('code');
+          itext('compose');
+        ie_close('code');
+      ie_close('a');
+      itext('.)');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'constant',
+          'href', '#constant');
+        itext('constant');
+      ie_close('a');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/combinators/constant');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'constant :: a -> () -> a', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('This is a very handy dandy function, used a lot. Pass it any value and it will give you back a function that will return that same value no matter what you pass it.');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'flip',
+          'href', '#flip');
+        itext('flip');
+      ie_close('a');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/combinators/flip');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'flip :: (a -> b -> c) -> b -> a -> c', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('This little function just takes a function and returns a function that takes the first two parameters in reverse. One can compose flip calls down the line to flip all, or some of the other parameters if there are more than two. Mix and match to your heart\'s desire.');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'identity',
+          'href', '#identity');
+        itext('identity');
+      ie_close('a');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/combinators/identity');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'identity ::  a -> a', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('This function and ');
+      ie_open('a', null, null,
+          'href', '#constant');
+        ie_open('code');
+          itext('constant');
+        ie_close('code');
+      ie_close('a');
+      itext(' are the workhorses of writing code with this library. It quite simply is just a function that when you pass it something, it returns that thing right back to you. So simple, I will leave it as an exercise to reason about why this is so powerful and important.');
+    ie_close('p');
+    ie_open('h4');
+      ie_open('a', null, null,
+          'id', 'substitution',
+          'href', '#substitution');
+        itext('substitution');
+      ie_close('a');
+    ie_close('h4');
+    ie_open('p');
+      ie_open('code');
+        itext('crocks/combinators/substitution');
+      ie_close('code');
+    ie_close('p');
+    $templateAlias2({code: 'substitution :: (a -> b -> c) -> (a -> b) -> a -> c', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      itext('While it a complicated little bugger, it can come in very handy from time to time. In it\'s first two arguments it takes functions. The first must be binary and the second unary. That will return you a function that is ready to take some value. Once supplied the fun starts, it will pass the ');
+      ie_open('code');
+        itext('a');
+      ie_close('code');
+      itext(' to the first argument of both functions, and the result of the second function to the second parameter of the first function. Finally after all that juggling, it will return the result of that first function. When used with partial application on that first parameter, a whole new world of combinatory madness is presented!');
+    ie_close('p');
     ie_open('input', null, null,
         'type', 'hidden',
         'value', opt_data.page.title);
@@ -30775,11 +28575,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'value', opt_data.site.title);
     ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({content: param2003}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param1885}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'HXuRQ.render';
+  $render.soyTemplateName = 'QAlxS.render';
 }
 
 exports.render.params = ["page","site"];
@@ -30789,14 +28589,17 @@ return exports;
 
 });
 
-class HXuRQ extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(HXuRQ, templates);
+class QAlxS extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(QAlxS, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
 
 
 /***/ }),
+/* 230 */,
+/* 231 */,
+/* 232 */,
 /* 233 */,
 /* 234 */,
 /* 235 */,
@@ -30825,7 +28628,11 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(HXuRQ, templates);
 /* 258 */,
 /* 259 */,
 /* 260 */,
-/* 261 */
+/* 261 */,
+/* 262 */,
+/* 263 */,
+/* 264 */,
+/* 265 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30861,9 +28668,9 @@ __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _pointfreeFunctionsSoy = __webpack_require__(232);
+var _combinatorsSoy = __webpack_require__(229);
 
-var _pointfreeFunctionsSoy2 = _interopRequireDefault(_pointfreeFunctionsSoy);
+var _combinatorsSoy2 = _interopRequireDefault(_combinatorsSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30873,23 +28680,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var HXuRQ = function (_Component) {
-  _inherits(HXuRQ, _Component);
+var QAlxS = function (_Component) {
+  _inherits(QAlxS, _Component);
 
-  function HXuRQ() {
-    _classCallCheck(this, HXuRQ);
+  function QAlxS() {
+    _classCallCheck(this, QAlxS);
 
-    return _possibleConstructorReturn(this, (HXuRQ.__proto__ || Object.getPrototypeOf(HXuRQ)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (QAlxS.__proto__ || Object.getPrototypeOf(QAlxS)).apply(this, arguments));
   }
 
-  return HXuRQ;
+  return QAlxS;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(HXuRQ, _pointfreeFunctionsSoy2.default);
+_metalSoy2.default.register(QAlxS, _combinatorsSoy2.default);
 
-exports.default = HXuRQ;
+exports.default = QAlxS;
 
 /***/ })
-],[261]);
+],[265]);

@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([27,33,34,35],[
+webpackJsonppageComponent([33,34,35,36],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19884,7 +19884,7 @@ if (goog.DEBUG) {
  * @return {void}
  * @suppress {checkTypes}
  */
-function __deltemplate_s152_d34389eb(opt_data, opt_ignored, opt_ijData) {
+function __deltemplate_s174_d34389eb(opt_data, opt_ignored, opt_ijData) {
   ie_open('a', null, null,
       'class', 'sidebar-link ' + (opt_data.page.active ? 'sidebar-link-selected' : ''),
       'href', opt_data.page.url);
@@ -19893,16 +19893,16 @@ function __deltemplate_s152_d34389eb(opt_data, opt_ignored, opt_ijData) {
           'class', 'sidebar-icon icon-16-' + opt_data.page.icon);
     }
     ie_open('span');
-      var dyn10 = opt_data.page.title;
-      if (typeof dyn10 == 'function') dyn10(); else if (dyn10 != null) itext(dyn10);
+      var dyn12 = opt_data.page.title;
+      if (typeof dyn12 == 'function') dyn12(); else if (dyn12 != null) itext(dyn12);
     ie_close('span');
   ie_close('a');
 }
-exports.__deltemplate_s152_d34389eb = __deltemplate_s152_d34389eb;
+exports.__deltemplate_s174_d34389eb = __deltemplate_s174_d34389eb;
 if (goog.DEBUG) {
-  __deltemplate_s152_d34389eb.soyTemplateName = 'Sidebar.__deltemplate_s152_d34389eb';
+  __deltemplate_s174_d34389eb.soyTemplateName = 'Sidebar.__deltemplate_s174_d34389eb';
 }
-soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'sidebar', 0, __deltemplate_s152_d34389eb);
+soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'sidebar', 0, __deltemplate_s174_d34389eb);
 
 exports.render.params = ["section","site"];
 exports.render.types = {"section":"any","site":"any"};
@@ -20091,8 +20091,8 @@ function $render(opt_data, opt_ignored, opt_ijData) {
       ie_void('span', null, null,
           'class', 'icon icon-16-clock');
       itext(' ');
-      var dyn11 = opt_data.time;
-      if (typeof dyn11 == 'function') dyn11(); else if (dyn11 != null) itext(dyn11);
+      var dyn13 = opt_data.time;
+      if (typeof dyn13 == 'function') dyn13(); else if (dyn13 != null) itext(dyn13);
     }
   ie_close('p');
 }
@@ -28348,17 +28348,12 @@ exports.default = parseFromAnchor;
 /* 214 */,
 /* 215 */,
 /* 216 */,
-/* 217 */,
-/* 218 */,
-/* 219 */,
-/* 220 */,
-/* 221 */,
-/* 222 */
+/* 217 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EGmTb", function() { return EGmTb; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "bqiyr", function() { return bqiyr; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28370,15 +28365,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var templates;
 goog.loadModule(function(exports) {
 
-// This file was automatically generated from Pair.soy.
+// This file was automatically generated from Arrow.soy.
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace EGmTb.
+ * @fileoverview Templates in namespace bqiyr.
  * @public
  */
 
-goog.module('EGmTb.incrementaldom');
+goog.module('bqiyr.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28412,136 +28407,58 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var param1043 = function() {
-    $templateAlias2({code: 'Pair a b', mode: 'haskell'}, null, opt_ijData);
+  var param303 = function() {
+    $templateAlias2({code: 'Arrow a b', mode: 'haskell'}, null, opt_ijData);
     ie_open('p');
       ie_open('code');
-        itext('Pair');
-      ie_close('code');
-      itext(' allows the ability to represent (2) distinct values of different types. Much like how ');
-      ie_open('code');
-        itext('Either');
-      ie_close('code');
-      itext(' is known as canonical Sum Type and defines the basis for all other Sum Types that ship with ');
-      ie_open('code');
-        itext('crocks');
-      ie_close('code');
-      itext(', ');
-      ie_open('code');
-        itext('Pair');
-      ie_close('code');
-      itext(' is known as the canonical Product Type and also at the heart of all Product Types in ');
-      ie_open('code');
-        itext('crocks');
-      ie_close('code');
-      itext('.');
-    ie_close('p');
-    ie_open('p');
-      itext('As ');
-      ie_open('code');
-        itext('Pair');
+        itext('Arrow');
       ie_close('code');
       itext(' is a ');
       ie_open('code');
-        itext('Bifunctor');
+        itext('Profunctor');
       ie_close('code');
-      itext(', it can vary in each of the (2) types it represents. When used as a normal ');
+      itext(' that lifts a function of type ');
       ie_open('code');
-        itext('Functor');
+        itext('a -> b');
       ie_close('code');
-      itext(', ');
+      itext(' and allows for lazy execution of the function. ');
       ie_open('code');
-        itext('Pair');
+        itext('Arrow');
       ie_close('code');
-      itext(' will always have a bias for the far right or second value, matching the pattern of the other ADTs in ');
+      itext(' can be considered a ');
       ie_open('code');
-        itext('crocks');
+        itext('Strong Profunctor');
       ie_close('code');
-      itext('. When mapped with a function, the function will only be applied to the second value, and will leave the first value untouched.');
-    ie_close('p');
-    ie_open('p');
+      itext('if the underlying data running through the ');
       ie_open('code');
-        itext('Pair');
+        itext('Arrow');
       ie_close('code');
-      itext(' also provides the ability to use ');
-      ie_open('code');
-        itext('ap');
-      ie_close('code');
-      itext(' and ');
-      ie_open('code');
-        itext('chain');
-      ie_close('code');
-      itext(', but in order to combine the resulting instances in a predictable, repeatable fashion the first values in the ');
+      itext(' is a ');
       ie_open('code');
         itext('Pair');
       ie_close('code');
-      itext('s must be ');
+      itext(', typically in the form of ');
       ie_open('code');
-        itext('Semigroup');
-      ie_close('code');
-      itext(' instances of the same type. When applied, ');
-      ie_open('code');
-        itext('ap');
-      ie_close('code');
-      itext(' and ');
-      ie_open('code');
-        itext('chain');
-      ie_close('code');
-      itext(' will concatenate the ');
-      ie_open('code');
-        itext('Semigroup');
-      ie_close('code');
-      itext('s providing the result of the concatenation in the first position of the resulting ');
-      ie_open('code');
-        itext('Pair');
+        itext('Arrow (Pair a c) (Pair b d)');
       ie_close('code');
       itext('.');
     ie_close('p');
     ie_open('p');
-      itext('A helpful benefit of the ');
+      itext('This will allow you to split execution into two distinct paths, applying ');
       ie_open('code');
-        itext('Bifunctor');
+        itext('Arrow');
       ie_close('code');
-      itext(' aspects ');
+      itext('to a specific path. The parameters of ');
       ie_open('code');
-        itext('Pair');
+        itext('Arrow');
       ie_close('code');
-      itext(' allows for defining parallel computations. There are many functions that ship with ');
+      itext(' represent the function that it wraps, with the input being on the left, and the output on the right. When an');
       ie_open('code');
-        itext('crocks');
+        itext('Arrow');
       ie_close('code');
-      itext(' that allow for parallelization such as ');
-      ie_open('a', null, null,
-          'href', '#branch');
-        ie_open('code');
-          itext('branch');
-        ie_close('code');
-      ie_close('a');
-      itext(', ');
-      ie_open('a', null, null,
-          'href', '#merge-pointfree');
-        ie_open('code');
-          itext('merge');
-        ie_close('code');
-      ie_close('a');
-      itext(' and');
-      ie_open('code');
-        itext('fanout');
-      ie_close('code');
-      itext('. Using those helpers in conjunction with the ability to');
-      ie_open('a', null, null,
-          'href', '#bimap');
-        ie_open('code');
-          itext('bimap');
-        ie_close('code');
-      ie_close('a');
-      itext(' functions over a given ');
-      ie_open('code');
-        itext('Pair');
-      ie_close('code');
-      itext('s values.');
+      itext(' wraps an endomorphism, the signature typically represents both the input and output.');
     ie_close('p');
-    $templateAlias2({code: 'import Pair from \'crocks/Pair\'\nimport Sum from \'crocks/Sum\'\nimport bimap from \'crocks/pointfree/bimap\'\nimport branch from \'crocks/Pair/branch\'\nimport compose from \'crocks/helpers/compose\'\nimport mreduce from \'crocks/helpers/mreduce\'\nimport merge from \'crocks/Pair/merge\'\n\n// negate :: a -> Boolean\nconst negate =\n  x => !x\n\n// inc :: Number -> Number\nconst inc =\n  x => x + 1\n\n// length :: Array -> Number\nconst length =\n  x => x.length\n\n// divide :: Number -> Number\nconst divide =\n  (x, y) => x / y\n\nPair(76, false)\n  .bimap(inc, negate)\n//=> Pair(77, true)\n\n// average :: [ Number ] -> Number\nconst average = compose(\n  merge(divide),\n  bimap(mreduce(Sum), length),\n  branch\n)\n\naverage([ 9, 77, 34 ])\n//=> 40', mode: 'javascript'}, null, opt_ijData);
+    $templateAlias2({code: 'import Arrow from \'crocks/Arrow\'\n\nimport chain from \'crocks/pointfree/chain\'\nimport compose from \'crocks/helpers/compose\'\nimport isString from \'crocks/predicates/isString\'\nimport option from \'crocks/pointfree/option\'\nimport prop from \'crocks/Maybe/prop\'\nimport safe from \'crocks/Maybe/safe\'\n\n// arrUpper :: Arrow String\nconst arrUpper =\n  Arrow(str => str.toUpperCase())\n\narrUpper\n  .runWith(\'nice\')\n//=> \'NICE\'\n\n// getName :: a -> String\nconst getName = compose(\n  option(\'no name\'),\n  chain(safe(isString)),\n  prop(\'name\')\n)\n\n// arrUpperName :: Arrow a String\nconst arrUpperName =\n  arrUpper\n    .contramap(getName)\n\narrUpperName\n  .runWith({ name: \'joey\' })\n//=> \'JOEY\'\n\narrUpperName\n  .runWith({ age: 23 })\n//=> \'NO NAME\'\n\narrUpperName\n  .runWith({ name: false })\n//=> \'NO NAME\'', mode: 'javascript'}, null, opt_ijData);
     ie_open('article', null, null,
         'id', 'topic-implements');
       ie_open('h2');
@@ -28553,37 +28470,101 @@ function $render(opt_data, opt_ignored, opt_ijData) {
       ie_close('h2');
       ie_open('p');
         ie_open('code');
-          itext('Setoid');
+          itext('Semigroupoid');
         ie_close('code');
         itext(', ');
         ie_open('code');
-          itext('Semigroup');
+          itext('Category');
         ie_close('code');
         itext(', ');
         ie_open('code');
           itext('Functor');
         ie_close('code');
-        itext(',  ');
+        itext(', ');
         ie_open('code');
-          itext('Bifunctor');
+          itext('Contravariant');
         ie_close('code');
         itext(', ');
         ie_open('code');
-          itext('Apply');
+          itext('Profunctor');
         ie_close('code');
-        itext(', ');
+      ie_close('p');
+    ie_close('article');
+    ie_open('article', null, null,
+        'id', 'topic-construction');
+      ie_open('h2');
+        ie_open('a', null, null,
+            'id', 'construction',
+            'href', '#construction');
+          itext('Construction');
+        ie_close('a');
+      ie_close('h2');
+      $templateAlias2({code: 'Arrow :: (a -> b) -> Arrow a b', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        itext('An ');
         ie_open('code');
-          itext('Chain');
+          itext('Arrow');
+        ie_close('code');
+        itext(' is constructed with a unary function of type ');
+        ie_open('code');
+          itext('(a -> b)');
+        ie_close('code');
+        itext('. The input, or domain, of the function is the left parameter in the type signature and the output, or co-domain, of the function represents the right.');
+      ie_close('p');
+      $templateAlias2({code: 'import Arrow from \'crocks/Arrow\'\n\nimport compose from \'crocks/helpers/compose\'\nimport option from \'crocks/pointfree/option\'\nimport prop from \'crocks/Maybe/prop\'\n\n// length :: a -> Integer\nconst length = compose(\n  option(0),\n  prop(\'length\')\n)\n\n// Arrow a Integer\nArrow(length)\n//=> Arrow (a -> Integer)', mode: 'javascript'}, null, opt_ijData);
+    ie_close('article');
+    ie_open('article', null, null,
+        'id', 'topic-constructor');
+      ie_open('h2');
+        ie_open('a', null, null,
+            'id', 'constructor-methods',
+            'href', '#constructor-methods');
+          itext('Constructor Methods');
+        ie_close('a');
+      ie_close('h2');
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'id',
+            'href', '#id');
+          itext('id');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Arrow.id :: () -> Arrow a', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        ie_open('code');
+          itext('id');
+        ie_close('code');
+        itext(' provides the identity for the ');
+        ie_open('code');
+          itext('Arrow');
+        ie_close('code');
+        itext(' in that when it is composed to either the left or right side of a given function, it will essentially result in a morphism that is, for all intents and purposes, the given function. For ');
+        ie_open('code');
+          itext('Arrow');
         ie_close('code');
         itext(',');
         ie_open('code');
-          itext('Traversable');
+          itext('id');
         ie_close('code');
-        itext(', ');
+        itext(' is the simple ');
         ie_open('code');
-          itext('Extend');
+          itext('identity');
         ie_close('code');
+        itext(' function that echoes it\'s given argument (');
+        ie_open('code');
+          itext('x => x');
+        ie_close('code');
+        itext('). As a convenience, ');
+        ie_open('code');
+          itext('id');
+        ie_close('code');
+        itext(' is also available on the ');
+        ie_open('code');
+          itext('Arrow');
+        ie_close('code');
+        itext(' instance.');
       ie_close('p');
+      $templateAlias2({code: 'import Arrow from \'crocks/Arrow\'\n\n// arrId :: Arrow a\nconst id = Arrow.id()\n\n// arrow :: Arrow a String\nconst arrow =\n  Arrow(x => x.toString())\n\n// left :: Arrow a String\nconst left =\n  id.compose(arrow)\n\n// right :: Arrow a String\nconst right =\n  arrow.compose(id)\n\nright.runWith(12)\n//=> \'12\'\n\nleft.runWith(12)\n//=> \'12\'', mode: 'javascript'}, null, opt_ijData);
     ie_close('article');
     ie_open('article', null, null,
         'id', 'topic-instance');
@@ -28596,100 +28577,138 @@ function $render(opt_data, opt_ignored, opt_ijData) {
       ie_close('h2');
       ie_open('h4');
         ie_open('a', null, null,
-            'id', 'equals',
-            'href', '#equals');
-          itext('equals');
+            'id', 'both',
+            'href', '#both');
+          itext('both');
         ie_close('a');
       ie_close('h4');
-      $templateAlias2({code: 'Pair a b ~> c -> Boolean', mode: 'haskell'}, null, opt_ijData);
+      $templateAlias2({code: 'Pair p => Arrow a b ~> () -> Arrow (p a a) (p b b)', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
-        itext('Used to compare the underlying values of (2) ');
+        ie_open('code');
+          itext('both');
+        ie_close('code');
+        itext(' allows for the mode of a given ');
+        ie_open('code');
+          itext('Arrow');
+        ie_close('code');
+        itext(' to switch to a manner that applies itself to both slots of a ');
         ie_open('code');
           itext('Pair');
         ie_close('code');
-        itext(' instances for equality by value. ');
+        itext(' that is passed through the ');
         ie_open('code');
-          itext('equals');
+          itext('Arrow');
         ie_close('code');
-        itext(' takes any given argument and returns ');
+        itext('. As noted in the type signature, ');
         ie_open('code');
-          itext('true');
+          itext('both');
         ie_close('code');
-        itext(' if the passed arguments is a ');
+        itext(' will give back an ');
+        ie_open('code');
+          itext('Arrow');
+        ie_close('code');
+        itext(' has a new signature that utilizes a ');
         ie_open('code');
           itext('Pair');
         ie_close('code');
-        itext(' with an underlying values both in the first and second are equal to the underlying values in the first and second  of the ');
+        itext(' on both sides.');
+      ie_close('p');
+      $templateAlias2({code: 'import Arrow from \'crocks/Arrow\'\nimport Pair from \'crocks/Pair\'\n\nimport merge from \'crocks/pointfree/merge\'\n\n// double :: Number -> Number\nconst double =\n  x => x * 2\n\n// add :: (Number, Number) -> Number\nconst add =\n  (x, y) => x + y\n\n// arrDouble :: Arrow Number\nconst arrDouble =\n  Arrow(double)\n\n// arrDoubleAndAdd :: Arrow (Pair Number Number) Number\nconst arrDoubleAndAdd =\n  arrDouble\n    .both()\n    .map(merge(add))\n\narrDouble\n  .runWith(200)\n//=> 400\n\narrDoubleAndAdd\n  .runWith(Pair(200, 10))\n//=> 420', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'compose',
+            'href', '#compose');
+          itext('compose');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Arrow a b ~> Arrow b c -> Arrow a c', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
         ie_open('code');
-          itext('Maybe');
+          itext('compose');
         ie_close('code');
-        itext(' the method is being called on. If the passed argument is not a ');
+        itext(' allows you to compose two ');
         ie_open('code');
-          itext('Maybe');
+          itext('Arrow');
         ie_close('code');
-        itext(' or the underlying values are not equal, ');
+        itext('s together, resulting in a new');
         ie_open('code');
-          itext('equals');
+          itext('Arrow');
         ie_close('code');
-        itext(' will return ');
+        itext(' that is the result of the composition.');
+      ie_close('p');
+      $templateAlias2({code: 'import Arrow from \'crocks/Arrow\'\n\nimport filter from \'crocks/pointfree/filter\'\nimport map from \'crocks/pointfree/map\'\n\n// arrFilterEven :: Arrow [ Number ]\nconst arrFilterEven =\n  Arrow(filter(x => !(x % 2)))\n\n// arrDoubleNumbers :: Arrow [ Number ]\nconst arrDoubleNumbers =\n  Arrow(map(x => x * 2))\n\n// arrLength :: Arrow [ a ] -> Number\nconst arrLength =\n  Arrow(x => x.length)\n\n// arrDoubleEven :: Arrow [ Number ]\nconst arrDoubleEven =\n  arrFilterEven\n    .compose(arrDoubleNumbers)\n\n// arrEvenCount :: Arrow [ Number ] Number\nconst arrEvenCount =\n  arrFilterEven\n    .compose(arrLength)\n\n// data :: [ Number ]\nconst data =\n  [ 12, 2, 36, 35 ]\n\narrDoubleEven\n  .runWith(data)\n//=> [ 24, 4, 72 ]\n\narrEvenCount\n  .runWith(data)\n//=> 3', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'contramap',
+            'href', '#contramap');
+          itext('contramap');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Arrow a b ~> (c -> a) -> Arrow c b', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        itext('When using ');
         ie_open('code');
-          itext('false');
+          itext('contramap');
+        ie_close('code');
+        itext(' on an ');
+        ie_open('code');
+          itext('Arrow');
+        ie_close('code');
+        itext(', a function can be lifted that will map a given type into the type required for the original ');
+        ie_open('code');
+          itext('Arrow');
+        ie_close('code');
+        itext('\'s input. This allows for "adaption" of given ');
+        ie_open('code');
+          itext('Arrow');
+        ie_close('code');
+        itext('\'s input for better reuse. The resulting type of the lifted function must match the input type of the ');
+        ie_open('code');
+          itext('Arrow');
         ie_close('code');
         itext('.');
       ie_close('p');
-      $templateAlias2({code: 'import Pair from \'crocks/Pair\'\nimport equals from \'crocks/pointfree/equals\'\n\nPair({ num: 33 }, \'string\')\n  .equals(Pair({ num: 33 }, \'string\'))\n//=> true\n\nPair({ num: 33 }, \'string\')\n  .equals(Pair({ num: 10 }, \'string\'))\n//=> false\n\nPair({ num: 33 }, \'string\')\n  .equals(Pair({ num: 33 }, \'different\'))\n//=> false\n\nequals(Pair([ 1, 2 ], \'\'), [ 1, 2 ])\n//=> false', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'import Arrow from \'crocks/Arrow\'\n\nimport chain from \'crocks/pointfree/chain\'\nimport compose from \'crocks/helpers/compose\'\nimport isNumber from \'crocks/predicates/isNumber\'\nimport option from \'crocks/pointfree/option\'\nimport prop from \'crocks/Maybe/prop\'\nimport safe from \'crocks/Maybe/safe\'\n\n// getValue :: (String, Number) -> a -> Number\nconst getValue = (key, def) => compose(\n  option(def),\n  chain(safe(isNumber)),\n  prop(key)\n)\n\n// arrAdd10 :: Arrow Number\nconst arrAdd10 =\n  Arrow(x => x + 10)\n\n// arrAdd10Value :: Arrow Object Number\nconst arrAdd10Value =\n  arrAdd10\n    .contramap(getValue(\'value\', 0))\n\narrAdd10\n  .runWith(23)\n//=> 33\n\narrAdd10Value\n  .runWith({ value: 23 })\n//=> 33\n\narrAdd10Value\n  .runWith({ value: \'23\' })\n//=> 10\n\narrAdd10Value\n  .runWith({ num: \'23\' })\n//=> 10', mode: 'javascript'}, null, opt_ijData);
       ie_open('h4');
         ie_open('a', null, null,
-            'id', 'concat',
-            'href', '#concat');
-          itext('concat');
+            'id', 'first',
+            'href', '#first');
+          itext('first');
         ie_close('a');
       ie_close('h4');
-      $templateAlias2({code: 'Semigroup s, t => Pair s t ~> Pair s t -> Pair s t', mode: 'haskell'}, null, opt_ijData);
+      $templateAlias2({code: 'Pair p => Arrow a b ~> () -> Arrow (p a c) (p b c)', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
-        itext('When both underlying values of a given ');
+        itext('When calling ');
+        ie_open('code');
+          itext('first');
+        ie_close('code');
+        itext(' on an ');
+        ie_open('code');
+          itext('Arrow');
+        ie_close('code');
+        itext(', a new ');
+        ie_open('code');
+          itext('Arrow');
+        ie_close('code');
+        itext(' is returned that will expect a ');
         ie_open('code');
           itext('Pair');
         ie_close('code');
-        itext(' are fixed to a ');
-        ie_open('code');
-          itext('Semigroup');
-        ie_close('code');
-        itext(',');
-        ie_open('code');
-          itext('concat');
-        ie_close('code');
-        itext(' can be used to concatenate another ');
+        itext(' with the original input type in the first slot of the ');
         ie_open('code');
           itext('Pair');
         ie_close('code');
-        itext(' instance with underlying');
+        itext('. When run, the ');
         ie_open('code');
-          itext('Semigroup');
+          itext('Arrow');
         ie_close('code');
-        itext('s of the same type and structure. Expecting a ');
-        ie_open('code');
-          itext('Maybe');
-        ie_close('code');
-        itext(' wrapping a');
-        ie_open('code');
-          itext('Semigroup');
-        ie_close('code');
-        itext(' of the same type, ');
-        ie_open('code');
-          itext('concat');
-        ie_close('code');
-        itext(' will give back a new ');
+        itext(' will only be applied to the first slot in the ');
         ie_open('code');
           itext('Pair');
         ie_close('code');
-        itext(' instance wrapping the result of combining the underlying ');
-        ie_open('code');
-          itext('Semigroup');
-        ie_close('code');
-        itext(' instances.');
+        itext(', leaving the second slot untouched.');
       ie_close('p');
-      $templateAlias2({code: 'import Pair from \'crocks/Pair\'\nimport Maybe from \'crocks/Maybe\'\nimport Sum from \'crocks/Sum\'\n\nimport compose from \'crocks/helpers/compose\'\nimport concat from \'crocks/pointfree/concat\'\nimport fanout from \'crocks/helpers/fanout\'\nimport flip from \'crocks/combinators/flip\'\nimport map from \'crocks/pointfree/map\'\nimport mapReduce from \'crocks/helpers/mapReduce\'\nimport option from \'crocks/pointfree/option\'\nimport prop from \'crocks/Maybe/prop\'\n\nPair(Sum(3), [ 3 ])\n  .concat(Pair(Sum(10), [ 10 ]))\n//=> Pair( Sum 13, [ 3, 10 ] )\n\n// Person :: { name: String, age: Number }\n// peeps :: [ Person ]\nconst peeps = [\n  { name: \'Haskell\', age: 82 },\n  { name: \'Heinrich\', age: 81 },\n  { name: \'Maria\', age: 93 }\n]\n\n// mapProp :: (String, (a -> b)) -> Object -> Maybe b\nconst mapProp = (key, fn) =>\n  compose(map(fn), prop(key))\n\n// Combined :: Pair (Maybe [ String ]) (Maybe Sum)\n// splitPerson :: Person -> Combined\nconst splitPerson = fanout(\n  mapProp(\'name\', x => [ x ]),\n  mapProp(\'age\', Sum)\n)\n\n// empty :: Combined\nconst empty =\n  Pair(Maybe([]), Maybe(Sum.empty()))\n\n// combine :: [ Person ] -> Combined\nconst combine = mapReduce(\n  splitPerson,\n  flip(concat),\n  empty\n)\n\ncombine(peeps)\n  .bimap(option([]), option(Sum(0)))\n//=> Pair( [ "Haskell", "Heinrich", "Maria" ], Sum 256 )', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'import Arrow from \'crocks/Arrow\'\nimport branch from \'crocks/Pair/branch\'\n\n// arrToUpper :: Arrow String\nconst arrToUpper =\n  Arrow(x => x.toUpperCase())\n\narrToUpper\n  .runWith(\'burrito bounce\')\n//=> \'BURRITO BOUNCE\'\n\n// join :: Pair String -> Object\nconst join = p => ({\n  original: p.snd(),\n  result: p.fst()\n})\n\n// flow :: Arrow String Object\nconst flow =\n  arrToUpper\n    .first()\n    .promap(branch, join)\n\nflow\n  .runWith(\'taco time\')\n//=> { original: \'taco time\', result: \'TACO TIME\' }', mode: 'javascript'}, null, opt_ijData);
       ie_open('h4');
         ie_open('a', null, null,
             'id', 'map',
@@ -28697,890 +28716,135 @@ function $render(opt_data, opt_ignored, opt_ijData) {
           itext('map');
         ie_close('a');
       ie_close('h4');
-      $templateAlias2({code: 'Pair c a ~> (a -> b) -> Pair c b', mode: 'haskell'}, null, opt_ijData);
+      $templateAlias2({code: 'Arrow a b ~> (b -> c) -> Arrow a c', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
-        itext('Used to apply transformations to values to the second portion of a given ');
-        ie_open('code');
-          itext('Pair');
-        ie_close('code');
-        itext('instance. ');
         ie_open('code');
           itext('map');
         ie_close('code');
-        itext(' takes a function that it will lift into the context of the');
+        itext(' allows a function to be lifted that will map the right side of the');
         ie_open('code');
-          itext('Pair');
+          itext('Arrow');
         ie_close('code');
-        itext(' and apply to it second value in the ');
-        ie_open('code');
-          itext('Pair');
-        ie_close('code');
-        itext(', returning a new ');
-        ie_open('code');
-          itext('Pair');
-        ie_close('code');
-        itext('instance. The new instance will contain the result of mapping in the second, leaving the value in the first untouched. If you need to map the first value,');
+        itext('. Where ');
         ie_open('a', null, null,
-            'href', '#bimap');
+            'href', '#contramap');
           ie_open('code');
-            itext('bimap');
+            itext('contramap');
           ie_close('code');
         ie_close('a');
-        itext(' can be used instead.');
+        itext(' is used to map the input, ');
+        ie_open('code');
+          itext('map');
+        ie_close('code');
+        itext(' maps the result of the ');
+        ie_open('code');
+          itext('Arrow');
+        ie_close('code');
+        itext(', allowing the result to be "adapted" or modified. The input type to the lifted function must match the result the ');
+        ie_open('code');
+          itext('Arrow');
+        ie_close('code');
+        itext('.');
       ie_close('p');
-      $templateAlias2({code: 'import Pair from \'crocks/Pair\'\n\nimport compose from \'crocks/helpers/compose\'\nimport map from \'crocks/pointfree/map\'\nimport merge from \'crocks/Pair/merge\'\nimport objOf from \'crocks/helpers/objOf\'\n\n// length :: String -> Number\nconst length =\n  x => x.length\n\n// add10 :: Number -> Number\nconst add10 =\n  x => x + 10\n\n// keyedLength :: Pair String String -> Object\nconst keyedLength =\n  compose(merge(objOf), map(length))\n\nPair(\'number\', 32)\n  .map(add10)\n//=> Pair("number", 42)\n\nkeyedLength(\n  Pair(\'text\', \'This is some text\')\n)\n//=> { text: 17 }', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'import Arrow from \'crocks/Arrow\'\n\nimport B from \'crocks/combinators/composeB\'\n\n// arrFullScale :: Arrow Number\nconst arrFullScale =\n  Arrow(x => 20 * Math.log10(Math.abs(x)))\n\narrFullScale\n  .runWith(-0.35)\n//=> -9.118639112994488\n\n// round :: Number -> Number\nconst round =\n  x => Math.floor(x * 100) / 100\n\n// stringRep :: Number -> String\nconst stringRep =\n  x => `${x} dBFS`\n\n// Arrow :: Number String\nconst arrStringFS =\n  arrFullScale\n    .map(B(stringRep, round))\n\narrStringFS\n  .runWith(0.35)\n//=> \'-9.12 dbFS\'', mode: 'javascript'}, null, opt_ijData);
       ie_open('h4');
         ie_open('a', null, null,
-            'id', 'bimap',
-            'href', '#bimap');
-          itext('bimap');
+            'id', 'promap',
+            'href', '#promap');
+          itext('promap');
         ie_close('a');
       ie_close('h4');
-      $templateAlias2({code: 'Pair a b ~> ((a -> c), (b -> d)) -> Pair c d', mode: 'haskell'}, null, opt_ijData);
+      $templateAlias2({code: 'Arrow a b ~> ((c -> a), (b -> d)) -> Arrow c d', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
-        itext('The types and values that make up a ');
         ie_open('code');
-          itext('Pair');
+          itext('promap');
         ie_close('code');
-        itext(' can vary independently in both the first and second portions of the ');
+        itext(' can be used to adapt BOTH ends of an ');
         ie_open('code');
-          itext('Pair');
+          itext('Arrow');
         ie_close('code');
-        itext('. While ');
+        itext(' allowing for existing');
+        ie_open('code');
+          itext('Arrow');
+        ie_close('code');
+        itext('s to be reused in places in a flow where the types do not line up. It combines both ');
         ie_open('a', null, null,
             'href', '#map');
           ie_open('code');
             itext('map');
-          ie_close('code');
-        ie_close('a');
-        itext(' can be used to apply these transformations, ');
-        ie_open('code');
-          itext('bimap');
-        ie_close('code');
-        itext(' allows for independent transformations on both sides, in parallel.');
-      ie_close('p');
-      ie_open('p');
-        ie_open('code');
-          itext('bimap');
-        ie_close('code');
-        itext(' takes (2) mapping functions as its arguments. The first function is used to map the first, while the second maps the second. ');
-        ie_open('code');
-          itext('Pair');
-        ie_close('code');
-        itext(' only provides a means to map the second\'s value exclusively using ');
-        ie_open('a', null, null,
-            'href', '#map');
-          ie_open('code');
-            itext('map');
-          ie_close('code');
-        ie_close('a');
-        itext('. If the need arises to map the first portion exclusively, use ');
-        ie_open('code');
-          itext('bimap');
-        ie_close('code');
-        itext(' passing the mapping function to the first argument and an ');
-        ie_open('a', null, null,
-            'href', '../functions/combinators.html#identity');
-          ie_open('code');
-            itext('identity');
-          ie_close('code');
-        ie_close('a');
-        itext(' to the second.');
-      ie_close('p');
-      $templateAlias2({code: 'import Pair from \'crocks/Pair\'\nimport Sum from \'crocks/Sum\'\n\nimport compose from \'crocks/helpers/compose\'\nimport bimap from \'crocks/pointfree/bimap\'\nimport branch from \'crocks/Pair/branch\'\nimport identity from \'crocks/combinators/identity\'\nimport merge from \'crocks/Pair/merge\'\nimport mreduce from \'crocks/helpers/mreduce\'\n\n// add10 :: Number -> Number\nconst add10 =\n  x => x + 10\n\n// divide :: (Number, Number) -> Number\nconst divide =\n  (x, y) => x / y\n\n// length :: [ Number ] -> Number\nconst length =\n  x => x.length\n\n// average :: [ Number ] -> Number\nconst average = compose(\n  merge(divide),\n  bimap(mreduce(Sum), length),\n  branch\n)\n\nPair(35, \'number\')\n  .bimap(add10, identity)\n//=> Pair( 45, \'number\' )\n\naverage([ 2, 3, 4 ])\n//=> 3', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'ap',
-            'href', '#ap');
-          itext('ap');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Semigroup s => Pair s (a -> b) ~> Pair s a -> Pair s b', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('Short for apply, ');
-        ie_open('code');
-          itext('ap');
-        ie_close('code');
-        itext(' is used to apply a ');
-        ie_open('code');
-          itext('Pair');
-        ie_close('code');
-        itext(' instance containing a value on its second portion to another ');
-        ie_open('code');
-          itext('Pair');
-        ie_close('code');
-        itext(' instance that contains a function in its second portion. The result of this application provides a new ');
-        ie_open('code');
-          itext('Pair');
-        ie_close('code');
-        itext(' instance containing the result in the second portion. ');
-        ie_open('code');
-          itext('ap');
-        ie_close('code');
-        itext(' requires that it is called on an instance that wraps a curried polyadic function in the second.');
-      ie_close('p');
-      ie_open('p');
-        itext('An additional constraint when using ');
-        ie_open('code');
-          itext('ap');
-        ie_close('code');
-        itext(' is that the ');
-        ie_open('code');
-          itext('Pair');
-        ie_close('code');
-        itext(' must contain a');
-        ie_open('code');
-          itext('Semigroup');
-        ie_close('code');
-        itext(' instance in its first. This is required for both the ');
-        ie_open('code');
-          itext('Pair');
-        ie_close('code');
-        itext(' with the function and the ');
-        ie_open('code');
-          itext('Pair');
-        ie_close('code');
-        itext(' with the value to be applied. With both ');
-        ie_open('code');
-          itext('Semigroups');
-        ie_close('code');
-        itext('being of the same type.');
-      ie_close('p');
-      $templateAlias2({code: 'import Pair from \'crocks/Pair\'\nimport liftA2 from \'crocks/helpers/liftA2\'\n\n// add :: Number -> Number -> Number\nconst add =\n  x => y => x + y\n\n// NumberRec :: Pair [ Number ] Number\n\n// twentyThree :: NumberRec\nconst twentyThree =\n  Pair([ 23 ], 23)\n\n// seventySeven :: NumberRec\nconst seventySeven =\n  Pair([ 77 ], 77)\n\n// combine :: NumberRec -> NumberRec -> NumberRec\nconst combine =\n  liftA2(add)\n\ntwentyThree\n  .map(add)\n  .ap(seventySeven)\n// Pair( [ 23, 77 ], 100 )\n\ncombine(twentyThree, seventySeven)\n// Pair( [ 23, 77 ], 100 )', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'chain',
-            'href', '#chain');
-          itext('chain');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Semigroup s => Pair s a ~> (a -> Pair s b) -> Pair s b', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('Combining a sequential series of transformations that allows for custom accumulation in addition to transforming a value. ');
-        ie_open('code');
-          itext('chain');
-        ie_close('code');
-        itext(' requires a ');
-        ie_open('code');
-          itext('Pair');
-        ie_close('code');
-        itext('returning function that contains a ');
-        ie_open('code');
-          itext('Semigroup');
-        ie_close('code');
-        itext(' in its first position. As an additional requirement, is that instances of the same ');
-        ie_open('code');
-          itext('Semigroup');
-        ie_close('code');
-        itext(' must occupy the first position of the source ');
-        ie_open('code');
-          itext('Pair');
-        ie_close('code');
-        itext(' and the ');
-        ie_open('code');
-          itext('Pair');
-        ie_close('code');
-        itext(' returned by the function.');
-      ie_close('p');
-      $templateAlias2({code: 'const Pair = require(\'crocks/Pair\')\n\nconst assoc = require(\'crocks/helpers/assoc\')\nconst omit = require(\'crocks/helpers/omit\')\n\n// addTmp :: (String, a, Object) -> Pair [ String ] Object\nconst addTmp = (key, value, x) =>\n  Pair([ key ], assoc(key, value, x))\n\n// add :: Object -> Pair [ String ] Object\nconst add = data => {\n  const { a, b } = data\n  return addTmp(\'sum\', a + b, data)\n}\n\n// multiply :: Object -> Pair [ String ] Object\nconst multiply = data => {\n  const { a, b } = data\n  return addTmp(\'product\', a * b, data)\n}\n\n// calc :: Object -> Object\nconst calc = data => {\n  const { product, sum } = data\n  return assoc(\'result\', product - sum, data)\n}\n\n// flow :: Object -> Object\nconst flow = x =>\n  Pair([], x)\n    .chain(add)\n    .chain(multiply)\n    .map(calc)\n    .merge(omit)\n\nflow({ a: 34, b: 76 })\n//=> { a: 34, b: 76, result: 2474 }\n\nflow({ a: 10, b: 5 })\n//=> { a: 10, b: 5, result: 35 }', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'sequence',
-            'href', '#sequence');
-          itext('sequence');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Applicative TypeRep t, Apply f => Pair a (f b) ~> (t | (b -> f b)) -> f (Pair a b)', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('When an instance of ');
-        ie_open('code');
-          itext('Pair');
-        ie_close('code');
-        itext(' wraps an ');
-        ie_open('code');
-          itext('Apply');
-        ie_close('code');
-        itext(' instance in its second position,');
-        ie_open('code');
-          itext('sequence');
-        ie_close('code');
-        itext(' can be used to swap the type sequence. ');
-        ie_open('code');
-          itext('sequence');
-        ie_close('code');
-        itext(' requires either an');
-        ie_open('code');
-          itext('Applicative TypeRep');
-        ie_close('code');
-        itext(' or an ');
-        ie_open('code');
-          itext('Apply');
-        ie_close('code');
-        itext(' returning function is provided for its argument.');
-      ie_close('p');
-      ie_open('p');
-        itext('While it is not a requirement that the first position be occupied by a');
-        ie_open('code');
-          itext('Semigroup');
-        ie_close('code');
-        itext(', in having an instance there sequencing back on a data structure with multiple items can allow for accumulation then sequencing back.');
-      ie_close('p');
-      ie_open('p');
-        ie_open('code');
-          itext('sequence');
-        ie_close('code');
-        itext(' can be derived from ');
-        ie_open('a', null, null,
-            'href', '#traverse');
-          ie_open('code');
-            itext('traverse');
-          ie_close('code');
-        ie_close('a');
-        itext(' by passing it an');
-        ie_open('a', null, null,
-            'href', '../functions/combinators.html#identity');
-          ie_open('code');
-            itext('identity');
-          ie_close('code');
-        ie_close('a');
-        itext(' function (');
-        ie_open('code');
-          itext('x => x');
-        ie_close('code');
-        itext(').');
-      ie_close('p');
-      $templateAlias2({code: 'import Pair from \'crocks/Pair\'\nimport Sum from \'crocks/Sum\'\n\nimport bimap from \'crocks/pointfree/bimap\'\nimport compose from \'crocks/helpers/compose\'\nimport concat from \'crocks/pointfree/concat\'\nimport flip from \'crocks/combinators/flip\'\nimport mapReduce from \'crocks/helpers/mapReduce\'\nimport sequence from \'crocks/pointfree/sequence\'\n\n// pair :: Pair Number [ String ]\nconst pair =\n  Pair(1, [ \'a\', \'b\', \'c\' ])\n\n// empty :: () -> Pair Sum String\nconst empty =\n  () => Pair(Sum.empty(), \'\')\n\n// seqArray :: Traversable t => t [ a ] -> [ t a ]\nconst seqArray =\n  sequence(Array)\n\n// toUpper :: String -> String\nconst toUpper =\n  x => x.toUpperCase()\n\n// combine :: [ Pair Number String ] -> Pair Sum String\nconst combine = mapReduce(\n  bimap(Sum, toUpper),\n  flip(concat),\n  empty()\n)\n\n// flow :: Pair Number [ String ] -> Pair Sum String\nconst flow =\n  compose(combine, seqArray)\n\nseqArray(pair)\n//=> [ Pair(1, "a"), Pair(1, "b"), Pair(1, "c") ]\n\nflow(pair)\n//=> Pair(Sum 3, "ABC")', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'traverse',
-            'href', '#traverse');
-          itext('traverse');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Applicative TypeRep t, Apply f => Pair a b ~> ((t | (b -> f b)), (b -> f c)) -> f (Pair a c)', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('Used to apply the "effect" of an ');
-        ie_open('code');
-          itext('Apply');
-        ie_close('code');
-        itext(' to a value in the second position of a ');
-        ie_open('code');
-          itext('Pair');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('traverse');
-        ie_close('code');
-        itext(' combines both the "effects" of the ');
-        ie_open('code');
-          itext('Apply');
-        ie_close('code');
-        itext(' and the ');
-        ie_open('code');
-          itext('Pair');
-        ie_close('code');
-        itext('by returning a new instance of the ');
-        ie_open('code');
-          itext('Apply');
-        ie_close('code');
-        itext(', wrapping the result of the');
-        ie_open('code');
-          itext('Apply');
-        ie_close('code');
-        itext('s "effect" on the value in the second position of the ');
-        ie_open('code');
-          itext('Pair');
-        ie_close('code');
-        itext('.');
-      ie_close('p');
-      ie_open('p');
-        ie_open('code');
-          itext('traverse');
-        ie_close('code');
-        itext(' requires either an ');
-        ie_open('code');
-          itext('Applicative TypeRep');
-        ie_close('code');
-        itext(' or an ');
-        ie_open('code');
-          itext('Apply');
-        ie_close('code');
-        itext(' returning function as its first argument and a function that is used to apply the "effect" of the target ');
-        ie_open('code');
-          itext('Apply');
-        ie_close('code');
-        itext(' to the value in the second position of the ');
-        ie_open('code');
-          itext('Pair');
-        ie_close('code');
-        itext('. The "effect" will only be applied to second value and leaves the first value untouched. Both arguments must return an instance of the target ');
-        ie_open('code');
-          itext('Apply');
-        ie_close('code');
-        itext('.');
-      ie_close('p');
-      $templateAlias2({code: 'import Maybe from \'crocks/Maybe\'\nimport Pair from \'crocks/Pair\'\n\nimport identity from \'crocks/combinators/identity\'\nimport safe from \'crocks/Maybe/safe\'\nimport traverse from \'crocks/pointfree/traverse\'\n\nconst { Just, Nothing } = Maybe\n\n// isOdd :: Integer -> Boolean\nconst isOdd =\n  x => !!(x % 2)\n\n// safeOdd :: Traversable t => t Integer -> Maybe (t Integer)\nconst safeOdd =\n  traverse(Maybe, safe(isOdd))\n\n// seqMaybe :: Traversable t => t (Maybe a) -> Maybe (t a)\nconst seqMaybe =\n  traverse(Maybe.of, identity)\n\n// odd :: Pair [ Number ] Integer\nconst odd =\n  Pair([ 10 ], 23)\n\n// even :: Pair String  Integer\nconst even =\n  Pair(\'nope\', 42)\n\nsafeOdd(odd)\n//=> Just Pair( [ 10 ], 23 )\n\nsafeOdd(even)\n//=> Nothing\n\nseqMaybe(Pair(true, Just(\'good\')))\n//=> Just Pair( true, "good" )\n\nseqMaybe(Pair(false, Nothing()))\n//=> Nothing', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'extend',
-            'href', '#extend');
-          itext('extend');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Pair a b ~> (Pair a b -> c) -> Pair a c', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('Used map the second position of a given ');
-        ie_open('code');
-          itext('Pair');
-        ie_close('code');
-        itext(' instance by taking the entire');
-        ie_open('code');
-          itext('Pair');
-        ie_close('code');
-        itext(' into consideration. ');
-        ie_open('code');
-          itext('extend');
-        ie_close('code');
-        itext(' takes a function the receives a ');
-        ie_open('code');
-          itext('Pair');
-        ie_close('code');
-        itext(' as its input and returns a new ');
-        ie_open('code');
-          itext('Pair');
-        ie_close('code');
-        itext(' with the result of that function in the second position, while leaving the value in the first position untouched.');
-      ie_close('p');
-      $templateAlias2({code: 'import Pair from \'crocks/Pair\'\n\nimport extend from \'crocks/pointfree/extend\'\nimport merge from \'crocks/Pair/merge\'\nimport objOf from \'crocks/helpers/objOf\'\n\n// name :: Pair String String\nconst name =\n  Pair(\'name\', \'Thomas\')\n\n// mergeObj :: Pair String a -> Object\nconst mergeObj =\n  merge(objOf)\n\n// makeObj :: Pair String a -> Pair String Object\nconst makeObj =\n  extend(mergeObj)\n\nmakeObj(name)\n//=> Pair("name", { name: "Thomas" })', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'swap',
-            'href', '#swap');
-          itext('swap');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Pair a b ~> ((a -> c), (b -> d)) -> Pair d c', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('Used to map the value of a ');
-        ie_open('code');
-          itext('Pair');
-        ie_close('code');
-        itext('s first position into the second position and the second position into the first, ');
-        ie_open('code');
-          itext('swap');
-        ie_close('code');
-        itext(' takes (2) functions as its arguments. The first function is used to map the value in the first position to the second, while the second \'maps the second into the first\'. If no mapping is required on either side, then ');
-        ie_open('a', null, null,
-            'href', '../functions/combinators.html#identity');
-          ie_open('code');
-            itext('identity');
-          ie_close('code');
-        ie_close('a');
-        itext(' functions can be used in one or both arguments.');
-      ie_close('p');
-      $templateAlias2({code: 'import Pair from \'crocks/Pair\'\n\nimport identity from \'crocks/combinators/identity\'\nimport swap from \'crocks/pointfree/swap\'\n\n// toString :: a -> String\nconst toString =\n  x => x.toString()\n\n// swapMap :: Pair a String -> Pair Number String\nconst swapMap =\n  swap(toString, parseInt)\n\n// m :: Pair Number String\nconst m =\n  Pair(76, \'105\')\n\nm.swap(identity, identity)\n//=> Pair("105", 76)\n\nswapMap(m)\n//=> Pair(105, "76")', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'fst',
-            'href', '#fst');
-          itext('fst');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Pair a b ~> () -> a', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        ie_open('code');
-          itext('fst');
-        ie_close('code');
-        itext(' is one of (2) projection methods used to extract the values contained in a given ');
-        ie_open('code');
-          itext('Pair');
-        ie_close('code');
-        itext(' instance. ');
-        ie_open('code');
-          itext('fst');
-        ie_close('code');
-        itext(' takes nothing as its input and will unwrap and provide the value in the first position, throwing away the value in the second.');
-        ie_open('a', null, null,
-            'href', '#snd');
-          ie_open('code');
-            itext('snd');
-          ie_close('code');
-        ie_close('a');
-        itext(' is the other projection function provided and is used to extract the value in the second position.');
-      ie_close('p');
-      $templateAlias2({code: 'import Pair from \'crocks/Pair\'\n\nPair(\'left\', \'right\')\n  .fst()\n//=> "left"', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'snd',
-            'href', '#snd');
-          itext('snd');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Pair a b ~> () -> b', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        ie_open('code');
-          itext('snd');
-        ie_close('code');
-        itext(' is one of (2) projection methods used to extract the values contained in a given ');
-        ie_open('code');
-          itext('Pair');
-        ie_close('code');
-        itext(' instance. ');
-        ie_open('code');
-          itext('snd');
-        ie_close('code');
-        itext(' takes nothing as its input and will unwrap and provide the value in the second position, throwing away the value in the first.');
-        ie_open('a', null, null,
-            'href', '#fst');
-          ie_open('code');
-            itext('fst');
-          ie_close('code');
-        ie_close('a');
-        itext(' is the other projection function provided and is used to extract the value in the first position.');
-      ie_close('p');
-      $templateAlias2({code: 'import Pair from \'crocks/Pair\'\n\nPair(\'left\', \'right\')\n  .snd()\n//=> "right"', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'toarray',
-            'href', '#toarray');
-          itext('toArray');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Pair a b ~> () -> [ a, b ]', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('While both ');
-        ie_open('a', null, null,
-            'href', '#fst');
-          ie_open('code');
-            itext('fst');
           ie_close('code');
         ie_close('a');
         itext(' and ');
         ie_open('a', null, null,
-            'href', '#snd');
+            'href', '#contramap');
           ie_open('code');
-            itext('snd');
+            itext('contramap');
           ie_close('code');
         ie_close('a');
-        itext(' can be used to extract specific values out of the structure of ');
-        ie_open('code');
-          itext('Pair');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('toArray');
-        ie_close('code');
-        itext(' extracts values but maintains the structure. Taking nothing as its input, ');
-        ie_open('code');
-          itext('toArray');
-        ie_close('code');
-        itext(' will return an');
-        ie_open('code');
-          itext('Array');
-        ie_close('code');
-        itext(' of two values. The first value in the ');
-        ie_open('code');
-          itext('Pair');
-        ie_close('code');
-        itext(' will occupy the [0] index, while the [1] index will house the second.');
+        itext(' into one operation. Just pass the function for ');
+        ie_open('a', null, null,
+            'href', '#contramap');
+          ie_open('code');
+            itext('contramap');
+          ie_close('code');
+        ie_close('a');
+        itext(' as the first argument and the function ');
+        ie_open('a', null, null,
+            'href', '#map');
+          ie_open('code');
+            itext('map');
+          ie_close('code');
+        ie_close('a');
+        itext(' as the second.');
       ie_close('p');
-      $templateAlias2({code: 'import Pair from \'crocks/Pair\'\nimport compose from \'crocks/helpers/compose\'\n\n// toArray :: Pair a b -> [ a, b ]\nconst toArray =\n  x => x.toArray()\n\n// toObject :: [ a, b ] -> Object\nconst toObject =\n  ([ left, right ]) => ({ left, right })\n\n// pairToObject :: Pair a b -> Object\nconst pairToObject =\n  compose(toObject, toArray)\n\n// m :: Pair String Number\nconst m =\n  Pair(\'a\', 1)\n\nm.toArray()\n//=> [ \'a\', 1 ]\n\npairToObject(m)\n//=> { left: \'a\', right: 1 }', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'import Arrow from \'crocks/Arrow\'\n\nimport chain from \'crocks/pointfree/chain\'\nimport compose from \'crocks/helpers/compose\'\nimport isString from \'crocks/predicates/isString\'\nimport objOf from \'crocks/helpers/objOf\'\nimport option from \'crocks/pointfree/option\'\nimport prop from \'crocks/Maybe/prop\'\nimport safe from \'crocks/Maybe/safe\'\n\n// upperFirst :: String -> String\nconst upperFirst = x =>\n  x.charAt(0)\n    .toUpperCase()\n    .concat(x.slice(1).toLowerCase())\n\n// arrTitleize :: Arrow String\nconst arrTitleize =\n  Arrow(x => x.split(\' \').map(upperFirst).join(\' \'))\n\narrTitleize\n  .runWith(\'tHis is siLLy\')\n//=> \'This Is Silly\'\n\n// stringProp :: String -> Object -> String\nconst stringProp = key => compose(\n  option(\'\'),\n  chain(safe(isString)),\n  prop(key)\n)\n\n// arrTitleObject :: Arrow Object\nconst arrTitleObject =\n  arrTitleize\n    .promap(stringProp(\'title\'), objOf(\'title\'))\n\narrTitleObject\n  .runWith({ title: \'SaY wHaT!?!\' })\n// { title: \'Say What!?!\' }\n\narrTitleObject\n  .runWith({ title: true })\n// { title: \'\' }', mode: 'javascript'}, null, opt_ijData);
       ie_open('h4');
         ie_open('a', null, null,
-            'id', 'merge',
-            'href', '#merge');
-          itext('merge');
+            'id', 'runwith',
+            'href', '#runwith');
+          itext('runWith');
         ie_close('a');
       ie_close('h4');
-      $templateAlias2({code: 'Pair a b ~> ((a, b) -> c) -> c', mode: 'haskell'}, null, opt_ijData);
+      $templateAlias2({code: 'Arrow a b ~> a -> b', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
-        itext('Acting as a means to fold a given ');
         ie_open('code');
-          itext('Pair');
+          itext('Arrow');
         ie_close('code');
-        itext(' over a binary operation, ');
+        itext('s are lazy to make combining and extending them easy. Once you have your final computation built out and you are ready to execute it, all you have to do is call ');
         ie_open('code');
-          itext('merge');
+          itext('runWith');
         ie_close('code');
-        itext(' takes a binary function as its sole argument. Using the function, ');
-        ie_open('code');
-          itext('merge');
-        ie_close('code');
-        itext(' will unwrap each of its values and apply them to the function in order from first to second. The result of the provided function is then provided as the overall result for ');
-        ie_open('code');
-          itext('merge');
-        ie_close('code');
-        itext('.');
+        itext(' on it, passing in the argument you what to run it with.');
       ie_close('p');
-      ie_open('p');
-        itext('This method comes in handy when using a ');
-        ie_open('code');
-          itext('Pair');
-        ie_close('code');
-        itext(' as a means to run parallel computations and combine their results into a final answer. Typically this method works hand in hand with the either the ');
-        ie_open('a', null, null,
-            'href', '#branch');
-          ie_open('code');
-            itext('branch');
-          ie_close('code');
-        ie_close('a');
-        itext(' or');
-        ie_open('a', null, null,
-            'href', '../functions/helpers.html#fanout');
-          ie_open('code');
-            itext('fanout');
-          ie_close('code');
-        ie_close('a');
-        itext(' helper functions.');
-      ie_close('p');
-      $templateAlias2({code: 'import Sum from \'crocks/Sum\'\n\nimport compose from \'crocks/helpers/compose\'\nimport fanout from \'crocks/helpers/fanout\'\nimport merge from \'crocks/Pair/merge\'\nimport mreduce from \'crocks/helpers/mreduce\'\n\n// length :: [ a ] -> Integer\nconst length =\n  x => x.length\n\n// divide :: (Number, Number) -> Number\nconst divide =\n  (x, y) => x / y\n\n// average :: [ Number ] -> Number\nconst average = compose(\n  merge(divide),\n  fanout(mreduce(Sum), length)\n)\n\n// nums :: [ Number ]\nconst nums =\n  [ 23, 96, 90, 4, 21 ]\n\naverage(nums)\n// 46.8', mode: 'javascript'}, null, opt_ijData);
-    ie_close('article');
-    ie_open('article', null, null,
-        'id', 'topic-helpers');
-      ie_open('h2');
-        ie_open('a', null, null,
-            'id', 'helper-functions',
-            'href', '#helper-functions');
-          itext('Helper Functions');
-        ie_close('a');
-      ie_close('h2');
+      $templateAlias2({code: 'import Arrow from \'crocks/Arrow\'\nimport Sum from \'crocks/Sum\'\n\nimport branch from \'crocks/Pair/branch\'\nimport merge from \'crocks/pointfree/merge\'\nimport mreduce from \'crocks/helpers/mreduce\'\n\n// data :: [ Number ]\nconst data =\n  [ 35, 60, 22, 100 ]\n\n// arrLength :: Arrow [ a ] Number\nconst arrLength =\n  Arrow(x => x.length)\n\narrLength\n  .runWith(data)\n//=> 4\n\n// arrSum :: Arrow [ Number ] Number\nconst arrSum =\n  Arrow(mreduce(Sum))\n\narrSum\n  .runWith(data)\n//=> 217\n\n// arrAvgList :: Arrow [ Number ] Number\nconst arrAvgList =\n  arrSum.first()\n    .compose(arrLength.second())\n    .promap(branch, merge((x, y) => x / y))\n\narrAvgList\n  .runWith(data)\n//=> 54.25', mode: 'javascript'}, null, opt_ijData);
       ie_open('h4');
         ie_open('a', null, null,
-            'id', 'branch',
-            'href', '#branch');
-          itext('branch');
+            'id', 'second',
+            'href', '#second');
+          itext('second');
         ie_close('a');
       ie_close('h4');
+      $templateAlias2({code: 'Pair p => Arrow a b ~> () -> Arrow (p c a) (p c b)', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
+        itext('Used to apply a given ');
         ie_open('code');
-          itext('crocks/Pair/branch');
+          itext('Arrow');
         ie_close('code');
-      ie_close('p');
-      $templateAlias2({code: 'branch :: a -> Pair a a', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('Typically the starting point for handling parallel computations on a single value, ');
-        ie_open('code');
-          itext('branch');
-        ie_close('code');
-        itext(' takes a single value of any type as its only argument. ');
-        ie_open('code');
-          itext('branch');
-        ie_close('code');
-        itext('then returns a ');
+        itext(' over the second slot of a ');
         ie_open('code');
           itext('Pair');
         ie_close('code');
-        itext(' with the reference or value in both the first and second positions.');
-      ie_close('p');
-      ie_open('p');
-        itext('Using ');
+        itext(', leaving the first slot untouched. The input to the ');
         ie_open('code');
-          itext('branch');
+          itext('Arrow');
         ie_close('code');
-        itext(' can simplify how computations that depend on the same value are constructed and encoded by removing the need to keep the original value in some state that needs to be passed from function to function.');
-      ie_close('p');
-      $templateAlias2({code: 'import assign from \'crocks/helpers/assign\'\nimport bimap from \'crocks/pointfree/bimap\'\nimport branch from \'crocks/Pair/branch\'\nimport compose from \'crocks/helpers/compose\'\nimport curry from \'crocks/helpers/curry\'\nimport objOf from \'crocks/helpers/objOf\'\nimport merge from \'crocks/Pair/merge\'\n\n// add10 :: Number -> Number\nconst add10 =\n  x => x + 10\n\n// applyChange :: (a -> b) -> a -> Object\nconst applyChange = fn =>\n  compose(objOf(\'current\'), fn)\n\n// createUndo :: (a -> b) -> a -> Object\nconst createUndo = curry(fn =>\n  compose(\n    merge(assign),\n    bimap(objOf(\'orig\'), applyChange(fn)),\n    branch\n  )\n)\n\n// applyAdd10 :: Number -> Object\nconst applyAdd10 =\n  createUndo(add10)\n\napplyAdd10(5)\n// { current: 15, orig: 5 }', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'topairs',
-            'href', '#topairs');
-          itext('toPairs');
-        ie_close('a');
-      ie_close('h4');
-      ie_open('p');
-        ie_open('code');
-          itext('crocks/Pair/toPairs');
-        ie_close('code');
-      ie_close('p');
-      $templateAlias2({code: 'toPairs :: Object -> List (Pair String a)', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('When dealing with ');
-        ie_open('code');
-          itext('Object');
-        ie_close('code');
-        itext('s, sometimes it makes more sense to work in a');
-        ie_open('code');
-          itext('Foldable');
-        ie_close('code');
-        itext(' structure like a ');
-        ie_open('code');
-          itext('List');
-        ie_close('code');
-        itext(' of key-value ');
-        ie_open('code');
-          itext('Pair');
-        ie_close('code');
-        itext('s. ');
-        ie_open('code');
-          itext('toPairs');
-        ie_close('code');
-        itext(' provides a means to take an object and give you back a ');
-        ie_open('code');
-          itext('List');
-        ie_close('code');
-        itext(' of ');
-        ie_open('code');
-          itext('Pairs');
-        ie_close('code');
-        itext(' that have a');
-        ie_open('code');
-          itext('String');
-        ie_close('code');
-        itext(' that represents the key in the ');
-        ie_open('code');
-          itext('fst');
-        ie_close('code');
-        itext(' and the value for that key in the');
-        ie_open('code');
-          itext('snd');
-        ie_close('code');
-        itext('. The primitive values are copied, while non-primitive values are references. Like most of the ');
-        ie_open('code');
-          itext('Object');
-        ie_close('code');
-        itext(' functions in ');
-        ie_open('code');
-          itext('crocks');
-        ie_close('code');
-        itext(', any keys with');
-        ie_open('code');
-          itext('undefined');
-        ie_close('code');
-        itext(' values will be omitted from the result. ');
-        ie_open('code');
-          itext('crocks');
-        ie_close('code');
-        itext(' provides an inverse to this function named ');
-        ie_open('a', null, null,
-            'href', '../functions/helpers.html#frompairs');
-          ie_open('code');
-            itext('fromPairs');
-          ie_close('code');
-        ie_close('a');
-        itext('.');
-      ie_close('p');
-      $templateAlias2({code: 'import compose from \'crocks/helpers/compose\'\nimport map from \'crocks/pointfree/map\'\nimport merge from \'crocks/Pair/merge\'\nimport toPairs from \'crocks/Pair/toPairs\'\n\n// record :: Object\nconst record = {\n  firstName: \'Joey\',\n  lastName: \'Fella\',\n  age: 34\n}\n\n// joinField :: (String, a) -> String\nconst joinField = (key, value) =>\n  `${key}:${value}`\n\n// joinRecord :: List String -> String\nconst joinRecord = list =>\n  list.toArray()\n    .join(\'|\')\n\n// buildRecord :: Object -> String\nconst buildRecord = compose(\n  joinRecord,\n  map(merge(joinField)),\n  toPairs\n)\n\nbuildRecord(record)\n//=> "firstName:Joey|lastName:Fella|age:34"', mode: 'javascript'}, null, opt_ijData);
-    ie_close('article');
-    ie_open('article', null, null,
-        'id', 'topic-pointfree');
-      ie_open('h2');
-        ie_open('a', null, null,
-            'id', 'pointfree-functions',
-            'href', '#pointfree-functions');
-          itext('Pointfree Functions');
-        ie_close('a');
-      ie_close('h2');
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'fst-pointfree',
-            'href', '#fst-pointfree');
-          itext('fst (pointfree)');
-        ie_close('a');
-      ie_close('h4');
-      ie_open('p');
-        ie_open('code');
-          itext('crocks/Pair/fst');
-        ie_close('code');
-      ie_close('p');
-      $templateAlias2({code: 'fst :: Pair a b -> a', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('The ');
-        ie_open('code');
-          itext('fst');
-        ie_close('code');
-        itext(' pointfree function is used extract the leftmost value of a ');
-        ie_open('code');
-          itext('Pair');
-        ie_close('code');
-        itext(' by invoking the ');
-        ie_open('a', null, null,
-            'href', '#fst');
-          ie_open('code');
-            itext('fst');
-          ie_close('code');
-        ie_close('a');
-        itext(' method on a given instance, returning the result.');
-        ie_open('code');
-          itext('fst');
-        ie_close('code');
-        itext(' takes a ');
-        ie_open('code');
-          itext('Pair');
-        ie_close('code');
-        itext(' as its only argument and returns the value wrapped in the leftmost portion of the provided ');
+        itext(' must match the expected type on the second slot of the incoming ');
         ie_open('code');
           itext('Pair');
         ie_close('code');
         itext('.');
       ie_close('p');
-      $templateAlias2({code: 'import Pair from \'crocks/Pair\'\n\nimport flip from \'crocks/combinators/flip\'\nimport fst from \'crocks/Pair/fst\'\nimport ifElse from \'crocks/logic/ifElse\'\nimport merge from \'crocks/Pair/merge\'\nimport snd from \'crocks/Pair/snd\'\n\n// lte :: (Number, Number) -> Boolean\nconst lte =\n  (y, x) => x <= y\n\n// min :: Pair Number Number -> Number\nconst min = ifElse(\n  merge(flip(lte)),\n  fst,\n  snd\n)\n\nmin(Pair(1, 2))\n//=> 1\n\nmin(Pair(45, 22))\n//=> 22\n\nmin(Pair(100, 100))\n//=> 100', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'merge-pointfree',
-            'href', '#merge-pointfree');
-          itext('merge (pointfree)');
-        ie_close('a');
-      ie_close('h4');
-      ie_open('p');
-        ie_open('code');
-          itext('crocks/Pair/merge');
-        ie_close('code');
-      ie_close('p');
-      $templateAlias2({code: 'merge :: ((a, b) -> c) -> Pair a b -> c', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('The pointfree ');
-        ie_open('code');
-          itext('merge');
-        ie_close('code');
-        itext(' function allows the ability to fold out a new value, using a binary function to combine the two values into one. This function takes (2) arguments, with the first being a binary function used to combine a ');
-        ie_open('code');
-          itext('Pair');
-        ie_close('code');
-        itext('s values and the second is the instance of ');
-        ie_open('code');
-          itext('Pair');
-        ie_close('code');
-        itext(' for the function to be applied. Like the method on ');
-        ie_open('code');
-          itext('Pair');
-        ie_close('code');
-        itext(', this function will return the result of the provided binary function.');
-      ie_close('p');
-      $templateAlias2({code: 'import Pair from \'crocks/Pair\'\n\nimport assoc from \'crocks/helpers/assoc\'\nimport compose from \'crocks/helpers/compose\'\nimport curry from \'crocks/helpers/curry\'\nimport map from \'crocks/pointfree/map\'\nimport merge from \'crocks/Pair/merge\'\n\n// mergeObj :: Pair String a -> Object -> Object\nconst mergeObj =\n  merge(assoc)\n\n// inc :: Number -> Number\nconst inc =\n  x => x + 1\n\n// incAssign :: Pair String Number -> Object -> Object\nconst incAssign = curry(\n  compose(mergeObj, map(inc))\n)\n\nincAssign(Pair(\'apples\', 5), {})\n// { apples: 6 }\n\nincAssign(\n  Pair(\'num\', 57),\n  { string: \'a string\' }\n)\n// { string: \'a string\', num: 58 }', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'snd-pointfree',
-            'href', '#snd-pointfree');
-          itext('snd (pointfree)');
-        ie_close('a');
-      ie_close('h4');
-      ie_open('p');
-        ie_open('code');
-          itext('crocks/Pair/snd');
-        ie_close('code');
-      ie_close('p');
-      $templateAlias2({code: 'snd :: Pair a b -> b', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('The ');
-        ie_open('code');
-          itext('snd');
-        ie_close('code');
-        itext(' pointfree function is used extract the rightmost value of a ');
-        ie_open('code');
-          itext('Pair');
-        ie_close('code');
-        itext(' by invoking the ');
-        ie_open('a', null, null,
-            'href', '#snd');
-          ie_open('code');
-            itext('snd');
-          ie_close('code');
-        ie_close('a');
-        itext(' method on a given instance, returning the result.');
-        ie_open('code');
-          itext('snd');
-        ie_close('code');
-        itext(' takes a ');
-        ie_open('code');
-          itext('Pair');
-        ie_close('code');
-        itext(' as its only argument and returns the value wrapped in the rightmost portion of the provided ');
-        ie_open('code');
-          itext('Pair');
-        ie_close('code');
-        itext('.');
-      ie_close('p');
-      $templateAlias2({code: 'import Pair from \'crocks/Pair\'\nimport Unit from \'crocks/Unit\'\n\nimport chain from \'crocks/pointfree/chain\'\nimport compose from \'crocks/helpers/compose\'\nimport map from \'crocks/pointfree/map\'\nimport snd from \'crocks/Pair/snd\'\n\n// Box :: a -> Pair () a\nconst Box =\n  x => Pair(Unit(), x)\n\n// unbox :: Pair a b -> b\nconst unbox =\n  snd\n\n// add :: Number -> Number -> Number\nconst add =\n  x => y => x + y\n\n// doubleBoxed :: Number -> Pair () Number\nconst doubleBoxed =\n  m => Box(m * 2)\n\n// flow :: Number -> Number\nconst flow = compose(\n  unbox,\n  chain(doubleBoxed),\n  map(add(10)),\n  Box\n)\n\nflow(10)\n//=> 40', mode: 'javascript'}, null, opt_ijData);
-    ie_close('article');
-    ie_open('article', null, null,
-        'id', 'topic-transformation');
-      ie_open('h2');
-        ie_open('a', null, null,
-            'id', 'transformation-functions',
-            'href', '#transformation-functions');
-          itext('Transformation Functions');
-        ie_close('a');
-      ie_close('h2');
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'writertopair',
-            'href', '#writertopair');
-          itext('writerToPair');
-        ie_close('a');
-      ie_close('h4');
-      ie_open('p');
-        ie_open('code');
-          itext('crocks/Pair/writerToPair');
-        ie_close('code');
-      ie_close('p');
-      $templateAlias2({code: 'writerToPair :: Monoid m => Writer m a -> Pair m a\nwriterToPair :: Monoid m => (a -> Writer m b) -> a -> Pair m b', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('Used to transform a ');
-        ie_open('code');
-          itext('Writer');
-        ie_close('code');
-        itext(' instance to a ');
-        ie_open('code');
-          itext('Pair');
-        ie_close('code');
-        itext(' instance,');
-        ie_open('code');
-          itext('writerToPair');
-        ie_close('code');
-        itext(' will take a given ');
-        ie_open('code');
-          itext('Writer');
-        ie_close('code');
-        itext(' and provide a new ');
-        ie_open('code');
-          itext('Pair');
-        ie_close('code');
-        itext(' with the ');
-        ie_open('code');
-          itext('log');
-        ie_close('code');
-        itext(' portion of the ');
-        ie_open('code');
-          itext('Writer');
-        ie_close('code');
-        itext(' in the first position and the ');
-        ie_open('code');
-          itext('resultant');
-        ie_close('code');
-        itext('in the second.');
-      ie_close('p');
-      ie_open('p');
-        itext('Like all ');
-        ie_open('code');
-          itext('crocks');
-        ie_close('code');
-        itext(' transformation functions, ');
-        ie_open('code');
-          itext('writerToPair');
-        ie_close('code');
-        itext(' has (2) possible signatures and will behave differently when passed either a ');
-        ie_open('code');
-          itext('Writer');
-        ie_close('code');
-        itext(' instance or a function that returns an instance of ');
-        ie_open('code');
-          itext('Writer');
-        ie_close('code');
-        itext('. When passed the instance, a ');
-        ie_open('code');
-          itext('Pair');
-        ie_close('code');
-        itext(' instance is returned. When passed a ');
-        ie_open('code');
-          itext('Writer');
-        ie_close('code');
-        itext(' returning function, a function will be returned that takes a given value and returns an ');
-        ie_open('code');
-          itext('Pair');
-        ie_close('code');
-        itext('.');
-      ie_close('p');
-      $templateAlias2({code: 'import Pair from \'crocks/Pair\'\nimport Sum from \'crocks/Sum\'\nimport Writer from \'crocks/Writer\'\n\nimport writerToPair from \'crocks/Pair/writerToPair\'\n\n// SumWriter :: Writer Sum a\nconst SumWriter =\n  Writer(Sum)\n\n// appendItem :: a -> [ a ] -> SumWriter [ a ]\nconst appendItem = item => xs =>\n  SumWriter(1, xs.concat([ item ]))\n\nSumWriter(0, [])\n  .chain(appendItem(\'one\'))\n  .chain(appendItem(\'two\'))\n  .chain(appendItem(\'three\'))\n//=> Writer (Sum 3) [ "one", "two", "three" ]\n\nwriterToPair(SumWriter(2, \'result\'))\n//=> Pair(Sum 2, \'result\')\n\nPair(Sum.empty(), [])\n  .chain(writerToPair(appendItem(\'one\')))\n  .chain(writerToPair(appendItem(\'two\')))\n  .chain(writerToPair(appendItem(\'three\')))\n//=> Pair(Sum 3, [ "one", "two", "threimport', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'import Arrow from \'crocks/Arrow\'\n\nimport assign from \'crocks/helpers/assign\'\nimport branch from \'crocks/Pair/branch\'\nimport merge from \'crocks/pointfree/merge\'\nimport objOf from \'crocks/helpers/objOf\'\n\n// names :: Object\nconst names = {\n  first: \'Joey\',\n  last: \'Fella\'\n}\n\n// arrFull :: Arrow Object\nconst arrFull =\n  Arrow(({ first, last }) => `${first} ${last}`)\n    .map(objOf(\'full\'))\n//=> { full: \'Joey Fella\' }\n\n// arrAddFull :: Arrow Object\nconst arrAddFull =\n  arrFull\n    .second()\n    .promap(branch, merge(assign))\n\narrAddFull\n  .runWith(names)\n//=> { full: \'Joey Fella\', first: \'Joey\', last: \'Fella\' }', mode: 'javascript'}, null, opt_ijData);
     ie_close('article');
     ie_open('input', null, null,
         'type', 'hidden',
@@ -29591,11 +28855,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'value', opt_data.site.title);
     ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({content: param1043}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param303}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'EGmTb.render';
+  $render.soyTemplateName = 'bqiyr.render';
 }
 
 exports.render.params = ["page","site"];
@@ -29605,14 +28869,19 @@ return exports;
 
 });
 
-class EGmTb extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(EGmTb, templates);
+class bqiyr extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(bqiyr, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
 
 
 /***/ }),
+/* 218 */,
+/* 219 */,
+/* 220 */,
+/* 221 */,
+/* 222 */,
 /* 223 */,
 /* 224 */,
 /* 225 */,
@@ -29641,7 +28910,12 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(EGmTb, templates);
 /* 248 */,
 /* 249 */,
 /* 250 */,
-/* 251 */
+/* 251 */,
+/* 252 */,
+/* 253 */,
+/* 254 */,
+/* 255 */,
+/* 256 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29677,9 +28951,9 @@ __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _PairSoy = __webpack_require__(222);
+var _ArrowSoy = __webpack_require__(217);
 
-var _PairSoy2 = _interopRequireDefault(_PairSoy);
+var _ArrowSoy2 = _interopRequireDefault(_ArrowSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -29689,23 +28963,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var EGmTb = function (_Component) {
-  _inherits(EGmTb, _Component);
+var bqiyr = function (_Component) {
+  _inherits(bqiyr, _Component);
 
-  function EGmTb() {
-    _classCallCheck(this, EGmTb);
+  function bqiyr() {
+    _classCallCheck(this, bqiyr);
 
-    return _possibleConstructorReturn(this, (EGmTb.__proto__ || Object.getPrototypeOf(EGmTb)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (bqiyr.__proto__ || Object.getPrototypeOf(bqiyr)).apply(this, arguments));
   }
 
-  return EGmTb;
+  return bqiyr;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(EGmTb, _PairSoy2.default);
+_metalSoy2.default.register(bqiyr, _ArrowSoy2.default);
 
-exports.default = EGmTb;
+exports.default = bqiyr;
 
 /***/ })
-],[251]);
+],[256]);

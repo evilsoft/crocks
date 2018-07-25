@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([14,33,34,35],[
+webpackJsonppageComponent([7,34,35,36],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19884,7 +19884,7 @@ if (goog.DEBUG) {
  * @return {void}
  * @suppress {checkTypes}
  */
-function __deltemplate_s152_d34389eb(opt_data, opt_ignored, opt_ijData) {
+function __deltemplate_s174_d34389eb(opt_data, opt_ignored, opt_ijData) {
   ie_open('a', null, null,
       'class', 'sidebar-link ' + (opt_data.page.active ? 'sidebar-link-selected' : ''),
       'href', opt_data.page.url);
@@ -19893,16 +19893,16 @@ function __deltemplate_s152_d34389eb(opt_data, opt_ignored, opt_ijData) {
           'class', 'sidebar-icon icon-16-' + opt_data.page.icon);
     }
     ie_open('span');
-      var dyn10 = opt_data.page.title;
-      if (typeof dyn10 == 'function') dyn10(); else if (dyn10 != null) itext(dyn10);
+      var dyn12 = opt_data.page.title;
+      if (typeof dyn12 == 'function') dyn12(); else if (dyn12 != null) itext(dyn12);
     ie_close('span');
   ie_close('a');
 }
-exports.__deltemplate_s152_d34389eb = __deltemplate_s152_d34389eb;
+exports.__deltemplate_s174_d34389eb = __deltemplate_s174_d34389eb;
 if (goog.DEBUG) {
-  __deltemplate_s152_d34389eb.soyTemplateName = 'Sidebar.__deltemplate_s152_d34389eb';
+  __deltemplate_s174_d34389eb.soyTemplateName = 'Sidebar.__deltemplate_s174_d34389eb';
 }
-soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'sidebar', 0, __deltemplate_s152_d34389eb);
+soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'sidebar', 0, __deltemplate_s174_d34389eb);
 
 exports.render.params = ["section","site"];
 exports.render.types = {"section":"any","site":"any"};
@@ -20091,8 +20091,8 @@ function $render(opt_data, opt_ignored, opt_ijData) {
       ie_void('span', null, null,
           'class', 'icon icon-16-clock');
       itext(' ');
-      var dyn11 = opt_data.time;
-      if (typeof dyn11 == 'function') dyn11(); else if (dyn11 != null) itext(dyn11);
+      var dyn13 = opt_data.time;
+      if (typeof dyn13 == 'function') dyn13(); else if (dyn13 != null) itext(dyn13);
     }
   ie_close('p');
 }
@@ -28366,12 +28366,20 @@ exports.default = parseFromAnchor;
 /* 232 */,
 /* 233 */,
 /* 234 */,
-/* 235 */
+/* 235 */,
+/* 236 */,
+/* 237 */,
+/* 238 */,
+/* 239 */,
+/* 240 */,
+/* 241 */,
+/* 242 */,
+/* 243 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "lZXkP", function() { return lZXkP; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UvPGU", function() { return UvPGU; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28383,15 +28391,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var templates;
 goog.loadModule(function(exports) {
 
-// This file was automatically generated from getting-started.soy.
+// This file was automatically generated from Last.soy.
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace lZXkP.
+ * @fileoverview Templates in namespace UvPGU.
  * @public
  */
 
-goog.module('lZXkP.incrementaldom');
+goog.module('UvPGU.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28425,123 +28433,921 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var param212 = function() {
+  var param2678 = function() {
+    $templateAlias2({code: 'Last a = Last (Maybe a)', mode: 'haskell'}, null, opt_ijData);
+    ie_open('p');
+      ie_open('code');
+        itext('Last');
+      ie_close('code');
+      itext(' is a ');
+      ie_open('code');
+        itext('Monoid');
+      ie_close('code');
+      itext(' that will always return the last, non-empty value when (2) ');
+      ie_open('code');
+        itext('Last');
+      ie_close('code');
+      itext(' instances are combined. ');
+      ie_open('code');
+        itext('Last');
+      ie_close('code');
+      itext(' is able to be a ');
+      ie_open('code');
+        itext('Monoid');
+      ie_close('code');
+      itext(' because it implements a ');
+      ie_open('a', null, null,
+          'href', '../crocks/Maybe.html');
+        ie_open('code');
+          itext('Maybe');
+        ie_close('code');
+      ie_close('a');
+      itext(' under the hood. The use of the ');
+      ie_open('a', null, null,
+          'href', '../crocks/Maybe.html');
+        ie_open('code');
+          itext('Maybe');
+        ie_close('code');
+      ie_close('a');
+      itext(' allows for an');
+      ie_open('a', null, null,
+          'href', '#empty');
+        ie_open('code');
+          itext('empty');
+        ie_close('code');
+      ie_close('a');
+      itext(' ');
+      ie_open('code');
+        itext('Last');
+      ie_close('code');
+      itext(' to be represented with a ');
+      ie_open('code');
+        itext('Nothing');
+      ie_close('code');
+      itext('.');
+    ie_close('p');
+    ie_open('p');
+      ie_open('code');
+        itext('Last');
+      ie_close('code');
+      itext(' can be constructed with either a value or a ');
+      ie_open('a', null, null,
+          'href', '../crocks/Maybe.html');
+        ie_open('code');
+          itext('Maybe');
+        ie_close('code');
+      ie_close('a');
+      itext(' instance. Any value passed to the constructor will be wrapped in a ');
+      ie_open('a', null, null,
+          'href', '../crocks/Maybe.html#just');
+        ie_open('code');
+          itext('Just');
+        ie_close('code');
+      ie_close('a');
+      itext(' to represent a non-empty instance of ');
+      ie_open('code');
+        itext('Last');
+      ie_close('code');
+      itext('. Any ');
+      ie_open('a', null, null,
+          'href', '../crocks/Maybe.html');
+        ie_open('code');
+          itext('Maybe');
+        ie_close('code');
+      ie_close('a');
+      itext(' passed to the constructor will be lifted as is, allowing the ability to "choose" a value based on some disjunction.');
+    ie_close('p');
+    ie_open('p');
+      itext('While most ');
+      ie_open('code');
+        itext('Monoid');
+      ie_close('code');
+      itext('s only provide a ');
+      ie_open('a', null, null,
+          'href', '#valueof');
+        ie_open('code');
+          itext('valueOf');
+        ie_close('code');
+      ie_close('a');
+      itext(' function used for extraction, ');
+      ie_open('code');
+        itext('Last');
+      ie_close('code');
+      itext(' takes advantage of its underlying ');
+      ie_open('a', null, null,
+          'href', '../crocks/Maybe.html');
+        ie_open('code');
+          itext('Maybe');
+        ie_close('code');
+      ie_close('a');
+      itext(' to provide an additional ');
+      ie_open('a', null, null,
+          'href', '#option');
+        ie_open('code');
+          itext('option');
+        ie_close('code');
+      ie_close('a');
+      itext(' method. Using ');
+      ie_open('a', null, null,
+          'href', '#valueof');
+        ie_open('code');
+          itext('valueOf');
+        ie_close('code');
+      ie_close('a');
+      itext(' will extract the underlying ');
+      ie_open('a', null, null,
+          'href', '../crocks/Maybe.html');
+        ie_open('code');
+          itext('Maybe');
+        ie_close('code');
+      ie_close('a');
+      itext(', while ');
+      ie_open('a', null, null,
+          'href', '#option');
+        ie_open('code');
+          itext('option');
+        ie_close('code');
+      ie_close('a');
+      itext(' will extract the underlying value in the ');
+      ie_open('a', null, null,
+          'href', '../crocks/Maybe.html');
+        ie_open('code');
+          itext('Maybe');
+        ie_close('code');
+      ie_close('a');
+      itext(', using the provided default value when the underlying');
+      ie_open('a', null, null,
+          'href', '../crocks/Maybe.html');
+        ie_open('code');
+          itext('Maybe');
+        ie_close('code');
+      ie_close('a');
+      itext(' is a ');
+      ie_open('a', null, null,
+          'href', '../crocks/Maybe.html#nothing');
+        ie_open('code');
+          itext('Nothing');
+        ie_close('code');
+      ie_close('a');
+      itext(' instance.');
+    ie_close('p');
+    $templateAlias2({code: 'import Last from \'crocks/Last\'\n\nimport and from \'crocks/logic/and\'\nimport isNumber from \'crocks/predicates/isNumber\'\nimport mconcatMap from \'crocks/helpers/mconcatMap\'\nimport safe from \'crocks/Maybe/safe\'\n\n// isEven :: Number -> Boolean\nconst isEven =\n  x => x % 2 === 0\n\n// isValid :: a -> Boolean\nconst isValid =\n  and(isNumber, isEven)\n\n// chooseLast :: [ * ] -> Last Number\nconst chooseLast =\n  mconcatMap(Last, safe(isValid))\n\nchooseLast([ 21, 45, 2, 22, 19 ])\n  .valueOf()\n//=> Just 22\n\nchooseLast([ \'a\', \'b\', \'c\' ])\n  .option(\'\')\n//=> ""', mode: 'javascript'}, null, opt_ijData);
     ie_open('article', null, null,
-        'id', 'installation');
+        'id', 'topic-implements');
       ie_open('h2');
         ie_open('a', null, null,
-            'id', 'installation',
-            'href', '#installation');
-          itext('Installation');
+            'id', 'implements',
+            'href', '#implements');
+          itext('Implements');
         ie_close('a');
       ie_close('h2');
       ie_open('p');
         ie_open('code');
-          itext('crocks');
+          itext('Setoid');
         ie_close('code');
-        itext(' is available from ');
+        itext(', ');
         ie_open('code');
-          itext('npm');
+          itext('Semigroup');
         ie_close('code');
-        itext(' and is just a shell command away. All you need to do is run the following to save it as a dependency in your current project folder:');
+        itext(', ');
+        ie_open('code');
+          itext('Monoid');
+        ie_close('code');
       ie_close('p');
-      $templateAlias2({code: '$ npm install crocks -S', mode: 'text'}, null, opt_ijData);
-      ie_open('p');
-        itext('This will pull down ');
-        ie_open('code');
-          itext('crocks');
-        ie_close('code');
-        itext(' into your project\'s ');
-        ie_open('code');
-          itext('node_modules');
-        ie_close('code');
-        itext(' folder and can be accessed by adding something like the following in the file that needs it:');
-      ie_close('p');
-      $templateAlias2({code: '// node require syntax\nconst crocks = require(\'crocks\')\n\n// Javascript modules (if you are transpiling)\nimport crocks from \'crocks\'', mode: 'javascript'}, null, opt_ijData);
     ie_close('article');
     ie_open('article', null, null,
-        'id', 'import-only-what-you-need');
+        'id', 'topic-construction');
       ie_open('h2');
         ie_open('a', null, null,
-            'id', 'import-only-whats-needed',
-            'href', '#import-only-whats-needed');
-          itext('Import only what\'s needed');
+            'id', 'construction',
+            'href', '#construction');
+          itext('Construction');
         ie_close('a');
       ie_close('h2');
+      $templateAlias2({code: 'Last :: a -> Last (Maybe a)\nLast :: Maybe a -> Last (Maybe a)', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
-        itext('There is a lot to this library, and as such it may not be desired to bring in the whole thing when bundling for a library or frontend application. If this is the case, the code is organized in a manner that groups all functions that return or construct a given ADT into their respective folders. While general purpose functions are spread across the following folders: ');
+        itext('A ');
         ie_open('code');
-          itext('combinators');
+          itext('Last');
         ie_close('code');
-        itext(', ');
+        itext(' instance can be constructed by passing either a direct (unwrapped) value ');
         ie_open('code');
-          itext('helpers');
+          itext('a');
         ie_close('code');
-        itext(', ');
+        itext(' or a ');
         ie_open('code');
-          itext('logic');
+          itext('Maybe a');
         ie_close('code');
-        itext(', ');
+        itext(' to the constructor. When a direct value is passed, the constructor will always wrap the value in a ');
         ie_open('code');
-          itext('pointfree');
+          itext('Just');
         ie_close('code');
-        itext(' and ');
+        itext(' and return a new ');
         ie_open('code');
-          itext('predicates');
+          itext('Last Just a');
+        ie_close('code');
+        itext(' instance.');
+      ie_close('p');
+      ie_open('p');
+        itext('Alternatively, by passing a ');
+        ie_open('code');
+          itext('Maybe a');
+        ie_close('code');
+        itext(', the user can programmatically provide an empty case to a given ');
+        ie_open('code');
+          itext('Last');
+        ie_close('code');
+        itext(' by passing a ');
+        ie_open('code');
+          itext('Nothing');
+        ie_close('code');
+        itext('.');
+      ie_close('p');
+      $templateAlias2({code: 'import Last from \'crocks/Last\'\nimport Maybe from \'crocks/Maybe\'\n\nconst { Just, Nothing } = Maybe\n\nLast(Just([ 1, 2, 3 ]))\n//=> Last( Just [ 1, 2, 3 ] )\n\nLast(Nothing())\n//=> Last( Nothing )\n\nLast(null)\n//=> Last( Just null )\n\nLast(false)\n//=> Last( Just false )', mode: 'javascript'}, null, opt_ijData);
+    ie_close('article');
+    ie_open('article', null, null,
+        'id', 'topic-constructor');
+      ie_open('h2');
+        ie_open('a', null, null,
+            'id', 'constructor-methods',
+            'href', '#constructor-methods');
+          itext('Constructor Methods');
+        ie_close('a');
+      ie_close('h2');
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'empty',
+            'href', '#empty');
+          itext('empty');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Last.empty :: () -> Last a', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        ie_open('code');
+          itext('empty');
+        ie_close('code');
+        itext(' provides the identity for the ');
+        ie_open('code');
+          itext('Monoid');
+        ie_close('code');
+        itext(' in that when the value it provides is ');
+        ie_open('code');
+          itext('concat');
+        ie_close('code');
+        itext('ed to any other value, it will return the other value. In the case of ');
+        ie_open('code');
+          itext('Last');
+        ie_close('code');
+        itext(' the result of ');
+        ie_open('code');
+          itext('empty');
+        ie_close('code');
+        itext(' is ');
+        ie_open('a', null, null,
+            'href', '../crocks/Maybe.html#nothing');
+          ie_open('code');
+            itext('Nothing');
+          ie_close('code');
+        ie_close('a');
+        itext('. ');
+        ie_open('code');
+          itext('empty');
+        ie_close('code');
+        itext(' is available on both the Constructor and the Instance for convenience.');
+      ie_close('p');
+      $templateAlias2({code: 'import Last from \'crocks/Last\'\n\nconst { empty } = Last\n\nempty()\n//=> Last( Nothing )\n\nLast(3)\n  .concat(empty())\n//=> Last( Just 3 )\n\nempty()\n  .concat(Last(3))\n//=> Last( Just 3 )', mode: 'javascript'}, null, opt_ijData);
+    ie_close('article');
+    ie_open('article', null, null,
+        'id', 'topic-instance');
+      ie_open('h2');
+        ie_open('a', null, null,
+            'id', 'instance-methods',
+            'href', '#instance-methods');
+          itext('Instance Methods');
+        ie_close('a');
+      ie_close('h2');
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'equals',
+            'href', '#equals');
+          itext('equals');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Last a ~> b -> Boolean', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        itext('Used to compare the underlying values of (2) ');
+        ie_open('code');
+          itext('Last');
+        ie_close('code');
+        itext(' instances for equality by value, ');
+        ie_open('code');
+          itext('equals');
+        ie_close('code');
+        itext(' takes any given argument and returns ');
+        ie_open('code');
+          itext('true');
+        ie_close('code');
+        itext(' if the passed argument is a ');
+        ie_open('code');
+          itext('Last');
+        ie_close('code');
+        itext(' with an underlying value equal to the underlying value of the ');
+        ie_open('code');
+          itext('Last');
+        ie_close('code');
+        itext(' the method is being called on. If the passed argument is not a ');
+        ie_open('code');
+          itext('Last');
+        ie_close('code');
+        itext(' or the underlying values are not equal, ');
+        ie_open('code');
+          itext('equals');
+        ie_close('code');
+        itext(' will return ');
+        ie_open('code');
+          itext('false');
+        ie_close('code');
+        itext('.');
+      ie_close('p');
+      $templateAlias2({code: 'import Last from \'crocks/Last\'\n\nimport Maybe from \'crocks/Maybe\'\n\nLast(33)\n  .equals(Last(33))\n//=> true\n\nLast(42)\n  .equals(Last(10))\n//=> false\n\nLast({ a: 5 })\n  .equals({ a: 5 })\n//=> false\n\nLast(95)\n  .equals(95)\n//=> false\n\nLast(95)\n  .equals(Maybe.of(95))\n//=> false', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'concat',
+            'href', '#concat');
+          itext('concat');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Last a ~> Last a -> Last a', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        ie_open('code');
+          itext('concat');
+        ie_close('code');
+        itext(' is used to combine (2) ');
+        ie_open('code');
+          itext('Semigroup');
+        ie_close('code');
+        itext('s of the same type under an operation specified by the ');
+        ie_open('code');
+          itext('Semigroup');
+        ie_close('code');
+        itext('. In the case of ');
+        ie_open('code');
+          itext('Last');
+        ie_close('code');
+        itext(', it will always provide the last non-empty value. All previous non-empty values will be thrown away and will always result in the last non-empty value.');
+      ie_close('p');
+      $templateAlias2({code: 'import Last from \'crocks/Last\'\nimport concat from \'crocks/pointfree/concat\'\n\nconst a = Last(\'a\')\nconst b = Last(\'b\')\nconst c = Last(\'c\')\n\na.concat(b)\n//=> Last( Just "b" )\n\nb.concat(a)\n//=> Last( Just "a" )\n\nconcat(c, concat(b, a))\n//=> Last( Just "c" )\n\nconcat(concat(c, b), a)\n//=> Last( Just "c" )\n\nconcat(concat(a, b), c)\n//=> Last( Just "a" )', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'option',
+            'href', '#option');
+          itext('option');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Last a ~> a -> a', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        ie_open('code');
+          itext('Last');
+        ie_close('code');
+        itext(' wraps an underlying ');
+        ie_open('a', null, null,
+            'href', '../crocks/Maybe.html');
+          ie_open('code');
+            itext('Maybe');
+          ie_close('code');
+        ie_close('a');
+        itext(' which provides the ability to option out a value in the case of an ');
+        ie_open('a', null, null,
+            'href', '#empty');
+          ie_open('code');
+            itext('empty');
+          ie_close('code');
+        ie_close('a');
+        itext(' instance. Just like ');
+        ie_open('a', null, null,
+            'href', '../crocks/Maybe.html#option');
+          ie_open('code');
+            itext('option');
+          ie_close('code');
+        ie_close('a');
+        itext(' on a ');
+        ie_open('a', null, null,
+            'href', '../crocks/Maybe.html');
+          ie_open('code');
+            itext('Maybe');
+          ie_close('code');
+        ie_close('a');
+        itext(' instance, it takes a value as its argument. When run on an ');
+        ie_open('a', null, null,
+            'href', '#empty');
+          ie_open('code');
+            itext('empty');
+          ie_close('code');
+        ie_close('a');
+        itext(' instance, the provided default will be returned. If ');
+        ie_open('code');
+          itext('option');
+        ie_close('code');
+        itext(' is run on a non-empty instance however, the wrapped value will be extracted not only from the ');
+        ie_open('code');
+          itext('Last');
+        ie_close('code');
+        itext(' but also from the underlying ');
+        ie_open('a', null, null,
+            'href', '../crocks/Maybe.html#just');
+          ie_open('code');
+            itext('Just');
+          ie_close('code');
+        ie_close('a');
+        itext('.');
+      ie_close('p');
+      ie_open('p');
+        itext('If the underlying ');
+        ie_open('a', null, null,
+            'href', '../crocks/Maybe.html');
+          ie_open('code');
+            itext('Maybe');
+          ie_close('code');
+        ie_close('a');
+        itext(' is desired, the ');
+        ie_open('a', null, null,
+            'href', '#valueof');
+          ie_open('code');
+            itext('valueOf');
+          ie_close('code');
+        ie_close('a');
+        itext(' method can be used and will return the ');
+        ie_open('a', null, null,
+            'href', '../crocks/Maybe.html');
+          ie_open('code');
+            itext('Maybe');
+          ie_close('code');
+        ie_close('a');
+        itext(' instead.');
+      ie_close('p');
+      $templateAlias2({code: 'import Last from \'crocks/Last\'\n\nimport compose from \'crocks/helpers/compose\'\nimport chain from \'crocks/pointfree/chain\'\nimport isString from \'crocks/predicates/isString\'\nimport mconcatMap from \'crocks/helpers/mconcatMap\'\nimport prop from \'crocks/Maybe/prop\'\nimport safe from \'crocks/Maybe/safe\'\n\n// stringVal :: a -> Maybe String\nconst stringVal = compose(\n  chain(safe(isString)),\n  prop(\'val\')\n)\n\n// lastValid :: [ a ] -> Last String\nconst lastValid =\n  mconcatMap(Last, stringVal)\n\n// good :: [ Object ]\nconst good =\n  [ { val: 23 }, { val: \'string\' }, { val: \'23\' } ]\n\n// bad :: [ Object ]\nconst bad =\n  [ { val: 23 }, { val: null }, {} ]\n\nlastValid(good)\n  .option(\'\')\n//=> "23"\n\nlastValid(bad)\n  .option(\'\')\n//=> ""', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'valueof',
+            'href', '#valueof');
+          itext('valueOf');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Last a ~> () -> Maybe a', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        ie_open('code');
+          itext('valueOf');
+        ie_close('code');
+        itext(' is used on all ');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext(' ');
+        ie_open('code');
+          itext('Monoid');
+        ie_close('code');
+        itext('s as a means of extraction. While the extraction is available, types that implement ');
+        ie_open('code');
+          itext('valueOf');
+        ie_close('code');
+        itext(' are not necessarily a');
+        ie_open('code');
+          itext('Comonad');
+        ie_close('code');
+        itext('. This function is used primarily for convenience for some of the helper functions that ship with ');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext('. Calling ');
+        ie_open('code');
+          itext('valueOf');
+        ie_close('code');
+        itext(' on a ');
+        ie_open('code');
+          itext('Last');
+        ie_close('code');
+        itext(' instance will result in the underlying ');
+        ie_open('a', null, null,
+            'href', '../crocks/Maybe.html');
+          ie_open('code');
+            itext('Maybe');
+          ie_close('code');
+        ie_close('a');
+        itext('.');
+      ie_close('p');
+      $templateAlias2({code: 'import Last from \'crocks/Last\'\n\nimport Maybe from \'crocks/Maybe\'\nimport valueOf from \'crocks/pointfree/valueOf\'\n\nconst { Nothing } = Maybe\n\nvalueOf(Last(56))\n//=> Just 56\n\nvalueOf(Last.empty())\n//=> Nothing\n\nLast(37)\n  .concat(Last(99))\n  .valueOf()\n//=> Just 99\n\nLast(Nothing())\n  .concat(Last.empty())\n  .valueOf()\n//=> Nothing', mode: 'javascript'}, null, opt_ijData);
+    ie_close('article');
+    ie_open('article', null, null,
+        'id', 'topic-transformation');
+      ie_open('h2');
+        ie_open('a', null, null,
+            'id', 'transformation-functions',
+            'href', '#transformation-functions');
+          itext('Transformation Functions');
+        ie_close('a');
+      ie_close('h2');
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'eithertolast',
+            'href', '#eithertolast');
+          itext('eitherToLast');
+        ie_close('a');
+      ie_close('h4');
+      ie_open('p');
+        ie_open('code');
+          itext('crocks/Last/eitherToLast');
+        ie_close('code');
+      ie_close('p');
+      $templateAlias2({code: 'eitherToLast :: Either b a -> Last a\neitherToLast :: (a -> Either c b) -> a -> Last b', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        itext('Used to transform a given ');
+        ie_open('code');
+          itext('Either');
+        ie_close('code');
+        itext(' instance to a ');
+        ie_open('code');
+          itext('Last');
+        ie_close('code');
+        itext('instance, ');
+        ie_open('code');
+          itext('eitherToLast');
+        ie_close('code');
+        itext(' will turn a ');
+        ie_open('code');
+          itext('Right');
+        ie_close('code');
+        itext(' instance into a non-empty ');
+        ie_open('code');
+          itext('Last');
+        ie_close('code');
+        itext(', wrapping the original value contained in the ');
+        ie_open('code');
+          itext('Right');
+        ie_close('code');
+        itext('. All ');
+        ie_open('code');
+          itext('Left');
+        ie_close('code');
+        itext(' instances will map to an ');
+        ie_open('a', null, null,
+            'href', '#empty');
+          ie_open('code');
+            itext('empty');
+          ie_close('code');
+        ie_close('a');
+        itext(' ');
+        ie_open('code');
+          itext('Last');
+        ie_close('code');
+        itext(', mapping the originally contained value to a ');
+        ie_open('code');
+          itext('Unit');
+        ie_close('code');
+        itext('. Values on the ');
+        ie_open('code');
+          itext('Left');
+        ie_close('code');
+        itext(' will be lost and as such this transformation is considered lossy in that regard.');
+      ie_close('p');
+      ie_open('p');
+        itext('Like all ');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext(' transformation functions, ');
+        ie_open('code');
+          itext('eitherToLast');
+        ie_close('code');
+        itext(' has (2) possible signatures and will behave differently when passed either an ');
+        ie_open('code');
+          itext('Either');
+        ie_close('code');
+        itext(' instance or a function that returns an instance of ');
+        ie_open('code');
+          itext('Either');
+        ie_close('code');
+        itext('. When passed the instance, a transformed ');
+        ie_open('code');
+          itext('Last');
+        ie_close('code');
+        itext(' is returned. When passed an ');
+        ie_open('code');
+          itext('Either');
+        ie_close('code');
+        itext(' returning function, a function will be returned that takes a given value and returns a ');
+        ie_open('code');
+          itext('Last');
+        ie_close('code');
+        itext('.');
+      ie_close('p');
+      $templateAlias2({code: 'import Last from \'crocks/Last\'\nimport Either from \'crocks/Either\'\nimport eitherToLast from \'crocks/Last/eitherToLast\'\n\nimport concat from \'crocks/pointfree/concat\'\nimport constant from \'crocks/combinators/constant\'\nimport flip from \'crocks/combinators/flip\'\nimport ifElse from \'crocks/logic/ifElse\'\nimport isNumber from \'crocks/predicates/isNumber\'\nimport mapReduce from \'crocks/helpers/mapReduce\'\n\nconst { Left, Right } = Either\n\n// someNumber :: a -> Either String Number\nconst someNumber = ifElse(\n  isNumber,\n  Right,\n  constant(Left(\'Nope\'))\n)\n\n// lastNumber :: [ a ] -> Last Number\nconst lastNumber = mapReduce(\n  eitherToLast(someNumber),\n  flip(concat),\n  Last.empty()\n)\n\n// "Bad Times" is lost, mapped to Nothing\neitherToLast(Left(\'Bad Times\'))\n//=> Last( Nothing )\n\neitherToLast(Right(\'correct\'))\n//=> Last( Just "correct" )\n\nlastNumber([ \'string\', null, 34, 76 ])\n//=> Last( Just 76 )\n\nlastNumber([ \'string\', null, true ])\n//=> Last( Nothing )', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'firsttolast',
+            'href', '#firsttolast');
+          itext('firstToLast');
+        ie_close('a');
+      ie_close('h4');
+      ie_open('p');
+        ie_open('code');
+          itext('crocks/Last/firstToLast');
+        ie_close('code');
+      ie_close('p');
+      $templateAlias2({code: 'firstToLast :: First a -> Last a\nfirstToLast :: (a -> First b) -> a -> Last b', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        itext('Used to transform a given ');
+        ie_open('code');
+          itext('First');
+        ie_close('code');
+        itext(' instance to a ');
+        ie_open('code');
+          itext('Last');
+        ie_close('code');
+        itext(' instance, ');
+        ie_open('code');
+          itext('firstToLast');
+        ie_close('code');
+        itext('will turn a non-empty instance into a non-empty ');
+        ie_open('code');
+          itext('Last');
+        ie_close('code');
+        itext(' wrapping the original value contained within the ');
+        ie_open('code');
+          itext('First');
+        ie_close('code');
+        itext('. All ');
+        ie_open('a', null, null,
+            'href', '#empty');
+          ie_open('code');
+            itext('empty');
+          ie_close('code');
+        ie_close('a');
+        itext(' instances will map to an ');
+        ie_open('a', null, null,
+            'href', '#empty');
+          ie_open('code');
+            itext('empty');
+          ie_close('code');
+        ie_close('a');
+        itext(' ');
+        ie_open('code');
+          itext('Last');
         ie_close('code');
         itext('.');
       ie_close('p');
       ie_open('p');
-        itext('To access the types, just reference the folder like: ');
+        itext('Like all ');
         ie_open('code');
-          itext('crocks/Maybe');
+          itext('crocks');
         ie_close('code');
-        itext(', or');
+        itext(' transformation functions, ');
         ie_open('code');
-          itext('crocks/Result');
+          itext('firstToLast');
         ie_close('code');
-        itext('. If you want to access a function that constructs a given type, reference it by name, like: ');
+        itext(' has (2) possible signatures and will behave differently when passed either a ');
         ie_open('code');
-          itext('crocks/Maybe/safe');
+          itext('First');
         ie_close('code');
-        itext(' or ');
+        itext(' instance or a function that returns an instance of ');
         ie_open('code');
-          itext('crocks/Result/tryCatch');
+          itext('First');
         ie_close('code');
-        itext('. This organization helps ensure that you only include what you need.');
+        itext('. When passed the instance, a transformed ');
+        ie_open('code');
+          itext('Last');
+        ie_close('code');
+        itext(' is returned. When passed a ');
+        ie_open('code');
+          itext('First');
+        ie_close('code');
+        itext(' returning function, a function will be returned that takes a given value and returns a ');
+        ie_open('code');
+          itext('Last');
+        ie_close('code');
+        itext('.');
       ie_close('p');
-      ie_open('h3');
+      $templateAlias2({code: 'import Last  from \'crocks/Last\'\nimport First from \'crocks/First\'\nimport firstToLast from \'crocks/Last/firstToLast\'\n\nimport isString from \'crocks/predicates/isString\'\nimport mconcatMap from \'crocks/helpers/mconcatMap\'\nimport safe from \'crocks/Maybe/safe\'\n\n// firstString :: [ a ] -> First String\nconst firstString =\n  mconcatMap(First, safe(isString))\n\n// unfixFirstString :: [ a ] -> Last String\nconst unfixFirstString =\n  firstToLast(firstString)\n\nfirstToLast(First.empty())\n//=> Last( Nothing )\n\nfirstToLast(First(false))\n//=> Last( Just false )\n\nunfixFirstString([ \'one\', 2, \'Three\', 4 ])\n//=> Last( Just "one" )\n\nunfixFirstString([ \'one\', 2, \'Three\', 4 ])\n  .concat(Last(\'another string\'))\n//=> Last( Just "another string" )\n\nunfixFirstString([ 1, 2, 3, 4 ])\n  .concat(Last(\'Last String\'))\n//=> Last( Just "Last String" )', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
         ie_open('a', null, null,
-            'id', 'entire-library-commonjs',
-            'href', '#entire-library-commonjs');
-          itext('Entire library (CommonJS)');
+            'id', 'maybetolast',
+            'href', '#maybetolast');
+          itext('maybeToLast');
         ie_close('a');
-      ie_close('h3');
-      $templateAlias2({code: '// namespace entire suite to crocks variable\nconst crocks = require(\'crocks\')\n\n// pluck anything that does not require name-spacing\nconst { safe, isNumber } = crocks\n\n// still requires entire object, but removes name-spacing\nconst { and, liftA2 } = require(\'crocks\')\n\n// divide :: Number -> Number\nconst divide =\n  x => y => x / y\n\n// safeNumber :: a -> Maybe Number\nconst safeNumber =\n  safe(isNumber)\n\n// notZero :: a -> Maybe Number\nconst notZero = safe(\n  and(isNumber, x => x !== 0)\n)\n\n// safeDivide:: a -> Maybe Number\nconst safeDivide = crocks.curry(\n  (x, y) => liftA2(divide, safeNumber(x), notZero(y))\n)\n\nsafeDivide(20, 0)\n//=> Nothing\n\nsafeDivide(20, 5)\n//=> Just 4\n\nsafeDivide(\'number\', 5)\n//=> Nothing', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h3');
+      ie_close('h4');
+      ie_open('p');
+        ie_open('code');
+          itext('crocks/Last/maybeToLast');
+        ie_close('code');
+      ie_close('p');
+      $templateAlias2({code: 'maybeToLast :: Maybe a -> Last a\nmaybeToLast :: (a -> Maybe b) -> a -> Last b', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        itext('Used to transform a given ');
         ie_open('a', null, null,
-            'id', 'entire-library-js-modules',
-            'href', '#entire-library-js-modules');
-          itext('Entire library (JS Modules)');
+            'href', '../crocks/Maybe.html');
+          ie_open('code');
+            itext('Maybe');
+          ie_close('code');
         ie_close('a');
-      ie_close('h3');
-      $templateAlias2({code: '// namespace entire suite to crocks variable\nimport crocks from \'crocks\'\n\n// still imports entire object, but removes name-spacing\nimport { and, liftA2 }  from \'crocks\'\n\n// pluck anything that does not require name-spacing\nconst { safe, isNumber } = crocks\n\n// divide :: Number -> Number\nconst divide =\n  x => y => x / y\n\n// safeNumber :: a -> Maybe Number\nconst safeNumber =\n  safe(isNumber)\n\n// notZero :: a -> Maybe Number\nconst notZero = safe(\n  and(isNumber, x => x !== 0)\n)\n\n// safeDivide:: a -> Maybe Number\nconst safeDivide = crocks.curry(\n  (x, y) => liftA2(divide, safeNumber(x), notZero(y))\n)\n\nsafeDivide(20, 0)\n//=> Nothing\n\nsafeDivide(20, 5)\n//=> Just 4\n\nsafeDivide(\'number\', 5)\n//=> Nothing', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h3');
+        itext(' instance to a ');
+        ie_open('code');
+          itext('Last');
+        ie_close('code');
+        itext(' instance, ');
+        ie_open('code');
+          itext('maybeToLast');
+        ie_close('code');
+        itext('will turn a ');
         ie_open('a', null, null,
-            'id', 'single-entities-commonjs',
-            'href', '#single-entities-commonjs');
-          itext('Single entities (CommonJS)');
+            'href', '../crocks/Maybe.html#just');
+          ie_open('code');
+            itext('Just');
+          ie_close('code');
         ie_close('a');
-      ie_close('h3');
-      $templateAlias2({code: '// require in each entity directly\nconst and = require(\'crocks/logic/and\')\nconst curry = require(\'crocks/helpers/curry\')\nconst isNumber = require(\'crocks/predicates/isNumber\')\nconst liftA2 = require(\'crocks/helpers/liftA2\')\nconst safe = require(\'crocks/Maybe/safe\')\n\n// divide :: Number -> Number\nconst divide =\n  x => y => x / y\n\n// safeNumber :: a -> Maybe Number\nconst safeNumber =\n  safe(isNumber)\n\n// notZero :: a -> Maybe Number\nconst notZero = safe(\n  and(isNumber, x => x !== 0)\n)\n\n// safeDivide:: a -> Maybe Number\nconst safeDivide = curry(\n  (x, y) => liftA2(divide, safeNumber(x), notZero(y))\n)\n\nsafeDivide(20, 0)\n//=> Nothing\n\nsafeDivide(20, 5)\n//=> Just 4\n\nsafeDivide(\'number\', 5)\n//=> Nothing', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h3');
+        itext(' into a non-empty ');
+        ie_open('code');
+          itext('Last');
+        ie_close('code');
+        itext(' instance, wrapping the original value contained within the ');
+        ie_open('code');
+          itext('Last');
+        ie_close('code');
+        itext('. All ');
         ie_open('a', null, null,
-            'id', 'single-entities-js-modules',
-            'href', '#single-entities-js-modules');
-          itext('Single entities (JS Modules)');
+            'href', '../crocks/Maybe.html#nothing');
+          ie_open('code');
+            itext('Nothing');
+          ie_close('code');
         ie_close('a');
-      ie_close('h3');
-      $templateAlias2({code: '// import in each entity directly\nimport and from \'crocks/logic/and\'\nimport curry from \'crocks/helpers/curry\'\nimport isNumber from \'crocks/predicates/isNumber\'\nimport liftA2 from \'crocks/helpers/liftA2\'\nimport safe from \'crocks/Maybe/safe\'\n\n// divide :: Number -> Number\nconst divide =\n  x => y => x / y\n\n// safeNumber :: a -> Maybe Number\nconst safeNumber =\n  safe(isNumber)\n\n// notZero :: a -> Maybe Number\nconst notZero = safe(\n  and(isNumber, x => x !== 0)\n)\n\n// safeDivide:: a -> Maybe Number\nconst safeDivide = curry(\n  (x, y) => liftA2(divide, safeNumber(x), notZero(y))\n)\n\nsafeDivide(20, 0)\n//=> Nothing\n\nsafeDivide(20, 5)\n//=> Just 4\n\nsafeDivide(\'number\', 5)\n//=> Nothing', mode: 'javascript'}, null, opt_ijData);
+        itext(' instances will map to an ');
+        ie_open('a', null, null,
+            'href', '#empty');
+          ie_open('code');
+            itext('empty');
+          ie_close('code');
+        ie_close('a');
+        itext(' ');
+        ie_open('code');
+          itext('Last');
+        ie_close('code');
+        itext(' instance.');
+      ie_close('p');
+      ie_open('p');
+        itext('This function is available mostly for completion sake, as ');
+        ie_open('code');
+          itext('Last');
+        ie_close('code');
+        itext(' can always take a ');
+        ie_open('a', null, null,
+            'href', '../crocks/Maybe.html');
+          ie_open('code');
+            itext('Maybe');
+          ie_close('code');
+        ie_close('a');
+        itext(' as its argument during construction. So while there is not a real need for this to be used for transforming instances, it can come in handy for lifting ');
+        ie_open('a', null, null,
+            'href', '../crocks/Maybe.html');
+          ie_open('code');
+            itext('Maybe');
+          ie_close('code');
+        ie_close('a');
+        itext(' returning functions.');
+      ie_close('p');
+      ie_open('p');
+        itext('Like all ');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext(' transformation functions, ');
+        ie_open('code');
+          itext('maybeToLast');
+        ie_close('code');
+        itext(' has (2) possible signatures and will behave differently when passed either a ');
+        ie_open('a', null, null,
+            'href', '../crocks/Maybe.html');
+          ie_open('code');
+            itext('Maybe');
+          ie_close('code');
+        ie_close('a');
+        itext(' instance or a function that returns an instance of ');
+        ie_open('a', null, null,
+            'href', '../crocks/Maybe.html');
+          ie_open('code');
+            itext('Maybe');
+          ie_close('code');
+        ie_close('a');
+        itext('. When passed the instance, a transformed ');
+        ie_open('code');
+          itext('Last');
+        ie_close('code');
+        itext(' is returned. When passed a ');
+        ie_open('a', null, null,
+            'href', '../crocks/Maybe.html');
+          ie_open('code');
+            itext('Maybe');
+          ie_close('code');
+        ie_close('a');
+        itext(' returning function, a function will be returned that takes a given value and returns a ');
+        ie_open('code');
+          itext('Last');
+        ie_close('code');
+        itext('.');
+      ie_close('p');
+      $templateAlias2({code: 'import Last from \'crocks/Last\'\nimport Maybe from \'crocks/Maybe\'\nimport maybeToLast from \'crocks/Last/maybeToLast\'\n\nimport chain from \'crocks/pointfree/chain\'\nimport compose from \'crocks/helpers/compose\'\nimport isNumber from \'crocks/predicates/isNumber\'\nimport prop from \'crocks/Maybe/prop\'\nimport safe from \'crocks/Maybe/safe\'\n\nconst { Nothing, Just } = Maybe\n\n// numVal :: a -> Maybe Number\nconst numVal = compose(\n  chain(safe(isNumber)),\n  prop(\'val\')\n)\n\n// lastNumVal :: a -> Last Number\nconst lastNumVal =\n  maybeToLast(numVal)\n\nmaybeToLast(Just(99))\n//=> Last( Just 99 )\n\nmaybeToLast(Nothing())\n//=> Last( Nothing )\n\nLast(Just(99))\n//=> Last( Just 99 )\n\nLast(Nothing())\n//=> Last( Nothing )\n\nLast(Just(80))\n  .concat(lastNumVal({ val: 97 }))\n//=> Last( Just 97 )\n\nlastNumVal({ val: 97 })\n  .concat(Last(80))\n//=> Last( Just 80 )\n\nlastNumVal(null)\n  .concat(Last(80))\n//=> Last( Just 80 )', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'resulttolast',
+            'href', '#resulttolast');
+          itext('resultToLast');
+        ie_close('a');
+      ie_close('h4');
+      ie_open('p');
+        ie_open('code');
+          itext('crocks/Last/resultToLast');
+        ie_close('code');
+      ie_close('p');
+      $templateAlias2({code: 'resultToLast :: Result e a -> Last a\nresultToLast :: (a -> Result e b) -> a -> Last b', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        itext('Used to transform a given ');
+        ie_open('code');
+          itext('Result');
+        ie_close('code');
+        itext(' instance to a ');
+        ie_open('code');
+          itext('Last');
+        ie_close('code');
+        itext(' instance,');
+        ie_open('code');
+          itext('resultToLast');
+        ie_close('code');
+        itext(' will turn an ');
+        ie_open('code');
+          itext('Ok');
+        ie_close('code');
+        itext(' instance into a non-empty ');
+        ie_open('code');
+          itext('Last');
+        ie_close('code');
+        itext(', wrapping the original value contained in the ');
+        ie_open('code');
+          itext('Ok');
+        ie_close('code');
+        itext('. All ');
+        ie_open('code');
+          itext('Err');
+        ie_close('code');
+        itext(' instances will map to an ');
+        ie_open('a', null, null,
+            'href', '#empty');
+          ie_open('code');
+            itext('empty');
+          ie_close('code');
+        ie_close('a');
+        itext(' ');
+        ie_open('code');
+          itext('Last');
+        ie_close('code');
+        itext(', mapping the originally contained value to a ');
+        ie_open('code');
+          itext('Unit');
+        ie_close('code');
+        itext('. Values on the ');
+        ie_open('code');
+          itext('Err');
+        ie_close('code');
+        itext(' will be lost and as such this transformation is considered lossy in that regard.');
+      ie_close('p');
+      ie_open('p');
+        itext('Like all ');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext(' transformation functions, ');
+        ie_open('code');
+          itext('resultToLast');
+        ie_close('code');
+        itext(' has (2) possible signatures and will behave differently when passed either an ');
+        ie_open('code');
+          itext('Result');
+        ie_close('code');
+        itext(' instance or a function that returns an instance of ');
+        ie_open('code');
+          itext('Result');
+        ie_close('code');
+        itext('. When passed the instance, a transformed ');
+        ie_open('code');
+          itext('Last');
+        ie_close('code');
+        itext(' is returned. When passed a ');
+        ie_open('code');
+          itext('Result');
+        ie_close('code');
+        itext(' returning function, a function will be returned that takes a given value and returns a ');
+        ie_open('code');
+          itext('Last');
+        ie_close('code');
+        itext('.');
+      ie_close('p');
+      $templateAlias2({code: 'import Last from \'crocks/Last\'\nimport Result from \'crocks/Result\'\nimport resultToLast from \'crocks/Last/resultToLast\'\n\nimport isNumber from \'crocks/predicates/isNumber\'\nimport tryCatch from \'crocks/Result/tryCatch\'\n\nconst { Err, Ok } = Result\n\nfunction onlyNums(x) {\n  if(!isNumber(x)) {\n    throw new Error(\'something amiss\')\n  }\n  return x\n}\n\n// lastNum :: a -> Last Number\nconst lastNum =\n  resultToLast(tryCatch(onlyNums))\n\n// "this is bad" is lost, mapped to Nothing\nresultToLast(Err(\'this is bad\'))\n//=> Last( Nothing )\n\nresultToLast(Ok(\'this is great\'))\n//=> Last( Just "this is great" )\n\nlastNum(90)\n  .concat(Last(0))\n//=> Last( Just 0 )\n\nlastNum(null)\n  .concat(Last(0))\n//=> Last( Just 0 )', mode: 'javascript'}, null, opt_ijData);
     ie_close('article');
     ie_open('input', null, null,
         'type', 'hidden',
@@ -28552,11 +29358,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'value', opt_data.site.title);
     ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({content: param212}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param2678}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'lZXkP.render';
+  $render.soyTemplateName = 'UvPGU.render';
 }
 
 exports.render.params = ["page","site"];
@@ -28566,22 +29372,14 @@ return exports;
 
 });
 
-class lZXkP extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(lZXkP, templates);
+class UvPGU extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(UvPGU, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
 
 
 /***/ }),
-/* 236 */,
-/* 237 */,
-/* 238 */,
-/* 239 */,
-/* 240 */,
-/* 241 */,
-/* 242 */,
-/* 243 */,
 /* 244 */,
 /* 245 */,
 /* 246 */,
@@ -28606,7 +29404,15 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(lZXkP, templates);
 /* 265 */,
 /* 266 */,
 /* 267 */,
-/* 268 */
+/* 268 */,
+/* 269 */,
+/* 270 */,
+/* 271 */,
+/* 272 */,
+/* 273 */,
+/* 274 */,
+/* 275 */,
+/* 276 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28642,9 +29448,9 @@ __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _gettingStartedSoy = __webpack_require__(235);
+var _LastSoy = __webpack_require__(243);
 
-var _gettingStartedSoy2 = _interopRequireDefault(_gettingStartedSoy);
+var _LastSoy2 = _interopRequireDefault(_LastSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28654,23 +29460,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var lZXkP = function (_Component) {
-  _inherits(lZXkP, _Component);
+var UvPGU = function (_Component) {
+  _inherits(UvPGU, _Component);
 
-  function lZXkP() {
-    _classCallCheck(this, lZXkP);
+  function UvPGU() {
+    _classCallCheck(this, UvPGU);
 
-    return _possibleConstructorReturn(this, (lZXkP.__proto__ || Object.getPrototypeOf(lZXkP)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (UvPGU.__proto__ || Object.getPrototypeOf(UvPGU)).apply(this, arguments));
   }
 
-  return lZXkP;
+  return UvPGU;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(lZXkP, _gettingStartedSoy2.default);
+_metalSoy2.default.register(UvPGU, _LastSoy2.default);
 
-exports.default = lZXkP;
+exports.default = UvPGU;
 
 /***/ })
-],[268]);
+],[276]);

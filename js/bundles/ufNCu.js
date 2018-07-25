@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([29,33,34,35],[
+webpackJsonppageComponent([14,34,35,36],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19884,7 +19884,7 @@ if (goog.DEBUG) {
  * @return {void}
  * @suppress {checkTypes}
  */
-function __deltemplate_s152_d34389eb(opt_data, opt_ignored, opt_ijData) {
+function __deltemplate_s174_d34389eb(opt_data, opt_ignored, opt_ijData) {
   ie_open('a', null, null,
       'class', 'sidebar-link ' + (opt_data.page.active ? 'sidebar-link-selected' : ''),
       'href', opt_data.page.url);
@@ -19893,16 +19893,16 @@ function __deltemplate_s152_d34389eb(opt_data, opt_ignored, opt_ijData) {
           'class', 'sidebar-icon icon-16-' + opt_data.page.icon);
     }
     ie_open('span');
-      var dyn10 = opt_data.page.title;
-      if (typeof dyn10 == 'function') dyn10(); else if (dyn10 != null) itext(dyn10);
+      var dyn12 = opt_data.page.title;
+      if (typeof dyn12 == 'function') dyn12(); else if (dyn12 != null) itext(dyn12);
     ie_close('span');
   ie_close('a');
 }
-exports.__deltemplate_s152_d34389eb = __deltemplate_s152_d34389eb;
+exports.__deltemplate_s174_d34389eb = __deltemplate_s174_d34389eb;
 if (goog.DEBUG) {
-  __deltemplate_s152_d34389eb.soyTemplateName = 'Sidebar.__deltemplate_s152_d34389eb';
+  __deltemplate_s174_d34389eb.soyTemplateName = 'Sidebar.__deltemplate_s174_d34389eb';
 }
-soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'sidebar', 0, __deltemplate_s152_d34389eb);
+soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'sidebar', 0, __deltemplate_s174_d34389eb);
 
 exports.render.params = ["section","site"];
 exports.render.types = {"section":"any","site":"any"};
@@ -20091,8 +20091,8 @@ function $render(opt_data, opt_ignored, opt_ijData) {
       ie_void('span', null, null,
           'class', 'icon icon-16-clock');
       itext(' ');
-      var dyn11 = opt_data.time;
-      if (typeof dyn11 == 'function') dyn11(); else if (dyn11 != null) itext(dyn11);
+      var dyn13 = opt_data.time;
+      if (typeof dyn13 == 'function') dyn13(); else if (dyn13 != null) itext(dyn13);
     }
   ie_close('p');
 }
@@ -28351,12 +28351,28 @@ exports.default = parseFromAnchor;
 /* 217 */,
 /* 218 */,
 /* 219 */,
-/* 220 */
+/* 220 */,
+/* 221 */,
+/* 222 */,
+/* 223 */,
+/* 224 */,
+/* 225 */,
+/* 226 */,
+/* 227 */,
+/* 228 */,
+/* 229 */,
+/* 230 */,
+/* 231 */,
+/* 232 */,
+/* 233 */,
+/* 234 */,
+/* 235 */,
+/* 236 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "rTWen", function() { return rTWen; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ufNCu", function() { return ufNCu; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28368,15 +28384,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var templates;
 goog.loadModule(function(exports) {
 
-// This file was automatically generated from Equiv.soy.
+// This file was automatically generated from getting-started.soy.
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace rTWen.
+ * @fileoverview Templates in namespace ufNCu.
  * @public
  */
 
-goog.module('rTWen.incrementaldom');
+goog.module('ufNCu.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28410,285 +28426,123 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var param707 = function() {
-    $templateAlias2({code: 'Equiv a a Boolean', mode: 'haskell'}, null, opt_ijData);
-    ie_open('p');
-      itext('Defined as a Monoidal Contravariant datatype, ');
-      ie_open('code');
-        itext('Equiv');
-      ie_close('code');
-      itext(' can be used to test equivalence between (2) values of a given type. It does this by wrapping a binary equivalence function of the form ');
-      ie_open('code');
-        itext('(a, a) -> Boolean');
-      ie_close('code');
-      itext('. Most of the time strict equality is used, but other functions of the required form can provide some powerful results.');
-    ie_close('p');
-    ie_open('p');
-      itext('While the far right parameter is always fixed to ');
-      ie_open('code');
-        itext('Boolean');
-      ie_close('code');
-      itext(' it cannot be Covariant, but is Contravariant allowing both inputs to vary in their type.');
-      ie_open('code');
-        itext('Equiv');
-      ie_close('code');
-      itext(' is also a ');
-      ie_open('a', null, null,
-          'href', '../monoids/index.html');
-        ie_open('code');
-          itext('Monoid');
-        ie_close('code');
-      ie_close('a');
-      itext(' and will concat the results of (2) ');
-      ie_open('code');
-        itext('Equiv');
-      ie_close('code');
-      itext('s under logical conjunction, with it\'s empty value always returning ');
-      ie_open('code');
-        itext('true');
-      ie_close('code');
-      itext('.');
-    ie_close('p');
-    ie_open('p');
-      itext('As ');
-      ie_open('code');
-        itext('Equiv');
-      ie_close('code');
-      itext(' wraps a function, it is lazy and a given instance will not produce a result until both arguments are satisfied. A given instance can be run by calling the method ');
-      ie_open('a', null, null,
-          'href', '#comparewith');
-        ie_open('code');
-          itext('compareWith');
-        ie_close('code');
-      ie_close('a');
-      itext(', providing both values for comparison.');
-    ie_close('p');
-    $templateAlias2({code: 'import Equiv from \'crocks/Equiv\'\n\nimport equals from \'crocks/pointfree/equals\'\n\n// toString :: a -> String\nconst toString =\n  x => x.toString()\n\n// length :: a -> Number\nconst length = x =>\n  x && x.length ? x.length : 0\n\n// eq :: Equiv a a\nconst eq =\n  Equiv(equals)\n\neq.contramap(toString)\n  .compareWith(\'123\', 123)\n//=> true\n\neq.contramap(length)\n  .compareWith([ 1, 2, 3 ], [ \'a\', \'b\' ])\n//=> false', mode: 'javascript'}, null, opt_ijData);
+  var param212 = function() {
     ie_open('article', null, null,
-        'id', 'topic-implements');
+        'id', 'installation');
       ie_open('h2');
         ie_open('a', null, null,
-            'id', 'implements',
-            'href', '#implements');
-          itext('Implements');
+            'id', 'installation',
+            'href', '#installation');
+          itext('Installation');
         ie_close('a');
       ie_close('h2');
       ie_open('p');
-        ie_open('code');
-          itext('Semigroup');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('Monoid');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('Contravariant');
-        ie_close('code');
-      ie_close('p');
-    ie_close('article');
-    ie_open('article', null, null,
-        'id', 'topic-constructor');
-      ie_open('h2');
-        ie_open('a', null, null,
-            'id', 'constructor-methods',
-            'href', '#constructor-methods');
-          itext('Constructor Methods');
-        ie_close('a');
-      ie_close('h2');
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'empty',
-            'href', '#empty');
-          itext('empty');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Equiv.empty :: () -> Equiv a a', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        ie_open('code');
-          itext('empty');
-        ie_close('code');
-        itext(' provides the identity for the ');
-        ie_open('code');
-          itext('Monoid');
-        ie_close('code');
-        itext(' in that when the value it provides is ');
-        ie_open('code');
-          itext('concat');
-        ie_close('code');
-        itext('ed to any other value, it will return the other value. In the case of ');
-        ie_open('code');
-          itext('Equiv');
-        ie_close('code');
-        itext(' the result of ');
-        ie_open('code');
-          itext('empty');
-        ie_close('code');
-        itext(' is an ');
-        ie_open('code');
-          itext('Equiv');
-        ie_close('code');
-        itext(' that will always return');
-        ie_open('code');
-          itext('true');
-        ie_close('code');
-        itext('. ');
-        ie_open('code');
-          itext('empty');
-        ie_close('code');
-        itext(' is available on both the Constructor and the Instance for convenience.');
-      ie_close('p');
-      $templateAlias2({code: 'import Equiv from \'crocks/Equiv\'\n\nimport equals from \'crocks/pointfree/equals\'\n\nconst eq =\n  Equiv(equals)\n\nconst empty =\n  Equiv.empty()\n\neq\n  .concat(empty)\n  .compareWith({ a: 32 }, { a: 32 })\n//=> true\n\nempty\n  .concat(eq)\n  .compareWith({ a: 32 }, { a: 32 })\n//=> true\n\nempty\n  .concat(eq)\n  .compareWith({ a: 32, b: 19 }, { a: 32 })\n//=> false', mode: 'javascript'}, null, opt_ijData);
-    ie_close('article');
-    ie_open('article', null, null,
-        'id', 'topic-instance');
-      ie_open('h2');
-        ie_open('a', null, null,
-            'id', 'instance-methods',
-            'href', '#instance-methods');
-          itext('Instance Methods');
-        ie_close('a');
-      ie_close('h2');
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'concat',
-            'href', '#concat');
-          itext('concat');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Equiv a a ~> Equiv a a -> Equiv a a', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        ie_open('code');
-          itext('concat');
-        ie_close('code');
-        itext(' is used to combine (2) ');
-        ie_open('code');
-          itext('Semigroup');
-        ie_close('code');
-        itext('s of the same type under an operation specified by the ');
-        ie_open('code');
-          itext('Semigroup');
-        ie_close('code');
-        itext('. In the case of ');
-        ie_open('code');
-          itext('Equiv');
-        ie_close('code');
-        itext(', the results of both');
-        ie_open('code');
-          itext('Equiv');
-        ie_close('code');
-        itext('s are combined under logical conjunction.');
-      ie_close('p');
-      $templateAlias2({code: 'import Equiv from \'crocks/Equiv\'\n\nimport compareWith from \'crocks/pointfree/compareWith\'\nimport equals from \'crocks/pointfree/equals\'\nimport isSameType from \'crocks/predicates/isSameType\'\nimport propOr from \'crocks/helpers/propOr\'\n\n// objLength :: Object -> Number\nconst objLength =\n  x => Object.keys(x).length\n\n// eq :: Equiv a a\nconst eq =\n  Equiv(equals)\n\n// sameType :: Equiv a a\nconst sameType =\n  Equiv(isSameType)\n\n// sameType :: Equiv Object Object\nconst length =\n  eq.contramap(objLength)\n\n// sameType :: Equiv a a\nconst sameTypeProp = key =>\n  sameType.contramap(propOr(null, key))\n\n// run :: Equiv Object Object\nconst run = compareWith(\n  { a: 19, b: \'string\' },\n  { a: 32, c: false }\n)\n\nrun(length)\n//=> true\n\nrun(sameTypeProp(\'a\'))\n//=> true\n\nrun(sameTypeProp(\'b\'))\n//=> false\n\nrun(\n  sameTypeProp(\'a\')\n    .concat(length)\n)\n// true\n\nrun(\n  sameTypeProp(\'b\')\n    .concat(length)\n)\n// false', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'contramap',
-            'href', '#contramap');
-          itext('contramap');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Equiv a a ~> (b -> a) -> Equiv b b', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('The far right parameter of ');
-        ie_open('code');
-          itext('Equiv');
-        ie_close('code');
-        itext(' fixed to ');
-        ie_open('code');
-          itext('Boolean');
-        ie_close('code');
-        itext(' which means we cannot map the value as expected. However the left two parameters can vary, although they must vary in the same manner.');
-      ie_close('p');
-      ie_open('p');
-        itext('This is where ');
-        ie_open('code');
-          itext('contramap');
-        ie_close('code');
-        itext(' comes into play as it can be used to adapt an ');
-        ie_open('code');
-          itext('Equiv');
-        ie_close('code');
-        itext('of a given type to accept a different type or modify the value. Provide it a function that has a return type that matches the input types of the ');
-        ie_open('code');
-          itext('Equiv');
-        ie_close('code');
-        itext('. This will return a new ');
-        ie_open('code');
-          itext('Equiv');
-        ie_close('code');
-        itext(' matching the input type of the provided function.');
-      ie_close('p');
-      $templateAlias2({code: 'import Equiv from \'crocks/Equiv\'\n\nimport equals from \'crocks/pointfree/equals\'\n\n// length :: String -> Number\nconst length =\n  x => x.length\n\n// eq :: Equiv a a\nconst eq =\n  Equiv(equals)\n\n// sameLength :: Equiv String String\nconst sameLength =\n  eq.contramap(length)\n\n// sameAmplitude :: Equiv Float Float\nconst sameAmplitude =\n  eq.contramap(Math.abs)\n\nsameAmplitude\n  .compareWith(-0.5011, 0.5011)\n//=> true\n\nsameAmplitude\n  .compareWith(-0.755, 0.8023)\n//=> false\n\nsameLength\n  .compareWith(\'aBcD\', \'1234\')\n//=> true\n\nsameLength\n  .compareWith(\'AB\', \'ABC\')\n//=> false', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'valueof',
-            'href', '#valueof');
-          itext('valueOf');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Equiv a a ~> () -> a -> a -> Boolean', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        ie_open('code');
-          itext('valueOf');
-        ie_close('code');
-        itext(' is used on all ');
         ie_open('code');
           itext('crocks');
         ie_close('code');
-        itext(' ');
+        itext(' is available from ');
         ie_open('code');
-          itext('Monoid');
+          itext('npm');
         ie_close('code');
-        itext('s as a means of extraction. While the extraction is available, types that implement ');
-        ie_open('code');
-          itext('valueOf');
-        ie_close('code');
-        itext(' are not necessarily a');
-        ie_open('code');
-          itext('Comonad');
-        ie_close('code');
-        itext('. This function is used primarily for convenience for some of the helper functions that ship with ');
+        itext(' and is just a shell command away. All you need to do is run the following to save it as a dependency in your current project folder:');
+      ie_close('p');
+      $templateAlias2({code: '$ npm install crocks -S', mode: 'text'}, null, opt_ijData);
+      ie_open('p');
+        itext('This will pull down ');
         ie_open('code');
           itext('crocks');
         ie_close('code');
-        itext('. Calling ');
+        itext(' into your project\'s ');
         ie_open('code');
-          itext('valueOf');
+          itext('node_modules');
         ie_close('code');
-        itext(' on an ');
-        ie_open('code');
-          itext('Equiv');
-        ie_close('code');
-        itext('instance will result in the underlying curried equivalence function.');
+        itext(' folder and can be accessed by adding something like the following in the file that needs it:');
       ie_close('p');
-      $templateAlias2({code: 'import Equiv from \'crocks/Equiv\'\n\nimport compose from \'crocks/helpers/compose\'\nimport equals from \'crocks/pointfree/equals\'\nimport propOr from \'crocks/helpers/propOr\'\n\n// toLower :: String -> String\nconst toLower =\n  x => x.toLowerCase()\n\n// length :: String -> String\nconst length =\n  x => x.length\n\n// lowerName :: Object -> String\nconst lowerName =\n  compose(toLower, propOr(\'\', \'name\'))\n\n// itemsLen :: Object -> Number\nconst itemsLen =\n  compose(length, propOr(\'\', \'items\'))\n\n// eq :: Equiv a a\nconst eq =\n  Equiv(equals)\n\n// checkName :: Equiv Object Object\nconst checkName =\n  eq.contramap(lowerName)\n\n// checkName :: Equiv Object Object\nconst checkItems =\n  eq.contramap(itemsLen)\n\n// test :: Object -> Object -> Boolean\nconst test =\n  checkName\n    .concat(checkItems)\n    .valueOf()\n\ntest(\n  { name: \'Bob\', items: [ 1, 2, 4 ] },\n  { name: \'bOb\', items: [ 9, 12, 9 ] }\n)\n//=> true', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
+      $templateAlias2({code: '// node require syntax\nconst crocks = require(\'crocks\')\n\n// Javascript modules (if you are transpiling)\nimport crocks from \'crocks\'', mode: 'javascript'}, null, opt_ijData);
+    ie_close('article');
+    ie_open('article', null, null,
+        'id', 'import-only-what-you-need');
+      ie_open('h2');
         ie_open('a', null, null,
-            'id', 'comparewith',
-            'href', '#comparewith');
-          itext('compareWith');
+            'id', 'import-only-whats-needed',
+            'href', '#import-only-whats-needed');
+          itext('Import only what\'s needed');
         ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Equiv a a ~> a -> a -> Boolean', mode: 'haskell'}, null, opt_ijData);
+      ie_close('h2');
       ie_open('p');
-        itext('As ');
+        itext('There is a lot to this library, and as such it may not be desired to bring in the whole thing when bundling for a library or frontend application. If this is the case, the code is organized in a manner that groups all functions that return or construct a given ADT into their respective folders. While general purpose functions are spread across the following folders: ');
         ie_open('code');
-          itext('Equiv');
+          itext('combinators');
         ie_close('code');
-        itext(' wraps a function, it needs a means to be run with two values for comparison. Instances provide a curried method called ');
+        itext(', ');
         ie_open('code');
-          itext('compareWith');
+          itext('helpers');
         ie_close('code');
-        itext(' that takes two values for comparison and will run them through the equivalence function, returning the resulting ');
+        itext(', ');
         ie_open('code');
-          itext('Boolean');
+          itext('logic');
+        ie_close('code');
+        itext(', ');
+        ie_open('code');
+          itext('pointfree');
+        ie_close('code');
+        itext(' and ');
+        ie_open('code');
+          itext('predicates');
         ie_close('code');
         itext('.');
       ie_close('p');
       ie_open('p');
-        itext('Due to the laziness of this type, complicated comparisons can be built out from combining and mapping smaller, simpler units of equivalence comparison.');
+        itext('To access the types, just reference the folder like: ');
+        ie_open('code');
+          itext('crocks/Maybe');
+        ie_close('code');
+        itext(', or');
+        ie_open('code');
+          itext('crocks/Result');
+        ie_close('code');
+        itext('. If you want to access a function that constructs a given type, reference it by name, like: ');
+        ie_open('code');
+          itext('crocks/Maybe/safe');
+        ie_close('code');
+        itext(' or ');
+        ie_open('code');
+          itext('crocks/Result/tryCatch');
+        ie_close('code');
+        itext('. This organization helps ensure that you only include what you need.');
       ie_close('p');
-      $templateAlias2({code: 'import Equiv from \'crocks/Equiv\'\n\n// both :: Equiv Boolean Boolean\nconst both =\n  Equiv((x, y) => x && y)\n\n// isEven :: Number -> Boolean\nconst isEven =\n  x => x % 2 === 0\n\n// isBig :: Number -> Boolean\nconst isBig =\n  x => x > 10\n\n// bothEven :: Equiv Number Number\nconst bothEven =\n  both.contramap(isEven)\n\n// bothBig :: Equiv Number Number\nconst bothBig =\n  both.contramap(isBig)\n\nbothEven\n  .compareWith(12, 20)\n//=> true\n\nbothEven\n  .compareWith(17, 20)\n//=> false\n\nbothBig\n  .compareWith(17)(20)\n//=> true\n\nbothBig\n  .compareWith(7)(20)\n//=> false\n\nbothBig\n  .concat(bothEven)\n  .compareWith(8)(54)\n//=> false', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h3');
+        ie_open('a', null, null,
+            'id', 'entire-library-commonjs',
+            'href', '#entire-library-commonjs');
+          itext('Entire library (CommonJS)');
+        ie_close('a');
+      ie_close('h3');
+      $templateAlias2({code: '// namespace entire suite to crocks variable\nconst crocks = require(\'crocks\')\n\n// pluck anything that does not require name-spacing\nconst { safe, isNumber } = crocks\n\n// still requires entire object, but removes name-spacing\nconst { and, liftA2 } = require(\'crocks\')\n\n// divide :: Number -> Number\nconst divide =\n  x => y => x / y\n\n// safeNumber :: a -> Maybe Number\nconst safeNumber =\n  safe(isNumber)\n\n// notZero :: a -> Maybe Number\nconst notZero = safe(\n  and(isNumber, x => x !== 0)\n)\n\n// safeDivide:: a -> Maybe Number\nconst safeDivide = crocks.curry(\n  (x, y) => liftA2(divide, safeNumber(x), notZero(y))\n)\n\nsafeDivide(20, 0)\n//=> Nothing\n\nsafeDivide(20, 5)\n//=> Just 4\n\nsafeDivide(\'number\', 5)\n//=> Nothing', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h3');
+        ie_open('a', null, null,
+            'id', 'entire-library-js-modules',
+            'href', '#entire-library-js-modules');
+          itext('Entire library (JS Modules)');
+        ie_close('a');
+      ie_close('h3');
+      $templateAlias2({code: '// namespace entire suite to crocks variable\nimport crocks from \'crocks\'\n\n// still imports entire object, but removes name-spacing\nimport { and, liftA2 }  from \'crocks\'\n\n// pluck anything that does not require name-spacing\nconst { safe, isNumber } = crocks\n\n// divide :: Number -> Number\nconst divide =\n  x => y => x / y\n\n// safeNumber :: a -> Maybe Number\nconst safeNumber =\n  safe(isNumber)\n\n// notZero :: a -> Maybe Number\nconst notZero = safe(\n  and(isNumber, x => x !== 0)\n)\n\n// safeDivide:: a -> Maybe Number\nconst safeDivide = crocks.curry(\n  (x, y) => liftA2(divide, safeNumber(x), notZero(y))\n)\n\nsafeDivide(20, 0)\n//=> Nothing\n\nsafeDivide(20, 5)\n//=> Just 4\n\nsafeDivide(\'number\', 5)\n//=> Nothing', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h3');
+        ie_open('a', null, null,
+            'id', 'single-entities-commonjs',
+            'href', '#single-entities-commonjs');
+          itext('Single entities (CommonJS)');
+        ie_close('a');
+      ie_close('h3');
+      $templateAlias2({code: '// require in each entity directly\nconst and = require(\'crocks/logic/and\')\nconst curry = require(\'crocks/helpers/curry\')\nconst isNumber = require(\'crocks/predicates/isNumber\')\nconst liftA2 = require(\'crocks/helpers/liftA2\')\nconst safe = require(\'crocks/Maybe/safe\')\n\n// divide :: Number -> Number\nconst divide =\n  x => y => x / y\n\n// safeNumber :: a -> Maybe Number\nconst safeNumber =\n  safe(isNumber)\n\n// notZero :: a -> Maybe Number\nconst notZero = safe(\n  and(isNumber, x => x !== 0)\n)\n\n// safeDivide:: a -> Maybe Number\nconst safeDivide = curry(\n  (x, y) => liftA2(divide, safeNumber(x), notZero(y))\n)\n\nsafeDivide(20, 0)\n//=> Nothing\n\nsafeDivide(20, 5)\n//=> Just 4\n\nsafeDivide(\'number\', 5)\n//=> Nothing', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h3');
+        ie_open('a', null, null,
+            'id', 'single-entities-js-modules',
+            'href', '#single-entities-js-modules');
+          itext('Single entities (JS Modules)');
+        ie_close('a');
+      ie_close('h3');
+      $templateAlias2({code: '// import in each entity directly\nimport and from \'crocks/logic/and\'\nimport curry from \'crocks/helpers/curry\'\nimport isNumber from \'crocks/predicates/isNumber\'\nimport liftA2 from \'crocks/helpers/liftA2\'\nimport safe from \'crocks/Maybe/safe\'\n\n// divide :: Number -> Number\nconst divide =\n  x => y => x / y\n\n// safeNumber :: a -> Maybe Number\nconst safeNumber =\n  safe(isNumber)\n\n// notZero :: a -> Maybe Number\nconst notZero = safe(\n  and(isNumber, x => x !== 0)\n)\n\n// safeDivide:: a -> Maybe Number\nconst safeDivide = curry(\n  (x, y) => liftA2(divide, safeNumber(x), notZero(y))\n)\n\nsafeDivide(20, 0)\n//=> Nothing\n\nsafeDivide(20, 5)\n//=> Just 4\n\nsafeDivide(\'number\', 5)\n//=> Nothing', mode: 'javascript'}, null, opt_ijData);
     ie_close('article');
     ie_open('input', null, null,
         'type', 'hidden',
@@ -28699,11 +28553,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'value', opt_data.site.title);
     ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({content: param707}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param212}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'rTWen.render';
+  $render.soyTemplateName = 'ufNCu.render';
 }
 
 exports.render.params = ["page","site"];
@@ -28713,30 +28567,14 @@ return exports;
 
 });
 
-class rTWen extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(rTWen, templates);
+class ufNCu extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(ufNCu, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
 
 
 /***/ }),
-/* 221 */,
-/* 222 */,
-/* 223 */,
-/* 224 */,
-/* 225 */,
-/* 226 */,
-/* 227 */,
-/* 228 */,
-/* 229 */,
-/* 230 */,
-/* 231 */,
-/* 232 */,
-/* 233 */,
-/* 234 */,
-/* 235 */,
-/* 236 */,
 /* 237 */,
 /* 238 */,
 /* 239 */,
@@ -28758,7 +28596,32 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(rTWen, templates);
 /* 255 */,
 /* 256 */,
 /* 257 */,
-/* 258 */
+/* 258 */,
+/* 259 */,
+/* 260 */,
+/* 261 */,
+/* 262 */,
+/* 263 */,
+/* 264 */,
+/* 265 */,
+/* 266 */,
+/* 267 */,
+/* 268 */,
+/* 269 */,
+/* 270 */,
+/* 271 */,
+/* 272 */,
+/* 273 */,
+/* 274 */,
+/* 275 */,
+/* 276 */,
+/* 277 */,
+/* 278 */,
+/* 279 */,
+/* 280 */,
+/* 281 */,
+/* 282 */,
+/* 283 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28794,9 +28657,9 @@ __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _EquivSoy = __webpack_require__(220);
+var _gettingStartedSoy = __webpack_require__(236);
 
-var _EquivSoy2 = _interopRequireDefault(_EquivSoy);
+var _gettingStartedSoy2 = _interopRequireDefault(_gettingStartedSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28806,23 +28669,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var rTWen = function (_Component) {
-  _inherits(rTWen, _Component);
+var ufNCu = function (_Component) {
+  _inherits(ufNCu, _Component);
 
-  function rTWen() {
-    _classCallCheck(this, rTWen);
+  function ufNCu() {
+    _classCallCheck(this, ufNCu);
 
-    return _possibleConstructorReturn(this, (rTWen.__proto__ || Object.getPrototypeOf(rTWen)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (ufNCu.__proto__ || Object.getPrototypeOf(ufNCu)).apply(this, arguments));
   }
 
-  return rTWen;
+  return ufNCu;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(rTWen, _EquivSoy2.default);
+_metalSoy2.default.register(ufNCu, _gettingStartedSoy2.default);
 
-exports.default = rTWen;
+exports.default = ufNCu;
 
 /***/ })
-],[258]);
+],[283]);

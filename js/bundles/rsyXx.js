@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([31,33,34,35],[
+webpackJsonppageComponent([3,34,35,36],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19884,7 +19884,7 @@ if (goog.DEBUG) {
  * @return {void}
  * @suppress {checkTypes}
  */
-function __deltemplate_s152_d34389eb(opt_data, opt_ignored, opt_ijData) {
+function __deltemplate_s174_d34389eb(opt_data, opt_ignored, opt_ijData) {
   ie_open('a', null, null,
       'class', 'sidebar-link ' + (opt_data.page.active ? 'sidebar-link-selected' : ''),
       'href', opt_data.page.url);
@@ -19893,16 +19893,16 @@ function __deltemplate_s152_d34389eb(opt_data, opt_ignored, opt_ijData) {
           'class', 'sidebar-icon icon-16-' + opt_data.page.icon);
     }
     ie_open('span');
-      var dyn10 = opt_data.page.title;
-      if (typeof dyn10 == 'function') dyn10(); else if (dyn10 != null) itext(dyn10);
+      var dyn12 = opt_data.page.title;
+      if (typeof dyn12 == 'function') dyn12(); else if (dyn12 != null) itext(dyn12);
     ie_close('span');
   ie_close('a');
 }
-exports.__deltemplate_s152_d34389eb = __deltemplate_s152_d34389eb;
+exports.__deltemplate_s174_d34389eb = __deltemplate_s174_d34389eb;
 if (goog.DEBUG) {
-  __deltemplate_s152_d34389eb.soyTemplateName = 'Sidebar.__deltemplate_s152_d34389eb';
+  __deltemplate_s174_d34389eb.soyTemplateName = 'Sidebar.__deltemplate_s174_d34389eb';
 }
-soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'sidebar', 0, __deltemplate_s152_d34389eb);
+soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'sidebar', 0, __deltemplate_s174_d34389eb);
 
 exports.render.params = ["section","site"];
 exports.render.types = {"section":"any","site":"any"};
@@ -20091,8 +20091,8 @@ function $render(opt_data, opt_ignored, opt_ijData) {
       ie_void('span', null, null,
           'class', 'icon icon-16-clock');
       itext(' ');
-      var dyn11 = opt_data.time;
-      if (typeof dyn11 == 'function') dyn11(); else if (dyn11 != null) itext(dyn11);
+      var dyn13 = opt_data.time;
+      if (typeof dyn13 == 'function') dyn13(); else if (dyn13 != null) itext(dyn13);
     }
   ie_close('p');
 }
@@ -28349,12 +28349,41 @@ exports.default = parseFromAnchor;
 /* 215 */,
 /* 216 */,
 /* 217 */,
-/* 218 */
+/* 218 */,
+/* 219 */,
+/* 220 */,
+/* 221 */,
+/* 222 */,
+/* 223 */,
+/* 224 */,
+/* 225 */,
+/* 226 */,
+/* 227 */,
+/* 228 */,
+/* 229 */,
+/* 230 */,
+/* 231 */,
+/* 232 */,
+/* 233 */,
+/* 234 */,
+/* 235 */,
+/* 236 */,
+/* 237 */,
+/* 238 */,
+/* 239 */,
+/* 240 */,
+/* 241 */,
+/* 242 */,
+/* 243 */,
+/* 244 */,
+/* 245 */,
+/* 246 */,
+/* 247 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PNOly", function() { return PNOly; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "rsyXx", function() { return rsyXx; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28366,15 +28395,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var templates;
 goog.loadModule(function(exports) {
 
-// This file was automatically generated from Async.soy.
+// This file was automatically generated from Sum.soy.
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace PNOly.
+ * @fileoverview Templates in namespace rsyXx.
  * @public
  */
 
-goog.module('PNOly.incrementaldom');
+goog.module('rsyXx.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28408,146 +28437,23 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var param411 = function() {
-    $templateAlias2({code: 'Async e a = Rejected e | Resolved a', mode: 'haskell'}, null, opt_ijData);
-    ie_open('p');
-      itext('Defined as a "lazy" Sum Type that implements an asynchronous control structure,');
-      ie_open('code');
-        itext('Async');
-      ie_close('code');
-      itext(' represents either the success or failure of a given asynchronous operation. The "laziness" of ');
-      ie_open('code');
-        itext('Async');
-      ie_close('code');
-      itext(' allows the ability to build complex asynchronous operations by defining each portion of that flow as smaller "steps" that can be composed together.');
-    ie_close('p');
-    ie_open('p');
-      itext('Depending on your needs, an ');
-      ie_open('code');
-        itext('Async');
-      ie_close('code');
-      itext(' can be constructed in a variety of ways. The typical closely resembles how a ');
-      ie_open('code');
-        itext('Promise');
-      ie_close('code');
-      itext(' is constructed with one major difference, the arguments used in the function that is passed to the ');
-      ie_open('code');
-        itext('Promise');
-      ie_close('code');
-      itext('constructor are reversed in an ');
-      ie_open('code');
-        itext('Async');
-      ie_close('code');
-      itext(' to match the order in which Async is parameterized.');
-    ie_close('p');
-    ie_open('p');
-      itext('There are many ways to represent asynchronous operations in JavaScript, and as such, the libraries available to us in our ecosystem provide different means to take advantage of these operations. The two most common use either ');
-      ie_open('code');
-        itext('Promise');
-      ie_close('code');
-      itext(' returning functions or allow for the Continuation Passing Style prevalent in the asynchronous functions that ship with NodeJS. ');
-      ie_open('code');
-        itext('Async');
-      ie_close('code');
-      itext(' provides (2) construction helpers that wrap functions using these styles of asynchronous processing and will give you back a function that takes the same arguments as the original and will return an ');
-      ie_open('code');
-        itext('Async');
-      ie_close('code');
-      itext(' instead. These functions are called ');
-      ie_open('a', null, null,
-          'href', '#frompromise');
-        ie_open('code');
-          itext('fromPromise');
-        ie_close('code');
-      ie_close('a');
-      itext(' and ');
-      ie_open('a', null, null,
-          'href', '#fromnode');
-        ie_open('code');
-          itext('fromNode');
-        ie_close('code');
-      ie_close('a');
-      itext('.');
-    ie_close('p');
+  var param3000 = function() {
+    $templateAlias2({code: 'Sum Number', mode: 'haskell'}, null, opt_ijData);
     ie_open('p');
       ie_open('code');
-        itext('Async');
+        itext('Sum');
       ie_close('code');
-      itext(' instances wrap asynchronous functions and are considered lazy, in that they will not run or execute until needed. This typically happens at an edge in a program and is done by executing the ');
-      ie_open('a', null, null,
-          'href', '#fork');
-        ie_open('code');
-          itext('fork');
-        ie_close('code');
-      ie_close('a');
-      itext(' method available on the instance, which takes (2) functions as its arguments.');
+      itext(' is a ');
+      ie_open('code');
+        itext('Monoid');
+      ie_close('code');
+      itext(' that will combine (2) ');
+      ie_open('code');
+        itext('Number');
+      ie_close('code');
+      itext('s under addition.');
     ie_close('p');
-    ie_open('p');
-      itext('The first function passed to ');
-      ie_open('a', null, null,
-          'href', '#fork');
-        ie_open('code');
-          itext('fork');
-        ie_close('code');
-      ie_close('a');
-      itext(' will be called on a ');
-      ie_open('a', null, null,
-          'href', '#rejected');
-        ie_open('code');
-          itext('Rejected');
-        ie_close('code');
-      ie_close('a');
-      itext(' instance and passed the value the ');
-      ie_open('code');
-        itext('Async');
-      ie_close('code');
-      itext(' was rejected with. The second function is called when ');
-      ie_open('a', null, null,
-          'href', '#fork');
-        ie_open('code');
-          itext('fork');
-        ie_close('code');
-      ie_close('a');
-      itext(' is invoked on a ');
-      ie_open('a', null, null,
-          'href', '#resolved');
-        ie_open('code');
-          itext('Resolved');
-        ie_close('code');
-      ie_close('a');
-      itext(' instance receiving the value the ');
-      ie_open('code');
-        itext('Async');
-      ie_close('code');
-      itext(' was resolved with.');
-    ie_close('p');
-    ie_open('p');
-      itext('At times, in a given environment, it may not be feasible to run an asynchronous flow to completion. To address when these use cases pop up, the ');
-      ie_open('a', null, null,
-          'href', '#fork');
-        ie_open('code');
-          itext('fork');
-        ie_close('code');
-      ie_close('a');
-      itext(' function will return a function that ignores its arguments and returns a ');
-      ie_open('code');
-        itext('Unit');
-      ie_close('code');
-      itext('. When this function is called, ');
-      ie_open('code');
-        itext('Async');
-      ie_close('code');
-      itext(' will finish running the current "in flight" computation to completion, but will cease all remaining execution. Wrapped functions can return a function that will be called when an ');
-      ie_open('code');
-        itext('Async');
-      ie_close('code');
-      itext(' computation is cancelled, this can be used to clear timeouts or "in flight" xhr requests. Cancellation with ');
-      ie_open('code');
-        itext('Async');
-      ie_close('code');
-      itext(' is total and will cancel silently, without notification.');
-    ie_close('p');
-    $templateAlias2({code: 'import Async from \'crocks/Async\'\n\nimport maybeToAsync from \'crocks/Async/maybeToAsync\'\n\nimport First from \'crocks/First\'\nimport equals from \'crocks/pointfree/equals\'\nimport map from \'crocks/pointfree/map\'\nimport mreduceMap from \'crocks/helpers/mreduceMap\'\nimport pick from \'crocks/helpers/pick\'\nimport safe from \'crocks/Maybe/safe\'\n\n// log :: String -> a -> a\nconst log = label => x =>\n  (console.log(`${label}:`, x), x)\n\n// propEq :: (String, a) -> Object -> Boolean\nconst propEq = (key, value) =>\n  x => equals(x[key], value)\n\n// findById :: Foldable f => (a -> Boolean) -> f a -> Maybe a\nconst findById = id =>\n  mreduceMap(First, safe(propEq(\'id\', id)))\n\n// getById :: Number -> Async String Object\nfunction getById(id) {\n  const data = [\n    { id: 1, name: \'Jimmothy Schmidt\', age: 24 },\n    { id: 2, name: \'Tori Blackwood\', age: 21 },\n    { id: 3, name: \'Joey Mc Carthy\', age: 27 }\n  ]\n\n  return Async(\n    (rej, res) => setTimeout(() => res(data), 1000)\n  ).chain(maybeToAsync(`id: ${id} -- Not Found`, findById(id)))\n}\n\ngetById(3)\n  .map(pick([ \'id\', \'name\' ]))\n  .fork(log(\'rej\'), log(\'res\'))\n//=> res: { id: 3, name: \'Joey Mc Carthy\' }\n\ngetById(5)\n  .map(pick([ \'id\', \'name\' ]))\n  .fork(log(\'rej\'), log(\'res\'))\n//=> rej: "id: 5 -- Not Found"\n\n// cancel :: () -> ()\nconst cancel = getById(1).fork(\n  log(\'rej\'),\n  log(\'res\'),\n  () => console.log(\'cancelled\')\n)\n\nsetTimeout(cancel, 500)\n//=> "cancelled"\n\nAsync\n  .all(map(getById, [ 1, 2 ]))\n  .map(map(pick([ \'id\', \'name\' ])))\n  .fork(log(\'rej\'), log(\'res\'))\n//=> res: [\n//=>   { id: 1, name: \'Jimmothy Schmidt\' },\n//=>   { id: 2, name: \'Tori Blackwood\' },\n//=> ]\n\nAsync\n  .all(map(getById, [ 3, 14 ]))\n  .map(map(pick([ \'id\', \'name\' ])))\n  .fork(log(\'rej\'), log(\'res\'))\n//=> rej:  "id: 14 -- Not Found"\n\nconst resolveAfter = (delay, value) =>\n  Async((rej, res) => {\n    const id = setTimeout(() => res(value), delay)\n    return () => clearTimeout(id)\n  })\n\nconst afterCancel = resolveAfter(10000, \'Delay Value\')\n  .fork(log(\'rej\'), log(\'res\'))\n\nafterCancel() // this clears the timeout', mode: 'javascript'}, null, opt_ijData);
+    $templateAlias2({code: 'import Sum from \'crocks/Sum\'\nimport mconcat from \'crocks/helpers/mconcat\'\nimport mconcatMap from \'crocks/helpers/mconcatMap\'\n\nSum(13)\n//=> Sum 13\n\nmconcat(Sum, [ 5, 2 ])\n//=> Sum 7\n\nSum(10)\n  .concat(Sum(10))\n//=> Sum 20\n\n// sumByTen :: [ Number ] -> Sum\nconst sumByTen =\n  mconcatMap(Sum, x => x * 10)\n\nsumByTen([ 2, 2 ])\n//=> Sum 40', mode: 'javascript'}, null, opt_ijData);
     ie_open('article', null, null,
         'id', 'topic-implements');
       ie_open('h2');
@@ -28559,33 +28465,78 @@ function $render(opt_data, opt_ignored, opt_ijData) {
       ie_close('h2');
       ie_open('p');
         ie_open('code');
-          itext('Functor');
+          itext('Setoid');
         ie_close('code');
         itext(', ');
         ie_open('code');
-          itext('Alt');
-        ie_close('code');
-        itext(',  ');
-        ie_open('code');
-          itext('Bifunctor');
+          itext('Semigroup');
         ie_close('code');
         itext(', ');
         ie_open('code');
-          itext('Apply');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('Chain');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('Applicative');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('Monad');
+          itext('Monoid');
         ie_close('code');
       ie_close('p');
+    ie_close('article');
+    ie_open('article', null, null,
+        'id', 'topic-construction');
+      ie_open('h2');
+        ie_open('a', null, null,
+            'id', 'construction',
+            'href', '#construction');
+          itext('Construction');
+        ie_close('a');
+      ie_close('h2');
+      $templateAlias2({code: 'Sum :: Number -> Sum Number', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        ie_open('code');
+          itext('Sum');
+        ie_close('code');
+        itext(' provides addition on ');
+        ie_open('code');
+          itext('Number');
+        ie_close('code');
+        itext('s and needs to be constructed with a ');
+        ie_open('code');
+          itext('Number');
+        ie_close('code');
+        itext(' instance. Calling the constructor with a ');
+        ie_open('code');
+          itext('Number');
+        ie_close('code');
+        itext(', results in a new');
+        ie_open('code');
+          itext('Sum');
+        ie_close('code');
+        itext(' that wraps the provided ');
+        ie_open('code');
+          itext('Number');
+        ie_close('code');
+        itext('.');
+      ie_close('p');
+      ie_open('p');
+        itext('Passing ');
+        ie_open('code');
+          itext('undefined');
+        ie_close('code');
+        itext(', ');
+        ie_open('code');
+          itext('NaN');
+        ie_close('code');
+        itext(' or ');
+        ie_open('code');
+          itext('null');
+        ie_close('code');
+        itext(' to the constructor will result in an');
+        ie_open('code');
+          itext('empty');
+        ie_close('code');
+        itext(' instance, or an instance containing a ');
+        ie_open('code');
+          itext('0');
+        ie_close('code');
+        itext('.');
+      ie_close('p');
+      $templateAlias2({code: 'import Sum from \'crocks/Sum\'\n\nimport equals from \'crocks/pointfree/equals\'\n\nSum(41)\n//=> Sum 41\n\nSum(Infinity)\n//=> Sum Infinity\n\nSum(NaN)\n//=> Sum 0\n\nequals(Sum(undefined), Sum.empty())\n//=> true', mode: 'javascript'}, null, opt_ijData);
     ie_close('article');
     ie_open('article', null, null,
         'id', 'topic-constructor');
@@ -28596,392 +28547,45 @@ function $render(opt_data, opt_ignored, opt_ijData) {
           itext('Constructor Methods');
         ie_close('a');
       ie_close('h2');
-      ie_open('h4');
+      ie_open('h3');
         ie_open('a', null, null,
-            'id', 'rejected',
-            'href', '#rejected');
-          itext('Rejected');
+            'id', 'empty',
+            'href', '#empty');
+          itext('empty');
         ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Async.Rejected :: e -> Async e a', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('Used to construct a ');
-        ie_open('code');
-          itext('Rejected');
-        ie_close('code');
-        itext(' instance of ');
-        ie_open('code');
-          itext('Async');
-        ie_close('code');
-        itext(' that represents the failure or "false" case of the disjunction. Calling ');
-        ie_open('code');
-          itext('Rejected');
-        ie_close('code');
-        itext(' with a given value, will return a new ');
-        ie_open('code');
-          itext('Rejected');
-        ie_close('code');
-        itext(' instance, wrapping the provided value.');
-      ie_close('p');
-      ie_open('p');
-        itext('When an instance is ');
-        ie_open('code');
-          itext('Rejected');
-        ie_close('code');
-        itext(', most ');
-        ie_open('code');
-          itext('Async');
-        ie_close('code');
-        itext(' returning methods on the instance will return another ');
-        ie_open('code');
-          itext('Rejected');
-        ie_close('code');
-        itext(' instance. This is in contrast to a javascript ');
-        ie_open('code');
-          itext('Promise');
-        ie_close('code');
-        itext(', that will continue on a ');
-        ie_open('a', null, null,
-            'href', '#resolved');
-          ie_open('code');
-            itext('Resolved');
-          ie_close('code');
-        ie_close('a');
-        itext(' path after a ');
-        ie_open('code');
-          itext('catch');
-        ie_close('code');
-        itext('. This behavior of ');
-        ie_open('code');
-          itext('Promise');
-        ie_close('code');
-        itext('s provide challenges when constructing complicated (or even some simple) ');
-        ie_open('code');
-          itext('Promise');
-        ie_close('code');
-        itext(' chains that may fail at various steps along the chain.');
-      ie_close('p');
-      ie_open('p');
-        itext('Even though ');
-        ie_open('code');
-          itext('Async');
-        ie_close('code');
-        itext(' is a ');
-        ie_open('code');
-          itext('Bifunctor');
-        ie_close('code');
-        itext(', in most cases it is desired to keep the type of a ');
-        ie_open('code');
-          itext('Rejected');
-        ie_close('code');
-        itext(' fixed to a type for a given flow. Given that ');
-        ie_open('code');
-          itext('Async');
-        ie_close('code');
-        itext(' is a ');
-        ie_open('code');
-          itext('Bifunctor');
-        ie_close('code');
-        itext(', it is easy to make sure you get the type you need at the edge by leaning on ');
-        ie_open('a', null, null,
-            'href', '#bimap');
-          ie_open('code');
-            itext('bimap');
-          ie_close('code');
-        ie_close('a');
-        itext(' to "square things up".');
-      ie_close('p');
-      $templateAlias2({code: 'import Async from \'crocks/Async\'\n\nconst { Rejected } = Async\n\n// log :: String -> a -> a\nconst log = label => x =>\n  (console.log(`${label}:`, x), x)\n\n// m :: Async String a\nconst m = Async(\n  rej => { rej(\'Some Error\') }\n)\n\n// n :: Async String a\nconst n =\n  Rejected(\'Some Error\')\n\nm.fork(log(\'rej\'), log(\'res\'))\n//=> rej: "Some Error"\n\nn.fork(log(\'rej\'), log(\'res\'))\n//=> rej: "Some Error"', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'resolved',
-            'href', '#resolved');
-          itext('Resolved');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Async.Resolved :: a -> Async e a', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('Used to construct a ');
-        ie_open('code');
-          itext('Resolved');
-        ie_close('code');
-        itext(' instance that represents the success or "true" portion of the disjunction. ');
-        ie_open('code');
-          itext('Resolved');
-        ie_close('code');
-        itext(' will wrap any given value passed to this constructor in the ');
-        ie_open('code');
-          itext('Resolved');
-        ie_close('code');
-        itext(' instance it returns, signaling the validity of the wrapped value.');
-      ie_close('p');
-      $templateAlias2({code: 'import Async from \'crocks/Async\'\n\nconst { Resolved } = Async\n\n// log :: String -> a -> a\nconst log = label => x =>\n  (console.log(`${label}:`, x), x)\n\n// m :: Async e Number\nconst m = Async(\n  (rej, res) => { res(97) }\n)\n\n// n :: Async e Number\nconst n =\n  Resolved(97)\n\nm.fork(log(\'rej\'), log(\'res\'))\n//=> res: 97\n\nn.fork(log(\'rej\'), log(\'res\'))\n//=> res: 97', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'frompromise',
-            'href', '#frompromise');
-          itext('fromPromise');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Async.fromPromise :: (* -> Promise a e) -> (* -> Async e a)', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('Used to turn an "eager" ');
-        ie_open('code');
-          itext('Promise');
-        ie_close('code');
-        itext(' returning function, into a function that takes the same arguments but returns a "lazy" ');
-        ie_open('code');
-          itext('Async');
-        ie_close('code');
-        itext(' instance instead. Due to the lazy nature of ');
-        ie_open('code');
-          itext('Async');
-        ie_close('code');
-        itext(', any curried interface will not be respected on the provided function. This can be solved by wrapping the resulting function with ');
-        ie_open('a', null, null,
-            'href', '../functions/helpers.html#nary');
-          ie_open('code');
-            itext('nAry');
-          ie_close('code');
-        ie_close('a');
-        itext(', which will provide a curried function that will return the desired ');
-        ie_open('code');
-          itext('Async');
-        ie_close('code');
-        itext('.');
-      ie_close('p');
-      $templateAlias2({code: 'import Async from \'crocks/Async\'\n\nimport ifElse from \'crocks/logic/ifElse\'\nimport isNumber from \'crocks/predicates/isNumber\'\nimport nAry from \'crocks/helpers/nAry\'\n\nconst { fromPromise } = Async\n\n// log :: String -> a -> a\nconst log = label => x =>\n  (console.log(`${label}:`, x), x)\n\n// safeProm :: ((a -> Boolean), a) -> Promise a a\nconst safeProm = (pred, x) => new Promise(\n  (res, rej) => ifElse(pred, res, rej, x)\n)\n\nsafeProm(isNumber, 34)\n  .then(log(\'resProm\'))\n//=> resProm: 34\n\nsafeProm(isNumber, \'34\')\n  .catch(log(\'rejProm\'))\n//=> rejProm: "34"\n\n// safeAsync :: (a -> Boolean) -> a -> Async a a\nconst safeAsync =\n  nAry(2, fromPromise(safeProm))\n\n// numAsync :: a -> Async a Number\nconst numAsync =\n  safeAsync(isNumber)\n\nnumAsync(34)\n  .fork(log(\'rej\'), log(\'res\'))\n//=> res: 34\n\nnumAsync(\'34\')\n  .fork(log(\'rej\'), log(\'res\'))\n//=> rej: "34"', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'fromnode',
-            'href', '#fromnode');
-          itext('fromNode');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'NodeCallback :: (e, a) -> ()\nAsync.fromNode :: ((*, NodeCallback) -> ()) -> (* -> Async e a)\nAsync.fromNode :: (((*, NodeCallback) -> ()), ctx) -> (* -> Async e a)', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('Many of the asynchronous functions that ship with Node JS provide a Continuation Passing Style, that requires the use of a callback function to be passed as the last argument. The provided callback functions are binary functions that take an ');
-        ie_open('code');
-          itext('err');
-        ie_close('code');
-        itext(' as the first argument, which is ');
-        ie_open('code');
-          itext('null');
-        ie_close('code');
-        itext(' when there is no error to be reported. The second argument is the ');
-        ie_open('code');
-          itext('data');
-        ie_close('code');
-        itext(' representing the result of the function in the case that there is no error present.');
-      ie_close('p');
-      ie_open('p');
-        itext('This interface can create the fabled pyramid of callback doom when trying to combine multiple asynchronous calls. ');
-        ie_open('code');
-          itext('fromNode');
-        ie_close('code');
-        itext(' can be used to wrap functions of this style. Just pass the desired function to wrap and ');
-        ie_open('code');
-          itext('fromNode');
-        ie_close('code');
-        itext(' will give back a new function, that takes the same number of arguments, minus the callback function.');
-      ie_close('p');
-      ie_open('p');
-        itext('When the provided function is called, it returns a "lazy" ');
-        ie_open('code');
-          itext('Async');
-        ie_close('code');
-        itext('. When the resulting instance is forked, if the ');
-        ie_open('code');
-          itext('err');
-        ie_close('code');
-        itext(' is a non-null value then the instance will be ');
-        ie_open('a', null, null,
-            'href', '#rejected');
-          ie_open('code');
-            itext('Rejected');
-          ie_close('code');
-        ie_close('a');
-        itext(' with the ');
-        ie_open('code');
-          itext('err');
-        ie_close('code');
-        itext(' value. When the ');
-        ie_open('code');
-          itext('err');
-        ie_close('code');
-        itext(' is null, then the instance will become ');
-        ie_open('a', null, null,
-            'href', '#resolved');
-          ie_open('code');
-            itext('Resolved');
-          ie_close('code');
-        ie_close('a');
-        itext(' with the ');
-        ie_open('code');
-          itext('data');
-        ie_close('code');
-        itext(' value.');
-      ie_close('p');
-      ie_open('p');
-        itext('There are some libraries whose functions are methods on some stateful object. As such, the need for binding may arise. ');
-        ie_open('code');
-          itext('fromNode');
-        ie_close('code');
-        itext(' provides a second, optional argument that takes the context that will be used to bind the function being wrapped.');
-      ie_close('p');
-      ie_open('p');
-        itext('Like ');
-        ie_open('a', null, null,
-            'href', '#frompromise');
-          ie_open('code');
-            itext('fromPromise');
-          ie_close('code');
-        ie_close('a');
-        itext(', any curried interface will not be respected. If a curried interface is needed then ');
-        ie_open('a', null, null,
-            'href', '../functions/helpers.html#nary');
-          ie_open('code');
-            itext('nAry');
-          ie_close('code');
-        ie_close('a');
-        itext(' can be used.');
-      ie_close('p');
-      $templateAlias2({code: 'import Async from \'crocks/Async\'\n\nimport curry from \'crocks/helpers/curry\'\nimport isNumber from \'crocks/predicates/isNumber\'\nimport nAry from \'crocks/helpers/nAry\'\nimport partial from \'crocks/helpers/partial\'\n\nconst { fromNode } = Async\n\n// log :: String -> a -> a\nconst log = curry(label => x =>\n  (console.log(`${label}:`, x), x)\n)\n\n// NodeCallback :: (e, a) -> ()\n// delay :: (Number, a, NodeCallback (String, Number)) -> ()\nfunction delay(delay, val, cb) {\n  setTimeout(\n    () => isNumber(val) ? cb(null, val) : cb(\'No Number\'),\n    delay\n  )\n}\n\n// callback :: (e, a) -> ()\nconst callback = (err, data) => {\n  err ? log(\'err\', err) : log(\'data\', data)\n}\n\n// wait500 :: a -> NodeCallback (String, Number) -> ()\nconst wait500 =\n  partial(delay, 500)\n\nwait500(32, callback)\n//=> data: 32\n\nwait500(\'32\', callback)\n//=> err: "No Number"\n\n// delayAsync :: Number -> a -> Async String Number\nconst delayAsync =\n  nAry(2, fromNode(delay))\n\n// waitAsync :: a -> Async String Number\nconst waitAsync =\n  delayAsync(1000)\n\nwaitAsync(32)\n  .fork(log(\'rej\'), log(\'res\'))\n//=> res: 32\n\nwaitAsync(\'32\')\n  .fork(log(\'rej\'), log(\'res\'))\n//=> rej: "No Number"', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'all',
-            'href', '#all');
-          itext('all');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Async.all :: [ Async e a ] -> Async e [ a ]', mode: 'haskell'}, null, opt_ijData);
+      ie_close('h3');
+      $templateAlias2({code: 'Sum.empty :: () -> Sum', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
         ie_open('code');
-          itext('Async');
+          itext('empty');
         ie_close('code');
-        itext(' provides an ');
+        itext(' provides the identity for the ');
         ie_open('code');
-          itext('all');
+          itext('Monoid');
         ie_close('code');
-        itext(' method that can be used when multiple, independent asynchronous operations need to be run in parallel. ');
+        itext(' in that when the value it provides is ');
         ie_open('code');
-          itext('all');
+          itext('concat');
         ie_close('code');
-        itext(' takes an ');
+        itext('ed to any other value, it will return the other value. In the case of ');
         ie_open('code');
-          itext('Array');
+          itext('Sum');
         ie_close('code');
-        itext(' of');
+        itext(' the result of ');
         ie_open('code');
-          itext('Async');
+          itext('empty');
         ie_close('code');
-        itext(' instances that, when forked, will execute each instance in the provided ');
+        itext(' is ');
         ie_open('code');
-          itext('Array');
+          itext('0');
         ie_close('code');
-        itext(' in parallel.');
+        itext('. ');
+        ie_open('code');
+          itext('empty');
+        ie_close('code');
+        itext(' is available on both the Constructor and the Instance for convenience.');
       ie_close('p');
-      ie_open('p');
-        itext('If any of the instances result in a ');
-        ie_open('a', null, null,
-            'href', '#rejected');
-          ie_open('code');
-            itext('Rejected');
-          ie_close('code');
-        ie_close('a');
-        itext(' state, the entire flow will be ');
-        ie_open('a', null, null,
-            'href', '#rejected');
-          ie_open('code');
-            itext('Rejected');
-          ie_close('code');
-        ie_close('a');
-        itext(' with value of the first ');
-        ie_open('a', null, null,
-            'href', '#rejected');
-          ie_open('code');
-            itext('Rejected');
-          ie_close('code');
-        ie_close('a');
-        itext(' instance. If all instances resolve, then the entire instance is ');
-        ie_open('a', null, null,
-            'href', '#resolved');
-          ie_open('code');
-            itext('Resolved');
-          ie_close('code');
-        ie_close('a');
-        itext(' with an ');
-        ie_open('code');
-          itext('Array');
-        ie_close('code');
-        itext(' containing all ');
-        ie_open('a', null, null,
-            'href', '#resolved');
-          ie_open('code');
-            itext('Resolved');
-          ie_close('code');
-        ie_close('a');
-        itext(' values in their provided order.');
-      ie_close('p');
-      $templateAlias2({code: 'import Async from \'crocks/Async\'\n\nconst { all, Rejected, Resolved } = Async\n\n// log :: String -> a -> a\nconst log = label => x =>\n  (console.log(`${label}:`, x), x)\n\nall([ Resolved(1), Resolved(2), Resolved(3) ])\n  .fork(log(\'rej\'), log(\'res\'))\n//=> res: [ 1, 2, 3 ]\n\nall([ Resolved(1), Rejected(2), Rejected(3) ])\n  .fork(log(\'rej\'), log(\'res\'))\n//=> rej: 2', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'of',
-            'href', '#of');
-          itext('of');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Async.of :: a -> Async e a', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('Used to wrap any value into an ');
-        ie_open('code');
-          itext('Async');
-        ie_close('code');
-        itext(' as a ');
-        ie_open('a', null, null,
-            'href', '#resolved');
-          ie_open('code');
-            itext('Resolved');
-          ie_close('code');
-        ie_close('a');
-        itext(' instance, ');
-        ie_open('code');
-          itext('of');
-        ie_close('code');
-        itext(' is used mostly by helper functions that work "generically" with instances of either ');
-        ie_open('code');
-          itext('Applicative');
-        ie_close('code');
-        itext(' or ');
-        ie_open('code');
-          itext('Monad');
-        ie_close('code');
-        itext('. When working specifically with the ');
-        ie_open('code');
-          itext('Async');
-        ie_close('code');
-        itext(' type, the ');
-        ie_open('a', null, null,
-            'href', '#resolved');
-          ie_open('code');
-            itext('Resolved');
-          ie_close('code');
-        ie_close('a');
-        itext(' constructor should be used. Reach for ');
-        ie_open('code');
-          itext('of');
-        ie_close('code');
-        itext(' when working with functions that will work with ANY ');
-        ie_open('code');
-          itext('Applicative');
-        ie_close('code');
-        itext('/');
-        ie_open('code');
-          itext('Monad');
-        ie_close('code');
-        itext('.');
-      ie_close('p');
-      $templateAlias2({code: 'import Async from \'crocks/Async\'\n\nconst { Resolved } = Async\n\n// log :: String -> a -> a\nconst log = label => x =>\n  (console.log(`${label}:`, x), x)\n\nAsync.of(\'U Wut M8\')\n  .fork(log(\'rej\'), log(\'res\'))\n//=> res: "U Wut M8"\n\nResolved(\'U Wut M8\')\n  .fork(log(\'rej\'), log(\'res\'))\n//=> res: "U Wut M8"\n\nAsync((rej, res) => res(\'U Wut M8\'))\n  .fork(log(\'rej\'), log(\'res\'))\n//=> res: "U Wut M8"', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'import Sum from \'crocks/Sum\'\n\nSum.empty()\n//=> Sum 0\n\nSum.empty()\n  .concat(Sum.empty())\n//=> Sum 0\n\nSum(4)\n  .concat(Sum.empty())\n//=> Sum 4\n\nSum.empty()\n  .concat(Sum(4))\n//=> Sum 4', mode: 'javascript'}, null, opt_ijData);
     ie_close('article');
     ie_open('article', null, null,
         'id', 'topic-instance');
@@ -28994,1198 +28598,126 @@ function $render(opt_data, opt_ignored, opt_ijData) {
       ie_close('h2');
       ie_open('h4');
         ie_open('a', null, null,
-            'id', 'map',
-            'href', '#map');
-          itext('map');
+            'id', 'equals',
+            'href', '#equals');
+          itext('equals');
         ie_close('a');
       ie_close('h4');
-      $templateAlias2({code: 'Async e a ~> (a -> b) -> Async e b', mode: 'haskell'}, null, opt_ijData);
+      $templateAlias2({code: 'Sum a ~> b -> Boolean', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
-        itext('Used to apply transformations to ');
-        ie_open('a', null, null,
-            'href', '#resolved');
-          ie_open('code');
-            itext('Resolved');
-          ie_close('code');
-        ie_close('a');
-        itext(' values of an ');
+        itext('Used to compare the underlying values of (2) ');
         ie_open('code');
-          itext('Async');
+          itext('Sum');
         ie_close('code');
-        itext(', ');
+        itext(' instances for equality by value, ');
         ie_open('code');
-          itext('map');
+          itext('equals');
         ie_close('code');
-        itext(' takes a function that it will lift into the context of the ');
+        itext(' takes any given argument and returns ');
         ie_open('code');
-          itext('Async');
+          itext('true');
         ie_close('code');
-        itext(' and apply to it the wrapped value. When ran on a ');
-        ie_open('a', null, null,
-            'href', '#resolved');
-          ie_open('code');
-            itext('Resolved');
-          ie_close('code');
-        ie_close('a');
-        itext(' instance, ');
+        itext(' if the passed argument is a ');
         ie_open('code');
-          itext('map');
+          itext('Sum');
         ie_close('code');
-        itext(' will apply the wrapped value to the provided function and return the result in a new ');
-        ie_open('a', null, null,
-            'href', '#resolved');
-          ie_open('code');
-            itext('Resolved');
-          ie_close('code');
-        ie_close('a');
-        itext(' instance.');
+        itext(' with an underlying value equal to the underlying value of the ');
+        ie_open('code');
+          itext('Sum');
+        ie_close('code');
+        itext(' the method is being called on. If the passed argument is not a ');
+        ie_open('code');
+          itext('Sum');
+        ie_close('code');
+        itext(' or the underlying values are not equal, ');
+        ie_open('code');
+          itext('equals');
+        ie_close('code');
+        itext(' will return ');
+        ie_open('code');
+          itext('false');
+        ie_close('code');
+        itext('.');
       ie_close('p');
-      $templateAlias2({code: 'import Async from \'crocks/Async\'\n\nimport and from \'crocks/logic/and\'\nimport compose from \'crocks/helpers/compose\'\nimport constant from \'crocks/combinators/constant\'\nimport ifElse from \'crocks/logic/ifElse\'\nimport isNumber from \'crocks/predicates/isNumber\'\nimport map from \'crocks/pointfree/map\'\n\nconst { Rejected, Resolved } = Async\n\n// log :: String -> a -> a\nconst log = label => x =>\n  (console.log(`${label}:`, x), x)\n\n// double :: Number -> Number\nconst double =\n  x => x * 2\n\n// gt10 :: Number -> Boolean\nconst gt10 =\n  x => x > 10\n\n// isValid :: a -> Async String Number\nconst isValid = ifElse(\n  and(isNumber, gt10),\n  Resolved,\n  constant(Rejected(\'Not Valid\'))\n)\n\n// doubleValid :: a -> Async String Number\nconst doubleValid =\n  compose(map(double), isValid)\n\nResolved(34)\n  .map(double)\n  .fork(log(\'rej\'), log(\'res\'))\n//=> res: 68\n\nRejected(\'34\')\n  .map(double)\n  .fork(log(\'rej\'), log(\'res\'))\n//=> rej: "34"\n\ndoubleValid(76)\n  .fork(log(\'rej\'), log(\'res\'))\n//=> res: 152\n\ndoubleValid(\'Too Silly\')\n  .fork(log(\'rej\'), log(\'res\'))\n//=> rej: "Not Valid"', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'import Sum from \'crocks/Sum\'\n\nSum(5)\n  .equals(Sum(5))\n//=> true\n\nSum(25)\n  .equals(Sum(31))\n//=> false', mode: 'javascript'}, null, opt_ijData);
       ie_open('h4');
         ie_open('a', null, null,
-            'id', 'alt',
-            'href', '#alt');
-          itext('alt');
+            'id', 'concat',
+            'href', '#concat');
+          itext('concat');
         ie_close('a');
       ie_close('h4');
-      $templateAlias2({code: 'Async e a ~> Async e a -> Async e a', mode: 'haskell'}, null, opt_ijData);
+      $templateAlias2({code: 'Sum ~> Sum -> Sum', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
-        itext('Providing a means for a fallback or alternative value, ');
         ie_open('code');
-          itext('alt');
+          itext('concat');
         ie_close('code');
-        itext(' combines (2)');
+        itext(' is used to combine (2) ');
         ie_open('code');
-          itext('Async');
+          itext('Semigroup');
         ie_close('code');
-        itext(' instances and will return the first ');
-        ie_open('a', null, null,
-            'href', '#resolved');
-          ie_open('code');
-            itext('Resolved');
-          ie_close('code');
-        ie_close('a');
-        itext(' instance it encounters or the last ');
-        ie_open('a', null, null,
-            'href', '#rejected');
-          ie_open('code');
-            itext('Rejected');
-          ie_close('code');
-        ie_close('a');
-        itext(' instance if it does not encounter a ');
-        ie_open('a', null, null,
-            'href', '#resolved');
-          ie_open('code');
-            itext('Resolved');
-          ie_close('code');
-        ie_close('a');
-        itext(' instance.');
+        itext('s of the same type under an operation specified by the ');
+        ie_open('code');
+          itext('Semigroup');
+        ie_close('code');
+        itext('. In the case of ');
+        ie_open('code');
+          itext('Sum');
+        ie_close('code');
+        itext(', it will add the (2) ');
+        ie_open('code');
+          itext('Number');
+        ie_close('code');
+        itext('s.');
       ie_close('p');
-      $templateAlias2({code: 'import Async from \'crocks/Async\'\n\nconst { Rejected, Resolved } = Async\n\n// log :: String -> a -> a\nconst log = label => x =>\n  (console.log(`${label}:`, x), x)\n\nResolved(true)\n  .alt(Rejected(\'Bad News\'))\n  .fork(log(\'rej\'), log(\'res\'))\n//=> res: true\n\nRejected(\'First Reject\')\n  .alt(Rejected(\'Second Reject\'))\n  .fork(log(\'rej\'), log(\'res\'))\n//=> rej: "Second Reject"\n\nRejected(\'First Reject\')\n  .alt(Resolved(\'First Resolve\'))\n  .alt(Rejected(\'Second Reject\'))\n  .alt(Resolved(\'Second Resolve\'))\n  .fork(log(\'rej\'), log(\'res\'))\n//=> rej: "First Resolve"', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'import Sum from \'crocks/Sum\'\n\nSum(5)\n  .concat(Sum(4))\n//=> Sum 9\n\nSum(45)\n  .concat(Sum(32))\n//=> Sum 77\n\nSum(1000)\n  .concat(Sum(Infinity))\n//=> Sum Infinity\n\nSum(1)\n  .concat(Sum(3))\n//=> Sum 4', mode: 'javascript'}, null, opt_ijData);
       ie_open('h4');
         ie_open('a', null, null,
-            'id', 'bimap',
-            'href', '#bimap');
-          itext('bimap');
+            'id', 'valueof',
+            'href', '#valueof');
+          itext('valueOf');
         ie_close('a');
       ie_close('h4');
-      $templateAlias2({code: 'Async e a ~> ((e -> b), (a -> c)) -> Async b c', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('Both ');
-        ie_open('a', null, null,
-            'href', '#rejected');
-          ie_open('code');
-            itext('Rejected');
-          ie_close('code');
-        ie_close('a');
-        itext(' and ');
-        ie_open('a', null, null,
-            'href', '#resolved');
-          ie_open('code');
-            itext('Resolved');
-          ie_close('code');
-        ie_close('a');
-        itext(' values can vary in their type, although most of the time, focus on mapping values is placed on the ');
-        ie_open('a', null, null,
-            'href', '#resolved');
-          ie_open('code');
-            itext('Resolved');
-          ie_close('code');
-        ie_close('a');
-        itext(' portion. When the requirement or need to map the ');
-        ie_open('a', null, null,
-            'href', '#rejected');
-          ie_open('code');
-            itext('Rejected');
-          ie_close('code');
-        ie_close('a');
-        itext(' portion arises, ');
-        ie_open('code');
-          itext('bimap');
-        ie_close('code');
-        itext(' can be used.');
-      ie_close('p');
+      $templateAlias2({code: 'Sum ~> () -> Number', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
         ie_open('code');
-          itext('bimap');
+          itext('valueOf');
         ie_close('code');
-        itext(' takes (2) functions as its arguments. The first function is used to map a ');
-        ie_open('a', null, null,
-            'href', '#rejected');
-          ie_open('code');
-            itext('Rejected');
-          ie_close('code');
-        ie_close('a');
-        itext(' instance, while the second maps a ');
-        ie_open('a', null, null,
-            'href', '#resolved');
-          ie_open('code');
-            itext('Resolved');
-          ie_close('code');
-        ie_close('a');
-        itext(' instance. While ');
-        ie_open('code');
-          itext('bimap');
-        ie_close('code');
-        itext(' requires that both possible instances are to be mapped, if the desire to map only the ');
-        ie_open('a', null, null,
-            'href', '#rejected');
-          ie_open('code');
-            itext('Rejected');
-          ie_close('code');
-        ie_close('a');
-        itext(' portion, an ');
-        ie_open('a', null, null,
-            'href', '../functions/combinators.html#identity');
-          ie_open('code');
-            itext('identity');
-          ie_close('code');
-        ie_close('a');
-        itext(' function can be provided to the second argument. This will leave all ');
-        ie_open('a', null, null,
-            'href', '#resolved');
-          ie_open('code');
-            itext('Resolved');
-          ie_close('code');
-        ie_close('a');
-        itext(' instance values untouched.');
-      ie_close('p');
-      $templateAlias2({code: 'import Async from \'crocks/Async\'\n\nimport assoc from \'crocks/helpers/assoc\'\nimport bimap from \'crocks/pointfree/bimap\'\nimport compose from \'crocks/helpers/compose\'\nimport objOf from \'crocks/helpers/objOf\'\n\nconst { Rejected, Resolved } = Async\n\n// log :: String -> a -> a\nconst log = label => x =>\n  (console.log(`${label}:`, x), x)\n\n// hasError :: Boolean -> Object -> Object\nconst hasError =\n  assoc(\'hasError\')\n\n// buildError :: a -> String\nconst buildError =\n  x => `${x}: is not valid`\n\n// buildResult :: (String, Boolean) -> a -> Object\nconst buildResult = (key, isError) =>\n  compose(hasError(isError), objOf(key))\n\n// finalize :: Bifunctor m => m a b -> m Object Object\nconst finalize = bimap(\n  compose(buildResult(\'error\', true), buildError),\n  buildResult(\'result\', false)\n)\n\nfinalize(Resolved(\'Good To Go\'))\n  .fork(log(\'rej\'), log(\'res\'))\n//=> res: { result: "Good To Go", hasError: false }\n\nfinalize(Rejected(null))\n  .fork(log(\'rej\'), log(\'res\'))\n//=> rej: { error: "null is not valid", hasError: true }', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'ap',
-            'href', '#ap');
-          itext('ap');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Async e (a -> b) ~> Async e a -> Async e b', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('Short for apply, ');
-        ie_open('code');
-          itext('ap');
-        ie_close('code');
-        itext(' is used to apply an ');
-        ie_open('code');
-          itext('Async');
-        ie_close('code');
-        itext(' instance containing a value to another ');
-        ie_open('code');
-          itext('Async');
-        ie_close('code');
-        itext(' instance that contains a function, resulting in new ');
-        ie_open('code');
-          itext('Async');
-        ie_close('code');
-        itext(' instance with the result. ');
-        ie_open('code');
-          itext('ap');
-        ie_close('code');
-        itext(' requires that it is called on an instance that is either ');
-        ie_open('a', null, null,
-            'href', '#rejected');
-          ie_open('code');
-            itext('Rejected');
-          ie_close('code');
-        ie_close('a');
-        itext(' or ');
-        ie_open('a', null, null,
-            'href', '#resolved');
-          ie_open('code');
-            itext('Resolved');
-          ie_close('code');
-        ie_close('a');
-        itext(' that wraps a curried polyadic function.');
-      ie_close('p');
-      ie_open('p');
-        itext('When either ');
-        ie_open('code');
-          itext('Async');
-        ie_close('code');
-        itext(' is ');
-        ie_open('a', null, null,
-            'href', '#rejected');
-          ie_open('code');
-            itext('Rejected');
-          ie_close('code');
-        ie_close('a');
-        itext(', ');
-        ie_open('code');
-          itext('ap');
-        ie_close('code');
-        itext(' will return a ');
-        ie_open('a', null, null,
-            'href', '#rejected');
-          ie_open('code');
-            itext('Rejected');
-          ie_close('code');
-        ie_close('a');
-        itext(' instance, that wraps the value of the original ');
-        ie_open('a', null, null,
-            'href', '#rejected');
-          ie_open('code');
-            itext('Rejected');
-          ie_close('code');
-        ie_close('a');
-        itext(' instance. This can be used to safely combine multiple values under a given combination function. If any of the inputs result in a ');
-        ie_open('a', null, null,
-            'href', '#rejected');
-          ie_open('code');
-            itext('Rejected');
-          ie_close('code');
-        ie_close('a');
-        itext(' than they will never be applied to the function and will not result in undesired exceptions or results.');
-      ie_close('p');
-      ie_open('p');
-        itext('When ');
-        ie_open('a', null, null,
-            'href', '#fork');
-          ie_open('code');
-            itext('fork');
-          ie_close('code');
-        ie_close('a');
-        itext('ed, all ');
-        ie_open('code');
-          itext('Async');
-        ie_close('code');
-        itext('s chained with multiple ');
-        ie_open('code');
-          itext('ap');
-        ie_close('code');
-        itext(' invocations will be executed concurrently.');
-      ie_close('p');
-      $templateAlias2({code: 'import Async from \'crocks/Async\'\n\nimport liftA2 from \'crocks/helpers/liftA2\'\n\nconst { Rejected, Resolved } = Async\n\n// log :: String -> a -> a\nconst log = label => x =>\n  (console.log(`${label}:`, x), x)\n\n// resolveAfter :: (Integer, a) -> Async e a\nconst resolveAfter = (delay, x) => Async(\n  (rej, res) => setTimeout(() => res(x), delay)\n)\n\n// join :: String -> String -> String\nconst join =\n  a => b => `${a} ${b}`\n\nAsync.of(join)\n  .ap(Resolved(\'blip\'))\n  .ap(Resolved(\'blop\'))\n  .fork(log(\'rej\'), log(\'res\'))\n//=> res: "blip blop"\n\nAsync.of(join)\n  .ap(Resolved(\'blip\'))\n  .ap(Rejected(\'Not Good\'))\n  .fork(log(\'rej\'), log(\'res\'))\n//=> rej: "Not Good"\n\nResolved(\'splish\')\n  .map(join)\n  .ap(Resolved(\'splash\'))\n  .fork(log(\'rej\'), log(\'res\'))\n//=> res: "splish splash"\n\n// first :: Async e String\nconst first =\n  resolveAfter(5000, \'first\')\n\n// second :: Async e String\nconst second =\n  resolveAfter(5000, \'second\')\n\n// `ap` runs all Asyncs at the same time in parallel.\n// This will finish running in about 5 seconds and\n// not 10 seconds\n\nliftA2(join, first, second)\n  .fork(log(\'rej\'), log(\'res\'))\n//=> res: "first second"', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'chain',
-            'href', '#chain');
-          itext('chain');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Async e a ~> (a -> Async e b) -> Async e b', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('Combining a sequential series of transformations that capture disjunction can be accomplished with ');
-        ie_open('code');
-          itext('chain');
-        ie_close('code');
-        itext('. ');
-        ie_open('code');
-          itext('chain');
-        ie_close('code');
-        itext(' expects a unary, ');
-        ie_open('code');
-          itext('Async');
-        ie_close('code');
-        itext(' returning function as its argument. When invoked on a ');
-        ie_open('a', null, null,
-            'href', '#rejected');
-          ie_open('code');
-            itext('Rejected');
-          ie_close('code');
-        ie_close('a');
-        itext(' instance , ');
-        ie_open('code');
-          itext('chain');
-        ie_close('code');
-        itext(' will not run the function, but will instead return another ');
-        ie_open('a', null, null,
-            'href', '#rejected');
-          ie_open('code');
-            itext('Rejected');
-          ie_close('code');
-        ie_close('a');
-        itext(' instance wrapping the original ');
-        ie_open('a', null, null,
-            'href', '#rejected');
-          ie_open('code');
-            itext('Rejected');
-          ie_close('code');
-        ie_close('a');
-        itext(' value. When called on a ');
-        ie_open('a', null, null,
-            'href', '#resolved');
-          ie_open('code');
-            itext('Resolved');
-          ie_close('code');
-        ie_close('a');
-        itext(' instance however, the inner value will be passed to provided function, returning the result as the new instance.');
-      ie_close('p');
-      $templateAlias2({code: 'import Async from \'crocks/Async\'\n\nimport chain from \'crocks/pointfree/chain\'\nimport compose from \'crocks/helpers/compose\'\nimport composeK from \'crocks/helpers/composeK\'\nimport constant from \'crocks/combinators/constant\'\nimport flip from \'crocks/combinators/flip\'\nimport ifElse from \'crocks/logic/ifElse\'\nimport isString from \'crocks/predicates/isString\'\nimport prop from \'crocks/Maybe/prop\'\nimport maybeToAsync from \'crocks/Async/maybeToAsync\'\n\nconst { Rejected, Resolved } = Async\n\n// log :: String -> a -> a\nconst log = label => x =>\n  (console.log(`${label}:`, x), x)\n\n// safe :: (b -> Boolean) -> b -> Async String a\nconst safe = pred =>\n  ifElse(pred, Resolved, constant(Rejected(\'Not Safe\')))\n\n// test :: RegExp -> String -> Boolean\nconst test = regex => str =>\n  regex.test(str)\n\n// lookup :: String -> Async String String\nconst lookup = compose(\n  maybeToAsync(\'Not Found\'),\n  flip(prop, { \'file-a\': \'file-b\', \'file-b\': \'file-c\' })\n)\n\n// fake :: String -> Async String Object\nconst fake = compose(\n  chain(lookup),\n  chain(safe(test(/^file-(a|b|c)/))),\n  chain(safe(isString))\n)\n\nfake(\'file-a\')\n  .fork(log(\'rej\'), log(\'res\'))\n//=> file-b\n\n// getTwo :: a -> Async String String\nconst getTwo =\n  composeK(fake, fake)\n\ngetTwo(\'file-a\')\n  .fork(log(\'rej\'), log(\'res\'))\n//=> res: file-c\n\ngetTwo(\'file-b\')\n  .fork(log(\'rej\'), log(\'res\'))\n//=> rej: "Not Found"\n\ngetTwo(76)\n  .fork(log(\'rej\'), log(\'res\'))\n//=> rej: "Not Safe"', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'coalesce',
-            'href', '#coalesce');
-          itext('coalesce');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Async e a ~> ((e -> b), (a -> b))) -> Async e b', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('Used as a means to apply a computation to a ');
-        ie_open('a', null, null,
-            'href', '#resolved');
-          ie_open('code');
-            itext('Resolved');
-          ie_close('code');
-        ie_close('a');
-        itext(' instance and then map any ');
-        ie_open('a', null, null,
-            'href', '#rejected');
-          ie_open('code');
-            itext('Rejected');
-          ie_close('code');
-        ie_close('a');
-        itext(' value while transforming it to a ');
-        ie_open('a', null, null,
-            'href', '#resolved');
-          ie_open('code');
-            itext('Resolved');
-          ie_close('code');
-        ie_close('a');
-        itext(' to continue computation. ');
-        ie_open('code');
-          itext('coalesce');
-        ie_close('code');
-        itext(' on an ');
-        ie_open('code');
-          itext('Async');
-        ie_close('code');
-        itext(' can be used to model the all too familiar, and more imperative ');
-        ie_open('code');
-          itext('if/else');
-        ie_close('code');
-        itext(' flow in a more declarative manner.');
-      ie_close('p');
-      ie_open('p');
-        itext('The first function is used when invoked on a ');
-        ie_open('a', null, null,
-            'href', '#rejected');
-          ie_open('code');
-            itext('Rejected');
-          ie_close('code');
-        ie_close('a');
-        itext(' instance and will return a ');
-        ie_open('a', null, null,
-            'href', '#resolved');
-          ie_open('code');
-            itext('Resolved');
-          ie_close('code');
-        ie_close('a');
-        itext(' instance wrapping the result of the function. The second function is used when ');
-        ie_open('code');
-          itext('coalesce');
-        ie_close('code');
-        itext(' is invoked on a ');
-        ie_open('a', null, null,
-            'href', '#resolved');
-          ie_open('code');
-            itext('Resolved');
-          ie_close('code');
-        ie_close('a');
-        itext(' instance and is used to map the original value, returning a new ');
-        ie_open('a', null, null,
-            'href', '#resolved');
-          ie_open('code');
-            itext('Resolved');
-          ie_close('code');
-        ie_close('a');
-        itext(' instance wrapping the result of the second function.');
-      ie_close('p');
-      $templateAlias2({code: 'import Async from \'crocks/Async\'\n\nimport coalesce from \'crocks/pointfree/coalesce\'\n\nconst { Rejected, Resolved } = Async\n\n// log :: String -> a -> a\nconst log = label => x =>\n  (console.log(`${label}:`, x), x)\n\n// label :: String -> String -> String\nconst label =\n  lbl => x => `${lbl} ${x}`\n\n// resolve :: Async e String -> Async e String\nconst resolve =\n  coalesce(label(\'Was\'), label(\'Still\'))\n\nresolve(Resolved(\'Resolved\'))\n  .fork(log(\'rej\'), log(\'res\'))\n//=> res: "Still Resolved"\n\nresolve(Rejected(\'Rejected\'))\n  .fork(log(\'rej\'), log(\'res\'))\n//=> res: "Was Rejected"', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'swap',
-            'href', '#swap');
-          itext('swap');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Async e a ~> ((e -> b), (a -> c)) -> Async c b', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('Used to map the value of a ');
-        ie_open('a', null, null,
-            'href', '#rejected');
-          ie_open('code');
-            itext('Rejected');
-          ie_close('code');
-        ie_close('a');
-        itext(' into a ');
-        ie_open('a', null, null,
-            'href', '#resolved');
-          ie_open('code');
-            itext('Resolved');
-          ie_close('code');
-        ie_close('a');
-        itext(' or a ');
-        ie_open('a', null, null,
-            'href', '#resolved');
-          ie_open('code');
-            itext('Resolved');
-          ie_close('code');
-        ie_close('a');
-        itext(' to a ');
-        ie_open('a', null, null,
-            'href', '#rejected');
-          ie_open('code');
-            itext('Rejected');
-          ie_close('code');
-        ie_close('a');
-        itext(', ');
-        ie_open('code');
-          itext('swap');
-        ie_close('code');
-        itext(' takes (2) functions as its arguments. The first function is used to map the expected ');
-        ie_open('a', null, null,
-            'href', '#rejected');
-          ie_open('code');
-            itext('Rejected');
-          ie_close('code');
-        ie_close('a');
-        itext(' value into a ');
-        ie_open('a', null, null,
-            'href', '#resolved');
-          ie_open('code');
-            itext('Resolved');
-          ie_close('code');
-        ie_close('a');
-        itext(', while the second goes from ');
-        ie_open('a', null, null,
-            'href', '#resolved');
-          ie_open('code');
-            itext('Resolved');
-          ie_close('code');
-        ie_close('a');
-        itext(' to ');
-        ie_open('a', null, null,
-            'href', '#rejected');
-          ie_open('code');
-            itext('Rejected');
-          ie_close('code');
-        ie_close('a');
-        itext('. If no mapping is required on either, then ');
-        ie_open('a', null, null,
-            'href', '../functions/combinators.html#identity');
-          ie_open('code');
-            itext('identity');
-          ie_close('code');
-        ie_close('a');
-        itext(' functions can be used in one or both arguments.');
-      ie_close('p');
-      $templateAlias2({code: 'import Async from \'crocks/Async\'\n\nimport compose from \'crocks/helpers/compose\'\nimport identity from \'crocks/combinators/identity\'\nimport swap from \'crocks/pointfree/swap\'\n\nconst { Rejected, Resolved } = Async\n\n// log :: String -> a -> a\nconst log = label => x =>\n  (console.log(`${label}:`, x), x)\n\n// length :: String -> Integer\nconst length =\n  x => x.length\n\n// repeat :: String -> Number -> String\nconst repeat =\n  char => n => char.repeat(n)\n\n// values :: Async String Number -> Async String Number\nconst values =\n  swap(length, repeat(\'a\'))\n\n// valueIso :: Async String Number -> Async String Number\nconst valueIso =\n  compose(values, values)\n\n// types :: Async a b -> b a\nconst types =\n  swap(identity, identity)\n\n// typeIso :: Async a b -> b a\nconst typeIso =\n  compose(types, types)\n\nvalues(Resolved(5))\n  .fork(log(\'rej\'), log(\'res\'))\n//=> rej: "aaaaa"\n\nvalues(Rejected(\'aaaaa\'))\n  .fork(log(\'rej\'), log(\'res\'))\n//=> res: 5\n\nvalueIso(Resolved(5))\n  .fork(log(\'rej\'), log(\'res\'))\n//=> res: 5\n\nvalueIso(Rejected(\'aaaaa\'))\n  .fork(log(\'rej\'), log(\'res\'))\n//=> rej: "aaaaa"\n\ntypes(Resolved(5))\n  .fork(log(\'rej\'), log(\'res\'))\n//=> rej: 5\n\ntypes(Rejected(\'aaaaa\'))\n  .fork(log(\'rej\'), log(\'res\'))\n//=> res: "aaaaa"\n\ntypeIso(Resolved(5))\n  .fork(log(\'rej\'), log(\'res\'))\n//=> res: 5\n\ntypeIso(Rejected(\'aaaaa\'))\n  .fork(log(\'rej\'), log(\'res\'))\n//=> rej: "aaaaa"', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'fork',
-            'href', '#fork');
-          itext('fork');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Async e a ~> ((e -> ()), (a -> ())) -> (() -> ())\nAsync e a ~> ((e -> ()), (a -> ()), (() -> ())) -> (() -> ())', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('The ');
-        ie_open('code');
-          itext('Async');
-        ie_close('code');
-        itext(' type is lazy and will not be executed until told to do so and ');
-        ie_open('code');
-          itext('fork');
-        ie_close('code');
-        itext(' is the primary method used for execution. ');
-        ie_open('code');
-          itext('fork');
-        ie_close('code');
-        itext(' implements (2) signatures depending on the need for clean up in the event of cancellation, but both return a function that can be used for cancellation of a given instance.');
-      ie_close('p');
-      ie_open('p');
-        itext('The first and more common signature takes (2) functions that will have their return values ignored. The first function will be run in the event of the');
-        ie_open('code');
-          itext('Async');
-        ie_close('code');
-        itext(' instance settling on ');
-        ie_open('a', null, null,
-            'href', '#rejected');
-          ie_open('code');
-            itext('Rejected');
-          ie_close('code');
-        ie_close('a');
-        itext(' and will receive as its single argument the value or "cause" of rejection. The second function provided will be executed in the case of the instance settling on ');
-        ie_open('a', null, null,
-            'href', '#resolved');
-          ie_open('code');
-            itext('Resolved');
-          ie_close('code');
-        ie_close('a');
-        itext(' and will receive as its single argument the value the ');
-        ie_open('code');
-          itext('Async');
-        ie_close('code');
-        itext(' was resolved with.');
-      ie_close('p');
-      ie_open('p');
-        itext('The second signature is used when any cleanup needs to be performed after a given ');
-        ie_open('code');
-          itext('Async');
-        ie_close('code');
-        itext(' is cancelled by having the function returned from ');
-        ie_open('code');
-          itext('fork');
-        ie_close('code');
-        itext(' called. The first (2) arguments to the signature are the same as the more common signature described above, but takes an addition function that can be used for "clean up" after cancellation. When all in-flight computations settle, the function provided will be silently executed.');
-      ie_close('p');
-      $templateAlias2({code: 'import Async from \'crocks/Async\'\n\nimport compose from \'crocks/helpers/compose\'\n\n// log :: String -> a -> a\nconst log = label => x =>\n  (console.log(`${label}:`, x), x)\n\n// inc :: Number -> Number\nconst inc =\n  n => n + 1\n\n// delay :: a -> Async e a\nconst delay = x => Async(\n  (rej, res) => { setTimeout(() => res(x), 1000) }\n).map(compose(inc, log(\'value\')))\n\ndelay(0)\n  .chain(delay)\n  .chain(delay)\n  .fork(log(\'rej\'), log(\'res\'))\n//=> value: 0\n//=> value: 1\n//=> value: 2\n//=> res: 3\n\nconst cancel =\n  delay(0)\n    .chain(delay)\n    .chain(delay)\n    .fork(log(\'rej\'), log(\'res\'))\n//=> value: 0\n//=> value: 1\n\nsetTimeout(cancel, 2200)', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'topromise',
-            'href', '#topromise');
-          itext('toPromise');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Async e a ~> () -> Promise a e', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('While ');
-        ie_open('a', null, null,
-            'href', '#fork');
-          ie_open('code');
-            itext('fork');
-          ie_close('code');
-        ie_close('a');
-        itext(' is the more common method for running an ');
-        ie_open('code');
-          itext('Async');
-        ie_close('code');
-        itext(' instance, there may come time where a ');
-        ie_open('code');
-          itext('Promise');
-        ie_close('code');
-        itext(' is needed at the edge of a given program or flow. When the need to integrate into an existing ');
-        ie_open('code');
-          itext('Promise');
-        ie_close('code');
-        itext(' chain arises, ');
-        ie_open('code');
-          itext('Async');
-        ie_close('code');
-        itext(' provides the ');
-        ie_open('code');
-          itext('toPromise');
-        ie_close('code');
-        itext(' method.');
-      ie_close('p');
-      ie_open('p');
-        ie_open('code');
-          itext('toPromise');
-        ie_close('code');
-        itext(' takes no arguments and when invoked will fork the instance internally and return a ');
-        ie_open('code');
-          itext('Promise');
-        ie_close('code');
-        itext(' that will be in-flight. This comes in handy for integration with other ');
-        ie_open('code');
-          itext('Promise');
-        ie_close('code');
-        itext(' based libraries that are utilized in a given application, program or flow.');
-      ie_close('p');
-      $templateAlias2({code: 'import Async from \'crocks/Async\'\n\nconst { Rejected, Resolved } = Async\n\n// log :: String -> a -> a\nconst log = label => x =>\n  (console.log(`${label}:`, x), x)\n\nResolved(\'resolved\')\n  .toPromise()\n  .then(log(\'res\'))\n  .catch(log(\'rej\'))\n//=> res: resolved\n\nRejected(\'rejected\')\n  .toPromise()\n  .then(log(\'res\'))\n  .catch(log(\'rej\'))\n//=> rej: rejected', mode: 'javascript'}, null, opt_ijData);
-    ie_close('article');
-    ie_open('article', null, null,
-        'id', 'topic-transformation');
-      ie_open('h2');
-        ie_open('a', null, null,
-            'id', 'transformation-functions',
-            'href', '#transformation-functions');
-          itext('Transformation Functions');
-        ie_close('a');
-      ie_close('h2');
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'eithertoasync',
-            'href', '#eithertoasync');
-          itext('eitherToAsync');
-        ie_close('a');
-      ie_close('h4');
-      ie_open('p');
-        ie_open('code');
-          itext('crocks/Async/eitherToAsync');
-        ie_close('code');
-      ie_close('p');
-      $templateAlias2({code: 'eitherToAsync :: Either b a -> Async b a\neitherToAsync :: (a -> Either c b) -> a -> Async c b', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('Used to transform a given ');
-        ie_open('code');
-          itext('Either');
-        ie_close('code');
-        itext(' instance to an ');
-        ie_open('code');
-          itext('Async');
-        ie_close('code');
-        itext(' instance, ');
-        ie_open('code');
-          itext('eitherToAsync');
-        ie_close('code');
-        itext(' will turn a ');
-        ie_open('code');
-          itext('Right');
-        ie_close('code');
-        itext(' instance into a ');
-        ie_open('a', null, null,
-            'href', '#resolved');
-          ie_open('code');
-            itext('Resolved');
-          ie_close('code');
-        ie_close('a');
-        itext(' instance wrapping the original value contained in the original ');
-        ie_open('code');
-          itext('Right');
-        ie_close('code');
-        itext('. If a ');
-        ie_open('code');
-          itext('Left');
-        ie_close('code');
-        itext(' is provided, then ');
-        ie_open('code');
-          itext('eitherToAsync');
-        ie_close('code');
-        itext(' will return a ');
-        ie_open('a', null, null,
-            'href', '#rejected');
-          ie_open('code');
-            itext('Rejected');
-          ie_close('code');
-        ie_close('a');
-        itext(' instance, wrapping the original ');
-        ie_open('code');
-          itext('Left');
-        ie_close('code');
-        itext(' value.');
-      ie_close('p');
-      ie_open('p');
-        itext('Like all ');
+        itext(' is used on all ');
         ie_open('code');
           itext('crocks');
         ie_close('code');
-        itext(' transformation functions, ');
+        itext(' ');
         ie_open('code');
-          itext('eitherToAsync');
+          itext('Monoid');
         ie_close('code');
-        itext(' has (2) possible signatures and will behave differently when passed either an ');
+        itext('s as a means of extraction. While the extraction is available, types that implement ');
         ie_open('code');
-          itext('Either');
+          itext('valueOf');
         ie_close('code');
-        itext(' instance or a function that returns an instance of ');
+        itext(' are not necessarily a');
         ie_open('code');
-          itext('Either');
+          itext('Comonad');
         ie_close('code');
-        itext('. When passed the instance, a transformed ');
-        ie_open('code');
-          itext('Async');
-        ie_close('code');
-        itext(' is returned. When passed an ');
-        ie_open('code');
-          itext('Either');
-        ie_close('code');
-        itext(' returning function, a function will be returned that takes a given value and returns an ');
-        ie_open('code');
-          itext('Async');
-        ie_close('code');
-        itext('.');
-      ie_close('p');
-      $templateAlias2({code: 'import Async from \'crocks/Async\'\nimport Either from \'crocks/Either\'\n\nimport eitherToAsync from \'crocks/Async/eitherToAsync\'\n\nimport and from \'crocks/logic/and\'\nimport ifElse from \'crocks/logic/ifElse\'\nimport isNumber from \'crocks/predicates/isNumber\'\n\nconst { Resolved } = Async\nconst { Left, Right } = Either\n\n// log :: String -> a -> a\nconst log = label => x =>\n  (console.log(`${label}:`, x), x)\n\n// gte :: Number -> Number -> Boolean\nconst gte =\n  x => y => y >= x\n\n// isLarge :: a -> Boolean\nconst isLarge =\n  and(isNumber, gte(10))\n\n// isValid :: a -> Either String a\nconst isValid = ifElse(\n  isLarge,\n  Right,\n  x => Left(`${x} is not valid`)\n)\n\neitherToAsync(Right(\'Correct\'))\n  .fork(log(\'rej\'), log(\'res\'))\n//=> res: "Correct"\n\neitherToAsync(Left(\'Not Good\'))\n  .fork(log(\'rej\'), log(\'res\'))\n//=> rej: "Not Good"\n\nResolved(54)\n  .chain(eitherToAsync(isValid))\n  .fork(log(\'rej\'), log(\'res\'))\n//=> res: 54\n\nResolved(4)\n  .chain(eitherToAsync(isValid))\n  .fork(log(\'rej\'), log(\'res\'))\n//=> rej: "4 is not valid"\n\nResolved(\'Bubble\')\n  .chain(eitherToAsync(isValid))\n  .fork(log(\'rej\'), log(\'res\'))\n//=> rej: "Bubble is not valid"', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'firsttoasync',
-            'href', '#firsttoasync');
-          itext('firstToAsync');
-        ie_close('a');
-      ie_close('h4');
-      ie_open('p');
-        ie_open('code');
-          itext('crocks/Async/firstToAsync');
-        ie_close('code');
-      ie_close('p');
-      $templateAlias2({code: 'firstToAsync :: e -> First a -> Async e a\nfirstToAsync :: e -> (a -> First b) -> a -> Async e b', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('Used to transform a given ');
-        ie_open('a', null, null,
-            'href', '../monoids/First.html');
-          ie_open('code');
-            itext('First');
-          ie_close('code');
-        ie_close('a');
-        itext(' instance to an ');
-        ie_open('code');
-          itext('Async');
-        ie_close('code');
-        itext(' instance, ');
-        ie_open('code');
-          itext('firstToAsync');
-        ie_close('code');
-        itext(' will turn a non-empty ');
-        ie_open('a', null, null,
-            'href', '../monoids/First.html');
-          ie_open('code');
-            itext('First');
-          ie_close('code');
-        ie_close('a');
-        itext(' instance into a ');
-        ie_open('a', null, null,
-            'href', '#resolved');
-          ie_open('code');
-            itext('Resolved');
-          ie_close('code');
-        ie_close('a');
-        itext(' instance wrapping the original value contained in the original non-empty.');
-      ie_close('p');
-      ie_open('p');
-        itext('The ');
-        ie_open('a', null, null,
-            'href', '../monoids/First.html');
-          ie_open('code');
-            itext('First');
-          ie_close('code');
-        ie_close('a');
-        itext(' datatype is based on a ');
-        ie_open('a', null, null,
-            'href', '../crocks/Maybe.html');
-          ie_open('code');
-            itext('Maybe');
-          ie_close('code');
-        ie_close('a');
-        itext(' and as such its left or empty value is fixed to a ');
-        ie_open('code');
-          itext('()');
-        ie_close('code');
-        itext(' type. As a means to allow for convenient transformation, ');
-        ie_open('code');
-          itext('firstToAsync');
-        ie_close('code');
-        itext(' takes a default ');
-        ie_open('a', null, null,
-            'href', '#rejected');
-          ie_open('code');
-            itext('Rejected');
-          ie_close('code');
-        ie_close('a');
-        itext(' value as the first argument. This value will be wrapped in a resulting ');
-        ie_open('a', null, null,
-            'href', '#rejected');
-          ie_open('code');
-            itext('Rejected');
-          ie_close('code');
-        ie_close('a');
-        itext(' instance in the case of empty.');
-      ie_close('p');
-      ie_open('p');
-        itext('Like all ');
+        itext('. This function is used primarily for convenience for some of the helper functions that ship with ');
         ie_open('code');
           itext('crocks');
         ie_close('code');
-        itext(' transformation functions, ');
+        itext('. Calling ');
         ie_open('code');
-          itext('firstToAsync');
+          itext('valueOf');
         ie_close('code');
-        itext(' has (2) possible signatures and will behave differently when passed either a ');
-        ie_open('a', null, null,
-            'href', '../monoids/First.html');
-          ie_open('code');
-            itext('First');
-          ie_close('code');
-        ie_close('a');
-        itext(' instance or a function that returns an instance of ');
-        ie_open('a', null, null,
-            'href', '../monoids/First.html');
-          ie_open('code');
-            itext('First');
-          ie_close('code');
-        ie_close('a');
-        itext('. When passed the instance, a transformed ');
+        itext(' on a ');
         ie_open('code');
-          itext('Async');
+          itext('Sum');
         ie_close('code');
-        itext(' is returned. When passed a ');
-        ie_open('a', null, null,
-            'href', '../monoids/First.html');
-          ie_open('code');
-            itext('First');
-          ie_close('code');
-        ie_close('a');
-        itext(' returning function, a function will be returned that takes a given value and returns an ');
+        itext(' instance will result in the underlying ');
         ie_open('code');
-          itext('Async');
+          itext('Number');
         ie_close('code');
         itext('.');
       ie_close('p');
-      $templateAlias2({code: 'import Async from \'crocks/Async\'\nimport First from \'crocks/First\'\n\nimport firstToAsync from \'crocks/Async/firstToAsync\'\n\nimport Pred from \'crocks/Pred\'\nimport isString from \'crocks/predicates/isString\'\nimport mconcatMap from \'crocks/helpers/mconcatMap\'\nimport safe from \'crocks/Maybe/safe\'\n\nconst { Resolved } = Async\n\n// log :: String -> a -> a\nconst log = label => x =>\n  (console.log(`${label}:`, x), x)\n\n// length :: String -> Number\nconst length =\n  x => x.length\n\n// gte :: Number -> Number -> Boolean\nconst gte =\n  x => y => y >= x\n\n// isValid :: Pred String\nconst isValid =\n  Pred(isString)\n    .concat(Pred(gte(4)).contramap(length))\n\n// firstValid :: [ String ] -> First String\nconst firstValid =\n  mconcatMap(First, safe(isValid))\n\n// findFirstValid :: [ String ] -> Async String String\nconst findFirstValid =\n  firstToAsync(\'Nothing Found\', firstValid)\n\nfirstToAsync(\'Error\', First(true))\n  .fork(log(\'rej\'), log(\'res\'))\n//=> res: true\n\nfirstToAsync(\'Error\', First.empty())\n  .fork(log(\'rej\'), log(\'res\'))\n//=> rej: "Error"\n\nResolved([ \'cat\', \'rhino\', \'unicorn\' ])\n  .chain(findFirstValid)\n  .fork(log(\'rej\'), log(\'res\'))\n//=> res: "rhino"\n\nResolved([ 1, 2, 3 ])\n  .chain(findFirstValid)\n  .fork(log(\'rej\'), log(\'res\'))\n//=> rej: "Nothing Found"\n\nResolved([ \'cat\', \'bat\', \'imp\' ])\n  .chain(findFirstValid)\n  .fork(log(\'rej\'), log(\'res\'))\n//=> rej: "Nothing Found"', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'lasttoasync',
-            'href', '#lasttoasync');
-          itext('lastToAsync');
-        ie_close('a');
-      ie_close('h4');
-      ie_open('p');
-        ie_open('code');
-          itext('crocks/Async/lastToAsync');
-        ie_close('code');
-      ie_close('p');
-      $templateAlias2({code: 'lastToAsync :: e -> Last a -> Async e a\nlastToAsync :: e -> (a -> Last b) -> a -> Async e b', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('Used to transform a given ');
-        ie_open('a', null, null,
-            'href', '../monoids/Last.html');
-          ie_open('code');
-            itext('Last');
-          ie_close('code');
-        ie_close('a');
-        itext(' instance to an ');
-        ie_open('code');
-          itext('Async');
-        ie_close('code');
-        itext(' instance, ');
-        ie_open('code');
-          itext('lastToAsync');
-        ie_close('code');
-        itext(' will turn a non-empty ');
-        ie_open('a', null, null,
-            'href', '../monoids/Last.html');
-          ie_open('code');
-            itext('Last');
-          ie_close('code');
-        ie_close('a');
-        itext(' instance into a ');
-        ie_open('a', null, null,
-            'href', '#resolved');
-          ie_open('code');
-            itext('Resolved');
-          ie_close('code');
-        ie_close('a');
-        itext(' instance wrapping the original value contained in the original non-empty.');
-      ie_close('p');
-      ie_open('p');
-        itext('The ');
-        ie_open('a', null, null,
-            'href', '../monoids/Last.html');
-          ie_open('code');
-            itext('Last');
-          ie_close('code');
-        ie_close('a');
-        itext(' datatype is based on a ');
-        ie_open('a', null, null,
-            'href', '../crocks/Maybe.html');
-          ie_open('code');
-            itext('Maybe');
-          ie_close('code');
-        ie_close('a');
-        itext(' and as such its left or empty value is fixed to a ');
-        ie_open('code');
-          itext('()');
-        ie_close('code');
-        itext(' type. As a means to allow for convenient transformation, ');
-        ie_open('code');
-          itext('lastToAsync');
-        ie_close('code');
-        itext(' takes a default ');
-        ie_open('a', null, null,
-            'href', '#rejected');
-          ie_open('code');
-            itext('Rejected');
-          ie_close('code');
-        ie_close('a');
-        itext(' value as the first argument. This value will be wrapped in a resulting ');
-        ie_open('a', null, null,
-            'href', '#rejected');
-          ie_open('code');
-            itext('Rejected');
-          ie_close('code');
-        ie_close('a');
-        itext(' instance, in the case of empty.');
-      ie_close('p');
-      ie_open('p');
-        itext('Like all ');
-        ie_open('code');
-          itext('crocks');
-        ie_close('code');
-        itext(' transformation functions, ');
-        ie_open('code');
-          itext('lastToAsync');
-        ie_close('code');
-        itext(' has (2) possible signatures and will behave differently when passed either a ');
-        ie_open('a', null, null,
-            'href', '../monoids/Last.html');
-          ie_open('code');
-            itext('Last');
-          ie_close('code');
-        ie_close('a');
-        itext(' instance or a function that returns an instance of ');
-        ie_open('a', null, null,
-            'href', '../monoids/Last.html');
-          ie_open('code');
-            itext('Last');
-          ie_close('code');
-        ie_close('a');
-        itext('. When passed the instance, a transformed ');
-        ie_open('code');
-          itext('Async');
-        ie_close('code');
-        itext(' is returned. When passed a ');
-        ie_open('a', null, null,
-            'href', '../monoids/Last.html');
-          ie_open('code');
-            itext('Last');
-          ie_close('code');
-        ie_close('a');
-        itext(' returning function, a function will be returned that takes a given value and returns an ');
-        ie_open('code');
-          itext('Async');
-        ie_close('code');
-        itext('.');
-      ie_close('p');
-      $templateAlias2({code: 'import Async from \'crocks/Async\'\nimport Last from \'crocks/Last\'\n\nimport lastToAsync from \'crocks/Async/lastToAsync\'\n\nimport Pred from \'crocks/Pred\'\nimport isString from \'crocks/predicates/isString\'\nimport mconcatMap from \'crocks/helpers/mconcatMap\'\nimport safe from \'crocks/Maybe/safe\'\n\nconst { Resolved } = Async\n\n// log :: String -> a -> a\nconst log = label => x =>\n  (console.log(`${label}:`, x), x)\n\n// length :: String -> Number\nconst length =\n  x => x.length\n\n// gte :: Number -> Number -> Boolean\nconst gte =\n  x => y => y >= x\n\n// isValid :: Pred String\nconst isValid =\n  Pred(isString)\n    .concat(Pred(gte(4)).contramap(length))\n\n// lastValid :: [ String ] -> Last String\nconst lastValid =\n  mconcatMap(Last, safe(isValid))\n\n// findLastValid :: [ String ] -> Async String String\nconst findLastValid =\n  lastToAsync(\'Nothing Found\', lastValid)\n\nlastToAsync(\'Error\', Last(true))\n  .fork(log(\'rej\'), log(\'res\'))\n//=> res: true\n\nlastToAsync(\'Error\', Last.empty())\n  .fork(log(\'rej\'), log(\'res\'))\n//=> rej: "Error"\n\nResolved([ \'unicorn\', \'rhino\', \'cat\' ])\n  .chain(findLastValid)\n  .fork(log(\'rej\'), log(\'res\'))\n//=> res: "rhino"\n\nResolved([ 1, 2, 3 ])\n  .chain(findLastValid)\n  .fork(log(\'rej\'), log(\'res\'))\n//=> rej: "Nothing Found"\n\nResolved([ \'cat\', \'bat\', \'imp\' ])\n  .chain(findLastValid)\n  .fork(log(\'rej\'), log(\'res\'))\n//=> rej: "Nothing Found"', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'maybetoasync',
-            'href', '#maybetoasync');
-          itext('maybeToAsync');
-        ie_close('a');
-      ie_close('h4');
-      ie_open('p');
-        ie_open('code');
-          itext('crocks/Async/maybeToAsync');
-        ie_close('code');
-      ie_close('p');
-      $templateAlias2({code: 'maybeToAsync :: e -> Maybe a -> Async e a\nmaybeToAsync :: e -> (a -> Maybe b) -> a -> Async e b', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('Used to transform a given ');
-        ie_open('a', null, null,
-            'href', '../crocks/Maybe.html');
-          ie_open('code');
-            itext('Maybe');
-          ie_close('code');
-        ie_close('a');
-        itext(' instance to an ');
-        ie_open('code');
-          itext('Async');
-        ie_close('code');
-        itext(' instance, ');
-        ie_open('code');
-          itext('maybeToAsync');
-        ie_close('code');
-        itext(' will turn a ');
-        ie_open('a', null, null,
-            'href', '../crocks/Maybe.html#just');
-          ie_open('code');
-            itext('Just');
-          ie_close('code');
-        ie_close('a');
-        itext(' instance into a ');
-        ie_open('a', null, null,
-            'href', '#resolved');
-          ie_open('code');
-            itext('Resolved');
-          ie_close('code');
-        ie_close('a');
-        itext(' instance wrapping the original value contained in the original ');
-        ie_open('a', null, null,
-            'href', '../crocks/Maybe.html#just');
-          ie_open('code');
-            itext('Just');
-          ie_close('code');
-        ie_close('a');
-        itext('.');
-      ie_close('p');
-      ie_open('p');
-        itext('A ');
-        ie_open('a', null, null,
-            'href', '../crocks/Maybe.html#nothing');
-          ie_open('code');
-            itext('Nothing');
-          ie_close('code');
-        ie_close('a');
-        itext(' instance is fixed to a ');
-        ie_open('code');
-          itext('()');
-        ie_close('code');
-        itext(' type and as such can only ever contain a value of ');
-        ie_open('code');
-          itext('undefined');
-        ie_close('code');
-        itext('. As a means to allow for convenient transformation, ');
-        ie_open('code');
-          itext('maybeToAsync');
-        ie_close('code');
-        itext(' takes a default ');
-        ie_open('a', null, null,
-            'href', '#rejected');
-          ie_open('code');
-            itext('Rejected');
-          ie_close('code');
-        ie_close('a');
-        itext(' value as the first argument. This value will be wrapped in a resulting ');
-        ie_open('a', null, null,
-            'href', '#rejected');
-          ie_open('code');
-            itext('Rejected');
-          ie_close('code');
-        ie_close('a');
-        itext(' instance, in the case of ');
-        ie_open('a', null, null,
-            'href', '../crocks/Maybe.html#nothing');
-          ie_open('code');
-            itext('Nothing');
-          ie_close('code');
-        ie_close('a');
-        itext('.');
-      ie_close('p');
-      ie_open('p');
-        itext('Like all ');
-        ie_open('code');
-          itext('crocks');
-        ie_close('code');
-        itext(' transformation functions, ');
-        ie_open('code');
-          itext('maybeToAsync');
-        ie_close('code');
-        itext(' has (2) possible signatures and will behave differently when passed either a ');
-        ie_open('a', null, null,
-            'href', '../crocks/Maybe.html');
-          ie_open('code');
-            itext('Maybe');
-          ie_close('code');
-        ie_close('a');
-        itext(' instance or a function that returns an instance of ');
-        ie_open('a', null, null,
-            'href', '../crocks/Maybe.html');
-          ie_open('code');
-            itext('Maybe');
-          ie_close('code');
-        ie_close('a');
-        itext('. When passed the instance, a transformed ');
-        ie_open('code');
-          itext('Async');
-        ie_close('code');
-        itext(' is returned. When passed a ');
-        ie_open('a', null, null,
-            'href', '../crocks/Maybe.html');
-          ie_open('code');
-            itext('Maybe');
-          ie_close('code');
-        ie_close('a');
-        itext(' returning function, a function will be returned that takes a given value and returns an ');
-        ie_open('code');
-          itext('Async');
-        ie_close('code');
-        itext('.');
-      ie_close('p');
-      $templateAlias2({code: 'import Async from \'crocks/Async\'\nimport Maybe from \'crocks/Maybe\'\n\nimport maybeToAsync from \'crocks/Async/maybeToAsync\'\n\nimport and from \'crocks/logic/and\'\nimport isEmpty from \'crocks/predicates/isEmpty\'\nimport isArray from \'crocks/predicates/isArray\'\nimport not from \'crocks/logic/not\'\nimport safe from \'crocks/Maybe/safe\'\n\nconst { Resolved } = Async\nconst { Nothing, Just } = Maybe\n\n// log :: String -> a -> a\nconst log = label => x =>\n  (console.log(`${label}:`, x), x)\n\n// isValid :: a -> Maybe [ b ]\nconst isValid = safe(\n  and(isArray, not(isEmpty))\n)\n\nmaybeToAsync(false, Just(true))\n  .fork(log(\'rej\'), log(\'res\'))\n//=> res: true\n\nmaybeToAsync(\'Bad\', Nothing())\n  .fork(log(\'rej\'), log(\'res\'))\n//=> rej: "Bad"\n\nResolved([ \'a\', \'b\', \'c\' ])\n  .chain(maybeToAsync(\'Invalid\', isValid))\n  .fork(log(\'rej\'), log(\'res\'))\n//=> res: [ \'a\', \'b\', \'c\' ]\n\nResolved([])\n  .chain(maybeToAsync(\'Invalid\', isValid))\n  .fork(log(\'rej\'), log(\'res\'))\n//=> rej: "Invalid"\n\nResolved(\'\')\n  .chain(maybeToAsync(\'Invalid\', isValid))\n  .fork(log(\'rej\'), log(\'res\'))\n//=> rej: "Invalid"', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'resulttoasync',
-            'href', '#resulttoasync');
-          itext('resultToAsync');
-        ie_close('a');
-      ie_close('h4');
-      ie_open('p');
-        ie_open('code');
-          itext('crocks/Async/resultToAsync');
-        ie_close('code');
-      ie_close('p');
-      $templateAlias2({code: 'resultToAsync :: Result b a -> Async b a\nresultToAsync :: (a -> Result c b) -> a -> Result c b', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('Used to transform a given ');
-        ie_open('code');
-          itext('Result');
-        ie_close('code');
-        itext(' instance to an ');
-        ie_open('code');
-          itext('Async');
-        ie_close('code');
-        itext(' instance, ');
-        ie_open('code');
-          itext('resultToAsync');
-        ie_close('code');
-        itext(' will turn an ');
-        ie_open('code');
-          itext('Ok');
-        ie_close('code');
-        itext(' instance into a ');
-        ie_open('a', null, null,
-            'href', '#resolved');
-          ie_open('code');
-            itext('Resolved');
-          ie_close('code');
-        ie_close('a');
-        itext(' instance wrapping the original value contained in the original ');
-        ie_open('code');
-          itext('Ok');
-        ie_close('code');
-        itext('. If an ');
-        ie_open('code');
-          itext('Err');
-        ie_close('code');
-        itext(' is provided, then ');
-        ie_open('code');
-          itext('resultToAsync');
-        ie_close('code');
-        itext(' will return a ');
-        ie_open('a', null, null,
-            'href', '#rejected');
-          ie_open('code');
-            itext('Rejected');
-          ie_close('code');
-        ie_close('a');
-        itext(' instance, wrapping the original ');
-        ie_open('code');
-          itext('Err');
-        ie_close('code');
-        itext(' value.');
-      ie_close('p');
-      ie_open('p');
-        itext('Like all ');
-        ie_open('code');
-          itext('crocks');
-        ie_close('code');
-        itext(' transformation functions, ');
-        ie_open('code');
-          itext('resultToAsync');
-        ie_close('code');
-        itext(' has (2) possible signatures and will behave differently when passed either a ');
-        ie_open('code');
-          itext('Result');
-        ie_close('code');
-        itext(' instance or a function that returns an instance of ');
-        ie_open('code');
-          itext('Result');
-        ie_close('code');
-        itext('. When passed the instance, a transformed ');
-        ie_open('code');
-          itext('Async');
-        ie_close('code');
-        itext(' is returned. When passed a ');
-        ie_open('code');
-          itext('Result');
-        ie_close('code');
-        itext(' returning function, a function will be returned that takes a given value and returns an ');
-        ie_open('code');
-          itext('Async');
-        ie_close('code');
-        itext('.');
-      ie_close('p');
-      $templateAlias2({code: 'import Async from \'crocks/Async\'\n\nimport Result from \'crocks/Result\'\n\nimport resultToAsync from \'crocks/Async/resultToAsync\'\n\nimport identity from \'crocks/combinators/identity\'\nimport isNumber from \'crocks/predicates/isNumber\'\nimport tryCatch from \'crocks/Result/tryCatch\'\n\nconst { Resolved } = Async\n\nconst { Err, Ok }  = Result\n\n// log :: String -> a -> a\nconst log = label => x =>\n  (console.log(`${label}:`, x), x)\n\n// notNumber :: a -> Number\nfunction notNumber(x) {\n  if (!isNumber(x)) {\n    throw new TypeError(\'Must be a Number\')\n  }\n  return x\n}\n\n// safeFail :: a -> Result TypeError Number\nconst safeFail =\n  tryCatch(notNumber)\n\nresultToAsync(Ok(99))\n  .fork(log(\'rej\'), log(\'res\'))\n//=> res: 99\n\nresultToAsync(Err(\'Not Good\'))\n  .fork(log(\'rej\'), log(\'res\'))\n//=> rej: "Not Good"\n\nResolved(103)\n  .chain(resultToAsync(safeFail))\n  .bimap(x => x.message, identity)\n  .fork(log(\'rej\'), log(\'res\'))\n//=> res: 103\n\nResolved(\'103\')\n  .chain(resultToAsync(safeFail))\n  .bimap(x => x.message, identity)\n  .fork(log(\'rej\'), log(\'res\'))\n//=> rej: "Must be a Number"', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'import Sum from \'crocks/Sum\'\n\nSum(4)\n  .valueOf()\n//=> 4\n\nSum.empty()\n  .valueOf()\n//=> 0\n\nSum(34)\n  .concat(Sum(21))\n  .valueOf()\n//=> 55', mode: 'javascript'}, null, opt_ijData);
     ie_close('article');
     ie_open('input', null, null,
         'type', 'hidden',
@@ -30196,11 +28728,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'value', opt_data.site.title);
     ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({content: param411}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param3000}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'PNOly.render';
+  $render.soyTemplateName = 'rsyXx.render';
 }
 
 exports.render.params = ["page","site"];
@@ -30210,49 +28742,46 @@ return exports;
 
 });
 
-class PNOly extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(PNOly, templates);
+class rsyXx extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(rsyXx, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
 
 
 /***/ }),
-/* 219 */,
-/* 220 */,
-/* 221 */,
-/* 222 */,
-/* 223 */,
-/* 224 */,
-/* 225 */,
-/* 226 */,
-/* 227 */,
-/* 228 */,
-/* 229 */,
-/* 230 */,
-/* 231 */,
-/* 232 */,
-/* 233 */,
-/* 234 */,
-/* 235 */,
-/* 236 */,
-/* 237 */,
-/* 238 */,
-/* 239 */,
-/* 240 */,
-/* 241 */,
-/* 242 */,
-/* 243 */,
-/* 244 */,
-/* 245 */,
-/* 246 */,
-/* 247 */,
 /* 248 */,
 /* 249 */,
 /* 250 */,
 /* 251 */,
 /* 252 */,
-/* 253 */
+/* 253 */,
+/* 254 */,
+/* 255 */,
+/* 256 */,
+/* 257 */,
+/* 258 */,
+/* 259 */,
+/* 260 */,
+/* 261 */,
+/* 262 */,
+/* 263 */,
+/* 264 */,
+/* 265 */,
+/* 266 */,
+/* 267 */,
+/* 268 */,
+/* 269 */,
+/* 270 */,
+/* 271 */,
+/* 272 */,
+/* 273 */,
+/* 274 */,
+/* 275 */,
+/* 276 */,
+/* 277 */,
+/* 278 */,
+/* 279 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30288,9 +28817,9 @@ __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _AsyncSoy = __webpack_require__(218);
+var _SumSoy = __webpack_require__(247);
 
-var _AsyncSoy2 = _interopRequireDefault(_AsyncSoy);
+var _SumSoy2 = _interopRequireDefault(_SumSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30300,23 +28829,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var PNOly = function (_Component) {
-  _inherits(PNOly, _Component);
+var rsyXx = function (_Component) {
+  _inherits(rsyXx, _Component);
 
-  function PNOly() {
-    _classCallCheck(this, PNOly);
+  function rsyXx() {
+    _classCallCheck(this, rsyXx);
 
-    return _possibleConstructorReturn(this, (PNOly.__proto__ || Object.getPrototypeOf(PNOly)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (rsyXx.__proto__ || Object.getPrototypeOf(rsyXx)).apply(this, arguments));
   }
 
-  return PNOly;
+  return rsyXx;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(PNOly, _AsyncSoy2.default);
+_metalSoy2.default.register(rsyXx, _SumSoy2.default);
 
-exports.default = PNOly;
+exports.default = rsyXx;
 
 /***/ })
-],[253]);
+],[279]);

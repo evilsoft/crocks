@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([32,33,34,35],[
+webpackJsonppageComponent([31,34,35,36],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19884,7 +19884,7 @@ if (goog.DEBUG) {
  * @return {void}
  * @suppress {checkTypes}
  */
-function __deltemplate_s152_d34389eb(opt_data, opt_ignored, opt_ijData) {
+function __deltemplate_s174_d34389eb(opt_data, opt_ignored, opt_ijData) {
   ie_open('a', null, null,
       'class', 'sidebar-link ' + (opt_data.page.active ? 'sidebar-link-selected' : ''),
       'href', opt_data.page.url);
@@ -19893,16 +19893,16 @@ function __deltemplate_s152_d34389eb(opt_data, opt_ignored, opt_ijData) {
           'class', 'sidebar-icon icon-16-' + opt_data.page.icon);
     }
     ie_open('span');
-      var dyn10 = opt_data.page.title;
-      if (typeof dyn10 == 'function') dyn10(); else if (dyn10 != null) itext(dyn10);
+      var dyn12 = opt_data.page.title;
+      if (typeof dyn12 == 'function') dyn12(); else if (dyn12 != null) itext(dyn12);
     ie_close('span');
   ie_close('a');
 }
-exports.__deltemplate_s152_d34389eb = __deltemplate_s152_d34389eb;
+exports.__deltemplate_s174_d34389eb = __deltemplate_s174_d34389eb;
 if (goog.DEBUG) {
-  __deltemplate_s152_d34389eb.soyTemplateName = 'Sidebar.__deltemplate_s152_d34389eb';
+  __deltemplate_s174_d34389eb.soyTemplateName = 'Sidebar.__deltemplate_s174_d34389eb';
 }
-soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'sidebar', 0, __deltemplate_s152_d34389eb);
+soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'sidebar', 0, __deltemplate_s174_d34389eb);
 
 exports.render.params = ["section","site"];
 exports.render.types = {"section":"any","site":"any"};
@@ -20091,8 +20091,8 @@ function $render(opt_data, opt_ignored, opt_ijData) {
       ie_void('span', null, null,
           'class', 'icon icon-16-clock');
       itext(' ');
-      var dyn11 = opt_data.time;
-      if (typeof dyn11 == 'function') dyn11(); else if (dyn11 != null) itext(dyn11);
+      var dyn13 = opt_data.time;
+      if (typeof dyn13 == 'function') dyn13(); else if (dyn13 != null) itext(dyn13);
     }
   ie_close('p');
 }
@@ -28348,12 +28348,14 @@ exports.default = parseFromAnchor;
 /* 214 */,
 /* 215 */,
 /* 216 */,
-/* 217 */
+/* 217 */,
+/* 218 */,
+/* 219 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "wTVmU", function() { return wTVmU; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tscPK", function() { return tscPK; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28365,15 +28367,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var templates;
 goog.loadModule(function(exports) {
 
-// This file was automatically generated from Arrow.soy.
+// This file was automatically generated from Const.soy.
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace wTVmU.
+ * @fileoverview Templates in namespace tscPK.
  * @public
  */
 
-goog.module('wTVmU.incrementaldom');
+goog.module('tscPK.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28407,58 +28409,16 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var param303 = function() {
-    $templateAlias2({code: 'Arrow a b', mode: 'haskell'}, null, opt_ijData);
+  var param689 = function() {
+    $templateAlias2({code: 'Const c a', mode: 'haskell'}, null, opt_ijData);
     ie_open('p');
+      itext('Const is a Product type the whose underlying left-most value is fixed to the value it was originally constructed with. This ensures that a desired value is immutable. While its right portion can still be mapped over, when observed, all information on the right will be discarded, leaving only the initial fixed value ');
       ie_open('code');
-        itext('Arrow');
-      ie_close('code');
-      itext(' is a ');
-      ie_open('code');
-        itext('Profunctor');
-      ie_close('code');
-      itext(' that lifts a function of type ');
-      ie_open('code');
-        itext('a -> b');
-      ie_close('code');
-      itext(' and allows for lazy execution of the function. ');
-      ie_open('code');
-        itext('Arrow');
-      ie_close('code');
-      itext(' can be considered a ');
-      ie_open('code');
-        itext('Strong Profunctor');
-      ie_close('code');
-      itext('if the underlying data running throw the ');
-      ie_open('code');
-        itext('Arrow');
-      ie_close('code');
-      itext(' is a ');
-      ie_open('code');
-        itext('Pair');
-      ie_close('code');
-      itext(', typically in the form of ');
-      ie_open('code');
-        itext('Arrow (Pair a c) (Pair b d)');
+        itext('c');
       ie_close('code');
       itext('.');
     ie_close('p');
-    ie_open('p');
-      itext('This will allow you to split execution into two distinct paths, applying ');
-      ie_open('code');
-        itext('Arrow');
-      ie_close('code');
-      itext('to a specific path. The parameters of ');
-      ie_open('code');
-        itext('Arrow');
-      ie_close('code');
-      itext(' represent the function that it wraps, with the input being on the left, and the output on the right. When an');
-      ie_open('code');
-        itext('Arrow');
-      ie_close('code');
-      itext(' wraps an endomorphism, the signature typically represents both the input and output.');
-    ie_close('p');
-    $templateAlias2({code: 'import Arrow from \'crocks/Arrow\'\n\nimport chain from \'crocks/pointfree/chain\'\nimport compose from \'crocks/helpers/compose\'\nimport isString from \'crocks/predicates/isString\'\nimport option from \'crocks/pointfree/option\'\nimport prop from \'crocks/Maybe/prop\'\nimport safe from \'crocks/Maybe/safe\'\n\n// arrUpper :: Arrow String\nconst arrUpper =\n  Arrow(str => str.toUpperCase())\n\narrUpper\n  .runWith(\'nice\')\n//=> \'NICE\'\n\n// getName :: a -> String\nconst getName = compose(\n  option(\'no name\'),\n  chain(safe(isString)),\n  prop(\'name\')\n)\n\n// arrUpperName :: Arrow a String\nconst arrUpperName =\n  arrUpper\n    .contramap(getName)\n\narrUpperName\n  .runWith({ name: \'joey\' })\n//=> \'JOEY\'\n\narrUpperName\n  .runWith({ age: 23 })\n//=> \'NO NAME\'\n\narrUpperName\n  .runWith({ name: false })\n//=> \'NO NAME\'', mode: 'javascript'}, null, opt_ijData);
+    $templateAlias2({code: 'import Const from \'crocks/Const\'\nimport Pair from \'crocks/Pair\'\nimport compose from \'crocks/helpers/compose\'\nimport concat from \'crocks/pointfree/concat\'\nimport extend from \'crocks/pointfree/extend\'\nimport flip from \'crocks/combinators/flip\'\nimport fst from \'crocks/Pair/fst\'\nimport valueOf from \'crocks/pointfree/valueOf\'\n\nConst(\'Hello World\')\n//=> Const \'Hello World\'\n\n// days :: [ String ]\nconst days =\n  [ \'Today\', \'Tomorrow\', \'Yesterday\' ]\n\ndays\n  .map(Const)\n  .reduce(flip(concat))\n//=> Const "Today"\n\nConst(100)\n  .concat(Const(10))\n//=> Const 100\n\n// toLower :: String -> String\nconst toLower =\n  x => x.toLowerCase()\n\n// Field :: Pair (Const a) a\n// updateField :: a -> Field\nconst updateField =\n  value => Pair(Const(value), value)\n\n// updateField :: Field -> Field\nconst resetField =\n  extend(compose(valueOf, fst))\n\nconst changed =\n  updateField(\'Joey\')\n    .map(toLower)\n    .chain(updateField)\n//=> Pair( Const "Joey", "joey" )\n\nresetField(changed)\n//=> Pair( Const "Joey", "Joey" )', mode: 'javascript'}, null, opt_ijData);
     ie_open('article', null, null,
         'id', 'topic-implements');
       ie_open('h2');
@@ -28470,11 +28430,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
       ie_close('h2');
       ie_open('p');
         ie_open('code');
-          itext('Semigroupoid');
+          itext('Setoid');
         ie_close('code');
         itext(', ');
         ie_open('code');
-          itext('Category');
+          itext('Semigroup');
         ie_close('code');
         itext(', ');
         ie_open('code');
@@ -28482,66 +28442,32 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_close('code');
         itext(', ');
         ie_open('code');
-          itext('Contravariant');
+          itext('Apply');
         ie_close('code');
         itext(', ');
         ie_open('code');
-          itext('Profunctor');
+          itext('Chain');
         ie_close('code');
       ie_close('p');
     ie_close('article');
     ie_open('article', null, null,
-        'id', 'topic-constructor');
+        'id', 'topic-construction');
       ie_open('h2');
         ie_open('a', null, null,
-            'id', 'constructor-methods',
-            'href', '#constructor-methods');
-          itext('Constructor Methods');
+            'id', 'construction',
+            'href', '#construction');
+          itext('Construction');
         ie_close('a');
       ie_close('h2');
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'id',
-            'href', '#id');
-          itext('id');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Arrow.id :: () -> Arrow a', mode: 'haskell'}, null, opt_ijData);
+      $templateAlias2({code: 'Const :: c -> Const c a', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
+        itext('The constructor for ');
         ie_open('code');
-          itext('id');
+          itext('Const');
         ie_close('code');
-        itext(' provides the identity for the ');
-        ie_open('code');
-          itext('Arrow');
-        ie_close('code');
-        itext(' in that when it is composed to either the left or right side of a given function, it will essentially result in a morphism that is, for all intents and purposes, the given function. For ');
-        ie_open('code');
-          itext('Arrow');
-        ie_close('code');
-        itext(',');
-        ie_open('code');
-          itext('id');
-        ie_close('code');
-        itext(' is the simple ');
-        ie_open('code');
-          itext('identity');
-        ie_close('code');
-        itext(' function that echoes it\'s given argument (');
-        ie_open('code');
-          itext('x => x');
-        ie_close('code');
-        itext('). As a convenience, ');
-        ie_open('code');
-          itext('id');
-        ie_close('code');
-        itext(' is also available on the ');
-        ie_open('code');
-          itext('Arrow');
-        ie_close('code');
-        itext(' instance.');
+        itext(' is a unary function that takes any value as its argument an results in a Product type whose underlying left-most value is fixed resulting in an immutable value.');
       ie_close('p');
-      $templateAlias2({code: 'import Arrow from \'crocks/Arrow\'\n\n// arrId :: Arrow a\nconst id = Arrow.id()\n\n// arrow :: Arrow a String\nconst arrow =\n  Arrow(x => x.toString())\n\n// left :: Arrow a String\nconst left =\n  id.compose(arrow)\n\n// right :: Arrow a String\nconst right =\n  arrow.compose(id)\n\nright.runWith(12) //=> \'12\'\nleft.runWith(12)  //=> \'12\'', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'import Const from \'crocks/Const\'\n\nConst(\'always and forever\')\n//=> Const "always and forever"\n\nConst(false)\n//=> Const false', mode: 'javascript'}, null, opt_ijData);
     ie_close('article');
     ie_open('article', null, null,
         'id', 'topic-instance');
@@ -28554,138 +28480,83 @@ function $render(opt_data, opt_ignored, opt_ijData) {
       ie_close('h2');
       ie_open('h4');
         ie_open('a', null, null,
-            'id', 'both',
-            'href', '#both');
-          itext('both');
+            'id', 'equals',
+            'href', '#equals');
+          itext('equals');
         ie_close('a');
       ie_close('h4');
-      $templateAlias2({code: 'Pair p => Arrow a b ~> () -> Arrow (p a a) (p b b)', mode: 'haskell'}, null, opt_ijData);
+      $templateAlias2({code: 'Const c a ~> b -> Boolean', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
+        itext('Used to compare the underlying values of two ');
         ie_open('code');
-          itext('both');
+          itext('Const');
         ie_close('code');
-        itext(' allows for the mode of a given ');
+        itext(' instances for equality by value, ');
         ie_open('code');
-          itext('Arrow');
+          itext('equals');
         ie_close('code');
-        itext(' to switch to a manner that applies itself to both slots of a ');
+        itext(' takes any given argument and returns ');
         ie_open('code');
-          itext('Pair');
+          itext('true');
         ie_close('code');
-        itext(' that is passed through the ');
+        itext(' if the passed arguments is a ');
         ie_open('code');
-          itext('Arrow');
+          itext('Const');
         ie_close('code');
-        itext('. As noted in the type signature, ');
+        itext(' with an underlying ');
         ie_open('code');
-          itext('both');
+          itext('left');
         ie_close('code');
-        itext(' will give back an ');
+        itext(' value equal to the underlying value of the ');
         ie_open('code');
-          itext('Arrow');
+          itext('Const');
         ie_close('code');
-        itext(' has a new signature that utilizes a ');
+        itext(' the method is being called on. If the passed argument is not a ');
         ie_open('code');
-          itext('Pair');
+          itext('Const');
         ie_close('code');
-        itext(' on both sides.');
-      ie_close('p');
-      $templateAlias2({code: 'import Arrow from \'crocks/Arrow\'\nimport Pair from \'crocks/Pair\'\n\nimport merge from \'crocks/Pair/merge\'\n\n// double :: Number -> Number\nconst double =\n  x => x * 2\n\n// add :: (Number, Number) -> Number\nconst add =\n  (x, y) => x + y\n\n// arrDouble :: Arrow Number\nconst arrDouble =\n  Arrow(double)\n\n// arrDoubleAndAdd :: Arrow (Pair Number Number) Number\nconst arrDoubleAndAdd =\n  arrDouble\n    .both()\n    .map(merge(add))\n\narrDouble\n  .runWith(200)  //=> 400\n\narrDoubleAndAdd\n  .runWith(Pair(200, 10))  //=> 420', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'compose',
-            'href', '#compose');
-          itext('compose');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Arrow a b ~> Arrow b c -> Arrow a c', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
+        itext(' or the underlying values are not equal, ');
         ie_open('code');
-          itext('compose');
+          itext('equals');
         ie_close('code');
-        itext(' allows you to compose (2) ');
+        itext(' will return ');
         ie_open('code');
-          itext('Arrow');
-        ie_close('code');
-        itext('s together, resulting in a new');
-        ie_open('code');
-          itext('Arrow');
-        ie_close('code');
-        itext(' that is the result of the composition.');
-      ie_close('p');
-      $templateAlias2({code: 'import Arrow from \'crocks/Arrow\'\n\nimport filter from \'crocks/pointfree/filter\'\nimport map from \'crocks/pointfree/map\'\n\n// arrFilterEven :: Arrow [ Number ]\nconst arrFilterEven =\n  Arrow(filter(x => !(x % 2)))\n\n// arrDoubleNumbers :: Arrow [ Number ]\nconst arrDoubleNumbers =\n  Arrow(map(x => x * 2))\n\n// arrLength :: Arrow [ a ] -> Number\nconst arrLength =\n  Arrow(x => x.length)\n\n// arrDoubleEven :: Arrow [ Number ]\nconst arrDoubleEven =\n  arrFilterEven\n    .compose(arrDoubleNumbers)\n\n// arrEvenCount :: Arrow [ Number ] Number\nconst arrEvenCount =\n  arrFilterEven\n    .compose(arrLength)\n\n// data :: [ Number ]\nconst data =\n  [ 12, 2, 36, 35 ]\n\narrDoubleEven\n  .runWith(data)\n//=> [ 24, 4, 72 ]\n\narrEvenCount\n  .runWith(data)\n//=> 3', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'contramap',
-            'href', '#contramap');
-          itext('contramap');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Arrow a b ~> (c -> a) -> Arrow c b', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('When using ');
-        ie_open('code');
-          itext('contramap');
-        ie_close('code');
-        itext(' on an ');
-        ie_open('code');
-          itext('Arrow');
-        ie_close('code');
-        itext(', a function can be lifted that will map a given type into the type required for the original ');
-        ie_open('code');
-          itext('Arrow');
-        ie_close('code');
-        itext('\'s input. This allows for "adaption" of given ');
-        ie_open('code');
-          itext('Arrow');
-        ie_close('code');
-        itext('\'s input for better reuse. The resulting type of the lifted function must match the input type of the ');
-        ie_open('code');
-          itext('Arrow');
+          itext('false');
         ie_close('code');
         itext('.');
       ie_close('p');
-      $templateAlias2({code: 'import Arrow from \'crocks/Arrow\'\n\nimport chain from \'crocks/pointfree/chain\'\nimport compose from \'crocks/helpers/compose\'\nimport isNumber from \'crocks/predicates/isNumber\'\nimport option from \'crocks/pointfree/option\'\nimport prop from \'crocks/Maybe/prop\'\nimport safe from \'crocks/Maybe/safe\'\n\n// getValue :: (String, Number) -> a -> Number\nconst getValue = (key, def) => compose(\n  option(def),\n  chain(safe(isNumber)),\n  prop(key)\n)\n\n// arrAdd10 :: Arrow Number\nconst arrAdd10 =\n  Arrow(x => x + 10)\n\n// arrAdd10Value :: Arrow Object Number\nconst arrAdd10Value =\n  arrAdd10\n    .contramap(getValue(\'value\', 0))\n\narrAdd10\n  .runWith(23)\n//=> 33\n\narrAdd10Value\n  .runWith({ value: 23 })\n  //=> 33\n\narrAdd10Value\n  .runWith({ value: \'23\' })\n  //=> 10\n\narrAdd10Value\n  .runWith({ num: \'23\' })\n//=> 10', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'import Const from \'crocks/Const\'\n\nConst(2)\n  .equals(Const(5))\n//=> false\n\nConst([ 1, 2, 3 ])\n  .equals(Const([ 1, 2, 3 ]))\n//=> true', mode: 'javascript'}, null, opt_ijData);
       ie_open('h4');
         ie_open('a', null, null,
-            'id', 'first',
-            'href', '#first');
-          itext('first');
+            'id', 'concat',
+            'href', '#concat');
+          itext('concat');
         ie_close('a');
       ie_close('h4');
-      $templateAlias2({code: 'Pair p => Arrow a b ~> () -> Arrow (p a c) (p b c)', mode: 'haskell'}, null, opt_ijData);
+      $templateAlias2({code: 'Const c a ~> Const c a -> Const c a', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
-        itext('When calling ');
         ie_open('code');
-          itext('first');
+          itext('concat');
         ie_close('code');
-        itext(' on an ');
+        itext(' is used to combine two ');
         ie_open('code');
-          itext('Arrow');
+          itext('Semigroup');
         ie_close('code');
-        itext(', a new ');
+        itext('s of the same type under an operation specified by the ');
         ie_open('code');
-          itext('Arrow');
+          itext('Semigroup');
         ie_close('code');
-        itext(' is returned that will expect a ');
+        itext('. In the case of ');
         ie_open('code');
-          itext('Pair');
+          itext('Const');
         ie_close('code');
-        itext(' with the original input type in the first slot of the ');
+        itext(', it will return a new');
         ie_open('code');
-          itext('Pair');
+          itext('Const');
         ie_close('code');
-        itext('. When run, the ');
-        ie_open('code');
-          itext('Arrow');
-        ie_close('code');
-        itext(' will only be applied to the first slot in the ');
-        ie_open('code');
-          itext('Pair');
-        ie_close('code');
-        itext(', leaving the second slot untouched.');
+        itext(' instance with the original value.');
       ie_close('p');
-      $templateAlias2({code: 'import Arrow from \'crocks/Arrow\'\nimport branch from \'crocks/Pair/branch\'\n\n// arrToUpper :: Arrow String\nconst arrToUpper =\n  Arrow(x => x.toUpperCase())\n\narrToUpper\n  .runWith(\'burrito bounce\')\n//=> \'BURRITO BOUNCE\'\n\n// join :: Pair String -> Object\nconst join = p => ({\n  original: p.snd(),\n  result: p.fst()\n})\n\n// flow :: Arrow String Object\nconst flow =\n  arrToUpper\n    .first()\n    .promap(branch, join)\n\nflow\n  .runWith(\'taco time\')\n//=> { original: \'taco time\', result: \'TACO TIME\' }', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'import Const from \'crocks/Const\'\n\nimport concat from \'crocks/pointfree/concat\'\nimport map from \'crocks/pointfree/map\'\n\n// Account :: {\n//   firstName: String,\n//   lastName: String,\n//   achievements: [ String ]\n// }\n\n// account1 :: Account\nconst account1 = {\n  firstName: \'John\',\n  lastName: \'Doe\',\n  achievements: [ \'232\', \'154\' ]\n}\n\n// account2 :: Account\nconst account2 = {\n  firstName: \'Joe\',\n  lastName: \'Blow\',\n  achievements: [ \'989\' ]\n}\n\n// constMerge :: [ a ] -> a\nconst constMerge = xs =>\n  map(Const, xs)\n    .reduce(concat)\n    .valueOf()\n\n// reduceAccounts :: (Account, Account) -> Account\nconst reduceAccounts = (acc, cur) => ({\n  firstName: constMerge([ cur.firstName, acc.firstName ]),\n  lastName: constMerge([ cur.lastName, acc.lastName ]),\n  achievements: concat(cur.achievements, acc.achievements)\n})\n\n// mergeAccounts :: [ Account ] -> Account\nconst mergeAccounts = accounts =>\n  accounts\n    .reduce(reduceAccounts)\n\nmergeAccounts([ account1, account2 ])\n//=> {\n//   firstName: "John",\n//   lastName: "Doe",\n//   achievements: [ \'232\', \'154\', \'989\' ]\n// }', mode: 'javascript'}, null, opt_ijData);
       ie_open('h4');
         ie_open('a', null, null,
             'id', 'map',
@@ -28693,135 +28564,122 @@ function $render(opt_data, opt_ignored, opt_ijData) {
           itext('map');
         ie_close('a');
       ie_close('h4');
-      $templateAlias2({code: 'Arrow a b ~> (b -> c) -> Arrow a c', mode: 'haskell'}, null, opt_ijData);
+      $templateAlias2({code: 'Const c a ~> (a -> b) -> Const c b', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
+        itext('Typically used to lift a function into the context of an ADT, but due to the unique behavior of ');
+        ie_open('code');
+          itext('Const');
+        ie_close('code');
+        itext(', any function that is passed in to ');
         ie_open('code');
           itext('map');
         ie_close('code');
-        itext(' allows a function to be lifted that will map the right side of the');
-        ie_open('code');
-          itext('Arrow');
-        ie_close('code');
-        itext('. Where ');
-        ie_open('a', null, null,
-            'href', '#contramap');
-          ie_open('code');
-            itext('contramap');
-          ie_close('code');
-        ie_close('a');
-        itext(' is used to map the input, ');
+        itext(' will be validated but it will not be applied. ');
         ie_open('code');
           itext('map');
         ie_close('code');
-        itext(' maps the result of the ');
+        itext(' will return a new ');
         ie_open('code');
-          itext('Arrow');
+          itext('Const');
         ie_close('code');
-        itext(', allowing the result to be "adapted" or modified. The input type to the lifted function must match the result the ');
+        itext('with the same left value.');
+      ie_close('p');
+      $templateAlias2({code: 'import Const from \'crocks/Const\'\n\n// toUpper :: String -> String\nconst toUpper =\n  x => x.toUpperCase()\n\nConst(\'initial\')\n  .map(toUpper)\n//=> Const "initial"', mode: 'javascript'}, null, opt_ijData);
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'ap',
+            'href', '#ap');
+          itext('ap');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Const c (a -> b) ~> Const c a -> Const c b', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        itext('Short for apply, ');
         ie_open('code');
-          itext('Arrow');
+          itext('ap');
+        ie_close('code');
+        itext(' is normally used to apply a ');
+        ie_open('code');
+          itext('Const');
+        ie_close('code');
+        itext(' instance containing a value to another ');
+        ie_open('code');
+          itext('Const');
+        ie_close('code');
+        itext(' instance that contains a function, resulting in new');
+        ie_open('code');
+          itext('Const');
+        ie_close('code');
+        itext(' instance with the result. However, due to the unique nature of ');
+        ie_open('code');
+          itext('Const');
+        ie_close('code');
+        itext('the function will remain the active value in the ');
+        ie_open('code');
+          itext('Const');
         ie_close('code');
         itext('.');
       ie_close('p');
-      $templateAlias2({code: 'import Arrow from \'crocks/Arrow\'\n\nimport B from \'crocks/combinators/composeB\'\n\n// arrFullScale :: Arrow Number\nconst arrFullScale =\n  Arrow(x => 20 * Math.log10(Math.abs(x)))\n\narrFullScale\n  .runWith(-0.35)\n//=> -9.118639112994488\n\n// round :: Number -> Number\nconst round =\n  x => Math.floor(x * 100) / 100\n\n// stringRep :: Number -> String\nconst stringRep =\n  x => `${x} dBFS`\n\n// Arrow :: Number String\nconst arrStringFS =\n  arrFullScale\n    .map(B(stringRep, round))\n\narrStringFS\n  .runWith(0.35)\n//=> \'-9.12 dbFS\'', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'import Const from \'crocks/Const\'\n\n// prod :: Number -> Number -> Number\nconst prod =\n  x => y => x * y\n\nConst(5)\n  .map(prod)\n  .ap(Const(27))\n//=> Const 5', mode: 'javascript'}, null, opt_ijData);
       ie_open('h4');
         ie_open('a', null, null,
-            'id', 'promap',
-            'href', '#promap');
-          itext('promap');
+            'id', 'chain',
+            'href', '#chain');
+          itext('chain');
         ie_close('a');
       ie_close('h4');
-      $templateAlias2({code: 'Arrow a b ~> ((c -> a), (b -> d)) -> Arrow c d', mode: 'haskell'}, null, opt_ijData);
+      $templateAlias2({code: 'Const c a ~> (a -> Const c b) -> Const c b', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
+        itext('Combining a sequential series of transformations that capture disjunction can be accomplished with ');
         ie_open('code');
-          itext('promap');
+          itext('chain');
         ie_close('code');
-        itext(' can be used to adapt BOTH ends of an ');
+        itext('. ');
         ie_open('code');
-          itext('Arrow');
+          itext('chain');
         ie_close('code');
-        itext(' allowing for existing');
+        itext(' expects a unary, ');
         ie_open('code');
-          itext('Arrow');
+          itext('Const');
         ie_close('code');
-        itext('s to be reused in places in a flow where the types do not line up. It combines both ');
-        ie_open('a', null, null,
-            'href', '#map');
-          ie_open('code');
-            itext('map');
-          ie_close('code');
-        ie_close('a');
-        itext(' and ');
-        ie_open('a', null, null,
-            'href', '#contramap');
-          ie_open('code');
-            itext('contramap');
-          ie_close('code');
-        ie_close('a');
-        itext(' into one operation. Just pass the function for ');
-        ie_open('a', null, null,
-            'href', '#contramap');
-          ie_open('code');
-            itext('contramap');
-          ie_close('code');
-        ie_close('a');
-        itext(' as the first argument and the function ');
-        ie_open('a', null, null,
-            'href', '#map');
-          ie_open('code');
-            itext('map');
-          ie_close('code');
-        ie_close('a');
-        itext(' as the second.');
+        itext(' returning function as its argument. When invoked the inner value will not be passed to provided function. A new ');
+        ie_open('code');
+          itext('Const');
+        ie_close('code');
+        itext(' will be returned with the same inner value.');
       ie_close('p');
-      $templateAlias2({code: 'import Arrow from \'crocks/Arrow\'\n\nimport chain from \'crocks/pointfree/chain\'\nimport compose from \'crocks/helpers/compose\'\nimport isString from \'crocks/predicates/isString\'\nimport objOf from \'crocks/helpers/objOf\'\nimport option from \'crocks/pointfree/option\'\nimport prop from \'crocks/Maybe/prop\'\nimport safe from \'crocks/Maybe/safe\'\n\n// upperFirst :: String -> String\nconst upperFirst = x =>\n  x.charAt(0)\n    .toUpperCase()\n    .concat(x.slice(1).toLowerCase())\n\n// arrTitleize :: Arrow String\nconst arrTitleize =\n  Arrow(x => x.split(\' \').map(upperFirst).join(\' \'))\n\narrTitleize\n  .runWith(\'tHis is siLLy\')\n//=> \'This Is Silly\'\n\n// stringProp :: String -> Object -> String\nconst stringProp = key => compose(\n  option(\'\'),\n  chain(safe(isString)),\n  prop(key)\n)\n\n// arrTitleObject :: Arrow Object\nconst arrTitleObject =\n  arrTitleize\n    .promap(stringProp(\'title\'), objOf(\'title\'))\n\narrTitleObject\n  .runWith({ title: \'SaY wHaT!?!\' })\n// { title: \'Say What!?!\' }\n\narrTitleObject\n  .runWith({ title: true })\n// { title: \'\' }', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'import Const from \'crocks/Const\'\n\nConst(\'initial\')\n  .chain(x => Const(x.toUpperCase()))\n//=> Const \'initial\'', mode: 'javascript'}, null, opt_ijData);
       ie_open('h4');
         ie_open('a', null, null,
-            'id', 'runwith',
-            'href', '#runwith');
-          itext('runWith');
+            'id', 'valueof',
+            'href', '#valueof');
+          itext('valueOf');
         ie_close('a');
       ie_close('h4');
-      $templateAlias2({code: 'Arrow a b ~> a -> b', mode: 'haskell'}, null, opt_ijData);
+      $templateAlias2({code: 'Const c a ~> () -> c', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
         ie_open('code');
-          itext('Arrow');
+          itext('valueOf');
         ie_close('code');
-        itext('s are lazy to make combining and extending them easy. Once you have your final computation built out and you are ready to execute it, all you have to do is call ');
+        itext(' is used as a means of extraction. This function is used primarily for convenience for some of the helper functions that ship with ');
         ie_open('code');
-          itext('runWith');
+          itext('crocks');
         ie_close('code');
-        itext(' on it, passing in the argument you what to run it with.');
+        itext('. Calling ');
+        ie_open('code');
+          itext('valueOf');
+        ie_close('code');
+        itext(' on a ');
+        ie_open('code');
+          itext('Const');
+        ie_close('code');
+        itext(' instance will result in the underlying left value of the ');
+        ie_open('code');
+          itext('Product');
+        ie_close('code');
+        itext(' type.');
       ie_close('p');
-      $templateAlias2({code: 'import Arrow from \'crocks/Arrow\'\nimport Sum from \'crocks/Sum\'\n\nimport branch from \'crocks/Pair/branch\'\nimport merge from \'crocks/Pair/merge\'\nimport mreduce from \'crocks/helpers/mreduce\'\n\n// data :: [ Number ]\nconst data =\n  [ 35, 60, 22, 100 ]\n\n// arrLength :: Arrow [ a ] Number\nconst arrLength =\n  Arrow(x => x.length)\n\narrLength\n  .runWith(data)\n//=> 4\n\n// arrSum :: Arrow [ Number ] Number\nconst arrSum =\n  Arrow(mreduce(Sum))\n\narrSum\n  .runWith(data)\n//=> 217\n\n// arrAvgList :: Arrow [ Number ] Number\nconst arrAvgList =\n  arrSum.first()\n    .compose(arrLength.second())\n    .promap(branch, merge((x, y) => x / y))\n\narrAvgList\n  .runWith(data)\n//=> 54.25', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'second',
-            'href', '#second');
-          itext('second');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Pair p => Arrow a b ~> () -> Arrow (p c a) (p c b)', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('Used to apply a given ');
-        ie_open('code');
-          itext('Arrow');
-        ie_close('code');
-        itext(' over the second slot of a ');
-        ie_open('code');
-          itext('Pair');
-        ie_close('code');
-        itext(', leaving the first slot untouched. The input to the ');
-        ie_open('code');
-          itext('Arrow');
-        ie_close('code');
-        itext(' must match the expected type on the second slot of the incoming ');
-        ie_open('code');
-          itext('Pair');
-        ie_close('code');
-        itext('.');
-      ie_close('p');
-      $templateAlias2({code: 'import Arrow from \'crocks/Arrow\'\n\nimport assign from \'crocks/helpers/assign\'\nimport branch from \'crocks/Pair/branch\'\nimport merge from \'crocks/Pair/merge\'\nimport objOf from \'crocks/helpers/objOf\'\n\n// names :: Object\nconst names = {\n  first: \'Joey\',\n  last: \'Fella\'\n}\n\n// arrFull :: Arrow Object\nconst arrFull =\n  Arrow(({ first, last }) => `${first} ${last}`)\n    .map(objOf(\'full\'))\n//=> { full: \'Joey Fella\' }\n\n// arrAddFull :: Arrow Object\nconst arrAddFull =\n  arrFull\n    .second()\n    .promap(branch, merge(assign))\n\narrAddFull\n  .runWith(names)\n//=> { full: \'Joey Fella\', first: \'Joey\', last: \'Fella\' }', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'import Const from \'crocks/Const\'\n\nConst(33)\n  .valueOf()\n//=> 33\n\nConst(35)\n  .concat(Const(20))\n  .valueOf()\n//=> 35', mode: 'javascript'}, null, opt_ijData);
     ie_close('article');
     ie_open('input', null, null,
         'type', 'hidden',
@@ -28832,11 +28690,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'value', opt_data.site.title);
     ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({content: param303}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param689}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'wTVmU.render';
+  $render.soyTemplateName = 'tscPK.render';
 }
 
 exports.render.params = ["page","site"];
@@ -28846,16 +28704,14 @@ return exports;
 
 });
 
-class wTVmU extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(wTVmU, templates);
+class tscPK extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(tscPK, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
 
 
 /***/ }),
-/* 218 */,
-/* 219 */,
 /* 220 */,
 /* 221 */,
 /* 222 */,
@@ -28894,9 +28750,7 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(wTVmU, templates);
 /* 255 */,
 /* 256 */,
 /* 257 */,
-/* 258 */,
-/* 259 */,
-/* 260 */
+/* 258 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28932,9 +28786,9 @@ __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _ArrowSoy = __webpack_require__(217);
+var _ConstSoy = __webpack_require__(219);
 
-var _ArrowSoy2 = _interopRequireDefault(_ArrowSoy);
+var _ConstSoy2 = _interopRequireDefault(_ConstSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28944,23 +28798,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var wTVmU = function (_Component) {
-  _inherits(wTVmU, _Component);
+var tscPK = function (_Component) {
+  _inherits(tscPK, _Component);
 
-  function wTVmU() {
-    _classCallCheck(this, wTVmU);
+  function tscPK() {
+    _classCallCheck(this, tscPK);
 
-    return _possibleConstructorReturn(this, (wTVmU.__proto__ || Object.getPrototypeOf(wTVmU)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (tscPK.__proto__ || Object.getPrototypeOf(tscPK)).apply(this, arguments));
   }
 
-  return wTVmU;
+  return tscPK;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(wTVmU, _ArrowSoy2.default);
+_metalSoy2.default.register(tscPK, _ConstSoy2.default);
 
-exports.default = wTVmU;
+exports.default = tscPK;
 
 /***/ })
-],[260]);
+],[258]);

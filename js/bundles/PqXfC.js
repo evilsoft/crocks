@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([26,33,34,35],[
+webpackJsonppageComponent([27,34,35,36],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19884,7 +19884,7 @@ if (goog.DEBUG) {
  * @return {void}
  * @suppress {checkTypes}
  */
-function __deltemplate_s152_d34389eb(opt_data, opt_ignored, opt_ijData) {
+function __deltemplate_s174_d34389eb(opt_data, opt_ignored, opt_ijData) {
   ie_open('a', null, null,
       'class', 'sidebar-link ' + (opt_data.page.active ? 'sidebar-link-selected' : ''),
       'href', opt_data.page.url);
@@ -19893,16 +19893,16 @@ function __deltemplate_s152_d34389eb(opt_data, opt_ignored, opt_ijData) {
           'class', 'sidebar-icon icon-16-' + opt_data.page.icon);
     }
     ie_open('span');
-      var dyn10 = opt_data.page.title;
-      if (typeof dyn10 == 'function') dyn10(); else if (dyn10 != null) itext(dyn10);
+      var dyn12 = opt_data.page.title;
+      if (typeof dyn12 == 'function') dyn12(); else if (dyn12 != null) itext(dyn12);
     ie_close('span');
   ie_close('a');
 }
-exports.__deltemplate_s152_d34389eb = __deltemplate_s152_d34389eb;
+exports.__deltemplate_s174_d34389eb = __deltemplate_s174_d34389eb;
 if (goog.DEBUG) {
-  __deltemplate_s152_d34389eb.soyTemplateName = 'Sidebar.__deltemplate_s152_d34389eb';
+  __deltemplate_s174_d34389eb.soyTemplateName = 'Sidebar.__deltemplate_s174_d34389eb';
 }
-soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'sidebar', 0, __deltemplate_s152_d34389eb);
+soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'sidebar', 0, __deltemplate_s174_d34389eb);
 
 exports.render.params = ["section","site"];
 exports.render.types = {"section":"any","site":"any"};
@@ -20091,8 +20091,8 @@ function $render(opt_data, opt_ignored, opt_ijData) {
       ie_void('span', null, null,
           'class', 'icon icon-16-clock');
       itext(' ');
-      var dyn11 = opt_data.time;
-      if (typeof dyn11 == 'function') dyn11(); else if (dyn11 != null) itext(dyn11);
+      var dyn13 = opt_data.time;
+      if (typeof dyn13 == 'function') dyn13(); else if (dyn13 != null) itext(dyn13);
     }
   ie_close('p');
 }
@@ -28359,7 +28359,7 @@ exports.default = parseFromAnchor;
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DrBWs", function() { return DrBWs; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PqXfC", function() { return PqXfC; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28375,11 +28375,11 @@ goog.loadModule(function(exports) {
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace DrBWs.
+ * @fileoverview Templates in namespace PqXfC.
  * @public
  */
 
-goog.module('DrBWs.incrementaldom');
+goog.module('PqXfC.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28413,7 +28413,7 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var param1261 = function() {
+  var param1351 = function() {
     $templateAlias2({code: 'Pred a Boolean', mode: 'haskell'}, null, opt_ijData);
     ie_open('p');
       itext('Defined as a Monoidal Contravariant datatype, ');
@@ -28518,6 +28518,36 @@ function $render(opt_data, opt_ignored, opt_ijData) {
       ie_close('p');
     ie_close('article');
     ie_open('article', null, null,
+        'id', 'topic-construction');
+      ie_open('h2');
+        ie_open('a', null, null,
+            'id', 'construction',
+            'href', '#construction');
+          itext('Construction');
+        ie_close('a');
+      ie_close('h2');
+      $templateAlias2({code: 'Pred :: (a -> Boolean) -> Pred a', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        itext('The ');
+        ie_open('code');
+          itext('Pred');
+        ie_close('code');
+        itext(' constructor is a unary function that requires a unary predicate function as its sole argument. Once provided with its predicate function, the constructor will return a new ');
+        ie_open('code');
+          itext('Pred');
+        ie_close('code');
+        itext(' instance wrapping the predicate.');
+      ie_close('p');
+      ie_open('p');
+        itext('If the function provided is not a predicate, then the resulting value will be coerced to a ');
+        ie_open('code');
+          itext('Boolean');
+        ie_close('code');
+        itext('.');
+      ie_close('p');
+      $templateAlias2({code: 'import Pred from \'crocks/Pred\'\n\nimport and from \'crocks/logic/and\'\nimport isArray from \'crocks/predicates/isArray\'\n\n// isEmpty :: a -> Boolean\nconst isEmpty =\n  x => !x.length\n\n// isEmptyArray :: a -> Boolean\nconst isEmptyArray =\n  and(isArray, isEmpty)\n\nPred(isEmptyArray)\n//=> Pred a', mode: 'javascript'}, null, opt_ijData);
+    ie_close('article');
+    ie_open('article', null, null,
         'id', 'topic-constructor');
       ie_open('h2');
         ie_open('a', null, null,
@@ -28591,7 +28621,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_open('code');
           itext('concat');
         ie_close('code');
-        itext(' is used to combine (2) ');
+        itext(' is used to combine two ');
         ie_open('code');
           itext('Semigroup');
         ie_close('code');
@@ -28741,11 +28771,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'value', opt_data.site.title);
     ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({content: param1261}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param1351}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'DrBWs.render';
+  $render.soyTemplateName = 'PqXfC.render';
 }
 
 exports.render.params = ["page","site"];
@@ -28755,8 +28785,8 @@ return exports;
 
 });
 
-class DrBWs extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(DrBWs, templates);
+class PqXfC extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(PqXfC, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
@@ -28789,7 +28819,10 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(DrBWs, templates);
 /* 247 */,
 /* 248 */,
 /* 249 */,
-/* 250 */
+/* 250 */,
+/* 251 */,
+/* 252 */,
+/* 253 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28837,23 +28870,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var DrBWs = function (_Component) {
-  _inherits(DrBWs, _Component);
+var PqXfC = function (_Component) {
+  _inherits(PqXfC, _Component);
 
-  function DrBWs() {
-    _classCallCheck(this, DrBWs);
+  function PqXfC() {
+    _classCallCheck(this, PqXfC);
 
-    return _possibleConstructorReturn(this, (DrBWs.__proto__ || Object.getPrototypeOf(DrBWs)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (PqXfC.__proto__ || Object.getPrototypeOf(PqXfC)).apply(this, arguments));
   }
 
-  return DrBWs;
+  return PqXfC;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(DrBWs, _PredSoy2.default);
+_metalSoy2.default.register(PqXfC, _PredSoy2.default);
 
-exports.default = DrBWs;
+exports.default = PqXfC;
 
 /***/ })
-],[250]);
+],[253]);

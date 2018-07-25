@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([30,33,34,35],[
+webpackJsonppageComponent([11,34,35,36],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19884,7 +19884,7 @@ if (goog.DEBUG) {
  * @return {void}
  * @suppress {checkTypes}
  */
-function __deltemplate_s152_d34389eb(opt_data, opt_ignored, opt_ijData) {
+function __deltemplate_s174_d34389eb(opt_data, opt_ignored, opt_ijData) {
   ie_open('a', null, null,
       'class', 'sidebar-link ' + (opt_data.page.active ? 'sidebar-link-selected' : ''),
       'href', opt_data.page.url);
@@ -19893,16 +19893,16 @@ function __deltemplate_s152_d34389eb(opt_data, opt_ignored, opt_ijData) {
           'class', 'sidebar-icon icon-16-' + opt_data.page.icon);
     }
     ie_open('span');
-      var dyn10 = opt_data.page.title;
-      if (typeof dyn10 == 'function') dyn10(); else if (dyn10 != null) itext(dyn10);
+      var dyn12 = opt_data.page.title;
+      if (typeof dyn12 == 'function') dyn12(); else if (dyn12 != null) itext(dyn12);
     ie_close('span');
   ie_close('a');
 }
-exports.__deltemplate_s152_d34389eb = __deltemplate_s152_d34389eb;
+exports.__deltemplate_s174_d34389eb = __deltemplate_s174_d34389eb;
 if (goog.DEBUG) {
-  __deltemplate_s152_d34389eb.soyTemplateName = 'Sidebar.__deltemplate_s152_d34389eb';
+  __deltemplate_s174_d34389eb.soyTemplateName = 'Sidebar.__deltemplate_s174_d34389eb';
 }
-soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'sidebar', 0, __deltemplate_s152_d34389eb);
+soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'sidebar', 0, __deltemplate_s174_d34389eb);
 
 exports.render.params = ["section","site"];
 exports.render.types = {"section":"any","site":"any"};
@@ -20091,8 +20091,8 @@ function $render(opt_data, opt_ignored, opt_ijData) {
       ie_void('span', null, null,
           'class', 'icon icon-16-clock');
       itext(' ');
-      var dyn11 = opt_data.time;
-      if (typeof dyn11 == 'function') dyn11(); else if (dyn11 != null) itext(dyn11);
+      var dyn13 = opt_data.time;
+      if (typeof dyn13 == 'function') dyn13(); else if (dyn13 != null) itext(dyn13);
     }
   ie_close('p');
 }
@@ -28350,12 +28350,32 @@ exports.default = parseFromAnchor;
 /* 216 */,
 /* 217 */,
 /* 218 */,
-/* 219 */
+/* 219 */,
+/* 220 */,
+/* 221 */,
+/* 222 */,
+/* 223 */,
+/* 224 */,
+/* 225 */,
+/* 226 */,
+/* 227 */,
+/* 228 */,
+/* 229 */,
+/* 230 */,
+/* 231 */,
+/* 232 */,
+/* 233 */,
+/* 234 */,
+/* 235 */,
+/* 236 */,
+/* 237 */,
+/* 238 */,
+/* 239 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "rgqsk", function() { return rgqsk; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "yzggX", function() { return yzggX; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "templates", function() { return templates; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_metal_component___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_metal_component__);
@@ -28367,15 +28387,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var templates;
 goog.loadModule(function(exports) {
 
-// This file was automatically generated from Const.soy.
+// This file was automatically generated from Any.soy.
 // Please don't edit this file by hand.
 
 /**
- * @fileoverview Templates in namespace rgqsk.
+ * @fileoverview Templates in namespace yzggX.
  * @public
  */
 
-goog.module('rgqsk.incrementaldom');
+goog.module('yzggX.incrementaldom');
 
 /** @suppress {extraRequire} */
 var soy = goog.require('soy');
@@ -28409,16 +28429,31 @@ var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTempl
  * @suppress {checkTypes}
  */
 function $render(opt_data, opt_ignored, opt_ijData) {
-  var param629 = function() {
-    $templateAlias2({code: 'Const c a', mode: 'haskell'}, null, opt_ijData);
+  var param2356 = function() {
+    $templateAlias2({code: 'Any Boolean', mode: 'haskell'}, null, opt_ijData);
     ie_open('p');
-      itext('Const is a Product type the whose underlying left-most value is fixed to the value it was originally constructed with. This ensures that a desired value is immutable. While its right portion can still be mapped over, when observed, all information on the right will be discarded, leaving only the initial fixed value ');
       ie_open('code');
-        itext('c');
+        itext('Any');
+      ie_close('code');
+      itext(' is a ');
+      ie_open('code');
+        itext('Monoid');
+      ie_close('code');
+      itext(' that will combine (2) values of any type using logical disjunction (OR) on their coerced ');
+      ie_open('code');
+        itext('Boolean');
+      ie_close('code');
+      itext(' values, mapping truth-y values to');
+      ie_open('code');
+        itext('true');
+      ie_close('code');
+      itext(' and false-y values to ');
+      ie_open('code');
+        itext('false');
       ie_close('code');
       itext('.');
     ie_close('p');
-    $templateAlias2({code: 'import Const from \'crocks/Const\'\nimport Pair from \'crocks/Pair\'\nimport compose from \'crocks/helpers/compose\'\nimport concat from \'crocks/pointfree/concat\'\nimport extend from \'crocks/pointfree/extend\'\nimport flip from \'crocks/combinators/flip\'\nimport fst from \'crocks/Pair/fst\'\nimport valueOf from \'crocks/pointfree/valueOf\'\n\nConst(\'Hello World\')\n//=> Const \'Hello World\'\n\n// days :: [ String ]\nconst days =\n  [ \'Today\', \'Tomorrow\', \'Yesterday\' ]\n\ndays\n  .map(Const)\n  .reduce(flip(concat))\n//=> Const "Today"\n\nConst(100)\n  .concat(Const(10))\n//=> Const 100\n\n// toLower :: String -> String\nconst toLower =\n  x => x.toLowerCase()\n\n// Field :: Pair (Const a) a\n// updateField :: a -> Field\nconst updateField =\n  value => Pair(Const(value), value)\n\n// updateField :: Field -> Field\nconst resetField =\n  extend(compose(valueOf, fst))\n\nconst changed =\n  updateField(\'Joey\')\n    .map(toLower)\n    .chain(updateField)\n//=> Pair( Const "Joey", "joey" )\n\nresetField(changed)\n//=> Pair( Const "Joey", "Joey" )', mode: 'javascript'}, null, opt_ijData);
+    $templateAlias2({code: 'import Any from \'crocks/Any\'\n\nimport isNumber from \'crocks/predicates/isNumber\'\nimport mconcatMap from \'crocks/helpers/mconcat\'\n\nconst trueString = Any(\'string\')\nconst falseString = Any(\'\')\nconst object = Any({ nice: true })\n\ntrueString.concat(falseString)\n//=> Any false\n\ntrueString.concat(object)\n//=> Any true\n\nconst anyNumber =\n  mconcatMap(Any, isNumber)\n\nanyNumber([ \'string\', 3 ])\n//=> Any true\n\nanyNumber([ true, \'string\' ])\n//=> Any false', mode: 'javascript'}, null, opt_ijData);
     ie_open('article', null, null,
         'id', 'topic-implements');
       ie_open('h2');
@@ -28438,17 +28473,104 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_close('code');
         itext(', ');
         ie_open('code');
-          itext('Functor');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('Apply');
-        ie_close('code');
-        itext(', ');
-        ie_open('code');
-          itext('Chain');
+          itext('Monoid');
         ie_close('code');
       ie_close('p');
+    ie_close('article');
+    ie_open('article', null, null,
+        'id', 'topic-construction');
+      ie_open('h2');
+        ie_open('a', null, null,
+            'id', 'construction',
+            'href', '#construction');
+          itext('Construction');
+        ie_close('a');
+      ie_close('h2');
+      $templateAlias2({code: 'Any :: a -> Any Boolean', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        ie_open('code');
+          itext('Any');
+        ie_close('code');
+        itext(' is constructed by calling the constructor with any type ');
+        ie_open('code');
+          itext('a');
+        ie_close('code');
+        itext('. This will return an ');
+        ie_open('code');
+          itext('Any');
+        ie_close('code');
+        itext(' wrapping the provided value, coerced to a ');
+        ie_open('code');
+          itext('Boolean');
+        ie_close('code');
+        itext('. For example, providing an non-empty ');
+        ie_open('code');
+          itext('String');
+        ie_close('code');
+        itext(' will result in an ');
+        ie_open('code');
+          itext('Any(true)');
+        ie_close('code');
+        itext('. While passing an empty ');
+        ie_open('code');
+          itext('String');
+        ie_close('code');
+        itext(' results in an ');
+        ie_open('code');
+          itext('Any(false)');
+        ie_close('code');
+        itext('.');
+      ie_close('p');
+      $templateAlias2({code: 'import Any from \'crocks/Any\'\n\nAny(0)\n//=> Any(false)\n\nAny(1)\n//=> Any(true)\n\nAny([])\n//=> Any(true)', mode: 'javascript'}, null, opt_ijData);
+    ie_close('article');
+    ie_open('article', null, null,
+        'id', 'topic-constructor');
+      ie_open('h2');
+        ie_open('a', null, null,
+            'id', 'constructor-methods',
+            'href', '#constructor-methods');
+          itext('Constructor Methods');
+        ie_close('a');
+      ie_close('h2');
+      ie_open('h4');
+        ie_open('a', null, null,
+            'id', 'empty',
+            'href', '#empty');
+          itext('empty');
+        ie_close('a');
+      ie_close('h4');
+      $templateAlias2({code: 'Any.empty :: () -> Any', mode: 'haskell'}, null, opt_ijData);
+      ie_open('p');
+        ie_open('code');
+          itext('empty');
+        ie_close('code');
+        itext(' provides the identity for the ');
+        ie_open('code');
+          itext('Monoid');
+        ie_close('code');
+        itext(' in that when the value it provides is ');
+        ie_open('code');
+          itext('concat');
+        ie_close('code');
+        itext('ed to any other value, it will return the other value. In the case of ');
+        ie_open('code');
+          itext('Any');
+        ie_close('code');
+        itext(' the result of ');
+        ie_open('code');
+          itext('empty');
+        ie_close('code');
+        itext(' is ');
+        ie_open('code');
+          itext('false');
+        ie_close('code');
+        itext('. ');
+        ie_open('code');
+          itext('empty');
+        ie_close('code');
+        itext(' is available on both the Constructor and the Instance for convenience.');
+      ie_close('p');
+      $templateAlias2({code: 'import Any from \'crocks/Any\'\n\nAny.empty() //=> Any false\n\nAny(true).concat(Any.empty())   //=> Any true\nAny(false).concat(Any.empty())  //=> Any false', mode: 'javascript'}, null, opt_ijData);
     ie_close('article');
     ie_open('article', null, null,
         'id', 'topic-instance');
@@ -28466,11 +28588,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
           itext('equals');
         ie_close('a');
       ie_close('h4');
-      $templateAlias2({code: 'Const c a ~> b -> Boolean', mode: 'haskell'}, null, opt_ijData);
+      $templateAlias2({code: 'Any a ~> b -> Boolean', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
         itext('Used to compare the underlying values of (2) ');
         ie_open('code');
-          itext('Const');
+          itext('Any');
         ie_close('code');
         itext(' instances for equality by value, ');
         ie_open('code');
@@ -28480,21 +28602,17 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_open('code');
           itext('true');
         ie_close('code');
-        itext(' if the passed arguments is a ');
+        itext(' if the passed argument is an ');
         ie_open('code');
-          itext('Const');
+          itext('Any');
         ie_close('code');
-        itext(' with an underlying ');
+        itext(' with an underlying value equal to the underlying value of the ');
         ie_open('code');
-          itext('left');
+          itext('Any');
         ie_close('code');
-        itext(' value equal to the underlying value of the ');
+        itext(' the method is being called on. If the passed argument is not an ');
         ie_open('code');
-          itext('Const');
-        ie_close('code');
-        itext(' the method is being called on. If the passed argument is not a ');
-        ie_open('code');
-          itext('Const');
+          itext('Any');
         ie_close('code');
         itext(' or the underlying values are not equal, ');
         ie_open('code');
@@ -28506,7 +28624,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_close('code');
         itext('.');
       ie_close('p');
-      $templateAlias2({code: 'import Const from \'crocks/Const\'\n\nConst(2)\n  .equals(Const(5))\n//=> false\n\nConst([ 1, 2, 3 ])\n  .equals(Const([ 1, 2, 3 ]))\n//=> true', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'import Any from \'crocks/Any\'\n\nAny(true)\n  .equals(Any(true))\n//=> true\n\nAny(true)\n  .equals(Any(false))\n//=> false', mode: 'javascript'}, null, opt_ijData);
       ie_open('h4');
         ie_open('a', null, null,
             'id', 'concat',
@@ -28514,7 +28632,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
           itext('concat');
         ie_close('a');
       ie_close('h4');
-      $templateAlias2({code: 'Const c a ~> Const c a -> Const c a', mode: 'haskell'}, null, opt_ijData);
+      $templateAlias2({code: 'Any ~> Any -> Any', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
         ie_open('code');
           itext('concat');
@@ -28529,107 +28647,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_close('code');
         itext('. In the case of ');
         ie_open('code');
-          itext('Const');
+          itext('Any');
         ie_close('code');
-        itext(', it will return a new');
-        ie_open('code');
-          itext('Const');
-        ie_close('code');
-        itext(' instance with the original value.');
+        itext(', it will combine the (2) using logical OR (disjunction).');
       ie_close('p');
-      $templateAlias2({code: 'import Const from \'crocks/Const\'\n\nimport concat from \'crocks/pointfree/concat\'\nimport map from \'crocks/pointfree/map\'\n\n// Account :: {\n//   firstName: String,\n//   lastName: String,\n//   achievements: [ String ]\n// }\n\n// account1 :: Account\nconst account1 = {\n  firstName: \'John\',\n  lastName: \'Doe\',\n  achievements: [ \'232\', \'154\' ]\n}\n\n// account2 :: Account\nconst account2 = {\n  firstName: \'Joe\',\n  lastName: \'Blow\',\n  achievements: [ \'989\' ]\n}\n\n// constMerge :: [ a ] -> a\nconst constMerge = xs =>\n  map(Const, xs)\n    .reduce(concat)\n    .valueOf()\n\n// reduceAccounts :: (Account, Account) -> Account\nconst reduceAccounts = (acc, cur) => ({\n  firstName: constMerge([ cur.firstName, acc.firstName ]),\n  lastName: constMerge([ cur.lastName, acc.lastName ]),\n  achievements: concat(cur.achievements, acc.achievements)\n})\n\n// mergeAccounts :: [ Account ] -> Account\nconst mergeAccounts = accounts =>\n  accounts\n    .reduce(reduceAccounts)\n\nmergeAccounts([ account1, account2 ])\n//=> {\n//   firstName: "John",\n//   lastName: "Doe",\n//   achievements: [ \'232\', \'154\', \'989\' ]\n// }', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'map',
-            'href', '#map');
-          itext('map');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Const c a ~> (a -> b) -> Const c b', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('Typically used to lift a function into the context of an ADT, but due to the unique behavior of ');
-        ie_open('code');
-          itext('Const');
-        ie_close('code');
-        itext(', any function that is passed in to ');
-        ie_open('code');
-          itext('map');
-        ie_close('code');
-        itext(' will be validated but it will not be applied. ');
-        ie_open('code');
-          itext('map');
-        ie_close('code');
-        itext(' will return a new ');
-        ie_open('code');
-          itext('Const');
-        ie_close('code');
-        itext('with the same left value.');
-      ie_close('p');
-      $templateAlias2({code: 'import Const from \'crocks/Const\'\n\n// toUpper :: String -> String\nconst toUpper =\n  x => x.toUpperCase()\n\nConst(\'initial\')\n  .map(toUpper)\n//=> Const "initial"', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'ap',
-            'href', '#ap');
-          itext('ap');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Const c (a -> b) ~> Const c a -> Const c b', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('Short for apply, ');
-        ie_open('code');
-          itext('ap');
-        ie_close('code');
-        itext(' is normally used to apply a ');
-        ie_open('code');
-          itext('Const');
-        ie_close('code');
-        itext(' instance containing a value to another ');
-        ie_open('code');
-          itext('Const');
-        ie_close('code');
-        itext(' instance that contains a function, resulting in new');
-        ie_open('code');
-          itext('Const');
-        ie_close('code');
-        itext(' instance with the result. However, due to the unique nature of ');
-        ie_open('code');
-          itext('Const');
-        ie_close('code');
-        itext('the function will remain the active value in the ');
-        ie_open('code');
-          itext('Const');
-        ie_close('code');
-        itext('.');
-      ie_close('p');
-      $templateAlias2({code: 'import Const from \'crocks/Const\'\n\n// prod :: Number -> Number -> Number\nconst prod =\n  x => y => x * y\n\nConst(5)\n  .map(prod)\n  .ap(Const(27))\n//=> Const 5', mode: 'javascript'}, null, opt_ijData);
-      ie_open('h4');
-        ie_open('a', null, null,
-            'id', 'chain',
-            'href', '#chain');
-          itext('chain');
-        ie_close('a');
-      ie_close('h4');
-      $templateAlias2({code: 'Const c a ~> (a -> Const c b) -> Const c b', mode: 'haskell'}, null, opt_ijData);
-      ie_open('p');
-        itext('Combining a sequential series of transformations that capture disjunction can be accomplished with ');
-        ie_open('code');
-          itext('chain');
-        ie_close('code');
-        itext('. ');
-        ie_open('code');
-          itext('chain');
-        ie_close('code');
-        itext(' expects a unary, ');
-        ie_open('code');
-          itext('Const');
-        ie_close('code');
-        itext(' returning function as its argument. When invoked the inner value will not be passed to provided function. A new ');
-        ie_open('code');
-          itext('Const');
-        ie_close('code');
-        itext(' will be returned with the same inner value.');
-      ie_close('p');
-      $templateAlias2({code: 'import Const from \'crocks/Const\'\n\nConst(\'initial\')\n  .chain(x => Const(x.toUpperCase()))\n//=> Const \'initial\'', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'import Any from \'crocks/Any\'\n\nAny(true).concat(Any(true))   //=> Any true\nAny(true).concat(Any(false))  //=> Any true\nAny(false).concat(Any(true))  //=> Any true\nAny(false).concat(Any(false)) //=> Any false', mode: 'javascript'}, null, opt_ijData);
       ie_open('h4');
         ie_open('a', null, null,
             'id', 'valueof',
@@ -28637,12 +28659,28 @@ function $render(opt_data, opt_ignored, opt_ijData) {
           itext('valueOf');
         ie_close('a');
       ie_close('h4');
-      $templateAlias2({code: 'Const c a ~> () -> c', mode: 'haskell'}, null, opt_ijData);
+      $templateAlias2({code: 'Any ~> () -> Boolean', mode: 'haskell'}, null, opt_ijData);
       ie_open('p');
         ie_open('code');
           itext('valueOf');
         ie_close('code');
-        itext(' is used as a means of extraction. This function is used primarily for convenience for some of the helper functions that ship with ');
+        itext(' is used on all ');
+        ie_open('code');
+          itext('crocks');
+        ie_close('code');
+        itext(' ');
+        ie_open('code');
+          itext('Monoid');
+        ie_close('code');
+        itext('s as a means of extraction. While the extraction is available, types that implement ');
+        ie_open('code');
+          itext('valueOf');
+        ie_close('code');
+        itext(' are not necessarily a');
+        ie_open('code');
+          itext('Comonad');
+        ie_close('code');
+        itext('. This function is used primarily for convenience for some of the helper functions that ship with ');
         ie_open('code');
           itext('crocks');
         ie_close('code');
@@ -28650,17 +28688,17 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         ie_open('code');
           itext('valueOf');
         ie_close('code');
-        itext(' on a ');
+        itext(' on an ');
         ie_open('code');
-          itext('Const');
+          itext('Any');
         ie_close('code');
-        itext(' instance will result in the underlying left value of the ');
+        itext(' instance will result in the underlying ');
         ie_open('code');
-          itext('Product');
+          itext('Boolean');
         ie_close('code');
-        itext(' type.');
+        itext(' value.');
       ie_close('p');
-      $templateAlias2({code: 'import Const from \'crocks/Const\'\n\nConst(33)\n  .valueOf()\n//=> 33\n\nConst(35)\n  .concat(Const(20))\n  .valueOf()\n//=> 35', mode: 'javascript'}, null, opt_ijData);
+      $templateAlias2({code: 'import Any from \'crocks/Any\'\n\nAny(0).valueOf()        //=> false\nAny(\'string\').valueOf() //=> true\n\n//=> true\nAny(45)\n  .concat(\'\')\n  .valueOf()', mode: 'javascript'}, null, opt_ijData);
     ie_close('article');
     ie_open('input', null, null,
         'type', 'hidden',
@@ -28671,11 +28709,11 @@ function $render(opt_data, opt_ignored, opt_ijData) {
         'value', opt_data.site.title);
     ie_close('input');
   };
-  $templateAlias1(soy.$$assignDefaults({content: param629}, opt_data), null, opt_ijData);
+  $templateAlias1(soy.$$assignDefaults({content: param2356}, opt_data), null, opt_ijData);
 }
 exports.render = $render;
 if (goog.DEBUG) {
-  $render.soyTemplateName = 'rgqsk.render';
+  $render.soyTemplateName = 'yzggX.render';
 }
 
 exports.render.params = ["page","site"];
@@ -28685,34 +28723,14 @@ return exports;
 
 });
 
-class rgqsk extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
-__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(rgqsk, templates);
+class yzggX extends __WEBPACK_IMPORTED_MODULE_0_metal_component___default.a {}
+__WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(yzggX, templates);
 
 /* harmony default export */ __webpack_exports__["default"] = (templates);
 /* jshint ignore:end */
 
 
 /***/ }),
-/* 220 */,
-/* 221 */,
-/* 222 */,
-/* 223 */,
-/* 224 */,
-/* 225 */,
-/* 226 */,
-/* 227 */,
-/* 228 */,
-/* 229 */,
-/* 230 */,
-/* 231 */,
-/* 232 */,
-/* 233 */,
-/* 234 */,
-/* 235 */,
-/* 236 */,
-/* 237 */,
-/* 238 */,
-/* 239 */,
 /* 240 */,
 /* 241 */,
 /* 242 */,
@@ -28732,7 +28750,28 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(rgqsk, templates);
 /* 256 */,
 /* 257 */,
 /* 258 */,
-/* 259 */
+/* 259 */,
+/* 260 */,
+/* 261 */,
+/* 262 */,
+/* 263 */,
+/* 264 */,
+/* 265 */,
+/* 266 */,
+/* 267 */,
+/* 268 */,
+/* 269 */,
+/* 270 */,
+/* 271 */,
+/* 272 */,
+/* 273 */,
+/* 274 */,
+/* 275 */,
+/* 276 */,
+/* 277 */,
+/* 278 */,
+/* 279 */,
+/* 280 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28768,9 +28807,9 @@ __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _ConstSoy = __webpack_require__(219);
+var _AnySoy = __webpack_require__(239);
 
-var _ConstSoy2 = _interopRequireDefault(_ConstSoy);
+var _AnySoy2 = _interopRequireDefault(_AnySoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28780,23 +28819,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var rgqsk = function (_Component) {
-  _inherits(rgqsk, _Component);
+var yzggX = function (_Component) {
+  _inherits(yzggX, _Component);
 
-  function rgqsk() {
-    _classCallCheck(this, rgqsk);
+  function yzggX() {
+    _classCallCheck(this, yzggX);
 
-    return _possibleConstructorReturn(this, (rgqsk.__proto__ || Object.getPrototypeOf(rgqsk)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (yzggX.__proto__ || Object.getPrototypeOf(yzggX)).apply(this, arguments));
   }
 
-  return rgqsk;
+  return yzggX;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(rgqsk, _ConstSoy2.default);
+_metalSoy2.default.register(yzggX, _AnySoy2.default);
 
-exports.default = rgqsk;
+exports.default = yzggX;
 
 /***/ })
-],[259]);
+],[280]);

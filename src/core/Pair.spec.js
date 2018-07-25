@@ -384,6 +384,37 @@ test('Pair bimap errors', t => {
   t.end()
 })
 
+test('Pair bimap fantasy-land errors', t => {
+  const bimap = bindFunc(Pair(0, 'gibbles')[fl.bimap])
+
+  const err = /Pair.fantasy-land\/bimap: Function required for both arguments/
+  t.throws(bimap(undefined, unit), err, 'throws with undefined in first argument')
+  t.throws(bimap(null, unit), err, 'throws with null in first argument')
+  t.throws(bimap(0, unit), err, 'throws with falsey number in first argument')
+  t.throws(bimap(1, unit), err, 'throws with truthy number in first argument')
+  t.throws(bimap('', unit), err, 'throws with falsey string in first argument')
+  t.throws(bimap('string', unit), err, 'throws with truthy string in first argument')
+  t.throws(bimap(false, unit), err, 'throws with false in first argument')
+  t.throws(bimap(true, unit), err, 'throws with true in first argument')
+  t.throws(bimap([], unit), err, 'throws with an array in first argument')
+  t.throws(bimap({}, unit), err, 'throws with object in first argument')
+
+  t.throws(bimap(unit, undefined), err, 'throws with undefined in second argument')
+  t.throws(bimap(unit, null), err, 'throws with null in second argument')
+  t.throws(bimap(unit, 0), err, 'throws with falsey number in second argument')
+  t.throws(bimap(unit, 1), err, 'throws with truthy number in second argument')
+  t.throws(bimap(unit, ''), err, 'throws with falsey string in second argument')
+  t.throws(bimap(unit, 'string'), err, 'throws with truthy string in second argument')
+  t.throws(bimap(unit, false), err, 'throws with false in second argument')
+  t.throws(bimap(unit, true), err, 'throws with true in second argument')
+  t.throws(bimap(unit, []), err, 'throws with an array in second argument')
+  t.throws(bimap(unit, {}), err, 'throws with object in second argument')
+
+  t.doesNotThrow(bimap(unit, unit), 'allows functions')
+
+  t.end()
+})
+
 test('Pair bimap functionality', t => {
   const add5 = x => x + 5
   const add7 = x => x + 7

@@ -651,7 +651,8 @@ fullName({ first: 'Lizzy' })
 #### sequence
 
 ```haskell
-Applicative TypeRep t, Apply f => Maybe (f a) ~> (t | (b -> f b)) -> f (Maybe a)
+Apply f => Maybe (f a) ~> (b -> f b) -> f (Maybe a)
+Applicative f => Maybe (f a) ~> TypeRep f -> f (Maybe a)
 ```
 
 When an instance of `Maybe` wraps an `Apply` instance, `sequence` can be used to
@@ -684,7 +685,8 @@ seqId(Nothing())
 #### traverse
 
 ```haskell
-Applicative TypeRep t, Apply f => Maybe a ~> ((t | (c -> f c)), (a -> f b)) -> f Maybe b
+Apply f => Maybe a ~> (c -> f c), (a -> f b)) -> f Maybe b
+Applicative f => Maybe a ~> (TypeRep f, (a -> f b)) -> f Maybe b
 ```
 
 Used to apply the "effect" of an `Apply` to a value inside of a `Maybe`,
@@ -1331,18 +1333,19 @@ eitherToMaybe :: Either b a -> Maybe a
 eitherToMaybe :: (a -> Either c b) -> a -> Maybe b
 ```
 
-Used to transform a given `Either` instance to a `Maybe`
-instance, `eitherToMaybe` will turn a `Right` instance into a `Just` wrapping
-the original value contained in the `Right`. All `Left` instances will map to
-a `Nothing`, mapping the originally contained value to a `Unit`. Values on the
-`Left` will be lost and as such this transformation is considered lossy in
-that regard.
+Used to transform a given [`Either`][either] instance to a `Maybe`
+instance, `eitherToMaybe` will turn a [`Right`][right] instance into
+a [`Just`](#just) wrapping the original value contained in the [`Right`][right].
+All [`Left`][left] instances will map to a [`Nothing`](#nothing), mapping the
+originally contained value to a `Unit`. Values on the [`Left`][left] will be
+lost and as such this transformation is considered lossy in that regard.
 
 Like all `crocks` transformation functions, `eitherToMaybe` has two possible
-signatures and will behave differently when passed either an `Either` instance
-or a function that returns an instance of `Either`. When passed the instance,
-a transformed `Maybe` is returned. When passed an `Either` returning function,
-a function will be returned that takes a given value and returns a `Maybe`.
+signatures and will behave differently when passed either
+an [`Either`][either] instance or a function that returns an instance
+of [`Either`][either]. When passed the instance, a transformed `Maybe` is
+returned. When passed an [`Either`][either] returning function, a function will
+be returned that takes a given value and returns a `Maybe`.
 
 ```javascript
 import Maybe from 'crocks/Maybe'
@@ -1394,16 +1397,17 @@ firstToMaybe :: First a -> Maybe a
 firstToMaybe :: (a -> First b) -> a -> Maybe b
 ```
 
-Used to transform a given `First` instance to a `Maybe`
-instance, `firstToMaybe` will turn a non-empty instance into a `Just` wrapping
-the original value contained within the `First`. All empty instances will map
-to a `Nothing`.
+Used to transform a given [`First`][first] instance to a `Maybe`
+instance, `firstToMaybe` will turn a non-empty instance into
+a [`Just`](#just) wrapping the original value contained within
+the [`First`][first]. All empty instances will map to a [`Nothing`](#nothing).
 
 Like all `crocks` transformation functions, `firstToMaybe` has two possible
-signatures and will behave differently when passed either a `First` instance
-or a function that returns an instance of `First`. When passed the instance,
-a transformed `Maybe` is returned. When passed a `First` returning function,
-a function will be returned that takes a given value and returns a `Maybe`.
+signatures and will behave differently when passed either
+a [`First`][first] instance or a function that returns an instance
+of [`First`][first]. When passed the instance, a transformed `Maybe` is
+returned. When passed a [`First`][first] returning function, a function will be
+returned that takes a given value and returns a `Maybe`.
 
 ```javascript
 import Maybe from 'crocks/Maybe'
@@ -1447,15 +1451,17 @@ lastToMaybe :: Last a -> Maybe a
 lastToMaybe :: (a -> Last b) -> a -> Maybe b
 ```
 
-Used to transform a given `Last` instance to a `Maybe` instance, `lastToMaybe`
-will turn a non-empty instance into a `Just` wrapping the original value
-contained within the `Last`. All empty instances will map to a `Nothing`.
+Used to transform a given [`Last`][last] instance to a `Maybe` instance,
+`lastToMaybe` will turn a non-empty instance into a [`Just`](#just) wrapping the
+original value contained within the [`Last`][last]. All empty instances will map
+to a [`Nothing`](#nothing).
 
 Like all `crocks` transformation functions, `lastToMaybe` has two possible
-signatures and will behave differently when passed either a `Last` instance
-or a function that returns an instance of `Last`. When passed the instance,
-a transformed `Maybe` is returned. When passed a `Last` returning function,
-a function will be returned that takes a given value and returns a `Maybe`.
+signatures and will behave differently when passed either
+a [`Last`][last] instance or a function that returns an instance
+of [`Last`][last]. When passed the instance, a transformed `Maybe` is returned.
+When passed a [`Last`][last] returning function, a function will be returned
+that takes a given value and returns a `Maybe`.
 
 ```javascript
 import Maybe from 'crocks/Maybe'
@@ -1550,4 +1556,9 @@ Just('so good')
 ```
 </article>
 
-[pred]: ../Pred.html
+[pred]: ./Pred.html
+[either]: ./Either.html
+[left]: ./Either.html#left
+[right]: ./Either.html#right
+[first]: ../monoids/First.html
+[last]: ../monoids/Last.html

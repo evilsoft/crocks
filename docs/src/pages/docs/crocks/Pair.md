@@ -11,7 +11,7 @@ Pair a b
 ```
 
 `Pair` allows the ability to represent two distinct values of different types.
-Much like how `Either` is known as canonical Sum Type and defines the basis for
+Much like how [`Either`][either] is known as canonical Sum Type and defines the basis for
 all other Sum Types that ship with `crocks`, `Pair` is known as the canonical
 Product Type and also at the heart of all Product Types in `crocks`.
 
@@ -416,7 +416,8 @@ flow({ a: 10, b: 5 })
 #### sequence
 
 ```haskell
-Applicative TypeRep t, Apply f => Pair a (f b) ~> (t | (b -> f b)) -> f (Pair a b)
+Apply f => Pair a (f b) ~> (c -> f c) -> f (Pair a b)
+Applicative f => Pair a (f b) ~> TypeRep f -> f (Pair a b)
 ```
 
 When an instance of `Pair` wraps an `Apply` instance in its second position,
@@ -479,7 +480,8 @@ flow(pair)
 #### traverse
 
 ```haskell
-Applicative TypeRep t, Apply f => Pair a b ~> ((t | (b -> f b)), (b -> f c)) -> f (Pair a c)
+Apply f => Pair a b ~> (d -> f d), (b -> f c)) -> f (Pair a c)
+Applicative f => Pair a b ~> (TypeRep f, (b -> f c)) -> f (Pair a c)
 ```
 
 Used to apply the "effect" of an `Apply` to a value in the second position of
@@ -1001,3 +1003,4 @@ Pair(Sum.empty(), [])
 [fanout]: ../functions/helpers.html#fanout
 [frompairs]: ../functions/helpers.html#frompairs
 [identity]: ../functions/combinators.html#identity
+[either]: ../crocks/Either.html

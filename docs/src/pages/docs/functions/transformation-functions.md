@@ -70,14 +70,15 @@ unnested
 
 Not all types can be transformed to and from each other. Some of them are lazy
 and/or asynchronous, or are just too far removed. Also, some transformations
-will result in a loss of information. Moving from an `Either` to a `Maybe`, for
-instance, would lose the `Left` value of `Either` as a `Maybe`'s first parameter
-(`Nothing`) is fixed at `Unit`. Conversely, if you move the other way around,
-from a `Maybe` to an `Either` you must provide a default `Left` value. Which
-means, if the inner `Maybe` results in a `Nothing`, it will map to `Left` of
-your provided value. As such, not all of these functions are guaranteed
-isomorphic. With some types you just cannot go back and forth and expect to
-retain information.
+will result in a loss of information. Moving from an [`Either`][either] to
+a [`Maybe`][maybe], for instance, would lose the [`Left`][left] value
+of [`Either`][either] as a [`Maybe`][maybe]'s first parameter
+([`Nothing`][nothing]) is fixed at `Unit`. Conversely, if you move the other way
+around, from a [`Maybe`][maybe] to an [`Either`][either] you must provide a
+default [`Left`][left] value. Which means, if the inner [`Maybe`][maybe] results
+in a [`Nothing`][nothing], it will map to [`Left`][left] of your provided value.
+As such, not all of these functions are guaranteed isomorphic. With some types
+you just cannot go back and forth and expect to retain information.
 
 Each function provides two signatures, one for if a Function is used for the
 second argument and another if the source ADT is passed instead. Although it may
@@ -143,23 +144,23 @@ bad
 | [`eitherToMaybe`][either-maybe] | `Either b a -> Maybe a` | `(a -> Either c b) -> a -> Maybe b` | `crocks/Maybe` |
 | `eitherToResult` | `Either e a -> Result e a` | `(a -> Either e b) -> a -> Result e b` | `crocks/Result` |
 | [`firstToAsync`][first-async] | `e -> First a -> Async e a` | `e -> (a -> First b) -> a -> Async e b` | `crocks/Async` |
-| `firstToEither` | `c -> First a -> Either c a` | `c -> (a -> First b) -> a -> Either c b` | `crocks/Either` |
+| [`firstToEither`][first-either] | `c -> First a -> Either c a` | `c -> (a -> First b) -> a -> Either c b` | `crocks/Either` |
 | [`firstToLast`][first-last] | `First a -> Last a` | `(a -> First b) -> a -> Last b` | `crocks/Last` |
 | [`firstToMaybe`][first-maybe] | `First a -> Maybe a` | `(a -> First b) -> a -> Maybe b` | `crocks/Maybe` |
 | `firstToResult` | `c -> First a -> Result c a` | `c -> (a -> First b) -> a -> Result c b` | `crocks/Result` |
 | [`lastToAsync`][last-async] | `e -> Last a -> Async e a` | `e -> (a -> Last b) -> a -> Async e b` | `crocks/Async` |
-| `lastToEither` | `c -> Last a -> Either c a` | `c -> (a -> Last b) -> a -> Either c b` | `crocks/Either` |
+| [`lastToEither`][last-either] | `c -> Last a -> Either c a` | `c -> (a -> Last b) -> a -> Either c b` | `crocks/Either` |
 | [`lastToFirst`][last-first] | `Last a -> First a` | `(a -> Last b) -> a -> First b` | `crocks/First` |
 | [`lastToMaybe`][last-maybe] | `Last a -> Maybe a` | `(a -> Last b) -> a -> Maybe b` | `crocks/Maybe` |
 | `lastToResult` | `c -> Last a -> Result c a` | `c -> (a -> Last b) -> a -> Result c b` | `crocks/Result` |
 | `listToArray` | `List a -> [ a ]` | `(a -> List b) -> a -> [ b ]` | `crocks/List` |
 | [`maybeToAsync`][maybe-async] | `e -> Maybe a -> Async e a` | `e -> (a -> Maybe b) -> a -> Async e b` | `crocks/Async` |
-| `maybeToEither` | `c -> Maybe a -> Either c a` | `c -> (a -> Maybe b) -> a -> Either c b` | `crocks/Either` |
+| [`maybeToEither`][maybe-either] | `c -> Maybe a -> Either c a` | `c -> (a -> Maybe b) -> a -> Either c b` | `crocks/Either` |
 | [`maybeToFirst`][maybe-first] | `Maybe a -> First a` | `(a -> Maybe b) -> a -> First b` | `crocks/First` |
 | [`maybeToLast`][maybe-last] | `Maybe a -> Last a` | `(a -> Maybe b) -> a -> Last b` | `crocks/Last` |
 | `maybeToResult` | `c -> Maybe a -> Result c a` | `c -> (a -> Maybe b) -> a -> Result c b` | `crocks/Result` |
 | [`resultToAsync`][result-async] | `Result e a -> Async e a` | `(a -> Result e b) -> a -> Async e b` | `crocks/Async` |
-| `resultToEither` | `Result e a -> Either e a` | `(a -> Result e b) -> a -> Either e b` | `crocks/Either` |
+| [`resultToEither`][result-either] | `Result e a -> Either e a` | `(a -> Result e b) -> a -> Either e b` | `crocks/Either` |
 | [`resultToFirst`][result-first] | `Result e a -> First a` | `(a -> Result e b) -> a -> First b` | `crocks/First` |
 | [`resultToLast`][result-last] | `Result e a -> Last a` | `(a -> Result e b) -> a -> Last b` | `crocks/Last` |
 | [`resultToMaybe`][result-maybe] | `Result e a -> Maybe a` | `(a -> Result e b) -> a -> Maybe b` | `crocks/Maybe` |
@@ -170,6 +171,11 @@ bad
 [last-async]: ../crocks/Async.html#lasttoasync
 [maybe-async]: ../crocks/Async.html#maybetoasync
 [result-async]: ../crocks/Async.html#resulttoasync
+
+[first-either]: ../crocks/Either.html#firsttoeither
+[last-either]: ../crocks/Either.html#lasttoeither
+[maybe-either]: ../crocks/Either.html#maybetoeither
+[result-either]: ../crocks/Either.html#resulttoeither
 
 [either-maybe]: ../crocks/Maybe.html#eithertomaybe
 [first-maybe]: ../crocks/Maybe.html#firsttomaybe
@@ -185,3 +191,8 @@ bad
 [first-last]: ../monoids/Last.html#firsttolast
 [maybe-last]: ../monoids/Last.html#maybetolast
 [result-last]: ../monoids/Last.html#resulttolast
+
+[maybe]: ../crocks/Maybe.html
+[nothing]: ../crocks/Maybe.html#nothing
+[either]: ../crocks/Either.html
+[left]: ../crocks/Either.html#left

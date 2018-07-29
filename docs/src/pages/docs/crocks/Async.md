@@ -1266,17 +1266,19 @@ eitherToAsync :: Either b a -> Async b a
 eitherToAsync :: (a -> Either c b) -> a -> Async c b
 ```
 
-Used to transform a given `Either` instance to
-an `Async` instance, `eitherToAsync` will turn a `Right` instance into
+Used to transform a given [`Either`][either] instance to
+an `Async` instance, `eitherToAsync` will turn a [`Right`][right] instance into
 a [`Resolved`](#resolved) instance wrapping the original value contained in the
-original `Right`. If a `Left` is provided, then `eitherToAsync` will return
-a [`Rejected`](#rejected) instance, wrapping the original `Left` value.
+original [`Right`][right]. If a [`Left`][left] is provided,
+then `eitherToAsync` will return a [`Rejected`](#rejected) instance, wrapping
+the original [`Left`][left] value.
 
 Like all `crocks` transformation functions, `eitherToAsync` has two possible
-signatures and will behave differently when passed either an `Either` instance
-or a function that returns an instance of `Either`. When passed the instance,
-a transformed `Async` is returned. When passed an `Either` returning function,
-a function will be returned that takes a given value and returns an `Async`.
+signatures and will behave differently when passed either
+an [`Either`][either] instance or a function that returns an instance
+of [`Either`][either]. When passed the instance, a transformed `Async` is
+returned. When passed an [`Either`][either] returning function, a function will
+be returned that takes a given value and returns an `Async`.
 
 <!-- eslint-disable no-console -->
 <!-- eslint-disable no-sequences -->
@@ -1678,6 +1680,9 @@ Resolved('103')
 [identity]: ../functions/combinators.html#identity
 [first]: ../monoids/First.html
 [last]: ../monoids/Last.html
-[maybe]: ../crocks/Maybe.html
-[just]: ../crocks/Maybe.html#just
-[nothing]: ../crocks/Maybe.html#nothing
+[maybe]: ./Maybe.html
+[just]: ./Maybe.html#just
+[nothing]: ./Maybe.html#nothing
+[either]: ./Either.html
+[left]: ./Either.html#left
+[right]: ./Either.html#right

@@ -1,13 +1,13 @@
-const test = require('tape')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import { makeFake as _makeFake } from '../test/helpers'
 
-const makeFake = helpers.makeFake
+const makeFake = _makeFake
 
-const isFunction = require('./isFunction')
+import isFunction from './isFunction'
 
-const fl = require('../core/flNames')
+import { empty as _empty } from '../core/flNames'
 
-const isEmpty = require('./isEmpty')
+import isEmpty from './isEmpty'
 
 test('isEmpty predicate function', t => {
   const Fake = makeFake([ 'concat', 'empty' ])
@@ -45,7 +45,7 @@ test('isEmpty predicate function', t => {
 test('isEmpty fantasy-land predicate function', t => {
   const Fake = makeFake([ 'concat', 'empty' ], true)
 
-  t.equal(isEmpty(Fake[fl.empty]()), true, 'returns true with empty monoid')
+  t.equal(isEmpty(Fake[_empty]()), true, 'returns true with empty monoid')
   t.equal(isEmpty(Fake()), false, 'returns true with empty monoid')
 
   t.end()

@@ -1,20 +1,21 @@
-const test = require('tape')
-const sinon = require('sinon')
-const MockCrock = require('../test/MockCrock')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import sinon from 'sinon'
+import MockCrock from '../test/MockCrock'
+import { bindFunc } from '../test/helpers'
 
-const bindFunc = helpers.bindFunc
 
-const curry = require('../core/curry')
-const compose = curry(require('../core/compose'))
-const isArray = require('../core/isArray')
-const isFunction = require('../core/isFunction')
-const isObject = require('../core/isObject')
-const isString = require('../core/isString')
-const isSameType = require('../core/isSameType')
-const unit = require('../core/_unit')
 
-const fl = require('../core/flNames')
+import curry from '../core/curry'
+import _compose from '../core/compose'
+const compose = curry(_compose)
+import isArray from '../core/isArray'
+import isFunction from '../core/isFunction'
+import isObject from '../core/isObject'
+import isString from '../core/isString'
+import isSameType from '../core/isSameType'
+import unit from '../core/_unit'
+
+import fl from '../core/flNames'
 
 const either =
   (f, g) => m => m.either(f, g)
@@ -25,7 +26,7 @@ const applyTo =
 const constant = x => () => x
 const identity = x => x
 
-const Either = require('.')
+import Either from '.'
 
 test('Either', t => {
   const m = Either(0)

@@ -1,21 +1,21 @@
-const test = require('tape')
-const sinon = require('sinon')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import sinon from 'sinon'
+import { bindFunc } from '../test/helpers'
 
-const bindFunc = helpers.bindFunc
 
-const compose = require('../core/compose')
-const isFunction = require('../core/isFunction')
-const isObject = require('../core/isObject')
-const isString = require('../core/isString')
-const isSameType = require('../core/isSameType')
 
-const fl = require('../core/flNames')
+import compose from '../core/compose'
+import isFunction from '../core/isFunction'
+import isObject from '../core/isObject'
+import isString from '../core/isString'
+import isSameType from '../core/isSameType'
+
+import fl from '../core/flNames'
 
 const constant = x => () => x
 const identity = x => x
 
-const Endo = require('.')
+import Endo from '.'
 
 test('Endo', t => {
   const a = bindFunc(Endo)

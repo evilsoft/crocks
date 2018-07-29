@@ -1,13 +1,11 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const hasAlg = require('./hasAlg')
-const isSemigroup = require('./isSemigroup')
+import hasAlg from './hasAlg'
+import isSemigroup from './isSemigroup'
 
 // isMonoid :: a -> Boolean
-function isMonoid(m) {
+export default function isMonoid(m) {
   return isSemigroup(m)
     && (hasAlg('empty', m) || hasAlg('empty', m.constructor))
 }
-
-module.exports = isMonoid

@@ -1,14 +1,14 @@
-const test = require('tape')
-const sinon = require('sinon')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import sinon from 'sinon'
+import { bindFunc } from '../test/helpers'
 
-const bindFunc = helpers.bindFunc
 
-const unit = require('../core/_unit')
+
+import unit from '../core/_unit'
 
 const constant = x => () => x
 
-const mapReduce = require('./mapReduce')
+import mapReduce from './mapReduce'
 
 test('mapReduce errors', t => {
   const m = bindFunc(mapReduce)

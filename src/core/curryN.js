@@ -1,7 +1,7 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-function curryN(n, fn) {
+export default function curryN(n, fn) {
   return function(...xs) {
     const args =
       xs.length ? xs : [ undefined ]
@@ -14,5 +14,3 @@ function curryN(n, fn) {
       : fn.apply(null, args.slice(0, n))
   }
 }
-
-module.exports = curryN

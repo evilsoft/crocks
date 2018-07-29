@@ -1,10 +1,9 @@
-const test = require('tape')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import { bindFunc } from '../test/helpers'
 
-const bindFunc = helpers.bindFunc
-const unit = require('../core/_unit')
+import unit from '../core/_unit'
 
-const setPath = require('./setPath')
+import setPath from './setPath'
 
 const fn = (path, src) =>
   setPath(path, 'value', src)

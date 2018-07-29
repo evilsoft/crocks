@@ -1,7 +1,7 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isFunction = require('../core/isFunction')
+import isFunction from '../core/isFunction'
 
 const err = 'compose: Functions required'
 
@@ -15,7 +15,7 @@ function applyPipe(f, g) {
 }
 
 // compose : ((y -> z), (x -> y), ..., (a -> b)) -> a -> z
-function compose(...args) {
+export default function compose(...args) {
   if(!arguments.length) {
     throw new TypeError(err)
   }
@@ -35,5 +35,3 @@ function compose(...args) {
 
   return tail.reduce(applyPipe, head)
 }
-
-module.exports = compose

@@ -1,8 +1,8 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const curry = require('../core/curry')
-const isFunction = require('../core/isFunction')
+import curry from '../core/curry'
+import isFunction from '../core/isFunction'
 
 function option(x, m) {
   if(!(m && isFunction(m.option))) {
@@ -12,4 +12,4 @@ function option(x, m) {
   return m.option(x)
 }
 
-module.exports = curry(option)
+export default curry(option)

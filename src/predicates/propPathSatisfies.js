@@ -1,14 +1,14 @@
 /** @license ISC License (c) copyright 2018 original and current authors */
 /** @author Ian Hofmann-Hicks (evilsoft) */
 
-const curry = require('../core/curry')
-const isArray = require('../core/isArray')
-const isEmpty  = require('../core/isEmpty')
-const isInteger = require('../core/isInteger')
-const isNil = require('../core/isNil')
-const isPredOrFunc = require('../core/isPredOrFunc')
-const isString = require('../core/isString')
-const predOrFunc = require('../core/predOrFunc')
+import curry from '../core/curry'
+import isArray from '../core/isArray'
+import isEmpty from '../core/isEmpty'
+import isInteger from '../core/isInteger'
+import isNil from '../core/isNil'
+import isPredOrFunc from '../core/isPredOrFunc'
+import isString from '../core/isString'
+import predOrFunc from '../core/predOrFunc'
 
 // propPathSatisfies: [ (String | Integer) ] -> (a -> Boolean) -> b -> Boolean
 // propPathSatisfies: [ (String | Integer) ] -> Pred a -> b -> Boolean
@@ -49,4 +49,4 @@ function propPathSatisfies(keys, pred, x) {
   return !!predOrFunc(pred, target)
 }
 
-module.exports = curry(propPathSatisfies)
+export default curry(propPathSatisfies)

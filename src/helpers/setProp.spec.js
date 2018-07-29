@@ -1,11 +1,10 @@
-const test = require('tape')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import { bindFunc } from '../test/helpers'
 
-const bindFunc = helpers.bindFunc
-const isFunction = require('../core/isFunction')
-const unit = require('../core/_unit')
+import isFunction from '../core/isFunction'
+import unit from '../core/_unit'
 
-const setProp = require('./setProp')
+import setProp from './setProp'
 
 const fn = (key, src) =>
   setProp(key, 'value', src)

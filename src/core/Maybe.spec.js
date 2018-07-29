@@ -1,20 +1,21 @@
-const test = require('tape')
-const sinon = require('sinon')
-const helpers = require('../test/helpers')
-const MockCrock = require('../test/MockCrock')
+import test from 'tape'
+import sinon from 'sinon'
+import { bindFunc } from '../test/helpers'
+import MockCrock from '../test/MockCrock'
 
-const bindFunc = helpers.bindFunc
 
-const curry = require('./curry')
-const compose = curry(require('./compose'))
-const isArray = require('./isArray')
-const isFunction = require('./isFunction')
-const isObject = require('./isObject')
-const isSameType = require('./isSameType')
-const isString = require('./isString')
-const unit = require('./_unit')
 
-const fl = require('./flNames')
+import curry from './curry'
+import _compose from './compose'
+const compose = curry(_compose)
+import isArray from './isArray'
+import isFunction from './isFunction'
+import isObject from './isObject'
+import isSameType from './isSameType'
+import isString from './isString'
+import unit from './_unit'
+
+import fl from './flNames'
 
 const constant = x => () => x
 const identity = x => x
@@ -25,7 +26,7 @@ const either =
 const applyTo =
   x => fn => fn(x)
 
-const Maybe = require('./Maybe')
+import Maybe. { Just, Nothing } from './Maybe'
 
 test('Maybe', t => {
   const m = Maybe(0)
@@ -107,8 +108,6 @@ test('Maybe inspect', t => {
 })
 
 test('Maybe type', t => {
-  const { Just, Nothing } = Maybe
-
   t.ok(isFunction(Maybe(0).type), 'is a function')
 
   t.equal(Just(0).type, Maybe.type, 'static and instance versions are the same for Just')
@@ -121,8 +120,6 @@ test('Maybe type', t => {
 })
 
 test('Maybe @@type', t => {
-  const { Just, Nothing } = Maybe
-
   t.equal(Just(0)['@@type'], Maybe['@@type'], 'static and instance versions are the same for Just')
   t.equal(Nothing(0)['@@type'], Maybe['@@type'], 'static and instance versions are the same for Nothing')
 

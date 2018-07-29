@@ -1,18 +1,16 @@
-const test = require('tape')
+import test from 'tape'
 
-const isFunction = require('../core/isFunction')
-const constant = require('../combinators/constant')
-const isSameType = require('../core/isSameType')
-const Pred = require('../Pred')
-const find = require('./find')
-const Maybe = require('../core/Maybe')
-const helpers = require('../test/helpers')
-const List = require('../core/List')
-const isNumber = require('../core/isNumber')
+import isFunction from '../core/isFunction'
+import constant from '../combinators/constant'
+import isSameType from '../core/isSameType'
+import Pred from '../Pred'
+import find from './find'
+import Maybe from '../core/Maybe'
+import { bindFunc } from '../test/helpers'
+import List from '../core/List'
+import isNumber from '../core/isNumber'
 
 const { fromArray } = List
-
-const bindFunc = helpers.bindFunc
 
 test('find is protected from bad fn', t => {
   const fn = bindFunc(fn => find(fn, []))

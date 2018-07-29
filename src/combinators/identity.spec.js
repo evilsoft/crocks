@@ -1,10 +1,10 @@
-const test = require('tape')
+import test from 'tape'
 
-const identity = require('./identity')
-const isFunction = require('../core/isFunction')
+import identity from './identity'
+import isFunction from '../core/isFunction'
 
 test('identity (I combinator)', t => {
-  const x = 'somehting'
+  const x = 'something'
 
   t.ok(isFunction(identity), 'is a function')
   t.equal(identity(x), x, 'returns the passed argument')

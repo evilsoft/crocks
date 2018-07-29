@@ -1,11 +1,12 @@
 /** @license ISC License (c) copyright 2018 original and current authors */
 /** @author Dale Francis */
 
-const curry = require('../core/curry')
-const isSameType = require('../core/isSameType')
-const isFunction = require('../core/isFunction')
+import curry from '../core/curry'
+import isSameType from '../core/isSameType'
+import isFunction from '../core/isFunction'
+import types from '../core/types'
 
-const Async = require('../core/types').proxy('Async')
+const Async = types.proxy('Async')
 
 const toPromise = m => {
   if(!isSameType(Async, m)) {
@@ -23,4 +24,4 @@ function asyncToPromise(m) {
     : toPromise(m)
 }
 
-module.exports = curry(asyncToPromise)
+export default curry(asyncToPromise)

@@ -1,7 +1,7 @@
-const test = require('tape')
+import test from 'tape'
 
-const isFunction = require('../core/isFunction')
-const isApplicative = require('./isApplicative')
+import isFunction from '../core/isFunction'
+import isApplicative from './isApplicative'
 
 test('isApplicative predicate', t => {
   t.ok(isFunction(isApplicative), 'is a function')

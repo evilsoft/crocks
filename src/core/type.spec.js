@@ -1,8 +1,8 @@
-const test = require('tape')
+import test from 'tape'
 
-const isFunction = require('./isFunction')
+import isFunction from './isFunction'
 
-const type = require('./type')
+import type from './type'
 
 const adt = { type: () => 'Type' }
 const fn = x => x

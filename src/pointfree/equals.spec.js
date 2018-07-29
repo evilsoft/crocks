@@ -1,9 +1,9 @@
-const test = require('tape')
+import test from 'tape'
 
-const isFunction = require('../core/isFunction')
-const MockCrock = require('../test/MockCrock')
+import isFunction from '../core/isFunction'
+import MockCrock from '../test/MockCrock'
 
-const equals = require('./equals')
+import equals from './equals'
 
 test('equals pointfree', t => {
   t.ok(isFunction(equals, 'is a function'))

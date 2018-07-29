@@ -1,7 +1,7 @@
-const test = require('tape')
+import test from 'tape'
 
-const isFunction = require('../core/isFunction')
-const isContravariant = require('./isContravariant')
+import isFunction from '../core/isFunction'
+import isContravariant from './isContravariant'
 
 test('isContravariant predicate', t => {
   t.ok(isFunction(isContravariant), 'is a function')

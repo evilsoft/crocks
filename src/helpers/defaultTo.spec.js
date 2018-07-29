@@ -1,6 +1,6 @@
-const test = require('tape')
+import test from 'tape'
 
-const defaultTo = require('./defaultTo')
+import defaultTo from './defaultTo'
 
 test('defaultTo', t => {
   const fn =

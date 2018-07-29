@@ -1,14 +1,14 @@
-const test = require('tape')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import { bindFunc } from '../test/helpers'
 
-const bindFunc = helpers.bindFunc
 
-const Pred = require('../Pred')
-const isFunction = require('../core/isFunction')
+
+import Pred from '../Pred'
+import isFunction from '../core/isFunction'
 
 const identity = x => x
 
-const not = require('./not')
+import not from './not'
 
 test('not logic function', t => {
   const f = bindFunc(not)

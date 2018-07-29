@@ -1,12 +1,14 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const Last = require('.')
-const Result = require('../core/types').proxy('Result')
+import Last from './index'
+import { proxy } from '../core/types'
 
-const curry = require('../core/curry')
-const isFunction = require('../core/isFunction')
-const isSameType = require('../core/isSameType')
+import curry from '../core/curry'
+import isFunction from '../core/isFunction'
+import isSameType from '../core/isSameType'
+
+const Result = proxy('Result')
 
 const applyTransform = result =>
   result.either(Last.empty, Last)
@@ -33,4 +35,4 @@ function resultToLast(result) {
   throw new TypeError('resultToLast: Result or Result returning function required')
 }
 
-module.exports = curry(resultToLast)
+export default curry(resultToLast)

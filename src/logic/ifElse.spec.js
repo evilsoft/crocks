@@ -1,17 +1,17 @@
-const test = require('tape')
-const sinon = require('sinon')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import sinon from 'sinon'
+import { bindFunc } from '../test/helpers'
 
-const bindFunc = helpers.bindFunc
 
-const Pred = require('../Pred')
-const isFunction = require('../core/isFunction')
-const unit = require('../core/_unit')
+
+import Pred from '../Pred'
+import isFunction from '../core/isFunction'
+import unit from '../core/_unit'
 
 const constant = x => () => x
 const identity = x => x
 
-const ifElse = require('./ifElse')
+import ifElse from './ifElse'
 
 test('ifElse logic function', t => {
   const f = bindFunc(ifElse)

@@ -1,20 +1,21 @@
-const test = require('tape')
-const sinon = require('sinon')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import sinon from 'sinon'
+import { bindFunc } from '../test/helpers'
 
-const bindFunc = helpers.bindFunc
 
-const MockCrock = require('../test/MockCrock')
 
-const curry = require('./curry')
-const compose = curry(require('./compose'))
-const isFunction = require('./isFunction')
-const isObject = require('./isObject')
-const isSameType = require('./isSameType')
-const isString = require('./isString')
-const unit = require('./_unit')
+import MockCrock from '../test/MockCrock'
 
-const fl = require('./flNames')
+import curry from './curry'
+import _compose from './compose'
+const compose = curry(_compose)
+import isFunction from './isFunction'
+import isObject from './isObject'
+import isSameType from './isSameType'
+import isString from './isString'
+import unit from './_unit'
+
+import fl from './flNames'
 
 const identity = x => x
 
@@ -24,7 +25,7 @@ const merge =
 const constant =
   x => () => x
 
-const Pair = require('./Pair')
+import Pair from './Pair'
 
 test('Pair core', t => {
   const m = bindFunc(Pair)

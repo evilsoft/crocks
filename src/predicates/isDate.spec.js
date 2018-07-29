@@ -1,8 +1,8 @@
-const test = require('tape')
+import test from 'tape'
 
-const isFunction = require('../core/isFunction')
+import isFunction from '../core/isFunction'
 
-const isDate = require('./isDate')
+import isDate from './isDate'
 
 test('isDate predicate', t => {
   t.ok(isFunction(isDate), 'is a function')

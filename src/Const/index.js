@@ -3,17 +3,18 @@
 
 const VERSION = 3
 
-const _equals = require('../core/equals')
-const _implements = require('../core/implements')
-const _inspect = require('../core/inspect')
-const _type = require('../core/types').type('Const')
-const typeFn = require('../core/types').typeFn
-const fl = require('../core/flNames')
+import _equals from '../core/equals'
+import _implements from '../core/implements'
+import _inspect from '../core/inspect'
+import { empty as _empty, concat as _concat, equals as __equals, map as _map, of as _of } from '../core/flNames'
 
-const isFunction = require('../core/isFunction')
-const isMonoid = require('../core/isMonoid')
-const isSameType = require('../core/isSameType')
-const isSemigroup = require('../core/isSemigroup')
+import isFunction from '../core/isFunction'
+import isMonoid from '../core/isMonoid'
+import isSameType from '../core/isSameType'
+import isSemigroup from '../core/isSemigroup'
+
+import { typeFn, type as getType } from '../core/types'
+const _type = getType('Const')
 
 const typeOrName =
   m => isFunction(m.type) ? m.type() : m.name
@@ -26,7 +27,7 @@ const empties = {
 }
 
 const getEmpty = T =>
-  T[fl.empty] || T.empty || empties[T.name]
+  T[_empty] || T.empty || empties[T.name]
 
 const validMonoid = T =>
   isMonoid(T) || T.name === 'String' || T.name === 'Array'
@@ -120,11 +121,11 @@ function _Const(T) {
       empty: empty('empty'),
       map: map('map'),
       of: of('of'),
-      [fl.concat]: concat(fl.concat),
-      [fl.empty]: empty(fl.empty),
-      [fl.equals]: equals,
-      [fl.map]: map(fl.map),
-      [fl.of]: of(fl.of),
+      [_concat]: concat(_concat),
+      [_empty]: empty(_empty),
+      [__equals]: equals,
+      [_map]: map(_map),
+      [_of]: of(_of),
       ['@@type']: typeString,
       constructor: Const
     }
@@ -134,8 +135,8 @@ function _Const(T) {
   Const.of = of('of')
   Const.type = type
 
-  Const[fl.empty] = empty(fl.empty)
-  Const[fl.of] = of(fl.of)
+  Const[_empty] = empty(_empty)
+  Const[_of] = of(_of)
   Const['@@type'] = typeString
 
   Const['@@implements'] = _implements(
@@ -145,4 +146,4 @@ function _Const(T) {
   return Const
 }
 
-module.exports = _Const
+export default _Const

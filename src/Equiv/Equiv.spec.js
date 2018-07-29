@@ -1,16 +1,16 @@
-const test = require('tape')
-const sinon = require('sinon')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import sinon from 'sinon'
+import { bindFunc } from '../test/helpers'
 
-const bindFunc = helpers.bindFunc
 
-const compose = require('../core/compose')
-const isFunction = require('../core/isFunction')
-const isObject = require('../core/isObject')
-const isString = require('../core/isString')
-const unit = require('../core/_unit')
 
-const fl = require('../core/flNames')
+import compose from '../core/compose'
+import isFunction from '../core/isFunction'
+import isObject from '../core/isObject'
+import isString from '../core/isString'
+import unit from '../core/_unit'
+
+import fl from '../core/flNames'
 
 const constant = x => () => x
 const identity = x => x
@@ -18,7 +18,7 @@ const identity = x => x
 const isSame =
   (x, y) => x === y
 
-const Equiv = require('.')
+import Equiv from '.'
 
 test('Equiv', t => {
   const e = bindFunc(Equiv)

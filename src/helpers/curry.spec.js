@@ -1,12 +1,12 @@
-const test = require('tape')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import { bindFunc } from '../test/helpers'
 
-const bindFunc = helpers.bindFunc
 
-const isFunction = require('../core/isFunction')
-const unit = require('../core/_unit')
 
-const curry = require('./curry')
+import isFunction from '../core/isFunction'
+import unit from '../core/_unit'
+
+import curry from './curry'
 
 test('curry', t => {
   const c = bindFunc(curry)

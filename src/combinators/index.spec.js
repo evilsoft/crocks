@@ -1,21 +1,21 @@
-const test = require('tape')
+import test from 'tape'
 
-const index = require('.')
+import Combinators from '.'
 
-const applyTo = require('./applyTo')
-const composeB = require('./composeB')
-const constant = require('./constant')
-const flip = require('./flip')
-const identity = require('./identity')
-const substitution = require('./substitution')
+import applyTo from './applyTo'
+import composeB from './composeB'
+import constant from './constant'
+import flip from './flip'
+import identity from './identity'
+import substitution from './substitution'
 
 test('combinators entry', t => {
-  t.equal(index.applyTo, applyTo, 'provides the T combinator (applyTo)')
-  t.equal(index.composeB, composeB, 'provides the B combinator (composeB)')
-  t.equal(index.constant, constant, 'provides the K combinator (constant)')
-  t.equal(index.flip, flip, 'provides the C combinator (flip)')
-  t.equal(index.identity, identity, 'provides the I combinator (identity)')
-  t.equal(index.substitution, substitution, 'provides the S combinator (substitution)')
+  t.equal(Combinators.applyTo, applyTo, 'provides the T combinator (applyTo)')
+  t.equal(Combinators.composeB, composeB, 'provides the B combinator (composeB)')
+  t.equal(Combinators.constant, constant, 'provides the K combinator (constant)')
+  t.equal(Combinators.flip, flip, 'provides the C combinator (flip)')
+  t.equal(Combinators.identity, identity, 'provides the I combinator (identity)')
+  t.equal(Combinators.substitution, substitution, 'provides the S combinator (substitution)')
 
   t.end()
 })

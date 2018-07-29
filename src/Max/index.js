@@ -3,22 +3,26 @@
 
 const VERSION = 2
 
-const _implements = require('../core/implements')
-const _inspect = require('../core/inspect')
-const _equals = require('../core/equals')
-const type = require('../core/types').type('Max')
-const _type = require('../core/types').typeFn(type(), VERSION)
-const fl = require('../core/flNames')
+import _implements from '../core/implements'
+import _inspect from '../core/inspect'
+import _equals from '../core/equals'
+import fl from '../core/flNames'
 
-const isNil = require('../core/isNil')
-const isNumber = require('../core/isNumber')
-const isSameType = require('../core/isSameType')
+import isNil from '../core/isNil'
+import isNumber from '../core/isNumber'
+import isSameType from '../core/isSameType'
 
-const _empty =
+import { typeFn, type as getType } from '../core/types'
+
+export const type = getType('Max')
+
+const _type = typeFn(type(), VERSION)
+
+export const empty =
   () => Max(-Infinity)
 
 function Max(n) {
-  const x = isNil(n) ? _empty().valueOf() : n
+  const x = isNil(n) ? empty().valueOf() : n
 
   if(!arguments.length || !isNumber(x)) {
     throw new TypeError('Max: Numeric value required')
@@ -26,9 +30,6 @@ function Max(n) {
 
   const valueOf =
     () => x
-
-  const empty =
-    _empty
 
   const inspect =
     () => `Max${_inspect(valueOf())}`
@@ -63,10 +64,10 @@ Max['@@implements'] = _implements(
   [ 'equals', 'concat', 'empty' ]
 )
 
-Max.empty = _empty
+Max.empty = empty
 Max.type = type
 
-Max[fl.empty] = _empty
+Max[fl.empty] = empty
 Max['@@type'] = _type
 
-module.exports = Max
+export default Max

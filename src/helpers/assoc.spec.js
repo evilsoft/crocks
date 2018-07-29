@@ -1,11 +1,12 @@
-const test = require('tape')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import { bindFunc } from '../test/helpers'
 
-const bindFunc = helpers.bindFunc
-const isFunction = require('../core/isFunction')
-const unit = require('../core/_unit')
 
-const assoc = require('./assoc')
+
+import isFunction from '../core/isFunction'
+import unit from '../core/_unit'
+
+import assoc from './assoc'
 
 const fn = (key, src) =>
   assoc(key, 'value', src)

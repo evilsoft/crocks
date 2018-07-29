@@ -1,12 +1,13 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const First = require('.')
-const Last = require('../core/types').proxy('Last')
+import First from './index'
+import types from '../core/types'
+const Last = types.proxy('Last')
 
-const curry = require('../core/curry')
-const isFunction = require('../core/isFunction')
-const isSameType = require('../core/isSameType')
+import curry from '../core/curry'
+import isFunction from '../core/isFunction'
+import isSameType from '../core/isSameType'
 
 const applyTransform = last =>
   First(last.valueOf())
@@ -33,4 +34,4 @@ function lastToFirst(last) {
   throw new TypeError('lastToFirst: Last or Last returning function required')
 }
 
-module.exports = curry(lastToFirst)
+export default curry(lastToFirst)

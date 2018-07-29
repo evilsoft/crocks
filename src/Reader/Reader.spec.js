@@ -1,18 +1,17 @@
-const test = require('tape')
-const sinon = require('sinon')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import sinon from 'sinon'
+import { bindFunc } from '../test/helpers'
 
-const bindFunc = helpers.bindFunc
+import curry from '../core/curry'
+import _compose from '../core/compose'
+const compose = curry(_compose)
+import isFunction from '../core/isFunction'
+import isObject from '../core/isObject'
+import isSameType from '../core/isSameType'
+import isString from '../core/isString'
+import unit from '../core/_unit'
 
-const curry = require('../core/curry')
-const compose = curry(require('../core/compose'))
-const isFunction = require('../core/isFunction')
-const isObject = require('../core/isObject')
-const isSameType = require('../core/isSameType')
-const isString = require('../core/isString')
-const unit = require('../core/_unit')
-
-const fl = require('../core/flNames')
+import fl from '../core/flNames'
 
 const constant = x => () => x
 const identity = x => x
@@ -20,7 +19,7 @@ const identity = x => x
 const applyTo =
   x => fn => fn(x)
 
-const Reader = require('.')
+import Reader from '.'
 
 test('Reader', t => {
   const m = Reader(unit)

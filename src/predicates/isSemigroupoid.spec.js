@@ -1,8 +1,8 @@
-const test = require('tape')
+import test from 'tape'
 
-const isFunction = require('../core/isFunction')
+import isFunction from '../core/isFunction'
 
-const isSemigroupoid = require('./isSemigroupoid')
+import isSemigroupoid from './isSemigroupoid'
 
 test('isSemigroupoid predicate', t => {
   t.ok(isFunction(isSemigroupoid), 'is a function')

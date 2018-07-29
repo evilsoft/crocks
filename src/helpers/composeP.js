@@ -1,8 +1,8 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isFunction = require('../core/isFunction')
-const isPromise = require('../core/isPromise')
+import isFunction from '../core/isFunction'
+import isPromise from '../core/isPromise'
 
 const err = 'composeP: Promise returning functions required'
 
@@ -22,7 +22,7 @@ function applyPipe(f, g) {
   }
 }
 
-function composeP(...args) {
+export default function composeP(...args) {
   if(!arguments.length) {
     throw new TypeError(err)
   }
@@ -42,5 +42,3 @@ function composeP(...args) {
 
   return tail.reduce(applyPipe, head)
 }
-
-module.exports = composeP

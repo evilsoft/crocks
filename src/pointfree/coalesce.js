@@ -1,8 +1,8 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const curry = require('../core/curry')
-const isFunction = require('../core/isFunction')
+import curry from '../core/curry'
+import isFunction from '../core/isFunction'
 
 function coalesce(f, g, m) {
   if(!(isFunction(f) && isFunction(g))) {
@@ -20,4 +20,4 @@ function coalesce(f, g, m) {
   )
 }
 
-module.exports = curry(coalesce)
+export default curry(coalesce)

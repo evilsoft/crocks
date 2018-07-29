@@ -1,12 +1,10 @@
-const test = require('tape')
-const sinon = require('sinon')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import sinon from 'sinon'
+import { bindFunc } from '../test/helpers'
 
-const bindFunc = helpers.bindFunc
-
-const isFunction = require('../core/isFunction')
-const unit = require('../core/_unit')
-const fl = require('../core/flNames')
+import isFunction from '../core/isFunction'
+import unit from '../core/_unit'
+import fl from '../core/flNames'
 
 const constant = x => () => x
 const identity = x => x
@@ -15,7 +13,7 @@ const mock = x => Object.assign({}, {
   map: sinon.spy()
 }, x)
 
-const map = require('./map')
+import map from './map'
 
 test('map pointfree', t => {
   const m = bindFunc(map)

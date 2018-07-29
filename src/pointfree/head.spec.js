@@ -1,16 +1,14 @@
-const test = require('tape')
-const sinon = require('sinon')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import sinon from 'sinon'
+import { bindFunc, testIterable } from '../test/helpers'
 
-const { bindFunc, testIterable } = helpers
-
-const M = require('../core/Maybe')
-const isFunction  = require('../core/isFunction')
-const unit = require('../core/_unit')
+import M from '../core/Maybe'
+import isFunction  from '../core/isFunction'
+import unit from '../core/_unit'
 
 const constant = x => () => x
 
-const head = require('./head')
+import head from './head'
 
 test('head pointfree', t => {
   const f = bindFunc(head)

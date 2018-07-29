@@ -1,36 +1,34 @@
-module.exports = {
-  alt: require('./alt'),
-  ap: require('./ap'),
-  bimap: require('./bimap'),
-  both: require('./both'),
-  chain: require('./chain'),
-  coalesce: require('./coalesce'),
-  compareWith: require('./compareWith'),
-  concat: require('./concat'),
-  cons: require('./cons'),
-  contramap: require('./contramap'),
-  either: require('./either'),
-  empty: require('./empty'),
-  equals: require('./equals'),
-  extend: require('./extend'),
-  filter: require('./filter'),
-  first: require('./first'),
-  fold: require('./fold'),
-  foldMap: require('./foldMap'),
-  head: require('./head'),
-  map: require('./map'),
-  merge: require('./merge'),
-  option: require('./option'),
-  promap: require('./promap'),
-  reduce: require('./reduce'),
-  reduceRight: require('./reduceRight'),
-  reject: require('./reject'),
-  run: require('./run'),
-  runWith: require('./runWith'),
-  second: require('./second'),
-  sequence: require('./sequence'),
-  swap: require('./swap'),
-  tail: require('./tail'),
-  traverse: require('./traverse'),
-  valueOf: require('./valueOf')
-}
+export { default as alt } from './alt'
+export { default as ap } from './ap'
+export { default as bimap } from './bimap'
+export { default as both } from './both'
+export { default as chain } from './chain'
+export { default as coalesce } from './coalesce'
+export { default as compareWith } from './compareWith'
+export { default as concat } from './concat'
+export { default as cons } from './cons'
+export { default as contramap } from './contramap'
+export { default as either } from './either'
+export { default as empty } from './empty'
+export { default as equals } from './equals'
+export { default as extend } from './extend'
+export { default as filter } from './filter'
+export { default as first } from './first'
+export { default as fold } from './fold'
+export { default as foldMap } from './foldMap'
+export { default as head } from './head'
+export { default as map } from './map'
+export { default as merge } from './merge'
+export { default as option } from './option'
+export { default as promap } from './promap'
+export { default as reduce } from './reduce'
+export { default as reduceRight } from './reduceRight'
+export { default as reject } from './reject'
+export { default as run } from './run'
+export { default as runWith } from './runWith'
+export { default as second } from './second'
+export { default as sequence } from './sequence'
+export { default as swap } from './swap'
+export { default as tail } from './tail'
+export { default as traverse } from './traverse'
+export { default as valueOf } from './valueOf'

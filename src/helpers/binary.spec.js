@@ -1,9 +1,9 @@
-const test = require('tape')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import { bindFunc } from '../test/helpers'
 
-const bindFunc = helpers.bindFunc
 
-const binary = require('./binary')
+
+import binary from './binary'
 
 test('binary helper', t => {
   const f = bindFunc(binary)

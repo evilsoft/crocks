@@ -6,12 +6,15 @@ module.exports = {
   },
   "extends": "eslint:recommended",
   "parserOptions": {
-    "sourceType": "module"
+    "sourceType": "module",
+    "ecmaVersion": 2018
   },
   "plugins": [
-    'markdown'
+    'markdown',
+    'import'
   ],
   "rules": {
+    "import/no-commonjs": [ "error" ],
     "array-bracket-spacing": [ "error", "always" ],
     "arrow-spacing": [ "error" ],
     "block-spacing": [ "error" ],
@@ -40,8 +43,15 @@ module.exports = {
     "no-with": [ "error" ],
     "no-useless-return": [ "error" ],
     "object-curly-spacing": [ "error", "always" ],
+    // "prefer-object-spread": [ "error" ],
     "quotes": [ "error", "single" ],
     "semi": [ "error", "never" ],
     "yoda": [ "error" ]
+  },
+  "overrides": {
+    "files": ["**/*.spec.js"],
+    "rules": {
+      "import/extensions": [ "off" ],
+    }
   }
 };

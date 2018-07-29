@@ -1,12 +1,12 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isFunction = require('../core/isFunction')
-const isNil = require('../core/isNil')
+import isFunction from '../core/isFunction'
+import isNil from '../core/isNil'
 
-const { Nothing, Just } = require('../core/Maybe')
+import { Nothing, Just } from '../core/Maybe'
 
-function tail(m) {
+export default function tail(m) {
   if(!isNil(m)) {
     if(isFunction(m.tail)) {
       return m.tail()
@@ -21,5 +21,3 @@ function tail(m) {
 
   throw new TypeError('tail: Array, String or List required')
 }
-
-module.exports = tail

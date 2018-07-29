@@ -1,12 +1,12 @@
-const test = require('tape')
-const { bindFunc } = require('../test/helpers')
+import test from 'tape'
+import { bindFunc } from '../test/helpers'
 
-const Pred = require('../Pred')
-const isFunction = require('../core/isFunction')
-const isNumber = require('../core/isNumber')
-const unit = require('../core/_unit')
+import Pred from '../Pred'
+import isFunction from '../core/isFunction'
+import isNumber from '../core/isNumber'
+import unit from '../core/_unit'
 
-const propSatisfies = require('./propSatisfies')
+import propSatisfies from './propSatisfies'
 
 const T =
   () => true

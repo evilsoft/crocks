@@ -1,10 +1,10 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isSameType = require('./isSameType')
-const isSemigroup = require('./isSemigroup')
+import isSameType from './isSameType'
+import isSemigroup from './isSemigroup'
 
-function innerConcat(method, m) {
+export default function innerConcat(method, m) {
   return function(left) {
     if(!isSemigroup(left)) {
       throw new TypeError(`${method}: Both containers must contain Semigroups of the same type`)
@@ -19,5 +19,3 @@ function innerConcat(method, m) {
     })
   }
 }
-
-module.exports = innerConcat

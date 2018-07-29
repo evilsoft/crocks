@@ -1,6 +1,6 @@
-const test = require('tape')
+import test from 'tape'
 
-const cloneIterable = require('./cloneIterable')
+import cloneIterable from './cloneIterable'
 
 test('cloneIterable shapes', t => {
   function First() { this.x = 42 }

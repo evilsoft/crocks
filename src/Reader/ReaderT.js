@@ -3,18 +3,22 @@
 
 const VERSION = 1
 
-const _implements = require('../core/implements')
-const _inspect = require('../core/inspect')
-const _type = require('../core/types').type('Reader')()
-const _typeString = require('../core/types').typeFn(_type, VERSION)
-const fl = require('../core/flNames')
+import _implements from '../core/implements'
+import _inspect from '../core/inspect'
+import fl from '../core/flNames'
 
-const curry = require('../core/curry')
-const isFunction = require('../core/isFunction')
-const isMonad = require('../core/isMonad')
-const isSameType = require('../core/isSameType')
+import curry from '../core/curry'
+import isFunction from '../core/isFunction'
+import isMonad from '../core/isMonad'
+import isSameType from '../core/isSameType'
 
-function _ReaderT(Monad) {
+import { typeFn, type as getType } from '../core/types'
+
+const _type = getType('Reader')()
+
+const _typeString = typeFn(_type, VERSION)
+
+export default function _ReaderT(Monad) {
   if(!isMonad(Monad)) {
     throw new TypeError('ReaderT: Monad required for construction')
   }
@@ -142,5 +146,3 @@ function _ReaderT(Monad) {
 
   return ReaderT
 }
-
-module.exports = _ReaderT

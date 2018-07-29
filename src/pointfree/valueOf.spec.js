@@ -1,12 +1,12 @@
-const test = require('tape')
-const sinon = require('sinon')
+import test from 'tape'
+import sinon from 'sinon'
 
-const isFunction = require('../core/isFunction')
-const unit = require('../core/_unit')
+import isFunction from '../core/isFunction'
+import unit from '../core/_unit'
 
 const constant = x => () => x
 
-const valueOf = require('./valueOf')
+import valueOf from './valueOf'
 
 test('valueOf pointfree', t => {
   const f = valueOf

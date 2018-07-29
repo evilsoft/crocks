@@ -1,9 +1,9 @@
-const { Just, Nothing } = require('../core/Maybe')
+import { Just, Nothing } from '../core/Maybe'
 
-const curry = require('../core/curry')
-const isPredOrFunc = require('../core/isPredOrFunc')
-const isFunction = require('../core/isFunction')
-const predOrFunc = require('../core/predOrFunc')
+import curry from '../core/curry'
+import isPredOrFunc from '../core/isPredOrFunc'
+import isFunction from '../core/isFunction'
+import predOrFunc from '../core/predOrFunc'
 
 // safeAfter :: ((b -> Boolean) | Pred) -> (a -> b) -> a -> Maybe b
 function safeAfter(pred, fn) {
@@ -22,4 +22,4 @@ function safeAfter(pred, fn) {
   }
 }
 
-module.exports = curry(safeAfter)
+export default curry(safeAfter)

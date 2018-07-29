@@ -1,8 +1,8 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isFunction = require('../core/isFunction')
-const isPromise = require('../core/isPromise')
+import isFunction from '../core/isFunction'
+import isPromise from '../core/isPromise'
 
 const err = 'pipeP: Promise returning functions required'
 
@@ -23,7 +23,7 @@ function applyPipe(f, g) {
 }
 
 // pipeP : Promise p => ((a -> p b), (b -> p c), ..., (y -> p z)) -> a -> p z
-function pipeP(...fns) {
+export default function pipeP(...fns) {
   if(!arguments.length) {
     throw new TypeError(err)
   }
@@ -40,5 +40,3 @@ function pipeP(...fns) {
 
   return tail.reduce(applyPipe, head)
 }
-
-module.exports = pipeP

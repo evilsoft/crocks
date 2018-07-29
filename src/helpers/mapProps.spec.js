@@ -1,12 +1,12 @@
-const test = require('tape')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import { bindFunc } from '../test/helpers'
 
-const bindFunc = helpers.bindFunc
+
 
 const fn =
   x => `from ${x}`
 
-const mapProps = require('./mapProps')
+import mapProps from './mapProps'
 
 test('mapProps errors', t => {
   const m = bindFunc(mapProps)

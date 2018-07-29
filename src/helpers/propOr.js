@@ -2,12 +2,12 @@
 /** @author Henrique Limas */
 /** @author Ian Hofmann-Hicks */
 
-const curry = require('../core/curry')
-const isDefined = require('../core/isDefined')
-const isEmpty = require('../core/isEmpty')
-const isNil = require('../core/isNil')
-const isInteger = require('../core/isInteger')
-const isString = require('../core/isString')
+import curry from '../core/curry'
+import isDefined from '../core/isDefined'
+import isEmpty from '../core/isEmpty'
+import isNil from '../core/isNil'
+import isInteger from '../core/isInteger'
+import isString from '../core/isString'
 
 // propOr : a -> String | Integer -> b -> c
 function propOr(def, key, target) {
@@ -26,4 +26,4 @@ function propOr(def, key, target) {
     : def
 }
 
-module.exports = curry(propOr)
+export default curry(propOr)

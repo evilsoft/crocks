@@ -1,10 +1,10 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const curry = require('../core/curry')
-const isObject = require('../core/isObject')
-const isFunction = require('../core/isFunction')
-const isNil = require('../core/isNil')
+import curry from '../core/curry'
+import isObject from '../core/isObject'
+import isFunction from '../core/isFunction'
+import isNil from '../core/isNil'
 
 // applyMap :: ({ (* -> *) }, Object) -> (Object , String) -> Object
 const applyMap = (fns, obj) =>
@@ -38,4 +38,4 @@ function mapProps(fns, obj) {
     .reduce(applyMap(fns, obj), {})
 }
 
-module.exports = curry(mapProps)
+export default curry(mapProps)

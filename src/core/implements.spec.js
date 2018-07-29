@@ -1,8 +1,8 @@
-const test = require('tape')
+import test from 'tape'
 
-const isFunction = require('./isFunction')
+import isFunction from './isFunction'
 
-const _implements = require('./implements')
+import _implements from './implements'
 
 test('implements', t => {
   t.ok(isFunction(_implements), 'is a function')

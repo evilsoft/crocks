@@ -1,11 +1,11 @@
 /** @license ISC License (c) copyright 2018 original and current authors */
 /** @author Karthik Iyengar (karthikiyengar) */
 
-const curry = require('../core/curry')
-const isFunction = require('../core/isFunction')
-const isInteger = require('../core/isInteger')
-const isSameType = require('../core/isSameType')
-const Tuple = require('./index')
+import curry from '../core/curry'
+import isFunction from '../core/isFunction'
+import isInteger from '../core/isInteger'
+import isSameType from '../core/isSameType'
+import Tuple from './index'
 
 const validTuple = (n, m) =>
   isSameType(Tuple(n), m)
@@ -75,5 +75,4 @@ function nmap(n) {
   }
 }
 
-module.exports =
-  curry(nmap)
+export default curry(nmap)

@@ -3,30 +3,31 @@
 
 const VERSION = 2
 
-const _implements = require('../core/implements')
-const _inspect = require('../core/inspect')
-const _equals = require('../core/equals')
-const type = require('../core/types').type('First')
-const _type = require('../core/types').typeFn(type(), VERSION)
-const fl = require('../core/flNames')
+import _implements from '../core/implements'
+import _inspect from '../core/inspect'
+import _equals from '../core/equals'
+import fl from '../core/flNames'
 
-const isSameType = require('../core/isSameType')
+import isSameType from '../core/isSameType'
 
-const Maybe = require('../core/Maybe')
+import Maybe from '../core/Maybe'
 
-const _empty =
+import { typeFn, type as getType } from '../core/types'
+
+export const type = getType('First')
+
+const _type = typeFn(type(), VERSION)
+
+const empty =
   () => First(Maybe.Nothing())
 
-function First(x) {
+export default function First(x) {
   if(!arguments.length) {
     throw new TypeError('First: Requires one argument')
   }
 
   const maybe =
     !isSameType(Maybe, x) ? Maybe.of(x) : x.map(x => x)
-
-  const empty =
-    _empty
 
   const inspect =
     () => `First(${_inspect(maybe)} )`
@@ -61,7 +62,7 @@ function First(x) {
     equals, empty, option, type, valueOf,
     concat: concat('concat'),
     [fl.equals]: equals,
-    [fl.empty]: _empty,
+    [fl.empty]: empty,
     [fl.concat]: concat(fl.concat),
     ['@@type']: _type,
     constructor: First
@@ -72,10 +73,8 @@ First['@@implements'] = _implements(
   [ 'equals', 'concat', 'empty' ]
 )
 
-First.empty = _empty
+First.empty = empty
 First.type = type
 
-First[fl.empty] = _empty
+First[fl.empty] = empty
 First['@@type'] = _type
-
-module.exports = First

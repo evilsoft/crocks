@@ -1,7 +1,7 @@
-const test = require('tape')
-const sinon = require('sinon')
+import test from 'tape'
+import sinon from 'sinon'
 
-const curryN = require('./curryN')
+import curryN from './curryN'
 
 test('curryN function functionality', t => {
   const result = 'result'

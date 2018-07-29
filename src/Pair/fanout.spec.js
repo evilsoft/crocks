@@ -1,22 +1,20 @@
-const test = require('tape')
-const helpers = require('../test/helpers')
-const MockCrock = require('../test/MockCrock')
+import test from 'tape'
+import { bindFunc } from '../test/helpers'
+import MockCrock from '../test/MockCrock'
 
-const bindFunc = helpers.bindFunc
+import Arrow from '../Arrow'
+import Pair from '../core/Pair'
+import _Star from '../Star'
 
-const Arrow = require('../Arrow')
-const Pair = require('../core/Pair')
-const _Star = require('../Star')
-
-const isFunction = require('../core/isFunction')
-const isSameType = require('../core/isSameType')
-const unit = require('../core/_unit')
+import isFunction from '../core/isFunction'
+import isSameType from '../core/isSameType'
+import unit from '../core/_unit'
 
 const Star = _Star(MockCrock)
 
 const identity = x => x
 
-const fanout = require('./fanout')
+import fanout from './fanout'
 
 test('fanout function', t => {
   t.ok(isFunction(fanout), 'is a function')

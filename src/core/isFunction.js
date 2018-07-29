@@ -2,8 +2,6 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 // isFunction : a -> Boolean
-function isFunction(fn) {
+export default function isFunction(fn) {
   return typeof fn === 'function'
 }
-
-module.exports = isFunction

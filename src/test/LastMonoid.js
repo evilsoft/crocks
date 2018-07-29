@@ -1,5 +1,5 @@
-const _implements = require('../core/implements')
-const _inspect = require('../core/inspect')
+import _implements from '../core/implements'
+import _inspect from '../core/inspect'
 
 const constant = x => () => x
 const identity = x => x
@@ -7,7 +7,7 @@ const identity = x => x
 const typeString = 'crocks/Last@1'
 const _type = constant('Last')
 
-function LastMonoid(x) {
+export default function LastMonoid(x) {
   return {
     inspect: constant('Last' + _inspect(x)),
     concat: identity,
@@ -24,5 +24,3 @@ LastMonoid['@@type'] = typeString
 LastMonoid['@@implements'] = _implements(
   [ 'concat', 'empty' ]
 )
-
-module.exports = LastMonoid

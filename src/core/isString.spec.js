@@ -1,10 +1,10 @@
-const test = require('tape')
+import test from 'tape'
 
-const isFunction = require('./isFunction')
+import isFunction from './isFunction'
 
 const identity = x => x
 
-const isString = require('./isString')
+import isString from './isString'
 
 test('isString core', t => {
   t.ok(isFunction(isString))

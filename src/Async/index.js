@@ -3,28 +3,32 @@
 
 const VERSION = 4
 
-const _implements = require('../core/implements')
-const _inspect = require('../core/inspect')
-const type = require('../core/types').type('Async')
-const _type = require('../core/types').typeFn(type(), VERSION)
-const fl = require('../core/flNames')
+import _implements from '../core/implements'
+import _inspect from '../core/inspect'
+import fl from '../core/flNames'
 
-const array = require('../core/array')
-const compose = require('../core/compose')
-const once = require('../core/once')
-const unit = require('../core/_unit')
+import array from '../core/array'
+import compose from '../core/compose'
+import once from '../core/once'
+import unit from '../core/_unit'
 
-const isArray = require('../core/isArray')
-const isFoldable = require('../core/isFoldable')
-const isFunction = require('../core/isFunction')
-const isInteger = require('../core/isInteger')
-const isPromise = require('../core/isPromise')
-const isSameType = require('../core/isSameType')
+import isArray from '../core/isArray'
+import isFoldable from '../core/isFoldable'
+import isFunction from '../core/isFunction'
+import isInteger from '../core/isInteger'
+import isPromise from '../core/isPromise'
+import isSameType from '../core/isSameType'
+
+import { typeFn, type as getType } from '../core/types'
+
+export const type = getType('Async')
+
+const _type = typeFn(type(), VERSION)
 
 const allAsyncs = xs =>
   xs.reduce((acc, x) => acc && isSameType(Async, x), true)
 
-const _of =
+export const of =
   x => Async((_, resolve) => resolve(x))
 
 const Rejected =
@@ -114,9 +118,6 @@ function Async(fn) {
   if(!isFunction(fn)) {
     throw new TypeError('Async: Function required')
   }
-
-  const of =
-    _of
 
   const inspect =
     () => `Async${_inspect(fn)}`
@@ -341,14 +342,14 @@ function Async(fn) {
   }
 }
 
-Async.of = _of
+Async.of = of
 Async.type = type
 
-Async[fl.of] = _of
+Async[fl.of] = of
 Async['@@type'] = _type
 
 Async.Rejected = Rejected
-Async.Resolved = _of
+Async.Resolved = of
 
 Async.fromPromise = fromPromise
 Async.fromNode = fromNode
@@ -361,4 +362,4 @@ Async['@@implements'] = _implements(
   [ 'alt', 'ap', 'bimap', 'chain', 'map', 'of' ]
 )
 
-module.exports = Async
+export default Async

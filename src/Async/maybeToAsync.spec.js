@@ -1,17 +1,17 @@
-const test = require('tape')
-const sinon = require('sinon')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import sinon from 'sinon'
+import { bindFunc } from '../test/helpers'
 
-const bindFunc = helpers.bindFunc
 
-const Async = require('.')
-const Maybe = require('../core/Maybe')
 
-const isFunction = require('../core/isFunction')
-const isSameType = require('../core/isSameType')
-const unit = require('../core/_unit')
+import Async from '.'
+import Maybe from '../core/Maybe'
 
-const maybeToAsync = require('./maybeToAsync')
+import isFunction from '../core/isFunction'
+import isSameType from '../core/isSameType'
+import unit from '../core/_unit'
+
+import maybeToAsync from './maybeToAsync'
 
 const identity = x => x
 

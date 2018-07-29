@@ -1,13 +1,13 @@
-const test = require('tape')
-const Last = require('../test/LastMonoid')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import Last from '../test/LastMonoid'
+import { bindFunc } from '../test/helpers'
 
-const bindFunc = helpers.bindFunc
 
-const isFunction = require('../core/isFunction')
-const unit = require('../core/_unit')
 
-const mreduceMap = require('./mreduceMap')
+import isFunction from '../core/isFunction'
+import unit from '../core/_unit'
+
+import mreduceMap from './mreduceMap'
 
 test('mreduceMap helper', t => {
   const mc = bindFunc(mreduceMap)

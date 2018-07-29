@@ -1,22 +1,15 @@
-const test = require('tape')
-const helpers = require('../test/helpers')
-const MockCrock = require('../test/MockCrock')
+import test from 'tape'
+import { bindFunc } from '../test/helpers'
+import MockCrock from '../test/MockCrock'
 
-const bindFunc = helpers.bindFunc
 
-const curry = require('./curry')
-const compose = curry(require('./compose'))
-const isSameType = require('./isSameType')
 
-const array = require('./array')
+import curry from './curry'
+import _compose from '../core/compose'
+const compose = curry(_compose)
+import isSameType from './isSameType'
 
-const map = array.map
-const ap = array.ap
-const chain = array.chain
-const sequence = array.sequence
-const set = array.set
-const traverse = array.traverse
-const unset = array.unset
+import { map, ap, chain, sequence, set, traverse, unset, fold, foldMap } from './array'
 
 const constant = x => () => x
 const identity = x => x
@@ -254,7 +247,7 @@ test('array traverse with Applicative TypeRep', t => {
 })
 
 test('array fold errors', t => {
-  const fn = bindFunc(x => array.fold(x))
+  const fn = bindFunc(x => fold(x))
 
   const emptyErr = /^TypeError: Array.fold: Non-empty Array of Semigroups required/
   t.throws(fn([]), emptyErr, 'throws when passed a single element array with no semigroup')
@@ -269,7 +262,6 @@ test('array fold errors', t => {
 })
 
 test('array fold functionality', t => {
-  const fold = array.fold
 
   t.same(fold([ [ 1 ], [ 2 ] ]), [ 1, 2 ], 'combines and extracts semigroups')
   t.same(fold([ 'happy' ]), 'happy', 'extracts a single semigroup')
@@ -278,7 +270,7 @@ test('array fold functionality', t => {
 })
 
 test('array foldMap errors', t => {
-  const fn = bindFunc(x => array.foldMap(identity, x))
+  const fn = bindFunc(x => foldMap(identity, x))
 
   const emptyErr = /^TypeError: Array.foldMap: Non-empty Array required/
   t.throws(fn([]), emptyErr, 'throws when passed an empty array')
@@ -294,7 +286,7 @@ test('array foldMap errors', t => {
 
 test('array foldMap functionality', t => {
   const fold = xs =>
-    array.foldMap(x => x.toString(), xs)
+    foldMap(x => x.toString(), xs)
 
   t.same(fold([ 1, 2 ]), '12', 'combines and extracts semigroups')
   t.same(fold([ 3 ]), '3', 'extracts a single semigroup')

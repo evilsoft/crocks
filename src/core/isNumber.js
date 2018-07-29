@@ -2,9 +2,7 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 // isNumber : a -> Boolean
-function isNumber(x) {
+export default function isNumber(x) {
   return typeof x === 'number'
     && !isNaN(x)
 }
-
-module.exports = isNumber

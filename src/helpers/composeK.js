@@ -1,13 +1,13 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isChain = require('../core/isChain')
-const isFunction = require('../core/isFunction')
+import isChain from '../core/isChain'
+import isFunction from '../core/isFunction'
 
 const err = 'composeK: Chain returning functions of the same type required'
 
 // composeK : Chain m => ((y -> m z), (x -> m y), ..., (a -> m b)) -> a -> m z
-function composeK(...args) {
+export default function composeK(...args) {
   if(!arguments.length) {
     throw new TypeError(err)
   }
@@ -43,5 +43,3 @@ function composeK(...args) {
     return tail(head.apply(null, arguments))
   }
 }
-
-module.exports = composeK

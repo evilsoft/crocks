@@ -3,21 +3,25 @@
 
 const VERSION = 4
 
-const _equals = require('./equals')
-const _implements = require('./implements')
-const _inspect = require('./inspect')
-const type = require('./types').type('Pair')
-const _type = require('./types').typeFn(type(), VERSION)
-const fl = require('./flNames')
+import _equals from './equals'
+import _implements from './implements'
+import _inspect from './inspect'
+import fl from './flNames'
 
-const isApplicative = require('./isApplicative')
-const isApply = require('./isApply')
-const isArray = require('./isArray')
-const isFunction = require('./isFunction')
-const isSameType = require('./isSameType')
-const isSemigroup = require('./isSemigroup')
+import isApplicative from './isApplicative'
+import isApply from './isApply'
+import isArray from './isArray'
+import isFunction from './isFunction'
+import isSameType from './isSameType'
+import isSemigroup from './isSemigroup'
 
-function Pair(l, r) {
+import { typeFn, type as getType } from './types'
+
+const _type = typeFn(type(), VERSION)
+
+export const type = getType('Pair')
+
+export default function Pair(l, r) {
   if(arguments.length < 2) {
     throw new TypeError('Pair: Must provide a first and second value')
   }
@@ -230,5 +234,3 @@ Pair['@@type'] = _type
 Pair['@@implements'] = _implements(
   [ 'ap', 'bimap', 'chain', 'concat', 'extend', 'equals', 'map', 'traverse' ]
 )
-
-module.exports = Pair

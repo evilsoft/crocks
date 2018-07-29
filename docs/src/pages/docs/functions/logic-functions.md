@@ -41,7 +41,7 @@ import isNil from 'crocks/predicates/isNil'
 import not from 'crocks/logic/not'
 
 // gte :: Number -> Number -> Boolean
-const gte = 
+const gte =
     x => y => y >= x
 
 // isLegalDrinkingAge :: Number -> Boolean
@@ -99,24 +99,22 @@ comes in really handy when creating lifting functions for Sum Types (like
 ```javascript
 import ifElse from 'crocks/logic/ifElse'
 
-import Maybe from 'crocks/Maybe'
+import { Just, Nothing } from 'crocks/Maybe'
 import isNumber from 'crocks/predicates/isNumber'
 import chain from 'crocks/pointfree/chain'
 import compose from 'crocks/core'
 import identity from 'crocks/combinators'
 
-const { Just, Nothing } = Maybe
-
 // safe :: (a -> Boolean) -> a -> Maybe a
-const safe = 
+const safe =
     pred => ifElse(pred, Just, Nothing)
 
 // gte :: Number -> Number -> Maybe Number
-const gte = 
+const gte =
     x => safe(n => n >= x)
 
 // isLarge :: a -> Maybe a
-const isLarge = 
+const isLarge =
     compose(chain(gte(42)), safe(isNumber))
 
 // ensureArray :: a -> Array

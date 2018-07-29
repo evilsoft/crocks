@@ -1,12 +1,13 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const Async = require('.')
-const Last = require('../core/types').proxy('Last')
+import Async from './index'
+import types from '../core/types'
+const Last = types.proxy('Last')
 
-const curry = require('../core/curry')
-const isFunction = require('../core/isFunction')
-const isSameType = require('../core/isSameType')
+import curry from '../core/curry'
+import isFunction from '../core/isFunction'
+import isSameType from '../core/isSameType'
 
 const constant = x => () => x
 
@@ -38,4 +39,4 @@ function lastToAsync(left, last) {
   throw new TypeError('lastToAsync: Last or Last returning function required for second argument')
 }
 
-module.exports = curry(lastToAsync)
+export default curry(lastToAsync)

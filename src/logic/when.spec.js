@@ -1,16 +1,16 @@
-const test = require('tape')
-const sinon = require('sinon')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import sinon from 'sinon'
+import { bindFunc } from '../test/helpers'
 
-const bindFunc = helpers.bindFunc
 
-const Pred = require('../Pred')
-const isFunction = require('../core/isFunction')
-const unit = require('../core/_unit')
+
+import Pred from '../Pred'
+import isFunction from '../core/isFunction'
+import unit from '../core/_unit'
 
 const constant = x => () => x
 
-const when = require('./when')
+import when from './when'
 
 test('when logic function', t => {
   const f = bindFunc(when)

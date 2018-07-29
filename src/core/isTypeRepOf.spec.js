@@ -1,9 +1,9 @@
-const test = require('tape')
+import test from 'tape'
 
-const isFunction = require('./isFunction')
-const unit = require('./_unit')
+import isFunction from './isFunction'
+import unit from './_unit'
 
-const isTypeRepOf = require('./isTypeRepOf')
+import isTypeRepOf from './isTypeRepOf'
 
 test('isTypeRepOf internal', t => {
   t.ok(isFunction(isTypeRepOf), 'is a function')

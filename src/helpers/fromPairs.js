@@ -1,11 +1,12 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const Pair = require('../core/types').proxy('Pair')
+import types from '../core/types'
+const Pair = types.proxy('Pair')
 
-const isFoldable = require('../core/isFoldable')
-const isSameType = require('../core/isSameType')
-const isString = require('../core/isString')
+import isFoldable from '../core/isFoldable'
+import isSameType from '../core/isSameType'
+import isString from '../core/isString'
 
 function foldPairs(acc, pair) {
   if(!isSameType(Pair, pair)) {
@@ -25,12 +26,10 @@ function foldPairs(acc, pair) {
 }
 
 // fromPairs : Foldable f => f (Pair String a) -> Object
-function fromPairs(xs) {
+export default function fromPairs(xs) {
   if(!isFoldable(xs)) {
     throw new TypeError('fromPairs: Foldable of Pairs required for argument')
   }
 
   return xs.reduce(foldPairs, {})
 }
-
-module.exports = fromPairs

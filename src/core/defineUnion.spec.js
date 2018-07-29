@@ -1,12 +1,12 @@
-const test = require('tape')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import { bindFunc } from '../test/helpers'
 
-const bindFunc = helpers.bindFunc
 
-const isFunction = require('./isFunction')
-const isObject = require('./isObject')
 
-const defineUnion = require('./defineUnion')
+import isFunction from './isFunction'
+import isObject from './isObject'
+
+import defineUnion from './defineUnion'
 
 test('defineUnion internal function', t => {
   const u = bindFunc(defineUnion)

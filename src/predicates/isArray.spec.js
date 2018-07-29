@@ -1,8 +1,8 @@
-const test = require('tape')
+import test from 'tape'
 
-const isFunction = require('../core/isFunction')
+import isFunction from '../core/isFunction'
 
-const isArray = require('./isArray')
+import isArray from './isArray'
 
 test('isArray predicate', t => {
   t.ok(isFunction(isArray), 'is a function')

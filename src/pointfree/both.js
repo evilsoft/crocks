@@ -1,12 +1,14 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const Pair = require('../core/types').proxy('Pair')
+import { proxy } from '../core/types'
 
-const isFunction = require('../core/isFunction')
-const isSameType = require('../core/isSameType')
+import isFunction from '../core/isFunction'
+import isSameType from '../core/isSameType'
 
-function both(m) {
+const Pair = proxy('Pair')
+
+export default function both(m) {
   if(isFunction(m)) {
     return function(x) {
       if(!isSameType(Pair, x)) {
@@ -23,5 +25,3 @@ function both(m) {
 
   throw new TypeError('both: Strong Function or Profunctor required')
 }
-
-module.exports = both

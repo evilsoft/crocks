@@ -1,12 +1,10 @@
-const test = require('tape')
-const sinon = require('sinon')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import sinon from 'sinon'
+import { bindFunc } from '../test/helpers'
 
-const bindFunc = helpers.bindFunc
-
-const fl = require('../core/flNames')
-const isFunction = require('../core/isFunction')
-const unit = require('../core/_unit')
+import fl from '../core/flNames'
+import isFunction from '../core/isFunction'
+import unit from '../core/_unit'
 
 const constant = x => () => x
 
@@ -16,7 +14,7 @@ const mock = x => Object.assign({}, {
   type: constant('Alt')
 }, x)
 
-const alt = require('./alt')
+import alt from './alt'
 
 test('alt pointfree', t => {
   const a = bindFunc(alt)

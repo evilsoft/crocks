@@ -1,8 +1,8 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const curry = require('../core/curry')
-const isFunction = require('../core/isFunction')
+import curry from '../core/curry'
+import isFunction from '../core/isFunction'
 
 const isWriter =
   x => !!x && isFunction(x.read)
@@ -32,4 +32,4 @@ function writerToPair(writer) {
   throw new TypeError('writerToPair: Writer or Writer returning function required')
 }
 
-module.exports = curry(writerToPair)
+export default curry(writerToPair)

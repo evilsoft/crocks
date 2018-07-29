@@ -3,22 +3,26 @@
 
 const VERSION = 3
 
-const _defineUnion = require('./defineUnion')
-const _equals = require('./equals')
-const _implements = require('./implements')
-const _innerConcat = require('./innerConcat')
-const _inspect = require('./inspect')
-const type = require('./types').type('Maybe')
-const _type = require('./types').typeFn(type(), VERSION)
-const fl = require('./flNames')
+import _defineUnion from './defineUnion'
+import _equals from './equals'
+import _implements from './implements'
+import _innerConcat from './innerConcat'
+import _inspect from './inspect'
+import fl from './flNames'
 
-const apOrFunc = require('./apOrFunc')
-const compose = require('./compose')
-const isApplicative = require('./isApplicative')
-const isApply = require('./isApply')
-const isArray = require('./isArray')
-const isFunction = require('./isFunction')
-const isSameType = require('./isSameType')
+import apOrFunc from './apOrFunc'
+import compose from './compose'
+import isApplicative from './isApplicative'
+import isApply from './isApply'
+import isArray from './isArray'
+import isFunction from './isFunction'
+import isSameType from './isSameType'
+
+import { typeFn, type as getType } from './types'
+
+export const type = getType('Maybe')
+
+const _type = typeFn(type(), VERSION)
 
 const constant = x => () => x
 const identity = x => x
@@ -26,10 +30,10 @@ const identity = x => x
 const _maybe =
   _defineUnion({ Nothing: [], Just: [ 'a' ] })
 
-const Nothing =
+export const Nothing =
   _maybe.Nothing
 
-const Just =
+export const Just =
   _maybe.Just
 
 Maybe.Nothing =
@@ -38,10 +42,10 @@ Maybe.Nothing =
 Maybe.Just =
   compose(Maybe, Just)
 
-const _of =
+const of =
   compose(Maybe, Just)
 
-const _zero =
+const zero =
   compose(Maybe, Nothing)
 
 function runSequence(x) {
@@ -51,7 +55,7 @@ function runSequence(x) {
     )
   }
 
-  return x.map(_of)
+  return x.map(of)
 }
 
 function Maybe(u) {
@@ -61,12 +65,6 @@ function Maybe(u) {
 
   const x =
     !_maybe.includes(u) ? Just(u) : u
-
-  const of =
-    _of
-
-  const zero =
-    _zero
 
   const option =
     n => either(constant(n), identity)
@@ -217,7 +215,7 @@ function Maybe(u) {
 
     return either(
       constant(m),
-      constant(m.map(_of))
+      constant(m.map(of))
     )
   }
 
@@ -242,16 +240,16 @@ function Maybe(u) {
   }
 }
 
-Maybe.of = _of
-Maybe.zero = _zero
+Maybe.of = of
+Maybe.zero = zero
 Maybe.type = type
 
-Maybe[fl.of] = _of
-Maybe[fl.zero] = _zero
+Maybe[fl.of] = of
+Maybe[fl.zero] = zero
 Maybe['@@type'] = _type
 
 Maybe['@@implements'] = _implements(
   [ 'alt', 'ap', 'chain', 'concat', 'equals', 'map', 'of', 'traverse', 'zero' ]
 )
 
-module.exports = Maybe
+export default Maybe

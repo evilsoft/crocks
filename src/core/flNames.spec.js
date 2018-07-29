@@ -1,6 +1,6 @@
-const test = require('tape')
+import test from 'tape'
 
-const methods = require('./flNames')
+import methods from './flNames'
 
 test('flMethods', t => {
   t.equals(methods.alt, 'fantasy-land/alt', 'provides alt')

@@ -1,11 +1,11 @@
-const test = require('tape')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import { bindFunc } from '../test/helpers'
 
-const bindFunc = helpers.bindFunc
 
-const isFunction = require('../core/isFunction')
 
-const sub = require('./substitution')
+import isFunction from '../core/isFunction'
+
+import sub from './substitution'
 
 const identity = x => x
 

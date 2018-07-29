@@ -3,21 +3,25 @@
 
 const VERSION = 2
 
-const _implements = require('../core/implements')
-const _inspect = require('../core/inspect')
+import _implements from '../core/implements'
+import _inspect from '../core/inspect'
 
-const curry = require('../core/curry')
-const isFunction = require('../core/isFunction')
-const isSameType = require('../core/isSameType')
+import curry from '../core/curry'
+import isFunction from '../core/isFunction'
+import isSameType from '../core/isSameType'
 
-const type = require('../core/types').type('Equiv')
-const _type = require('../core/types').typeFn(type(), VERSION)
-const fl = require('../core/flNames')
+import fl from '../core/flNames'
 
-const _empty =
+import { typeFn, type as getType } from '../core/types'
+
+export const type = getType('Equiv')
+
+const _type = typeFn(type(), VERSION)
+
+const empty =
   () => Equiv(() => true)
 
-function Equiv(compare) {
+export default function Equiv(compare) {
   if(!isFunction(compare)) {
     throw new TypeError('Equiv: Comparison function required')
   }
@@ -28,9 +32,6 @@ function Equiv(compare) {
 
   const inspect =
     () => `Equiv${_inspect(compare)}`
-
-  const empty =
-    _empty
 
   const valueOf =
     () => compareWith
@@ -72,14 +73,12 @@ function Equiv(compare) {
   }
 }
 
-Equiv.empty = _empty
+Equiv.empty = empty
 Equiv.type = type
 
-Equiv[fl.empty] = _empty
+Equiv[fl.empty] = empty
 Equiv['@@type'] = _type
 
 Equiv['@@implements'] = _implements(
   [ 'concat', 'contramap', 'empty' ]
 )
-
-module.exports = Equiv

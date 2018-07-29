@@ -1,10 +1,10 @@
-const test = require('tape')
+import test from 'tape'
 
-const isFunction = require('./isFunction')
+import isFunction from './isFunction'
 
 const identity = x => x
 
-const isDate = require('./isDate')
+import isDate from './isDate'
 
 test('isDate core', t => {
   t.ok(isFunction(isDate))

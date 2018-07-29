@@ -1,8 +1,8 @@
-const test = require('tape')
-const sinon = require('sinon')
+import test from 'tape'
+import sinon from 'sinon'
 
-const isFunction = require('./isFunction')
-const predOrFunc = require('./predOrFunc')
+import isFunction from './isFunction'
+import predOrFunc from './predOrFunc'
 
 test('predOrFunc internal', t => {
   t.ok(isFunction(predOrFunc), 'is a function')

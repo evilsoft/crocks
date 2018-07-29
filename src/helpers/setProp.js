@@ -1,20 +1,20 @@
 /** @license ISC License (c) copyright 2018 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const curry = require('../core/curry')
-const isArray = require('../core/isArray')
-const isInteger = require('../core/isInteger')
-const isObject = require('../core/isObject')
-const isString = require('../core/isString')
+import curry from '../core/curry'
+import isArray from '../core/isArray'
+import isInteger from '../core/isInteger'
+import isObject from '../core/isObject'
+import isString from '../core/isString'
 
-const array = require('../core/array')
-const object = require('../core/object')
+import { set } from '../core/array'
+import { set as _set } from '../core/object'
 
 function fn(name) {
   function setProp(key, val, x) {
     if(isObject(x)) {
       if(isString(key)) {
-        return object.set(key, val, x)
+        return _set(key, val, x)
       }
 
       throw new TypeError(
@@ -24,7 +24,7 @@ function fn(name) {
 
     if(isArray(x)) {
       if(isInteger(key) && key >= 0) {
-        return array.set(key, val, x)
+        return set(key, val, x)
       }
 
       throw new TypeError(
@@ -47,4 +47,4 @@ const setProp =
 setProp.origFn =
   fn
 
-module.exports = setProp
+export default setProp

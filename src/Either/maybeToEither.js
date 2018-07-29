@@ -1,12 +1,13 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const Either = require('.')
-const Maybe = require('../core/types').proxy('Maybe')
+import Either from './index'
+import types from '../core/types'
+const Maybe = types.proxy('Maybe')
 
-const curry = require('../core/curry')
-const isFunction = require('../core/isFunction')
-const isSameType = require('../core/isSameType')
+import curry from '../core/curry'
+import isFunction from '../core/isFunction'
+import isSameType from '../core/isSameType'
 
 const constant = x => () => x
 
@@ -38,4 +39,4 @@ function maybeToEither(left, maybe) {
   throw new TypeError('maybeToEither: Maybe or Maybe returning function required for second argument')
 }
 
-module.exports = curry(maybeToEither)
+export default curry(maybeToEither)

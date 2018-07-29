@@ -1,9 +1,9 @@
-const test = require('tape')
+import test from 'tape'
 
-const isFunction = require('./isFunction')
-const unit = require('./_unit')
+import isFunction from './isFunction'
+import unit from './_unit'
 
-const isNil = require('./isNil')
+import isNil from './isNil'
 
 test('isNil predicate function', t => {
   t.ok(isFunction(isNil), 'is a function')

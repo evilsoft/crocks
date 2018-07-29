@@ -1,14 +1,12 @@
-const test = require('tape')
-const sinon = require('sinon')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import sinon from 'sinon'
+import { bindFunc } from '../test/helpers'
 
-const bindFunc = helpers.bindFunc
+import Pred from '../Pred'
+import isFunction from '../core/isFunction'
+import unit from '../core/_unit'
 
-const Pred = require('../Pred')
-const isFunction = require('../core/isFunction')
-const unit = require('../core/_unit')
-
-const reject = require('./reject')
+import reject from './reject'
 
 test('reject pointfree', t => {
   const m = bindFunc(reject)

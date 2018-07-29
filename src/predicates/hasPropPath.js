@@ -1,13 +1,13 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const curry = require('../core/curry')
-const isArray = require('../core/isArray')
-const isDefined = require('../core/isDefined')
-const isEmpty = require('../core/isEmpty')
-const isInteger = require('../core/isInteger')
-const isNil = require('../core/isNil')
-const isString = require('../core/isString')
+import curry from '../core/curry'
+import isArray from '../core/isArray'
+import isDefined from '../core/isDefined'
+import isEmpty from '../core/isEmpty'
+import isInteger from '../core/isInteger'
+import isNil from '../core/isNil'
+import isString from '../core/isString'
 
 // hasPropPath : [ String | Integer ] -> a -> Boolean
 function hasPropPath(keys, target) {
@@ -46,4 +46,4 @@ function hasPropPath(keys, target) {
   return true
 }
 
-module.exports = curry(hasPropPath)
+export default curry(hasPropPath)

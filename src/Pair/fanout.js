@@ -1,13 +1,13 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const Pair = require('../core/Pair')
+import Pair from '../core/Pair'
 
-const curry = require('../core/curry')
-const isContravariant = require('../core/isContravariant')
-const isFunction = require('../core/isFunction')
-const isSameType = require('../core/isSameType')
-const isSemigroupoid = require('../core/isSemigroupoid')
+import curry from '../core/curry'
+import isContravariant from '../core/isContravariant'
+import isFunction from '../core/isFunction'
+import isSameType from '../core/isSameType'
+import isSemigroupoid from '../core/isSemigroupoid'
 
 const valid = (x, y) =>
   isSameType(x, y)
@@ -34,4 +34,4 @@ function fanout(fst, snd) {
   )
 }
 
-module.exports = curry(fanout)
+export default curry(fanout)

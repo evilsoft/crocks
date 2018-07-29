@@ -2,8 +2,6 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 // isBoolean : a -> Boolean
-function isBoolean(x) {
+export default function isBoolean(x) {
   return typeof x === 'boolean'
 }
-
-module.exports = isBoolean

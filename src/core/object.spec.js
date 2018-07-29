@@ -1,14 +1,8 @@
-const test = require('tape')
+import test from 'tape'
 
-const compose = require('./compose')
+import compose from './compose'
 
-const object = require('./object')
-
-const assign = object.assign
-const filter = object.filter
-const map = object.map
-const set = object.set
-const unset = object.unset
+import { assign, filter, map, set, unset } from './object'
 
 const identity = x => x
 

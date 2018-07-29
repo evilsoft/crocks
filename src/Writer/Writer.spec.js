@@ -1,27 +1,27 @@
-const test = require('tape')
-const sinon = require('sinon')
-const helpers = require('../test/helpers')
-const Last = require('../test/LastMonoid')
+import test from 'tape'
+import sinon from 'sinon'
+import { bindFunc } from '../test/helpers'
+import Last from '../test/LastMonoid'
 
-const bindFunc = helpers.bindFunc
+import Pair from '../core/Pair'
+import curry from '../core/curry'
+import _compose from '../core/compose'
+import isFunction from '../core/isFunction'
+import isObject from '../core/isObject'
+import isSameType from '../core/isSameType'
+import isString from '../core/isString'
+import unit from '../core/_unit'
 
-const Pair = require('../core/Pair')
-const curry = require('../core/curry')
-const compose = curry(require('../core/compose'))
-const isFunction = require('../core/isFunction')
-const isObject = require('../core/isObject')
-const isSameType = require('../core/isSameType')
-const isString = require('../core/isString')
-const unit = require('../core/_unit')
+import fl from '../core/flNames'
 
-const fl = require('../core/flNames')
+const compose = curry(_compose)
 
 const identity = x => x
 
 const applyTo =
   x => fn => fn(x)
 
-const _Writer = require('.')
+import _Writer from '.'
 const Writer = _Writer(Last)
 
 test('Writer construction', t => {

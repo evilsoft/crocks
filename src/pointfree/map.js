@@ -1,16 +1,16 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const compose = require('../core/compose')
-const curry = require('../core/curry')
-const isArray = require('../core/isArray')
-const isObject = require('../core/isObject')
-const isFunction = require('../core/isFunction')
-const isFunctor= require('../core/isFunctor')
+import compose from '../core/compose'
+import curry from '../core/curry'
+import isArray from '../core/isArray'
+import isObject from '../core/isObject'
+import isFunction from '../core/isFunction'
+import isFunctor from '../core/isFunctor'
 
-const array = require('../core/array')
-const object = require('../core/object')
-const fl = require('../core/flNames')
+import array from '../core/array'
+import object from '../core/object'
+import fl from '../core/flNames'
 
 // map : Functor f => (a -> b) -> f a -> f b
 function map(fn, m) {
@@ -37,4 +37,4 @@ function map(fn, m) {
   throw new TypeError('map: Object, Function or Functor of the same type required for second argument')
 }
 
-module.exports = curry(map)
+export default curry(map)

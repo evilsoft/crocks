@@ -3,23 +3,27 @@
 
 const VERSION = 3
 
-const _defineUnion = require('../core/defineUnion')
-const _equals = require('../core/equals')
-const _implements = require('../core/implements')
-const _innerConcat = require('../core/innerConcat')
-const _inspect = require('../core/inspect')
-const type = require('../core/types').type('Result')
-const _type = require('../core/types').typeFn(type(), VERSION)
-const fl = require('../core/flNames')
+import _defineUnion from '../core/defineUnion'
+import _equals from '../core/equals'
+import _implements from '../core/implements'
+import _innerConcat from '../core/innerConcat'
+import _inspect from '../core/inspect'
+import fl from '../core/flNames'
 
-const apOrFunc = require('../core/apOrFunc')
-const compose = require('../core/compose')
-const isApplicative = require('../core/isApplicative')
-const isApply = require('../core/isApply')
-const isArray = require('../core/isArray')
-const isFunction = require('../core/isFunction')
-const isSameType = require('../core/isSameType')
-const isSemigroup = require('../core/isSemigroup')
+import apOrFunc from '../core/apOrFunc'
+import compose from '../core/compose'
+import isApplicative from '../core/isApplicative'
+import isApply from '../core/isApply'
+import isArray from '../core/isArray'
+import isFunction from '../core/isFunction'
+import isSameType from '../core/isSameType'
+import isSemigroup from '../core/isSemigroup'
+
+import { typeFn, type as getType } from '../core/types'
+
+export const type = getType('Result')
+
+const _type = typeFn(type(), VERSION)
 
 const constant =
   x => () => x
@@ -27,14 +31,13 @@ const constant =
 const _result =
   _defineUnion({ Err: [ 'a' ], Ok: [ 'b' ] })
 
-Result.Err =
+export const Err =
   compose(Result, _result.Err)
 
-Result.Ok =
+export const Ok =
   compose(Result, _result.Ok)
 
-const _of =
-  Result.Ok
+export const of = Ok
 
 const concatApErr =
   m => x => Result.Err(m.either(
@@ -52,7 +55,7 @@ function runSequence(x) {
     )
   }
 
-  return x.map(_of)
+  return x.map(of)
 }
 
 function Result(u) {
@@ -68,9 +71,6 @@ function Result(u) {
       x => m.either(y => _equals(y, x), constant(false)),
       x => m.either(constant(false), y => _equals(y, x))
     )
-
-  const of =
-    _of
 
   const inspect = () =>
     either(
@@ -233,7 +233,7 @@ function Result(u) {
 
     return either(
       constant(m),
-      constant(m.map(_of))
+      constant(m.map(of))
     )
   }
 
@@ -258,14 +258,16 @@ function Result(u) {
   }
 }
 
-Result.of = _of
+Result.Err = Err
+Result.Ok = Ok
+Result.of = of
 Result.type = type
 
-Result[fl.of] = _of
+Result[fl.of] = of
 Result['@@type'] = _type
 
 Result['@@implements'] = _implements(
   [ 'alt', 'ap', 'bimap', 'chain', 'concat', 'equals', 'map', 'of', 'traverse' ]
 )
 
-module.exports = Result
+export default Result

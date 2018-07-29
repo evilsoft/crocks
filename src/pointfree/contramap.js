@@ -1,11 +1,11 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const compose = require('../core/compose')
-const curry = require('../core/curry')
-const isFunction = require('../core/isFunction')
-const isContravariant = require('../core/isContravariant')
-const fl = require('../core/flNames')
+import compose from '../core/compose'
+import curry from '../core/curry'
+import isFunction from '../core/isFunction'
+import isContravariant from '../core/isContravariant'
+import fl from '../core/flNames'
 
 // contramap : Functor f => (b -> a) -> f b -> f a
 function contramap(fn, m) {
@@ -28,4 +28,4 @@ function contramap(fn, m) {
   )
 }
 
-module.exports = curry(contramap)
+export default curry(contramap)

@@ -1,13 +1,13 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isApply = require('./isApply')
-const isArray = require('./isArray')
-const isEmpty = require('./isEmpty')
-const isFunction = require('./isFunction')
-const isSameType = require('./isSameType')
-const isSemigroup = require('./isSemigroup')
-const apOrFunc = require('./apOrFunc')
+import isApply from './isApply'
+import isArray from './isArray'
+import isEmpty from './isEmpty'
+import isFunction from './isFunction'
+import isSameType from './isSameType'
+import isSemigroup from './isSemigroup'
+import apOrFunc from './apOrFunc'
 
 const identity =
   x => x
@@ -36,10 +36,10 @@ function runTraverse(name, fn) {
 const allFuncs =
   xs => xs.reduce((b, i) => b && isFunction(i), true)
 
-const map =
+export const map =
   (f, m) => m.map(x => f(x))
 
-function ap(x, m) {
+export function ap(x, m) {
   if(!(m.length && allFuncs(m))) {
     throw new TypeError('Array.ap: Second Array must all be functions')
   }
@@ -47,7 +47,7 @@ function ap(x, m) {
   return m.reduce((acc, f) => acc.concat(map(f, x)), [])
 }
 
-function chain(f, m) {
+export function chain(f, m) {
   return m.reduce(function(y, x) {
     const n = f(x)
 
@@ -59,17 +59,17 @@ function chain(f, m) {
   }, [])
 }
 
-function sequence(f, m) {
+export function sequence(f, m) {
   const fn = apOrFunc(f)
   return m.reduceRight(runTraverse('sequence', identity), fn([]))
 }
 
-function traverse(f, fn, m) {
+export function traverse(f, fn, m) {
   const af = apOrFunc(f)
   return m.reduceRight(runTraverse('traverse', fn), af([]))
 }
 
-function fold(m) {
+export function fold(m) {
   if(isEmpty(m)) {
     throw new TypeError(
       'Array.fold: Non-empty Array of Semigroups required'
@@ -91,7 +91,7 @@ function fold(m) {
   })
 }
 
-function foldMap(fn, m) {
+export function foldMap(fn, m) {
   if(isEmpty(m)) {
     throw new TypeError(
       'Array.foldMap: Non-empty Array required'
@@ -122,7 +122,7 @@ function foldMap(fn, m) {
     }, head)
 }
 
-function set(indx, val, m) {
+export function set(indx, val, m) {
   const arr = m.slice()
 
   arr[indx] = val
@@ -130,12 +130,12 @@ function set(indx, val, m) {
   return arr
 }
 
-function unset(indx, m) {
+export function unset(indx, m) {
   return m.slice(0, indx)
     .concat(m.slice(indx + 1))
 }
 
-module.exports = {
+export default {
   ap, chain, fold,
   foldMap, map,
   sequence, set,

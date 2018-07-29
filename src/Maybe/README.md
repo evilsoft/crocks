@@ -22,14 +22,12 @@ constructors to construct `Maybe` instances in most cases. You can use the
 `Just`.
 
 ```javascript
-import Maybe from 'crocks/Maybe'
+import { Just, Nothing } from 'crocks/Maybe'
 
 import chain from 'crocks/pointfree/chain'
 import compose from 'crocks/helpers/compose'
 import ifElse from 'crocks/logic/ifElse'
 import isNumber from 'crocks/predicates/isNumber'
-
-const { Just, Nothing } = Maybe
 
 // gt5 :: Number -> Boolean
 const gt5 =
@@ -92,13 +90,11 @@ will just return another `Nothing`. Anything passed to the constructor will
 be thrown out and mapped to `()`.
 
 ```javascript
-import Maybe from 'crocks/Maybe'
+import { Just, Nothing } from 'crocks/Maybe'
 
 import chain from 'crocks/pointfree/chain'
 import isNumber from 'crocks/predicates/isNumber'
 import safeLift from 'crocks/Maybe/safeLift'
-
-const { Just, Nothing } = Maybe
 
 // add10 :: Number -> Number
 const add10 =
@@ -134,14 +130,12 @@ disjunction or a valid value.  `Just` will wrap any given value in
 a `Just`, signaling the validity of the wrapped value.
 
 ```javascript
-import Maybe from 'crocks/Maybe'
+import { Just, Nothing } from 'crocks/Maybe'
 
 import compose from 'crocks/helpers/compose'
 import ifElse from 'crocks/logic/ifElse'
 import isString from 'crocks/predicates/isString'
 import map from 'crocks/pointfree/map'
-
-const { Just, Nothing } = Maybe
 
 // toUpper :: String -> String
 const toUpper =

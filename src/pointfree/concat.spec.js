@@ -1,22 +1,20 @@
-const test = require('tape')
-const sinon = require('sinon')
-const helpers = require('../test/helpers')
-
-const bindFunc = helpers.bindFunc
+import test from 'tape'
+import sinon from 'sinon'
+import { bindFunc } from '../test/helpers'
 
 const constant = x => () => x
 const identity = x => x
 
-const isFunction  = require('../core/isFunction')
-const unit = require('../core/_unit')
-const fl = require('../core/flNames')
+import isFunction  from '../core/isFunction'
+import unit from '../core/_unit'
+import fl from '../core/flNames'
 
 const mock = x => Object.assign({}, {
   concat: sinon.spy(),
   type: constant('Semigroup')
 }, x)
 
-const concat = require('./concat')
+import concat from './concat'
 
 test('concat pointfree', t => {
   const f = bindFunc(concat)

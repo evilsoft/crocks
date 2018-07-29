@@ -1,11 +1,11 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isSameType = require('./isSameType')
-const isSame = require('./isSame')
-const hasAlg = require('./hasAlg')
-const type = require('./type')
-const fl = require('./flNames')
+import isSameType from './isSameType'
+import isSame from './isSame'
+import hasAlg from './hasAlg'
+import type from './type'
+import fl from './flNames'
 
 const comp = (a, b) =>
   a.valueOf() === b.valueOf()
@@ -43,7 +43,7 @@ function deepEquals(a, b) {
   return true
 }
 
-function equals(a, b) {
+export default function equals(a, b) {
   if(isSame(a, b)) {
     return true
   }
@@ -58,5 +58,3 @@ function equals(a, b) {
 
   return (strats[type(a)] || comp)(a, b)
 }
-
-module.exports = equals

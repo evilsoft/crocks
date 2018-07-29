@@ -4,4 +4,4 @@
 const fulfills =
   algs => test => algs.indexOf(test) !== -1
 
-module.exports = fulfills
+export default fulfills

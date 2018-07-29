@@ -1,10 +1,10 @@
-const test = require('tape')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import { bindFunc as _bindFunc } from '../test/helpers'
 
-const bindFunc = helpers.bindFunc
-const isFunction = require('../core/isFunction')
+const bindFunc = _bindFunc
+import isFunction from '../core/isFunction'
 
-const sub = require('./converge')
+import sub from './converge'
 
 test('converge (Big Phi or S\' combinator)', t => {
   const s = bindFunc(sub)

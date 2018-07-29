@@ -1,11 +1,11 @@
-const test = require('tape')
-const { testIterable } = require('../test/helpers')
-const isFunction = require('./isFunction')
+import test from 'tape'
+import { testIterable } from '../test/helpers'
+import isFunction from './isFunction'
 
 const identity = x => x
 const iterable = testIterable(1, 5, 1)
 
-const isIterable = require('./isIterable')
+import isIterable from './isIterable'
 
 test('isIterable core', t => {
   t.ok(isFunction(isIterable))

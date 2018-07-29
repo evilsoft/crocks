@@ -4,9 +4,7 @@
 const toString = Object.prototype.toString
 
 // isObject : a -> Boolean
-function isObject(x) {
+export default function isObject(x) {
   return !!x
     && toString.call(x) === '[object Object]'
 }
-
-module.exports = isObject

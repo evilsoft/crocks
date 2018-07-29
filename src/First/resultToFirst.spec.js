@@ -1,17 +1,17 @@
-const test = require('tape')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import { bindFunc } from '../test/helpers'
 
-const bindFunc = helpers.bindFunc
 
-const First = require('.')
-const Result = require('../Result')
 
-const isFunction = require('../core/isFunction')
-const isSameType = require('../core/isSameType')
+import First from '.'
+import Result from '../Result'
+
+import isFunction from '../core/isFunction'
+import isSameType from '../core/isSameType'
 
 const identity = x => x
 
-const resultToFirst = require('./resultToFirst')
+import resultToFirst from './resultToFirst'
 
 test('resultToFirst transform', t => {
   const f = bindFunc(resultToFirst)

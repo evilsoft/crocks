@@ -1,12 +1,12 @@
-const test = require('tape')
-const sinon = require('sinon')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import sinon from 'sinon'
+import { bindFunc } from '../test/helpers'
 
-const bindFunc = helpers.bindFunc
 
-const isFunction = require('../core/isFunction')
-const unit = require('../core/_unit')
-const fl = require('../core/flNames')
+
+import isFunction from '../core/isFunction'
+import unit from '../core/_unit'
+import fl from '../core/flNames'
 
 const constant = x => () => x
 
@@ -16,7 +16,7 @@ const mock = x => Object.assign({}, {
   chain: sinon.spy()
 }, x)
 
-const chain = require('./chain')
+import chain from './chain'
 
 test('chain pointfree', t => {
   const c = bindFunc(chain)

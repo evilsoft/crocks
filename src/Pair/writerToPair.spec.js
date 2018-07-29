@@ -1,19 +1,18 @@
-const test = require('tape')
-const helpers = require('../test/helpers')
-const Last = require('../test/LastMonoid')
+import test from 'tape'
+import { bindFunc } from '../test/helpers'
+import Last from '../test/LastMonoid'
 
-const bindFunc = helpers.bindFunc
+import Pair from '.'
+import _Writer from '../Writer'
+const Writer = _Writer(Last)
 
-const Pair = require('.')
-const Writer = require('../Writer')(Last)
-
-const isFunction = require('../core/isFunction')
-const isSameType = require('../core/isSameType')
+import isFunction from '../core/isFunction'
+import isSameType from '../core/isSameType'
 
 const constant = x => () => x
 const identity = x => x
 
-const writerToPair = require('./writerToPair')
+import writerToPair from './writerToPair'
 
 test('writerToPair transform', t => {
   const f = bindFunc(writerToPair)

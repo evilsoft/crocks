@@ -2,14 +2,14 @@
 /** @author Karthik Iyengar (karthikiyengar) */
 /** @author Ian Hofmann-Hicks */
 
-const curry = require('../core/curry')
-const equals = require('../core/equals')
-const isArray = require('../core/isArray')
-const isDefined = require('../core/isDefined')
-const isEmpty  = require('../core/isEmpty')
-const isInteger = require('../core/isInteger')
-const isNil = require('../core/isNil')
-const isString = require('../core/isString')
+import curry from '../core/curry'
+import equals from '../core/equals'
+import isArray from '../core/isArray'
+import isDefined from '../core/isDefined'
+import isEmpty  from '../core/isEmpty'
+import isInteger from '../core/isInteger'
+import isNil from '../core/isNil'
+import isString from '../core/isString'
 
 // propPathEq :: [ String | Number ] -> a -> Object -> Boolean
 function propPathEq(keys, value, target) {
@@ -47,4 +47,4 @@ function propPathEq(keys, value, target) {
   return equals(acc, value)
 }
 
-module.exports = curry(propPathEq)
+export default curry(propPathEq)

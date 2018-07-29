@@ -1,13 +1,11 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const hasAlg = require('./hasAlg')
-const isApply = require('./isApply')
+import hasAlg from './hasAlg'
+import isApply from './isApply'
 
 // isApplicative : a -> Boolean
-function isApplicative(m) {
+export default function isApplicative(m) {
   return isApply(m)
     && (hasAlg('of', m) || hasAlg('of', m.constructor))
 }
-
-module.exports = isApplicative

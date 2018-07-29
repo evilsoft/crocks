@@ -1,10 +1,9 @@
-const test = require('tape')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import { bindFunc } from '../test/helpers'
 
-const bindFunc = helpers.bindFunc
-const unit = require('../core/_unit')
+import unit from '../core/_unit'
 
-const unsetPath = require('./unsetPath')
+import unsetPath from './unsetPath'
 
 test('unsetPath helper function', t => {
   const fn = bindFunc(unsetPath)

@@ -1,13 +1,11 @@
-const test = require('tape')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import { makeFake } from '../test/helpers'
 
-const makeFake = helpers.makeFake
-
-const isFunction = require('../core/isFunction')
+import isFunction from '../core/isFunction'
 
 const identity = x => x
 
-const isCategory = require('./isCategory')
+import isCategory from './isCategory'
 
 test('isCategory predicate function', t => {
   const Fake = makeFake([ 'compose', 'id' ])

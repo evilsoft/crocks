@@ -12,12 +12,12 @@ function rejectUnit(obj) {
   }
 }
 
-function assign(x, m) {
+export function assign(x, m) {
   const result = Object.keys(m).reduce(rejectUnit(m), {})
   return Object.keys(x).reduce(rejectUnit(x), result)
 }
 
-function filter(f, m) {
+export function filter(f, m) {
   return Object.keys(m).reduce((acc, key) => {
     if(f(m[key])) {
       acc[key] = m[key]
@@ -26,18 +26,18 @@ function filter(f, m) {
   }, {})
 }
 
-function map(f, m) {
+export function map(f, m) {
   return Object.keys(m).reduce((acc, key) => {
     acc[key] = f(m[key])
     return acc
   }, {})
 }
 
-function set(key, val, m) {
+export function set(key, val, m) {
   return assign({ [key]: val }, m)
 }
 
-function unset(key, m) {
+export function unset(key, m) {
   return Object.keys(m).reduce((acc, k) => {
     if(m[k] !== undefined && k !== key) {
       acc[k] = m[k]
@@ -45,9 +45,4 @@ function unset(key, m) {
 
     return acc
   }, {})
-}
-
-module.exports = {
-  assign, filter,
-  map, set, unset
 }

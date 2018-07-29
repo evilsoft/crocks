@@ -1,10 +1,10 @@
-const test = require('tape')
-const sinon = require('sinon')
+import test from 'tape'
+import sinon from 'sinon'
 
-const isFunction = require('./isFunction')
-const apOrFunc = require('./apOrFunc')
+import isFunction from './isFunction'
+import apOrFunc from './apOrFunc'
 
-const MockCrock = require('../test/MockCrock')
+import MockCrock from '../test/MockCrock'
 
 const oldFn = MockCrock.of
 

@@ -1,18 +1,16 @@
-const test = require('tape')
-const sinon = require('sinon')
-const helpers = require('../test/helpers')
-const MockCrock = require('../test/MockCrock')
+import test from 'tape'
+import sinon from 'sinon'
+import { bindFunc } from '../test/helpers'
+import MockCrock from '../test/MockCrock'
 
-const bindFunc = helpers.bindFunc
-
-const isArray = require('../core/isArray')
-const isFunction = require('../core/isFunction')
-const isSameType = require('../core/isSameType')
-const unit = require('../core/_unit')
+import isArray from '../core/isArray'
+import isFunction from '../core/isFunction'
+import isSameType from '../core/isSameType'
+import unit from '../core/_unit'
 
 const constant = x => () => x
 
-const traverse = require('./traverse')
+import traverse from './traverse'
 
 test('traverse pointfree', t => {
   const trav = bindFunc(traverse)

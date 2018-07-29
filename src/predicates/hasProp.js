@@ -1,12 +1,12 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const curry = require('../core/curry')
-const isDefined = require('../core/isDefined')
-const isEmpty = require('../core/isEmpty')
-const isInteger = require('../core/isInteger')
-const isNil = require('../core/isNil')
-const isString = require('../core/isString')
+import curry from '../core/curry'
+import isDefined from '../core/isDefined'
+import isEmpty from '../core/isEmpty'
+import isInteger from '../core/isInteger'
+import isNil from '../core/isNil'
+import isString from '../core/isString'
 
 // hasProp : (String | Integer) -> a -> Boolean
 function hasProp(key, x) {
@@ -23,4 +23,4 @@ function hasProp(key, x) {
   return isDefined(x[key])
 }
 
-module.exports = curry(hasProp)
+export default curry(hasProp)

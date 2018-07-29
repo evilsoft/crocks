@@ -1,15 +1,13 @@
-const test = require('tape')
-const sinon = require('sinon')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import sinon from 'sinon'
+import { bindFunc } from '../test/helpers'
 
-const bindFunc = helpers.bindFunc
-
-const isFunction = require('../core/isFunction')
-const unit = require('../core/_unit')
+import isFunction from '../core/isFunction'
+import unit from '../core/_unit'
 
 const constant = x => () => x
 
-const fold = require('./fold')
+import fold from './fold'
 
 test('fold pointfree errors', t => {
   const f = bindFunc(fold)

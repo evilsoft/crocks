@@ -1,11 +1,11 @@
-const test = require('tape')
-const sinon = require('sinon')
+import test from 'tape'
+import sinon from 'sinon'
 
-const isFunction = require('./isFunction')
+import isFunction from './isFunction'
 
 const identity = x => x
 
-const once = require('./once')
+import once from './once'
 
 test('once core', t => {
   t.ok(isFunction(once), 'is a function')

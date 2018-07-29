@@ -3,10 +3,8 @@
 
 // Composition (Bluebird)
 // compose : (b -> c) -> (a -> b) -> a -> c
-function compose(f, g) {
+export default function compose(f, g) {
   return function(x) {
     return f(g(x))
   }
 }
-
-module.exports = compose

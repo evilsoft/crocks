@@ -1,16 +1,16 @@
-const test = require('tape')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import { bindFunc } from '../test/helpers'
 
-const bindFunc = helpers.bindFunc
 
-const List = require('.')
 
-const isArray = require('../core/isArray')
-const isFunction = require('../core/isFunction')
+import List from '.'
+
+import isArray from '../core/isArray'
+import isFunction from '../core/isFunction'
 
 const identity = x => x
 
-const listToArray = require('./listToArray')
+import listToArray from './listToArray'
 
 test('listToArray transform', t => {
   const f = bindFunc(listToArray)

@@ -1,9 +1,9 @@
-const test = require('tape')
+import test from 'tape'
 
-const isFunction = require('../core/isFunction')
-const coreIsIterable = require('../core/isIterable')
+import isFunction from '../core/isFunction'
+import coreIsIterable from '../core/isIterable'
 
-const isIterable = require('./isIterable')
+import isIterable from './isIterable'
 
 test('isIterable predicate', t => {
   t.ok(isFunction(isIterable), 'is a function')

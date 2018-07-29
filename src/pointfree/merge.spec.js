@@ -1,16 +1,14 @@
-const test = require('tape')
-const helpers = require('../test/helpers')
-const sinon = require('sinon')
+import test from 'tape'
+import { bindFunc } from '../test/helpers'
+import sinon from 'sinon'
 
-const bindFunc = helpers.bindFunc
-
-const isFunction = require('../core/isFunction')
-const unit = require('../core/_unit')
+import isFunction from '../core/isFunction'
+import unit from '../core/_unit'
 
 const constant = x => () => x
 const identity = x => x
 
-const merge  = require('./merge')
+import merge  from './merge'
 
 test('merge pointfree', t => {
   const m = bindFunc(merge)

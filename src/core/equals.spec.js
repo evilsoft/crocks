@@ -1,8 +1,8 @@
-const test = require('tape')
-const sinon = require('sinon')
+import test from 'tape'
+import sinon from 'sinon'
 
-const fl = require('../core/flNames')
-const isFunction = require('./isFunction')
+import fl from '../core/flNames'
+import isFunction from './isFunction'
 
 const constant = x => () => x
 
@@ -11,7 +11,7 @@ const mock = x => Object.assign({}, {
   type: constant('Setoid')
 }, x)
 
-const equals = require('./equals')
+import equals from './equals'
 
 test('equals', t => {
   t.ok(isFunction(equals), 'is a function')

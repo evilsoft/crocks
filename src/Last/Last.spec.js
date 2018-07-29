@@ -1,21 +1,19 @@
-const test = require('tape')
-const MockCrock = require('../test/MockCrock')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import MockCrock from '../test/MockCrock'
+import { bindFunc } from '../test/helpers'
 
-const bindFunc = helpers.bindFunc
+import Maybe from '../core/Maybe'
+import isFunction from '../core/isFunction'
+import isObject from '../core/isObject'
+import isSameType from '../core/isSameType'
+import isString from '../core/isString'
 
-const Maybe = require('../core/Maybe')
-const isFunction = require('../core/isFunction')
-const isObject = require('../core/isObject')
-const isSameType = require('../core/isSameType')
-const isString = require('../core/isString')
-
-const fl = require('../core/flNames')
+import fl from '../core/flNames'
 
 const constant = x => () => x
 const extract = m => m.option('empty')
 
-const Last = require('.')
+import Last from '.'
 
 test('Last', t => {
   t.ok(isFunction(Last), 'is a function')

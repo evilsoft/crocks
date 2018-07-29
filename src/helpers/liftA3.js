@@ -1,15 +1,12 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const array = require('../core/array')
-const curry = require('../core/curry')
-const isApply = require('../core/isApply')
-const isArray = require('../core/isArray')
-const isFunction = require('../core/isFunction')
-const isSameType = require('../core/isSameType')
-
-const map = array.map
-const ap = array.ap
+import { map, ap } from '../core/array'
+import curry from '../core/curry'
+import isApply from '../core/isApply'
+import isArray from '../core/isArray'
+import isFunction from '../core/isFunction'
+import isSameType from '../core/isSameType'
 
 // liftA3 :: Applicative m => (a -> b -> c -> d) -> m a -> m b -> m c -> m d
 function liftA3(fn, x, y, z) {
@@ -27,4 +24,4 @@ function liftA3(fn, x, y, z) {
   return x.map(fn).ap(y).ap(z)
 }
 
-module.exports = curry(liftA3)
+export default curry(liftA3)

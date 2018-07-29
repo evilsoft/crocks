@@ -1,9 +1,9 @@
-const test = require('tape')
+import test from 'tape'
 
-const isFunction = require('../core/isFunction')
-const unit = require('../core/_unit')
+import isFunction from '../core/isFunction'
+import unit from '../core/_unit'
 
-const isBoolean = require('./isBoolean')
+import isBoolean from './isBoolean'
 
 test('isBoolean predicate function', t => {
   t.ok(isFunction(isBoolean), 'is a function')

@@ -1,16 +1,16 @@
-const test = require('tape')
-const MockCrock = require('../test/MockCrock')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import MockCrock from '../test/MockCrock'
+import { bindFunc } from '../test/helpers'
 
-const bindFunc = helpers.bindFunc
 
-const isFunction = require('../core/isFunction')
-const isObject = require('../core/isObject')
-const isString = require('../core/isString')
 
-const fl = require('../core/flNames')
+import isFunction from '../core/isFunction'
+import isObject from '../core/isObject'
+import isString from '../core/isString'
 
-const Assign = require('.')
+import fl from '../core/flNames'
+
+import Assign from '.'
 
 const constant = x => () => x
 const identity = x => x

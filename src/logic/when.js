@@ -1,10 +1,10 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const curry = require('../core/curry')
-const predOrFunc = require('../core/predOrFunc')
-const isPredOrFunc = require('../core/isPredOrFunc')
-const isFunction = require('../core/isFunction')
+import curry from '../core/curry'
+import predOrFunc from '../core/predOrFunc'
+import isPredOrFunc from '../core/isPredOrFunc'
+import isFunction from '../core/isFunction'
 
 // when : (a -> Boolean) | Pred -> (a -> b) -> a -> b | a
 function when(pred, f) {
@@ -24,4 +24,4 @@ function when(pred, f) {
     predOrFunc(pred, x) ? f(x) : x
 }
 
-module.exports = curry(when)
+export default curry(when)

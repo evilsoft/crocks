@@ -1,15 +1,15 @@
-const test = require('tape')
-const sinon = require('sinon')
-const Mock = require('../test/MockCrock')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import sinon from 'sinon'
+import Mock from '../test/MockCrock'
+import { bindFunc } from '../test/helpers'
 
-const bindFunc = helpers.bindFunc
 
-const isFunction = require('../core/isFunction')
+
+import isFunction from '../core/isFunction'
 
 const identity = x => x
 
-const pipeK = require('./pipeK')
+import pipeK from './pipeK'
 
 test('pipeK parameters', t => {
   const c = bindFunc(pipeK)

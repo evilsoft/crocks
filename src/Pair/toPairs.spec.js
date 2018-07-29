@@ -1,14 +1,12 @@
-const test = require('tape')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import { bindFunc } from '../test/helpers'
 
-const bindFunc = helpers.bindFunc
+import List from '../core/List'
+import Pair from '../core/Pair'
+import isSameType from '../core/isSameType'
+import unit from '../core/_unit'
 
-const List = require('../core/List')
-const Pair = require('../core/Pair')
-const isSameType = require('../core/isSameType')
-const unit = require('../core/_unit')
-
-const toPairs = require('./toPairs')
+import toPairs from './toPairs'
 
 test('toPairs', t => {
   const fn = bindFunc(toPairs)

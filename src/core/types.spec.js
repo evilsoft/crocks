@@ -1,11 +1,10 @@
-const test = require('tape')
+import test from 'tape'
 
-const isFunction = require('./isFunction')
+import isFunction from './isFunction'
 
-const _types = require('./types')
+import { proxy, type, typeFn } from './types'
 
 test('types core', t => {
-  const { proxy, type, typeFn } = _types
 
   t.ok(isFunction(type), 'provides a `types` function')
   t.ok(isFunction(proxy), 'provides a `proxy` function')
@@ -15,7 +14,6 @@ test('types core', t => {
 })
 
 test('type function ', t => {
-  const { type } = _types
 
   const fn =
     x => type(x)()
@@ -55,7 +53,6 @@ test('type function ', t => {
 })
 
 test('proxy function ', t => {
-  const { proxy } = _types
 
   const fn =
     x => proxy(x).type()
@@ -98,7 +95,6 @@ test('proxy function ', t => {
 })
 
 test('typeFn function ', t => {
-  const { typeFn } = _types
 
   const fn =
     (x, v) => typeFn(x, v)

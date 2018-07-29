@@ -3,22 +3,26 @@
 
 const VERSION = 2
 
-const _implements = require('../core/implements')
-const _inspect = require('../core/inspect')
-const type = require('../core/types').type('State')
-const _type = require('../core/types').typeFn(type(), VERSION)
-const fl = require('../core/flNames')
+import _implements from '../core/implements'
+import _inspect from '../core/inspect'
+import fl from '../core/flNames'
 
-const Pair = require('../core/Pair')
-const Unit = require('../core/Unit')
+import Pair from '../core/Pair'
+import Unit from '../core/Unit'
 
-const isFunction = require('../core/isFunction')
-const isSameType = require('../core/isSameType')
+import isFunction from '../core/isFunction'
+import isSameType from '../core/isSameType'
 
-const _of =
+import { typeFn, type as getType } from '../core/types'
+
+export const type = getType('State')
+
+const _type = typeFn(type(), VERSION)
+
+export const of =
   x => State(s => Pair(x, s))
 
-function get(fn) {
+export function get(fn) {
   if(!arguments.length) {
     return State(s => Pair(s, s))
   }
@@ -30,7 +34,7 @@ function get(fn) {
   throw new TypeError('State.get: No arguments or function required')
 }
 
-function modify(fn) {
+export function modify(fn) {
   if(!isFunction(fn)) {
     throw new TypeError('State.modify: Function Required')
   }
@@ -38,13 +42,13 @@ function modify(fn) {
   return State(s => Pair(Unit(), fn(s)))
 }
 
-function State(fn) {
+export const put =
+  x => modify(() => x)
+
+export default function State(fn) {
   if(!isFunction(fn)) {
     throw new TypeError('State: Must wrap a function in the form (s -> Pair a s)')
   }
-
-  const of =
-    _of
 
   const inspect =
     () => `State${_inspect(fn)}`
@@ -132,21 +136,15 @@ function State(fn) {
   }
 }
 
-State.of = _of
+State.of = of
 State.get = get
-
 State.modify = modify
-
-State.put =
-  x => modify(() => x)
-
+State.put = put
 State.type = type
 
-State[fl.of] = _of
+State[fl.of] = of
 State['@@type'] = _type
 
 State['@@implements'] = _implements(
   [ 'ap', 'chain', 'map', 'of' ]
 )
-
-module.exports = State

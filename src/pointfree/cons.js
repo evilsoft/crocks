@@ -1,9 +1,9 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const curry = require('../core/curry')
-const isArray = require('../core/isArray')
-const isFunction = require('../core/isFunction')
+import curry from '../core/curry'
+import isArray from '../core/isArray'
+import isFunction from '../core/isFunction'
 
 function cons(x, m) {
   if(m && isFunction(m.cons)) {
@@ -16,4 +16,4 @@ function cons(x, m) {
   throw new TypeError('cons: List or Array required for second argument')
 }
 
-module.exports = curry(cons)
+export default curry(cons)

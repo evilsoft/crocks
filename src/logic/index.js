@@ -1,9 +1,7 @@
-module.exports = {
-  and: require('./and'),
-  ifElse: require('./ifElse'),
-  implies: require('./implies'),
-  not: require('./not'),
-  or: require('./or'),
-  unless: require('./unless'),
-  when: require('./when')
-}
+export { default as and } from './and'
+export { default as ifElse } from './ifElse'
+export { default as implies } from './implies'
+export { default as not } from './not'
+export { default as or } from './or'
+export { default as unless } from './unless'
+export { default as when } from './when'

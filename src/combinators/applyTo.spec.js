@@ -1,12 +1,12 @@
-const test = require('tape')
-const sinon = require('sinon')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import sinon from 'sinon'
+import { bindFunc } from '../test/helpers'
 
-const bindFunc = helpers.bindFunc
 
-const isFunction = require('../core/isFunction')
 
-const applyTo = require('./applyTo')
+import isFunction from '../core/isFunction'
+
+import applyTo from './applyTo'
 
 const identity = x => x
 

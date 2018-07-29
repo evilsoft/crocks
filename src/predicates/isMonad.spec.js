@@ -1,8 +1,8 @@
-const test = require('tape')
+import test from 'tape'
 
-const isFunction = require('../core/isFunction')
+import isFunction from '../core/isFunction'
 
-const isMonad = require('./isMonad')
+import isMonad from './isMonad'
 
 test('isMonad predicate', t => {
   t.ok(isFunction(isMonad), 'is a function')

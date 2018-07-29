@@ -1,11 +1,12 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const { Nothing, Just } = require('../core/Maybe')
-const predOrFunc = require('../core/predOrFunc')
+import Maybe from '../core/Maybe'
+const { Nothing, Just } = Maybe
+import predOrFunc from '../core/predOrFunc'
 
-const curry = require('../core/curry')
-const isPredOrFunc = require('../core/isPredOrFunc')
+import curry from '../core/curry'
+import isPredOrFunc from '../core/isPredOrFunc'
 
 // safe : ((a -> Boolean) | Pred) -> a -> Maybe a
 function safe(pred, x) {
@@ -18,4 +19,4 @@ function safe(pred, x) {
     : Nothing()
 }
 
-module.exports = curry(safe)
+export default curry(safe)

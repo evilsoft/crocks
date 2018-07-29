@@ -1,11 +1,11 @@
 /** @license ISC License (c) copyright 2018 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const _array = require('../core/array')
+import _array from '../core/array'
 
-const curry = require('../core/curry')
-const isArray = require('../core/isArray')
-const isFunction = require('../core/isFunction')
+import curry from '../core/curry'
+import isArray from '../core/isArray'
+import isFunction from '../core/isFunction'
 
 // foldMap :: Foldable f, Semigroup s => (a -> s) -> f a -> s
 function foldMap(fn, m) {
@@ -28,4 +28,4 @@ function foldMap(fn, m) {
   )
 }
 
-module.exports = curry(foldMap)
+export default curry(foldMap)

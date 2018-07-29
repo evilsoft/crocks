@@ -1,22 +1,23 @@
-const test = require('tape')
-const sinon = require('sinon')
-const helpers = require('../test/helpers')
-const MockCrock = require('../test/MockCrock')
+import test from 'tape'
+import sinon from 'sinon'
+import { bindFunc } from '../test/helpers'
+import MockCrock from '../test/MockCrock'
 
-const bindFunc = helpers.bindFunc
 
-const curry = require('./curry')
-const _compose = curry(require('./compose'))
-const isFunction = require('./isFunction')
-const isObject = require('./isObject')
-const isSameType = require('./isSameType')
-const isString = require('./isString')
-const unit = require('./_unit')
 
-const fl = require('./flNames')
+import curry from './curry'
+import _compose from './compose'
+const compose = curry(_compose)
+import isFunction from './isFunction'
+import isObject from './isObject'
+import isSameType from './isSameType'
+import isString from './isString'
+import unit from './_unit'
 
-const Maybe = require('./Maybe')
-const Pred = require('../Pred')
+import fl from './flNames'
+
+import Maybe from './Maybe'
+import Pred from '../Pred'
 
 const constant = x => () => x
 const identity = x => x
@@ -24,7 +25,7 @@ const identity = x => x
 const applyTo =
   x => fn => fn(x)
 
-const List = require('./List')
+import List from './List'
 
 test('List', t => {
   const f = x => List(x).toArray()
@@ -652,7 +653,7 @@ test('List map properties (Functor)', t => {
   t.ok(isFunction(m.map), 'provides a map function')
 
   t.same(m.map(identity).valueOf(), m.valueOf(), 'identity')
-  t.same(m.map(_compose(f, g)).valueOf(), m.map(g).map(f).valueOf(), 'composition')
+  t.same(m.map(compose(f, g)).valueOf(), m.map(g).map(f).valueOf(), 'composition')
 
   t.end()
 })
@@ -693,7 +694,7 @@ test('List ap errors', t => {
 test('List ap properties (Apply)', t => {
   const m = List([ identity ])
 
-  const a = m.map(_compose).ap(m).ap(m)
+  const a = m.map(compose).ap(m).ap(m)
   const b = m.ap(m.ap(m))
 
   t.ok(isFunction(List([]).ap), 'provides an ap function')

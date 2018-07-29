@@ -1,13 +1,13 @@
-const test = require('tape')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import { bindFunc } from '../test/helpers'
 
 const makeFake = helpers.makeFake
 
-const isFunction = require('./isFunction')
+import isFunction from './isFunction'
 
 const identity = x => x
 
-const isPlus = require('./isPlus')
+import isPlus from './isPlus'
 
 test('isPlus predicate function', t => {
   const Fake = makeFake([ 'alt', 'map', 'zero' ])

@@ -1,11 +1,11 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const hasAlg = require('../core/hasAlg')
-const isSameType = require('../core/isSameType')
-const fl = require('../core/flNames')
+import fl from '../core/flNames'
+import hasAlg from '../core/hasAlg'
+import isSameType from '../core/isSameType'
 
-function empty(m) {
+export default function empty(m) {
   if(m && hasAlg('empty', m)) {
     return (m[fl.empty] || m.empty).call(m)
   }
@@ -28,5 +28,3 @@ function empty(m) {
 
   throw new TypeError('empty: Monoid, Array, String or Object required')
 }
-
-module.exports = empty

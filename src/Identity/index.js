@@ -3,33 +3,34 @@
 
 const VERSION = 3
 
-const _equals = require('../core/equals')
-const _implements = require('../core/implements')
-const _innerConcat = require('../core/innerConcat')
-const _inspect = require('../core/inspect')
-const type = require('../core/types').type('Identity')
-const _type = require('../core/types').typeFn(type(), VERSION)
-const fl = require('../core/flNames')
+import _equals from '../core/equals'
+import _implements from '../core/implements'
+import _innerConcat from '../core/innerConcat'
+import _inspect from '../core/inspect'
+import fl from '../core/flNames'
 
-const isArray = require('../core/isArray')
-const isApply = require('../core/isApply')
-const isApplicative = require('../core/isApplicative')
-const isFunction = require('../core/isFunction')
-const isSameType = require('../core/isSameType')
+import isArray from '../core/isArray'
+import isApply from '../core/isApply'
+import isApplicative from '../core/isApplicative'
+import isFunction from '../core/isFunction'
+import isSameType from '../core/isSameType'
 
-const _of =
+import { typeFn, type as getType } from '../core/types'
+
+export const type = getType('Identity')
+
+const _type = typeFn(type(), VERSION)
+
+export const of =
   Identity
 
-function Identity(x) {
+export default function Identity(x) {
   if(!arguments.length) {
     throw new TypeError('Identity: Must wrap something')
   }
 
   const valueOf =
     () => x
-
-  const of =
-    _of
 
   const equals =
     m => isSameType(Identity, m)
@@ -97,7 +98,7 @@ function Identity(x) {
       throw new TypeError('Identity.sequence: Must wrap an Apply')
     }
 
-    return x.map(_of)
+    return x.map(of)
   }
 
   function traverse(f, fn) {
@@ -121,7 +122,7 @@ function Identity(x) {
       )
     }
 
-    return m.map(_of)
+    return m.map(of)
   }
 
   return {
@@ -140,14 +141,12 @@ function Identity(x) {
   }
 }
 
-Identity.of = _of
+Identity.of = of
 Identity.type = type
 
-Identity[fl.of] = _of
+Identity[fl.of] = of
 Identity['@@type'] = _type
 
 Identity['@@implements'] = _implements(
   [ 'ap', 'chain', 'concat', 'equals', 'map', 'of', 'traverse' ]
 )
-
-module.exports = Identity

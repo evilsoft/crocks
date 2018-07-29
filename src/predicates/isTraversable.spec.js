@@ -1,13 +1,11 @@
-const test = require('tape')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import { makeFake } from '../test/helpers'
 
-const makeFake = helpers.makeFake
-
-const isFunction = require('../core/isFunction')
+import isFunction from '../core/isFunction'
 
 const identity = x => x
 
-const isTraversable = require('./isTraversable')
+import isTraversable from './isTraversable'
 
 test('isTraversable predicate function', t => {
   const Fake = makeFake([ 'map', 'traverse' ])

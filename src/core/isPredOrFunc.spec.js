@@ -1,9 +1,9 @@
-const test = require('tape')
+import test from 'tape'
 
-const Pred = require('../Pred')
-const isNumber = require('./isNumber')
-const unit = require('./_unit')
-const isPredOrFunc = require('./isPredOrFunc')
+import Pred from '../Pred'
+import isNumber from './isNumber'
+import unit from './_unit'
+import isPredOrFunc from './isPredOrFunc'
 
 const isLargeNumber =
   Pred(isNumber)

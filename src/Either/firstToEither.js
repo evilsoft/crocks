@@ -1,12 +1,14 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const Either = require('.')
-const First = require('../core/types').proxy('First')
+import Either from './index'
+import { proxy } from '../core/types'
 
-const curry = require('../core/curry')
-const isFunction = require('../core/isFunction')
-const isSameType = require('../core/isSameType')
+import curry from '../core/curry'
+import isFunction from '../core/isFunction'
+import isSameType from '../core/isSameType'
+
+const First = proxy('First')
 
 const constant = x => () => x
 
@@ -38,4 +40,4 @@ function firstToEither(left, first) {
   throw new TypeError('firstToEither: First or First returning function required for second argument')
 }
 
-module.exports = curry(firstToEither)
+export default curry(firstToEither)

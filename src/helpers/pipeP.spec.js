@@ -1,14 +1,14 @@
-const test = require('tape')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import { bindFunc } from '../test/helpers'
 
-const bindFunc = helpers.bindFunc
 
-const isFunction = require('../core/isFunction')
-const unit = require('../core/_unit')
+
+import isFunction from '../core/isFunction'
+import unit from '../core/_unit'
 
 const identity = x => x
 
-const pipeP = require('./pipeP')
+import pipeP from './pipeP'
 
 test('pipeP errors', t => {
   const prom = x => Promise.resolve(x)

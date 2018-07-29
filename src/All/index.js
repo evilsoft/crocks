@@ -3,22 +3,26 @@
 
 const VERSION = 2
 
-const _implements = require('../core/implements')
-const _inspect = require('../core/inspect')
-const _equals = require('../core/equals')
-const type = require('../core/types').type('All')
-const _type = require('../core/types').typeFn(type(), VERSION)
-const fl = require('../core/flNames')
+import _implements from '../core/implements'
+import _inspect from '../core/inspect'
+import _equals from '../core/equals'
+import fl from '../core/flNames'
 
-const isFunction = require('../core/isFunction')
-const isNil = require('../core/isNil')
-const isSameType = require('../core/isSameType')
+import isFunction from '../core/isFunction'
+import isNil from '../core/isNil'
+import isSameType from '../core/isSameType'
 
-const _empty =
+import { typeFn, type as getType } from '../core/types'
+
+export const type = getType('All')
+
+const _type = typeFn(type(), VERSION)
+
+export const empty =
   () => All(true)
 
 function All(b) {
-  const x = isNil(b) ? _empty().valueOf() : b
+  const x = isNil(b) ? empty().valueOf() : b
 
   if(!arguments.length || isFunction(x)) {
     throw new TypeError('All: Non-function value required')
@@ -26,9 +30,6 @@ function All(b) {
 
   const valueOf =
     () => !!x
-
-  const empty =
-    _empty
 
   const equals =
     m => isSameType(All, m)
@@ -63,10 +64,10 @@ All['@@implements'] = _implements(
   [ 'equals', 'concat', 'empty' ]
 )
 
-All.empty = _empty
+All.empty = empty
 All.type = type
 
-All[fl.empty] = _empty
+All[fl.empty] = empty
 All['@@type'] = _type
 
-module.exports = All
+export default All

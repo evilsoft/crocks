@@ -1,12 +1,12 @@
-const test = require('tape')
-const helpers = require('../test/helpers')
-const Last = require('../test/LastMonoid')
+import test from 'tape'
+import { bindFunc } from '../test/helpers'
+import Last from '../test/LastMonoid'
 
-const bindFunc = helpers.bindFunc
 
-const isFunction = require('../core/isFunction')
 
-const mconcat = require('./mconcat')
+import isFunction from '../core/isFunction'
+
+import mconcat from './mconcat'
 
 test('mconcat helper', t => {
   const mc = bindFunc(mconcat)

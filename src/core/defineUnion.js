@@ -1,12 +1,12 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const curry = require('./curry')
-const isArray = require('./isArray')
-const isEmpty = require('./isEmpty')
-const isFunction = require('./isFunction')
-const isObject = require('./isObject')
-const isString = require('./isString')
+import curry from './curry'
+import isArray from './isArray'
+import isEmpty from './isEmpty'
+import isFunction from './isFunction'
+import isObject from './isObject'
+import isString from './isString'
 
 const constant = x => () => x
 
@@ -39,7 +39,7 @@ function construction(def, tag) {
   }
 }
 
-function defineUnion(defs) {
+export default function defineUnion(defs) {
   if(!isObject(defs) || isEmpty(defs)) {
     throw new TypeError('defineUnion: Argument must be an Object containing definition lists')
   }
@@ -56,5 +56,3 @@ function defineUnion(defs) {
     return obj
   }, { caseOf: curry(caseOf(defs)), includes: curry(includes(defs)) })
 }
-
-module.exports = defineUnion

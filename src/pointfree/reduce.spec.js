@@ -1,12 +1,10 @@
-const test = require('tape')
-const sinon = require('sinon')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import sinon from 'sinon'
+import { bindFunc } from '../test/helpers'
 
-const bindFunc = helpers.bindFunc
-
-const isFunction = require('../core/isFunction')
-const fl = require('../core/flNames')
-const unit = require('../core/_unit')
+import isFunction from '../core/isFunction'
+import fl from '../core/flNames'
+import unit from '../core/_unit'
 
 const constant = x => () => x
 
@@ -14,7 +12,7 @@ const mock = x => Object.assign({}, {
   reduce: constant('Chain')
 }, x)
 
-const reduce = require('./reduce')
+import reduce from './reduce'
 
 test('reduce pointfree', t => {
   const r = bindFunc(reduce)

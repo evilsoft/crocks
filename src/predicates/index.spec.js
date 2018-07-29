@@ -1,89 +1,89 @@
-const test = require('tape')
+import test from 'tape'
 
-const index = require('.')
+import * as Predicates from '.'
 
-const hasProp = require('./hasProp')
-const hasPropPath = require('./hasPropPath')
-const isAlt = require('./isAlt')
-const isAlternative = require('./isAlternative')
-const isApplicative = require('./isApplicative')
-const isApply = require('./isApply')
-const isArray = require('./isArray')
-const isBifunctor = require('./isBifunctor')
-const isBoolean = require('./isBoolean')
-const isCategory = require('./isCategory')
-const isChain = require('./isChain')
-const isContravariant = require('./isContravariant')
-const isDate = require('./isDate')
-const isDefined = require('./isDefined')
-const isEmpty = require('./isEmpty')
-const isExtend = require('./isExtend')
-const isFoldable = require('./isFoldable')
-const isFunction = require('./isFunction')
-const isFunctor = require('./isFunctor')
-const isInteger = require('./isInteger')
-const isIterable= require('./isIterable')
-const isMonad = require('./isMonad')
-const isMonoid = require('./isMonoid')
-const isNil = require('./isNil')
-const isNumber = require('./isNumber')
-const isObject = require('./isObject')
-const isPlus = require('./isPlus')
-const isProfunctor = require('./isProfunctor')
-const isPromise = require('./isPromise')
-const isSame = require('./isSame')
-const isSameType = require('./isSameType')
-const isSemigroup = require('./isSemigroup')
-const isSemigroupoid = require('./isSemigroupoid')
-const isSetoid = require('./isSetoid')
-const isString = require('./isString')
-const isTraversable = require('./isTraversable')
-const propEq = require('./propEq')
-const propPathEq = require('./propPathEq')
-const propSatisfies = require('./propSatisfies')
-const propPathSatisfies = require('./propPathSatisfies')
+import hasProp from './hasProp'
+import hasPropPath from './hasPropPath'
+import isAlt from './isAlt'
+import isAlternative from './isAlternative'
+import isApplicative from './isApplicative'
+import isApply from './isApply'
+import isArray from './isArray'
+import isBifunctor from './isBifunctor'
+import isBoolean from './isBoolean'
+import isCategory from './isCategory'
+import isChain from './isChain'
+import isContravariant from './isContravariant'
+import isDate from './isDate'
+import isDefined from './isDefined'
+import isEmpty from './isEmpty'
+import isExtend from './isExtend'
+import isFoldable from './isFoldable'
+import isFunction from './isFunction'
+import isFunctor from './isFunctor'
+import isInteger from './isInteger'
+import isIterable from './isIterable'
+import isMonad from './isMonad'
+import isMonoid from './isMonoid'
+import isNil from './isNil'
+import isNumber from './isNumber'
+import isObject from './isObject'
+import isPlus from './isPlus'
+import isProfunctor from './isProfunctor'
+import isPromise from './isPromise'
+import isSame from './isSame'
+import isSameType from './isSameType'
+import isSemigroup from './isSemigroup'
+import isSemigroupoid from './isSemigroupoid'
+import isSetoid from './isSetoid'
+import isString from './isString'
+import isTraversable from './isTraversable'
+import propEq from './propEq'
+import propPathEq from './propPathEq'
+import propSatisfies from './propSatisfies'
+import propPathSatisfies from './propPathSatisfies'
 
 test('predicates entry', t => {
-  t.equal(index.hasProp, hasProp, 'provides the hasProp predicate')
-  t.equal(index.hasPropPath, hasPropPath, 'provides the hasPropPath predicate')
-  t.equal(index.isAlt, isAlt, 'provides the isAlt predicate')
-  t.equal(index.isAlternative, isAlternative, 'provides the isAlternative predicate')
-  t.equal(index.isApply, isApply, 'provides the isApply predicate')
-  t.equal(index.isApplicative, isApplicative, 'provides the isApply predicate')
-  t.equal(index.isArray, isArray, 'provides the isArray predicate')
-  t.equal(index.isBifunctor, isBifunctor, 'provides the isBifunctor predicate')
-  t.equal(index.isBoolean, isBoolean, 'provides the isBoolean predicate')
-  t.equal(index.isCategory, isCategory, 'provides the isCategory predicate')
-  t.equal(index.isChain, isChain, 'provides the isChain predicate')
-  t.equal(index.isContravariant, isContravariant, 'provides the isContravariant predicate')
-  t.equal(index.isDate, isDate, 'provides the isDate predicate')
-  t.equal(index.isDefined, isDefined, 'provides the isDefined predicate')
-  t.equal(index.isEmpty, isEmpty, 'provides the isEmpty predicate')
-  t.equal(index.isExtend, isExtend, 'provides the isExtend predicate')
-  t.equal(index.isFoldable, isFoldable, 'provides the isFoldable predicate')
-  t.equal(index.isFunction, isFunction, 'provides the isFunction predicate')
-  t.equal(index.isFunctor, isFunctor, 'provides the isFunctor predicate')
-  t.equal(index.isInteger, isInteger, 'provides the isInteger predicate')
-  t.equal(index.isIterable, isIterable, 'provides the isIterable predicate')
-  t.equal(index.isMonad, isMonad, 'provides the isMonad predicate')
-  t.equal(index.isMonoid, isMonoid, 'provides the isMonoid predicate')
-  t.equal(index.isNil, isNil, 'provides the isNil predicate')
-  t.equal(index.isNumber, isNumber, 'provides the isNumber predicate')
-  t.equal(index.isObject, isObject, 'provides the isObject predicate')
-  t.equal(index.isPlus, isPlus, 'provides the isPlus predicate')
-  t.equal(index.isProfunctor, isProfunctor, 'provides the isProfunctor predicate')
-  t.equal(index.isPromise, isPromise, 'provides the isPromise predicate')
-  t.equal(index.isSame, isSame, 'provides the isSame predicate')
-  t.equal(index.isSameType, isSameType, 'provides the isSameType predicate')
-  t.equal(index.isSemigroup, isSemigroup, 'provides the isSemigroup predicate')
-  t.equal(index.isSemigroupoid, isSemigroupoid, 'provides the isSemigroupoid predicate')
-  t.equal(index.isSetoid, isSetoid, 'provides the isSetoid predicate')
-  t.equal(index.isString, isString, 'provides the isString predicate')
-  t.equal(index.isTraversable, isTraversable, 'provides the isTraversable predicate')
-  t.equal(index.propEq, propEq, 'provides the propEq predicate')
-  t.equal(index.propPathEq, propPathEq, 'provides the propEq predicate')
-  t.equal(index.propSatisfies, propSatisfies, 'provides the propSatisfies predicate')
-  t.equal(index.propPathSatisfies, propPathSatisfies, 'provides the propPathSatisfies predicate')
+  t.equal(Predicates.hasProp, hasProp, 'provides the hasProp predicate')
+  t.equal(Predicates.hasPropPath, hasPropPath, 'provides the hasPropPath predicate')
+  t.equal(Predicates.isAlt, isAlt, 'provides the isAlt predicate')
+  t.equal(Predicates.isAlternative, isAlternative, 'provides the isAlternative predicate')
+  t.equal(Predicates.isApply, isApply, 'provides the isApply predicate')
+  t.equal(Predicates.isApplicative, isApplicative, 'provides the isApply predicate')
+  t.equal(Predicates.isArray, isArray, 'provides the isArray predicate')
+  t.equal(Predicates.isBifunctor, isBifunctor, 'provides the isBifunctor predicate')
+  t.equal(Predicates.isBoolean, isBoolean, 'provides the isBoolean predicate')
+  t.equal(Predicates.isCategory, isCategory, 'provides the isCategory predicate')
+  t.equal(Predicates.isChain, isChain, 'provides the isChain predicate')
+  t.equal(Predicates.isContravariant, isContravariant, 'provides the isContravariant predicate')
+  t.equal(Predicates.isDate, isDate, 'provides the isDate predicate')
+  t.equal(Predicates.isDefined, isDefined, 'provides the isDefined predicate')
+  t.equal(Predicates.isEmpty, isEmpty, 'provides the isEmpty predicate')
+  t.equal(Predicates.isExtend, isExtend, 'provides the isExtend predicate')
+  t.equal(Predicates.isFoldable, isFoldable, 'provides the isFoldable predicate')
+  t.equal(Predicates.isFunction, isFunction, 'provides the isFunction predicate')
+  t.equal(Predicates.isFunctor, isFunctor, 'provides the isFunctor predicate')
+  t.equal(Predicates.isInteger, isInteger, 'provides the isInteger predicate')
+  t.equal(Predicates.isIterable, isIterable, 'provides the isIterable predicate')
+  t.equal(Predicates.isMonad, isMonad, 'provides the isMonad predicate')
+  t.equal(Predicates.isMonoid, isMonoid, 'provides the isMonoid predicate')
+  t.equal(Predicates.isNil, isNil, 'provides the isNil predicate')
+  t.equal(Predicates.isNumber, isNumber, 'provides the isNumber predicate')
+  t.equal(Predicates.isObject, isObject, 'provides the isObject predicate')
+  t.equal(Predicates.isPlus, isPlus, 'provides the isPlus predicate')
+  t.equal(Predicates.isProfunctor, isProfunctor, 'provides the isProfunctor predicate')
+  t.equal(Predicates.isPromise, isPromise, 'provides the isPromise predicate')
+  t.equal(Predicates.isSame, isSame, 'provides the isSame predicate')
+  t.equal(Predicates.isSameType, isSameType, 'provides the isSameType predicate')
+  t.equal(Predicates.isSemigroup, isSemigroup, 'provides the isSemigroup predicate')
+  t.equal(Predicates.isSemigroupoid, isSemigroupoid, 'provides the isSemigroupoid predicate')
+  t.equal(Predicates.isSetoid, isSetoid, 'provides the isSetoid predicate')
+  t.equal(Predicates.isString, isString, 'provides the isString predicate')
+  t.equal(Predicates.isTraversable, isTraversable, 'provides the isTraversable predicate')
+  t.equal(Predicates.propEq, propEq, 'provides the propEq predicate')
+  t.equal(Predicates.propPathEq, propPathEq, 'provides the propEq predicate')
+  t.equal(Predicates.propSatisfies, propSatisfies, 'provides the propSatisfies predicate')
+  t.equal(Predicates.propPathSatisfies, propPathSatisfies, 'provides the propPathSatisfies predicate')
 
   t.end()
 })

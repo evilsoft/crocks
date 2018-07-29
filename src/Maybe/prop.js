@@ -1,13 +1,14 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const curry = require('../core/curry')
-const isDefined = require('../core/isDefined')
-const isEmpty = require('../core/isEmpty')
-const isNil = require('../core/isNil')
-const isInteger = require('../core/isInteger')
-const isString = require('../core/isString')
-const { Nothing, Just } = require('../core/Maybe')
+import curry from '../core/curry'
+import isDefined from '../core/isDefined'
+import isEmpty from '../core/isEmpty'
+import isNil from '../core/isNil'
+import isInteger from '../core/isInteger'
+import isString from '../core/isString'
+import Maybe from '../core/Maybe'
+const { Nothing, Just } = Maybe
 
 // prop : (String | Integer) -> a -> Maybe b
 function prop(key, target) {
@@ -26,4 +27,4 @@ function prop(key, target) {
     : Nothing()
 }
 
-module.exports = curry(prop)
+export default curry(prop)

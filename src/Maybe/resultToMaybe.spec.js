@@ -1,17 +1,15 @@
-const test = require('tape')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import { bindFunc } from '../test/helpers'
 
-const bindFunc = helpers.bindFunc
+import Maybe from '.'
+import Result from '../Result'
 
-const Maybe = require('.')
-const Result = require('../Result')
-
-const isFunction = require('../core/isFunction')
-const isSameType = require('../core/isSameType')
+import isFunction from '../core/isFunction'
+import isSameType from '../core/isSameType'
 
 const identity = x => x
 
-const resultToMaybe = require('./resultToMaybe')
+import resultToMaybe from './resultToMaybe'
 
 test('resultToMaybe transform', t => {
   const f = bindFunc(resultToMaybe)

@@ -1,4 +1,4 @@
-const fl = require('../core/flNames')
+import fl from '../core/flNames'
 
 const id =
   x => x
@@ -15,13 +15,13 @@ const repFuncs =
 const isRepFunc =
   contains(repFuncs)
 
-function bindFunc(fn) {
+export function bindFunc(fn) {
   return function() {
     return Function.bind.apply(fn, [ null ].concat(slice(arguments)))
   }
 }
 
-function makeFake(algs, useFl) {
+export function makeFake(algs, useFl) {
   const xs = algs.slice()
   const hasAlg = contains(xs)
 
@@ -52,7 +52,7 @@ function makeFake(algs, useFl) {
   }, Fake)
 }
 
-const testIterable = (from = 1, to = 5, current = 1) => {
+export const testIterable = (from = 1, to = 5, current = 1) => {
   const iterable = {
     from,
     to,
@@ -72,10 +72,4 @@ const testIterable = (from = 1, to = 5, current = 1) => {
   }
 
   return iterable
-}
-
-module.exports = {
-  bindFunc,
-  makeFake,
-  testIterable
 }

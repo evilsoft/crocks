@@ -1,9 +1,9 @@
-const test = require('tape')
+import test from 'tape'
 
-const Last = require('../test/LastMonoid')
-const isFunction = require('./isFunction')
+import Last from '../test/LastMonoid'
+import isFunction from './isFunction'
 
-const mconcatMap = require('./mconcatMap')
+import mconcatMap from './mconcatMap'
 
 test('mconcatMap core', t => {
   t.ok(isFunction(mconcatMap), 'is a function')

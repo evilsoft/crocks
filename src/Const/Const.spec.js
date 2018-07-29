@@ -1,21 +1,22 @@
-const test = require('tape')
-const sinon = require('sinon')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import { spy as _spy } from 'sinon'
+import { bindFunc as _bindFunc } from '../test/helpers'
 
-const bindFunc = helpers.bindFunc
+const bindFunc = _bindFunc
 
-const Last = require('../test/LastMonoid')
-const MockCrock = require('../test/MockCrock')
+import Last, { type } from '../test/LastMonoid'
+import MockCrock from '../test/MockCrock'
 
-const curry = require('../core/curry')
-const compose = curry(require('../core/compose'))
-const isFunction  = require('../core/isFunction')
-const isString = require('../core/isString')
-const unit = require('../core/_unit')
+import curry from '../core/curry'
+import _compose from '../core/compose'
+const compose = curry(_compose)
+import isFunction from '../core/isFunction'
+import isString from '../core/isString'
+import unit from '../core/_unit'
 
-const fl = require('../core/flNames')
+import { empty, of, equals, concat, map as _map } from '../core/flNames'
 
-const Const = require('.')
+import Const from '.'
 
 const identity = x => x
 
@@ -90,16 +91,16 @@ test('Const construction', t => {
 test('Const fantasy-land api', t => {
   const M = Const(Boolean)
 
-  t.ok(isFunction(M[fl.empty]), 'provides empty method on constructor')
-  t.ok(isFunction(M[fl.of]), 'provides of method on constructor')
+  t.ok(isFunction(M[empty]), 'provides empty method on constructor')
+  t.ok(isFunction(M[of]), 'provides of method on constructor')
 
   const m = M(true)
 
-  t.ok(isFunction(m[fl.equals]), 'provides equals method on instance')
-  t.ok(isFunction(m[fl.concat]), 'provides concat method on instance')
-  t.ok(isFunction(m[fl.empty]), 'provides empty method on instance')
-  t.ok(isFunction(m[fl.map]), 'provides map method on instance')
-  t.ok(isFunction(m[fl.of]), 'provides of method on instance')
+  t.ok(isFunction(m[equals]), 'provides equals method on instance')
+  t.ok(isFunction(m[concat]), 'provides concat method on instance')
+  t.ok(isFunction(m[empty]), 'provides empty method on instance')
+  t.ok(isFunction(m[_map]), 'provides map method on instance')
+  t.ok(isFunction(m[of]), 'provides of method on instance')
 
   t.end()
 })
@@ -124,7 +125,7 @@ test('Const inspect', t => {
   t.ok(isFunction(m.inspect), 'provides an inpsect function')
   t.equal(m.inspect, m.toString, 'toString is the same function as inspect')
   t.equal(m.inspect(), 'Const(Number) 0', 'returns inspect string with fixed type')
-  t.equal(n.inspect(), `Const(${Last.type()}) Last 0`, 'returns inspect string with fixed type for ADTs')
+  t.equal(n.inspect(), `Const(${type()}) Last 0`, 'returns inspect string with fixed type for ADTs')
 
   t.end()
 })
@@ -137,7 +138,7 @@ test('Const type', t => {
   t.ok(isFunction(Num(0).type), 'provides a type function')
   t.equal(Num(0).type(), 'Const(Number)', 'type returns Const(Number) for Number')
   t.equal(Arr([]).type(), 'Const(Array)', 'type returns Const(Array) for Array')
-  t.equal(Mon(Last(null)).type(), `Const(${Last.type()})`, 'type uses result of type for inner type name')
+  t.equal(Mon(Last(null)).type(), `Const(${type()})`, 'type uses result of type for inner type name')
 
   t.end()
 })
@@ -242,7 +243,7 @@ test('Const concat fantasy-land errors', t => {
   const notConst = MockCrock()
   const nonMon = Const(Boolean)(true)
 
-  const cat = bindFunc(a[fl.concat])
+  const cat = bindFunc(a[concat])
 
   const err = /Const\(Array\).fantasy-land\/concat: Const\(Array\) required/
   t.throws(cat(undefined), err, 'throws with undefined')
@@ -258,7 +259,7 @@ test('Const concat fantasy-land errors', t => {
   t.throws(cat(notConst), err, 'throws when passed non-Const')
   t.throws(cat(nonMon), err, 'throws when passed Const of different type')
 
-  const nonCat = bindFunc(nonMon[fl.concat])
+  const nonCat = bindFunc(nonMon[concat])
   const semiErr = /Const\(Boolean\).fantasy-land\/concat: Must be fixed to a Semigroup/
   t.throws(nonCat(nonMon), semiErr, 'throws pointed to non-Semigroup')
 
@@ -291,7 +292,7 @@ test('Const empty errors', t => {
 })
 
 test('Const empty fantasy-land errors', t => {
-  const nonMon = bindFunc(Const(Boolean)[fl.empty])
+  const nonMon = bindFunc(Const(Boolean)[empty])
 
   const monErr = /Const\(Boolean\).fantasy-land\/empty: Must be fixed to a Monoid/
   t.throws(nonMon(nonMon), monErr, 'throws when pointed to non-Monoid')
@@ -335,7 +336,7 @@ test('Const map errors', t => {
 })
 
 test('Const map fantasy-land errors', t => {
-  const map = bindFunc(Const(String)('0')[fl.map])
+  const map = bindFunc(Const(String)('0')[_map])
 
   const err = /Const\(String\).fantasy-land\/map: Function required/
   t.throws(map(undefined), err, 'throws when passed undefined')
@@ -355,7 +356,7 @@ test('Const map fantasy-land errors', t => {
 })
 
 test('Const map functionality', t => {
-  const spy = sinon.spy(identity)
+  const spy = _spy(identity)
   const x = 42
 
   const m = Const(Number)(x).map(spy)
@@ -434,7 +435,7 @@ test('Const of errors', t => {
 
 test('Const of fantasy-land errors', t => {
   const fn =
-    bindFunc(Const(Boolean)[fl.of])
+    bindFunc(Const(Boolean)[of])
 
   const err = /Const\(Boolean\).fantasy-land\/of: Must be fixed to a Monoid/
   t.throws(fn('matters not'), err, 'throws when not pointed to a Monoid')

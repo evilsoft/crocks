@@ -1,11 +1,11 @@
-const test = require('tape')
+import test from 'tape'
 
-const isFunction = require('../core/isFunction')
+import isFunction from '../core/isFunction'
 
 const merge =
   (fn, m) => m.merge(fn)
 
-const branch = require('./branch')
+import branch from './branch'
 
 test('branch helper function', t => {
   const extract =

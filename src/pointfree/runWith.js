@@ -1,8 +1,8 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const curry = require('../core/curry')
-const isFunction = require('../core/isFunction')
+import curry from '../core/curry'
+import isFunction from '../core/isFunction'
 
 function runWith(x, m) {
   if(!(m && isFunction(m.runWith))) {
@@ -12,4 +12,4 @@ function runWith(x, m) {
   return m.runWith(x)
 }
 
-module.exports = curry(runWith)
+export default curry(runWith)

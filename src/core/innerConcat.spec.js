@@ -1,14 +1,14 @@
-const test = require('tape')
-const helpers = require('../test/helpers')
-const Mock = require('../test/MockCrock')
-const Last = require('../test/LastMonoid')
+import test from 'tape'
+import { bindFunc } from '../test/helpers'
+import Mock from '../test/MockCrock'
+import Last from '../test/LastMonoid'
 
-const bindFunc = helpers.bindFunc
 
-const isFunction = require('./isFunction')
-const isSameType = require('./isSameType')
 
-const innerConcat = require('./innerConcat')
+import isFunction from './isFunction'
+import isSameType from './isSameType'
+
+import innerConcat from './innerConcat'
 
 test('innerConcat errors', t => {
   const err = /MockCrock.concat: Both containers must contain Semigroups of the same type/

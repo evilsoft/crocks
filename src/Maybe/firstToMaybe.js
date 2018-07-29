@@ -1,11 +1,13 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const First = require('../core/types').proxy('First')
+import { proxy } from '../core/types'
 
-const curry = require('../core/curry')
-const isFunction = require('../core/isFunction')
-const isSameType = require('../core/isSameType')
+import curry from '../core/curry'
+import isFunction from '../core/isFunction'
+import isSameType from '../core/isSameType'
+
+const First = proxy('First')
 
 const applyTransform = first =>
   first.valueOf()
@@ -32,4 +34,4 @@ function firstToMaybe(first) {
   throw new TypeError('firstToMaybe: First or First returning function required')
 }
 
-module.exports = curry(firstToMaybe)
+export default curry(firstToMaybe)

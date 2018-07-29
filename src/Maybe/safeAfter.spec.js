@@ -1,12 +1,10 @@
-const test = require('tape')
-const sinon = require('sinon')
-const Pred = require('../Pred')
-const isFunction = require('../core/isFunction')
-const unit = require('../core/_unit')
-const safeAfter = require('./safeAfter')
-const helpers = require('../test/helpers')
-
-const bindFunc = helpers.bindFunc
+import test from 'tape'
+import sinon from 'sinon'
+import Pred from '../Pred'
+import isFunction from '../core/isFunction'
+import unit from '../core/_unit'
+import safeAfter from './safeAfter'
+import { bindFunc } from '../test/helpers'
 
 const identity = f => f
 

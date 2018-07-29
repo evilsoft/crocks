@@ -1,9 +1,9 @@
-const test = require('tape')
+import test from 'tape'
 
-const isFunction = require('../core/isFunction')
+import isFunction from '../core/isFunction'
 const unit = () => undefined
 
-const constant = require('./constant')
+import constant from './constant'
 
 test('constant (K combinator)', t => {
   const x = 3

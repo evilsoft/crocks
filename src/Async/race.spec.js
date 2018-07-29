@@ -1,13 +1,13 @@
-const test = require('tape')
-const sinon = require('sinon')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import sinon from 'sinon'
+import { bindFunc } from '../test/helpers'
 
-const bindFunc = helpers.bindFunc
 
-const Async = require('.')
-const isFunction = require('../core/isFunction')
 
-const race = require('./race')
+import Async from '.'
+import isFunction from '../core/isFunction'
+
+import race from './race'
 
 const unit = () => undefined
 

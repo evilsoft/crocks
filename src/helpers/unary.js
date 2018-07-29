@@ -1,10 +1,10 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isFunction = require('../core/isFunction')
+import isFunction from '../core/isFunction'
 
 // unary : (* -> b) -> a -> b
-function unary(fn) {
+export default function unary(fn) {
   if(!isFunction(fn)) {
     throw new TypeError('unary: Function required')
   }
@@ -13,5 +13,3 @@ function unary(fn) {
     return fn(x)
   }
 }
-
-module.exports = unary

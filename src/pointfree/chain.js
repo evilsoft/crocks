@@ -1,12 +1,12 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const _chain = require('../core/array').chain
-const curry = require('../core/curry')
-const isArray = require('../core/isArray')
-const isChain = require('../core/isChain')
-const isFunction = require('../core/isFunction')
-const fl = require('../core/flNames')
+import { chain as _chain } from '../core/array'
+import curry from '../core/curry'
+import isArray from '../core/isArray'
+import isChain from '../core/isChain'
+import isFunction from '../core/isFunction'
+import fl from '../core/flNames'
 
 // chain : Chain m => (a -> m b) -> m a -> m b
 function chain(fn, m) {
@@ -25,4 +25,4 @@ function chain(fn, m) {
   return (m[fl.chain] || m.chain).call(m, fn)
 }
 
-module.exports = curry(chain)
+export default curry(chain)

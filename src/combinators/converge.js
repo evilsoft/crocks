@@ -1,8 +1,8 @@
 /** @license ISC License (c) copyright 2018 original and current authors */
 /** @author Matt Ross (amsross) */
 
-const curry = require('../core/curry')
-const isFunction = require('../core/isFunction')
+import curry from '../core/curry'
+import isFunction from '../core/isFunction'
 
 // converge (Phoenix or Starling Prime)
 // (b -> c -> d) -> (a -> b) -> (a -> c) -> a -> d
@@ -14,4 +14,4 @@ function converge(f, g, h, x) {
   return curry(f)(g(x), h(x))
 }
 
-module.exports = curry(converge)
+export default curry(converge)

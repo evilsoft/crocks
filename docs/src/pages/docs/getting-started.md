@@ -93,7 +93,8 @@ safeDivide('number', 5)
 import crocks from 'crocks'
 
 // still imports entire object, but removes name-spacing
-import { and, liftA2 }  from 'crocks'
+import crocks from 'crocks'
+const { and, liftA2 } = crocks
 
 // pluck anything that does not require name-spacing
 const { safe, isNumber } = crocks

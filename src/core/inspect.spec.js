@@ -1,9 +1,9 @@
-const test = require('tape')
-const Mock = require('../test/MockCrock')
-const isFunction = require('./isFunction')
-const unit = require('./_unit')
+import test from 'tape'
+import Mock from '../test/MockCrock'
+import isFunction from './isFunction'
+import unit from './_unit'
 
-const inspect = require('./inspect')
+import inspect from './inspect'
 
 test('inspect internal function', t => {
   const m = Mock.of(42)

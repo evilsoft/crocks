@@ -1,7 +1,7 @@
 /** @license ISC License (c) copyright 2018 original and current authors */
 /** @author Henrique Limas (HenriqueLimas) */
 
-function cloneIterable(source) {
+export default function cloneIterable(source) {
   let copy = Object.create(Object.getPrototypeOf(source))
   Object.assign(copy, source)
 
@@ -12,5 +12,3 @@ function cloneIterable(source) {
 
   return copy
 }
-
-module.exports = cloneIterable

@@ -1,16 +1,14 @@
-const test = require('tape')
-const sinon = require('sinon')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import { spy } from 'sinon'
+import { bindFunc } from '../test/helpers'
 
-const bindFunc = helpers.bindFunc
-
-const isFunction = require('../core/isFunction')
-const unit = require('../core/_unit')
+import isFunction from '../core/isFunction'
+import unit from '../core/_unit'
 
 const constant = x => () => x
 const identity = x => x
 
-const foldMap = require('./foldMap')
+import foldMap from './foldMap'
 
 test('fold pointfree errors', t => {
   const fn = bindFunc(x => foldMap(x, [ 1 ]))
@@ -46,7 +44,7 @@ test('fold pointfree errors', t => {
 
 test('fold pointfree', t => {
   const x = 'folded'
-  const m = { foldMap: sinon.spy(constant(x)) }
+  const m = { foldMap: spy(constant(x)) }
 
   t.ok(isFunction(foldMap), 'is a function')
 

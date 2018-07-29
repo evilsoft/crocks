@@ -1,17 +1,15 @@
-const test = require('tape')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import { bindFunc } from '../test/helpers'
 
-const bindFunc = helpers.bindFunc
+import Tuple from '.'
 
-const Tuple = require('.')
-
-const List = require('../core/List')
-const isArray = require('../core/isArray')
-const isFunction = require('../core/isFunction')
+import { fromArray } from '../core/List'
+import isArray from '../core/isArray'
+import isFunction from '../core/isFunction'
 
 const identity = x => x
 
-const tupleToArray = require('./tupleToArray')
+import tupleToArray from './tupleToArray'
 
 test('tupleToArray transform', t => {
   const f = bindFunc(tupleToArray)
@@ -27,7 +25,7 @@ test('tupleToArray transform', t => {
   t.throws(f(false), TypeError, 'throws if arg is false')
   t.throws(f(true), TypeError, 'throws if arg is true')
   t.throws(f({}), TypeError, 'throws if arg is an object')
-  t.throws(f(List.fromArray([ 1,2,3 ])), TypeError, 'throws if arg is a different crock')
+  t.throws(f(fromArray([ 1,2,3 ])), TypeError, 'throws if arg is a different crock')
 
   t.end()
 })
@@ -122,4 +120,3 @@ test('tupleToArray with Tuple returning function', t => {
 
   t.end()
 })
-

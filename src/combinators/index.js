@@ -1,9 +1,7 @@
-module.exports = {
-  applyTo: require('./applyTo'),
-  composeB: require('./composeB'),
-  constant: require('./constant'),
-  converge: require('./converge'),
-  flip: require('./flip'),
-  identity: require('./identity'),
-  substitution: require('./substitution')
-}
+export { default as applyTo } from './applyTo'
+export { default as composeB } from './composeB'
+export { default as constant } from './constant'
+export { default as converge } from './converge'
+export { default as flip } from './flip'
+export { default as identity } from './identity'
+export { default as substitution } from './substitution'

@@ -1,10 +1,10 @@
-const test = require('tape')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import { bindFunc } from '../test/helpers'
 
-const bindFunc = helpers.bindFunc
-const isFunction = require('../core/isFunction')
 
-const partial = require('./partial')
+import isFunction from '../core/isFunction'
+
+import partial from './partial'
 
 test('partial helper', t => {
   const f = bindFunc(partial)

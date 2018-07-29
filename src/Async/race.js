@@ -1,10 +1,11 @@
 /** @license ISC License (c) copyright 2018 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const curry = require('../core/curry')
-const isSameType = require('../core/isSameType')
+import curry from '../core/curry'
+import isSameType from '../core/isSameType'
 
-const Async = require('../core/types').proxy('Async')
+import types from '../core/types'
+const Async = types.proxy('Async')
 
 function race(m, a) {
   if(!(isSameType(m, a) && isSameType(Async, m))) {
@@ -14,5 +15,4 @@ function race(m, a) {
   return a.race(m)
 }
 
-module.exports =
-  curry(race)
+export default curry(race)

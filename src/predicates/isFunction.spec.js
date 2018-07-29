@@ -1,6 +1,6 @@
-const test = require('tape')
+import test from 'tape'
 
-const isFunction = require('./isFunction')
+import isFunction from './isFunction'
 
 test('isFunction predicate', t => {
   t.equal(typeof isFunction, 'function', 'is a function')

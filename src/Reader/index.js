@@ -3,20 +3,24 @@
 
 const VERSION = 2
 
-const _implements = require('../core/implements')
-const _inspect = require('../core/inspect')
-const type = require('../core/types').type('Reader')
-const _type = require('../core/types').typeFn(type(), VERSION)
-const fl = require('../core/flNames')
+import _implements from '../core/implements'
+import _inspect from '../core/inspect'
+import fl from '../core/flNames'
 
-const compose = require('../core/compose')
-const isFunction = require('../core/isFunction')
-const isSameType = require('../core/isSameType')
+import compose from '../core/compose'
+import isFunction from '../core/isFunction'
+import isSameType from '../core/isSameType'
 
-const _of =
+import { typeFn, type as getType } from '../core/types'
+
+export const type = getType('Reader')
+
+const _type = typeFn(type(), VERSION)
+
+export const of =
   x => Reader(() => x)
 
-function ask(fn) {
+export function ask(fn) {
   if(!arguments.length) {
     return Reader(x => x)
   }
@@ -28,13 +32,10 @@ function ask(fn) {
   throw new TypeError('Reader.ask: No argument or function required')
 }
 
-function Reader(runWith) {
+export default function Reader(runWith) {
   if(!arguments.length || !isFunction(runWith)) {
     throw new TypeError('Reader: Must wrap a function')
   }
-
-  const of =
-    _of
 
   const inspect =
     () => `Reader${_inspect(runWith)}`
@@ -96,15 +97,13 @@ function Reader(runWith) {
   }
 }
 
-Reader.of = _of
+Reader.of = of
 Reader.ask = ask
 Reader.type = type
 
-Reader[fl.of] = _of
+Reader[fl.of] = of
 Reader['@@type'] = _type
 
 Reader['@@implements'] = _implements(
   [ 'ap', 'chain', 'map', 'of' ]
 )
-
-module.exports = Reader

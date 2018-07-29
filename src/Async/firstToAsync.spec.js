@@ -1,17 +1,17 @@
-const test = require('tape')
-const sinon = require('sinon')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import sinon from 'sinon'
+import { bindFunc } from '../test/helpers'
 
-const bindFunc = helpers.bindFunc
 
-const Async = require('.')
-const First = require('../First')
 
-const isFunction = require('../core/isFunction')
-const isSameType = require('../core/isSameType')
-const unit = require('../core/_unit')
+import Async from '.'
+import First from '../First'
 
-const firstToAsync = require('./firstToAsync')
+import isFunction from '../core/isFunction'
+import isSameType from '../core/isSameType'
+import unit from '../core/_unit'
+
+import firstToAsync from './firstToAsync'
 
 const identity = x => x
 

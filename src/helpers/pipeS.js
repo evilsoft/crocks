@@ -1,13 +1,13 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isSameType = require('../core/isSameType')
-const isSemigroupoid = require('../core/isSemigroupoid')
+import isSameType from '../core/isSameType'
+import isSemigroupoid from '../core/isSemigroupoid'
 
 const err = 'pipeS: Semigroupoids of the same type required'
 
 // pipeS : Semigroupoid s => (s a b, s b c, ..., s y z) -> s a z
-function pipeS(...ms) {
+export default function pipeS(...ms) {
   if(!arguments.length) {
     throw new TypeError(err)
   }
@@ -31,5 +31,3 @@ function pipeS(...ms) {
     return comp.compose(m)
   })
 }
-
-module.exports = pipeS

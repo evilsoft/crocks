@@ -1,10 +1,10 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const curry = require('../core/curry')
-const curryN = require('../core/curryN')
-const isFunction = require('../core/isFunction')
-const isNumber = require('../core/isNumber')
+import curry from '../core/curry'
+import curryN from '../core/curryN'
+import isFunction from '../core/isFunction'
+import isNumber from '../core/isNumber'
 
 // nAry : Number -> (* -> a) -> * -> * -> a
 function nAry(num, fn) {
@@ -19,4 +19,4 @@ function nAry(num, fn) {
   return curryN(num, fn)
 }
 
-module.exports = curry(nAry)
+export default curry(nAry)

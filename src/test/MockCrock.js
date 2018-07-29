@@ -1,6 +1,6 @@
-const _implements = require('../core/implements')
-const _inspect = require('../core/inspect')
-const _equals = require('../core/equals')
+import _implements from '../core/implements'
+import _inspect from '../core/inspect'
+import _equals from '../core/equals'
 
 const constant = x => () => x
 
@@ -8,7 +8,7 @@ const _type = constant('MockCrock')
 const typeString = 'crocks/MockCrock@1'
 const _of   = x => MockCrock(x)
 
-function MockCrock(x) {
+export default function MockCrock(x) {
   const valueOf     = constant(x)
   const map       = fn => MockCrock(fn(x))
   const type      = _type
@@ -36,5 +36,3 @@ MockCrock['@@type'] = typeString
 MockCrock['@@implements'] = _implements(
   [ 'ap', 'chain', 'equals', 'map', 'of', 'traverse' ]
 )
-
-module.exports = MockCrock

@@ -3,20 +3,24 @@
 
 const VERSION = 2
 
-const _implements = require('../core/implements')
-const _inspect = require('../core/inspect')
-const type = require('../core/types').type('Pred')
-const _type = require('../core/types').typeFn(type(), VERSION)
-const fl = require('../core/flNames')
+import _implements from '../core/implements'
+import _inspect from '../core/inspect'
+import fl from '../core/flNames'
 
-const compose = require('../core/compose')
-const isFunction = require('../core/isFunction')
-const isSameType = require('../core/isSameType')
+import compose from '../core/compose'
+import isFunction from '../core/isFunction'
+import isSameType from '../core/isSameType'
 
-const _empty =
+import { typeFn, type as getType } from '../core/types'
+
+export const type = getType('Pred')
+
+const _type = typeFn(type(), VERSION)
+
+export const empty =
   () => Pred(() => true)
 
-function Pred(pred) {
+export default function Pred(pred) {
   if(!isFunction(pred)) {
     throw new TypeError('Pred: Predicate function required')
   }
@@ -26,9 +30,6 @@ function Pred(pred) {
 
   const inspect =
     () => `Pred${_inspect(runWith)}`
-
-  const empty =
-    _empty
 
   const valueOf =
     () => runWith
@@ -66,14 +67,12 @@ function Pred(pred) {
   }
 }
 
-Pred.empty = _empty
+Pred.empty = empty
 Pred.type = type
 
-Pred[fl.empty] = _empty
+Pred[fl.empty] = empty
 Pred['@@type'] = _type
 
 Pred['@@implements'] = _implements(
   [ 'concat', 'contramap', 'empty' ]
 )
-
-module.exports = Pred

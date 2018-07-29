@@ -1,11 +1,11 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
-const isObject = require('./isObject')
-const isMonoid = require('./isMonoid')
-const equals = require('./equals')
-const fl = require('./flNames')
+import isObject from './isObject'
+import isMonoid from './isMonoid'
+import equals from './equals'
+import fl from './flNames'
 
-function isEmpty(x) {
+export default function isEmpty(x) {
   if(isMonoid(x)) {
     const empty = x.constructor[fl['empty']] || x.constructor['empty'] || x['empty']
 
@@ -22,5 +22,3 @@ function isEmpty(x) {
 
   return true
 }
-
-module.exports = isEmpty

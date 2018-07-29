@@ -1,9 +1,9 @@
-const test = require('tape')
+import test from 'tape'
 
-const isFunction = require('./isFunction')
-const unit = require('./_unit')
+import isFunction from './isFunction'
+import unit from './_unit'
 
-const isNumber = require('./isNumber')
+import isNumber from './isNumber'
 
 test('isNumber core', t => {
   t.ok(isFunction(isNumber), 'is a function')

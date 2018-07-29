@@ -1,15 +1,16 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isArray = require('../core/isArray')
-const isFunction = require('../core/isFunction')
-const isIterable = require('../core/isIterable')
-const isString = require('../core/isString')
-const cloneIterable = require('../core/cloneIterable')
+import isArray from '../core/isArray'
+import isFunction from '../core/isFunction'
+import isIterable from '../core/isIterable'
+import isString from '../core/isString'
+import cloneIterable from '../core/cloneIterable'
 
-const { Nothing, Just } = require('../core/Maybe')
+import Maybe from '../core/Maybe'
+const { Nothing, Just } = Maybe
 
-function head(m) {
+export default function head(m) {
   if(m && isFunction(m.head)) {
     return m.head()
   }
@@ -28,5 +29,3 @@ function head(m) {
 
   throw new TypeError('head: List or iterable required')
 }
-
-module.exports = head

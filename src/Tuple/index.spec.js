@@ -1,16 +1,17 @@
-const test = require('tape')
-const sinon = require('sinon')
-const fl = require('../core/flNames')
-const helpers = require('../test/helpers')
-const bindFunc = helpers.bindFunc
-const curry = require('../core/curry')
-const compose = curry(require('../core/compose'))
-const isFunction = require('./../core/isFunction')
-const unit = require('./../core/_unit')
-const isObject = require('./../core/isObject')
-const isString = require('./../core/isString')
+import test from 'tape'
+import sinon from 'sinon'
+import fl from '../core/flNames'
+import { bindFunc } from '../test/helpers'
 
-const Tuple = require('./index')
+import curry from '../core/curry'
+import _compose from '../core/compose'
+const compose = curry(_compose)
+import isFunction from './../core/isFunction'
+import unit from './../core/_unit'
+import isObject from './../core/isObject'
+import isString from './../core/isString'
+
+import Tuple from '.'
 
 const identity = x => x
 

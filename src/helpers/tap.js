@@ -1,9 +1,9 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const curry = require('../core/curry')
-const compose = require('../core/compose')
-const isFunction = require('../core/isFunction')
+import curry from '../core/curry'
+import compose from '../core/compose'
+import isFunction from '../core/isFunction'
 
 const constant = x => () => x
 
@@ -18,4 +18,4 @@ function tap(fn, x) {
   return compose(constant(x), fn)(x)
 }
 
-module.exports = curry(tap)
+export default curry(tap)

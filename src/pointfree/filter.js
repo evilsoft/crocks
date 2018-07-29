@@ -1,13 +1,13 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const curry = require('../core/curry')
+import curry from '../core/curry'
 
-const isFunction = require('../core/isFunction')
-const isPredOrFunc = require('../core/isPredOrFunc')
-const isObject = require('../core/isObject')
-const object = require('../core/object')
-const predOrFunc = require('../core/predOrFunc')
+import isFunction from '../core/isFunction'
+import isPredOrFunc from '../core/isPredOrFunc'
+import isObject from '../core/isObject'
+import object from '../core/object'
+import predOrFunc from '../core/predOrFunc'
 
 // filter : Filterable f => (a -> Boolean) -> f a -> f a
 function filter(pred, m) {
@@ -29,4 +29,4 @@ function filter(pred, m) {
   throw new TypeError('filter: Filterable or Object required for second argument')
 }
 
-module.exports = curry(filter)
+export default curry(filter)

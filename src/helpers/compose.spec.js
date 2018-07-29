@@ -1,13 +1,13 @@
-const test = require('tape')
-const sinon = require('sinon')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import sinon from 'sinon'
+import { bindFunc } from '../test/helpers'
 
-const bindFunc = helpers.bindFunc
 
-const isFunction  = require('../core/isFunction')
-const unit = require('../core/_unit')
 
-const compose = require('./compose')
+import isFunction  from '../core/isFunction'
+import unit from '../core/_unit'
+
+import compose from './compose'
 
 test('compose parameters', t => {
   const c = bindFunc(compose)

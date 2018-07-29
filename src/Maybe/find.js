@@ -1,15 +1,18 @@
 /** @license ISC License (c) copyright 2018 original and current authors */
 /** @author Dale Francis (dalefrancis88) */
 
-const Pred = require('../core/types').proxy('Pred')
+import { proxy } from '../core/types'
 
-const curry = require('../core/curry')
-const { Just, Nothing } = require('.')
-const predOrFunc = require('../core/predOrFunc')
+import curry from '../core/curry'
+import { Just, Nothing } from '.'
 
-const isFunction = require('../core/isFunction')
-const isFoldable = require('../core/isFoldable')
-const isSameType = require('../core/isSameType')
+import predOrFunc from '../core/predOrFunc'
+
+import isFunction from '../core/isFunction'
+import isFoldable from '../core/isFoldable'
+import isSameType from '../core/isSameType'
+
+const Pred = proxy('Pred')
 
 const accumulator = fn => (acc, cur) =>
   !acc.found && predOrFunc(fn, cur) ? { found: true, value: cur } : acc
@@ -29,4 +32,4 @@ function find(fn, foldable) {
   return result.found ? Just(result.value) : Nothing()
 }
 
-module.exports = curry(find)
+export default curry(find)

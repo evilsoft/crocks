@@ -1,11 +1,9 @@
-const test = require('tape')
-const helpers = require('../test/helpers')
-const isFunction = require('../core/isFunction')
-const unit = require('../core/_unit')
+import test from 'tape'
+import { bindFunc } from '../test/helpers'
+import isFunction from '../core/isFunction'
+import unit from '../core/_unit'
 
-const bindFunc = helpers.bindFunc
-
-const propPathEq = require('./propPathEq')
+import propPathEq from './propPathEq'
 
 test('propPathEq function', t => {
   const fn = propPathEq([ 'a' ])

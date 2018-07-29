@@ -33,17 +33,13 @@ const _types = {
   'Writer': () => 'Writer'
 }
 
-const type =
+export const type =
   type => _types[type] || _types['unk']
 
-const proxy =
+export const proxy =
   (t, ctx) => ({ type: () => type(t)(ctx) })
 
-const typeFn = (t, ver, ctx) => {
+export const typeFn = (t, ver, ctx) => {
   const typeStr = type(t)(ctx)
   return `crocks/${typeStr}@${ver || 0}`
-}
-
-module.exports = {
-  proxy, type, typeFn
 }

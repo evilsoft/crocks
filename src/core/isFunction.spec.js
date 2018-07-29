@@ -1,8 +1,8 @@
-const test = require('tape')
+import test from 'tape'
 
-const unit = require('./_unit')
+import unit from './_unit'
 
-const isFunction = require('./isFunction')
+import isFunction from './isFunction'
 
 test('isFunction core', t => {
   t.equal(typeof isFunction, 'function', 'is a function')

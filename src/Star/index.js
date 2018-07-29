@@ -3,18 +3,22 @@
 
 const VERSION = 2
 
-const _implements = require('../core/implements')
-const _inspect = require('../core/inspect')
-const _type = require('../core/types').type('Star')
-const __type = require('../core/types').typeFn(_type(), VERSION)
-const fl = require('../core/flNames')
+import _implements from '../core/implements'
+import _inspect from '../core/inspect'
+import fl from '../core/flNames'
 
-const array = require('../core/array')
-const isFunction = require('../core/isFunction')
-const isMonad = require('../core/isMonad')
-const isSameType = require('../core/isSameType')
+import array from '../core/array'
+import isFunction from '../core/isFunction'
+import isMonad from '../core/isMonad'
+import isSameType from '../core/isSameType'
 
-const Pair = require('../core/Pair')
+import Pair from '../core/Pair'
+
+import { typeFn, type as getType } from '../core/types'
+
+export const type = getType('Star')
+
+const _type = typeFn(type(), VERSION)
 
 const merge =
   (fn, m) => m.merge(fn)
@@ -22,7 +26,7 @@ const merge =
 const sequence =
   (af, m) => array.sequence(af, m)
 
-function _Star(Monad) {
+export default function _Star(Monad) {
   if(!isMonad(Monad)) {
     throw new TypeError('Star: Monad required for construction')
   }
@@ -37,10 +41,10 @@ function _Star(Monad) {
     Monad['@@type']
 
   const outerType =
-    `${_type()}( ${innerType} )`
+    `${type()}( ${innerType} )`
 
   const typeString =
-    `${__type}( ${innerFullType} )`
+    `${_type}( ${innerFullType} )`
 
   const type =
     () => outerType
@@ -206,5 +210,3 @@ function _Star(Monad) {
 
   return Star
 }
-
-module.exports = _Star

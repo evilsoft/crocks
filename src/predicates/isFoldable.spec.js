@@ -1,8 +1,8 @@
-const test = require('tape')
+import test from 'tape'
 
-const isFunction = require('../core/isFunction')
+import isFunction from '../core/isFunction'
 
-const isFoldable = require('./isFoldable')
+import isFoldable from './isFoldable'
 
 test('isFoldable predicate', t => {
   t.ok(isFunction(isFoldable), 'is a function')

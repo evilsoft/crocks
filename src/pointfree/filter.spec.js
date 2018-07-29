@@ -1,17 +1,15 @@
-const test = require('tape')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import { bindFunc } from '../test/helpers'
 
-const bindFunc = helpers.bindFunc
+import Pred from '../Pred'
 
-const Pred = require('../Pred')
-
-const isFunction = require('../core/isFunction')
-const unit = require('../core/_unit')
+import isFunction from '../core/isFunction'
+import unit from '../core/_unit'
 
 const constant = x => () => x
 const identity = x => x
 
-const filter = require('./filter')
+import filter from './filter'
 
 test('filter pointfree', t => {
   const m = bindFunc(filter)

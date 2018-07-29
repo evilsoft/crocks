@@ -1,12 +1,12 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isArray = require('./isArray')
-const isFunction = require('./isFunction')
-const isObject = require('./isObject')
-const isString = require('./isString')
-const isSymbol = require('./isSymbol')
-const isDate = require('./isDate')
+import isArray from './isArray'
+import isFunction from './isFunction'
+import isObject from './isObject'
+import isString from './isString'
+import isSymbol from './isSymbol'
+import isDate from './isDate'
 
 function arrayInspect(xs) {
   return xs.length
@@ -15,7 +15,7 @@ function arrayInspect(xs) {
 }
 
 // inspect : a -> String
-function inspect(x) {
+export default function inspect(x) {
   if(x && isFunction(x.inspect)) {
     return ` ${x.inspect()}`
   }
@@ -44,5 +44,3 @@ function inspect(x) {
 
   return ` ${x}`
 }
-
-module.exports = inspect

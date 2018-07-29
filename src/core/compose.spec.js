@@ -1,9 +1,9 @@
-const test = require('tape')
-const sinon = require('sinon')
+import test from 'tape'
+import sinon from 'sinon'
 
 const identity = x => x
 
-const compose = require('./compose')
+import compose from './compose'
 
 test('compose core', t => {
   const f = sinon.spy(identity)

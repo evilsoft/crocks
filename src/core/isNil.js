@@ -4,8 +4,6 @@
 /* eslint eqeqeq: "off" */
 
 // isNil : a -> Boolean
-function isNil(x) {
+export default function isNil(x) {
   return x == null || x !== x
 }
-
-module.exports = isNil

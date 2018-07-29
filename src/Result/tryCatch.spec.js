@@ -1,13 +1,11 @@
-const test = require('tape')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import { bindFunc } from '../test/helpers'
 
-const bindFunc = helpers.bindFunc
-
-const Result = require('.')
-const isFunction = require('../core/isFunction')
-const equals = require('../core/equals')
-const isSameType = require('../core/isSameType')
-const unit = require('../core/_unit')
+import Result from '.'
+import isFunction from '../core/isFunction'
+import equals from '../core/equals'
+import isSameType from '../core/isSameType'
+import unit from '../core/_unit'
 
 const constant = x => () => x
 const identity = x => x
@@ -15,7 +13,7 @@ const identity = x => x
 const either =
   (f, g) => m => m.either(f, g)
 
-const tryCatch = require('./tryCatch')
+import tryCatch from './tryCatch'
 
 test('tryCatch', t => {
   const f = bindFunc(tryCatch)

@@ -1,15 +1,15 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const _array = require('../core/array')
+import { fold as _fold } from '../core/array'
 
-const isArray = require('../core/isArray')
-const isFunction = require('../core/isFunction')
+import isArray from '../core/isArray'
+import isFunction from '../core/isFunction'
 
 // fold : Foldable f, Semigroup s => f s -> s
-function fold(m) {
+export default function fold(m) {
   if(isArray(m)) {
-    return _array.fold(m)
+    return _fold(m)
   }
 
   if(m && isFunction(m.fold)) {
@@ -18,5 +18,3 @@ function fold(m) {
 
   throw new TypeError('fold: Non-empty Foldable with at least one Semigroup is required')
 }
-
-module.exports = fold

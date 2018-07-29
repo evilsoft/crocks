@@ -1,14 +1,14 @@
 /** @license ISC License (c) copyright 2018 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const array = require('../core/array')
-const curry = require('../core/curry')
-const isArray = require('../core/isArray')
-const isEmpty = require('../core/isEmpty')
-const isInteger = require('../core/isInteger')
-const isObject = require('../core/isObject')
-const isString = require('../core/isString')
-const object = require('../core/object')
+import { set } from '../core/array'
+import curry from '../core/curry'
+import isArray from '../core/isArray'
+import isEmpty from '../core/isEmpty'
+import isInteger from '../core/isInteger'
+import isObject from '../core/isObject'
+import isString from '../core/isString'
+import { set as _set } from '../core/object'
 
 const isValid = x =>
   isObject(x) || isArray(x)
@@ -45,7 +45,7 @@ function setPath(path, val, obj) {
 
   if(isObject(obj)) {
     if(isString(key)) {
-      return object.set(key, newVal, obj)
+      return _set(key, newVal, obj)
     }
 
     throw new TypeError(
@@ -54,7 +54,7 @@ function setPath(path, val, obj) {
   }
 
   if(isInteger(key)) {
-    return array.set(key, newVal, obj)
+    return set(key, newVal, obj)
   }
 
   throw new TypeError(
@@ -62,4 +62,4 @@ function setPath(path, val, obj) {
   )
 }
 
-module.exports = curry(setPath)
+export default curry(setPath)

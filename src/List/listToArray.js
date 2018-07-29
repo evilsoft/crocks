@@ -1,11 +1,11 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const List = require('.')
+import List from './index'
 
-const curry = require('../core/curry')
-const isFunction = require('../core/isFunction')
-const isSameType = require('../core/isSameType')
+import curry from '../core/curry'
+import isFunction from '../core/isFunction'
+import isSameType from '../core/isSameType'
 
 // listToArray : List a -> [ a ]
 // listToArray : (a -> List b) -> a -> [ b ]
@@ -29,4 +29,4 @@ function listToArray(list) {
   throw new TypeError('listToArray: List or List returning function required')
 }
 
-module.exports = curry(listToArray)
+export default curry(listToArray)

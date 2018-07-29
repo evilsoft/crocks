@@ -1,8 +1,8 @@
-const test = require('tape')
+import test from 'tape'
 
-const isFunction = require('../core/isFunction')
+import isFunction from '../core/isFunction'
 
-const isMonoid = require('./isMonoid')
+import isMonoid from './isMonoid'
 
 test('isMonoid predicate', t => {
   t.ok(isFunction(isMonoid), 'is a function')

@@ -1,8 +1,8 @@
 /** @license ISC License (c) copyright 2018 original and current authors */
 /** @author Jasmina Jacquelina (jasminabasurita) */
 
-const curry = require('../core/curry')
-const isFunction = require('../core/isFunction')
+import curry from '../core/curry'
+import isFunction from '../core/isFunction'
 
 // tupleToArray : Tuple a -> [ a ]
 // tupleToArray : (a -> Tuple b) -> a -> [ b ]
@@ -26,5 +26,4 @@ function tupleToArray(tuple) {
   throw new TypeError('tupleToArray: Tuple or Tuple returning function required')
 }
 
-module.exports = curry(tupleToArray)
-
+export default curry(tupleToArray)

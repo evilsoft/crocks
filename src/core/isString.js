@@ -2,8 +2,6 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 // isString : a -> Boolean
-function isString(x) {
+export default function isString(x) {
   return typeof x === 'string'
 }
-
-module.exports = isString

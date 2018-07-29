@@ -1,18 +1,18 @@
-const test = require('tape')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import { bindFunc } from '../test/helpers'
 
-const bindFunc = helpers.bindFunc
 
-const Either = require('.')
-const Result = require('../Result')
 
-const isFunction = require('../core/isFunction')
-const isSameType = require('../core/isSameType')
+import Either from '.'
+import Result from '../Result'
+
+import isFunction from '../core/isFunction'
+import isSameType from '../core/isSameType'
 
 const constant = x => () => x
 const identity = x => x
 
-const resultToEither = require('./resultToEither')
+import resultToEither from './resultToEither'
 
 test('resultToEither transform', t => {
   const f = bindFunc(resultToEither)

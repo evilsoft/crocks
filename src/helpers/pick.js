@@ -1,10 +1,10 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const curry = require('../core/curry')
-const isFoldable = require('../core/isFoldable')
-const isObject  = require('../core/isObject')
-const isString = require('../core/isString')
+import curry from '../core/curry'
+import isFoldable from '../core/isFoldable'
+import isObject  from '../core/isObject'
+import isString from '../core/isString'
 
 function pickKeys(obj) {
   return function(acc, key) {
@@ -29,4 +29,4 @@ function pick(keys, obj) {
   return keys.reduce(pickKeys(obj), {})
 }
 
-module.exports = curry(pick)
+export default curry(pick)

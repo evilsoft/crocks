@@ -1,17 +1,17 @@
-const test = require('tape')
-const sinon = require('sinon')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import { spy } from 'sinon'
+import { bindFunc as _bindFunc } from '../test/helpers'
 
-const bindFunc = helpers.bindFunc
+const bindFunc = _bindFunc
 
-const Async = require('.')
-const isFunction  = require('../core/isFunction')
-const isPromise  = require('../core/isPromise')
+import Async, { of } from '.'
+import isFunction from '../core/isFunction'
+import isPromise from '../core/isPromise'
 
 const unit = () => undefined
 const identity = x => x
 
-const asyncToPromise = require('./asyncToPromise')
+import asyncToPromise from './asyncToPromise'
 
 test('asyncToPromise transform', t => {
   const f = bindFunc(asyncToPromise)
@@ -34,7 +34,7 @@ test('asyncToPromise transform', t => {
 
   t.ok(isFunction(asyncToPromise), 'is a function')
 
-  m.toPromise = sinon.spy()
+  m.toPromise = spy()
 
   const result = asyncToPromise(m)
 
@@ -46,7 +46,7 @@ test('asyncToPromise transform', t => {
 
 test('asyncToPromise with Async', t => {
   const data = 'TestData'
-  const async = Async.of(data)
+  const async = of(data)
 
   const p = asyncToPromise(async)
 
@@ -74,7 +74,7 @@ test('asyncToPromise with Async returning function', t => {
   t.throws(f([]), TypeError, 'throws if function returns an array')
 
   const data = 'TestData'
-  const promise = Async.of(data)
+  const promise = of(data)
 
   const m = asyncToPromise(identity, promise)
   const rej = y => x => t.equal(x, y, 'rejects a rejected Promise')

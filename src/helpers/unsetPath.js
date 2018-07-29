@@ -1,15 +1,15 @@
 /** @license ISC License (c) copyright 2018 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const curry = require('../core/curry')
-const isArray = require('../core/isArray')
-const isEmpty = require('../core/isEmpty')
-const isInteger  = require('../core/isInteger')
-const isObject  = require('../core/isObject')
-const isString = require('../core/isString')
+import curry from '../core/curry'
+import isArray from '../core/isArray'
+import isEmpty from '../core/isEmpty'
+import isInteger from '../core/isInteger'
+import isObject from '../core/isObject'
+import isString from '../core/isString'
 
-const array = require('../core/array')
-const object = require('../core/object')
+import { unset, set } from '../core/array'
+import { unset as _unset, set as _set } from '../core/object'
 
 const pathError =
   'unsetPath: Non-empty Array of non-empty Strings and/or Positive Integers required for first argument'
@@ -32,11 +32,11 @@ function unsetPath(path, obj) {
 
   if(path.length === 1) {
     if(isArray(obj) && isInteger(key)) {
-      return array.unset(key, obj)
+      return unset(key, obj)
     }
 
     if(isObject(obj) && isString(key)) {
-      return object.unset(key, obj)
+      return _unset(key, obj)
     }
 
     return obj
@@ -50,10 +50,10 @@ function unsetPath(path, obj) {
   }
 
   if(isArray(obj)) {
-    return array.set(key, unsetPath(path.slice(1), next), obj)
+    return set(key, unsetPath(path.slice(1), next), obj)
   }
 
-  return object.set(key, unsetPath(path.slice(1), next), obj)
+  return _set(key, unsetPath(path.slice(1), next), obj)
 }
 
-module.exports = curry(unsetPath)
+export default curry(unsetPath)

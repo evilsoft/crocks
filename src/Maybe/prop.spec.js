@@ -1,12 +1,10 @@
-const test = require('tape')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import { bindFunc } from '../test/helpers'
 
-const bindFunc = helpers.bindFunc
+import isFunction from '../core/isFunction'
+import equals from '../core/equals'
 
-const isFunction = require('../core/isFunction')
-const equals = require('../core/equals')
-
-const prop = require('./prop')
+import prop from './prop'
 
 test('prop function', t => {
   const fn =

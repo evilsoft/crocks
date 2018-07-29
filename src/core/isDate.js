@@ -2,10 +2,7 @@
 /** @author Dale Francis (dalefrancis88) */
 
 // isDate : a -> Boolean
-function isDate(x) {
+export default function isDate(x) {
   return Object.prototype.toString.apply(x) === '[object Date]'
     && !isNaN(x.valueOf())
 }
-
-module.exports = isDate
-

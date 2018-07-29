@@ -3,21 +3,25 @@
 
 const VERSION = 2
 
-const _implements = require('./implements')
-const type = require('./types').type('Unit')
-const _type = require('./types').typeFn(type(), VERSION)
-const fl = require('./flNames')
+import _implements from './implements'
+import fl from './flNames'
 
-const isFunction = require('./isFunction')
-const isSameType = require('./isSameType')
+import isFunction from './isFunction'
+import isSameType from './isSameType'
 
-const _of =
+import { typeFn, type as getType } from './types'
+
+export const type = getType('Unit')
+
+const _type = typeFn(type(), VERSION)
+
+const of =
   Unit
 
-const _empty =
+const empty =
   Unit
 
-function Unit() {
+export default function Unit() {
   const equals =
     m => isSameType(Unit, m)
 
@@ -26,12 +30,6 @@ function Unit() {
 
   const valueOf =
     () => undefined
-
-  const of =
-    _of
-
-  const empty =
-    _empty
 
   function concat(method) {
     return function(m) {
@@ -88,16 +86,14 @@ function Unit() {
   }
 }
 
-Unit.of = _of
-Unit.empty = _empty
+Unit.of = of
+Unit.empty = empty
 Unit.type = type
 
-Unit[fl.of] = _of
-Unit[fl.empty] = _empty
+Unit[fl.of] = of
+Unit[fl.empty] = empty
 Unit['@@type'] = _type
 
 Unit['@@implements'] = _implements(
   [ 'ap', 'chain', 'concat', 'empty', 'equals', 'map', 'of' ]
 )
-
-module.exports = Unit

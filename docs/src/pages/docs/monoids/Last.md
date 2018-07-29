@@ -82,9 +82,7 @@ empty case to a given `Last` by passing a `Nothing`.
 
 ```javascript
 import Last from 'crocks/Last'
-import Maybe from 'crocks/Maybe'
-
-const { Just, Nothing } = Maybe
+import { Just, Nothing } from 'crocks/Maybe'
 
 Last(Just([ 1, 2, 3 ]))
 //=> Last( Just [ 1, 2, 3 ] )

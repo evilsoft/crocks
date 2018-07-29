@@ -496,14 +496,12 @@ of the target `Apply` to the value in the second position of the `Pair`. The
 untouched. Both arguments must return an instance of the target `Apply`.
 
 ```javascript
-import Maybe from 'crocks/Maybe'
+import Maybe, { Just, Nothing } from 'crocks/Maybe'
 import Pair from 'crocks/Pair'
 
 import identity from 'crocks/combinators/identity'
 import safe from 'crocks/Maybe/safe'
 import traverse from 'crocks/pointfree/traverse'
-
-const { Just, Nothing } = Maybe
 
 // isOdd :: Integer -> Boolean
 const isOdd =

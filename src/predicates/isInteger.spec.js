@@ -1,7 +1,7 @@
-const test = require('tape')
+import test from 'tape'
 
-const isFunction = require('../core/isFunction')
-const isInteger = require('../core/isNil')
+import isFunction from '../core/isFunction'
+import isInteger from '../core/isNil'
 
 test('isInteger predicate', t => {
   t.ok(isFunction(isInteger), 'is a function')

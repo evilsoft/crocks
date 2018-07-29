@@ -1,8 +1,8 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const curry = require('../core/curry')
-const isFunction = require('../core/isFunction')
+import curry from '../core/curry'
+import isFunction from '../core/isFunction'
 
 function either(lf, rf, m) {
   if(!(isFunction(lf) && isFunction(rf))) {
@@ -20,4 +20,4 @@ function either(lf, rf, m) {
   return m.either(lf, rf)
 }
 
-module.exports = curry(either)
+export default curry(either)

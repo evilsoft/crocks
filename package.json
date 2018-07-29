@@ -2,7 +2,9 @@
   "name": "crocks",
   "version": "0.11.1",
   "description": "A collection of well known Algebraic Datatypes for your utter enjoyment.",
-  "main": "./index.js",
+  "main": "./build/cjs/crocks.js",
+  "module": "./build/es/index.js",
+  "jsnext:main": "./build/es/index.js",
   "scripts": {
     "contributors:add": "all-contributors add",
     "contributors:generate": "all-contributors generate",
@@ -11,8 +13,8 @@
     "preversion": "npm run build",
     "postpublish": "npm run docs:deploy",
     "build:publish": "npm test && ./bin/publish",
-    "build:dist": "webpack && uglifyjs build/dist/crocks.js -c \"warnings=false\" -m -o build/dist/crocks.min.js",
-    "build": "doctoc && rimraf build && buble -i src -o build && npm run build:dist",
+    "build:dist": "rollup -c && cp -r src/* build/",
+    "build": "doctoc && rimraf build && npm run build:dist",
     "doctoc": "doctoc README.md",
     "docs:dev": "cd docs && npm start",
     "docs:deploy": "cd docs && npm run docs:deploy",
@@ -20,8 +22,8 @@
     "lint:dev": "esw --ext .md,.js . -w --color",
     "spec:coverage": "nyc npm run spec:build",
     "spec:dev": "nodemon -q -e js -w src -x \"npm run spec:src -s | tap-spec\"",
-    "spec:build": "npm run build && tape build/**/*.spec.js build/*.spec.js",
-    "spec:src": "tape src/**/*.spec.js src/*.spec.js",
+    "spec:build": "npm run build && tape -r esm 'build/**/*.spec.js' 'build/*.spec.js'",
+    "spec:src": "tape -r esm 'src/**/*.spec.js' 'src/*.spec.js'",
     "test": "npm run lint && npm run spec:coverage",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
@@ -50,7 +52,14 @@
     "url": "https://github.com/evilsoft/crocks/issues"
   },
   "homepage": "https://evilsoft.github.io/crocks",
+  "esm": {
+    "mode": "all",
+    "cjs": true
+  },
   "nyc": {
+    "require": [
+      "esm"
+    ],
     "check-coverage": true,
     "lines": 100,
     "statements": 100,
@@ -58,6 +67,7 @@
     "branches": 100,
     "exclude": [
       "src/",
+      "rollup.config.js",
       "build/test/",
       "**/*.spec.js"
     ]

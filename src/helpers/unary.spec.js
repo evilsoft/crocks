@@ -1,9 +1,7 @@
-const test = require('tape')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import { bindFunc } from '../test/helpers'
 
-const bindFunc = helpers.bindFunc
-
-const unary = require('./unary')
+import unary from './unary'
 
 test('unary helper', t => {
   const f = bindFunc(unary)

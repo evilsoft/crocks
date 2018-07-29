@@ -1,9 +1,9 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const curry = require('../core/curry')
-const isFoldable = require('../core/isFoldable')
-const isFunction = require('../core/isFunction')
+import curry from '../core/curry'
+import isFoldable from '../core/isFoldable'
+import isFunction from '../core/isFunction'
 
 function mapReduce(mapFn, reduceFn, empty, xs) {
   if(!isFunction(mapFn)) {
@@ -24,4 +24,4 @@ function mapReduce(mapFn, reduceFn, empty, xs) {
   )
 }
 
-module.exports = curry(mapReduce)
+export default curry(mapReduce)

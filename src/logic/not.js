@@ -1,9 +1,9 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const curry = require('../core/curry')
-const isPredOrFunc = require('../core/isPredOrFunc')
-const predOrFunc = require('../core/predOrFunc')
+import curry from '../core/curry'
+import isPredOrFunc from '../core/isPredOrFunc'
+import predOrFunc from '../core/predOrFunc'
 
 // not : (a -> Boolean) | Pred -> a -> Boolean
 function not(pred, x) {
@@ -16,4 +16,4 @@ function not(pred, x) {
   return !predOrFunc(pred, x)
 }
 
-module.exports = curry(not)
+export default curry(not)

@@ -1,13 +1,13 @@
-const test = require('tape')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import { bindFunc } from '../test/helpers'
 
 const makeFake = helpers.makeFake
 
-const isFunction = require('./isFunction')
+import isFunction from './isFunction'
 
 const identity = x => x
 
-const isMonoid = require('./isMonoid')
+import isMonoid from './isMonoid'
 
 test('isMonoid core', t => {
   const Fake = makeFake([ 'concat', 'empty' ])

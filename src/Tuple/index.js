@@ -3,21 +3,23 @@
 
 const VERSION = 1
 
-const _implements = require('../core/implements')
-const _equals = require('../core/equals')
-const _inspect = require('../core/inspect')
-const _type = require('../core/types').type('Tuple')
-const typeFn = require('../core/types').typeFn
-const fl = require('../core/flNames')
+import _implements from '../core/implements'
+import _equals from '../core/equals'
+import _inspect from '../core/inspect'
+import fl from '../core/flNames'
 
-const isFunction = require('../core/isFunction')
-const isInteger = require('../core/isInteger')
-const isSameType = require('../core/isSameType')
-const isSemigroup = require('../core/isSemigroup')
+import isFunction from '../core/isFunction'
+import isInteger from '../core/isInteger'
+import isSameType from '../core/isSameType'
+import isSemigroup from '../core/isSemigroup'
+
+import { typeFn, type as getType } from '../core/types'
+
+const _type = getType('Tuple')
 
 const constant = x => () => x
 
-function _Tuple(n) {
+export default function _Tuple(n) {
   if (!(isInteger(n) && n >= 1)) {
     throw new TypeError('Tuple: First argument must be an integer')
   }
@@ -170,5 +172,3 @@ function _Tuple(n) {
     }
   }
 }
-
-module.exports = _Tuple

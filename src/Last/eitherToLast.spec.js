@@ -1,16 +1,14 @@
-const test = require('tape')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import { bindFunc } from '../test/helpers'
 
-const bindFunc = helpers.bindFunc
+import Either from '../Either'
+import Last from '.'
+import isFunction from '../core/isFunction'
+import isSameType from '../core/isSameType'
 
-const Either = require('../Either')
-const Last = require('.')
-const isFunction = require('../core/isFunction')
-const isSameType = require('../core/isSameType')
+import eitherToLast from './eitherToLast'
 
 const identity = x => x
-
-const eitherToLast = require('./eitherToLast')
 
 test('eitherToLast transform', t => {
   const f = bindFunc(eitherToLast)

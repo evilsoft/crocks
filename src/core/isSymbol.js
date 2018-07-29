@@ -2,8 +2,6 @@
 /** @author Robert Pearce (rpearce) */
 
 // isSymbol : a -> Boolean
-function isSymbol(x) {
+export default function isSymbol(x) {
   return typeof x === 'symbol'
 }
-
-module.exports = isSymbol

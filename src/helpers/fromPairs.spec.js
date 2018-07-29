@@ -1,11 +1,11 @@
-const test = require('tape')
-const { bindFunc } = require('../test/helpers')
+import test from 'tape'
+import { bindFunc } from '../test/helpers'
 
-const Pair = require('../core/Pair')
-const isObject = require('../core/isObject')
-const unit = require('../core/_unit')
+import Pair from '../core/Pair'
+import isObject from '../core/isObject'
+import unit from '../core/_unit'
 
-const fromPairs = require('./fromPairs')
+import fromPairs from './fromPairs'
 
 test('fromPairs', t => {
   const fn = bindFunc(fromPairs)

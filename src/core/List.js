@@ -3,25 +3,29 @@
 
 const VERSION = 4
 
-const _equals = require('./equals')
-const _implements = require('./implements')
-const _inspect = require('./inspect')
-const type = require('./types').type('List')
-const _type = require('./types').typeFn(type(), VERSION)
-const fl = require('./flNames')
+import _equals from './equals'
+import _implements from './implements'
+import _inspect from './inspect'
+import fl from './flNames'
 
-const array = require('./array')
+import array from './array'
 
-const apOrFunc = require('./apOrFunc')
-const isApplicative = require('./isApplicative')
-const isApply = require('./isApply')
-const isArray = require('./isArray')
-const isEmpty = require('./isEmpty')
-const isFunction = require('./isFunction')
-const isPredOrFunc = require('./isPredOrFunc')
-const isSameType = require('./isSameType')
-const isSemigroup = require('./isSemigroup')
-const predOrFunc = require('./predOrFunc')
+import apOrFunc from './apOrFunc'
+import isApplicative from './isApplicative'
+import isApply from './isApply'
+import isArray from './isArray'
+import isEmpty from './isEmpty'
+import isFunction from './isFunction'
+import isPredOrFunc from './isPredOrFunc'
+import isSameType from './isSameType'
+import isSemigroup from './isSemigroup'
+import predOrFunc from './predOrFunc'
+
+import { typeFn, type as getType } from './types'
+
+export const type = getType('List')
+
+const _type = typeFn(type(), VERSION)
 
 const not =
   fn => x => !fn(x)
@@ -29,12 +33,13 @@ const not =
 const _prepend =
   x => m => x.concat(m)
 
-const { Nothing, Just } = require('./Maybe')
+import Maybe from './Maybe'
+const { Nothing, Just } = Maybe
 
-const _of =
+const of =
   x => List([ x ])
 
-const _empty =
+const empty =
   () => List([])
 
 function fromArray(xs) {
@@ -96,17 +101,11 @@ function List(x) {
     }
   }
 
-  const of =
-    _of
-
   const valueOf =
     () => xs.slice()
 
   const toArray =
     valueOf
-
-  const empty =
-    _empty
 
   const inspect =
     () => `List${_inspect(xs)}`
@@ -341,12 +340,12 @@ function List(x) {
   }
 }
 
-List.of = _of
-List.empty = _empty
+List.of = of
+List.empty = empty
 List.type = type
 
-List[fl.of] = _of
-List[fl.empty] = _empty
+List[fl.of] = of
+List[fl.empty] = empty
 List['@@type'] = _type
 
 List.fromArray =
@@ -356,4 +355,4 @@ List['@@implements'] = _implements(
   [ 'ap', 'chain', 'concat', 'empty', 'equals', 'map', 'of', 'reduce', 'traverse' ]
 )
 
-module.exports = List
+export default List

@@ -28,14 +28,12 @@ constructors to construct `Maybe` instances in most cases. You can use the
 `Just`.
 
 ```javascript
-import Maybe from 'crocks/Maybe'
+import { Just, Nothing } from 'crocks/Maybe'
 
 import chain from 'crocks/pointfree/chain'
 import compose from 'crocks/helpers/compose'
 import ifElse from 'crocks/logic/ifElse'
 import isNumber from 'crocks/predicates/isNumber'
-
-const { Just, Nothing } = Maybe
 
 // gt5 :: Number -> Boolean
 const gt5 =
@@ -168,13 +166,11 @@ will just return another `Nothing`. Anything passed to the constructor will
 be thrown out and mapped to `()`.
 
 ```javascript
-import Maybe from 'crocks/Maybe'
+import { Just, Nothing } from 'crocks/Maybe'
 
 import chain from 'crocks/pointfree/chain'
 import isNumber from 'crocks/predicates/isNumber'
 import safeLift from 'crocks/Maybe/safeLift'
-
-const { Just, Nothing } = Maybe
 
 // add10 :: Number -> Number
 const add10 =
@@ -210,14 +206,12 @@ disjunction or a valid value.  `Just` will wrap any given value in
 a `Just`, signaling the validity of the wrapped value.
 
 ```javascript
-import Maybe from 'crocks/Maybe'
+import { Just, Nothing } from 'crocks/Maybe'
 
 import compose from 'crocks/helpers/compose'
 import ifElse from 'crocks/logic/ifElse'
 import isString from 'crocks/predicates/isString'
 import map from 'crocks/pointfree/map'
-
-const { Just, Nothing } = Maybe
 
 // toUpper :: String -> String
 const toUpper =
@@ -1332,7 +1326,7 @@ eitherToMaybe :: (a -> Either c b) -> a -> Maybe b
 ```
 
 Used to transform a given [`Either`][either] instance to a `Maybe`
-instance or flatten a `Maybe` of `Either` into a `Maybe` when chained, 
+instance or flatten a `Maybe` of `Either` into a `Maybe` when chained,
 `eitherToMaybe` will turn a [`Right`][right] instance into
 a [`Just`](#just) wrapping the original value contained in the [`Right`][right].
 All [`Left`][left] instances will map to a [`Nothing`](#nothing), mapping the
@@ -1405,7 +1399,7 @@ firstToMaybe :: (a -> First b) -> a -> Maybe b
 ```
 
 Used to transform a given [`First`][first] instance to a `Maybe`
-instance or flatten a `Maybe` of `First` into a `Maybe` when chained, 
+instance or flatten a `Maybe` of `First` into a `Maybe` when chained,
 `firstToMaybe` will turn a non-empty instance into a [`Just`](#just) wrapping
 the original value contained within the [`First`][first]. All empty instances
 will map to a [`Nothing`](#nothing).
@@ -1467,10 +1461,10 @@ lastToMaybe :: Last a -> Maybe a
 lastToMaybe :: (a -> Last b) -> a -> Maybe b
 ```
 
-Used to transform a given [`Last`][last] instance to a `Maybe` instance or 
+Used to transform a given [`Last`][last] instance to a `Maybe` instance or
 flatten a `Maybe` of `Last` into a `Maybe` when chained, `lastToMaybe` will
 turn a non-empty instance into a [`Just`](#just) wrapping the original value
-contained within the [`Last`][last]. All empty instances will map to a 
+contained within the [`Last`][last]. All empty instances will map to a
 [`Nothing`](#nothing).
 
 Like all `crocks` transformation functions, `lastToMaybe` has two possible
@@ -1531,7 +1525,7 @@ resultToMaybe :: (a -> Result e b) -> a -> Maybe b
 ```
 
 Used to transform a given `Result` instance to a `Maybe`
-instance or flatten a `Maybe` of `Result` into a `Maybe` when chained, 
+instance or flatten a `Maybe` of `Result` into a `Maybe` when chained,
 `resultToMaybe` will turn an `Ok` instance into a [`Just`](#just) wrapping the
 original value contained in the `Ok`.
 All `Err` instances will map to a [`Nothing`](#nothing), mapping the originally

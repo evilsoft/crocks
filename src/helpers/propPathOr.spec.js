@@ -1,13 +1,13 @@
-const test = require('tape')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import { bindFunc } from '../test/helpers'
 
-const bindFunc = helpers.bindFunc
 
-const equals = require('../core/equals')
-const isFunction = require('../core/isFunction')
-const unit = require('../core/_unit')
 
-const propPathOr = require('./propPathOr')
+import equals from '../core/equals'
+import isFunction from '../core/isFunction'
+import unit from '../core/_unit'
+
+import propPathOr from './propPathOr'
 
 test('propPathOr function', t => {
   const def = 'default value'

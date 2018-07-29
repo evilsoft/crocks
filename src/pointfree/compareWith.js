@@ -1,8 +1,8 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const curry = require('../core/curry')
-const isFunction = require('../core/isFunction')
+import curry from '../core/curry'
+import isFunction from '../core/isFunction'
 
 function compareWith(x, y, m) {
   if(!(m && isFunction(m.compareWith))) {
@@ -12,4 +12,4 @@ function compareWith(x, y, m) {
   return m.compareWith(x, y)
 }
 
-module.exports = curry(compareWith)
+export default curry(compareWith)

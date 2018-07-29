@@ -1,13 +1,13 @@
-const test = require('tape')
-const sinon = require('sinon')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import sinon from 'sinon'
+import { bindFunc } from '../test/helpers'
 
-const bindFunc = helpers.bindFunc
+
 
 const constant = x => () => x
 const identity = x => x
 
-const composeS = require('./composeS')
+import composeS from './composeS'
 
 const Mock = x => ({
   compose: sinon.spy(identity),

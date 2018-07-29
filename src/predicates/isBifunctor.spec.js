@@ -1,8 +1,8 @@
-const test = require('tape')
+import test from 'tape'
 
-const isFunction = require('../core/isFunction')
+import isFunction from '../core/isFunction'
 
-const isBifunctor = require('./isBifunctor')
+import isBifunctor from './isBifunctor'
 
 test('isBifunctor predicate', t => {
   t.ok(isFunction(isBifunctor), 'is a function')

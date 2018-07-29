@@ -3,24 +3,28 @@
 
 const VERSION = 2
 
-const _implements = require('../core/implements')
-const _inspect = require('../core/inspect')
-const _object = require('../core/object')
-const _equals = require('../core/equals')
+import _implements from '../core/implements'
+import _inspect from '../core/inspect'
+import _object from '../core/object'
+import _equals from '../core/equals'
 
-const type = require('../core/types').type('Assign')
-const _type = require('../core/types').typeFn(type(), VERSION)
-const fl = require('../core/flNames')
+import fl from '../core/flNames'
 
-const isNil = require('../core/isNil')
-const isObject = require('../core/isObject')
-const isSameType = require('../core/isSameType')
+import isNil from '../core/isNil'
+import isObject from '../core/isObject'
+import isSameType from '../core/isSameType'
 
-const _empty =
+import { typeFn, type as getType } from '../core/types'
+
+export const type = getType('Assign')
+
+const _type = typeFn(type(), VERSION)
+
+const empty =
   () => Assign({})
 
 function Assign(o) {
-  const x = isNil(o) ? _empty().valueOf() : o
+  const x = isNil(o) ? empty().valueOf() : o
 
   if(!arguments.length || !isObject(x)) {
     throw new TypeError('Assign: Object required')
@@ -28,9 +32,6 @@ function Assign(o) {
 
   const valueOf =
     () => x
-
-  const empty =
-    _empty
 
   const inspect =
     () => `Assign${_inspect(valueOf())}`
@@ -65,10 +66,10 @@ Assign['@@implements'] = _implements(
   [ 'equals', 'concat', 'empty' ]
 )
 
-Assign.empty = _empty
+Assign.empty = empty
 Assign.type = type
 
-Assign[fl.empty] = _empty
+Assign[fl.empty] = empty
 Assign['@@type'] = _type
 
-module.exports = Assign
+export default Assign

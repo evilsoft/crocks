@@ -1,14 +1,14 @@
-const test = require('tape')
-const helpers = require('../test/helpers')
-const MockCrock = require('../test/MockCrock')
+import test from 'tape'
+import { bindFunc } from '../test/helpers'
+import MockCrock from '../test/MockCrock'
 
-const bindFunc = helpers.bindFunc
 
-const isFunction = require('../core/isFunction')
+
+import isFunction from '../core/isFunction'
 
 const identity = x => x
 
-const liftA3 = require('./liftA3')
+import liftA3 from './liftA3'
 
 test('liftA3', t => {
   const fn = bindFunc(liftA3)

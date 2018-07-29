@@ -1,8 +1,8 @@
-const test = require('tape')
+import test from 'tape'
 
-const isFunction = require('./isFunction')
+import isFunction from './isFunction'
 
-const isSame = require('./isSame')
+import isSame from './isSame'
 
 test('isSame', t => {
   t.ok(isFunction(isSame), 'is a function')

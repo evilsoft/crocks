@@ -2,7 +2,7 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 // once : ((*) -> b) -> ((*) -> b)
-function once(fn) {
+export default function once(fn) {
   var called, result
 
   return function() {
@@ -14,5 +14,3 @@ function once(fn) {
     return result
   }
 }
-
-module.exports = once

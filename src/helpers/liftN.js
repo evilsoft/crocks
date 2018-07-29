@@ -1,18 +1,16 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const array = require('../core/array')
-const curry = require('../core/curry')
-const curryN = require('../core/curryN')
+import { ap } from '../core/array'
+import curry from '../core/curry'
+import curryN from '../core/curryN'
 
-const isApply = require('../core/isApply')
-const isArray = require('../core/isArray')
-const isFunction = require('../core/isFunction')
-const isFunctor = require('../core/isFunctor')
-const isInteger = require('../core/isInteger')
-const isSameType = require('../core/isSameType')
-
-const ap = array.ap
+import isApply from '../core/isApply'
+import isArray from '../core/isArray'
+import isFunction from '../core/isFunction'
+import isFunctor from '../core/isFunctor'
+import isInteger from '../core/isInteger'
+import isSameType from '../core/isSameType'
 
 const applyAp = (x, y) => {
   if(!(isSameType(x, y) && (isArray(y) || isApply(y)))) {
@@ -47,4 +45,4 @@ function liftN(n, fn) {
   })
 }
 
-module.exports = curry(liftN)
+export default curry(liftN)

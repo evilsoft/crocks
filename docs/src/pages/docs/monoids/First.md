@@ -85,9 +85,7 @@ empty case to a given `First` by passing a `Nothing`.
 
 ```javascript
 import First from 'crocks/First'
-import Maybe from 'crocks/Maybe'
-
-const { Just, Nothing } = Maybe
+import { Just, Nothing } from 'crocks/Maybe'
 
 First(Just(22))
 //=> First( Just 22 )

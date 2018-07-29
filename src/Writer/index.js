@@ -3,22 +3,26 @@
 
 const VERSION = 2
 
-const _equals = require('../core/equals')
-const _implements = require('../core/implements')
-const _inspect = require('../core/inspect')
-const __type = require('../core/types').type('Writer')()
-const _typeString = require('../core/types').typeFn(__type, VERSION)
-const fl = require('../core/flNames')
+import _equals from '../core/equals'
+import _implements from '../core/implements'
+import _inspect from '../core/inspect'
+import fl from '../core/flNames'
 
-const Pair = require('../core/Pair')
+import Pair from '../core/Pair'
 
-const isFunction = require('../core/isFunction')
-const isMonoid = require('../core/isMonoid')
-const isSameType = require('../core/isSameType')
+import isFunction from '../core/isFunction'
+import isMonoid from '../core/isMonoid'
+import isSameType from '../core/isSameType'
+
+import { typeFn, type as getType } from '../core/types'
+
+const __type = getType('Writer')()
+
+const _typeString = typeFn(__type, VERSION)
 
 const constant = x => () => x
 
-function _Writer(Monoid) {
+export default function _Writer(Monoid) {
   if(!isMonoid(Monoid)) {
     throw new TypeError('Writer: Monoid required for construction')
   }
@@ -127,5 +131,3 @@ function _Writer(Monoid) {
 
   return Writer
 }
-
-module.exports = _Writer

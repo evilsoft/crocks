@@ -2,115 +2,93 @@
 /** @author Ian Hofmann-Hicks (evil) */
 /** @author Henrique Limas */
 
-const combinators = require('./combinators')
-const logic = require('./logic')
-const predicates = require('./predicates')
+export * from './combinators'
+export * from './logic'
+export * from './predicates'
 
-const crocks = {
-  Arrow: require('./Arrow'),
-  Async: require('./Async'),
-  Const: require('./Const'),
-  Either: require('./Either'),
-  Equiv: require('./Equiv'),
-  Identity: require('./Identity'),
-  IO: require('./IO'),
-  List: require('./List'),
-  Maybe: require('./Maybe'),
-  Pair: require('./Pair'),
-  Pred: require('./Pred'),
-  Reader: require('./Reader'),
-  ReaderT: require('./Reader/ReaderT'),
-  Result: require('./Result'),
-  Star: require('./Star'),
-  State: require('./State'),
-  Tuple: require('./Tuple'),
-  Unit: require('./Unit'),
-  Writer: require('./Writer')
-}
+export { default as Arrow } from './Arrow/index'
+export { default as Async } from './Async/index'
+export { default as Const } from './Const/index'
+export { default as Either } from './Either/index'
+export { default as Equiv } from './Equiv/index'
+export { default as Identity } from './Identity/index'
+export { default as IO } from './IO/index'
+export { default as List } from './List/index'
+export { default as Maybe } from './Maybe/index'
+export { default as Pair } from './Pair/index'
+export { default as Pred } from './Pred/index'
+export { default as Reader } from './Reader/index'
+export { default as ReaderT } from './Reader/ReaderT'
+export { default as Result } from './Result/index'
+export { default as Star } from './Star/index'
+export { default as State } from './State/index'
+export { default as Tuple } from './Tuple/index'
+export { default as Unit } from './Unit/index'
+export { default as Writer } from './Writer/index'
 
-const helpers = Object.assign({},
-  require('./helpers'), {
-    branch: require('./Pair/branch'),
-    fanout: require('./Pair/fanout'),
-    find: require('./Maybe/find'),
-    prop: require('./Maybe/prop'),
-    propPath: require('./Maybe/propPath'),
-    safe: require('./Maybe/safe'),
-    safeAfter: require('./Maybe/safeAfter'),
-    safeLift: require('./Maybe/safeLift'),
-    toPairs: require('./Pair/toPairs'),
-    tryCatch: require('./Result/tryCatch')
-  }
-)
+export * from './helpers'
 
-const monoids = {
-  All: require('./All'),
-  Any: require('./Any'),
-  Assign: require('./Assign'),
-  Endo: require('./Endo'),
-  First: require('./First'),
-  Last: require('./Last'),
-  Max: require('./Max'),
-  Min: require('./Min'),
-  Prod: require('./Prod'),
-  Sum: require('./Sum')
-}
+export { default as branch } from './Pair/branch'
+export { default as fanout } from './Pair/fanout'
+export { default as find } from './Maybe/find'
+export { default as prop } from './Maybe/prop'
+export { default as propPath } from './Maybe/propPath'
+export { default as safe } from './Maybe/safe'
+export { default as safeAfter } from './Maybe/safeAfter'
+export { default as safeLift } from './Maybe/safeLift'
+export { default as toPairs } from './Pair/toPairs'
+export { default as tryCatch } from './Result/tryCatch'
 
-const pointfree = Object.assign({},
-  require('./pointfree'), {
-    evalWith: require('./State/evalWith'),
-    execWith: require('./State/execWith'),
-    fst: require('./Pair/fst'),
-    log: require('./Writer/log'),
-    nmap: require('./Tuple/nmap'),
-    project: require('./Tuple/project'),
-    race: require('./Async/race'),
-    read: require('./Writer/read'),
-    snd: require('./Pair/snd')
-  }
-)
+export { default as All } from './All'
+export { default as Any } from './Any'
+export { default as Assign } from './Assign'
+export { default as Endo } from './Endo'
+export { default as First } from './First'
+export { default as Last } from './Last'
+export { default as Max } from './Max'
+export { default as Min } from './Min'
+export { default as Prod } from './Prod'
+export { default as Sum } from './Sum'
 
-const transforms = {
-  arrayToList: require('./List/arrayToList'),
-  asyncToPromise: require('./Async/asyncToPromise'),
-  eitherToAsync: require('./Async/eitherToAsync'),
-  eitherToFirst: require('./First/eitherToFirst'),
-  eitherToLast: require('./Last/eitherToLast'),
-  eitherToMaybe: require('./Maybe/eitherToMaybe'),
-  eitherToResult: require('./Result/eitherToResult'),
-  firstToAsync: require('./Async/firstToAsync'),
-  firstToEither: require('./Either/firstToEither'),
-  firstToLast: require('./Last/firstToLast'),
-  firstToMaybe: require('./Maybe/firstToMaybe'),
-  firstToResult: require('./Result/firstToResult'),
-  lastToAsync: require('./Async/lastToAsync'),
-  lastToEither: require('./Either/lastToEither'),
-  lastToFirst: require('./First/lastToFirst'),
-  lastToMaybe: require('./Maybe/lastToMaybe'),
-  lastToResult: require('./Result/lastToResult'),
-  listToArray: require('./List/listToArray'),
-  maybeToAsync: require('./Async/maybeToAsync'),
-  maybeToEither: require('./Either/maybeToEither'),
-  maybeToFirst: require('./First/maybeToFirst'),
-  maybeToLast: require('./Last/maybeToLast'),
-  maybeToResult: require('./Result/maybeToResult'),
-  resultToAsync: require('./Async/resultToAsync'),
-  resultToEither: require('./Either/resultToEither'),
-  resultToFirst: require('./First/resultToFirst'),
-  resultToLast: require('./Last/resultToLast'),
-  resultToMaybe: require('./Maybe/resultToMaybe'),
-  tupleToArray: require('./Tuple/tupleToArray'),
-  writerToPair: require('./Pair/writerToPair')
-}
+export * from './pointfree'
 
-module.exports = Object.assign(
-  {},
-  combinators,
-  crocks,
-  helpers,
-  logic,
-  monoids,
-  pointfree,
-  predicates,
-  transforms
-)
+export { default as evalWith } from './State/evalWith'
+export { default as execWith } from './State/execWith'
+export { default as fst } from './Pair/fst'
+export { default as log } from './Writer/log'
+export { default as nmap } from './Tuple/nmap'
+export { default as project } from './Tuple/project'
+export { default as race } from './Async/race'
+export { default as read } from './Writer/read'
+export { default as snd } from './Pair/snd'
+
+export { default as arrayToList } from './List/arrayToList'
+export { default as asyncToPromise } from './Async/asyncToPromise'
+export { default as eitherToAsync } from './Async/eitherToAsync'
+export { default as eitherToFirst } from './First/eitherToFirst'
+export { default as eitherToLast } from './Last/eitherToLast'
+export { default as eitherToMaybe } from './Maybe/eitherToMaybe'
+export { default as eitherToResult } from './Result/eitherToResult'
+export { default as firstToAsync } from './Async/firstToAsync'
+export { default as firstToEither } from './Either/firstToEither'
+export { default as firstToLast } from './Last/firstToLast'
+export { default as firstToMaybe } from './Maybe/firstToMaybe'
+export { default as firstToResult } from './Result/firstToResult'
+export { default as lastToAsync } from './Async/lastToAsync'
+export { default as lastToEither } from './Either/lastToEither'
+export { default as lastToFirst } from './First/lastToFirst'
+export { default as lastToMaybe } from './Maybe/lastToMaybe'
+export { default as lastToResult } from './Result/lastToResult'
+export { default as listToArray } from './List/listToArray'
+export { default as maybeToAsync } from './Async/maybeToAsync'
+export { default as maybeToEither } from './Either/maybeToEither'
+export { default as maybeToFirst } from './First/maybeToFirst'
+export { default as maybeToLast } from './Last/maybeToLast'
+export { default as maybeToResult } from './Result/maybeToResult'
+export { default as resultToAsync } from './Async/resultToAsync'
+export { default as resultToEither } from './Either/resultToEither'
+export { default as resultToFirst } from './First/resultToFirst'
+export { default as resultToLast } from './Last/resultToLast'
+export { default as resultToMaybe } from './Maybe/resultToMaybe'
+export { default as tupleToArray } from './Tuple/tupleToArray'
+export { default as writerToPair } from './Pair/writerToPair'

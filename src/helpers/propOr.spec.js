@@ -1,12 +1,12 @@
-const test = require('tape')
-const helpers = require('../test/helpers')
+import test from 'tape'
+import { bindFunc } from '../test/helpers'
 
-const bindFunc = helpers.bindFunc
 
-const equals = require('../core/equals')
-const isFunction = require('../core/isFunction')
 
-const propOr = require('./propOr')
+import equals from '../core/equals'
+import isFunction from '../core/isFunction'
+
+import propOr from './propOr'
 
 test('propOr function', t => {
   const def = 'default value'

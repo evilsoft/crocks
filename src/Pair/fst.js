@@ -1,14 +1,12 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isFunction = require('../core/isFunction')
+import isFunction from '../core/isFunction'
 
-function fst(m) {
+export default function fst(m) {
   if(!(m && isFunction(m.fst))) {
     throw new TypeError('fst: Pair required')
   }
 
   return m.fst()
 }
-
-module.exports = fst

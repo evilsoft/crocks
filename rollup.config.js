@@ -7,8 +7,10 @@ const input = 'src/index.js'
 /* istanbul ignore next */
 export default [{
   input,
+  experimentalCodeSplitting: true,
+  experimentalPreserveModules: true,
   output: {
-    file: 'build/cjs/crocks.js',
+    dir: 'build/cjs',
     plugins: [
       resolve(),
       buble(),

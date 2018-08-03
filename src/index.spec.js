@@ -79,6 +79,7 @@ const unit = require('./helpers/unit')
 // logic
 const and = require('./logic/and')
 const ifElse = require('./logic/ifElse')
+const implies = require('./logic/implies')
 const not = require('./logic/not')
 const or = require('./logic/or')
 const unless = require('./logic/unless')
@@ -292,6 +293,7 @@ test('entry', t => {
   // logic
   t.equal(crocks.and, and, 'provides the and logic')
   t.equal(crocks.ifElse, ifElse, 'provides the ifElse logic')
+  t.equal(crocks.implies, implies, 'provides the implies logic')
   t.equal(crocks.not, not, 'provides the not logic')
   t.equal(crocks.or, or, 'provides the or logic')
   t.equal(crocks.unless, unless, 'provides the unless logic')

@@ -13,7 +13,7 @@ function implies(p, q) {
     )
   }
 
-  return x => predOrFunc(p, x) ? predOrFunc(q, x) : true
+  return x => !predOrFunc(p, x) || !!predOrFunc(q, x)
 }
 
 module.exports = curry(implies)

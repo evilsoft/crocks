@@ -75,6 +75,7 @@ accepted Datatype):
 | `merge` | `(a -> b -> c) -> m a b -> c` | `crocks/pointfree` |
 | [`nmap`][nmap] | `Integer -> ...(* -> *) m ...* -> m ...*` | `crocks/Tuple` |
 | `option` | `a -> m a -> a` | `crocks/pointfree` |
+| `project` | `Integer -> m ...* -> a` | `crocks/pointfree` |
 | `promap` | `(c -> a) -> (b -> d) -> m a b -> m c d` | `crocks/pointfree` |
 | [`race`][race] | `m e a -> m e a -> m e a` | `crocks/Async` |
 | `read` | `m a b -> Pair a b` | `crocks/Writer` |

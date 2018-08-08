@@ -25,7 +25,7 @@ module.exports = {
   map: require('./map'),
   merge: require('../pointfree/merge'),
   option: require('./option'),
-  project: require('./project'),
+  project: require('../Tuple/project'),
   promap: require('./promap'),
   race: require('../Async/race'),
   read: require('../Writer/read'),

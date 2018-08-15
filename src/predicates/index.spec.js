@@ -38,6 +38,8 @@ const isString = require('./isString')
 const isTraversable = require('./isTraversable')
 const propEq = require('./propEq')
 const propPathEq = require('./propPathEq')
+const propSatisfies = require('./propSatisfies')
+const propPathSatisfies = require('./propPathSatisfies')
 
 test('predicates entry', t => {
   t.equal(index.hasProp, hasProp, 'provides the hasProp predicate')
@@ -76,6 +78,8 @@ test('predicates entry', t => {
   t.equal(index.isTraversable, isTraversable, 'provides the isTraversable predicate')
   t.equal(index.propEq, propEq, 'provides the propEq predicate')
   t.equal(index.propPathEq, propPathEq, 'provides the propEq predicate')
+  t.equal(index.propSatisfies, propSatisfies, 'provides the propSatisfies predicate')
+  t.equal(index.propPathSatisfies, propPathSatisfies, 'provides the propPathSatisfies predicate')
 
   t.end()
 })

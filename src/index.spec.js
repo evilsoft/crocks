@@ -179,6 +179,8 @@ const isSymbol = require('./predicates/isSymbol')
 const isTraversable = require('./predicates/isTraversable')
 const propEq = require('./predicates/propEq')
 const propPathEq = require('./predicates/propPathEq')
+const propSatisfies = require('./predicates/propSatisfies')
+const propPathSatisfies = require('./predicates/propPathSatisfies')
 
 // transforms
 const arrayToList = require('./List/arrayToList')
@@ -393,6 +395,8 @@ test('entry', t => {
   t.equal(crocks.isTraversable, isTraversable, 'provides the isTraversable predicate')
   t.equal(crocks.propEq, propEq, 'provides the propEq predicate')
   t.equal(crocks.propPathEq, propPathEq, 'provides the propEq predicate')
+  t.equal(crocks.propSatisfies, propSatisfies, 'provides the propSatisfies predicate')
+  t.equal(crocks.propPathSatisfies, propPathSatisfies, 'provides the propPathSatisfies predicate')
 
   // transforms
   t.equal(crocks.arrayToList, arrayToList, 'provides the arrayToList transform')

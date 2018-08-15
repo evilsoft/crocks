@@ -3,7 +3,6 @@
 
 const curry = require('../core/curry')
 const isArray = require('../core/isArray')
-const isDefined = require('../core/isDefined')
 const isEmpty  = require('../core/isEmpty')
 const isInteger = require('../core/isInteger')
 const isNil = require('../core/isNil')
@@ -45,10 +44,6 @@ function propPathSatisfies(keys, pred, x) {
     }
 
     target = target[key]
-
-    if(!isDefined(target)) {
-      return false
-    }
   }
 
   return !!predOrFunc(pred, target)

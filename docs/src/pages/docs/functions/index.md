@@ -112,6 +112,7 @@ type: `Pred a` and vice-versa
 |:---|:---|:---|
 | [`and`][and] | `(a -> Boolean) -> (a -> Boolean) -> a -> Boolean` | `crocks/logic/and` |
 | [`ifElse`][ifelse] | `(a -> Boolean) -> (a -> b) -> (a -> b) -> a -> b` | `crocks/logic/ifElse` |
+| [`implies`][implies] | `(a -> Boolean) -> (a -> Boolean) -> a -> Boolean` | `crocks/logic/implies` |
 | [`not`][not] | `(a -> Boolean) -> a -> Boolean` | `crocks/logic/not` |
 | [`or`][or] | `(a -> Boolean) -> (a -> Boolean) -> a -> Boolean` | `crocks/logic/or` |
 | [`unless`][unless] | `(a -> Boolean) -> (a -> a) -> a -> a` | `crocks/logic/unless` |
@@ -177,6 +178,7 @@ type: `Pred a` and vice-versa
 
 [and]: logic-functions.html#and
 [ifelse]: logic-functions.html#ifelse
+[implies]: logic-functions.html#implies
 [not]: logic-functions.html#not
 [or]: logic-functions.html#or
 [unless]: logic-functions.html#unless

@@ -3,8 +3,10 @@
 
 const isApply = require('./isApply')
 const isArray = require('./isArray')
+const isEmpty = require('./isEmpty')
 const isFunction = require('./isFunction')
 const isSameType = require('./isSameType')
+const isSemigroup = require('./isSemigroup')
 const apOrFunc = require('./apOrFunc')
 
 const identity =
@@ -67,6 +69,28 @@ function traverse(f, fn, m) {
   return m.reduceRight(runTraverse('traverse', fn), af([]))
 }
 
+function fold(m) {
+  if(isEmpty(m)) {
+    throw new TypeError(
+      'Array.fold: Non-empty Array of Semigroups required'
+    )
+  }
+
+  const head =
+    m[0]
+
+  if(!isSemigroup(head)) {
+    throw new TypeError('Array.fold: Must contain Semigroups of the same type')
+  }
+
+  return  m.reduce(function(x, y) {
+    if(!isSameType(x, y)) {
+      throw new TypeError('Array.fold: Must contain Semigroups of the same type')
+    }
+    return x.concat(y)
+  })
+}
+
 module.exports = {
-  ap, chain, map, sequence, traverse
+  ap, chain, fold, map, sequence, traverse
 }

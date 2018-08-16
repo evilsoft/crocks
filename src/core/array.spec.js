@@ -235,3 +235,27 @@ test('array traverse with Applicative TypeRep', t => {
 
   t.end()
 })
+
+test('array fold errors', t => {
+  const fn = bindFunc(x => array.fold(x))
+
+  const emptyErr = /^TypeError: Array.fold: Non-empty Array of Semigroups required/
+  t.throws(fn([]), emptyErr, 'throws when passed a single element array with no semigroup')
+
+  const notSameSemi = /^TypeError: Array.fold: Must contain Semigroups of the same type/
+  t.throws(fn([ 0 ]), notSameSemi, 'throws when passed a single element array with no semigroup')
+
+  t.throws(fn([ '', 0 ]), notSameSemi, 'throws when not elements are semigroups')
+  t.throws(fn([ '', [] ]), notSameSemi, 'throws when different semigroups')
+
+  t.end()
+})
+
+test('array fold functionality', t => {
+  const fold = array.fold
+
+  t.same(fold([ [ 1 ], [ 2 ] ]), [ 1, 2 ], 'combines and extracts semigroups')
+  t.same(fold([ 'happy' ]), 'happy', 'extracts a single semigroup')
+
+  t.end()
+})

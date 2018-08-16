@@ -91,6 +91,38 @@ function fold(m) {
   })
 }
 
+function foldMap(fn, m) {
+  if(isEmpty(m)) {
+    throw new TypeError(
+      'Array.foldMap: Non-empty Array required'
+    )
+  }
+
+  if(m.length === 1) {
+    const val = fn(m[0])
+
+    if(!isSemigroup(val)) {
+      throw new TypeError(
+        'Array.foldMap: Provided function must return Semigroups of the same type'
+      )
+    }
+
+    return val
+  }
+
+  return m.slice(1).reduce(function(semi, x) {
+    const val = fn(x)
+
+    if(!(isSameType(semi, val) && isSemigroup(val))) {
+      throw new TypeError(
+        'Array.foldMap: Provided function must return Semigroups of the same type'
+      )
+    }
+
+    return semi.concat(val)
+  }, fn(m[0]))
+}
+
 module.exports = {
-  ap, chain, fold, map, sequence, traverse
+  ap, chain, fold, foldMap, map, sequence, traverse
 }

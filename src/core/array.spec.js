@@ -245,7 +245,7 @@ test('array fold errors', t => {
   const notSameSemi = /^TypeError: Array.fold: Must contain Semigroups of the same type/
   t.throws(fn([ 0 ]), notSameSemi, 'throws when passed a single element array with no semigroup')
 
-  t.throws(fn([ '', 0 ]), notSameSemi, 'throws when not elements are semigroups')
+  t.throws(fn([ '', 0 ]), notSameSemi, 'throws when not all elements are semigroups')
   t.throws(fn([ '', [] ]), notSameSemi, 'throws when different semigroups')
 
   t.end()
@@ -256,6 +256,31 @@ test('array fold functionality', t => {
 
   t.same(fold([ [ 1 ], [ 2 ] ]), [ 1, 2 ], 'combines and extracts semigroups')
   t.same(fold([ 'happy' ]), 'happy', 'extracts a single semigroup')
+
+  t.end()
+})
+
+test('array foldMap errors', t => {
+  const fn = bindFunc(x => array.foldMap(identity, x))
+
+  const emptyErr = /^TypeError: Array.foldMap: Non-empty Array required/
+  t.throws(fn([]), emptyErr, 'throws when passed an empty array')
+
+  const notSameSemi = /^TypeError: Array.foldMap: Provided function must return Semigroups of the same type/
+  t.throws(fn([ 0 ]), notSameSemi, 'throws when function does not return a Semigroup')
+
+  t.throws(fn([ '', 0 ]), notSameSemi, 'throws when not all returned values are Semigroups')
+  t.throws(fn([ '', [] ]), notSameSemi, 'throws when different semigroups are returned')
+
+  t.end()
+})
+
+test('array foldMap functionality', t => {
+  const fold = xs =>
+    array.foldMap(x => x.toString(), xs)
+
+  t.same(fold([ 1, 2 ]), '12', 'combines and extracts semigroups')
+  t.same(fold([ 3 ]), '3', 'extracts a single semigroup')
 
   t.end()
 })

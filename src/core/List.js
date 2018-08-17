@@ -190,29 +190,26 @@ function List(x) {
       )
     }
 
-    if(xs.length === 1) {
-      const val = fn(xs[0])
+    const head =
+      fn(xs[0])
 
-      if(!isSemigroup(val)) {
-        throw new TypeError(
-          'List.foldMap: Provided function must return Semigroups of the same type'
-        )
-      }
-
-      return val
+    if(!isSemigroup(head)) {
+      throw new TypeError(
+        'List.foldMap: Provided function must return Semigroups of the same type'
+      )
     }
 
-    return xs.slice(1).reduce(function(semi, x) {
-      const val = fn(x)
+    return xs.length !== 1
+      ? xs.slice(1).reduce(function(semi, x) {
+        const val = fn(x)
 
-      if(!(isSameType(semi, val) && isSemigroup(val))) {
-        throw new TypeError(
-          'List.foldMap: Provided function must return Semigroups of the same type'
-        )
-      }
-
-      return semi.concat(val)
-    }, fn(xs[0]))
+        if(!(isSameType(semi, val) && isSemigroup(val))) {
+          throw new TypeError(
+            'List.foldMap: Provided function must return Semigroups of the same type'
+          )
+        }
+        return semi.concat(val)
+      }, head) : head
   }
 
   function filter(pred) {

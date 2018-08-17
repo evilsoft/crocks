@@ -98,29 +98,28 @@ function foldMap(fn, m) {
     )
   }
 
-  if(m.length === 1) {
-    const val = fn(m[0])
+  const head =
+    fn(m[0])
 
-    if(!isSemigroup(val)) {
-      throw new TypeError(
-        'Array.foldMap: Provided function must return Semigroups of the same type'
-      )
-    }
-
-    return val
+  if(!isSemigroup(head)) {
+    throw new TypeError(
+      'Array.foldMap: Provided function must return Semigroups of the same type'
+    )
   }
 
-  return m.slice(1).reduce(function(semi, x) {
-    const val = fn(x)
+  return m.length === 1
+    ? head
+    : m.slice(1).reduce(function(semi, x) {
+      const val = fn(x)
 
-    if(!(isSameType(semi, val) && isSemigroup(val))) {
-      throw new TypeError(
-        'Array.foldMap: Provided function must return Semigroups of the same type'
-      )
-    }
+      if(!(isSameType(semi, val) && isSemigroup(val))) {
+        throw new TypeError(
+          'Array.foldMap: Provided function must return Semigroups of the same type'
+        )
+      }
 
-    return semi.concat(val)
-  }, fn(m[0]))
+      return semi.concat(val)
+    }, head)
 }
 
 module.exports = {

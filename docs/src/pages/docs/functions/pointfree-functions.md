@@ -2,7 +2,7 @@
 title: "Point-free Functions"
 description: "Point-free Functions API"
 layout: "notopic"
-functions: ["alt", "ap", "bimap", "both", "chain", "coalesce", "comparewith", "concat", "cons", "contramap", "either", "empty", "equals", "extend", "filter", "first", "fold", "head", "map", "merge", "option", "promap", "race", "reduce", "reduceright", "run", "runwith", "second", "sequence", "swap", "tail", "traverse", "valueof"]
+functions: ["alt", "ap", "bimap", "both", "chain", "coalesce", "comparewith", "concat", "cons", "contramap", "either", "empty", "equals", "extend", "filter", "first", "fold", "foldmap", "head", "map", "merge", "option", "promap", "race", "reduce", "reduceright", "run", "runwith", "second", "sequence", "swap", "tail", "traverse", "valueof"]
 weight: 50
 ---
 
@@ -68,6 +68,7 @@ accepted Datatype):
 | `filter` | <code>((a -> Boolean) &#124; Pred a) -> m a -> m a</code> | `crocks/pointfree` |
 | `first` | `m (a -> b) -> m (Pair a c -> Pair b c)` | `crocks/pointfree` |
 | `fold` | `Semigroup s => m s -> s` | `crocks/pointfree` |
+| `foldMap` | `Semigroup s => (a -> s) -> m a -> s` | `crocks/pointfree` |
 | [`fst`][fst] | `m a b -> a` | `crocks/Pair` |
 | `head` | `m a -> Maybe a` | `crocks/pointfree` |
 | `log` | `m a b -> a` | `crocks/Writer` |
@@ -113,6 +114,7 @@ accepted Datatype):
 | `filter` | `Array`, `List`, `Object` |
 | `first` | [`Arrow`][arrow-first], `Function`, `Star` |
 | `fold` | `Array`, `List` |
+| `foldMap` | `Array`, `List` |
 | [`fst`][fst] | [`Pair`][pair-fst] |
 | `head` | `Array`, `List`, `String` |
 | `log` | `Writer` |

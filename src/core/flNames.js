@@ -3,6 +3,7 @@
 
 module.exports = {
   alt: 'fantasy-land/alt',
+  ap: 'fantasy-land/ap',
   bimap: 'fantasy-land/bimap',
   chain: 'fantasy-land/chain',
   compose: 'fantasy-land/compose',

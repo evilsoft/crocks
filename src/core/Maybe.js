@@ -221,6 +221,23 @@ function Maybe(u) {
     )
   }
 
+  function applyTo(method) {
+    return function(liftedApply) {
+      if(!isSameType(Maybe, liftedApply)) {
+        throw new TypeError(`Maybe.${method}: Maybe required`)
+      }
+
+      return either(
+        Maybe.Nothing,
+        a => liftedApply.either(
+          Maybe.Nothing,
+          f =>
+            Maybe.Just(f(a))
+        )
+      )
+    }
+  }
+
   return {
     inspect, toString: inspect, either,
     option, type, equals, coalesce,
@@ -230,6 +247,8 @@ function Maybe(u) {
     chain: chain('chain'),
     concat: concat('concat'),
     map: map('map'),
+    applyTo: applyTo('applyTo'),
+    [fl.ap]: applyTo(fl.ap),
     [fl.zero]: zero,
     [fl.of]: of,
     [fl.equals]: equals,

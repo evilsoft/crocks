@@ -44,5 +44,6 @@ module.exports = {
   toPairs: require('../Pair/toPairs'),
   tryCatch: require('../Result/tryCatch'),
   unary: require('./unary'),
-  unit: require('./unit')
+  unit: require('./unit'),
+  unsetPath: require('./unsetPath')
 }

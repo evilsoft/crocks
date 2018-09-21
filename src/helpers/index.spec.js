@@ -48,6 +48,7 @@ const toPairs = require('../Pair/toPairs')
 const tryCatch = require('../Result/tryCatch')
 const unary = require('./unary')
 const unit = require('./unit')
+const unsetPath = require('./unsetPath')
 
 test('helpers entry', t => {
   t.equal(index.assign, assign, 'provides the assign helper')
@@ -96,6 +97,7 @@ test('helpers entry', t => {
   t.equal(index.tryCatch, tryCatch, 'provides the tryCatch helper')
   t.equal(index.unary, unary, 'provides the unary helper')
   t.equal(index.unit, unit, 'provides the unit helper')
+  t.equal(index.unsetPath, unsetPath, 'provides the unsetPath helper')
 
   t.end()
 })

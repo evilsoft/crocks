@@ -75,6 +75,7 @@ const toPairs = require('./Pair/toPairs')
 const tryCatch = require('./Result/tryCatch')
 const unary = require('./helpers/unary')
 const unit = require('./helpers/unit')
+const unsetPath = require('./helpers/unsetPath')
 
 // logic
 const and = require('./logic/and')
@@ -292,6 +293,7 @@ test('entry', t => {
   t.equal(crocks.tryCatch, tryCatch, 'provides the tryCatch helper')
   t.equal(crocks.unary, unary, 'provides the unary helper')
   t.equal(crocks.unit, unit, 'provides the unit helper')
+  t.equal(crocks.unsetPath, unsetPath, 'provides the unsetPath helper')
 
   // logic
   t.equal(crocks.and, and, 'provides the and logic')

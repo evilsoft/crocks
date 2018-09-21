@@ -1253,3 +1253,53 @@ test('Async chain properties (Monad)', t => {
 
   t.end()
 })
+
+test('Async applyTo', t => {
+  const f = sinon.spy()
+
+  Async.of(3).applyTo(Async.of())
+
+  t.ok(f.calledWith(0), 'wraps the value passed into an Async')
+
+  t.end()
+})
+
+// todo: What can we generalize for all Applicative law tests??
+test('Async applyTo properties (Applicative)', t => {
+  // https://github.com/fantasyland/fantasy-land#applicative
+
+  {
+    const identity = x => x
+
+    const a = sinon.spy()
+    const b = sinon.spy()
+    Async.of(3).applyTo(Async.of(identity)).fork(unit, a)
+    Async.of(3).fork(unit, b)
+    t.same(a.args[0], b.args[0], 'identity')
+  }
+
+  {
+    const f = x => x * 3
+
+    const a = sinon.spy()
+    const b = sinon.spy()
+    Async.of(4).applyTo(Async.of(f)).fork(unit, a)
+    Async.of(f(4)).fork(unit, b)
+
+    t.same(a.args[0], b.args[0], 'homomorphism')
+  }
+
+  {
+    const y = 3
+    const u = Async.of(x => x * 4)
+
+    const a = sinon.spy()
+    const b = sinon.spy()
+    Async.of(y).applyTo(u).fork(unit, a)
+    u.applyTo(Async.of(f => f(y))).fork(unit, b)
+
+    t.same(a.args[0], b.args[0], 'interchange')
+  }
+
+  t.end()
+})

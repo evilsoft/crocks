@@ -330,26 +330,31 @@ function Async(fn) {
       }
 
       // liftedApply is Async[A => B]
-
-      // otherwise, apply it?
       return Async(function (reject, resolve) {
         let resolvedA = null
         let resolvedF = null
-        function finish() {
-          if (resolvedA && resolvedF) {
+        let cancelled = false
+
+        const rejectOnce = once(reject)
+
+        // todo: not sure if this is necessary
+        const cancel = () => { cancelled = true }
+
+        function resolveBoth() {
+          if (!cancelled && resolvedA && resolvedF) {
             resolve(resolvedF(resolvedA))
           }
         }
 
-        // ack! whichever one rejects first, the resulting Aync will have
-        fork(reject, a => {
+        const cancelValue = fork(rejectOnce, a => {
           resolvedA = a
-          finish()
+          resolveBoth()
         })
-        liftedApply.fork(reject, b => {
+        const cancelLifted = liftedApply.fork(rejectOnce, b => {
           resolvedF = b
-          finish()
+          resolveBoth()
         })
+        return () => { cancelLifted(); cancelValue(); cancel() }
       })
     }
   }
@@ -363,7 +368,7 @@ function Async(fn) {
     bimap: bimap('bimap'),
     map: map('map'),
     chain: chain('chain'),
-    applyTo: applyTo,
+    applyTo: applyTo('applyTo'),
     [fl.ap]: applyTo(fl.ap),
     [fl.of]: of,
     [fl.alt]: alt(fl.alt),

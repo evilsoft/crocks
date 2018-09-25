@@ -164,6 +164,21 @@ function Either(u) {
     )
   }
 
+  function applyTo(method) {
+    return function(liftedApply) {
+      if(!isSameType(Either, liftedApply)) {
+        throw new TypeError(`Either.${method}: Either required`)
+      }
+      if(!liftedApply.either(constant(true), isFunction)) {
+        throw new TypeError(`Either.${method}: Wrapped value must be a function`)
+      }
+      return either(
+        Either.Left,
+        value => liftedApply.map(fn => fn(value))
+      )
+    }
+  }
+
   function chain(method) {
     return function(fn) {
       if(!isFunction(fn)) {
@@ -236,6 +251,8 @@ function Either(u) {
     concat: concat('concat'),
     chain: chain('chain'),
     map: map('map'),
+    applyTo: applyTo('applyTo'),
+    [fl.ap]: applyTo(fl.ap),
     [fl.of]: of,
     [fl.equals]: equals,
     [fl.alt]: alt(fl.alt),

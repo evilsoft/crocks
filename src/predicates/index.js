@@ -32,7 +32,10 @@ module.exports = {
   isSemigroupoid: require('./isSemigroupoid'),
   isSetoid: require('./isSetoid'),
   isString: require('./isString'),
+  isSymbol: require('./isSymbol'),
   isTraversable: require('./isTraversable'),
   propEq: require('./propEq'),
-  propPathEq: require('./propPathEq')
+  propPathEq: require('./propPathEq'),
+  propSatisfies: require('./propSatisfies'),
+  propPathSatisfies: require('./propPathSatisfies')
 }

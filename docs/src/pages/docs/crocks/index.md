@@ -24,7 +24,7 @@ but what they do from type to type may vary.
 | [`Equiv`][equiv] | [`empty`][equiv-empty] | [`concat`][equiv-concat], [`contramap`][equiv-contra], [`compareWith`][equiv-compare], [`valueOf`][equiv-value] |
 | `Identity` | `of` | `ap`, `chain`, `concat`, `equals`, `map`, `of`, `sequence`, `traverse`, `valueOf` |
 | `IO` | `of` | `ap`, `chain`, `map`, `of`, `run` |
-| `List` |  `empty`, `fromArray`, `of` | `ap`, `chain`, `concat`, `cons`, `empty`, `equals`, `filter`, `head`, `map`, `of`, `reduce`, `reduceRight`, `reject`, `sequence`, `tail`, `toArray`, `traverse`, `valueOf` |
+| `List` |  `empty`, `fromArray`, `of` | `ap`, `chain`, `concat`, `cons`, `empty`, `equals`, `filter`, `fold`, `foldMap`, `head`, `map`, `of`, `reduce`, `reduceRight`, `reject`, `sequence`, `tail`, `toArray`, `traverse`, `valueOf` |
 | [`Maybe`][maybe] | [`Nothing`][maybe-nothing], [`Just`][maybe-just], [`of`][maybe-of], [`zero`][maybe-zero] | [`alt`][maybe-alt], [`ap`][maybe-ap], [`chain`][maybe-chain], [`coalesce`][maybe-coalesce], [`concat`][maybe-concat], [`equals`][maybe-equals], [`either`][maybe-either], [`map`][maybe-map], [`of`][maybe-of], [`option`][maybe-option], [`sequence`][maybe-sequence], [`traverse`][maybe-traverse], [`zero`][maybe-zero] |
 | [`Pair`][pair] | --- | [`ap`][pair-ap], [`bimap`][pair-bimap], [`chain`][pair-chain], [`concat`][pair-concat], [`equals`][pair-equals], [`extend`][pair-extend], [`fst`][pair-fst], [`map`][pair-map], [`merge`][pair-merge], [`sequence`][pair-sequence], [`snd`][pair-snd], [`swap`][pair-swap], [`traverse`][pair-traverse], [`toArray`][pair-toarray] |
 | [`Pred`][pred] * | [`empty`][pred-empty] | [`concat`][pred-concat], [`contramap`][pred-contra], [`runWith`][pred-run], [`valueOf`][pred-value] |
@@ -33,6 +33,7 @@ but what they do from type to type may vary.
 | `Result` | `Err`, `Ok`, `of`| `alt`, `ap`, `bimap`, `chain`, `coalesce`, `concat`, `either`, `equals`, `map`, `of`, `sequence`, `swap`, `traverse` |
 | `Star` | `id` | `both`, `compose`, `contramap`, `map`, `promap`, `runWith` |
 | [`State`][state] | [`get`][state-get], [`modify`][state-modify], [`of`][state-of], [`put`][state-put] | [`ap`][state-ap], [`chain`][state-chain], [`evalWith`][state-eval], [`execWith`][state-exec], [`map`][state-map], [`runWith`][state-run] |
+| [`Tuple`][tuple] | --- | [`concat`][tuple-concat], [`equals`][tuple-equals], [`map`][tuple-map], [`mapAll`][tuple-mapall], [`merge`][tuple-merge], [`project`][tuple-project], [`toArray`][tuple-toarray] |
 | `Unit` | `empty`, `of` | `ap`, `chain`, `concat`, `empty`, `equals`, `map`, `of`, `valueOf` |
 | `Writer`| `of` | `ap`, `chain`, `equals`, `log`, `map`, `of`, `read`, `valueOf` |
 
@@ -155,3 +156,12 @@ but what they do from type to type may vary.
 [state-run]: State.html#runwith
 [state-eval]: State.html#evalwith
 [state-exec]: State.html#execwith
+
+[tuple]: Tuple.html
+[tuple-concat]: Tuple.html#concat
+[tuple-equals]: Tuple.html#equals
+[tuple-map]: Tuple.html#map
+[tuple-mapall]: Tuple.html#mapall
+[tuple-merge]: Tuple.html#merge
+[tuple-project]: Tuple.html#project
+[tuple-toarray]: Tuple.html#toarray

@@ -160,18 +160,56 @@ function List(x) {
     if(isEmpty(xs)) {
       throw new TypeError('List.fold: List must contain at least one Semigroup')
     }
-    if(xs.length === 1) {
-      if(!isSemigroup(xs[0])) {
-        throw new TypeError('List.fold: List must contain Semigroups of the same type')
-      }
-      return xs[0]
+
+    const head =
+      xs[0]
+
+    if(!isSemigroup(head)) {
+      throw new TypeError('List.fold: List must contain Semigroups of the same type')
     }
+
     return xs.reduce(function(x, y) {
-      if(!(isSemigroup(x) && isSameType(x, y))) {
+      if(!isSameType(x, y)) {
         throw new TypeError('List.fold: List must contain Semigroups of the same type')
       }
+
       return x.concat(y)
     })
+  }
+
+  function foldMap(fn) {
+    if(!isFunction(fn)) {
+      throw new TypeError(
+        'List.foldMap: Semigroup returning function required'
+      )
+    }
+
+    if(isEmpty(xs)) {
+      throw new TypeError(
+        'List.foldMap: List must not be empty'
+      )
+    }
+
+    const head =
+      fn(xs[0])
+
+    if(!isSemigroup(head)) {
+      throw new TypeError(
+        'List.foldMap: Provided function must return Semigroups of the same type'
+      )
+    }
+
+    return xs.length !== 1
+      ? xs.slice(1).reduce(function(semi, x) {
+        const val = fn(x)
+
+        if(!(isSameType(semi, val) && isSemigroup(val))) {
+          throw new TypeError(
+            'List.foldMap: Provided function must return Semigroups of the same type'
+          )
+        }
+        return semi.concat(val)
+      }, head) : head
   }
 
   function filter(pred) {
@@ -281,7 +319,7 @@ function List(x) {
   return {
     inspect, toString: inspect, valueOf, toArray,
     head, tail, cons, type, equals, empty,
-    reduceRight, fold, filter, reject,
+    reduceRight, fold, foldMap, filter, reject,
     ap, of, sequence, traverse,
     concat: concat('concat'),
     map: map('map'),

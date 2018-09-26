@@ -414,7 +414,7 @@ test('List reduceRight functionality', t => {
 test('List fold errors', t => {
   const f = bindFunc(x => List(x).fold())
 
-  const noSemi = /List.fold: List must contain Semigroups of the same type/
+  const noSemi = /^TypeError: List.fold: List must contain Semigroups of the same type/
   t.throws(f(undefined), noSemi, 'throws when contains single undefined')
   t.throws(f(null), noSemi, 'throws when contains single null')
   t.throws(f(0), noSemi, 'throws when contains single falsey number')
@@ -424,10 +424,10 @@ test('List fold errors', t => {
   t.throws(f({}), noSemi, 'throws when contains a single object')
   t.throws(f(unit), noSemi, 'throws when contains a single function')
 
-  const empty = /List.fold: List must contain at least one Semigroup/
+  const empty = /^TypeError: List.fold: List must contain at least one Semigroup/
   t.throws(f([]), empty, 'throws when empty')
 
-  const diff = /List.fold: List must contain Semigroups of the same type/
+  const diff = /^TypeError: List.fold: List must contain Semigroups of the same type/
   t.throws(f([ [], '' ]), diff, 'throws when empty')
 
   t.end()
@@ -438,6 +438,45 @@ test('List fold functionality', t => {
 
   t.same(f([ [ 1 ], [ 2 ] ]), [ 1, 2 ], 'combines and extracts semigroups')
   t.equals(f('lucky'), 'lucky', 'extracts a single semigroup')
+
+  t.end()
+})
+
+test('List foldMap errors', t => {
+  const noFunc = bindFunc(fn => List([ 1 ]).foldMap(fn))
+
+  const funcErr = /^TypeError: List.foldMap: Semigroup returning function required/
+  t.throws(noFunc(undefined), funcErr, 'throws with undefined')
+  t.throws(noFunc(null), funcErr, 'throws with null')
+  t.throws(noFunc(0), funcErr, 'throws with falsey number')
+  t.throws(noFunc(1), funcErr, 'throws with truthy number')
+  t.throws(noFunc(false), funcErr, 'throws with false')
+  t.throws(noFunc(true), funcErr, 'throws with true')
+  t.throws(noFunc(''), funcErr, 'throws with falsey string')
+  t.throws(noFunc('string'), funcErr, 'throws with truthy string')
+  t.throws(noFunc({}), funcErr, 'throws with an object')
+  t.throws(noFunc([]), funcErr, 'throws with an array')
+
+  const fn = bindFunc(x => List(x).foldMap(identity))
+
+  const emptyErr = /^TypeError: List.foldMap: List must not be empty/
+  t.throws(fn([]), emptyErr, 'throws when passed an empty List')
+
+  const notSameSemi = /^TypeError: List.foldMap: Provided function must return Semigroups of the same type/
+  t.throws(fn([ 0 ]), notSameSemi, 'throws when function does not return a Semigroup')
+
+  t.throws(fn([ '', 0 ]), notSameSemi, 'throws when not all returned values are Semigroups')
+  t.throws(fn([ '', [] ]), notSameSemi, 'throws when different semigroups are returned')
+
+  t.end()
+})
+
+test('List foldMap functionality', t => {
+  const fold = xs =>
+    List(xs).foldMap(x => x.toString())
+
+  t.same(fold([ 1, 2 ]), '12', 'combines and extracts semigroups')
+  t.same(fold([ 3 ]), '3', 'extracts a single semigroup')
 
   t.end()
 })

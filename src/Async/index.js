@@ -128,15 +128,29 @@ function Async(fn) {
     }
 
     let cancelled = false
+    let settled = false
 
-    const cancel = () => { cancelled = true }
+    const cancel =
+      () => { cancelled = true }
 
     const forkCancel =
       isFunction(cleanup) ? cleanup : unit
 
+    const settle = (f, x) => {
+      if(!settled) {
+        settled = true
+
+        if(cancelled) {
+          return unit()
+        }
+
+        return f(x)
+      }
+    }
+
     const internal = fn(
-      x => cancelled ? unit() : reject(x),
-      x => cancelled ? unit() : resolve(x)
+      settle.bind(null, reject),
+      settle.bind(null, resolve)
     )
 
     const internalFn = isFunction(internal) ? internal : unit

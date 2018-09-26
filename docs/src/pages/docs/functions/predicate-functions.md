@@ -2,7 +2,7 @@
 description: "Predicate Functions API"
 layout: "notopic"
 title: "Predicate Functions"
-functions: ["hasprop", "hasproppath", "isalt", "isalternative", "isapplicative", "isapply", "isarray", "isbifunctor", "isboolean", "iscategory", "ischain", "iscontravariant", "isdefined", "isempty", "isextend", "isfoldable", "isfunction", "isfunctor", "isinteger", "ismonad", "ismonoid", "isnil", "isnumber", "isobject", "isplus", "isprofunctor", "ispromise", "issame", "issametype", "issemigroup", "issemigroupoid", "issetoid", "isstring", "istraversable", "propeq", "proppatheq"]
+functions: ["hasprop", "hasproppath", "isalt", "isalternative", "isapplicative", "isapply", "isarray", "isbifunctor", "isboolean", "iscategory", "ischain", "iscontravariant", "isdefined", "isempty", "isextend", "isfoldable", "isfunction", "isfunctor", "isinteger", "ismonad", "ismonoid", "isnil", "isnumber", "isobject", "isplus", "isprofunctor", "ispromise", "issame", "issametype", "issemigroup", "issemigroupoid", "issetoid", "isstring", "istraversable", "propeq", "proppatheq", "proppathsatisfies", "propsatisfies"]
 weight: 40
 ---
 
@@ -26,7 +26,7 @@ description of their truth:
 * `isBoolean :: a -> Boolean`: Boolean
 * `isCategory :: a -> Boolean`: an ADT that provides `id` and `compose` methods
 * `isChain :: a -> Boolean`: an ADT that provides `map`, `ap` and `chain` methods
-* `isContravariant : a -> Boolean`: an ADT that provides `contramap` method
+* `isContravariant :: a -> Boolean`: an ADT that provides `contramap` method
 * `isDefined :: a -> Boolean`: Every value that is not `undefined`, `null` included
 * `isEmpty :: a -> Boolean`: Empty Object, Array or String
 * `isExtend :: a -> Boolean`: an ADT that provides `map` and `extend` methods
@@ -40,7 +40,7 @@ description of their truth:
 * `isNumber :: a -> Boolean`: `Number` that is not a `NaN` value, `Infinity` included
 * `isObject :: a -> Boolean`: Plain Old Javascript Object (POJO)
 * `isPlus :: a -> Boolean`: an ADT that provides `map`, `alt` and `zero` methods
-* `isProfunctor : a -> Boolean`: an ADT that provides `map`, `contramap` and `promap` methods
+* `isProfunctor :: a -> Boolean`: an ADT that provides `map`, `contramap` and `promap` methods
 * `isPromise :: a -> Boolean`: an object implementing `then` and `catch`
 * `isSame :: a -> b -> Boolean`: same value or reference, use `equals` for value equality
 * `isSameType :: a -> b -> Boolean`: Constructor matches a values type, or two values types match
@@ -48,9 +48,12 @@ description of their truth:
 * `isSemigroupoid :: a -> Boolean`: an ADT that provides a `compose` method
 * `isSetoid :: a -> Boolean`: an ADT that provides an `equals` method
 * `isString :: a -> Boolean`: String
+* `isSymbol :: a -> Boolean`: Symbol
 * `isTraversable :: a -> Boolean`: an ADT that provides `map` and `traverse` methods
-* `propEq: (String | Integer) -> a -> Object -> Boolean`: an `Object` that contains the provided key
-* `propPathEq :: [ String | Integer ] -> a -> Object -> Boolean`: an `Object` that contains the provided key in the provided traversal path
+* `propEq :: (String | Integer) -> a -> Object -> Boolean`: an `Object` that contains the provided key with a value equal to the provided value. (equality by value)
+* `propPathEq :: [ String | Integer ] -> a -> Object -> Boolean`: an `Object` that contains the provided key in the  traversal path, with a value equal to the provided value. (equality by value)
+* `propPathSatisfies :: [ String | Integer ] -> ((a -> Boolean) | Pred) -> Object -> Boolean`: an `Object` that contains the provided key in the traversal path with a value that passes the provided predicate.
+* `propSatisfies :: (String | Integer) -> ((a -> Boolean) | Pred) -> Object -> Boolean`: an `Object` that contains the provided key with a value that passes the provided predicate.
 
 [pred]: ../crocks/Pred.html
 [ifelse]: logic-functions.html#ifelse

@@ -4,16 +4,16 @@ const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
 
+const Async = require('.')
 const isFunction  = require('../core/isFunction')
 
-const constant = x => () => x
+const unit = () => undefined
 
 const toPromise = require('./toPromise')
 
 test('toPromise pointfree', t => {
   const f = bindFunc(toPromise)
-  const x = 1337
-  const m = { toPromise: sinon.spy(constant(x)) }
+  const m = Async(unit)
 
   const err = /toPromise: Async required/
 
@@ -30,8 +30,12 @@ test('toPromise pointfree', t => {
 
   t.ok(isFunction(toPromise), 'is a function')
 
+  m.toPromise = sinon.spy()
+
   const result = toPromise(m)
 
   t.ok(m.toPromise.called, 'calls toPromise on the passed in container')
-  t.equal(result, x, 'returns the result of calling toPromise')
+  t.equal(result, unit(), 'returns the result of calling toPromise')
+
+  t.end()
 })

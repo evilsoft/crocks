@@ -43,7 +43,7 @@ const sequence = require('./sequence')
 const snd = require('../Pair/snd')
 const swap = require('./swap')
 const tail = require('./tail')
-const toPromise = require('./toPromise')
+const toPromise = require('../Async/toPromise')
 const traverse = require('./traverse')
 const valueOf = require('./valueOf')
 

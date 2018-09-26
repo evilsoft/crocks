@@ -1,10 +1,12 @@
 /** @license ISC License (c) copyright 2018 original and current authors */
 /** @author Dale Francis */
 
-const isFunction = require('../core/isFunction')
+const isSameType = require('../core/isSameType')
+
+const Async = require('../core/types').proxy('Async')
 
 function toPromise(m) {
-  if(!(m && isFunction(m.toPromise))) {
+  if(!isSameType(Async, m)) {
     throw new TypeError('toPromise: Async required')
   }
 

@@ -333,15 +333,11 @@ function Async(fn) {
       return Async(function (reject, resolve) {
         let resolvedA = null
         let resolvedF = null
-        let cancelled = false
 
         const rejectOnce = once(reject)
 
-        // todo: not sure if this is necessary
-        const cancel = () => { cancelled = true }
-
         function resolveBoth() {
-          if (!cancelled && resolvedA && resolvedF) {
+          if (resolvedA && resolvedF) {
             resolve(resolvedF(resolvedA))
           }
         }
@@ -354,7 +350,7 @@ function Async(fn) {
           resolvedF = b
           resolveBoth()
         })
-        return () => { cancelLifted(); cancelValue(); cancel() }
+        return () => { cancelLifted(); cancelValue() }
       })
     }
   }

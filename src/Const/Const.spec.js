@@ -14,6 +14,9 @@ const unit = require('../core/_unit')
 
 const fl = require('../core/flNames')
 
+const laws = require('../test/laws')
+const equals = require('../core/equals')
+
 const Const = require('.')
 
 const identity = x => x
@@ -343,6 +346,24 @@ test('Const chain properties (Chain)', t => {
   const b = x => Const(x).chain(y => f(y).chain(g))
 
   t.equal(a(10).valueOf(), b(10).valueOf(), 'assosiativity')
+
+  t.end()
+})
+
+test('Const applyTo properties (Apply)', t => {
+  const apply = laws['fl/apply'](Const)
+
+  t.ok(apply.composition(equals, Const.of(x => x * 3), Const.of(x => x + 4), Const.of(5)), 'composition')
+
+  t.end()
+})
+
+test('Const applyTo properties (Applicative)', t => {
+  const applicative = laws['fl/applicative'](Const)
+
+  t.ok(applicative.identity(equals, 5), 'identity')
+  t.ok(applicative.homomorphism(equals, x => x * 3, 18), 'homomorphism')
+  t.ok(applicative.interchange(equals, Const.of(x => x +10), 23), 'interchange')
 
   t.end()
 })

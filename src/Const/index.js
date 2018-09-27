@@ -13,6 +13,9 @@ const fl = require('../core/flNames')
 const isFunction = require('../core/isFunction')
 const isSameType = require('../core/isSameType')
 
+const _of =
+  x => Const(x)
+
 function Const(x) {
   if(!arguments.length) {
     throw new TypeError('Const: Must wrap something')
@@ -56,6 +59,16 @@ function Const(x) {
     return Const(x)
   }
 
+  function applyTo(method) {
+    return function(m){
+      if(!isSameType(Const, m)) {
+        throw new TypeError(`Const.${method}: Const required`)
+      }
+
+      return Const(x)
+    }
+  }
+
   function chain(method) {
     return function(fn) {
       if(!isFunction(fn)) {
@@ -72,6 +85,8 @@ function Const(x) {
     concat: concat('concat'),
     map: map('map'),
     chain: chain('chain'),
+    applyTo: applyTo('applyTo'),
+    [fl.ap]: applyTo(fl.ap),
     [fl.equals]: equals,
     [fl.concat]: concat(fl.concat),
     [fl.map]: map(fl.map),
@@ -81,7 +96,10 @@ function Const(x) {
   }
 }
 
+Const.of = _of
 Const.type = type
+
+Const[fl.of] = _of
 Const['@@type'] = _type
 
 Const['@@implements'] = _implements(

@@ -13,6 +13,7 @@ const isString = require('../core/isString')
 const unit = require('../core/_unit')
 
 const fl = require('../core/flNames')
+const laws = require('../test/laws.js')
 
 const constant = x => () => x
 const identity = x => x
@@ -1257,49 +1258,35 @@ test('Async chain properties (Monad)', t => {
 test('Async applyTo', t => {
   const f = sinon.spy()
 
-  Async.of(3).applyTo(Async.of())
+  Async.of(3).applyTo(Async.of(x => x * 10)).fork(unit, f)
 
-  t.ok(f.calledWith(0), 'wraps the value passed into an Async')
+  t.ok(f.calledWith(30), 'wraps the value passed into an Async')
 
   t.end()
 })
 
-// todo: What can we generalize for all Applicative law tests??
+const asyncEquals = (a, b) => {
+  const aRes = sinon.spy()
+  const bRes = sinon.spy()
+  a.fork(unit, aRes)
+  b.fork(unit, bRes)
+  return aRes.args[0][0] === bRes.args[0][0]
+}
+
+test('Async applyTo properties (Apply)', t => {
+  const apply = laws['fl/apply'](Async)
+
+  t.ok(apply.composition(asyncEquals, Async.of(x => x * 3), Async.of(x => x + 4), Async.of(5)), 'composition')
+
+  t.end()
+})
+
 test('Async applyTo properties (Applicative)', t => {
-  // https://github.com/fantasyland/fantasy-land#applicative
+  const applicative = laws['fl/applicative'](Async)
 
-  {
-    const identity = x => x
-
-    const a = sinon.spy()
-    const b = sinon.spy()
-    Async.of(3).applyTo(Async.of(identity)).fork(unit, a)
-    Async.of(3).fork(unit, b)
-    t.same(a.args[0], b.args[0], 'identity')
-  }
-
-  {
-    const f = x => x * 3
-
-    const a = sinon.spy()
-    const b = sinon.spy()
-    Async.of(4).applyTo(Async.of(f)).fork(unit, a)
-    Async.of(f(4)).fork(unit, b)
-
-    t.same(a.args[0], b.args[0], 'homomorphism')
-  }
-
-  {
-    const y = 3
-    const u = Async.of(x => x * 4)
-
-    const a = sinon.spy()
-    const b = sinon.spy()
-    Async.of(y).applyTo(u).fork(unit, a)
-    u.applyTo(Async.of(f => f(y))).fork(unit, b)
-
-    t.same(a.args[0], b.args[0], 'interchange')
-  }
+  t.ok(applicative.identity(asyncEquals, 5), 'identity')
+  t.ok(applicative.homomorphism(asyncEquals, x => x * 3, 18), 'homomorphism')
+  t.ok(applicative.interchange(asyncEquals, Async.of(x => x +10), 23), 'interchange')
 
   t.end()
 })

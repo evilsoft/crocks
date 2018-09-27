@@ -16,6 +16,9 @@ const unit = require('../core/_unit')
 
 const fl = require('../core/flNames')
 
+const laws = require('../test/laws.js')
+const equals = require('../core/equals')
+
 const either =
   (f, g) => m => m.either(f, g)
 
@@ -1228,6 +1231,24 @@ test('Either traverse with Applicative TypeRep', t => {
   t.ok(isSameType(Array, arL), 'Provides an outer type of Array')
   t.ok(isSameType(Either, arL[0]), 'Provides an inner type of Either')
   t.equal(arL[0].either(identity, constant(0)), 'Left', 'Either contains original Left value')
+
+  t.end()
+})
+
+test('Either applyTo properties (Apply)', t => {
+  const apply = laws['fl/apply'](Either)
+
+  t.ok(apply.composition(equals, Either.of(x => x * 3), Either.of(x => x + 4), Either.of(5)), 'composition')
+
+  t.end()
+})
+
+test('Either applyTo properties (Applicative)', t => {
+  const applicative = laws['fl/applicative'](Either)
+
+  t.ok(applicative.identity(equals, 5), 'identity')
+  t.ok(applicative.homomorphism(equals, x => x * 3, 18), 'homomorphism')
+  t.ok(applicative.interchange(equals, Either.of(x => x +10), 23), 'interchange')
 
   t.end()
 })

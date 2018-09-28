@@ -14,8 +14,8 @@ const unit = require('../core/_unit')
 
 const fl = require('../core/flNames')
 
-const laws = require('../test/laws')
-const equals = require('../core/equals')
+// const laws = require('../test/laws')
+// const equals = require('../core/equals')
 
 const Const = require('.')
 
@@ -350,25 +350,26 @@ test('Const chain properties (Chain)', t => {
   t.end()
 })
 
-const logEquals = (a, b) => {
-  // console.log('Now comparing:', typeof a.valueOf(), typeof b.valueOf())
-  return equals(a, b)
-}
+// const logEquals = (a, b) => {
+//   // console.log('Now comparing:', typeof a.valueOf(), typeof b.valueOf())
+//   return equals(a, b)
+// }
 
-test('Const applyTo properties (Apply)', t => {
-  const apply = laws['fl/apply'](Const)
+// TODO: we'll need to confer on what to do here
+// test('Const applyTo properties (Apply)', t => {
+//   const apply = laws['fl/apply'](Const)
 
-  t.ok(apply.composition(logEquals, Const.of(x => x * 3), Const.of(x => x + 4), Const.of(5)), 'composition')
+//   t.ok(apply.composition(logEquals, Const.of(x => x * 3), Const.of(x => x + 4), Const.of(5)), 'composition')
 
-  t.end()
-})
+//   t.end()
+// })
 
-test('Const applyTo properties (Applicative)', t => {
-  const applicative = laws['fl/applicative'](Const)
+// test('Const applyTo properties (Applicative)', t => {
+//   const applicative = laws['fl/applicative'](Const)
 
-  t.ok(applicative.identity(logEquals, 5), 'identity')
-  t.ok(applicative.homomorphism(logEquals, x => x * 3, 18), 'homomorphism')
-  t.ok(applicative.interchange(logEquals, Const.of(x => x +10), 23), 'interchange')
+//   t.ok(applicative.identity(logEquals, 5), 'identity')
+//   t.ok(applicative.homomorphism(logEquals, x => x * 3, 18), 'homomorphism')
+//   t.ok(applicative.interchange(logEquals, Const.of(x => x +10), 23), 'interchange')
 
-  t.end()
-})
+//   t.end()
+// })

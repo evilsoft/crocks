@@ -15,6 +15,8 @@ const isString = require('../core/isString')
 const unit = require('../core/_unit')
 
 const fl = require('../core/flNames')
+const laws = require('../test/laws.js')
+const equals = require('../core/equals')
 
 const applyTo =
   x => fn => fn(x)
@@ -605,6 +607,24 @@ test('Identity traverse with Applicative TypeRep', t => {
   t.ok(isSameType(Array, arM), 'Provides an outer type of Array')
   t.ok(isSameType(Identity, arM[0]), 'Provides an inner type of Identity')
   t.equal(arM[0].valueOf(), res, 'Identity contains transformed value')
+
+  t.end()
+})
+
+test('Identity applyTo properties (Apply)', t => {
+  const apply = laws['fl/apply'](Identity)
+
+  t.ok(apply.composition(equals, Identity.of(x => x * 3), Identity.of(x => x + 4), Identity.of(5)), 'composition')
+
+  t.end()
+})
+
+test('Identity applyTo properties (Applicative)', t => {
+  const applicative = laws['fl/applicative'](Identity)
+
+  t.ok(applicative.identity(equals, 5), 'identity')
+  t.ok(applicative.homomorphism(equals, x => x * 3, 18), 'homomorphism')
+  t.ok(applicative.interchange(equals, Identity.of(x => x +10), 23), 'interchange')
 
   t.end()
 })

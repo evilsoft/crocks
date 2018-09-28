@@ -17,6 +17,8 @@ const fl = require('./flNames')
 
 const Maybe = require('./Maybe')
 const Pred = require('../Pred')
+const laws = require('../test/laws.js')
+const equals = require('../core/equals')
 
 const constant = x => () => x
 const identity = x => x
@@ -916,6 +918,24 @@ test('List traverse with Applicative TypeRep', t => {
   t.ok(isSameType(Array, arM), 'Provides an outer type of Array')
   t.ok(isSameType(List, arM[0]), 'Provides an inner type of List')
   t.same(arM[0].valueOf(), [ res ], 'inner List contains transformed value')
+
+  t.end()
+})
+
+test('List applyTo properties (Apply)', t => {
+  const apply = laws['fl/apply'](List)
+
+  t.ok(apply.composition(equals, List([ x => x * 3, x => x * 4 ]), List.of(x => x + 4), List.of(5)), 'composition')
+
+  t.end()
+})
+
+test('Identity applyTo properties (Applicative)', t => {
+  const applicative = laws['fl/applicative'](List)
+
+  t.ok(applicative.identity(equals, 5), 'identity')
+  t.ok(applicative.homomorphism(equals, x => x * 3, 18), 'homomorphism')
+  t.ok(applicative.interchange(equals, List.of(x => x +10), 23), 'interchange')
 
   t.end()
 })

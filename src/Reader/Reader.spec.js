@@ -13,6 +13,7 @@ const isString = require('../core/isString')
 const unit = require('../core/_unit')
 
 const fl = require('../core/flNames')
+const laws = require('../test/laws.js')
 
 const constant = x => () => x
 const identity = x => x
@@ -411,6 +412,26 @@ test('Reader chain properties (Monad)', t => {
 
   t.equal(Reader.of(3).chain(f).runWith(0), f(3).runWith(0), 'left identity')
   t.equal(f(6).chain(Reader.of).runWith(0), f(6).runWith(0), 'right identity')
+
+  t.end()
+})
+
+const stringReaderEquals = (a, b) => a.runWith('foo') === b.runWith('foo')
+
+test('IO applyTo properties (Apply)', t => {
+  const apply = laws['fl/apply'](Reader)
+
+  t.ok(apply.composition(stringReaderEquals, Reader.of(x => x * 3), Reader.of(x => x + 4), Reader.of(5)), 'composition')
+
+  t.end()
+})
+
+test('IO applyTo properties (Applicative)', t => {
+  const applicative = laws['fl/applicative'](Reader)
+
+  t.ok(applicative.identity(stringReaderEquals, 5), 'identity')
+  t.ok(applicative.homomorphism(stringReaderEquals, x => x * 3, 18), 'homomorphism')
+  t.ok(applicative.interchange(stringReaderEquals, Reader.of(x => x +10), 23), 'interchange')
 
   t.end()
 })

@@ -65,6 +65,25 @@ function Reader(runWith) {
     })
   }
 
+  function applyTo(method) {
+    return function(liftedApply) {
+      if(!isSameType(Reader, liftedApply)) {
+        throw new TypeError(`Reader.${method}: Reader required`)
+      }
+
+      return Reader(function(e) {
+        const x = runWith(e)
+
+        return liftedApply.map(fn => {
+          if(!isFunction(fn)) {
+            throw new TypeError(`Reader.${method}: Wrapped function must return a function`)
+          }
+          return fn(x)
+        }).runWith(e)
+      })
+    }
+  }
+
   function chain(method) {
     return function(fn) {
       if(!isFunction(fn)) {
@@ -88,6 +107,8 @@ function Reader(runWith) {
     type, ap, of,
     map: map('map'),
     chain: chain('chain'),
+    applyTo: applyTo('applyTo'),
+    [fl.ap]: applyTo(fl.ap),
     [fl.of]: of,
     [fl.map]: map(fl.map),
     [fl.chain]: chain(fl.chain),

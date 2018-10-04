@@ -14,6 +14,7 @@ const isString  = require('../core/isString')
 const unit = require('../core/_unit')
 
 const fl = require('../core/flNames')
+const laws = require('../test/laws.js')
 
 const identity = x => x
 
@@ -601,6 +602,48 @@ test('State chain properties (Monad)', t => {
 
   t.equal(State.of(3).chain(f).evalWith(0), f(3).evalWith(0), 'left identity')
   t.equal(f(6).chain(State.of).evalWith(0), f(6).evalWith(0), 'right identity')
+
+  t.end()
+})
+
+test('State.applyTo should apply lifted functions to values', t => {
+  const getLength = State.of(str => str.length)
+  const result = State.of('alfonzo').applyTo(getLength).runWith(0)
+
+  t.ok(result.equals(Pair(7, 0)))
+
+  t.end()
+})
+
+test('State.applyTo should maintain state changes from the supplied value', t => {
+  const getLengthAndIncState = State(s => Pair(str => str.length, s + 8))
+  const result = State.of('alfonzo').applyTo(getLengthAndIncState).runWith(0)
+
+  t.ok(result.equals(Pair(7, 8)))
+
+  t.end()
+})
+
+const stateEquals = seed => (a, b) => {
+  const aPair = a.runWith(seed)
+  const bPair = b.runWith(seed)
+  return aPair.equals(bPair)
+}
+
+test('State applyTo properties (Apply)', t => {
+  const apply = laws['fl/apply'](State)
+
+  t.ok(apply.composition(stateEquals, State.of(x => x * 3), State.of(x => x + 4), State.of(5)), 'composition')
+
+  t.end()
+})
+
+test('State applyTo properties (Applicative)', t => {
+  const applicative = laws['fl/applicative'](State)
+
+  t.ok(applicative.identity(stateEquals, 5), 'identity')
+  t.ok(applicative.homomorphism(stateEquals, x => x * 3, 18), 'homomorphism')
+  t.ok(applicative.interchange(stateEquals, State.of(x => x +10), 23), 'interchange')
 
   t.end()
 })

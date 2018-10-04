@@ -100,6 +100,27 @@ function State(fn) {
     })
   }
 
+  function applyTo(method) {
+    return function(liftedApply) {
+      if(!isSameType(State, liftedApply)) {
+        throw new TypeError(`State.${method}: State required`)
+      }
+
+      return State(s => {
+        const pair = runWith(s, method)
+        const a = pair.fst()
+
+        const fnPair = liftedApply.runWith(pair.snd(), method)
+
+        if(!isFunction(fnPair.fst())) {
+          throw new TypeError(`State.${method}: passed value must be a function`)
+        }
+
+        return Pair(fnPair.fst()(a), fnPair.snd())
+      })
+    }
+  }
+
   function chain(method) {
     return function(fn) {
       if(!isFunction(fn)) {
@@ -124,6 +145,8 @@ function State(fn) {
     execWith, evalWith, type, ap, of,
     map: map('map'),
     chain: chain('chain'),
+    applyTo: applyTo('applyTo'),
+    [fl.ap]: applyTo(fl.ap),
     [fl.of]: of,
     [fl.map]: map(fl.map),
     [fl.chain]: chain(fl.chain),

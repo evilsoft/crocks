@@ -61,6 +61,16 @@ function Unit() {
     return Unit()
   }
 
+  function applyTo(method) {
+    return function(m) {
+      if(!isSameType(Unit, m)) {
+        throw new TypeError(`Unit.${method}: Unit required`)
+      }
+
+      return Unit()
+    }
+  }
+
   function chain(method) {
     return function(fn) {
       if(!isFunction(fn)) {
@@ -77,6 +87,8 @@ function Unit() {
     concat: concat('concat'),
     map: map('map'),
     chain: chain('chain'),
+    applyTo: applyTo('applyTo'),
+    [fl.ap]: applyTo(fl.ap),
     [fl.of]: of,
     [fl.empty]: empty,
     [fl.equals]: equals,

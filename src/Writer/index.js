@@ -84,6 +84,24 @@ function _Writer(Monoid) {
       )
     }
 
+    function applyTo(method) {
+      return function(liftedApply) {
+        if(!isSameType(Writer, liftedApply)) {
+          throw new TypeError(`Writer.${method}: Writer required`)
+        }
+
+        const fn = liftedApply.valueOf()
+        if(!isFunction(fn)) {
+          throw new TypeError(`Writer.${method}: supplied value must be a function`)
+        }
+
+        return Writer(
+          log().concat(liftedApply.log()).valueOf(),
+          fn(val)
+        )
+      }
+    }
+
     function chain(method) {
       return function(fn) {
         if(!isFunction(fn)) {
@@ -106,6 +124,8 @@ function _Writer(Monoid) {
       ap, of,
       chain: chain('chain'),
       map: map('map'),
+      applyTo: applyTo('applyTo'),
+      [fl.ap]: applyTo(fl.ap),
       [fl.of]: of,
       [fl.equals]: equals,
       [fl.map]: map(fl.map),

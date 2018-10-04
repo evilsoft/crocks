@@ -15,6 +15,8 @@ const isString = require('../core/isString')
 const unit = require('../core/_unit')
 
 const fl = require('../core/flNames')
+const laws = require('../test/laws.js')
+const equals = require('../core/equals')
 
 const identity = x => x
 
@@ -432,6 +434,24 @@ test('Writer chain properties (Monad)', t => {
 
   t.equal(Writer.of(3).chain(f).valueOf(), f(3).valueOf(), 'left identity')
   t.equal(f(3).chain(Writer.of).valueOf(), f(3).valueOf(), 'right identity')
+
+  t.end()
+})
+
+test('Writer applyTo properties (Apply)', t => {
+  const apply = laws['fl/apply'](Writer)
+
+  t.ok(apply.composition(equals, Writer.of(x => x * 3), Writer.of(x => x + 4), Writer.of(5)), 'composition')
+
+  t.end()
+})
+
+test('Writer applyTo properties (Applicative)', t => {
+  const applicative = laws['fl/applicative'](Writer)
+
+  t.ok(applicative.identity(equals, 5), 'identity')
+  t.ok(applicative.homomorphism(equals, x => x * 3, 18), 'homomorphism')
+  t.ok(applicative.interchange(equals, Writer.of(x => x +10), 23), 'interchange')
 
   t.end()
 })

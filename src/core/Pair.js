@@ -123,6 +123,26 @@ function Pair(l, r) {
     return Pair(l.concat(r), fn(m.snd()))
   }
 
+  function applyTo(method) {
+    return function(liftedApply) {
+      if(!isSameType(Pair, liftedApply)) {
+        throw new TypeError(`Pair.${method}: Pair required`)
+      }
+
+      const l = fst()
+      const r = liftedApply.fst()
+
+      const x = snd()
+      const fn = liftedApply.snd()
+
+      if(!(isSemigroup(l) && isSameType(l, r))) {
+        throw new TypeError(`Pair.${method}: Semigroups of the same type is required for first values`)
+      }
+
+      return Pair(l.concat(r), fn(x))
+    }
+  }
+
   function chain(method) {
     return function(fn) {
       const l = fst()
@@ -213,6 +233,8 @@ function Pair(l, r) {
     bimap: bimap('bimap'),
     chain: chain('chain'),
     extend: extend('extend'),
+    applyTo: applyTo('applyTo'),
+    [fl.ap]: applyTo(fl.ap),
     [fl.equals]: equals,
     [fl.concat]: concat(fl.concat),
     [fl.map]: map(fl.map),

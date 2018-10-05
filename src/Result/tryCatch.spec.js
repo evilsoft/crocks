@@ -39,7 +39,7 @@ test('tryCatch', t => {
   t.end()
 })
 
-test.only('tryCatch functionality', t => {
+test('tryCatch functionality', t => {
   const msg = 'silly error'
 
   const f = x => x

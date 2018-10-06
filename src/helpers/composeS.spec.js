@@ -59,7 +59,7 @@ test('composeS function', t => {
   t.ok(g.compose.calledWith(f), 'calls compose on the penultimate passing the first')
   t.equals(g.compose.lastCall.returnValue, m, 'returns the result of compose on the penultimate argument')
 
-  f.compose.reset()
+  f.compose.resetHistory()
 
   const single = composeS(f)
 

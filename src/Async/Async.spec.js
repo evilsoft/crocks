@@ -447,17 +447,17 @@ test('Async fork settle', t => {
   Async(rej => { rej(10); rej(10) }).fork(rej, res)
   t.ok(rej.calledOnce, 'calls reject once when called twice in an Async')
 
-  rej.reset()
+  rej.resetHistory()
   Async((_, res) => { res(10); res(10) }).fork(rej, res)
   t.ok(res.calledOnce, 'calls resolve once when called twice in an Async')
 
-  res.reset()
+  res.resetHistory()
   Async((rej, res) => { rej(10); res(10) }).fork(rej, res)
   t.ok(rej.calledOnce, 'calls reject when called before a resolve in an Async')
   t.ok(res.notCalled, 'does not call resolve after reject in an Async')
 
-  rej.reset()
-  res.reset()
+  rej.resetHistory()
+  res.resetHistory()
   Async((rej, res) => { res(10); rej(10) }).fork(rej, res)
   t.ok(res.calledOnce, 'calls resolve when called before a reject in an Async')
   t.ok(rej.notCalled, 'does not call reject after resolve in an Async')

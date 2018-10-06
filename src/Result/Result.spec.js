@@ -1265,7 +1265,7 @@ test('Result applyTo behavior', t => {
     t.ok(equals(result.either(identity, constant(0)), List([ 'failed' ])), 'not apply the function on an error.')
   }
 
-  { // todo: i think this will fail?
+  {
     const result = Result.Ok('success').applyTo(Result.Err(List([ 'bar' ])))
     t.ok(equals(result.either(identity, constant(0)), List([ 'bar' ])), 'gather errors from the supplied value')
   }

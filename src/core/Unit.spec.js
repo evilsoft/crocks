@@ -8,6 +8,8 @@ const bindFunc = helpers.bindFunc
 const isFunction = require('./isFunction')
 const isObject = require('./isObject')
 const isString = require('./isString')
+const equals = require('../core/equals')
+const laws = require('../test/laws.js')
 
 const curry = require('./curry')
 const compose = curry(require('./compose'))
@@ -423,6 +425,24 @@ test('Unit chain properties (Monad)', t => {
   t.equal(Unit.of(56).chain(f).valueOf(), f(56).valueOf(), 'left identity')
 
   t.equal(f(3).chain(Unit.of).valueOf(), f(3).valueOf(), 'right identity')
+
+  t.end()
+})
+
+test('Unit applyTo properties (Apply)', t => {
+  const apply = laws['fl/apply'](Unit)
+
+  t.ok(apply.composition(equals, Unit.of(x => x * 3), Unit.of(x => x + 4), Unit.of(5)), 'composition')
+
+  t.end()
+})
+
+test('Unit applyTo properties (Applicative)', t => {
+  const applicative = laws['fl/applicative'](Unit)
+
+  t.ok(applicative.identity(equals, 5), 'identity')
+  t.ok(applicative.homomorphism(equals, x => x * 3, 18), 'homomorphism')
+  t.ok(applicative.interchange(equals, Unit.of(x => x +10), 23), 'interchange')
 
   t.end()
 })

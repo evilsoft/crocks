@@ -963,10 +963,25 @@ test('Maybe traverse with Applicative TypeRep', t => {
   t.end()
 })
 
+test('Maybe applyTo behavior', t => {
+
+  t.ok(Maybe.Just(5).applyTo(Maybe.Just(x => x + 10)), Maybe.Just(15), 'apply functions to Just values')
+  t.ok(Maybe.Nothing().applyTo(Maybe.Just(x => x + 10)), Maybe.Nothing(), 'not apply functions to Nothing values')
+  t.ok(Maybe.Just(5).applyTo(Maybe.Nothing()), Maybe.Nothing(), 'return Nothing when Nothing is supplied')
+
+  t.end()
+})
+
 test('Maybe applyTo properties (Apply)', t => {
   const apply = laws['fl/apply'](Maybe)
 
-  t.ok(apply.composition(equals, Maybe.of(x => x * 3), Maybe.of(x => x + 4), Maybe.of(5)), 'composition')
+  const MaybeInstances = [
+    Maybe.of(5),
+    Maybe.Just(16),
+    Maybe.Nothing()
+  ]
+
+  t.ok(apply.composition(equals, MaybeInstances), 'composition')
 
   t.end()
 })
@@ -974,9 +989,9 @@ test('Maybe applyTo properties (Apply)', t => {
 test('Maybe applyTo properties (Applicative)', t => {
   const applicative = laws['fl/applicative'](Maybe)
 
-  t.ok(applicative.identity(equals, 5), 'identity')
-  t.ok(applicative.homomorphism(equals, x => x * 3, 18), 'homomorphism')
-  t.ok(applicative.interchange(equals, Maybe.of(x => x +10), 23), 'interchange')
+  t.ok(applicative.identity(equals), 'identity')
+  t.ok(applicative.homomorphism(equals), 'homomorphism')
+  t.ok(applicative.interchange(equals), 'interchange')
 
   t.end()
 })

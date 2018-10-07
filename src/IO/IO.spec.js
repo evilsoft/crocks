@@ -361,12 +361,24 @@ test('IO chain properties (Monad)', t => {
   t.end()
 })
 
+test('IO behavior', t => {
+
+  t.equal(IO(() => 15).applyTo(IO(() => x => x * 4)).run(), 60, 'apply the function to the wrapped value')
+
+  t.end()
+})
+
 const ioEquals = (a, b) => a.run() === b.run()
 
 test('IO applyTo properties (Apply)', t => {
   const apply = laws['fl/apply'](IO)
 
-  t.ok(apply.composition(ioEquals, IO.of(x => x * 3), IO.of(x => x + 4), IO.of(5)), 'composition')
+  const IOInstances = [
+    IO.of(5),
+    IO(() => 15)
+  ]
+
+  t.ok(apply.composition(ioEquals, IOInstances), 'composition')
 
   t.end()
 })

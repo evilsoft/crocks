@@ -34,10 +34,10 @@ module.exports = {
 
       // https://medium.com/@JosephJnk/an-introduction-to-applicative-functors-aea966799b1d
       // ap(ap(ap(pure(compose), u), v), w) must be equal to ap(u, ap(v, w))
-      return instances.every(m => equals(
+      return instances.reduce((all, m) => all && equals(
         m[fl.ap](mG[fl.ap](mF[fl.ap](type[fl.of](curriedCompose)))),
         m[fl.ap](mG)[fl.ap](mF)
-      ))
+      ), true)
     }
   }),
   'fl/applicative': type => ({

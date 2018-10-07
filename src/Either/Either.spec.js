@@ -1235,10 +1235,29 @@ test('Either traverse with Applicative TypeRep', t => {
   t.end()
 })
 
+test('Either applyTo behavior', t => {
+
+  t.ok(equals(Either.Right(5).applyTo(Either.Right(x => x * 3)), Either.Right(15)), 'apply the supplied function to the right value')
+
+  t.ok(equals(Either.Right(5).applyTo(Either.Left('error')), Either.Left('error')), 'not apply a supplied left value')
+
+  t.ok(equals(Either.Left('error').applyTo(Either.Right(x => x.length)), Either.Left('error')), 'not apply the supplied function to a wrapped left value')
+
+  t.ok(equals(Either.Left('error1').applyTo(Either.Left('error2')), Either.Left('error1')), 'prefer errors from the inner value')
+
+  t.end()
+})
+
 test('Either applyTo properties (Apply)', t => {
   const apply = laws['fl/apply'](Either)
 
-  t.ok(apply.composition(equals, Either.of(x => x * 3), Either.of(x => x + 4), Either.of(5)), 'composition')
+  const EitherInstances = [
+    Either.of('foo'),
+    Either.Right('bar'),
+    Either.Left('error')
+  ]
+
+  t.ok(apply.composition(equals, EitherInstances), 'composition')
 
   t.end()
 })
@@ -1246,9 +1265,9 @@ test('Either applyTo properties (Apply)', t => {
 test('Either applyTo properties (Applicative)', t => {
   const applicative = laws['fl/applicative'](Either)
 
-  t.ok(applicative.identity(equals, 5), 'identity')
-  t.ok(applicative.homomorphism(equals, x => x * 3, 18), 'homomorphism')
-  t.ok(applicative.interchange(equals, Either.of(x => x +10), 23), 'interchange')
+  t.ok(applicative.identity(equals), 'identity')
+  t.ok(applicative.homomorphism(equals), 'homomorphism')
+  t.ok(applicative.interchange(equals), 'interchange')
 
   t.end()
 })

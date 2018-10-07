@@ -97,7 +97,7 @@ need to account for for the rest of your flow.
 | [`safeLift`][safelift] | <code>((a -> Boolean) &#124; Pred) -> (a -> b) -> a -> Maybe b</code> | `crocks/Maybe/safeLift` |
 | [`tap`][tap] | `(a -> b) -> a -> a` | `crocks/helpers/tap` |
 | [`toPairs`][topairs] | `Object -> List (Pair String a)` | `crocks/Pair/toPairs` |
-| [`tryCatch`][trycatch] | `(a -> b) -> a -> Result e b` | `crocks/Result/tryCatch` |
+| [`tryCatch`][trycatch] | `((*) -> b) -> (*) -> Result e b` | `crocks/Result/tryCatch` |
 | [`unary`][unary] | `((*) -> b) -> a -> b` | `crocks/helpers/unary` |
 | [`unit`][unit] | `() -> undefined` | `crocks/helpers/unit` |
 

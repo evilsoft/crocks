@@ -100,6 +100,7 @@ need to account for for the rest of your flow.
 | [`tryCatch`][trycatch] | `(a -> b) -> a -> Result e b` | `crocks/Result/tryCatch` |
 | [`unary`][unary] | `((*) -> b) -> a -> b` | `crocks/helpers/unary` |
 | [`unit`][unit] | `() -> undefined` | `crocks/helpers/unit` |
+| [`unsetPath`][unsetpath] |  <code>[ String &#124; Integer] -> (Object &#124; Array) -> (Object &#124; Array)</code>  | `crocks/helpers/unsetPath` |
 
 ## Logic
 
@@ -175,6 +176,7 @@ type: `Pred a` and vice-versa
 [trycatch]: helpers.html#trycatch
 [unary]: helpers.html#unary
 [unit]: helpers.html#unit
+[unsetpath]: helpers.html#unsetpath
 
 [and]: logic-functions.html#and
 [ifelse]: logic-functions.html#ifelse

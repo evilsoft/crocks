@@ -95,7 +95,7 @@ need to account for for the rest of your flow.
 | [`safe`][safe] | <code>((a -> Boolean) &#124; Pred) -> a -> Maybe a</code> | `crocks/Maybe/safe` |
 | [`safeAfter`][safeafter] | <code>safeAfter :: ((b -> Boolean) &#124; Pred) -> (a -> b) -> a -> Maybe b</code> | `crocks/Maybe/safeAfter` |
 | [`safeLift`][safelift] | <code>((a -> Boolean) &#124; Pred) -> (a -> b) -> a -> Maybe b</code> | `crocks/Maybe/safeLift` |
-| [`setPath`][setpath] | <code>[ String &#124; Integer ] -> a -> Object -> Object</code> | `crocks/helpers/setPath` |
+| [`setPath`][setpath] | <code>[ String &#124; Integer ] -> a -> (Object &#124; Array) -> (Object &#124; Array)</code> | `crocks/helpers/setPath` |
 | [`tap`][tap] | `(a -> b) -> a -> a` | `crocks/helpers/tap` |
 | [`toPairs`][topairs] | `Object -> List (Pair String a)` | `crocks/Pair/toPairs` |
 | [`tryCatch`][trycatch] | `(a -> b) -> a -> Result e b` | `crocks/Result/tryCatch` |

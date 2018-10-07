@@ -934,13 +934,13 @@ def([ 'arr', 'length' ], data)
 `crocks/helpers/setPath`
 
 ```haskell
-setPath :: [ String | Integer ] -> a -> Object -> Object
+setPath :: [ String | Integer ] -> a -> (Object | Array) -> (Object | Array)
 ```
 
-Used to set a value on a deeply nested Object, `setPath` will traverse down
+Used to set a value on a deeply nested `Object`, `setPath` will traverse down
 a path and set the a the final property to the provided value. `setPath` returns
-the an object with the modification and does not alter the original object along
-the path.
+the an `Object`/`Array` with the modification and does not alter the original
+`Object`/`Array` along the path.
 
 The provided path can be a mixture of either `Integer`s or `String`s to allow
 for traversing through both `Array`s and `Object`s. When an `Integer` is provided

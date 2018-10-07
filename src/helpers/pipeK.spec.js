@@ -74,7 +74,7 @@ test('pipeK helper', t => {
   t.ok(g.calledWith(6 * 10), 'last function is chained to result of first function')
   t.equal(g.lastCall.returnValue, resDouble, 'returns the result of the last function')
 
-  f.reset()
+  f.resetHistory()
 
   const single = pipeK(f)
   const resSingle = single(23, 30)

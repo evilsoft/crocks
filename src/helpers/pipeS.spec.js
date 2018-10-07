@@ -59,7 +59,7 @@ test('pipeS helper', t => {
   t.ok(g.compose.calledWith(h), 'calls compose on the penultimate passing the last')
   t.equals(g.compose.lastCall.returnValue, m, 'returns the result of compose on the penultimate argument')
 
-  f.compose.reset()
+  f.compose.resetHistory()
 
   const single = pipeS(f)
 

@@ -74,7 +74,7 @@ test('composeK function', t => {
   t.ok(f.calledWith(6 + 10), 'first function is chained to result of last function')
   t.equal(f.lastCall.returnValue, resDouble, 'returns the result of the first function')
 
-  f.reset()
+  f.resetHistory()
 
   const single = composeK(f)
   const resSingle = single(23, 30)

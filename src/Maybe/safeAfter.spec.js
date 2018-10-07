@@ -56,8 +56,8 @@ test('safeAfter predicate function', (t) => {
   t.ok(pred.calledWith(false), 'calls the predicate function with resultant value')
   t.equals(fResult, 'nothing', 'returns a Nothing when predicate is a false')
 
-  pred.reset()
-  fn.reset()
+  pred.resetHistory()
+  fn.resetHistory()
 
   const tResult = f('just').option('nothing')
   t.ok(fn.calledOnce, 'calls the result function once')
@@ -81,8 +81,8 @@ test('safeAfter Pred', (t) => {
   t.ok(predFn.calledWith(false), 'calls the predicate function with resultant value')
   t.equals(fResult, 'nothing', 'returns a Nothing when predicate is a false')
 
-  predFn.reset()
-  fn.reset()
+  predFn.resetHistory()
+  fn.resetHistory()
 
   const tResult = f('just').option('nothing')
   t.ok(fn.calledOnce, 'calls the result function once')

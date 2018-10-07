@@ -416,22 +416,39 @@ test('Reader chain properties (Monad)', t => {
   t.end()
 })
 
-const stringReaderEquals = (a, b) => a.runWith('foo') === b.runWith('foo')
+test('Reader applyTo behavior', t => {
 
-test('IO applyTo properties (Apply)', t => {
-  const apply = laws['fl/apply'](Reader)
+  t.equal(
+    Reader(x => x + 13).applyTo(Reader(unit).of(x => x * 3)).runWith(2),
+    45,
+    'apply functions to wrapped values'
+  )
 
-  t.ok(apply.composition(stringReaderEquals, Reader.of(x => x * 3), Reader.of(x => x + 4), Reader.of(5)), 'composition')
+  t.end()
+
+})
+
+const numberReaderEquals = (a, b) => a.runWith(15) === b.runWith(15)
+
+test('Reader applyTo properties (Apply)', t => {
+  const apply = laws['fl/apply'](Reader(unit))
+
+  const ReaderInstances = [
+    Reader(x => x + 13),
+    Reader(unit).of(15)
+  ]
+
+  t.ok(apply.composition(numberReaderEquals, ReaderInstances), 'composition')
 
   t.end()
 })
 
-test('IO applyTo properties (Applicative)', t => {
+test('Reader applyTo properties (Applicative)', t => {
   const applicative = laws['fl/applicative'](Reader)
 
-  t.ok(applicative.identity(stringReaderEquals, 5), 'identity')
-  t.ok(applicative.homomorphism(stringReaderEquals, x => x * 3, 18), 'homomorphism')
-  t.ok(applicative.interchange(stringReaderEquals, Reader.of(x => x +10), 23), 'interchange')
+  t.ok(applicative.identity(numberReaderEquals), 'identity')
+  t.ok(applicative.homomorphism(numberReaderEquals), 'homomorphism')
+  t.ok(applicative.interchange(numberReaderEquals), 'interchange')
 
   t.end()
 })

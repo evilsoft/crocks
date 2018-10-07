@@ -11,11 +11,10 @@ const isFunction  = require('../core/isFunction')
 const isObject = require('../core/isObject')
 const isString = require('../core/isString')
 const unit = require('../core/_unit')
+const List = require('../core/List')
 
 const fl = require('../core/flNames')
-
-// const laws = require('../test/laws')
-// const equals = require('../core/equals')
+const equals = require('../core/equals.js')
 
 const Const = require('.')
 
@@ -350,26 +349,19 @@ test('Const chain properties (Chain)', t => {
   t.end()
 })
 
-// const logEquals = (a, b) => {
-//   // console.log('Now comparing:', typeof a.valueOf(), typeof b.valueOf())
-//   return equals(a, b)
-// }
+test('Const applyTo behavior', t => {
 
-// TODO: we'll need to confer on what to do here
-// test('Const applyTo properties (Apply)', t => {
-//   const apply = laws['fl/apply'](Const)
+  {
+    const x = Const(5)
+    const result = x.applyTo(Const(6))
+    t.equal(result.valueOf(), 5, 'not combine non-semigroups')
+  }
 
-//   t.ok(apply.composition(logEquals, Const.of(x => x * 3), Const.of(x => x + 4), Const.of(5)), 'composition')
+  {
+    const x = Const(List([ 5 ]))
+    const result = x.applyTo(Const(List([ 6 ])))
+    t.ok(equals(result.valueOf(), List([ 5, 6 ])), 'combine semigroups')
+  }
 
-//   t.end()
-// })
-
-// test('Const applyTo properties (Applicative)', t => {
-//   const applicative = laws['fl/applicative'](Const)
-
-//   t.ok(applicative.identity(logEquals, 5), 'identity')
-//   t.ok(applicative.homomorphism(logEquals, x => x * 3, 18), 'homomorphism')
-//   t.ok(applicative.interchange(logEquals, Const.of(x => x +10), 23), 'interchange')
-
-//   t.end()
-// })
+  t.end()
+})

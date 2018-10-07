@@ -1255,7 +1255,7 @@ test('Async chain properties (Monad)', t => {
   t.end()
 })
 
-test('Async applyTo', t => {
+test('Async applyTo behavior', t => {
   const f = sinon.spy()
 
   Async.of(3).applyTo(Async.of(x => x * 10)).fork(unit, f)
@@ -1268,15 +1268,26 @@ test('Async applyTo', t => {
 const asyncEquals = (a, b) => {
   const aRes = sinon.spy()
   const bRes = sinon.spy()
-  a.fork(unit, aRes)
-  b.fork(unit, bRes)
-  return aRes.args[0][0] === bRes.args[0][0]
+  const aRej = sinon.spy()
+  const bRej = sinon.spy()
+  a.fork(aRej, aRes)
+  b.fork(bRej, bRes)
+  // either their successes are the same, or failures are the same
+  return spiesEqual(aRes, bRes) || spiesEqual(aRej, bRej)
 }
+
+const spiesEqual = (a, b) => a.args[0] && b.args[0] && a.args[0][0] === b.args[0][0]
 
 test('Async applyTo properties (Apply)', t => {
   const apply = laws['fl/apply'](Async)
 
-  t.ok(apply.composition(asyncEquals, Async.of(x => x * 3), Async.of(x => x + 4), Async.of(5)), 'composition')
+  const AsyncInstances = [
+    Async.of(5),
+    Async.Rejected('error'),
+    Async.Resolved(15)
+  ]
+
+  t.ok(apply.composition(asyncEquals, AsyncInstances), 'composition')
 
   t.end()
 })
@@ -1284,9 +1295,9 @@ test('Async applyTo properties (Apply)', t => {
 test('Async applyTo properties (Applicative)', t => {
   const applicative = laws['fl/applicative'](Async)
 
-  t.ok(applicative.identity(asyncEquals, 5), 'identity')
-  t.ok(applicative.homomorphism(asyncEquals, x => x * 3, 18), 'homomorphism')
-  t.ok(applicative.interchange(asyncEquals, Async.of(x => x +10), 23), 'interchange')
+  t.ok(applicative.identity(asyncEquals), 'identity')
+  t.ok(applicative.homomorphism(asyncEquals), 'homomorphism')
+  t.ok(applicative.interchange(asyncEquals), 'interchange')
 
   t.end()
 })

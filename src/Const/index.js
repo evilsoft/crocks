@@ -12,12 +12,7 @@ const fl = require('../core/flNames')
 
 const isFunction = require('../core/isFunction')
 const isSameType = require('../core/isSameType')
-
-// todo: this is wrong, we need a Monoid of whatever type is on the left,
-// and this needs to be defined as:
-// const _of = x => Const(Monoid.mempty)
-const _of =
-  x => Const(x)
+const isSemigroup = require('../core/isSemigroup')
 
 function Const(x) {
   if(!arguments.length) {
@@ -63,21 +58,14 @@ function Const(x) {
   }
 
   function applyTo(method) {
-    return function(m){
-      // todo: this isn't correct... Const is only an applicative if we have a Semigroup for the
-      // inner value.
-      // this should be defined as:
-      // return Const(SemigroupOfA.mappend(x, m.valueOf()))
-      //
-      // but where shall we get an Semigroup from?
-      // one might be to define a new type, ConstApplicative
-      // and have a 'toApplicative(semigroup)' which defines 'ap'
-      // would be used like: Const(5).toApplicative(NumberSemigroup).ap()
-      if(!isSameType(Const, m)) {
+    return function(liftedApply){
+      if(!isSameType(Const, liftedApply)) {
         throw new TypeError(`Const.${method}: Const required`)
       }
 
-      return Const(x)
+      const y = liftedApply.valueOf()
+      // todo: should we default to just returning x, or should we throw?
+      return isSemigroup(x) && isSameType(y, x) ? Const(x.concat(y)) : Const(x)
     }
   }
 
@@ -108,10 +96,8 @@ function Const(x) {
   }
 }
 
-Const.of = _of
 Const.type = type
 
-Const[fl.of] = _of
 Const['@@type'] = _type
 
 Const['@@implements'] = _implements(

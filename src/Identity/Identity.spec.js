@@ -611,10 +611,19 @@ test('Identity traverse with Applicative TypeRep', t => {
   t.end()
 })
 
+test('Identity applyTo behavior', t => {
+  t.equal(Identity(15).applyTo(Identity(x => x * 4)).valueOf(), 60, 'should apply the function to the wrapped value')
+})
+
 test('Identity applyTo properties (Apply)', t => {
   const apply = laws['fl/apply'](Identity)
 
-  t.ok(apply.composition(equals, Identity.of(x => x * 3), Identity.of(x => x + 4), Identity.of(5)), 'composition')
+  const IdentityInstances = [
+    Identity.of(5),
+    Identity(19)
+  ]
+
+  t.ok(apply.composition(equals, IdentityInstances), 'composition')
 
   t.end()
 })
@@ -622,9 +631,9 @@ test('Identity applyTo properties (Apply)', t => {
 test('Identity applyTo properties (Applicative)', t => {
   const applicative = laws['fl/applicative'](Identity)
 
-  t.ok(applicative.identity(equals, 5), 'identity')
-  t.ok(applicative.homomorphism(equals, x => x * 3, 18), 'homomorphism')
-  t.ok(applicative.interchange(equals, Identity.of(x => x +10), 23), 'interchange')
+  t.ok(applicative.identity(equals), 'identity')
+  t.ok(applicative.homomorphism(equals), 'homomorphism')
+  t.ok(applicative.interchange(equals), 'interchange')
 
   t.end()
 })

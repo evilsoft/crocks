@@ -922,10 +922,34 @@ test('List traverse with Applicative TypeRep', t => {
   t.end()
 })
 
+test('List applyTo behavior', t => {
+
+  t.ok(
+    equals(
+      List([ 1, 2, 3 ]).applyTo(List([ x => x * 3, y => y + 6 ])),
+      List([ 3, 7, 6, 8, 9, 9 ])
+    ),
+    'should apply all functions to all items in the list'
+  )
+
+  t.ok(equals(List([ 1, 2, 3 ]).applyTo(List.empty()), List.empty()),
+    'return an empty list if an empty list is supplied')
+
+  t.ok(equals(List.empty().applyTo(List([ x => x * 3 ])), List.empty()),
+    'return an empty list if an empty list if applied on an empty list')
+
+  t.end()
+})
+
 test('List applyTo properties (Apply)', t => {
   const apply = laws['fl/apply'](List)
 
-  t.ok(apply.composition(equals, List([ x => x * 3, x => x * 4 ]), List.of(x => x + 4), List.of(5)), 'composition')
+  const ListInstances = [
+    List([ 1, 2, 3 ]),
+    List([])
+  ]
+
+  t.ok(apply.composition(equals, ListInstances), 'composition')
 
   t.end()
 })

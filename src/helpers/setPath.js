@@ -5,7 +5,6 @@ const curry = require('../core/curry')
 const isArray = require('../core/isArray')
 const isEmpty = require('../core/isEmpty')
 const isInteger = require('../core/isInteger')
-const isNil = require('../core/isNil')
 const isObject = require('../core/isObject')
 const isString = require('../core/isString')
 const object = require('../core/object')
@@ -16,7 +15,7 @@ const isValid = x =>
 const pathError =
   'setPath: Non-empty Array of non-empty Strings and/or Integers required for first argument'
 
-// setPath :: [ String | Number ] -> a -> Object -> Object
+// setPath :: [ String | Integer ] -> a -> (Object | Array) -> (Object | Array)
 function setPath(path, val, obj) {
   if(!isArray(path) || isEmpty(path)) {
     throw new TypeError(pathError)
@@ -30,7 +29,7 @@ function setPath(path, val, obj) {
   let newVal = val
 
   if(path.length > 1) {
-    const next = isNil(obj[key]) || !isValid(obj[key])
+    const next = !isValid(obj[key])
       ? isInteger(path[1]) ? [] : {}
       : obj[key]
 

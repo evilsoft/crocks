@@ -613,6 +613,8 @@ test('Identity traverse with Applicative TypeRep', t => {
 
 test('Identity applyTo behavior', t => {
   t.equal(Identity(15).applyTo(Identity(x => x * 4)).valueOf(), 60, 'should apply the function to the wrapped value')
+
+  t.end()
 })
 
 test('Identity applyTo properties (Apply)', t => {

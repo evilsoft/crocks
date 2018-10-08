@@ -633,7 +633,12 @@ const stateEquals = seed => (a, b) => {
 test('State applyTo properties (Apply)', t => {
   const apply = laws['fl/apply'](State)
 
-  t.ok(apply.composition(stateEquals, State.of(x => x * 3), State.of(x => x + 4), State.of(5)), 'composition')
+  const StateInstances = [
+    State.of(5),
+    State(s => Pair(str => str.length, s + 8))
+  ]
+
+  t.ok(apply.composition(stateEquals('foo'), StateInstances), 'composition')
 
   t.end()
 })
@@ -641,9 +646,9 @@ test('State applyTo properties (Apply)', t => {
 test('State applyTo properties (Applicative)', t => {
   const applicative = laws['fl/applicative'](State)
 
-  t.ok(applicative.identity(stateEquals, 5), 'identity')
-  t.ok(applicative.homomorphism(stateEquals, x => x * 3, 18), 'homomorphism')
-  t.ok(applicative.interchange(stateEquals, State.of(x => x +10), 23), 'interchange')
+  t.ok(applicative.identity(stateEquals('foo'), 5), 'identity')
+  t.ok(applicative.homomorphism(stateEquals('foo'), x => x * 3, 18), 'homomorphism')
+  t.ok(applicative.interchange(stateEquals('foo'), State.of(x => x +10), 23), 'interchange')
 
   t.end()
 })

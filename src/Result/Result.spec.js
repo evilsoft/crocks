@@ -1281,7 +1281,12 @@ test('Result applyTo behavior', t => {
 test('Result applyTo properties (Apply)', t => {
   const apply = laws['fl/apply'](Result)
 
-  t.ok(apply.composition(equals, Result.of(x => x * 3), Result.of(x => x + 4), Result.of(5)), 'composition')
+  const ResultInstances = [
+    Result.Ok(15),
+    Result.Err('error')
+  ]
+
+  t.ok(apply.composition(equals, ResultInstances), 'composition')
 
   t.end()
 })
@@ -1289,9 +1294,9 @@ test('Result applyTo properties (Apply)', t => {
 test('Result applyTo properties (Applicative)', t => {
   const applicative = laws['fl/applicative'](Result)
 
-  t.ok(applicative.identity(equals, 5), 'identity')
-  t.ok(applicative.homomorphism(equals, x => x * 3, 18), 'homomorphism')
-  t.ok(applicative.interchange(equals, Result.of(x => x +10), 23), 'interchange')
+  t.ok(applicative.identity(equals), 'identity')
+  t.ok(applicative.homomorphism(equals), 'homomorphism')
+  t.ok(applicative.interchange(equals), 'interchange')
 
   t.end()
 })

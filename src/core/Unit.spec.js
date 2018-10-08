@@ -429,10 +429,22 @@ test('Unit chain properties (Monad)', t => {
   t.end()
 })
 
+test('Unit applyTo behavior', t => {
+
+  t.equal(Unit(5).applyTo(Unit(x => x * 3)).valueOf(), undefined, 'not apply the supplied function')
+
+  t.end()
+})
+
 test('Unit applyTo properties (Apply)', t => {
   const apply = laws['fl/apply'](Unit)
 
-  t.ok(apply.composition(equals, Unit.of(x => x * 3), Unit.of(x => x + 4), Unit.of(5)), 'composition')
+  const UnitInstances = [
+    Unit.of(5),
+    Unit(15)
+  ]
+
+  t.ok(apply.composition(equals, UnitInstances), 'composition')
 
   t.end()
 })
@@ -440,9 +452,9 @@ test('Unit applyTo properties (Apply)', t => {
 test('Unit applyTo properties (Applicative)', t => {
   const applicative = laws['fl/applicative'](Unit)
 
-  t.ok(applicative.identity(equals, 5), 'identity')
-  t.ok(applicative.homomorphism(equals, x => x * 3, 18), 'homomorphism')
-  t.ok(applicative.interchange(equals, Unit.of(x => x +10), 23), 'interchange')
+  t.ok(applicative.identity(equals), 'identity')
+  t.ok(applicative.homomorphism(equals), 'homomorphism')
+  t.ok(applicative.interchange(equals), 'interchange')
 
   t.end()
 })

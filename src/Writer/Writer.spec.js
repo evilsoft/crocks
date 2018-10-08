@@ -13,6 +13,7 @@ const isObject = require('../core/isObject')
 const isSameType = require('../core/isSameType')
 const isString = require('../core/isString')
 const unit = require('../core/_unit')
+const Sum = require('../Sum')
 
 const fl = require('../core/flNames')
 const laws = require('../test/laws.js')
@@ -438,10 +439,32 @@ test('Writer chain properties (Monad)', t => {
   t.end()
 })
 
+test('Writer applyTo behavior', t => {
+
+  {
+    const result = Writer('foo', 15).applyTo(Writer('bar', x => x * 2))
+    t.equal(result.valueOf(), 30, 'apply functions to wrapped values')
+    t.equal(result.log().valueOf(), 'bar', 'maintain log values from the supplied Writer')
+  }
+
+  {
+    const NumWriter = _Writer(Sum)
+    const result = NumWriter(5, 20).applyTo(NumWriter(10, x => x * 2))
+    t.equal(result.log().valueOf(), 15, 'combine log values using the monoid supplied for the Writer')
+  }
+
+  t.end()
+})
+
 test('Writer applyTo properties (Apply)', t => {
   const apply = laws['fl/apply'](Writer)
 
-  t.ok(apply.composition(equals, Writer.of(x => x * 3), Writer.of(x => x + 4), Writer.of(5)), 'composition')
+  const WriterInstances = [
+    Writer.of(5),
+    Writer('foo', 14)
+  ]
+
+  t.ok(apply.composition(equals, WriterInstances), 'composition')
 
   t.end()
 })
@@ -449,9 +472,9 @@ test('Writer applyTo properties (Apply)', t => {
 test('Writer applyTo properties (Applicative)', t => {
   const applicative = laws['fl/applicative'](Writer)
 
-  t.ok(applicative.identity(equals, 5), 'identity')
-  t.ok(applicative.homomorphism(equals, x => x * 3, 18), 'homomorphism')
-  t.ok(applicative.interchange(equals, Writer.of(x => x +10), 23), 'interchange')
+  t.ok(applicative.identity(equals), 'identity')
+  t.ok(applicative.homomorphism(equals), 'homomorphism')
+  t.ok(applicative.interchange(equals), 'interchange')
 
   t.end()
 })

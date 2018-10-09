@@ -2,7 +2,7 @@
 title: "Helpers"
 description: "Helper functions"
 layout: "notopic"
-functions: ["assign", "assoc", "binary", "compose", "composek", "composep", "composes", "curry", "defaultprops", "defaultto", "dissoc", "fanout", "frompairs", "lifta2", "lifta3", "liftn", "mapprops", "mapreduce", "mconcat", "mconcatmap", "mreduce", "mreducemap", "nary", "objof", "omit", "once", "partial", "pick", "pipe", "pipek", "pipep", "pipes", "propor", "proppathor", "tap", "unary", "unit"]
+functions: ["assign", "assoc", "binary", "compose", "composek", "composep", "composes", "curry", "defaultprops", "defaultto", "dissoc", "fanout", "frompairs", "lifta2", "lifta3", "liftn", "mapprops", "mapreduce", "mconcat", "mconcatmap", "mreduce", "mreducemap", "nary", "objof", "omit", "once", "partial", "pick", "pipe", "pipek", "pipep", "pipes", "propor", "proppathor", "tap", "unary", "unit", "unsetPath"]
 weight: 20
 ---
 
@@ -983,11 +983,50 @@ applies (2) arguments to a given function.
 ```haskell
 unit :: () -> undefined
 ```
+
 While it seems like just a simple function, `unit` can be used for a number of
 things. A common use for it is as a default `noop` as it is a function that does
 nothing and returns `undefined`. You can also use it in a pointed fashion to
 represent some special value for a given type. This pointed use is the heart and
-soul of the infamous `Maybe` type.
+soul of the infamous [`Maybe`][maybe] type.
 
+#### unsetPath
+
+`crocks/helpers/unsetPath`
+
+```haskell
+unsetPath :: [ String | Integer ] -> (Object | Array) -> (Object | Array)
+```
+
+Used to remove a property or index on a deeply nested `Object`/`Array`.
+`unsetPath` is will return a new instance with the property or index removed.
+
+The provided path can be a mixture of either `Integer`s or `String`s to allow
+for traversing through both `Array`s and `Object`s. When an `Integer` is provided
+it will treat that portion as an `Array` while `String`s are used to reference
+through `Object`s.
+
+```javascript
+import unsetPath from 'crocks/helpers/unsetPath'
+
+unsetPath([ 'people', 0, 'remove' ], {
+  people: [
+    { name: 'Tonya', remove: true },
+    { name: 'Bobby' },
+  ]
+})
+//=> { people: [ { name: 'Tonya' }, { name: 'Bobby' } ] }
+
+unsetPath([ 'a', 'c', 'd' ], { a: null })
+//=> { a: null }
+
+unsetPath([ 'a', 'b' ], { a: { b: false } })
+//=> { a: {} }
+
+unsetPath([ 'a', 'b' ], { a: { c: false } })
+//=> { a: { c: false } }
+```
+
+[maybe]: ../crocks/Maybe.html
 [safe]: ../crocks/Maybe.html#safe
 [topairs]: ../crocks/Pair.html#topairs

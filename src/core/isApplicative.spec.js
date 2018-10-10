@@ -38,7 +38,7 @@ test('isApplicative fantasy-land', t => {
   const fake = Fake()
 
   t.equal(isApplicative(Fake), false, 'returns false when Applicative Constructor is passed')
-  t.equal(isApplicative(fake), false, 'returns false when Applicative is passed')
+  t.equal(isApplicative(fake), true, 'returns true when Applicative is passed')
 
   t.end()
 })

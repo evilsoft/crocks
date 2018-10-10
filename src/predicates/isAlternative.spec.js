@@ -38,7 +38,7 @@ test('isAlternative fantasy-land', t => {
   const fake = Fake()
 
   t.equal(isAlternative(Fake), false, 'returns true when Alternative Constructor is passed')
-  t.equal(isAlternative(fake), false, 'returns false when Alternative is passed')
+  t.equal(isAlternative(fake), true, 'returns true when Alternative is passed')
 
   t.end()
 })

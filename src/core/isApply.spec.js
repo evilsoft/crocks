@@ -37,7 +37,7 @@ test('isApply fantasy-land', t => {
   const fake = Fake()
 
   t.equal(isApply(Fake), false, 'returns false when Apply Constructor is passed')
-  t.equal(isApply(fake), false, 'returns false when Apply is passed')
+  t.equal(isApply(fake), true, 'returns true when Apply is passed')
 
   t.ok(isFunction(isApply))
   t.end()

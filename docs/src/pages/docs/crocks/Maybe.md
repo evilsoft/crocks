@@ -463,7 +463,6 @@ a function that it will lift into the context of the `Maybe` and apply to it
 the wrapped value. When ran on a `Just` instance, `map` will apply the wrapped
 value to the provided function and return the result in a new `Just` instance.
 
-
 ```javascript
 import Maybe from 'crocks/Maybe'
 
@@ -1506,11 +1505,11 @@ resultToMaybe :: (a -> Result e b) -> a -> Maybe b
 ```
 
 Used to transform a given `Result` instance to a `Maybe`
-instance, `resultToMaybe` will turn an `Ok` instance into a `Just` wrapping
-the original value contained in the `Ok`. All `Err` instances will map to
-a `Nothing`, mapping the originally contained value to a `Unit`. Values on the
-`Err` will be lost and as such this transformation is considered lossy in
-that regard.
+instance, `resultToMaybe` will turn an `Ok` instance into
+a [`Just`](#just) wrapping the original value contained in the `Ok`.
+All `Err` instances will map to a [`Nothing`](#nothing), mapping the originally
+contained value to a `Unit`. Values on the `Err` will be lost and as such this
+transformation is considered lossy in that regard.
 
 Like all `crocks` transformation functions, `resultToMaybe` has two possible
 signatures and will behave differently when passed either an `Result` instance

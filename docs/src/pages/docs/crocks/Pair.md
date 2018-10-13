@@ -581,8 +581,9 @@ Pair a b ~> ((a -> c), (b -> d)) -> Pair d c
 Used to map the value of a `Pair`s first position into the second position and
 the second position into the first, `swap` takes two functions as its arguments.
 The first function is used to map the value in the first position to the second,
-while the second 'maps the second into the first'. If no mapping is required on
-either side, then [`identity`][identity] functions can be used in one or both arguments.
+while the second maps the second into the first. If no mapping is required on
+either side, then [`identity`][identity] functions can be used in one or both
+arguments.
 
 ```javascript
 import Pair from 'crocks/Pair'

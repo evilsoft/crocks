@@ -125,7 +125,13 @@ equals(
 Either.Left :: c -> Either c a
 ```
 
-[FUNC DESC]
+Used to construct a `Left` instance of an `Either` that represents the
+`false` portion of disjunction. The `Left` constructor takes a value of any type
+and returns a `Left` instance wrapping the value passed to the constructor.
+
+When an instance is a `Left`, most other methods `Either` returning methods on
+the instance will do nothing to the wrapped value and return another `Left` with
+the same initial value the `Left` instance is constructed with.
 
 ```javascript
 import Either from 'crocks/Either'
@@ -169,7 +175,9 @@ chain(safeYell, Left({ level: 'inside voice' }))
 Either.Right :: a -> Either c a
 ```
 
-[FUNC DESC]
+Used to construct a `Right` instance of the an `Either` that represents
+the `true` portion of a disjunction. The `Right` constructor takes any value and
+will return a new `Right` instance wrapping the value provided.
 
 ```javascript
 import Either from 'crocks/Either'
@@ -256,7 +264,12 @@ add10ToLarge(10)
 Either.of :: a -> Either c a
 ```
 
-[FUNC DESC]
+Used to lift any value into an `Either` as a `Right`, `of` is used mostly by
+helper functions that work "generically" with instances of
+either `Applicative` or `Monad`. When working specifically with
+the `Either` type, the [`Right`](#right) constructor should be used. Reach
+for `of` when working with functions that will work with
+ANY `Applicative`/`Monad`.
 
 ```javascript
 import Either from 'crocks/Either'
@@ -294,7 +307,12 @@ Right(undefined)
 Either c a ~> b -> Boolean
 ```
 
-[ METHOD DESC ]
+Used to compare the underlying values of two `Either` instances for equality by
+value, `equals` takes any given argument and returns `true` if the passed
+arguments is a `Either` of the same instance with an underlying value equal to
+the underlying value of the `Either` the method is being called on. If the
+passed argument is not an `Either` of the same instance or the underlying values
+are not equal, `equals` will return `false`.
 
 ```javascript
 import Either from 'crocks/Either'
@@ -329,7 +347,12 @@ equals(Right('sad'), 'sad')
 Semigroup s => Either c s ~> Either c s -> Either c s
 ```
 
-[ METHOD DESC ]
+When an underlying `Right` value of a given `Either` is fixed to
+a `Semigroup`, `concat` can be used to concatenate  another `Right` instance
+with an underlying `Semigroup` of the same type. Expecting an `Either` wrapping
+a `Semigroup` of the same type, `concat` will give back a new `Either` instance
+wrapping the result of combining the two underlying `Semigroup`s. When called on
+a `Left` instance, `concat` will return a `Left` containing the initial value.
 
 ```javascript
 
@@ -383,7 +406,11 @@ fold([
 Either c a ~> (a -> b) -> Either c b
 ```
 
-[ METHOD DESC ]
+Used to apply transformations to values `Right` instances of `Either`, `map`
+takes a function that it will lift into the context of the `Either` and apply to
+it the wrapped value. When ran on a `Right` instance, `map` will apply the
+wrapped value to the provided function and return the result in a
+new `Right` instance.
 
 ```javascript
 import Either from 'crocks/Either'
@@ -443,7 +470,9 @@ processResult(57)
 Either c a ~> Either c a -> Either c a
 ```
 
-[ METHOD DESC ]
+Providing a means for a fallback or alternative value, `alt` combines two
+`Either` instances and will return the first `Right` it encounters or the
+last `Left` if it does not encounter a `Right`.
 
 ```javascript
 import Either from 'crocks/Either'
@@ -471,7 +500,17 @@ Left('error')
 Either c a ~> ((c -> d), (a -> b)) -> Either d b
 ```
 
-[ METHOD DESC ]
+The types and values that make up an `Either` can vary independently in both
+the `Left` and `Right` instances of the `Either`. While [`map`](#map) can be
+used to apply a transformation to a `Right` instance, `bimap` allows
+transformations for either.
+
+`bimap` takes two mapping functions as its arguments. The first function is used
+to map a `Left` instance, while the second maps a `Right`. `Either` only
+provides a means to map a `Right` instance exclusively using [`map`](#map). If
+the need arises to map a `Left` instance exclusively, then `bimap` can be used,
+passing the mapping function to the first argument and
+an [`identity`][identity] to the second.
 
 ```javascript
 import Either from 'crocks/Either'
@@ -554,7 +593,17 @@ flow(20)
 Either c (a -> b) ~> Either c a -> Either c b
 ```
 
-[ METHOD DESC ]
+Short for apply, `ap` is used to apply an `Either` instance containing a value
+to another `Either` instance that contains a function, resulting in
+new `Either` instance containing the result of the application. `ap` requires
+that it is called on either a `Left` containing anything or a `Right` that
+wraps a curried polyadic function.
+
+When either instance is a `Left`, `ap` will return a `Left` containing the
+original value. This can be used to safely combine multiple values under a
+given combination function. If any of the inputs results in a `Left` than they
+will never be applied to the function and not provide exceptions or undesired
+results.
 
 ```javascript
 import Either from 'crocks/Either'
@@ -623,7 +672,13 @@ Apply f => Either c (f a) ~> (b -> f b) -> f (Either c a)
 Applicative f => Either c (f a) ~> TypeRep f -> f (Either c a)
 ```
 
-[ METHOD DESC ]
+When an instance of `Either` wraps an `Apply` instance, `sequence` can be used
+to swap the type sequence. `sequence` requires either
+an `Applicative TypeRep` or an `Apply` returning function is provided for its
+argument. This will be used in the case that the `Either` instance is a `Left`.
+
+`sequence` can be derived from [`traverse`](#traverse) by passing it
+an [`identity`][identity] function.
 
 ```javascript
 import Either from 'crocks/Either'
@@ -660,7 +715,16 @@ Apply f => Either c a ~> (d -> f d), (a -> f b)) -> f Either c b
 Applicative f => Either c a ~> (TypeRep f, (a -> f b)) -> f Either c b
 ```
 
-[ METHOD DESC ]
+Used to apply the "effect" of an `Apply` to a value inside of an `Either`,
+`traverse` combines both the "effects" of the `Apply` and the `Either` by
+returning a new instance of the `Apply`, wrapping the result of the
+`Apply`s "effect" on the value in the supplied `Either`.
+
+`traverse` requires either an `Applicative TypeRep` or an `Apply` returning
+function as its first argument and a function that is used to apply the "effect"
+of the target `Apply` to the value inside of the `Either`. This will be used in
+the case that the `Either` instance is a `Left`. Both arguments must provide
+an instance of the target `Apply`.
 
 ```javascript
 import Either from 'crocks/Either'
@@ -733,7 +797,12 @@ updateSmall()
 Either c a ~> (a -> Either c b) -> Either c b
 ```
 
-[ METHOD DESC ]
+Combining a sequential series of transformations that capture disjunction can be
+accomplished with `chain`. `chain` expects a unary, `Either` returning function
+as its argument. When invoked on a `Left`, `chain` will not run the function,
+but will instead return another `Left` wrapping the original value. When called
+on a `Left` however, the inner value will be passed to provided function,
+returning the result as the new instance.
 
 ```javascript
 import Either from 'crocks/Either'
@@ -804,7 +873,14 @@ getStringValue({
 Either c a ~> ((c -> b), (a -> b)) -> Either c b
 ```
 
-[ METHOD DESC ]
+Used to take a `Left` instance and not only map its internal value, but also
+to "promote" it to a `Right` instance. `coalesce` takes two unary functions as
+its arguments and will return a new `Right` instance.
+
+The first function is used when invoked on a `Left` and will return a `Right`
+instance, wrapping the result of the function. The second function is used when
+`coalesce` is invoked on a `Right` and is used to map the original value,
+returning a new `Right` instance wrapping the result of the second function.
 
 ```javascript
 import Either from 'crocks/Either'
@@ -868,8 +944,12 @@ incValue({ a: 44 })
 Either c a ~> ((c -> d), (a -> b)) -> Either b d
 ```
 
-[ METHOD DESC ]
-
+Used to map the value of an `Either` instance and transform a `Left` into a
+`Right` or a `Right` into a `Left`, `swap` takes two functions as its arguments.
+The first function is used to map and transform a `Left` into a `Right`,
+while the second maps and transforms a `Right` into a `Left`. If no mapping of
+the contained values is required for either instance,
+then [`identity`][identity] functions can be used in one or both arguments.
 
 ```javascript
 import Either from 'crocks/Either'
@@ -957,7 +1037,23 @@ firstToEither :: c -> First a -> Either c a
 firstToEither :: c -> (a -> First b) -> a -> Either c a
 ```
 
-[TRANSFORMATION FUNCTION DESC]
+Used to transform a given [`First`][first] instance to an `Either`
+instance, `firstToEither` will turn a non-empty instance into
+a [`Right`](#right) wrapping the original value contained within
+the [`First`][first].
+
+The [`First`][first] datatype is based on a [`Maybe`][maybe] and as such its
+is fixed to a `()` type. As a means to allow for convenient
+transformation, `firstToEither` takes a default [`Left`](#left) value as the
+first argument. This value will be wrapped in a
+resulting [`Left`](#left) instance in the case of empty.
+
+Like all `crocks` transformation functions, `firstToEither` has two possible
+signatures and will behave differently when passed either
+a [`First`][first] instance or a function that returns an instance
+of [`First`][first]. When passed the instance, a transformed `Either` is
+returned. When passed a [`First`][first] returning function, a function will be
+returned that takes a given value and returns a `Either`.
 
 ```javascript
 ```
@@ -971,7 +1067,23 @@ lastToEither :: c -> Last a -> Either c a
 lastToEither :: c -> (a -> Last b) -> a -> Either c a
 ```
 
-[TRANSFORMATION FUNCTION DESC]
+Used to transform a given [`Last`][last] instance to
+an `Either`, `lastToEither` will turn a non-empty [`Last`][last] instance into
+a [`Right`](#right) instance wrapping the original value contained in the
+original non-empty.
+
+The [`Last`][last] datatype is based on a [`Maybe`][maybe] and as such its left
+or empty value is fixed to a `()` type. As a means to allow for convenient
+transformation, `lastToEither` takes a default [`Left`](#left) value as the
+first argument. This value will be wrapped in a
+resulting [`Left`](#left) instance, in the case of empty.
+
+Like all `crocks` transformation functions, `lastToEither` has two possible
+signatures and will behave differently when passed either
+a [`Last`][last] instance or a function that returns an instance
+of [`Last`][last]. When passed the instance, a transformed `Either` is returned.
+When passed a [`Last`][last] returning function, a function will be returned
+that takes a given value and returns an `Either`.
 
 ```javascript
 ```
@@ -985,7 +1097,23 @@ maybeToEither :: c -> Maybe a -> Either c a
 maybeToEither :: c -> (a -> Maybe b) -> a -> Either c a
 ```
 
-[TRANSFORMATION FUNCTION DESC]
+Used to transform a given [`Maybe`][maybe] instance to
+an `Either` instance, `maybeToEither` will turn a [`Just`][just] instance into
+a [`Right`](#right) instance wrapping the original value contained in the
+original [`Just`][just].
+
+A [`Nothing`][nothing] instance is fixed to a `()` type and as such can only
+ever contain a value of `undefined`. As a means to allow for convenient
+transformation, `maybeToEither` takes a default [`Left`](#left) value
+as the first argument. This value will be wrapped in a
+resulting [`Left`](#left) instance, in the case of [`Nothing`][nothing].
+
+Like all `crocks` transformation functions, `maybeToEither` has two possible
+signatures and will behave differently when passed either
+a [`Maybe`][maybe] instance or a function that returns an instance
+of [`Maybe`][maybe]. When passed the instance, a transformed `Either` is
+returned. When passed a [`Maybe`][maybe] returning function, a function will be
+returned that takes a given value and returns an `Either`.
 
 ```javascript
 ```
@@ -999,7 +1127,17 @@ resultToEither :: Result e a -> Either e a
 resultToEither :: (a -> Result e b) -> a -> Either e a
 ```
 
-[TRANSFORMATION FUNCTION DESC]
+Used to transform a given `Result` instance to
+an `Either` instance, `resultToEither` will turn an `Ok` instance into
+a [`Right`](#right) instance wrapping the value contained in the
+original `Ok`. If an `Err` is provided, then `resultToEither` will return
+a [`Left`](#left) instance, wrapping the original `Err` value.
+
+Like all `crocks` transformation functions, `resultToEither` has two possible
+signatures and will behave differently when passed either a `Result` instance
+or a function that returns an instance of `Result`. When passed the instance,
+a transformed `Either` is returned. When passed a `Result` returning function,
+a function will be returned that takes a given value and returns an `Either`.
 
 ```javascript
 ```
@@ -1007,5 +1145,9 @@ resultToEither :: (a -> Result e b) -> a -> Either e a
 </article>
 
 [async]: ./Async.html
+[identity]: ../functions/combinators.html#identity
+[first]: ../monoids/First.html
+[last]: ../monoids/Last.html
 [maybe]: ./Maybe.html
 [nothing]: ./Maybe.html#nothing
+[just]: ./Maybe.html#just

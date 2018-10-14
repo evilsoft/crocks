@@ -22,8 +22,8 @@ imperative `if...else` trees that are common in programming.
 
 Like most other types in `crocks`, `Either` has a right bias in regard to
 instance methods like `map`, `ap` and `chain`. This behavior can be used to
-formally capture Error handling as the `Left` value will be maintained and the
-operations will not be applied.
+formally capture Error handling as the `Left` value will be maintained and most
+the future operations will not be applied.
 
 ```javascript
 import Either from 'crocks/Either'
@@ -82,7 +82,7 @@ Either :: a -> Either c a
 ```
 
 An `Either` is typically constructed by using one of the instance constructors
-provided on the `TypeRep`, [`Left`](#left) or [`Right`](#right). For consistency,
+provided on the `TypeRep`: [`Left`](#left) or [`Right`](#right). For consistency,
 an `Either` can be constructed using its `TypeRep` as a constructor. The
 constructor is a unary function that accepts any type `a` and will return a
 `Right` instance, wrapping the value it was passed.
@@ -126,12 +126,12 @@ Either.Left :: c -> Either c a
 ```
 
 Used to construct a `Left` instance of an `Either` that represents the
-`false` portion of disjunction. The `Left` constructor takes a value of any type
-and returns a `Left` instance wrapping the value passed to the constructor.
+`false` portion of a disjunction. The `Left` constructor takes a value of any
+type and returns a `Left` instance wrapping the value passed to the constructor.
 
 When an instance is a `Left`, most other methods `Either` returning methods on
 the instance will do nothing to the wrapped value and return another `Left` with
-the same initial value the `Left` instance is constructed with.
+the same initial value the `Left` instance was constructed with.
 
 ```javascript
 import Either from 'crocks/Either'
@@ -1056,6 +1056,52 @@ returned. When passed a [`First`][first] returning function, a function will be
 returned that takes a given value and returns a `Either`.
 
 ```javascript
+import Either from 'crocks/Either'
+
+import First from 'crocks/First'
+import and from 'crocks/logic/and'
+import firstToEither from 'crocks/Either/firstToEither'
+import isNumber from 'crocks/predicates/isNumber'
+import map from 'crocks/pointfree/map'
+import mconcatMap from 'crocks/helpers/mconcatMap'
+import safe from 'crocks/Maybe/safe'
+
+const { Right } = Either
+
+// sorry :: First a -> Either String a
+const sorry =
+  firstToEither('Sorry Charlie')
+
+sorry(First.empty())
+//=> Left "Sorry Charlie"
+
+sorry(First('So Good'))
+//=> Right "So Good"
+
+// gte :: Number -> Number -> Boolean
+const gte =
+  y => x => x >= y
+
+// isValid :: a -> Boolean
+const isValid =
+  and(isNumber, gte(30))
+
+// firstValid :: a -> First Number
+const firstValid =
+  mconcatMap(First, safe(isValid))
+
+// data :: [ * ]
+const data =
+  [ 1, '200', 60, 300 ]
+
+Right(data)
+  .chain(sorry(firstValid))
+//=> Right 60
+
+Right(data)
+  .map(map(x => x.toString()))
+  .chain(sorry(firstValid))
+//=> Left "Sorry Charlie"
 ```
 
 #### lastToEither
@@ -1086,6 +1132,60 @@ When passed a [`Last`][last] returning function, a function will be returned
 that takes a given value and returns an `Either`.
 
 ```javascript
+
+import Either from 'crocks/Either'
+
+import Last from 'crocks/Last'
+import and from 'crocks/logic/and'
+import compose from 'crocks/helpers/compose'
+import concat from 'crocks/pointfree/concat'
+import lastToEither from 'crocks/Either/lastToEither'
+import isString from 'crocks/predicates/isString'
+import map from 'crocks/pointfree/map'
+import mconcatMap from 'crocks/helpers/mconcatMap'
+import safe from 'crocks/Maybe/safe'
+import when from 'crocks/logic/when'
+
+const { Right } = Either
+
+// sorry :: Last a -> Either String a
+const sorry =
+  lastToEither('Sorry Charlie')
+
+sorry(Last.empty())
+//=> Left "Sorry Charlie"
+
+sorry(Last('So Good'))
+//=> Right "So Good"
+
+// lte :: Number -> Number -> Boolean
+const lte =
+  y => x => x <= y
+
+// length :: String -> Number
+const length =
+  x => x.length
+
+// isValid :: a -> Boolean
+const isValid =
+  and(isString, compose(lte(3), length))
+
+// lastValid :: a -> Last Number
+const lastValid =
+  mconcatMap(Last, safe(isValid))
+
+// data :: [ * ]
+const data =
+  [ 1, '200', 60, 300 ]
+
+Right(data)
+  .chain(sorry(lastValid))
+//=> Right "200"
+
+Right(data)
+  .map(map(when(isString, concat('!'))))
+  .chain(sorry(lastValid))
+//=> Left "Sorry Charlie"
 ```
 
 #### maybeToEither
@@ -1116,6 +1216,39 @@ returned. When passed a [`Maybe`][maybe] returning function, a function will be
 returned that takes a given value and returns an `Either`.
 
 ```javascript
+import Either from 'crocks/Either'
+
+import Maybe from 'crocks/Maybe'
+import compose from 'crocks/helpers/compose'
+import fanout from 'crocks/helpers/fanout'
+import identity from 'crocks/combinators/identity'
+import isObject from 'crocks/predicates/isObject'
+import maybeToEither from 'crocks/Either/maybeToEither'
+import merge from 'crocks/Pair/merge'
+import safe from 'crocks/Maybe/safe'
+
+const { Nothing, Just } = Maybe
+const { Right } = Either
+
+maybeToEither(false, Nothing())
+//=> Left false
+
+maybeToEither(false, Just(true))
+//=> Right true
+
+// isValid :: a -> Either b Object
+const isValid = compose(
+  merge(maybeToEither),
+  fanout(identity, safe(isObject))
+)
+
+Right('I am String')
+  .chain(isValid)
+//=> Left "I am String"
+
+Right({ key: 'value' })
+  .chain(isValid)
+//=> Right { key: "value" }
 ```
 
 #### resultToEither
@@ -1140,6 +1273,66 @@ a transformed `Either` is returned. When passed a `Result` returning function,
 a function will be returned that takes a given value and returns an `Either`.
 
 ```javascript
+import Either from 'crocks/Either'
+
+import Result from 'crocks/Result'
+import assign from 'crocks/helpers/assign'
+import compose from 'crocks/helpers/compose'
+import composeK from 'crocks/helpers/composeK'
+import fanout from 'crocks/helpers/fanout'
+import isNumber from 'crocks/predicates/isNumber'
+import liftA2 from 'crocks/helpers/liftA2'
+import map from 'crocks/pointfree/map'
+import maybeToResult from 'crocks/Result/maybeToResult'
+import merge from 'crocks/Pair/merge'
+import objOf from 'crocks/helpers/objOf'
+import prop from 'crocks/Maybe/prop'
+import resultToEither from 'crocks/Either/resultToEither'
+import safeLift from 'crocks/Maybe/safeLift'
+
+const { Err, Ok } = Result
+
+resultToEither(Err('no good'))
+//=> Left "no good"
+
+resultToEither(Ok('so good'))
+//=> Right "so good"
+
+// safeInc :: a -> Maybe Number
+const safeInc =
+  safeLift(isNumber, x => x + 1)
+
+// incProp :: String -> a -> Maybe Number
+const incProp = key =>
+  composeK(safeInc, prop(key))
+
+// incResult :: String -> a -> Result [ String ] Object
+const incResult = key => maybeToResult(
+  [ `${key} is not valid` ],
+  compose(map(objOf(key)), incProp(key))
+)
+
+// incThem :: a -> Result [ String ] Object
+const incThem = compose(
+  merge(liftA2(assign)),
+  fanout(incResult('b'), incResult('a'))
+)
+
+Either.of({})
+  .chain(resultToEither(incThem))
+//=> Left [ "b is not valid", "a is not valid" ]
+
+Either.of({ a: 33 })
+  .chain(resultToEither(incThem))
+//=> Left [ "b is not valid" ]
+
+Either.of({ a: 99, b: '41' })
+  .chain(resultToEither(incThem))
+//=> Left [ "b is not valid" ]
+
+Either.of({ a: 99, b: 41 })
+  .chain(resultToEither(incThem))
+//=> Right { a: 100, b: 42 }
 ```
 
 </article>

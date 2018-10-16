@@ -20,7 +20,7 @@ test('both pointfree', t => {
 
   t.ok(isFunction(both), 'is a function')
 
-  const err = /both: Arrow, Function or Star required/
+  const err = /both: Strong Function or Profunctor required/
   t.throws(f(undefined), err, 'throws if arg is undefined')
   t.throws(f(null), err, 'throws if arg is null')
   t.throws(f(0), err, 'throws if arg is a falsey number')

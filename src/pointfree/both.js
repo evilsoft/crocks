@@ -21,7 +21,7 @@ function both(m) {
     return m.both()
   }
 
-  throw new TypeError('both: Arrow, Function or Star required')
+  throw new TypeError('both: Strong Function or Profunctor required')
 }
 
 module.exports = both

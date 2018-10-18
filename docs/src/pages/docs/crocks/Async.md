@@ -1274,7 +1274,7 @@ then `eitherToAsync` will return a [`Rejected`](#rejected) instance, wrapping
 the original [`Left`][left] value.
 
 Like all `crocks` transformation functions, `eitherToAsync` has two possible
-signatures and will behave differently when passed either
+signatures and will behave differently when passed
 an [`Either`][either] instance or a function that returns an instance
 of [`Either`][either]. When passed the instance, a transformed `Async` is
 returned. When passed an [`Either`][either] returning function, a function will

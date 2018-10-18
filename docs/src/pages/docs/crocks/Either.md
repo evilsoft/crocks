@@ -22,8 +22,8 @@ imperative `if...else` trees that are common in programming.
 
 Like most other types in `crocks`, `Either` has a right bias in regard to
 instance methods like `map`, `ap` and `chain`. This behavior can be used to
-formally capture Error handling as the `Left` value will be maintained and most
-the future operations will not be applied.
+formally capture Error handling as the `Left` value will be maintained
+throughout subsequent flows.
 
 ```javascript
 import Either from 'crocks/Either'
@@ -129,7 +129,7 @@ Used to construct a `Left` instance of an `Either` that represents the
 `false` portion of a disjunction. The `Left` constructor takes a value of any
 type and returns a `Left` instance wrapping the value passed to the constructor.
 
-When an instance is a `Left`, most other methods `Either` returning methods on
+When an instance is a `Left`, most `Either` returning methods on
 the instance will do nothing to the wrapped value and return another `Left` with
 the same initial value the `Left` instance was constructed with.
 
@@ -801,7 +801,7 @@ Combining a sequential series of transformations that capture disjunction can be
 accomplished with `chain`. `chain` expects a unary, `Either` returning function
 as its argument. When invoked on a `Left`, `chain` will not run the function,
 but will instead return another `Left` wrapping the original value. When called
-on a `Left` however, the inner value will be passed to provided function,
+on a `Left` however, the inner value will be passed to the provided function,
 returning the result as the new instance.
 
 ```javascript
@@ -995,7 +995,7 @@ Either c a ~> ((c -> b), (a -> b)) -> b
 ```
 
 Used as a means to map and extract a value from an `Either` based on the
-context. `either` takes two functions as its arguments. The first will map any
+context, `either` takes two functions as its arguments. The first will map any
 the value `Left` in a left instance. While the second is used to map any `Right`
 instance value. The function will return the result of whichever function is
 used to map.
@@ -1043,7 +1043,7 @@ a [`Right`](#right) wrapping the original value contained within
 the [`First`][first].
 
 The [`First`][first] datatype is based on a [`Maybe`][maybe] and as such its
-is fixed to a `()` type. As a means to allow for convenient
+is fixed to a `()` (unit) type. As a means to allow for convenient
 transformation, `firstToEither` takes a default [`Left`](#left) value as the
 first argument. This value will be wrapped in a
 resulting [`Left`](#left) instance in the case of empty.
@@ -1119,9 +1119,9 @@ a [`Right`](#right) instance wrapping the original value contained in the
 original non-empty.
 
 The [`Last`][last] datatype is based on a [`Maybe`][maybe] and as such its left
-or empty value is fixed to a `()` type. As a means to allow for convenient
-transformation, `lastToEither` takes a default [`Left`](#left) value as the
-first argument. This value will be wrapped in a
+or empty value is fixed to a `()` (unit) type. As a means to allow for
+convenient transformation, `lastToEither` takes a default [`Left`](#left) value
+as the first argument. This value will be wrapped in a
 resulting [`Left`](#left) instance, in the case of empty.
 
 Like all `crocks` transformation functions, `lastToEither` has two possible
@@ -1132,7 +1132,6 @@ When passed a [`Last`][last] returning function, a function will be returned
 that takes a given value and returns an `Either`.
 
 ```javascript
-
 import Either from 'crocks/Either'
 
 import Last from 'crocks/Last'

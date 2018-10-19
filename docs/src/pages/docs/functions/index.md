@@ -43,7 +43,7 @@ need to account for for the rest of your flow.
 
 | Function | Signature | Location |
 |:---|:---|:---|
-| [`applyto`][applyto] | `a -> (a -> b) -> b` | `crocks/combinators/applyTo` |
+| [`applyTo`][applyto] | `a -> (a -> b) -> b` | `crocks/combinators/applyTo` |
 | [`composeB`][composeb] | `(b -> c) -> (a -> b) -> a -> c` | `crocks/combinators/composeB` |
 | [`constant`][constant] | `a -> () -> a` | `crocks/combinators/constant` |
 | [`flip`][flip] | `(a -> b -> c) -> b -> a -> c` | `crocks/combinators/flip` |

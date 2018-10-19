@@ -2,7 +2,7 @@
 title: "Helpers"
 description: "Helper functions"
 layout: "notopic"
-functions: ["assign", "assoc", "binary", "compose", "composek", "composep", "composes", "curry", "defaultprops", "defaultto", "dissoc", "fanout", "frompairs", "lifta2", "lifta3", "liftn", "mapprops", "mapreduce", "mconcat", "mconcatmap", "mreduce", "mreducemap", "nary", "objof", "omit", "once", "partial", "pick", "pipe", "pipek", "pipep", "pipes", "propor", "proppathor", "tap", "unary", "unit", "unsetPath"]
+functions: ["assign", "assoc", "binary", "compose", "composek", "composep", "composes", "curry", "defaultprops", "defaultto", "dissoc", "fanout", "frompairs", "lifta2", "lifta3", "liftn", "mapprops", "mapreduce", "mconcat", "mconcatmap", "mreduce", "mreducemap", "nary", "objof", "omit", "once", "partial", "pick", "pipe", "pipek", "pipep", "pipes", "propor", "proppathor", "setpath", "tap", "unary", "unit", "unsetpath"]
 weight: 20
 ---
 
@@ -927,6 +927,56 @@ def([ 'foo', 'undef' ], data)
 
 def([ 'arr', 'length' ], data)
 //=> 2
+```
+
+#### setPath
+
+`crocks/helpers/setPath`
+
+```haskell
+setPath :: [ String | Integer ] -> a -> (Object | Array) -> (Object | Array)
+```
+
+Used to set a value on a deeply nested `Object`, `setPath` will traverse down
+a path and set the a the final property to the provided value. `setPath` returns
+the an `Object`/`Array` with the modification and does not alter the original
+`Object`/`Array` along the path.
+
+The provided path can be a mixture of either `Integer`s or `String`s to allow
+for traversing through both `Array`s and `Object`s. When an `Integer` is provided
+it will treat that portion as an `Array` while `String`s are used to reference
+through `Object`s. If at any point in the provided a `NaN`, `undefined`
+or `null` values is encountered, a new `Object`/`Array` will be created.
+
+```javascript
+import setPath from 'crocks/helpers/setPath'
+
+setPath([ 'account', 'name' ], 'Awesome Place', {
+  account: {
+    name: 'Great Place',
+    rating: 5
+  }
+})
+//=> { account: { name: 'Awesome Place', rating: 5 } }
+
+setPath([ 'people', 2, 'age' ], 26, {
+  people: [
+    { name: 'George', age: 22 },
+    { name: 'Greta', age: 21 },
+    { name: 'Ali', age: 25 }
+  ]
+})
+//=> { people: [
+//   { name: 'George', age: 22 },
+//   { name: 'Greta', age: 21 },
+//   { name: 'Ali', age: 26 },
+// ] }
+
+setPath([ 'a', 'c' ], false, { a: { b: true } })
+// => { a: { b: true, c: false } }
+
+setPath([ 'list', 'a' ], 'ohhh, I see.', { list: [ 'string', 'another' ] })
+//=> { list: { 0: 'string', 1: 'another', a: 'ohhh, I see.' } }
 ```
 
 #### tap

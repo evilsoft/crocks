@@ -8,19 +8,19 @@ weight: 2
 
 The `crocks` are the heart and soul of this library. This is where you will find
 all your favorite ADT's you have grown to love. They include gems such as:
-[`Maybe`][maybe], `Either` and `IO`, to name a few. They are usually just a simple
-constructor that takes either a function or value (depending on the type)
-and will return you a "container" that wraps whatever you passed it. Each
-container provides a variety of functions that act as the operations you can do
-on the contained value. There are many types that share the same function names,
-but what they do from type to type may vary.
+[`Maybe`][maybe], [`Either`][either] and `IO`, to name a few. They are usually
+just a simple constructor that takes either a function or value (depending on
+the type) and will return you a "container" that wraps whatever you passed it.
+Each container provides a variety of functions that act as the operations you
+can do on the contained value. There are many types that share the same function
+names, but what they do from type to type may vary.
 
 | Crock | Constructor | Instance |
 |---|:---|:---|
 | [`Arrow`][arrow] | [`id`][arrow-id] | [`both`][arrow-both], [`compose`][arrow-compose], [`contramap`][arrow-contra],[`first`][arrow-first], [`map`][arrow-map], [`promap`][arrow-promap], [`runWith`][arrow-runwith], [`second`][arrow-second] |
 | [`Async`][async] | [`Rejected`][async-rejected], [`Resolved`][async-resolved], [`all`][async-all], [`resolveAfter`][async-resolveAfter], [`rejectAfter`][async-rejectafter], [`fromNode`][async-fromnode], [`fromPromise`][async-frompromise], [`of`][async-of] | [`alt`][async-alt], [`ap`][async-ap], [`bimap`][async-bimap], [`chain`][async-chain], [`coalesce`][async-coalesce], [`race`][async-race], [`fork`][async-fork], [`map`][async-map], [`of`][async-of], [`swap`][async-swap], [`toPromise`][async-topromise] |
 | [`Const`][const] | -- | [`ap`][const-ap], [`chain`][const-chain], [`concat`][const-concat], [`equals`][const-equals], [`map`][const-map], [`valueOf`][const-valueof] |
-| `Either` | `Left`, `Right`, `of`| `alt`, `ap`, `bimap`, `chain`, `coalesce`, `concat`, `either`, `equals`, `map`, `of`, `sequence`, `swap`, `traverse` |
+| [`Either`][either] | [`Left`][either-left], [`Right`][either-right], [`of`][either-of]| [`alt`][either-alt], [`ap`][either-ap], [`bimap`][either-bimap], [`chain`][either-chain], [`coalesce`][either-coalesce], [`concat`][either-concat], [`either`][either-either], [`equals`][either-equals], [`map`][either-map], [`of`][either-of], [`sequence`][either-sequence], [`swap`][either-swap], [`traverse`][either-traverse] |
 | [`Equiv`][equiv] | [`empty`][equiv-empty] | [`concat`][equiv-concat], [`contramap`][equiv-contra], [`compareWith`][equiv-compare], [`valueOf`][equiv-value] |
 | `Identity` | `of` | `ap`, `chain`, `concat`, `equals`, `map`, `of`, `sequence`, `traverse`, `valueOf` |
 | `IO` | `of` | `ap`, `chain`, `map`, `of`, `run` |
@@ -67,7 +67,6 @@ but what they do from type to type may vary.
 [async-race]: Async.html#race
 [async-fork]: Async.html#fork
 [async-map]: Async.html#map
-[async-of]: Async.html#of
 [async-swap]: Async.html#swap
 [async-topromise]: Async.html#topromise
 
@@ -78,6 +77,23 @@ but what they do from type to type may vary.
 [const-ap]: Const.html#ap
 [const-chain]: Const.html#chain
 [const-valueof]: Const.html#valueof
+
+[either]: Either.html
+[either-left]: Either.html#left
+[either-right]: Either.html#right
+[either-of]: Either.html#of
+[either-alt]: Either.html#alt
+[either-ap]: Either.html#ap
+[either-bimap]: Either.html#bimap
+[either-chain]: Either.html#chain
+[either-coalesce]: Either.html#coalesce
+[either-concat]: Either.html#concat
+[either-either]: Either.html#either
+[either-equals]: Either.html#equals
+[either-map]: Either.html#map
+[either-sequence]: Either.html#sequence
+[either-swap]: Either.html#swap
+[either-traverse]: Either.html#traverse
 
 [equiv]: Equiv.html
 [equiv-empty]: Equiv.html#empty

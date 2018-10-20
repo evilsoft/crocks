@@ -70,11 +70,13 @@ const propPath = require('./Maybe/propPath')
 const propPathOr = require('./helpers/propPathOr')
 const safe = require('./Maybe/safe')
 const safeLift = require('./Maybe/safeLift')
+const setPath = require('./helpers/setPath')
 const tap = require('./helpers/tap')
 const toPairs = require('./Pair/toPairs')
 const tryCatch = require('./Result/tryCatch')
 const unary = require('./helpers/unary')
 const unit = require('./helpers/unit')
+const unsetPath = require('./helpers/unsetPath')
 
 // logic
 const and = require('./logic/and')
@@ -287,11 +289,13 @@ test('entry', t => {
   t.equal(crocks.propPathOr, propPathOr, 'provides the propPathOr helper')
   t.equal(crocks.safe, safe, 'provides the safe helper')
   t.equal(crocks.safeLift, safeLift, 'provides the safeLift helper')
+  t.equal(crocks.setPath, setPath, 'provides the setPath helper')
   t.equal(crocks.tap, tap, 'provides the tap helper')
   t.equal(crocks.toPairs, toPairs, 'provides the toPairs helper')
   t.equal(crocks.tryCatch, tryCatch, 'provides the tryCatch helper')
   t.equal(crocks.unary, unary, 'provides the unary helper')
   t.equal(crocks.unit, unit, 'provides the unit helper')
+  t.equal(crocks.unsetPath, unsetPath, 'provides the unsetPath helper')
 
   // logic
   t.equal(crocks.and, and, 'provides the and logic')

@@ -1,7 +1,7 @@
 /**
  * Senna.js - A blazing-fast Single Page Application engine
  * @author Liferay, Inc.
- * @version v2.5.0
+ * @version v2.6.2
  * @link http://sennajs.com
  * @license BSD-3-Clause
  */
@@ -218,7 +218,7 @@ function disableCompatibilityMode() {
  *       using "key" to keep working like before. NOTE: this may cause
  *       problems, since "key" is meant to be used differently. Only use this
  *       if it's not possible to upgrade the code to use "ref" instead.
- * @param {Object=} opt_data Optional object with data to specify more
+ * @param {Object=} data Optional object with data to specify more
  *     details, such as:
  *         - renderers {Array} the template renderers that should be in
  *           compatibility mode, either their constructors or strings
@@ -227,9 +227,9 @@ function disableCompatibilityMode() {
  * @type {Object}
  */
 function enableCompatibilityMode() {
-  var opt_data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-  compatibilityModeData_ = opt_data;
+  compatibilityModeData_ = data;
 }
 
 /**
@@ -282,17 +282,20 @@ function getFunctionName(fn) {
  * be recalculated even if this function is called multiple times.
  * @param {!function()} ctor Class constructor.
  * @param {string} propertyName Property name to be merged.
- * @param {function(*, *):*=} opt_mergeFn Function that receives the merged
+ * @param {function(*, *):*=} mergeFn Function that receives the merged
  *     value of the property so far and the next value to be merged to it.
  *     Should return these two merged together. If not passed the final property
  *     will be the first truthy value among ancestors.
+ * @return {Object}
  */
-function getStaticProperty(ctor, propertyName, opt_mergeFn) {
+function getStaticProperty(ctor, propertyName) {
+  var mergeFn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : getFirstTruthy_;
+
   var mergedName = propertyName + '_MERGED';
   if (!ctor.hasOwnProperty(mergedName)) {
+    // eslint-disable-next-line
     var merged = ctor.hasOwnProperty(propertyName) ? ctor[propertyName] : null;
     if (ctor.__proto__ && !ctor.__proto__.isPrototypeOf(Function)) {
-      var mergeFn = opt_mergeFn || getFirstTruthy_;
       merged = mergeFn(merged, getStaticProperty(ctor.__proto__, propertyName, mergeFn));
     }
     ctor[mergedName] = merged;
@@ -301,34 +304,35 @@ function getStaticProperty(ctor, propertyName, opt_mergeFn) {
 }
 
 /**
- * Gets an unique id. If `opt_object` argument is passed, the object is
+ * Gets an unique id. If `object` argument is passed, the object is
  * mutated with an unique id. Consecutive calls with the same object
  * reference won't mutate the object again, instead the current object uid
  * returns. See {@link UID_PROPERTY}.
- * @param {Object=} opt_object Optional object to be mutated with the uid. If
+ * @param {Object=} object Optional object to be mutated with the uid. If
  *     not specified this method only returns the uid.
- * @param {boolean=} opt_noInheritance Optional flag indicating if this
+ * @param {boolean=} noInheritance Optional flag indicating if this
  *     object's uid property can be inherited from parents or not.
  * @throws {Error} when invoked to indicate the method should be overridden.
+ * @return {number}
  */
-function getUid(opt_object, opt_noInheritance) {
-  if (opt_object) {
-    var id = opt_object[UID_PROPERTY];
-    if (opt_noInheritance && !opt_object.hasOwnProperty(UID_PROPERTY)) {
+function getUid(object, noInheritance) {
+  if (object) {
+    var id = object[UID_PROPERTY];
+    if (noInheritance && !object.hasOwnProperty(UID_PROPERTY)) {
       id = null;
     }
-    return id || (opt_object[UID_PROPERTY] = uniqueIdCounter_++);
+    return id || (object[UID_PROPERTY] = uniqueIdCounter_++);
   }
   return uniqueIdCounter_++;
 }
 
 /**
  * The identity function. Returns its first argument.
- * @param {*=} opt_returnValue The single value that will be returned.
+ * @param {*=} returnValue The single value that will be returned.
  * @return {?} The first argument.
  */
-function identityFunction(opt_returnValue) {
-  return opt_returnValue;
+function identityFunction(returnValue) {
+  return returnValue;
 }
 
 /**
@@ -454,10 +458,18 @@ function isString(val) {
  * Sets to true if running inside Node.js environment with extra check for
  * `process.browser` to skip Karma runner environment. Karma environment has
  * `process` defined even though it runs on the browser.
+ * @param {?Object} options Contains `checkEnv` property which if true, checks
+ * the NODE_ENV variable. If NODE_ENV equals 'test', the function returns false.
  * @return {boolean}
  */
 function isServerSide() {
-  return typeof process !== 'undefined' && typeof process.env !== 'undefined' && process.env.NODE_ENV !== 'test' && !process.browser;
+  var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { checkEnv: true };
+
+  var serverSide = typeof process !== 'undefined' && !process.browser;
+  if (serverSide && options.checkEnv) {
+    serverSide = typeof process.env !== 'undefined' && process.env.NODE_ENV !== 'test';
+  }
+  return serverSide;
 }
 
 /**
@@ -499,6 +511,10 @@ var core$2 = Object.freeze({
 // default imports for this file still work. It's best to use the named exports
 // for each function instead though, since that allows bundlers like Rollup to
 // reduce the bundle size by removing unused code.
+
+/**
+ * Set of utilities for array operations
+ */
 
 var array = function () {
 	function array() {
@@ -548,14 +564,15 @@ var array = function () {
 		/**
    * Transforms the input nested array to become flat.
    * @param {Array.<*|Array.<*>>} arr Nested array to flatten.
-   * @param {Array.<*>} opt_output Optional output array.
+   * @param {Array.<*>=} output Optional output array.
    * @return {Array.<*>} Flat array.
    */
 
 	}, {
 		key: 'flatten',
-		value: function flatten(arr, opt_output) {
-			var output = opt_output || [];
+		value: function flatten(arr) {
+			var output = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+
 			for (var i = 0; i < arr.length; i++) {
 				if (Array.isArray(arr[i])) {
 					array.flatten(arr[i], output);
@@ -603,7 +620,7 @@ var array = function () {
    * is faster and working on all array-like objects (like arguments).
    * @param {!Object} arr Array-like object to slice.
    * @param {number} start The index that should start the slice.
-   * @param {number=} opt_end The index where the slice should end, not
+   * @param {number=} end The index where the slice should end, not
    *   included in the final array. If not given, all elements after the
    *   start index will be included.
    * @return {!Array}
@@ -611,9 +628,10 @@ var array = function () {
 
 	}, {
 		key: 'slice',
-		value: function slice(arr, start, opt_end) {
+		value: function slice(arr, start) {
+			var end = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : arr.length;
+
 			var sliced = [];
-			var end = isDef(opt_end) ? opt_end : arr.length;
 			for (var i = start; i < end; i++) {
 				sliced.push(arr[i]);
 			}
@@ -623,7 +641,7 @@ var array = function () {
 	return array;
 }();
 
-/*!
+/* !
  * Polyfill from Google's Closure Library.
  * Copyright 2013 The Closure Library Authors. All Rights Reserved.
  */
@@ -648,18 +666,18 @@ async.throwException = function (exception) {
  * Fires the provided callback just before the current callstack unwinds, or as
  * soon as possible after the current JS execution context.
  * @param {function(this:THIS)} callback
- * @param {THIS=} opt_context Object to use as the "this value" when calling
+ * @param {THIS=} context Object to use as the "this value" when calling
  *     the provided function.
  * @template THIS
  */
-async.run = function (callback, opt_context) {
+async.run = function (callback, context) {
 	if (!async.run.workQueueScheduled_) {
 		// Nothing is currently scheduled, schedule it now.
 		async.nextTick(async.run.processWorkQueue);
 		async.run.workQueueScheduled_ = true;
 	}
 
-	async.run.workQueue_.push(new async.run.WorkItem_(callback, opt_context));
+	async.run.workQueue_.push(new async.run.WorkItem_(callback, context));
 };
 
 /** @private {boolean} */
@@ -715,27 +733,23 @@ async.run.WorkItem_ = function (fn, scope) {
  * reasons.
  * @param {function(this:SCOPE)} callback Callback function to fire as soon as
  *     possible.
- * @param {SCOPE=} opt_context Object in whose scope to call the listener.
+ * @param {SCOPE=} context Object in whose scope to call the listener.
  * @template SCOPE
  */
-async.nextTick = function (callback, opt_context) {
+async.nextTick = function (callback, context) {
 	var cb = callback;
-	if (opt_context) {
-		cb = callback.bind(opt_context);
+	if (context) {
+		cb = callback.bind(context);
 	}
 	cb = async.nextTick.wrapCallback_(cb);
-	// Introduced and currently only supported by IE10.
-	// Verify if variable is defined on the current runtime (i.e., node, browser).
-	// Can't use typeof enclosed in a function (such as core.isFunction) or an
-	// exception will be thrown when the function is called on an environment
-	// where the variable is undefined.
-	if (typeof setImmediate === 'function') {
-		setImmediate(cb);
-		return;
-	}
 	// Look for and cache the custom fallback version of setImmediate.
 	if (!async.nextTick.setImmediate_) {
-		async.nextTick.setImmediate_ = async.nextTick.getSetImmediateEmulator_();
+		if (typeof setImmediate === 'function' && isServerSide({ checkEnv: false })) {
+			async.nextTick.setImmediate_ = setImmediate;
+		} else {
+			// eslint-disable-next-line
+			async.nextTick.setImmediate_ = async.nextTick.getSetImmediateEmulator_();
+		}
 	}
 	async.nextTick.setImmediate_(cb);
 };
@@ -777,6 +791,7 @@ async.nextTick.getSetImmediateEmulator_ = function () {
 			var iframe = document.createElement('iframe');
 			iframe.style.display = 'none';
 			iframe.src = '';
+			iframe.title = '';
 			document.documentElement.appendChild(iframe);
 			var win = iframe.contentWindow;
 			var doc = win.document;
@@ -851,8 +866,8 @@ async.nextTick.getSetImmediateEmulator_ = function () {
  * @return {function()} The wrapped callback.
  * @private
  */
-async.nextTick.wrapCallback_ = function (opt_returnValue) {
-	return opt_returnValue;
+async.nextTick.wrapCallback_ = function (callback) {
+	return callback;
 };
 
 /**
@@ -864,6 +879,9 @@ async.nextTick.wrapCallback_ = function (opt_returnValue) {
  */
 
 var Disposable = function () {
+	/**
+  * Disposable constructor
+  */
 	function Disposable() {
 		classCallCheck(this, Disposable);
 
@@ -913,6 +931,10 @@ var Disposable = function () {
 	return Disposable;
 }();
 
+/**
+ * Set of utilities for object operations
+ */
+
 var object = function () {
 	function object() {
 		classCallCheck(this, object);
@@ -928,10 +950,18 @@ var object = function () {
    * @return {Object} Returns the target object reference.
    */
 		value: function mixin(target) {
-			var key = void 0,
-			    source = void 0;
-			for (var i = 1; i < arguments.length; i++) {
-				source = arguments[i];
+			var key = void 0;
+			var source = void 0;
+
+			for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+				args[_key - 1] = arguments[_key];
+			}
+
+			for (var i = 0; i < args.length; i++) {
+				source = args[i];
+				// Possible prototype chain leak, breaks 1 metal-dom and
+				// 1 metal-incremental-dom test if guard-for-in rule is addressed
+				// eslint-disable-next-line
 				for (key in source) {
 					target[key] = source[key];
 				}
@@ -942,15 +972,16 @@ var object = function () {
 		/**
    * Returns an object based on its fully qualified external name.
    * @param {string} name The fully qualified name.
-   * @param {object=} opt_obj The object within which to look; default is
+   * @param {object=} scope The object within which to look; default is
    *     <code>window</code>.
    * @return {?} The value (object or primitive) or, if not found, undefined.
    */
 
 	}, {
 		key: 'getObjectByName',
-		value: function getObjectByName(name, opt_obj) {
-			var scope = opt_obj || window;
+		value: function getObjectByName(name) {
+			var scope = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : window;
+
 			var parts = name.split('.');
 			return parts.reduce(function (part, key) {
 				return part[key];
@@ -979,6 +1010,8 @@ var object = function () {
 		/**
    * Checks if the two given objects are equal. This is done via a shallow
    * check, including only the keys directly contained by the 2 objects.
+   * @param {Object} obj1
+   * @param {Object} obj2
    * @return {boolean}
    */
 
@@ -1005,6 +1038,10 @@ var object = function () {
 	}]);
 	return object;
 }();
+
+/**
+ * Set of utilities for string operations
+ */
 
 var string = function () {
 	function string() {
@@ -1049,22 +1086,22 @@ var string = function () {
 		}
 
 		/**
-  * Escapes characters in the string that are not safe to use in a RegExp.
-  * @param {*} str The string to escape. If not a string, it will be casted
-  *     to one.
-  * @return {string} A RegExp safe, escaped copy of {@code s}.
-  */
+   * Escapes characters in the string that are not safe to use in a RegExp.
+   * @param {*} str The string to escape. If not a string, it will be casted
+   *     to one.
+   * @return {string} A RegExp safe, escaped copy of {@code s}.
+   */
 
 	}, {
 		key: 'escapeRegex',
 		value: function escapeRegex(str) {
-			return String(str).replace(/([-()\[\]{}+?*.$\^|,:#<!\\])/g, '\\$1').replace(/\x08/g, '\\x08');
+			return String(str).replace(/([-()[\]{}+?*.$^|,:#<!\\])/g, '\\$1').replace(/\x08/g, '\\x08'); // eslint-disable-line
 		}
 
 		/**
-  * Returns a string with at least 64-bits of randomness.
-  * @return {string} A random string, e.g. sn1s7vb4gcic.
-  */
+   * Returns a string with at least 64-bits of randomness.
+   * @return {string} A random string, e.g. sn1s7vb4gcic.
+   */
 
 	}, {
 		key: 'getRandomString',
@@ -2404,6 +2441,23 @@ var utils = function () {
 			}
 			return path;
 		}
+
+		/**
+   * Overrides document referrer
+   * @param {string} referrer
+   * @static
+   */
+
+	}, {
+		key: 'setReferrer',
+		value: function setReferrer(referrer) {
+			Object.defineProperty(globals.document, 'referrer', {
+				configurable: true,
+				get: function get$$1() {
+					return referrer;
+				}
+			});
+		}
 	}]);
 	return utils;
 }();
@@ -2420,6 +2474,10 @@ var dataAttributes = {
 
 var METAL_DATA = '__metal_data__';
 
+/**
+ * Set of utilities for dom data operations
+ */
+
 var domData = function () {
 	function domData() {
 		classCallCheck(this, domData);
@@ -2431,22 +2489,22 @@ var domData = function () {
 		/**
    * Gets Metal.js's data for the given element.
    * @param {!Element} element
-   * @param {string=} opt_name Optional property from the data to be returned.
-   * @param {*} opt_initialVal Optinal value to the set the requested property
+   * @param {string=} name Optional property from the data to be returned.
+   * @param {*=} initialValue Optional value to the set the requested property
    *     to if it doesn't exist yet in the data.
    * @return {!Object}
    */
-		value: function get$$1(element, opt_name, opt_initialVal) {
+		value: function get$$1(element, name, initialValue) {
 			if (!element[METAL_DATA]) {
 				element[METAL_DATA] = {};
 			}
-			if (!opt_name) {
+			if (!name) {
 				return element[METAL_DATA];
 			}
-			if (!element[METAL_DATA][opt_name] && opt_initialVal) {
-				element[METAL_DATA][opt_name] = opt_initialVal;
+			if (!isDef(element[METAL_DATA][name]) && isDef(initialValue)) {
+				element[METAL_DATA][name] = initialValue;
 			}
-			return element[METAL_DATA][opt_name];
+			return element[METAL_DATA][name];
 		}
 
 		/**
@@ -2460,6 +2518,27 @@ var domData = function () {
 		value: function has(element) {
 			return !!element[METAL_DATA];
 		}
+
+		/**
+   * Sets Metal.js's data for the given element.
+   * @param {!Element} element
+   * @param {string=} name Property from the data to be set.
+   * @param {*=} value Value to be set on the element.
+   * @return {!Object|*}
+   */
+
+	}, {
+		key: 'set',
+		value: function set$$1(element, name, value) {
+			if (!element[METAL_DATA]) {
+				element[METAL_DATA] = {};
+			}
+			if (!name || !isDef(value)) {
+				return element[METAL_DATA];
+			}
+			element[METAL_DATA][name] = value;
+			return element[METAL_DATA][name];
+		}
 	}]);
 	return domData;
 }();
@@ -2470,16 +2549,18 @@ var domData = function () {
  * EventHandle is a Disposable, but it's important to note that the
  * EventEmitter that created it is not the one responsible for disposing it.
  * That responsibility is for the code that holds a reference to it.
- * @param {!EventEmitter} emitter Emitter the event was subscribed to.
- * @param {string} event The name of the event that was subscribed to.
- * @param {!Function} listener The listener subscribed to the event.
- * @constructor
  * @extends {Disposable}
  */
 
 var EventHandle = function (_Disposable) {
 	inherits(EventHandle, _Disposable);
 
+	/**
+  * EventHandle constructor
+  * @param {!EventEmitter} emitter Emitter the event was subscribed to.
+  * @param {string} event The name of the event that was subscribed to.
+  * @param {!Function} listener The listener subscribed to the event.
+  */
 	function EventHandle(emitter, event, listener) {
 		classCallCheck(this, EventHandle);
 
@@ -2541,13 +2622,15 @@ var singleArray_ = [0];
 
 /**
  * EventEmitter utility.
- * @constructor
  * @extends {Disposable}
  */
 
 var EventEmitter$1 = function (_Disposable) {
 	inherits(EventEmitter, _Disposable);
 
+	/**
+  * EventEmitter constructor
+  */
 	function EventEmitter() {
 		classCallCheck(this, EventEmitter);
 
@@ -2607,7 +2690,7 @@ var EventEmitter$1 = function (_Disposable) {
    * Adds a listener to the end of the listeners array for the specified events.
    * @param {!(Array|string)} event
    * @param {!Function} listener
-   * @param {boolean} opt_default Flag indicating if this listener is a default
+   * @param {boolean} defaultListener Flag indicating if this listener is a default
    *   action for this event. Default actions are run last, and only if no previous
    *   listener call `preventDefault()` on the received event facade.
    * @return {!EventHandle} Can be used to remove the listener.
@@ -2615,12 +2698,12 @@ var EventEmitter$1 = function (_Disposable) {
 
 	}, {
 		key: 'addListener',
-		value: function addListener(event, listener, opt_default) {
+		value: function addListener(event, listener, defaultListener) {
 			this.validateListener_(listener);
 
 			var events = this.toEventsArray_(event);
 			for (var i = 0; i < events.length; i++) {
-				this.addSingleListener_(events[i], listener, opt_default);
+				this.addSingleListener_(events[i], listener, defaultListener);
 			}
 
 			return new EventHandle(this, event, listener);
@@ -2630,24 +2713,23 @@ var EventEmitter$1 = function (_Disposable) {
    * Adds a listener to the end of the listeners array for a single event.
    * @param {string} event
    * @param {!Function} listener
-   * @param {boolean} opt_default Flag indicating if this listener is a default
+   * @param {boolean} defaultListener Flag indicating if this listener is a default
    *   action for this event. Default actions are run last, and only if no previous
    *   listener call `preventDefault()` on the received event facade.
-   * @return {!EventHandle} Can be used to remove the listener.
-   * @param {Function=} opt_origin The original function that was added as a
+   * @param {Function=} origin The original function that was added as a
    *   listener, if there is any.
    * @protected
    */
 
 	}, {
 		key: 'addSingleListener_',
-		value: function addSingleListener_(event, listener, opt_default, opt_origin) {
+		value: function addSingleListener_(event, listener, defaultListener, origin) {
 			this.runListenerHandlers_(event);
-			if (opt_default || opt_origin) {
+			if (defaultListener || origin) {
 				listener = {
-					default: opt_default,
+					default: defaultListener,
 					fn: listener,
-					origin: opt_origin
+					origin: origin
 				};
 			}
 			this.events_ = this.events_ || {};
@@ -2702,7 +2784,7 @@ var EventEmitter$1 = function (_Disposable) {
 				return false;
 			}
 
-			var args = array.slice(arguments, 1);
+			var args = array.slice(arguments, 1); // eslint-disable-line
 			this.runListeners_(listeners, args, this.buildFacade_(event));
 			return true;
 		}
@@ -2790,11 +2872,14 @@ var EventEmitter$1 = function (_Disposable) {
 				return;
 			}
 
+			/**
+    *
+    */
 			function handlerInternal() {
 				if (--amount === 0) {
 					self.removeListener(event, handlerInternal);
 				}
-				listener.apply(self, arguments);
+				listener.apply(self, arguments); // eslint-disable-line
 			}
 
 			self.addSingleListener_(event, handlerInternal, false, listener);
@@ -2813,13 +2898,14 @@ var EventEmitter$1 = function (_Disposable) {
 		key: 'matchesListener_',
 		value: function matchesListener_(listenerObj, listener) {
 			var fn = listenerObj.fn || listenerObj;
-			return fn === listener || listenerObj.origin && listenerObj.origin === listener;
+			return fn === listener || listenerObj.origin && listenerObj.origin === listener // eslint-disable-line
+			;
 		}
 
 		/**
    * Removes a listener for the specified events.
    * Caution: changes array indices in the listener array behind the listener.
-   * @param {!(Array|string)} events
+   * @param {!(Array|string)} event
    * @param {!Function} listener
    * @return {!Object} Returns emitter, so calls can be chained.
    */
@@ -2850,19 +2936,19 @@ var EventEmitter$1 = function (_Disposable) {
 	}, {
 		key: 'on',
 		value: function on() {
-			return this.addListener.apply(this, arguments);
+			return this.addListener.apply(this, arguments); // eslint-disable-line
 		}
 
 		/**
    * Adds handler that gets triggered when an event is listened to on this
    * instance.
-   * @param {!function()}
+   * @param {!function()} handler
    */
 
 	}, {
 		key: 'onListener',
 		value: function onListener(handler) {
-			this.listenerHandlers_ = this.addHandler_(this.listenerHandlers_, handler);
+			this.listenerHandlers_ = this.addHandler_(this.listenerHandlers_, handler); // eslint-disable-line
 		}
 
 		/**
@@ -2883,16 +2969,16 @@ var EventEmitter$1 = function (_Disposable) {
    * Removes all listeners, or those of the specified events. It's not a good
    * idea to remove listeners that were added elsewhere in the code,
    * especially when it's on an emitter that you didn't create.
-   * @param {(Array|string)=} opt_events
+   * @param {(Array|string)=} event
    * @return {!Object} Returns emitter, so calls can be chained.
    */
 
 	}, {
 		key: 'removeAllListeners',
-		value: function removeAllListeners(opt_events) {
+		value: function removeAllListeners(event) {
 			if (this.events_) {
-				if (opt_events) {
-					var events = this.toEventsArray_(opt_events);
+				if (event) {
+					var events = this.toEventsArray_(event);
 					for (var i = 0; i < events.length; i++) {
 						this.events_[events[i]] = null;
 					}
@@ -2935,7 +3021,7 @@ var EventEmitter$1 = function (_Disposable) {
 	}, {
 		key: 'removeListener',
 		value: function removeListener() {
-			return this.off.apply(this, arguments);
+			return this.off.apply(this, arguments); // eslint-disable-line
 		}
 
 		/**
@@ -2960,7 +3046,7 @@ var EventEmitter$1 = function (_Disposable) {
    * Runs the given listeners.
    * @param {!Array} listeners
    * @param {!Array} args
-   * @param (Object) facade
+   * @param {Object} facade
    * @protected
    */
 
@@ -3038,6 +3124,13 @@ var EventEmitter$1 = function (_Disposable) {
 	return EventEmitter;
 }(Disposable);
 
+/**
+ * Converts to an array
+ * @param {Object} val
+ * @return {Array}
+ */
+
+
 function toArray$1(val) {
 	val = val || [];
 	return Array.isArray(val) ? val : [val];
@@ -3048,20 +3141,22 @@ function toArray$1(val) {
  * instances together, emitting events from the first emitter through the
  * second one. That means that listening to a supported event on the target
  * emitter will mean listening to it on the origin emitter as well.
- * @param {EventEmitter} originEmitter Events originated on this emitter
- *   will be fired for the target emitter's listeners as well.
- * @param {EventEmitter} targetEmitter Event listeners attached to this emitter
- *   will also be triggered when the event is fired by the origin emitter.
- * @param {Object} opt_blacklist Optional blacklist of events that should not be
- *   proxied.
- * @constructor
  * @extends {Disposable}
  */
 
 var EventEmitterProxy = function (_Disposable) {
 	inherits(EventEmitterProxy, _Disposable);
 
-	function EventEmitterProxy(originEmitter, targetEmitter, opt_blacklist, opt_whitelist) {
+	/**
+  * @param {EventEmitter} originEmitter Events originated on this emitter
+  * will be fired for the target emitter's listeners as well.
+  * @param {EventEmitter} targetEmitter Event listeners attached to this emitter
+  * will also be triggered when the event is fired by the origin emitter.
+  * @param {Object} blacklist Optional blacklist of events that should not be
+  * proxied.
+  * @param {Object} whitelist
+  */
+	function EventEmitterProxy(originEmitter, targetEmitter, blacklist, whitelist) {
 		classCallCheck(this, EventEmitterProxy);
 
 		/**
@@ -3071,7 +3166,7 @@ var EventEmitterProxy = function (_Disposable) {
    */
 		var _this = possibleConstructorReturn(this, (EventEmitterProxy.__proto__ || Object.getPrototypeOf(EventEmitterProxy)).call(this));
 
-		_this.blacklist_ = opt_blacklist;
+		_this.blacklist_ = blacklist;
 
 		/**
    * The origin emitter. This emitter's events will be proxied through the
@@ -3110,7 +3205,7 @@ var EventEmitterProxy = function (_Disposable) {
    * @type {Object}
    * @protected
    */
-		_this.whitelist_ = opt_whitelist;
+		_this.whitelist_ = whitelist;
 
 		_this.startProxy_();
 		return _this;
@@ -3152,7 +3247,9 @@ var EventEmitterProxy = function (_Disposable) {
 	}, {
 		key: 'emitOnTarget_',
 		value: function emitOnTarget_() {
-			this.targetEmitter_.emit.apply(this.targetEmitter_, arguments);
+			var _targetEmitter_;
+
+			(_targetEmitter_ = this.targetEmitter_).emit.apply(_targetEmitter_, arguments);
 		}
 
 		/**
@@ -3263,13 +3360,15 @@ var EventEmitterProxy = function (_Disposable) {
 /**
  * EventHandler utility. It's useful for easily removing a group of
  * listeners from different EventEmitter instances.
- * @constructor
  * @extends {Disposable}
  */
 
 var EventHandler = function (_Disposable) {
 	inherits(EventHandler, _Disposable);
 
+	/**
+  * EventHandler constructor
+  */
 	function EventHandler() {
 		classCallCheck(this, EventHandler);
 
@@ -3295,8 +3394,12 @@ var EventHandler = function (_Disposable) {
 	createClass(EventHandler, [{
 		key: 'add',
 		value: function add() {
+			for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+				args[_key] = arguments[_key];
+			}
+
 			for (var i = 0; i < arguments.length; i++) {
-				this.eventHandles_.push(arguments[i]);
+				this.eventHandles_.push(args[i]);
 			}
 		}
 
@@ -3342,16 +3445,16 @@ var DomDelegatedEventHandle = function (_EventHandle) {
   * @param {!Event} emitter Element the event was subscribed to.
   * @param {string} event The name of the event that was subscribed to.
   * @param {!Function} listener The listener subscribed to the event.
-  * @param {string=} opt_selector An optional selector used when delegating
+  * @param {string=} selector An optional selector used when delegating
   *     the event.
   * @constructor
   */
-	function DomDelegatedEventHandle(emitter, event, listener, opt_selector) {
+	function DomDelegatedEventHandle(emitter, event, listener, selector) {
 		classCallCheck(this, DomDelegatedEventHandle);
 
 		var _this = possibleConstructorReturn(this, (DomDelegatedEventHandle.__proto__ || Object.getPrototypeOf(DomDelegatedEventHandle)).call(this, emitter, event, listener));
 
-		_this.selector_ = opt_selector;
+		_this.selector_ = selector;
 		return _this;
 	}
 
@@ -3392,16 +3495,16 @@ var DomEventHandle = function (_EventHandle) {
   * @param {!EventEmitter} emitter Emitter the event was subscribed to.
   * @param {string} event The name of the event that was subscribed to.
   * @param {!Function} listener The listener subscribed to the event.
-  * @param {boolean} opt_capture Flag indicating if listener should be triggered
+  * @param {boolean} capture Flag indicating if listener should be triggered
   *   during capture phase, instead of during the bubbling phase. Defaults to false.
   * @constructor
   */
-	function DomEventHandle(emitter, event, listener, opt_capture) {
+	function DomEventHandle(emitter, event, listener, capture) {
 		classCallCheck(this, DomEventHandle);
 
 		var _this = possibleConstructorReturn(this, (DomEventHandle.__proto__ || Object.getPrototypeOf(DomEventHandle)).call(this, emitter, event, listener));
 
-		_this.capture_ = opt_capture;
+		_this.capture_ = capture;
 		return _this;
 	}
 
@@ -3577,7 +3680,7 @@ function append(parent, child) {
 	if (isString(child)) {
 		child = buildFragment(child);
 	}
-	if (child instanceof NodeList) {
+	if (isNodeListLike(child)) {
 		var childArr = Array.prototype.slice.call(child);
 		for (var i = 0; i < childArr.length; i++) {
 			parent.appendChild(childArr[i]);
@@ -3630,20 +3733,20 @@ function contains(element1, element2) {
  *     that should match the event for the listener to be triggered.
  * @param {!function(!Object)} callback Function to be called when the event
  *     is triggered. It will receive the normalized event object.
- * @param {boolean=} opt_default Optional flag indicating if this is a default
+ * @param {boolean=} defaultListener Optional flag indicating if this is a default
  *     listener. That means that it would only be executed after all non
  *     default listeners, and only if the event isn't prevented via
  *     `preventDefault`.
  * @return {!EventHandle} Can be used to remove the listener.
  */
-function delegate(element, eventName, selectorOrTarget, callback, opt_default) {
+function delegate(element, eventName, selectorOrTarget, callback, defaultListener) {
 	var customConfig = customEvents[eventName];
 	if (customConfig && customConfig.delegate) {
 		eventName = customConfig.originalEvent;
 		callback = customConfig.handler.bind(customConfig, callback);
 	}
 
-	if (opt_default) {
+	if (defaultListener) {
 		// Wrap callback so we don't set property directly on it.
 		callback = callback.bind();
 		callback.defaultListener_ = true;
@@ -3664,10 +3767,12 @@ function delegate(element, eventName, selectorOrTarget, callback, opt_default) {
  * simulating browsers behaviour, avoiding event listeners to be called by triggerEvent method.
  * @param {Element} node Element to be checked.
  * @param {string} eventName The event name.
+ * @param {Object=} eventObj
  * @private
+ * @return {boolean}
  */
-function isAbleToInteractWith_(node, eventName, opt_eventObj) {
-	if (opt_eventObj && eventName === 'click' && opt_eventObj.button === 2) {
+function isAbleToInteractWith_(node, eventName, eventObj) {
+	if (eventObj && eventName === 'click' && eventObj.button === 2) {
 		// Firefox triggers "click" events on the document for right clicks. This
 		// causes our delegate logic to trigger it for regular elements too, which
 		// shouldn't happen. Ignoring them here.
@@ -3679,6 +3784,15 @@ function isAbleToInteractWith_(node, eventName, opt_eventObj) {
 		return !(node.disabled || parent(node, 'fieldset[disabled]'));
 	}
 	return true;
+}
+
+/**
+ * Returns true if the specified value is a NodeList or like one.
+ * @param {?} val Variable to test.
+ * @return {boolean} Whether variable is like a NodeList.
+ */
+function isNodeListLike(val) {
+	return isDefAndNotNull(val) && typeof val.length === 'number' && typeof val.item === 'function';
 }
 
 /**
@@ -3764,12 +3878,18 @@ function match(element, selector) {
  * @private
  */
 function matchFallback_(element, selector) {
-	var nodes = document.querySelectorAll(selector, element.parentNode);
-	for (var i = 0; i < nodes.length; ++i) {
-		if (nodes[i] === element) {
-			return true;
+	var parentNode = element.parentNode;
+
+	if (parentNode) {
+		var nodes = parentNode.querySelectorAll(selector);
+
+		for (var i = 0; i < nodes.length; ++i) {
+			if (nodes[i] === element) {
+				return true;
+			}
 		}
 	}
+
 	return false;
 }
 
@@ -3778,6 +3898,7 @@ function matchFallback_(element, selector) {
  * selector, or null if there is none.
  * @param {!Element} element
  * @param {?string} selector
+ * @return {Element|null}
  */
 
 
@@ -3800,11 +3921,11 @@ function normalizeDelegateEvent_(event) {
  * @param {string} eventName The name of the event to listen to.
  * @param {!function(!Object)} callback Function to be called when the event is
  *   triggered. It will receive the normalized event object.
- * @param {boolean} opt_capture Flag indicating if listener should be triggered
+ * @param {boolean} capture Flag indicating if listener should be triggered
  *   during capture phase, instead of during the bubbling phase. Defaults to false.
  * @return {!DomEventHandle} Can be used to remove the listener.
  */
-function on(element, eventName, callback, opt_capture) {
+function on(element, eventName, callback, capture) {
 	if (isString(element)) {
 		return delegate(document, eventName, element, callback);
 	}
@@ -3813,8 +3934,8 @@ function on(element, eventName, callback, opt_capture) {
 		eventName = customConfig.originalEvent;
 		callback = customConfig.handler.bind(customConfig, callback);
 	}
-	element.addEventListener(eventName, callback, opt_capture);
-	return new DomEventHandle(element, eventName, callback, opt_capture);
+	element.addEventListener(eventName, callback, capture);
+	return new DomEventHandle(element, eventName, callback, capture);
 }
 
 /**
@@ -3830,7 +3951,7 @@ function on(element, eventName, callback, opt_capture) {
 function once(element, eventName, callback) {
 	var domEventHandle = on(element, eventName, function () {
 		domEventHandle.removeListener();
-		return callback.apply(this, arguments);
+		return callback.apply(this, arguments); // eslint-disable-line
 	});
 	return domEventHandle;
 }
@@ -3845,6 +3966,15 @@ function once(element, eventName, callback) {
 function parent(element, selector) {
 	return closest(element.parentNode, selector);
 }
+
+/**
+ * Inserts a node before first child of the parent. If child is a HTML string
+ * it will be converted to document fragment before prepending it to the parent.
+ * @param {!Element} parent The node to prepend to.
+ * @param {!(Element|NodeList|string)} child The thing to prepend to the parent.
+ * @return {!Element} The prepended child.
+ */
+
 
 /**
  * Registers a custom event.
@@ -3978,7 +4108,7 @@ function supportsEvent(element, eventName) {
 
 /**
  * This triggers all default matched delegated listeners of a given event type.
- * @param {!Array} defaultFns Array to collect default listeners in, instead
+ * @param {!Array} defFns Array to collect default listeners in, instead
  * @param {!Event} event
  * @return {boolean} False if at least one of the triggered callbacks returns
  *     false, or true otherwise.
@@ -4065,7 +4195,7 @@ function triggerElementListeners_(element, event, defaultFns) {
  * NOTE: This should mostly be used for testing, not on real code.
  * @param {!Element} element The node that should trigger the event.
  * @param {string} eventName The name of the event to be triggred.
- * @param {Object=} opt_eventObj An object with data that should be on the
+ * @param {Object=} eventObj An object with data that should be on the
  *   triggered event's payload.
  */
 
@@ -4158,7 +4288,7 @@ var DomEventEmitterProxy = function (_EventEmitterProxy) {
 					var index = event.indexOf(':', 9);
 					var eventName = event.substring(9, index);
 					var selector = event.substring(index + 1);
-					return delegate(this.originEmitter_, eventName, selector, listener);
+					return delegate(this.originEmitter_, eventName, selector, listener); // eslint-disable-line
 				} else {
 					return on(this.originEmitter_, event, listener);
 				}
@@ -4184,6 +4314,7 @@ var DomEventEmitterProxy = function (_EventEmitterProxy) {
    * Checks if the given event is supported by the origin element.
    * @param {string} event
    * @protected
+   * @return {boolean}
    */
 
 	}, {
@@ -4206,7 +4337,7 @@ var DomEventEmitterProxy = function (_EventEmitterProxy) {
 	}, {
 		key: 'shouldProxyEvent_',
 		value: function shouldProxyEvent_(event) {
-			return get(DomEventEmitterProxy.prototype.__proto__ || Object.getPrototypeOf(DomEventEmitterProxy.prototype), 'shouldProxyEvent_', this).call(this, event) && this.isSupportedDomEvent_(event);
+			return get(DomEventEmitterProxy.prototype.__proto__ || Object.getPrototypeOf(DomEventEmitterProxy.prototype), 'shouldProxyEvent_', this).call(this, event) && this.isSupportedDomEvent_(event); // eslint-disable-line
 		}
 	}]);
 	return DomEventEmitterProxy;
@@ -4252,10 +4383,14 @@ var features = function () {
 			var prefixes = ['Webkit', 'MS', 'O', ''];
 			var typeTitleCase = string.replaceInterval(type, 0, 1, type.substring(0, 1).toUpperCase());
 			var suffixes = [typeTitleCase + 'End', typeTitleCase + 'End', typeTitleCase + 'End', type + 'end'];
+			if (!features.animationElement_) {
+				features.animationElement_ = document.createElement('div');
+			}
 			for (var i = 0; i < prefixes.length; i++) {
-				if (features.animationElement_.style[prefixes[i] + typeTitleCase] !== undefined) {
-					return prefixes[i].toLowerCase() + suffixes[i];
-				}
+				if (features.animationElement_.style[prefixes[i] + typeTitleCase] !== undefined // eslint-disable-line
+				) {
+						return prefixes[i].toLowerCase() + suffixes[i];
+					}
 			}
 			return type + 'end';
 		}
@@ -4282,7 +4417,7 @@ var features = function () {
 	return features;
 }();
 
-features.animationElement_ = document.createElement('div');
+features.animationElement_ = undefined;
 features.animationEventName_ = undefined;
 features.attrOrderChange_ = undefined;
 
@@ -4301,15 +4436,15 @@ var globalEval = function () {
 		/**
    * Evaluates the given string in the global scope.
    * @param {string} text
-   * @param {function()=} opt_appendFn Optional function to append the node
+   * @param {function()=} appendFn Optional function to append the node
    *   into document.
    * @return {Element} script
    */
-		value: function run(text, opt_appendFn) {
+		value: function run(text, appendFn) {
 			var script = document.createElement('script');
 			script.text = text;
-			if (opt_appendFn) {
-				opt_appendFn(script);
+			if (appendFn) {
+				appendFn(script);
 			} else {
 				document.head.appendChild(script);
 			}
@@ -4320,28 +4455,28 @@ var globalEval = function () {
 		/**
    * Evaluates the given javascript file in the global scope.
    * @param {string} src The file's path.
-   * @param {function()=} opt_callback Optional function to be called
+   * @param {function()=} defaultFn Optional function to be called
    *   when the script has been run.
-   * @param {function()=} opt_appendFn Optional function to append the node
+   * @param {function()=} appendFn Optional function to append the node
    *   into document.
    * @return {Element} script
    */
 
 	}, {
 		key: 'runFile',
-		value: function runFile(src, opt_callback, opt_appendFn) {
+		value: function runFile(src, defaultFn, appendFn) {
 			var script = document.createElement('script');
 			script.src = src;
 
 			var callback = function callback() {
 				exitDocument(script);
-				opt_callback && opt_callback();
+				defaultFn && defaultFn();
 			};
 			once(script, 'load', callback);
 			once(script, 'error', callback);
 
-			if (opt_appendFn) {
-				opt_appendFn(script);
+			if (appendFn) {
+				appendFn(script);
 			} else {
 				document.head.appendChild(script);
 			}
@@ -4352,18 +4487,18 @@ var globalEval = function () {
 		/**
    * Evaluates the code referenced by the given script element.
    * @param {!Element} script
-   * @param {function()=} opt_callback Optional function to be called
+   * @param {function()=} defaultFn Optional function to be called
    *   when the script has been run.
-   * @param {function()=} opt_appendFn Optional function to append the node
+   * @param {function()=} appendFn Optional function to append the node
    *   into document.
    * @return {Element} script
    */
 
 	}, {
 		key: 'runScript',
-		value: function runScript(script, opt_callback, opt_appendFn) {
+		value: function runScript(script, defaultFn, appendFn) {
 			var callback = function callback() {
-				opt_callback && opt_callback();
+				defaultFn && defaultFn();
 			};
 			if (script.type && script.type !== 'text/javascript') {
 				async.nextTick(callback);
@@ -4371,30 +4506,30 @@ var globalEval = function () {
 			}
 			exitDocument(script);
 			if (script.src) {
-				return globalEval.runFile(script.src, opt_callback, opt_appendFn);
+				return globalEval.runFile(script.src, defaultFn, appendFn);
 			} else {
 				async.nextTick(callback);
-				return globalEval.run(script.text, opt_appendFn);
+				return globalEval.run(script.text, appendFn);
 			}
 		}
 
 		/**
    * Evaluates any script tags present in the given element.
    * @param {!Element} element
-   * @param {function()=} opt_callback Optional function to be called
+   * @param {function()=} defaultFn Optional function to be called
    *   when the script has been run.
-   * @param {function()=} opt_appendFn Optional function to append the node
+   * @param {function()=} appendFn Optional function to append the node
    *   into document.
    */
 
 	}, {
 		key: 'runScriptsInElement',
-		value: function runScriptsInElement(element, opt_callback, opt_appendFn) {
+		value: function runScriptsInElement(element, defaultFn, appendFn) {
 			var scripts = element.querySelectorAll('script');
 			if (scripts.length) {
-				globalEval.runScriptsInOrder(scripts, 0, opt_callback, opt_appendFn);
-			} else if (opt_callback) {
-				async.nextTick(opt_callback);
+				globalEval.runScriptsInOrder(scripts, 0, defaultFn, appendFn);
+			} else if (defaultFn) {
+				async.nextTick(defaultFn);
 			}
 		}
 
@@ -4402,22 +4537,22 @@ var globalEval = function () {
    * Runs the given scripts elements in the order that they appear.
    * @param {!NodeList} scripts
    * @param {number} index
-   * @param {function()=} opt_callback Optional function to be called
+   * @param {function()=} defaultFn Optional function to be called
    *   when the script has been run.
-   * @param {function()=} opt_appendFn Optional function to append the node
+   * @param {function()=} appendFn Optional function to append the node
    *   into document.
    */
 
 	}, {
 		key: 'runScriptsInOrder',
-		value: function runScriptsInOrder(scripts, index, opt_callback, opt_appendFn) {
+		value: function runScriptsInOrder(scripts, index, defaultFn, appendFn) {
 			globalEval.runScript(scripts.item(index), function () {
 				if (index < scripts.length - 1) {
-					globalEval.runScriptsInOrder(scripts, index + 1, opt_callback, opt_appendFn);
-				} else if (opt_callback) {
-					async.nextTick(opt_callback);
+					globalEval.runScriptsInOrder(scripts, index + 1, defaultFn, appendFn); // eslint-disable-line
+				} else if (defaultFn) {
+					async.nextTick(defaultFn);
 				}
-			}, opt_appendFn);
+			}, appendFn);
 		}
 	}]);
 	return globalEval;
@@ -4438,15 +4573,15 @@ var globalEvalStyles = function () {
 		/**
    * Evaluates the given style.
    * @param {string} text
-   * @param {function()=} opt_appendFn Optional function to append the node
+   * @param {function()=} appendFn Optional function to append the node
    *   into document.
    * @return {Element} style
    */
-		value: function run(text, opt_appendFn) {
+		value: function run(text, appendFn) {
 			var style = document.createElement('style');
 			style.innerHTML = text;
-			if (opt_appendFn) {
-				opt_appendFn(style);
+			if (appendFn) {
+				appendFn(style);
 			} else {
 				document.head.appendChild(style);
 			}
@@ -4456,38 +4591,38 @@ var globalEvalStyles = function () {
 		/**
    * Evaluates the given style file.
    * @param {string} href The file's path.
-   * @param {function()=} opt_callback Optional function to be called
+   * @param {function()=} defaultFn Optional function to be called
    *   when the styles has been run.
-   * @param {function()=} opt_appendFn Optional function to append the node
+   * @param {function()=} appendFn Optional function to append the node
    *   into document.
    * @return {Element} style
    */
 
 	}, {
 		key: 'runFile',
-		value: function runFile(href, opt_callback, opt_appendFn) {
+		value: function runFile(href, defaultFn, appendFn) {
 			var link = document.createElement('link');
 			link.rel = 'stylesheet';
 			link.href = href;
-			globalEvalStyles.runStyle(link, opt_callback, opt_appendFn);
+			globalEvalStyles.runStyle(link, defaultFn, appendFn);
 			return link;
 		}
 
 		/**
    * Evaluates the code referenced by the given style/link element.
    * @param {!Element} style
-   * @param {function()=} opt_callback Optional function to be called
+   * @param {function()=} defaultFn Optional function to be called
    *   when the script has been run.
-   * @param {function()=} opt_appendFn Optional function to append the node
+   * @param {function()=} appendFn Optional function to append the node
    *   into document.
    *  @return {Element} style
    */
 
 	}, {
 		key: 'runStyle',
-		value: function runStyle(style, opt_callback, opt_appendFn) {
+		value: function runStyle(style, defaultFn, appendFn) {
 			var callback = function callback() {
-				opt_callback && opt_callback();
+				defaultFn && defaultFn();
 			};
 			if (style.rel && style.rel !== 'stylesheet') {
 				async.nextTick(callback);
@@ -4501,8 +4636,8 @@ var globalEvalStyles = function () {
 				once(style, 'error', callback);
 			}
 
-			if (opt_appendFn) {
-				opt_appendFn(style);
+			if (appendFn) {
+				appendFn(style);
 			} else {
 				document.head.appendChild(style);
 			}
@@ -4513,72 +4648,82 @@ var globalEvalStyles = function () {
 		/**
    * Evaluates any style present in the given element.
    * @param {!Element} element
-   * @param {function()=} opt_callback Optional function to be called when the
+   * @param {function()=} defaultFn Optional function to be called when the
    *   style has been run.
-   * @param {function()=} opt_appendFn Optional function to append the node
+   * @param {function()=} appendFn Optional function to append the node
    *   into document.
    */
 
 	}, {
 		key: 'runStylesInElement',
-		value: function runStylesInElement(element, opt_callback, opt_appendFn) {
+		value: function runStylesInElement(element, defaultFn, appendFn) {
 			var styles = element.querySelectorAll('style,link');
-			if (styles.length === 0 && opt_callback) {
-				async.nextTick(opt_callback);
+			if (styles.length === 0 && defaultFn) {
+				async.nextTick(defaultFn);
 				return;
 			}
 
 			var loadCount = 0;
 			var callback = function callback() {
-				if (opt_callback && ++loadCount === styles.length) {
-					async.nextTick(opt_callback);
+				if (defaultFn && ++loadCount === styles.length) {
+					async.nextTick(defaultFn);
 				}
 			};
 			for (var i = 0; i < styles.length; i++) {
-				globalEvalStyles.runStyle(styles[i], callback, opt_appendFn);
+				globalEvalStyles.runStyle(styles[i], callback, appendFn);
 			}
 		}
 	}]);
 	return globalEvalStyles;
 }();
 
-var mouseEventMap = {
-	mouseenter: 'mouseover',
-	mouseleave: 'mouseout',
-	pointerenter: 'pointerover',
-	pointerleave: 'pointerout'
-};
-Object.keys(mouseEventMap).forEach(function (eventName) {
-	registerCustomEvent(eventName, {
-		delegate: true,
-		handler: function handler(callback, event) {
-			var related = event.relatedTarget;
-			var target = event.delegateTarget;
-			if (!related || related !== target && !contains(target, related)) {
+/**
+ * Register custom events for event delegation.
+ */
+function registerEvents() {
+	var mouseEventMap = {
+		mouseenter: 'mouseover',
+		mouseleave: 'mouseout',
+		pointerenter: 'pointerover',
+		pointerleave: 'pointerout'
+	};
+	Object.keys(mouseEventMap).forEach(function (eventName) {
+		registerCustomEvent(eventName, {
+			delegate: true,
+			handler: function handler(callback, event) {
+				var related = event.relatedTarget;
+				var target = event.delegateTarget;
+				// eslint-disable-next-line
+				if (!related || related !== target && !contains(target, related)) {
+					event.customType = eventName;
+					return callback(event);
+				}
+			},
+			originalEvent: mouseEventMap[eventName]
+		});
+	});
+
+	var animationEventMap = {
+		animation: 'animationend',
+		transition: 'transitionend'
+	};
+	Object.keys(animationEventMap).forEach(function (eventType) {
+		var eventName = animationEventMap[eventType];
+		registerCustomEvent(eventName, {
+			event: true,
+			delegate: true,
+			handler: function handler(callback, event) {
 				event.customType = eventName;
 				return callback(event);
-			}
-		},
-		originalEvent: mouseEventMap[eventName]
+			},
+			originalEvent: features.checkAnimationEventName()[eventType]
+		});
 	});
-});
+}
 
-var animationEventMap = {
-	animation: 'animationend',
-	transition: 'transitionend'
-};
-Object.keys(animationEventMap).forEach(function (eventType) {
-	var eventName = animationEventMap[eventType];
-	registerCustomEvent(eventName, {
-		event: true,
-		delegate: true,
-		handler: function handler(callback, event) {
-			event.customType = eventName;
-			return callback(event);
-		},
-		originalEvent: features.checkAnimationEventName()[eventType]
-	});
-});
+if (!isServerSide()) {
+	registerEvents();
+}
 
 /*!
  * Promises polyfill from Google's Closure Library.
@@ -6552,6 +6697,11 @@ Surface.defaultTransition = function (from, to) {
 	}
 };
 
+var NavigationStrategy = {
+	IMMEDIATE: 'immediate',
+	SCHEDULE_LAST: 'scheduleLast'
+};
+
 var App$1 = function (_EventEmitter) {
 	inherits(App, _EventEmitter);
 
@@ -6667,6 +6817,17 @@ var App$1 = function (_EventEmitter) {
 		_this.nativeScrollRestorationSupported = 'scrollRestoration' in globals.window.history;
 
 		/**
+   * When set to NavigationStrategy.SCHEDULE_LAST means that the current navigation
+   * cannot be Cancelled to start another and will be queued in
+   * scheduledNavigationQueue. When NavigationStrategy.IMMEDIATE means that all
+   * navigation will be cancelled to start another.
+   * @type {!string}
+   * @default immediate
+   * @protected
+   */
+		_this.navigationStrategy = NavigationStrategy.IMMEDIATE;
+
+		/**
    * When set to true there is a pendingNavigate that has not yet been
    * resolved or rejected.
    * @type {boolean}
@@ -6715,6 +6876,14 @@ var App$1 = function (_EventEmitter) {
    * @protected
    */
 		_this.routes = [];
+
+		/**
+   * Holds a queue that stores every DOM event that can initiate a navigation.
+   * @type {!Event}
+   * @default []
+   * @protected
+   */
+		_this.scheduledNavigationQueue = [];
 
 		/**
    * Maps the screen instances by the url containing the parameters.
@@ -6849,7 +7018,7 @@ var App$1 = function (_EventEmitter) {
 
 			var path = utils.getUrlPath(url);
 
-			if (!this.isLinkSameOrigin_(uri.getHostname())) {
+			if (!this.isLinkSameOrigin_(uri.getHost())) {
 				void 0;
 				return false;
 			}
@@ -6882,7 +7051,7 @@ var App$1 = function (_EventEmitter) {
 			Object.keys(this.screens).forEach(function (path) {
 				if (path === _this4.activePath) {
 					_this4.activeScreen.clearCache();
-				} else {
+				} else if (!(_this4.isNavigationPending && _this4.pendingNavigate.path === path)) {
 					_this4.removeScreen(path);
 				}
 			});
@@ -6974,6 +7143,10 @@ var App$1 = function (_EventEmitter) {
 			}).then(function () {
 				return nextScreen.load(path);
 			}).then(function () {
+				// At this point we cannot stop navigation and all received
+				// navigate candidates will be queued at scheduledNavigationQueue.
+				_this5.navigationStrategy = NavigationStrategy.SCHEDULE_LAST;
+
 				if (_this5.activeScreen) {
 					_this5.activeScreen.deactivate();
 				}
@@ -6997,6 +7170,13 @@ var App$1 = function (_EventEmitter) {
 				_this5.isNavigationPending = false;
 				_this5.handleNavigateError_(path, nextScreen, reason);
 				throw reason;
+			}).thenAlways(function () {
+				_this5.navigationStrategy = NavigationStrategy.IMMEDIATE;
+
+				if (_this5.scheduledNavigationQueue.length) {
+					var scheduledNavigation = _this5.scheduledNavigationQueue.shift();
+					_this5.maybeNavigate_(scheduledNavigation.href, scheduledNavigation);
+				}
 			});
 		}
 
@@ -7214,17 +7394,17 @@ var App$1 = function (_EventEmitter) {
 		}
 
 		/**
-   * Tests if hostname is an offsite link.
-   * @param {!string} hostname Link hostname to compare with
-   *     <code>globals.window.location.hostname</code>.
+   * Tests if host is an offsite link.
+   * @param {!string} host Link host to compare with
+   *     <code>globals.window.location.host</code>.
    * @return {boolean}
    * @protected
    */
 
 	}, {
 		key: 'isLinkSameOrigin_',
-		value: function isLinkSameOrigin_(hostname) {
-			return hostname === globals.window.location.hostname;
+		value: function isLinkSameOrigin_(host) {
+			return host === globals.window.location.host;
 		}
 
 		/**
@@ -7289,6 +7469,26 @@ var App$1 = function (_EventEmitter) {
 		}
 
 		/**
+   * This method is used to evaluate if is possible to queue received
+   *  dom event to scheduleNavigationQueue and enqueue it.
+   * @param {string} href Information about the link's href.
+   * @param {Event} event Dom event that initiated the navigation.
+   */
+
+	}, {
+		key: 'maybeScheduleNavigation_',
+		value: function maybeScheduleNavigation_(href, event) {
+			if (this.isNavigationPending && this.navigationStrategy === NavigationStrategy.SCHEDULE_LAST) {
+				this.scheduledNavigationQueue = [object.mixin({
+					href: href,
+					isScheduledNavigation: true
+				}, event)];
+				return true;
+			}
+			return false;
+		}
+
+		/**
    * Maybe navigate to a path.
    * @param {string} href Information about the link's href.
    * @param {Event} event Dom event that initiated the navigation.
@@ -7301,8 +7501,12 @@ var App$1 = function (_EventEmitter) {
 				return;
 			}
 
-			globals.capturedFormElement = event.capturedFormElement;
-			globals.capturedFormButtonElement = event.capturedFormButtonElement;
+			var isNavigationScheduled = this.maybeScheduleNavigation_(href, event);
+
+			if (isNavigationScheduled) {
+				event.preventDefault();
+				return;
+			}
 
 			var navigateFailed = false;
 			try {
@@ -7312,7 +7516,7 @@ var App$1 = function (_EventEmitter) {
 				navigateFailed = true;
 			}
 
-			if (!navigateFailed) {
+			if (!navigateFailed && !event.isScheduledNavigation) {
 				event.preventDefault();
 			}
 		}
@@ -7476,6 +7680,11 @@ var App$1 = function (_EventEmitter) {
 				throw new Error('HTML5 History is not supported. Senna will not intercept navigation.');
 			}
 
+			if (opt_event) {
+				globals.capturedFormElement = opt_event.capturedFormElement;
+				globals.capturedFormButtonElement = opt_event.capturedFormButtonElement;
+			}
+
 			// When reloading the same path do replaceState instead of pushState to
 			// avoid polluting history with states with the same path.
 			if (path === this.activePath) {
@@ -7517,7 +7726,7 @@ var App$1 = function (_EventEmitter) {
 		key: 'onBeforeNavigateDefault_',
 		value: function onBeforeNavigateDefault_(event) {
 			if (this.pendingNavigate) {
-				if (this.pendingNavigate.path === event.path) {
+				if (this.pendingNavigate.path === event.path || this.navigationStrategy === NavigationStrategy.SCHEDULE_LAST) {
 					void 0;
 					return;
 				}
@@ -7662,6 +7871,18 @@ var App$1 = function (_EventEmitter) {
 				if (!this.nativeScrollRestorationSupported) {
 					this.lockHistoryScrollPosition_();
 				}
+				this.once('endNavigate', function () {
+					if (state.referrer) {
+						utils.setReferrer(state.referrer);
+					}
+				});
+				var uri = new Uri(state.path);
+				uri.setHostname(globals.window.location.hostname);
+				uri.setPort(globals.window.location.port);
+				var isNavigationScheduled = this.maybeScheduleNavigation_(uri.toString(), {});
+				if (isNavigationScheduled) {
+					return;
+				}
 				this.navigate(state.path, true);
 			}
 		}
@@ -7705,7 +7926,7 @@ var App$1 = function (_EventEmitter) {
 				endNavigatePayload.error = reason;
 				throw reason;
 			}).thenAlways(function () {
-				if (!_this11.pendingNavigate) {
+				if (!_this11.pendingNavigate && !_this11.scheduledNavigationQueue.length) {
 					removeClasses(globals.document.documentElement, _this11.loadingCssClass);
 					_this11.maybeRestoreNativeScrollRestoration();
 					_this11.captureScrollPositionFromScrollEvent = true;
@@ -7961,8 +8182,8 @@ var App$1 = function (_EventEmitter) {
 		value: function stopPendingNavigate_() {
 			if (this.pendingNavigate) {
 				this.pendingNavigate.cancel('Cancel pending navigation');
-				this.pendingNavigate = null;
 			}
+			this.pendingNavigate = null;
 		}
 
 		/**
@@ -8011,11 +8232,19 @@ var App$1 = function (_EventEmitter) {
 	}, {
 		key: 'updateHistory_',
 		value: function updateHistory_(title, path, state, opt_replaceHistory) {
+			var referrer = globals.window.location.href;
+
+			if (state) {
+				state.referrer = referrer;
+			}
+
 			if (opt_replaceHistory) {
 				globals.window.history.replaceState(state, title, path);
 			} else {
 				globals.window.history.pushState(state, title, path);
 			}
+
+			utils.setReferrer(referrer);
 
 			var titleNode = globals.document.querySelector('title');
 			if (titleNode) {
@@ -8217,7 +8446,7 @@ var UA = function () {
    * @static
    */
 		value: function getNativeUserAgent() {
-			var navigator = UA.globals.window.navigator;
+			var navigator = UA.globals.window && UA.globals.window.navigator;
 			if (navigator) {
 				var userAgent = navigator.userAgent;
 				if (userAgent) {
@@ -8239,7 +8468,7 @@ var UA = function () {
 	}, {
 		key: 'getNativePlatform',
 		value: function getNativePlatform() {
-			var navigator = UA.globals.window.navigator;
+			var navigator = UA.globals.window && UA.globals.window.navigator;
 			if (navigator) {
 				var platform = navigator.platform;
 				if (platform) {
@@ -8255,7 +8484,7 @@ var UA = function () {
    * @return {boolean}
    * @private
    * @static
-  */
+   */
 
 	}, {
 		key: 'matchPlatform',
@@ -8269,7 +8498,7 @@ var UA = function () {
    * @return {boolean}
    * @private
    * @static
-  */
+   */
 
 	}, {
 		key: 'matchUserAgent',
@@ -8280,6 +8509,7 @@ var UA = function () {
 		/**
    * Tests the user agent.
    * @param {string} userAgent The user agent string.
+   * @param {string} platform
    * @static
    */
 
@@ -8377,9 +8607,12 @@ var UA = function () {
  */
 
 
-UA.globals = {
-	window: window
-};
+Object.defineProperty(UA, 'globals', {
+	writable: true,
+	value: {
+		window: isServerSide() ? null : window
+	}
+});
 
 UA.testUserAgent(UA.getNativeUserAgent(), UA.getNativePlatform());
 
@@ -8616,6 +8849,7 @@ var RequestScreen = function (_Screen) {
 				return headers.add(header, _this2.httpHeaders[header]);
 			});
 			if (globals.capturedFormElement) {
+				this.addSafariXHRPolyfill();
 				body = new FormData(globals.capturedFormElement);
 				this.maybeAppendSubmitButtonValue_(body);
 				httpMethod = RequestScreen.POST;
@@ -8625,6 +8859,7 @@ var RequestScreen = function (_Screen) {
 			}
 			var requestPath = this.formatLoadPath(path);
 			return Ajax.request(requestPath, httpMethod, body, headers, null, this.timeout).then(function (xhr) {
+				_this2.removeSafariXHRPolyfill();
 				_this2.setRequest(xhr);
 				_this2.assertValidResponseStatusCode(xhr.status);
 				if (httpMethod === RequestScreen.GET && _this2.isCacheable()) {
@@ -8633,6 +8868,7 @@ var RequestScreen = function (_Screen) {
 				xhr.requestPath = requestPath;
 				return xhr.responseText;
 			}).catch(function (reason) {
+				_this2.removeSafariXHRPolyfill();
 				switch (reason.message) {
 					case errors.REQUEST_TIMEOUT:
 						reason.timeout = true;
@@ -8685,6 +8921,52 @@ var RequestScreen = function (_Screen) {
 				return responseUrl;
 			}
 			return request.getResponseHeader(RequestScreen.X_REQUEST_URL_HEADER);
+		}
+
+		/**
+   * This function set attribute data-safari-temp-disabled to 
+   * true and set disable attribute of an input type="file" tag
+   * is used as a polyfill for iOS 11.3 Safari / macOS Safari 11.1 
+   * empty <input type="file"> XHR bug.
+   * https://github.com/rails/rails/issues/32440
+   * https://bugs.webkit.org/show_bug.cgi?id=184490
+   */
+
+	}, {
+		key: 'addSafariXHRPolyfill',
+		value: function addSafariXHRPolyfill() {
+			if (globals.capturedFormElement && UA.isSafari) {
+				var inputs = globals.capturedFormElement.querySelectorAll('input[type="file"]:not([disabled])');
+				for (var index = 0; index < inputs.length; index++) {
+					var input = inputs[index];
+					if (input.files.length > 0) {
+						return;
+					}
+					input.setAttribute('data-safari-temp-disabled', 'true');
+					input.setAttribute('disabled', '');
+				}
+			}
+		}
+
+		/**
+   * This function remove attribute data-safari-temp-disabled and disable attribute
+   * of an input type="file" tag is used as a polyfill for iOS 11.3 Safari / macOS Safari 11.1
+   * empty <input type="file"> XHR bug.
+   * https://github.com/rails/rails/issues/32440
+   * https://bugs.webkit.org/show_bug.cgi?id=184490
+   */
+
+	}, {
+		key: 'removeSafariXHRPolyfill',
+		value: function removeSafariXHRPolyfill() {
+			if (globals.capturedFormElement && UA.isSafari) {
+				var inputs = globals.capturedFormElement.querySelectorAll('input[type="file"][data-safari-temp-disabled]');
+				for (var index = 0; index < inputs.length; index++) {
+					var input = inputs[index];
+					input.removeAttribute('data-safari-temp-disabled');
+					input.removeAttribute('disabled');
+				}
+			}
 		}
 
 		/**
@@ -8866,8 +9148,15 @@ var HtmlScreen = function (_RequestScreen) {
 		value: function copyNodeAttributesFromContent_(content, node) {
 			content = content.replace(/[<]\s*html/ig, '<senna');
 			content = content.replace(/\/html\s*\>/ig, '/senna>');
-			node.innerHTML = content;
-			var placeholder = node.querySelector('senna');
+			var placeholder = void 0;
+			if (UA.isIe) {
+				var tempNode = globals.document.createRange().createContextualFragment(content);
+				placeholder = tempNode.querySelector('senna');
+			} else {
+				node.innerHTML = content;
+				placeholder = node.querySelector('senna');
+			}
+
 			if (placeholder) {
 				utils.clearNodeAttributes(node);
 				utils.copyNodeAttributes(placeholder, node);
@@ -8998,8 +9287,8 @@ var HtmlScreen = function (_RequestScreen) {
 			var _this5 = this;
 
 			return get(HtmlScreen.prototype.__proto__ || Object.getPrototypeOf(HtmlScreen.prototype), 'flip', this).call(this, surfaces).then(function () {
-				utils.clearNodeAttributes(document.documentElement);
-				utils.copyNodeAttributes(_this5.virtualDocument, document.documentElement);
+				utils.clearNodeAttributes(globals.document.documentElement);
+				utils.copyNodeAttributes(_this5.virtualDocument, globals.document.documentElement);
 			});
 		}
 
@@ -9495,7 +9784,7 @@ globals.document.addEventListener('DOMContentLoaded', function () {
 /**
  * @returns String current senna version
  */
-var version = '2.5.0';
+var version = '2.6.2';
 
 exports['default'] = App$1;
 exports.dataAttributeHandler = dataAttributeHandler;

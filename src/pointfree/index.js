@@ -18,6 +18,7 @@ module.exports = {
   filter: require('./filter'),
   first: require('./first'),
   fold: require('./fold'),
+  foldMap: require('./foldMap'),
   fst: require('../Pair/fst'),
   head: require('./head'),
   log: require('../Writer/log'),

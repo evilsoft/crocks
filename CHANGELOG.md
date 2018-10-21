@@ -1,4 +1,31 @@
 # Change Log for `crocks`
+v0.10.2 -- October 20, 2018
+--
+
+### Bug Fix
+* Allow only one reject/resolve in a single fork of an `Async`.
+
+### Additions
+* Functions/Methods
+  * Add `implies` logic function
+  * Add `propSatisfies` predicate function
+  * Add `propPathSatisfies` predicate function
+  * Add `foldMap` method to `List`
+  * Add `foldMap` pointfree function for `List` and `Array`
+  * Add `setPath` helper function
+  * Add `unsetPath` helper function
+* Documentation
+  * Add `Either` documentation
+
+### Pull Requests
+* [#309 - Avoid Async resolving/rejecting multiple times in a single fork.](https://github.com/evilsoft/crocks/pull/309)
+* [#303 - Add `implies` Logic Combinator](https://github.com/evilsoft/crocks/pull/303)
+* [#305 - Add `propSatisfies` and `propPathSatisfies` to the Predicates](https://github.com/evilsoft/crocks/pull/305)
+* [#310 - Add `foldMap` pointfree and `List`/`Array` implementations](https://github.com/evilsoft/crocks/pull/310)
+* [#321 - Update Dependencies](https://github.com/evilsoft/crocks/pull/321)
+* [#323 - Add `unsetPath` helper function](https://github.com/evilsoft/crocks/pull/323)
+* [#322 - Add `setPath` helper function](https://github.com/evilsoft/crocks/pull/322)
+* [#324 - Add `Either` docs](https://github.com/evilsoft/crocks/pull/324)
 
 v0.10.1 -- July 24, 2018
 --

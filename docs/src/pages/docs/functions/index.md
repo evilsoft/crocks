@@ -43,7 +43,7 @@ need to account for for the rest of your flow.
 
 | Function | Signature | Location |
 |:---|:---|:---|
-| [`applyto`][applyto] | `a -> (a -> b) -> b` | `crocks/combinators/applyTo` |
+| [`applyTo`][applyto] | `a -> (a -> b) -> b` | `crocks/combinators/applyTo` |
 | [`composeB`][composeb] | `(b -> c) -> (a -> b) -> a -> c` | `crocks/combinators/composeB` |
 | [`constant`][constant] | `a -> () -> a` | `crocks/combinators/constant` |
 | [`flip`][flip] | `(a -> b -> c) -> b -> a -> c` | `crocks/combinators/flip` |
@@ -95,11 +95,13 @@ need to account for for the rest of your flow.
 | [`safe`][safe] | <code>((a -> Boolean) &#124; Pred) -> a -> Maybe a</code> | `crocks/Maybe/safe` |
 | [`safeAfter`][safeafter] | <code>safeAfter :: ((b -> Boolean) &#124; Pred) -> (a -> b) -> a -> Maybe b</code> | `crocks/Maybe/safeAfter` |
 | [`safeLift`][safelift] | <code>((a -> Boolean) &#124; Pred) -> (a -> b) -> a -> Maybe b</code> | `crocks/Maybe/safeLift` |
+| [`setPath`][setpath] | <code>[ String &#124; Integer ] -> a -> (Object &#124; Array) -> (Object &#124; Array)</code> | `crocks/helpers/setPath` |
 | [`tap`][tap] | `(a -> b) -> a -> a` | `crocks/helpers/tap` |
 | [`toPairs`][topairs] | `Object -> List (Pair String a)` | `crocks/Pair/toPairs` |
 | [`tryCatch`][trycatch] | `((*) -> b) -> (*) -> Result e b` | `crocks/Result/tryCatch` |
 | [`unary`][unary] | `((*) -> b) -> a -> b` | `crocks/helpers/unary` |
 | [`unit`][unit] | `() -> undefined` | `crocks/helpers/unit` |
+| [`unsetPath`][unsetpath] |  <code>[ String &#124; Integer] -> (Object &#124; Array) -> (Object &#124; Array)</code>  | `crocks/helpers/unsetPath` |
 
 ## Logic
 
@@ -170,11 +172,13 @@ type: `Pred a` and vice-versa
 [safe]: ../crocks/Maybe.html#safe
 [safeafter]: ../crocks/Maybe.html#safeafter
 [safelift]: ../crocks/Maybe.html#safelift
+[setpath]: helpers.html#setpath
 [tap]: helpers.html#tap
 [topairs]: ../crocks/Pair.html#topairs
 [trycatch]: helpers.html#trycatch
 [unary]: helpers.html#unary
 [unit]: helpers.html#unit
+[unsetpath]: helpers.html#unsetpath
 
 [and]: logic-functions.html#and
 [ifelse]: logic-functions.html#ifelse

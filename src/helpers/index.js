@@ -40,9 +40,11 @@ module.exports = {
   safe: require('../Maybe/safe'),
   safeAfter: require('../Maybe/safeAfter'),
   safeLift: require('../Maybe/safeLift'),
+  setPath: require('./setPath'),
   tap: require('./tap'),
   toPairs: require('../Pair/toPairs'),
   tryCatch: require('../Result/tryCatch'),
   unary: require('./unary'),
-  unit: require('./unit')
+  unit: require('./unit'),
+  unsetPath: require('./unsetPath')
 }

@@ -4,12 +4,12 @@ const helpers = require('../test/helpers')
 const bindFunc = helpers.bindFunc
 const unit = require('../core/_unit')
 
-const assoc = require('./assoc')
+const setProp = require('./setProp')
 
-test('assoc helper function', t => {
-  const fn = bindFunc(assoc)
+test('setProp helper function', t => {
+  const fn = bindFunc(setProp)
 
-  const noKey = /assoc: String or Integer required for first argument$/
+  const noKey = /setProp: String or Integer required for first argument$/
   t.throws(fn(undefined, 1, {}), noKey, 'throws when first arg is undefined')
   t.throws(fn(null, 1, {}), noKey, 'throws when first arg is null')
   t.throws(fn(NaN, 1, {}), noKey, 'throws when first arg is NaN')
@@ -25,10 +25,10 @@ test('assoc helper function', t => {
   t.end()
 })
 
-test('assoc with Objects', t => {
-  const fn = bindFunc(assoc)
+test('setProp with Objects', t => {
+  const fn = bindFunc(setProp)
 
-  const noObj = /assoc: Object required for third argument when first is a String$/
+  const noObj = /setProp: Object required for third argument when first is a String$/
   t.throws(fn('key', 1, undefined), noObj, 'throws when third arg is undefined')
   t.throws(fn('key', 1, null), noObj, 'throws when third arg is null')
   t.throws(fn('key', 1, 0), noObj, 'throws when third arg is a falsey number')
@@ -42,17 +42,17 @@ test('assoc with Objects', t => {
 
   const data = { a: 45, b: 23 }
 
-  t.same(assoc('c', 10, data), { a: 45, b: 23, c: 10 }, 'adds a new key when it does not exist')
-  t.same(assoc('b', 10, data), { a: 45, b: 10 }, 'overrides an existing key when it exists')
+  t.same(setProp('c', 10, data), { a: 45, b: 23, c: 10 }, 'adds a new key when it does not exist')
+  t.same(setProp('b', 10, data), { a: 45, b: 10 }, 'overrides an existing key when it exists')
   t.same(data, { a: 45, b: 23 }, 'does not modify exsiting object (shallow)')
 
   t.end()
 })
 
-test('assoc with Arrays', t => {
-  const fn = bindFunc(assoc)
+test('setProp with Arrays', t => {
+  const fn = bindFunc(setProp)
 
-  const noObj = /assoc: Array required for third argument when first is an Integer$/
+  const noObj = /setProp: Array required for third argument when first is an Integer$/
   t.throws(fn(1, 1, undefined), noObj, 'throws when third arg is undefined')
   t.throws(fn(1, 1, null), noObj, 'throws when third arg is null')
   t.throws(fn(1, 1, 0), noObj, 'throws when third arg is a falsey number')
@@ -66,13 +66,14 @@ test('assoc with Arrays', t => {
 
   const data = [ 'a', 'b' ]
 
-  t.same(assoc(1, 10, data), [ 'a', 10 ], 'overwrites existing value')
-  t.same(assoc(2, 10, data), [ 'a', 'b', 10 ], 'adds a value when it does not exist')
+  t.same(setProp(1, 10, data), [ 'a', 10 ], 'overwrites existing value')
+  t.same(setProp(2, 10, data), [ 'a', 'b', 10 ], 'adds a value when it does not exist')
 
-  const sparse = assoc(3, 10, data)
+  const sparse = setProp(3, 10, data)
 
   t.equal(sparse[3], 10, 'sets value at specifed index in path')
   t.equal(sparse[2], undefined, 'fills unallocated indcies with undefined when setting a value')
+  t.same(data, [ 'a', 'b' ], 'does not alter original array')
 
   t.end()
 })

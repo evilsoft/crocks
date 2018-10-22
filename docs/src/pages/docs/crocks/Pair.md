@@ -373,12 +373,12 @@ the first position of the source `Pair` and the `Pair` returned by the function.
 ```javascript
 const Pair = require('crocks/Pair')
 
-const assoc = require('crocks/helpers/assoc')
+const setProp = require('crocks/helpers/setProp')
 const omit = require('crocks/helpers/omit')
 
 // addTmp :: (String, a, Object) -> Pair [ String ] Object
 const addTmp = (key, value, x) =>
-  Pair([ key ], assoc(key, value, x))
+  Pair([ key ], setProp(key, value, x))
 
 // add :: Object -> Pair [ String ] Object
 const add = data => {
@@ -395,7 +395,7 @@ const multiply = data => {
 // calc :: Object -> Object
 const calc = data => {
   const { product, sum } = data
-  return assoc('result', product - sum, data)
+  return setProp('result', product - sum, data)
 }
 
 // flow :: Object -> Object

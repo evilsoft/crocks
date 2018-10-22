@@ -78,10 +78,10 @@ be fixed to that type for all valid combination of instances.
 
 ```javascript
 import Reader from 'crocks/Reader'
-import assoc from 'crocks/helpers/assoc'
+import setProp from 'crocks/helpers/setProp'
 
 // Reader Object Object
-Reader(assoc('animal', 'cat'))
+Reader(setProp('animal', 'cat'))
 //=> Reader (Object -> Object)
 
 // Reader a Number

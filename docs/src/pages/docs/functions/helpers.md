@@ -23,22 +23,6 @@ will omit any key-value pairs that are `undefined`. Check out a related function
 named [`defaultProps`](#defaultprops) that will only assign values that are
 `undefined` in the second argument.
 
-#### assoc
-
-`crocks/helpers/assoc`
-
-```haskell
-assoc :: String -> a -> Object -> Object
-```
-There may come a time when you want to add a key-value pair to an `Object` and
-want control over how the key and value are applied. That is where `assoc` can
-come to your aid. Just provide a `String` key and a value of any type to be
-associated to the key. Finally pass it any `Object` and you will get back a
-shallow copy with your key-value pair merged in. This will overwrite any exiting
-keys with new value specified. Used with [`flip`](combinators.html#flip),
-you can do some interesting things with this function, give it a play! If you
-just want to create an `Object` and not concatenate it to another `Object`,
-[`objOf`](#objof) may be the function for you.
 
 #### binary
 
@@ -977,6 +961,46 @@ setPath([ 'a', 'c' ], false, { a: { b: true } })
 
 setPath([ 'list', 'a' ], 'ohhh, I see.', { list: [ 'string', 'another' ] })
 //=> { list: { 0: 'string', 1: 'another', a: 'ohhh, I see.' } }
+```
+
+#### setProp
+
+`crocks/helpers/setProp`
+
+```haskell
+setProp :: (String | Integer) -> a -> (Object | Array) -> (Object | Array)
+```
+
+Used to set a given value for a specific key or index of
+an `Object` or `Array`. `setProp` takes either a `String` or `Integer` value
+as its first argument and a value of any type as its second. The third parameter
+is dependent of the type of the first argument. When a `String` is provided, the
+third argument must be an `Object`. Otherwise if the first argument is
+an `Integer`, then the third must be an `Array`.
+
+`setProp` will return a new instance of either `Object` or `Array` with the
+addition applied. When the value exists on the provided object, then the value
+will overwritten. If the value does not exist then it will be added to the
+resulting structure. In the case of `Array`, the value will be added to the
+provided index, leaving `undefined` values, resulting in a sparse `Array`.
+
+```javascript
+import setProp from 'crocks/helpers/setProp'
+
+setProp('a', false, { a: true })
+//=> { a: false }
+
+setProp('b', 43, { a: true })
+//=> { a: true, b: 43 }
+
+setProp(0, 'string', [ 'a' ])
+//=> [ "string" ]
+
+setProp(1, 'b', [ 'a' ])
+//=> [ "a", "b" ]
+
+setProp(2, 'c', [ 'a' ])
+//=> [ "a", undefined, "c" ]
 ```
 
 #### tap

@@ -724,7 +724,7 @@ all [`Resolved`](#resolved) instance values untouched.
 ```javascript
 import Async from 'crocks/Async'
 
-import assoc from 'crocks/helpers/assoc'
+import setProp from 'crocks/helpers/setProp'
 import bimap from 'crocks/pointfree/bimap'
 import compose from 'crocks/helpers/compose'
 import objOf from 'crocks/helpers/objOf'
@@ -737,7 +737,7 @@ const log = label => x =>
 
 // hasError :: Boolean -> Object -> Object
 const hasError =
-  assoc('hasError')
+  setProp('hasError')
 
 // buildError :: a -> String
 const buildError =

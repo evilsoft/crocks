@@ -609,7 +609,7 @@ results.
 import Either from 'crocks/Either'
 
 import assign from 'crocks/helpers/assign'
-import assoc from 'crocks/helpers/assoc'
+import setProp from 'crocks/helpers/setProp'
 import compose from 'crocks/helpers/compose'
 import identity from 'crocks/combinators/identity'
 import ifElse from 'crocks/logic/ifElse'
@@ -625,13 +625,13 @@ const objectOr =
 // Error :: { error: a, passed: Boolean }
 // error :: a -> Error
 const error = compose(
-  assoc('passed', false),
+  setProp('passed', false),
   objOf('error')
 )
 
 // setPassed :: Either c Object -> Either Error Object
 const setPassed = m =>
-  Either.of(assoc('passed', true))
+  Either.of(setProp('passed', true))
     .ap(m)
     .bimap(error, identity)
 
@@ -885,7 +885,7 @@ returning a new `Right` instance wrapping the result of the second function.
 ```javascript
 import Either from 'crocks/Either'
 
-import assoc from 'crocks/helpers/assoc'
+import setProp from 'crocks/helpers/setProp'
 import coalesce from 'crocks/pointfree/coalesce'
 import compose from 'crocks/helpers/compose'
 import identity from 'crocks/combinators/identity'
@@ -921,7 +921,7 @@ hasValue({ value: 45 })
 
 // defaultValue :: Either Object Record -> Either Object Record
 const defaultValue =
-  coalesce(assoc('value', 0), identity)
+  coalesce(setProp('value', 0), identity)
 
 // incValue :: Either Object Record -> Either c Record
 const incValue = compose(

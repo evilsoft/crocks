@@ -9,9 +9,10 @@ weight: 60
 Identity a
 ```
 
-`Identity` is one of the most versatile `monads`. It does not have any inherant
-behaviour and simply applies the given `function` to it's value. `Identity` is 
-often used in place where a `monad` or `applicative` is expected. 
+`Identity` is one of the most versatile `monads`. Although it does not have any 
+inherant behaviour its power comes from lifting a simple value into the monadic
+space and applying the given `function` (`map`/`chain`/etc) to it's value. 
+`Identity` is often used in place where a `monad` or `applicative` is expected. 
 Identity is also known the "empty" functor and applicative functor. `Identity` 
 composed with another functor or applicative functor is isomorphic to the 
 original.
@@ -63,13 +64,19 @@ Identity(42)
 Identity.of :: a -> Identity a
 ```
 
-`of` is used to construct an `Identity` with any given value.
+`of` is used to construct an `Identity` with any given value. It is there to
+allow `Identity` to function as a pointed functor. 
 
 ```javascript
 import Identity from 'crocks/Identity'
 
-Identity.of(42)
+const { of } = Identity
+
+of(42)
 //=> Identity 42
+
+of(true)
+//=> Identity true
 
 ```
 
@@ -208,6 +215,32 @@ Identity(double)
 ```
 
 #### sequence
+
+```haskell
+Apply f => Identity (f a) ~> (b -> f b) -> f (Identity a)
+Applicative f => Identity (f a) ~> TypeRep f -> f (Identity a)
+```
+
+When an instance of `Identity` wraps an `Apply` instance, `sequence` can be used to
+swap the type sequence. `sequence` requires either an `Applicative TypeRep` or
+an `Apply` returning function is provided for its argument.
+
+`sequence` can be derived from [`traverse`](#traverse) by passing it an
+`identity` function (`x => x`).
+
+```javascript
+import Identity from 'crocks/Identity'
+
+import Maybe from 'crocks/Maybe'
+import sequence from 'crocks/pointfree/sequence'
+
+// seqId :: Identity Maybe a -> Maybe Identity a
+const seqMaybe =
+  sequence(Maybe)
+
+seqMaybe(Identity(Maybe(42)))
+//=> Just Identity 42
+```
 
 #### traverse
 

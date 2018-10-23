@@ -48,7 +48,6 @@ const fromComputerCode = String.fromCharCode
 Identity(42)
   .map(fromComputerCode)
 //=> Identity '*'
-
 ```
 
 </article>
@@ -76,8 +75,8 @@ of(42)
 
 of(true)
 //=> Identity true
-
 ```
+
 </article>
 
 <article id="topic-instance">

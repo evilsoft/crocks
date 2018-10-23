@@ -37,12 +37,17 @@ Identity(10)
 Identity :: a -> Identity a
 ```
 
+The contstructor for an `Identity` is a unary function. When a value is passed
+in an `Identity` of the given value is returned ready for `map` or `chain`. 
 
 ```javascript
 import Identity from 'crocks/Identity'
 
+const fromComputerCode = String.fromCharCode
+
 Identity(42)
-//=> Identity 42
+  .map(fromComputerCode)
+//=> Identity '*'
 
 ```
 
@@ -58,7 +63,7 @@ Identity(42)
 Identity.of :: a -> Identity a
 ```
 
-`of` is used to construct an `Identity` with ...
+`of` is used to construct an `Identity` with any given value.
 
 ```javascript
 import Identity from 'crocks/Identity'
@@ -160,15 +165,20 @@ sumList([ 3, 4, 5 ])
 Identity a ~> (a -> b) -> Identity b
 ```
 
+Used to apply transformations to values you've lifted into an `Identity`, `map`
+takes a function that it will lift into the context of the `Identity` and apply
+to it the wrapped value. `Identity` contains no bahaviour and will do nothing
+more than apply the value inside the `Identity` to the function.
 
 ```javascript
 import Identity from 'crocks/Identity'
+import map from 'crocks/pointfree/map'
 
 const prod = a => b => a * b
-const double = prod(2)
 
-Identity(5)
-  .map(double)
+const mapDouble = map(prod(2))
+
+mapDouble(Identity(5))
 //=> Identity 10
 ```
 
@@ -207,20 +217,25 @@ Identity(double)
 Identity a ~> (a -> Identity b) -> Identity b
 ```
 
-Normally one of the ways `Monad`s like `Identity`...
+Normally one of the ways `Monad`s like `Identity` are able to be combined and 
+have their effects applied is through `chain`. However `Identity` is different
+because there are no effects to apply. `chain` will simply take a func that 
+returns `Identity` and applies it to its value.
 
 ```javascript
 import Identity from 'crocks/Identity'
 import compose from 'crocks/helpers/compose'
+import chain from 'crocks/pointfree/chain'
 
 const prod = a => b => a * b
 const doubleAsIdentity = compose(Identity, prod(2))
 
-Identity(5)
-  .chain(doubleAsIdentity)
+doubleAsIdentity(21)
+//=> Identity 42
+
+chain(doubleAsIdentity, Identity(5))
 //=> Identity 10
 
 ```
-
 
 </article>

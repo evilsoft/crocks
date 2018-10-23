@@ -22,7 +22,7 @@ names, but what they do from type to type may vary.
 | [`Const`][const] | -- | [`ap`][const-ap], [`chain`][const-chain], [`concat`][const-concat], [`equals`][const-equals], [`map`][const-map], [`valueOf`][const-valueof] |
 | [`Either`][either] | [`Left`][either-left], [`Right`][either-right], [`of`][either-of]| [`alt`][either-alt], [`ap`][either-ap], [`bimap`][either-bimap], [`chain`][either-chain], [`coalesce`][either-coalesce], [`concat`][either-concat], [`either`][either-either], [`equals`][either-equals], [`map`][either-map], [`of`][either-of], [`sequence`][either-sequence], [`swap`][either-swap], [`traverse`][either-traverse] |
 | [`Equiv`][equiv] | [`empty`][equiv-empty] | [`concat`][equiv-concat], [`contramap`][equiv-contra], [`compareWith`][equiv-compare], [`valueOf`][equiv-value] |
-| [`Identity`][identity] | [`of`][identity-of] | [`ap`][identity-ap], [`chain`][identity-chain], [`concat`][identity-concat], [`equals`][identity-equals], [`map`][identity-map], [`of`][identity-of], [`sequence`][identity-sequence], [`traverse`][identity-traverse], [`valueOf`][identity-valueOf] |
+| [`Identity`][identity] | [`of`][identity-of] | [`ap`][identity-ap], [`chain`][identity-chain], [`concat`][identity-concat], [`equals`][identity-equals], [`map`][identity-map], [`of`][identity-of], [`sequence`][identity-sequence], [`traverse`][identity-traverse], [`valueOf`][identity-valueof] |
 | `IO` | `of` | `ap`, `chain`, `map`, `of`, `run` |
 | `List` |  `empty`, `fromArray`, `of` | `ap`, `chain`, `concat`, `cons`, `empty`, `equals`, `filter`, `fold`, `foldMap`, `head`, `map`, `of`, `reduce`, `reduceRight`, `reject`, `sequence`, `tail`, `toArray`, `traverse`, `valueOf` |
 | [`Maybe`][maybe] | [`Nothing`][maybe-nothing], [`Just`][maybe-just], [`of`][maybe-of], [`zero`][maybe-zero] | [`alt`][maybe-alt], [`ap`][maybe-ap], [`chain`][maybe-chain], [`coalesce`][maybe-coalesce], [`concat`][maybe-concat], [`equals`][maybe-equals], [`either`][maybe-either], [`map`][maybe-map], [`of`][maybe-of], [`option`][maybe-option], [`sequence`][maybe-sequence], [`traverse`][maybe-traverse], [`zero`][maybe-zero] |
@@ -105,6 +105,7 @@ names, but what they do from type to type may vary.
 [identity-map]: Identity.html#map
 [identity-sequence]: Identity.html#sequence
 [identity-traverse]: Identity.html#traverse
+[identity-valueof]: Identity.html#valueof
 
 [equiv]: Equiv.html
 [equiv-empty]: Equiv.html#empty

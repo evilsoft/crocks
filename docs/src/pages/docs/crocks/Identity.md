@@ -9,13 +9,12 @@ weight: 60
 Identity a
 ```
 
-`Identity` is one of the most versatile `monads`. Although it does not have any 
-inherant behaviour its power comes from lifting a simple value into the monadic
-space and applying the given `function` (`map`/`chain`/etc) to it's value. 
-`Identity` is often used in place where a `monad` or `applicative` is expected. 
-Identity is also known the "empty" functor and applicative functor. `Identity` 
-composed with another functor or applicative functor is isomorphic to the 
-original.
+`Identity` is a `crock` that can be used to wrap a common interface around 
+existing Javascript types and functions. It maintains integrity by lifting 
+and applying functions and types as is, without adding any additional structure
+or effects. By not applying and additional structure to existing functions, 
+`Identity` can be swapped in and out for other `Functor`s that do apply their 
+own structure and effects.
 
 ```javascript
 import Identity from 'crocks/Identity'
@@ -26,7 +25,7 @@ Identity(10)
 <article id="topic-implements">
 
 ## Implements
-`Setoid`, `Semigroup`, `Functor`, `Chain`, `Traversable`, `Apply`, `Applicative`, `Monad`
+`Setoid`, `Semigroup`, `Functor`, `Traversable`, `Apply`, `Chain`, `Applicative`, `Monad`
 
 </article>
 
@@ -79,7 +78,6 @@ of(true)
 //=> Identity true
 
 ```
-
 </article>
 
 <article id="topic-instance">
@@ -94,7 +92,7 @@ Identity a ~> b -> Boolean
 
 Used to compare the underlying values of two `Identity` instances for equality by
 value, `equals` takes any given argument and returns `true` if the passed
-arguments is a `Identity` with an underlying value equal to the underlying value
+arguments is an `Identity` with an underlying value equal to the underlying value
 of the `Identity` the method is being called on. If the passed argument is not
 an `Identity` or the underlying values are not equal, `equals` will return `false`.
 
@@ -131,7 +129,7 @@ Identity s => Identity s ~> Identity s -> Identity s
 
 When an underlying value of a given `Identity` is fixed to a `Semigroup`, 
 `concat` can be used to concat another `Identity` instance with an underlying
-`Semigroup` of the same type. Expecting a `Identity` wrapping a `Semigroup` of
+`Semigroup` of the same type. Expecting an `Identity` wrapping a `Semigroup` of
 the same type, `concat` will give back a new `Identity` instance wrapping the
 result of combining the two underlying `Semigroup`s.
 
@@ -163,7 +161,6 @@ Identity([ 34 ])
 
 sumList([ 3, 4, 5 ])
 //=> Identity 12
-
 ```
 
 #### map
@@ -195,11 +192,11 @@ mapDouble(Identity(5))
 Identity (a -> b) ~> Identity a -> Identity b
 ```
 
-`ap` allows for values wrapped in a `Identity` to be applied to functions also
-wrapped in a `Identity`. In order to use `ap`, the `Identity` must contain a
+`ap` allows for values wrapped in an `Identity` to be applied to functions also
+wrapped in an `Identity`. In order to use `ap`, the `Identity` must contain a
 function as its value. Under the hood, `ap` unwraps both the function
 and the value to be applied and applies the value to the function. Finally it
-will wrap the result of that application back into a `Identity`. It is required
+will wrap the result of that application back into an `Identity`. It is required
 that the inner function is curried.
 
 ```javascript
@@ -211,7 +208,6 @@ const double = prod(2)
 Identity(double)
   .ap(5)
 //=> Identity 10
-
 ```
 
 #### sequence
@@ -223,7 +219,7 @@ Applicative f => Identity (f a) ~> TypeRep f -> f (Identity a)
 
 When an instance of `Identity` wraps an `Apply` instance, `sequence` can be used to
 swap the type sequence. `sequence` requires either an `Applicative TypeRep` or
-an `Apply` returning function is provided for its argument.
+an `Apply` returning function to be provided for its argument.
 
 `sequence` can be derived from [`traverse`](#traverse) by passing it an
 `identity` function (`x => x`).
@@ -244,6 +240,59 @@ seqMaybe(Identity(Maybe(42)))
 
 #### traverse
 
+```haskell
+Apply f => Identity a ~> (a -> f b) -> f (Identity b)
+Applicative f => Identity a ~> (TypeRep f, (a -> f b)) -> f (Identity a b)
+```
+
+Used to apply the "effect" of an `Apply` to a value inside of a `Identity`,
+`traverse` combines both the "effects" of the `Apply` and the `Identity` by
+returning a new instance of the `Apply`, wrapping the result of the
+`Apply`s "effect" on the value in the `Identity`.
+
+`traverse` requires either an `Applicative TypeRep` or an `Apply` returning
+function as its first argument and a function that is used to apply the "effect"
+of the target  `Apply` to the value inside of the `Identity`. Both arguments must provide
+an instance of the target `Apply`.
+
+```javascript
+import Identity from 'crocks/Identity'
+import IO from 'crocks/IO'
+
+import compose from 'crocks/helpers/compose'
+import isNumber from 'crocks/predicates/isNumber'
+import traverse from 'crocks/pointfree/traverse'
+import ifElse from 'crocks/logic/ifElse'
+
+// someGlobal :: Number
+let someGlobal = 10
+
+// addToGlobal :: Number -> IO Number
+const addToGlobal = x => IO(() => someGlobal + x)
+
+// safeAddToGlobal :: a -> IO (Maybe Number)
+const safeAddToGlobal = compose(
+  traverse(IO, addToGlobal),
+  Identity,
+  ifElse(isNumber, x => x, () => NaN)
+)
+
+safeAddToGlobal(32)
+  .run()
+//=> Identity 42
+//someGlobal => 42
+
+safeAddToGlobal(32)
+  .run()
+  .valueOf()
+//=> 42
+
+safeAddToGlobal(undefined)
+  .run()
+  .valueOf()
+//=> NaN
+```
+
 #### chain
 
 ```haskell
@@ -252,7 +301,7 @@ Identity a ~> (a -> Identity b) -> Identity b
 
 Normally one of the ways `Monad`s like `Identity` are able to be combined and 
 have their effects applied is through `chain`. However `Identity` is different
-because there are no effects to apply. `chain` will simply take a func that 
+because there are no effects to apply. `chain` will simply take a function that 
 returns `Identity` and applies it to its value.
 
 ```javascript
@@ -268,7 +317,29 @@ doubleAsIdentity(21)
 
 chain(doubleAsIdentity, Identity(5))
 //=> Identity 10
+```
 
+#### valueOf
+
+```haskell
+Identity a ~> () -> a
+```
+
+`valueOf` is used as a means of extraction. This function is used primarily for
+convenience for some of the helper functions that ship with `crocks`. Calling
+`valueOf` on an `Identity` instance will return the value being contained.
+
+```javascript
+import Identity from 'crocks/Identity'
+
+Identity(42)
+  .valueOf()
+//=> 33
+
+Identity(20)
+  .concat(Identity(22))
+  .valueOf()
+//=> 35
 ```
 
 </article>

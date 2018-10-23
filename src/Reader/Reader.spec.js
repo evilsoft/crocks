@@ -13,6 +13,7 @@ const isString = require('../core/isString')
 const unit = require('../core/_unit')
 
 const fl = require('../core/flNames')
+const laws = require('../test/laws.js')
 
 const constant = x => () => x
 const identity = x => x
@@ -411,6 +412,43 @@ test('Reader chain properties (Monad)', t => {
 
   t.equal(Reader.of(3).chain(f).runWith(0), f(3).runWith(0), 'left identity')
   t.equal(f(6).chain(Reader.of).runWith(0), f(6).runWith(0), 'right identity')
+
+  t.end()
+})
+
+test('Reader applyTo behavior', t => {
+
+  t.equal(
+    Reader(x => x + 13).applyTo(Reader(unit).of(x => x * 3)).runWith(2),
+    45,
+    'apply functions to wrapped values'
+  )
+
+  t.end()
+
+})
+
+const numberReaderEquals = (a, b) => a.runWith(15) === b.runWith(15)
+
+test('Reader applyTo properties (Apply)', t => {
+  const apply = laws['fl/apply'](Reader(unit))
+
+  const ReaderInstances = [
+    Reader(x => x + 13),
+    Reader(unit).of(15)
+  ]
+
+  t.ok(apply.composition(numberReaderEquals, ReaderInstances), 'composition')
+
+  t.end()
+})
+
+test('Reader applyTo properties (Applicative)', t => {
+  const applicative = laws['fl/applicative'](Reader)
+
+  t.ok(applicative.identity(numberReaderEquals), 'identity')
+  t.ok(applicative.homomorphism(numberReaderEquals), 'homomorphism')
+  t.ok(applicative.interchange(numberReaderEquals), 'interchange')
 
   t.end()
 })

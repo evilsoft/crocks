@@ -13,6 +13,7 @@ const isObject = require('./isObject')
 const isSameType = require('./isSameType')
 const isString = require('./isString')
 const unit = require('./_unit')
+const equals = require('./equals')
 
 const fl = require('./flNames')
 
@@ -788,6 +789,15 @@ test('Pair extend properties (Extend)', t => {
   const right = m.extend(w => f(w.extend(g)))
 
   t.ok(left.equals(right), 'composition')
+
+  t.end()
+})
+
+test('Pair applyTo behavior', t => {
+  equals
+  const p = Pair([ 0 ], 23)
+  const pf = Pair([ 5 ], p => p + 30)
+  t.ok(equals(p.applyTo(pf), Pair([ 0, 5 ], 53)), 'apply functions to the second value and combine left values')
 
   t.end()
 })

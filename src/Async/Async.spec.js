@@ -13,6 +13,7 @@ const isString = require('../core/isString')
 const unit = require('../core/_unit')
 
 const fl = require('../core/flNames')
+const laws = require('../test/laws.js')
 
 const constant = x => () => x
 const identity = x => x
@@ -1250,6 +1251,53 @@ test('Async chain properties (Monad)', t => {
   f(3).fork(unit, bRight)
 
   t.same(aRight.args[0], bRight.args[0], 'right identity')
+
+  t.end()
+})
+
+test('Async applyTo behavior', t => {
+  const f = sinon.spy()
+
+  Async.of(3).applyTo(Async.of(x => x * 10)).fork(unit, f)
+
+  t.ok(f.calledWith(30), 'wraps the value passed into an Async')
+
+  t.end()
+})
+
+const asyncEquals = (a, b) => {
+  const aRes = sinon.spy()
+  const bRes = sinon.spy()
+  const aRej = sinon.spy()
+  const bRej = sinon.spy()
+  a.fork(aRej, aRes)
+  b.fork(bRej, bRes)
+  // either their successes are the same, or failures are the same
+  return spiesEqual(aRes, bRes) || spiesEqual(aRej, bRej)
+}
+
+const spiesEqual = (a, b) => a.args[0] && b.args[0] && a.args[0][0] === b.args[0][0]
+
+test('Async applyTo properties (Apply)', t => {
+  const apply = laws['fl/apply'](Async)
+
+  const AsyncInstances = [
+    Async.of(5),
+    Async.Rejected('error'),
+    Async.Resolved(15)
+  ]
+
+  t.ok(apply.composition(asyncEquals, AsyncInstances), 'composition')
+
+  t.end()
+})
+
+test('Async applyTo properties (Applicative)', t => {
+  const applicative = laws['fl/applicative'](Async)
+
+  t.ok(applicative.identity(asyncEquals), 'identity')
+  t.ok(applicative.homomorphism(asyncEquals), 'homomorphism')
+  t.ok(applicative.interchange(asyncEquals), 'interchange')
 
   t.end()
 })

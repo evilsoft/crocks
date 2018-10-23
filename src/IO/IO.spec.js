@@ -12,6 +12,7 @@ const isString = require('../core/isString')
 const unit = require('../core/_unit')
 
 const fl = require('../core/flNames')
+const laws = require('../test/laws.js')
 
 const constant = x => () => x
 const identity = x => x
@@ -356,6 +357,38 @@ test('IO chain properties (Monad)', t => {
 
   t.equal(IO.of(3).chain(f).run(), f(3).run(), 'left identity')
   t.equal(f(6).chain(IO.of).run(), f(6).run(), 'right identity')
+
+  t.end()
+})
+
+test('IO behavior', t => {
+
+  t.equal(IO(() => 15).applyTo(IO(() => x => x * 4)).run(), 60, 'apply the function to the wrapped value')
+
+  t.end()
+})
+
+const ioEquals = (a, b) => a.run() === b.run()
+
+test('IO applyTo properties (Apply)', t => {
+  const apply = laws['fl/apply'](IO)
+
+  const IOInstances = [
+    IO.of(5),
+    IO(() => 15)
+  ]
+
+  t.ok(apply.composition(ioEquals, IOInstances), 'composition')
+
+  t.end()
+})
+
+test('IO applyTo properties (Applicative)', t => {
+  const applicative = laws['fl/applicative'](IO)
+
+  t.ok(applicative.identity(ioEquals, 5), 'identity')
+  t.ok(applicative.homomorphism(ioEquals, x => x * 3, 18), 'homomorphism')
+  t.ok(applicative.interchange(ioEquals, IO.of(x => x +10), 23), 'interchange')
 
   t.end()
 })

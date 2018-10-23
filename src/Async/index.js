@@ -323,6 +323,38 @@ function Async(fn) {
     }
   }
 
+  function applyTo(method) {
+    return function (liftedApply) {
+      if (!isSameType(Async, liftedApply)) {
+        throw new TypeError(`Async.${method}: Async required`)
+      }
+
+      // liftedApply is Async[A => B]
+      return Async(function (reject, resolve) {
+        let resolvedA = null
+        let resolvedF = null
+
+        const rejectOnce = once(reject)
+
+        function resolveBoth() {
+          if (resolvedA && resolvedF) {
+            resolve(resolvedF(resolvedA))
+          }
+        }
+
+        const cancelValue = fork(rejectOnce, a => {
+          resolvedA = a
+          resolveBoth()
+        })
+        const cancelLifted = liftedApply.fork(rejectOnce, b => {
+          resolvedF = b
+          resolveBoth()
+        })
+        return () => { cancelLifted(); cancelValue() }
+      })
+    }
+  }
+
   return {
     fork, toPromise, inspect,
     toString: inspect, type,
@@ -332,6 +364,8 @@ function Async(fn) {
     bimap: bimap('bimap'),
     map: map('map'),
     chain: chain('chain'),
+    applyTo: applyTo('applyTo'),
+    [fl.ap]: applyTo(fl.ap),
     [fl.of]: of,
     [fl.alt]: alt(fl.alt),
     [fl.bimap]: bimap(fl.bimap),

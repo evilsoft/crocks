@@ -37,7 +37,7 @@ test('isChain fantasy-land', t => {
   const fake = Fake()
 
   t.equal(isChain(Fake), false, 'returns false when Chain Constructor is passed')
-  t.equal(isChain(fake), false, 'returns false when Chain is passed')
+  t.equal(isChain(fake), true, 'returns true when Chain is passed')
 
   t.end()
 })

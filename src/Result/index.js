@@ -177,6 +177,26 @@ function Result(u) {
     )
   }
 
+  function applyTo(method) {
+    return function(liftedApply) {
+      if(!isSameType(Result, liftedApply)) {
+        throw new TypeError(`Result.${method}: Result required`)
+      }
+
+      return either(
+        concatApErr(liftedApply),
+        function(x) {
+          return liftedApply.either(Result.Err, fn => {
+            if(!isFunction(fn)) {
+              throw new TypeError(`Result.${method}: supplied value must be a function`)
+            }
+            return Result.Ok(fn(x))
+          })
+        }
+      )
+    }
+  }
+
   function chain(method) {
     return function(fn) {
       if(!isFunction(fn)) {
@@ -246,6 +266,8 @@ function Result(u) {
     concat: concat('concat'),
     map: map('map'),
     chain: chain('chain'),
+    applyTo: applyTo('applyTo'),
+    [fl.ap]: applyTo(fl.ap),
     [fl.of]: of,
     [fl.equals]: equals,
     [fl.alt]: alt(fl.alt),

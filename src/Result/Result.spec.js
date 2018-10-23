@@ -5,6 +5,7 @@ const MockCrock = require('../test/MockCrock')
 
 const bindFunc = helpers.bindFunc
 
+const List = require('../core/List')
 const curry = require('../core/curry')
 const compose = curry(require('../core/compose'))
 const isArray = require('../core/isArray')
@@ -15,6 +16,8 @@ const isString = require('../core/isString')
 const unit = require('../core/_unit')
 
 const fl = require('../core/flNames')
+const laws = require('../test/laws.js')
+const equals = require('../core/equals')
 
 const constant = x => () => x
 const identity = x => x
@@ -1246,6 +1249,54 @@ test('Result traverse with Applicative TypeRep', t => {
   t.ok(isSameType(Array, arE), 'Provides an outer type of Array')
   t.ok(isSameType(Result, arE[0]), 'Provides an inner type of Result')
   t.equal(arE[0].either(identity, constant(0)), 'Err', 'Result contains original Err value')
+
+  t.end()
+})
+
+test('Result applyTo behavior', t => {
+
+  {
+    const result = Result.Ok('success').applyTo(Result.Ok(x => x.length))
+    t.equal(result.either(constant(0), identity), 7, 'apply the function on a succesful value.')
+  }
+
+  {
+    const result = Result.Err(List([ 'failed' ])).applyTo(Result.Ok(x => x.length))
+    t.ok(equals(result.either(identity, constant(0)), List([ 'failed' ])), 'not apply the function on an error.')
+  }
+
+  {
+    const result = Result.Ok('success').applyTo(Result.Err(List([ 'bar' ])))
+    t.ok(equals(result.either(identity, constant(0)), List([ 'bar' ])), 'gather errors from the supplied value')
+  }
+
+  {
+    const result = Result.Err(List([ 'foo' ])).applyTo(Result.Err(List([ 'bar' ])))
+    t.ok(equals(result.either(identity, constant(0)), List([ 'foo', 'bar' ])), 'combine errors')
+  }
+
+  t.end()
+})
+
+test('Result applyTo properties (Apply)', t => {
+  const apply = laws['fl/apply'](Result)
+
+  const ResultInstances = [
+    Result.Ok(15),
+    Result.Err('error')
+  ]
+
+  t.ok(apply.composition(equals, ResultInstances), 'composition')
+
+  t.end()
+})
+
+test('Result applyTo properties (Applicative)', t => {
+  const applicative = laws['fl/applicative'](Result)
+
+  t.ok(applicative.identity(equals), 'identity')
+  t.ok(applicative.homomorphism(equals), 'homomorphism')
+  t.ok(applicative.interchange(equals), 'interchange')
 
   t.end()
 })

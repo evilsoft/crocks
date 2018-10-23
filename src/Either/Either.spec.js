@@ -16,6 +16,9 @@ const unit = require('../core/_unit')
 
 const fl = require('../core/flNames')
 
+const laws = require('../test/laws.js')
+const equals = require('../core/equals')
+
 const either =
   (f, g) => m => m.either(f, g)
 
@@ -1228,6 +1231,43 @@ test('Either traverse with Applicative TypeRep', t => {
   t.ok(isSameType(Array, arL), 'Provides an outer type of Array')
   t.ok(isSameType(Either, arL[0]), 'Provides an inner type of Either')
   t.equal(arL[0].either(identity, constant(0)), 'Left', 'Either contains original Left value')
+
+  t.end()
+})
+
+test('Either applyTo behavior', t => {
+
+  t.ok(equals(Either.Right(5).applyTo(Either.Right(x => x * 3)), Either.Right(15)), 'apply the supplied function to the right value')
+
+  t.ok(equals(Either.Right(5).applyTo(Either.Left('error')), Either.Left('error')), 'not apply a supplied left value')
+
+  t.ok(equals(Either.Left('error').applyTo(Either.Right(x => x.length)), Either.Left('error')), 'not apply the supplied function to a wrapped left value')
+
+  t.ok(equals(Either.Left('error1').applyTo(Either.Left('error2')), Either.Left('error1')), 'prefer errors from the inner value')
+
+  t.end()
+})
+
+test('Either applyTo properties (Apply)', t => {
+  const apply = laws['fl/apply'](Either)
+
+  const EitherInstances = [
+    Either.of('foo'),
+    Either.Right('bar'),
+    Either.Left('error')
+  ]
+
+  t.ok(apply.composition(equals, EitherInstances), 'composition')
+
+  t.end()
+})
+
+test('Either applyTo properties (Applicative)', t => {
+  const applicative = laws['fl/applicative'](Either)
+
+  t.ok(applicative.identity(equals), 'identity')
+  t.ok(applicative.homomorphism(equals), 'homomorphism')
+  t.ok(applicative.interchange(equals), 'interchange')
 
   t.end()
 })

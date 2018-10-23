@@ -268,6 +268,27 @@ function List(x) {
     )
   }
 
+  function applyTo(method) {
+    return function(liftedApplys) {
+      if(!isSameType(List, liftedApplys)) {
+        throw new TypeError(`List.${method}: List required`)
+      }
+
+      const applys = liftedApplys.valueOf()
+
+      return List(
+        xs.reduce((acc, x) => {
+          return acc.concat(applys.map(fn => {
+            if(!isFunction(fn)) {
+              throw new TypeError(`List.${method}: Wrapped values must all be functions.`)
+            }
+            return fn(x)
+          }))
+        }, [])
+      )
+    }
+  }
+
   function chain(method) {
     return function(fn) {
       if(!isFunction(fn)) {
@@ -325,6 +346,8 @@ function List(x) {
     map: map('map'),
     chain: chain('chain'),
     reduce: reduce('reduce'),
+    applyTo: applyTo('applyTo'),
+    [fl.ap]: applyTo(fl.ap),
     [fl.of]: of,
     [fl.equals]: equals,
     [fl.concat]: concat(fl.concat),

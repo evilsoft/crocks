@@ -12,6 +12,7 @@ const fl = require('../core/flNames')
 
 const isFunction = require('../core/isFunction')
 const isSameType = require('../core/isSameType')
+const isSemigroup = require('../core/isSemigroup')
 
 function Const(x) {
   if(!arguments.length) {
@@ -56,6 +57,18 @@ function Const(x) {
     return Const(x)
   }
 
+  function applyTo(method) {
+    return function(liftedApply){
+      if(!isSameType(Const, liftedApply)) {
+        throw new TypeError(`Const.${method}: Const required`)
+      }
+
+      const y = liftedApply.valueOf()
+      // todo: should we default to just returning x, or should we throw?
+      return isSemigroup(x) && isSameType(y, x) ? Const(x.concat(y)) : Const(x)
+    }
+  }
+
   function chain(method) {
     return function(fn) {
       if(!isFunction(fn)) {
@@ -72,6 +85,8 @@ function Const(x) {
     concat: concat('concat'),
     map: map('map'),
     chain: chain('chain'),
+    applyTo: applyTo('applyTo'),
+    [fl.ap]: applyTo(fl.ap),
     [fl.equals]: equals,
     [fl.concat]: concat(fl.concat),
     [fl.map]: map(fl.map),
@@ -82,6 +97,7 @@ function Const(x) {
 }
 
 Const.type = type
+
 Const['@@type'] = _type
 
 Const['@@implements'] = _implements(

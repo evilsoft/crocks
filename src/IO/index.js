@@ -52,6 +52,23 @@ function IO(run) {
 
   }
 
+  function applyTo(method) {
+    return function(liftedApply) {
+      if(!isSameType(IO, liftedApply)) {
+        throw new TypeError(`IO.${method}: IO required`)
+      }
+      return IO(() => {
+        const x = run()
+        return liftedApply.map(fn => {
+          if(!isFunction(fn)) {
+            throw new TypeError(`IO.${method}: Wrapped value must be a function`)
+          }
+          return fn(x)
+        }).run()
+      })
+    }
+  }
+
   function chain(method) {
     return function(fn) {
       if(!isFunction(fn)) {
@@ -75,6 +92,8 @@ function IO(run) {
     run, type, ap, of,
     map: map('map'),
     chain: chain('chain'),
+    applyTo: applyTo('applyTo'),
+    [fl.ap]: applyTo(fl.ap),
     [fl.of]: of,
     [fl.map]: map(fl.map),
     [fl.chain]: chain(fl.chain),

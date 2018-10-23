@@ -11,8 +11,10 @@ const isFunction  = require('../core/isFunction')
 const isObject = require('../core/isObject')
 const isString = require('../core/isString')
 const unit = require('../core/_unit')
+const List = require('../core/List')
 
 const fl = require('../core/flNames')
+const equals = require('../core/equals.js')
 
 const Const = require('.')
 
@@ -343,6 +345,23 @@ test('Const chain properties (Chain)', t => {
   const b = x => Const(x).chain(y => f(y).chain(g))
 
   t.equal(a(10).valueOf(), b(10).valueOf(), 'assosiativity')
+
+  t.end()
+})
+
+test('Const applyTo behavior', t => {
+
+  {
+    const x = Const(5)
+    const result = x.applyTo(Const(6))
+    t.equal(result.valueOf(), 5, 'not combine non-semigroups')
+  }
+
+  {
+    const x = Const(List([ 5 ]))
+    const result = x.applyTo(Const(List([ 6 ])))
+    t.ok(equals(result.valueOf(), List([ 5, 6 ])), 'combine semigroups')
+  }
 
   t.end()
 })

@@ -70,6 +70,19 @@ function Identity(x) {
     return m.map(x)
   }
 
+  function applyTo(method) {
+    return function(liftedApply) {
+      if(!isSameType(Identity, liftedApply)) {
+        throw new TypeError(`Identity.${method}: Identity required`)
+      }
+      else if(!isFunction(liftedApply.valueOf())) {
+        throw new TypeError(`Identity.${method}: Function required`)
+      }
+      const apply = liftedApply.valueOf()
+      return Identity(apply(valueOf()))
+    }
+  }
+
   function chain(method) {
     return function(fn) {
       if(!isFunction(fn)) {
@@ -130,6 +143,8 @@ function Identity(x) {
     concat: concat('concat'),
     map: map('map'),
     chain: chain('chain'),
+    applyTo: applyTo('applyTo'),
+    [fl.ap]: applyTo(fl.ap),
     [fl.of]: of,
     [fl.equals]: equals,
     [fl.concat]: concat(fl.concat),

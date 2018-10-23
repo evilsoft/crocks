@@ -38,7 +38,7 @@ test('isMonad fantasy-land', t => {
   const fake = Fake()
 
   t.equal(isMonad(Fake), false, 'returns false when Monad Constructor is passed')
-  t.equal(isMonad(fake), false , 'returns false when Monad is passed')
+  t.equal(isMonad(fake), true , 'returns true when Monad is passed')
 
   t.end()
 })

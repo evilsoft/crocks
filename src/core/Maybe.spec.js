@@ -16,6 +16,9 @@ const unit = require('./_unit')
 
 const fl = require('./flNames')
 
+const laws = require('../test/laws.js')
+const equals = require('../core/equals')
+
 const constant = x => () => x
 const identity = x => x
 
@@ -956,6 +959,39 @@ test('Maybe traverse with Applicative TypeRep', t => {
   t.ok(isSameType(Array, arN), 'Nothing provides an outer type of MockCrock')
   t.ok(isSameType(Maybe, arN[0]), 'Nothing provides an inner type of Maybe')
   t.equal(arN[0].option('Nothing'), 'Nothing', 'Reports as a Nothing')
+
+  t.end()
+})
+
+test('Maybe applyTo behavior', t => {
+
+  t.ok(Maybe.Just(5).applyTo(Maybe.Just(x => x + 10)), Maybe.Just(15), 'apply functions to Just values')
+  t.ok(Maybe.Nothing().applyTo(Maybe.Just(x => x + 10)), Maybe.Nothing(), 'not apply functions to Nothing values')
+  t.ok(Maybe.Just(5).applyTo(Maybe.Nothing()), Maybe.Nothing(), 'return Nothing when Nothing is supplied')
+
+  t.end()
+})
+
+test('Maybe applyTo properties (Apply)', t => {
+  const apply = laws['fl/apply'](Maybe)
+
+  const MaybeInstances = [
+    Maybe.of(5),
+    Maybe.Just(16),
+    Maybe.Nothing()
+  ]
+
+  t.ok(apply.composition(equals, MaybeInstances), 'composition')
+
+  t.end()
+})
+
+test('Maybe applyTo properties (Applicative)', t => {
+  const applicative = laws['fl/applicative'](Maybe)
+
+  t.ok(applicative.identity(equals), 'identity')
+  t.ok(applicative.homomorphism(equals), 'homomorphism')
+  t.ok(applicative.interchange(equals), 'interchange')
 
   t.end()
 })

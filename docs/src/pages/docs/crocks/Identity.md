@@ -170,7 +170,7 @@ Identity a ~> (a -> b) -> Identity b
 
 Used to apply transformations to values you've lifted into an `Identity`, `map`
 takes a function that it will lift into the context of the `Identity` and apply
-to it the wrapped value. `Identity` contains no bahaviour and will do nothing
+to it the wrapped value. `Identity` contains no behavior and will do nothing
 more than apply the value inside the `Identity` to the function.
 
 ```javascript

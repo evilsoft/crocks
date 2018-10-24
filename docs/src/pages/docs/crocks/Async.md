@@ -1251,6 +1251,8 @@ timeout(slow)
 //=> rejected: "Error: Request has timed out"
 ```
 
+#### toPromise (pointfree)
+
 `crocks/Async/toPromise`
 
 ```haskell

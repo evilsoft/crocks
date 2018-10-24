@@ -1251,6 +1251,67 @@ timeout(slow)
 //=> rejected: "Error: Request has timed out"
 ```
 
+`crocks/Async/toPromise`
+
+```haskell
+toPromise :: Async e a -> Promise a e
+```
+
+The `toPromise` pointfree function takes an `Async` and when invoked will fork
+the instance internally and return a `Promise` that will be in-flight. This 
+comes in handy for integration with other `Promise` based libraries that are 
+utilized in a given application, program or flow.
+
+<!-- eslint-disable no-console -->
+<!-- eslint-disable no-sequences -->
+
+```javascript
+import Async from 'crocks/Async'
+import race from 'crocks/Async/race'
+import toPromise from 'crocks/Async/toPromise'
+
+import ifElse from 'crocks/logice/ifElse'
+import compose from 'crocks/helpers/compose'
+import isPromise from 'crocks/pointfree/isPromise'
+
+const { resolveAfter, rejectAfter } = Async
+
+// log :: String -> a -> a
+const log = label => x =>
+  (console.log(`${label}:`, x), x)
+
+// logIt :: Promise a e -> Promise a e
+const logIt = p =>
+  p.then(log('resolved'), log('rejected'))
+
+const logResult =
+  compose(logIt, ifElse(isPromise, x => x, toPromise))
+
+const failingPromise =
+  new Promise((resolve, reject) => setTimeout(() => reject('Promise rejected!'), 300))
+
+// timeout :: Async Error a -> Async Error a
+const timeout =
+  race(rejectAfter(300, new Error('Request has timed out')))
+
+// fast :: Async e String
+const fast =
+  resolveAfter(150, 'All good')
+
+// slow :: Async e Boolean
+const slow =
+  resolveAfter(900, true)
+
+logResult(timeout(fast))
+//=> resolved: "All good"
+
+logResult(timeout(slow))
+// => rejected: "Error: Request has timed out"
+
+logResult(failingPromise)
+// => rejected: "Promise rejected!"
+```
+
 </article>
 
 <article id="topic-transformation">

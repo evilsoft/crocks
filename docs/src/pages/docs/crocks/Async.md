@@ -1262,7 +1262,7 @@ toPromise :: Async e a -> Promise a e
 The `toPromise` pointfree function takes an `Async` and when invoked will fork
 the instance internally and return a `Promise` that will be in-flight. This 
 comes in handy for integration with other `Promise` based libraries that are 
-utilized in a given application, program or flow.
+utilized in a given application, program or flow through composition.
 
 <!-- eslint-disable no-console -->
 <!-- eslint-disable no-sequences -->

@@ -1251,15 +1251,21 @@ timeout(slow)
 //=> rejected: "Error: Request has timed out"
 ```
 
-#### toPromise (pointfree)
+</article>
 
-`crocks/Async/toPromise`
+<article id="topic-transformation">
+
+## Transformation Functions
+
+#### asyncToPromise
+
+`crocks/Async/asyncToPromise`
 
 ```haskell
-toPromise :: Async e a -> Promise a e
+asyncToPromise :: Async e a -> Promise a e
 ```
 
-The `toPromise` pointfree function takes an `Async` and when invoked will fork
+The `asyncToPromise` function takes an `Async` and when invoked will fork
 the instance internally and return a `Promise` that will be in-flight. This 
 comes in handy for integration with other `Promise` based libraries that are 
 utilized in a given application, program or flow through composition.
@@ -1270,7 +1276,7 @@ utilized in a given application, program or flow through composition.
 ```javascript
 import Async from 'crocks/Async'
 import race from 'crocks/Async/race'
-import toPromise from 'crocks/Async/toPromise'
+import asyncToPromise from 'crocks/Async/asyncToPromise'
 
 import ifElse from 'crocks/logice/ifElse'
 import compose from 'crocks/helpers/compose'
@@ -1287,7 +1293,7 @@ const logIt = p =>
   p.then(log('resolved'), log('rejected'))
 
 const logResult =
-  compose(logIt, ifElse(isPromise, x => x, toPromise))
+  compose(logIt, ifElse(isPromise, x => x, asyncToPromise))
 
 const failingPromise =
   new Promise((resolve, reject) => setTimeout(() => reject('Promise rejected!'), 300))
@@ -1313,12 +1319,6 @@ logResult(timeout(slow))
 logResult(failingPromise)
 // => rejected: "Promise rejected!"
 ```
-
-</article>
-
-<article id="topic-transformation">
-
-## Transformation Functions
 
 #### eitherToAsync
 

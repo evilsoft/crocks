@@ -2,7 +2,7 @@
 title: "Transformation Functions"
 description: "Transformation Functions API"
 layout: "notopic"
-functions: ["arraytolist", "eithertoasync", "eithertofirst", "eithertolast", "eithertomaybe", "eithertoresult", "firsttoasync", "firsttoeither", "firsttolast", "firsttomaybe", "firsttoresult", "lasttoasync", "lasttoeither", "lasttofirst", "lasttomaybe", "lasttoresult", "listtoarray", "maybetoasync", "maybetoeither", "maybetofirst","maybetolast", "maybetoresult", "resulttoasync", "resulttoeither", "resulttofirst", "resulttolast", "resulttomaybe", "writertopair"]
+functions: ["arraytolist", "asyncToPromise", "eithertoasync", "eithertofirst", "eithertolast", "eithertomaybe", "eithertoresult", "firsttoasync", "firsttoeither", "firsttolast", "firsttomaybe", "firsttoresult", "lasttoasync", "lasttoeither", "lasttofirst", "lasttomaybe", "lasttoresult", "listtoarray", "maybetoasync", "maybetoeither", "maybetofirst","maybetolast", "maybetoresult", "resulttoasync", "resulttoeither", "resulttofirst", "resulttolast", "resulttomaybe", "writertopair"]
 weight: 60
 ---
 
@@ -138,6 +138,7 @@ bad
 | Transform | ADT signature | Function Signature | Location |
 |---|:---|:---|:---|
 | `arrayToList` | `[ a ] -> List a` | `(a -> [ b ]) -> a -> List b` | `crocks/List` |
+| [`asyncToPromise`][async-promise] | `Async e a -> Promise a e` | `crocks/Async` |
 | [`eitherToAsync`][either-async] | `Either e a -> Async e a` | `(a -> Either e b) -> a -> Async e b` | `crocks/Async` |
 | [`eitherToFirst`][either-first] | `Either b a -> First a` | `(a -> Either c b) -> a -> First b` | `crocks/First` |
 | [`eitherToLast`][either-last] | `Either b a -> Last a` | `(a -> Either c b) -> a -> Last b` | `crocks/Last` |
@@ -165,6 +166,8 @@ bad
 | [`resultToLast`][result-last] | `Result e a -> Last a` | `(a -> Result e b) -> a -> Last b` | `crocks/Last` |
 | [`resultToMaybe`][result-maybe] | `Result e a -> Maybe a` | `(a -> Result e b) -> a -> Maybe b` | `crocks/Maybe` |
 | `writerToPair` | `Writer m a -> Pair m a` | `(a -> Writer m b) -> a -> Pair m b` | `crocks/Pair` |
+
+[async-promise]: ../crocks/Async.html#asynctopromise
 
 [either-async]: ../crocks/Async.html#eithertoasync
 [first-async]: ../crocks/Async.html#firsttoasync

@@ -2,7 +2,7 @@
 title: "Point-free Functions"
 description: "Point-free Functions API"
 layout: "notopic"
-functions: ["alt", "ap", "bimap", "both", "chain", "coalesce", "comparewith", "concat", "cons", "contramap", "either", "empty", "equals", "extend", "filter", "first", "fold", "foldmap", "head", "map", "merge", "option", "promap", "race", "reduce", "reduceright", "run", "runwith", "second", "sequence", "swap", "tail", "toPromise", "traverse", "valueof"]
+functions: ["alt", "ap", "bimap", "both", "chain", "coalesce", "comparewith", "concat", "cons", "contramap", "either", "empty", "equals", "extend", "filter", "first", "fold", "foldmap", "head", "map", "merge", "option", "promap", "race", "reduce", "reduceright", "run", "runwith", "second", "sequence", "swap", "tail", "traverse", "valueof"]
 weight: 50
 ---
 
@@ -89,7 +89,6 @@ accepted Datatype):
 | [`snd`][snd] | `m a b -> b` | `crocks/Pair` |
 | `swap` | `(c -> d) -> (a -> b) -> m c a -> m b d` | `crocks/pointfree` |
 | `tail` | `m a -> Maybe (m a)` | `crocks/pointfree` |
-| [`toPromise`][topromise] | `m e a -> Promise a e` | `crocks/Async` |
 | `traverse` | <code>Applicative TypeRep t, Apply f => (t &#124; (c -> f c)) -> (a -> f b) -> m (f a) -> f (m b)</code> | `crocks/pointfree` |
 | `valueOf` | `m a -> a` | `crocks/pointfree` |
 
@@ -135,7 +134,6 @@ accepted Datatype):
 | [`snd`][snd] | [`Pair`][pair-snd] |
 | `swap` | [`Async`][async-swap], [`Either`][either-swap], [`Pair`][pair-swap], `Result` |
 | `tail` | `Array`, `List`, `String` |
-| [`toPromise`][topromise] | [`Async`][async-topromise] |
 | `traverse` | `Array`, [`Either`][either-traverse], `Identity`, `List`, [`Maybe`][maybe-traverse], [`Pair`][pair-traverse], `Result` |
 | `valueOf` | [`All`][all-value], [`Any`][any-value], [`Assign`][assign-value], [`Const`][const-value], [`Endo`][endo-value], [`Equiv`][equiv-value], [`First`][first-value], `Identity`, [`Last`][last-value], [`Max`][max-value], [`Min`][min-value], [`Pred`][pred-value], [`Prod`][prod-value], [`Sum`][sum-value], `Unit`, `Writer` |
 
@@ -170,7 +168,6 @@ accepted Datatype):
 [async-map]: ../crocks/Async.html#map
 [async-swap]: ../crocks/Async.html#swap
 [async-race]: ../crocks/Async.html#race
-[async-topromise]: ../crocks/Async.html#topromise
 
 [const-ap]: ../crocks/Const.html#ap
 [const-chain]: ../crocks/Const.html#chain
@@ -292,4 +289,3 @@ accepted Datatype):
 [snd]: ../crocks/Pair.html#snd-pointfree
 
 [race]: ../crocks/Async.html#race-pointfree
-[topromise]: ../crocks/Async.html#topromise-pointfree

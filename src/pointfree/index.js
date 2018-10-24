@@ -40,7 +40,7 @@ module.exports = {
   snd: require('../Pair/snd'),
   swap: require('./swap'),
   tail: require('./tail'),
-  toPromise: require('../Async/toPromise'),
+  asyncToPromise: require('../Async/asyncToPromise'),
   traverse: require('./traverse'),
   valueOf: require('./valueOf')
 }

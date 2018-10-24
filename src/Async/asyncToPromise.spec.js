@@ -9,13 +9,13 @@ const isFunction  = require('../core/isFunction')
 
 const unit = () => undefined
 
-const toPromise = require('./toPromise')
+const asyncToPromise = require('./asyncToPromise')
 
-test('toPromise pointfree', t => {
-  const f = bindFunc(toPromise)
+test('asyncToPromise pointfree', t => {
+  const f = bindFunc(asyncToPromise)
   const m = Async(unit)
 
-  const err = /toPromise: Async required/
+  const err = /asyncToPromise: Async required/
 
   t.throws(f(undefined), err, 'throws if passed undefined')
   t.throws(f(null), err, 'throws if passed null')
@@ -28,14 +28,14 @@ test('toPromise pointfree', t => {
   t.throws(f([]), err, 'throws if passed an array')
   t.throws(f({}), err, 'throws if passed an object')
 
-  t.ok(isFunction(toPromise), 'is a function')
+  t.ok(isFunction(asyncToPromise), 'is a function')
 
   m.toPromise = sinon.spy()
 
-  const result = toPromise(m)
+  const result = asyncToPromise(m)
 
-  t.ok(m.toPromise.called, 'calls toPromise on the passed in container')
-  t.equal(result, unit(), 'returns the result of calling toPromise')
+  t.ok(m.toPromise.called, 'calls asyncToPromise on the passed in container')
+  t.equal(result, unit(), 'returns the result of calling asyncToPromise')
 
   t.end()
 })

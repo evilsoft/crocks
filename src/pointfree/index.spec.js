@@ -43,7 +43,7 @@ const sequence = require('./sequence')
 const snd = require('../Pair/snd')
 const swap = require('./swap')
 const tail = require('./tail')
-const toPromise = require('../Async/toPromise')
+const asyncToPromise = require('../Async/asyncToPromise')
 const traverse = require('./traverse')
 const valueOf = require('./valueOf')
 
@@ -89,7 +89,7 @@ test('pointfree entry', t => {
   t.equal(index.snd, snd, 'provides the snd pointfree')
   t.equal(index.swap, swap, 'provides the swap pointfree')
   t.equal(index.tail, tail, 'provides the tail pointfree')
-  t.equal(index.toPromise, toPromise, 'provides the toPromise pointfree')
+  t.equal(index.asyncToPromise, asyncToPromise, 'provides the asyncToPromise pointfree')
   t.equal(index.traverse, traverse, 'provides the traverse pointfree')
   t.equal(index.valueOf, valueOf, 'provides the valueOf pointfree')
 

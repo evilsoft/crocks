@@ -6,12 +6,12 @@ const isSameType = require('../core/isSameType')
 const Async = require('../core/types').proxy('Async')
 
 // Async e a -> Promise a e
-function toPromise(m) {
+function asyncToPromise(m) {
   if(!isSameType(Async, m)) {
-    throw new TypeError('toPromise: Async required')
+    throw new TypeError('asyncToPromise: Async required')
   }
 
   return m.toPromise()
 }
 
-module.exports = toPromise
+module.exports = asyncToPromise

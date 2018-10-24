@@ -2,7 +2,7 @@
 title: "Helpers"
 description: "Helper functions"
 layout: "notopic"
-functions: ["assign", "assoc", "binary", "compose", "composek", "composep", "composes", "curry", "defaultprops", "defaultto", "dissoc", "fanout", "frompairs", "lifta2", "lifta3", "liftn", "mapprops", "mapreduce", "mconcat", "mconcatmap", "mreduce", "mreducemap", "nary", "objof", "omit", "once", "partial", "pick", "pipe", "pipek", "pipep", "pipes", "propor", "proppathor", "setpath", "tap", "unary", "unit", "unsetpath"]
+functions: ["assign", "assoc", "binary", "compose", "composek", "composep", "composes", "curry", "defaultprops", "defaultto", "dissoc", "fanout", "frompairs", "lifta2", "lifta3", "liftn", "mapprops", "mapreduce", "mconcat", "mconcatmap", "mreduce", "mreducemap", "nary", "objof", "omit", "once", "partial", "pick", "pipe", "pipek", "pipep", "pipes", "propor", "proppathor", "setpath", "setprop", "tap", "unary", "unit", "unsetpath"]
 weight: 20
 ---
 

@@ -59,7 +59,43 @@ converge :: (b -> c -> d) -> (a -> b) -> (a -> c) -> a -> d
 Provides a means of passing an acculumating function and two branching functions.
 A value can be applied to the resulting function which will then be applied to
 each branching function, the results of which will be applied to the accumulating
-function: `converge(divide, sum, length)([1, 2, 3, 4, 5])`.
+function.
+
+```javascript
+import { Just } from 'crocks/Maybe'
+import { alt } from 'crocks/pointfree'
+import { converge } from 'crocks/combinators'
+import { prop } from 'crocks/helpers'
+
+const divide = x => y => x / y
+const sum = xs => xs.reduce((m, n) => m + n, 0)
+const length = xs => xs.length
+
+converge(divide, sum, length)([1, 2, 3, 4, 5])
+//=> 3
+
+const maybeGetDisplay = prop('display')
+const maybeGetFirst = prop('first')
+const maybeGetLast = prop('last')
+const maybeConcatStrings = x => y => Just(x => y => x + ' ' + y).ap(x).ap(y).alt(x).alt(y)
+const maybeMakeDisplay = converge(maybeConcatStrings, maybeGetFirst, maybeGetLast)
+const maybeGetName = converge(alt, maybeGetDisplay, maybeMakeDisplay)
+
+maybeGetName({ display: 'Jack Sparrow' })
+//=> Just('Jack Sparrow')
+
+maybeGetName({ first: 'J', last: 'S' })
+//=> Just('J S')
+
+maybeGetName({ display: 'Jack Sparrow', first: 'J', last: 'S' })
+//=> Just('Jack Sparrow')
+
+maybeGetName({ first: 'J' })
+//=> Just('J')
+
+maybeGetName({ first: 'S' })
+//=> Just('S')
+```
 
 #### flip
 

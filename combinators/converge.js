@@ -4,7 +4,7 @@
 const curry = require('../helpers/curry')
 const isFunction = require('../predicates/isFunction')
 
-// converge (Phoenix Combinator)
+// converge (Phoenix or Starling Prime)
 // (b -> c -> d) -> (a -> b) -> (a -> c) -> a -> d
 function converge(f, g, h, x) {
   if(!isFunction(f) || !isFunction(g) || !isFunction(h)) {

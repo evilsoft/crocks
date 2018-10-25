@@ -6,7 +6,7 @@ const isFunction = require('../predicates/isFunction')
 
 const sub = require('./converge')
 
-test('converge (Phoenix Combinator)', t => {
+test('converge (Big Phi or S\' combinator)', t => {
   const s = bindFunc(sub)
   const x = 67
   const f = x => y => x + y

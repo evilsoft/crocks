@@ -48,9 +48,9 @@ test('converge (Big Phi or S\' combinator)', t => {
   t.throws(s(f, g, {}, x), TypeError, 'throws with third arg an object')
   t.throws(s(f, g, [], x), TypeError, 'throws with third arg an array')
 
-  const result = sub(f, g, h, 2)
+  const result = sub(f, g, h, x)
 
-  t.equal(result, 4, 'returns expected result')
+  t.equal(result, 134, 'returns expected result')
 
   t.end()
 })

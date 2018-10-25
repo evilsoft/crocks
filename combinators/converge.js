@@ -1,5 +1,5 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
-/** @author Ian Hofmann-Hicks (evil) */
+/** @author Matt Ross (amsross) */
 
 const curry = require('../helpers/curry')
 const isFunction = require('../predicates/isFunction')

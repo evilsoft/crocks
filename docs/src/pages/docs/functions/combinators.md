@@ -48,6 +48,19 @@ This is a very handy dandy function, used a lot. Pass it any value and it will
 give you back a function that will return that same value no matter what you
 pass it.
 
+#### converge
+
+`crocks/combinators/converge`
+
+```haskell
+converge :: (b -> c -> d) -> (a -> b) -> (a -> c) -> a -> d
+```
+
+Provides a means of passing an acculumating function and two branching functions.
+A value can be applied to the resulting function which will then be applied to
+each branching function, the results of which will be applied to the accumulating
+function: `converge(divide, sum, length)([1, 2, 3, 4, 5])`.
+
 #### flip
 
 `crocks/combinators/flip`

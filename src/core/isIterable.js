@@ -2,9 +2,10 @@
 /** @author Dale Francis (dalefrancis88) */
 
 const isFunction = require('./isFunction')
+const isNil = require('./isNil')
 
 function isIterable(iterable) {
-  return iterable !== null && iterable !== undefined && isFunction(iterable[Symbol.iterator])
+  return !isNil(iterable) && isFunction(iterable[Symbol.iterator])
 }
 
 module.exports = isIterable

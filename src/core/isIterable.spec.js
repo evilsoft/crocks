@@ -19,8 +19,8 @@ const testIterable = {
     if (this.current <= this.to) {
       return { done: false, value: this.current++ }
     }
-    return { done: true }
 
+    return { done: true }
   }
 }
 
@@ -36,9 +36,10 @@ test('isIterable core', t => {
   t.equal(isIterable({}), false, 'returns false for an object')
   t.equal(isIterable(identity), false, 'returns false for function')
 
-  t.equal(isIterable([]), true, 'returns false for an array')
+  t.equal(isIterable([]), true, 'returns true for an array')
   t.equal(isIterable('string'), true, 'returns true for truthy string')
-  t.equal(isIterable(testIterable), true, 'returns true for fake iterable string')
+  t.equal(isIterable(''), true, 'returns true for falsey string')
+  t.equal(isIterable(testIterable), true, 'returns true for fake iterable')
 
   t.end()
 })

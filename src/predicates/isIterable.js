@@ -2,4 +2,4 @@
 /** @author Dale Francis (dalefrancis88) */
 
 module.exports =
-  require('../core/isPromise')
+  require('../core/isIterable')

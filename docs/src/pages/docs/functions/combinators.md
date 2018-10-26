@@ -87,13 +87,13 @@ const average = converge(divide, sum, length)
 average(data)
 //=> 3
 
-// maybeGetDisplay :: a -> Maybe String
+// maybeGetDisplay :: a -> Maybe b
 const maybeGetDisplay = prop('display')
 
-// maybeGetFirst :: a -> Maybe String
+// maybeGetFirst :: a -> Maybe b
 const maybeGetFirst = prop('first')
 
-// maybeGetLast :: a -> Maybe String
+// maybeGetLast :: a -> Maybe b
 const maybeGetLast = prop('last')
 
 // maybeConcatStrings :: Maybe String -> Maybe String -> Maybe String
@@ -102,7 +102,7 @@ const maybeConcatStrings = x => y => Just(x => y => x + ' ' + y).ap(x).ap(y).alt
 // maybeMakeDisplay :: a -> Maybe String
 const maybeMakeDisplay = converge(maybeConcatStrings, maybeGetFirst, maybeGetLast)
 
-// maybeGetName :: a -> Maybe String
+// maybeGetName :: a -> Maybe b
 const maybeGetName = converge(alt, maybeGetDisplay, maybeMakeDisplay)
 
 maybeGetName({ display: 'Jack Sparrow' })

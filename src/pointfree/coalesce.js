@@ -16,7 +16,7 @@ function coalesce(f, g, m) {
   }
 
   throw new TypeError(
-    'coalesce: Async, Either, Maybe or Result required for third argument'
+    'coalesce: Sum Type required for third argument'
   )
 }
 

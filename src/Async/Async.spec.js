@@ -391,7 +391,7 @@ test('Async type', t => {
 
 test('Async @@type', t => {
   t.equal(Async(unit)['@@type'], Async['@@type'], 'static and instance versions are the same')
-  t.equal(Async(unit)['@@type'], 'crocks/Async@3', 'returns crocks/Async@3')
+  t.equal(Async(unit)['@@type'], 'crocks/Async@4', 'returns crocks/Async@4')
 
   t.end()
 })

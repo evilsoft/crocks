@@ -9,65 +9,76 @@ weight: 30
 Const c a
 ```
 
-Const is a Product type the whose underlying left-most value is fixed to the
-value it was originally constructed with. This ensures that a desired value is
-immutable. While its right portion can still be mapped over, when observed, all
-information on the right will be discarded, leaving only the initial fixed
-value `c`.
+Commonly known as the Delta (Δ) Functor, `Const` is a Product type the whose
+underlying left-most value is fixed to the value it was originally constructed
+with. This ensures that a desired value is immutable. While its right portion
+can still be mapped over, when observed, all information on the right will be
+discarded, leaving only the initial fixed value `c`.
+
+When `c` is a `Semigroup` instance, `Const` acts like a `Semigroup` and can
+combine two instances using [`concat`](#concat). As a special bonus, is also
+acts as an `Apply` as [`ap`](#ap) can be derived from [`concat`](#concat).
+
+When `c` is a `Monoid` instance, `Const` acts like a `Monoid` and provides
+a valid [`empty`](#empty) function on both the Constructor and Instance. Like,
+the `Semigroup` having the ability to be used as an `Apply`, `Const` can derive
+an [`of`](#of) function and can be used like an `Applicative`.
 
 ```javascript
-import Const from 'crocks/Const'
+import Const from '/crocks/Const'
+import Identity from 'crocks/Identity'
 import Pair from 'crocks/Pair'
+import Sum from 'crocks/Sum'
+
 import compose from 'crocks/helpers/compose'
-import concat from 'crocks/pointfree/concat'
-import extend from 'crocks/pointfree/extend'
-import flip from 'crocks/combinators/flip'
-import fst from 'crocks/Pair/fst'
-import valueOf from 'crocks/pointfree/valueOf'
+import curry from 'crocks/helpers/curry'
+import map from 'crocks/pointfree/map'
+import traverse from 'crocks/pointfree/traverse'
 
-Const('Hello World')
-//=> Const 'Hello World'
+// StrConst :: String -> Const String a
+const StrConst =
+  Const(String)
 
-// days :: [ String ]
-const days =
-  [ 'Today', 'Tomorrow', 'Yesterday' ]
+StrConst('Hello World')
+//=> Const(String) "Hello World"
 
-days
-  .map(Const)
-  .reduce(flip(concat))
-//=> Const "Today"
+// add :: Number -> Number -> Number
+const add =
+  x => y => x + y
 
-Const(100)
-  .concat(Const(10))
-//=> Const 100
+Pair(Identity(30), StrConst('always, forever'))
+  .bimap(map(add(4)), map(add(4)))
+//=> Pair(Identity 34, Const(String) "alway, forever")
 
-// toLower :: String -> String
-const toLower =
-  x => x.toLowerCase()
+// ArrayConst :: [ b ] -> Const [ b ] a
+const ArrayConst =
+  Const(Array)
 
-// Field :: Pair (Const a) a
-// updateField :: a -> Field
-const updateField =
-  value => Pair(Const(value), value)
+ArrayConst([ 'a' ])
+  .map(add)
+  .ap(ArrayConst([ 'b' ]))
+//=> Const(Array) [ "a", "b" ]
 
-// updateField :: Field -> Field
-const resetField =
-  extend(compose(valueOf, fst))
+// foldMap :: Monoid m, Foldable f => M -> (a -> m) -> f a -> m
+const foldMap = curry(
+  (T, fn, xs) => {
+    const Rep = Const(T)
+    return traverse(Rep, compose(Rep, fn), xs).valueOf()
+  }
+)
 
-const changed =
-  updateField('Joey')
-    .map(toLower)
-    .chain(updateField)
-//=> Pair( Const "Joey", "joey" )
+// foldLength :: [ String ] -> Sum
+const foldLength =
+  foldMap(Sum, compose(Sum, x => x.length))
 
-resetField(changed)
-//=> Pair( Const "Joey", "Joey" )
+foldLength([ '12', '34', '567' ])
+//=> Sum 7
 ```
 
 <article id="topic-implements">
 
 ## Implements
-`Setoid`, `Semigroup`, `Functor`, `Apply`, `Chain`
+`Setoid`, `Semigroup`, `Monoid`, `Functor`, `Apply`, `Applicative`
 
 </article>
 
@@ -76,21 +87,74 @@ resetField(changed)
 ## Construction
 
 ```haskell
-Const :: c -> Const c a
+Const :: TypeRep T => T -> Const T
+Const c :: c -> Const c a
 ```
 
-The constructor for `Const` is a unary function that takes any value as its
-argument an results in a Product type whose underlying left-most value is fixed
-resulting in an immutable value.
+`Const` is a Type Constructor that take a Constructor or TypeRep and will give
+back an Instance Constructor that will take a value of the type provided.
 
 ```javascript
 import Const from 'crocks/Const'
 
-Const('always and forever')
-//=> Const "always and forever"
+// StrConst :: Const String a
+const StrConst =
+  Const(String)
 
-Const(false)
-//=> Const false
+// BoolConst :: Const Boolean a
+const BoolConst =
+  Const(Boolean)
+
+StrConst('always and forever')
+//=> Const(String) "always and forever"
+
+BoolConst(false)
+//=> Const(Boolean) false
+```
+
+</article>
+
+<article id="topic-constructor">
+
+## Constructor Methods
+
+#### empty
+
+```haskell
+Monoid m => Const(m).empty :: () -> Const m ()
+```
+
+When `Const` is fixed to a `Monoid` type, we automatically get
+a `Monoid` implementation by creating an instance that points to
+the `empty` element of the underlying `Monoid`. As this is just a "pass through"
+of the underlying `Monoid`, everything valid for the underlying type, holds true
+for `Const`.
+
+`empty` will throw a `TypeError` if the underlying Type does not point to a type
+of `Monoid`.
+
+```javascript
+```
+
+#### of
+
+```haskell
+Monoid m => Const(m).of :: a -> Const m a
+```
+
+When `Const` is fixed to a `Monoid` type, we automatically get
+an `Applicative` implementation by creating an instance that points to
+the `empty` element of the underlying `Monoid`.
+
+The `Applicative` laws work due to the fact that we can derive an `Apply` by
+mapping all every morphinism to the `concat` method of a pointed to `Semigroup`.
+As, we must be a `Semigroup` before we can be a `Monoid`, [`ap`](#ap) is
+guaranteed.
+
+`of` will throw a `TypeError` if the underlying Type does not point to a type
+of `Monoid`.
+
+```javascript
 ```
 
 </article>
@@ -107,7 +171,7 @@ Const c a ~> b -> Boolean
 
 Used to compare the underlying values of two `Const` instances for equality by
 value, `equals` takes any given argument and returns `true` if the passed
-arguments is a `Const` with an underlying `left` value equal to the underlying
+argument is a `Const` with an underlying `left` value equal to the underlying
 value of the `Const` the method is being called on. If the passed argument is
 not a `Const` or the underlying values are not equal, `equals` will
 return `false`.
@@ -115,75 +179,75 @@ return `false`.
 ```javascript
 import Const from 'crocks/Const'
 
-Const(2)
-  .equals(Const(5))
+// NumConst :: Const Number a
+const NumConst =
+  Const(Number)
+
+// ArrConst :: Const Array a
+const ArrConst =
+  Const(Array)
+
+NumConst(2)
+  .equals(NumConst(5))
 //=> false
 
-Const([ 1, 2, 3 ])
-  .equals(Const([ 1, 2, 3 ]))
+NumConst(5)
+  .equals(NumConst(5))
+//=> true
+
+ArrConst([ 'a', 'b' ])
+  .equals(ArrConst([ 'c', 'd' ]))
+//=> false
+
+ArrConst([ 'c', 'd' ])
+  .equals(ArrConst([ 'c', 'd' ]))
 //=> true
 ```
 
 #### concat
 
 ```haskell
-Const c a ~> Const c a -> Const c a
+Semigroup s => Const s a ~> Const s a -> Const s a
 ```
 
 `concat` is used to combine two `Semigroup`s of the same type under an operation
-specified by the `Semigroup`. In the case of `Const`, it will return a new
-`Const` instance with the original value.
+specified by the `Semigroup`. When a `Const` instance is fixed to
+a `Semigroup` type, it will combine the two values that each `Const` points to
+using the `concat` method of the underlying `Semigroup`.
+
+`concat` will throw a `TypeError` if the underlying Type does not point to a
+type of `Semigroup`.
 
 ```javascript
 import Const from 'crocks/Const'
 
-import concat from 'crocks/pointfree/concat'
-import map from 'crocks/pointfree/map'
+import Maybe from 'crocks/Maybe'
+import Sum from 'crocks/Sum'
 
-// Account :: {
-//   firstName: String,
-//   lastName: String,
-//   achievements: [ String ]
-// }
+const { Just } = Maybe
 
-// account1 :: Account
-const account1 = {
-  firstName: 'John',
-  lastName: 'Doe',
-  achievements: [ '232', '154' ]
-}
+const ArrayConst =
+  Const(Array)
 
-// account2 :: Account
-const account2 = {
-  firstName: 'Joe',
-  lastName: 'Blow',
-  achievements: [ '989' ]
-}
+const MaybeConst =
+  Const(Maybe)
 
-// constMerge :: [ a ] -> a
-const constMerge = xs =>
-  map(Const, xs)
-    .reduce(concat)
-    .valueOf()
+ArrayConst([ 'a', 'b' ])
+  .concat(ArrayConst([ 'c' ]))
+//=> Const(Array) [ "a", "b", "c" ]
 
-// reduceAccounts :: (Account, Account) -> Account
-const reduceAccounts = (acc, cur) => ({
-  firstName: constMerge([ cur.firstName, acc.firstName ]),
-  lastName: constMerge([ cur.lastName, acc.lastName ]),
-  achievements: concat(cur.achievements, acc.achievements)
-})
+// a :: Maybe Sum
+const a =
+  Just(Sum(10))
 
-// mergeAccounts :: [ Account ] -> Account
-const mergeAccounts = accounts =>
-  accounts
-    .reduce(reduceAccounts)
+// b :: Maybe Sum
+const b =
+  Just(Sum(32))
 
-mergeAccounts([ account1, account2 ])
-//=> {
-//   firstName: "John",
-//   lastName: "Doe",
-//   achievements: [ '232', '154', '989' ]
-// }
+MaybeConst(a)
+  .concat(MaybeConst(b))
+  .valueOf()
+//=> Just (Sum 42)
 ```
 
 #### map
@@ -199,26 +263,43 @@ with the same left value.
 
 ```javascript
 import Const from 'crocks/Const'
+import Identity from 'crocks/Identity'
+import Maybe from 'crocks/Maybe'
 
-// toUpper :: String -> String
-const toUpper =
-  x => x.toUpperCase()
+import map from 'crocks/pointfree/map'
 
-Const('initial')
-  .map(toUpper)
-//=> Const "initial"
+const { Just } = Maybe
+
+// MaybeConst :: Maybe a -> MaybeConst (Maybe a)
+const MaybeConst =
+  Const(Maybe)
+
+// add10 :: Functor f => f Number -> f Number
+const add10 =
+  map(x => x + 10)
+
+Identity(Just(3))
+  .map(add10)
+//=> Identity Just 13
+
+MaybeConst(Just(3))
+  .map(add10)
+//=> Const(Maybe) Just 3
 ```
 
 #### ap
 
 ```haskell
-Const c (a -> b) ~> Const c a -> Const c b
+Semigroup s => Const s (a -> b) ~> Const s a -> Const s b
 ```
 
-Short for apply, `ap` is normally used to apply a `Const` instance containing a
-value to another `Const` instance that contains a function, resulting in new
-`Const` instance with the result. However, due to the unique nature of `Const`
-the function will remain the active value in the `Const`.
+The unique nature of the `Const` functor allows any underlying `Semigroup` to
+act an an `Apply`. When on `Const` is applied to another `Const` whose
+underlying `Semigroup`s match, the `Semigroup`s will be combined by calling
+`concat` on the underlying `Semigroup`.
+
+`ap` will throw a `TypeError` if the underlying Type does not point to a type
+of `Semigroup`.
 
 ```javascript
 import Const from 'crocks/Const'
@@ -233,47 +314,31 @@ Const(5)
 //=> Const 5
 ```
 
-#### chain
-
-```haskell
-Const c a ~> (a -> Const c b) -> Const c b
-```
-
-Combining a sequential series of transformations that capture disjunction can
-be accomplished with `chain`. `chain` expects a unary, `Const` returning
-function as its argument. When invoked the inner value will not be passed to
-provided function. A new `Const` will be returned with the same inner value.
-
-```javascript
-import Const from 'crocks/Const'
-
-Const('initial')
-  .chain(x => Const(x.toUpperCase()))
-//=> Const 'initial'
-```
-
 #### valueOf
 
 ```haskell
 Const c a ~> () -> c
 ```
 
-`valueOf` is used as a means of extraction. This function
-is used primarily for convenience for some of the helper functions that ship
-with `crocks`. Calling `valueOf` on a `Const` instance will result in the
-underlying left value of the `Product` type.
+`valueOf` is used as a means of extraction. This function is used primarily for
+convenience for some of the helper functions that ship with `crocks`.
+Calling `valueOf` on a `Const` instance will result in the underlying left value
+of the `Product` type.
 
 ```javascript
 import Const from 'crocks/Const'
 
-Const(33)
-  .valueOf()
-//=> 33
+const ArrayConst =
+  Const(Array)
 
-Const(35)
-  .concat(Const(20))
+ArrayConst([ 33 ])
   .valueOf()
-//=> 35
+//=> [ 33 ]
+
+ArrayConst([ 35 ])
+  .concat(ArrayConst([ 20 ]))
+  .valueOf()
+//=> [ 35, 20 ]
 ```
 
 </article>

@@ -26,7 +26,6 @@ test('type function ', t => {
   t.equals(fn('Arrow'), 'Arrow', 'returns `Arrow` for key `Arrow`')
   t.equals(fn('Assign'), 'Assign', 'returns `Assign` for key `Assign`')
   t.equals(fn('Async'), 'Async', 'returns `Async` for key `Async`')
-  t.equals(fn('Const'), 'Const', 'returns `Const` for key `Const`')
   t.equals(fn('Either'), 'Either', 'returns `Either` for key `Either`')
   t.equals(fn('Endo'), 'Endo', 'returns `Endo` for key `Endo`')
   t.equals(fn('Equiv'), 'Equiv', 'returns `Equiv` for key `Equiv`')
@@ -48,6 +47,9 @@ test('type function ', t => {
   t.equals(fn('Sum'), 'Sum', 'returns `Sum` for key `Sum`')
   t.equals(fn('Unit'), 'Unit', 'returns `Unit` for key `Unit`')
   t.equals(fn('Writer'), 'Writer', 'returns `Writer` for key `Writer`')
+
+  t.equals(type('Const')('Type'), 'Const(Type)', 'returns `Const(Type)` for key `Const` with `Type` context')
+  t.equals(type('Tuple')(6), '6-Tuple', 'returns `6-Tuple` for key `Tuple` with `6` context')
 
   t.end()
 })
@@ -64,7 +66,6 @@ test('proxy function ', t => {
   t.equals(fn('Arrow'), 'Arrow', 'returns `Arrow` for key `Arrow`')
   t.equals(fn('Assign'), 'Assign', 'returns `Assign` for key `Assign`')
   t.equals(fn('Async'), 'Async', 'returns `Async` for key `Async`')
-  t.equals(fn('Const'), 'Const', 'returns `Const` for key `Const`')
   t.equals(fn('Either'), 'Either', 'returns `Either` for key `Either`')
   t.equals(fn('Endo'), 'Endo', 'returns `Endo` for key `Endo`')
   t.equals(fn('Equiv'), 'Equiv', 'returns `Equiv` for key `Equiv`')
@@ -86,6 +87,12 @@ test('proxy function ', t => {
   t.equals(fn('Sum'), 'Sum', 'returns `Sum` for key `Sum`')
   t.equals(fn('Unit'), 'Unit', 'returns `Unit` for key `Unit`')
   t.equals(fn('Writer'), 'Writer', 'returns `Writer` for key `Writer`')
+
+  const withCtx =
+    (x, ctx) => proxy(x, ctx).type()
+
+  t.equals(withCtx('Const', 'SomeType'), 'Const(SomeType)', 'returns `Const(SomeType)` for key `Const` with `SomeType` context')
+  t.equals(withCtx('Tuple', 2), '2-Tuple', 'returns `2-Tuple` for key `Tuple` with `2` context')
 
   t.end()
 })
@@ -105,7 +112,6 @@ test('typeFn function ', t => {
   t.equals(fn('Arrow'), 'crocks/Arrow@0', 'returns `crocks/Arrow@0` for key `Arrow`')
   t.equals(fn('Assign'), 'crocks/Assign@0', 'returns `crocks/Assign@0` for key `Assign`')
   t.equals(fn('Async'), 'crocks/Async@0', 'returns `crocks/Async@0` for key `Async`')
-  t.equals(fn('Const'), 'crocks/Const@0', 'returns `crocks/Const@0` for key `Const`')
   t.equals(fn('Either'), 'crocks/Either@0', 'returns `crocks/Either@0` for key `Either`')
   t.equals(fn('Endo'), 'crocks/Endo@0', 'returns `crocks/Endo@0` for key `Endo`')
   t.equals(fn('Equiv'), 'crocks/Equiv@0', 'returns `crocks/Equiv@0` for key `Equiv`')
@@ -127,6 +133,9 @@ test('typeFn function ', t => {
   t.equals(fn('Sum'), 'crocks/Sum@0', 'returns `crocks/Sum@0` for key `Sum`')
   t.equals(fn('Unit'), 'crocks/Unit@0', 'returns `crocks/Unit@0` for key `Unit`')
   t.equals(fn('Writer'), 'crocks/Writer@0', 'returns `crocks/Writer@0` for key `Writer`')
+
+  t.equals(typeFn('Const', 0, 'String'), 'crocks/Const(String)@0', 'returns `crocks/Const(String)@0` for key `Const` with `String` context')
+  t.equals(typeFn('Tuple', 0, 3), 'crocks/3-Tuple@0', 'returns `crocks/3-Tuple@0` for key `Tuple` with `3` context')
 
   t.end()
 })

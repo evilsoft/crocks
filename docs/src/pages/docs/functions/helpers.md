@@ -1000,7 +1000,7 @@ exercise some discipline here to not mutate.
 `crocks/Result/tryCatch`
 
 ```haskell
-tryCatch :: (a -> b) -> a -> Result e b
+tryCatch :: ((*) -> b) -> (*) -> Result e b
 ```
 
 Typical try-catch blocks are very imperative in their usage. This `tryCatch`

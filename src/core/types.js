@@ -8,7 +8,7 @@ const _types = {
   'Arrow': () => 'Arrow',
   'Assign': () => 'Assign',
   'Async': () => 'Async',
-  'Const': () => 'Const',
+  'Const': inner => `Const(${inner})`,
   'Either': () => 'Either',
   'Endo': () => 'Endo',
   'Equiv': () => 'Equiv',
@@ -37,7 +37,7 @@ const type =
   type => _types[type] || _types['unk']
 
 const proxy =
-  t => ({ type: type(t) })
+  (t, ctx) => ({ type: () => type(t)(ctx) })
 
 const typeFn = (t, ver, ctx) => {
   const typeStr = type(t)(ctx)

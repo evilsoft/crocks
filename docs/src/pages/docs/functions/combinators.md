@@ -2,7 +2,7 @@
 description: "Combinators API"
 layout: "notopic"
 title: "Combinators"
-functions: ["applyto", "composeb", "constant", "flip", "identity", "substitution"]
+functions: ["applyto", "composeb", "constant", "converge", "flip", "identity", "substitution"]
 weight: 10
 ---
 
@@ -47,6 +47,79 @@ constant :: a -> () -> a
 This is a very handy dandy function, used a lot. Pass it any value and it will
 give you back a function that will return that same value no matter what you
 pass it.
+
+#### converge
+
+`crocks/combinators/converge`
+
+```haskell
+converge :: (b -> c -> d) -> (a -> b) -> (a -> c) -> a -> d
+```
+
+Provides a means of passing an acculumating function and two branching functions.
+A value can be applied to the resulting function which will then be applied to
+each branching function, the results of which will be applied to the accumulating
+function.
+
+```javascript
+import Maybe from 'crocks/Maybe'
+import alt from 'crocks/pointfree/alt'
+import converge from 'crocks/combinators/converge'
+import prop from 'crocks/Maybe/prop'
+
+const { Just } = Maybe
+
+// data :: [ Number ]
+const data = [ 1, 2, 3, 4, 5 ]
+
+// divide :: Number -> Number -> Number
+const divide = x => y => x / y
+
+// sum :: [ Number ] -> Number
+const sum = xs => xs.reduce((m, n) => m + n, 0)
+
+// length :: [ a ] -> Number
+const length = xs => xs.length
+
+// average :: [ Number ] -> Number
+const average = converge(divide, sum, length)
+
+average(data)
+//=> 3
+
+// maybeGetDisplay :: a -> Maybe b
+const maybeGetDisplay = prop('display')
+
+// maybeGetFirst :: a -> Maybe b
+const maybeGetFirst = prop('first')
+
+// maybeGetLast :: a -> Maybe b
+const maybeGetLast = prop('last')
+
+// maybeConcatStrings :: Maybe String -> Maybe String -> Maybe String
+const maybeConcatStrings = x => y => Just(x => y => x + ' ' + y).ap(x).ap(y).alt(x).alt(y)
+
+// maybeMakeDisplay :: a -> Maybe String
+const maybeMakeDisplay = converge(maybeConcatStrings, maybeGetFirst, maybeGetLast)
+
+// maybeGetName :: a -> Maybe b
+const maybeGetName = converge(alt, maybeGetDisplay, maybeMakeDisplay)
+
+maybeGetName({ display: 'Jack Sparrow' })
+//=> Just('Jack Sparrow')
+
+maybeGetName({ first: 'J', last: 'S' })
+//=> Just('J S')
+
+maybeGetName({ display: 'Jack Sparrow', first: 'J', last: 'S' })
+//=> Just('Jack Sparrow')
+
+maybeGetName({ first: 'J' })
+//=> Just('J')
+
+maybeGetName({ first: 'S' })
+//=> Just('S')
+```
 
 #### flip
 

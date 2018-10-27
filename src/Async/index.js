@@ -73,8 +73,7 @@ function fromPromise(fn) {
       }
 
       promise
-        .then(resolve)
-        .catch(reject)
+        .then(resolve, reject)
     })
   }
 }

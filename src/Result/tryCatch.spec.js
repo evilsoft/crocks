@@ -5,6 +5,7 @@ const bindFunc = helpers.bindFunc
 
 const Result = require('.')
 const isFunction = require('../core/isFunction')
+const equals = require('../core/equals')
 const isSameType = require('../core/isSameType')
 const unit = require('../core/_unit')
 
@@ -43,7 +44,6 @@ test('tryCatch functionality', t => {
 
   const f = x => x
   const g = () =>  { throw new Error(msg) }
-
   const extract =
     either(identity, constant('Ok'))
 
@@ -58,6 +58,14 @@ test('tryCatch functionality', t => {
 
   t.equals(good, 'Ok', 'returns an Ok when no error')
   t.equals(bad.message, msg, 'returns an Err with error on error')
+
+  const x = (a, b, c) => ({ a, b, c })
+
+  const noncurried = tryCatch(x, 1,2,3).either(identity, identity)
+  const curried = tryCatch(x, 1)(2)(3).either(identity, identity)
+
+  t.equals(equals(noncurried, { a: 1, b: 2, c: 3 }), true, 'preserves the arity of the passed function')
+  t.equals(equals(curried, { a: 1, b: 2, c: 3 }), true, 'returned function is curried')
 
   t.end()
 })

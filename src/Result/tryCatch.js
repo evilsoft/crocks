@@ -10,10 +10,14 @@ function tryCatch(fn) {
     throw new TypeError('tryCatch: Function required for first argument')
   }
 
-  return function(x) {
-    try { return Ok(fn(x)) }
+  const safe = function() {
+    try { return Ok(fn.apply(this, arguments)) }
     catch(e) { return Err(e) }
   }
+
+  Object.defineProperty(safe, 'length', { value: fn.length })
+
+  return safe
 }
 
 module.exports = curry(tryCatch)

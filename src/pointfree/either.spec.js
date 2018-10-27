@@ -41,7 +41,7 @@ test('either pointfree', t => {
   t.throws(f(unit, [], m), err, 'throws if second arg passed an array')
   t.throws(f(unit, {}, m), err, 'throws if second arg passed an object')
 
-  const last = /either: Last argument must be an Either or Maybe/
+  const last = /either: Last argument must be a Sum Type/
   t.throws(f(unit, unit, undefined), last, 'throws if third arg undefined')
   t.throws(f(unit, unit, null), last, 'throws if third arg passed null')
   t.throws(f(unit, unit, 0), last, 'throws if third arg passed a falsey number')

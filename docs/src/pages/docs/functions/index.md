@@ -46,6 +46,7 @@ need to account for for the rest of your flow.
 | [`applyTo`][applyto] | `a -> (a -> b) -> b` | `crocks/combinators/applyTo` |
 | [`composeB`][composeb] | `(b -> c) -> (a -> b) -> a -> c` | `crocks/combinators/composeB` |
 | [`constant`][constant] | `a -> () -> a` | `crocks/combinators/constant` |
+| [`converge`][converge] | `(b -> c -> d) -> (a -> b) -> (a -> c) -> a -> d` | `crocks/combinators/converge` |
 | [`flip`][flip] | `(a -> b -> c) -> b -> a -> c` | `crocks/combinators/flip` |
 | [`identity`][identity] | `a -> a` | `crocks/combinators/identity` |
 | [`substitution`][substitution] | `(a -> b -> c) -> (a -> b) -> a -> c` | `crocks/combinators/substitution` |

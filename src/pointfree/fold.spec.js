@@ -16,7 +16,7 @@ test('fold pointfree errors', t => {
 
   t.ok(isFunction(fold), 'is a function')
 
-  const noFold = /fold: Non-empty Foldable with at least one Semigroup is required/
+  const noFold = /^TypeError: fold: Non-empty Foldable with at least one Semigroup is required/
   t.throws(f(undefined), noFold, 'throws when passed undefined')
   t.throws(f(null), noFold, 'throws when passed null')
   t.throws(f(0), noFold, 'throws when passed falsey number')
@@ -27,33 +27,21 @@ test('fold pointfree errors', t => {
   t.throws(f(true), noFold, 'throws when passed true')
   t.throws(f({}), noFold, 'throws when passed an object')
   t.throws(f(unit), noFold, 'throws when passed a function')
-  t.throws(f([]), noFold, 'throws when passed an empty array')
-
-  const noSemi = /fold: Foldable must contain Semigroups of the same type/
-  t.throws(f([ 0 ]), noSemi, 'throws when passed a single element array with no semigroup')
-
-  const notSame = /fold: Foldable must contain Semigroups of the same type/
-  t.throws(f([ '', 0 ]), notSame, 'throws when not elements are semigroups')
-  t.throws(f([ '', [] ]), notSame, 'throws when different semigroups')
 
   t.end()
 })
 
-test('fold pointfree array', t => {
-  t.same(fold([ [ 1 ], [ 2 ] ]), [ 1, 2 ], 'combines and extracts semigroups')
-  t.same(fold([ 'happy' ]), 'happy', 'extracts a single semigroup')
-
-  t.end()
-})
-
-test('fold pointfree foldable', t => {
+test('fold pointfree', t => {
   const x = 'folded'
   const m = { fold: sinon.spy(constant(x)) }
 
   const result = fold(m)
 
-  t.ok(m.fold.called, 'calls fold on the ')
+  t.ok(m.fold.called, 'calls fold on the foldable')
   t.equals(result, x, 'returns the result of calling fold on container')
+
+  const arr = fold([ x ])
+  t.equals(arr, x, 'returns the result of calling fold on an array')
 
   t.end()
 })

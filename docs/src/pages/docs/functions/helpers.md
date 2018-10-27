@@ -2,7 +2,7 @@
 title: "Helpers"
 description: "Helper functions"
 layout: "notopic"
-functions: ["assign", "assoc", "binary", "compose", "composek", "composep", "composes", "curry", "defaultprops", "defaultto", "dissoc", "fanout", "frompairs", "lifta2", "lifta3", "liftn", "mapprops", "mapreduce", "mconcat", "mconcatmap", "mreduce", "mreducemap", "nary", "objof", "omit", "once", "partial", "pick", "pipe", "pipek", "pipep", "pipes", "propor", "proppathor", "tap", "unary", "unit"]
+functions: ["assign", "assoc", "binary", "compose", "composek", "composep", "composes", "curry", "defaultprops", "defaultto", "dissoc", "fanout", "frompairs", "lifta2", "lifta3", "liftn", "mapprops", "mapreduce", "mconcat", "mconcatmap", "mreduce", "mreducemap", "nary", "objof", "omit", "once", "partial", "pick", "pipe", "pipek", "pipep", "pipes", "propor", "proppathor", "setpath", "tap", "unary", "unit", "unsetpath"]
 weight: 20
 ---
 
@@ -929,6 +929,56 @@ def([ 'arr', 'length' ], data)
 //=> 2
 ```
 
+#### setPath
+
+`crocks/helpers/setPath`
+
+```haskell
+setPath :: [ String | Integer ] -> a -> (Object | Array) -> (Object | Array)
+```
+
+Used to set a value on a deeply nested `Object`, `setPath` will traverse down
+a path and set the a the final property to the provided value. `setPath` returns
+the an `Object`/`Array` with the modification and does not alter the original
+`Object`/`Array` along the path.
+
+The provided path can be a mixture of either `Integer`s or `String`s to allow
+for traversing through both `Array`s and `Object`s. When an `Integer` is provided
+it will treat that portion as an `Array` while `String`s are used to reference
+through `Object`s. If at any point in the provided a `NaN`, `undefined`
+or `null` values is encountered, a new `Object`/`Array` will be created.
+
+```javascript
+import setPath from 'crocks/helpers/setPath'
+
+setPath([ 'account', 'name' ], 'Awesome Place', {
+  account: {
+    name: 'Great Place',
+    rating: 5
+  }
+})
+//=> { account: { name: 'Awesome Place', rating: 5 } }
+
+setPath([ 'people', 2, 'age' ], 26, {
+  people: [
+    { name: 'George', age: 22 },
+    { name: 'Greta', age: 21 },
+    { name: 'Ali', age: 25 }
+  ]
+})
+//=> { people: [
+//   { name: 'George', age: 22 },
+//   { name: 'Greta', age: 21 },
+//   { name: 'Ali', age: 26 },
+// ] }
+
+setPath([ 'a', 'c' ], false, { a: { b: true } })
+// => { a: { b: true, c: false } }
+
+setPath([ 'list', 'a' ], 'ohhh, I see.', { list: [ 'string', 'another' ] })
+//=> { list: { 0: 'string', 1: 'another', a: 'ohhh, I see.' } }
+```
+
 #### tap
 
 `crocks/helpers/tap`
@@ -950,7 +1000,7 @@ exercise some discipline here to not mutate.
 `crocks/Result/tryCatch`
 
 ```haskell
-tryCatch :: (a -> b) -> a -> Result e b
+tryCatch :: ((*) -> b) -> (*) -> Result e b
 ```
 
 Typical try-catch blocks are very imperative in their usage. This `tryCatch`
@@ -983,11 +1033,50 @@ applies (2) arguments to a given function.
 ```haskell
 unit :: () -> undefined
 ```
+
 While it seems like just a simple function, `unit` can be used for a number of
 things. A common use for it is as a default `noop` as it is a function that does
 nothing and returns `undefined`. You can also use it in a pointed fashion to
 represent some special value for a given type. This pointed use is the heart and
-soul of the infamous `Maybe` type.
+soul of the infamous [`Maybe`][maybe] type.
 
+#### unsetPath
+
+`crocks/helpers/unsetPath`
+
+```haskell
+unsetPath :: [ String | Integer ] -> (Object | Array) -> (Object | Array)
+```
+
+Used to remove a property or index on a deeply nested `Object`/`Array`.
+`unsetPath` is will return a new instance with the property or index removed.
+
+The provided path can be a mixture of either `Integer`s or `String`s to allow
+for traversing through both `Array`s and `Object`s. When an `Integer` is provided
+it will treat that portion as an `Array` while `String`s are used to reference
+through `Object`s.
+
+```javascript
+import unsetPath from 'crocks/helpers/unsetPath'
+
+unsetPath([ 'people', 0, 'remove' ], {
+  people: [
+    { name: 'Tonya', remove: true },
+    { name: 'Bobby' },
+  ]
+})
+//=> { people: [ { name: 'Tonya' }, { name: 'Bobby' } ] }
+
+unsetPath([ 'a', 'c', 'd' ], { a: null })
+//=> { a: null }
+
+unsetPath([ 'a', 'b' ], { a: { b: false } })
+//=> { a: {} }
+
+unsetPath([ 'a', 'b' ], { a: { c: false } })
+//=> { a: { c: false } }
+```
+
+[maybe]: ../crocks/Maybe.html
 [safe]: ../crocks/Maybe.html#safe
 [topairs]: ../crocks/Pair.html#topairs

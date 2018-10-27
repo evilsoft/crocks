@@ -10,7 +10,7 @@ First a = First (Maybe a)
 ```
 
 `First` is a `Monoid` that will always return the first, non-empty value when
-(2) `First` instances are combined. `First` is able to be a `Monoid` because
+two `First` instances are combined. `First` is able to be a `Monoid` because
 it implements a [`Maybe`][maybe] under the hood. The use of
 the [`Maybe`][maybe] allows for an [`empty`](#empty) `First` to be represented
 with a [`Nothing`][nothing].
@@ -148,7 +148,7 @@ empty()
 First a ~> b -> Boolean
 ```
 
-Used to compare the underlying values of (2) `First` instances for equality by
+Used to compare the underlying values of two `First` instances for equality by
 value, `equals` takes any given argument and returns `true` if the passed
 arguments is a `First` with an underlying value equal to the underlying value
 of the `First` the method is being called on. If the passed argument is not
@@ -186,7 +186,7 @@ First(95)
 First a ~> First a -> First a
 ```
 
-`concat` is used to combine (2) `Semigroup`s of the same type under an operation
+`concat` is used to combine two `Semigroup`s of the same type under an operation
 specified by the `Semigroup`. In the case of `First`, it will always provide the
 first non-empty value. Any subsequent non-empty values will be thrown away and
 will always result in the first non-empty value.
@@ -321,18 +321,20 @@ eitherToFirst :: Either b a -> First a
 eitherToFirst :: (a -> Either c b) -> a -> First b
 ```
 
-Used to transform a given `Either` instance to a `First`
-instance, `eitherToFirst` will turn a `Right` instance into a non-empty `First`,
-wrapping the original value contained in the `Right`. All `Left` instances will
-map to an [`empty`](#empty) `First`, mapping the originally contained value to a `Unit`.
-Values on the `Left` will be lost and as such this transformation is considered
-lossy in that regard.
+Used to transform a given [`Either`][either] instance to a `First`
+instance, `eitherToFirst` will turn a [`Right`][right] instance into a
+non-empty `First`, wrapping the original value contained in
+the [`Right`][right]. All [`Left`][left] instances will map to
+an [`empty`](#empty) `First`, mapping the originally contained value to
+a `Unit`. Values on the [`Left`][left] will be lost and as such this
+transformation is considered lossy in that regard.
 
-Like all `crocks` transformation functions, `eitherToFirst` has (2) possible
-signatures and will behave differently when passed either an `Either` instance
-or a function that returns an instance of `Either`. When passed the instance,
-a transformed `First` is returned. When passed an `Either` returning function,
-a function will be returned that takes a given value and returns a `First`.
+Like all `crocks` transformation functions, `eitherToFirst` has two possible
+signatures and will behave differently when passed either
+an [`Either`][either] instance or a function that returns an instance
+of [`Either`][either]. When passed the instance, a transformed `First` is
+returned. When passed an [`Either`][either] returning function, a function will
+be returned that takes a given value and returns a `First`.
 
 ```javascript
 import First from 'crocks/First'
@@ -385,16 +387,17 @@ lastToFirst :: Last a -> First a
 lastToFirst :: (a -> Last b) -> a -> First b
 ```
 
-Used to transform a given `Last` instance to a `First` instance, `lastToFirst`
-will turn a non-empty instance into a non-empty `First` wrapping the original
-value contained within the `Last`. All [`empty`](#empty) instances will map
-to an [`empty`](#empty) `First`.
+Used to transform a given [`Last`][last] instance to a `First` instance,
+`lastToFirst` will turn a non-empty instance into a non-empty `First` wrapping
+the original value contained within the [`Last`][last].
+All [`empty`](#empty) instances will map to an [`empty`](#empty) `First`.
 
-Like all `crocks` transformation functions, `lastToFirst` has (2) possible
-signatures and will behave differently when passed either a `Last` instance
-or a function that returns an instance of `Last`. When passed the instance,
-a transformed `First` is returned. When passed a `Last` returning function,
-a function will be returned that takes a given value and returns a `First`.
+Like all `crocks` transformation functions, `lastToFirst` has two possible
+signatures and will behave differently when passed either
+a [`Last`][last] instance or a function that returns an instance
+of [`Last`][last]. When passed the instance, a transformed `First` is returned.
+When passed a [`Last`][last] returning function, a function will be returned
+that takes a given value and returns a `First`.
 
 ```javascript
 import First from 'crocks/First'
@@ -448,7 +451,7 @@ take a `Maybe` as its argument during construction. So while there is not a
 real need for this to be used for transforming instances, it can come in
 handy for lifting [`Maybe`][maybe] returning functions.
 
-Like all `crocks` transformation functions, `maybeToFirst` has (2) possible
+Like all `crocks` transformation functions, `maybeToFirst` has two possible
 signatures and will behave differently when passed either a [`Maybe`][maybe]
 instance or a function that returns an instance of [`Maybe`][maybe]. When
 passed the instance, a transformed `First` is returned. When passed
@@ -519,7 +522,7 @@ to an [`empty`](#empty) `First`, mapping the originally contained value to
 a `Unit`. Values on the `Err` will be lost and as such this transformation is
 considered lossy in that regard.
 
-Like all `crocks` transformation functions, `resultToFirst` has (2) possible
+Like all `crocks` transformation functions, `resultToFirst` has two possible
 signatures and will behave differently when passed either an `Result` instance
 or a function that returns an instance of `Result`. When passed the instance,
 a transformed `First` is returned. When passed a `Result` returning function,
@@ -568,3 +571,7 @@ firstNum(null)
 [maybe]: ../crocks/Maybe.html
 [nothing]: ../crocks/Maybe.html#nothing
 [option]: ../crocks/Maybe.html#option
+[last]: ./Last.html
+[either]: ../crocks/Either.html
+[left]: ../crocks/Either.html#left
+[right]: ../crocks/Either.html#right

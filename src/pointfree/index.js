@@ -32,7 +32,6 @@ module.exports = {
   sequence: require('./sequence'),
   swap: require('./swap'),
   tail: require('./tail'),
-  asyncToPromise: require('../Async/asyncToPromise'),
   traverse: require('./traverse'),
   valueOf: require('./valueOf')
 }

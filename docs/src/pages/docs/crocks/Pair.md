@@ -166,7 +166,7 @@ import Sum from 'crocks/Sum'
 
 import compose from 'crocks/helpers/compose'
 import concat from 'crocks/pointfree/concat'
-import fanout from 'crocks/helpers/fanout'
+import fanout from 'crocks/Pair/fanout'
 import flip from 'crocks/combinators/flip'
 import map from 'crocks/pointfree/map'
 import mapReduce from 'crocks/helpers/mapReduce'
@@ -710,7 +710,7 @@ method works hand in hand with the either the [`branch`](#branch) or
 import Sum from 'crocks/Sum'
 
 import compose from 'crocks/helpers/compose'
-import fanout from 'crocks/helpers/fanout'
+import fanout from 'crocks/Pair/fanout'
 import merge from 'crocks/pointfree/merge'
 import mreduce from 'crocks/helpers/mreduce'
 

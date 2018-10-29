@@ -277,7 +277,7 @@ functions, `dissoc` will remove any `undefined` values from the result.
 
 #### fanout
 
-`crocks/helpers/fanout`
+`crocks/Pair/fanout`
 
 ```haskell
 fanout :: (a -> b) -> (a -> c) -> (a -> Pair b c)

@@ -67,7 +67,7 @@ need to account for for the rest of your flow.
 | [`defaultProps`][defaultprops] | `Object -> Object -> Object` | `crocks/helpers/defaultProps` |
 | [`defaultTo`][defaultto] | `a -> b -> a` | `crocks/helpers/defaultTo` |
 | [`dissoc`][dissoc] | `String -> Object -> Object` | `crocks/helpers/dissoc` |
-| [`fanout`][fanout] | `(a -> b) -> (a -> c) -> (a -> Pair b c)` | `crocks/helpers/fanout` |
+| [`fanout`][fanout] | `(a -> b) -> (a -> c) -> (a -> Pair b c)` | `crocks/Pair/fanout` |
 | [`find`][find] | <code>Foldable f => ((a -> Boolean) &#124; Pred) -> f a -> Maybe a</code> | `crocks/Maybe/find` |
 | [`fromPairs`][frompairs] | `Foldable f => f (Pair String a) -> Object` | `crocks/helpers/fromPairs` |
 | [`liftA2`][lifta2] | `Applicative m => (a -> b -> c) -> m a -> m b -> m c` | `crocks/helpers/liftA2` |

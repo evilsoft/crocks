@@ -480,7 +480,7 @@ flow(pair)
 #### traverse
 
 ```haskell
-Apply f => Pair a b ~> (d -> f d), (b -> f c)) -> f (Pair a c)
+Apply f => Pair a b ~> ((d -> f d), (b -> f c)) -> f (Pair a c)
 Applicative f => Pair a b ~> (TypeRep f, (b -> f c)) -> f (Pair a c)
 ```
 

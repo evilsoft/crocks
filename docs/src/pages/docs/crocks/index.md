@@ -19,7 +19,7 @@ names, but what they do from type to type may vary.
 |---|:---|:---|
 | [`Arrow`][arrow] | [`id`][arrow-id] | [`both`][arrow-both], [`compose`][arrow-compose], [`contramap`][arrow-contra],[`first`][arrow-first], [`map`][arrow-map], [`promap`][arrow-promap], [`runWith`][arrow-runwith], [`second`][arrow-second] |
 | [`Async`][async] | [`Rejected`][async-rejected], [`Resolved`][async-resolved], [`all`][async-all], [`resolveAfter`][async-resolveAfter], [`rejectAfter`][async-rejectafter], [`fromNode`][async-fromnode], [`fromPromise`][async-frompromise], [`of`][async-of] | [`alt`][async-alt], [`ap`][async-ap], [`bimap`][async-bimap], [`chain`][async-chain], [`coalesce`][async-coalesce], [`race`][async-race], [`fork`][async-fork], [`map`][async-map], [`of`][async-of], [`swap`][async-swap], [`toPromise`][async-topromise] |
-| [`Const`][const] | -- | [`ap`][const-ap], [`chain`][const-chain], [`concat`][const-concat], [`equals`][const-equals], [`map`][const-map], [`valueOf`][const-valueof] |
+| [`Const`][const] | [`empty`][const-empty], [`of`][const-of] | [`ap`][const-ap], [`concat`][const-concat], [`empty`][const-empty], [`equals`][const-equals], [`map`][const-map], [`of`][const-of], [`valueOf`][const-valueof] |
 | [`Either`][either] | [`Left`][either-left], [`Right`][either-right], [`of`][either-of]| [`alt`][either-alt], [`ap`][either-ap], [`bimap`][either-bimap], [`chain`][either-chain], [`coalesce`][either-coalesce], [`concat`][either-concat], [`either`][either-either], [`equals`][either-equals], [`map`][either-map], [`of`][either-of], [`sequence`][either-sequence], [`swap`][either-swap], [`traverse`][either-traverse] |
 | [`Equiv`][equiv] | [`empty`][equiv-empty] | [`concat`][equiv-concat], [`contramap`][equiv-contra], [`compareWith`][equiv-compare], [`valueOf`][equiv-value] |
 | [`Identity`][identity] | [`of`][identity-of] | [`ap`][identity-ap], [`chain`][identity-chain], [`concat`][identity-concat], [`equals`][identity-equals], [`map`][identity-map], [`of`][identity-of], [`sequence`][identity-sequence], [`traverse`][identity-traverse], [`valueOf`][identity-valueof] |
@@ -73,9 +73,10 @@ names, but what they do from type to type may vary.
 [const]: Const.html
 [const-equals]: Const.html#equals
 [const-concat]: Const.html#concat
+[const-empty]: Const.html#empty
 [const-map]: Const.html#map
 [const-ap]: Const.html#ap
-[const-chain]: Const.html#chain
+[const-of]: Const.html#of
 [const-valueof]: Const.html#valueof
 
 [either]: Either.html

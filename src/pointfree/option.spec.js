@@ -18,7 +18,7 @@ test('option pointfree', t => {
 
   t.ok(isFunction(option), 'is a function')
 
-  const err = /option: Last argument must be a Maybe/
+  const err = /option: Last argument must be a Maybe, First or Last/
   t.throws(f(0, undefined), err, 'throws if undefined in second arg')
   t.throws(f(0, null), err, 'throws if passed null in second arg')
   t.throws(f(0, 0), err, 'throws if passed a falsey number in second arg')

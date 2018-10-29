@@ -63,17 +63,15 @@ Identity.of :: a -> Identity a
 ```
 
 `of` is used to construct an `Identity` with any given value. It is there to
-allow `Identity` to function as a pointed functor. 
+allow `Identity` to work as a pointed functor. 
 
 ```javascript
 import Identity from 'crocks/Identity'
 
-const { of } = Identity
-
-of(42)
+Identity.of(42)
 //=> Identity 42
 
-of(true)
+Identity.of(true)
 //=> Identity true
 ```
 
@@ -251,7 +249,7 @@ returning a new instance of the `Apply`, wrapping the result of the
 
 `traverse` requires either an `Applicative TypeRep` or an `Apply` returning
 function as its first argument and a function that is used to apply the "effect"
-of the target  `Apply` to the value inside of the `Identity`. Both arguments must provide
+of the target `Apply` to the value inside of the `Identity`. Both arguments must provide
 an instance of the target `Apply`.
 
 ```javascript

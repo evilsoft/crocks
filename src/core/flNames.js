@@ -11,6 +11,7 @@ module.exports = {
   empty: 'fantasy-land/empty',
   equals: 'fantasy-land/equals',
   extend: 'fantasy-land/extend',
+  filter: 'fantasy-land/filter',
   id: 'fantasy-land/id',
   map: 'fantasy-land/map',
   of: 'fantasy-land/of',

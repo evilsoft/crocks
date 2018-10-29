@@ -69,6 +69,7 @@ test('List fantasy-land api', t => {
   t.ok(isFunction(m[fl.map]), 'provides map method on instance')
   t.ok(isFunction(m[fl.chain]), 'provides chain method on instance')
   t.ok(isFunction(m[fl.reduce]), 'provides reduce method on instance')
+  t.ok(isFunction(m[fl.filter]), 'provides filter method on instance')
 
   t.end()
 })
@@ -136,7 +137,7 @@ test('List @@type', t => {
   const m = List([])
 
   t.equal(m['@@type'], List['@@type'], 'static and instance versions are the same')
-  t.equal(m['@@type'], 'crocks/List@3', 'returns crocks/List@3')
+  t.equal(m['@@type'], 'crocks/List@4', 'returns crocks/List@4')
 
   t.end()
 })
@@ -477,6 +478,25 @@ test('List foldMap functionality', t => {
 
   t.same(fold([ 1, 2 ]), '12', 'combines and extracts semigroups')
   t.same(fold([ 3 ]), '3', 'extracts a single semigroup')
+
+  t.end()
+})
+
+test('List filter fantasy-land errors', t => {
+  const filter = bindFunc(List([ 0 ])[fl.filter])
+
+  const err = /List.fantasy-land\/filter: Pred or predicate function required/
+
+  t.throws(filter(undefined), err, 'throws with undefined')
+  t.throws(filter(null), err, 'throws with null')
+  t.throws(filter(0), err, 'throws with falsey number')
+  t.throws(filter(1), err, 'throws with truthy number')
+  t.throws(filter(''), err, 'throws with falsey string')
+  t.throws(filter('string'), err, 'throws with truthy string')
+  t.throws(filter(false), err, 'throws with false')
+  t.throws(filter(true), err, 'throws with true')
+  t.throws(filter([]), err, 'throws with an array')
+  t.throws(filter({}), err, 'throws with an object')
 
   t.end()
 })

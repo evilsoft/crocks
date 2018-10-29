@@ -9,7 +9,7 @@ const isObject = require('../core/isObject')
 const object = require('../core/object')
 const predOrFunc = require('../core/predOrFunc')
 
-// filter : Foldable f => (a -> Boolean) -> f a -> f a
+// filter : Filterable f => (a -> Boolean) -> f a -> f a
 function filter(pred, m) {
   if(!isPredOrFunc(pred)) {
     throw new TypeError('filter: Pred or predicate function required for first argument')
@@ -26,7 +26,7 @@ function filter(pred, m) {
     return object.filter(fn, m)
   }
 
-  throw new TypeError('filter: Foldable or Object required for second argument')
+  throw new TypeError('filter: Filterable or Object required for second argument')
 }
 
 module.exports = curry(filter)

@@ -23,7 +23,7 @@ function second(m) {
     return m.second()
   }
 
-  throw new TypeError('second: Arrow, Function or Star required')
+  throw new TypeError('second: Strong Function or Profunctor required')
 }
 
 module.exports = second

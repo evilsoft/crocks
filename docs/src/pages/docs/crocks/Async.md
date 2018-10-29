@@ -1263,7 +1263,7 @@ timeout(slow)
 
 ```haskell
 asyncToPromise :: Async e a -> Promise a e
-asyncToPromise :: (a -> m e b) -> a -> Promise b e
+asyncToPromise :: (a -> Async e b) -> a -> Promise b e
 ```
 
 The `asyncToPromise` function takes an `Async` and when invoked will fork

@@ -138,7 +138,7 @@ bad
 | Transform | ADT signature | Function Signature | Location |
 |---|:---|:---|:---|
 | `arrayToList` | `[ a ] -> List a` | `(a -> [ b ]) -> a -> List b` | `crocks/List` |
-| [`asyncToPromise`][async-promise] | `Async e a -> Promise a e` | `crocks/Async` |
+| [`asyncToPromise`][async-promise] | `(a -> Async e b) -> a -> Promise b e` | `Async e a -> Promise a e` | `crocks/Async` |
 | [`eitherToAsync`][either-async] | `Either e a -> Async e a` | `(a -> Either e b) -> a -> Async e b` | `crocks/Async` |
 | [`eitherToFirst`][either-first] | `Either b a -> First a` | `(a -> Either c b) -> a -> First b` | `crocks/First` |
 | [`eitherToLast`][either-last] | `Either b a -> Last a` | `(a -> Either c b) -> a -> Last b` | `crocks/Last` |

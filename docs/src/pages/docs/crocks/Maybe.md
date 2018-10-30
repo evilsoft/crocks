@@ -730,7 +730,6 @@ safeAddToGlobal(32)
 safeAddToGlobal(undefined)
   .run()
 //=> Nothing
-//someGlobal => 42
 ```
 
 #### chain

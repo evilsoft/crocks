@@ -17,10 +17,10 @@ const toPromise = m => {
 
 // asyncToPromise :: m e a -> Promise a e
 // asyncToPromise :: (a -> m e b) -> a -> Promise b e
-function asyncToPromise(async) {
-  return isFunction(async)
-    ? x => toPromise(async(x))
-    : toPromise(async)
+function asyncToPromise(m) {
+  return isFunction(m)
+    ? x => toPromise(m(x))
+    : toPromise(m)
 }
 
 module.exports = curry(asyncToPromise)

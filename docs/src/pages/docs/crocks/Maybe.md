@@ -1332,7 +1332,8 @@ eitherToMaybe :: (a -> Either c b) -> a -> Maybe b
 ```
 
 Used to transform a given [`Either`][either] instance to a `Maybe`
-instance, `eitherToMaybe` will turn a [`Right`][right] instance into
+instance or flatten a `Maybe` of `Either` into a `Maybe` when chained, 
+`eitherToMaybe` will turn a [`Right`][right] instance into
 a [`Just`](#just) wrapping the original value contained in the [`Right`][right].
 All [`Left`][left] instances will map to a [`Nothing`](#nothing), mapping the
 originally contained value to a `Unit`. Values on the [`Left`][left] will be
@@ -1384,6 +1385,14 @@ Nothing()
 Just(99)
   .chain(eitherToMaybe(someNumber))
 //=> Just 99
+
+Just(Right(42))
+  .chain(eitherToMaybe)
+// Just 42
+
+Just(Left(24))
+  .chain(eitherToMaybe)
+// Nothing
 ```
 
 #### firstToMaybe
@@ -1396,9 +1405,10 @@ firstToMaybe :: (a -> First b) -> a -> Maybe b
 ```
 
 Used to transform a given [`First`][first] instance to a `Maybe`
-instance, `firstToMaybe` will turn a non-empty instance into
-a [`Just`](#just) wrapping the original value contained within
-the [`First`][first]. All empty instances will map to a [`Nothing`](#nothing).
+instance or flatten a `Maybe` of `First` into a `Maybe` when chained, 
+`firstToMaybe` will turn a non-empty instance into a [`Just`](#just) wrapping
+the original value contained within the [`First`][first]. All empty instances
+will map to a [`Nothing`](#nothing).
 
 Like all `crocks` transformation functions, `firstToMaybe` has two possible
 signatures and will behave differently when passed either
@@ -1438,6 +1448,10 @@ Just([])
 Just([ 'first', 'second', 'third' ])
   .chain(firstToMaybe(firstValue))
 //=> Just "first"
+
+Just(First('first'))
+  .chain(firstToMaybe)
+//=> Just "first"
 ```
 
 #### lastToMaybe
@@ -1449,10 +1463,11 @@ lastToMaybe :: Last a -> Maybe a
 lastToMaybe :: (a -> Last b) -> a -> Maybe b
 ```
 
-Used to transform a given [`Last`][last] instance to a `Maybe` instance,
-`lastToMaybe` will turn a non-empty instance into a [`Just`](#just) wrapping the
-original value contained within the [`Last`][last]. All empty instances will map
-to a [`Nothing`](#nothing).
+Used to transform a given [`Last`][last] instance to a `Maybe` instance or 
+flatten a `Maybe` of `Last` into a `Maybe` when chained, `lastToMaybe` will
+turn a non-empty instance into a [`Just`](#just) wrapping the original value
+contained within the [`Last`][last]. All empty instances will map to a 
+[`Nothing`](#nothing).
 
 Like all `crocks` transformation functions, `lastToMaybe` has two possible
 signatures and will behave differently when passed either
@@ -1492,6 +1507,10 @@ Just([])
 Just([ 'first', 'second', 'third' ])
   .chain(lastToMaybe(lastValue))
 //=> Just "third"
+
+Just(Last('last'))
+  .chain(lastToMaybe)
+//=> Just "last"
 ```
 
 #### resultToMaybe
@@ -1504,8 +1523,9 @@ resultToMaybe :: (a -> Result e b) -> a -> Maybe b
 ```
 
 Used to transform a given `Result` instance to a `Maybe`
-instance, `resultToMaybe` will turn an `Ok` instance into
-a [`Just`](#just) wrapping the original value contained in the `Ok`.
+instance or flatten a `Maybe` of `Result` into a `Maybe` when chained, 
+`resultToMaybe` will turn an `Ok` instance into a [`Just`](#just) wrapping the
+original value contained in the `Ok`.
 All `Err` instances will map to a [`Nothing`](#nothing), mapping the originally
 contained value to a `Unit`. Values on the `Err` will be lost and as such this
 transformation is considered lossy in that regard.
@@ -1550,6 +1570,10 @@ Just('so good')
 
 Just('so good')
   .chain(resultToMaybe(Ok))
+//=> Just "so good"
+
+Just(Result('in time!'))
+  .chain(resultToMaybe)
 //=> Just "so good"
 ```
 </article>

@@ -972,14 +972,17 @@ setProp :: String -> a -> Object -> Object
 ```
 
 Used to set a given value for a specific key or index of
-an `Object` or `Array`. `setProp` takes a `String` as its first argument, a
-value of any type as its second and finally an `Object` as the third and final
-argument.
+an `Object` or `Array`. `setProp` takes either a `String` or `Integer` value
+as its first argument and a value of any type as its second. The third parameter
+is dependent of the type of the first argument. When a `String` is provided, the
+third argument must be an `Object`. Otherwise if the first argument is
+an `Integer`, then the third must be an `Array`.
 
-`setProp` will return a new instance of `Object` with the modification
-applied. When the value exists on the provided object, then the value
+`setProp` will return a new instance of either `Object` or `Array` with the
+addition applied. When the value exists on the provided object, then the value
 will overwritten. If the value does not exist then it will be added to the
-resulting structure.
+resulting structure. In the case of `Array`, the value will be added to the
+provided index, leaving `undefined` values, resulting in a sparse `Array`.
 
 ```javascript
 import setProp from 'crocks/helpers/setProp'
@@ -989,6 +992,15 @@ setProp('a', false, { a: true })
 
 setProp('b', 43, { a: true })
 //=> { a: true, b: 43 }
+
+setProp(0, 'string', [ 'a' ])
+//=> [ "string" ]
+
+setProp(1, 'b', [ 'a' ])
+//=> [ "a", "b" ]
+
+setProp(2, 'c', [ 'a' ])
+//=> [ "a", undefined, "c" ]
 ```
 
 #### tap

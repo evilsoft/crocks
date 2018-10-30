@@ -1452,6 +1452,10 @@ Just([ 'first', 'second', 'third' ])
 Just(First('first'))
   .chain(firstToMaybe)
 //=> Just "first"
+
+Just(First.empty())
+  .chain(firstToMaybe)
+//=> Nothing
 ```
 
 #### lastToMaybe
@@ -1511,6 +1515,10 @@ Just([ 'first', 'second', 'third' ])
 Just(Last('last'))
   .chain(lastToMaybe)
 //=> Just "last"
+
+Just(Last.empty())
+  .chain(lastToMaybe)
+//=> Nothing
 ```
 
 #### resultToMaybe
@@ -1575,6 +1583,10 @@ Just('so good')
 Just(Result('in time!'))
   .chain(resultToMaybe)
 //=> Just "so good"
+
+Just(Err('to be human'))
+  .chain(resultToMaybe)
+//=> Nothing
 ```
 </article>
 

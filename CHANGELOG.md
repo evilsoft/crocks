@@ -1,4 +1,65 @@
 # Change Log for `crocks`
+
+v0.11.0 -- October 28, 2018
+--
+
+### Video Log
+
+* [crocks-0.11.0 release](http://bit.ly/crocks-0-11-0-video)
+
+### Bug Fix
+* When doing computations on a `Async` using `fromPromise`, errors where being swallowed. This has been fixed and Errors will now throw as expected.
+
+### Additions
+* Functions/Methods
+  * Add `converge` combinator function
+  * Add `isIterable` predicate function
+
+### Modifications
+* `tryCatch` now works with functions of n-arity.
+* Removed Specific Names of Types in pointfree function Errors when they worked on multiple types
+
+### Breaking
+* Changes to `Const`:
+  * Now exports a Type Constructor that requires a TypeRep or JavaScript Type Constructor and will return an Instance Constructor, pointed to the provided Type
+  * Removal of `chain` method on the Instance
+  * Addition of `empty` to the Instance and TypeRep, when pointed to a `Monoid` (provides the empty of the `Monoid`)
+  * `of` will now behave as the new `empty` when pointed to a `Monoid`, otherwise it is a TypeError.
+  * `concat` will now map to the `concat` and perform concatenation when pointed to a `Semigroup`
+  * `ap` has been changed to behave as `concat` when pointed to a `Semigroup`
+* Removed links to package specific in folder index pages:
+  * `crocks/helpers`
+    * `branch` --> `Pair/branch`
+    * `find` --> `Maybe/find`
+    * `prop` --> `Maybe/prop`
+    * `propPath` --> `Maybe/propPath`
+    * `safe` --> `Maybe/safe`
+    * `safeAfter` --> `Maybe/safeAfter`
+    * `safeLift` --> `Maybe/safeLift`
+    * `toPairs` --> `Pair/toPairs`
+    * `tryCatch` --> `Result/tryCatch`
+  * `crocks/pointfree`
+    * `evalWith` --> `State/evalWith`
+    * `execWith` --> `State/execWith`
+    * `fst` --> `Pair/fst`
+    * `log` --> `Writer/log`
+    * `nmap` --> `Tuple/nmap`
+    * `race` --> `Async/race`
+    * `read` --> `Writer/read`
+    * `snd` --> `Pair/snd`
+* `crocks/transofrmations`
+  * removed all
+
+### Pull Requests
+* [#332 - Added an isIterable predicate](https://github.com/evilsoft/crocks/pull/332)
+* [#333 - Add converge (Phoenix) to combinators](https://github.com/evilsoft/crocks/pull/333)
+* [#320 - Convert tryCatch to nAry](https://github.com/evilsoft/crocks/pull/320)
+* [#327 - Make `Const` a "true" Applicative](https://github.com/evilsoft/crocks/pull/)
+* [#339 - Prevent fromPromise from swallowing errors](https://github.com/evilsoft/crocks/pull/339)
+* [#311 - Seperate function refs in the main index](https://github.com/evilsoft/crocks/pull/311)
+* [#306 - Remove specific types in errors for pointfree functions](https://github.com/evilsoft/crocks/pull/306)
+* [#340 - Expose isIterable to the main API](https://github.com/evilsoft/crocks/pull/340)
+
 v0.10.2 -- October 20, 2018
 --
 

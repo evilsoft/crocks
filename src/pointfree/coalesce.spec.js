@@ -41,7 +41,7 @@ test('coalesce pointfree', t => {
   t.throws(m(unit, [], f), err, 'throws if second arg is an array')
   t.throws(m(unit, {}, f), err, 'throws if second arg is an object')
 
-  const last = /coalesce: Async, Either, Maybe or Result required for third argument/
+  const last = /coalesce: Sum Type required for third argument/
   t.throws(m(unit, unit, undefined), last, 'throws if third arg is undefined')
   t.throws(m(unit, unit, null), last, 'throws if third arg is null')
   t.throws(m(unit, unit, 0), last, 'throws if third arg is a falsey number')

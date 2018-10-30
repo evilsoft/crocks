@@ -1582,7 +1582,7 @@ Just('so good')
 
 Just(Result('in time!'))
   .chain(resultToMaybe)
-//=> Just "so good"
+//=> Just "in time!"
 
 Just(Err('to be human'))
   .chain(resultToMaybe)

@@ -189,6 +189,7 @@ const propPathSatisfies = require('./predicates/propPathSatisfies')
 
 // transforms
 const arrayToList = require('./List/arrayToList')
+const asyncToPromise = require('./Async/asyncToPromise')
 const eitherToAsync = require('./Async/eitherToAsync')
 const eitherToFirst = require('./First/eitherToFirst')
 const eitherToLast = require('./Last/eitherToLast')
@@ -410,6 +411,7 @@ test('entry', t => {
 
   // transforms
   t.equal(crocks.arrayToList, arrayToList, 'provides the arrayToList transform')
+  t.equal(crocks.asyncToPromise, asyncToPromise, 'provides the asyncToPromise transform')
   t.equal(crocks.eitherToAsync, eitherToAsync, 'provides the eitherToAsync transform')
   t.equal(crocks.eitherToFirst, eitherToFirst, 'provides the eitherToFirst transform')
   t.equal(crocks.eitherToLast, eitherToLast, 'provides the eitherToLast transform')

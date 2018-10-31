@@ -70,6 +70,7 @@ const pointfree = Object.assign({},
 
 const transforms = {
   arrayToList: require('./List/arrayToList'),
+  asyncToPromise: require('./Async/asyncToPromise'),
   eitherToAsync: require('./Async/eitherToAsync'),
   eitherToFirst: require('./First/eitherToFirst'),
   eitherToLast: require('./Last/eitherToLast'),

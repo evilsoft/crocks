@@ -29,8 +29,8 @@ of the concatenation in the first position of the resulting `Pair`.
 
 A helpful benefit of the `Bifunctor` aspects `Pair` allows for defining parallel
 computations. There are many functions that ship with `crocks` that allow for
-parallelization such as [`branch`](#branch), `merge` and
-`fanout`. Using those helpers in conjunction with the ability to
+parallelization such as [`branch`](#branch), [`merge`](#merge) and
+[`fanout`](#fanout). Using those helpers in conjunction with the ability to
 [`bimap`](#bimap) functions over a given `Pair`s values.
 
 ```javascript
@@ -793,6 +793,66 @@ applyAdd10(5)
 // { current: 15, orig: 5 }
 ```
 
+#### fanout
+
+`crocks/Pair/fanout`
+
+```haskell
+fanout :: (a -> b) -> (a -> c) -> (a -> Pair b c)
+fanout :: Arrow a b -> Arrow a c -> Arrow a (Pair b c)
+fanout :: Monad m => Star a (m b) -> Star a (m c) -> Star a (m (Pair b c))
+```
+
+There are may times that you need to keep some running or persistent state while
+performing a given computation. A common way to do this is to take the input to
+the computation and branch it into a `Pair` and perform different operations on
+each version of the input. This is such a common pattern that it warrants the
+`fanout` function to take care of the initial split and mapping. Just provide a
+pair of either simple functions or a pair of one of the computation types
+(`Arrow` or `Star`). You will get back something of the same type that is
+configured to split it's input into a pair and than apply the first Function/ADT
+to the first portion of the underlying `Pair` and the second on the second.
+
+```javascript
+import compose from 'crocks/helpers/compose'
+import fanout from 'crocks/Pair/fanout'
+import liftA2 from 'crocks/helpers/liftA2'
+import map from 'crocks/pointfree/map'
+import Maybe from 'crocks/Maybe'
+import merge from 'crocks/Pair/merge'
+import prop from 'crocks/Maybe/prop'
+import sequence from 'crocks/pointfree/sequence'
+
+// Person :: { first: String, last: String }
+// people :: [Person]
+const people = [
+  { first: 'Ziggy', last: 'Stardust' },
+  { first: 'Lizard', last: 'King' }
+]
+
+// concat :: String -> String -> String
+const concat = a => b => `${a} ${b}`
+
+// join :: String -> [a] -> String
+const join = sep => arr => arr.join(sep)
+
+// getName :: Person -> String
+const getName = compose(
+  merge(liftA2(concat)),
+  fanout(prop('first'), prop('last'))
+)
+
+// getPersons :: [Person] -> String
+const getPersons = compose(
+  map(join(', ')),
+  sequence(Maybe),
+  map(getName)
+)
+
+getPersons(people)
+//=> Just "Ziggy Stardust, Lizard King"
+```
+
 #### toPairs
 
 `crocks/Pair/toPairs`
@@ -1006,7 +1066,6 @@ fanout(Sum, x => appendItem(x)([ x ]), 1)
 
 </article>
 
-[fanout]: ../functions/helpers.html#fanout
 [frompairs]: ../functions/helpers.html#frompairs
 [identity]: ../functions/combinators.html#identity
 [either]: ../crocks/Either.html

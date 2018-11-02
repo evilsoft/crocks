@@ -2,7 +2,7 @@
 title: "Pair"
 description: "Canonical Product Type"
 layout: "guide"
-functions: ["branch", "fst", "snd", "topairs", "writertopair"]
+functions: ["branch", "fanout", "fst", "snd", "topairs", "writertopair"]
 weight: 100
 ---
 

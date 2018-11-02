@@ -1509,7 +1509,7 @@ Resolved(First.empty())
 //=> rej: "Left"
 
 Resolved(First(42))
-  .chain(firstToAsync('Error'))
+  .chain(firstToAsync('Left'))
   .fork(log('rej'), log('res'))
 // => res: 42
 ```
@@ -1610,7 +1610,7 @@ Resolved(Last.empty())
 //=> rej: "Left"
 
 Resolved(Last('too know!'))
-  .chain(lastToAsync('Error'))
+  .chain(lastToAsync('Left'))
   .fork(log('rej'), log('res'))
 // => res: "too know!"
 ```

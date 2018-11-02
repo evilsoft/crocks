@@ -1331,7 +1331,7 @@ eitherToAsync :: (a -> Either c b) -> a -> Async c b
 ```
 
 Used to transform a given [`Either`][either] instance to an `Async` instance or
-flatten a `Async` of `Either` into a `Async` when chained, `eitherToAsync` will
+flatten an `Async` of `Either` into an `Async` when chained, `eitherToAsync` will
 turn a [`Right`][right] instance into a [`Resolved`](#resolved) instance
 wrapping the original value contained in the original [`Right`][right]. If a 
 [`Left`][left] is provided, then `eitherToAsync` will return a 
@@ -1423,7 +1423,7 @@ firstToAsync :: e -> (a -> First b) -> a -> Async e b
 ```
 
 Used to transform a given [`First`][first] instance to an `Async` instance or
-flatten a `Async` of `First` into a `Async` when chained, `firstToAsync` will
+flatten an `Async` of `First` into an `Async` when chained, `firstToAsync` will
 turn a non-empty [`First`][first] instance into a [`Resolved`](#resolved)
 instance wrapping the original value contained in the original non-empty.
 
@@ -1524,7 +1524,7 @@ lastToAsync :: e -> (a -> Last b) -> a -> Async e b
 ```
 
 Used to transform a given [`Last`][last] instance to an `Async` instance or
-flatten a `Async` of `Last` into a `Async` when chained, `lastToAsync` will
+flatten an `Async` of `Last` into an `Async` when chained, `lastToAsync` will
 turn a non-empty [`Last`][last] instance into a [`Resolved`](#resolved)
 instance wrapping the original value contained in the original non-empty.
 
@@ -1625,7 +1625,7 @@ maybeToAsync :: e -> (a -> Maybe b) -> a -> Async e b
 ```
 
 Used to transform a given [`Maybe`][maybe] instance to an `Async` instance or
-flatten a `Async` of `Maybe` into a `Async` when chained, `maybeToAsync` will
+flatten an `Async` of `Maybe` into an `Async` when chained, `maybeToAsync` will
 turn a [`Just`][just] instance into a [`Resolved`](#resolved) instance wrapping
 the original value contained in the original [`Just`][just].
 
@@ -1711,8 +1711,8 @@ resultToAsync :: Result b a -> Async b a
 resultToAsync :: (a -> Result c b) -> a -> Async c b
 ```
 
-Used to transform a given `Result` instance to an `Async` instance or flatten a
-`Async` of `Result` into a `Async` when chained, `resultToAsync` will turn an
+Used to transform a given `Result` instance to an `Async` instance or flatten an
+`Async` of `Result` into an `Async` when chained, `resultToAsync` will turn an
 `Ok` instance into a [`Resolved`](#resolved) instance wrapping the original
 value contained in the original `Ok`. If an `Err` is provided, then
 `resultToAsync` will return a [`Rejected`](#rejected) instance, wrapping the

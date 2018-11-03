@@ -1330,12 +1330,12 @@ eitherToAsync :: Either b a -> Async b a
 eitherToAsync :: (a -> Either c b) -> a -> Async c b
 ```
 
-Used to transform a given [`Either`][either] instance to
-an `Async` instance, `eitherToAsync` will turn a [`Right`][right] instance into
-a [`Resolved`](#resolved) instance wrapping the original value contained in the
-original [`Right`][right]. If a [`Left`][left] is provided,
-then `eitherToAsync` will return a [`Rejected`](#rejected) instance, wrapping
-the original [`Left`][left] value.
+Used to transform a given [`Either`][either] instance to an `Async` instance or
+flatten an `Async` of `Either` into an `Async` when chained, `eitherToAsync` will
+turn a [`Right`][right] instance into a [`Resolved`](#resolved) instance
+wrapping the original value contained in the original [`Right`][right]. If a 
+[`Left`][left] is provided, then `eitherToAsync` will return a 
+[`Rejected`](#rejected) instance, wrapping the original [`Left`][left] value.
 
 Like all `crocks` transformation functions, `eitherToAsync` has two possible
 signatures and will behave differently when passed
@@ -1401,6 +1401,16 @@ Resolved('Bubble')
   .chain(eitherToAsync(isValid))
   .fork(log('rej'), log('res'))
 //=> rej: "Bubble is not valid"
+
+Resolved(Left('Alone'))
+  .chain(eitherToAsync)
+  .fork(log('rej'), log('res'))
+//=> rej: "Alone"
+
+Resolved(Right('Away'))
+  .chain(eitherToAsync)
+  .fork(log('rej'), log('res'))
+//=> res: "Away"
 ```
 
 #### firstToAsync
@@ -1412,10 +1422,10 @@ firstToAsync :: e -> First a -> Async e a
 firstToAsync :: e -> (a -> First b) -> a -> Async e b
 ```
 
-Used to transform a given [`First`][first] instance to
-an `Async` instance, `firstToAsync` will turn a non-empty [`First`][first] instance into
-a [`Resolved`](#resolved) instance wrapping the original value contained in the
-original non-empty.
+Used to transform a given [`First`][first] instance to an `Async` instance or
+flatten an `Async` of `First` into an `Async` when chained, `firstToAsync` will
+turn a non-empty [`First`][first] instance into a [`Resolved`](#resolved)
+instance wrapping the original value contained in the original non-empty.
 
 The [`First`][first] datatype is based on a [`Maybe`][maybe] and as such its left or empty value
 is fixed to a `()` type. As a means to allow for convenient
@@ -1492,6 +1502,16 @@ Resolved([ 'cat', 'bat', 'imp' ])
   .chain(findFirstValid)
   .fork(log('rej'), log('res'))
 //=> rej: "Nothing Found"
+
+Resolved(First.empty())
+  .chain(firstToAsync('Left'))
+  .fork(log('rej'), log('res'))
+//=> rej: "Left"
+
+Resolved(First(42))
+  .chain(firstToAsync('Left'))
+  .fork(log('rej'), log('res'))
+// => res: 42
 ```
 
 #### lastToAsync
@@ -1503,10 +1523,10 @@ lastToAsync :: e -> Last a -> Async e a
 lastToAsync :: e -> (a -> Last b) -> a -> Async e b
 ```
 
-Used to transform a given [`Last`][last] instance to
-an `Async` instance, `lastToAsync` will turn a non-empty [`Last`][last] instance into
-a [`Resolved`](#resolved) instance wrapping the original value contained in the
-original non-empty.
+Used to transform a given [`Last`][last] instance to an `Async` instance or
+flatten an `Async` of `Last` into an `Async` when chained, `lastToAsync` will
+turn a non-empty [`Last`][last] instance into a [`Resolved`](#resolved)
+instance wrapping the original value contained in the original non-empty.
 
 The [`Last`][last] datatype is based on a [`Maybe`][maybe] and as such its left or empty value
 is fixed to a `()` type. As a means to allow for convenient
@@ -1583,6 +1603,16 @@ Resolved([ 'cat', 'bat', 'imp' ])
   .chain(findLastValid)
   .fork(log('rej'), log('res'))
 //=> rej: "Nothing Found"
+
+Resolved(Last.empty())
+  .chain(lastToAsync('Left'))
+  .fork(log('rej'), log('res'))
+//=> rej: "Left"
+
+Resolved(Last('too know!'))
+  .chain(lastToAsync('Left'))
+  .fork(log('rej'), log('res'))
+// => res: "too know!"
 ```
 
 #### maybeToAsync
@@ -1594,10 +1624,10 @@ maybeToAsync :: e -> Maybe a -> Async e a
 maybeToAsync :: e -> (a -> Maybe b) -> a -> Async e b
 ```
 
-Used to transform a given [`Maybe`][maybe] instance to
-an `Async` instance, `maybeToAsync` will turn a [`Just`][just] instance into
-a [`Resolved`](#resolved) instance wrapping the original value contained in the
-original [`Just`][just].
+Used to transform a given [`Maybe`][maybe] instance to an `Async` instance or
+flatten an `Async` of `Maybe` into an `Async` when chained, `maybeToAsync` will
+turn a [`Just`][just] instance into a [`Resolved`](#resolved) instance wrapping
+the original value contained in the original [`Just`][just].
 
 A [`Nothing`][nothing] instance is fixed to a `()` type and as such can only ever contain
 a value of `undefined`. As a means to allow for convenient
@@ -1660,6 +1690,16 @@ Resolved('')
   .chain(maybeToAsync('Invalid', isValid))
   .fork(log('rej'), log('res'))
 //=> rej: "Invalid"
+
+Resolved(Nothing())
+  .chain(maybeToAsync('Left'))
+  .fork(log('rej'), log('res'))
+//=> rej: "Left"
+
+Resolved(Just('the 2 of us'))
+  .chain(maybeToAsync('Left'))
+  .fork(log('rej'), log('res'))
+// => res: "the 2 of us"
 ```
 
 #### resultToAsync
@@ -1671,11 +1711,12 @@ resultToAsync :: Result b a -> Async b a
 resultToAsync :: (a -> Result c b) -> a -> Async c b
 ```
 
-Used to transform a given `Result` instance to
-an `Async` instance, `resultToAsync` will turn an `Ok` instance into
-a [`Resolved`](#resolved) instance wrapping the original value contained in the
-original `Ok`. If an `Err` is provided, then `resultToAsync` will return
-a [`Rejected`](#rejected) instance, wrapping the original `Err` value.
+Used to transform a given `Result` instance to an `Async` instance or flatten an
+`Async` of `Result` into an `Async` when chained, `resultToAsync` will turn an
+`Ok` instance into a [`Resolved`](#resolved) instance wrapping the original
+value contained in the original `Ok`. If an `Err` is provided, then
+`resultToAsync` will return a [`Rejected`](#rejected) instance, wrapping the
+original `Err` value.
 
 Like all `crocks` transformation functions, `resultToAsync` has two possible
 signatures and will behave differently when passed either a `Result` instance
@@ -1736,6 +1777,17 @@ Resolved('103')
   .bimap(x => x.message, identity)
   .fork(log('rej'), log('res'))
 //=> rej: "Must be a Number"
+
+Resolved(Err('Invalid entry'))
+  .chain(resultToAsync)
+  .fork(log('rej'), log('res'))
+//=> rej: "Invalid entry"
+
+Resolved(Ok('Success!'))
+  .chain(resultToAsync)
+  .fork(log('rej'), log('res'))
+// => res: "Success!"
+
 ```
 
 </article>

@@ -85,7 +85,7 @@ An `Either` is typically constructed by using one of the instance constructors
 provided on the `TypeRep`: [`Left`](#left) or [`Right`](#right). For consistency,
 an `Either` can be constructed using its `TypeRep` as a constructor. The
 constructor is a unary function that accepts any type `a` and will return a
-`Right` instance, wrapping the value it was passed.
+[`Right`](#right) instance, wrapping the value it was passed.
 
 ```javascript
 import Either from 'crocks/Either'
@@ -945,7 +945,7 @@ Either c a ~> ((c -> d), (a -> b)) -> Either b d
 ```
 
 Used to map the value of an `Either` instance and transform a [`Left`](#left) into a
-`Right` or a [`Right`](#right) into a [`Left`](#left), `swap` takes two functions as its arguments.
+[`Right`](#right) or a [`Right`](#right) into a [`Left`](#left), `swap` takes two functions as its arguments.
 The first function is used to map and transform a [`Left`](#left) into a [`Right`](#right),
 while the second maps and transforms a [`Right`](#right) into a [`Left`](#left). If no mapping of
 the contained values is required for either instance,

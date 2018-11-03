@@ -21,10 +21,10 @@ right or second value, matching the pattern of the other ADTs in `crocks`. When
 mapped with a function, the function will only be applied to the second value,
 and will leave the first value untouched.
 
-`Pair` also provides the ability to use `ap` and `chain`, but in order to
+`Pair` also provides the ability to use  [`ap`](#ap) and [`chain`](#chain), but in order to
 combine the resulting instances in a predictable, repeatable fashion the first
 values in the `Pair`s must be `Semigroup` instances of the same type. When
-applied, `ap` and `chain` will concatenate the `Semigroup`s providing the result
+applied,  [`ap`](#ap) and [`chain`](#chain) will concatenate the `Semigroup`s providing the result
 of the concatenation in the first position of the resulting `Pair`.
 
 A helpful benefit of the `Bifunctor` aspects `Pair` allows for defining parallel
@@ -957,7 +957,8 @@ writerToPair :: Monoid m => Writer m a -> Pair m a
 writerToPair :: Monoid m => (a -> Writer m b) -> a -> Pair m b
 ```
 
-Used to transform a `Writer` instance to a `Pair` instance,
+Used to transform a `Writer` instance to a `Pair` instance or
+flatten a `Pair` of `Writer` into an `Pair` when chained,
 `writerToPair` will take a given `Writer` and provide a new `Pair` with
 the `log` portion of the `Writer` in the first position and the `resultant`
 in the second.
@@ -972,6 +973,7 @@ a function will be returned that takes a given value and returns an `Pair`.
 import Pair from 'crocks/Pair'
 import Sum from 'crocks/Sum'
 import Writer from 'crocks/Writer'
+import fanout from 'crocks/helpers/fanout'
 
 import writerToPair from 'crocks/Pair/writerToPair'
 
@@ -996,7 +998,10 @@ Pair(Sum.empty(), [])
   .chain(writerToPair(appendItem('one')))
   .chain(writerToPair(appendItem('two')))
   .chain(writerToPair(appendItem('three')))
-//=> Pair(Sum 3, [ "one", "two", "threimport
+//=> Pair(Sum 3, [ "one", "two", "three"])
+
+fanout(Sum, x => appendItem(x)([ x ]), 1)
+  .chain(writerToPair)
 ```
 
 </article>

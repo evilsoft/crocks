@@ -537,6 +537,23 @@ test('List filter functionality', t => {
   t.end()
 })
 
+test('List filter properties (Filterable)', t => {
+  const m = List([ 2, 6, 10, 25, 9, 28 ])
+  const n = List([ 'string', 'party' ])
+
+  const isEven = x => x % 2 === 0
+  const isBig = x => x >= 10
+
+  const left = m.filter(x => isBig(x) && isEven(x)).valueOf()
+  const right = m.filter(isBig).filter(isEven).valueOf()
+
+  t.same(left, right , 'distributivity')
+  t.same(m.filter(() => true).valueOf(), m.valueOf(), 'identity')
+  t.same(m.filter(() => false).valueOf(), n.filter(() => false).valueOf(), 'annihilation')
+
+  t.end()
+})
+
 test('List reject errors', t => {
   const reject = bindFunc(List([ 0 ]).reject)
 

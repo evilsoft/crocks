@@ -1,5 +1,33 @@
 # Change Log for `crocks`
 
+v0.11.1 -- November 4, 2018
+--
+
+### Video Log
+
+* [crocks-0.11.1 release](http://bit.ly/crocks-0-11-1-video)
+
+### Additions
+* Functions/Methods
+  * Add `asyncToPromise` natural transformation function
+
+### Documentation
+* Add `Identity` documentation
+* Add flattening examples for the following Natural Transformations:
+  * `[x]toMaybe`
+  * `[x]toAsync`
+  * `[x]toEither`
+  * `writerToPair`
+* Main page layout and wording modifications
+
+### Pull Requests
+* [#330 - Documentation for Identity](https://github.com/evilsoft/crocks/pull/330)
+* [#295 - Adding a new natural transform: asyncToPromise](https://github.com/evilsoft/crocks/pull/295)
+* [#343 - Added flattening examples to the Maybe docs](https://github.com/evilsoft/crocks/pull/343)
+* [#345 - Added flattening examples to Async](https://github.com/evilsoft/crocks/pull/345)
+* [#344 - Updates to the layout, design and wording of the main docs page](https://github.com/evilsoft/crocks/pull/344)
+* [#346 - Added flattening examples](https://github.com/evilsoft/crocks/pull/346)
+
 v0.11.0 -- October 28, 2018
 --
 

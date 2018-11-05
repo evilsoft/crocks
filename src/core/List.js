@@ -1,7 +1,7 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const VERSION = 3
+const VERSION = 4
 
 const _equals = require('./equals')
 const _implements = require('./implements')
@@ -212,17 +212,19 @@ function List(x) {
       }, head) : head
   }
 
-  function filter(pred) {
-    if(!isPredOrFunc(pred)) {
-      throw new TypeError('List.filter: Pred or predicate function required')
-    }
+  function filter(method) {
+    return function(pred) {
+      if(!isPredOrFunc(pred)) {
+        throw new TypeError(`List.${method}: Pred or predicate function required`)
+      }
 
-    return List(
-      xs.reduce(
-        (x, y) => predOrFunc(pred, y) ? x.concat([ y ]) : x,
-        []
+      return List(
+        xs.reduce(
+          (x, y) => predOrFunc(pred, y) ? x.concat([ y ]) : x,
+          []
+        )
       )
-    )
+    }
   }
 
   function reject(pred) {
@@ -319,12 +321,13 @@ function List(x) {
   return {
     inspect, toString: inspect, valueOf, toArray,
     head, tail, cons, type, equals, empty,
-    reduceRight, fold, foldMap, filter, reject,
+    reduceRight, fold, foldMap, reject,
     ap, of, sequence, traverse,
     concat: concat('concat'),
     map: map('map'),
     chain: chain('chain'),
     reduce: reduce('reduce'),
+    filter: filter('filter'),
     [fl.of]: of,
     [fl.equals]: equals,
     [fl.concat]: concat(fl.concat),
@@ -332,6 +335,7 @@ function List(x) {
     [fl.map]: map(fl.map),
     [fl.chain]: chain(fl.chain),
     [fl.reduce]: reduce(fl.reduce),
+    [fl.filter]: filter(fl.filter),
     ['@@type']: _type,
     constructor: List
   }

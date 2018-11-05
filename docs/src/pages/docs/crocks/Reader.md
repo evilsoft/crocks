@@ -217,7 +217,7 @@ const propOr = (key, def) =>
 const lengthObj =
   B(objOf('length'), length)
 
-// addLength :: Object -> Redaer Array Object
+// addLength :: Object -> Reader Array Object
 const addLength = x =>
   ask(propOr('list', []))
     .map(B(assign(x), lengthObj))

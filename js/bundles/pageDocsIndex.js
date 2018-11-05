@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([13,35,36,37],[
+webpackJsonppageComponent([13,36,37,38],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19884,7 +19884,7 @@ if (goog.DEBUG) {
  * @return {void}
  * @suppress {checkTypes}
  */
-function __deltemplate_s174_d34389eb(opt_data, opt_ignored, opt_ijData) {
+function __deltemplate_s182_d34389eb(opt_data, opt_ignored, opt_ijData) {
   ie_open('a', null, null,
       'class', 'sidebar-link ' + (opt_data.page.active ? 'sidebar-link-selected' : ''),
       'href', opt_data.page.url);
@@ -19898,11 +19898,11 @@ function __deltemplate_s174_d34389eb(opt_data, opt_ignored, opt_ijData) {
     ie_close('span');
   ie_close('a');
 }
-exports.__deltemplate_s174_d34389eb = __deltemplate_s174_d34389eb;
+exports.__deltemplate_s182_d34389eb = __deltemplate_s182_d34389eb;
 if (goog.DEBUG) {
-  __deltemplate_s174_d34389eb.soyTemplateName = 'Sidebar.__deltemplate_s174_d34389eb';
+  __deltemplate_s182_d34389eb.soyTemplateName = 'Sidebar.__deltemplate_s182_d34389eb';
 }
-soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'sidebar', 0, __deltemplate_s174_d34389eb);
+soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'sidebar', 0, __deltemplate_s182_d34389eb);
 
 exports.render.params = ["section","site"];
 exports.render.types = {"section":"any","site":"any"};
@@ -28369,7 +28369,8 @@ exports.default = parseFromAnchor;
 /* 235 */,
 /* 236 */,
 /* 237 */,
-/* 238 */
+/* 238 */,
+/* 239 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -28528,25 +28529,25 @@ function $topics(opt_data, opt_ignored, opt_ijData) {
               'class', 'col-md-12 col-md-offset-2 col-xs-16');
             ie_open('div', null, null,
                 'class', 'row');
-              var childIdList281 = opt_data.page.childIds;
-              var childIdListLen281 = childIdList281.length;
-              for (var childIdIndex281 = 0; childIdIndex281 < childIdListLen281; childIdIndex281++) {
-                var childIdData281 = childIdList281[childIdIndex281];
-                var topic__soy271 = opt_data.page.children[childIdData281];
-                if (! topic__soy271.hidden) {
+              var childIdList289 = opt_data.page.childIds;
+              var childIdListLen289 = childIdList289.length;
+              for (var childIdIndex289 = 0; childIdIndex289 < childIdListLen289; childIdIndex289++) {
+                var childIdData289 = childIdList289[childIdIndex289];
+                var topic__soy279 = opt_data.page.children[childIdData289];
+                if (! topic__soy279.hidden) {
                   ie_open('div', null, null,
                       'class', 'col-md-8 col-md-offset-0 col-xs-14 col-xs-offset-1');
                     ie_open('a', null, null,
                         'class', 'topic radial-out',
-                        'href', topic__soy271.url);
+                        'href', topic__soy279.url);
                       ie_open('div', null, null,
                           'class', 'topic-icon');
                         ie_void('span', null, null,
-                            'class', 'icon-16-' + topic__soy271.icon);
+                            'class', 'icon-16-' + topic__soy279.icon);
                       ie_close('div');
                       ie_open('h3', null, null,
                           'class', 'topic-title');
-                        var dyn15 = topic__soy271.title;
+                        var dyn15 = topic__soy279.title;
                         if (typeof dyn15 == 'function') dyn15(); else if (dyn15 != null) itext(dyn15);
                       ie_close('h3');
                     ie_close('a');
@@ -28582,7 +28583,6 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(pageDocsIndex, templa
 
 
 /***/ }),
-/* 239 */,
 /* 240 */,
 /* 241 */,
 /* 242 */,
@@ -28627,7 +28627,9 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(pageDocsIndex, templa
 /* 281 */,
 /* 282 */,
 /* 283 */,
-/* 284 */
+/* 284 */,
+/* 285 */,
+/* 286 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28663,7 +28665,7 @@ __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _indexSoy = __webpack_require__(238);
+var _indexSoy = __webpack_require__(239);
 
 var _indexSoy2 = _interopRequireDefault(_indexSoy);
 
@@ -28694,4 +28696,4 @@ _metalSoy2.default.register(pageDocsIndex, _indexSoy2.default);
 exports.default = pageDocsIndex;
 
 /***/ })
-],[284]);
+],[286]);

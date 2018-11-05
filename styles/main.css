@@ -12114,3 +12114,23 @@ li a:not([class]) {
     width: 220px; }
   .highlight-graphic {
     margin-top: 0px; } }
+
+header.header {
+  padding: 0 32px 16px; }
+
+article.about {
+  padding: 64px 0px 32px; }
+  article.about h3 {
+    margin-top: 0; }
+
+div.features {
+  padding: 0; }
+
+.header-cta a.btn {
+  margin: 16px 0 0 0; }
+
+.header-search {
+  max-width: 450px;
+  min-width: 33%;
+  display: inline-block;
+  margin-bottom: 16px; }

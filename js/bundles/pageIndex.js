@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([0,35,36,37],[
+webpackJsonppageComponent([0,36,37,38],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19884,7 +19884,7 @@ if (goog.DEBUG) {
  * @return {void}
  * @suppress {checkTypes}
  */
-function __deltemplate_s174_d34389eb(opt_data, opt_ignored, opt_ijData) {
+function __deltemplate_s182_d34389eb(opt_data, opt_ignored, opt_ijData) {
   ie_open('a', null, null,
       'class', 'sidebar-link ' + (opt_data.page.active ? 'sidebar-link-selected' : ''),
       'href', opt_data.page.url);
@@ -19898,11 +19898,11 @@ function __deltemplate_s174_d34389eb(opt_data, opt_ignored, opt_ijData) {
     ie_close('span');
   ie_close('a');
 }
-exports.__deltemplate_s174_d34389eb = __deltemplate_s174_d34389eb;
+exports.__deltemplate_s182_d34389eb = __deltemplate_s182_d34389eb;
 if (goog.DEBUG) {
-  __deltemplate_s174_d34389eb.soyTemplateName = 'Sidebar.__deltemplate_s174_d34389eb';
+  __deltemplate_s182_d34389eb.soyTemplateName = 'Sidebar.__deltemplate_s182_d34389eb';
 }
-soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'sidebar', 0, __deltemplate_s174_d34389eb);
+soy.$$registerDelegateFn(soy.$$getDelTemplateId('ElectricNavigation.anchor.idom'), 'sidebar', 0, __deltemplate_s182_d34389eb);
 
 exports.render.params = ["section","site"];
 exports.render.types = {"section":"any","site":"any"};
@@ -28382,7 +28382,8 @@ exports.default = parseFromAnchor;
 /* 248 */,
 /* 249 */,
 /* 250 */,
-/* 251 */
+/* 251 */,
+/* 252 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -28428,6 +28429,8 @@ var ie_open_end = IncrementalDom.elementOpenEnd;
 var itext = IncrementalDom.text;
 var iattr = IncrementalDom.attr;
 
+var $templateAlias2 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('ElectricSearchAutocomplete.incrementaldom', 'render');
+
 var $templateAlias1 = __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.getTemplate('main.incrementaldom', 'render');
 
 
@@ -28442,6 +28445,7 @@ function $render(opt_data, opt_ignored, opt_ijData) {
   var param138 = function() {
     $header(opt_data, null, opt_ijData);
     $why(null, null, opt_ijData);
+    $features(null, null, opt_ijData);
     $highlights(null, null, opt_ijData);
     $footer(null, null, opt_ijData);
   };
@@ -28461,6 +28465,7 @@ if (goog.DEBUG) {
  * @suppress {checkTypes}
  */
 function $header(opt_data, opt_ignored, opt_ijData) {
+  var $$temp;
   ie_open('header', null, null,
       'class', 'header');
     ie_open('div', null, null,
@@ -28476,12 +28481,8 @@ function $header(opt_data, opt_ignored, opt_ijData) {
         if (typeof dyn11 == 'function') dyn11(); else if (dyn11 != null) itext(dyn11);
       ie_close('h2');
       ie_open('div', null, null,
-          'class', 'header-cta');
-        ie_open('a', null, null,
-            'href', 'docs/getting-started.html',
-            'class', 'btn btn-accent');
-          itext('Get Started');
-        ie_close('a');
+          'class', 'header-search');
+        $templateAlias2({dataURL: (($$temp = opt_data.site.basePath) == null ? '' : $$temp) + '/site.json', maxResults: 3, path: '/docs/', fieldNames: ['title', 'description', 'functions'], placeholder: 'Search Docs'}, null, opt_ijData);
       ie_close('div');
     ie_close('div');
     ie_open('p', null, null,
@@ -28527,12 +28528,20 @@ function $why(opt_data, opt_ignored, opt_ijData) {
             'class', 'col-md-12 col-md-offset-2');
           ie_open('h3', null, null,
               'class', 'about-title');
-            itext('Why?');
+            itext('Powerful. Simple. Reliable.');
           ie_close('h3');
           ie_open('p', null, null,
               'class', 'about-description');
-            itext('Because Functional Programming! Crocks curates and provides a common interface between each data type (where possible of course), not forgetting all of the helper functions necessary to hit the ground running.');
+            itext('Crocks is a zero dependency library that curates and provides a collection of containers with a common interface between each, where possible, Along with a large set of the helper functions necessary to hit the ground running.');
           ie_close('p');
+        ie_close('div');
+        ie_open('div', null, null,
+            'class', 'header-cta');
+          ie_open('a', null, null,
+              'href', 'docs/getting-started.html',
+              'class', 'btn btn-accent');
+            itext('Get Started');
+          ie_close('a');
         ie_close('div');
       ie_close('div');
     ie_close('div');
@@ -28558,54 +28567,63 @@ function $features(opt_data, opt_ignored, opt_ijData) {
         'class', 'container');
       ie_open('div', null, null,
           'class', 'row');
-        ie_open('section', null, null,
-            'class', 'feature col-md-4 col-md-offset-2');
-          ie_open('div', null, null,
-              'class', 'feature-graphic');
-            ie_void('span', null, null,
-                'class', 'icon-16-bullhorn');
-          ie_close('div');
-          ie_open('h3', null, null,
-              'class', 'feature-title');
-            itext('Heading');
-          ie_close('h3');
-          ie_open('p', null, null,
-              'class', 'feature-description');
-            itext('Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros praesent commodo.');
-          ie_close('p');
-        ie_close('section');
-        ie_open('section', null, null,
-            'class', 'feature col-md-4');
-          ie_open('div', null, null,
-              'class', 'feature-graphic');
-            ie_void('span', null, null,
-                'class', 'icon-16-lock');
-          ie_close('div');
-          ie_open('h3', null, null,
-              'class', 'feature-title');
-            itext('Heading');
-          ie_close('h3');
-          ie_open('p', null, null,
-              'class', 'feature-description');
-            itext('Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros praesent commodo.');
-          ie_close('p');
-        ie_close('section');
-        ie_open('section', null, null,
-            'class', 'feature col-md-4');
-          ie_open('div', null, null,
-              'class', 'feature-graphic');
-            ie_void('span', null, null,
-                'class', 'icon-16-calendar');
-          ie_close('div');
-          ie_open('h3', null, null,
-              'class', 'feature-title');
-            itext('Heading');
-          ie_close('h3');
-          ie_open('p', null, null,
-              'class', 'feature-description');
-            itext('Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros praesent commodo.');
-          ie_close('p');
-        ie_close('section');
+        ie_open('a', null, null,
+            'href', '/docs/crocks/');
+          ie_open('section', null, null,
+              'class', 'feature col-md-4 col-md-offset-2');
+            ie_open('div', null, null,
+                'class', 'feature-graphic');
+              ie_void('span', null, null,
+                  'class', 'icon-16-code-file');
+            ie_close('div');
+            ie_open('h3', null, null,
+                'class', 'feature-title');
+              itext('Crocks');
+            ie_close('h3');
+            ie_open('p', null, null,
+                'class', 'feature-description');
+              itext('The `crocks` are the heart and soul of this library. This is where you will find all your favorite ADT\'s you have grown to love.');
+            ie_close('p');
+          ie_close('section');
+        ie_close('a');
+        ie_open('a', null, null,
+            'href', '/docs/monoids/');
+          ie_open('section', null, null,
+              'class', 'feature col-md-4');
+            ie_open('div', null, null,
+                'class', 'feature-graphic');
+              ie_void('span', null, null,
+                  'class', 'icon-16-code-file');
+            ie_close('div');
+            ie_open('h3', null, null,
+                'class', 'feature-title');
+              itext('Monoids');
+            ie_close('h3');
+            ie_open('p', null, null,
+                'class', 'feature-description');
+              itext('Each Monoid provides a means to represent a binary operation and is usually locked down to a specific type. These are great when you need to combine a list of values down to one value.');
+            ie_close('p');
+          ie_close('section');
+        ie_close('a');
+        ie_open('a', null, null,
+            'href', '/docs/functions/');
+          ie_open('section', null, null,
+              'class', 'feature col-md-4');
+            ie_open('div', null, null,
+                'class', 'feature-graphic');
+              ie_void('span', null, null,
+                  'class', 'icon-16-code-file');
+            ie_close('div');
+            ie_open('h3', null, null,
+                'class', 'feature-title');
+              itext('Functions');
+            ie_close('h3');
+            ie_open('p', null, null,
+                'class', 'feature-description');
+              itext('A wonderfully curated collection of combinators, helper functions, logic functions, predicates, point-free functions and natural transforms.');
+            ie_close('p');
+          ie_close('section');
+        ie_close('a');
       ie_close('div');
     ie_close('div');
   ie_close('div');
@@ -28694,6 +28712,28 @@ function $highlights(opt_data, opt_ignored, opt_ijData) {
           ie_close('div');
         ie_close('div');
       ie_close('section');
+      ie_open('section', null, null,
+          'class', 'highlight row');
+        ie_open('div', null, null,
+            'class', 'col-md-6 col-md-push-9');
+          ie_open('h4', null, null,
+              'class', 'highlight-title');
+            itext('Simple and unambiguous error messages');
+          ie_close('h4');
+          ie_open('p', null, null,
+              'class', 'highlight-description');
+            itext('Being a library built for and by developers, Crocks has ensured it has helpful error messaging at the point of the problem, not deep down in the depths of some abstraction in crocks. The immediate feedback loop enables faster, higher quality development.');
+          ie_close('p');
+        ie_close('div');
+        ie_open('div', null, null,
+            'class', 'col-md-5 col-md-offset-2 col-md-pull-6');
+          ie_open('div', null, null,
+              'class', 'highlight-graphic');
+            ie_void('span', null, null,
+                'class', 'icon-16-alert');
+          ie_close('div');
+        ie_close('div');
+      ie_close('section');
     ie_close('div');
   ie_close('div');
 }
@@ -28735,7 +28775,7 @@ function $footer(opt_data, opt_ignored, opt_ijData) {
             'class', 'footer-description col-md-5');
           itext('Found an issue with the docs? Report it ');
           ie_open('a', null, null,
-              'href', 'https://github.com/evilsoft/crocks/issues/new');
+              'href', 'https://github.com/evilsoft/crocks/issues/new?template=bug_report.md');
             itext('here');
           ie_close('a');
         ie_close('p');
@@ -28773,7 +28813,6 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(pageIndex, templates)
 
 
 /***/ }),
-/* 252 */,
 /* 253 */,
 /* 254 */,
 /* 255 */,
@@ -28807,7 +28846,9 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(pageIndex, templates)
 /* 283 */,
 /* 284 */,
 /* 285 */,
-/* 286 */
+/* 286 */,
+/* 287 */,
+/* 288 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28843,7 +28884,7 @@ __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _indexSoy = __webpack_require__(251);
+var _indexSoy = __webpack_require__(252);
 
 var _indexSoy2 = _interopRequireDefault(_indexSoy);
 
@@ -28874,4 +28915,4 @@ _metalSoy2.default.register(pageIndex, _indexSoy2.default);
 exports.default = pageIndex;
 
 /***/ })
-],[286]);
+],[288]);

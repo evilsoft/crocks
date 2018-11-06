@@ -1,6 +1,7 @@
 /** @license ISC License (c) copyright 2018 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
+const array = require('../core/array')
 const curry = require('../core/curry')
 const isArray = require('../core/isArray')
 const isEmpty = require('../core/isEmpty')
@@ -22,7 +23,9 @@ function setPath(path, val, obj) {
   }
 
   if(!isValid(obj)) {
-    throw new TypeError('setPath: Object or Array required for third argument')
+    throw new TypeError(
+      'setPath: Object or Array required for third argument'
+    )
   }
 
   const key = path[0]
@@ -37,16 +40,13 @@ function setPath(path, val, obj) {
   }
 
   if(isString(key) && !isEmpty(key)) {
-    return object.assign({ [key]: newVal }, obj)
+    return object.set(key, newVal, obj)
   }
 
   if(isInteger(key)) {
-    const arr =
-      isArray(obj) ? obj.slice() : obj
-
-    arr[key] = newVal
-
-    return arr
+    return isArray(obj)
+      ? array.set(key, newVal, obj)
+      : object.set(key, newVal, obj)
   }
 
   throw new TypeError(pathError)

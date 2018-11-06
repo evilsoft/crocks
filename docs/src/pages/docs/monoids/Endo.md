@@ -144,7 +144,7 @@ endofunctions under function composition.
 ```javascript
 import Endo from 'crocks/Endo'
 
-import assoc from 'crocks/helpers/assoc'
+import setProp from 'crocks/helpers/setProp'
 import mapProps from 'crocks/helpers/mapProps'
 import objOf from 'crocks/helpers/objOf'
 
@@ -158,7 +158,7 @@ const incValue =
 
 // addDone :: Endo Object
 const addDone =
-  Endo(assoc('done', true))
+  Endo(setProp('done', true))
 
 // finish :: Endo Object
 const packResults =

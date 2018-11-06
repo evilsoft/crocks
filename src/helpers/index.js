@@ -34,6 +34,7 @@ module.exports = {
   propOr: require('./propOr'),
   propPathOr: require('./propPathOr'),
   setPath: require('./setPath'),
+  setProp: require('./setProp'),
   tap: require('./tap'),
   unary: require('./unary'),
   unit: require('./unit'),

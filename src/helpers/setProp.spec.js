@@ -5,14 +5,14 @@ const bindFunc = helpers.bindFunc
 const isFunction = require('../core/isFunction')
 const unit = require('../core/_unit')
 
-const assoc = require('./assoc')
+const setProp = require('./setProp')
 
-test('assoc helper function', t => {
-  t.ok(isFunction(assoc), 'is a function')
+test('setProp helper function', t => {
+  t.ok(isFunction(setProp), 'is a function')
 
-  const fn = bindFunc(assoc)
+  const fn = bindFunc(setProp)
 
-  const err = /assoc: Object or Array required for third argument$/
+  const err = /setProp: Object or Array required for third argument$/
   t.throws(fn('a', 1, undefined), err, 'throws when third arg is undefined')
   t.throws(fn('a', 1, null), err, 'throws when third arg is null')
   t.throws(fn('a', 1, NaN), err, 'throws when third arg is NaN')
@@ -27,10 +27,10 @@ test('assoc helper function', t => {
   t.end()
 })
 
-test('assoc with Object', t => {
-  const fn = bindFunc(assoc)
+test('setProp with Object', t => {
+  const fn = bindFunc(setProp)
 
-  const err = /assoc: String required for first argument when third argument is an Object$/
+  const err = /setProp: String required for first argument when third argument is an Object$/
   t.throws(fn(undefined, 1, {}), err, 'throws when first arg is undefined')
   t.throws(fn(null, 1, {}), err, 'throws when first arg is null')
   t.throws(fn(NaN, 1, {}), err, 'throws when first arg is NaN')
@@ -44,17 +44,17 @@ test('assoc with Object', t => {
 
   const data = { a: 45, b: 23 }
 
-  t.same(assoc('c', 10, data), { a: 45, b: 23, c: 10 }, 'adds a new key when it does not exist')
-  t.same(assoc('b', 10, data), { a: 45, b: 10 }, 'overrides an existing key when it exists')
+  t.same(setProp('c', 10, data), { a: 45, b: 23, c: 10 }, 'adds a new key when it does not exist')
+  t.same(setProp('b', 10, data), { a: 45, b: 10 }, 'overrides an existing key when it exists')
   t.same(data, { a: 45, b: 23 }, 'does not modify exsiting object')
 
   t.end()
 })
 
-test('assoc with Array', t => {
-  const fn = bindFunc(assoc)
+test('setProp with Array', t => {
+  const fn = bindFunc(setProp)
 
-  const err = /assoc: Integer required for first argument when third argument is an Array$/
+  const err = /setProp: Integer required for first argument when third argument is an Array$/
   t.throws(fn(undefined, 1, []), err, 'throws when first arg is undefined')
   t.throws(fn(null, 1, []), err, 'throws when first arg is null')
   t.throws(fn(NaN, 1, []), err, 'throws when first arg is NaN')
@@ -68,10 +68,10 @@ test('assoc with Array', t => {
 
   const data = [ 1, 2, 3 ]
 
-  t.same(assoc(3, 10, data), [ 1, 2, 3, 10 ], 'adds a new value when index does not exist')
-  t.same(assoc(2, 10, data), [ 1, 2, 10 ], 'overrides an existing value when index exists')
+  t.same(setProp(3, 10, data), [ 1, 2, 3, 10 ], 'adds a new value when index does not exist')
+  t.same(setProp(2, 10, data), [ 1, 2, 10 ], 'overrides an existing value when index exists')
 
-  const sparse = assoc(4, 10, data)
+  const sparse = setProp(4, 10, data)
 
   t.equal(sparse[4], 10, 'sets value at specifed index in path')
   t.equal(sparse[3], undefined, 'fills unallocated indcies with undefined when setting a value')

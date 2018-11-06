@@ -56,7 +56,7 @@ need to account for for the rest of your flow.
 | Function | Signature | Location |
 |:---|:---|:---|
 | [`assign`][assign] | `Object -> Object -> Object` | `crocks/helpers/assign` |
-| [`assoc`][assoc] | `String -> a -> Object -> Object` | `crocks/helpers/assoc` |
+| [`assoc`][setprop]<br /><i>(deprecated)</i> | `String -> a -> Object -> Object` | `crocks/helpers/assoc` |
 | [`binary`][binary] | `((*) -> c) -> a -> b -> c` | `crocks/helpers/binary` |
 | [`branch`][branch] | `a -> Pair a a` | `crocks/Pair/branch` |
 | [`compose`][compose] | `((y -> z), ..., (a -> b)) -> a -> z` | `crocks/helpers/compose` |
@@ -97,6 +97,7 @@ need to account for for the rest of your flow.
 | [`safeAfter`][safeafter] | <code>safeAfter :: ((b -> Boolean) &#124; Pred) -> (a -> b) -> a -> Maybe b</code> | `crocks/Maybe/safeAfter` |
 | [`safeLift`][safelift] | <code>((a -> Boolean) &#124; Pred) -> (a -> b) -> a -> Maybe b</code> | `crocks/Maybe/safeLift` |
 | [`setPath`][setpath] | <code>[ String &#124; Integer ] -> a -> (Object &#124; Array) -> (Object &#124; Array)</code> | `crocks/helpers/setPath` |
+| [`setProp`][setprop] | `String -> a -> Object -> Object` | `crocks/helpers/setProp` |
 | [`tap`][tap] | `(a -> b) -> a -> a` | `crocks/helpers/tap` |
 | [`toPairs`][topairs] | `Object -> List (Pair String a)` | `crocks/Pair/toPairs` |
 | [`tryCatch`][trycatch] | `((*) -> b) -> (*) -> Result e b` | `crocks/Result/tryCatch` |
@@ -133,7 +134,6 @@ type: `Pred a` and vice-versa
 [substitution]: combinators.html#substitution
 
 [assign]: helpers.html#assign
-[assoc]: helpers.html#assoc
 [binary]: helpers.html#binary
 [branch]: ../crocks/Pair.html#branch
 [compose]: helpers.html#compose
@@ -174,6 +174,7 @@ type: `Pred a` and vice-versa
 [safeafter]: ../crocks/Maybe.html#safeafter
 [safelift]: ../crocks/Maybe.html#safelift
 [setpath]: helpers.html#setpath
+[setprop]: helpers.html#setprop
 [tap]: helpers.html#tap
 [topairs]: ../crocks/Pair.html#topairs
 [trycatch]: helpers.html#trycatch

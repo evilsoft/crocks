@@ -7,6 +7,7 @@ const object = require('./object')
 const assign = object.assign
 const filter = object.filter
 const map = object.map
+const set = object.set
 
 const identity = x => x
 
@@ -69,6 +70,15 @@ test('object map properties (Functor)', t => {
 
   t.same(map(identity, m), m, 'identity')
   t.same(map(compose(f, g), m), map(f, map(g, m)), 'composition')
+
+  t.end()
+})
+
+test('object set functionality', t => {
+  const data = { a: 'string', b: false }
+
+  t.same(set('c', 10, data), { a: 'string', b: false, c: 10 }, 'adds a new key when it does not exist')
+  t.same(set('b', 10, data), { a: 'string', b: 10 }, 'overrides an existing key when it exists')
 
   t.end()
 })

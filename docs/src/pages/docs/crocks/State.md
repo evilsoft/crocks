@@ -398,7 +398,7 @@ instances' resultants.
 ```javascript
 import State from 'crocks/State'
 
-import assoc from 'crocks/helpers/assoc'
+import setProp from 'crocks/helpers/setProp'
 import propOr from 'crocks/helpers/propOr'
 
 const { get, modify } = State
@@ -426,7 +426,7 @@ const getKey = key =>
 
 // updateKey :: String -> a -> State Object ()
 const updateKey = key => val =>
-  modify(assoc(key, val))
+  modify(setProp(key, val))
 
 // addToSub :: Number -> String Object Number
 const addToSub = x =>

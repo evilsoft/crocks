@@ -122,6 +122,14 @@ function foldMap(fn, m) {
     }, head)
 }
 
+function set(indx, val, m) {
+  const arr = m.slice()
+
+  arr[indx] = val
+
+  return arr
+}
+
 module.exports = {
-  ap, chain, fold, foldMap, map, sequence, traverse
+  ap, chain, fold, foldMap, map, sequence, set, traverse
 }

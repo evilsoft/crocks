@@ -1,9 +1,8 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const isArray = require('../core/isArray')
 const isFunction = require('../core/isFunction')
-const isString = require('../core/isString')
+const isIterable = require('../core/isIterable')
 
 const { Nothing, Just } = require('../core/Maybe')
 
@@ -12,10 +11,11 @@ function head(m) {
     return m.head()
   }
 
-  if(isArray(m) || isString(m)) {
-    return !m.length
-      ? Nothing()
-      : Just(m[0])
+  if(isIterable(m)) {
+    const iterator = m[Symbol.iterator]()
+    const head = iterator.next()
+
+    return head.done ? Nothing() : Just(head.value)
   }
 
   throw new TypeError('head: Array, String or List required')

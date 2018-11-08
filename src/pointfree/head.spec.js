@@ -2,7 +2,7 @@ const test = require('tape')
 const sinon = require('sinon')
 const helpers = require('../test/helpers')
 
-const bindFunc = helpers.bindFunc
+const { bindFunc, testIterable } = helpers
 
 const M = require('../core/Maybe')
 const isFunction  = require('../core/isFunction')
@@ -69,6 +69,22 @@ test('head pointfree List', t => {
 
   t.ok(m.head.called, 'calls head on list passing first arg')
   t.equal(m.head.returnValues[0], result, 'returns the result of the List head')
+
+  t.end()
+})
+
+test('head pointfree iterable', t => {
+  const empty = testIterable(0, 0, 1)
+  const one = testIterable(1, 1, 1)
+  const two = testIterable(1, 2, 1)
+
+  t.equals(head(empty).type(), M.type(), 'returns a Maybe on empty')
+  t.equals(head(one).type(), M.type(), 'returns a Maybe on one element array')
+  t.equals(head(two).type(), M.type(), 'returns a Maybe on two element array')
+
+  t.equals(head(empty).option('Nothing'), 'Nothing', 'returns a Nothing on empty')
+  t.equals(head(one).option('Nothing'), 1, 'returns `1` on single element iterable')
+  t.equals(head(two).option('Nothing'), 1, 'returns `1` on dual element iterable')
 
   t.end()
 })

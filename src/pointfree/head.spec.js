@@ -76,7 +76,7 @@ test('head pointfree List', t => {
 test('head pointfree iterable', t => {
   const empty = testIterable(0, 0, 1)
   const one = testIterable(1, 1, 1)
-  const two = testIterable(1, 2, 1)
+  const two = testIterable(2, 2, 2)
 
   t.equals(head(empty).type(), M.type(), 'returns a Maybe on empty')
   t.equals(head(one).type(), M.type(), 'returns a Maybe on one element array')
@@ -84,7 +84,7 @@ test('head pointfree iterable', t => {
 
   t.equals(head(empty).option('Nothing'), 'Nothing', 'returns a Nothing on empty')
   t.equals(head(one).option('Nothing'), 1, 'returns `1` on single element iterable')
-  t.equals(head(two).option('Nothing'), 1, 'returns `1` on dual element iterable')
+  t.equals(head(two).option('Nothing'), 2, 'returns `2` on dual element iterable')
 
   t.end()
 })

@@ -2,7 +2,7 @@
 title: "Helpers"
 description: "Helper functions"
 layout: "notopic"
-functions: ["assign", "assoc", "binary", "compose", "composek", "composep", "composes", "curry", "defaultprops", "defaultto", "dissoc", "fanout", "frompairs", "lifta2", "lifta3", "liftn", "mapprops", "mapreduce", "mconcat", "mconcatmap", "mreduce", "mreducemap", "nary", "objof", "omit", "once", "partial", "pick", "pipe", "pipek", "pipep", "pipes", "propor", "proppathor", "setpath", "setprop", "tap", "unary", "unit", "unsetpath"]
+functions: ["assign", "assoc", "binary", "compose", "composek", "composep", "composes", "curry", "defaultprops", "defaultto", "dissoc", "frompairs", "lifta2", "lifta3", "liftn", "mapprops", "mapreduce", "mconcat", "mconcatmap", "mreduce", "mreducemap", "nary", "objof", "omit", "once", "partial", "pick", "pipe", "pipek", "pipep", "pipes", "propor", "proppathor", "setpath", "setprop", "tap", "unary", "unit", "unsetpath"]
 weight: 20
 ---
 
@@ -274,26 +274,6 @@ given `Object`, `dissoc` does the opposite. Just pass `dissoc` a `String` key
 and the `Object` you wish to dissociate that key from and you will get back a
 new, shallow copy of the `Object` sans your key. As with all the `Object`
 functions, `dissoc` will remove any `undefined` values from the result.
-
-#### fanout
-
-`crocks/helpers/fanout`
-
-```haskell
-fanout :: (a -> b) -> (a -> c) -> (a -> Pair b c)
-fanout :: Arrow a b -> Arrow a c -> Arrow a (Pair b c)
-fanout :: Monad m => Star a (m b) -> Star a (m c) -> Star a (m (Pair b c))
-```
-
-There are may times that you need to keep some running or persistent state while
-performing a given computation. A common way to do this is to take the input to
-the computation and branch it into a `Pair` and perform different operations on
-each version of the input. This is such a common pattern that it warrants the
-`fanout` function to take care of the initial split and mapping. Just provide a
-pair of either simple functions or a pair of one of the computation types
-(`Arrow` or `Star`). You will get back something of the same type that is
-configured to split it's input into a pair and than apply the first Function/ADT
-to the first portion of the underlying `Pair` and the second on the second.
 
 #### fromPairs
 

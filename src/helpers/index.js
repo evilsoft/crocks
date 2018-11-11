@@ -10,7 +10,6 @@ module.exports = {
   defaultProps: require('./defaultProps'),
   defaultTo: require('./defaultTo'),
   dissoc: require('./dissoc'),
-  fanout: require('./fanout'),
   fromPairs: require('./fromPairs'),
   liftA2: require('./liftA2'),
   liftA3: require('./liftA3'),

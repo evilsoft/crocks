@@ -31,6 +31,7 @@ const crocks = {
 const helpers = Object.assign({},
   require('./helpers'), {
     branch: require('./Pair/branch'),
+    fanout: require('./Pair/fanout'),
     find: require('./Maybe/find'),
     prop: require('./Maybe/prop'),
     propPath: require('./Maybe/propPath'),

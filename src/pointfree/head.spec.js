@@ -17,7 +17,7 @@ test('head pointfree', t => {
 
   t.ok(isFunction(head), 'is a function')
 
-  const err = /head: Array, String or List required/
+  const err = /head: List or iterable required/
   t.throws(f(undefined), err, 'throws when arg is undefined')
   t.throws(f(null), err, 'throws when arg is null')
   t.throws(f(0), err, 'throws when arg is falsey number')

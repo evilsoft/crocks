@@ -18,7 +18,7 @@ function head(m) {
     return head.done ? Nothing() : Just(head.value)
   }
 
-  throw new TypeError('head: Array, String or List required')
+  throw new TypeError('head: List or iterable required')
 }
 
 module.exports = head

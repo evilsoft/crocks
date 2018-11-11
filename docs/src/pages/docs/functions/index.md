@@ -129,6 +129,7 @@ type: `Pred a` and vice-versa
 [applyto]: combinators.html#applyto
 [composeb]: combinators.html#composeb
 [constant]: combinators.html#constant
+[converge]: combinators.html#converge
 [flip]: combinators.html#flip
 [identity]: combinators.html#identity
 [substitution]: combinators.html#substitution

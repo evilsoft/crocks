@@ -473,4 +473,31 @@ trimap(add(10), toUpper, add(10), triple)
 //=> 3-Tuple( 42, "STRING", 10 )
 ```
 
+#### project
+
+`crocks/Tuple/project`
+
+```haskell
+project :: Integer -> m ...* -> a
+```
+
+`project` takes a positive, non-zero Integer as its input and returns another function that accepts a `n-Tuple`. It then returns the value from the `n-Tuple` that resides at the provided `Integer` index.
+
+
+```javascript
+import Tuple from 'crocks/Tuple'
+import project from 'crocks/Tuple/project'
+
+// Triple :: 3-Tuple
+const Triple = Tuple(3)('one', 'two', 'three')
+
+const getFirst = project(1)
+
+getFirst(Triple)
+//=> "one"
+
+project(2, Triple)
+//=> "two"
+```
+
 </article>

@@ -21,7 +21,6 @@ module.exports = {
   map: require('./map'),
   merge: require('./merge'),
   option: require('./option'),
-  project: require('../Tuple/project'),
   promap: require('./promap'),
   reduce: require('./reduce'),
   reduceRight: require('./reduceRight'),

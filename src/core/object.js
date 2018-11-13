@@ -33,8 +33,13 @@ function map(f, m) {
   }, {})
 }
 
+function set(key, val, m) {
+  return assign({ [key]: val }, m)
+}
+
 module.exports = {
   assign,
   filter,
-  map
+  map,
+  set
 }

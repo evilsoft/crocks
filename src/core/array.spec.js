@@ -14,6 +14,7 @@ const map = array.map
 const ap = array.ap
 const chain = array.chain
 const sequence = array.sequence
+const set = array.set
 const traverse = array.traverse
 
 const constant = x => () => x
@@ -143,6 +144,21 @@ test('array sequence errors', t => {
   t.throws(fn(true), err, 'throws with true')
   t.throws(fn([]), err, 'throws with an array')
   t.throws(fn({}), err, 'throws with an object')
+
+  t.end()
+})
+
+test('array set functionality', t => {
+  const data = [ 'a', 'b' ]
+
+  t.same(set(1, 10, data), [ 'a', 10 ], 'overwrites existing value')
+  t.same(set(2, 10, data), [ 'a', 'b', 10 ], 'adds a value when it does not exist')
+
+  const sparse = set(3, 10, data)
+
+  t.equal(sparse[3], 10, 'sets value at specifed index in path')
+  t.equal(sparse[2], undefined, 'fills unallocated indcies with undefined when setting a value')
+  t.same(data, [ 'a', 'b' ], 'does not alter original array')
 
   t.end()
 })

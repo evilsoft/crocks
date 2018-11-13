@@ -2,7 +2,7 @@
 title: "Pair"
 description: "Canonical Product Type"
 layout: "guide"
-functions: ["branch", "fst", "snd", "topairs", "writertopair"]
+functions: ["branch", "fanout", "fst", "snd", "topairs", "writertopair"]
 weight: 100
 ---
 
@@ -21,16 +21,16 @@ right or second value, matching the pattern of the other ADTs in `crocks`. When
 mapped with a function, the function will only be applied to the second value,
 and will leave the first value untouched.
 
-`Pair` also provides the ability to use `ap` and `chain`, but in order to
+`Pair` also provides the ability to use  [`ap`](#ap) and [`chain`](#chain), but in order to
 combine the resulting instances in a predictable, repeatable fashion the first
 values in the `Pair`s must be `Semigroup` instances of the same type. When
-applied, `ap` and `chain` will concatenate the `Semigroup`s providing the result
+applied,  [`ap`](#ap) and [`chain`](#chain) will concatenate the `Semigroup`s providing the result
 of the concatenation in the first position of the resulting `Pair`.
 
 A helpful benefit of the `Bifunctor` aspects `Pair` allows for defining parallel
 computations. There are many functions that ship with `crocks` that allow for
-parallelization such as [`branch`](#branch), `merge` and
-`fanout`. Using those helpers in conjunction with the ability to
+parallelization such as [`branch`](#branch), [`merge`](#merge) and
+[`fanout`](#fanout). Using those helpers in conjunction with the ability to
 [`bimap`](#bimap) functions over a given `Pair`s values.
 
 ```javascript
@@ -166,7 +166,7 @@ import Sum from 'crocks/Sum'
 
 import compose from 'crocks/helpers/compose'
 import concat from 'crocks/pointfree/concat'
-import fanout from 'crocks/helpers/fanout'
+import fanout from 'crocks/Pair/fanout'
 import flip from 'crocks/combinators/flip'
 import map from 'crocks/pointfree/map'
 import mapReduce from 'crocks/helpers/mapReduce'
@@ -373,12 +373,12 @@ the first position of the source `Pair` and the `Pair` returned by the function.
 ```javascript
 const Pair = require('crocks/Pair')
 
-const assoc = require('crocks/helpers/assoc')
+const setProp = require('crocks/helpers/setProp')
 const omit = require('crocks/helpers/omit')
 
 // addTmp :: (String, a, Object) -> Pair [ String ] Object
 const addTmp = (key, value, x) =>
-  Pair([ key ], assoc(key, value, x))
+  Pair([ key ], setProp(key, value, x))
 
 // add :: Object -> Pair [ String ] Object
 const add = data => {
@@ -395,7 +395,7 @@ const multiply = data => {
 // calc :: Object -> Object
 const calc = data => {
   const { product, sum } = data
-  return assoc('result', product - sum, data)
+  return setProp('result', product - sum, data)
 }
 
 // flow :: Object -> Object
@@ -480,7 +480,7 @@ flow(pair)
 #### traverse
 
 ```haskell
-Apply f => Pair a b ~> (d -> f d), (b -> f c)) -> f (Pair a c)
+Apply f => Pair a b ~> ((d -> f d), (b -> f c)) -> f (Pair a c)
 Applicative f => Pair a b ~> (TypeRep f, (b -> f c)) -> f (Pair a c)
 ```
 
@@ -710,7 +710,7 @@ method works hand in hand with the either the [`branch`](#branch) or
 import Sum from 'crocks/Sum'
 
 import compose from 'crocks/helpers/compose'
-import fanout from 'crocks/helpers/fanout'
+import fanout from 'crocks/Pair/fanout'
 import merge from 'crocks/pointfree/merge'
 import mreduce from 'crocks/helpers/mreduce'
 
@@ -791,6 +791,66 @@ const applyAdd10 =
 
 applyAdd10(5)
 // { current: 15, orig: 5 }
+```
+
+#### fanout
+
+`crocks/Pair/fanout`
+
+```haskell
+fanout :: (a -> b) -> (a -> c) -> (a -> Pair b c)
+fanout :: Arrow a b -> Arrow a c -> Arrow a (Pair b c)
+fanout :: Monad m => Star a (m b) -> Star a (m c) -> Star a (m (Pair b c))
+```
+
+There are may times that you need to keep some running or persistent state while
+performing a given computation. A common way to do this is to take the input to
+the computation and branch it into a `Pair` and perform different operations on
+each version of the input. This is such a common pattern that it warrants the
+`fanout` function to take care of the initial split and mapping. Just provide a
+pair of either simple functions or a pair of one of the computation types
+(`Arrow` or `Star`). You will get back something of the same type that is
+configured to split it's input into a pair and than apply the first Function/ADT
+to the first portion of the underlying `Pair` and the second on the second.
+
+```javascript
+import compose from 'crocks/helpers/compose'
+import fanout from 'crocks/Pair/fanout'
+import liftA2 from 'crocks/helpers/liftA2'
+import map from 'crocks/pointfree/map'
+import Maybe from 'crocks/Maybe'
+import merge from 'crocks/Pair/merge'
+import prop from 'crocks/Maybe/prop'
+import sequence from 'crocks/pointfree/sequence'
+
+// Person :: { first: String, last: String }
+// people :: [Person]
+const people = [
+  { first: 'Ziggy', last: 'Stardust' },
+  { first: 'Lizard', last: 'King' }
+]
+
+// concat :: String -> String -> String
+const concat = a => b => `${a} ${b}`
+
+// join :: String -> [a] -> String
+const join = sep => arr => arr.join(sep)
+
+// getName :: Person -> String
+const getName = compose(
+  merge(liftA2(concat)),
+  fanout(prop('first'), prop('last'))
+)
+
+// getPersons :: [Person] -> String
+const getPersons = compose(
+  map(join(', ')),
+  sequence(Maybe),
+  map(getName)
+)
+
+getPersons(people)
+//=> Just "Ziggy Stardust, Lizard King"
 ```
 
 #### toPairs
@@ -957,7 +1017,8 @@ writerToPair :: Monoid m => Writer m a -> Pair m a
 writerToPair :: Monoid m => (a -> Writer m b) -> a -> Pair m b
 ```
 
-Used to transform a `Writer` instance to a `Pair` instance,
+Used to transform a `Writer` instance to a `Pair` instance or
+flatten a `Pair` of `Writer` into an `Pair` when chained,
 `writerToPair` will take a given `Writer` and provide a new `Pair` with
 the `log` portion of the `Writer` in the first position and the `resultant`
 in the second.
@@ -972,6 +1033,7 @@ a function will be returned that takes a given value and returns an `Pair`.
 import Pair from 'crocks/Pair'
 import Sum from 'crocks/Sum'
 import Writer from 'crocks/Writer'
+import fanout from 'crocks/helpers/fanout'
 
 import writerToPair from 'crocks/Pair/writerToPair'
 
@@ -996,12 +1058,14 @@ Pair(Sum.empty(), [])
   .chain(writerToPair(appendItem('one')))
   .chain(writerToPair(appendItem('two')))
   .chain(writerToPair(appendItem('three')))
-//=> Pair(Sum 3, [ "one", "two", "threimport
+//=> Pair(Sum 3, [ "one", "two", "three"])
+
+fanout(Sum, x => appendItem(x)([ x ]), 1)
+  .chain(writerToPair)
 ```
 
 </article>
 
-[fanout]: ../functions/helpers.html#fanout
 [frompairs]: ../functions/helpers.html#frompairs
 [identity]: ../functions/combinators.html#identity
 [either]: ../crocks/Either.html

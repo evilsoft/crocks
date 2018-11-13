@@ -2,7 +2,7 @@
 title: "Helpers"
 description: "Helper functions"
 layout: "notopic"
-functions: ["assign", "assoc", "binary", "compose", "composek", "composep", "composes", "curry", "defaultprops", "defaultto", "dissoc", "fanout", "frompairs", "lifta2", "lifta3", "liftn", "mapprops", "mapreduce", "mconcat", "mconcatmap", "mreduce", "mreducemap", "nary", "objof", "omit", "once", "partial", "pick", "pipe", "pipek", "pipep", "pipes", "propor", "proppathor", "setpath", "tap", "unary", "unit", "unsetpath"]
+functions: ["assign", "assoc", "binary", "compose", "composek", "composep", "composes", "curry", "defaultprops", "defaultto", "dissoc", "frompairs", "lifta2", "lifta3", "liftn", "mapprops", "mapreduce", "mconcat", "mconcatmap", "mreduce", "mreducemap", "nary", "objof", "omit", "once", "partial", "pick", "pipe", "pipek", "pipep", "pipes", "propor", "proppathor", "setpath", "setprop", "tap", "unary", "unit", "unsetpath"]
 weight: 20
 ---
 
@@ -23,22 +23,6 @@ will omit any key-value pairs that are `undefined`. Check out a related function
 named [`defaultProps`](#defaultprops) that will only assign values that are
 `undefined` in the second argument.
 
-#### assoc
-
-`crocks/helpers/assoc`
-
-```haskell
-assoc :: String -> a -> Object -> Object
-```
-There may come a time when you want to add a key-value pair to an `Object` and
-want control over how the key and value are applied. That is where `assoc` can
-come to your aid. Just provide a `String` key and a value of any type to be
-associated to the key. Finally pass it any `Object` and you will get back a
-shallow copy with your key-value pair merged in. This will overwrite any exiting
-keys with new value specified. Used with [`flip`](combinators.html#flip),
-you can do some interesting things with this function, give it a play! If you
-just want to create an `Object` and not concatenate it to another `Object`,
-[`objOf`](#objof) may be the function for you.
 
 #### binary
 
@@ -290,26 +274,6 @@ given `Object`, `dissoc` does the opposite. Just pass `dissoc` a `String` key
 and the `Object` you wish to dissociate that key from and you will get back a
 new, shallow copy of the `Object` sans your key. As with all the `Object`
 functions, `dissoc` will remove any `undefined` values from the result.
-
-#### fanout
-
-`crocks/helpers/fanout`
-
-```haskell
-fanout :: (a -> b) -> (a -> c) -> (a -> Pair b c)
-fanout :: Arrow a b -> Arrow a c -> Arrow a (Pair b c)
-fanout :: Monad m => Star a (m b) -> Star a (m c) -> Star a (m (Pair b c))
-```
-
-There are may times that you need to keep some running or persistent state while
-performing a given computation. A common way to do this is to take the input to
-the computation and branch it into a `Pair` and perform different operations on
-each version of the input. This is such a common pattern that it warrants the
-`fanout` function to take care of the initial split and mapping. Just provide a
-pair of either simple functions or a pair of one of the computation types
-(`Arrow` or `Star`). You will get back something of the same type that is
-configured to split it's input into a pair and than apply the first Function/ADT
-to the first portion of the underlying `Pair` and the second on the second.
 
 #### fromPairs
 
@@ -977,6 +941,46 @@ setPath([ 'a', 'c' ], false, { a: { b: true } })
 
 setPath([ 'list', 'a' ], 'ohhh, I see.', { list: [ 'string', 'another' ] })
 //=> { list: { 0: 'string', 1: 'another', a: 'ohhh, I see.' } }
+```
+
+#### setProp
+
+`crocks/helpers/setProp`
+
+```haskell
+setProp :: String -> a -> Object -> Object
+```
+
+Used to set a given value for a specific key or index of
+an `Object` or `Array`. `setProp` takes either a `String` or `Integer` value
+as its first argument and a value of any type as its second. The third parameter
+is dependent of the type of the first argument. When a `String` is provided, the
+third argument must be an `Object`. Otherwise if the first argument is
+an `Integer`, then the third must be an `Array`.
+
+`setProp` will return a new instance of either `Object` or `Array` with the
+addition applied. When the value exists on the provided object, then the value
+will overwritten. If the value does not exist then it will be added to the
+resulting structure. In the case of `Array`, the value will be added to the
+provided index, leaving `undefined` values, resulting in a sparse `Array`.
+
+```javascript
+import setProp from 'crocks/helpers/setProp'
+
+setProp('a', false, { a: true })
+//=> { a: false }
+
+setProp('b', 43, { a: true })
+//=> { a: true, b: 43 }
+
+setProp(0, 'string', [ 'a' ])
+//=> [ "string" ]
+
+setProp(1, 'b', [ 'a' ])
+//=> [ "a", "b" ]
+
+setProp(2, 'c', [ 'a' ])
+//=> [ "a", undefined, "c" ]
 ```
 
 #### tap

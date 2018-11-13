@@ -31,7 +31,7 @@ test('filter pointfree', t => {
   t.throws(m([], f), noFunc, 'throws if first arg is an array')
   t.throws(m({}, f), noFunc, 'throws if first arg is an object')
 
-  const noData = /filter: Foldable or Object required for second argument/
+  const noData = /filter: Filterable or Object required for second argument/
   t.throws(m(unit, undefined), noData, 'throws if second arg is undefined')
   t.throws(m(unit, null), noData, 'throws if second arg is null')
   t.throws(m(unit, 0), noData, 'throws if second arg is a falsey number')
@@ -41,23 +41,23 @@ test('filter pointfree', t => {
   t.throws(m(unit, false), noData, 'throws if second arg is false')
   t.throws(m(unit, true), noData, 'throws if second arg is true')
 
-  t.doesNotThrow(m(unit, f), 'allows a function and Foldable container')
-  t.doesNotThrow(m(unit, []), 'allows a function and an array (also Foldable)')
+  t.doesNotThrow(m(unit, f), 'allows a function and Filterable container')
+  t.doesNotThrow(m(unit, []), 'allows a function and an array (also Filterable)')
   t.doesNotThrow(m(unit, {}), 'allows a function and an object')
 
-  t.doesNotThrow(m(Pred(unit), f), 'allows a Pred and Foldable container')
-  t.doesNotThrow(m(Pred(unit), []), 'allows a Pred and an array (also Foldable)')
+  t.doesNotThrow(m(Pred(unit), f), 'allows a Pred and Filterable container')
+  t.doesNotThrow(m(Pred(unit), []), 'allows a Pred and an array (also Filterable)')
   t.doesNotThrow(m(Pred(unit), {}), 'allows a Pred and an object')
 
   t.end()
 })
 
-test('filter Foldable', t => {
+test('filter Filterable', t => {
   const m = { filter: constant('called') }
 
   const result = filter(identity, m)
 
-  t.equals(result, 'called', 'calls filter on Foldable, passing the function')
+  t.equals(result, 'called', 'calls filter on Filterable, passing the function')
 
   t.end()
 })

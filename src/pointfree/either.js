@@ -13,7 +13,7 @@ function either(lf, rf, m) {
 
   if(!(m && isFunction(m.either))) {
     throw new TypeError(
-      'either: Last argument must be an Either or Maybe'
+      'either: Last argument must be a Sum Type'
     )
   }
 

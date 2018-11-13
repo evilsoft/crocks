@@ -69,6 +69,7 @@ test('List fantasy-land api', t => {
   t.ok(isFunction(m[fl.map]), 'provides map method on instance')
   t.ok(isFunction(m[fl.chain]), 'provides chain method on instance')
   t.ok(isFunction(m[fl.reduce]), 'provides reduce method on instance')
+  t.ok(isFunction(m[fl.filter]), 'provides filter method on instance')
 
   t.end()
 })
@@ -136,7 +137,7 @@ test('List @@type', t => {
   const m = List([])
 
   t.equal(m['@@type'], List['@@type'], 'static and instance versions are the same')
-  t.equal(m['@@type'], 'crocks/List@3', 'returns crocks/List@3')
+  t.equal(m['@@type'], 'crocks/List@4', 'returns crocks/List@4')
 
   t.end()
 })
@@ -481,6 +482,25 @@ test('List foldMap functionality', t => {
   t.end()
 })
 
+test('List filter fantasy-land errors', t => {
+  const filter = bindFunc(List([ 0 ])[fl.filter])
+
+  const err = /List.fantasy-land\/filter: Pred or predicate function required/
+
+  t.throws(filter(undefined), err, 'throws with undefined')
+  t.throws(filter(null), err, 'throws with null')
+  t.throws(filter(0), err, 'throws with falsey number')
+  t.throws(filter(1), err, 'throws with truthy number')
+  t.throws(filter(''), err, 'throws with falsey string')
+  t.throws(filter('string'), err, 'throws with truthy string')
+  t.throws(filter(false), err, 'throws with false')
+  t.throws(filter(true), err, 'throws with true')
+  t.throws(filter([]), err, 'throws with an array')
+  t.throws(filter({}), err, 'throws with an object')
+
+  t.end()
+})
+
 test('List filter errors', t => {
   const filter = bindFunc(List([ 0 ]).filter)
 
@@ -513,6 +533,23 @@ test('List filter functionality', t => {
 
   t.same(m.filter(bigNumPred).valueOf(), [ 34 ], 'filters for bigNums with Pred')
   t.same(m.filter(justStringsPred).valueOf(), [ 'string' ], 'filters for strings with Pred')
+
+  t.end()
+})
+
+test('List filter properties (Filterable)', t => {
+  const m = List([ 2, 6, 10, 25, 9, 28 ])
+  const n = List([ 'string', 'party' ])
+
+  const isEven = x => x % 2 === 0
+  const isBig = x => x >= 10
+
+  const left = m.filter(x => isBig(x) && isEven(x)).valueOf()
+  const right = m.filter(isBig).filter(isEven).valueOf()
+
+  t.same(left, right , 'distributivity')
+  t.same(m.filter(() => true).valueOf(), m.valueOf(), 'identity')
+  t.same(m.filter(() => false).valueOf(), n.filter(() => false).valueOf(), 'annihilation')
 
   t.end()
 })

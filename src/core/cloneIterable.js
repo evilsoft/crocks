@@ -1,17 +1,10 @@
 /** @license ISC License (c) copyright 2018 original and current authors */
 /** @author Henrique Limas (HenriqueLimas) */
 
-const isArray = require('../core/isArray')
-const isIterable = require('../core/isIterable')
-const isObject = require('../core/isObject')
-
-const err = 'cloneIterable: Iterable required'
+const isArray = require('./isArray')
+const isObject = require('./isObject')
 
 function cloneIterable(source) {
-  if (!isIterable(source)) {
-    throw new TypeError(err)
-  }
-
   if (isArray(source)) {
     return [].concat(source)
   }

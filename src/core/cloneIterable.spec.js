@@ -1,29 +1,6 @@
 const test = require('tape')
-const helpers = require('../test/helpers')
-const isFunction  = require('../core/isFunction')
-
-const bindFunc = helpers.bindFunc
 
 const cloneIterable = require('./cloneIterable')
-
-test('cloneIterable parameters', t => {
-  const c = bindFunc(cloneIterable)
-
-  t.ok(isFunction(cloneIterable), 'cloneIterable is a function')
-
-  const err = /cloneIterable: Iterable required/
-  t.throws(cloneIterable, err, 'throws Error when nothing passed')
-
-  t.throws(c(undefined), err, 'throws when undefined passed')
-  t.throws(c(null), err, 'throws when null passed')
-  t.throws(c(0), err, 'throws when falsy number passed')
-  t.throws(c(1), err, 'throws when truthy number passed')
-  t.throws(c(false), err, 'throws when false passed')
-  t.throws(c(true), err, 'throws when true passed')
-  t.throws(c({}), err, 'throws when not Iterable object is passed')
-
-  t.end()
-})
 
 test('cloneIterable arrays', t => {
   const empty = []

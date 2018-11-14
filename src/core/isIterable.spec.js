@@ -1,28 +1,11 @@
 const test = require('tape')
-
+const { testIterable } = require('../test/helpers')
 const isFunction = require('./isFunction')
 
 const identity = x => x
+const iterable = testIterable(1, 5, 1)
 
 const isIterable = require('./isIterable')
-
-const testIterable = {
-  from: 1,
-  to: 5,
-
-  [Symbol.iterator]() {
-    this.current = this.from
-    return this
-  },
-
-  next() {
-    if (this.current <= this.to) {
-      return { done: false, value: this.current++ }
-    }
-
-    return { done: true }
-  }
-}
 
 test('isIterable core', t => {
   t.ok(isFunction(isIterable))
@@ -39,7 +22,7 @@ test('isIterable core', t => {
   t.equal(isIterable([]), true, 'returns true for an array')
   t.equal(isIterable('string'), true, 'returns true for truthy string')
   t.equal(isIterable(''), true, 'returns true for falsey string')
-  t.equal(isIterable(testIterable), true, 'returns true for fake iterable')
+  t.equal(isIterable(iterable), true, 'returns true for fake iterable')
 
   t.end()
 })

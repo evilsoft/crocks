@@ -52,7 +52,30 @@ function makeFake(algs, useFl) {
   }, Fake)
 }
 
+const testIterable = (from = 1, to = 5, current = 1) => {
+  const iterable = {
+    from,
+    to,
+    current,
+    [Symbol.iterator]: () => {
+      iterable.current = current
+
+      return iterable
+    },
+    next: () => {
+      if (iterable.current <= iterable.to) {
+        return { done: false, value: iterable.current++ }
+      }
+
+      return { done: true }
+    }
+  }
+
+  return iterable
+}
+
 module.exports = {
   bindFunc,
-  makeFake
+  makeFake,
+  testIterable
 }

@@ -23,6 +23,7 @@ test('cloneIterable shapes', t => {
 
   t.deepEqual(cloneIterable(first), first, 'maintains same structure')
   t.notEqual(cloneIterable(first), first, 'returns a clone with the same structure')
+
   t.end()
 })
 
@@ -47,5 +48,16 @@ test('cloneIterable symbols', t => {
   }
 
   t.deepEqual(cloneIterable(first), first, 'clone symbols properties')
+  t.end()
+})
+
+test('cloneIterable Array', t => {
+  const testArray = [ 1, 2, 3 ]
+  const cloned = cloneIterable(testArray)
+  const iterator = cloned[Symbol.iterator]()
+
+  t.deepEqual(cloned, testArray)
+  t.equal(iterator.next().value, 1)
+
   t.end()
 })

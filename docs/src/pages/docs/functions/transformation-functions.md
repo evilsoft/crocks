@@ -165,6 +165,7 @@ bad
 | [`resultToFirst`][result-first] | `Result e a -> First a` | `(a -> Result e b) -> a -> First b` | `crocks/First` |
 | [`resultToLast`][result-last] | `Result e a -> Last a` | `(a -> Result e b) -> a -> Last b` | `crocks/Last` |
 | [`resultToMaybe`][result-maybe] | `Result e a -> Maybe a` | `(a -> Result e b) -> a -> Maybe b` | `crocks/Maybe` |
+| [`tupleToArray`][tuple-array] | `Tuple a -> [ a ]` | `(a -> Tuple b) -> a -> [ b ]` | `crocks/Tuple` |
 | `writerToPair` | `Writer m a -> Pair m a` | `(a -> Writer m b) -> a -> Pair m b` | `crocks/Pair` |
 
 [async-promise]: ../crocks/Async.html#asynctopromise
@@ -194,6 +195,8 @@ bad
 [first-last]: ../monoids/Last.html#firsttolast
 [maybe-last]: ../monoids/Last.html#maybetolast
 [result-last]: ../monoids/Last.html#resulttolast
+
+[tuple-array]: ../crocks/Tuple.html#tupletoarray
 
 [maybe]: ../crocks/Maybe.html
 [nothing]: ../crocks/Maybe.html#nothing

@@ -153,10 +153,14 @@ function _Tuple(n) {
       return parts.slice()
     }
 
+    function tupleLength() {
+      return n
+    }
+
     return {
       inspect, toString: inspect, merge,
       project, mapAll, toArray,
-      type, equals,
+      tupleLength, type, equals,
       map: map('map'),
       concat: concat('concat'),
       [fl.map]: map(fl.map),

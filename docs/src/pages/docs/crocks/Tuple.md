@@ -499,15 +499,15 @@ be returned that takes a given value and returns an `Array`.
 
 ```javascript
 import Tuple from 'crocks/Tuple'
-
 import tupleToArray from 'crocks/Tuple/tupleToArray'
+import constant from 'crocks/combinators/constant'
 
 const Triple = Tuple(3)
 
 const triple = Triple( 1, { key: 'value' }, 'string' )
 
-tupleToArray(triple) // => [ 1, { key: 'value' }, 'string' ]
+tupleToArray(triple)              // => [ 1, { key: 'value' }, 'string' ]
 
-tupleToArray(() => triple)() // => [ 1, { key: 'value' }, 'string' ]
+tupleToArray(constant(triple))()  // => [ 1, { key: 'value' }, 'string' ]
 ```
 </article>

@@ -22,7 +22,7 @@ function _Tuple(n) {
     throw new TypeError('Tuple: First argument must be an integer')
   }
 
-  const tupleLength = () => n
+  const tupleLength = constant(n)
 
   const type =
     constant(_type(n))

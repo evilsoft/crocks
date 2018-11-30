@@ -2,7 +2,7 @@
 title: "Tuple"
 description: "Tuple Crock"
 layout: "guide"
-functions: ["nmap"]
+functions: ["nmap", "tupletoarray"]
 weight: 150
 ---
 

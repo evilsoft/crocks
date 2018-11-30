@@ -2,7 +2,7 @@
 title: "Transformation Functions"
 description: "Transformation Functions API"
 layout: "notopic"
-functions: ["arraytolist", "asyncToPromise", "eithertoasync", "eithertofirst", "eithertolast", "eithertomaybe", "eithertoresult", "firsttoasync", "firsttoeither", "firsttolast", "firsttomaybe", "firsttoresult", "lasttoasync", "lasttoeither", "lasttofirst", "lasttomaybe", "lasttoresult", "listtoarray", "maybetoasync", "maybetoeither", "maybetofirst","maybetolast", "maybetoresult", "resulttoasync", "resulttoeither", "resulttofirst", "resulttolast", "resulttomaybe", "writertopair"]
+functions: ["arraytolist", "asyncToPromise", "eithertoasync", "eithertofirst", "eithertolast", "eithertomaybe", "eithertoresult", "firsttoasync", "firsttoeither", "firsttolast", "firsttomaybe", "firsttoresult", "lasttoasync", "lasttoeither", "lasttofirst", "lasttomaybe", "lasttoresult", "listtoarray", "maybetoasync", "maybetoeither", "maybetofirst","maybetolast", "maybetoresult", "resulttoasync", "resulttoeither", "resulttofirst", "resulttolast", "resulttomaybe", "tupletoarray", "writertopair"]
 weight: 60
 ---
 

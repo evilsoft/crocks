@@ -217,6 +217,7 @@ const resultToEither = require('./Either/resultToEither')
 const resultToFirst = require('./First/resultToFirst')
 const resultToLast = require('./Last/resultToLast')
 const resultToMaybe = require('./Maybe/resultToMaybe')
+const tupleToArray = require('./Tuple/tupleToArray')
 const writerToPair = require('./Pair/writerToPair')
 
 test('entry', t => {
@@ -438,6 +439,7 @@ test('entry', t => {
   t.equal(crocks.resultToFirst, resultToFirst, 'provides the resultToFirst transform')
   t.equal(crocks.resultToLast, resultToLast, 'provides the resultToLast transform')
   t.equal(crocks.resultToMaybe, resultToMaybe, 'provides the resultToMaybe transform')
+  t.equal(crocks.tupleToArray, tupleToArray, 'provides the tupleToArray transform')
   t.equal(crocks.writerToPair, writerToPair, 'provides the writerToPair transform')
 
   t.end()

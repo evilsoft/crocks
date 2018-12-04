@@ -98,6 +98,7 @@ const transforms = {
   resultToFirst: require('./First/resultToFirst'),
   resultToLast: require('./Last/resultToLast'),
   resultToMaybe: require('./Maybe/resultToMaybe'),
+  tupleToArray: require('./Tuple/tupleToArray'),
   writerToPair: require('./Pair/writerToPair')
 }
 

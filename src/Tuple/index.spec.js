@@ -406,6 +406,24 @@ test('Tuple equals properties (Setoid)', t => {
   t.end()
 })
 
+test('Tuple length functionality', t => {
+  const a = Tuple(2)({ deep: 'equals' }, [ 1 ])
+  const b = Tuple(3)({ deep: 'equals' }, [ 1 ], 8)
+  const c = Tuple(4)(1, 'space kitten', 'rainbow', 'unicorn')
+  const d = Tuple(2)
+  const e = Tuple(3)
+  const f = Tuple(4)
+
+  t.equal(a.tupleLength(), 2, 'returns tuple length when length is 2')
+  t.equal(b.tupleLength(), 3, 'returns tuple length when length is 3')
+  t.equal(c.tupleLength(), 4, 'returns tuple length when length is 4')
+  t.equal(d.tupleLength(), 2, 'returns tuple length when length is 2 and Tuple contains no data')
+  t.equal(e.tupleLength(), 3, 'returns tuple length when length is 3 and Tuple contains no data')
+  t.equal(f.tupleLength(), 4, 'returns tuple length when length is 4 and Tuple contains no data')
+
+  t.end()
+})
+
 test('Tuple merge', t => {
   const m = Tuple(3)(1, 2, 3)
   t.ok(isFunction(m.merge), 'provides a merge function')

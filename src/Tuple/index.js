@@ -22,6 +22,8 @@ function _Tuple(n) {
     throw new TypeError('Tuple: First argument must be an integer')
   }
 
+  const tupleLength = constant(n)
+
   const type =
     constant(_type(n))
 
@@ -30,6 +32,7 @@ function _Tuple(n) {
 
   const withProps = fn => {
     fn.type = type
+    fn.tupleLength = tupleLength
     fn['@@type'] = typeString
     fn['@@implements'] = _implements([ 'map', 'concat', 'equals' ])
     return fn
@@ -156,7 +159,7 @@ function _Tuple(n) {
     return {
       inspect, toString: inspect, merge,
       project, mapAll, toArray,
-      type, equals,
+      tupleLength, type, equals,
       map: map('map'),
       concat: concat('concat'),
       [fl.map]: map(fl.map),

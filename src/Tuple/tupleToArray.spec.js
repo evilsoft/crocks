@@ -5,7 +5,7 @@ const bindFunc = helpers.bindFunc
 
 const Tuple = require('.')
 
-const List = require('../core/List')
+const List = require('../List')
 const isArray = require('../core/isArray')
 const isFunction = require('../core/isFunction')
 

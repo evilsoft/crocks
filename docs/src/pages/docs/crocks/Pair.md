@@ -858,12 +858,12 @@ getPersons(people)
 `crocks/Pair/toPairs`
 
 ```haskell
-toPairs :: Object -> List (Pair String a)
+toPairs :: Object -> [ (Pair String a) ]
 ```
 
 When dealing with `Object`s, sometimes it makes more sense to work in a
-`Foldable` structure like a `List` of key-value `Pair`s. `toPairs` provides a
-means to take an object and give you back a `List` of `Pairs` that have a
+`Foldable` structure like an array of key-value `Pair`s. `toPairs` provides a
+means to take an object and give you back an array of `Pairs` that have a
 `String` that represents the key in the `fst` and the value for that key in the
 `snd`. The primitive values are copied, while non-primitive values are
 references. Like most of the `Object` functions in `crocks`, any keys with
@@ -887,14 +887,12 @@ const record = {
 const joinField = (key, value) =>
   `${key}:${value}`
 
-// joinRecord :: List String -> String
-const joinRecord = list =>
-  list.toArray()
-    .join('|')
+// joinRecord :: String -> [String] -> String
+const join = separator => array => array.join(separator)
 
 // buildRecord :: Object -> String
 const buildRecord = compose(
-  joinRecord,
+  join('|'),
   map(merge(joinField)),
   toPairs
 )

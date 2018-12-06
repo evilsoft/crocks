@@ -4,7 +4,7 @@ const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
 
-const List = require('../core/List')
+const List = require('../List')
 const curry = require('../core/curry')
 const compose = curry(require('../core/compose'))
 const isFunction = require('../core/isFunction')

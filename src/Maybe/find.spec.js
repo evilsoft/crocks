@@ -7,7 +7,7 @@ const Pred = require('../Pred')
 const find = require('./find')
 const Maybe = require('../core/Maybe')
 const helpers = require('../test/helpers')
-const List = require('../core/List')
+const List = require('../List')
 const isNumber = require('../core/isNumber')
 
 const { fromArray } = List

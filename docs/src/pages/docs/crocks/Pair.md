@@ -858,7 +858,7 @@ getPersons(people)
 `crocks/Pair/toPairs`
 
 ```haskell
-toPairs :: Object -> [ (Pair String a) ]
+toPairs :: (Object | Array) -> [ (Pair String a) ]
 ```
 
 When dealing with `Object`s, sometimes it makes more sense to work in a

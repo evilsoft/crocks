@@ -7,10 +7,7 @@ const Pred = require('../Pred')
 const find = require('./find')
 const Maybe = require('../core/Maybe')
 const helpers = require('../test/helpers')
-const List = require('../core/List')
 const isNumber = require('../core/isNumber')
-
-const { fromArray } = List
 
 const bindFunc = helpers.bindFunc
 
@@ -67,13 +64,11 @@ test('find works with predicates', t => {
 
   t.equal(find(largeNumber, [ 10, '12', 150, 200, 2000 ]).option(0), 150, 'works with predicates')
   t.ok(isSameType(Maybe, isTrue([])), 'returns a Maybe for array value')
-  t.ok(isSameType(Maybe, isTrue(fromArray([]))), 'returns a Maybe for List value')
   t.equal(gt3([ 1, 2, 3, 4, 5, 6 ]).option('Nothing'), 4, 'returns the correct value')
   t.equal(gt3([ 0, null, undefined, 4, 5, 6 ]).option('Nothing'), 4, 'handles bad values in foldable')
   t.equal(gt3([ 1, 2, 3 ]).option('Nothing'), 'Nothing', 'returns nothing when value is not found')
   t.equal(isTrue([]).option('Nothing'), 'Nothing', 'returns a Nothing when there are no items ([])')
   t.equal(isTrue(new Array()).option('Nothing'), 'Nothing', 'returns a Nothing when there are no items (Array)')
-  t.equal(isTrue(fromArray([])).option('Nothing'), 'Nothing', 'returns a Nothing when there are no items (List)')
 
   t.end()
 })
@@ -88,7 +83,6 @@ test('find works as expected', t => {
   t.ok(isFunction(find), 'is a function')
 
   t.ok(isSameType(Maybe, isTrue([])), 'returns a Maybe for array value')
-  t.ok(isSameType(Maybe, isTrue(fromArray([]))), 'returns a Maybe for List value')
 
   t.equal(gt3([ 1, 2, 3, 4, 5, 6 ]).option('Nothing'), 4, 'returns the correct value')
 
@@ -96,7 +90,6 @@ test('find works as expected', t => {
   t.equal(gt3([ 1, 2, 3 ]).option('Nothing'), 'Nothing', 'returns nothing when value is not found')
   t.equal(isTrue([]).option('Nothing'), 'Nothing', 'returns a Nothing when there are no items ([])')
   t.equal(isTrue(new Array()).option('Nothing'), 'Nothing', 'returns a Nothing when there are no items (Array)')
-  t.equal(isTrue(fromArray([])).option('Nothing'), 'Nothing', 'returns a Nothing when there are no items (List)')
 
   t.end()
 })

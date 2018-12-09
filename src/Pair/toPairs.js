@@ -3,11 +3,12 @@
 
 const Pair = require('../core/Pair')
 const isObject = require('../core/isObject')
+const isArray = require('../core/isArray')
 
 // toPairs : Object -> List (Pair String a)
 function toPairs(obj) {
-  if(!isObject(obj)) {
-    throw new TypeError('toPairs: Object required for argument')
+  if(!isObject(obj) && !isArray(obj)) {
+    throw new TypeError('toPairs: Object or Array required for argument')
   }
 
   return Object.keys(obj).reduce(

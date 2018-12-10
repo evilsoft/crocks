@@ -28,6 +28,58 @@ a `logical and`. This is super helpful when combined with `or` for putting
 together reusable, complex predicates. As they follow the general form
 of `(a -> Boolean)` they are easily combined with other logic functions.
 
+```javascript
+import and from 'crocks/logic/and'
+
+import equals from 'crocks/core/equals'
+import constant from 'crocks/combinators/constant'
+import propOr from 'crocks/helpers/propOr'
+import isNumber from 'crocks/predicates/isNumber'
+import isEmpty from 'crocks/predicates/isEmpty'
+import isArray from 'crocks/predicates/isArray'
+import isNil from 'crocks/predicates/isNil'
+import not from 'crocks/logic/not'
+
+// gte :: Number -> Number -> Boolean
+const gte = 
+    x => y => y >= x
+
+// isLegalDrinkingAge :: Number -> Boolean
+const isLegalDrinkingAge =
+    and(isNumber, gte(21))
+
+// isValid :: a -> Boolean
+const isValid =
+  and(isArray, not(isEmpty))
+
+isLegalDrinkingAge(18)
+//=> false
+
+isLegalDrinkingAge(21)
+//=> true
+
+isValid([42])
+//=> true
+
+isValid(null)
+//=> false
+
+isValid([])
+//=> false
+
+and(constant(true), constant(true), 'ignored')
+//=> true
+
+and(constant(true), constant(false), 'ignored')
+//=> false
+
+and(constant(false), constant(true), 'ignored')
+//=> false
+
+and(constant(false), constant(false), 'ignored')
+//=> false
+```
+
 #### ifElse
 
 ```haskell

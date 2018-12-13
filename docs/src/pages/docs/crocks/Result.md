@@ -246,6 +246,15 @@ a `Result` or the underlying values are not equal, `equals` will return `false`.
 ```javascript
 ```
 
+#### bimap
+
+```haskell
+Semigroup s => Result e s ~> Result e s -> Result e s
+```
+
+```javascript
+```
+
 #### concat
 
 ```haskell
@@ -265,12 +274,12 @@ will return an [`Err`](#err) and attempt to concat the errors.
 #### map
 
 ```haskell
-Maybe a ~> (a -> b) -> Maybe b
+Result e a ~> (a -> b) -> Result e b
 ```
 
 Used to apply transformations to values in the safety of a `Result`, `map` takes
 a function that it will lift into the context of the `Result` and apply to it
-the wrapped value. When ran on a [`Ok`](#ok) instance, `map` will apply the wrapped
+the wrapped value. When ran on an [`Ok`](#ok) instance, `map` will apply the wrapped
 value to the provided function and return the result in a new [`Ok`](#ok) instance.
 
 ```javascript
@@ -279,7 +288,7 @@ value to the provided function and return the result in a new [`Ok`](#ok) instan
 #### alt
 
 ```haskell
-Maybe a ~> Maybe a -> Maybe a
+Result e a ~> Result e a -> Result e a
 ```
 
 Providing a means for a fallback or alternative value, `alt` combines two
@@ -294,7 +303,7 @@ structure.
 #### ap
 
 ```haskell
-Maybe (a -> b) ~> Maybe a -> Maybe b
+Result e (a -> b) ~> Result e a -> Result e b
 ```
 
 Short for apply, `ap` is used to apply a `Result` instance containing a value
@@ -313,8 +322,8 @@ the function and not provide exceptions or unexpected results.
 #### sequence
 
 ```haskell
-Apply f => Maybe (f a) ~> (b -> f b) -> f (Maybe a)
-Applicative f => Maybe (f a) ~> TypeRep f -> f (Maybe a)
+Apply f => Result e (f a) ~> (b -> f b) -> f (Result e a)
+Applicative f => Result e (f a) ~> TypeRep f -> f (Result e a)
 ```
 
 When an instance of `Result` wraps an `Apply` instance, `sequence` can be used to
@@ -331,8 +340,8 @@ the case that the `Result` instance is a [`Err`](#err).
 #### traverse
 
 ```haskell
-Apply f => Maybe a ~> (c -> f c), (a -> f b)) -> f Maybe b
-Applicative f => Maybe a ~> (TypeRep f, (a -> f b)) -> f Maybe b
+Apply f => Result e a ~> (c -> f c), (a -> f b)) -> f Result e b
+Applicative f => Result e a ~> (TypeRep f, (a -> f b)) -> f Result e b
 ```
 
 Used to apply the "effect" of an `Apply` to a value inside of a `Result`,
@@ -352,7 +361,7 @@ an instance of the target `Apply`.
 #### chain
 
 ```haskell
-Maybe a ~> (a -> Maybe b) -> Maybe b
+Result e a ~> (a -> Result e b) -> Result e b
 ```
 
 Combining a sequential series of transformations that capture disjunction can be
@@ -368,7 +377,7 @@ new instance.
 #### coalesce
 
 ```haskell
-Maybe a ~> ((() -> b), (a -> b))) -> Maybe b
+Result e a ~> ((e -> b), (a -> b))) -> Result c b
 ```
 
 When one would like to [`option`](#option) a `Result` but would like to remain
@@ -383,21 +392,11 @@ returning a new [`Ok`](#ok) instance wrapping the result of the second function.
 ```javascript
 ```
 
-#### option
+#### swap
 
 ```haskell
-Maybe a ~> a -> a
+Result e a ~> ((e -> a), (a -> e)) -> Result e a
 ```
-
-Used as the primary way to "fold" a value out of a `Result`, `option` expects a
-default value. The default value provided will be returned when `option` is
-invoked on a [`Err`](#err) instance. When invoked on a [`Ok`](#ok), the underlying value
-is returned, discarding the provided default value. `option` is typically ran
-at the "edge" of a flow, to provide default values for complicated
-representations of disjunction.
-
-When the need to immediately map the result of optioning a `Result` arises,
-then [`either`](#either) may be employed to combine it in one operation.
 
 ```javascript
 ```
@@ -405,14 +404,12 @@ then [`either`](#either) may be employed to combine it in one operation.
 #### either
 
 ```haskell
-Maybe a ~> ((() -> b), (a -> b)) -> b
+Result e a ~> ((e -> b), (a -> b)) -> b
 ```
 
 Used to provide a means to map a given `Result` instance while optioning out the
-wrapped value. [`option`](#option) can handle most cases for optioning `Result`,
-but does not provide a means to map a given value at the time of
-optioning. `either` expects two functions as its arguments. The first is a
-pointed function that will be used when invoked on a [`Err`](#err). While the second
+wrapped value. `either` expects two functions as its arguments. The first is a
+function that will be used to map an [`Err`](#err). While the second
 will map the value wrapped in a given [`Ok`](#ok) and return the result of that
 mapping.
 

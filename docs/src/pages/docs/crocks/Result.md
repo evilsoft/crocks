@@ -215,14 +215,34 @@ safeShout('Hey there!')
 Result.of :: a -> Result e a
 ```
 
-Used to wrap any value into a `Result` as a [`Ok`](#ok), `of` is used mostly by
-helper functions that work "generically" with instances of
-either `Applicative` or `Monad`. When working specifically with
-the `Result` type, the [`Ok`](#ok) constructor should be used. Reach
-for `of` when working with functions that will work with
-ANY `Applicative`/`Monad`.
+Used to wrap any value into a `Result` as an [`Ok`](#ok), `of` is used mostly 
+by helper functions that work "generically" with instances of either 
+`Applicative` or `Monad`. When working specifically with the `Result` type, the
+[`Ok`](#ok) constructor should be used. Reach for `of` when working with 
+functions that will work with ANY `Applicative`/`Monad`.
 
 ```javascript
+import Result from 'crocks/Result'
+
+const { Ok, of } = Result
+
+of('Some result!')
+//=> Ok "Some result!"
+
+of(undefined)
+//=> Ok undefined
+
+Ok('Some result!')
+//=> Ok "Some result!"
+
+Ok(undefined)
+//=> Ok undefined
+
+Result('Some result!')
+//=> Ok "Some result!"
+
+Result(undefined)
+//=> Ok undefined
 ```
 
 </article>
@@ -238,21 +258,39 @@ Result e a ~> b -> Boolean
 ```
 
 Used to compare the underlying values of two `Result` instances for equality by
-value, `equals` takes any given argument and returns `true` if the passed
-arguments is a `Result` with an underlying value equal to the underlying value
-of the `Result` the method is being called on. If the passed argument is not
-a `Result` or the underlying values are not equal, `equals` will return `false`.
+value. `equals` takes any given argument and returns `true` if the passed 
+arguments is a `Result` ([`Ok`](#ok) or [`Err`](#err)) with an underlying value
+equal to the underlying value of the `Result` the method is being called on. If
+the passed argument is not a `Result` or the underlying values are not equal, 
+`equals` will return `false`.
 
 ```javascript
-```
+import Result from 'crocks/Result'
 
-#### bimap
+import equals from 'crocks/pointfree/equals'
 
-```haskell
-Semigroup s => Result e s ~> Result e s -> Result e s
-```
+const { Ok, Err } = Result
 
-```javascript
+Ok('result')
+  .equals(Ok('result'))
+//=> true
+
+Ok(null)
+  .equals(Ok(null))
+//=> true
+
+Ok('error')
+  .equals(Err('error'))
+//=> false
+
+// by value, not reference for most types
+Ok([ 1, { a: 2 }, 'string' ])
+  .equals(Ok([ 1, { a: 2 }, 'string' ]))
+//=> true
+
+equals(Ok('result'), 'result')
+//=> false
+
 ```
 
 #### concat
@@ -296,6 +334,26 @@ Providing a means for a fallback or alternative value, `alt` combines two
 if it does not have a [`Ok`](#ok). This can be used in conjunction with
 [`zero`](#zero) to return the first valid value in contained in a `Foldable`
 structure.
+
+```javascript
+```
+
+#### bimap
+
+```haskell
+Result e a ~> ((e -> d), (a -> b)) -> Result d b
+```
+
+While it's more common to only need to [`map`](#map) over a `Result` that's an
+[`Ok`](#ok) there comes a time when you need to map over a `Result` regardless
+of wether it's an [`Ok`](#ok) or an [`Err`](#err).
+
+`bimap` takes two mapping functions as its arguments. The first function is
+used to map a [`Err`](#err) instance, while the second maps a [`Ok`](#ok). 
+`Result` only provides a means to map an [`Ok`](#ok) instance exclusively using
+[`map`](#map). If the need arises to map a [`Err`](#err) instance exclusively,
+then `bimap` can be used, passing the mapping function to the first argument
+and an [`identity`][identity] to the second.
 
 ```javascript
 ```
@@ -429,7 +487,7 @@ mapping.
 `crocks/Result/tryCatch`
 
 ```haskell
-TryCatch :: (a -> b) -> a -> Result e a
+TryCatch :: (* -> a) -> * -> Result e a
 ```
 
 ```javascript

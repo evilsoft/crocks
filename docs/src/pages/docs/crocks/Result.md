@@ -304,9 +304,31 @@ can be used to concat another `Result` instance with an underlying `Semigroup`
 of the same type. Expecting a `Result` wrapping a `Semigroup` of the same type,
 `concat` will give back a new `Result` instance wrapping the result of combining
 the two underlying `Semigroup`s. When called on a [`Err`](#err) instance, `concat`
-will return an [`Err`](#err) and attempt to concat the errors.
+will return an [`Err`](#err) will return the first [`Err`](#err) in the chain.
 
 ```javascript
+import Result from 'crocks/Result'
+
+import concat from 'crocks/pointfree/concat'
+
+const { Ok, Err } = Result
+
+Ok([ 1, 2, 3 ])
+  .concat(Ok([ 4, 5, 6 ]))
+//=> [ 1, 2, 3, 4, 5, 6 ]
+
+Ok([ 1, 2, 3 ])
+  .concat(Err([ 4, 5, 6 ]))
+//=> Err [ 4, 5, 6 ]
+
+concat(Ok('Result'), Err('Error'))
+//=> Err "Error"
+
+concat(Err('Error'), Ok('Result'))
+//=> Err "Error"
+
+concat(Err('Error 1'), Err('Error 2'))
+//=> Err "Error 1"
 ```
 
 #### map
@@ -317,10 +339,62 @@ Result e a ~> (a -> b) -> Result e b
 
 Used to apply transformations to values in the safety of a `Result`, `map` takes
 a function that it will lift into the context of the `Result` and apply to it
-the wrapped value. When ran on an [`Ok`](#ok) instance, `map` will apply the wrapped
+the wrapped value. When run on an [`Ok`](#ok) instance, `map` will apply the wrapped
 value to the provided function and return the result in a new [`Ok`](#ok) instance.
+When run on an ['Err'](#err) instance `map` with return the error value in a new
+[`Err`](#err) instance.
 
 ```javascript
+import Result from 'crocks/Result'
+
+import map from 'crocks/pointfree/map'
+import merge from 'crocks/pointfree/merge'
+import assign from 'crocks/helpers/assign'
+import objOf from 'crocks/helpers/objOf'
+import fanout from 'crocks/Pair/fanout'
+import isNumber from 'crocks/predicates/isNumber'
+import ifElse from 'crocks/logic/ifElse'
+import compose from 'crocks/core/compose'
+
+const { Ok, Err } = Result
+
+// buildError :: String -> String
+const buildError = x => Err(`${x} is not a valid string`)
+
+const prod =
+  x => y => x * y
+
+const fromNumber =
+  ifElse(isNumber, Ok, buildError)
+
+const double =
+  compose(
+    map(prod(2)),
+    fromNumber
+  )
+
+double(21)
+//=> Ok 42
+
+double('number')
+//=> Err "number is not a valid string"
+
+const getParity = compose(
+  objOf('parity'),
+  n => n % 2 === 0 ? 'Even' : 'Odd'
+)
+
+const getInfo = compose(
+  map(merge(assign)),
+  map(fanout(objOf('value'), getParity)),
+  fromNumber
+)
+
+getInfo(5324)
+//=> Ok { parity: "Even", value: 5324 }
+
+getInfo('number')
+//=> Err "number is not a valid string"
 ```
 
 #### alt
@@ -331,11 +405,48 @@ Result e a ~> Result e a -> Result e a
 
 Providing a means for a fallback or alternative value, `alt` combines two
 `Result` instances and will return the first [`Ok`](#ok) it encounters or [`Err`](#err)
-if it does not have a [`Ok`](#ok). This can be used in conjunction with
-[`zero`](#zero) to return the first valid value in contained in a `Foldable`
-structure.
+if it does not have an [`Ok`](#ok).
 
 ```javascript
+import Result from 'crocks/result'
+
+import alt from 'crocks/pointfree/alt'
+import map from 'crocks/pointfree/map'
+import reduce from 'crocks/pointfree/reduce'
+import flip from 'crocks/combinators/flip'
+import ifElse from 'crocks/logic/ifElse'
+import compose from 'crocks/core/compose'
+import curry from 'crocks/core/curry'
+
+const { Ok, Err } = Result
+
+const check =
+  pred => ifElse(pred, Ok, Err)
+
+// gte :: Number -> Number -> Boolean
+const gte =
+  x => y => y >= x
+
+const find =
+  curry(pred => compose(reduce(flip(alt), Err('Not found')), map(check(pred))))
+
+Err('Error')
+  .alt(Ok('Result'))
+//=> Ok "Result"
+
+Ok('Result')
+  .alt(Err('Error'))
+//=> Ok "Result"
+
+Err('Error 1')
+  .alt(Err('Error 2'))
+//=> Ok "Error 1"
+
+find(gte(41), [ 17, 25, 38, 42 ])
+//=> Ok 42
+
+find(gte(11), [ 1, 2, 3, 4 ])
+//=> Err "Not found"
 ```
 
 #### bimap

@@ -96,6 +96,48 @@ corresponding function, returning the result as the final result. This function
 comes in really handy when creating lifting functions for Sum Types (like
 `Either` or [`Maybe`][maybe]).
 
+```javascript
+import ifElse from 'crocks/logic/ifElse'
+
+import Maybe from 'crocks/Maybe'
+import isNumber from 'crocks/predicates/isNumber'
+import chain from 'crocks/pointfree/chain'
+import compose from 'crocks/core'
+import identity from 'crocks/combinators'
+
+const { Just, Nothing } = Maybe
+
+// safe :: (a -> Boolean) -> a -> Maybe a
+const safe = 
+    pred => ifElse(pred, Just, Nothing)
+
+// gte :: Number -> Number -> Maybe Number
+const gte = 
+    x => safe(n => n >= x)
+
+// isLarge :: a -> Maybe a
+const isLarge = 
+    compose(chain(gte(42)), safe(isNumber))
+
+// ensureArray :: a -> Array
+const ensureArray =
+    ifElse(isArray, identity, _ => [])
+
+isLarge(10)
+//=> Just 10
+
+isLarge(44)
+//=> Nothing
+
+ensureArray('nope')
+    .map(x => x + x)
+//=> []
+
+ensureArray([3])
+    .map(x => x + x)
+//=> [6]
+```
+
 #### implies
 
 ```haskell

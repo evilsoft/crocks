@@ -359,7 +359,7 @@ import compose from 'crocks/core/compose'
 const { Ok, Err } = Result
 
 // buildError :: String -> String
-const buildError = x => Err(`${x} is not a valid string`)
+const buildError = x => Err(`${x} is not a valid number`)
 
 const prod =
   x => y => x * y
@@ -376,8 +376,8 @@ const double =
 double(21)
 //=> Ok 42
 
-double('number')
-//=> Err "number is not a valid string"
+double('down')
+//=> Err "down is not a valid number"
 
 const getParity = compose(
   objOf('parity'),
@@ -393,8 +393,8 @@ const getInfo = compose(
 getInfo(5324)
 //=> Ok { parity: "Even", value: 5324 }
 
-getInfo('number')
-//=> Err "number is not a valid string"
+getInfo('down')
+//=> Err "down is not a valid number"
 ```
 
 #### alt
@@ -455,7 +455,7 @@ find(gte(11), [ 1, 2, 3, 4 ])
 Result e a ~> ((e -> d), (a -> b)) -> Result d b
 ```
 
-While it's more common to only need to [`map`](#map) over a `Result` that's an
+While it's more common to [`map`](#map) over a `Result` that's an
 [`Ok`](#ok) there comes a time when you need to map over a `Result` regardless
 of wether it's an [`Ok`](#ok) or an [`Err`](#err).
 
@@ -467,6 +467,52 @@ then `bimap` can be used, passing the mapping function to the first argument
 and an [`identity`][identity] to the second.
 
 ```javascript
+import Result from 'crocks/Result'
+
+import map from 'crocks/pointfree/map'
+import ifElse from 'crocks/logic/ifElse'
+import setProp from 'crocks/helpers/setProp'
+import compose from 'crocks/core/compose'
+import objOf from 'crocks/helpers/objOf'
+import isNumber from 'crocks/predicates/isNumber'
+import bimap from 'crocks/pointfree/bimap'
+
+const { Ok, Err } = Result
+
+// buildError :: String -> String
+const buildError = x => Err(`${x} is not a valid number`)
+
+const prod =
+  x => y => x * y
+
+const fromNumber =
+  ifElse(isNumber, Ok, buildError)
+
+// hasError :: Boolean -> Object -> Object
+const hasError =
+  setProp('hasError')
+
+// buildResult :: (String, Boolean) -> a -> Object
+const buildResult = (key, isError) =>
+  compose(hasError(isError), objOf(key))
+
+const finalize =
+  bimap(
+    buildResult('error', true),
+    buildResult('result', false)
+  )
+
+const double =
+  compose(
+    map(prod(2)),
+    fromNumber
+  )
+
+finalize(double(21))
+//=> Ok { result: 42, hasError: false }
+
+finalize(double('unk'))
+//=> Err { error: "unk is not a valid number", hasError: true }
 ```
 
 #### ap
@@ -486,6 +532,44 @@ any of the inputs results in a [`Err`](#err) than they will never be applied to
 the function and not provide exceptions or unexpected results.
 
 ```javascript
+import Result from 'crocks/Result'
+
+import map from 'crocks/pointfree/map'
+import ifElse from 'crocks/logic/ifElse'
+import isNumber from 'crocks/predicates/isNumber'
+import liftA2 from 'crocks/helpers/liftA2'
+
+const { Ok, Err } = Result
+
+// buildError :: String -> String
+const buildError = x => Err(`${x} is not a valid number`)
+
+const prod =
+  x => y => x * y
+
+const fromNumber =
+  ifElse(isNumber, Ok, buildError)
+
+map(prod, fromNumber(2))
+  .ap(fromNumber(5))
+//=> Ok 10
+
+map(prod, fromNumber('string'))
+  .ap(fromNumber(5))
+//=> Err "string is not a valid number"
+
+Ok(prod)
+  .ap(fromNumber(2))
+  .ap(fromNumber(21))
+//=> Ok 42
+
+Ok(prod)
+  .ap(fromNumber('string'))
+  .ap(fromNumber(21))
+//=> Err "string is not a valid number"
+
+liftA2(prod, fromNumber(2), fromNumber(21))
+//=> Ok 42
 ```
 
 #### sequence

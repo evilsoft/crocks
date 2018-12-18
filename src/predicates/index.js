@@ -11,6 +11,7 @@ module.exports = {
   isCategory: require('./isCategory'),
   isChain: require('./isChain'),
   isContravariant: require('./isContravariant'),
+  isDate: require('./isDate'),
   isDefined: require('./isDefined'),
   isEmpty: require('./isEmpty'),
   isExtend: require('./isExtend'),

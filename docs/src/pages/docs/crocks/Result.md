@@ -625,6 +625,64 @@ inner value will be passed to provided function, returning the result as the
 new instance.
 
 ```javascript
+import Result from 'crocks/Result'
+
+import map from 'crocks/pointfree/map'
+import ifElse from 'crocks/logic/ifElse'
+import compose from 'crocks/core/compose'
+import isDefined from 'crocks/core/isDefined'
+import isNumber from 'crocks/predicates/isNumber'
+import chain from 'crocks/pointfree/chain'
+import not from 'crocks/logic/not'
+import isNil from 'crocks/predicates/isNil'
+import bimap from 'crocks/pointfree/bimap'
+import identity from 'crocks/combinators/identity'
+
+const { Ok, Err } = Result
+
+const ensure = (pred, f) => ifElse(pred, Ok, compose(Err, f))
+
+const ensureNotIsNil = ensure(not(isNil), () => 'The value given was nil')
+
+const ensureDefined = ensure(isDefined, () => 'The value given was undefined')
+
+const prop =
+  name =>
+    compose(
+      bimap(() => `${name} does not exist on the value given`, identity),
+      chain(ensureDefined),
+      map(x => x[name]),
+      ensureNotIsNil
+    )
+
+const fromNumber = ensure(isNumber, x => `${x} is not a valid number`)
+
+const getAge = prop('age')
+
+// protectedAdd10 :: a -> Result String Number
+const protectedAdd10 = compose(map(x => x + 10), fromNumber)
+
+getAge({ name: 'Sarah', age: 21 })
+//=> Ok 21
+
+getAge({ name: 'Sarah', age: 'unk' })
+//=> Ok "unk"
+
+chain(fromNumber, getAge({ name: 'Sarah', age: 21 }))
+//=> Ok 21
+
+getAge({ name: 'Sarah', age: 21 })
+  .chain(fromNumber)
+  .chain(protectedAdd10)
+//=> Ok 31
+
+getAge({ name: 'Sarah', age: 'unk' })
+  .chain(fromNumber)
+  .chain(protectedAdd10)
+//=> Err "unk is not a valid number"
+
+getAge({ name: 'Sarah' })
+//=> Err "age does not exist on the value given"
 ```
 
 #### coalesce

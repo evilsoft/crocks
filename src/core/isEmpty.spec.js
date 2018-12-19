@@ -29,6 +29,7 @@ test('isEmpty predicate function', t => {
   t.equal(isEmpty('string'), false, 'returns false with non-empty string')
 
   t.equal(isEmpty(Fake.empty()), true, 'returns true with empty monoid')
+  t.equal(isEmpty(Fake()), false, 'returns true with empty monoid')
 
   t.end()
 })

@@ -1,10 +1,15 @@
 const test = require('tape')
+const helpers = require('../test/helpers')
+
+const makeFake = helpers.makeFake
 
 const isFunction = require('./isFunction')
 
 const isEmpty = require('./isEmpty')
 
 test('isEmpty predicate function', t => {
+  const Fake = makeFake([ 'concat', 'empty' ])
+
   t.ok(isFunction(isEmpty), 'is a function')
 
   t.equal(isEmpty(undefined), true, 'returns true with undefined')
@@ -23,6 +28,7 @@ test('isEmpty predicate function', t => {
   t.equal(isEmpty(''), true, 'returns true with empty string')
   t.equal(isEmpty('string'), false, 'returns false with non-empty string')
 
+  t.equal(isEmpty(Fake.empty()), true, 'returns true with empty monoid')
+
   t.end()
 })
-

@@ -28,7 +28,7 @@ description of their truth:
 * `isChain :: a -> Boolean`: an ADT that provides `map`, `ap` and `chain` methods
 * `isContravariant :: a -> Boolean`: an ADT that provides `contramap` method
 * `isDefined :: a -> Boolean`: Every value that is not `undefined`, `null` included
-* `isEmpty :: a -> Boolean`: Empty Object, Array or String
+* `isEmpty :: a -> Boolean`: Empty Monoid, Object, Array or String
 * `isExtend :: a -> Boolean`: an ADT that provides `map` and `extend` methods
 * `isFoldable :: a -> Boolean`: Array, List or any structure with a `reduce` method
 * `isFunction :: a -> Boolean`: Function

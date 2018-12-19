@@ -10,22 +10,24 @@ weight: 130
 Result e a = Err e | Ok a
 ```
 
-Result is a Sum Type a step above `Result`. With a `Result` the
-left side contains no information, where as with a `Result` the left contains
-the error information from an operation. `Result` is well suited for capturing 
-disjunction when the cause of the "error" case needs to be communicated. For 
+Result is a Sum Type a step above [`Maybe`][maybe]. With a [`Maybe`][maybe] the left side
+contains no information, where as with a `Result` the left contains the
+error information from an operation. `Result` is well suited for capturing 
+disjunction when the cause of the "error" case needs to be communicated. For
 example, when executing a function and you exception is important or useful.
 
-A `Result` represents disjunction by using two constructors, [`Err`](#err) or [`Ok`](#ok).
-An [`Ok`](#ok) instance represents the positive result while [`Err`](#err) is considered
-the negative. With the exception of [`coalesce`](#coalesce), [`swap`](#swap)
-and [`bimap`](#bimap), all `Result` returning methods on an instance will be
-applied to a [`Ok`](#ok) returning the result. If an instance is a [`Err`](#err), then all application is skipped and another [`Err`](#err) is returned.
+A `Result` represents disjunction by using two constructors, [`Err`](#err) or
+[`Ok`](#ok). An [`Ok`](#ok) instance represents the positive result while
+[`Err`](#err) is considered the negative. With the exception of
+[`coalesce`](#coalesce), [`swap`](#swap) and [`bimap`](#bimap), all `Result`
+returning methods on an instance will be applied to a [`Ok`](#ok) returning the
+result. If an instance is a [`Err`](#err), then all application is skipped and
+another [`Err`](#err) is returned.
 
 It is recommended to use the available [`Ok`](#ok) and [`Err`](#err)
 constructors to construct `Result` instances in most cases. You can use the
-`Result` constructor to construct a [`Ok`](#ok), but it will read better to just use
-`Ok`.
+`Result` constructor to construct a [`Ok`](#ok), but it will read better to 
+just use [`Ok`](#ok).
 
 ```javascript
 ```
@@ -52,9 +54,9 @@ instance constructors, [`Ok`](#ok) or [`Err`](#err). This is due to the nature
 of `Result` and most other Sum Types.
 
 As a matter of consistency and completion, a `Result` instance can also be
-constructed using its TypeRep like any other type. The `Result` constructor is a
-unary function that accepts any type `a` and returns a [`Ok`](#ok) instance, wrapping
-the value passed to its argument.
+constructed using its TypeRep like any other type. The `Result` constructor is
+a unary function that accepts any type `a` and returns a [`Ok`](#ok) instance,
+wrapping the value passed to its argument.
 
 ```javascript
 import Result from 'crocks/Result'
@@ -124,9 +126,13 @@ equals(
 Result.Err :: e -> Result e a
 ```
 
-Used to construct an [`Err`](#err) instance that represents the "false" or 
-"Negative" portion of a disjunction. When an instance is an [`Err`](#err), most 
- `Result` returning methods will just return another [`Err`](#err). 
+Used to construct an [`Err`](#err) instance that represents the "false" or
+"Negative" portion of a disjunction. When an instance is an [`Err`](#err), most
+`Result` returning methods will just return another [`Err`](#err).
+
+The power of the [`Err`](#err) as opposed to a [`Nothing`] is that it can hold
+meaningful information on why the flow is in this path. This works as a core
+tool when using Railway Orientated Programming concepts.
 
 ```javascript
 import Result from 'crocks/Result'
@@ -169,9 +175,9 @@ chain(protectedAdd10, Err('d'))
 Result.Ok :: a -> Result e a
 ```
 
-Used to construct a [`Ok`](#ok) instance that represents the "true" portion of a
-disjunction or a valid value.  [`Ok`](#ok) will wrap any given value in
-a [`Ok`](#ok), signaling the validity of the wrapped value.
+Used to construct an [`Ok`](#ok) instance that represents the "true" portion of
+a disjunction or a valid value. [`Ok`](#ok) will wrap any given value in an
+[`Ok`](#ok), signaling the validity of the wrapped value.
 
 ```javascript
 import Result from 'crocks/Result'
@@ -257,11 +263,11 @@ Result(undefined)
 Result e a ~> b -> Boolean
 ```
 
-Used to compare the underlying values of two `Result` instances for equality by
+Used to compare the contained values of two `Result` instances for equality by
 value. `equals` takes any given argument and returns `true` if the passed 
-arguments is a `Result` ([`Ok`](#ok) or [`Err`](#err)) with an underlying value
-equal to the underlying value of the `Result` the method is being called on. If
-the passed argument is not a `Result` or the underlying values are not equal, 
+arguments is a `Result` ([`Ok`](#ok) or [`Err`](#err)) with an contained value
+equal to the contained value of the `Result` the method is being called on. If
+the passed argument is not a `Result` or the contained values are not equal, 
 `equals` will return `false`.
 
 ```javascript
@@ -290,7 +296,6 @@ Ok([ 1, { a: 2 }, 'string' ])
 
 equals(Ok('result'), 'result')
 //=> false
-
 ```
 
 #### concat
@@ -646,6 +651,8 @@ const ensureNotIsNil = ensure(not(isNil), () => 'The value given was nil')
 
 const ensureDefined = ensure(isDefined, () => 'The value given was undefined')
 
+const fromNumber = ensure(isNumber, x => `${x} is not a valid number`)
+
 const prop =
   name =>
     compose(
@@ -654,8 +661,6 @@ const prop =
       map(x => x[name]),
       ensureNotIsNil
     )
-
-const fromNumber = ensure(isNumber, x => `${x} is not a valid number`)
 
 const getAge = prop('age')
 
@@ -691,9 +696,9 @@ getAge({ name: 'Sarah' })
 Result e a ~> ((e -> b), (a -> b))) -> Result c b
 ```
 
-When one would like to [`option`](#option) a `Result` but would like to remain
-within a `Result` type, `coalesce` can be used. `coalesce` expects two functions
-for it's inputs.
+There will come a time in your flow that you will want to ensure you have an
+[`Ok`](#ok) of a given type. `coalesce` allows you to `map` over both the
+[`Ok`](#ok) and the [`Err`](#err) and return an [`Ok`](#ok). `coalesce` expects two functions for it's inputs.
 
 The first function is used when invoked on a [`Err`](#err) and will return a [`Ok`](#ok)
 instance wrapping the result of the function. The second function is used when
@@ -718,14 +723,60 @@ Result e a ~> ((e -> a), (a -> e)) -> Result e a
 Result e a ~> ((e -> b), (a -> b)) -> b
 ```
 
-Used to provide a means to map a given `Result` instance while optioning out the
-wrapped value. `either` expects two functions as its arguments. The first is a
+Used to provide a means to map a given `Result` instance folding it out of it's
+container. `either` expects two functions as its arguments. The first is a
 function that will be used to map an [`Err`](#err). While the second
 will map the value wrapped in a given [`Ok`](#ok) and return the result of that
 mapping.
 
+By using composing `either` you can create functions that us the power of 
+`ADT`s while returning a plain javascript type.
 
 ```javascript
+import Result from 'crocks/Result'
+
+import either from 'crocks/pointfree/either'
+import map from 'crocks/pointfree/map'
+import ifElse from 'crocks/logic/ifElse'
+import compose from 'crocks/core/compose'
+import isNumber from 'crocks/predicates/isNumber'
+import setProp from 'crocks/helpers/setProp'
+import objOf from 'crocks/helpers/objOf'
+
+const { Ok, Err } = Result
+
+const ensure = (pred, f) => ifElse(pred, Ok, compose(Err, f))
+
+const fromNumber = ensure(isNumber, x => `${x} is not a valid number`)
+
+const prod =
+  x => y => x * y
+
+// hasError :: Boolean -> Object -> Object
+const hasError =
+  setProp('hasError')
+
+// buildResult :: (String, Boolean) -> a -> Object
+const buildResult = (key, isError) =>
+  compose(hasError(isError), objOf(key))
+
+const createResult =
+  either(
+    buildResult('error', true),
+    buildResult('result', false)
+  )
+
+const double = compose(
+  createResult,
+  map(prod(2)),
+  fromNumber
+)
+
+double(42)
+//=> { result: 84, hasError: false }
+
+double('value')
+//=> { error: 'value is not a valid number', hasError: true }
 ```
 
 </article>

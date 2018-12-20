@@ -827,6 +827,75 @@ returned. When passed an [`Either`][either] returning function, a function will
 be returned that takes a given value and returns a `Result`.
 
 ```javascript
+import Result from 'crocks/Result'
+
+import Either from 'crocks/Either'
+import assign from 'crocks/helpers/assign'
+import compose from 'crocks/helpers/compose'
+import composeK from 'crocks/helpers/composeK'
+import fanout from 'crocks/Pair/fanout'
+import isNumber from 'crocks/predicates/isNumber'
+import liftA2 from 'crocks/helpers/liftA2'
+import map from 'crocks/pointfree/map'
+import maybeToEither from 'crocks/Result/maybeToEither'
+import merge from 'crocks/Pair/merge'
+import objOf from 'crocks/helpers/objOf'
+import prop from 'crocks/Maybe/prop'
+import eitherToResult from 'crocks/Either/eitherToResult'
+import safeLift from 'crocks/Maybe/safeLift'
+
+const { Left, Right } = Either
+const { Ok } = Result
+
+eitherToResult(Left('no good'))
+//=> Err "no good"
+
+eitherToResult(Right('so good'))
+//=> Ok "so good"
+
+// safeInc :: a -> Maybe Number
+const safeInc =
+  safeLift(isNumber, x => x + 1)
+
+// incProp :: String -> a -> Maybe Number
+const incProp = key =>
+  composeK(safeInc, prop(key))
+
+// incResult :: String -> a -> Result [ String ] Object
+const incResult = key => maybeToEither(
+  [ `${key} is not valid` ],
+  compose(map(objOf(key)), incProp(key))
+)
+
+// incThem :: a -> Result [ String ] Object
+const incThem = compose(
+  merge(liftA2(assign)),
+  fanout(incResult('b'), incResult('a'))
+)
+
+Result.of({})
+  .chain(eitherToResult(incThem))
+//=> Err [ "b is not valid", "a is not valid" ]
+
+Result.of({ a: 33 })
+  .chain(eitherToResult(incThem))
+//=> Err [ "b is not valid" ]
+
+Result.of({ a: 99, b: '41' })
+  .chain(eitherToResult(incThem))
+//=> Err [ "b is not valid" ]
+
+Result.of({ a: 99, b: 41 })
+  .chain(eitherToResult(incThem))
+//=> Ok { a: 100, b: 42 }
+
+Ok(Left('Err'))
+  .chain(eitherToResult)
+//=> Err "Err"
+
+Ok(Right('42'))
+  .chain(eitherToResult)
+//=> Ok "42"
 ```
 
 #### firstToResult
@@ -912,6 +981,37 @@ When passed a [`Last`][last] returning function, a function will be returned
 that takes a given value and returns a `Result`.
 
 ```javascript
+import Result from 'crocks/Result'
+
+import Last from 'crocks/Last'
+import lastToResult from 'crocks/Result/lastToResult'
+
+import mconcat from 'crocks/helpers/mconcat'
+
+const { Ok, Err } = Result
+
+// lastValue :: [ a ] -> Last a
+const lastValue =
+  mconcat(Last)
+
+lastToResult('Error occurred!', Last('the end'))
+//=> Ok "the end"
+
+Err('Error occurred!')
+  .chain(lastToResult('Error occurred!', lastValue))
+//=> Err "Error occurred!"
+
+Ok([])
+  .chain(lastToResult('Error occurred!', lastValue))
+//=> Err "Error occurred!"
+
+Ok([ 'first', 'second', 'third' ])
+  .chain(lastToResult('Error occurred!', lastValue))
+//=> Ok "third"
+
+Ok(Last('last'))
+  .chain(lastToResult('Error occurred!'))
+//=> Ok "last"
 ```
 
 #### maybeToResult
@@ -925,19 +1025,51 @@ maybeToResult :: e -> (a -> Maybe b) -> a -> Result e b
 
 Used to transform a given [`Maybe`][maybe] instance to a `Result`
 instance or flatten a `Result` of [`Maybe`][maybe] into a `Result` when chained, 
-`maybeToResult` will turn an [`Just`][just] instance into a [`Ok`](#ok) wrapping the
+`maybeToResult` will turn a [`Just`][just] instance into an [`Ok`](#ok) wrapping the
 original value contained in the [`Just`][just].
-All [`Err`](#err) instances will map to a [`Err`](#err), mapping the originally
-contained value to a `Unit`. Values on the [`Err`](#err) will be lost and as such this
-transformation is considered lossy in that regard.
+All [`Nothing`](nothing) instances will map to a [`Err`](#err), containing the
+given `e` value. 
 
 Like all `crocks` transformation functions, `maybeToResult` has two possible
-signatures and will behave differently when passed either an `Result` instance
-or a function that returns an instance of `Result`. When passed the instance,
-a transformed `Result` is returned. When passed a `Result` returning function,
+signatures and will behave differently when passed either a [`Maybe`][maybe] instance
+or a function that returns an instance of [`Maybe`][maybe]. When passed the instance,
+a transformed `Result` is returned. When passed a [`Maybe`][maybe] returning function,
 a function will be returned that takes a given value and returns a `Result`.
+This means that when used with the [`Maybe-helpers`][helpers] and `compose` you
+have a larger collection of `Result` returning functions.
 
 ```javascript
+import Result from 'crocks/Result'
+
+import maybeToResult from 'crocks/Result/maybeToResult'
+import Maybe from 'crocks/Maybe'
+import prop from 'crocks/Maybe/prop'
+import compose from 'crocks/helpers/compose'
+
+const { Ok } = Result
+const { Just, Nothing } = Maybe
+
+maybeToResult('An error occurred', Just('21'))
+//=> Ok "21"
+
+maybeToResult('An error occurred', Nothing())
+//=> Err "An error occurred"
+
+const getProp = compose(maybeToResult('The requested prop did not exist or was undefined'), prop)
+
+getProp('name', { name: 'Jobn', age: 21 })
+//=> Ok "Jobn"
+
+getProp('name', { age: 27 })
+//=> Err "The requested prop did not exist or was undefined"
+
+Ok(Just('in time!'))
+  .chain(maybeToResult('An error occurred'))
+//=> Ok "in time!"
+
+Ok(Nothing())
+  .chain(maybeToResult('An error occurred'))
+//=> Err "An error occurred"
 ```
 </article>
 
@@ -950,3 +1082,4 @@ a function will be returned that takes a given value and returns a `Result`.
 [maybe]: ../monoids/Maybe.html
 [just]: ./Maybe.html#just
 [nothing]: ./Maybe.html#nothing
+[helpers]: ./Maybe.html#helper-functions

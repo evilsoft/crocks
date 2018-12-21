@@ -30,6 +30,63 @@ constructors to construct `Result` instances in most cases. You can use the
 just use [`Ok`](#ok).
 
 ```javascript
+import Result from 'crocks/Result'
+
+import and from 'crocks/logic/and'
+import ifElse from 'crocks/logic/ifElse'
+import curry from 'crocks/core/curry'
+import tryCatch from 'crocks/Result/tryCatch'
+import compose from 'crocks/core/compose'
+import chain from 'crocks/pointfree/chain'
+import isDefined from 'crocks/predicates/isDefined'
+import constant from 'crocks/combinators/constant'
+import bimap from 'crocks/pointfree/bimap'
+import identity from 'crocks/combinators/identity'
+
+const { Err, Ok } = Result
+
+// gte :: Number -> Number -> Boolean
+const gte =
+  y => x => x >= y
+
+// lte :: Number -> Number -> Boolean
+const lte =
+  y => x => x <= y
+
+const between = (x, y) => and(gte(x), lte(y))
+
+const ensure = pred => ifElse(pred, Ok, Err)
+const inRange = ensure(between(10, 15))
+
+inRange(12)
+//=> Ok 12
+
+inRange(25)
+//=> Err 25
+
+inRange('Test')
+//=> Err "Test"
+
+const prop =
+  curry((name, obj) => obj[name])
+
+const tryGetAge = compose(
+  bimap(constant('Age not found!'), identity),
+  chain(ensure(isDefined)),
+  tryCatch(prop('age'))
+)
+
+tryGetAge({ name: 'Sarah', age: 23 })
+//=> Ok 23
+
+tryGetAge({ name: 'Sarah' })
+//=> Err "Age not found!"
+
+tryGetAge(1)
+//=> Err "Age not found!"
+
+tryGetAge(undefined)
+//=> Err "Age not found!"
 ```
 
 <article id="topic-implements">
@@ -714,8 +771,7 @@ import ifElse from 'crocks/logic/ifElse'
 import compose from 'crocks/core/compose'
 import isNumber from 'crocks/predicates/isNumber'
 import chain from 'crocks/pointfree/chain'
-import not from 'crocks/logic/not'
-import isNil from 'crocks/predicates/isNil'
+import isObject from 'crocks/predicates/isObject'
 import hasProp from 'crocks/predicates/hasProp'
 import identity from 'crocks/combinators/identity'
 import constant from 'crocks/combinators/constant'
@@ -731,11 +787,11 @@ const { Err, Ok } = Result
 const gte =
   y => x => x >= y
 
-const ensure = (pred, f) => ifElse(pred, Ok, compose(Err, f))
+const ensure = pred => ifElse(pred, Ok, Err)
 
-const fromNumber = ensure(isNumber, x => `${x} is not a valid number`)
+const fromNumber = ensure(isNumber)
 
-const ensureNotIsNil = ensure(not(isNil), identity)
+const ensureIsObject = ensure(isObject)
 
 fromNumber(45)
   .coalesce(constant(42), identity)
@@ -745,7 +801,7 @@ fromNumber('number')
   .coalesce(constant(42), identity)
 //=> Ok 42
 
-const hasAge = ensure(hasProp('age'), identity)
+const hasAge = ensure(hasProp('age'))
 
 const prop =
   name => x => x[name]
@@ -754,7 +810,7 @@ const ensureHasAge = compose(
   coalesce(assoc('age', 0), identity),
   chain(hasAge),
   coalesce(constant({}), identity),
-  ensureNotIsNil
+  ensureIsObject
 )
 
 const setCanDrink = compose(
@@ -778,6 +834,12 @@ getDetails(null)
 //=> Ok { canDrink: false, age: 0 }
 
 getDetails(undefined)
+//=> Ok { canDrink: false, age: 0 }
+
+getDetails(1)
+//=> Ok { canDrink: false, age: 0 }
+
+getDetails(false)
 //=> Ok { canDrink: false, age: 0 }
 ```
 

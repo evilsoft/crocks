@@ -706,6 +706,79 @@ instance wrapping the result of the function. The second function is used when
 returning a new [`Ok`](#ok) instance wrapping the result of the second function.
 
 ```javascript
+import Result from 'crocks/Result'
+
+import map from 'crocks/pointfree/map'
+import coalesce from 'crocks/pointfree/coalesce'
+import ifElse from 'crocks/logic/ifElse'
+import compose from 'crocks/core/compose'
+import isNumber from 'crocks/predicates/isNumber'
+import chain from 'crocks/pointfree/chain'
+import not from 'crocks/logic/not'
+import isNil from 'crocks/predicates/isNil'
+import hasProp from 'crocks/predicates/hasProp'
+import identity from 'crocks/combinators/identity'
+import constant from 'crocks/combinators/constant'
+import assign from 'crocks/helpers/assign'
+import fanout from 'crocks/Pair/fanout'
+import merge from 'crocks/Pair/merge'
+import objOf from 'crocks/helpers/objOf'
+import assoc from 'crocks/helpers/assoc'
+
+const { Err, Ok } = Result
+
+// gte :: Number -> Number -> Boolean
+const gte =
+  y => x => x >= y
+
+const ensure = (pred, f) => ifElse(pred, Ok, compose(Err, f))
+
+const fromNumber = ensure(isNumber, x => `${x} is not a valid number`)
+
+const ensureNotIsNil = ensure(not(isNil), identity)
+
+fromNumber(45)
+  .coalesce(constant(42), identity)
+//=> Ok 45
+
+fromNumber('number')
+  .coalesce(constant(42), identity)
+//=> Ok 42
+
+const hasAge = ensure(hasProp('age'), identity)
+
+const prop =
+  name => x => x[name]
+
+const ensureHasAge = compose(
+  coalesce(assoc('age', 0), identity),
+  chain(hasAge),
+  coalesce(constant({}), identity),
+  ensureNotIsNil
+)
+
+const setCanDrink = compose(
+  merge(assign),
+  map(compose(objOf('canDrink'), gte(18))),
+  fanout(identity, prop('age'))
+)
+
+const getDetails = compose(
+  map(setCanDrink),
+  ensureHasAge
+)
+
+getDetails({ name: 'John', age: 17 })
+//=> Ok { canDrink: false, name: "John", age: 17 }
+
+getDetails({ name: 'Laury', age: 22 })
+//=> Ok { canDrink: true, name: "Laury", age: 22 }
+
+getDetails(null)
+//=> Ok { canDrink: false, age: 0 }
+
+getDetails(undefined)
+//=> Ok { canDrink: false, age: 0 }
 ```
 
 #### swap
@@ -714,7 +787,46 @@ returning a new [`Ok`](#ok) instance wrapping the result of the second function.
 Result e a ~> ((e -> a), (a -> e)) -> Result e a
 ```
 
+Used to map the value of an `Either` instance and transform an [`Err`](#err) into an
+[`Ok`](#ok) or an [`Ok`](#ok) into an [`Err`](#err), `swap` takes two functions as its arguments.
+The first function is used to map and transform an [`Err`](#err) into an [`Ok`](#ok),
+while the second maps and transforms an [`Ok`](#ok) into an [`Err`](#err). If no mapping of
+the contained values is required for either instance,
+then [`identity`][identity] functions can be used in one or both arguments.
+
 ```javascript
+import Result from 'crocks/Result'
+
+import identity from 'crocks/combinators/identity'
+import swap from 'crocks/pointfree/swap'
+import isNumber from 'crocks/predicates/isNumber'
+import compose from 'crocks/core/compose'
+import ifElse from 'crocks/logic/ifElse'
+import constant from 'crocks/combinators/constant'
+
+const { Ok, Err } = Result
+
+const simpleSwap =
+  swap(identity, identity)
+
+simpleSwap(Ok(42))
+//=> Err 42
+
+simpleSwap(Err(21))
+//=> Ok 21
+
+const ensure = (pred, f) => ifElse(pred, Ok, compose(Err, f))
+
+const fromNumber = ensure(isNumber, x => `${x} is not a valid number`)
+
+const swapWithDefault =
+  swap(constant(0), x => `${x} is not a valid value`)
+
+swapWithDefault(fromNumber(4))
+//=> Err "4 is not a valid value"
+
+swapWithDefault(fromNumber('number'))
+//=> Ok 0
 ```
 
 #### either
@@ -1083,3 +1195,4 @@ Ok(Nothing())
 [just]: ./Maybe.html#just
 [nothing]: ./Maybe.html#nothing
 [helpers]: ./Maybe.html#helper-functions
+[identity]: ../functions/combinators.html#identity

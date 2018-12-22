@@ -801,7 +801,7 @@ Combining a sequential series of transformations that capture disjunction can be
 accomplished with `chain`. `chain` expects a unary, `Either` returning function
 as its argument. When invoked on a [`Left`](#left), `chain` will not run the function,
 but will instead return another [`Left`](#left) wrapping the original value. When called
-on a [`Left`](#left) however, the inner value will be passed to the provided function,
+on a [`Right`](#right) however, the inner value will be passed to the provided function,
 returning the result as the new instance.
 
 ```javascript

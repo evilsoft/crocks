@@ -7,40 +7,43 @@ const unit = require('../core/_unit')
 
 const assoc = require('./assoc')
 
+const fn = (key, src) =>
+  assoc(key, 'value', src)
+
 test('assoc helper function', t => {
   t.ok(isFunction(assoc), 'is a function')
 
-  const fn = bindFunc(assoc)
+  const f = bindFunc(src => fn('a', src))
 
   const err = /assoc: Object or Array required for third argument$/
-  t.throws(fn('a', 1, undefined), err, 'throws when third arg is undefined')
-  t.throws(fn('a', 1, null), err, 'throws when third arg is null')
-  t.throws(fn('a', 1, NaN), err, 'throws when third arg is NaN')
-  t.throws(fn('a', 1, 0), err, 'throws when third arg is a falsey number')
-  t.throws(fn('a', 1, 1), err, 'throws when third arg is a truthy number')
-  t.throws(fn('a', 1, ''), err, 'throws when third arg is a falsey string')
-  t.throws(fn('a', 1, 'string'), err, 'throws when third arg is a truthy string')
-  t.throws(fn('a', 1, false), err, 'throws when third arg is a false')
-  t.throws(fn('a', 1, true), err, 'throws when third arg is a true')
-  t.throws(fn('a', 1, unit), err, 'throws when third arg is a function')
+  t.throws(f(undefined), err, 'throws when third arg is undefined')
+  t.throws(f(null), err, 'throws when third arg is null')
+  t.throws(f(NaN), err, 'throws when third arg is NaN')
+  t.throws(f(0), err, 'throws when third arg is a falsey number')
+  t.throws(f(1), err, 'throws when third arg is a truthy number')
+  t.throws(f(''), err, 'throws when third arg is a falsey string')
+  t.throws(f('string'), err, 'throws when third arg is a truthy string')
+  t.throws(f(false), err, 'throws when third arg is a false')
+  t.throws(f(true), err, 'throws when third arg is a true')
+  t.throws(f(unit), err, 'throws when third arg is a function')
 
   t.end()
 })
 
 test('assoc with Object', t => {
-  const fn = bindFunc(assoc)
+  const f = bindFunc(key => fn(key, {}))
 
   const err = /assoc: String required for first argument when third argument is an Object$/
-  t.throws(fn(undefined, 1, {}), err, 'throws when first arg is undefined')
-  t.throws(fn(null, 1, {}), err, 'throws when first arg is null')
-  t.throws(fn(NaN, 1, {}), err, 'throws when first arg is NaN')
-  t.throws(fn(0, 1, {}), err, 'throws when first arg is a falsey number')
-  t.throws(fn(1, 1, {}), err, 'throws when first arg is a truthy number')
-  t.throws(fn(false, 1, {}), err, 'throws when first arg is false')
-  t.throws(fn(true, 1, {}), err, 'throws when first arg is true')
-  t.throws(fn(unit, 1, {}), err, 'throws when first arg is a function')
-  t.throws(fn([], 1, {}), err, 'throws when first arg is an array')
-  t.throws(fn({}, 1, {}), err, 'throws when first arg is an object')
+  t.throws(f(undefined), err, 'throws when first arg is undefined')
+  t.throws(f(null), err, 'throws when first arg is null')
+  t.throws(f(NaN), err, 'throws when first arg is NaN')
+  t.throws(f(0), err, 'throws when first arg is a falsey number')
+  t.throws(f(1), err, 'throws when first arg is a truthy number')
+  t.throws(f(false), err, 'throws when first arg is false')
+  t.throws(f(true), err, 'throws when first arg is true')
+  t.throws(f(unit), err, 'throws when first arg is a function')
+  t.throws(f([]), err, 'throws when first arg is an array')
+  t.throws(f({}), err, 'throws when first arg is an object')
 
   const data = { a: 45, b: 23 }
 
@@ -52,19 +55,21 @@ test('assoc with Object', t => {
 })
 
 test('assoc with Array', t => {
-  const fn = bindFunc(assoc)
+  const f = bindFunc(key => fn(key, []))
 
-  const err = /assoc: Integer required for first argument when third argument is an Array$/
-  t.throws(fn(undefined, 1, []), err, 'throws when first arg is undefined')
-  t.throws(fn(null, 1, []), err, 'throws when first arg is null')
-  t.throws(fn(NaN, 1, []), err, 'throws when first arg is NaN')
-  t.throws(fn('', 1, []), err, 'throws when first arg is a falsey string')
-  t.throws(fn('string', 1, []), err, 'throws when first arg is a truthy string')
-  t.throws(fn(false, 1, []), err, 'throws when first arg is false')
-  t.throws(fn(true, 1, []), err, 'throws when first arg is true')
-  t.throws(fn(unit, 1, []), err, 'throws when first arg is a function')
-  t.throws(fn([], 1, []), err, 'throws when first arg is an array')
-  t.throws(fn({}, 1, []), err, 'throws when first arg is an object')
+  const err = /assoc: Positive Integer required for first argument when third argument is an Array$/
+  t.throws(f(undefined), err, 'throws when first arg is undefined')
+  t.throws(f(null), err, 'throws when first arg is null')
+  t.throws(f(NaN), err, 'throws when first arg is NaN')
+  t.throws(f(''), err, 'throws when first arg is a falsey string')
+  t.throws(f(1.23), err, 'throws when first arg is a float')
+  t.throws(f(-1), err, 'throws when first arg is a negative integer')
+  t.throws(f('string'), err, 'throws when first arg is a truthy string')
+  t.throws(f(false), err, 'throws when first arg is false')
+  t.throws(f(true), err, 'throws when first arg is true')
+  t.throws(f(unit), err, 'throws when first arg is a function')
+  t.throws(f([]), err, 'throws when first arg is an array')
+  t.throws(f({}), err, 'throws when first arg is an object')
 
   const data = [ 1, 2, 3 ]
 

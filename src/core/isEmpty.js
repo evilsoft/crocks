@@ -6,7 +6,7 @@ const equals = require('./equals')
 
 function isEmpty(x) {
   if(isMonoid(x)) {
-    return equals(x, x.empty())
+    return equals(x, x.constructor.empty())
   }
 
   if(isObject(x)) {

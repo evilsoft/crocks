@@ -6,6 +6,7 @@ const isFunction = require('./isFunction')
 const isObject = require('./isObject')
 const isString = require('./isString')
 const isSymbol = require('./isSymbol')
+const isDate = require('./isDate')
 
 function arrayInspect(xs) {
   return xs.length
@@ -37,7 +38,7 @@ function inspect(x) {
     return ` "${x}"`
   }
 
-  if(isSymbol(x)) {
+  if(isSymbol(x) || isDate(x)) {
     return ` ${x.toString()}`
   }
 

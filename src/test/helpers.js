@@ -27,7 +27,7 @@ function makeFake(algs, useFl) {
 
   const inst = xs.reduce((o, alg) => {
     const fn = useFl ? fl[alg] : alg
-    if((!isRepFunc(alg) || alg === 'empty') && fn) {
+    if(!isRepFunc(alg) && fn) {
       o[fn] = id
     }
 

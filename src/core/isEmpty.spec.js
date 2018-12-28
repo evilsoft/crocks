@@ -5,6 +5,8 @@ const makeFake = helpers.makeFake
 
 const isFunction = require('./isFunction')
 
+const fl = require('../core/flNames')
+
 const isEmpty = require('./isEmpty')
 
 test('isEmpty predicate function', t => {
@@ -29,6 +31,15 @@ test('isEmpty predicate function', t => {
   t.equal(isEmpty('string'), false, 'returns false with non-empty string')
 
   t.equal(isEmpty(Fake.empty()), true, 'returns true with empty monoid')
+  t.equal(isEmpty(Fake()), false, 'returns true with empty monoid')
+
+  t.end()
+})
+
+test('isEmpty fantasy-land predicate function', t => {
+  const Fake = makeFake([ 'concat', 'empty' ], true)
+
+  t.equal(isEmpty(Fake[fl.empty]()), true, 'returns true with empty monoid')
   t.equal(isEmpty(Fake()), false, 'returns true with empty monoid')
 
   t.end()

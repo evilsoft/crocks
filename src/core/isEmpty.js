@@ -3,10 +3,13 @@
 const isObject = require('./isObject')
 const isMonoid = require('./isMonoid')
 const equals = require('./equals')
+const fl = require('./flNames')
 
 function isEmpty(x) {
   if(isMonoid(x)) {
-    return equals(x, x.constructor.empty())
+    const empty = x.constructor[fl['empty']] || x.constructor['empty'] || x['empty']
+
+    return equals(x, empty())
   }
 
   if(isObject(x)) {

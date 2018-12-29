@@ -53,9 +53,13 @@ const gte =
 const lte =
   y => x => x <= y
 
+// between :: (Number, Number) -> Boolean
 const between = (x, y) => and(gte(x), lte(y))
 
+// ensure :: (a -> bool) -> (a -> Result a a)
 const ensure = pred => ifElse(pred, Ok, Err)
+
+// inRange :: Number -> Result
 const inRange = ensure(between(10, 15))
 
 inRange(12)
@@ -117,6 +121,7 @@ wrapping the value passed to its argument.
 
 ```javascript
 import Result from 'crocks/Result'
+
 import equals from 'crocks/pointfree/equals'
 
 const { Ok, Err, of } = Result
@@ -195,35 +200,48 @@ tool when using Railway Orientated Programming concepts.
 import Result from 'crocks/Result'
 
 import chain from 'crocks/pointfree/chain'
+import bimap from 'crocks/pointfree/bimap'
 import isNumber from 'crocks/predicates/isNumber'
 import ifElse from 'crocks/logic/ifElse'
+import compose from 'crocks/core/compose'
 
 const { Ok, Err } = Result
 
+// ensure :: (a -> bool) -> (a -> Result a a)
+const ensure = pred => ifElse(pred, Ok, Err)
+
 // buildError :: String -> String
-const buildError = x => Err(`${x} is not a valid number`)
+const buildError = x => `${x} is not a valid number`
 
 // add10 :: Number -> Number
 const add10 =
   x => x + 10
 
 // protectedAdd10 :: a -> Result String Number
-const protectedAdd10 =
-    ifElse(isNumber, x => Ok(add10(x)), buildError)
+const protectedAdd10 = compose(
+  bimap(buildError, add10),
+  ensure(isNumber)
+)
+
+Err(undefined)
+//=> Err undefined
+
+Err(null)
+//=> Err null
+
+Err(23)
+  .map(add10)
+//=> Err 23
 
 Ok(23)
   .map(add10)
 //=> Ok 33
 
-Err(23)
-  .map(add10)
-//=> Err
+chain(protectedAdd10, Err('number'))
+//=> Err "number"
 
 chain(protectedAdd10, Ok(10))
 //=> Ok 20
-
-chain(protectedAdd10, Err('d'))
-//=> Err "d is not a valid number"
 ```
 
 #### Ok
@@ -243,21 +261,35 @@ import compose from 'crocks/helpers/compose'
 import ifElse from 'crocks/logic/ifElse'
 import isString from 'crocks/predicates/isString'
 import map from 'crocks/pointfree/map'
+import bimap from 'crocks/pointfree/bimap'
+import identity from 'crocks/combinators/identity'
 
 const { Ok, Err } = Result
 
+// ensure :: (a -> bool) -> (a -> Result a a)
+const ensure = pred => ifElse(pred, Ok, Err)
+
 // buildError :: String -> String
-const buildError = x => Err(`${x} is not a valid string`)
+const buildError = x => `${x} is not a valid string`
+
+// protectedAdd10 :: a -> Result String Number
+const ensureString = compose(
+  bimap(buildError, identity),
+  ensure(isString)
+)
 
 // toUpper :: String -> String
 const toUpper =
   x => x.toUpperCase()
 
-const ensureString =
-    ifElse(isString, Ok, buildError)
-
 Ok(32)
 //=> Ok 32
+
+Ok(undefined)
+//=> Ok undefined
+
+Ok(null)
+//=> Ok null
 
 // safeShout :: a -> Result String String
 const safeShout = compose(
@@ -423,12 +455,15 @@ const { Ok, Err } = Result
 // buildError :: String -> String
 const buildError = x => Err(`${x} is not a valid number`)
 
+// prod :: Number -> Number -> Number
 const prod =
   x => y => x * y
 
+// fromNumber :: a -> Result
 const fromNumber =
   ifElse(isNumber, Ok, buildError)
 
+// doube :: a -> Result String Number
 const double =
   compose(
     map(prod(2)),
@@ -441,11 +476,13 @@ double(21)
 double('down')
 //=> Err "down is not a valid number"
 
+// getParity :: Number -> Object
 const getParity = compose(
   objOf('parity'),
   n => n % 2 === 0 ? 'Even' : 'Odd'
 )
 
+// getInfo :: a -> Object
 const getInfo = compose(
   map(merge(assign)),
   map(fanout(objOf('value'), getParity)),
@@ -482,15 +519,16 @@ import curry from 'crocks/core/curry'
 
 const { Ok, Err } = Result
 
-const check =
-  pred => ifElse(pred, Ok, Err)
+// ensure :: (a -> bool) -> (a -> Result a a)
+const ensure = pred => ifElse(pred, Ok, Err)
 
 // gte :: Number -> Number -> Boolean
 const gte =
   x => y => y >= x
 
+// find :: (a -> Boolean) -> Foldable a -> Result String a
 const find =
-  curry(pred => compose(reduce(flip(alt), Err('Not found')), map(check(pred))))
+  curry(pred => compose(reduce(flip(alt), Err('Not found')), map(ensure(pred))))
 
 Err('Error')
   .alt(Ok('Result'))
@@ -535,46 +573,56 @@ import map from 'crocks/pointfree/map'
 import ifElse from 'crocks/logic/ifElse'
 import setProp from 'crocks/helpers/setProp'
 import compose from 'crocks/core/compose'
+import identity from 'crocks/combinators/identity'
 import objOf from 'crocks/helpers/objOf'
 import isNumber from 'crocks/predicates/isNumber'
 import bimap from 'crocks/pointfree/bimap'
 
 const { Ok, Err } = Result
 
+// ensure :: (a -> bool) -> (a -> Result a a)
+const ensure = pred => ifElse(pred, Ok, Err)
+
 // buildError :: String -> String
-const buildError = x => Err(`${x} is not a valid number`)
+const buildError = x => `${x} is not a valid number`
 
 const prod =
   x => y => x * y
 
-const fromNumber =
-  ifElse(isNumber, Ok, buildError)
+// fromNumber :: a -> Result String Number
+const fromNumber = compose(
+  bimap(buildError, identity),
+  ensure(isNumber)
+)
 
 // hasError :: Boolean -> Object -> Object
 const hasError =
   setProp('hasError')
 
-// buildResult :: (String, Boolean) -> a -> Object
-const buildResult = (key, isError) =>
-  compose(hasError(isError), objOf(key))
+// ResultObject :: { Boolean, Number, String }
 
-const finalize =
-  bimap(
-    buildResult('error', true),
-    buildResult('result', false)
-  )
+// buildResult :: (String, Boolean) -> a -> ResultObject
+const buildResult =
+  (key, isError) =>
+    compose(hasError(isError), objOf(key))
 
-const double =
-  compose(
-    map(prod(2)),
-    fromNumber
-  )
+// finalize :: Result e a -> Result ResultObject ResultObject
+const finalize = bimap(
+  buildResult('error', true),
+  buildResult('result', false)
+)
+
+// double :: a -> Result String Number
+const double = compose(
+  map(prod(2)),
+  fromNumber
+)
 
 finalize(double(21))
-//=> Ok { result: 42, hasError: false }
+//=> Ok { hasError: false, result: 42 }
 
 finalize(double('unk'))
-//=> Err { error: "unk is not a valid number", hasError: true }
+//=> Err { hasError: true, error: "unk is not a valid number" }
 ```
 
 #### ap
@@ -586,11 +634,11 @@ Result e (a -> b) ~> Result e a -> Result e b
 Short for apply, `ap` is used to apply a `Result` instance containing a value
 to another `Result` instance that contains a function, resulting in new `Result`
 instance with the result. `ap` requires that it is called on an `instance` that
-is either a [`Err`](#err) or a [`Ok`](#ok) that wraps a curried polyadic function.
+is either an [`Err`](#err) or an [`Ok`](#ok) that wraps a curried polyadic function.
 
-When either `Result` is a [`Err`](#err), `ap` will return a [`Err`](#err). This can be
+When either instance is an [`Err`](#err), `ap` will return an [`Err`](#err). This can be
 used to safely combine multiple values under a given combination function. If
-any of the inputs results in a [`Err`](#err) than they will never be applied to
+any of the inputs results in an [`Err`](#err) than they will never be applied to
 the function and not provide exceptions or unexpected results.
 
 ```javascript
@@ -606,9 +654,11 @@ const { Ok, Err } = Result
 // buildError :: String -> String
 const buildError = x => Err(`${x} is not a valid number`)
 
+// prod :: Number -> Number -> Number
 const prod =
   x => y => x * y
 
+// fromNumber :: a -> Result String Number
 const fromNumber =
   ifElse(isNumber, Ok, buildError)
 

@@ -700,6 +700,31 @@ the case that the `Result` instance is a [`Err`](#err).
 `identity` function (`x => x`).
 
 ```javascript
+import Result from 'crocks/Result'
+
+import Identity from 'crocks/Identity'
+
+const { Err, Ok } = Result
+
+// arrayOf :: a -> [ a ]
+const arrayOf =
+  x => [ x ]
+
+Ok([ 1, 2, 3 ])
+  .sequence(arrayOf)
+//=> [ Ok 1, Ok 2, Ok 3 ]
+
+Err('no array here')
+  .sequence(arrayOf)
+//=> [ Err "no array here" ]
+
+Ok(Identity.of(42))
+  .sequence(Identity)
+//=> Identity (Ok 42)
+
+Err(0)
+  .sequence(Identity)
+//=> Identity (Err 0)
 ```
 
 #### traverse
@@ -721,6 +746,73 @@ the case that the `Result` instance is a [`Err`](#err). Both arguments must prov
 an instance of the target `Apply`.
 
 ```javascript
+import Result from 'crocks/Result'
+
+import Pair from 'crocks/Pair'
+import State from 'crocks/State'
+import Sum from 'crocks/Sum'
+import constant from 'crocks/combinators/constant'
+import ifElse from 'crocks/logic/ifElse'
+import traverse from 'crocks/pointfree/traverse'
+
+const { Err, Ok } = Result
+const { get, modify } = State
+
+// gte :: Number -> Number -> Boolean
+const lte =
+  y => x => x <= y
+
+const ensure = pred => ifElse(pred, Ok, Err)
+
+// tallyOf :: a -> [ a ]
+const tallyOf =
+  x => Pair(Sum.empty(), x)
+
+// incBy :: Number -> Pair Sum Number
+const incBy =
+  x => Pair(Sum(x), x)
+
+Ok(12)
+  .traverse(tallyOf, incBy)
+//=> Pair( Sum 12, Ok 12 )
+
+Err(true)
+  .traverse(tallyOf, incBy)
+//=> Pair( Sum 0, Err true )
+
+// lte10 :: Number -> Result Number Number
+const lte10 = ensure(lte(10))
+
+// update :: Number -> State Number Number
+const update = x =>
+  modify(state => x + state)
+    .chain(constant(get()))
+
+// updateSmall :: () => State Number Number
+const updateSmall = () =>
+  get(lte10)
+    .chain(traverse(State, update))
+
+updateSmall()
+  .runWith(3)
+//=> Pair( Ok 6, 6 )
+
+updateSmall()
+  .chain(updateSmall)
+  .runWith(3)
+//=> Pair( Err 12, 12 )
+
+updateSmall()
+  .chain(updateSmall)
+  .chain(updateSmall)
+  .runWith(3)
+//=> Pair( Err 12, 12 )
+
+updateSmall()
+  .chain(updateSmall)
+  .chain(updateSmall)
+  .runWith(30)
+//=> Pair( Err 30, 30 )
 ```
 
 #### chain
@@ -729,12 +821,12 @@ an instance of the target `Apply`.
 Result e a ~> (a -> Result e b) -> Result e b
 ```
 
-Combining a sequential series of transformations that capture disjunction can be
-accomplished with `chain`. `chain` expects a unary, `Result` returning function
-as its argument. When invoked on a [`Err`](#err), `chain` will not run the function,
-but will instead return another [`Err`](#err). When called on a [`Ok`](#ok) however, the
-inner value will be passed to provided function, returning the result as the
-new instance.
+Combining a sequential series of transformations that capture disjunction can
+be accomplished with `chain`. `chain` expects a unary, `Result` returning
+function as its argument. When invoked on a [`Err`](#err), `chain` will not run
+the function, but will instead return a new [`Err`](#err) instance with the
+same containing value. When called on a [`Ok`](#ok) however, the inner value
+will be passed to provided function, returning the result as the new instance.
 
 ```javascript
 import Result from 'crocks/Result'
@@ -899,7 +991,7 @@ getDetails(false)
 Result e a ~> ((e -> a), (a -> e)) -> Result e a
 ```
 
-Used to map the value of an `Either` instance and transform an [`Err`](#err) into an
+Used to map the value of a `Result` instance and transform an [`Err`](#err) into an
 [`Ok`](#ok) or an [`Ok`](#ok) into an [`Err`](#err), `swap` takes two functions as its arguments.
 The first function is used to map and transform an [`Err`](#err) into an [`Ok`](#ok),
 while the second maps and transforms an [`Ok`](#ok) into an [`Err`](#err). If no mapping of

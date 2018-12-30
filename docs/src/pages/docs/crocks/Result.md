@@ -823,9 +823,9 @@ Result e a ~> (a -> Result e b) -> Result e b
 
 Combining a sequential series of transformations that capture disjunction can
 be accomplished with `chain`. `chain` expects a unary, `Result` returning
-function as its argument. When invoked on a [`Err`](#err), `chain` will not run
+function as its argument. When invoked on an [`Err`](#err), `chain` will not run
 the function, but will instead return a new [`Err`](#err) instance with the
-same containing value. When called on a [`Ok`](#ok) however, the inner value
+same containing value. When called on an [`Ok`](#ok) however, the inner value
 will be passed to provided function, returning the result as the new instance.
 
 ```javascript
@@ -836,31 +836,32 @@ import ifElse from 'crocks/logic/ifElse'
 import compose from 'crocks/core/compose'
 import isDefined from 'crocks/core/isDefined'
 import isNumber from 'crocks/predicates/isNumber'
+import hasProp from 'crocks/predicates/hasProp'
 import chain from 'crocks/pointfree/chain'
-import not from 'crocks/logic/not'
-import isNil from 'crocks/predicates/isNil'
 import bimap from 'crocks/pointfree/bimap'
 import identity from 'crocks/combinators/identity'
 
 const { Ok, Err } = Result
 
-const ensure = (pred, f) => ifElse(pred, Ok, compose(Err, f))
+// buildError :: String -> Result String a
+const buildError = x => Err(`${x} is not a valid value`)
 
-const ensureNotIsNil = ensure(not(isNil), () => 'The value given was nil')
+// ensure :: (a -> bool) -> (a -> Result a a)
+const ensure = pred => ifElse(pred, Ok, buildError)
 
-const ensureDefined = ensure(isDefined, () => 'The value given was undefined')
+// fromNumber :: a -> Result String Number
+const fromNumber = ensure(isNumber)
 
-const fromNumber = ensure(isNumber, x => `${x} is not a valid number`)
-
+// prop :: (String | Number) -> Object -> Result String a
 const prop =
-  name =>
-    compose(
-      bimap(() => `${name} does not exist on the value given`, identity),
-      chain(ensureDefined),
-      map(x => x[name]),
-      ensureNotIsNil
-    )
+  name => compose(
+    bimap(() => `${name} does not exist on the value given`, identity),
+    chain(ensure(isDefined)),
+    map(x => x[name]),
+    ensure(hasProp(name))
+  )
 
+// prop :: Object -> Result String a
 const getAge = prop('age')
 
 // protectedAdd10 :: a -> Result String Number
@@ -883,10 +884,10 @@ getAge({ name: 'Sarah', age: 21 })
 getAge({ name: 'Sarah', age: 'unk' })
   .chain(fromNumber)
   .chain(protectedAdd10)
-//=> Err "unk is not a valid number"
+//=> Err "unk is not a valid value"
 
 getAge({ name: 'Sarah' })
-//=> Err "age does not exist on the value given"
+//=> Err "age does not exist on the object given"
 ```
 
 #### coalesce

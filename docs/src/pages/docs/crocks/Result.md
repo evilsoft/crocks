@@ -898,12 +898,13 @@ Result e a ~> ((e -> b), (a -> b))) -> Result c b
 
 There will come a time in your flow that you will want to ensure you have an
 [`Ok`](#ok) of a given type. `coalesce` allows you to `map` over both the
-[`Ok`](#ok) and the [`Err`](#err) and return an [`Ok`](#ok). `coalesce` expects two functions for it's inputs.
+[`Ok`](#ok) and the [`Err`](#err) and return an [`Ok`](#ok). `coalesce` expects
+two functions for it's inputs. 
 
-The first function is used when invoked on a [`Err`](#err) and will return a [`Ok`](#ok)
-instance wrapping the result of the function. The second function is used when
-`coalesce` is invoked on a [`Ok`](#ok) and is used to map the original value,
-returning a new [`Ok`](#ok) instance wrapping the result of the second function.
+The first function is used when invoked on a [`Err`](#err) and will return a
+[`Ok`](#ok) instance wrapping the result of the function. The second function
+is used when `coalesce` is invoked on a [`Ok`](#ok) and is used to map the
+original value, returning a new [`Ok`](#ok) instance wrapping the result of the second function.
 
 ```javascript
 import Result from 'crocks/Result'
@@ -1110,6 +1111,14 @@ double('value')
 ```haskell
 TryCatch :: (* -> a) -> * -> Result e a
 ```
+Used when you you want to take any variadic function and wrap it with the added
+function of a `Result` type. `tryCatch` will execute the function with the 
+parameters passed and return either an [`Ok`](#ok) when successful or an 
+[`Err`](#err) when an exception is thrown.
+
+It is important to note that as of now `tryCatch` does not currently support
+any type of curried function. `tryCatch` applies all arguments to the top-level
+function.
 
 ```javascript
 ```

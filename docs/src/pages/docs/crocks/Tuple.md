@@ -2,7 +2,7 @@
 title: "Tuple"
 description: "Tuple Crock"
 layout: "guide"
-functions: ["nmap"]
+functions: ["nmap", "tupletoarray"]
 weight: 150
 ---
 
@@ -500,4 +500,41 @@ project(2, Triple)
 //=> "two"
 ```
 
+</article>
+
+<article id="topic-transformation">
+
+## Transformation Functions
+
+#### tupleToArray
+
+`crocks/Tuple/tupleToArray`
+
+```haskell
+tupleToArray :: Tuple a -> [ a ]
+tupleToArray :: (a -> Tuple b) -> a -> [ b ]
+```
+
+Used to transform a given `Tuple` instance to an `Array` instance. 
+
+Like all `crocks` transformation functions, `tupleToArray` has two possible
+signatures and will behave differently when passed either
+a `Tuple` instance or a function that returns an instance
+of `Tuple`. When passed the instance, a transformed `Array` is
+returned. When passed a `Tuple` returning function, a function will
+be returned that takes a given value and returns an `Array`.
+
+```javascript
+import Tuple from 'crocks/Tuple'
+import tupleToArray from 'crocks/Tuple/tupleToArray'
+import constant from 'crocks/combinators/constant'
+
+const Triple = Tuple(3)
+
+const triple = Triple( 1, { key: 'value' }, 'string' )
+
+tupleToArray(triple)              // => [ 1, { key: 'value' }, 'string' ]
+
+tupleToArray(constant(triple))()  // => [ 1, { key: 'value' }, 'string' ]
+```
 </article>

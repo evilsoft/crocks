@@ -3,7 +3,9 @@
 
 const isArray = require('../core/isArray')
 const isFunction = require('../core/isFunction')
+const isIterable = require('../core/isIterable')
 const isString = require('../core/isString')
+const cloneIterable = require('../core/cloneIterable')
 
 const { Nothing, Just } = require('../core/Maybe')
 
@@ -13,12 +15,18 @@ function head(m) {
   }
 
   if(isArray(m) || isString(m)) {
-    return !m.length
-      ? Nothing()
-      : Just(m[0])
+    return !m.length ? Nothing() : Just(m[0])
   }
 
-  throw new TypeError('head: Array, String or List required')
+  if(isIterable(m)) {
+    const cloned = cloneIterable(m)
+    const iterator = cloned[Symbol.iterator]()
+    const head = iterator.next()
+
+    return head.done ? Nothing() : Just(head.value)
+  }
+
+  throw new TypeError('head: List or iterable required')
 }
 
 module.exports = head

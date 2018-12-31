@@ -28,6 +28,58 @@ a `logical and`. This is super helpful when combined with `or` for putting
 together reusable, complex predicates. As they follow the general form
 of `(a -> Boolean)` they are easily combined with other logic functions.
 
+```javascript
+import and from 'crocks/logic/and'
+
+import equals from 'crocks/core/equals'
+import constant from 'crocks/combinators/constant'
+import propOr from 'crocks/helpers/propOr'
+import isNumber from 'crocks/predicates/isNumber'
+import isEmpty from 'crocks/predicates/isEmpty'
+import isArray from 'crocks/predicates/isArray'
+import isNil from 'crocks/predicates/isNil'
+import not from 'crocks/logic/not'
+
+// gte :: Number -> Number -> Boolean
+const gte = 
+    x => y => y >= x
+
+// isLegalDrinkingAge :: Number -> Boolean
+const isLegalDrinkingAge =
+    and(isNumber, gte(21))
+
+// isValid :: a -> Boolean
+const isValid =
+  and(isArray, not(isEmpty))
+
+isLegalDrinkingAge(18)
+//=> false
+
+isLegalDrinkingAge(21)
+//=> true
+
+isValid([42])
+//=> true
+
+isValid(null)
+//=> false
+
+isValid([])
+//=> false
+
+and(constant(true), constant(true), 'ignored')
+//=> true
+
+and(constant(true), constant(false), 'ignored')
+//=> false
+
+and(constant(false), constant(true), 'ignored')
+//=> false
+
+and(constant(false), constant(false), 'ignored')
+//=> false
+```
+
 #### ifElse
 
 ```haskell
@@ -43,6 +95,48 @@ through the predicate. After the value is evaluated, it will be ran through it's
 corresponding function, returning the result as the final result. This function
 comes in really handy when creating lifting functions for Sum Types (like
 `Either` or [`Maybe`][maybe]).
+
+```javascript
+import ifElse from 'crocks/logic/ifElse'
+
+import Maybe from 'crocks/Maybe'
+import isNumber from 'crocks/predicates/isNumber'
+import chain from 'crocks/pointfree/chain'
+import compose from 'crocks/core'
+import identity from 'crocks/combinators'
+
+const { Just, Nothing } = Maybe
+
+// safe :: (a -> Boolean) -> a -> Maybe a
+const safe = 
+    pred => ifElse(pred, Just, Nothing)
+
+// gte :: Number -> Number -> Maybe Number
+const gte = 
+    x => safe(n => n >= x)
+
+// isLarge :: a -> Maybe a
+const isLarge = 
+    compose(chain(gte(42)), safe(isNumber))
+
+// ensureArray :: a -> Array
+const ensureArray =
+    ifElse(isArray, identity, _ => [])
+
+isLarge(10)
+//=> Just 10
+
+isLarge(44)
+//=> Nothing
+
+ensureArray('nope')
+    .map(x => x + x)
+//=> []
+
+ensureArray([3])
+    .map(x => x + x)
+//=> [6]
+```
 
 #### implies
 

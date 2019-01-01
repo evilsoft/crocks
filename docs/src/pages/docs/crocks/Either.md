@@ -1283,16 +1283,16 @@ resultToEither :: Result e a -> Either e a
 resultToEither :: (a -> Result e b) -> a -> Either e a
 ```
 
-Used to transform a given `Result` instance to an `Either` instance or flatten
-an `Either` of `Result` into an `Either` when chained, `resultToEither` will
+Used to transform a given [`Result`][result] instance to an `Either` instance or flatten
+an `Either` of [`Result`][result] into an `Either` when chained, `resultToEither` will
 turn an `Ok` instance into a [`Right`](#right) instance wrapping the value
 contained in the original `Ok`. If an `Err` is provided, then `resultToEither`
 will return a [`Left`](#left) instance, wrapping the original `Err` value.
 
 Like all `crocks` transformation functions, `resultToEither` has two possible
-signatures and will behave differently when passed either a `Result` instance
-or a function that returns an instance of `Result`. When passed the instance,
-a transformed `Either` is returned. When passed a `Result` returning function,
+signatures and will behave differently when passed either a [`Result`][result] instance
+or a function that returns an instance of [`Result`][result]. When passed the instance,
+a transformed `Either` is returned. When passed a [`Result`][result] returning function,
 a function will be returned that takes a given value and returns an `Either`.
 
 ```javascript
@@ -1376,3 +1376,4 @@ Right(Ok('42'))
 [maybe]: ./Maybe.html
 [nothing]: ./Maybe.html#nothing
 [just]: ./Maybe.html#just
+[result]: ./Result.html

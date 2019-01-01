@@ -10,23 +10,24 @@ weight: 130
 Result e a = Err e | Ok a
 ```
 
-Result is a Sum Type a step above [`Maybe`][maybe]. With a [`Maybe`][maybe] the left side
-contains no information, where as with a `Result` the left contains the
-error information from an operation. `Result` is well suited for capturing 
+Result is a Sum Type a step above [`Maybe`][maybe]. With a [`Maybe`][maybe] the
+left side represents the lack of a valu, where as with a `Result` the left
+contains
+the error information from an operation. `Result` is well suited for capturing
 disjunction when the cause of the "error" case needs to be communicated. For
 example, when executing a function and you exception is important or useful.
 
-A `Result` represents disjunction by using two constructors, [`Err`](#err) or
+A `Result` represents disjunction by using two constructors, [`Err`](#err) and
 [`Ok`](#ok). An [`Ok`](#ok) instance represents the positive result while
 [`Err`](#err) is considered the negative. With the exception of
 [`coalesce`](#coalesce), [`swap`](#swap) and [`bimap`](#bimap), all `Result`
-returning methods on an instance will be applied to a [`Ok`](#ok) returning the
-result. If an instance is a [`Err`](#err), then all application is skipped and
-another [`Err`](#err) is returned.
+returning methods on an instance will be applied to an [`Ok`](#ok) returning the
+result. If an instance is an [`Err`](#err), then all application is skipped and
+another [`Err`](#err) instance is returned with the same containing value.
 
 It is recommended to use the available [`Ok`](#ok) and [`Err`](#err)
 constructors to construct `Result` instances in most cases. You can use the
-`Result` constructor to construct a [`Ok`](#ok), but it will read better to 
+`Result` constructor to construct an [`Ok`](#ok), but it will read better to 
 just use [`Ok`](#ok).
 
 ```javascript
@@ -190,7 +191,8 @@ Result.Err :: e -> Result e a
 
 Used to construct an [`Err`](#err) instance that represents the "false" or
 "Negative" portion of a disjunction. When an instance is an [`Err`](#err), most
-`Result` returning methods will just return another [`Err`](#err).
+`Result` returning methods will just return a new [`Err`](#err) instance with
+the same containing value.
 
 The power of the [`Err`](#err) as opposed to a [`Nothing`] is that it can hold
 meaningful information on why the flow is in this path. This works as a core
@@ -310,11 +312,11 @@ safeShout('Hey there!')
 Result.of :: a -> Result e a
 ```
 
-Used to wrap any value into a `Result` as an [`Ok`](#ok), `of` is used mostly 
-by helper functions that work "generically" with instances of either 
-`Applicative` or `Monad`. When working specifically with the `Result` type, the
-[`Ok`](#ok) constructor should be used. Reach for `of` when working with 
-functions that will work with ANY `Applicative`/`Monad`.
+Used to wrap any value into a `Result` as an [`Ok`](#ok), `of` is used mostly
+by helper functions that work "generically" with instances of either
+`Applicative` or `Monad` types. When working specifically with the `Result`
+type, the [`Ok`](#ok) constructor should be used. Reach for `of` when working
+with functions that will work with ANY `Applicative`/`Monad`.
 
 ```javascript
 import Result from 'crocks/Result'
@@ -354,10 +356,10 @@ Result e a ~> b -> Boolean
 
 Used to compare the contained values of two `Result` instances for equality by
 value. `equals` takes any given argument and returns `true` if the passed 
-arguments is a `Result` ([`Ok`](#ok) or [`Err`](#err)) with an contained value
+argument is a `Result` ([`Ok`](#ok) or [`Err`](#err)) with a contained value
 equal to the contained value of the `Result` the method is being called on. If
-the passed argument is not a `Result` or the contained values are not equal, 
-`equals` will return `false`.
+the passed argument is not a `Result` or the contained values are not equal by
+value thn `equals` will return `false`.
 
 ```javascript
 import Result from 'crocks/Result'
@@ -397,8 +399,9 @@ When an underlying value of a given `Result` is fixed to a `Semigroup`, `concat`
 can be used to concat another `Result` instance with an underlying `Semigroup`
 of the same type. Expecting a `Result` wrapping a `Semigroup` of the same type,
 `concat` will give back a new `Result` instance wrapping the result of combining
-the two underlying `Semigroup`s. When called on a [`Err`](#err) instance, `concat`
-will return an [`Err`](#err) will return the first [`Err`](#err) in the chain.
+the two underlying `Semigroup`s. When called on a [`Err`](#err) instance,
+`concat` will return an [`Err`](#err) with the value of the first [`Err`](#err)
+in the chain.
 
 ```javascript
 import Result from 'crocks/Result'
@@ -433,9 +436,9 @@ Result e a ~> (a -> b) -> Result e b
 
 Used to apply transformations to values in the safety of a `Result`, `map` takes
 a function that it will lift into the context of the `Result` and apply to it
-the wrapped value. When run on an [`Ok`](#ok) instance, `map` will apply the wrapped
-value to the provided function and return the result in a new [`Ok`](#ok) instance.
-When run on an ['Err'](#err) instance `map` with return the error value in a new
+the wrapped value. When run on an [`Ok`](#ok) instance, `map` will apply the
+wrapped value to the provided function and return the result in a new [`Ok`](#ok)
+instance. When run on an ['Err'](#err) `map` with return the error value in a new
 [`Err`](#err) instance.
 
 ```javascript
@@ -503,8 +506,8 @@ Result e a ~> Result e a -> Result e a
 ```
 
 Providing a means for a fallback or alternative value, `alt` combines two
-`Result` instances and will return the first [`Ok`](#ok) it encounters or [`Err`](#err)
-if it does not have an [`Ok`](#ok).
+`Result` instances and will return the first [`Ok`](#ok) it encounters or
+am [`Err`](#err) if neither value is an [`Ok`](#ok).
 
 ```javascript
 import Result from 'crocks/result'
@@ -527,8 +530,12 @@ const gte =
   x => y => y >= x
 
 // find :: (a -> Boolean) -> Foldable a -> Result String a
-const find =
-  curry(pred => compose(reduce(flip(alt), Err('Not found')), map(ensure(pred))))
+const find = curry(
+  pred => compose(
+    reduce(flip(alt), Err('Not found')),
+    map(ensure(pred))
+  )
+)
 
 Err('Error')
   .alt(Ok('Result'))
@@ -555,16 +562,16 @@ find(gte(11), [ 1, 2, 3, 4 ])
 Result e a ~> ((e -> d), (a -> b)) -> Result d b
 ```
 
-While it's more common to [`map`](#map) over a `Result` that's an
-[`Ok`](#ok) there comes a time when you need to map over a `Result` regardless
+While it's more common to only [`map`](#map) over a `Result` that's an
+[`Ok`](#ok) there may come a time when you need to map over a `Result` regardless
 of wether it's an [`Ok`](#ok) or an [`Err`](#err).
 
 `bimap` takes two mapping functions as its arguments. The first function is
-used to map a [`Err`](#err) instance, while the second maps a [`Ok`](#ok). 
+used to map an [`Err`](#err) instance, while the second maps an [`Ok`](#ok). 
 `Result` only provides a means to map an [`Ok`](#ok) instance exclusively using
-[`map`](#map). If the need arises to map a [`Err`](#err) instance exclusively,
+[`map`](#map). If the need arises to map an [`Err`](#err) instance exclusively,
 then `bimap` can be used, passing the mapping function to the first argument
-and an [`identity`][identity] to the second.
+and [`identity`][identity] to the second.
 
 ```javascript
 import Result from 'crocks/Result'
@@ -586,6 +593,7 @@ const ensure = pred => ifElse(pred, Ok, Err)
 // buildError :: String -> String
 const buildError = x => `${x} is not a valid number`
 
+// prod :: Number -> Number -> Number
 const prod =
   x => y => x * y
 
@@ -631,15 +639,16 @@ finalize(double('unk'))
 Result e (a -> b) ~> Result e a -> Result e b
 ```
 
-Short for apply, `ap` is used to apply a `Result` instance containing a value
-to another `Result` instance that contains a function, resulting in new `Result`
+Short for apply, `ap` is used to apply a `Result` instance containing a value to
+another `Result` instance that contains a function, resulting in new `Result`
 instance with the result. `ap` requires that it is called on an `instance` that
-is either an [`Err`](#err) or an [`Ok`](#ok) that wraps a curried polyadic function.
+is either an [`Err`](#err) or an [`Ok`](#ok) that wraps a curried polyadic
+function.
 
-When either instance is an [`Err`](#err), `ap` will return an [`Err`](#err). This can be
-used to safely combine multiple values under a given combination function. If
-any of the inputs results in an [`Err`](#err) than they will never be applied to
-the function and not provide exceptions or unexpected results.
+When either instance is an [`Err`](#err), `ap` will return an [`Err`](#err). 
+This can be used to safely combine multiple values under a given combination
+function. If any of the inputs results in an [`Err`](#err) than they will never
+be applied to the function and not provide exceptions or unexpected results.
 
 ```javascript
 import Result from 'crocks/Result'
@@ -740,10 +749,10 @@ returning a new instance of the `Apply`, wrapping the result of the
 `Apply`s "effect" on the value in the `Result`.
 
 `traverse` requires either an `Applicative TypeRep` or an `Apply` returning
-function as its first argument and a function that is used to apply the "effect"
-of the target  `Apply` to the value inside of the `Result`. This will be used in
-the case that the `Result` instance is a [`Err`](#err). Both arguments must provide
-an instance of the target `Apply`.
+function as its first argument and a function that is used to apply the
+"effect" of the target  `Apply` to the value inside of the `Result`. This will
+be used in the case that the `Result` instance is a [`Err`](#err). Both
+arguments must provide an instance of the target `Apply`.
 
 ```javascript
 import Result from 'crocks/Result'
@@ -904,7 +913,8 @@ two functions for it's inputs.
 The first function is used when invoked on a [`Err`](#err) and will return a
 [`Ok`](#ok) instance wrapping the result of the function. The second function
 is used when `coalesce` is invoked on a [`Ok`](#ok) and is used to map the
-original value, returning a new [`Ok`](#ok) instance wrapping the result of the second function.
+original value, returning a new [`Ok`](#ok) instance wrapping the result of the
+second function.
 
 ```javascript
 import Result from 'crocks/Result'

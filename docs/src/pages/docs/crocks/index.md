@@ -30,7 +30,7 @@ names, but what they do from type to type may vary.
 | [`Pred`][pred] * | [`empty`][pred-empty] | [`concat`][pred-concat], [`contramap`][pred-contra], [`runWith`][pred-run], [`valueOf`][pred-value] |
 | [`Reader`][reader] | [`ask`][reader-ask], [`of`][reader-of] | [`ap`][reader-ap], [`chain`][reader-chain], [`map`][reader-map], [`runWith`][reader-run] |
 | [`ReaderT`][readert] | [`ask`][readert-ask], [`lift`][readert-lift], [`liftFn`][readert-liftfn], [`of`][readert-of] | [`ap`][readert-ap], [`chain`][readert-chain], [`map`][readert-map], [`runWith`][readert-run] |
-| `Result` | `Err`, `Ok`, `of`| `alt`, `ap`, `bimap`, `chain`, `coalesce`, `concat`, `either`, `equals`, `map`, `of`, `sequence`, `swap`, `traverse` |
+| [`Result`][result] | [`Err`][result-err], [`Ok`][result-ok], [`of`][result-of]| [`alt`][result-alt], [`ap`][result-ap], [`bimap`][result-bimap], [`chain`][result-chain], [`coalesce`][result-coalesce], [`concat`][result-concat], [`either`][result-either], [`equals`][result-equals], [`map`][result-map], [`of`][result-of], [`sequence`][result-sequence], [`swap`][result-swap], [`traverse`][result-traverse] |
 | `Star` | `id` | `both`, `compose`, `contramap`, `map`, `promap`, `runWith` |
 | [`State`][state] | [`get`][state-get], [`modify`][state-modify], [`of`][state-of], [`put`][state-put] | [`ap`][state-ap], [`chain`][state-chain], [`evalWith`][state-eval], [`execWith`][state-exec], [`map`][state-map], [`runWith`][state-run] |
 | [`Tuple`][tuple] | --- | [`concat`][tuple-concat], [`equals`][tuple-equals], [`map`][tuple-map], [`mapAll`][tuple-mapall], [`merge`][tuple-merge], [`project`][tuple-project], [`toArray`][tuple-toarray] |
@@ -173,6 +173,23 @@ names, but what they do from type to type may vary.
 [readert-chain]: ReaderT.html#chain
 [readert-map]: ReaderT.html#map
 [readert-run]: ReaderT.html#runwith
+
+[result]: Result.html
+[result-err]: Result.html#err
+[result-ok]: Result.html#ok
+[result-of]: Result.html#of
+[result-alt]: Result.html#alt
+[result-ap]: Result.html#ap
+[result-bimap]: Result.html#bimap
+[result-chain]: Result.html#chain
+[result-coalesce]: Result.html#coalesce
+[result-concat]: Result.html#concat
+[result-either]: Result.html#either
+[result-equals]: Result.html#equals
+[result-map]: Result.html#map
+[result-sequence]: Result.html#sequence
+[result-swap]: Result.html#swap
+[result-traverse]: Result.html#traverse
 
 [state]: State.html
 [state-get]: State.html#get

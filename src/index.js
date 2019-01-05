@@ -63,6 +63,7 @@ const pointfree = Object.assign({},
     fst: require('./Pair/fst'),
     log: require('./Writer/log'),
     nmap: require('./Tuple/nmap'),
+    project: require('./Tuple/project'),
     race: require('./Async/race'),
     read: require('./Writer/read'),
     snd: require('./Pair/snd')

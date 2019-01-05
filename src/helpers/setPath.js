@@ -13,13 +13,12 @@ const object = require('../core/object')
 const isValid = x =>
   isObject(x) || isArray(x)
 
-const pathError =
-  'setPath: Non-empty Array of non-empty Strings and/or Integers required for first argument'
-
 // setPath :: [ String | Integer ] -> a -> (Object | Array) -> (Object | Array)
 function setPath(path, val, obj) {
   if(!isArray(path) || isEmpty(path)) {
-    throw new TypeError(pathError)
+    throw new TypeError(
+      'setPath: Non-empty Array of non-empty Strings and/or Positive Integers required for first argument'
+    )
   }
 
   if(!isValid(obj)) {
@@ -39,17 +38,23 @@ function setPath(path, val, obj) {
     newVal = setPath(path.slice(1), val, next)
   }
 
-  if(isString(key) && !isEmpty(key)) {
-    return object.set(key, newVal, obj)
+  if(isObject(obj)) {
+    if(isString(key) && !isEmpty(key)) {
+      return object.set(key, newVal, obj)
+    }
+
+    throw new TypeError(
+      'setPath: Non-empty String required in path when referencing an Object'
+    )
   }
 
-  if(isInteger(key)) {
-    return isArray(obj)
-      ? array.set(key, newVal, obj)
-      : object.set(key, newVal, obj)
+  if(isInteger(key) && key >= 0) {
+    return array.set(key, newVal, obj)
   }
 
-  throw new TypeError(pathError)
+  throw new TypeError(
+    'setPath: Positive Integers required in path when referencing an Array'
+  )
 }
 
 module.exports = curry(setPath)

@@ -130,6 +130,14 @@ function set(indx, val, m) {
   return arr
 }
 
+function unset(indx, m) {
+  return m.slice(0, indx)
+    .concat(m.slice(indx + 1))
+}
+
 module.exports = {
-  ap, chain, fold, foldMap, map, sequence, set, traverse
+  ap, chain, fold,
+  foldMap, map,
+  sequence, set,
+  traverse, unset
 }

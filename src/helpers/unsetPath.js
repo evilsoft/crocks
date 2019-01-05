@@ -7,20 +7,12 @@ const isEmpty = require('../core/isEmpty')
 const isInteger  = require('../core/isInteger')
 const isObject  = require('../core/isObject')
 const isString = require('../core/isString')
+
+const array = require('../core/array')
 const object = require('../core/object')
 
 const pathError =
-  'unsetPath: Non-empty Array of non-empty Strings and/or Integers required for first argument'
-
-function unset(key, obj) {
-  return function(acc, k) {
-    if(obj[k] !== undefined && k !== key) {
-      acc[k] = obj[k]
-    }
-
-    return acc
-  }
-}
+  'unsetPath: Non-empty Array of non-empty Strings and/or Positive Integers required for first argument'
 
 function unsetPath(path, obj) {
   if(!isArray(path) || isEmpty(path)) {
@@ -28,19 +20,25 @@ function unsetPath(path, obj) {
   }
 
   if(!(isObject(obj) || isArray(obj))) {
-    throw new TypeError('unsetPath: Object or Array required for second argument')
+    return obj
   }
 
   const key = path[0]
 
+  if(!(isString(key) && !isEmpty(key) || isInteger(key) && key >= 0)) {
+    throw new TypeError(pathError)
+  }
+
   if(path.length === 1) {
-    if(!(isString(key) || isInteger(key))) {
-      throw new TypeError(pathError)
+    if(isArray(obj) && isInteger(key)) {
+      return array.unset(key, obj)
     }
 
-    return isInteger(key) && isArray(obj)
-      ? obj.slice(0, key).concat(obj.slice(key + 1))
-      : Object.keys(obj).reduce(unset(key, obj), {})
+    if(isObject(obj) && isString(key)) {
+      return object.unset(key, obj)
+    }
+
+    return obj
   }
 
   const next =
@@ -50,11 +48,11 @@ function unsetPath(path, obj) {
     return obj
   }
 
-  return isInteger(key) && isArray(obj)
-    ? obj.slice(0, key)
-      .concat([ unsetPath(path.slice(1), next) ])
-      .concat(obj.slice(key + 1))
-    : object.assign({ [key]: unsetPath(path.slice(1), next) }, obj)
+  if(isArray(obj)) {
+    return array.set(key, unsetPath(path.slice(1), next), obj)
+  }
+
+  return object.set(key, unsetPath(path.slice(1), next), obj)
 }
 
 module.exports = curry(unsetPath)

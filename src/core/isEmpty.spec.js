@@ -11,6 +11,10 @@ const isEmpty = require('./isEmpty')
 
 test('isEmpty predicate function', t => {
   const Fake = makeFake([ 'concat', 'empty' ])
+  const primitiveMonoid = {
+    concat: x => x,
+    empty: () => true
+  }
 
   t.ok(isFunction(isEmpty), 'is a function')
 
@@ -32,6 +36,8 @@ test('isEmpty predicate function', t => {
 
   t.equal(isEmpty(Fake.empty()), true, 'returns true with empty monoid')
   t.equal(isEmpty(Fake()), false, 'returns true with empty monoid')
+
+  t.equal(isEmpty(primitiveMonoid), false, 'returns true with empty monoid')
 
   t.end()
 })

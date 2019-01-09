@@ -23,12 +23,12 @@ function fn(name) {
     }
 
     if(isArray(x)) {
-      if(isInteger(key)) {
+      if(isInteger(key) && key >= 0) {
         return array.set(key, val, x)
       }
 
       throw new TypeError(
-        `${name}: Integer required for first argument when third argument is an Array`
+        `${name}: Positive Integer required for first argument when third argument is an Array`
       )
     }
 

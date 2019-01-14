@@ -898,7 +898,7 @@ def([ 'arr', 'length' ], data)
 `crocks/helpers/setPath`
 
 ```haskell
-setPath :: [ String | Integer ] -> a -> (Object | Array) -> (Object | Array)
+setPath :: [ (String | Integer) ] -> a -> (Object | Array) -> (Object | Array)
 ```
 
 Used to set a value on a deeply nested `Object`, `setPath` will traverse down
@@ -1050,16 +1050,16 @@ soul of the infamous [`Maybe`][maybe] type.
 `crocks/helpers/unsetPath`
 
 ```haskell
-unsetPath :: [ String | Integer ] -> (Object | Array) -> (Object | Array)
+unsetPath :: [ (String | Integer) ] -> a -> a
 ```
 
 Used to remove a property or index on a deeply nested `Object`/`Array`.
 `unsetPath` is will return a new instance with the property or index removed.
 
-The provided path can be a mixture of either `Integer`s or `String`s to allow
-for traversing through both `Array`s and `Object`s. When an `Integer` is provided
-it will treat that portion as an `Array` while `String`s are used to reference
-through `Object`s.
+The provided path can be a mixture of either Positive `Integer`s or `String`s to
+allow for traversing through both `Array`s and `Object`s. When an `Integer` is
+provided it will treat that portion as an `Array` while `String`s are used to
+reference through `Object`s.
 
 ```javascript
 import unsetPath from 'crocks/helpers/unsetPath'

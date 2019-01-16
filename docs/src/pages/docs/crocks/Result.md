@@ -11,7 +11,7 @@ Result e a = Err e | Ok a
 ```
 
 Result is a Sum Type a step above [`Maybe`][maybe]. With a [`Maybe`][maybe] the
-left side represents the lack of a valu, where as with a `Result` the left
+left side represents the lack of a value, where as with a `Result` the left
 contains
 the error information from an operation. `Result` is well suited for capturing
 disjunction when the cause of the "error" case needs to be communicated. For
@@ -55,13 +55,16 @@ const lte =
   y => x => x <= y
 
 // between :: (Number, Number) -> Boolean
-const between = (x, y) => and(gte(x), lte(y))
+const between = (x, y) =>
+  and(gte(x), lte(y))
 
-// ensure :: (a -> bool) -> (a -> Result a a)
-const ensure = pred => ifElse(pred, Ok, Err)
+// ensure :: (a -> bool) -> a -> Result a a
+const ensure = pred =>
+  ifElse(pred, Ok, Err)
 
 // inRange :: Number -> Result
-const inRange = ensure(between(10, 15))
+const inRange =
+  ensure(between(10, 15))
 
 inRange(12)
 //=> Ok 12
@@ -153,7 +156,6 @@ Ok(null)
 
 Ok(undefined)
 //=> Ok undefined
-//=> Ok undefined
 
 Err('some string')
 //=> Err "some string"
@@ -209,8 +211,9 @@ import compose from 'crocks/core/compose'
 
 const { Ok, Err } = Result
 
-// ensure :: (a -> bool) -> (a -> Result a a)
-const ensure = pred => ifElse(pred, Ok, Err)
+// ensure :: (a -> bool) -> a -> Result a a
+const ensure = pred =>
+  ifElse(pred, Ok, Err)
 
 // buildError :: String -> String
 const buildError = x => `${x} is not a valid number`
@@ -268,11 +271,13 @@ import identity from 'crocks/combinators/identity'
 
 const { Ok, Err } = Result
 
-// ensure :: (a -> bool) -> (a -> Result a a)
-const ensure = pred => ifElse(pred, Ok, Err)
+// ensure :: (a -> bool) -> a -> Result a a
+const ensure = pred =>
+  ifElse(pred, Ok, Err)
 
 // buildError :: String -> String
-const buildError = x => `${x} is not a valid string`
+const buildError = x =>
+  `${x} is not a valid string`
 
 // protectedAdd10 :: a -> Result String Number
 const ensureString = compose(
@@ -522,8 +527,9 @@ import curry from 'crocks/core/curry'
 
 const { Ok, Err } = Result
 
-// ensure :: (a -> bool) -> (a -> Result a a)
-const ensure = pred => ifElse(pred, Ok, Err)
+// ensure :: (a -> bool) -> a -> Result a a
+const ensure = pred =>
+  ifElse(pred, Ok, Err)
 
 // gte :: Number -> Number -> Boolean
 const gte =
@@ -587,8 +593,9 @@ import bimap from 'crocks/pointfree/bimap'
 
 const { Ok, Err } = Result
 
-// ensure :: (a -> bool) -> (a -> Result a a)
-const ensure = pred => ifElse(pred, Ok, Err)
+// ensure :: (a -> bool) -> a -> Result a a
+const ensure = pred =>
+  ifElse(pred, Ok, Err)
 
 // buildError :: String -> String
 const buildError = x => `${x} is not a valid number`
@@ -855,8 +862,9 @@ const { Ok, Err } = Result
 // buildError :: String -> Result String a
 const buildError = x => Err(`${x} is not a valid value`)
 
-// ensure :: (a -> bool) -> (a -> Result a a)
-const ensure = pred => ifElse(pred, Ok, buildError)
+// ensure :: (a -> bool) -> a -> Result a a
+const ensure = pred =>
+  ifElse(pred, Ok, buildError)
 
 // fromNumber :: a -> Result String Number
 const fromNumber = ensure(isNumber)

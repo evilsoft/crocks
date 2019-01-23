@@ -16,6 +16,7 @@ const chain = array.chain
 const sequence = array.sequence
 const set = array.set
 const traverse = array.traverse
+const unset = array.unset
 
 const constant = x => () => x
 const identity = x => x
@@ -297,6 +298,17 @@ test('array foldMap functionality', t => {
 
   t.same(fold([ 1, 2 ]), '12', 'combines and extracts semigroups')
   t.same(fold([ 3 ]), '3', 'extracts a single semigroup')
+
+  t.end()
+})
+
+test('array unset functionality', t => {
+  const data = [ 'a', 'b', 'c' ]
+
+  t.same(unset(0, data), [ 'b', 'c' ], 'removes the head element with an index of 0')
+  t.same(unset(1, data), [ 'a', 'c' ], 'removes elements in the middle of array')
+  t.same(unset(2, data), [ 'a', 'b' ], 'removes last element with last index specified')
+  t.same(unset(12, data), data, 'provides a new instance of array, with the same elements when index does not exist')
 
   t.end()
 })

@@ -40,7 +40,7 @@ function fn(name) {
   return curry(setProp)
 }
 
-// setProp :: String -> a -> Object -> Object
+// setProp :: (String | Integer) -> a -> (Object | Array) -> (Object | Array)
 const setProp =
   fn('setProp')
 

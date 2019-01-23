@@ -37,9 +37,17 @@ function set(key, val, m) {
   return assign({ [key]: val }, m)
 }
 
+function unset(key, m) {
+  return Object.keys(m).reduce((acc, k) => {
+    if(m[k] !== undefined && k !== key) {
+      acc[k] = m[k]
+    }
+
+    return acc
+  }, {})
+}
+
 module.exports = {
-  assign,
-  filter,
-  map,
-  set
+  assign, filter,
+  map, set, unset
 }

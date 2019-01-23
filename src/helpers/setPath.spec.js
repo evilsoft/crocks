@@ -26,6 +26,18 @@ test('setPath helper function', t => {
   t.throws(f([], {}), badKeys, 'throws when first arg is an empty array')
   t.throws(f({}, {}), badKeys, 'throws when first arg is an object')
 
+  t.throws(f([ undefined ], {}), badKeys, 'throws when first arg contains undefined')
+  t.throws(f([ null ], {}), badKeys, 'throws when first arg contains null')
+  t.throws(f([ NaN ], {}), badKeys, 'throws when first arg contains NaN')
+  t.throws(f([ '' ], {}), badKeys, 'throws with an empty string in path')
+  t.throws(f([ 1.23 ], {}), badKeys, 'throws with float number in path')
+  t.throws(f([ -1 ], {}), badKeys, 'throws with negative integer number in path')
+  t.throws(f([ false ], {}), badKeys, 'throws when first arg contains false')
+  t.throws(f([ true ], {}), badKeys, 'throws when first arg contains true')
+  t.throws(f([ unit ], {}), badKeys, 'throws when first arg contains a function')
+  t.throws(f([ [] ], {}), badKeys, 'throws when first arg contains an array')
+  t.throws(f([ {} ], {}), badKeys, 'throws when first arg contains an object')
+
   const noObj = /setPath: Object or Array required for third argument/
   t.throws(f([ 'key' ], undefined), noObj, 'throws when third arg is undefined')
   t.throws(f([ 'key' ], null), noObj, 'throws when third arg is null')
@@ -45,17 +57,8 @@ test('setPath errors with objects', t => {
   const f = bindFunc(path => fn(path, {}))
 
   const err = /setPath: Non-empty String required in path when referencing an Object/
-  t.throws(f([ undefined ]), err, 'throws with undefined in path')
-  t.throws(f([ null ]), err, 'throws with null in path')
-  t.throws(f([ NaN ]), err, 'throws with NaN in path')
-  t.throws(f([ '' ]), err, 'throws with an empty string in path')
   t.throws(f([ 0 ]), err, 'throws with falsey number in path')
   t.throws(f([ 1 ]), err, 'throws with truthy number in path')
-  t.throws(f([ false ]), err, 'throws with false in path')
-  t.throws(f([ true ]), err, 'throws with true in path')
-  t.throws(f([ unit ]), err, 'throws with a function in path')
-  t.throws(f([ {} ]), err, 'throws with an object in path')
-  t.throws(f([ [] ]), err, 'throws with an object in path')
 
   t.end()
 })
@@ -76,18 +79,7 @@ test('setPath errors with array', t => {
   const f = bindFunc(path => fn(path, []))
 
   const err = /setPath: Positive Integers required in path when referencing an Array/
-  t.throws(f([ undefined ]), err, 'throws with undefined in path')
-  t.throws(f([ null ]), err, 'throws with null in path')
-  t.throws(f([ NaN ]), err, 'throws with NaN in path')
-  t.throws(f([ '' ]), err, 'throws with an empty string in path')
   t.throws(f([ 'string' ]), err, 'throws with a non-empty string in path')
-  t.throws(f([ 1.23 ]), err, 'throws with float number in path')
-  t.throws(f([ -1 ]), err, 'throws with negative integer number in path')
-  t.throws(f([ false ]), err, 'throws with false in path')
-  t.throws(f([ true ]), err, 'throws with true in path')
-  t.throws(f([ unit ]), err, 'throws with a function in path')
-  t.throws(f([ {} ]), err, 'throws with an object in path')
-  t.throws(f([ [] ]), err, 'throws with an object in path')
 
   t.end()
 })

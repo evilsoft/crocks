@@ -13,12 +13,13 @@ const object = require('../core/object')
 const isValid = x =>
   isObject(x) || isArray(x)
 
+const pathErr =
+  'setPath: Non-empty Array of non-empty Strings and/or Positive Integers required for first argument'
+
 // setPath :: [ String | Integer ] -> a -> (Object | Array) -> (Object | Array)
 function setPath(path, val, obj) {
   if(!isArray(path) || isEmpty(path)) {
-    throw new TypeError(
-      'setPath: Non-empty Array of non-empty Strings and/or Positive Integers required for first argument'
-    )
+    throw new TypeError(pathErr)
   }
 
   if(!isValid(obj)) {
@@ -30,6 +31,10 @@ function setPath(path, val, obj) {
   const key = path[0]
   let newVal = val
 
+  if(!(isString(key) && !isEmpty(key) || isInteger(key) && key >= 0)) {
+    throw new TypeError(pathErr)
+  }
+
   if(path.length > 1) {
     const next = !isValid(obj[key])
       ? isInteger(path[1]) ? [] : {}
@@ -39,7 +44,7 @@ function setPath(path, val, obj) {
   }
 
   if(isObject(obj)) {
-    if(isString(key) && !isEmpty(key)) {
+    if(isString(key)) {
       return object.set(key, newVal, obj)
     }
 
@@ -48,7 +53,7 @@ function setPath(path, val, obj) {
     )
   }
 
-  if(isInteger(key) && key >= 0) {
+  if(isInteger(key)) {
     return array.set(key, newVal, obj)
   }
 

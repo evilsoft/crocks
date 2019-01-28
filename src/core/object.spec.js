@@ -8,6 +8,7 @@ const assign = object.assign
 const filter = object.filter
 const map = object.map
 const set = object.set
+const unset = object.unset
 
 const identity = x => x
 
@@ -79,6 +80,15 @@ test('object set functionality', t => {
 
   t.same(set('c', 10, data), { a: 'string', b: false, c: 10 }, 'adds a new key when it does not exist')
   t.same(set('b', 10, data), { a: 'string', b: 10 }, 'overrides an existing key when it exists')
+
+  t.end()
+})
+
+test('object unset functionality', t => {
+  const data = { a: 'string', b: false }
+
+  t.same(unset('a', data), { b: false }, 'removes specified key')
+  t.same(unset('c', data), data, 'returns a new object with nothing removed')
 
   t.end()
 })

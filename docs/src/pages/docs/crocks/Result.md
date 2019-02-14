@@ -10,25 +10,27 @@ weight: 130
 Result e a = Err e | Ok a
 ```
 
-Result is a Sum Type a step above [`Maybe`][maybe]. With a [`Maybe`][maybe] the
-left side represents the lack of a value, where as with a `Result` the left
-contains
-the error information from an operation. `Result` is well suited for capturing
-disjunction when the cause of the "error" case needs to be communicated. For
-example, when executing a function and you exception is important or useful.
+Result is a Sum Type similar to that of [`Either`][either] with the added
+behaviour of accumulating the [`Err`][#err] when using [`ap`][#ap] or [`alt`][#alt].
+With [`Either`][either] being defined as a tagged union type, it captures the
+essence of disjunction as it provides either a [`Left`][left] value or
+a [`Right`][right] value but not both. With a `Result` the left contains the
+error information from an operation and the right contains the result.
+`Result` is well suited for capturing disjunction when the cause of the "error"
+case needs to be communicated. For example, when executing a function and you
+exception is important or useful.
 
-A `Result` represents disjunction by using two constructors, [`Err`](#err) and
-[`Ok`](#ok). An [`Ok`](#ok) instance represents the positive result while
-[`Err`](#err) is considered the negative. With the exception of
-[`coalesce`](#coalesce), [`swap`](#swap) and [`bimap`](#bimap), all `Result`
-returning methods on an instance will be applied to an [`Ok`](#ok) returning the
-result. If an instance is an [`Err`](#err), then all application is skipped and
+A `Result` represents disjunction by using two constructors, [`Err`](#err) and [`Ok`](#ok). 
+An [`Ok`](#ok) instance represents the positive result while [`Err`](#err) is 
+considered the negative. With the exception 
+of[`coalesce`](#coalesce), [`swap`](#swap) and [`bimap`](#bimap), all `Result` returning 
+methods on an instance will be applied to an [`Ok`](#ok) returning the result.
+If an instance is an [`Err`](#err), then all application is skipped and
 another [`Err`](#err) instance is returned with the same containing value.
 
-It is recommended to use the available [`Ok`](#ok) and [`Err`](#err)
-constructors to construct `Result` instances in most cases. You can use the
-`Result` constructor to construct an [`Ok`](#ok), but it will read better to 
-just use [`Ok`](#ok).
+It is recommended to use the available [`Ok`](#ok) and [`Err`](#err) constructors
+to construct `Result` instances in most cases. You can use the `Result` constructor
+to construct an [`Ok`](#ok), but it will read better to just use [`Ok`](#ok).
 
 ```javascript
 import Result from 'crocks/Result'

@@ -263,6 +263,68 @@ back a predicate function ready for insertion into your flow. All predicate
 based functions in `crocks` take either a [`Pred`][pred] or predicate
 function, so it should be easy to swap between the two.
 
+```javascript
+import not from 'crocks/logic/not'
+
+import Pred from 'crocks/Pred'
+import propSatisfies from 'crocks/predicates/propSatisfies'
+import isString from 'crocks/predicates/isString'
+import and from 'crocks/logic/and'
+import compose from 'crocks/core/compose'
+import flip from 'crocks/combinators/flip'
+import identity from 'crocks/combinators/identity'
+
+// isFalsey :: a -> Boolean
+const isFalsey = not(identity)
+
+// isTruthy :: a -> Boolean
+const isTruthy = not(isFalsey)
+
+isTruthy('Test string')
+//=> true
+
+isTruthy('')
+//=> false
+
+isFalsey('')
+//=> true
+
+isFalsey('Test string')
+//=> false
+
+// User :: { String, String, String}
+
+const validUser = {
+  email: 'testuser@email.com',
+  firstName: 'Tom',
+  lastName: 'Smith'
+}
+
+const invalidUser = {
+  email: '',
+  firstName: '',
+  lastName: 'Smith'
+}
+
+// hasValidStringProp :: string -> User -> Boolean
+const hasValidStringProp = compose(Pred, flip(propSatisfies, and(isString, isTruthy)))
+
+// hasName :: User -> Boolean
+const hasName = hasValidStringProp('firstName')
+
+// hasEmail :: User -> Boolean
+const hasEmail = hasValidStringProp('email')
+
+// isUserInvalid :: User -> Boolean
+const isUserInvalid = Pred(not(hasName)).concat(Pred(not(hasEmail)))
+
+isUserInvalid.runWith(invalidUser)
+//=> true
+
+isUserInvalid.runWith(validUser)
+//=> false
+```
+
 #### or
 
 ```haskell

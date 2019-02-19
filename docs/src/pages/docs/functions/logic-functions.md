@@ -341,7 +341,6 @@ predicates. As they follow the general form of `(a -> Boolean)` they are easily
 combined with other logic functions.
 
 ```javascript
-import { or, propSatisfies, propPathSatisfies, constant,  isEmpty, not } from 'crocks'
 import or from 'crocks/logic/or'
 
 import propSatisfies from 'crocks/predicates/propSatisfies'
@@ -411,6 +410,35 @@ it will evaluate it and if true, will run your value through the provided
 function. Either the original or modified value will be returned depending on
 the result of the predicate. Check out [`unless`](#unless) for a negated version
 of this function.
+
+```javascript
+import when from 'crocks/logic/when'
+
+import constant from 'crocks/combinator/constant'
+
+const prod = a => b => b * a
+
+when(constant(true), prod(2), 21)
+//=> 42
+
+when(constant(false), prod(2), 21)
+//=> 21
+
+const gt = a => b => b > a
+
+const dec = a => a - 1
+
+const safeDec = when(gt(0), dec)
+
+let lives = 3
+
+for (let i = 0; i < 10; i++) {
+  lives = safeDec(lives)
+}
+
+console.log(`Lives remaining: ${lives}`)
+//=> "Lives remaining: 0"
+```
 
 [all]: ../monoids/All.html
 [maybe]: ../crocks/Maybe.html

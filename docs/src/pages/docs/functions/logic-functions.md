@@ -340,6 +340,48 @@ is super helpful when combined with `and` for putting together reusable, complex
 predicates. As they follow the general form of `(a -> Boolean)` they are easily
 combined with other logic functions.
 
+```javascript
+import { or, propSatisfies, propPathSatisfies, constant,  isEmpty, not } from 'crocks'
+import or from 'crocks/logic/or'
+
+import propSatisfies from 'crocks/predicates/propSatisfies'
+import propPathSatisfies from 'crocks/predicates/propPathSatisfies'
+import constant from 'crocks/combinators/constant'
+import isEmpty from 'crocks/predicates/isEmpty'
+import not from 'crocks/logic/not'
+
+or(constant(true), constant(true), 'ignored')
+//=> true
+
+or(constant(true), constant(false), 'ignored')
+//=> true
+
+or(constant(false), constant(true), 'ignored')
+//=> true
+
+or(constant(false), constant(false), 'ignored')
+//=> false
+
+const createResponse = (users, error = '') => ({
+  error,
+  response: {
+    users
+  }
+})
+
+const hasNoData = or(
+  propSatisfies('error', not(isEmpty)),
+  propPathSatisfies(['response', 'users'], isEmpty)
+)
+
+hasNoData(createResponse([ { name: 'User 1' } ]))
+//=> false
+
+hasNoData(createResponse([], 'No users found'))
+//=> true
+
+```
+
 #### unless
 
 ```haskell

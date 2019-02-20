@@ -396,6 +396,33 @@ function. Either the original or modified value will be returned depending on
 the result of the predicate. Check out [`when`](#when) for a negated version of
 this function.
 
+```javascript
+import unless from 'crocks/logic/unless'
+
+import constant from 'crocks/combinator/constant'
+import isString from 'crocks/predicates/isString'
+
+// prod :: Number -> Number -> Number
+const prod = a => b => b * a
+
+unless(constant(true), prod(2), 21)
+//=> 21
+
+unless(constant(false), prod(2), 21)
+//=> 42
+
+// toString :: a -> String
+const toString = x => x.toString()
+
+// ensureAllString :: [ a ] -> [ String ]
+const ensureAllString = unless(isString, toString)
+
+const testData = [1,2,'3', 4, true, false, new Date()]
+
+testData.map(ensureAllString)
+//=> [ '1', '2', '3', '4', 'true', 'false', 'Tue Feb 19 2019 23:16:55 GMT-0800 (Pacific Standard Time)' ]
+```
+
 #### when
 
 ```haskell
@@ -416,6 +443,7 @@ import when from 'crocks/logic/when'
 
 import constant from 'crocks/combinator/constant'
 
+// prod :: Number -> Number -> Number
 const prod = a => b => b * a
 
 when(constant(true), prod(2), 21)
@@ -424,10 +452,13 @@ when(constant(true), prod(2), 21)
 when(constant(false), prod(2), 21)
 //=> 21
 
+// gt :: Number -> Number -> Boolean
 const gt = a => b => b > a
 
+// dec :: Number -> Number
 const dec = a => a - 1
 
+// dec :: Number -> Number
 const safeDec = when(gt(0), dec)
 
 let lives = 3

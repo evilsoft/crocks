@@ -2,7 +2,7 @@
 description: "Predicate Functions API"
 layout: "notopic"
 title: "Predicate Functions"
-functions: ["hasprop", "hasproppath", "isalt", "isalternative", "isapplicative", "isapply", "isarray", "isbifunctor", "isboolean", "iscategory", "ischain", "iscontravariant", "isDate", "isdefined", "isempty", "isextend", "isfoldable", "isfunction", "isfunctor", "isinteger", "isiterable", "ismonad", "ismonoid", "isnil", "isnumber", "isobject", "isplus", "isprofunctor", "ispromise", "issame", "issametype", "issemigroup", "issemigroupoid", "issetoid", "isstring", "istraversable", "propeq", "proppatheq", "proppathsatisfies", "propsatisfies"]
+functions: ["hasprop", "hasproppath", "isalt", "isalternative", "isapplicative", "isapply", "isarray", "isbifunctor", "isboolean", "iscategory", "ischain", "iscontravariant", "isDate", "isdefined", "isempty", "isextend", "isfoldable", "isfunction", "isfunctor", "isinteger", "isiterable", "ismonad", "ismonoid", "isnil", "isnumber", "isobject", "isplus", "isprofunctor", "ispromise", "issame", "issametype", "issemigroup", "issemigroupoid", "issetoid", "isstring", "istraversable", "isTrue", "propeq", "proppatheq", "proppathsatisfies", "propsatisfies"]
 weight: 40
 ---
 
@@ -52,6 +52,7 @@ description of their truth:
 * `isString :: a -> Boolean`: String
 * `isSymbol :: a -> Boolean`: Symbol
 * `isTraversable :: a -> Boolean`: an ADT that provides `map` and `traverse` methods
+* `isTrue :: a -> Boolean`: a value that is strictly equal to `true`
 * `propEq :: (String | Integer) -> a -> Object -> Boolean`: an `Object` that contains the provided key with a value equal to the provided value. (equality by value)
 * `propPathEq :: [ String | Integer ] -> a -> Object -> Boolean`: an `Object` that contains the provided key in the  traversal path, with a value equal to the provided value. (equality by value)
 * `propPathSatisfies :: [ String | Integer ] -> ((a -> Boolean) | Pred) -> Object -> Boolean`: an `Object` that contains the provided key in the traversal path with a value that passes the provided predicate.

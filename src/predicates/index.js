@@ -37,6 +37,7 @@ module.exports = {
   isSymbol: require('./isSymbol'),
   isTraversable: require('./isTraversable'),
   isTrue: require('./isTrue'),
+  isTruthy: require('./isTruthy'),
   propEq: require('./propEq'),
   propPathEq: require('./propPathEq'),
   propSatisfies: require('./propSatisfies'),

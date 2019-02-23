@@ -15,6 +15,7 @@ module.exports = {
   isDefined: require('./isDefined'),
   isEmpty: require('./isEmpty'),
   isExtend: require('./isExtend'),
+  isFalse: require('./isFalse'),
   isFoldable: require('./isFoldable'),
   isFunction: require('./isFunction'),
   isFunctor: require('./isFunctor'),

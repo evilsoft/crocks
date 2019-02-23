@@ -2,7 +2,7 @@
 description: "Predicate Functions API"
 layout: "notopic"
 title: "Predicate Functions"
-functions: ["hasprop", "hasproppath", "isalt", "isalternative", "isapplicative", "isapply", "isarray", "isbifunctor", "isboolean", "iscategory", "ischain", "iscontravariant", "isDate", "isdefined", "isempty", "isextend", "isfoldable", "isfunction", "isfunctor", "isinteger", "isiterable", "ismonad", "ismonoid", "isnil", "isnumber", "isobject", "isplus", "isprofunctor", "ispromise", "issame", "issametype", "issemigroup", "issemigroupoid", "issetoid", "isstring", "istraversable", "isTrue", "isTruthy", "propeq", "proppatheq", "proppathsatisfies", "propsatisfies"]
+functions: ["hasprop", "hasproppath", "isalt", "isalternative", "isapplicative", "isapply", "isarray", "isbifunctor", "isboolean", "iscategory", "ischain", "iscontravariant", "isDate", "isdefined", "isempty", "isextend", "isfalse", "isfoldable", "isfunction", "isfunctor", "isinteger", "isiterable", "ismonad", "ismonoid", "isnil", "isnumber", "isobject", "isplus", "isprofunctor", "ispromise", "issame", "issametype", "issemigroup", "issemigroupoid", "issetoid", "isstring", "istraversable", "istrue", "istruthy", "propeq", "proppatheq", "proppathsatisfies", "propsatisfies"]
 weight: 40
 ---
 
@@ -31,6 +31,7 @@ description of their truth:
 * `isDefined :: a -> Boolean`: Every value that is not `undefined`, `null` included
 * `isEmpty :: a -> Boolean`: Empty Monoid, Object, Array or String
 * `isExtend :: a -> Boolean`: an ADT that provides `map` and `extend` methods
+* `isFalse :: a -> Boolean`: a value that is strictly equal to `false`
 * `isFoldable :: a -> Boolean`: Array, List or any structure with a `reduce` method
 * `isFunction :: a -> Boolean`: Function
 * `isFunctor :: a -> Boolean`: an ADT that provides a `map` method

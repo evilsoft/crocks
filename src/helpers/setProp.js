@@ -23,12 +23,12 @@ function fn(name) {
     }
 
     if(isArray(x)) {
-      if(isInteger(key)) {
+      if(isInteger(key) && key >= 0) {
         return array.set(key, val, x)
       }
 
       throw new TypeError(
-        `${name}: Integer required for first argument when third argument is an Array`
+        `${name}: Positive Integer required for first argument when third argument is an Array`
       )
     }
 
@@ -40,7 +40,7 @@ function fn(name) {
   return curry(setProp)
 }
 
-// setProp :: String -> a -> Object -> Object
+// setProp :: (String | Integer) -> a -> (Object | Array) -> (Object | Array)
 const setProp =
   fn('setProp')
 

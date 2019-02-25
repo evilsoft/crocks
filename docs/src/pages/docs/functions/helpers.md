@@ -898,7 +898,7 @@ def([ 'arr', 'length' ], data)
 `crocks/helpers/setPath`
 
 ```haskell
-setPath :: [ String | Integer ] -> a -> (Object | Array) -> (Object | Array)
+setPath :: [ (String | Integer) ] -> a -> (Object | Array) -> (Object | Array)
 ```
 
 Used to set a value on a deeply nested `Object`, `setPath` will traverse down
@@ -907,10 +907,11 @@ the an `Object`/`Array` with the modification and does not alter the original
 `Object`/`Array` along the path.
 
 The provided path can be a mixture of either `Integer`s or `String`s to allow
-for traversing through both `Array`s and `Object`s. When an `Integer` is provided
-it will treat that portion as an `Array` while `String`s are used to reference
-through `Object`s. If at any point in the provided a `NaN`, `undefined`
-or `null` values is encountered, a new `Object`/`Array` will be created.
+for traversing through both `Array`s and `Object`s. When an `Integer` zero or
+greater is provided it will treat that portion as an `Array` while `String`s are
+used to reference through `Object`s. If at any point in the provided
+a `NaN`, `undefined` or `null` values is encountered, a
+new `Object`/`Array` will be created.
 
 ```javascript
 import setPath from 'crocks/helpers/setPath'
@@ -948,7 +949,7 @@ setPath([ 'list', 'a' ], 'ohhh, I see.', { list: [ 'string', 'another' ] })
 `crocks/helpers/setProp`
 
 ```haskell
-setProp :: String -> a -> Object -> Object
+setProp ::  (String | Integer) -> a -> (Object | Array) -> (Object | Array)
 ```
 
 Used to set a given value for a specific key or index of
@@ -956,7 +957,7 @@ an `Object` or `Array`. `setProp` takes either a `String` or `Integer` value
 as its first argument and a value of any type as its second. The third parameter
 is dependent of the type of the first argument. When a `String` is provided, the
 third argument must be an `Object`. Otherwise if the first argument is
-an `Integer`, then the third must be an `Array`.
+an `Integer` zero or greater, then the third must be an `Array`.
 
 `setProp` will return a new instance of either `Object` or `Array` with the
 addition applied. When the value exists on the provided object, then the value
@@ -1049,16 +1050,16 @@ soul of the infamous [`Maybe`][maybe] type.
 `crocks/helpers/unsetPath`
 
 ```haskell
-unsetPath :: [ String | Integer ] -> (Object | Array) -> (Object | Array)
+unsetPath :: [ (String | Integer) ] -> a -> a
 ```
 
 Used to remove a property or index on a deeply nested `Object`/`Array`.
 `unsetPath` is will return a new instance with the property or index removed.
 
-The provided path can be a mixture of either `Integer`s or `String`s to allow
-for traversing through both `Array`s and `Object`s. When an `Integer` is provided
-it will treat that portion as an `Array` while `String`s are used to reference
-through `Object`s.
+The provided path can be a mixture of either Positive `Integer`s or `String`s to
+allow for traversing through both `Array`s and `Object`s. When an `Integer` is
+provided it will treat that portion as an `Array` while `String`s are used to
+reference through `Object`s.
 
 ```javascript
 import unsetPath from 'crocks/helpers/unsetPath'

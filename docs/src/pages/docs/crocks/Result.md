@@ -37,14 +37,10 @@ import Result from 'crocks/Result'
 
 import and from 'crocks/logic/and'
 import ifElse from 'crocks/logic/ifElse'
-import curry from 'crocks/core/curry'
-import tryCatch from 'crocks/Result/tryCatch'
 import compose from 'crocks/core/compose'
-import chain from 'crocks/pointfree/chain'
-import isDefined from 'crocks/predicates/isDefined'
-import constant from 'crocks/combinators/constant'
+import isNumber from 'crocks/predicates/isNumber'
 import bimap from 'crocks/pointfree/bimap'
-import identity from 'crocks/combinators/identity'
+import liftA2 from 'crocks/helpers/liftA2'
 
 const { Err, Ok } = Result
 
@@ -77,26 +73,32 @@ inRange(25)
 inRange('Test')
 //=> Err "Test"
 
-const prop =
-  curry((name, obj) => obj[name])
-
-const tryGetAge = compose(
-  bimap(constant('Age not found!'), identity),
-  chain(ensure(isDefined)),
-  tryCatch(prop('age'))
+// ensureNumber :: a -> Result [a] a
+const ensureNumber = compose(
+  bimap(x => [ x ], x => x),
+  ensure(isNumber)
 )
 
-tryGetAge({ name: 'Sarah', age: 23 })
-//=> Ok 23
+// prod :: Number -> Number -> Number
+const prod = a => b => a * b
 
-tryGetAge({ name: 'Sarah' })
-//=> Err "Age not found!"
+ensureNumber('Not a number 1')
+  .alt(ensureNumber('Not a number 2'))
+//=> Err [ "Not a number 1", "Not a number 2" ]
 
-tryGetAge(1)
-//=> Err "Age not found!"
+liftA2(
+  prod,
+  ensureNumber('Not 21'),
+  ensureNumber('Not 2')
+)
+//=> Err [ "Not 21", "Not 2" ]
 
-tryGetAge(undefined)
-//=> Err "Age not found!"
+liftA2(
+  prod,
+  ensureNumber(21),
+  ensureNumber(2)
+)
+//=> Ok 42
 ```
 
 <article id="topic-implements">
@@ -193,14 +195,15 @@ equals(
 Result.Err :: e -> Result e a
 ```
 
-Used to construct an [`Err`](#err) instance that represents the "false" or
-"Negative" portion of a disjunction. When an instance is an [`Err`](#err), most
-`Result` returning methods will just return a new [`Err`](#err) instance with
-the same containing value.
+Used to construct an [`Err`](#err) instance that represents the "false" portion
+of a disjunction. When an instance is an [`Err`](#err), most `Result` returning
+methods will just return a new [`Err`](#err) instance with the same containing
+value.
 
-The power of the [`Err`](#err) as opposed to a [`Nothing`] is that it can hold
-meaningful information on why the flow is in this path. This works as a core
-tool when using Railway Orientated Programming concepts.
+The power of the [`Err`](#err) as opposed to a [`Left`][left] or a [`Nothing`][nothing] is 
+that it can hold meaningful information on why the flow is in this path. It will
+also accumulate this information when [`ap`](#ap) or [`alt`](#alt) are used. This works as a
+core tool when using Railway Orientated Programming concepts.
 
 ```javascript
 import Result from 'crocks/Result'
@@ -1401,13 +1404,16 @@ maybeToResult('An error occurred', Just('21'))
 maybeToResult('An error occurred', Nothing())
 //=> Err "An error occurred"
 
-const getProp = compose(maybeToResult('The requested prop did not exist or was undefined'), prop)
+const getName = compose(
+  maybeToResult('Name did not exist or was undefined'),
+  prop('name')
+)
 
-getProp('name', { name: 'Jobn', age: 21 })
-//=> Ok "Jobn"
+getName({ name: 'John', age: 21 })
+//=> Ok "John"
 
-getProp('name', { age: 27 })
-//=> Err "The requested prop did not exist or was undefined"
+getName({ age: 27 })
+//=> Err "Name did not exist or was undefined"
 
 Ok(Just('in time!'))
   .chain(maybeToResult('An error occurred'))

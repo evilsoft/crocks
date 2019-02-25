@@ -220,8 +220,8 @@ const { Ok, Err } = Result
 const ensure = pred =>
   ifElse(pred, Ok, Err)
 
-// buildError :: String -> String
-const buildError = x => `${x} is not a valid number`
+// buildError :: () -> String
+const buildError = () => 'The value given was not a valid number'
 
 // add10 :: Number -> Number
 const add10 =
@@ -280,11 +280,11 @@ const { Ok, Err } = Result
 const ensure = pred =>
   ifElse(pred, Ok, Err)
 
-// buildError :: String -> String
-const buildError = x =>
-  `${x} is not a valid string`
+// buildError :: () -> String
+const buildError = () =>
+  'The value given is not a valid string'
 
-// protectedAdd10 :: a -> Result String Number
+// ensureString :: a -> Result String Number
 const ensureString = compose(
   bimap(buildError, identity),
   ensure(isString)
@@ -310,7 +310,7 @@ const safeShout = compose(
 )
 
 safeShout(45)
-//=> Err "45 is not a valid string"
+//=> Err "The value given is not a valid string"
 
 safeShout('Hey there!')
 //=> Ok "HEY THERE!"
@@ -465,8 +465,8 @@ import compose from 'crocks/core/compose'
 
 const { Ok, Err } = Result
 
-// buildError :: String -> String
-const buildError = x => Err(`${x} is not a valid number`)
+// buildError :: () -> String
+const buildError = () => Err('The value given was not a valid number')
 
 // prod :: Number -> Number -> Number
 const prod =
@@ -487,7 +487,7 @@ double(21)
 //=> Ok 42
 
 double('down')
-//=> Err "down is not a valid number"
+//=> Err "The value given was not a valid number"
 
 // getParity :: Number -> Object
 const getParity = compose(
@@ -506,7 +506,7 @@ getInfo(5324)
 //=> Ok { parity: "Even", value: 5324 }
 
 getInfo('down')
-//=> Err "down is not a valid number"
+//=> Err "The value given was not a valid number"
 ```
 
 #### alt
@@ -517,7 +517,10 @@ Result e a ~> Result e a -> Result e a
 
 Providing a means for a fallback or alternative value, `alt` combines two
 `Result` instances and will return the first [`Ok`](#ok) it encounters or
-am [`Err`](#err) if neither value is an [`Ok`](#ok).
+am [`Err`](#err) if neither value is an [`Ok`](#ok). 
+
+If the value in both [`Err`](#err) are `Semigroup`s of the same type then they
+will accumalte based on their rules.
 
 ```javascript
 import Result from 'crocks/result'
@@ -556,9 +559,9 @@ Ok('Result')
   .alt(Err('Error'))
 //=> Ok "Result"
 
-Err('Error 1')
-  .alt(Err('Error 2'))
-//=> Ok "Error 1"
+Err('Error 1.')
+  .alt(Err('Error 2.'))
+//=> Err "Error 1.Error 2."
 
 find(gte(41), [ 17, 25, 38, 42 ])
 //=> Ok 42
@@ -602,8 +605,8 @@ const { Ok, Err } = Result
 const ensure = pred =>
   ifElse(pred, Ok, Err)
 
-// buildError :: String -> String
-const buildError = x => `${x} is not a valid number`
+// buildError :: () -> String
+const buildError = () => 'The value given was not a valid number'
 
 // prod :: Number -> Number -> Number
 const prod =
@@ -642,7 +645,7 @@ finalize(double(21))
 //=> Ok { hasError: false, result: 42 }
 
 finalize(double('unk'))
-//=> Err { hasError: true, error: "unk is not a valid number" }
+//=> Err { hasError: true, error: "The value given was not a valid number" }
 ```
 
 #### ap
@@ -661,6 +664,8 @@ When either instance is an [`Err`](#err), `ap` will return an [`Err`](#err).
 This can be used to safely combine multiple values under a given combination
 function. If any of the inputs results in an [`Err`](#err) than they will never
 be applied to the function and not provide exceptions or unexpected results.
+However if the value in both [`Err`](#err) are `Semigroup`s of the same type
+then they will accumalte based on their rules.
 
 ```javascript
 import Result from 'crocks/Result'
@@ -672,8 +677,8 @@ import liftA2 from 'crocks/helpers/liftA2'
 
 const { Ok, Err } = Result
 
-// buildError :: String -> String
-const buildError = x => Err(`${x} is not a valid number`)
+// buildError :: () -> String
+const buildError = () => Err('The value given was not a valid number')
 
 // prod :: Number -> Number -> Number
 const prod =
@@ -689,7 +694,7 @@ map(prod, fromNumber(2))
 
 map(prod, fromNumber('string'))
   .ap(fromNumber(5))
-//=> Err "string is not a valid number"
+//=> Err "The value given was not a valid number"
 
 Ok(prod)
   .ap(fromNumber(2))
@@ -699,10 +704,16 @@ Ok(prod)
 Ok(prod)
   .ap(fromNumber('string'))
   .ap(fromNumber(21))
-//=> Err "string is not a valid number"
+//=> Err "The value given was not a valid number"
 
 liftA2(prod, fromNumber(2), fromNumber(21))
 //=> Ok 42
+
+liftA2(prod, Err('Not 2'), Err('Not 21'))
+//=> Err "Not 2Not 21"
+
+liftA2(prod, Err([ 'Not 2' ]), Err([ 'Not 21' ]))
+//=> Err [ "Not 2", "Not 21" ]
 ```
 
 #### sequence
@@ -1046,13 +1057,13 @@ simpleSwap(Err(21))
 
 const ensure = (pred, f) => ifElse(pred, Ok, compose(Err, f))
 
-const fromNumber = ensure(isNumber, x => `${x} is not a valid number`)
+const fromNumber = ensure(isNumber, () => 'The value given was not a valid number')
 
 const swapWithDefault =
-  swap(constant(0), x => `${x} is not a valid value`)
+  swap(constant(0), () => 'The value given is not a valid value')
 
 swapWithDefault(fromNumber(4))
-//=> Err "4 is not a valid value"
+//=> Err "The value given is not a valid value"
 
 swapWithDefault(fromNumber('number'))
 //=> Ok 0
@@ -1088,7 +1099,7 @@ const { Ok, Err } = Result
 
 const ensure = (pred, f) => ifElse(pred, Ok, compose(Err, f))
 
-const fromNumber = ensure(isNumber, x => `${x} is not a valid number`)
+const fromNumber = ensure(isNumber, () => 'The value given was not a valid number')
 
 const prod =
   x => y => x * y
@@ -1117,7 +1128,7 @@ double(42)
 //=> { result: 84, hasError: false }
 
 double('value')
-//=> { error: 'value is not a valid number', hasError: true }
+//=> { error: 'The value given was not a valid number', hasError: true }
 ```
 
 </article>

@@ -13,22 +13,22 @@
     "preversion": "npm run build",
     "postpublish": "npm run docs:deploy",
     "build:publish": "npm test && ./bin/publish",
-    "build:dist": "rollup -c && cp -r src/* build/",
+    "build:dist": "rollup -c",
     "build": "doctoc && rimraf build && npm run build:dist",
     "doctoc": "doctoc README.md",
     "docs:dev": "cd docs && npm start",
     "docs:deploy": "cd docs && npm run docs:deploy",
-    "lint": "eslint --ext .md,.js .",
-    "lint:dev": "esw --ext .md,.js . -w --color",
+    "lint": "eslint --ext .md,.js,.mjs .",
+    "lint:dev": "esw --ext .md,.js,.mjs . -w --color",
     "spec:coverage": "nyc npm run spec:build",
-    "spec:dev": "nodemon -q -e js -w src -x \"npm run spec:src -s | tap-spec\"",
-    "spec:build": "npm run build && tape -r esm 'build/**/*.spec.js' 'build/*.spec.js'",
-    "spec:src": "tape -r esm 'src/**/*.spec.js' 'src/*.spec.js'",
+    "spec:dev": "nodemon -q -e mjs -w src -x \"npm run spec:src -s | tap-spec\"",
+    "spec:build": "npm run build && tape -r esm 'build/**/*.spec.mjs' 'build/*.spec.mjs'",
+    "spec:src": "tape -r esm 'src/**/*.spec.mjs' 'src/*.spec.mjs'",
     "test": "npm run lint && npm run spec:coverage",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "lint-staged": {
-    "*.{js,md}": [
+    "*.{js,mjs,md}": [
       "eslint --fix",
       "git add"
     ]
@@ -69,7 +69,7 @@
       "src/",
       "rollup.config.js",
       "build/test/",
-      "**/*.spec.js"
+      "**/*.spec.mjs"
     ]
   },
   "devDependencies": {

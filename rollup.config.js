@@ -2,31 +2,47 @@ import buble from 'rollup-plugin-buble'
 import resolve from 'rollup-plugin-node-resolve'
 import { terser } from 'rollup-plugin-terser'
 
-const input = 'src/index.js'
+const input = 'src/index.mjs'
 
-/* istanbul ignore next */
-export default [{
+const base = {
   input,
   experimentalCodeSplitting: true,
   experimentalPreserveModules: true,
+}
+
+const esm = {
+  ...base,
   output: {
-    dir: 'build/cjs',
+    dir: 'build',
+    format: 'es',
+  },
+}
+
+const cjs = {
+  ...base,
+  output: {
+    dir: 'build_cjs',
+    format: 'cjs',
     plugins: [
       resolve(),
       buble(),
     ],
-    format: 'cjs',
-  }
-}, {
+  },
+}
+
+const umd = {
   input,
+  output: {
+    file: 'build/crocks.min.js',
+    format: 'umd',
+    name: 'crocks',
+  },
   plugins: [
     resolve(),
     buble(),
     terser(),
   ],
-  output: {
-    file: 'build/crocks.min.js',
-    format: 'umd',
-    name: 'crocks',
-  }
-}]
+}
+
+/* istanbul ignore next */
+export default [esm, cjs, umd]

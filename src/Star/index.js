@@ -20,6 +20,8 @@ export const type = getType('Star')
 
 const _type = typeFn(type(), VERSION)
 
+const __type = type()
+
 const merge =
   (fn, m) => m.merge(fn)
 
@@ -41,7 +43,7 @@ export default function _Star(Monad) {
     Monad['@@type']
 
   const outerType =
-    `${type()}( ${innerType} )`
+    `${__type}( ${innerType} )`
 
   const typeString =
     `${_type}( ${innerFullType} )`

@@ -42,7 +42,7 @@ const of =
 const empty =
   () => List([])
 
-function fromArray(xs) {
+export function fromArray(xs) {
   if(!isArray(xs)) {
     throw new TypeError('List.fromArray: Array required')
   }
@@ -348,8 +348,7 @@ List[fl.of] = of
 List[fl.empty] = empty
 List['@@type'] = _type
 
-List.fromArray =
-  fromArray
+List.fromArray = fromArray
 
 List['@@implements'] = _implements(
   [ 'ap', 'chain', 'concat', 'empty', 'equals', 'map', 'of', 'reduce', 'traverse' ]

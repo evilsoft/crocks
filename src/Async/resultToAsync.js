@@ -2,8 +2,8 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 import Async from './index'
-import types from '../core/types'
-const Result = types.proxy('Result')
+import { proxy } from '../core/types'
+const Result = proxy('Result')
 
 import curry from '../core/curry'
 import isFunction from '../core/isFunction'

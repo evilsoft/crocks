@@ -5,7 +5,7 @@ const VERSION = 2
 
 import _implements from '../core/implements'
 import _inspect from '../core/inspect'
-import _object from '../core/object'
+import { assign } from '../core/object'
 import _equals from '../core/equals'
 
 import fl from '../core/flNames'
@@ -46,7 +46,7 @@ function Assign(o) {
         throw new TypeError(`Assign.${method}: Assign required`)
       }
 
-      return Assign(_object.assign(m.valueOf(), x))
+      return Assign(assign(m.valueOf(), x))
     }
   }
 

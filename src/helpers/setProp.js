@@ -44,7 +44,8 @@ function fn(name) {
 const setProp =
   fn('setProp')
 
-setProp.origFn =
-  fn
+export const origFn = fn
+
+setProp.origFn = fn
 
 export default setProp

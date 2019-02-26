@@ -6,7 +6,7 @@ import isArray from '../core/isArray'
 import isPredOrFunc from '../core/isPredOrFunc'
 import isFunction from '../core/isFunction'
 import isObject from '../core/isObject'
-import object from '../core/object'
+import { filter } from '../core/object'
 import predOrFunc from '../core/predOrFunc'
 
 const not =
@@ -32,7 +32,7 @@ function reject(pred, m) {
   }
 
   if(isObject(m)) {
-    return object.filter(not(fn), m)
+    return filter(not(fn), m)
   }
 
   throw new TypeError('reject: Foldable or Object required for second argument')

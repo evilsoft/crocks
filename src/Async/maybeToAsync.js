@@ -2,12 +2,13 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 import Async from './index'
-import types from '../core/types'
-const Maybe = types.proxy('Maybe')
+import { proxy } from '../core/types'
 
 import curry from '../core/curry'
 import isFunction from '../core/isFunction'
 import isSameType from '../core/isSameType'
+
+const Maybe = proxy('Maybe')
 
 const constant = x => () => x
 

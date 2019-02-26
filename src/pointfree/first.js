@@ -1,8 +1,8 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-import types from '../core/types'
-const Pair = types.proxy('Pair')
+import { proxy } from '../core/types'
+const Pair = proxy('Pair')
 
 import isFunction from '../core/isFunction'
 import isSameType from '../core/isSameType'

@@ -3,7 +3,7 @@
 
 import curry from '../core/curry'
 import isObject from '../core/isObject'
-import object from '../core/object'
+import { assign } from '../core/object'
 
 // defaultProps : Object -> Object -> Object
 function defaultProps(x, m) {
@@ -11,7 +11,7 @@ function defaultProps(x, m) {
     throw new TypeError('defaultProps: Objects required for both arguments')
   }
 
-  return object.assign(m, x)
+  return assign(m, x)
 }
 
 export default curry(defaultProps)

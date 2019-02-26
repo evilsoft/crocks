@@ -3,7 +3,7 @@
 
 const VERSION = 3
 
-import _defineUnion from './defineUnion'
+import defineUnion from './defineUnion'
 import _equals from './equals'
 import _implements from './implements'
 import _innerConcat from './innerConcat'
@@ -28,25 +28,23 @@ const constant = x => () => x
 const identity = x => x
 
 const _maybe =
-  _defineUnion({ Nothing: [], Just: [ 'a' ] })
+  defineUnion({ Nothing: [], Just: [ 'a' ] })
 
-export const Nothing =
+const _Nothing =
   _maybe.Nothing
 
-export const Just =
+const _Just =
   _maybe.Just
 
-Maybe.Nothing =
-  compose(Maybe, Nothing)
+export const Nothing =
+  compose(Maybe, _Nothing)
 
-Maybe.Just =
-  compose(Maybe, Just)
+export const Just =
+  compose(Maybe, _Just)
 
-const of =
-  compose(Maybe, Just)
+export const of = Just
 
-const zero =
-  compose(Maybe, Nothing)
+export const zero = Nothing
 
 function runSequence(x) {
   if(!(isApply(x) || isArray(x))) {
@@ -58,7 +56,7 @@ function runSequence(x) {
   return x.map(of)
 }
 
-function Maybe(u) {
+export default function Maybe(u) {
   if(!arguments.length) {
     throw new TypeError('Maybe: Must wrap something, try using Nothing or Just constructors')
   }
@@ -243,6 +241,8 @@ function Maybe(u) {
 Maybe.of = of
 Maybe.zero = zero
 Maybe.type = type
+Maybe.Just = Just
+Maybe.Nothing = Nothing
 
 Maybe[fl.of] = of
 Maybe[fl.zero] = zero
@@ -251,5 +251,3 @@ Maybe['@@type'] = _type
 Maybe['@@implements'] = _implements(
   [ 'alt', 'ap', 'chain', 'concat', 'equals', 'map', 'of', 'traverse', 'zero' ]
 )
-
-export default Maybe

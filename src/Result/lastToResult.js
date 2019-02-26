@@ -2,8 +2,8 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 import Result from './index'
-import types from '../core/types'
-const Last = types.proxy('Last')
+import { proxy } from '../core/types'
+const Last = proxy('Last')
 
 import curry from '../core/curry'
 import isFunction from '../core/isFunction'

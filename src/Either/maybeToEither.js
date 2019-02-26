@@ -2,8 +2,8 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 import Either from './index'
-import types from '../core/types'
-const Maybe = types.proxy('Maybe')
+import { proxy } from '../core/types'
+const Maybe = proxy('Maybe')
 
 import curry from '../core/curry'
 import isFunction from '../core/isFunction'

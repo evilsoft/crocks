@@ -17,9 +17,9 @@ import isSemigroup from './isSemigroup'
 
 import { typeFn, type as getType } from './types'
 
-const _type = typeFn(type(), VERSION)
-
 export const type = getType('Pair')
+
+const _type = typeFn(type(), VERSION)
 
 export default function Pair(l, r) {
   if(arguments.length < 2) {

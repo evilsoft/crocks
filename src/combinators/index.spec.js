@@ -1,6 +1,6 @@
 import test from 'tape'
 
-import Combinators from '.'
+import * as Combinators from '.'
 
 import applyTo from './applyTo'
 import composeB from './composeB'

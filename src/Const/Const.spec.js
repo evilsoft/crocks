@@ -1,8 +1,6 @@
 import test from 'tape'
 import { spy as _spy } from 'sinon'
-import { bindFunc as _bindFunc } from '../test/helpers'
-
-const bindFunc = _bindFunc
+import { bindFunc } from '../test/helpers'
 
 import Last, { type } from '../test/LastMonoid'
 import MockCrock from '../test/MockCrock'

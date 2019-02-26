@@ -4,8 +4,9 @@
 import curry from '../core/curry'
 import isSameType from '../core/isSameType'
 
-import types from '../core/types'
-const Async = types.proxy('Async')
+import { proxy } from '../core/types'
+
+const Async = proxy('Async')
 
 function race(m, a) {
   if(!(isSameType(m, a) && isSameType(Async, m))) {

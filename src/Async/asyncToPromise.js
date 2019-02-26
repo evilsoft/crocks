@@ -4,9 +4,9 @@
 import curry from '../core/curry'
 import isSameType from '../core/isSameType'
 import isFunction from '../core/isFunction'
-import types from '../core/types'
+import { proxy } from '../core/types'
 
-const Async = types.proxy('Async')
+const Async = proxy('Async')
 
 const toPromise = m => {
   if(!isSameType(Async, m)) {

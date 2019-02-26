@@ -2,12 +2,13 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 import Async from './index'
-import types from '../core/types'
-const Either = types.proxy('Either')
+import { proxy } from '../core/types'
 
 import curry from '../core/curry'
 import isFunction from '../core/isFunction'
 import isSameType from '../core/isSameType'
+
+const Either = proxy('Either')
 
 const applyTransform = either =>
   either.either(Async.Rejected, Async.Resolved)

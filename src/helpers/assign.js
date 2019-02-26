@@ -3,7 +3,7 @@
 
 import curry from '../core/curry'
 import isObject from '../core/isObject'
-import object from '../core/object'
+import { assign as _assign } from '../core/object'
 
 // assign : Object -> Object -> Object
 function assign(x, m) {
@@ -11,7 +11,7 @@ function assign(x, m) {
     throw new TypeError('assign: Objects required for both arguments')
   }
 
-  return object.assign(x, m)
+  return _assign(x, m)
 }
 
 export default curry(assign)

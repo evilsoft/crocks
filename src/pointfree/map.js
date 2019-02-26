@@ -8,8 +8,9 @@ import isObject from '../core/isObject'
 import isFunction from '../core/isFunction'
 import isFunctor from '../core/isFunctor'
 
-import array from '../core/array'
-import object from '../core/object'
+import { map as arrayMap } from '../core/array'
+import { map as objectMap } from '../core/object'
+
 import fl from '../core/flNames'
 
 // map : Functor f => (a -> b) -> f a -> f b
@@ -23,7 +24,7 @@ function map(fn, m) {
   }
 
   if(isArray(m)) {
-    return array.map(fn, m)
+    return arrayMap(fn, m)
   }
 
   if(m && isFunctor(m)) {
@@ -31,7 +32,7 @@ function map(fn, m) {
   }
 
   if(isObject(m)) {
-    return object.map(fn, m)
+    return objectMap(fn, m)
   }
 
   throw new TypeError('map: Object, Function or Functor of the same type required for second argument')

@@ -62,9 +62,10 @@ each branching function, the results of which will be applied to the accumulatin
 function.
 
 ```javascript
+import converge from 'crocks/combinators/converge'
+
 import Maybe from 'crocks/Maybe'
 import alt from 'crocks/pointfree/alt'
-import converge from 'crocks/combinators/converge'
 import prop from 'crocks/Maybe/prop'
 
 const { Just } = Maybe
@@ -205,11 +206,47 @@ as an exercise to reason about why this is so powerful and important.
 substitution :: (a -> b -> c) -> (a -> b) -> a -> c
 ```
 
-While it a complicated little bugger, it can come in very handy from time to
-time. In it's first two arguments it takes functions. The first must be binary
-and the second unary. That will return you a function that is ready to take some
-value. Once supplied the fun starts, it will pass the `a` to the first argument
-of both functions, and the result of the second function to the second parameter
-of the first function. Finally after all that juggling, it will return the
-result of that first function. When used with partial application on that first
-parameter, a whole new world of combinatory madness is presented!
+While it may seem like a complicated little bugger, `substitution` can come in
+very handy from time to time. `substitution` is used when you have a `binary`
+function and you can supply the first argument and can use that value to create
+the second argument. It first takes a `binary` function followed by a `unary`
+function for it's first two arguments. This will return a function that is ready
+to take some context, `a`. Once supplied the fun starts, it will pass the given
+`a` to the `binary` and `unary` functions, and will then apply the result of
+the `unary` function as the second parameter of the `binary` function. Finally
+after all that juggling, it will return the result of that `binary` function.
+
+When used with partial application on that first parameter, a whole new world
+of combinatory madness is presented!
+
+```javascript
+import substitution from 'crocks/combinators/substitution'
+
+import curry from 'crocks/core/curry'
+import composeB from 'crocks/combinators/composeB'
+
+// getDetails :: String -> Number -> String
+const getDetails = curry((text, length) => 
+  `The given text "${text}" has a length of ${length}`
+)
+
+// getLength :: a -> Number
+const getLength = s => 
+  s.length
+
+substitution(getDetails, getLength, 'testing')
+//=> "The given text \"testing\" has a length of 7"
+
+// getLastIndex :: a -> Number
+const getLastIndex = composeB(
+  x => x - 1,
+  getLength
+)
+
+// slice :: Array -> Array
+const slice = curry((arr, index) => 
+  arr.slice(index))
+
+substitution(slice, getLastIndex, [ 1, 2, 3, 4, 5 ])
+//=> [ 5 ]
+```

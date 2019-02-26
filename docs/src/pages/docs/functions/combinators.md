@@ -130,9 +130,59 @@ flip :: (a -> b -> c) -> b -> a -> c
 ```
 
 This little function just takes a function and returns a function that takes
-the first two parameters in reverse. One can compose flip calls down the line to
-flip all, or some of the other parameters if there are more than two. Mix and
-match to your heart's desire.
+the first two parameters in reverse. `flip` is perfectly suited for those
+moments where you have the context of your function but not the data. Applying
+`flip` to the function will allow you to pass in your context and will return a
+function waiting for the data. This will happen often when you're using composition.
+
+When required, one can compose flip calls down the line to flip all, or some of
+the other parameters if there are more than two. Mix and match to your heart's
+desire.
+
+```javascript
+import flip from 'crocks/combinators/flip'
+
+import isNumber from 'crocks/predicates/isNumber'
+import Pred from 'crocks/Pred'
+import mconcat from 'crocks/helpers/mconcat'
+import runWith from 'crocks/pointfree/runWith'
+import composeB from 'crocks/combinators/composeB'
+import concat from 'crocks/pointfree/concat'
+
+concat('first param. ', 'second param. ')
+//=> "second param. first param. ""
+
+flip(concat, 'first param. ', 'second param. ')
+//=> "first param. second param. ""
+
+// checkAll :: [ a -> Boolean ] -> a -> Boolean
+const checkAll = composeB(flip(runWith), mconcat(Pred))
+
+// lte :: Number -> Number -> Number
+const lte = a => b => b <= a
+
+// lte :: Number -> Number -> Number
+const gte = a => b => b >= a
+
+// between2and10 :: a -> Boolean
+const between2and10 = checkAll([
+  isNumber,
+  gte(2),
+  lte(10)
+])
+
+between2and10(8)
+//=> true
+
+between2and10(11)
+//=> false
+
+between2and10(1)
+//=> false
+
+between2and10('not a number')
+//=> false
+```
 
 #### identity
 

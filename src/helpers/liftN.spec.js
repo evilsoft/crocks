@@ -2,8 +2,6 @@ import test from 'tape'
 import { bindFunc } from '../test/helpers'
 import MockCrock from '../test/MockCrock'
 
-
-
 import isFunction from '../core/isFunction'
 import isSameType from '../core/isSameType'
 

@@ -3,8 +3,6 @@ import sinon from 'sinon'
 import { bindFunc } from '../test/helpers'
 import MockCrock from '../test/MockCrock'
 
-
-
 import curry from './curry'
 import _compose from './compose'
 const compose = curry(_compose)
@@ -26,7 +24,7 @@ const either =
 const applyTo =
   x => fn => fn(x)
 
-import Maybe. { Just, Nothing } from './Maybe'
+import Maybe, { Just, Nothing } from './Maybe'
 
 test('Maybe', t => {
   const m = Maybe(0)

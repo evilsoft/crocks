@@ -2,8 +2,6 @@ import test from 'tape'
 import { bindFunc } from '../test/helpers'
 import Last from '../test/LastMonoid'
 
-
-
 import isFunction from '../core/isFunction'
 
 import mconcat from './mconcat'

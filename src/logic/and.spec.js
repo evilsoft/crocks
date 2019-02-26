@@ -1,8 +1,6 @@
 import test from 'tape'
 import { bindFunc } from '../test/helpers'
 
-
-
 import Pred from '../Pred'
 import isFunction from '../core/isFunction'
 import unit from '../core/_unit'

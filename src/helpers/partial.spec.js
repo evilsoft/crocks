@@ -1,7 +1,6 @@
 import test from 'tape'
 import { bindFunc } from '../test/helpers'
 
-
 import isFunction from '../core/isFunction'
 
 import partial from './partial'

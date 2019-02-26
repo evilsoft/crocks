@@ -3,8 +3,6 @@ import sinon from 'sinon'
 import MockCrock from '../test/MockCrock'
 import { bindFunc } from '../test/helpers'
 
-
-
 import isFunction from './isFunction'
 import isObject from './isObject'
 import isString from './isString'

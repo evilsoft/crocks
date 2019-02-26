@@ -3,8 +3,6 @@ import sinon from 'sinon'
 import { bindFunc } from '../test/helpers'
 import MockCrock from '../test/MockCrock'
 
-
-
 import isArray from '../core/isArray'
 import isFunction from '../core/isFunction'
 import isSameType from '../core/isSameType'

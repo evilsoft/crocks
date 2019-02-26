@@ -3,8 +3,6 @@ import { bindFunc } from '../test/helpers'
 import Mock from '../test/MockCrock'
 import Last from '../test/LastMonoid'
 
-
-
 import isFunction from './isFunction'
 import isSameType from './isSameType'
 

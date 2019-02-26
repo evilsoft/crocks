@@ -2,8 +2,6 @@ import test from 'tape'
 import Last from '../test/LastMonoid'
 import { bindFunc } from '../test/helpers'
 
-
-
 import isFunction from '../core/isFunction'
 
 import mreduce from './mreduce'

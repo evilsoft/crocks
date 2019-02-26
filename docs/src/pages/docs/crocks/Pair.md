@@ -371,10 +371,10 @@ additional requirement, is that instances of the same `Semigroup` must occupy
 the first position of the source `Pair` and the `Pair` returned by the function.
 
 ```javascript
-const Pair = require('crocks/Pair')
+import Pair from 'crocks/Pair'
 
-const setProp = require('crocks/helpers/setProp')
-const omit = require('crocks/helpers/omit')
+import setProp from 'crocks/helpers/setProp'
+import omit from 'crocks/helpers/omit'
 
 // addTmp :: (String, a, Object) -> Pair [ String ] Object
 const addTmp = (key, value, x) =>

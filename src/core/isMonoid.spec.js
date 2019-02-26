@@ -1,7 +1,5 @@
 import test from 'tape'
-import { bindFunc } from '../test/helpers'
-
-const makeFake = helpers.makeFake
+import { makeFake } from '../test/helpers'
 
 import isFunction from './isFunction'
 

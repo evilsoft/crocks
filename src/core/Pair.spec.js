@@ -2,8 +2,6 @@ import test from 'tape'
 import sinon from 'sinon'
 import { bindFunc } from '../test/helpers'
 
-
-
 import MockCrock from '../test/MockCrock'
 
 import curry from './curry'

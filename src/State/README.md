@@ -453,7 +453,7 @@ initial state and will return the resulting `Pair` with the resultant in the
 
 
 ```javascript
-import { get, put } from 'crocks/State'
+import State, { get, put } from 'crocks/State'
 
 import K from 'crocks/combinators/constant'
 
@@ -628,7 +628,7 @@ to the [`execWith`](#execwith) method to the provided `State` instance, it will
 also return the resulting state, throwing away the resulting resultant.
 
 ```javascript
-import { modify } from 'crocks/State'
+import State, { modify } from 'crocks/State'
 
 import execWith from 'crocks/State/execWith'
 

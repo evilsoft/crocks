@@ -2,8 +2,6 @@ import test from 'tape'
 import sinon from 'sinon'
 import { bindFunc } from '../test/helpers'
 
-
-
 const constant = x => () => x
 const identity = x => x
 

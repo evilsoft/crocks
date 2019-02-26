@@ -2,7 +2,6 @@ import test from 'tape'
 import sinon from 'sinon'
 import { bindFunc } from '../test/helpers'
 
-
 import isFunction from '../core/isFunction'
 
 import flip from './flip'

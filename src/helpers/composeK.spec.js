@@ -3,8 +3,6 @@ import sinon from 'sinon'
 import { bindFunc } from '../test/helpers'
 import Mock from '../test/MockCrock'
 
-
-
 import isFunction from '../core/isFunction'
 
 const identity = x => x

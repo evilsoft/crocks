@@ -3,8 +3,6 @@ import sinon from 'sinon'
 import MockCrock from '../test/MockCrock'
 import { bindFunc } from '../test/helpers'
 
-
-
 import curry from '../core/curry'
 import _compose from '../core/compose'
 const compose = curry(_compose)

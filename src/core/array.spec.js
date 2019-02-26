@@ -2,8 +2,6 @@ import test from 'tape'
 import { bindFunc } from '../test/helpers'
 import MockCrock from '../test/MockCrock'
 
-
-
 import curry from './curry'
 import _compose from '../core/compose'
 const compose = curry(_compose)

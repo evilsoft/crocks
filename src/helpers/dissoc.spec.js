@@ -1,7 +1,6 @@
 import test from 'tape'
 import { bindFunc } from '../test/helpers'
 
-
 import unit from '../core/_unit'
 
 import dissoc from './dissoc'

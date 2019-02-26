@@ -2,8 +2,6 @@ import test from 'tape'
 import sinon from 'sinon'
 import { bindFunc } from '../test/helpers'
 
-
-
 import Pair from '../core/Pair'
 import isFunction from '../core/isFunction'
 import unit from '../core/_unit'

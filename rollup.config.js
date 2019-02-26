@@ -2,18 +2,24 @@ import buble from 'rollup-plugin-buble'
 import resolve from 'rollup-plugin-node-resolve'
 import { terser } from 'rollup-plugin-terser'
 
-const input = 'src/index.mjs'
-
 const base = {
-  input,
-  experimentalCodeSplitting: true,
-  experimentalPreserveModules: true,
+  input: 'src/index.js',
+  preserveModules: true,
 }
+
+const minifiedLegacyBrowserBundle = {
+  preserveModules: false,
+  plugins: [
+    resolve(),
+    buble(),
+    terser(),
+  ]
+};
 
 const esm = {
   ...base,
   output: {
-    dir: 'build',
+    dir: 'build/es',
     format: 'es',
   },
 }
@@ -21,7 +27,7 @@ const esm = {
 const cjs = {
   ...base,
   output: {
-    dir: 'build_cjs',
+    dir: 'build/cjs',
     format: 'cjs',
     plugins: [
       resolve(),
@@ -31,18 +37,29 @@ const cjs = {
 }
 
 const umd = {
-  input,
+  ...base,
+  ...minifiedLegacyBrowserBundle,
   output: {
-    file: 'build/crocks.min.js',
+    file: 'build/umd/crocks.umd.min.js',
     format: 'umd',
     name: 'crocks',
   },
-  plugins: [
-    resolve(),
-    buble(),
-    terser(),
-  ],
+}
+
+const system = {
+  ...base,
+  ...minifiedLegacyBrowserBundle,
+  preserveModules: true,
+  output: {
+    dir: 'build/system',
+    format: 'system'
+  },
 }
 
 /* istanbul ignore next */
-export default [esm, cjs, umd]
+export default [
+  cjs,
+  esm,
+  system,
+  umd,
+]

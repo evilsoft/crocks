@@ -22,7 +22,6 @@
     "lint:dev": "esw --ext .md,.js . -w --color",
     "spec:coverage": "nyc npm run spec:src",
     "spec:dev": "nodemon -q -e js -w src -x \"npm run spec:src -s | tap-spec\"",
-    "spec:build": "npm run build && tape -r esm 'build/**/*.spec.js' 'build/*.spec.js'",
     "spec:src": "tape -r esm src/**/*.spec.js src/*.spec.js",
     "test": "npm run lint && npm run spec:coverage",
     "coverage": "nyc report --reporter=text-lcov | coveralls"

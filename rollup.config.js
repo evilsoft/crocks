@@ -18,6 +18,9 @@ const minifiedLegacyBrowserBundle = {
 
 const esm = {
   ...base,
+  plugins: [
+    resolve()
+  ],
   output: {
     dir: 'build/es',
     format: 'es',
@@ -29,11 +32,11 @@ const cjs = {
   output: {
     dir: 'build/cjs',
     format: 'cjs',
-    plugins: [
-      resolve(),
-      buble(),
-    ],
   },
+  plugins: [
+    resolve(),
+    buble(),
+  ],
 }
 
 const umd = {
@@ -58,8 +61,8 @@ const system = {
 
 /* istanbul ignore next */
 export default [
-  cjs,
   esm,
+  cjs,
   system,
   umd,
 ]

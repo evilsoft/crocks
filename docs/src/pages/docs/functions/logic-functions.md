@@ -274,11 +274,11 @@ import compose from 'crocks/core/compose'
 import flip from 'crocks/combinators/flip'
 import identity from 'crocks/combinators/identity'
 
-// isFalsey :: a -> Boolean
-const isFalsey = not(identity)
+// isFalsy :: a -> Boolean
+const isFalsy = not(identity)
 
 // isTruthy :: a -> Boolean
-const isTruthy = not(isFalsey)
+const isTruthy = not(isFalsy)
 
 isTruthy('Test string')
 //=> true
@@ -286,10 +286,10 @@ isTruthy('Test string')
 isTruthy('')
 //=> false
 
-isFalsey('')
+isFalsy('')
 //=> true
 
-isFalsey('Test string')
+isFalsy('Test string')
 //=> false
 
 // User :: { String, String, String}
@@ -368,16 +368,16 @@ const createResponse = (users, error = '') => ({
   }
 })
 
-const hasNoData = or(
-  propSatisfies('error', not(isEmpty)),
-  propPathSatisfies(['response', 'users'], isEmpty)
+const hasData = or(
+  propSatisfies('error',(isEmpty)),
+  propPathSatisfies(['response', 'users'], not(isEmpty))
 )
 
-hasNoData(createResponse([ { name: 'User 1' } ]))
-//=> false
-
-hasNoData(createResponse([], 'No users found'))
+hasData(createResponse([ { name: 'User 1' } ]))
 //=> true
+
+hasData(createResponse([], 'No users found'))
+//=> false
 
 ```
 
@@ -401,14 +401,18 @@ import unless from 'crocks/logic/unless'
 
 import constant from 'crocks/combinator/constant'
 import isString from 'crocks/predicates/isString'
+import flip from 'crocks/combinators/flip'
 
 // prod :: Number -> Number -> Number
 const prod = a => b => b * a
 
-unless(constant(true), prod(2), 21)
+// doubleUnless :: (a -> boolean) -> Number -> Number
+const doubleUnless = flip(unless, prod(2))
+
+doubleUnless(constant(true), 21)
 //=> 21
 
-unless(constant(false), prod(2), 21)
+doubleUnless(constant(false), 21)
 //=> 42
 
 // toString :: a -> String
@@ -442,32 +446,49 @@ of this function.
 import when from 'crocks/logic/when'
 
 import constant from 'crocks/combinator/constant'
+import flip from 'crocks/combinator/flip'
+import composeB from 'crocks/combinator/composeB'
+import compose from 'crocks/core/compose'
 
 // prod :: Number -> Number -> Number
 const prod = a => b => b * a
 
-when(constant(true), prod(2), 21)
+// doubleWhen :: (a -> boolean) -> Number -> Number
+const doubleWhen = flip(when, prod(2))
+
+doubleWhen(constant(true), 21)
 //=> 42
 
-when(constant(false), prod(2), 21)
+doubleWhen(constant(false), 21)
 //=> 21
 
 // gt :: Number -> Number -> Boolean
 const gt = a => b => b > a
 
-// dec :: Number -> Number
-const dec = a => a - 1
+// subtract :: Number -> Number
+const subtract = a => b => b - a
 
-// dec :: Number -> Number
-const safeDec = when(gt(0), dec)
+// protectedSubtract :: Number -> Number -> Number
+const protectedSubtract = composeB(
+  when(gt(0)), 
+  subtract
+)
 
-let lives = 3
+// smallExplosion :: Number -> Number
+const smallExplosion = protectedSubtract(15)
 
-for (let i = 0; i < 10; i++) {
-  lives = safeDec(lives)
-}
+// largeExplosion :: Number -> Number
+const largeExplosion = compose(
+  smallExplosion,
+  smallExplosion,
+  smallExplosion,
+)
 
-console.log(`Lives remaining: ${lives}`)
+let health = 30
+
+health = largeExplosion(health)
+
+console.log(`Health remaining: ${health}`)
 //=> "Lives remaining: 0"
 ```
 

@@ -67,6 +67,8 @@
     "branches": 100,
     "exclude": [
       "rollup.config.js",
+      "**/*.spec.js",
+      "src/test/*",
       "build/*"
     ]
   },

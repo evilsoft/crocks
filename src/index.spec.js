@@ -222,7 +222,7 @@ import tupleToArray from './Tuple/tupleToArray'
 import writerToPair from './Pair/writerToPair'
 
 test('entry', t => {
-  t.equal(toString(), '[object Object]', 'is an object')
+  t.equal(typeof Crocks, 'object', 'is an object')
 
   // combinators
   t.equal(Crocks.applyTo, applyTo, 'provides the T combinator (applyTo)')

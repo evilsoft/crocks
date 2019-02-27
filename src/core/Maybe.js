@@ -62,7 +62,7 @@ export default function Maybe(u) {
   }
 
   const x =
-    !_maybe.includes(u) ? Just(u) : u
+    !_maybe.includes(u) ? _Just(u) : u
 
   const option =
     n => either(constant(n), identity)

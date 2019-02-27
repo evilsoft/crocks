@@ -66,10 +66,8 @@
     "functions": 100,
     "branches": 100,
     "exclude": [
-      "src/",
       "rollup.config.js",
-      "build/test/",
-      "**/*.spec.js"
+      "build/*"
     ]
   },
   "devDependencies": {

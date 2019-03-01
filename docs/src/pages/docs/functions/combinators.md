@@ -31,10 +31,38 @@ composeB :: (b -> c) -> (a -> b) -> a -> c
 Provides a means to describe a composition between two functions. it takes two
 functions and a value. Given `composeB(f, g)`, which is read `f` after `g`, it
 will return a function that will take value `a` and apply it to `g`, passing the
-result as an argument to `f`, and will finally return the result of `f`. (This
+result as an argument to `f`, and will finally return the result of `f`. This
 allows only two functions, if you want to avoid things like:
 `composeB(composeB(f, g), composeB(h, i))` then check out
-[`compose`](helpers.html#compose).)
+[`compose`][compose].
+
+```javascript
+import composeB from 'crocks/combinators/composeB'
+
+import Either from 'crocks/Either'
+import chain from 'crocks/pointfree/chain'
+import isString from 'crocks/predicates/isString'
+import ifElse from 'crocks/logic/ifElse'
+
+const { Left, Right } = Either
+
+// yell :: String -> String
+const yell =
+  x => `${x.toUpperCase()}!`
+
+// safeYell :: a -> Either a String
+const safeYell =  ifElse(
+  isString,
+  composeB(Right, yell),
+  Left
+)
+
+safeYell('quite')
+//=> Right "QUITE!"
+
+safeYell(42)
+//=> Left 42
+```
 
 #### constant
 
@@ -62,63 +90,78 @@ each branching function, the results of which will be applied to the accumulatin
 function.
 
 ```javascript
-import converge from 'crocks/combinators/converge'
+import converge from "crocks/combinators/converge"
 
-import Maybe from 'crocks/Maybe'
-import alt from 'crocks/pointfree/alt'
-import prop from 'crocks/Maybe/prop'
-
-const { Just } = Maybe
+import alt from "crocks/pointfree/alt"
+import prop from "crocks/Maybe/prop"
+import propOr from "crocks/Maybe/propOr"
+import liftA2 from "crocks/helpers/liftA2"
 
 // data :: [ Number ]
-const data = [ 1, 2, 3, 4, 5 ]
+const data = [1, 2, 3, 4, 5];
 
 // divide :: Number -> Number -> Number
-const divide = x => y => x / y
+const divide = x => y => 
+  y / x;
+
+// add :: Number -> Number -> Number
+const add = a => b => 
+  b + a
 
 // sum :: [ Number ] -> Number
-const sum = xs => xs.reduce((m, n) => m + n, 0)
+const sum = xs => 
+  xs.reduce(add, 0);
 
 // length :: [ a ] -> Number
-const length = xs => xs.length
+const length = propOr(0, 'length');
 
 // average :: [ Number ] -> Number
-const average = converge(divide, sum, length)
+const average = converge(divide, length, sum);
 
-average(data)
+average(data);
 //=> 3
 
 // maybeGetDisplay :: a -> Maybe b
-const maybeGetDisplay = prop('display')
+const maybeGetDisplay = prop("display");
 
 // maybeGetFirst :: a -> Maybe b
-const maybeGetFirst = prop('first')
+const maybeGetFirst = prop("first");
 
 // maybeGetLast :: a -> Maybe b
-const maybeGetLast = prop('last')
+const maybeGetLast = prop("last");
+
+const buildFullName = surname => firstname => 
+  `${firstname} ${surname}`
 
 // maybeConcatStrings :: Maybe String -> Maybe String -> Maybe String
-const maybeConcatStrings = x => y => Just(x => y => x + ' ' + y).ap(x).ap(y).alt(x).alt(y)
+const maybeBuildFullName = a => b =>
+  liftA2(buildFullName, a, b)
+    .alt(a)
+    .alt(b);
 
 // maybeMakeDisplay :: a -> Maybe String
-const maybeMakeDisplay = converge(maybeConcatStrings, maybeGetFirst, maybeGetLast)
+const maybeMakeDisplay = converge(
+  maybeBuildFullName,
+  maybeGetLast,
+  maybeGetFirst
+);
 
 // maybeGetName :: a -> Maybe b
-const maybeGetName = converge(alt, maybeGetDisplay, maybeMakeDisplay)
+const maybeGetName = converge(alt, maybeMakeDisplay, maybeGetDisplay);
 
-maybeGetName({ display: 'Jack Sparrow' })
+maybeGetName({ display: "Jack Sparrow" });
 //=> Just('Jack Sparrow')
 
-maybeGetName({ first: 'J', last: 'S' })
+maybeGetName({ first: "J", last: "S" });
 //=> Just('J S')
 
-maybeGetName({ display: 'Jack Sparrow', first: 'J', last: 'S' })
+maybeGetName({ display: "Jack Sparrow", first: "J", last: "S" });
 //=> Just('Jack Sparrow')
 
-maybeGetName({ first: 'J' })
+maybeGetName({ first: "J" });
 //=> Just('J')
 
-maybeGetName({ first: 'S' })
+maybeGetName({ first: "S" });
 //=> Just('S')
 ```
 
@@ -141,47 +184,43 @@ the other parameters if there are more than two. Mix and match to your heart's
 desire.
 
 ```javascript
-import flip from 'crocks/combinators/flip'
+import flip from "crocks/combinators/flip";
 
-import isNumber from 'crocks/predicates/isNumber'
-import Pred from 'crocks/Pred'
-import mconcat from 'crocks/helpers/mconcat'
-import runWith from 'crocks/pointfree/runWith'
-import composeB from 'crocks/combinators/composeB'
-import concat from 'crocks/pointfree/concat'
+import isNumber from "crocks/predicates/isNumber";
+import Pred from "crocks/Pred";
+import mconcat from "crocks/helpers/mconcat";
+import runWith from "crocks/pointfree/runWith";
+import composeB from "crocks/combinators/composeB";
+import concat from "crocks/pointfree/concat";
 
-concat('first param. ', 'second param. ')
+concat("first param. ", "second param. ");
 //=> "second param. first param. ""
 
-flip(concat, 'first param. ', 'second param. ')
+flip(concat, "first param. ", "second param. ");
 //=> "first param. second param. ""
 
 // checkAll :: [ a -> Boolean ] -> a -> Boolean
-const checkAll = composeB(flip(runWith), mconcat(Pred))
+const checkAll = composeB(flip(runWith), mconcat(Pred));
 
 // lte :: Number -> Number -> Number
-const lte = a => b => b <= a
+const lte = a => b => b <= a;
 
 // lte :: Number -> Number -> Number
-const gte = a => b => b >= a
+const gte = a => b => b >= a;
 
 // between2and10 :: a -> Boolean
-const between2and10 = checkAll([
-  isNumber,
-  gte(2),
-  lte(10)
-])
+const between2and10 = checkAll([isNumber, gte(2), lte(10)]);
 
-between2and10(8)
+between2and10(8);
 //=> true
 
-between2and10(11)
+between2and10(11);
 //=> false
 
-between2and10(1)
+between2and10(1);
 //=> false
 
-between2and10('not a number')
+between2and10("not a number");
 //=> false
 ```
 
@@ -220,33 +259,30 @@ When used with partial application on that first parameter, a whole new world
 of combinatory madness is presented!
 
 ```javascript
-import substitution from 'crocks/combinators/substitution'
+import substitution from "crocks/combinators/substitution";
 
-import curry from 'crocks/core/curry'
-import composeB from 'crocks/combinators/composeB'
+import curry from "crocks/core/curry";
+import composeB from "crocks/combinators/composeB";
 
 // getDetails :: String -> Number -> String
-const getDetails = curry((text, length) => 
-  `The given text "${text}" has a length of ${length}`
-)
+const getDetails = curry(
+  (text, length) => `The given text "${text}" has a length of ${length}`
+);
 
 // getLength :: a -> Number
-const getLength = s => 
-  s.length
+const getLength = s => s.length;
 
-substitution(getDetails, getLength, 'testing')
+substitution(getDetails, getLength, "testing");
 //=> "The given text \"testing\" has a length of 7"
 
 // getLastIndex :: a -> Number
-const getLastIndex = composeB(
-  x => x - 1,
-  getLength
-)
+const getLastIndex = composeB(x => x - 1, getLength);
 
 // slice :: Array -> Array
-const slice = curry((arr, index) => 
-  arr.slice(index))
+const slice = curry((arr, index) => arr.slice(index));
 
-substitution(slice, getLastIndex, [ 1, 2, 3, 4, 5 ])
+substitution(slice, getLastIndex, [1, 2, 3, 4, 5]);
 //=> [ 5 ]
 ```
+
+[compose]: ./helpers.html#compose

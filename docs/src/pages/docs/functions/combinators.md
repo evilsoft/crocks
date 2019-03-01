@@ -75,6 +75,57 @@ constant :: a -> () -> a
 This is a very handy dandy function, used a lot. Pass it any value and it will
 give you back a function that will return that same value no matter what you
 pass it.
+`constant` is perfect for those moments where you need to pass a function but
+do not care about the input. `constant` will swallow any value given to it and
+always return the initial value it was given.
+It is important to note that any function that is passed into `constant` will
+get the added benefit of having [`curry`][curry] applied to it.
+
+```javascript
+import constant from 'crocks/combinator/constant'
+
+import Result from 'crocks/Result'
+import ifElse from 'crocks/logic/ifElse'
+import propOr from 'crocks/Maybe/propOr'
+import composeB from 'crocks/combinators/composeB'
+
+const { Ok, Err } = Result
+
+// whatsTheAnswer :: () -> Number
+const whatsTheAnswer = constant(42)
+
+whatsTheAnswer("to life?")
+//=> 42
+
+whatsTheAnswer("to the universe?")
+//=> 42
+
+whatsTheAnswer("to everything?")
+//=> 42
+
+// ensure :: (a -> Boolean) -> a -> Result a
+const ensure = pred => ifElse(pred, Ok, Err)
+
+// getLength :: Result a String -> Result Number
+const getLength = bimap(
+  constant(0), propOr(0, 'length')
+)
+
+// getLengthOfString :: a -> Result a String
+const getLengthOfString = composeB(
+  getLength,
+  ensure(isString)
+)
+
+getLengthOfString('testing')
+//=> Ok 7
+
+getLengthOfString(42)
+//=> Err 0
+
+getLengthOfString([1, 2, 3, 4])
+//=> Err 0
+```
 
 #### converge
 
@@ -286,3 +337,4 @@ substitution(slice, getLastIndex, [1, 2, 3, 4, 5]);
 ```
 
 [compose]: ./helpers.html#compose
+[curry]: ./helpers.html#curry

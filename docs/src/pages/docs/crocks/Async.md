@@ -895,7 +895,7 @@ const lookup = compose(
 const fake = compose(
   chain(lookup),
   chain(safe(test(/^file-(a|b|c)/))),
-  chain(safe(isString))
+  safe(isString)
 )
 
 fake('file-a')

@@ -81,7 +81,7 @@ It is important to note that any function that is passed into `constant` will
 get the added benefit of having [`curry`][curry] applied to it.
 
 ```javascript
-import constant from 'crocks/combinator/constant'
+import constant from 'crocks/combinators/constant'
 
 import Result from 'crocks/Result'
 import ifElse from 'crocks/logic/ifElse'

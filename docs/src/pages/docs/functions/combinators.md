@@ -40,8 +40,8 @@ allows only two functions, if you want to avoid things like:
 import composeB from 'crocks/combinators/composeB'
 
 import Either from 'crocks/Either'
-import isString from 'crocks/predicates/isString'
 import ifElse from 'crocks/logic/ifElse'
+import isString from 'crocks/predicates/isString'
 
 const { Left, Right } = Either
 
@@ -83,12 +83,12 @@ get the added benefit of having [`curry`][curry] applied to it.
 ```javascript
 import constant from 'crocks/combinators/constant'
 
-import Result from 'crocks/Result'
-import ifElse from 'crocks/logic/ifElse'
-import propOr from 'crocks/Maybe/propOr'
 import bimap from 'crocks/pointfree/bimap'
 import composeB from 'crocks/combinators/composeB'
+import ifElse from 'crocks/logic/ifElse'
 import isString from 'crocks/predicates/isString'
+import propOr from 'crocks/Maybe/propOr'
+import Result from 'crocks/Result'
 
 const { Ok, Err } = Result
 
@@ -147,9 +147,9 @@ function.
 import converge from 'crocks/combinators/converge'
 
 import alt from 'crocks/pointfree/alt'
-import prop from 'crocks/Maybe/prop'
-import propOr from 'crocks/Maybe/propOr'
 import liftA2 from 'crocks/helpers/liftA2'
+import prop from 'crocks/Maybe/prop'
+import propOr from 'crocks/helpers/propOr'
 
 // data :: [ Number ]
 const data = [ 1, 2, 3, 4, 5 ]
@@ -158,8 +158,8 @@ const data = [ 1, 2, 3, 4, 5 ]
 const divide = x => y =>
   y / x
 
-// add :: Number -> Number -> Number
-const add = a => b =>
+// add :: (Number, Number) -> Number
+const add = (a, b) =>
   b + a
 
 // sum :: [ Number ] -> Number
@@ -246,12 +246,12 @@ desire.
 ```javascript
 import flip from 'crocks/combinators/flip'
 
-import isNumber from 'crocks/predicates/isNumber'
-import Pred from 'crocks/Pred'
-import mconcat from 'crocks/helpers/mconcat'
-import runWith from 'crocks/pointfree/runWith'
 import composeB from 'crocks/combinators/composeB'
 import concat from 'crocks/pointfree/concat'
+import isNumber from 'crocks/predicates/isNumber'
+import mconcat from 'crocks/helpers/mconcat'
+import Pred from 'crocks/Pred'
+import runWith from 'crocks/pointfree/runWith'
 
 concat('first param. ', 'second param. ')
 //=> "second param. first param. ""
@@ -313,12 +313,12 @@ substitution :: (a -> b -> c) -> (a -> b) -> a -> c
 ```
 
 While it may seem like a complicated little bugger, `substitution` can come in
-very handy from time to time. `substitution` is used when you have a `binary`
-function and you can supply the first argument and can use that value to create
-the second argument. It first takes a `binary` function followed by a `unary`
-function for it's first two arguments. This will return a function that is ready
-to take some context, `a`. Once supplied the fun starts, it will pass the given
-`a` to the `binary` and `unary` functions, and will then apply the result of
+very handy from time to time. `substitution` is used when you have a `binary` function
+and you can supply the first argument and can use that value to create the
+second argument. It first takes a `binary` function followed by a `unary` function
+for it's first two arguments. This will return a function that is ready to take
+some context, `a`. Once supplied the fun starts, it will pass the given `a` to
+the `binary` and `unary` functions, and will then apply the result of
 the `unary` function as the second parameter of the `binary` function. Finally
 after all that juggling, it will return the result of that `binary` function.
 
@@ -328,8 +328,8 @@ of combinatory madness is presented!
 ```javascript
 import substitution from 'crocks/combinators/substitution'
 
-import curry from 'crocks/core/curry'
 import composeB from 'crocks/combinators/composeB'
+import curry from 'crocks/core/curry'
 
 // getDetails :: String -> Number -> String
 const getDetails = curry((text, length) =>
@@ -349,7 +349,7 @@ const getLastIndex = composeB(
   getLength
 )
 
-// slice :: Array -> Array
+// slice :: Array -> Number -> Array
 const slice = curry((arr, index) =>
   arr.slice(index))
 

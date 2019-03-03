@@ -10,6 +10,13 @@ Transformation functions are mostly used to reduce unwanted nesting of similar
 types. Take for example the following structure:
 
 ```javascript
+import Either from 'crocks/Either'
+import Maybe from 'crocks/Maybe'
+
+import map from 'crocks/pointfree/map'
+import option from 'crocks/pointfree/option'
+import identity from 'crocks/combinators/identity'
+
 const data =
   Either.of(Maybe.of(3))  // Right Just 3
 
@@ -33,6 +40,13 @@ dealing with this. Using them effectively, can turn the above code into
 something more like this:
 
 ```javascript
+import Either from 'crocks/Either'
+import Maybe from 'crocks/Maybe'
+
+import maybeToEither from 'crocks/Either/maybeToEither'
+import map from 'crocks/pointfree/map'
+import identity from 'crocks/combinators/identity'
+
 const data =
   Either.of(Maybe.of(3))      // Right Just 3
     .chain(maybeToEither(0))  // Right 3
@@ -89,6 +103,16 @@ extend an existing function without having to explicitly compose it. Both
 versions can be seen here:
 
 ```javascript
+import Either from 'crocks/Either'
+import Maybe from 'crocks/Maybe'
+import Async from 'crocks/Async'
+
+import safeLift from 'crocks/Maybe/safeLift'
+import maybeToAsync from 'crocks/Either/maybeToAsync'
+import eitherToMaybe from 'crocks/Maybe/eitherToMaybe'
+import compose from 'crocks/helpers/compose'
+import isNumber from 'crocks/predicates/isNumber'
+
 // Avoid nesting
 // inc :: a -> Maybe Number
 const inc =

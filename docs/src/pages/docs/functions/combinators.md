@@ -93,7 +93,8 @@ import isString from 'crocks/predicates/isString'
 const { Ok, Err } = Result
 
 // whatsTheAnswer :: () -> Number
-const whatsTheAnswer = constant(42)
+const whatsTheAnswer =
+  constant(42)
 
 whatsTheAnswer('to life?')
 //=> 42
@@ -166,22 +167,27 @@ const sum = xs =>
   xs.reduce(add, 0)
 
 // length :: [ a ] -> Number
-const length = propOr(0, 'length')
+const length =
+  propOr(0, 'length')
 
 // average :: [ Number ] -> Number
-const average = converge(divide, length, sum)
+const average =
+  converge(divide, length, sum)
 
 average(data)
 //=> 3
 
 // maybeGetDisplay :: a -> Maybe b
-const maybeGetDisplay = prop('display')
+const maybeGetDisplay =
+  prop('display')
 
 // maybeGetFirst :: a -> Maybe b
-const maybeGetFirst = prop('first')
+const maybeGetFirst =
+  prop('first')
 
 // maybeGetLast :: a -> Maybe b
-const maybeGetLast = prop('last')
+const maybeGetLast =
+  prop('last')
 
 const buildFullName = surname => firstname =>
   `${firstname} ${surname}`

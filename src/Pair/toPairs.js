@@ -12,7 +12,7 @@ function toPairs(obj) {
   }
 
   return Object.entries(obj).reduce(
-    (acc, [key, value]) => value !== undefined
+    (acc, [ key, value ]) => value !== undefined
       ? acc.concat( [ Pair(key, value) ] )
       : acc,
     []

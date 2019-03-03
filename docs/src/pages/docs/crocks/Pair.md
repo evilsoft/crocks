@@ -889,7 +889,7 @@ const joinField = (key, value) =>
 
 // join :: [String] -> String
 const join = array =>
-  array.join("|")
+  array.join('|')
 
 // buildRecord :: Object -> String
 const buildRecord = compose(

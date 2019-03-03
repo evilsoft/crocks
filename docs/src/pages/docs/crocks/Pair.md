@@ -887,12 +887,13 @@ const record = {
 const joinField = (key, value) =>
   `${key}:${value}`
 
-// joinRecord :: String -> [String] -> String
-const join = separator => array => array.join(separator)
+// join :: [String] -> String
+const join = array =>
+  array.join("|")
 
 // buildRecord :: Object -> String
 const buildRecord = compose(
-  join('|'),
+  join(),
   map(merge(joinField)),
   toPairs
 )

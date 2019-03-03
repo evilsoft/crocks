@@ -233,25 +233,33 @@ to represent your flow in a more left-to-right manner, then [`pipeS`](#pipes) is
 provided for such things.
 
 ```javascript
-import crocks from 'crocks'
+import Arrow from 'crocks/Arrow'
 
-const {
-  Arrow, bimap, branch, composeS, merge, mreduce, Sum
-} = crocks
+import bimap from 'crocks/pointfree/bimap'
+import branch from 'crocks/Pair/branch'
+import composeS from 'crocks/helpers/composeS'
+import merge from 'crocks/pointfree/merge'
+import mreduce from 'crocks/helpers/mreduce'
+import Sum from 'crocks/Sum'
 
-const length =
-  xs => xs.length
+// length :: a -> Number
+const length = xs =>
+  xs.length
 
-const divide =
-  (x, y) => x / y
+// divide :: (Number, Number) -> Number
+const divide = (x, y) =>
+  x / y
 
+// avg :: Arrow [ Number ] Number
 const avg =
   Arrow(bimap(mreduce(Sum), length))
     .promap(branch, merge(divide))
 
+// double :: Arrow (Number -> Number)
 const double =
   Arrow(x => x * 2)
 
+// data :: [ Number ]
 const data =
   [ 34, 198, 3, 43, 92 ]
 
@@ -391,9 +399,10 @@ curried functions (i.e. `x => y => x + y`) will need to be explicitly curried
 using [`curry`](#curry) to ensure proper application of the arguments.
 
 ```javascript
+import liftN from 'crocks/helpers/liftN'
+
 import compose from 'crocks/helpers/compose'
 import curry from 'crocks/helpers/curry'
-import liftN from 'crocks/helpers/liftN'
 import isNumber from 'crocks/predicates/isNumber'
 import isString from 'crocks/predicates/isString'
 import map from 'crocks/pointfree/map'
@@ -404,16 +413,16 @@ const apply = fn => xs =>
   fn.apply(null, xs)
 
 // join :: String -> String -> String
-const join =
-  x => y => `${x} ${y}`
+const join = x => y =>
+  `${x} ${y}`
 
 // safeString :: a -> Maybe String
 const safeString =
   safe(isString)
 
 // sumArgs :: (* Number) -> Number
-const sumArgs =
-  (...args) => args.reduce((x, y) => x + y, 0)
+const sumArgs = (...args) =>
+  args.reduce((x, y) => x + y, 0)
 
 // max :: Applicative m => [ m Number ] -> m Number
 const max =
@@ -482,11 +491,11 @@ of the original `Object` is know.
 ```javascript
 import mapProps from 'crocks/helpers/mapProps'
 
-const add =
-  x => y => x + y
+const add = x => y =>
+  x + y
 
-const toUpper =
-  x => x.toUpperCase()
+const toUpper = x =>
+  x.toUpperCase()
 
 const mapping = {
   entry: toUpper,
@@ -510,8 +519,8 @@ mapProps(mapping, {
     hat: 2
   }
 })
-
 //=> { entry: 'LEGEND', fauna: { unicorns: 11, zombies: 3 }, other: { hat: 2} }
+
 ```
 
 #### mapReduce
@@ -531,17 +540,20 @@ finally a `Foldable` structure of data. Once all arguments are provided,
 function, before sending it to the second argument of your reduction function.
 
 ```javascript
-import Max from 'crocks/Max'
-import Maybe from 'crocks/Maybe'
-import isNumber from 'crocks/predicates/isNumber'
 import mapReduce from 'crocks/helpers/mapReduce'
+
+import isNumber from 'crocks/predicates/isNumber'
+import Maybe from 'crocks/Maybe'
+import Max from 'crocks/Max'
 import safeLift from 'crocks/Maybe/safeLift'
 
 const { Nothing } = Maybe
 
+// data :: [ * ]
 const data =
   [ '100', null, 3, true, 1 ]
 
+// safeMax :: [ * ] -> Number
 const safeMax = mapReduce(
   safeLift(isNumber, Max),
   (y, x) => y.concat(x).alt(y).alt(x),
@@ -685,13 +697,15 @@ arguments to it. You will get back a curried function that is ready to accept
 the rest of the arguments.
 
 ```javascript
-import crocks from 'crocks'
+import partial from 'crocks/helpers/partial'
 
-const { map, partial } = crocks
+import map from 'crocks/pointfree/map'
 
+// max10 :: Number -> Number
 const max10 =
   partial(Math.min, 10)
 
+// data :: [ Number ]
 const data =
   [ 13, 5, 13 ]
 
@@ -853,25 +867,34 @@ pipeS :: Semigroupoid s => (s a b, ..., s y z) -> s a z
 ```
 
 While `Star`s and `Arrow`s come in very handy at times, the only thing that
-could make them better is to compose them . With `pipeS` you can do just that
+could make them better is to compose them. With `pipeS` you can do just that
 with any `Semigroupoid`. Just like with [`composeS`](#composes), you just pass
 it `Semigroupoid`s of the same type and you will get back another `Semigroupoid`
 with them all composed together. The only difference between the two, is that
 `pipeS` composes in a left-to-right fashion, while [`composeS`](#composes) does
 the opposite.
 
+<!-- 
+There is an issue with this example, TODO: investigate
 ```javascript
-import { curry, isNumber, pipeS, prop, safeLift, Star } from 'crocks'
+import pipeS from 'crocks/helpers/pipeS'
 
+import curry from 'crocks/core/curry'
+import isNumber from 'crocks/predicates/isNumber'
+import prop from 'crocks/Maybe/prop'
+import safeLift from 'crocks/Maybe/safeLift'
+import Star from 'crocks/Star'
+
+// add :: Number -> Number -> Number
 const add = curry(
   (x, y) => x + y
 )
 
-const pull =
-  x => Star(prop(x))
+const pull = x =>
+  Star(prop(x))
 
-const safeAdd =
-  x => Star(safeLift(isNumber, add(x)))
+const safeAdd = x =>
+  Star(safeLift(isNumber, add(x)))
 
 const data = {
   num: 56,
@@ -890,7 +913,7 @@ flow('num', 10)
 flow('string', 100)
   .runWith(data)
 // => Nothing
-```
+``` -->
 
 #### propOr
 

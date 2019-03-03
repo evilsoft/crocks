@@ -31,17 +31,14 @@ of `(a -> Boolean)` they are easily combined with other logic functions.
 ```javascript
 import and from 'crocks/logic/and'
 
-import equals from 'crocks/core/equals'
 import constant from 'crocks/combinators/constant'
-import propOr from 'crocks/helpers/propOr'
 import isNumber from 'crocks/predicates/isNumber'
 import isEmpty from 'crocks/predicates/isEmpty'
 import isArray from 'crocks/predicates/isArray'
-import isNil from 'crocks/predicates/isNil'
 import not from 'crocks/logic/not'
 
 // gte :: Number -> Number -> Boolean
-const gte = 
+const gte =
     x => y => y >= x
 
 // isLegalDrinkingAge :: Number -> Boolean
@@ -58,7 +55,7 @@ isLegalDrinkingAge(18)
 isLegalDrinkingAge(21)
 //=> true
 
-isValid([42])
+isValid([ 42 ])
 //=> true
 
 isValid(null)
@@ -101,6 +98,7 @@ import ifElse from 'crocks/logic/ifElse'
 
 import Maybe from 'crocks/Maybe'
 import isNumber from 'crocks/predicates/isNumber'
+import isArray from 'crocks/predicates/isArray'
 import chain from 'crocks/pointfree/chain'
 import compose from 'crocks/core'
 import identity from 'crocks/combinators'
@@ -108,20 +106,20 @@ import identity from 'crocks/combinators'
 const { Just, Nothing } = Maybe
 
 // safe :: (a -> Boolean) -> a -> Maybe a
-const safe = 
-    pred => ifElse(pred, Just, Nothing)
+const safe =
+  pred => ifElse(pred, Just, Nothing)
 
 // gte :: Number -> Number -> Maybe Number
-const gte = 
-    x => safe(n => n >= x)
+const gte =
+  x => safe(n => n >= x)
 
 // isLarge :: a -> Maybe a
-const isLarge = 
-    compose(chain(gte(42)), safe(isNumber))
+const isLarge =
+  compose(chain(gte(42)), safe(isNumber))
 
 // ensureArray :: a -> Array
 const ensureArray =
-    ifElse(isArray, identity, _ => [])
+  ifElse(isArray, identity, () => [])
 
 isLarge(10)
 //=> Just 10
@@ -130,11 +128,11 @@ isLarge(44)
 //=> Nothing
 
 ensureArray('nope')
-    .map(x => x + x)
+  .map(x => x + x)
 //=> []
 
-ensureArray([3])
-    .map(x => x + x)
+ensureArray([ 3 ])
+  .map(x => x + x)
 //=> [6]
 ```
 
@@ -275,10 +273,12 @@ import flip from 'crocks/combinators/flip'
 import identity from 'crocks/combinators/identity'
 
 // isFalsy :: a -> Boolean
-const isFalsy = not(identity)
+const isFalsy =
+  not(identity)
 
 // isTruthy :: a -> Boolean
-const isTruthy = not(isFalsy)
+const isTruthy =
+  not(isFalsy)
 
 isTruthy('Test string')
 //=> true
@@ -292,36 +292,50 @@ isFalsy('')
 isFalsy('Test string')
 //=> false
 
-// User :: { String, String, String}
+// User :: { email: String, firstName: String, lastName: String}
 
+// validUser :: User
 const validUser = {
   email: 'testuser@email.com',
   firstName: 'Tom',
   lastName: 'Smith'
 }
 
+// invalidUser :: User
 const invalidUser = {
   email: '',
   firstName: '',
   lastName: 'Smith'
 }
+// isNonEmptyString :: a -> Boolean
+const isNonEmptyString =
+  and(isString, isTruthy)
 
-// hasValidStringProp :: string -> User -> Boolean
-const hasValidStringProp = compose(Pred, flip(propSatisfies, and(isString, isTruthy)))
+// hasValidStringProp :: String -> User -> Boolean
+const hasValidStringProp = compose(
+  Pred,
+  flip(propSatisfies, isNonEmptyString)
+)
 
 // hasName :: User -> Boolean
-const hasName = hasValidStringProp('firstName')
+const hasName =
+  hasValidStringProp('firstName')
 
 // hasEmail :: User -> Boolean
-const hasEmail = hasValidStringProp('email')
+const hasEmail =
+  hasValidStringProp('email')
 
 // isUserInvalid :: User -> Boolean
-const isUserInvalid = Pred(not(hasName)).concat(Pred(not(hasEmail)))
+const isUserInvalid =
+  Pred(not(hasName))
+    .concat(Pred(not(hasEmail)))
 
-isUserInvalid.runWith(invalidUser)
+isUserInvalid
+  .runWith(invalidUser)
 //=> true
 
-isUserInvalid.runWith(validUser)
+isUserInvalid
+  .runWith(validUser)
 //=> false
 ```
 
@@ -361,6 +375,9 @@ or(constant(false), constant(true), 'ignored')
 or(constant(false), constant(false), 'ignored')
 //=> false
 
+// Response :: { error: String, response: { users: [ * ] } }
+
+// createResponse :: ([ * ], String) -> Response
 const createResponse = (users, error = '') => ({
   error,
   response: {
@@ -368,9 +385,10 @@ const createResponse = (users, error = '') => ({
   }
 })
 
+// hasData :: Response -> Boolean
 const hasData = or(
-  propSatisfies('error',(isEmpty)),
-  propPathSatisfies(['response', 'users'], not(isEmpty))
+  propSatisfies('error', isEmpty),
+  propPathSatisfies([ 'response', 'users' ], not(isEmpty))
 )
 
 hasData(createResponse([ { name: 'User 1' } ]))
@@ -404,10 +422,12 @@ import isString from 'crocks/predicates/isString'
 import flip from 'crocks/combinators/flip'
 
 // prod :: Number -> Number -> Number
-const prod = a => b => b * a
+const prod = a => b =>
+  b * a
 
-// doubleUnless :: (a -> boolean) -> Number -> Number
-const doubleUnless = flip(unless, prod(2))
+// doubleUnless :: (a -> Boolean) -> Number -> Number
+const doubleUnless =
+  flip(unless, prod(2))
 
 doubleUnless(constant(true), 21)
 //=> 21
@@ -416,12 +436,16 @@ doubleUnless(constant(false), 21)
 //=> 42
 
 // toString :: a -> String
-const toString = x => x.toString()
+const toString = x =>
+  x.toString()
 
 // ensureAllString :: [ a ] -> [ String ]
-const ensureAllString = unless(isString, toString)
+const ensureAllString =
+  unless(isString, toString)
 
-const testData = [1,2,'3', 4, true, false, new Date()]
+// testData :: [ * ]
+const testData =
+  [ 1, 2, '3', 4, true, false, new Date() ]
 
 testData.map(ensureAllString)
 //=> [ '1', '2', '3', '4', 'true', 'false', 'Tue Feb 19 2019 23:16:55 GMT-0800 (Pacific Standard Time)' ]
@@ -442,6 +466,8 @@ function. Either the original or modified value will be returned depending on
 the result of the predicate. Check out [`unless`](#unless) for a negated version
 of this function.
 
+<!-- eslint-disable no-console -->
+
 ```javascript
 import when from 'crocks/logic/when'
 
@@ -451,10 +477,12 @@ import composeB from 'crocks/combinator/composeB'
 import compose from 'crocks/core/compose'
 
 // prod :: Number -> Number -> Number
-const prod = a => b => b * a
+const prod = a => b =>
+  b * a
 
-// doubleWhen :: (a -> boolean) -> Number -> Number
-const doubleWhen = flip(when, prod(2))
+// doubleWhen :: (a -> Boolean) -> Number -> Number
+const doubleWhen =
+  flip(when, prod(2))
 
 doubleWhen(constant(true), 21)
 //=> 42
@@ -463,14 +491,16 @@ doubleWhen(constant(false), 21)
 //=> 21
 
 // gt :: Number -> Number -> Boolean
-const gt = a => b => b > a
+const gt = a => b =>
+  b > a
 
 // subtract :: Number -> Number
-const subtract = a => b => b - a
+const subtract = a => b =>
+  b - a
 
 // protectedSubtract :: Number -> Number -> Number
 const protectedSubtract = composeB(
-  when(gt(0)), 
+  when(gt(0)),
   subtract
 )
 
@@ -481,12 +511,11 @@ const smallExplosion = protectedSubtract(15)
 const largeExplosion = compose(
   smallExplosion,
   smallExplosion,
-  smallExplosion,
+  smallExplosion
 )
 
-let health = 30
-
-health = largeExplosion(health)
+const startingHealth = 30
+const health = largeExplosion(startingHealth)
 
 console.log(`Health remaining: ${health}`)
 //=> "Lives remaining: 0"

@@ -1207,12 +1207,60 @@ function of a `Result` type. `tryCatch` will execute the function with the
 parameters passed and return either an [`Ok`](#ok) when successful or an 
 [`Err`](#err) when an exception is thrown.
 
-It is important to note that as of now `tryCatch` does not currently support
-any type of curried function. `tryCatch` applies all arguments to the top-level
-function.
+Although we do our best to not use `Error` to control program flow, there are
+times when we don't have full control over the behaviour of a function. The
+saviour in this situation is `tryCatch`. You can wrap this funcition and it
+will always return a `Result`
+
+It is important to note that, as of now, `tryCatch` does not currently support
+manually or externally curried functions. When using it with a function that
+has been `curry`'d by `crocks` all arguments must be passed in one go. It will
+not support partial application. `tryCatch` applies all arguments to the top-level
+function, which works well for `curry`, and the protection only applies to the
+first activation in the run.
 
 ```javascript
+import tryCatch from 'crocks/Result/tryCatch'
+
+tryCatch(() => {
+  throw new Error('Simple error!')
+})()
+// Err "Simple error!"
+
+// calculateArea :: (a, b) -> Number
+const calculateArea = (width, height) => {
+  if (isNaN(width) || isNaN(height)) {
+    throw Error('Parameter is not a number!')
+  }
+
+  return width * height
+}
+
+// tryCalculateArea :: (a, b) -> Result String Number
+const tryCalculateArea =
+  tryCatch(calculateArea)
+
+tryCalculateArea(3, 6)
+//=> 18
+
+tryCalculateArea('String', 5)
+// Err "Parameter is not a a number!"
+
+// getLength :: a -> Number
+const getLength = a =>
+  a.length
+
+// tryGetLength :: a -> Result String Number
+const tryGetLength =
+  tryCatch(getLength)
+
+tryGetLength([ 3, 2, 1 ])
+//=> Ok 3
+
+tryGetLength()
+//=> Err "TypeError: Cannot read property 'length' of undefined"
 ```
+
 </article>
 
 <article id="topic-transformation">

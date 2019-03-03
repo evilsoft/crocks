@@ -307,6 +307,7 @@ const invalidUser = {
   firstName: '',
   lastName: 'Smith'
 }
+
 // isNonEmptyString :: a -> Boolean
 const isNonEmptyString =
   and(isString, isTruthy)

@@ -150,26 +150,10 @@ composeP :: Promise p => ((y -> p z c), ..., (a -> p b c)) -> a -> p z c
 ```
 
 When working with `Promise`s, it is common place to create chains on a
-`Promise`'s `then` function:
-
-```javascript
-const promFunc = x =>
-  promiseSomething(x)
-    .then(doSomething)
-    .then(doAnother)
-```
-
-Doing this involves a lot of boilerplate and forces you into a fluent style,
+`Promise`'s `then` function. Doing this involves a lot of boilerplate and forces you into a fluent style,
 whether you want to be or not. Using `composeP` you have the option to compose a
 series of `Promise` returning functions like you would any other function
-composition, in a right-to-left fashion. Like so:
-
-```javascript
-const { composeP } = crocks
-
-const promFunc =
-  composeP(doAnother, doSomething, promiseSomething)
-```
+composition, in a right-to-left fashion.
 
 Due to the nature of the `then` function, only the head of your composition
 needs to return a `Promise`. This will create a function that takes a value,
@@ -177,6 +161,59 @@ which is passed through your chain, returning a `Promise` which can be extended.
 This is only a `then` chain, it does not do anything with the `catch` function.
 If you would like to provide your functions in a left-to-right manner, check out
 [pipeP](#pipep).
+
+<!-- eslint-disable no-console -->
+
+```javascript
+import composeP from 'crocks/helpers/composeP'
+
+import Async from 'crocks/Async'
+import asyncToPromise from 'crocks/Async/asyncToPromise'
+import composeB from 'crocks/combinators/composeB'
+
+const { resolveAfter } = Async
+
+// resolveQuick :: a -> Async e a
+const resolveQuick = value =>
+  resolveAfter(300, value)
+
+// promiseSomething :: a -> Promise a e
+const promiseSomething = composeB(
+  asyncToPromise, resolveQuick
+)
+
+// log :: a -> ()
+const log = x =>
+  console.log(x)
+
+// sayHello :: String -> String
+const sayHello = to =>
+  `Hello ${to}`
+
+// emphasize :: String -> String
+const emphasize = to =>
+  `${to}!`
+
+// promFunc :: a -> Promise a e
+const promFunc = x =>
+  promiseSomething(x)
+    .then(emphasize)
+    .then(sayHello)
+
+// composedPromFunc :: a -> Promise a e
+const composedPromFunc =
+  composeP(sayHello, emphasize, promiseSomething)
+
+promFunc('World')
+  .then(log)
+//=> Hello World!
+
+composedPromFunc('World')
+  .then(log)
+//=> Hello World!
+```
+
+<!-- eslint-disable no-console -->
 
 #### composeS
 
@@ -707,9 +744,11 @@ chaining together a series of functions with the signature:
 functions left-to-right.
 
 ```javascript
-import crocks from 'crocks'
+import pipeK from 'crocks/helpers/pipeK'
 
-const { curry, List, Writer } = crocks
+import curry from 'crocks/core/curry'
+import List from 'crocks/List'
+import Writer from 'crocks/Writer'
 
 const OpWriter =
   Writer(List)

@@ -32,9 +32,9 @@ of `(a -> Boolean)` they are easily combined with other logic functions.
 import and from 'crocks/logic/and'
 
 import constant from 'crocks/combinators/constant'
-import isNumber from 'crocks/predicates/isNumber'
-import isEmpty from 'crocks/predicates/isEmpty'
 import isArray from 'crocks/predicates/isArray'
+import isEmpty from 'crocks/predicates/isEmpty'
+import isNumber from 'crocks/predicates/isNumber'
 import not from 'crocks/logic/not'
 
 // gte :: Number -> Number -> Boolean
@@ -96,12 +96,12 @@ comes in really handy when creating lifting functions for Sum Types (like
 ```javascript
 import ifElse from 'crocks/logic/ifElse'
 
-import Maybe from 'crocks/Maybe'
-import isNumber from 'crocks/predicates/isNumber'
-import isArray from 'crocks/predicates/isArray'
 import chain from 'crocks/pointfree/chain'
 import compose from 'crocks/core'
 import identity from 'crocks/combinators'
+import isArray from 'crocks/predicates/isArray'
+import isNumber from 'crocks/predicates/isNumber'
+import Maybe from 'crocks/Maybe'
 
 const { Just, Nothing } = Maybe
 
@@ -163,11 +163,11 @@ like [`Pred`][pred] and the [`All`][all] `Monoid`.
 
 import implies from 'crocks/logic/implies'
 
-import Pred from 'crocks/Pred'
 import isArray from 'crocks/predicates/isArray'
 import isString from 'crocks/predicates/isString'
 import not from 'crocks/logic/not'
 import or from 'crocks/logic/or'
+import Pred from 'crocks/Pred'
 import safe from 'crocks/Maybe/safe'
 
 // length :: (String | Array) -> Number
@@ -264,13 +264,13 @@ function, so it should be easy to swap between the two.
 ```javascript
 import not from 'crocks/logic/not'
 
-import Pred from 'crocks/Pred'
-import propSatisfies from 'crocks/predicates/propSatisfies'
-import isString from 'crocks/predicates/isString'
 import and from 'crocks/logic/and'
 import compose from 'crocks/core/compose'
 import flip from 'crocks/combinators/flip'
 import identity from 'crocks/combinators/identity'
+import isString from 'crocks/predicates/isString'
+import Pred from 'crocks/Pred'
+import propSatisfies from 'crocks/predicates/propSatisfies'
 
 // isFalsy :: a -> Boolean
 const isFalsy =
@@ -358,11 +358,11 @@ combined with other logic functions.
 ```javascript
 import or from 'crocks/logic/or'
 
-import propSatisfies from 'crocks/predicates/propSatisfies'
-import propPathSatisfies from 'crocks/predicates/propPathSatisfies'
 import constant from 'crocks/combinators/constant'
 import isEmpty from 'crocks/predicates/isEmpty'
 import not from 'crocks/logic/not'
+import propSatisfies from 'crocks/predicates/propSatisfies'
+import propPathSatisfies from 'crocks/predicates/propPathSatisfies'
 
 or(constant(true), constant(true), 'ignored')
 //=> true
@@ -419,8 +419,8 @@ this function.
 import unless from 'crocks/logic/unless'
 
 import constant from 'crocks/combinator/constant'
-import isString from 'crocks/predicates/isString'
 import flip from 'crocks/combinators/flip'
+import isString from 'crocks/predicates/isString'
 
 // double :: Number -> Number
 const double = a =>
@@ -472,10 +472,10 @@ of this function.
 ```javascript
 import when from 'crocks/logic/when'
 
+import compose from 'crocks/core/compose'
+import composeB from 'crocks/combinator/composeB'
 import constant from 'crocks/combinator/constant'
 import flip from 'crocks/combinator/flip'
-import composeB from 'crocks/combinator/composeB'
-import compose from 'crocks/core/compose'
 
 // double :: Number -> Number
 const double = a =>

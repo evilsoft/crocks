@@ -37,7 +37,7 @@ import Result from 'crocks/Result'
 
 import and from 'crocks/logic/and'
 import ifElse from 'crocks/logic/ifElse'
-import compose from 'crocks/core/compose'
+import composeB from 'crocks/combinators/composeB'
 import isNumber from 'crocks/predicates/isNumber'
 import bimap from 'crocks/pointfree/bimap'
 import liftA2 from 'crocks/helpers/liftA2'
@@ -45,18 +45,18 @@ import liftA2 from 'crocks/helpers/liftA2'
 const { Err, Ok } = Result
 
 // gte :: Number -> Number -> Boolean
-const gte =
-  y => x => x >= y
+const gte = y => x =>
+  x >= y
 
 // lte :: Number -> Number -> Boolean
-const lte =
-  y => x => x <= y
+const lte = y => x =>
+  x <= y
 
 // between :: (Number, Number) -> Boolean
 const between = (x, y) =>
   and(gte(x), lte(y))
 
-// ensure :: (a -> bool) -> a -> Result a a
+// ensure :: (a -> Boolean) -> a -> Result a
 const ensure = pred =>
   ifElse(pred, Ok, Err)
 
@@ -74,13 +74,14 @@ inRange('Test')
 //=> Err "Test"
 
 // ensureNumber :: a -> Result [a] a
-const ensureNumber = compose(
+const ensureNumber = composeB(
   bimap(x => [ x ], x => x),
   ensure(isNumber)
 )
 
 // prod :: Number -> Number -> Number
-const prod = a => b => a * b
+const prod = a => b =>
+  a * b
 
 ensureNumber('Not a number 1')
   .alt(ensureNumber('Not a number 2'))
@@ -212,16 +213,17 @@ import chain from 'crocks/pointfree/chain'
 import bimap from 'crocks/pointfree/bimap'
 import isNumber from 'crocks/predicates/isNumber'
 import ifElse from 'crocks/logic/ifElse'
-import compose from 'crocks/core/compose'
+import compose from 'crocks/helpers/compose'
 
 const { Ok, Err } = Result
 
-// ensure :: (a -> bool) -> a -> Result a a
+// ensure :: (a -> Boolean) -> a -> Result a
 const ensure = pred =>
   ifElse(pred, Ok, Err)
 
 // buildError :: () -> String
-const buildError = () => 'The value given was not a valid number'
+const buildError = () =>
+  'The value given was not a valid number'
 
 // add10 :: Number -> Number
 const add10 =
@@ -276,7 +278,7 @@ import identity from 'crocks/combinators/identity'
 
 const { Ok, Err } = Result
 
-// ensure :: (a -> bool) -> a -> Result a a
+// ensure :: (a -> Boolean) -> a -> Result a
 const ensure = pred =>
   ifElse(pred, Ok, Err)
 
@@ -303,7 +305,7 @@ Ok(undefined)
 Ok(null)
 //=> Ok null
 
-// safeShout :: a -> Result String String
+// safeShout :: a -> Result String
 const safeShout = compose(
   map(toUpper),
   ensureString
@@ -461,38 +463,43 @@ import objOf from 'crocks/helpers/objOf'
 import fanout from 'crocks/Pair/fanout'
 import isNumber from 'crocks/predicates/isNumber'
 import ifElse from 'crocks/logic/ifElse'
-import compose from 'crocks/core/compose'
+import compose from 'crocks/helpers/compose'
+import composeB from 'crocks/combinators/composeB'
 
 const { Ok, Err } = Result
 
 // buildError :: () -> String
-const buildError = () => Err('The value given was not a valid number')
+const buildError = () =>
+  Err('The value given was not a valid number')
 
-// prod :: Number -> Number -> Number
-const prod =
-  x => y => x * y
+// double :: Number -> Number
+const double =
+  x => x * 2
 
-// fromNumber :: a -> Result
+// fromNumber :: a -> Result a String
 const fromNumber =
   ifElse(isNumber, Ok, buildError)
 
-// doube :: a -> Result String Number
-const double =
-  compose(
-    map(prod(2)),
-    fromNumber
-  )
+// doubleNumber :: a -> Result String Number
+const doubleNumber = composeB(
+  map(double),
+  fromNumber
+)
 
-double(21)
+doubleNumber(21)
 //=> Ok 42
 
-double('down')
+doubleNumber('down')
 //=> Err "The value given was not a valid number"
 
+// isEvenOrOdd :: a -> String
+const isEvenOrOdd = n =>
+  n % 2 === 0 ? 'Even' : 'Odd'
+
 // getParity :: Number -> Object
-const getParity = compose(
+const getParity = composeB(
   objOf('parity'),
-  n => n % 2 === 0 ? 'Even' : 'Odd'
+  isEvenOrOdd
 )
 
 // getInfo :: a -> Object
@@ -530,22 +537,22 @@ import map from 'crocks/pointfree/map'
 import reduce from 'crocks/pointfree/reduce'
 import flip from 'crocks/combinators/flip'
 import ifElse from 'crocks/logic/ifElse'
-import compose from 'crocks/core/compose'
+import composeB from 'crocks/combinators/composeB'
 import curry from 'crocks/core/curry'
 
 const { Ok, Err } = Result
 
-// ensure :: (a -> bool) -> a -> Result a a
+// ensure :: (a -> Boolean) -> a -> Result a
 const ensure = pred =>
   ifElse(pred, Ok, Err)
 
 // gte :: Number -> Number -> Boolean
-const gte =
-  x => y => y >= x
+const gte = x => y =>
+  y >= x
 
 // find :: (a -> Boolean) -> Foldable a -> Result String a
 const find = curry(
-  pred => compose(
+  pred => composeB(
     reduce(flip(alt), Err('Not found')),
     map(ensure(pred))
   )
@@ -593,7 +600,7 @@ import Result from 'crocks/Result'
 import map from 'crocks/pointfree/map'
 import ifElse from 'crocks/logic/ifElse'
 import setProp from 'crocks/helpers/setProp'
-import compose from 'crocks/core/compose'
+import composeB from 'crocks/combinators/composeB'
 import identity from 'crocks/combinators/identity'
 import objOf from 'crocks/helpers/objOf'
 import isNumber from 'crocks/predicates/isNumber'
@@ -601,19 +608,20 @@ import bimap from 'crocks/pointfree/bimap'
 
 const { Ok, Err } = Result
 
-// ensure :: (a -> bool) -> a -> Result a a
+// ensure :: (a -> Boolean) -> a -> Result a
 const ensure = pred =>
   ifElse(pred, Ok, Err)
 
 // buildError :: () -> String
-const buildError = () => 'The value given was not a valid number'
+const buildError = () =>
+  'The value given was not a valid number'
 
 // prod :: Number -> Number -> Number
-const prod =
-  x => y => x * y
+const prod = x => y =>
+  x * y
 
 // fromNumber :: a -> Result String Number
-const fromNumber = compose(
+const fromNumber = composeB(
   bimap(buildError, identity),
   ensure(isNumber)
 )
@@ -622,21 +630,20 @@ const fromNumber = compose(
 const hasError =
   setProp('hasError')
 
-// ResultObject :: { Boolean, Number, String }
+// ResultObject :: { result: Number, hasError: Boolean, error: String }
 
 // buildResult :: (String, Boolean) -> a -> ResultObject
-const buildResult =
-  (key, isError) =>
-    compose(hasError(isError), objOf(key))
+const buildResult = (key, isError) =>
+  composeB(hasError(isError), objOf(key))
 
-// finalize :: Result e a -> Result ResultObject ResultObject
+// finalize :: Result e a -> Result ResultObject
 const finalize = bimap(
   buildResult('error', true),
   buildResult('result', false)
 )
 
 // double :: a -> Result String Number
-const double = compose(
+const double = composeB(
   map(prod(2)),
   fromNumber
 )
@@ -678,11 +685,12 @@ import liftA2 from 'crocks/helpers/liftA2'
 const { Ok, Err } = Result
 
 // buildError :: () -> String
-const buildError = () => Err('The value given was not a valid number')
+const buildError = () =>
+  Err('The value given was not a valid number')
 
 // prod :: Number -> Number -> Number
-const prod =
-  x => y => x * y
+const prod = x => y =>
+  x * y
 
 // fromNumber :: a -> Result String Number
 const fromNumber =
@@ -791,18 +799,20 @@ const { Err, Ok } = Result
 const { get, modify } = State
 
 // gte :: Number -> Number -> Boolean
-const lte =
-  y => x => x <= y
+const lte = y => x =>
+  x <= y
 
-const ensure = pred => ifElse(pred, Ok, Err)
+// ensure :: (a -> Boolean) -> a -> Result a
+const ensure = pred =>
+  ifElse(pred, Ok, Err)
 
 // tallyOf :: a -> [ a ]
-const tallyOf =
-  x => Pair(Sum.empty(), x)
+const tallyOf = x =>
+  Pair(Sum.empty(), x)
 
 // incBy :: Number -> Pair Sum Number
-const incBy =
-  x => Pair(Sum(x), x)
+const incBy = x =>
+  Pair(Sum(x), x)
 
 Ok(12)
   .traverse(tallyOf, incBy)
@@ -812,15 +822,16 @@ Err(true)
   .traverse(tallyOf, incBy)
 //=> Pair( Sum 0, Err true )
 
-// lte10 :: Number -> Result Number Number
-const lte10 = ensure(lte(10))
+// lte10 :: Number -> Result Number
+const lte10 =
+  ensure(lte(10))
 
-// update :: Number -> State Number Number
+// update :: Number -> State Number
 const update = x =>
   modify(state => x + state)
     .chain(constant(get()))
 
-// updateSmall :: () => State Number Number
+// updateSmall :: () => State Number
 const updateSmall = () =>
   get(lte10)
     .chain(traverse(State, update))
@@ -865,7 +876,8 @@ import Result from 'crocks/Result'
 
 import map from 'crocks/pointfree/map'
 import ifElse from 'crocks/logic/ifElse'
-import compose from 'crocks/core/compose'
+import compose from 'crocks/helpers/compose'
+import composeB from 'crocks/combinators/composeB'
 import isDefined from 'crocks/core/isDefined'
 import isNumber from 'crocks/predicates/isNumber'
 import hasProp from 'crocks/predicates/hasProp'
@@ -876,29 +888,34 @@ import identity from 'crocks/combinators/identity'
 const { Ok, Err } = Result
 
 // buildError :: String -> Result String a
-const buildError = x => Err(`${x} is not a valid value`)
+const buildError = () =>
+  Err('the value given is not valid')
 
-// ensure :: (a -> bool) -> a -> Result a a
+// ensure :: (a -> Boolean) -> a -> Result a
 const ensure = pred =>
   ifElse(pred, Ok, buildError)
 
 // fromNumber :: a -> Result String Number
-const fromNumber = ensure(isNumber)
+const fromNumber =
+  ensure(isNumber)
 
 // prop :: (String | Number) -> Object -> Result String a
-const prop =
-  name => compose(
-    bimap(() => `${name} does not exist on the value given`, identity),
-    chain(ensure(isDefined)),
-    map(x => x[name]),
-    ensure(hasProp(name))
-  )
+const prop = name => compose(
+  bimap(() => `${name} does not exist on the value given`, identity),
+  chain(ensure(isDefined)),
+  map(x => x[name]),
+  ensure(hasProp(name))
+)
 
 // prop :: Object -> Result String a
-const getAge = prop('age')
+const getAge =
+  prop('age')
 
 // protectedAdd10 :: a -> Result String Number
-const protectedAdd10 = compose(map(x => x + 10), fromNumber)
+const protectedAdd10 = composeB(
+  map(x => x + 10),
+  fromNumber
+)
 
 getAge({ name: 'Sarah', age: 21 })
 //=> Ok 21
@@ -917,7 +934,7 @@ getAge({ name: 'Sarah', age: 21 })
 getAge({ name: 'Sarah', age: 'unk' })
   .chain(fromNumber)
   .chain(protectedAdd10)
-//=> Err "unk is not a valid value"
+//=> Err "the value given is not valid"
 
 getAge({ name: 'Sarah' })
 //=> Err "age does not exist on the object given"
@@ -946,7 +963,8 @@ import Result from 'crocks/Result'
 import map from 'crocks/pointfree/map'
 import coalesce from 'crocks/pointfree/coalesce'
 import ifElse from 'crocks/logic/ifElse'
-import compose from 'crocks/core/compose'
+import compose from 'crocks/helpers/compose'
+import composeB from 'crocks/combinators/composeB'
 import isNumber from 'crocks/predicates/isNumber'
 import chain from 'crocks/pointfree/chain'
 import isObject from 'crocks/predicates/isObject'
@@ -962,14 +980,20 @@ import assoc from 'crocks/helpers/assoc'
 const { Err, Ok } = Result
 
 // gte :: Number -> Number -> Boolean
-const gte =
-  y => x => x >= y
+const gte = y => x =>
+  x >= y
 
-const ensure = pred => ifElse(pred, Ok, Err)
+// ensure :: (a -> Boolean) -> a -> Result a
+const ensure = pred =>
+  ifElse(pred, Ok, Err)
 
-const fromNumber = ensure(isNumber)
+// fromNumber :: a -> Result a Number
+const fromNumber =
+  ensure(isNumber)
 
-const ensureIsObject = ensure(isObject)
+// ensureIsObject :: a -> Result a Object
+const ensureIsObject =
+  ensure(isObject)
 
 fromNumber(45)
   .coalesce(constant(42), identity)
@@ -979,11 +1003,17 @@ fromNumber('number')
   .coalesce(constant(42), identity)
 //=> Ok 42
 
-const hasAge = ensure(hasProp('age'))
+// hasAge :: a -> Result a Boolean
+const hasAge =
+  ensure(hasProp('age'))
 
-const prop =
-  name => x => x[name]
+// prop :: String -> Object -> a
+const prop = name => x =>
+  x[name]
 
+// Person :: { canDrink: Boolean, name: String: age: Number }
+
+// ensureHasAge :: a -> Result a Person
 const ensureHasAge = compose(
   coalesce(assoc('age', 0), identity),
   chain(hasAge),
@@ -991,13 +1021,19 @@ const ensureHasAge = compose(
   ensureIsObject
 )
 
+// determineCanDrink :: Number -> { canDrink: Boolean }
+const determineCanDrink =
+  composeB(objOf('canDrink'), gte(18))
+
+// setCanDrink :: a -> Result a Person
 const setCanDrink = compose(
   merge(assign),
-  map(compose(objOf('canDrink'), gte(18))),
+  map(determineCanDrink),
   fanout(identity, prop('age'))
 )
 
-const getDetails = compose(
+// setCanDrink :: a -> Result Person
+const getDetails = composeB(
   map(setCanDrink),
   ensureHasAge
 )
@@ -1040,12 +1076,12 @@ import Result from 'crocks/Result'
 import identity from 'crocks/combinators/identity'
 import swap from 'crocks/pointfree/swap'
 import isNumber from 'crocks/predicates/isNumber'
-import compose from 'crocks/core/compose'
 import ifElse from 'crocks/logic/ifElse'
 import constant from 'crocks/combinators/constant'
 
 const { Ok, Err } = Result
 
+// simpleSwap :: Result e a -> Result a e
 const simpleSwap =
   swap(identity, identity)
 
@@ -1055,10 +1091,19 @@ simpleSwap(Ok(42))
 simpleSwap(Err(21))
 //=> Ok 21
 
-const ensure = (pred, f) => ifElse(pred, Ok, compose(Err, f))
+// buildError :: () -> Result String *
+const buildError = () =>
+  Err('The value given was not a valid number')
 
-const fromNumber = ensure(isNumber, () => 'The value given was not a valid number')
+// ensure :: (a -> Boolean) -> a -> Result String a
+const ensure = pred =>
+  ifElse(pred, Ok, buildError)
 
+// fromNumber :: a -> Result String Number
+const fromNumber =
+  ensure(isNumber)
+
+// swapWithDefault :: Result e a -> Result String Number
 const swapWithDefault =
   swap(constant(0), () => 'The value given is not a valid value')
 
@@ -1090,19 +1135,28 @@ import Result from 'crocks/Result'
 import either from 'crocks/pointfree/either'
 import map from 'crocks/pointfree/map'
 import ifElse from 'crocks/logic/ifElse'
-import compose from 'crocks/core/compose'
+import compose from 'crocks/helpers/compose'
 import isNumber from 'crocks/predicates/isNumber'
 import setProp from 'crocks/helpers/setProp'
 import objOf from 'crocks/helpers/objOf'
 
 const { Ok, Err } = Result
 
-const ensure = (pred, f) => ifElse(pred, Ok, compose(Err, f))
+// buildError :: () -> Result String *
+const buildError = () =>
+  Err('The value given was not a valid number')
 
-const fromNumber = ensure(isNumber, () => 'The value given was not a valid number')
+// ensure :: (a -> Boolean) -> a -> Result String a
+const ensure = pred =>
+  ifElse(pred, Ok, buildError)
 
-const prod =
-  x => y => x * y
+// fromNumber :: a -> Result String Number
+const fromNumber =
+  ensure(isNumber)
+
+// double :: Number -> Number
+const double = x =>
+  x * 2
 
 // hasError :: Boolean -> Object -> Object
 const hasError =
@@ -1112,22 +1166,25 @@ const hasError =
 const buildResult = (key, isError) =>
   compose(hasError(isError), objOf(key))
 
-const createResult =
-  either(
-    buildResult('error', true),
-    buildResult('result', false)
-  )
+// ResultDetail :: { result: Number, hasError: Boolean, error: String }
 
-const double = compose(
+// createResult :: Result e a -> ResultDetail
+const createResult = either(
+  buildResult('error', true),
+  buildResult('result', false)
+)
+
+// doubleNumber :: a -> ResultDetail
+const doubleNumber = compose(
   createResult,
-  map(prod(2)),
+  map(double),
   fromNumber
 )
 
-double(42)
+doubleNumber(42)
 //=> { result: 84, hasError: false }
 
-double('value')
+doubleNumber('value')
 //=> { error: 'The value given was not a valid number', hasError: true }
 ```
 
@@ -1191,8 +1248,8 @@ import Result from 'crocks/Result'
 
 import Either from 'crocks/Either'
 import assign from 'crocks/helpers/assign'
-import compose from 'crocks/helpers/compose'
 import composeK from 'crocks/helpers/composeK'
+import composeB from 'crocks/combinators/composeB'
 import fanout from 'crocks/Pair/fanout'
 import isNumber from 'crocks/predicates/isNumber'
 import liftA2 from 'crocks/helpers/liftA2'
@@ -1224,11 +1281,14 @@ const incProp = key =>
 // incResult :: String -> a -> Result [ String ] Object
 const incResult = key => maybeToEither(
   [ `${key} is not valid` ],
-  compose(map(objOf(key)), incProp(key))
+  composeB(
+    map(objOf(key)),
+    incProp(key)
+  )
 )
 
 // incThem :: a -> Result [ String ] Object
-const incThem = compose(
+const incThem = composeB(
   merge(liftA2(assign)),
   fanout(incResult('b'), incResult('a'))
 )
@@ -1287,12 +1347,12 @@ import firstToResult from 'crocks/Result/firstToResult'
 import flip from 'crocks/combinators/flip'
 import prop from 'crocks/Maybe/prop'
 import mapReduce from 'crocks/helpers/mapReduce'
-import compose from 'crocks/helpers/compose'
+import composeB from 'crocks/combinators/composeB'
 import concat from 'crocks/pointfree/concat'
 
 const { empty } = First
 
-// Person :: (String, Number)
+// Person :: { name: String, age: Number }
 
 // createPerson :: (String, Number) -> Person
 const createPerson = (name, age) => ({
@@ -1300,10 +1360,16 @@ const createPerson = (name, age) => ({
 })
 
 // liftName :: Person -> First (Maybe String)
-const liftName = compose(First, prop('name'))
+const liftName = composeB(
+  First,
+  prop('name')
+)
 
-// mergeFirstName :: [Person] -> First (Maybe String)
-const mergeFirstName = compose(firstToResult('(No name found)'), mapReduce(liftName, flip(concat), empty()))
+// mergeFirstName :: [ Person ] -> First (Maybe String)
+const mergeFirstName = composeB(
+  firstToResult('(No name found)'),
+  mapReduce(liftName, flip(concat), empty())
+)
 
 mergeFirstName([
   createPerson('John', 30),
@@ -1404,7 +1470,7 @@ import Result from 'crocks/Result'
 import maybeToResult from 'crocks/Result/maybeToResult'
 import Maybe from 'crocks/Maybe'
 import prop from 'crocks/Maybe/prop'
-import compose from 'crocks/helpers/compose'
+import composeB from 'crocks/combinators/composeB'
 
 const { Ok } = Result
 const { Just, Nothing } = Maybe
@@ -1415,7 +1481,10 @@ maybeToResult('An error occurred', Just('21'))
 maybeToResult('An error occurred', Nothing())
 //=> Err "An error occurred"
 
-const getName = compose(
+// Person :: { name: string, age: Number }
+
+// getName :: Person -> Result String
+const getName = composeB(
   maybeToResult('Name did not exist or was undefined'),
   prop('name')
 )

@@ -36,10 +36,10 @@ to construct an [`Ok`](#ok), but it will read better to just use [`Ok`](#ok).
 import Result from 'crocks/Result'
 
 import and from 'crocks/logic/and'
-import ifElse from 'crocks/logic/ifElse'
-import composeB from 'crocks/combinators/composeB'
-import isNumber from 'crocks/predicates/isNumber'
 import bimap from 'crocks/pointfree/bimap'
+import composeB from 'crocks/combinators/composeB'
+import ifElse from 'crocks/logic/ifElse'
+import isNumber from 'crocks/predicates/isNumber'
 import liftA2 from 'crocks/helpers/liftA2'
 
 const { Err, Ok } = Result
@@ -209,11 +209,11 @@ core tool when using Railway Orientated Programming concepts.
 ```javascript
 import Result from 'crocks/Result'
 
-import chain from 'crocks/pointfree/chain'
 import bimap from 'crocks/pointfree/bimap'
-import isNumber from 'crocks/predicates/isNumber'
+import chain from 'crocks/pointfree/chain'
+import composeB from 'crocks/combinators/composeB'
 import ifElse from 'crocks/logic/ifElse'
-import compose from 'crocks/helpers/compose'
+import isNumber from 'crocks/predicates/isNumber'
 
 const { Ok, Err } = Result
 
@@ -230,7 +230,7 @@ const add10 =
   x => x + 10
 
 // protectedAdd10 :: a -> Result String Number
-const protectedAdd10 = compose(
+const protectedAdd10 = composeB(
   bimap(buildError, add10),
   ensure(isNumber)
 )
@@ -269,12 +269,12 @@ a disjunction or a valid value. [`Ok`](#ok) will wrap any given value in an
 ```javascript
 import Result from 'crocks/Result'
 
-import compose from 'crocks/helpers/compose'
+import bimap from 'crocks/pointfree/bimap'
+import composeB from 'crocks/combinators/composeB'
+import identity from 'crocks/combinators/identity'
 import ifElse from 'crocks/logic/ifElse'
 import isString from 'crocks/predicates/isString'
 import map from 'crocks/pointfree/map'
-import bimap from 'crocks/pointfree/bimap'
-import identity from 'crocks/combinators/identity'
 
 const { Ok, Err } = Result
 
@@ -287,7 +287,7 @@ const buildError = () =>
   'The value given is not a valid string'
 
 // ensureString :: a -> Result String Number
-const ensureString = compose(
+const ensureString = composeB(
   bimap(buildError, identity),
   ensure(isString)
 )
@@ -306,7 +306,7 @@ Ok(null)
 //=> Ok null
 
 // safeShout :: a -> Result String
-const safeShout = compose(
+const safeShout = composeB(
   map(toUpper),
   ensureString
 )
@@ -456,19 +456,19 @@ instance. When run on an ['Err'](#err) `map` with return the error value in a ne
 ```javascript
 import Result from 'crocks/Result'
 
-import map from 'crocks/pointfree/map'
-import merge from 'crocks/pointfree/merge'
 import assign from 'crocks/helpers/assign'
-import objOf from 'crocks/helpers/objOf'
-import fanout from 'crocks/Pair/fanout'
-import isNumber from 'crocks/predicates/isNumber'
-import ifElse from 'crocks/logic/ifElse'
 import compose from 'crocks/helpers/compose'
 import composeB from 'crocks/combinators/composeB'
+import fanout from 'crocks/Pair/fanout'
+import ifElse from 'crocks/logic/ifElse'
+import isNumber from 'crocks/predicates/isNumber'
+import map from 'crocks/pointfree/map'
+import merge from 'crocks/pointfree/merge'
+import objOf from 'crocks/helpers/objOf'
 
 const { Ok, Err } = Result
 
-// buildError :: () -> String
+// buildError :: () -> Result String *
 const buildError = () =>
   Err('The value given was not a valid number')
 
@@ -533,12 +533,12 @@ will accumalte based on their rules.
 import Result from 'crocks/result'
 
 import alt from 'crocks/pointfree/alt'
-import map from 'crocks/pointfree/map'
-import reduce from 'crocks/pointfree/reduce'
-import flip from 'crocks/combinators/flip'
-import ifElse from 'crocks/logic/ifElse'
 import composeB from 'crocks/combinators/composeB'
 import curry from 'crocks/core/curry'
+import flip from 'crocks/combinators/flip'
+import ifElse from 'crocks/logic/ifElse'
+import map from 'crocks/pointfree/map'
+import reduce from 'crocks/pointfree/reduce'
 
 const { Ok, Err } = Result
 
@@ -597,14 +597,14 @@ and [`identity`][identity] to the second.
 ```javascript
 import Result from 'crocks/Result'
 
-import map from 'crocks/pointfree/map'
-import ifElse from 'crocks/logic/ifElse'
-import setProp from 'crocks/helpers/setProp'
+import bimap from 'crocks/pointfree/bimap'
 import composeB from 'crocks/combinators/composeB'
 import identity from 'crocks/combinators/identity'
-import objOf from 'crocks/helpers/objOf'
+import ifElse from 'crocks/logic/ifElse'
 import isNumber from 'crocks/predicates/isNumber'
-import bimap from 'crocks/pointfree/bimap'
+import map from 'crocks/pointfree/map'
+import objOf from 'crocks/helpers/objOf'
+import setProp from 'crocks/helpers/setProp'
 
 const { Ok, Err } = Result
 
@@ -677,14 +677,14 @@ then they will accumalte based on their rules.
 ```javascript
 import Result from 'crocks/Result'
 
-import map from 'crocks/pointfree/map'
 import ifElse from 'crocks/logic/ifElse'
 import isNumber from 'crocks/predicates/isNumber'
 import liftA2 from 'crocks/helpers/liftA2'
+import map from 'crocks/pointfree/map'
 
 const { Ok, Err } = Result
 
-// buildError :: () -> String
+// buildError :: () -> Result String *
 const buildError = () =>
   Err('The value given was not a valid number')
 
@@ -788,11 +788,11 @@ arguments must provide an instance of the target `Apply`.
 ```javascript
 import Result from 'crocks/Result'
 
+import constant from 'crocks/combinators/constant'
+import ifElse from 'crocks/logic/ifElse'
 import Pair from 'crocks/Pair'
 import State from 'crocks/State'
 import Sum from 'crocks/Sum'
-import constant from 'crocks/combinators/constant'
-import ifElse from 'crocks/logic/ifElse'
 import traverse from 'crocks/pointfree/traverse'
 
 const { Err, Ok } = Result
@@ -874,16 +874,16 @@ will be passed to provided function, returning the result as the new instance.
 ```javascript
 import Result from 'crocks/Result'
 
-import map from 'crocks/pointfree/map'
-import ifElse from 'crocks/logic/ifElse'
+import bimap from 'crocks/pointfree/bimap'
+import chain from 'crocks/pointfree/chain'
 import compose from 'crocks/helpers/compose'
 import composeB from 'crocks/combinators/composeB'
+import hasProp from 'crocks/predicates/hasProp'
+import identity from 'crocks/combinators/identity'
+import ifElse from 'crocks/logic/ifElse'
 import isDefined from 'crocks/core/isDefined'
 import isNumber from 'crocks/predicates/isNumber'
-import hasProp from 'crocks/predicates/hasProp'
-import chain from 'crocks/pointfree/chain'
-import bimap from 'crocks/pointfree/bimap'
-import identity from 'crocks/combinators/identity'
+import map from 'crocks/pointfree/map'
 
 const { Ok, Err } = Result
 
@@ -946,13 +946,13 @@ getAge({ name: 'Sarah' })
 Result e a ~> ((e -> b), (a -> b))) -> Result c b
 ```
 
-There will come a time in your flow that you will want to ensure you have an
-[`Ok`](#ok) of a given type. `coalesce` allows you to `map` over both the
-[`Ok`](#ok) and the [`Err`](#err) and return an [`Ok`](#ok). `coalesce` expects
+There will come a time in your flow that you will want to ensure you have
+an [`Ok`](#ok) of a given type. `coalesce` allows you to `map` over both
+the [`Ok`](#ok) and the [`Err`](#err) and return an [`Ok`](#ok). `coalesce` expects
 two functions for it's inputs. 
 
-The first function is used when invoked on a [`Err`](#err) and will return a
-[`Ok`](#ok) instance wrapping the result of the function. The second function
+The first function is used when invoked on a [`Err`](#err) and will return
+a [`Ok`](#ok) instance wrapping the result of the function. The second function
 is used when `coalesce` is invoked on a [`Ok`](#ok) and is used to map the
 original value, returning a new [`Ok`](#ok) instance wrapping the result of the
 second function.
@@ -960,22 +960,22 @@ second function.
 ```javascript
 import Result from 'crocks/Result'
 
-import map from 'crocks/pointfree/map'
+import assign from 'crocks/helpers/assign'
+import assoc from 'crocks/helpers/assoc'
+import chain from 'crocks/pointfree/chain'
 import coalesce from 'crocks/pointfree/coalesce'
-import ifElse from 'crocks/logic/ifElse'
 import compose from 'crocks/helpers/compose'
 import composeB from 'crocks/combinators/composeB'
-import isNumber from 'crocks/predicates/isNumber'
-import chain from 'crocks/pointfree/chain'
-import isObject from 'crocks/predicates/isObject'
+import constant from 'crocks/combinators/constant'
+import fanout from 'crocks/Pair/fanout'
 import hasProp from 'crocks/predicates/hasProp'
 import identity from 'crocks/combinators/identity'
-import constant from 'crocks/combinators/constant'
-import assign from 'crocks/helpers/assign'
-import fanout from 'crocks/Pair/fanout'
+import ifElse from 'crocks/logic/ifElse'
+import isNumber from 'crocks/predicates/isNumber'
+import isObject from 'crocks/predicates/isObject'
+import map from 'crocks/pointfree/map'
 import merge from 'crocks/Pair/merge'
 import objOf from 'crocks/helpers/objOf'
-import assoc from 'crocks/helpers/assoc'
 
 const { Err, Ok } = Result
 
@@ -1073,11 +1073,11 @@ then [`identity`][identity] functions can be used in one or both arguments.
 ```javascript
 import Result from 'crocks/Result'
 
-import identity from 'crocks/combinators/identity'
-import swap from 'crocks/pointfree/swap'
-import isNumber from 'crocks/predicates/isNumber'
-import ifElse from 'crocks/logic/ifElse'
 import constant from 'crocks/combinators/constant'
+import identity from 'crocks/combinators/identity'
+import ifElse from 'crocks/logic/ifElse'
+import isNumber from 'crocks/predicates/isNumber'
+import swap from 'crocks/pointfree/swap'
 
 const { Ok, Err } = Result
 
@@ -1132,13 +1132,13 @@ By using composing `either` you can create functions that us the power of
 ```javascript
 import Result from 'crocks/Result'
 
-import either from 'crocks/pointfree/either'
-import map from 'crocks/pointfree/map'
-import ifElse from 'crocks/logic/ifElse'
 import compose from 'crocks/helpers/compose'
+import either from 'crocks/pointfree/either'
+import ifElse from 'crocks/logic/ifElse'
 import isNumber from 'crocks/predicates/isNumber'
-import setProp from 'crocks/helpers/setProp'
+import map from 'crocks/pointfree/map'
 import objOf from 'crocks/helpers/objOf'
+import setProp from 'crocks/helpers/setProp'
 
 const { Ok, Err } = Result
 
@@ -1294,10 +1294,11 @@ be returned that takes a given value and returns a `Result`.
 ```javascript
 import Result from 'crocks/Result'
 
-import Either from 'crocks/Either'
 import assign from 'crocks/helpers/assign'
 import composeK from 'crocks/helpers/composeK'
 import composeB from 'crocks/combinators/composeB'
+import Either from 'crocks/Either'
+import eitherToResult from 'crocks/Either/eitherToResult'
 import fanout from 'crocks/Pair/fanout'
 import isNumber from 'crocks/predicates/isNumber'
 import liftA2 from 'crocks/helpers/liftA2'
@@ -1306,7 +1307,6 @@ import maybeToEither from 'crocks/Result/maybeToEither'
 import merge from 'crocks/Pair/merge'
 import objOf from 'crocks/helpers/objOf'
 import prop from 'crocks/Maybe/prop'
-import eitherToResult from 'crocks/Either/eitherToResult'
 import safeLift from 'crocks/Maybe/safeLift'
 
 const { Left, Right } = Either
@@ -1391,12 +1391,12 @@ returned that takes a given value and returns a `Result`.
 ```javascript
 import First from 'crocks/First'
 
-import firstToResult from 'crocks/Result/firstToResult'
-import flip from 'crocks/combinators/flip'
-import prop from 'crocks/Maybe/prop'
-import mapReduce from 'crocks/helpers/mapReduce'
 import composeB from 'crocks/combinators/composeB'
 import concat from 'crocks/pointfree/concat'
+import firstToResult from 'crocks/Result/firstToResult'
+import flip from 'crocks/combinators/flip'
+import mapReduce from 'crocks/helpers/mapReduce'
+import prop from 'crocks/Maybe/prop'
 
 const { empty } = First
 
@@ -1515,10 +1515,10 @@ have a larger collection of `Result` returning functions.
 ```javascript
 import Result from 'crocks/Result'
 
+import composeB from 'crocks/combinators/composeB'
 import maybeToResult from 'crocks/Result/maybeToResult'
 import Maybe from 'crocks/Maybe'
 import prop from 'crocks/Maybe/prop'
-import composeB from 'crocks/combinators/composeB'
 
 const { Ok } = Result
 const { Just, Nothing } = Maybe

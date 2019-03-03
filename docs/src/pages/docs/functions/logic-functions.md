@@ -421,13 +421,13 @@ import constant from 'crocks/combinator/constant'
 import isString from 'crocks/predicates/isString'
 import flip from 'crocks/combinators/flip'
 
-// prod :: Number -> Number -> Number
-const prod = a => b =>
-  b * a
+// double :: Number -> Number
+const double = a =>
+  a * 2
 
 // doubleUnless :: (a -> Boolean) -> Number -> Number
 const doubleUnless =
-  flip(unless, prod(2))
+  flip(unless, double)
 
 doubleUnless(constant(true), 21)
 //=> 21
@@ -476,13 +476,13 @@ import flip from 'crocks/combinator/flip'
 import composeB from 'crocks/combinator/composeB'
 import compose from 'crocks/core/compose'
 
-// prod :: Number -> Number -> Number
-const prod = a => b =>
-  b * a
+// double :: Number -> Number
+const double = a =>
+  a * 2
 
 // doubleWhen :: (a -> Boolean) -> Number -> Number
 const doubleWhen =
-  flip(when, prod(2))
+  flip(when, double)
 
 doubleWhen(constant(true), 21)
 //=> 42

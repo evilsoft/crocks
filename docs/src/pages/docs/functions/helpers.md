@@ -70,10 +70,19 @@ the boring hook up for you. Just like `compose`, functions are applied
 right-to-left, so you can turn this:
 
 ```javascript
-const { chain, compose, isObject, prop, safe } = crocks
+import compose from 'crocks/helpers/compose'
+
+import chain from 'crocks/pointfree/chain'
+import isObject from 'crocks/predicates/isObject'
+import prop from 'crocks/Maybe/prop'
+import safe from 'crocks/Maybe/safe'
 
 const data = {
-  do: { re: { mi: 'fa' } }
+  do: {
+    re: {
+      mi: 'fa'
+    }
+  }
 }
 
 // fluent :: a -> Maybe b
@@ -101,10 +110,18 @@ pointfree(data)
 into the more abbreviated form:
 
 ```javascript
-const { composeK, isObject, prop, safe } = crocks
+import composeK from 'crocks/helpers/composeK'
+
+import isObject from 'crocks/predicates/isObject'
+import prop from 'crocks/Maybe/prop'
+import safe from 'crocks/Maybe/safe'
 
 const data = {
-  do: { re: { mi: 'fa' } }
+  do: {
+    re: {
+      mi: 'fa'
+    }
+  }
 }
 
 // flow :: a -> Maybe b
@@ -133,26 +150,10 @@ composeP :: Promise p => ((y -> p z c), ..., (a -> p b c)) -> a -> p z c
 ```
 
 When working with `Promise`s, it is common place to create chains on a
-`Promise`'s `then` function:
-
-```javascript
-const promFunc = x =>
-  promiseSomething(x)
-    .then(doSomething)
-    .then(doAnother)
-```
-
-Doing this involves a lot of boilerplate and forces you into a fluent style,
+`Promise`'s `then` function. Doing this involves a lot of boilerplate and forces you into a fluent style,
 whether you want to be or not. Using `composeP` you have the option to compose a
 series of `Promise` returning functions like you would any other function
-composition, in a right-to-left fashion. Like so:
-
-```javascript
-const { composeP } = crocks
-
-const promFunc =
-  composeP(doAnother, doSomething, promiseSomething)
-```
+composition, in a right-to-left fashion.
 
 Due to the nature of the `then` function, only the head of your composition
 needs to return a `Promise`. This will create a function that takes a value,
@@ -160,6 +161,59 @@ which is passed through your chain, returning a `Promise` which can be extended.
 This is only a `then` chain, it does not do anything with the `catch` function.
 If you would like to provide your functions in a left-to-right manner, check out
 [pipeP](#pipep).
+
+<!-- eslint-disable no-console -->
+
+```javascript
+import composeP from 'crocks/helpers/composeP'
+
+import Async from 'crocks/Async'
+import asyncToPromise from 'crocks/Async/asyncToPromise'
+import composeB from 'crocks/combinators/composeB'
+
+const { resolveAfter } = Async
+
+// resolveQuick :: a -> Async e a
+const resolveQuick = value =>
+  resolveAfter(300, value)
+
+// promiseSomething :: a -> Promise a e
+const promiseSomething = composeB(
+  asyncToPromise, resolveQuick
+)
+
+// log :: a -> ()
+const log = x =>
+  console.log(x)
+
+// sayHello :: String -> String
+const sayHello = to =>
+  `Hello ${to}`
+
+// emphasize :: String -> String
+const emphasize = to =>
+  `${to}!`
+
+// promFunc :: a -> Promise a e
+const promFunc = x =>
+  promiseSomething(x)
+    .then(emphasize)
+    .then(sayHello)
+
+// composedPromFunc :: a -> Promise a e
+const composedPromFunc =
+  composeP(sayHello, emphasize, promiseSomething)
+
+promFunc('World')
+  .then(log)
+//=> Hello World!
+
+composedPromFunc('World')
+  .then(log)
+//=> Hello World!
+```
+
+<!-- eslint-disable no-console -->
 
 #### composeS
 
@@ -690,9 +744,11 @@ chaining together a series of functions with the signature:
 functions left-to-right.
 
 ```javascript
-import crocks from 'crocks'
+import pipeK from 'crocks/helpers/pipeK'
 
-const { curry, List, Writer } = crocks
+import curry from 'crocks/core/curry'
+import List from 'crocks/List'
+import Writer from 'crocks/Writer'
 
 const OpWriter =
   Writer(List)
@@ -735,17 +791,58 @@ standard boilerplate that comes with working with `Promise` chains. The only
 difference between `pipeP` and [`composeP`](#composep) is that it takes its
 functions in a left-to-right order:
 
-```javascript
-const { pipeP } = crocks
+<!-- eslint-disable no-console -->
 
+```javascript
+import pipeP from 'crocks/helpers/pipeP'
+
+import Async from 'crocks/Async'
+import asyncToPromise from 'crocks/Async/asyncToPromise'
+import composeB from 'crocks/combinators/composeB'
+
+const { resolveAfter } = Async
+
+// prod :: Number -> Number -> Number
+const prod = a => b =>
+  b * a
+
+// resolveQuick :: a -> Async e a
+const resolveQuick = value =>
+  resolveAfter(300, value)
+
+// promise :: a -> Promise a e
+const promise = composeB(
+  asyncToPromise, resolveQuick
+)
+
+// double :: Number -> Number
+const double =
+  prod(2)
+
+// triple :: Number -> Number
+const triple =
+  prod(3)
+
+// promFunc :: Number -> Promise Number e
 const promFunc = x =>
   promise(x)
-    .then(doSomething)
-    .then(doAnother)
+    .then(double)
+    .then(triple)
 
+// promPipe :: Number -> Promise Number e
 const promPipe =
-  pipeP(proimse, doSomething, doAnother)
+  pipeP(promise, double, triple)
+
+promFunc(5)
+  .then(v => console.log(v))
+//=> 30
+
+promPipe(5)
+  .then(v => console.log(v))
+//=> 30
 ```
+
+<!-- eslint-enable no-console -->
 
 #### pipeS
 
@@ -764,9 +861,7 @@ with them all composed together. The only difference between the two, is that
 the opposite.
 
 ```javascript
-import {
-  curry, isNumber, pipeS, prop, safeLift, Star
-} from 'crocks'
+import { curry, isNumber, pipeS, prop, safeLift, Star } from 'crocks'
 
 const add = curry(
   (x, y) => x + y
@@ -788,10 +883,12 @@ const flow = (key, num) => pipeS(
   safeAdd(num)
 )
 
-flow('num', 10).runWith(data)
+flow('num', 10)
+  .runWith(data)
 // => Just 66
 
-flow('string', 100).runWith(data)
+flow('string', 100)
+  .runWith(data)
 // => Nothing
 ```
 
@@ -1067,7 +1164,7 @@ import unsetPath from 'crocks/helpers/unsetPath'
 unsetPath([ 'people', 0, 'remove' ], {
   people: [
     { name: 'Tonya', remove: true },
-    { name: 'Bobby' },
+    { name: 'Bobby' }
   ]
 })
 //=> { people: [ { name: 'Tonya' }, { name: 'Bobby' } ] }

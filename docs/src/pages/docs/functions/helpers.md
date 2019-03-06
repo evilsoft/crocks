@@ -874,8 +874,6 @@ with them all composed together. The only difference between the two, is that
 `pipeS` composes in a left-to-right fashion, while [`composeS`](#composes) does
 the opposite.
 
-<!-- 
-There is an issue with this example, TODO: investigate
 ```javascript
 import pipeS from 'crocks/helpers/pipeS'
 
@@ -885,35 +883,41 @@ import prop from 'crocks/Maybe/prop'
 import safeLift from 'crocks/Maybe/safeLift'
 import Star from 'crocks/Star'
 
+// MaybeStar :: (a -> b) -> Star (Maybe (a -> b))
+const MaybeStar =
+  Star(Maybe)
+
 // add :: Number -> Number -> Number
 const add = curry(
   (x, y) => x + y
 )
 
-const pull = x =>
-  Star(prop(x))
+// pull :: String -> Star (Maybe a -> b)
+const pull =
+  x => MaybeStar(prop(x))
 
-const safeAdd = x =>
-  Star(safeLift(isNumber, add(x)))
+// safeAdd :: Number -> Star (Maybe a -> Number)
+const safeAdd =
+  x => MaybeStar(safeLift(isNumber, add(x)))
 
+// data :: { num: Number, string: String }
 const data = {
   num: 56,
   string: '56'
 }
 
+// flow :: (String, Number) -> Maybe Number
 const flow = (key, num) => pipeS(
   pull(key),
   safeAdd(num)
 )
 
-flow('num', 10)
-  .runWith(data)
+flow('num', 10).runWith(data)
 // => Just 66
 
-flow('string', 100)
-  .runWith(data)
+flow('string', 100).runWith(data)
 // => Nothing
-``` -->
+```
 
 #### propOr
 

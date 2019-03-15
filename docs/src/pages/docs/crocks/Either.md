@@ -739,7 +739,7 @@ import traverse from 'crocks/pointfree/traverse'
 const { Left, Right } = Either
 const { get } = State
 
-// tallyOf :: a -> [ a ]
+// tallyOf :: Number -> Pair Sum Number
 const tallyOf =
   x => Pair(Sum.empty(), x)
 

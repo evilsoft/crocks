@@ -11,7 +11,7 @@ Result e a = Err e | Ok a
 ```
 
 Result is a Sum Type similar to that of [`Either`][either] with the added
-behaviour of accumulating the [`Err`][#err] when using [`ap`][#ap] or [`alt`][#alt].
+behaviour of accumulating the [`Err`](#err) when using [`ap`](#ap) or [`alt`](#alt).
 With [`Either`][either] being defined as a tagged union type, it captures the
 essence of disjunction as it provides either a [`Left`][left] value or
 a [`Right`][right] value but not both. With a `Result` the left contains the
@@ -437,7 +437,7 @@ concat(Err('Error'), Ok('Result'))
 //=> Err "Error"
 
 concat(Err('Error 1'), Err('Error 2'))
-//=> Err "Error 1"
+//=> Err "Error 2"
 ```
 
 #### map
@@ -468,7 +468,7 @@ import objOf from 'crocks/helpers/objOf'
 
 const { Ok, Err } = Result
 
-// buildError :: () -> Result String *
+// buildError :: () -> Result String a
 const buildError = () =>
   Err('The value given was not a valid number')
 
@@ -476,7 +476,7 @@ const buildError = () =>
 const double =
   x => x * 2
 
-// fromNumber :: a -> Result a String
+// fromNumber :: a -> Result String Number
 const fromNumber =
   ifElse(isNumber, Ok, buildError)
 
@@ -492,7 +492,7 @@ doubleNumber(21)
 doubleNumber('down')
 //=> Err "The value given was not a valid number"
 
-// isEvenOrOdd :: a -> String
+// isEvenOrOdd :: Number -> String
 const isEvenOrOdd = n =>
   n % 2 === 0 ? 'Even' : 'Odd'
 
@@ -502,7 +502,7 @@ const getParity = composeB(
   isEvenOrOdd
 )
 
-// getInfo :: a -> Object
+// getInfo :: a -> Result String ({ parity: String, value: Number })
 const getInfo = compose(
   map(merge(assign)),
   map(fanout(objOf('value'), getParity)),
@@ -530,15 +530,17 @@ If the value in both [`Err`](#err) are `Semigroup`s of the same type then they
 will accumalte based on their rules.
 
 ```javascript
-import Result from 'crocks/result'
+import Result from 'crocks/Result'
 
 import alt from 'crocks/pointfree/alt'
-import composeB from 'crocks/combinators/composeB'
+import compose from 'crocks/helpers/compose'
 import curry from 'crocks/core/curry'
 import flip from 'crocks/combinators/flip'
+import identity from 'crocks/combinators/identity'
 import ifElse from 'crocks/logic/ifElse'
 import map from 'crocks/pointfree/map'
 import reduce from 'crocks/pointfree/reduce'
+import bimap from 'crocks/pointfree/bimap'
 
 const { Ok, Err } = Result
 
@@ -552,8 +554,9 @@ const gte = x => y =>
 
 // find :: (a -> Boolean) -> Foldable a -> Result String a
 const find = curry(
-  pred => composeB(
-    reduce(flip(alt), Err('Not found')),
+  pred => compose(
+    bimap(() => 'Not Found', identity),
+    reduce(flip(alt), Err()),
     map(ensure(pred))
   )
 )
@@ -630,13 +633,13 @@ const fromNumber = composeB(
 const hasError =
   setProp('hasError')
 
-// ResultObject :: { result: Number, hasError: Boolean, error: String }
+// Outcome :: { result: Number, hasError: Boolean, error: String }
 
-// buildResult :: (String, Boolean) -> a -> ResultObject
+// buildResult :: (String, Boolean) -> a -> Outcome
 const buildResult = (key, isError) =>
   composeB(hasError(isError), objOf(key))
 
-// finalize :: Result e a -> Result ResultObject
+// finalize :: Result e a -> Result Outcome
 const finalize = bimap(
   buildResult('error', true),
   buildResult('result', false)
@@ -684,7 +687,7 @@ import map from 'crocks/pointfree/map'
 
 const { Ok, Err } = Result
 
-// buildError :: () -> Result String *
+// buildError :: () -> Result String a
 const buildError = () =>
   Err('The value given was not a valid number')
 
@@ -788,11 +791,11 @@ arguments must provide an instance of the target `Apply`.
 ```javascript
 import Result from 'crocks/Result'
 
-import constant from 'crocks/combinators/constant'
-import ifElse from 'crocks/logic/ifElse'
 import Pair from 'crocks/Pair'
 import State from 'crocks/State'
 import Sum from 'crocks/Sum'
+import constant from 'crocks/combinators/constant'
+import ifElse from 'crocks/logic/ifElse'
 import traverse from 'crocks/pointfree/traverse'
 
 const { Err, Ok } = Result
@@ -806,7 +809,7 @@ const lte = y => x =>
 const ensure = pred =>
   ifElse(pred, Ok, Err)
 
-// tallyOf :: a -> [ a ]
+// tallyOf :: Number -> Pair Sum Number
 const tallyOf = x =>
   Pair(Sum.empty(), x)
 
@@ -843,7 +846,7 @@ updateSmall()
 updateSmall()
   .chain(updateSmall)
   .runWith(3)
-//=> Pair( Err 12, 12 )
+//=> Pair( Ok 12, 12 )
 
 updateSmall()
   .chain(updateSmall)
@@ -874,24 +877,26 @@ will be passed to provided function, returning the result as the new instance.
 ```javascript
 import Result from 'crocks/Result'
 
-import bimap from 'crocks/pointfree/bimap'
 import chain from 'crocks/pointfree/chain'
 import compose from 'crocks/helpers/compose'
 import composeB from 'crocks/combinators/composeB'
-import hasProp from 'crocks/predicates/hasProp'
-import identity from 'crocks/combinators/identity'
 import ifElse from 'crocks/logic/ifElse'
-import isDefined from 'crocks/core/isDefined'
 import isNumber from 'crocks/predicates/isNumber'
+import maybeToResult from 'crocks/Result/maybeToResult'
 import map from 'crocks/pointfree/map'
+import prop from 'crocks/Maybe/prop'
 
-const { Ok, Err } = Result
+const { Err, Ok } = Result
 
-// buildError :: String -> Result String a
+// errText :: (String | Number) -> String
+const errText = name =>
+  `${name} does not exist on the value given`
+
+// buildError :: () -> Result String a
 const buildError = () =>
   Err('the value given is not valid')
 
-// ensure :: (a -> Boolean) -> a -> Result a
+// ensure :: (a -> Boolean) -> a -> Result String a
 const ensure = pred =>
   ifElse(pred, Ok, buildError)
 
@@ -899,45 +904,38 @@ const ensure = pred =>
 const fromNumber =
   ensure(isNumber)
 
-// prop :: (String | Number) -> Object -> Result String a
-const prop = name => compose(
-  bimap(() => `${name} does not exist on the value given`, identity),
-  chain(ensure(isDefined)),
-  map(x => x[name]),
-  ensure(hasProp(name))
-)
-
-// prop :: Object -> Result String a
-const getAge =
-  prop('age')
-
+// getProp :: (String | Number) -> Object -> Result String a
+const getProp = name => 
+  maybeToResult(errText(name), prop(name))
+  
 // protectedAdd10 :: a -> Result String Number
 const protectedAdd10 = composeB(
   map(x => x + 10),
   fromNumber
 )
 
+// getAge :: Object -> Result String Number
+const getAge = composeB(
+  chain(fromNumber),
+  getProp('age')
+)
+
 getAge({ name: 'Sarah', age: 21 })
 //=> Ok 21
 
 getAge({ name: 'Sarah', age: 'unk' })
-//=> Ok "unk"
+//=> Err "the value given is not valid"
 
-chain(fromNumber, getAge({ name: 'Sarah', age: 21 }))
-//=> Ok 21
+getAge({ name: 'Sarah' })
+//=> Err "age does not exist on the value given"
 
 getAge({ name: 'Sarah', age: 21 })
-  .chain(fromNumber)
   .chain(protectedAdd10)
 //=> Ok 31
 
 getAge({ name: 'Sarah', age: 'unk' })
-  .chain(fromNumber)
   .chain(protectedAdd10)
 //=> Err "the value given is not valid"
-
-getAge({ name: 'Sarah' })
-//=> Err "age does not exist on the object given"
 ```
 
 #### coalesce
@@ -961,7 +959,7 @@ second function.
 import Result from 'crocks/Result'
 
 import assign from 'crocks/helpers/assign'
-import assoc from 'crocks/helpers/assoc'
+import setProp from 'crocks/helpers/setProp'
 import chain from 'crocks/pointfree/chain'
 import coalesce from 'crocks/pointfree/coalesce'
 import compose from 'crocks/helpers/compose'
@@ -974,7 +972,7 @@ import ifElse from 'crocks/logic/ifElse'
 import isNumber from 'crocks/predicates/isNumber'
 import isObject from 'crocks/predicates/isObject'
 import map from 'crocks/pointfree/map'
-import merge from 'crocks/Pair/merge'
+import merge from 'crocks/pointfree/merge'
 import objOf from 'crocks/helpers/objOf'
 
 const { Err, Ok } = Result
@@ -1015,7 +1013,7 @@ const prop = name => x =>
 
 // ensureHasAge :: a -> Result a Person
 const ensureHasAge = compose(
-  coalesce(assoc('age', 0), identity),
+  coalesce(setProp('age', 0), identity),
   chain(hasAge),
   coalesce(constant({}), identity),
   ensureIsObject
@@ -1091,7 +1089,7 @@ simpleSwap(Ok(42))
 simpleSwap(Err(21))
 //=> Ok 21
 
-// buildError :: () -> Result String *
+// buildError :: () -> Result String a
 const buildError = () =>
   Err('The value given was not a valid number')
 
@@ -1120,7 +1118,7 @@ swapWithDefault(fromNumber('number'))
 Result e a ~> ((e -> b), (a -> b)) -> b
 ```
 
-Used to provide a means to map a given `Result` instance folding it out of it's
+Used to provide a means to map a given `Result` instance folding it out of its
 container. `either` expects two functions as its arguments. The first is a
 function that will be used to map an [`Err`](#err). While the second
 will map the value wrapped in a given [`Ok`](#ok) and return the result of that
@@ -1142,7 +1140,7 @@ import setProp from 'crocks/helpers/setProp'
 
 const { Ok, Err } = Result
 
-// buildError :: () -> Result String *
+// buildError :: () -> Result String a
 const buildError = () =>
   Err('The value given was not a valid number')
 
@@ -1195,14 +1193,14 @@ doubleNumber('value')
 ## Helper Functions
 
 
-#### TryCatch
+#### tryCatch
 
 `crocks/Result/tryCatch`
 
 ```haskell
-TryCatch :: (* -> a) -> * -> Result e a
+tryCatch :: (* -> a) -> * -> Result e a
 ```
-Used when you you want to take any variadic function and wrap it with the added
+Used when you want to take any variadic function and wrap it with the added
 function of a `Result` type. `tryCatch` will execute the function with the 
 parameters passed and return either an [`Ok`](#ok) when successful or an 
 [`Err`](#err) when an exception is thrown.
@@ -1211,13 +1209,6 @@ Although we do our best to not use `Error` to control program flow, there are
 times when we don't have full control over the behaviour of a function. The
 saviour in this situation is `tryCatch`. You can wrap this funcition and it
 will always return a `Result`
-
-It is important to note that, as of now, `tryCatch` does not currently support
-manually or externally curried functions. When using it with a function that
-has been `curry`'d by `crocks` all arguments must be passed in one go. It will
-not support partial application. `tryCatch` applies all arguments to the top-level
-function, which works well for `curry`, and the protection only applies to the
-first activation in the run.
 
 ```javascript
 import tryCatch from 'crocks/Result/tryCatch'
@@ -1241,10 +1232,10 @@ const tryCalculateArea =
   tryCatch(calculateArea)
 
 tryCalculateArea(3, 6)
-//=> 18
+//=> Ok 18
 
 tryCalculateArea('String', 5)
-// Err "Parameter is not a a number!"
+// Err "Error: Parameter is not a number!"
 
 // getLength :: a -> Number
 const getLength = a =>
@@ -1280,7 +1271,7 @@ Used to transform a given [`Either`][either] instance to a `Result`
 instance or flatten a `Result` of `Either` into a `Result` when chained, 
 `eitherToMaybe` will turn a [`Right`][right] instance into
 a [`Ok`](#ok) wrapping the original value contained in the [`Right`][right].
-All [`Left`][left] instances will map to a [`Err`](#err), mapping the
+All [`Left`][left] instances will map to an [`Err`](#err), mapping the
 originally contained value to a `Unit`. Values on the [`Left`][left] will be
 lost and as such this transformation is considered lossy in that regard.
 
@@ -1294,17 +1285,17 @@ be returned that takes a given value and returns a `Result`.
 ```javascript
 import Result from 'crocks/Result'
 
+import Either from 'crocks/Either'
 import assign from 'crocks/helpers/assign'
 import composeK from 'crocks/helpers/composeK'
 import composeB from 'crocks/combinators/composeB'
-import Either from 'crocks/Either'
-import eitherToResult from 'crocks/Either/eitherToResult'
+import eitherToResult from 'crocks/Result/eitherToResult'
 import fanout from 'crocks/Pair/fanout'
 import isNumber from 'crocks/predicates/isNumber'
 import liftA2 from 'crocks/helpers/liftA2'
 import map from 'crocks/pointfree/map'
-import maybeToEither from 'crocks/Result/maybeToEither'
-import merge from 'crocks/Pair/merge'
+import maybeToEither from 'crocks/Either/maybeToEither'
+import merge from 'crocks/pointfree/merge'
 import objOf from 'crocks/helpers/objOf'
 import prop from 'crocks/Maybe/prop'
 import safeLift from 'crocks/Maybe/safeLift'
@@ -1343,7 +1334,7 @@ const incThem = composeB(
 
 Result.of({})
   .chain(eitherToResult(incThem))
-//=> Err [ "b is not valid", "a is not valid" ]
+//=> Err [ "b is not valid" ]
 
 Result.of({ a: 33 })
   .chain(eitherToResult(incThem))
@@ -1377,11 +1368,11 @@ firstToResult :: e -> (a -> First b) -> a -> Result e b
 
 Used to transform a given [`First`][first] instance to a `Result`
 instance or flatten a `Result` of [`First`][first] into a `Result` when chained, 
-`firstToMaybe` will turn a non-empty instance into an [`Ok`](#ok) wrapping
+`firstToResult` will turn a non-empty instance into an [`Ok`](#ok) wrapping
 the original value contained within the [`First`][first]. All empty instances
 will map to an [`Err`](#err) with the given value.
 
-Like all `crocks` transformation functions, `firstToMaybe` has two possible
+Like all `crocks` transformation functions, `firstToResult` has two possible
 signatures and will behave differently when passed either
 a [`First`][first] instance or a function that returns an instance
 of [`First`][first]. When passed the instance, a transformed `Result` is
@@ -1407,13 +1398,13 @@ const createPerson = (name, age) => ({
   name, age
 })
 
-// liftName :: Person -> First (Maybe String)
+// liftName :: Person -> First String
 const liftName = composeB(
   First,
   prop('name')
 )
 
-// mergeFirstName :: [ Person ] -> First (Maybe String)
+// mergeFirstName :: [ Person ] -> First String
 const mergeFirstName = composeB(
   firstToResult('(No name found)'),
   mapReduce(liftName, flip(concat), empty())

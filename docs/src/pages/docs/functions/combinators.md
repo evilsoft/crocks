@@ -40,6 +40,7 @@ allows only two functions, if you want to avoid things like:
 import composeB from 'crocks/combinators/composeB'
 
 import Either from 'crocks/Either'
+
 import ifElse from 'crocks/logic/ifElse'
 import isString from 'crocks/predicates/isString'
 
@@ -83,12 +84,13 @@ get the added benefit of having [`curry`][curry] applied to it.
 ```javascript
 import constant from 'crocks/combinators/constant'
 
+import Result from 'crocks/Result'
+
 import bimap from 'crocks/pointfree/bimap'
 import composeB from 'crocks/combinators/composeB'
 import ifElse from 'crocks/logic/ifElse'
 import isString from 'crocks/predicates/isString'
-import propOr from 'crocks/Maybe/propOr'
-import Result from 'crocks/Result'
+import propOr from 'crocks/helpers/propOr'
 
 const { Ok, Err } = Result
 
@@ -189,6 +191,7 @@ const maybeGetFirst =
 const maybeGetLast =
   prop('last')
 
+// buildFullName :: String -> String -> String
 const buildFullName = surname => firstname =>
   `${firstname} ${surname}`
 
@@ -235,9 +238,10 @@ flip :: (a -> b -> c) -> b -> a -> c
 
 This little function just takes a function and returns a function that takes
 the first two parameters in reverse. `flip` is perfectly suited for those
-moments where you have the context of your function but not the data. Applying
-`flip` to the function will allow you to pass in your context and will return a
-function waiting for the data. This will happen often when you're using composition.
+moments where you have the context of your function but not the data. 
+Applying `flip` to the function will allow you to pass in your context and will
+return a function waiting for the data. This will happen often when you're
+using composition.
 
 When required, one can compose flip calls down the line to flip all, or some of
 the other parameters if there are more than two. Mix and match to your heart's
@@ -246,11 +250,12 @@ desire.
 ```javascript
 import flip from 'crocks/combinators/flip'
 
+import Pred from 'crocks/Pred'
+
 import composeB from 'crocks/combinators/composeB'
 import concat from 'crocks/pointfree/concat'
 import isNumber from 'crocks/predicates/isNumber'
 import mconcat from 'crocks/helpers/mconcat'
-import Pred from 'crocks/Pred'
 import runWith from 'crocks/pointfree/runWith'
 
 concat('first param. ', 'second param. ')
@@ -267,7 +272,7 @@ const checkAll =
 const lte = a => b =>
   b <= a
 
-// lte :: Number -> Number -> Number
+// gte :: Number -> Number -> Number
 const gte = a => b =>
   b >= a
 

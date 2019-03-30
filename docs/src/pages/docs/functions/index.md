@@ -66,7 +66,7 @@ need to account for for the rest of your flow.
 | [`curry`][curry] | `((a, b, ...) -> z) -> a -> b -> ... -> z` | `crocks/helpers/curry` |
 | [`defaultProps`][defaultprops] | `Object -> Object -> Object` | `crocks/helpers/defaultProps` |
 | [`defaultTo`][defaultto] | `a -> b -> a` | `crocks/helpers/defaultTo` |
-| [`dissoc`][dissoc] | `String -> Object -> Object` | `crocks/helpers/dissoc` |
+| [`dissoc`][unsetprop]<br /><i>(deprecated)</i> | <code>(String &#124; Integer) -> a -> a</code> | `crocks/helpers/dissoc` |
 | [`fanout`][fanout] | `(a -> b) -> (a -> c) -> (a -> Pair b c)` | `crocks/Pair/fanout` |
 | [`find`][find] | <code>Foldable f => ((a -> Boolean) &#124; Pred) -> f a -> Maybe a</code> | `crocks/Maybe/find` |
 | [`fromPairs`][frompairs] | `Foldable f => f (Pair String a) -> Object` | `crocks/helpers/fromPairs` |
@@ -103,7 +103,8 @@ need to account for for the rest of your flow.
 | [`tryCatch`][trycatch] | `((*) -> b) -> (*) -> Result e b` | `crocks/Result/tryCatch` |
 | [`unary`][unary] | `((*) -> b) -> a -> b` | `crocks/helpers/unary` |
 | [`unit`][unit] | `() -> undefined` | `crocks/helpers/unit` |
-| [`unsetPath`][unsetpath] |  <code>[ (String &#124; Integer) ] -> a -> a</code>  | `crocks/helpers/unsetPath` |
+| [`unsetPath`][unsetpath] | <code>[ (String &#124; Integer) ] -> a -> a</code>  | `crocks/helpers/unsetPath` |
+| [`unsetProp`][unsetprop] | <code>(String &#124; Integer) -> a -> a</code> | `crocks/helpers/unsetProp` |
 
 ## Logic
 
@@ -182,6 +183,7 @@ type: `Pred a` and vice-versa
 [unary]: helpers.html#unary
 [unit]: helpers.html#unit
 [unsetpath]: helpers.html#unsetpath
+[unsetprop]: helpers.html#unsetprop
 
 [and]: logic-functions.html#and
 [ifelse]: logic-functions.html#ifelse

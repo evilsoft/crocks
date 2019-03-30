@@ -37,5 +37,6 @@ module.exports = {
   tap: require('./tap'),
   unary: require('./unary'),
   unit: require('./unit'),
-  unsetPath: require('./unsetPath')
+  unsetPath: require('./unsetPath'),
+  unsetProp: require('./unsetProp')
 }

@@ -2,7 +2,7 @@
 title: "Helpers"
 description: "Helper functions"
 layout: "notopic"
-functions: ["assign", "assoc", "binary", "compose", "composek", "composep", "composes", "curry", "defaultprops", "defaultto", "dissoc", "frompairs", "lifta2", "lifta3", "liftn", "mapprops", "mapreduce", "mconcat", "mconcatmap", "mreduce", "mreducemap", "nary", "objof", "omit", "once", "partial", "pick", "pipe", "pipek", "pipep", "pipes", "propor", "proppathor", "setpath", "setprop", "tap", "unary", "unit", "unsetpath"]
+functions: ["assign", "assoc", "binary", "compose", "composek", "composep", "composes", "curry", "defaultprops", "defaultto", "dissoc", "frompairs", "lifta2", "lifta3", "liftn", "mapprops", "mapreduce", "mconcat", "mconcatmap", "mreduce", "mreducemap", "nary", "objof", "omit", "once", "partial", "pick", "pipe", "pipek", "pipep", "pipes", "propor", "proppathor", "setpath", "setprop", "tap", "unary", "unit", "unsetpath", "unsetprop"]
 weight: 20
 ---
 
@@ -260,20 +260,6 @@ back either the default or the passed value, depending on if the passed value is
 `null`, `undefined` or `NaN`. While this *is* JavaScript and you can return
 anything, it is suggested to stick to the signature and only let `a`s through.
 As a `b` can be an `a` as well.
-
-#### dissoc
-
-`crocks/helpers/dissoc`
-
-```haskell
-dissoc :: String -> Object -> Object
-```
-
-While [`assoc`](#assoc) can be used to associate a given key-value pair to a
-given `Object`, `dissoc` does the opposite. Just pass `dissoc` a `String` key
-and the `Object` you wish to dissociate that key from and you will get back a
-new, shallow copy of the `Object` sans your key. As with all the `Object`
-functions, `dissoc` will remove any `undefined` values from the result.
 
 #### fromPairs
 
@@ -1080,6 +1066,44 @@ unsetPath([ 'a', 'b' ], { a: { b: false } })
 
 unsetPath([ 'a', 'b' ], { a: { c: false } })
 //=> { a: { c: false } }
+```
+
+#### unsetProp
+
+`crocks/helpers/unsetProp`
+
+```haskell
+unsetProp :: (String | Integer) -> a -> a
+```
+
+`unsetProp` is a binary function that takes either a property name or an index
+as its first argument. Which specifies what should be removed, or "unset", from
+the `Object` or `Array` provided as the second argument. If the value provided
+for the second argument is not an `Object` or `Array`, then the value provided
+is echoed back as the result.
+
+The first argument must be either a non-empty `String` or
+positive `Integer`. A `String` should be provided when working with
+an `Object`, while `Array`s require an `Integer`. `unsetProp` will return a new
+instance of either the `Object` or `Array`, sans the key or index.
+
+```javascript
+import unsetProp from '/crocks/helpers/unsetProp'
+
+unsetProp('temp', { name: 'Joey', temp: 33 })
+//=> { name: 'Joey' }
+
+unsetProp(1, [ 33, 22, 99 ])
+//=> [ 33, 99 ]
+
+unsetProp('d', { a: 'A', b: 'B' })
+//=> { a: 'A', b: 'B' }
+
+unsetProp(10, [ 'a', 'b', 'c' ])
+//=> [ 'a', 'b', 'c' ]
+
+unsetProp('silly', null)
+//=> null
 ```
 
 [maybe]: ../crocks/Maybe.html

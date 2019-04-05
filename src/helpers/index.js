@@ -14,6 +14,7 @@ module.exports = {
   liftA2: require('./liftA2'),
   liftA3: require('./liftA3'),
   liftN: require('./liftN'),
+  getPropOr: require('./getPropOr'),
   mapProps: require('./mapProps'),
   mapReduce: require('./mapReduce'),
   mconcat: require('./mconcat'),

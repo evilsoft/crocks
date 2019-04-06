@@ -344,7 +344,7 @@ import State from 'crocks/State'
 
 import compose from 'crocks/helpers/compose'
 import objOf from 'crocks/helpers/objOf'
-import propOr from 'crocks/helpers/propOr'
+import getPropOr from 'crocks/helpers/getPropOr'
 
 const { get } = State
 
@@ -354,7 +354,7 @@ const add =
 
 // getNum :: State Object Number
 const getNum =
-  get(propOr(0, 'num'))
+  get(getPropOr(0, 'num'))
 
 getNum
   .map(add(10))
@@ -399,7 +399,7 @@ instances' resultants.
 import State from 'crocks/State'
 
 import setProp from 'crocks/helpers/setProp'
-import propOr from 'crocks/helpers/propOr'
+import getPropOr from 'crocks/helpers/getPropOr'
 
 const { get, modify } = State
 
@@ -422,7 +422,7 @@ const round =
 
 // getKey :: String -> State Object Number
 const getKey = key =>
-  get(propOr(0, key))
+  get(getPropOr(0, key))
 
 // updateKey :: String -> a -> State Object ()
 const updateKey = key => val =>
@@ -552,7 +552,7 @@ State s a ~> s -> a
 `State` is a lazy datatype that requires a value for it's state portion to
 be run. A given `State` instance provides an `evalWith` method that accepts a
 value to run the instance with. The value must be a member of the type that the
-given `State` instance is fixed to in it's state portion, `s`.
+given `State` instance is fixed to in its state portion, `s`.
 
 When called, `evalWith` will run the state transition with the given value as
 the initial state and will return the resulting resultant discarding the state
@@ -565,7 +565,7 @@ import concat from 'crocks/pointfree/concat'
 import flip from 'crocks/combinators/flip'
 import liftA2 from 'crocks/helpers/liftA2'
 import map from 'crocks/pointfree/map'
-import propOr from 'crocks/helpers/propOr'
+import getPropOr from 'crocks/helpers/getPropOr'
 
 const { get } = State
 
@@ -576,11 +576,11 @@ const name = {
 
 // getLast :: State Object String
 const getFirst =
-  get(propOr('', 'first'))
+  get(getPropOr('', 'first'))
 
 // getLast :: State Object String
 const getLast =
-  get(propOr('', 'last'))
+  get(getPropOr('', 'last'))
 
 // inner :: Functor f => f a -> f [ a ]
 const inner =

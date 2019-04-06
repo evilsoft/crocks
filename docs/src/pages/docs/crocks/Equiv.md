@@ -157,7 +157,7 @@ import Equiv from 'crocks/Equiv'
 import compareWith from 'crocks/pointfree/compareWith'
 import equals from 'crocks/pointfree/equals'
 import isSameType from 'crocks/predicates/isSameType'
-import propOr from 'crocks/helpers/propOr'
+import getPropOr from 'crocks/helpers/getPropOr'
 
 // objLength :: Object -> Number
 const objLength =
@@ -177,7 +177,7 @@ const length =
 
 // sameType :: Equiv a a
 const sameTypeProp = key =>
-  sameType.contramap(propOr(null, key))
+  sameType.contramap(getPropOr(null, key))
 
 // run :: Equiv Object Object
 const run = compareWith(
@@ -278,7 +278,7 @@ import Equiv from 'crocks/Equiv'
 
 import compose from 'crocks/helpers/compose'
 import equals from 'crocks/pointfree/equals'
-import propOr from 'crocks/helpers/propOr'
+import getPropOr from 'crocks/helpers/getPropOr'
 
 // toLower :: String -> String
 const toLower =
@@ -290,11 +290,11 @@ const length =
 
 // lowerName :: Object -> String
 const lowerName =
-  compose(toLower, propOr('', 'name'))
+  compose(toLower, getPropOr('', 'name'))
 
 // itemsLen :: Object -> Number
 const itemsLen =
-  compose(length, propOr('', 'items'))
+  compose(length, getPropOr('', 'items'))
 
 // eq :: Equiv a a
 const eq =

@@ -801,7 +801,7 @@ import traverse from 'crocks/pointfree/traverse'
 const { Err, Ok } = Result
 const { get, modify } = State
 
-// gte :: Number -> Number -> Boolean
+// lte :: Number -> Number -> Boolean
 const lte = y => x =>
   x <= y
 
@@ -878,7 +878,6 @@ will be passed to provided function, returning the result as the new instance.
 import Result from 'crocks/Result'
 
 import chain from 'crocks/pointfree/chain'
-import compose from 'crocks/helpers/compose'
 import composeB from 'crocks/combinators/composeB'
 import ifElse from 'crocks/logic/ifElse'
 import isNumber from 'crocks/predicates/isNumber'
@@ -959,7 +958,6 @@ second function.
 import Result from 'crocks/Result'
 
 import assign from 'crocks/helpers/assign'
-import setProp from 'crocks/helpers/setProp'
 import chain from 'crocks/pointfree/chain'
 import coalesce from 'crocks/pointfree/coalesce'
 import compose from 'crocks/helpers/compose'
@@ -974,6 +972,7 @@ import isObject from 'crocks/predicates/isObject'
 import map from 'crocks/pointfree/map'
 import merge from 'crocks/pointfree/merge'
 import objOf from 'crocks/helpers/objOf'
+import setProp from 'crocks/helpers/setProp'
 
 const { Err, Ok } = Result
 
@@ -1075,9 +1074,11 @@ import constant from 'crocks/combinators/constant'
 import identity from 'crocks/combinators/identity'
 import ifElse from 'crocks/logic/ifElse'
 import isNumber from 'crocks/predicates/isNumber'
+import when from 'crocks/logic/when'
 import swap from 'crocks/pointfree/swap'
 
 const { Ok, Err } = Result
+
 
 // simpleSwap :: Result e a -> Result a e
 const simpleSwap =
@@ -1089,26 +1090,34 @@ simpleSwap(Ok(42))
 simpleSwap(Err(21))
 //=> Ok 21
 
-// buildError :: () -> Result String a
-const buildError = () =>
-  Err('The value given was not a valid number')
-
 // ensure :: (a -> Boolean) -> a -> Result String a
 const ensure = pred =>
-  ifElse(pred, Ok, buildError)
+  ifElse(pred, Ok, Err)
 
 // fromNumber :: a -> Result String Number
 const fromNumber =
   ensure(isNumber)
 
-// swapWithDefault :: Result e a -> Result String Number
-const swapWithDefault =
-  swap(constant(0), () => 'The value given is not a valid value')
+// toString :: Number -> String
+const toString = x => 
+  x.toString()
 
-swapWithDefault(fromNumber(4))
-//=> Err "The value given is not a valid value"
+// toNumber :: String -> Number
+const toNumber = x => 
+  parseInt(x)
 
-swapWithDefault(fromNumber('number'))
+// parseWithDefault :: Number -> a -> Number
+const parseWithDefault = defaultValue => value => 
+  when(isNaN, constant(defaultValue), toNumber(value))
+
+// swapWith :: Result String Number -> Result String Number
+const swapValues =
+  swap(parseWithDefault(0), toString)
+
+swapValues(fromNumber(4))
+//=> Err "4"
+
+swapValues(fromNumber('number'))
 //=> Ok 0
 ```
 
@@ -1124,7 +1133,7 @@ function that will be used to map an [`Err`](#err). While the second
 will map the value wrapped in a given [`Ok`](#ok) and return the result of that
 mapping.
 
-By using composing `either` you can create functions that us the power of 
+By composing `either` you can create functions that us the power of 
 `ADT`s while returning a plain javascript type.
 
 ```javascript
@@ -1317,7 +1326,7 @@ const safeInc =
 const incProp = key =>
   composeK(safeInc, prop(key))
 
-// incResult :: String -> a -> Result [ String ] Object
+// incResult :: String -> a -> Either [ String ] Object
 const incResult = key => maybeToEither(
   [ `${key} is not valid` ],
   composeB(
@@ -1326,7 +1335,7 @@ const incResult = key => maybeToEither(
   )
 )
 
-// incThem :: a -> Result [ String ] Object
+// incThem :: a -> Either [ String ] Object
 const incThem = composeB(
   merge(liftA2(assign)),
   fanout(incResult('b'), incResult('a'))
@@ -1414,7 +1423,7 @@ mergeFirstName([
   createPerson('John', 30),
   createPerson('Jon', 33)
 ])
-//=> Ok "Jon"
+//=> Ok "John"
 
 mergeFirstName([
   createPerson(undefined, 30),

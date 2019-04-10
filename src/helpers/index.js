@@ -11,6 +11,7 @@ module.exports = {
   defaultTo: require('./defaultTo'),
   dissoc: require('./dissoc'),
   fromPairs: require('./fromPairs'),
+  getPathOr: require('./getPathOr'),
   liftA2: require('./liftA2'),
   liftA3: require('./liftA3'),
   liftN: require('./liftN'),

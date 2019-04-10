@@ -96,12 +96,13 @@ comes in really handy when creating lifting functions for Sum Types (like
 ```javascript
 import ifElse from 'crocks/logic/ifElse'
 
+import Maybe from 'crocks/Maybe'
+
 import chain from 'crocks/pointfree/chain'
-import compose from 'crocks/core'
+import compose from 'crocks/helpers/compose'
 import identity from 'crocks/combinators'
 import isArray from 'crocks/predicates/isArray'
 import isNumber from 'crocks/predicates/isNumber'
-import Maybe from 'crocks/Maybe'
 
 const { Just, Nothing } = Maybe
 
@@ -163,11 +164,12 @@ like [`Pred`][pred] and the [`All`][all] `Monoid`.
 
 import implies from 'crocks/logic/implies'
 
+import Pred from 'crocks/Pred'
+
 import isArray from 'crocks/predicates/isArray'
 import isString from 'crocks/predicates/isString'
 import not from 'crocks/logic/not'
 import or from 'crocks/logic/or'
-import Pred from 'crocks/Pred'
 import safe from 'crocks/Maybe/safe'
 
 // length :: (String | Array) -> Number
@@ -264,12 +266,13 @@ function, so it should be easy to swap between the two.
 ```javascript
 import not from 'crocks/logic/not'
 
+import Pred from 'crocks/Pred'
+
 import and from 'crocks/logic/and'
-import compose from 'crocks/core/compose'
+import compose from 'crocks/helpers/compose'
 import flip from 'crocks/combinators/flip'
 import identity from 'crocks/combinators/identity'
 import isString from 'crocks/predicates/isString'
-import Pred from 'crocks/Pred'
 import propSatisfies from 'crocks/predicates/propSatisfies'
 
 // isFalsy :: a -> Boolean
@@ -418,7 +421,7 @@ this function.
 ```javascript
 import unless from 'crocks/logic/unless'
 
-import constant from 'crocks/combinator/constant'
+import constant from 'crocks/combinators/constant'
 import flip from 'crocks/combinators/flip'
 import isString from 'crocks/predicates/isString'
 
@@ -440,16 +443,16 @@ doubleUnless(constant(false), 21)
 const toString = x =>
   x.toString()
 
-// ensureAllString :: [ a ] -> [ String ]
-const ensureAllString =
+// ensureString :: a -> String
+const ensureString =
   unless(isString, toString)
 
 // testData :: [ * ]
 const testData =
-  [ 1, 2, '3', 4, true, false, new Date() ]
+  [ 1, 2, '3', 4, true, false, new Date(1770, 3, 29) ]
 
-testData.map(ensureAllString)
-//=> [ '1', '2', '3', '4', 'true', 'false', 'Tue Feb 19 2019 23:16:55 GMT-0800 (Pacific Standard Time)' ]
+testData.map(ensureString)
+//=> [ '1', '2', '3', '4', 'true', 'false', 'Sun Apr 29 1770 00:00:00 GMT-0752 (Pacific Daylight Time)' ]
 ```
 
 #### when
@@ -472,10 +475,12 @@ of this function.
 ```javascript
 import when from 'crocks/logic/when'
 
-import compose from 'crocks/core/compose'
-import composeB from 'crocks/combinator/composeB'
-import constant from 'crocks/combinator/constant'
-import flip from 'crocks/combinator/flip'
+import compose from 'crocks/helpers/compose'
+import composeB from 'crocks/combinators/composeB'
+import constant from 'crocks/combinators/constant'
+import curry from 'crocks/helpers/curry'
+import flip from 'crocks/combinators/flip'
+import mapProps from 'crocks/helpers/mapProps'
 
 // double :: Number -> Number
 const double = a =>
@@ -515,11 +520,22 @@ const largeExplosion = compose(
   smallExplosion
 )
 
-const startingHealth = 30
-const health = largeExplosion(startingHealth)
+// Player :: { health: Number  }
+// player :: Player
+const player = {
+  health: 30
+}
 
-console.log(`Health remaining: ${health}`)
-//=> "Lives remaining: 0"
+// affectHealth :: (Number -> Number) -> Player -> Player
+const affectHealth = curry(
+  fn => mapProps({ health: fn })
+)
+
+affectHealth(smallExplosion, player)
+//=> { health: 15 }
+
+affectHealth(largeExplosion, player)
+//=> { health: 0 }
 ```
 
 [all]: ../monoids/All.html

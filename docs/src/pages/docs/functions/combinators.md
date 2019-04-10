@@ -268,11 +268,11 @@ flip(concat, 'first param. ', 'second param. ')
 const checkAll =
   composeB(flip(runWith), mconcat(Pred))
 
-// lte :: Number -> Number -> Number
+// lte :: Number -> Number -> Boolean
 const lte = a => b =>
   b <= a
 
-// gte :: Number -> Number -> Number
+// gte :: Number -> Number -> Boolean
 const gte = a => b =>
   b >= a
 

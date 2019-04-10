@@ -904,9 +904,9 @@ const fromNumber =
   ensure(isNumber)
 
 // getProp :: (String | Number) -> Object -> Result String a
-const getProp = name => 
+const getProp = name =>
   maybeToResult(errText(name), prop(name))
-  
+
 // protectedAdd10 :: a -> Result String Number
 const protectedAdd10 = composeB(
   map(x => x + 10),
@@ -1079,7 +1079,6 @@ import swap from 'crocks/pointfree/swap'
 
 const { Ok, Err } = Result
 
-
 // simpleSwap :: Result e a -> Result a e
 const simpleSwap =
   swap(identity, identity)
@@ -1099,15 +1098,15 @@ const fromNumber =
   ensure(isNumber)
 
 // toString :: Number -> String
-const toString = x => 
+const toString = x =>
   x.toString()
 
 // toNumber :: String -> Number
-const toNumber = x => 
+const toNumber = x =>
   parseInt(x)
 
 // parseWithDefault :: Number -> a -> Number
-const parseWithDefault = defaultValue => value => 
+const parseWithDefault = defaultValue => value =>
   when(isNaN, constant(defaultValue), toNumber(value))
 
 // swapWith :: Result String Number -> Result String Number

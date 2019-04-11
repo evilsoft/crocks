@@ -515,7 +515,7 @@ resultToFirst :: Result e a -> First a
 resultToFirst :: (a -> Result e b) -> a -> First b
 ```
 
-Used to transform a given `Result` instance to a `First` instance,
+Used to transform a given [`Result`][result] instance to a `First` instance,
 `resultToFirst` will turn an `Ok` instance into a non-empty `First`,
 wrapping the original value contained in the `Ok`. All `Err` instances will map
 to an [`empty`](#empty) `First`, mapping the originally contained value to
@@ -523,9 +523,9 @@ a `Unit`. Values on the `Err` will be lost and as such this transformation is
 considered lossy in that regard.
 
 Like all `crocks` transformation functions, `resultToFirst` has two possible
-signatures and will behave differently when passed either an `Result` instance
-or a function that returns an instance of `Result`. When passed the instance,
-a transformed `First` is returned. When passed a `Result` returning function,
+signatures and will behave differently when passed either an [`Result`][result] instance
+or a function that returns an instance of [`Result`][result]. When passed the instance,
+a transformed `First` is returned. When passed a [`Result`][result] returning function,
 a function will be returned that takes a given value and returns a `First`.
 
 ```javascript
@@ -575,3 +575,4 @@ firstNum(null)
 [either]: ../crocks/Either.html
 [left]: ../crocks/Either.html#left
 [right]: ../crocks/Either.html#right
+[result]: ../crocks/Result.html

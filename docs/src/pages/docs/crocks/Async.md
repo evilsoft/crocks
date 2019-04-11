@@ -1711,17 +1711,17 @@ resultToAsync :: Result b a -> Async b a
 resultToAsync :: (a -> Result c b) -> a -> Async c b
 ```
 
-Used to transform a given `Result` instance to an `Async` instance or flatten an
-`Async` of `Result` into an `Async` when chained, `resultToAsync` will turn an
+Used to transform a given [`Result`][result] instance to an `Async` instance or flatten an
+`Async` of [`Result`][result] into an `Async` when chained, `resultToAsync` will turn an
 `Ok` instance into a [`Resolved`](#resolved) instance wrapping the original
 value contained in the original `Ok`. If an `Err` is provided, then
 `resultToAsync` will return a [`Rejected`](#rejected) instance, wrapping the
 original `Err` value.
 
 Like all `crocks` transformation functions, `resultToAsync` has two possible
-signatures and will behave differently when passed either a `Result` instance
-or a function that returns an instance of `Result`. When passed the instance,
-a transformed `Async` is returned. When passed a `Result` returning function,
+signatures and will behave differently when passed either a [`Result`][result] instance
+or a function that returns an instance of [`Result`][result]. When passed the instance,
+a transformed `Async` is returned. When passed a [`Result`][result] returning function,
 a function will be returned that takes a given value and returns an `Async`.
 
 <!-- eslint-disable no-console -->
@@ -1802,3 +1802,4 @@ Resolved(Ok('Success!'))
 [either]: ./Either.html
 [left]: ./Either.html#left
 [right]: ./Either.html#right
+[result]: ./Result.html

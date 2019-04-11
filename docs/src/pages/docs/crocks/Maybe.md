@@ -1530,8 +1530,8 @@ resultToMaybe :: Result e a -> Maybe a
 resultToMaybe :: (a -> Result e b) -> a -> Maybe b
 ```
 
-Used to transform a given `Result` instance to a `Maybe`
-instance or flatten a `Maybe` of `Result` into a `Maybe` when chained, 
+Used to transform a given [`Result`][result] instance to a `Maybe`
+instance or flatten a `Maybe` of [`Result`][result] into a `Maybe` when chained, 
 `resultToMaybe` will turn an `Ok` instance into a [`Just`](#just) wrapping the
 original value contained in the `Ok`.
 All `Err` instances will map to a [`Nothing`](#nothing), mapping the originally
@@ -1539,9 +1539,9 @@ contained value to a `Unit`. Values on the `Err` will be lost and as such this
 transformation is considered lossy in that regard.
 
 Like all `crocks` transformation functions, `resultToMaybe` has two possible
-signatures and will behave differently when passed either an `Result` instance
-or a function that returns an instance of `Result`. When passed the instance,
-a transformed `Maybe` is returned. When passed a `Result` returning function,
+signatures and will behave differently when passed either an [`Result`][result] instance
+or a function that returns an instance of [`Result`][result]. When passed the instance,
+a transformed `Maybe` is returned. When passed a [`Result`][result] returning function,
 a function will be returned that takes a given value and returns a `Maybe`.
 
 ```javascript
@@ -1596,3 +1596,4 @@ Just(Err('to be human'))
 [right]: ./Either.html#right
 [first]: ../monoids/First.html
 [last]: ../monoids/Last.html
+[result]: ./Result.html

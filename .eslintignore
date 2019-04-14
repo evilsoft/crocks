@@ -13,7 +13,9 @@ docs/src/pages/*
 docs/src/pages/docs/*
 
 # need to clean up functions
-#!docs/src/pages/docs/functions
+!docs/src/pages/docs/functions
+docs/src/pages/docs/functions/*
+!docs/src/pages/docs/functions/logic-functions.md
 
 !docs/src/pages/docs/crocks
 !docs/src/pages/docs/monoids

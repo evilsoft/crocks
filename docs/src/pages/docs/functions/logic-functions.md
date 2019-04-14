@@ -45,8 +45,8 @@ import isNumber from 'crocks/predicates/isNumber'
 import not from 'crocks/logic/not'
 
 // gte :: Number -> Number -> Boolean
-const gte =
-    x => y => y >= x
+const gte = x => y =>
+  y >= x
 
 // isLegalDrinkingAge :: Number -> Boolean
 const isLegalDrinkingAge =
@@ -501,20 +501,6 @@ import curry from 'crocks/helpers/curry'
 import flip from 'crocks/combinators/flip'
 import mapProps from 'crocks/helpers/mapProps'
 
-// double :: Number -> Number
-const double = a =>
-  a * 2
-
-// doubleWhen :: (a -> Boolean) -> Number -> Number
-const doubleWhen =
-  flip(when, double)
-
-doubleWhen(constant(true), 21)
-//=> 42
-
-doubleWhen(constant(false), 21)
-//=> 21
-
 // gt :: Number -> Number -> Boolean
 const gt = a => b =>
   b > a
@@ -524,13 +510,19 @@ const subtract = a => b =>
   b - a
 
 // protectedSubtract :: Number -> Number -> Number
-const protectedSubtract = composeB(
-  when(gt(0)),
-  subtract
+const protectedSubtract = curry(
+  composeB(when(gt(0)),subtract)
 )
 
+protectedSubtract(10, 30)
+//=> 20
+
+protectedSubtract(10, -5)
+//=> -5
+
 // smallExplosion :: Number -> Number
-const smallExplosion = protectedSubtract(15)
+const smallExplosion =
+  protectedSubtract(15)
 
 // largeExplosion :: Number -> Number
 const largeExplosion = compose(
@@ -555,6 +547,20 @@ affectHealth(smallExplosion, player)
 
 affectHealth(largeExplosion, player)
 //=> { health: 0 }
+
+// double :: Number -> Number
+const double = a =>
+  a * 2
+
+// doubleWhen :: (a -> Boolean) -> Number -> Number
+const doubleWhen =
+  flip(when, double)
+
+doubleWhen(constant(true), 21)
+//=> 42
+
+doubleWhen(constant(false), 21)
+//=> 21
 ```
 
 [all]: ../monoids/All.html

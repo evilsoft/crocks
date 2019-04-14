@@ -29,6 +29,13 @@ together reusable, complex predicates. As they follow the general form
 of `(a -> Boolean)` they are easily combined with other logic functions.
 
 ```javascript
+//  p | q | p && q
+// ================
+//  T | T |   T
+//  T | F |   F
+//  F | T |   F
+//  F | F |   F
+
 import and from 'crocks/logic/and'
 
 import constant from 'crocks/combinators/constant'
@@ -100,19 +107,19 @@ import Maybe from 'crocks/Maybe'
 
 import chain from 'crocks/pointfree/chain'
 import compose from 'crocks/helpers/compose'
-import identity from 'crocks/combinators'
+import identity from 'crocks/combinators/identity'
 import isArray from 'crocks/predicates/isArray'
 import isNumber from 'crocks/predicates/isNumber'
 
 const { Just, Nothing } = Maybe
 
 // safe :: (a -> Boolean) -> a -> Maybe a
-const safe =
-  pred => ifElse(pred, Just, Nothing)
+const safe = pred =>
+  ifElse(pred, Just, Nothing)
 
 // gte :: Number -> Number -> Maybe Number
-const gte =
-  x => safe(n => n >= x)
+const gte = x =>
+  safe(n => n >= x)
 
 // isLarge :: a -> Maybe a
 const isLarge =
@@ -123,10 +130,10 @@ const ensureArray =
   ifElse(isArray, identity, () => [])
 
 isLarge(10)
-//=> Just 10
+//=> Nothing
 
 isLarge(44)
-//=> Nothing
+//=> Just 44
 
 ensureArray('nope')
   .map(x => x + x)
@@ -134,7 +141,7 @@ ensureArray('nope')
 
 ensureArray([ 3 ])
   .map(x => x + x)
-//=> [6]
+//=> [ 6 ]
 ```
 
 #### implies
@@ -173,8 +180,8 @@ import or from 'crocks/logic/or'
 import safe from 'crocks/Maybe/safe'
 
 // length :: (String | Array) -> Number
-const length =
-  x => x.length
+const length = x =>
+  x.length
 
 // stringOrArray :: a -> Pred a
 const stringOrArray =
@@ -264,6 +271,11 @@ based functions in `crocks` take either a [`Pred`][pred] or predicate
 function, so it should be easy to swap between the two.
 
 ```javascript
+//  p | !p
+// ========
+//  T | F
+//  F | T
+
 import not from 'crocks/logic/not'
 
 import Pred from 'crocks/Pred'
@@ -359,6 +371,13 @@ predicates. As they follow the general form of `(a -> Boolean)` they are easily
 combined with other logic functions.
 
 ```javascript
+//  p | q | p || q
+// ================
+//  T | T |   T
+//  T | F |   T
+//  F | T |   T
+//  F | F |   F
+
 import or from 'crocks/logic/or'
 
 import constant from 'crocks/combinators/constant'
@@ -520,7 +539,7 @@ const largeExplosion = compose(
   smallExplosion
 )
 
-// Player :: { health: Number  }
+// Player :: { health: Number }
 // player :: Player
 const player = {
   health: 30

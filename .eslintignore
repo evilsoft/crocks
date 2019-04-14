@@ -16,6 +16,7 @@ docs/src/pages/docs/*
 !docs/src/pages/docs/functions
 docs/src/pages/docs/functions/*
 !docs/src/pages/docs/functions/logic-functions.md
+!docs/src/pages/docs/functions/combinators.md
 
 !docs/src/pages/docs/crocks
 !docs/src/pages/docs/monoids

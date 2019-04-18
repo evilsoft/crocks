@@ -255,7 +255,7 @@ const avg =
   Arrow(bimap(mreduce(Sum), length))
     .promap(branch, merge(divide))
 
-// double :: Arrow (Number -> Number)
+// double :: Arrow Number Number
 const double =
   Arrow(x => x * 2)
 
@@ -477,12 +477,15 @@ of the original `Object` is know.
 ```javascript
 import mapProps from 'crocks/helpers/mapProps'
 
+// add :: Number -> Number -> Number
 const add = x => y =>
   x + y
 
+// toUpper :: String -> String
 const toUpper = x =>
   x.toUpperCase()
 
+// mapping :: Object
 const mapping = {
   entry: toUpper,
   fauna: {
@@ -506,7 +509,6 @@ mapProps(mapping, {
   }
 })
 //=> { entry: 'LEGEND', fauna: { unicorns: 11, zombies: 3 }, other: { hat: 2} }
-
 ```
 
 #### mapReduce
@@ -539,7 +541,7 @@ const { Nothing } = Maybe
 const data =
   [ '100', null, 3, true, 1 ]
 
-// safeMax :: [ * ] -> Number
+// safeMax :: [ * ] -> Maybe Max
 const safeMax = mapReduce(
   safeLift(isNumber, Max),
   (y, x) => y.concat(x).alt(y).alt(x),
@@ -591,14 +593,14 @@ mreduceMap :: Monoid m, Foldable f => m -> (b -> a) -> f b -> a
 ```
 
 There comes a time where the values you have in a `List` or an `Array` are not
-in the type that is needed for the [`Monoid`](../monoids/index.html) you want to
+in the type that is needed for the [`Monoid`][monoids] you want to
 combine with. These two functions can be used to `map` some transforming
 function from a given type into the type needed for the
-[`Monoid`](../monoids/index.html). In essence, this function will run each value
+[`Monoid`][monoids]. In essence, this function will run each value
 through the function before it lifts the value into the
-[`Monoid`](../monoids/index.html), before `concat` is applied. The difference
+[`Monoid`][monoids], before `concat` is applied. The difference
 between the two is that `mconcatMap` returns the result inside the
-[`Monoid`](../monoids/index.html) used to combine them. Where `mreduceMap`
+[`Monoid`][monoids] used to combine them. Where `mreduceMap`
 returns the bare value itself.
 
 #### nAry
@@ -675,9 +677,9 @@ partial :: (((*) -> c), *) -> (*) -> c
 ```
 
 There are many times when using functions from non-functional libraries or from
-built-in JS functions, where it does not make sense to wrap it in a
-[`curry`](#curry). You just want to partially apply some arguments to it and get
-back a function ready to take the rest. That is a perfect opportunity to use
+built-in JS functions, where it does not make sense to wrap it in
+a [`curry`](#curry). You just want to partially apply some arguments to it and
+get back a function ready to take the rest. That is a perfect opportunity to use
 `partial`. Just pass a function as the first argument and then apply any other
 arguments to it. You will get back a curried function that is ready to accept
 the rest of the arguments.
@@ -750,15 +752,20 @@ import curry from 'crocks/core/curry'
 import List from 'crocks/List'
 import Writer from 'crocks/Writer'
 
+// OpWriter :: Writer List
 const OpWriter =
   Writer(List)
 
+// addLog :: Number -> Number -> OpWriter Number
 const addLog = curry(
-  (x, y) => OpWriter(`adding ${x} to ${y}`, x + y)
+  (x, y) =>
+    OpWriter(`adding ${x} to ${y}`, x + y)
 )
 
+// addLog :: Number -> Number -> OpWriter Number
 const scaleLog = curry(
-  (x, y) => OpWriter(`scaling ${y} by ${x}`, x * y)
+  (x, y) =>
+    OpWriter(`scaling ${y} by ${x}`, x * y)
 )
 
 const fluent = x =>
@@ -863,13 +870,15 @@ the opposite.
 ```javascript
 import pipeS from 'crocks/helpers/pipeS'
 
+import Maybe from 'crocks/Maybe'
+
 import curry from 'crocks/core/curry'
 import isNumber from 'crocks/predicates/isNumber'
 import prop from 'crocks/Maybe/prop'
 import safeLift from 'crocks/Maybe/safeLift'
 import Star from 'crocks/Star'
 
-// MaybeStar :: (a -> b) -> Star (Maybe (a -> b))
+// MaybeStar :: Star a (Maybe b)
 const MaybeStar =
   Star(Maybe)
 
@@ -878,13 +887,13 @@ const add = curry(
   (x, y) => x + y
 )
 
-// pull :: String -> Star (Maybe a -> b)
-const pull =
-  x => MaybeStar(prop(x))
+// pull :: String -> MaybeStar Object Number
+const pull = x =>
+  MaybeStar(prop(x))
 
-// safeAdd :: Number -> Star (Maybe a -> Number)
-const safeAdd =
-  x => MaybeStar(safeLift(isNumber, add(x)))
+// safeAdd :: Number -> MaybeStar Number Number
+const safeAdd = x =>
+  MaybeStar(safeLift(isNumber, add(x)))
 
 // data :: { num: Number, string: String }
 const data = {
@@ -892,16 +901,18 @@ const data = {
   string: '56'
 }
 
-// flow :: (String, Number) -> Maybe Number
+// flow :: (String, Number) -> MaybeStar Object Number
 const flow = (key, num) => pipeS(
   pull(key),
   safeAdd(num)
 )
 
-flow('num', 10).runWith(data)
+flow('num', 10)
+  .runWith(data)
 // => Just 66
 
-flow('string', 100).runWith(data)
+flow('string', 100)
+  .runWith(data)
 // => Nothing
 ```
 
@@ -1231,5 +1242,6 @@ unsetProp('silly', null)
 ```
 
 [maybe]: ../crocks/Maybe.html
+[monoids]: ../monoids/index.html
 [safe]: ../crocks/Maybe.html#safe
 [topairs]: ../crocks/Pair.html#topairs

@@ -16,12 +16,12 @@ calling styles:
 import map from 'crocks/pointfree/map'
 
 import compose from 'crocks/helpers/compose'
-import safe from 'crocks/Maybe/safe'
 import isInteger from 'crocks/predicates/isInteger'
+import safe from 'crocks/Maybe/safe'
 
 // isEven :: Integer -> Boolean
-const isEven =
-  x => x % 2 === 0
+const isEven = x =>
+  x % 2 === 0
 
 // maybeInt :: a -> Maybe Integer
 const maybeInt =

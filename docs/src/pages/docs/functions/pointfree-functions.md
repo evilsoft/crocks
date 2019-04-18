@@ -13,15 +13,15 @@ approach. Below is a small code same to contrast the difference between the two
 calling styles:
 
 ```javascript
-import crocks from 'crocks'
+import map from 'crocks/pointfree/map'
 
-const {
-  compose, map, safe, isInteger
-} = crocks // map is the point-free function
+import compose from 'crocks/helpers/compose'
+import isInteger from 'crocks/predicates/isInteger'
+import safe from 'crocks/Maybe/safe'
 
 // isEven :: Integer -> Boolean
-const isEven =
-  x => (x % 2) === 0
+const isEven = x =>
+  x % 2 === 0
 
 // maybeInt :: a -> Maybe Integer
 const maybeInt =
@@ -35,6 +35,24 @@ const fluentIsEven = data =>
 // pointfreeIsEven :: a -> Maybe Boolean
 const pointfreeIsEven =
   compose(map(isEven), maybeInt)
+
+fluentIsEven(5)
+//=> Just false
+
+fluentIsEven('number')
+//=> Nothing
+
+fluentIsEven(6)
+//=> Just true
+
+pointfreeIsEven(5)
+//=> Just false
+
+pointfreeIsEven('not even')
+//=> Nothing
+
+pointfreeIsEven(6)
+//=> Just true
 ```
 
 These functions provide a very clean way to build out very simple functions and

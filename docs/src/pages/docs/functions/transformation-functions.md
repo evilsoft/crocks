@@ -10,18 +10,26 @@ Transformation functions are mostly used to reduce unwanted nesting of similar
 types. Take for example the following structure:
 
 ```javascript
+import Either from 'crocks/Either'
+import Maybe from 'crocks/Maybe'
+
+import identity from 'crocks/combinators/identity'
+import map from 'crocks/pointfree/map'
+import option from 'crocks/pointfree/option'
+
 const data =
-  Either.of(Maybe.of(3))  // Right Just 3
+  Either.of(Maybe.of(3))
+//=> Right Just 3
 
 // mapping on the inner Maybe is tedious at best
 data
-  .map(map(x => x + 1))   // Right Just 4
-  .map(map(x => x * 10))  // Right Just 40
+  .map(map(x => x + 1))   //=> Right Just 4
+  .map(map(x => x * 10))  //=> Right Just 40
 
 // and extraction...super gross
 data
-  .either(identity, identity)  // Just 3
-  .option(0)                   // 3
+  .either(identity, identity)  //=> Just 3
+  .option(0)                   //=> 3
 
 // or
 data
@@ -33,39 +41,49 @@ dealing with this. Using them effectively, can turn the above code into
 something more like this:
 
 ```javascript
+import Either from 'crocks/Either'
+import Maybe from 'crocks/Maybe'
+
+import identity from 'crocks/combinators/identity'
+import map from 'crocks/pointfree/map'
+import maybeToEither from 'crocks/Either/maybeToEither'
+
 const data =
-  Either.of(Maybe.of(3))      // Right Just 3
-    .chain(maybeToEither(0))  // Right 3
+  Either.of(Maybe.of(3))      //=> Right Just 3
+    .chain(maybeToEither(0))  //=> Right 3
 
 // mapping on a single Either, much better
 data
-  .map(x => x + 1)  // Right 4
-  .map(x => x * 10) // Right 40
+  .map(x => x + 1)  //=> Right 4
+  .map(x => x * 10) //=> Right 40
 
 // no need to default the Left case anymore
 data
-  .either(identity, identity) // 3
+  .either(identity, identity)
+//=> 3
 
 // effects of the inner type are applied immediately
 const nested =
-  Either.of(Maybe.Nothing) // Right Nothing
+  Either.of(Maybe.Nothing)
+//=> Right Nothing
 
 const unnested =
   nested
-    .chain(maybeToEither(0))  // Left 0
+    .chain(maybeToEither(0))
+//=> Left 0
 
 // Always maps, although the inner Maybe skips
 nested
-  .map(map(x => x + 1))        // Right Nothing (runs mapping)
-  .map(map(x => x * 10))       // Right Nothing (runs mapping)
-  .either(identity, identity)  // Nothing
-  .option(0)                   // 0
+  .map(map(x => x + 1))        //=> Right Nothing (runs mapping)
+  .map(map(x => x * 10))       //=> Right Nothing (runs mapping)
+  .either(identity, identity)  //=> Nothing
+  .option(0)                   //=> 0
 
 // Never maps on a Left, just skips it
 unnested
-  .map(x => x + 1)             // Left 0 (skips mapping)
-  .map(x => x * 10)            // Left 0 (skips mapping)
-  .either(identity, identity)  // 0
+  .map(x => x + 1)             //=> Left 0 (skips mapping)
+  .map(x => x * 10)            //=> Left 0 (skips mapping)
+  .either(identity, identity)  //=> 0
 ```
 
 Not all types can be transformed to and from each other. Some of them are lazy
@@ -89,6 +107,16 @@ extend an existing function without having to explicitly compose it. Both
 versions can be seen here:
 
 ```javascript
+import Either from 'crocks/Either'
+import Maybe from 'crocks/Maybe'
+import Async from 'crocks/Async'
+
+import safeLift from 'crocks/Maybe/safeLift'
+import maybeToAsync from 'crocks/Either/maybeToAsync'
+import eitherToMaybe from 'crocks/Maybe/eitherToMaybe'
+import compose from 'crocks/helpers/compose'
+import isNumber from 'crocks/predicates/isNumber'
+
 // Avoid nesting
 // inc :: a -> Maybe Number
 const inc =

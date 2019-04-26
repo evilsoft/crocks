@@ -1253,3 +1253,33 @@ test('Async chain properties (Monad)', t => {
 
   t.end()
 })
+
+test('Async bichain properties (BiChain)', t => {
+  t.ok(isFunction(Async(unit).bichain), 'provides a bichain function')
+
+  const aRej = sinon.spy()
+  const bRej = sinon.spy()
+
+  const fOfL = x => Async((rej) => rej(x + 2))
+  const gOfL = x => Async((rej) => rej(x + 10))
+
+  const aRes = sinon.spy()
+  const bRes = sinon.spy()
+
+  const fOfR = x => Async((_, res) => res(x * 2))
+  const gOfR = x => Async((_, res) => res(x * 10))
+
+  const x = 12
+  const y = 7
+
+  Async((rej) => rej(x)).bichain(fOfL, Async.of).bichain(gOfL, Async.of).fork(aRej, unit)
+  Async((rej) => rej(x)).bichain(y => fOfL(y).bichain(gOfL, Async.of), Async.of).fork(bRej, unit)
+
+  Async((rej) => rej(y)).bichain(Async.Rejected, fOfR).bichain(Async.Rejected, gOfR).fork(unit, aRes)
+  Async((rej) => rej(y)).bichain(Async.Rejected, y => fOfR(y).bichain(Async.Rejected, gOfR)).fork(unit, bRes)
+
+  t.same(aRej.args[0], bRej.args[0], 'left assosiativity')
+  t.same(aRes.args[0], bRes.args[0], 'right assosiativity')
+
+  t.end()
+})

@@ -21,7 +21,8 @@ test('isEmpty predicate function', t => {
   t.equal(isEmpty(undefined), true, 'returns true with undefined')
   t.equal(isEmpty(null), true, 'returns true with null')
   t.equal(isEmpty(0), true, 'returns true with falsey number')
-  t.equal(isEmpty(1), true, 'returns false with truthy number')
+  t.equal(isEmpty(1), true, 'returns true with truthy number')
+  t.equal(isEmpty(-1), true, 'returns true with truthy negative number')
   t.equal(isEmpty(false), true, 'returns true with false')
   t.equal(isEmpty(true), true, 'returns false with true')
 

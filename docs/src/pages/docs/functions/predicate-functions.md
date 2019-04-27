@@ -29,7 +29,7 @@ description of their truth:
 * `isContravariant :: a -> Boolean`: an ADT that provides `contramap` method
 * `isDate :: a -> Boolean`: Date
 * `isDefined :: a -> Boolean`: Every value that is not `undefined`, `null` included
-* `isEmpty :: a -> Boolean`: Empty Monoid, Object, Array or String
+* `isEmpty :: a -> Boolean`: Empty Monoid, Object, Array, String, undefined, null, all Numbers and Boolean values
 * `isExtend :: a -> Boolean`: an ADT that provides `map` and `extend` methods
 * `isFalse :: a -> Boolean`: a value that is strictly equal to `false`
 * `isFalsy :: a -> Boolean`: a value that is considered to be [`falsy`][falsy]

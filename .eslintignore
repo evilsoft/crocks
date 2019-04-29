@@ -8,10 +8,4 @@ docs/*
 !docs/src
 docs/src/*
 !docs/src/pages
-docs/src/pages/*
-
-!docs/src/pages/docs
-docs/src/pages/docs/*
-!docs/src/pages/docs/functions
-!docs/src/pages/docs/crocks
-!docs/src/pages/docs/monoids
+docs/src/pages/docs/getting-started.md

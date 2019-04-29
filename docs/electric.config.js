@@ -1,7 +1,7 @@
-'use strict';
+'use strict'
 
-var marble = require('marble');
-var slugify = require('markdown-slug');
+var marble = require('marble')
+var slugify = require('markdown-slug')
 
 module.exports = {
   basePath: '/crocks',
@@ -9,9 +9,7 @@ module.exports = {
     branch: 'gh-pages'
   },
   codeMirrorTheme: 'blackboard',
-  codeMirrorLanguages: [
-    'javascript', 'haskell'
-  ],
+  codeMirrorLanguages: ['javascript', 'haskell'],
   envOptions: {
     dev: {
       basePath: ''
@@ -20,22 +18,22 @@ module.exports = {
   markdownOptions: {
     html: true
   },
-  markdownRenderer: function(md) {
+  markdownRenderer: function (md) {
     const origHtmlblock = md.renderer.rules.htmlblock
 
     // add links to headers
-    md.renderer.rules.heading_open = function(t, idx) {
+    md.renderer.rules.heading_open = function (t, idx) {
       var slug = slugify(t[idx + 1].content)
-      return '<h' + t[idx].hLevel + '><a id="'+ slug + '"href="#' + slug + '">'
+      return '<h' + t[idx].hLevel + '><a id="' + slug + '"href="#' + slug + '">'
     }
 
-    md.renderer.rules.heading_close = function(t, idx) {
-      return '</a></h' + t[idx].hLevel+ '>'
+    md.renderer.rules.heading_close = function (t, idx) {
+      return '</a></h' + t[idx].hLevel + '>'
     }
 
     // Remove all html comments from markdown docs
     // as they break. We use the comments for the linter
-    md.renderer.rules.htmlblock = function(t, idx) {
+    md.renderer.rules.htmlblock = function (t, idx) {
       const content = t[idx].content
 
       const htmlComment =

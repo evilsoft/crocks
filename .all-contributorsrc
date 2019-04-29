@@ -223,6 +223,15 @@
         "doc",
         "code"
       ]
+    },
+    {
+      "login": "faliah",
+      "name": "Denis Zolkin",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/5593080?v=4",
+      "profile": "https://github.com/faliah",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "repoType": "github"

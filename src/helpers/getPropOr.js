@@ -4,8 +4,8 @@
 const curry = require('../core/curry')
 const isDefined = require('../core/isDefined')
 const isEmpty = require('../core/isEmpty')
-const isNil = require('../core/isNil')
 const isInteger = require('../core/isInteger')
+const isNil = require('../core/isNil')
 const isString = require('../core/isString')
 
 function fn(name) {

@@ -349,12 +349,13 @@ same name, that last value will be moved over.
 getPropOr :: a -> (String | Integer) -> b -> a
 ```
 
-If you want some safety around pulling a value out of an Object or Array with a
-single key or index, you can always reach for `getPropOr`. Well, as long as you
-are working with non-nested data that is. Just tell `getPropOr` either the key
-or index you are interested in, and you will get back a function that will take
-anything and return the wrapped value if the key/index is defined. If the
-key/index is not defined however, you will get back the provided default value.
+Reach for `getPropOr` (previously known as `propOr`) when you want some safety
+around pulling a value out of an Object or Array with a single key or
+index. Well, as long as you are working with non-nested data that is. Just
+tell `getPropOr` either the key or index you are interested in, and you will get
+back a function that will take anything and return the wrapped value if the
+key/index is defined. If the key/index is not defined however, you will get back
+the provided default value.
 
 ```javascript
 import getPropOr from 'crocks/helpers/getPropOr'
@@ -1075,11 +1076,12 @@ setProp ::  (String | Integer) -> a -> (Object | Array) -> (Object | Array)
 ```
 
 Used to set a given value for a specific key or index of
-an `Object` or `Array`. `setProp` takes either a `String` or `Integer` value
-as its first argument and a value of any type as its second. The third parameter
-is dependent of the type of the first argument. When a `String` is provided, the
-third argument must be an `Object`. Otherwise if the first argument is
-an `Integer` zero or greater, then the third must be an `Array`.
+an `Object` or `Array`. `setProp`, previously called `assoc`, takes either
+a `String` or `Integer` value as its first argument and a value of any type as
+its second. The third parameter is dependent of the type of the first argument.
+When a `String` is provided, the third argument must be an `Object`. Otherwise
+if the first argument is an `Integer` zero or greater, then the third must be
+an `Array`.
 
 `setProp` will return a new instance of either `Object` or `Array` with the
 addition applied. When the value exists on the provided object, then the value
@@ -1176,7 +1178,8 @@ unsetPath :: [ (String | Integer) ] -> a -> a
 ```
 
 Used to remove a property or index on a deeply nested `Object`/`Array`.
-`unsetPath` is will return a new instance with the property or index removed.
+`unsetPath`, previously called `dissoc`, will return a new instance with the
+property or index removed.
 
 The provided path can be a mixture of either Positive `Integer`s or `String`s to
 allow for traversing through both `Array`s and `Object`s. When an `Integer` is

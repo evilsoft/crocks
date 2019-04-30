@@ -90,7 +90,7 @@ import bimap from 'crocks/pointfree/bimap'
 import composeB from 'crocks/combinators/composeB'
 import ifElse from 'crocks/logic/ifElse'
 import isString from 'crocks/predicates/isString'
-import propOr from 'crocks/helpers/propOr'
+import getPropOr from 'crocks/helpers/getPropOr'
 
 const { Ok, Err } = Result
 
@@ -113,7 +113,7 @@ const ensure = pred =>
 
 // getLength :: Result a String -> Result Number
 const getLength = bimap(
-  constant(0), propOr(0, 'length')
+  constant(0), getPropOr(0, 'length')
 )
 
 // getLengthOfString :: a -> Result a String
@@ -151,7 +151,7 @@ import converge from 'crocks/combinators/converge'
 import alt from 'crocks/pointfree/alt'
 import liftA2 from 'crocks/helpers/liftA2'
 import prop from 'crocks/Maybe/prop'
-import propOr from 'crocks/helpers/propOr'
+import getPropOr from 'crocks/helpers/getPropOr'
 
 // data :: [ Number ]
 const data = [ 1, 2, 3, 4, 5 ]
@@ -170,7 +170,7 @@ const sum = xs =>
 
 // length :: [ a ] -> Number
 const length =
-  propOr(0, 'length')
+  getPropOr(0, 'length')
 
 // average :: [ Number ] -> Number
 const average =
@@ -238,7 +238,7 @@ flip :: (a -> b -> c) -> b -> a -> c
 
 This little function just takes a function and returns a function that takes
 the first two parameters in reverse. `flip` is perfectly suited for those
-moments where you have the context of your function but not the data. 
+moments where you have the context of your function but not the data.
 Applying `flip` to the function will allow you to pass in your context and will
 return a function waiting for the data. This will happen often when you're
 using composition.

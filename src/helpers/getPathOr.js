@@ -3,9 +3,9 @@
 
 const curry = require('../core/curry')
 const isArray = require('../core/isArray')
+const isDefined = require('../core/isDefined')
 const isEmpty = require('../core/isEmpty')
 const isInteger = require('../core/isInteger')
-const isDefined = require('../core/isDefined')
 const isNil = require('../core/isNil')
 const isString = require('../core/isString')
 

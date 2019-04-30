@@ -2,17 +2,17 @@
 /** @author Dale Francis (dalefrancis88) */
 
 const curry = require('../core/curry')
-const isBiChain = require('../core/isBiChain')
+const isBichain = require('../core/isBichain')
 const isFunction = require('../core/isFunction')
 
 // bichain : bichain m => (e -> m c b) -> (a -> m c b) -> m e a -> m c b
 function bichain(f, g, m) {
   if(!isFunction(f) || !isFunction(g)) {
-    throw new TypeError('bichain: Functions required for both arguments')
+    throw new TypeError('bichain: Functions required for first two arguments')
   }
 
-  if(!isBiChain(m)) {
-    throw new TypeError('chain: Chain of the same type required for second argument')
+  if(!isBichain(m)) {
+    throw new TypeError('bichain: Bichain required for third argument')
   }
 
   return m.bichain.call(m, f, g)

@@ -322,35 +322,33 @@ function Async(fn) {
     }
   }
 
-  function bichain(method) {
-    return function(l, r) {
-      if(!isFunction(l) || !isFunction(r)) {
-        throw new TypeError(`Async.${method}: Functions required for both arguments`)
+  function bichain(l, r) {
+    if(!isFunction(l) || !isFunction(r)) {
+      throw new TypeError('Async.bichain: Functions required for both arguments')
+    }
+
+    return Async(function(rej, res) {
+      let cancel = unit
+      let innerCancel = unit
+
+      function setInnerCancel(mapFn) {
+        return function(x) {
+          const m = mapFn(x)
+
+          if(!isSameType(Async, m)) {
+            throw new TypeError(
+              'Async.bichain: Function must return another Async'
+            )
+          }
+
+          innerCancel = m.fork(rej, res)
+        }
       }
 
-      return Async(function(rej, res) {
-        let cancel = unit
-        let innerCancel = unit
+      cancel = fork(setInnerCancel(l), setInnerCancel(r))
 
-        function setInnerCancel(mapFn) {
-          return function(x) {
-            const m = mapFn(x)
-
-            if(!isSameType(Async, m)) {
-              throw new TypeError(
-                `Async.${method}: Function must return another Async`
-              )
-            }
-
-            innerCancel = m.fork(rej, res)
-          }
-        }
-
-        cancel = fork(setInnerCancel(l), setInnerCancel(r))
-
-        return once(() => innerCancel(cancel()))
-      })
-    }
+      return once(() => innerCancel(cancel()))
+    })
   }
 
   return {
@@ -362,7 +360,7 @@ function Async(fn) {
     bimap: bimap('bimap'),
     map: map('map'),
     chain: chain('chain'),
-    bichain: bichain('bichain'),
+    bichain,
     [fl.of]: of,
     [fl.alt]: alt(fl.alt),
     [fl.bimap]: bimap(fl.bimap),

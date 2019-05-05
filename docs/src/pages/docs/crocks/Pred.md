@@ -34,7 +34,7 @@ This implementation of `Pred` was heavily inspired by [this article](https://med
 import Pred from 'crocks/Pred'
 
 import isNumber from 'crocks/predicates/isNumber'
-import propOr from 'crocks/helpers/propOr'
+import getPropOr from 'crocks/helpers/getPropOr'
 import filter from 'crocks/pointfree/filter'
 
 // largeNumber :: Pred Number
@@ -45,7 +45,7 @@ const largeNumber =
 // largeItem :: Pred Object
 const largeItem =
   largeNumber
-    .contramap(propOr(null, 'item'))
+    .contramap(getPropOr(null, 'item'))
 
 largeNumber
   .runWith(45)
@@ -266,12 +266,12 @@ mapping the input to now accept the type of the input of the given function.
 ```javascript
 import Pred from 'crocks/Pred'
 import contramap from 'crocks/pointfree/contramap'
-import propOr from 'crocks/helpers/propOr'
+import getPropOr from 'crocks/helpers/getPropOr'
 
 // Length :: String | Function | Array
 // length :: Length -> Number
 const length =
-  propOr(0, 'length')
+  getPropOr(0, 'length')
 
 // gt5 :: Pred Number
 const gt5 =
@@ -283,7 +283,7 @@ const validLength =
 
 // validItemLength :: Pred Object
 const validItemLength =
-  contramap(propOr(null, 'item'), validLength)
+  contramap(getPropOr(null, 'item'), validLength)
 
 gt5
   .runWith(5)

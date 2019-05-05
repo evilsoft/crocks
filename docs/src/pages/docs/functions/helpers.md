@@ -2,7 +2,7 @@
 title: "Helpers"
 description: "Helper functions"
 layout: "notopic"
-functions: ["assign", "assoc", "binary", "compose", "composek", "composep", "composes", "curry", "defaultprops", "defaultto", "dissoc", "frompairs", "lifta2", "lifta3", "liftn", "mapprops", "mapreduce", "mconcat", "mconcatmap", "mreduce", "mreducemap", "nary", "objof", "omit", "once", "partial", "pick", "pipe", "pipek", "pipep", "pipes", "propor", "proppathor", "setpath", "setprop", "tap", "unary", "unit", "unsetpath", "unsetprop"]
+functions: ["assign", "assoc", "binary", "compose", "composek", "composep", "composes", "curry", "defaultprops", "defaultto", "dissoc", "frompairs", "getpropor", "lifta2", "lifta3", "liftn", "mapprops", "mapreduce", "mconcat", "mconcatmap", "mreduce", "mreducemap", "nary", "objof", "omit", "once", "partial", "pick", "pipe", "pipek", "pipep", "pipes", "propor", "proppathor", "setpath", "setprop", "tap", "unary", "unit", "unsetpath", "unsetprop"]
 weight: 20
 ---
 
@@ -339,6 +339,53 @@ into the new `Object`, while non-primitives are references to the original. If
 you provide an `undefined` values for the second, that `Pair` will not be
 represented in the resulting `Object`. Also, when if multiple keys share the
 same name, that last value will be moved over.
+
+
+#### getPropOr
+
+`crocks/helpers/getPropOr`
+
+```haskell
+getPropOr :: a -> (String | Integer) -> b -> a
+```
+
+Reach for `getPropOr` (previously known as `propOr`) when you want some safety
+around pulling a value out of an Object or Array with a single key or
+index. Well, as long as you are working with non-nested data that is. Just
+tell `getPropOr` either the key or index you are interested in, and you will get
+back a function that will take anything and return the wrapped value if the
+key/index is defined. If the key/index is not defined however, you will get back
+the provided default value.
+
+```javascript
+import getPropOr from 'crocks/helpers/getPropOr'
+
+const data = {
+  foo: 'bar',
+  null: null,
+  nan: NaN,
+  undef: undefined
+}
+
+// def :: (String | Integer) -> a -> b
+const def =
+  getPropOr('default')
+
+def('foo', data)
+//=> "bar"
+
+def('null', data)
+//=> null
+
+def('nan', data)
+//=> NaN
+
+def('baz', data)
+//=> "default"
+
+def('undef', data)
+//=> "default"
+```
 
 #### liftA2
 
@@ -916,51 +963,6 @@ flow('string', 100)
 // => Nothing
 ```
 
-#### propOr
-
-`crocks/helpers/propOr`
-
-```haskell
-propOr :: a -> (String | Integer) -> b -> c
-```
-
-If you want some safety around pulling a value out of an Object or Array with a
-single key or index, you can always reach for `propOr`. Well, as long as you are
-working with non-nested data that is. Just tell `propOr` either the key or index
-you are interested in, and you will get back a function that will take anything
-and return the wrapped value if the key/index is defined. If the key/index is not
-defined however, you will get back the provided default value.
-
-```javascript
-import propOr from 'crocks/helpers/propOr'
-
-const data = {
-  foo: 'bar',
-  null: null,
-  nan: NaN,
-  undef: undefined
-}
-
-// def :: (String | Integer) -> a -> b
-const def =
-  propOr('default')
-
-def('foo', data)
-//=> "bar"
-
-def('null', data)
-//=> null
-
-def('nan', data)
-//=> NaN
-
-def('baz', data)
-//=> "default"
-
-def('undef', data)
-//=> "default"
-```
-
 #### propPathOr
 
 `crocks/helpers/propPathOr`
@@ -969,14 +971,14 @@ def('undef', data)
 propPathOr :: Foldable f => a -> f (String | Integer) -> b -> c
 ```
 
-While [`propOr`](#propor) is good for simple, single-level structures, there may
-come a time when you have to work with nested POJOs or Arrays. When you run into
-this situation, just pull in `propPathOr` and pass it a left-to-right traversal
-path of keys, indices or a combination of both (gross...but possible). This will
-kick you back a function that behaves just like [`propOr`](#propor). You pass it
-some data, and it will attempt to resolve your provided path. If the path is
-valid, it will return the value. But if at any point that path "breaks" it will
-give you back the default value.
+While [`getPropOr`](#getpropor) is good for simple, single-level
+structures, there may come a time when you have to work with nested POJOs or
+Arrays. When you run into this situation, just pull in `propPathOr` and pass it
+a left-to-right traversal path of keys, indices or a combination of both
+(gross...but possible). This will kick you back a function that behaves just
+like [`getPropOr`](#getpropor). You pass it some data, and it will attempt to
+resolve your provided path. If the path is valid, it will return the value. But
+if at any point that path "breaks" it will give you back the default value.
 
 ```javascript
 import propPathOr from 'crocks/helpers/propPathOr'
@@ -1074,11 +1076,12 @@ setProp ::  (String | Integer) -> a -> (Object | Array) -> (Object | Array)
 ```
 
 Used to set a given value for a specific key or index of
-an `Object` or `Array`. `setProp` takes either a `String` or `Integer` value
-as its first argument and a value of any type as its second. The third parameter
-is dependent of the type of the first argument. When a `String` is provided, the
-third argument must be an `Object`. Otherwise if the first argument is
-an `Integer` zero or greater, then the third must be an `Array`.
+an `Object` or `Array`. `setProp`, previously called `assoc`, takes either
+a `String` or `Integer` value as its first argument and a value of any type as
+its second. The third parameter is dependent of the type of the first argument.
+When a `String` is provided, the third argument must be an `Object`. Otherwise
+if the first argument is an `Integer` zero or greater, then the third must be
+an `Array`.
 
 `setProp` will return a new instance of either `Object` or `Array` with the
 addition applied. When the value exists on the provided object, then the value
@@ -1175,7 +1178,8 @@ unsetPath :: [ (String | Integer) ] -> a -> a
 ```
 
 Used to remove a property or index on a deeply nested `Object`/`Array`.
-`unsetPath` is will return a new instance with the property or index removed.
+`unsetPath`, previously called `dissoc`, will return a new instance with the
+property or index removed.
 
 The provided path can be a mixture of either Positive `Integer`s or `String`s to
 allow for traversing through both `Array`s and `Object`s. When an `Integer` is

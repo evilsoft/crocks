@@ -10,7 +10,7 @@
     "preversion": "npm run build",
     "postpublish": "npm run docs:deploy",
     "build:publish": "npm test && ./bin/publish",
-    "build:dist": "webpack && uglifyjs build/dist/crocks.js -c \"warnings=false\" -m -o build/dist/crocks.min.js",
+    "build:dist": "webpack && uglifyjs build/dist/crocks.js -m -o build/dist/crocks.min.js",
     "build": "doctoc && rimraf build && buble -i src -o build && npm run build:dist",
     "doctoc": "doctoc README.md",
     "docs:dev": "cd docs && npm start",

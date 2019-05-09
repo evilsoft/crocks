@@ -9,12 +9,13 @@ const isInteger = require('../core/isInteger')
 const isNil = require('../core/isNil')
 const isString = require('../core/isString')
 
+const errFn = name =>
+  `${name}: Array of Non-empty Strings or Integers required for second argument`
+
 function fn(name) {
   function getPathOr(def, keys, target) {
     if(!isArray(keys)) {
-      throw new TypeError(
-        `${name}: Array of Non-empty Strings or Integers required for second argument`
-      )
+      throw new TypeError(errFn(name))
     }
 
     if(isNil(target)) {
@@ -26,9 +27,7 @@ function fn(name) {
       const key = keys[i]
 
       if(!(isString(key) && !isEmpty(key) || isInteger(key))) {
-        throw new TypeError(
-          `${name}: Array of Non-empty Strings or Integers required for second argument`
-        )
+        throw new TypeError(errFn(name))
       }
 
       if(isNil(value)) {

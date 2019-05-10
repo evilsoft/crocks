@@ -70,6 +70,7 @@ need to account for for the rest of your flow.
 | [`fanout`][fanout] | `(a -> b) -> (a -> c) -> (a -> Pair b c)` | `crocks/Pair/fanout` |
 | [`find`][find] | <code>Foldable f => ((a -> Boolean) &#124; Pred) -> f a -> Maybe a</code> | `crocks/Maybe/find` |
 | [`fromPairs`][frompairs] | `Foldable f => f (Pair String a) -> Object` | `crocks/helpers/fromPairs` |
+| [`getPathOr`][getpathor] | <code>a -> f [ (String &#124; Integer) ] -> b -> a</code> | `crocks/helpers/getPathOr` |
 | [`getPropOr`][getpropor] | <code>a -> (String &#124; Integer) -> b -> c</code> | `crocks/helpers/getPropOr` |
 | [`liftA2`][lifta2] | `Applicative m => (a -> b -> c) -> m a -> m b -> m c` | `crocks/helpers/liftA2` |
 | [`liftA3`][lifta3] | `Applicative m => (a -> b -> c -> d) -> m a -> m b -> m c -> m d` | `crocks/helpers/liftA3` |
@@ -93,7 +94,7 @@ need to account for for the rest of your flow.
 | [`prop`][prop] | <code>(String &#124; Integer) -> a -> Maybe b</code> | `crocks/Maybe/prop` |
 | [`propOr`][getpropor]<br /><i>(deprecated)</i> | <code>a -> (String &#124; Integer) -> b -> c</code> | `crocks/helpers/propOr` |
 | [`propPath`][proppath] | <code>Foldable f => f (String &#124; Integer) -> a -> Maybe b</code> | `crocks/Maybe/propPath` |
-| [`propPathOr`][proppathor] | <code>Foldable f => a -> f (String &#124; Integer) -> b -> c</code> | `crocks/helpers/propPathOr` |
+| [`propPathOr`][getpathor]<br /><i>(deprecated)</i> | <code>a -> [ (String &#124; Integer) ] -> b -> a</code> | `crocks/helpers/propPathOr` |
 | [`safe`][safe] | <code>((a -> Boolean) &#124; Pred) -> a -> Maybe a</code> | `crocks/Maybe/safe` |
 | [`safeAfter`][safeafter] | <code>safeAfter :: ((b -> Boolean) &#124; Pred) -> (a -> b) -> a -> Maybe b</code> | `crocks/Maybe/safeAfter` |
 | [`safeLift`][safelift] | <code>((a -> Boolean) &#124; Pred) -> (a -> b) -> a -> Maybe b</code> | `crocks/Maybe/safeLift` |
@@ -150,6 +151,7 @@ type: `Pred a` and vice-versa
 [fanout]: helpers.html#fanout
 [find]: ../crocks/Maybe.html#find
 [frompairs]: helpers.html#frompairs
+[getpathor]: helpers.html#getpathor
 [getpropor]: helpers.html#getpropor
 [lifta2]: helpers.html#lifta2
 [lifta3]: helpers.html#lifta3
@@ -172,7 +174,6 @@ type: `Pred a` and vice-versa
 [pipes]: helpers.html#pipes
 [prop]: ../crocks/Maybe.html#prop
 [proppath]: ../crocks/Maybe.html#proppath
-[proppathor]: helpers.html#proppathor
 [safe]: ../crocks/Maybe.html#safe
 [safeafter]: ../crocks/Maybe.html#safeafter
 [safelift]: ../crocks/Maybe.html#safelift

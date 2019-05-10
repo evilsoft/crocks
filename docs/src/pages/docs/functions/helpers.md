@@ -2,7 +2,7 @@
 title: "Helpers"
 description: "Helper functions"
 layout: "notopic"
-functions: ["assign", "assoc", "binary", "compose", "composek", "composep", "composes", "curry", "defaultprops", "defaultto", "dissoc", "frompairs", "getpropor", "lifta2", "lifta3", "liftn", "mapprops", "mapreduce", "mconcat", "mconcatmap", "mreduce", "mreducemap", "nary", "objof", "omit", "once", "partial", "pick", "pipe", "pipek", "pipep", "pipes", "propor", "proppathor", "setpath", "setprop", "tap", "unary", "unit", "unsetpath", "unsetprop"]
+functions: ["assign", "assoc", "binary", "compose", "composek", "composep", "composes", "curry", "defaultprops", "defaultto", "dissoc", "frompairs", "getpathor", "getpropor", "lifta2", "lifta3", "liftn", "mapprops", "mapreduce", "mconcat", "mconcatmap", "mreduce", "mreducemap", "nary", "objof", "omit", "once", "partial", "pick", "pipe", "pipek", "pipep", "pipes", "propor", "proppathor", "setpath", "setprop", "tap", "unary", "unit", "unsetpath", "unsetprop"]
 weight: 20
 ---
 
@@ -340,6 +340,59 @@ you provide an `undefined` values for the second, that `Pair` will not be
 represented in the resulting `Object`. Also, when if multiple keys share the
 same name, that last value will be moved over.
 
+#### getPathOr
+
+`crocks/helpers/getPathOr`
+
+```haskell
+getPathOr :: a -> [ (String | Integer) ] -> b -> c
+```
+
+While [`getPropOr`](#getpropor) is good for simple, single-level
+structures, there may come a time when you have to work with nested POJOs or
+Arrays. When you run into this situation, just pull in `getPathOr`, which was
+previously called `propPathOr`, and pass it a left-to-right traversal path of
+keys, indices or a combination of both (gross...but possible). This will kick
+you back a function that behaves just like [`getPropOr`](#getpropor). You pass
+it some data, and it will attempt to resolve your provided path. If the path is
+valid, it will return the value. But if at any point that path "breaks" it will
+give you back the default value.
+
+```javascript
+import getPathOr from 'crocks/helpers/getPathOr'
+
+const data = {
+  foo: {
+    bar: 'bar',
+    null: null,
+    nan: NaN,
+    undef: undefined
+  },
+  arr: [ 1, 2 ]
+}
+
+// def :: [ String | Integer ] -> a -> b
+const def =
+  getPathOr('default')
+
+def([ 'foo', 'bar' ], data)
+//=> "bar"
+
+def([ 'baz', 'tommy' ], data)
+//=> "default"
+
+def([ 'foo', 'null' ], data)
+//=> null
+
+def([ 'foo', 'nan' ], data)
+//=> NaN
+
+def([ 'foo', 'undef' ], data)
+//=> "default"
+
+def([ 'arr', 'length' ], data)
+//=> 2
+```
 
 #### getPropOr
 
@@ -961,59 +1014,6 @@ flow('num', 10)
 flow('string', 100)
   .runWith(data)
 // => Nothing
-```
-
-#### propPathOr
-
-`crocks/helpers/propPathOr`
-
-```haskell
-propPathOr :: Foldable f => a -> f (String | Integer) -> b -> c
-```
-
-While [`getPropOr`](#getpropor) is good for simple, single-level
-structures, there may come a time when you have to work with nested POJOs or
-Arrays. When you run into this situation, just pull in `propPathOr` and pass it
-a left-to-right traversal path of keys, indices or a combination of both
-(gross...but possible). This will kick you back a function that behaves just
-like [`getPropOr`](#getpropor). You pass it some data, and it will attempt to
-resolve your provided path. If the path is valid, it will return the value. But
-if at any point that path "breaks" it will give you back the default value.
-
-```javascript
-import propPathOr from 'crocks/helpers/propPathOr'
-
-const data = {
-  foo: {
-    bar: 'bar',
-    null: null,
-    nan: NaN,
-    undef: undefined
-  },
-  arr: [ 1, 2 ]
-}
-
-// def :: [ String | Integer ] -> a -> b
-const def =
-  propPathOr('default')
-
-def([ 'foo', 'bar' ], data)
-//=> "bar"
-
-def([ 'baz', 'tommy' ], data)
-//=> "default"
-
-def([ 'foo', 'null' ], data)
-//=> null
-
-def([ 'foo', 'nan' ], data)
-//=> NaN
-
-def([ 'foo', 'undef' ], data)
-//=> "default"
-
-def([ 'arr', 'length' ], data)
-//=> 2
 ```
 
 #### setPath

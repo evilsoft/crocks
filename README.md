@@ -283,7 +283,7 @@ Thanks goes to these wonderful people ([emoji key][emojis]):
 
 ### Tutorials
 #### Tutorial rpearce
-* [Ramda Chops: Function Currying](https://robertwpearce.com/blog/ramda-chops-function-currying.html)
+* [Ramda Chops: Function Currying](https://robertwpearce.com/ramda-chops-function-currying.html)
 
 ### Examples
 #### Example dbagia

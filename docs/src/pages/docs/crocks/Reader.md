@@ -194,9 +194,9 @@ import Reader from 'crocks/Reader'
 
 import assign from 'crocks/helpers/assign'
 import B from 'crocks/combinators/composeB'
+import getProp from 'crocks/Maybe/getProp'
 import objOf from 'crocks/helpers/objOf'
 import option from 'crocks/pointfree/option'
-import prop from 'crocks/Maybe/prop'
 
 const { ask } = Reader
 
@@ -211,7 +211,7 @@ ask()
 
 // propOr :: (String, a) -> b -> a
 const propOr = (key, def) =>
-  B(option(def), prop(key))
+  B(option(def), getProp(key))
 
 // lengthObj :: Array -> Object
 const lengthObj =
@@ -307,8 +307,8 @@ a function that will take any `a` and return a new `Reader` with a value of `b`.
 import Reader from 'crocks/Reader'
 
 import B from 'crocks/combinators/composeB'
+import getProp from 'crocks/Maybe/getProp'
 import option from 'crocks/pointfree/option'
-import prop from 'crocks/Maybe/prop'
 
 const { ask } = Reader
 
@@ -322,7 +322,7 @@ const add  =
 
 // propOr :: (String, a) -> b -> a
 const propOr = (key, def) =>
-  B(option(def), prop(key))
+  B(option(def), getProp(key))
 
 // applyScale :: Number -> Reader Object Number
 const applyScale = x =>

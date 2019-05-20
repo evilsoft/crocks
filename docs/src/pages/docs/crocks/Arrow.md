@@ -25,9 +25,9 @@ import Arrow from 'crocks/Arrow'
 
 import chain from 'crocks/pointfree/chain'
 import compose from 'crocks/helpers/compose'
+import getProp from 'crocks/Maybe/getProp'
 import isString from 'crocks/predicates/isString'
 import option from 'crocks/pointfree/option'
-import prop from 'crocks/Maybe/prop'
 import safe from 'crocks/Maybe/safe'
 
 // arrUpper :: Arrow String
@@ -42,7 +42,7 @@ arrUpper
 const getName = compose(
   option('no name'),
   chain(safe(isString)),
-  prop('name')
+  getProp('name')
 )
 
 // arrUpperName :: Arrow a String
@@ -86,13 +86,13 @@ and the output, or co-domain, of the function represents the right.
 import Arrow from 'crocks/Arrow'
 
 import compose from 'crocks/helpers/compose'
+import getProp from 'crocks/Maybe/getProp'
 import option from 'crocks/pointfree/option'
-import prop from 'crocks/Maybe/prop'
 
 // length :: a -> Integer
 const length = compose(
   option(0),
-  prop('length')
+  getProp('length')
 )
 
 // Arrow a Integer
@@ -258,16 +258,16 @@ import Arrow from 'crocks/Arrow'
 
 import chain from 'crocks/pointfree/chain'
 import compose from 'crocks/helpers/compose'
+import getProp from 'crocks/Maybe/getProp'
 import isNumber from 'crocks/predicates/isNumber'
 import option from 'crocks/pointfree/option'
-import prop from 'crocks/Maybe/prop'
 import safe from 'crocks/Maybe/safe'
 
 // getValue :: (String, Number) -> a -> Number
 const getValue = (key, def) => compose(
   option(def),
   chain(safe(isNumber)),
-  prop(key)
+  getProp(key)
 )
 
 // arrAdd10 :: Arrow Number
@@ -395,10 +395,10 @@ import Arrow from 'crocks/Arrow'
 
 import chain from 'crocks/pointfree/chain'
 import compose from 'crocks/helpers/compose'
+import getProp from 'crocks/Maybe/getProp'
 import isString from 'crocks/predicates/isString'
 import objOf from 'crocks/helpers/objOf'
 import option from 'crocks/pointfree/option'
-import prop from 'crocks/Maybe/prop'
 import safe from 'crocks/Maybe/safe'
 
 // upperFirst :: String -> String
@@ -419,7 +419,7 @@ arrTitleize
 const stringProp = key => compose(
   option(''),
   chain(safe(isString)),
-  prop(key)
+  getProp(key)
 )
 
 // arrTitleObject :: Arrow Object

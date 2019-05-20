@@ -2,7 +2,7 @@
 title: "Maybe"
 description: "Maybe Crock"
 layout: "guide"
-functions: ["find", "prop", "proppath", "safe", "safeafter", "safelift", "eithertomaybe", "firsttomaybe", "lasttomaybe", "resulttomaybe"]
+functions: ["find", "getprop", "prop", "proppath", "safe", "safeafter", "safelift", "eithertomaybe", "firsttomaybe", "lasttomaybe", "resulttomaybe"]
 weight: 90
 ---
 
@@ -585,10 +585,10 @@ import compose from 'crocks/helpers/compose'
 import chain from 'crocks/pointfree/chain'
 import curry from 'crocks/helpers/curry'
 import fanout from 'crocks/Pair/fanout'
+import getProp from 'crocks/Maybe/getProp'
 import isString from 'crocks/predicates/isString'
 import liftA2 from 'crocks/helpers/liftA2'
 import merge from 'crocks/pointfree/merge'
-import prop from 'crocks/Maybe/prop'
 import safe from 'crocks/Maybe/safe'
 
 const { Nothing, Just } =  Maybe
@@ -605,7 +605,7 @@ const joinWith = curry(
 // stringProp :: String -> a -> Maybe String
 const stringProp = key => compose(
   chain(safe(isString)),
-  prop(key)
+  getProp(key)
 )
 
 // getNames :: a -> Pair (Maybe String) (Maybe String)
@@ -750,9 +750,9 @@ import Maybe from 'crocks/Maybe'
 
 import chain from 'crocks/pointfree/chain'
 import compose from 'crocks/helpers/compose'
+import getProp from 'crocks/Maybe/getProp'
 import isNumber from 'crocks/predicates/isNumber'
 import isString from 'crocks/predicates/isString'
-import prop from 'crocks/Maybe/prop'
 import safe from 'crocks/Maybe/safe'
 import safeLift from 'crocks/Maybe/safeLift'
 
@@ -769,7 +769,7 @@ const chainNumber =
 // doubleValue :: a -> Maybe Number
 const doubleValue = compose(
   chain(safeLift(isNumber, double)),
-  prop('value')
+  getProp('value')
 )
 
 chainNumber(Just(45))
@@ -817,11 +817,11 @@ import compose from 'crocks/helpers/compose'
 import composeK from 'crocks/helpers/composeK'
 import coalesce from 'crocks/pointfree/coalesce'
 import constant from 'crocks/combinators/constant'
+import getProp from 'crocks/Maybe/getProp'
 import identity from 'crocks/combinators/identity'
 import isString from 'crocks/predicates/isString'
 import map from 'crocks/pointfree/map'
 import objOf from 'crocks/helpers/objOf'
-import prop from 'crocks/Maybe/prop'
 import safe from 'crocks/Maybe/safe'
 
 const { Nothing, Just } = Maybe
@@ -843,7 +843,7 @@ const shoutOut = compose(
 // stringValue :: a -> Maybe String
 const stringValue = composeK(
   safe(isString),
-  prop('value')
+  getProp('value')
 )
 
 // shoutValue :: a -> Maybe Object
@@ -990,32 +990,33 @@ find(isEven, [ 1, 2, 3, 4, 5 ])
 //=> Just 2
 ```
 
-#### prop
+#### getProp
 
-`crocks/Maybe/prop`
+`crocks/Maybe/getProp`
 
 ```haskell
-prop :: (String | Integer) -> a -> Maybe b
+getProp :: (String | Integer) -> a -> Maybe b
 ```
 
 If you want some safety around pulling a value out of an `Object` or `Array`
-with a single key or index, you can always reach for `prop`. Well, as long
-as you are working with non-nested data that is. Just tell `prop` either the key
-or index you are interested in, and you will get back a function that will take
-anything and return a `Just` with the wrapped value if the key/index is defined.
-If the key/index is not defined, you will get back a `Nothing`.
+with a single key or index, you can always reach for `getProp`, previously known
+as `prop`. Well, as long as you are working with non-nested data that is. Just
+tell `getProp` either the key or index you are interested in, and you will get
+back a function that will take anything and return a `Just` with the wrapped
+value if the key/index is defined. If the key/index is not defined, you will get
+back a `Nothing`.
 
 ```javascript
 import composeK from 'crocks/helpers/composeK'
-import prop from 'crocks/Maybe/prop'
+import getProp from 'crocks/Maybe/getProp'
 
 // getValue :: a -> Maybe b
 const getValue =
-  prop('value')
+  getProp('value')
 
 // getHead :: a -> Maybe b
 const getHead =
-  prop(0)
+  getProp(0)
 
 // getFirstValue :: a -> Maybe b
 const getFirstValue = composeK(
@@ -1053,11 +1054,11 @@ getFirstValue({ value: [ 'a', 'b' ] })
 propPath :: Foldable f => f (String | Integer) -> a -> Maybe b
 ```
 
-While [`prop`](#prop) is good for simple, single-level structures, there may
+While [`getProp`](#getprop) is good for simple, single-level structures, there may
 come a time when you have to work with nested POJOs or Arrays. When you run into
 this situation, just pull in `propPath` and pass it a left-to-right traversal
 path of keys, indices or a combination of both (gross...but possible). This will
-kick you back a function that behaves just like [`prop`](#prop). You pass it
+kick you back a function that behaves just like [`getProp`](#getprop). You pass it
 some data, and it will attempt to resolve your provided path. If the path is
 valid, it will return the value residing there (`null` and `NaN` included!) in
 a `Just`. But if at any point that path "breaks" it will give you back a `Nothing`.
@@ -1332,7 +1333,7 @@ eitherToMaybe :: (a -> Either c b) -> a -> Maybe b
 ```
 
 Used to transform a given [`Either`][either] instance to a `Maybe`
-instance or flatten a `Maybe` of `Either` into a `Maybe` when chained, 
+instance or flatten a `Maybe` of `Either` into a `Maybe` when chained,
 `eitherToMaybe` will turn a [`Right`][right] instance into
 a [`Just`](#just) wrapping the original value contained in the [`Right`][right].
 All [`Left`][left] instances will map to a [`Nothing`](#nothing), mapping the
@@ -1405,7 +1406,7 @@ firstToMaybe :: (a -> First b) -> a -> Maybe b
 ```
 
 Used to transform a given [`First`][first] instance to a `Maybe`
-instance or flatten a `Maybe` of `First` into a `Maybe` when chained, 
+instance or flatten a `Maybe` of `First` into a `Maybe` when chained,
 `firstToMaybe` will turn a non-empty instance into a [`Just`](#just) wrapping
 the original value contained within the [`First`][first]. All empty instances
 will map to a [`Nothing`](#nothing).
@@ -1467,10 +1468,10 @@ lastToMaybe :: Last a -> Maybe a
 lastToMaybe :: (a -> Last b) -> a -> Maybe b
 ```
 
-Used to transform a given [`Last`][last] instance to a `Maybe` instance or 
+Used to transform a given [`Last`][last] instance to a `Maybe` instance or
 flatten a `Maybe` of `Last` into a `Maybe` when chained, `lastToMaybe` will
 turn a non-empty instance into a [`Just`](#just) wrapping the original value
-contained within the [`Last`][last]. All empty instances will map to a 
+contained within the [`Last`][last]. All empty instances will map to a
 [`Nothing`](#nothing).
 
 Like all `crocks` transformation functions, `lastToMaybe` has two possible
@@ -1531,7 +1532,7 @@ resultToMaybe :: (a -> Result e b) -> a -> Maybe b
 ```
 
 Used to transform a given [`Result`][result] instance to a `Maybe`
-instance or flatten a `Maybe` of [`Result`][result] into a `Maybe` when chained, 
+instance or flatten a `Maybe` of [`Result`][result] into a `Maybe` when chained,
 `resultToMaybe` will turn an `Ok` instance into a [`Just`](#just) wrapping the
 original value contained in the `Ok`.
 All `Err` instances will map to a [`Nothing`](#nothing), mapping the originally

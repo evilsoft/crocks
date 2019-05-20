@@ -149,8 +149,8 @@ function.
 import converge from 'crocks/combinators/converge'
 
 import alt from 'crocks/pointfree/alt'
+import getProp from 'crocks/Maybe/getProp'
 import liftA2 from 'crocks/helpers/liftA2'
-import prop from 'crocks/Maybe/prop'
 import getPropOr from 'crocks/helpers/getPropOr'
 
 // data :: [ Number ]
@@ -181,15 +181,15 @@ average(data)
 
 // maybeGetDisplay :: a -> Maybe b
 const maybeGetDisplay =
-  prop('display')
+  getProp('display')
 
 // maybeGetFirst :: a -> Maybe b
 const maybeGetFirst =
-  prop('first')
+  getProp('first')
 
 // maybeGetLast :: a -> Maybe b
 const maybeGetLast =
-  prop('last')
+  getProp('last')
 
 // buildFullName :: String -> String -> String
 const buildFullName = surname => firstname =>

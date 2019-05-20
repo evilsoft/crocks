@@ -32,7 +32,7 @@ binary :: ((*) -> c) -> a -> b -> c
 ```
 With all the different functions out there in the real world, sometimes it is
 nice to restrict them to a specific -arity to work with your all your wonderful
-compositions. When you want to restict any function of any arity to a simple
+compositions. When you want to restrict any function of any arity to a simple
 binary function. Just pass your function to `binary` and you will get back a
 curried, binary function that will only apply (2) arguments to the inner
 function, ignoring any others. This works very well with functions like
@@ -73,8 +73,8 @@ right-to-left, so you can turn this:
 import compose from 'crocks/helpers/compose'
 
 import chain from 'crocks/pointfree/chain'
+import getProp from 'crocks/Maybe/getProp'
 import isObject from 'crocks/predicates/isObject'
-import prop from 'crocks/Maybe/prop'
 import safe from 'crocks/Maybe/safe'
 
 const data = {
@@ -88,18 +88,18 @@ const data = {
 // fluent :: a -> Maybe b
 const fluent = x =>
   safe(isObject, x)
-    .chain(prop('do'))
-    .chain(prop('re'))
-    .chain(prop('mi'))
+    .chain(getProp('do'))
+    .chain(getProp('re'))
+    .chain(getProp('mi'))
 
 fluent(data)
 // => Just 'fa'
 
 // pointfree :: a -> Maybe b
 const pointfree = compose(
-  chain(prop('mi')),
-  chain(prop('re')),
-  chain(prop('do')),
+  chain(getProp('mi')),
+  chain(getProp('re')),
+  chain(getProp('do')),
   safe(isObject)
 )
 
@@ -112,8 +112,8 @@ into the more abbreviated form:
 ```javascript
 import composeK from 'crocks/helpers/composeK'
 
+import getProp from 'crocks/Maybe/getProp'
 import isObject from 'crocks/predicates/isObject'
-import prop from 'crocks/Maybe/prop'
 import safe from 'crocks/Maybe/safe'
 
 const data = {
@@ -126,9 +126,9 @@ const data = {
 
 // flow :: a -> Maybe b
 const flow = composeK(
-  prop('mi'),
-  prop('re'),
-  prop('do'),
+  getProp('mi'),
+  getProp('re'),
+  getProp('do'),
   safe(isObject)
 )
 
@@ -402,7 +402,7 @@ def([ 'arr', 'length' ], data)
 getPropOr :: a -> (String | Integer) -> b -> a
 ```
 
-Reach for `getPropOr` (previously known as `propOr`) when you want some safety
+Reach for `getPropOr`, previously known as `propOr`, when you want some safety
 around pulling a value out of an Object or Array with a single key or
 index. Well, as long as you are working with non-nested data that is. Just
 tell `getPropOr` either the key or index you are interested in, and you will get
@@ -973,8 +973,8 @@ import pipeS from 'crocks/helpers/pipeS'
 import Maybe from 'crocks/Maybe'
 
 import curry from 'crocks/core/curry'
+import getProp from 'crocks/Maybe/getProp'
 import isNumber from 'crocks/predicates/isNumber'
-import prop from 'crocks/Maybe/prop'
 import safeLift from 'crocks/Maybe/safeLift'
 import Star from 'crocks/Star'
 
@@ -989,7 +989,7 @@ const add = curry(
 
 // pull :: String -> MaybeStar Object Number
 const pull = x =>
-  MaybeStar(prop(x))
+  MaybeStar(getProp(x))
 
 // safeAdd :: Number -> MaybeStar Number Number
 const safeAdd = x =>

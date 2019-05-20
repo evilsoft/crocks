@@ -260,7 +260,7 @@ import Tuple from 'crocks/Tuple'
 
 import Maybe from 'crocks/Maybe'
 import chain from 'crocks/pointfree/chain'
-import prop from 'crocks/Maybe/prop'
+import getProp from 'crocks/Maybe/getProp'
 
 const { Just } = Maybe
 
@@ -269,7 +269,7 @@ const Pair =
   Tuple(2)
 
 Pair(false, Just({ a: 'this is a' }))
-  .map(chain(prop('a')))
+  .map(chain(getProp('a')))
 //=> 2-Tuple( false, Just "this is a" )
 ```
 
@@ -520,7 +520,7 @@ tupleToArray :: Tuple a -> [ a ]
 tupleToArray :: (a -> Tuple b) -> a -> [ b ]
 ```
 
-Used to transform a given `Tuple` instance to an `Array` instance. 
+Used to transform a given `Tuple` instance to an `Array` instance.
 
 Like all `crocks` transformation functions, `tupleToArray` has two possible
 signatures and will behave differently when passed either

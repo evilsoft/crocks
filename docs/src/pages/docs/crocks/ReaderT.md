@@ -403,7 +403,7 @@ of the form `Monad m => a -> ReaderT e (m b)`.
 ```javascript
 import ReaderT from 'crocks/Reader/ReaderT'
 import Maybe from 'crocks/Maybe'
-import prop from 'crocks/Maybe/prop'
+import getProp from 'crocks/Maybe/getProp'
 
 const MaybeReader =
   ReaderT(Maybe)
@@ -412,7 +412,7 @@ const { ask, liftFn } = MaybeReader
 
 // readProp :: String -> b -> ReaderT e (Maybe a)
 const readProp = key =>
-  liftFn(prop(key))
+  liftFn(getProp(key))
 
 // getName :: ReaderT e (Maybe a)
 const getName =
@@ -463,7 +463,7 @@ that accepts an environment and returns the resulting `Monad`.
 import ReaderT from 'crocks/Reader/ReaderT'
 import Maybe from 'crocks/Maybe'
 
-import prop from 'crocks/Maybe/prop'
+import getProp from 'crocks/Maybe/getProp'
 
 const MaybeReader = ReaderT(Maybe)
 const { ask, liftFn } = MaybeReader
@@ -479,12 +479,12 @@ const data = {
 const length =
   x => x.length
 
-// getProp :: String -> ReaderT Object (Maybe [])
-const getProp = key =>
+// prop :: String -> ReaderT Object (Maybe [])
+const prop = key =>
   ask()
-    .chain(liftFn(prop(key)))
+    .chain(liftFn(getProp(key)))
 
-getProp('animals')
+prop('animals')
   .map(length)
   .runWith(data)
 //=> Just 3

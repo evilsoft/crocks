@@ -866,9 +866,9 @@ import compose from 'crocks/helpers/compose'
 import composeK from 'crocks/helpers/composeK'
 import constant from 'crocks/combinators/constant'
 import flip from 'crocks/combinators/flip'
+import getProp from 'crocks/Maybe/getProp'
 import ifElse from 'crocks/logic/ifElse'
 import isString from 'crocks/predicates/isString'
-import prop from 'crocks/Maybe/prop'
 import maybeToAsync from 'crocks/Async/maybeToAsync'
 
 const { Rejected, Resolved } = Async
@@ -888,7 +888,7 @@ const test = regex => str =>
 // lookup :: String -> Async String String
 const lookup = compose(
   maybeToAsync('Not Found'),
-  flip(prop, { 'file-a': 'file-b', 'file-b': 'file-c' })
+  flip(getProp, { 'file-a': 'file-b', 'file-b': 'file-c' })
 )
 
 // fake :: String -> Async String Object
@@ -1267,8 +1267,8 @@ asyncToPromise :: (a -> Async e b) -> a -> Promise b e
 ```
 
 The `asyncToPromise` function takes an `Async` and when invoked will fork
-the instance internally and return a `Promise` that will be in-flight. This 
-comes in handy for integration with other `Promise` based libraries that are 
+the instance internally and return a `Promise` that will be in-flight. This
+comes in handy for integration with other `Promise` based libraries that are
 utilized in a given application, program or flow through composition.
 
 <!-- eslint-disable no-console -->
@@ -1333,8 +1333,8 @@ eitherToAsync :: (a -> Either c b) -> a -> Async c b
 Used to transform a given [`Either`][either] instance to an `Async` instance or
 flatten an `Async` of `Either` into an `Async` when chained, `eitherToAsync` will
 turn a [`Right`][right] instance into a [`Resolved`](#resolved) instance
-wrapping the original value contained in the original [`Right`][right]. If a 
-[`Left`][left] is provided, then `eitherToAsync` will return a 
+wrapping the original value contained in the original [`Right`][right]. If a
+[`Left`][left] is provided, then `eitherToAsync` will return a
 [`Rejected`](#rejected) instance, wrapping the original [`Left`][left] value.
 
 Like all `crocks` transformation functions, `eitherToAsync` has two possible

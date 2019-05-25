@@ -168,10 +168,10 @@ import compose from 'crocks/helpers/compose'
 import concat from 'crocks/pointfree/concat'
 import fanout from 'crocks/Pair/fanout'
 import flip from 'crocks/combinators/flip'
+import getProp from 'crocks/Maybe/getProp'
 import map from 'crocks/pointfree/map'
 import mapReduce from 'crocks/helpers/mapReduce'
 import option from 'crocks/pointfree/option'
-import prop from 'crocks/Maybe/prop'
 
 Pair(Sum(3), [ 3 ])
   .concat(Pair(Sum(10), [ 10 ]))
@@ -187,7 +187,7 @@ const peeps = [
 
 // mapProp :: (String, (a -> b)) -> Object -> Maybe b
 const mapProp = (key, fn) =>
-  compose(map(fn), prop(key))
+  compose(map(fn), getProp(key))
 
 // Combined :: Pair (Maybe [ String ]) (Maybe Sum)
 // splitPerson :: Person -> Combined
@@ -816,11 +816,11 @@ to the first portion of the underlying `Pair` and the second on the second.
 ```javascript
 import compose from 'crocks/helpers/compose'
 import fanout from 'crocks/Pair/fanout'
+import getProp from 'crocks/Maybe/getProp'
 import liftA2 from 'crocks/helpers/liftA2'
 import map from 'crocks/pointfree/map'
 import Maybe from 'crocks/Maybe'
 import merge from 'crocks/Pair/merge'
-import prop from 'crocks/Maybe/prop'
 import sequence from 'crocks/pointfree/sequence'
 
 // Person :: { first: String, last: String }
@@ -839,7 +839,7 @@ const join = sep => arr => arr.join(sep)
 // getName :: Person -> String
 const getName = compose(
   merge(liftA2(concat)),
-  fanout(prop('first'), prop('last'))
+  fanout(getProp('first'), getProp('last'))
 )
 
 // getPersons :: [Person] -> String

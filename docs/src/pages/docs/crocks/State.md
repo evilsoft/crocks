@@ -137,7 +137,7 @@ A construction helper that is used to access the state portion of a given
 `State` instance. To make the state accessible, `get` will place the state in
 the resultant portion, overwriting what was there previously.
 
-`get` may be called with or without a function as it's argument. When nothing is
+`get` may be called with or without a function as its argument. When nothing is
 provided for the argument, the state will be applied to the resultant as is. The
 state will be mapped over any provided function that takes the same type as the
 state, with the result deposited in the resultant.
@@ -147,16 +147,16 @@ import State from 'crocks/State'
 
 import chain from 'crocks/pointfree/chain'
 import compose from 'crocks/helpers/compose'
+import getProp from 'crocks/Maybe/getProp'
 import isNumber from 'crocks/predicates/isNumber'
 import option from 'crocks/pointfree/option'
-import prop from 'crocks/Maybe/prop'
 import safe from 'crocks/Maybe/safe'
 
 const { get } = State
 
 // propOr :: (String, (b -> Boolean), a) -> Object -> c
 const propOr = (key, pred, def) =>
-  compose(option(def), chain(safe(pred)), prop(key))
+  compose(option(def), chain(safe(pred)), getProp(key))
 
 // safeNumber :: Object -> Number
 const safeNumber =

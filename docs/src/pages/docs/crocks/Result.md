@@ -20,10 +20,10 @@ error information from an operation and the right contains the result.
 case needs to be communicated. For example, when executing a function and you
 exception is important or useful.
 
-A `Result` represents disjunction by using two constructors, [`Err`](#err) and [`Ok`](#ok). 
-An [`Ok`](#ok) instance represents the positive result while [`Err`](#err) is 
-considered the negative. With the exception 
-of[`coalesce`](#coalesce), [`swap`](#swap) and [`bimap`](#bimap), all `Result` returning 
+A `Result` represents disjunction by using two constructors, [`Err`](#err) and [`Ok`](#ok).
+An [`Ok`](#ok) instance represents the positive result while [`Err`](#err) is
+considered the negative. With the exception
+of[`coalesce`](#coalesce), [`swap`](#swap) and [`bimap`](#bimap), all `Result` returning
 methods on an instance will be applied to an [`Ok`](#ok) returning the result.
 If an instance is an [`Err`](#err), then all application is skipped and
 another [`Err`](#err) instance is returned with the same containing value.
@@ -201,7 +201,7 @@ of a disjunction. When an instance is an [`Err`](#err), most `Result` returning
 methods will just return a new [`Err`](#err) instance with the same containing
 value.
 
-The power of the [`Err`](#err) as opposed to a [`Left`][left] or a [`Nothing`][nothing] is 
+The power of the [`Err`](#err) as opposed to a [`Left`][left] or a [`Nothing`][nothing] is
 that it can hold meaningful information on why the flow is in this path. It will
 also accumulate this information when [`ap`](#ap) or [`alt`](#alt) are used. This works as a
 core tool when using Railway Orientated Programming concepts.
@@ -367,7 +367,7 @@ Result e a ~> b -> Boolean
 ```
 
 Used to compare the contained values of two `Result` instances for equality by
-value. `equals` takes any given argument and returns `true` if the passed 
+value. `equals` takes any given argument and returns `true` if the passed
 argument is a `Result` ([`Ok`](#ok) or [`Err`](#err)) with a contained value
 equal to the contained value of the `Result` the method is being called on. If
 the passed argument is not a `Result` or the contained values are not equal by
@@ -524,7 +524,7 @@ Result e a ~> Result e a -> Result e a
 
 Providing a means for a fallback or alternative value, `alt` combines two
 `Result` instances and will return the first [`Ok`](#ok) it encounters or
-am [`Err`](#err) if neither value is an [`Ok`](#ok). 
+am [`Err`](#err) if neither value is an [`Ok`](#ok).
 
 If the value in both [`Err`](#err) are `Semigroup`s of the same type then they
 will accumalte based on their rules.
@@ -591,7 +591,7 @@ While it's more common to only [`map`](#map) over a `Result` that's an
 of wether it's an [`Ok`](#ok) or an [`Err`](#err).
 
 `bimap` takes two mapping functions as its arguments. The first function is
-used to map an [`Err`](#err) instance, while the second maps an [`Ok`](#ok). 
+used to map an [`Err`](#err) instance, while the second maps an [`Ok`](#ok).
 `Result` only provides a means to map an [`Ok`](#ok) instance exclusively using
 [`map`](#map). If the need arises to map an [`Err`](#err) instance exclusively,
 then `bimap` can be used, passing the mapping function to the first argument
@@ -670,7 +670,7 @@ instance with the result. `ap` requires that it is called on an `instance` that
 is either an [`Err`](#err) or an [`Ok`](#ok) that wraps a curried polyadic
 function.
 
-When either instance is an [`Err`](#err), `ap` will return an [`Err`](#err). 
+When either instance is an [`Err`](#err), `ap` will return an [`Err`](#err).
 This can be used to safely combine multiple values under a given combination
 function. If any of the inputs results in an [`Err`](#err) than they will never
 be applied to the function and not provide exceptions or unexpected results.
@@ -883,7 +883,7 @@ import ifElse from 'crocks/logic/ifElse'
 import isNumber from 'crocks/predicates/isNumber'
 import maybeToResult from 'crocks/Result/maybeToResult'
 import map from 'crocks/pointfree/map'
-import prop from 'crocks/Maybe/prop'
+import getProp from 'crocks/Maybe/getProp'
 
 const { Err, Ok } = Result
 
@@ -903,9 +903,9 @@ const ensure = pred =>
 const fromNumber =
   ensure(isNumber)
 
-// getProp :: (String | Number) -> Object -> Result String a
-const getProp = name =>
-  maybeToResult(errText(name), prop(name))
+// prop :: (String | Number) -> Object -> Result String a
+const prop = name =>
+  maybeToResult(errText(name), getProp(name))
 
 // protectedAdd10 :: a -> Result String Number
 const protectedAdd10 = composeB(
@@ -916,7 +916,7 @@ const protectedAdd10 = composeB(
 // getAge :: Object -> Result String Number
 const getAge = composeB(
   chain(fromNumber),
-  getProp('age')
+  prop('age')
 )
 
 getAge({ name: 'Sarah', age: 21 })
@@ -946,7 +946,7 @@ Result e a ~> ((e -> b), (a -> b))) -> Result c b
 There will come a time in your flow that you will want to ensure you have
 an [`Ok`](#ok) of a given type. `coalesce` allows you to `map` over both
 the [`Ok`](#ok) and the [`Err`](#err) and return an [`Ok`](#ok). `coalesce` expects
-two functions for it's inputs. 
+two functions for it's inputs.
 
 The first function is used when invoked on a [`Err`](#err) and will return
 a [`Ok`](#ok) instance wrapping the result of the function. The second function
@@ -1132,7 +1132,7 @@ function that will be used to map an [`Err`](#err). While the second
 will map the value wrapped in a given [`Ok`](#ok) and return the result of that
 mapping.
 
-By composing `either` you can create functions that us the power of 
+By composing `either` you can create functions that us the power of
 `ADT`s while returning a plain javascript type.
 
 ```javascript
@@ -1209,8 +1209,8 @@ doubleNumber('value')
 tryCatch :: (* -> a) -> * -> Result e a
 ```
 Used when you want to take any variadic function and wrap it with the added
-function of a `Result` type. `tryCatch` will execute the function with the 
-parameters passed and return either an [`Ok`](#ok) when successful or an 
+function of a `Result` type. `tryCatch` will execute the function with the
+parameters passed and return either an [`Ok`](#ok) when successful or an
 [`Err`](#err) when an exception is thrown.
 
 Although we do our best to not use `Error` to control program flow, there are
@@ -1276,7 +1276,7 @@ eitherToResult :: (a -> Either c b) -> a -> Result c b
 ```
 
 Used to transform a given [`Either`][either] instance to a `Result`
-instance or flatten a `Result` of `Either` into a `Result` when chained, 
+instance or flatten a `Result` of `Either` into a `Result` when chained,
 `eitherToMaybe` will turn a [`Right`][right] instance into
 a [`Ok`](#ok) wrapping the original value contained in the [`Right`][right].
 All [`Left`][left] instances will map to an [`Err`](#err), mapping the
@@ -1305,7 +1305,7 @@ import map from 'crocks/pointfree/map'
 import maybeToEither from 'crocks/Either/maybeToEither'
 import merge from 'crocks/pointfree/merge'
 import objOf from 'crocks/helpers/objOf'
-import prop from 'crocks/Maybe/prop'
+import getProp from 'crocks/Maybe/getProp'
 import safeLift from 'crocks/Maybe/safeLift'
 
 const { Left, Right } = Either
@@ -1323,7 +1323,7 @@ const safeInc =
 
 // incProp :: String -> a -> Maybe Number
 const incProp = key =>
-  composeK(safeInc, prop(key))
+  composeK(safeInc, getProp(key))
 
 // incResult :: String -> a -> Either [ String ] Object
 const incResult = key => maybeToEither(
@@ -1375,7 +1375,7 @@ firstToResult :: e -> (a -> First b) -> a -> Result e b
 ```
 
 Used to transform a given [`First`][first] instance to a `Result`
-instance or flatten a `Result` of [`First`][first] into a `Result` when chained, 
+instance or flatten a `Result` of [`First`][first] into a `Result` when chained,
 `firstToResult` will turn a non-empty instance into an [`Ok`](#ok) wrapping
 the original value contained within the [`First`][first]. All empty instances
 will map to an [`Err`](#err) with the given value.
@@ -1395,7 +1395,7 @@ import concat from 'crocks/pointfree/concat'
 import firstToResult from 'crocks/Result/firstToResult'
 import flip from 'crocks/combinators/flip'
 import mapReduce from 'crocks/helpers/mapReduce'
-import prop from 'crocks/Maybe/prop'
+import getProp from 'crocks/Maybe/getProp'
 
 const { empty } = First
 
@@ -1409,7 +1409,7 @@ const createPerson = (name, age) => ({
 // liftName :: Person -> First String
 const liftName = composeB(
   First,
-  prop('name')
+  getProp('name')
 )
 
 // mergeFirstName :: [ Person ] -> First String
@@ -1440,10 +1440,10 @@ lastToResult :: e -> Last a -> Result e a
 lastToResult :: e -> (a -> Last b) -> a -> Result e b
 ```
 
-Used to transform a given [`Last`][last] instance to a `Result` instance or 
+Used to transform a given [`Last`][last] instance to a `Result` instance or
 flatten a `Result` of [`Last`][last] into a `Result` when chained, `lastToResult` will
 turn a non-empty instance into a [`Ok`](#ok) wrapping the original value
-contained within the [`Last`][last]. All empty instances will map to a 
+contained within the [`Last`][last]. All empty instances will map to a
 [`Err`](#err).
 
 Like all `crocks` transformation functions, `lastToResult` has two possible
@@ -1497,11 +1497,11 @@ maybeToResult :: e -> (a -> Maybe b) -> a -> Result e b
 ```
 
 Used to transform a given [`Maybe`][maybe] instance to a `Result`
-instance or flatten a `Result` of [`Maybe`][maybe] into a `Result` when chained, 
+instance or flatten a `Result` of [`Maybe`][maybe] into a `Result` when chained,
 `maybeToResult` will turn a [`Just`][just] instance into an [`Ok`](#ok) wrapping the
 original value contained in the [`Just`][just].
 All [`Nothing`](nothing) instances will map to a [`Err`](#err), containing the
-given `e` value. 
+given `e` value.
 
 Like all `crocks` transformation functions, `maybeToResult` has two possible
 signatures and will behave differently when passed either a [`Maybe`][maybe] instance
@@ -1517,7 +1517,7 @@ import Result from 'crocks/Result'
 import composeB from 'crocks/combinators/composeB'
 import maybeToResult from 'crocks/Result/maybeToResult'
 import Maybe from 'crocks/Maybe'
-import prop from 'crocks/Maybe/prop'
+import getProp from 'crocks/Maybe/getProp'
 
 const { Ok } = Result
 const { Just, Nothing } = Maybe
@@ -1533,7 +1533,7 @@ maybeToResult('An error occurred', Nothing())
 // getName :: Person -> Result String
 const getName = composeB(
   maybeToResult('Name did not exist or was undefined'),
-  prop('name')
+  getProp('name')
 )
 
 getName({ name: 'John', age: 21 })

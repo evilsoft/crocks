@@ -71,6 +71,7 @@ need to account for for the rest of your flow.
 | [`find`][find] | <code>Foldable f => ((a -> Boolean) &#124; Pred) -> f a -> Maybe a</code> | `crocks/Maybe/find` |
 | [`fromPairs`][frompairs] | `Foldable f => f (Pair String a) -> Object` | `crocks/helpers/fromPairs` |
 | [`getPathOr`][getpathor] | <code>a -> f [ (String &#124; Integer) ] -> b -> a</code> | `crocks/helpers/getPathOr` |
+| [`getProp`][getprop] | <code>(String &#124; Integer) -> a -> Maybe b</code> | `crocks/Maybe/getProp` |
 | [`getPropOr`][getpropor] | <code>a -> (String &#124; Integer) -> b -> c</code> | `crocks/helpers/getPropOr` |
 | [`liftA2`][lifta2] | `Applicative m => (a -> b -> c) -> m a -> m b -> m c` | `crocks/helpers/liftA2` |
 | [`liftA3`][lifta3] | `Applicative m => (a -> b -> c -> d) -> m a -> m b -> m c -> m d` | `crocks/helpers/liftA3` |
@@ -91,7 +92,7 @@ need to account for for the rest of your flow.
 | [`pipeK`][pipek] | `Chain m => ((a -> m b), ..., (y -> m z)) -> a -> m z` | `crocks/helpers/pipeK` |
 | [`pipeP`][pipep] | `Promise p => ((a -> p b d), ..., (y -> p z d)) -> a -> p z d` | `crocks/helpers/pipeP` |
 | [`pipeS`][pipes] | `Semigroupoid s => (s a b, ..., s y z) -> s a z` | `crocks/helpers/pipeS` |
-| [`prop`][prop] | <code>(String &#124; Integer) -> a -> Maybe b</code> | `crocks/Maybe/prop` |
+| [`prop`][getprop]<br /><i>(deprecated)</i> | <code>(String &#124; Integer) -> a -> Maybe b</code> | `crocks/Maybe/prop` |
 | [`propOr`][getpropor]<br /><i>(deprecated)</i> | <code>a -> (String &#124; Integer) -> b -> c</code> | `crocks/helpers/propOr` |
 | [`propPath`][proppath] | <code>Foldable f => f (String &#124; Integer) -> a -> Maybe b</code> | `crocks/Maybe/propPath` |
 | [`propPathOr`][getpathor]<br /><i>(deprecated)</i> | <code>a -> [ (String &#124; Integer) ] -> b -> a</code> | `crocks/helpers/propPathOr` |
@@ -152,6 +153,7 @@ type: `Pred a` and vice-versa
 [find]: ../crocks/Maybe.html#find
 [frompairs]: helpers.html#frompairs
 [getpathor]: helpers.html#getpathor
+[getprop]: ../crocks/Maybe.html#getprop
 [getpropor]: helpers.html#getpropor
 [lifta2]: helpers.html#lifta2
 [lifta3]: helpers.html#lifta3
@@ -172,7 +174,6 @@ type: `Pred a` and vice-versa
 [pipek]: helpers.html#pipek
 [pipep]: helpers.html#pipep
 [pipes]: helpers.html#pipes
-[prop]: ../crocks/Maybe.html#prop
 [proppath]: ../crocks/Maybe.html#proppath
 [safe]: ../crocks/Maybe.html#safe
 [safeafter]: ../crocks/Maybe.html#safeafter

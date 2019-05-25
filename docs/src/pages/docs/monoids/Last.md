@@ -233,15 +233,15 @@ import Last from 'crocks/Last'
 
 import compose from 'crocks/helpers/compose'
 import chain from 'crocks/pointfree/chain'
+import getProp from 'crocks/Maybe/getProp'
 import isString from 'crocks/predicates/isString'
 import mconcatMap from 'crocks/helpers/mconcatMap'
-import prop from 'crocks/Maybe/prop'
 import safe from 'crocks/Maybe/safe'
 
 // stringVal :: a -> Maybe String
 const stringVal = compose(
   chain(safe(isString)),
-  prop('val')
+  getProp('val')
 )
 
 // lastValid :: [ a ] -> Last String
@@ -461,8 +461,8 @@ import maybeToLast from 'crocks/Last/maybeToLast'
 
 import chain from 'crocks/pointfree/chain'
 import compose from 'crocks/helpers/compose'
+import getProp from 'crocks/Maybe/getProp'
 import isNumber from 'crocks/predicates/isNumber'
-import prop from 'crocks/Maybe/prop'
 import safe from 'crocks/Maybe/safe'
 
 const { Nothing, Just } = Maybe
@@ -470,7 +470,7 @@ const { Nothing, Just } = Maybe
 // numVal :: a -> Maybe Number
 const numVal = compose(
   chain(safe(isNumber)),
-  prop('val')
+  getProp('val')
 )
 
 // lastNumVal :: a -> Last Number

@@ -807,10 +807,10 @@ returning the result as the new instance.
 ```javascript
 import Either from 'crocks/Either'
 
+import getProp from 'crocks/Maybe/getProp'
 import ifElse from 'crocks/logic/ifElse'
 import isString from 'crocks/predicates/isString'
 import maybeToEither from 'crocks/Either/maybeToEither'
-import prop from 'crocks/Maybe/prop'
 import propEq from 'crocks/predicates/propEq'
 
 const { Left, Right } = Either
@@ -835,7 +835,7 @@ const stringOr =
 
 // valueOr :: b -> Either c a
 const valueOr = x =>
-  maybeToEither(x, prop('value'), x)
+  maybeToEither(x, getProp('value'), x)
 
 // getStringValue :: b -> Either c String
 const getStringValue = x =>
@@ -1123,7 +1123,7 @@ lastToEither :: c -> (a -> Last b) -> a -> Either c a
 
 Used to transform a given [`Last`][last] instance to an `Either` or flatten an
 `Either` of [`Last`][last] into an `Either` when chained, `lastToEither` will turn a
-non-empty [`Last`][last] instance into a [`Right`](#right) instance wrapping 
+non-empty [`Last`][last] instance into a [`Right`](#right) instance wrapping
 the original value contained in the original non-empty.
 
 The [`Last`][last] datatype is based on a [`Maybe`][maybe] and as such its left
@@ -1303,13 +1303,13 @@ import assign from 'crocks/helpers/assign'
 import compose from 'crocks/helpers/compose'
 import composeK from 'crocks/helpers/composeK'
 import fanout from 'crocks/Pair/fanout'
+import getProp from 'crocks/Maybe/getProp'
 import isNumber from 'crocks/predicates/isNumber'
 import liftA2 from 'crocks/helpers/liftA2'
 import map from 'crocks/pointfree/map'
 import maybeToResult from 'crocks/Result/maybeToResult'
 import merge from 'crocks/Pair/merge'
 import objOf from 'crocks/helpers/objOf'
-import prop from 'crocks/Maybe/prop'
 import resultToEither from 'crocks/Either/resultToEither'
 import safeLift from 'crocks/Maybe/safeLift'
 
@@ -1328,7 +1328,7 @@ const safeInc =
 
 // incProp :: String -> a -> Maybe Number
 const incProp = key =>
-  composeK(safeInc, prop(key))
+  composeK(safeInc, getProp(key))
 
 // incResult :: String -> a -> Result [ String ] Object
 const incResult = key => maybeToResult(

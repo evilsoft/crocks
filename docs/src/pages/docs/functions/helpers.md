@@ -743,7 +743,7 @@ yourself constantly concatenating the result of this function into another
 `crocks/helpers/omit`
 
 ```haskell
-omit :: Foldable f => f String -> Object -> Object
+omit :: Foldable f => f ([ String ] | List String) -> Object -> Object
 ```
 
 Sometimes you just want to strip `Object`s of unwanted properties by key. Using

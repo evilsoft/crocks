@@ -70,6 +70,7 @@ need to account for for the rest of your flow.
 | [`fanout`][fanout] | `(a -> b) -> (a -> c) -> (a -> Pair b c)` | `crocks/Pair/fanout` |
 | [`find`][find] | <code>Foldable f => ((a -> Boolean) &#124; Pred) -> f a -> Maybe a</code> | `crocks/Maybe/find` |
 | [`fromPairs`][frompairs] | `Foldable f => f (Pair String a) -> Object` | `crocks/helpers/fromPairs` |
+| [`getPath`][getpath] | <code>[ (String &#124; Integer) ] -> a -> Maybe b</code> | `crocks/Maybe/getPath` |
 | [`getPathOr`][getpathor] | <code>a -> f [ (String &#124; Integer) ] -> b -> a</code> | `crocks/helpers/getPathOr` |
 | [`getProp`][getprop] | <code>(String &#124; Integer) -> a -> Maybe b</code> | `crocks/Maybe/getProp` |
 | [`getPropOr`][getpropor] | <code>a -> (String &#124; Integer) -> b -> c</code> | `crocks/helpers/getPropOr` |
@@ -94,7 +95,7 @@ need to account for for the rest of your flow.
 | [`pipeS`][pipes] | `Semigroupoid s => (s a b, ..., s y z) -> s a z` | `crocks/helpers/pipeS` |
 | [`prop`][getprop]<br /><i>(deprecated)</i> | <code>(String &#124; Integer) -> a -> Maybe b</code> | `crocks/Maybe/prop` |
 | [`propOr`][getpropor]<br /><i>(deprecated)</i> | <code>a -> (String &#124; Integer) -> b -> c</code> | `crocks/helpers/propOr` |
-| [`propPath`][proppath] | <code>Foldable f => f (String &#124; Integer) -> a -> Maybe b</code> | `crocks/Maybe/propPath` |
+| [`propPath`][getpath]<br /><i>(deprecated)</i> | <code>[ (String &#124; Integer) ] -> a -> Maybe b</code> | `crocks/Maybe/propPath` |
 | [`propPathOr`][getpathor]<br /><i>(deprecated)</i> | <code>a -> [ (String &#124; Integer) ] -> b -> a</code> | `crocks/helpers/propPathOr` |
 | [`safe`][safe] | <code>((a -> Boolean) &#124; Pred) -> a -> Maybe a</code> | `crocks/Maybe/safe` |
 | [`safeAfter`][safeafter] | <code>safeAfter :: ((b -> Boolean) &#124; Pred) -> (a -> b) -> a -> Maybe b</code> | `crocks/Maybe/safeAfter` |
@@ -152,6 +153,7 @@ type: `Pred a` and vice-versa
 [fanout]: helpers.html#fanout
 [find]: ../crocks/Maybe.html#find
 [frompairs]: helpers.html#frompairs
+[getpath]: ../crocks/Maybe.html#getpath
 [getpathor]: helpers.html#getpathor
 [getprop]: ../crocks/Maybe.html#getprop
 [getpropor]: helpers.html#getpropor

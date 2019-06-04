@@ -13,7 +13,7 @@ function omitKeys(keys, obj) {
   }
 }
 
-// omit : ([ String ] | List String) -> Object -> Object
+// omit : [ String ] -> Object -> Object
 function omit(keys, obj) {
   if(!isFoldable(keys)) {
     throw new TypeError('omit: Foldable required for first argument')

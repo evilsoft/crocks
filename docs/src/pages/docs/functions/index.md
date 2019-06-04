@@ -84,7 +84,7 @@ need to account for for the rest of your flow.
 | [`mreduceMap`][mreducemap] | `Monoid m, Foldable f => m -> (b -> a) -> f b -> a` | `crocks/helpers/mreduceMap` |
 | [`nAry`][nary] | `Number -> ((*) -> a) -> (*) -> a` | `crocks/helpers/nAry` |
 | [`objOf`][objof] | `String -> a -> Object` | `crocks/helpers/objOf` |
-| [`omit`][omit] | `Foldable f => f String -> Object -> Object` | `crocks/helpers/omit` |
+| [`omit`][omit] | `[ String ] -> Object -> Object` | `crocks/helpers/omit` |
 | [`once`][once] | `((*) -> a) -> ((*) -> a)` | `crocks/helpers/once` |
 | [`partial`][partial] | `(((*) -> c), *) -> (*) -> c` | `crocks/helpers/partial` |
 | [`pick`][pick] | `Foldable f => f String -> Object -> Object` | `crocks/helpers/pick` |

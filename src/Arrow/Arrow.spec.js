@@ -34,7 +34,7 @@ test('Arrow', t => {
 
   t.equals(Arrow(unit).constructor, Arrow, 'provides TypeRep on constructor')
 
-  const err = /Arrow: Function required/
+  const err = /Arrow: Argument must be a Function/
   t.throws(Arrow, err, 'throws with nothing')
   t.throws(a(undefined), err, 'throws with undefined')
   t.throws(a(null), err, 'throws with undefined')
@@ -135,7 +135,7 @@ test('Arrow compose functionality', t => {
 
   const cat = bindFunc(a.compose)
 
-  const err = /Arrow.compose: Arrow required/
+  const err = /Arrow\.compose: Argument must be an Arrow/
   t.throws(cat(undefined), err, 'throws with undefined')
   t.throws(cat(null), err, 'throws with null')
   t.throws(cat(0), err, 'throws with falsey number')
@@ -159,7 +159,7 @@ test('Arrow compose fantasy-land errors', t => {
 
   const cat = bindFunc(a[fl.compose])
 
-  const err = /Arrow.fantasy-land\/compose: Arrow required/
+  const err = /Arrow\.fantasy-land\/compose: Argument must be an Arrow/
   t.throws(cat(undefined), err, 'throws with undefined')
   t.throws(cat(null), err, 'throws with null')
   t.throws(cat(0), err, 'throws with falsey number')
@@ -222,7 +222,7 @@ test('Arrow id properties (Category)', t => {
 test('Arrow map errors', t => {
   const map = bindFunc(Arrow(unit).map)
 
-  const err = /Arrow.map: Function required/
+  const err = /Arrow\.map: Argument must be a Function/
   t.throws(map(undefined), err, 'throws with undefined')
   t.throws(map(null), err, 'throws with null')
   t.throws(map(0), err, 'throws with falsey number')
@@ -242,7 +242,7 @@ test('Arrow map errors', t => {
 test('Arrow map fantasy-land errors', t => {
   const map = bindFunc(Arrow(unit)[fl.map])
 
-  const err = /Arrow.fantasy-land\/map: Function required/
+  const err = /Arrow\.fantasy-land\/map: Argument must be a Function/
   t.throws(map(undefined), err, 'throws with undefined')
   t.throws(map(null), err, 'throws with null')
   t.throws(map(0), err, 'throws with falsey number')
@@ -295,7 +295,7 @@ test('Arrow map properties (Functor)', t => {
 test('Arrow contramap errors', t => {
   const cmap = bindFunc(Arrow(unit).contramap)
 
-  const err = /Arrow.contramap: Function required/
+  const err = /Arrow\.contramap: Argument must be a Function/
   t.throws(cmap(undefined), err, 'throws with undefined')
   t.throws(cmap(null), err, 'throws with null')
   t.throws(cmap(0), err, 'throws with falsey number')
@@ -315,7 +315,7 @@ test('Arrow contramap errors', t => {
 test('Arrow contramap fantasy-land errors', t => {
   const cmap = bindFunc(Arrow(unit)[fl.contramap])
 
-  const err = /Arrow.fantasy-land\/contramap: Function required/
+  const err = /Arrow\.fantasy-land\/contramap: Argument must be a Function/
   t.throws(cmap(undefined), err, 'throws with undefined')
   t.throws(cmap(null), err, 'throws with null')
   t.throws(cmap(0), err, 'throws with falsey number')
@@ -368,7 +368,7 @@ test('Arrow contramap properties (Contra Functor)', t => {
 test('Arrow promap errors', t => {
   const promap = bindFunc(Arrow(unit).promap)
 
-  const err = /Arrow.promap: Functions required for both arguments/
+  const err = /Arrow\.promap: Both arguments must be Functions/
   t.throws(promap(undefined, unit), err, 'throws with undefined as first argument')
   t.throws(promap(null, unit), err, 'throws with null as first argument')
   t.throws(promap(0, unit), err, 'throws with falsey number as first argument')
@@ -399,7 +399,7 @@ test('Arrow promap errors', t => {
 test('Arrow promap fantasy-land errors', t => {
   const promap = bindFunc(Arrow(unit)[fl.promap])
 
-  const err = /Arrow.fantasy-land\/promap: Functions required for both arguments/
+  const err = /Arrow\.fantasy-land\/promap: Both arguments must be Functions/
   t.throws(promap(undefined, unit), err, 'throws with undefined as first argument')
   t.throws(promap(null, unit), err, 'throws with null as first argument')
   t.throws(promap(0, unit), err, 'throws with falsey number as first argument')
@@ -484,7 +484,7 @@ test('Arrow first', t => {
 
   const runWith = bindFunc(m.first().runWith)
 
-  const err = /Arrow.first: Pair required for inner argument/
+  const err = /Arrow\.first: Inner argument must be a Pair/
   t.throws(runWith(undefined), err, 'throws with undefined as inner argument')
   t.throws(runWith(null), err, 'throws with null as inner argument')
   t.throws(runWith(0), err, 'throws with falsey number as inner argument')
@@ -514,7 +514,7 @@ test('Arrow second', t => {
 
   const runWith = bindFunc(m.second().runWith)
 
-  const err = /Arrow.second: Pair required for inner argument/
+  const err = /Arrow\.second: Inner argument must be a Pair/
   t.throws(runWith(undefined), err, 'throws with undefined as inner argument')
   t.throws(runWith(null), err, 'throws with null as inner argument')
   t.throws(runWith(0), err, 'throws with falsey number as inner argument')
@@ -544,7 +544,7 @@ test('Arrow both', t => {
 
   const runWith = bindFunc(m.both().runWith)
 
-  const err = /Arrow.both: Pair required for inner argument/
+  const err = /Arrow\.both: Inner argument must be a Pair/
   t.throws(runWith(undefined), err, 'throws with undefined as inner argument')
   t.throws(runWith(null), err, 'throws with null as inner argument')
   t.throws(runWith(0), err, 'throws with falsey number as inner argument')

@@ -21,7 +21,7 @@ function All(b) {
   const x = isNil(b) ? _empty().valueOf() : b
 
   if(!arguments.length || isFunction(x)) {
-    throw new TypeError('All: Non-function value required')
+    throw new TypeError('All: Value must not be a Function')
   }
 
   const valueOf =

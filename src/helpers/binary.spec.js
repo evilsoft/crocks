@@ -8,7 +8,7 @@ const binary = require('./binary')
 test('binary helper', t => {
   const f = bindFunc(binary)
 
-  const err = /binary: Function required/
+  const err = /binary: Argument must be a Function/
   t.throws(f(undefined), err, 'throws with undefined')
   t.throws(f(null), err, 'throws with null')
   t.throws(f(0), err, 'throws with falsey number')

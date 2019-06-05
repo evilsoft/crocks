@@ -13,7 +13,7 @@ test('curry', t => {
 
   t.ok(isFunction(curry), 'curry is a function')
 
-  const err = /curry: Function required/
+  const err = /curry: Argument must be a Function/
   t.throws(curry, err, 'throws err when nothing passed')
 
   t.throws(c(undefined), err, 'throws err when undefined passed')

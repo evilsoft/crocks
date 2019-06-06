@@ -9,7 +9,7 @@ const Async = require('../core/types').proxy('Async')
 
 const toPromise = m => {
   if(!isSameType(Async, m)) {
-    throw new TypeError('asyncToPromise: Async or a function returning an Async required')
+    throw new TypeError('asyncToPromise: Argument must be an Async or a Function that returns an Async')
   }
 
   return m.toPromise()

@@ -30,7 +30,7 @@ function fanout(fst, snd) {
   }
 
   throw new TypeError(
-    'fanout: Arrows, Functions or Stars of the same type required for both arguments'
+    'fanout: Both arguments must be Arrows, Functions, or Stars of the same type'
   )
 }
 

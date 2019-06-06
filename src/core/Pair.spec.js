@@ -137,7 +137,7 @@ test('Pair merge', t => {
 
   const merge = bindFunc(p.merge)
 
-  const err = /Pair.merge: Binary function required/
+  const err = /Pair\.merge: Argument must be a binary Function/
   t.throws(merge(undefined), err, 'throws with undefined')
   t.throws(merge(null), err, 'throws with null')
   t.throws(merge(0), err, 'throws with falsey number')
@@ -196,10 +196,10 @@ test('Pair concat errors', t => {
   const bad = bindFunc(Pair(0, 0).concat)
   const good = bindFunc(Pair([], 'string').concat)
 
-  const noPair = /Pair.concat: Pair required/
+  const noPair = /Pair\.concat: Argument must be a Pair/
   t.throws(good([]), noPair, 'throws when Non-Pair passed')
 
-  const err = /Pair.concat: Both Pairs must contain Semigroups of the same type/
+  const err = /Pair\.concat: Both Pairs must contain Semigroups of the same type/
   t.throws(bad(Pair([], [])), err, 'throws when left Pair does not contain Semigroups')
   t.throws(good(Pair(0, 0)), err, 'throws when right Pair does not contain Semigroups')
 
@@ -210,10 +210,10 @@ test('Pair concat fantasy-land errors', t => {
   const bad = bindFunc(Pair(0, 0)[fl.concat])
   const good = bindFunc(Pair([], 'string')[fl.concat])
 
-  const noPair = /Pair.fantasy-land\/concat: Pair required/
+  const noPair = /Pair\.fantasy-land\/concat: Argument must be a Pair/
   t.throws(good([]), noPair, 'throws when Non-Pair passed')
 
-  const err = /Pair.fantasy-land\/concat: Both Pairs must contain Semigroups of the same type/
+  const err = /Pair\.fantasy-land\/concat: Both Pairs must contain Semigroups of the same type/
   t.throws(bad(Pair([], [])), err, 'throws when left Pair does not contain Semigroups')
   t.throws(good(Pair(0, 0)), err, 'throws when right Pair does not contain Semigroups')
 
@@ -252,7 +252,7 @@ test('Pair concat properties (Semigroup)', t => {
 test('Pair swap', t => {
   const fn = bindFunc(Pair(0, 0).swap)
 
-  const err = /Pair.swap: Requires both left and right functions/
+  const err = /Pair\.swap: Both arguments must be Functions/
   t.throws(fn(null, unit), err, 'throws with null in left')
   t.throws(fn(undefined, unit), err, 'throws with undefined in left')
   t.throws(fn(0, unit), err, 'throws with falsey number in left')
@@ -285,7 +285,7 @@ test('Pair swap', t => {
 test('Pair map errors', t => {
   const map = bindFunc(Pair(0, 'gibbles').map)
 
-  const err = /Pair.map: Function required/
+  const err = /Pair\.map: Argument must be a Function/
   t.throws(map(undefined), err, 'throws with undefined')
   t.throws(map(null), err, 'throws with null')
   t.throws(map(0), err, 'throws with falsey number')
@@ -305,7 +305,7 @@ test('Pair map errors', t => {
 test('Pair map fantasy-land errors', t => {
   const map = bindFunc(Pair(0, 'gibbles')[fl.map])
 
-  const err = /Pair.fantasy-land\/map: Function required/
+  const err = /Pair\.fantasy-land\/map: Argument must be a Function/
   t.throws(map(undefined), err, 'throws with undefined')
   t.throws(map(null), err, 'throws with null')
   t.throws(map(0), err, 'throws with falsey number')
@@ -356,7 +356,7 @@ test('Pair map properties (Functor)', t => {
 test('Pair bimap errors', t => {
   const bimap = bindFunc(Pair(0, 'gibbles').bimap)
 
-  const err = /Pair.bimap: Function required for both arguments/
+  const err = /Pair\.bimap: Both arguments must be Functions/
   t.throws(bimap(undefined, unit), err, 'throws with undefined in first argument')
   t.throws(bimap(null, unit), err, 'throws with null in first argument')
   t.throws(bimap(0, unit), err, 'throws with falsey number in first argument')
@@ -387,7 +387,7 @@ test('Pair bimap errors', t => {
 test('Pair bimap fantasy-land errors', t => {
   const bimap = bindFunc(Pair(0, 'gibbles')[fl.bimap])
 
-  const err = /Pair.fantasy-land\/bimap: Function required for both arguments/
+  const err = /Pair\.fantasy-land\/bimap: Both arguments must be Functions/
   t.throws(bimap(undefined, unit), err, 'throws with undefined in first argument')
   t.throws(bimap(null, unit), err, 'throws with null in first argument')
   t.throws(bimap(0, unit), err, 'throws with falsey number in first argument')
@@ -456,7 +456,7 @@ test('Pair ap errors', t => {
 
   const ap = bindFunc((l, r) => l.ap(r))
 
-  const err = /Pair.ap: Pair required/
+  const err = /Pair\.ap: Argument must be a Pair/
   t.throws(ap(Pair([], unit), undefined), err, 'throws with undefined')
   t.throws(ap(Pair([], unit), null), err, 'throws with null')
   t.throws(ap(Pair([], unit), 0), err, 'throws with falsey number')
@@ -469,7 +469,7 @@ test('Pair ap errors', t => {
   t.throws(ap(Pair([], unit), {}), err, 'throws with an object')
   t.throws(ap(Pair([], unit), m), err, 'throws when non-Pair')
 
-  const noSemi = /Pair.ap: Semigroups of the same type is required for first values/
+  const noSemi = /Pair\.ap: First values must be Semigroups of the same type/
   t.throws(ap(Pair(undefined, unit), Pair([], true)), noSemi, 'throws if wrapped first value is undefined')
   t.throws(ap(Pair(null, unit), Pair([], true)), noSemi, 'throws if wrapped first value is null')
   t.throws(ap(Pair(0, unit), Pair([], true)), noSemi, 'throws if wrapped first value is a falsey number')
@@ -487,7 +487,7 @@ test('Pair ap errors', t => {
   t.throws(ap(Pair([], unit), Pair(true, 0)), noSemi, 'throws when first of passed value is true')
   t.throws(ap(Pair([], unit), Pair({}, 0)), noSemi, 'throws when first of passed value is an object')
 
-  const noFunc = /Pair.ap: Function required for second value/
+  const noFunc = /Pair\.ap: Second value must be a Function/
   t.throws(ap(Pair([], undefined), Pair([], 0)), noFunc, 'throws when second wrapped value is undefined')
   t.throws(ap(Pair([], null), Pair([], 0)), noFunc, 'throws when second wrapped value is null')
   t.throws(ap(Pair([], 0), Pair([], 0)), noFunc, 'throws when second wrapped value is a falsey number')
@@ -532,14 +532,14 @@ test('Pair chain errors', t => {
   const badFn = () => Pair(0, 0)
   const fn = () => Pair([], 0)
 
-  const noSemi = /Pair.chain: Semigroups of the same type required for first values/
+  const noSemi = /Pair\.chain: First values must be Semigroups of the same type/
   t.throws(badChain(unit), noSemi, 'throws if wrapped first value is not a Semigroup')
   t.throws(chain(badFn), noSemi, 'throws if monadic function returns a Pair with a non-Semigroup as first value')
 
-  const noPair = /Pair.chain: Function must return a Pair/
+  const noPair = /Pair\.chain: Function must return a Pair/
   t.throws(chain(unit), noPair, 'throws with non-Pair returning function')
 
-  const err = /Pair.chain: Function required/
+  const err = /Pair\.chain: Argument must be a Function/
   t.throws(chain(undefined), err, 'throws with undefined')
   t.throws(chain(null), err, 'throws with null')
   t.throws(chain(0), err, 'throws with falsey number')
@@ -563,14 +563,14 @@ test('Pair chain fantasy-land errors', t => {
   const badFn = () => Pair(0, 0)
   const fn = () => Pair([], 0)
 
-  const noSemi = /Pair.fantasy-land\/chain: Semigroups of the same type required for first values/
+  const noSemi = /Pair\.fantasy-land\/chain: First values must be Semigroups of the same type/
   t.throws(badChain(unit), noSemi, 'throws if wrapped first value is not a Semigroup')
   t.throws(chain(badFn), noSemi, 'throws if monadic function returns a Pair with a non-Semigroup as first value')
 
-  const noPair = /Pair.fantasy-land\/chain: Function must return a Pair/
+  const noPair = /Pair\.fantasy-land\/chain: Function must return a Pair/
   t.throws(chain(unit), noPair, 'throws with non-Pair returning function')
 
-  const err = /Pair.fantasy-land\/chain: Function required/
+  const err = /Pair\.fantasy-land\/chain: Argument must be a Function/
   t.throws(chain(undefined), err, 'throws with undefined')
   t.throws(chain(null), err, 'throws with null')
   t.throws(chain(0), err, 'throws with falsey number')
@@ -609,19 +609,19 @@ test('Pair sequence errors', t => {
   const seq = bindFunc(Pair([], MockCrock({ something: true })).sequence)
   const seqBad = bindFunc(Pair([], '').sequence)
 
-  const noFunc = /Pair.sequence: Applicative TypeRep or Apply returning function required/
-  t.throws(seq(undefined), noFunc, 'throws with undefined')
-  t.throws(seq(null), noFunc, 'throws with null')
-  t.throws(seq(0), noFunc, 'throws falsey with number')
-  t.throws(seq(1), noFunc, 'throws truthy with number')
-  t.throws(seq(''), noFunc, 'throws falsey with string')
-  t.throws(seq('string'), noFunc, 'throws with truthy string')
-  t.throws(seq(false), noFunc, 'throws with false')
-  t.throws(seq(true), noFunc, 'throws with true')
-  t.throws(seq([]), noFunc, 'throws with an array')
-  t.throws(seq({}), noFunc, 'throws with an object')
+  const err = /Pair\.sequence: Argument must be an Applicative TypeRep or a Function that returns an Apply/
+  t.throws(seq(undefined), err, 'throws with undefined')
+  t.throws(seq(null), err, 'throws with null')
+  t.throws(seq(0), err, 'throws falsey with number')
+  t.throws(seq(1), err, 'throws truthy with number')
+  t.throws(seq(''), err, 'throws falsey with string')
+  t.throws(seq('string'), err, 'throws with truthy string')
+  t.throws(seq(false), err, 'throws with false')
+  t.throws(seq(true), err, 'throws with true')
+  t.throws(seq([]), err, 'throws with an array')
+  t.throws(seq({}), err, 'throws with an object')
 
-  const noAp = /Pair.sequence: Must wrap an Apply in the second/
+  const noAp = /Pair\.sequence: Must wrap an Apply in the second/
   t.throws(seqBad(unit), noAp, 'wrapping non-Apply throws')
 
   t.end()
@@ -667,7 +667,7 @@ test('Pair sequence with Applicative TypeRep', t => {
 test('Pair traverse errors', t => {
   const traverse = bindFunc(Pair([], 0).traverse)
 
-  const err = /Pair.traverse: Applicative TypeRep or Apply returning function required for first argument/
+  const err = /Pair\.traverse: First argument must be an Applicative TypeRep or a Function that returns an Apply/
   t.throws(traverse(undefined, MockCrock), err, 'throws with undefined in first argument')
   t.throws(traverse(null, MockCrock), err, 'throws with null in first argument')
   t.throws(traverse(0, MockCrock), err, 'throws falsey with number in first argument')
@@ -679,7 +679,7 @@ test('Pair traverse errors', t => {
   t.throws(traverse([], MockCrock), err, 'throws with an array in first argument')
   t.throws(traverse({}, MockCrock), err, 'throws with an object in first argument')
 
-  const last = /Pair.traverse: Apply returning function required for second argument/
+  const last = /Pair\.traverse: Second argument must be a Function that returns an Apply/
   t.throws(traverse(MockCrock, undefined), last, 'throws with undefined in second argument')
   t.throws(traverse(MockCrock, null), last, 'throws with null in second argument')
   t.throws(traverse(MockCrock, 0), last, 'throws falsey with number in second argument')
@@ -691,7 +691,7 @@ test('Pair traverse errors', t => {
   t.throws(traverse(MockCrock, []), last, 'throws with an array in second argument')
   t.throws(traverse(MockCrock, {}), last, 'throws with an object in second argument')
 
-  const noAp = /Pair.traverse: Both functions must return an Apply of the same type/
+  const noAp = /Pair\.traverse: Both functions must return an Apply of the same type/
   t.throws(traverse(unit, unit), noAp, 'throws when first function does not return an Applicative')
 
   t.end()
@@ -743,7 +743,7 @@ test('Pair traverse with Applicative TypeRep', t => {
 test('Pair extend errors', t => {
   const extend = bindFunc(Pair(0, 'gibbles').extend)
 
-  const err = /Pair.extend: Function required/
+  const err = /Pair\.extend: Argument must be a Function/
   t.throws(extend(undefined), err, 'throws with undefined')
   t.throws(extend(null), err, 'throws with null')
   t.throws(extend(0), err, 'throws with falsey number')
@@ -762,7 +762,7 @@ test('Pair extend errors', t => {
 test('Pair extend fantasy-land errors', t => {
   const extend = bindFunc(Pair(0, 'gibbles')[fl.extend])
 
-  const err = /Pair.fantasy-land\/extend: Function required/
+  const err = /Pair.fantasy-land\/extend: Argument must be a Function/
   t.throws(extend(undefined), err, 'throws with undefined')
   t.throws(extend(null), err, 'throws with null')
   t.throws(extend(0), err, 'throws with falsey number')

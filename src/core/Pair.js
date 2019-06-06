@@ -36,7 +36,7 @@ function Pair(l, r) {
 
   function merge(fn) {
     if(!isFunction(fn)) {
-      throw new TypeError('Pair.merge: Binary function required')
+      throw new TypeError('Pair.merge: Argument must be a binary Function')
     }
 
     return fn(fst(), snd())
@@ -51,7 +51,7 @@ function Pair(l, r) {
   function concat(method) {
     return function(m) {
       if(!isSameType(Pair, m)) {
-        throw new TypeError(`Pair.${method}: Pair required`)
+        throw new TypeError(`Pair.${method}: Argument must be a Pair`)
       }
 
       const lf = fst()
@@ -76,7 +76,7 @@ function Pair(l, r) {
 
   function swap(f, g) {
     if(!isFunction(f) || !isFunction(g)) {
-      throw new TypeError('Pair.swap: Requires both left and right functions')
+      throw new TypeError('Pair.swap: Both arguments must be Functions')
     }
 
     return Pair(g(r), f(l))
@@ -85,7 +85,7 @@ function Pair(l, r) {
   function map(method) {
     return function(fn) {
       if(!isFunction(fn)) {
-        throw new TypeError(`Pair.${method}: Function required`)
+        throw new TypeError(`Pair.${method}: Argument must be a Function`)
       }
 
       return Pair(l, fn(r))
@@ -95,7 +95,7 @@ function Pair(l, r) {
   function bimap(method) {
     return function(f, g) {
       if(!isFunction(f) || !isFunction(g)) {
-        throw new TypeError(`Pair.${method}: Function required for both arguments`)
+        throw new TypeError(`Pair.${method}: Both arguments must be Functions`)
       }
 
       return Pair(f(l), g(r))
@@ -104,20 +104,20 @@ function Pair(l, r) {
 
   function ap(m) {
     if(!isSameType(Pair, m)) {
-      throw new TypeError('Pair.ap: Pair required')
+      throw new TypeError('Pair.ap: Argument must be a Pair')
     }
 
     const fn = snd()
 
     if(!isFunction(fn)) {
-      throw new TypeError('Pair.ap: Function required for second value')
+      throw new TypeError('Pair.ap: Second value must be a Function')
     }
 
     const l = fst()
     const r = m.fst()
 
     if(!(isSemigroup(l) && isSameType(l, r))) {
-      throw new TypeError('Pair.ap: Semigroups of the same type is required for first values')
+      throw new TypeError('Pair.ap: First values must be Semigroups of the same type')
     }
 
     return Pair(l.concat(r), fn(m.snd()))
@@ -128,11 +128,11 @@ function Pair(l, r) {
       const l = fst()
 
       if(!isFunction(fn)) {
-        throw new TypeError(`Pair.${method}: Function required`)
+        throw new TypeError(`Pair.${method}: Argument must be a Function`)
       }
 
       if(!isSemigroup(l)) {
-        throw new TypeError(`Pair.${method}: Semigroups of the same type required for first values`)
+        throw new TypeError(`Pair.${method}: First values must be Semigroups of the same type`)
       }
 
       const m = fn(snd())
@@ -144,7 +144,7 @@ function Pair(l, r) {
       const r = m.fst()
 
       if(!isSameType(l, r)) {
-        throw new TypeError(`Pair.${method}: Semigroups of the same type required for first values`)
+        throw new TypeError(`Pair.${method}: First values must be Semigroups of the same type`)
       }
 
       return Pair(
@@ -157,7 +157,7 @@ function Pair(l, r) {
   function sequence(f) {
     if(!(isApplicative(f) || isFunction(f))) {
       throw new TypeError(
-        'Pair.sequence: Applicative TypeRep or Apply returning function required'
+        'Pair.sequence: Argument must be an Applicative TypeRep or a Function that returns an Apply'
       )
     }
 
@@ -173,13 +173,13 @@ function Pair(l, r) {
   function traverse(f, fn) {
     if(!(isApplicative(f) || isFunction(f))) {
       throw new TypeError(
-        'Pair.traverse: Applicative TypeRep or Apply returning function required for first argument'
+        'Pair.traverse: First argument must be an Applicative TypeRep or a Function that returns an Apply'
       )
     }
 
     if(!isFunction(fn)) {
       throw new TypeError(
-        'Pair.traverse: Apply returning function required for second argument'
+        'Pair.traverse: Second argument must be a Function that returns an Apply'
       )
     }
 
@@ -197,7 +197,7 @@ function Pair(l, r) {
   function extend(method) {
     return function(fn) {
       if(!isFunction(fn)) {
-        throw new TypeError(`Pair.${method}: Function required`)
+        throw new TypeError(`Pair.${method}: Argument must be a Function`)
       }
 
       return Pair(l, fn(Pair(l, r)))

@@ -13,7 +13,7 @@ const toPairs = require('./toPairs')
 test('toPairs', t => {
   const fn = bindFunc(toPairs)
 
-  const err = /toPairs: Object required for argument/
+  const err = /toPairs: Argument must be an Object/
   t.throws(fn(undefined), err, 'throws when argument is undefined')
   t.throws(fn(null), err, 'throws when argument is null')
   t.throws(fn(0), err, 'throws when argument is a falsey number')

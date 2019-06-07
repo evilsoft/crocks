@@ -6,15 +6,15 @@ const isFunction = require('../core/isFunction')
 const isNumber = require('../core/isNumber')
 const unit = require('../core/_unit')
 
-const propPathSatisfies = require('./propPathSatisfies')
+const pathSatisfies = require('./pathSatisfies')
 
 const T =
   () => true
 
-test('propPathSatisfies function', t => {
-  const fn = propPathSatisfies([ 'a' ], T)
+test('pathSatisfies function', t => {
+  const fn = pathSatisfies([ 'a' ], T)
 
-  t.ok(isFunction(propPathSatisfies), 'is a function')
+  t.ok(isFunction(pathSatisfies), 'is a function')
 
   t.equals(fn(null), false, 'returns false when target is null')
   t.equals(fn(NaN), false, 'returns false when target is NaN')
@@ -23,12 +23,12 @@ test('propPathSatisfies function', t => {
   t.end()
 })
 
-test('propPathSatisfies errors', t => {
+test('pathSatisfies errors', t => {
   const firstArg = bindFunc(
-    x => propPathSatisfies(x, T, 'target')
+    x => pathSatisfies(x, T, 'target')
   )
 
-  const err = /propPathSatisfies: First argumnet must be an Array of Non-empty Strings or Integers/
+  const err = /pathSatisfies: First argumnet must be an Array of Non-empty Strings or Integers/
   t.throws(firstArg(undefined), err, 'throws with undefined as first argument')
   t.throws(firstArg(null), err, 'throws with null as first argument')
   t.throws(firstArg(NaN), err, 'throws with NaN as first argument')
@@ -53,10 +53,10 @@ test('propPathSatisfies errors', t => {
   t.throws(firstArg([ unit ]), err, 'throws with Function in first argument array')
 
   const secondArg = bindFunc(
-    x => propPathSatisfies([ 'a' ], x, 'target')
+    x => pathSatisfies([ 'a' ], x, 'target')
   )
 
-  const predErr = /propPathSatisfies: Second argumnet must be a Pred or predicate function/
+  const predErr = /pathSatisfies: Second argumnet must be a Pred or predicate function/
   t.throws(secondArg(undefined), predErr, 'throws with undefined as second argument')
   t.throws(secondArg(null), predErr, 'throws with null as second argument')
   t.throws(secondArg(NaN), predErr, 'throws with NaN as second argument')
@@ -72,8 +72,8 @@ test('propPathSatisfies errors', t => {
   t.end()
 })
 
-test('propPathSatisfies object traversal', t => {
-  const fn = propPathSatisfies([ 'a', 'b' ], isNumber)
+test('pathSatisfies object traversal', t => {
+  const fn = pathSatisfies([ 'a', 'b' ], isNumber)
 
   t.equals(fn({ a: { b: 23 } }), true, 'returns true when function predicate matches')
   t.equals(fn({ a: { b: '33' } }), false, 'returns false when function predicate does not match')
@@ -83,7 +83,7 @@ test('propPathSatisfies object traversal', t => {
   t.equals(fn({ a: { c: 'not' } }), false, 'returns false when key does not exist with predicate function')
   t.equals(fn({ b: 23 }), false, 'returns false on shallow path with predicate function')
 
-  const pred = propPathSatisfies([ 'a', 'b' ], Pred(isNumber))
+  const pred = pathSatisfies([ 'a', 'b' ], Pred(isNumber))
 
   t.equals(pred({ a: { b: 23 } }), true, 'returns true when Pred matches')
   t.equals(pred({ a: { b: '33' } }), false, 'returns false when Pred does not match')
@@ -96,8 +96,8 @@ test('propPathSatisfies object traversal', t => {
   t.end()
 })
 
-test('propPathSatisfies array traversal', t => {
-  const fn = propPathSatisfies([ 1, 1 ], isNumber)
+test('pathSatisfies array traversal', t => {
+  const fn = pathSatisfies([ 1, 1 ], isNumber)
 
   t.equals(fn([ 34, [ 99, 44 ] ]), true, 'returns true when function predicate matches')
   t.equals(fn([ 'three', [ 'one', 'two' ] ]), false, 'returns false when function predicate does not match')
@@ -107,7 +107,7 @@ test('propPathSatisfies array traversal', t => {
   t.equals(fn([ 75, undefined ]), false, 'returns false when undefined encountered with predicate function')
   t.equals(fn([ 75 ]), false, 'returns false on shallow path with predicate function')
 
-  const pred = propPathSatisfies([ 1, 1 ], Pred(isNumber))
+  const pred = pathSatisfies([ 1, 1 ], Pred(isNumber))
 
   t.equals(pred([ 34, [ 99, 44 ] ]), true, 'returns true when Pred matches')
   t.equals(pred([ 'three', [ 'one', 'two' ] ]), false, 'returns false when Pred does not match')

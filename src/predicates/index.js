@@ -41,6 +41,7 @@ module.exports = {
   isTrue: require('./isTrue'),
   isTruthy: require('./isTruthy'),
   pathEq: require('./pathEq'),
+  pathSatisfies: require('./pathSatisfies'),
   propEq: require('./propEq'),
   propPathEq: require('./propPathEq'),
   propSatisfies: require('./propSatisfies'),

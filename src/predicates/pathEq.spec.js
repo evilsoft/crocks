@@ -5,13 +5,13 @@ const unit = require('../core/_unit')
 
 const bindFunc = helpers.bindFunc
 
-const propPathEq = require('./propPathEq')
+const pathEq = require('./pathEq')
 
-test('propPathEq function', t => {
-  const fn = propPathEq([ 'a' ])
-  const empty = propPathEq([])
+test('pathEq function', t => {
+  const fn = pathEq([ 'a' ])
+  const empty = pathEq([])
 
-  t.ok(isFunction(propPathEq), 'is a function')
+  t.ok(isFunction(pathEq), 'is a function')
 
   t.equals(fn(undefined, undefined), false, 'returns false with undefined as third argument')
   t.equals(fn(null, null), false, 'returns false with null as third argument')
@@ -24,10 +24,10 @@ test('propPathEq function', t => {
   t.end()
 })
 
-test('propPathEq errors', t => {
-  const fn = bindFunc(x => propPathEq(x, null, {}))
+test('pathEq errors', t => {
+  const fn = bindFunc(x => pathEq(x, null, {}))
 
-  const err = /propPathEq: First argument must be an Array of Non-empty Strings or Integers/
+  const err = /pathEq: First argument must be an Array of Non-empty Strings or Integers/
   t.throws(fn(undefined), err, 'throws with undefined in first argument')
   t.throws(fn(null), err, 'throws with null in first argument')
   t.throws(fn(0), err, 'throws with falsey number in first argument')
@@ -53,9 +53,9 @@ test('propPathEq errors', t => {
   t.end()
 })
 
-test('propPathEq object traversal', t => {
-  const fn = propPathEq([ 'a', 'b' ])
-  const empty = propPathEq([])
+test('pathEq object traversal', t => {
+  const fn = pathEq([ 'a', 'b' ])
+  const empty = pathEq([])
 
   t.equals(fn('', { a: { b: '' } }), true, 'returns true when keypath found and values are equal')
   t.equals(fn(null, { a: { b: null } }), true, 'returns true when comparing to null values that are present')
@@ -75,9 +75,9 @@ test('propPathEq object traversal', t => {
   t.end()
 })
 
-test('propPathEq array traversal', t => {
-  const fn = propPathEq([ 1, '0' ])
-  const empty = propPathEq([])
+test('pathEq array traversal', t => {
+  const fn = pathEq([ 1, '0' ])
+  const empty = pathEq([])
 
   t.equals(fn('', [ false, [ '' ] ]), true, 'returns true when keypath found and values are equal')
   t.equals(fn(null, [ '', [ null ] ]), true, 'returns true when comparing to null values that are present')
@@ -96,10 +96,10 @@ test('propPathEq array traversal', t => {
   t.end()
 })
 
-test('propPathEq mixed traversal', t => {
+test('pathEq mixed traversal', t => {
   const value = 'bubbles'
 
-  const fn = propPathEq([ 'a', 1 ], value)
+  const fn = pathEq([ 'a', 1 ], value)
 
   t.equals(fn({ a: [ 0, value ] }), true, 'returns false when found with mixed path and values are equal')
   t.equals(fn({ a: [ value, 42 ] }), false, 'returns false when found with mixed path and values are not equal')

@@ -40,6 +40,7 @@ module.exports = {
   isTraversable: require('./isTraversable'),
   isTrue: require('./isTrue'),
   isTruthy: require('./isTruthy'),
+  pathEq: require('./pathEq'),
   propEq: require('./propEq'),
   propPathEq: require('./propPathEq'),
   propSatisfies: require('./propSatisfies'),

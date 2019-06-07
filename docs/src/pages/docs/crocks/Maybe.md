@@ -2,7 +2,7 @@
 title: "Maybe"
 description: "Maybe Crock"
 layout: "guide"
-functions: ["find", "getprop", "prop", "proppath", "safe", "safeafter", "safelift", "eithertomaybe", "firsttomaybe", "lasttomaybe", "resulttomaybe"]
+functions: ["find", "getpath", "getprop", "prop", "proppath", "safe", "safeafter", "safelift", "eithertomaybe", "firsttomaybe", "lasttomaybe", "resulttomaybe"]
 weight: 90
 ---
 
@@ -803,7 +803,7 @@ Maybe a ~> ((() -> b), (a -> b))) -> Maybe b
 
 When one would like to [`option`](#option) a `Maybe` but would like to remain
 within a `Maybe` type, `coalesce` can be used. `coalesce` expects two functions
-for it's inputs.
+for its inputs.
 
 The first function is used when invoked on a `Nothing` and will return a `Just`
 instance wrapping the result of the function. The second function is used when
@@ -990,6 +990,65 @@ find(isEven, [ 1, 2, 3, 4, 5 ])
 //=> Just 2
 ```
 
+#### getPath
+
+`crocks/Maybe/getPath`
+
+```haskell
+getPath :: [ (String | Integer) ] -> a -> Maybe b
+```
+
+While [`getProp`](#getprop) is good for simple, single-level structures, there
+may come a time when you have to work with nested POJOs or Arrays. When you run
+into this situation, just pull in `getPath` (formally known as `propPath`) and
+pass it a left-to-right traversal path of keys, indices or a combination of
+both. This will kick you back a function that behaves just
+like [`getProp`](#getprop). You pass it some data, and it will attempt to
+resolve your provided path. If the path is valid, it will return the value
+residing there (`null` and `NaN` included!) in a `Just`. But, if at any point,
+that path "breaks", it will give you back a `Nothing`.
+
+```javascript
+import composeK from 'crocks/helpers/composeK'
+import isString from 'crocks/predicates/isString'
+import getPath from 'crocks/Maybe/getPath'
+import safe from 'crocks/Maybe/safe'
+
+// getFirstValue :: a -> Maybe b
+const getFirstValue =
+  getPath([ 'value', 0 ])
+
+// getStringFirst :: a -> Maybe String
+const getStringFirst = composeK(
+  safe(isString),
+  getFirstValue
+)
+
+getFirstValue({ value: [] })
+//=> Nothing
+
+getFirstValue({ value: 84 })
+//=> Nothing
+
+getFirstValue(undefined)
+//=> Nothing
+
+getFirstValue({ value: [ 'a', 'b' ] })
+//=> Just "a"
+
+getStringFirst(false)
+//=> Nothing
+
+getStringFirst({ towel: true })
+//=> Nothing
+
+getStringFirst({ value: [ 0, 54 ] })
+//=> Nothing
+
+getStringFirst({ value: [ 'nice', 'jobb' ] })
+//=> Just "nice"
+```
+
 #### getProp
 
 `crocks/Maybe/getProp`
@@ -1044,64 +1103,6 @@ getFirstValue(null)
 
 getFirstValue({ value: [ 'a', 'b' ] })
 //=> Just "a"
-```
-
-#### propPath
-
-`crocks/Maybe/propPath`
-
-```haskell
-propPath :: Foldable f => f (String | Integer) -> a -> Maybe b
-```
-
-While [`getProp`](#getprop) is good for simple, single-level structures, there may
-come a time when you have to work with nested POJOs or Arrays. When you run into
-this situation, just pull in `propPath` and pass it a left-to-right traversal
-path of keys, indices or a combination of both (gross...but possible). This will
-kick you back a function that behaves just like [`getProp`](#getprop). You pass it
-some data, and it will attempt to resolve your provided path. If the path is
-valid, it will return the value residing there (`null` and `NaN` included!) in
-a `Just`. But if at any point that path "breaks" it will give you back a `Nothing`.
-
-```javascript
-import composeK from 'crocks/helpers/composeK'
-import isString from 'crocks/predicates/isString'
-import propPath from 'crocks/Maybe/propPath'
-import safe from 'crocks/Maybe/safe'
-
-// getFirstValue :: a -> Maybe b
-const getFirstValue =
-  propPath([ 'value', 0 ])
-
-// getStringFirst :: a -> Maybe String
-const getStringFirst = composeK(
-  safe(isString),
-  getFirstValue
-)
-
-getFirstValue({ value: [] })
-//=> Nothing
-
-getFirstValue({ value: 84 })
-//=> Nothing
-
-getFirstValue(undefined)
-//=> Nothing
-
-getFirstValue({ value: [ 'a', 'b' ] })
-//=> Just "a"
-
-getStringFirst(false)
-//=> Nothing
-
-getStringFirst({ towel: true })
-//=> Nothing
-
-getStringFirst({ value: [ 0, 54 ] })
-//=> Nothing
-
-getStringFirst({ value: [ 'nice', 'jobb' ] })
-//=> Just "nice"
 ```
 
 #### safe

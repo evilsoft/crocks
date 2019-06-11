@@ -25,6 +25,14 @@ const applyTo =
 const constant = x => () => x
 const identity = x => x
 
+const testCircularReference = (t, fn) => {
+  const objectWithCircularReference = {}
+  const ref = { objectWithCircularReference }
+  objectWithCircularReference.ref = ref
+
+  t.doesNotThrow(() => fn(objectWithCircularReference), 'does not throw when called with an object containing a circular reference')
+}
+
 const Either = require('.')
 
 test('Either', t => {
@@ -94,6 +102,8 @@ test('Either.Left', t => {
 
   t.equal(l.either(identity, constant('right')), 'value', 'creates an Either.Left')
 
+  testCircularReference(t, Either.Left)
+
   t.end()
 })
 
@@ -101,6 +111,8 @@ test('Either.Right', t => {
   const r = Either.Right('value')
 
   t.equal(r.either(constant('left'), identity), 'value', 'creates an Either.Right')
+
+  testCircularReference(t, Either.Right)
 
   t.end()
 })
@@ -844,6 +856,7 @@ test('Either of', t => {
   t.equal(Either.of, Either(0).of, 'Either.of is the same as the instance version')
   t.equal(Either.of(0).type(), 'Either', 'returns an Either')
   t.equal(Either.of(0).either(constant('left'), identity), 0, 'wraps the value into an Either.Right')
+  testCircularReference(t, Either.of)
 
   t.end()
 })

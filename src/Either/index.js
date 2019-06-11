@@ -63,12 +63,11 @@ function Either(u) {
   const of =
     _of
 
-  const inspect = constant(
+  const inspect = () =>
     either(
       l => `Left${_inspect(l)}`,
       r => `Right${_inspect(r)}`
     )
-  )
 
   function either(f, g) {
     if(!isFunction(f) || !isFunction(g)) {

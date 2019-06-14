@@ -11,7 +11,7 @@ const isString = require('../core/isString')
 const predOrFunc = require('../core/predOrFunc')
 
 const err = name =>
-  `${name}: First argumnet must be an Array of Non-empty Strings or Integers`
+  `${name}: First argument must be an Array of non-empty Strings or Integers`
 
 function fn(name) {
   // pathSatisfies: [ (String | Integer) ] -> (a -> Boolean) -> b -> Boolean
@@ -23,7 +23,7 @@ function fn(name) {
 
     if(!isPredOrFunc(pred)) {
       throw new TypeError(
-        `${name}: Second argumnet must be a Pred or predicate function`
+        `${name}: Second argument must be a Pred or predicate Function`
       )
     }
 

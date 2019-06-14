@@ -28,7 +28,7 @@ test('pathSatisfies errors', t => {
     x => pathSatisfies(x, T, 'target')
   )
 
-  const err = /pathSatisfies: First argumnet must be an Array of Non-empty Strings or Integers/
+  const err = /pathSatisfies: First argument must be an Array of non-empty Strings or Integers/
   t.throws(firstArg(undefined), err, 'throws with undefined as first argument')
   t.throws(firstArg(null), err, 'throws with null as first argument')
   t.throws(firstArg(NaN), err, 'throws with NaN as first argument')
@@ -56,7 +56,7 @@ test('pathSatisfies errors', t => {
     x => pathSatisfies([ 'a' ], x, 'target')
   )
 
-  const predErr = /pathSatisfies: Second argumnet must be a Pred or predicate function/
+  const predErr = /pathSatisfies: Second argument must be a Pred or predicate Function/
   t.throws(secondArg(undefined), predErr, 'throws with undefined as second argument')
   t.throws(secondArg(null), predErr, 'throws with null as second argument')
   t.throws(secondArg(NaN), predErr, 'throws with NaN as second argument')

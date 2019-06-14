@@ -27,7 +27,7 @@ test('pathEq function', t => {
 test('pathEq errors', t => {
   const fn = bindFunc(x => pathEq(x, null, {}))
 
-  const err = /pathEq: First argument must be an Array of Non-empty Strings or Integers/
+  const err = /pathEq: First argument must be an Array of non-empty Strings or Integers/
   t.throws(fn(undefined), err, 'throws with undefined in first argument')
   t.throws(fn(null), err, 'throws with null in first argument')
   t.throws(fn(0), err, 'throws with falsey number in first argument')

@@ -12,7 +12,7 @@ const isNil = require('../core/isNil')
 const isString = require('../core/isString')
 
 const err = name =>
-  `${name}: First argument must be an Array of Non-empty Strings or Integers`
+  `${name}: First argument must be an Array of non-empty Strings or Integers`
 
 function fn(name) {
   // pathEq :: [ String | Number ] -> a -> Object -> Boolean

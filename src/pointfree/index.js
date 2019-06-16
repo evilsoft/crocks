@@ -18,6 +18,8 @@ module.exports = {
   fold: require('./fold'),
   foldMap: require('./foldMap'),
   head: require('./head'),
+  init: require('./init'),
+  last: require('./last'),
   map: require('./map'),
   merge: require('./merge'),
   option: require('./option'),

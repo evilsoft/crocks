@@ -384,7 +384,7 @@ import constant from 'crocks/combinators/constant'
 import isEmpty from 'crocks/predicates/isEmpty'
 import not from 'crocks/logic/not'
 import propSatisfies from 'crocks/predicates/propSatisfies'
-import propPathSatisfies from 'crocks/predicates/propPathSatisfies'
+import pathSatisfies from 'crocks/predicates/pathSatisfies'
 
 or(constant(true), constant(true), 'ignored')
 //=> true
@@ -411,7 +411,7 @@ const createResponse = (users, error = '') => ({
 // hasData :: Response -> Boolean
 const hasData = or(
   propSatisfies('error', isEmpty),
-  propPathSatisfies([ 'response', 'users' ], not(isEmpty))
+  pathSatisfies([ 'response', 'users' ], not(isEmpty))
 )
 
 hasData(createResponse([ { name: 'User 1' } ]))

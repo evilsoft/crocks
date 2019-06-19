@@ -1,0 +1,1060 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta content="minimum-scale=1.0, width=device-width" name="viewport"><meta name="description" content="Result Crock"><title>Result - Crocks</title><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Roboto+Mono"><!-- inject:css --><link rel="stylesheet" href="/crocks/vendor/galano/galano.css"><link rel="stylesheet" href="/crocks/vendor/icon-12/icon-12.css"><link rel="stylesheet" href="/crocks/vendor/icon-16/icon-16.css"><link rel="stylesheet" href="/crocks/vendor/senna/senna.css"><link rel="stylesheet" href="/crocks/vendor/codemirror/lib/codemirror.css"><link rel="stylesheet" href="/crocks/vendor/codemirror/theme/blackboard.css"><!-- endinject --><!-- inject:js --><script src="/crocks/js/bundles/shared.electric.js"></script><script src="/crocks/vendor/senna/senna.js"></script><script src="/crocks/vendor/codemirror/lib/codemirror.js"></script><script src="/crocks/vendor/codemirror/mode/haskell/haskell.js"></script><script src="/crocks/vendor/codemirror/mode/javascript/javascript.js"></script><!-- endinject --><link rel="icon" href="/crocks/images/favicon.ico" type="image/x-icon"><link rel="stylesheet" href="/crocks/styles/main.css"></head><body data-senna><div data-senna-surface id="wrapper"><div class="senna-loading-bar"></div><!-- inject:metal:js --><div id="pageComponent"><div class="main"><main class="guide"><div class="docs"><nav class="topbar topbar-light topbar-docs"><div class="topbar-logo"><a class="topbar-logo-link" href="/crocks"><span class="topbar-logo-icon icon-16-loop"></span><h3 class="topbar-logo-text">Crocks</h3></a></div><nav class="topbar-menu"><button class="topbar-toggle">Menu</button><ul class="topbar-list"><li class="topbar-item"><a class="topbar-link topbar-link-selected" href="/crocks/docs/" target="undefined"><span>Documentation</span></a></li></ul></nav></nav><nav class="sidebar"><a class="sidebar-header toggler-header-collapsed"><span class="sidebar-icon icon-16-menu"></span><span>Docs Menu</span><span class="sidebar-icon-right"><span class="icon-12-arrow-down-short"></span><span class="icon-12-arrow-up-short"></span></span></a><div class="sidebar-toggler-content toggler-collapsed"><div class="sidebar-search"><div class="page-autocomplete"><div class="form-group"><div class="input-inner-addon input-inner-addon-right"><input autocomplete="off" class="form-control" name="q" placeholder="Search Docs" ref="input" required type="text" ><span class="input-inner-icon-helper icon-16-magnifier"></span></div></div></div></div><nav class=""><ul class="sidebar-list sidebar-list-1"><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/getting-started.html"><span class="sidebar-icon icon-16-arrow-right-rod"></span><span>Getting Started</span></a></li><li class="sidebar-item active"><a class="sidebar-link sidebar-link-selected" href="/crocks/docs/crocks/"><span class="sidebar-icon icon-16-code-file"></span><span>Crocks</span></a><nav class=""><ul class="sidebar-list sidebar-list-1"><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/crocks/Arrow.html"><span>Arrow</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/crocks/Async.html"><span>Async</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/crocks/Const.html"><span>Const</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/crocks/Either.html"><span>Either</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/crocks/Equiv.html"><span>Equiv</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/crocks/Identity.html"><span>Identity</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/crocks/Maybe.html"><span>Maybe</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/crocks/Pair.html"><span>Pair</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/crocks/Pred.html"><span>Pred</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/crocks/Reader.html"><span>Reader</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/crocks/ReaderT.html"><span>ReaderT</span></a></li><li class="sidebar-item active"><a class="sidebar-link sidebar-link-selected" href="/crocks/docs/crocks/Result.html"><span>Result</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/crocks/State.html"><span>State</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/crocks/Tuple.html"><span>Tuple</span></a></li></ul></nav></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/monoids/"><span class="sidebar-icon icon-16-code-file"></span><span>Monoids</span></a><nav class=""><ul class="sidebar-list sidebar-list-1"><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/monoids/All.html"><span>All</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/monoids/Any.html"><span>Any</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/monoids/Assign.html"><span>Assign</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/monoids/Endo.html"><span>Endo</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/monoids/First.html"><span>First</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/monoids/Last.html"><span>Last</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/monoids/Max.html"><span>Max</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/monoids/Min.html"><span>Min</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/monoids/Prod.html"><span>Prod</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/monoids/Sum.html"><span>Sum</span></a></li></ul></nav></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/functions/"><span class="sidebar-icon icon-16-code-file"></span><span>Functions</span></a><nav class=""><ul class="sidebar-list sidebar-list-1"><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/functions/combinators.html"><span>Combinators</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/functions/helpers.html"><span>Helpers</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/functions/logic-functions.html"><span>Logic Functions</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/functions/predicate-functions.html"><span>Predicate Functions</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/functions/pointfree-functions.html"><span>Point-free Functions</span></a></li><li class="sidebar-item"><a class="sidebar-link " href="/crocks/docs/functions/transformation-functions.html"><span>Transformation Functions</span></a></li></ul></nav></li></ul></nav></div></nav><div class="sidebar-offset"><header class="guide-header"><div class="container-hybrid"><h1 class="title">Result</h1></div></header><div class="container-hybrid"><div class="docs-guide row"><div class="docs-content col-xs-16 col-md-9"><div class="guide-content"><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">Result e a = Err e | Ok a</code></pre></div><p>Result is a Sum Type similar to that of <a href="./Either.html"><code>Either</code></a> with the added behaviour of accumulating the <a href="#err"><code>Err</code></a> when using <a href="#ap"><code>ap</code></a> or <a href="#alt"><code>alt</code></a>. With <a href="./Either.html"><code>Either</code></a> being defined as a tagged union type, it captures the essence of disjunction as it provides either a <a href="./Either.html#left"><code>Left</code></a> value or a <a href="./Either.html#right"><code>Right</code></a> value but not both. With a <code>Result</code> the left contains the error information from an operation and the right contains the result.<code>Result</code> is well suited for capturing disjunction when the cause of the &quot;error&quot; case needs to be communicated. For example, when executing a function and you exception is important or useful.</p><p>A <code>Result</code> represents disjunction by using two constructors, <a href="#err"><code>Err</code></a> and <a href="#ok"><code>Ok</code></a>. An <a href="#ok"><code>Ok</code></a> instance represents the positive result while <a href="#err"><code>Err</code></a> is considered the negative. With the exception of<a href="#coalesce"><code>coalesce</code></a>, <a href="#swap"><code>swap</code></a> and <a href="#bimap"><code>bimap</code></a>, all <code>Result</code> returning methods on an instance will be applied to an <a href="#ok"><code>Ok</code></a> returning the result. If an instance is an <a href="#err"><code>Err</code></a>, then all application is skipped and another <a href="#err"><code>Err</code></a> instance is returned with the same containing value.</p><p>It is recommended to use the available <a href="#ok"><code>Ok</code></a> and <a href="#err"><code>Err</code></a> constructors to construct <code>Result</code> instances in most cases. You can use the <code>Result</code> constructor to construct an <a href="#ok"><code>Ok</code></a>, but it will read better to just use <a href="#ok"><code>Ok</code></a>.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">import Result from &#39;crocks/Result&#39;
+
+import and from &#39;crocks/logic/and&#39;
+import bimap from &#39;crocks/pointfree/bimap&#39;
+import composeB from &#39;crocks/combinators/composeB&#39;
+import ifElse from &#39;crocks/logic/ifElse&#39;
+import isNumber from &#39;crocks/predicates/isNumber&#39;
+import liftA2 from &#39;crocks/helpers/liftA2&#39;
+
+const { Err, Ok } = Result
+
+// gte :: Number -&gt; Number -&gt; Boolean
+const gte = y =&gt; x =&gt;
+  x &gt;= y
+
+// lte :: Number -&gt; Number -&gt; Boolean
+const lte = y =&gt; x =&gt;
+  x &lt;= y
+
+// between :: (Number, Number) -&gt; Boolean
+const between = (x, y) =&gt;
+  and(gte(x), lte(y))
+
+// ensure :: (a -&gt; Boolean) -&gt; a -&gt; Result a
+const ensure = pred =&gt;
+  ifElse(pred, Ok, Err)
+
+// inRange :: Number -&gt; Result
+const inRange =
+  ensure(between(10, 15))
+
+inRange(12)
+//=&gt; Ok 12
+
+inRange(25)
+//=&gt; Err 25
+
+inRange(&#39;Test&#39;)
+//=&gt; Err &quot;Test&quot;
+
+// ensureNumber :: a -&gt; Result [a] a
+const ensureNumber = composeB(
+  bimap(x =&gt; [ x ], x =&gt; x),
+  ensure(isNumber)
+)
+
+// prod :: Number -&gt; Number -&gt; Number
+const prod = a =&gt; b =&gt;
+  a * b
+
+ensureNumber(&#39;Not a number 1&#39;)
+  .alt(ensureNumber(&#39;Not a number 2&#39;))
+//=&gt; Err [ &quot;Not a number 1&quot;, &quot;Not a number 2&quot; ]
+
+liftA2(
+  prod,
+  ensureNumber(&#39;Not 21&#39;),
+  ensureNumber(&#39;Not 2&#39;)
+)
+//=&gt; Err [ &quot;Not 21&quot;, &quot;Not 2&quot; ]
+
+liftA2(
+  prod,
+  ensureNumber(21),
+  ensureNumber(2)
+)
+//=&gt; Ok 42</code></pre></div><article id="topic-implements"><h2><a id="implements"href="#implements">Implements</a></h2><p><code>Setoid</code>, <code>Semigroup</code>, <code>Functor</code>, <code>Alt</code>, <code>Apply</code>, <code>Traversable</code>,<code>Chain</code>, <code>Applicative</code>, <code>Monad</code></p></article><article id="topic-construction"><h2><a id="construction"href="#construction">Construction</a></h2><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">Result :: a -&gt; Result e a</code></pre></div><p>Most of the time, <code>Result</code> is constructed using functions of your own making and helper functions like <a href="#trycatch"><code>tryCatch</code></a> or by employing one of the instance constructors, <a href="#ok"><code>Ok</code></a> or <a href="#err"><code>Err</code></a>. This is due to the nature of <code>Result</code> and most other Sum Types.</p><p>As a matter of consistency and completion, a <code>Result</code> instance can also be constructed using its TypeRep like any other type. The <code>Result</code> constructor is a unary function that accepts any type <code>a</code> and returns a <a href="#ok"><code>Ok</code></a> instance, wrapping the value passed to its argument.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">import Result from &#39;crocks/Result&#39;
+
+import equals from &#39;crocks/pointfree/equals&#39;
+
+const { Ok, Err, of } = Result
+
+Result(&#39;some string&#39;)
+//=&gt; Ok &quot;some string&quot;
+
+Result(null)
+//=&gt; Ok null
+
+Result(undefined)
+//=&gt; Ok undefined
+
+of(&#39;some string&#39;)
+//=&gt; Ok &quot;some string&quot;
+
+of(null)
+//=&gt; Ok null
+
+of(undefined)
+//=&gt; Ok undefined
+
+Ok(&#39;some string&#39;)
+//=&gt; Ok &quot;some string&quot;
+
+Ok(null)
+//=&gt; Ok null
+
+Ok(undefined)
+//=&gt; Ok undefined
+
+Err(&#39;some string&#39;)
+//=&gt; Err &quot;some string&quot;
+
+Err(null)
+//=&gt; Err null
+
+Err(undefined)
+//=&gt; Err undefined
+
+equals(
+  Result.Ok([ 1, 2, 3 ]),
+  Result.of([ 1, 2, 3 ])
+)
+//=&gt; true
+
+equals(
+  of({ a: 100 }),
+  Result({ a: 100 })
+)
+//=&gt; true</code></pre></div></article><article id="topic-constructor"><h2><a id="constructor-methods"href="#constructor-methods">Constructor Methods</a></h2><h4><a id="err"href="#err">Err</a></h4><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">Result.Err :: e -&gt; Result e a</code></pre></div><p>Used to construct an <a href="#err"><code>Err</code></a> instance that represents the &quot;false&quot; portion of a disjunction. When an instance is an <a href="#err"><code>Err</code></a>, most <code>Result</code> returning methods will just return a new <a href="#err"><code>Err</code></a> instance with the same containing value.</p><p>The power of the <a href="#err"><code>Err</code></a> as opposed to a <a href="./Either.html#left"><code>Left</code></a> or a <a href="./Maybe.html#nothing"><code>Nothing</code></a> is that it can hold meaningful information on why the flow is in this path. It will also accumulate this information when <a href="#ap"><code>ap</code></a> or <a href="#alt"><code>alt</code></a> are used. This works as a core tool when using Railway Orientated Programming concepts.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">import Result from &#39;crocks/Result&#39;
+
+import bimap from &#39;crocks/pointfree/bimap&#39;
+import chain from &#39;crocks/pointfree/chain&#39;
+import composeB from &#39;crocks/combinators/composeB&#39;
+import ifElse from &#39;crocks/logic/ifElse&#39;
+import isNumber from &#39;crocks/predicates/isNumber&#39;
+
+const { Ok, Err } = Result
+
+// ensure :: (a -&gt; Boolean) -&gt; a -&gt; Result a
+const ensure = pred =&gt;
+  ifElse(pred, Ok, Err)
+
+// buildError :: () -&gt; String
+const buildError = () =&gt;
+  &#39;The value given was not a valid number&#39;
+
+// add10 :: Number -&gt; Number
+const add10 =
+  x =&gt; x + 10
+
+// protectedAdd10 :: a -&gt; Result String Number
+const protectedAdd10 = composeB(
+  bimap(buildError, add10),
+  ensure(isNumber)
+)
+
+Err(undefined)
+//=&gt; Err undefined
+
+Err(null)
+//=&gt; Err null
+
+Err(23)
+  .map(add10)
+//=&gt; Err 23
+
+Ok(23)
+  .map(add10)
+//=&gt; Ok 33
+
+chain(protectedAdd10, Err(&#39;number&#39;))
+//=&gt; Err &quot;number&quot;
+
+chain(protectedAdd10, Ok(10))
+//=&gt; Ok 20</code></pre></div><h4><a id="ok"href="#ok">Ok</a></h4><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">Result.Ok :: a -&gt; Result e a</code></pre></div><p>Used to construct an <a href="#ok"><code>Ok</code></a> instance that represents the &quot;true&quot; portion of a disjunction or a valid value. <a href="#ok"><code>Ok</code></a> will wrap any given value in an<a href="#ok"><code>Ok</code></a>, signaling the validity of the wrapped value.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">import Result from &#39;crocks/Result&#39;
+
+import bimap from &#39;crocks/pointfree/bimap&#39;
+import composeB from &#39;crocks/combinators/composeB&#39;
+import identity from &#39;crocks/combinators/identity&#39;
+import ifElse from &#39;crocks/logic/ifElse&#39;
+import isString from &#39;crocks/predicates/isString&#39;
+import map from &#39;crocks/pointfree/map&#39;
+
+const { Ok, Err } = Result
+
+// ensure :: (a -&gt; Boolean) -&gt; a -&gt; Result a
+const ensure = pred =&gt;
+  ifElse(pred, Ok, Err)
+
+// buildError :: () -&gt; String
+const buildError = () =&gt;
+  &#39;The value given is not a valid string&#39;
+
+// ensureString :: a -&gt; Result String Number
+const ensureString = composeB(
+  bimap(buildError, identity),
+  ensure(isString)
+)
+
+// toUpper :: String -&gt; String
+const toUpper =
+  x =&gt; x.toUpperCase()
+
+Ok(32)
+//=&gt; Ok 32
+
+Ok(undefined)
+//=&gt; Ok undefined
+
+Ok(null)
+//=&gt; Ok null
+
+// safeShout :: a -&gt; Result String
+const safeShout = composeB(
+  map(toUpper),
+  ensureString
+)
+
+safeShout(45)
+//=&gt; Err &quot;The value given is not a valid string&quot;
+
+safeShout(&#39;Hey there!&#39;)
+//=&gt; Ok &quot;HEY THERE!&quot;</code></pre></div><h4><a id="of"href="#of">of</a></h4><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">Result.of :: a -&gt; Result e a</code></pre></div><p>Used to wrap any value into a <code>Result</code> as an <a href="#ok"><code>Ok</code></a>, <code>of</code> is used mostly by helper functions that work &quot;generically&quot; with instances of either<code>Applicative</code> or <code>Monad</code> types. When working specifically with the <code>Result</code>type, the <a href="#ok"><code>Ok</code></a> constructor should be used. Reach for <code>of</code> when working with functions that will work with ANY <code>Applicative</code>/<code>Monad</code>.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">import Result from &#39;crocks/Result&#39;
+
+const { Ok, of } = Result
+
+of(&#39;Some result!&#39;)
+//=&gt; Ok &quot;Some result!&quot;
+
+of(undefined)
+//=&gt; Ok undefined
+
+Ok(&#39;Some result!&#39;)
+//=&gt; Ok &quot;Some result!&quot;
+
+Ok(undefined)
+//=&gt; Ok undefined
+
+Result(&#39;Some result!&#39;)
+//=&gt; Ok &quot;Some result!&quot;
+
+Result(undefined)
+//=&gt; Ok undefined</code></pre></div></article><article id="topic-instance"><h2><a id="instance-methods"href="#instance-methods">Instance Methods</a></h2><h4><a id="equals"href="#equals">equals</a></h4><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">Result e a ~&gt; b -&gt; Boolean</code></pre></div><p>Used to compare the contained values of two <code>Result</code> instances for equality by value. <code>equals</code> takes any given argument and returns <code>true</code> if the passed argument is a <code>Result</code> (<a href="#ok"><code>Ok</code></a> or <a href="#err"><code>Err</code></a>) with a contained value equal to the contained value of the <code>Result</code> the method is being called on. If the passed argument is not a <code>Result</code> or the contained values are not equal by value thn <code>equals</code> will return <code>false</code>.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">import Result from &#39;crocks/Result&#39;
+
+import equals from &#39;crocks/pointfree/equals&#39;
+
+const { Ok, Err } = Result
+
+Ok(&#39;result&#39;)
+  .equals(Ok(&#39;result&#39;))
+//=&gt; true
+
+Ok(null)
+  .equals(Ok(null))
+//=&gt; true
+
+Ok(&#39;error&#39;)
+  .equals(Err(&#39;error&#39;))
+//=&gt; false
+
+// by value, not reference for most types
+Ok([ 1, { a: 2 }, &#39;string&#39; ])
+  .equals(Ok([ 1, { a: 2 }, &#39;string&#39; ]))
+//=&gt; true
+
+equals(Ok(&#39;result&#39;), &#39;result&#39;)
+//=&gt; false</code></pre></div><h4><a id="concat"href="#concat">concat</a></h4><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">Semigroup s =&gt; Result e s ~&gt; Result e s -&gt; Result e s</code></pre></div><p>When an underlying value of a given <code>Result</code> is fixed to a <code>Semigroup</code>, <code>concat</code>can be used to concat another <code>Result</code> instance with an underlying <code>Semigroup</code>of the same type. Expecting a <code>Result</code> wrapping a <code>Semigroup</code> of the same type,<code>concat</code> will give back a new <code>Result</code> instance wrapping the result of combining the two underlying <code>Semigroup</code>s. When called on a <a href="#err"><code>Err</code></a> instance,<code>concat</code> will return an <a href="#err"><code>Err</code></a> with the value of the first <a href="#err"><code>Err</code></a>in the chain.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">import Result from &#39;crocks/Result&#39;
+
+import concat from &#39;crocks/pointfree/concat&#39;
+
+const { Ok, Err } = Result
+
+Ok([ 1, 2, 3 ])
+  .concat(Ok([ 4, 5, 6 ]))
+//=&gt; [ 1, 2, 3, 4, 5, 6 ]
+
+Ok([ 1, 2, 3 ])
+  .concat(Err([ 4, 5, 6 ]))
+//=&gt; Err [ 4, 5, 6 ]
+
+concat(Ok(&#39;Result&#39;), Err(&#39;Error&#39;))
+//=&gt; Err &quot;Error&quot;
+
+concat(Err(&#39;Error&#39;), Ok(&#39;Result&#39;))
+//=&gt; Err &quot;Error&quot;
+
+concat(Err(&#39;Error 1&#39;), Err(&#39;Error 2&#39;))
+//=&gt; Err &quot;Error 2&quot;</code></pre></div><h4><a id="map"href="#map">map</a></h4><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">Result e a ~&gt; (a -&gt; b) -&gt; Result e b</code></pre></div><p>Used to apply transformations to values in the safety of a <code>Result</code>, <code>map</code> takes a function that it will lift into the context of the <code>Result</code> and apply to it the wrapped value. When run on an <a href="#ok"><code>Ok</code></a> instance, <code>map</code> will apply the wrapped value to the provided function and return the result in a new <a href="#ok"><code>Ok</code></a>instance. When run on an <a href="#err">'Err'</a> <code>map</code> with return the error value in a new<a href="#err"><code>Err</code></a> instance.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">import Result from &#39;crocks/Result&#39;
+
+import assign from &#39;crocks/helpers/assign&#39;
+import compose from &#39;crocks/helpers/compose&#39;
+import composeB from &#39;crocks/combinators/composeB&#39;
+import fanout from &#39;crocks/Pair/fanout&#39;
+import ifElse from &#39;crocks/logic/ifElse&#39;
+import isNumber from &#39;crocks/predicates/isNumber&#39;
+import map from &#39;crocks/pointfree/map&#39;
+import merge from &#39;crocks/pointfree/merge&#39;
+import objOf from &#39;crocks/helpers/objOf&#39;
+
+const { Ok, Err } = Result
+
+// buildError :: () -&gt; Result String a
+const buildError = () =&gt;
+  Err(&#39;The value given was not a valid number&#39;)
+
+// double :: Number -&gt; Number
+const double =
+  x =&gt; x * 2
+
+// fromNumber :: a -&gt; Result String Number
+const fromNumber =
+  ifElse(isNumber, Ok, buildError)
+
+// doubleNumber :: a -&gt; Result String Number
+const doubleNumber = composeB(
+  map(double),
+  fromNumber
+)
+
+doubleNumber(21)
+//=&gt; Ok 42
+
+doubleNumber(&#39;down&#39;)
+//=&gt; Err &quot;The value given was not a valid number&quot;
+
+// isEvenOrOdd :: Number -&gt; String
+const isEvenOrOdd = n =&gt;
+  n % 2 === 0 ? &#39;Even&#39; : &#39;Odd&#39;
+
+// getParity :: Number -&gt; Object
+const getParity = composeB(
+  objOf(&#39;parity&#39;),
+  isEvenOrOdd
+)
+
+// getInfo :: a -&gt; Result String ({ parity: String, value: Number })
+const getInfo = compose(
+  map(merge(assign)),
+  map(fanout(objOf(&#39;value&#39;), getParity)),
+  fromNumber
+)
+
+getInfo(5324)
+//=&gt; Ok { parity: &quot;Even&quot;, value: 5324 }
+
+getInfo(&#39;down&#39;)
+//=&gt; Err &quot;The value given was not a valid number&quot;</code></pre></div><h4><a id="alt"href="#alt">alt</a></h4><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">Result e a ~&gt; Result e a -&gt; Result e a</code></pre></div><p>Providing a means for a fallback or alternative value, <code>alt</code> combines two<code>Result</code> instances and will return the first <a href="#ok"><code>Ok</code></a> it encounters or am <a href="#err"><code>Err</code></a> if neither value is an <a href="#ok"><code>Ok</code></a>.</p><p>If the value in both <a href="#err"><code>Err</code></a> are <code>Semigroup</code>s of the same type then they will accumalte based on their rules.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">import Result from &#39;crocks/Result&#39;
+
+import alt from &#39;crocks/pointfree/alt&#39;
+import compose from &#39;crocks/helpers/compose&#39;
+import curry from &#39;crocks/core/curry&#39;
+import flip from &#39;crocks/combinators/flip&#39;
+import identity from &#39;crocks/combinators/identity&#39;
+import ifElse from &#39;crocks/logic/ifElse&#39;
+import map from &#39;crocks/pointfree/map&#39;
+import reduce from &#39;crocks/pointfree/reduce&#39;
+import bimap from &#39;crocks/pointfree/bimap&#39;
+
+const { Ok, Err } = Result
+
+// ensure :: (a -&gt; Boolean) -&gt; a -&gt; Result a
+const ensure = pred =&gt;
+  ifElse(pred, Ok, Err)
+
+// gte :: Number -&gt; Number -&gt; Boolean
+const gte = x =&gt; y =&gt;
+  y &gt;= x
+
+// find :: (a -&gt; Boolean) -&gt; Foldable a -&gt; Result String a
+const find = curry(
+  pred =&gt; compose(
+    bimap(() =&gt; &#39;Not Found&#39;, identity),
+    reduce(flip(alt), Err()),
+    map(ensure(pred))
+  )
+)
+
+Err(&#39;Error&#39;)
+  .alt(Ok(&#39;Result&#39;))
+//=&gt; Ok &quot;Result&quot;
+
+Ok(&#39;Result&#39;)
+  .alt(Err(&#39;Error&#39;))
+//=&gt; Ok &quot;Result&quot;
+
+Err(&#39;Error 1.&#39;)
+  .alt(Err(&#39;Error 2.&#39;))
+//=&gt; Err &quot;Error 1.Error 2.&quot;
+
+find(gte(41), [ 17, 25, 38, 42 ])
+//=&gt; Ok 42
+
+find(gte(11), [ 1, 2, 3, 4 ])
+//=&gt; Err &quot;Not found&quot;</code></pre></div><h4><a id="bimap"href="#bimap">bimap</a></h4><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">Result e a ~&gt; ((e -&gt; d), (a -&gt; b)) -&gt; Result d b</code></pre></div><p>While it's more common to only <a href="#map"><code>map</code></a> over a <code>Result</code> that's an<a href="#ok"><code>Ok</code></a> there may come a time when you need to map over a <code>Result</code> regardless of wether it's an <a href="#ok"><code>Ok</code></a> or an <a href="#err"><code>Err</code></a>.</p><p><code>bimap</code> takes two mapping functions as its arguments. The first function is used to map an <a href="#err"><code>Err</code></a> instance, while the second maps an <a href="#ok"><code>Ok</code></a>.<code>Result</code> only provides a means to map an <a href="#ok"><code>Ok</code></a> instance exclusively using<a href="#map"><code>map</code></a>. If the need arises to map an <a href="#err"><code>Err</code></a> instance exclusively, then <code>bimap</code> can be used, passing the mapping function to the first argument and <a href="../functions/combinators.html#identity"><code>identity</code></a> to the second.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">import Result from &#39;crocks/Result&#39;
+
+import bimap from &#39;crocks/pointfree/bimap&#39;
+import composeB from &#39;crocks/combinators/composeB&#39;
+import identity from &#39;crocks/combinators/identity&#39;
+import ifElse from &#39;crocks/logic/ifElse&#39;
+import isNumber from &#39;crocks/predicates/isNumber&#39;
+import map from &#39;crocks/pointfree/map&#39;
+import objOf from &#39;crocks/helpers/objOf&#39;
+import setProp from &#39;crocks/helpers/setProp&#39;
+
+const { Ok, Err } = Result
+
+// ensure :: (a -&gt; Boolean) -&gt; a -&gt; Result a
+const ensure = pred =&gt;
+  ifElse(pred, Ok, Err)
+
+// buildError :: () -&gt; String
+const buildError = () =&gt;
+  &#39;The value given was not a valid number&#39;
+
+// prod :: Number -&gt; Number -&gt; Number
+const prod = x =&gt; y =&gt;
+  x * y
+
+// fromNumber :: a -&gt; Result String Number
+const fromNumber = composeB(
+  bimap(buildError, identity),
+  ensure(isNumber)
+)
+
+// hasError :: Boolean -&gt; Object -&gt; Object
+const hasError =
+  setProp(&#39;hasError&#39;)
+
+// Outcome :: { result: Number, hasError: Boolean, error: String }
+
+// buildResult :: (String, Boolean) -&gt; a -&gt; Outcome
+const buildResult = (key, isError) =&gt;
+  composeB(hasError(isError), objOf(key))
+
+// finalize :: Result e a -&gt; Result Outcome
+const finalize = bimap(
+  buildResult(&#39;error&#39;, true),
+  buildResult(&#39;result&#39;, false)
+)
+
+// double :: a -&gt; Result String Number
+const double = composeB(
+  map(prod(2)),
+  fromNumber
+)
+
+finalize(double(21))
+//=&gt; Ok { hasError: false, result: 42 }
+
+finalize(double(&#39;unk&#39;))
+//=&gt; Err { hasError: true, error: &quot;The value given was not a valid number&quot; }</code></pre></div><h4><a id="ap"href="#ap">ap</a></h4><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">Result e (a -&gt; b) ~&gt; Result e a -&gt; Result e b</code></pre></div><p>Short for apply, <code>ap</code> is used to apply a <code>Result</code> instance containing a value to another <code>Result</code> instance that contains a function, resulting in new <code>Result</code>instance with the result. <code>ap</code> requires that it is called on an <code>instance</code> that is either an <a href="#err"><code>Err</code></a> or an <a href="#ok"><code>Ok</code></a> that wraps a curried polyadic function.</p><p>When either instance is an <a href="#err"><code>Err</code></a>, <code>ap</code> will return an <a href="#err"><code>Err</code></a>. This can be used to safely combine multiple values under a given combination function. If any of the inputs results in an <a href="#err"><code>Err</code></a> than they will never be applied to the function and not provide exceptions or unexpected results. However if the value in both <a href="#err"><code>Err</code></a> are <code>Semigroup</code>s of the same type then they will accumalte based on their rules.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">import Result from &#39;crocks/Result&#39;
+
+import ifElse from &#39;crocks/logic/ifElse&#39;
+import isNumber from &#39;crocks/predicates/isNumber&#39;
+import liftA2 from &#39;crocks/helpers/liftA2&#39;
+import map from &#39;crocks/pointfree/map&#39;
+
+const { Ok, Err } = Result
+
+// buildError :: () -&gt; Result String a
+const buildError = () =&gt;
+  Err(&#39;The value given was not a valid number&#39;)
+
+// prod :: Number -&gt; Number -&gt; Number
+const prod = x =&gt; y =&gt;
+  x * y
+
+// fromNumber :: a -&gt; Result String Number
+const fromNumber =
+  ifElse(isNumber, Ok, buildError)
+
+map(prod, fromNumber(2))
+  .ap(fromNumber(5))
+//=&gt; Ok 10
+
+map(prod, fromNumber(&#39;string&#39;))
+  .ap(fromNumber(5))
+//=&gt; Err &quot;The value given was not a valid number&quot;
+
+Ok(prod)
+  .ap(fromNumber(2))
+  .ap(fromNumber(21))
+//=&gt; Ok 42
+
+Ok(prod)
+  .ap(fromNumber(&#39;string&#39;))
+  .ap(fromNumber(21))
+//=&gt; Err &quot;The value given was not a valid number&quot;
+
+liftA2(prod, fromNumber(2), fromNumber(21))
+//=&gt; Ok 42
+
+liftA2(prod, Err(&#39;Not 2&#39;), Err(&#39;Not 21&#39;))
+//=&gt; Err &quot;Not 2Not 21&quot;
+
+liftA2(prod, Err([ &#39;Not 2&#39; ]), Err([ &#39;Not 21&#39; ]))
+//=&gt; Err [ &quot;Not 2&quot;, &quot;Not 21&quot; ]</code></pre></div><h4><a id="sequence"href="#sequence">sequence</a></h4><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">Apply f =&gt; Result e (f a) ~&gt; (b -&gt; f b) -&gt; f (Result e a)
+Applicative f =&gt; Result e (f a) ~&gt; TypeRep f -&gt; f (Result e a)</code></pre></div><p>When an instance of <code>Result</code> wraps an <code>Apply</code> instance, <code>sequence</code> can be used to swap the type sequence. <code>sequence</code> requires either an <code>Applicative TypeRep</code> or an <code>Apply</code> returning function is provided for its argument. This will be used in the case that the <code>Result</code> instance is a <a href="#err"><code>Err</code></a>.</p><p><code>sequence</code> can be derived from <a href="#traverse"><code>traverse</code></a> by passing it an<code>identity</code> function (<code>x =&gt; x</code>).</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">import Result from &#39;crocks/Result&#39;
+
+import Identity from &#39;crocks/Identity&#39;
+
+const { Err, Ok } = Result
+
+// arrayOf :: a -&gt; [ a ]
+const arrayOf =
+  x =&gt; [ x ]
+
+Ok([ 1, 2, 3 ])
+  .sequence(arrayOf)
+//=&gt; [ Ok 1, Ok 2, Ok 3 ]
+
+Err(&#39;no array here&#39;)
+  .sequence(arrayOf)
+//=&gt; [ Err &quot;no array here&quot; ]
+
+Ok(Identity.of(42))
+  .sequence(Identity)
+//=&gt; Identity (Ok 42)
+
+Err(0)
+  .sequence(Identity)
+//=&gt; Identity (Err 0)</code></pre></div><h4><a id="traverse"href="#traverse">traverse</a></h4><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">Apply f =&gt; Result e a ~&gt; (c -&gt; f c), (a -&gt; f b)) -&gt; f Result e b
+Applicative f =&gt; Result e a ~&gt; (TypeRep f, (a -&gt; f b)) -&gt; f Result e b</code></pre></div><p>Used to apply the &quot;effect&quot; of an <code>Apply</code> to a value inside of a <code>Result</code>,<code>traverse</code> combines both the &quot;effects&quot; of the <code>Apply</code> and the <code>Result</code> by returning a new instance of the <code>Apply</code>, wrapping the result of the<code>Apply</code>s &quot;effect&quot; on the value in the <code>Result</code>.</p><p><code>traverse</code> requires either an <code>Applicative TypeRep</code> or an <code>Apply</code> returning function as its first argument and a function that is used to apply the &quot;effect&quot; of the target  <code>Apply</code> to the value inside of the <code>Result</code>. This will be used in the case that the <code>Result</code> instance is a <a href="#err"><code>Err</code></a>. Both arguments must provide an instance of the target <code>Apply</code>.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">import Result from &#39;crocks/Result&#39;
+
+import Pair from &#39;crocks/Pair&#39;
+import State from &#39;crocks/State&#39;
+import Sum from &#39;crocks/Sum&#39;
+import constant from &#39;crocks/combinators/constant&#39;
+import ifElse from &#39;crocks/logic/ifElse&#39;
+import traverse from &#39;crocks/pointfree/traverse&#39;
+
+const { Err, Ok } = Result
+const { get, modify } = State
+
+// lte :: Number -&gt; Number -&gt; Boolean
+const lte = y =&gt; x =&gt;
+  x &lt;= y
+
+// ensure :: (a -&gt; Boolean) -&gt; a -&gt; Result a
+const ensure = pred =&gt;
+  ifElse(pred, Ok, Err)
+
+// tallyOf :: Number -&gt; Pair Sum Number
+const tallyOf = x =&gt;
+  Pair(Sum.empty(), x)
+
+// incBy :: Number -&gt; Pair Sum Number
+const incBy = x =&gt;
+  Pair(Sum(x), x)
+
+Ok(12)
+  .traverse(tallyOf, incBy)
+//=&gt; Pair( Sum 12, Ok 12 )
+
+Err(true)
+  .traverse(tallyOf, incBy)
+//=&gt; Pair( Sum 0, Err true )
+
+// lte10 :: Number -&gt; Result Number
+const lte10 =
+  ensure(lte(10))
+
+// update :: Number -&gt; State Number
+const update = x =&gt;
+  modify(state =&gt; x + state)
+    .chain(constant(get()))
+
+// updateSmall :: () =&gt; State Number
+const updateSmall = () =&gt;
+  get(lte10)
+    .chain(traverse(State, update))
+
+updateSmall()
+  .runWith(3)
+//=&gt; Pair( Ok 6, 6 )
+
+updateSmall()
+  .chain(updateSmall)
+  .runWith(3)
+//=&gt; Pair( Ok 12, 12 )
+
+updateSmall()
+  .chain(updateSmall)
+  .chain(updateSmall)
+  .runWith(3)
+//=&gt; Pair( Err 12, 12 )
+
+updateSmall()
+  .chain(updateSmall)
+  .chain(updateSmall)
+  .runWith(30)
+//=&gt; Pair( Err 30, 30 )</code></pre></div><h4><a id="chain"href="#chain">chain</a></h4><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">Result e a ~&gt; (a -&gt; Result e b) -&gt; Result e b</code></pre></div><p>Combining a sequential series of transformations that capture disjunction can be accomplished with <code>chain</code>. <code>chain</code> expects a unary, <code>Result</code> returning function as its argument. When invoked on an <a href="#err"><code>Err</code></a>, <code>chain</code> will not run the function, but will instead return a new <a href="#err"><code>Err</code></a> instance with the same containing value. When called on an <a href="#ok"><code>Ok</code></a> however, the inner value will be passed to provided function, returning the result as the new instance.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">import Result from &#39;crocks/Result&#39;
+
+import chain from &#39;crocks/pointfree/chain&#39;
+import composeB from &#39;crocks/combinators/composeB&#39;
+import ifElse from &#39;crocks/logic/ifElse&#39;
+import isNumber from &#39;crocks/predicates/isNumber&#39;
+import maybeToResult from &#39;crocks/Result/maybeToResult&#39;
+import map from &#39;crocks/pointfree/map&#39;
+import getProp from &#39;crocks/Maybe/getProp&#39;
+
+const { Err, Ok } = Result
+
+// errText :: (String | Number) -&gt; String
+const errText = name =&gt;
+  `${name} does not exist on the value given`
+
+// buildError :: () -&gt; Result String a
+const buildError = () =&gt;
+  Err(&#39;the value given is not valid&#39;)
+
+// ensure :: (a -&gt; Boolean) -&gt; a -&gt; Result String a
+const ensure = pred =&gt;
+  ifElse(pred, Ok, buildError)
+
+// fromNumber :: a -&gt; Result String Number
+const fromNumber =
+  ensure(isNumber)
+
+// prop :: (String | Number) -&gt; Object -&gt; Result String a
+const prop = name =&gt;
+  maybeToResult(errText(name), getProp(name))
+
+// protectedAdd10 :: a -&gt; Result String Number
+const protectedAdd10 = composeB(
+  map(x =&gt; x + 10),
+  fromNumber
+)
+
+// getAge :: Object -&gt; Result String Number
+const getAge = composeB(
+  chain(fromNumber),
+  prop(&#39;age&#39;)
+)
+
+getAge({ name: &#39;Sarah&#39;, age: 21 })
+//=&gt; Ok 21
+
+getAge({ name: &#39;Sarah&#39;, age: &#39;unk&#39; })
+//=&gt; Err &quot;the value given is not valid&quot;
+
+getAge({ name: &#39;Sarah&#39; })
+//=&gt; Err &quot;age does not exist on the value given&quot;
+
+getAge({ name: &#39;Sarah&#39;, age: 21 })
+  .chain(protectedAdd10)
+//=&gt; Ok 31
+
+getAge({ name: &#39;Sarah&#39;, age: &#39;unk&#39; })
+  .chain(protectedAdd10)
+//=&gt; Err &quot;the value given is not valid&quot;</code></pre></div><h4><a id="coalesce"href="#coalesce">coalesce</a></h4><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">Result e a ~&gt; ((e -&gt; b), (a -&gt; b))) -&gt; Result c b</code></pre></div><p>There will come a time in your flow that you will want to ensure you have an <a href="#ok"><code>Ok</code></a> of a given type. <code>coalesce</code> allows you to <code>map</code> over both the <a href="#ok"><code>Ok</code></a> and the <a href="#err"><code>Err</code></a> and return an <a href="#ok"><code>Ok</code></a>. <code>coalesce</code> expects two functions for it's inputs.</p><p>The first function is used when invoked on a <a href="#err"><code>Err</code></a> and will return a <a href="#ok"><code>Ok</code></a> instance wrapping the result of the function. The second function is used when <code>coalesce</code> is invoked on a <a href="#ok"><code>Ok</code></a> and is used to map the original value, returning a new <a href="#ok"><code>Ok</code></a> instance wrapping the result of the second function.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">import Result from &#39;crocks/Result&#39;
+
+import assign from &#39;crocks/helpers/assign&#39;
+import chain from &#39;crocks/pointfree/chain&#39;
+import coalesce from &#39;crocks/pointfree/coalesce&#39;
+import compose from &#39;crocks/helpers/compose&#39;
+import composeB from &#39;crocks/combinators/composeB&#39;
+import constant from &#39;crocks/combinators/constant&#39;
+import fanout from &#39;crocks/Pair/fanout&#39;
+import hasProp from &#39;crocks/predicates/hasProp&#39;
+import identity from &#39;crocks/combinators/identity&#39;
+import ifElse from &#39;crocks/logic/ifElse&#39;
+import isNumber from &#39;crocks/predicates/isNumber&#39;
+import isObject from &#39;crocks/predicates/isObject&#39;
+import map from &#39;crocks/pointfree/map&#39;
+import merge from &#39;crocks/pointfree/merge&#39;
+import objOf from &#39;crocks/helpers/objOf&#39;
+import setProp from &#39;crocks/helpers/setProp&#39;
+
+const { Err, Ok } = Result
+
+// gte :: Number -&gt; Number -&gt; Boolean
+const gte = y =&gt; x =&gt;
+  x &gt;= y
+
+// ensure :: (a -&gt; Boolean) -&gt; a -&gt; Result a
+const ensure = pred =&gt;
+  ifElse(pred, Ok, Err)
+
+// fromNumber :: a -&gt; Result a Number
+const fromNumber =
+  ensure(isNumber)
+
+// ensureIsObject :: a -&gt; Result a Object
+const ensureIsObject =
+  ensure(isObject)
+
+fromNumber(45)
+  .coalesce(constant(42), identity)
+//=&gt; Ok 45
+
+fromNumber(&#39;number&#39;)
+  .coalesce(constant(42), identity)
+//=&gt; Ok 42
+
+// hasAge :: a -&gt; Result a Boolean
+const hasAge =
+  ensure(hasProp(&#39;age&#39;))
+
+// prop :: String -&gt; Object -&gt; a
+const prop = name =&gt; x =&gt;
+  x[name]
+
+// Person :: { canDrink: Boolean, name: String: age: Number }
+
+// ensureHasAge :: a -&gt; Result a Person
+const ensureHasAge = compose(
+  coalesce(setProp(&#39;age&#39;, 0), identity),
+  chain(hasAge),
+  coalesce(constant({}), identity),
+  ensureIsObject
+)
+
+// determineCanDrink :: Number -&gt; { canDrink: Boolean }
+const determineCanDrink =
+  composeB(objOf(&#39;canDrink&#39;), gte(18))
+
+// setCanDrink :: a -&gt; Result a Person
+const setCanDrink = compose(
+  merge(assign),
+  map(determineCanDrink),
+  fanout(identity, prop(&#39;age&#39;))
+)
+
+// setCanDrink :: a -&gt; Result Person
+const getDetails = composeB(
+  map(setCanDrink),
+  ensureHasAge
+)
+
+getDetails({ name: &#39;John&#39;, age: 17 })
+//=&gt; Ok { canDrink: false, name: &quot;John&quot;, age: 17 }
+
+getDetails({ name: &#39;Laury&#39;, age: 22 })
+//=&gt; Ok { canDrink: true, name: &quot;Laury&quot;, age: 22 }
+
+getDetails(null)
+//=&gt; Ok { canDrink: false, age: 0 }
+
+getDetails(undefined)
+//=&gt; Ok { canDrink: false, age: 0 }
+
+getDetails(1)
+//=&gt; Ok { canDrink: false, age: 0 }
+
+getDetails(false)
+//=&gt; Ok { canDrink: false, age: 0 }</code></pre></div><h4><a id="swap"href="#swap">swap</a></h4><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">Result e a ~&gt; ((e -&gt; a), (a -&gt; e)) -&gt; Result e a</code></pre></div><p>Used to map the value of a <code>Result</code> instance and transform an <a href="#err"><code>Err</code></a> into an<a href="#ok"><code>Ok</code></a> or an <a href="#ok"><code>Ok</code></a> into an <a href="#err"><code>Err</code></a>, <code>swap</code> takes two functions as its arguments. The first function is used to map and transform an <a href="#err"><code>Err</code></a> into an <a href="#ok"><code>Ok</code></a>, while the second maps and transforms an <a href="#ok"><code>Ok</code></a> into an <a href="#err"><code>Err</code></a>. If no mapping of the contained values is required for either instance, then <a href="../functions/combinators.html#identity"><code>identity</code></a> functions can be used in one or both arguments.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">import Result from &#39;crocks/Result&#39;
+
+import constant from &#39;crocks/combinators/constant&#39;
+import identity from &#39;crocks/combinators/identity&#39;
+import ifElse from &#39;crocks/logic/ifElse&#39;
+import isNumber from &#39;crocks/predicates/isNumber&#39;
+import when from &#39;crocks/logic/when&#39;
+import swap from &#39;crocks/pointfree/swap&#39;
+
+const { Ok, Err } = Result
+
+// simpleSwap :: Result e a -&gt; Result a e
+const simpleSwap =
+  swap(identity, identity)
+
+simpleSwap(Ok(42))
+//=&gt; Err 42
+
+simpleSwap(Err(21))
+//=&gt; Ok 21
+
+// ensure :: (a -&gt; Boolean) -&gt; a -&gt; Result String a
+const ensure = pred =&gt;
+  ifElse(pred, Ok, Err)
+
+// fromNumber :: a -&gt; Result String Number
+const fromNumber =
+  ensure(isNumber)
+
+// toString :: Number -&gt; String
+const toString = x =&gt;
+  x.toString()
+
+// toNumber :: String -&gt; Number
+const toNumber = x =&gt;
+  parseInt(x)
+
+// parseWithDefault :: Number -&gt; a -&gt; Number
+const parseWithDefault = defaultValue =&gt; value =&gt;
+  when(isNaN, constant(defaultValue), toNumber(value))
+
+// swapWith :: Result String Number -&gt; Result String Number
+const swapValues =
+  swap(parseWithDefault(0), toString)
+
+swapValues(fromNumber(4))
+//=&gt; Err &quot;4&quot;
+
+swapValues(fromNumber(&#39;number&#39;))
+//=&gt; Ok 0</code></pre></div><h4><a id="either"href="#either">either</a></h4><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">Result e a ~&gt; ((e -&gt; b), (a -&gt; b)) -&gt; b</code></pre></div><p>Used to provide a means to map a given <code>Result</code> instance folding it out of its container. <code>either</code> expects two functions as its arguments. The first is a function that will be used to map an <a href="#err"><code>Err</code></a>. While the second will map the value wrapped in a given <a href="#ok"><code>Ok</code></a> and return the result of that mapping.</p><p>By composing <code>either</code> you can create functions that us the power of<code>ADT</code>s while returning a plain javascript type.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">import Result from &#39;crocks/Result&#39;
+
+import compose from &#39;crocks/helpers/compose&#39;
+import either from &#39;crocks/pointfree/either&#39;
+import ifElse from &#39;crocks/logic/ifElse&#39;
+import isNumber from &#39;crocks/predicates/isNumber&#39;
+import map from &#39;crocks/pointfree/map&#39;
+import objOf from &#39;crocks/helpers/objOf&#39;
+import setProp from &#39;crocks/helpers/setProp&#39;
+
+const { Ok, Err } = Result
+
+// buildError :: () -&gt; Result String a
+const buildError = () =&gt;
+  Err(&#39;The value given was not a valid number&#39;)
+
+// ensure :: (a -&gt; Boolean) -&gt; a -&gt; Result String a
+const ensure = pred =&gt;
+  ifElse(pred, Ok, buildError)
+
+// fromNumber :: a -&gt; Result String Number
+const fromNumber =
+  ensure(isNumber)
+
+// double :: Number -&gt; Number
+const double = x =&gt;
+  x * 2
+
+// hasError :: Boolean -&gt; Object -&gt; Object
+const hasError =
+  setProp(&#39;hasError&#39;)
+
+// buildResult :: (String, Boolean) -&gt; a -&gt; Object
+const buildResult = (key, isError) =&gt;
+  compose(hasError(isError), objOf(key))
+
+// ResultDetail :: { result: Number, hasError: Boolean, error: String }
+
+// createResult :: Result e a -&gt; ResultDetail
+const createResult = either(
+  buildResult(&#39;error&#39;, true),
+  buildResult(&#39;result&#39;, false)
+)
+
+// doubleNumber :: a -&gt; ResultDetail
+const doubleNumber = compose(
+  createResult,
+  map(double),
+  fromNumber
+)
+
+doubleNumber(42)
+//=&gt; { result: 84, hasError: false }
+
+doubleNumber(&#39;value&#39;)
+//=&gt; { error: &#39;The value given was not a valid number&#39;, hasError: true }</code></pre></div></article><article id="topic-helpers"><h2><a id="helper-functions"href="#helper-functions">Helper Functions</a></h2><h4><a id="trycatch"href="#trycatch">tryCatch</a></h4><p><code>crocks/Result/tryCatch</code></p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">tryCatch :: (* -&gt; a) -&gt; * -&gt; Result e a</code></pre></div><p>Used when you want to take any variadic function and wrap it with the added function of a <code>Result</code> type. <code>tryCatch</code> will execute the function with the parameters passed and return either an <a href="#ok"><code>Ok</code></a> when successful or an<a href="#err"><code>Err</code></a> when an exception is thrown.</p><p>Although we do our best to not use <code>Error</code> to control program flow, there are times when we don't have full control over the behaviour of a function. The saviour in this situation is <code>tryCatch</code>. You can wrap this funcition and it will always return a <code>Result</code></p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">import tryCatch from &#39;crocks/Result/tryCatch&#39;
+
+tryCatch(() =&gt; {
+  throw new Error(&#39;Simple error!&#39;)
+})()
+// Err &quot;Simple error!&quot;
+
+// calculateArea :: (a, b) -&gt; Number
+const calculateArea = (width, height) =&gt; {
+  if (isNaN(width) || isNaN(height)) {
+    throw Error(&#39;Parameter is not a number!&#39;)
+  }
+
+  return width * height
+}
+
+// tryCalculateArea :: (a, b) -&gt; Result String Number
+const tryCalculateArea =
+  tryCatch(calculateArea)
+
+tryCalculateArea(3, 6)
+//=&gt; Ok 18
+
+tryCalculateArea(&#39;String&#39;, 5)
+// Err &quot;Error: Parameter is not a number!&quot;
+
+// getLength :: a -&gt; Number
+const getLength = a =&gt;
+  a.length
+
+// tryGetLength :: a -&gt; Result String Number
+const tryGetLength =
+  tryCatch(getLength)
+
+tryGetLength([ 3, 2, 1 ])
+//=&gt; Ok 3
+
+tryGetLength()
+//=&gt; Err &quot;TypeError: Cannot read property &#39;length&#39; of undefined&quot;</code></pre></div></article><article id="topic-transformation"><h2><a id="transformation-functions"href="#transformation-functions">Transformation Functions</a></h2><h4><a id="eithertoresult"href="#eithertoresult">eitherToResult</a></h4><p><code>crocks/Result/eitherToResult</code></p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">eitherToResult :: Either b a -&gt; Result b a
+eitherToResult :: (a -&gt; Either c b) -&gt; a -&gt; Result c b</code></pre></div><p>Used to transform a given <a href="./Either.html"><code>Either</code></a> instance to a <code>Result</code>instance or flatten a <code>Result</code> of <code>Either</code> into a <code>Result</code> when chained,<code>eitherToMaybe</code> will turn a <a href="./Either.html#right"><code>Right</code></a> instance into a <a href="#ok"><code>Ok</code></a> wrapping the original value contained in the <a href="./Either.html#right"><code>Right</code></a>. All <a href="./Either.html#left"><code>Left</code></a> instances will map to an <a href="#err"><code>Err</code></a>, mapping the originally contained value to a <code>Unit</code>. Values on the <a href="./Either.html#left"><code>Left</code></a> will be lost and as such this transformation is considered lossy in that regard.</p><p>Like all <code>crocks</code> transformation functions, <code>eitherToMaybe</code> has two possible signatures and will behave differently when passed either an <a href="./Either.html"><code>Either</code></a> instance or a function that returns an instance of <a href="./Either.html"><code>Either</code></a>. When passed the instance, a transformed <code>Result</code> is returned. When passed an <a href="./Either.html"><code>Either</code></a> returning function, a function will be returned that takes a given value and returns a <code>Result</code>.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">import Result from &#39;crocks/Result&#39;
+
+import Either from &#39;crocks/Either&#39;
+import assign from &#39;crocks/helpers/assign&#39;
+import composeK from &#39;crocks/helpers/composeK&#39;
+import composeB from &#39;crocks/combinators/composeB&#39;
+import eitherToResult from &#39;crocks/Result/eitherToResult&#39;
+import fanout from &#39;crocks/Pair/fanout&#39;
+import isNumber from &#39;crocks/predicates/isNumber&#39;
+import liftA2 from &#39;crocks/helpers/liftA2&#39;
+import map from &#39;crocks/pointfree/map&#39;
+import maybeToEither from &#39;crocks/Either/maybeToEither&#39;
+import merge from &#39;crocks/pointfree/merge&#39;
+import objOf from &#39;crocks/helpers/objOf&#39;
+import getProp from &#39;crocks/Maybe/getProp&#39;
+import safeLift from &#39;crocks/Maybe/safeLift&#39;
+
+const { Left, Right } = Either
+const { Ok } = Result
+
+eitherToResult(Left(&#39;no good&#39;))
+//=&gt; Err &quot;no good&quot;
+
+eitherToResult(Right(&#39;so good&#39;))
+//=&gt; Ok &quot;so good&quot;
+
+// safeInc :: a -&gt; Maybe Number
+const safeInc =
+  safeLift(isNumber, x =&gt; x + 1)
+
+// incProp :: String -&gt; a -&gt; Maybe Number
+const incProp = key =&gt;
+  composeK(safeInc, getProp(key))
+
+// incResult :: String -&gt; a -&gt; Either [ String ] Object
+const incResult = key =&gt; maybeToEither(
+  [ `${key} is not valid` ],
+  composeB(
+    map(objOf(key)),
+    incProp(key)
+  )
+)
+
+// incThem :: a -&gt; Either [ String ] Object
+const incThem = composeB(
+  merge(liftA2(assign)),
+  fanout(incResult(&#39;b&#39;), incResult(&#39;a&#39;))
+)
+
+Result.of({})
+  .chain(eitherToResult(incThem))
+//=&gt; Err [ &quot;b is not valid&quot; ]
+
+Result.of({ a: 33 })
+  .chain(eitherToResult(incThem))
+//=&gt; Err [ &quot;b is not valid&quot; ]
+
+Result.of({ a: 99, b: &#39;41&#39; })
+  .chain(eitherToResult(incThem))
+//=&gt; Err [ &quot;b is not valid&quot; ]
+
+Result.of({ a: 99, b: 41 })
+  .chain(eitherToResult(incThem))
+//=&gt; Ok { a: 100, b: 42 }
+
+Ok(Left(&#39;Err&#39;))
+  .chain(eitherToResult)
+//=&gt; Err &quot;Err&quot;
+
+Ok(Right(&#39;42&#39;))
+  .chain(eitherToResult)
+//=&gt; Ok &quot;42&quot;</code></pre></div><h4><a id="firsttoresult"href="#firsttoresult">firstToResult</a></h4><p><code>crocks/Result/firstToResult</code></p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">firstToResult :: e -&gt; First a -&gt; Result e a
+firstToResult :: e -&gt; (a -&gt; First b) -&gt; a -&gt; Result e b</code></pre></div><p>Used to transform a given <a href="../monoids/First.html"><code>First</code></a> instance to a <code>Result</code>instance or flatten a <code>Result</code> of <a href="../monoids/First.html"><code>First</code></a> into a <code>Result</code> when chained,<code>firstToResult</code> will turn a non-empty instance into an <a href="#ok"><code>Ok</code></a> wrapping the original value contained within the <a href="../monoids/First.html"><code>First</code></a>. All empty instances will map to an <a href="#err"><code>Err</code></a> with the given value.</p><p>Like all <code>crocks</code> transformation functions, <code>firstToResult</code> has two possible signatures and will behave differently when passed either a <a href="../monoids/First.html"><code>First</code></a> instance or a function that returns an instance of <a href="../monoids/First.html"><code>First</code></a>. When passed the instance, a transformed <code>Result</code> is returned. When passed a <a href="../monoids/First.html"><code>First</code></a> returning function, a function will be returned that takes a given value and returns a <code>Result</code>.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">import First from &#39;crocks/First&#39;
+
+import composeB from &#39;crocks/combinators/composeB&#39;
+import concat from &#39;crocks/pointfree/concat&#39;
+import firstToResult from &#39;crocks/Result/firstToResult&#39;
+import flip from &#39;crocks/combinators/flip&#39;
+import mapReduce from &#39;crocks/helpers/mapReduce&#39;
+import getProp from &#39;crocks/Maybe/getProp&#39;
+
+const { empty } = First
+
+// Person :: { name: String, age: Number }
+
+// createPerson :: (String, Number) -&gt; Person
+const createPerson = (name, age) =&gt; ({
+  name, age
+})
+
+// liftName :: Person -&gt; First String
+const liftName = composeB(
+  First,
+  getProp(&#39;name&#39;)
+)
+
+// mergeFirstName :: [ Person ] -&gt; First String
+const mergeFirstName = composeB(
+  firstToResult(&#39;(No name found)&#39;),
+  mapReduce(liftName, flip(concat), empty())
+)
+
+mergeFirstName([
+  createPerson(&#39;John&#39;, 30),
+  createPerson(&#39;Jon&#39;, 33)
+])
+//=&gt; Ok &quot;John&quot;
+
+mergeFirstName([
+  createPerson(undefined, 30),
+  createPerson(undefined, 33)
+])
+//=&gt; Err &quot;(No name found)&quot;</code></pre></div><h4><a id="lasttoresult"href="#lasttoresult">lastToResult</a></h4><p><code>crocks/Result/lastToResult</code></p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">lastToResult :: e -&gt; Last a -&gt; Result e a
+lastToResult :: e -&gt; (a -&gt; Last b) -&gt; a -&gt; Result e b</code></pre></div><p>Used to transform a given <a href="../monoids/Last.html"><code>Last</code></a> instance to a <code>Result</code> instance or flatten a <code>Result</code> of <a href="../monoids/Last.html"><code>Last</code></a> into a <code>Result</code> when chained, <code>lastToResult</code> will turn a non-empty instance into a <a href="#ok"><code>Ok</code></a> wrapping the original value contained within the <a href="../monoids/Last.html"><code>Last</code></a>. All empty instances will map to a<a href="#err"><code>Err</code></a>.</p><p>Like all <code>crocks</code> transformation functions, <code>lastToResult</code> has two possible signatures and will behave differently when passed either a <a href="../monoids/Last.html"><code>Last</code></a> instance or a function that returns an instance of <a href="../monoids/Last.html"><code>Last</code></a>. When passed the instance, a transformed <code>Result</code> is returned. When passed a <a href="../monoids/Last.html"><code>Last</code></a> returning function, a function will be returned that takes a given value and returns a <code>Result</code>.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">import Result from &#39;crocks/Result&#39;
+
+import Last from &#39;crocks/Last&#39;
+import lastToResult from &#39;crocks/Result/lastToResult&#39;
+
+import mconcat from &#39;crocks/helpers/mconcat&#39;
+
+const { Ok, Err } = Result
+
+// lastValue :: [ a ] -&gt; Last a
+const lastValue =
+  mconcat(Last)
+
+lastToResult(&#39;Error occurred!&#39;, Last(&#39;the end&#39;))
+//=&gt; Ok &quot;the end&quot;
+
+Err(&#39;Error occurred!&#39;)
+  .chain(lastToResult(&#39;Error occurred!&#39;, lastValue))
+//=&gt; Err &quot;Error occurred!&quot;
+
+Ok([])
+  .chain(lastToResult(&#39;Error occurred!&#39;, lastValue))
+//=&gt; Err &quot;Error occurred!&quot;
+
+Ok([ &#39;first&#39;, &#39;second&#39;, &#39;third&#39; ])
+  .chain(lastToResult(&#39;Error occurred!&#39;, lastValue))
+//=&gt; Ok &quot;third&quot;
+
+Ok(Last(&#39;last&#39;))
+  .chain(lastToResult(&#39;Error occurred!&#39;))
+//=&gt; Ok &quot;last&quot;</code></pre></div><h4><a id="maybetoresult"href="#maybetoresult">maybeToResult</a></h4><p><code>crocks/Result/maybeToResult</code></p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="haskell" ref="code">maybeToResult :: e -&gt; Maybe a -&gt; Result e a
+maybeToResult :: e -&gt; (a -&gt; Maybe b) -&gt; a -&gt; Result e b</code></pre></div><p>Used to transform a given <a href="../monoids/Maybe.html"><code>Maybe</code></a> instance to a <code>Result</code>instance or flatten a <code>Result</code> of <a href="../monoids/Maybe.html"><code>Maybe</code></a> into a <code>Result</code> when chained,<code>maybeToResult</code> will turn a <a href="./Maybe.html#just"><code>Just</code></a> instance into an <a href="#ok"><code>Ok</code></a> wrapping the original value contained in the <a href="./Maybe.html#just"><code>Just</code></a>. All <a href="nothing"><code>Nothing</code></a> instances will map to a <a href="#err"><code>Err</code></a>, containing the given <code>e</code> value.</p><p>Like all <code>crocks</code> transformation functions, <code>maybeToResult</code> has two possible signatures and will behave differently when passed either a <a href="../monoids/Maybe.html"><code>Maybe</code></a> instance or a function that returns an instance of <a href="../monoids/Maybe.html"><code>Maybe</code></a>. When passed the instance, a transformed <code>Result</code> is returned. When passed a <a href="../monoids/Maybe.html"><code>Maybe</code></a> returning function, a function will be returned that takes a given value and returns a <code>Result</code>. This means that when used with the <a href="./Maybe.html#helper-functions"><code>Maybe-helpers</code></a> and <code>compose</code> you have a larger collection of <code>Result</code> returning functions.</p><div class="code-container"><button class="btn btn-sm btn-copy"><span class="icon-12-overlap"></span></button><pre><code class="code" data-mode="javascript" ref="code">import Result from &#39;crocks/Result&#39;
+
+import composeB from &#39;crocks/combinators/composeB&#39;
+import maybeToResult from &#39;crocks/Result/maybeToResult&#39;
+import Maybe from &#39;crocks/Maybe&#39;
+import getProp from &#39;crocks/Maybe/getProp&#39;
+
+const { Ok } = Result
+const { Just, Nothing } = Maybe
+
+maybeToResult(&#39;An error occurred&#39;, Just(&#39;21&#39;))
+//=&gt; Ok &quot;21&quot;
+
+maybeToResult(&#39;An error occurred&#39;, Nothing())
+//=&gt; Err &quot;An error occurred&quot;
+
+// Person :: { name: string, age: Number }
+
+// getName :: Person -&gt; Result String
+const getName = composeB(
+  maybeToResult(&#39;Name did not exist or was undefined&#39;),
+  getProp(&#39;name&#39;)
+)
+
+getName({ name: &#39;John&#39;, age: 21 })
+//=&gt; Ok &quot;John&quot;
+
+getName({ age: 27 })
+//=&gt; Err &quot;Name did not exist or was undefined&quot;
+
+Ok(Just(&#39;in time!&#39;))
+  .chain(maybeToResult(&#39;An error occurred&#39;))
+//=&gt; Ok &quot;in time!&quot;
+
+Ok(Nothing())
+  .chain(maybeToResult(&#39;An error occurred&#39;))
+//=&gt; Err &quot;An error occurred&quot;</code></pre></div></article><input type="hidden" value="Result"><input type="hidden" value="Crocks"></div><div class="contribute"><div class="contribute-img"><span class="icon-16-github"></span></div><div class="contribute-text"><p>Contribute on Github! <a href="https://github.com/evilsoft/crocks/tree/master/docs/src/pages/docs/crocks/Result.md" class="contribute-link" target="_blank">Edit this section</a>.</p></div></div></div><nav class="col-xs-16 col-md-offset-2 col-md-5"><div class="docs-nav-container"><div class="affix-top docs-nav"><div ref="readingContainer"></div></div></div></nav></div></div></div></div></main></div></div><script src="/crocks/js/bundles/UvFhv.js"></script><script>var data = JSON.parse('{\x22pageLocation\x22:\x22index.children.docs.children.crocks.children.Result\x22,\x22site\x22:{\x22title\x22:\x22Crocks\x22,\x22githubRepo\x22:\x22evilsoft\/crocks\x22,\x22googleAnalytics\x22:\x22UA-37033501-5\x22,\x22icon\x22:\x22icon-16-loop\x22,\x22index\x22:{\x22title\x22:\x22Home\x22,\x22description\x22:\x22A collection of well known Algebraic Data Types for your utter enjoyment.\x22,\x22srcFilePath\x22:\x22src\/pages\/index.soy\x22,\x22id\x22:\x22pages\x22,\x22location\x22:\x22\/.\/\x22,\x22url\x22:\x22\/crocks\/.\/\x22,\x22children\x22:{\x22docs\x22:{\x22children\x22:{\x22getting-started\x22:{\x22title\x22:\x22Getting Started\x22,\x22description\x22:\x22Getting started with a Crocks.\x22,\x22icon\x22:\x22arrow-right-rod\x22,\x22layout\x22:\x22guide\x22,\x22weight\x22:1,\x22srcFilePath\x22:\x22src\/pages\/docs\/getting-started.md\x22,\x22id\x22:\x22getting-started\x22,\x22location\x22:\x22\/docs\/getting-started.html\x22,\x22url\x22:\x22\/crocks\/docs\/getting-started.html\x22},\x22search\x22:{\x22title\x22:\x22Search\x22,\x22description\x22:\x22Find what you\x27re looking for in the documentation.\x22,\x22hidden\x22:true,\x22srcFilePath\x22:\x22src\/pages\/docs\/search.soy\x22,\x22id\x22:\x22search\x22,\x22location\x22:\x22\/docs\/search.html\x22,\x22url\x22:\x22\/crocks\/docs\/search.html\x22},\x22crocks\x22:{\x22children\x22:{\x22Arrow\x22:{\x22title\x22:\x22Arrow\x22,\x22description\x22:\x22Arrow Crock\x22,\x22layout\x22:\x22guide\x22,\x22weight\x22:10,\x22srcFilePath\x22:\x22src\/pages\/docs\/crocks\/Arrow.md\x22,\x22id\x22:\x22Arrow\x22,\x22location\x22:\x22\/docs\/crocks\/Arrow.html\x22,\x22url\x22:\x22\/crocks\/docs\/crocks\/Arrow.html\x22},\x22Async\x22:{\x22title\x22:\x22Async\x22,\x22description\x22:\x22Async Crock\x22,\x22layout\x22:\x22guide\x22,\x22functions\x22:[\x22asynctopromise\x22,\x22eithertoasync\x22,\x22firsttoasync\x22,\x22lasttoasync\x22,\x22maybetoasync\x22,\x22resulttoasync\x22],\x22weight\x22:20,\x22srcFilePath\x22:\x22src\/pages\/docs\/crocks\/Async.md\x22,\x22id\x22:\x22Async\x22,\x22location\x22:\x22\/docs\/crocks\/Async.html\x22,\x22url\x22:\x22\/crocks\/docs\/crocks\/Async.html\x22},\x22Const\x22:{\x22title\x22:\x22Const\x22,\x22description\x22:\x22Const Monoid\x22,\x22layout\x22:\x22guide\x22,\x22weight\x22:30,\x22srcFilePath\x22:\x22src\/pages\/docs\/crocks\/Const.md\x22,\x22id\x22:\x22Const\x22,\x22location\x22:\x22\/docs\/crocks\/Const.html\x22,\x22url\x22:\x22\/crocks\/docs\/crocks\/Const.html\x22},\x22Either\x22:{\x22title\x22:\x22Either\x22,\x22description\x22:\x22Either Crock\x22,\x22layout\x22:\x22guide\x22,\x22functions\x22:[\x22firsttoeither\x22,\x22lasttoeither\x22,\x22maybetoeither\x22,\x22resulttoeither\x22],\x22weight\x22:40,\x22srcFilePath\x22:\x22src\/pages\/docs\/crocks\/Either.md\x22,\x22id\x22:\x22Either\x22,\x22location\x22:\x22\/docs\/crocks\/Either.html\x22,\x22url\x22:\x22\/crocks\/docs\/crocks\/Either.html\x22},\x22Equiv\x22:{\x22title\x22:\x22Equiv\x22,\x22description\x22:\x22Equiv Crock\x22,\x22layout\x22:\x22guide\x22,\x22weight\x22:50,\x22srcFilePath\x22:\x22src\/pages\/docs\/crocks\/Equiv.md\x22,\x22id\x22:\x22Equiv\x22,\x22location\x22:\x22\/docs\/crocks\/Equiv.html\x22,\x22url\x22:\x22\/crocks\/docs\/crocks\/Equiv.html\x22},\x22Identity\x22:{\x22title\x22:\x22Identity\x22,\x22description\x22:\x22Identity Crock\x22,\x22layout\x22:\x22guide\x22,\x22weight\x22:60,\x22srcFilePath\x22:\x22src\/pages\/docs\/crocks\/Identity.md\x22,\x22id\x22:\x22Identity\x22,\x22location\x22:\x22\/docs\/crocks\/Identity.html\x22,\x22url\x22:\x22\/crocks\/docs\/crocks\/Identity.html\x22},\x22Maybe\x22:{\x22title\x22:\x22Maybe\x22,\x22description\x22:\x22Maybe Crock\x22,\x22layout\x22:\x22guide\x22,\x22functions\x22:[\x22find\x22,\x22getpath\x22,\x22getprop\x22,\x22prop\x22,\x22proppath\x22,\x22safe\x22,\x22safeafter\x22,\x22safelift\x22,\x22eithertomaybe\x22,\x22firsttomaybe\x22,\x22lasttomaybe\x22,\x22resulttomaybe\x22],\x22weight\x22:90,\x22srcFilePath\x22:\x22src\/pages\/docs\/crocks\/Maybe.md\x22,\x22id\x22:\x22Maybe\x22,\x22location\x22:\x22\/docs\/crocks\/Maybe.html\x22,\x22url\x22:\x22\/crocks\/docs\/crocks\/Maybe.html\x22},\x22Pair\x22:{\x22title\x22:\x22Pair\x22,\x22description\x22:\x22Canonical Product Type\x22,\x22layout\x22:\x22guide\x22,\x22functions\x22:[\x22branch\x22,\x22fanout\x22,\x22fst\x22,\x22snd\x22,\x22topairs\x22,\x22writertopair\x22],\x22weight\x22:100,\x22srcFilePath\x22:\x22src\/pages\/docs\/crocks\/Pair.md\x22,\x22id\x22:\x22Pair\x22,\x22location\x22:\x22\/docs\/crocks\/Pair.html\x22,\x22url\x22:\x22\/crocks\/docs\/crocks\/Pair.html\x22},\x22Pred\x22:{\x22title\x22:\x22Pred\x22,\x22description\x22:\x22Pred Crock\x22,\x22layout\x22:\x22guide\x22,\x22weight\x22:100,\x22srcFilePath\x22:\x22src\/pages\/docs\/crocks\/Pred.md\x22,\x22id\x22:\x22Pred\x22,\x22location\x22:\x22\/docs\/crocks\/Pred.html\x22,\x22url\x22:\x22\/crocks\/docs\/crocks\/Pred.html\x22},\x22Reader\x22:{\x22title\x22:\x22Reader\x22,\x22description\x22:\x22Reader Crock\x22,\x22layout\x22:\x22guide\x22,\x22weight\x22:110,\x22srcFilePath\x22:\x22src\/pages\/docs\/crocks\/Reader.md\x22,\x22id\x22:\x22Reader\x22,\x22location\x22:\x22\/docs\/crocks\/Reader.html\x22,\x22url\x22:\x22\/crocks\/docs\/crocks\/Reader.html\x22},\x22ReaderT\x22:{\x22title\x22:\x22ReaderT\x22,\x22description\x22:\x22Reader Monad Transformer Crock\x22,\x22layout\x22:\x22guide\x22,\x22weight\x22:120,\x22srcFilePath\x22:\x22src\/pages\/docs\/crocks\/ReaderT.md\x22,\x22id\x22:\x22ReaderT\x22,\x22location\x22:\x22\/docs\/crocks\/ReaderT.html\x22,\x22url\x22:\x22\/crocks\/docs\/crocks\/ReaderT.html\x22},\x22Result\x22:{\x22title\x22:\x22Result\x22,\x22description\x22:\x22Result Crock\x22,\x22layout\x22:\x22guide\x22,\x22functions\x22:[\x22trycatch\x22,\x22eithertoresult\x22,\x22firsttoresult\x22,\x22lasttoresult\x22,\x22maybetoresult\x22],\x22weight\x22:130,\x22srcFilePath\x22:\x22src\/pages\/docs\/crocks\/Result.md\x22,\x22id\x22:\x22Result\x22,\x22location\x22:\x22\/docs\/crocks\/Result.html\x22,\x22url\x22:\x22\/crocks\/docs\/crocks\/Result.html\x22,\x22active\x22:true},\x22State\x22:{\x22title\x22:\x22State\x22,\x22description\x22:\x22State Crock\x22,\x22layout\x22:\x22guide\x22,\x22functions\x22:[\x22evalwith\x22,\x22execwith\x22],\x22weight\x22:140,\x22srcFilePath\x22:\x22src\/pages\/docs\/crocks\/State.md\x22,\x22id\x22:\x22State\x22,\x22location\x22:\x22\/docs\/crocks\/State.html\x22,\x22url\x22:\x22\/crocks\/docs\/crocks\/State.html\x22},\x22Tuple\x22:{\x22title\x22:\x22Tuple\x22,\x22description\x22:\x22Tuple Crock\x22,\x22layout\x22:\x22guide\x22,\x22functions\x22:[\x22nmap\x22,\x22tupletoarray\x22],\x22weight\x22:150,\x22srcFilePath\x22:\x22src\/pages\/docs\/crocks\/Tuple.md\x22,\x22id\x22:\x22Tuple\x22,\x22location\x22:\x22\/docs\/crocks\/Tuple.html\x22,\x22url\x22:\x22\/crocks\/docs\/crocks\/Tuple.html\x22}},\x22title\x22:\x22Crocks\x22,\x22description\x22:\x22Crocks API\x22,\x22layout\x22:\x22notopic\x22,\x22icon\x22:\x22code-file\x22,\x22weight\x22:2,\x22srcFilePath\x22:\x22src\/pages\/docs\/crocks\/index.md\x22,\x22id\x22:\x22crocks\x22,\x22location\x22:\x22\/docs\/crocks\/\x22,\x22url\x22:\x22\/crocks\/docs\/crocks\/\x22,\x22childIds\x22:[\x22Arrow\x22,\x22Async\x22,\x22Const\x22,\x22Either\x22,\x22Equiv\x22,\x22Identity\x22,\x22Maybe\x22,\x22Pair\x22,\x22Pred\x22,\x22Reader\x22,\x22ReaderT\x22,\x22Result\x22,\x22State\x22,\x22Tuple\x22],\x22active\x22:true},\x22functions\x22:{\x22children\x22:{\x22combinators\x22:{\x22description\x22:\x22Combinators API\x22,\x22layout\x22:\x22notopic\x22,\x22title\x22:\x22Combinators\x22,\x22functions\x22:[\x22applyto\x22,\x22composeb\x22,\x22constant\x22,\x22converge\x22,\x22flip\x22,\x22identity\x22,\x22substitution\x22],\x22weight\x22:10,\x22srcFilePath\x22:\x22src\/pages\/docs\/functions\/combinators.md\x22,\x22id\x22:\x22combinators\x22,\x22location\x22:\x22\/docs\/functions\/combinators.html\x22,\x22url\x22:\x22\/crocks\/docs\/functions\/combinators.html\x22},\x22helpers\x22:{\x22title\x22:\x22Helpers\x22,\x22description\x22:\x22Helper functions\x22,\x22layout\x22:\x22notopic\x22,\x22functions\x22:[\x22assign\x22,\x22assoc\x22,\x22binary\x22,\x22compose\x22,\x22composek\x22,\x22composep\x22,\x22composes\x22,\x22curry\x22,\x22defaultprops\x22,\x22defaultto\x22,\x22dissoc\x22,\x22frompairs\x22,\x22getpathor\x22,\x22getpropor\x22,\x22lifta2\x22,\x22lifta3\x22,\x22liftn\x22,\x22mapprops\x22,\x22mapreduce\x22,\x22mconcat\x22,\x22mconcatmap\x22,\x22mreduce\x22,\x22mreducemap\x22,\x22nary\x22,\x22objof\x22,\x22omit\x22,\x22once\x22,\x22partial\x22,\x22pick\x22,\x22pipe\x22,\x22pipek\x22,\x22pipep\x22,\x22pipes\x22,\x22propor\x22,\x22proppathor\x22,\x22setpath\x22,\x22setprop\x22,\x22tap\x22,\x22unary\x22,\x22unit\x22,\x22unsetpath\x22,\x22unsetprop\x22],\x22weight\x22:20,\x22srcFilePath\x22:\x22src\/pages\/docs\/functions\/helpers.md\x22,\x22id\x22:\x22helpers\x22,\x22location\x22:\x22\/docs\/functions\/helpers.html\x22,\x22url\x22:\x22\/crocks\/docs\/functions\/helpers.html\x22},\x22logic-functions\x22:{\x22description\x22:\x22Logic Functions API\x22,\x22layout\x22:\x22notopic\x22,\x22title\x22:\x22Logic Functions\x22,\x22functions\x22:[\x22and\x22,\x22ifelse\x22,\x22implies\x22,\x22not\x22,\x22or\x22,\x22unless\x22,\x22when\x22],\x22weight\x22:30,\x22srcFilePath\x22:\x22src\/pages\/docs\/functions\/logic-functions.md\x22,\x22id\x22:\x22logic-functions\x22,\x22location\x22:\x22\/docs\/functions\/logic-functions.html\x22,\x22url\x22:\x22\/crocks\/docs\/functions\/logic-functions.html\x22},\x22pointfree-functions\x22:{\x22title\x22:\x22Point-free Functions\x22,\x22description\x22:\x22Point-free Functions API\x22,\x22layout\x22:\x22notopic\x22,\x22functions\x22:[\x22alt\x22,\x22ap\x22,\x22bimap\x22,\x22both\x22,\x22chain\x22,\x22coalesce\x22,\x22comparewith\x22,\x22concat\x22,\x22cons\x22,\x22contramap\x22,\x22either\x22,\x22empty\x22,\x22equals\x22,\x22extend\x22,\x22filter\x22,\x22first\x22,\x22fold\x22,\x22foldmap\x22,\x22head\x22,\x22map\x22,\x22merge\x22,\x22option\x22,\x22promap\x22,\x22race\x22,\x22reduce\x22,\x22reduceright\x22,\x22run\x22,\x22runwith\x22,\x22second\x22,\x22sequence\x22,\x22swap\x22,\x22tail\x22,\x22traverse\x22,\x22valueof\x22],\x22weight\x22:50,\x22srcFilePath\x22:\x22src\/pages\/docs\/functions\/pointfree-functions.md\x22,\x22id\x22:\x22pointfree-functions\x22,\x22location\x22:\x22\/docs\/functions\/pointfree-functions.html\x22,\x22url\x22:\x22\/crocks\/docs\/functions\/pointfree-functions.html\x22},\x22predicate-functions\x22:{\x22description\x22:\x22Predicate Functions API\x22,\x22layout\x22:\x22notopic\x22,\x22title\x22:\x22Predicate Functions\x22,\x22functions\x22:[\x22hasprop\x22,\x22hasproppath\x22,\x22isalt\x22,\x22isalternative\x22,\x22isapplicative\x22,\x22isapply\x22,\x22isarray\x22,\x22isbifunctor\x22,\x22isboolean\x22,\x22iscategory\x22,\x22ischain\x22,\x22iscontravariant\x22,\x22isDate\x22,\x22isdefined\x22,\x22isempty\x22,\x22isextend\x22,\x22isfalse\x22,\x22isfalsy\x22,\x22isfoldable\x22,\x22isfunction\x22,\x22isfunctor\x22,\x22isinteger\x22,\x22isiterable\x22,\x22ismonad\x22,\x22ismonoid\x22,\x22isnil\x22,\x22isnumber\x22,\x22isobject\x22,\x22isplus\x22,\x22isprofunctor\x22,\x22ispromise\x22,\x22issame\x22,\x22issametype\x22,\x22issemigroup\x22,\x22issemigroupoid\x22,\x22issetoid\x22,\x22isstring\x22,\x22istraversable\x22,\x22istrue\x22,\x22istruthy\x22,\x22patheq\x22,\x22pathsatisfies\x22,\x22propeq\x22,\x22propsatisfies\x22],\x22weight\x22:40,\x22srcFilePath\x22:\x22src\/pages\/docs\/functions\/predicate-functions.md\x22,\x22id\x22:\x22predicate-functions\x22,\x22location\x22:\x22\/docs\/functions\/predicate-functions.html\x22,\x22url\x22:\x22\/crocks\/docs\/functions\/predicate-functions.html\x22},\x22transformation-functions\x22:{\x22title\x22:\x22Transformation Functions\x22,\x22description\x22:\x22Transformation Functions API\x22,\x22layout\x22:\x22notopic\x22,\x22functions\x22:[\x22arraytolist\x22,\x22asyncToPromise\x22,\x22eithertoasync\x22,\x22eithertofirst\x22,\x22eithertolast\x22,\x22eithertomaybe\x22,\x22eithertoresult\x22,\x22firsttoasync\x22,\x22firsttoeither\x22,\x22firsttolast\x22,\x22firsttomaybe\x22,\x22firsttoresult\x22,\x22lasttoasync\x22,\x22lasttoeither\x22,\x22lasttofirst\x22,\x22lasttomaybe\x22,\x22lasttoresult\x22,\x22listtoarray\x22,\x22maybetoasync\x22,\x22maybetoeither\x22,\x22maybetofirst\x22,\x22maybetolast\x22,\x22maybetoresult\x22,\x22resulttoasync\x22,\x22resulttoeither\x22,\x22resulttofirst\x22,\x22resulttolast\x22,\x22resulttomaybe\x22,\x22tupletoarray\x22,\x22writertopair\x22],\x22weight\x22:60,\x22srcFilePath\x22:\x22src\/pages\/docs\/functions\/transformation-functions.md\x22,\x22id\x22:\x22transformation-functions\x22,\x22location\x22:\x22\/docs\/functions\/transformation-functions.html\x22,\x22url\x22:\x22\/crocks\/docs\/functions\/transformation-functions.html\x22}},\x22title\x22:\x22Functions\x22,\x22description\x22:\x22functions\x22,\x22layout\x22:\x22notopic\x22,\x22icon\x22:\x22code-file\x22,\x22weight\x22:40,\x22srcFilePath\x22:\x22src\/pages\/docs\/functions\/index.md\x22,\x22id\x22:\x22functions\x22,\x22location\x22:\x22\/docs\/functions\/\x22,\x22url\x22:\x22\/crocks\/docs\/functions\/\x22,\x22childIds\x22:[\x22combinators\x22,\x22helpers\x22,\x22logic-functions\x22,\x22predicate-functions\x22,\x22pointfree-functions\x22,\x22transformation-functions\x22]},\x22monoids\x22:{\x22children\x22:{\x22All\x22:{\x22title\x22:\x22All\x22,\x22description\x22:\x22All Monoid\x22,\x22layout\x22:\x22guide\x22,\x22weight\x22:10,\x22srcFilePath\x22:\x22src\/pages\/docs\/monoids\/All.md\x22,\x22id\x22:\x22All\x22,\x22location\x22:\x22\/docs\/monoids\/All.html\x22,\x22url\x22:\x22\/crocks\/docs\/monoids\/All.html\x22},\x22Any\x22:{\x22title\x22:\x22Any\x22,\x22description\x22:\x22Any Monoid\x22,\x22layout\x22:\x22guide\x22,\x22weight\x22:20,\x22srcFilePath\x22:\x22src\/pages\/docs\/monoids\/Any.md\x22,\x22id\x22:\x22Any\x22,\x22location\x22:\x22\/docs\/monoids\/Any.html\x22,\x22url\x22:\x22\/crocks\/docs\/monoids\/Any.html\x22},\x22Assign\x22:{\x22title\x22:\x22Assign\x22,\x22description\x22:\x22Assign Monoid\x22,\x22layout\x22:\x22guide\x22,\x22weight\x22:30,\x22srcFilePath\x22:\x22src\/pages\/docs\/monoids\/Assign.md\x22,\x22id\x22:\x22Assign\x22,\x22location\x22:\x22\/docs\/monoids\/Assign.html\x22,\x22url\x22:\x22\/crocks\/docs\/monoids\/Assign.html\x22},\x22Endo\x22:{\x22title\x22:\x22Endo\x22,\x22description\x22:\x22Endo Monoid\x22,\x22layout\x22:\x22guide\x22,\x22weight\x22:40,\x22srcFilePath\x22:\x22src\/pages\/docs\/monoids\/Endo.md\x22,\x22id\x22:\x22Endo\x22,\x22location\x22:\x22\/docs\/monoids\/Endo.html\x22,\x22url\x22:\x22\/crocks\/docs\/monoids\/Endo.html\x22},\x22First\x22:{\x22title\x22:\x22First\x22,\x22description\x22:\x22First Monoid\x22,\x22layout\x22:\x22guide\x22,\x22weight\x22:50,\x22srcFilePath\x22:\x22src\/pages\/docs\/monoids\/First.md\x22,\x22id\x22:\x22First\x22,\x22location\x22:\x22\/docs\/monoids\/First.html\x22,\x22url\x22:\x22\/crocks\/docs\/monoids\/First.html\x22},\x22Last\x22:{\x22title\x22:\x22Last\x22,\x22description\x22:\x22Last Monoid\x22,\x22layout\x22:\x22guide\x22,\x22weight\x22:60,\x22srcFilePath\x22:\x22src\/pages\/docs\/monoids\/Last.md\x22,\x22id\x22:\x22Last\x22,\x22location\x22:\x22\/docs\/monoids\/Last.html\x22,\x22url\x22:\x22\/crocks\/docs\/monoids\/Last.html\x22},\x22Max\x22:{\x22title\x22:\x22Max\x22,\x22description\x22:\x22Max Monoid\x22,\x22layout\x22:\x22guide\x22,\x22weight\x22:70,\x22srcFilePath\x22:\x22src\/pages\/docs\/monoids\/Max.md\x22,\x22id\x22:\x22Max\x22,\x22location\x22:\x22\/docs\/monoids\/Max.html\x22,\x22url\x22:\x22\/crocks\/docs\/monoids\/Max.html\x22},\x22Min\x22:{\x22title\x22:\x22Min\x22,\x22description\x22:\x22Min Monoid\x22,\x22layout\x22:\x22guide\x22,\x22weight\x22:80,\x22srcFilePath\x22:\x22src\/pages\/docs\/monoids\/Min.md\x22,\x22id\x22:\x22Min\x22,\x22location\x22:\x22\/docs\/monoids\/Min.html\x22,\x22url\x22:\x22\/crocks\/docs\/monoids\/Min.html\x22},\x22Prod\x22:{\x22title\x22:\x22Prod\x22,\x22description\x22:\x22Prod Monoid\x22,\x22layout\x22:\x22guide\x22,\x22weight\x22:90,\x22srcFilePath\x22:\x22src\/pages\/docs\/monoids\/Prod.md\x22,\x22id\x22:\x22Prod\x22,\x22location\x22:\x22\/docs\/monoids\/Prod.html\x22,\x22url\x22:\x22\/crocks\/docs\/monoids\/Prod.html\x22},\x22Sum\x22:{\x22title\x22:\x22Sum\x22,\x22description\x22:\x22Sum Monoid\x22,\x22layout\x22:\x22guide\x22,\x22weight\x22:100,\x22srcFilePath\x22:\x22src\/pages\/docs\/monoids\/Sum.md\x22,\x22id\x22:\x22Sum\x22,\x22location\x22:\x22\/docs\/monoids\/Sum.html\x22,\x22url\x22:\x22\/crocks\/docs\/monoids\/Sum.html\x22}},\x22title\x22:\x22Monoids\x22,\x22description\x22:\x22Monoids API\x22,\x22layout\x22:\x22notopic\x22,\x22icon\x22:\x22code-file\x22,\x22weight\x22:3,\x22srcFilePath\x22:\x22src\/pages\/docs\/monoids\/index.md\x22,\x22id\x22:\x22monoids\x22,\x22location\x22:\x22\/docs\/monoids\/\x22,\x22url\x22:\x22\/crocks\/docs\/monoids\/\x22,\x22childIds\x22:[\x22All\x22,\x22Any\x22,\x22Assign\x22,\x22Endo\x22,\x22First\x22,\x22Last\x22,\x22Max\x22,\x22Min\x22,\x22Prod\x22,\x22Sum\x22]}},\x22title\x22:\x22Documentation\x22,\x22description\x22:\x22Everything you need to know to get started.\x22,\x22srcFilePath\x22:\x22src\/pages\/docs\/index.soy\x22,\x22id\x22:\x22docs\x22,\x22location\x22:\x22\/docs\/\x22,\x22url\x22:\x22\/crocks\/docs\/\x22,\x22childIds\x22:[\x22getting-started\x22,\x22crocks\x22,\x22monoids\x22,\x22functions\x22,\x22search\x22],\x22active\x22:true}},\x22childIds\x22:[\x22docs\x22]},\x22basePath\x22:\x22\/crocks\x22,\x22topbar\x22:[{\x22href\x22:\x22\/crocks\/docs\/\x22,\x22label\x22:\x22Documentation\x22,\x22selected\x22:true}]}}'); if (window.electricPageComponent) {window.electricPageComponent.dispose();}var getByPath = function(obj, path) {path = path.split('.'); for (var i = 0; i < path.length; i++) {obj = obj[path[i]];}; return obj;}; if (window.pageComponent) {var page = getByPath(data.site, data.pageLocation); if (page) {window.electricPageComponent = pageComponent.default.render(pageComponent.default, {element: '#pageComponent > *', page: page, site: data.site});}if (window.runCodeMirror) {runCodeMirror();}}</script><!-- endinject --></div><!-- inject:vendor:js --><script>CodeMirror.defaults.lineNumbers = true; CodeMirror.defaults.matchBrackets = true; CodeMirror.defaults.readOnly = true; CodeMirror.defaults.tabindex = -1; CodeMirror.defaults.tabSize = 2; CodeMirror.defaults.theme = 'blackboard'; CodeMirror.defaults.viewportMargin = Infinity; var REGEX_LB = /&#123;/g; var REGEX_RB = /&#125;/g; function runCodeMirror() {var code = document.querySelectorAll('.code'); for (var i = 0; i < code.length; i++) {var text = code[i].innerText .replace(REGEX_LB, '{') .replace(REGEX_RB, '}'); var editor = CodeMirror(function(elt) {var preEl = code[i].parentNode; preEl.parentNode.appendChild(elt);}, {mode: code[i].getAttribute('data-mode') || '', value: text});}if (window.ElectricCodeTabs) {new window.ElectricCodeTabs();}}runCodeMirror(); function runGoogleAnalytics(path) {if (typeof ga === 'function') {ga('set', 'page', path); ga('send', 'pageview');}}document.addEventListener('DOMContentLoaded', function() {if (typeof senna !== 'undefined') {var app = senna.dataAttributeHandler.getApp(); app.on('endNavigate', function(event) {runGoogleAnalytics(event.path);});}}); (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga'); ga('create', 'UA-37033501-5', 'auto'); ga('send', 'pageview');</script><!-- endinject --></body></html>

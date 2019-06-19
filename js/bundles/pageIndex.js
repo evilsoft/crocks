@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([0,36,37,38],[
+webpackJsonppageComponent([0,37,38,39],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -28383,7 +28383,8 @@ exports.default = parseFromAnchor;
 /* 249 */,
 /* 250 */,
 /* 251 */,
-/* 252 */
+/* 252 */,
+/* 253 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -28568,7 +28569,7 @@ function $features(opt_data, opt_ignored, opt_ijData) {
       ie_open('div', null, null,
           'class', 'row');
         ie_open('a', null, null,
-            'href', '/docs/crocks/');
+            'href', 'docs/crocks/');
           ie_open('section', null, null,
               'class', 'feature col-md-4 col-md-offset-2');
             ie_open('div', null, null,
@@ -28587,7 +28588,7 @@ function $features(opt_data, opt_ignored, opt_ijData) {
           ie_close('section');
         ie_close('a');
         ie_open('a', null, null,
-            'href', '/docs/monoids/');
+            'href', 'docs/monoids/');
           ie_open('section', null, null,
               'class', 'feature col-md-4');
             ie_open('div', null, null,
@@ -28606,7 +28607,7 @@ function $features(opt_data, opt_ignored, opt_ijData) {
           ie_close('section');
         ie_close('a');
         ie_open('a', null, null,
-            'href', '/docs/functions/');
+            'href', 'docs/functions/');
           ie_open('section', null, null,
               'class', 'feature col-md-4');
             ie_open('div', null, null,
@@ -28813,7 +28814,6 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(pageIndex, templates)
 
 
 /***/ }),
-/* 253 */,
 /* 254 */,
 /* 255 */,
 /* 256 */,
@@ -28848,7 +28848,9 @@ __WEBPACK_IMPORTED_MODULE_1_metal_soy___default.a.register(pageIndex, templates)
 /* 285 */,
 /* 286 */,
 /* 287 */,
-/* 288 */
+/* 288 */,
+/* 289 */,
+/* 290 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28884,7 +28886,7 @@ __webpack_require__(132);
 
 __webpack_require__(133);
 
-var _indexSoy = __webpack_require__(252);
+var _indexSoy = __webpack_require__(253);
 
 var _indexSoy2 = _interopRequireDefault(_indexSoy);
 
@@ -28915,4 +28917,4 @@ _metalSoy2.default.register(pageIndex, _indexSoy2.default);
 exports.default = pageIndex;
 
 /***/ })
-],[288]);
+],[290]);

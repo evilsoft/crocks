@@ -465,6 +465,27 @@ test('Async fork settle', t => {
   t.end()
 })
 
+test('Async cancel bichain cleanup functions - rejected', t => {
+  const rejCleanUp = sinon.spy()
+  const forkCleanUp = sinon.spy()
+
+  const cancel =
+    Async.Rejected(0)
+      .bichain(x => Async(rej => { rej(x); return rejCleanUp }), Async.of)
+      .fork(unit, unit, forkCleanUp)
+
+  cancel()
+
+  t.ok(forkCleanUp.calledAfter(rejCleanUp), 'calls the fork cleanup last')
+
+  cancel()
+
+  t.ok(rejCleanUp.calledOnce, 'calls the Async level cleanup only once')
+  t.ok(forkCleanUp.calledOnce, 'calls the fork level cleanup only once')
+
+  t.end()
+})
+
 test('Async cancel chain cleanup functions', t => {
   const resCleanUp = sinon.spy()
   const rejCleanUp = sinon.spy()
@@ -1300,7 +1321,7 @@ test('Async bichain right errors', t => {
   t.end()
 })
 
-test('Async bichain properties (BiChain)', t => {
+test('Async bichain properties (Bichain)', t => {
   t.ok(isFunction(Async(unit).bichain), 'provides a bichain function')
 
   const aRej = sinon.spy()

@@ -1,5 +1,5 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
-/** @author Ian Hofmann-Hicks (evil) */
+/** @author RichardForrester */
 
 const isFunction = require('../core/isFunction')
 const isNil = require('../core/isNil')
@@ -19,7 +19,7 @@ function init(m) {
     }
   }
 
-  throw new TypeError('init: Array, String, or List required')
+  throw new TypeError('init: Argument must be an Array, String, or List')
 }
 
 module.exports = init

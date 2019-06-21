@@ -89,6 +89,8 @@ accepted Datatype):
 | `foldMap` | `Semigroup s => (a -> s) -> m a -> s` | `crocks/pointfree` |
 | [`fst`][fst] | `m a b -> a` | `crocks/Pair` |
 | `head` | `m a -> Maybe a` | `crocks/pointfree` |
+| `init` | `m a -> Maybe (m a)` | `crocks/pointfree` |
+| `last` | `m a -> Maybe a` | `crocks/pointfree` |
 | `log` | `m a b -> a` | `crocks/Writer` |
 | `map` | `(a -> b) -> m a -> m b` | `crocks/pointfree` |
 | `merge` | `(a -> b -> c) -> m a b -> c` | `crocks/pointfree` |
@@ -136,6 +138,8 @@ accepted Datatype):
 | `foldMap` | `Array`, `List` |
 | [`fst`][fst] | [`Pair`][pair-fst] |
 | `head` | `Array`, `List`, `String` |
+| `init` | `Array`, `List`, `String` |
+| `last` | `Array`, `List`, `String` |
 | `log` | `Writer` |
 | `map` | [`Async`][async-map], `Array`, [`Arrow`][arrow-map], [`Const`][const-map], [`Either`][either-map], `Function`, `Identity`, `IO`, `List`, [`Maybe`][maybe-map], `Object`, [`Pair`][pair-map], [`Reader`][reader-map], [`Result`][result-map], `Star`, [`State`][state-map], [`Tuple`][tuple-map], `Unit`, `Writer` |
 | `merge` | [`Pair`][pair-merge], [`Tuple`][tuple-merge] |

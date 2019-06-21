@@ -17,7 +17,7 @@ test('last pointfree', t => {
 
   t.ok(isFunction(last), 'is a function')
 
-  const err = /last: List, String, or Iterable required/
+  const err = /last: Argument should be a List, String, or Iterable/
   t.throws(f(undefined), err, 'throws when arg is undefined')
   t.throws(f(null), err, 'throws when arg is null')
   t.throws(f(0), err, 'throws when arg is falsey number')
@@ -83,8 +83,8 @@ test('last pointfree iterable', t => {
   t.equals(last(two).type(), M.type(), 'returns a Maybe on two element iterable')
 
   t.equals(last(empty).option('Nothing'), 'Nothing', 'returns a Nothing on empty')
-  t.equals(last(one).option('Nothing'), 2, 'returns `2` on six element iterable')
-  t.equals(last(two).option('Nothing'), 3, 'returns `3` on seven element iterable')
+  t.equals(last(one).option('Nothing'), 2, 'returns `2` on two element iterable')
+  t.equals(last(two).option('Nothing'), 3, 'returns `3` on three element iterable')
 
   t.end()
 })

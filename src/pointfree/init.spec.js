@@ -17,7 +17,7 @@ test('init pointfree', t => {
 
   t.ok(isFunction(init), 'is a function')
 
-  const err = /init: Array, String, or List required/
+  const err = /init: Argument must be an Array, String, or List/
   t.throws(f(undefined), err, 'throws when arg is undefined')
   t.throws(f(null), err, 'throws when arg is null')
   t.throws(f(0), err, 'throws when arg is falsey number')

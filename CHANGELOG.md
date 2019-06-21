@@ -1,5 +1,83 @@
 # Change Log for `crocks`
 
+v0.12.0 -- June 16, 2019
+--
+
+### Fixes
+* Remove circular reference when using `inspect` with `Either`
+
+### Breaking
+* Move `fanout` into the `Pair` folder.
+* Move `project` into `Tuple` folder.
+* `assoc` will now throw when the key/index does not match the structure it is referencing. Positive `Integer` for `Array`, `String` for `Object`.
+
+### Additions
+* Functions/Methods
+  * `fantasy-land` `Filterable` interface to `List`
+  * `setPath` Helper
+  * `unsetPath` Helper
+  * `tupleToArray` Point-free
+  * `isDate` Predicate
+  * `isFalse`, `isFalsy`, `isTrue` and `isTruthy` Predicates
+* Deprecation of `prop` and `propPath` Functions. Original functions will be maintained until `1.0.0` release.
+  * Replace `helpers/assoc` with `helpers/setProp`
+  * Replace `helpers/dissoc` with `helpers/unsetPath`
+  * Replace `helpers/propOr` with `helpers/getPropOr`
+  * Replace `helpers/propPathOr` with `helpers/getPathOr`
+  * Replace `Maybe/prop` with `Maybe/getProp`
+  * Replace `Maybe/propPath` with `Maybe/getPath`
+
+### Modifications
+* Add Iterable support to `head` Helper Function
+* Have `isEmpty` work with `Monoid`s
+
+### Documentation
+* Many minor corrections and link updates
+* Add examples for Logic Functions
+* Add `Result` Documentation
+* Updates to `combinator` Functions
+
+
+### Pull Requests
+* [#347 - Fix small `Reader` typo](https://github.com/evilsoft/crocks/pull/347)
+* [#341 - Change Foldable to Filterable on List.filter for FL Compliance](https://github.com/evilsoft/crocks/pull/341)
+* [#322 - Add `setPath` helper function](https://github.com/evilsoft/crocks/pull/322)
+* [#331 - Move `assoc` to be `setProp`](https://github.com/evilsoft/crocks/pull/331)
+* [#350 - Fixup some Links in the Docs](https://github.com/evilsoft/crocks/pull/350)
+* [#342 - Move fanout to the Pair folder](https://github.com/evilsoft/crocks/pull/342)
+* [#348 - Simplify `isNil` predicate for better backward compatibility.](https://github.com/evilsoft/crocks/pull/348)
+* [#349 - Added support for iterables to `head`](https://github.com/evilsoft/crocks/pull/349)
+* [#351 - Create function to clone iterables](https://github.com/evilsoft/crocks/pull/351)
+* [#354 - Add tupleToArray point free function](https://github.com/evilsoft/crocks/pull/354)
+* [#353 - Update for head that now uses the new cloneIterable function](https://github.com/evilsoft/crocks/pull/353)
+* [#359 - Adding examples for the `And` function](https://github.com/evilsoft/crocks/pull/359)
+* [#361 - Adding in examples for ifElse](https://github.com/evilsoft/crocks/pull/361)
+* [#363 - Update Either.md](https://github.com/evilsoft/crocks/pull/363)
+* [#362 - Adding in new isDate function](https://github.com/evilsoft/crocks/pull/362)
+* [#308 - Move project to the Tuple folder](https://github.com/evilsoft/crocks/pull/308)
+* [#367 - Update setPath to differentiate Array/Object by Integer/String](https://github.com/evilsoft/crocks/pull/367)
+* [#370 - More changes to setPath and unsetPath](https://github.com/evilsoft/crocks/pull/370)
+* [#364 - Adding in check for empty monoid](https://github.com/evilsoft/crocks/pull/364)
+* [#383 - Minor update to fix docs bug](https://github.com/evilsoft/crocks/pull/383)
+* [#374 - Adding truth predicates](https://github.com/evilsoft/crocks/pull/374)
+* [#386 - Add `unsetProp` and deprecate `dissoc` in favor of the new function](https://github.com/evilsoft/crocks/pull/386)
+* [#390 - Update `src` dependencies to fixup audit](https://github.com/evilsoft/crocks/pull/390)
+* [#365 - Result Documentation](https://github.com/evilsoft/crocks/pull/365)
+* [#372 - Added documentation for final logic functions](https://github.com/evilsoft/crocks/pull/372)
+* [#381 - Updating descriptions and adding examples for combinators](https://github.com/evilsoft/crocks/pull/381)
+* [#385 - Fixing linting issues](https://github.com/evilsoft/crocks/pull/385)
+* [#392 - Fix isEmpty for truthy numbers](https://github.com/evilsoft/crocks/pull/392)
+* [#391 - Updates to fully enable linting for docs](https://github.com/evilsoft/crocks/pull/391)
+* [#389 - Move `propOr` to `getPropOr`](https://github.com/evilsoft/crocks/pull/389)
+* [#396 - Remove `warning` option for uglifyjs to fix node 6 builds](https://github.com/evilsoft/crocks/pull/396)
+* [#395 - Move `propPathOr` to `getPathOr`](https://github.com/evilsoft/crocks/pull/395)
+* [#398 - Fix invalid link](https://github.com/evilsoft/crocks/pull/398)
+* [#400 - Move `prop` to `getProp`](https://github.com/evilsoft/crocks/pull/400)
+* [#402 - Update omit function signature](https://github.com/evilsoft/crocks/pull/402)
+* [#403 - Move `propPath` to `getPath`](https://github.com/evilsoft/crocks/pull/403)
+* [#408 - Fix Either constructor when called with object containing a circular reference](https://github.com/evilsoft/crocks/pull/408)
+* [#407 - Move propPath predicate functions to path](https://github.com/evilsoft/crocks/pull/407)
+
 v0.11.1 -- November 4, 2018
 --
 

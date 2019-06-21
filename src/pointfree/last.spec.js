@@ -17,7 +17,7 @@ test('last pointfree', t => {
 
   t.ok(isFunction(last), 'is a function')
 
-  const err = /last: Argument should be a List, String, or Iterable/
+  const err = /last: Argument must be a List, String, or Iterable/
   t.throws(f(undefined), err, 'throws when arg is undefined')
   t.throws(f(null), err, 'throws when arg is null')
   t.throws(f(0), err, 'throws when arg is falsey number')

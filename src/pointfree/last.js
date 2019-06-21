@@ -37,7 +37,7 @@ function last(m) {
     return Just(val)
   }
 
-  throw new TypeError('last: Argument should be a List, String, or Iterable')
+  throw new TypeError('last: Argument must be a List, String, or Iterable')
 }
 
 module.exports = last

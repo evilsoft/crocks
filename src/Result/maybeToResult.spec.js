@@ -45,7 +45,7 @@ test('maybeToResult with Maybe', t => {
   t.ok(isSameType(Result, bad), 'returns an Result with a Nothing')
 
   t.equals(good.either(identity, identity), some, 'Just maps to a Ok')
-  t.equals(bad.either(identity, identity), none, 'Nothing maps to a Left with option value')
+  t.equals(bad.either(identity, identity), none, 'Nothing maps to a Err with option value')
 
   t.end()
 })
@@ -80,7 +80,7 @@ test('maybeToResult with Maybe returning function', t => {
   t.ok(isSameType(Result, bad), 'returns an Result with a Nothing')
 
   t.equals(good.either(identity, identity), some, 'Just maps to a Ok')
-  t.equals(bad.either(identity, identity), none, 'Nothing maps to a Left with option value')
+  t.equals(bad.either(identity, identity), none, 'Nothing maps to an Err with option value')
 
   t.end()
 })

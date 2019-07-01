@@ -1523,6 +1523,82 @@ Just(Last.empty())
 //=> Nothing
 ```
 
+
+#### maybeToArray
+
+`crocks/Maybe/maybeToArray`
+
+```haskell
+maybeToArray :: Maybe a -> [ a ]
+maybeToArray :: (a -> Maybe b) -> a -> [ b ]
+```
+
+Used to transform a given `Maybe` instance to an `Array` or
+flatten an `Array` of `Maybe` into an `Array` when chained, `maybeToArray` will
+turn a [`Just`](#just) instance into a single element `Array`, wrapping the
+original value contained within
+the [`Just`](#just) instance. All [`Nothing`](#nothing) instances will map to an
+empty `Array`.
+
+Like all `crocks` transformation functions, `maybeToArray` has two possible
+signatures and will behave differently when passed either
+a `Maybe` instance or a function that returns an instance of `Maybe`. When
+passed the instance, a transformed `Array` is returned. When passed
+a `Maybe` returning function, a function will be returned that takes a given
+value and returns an `Array`.
+
+```javascript
+import Maybe from 'crocks/Maybe'
+
+import chain from 'crocks/pointfree/chain'
+import composeK from 'crocks/helpers/composeK'
+import getProp from 'crocks/Maybe/getProp'
+import isString from 'crocks/predicates/isString'
+import safe from 'crocks/Maybe/safe'
+
+import maybeToArray from 'crocks/Maybe/maybeToArray'
+
+const { Nothing, Just } = Maybe
+
+maybeToArray(Nothing())
+//=> []
+
+maybeToArray(Just(33))
+//=> [ 33 ]
+
+// flatten :: [ Maybe a ] -> [ a ]
+const flatten =
+  chain(maybeToArray)
+
+flatten([ Just(33), Just('text') ])
+//=> [ 33, 'text' ]
+
+flatten([ Just('left'), Nothing(), Just('right') ])
+//=> [ 'left', 'right' ]
+
+// getUser :: a -> Maybe String
+const getUser = composeK(
+  safe(isString),
+  getProp('user')
+)
+
+// getUsers :: [ * ] -> [ String ]
+const getUsers =
+  chain(maybeToArray(getUser))
+
+// data :: [ * ]
+const data = [
+  { user: 'Allison' },
+  'Ben',
+  { user: 'Beth' },
+  null,
+  { user: 'Claire' }
+]
+
+getUsers(data)
+//=> [ 'Allison', 'Beth', 'Claire' ]
+```
+
 #### resultToMaybe
 
 `crocks/Maybe/resultToMaybe`

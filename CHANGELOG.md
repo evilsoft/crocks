@@ -1,5 +1,19 @@
 # Change Log for `crocks`
 
+v0.12.1 -- June 30, 2019
+
+### Additions
+* Functions/Methods
+  * `init` Pointfree
+  * `last` Pointfree
+  * `List/maybeToList` Transformation
+  * `Maybe/maybeToArray` Transformation
+
+### Pull Requests
+* [#409 - Add `init` and `last` to pointfree](https://github.com/evilsoft/crocks/pull/409)
+* [#412 - Add `maybeToList` and `maybeToArray` transformations](https://github.com/evilsoft/crocks/pull/412)
+
+
 v0.12.0 -- June 16, 2019
 --
 

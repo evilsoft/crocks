@@ -1,5 +1,5 @@
-/** @license ISC License (c) copyright 2016 original and current authors */
-/** @author Ian Hofmann-Hicks (evil) */
+/** @license ISC License (c) copyright 2019 original and current authors */
+/** @author Dale Francis (dalefrancis88) */
 
 const hasAlg = require('./hasAlg')
 

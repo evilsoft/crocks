@@ -1,7 +1,7 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const VERSION = 4
+const VERSION = 5
 
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
@@ -324,7 +324,7 @@ function Async(fn) {
 
   function bichain(l, r) {
     if(!isFunction(l) || !isFunction(r)) {
-      throw new TypeError('Async.bichain: Functions required for both arguments')
+      throw new TypeError('Async.bichain: Both arguments must be Async returning functions')
     }
 
     return Async(function(rej, res) {
@@ -337,7 +337,7 @@ function Async(fn) {
 
           if(!isSameType(Async, m)) {
             throw new TypeError(
-              'Async.bichain: Function must return another Async'
+              'Async.bichain: Both arguments must be Async returning functions'
             )
           }
 

@@ -21,7 +21,7 @@ test('bichain pointfree', t => {
 
   t.ok(isFunction(bichain), 'is a function')
 
-  const err = /bichain: Functions required for first two arguments/
+  const err = /bichain: First two arguments must be Async returning functions/
   t.throws(m(undefined, unit, f), err, 'throws if first arg is undefined')
   t.throws(m(null, unit, f), err, 'throws if first arg is null')
   t.throws(m(0, unit, f), err, 'throws if first arg is a falsey number')
@@ -44,7 +44,7 @@ test('bichain pointfree', t => {
   t.throws(m(unit, [], f), err, 'throws if second arg is an array')
   t.throws(m(unit, {}, f), err, 'throws if second arg is an object')
 
-  const last = /bichain: Bichain required for third argument/
+  const last = /bichain: Third argument must be a Bichain/
   t.throws(m(unit, unit, undefined), last, 'throws if third arg is undefined')
   t.throws(m(unit, unit, null), last, 'throws if third arg is null')
   t.throws(m(unit, unit, 0), last, 'throws if third arg is a falsey number')

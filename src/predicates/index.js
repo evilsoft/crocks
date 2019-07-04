@@ -8,7 +8,7 @@ module.exports = {
   isApply: require('./isApply'),
   isArray: require('./isArray'),
   isBifunctor: require('./isBifunctor'),
-  isBichain: require('./isbichain'),
+  isBichain: require('./isBichain'),
   isBoolean: require('./isBoolean'),
   isCategory: require('./isCategory'),
   isChain: require('./isChain'),

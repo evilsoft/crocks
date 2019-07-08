@@ -308,7 +308,7 @@ Thanks goes to these wonderful people ([emoji key][emojis]):
 ### Course/Videos
 
 #### Video evilsoft
-* [State Monad In Javascript (egghead.io)](https://egghead.io/courses/state-monad-in-javascript)
+* [State Monad In JavaScript (egghead.io)](https://egghead.io/courses/state-monad-in-javascript)
 * [Working With ADTs (YouTube)](https://www.youtube.com/playlist?list=PLjvgv-FpMo7XRVFZjZsWXJ5nVmRJ5a5Hv)
 * [Functional JS (YouTube)](https://www.youtube.com/playlist?list=PLjvgv-FpMo7XvlfO8YKiz4_onf8WonhiA)
 

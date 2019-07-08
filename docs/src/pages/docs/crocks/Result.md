@@ -371,7 +371,7 @@ value. `equals` takes any given argument and returns `true` if the passed
 argument is a `Result` ([`Ok`](#ok) or [`Err`](#err)) with a contained value
 equal to the contained value of the `Result` the method is being called on. If
 the passed argument is not a `Result` or the contained values are not equal by
-value thn `equals` will return `false`.
+value then `equals` will return `false`.
 
 ```javascript
 import Result from 'crocks/Result'
@@ -588,7 +588,7 @@ Result e a ~> ((e -> d), (a -> b)) -> Result d b
 
 While it's more common to only [`map`](#map) over a `Result` that's an
 [`Ok`](#ok) there may come a time when you need to map over a `Result` regardless
-of wether it's an [`Ok`](#ok) or an [`Err`](#err).
+of whether it's an [`Ok`](#ok) or an [`Err`](#err).
 
 `bimap` takes two mapping functions as its arguments. The first function is
 used to map an [`Err`](#err) instance, while the second maps an [`Ok`](#ok).
@@ -1215,7 +1215,7 @@ parameters passed and return either an [`Ok`](#ok) when successful or an
 
 Although we do our best to not use `Error` to control program flow, there are
 times when we don't have full control over the behaviour of a function. The
-saviour in this situation is `tryCatch`. You can wrap this funcition and it
+saviour in this situation is `tryCatch`. You can wrap this function and it
 will always return a `Result`
 
 ```javascript

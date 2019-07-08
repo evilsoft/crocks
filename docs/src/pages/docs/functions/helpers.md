@@ -763,7 +763,7 @@ white-list properties rather than reject them, take a look at [`pick`](#pick).
 once :: ((*) -> a) -> ((*) -> a)
 ```
 
-There are times in Javascript development where you only want to call a function
+There are times in JavaScript development where you only want to call a function
 once and memo-ize the first result for every subsequent call to that function.
 Just pass the function you want guarded to `once` and you will get back a
 function with the expected guarantees.

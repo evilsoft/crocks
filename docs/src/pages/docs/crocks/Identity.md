@@ -10,7 +10,7 @@ Identity a
 ```
 
 `Identity` is a `crock` that can be used to wrap a common interface around 
-existing Javascript types and functions. It maintains integrity by lifting 
+existing JavaScript types and functions. It maintains integrity by lifting 
 and applying functions and types as is, without adding any additional structure
 or effects. By not applying and additional structure to existing functions, 
 `Identity` can be swapped in and out for other `Functor`s that do apply their 
@@ -37,7 +37,7 @@ Identity(10)
 Identity :: a -> Identity a
 ```
 
-The contstructor for an `Identity` is a unary function. When a value is passed
+The constructor for an `Identity` is a unary function. When a value is passed
 in an `Identity` of the given value is returned ready for `map` or `chain`. 
 
 ```javascript

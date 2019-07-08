@@ -24,7 +24,7 @@ be accessed by adding something like the following in the file that needs it:
 // node require syntax
 const crocks = require('crocks')
 
-// Javascript modules (if you are transpiling)
+// JavaScript modules (if you are transpiling)
 import crocks from 'crocks'
 ```
 

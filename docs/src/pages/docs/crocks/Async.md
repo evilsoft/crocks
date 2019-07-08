@@ -1279,7 +1279,7 @@ import Async from 'crocks/Async'
 import race from 'crocks/Async/race'
 import asyncToPromise from 'crocks/Async/asyncToPromise'
 
-import ifElse from 'crocks/logice/ifElse'
+import ifElse from 'crocks/logic/ifElse'
 import compose from 'crocks/helpers/compose'
 import isPromise from 'crocks/pointfree/isPromise'
 

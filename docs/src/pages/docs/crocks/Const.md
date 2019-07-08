@@ -48,7 +48,7 @@ const add =
 
 Pair(Identity(30), StrConst('always, forever'))
   .bimap(map(add(4)), map(add(4)))
-//=> Pair(Identity 34, Const(String) "alway, forever")
+//=> Pair(Identity 34, Const(String) "always, forever")
 
 // ArrayConst :: [ b ] -> Const [ b ] a
 const ArrayConst =

@@ -285,7 +285,7 @@ heckYeah
 State.of :: a -> State s a
 ```
 
-Used to "blindly" lift any Javascript value into a `State`, `of` will take the
+Used to "blindly" lift any JavaScript value into a `State`, `of` will take the
 provided value and return back a new `State` instance with the value in
 the resultant. There are many uses for `of`, but mostly it is used to set the
 resultant in the same way [`put`](#put) is used to replace the state. Many times

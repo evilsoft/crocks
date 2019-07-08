@@ -42,7 +42,7 @@ description of their truth:
 * `isMonoid :: a -> Boolean`: an ADT that provides `concat` and `empty` methods
 * `isNil :: a -> Boolean`: `undefined` or `null` or `NaN`
 * `isNumber :: a -> Boolean`: `Number` that is not a `NaN` value, `Infinity` included
-* `isObject :: a -> Boolean`: Plain Old Javascript Object (POJO)
+* `isObject :: a -> Boolean`: Plain Old JavaScript Object (POJO)
 * `isPlus :: a -> Boolean`: an ADT that provides `map`, `alt` and `zero` methods
 * `isProfunctor :: a -> Boolean`: an ADT that provides `map`, `contramap` and `promap` methods
 * `isPromise :: a -> Boolean`: an object implementing `then` and `catch`

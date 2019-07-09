@@ -321,8 +321,8 @@ eitherToFirst :: Either b a -> First a
 eitherToFirst :: (a -> Either c b) -> a -> First b
 ```
 
-Used to transform a given [`Either`][either] instance to a `First`
-instance, `eitherToFirst` will turn a [`Right`][right] instance into a
+Used to transform a given [`Either`][either] instance to
+a `First` instance, `eitherToFirst` will turn a [`Right`][right] instance into a
 non-empty `First`, wrapping the original value contained in
 the [`Right`][right]. All [`Left`][left] instances will map to
 an [`empty`](#empty) `First`, mapping the originally contained value to
@@ -440,11 +440,11 @@ maybeToFirst :: Maybe a -> First a
 maybeToFirst :: (a -> Maybe b) -> a -> First b
 ```
 
-Used to transform a given [`Maybe`][maybe] instance to a `First`
-instance, `maybeToFirst` will turn a [`Just`][just] into a non-empty
-`First` instance, wrapping the original value contained within the `First`.
-All [`Nothing`][nothing] instances will map to an [`empty`](#empty) `First`
-instance.
+Used to transform a given [`Maybe`][maybe] instance to
+a `First` instance, `maybeToFirst` will turn a [`Just`][just] into a
+non-empty `First` instance, wrapping the original value contained within
+the `First`. All [`Nothing`][nothing] instances will map to
+an [`empty`](#empty) `First` instance.
 
 This function is available mostly for completion sake, as `First` can always
 take a `Maybe` as its argument during construction. So while there is not a

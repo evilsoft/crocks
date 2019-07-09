@@ -18,10 +18,10 @@ can be accomplished in `crocks` by reaching for `assign`. Unlike the
 `Object.assign` that ships with JavaScript, this `assign` will combine your
 `Object`s into a new shallow copy of their merger. `assign` only takes two
 arguments and will overwrite keys present in the second argument with values
-from the first. As with most of the `crocks` `Object` based functions, `assign`
-will omit any key-value pairs that are `undefined`. Check out a related function
-named [`defaultProps`](#defaultprops) that will only assign values that are
-`undefined` in the second argument.
+from the first. As with most of the `crocks` `Object` based functions, `assign` will
+omit any key-value pairs that are `undefined`. Check out a related function
+named [`defaultProps`](#defaultprops) that will only assign values that
+are `undefined` in the second argument.
 
 
 #### binary
@@ -333,8 +333,8 @@ fromPairs :: Foldable f => f (Pair String a) -> Object
 
 As an inverse to [`toPairs`][topairs], `fromPairs` takes either an `Array` or
 `List` of key-value `Pair`s and constructs an `Object` from it. The `Pair` must
-contain a `String` in the `fst` and any type of value in the `snd`. The `fst`
-will become the key for the value in the `snd`. All primitive values are copied
+contain a `String` in the `fst` and any type of value in the `snd`. The `fst` will
+become the key for the value in the `snd`. All primitive values are copied
 into the new `Object`, while non-primitives are references to the original. If
 you provide an `undefined` values for the second, that `Pair` will not be
 represented in the resulting `Object`. Also, when if multiple keys share the
@@ -695,13 +695,12 @@ mreduceMap :: Monoid m, Foldable f => m -> (b -> a) -> f b -> a
 There comes a time where the values you have in a `List` or an `Array` are not
 in the type that is needed for the [`Monoid`][monoids] you want to
 combine with. These two functions can be used to `map` some transforming
-function from a given type into the type needed for the
-[`Monoid`][monoids]. In essence, this function will run each value
-through the function before it lifts the value into the
-[`Monoid`][monoids], before `concat` is applied. The difference
-between the two is that `mconcatMap` returns the result inside the
-[`Monoid`][monoids] used to combine them. Where `mreduceMap`
-returns the bare value itself.
+function from a given type into the type needed for
+the [`Monoid`][monoids]. In essence, this function will run each value through
+the function before it lifts the value into the [`Monoid`][monoids],
+before `concat` is applied. The difference between the two is
+that `mconcatMap` returns the result inside the [`Monoid`][monoids] used
+to combine them. Where `mreduceMap` returns the bare value itself.
 
 #### nAry
 
@@ -814,9 +813,9 @@ key-value pairs on an object through. Think of `pick` as a sort of white-list or
 filter for `Object` properties. Pass it a `Foldable` structure of `String`s that
 are the keys you would like to pick off of your `Object`. This will give you
 back a shallow copy of the key-value pairs you specified. This function will
-ignore inherited properties and should only be used with POJOs. Any `undefined`
-values will not be copied over, although `null` values are allowed. For
-black-listing properties, have a look at [`omit`](#omit).
+ignore inherited properties and should only be used with POJOs.
+Any `undefined` values will not be copied over, although `null` values are
+allowed. For black-listing properties, have a look at [`omit`](#omit).
 
 #### pipe
 
@@ -962,10 +961,10 @@ pipeS :: Semigroupoid s => (s a b, ..., s y z) -> s a z
 While `Star`s and `Arrow`s come in very handy at times, the only thing that
 could make them better is to compose them. With `pipeS` you can do just that
 with any `Semigroupoid`. Just like with [`composeS`](#composes), you just pass
-it `Semigroupoid`s of the same type and you will get back another `Semigroupoid`
-with them all composed together. The only difference between the two, is that
-`pipeS` composes in a left-to-right fashion, while [`composeS`](#composes) does
-the opposite.
+it `Semigroupoid`s of the same type and you will get back
+another `Semigroupoid` with them all composed together. The only difference
+between the two, is that `pipeS` composes in a left-to-right fashion,
+while [`composeS`](#composes) does the opposite.
 
 ```javascript
 import pipeS from 'crocks/helpers/pipeS'
@@ -1132,12 +1131,12 @@ exercise some discipline here to not mutate.
 tryCatch :: ((*) -> b) -> (*) -> Result e b
 ```
 
-Typical try-catch blocks are very imperative in their usage. This `tryCatch`
-function provides a means of capturing that imperative nature in a simple
-declarative style. Pass it a function that could fail and it will return you
-another function wrapping the first function. When called, the new function will
-either return the result in a `Result.Ok` if everything was good, or an error
-wrapped in an `Result.Err` if it fails.
+Typical try-catch blocks are very imperative in their usage. This `tryCatch` function
+provides a means of capturing that imperative nature in a simple declarative
+style. Pass it a function that could fail and it will return you another function
+wrapping the first function. When called, the new function will either return the
+result in a `Result.Ok` if everything was good, or an error wrapped in
+an `Result.Err` if it fails.
 
 #### unary
 

@@ -10,14 +10,14 @@ Arrow a b
 ```
 
 `Arrow` is a `Profunctor` that lifts a function of type `a -> b` and allows for
-lazy execution of the function. `Arrow` can be considered a `Strong Profunctor`
-if the underlying data running through the `Arrow` is a `Pair`, typically in the
+lazy execution of the function. `Arrow` can be considered a `Strong Profunctor` if 
+the underlying data running through the `Arrow` is a `Pair`, typically in the
 form of `Arrow (Pair a c) (Pair b d)`.
 
-This will allow you to split execution into two distinct paths, applying `Arrow`
-to a specific path. The parameters of `Arrow` represent the function that it
-wraps, with the input being on the left, and the output on the right. When an
-`Arrow` wraps an endomorphism, the signature typically represents both the input
+This will allow you to split execution into two distinct paths, applying `Arrow` to 
+a specific path. The parameters of `Arrow` represent the function that it
+wraps, with the input being on the left, and the output on the right. When
+an `Arrow` wraps an endomorphism, the signature typically represents both the input
 and output.
 
 ```javascript
@@ -198,8 +198,8 @@ arrDoubleAndAdd
 ```haskell
 Arrow a b ~> Arrow b c -> Arrow a c
 ```
-`compose` allows you to compose two `Arrow`s together, resulting in a new
-`Arrow` that is the result of the composition.
+`compose` allows you to compose two `Arrow`s together, resulting in a
+new `Arrow` that is the result of the composition.
 
 ```javascript
 import Arrow from 'crocks/Arrow'
@@ -342,8 +342,8 @@ flow
 Arrow a b ~> (b -> c) -> Arrow a c
 ```
 
-`map` allows a function to be lifted that will map the right side of the
-`Arrow`. Where [`contramap`](#contramap) is used to map the input, `map` maps the result
+`map` allows a function to be lifted that will map the right side of the `Arrow`.
+Where [`contramap`](#contramap) is used to map the input, `map` maps the result
 of the `Arrow`, allowing the result to be "adapted" or modified. The input type
 to the lifted function must match the result the `Arrow`.
 
@@ -384,11 +384,11 @@ arrStringFS
 Arrow a b ~> ((c -> a), (b -> d)) -> Arrow c d
 ```
 
-`promap` can be used to adapt BOTH ends of an `Arrow` allowing for existing
-`Arrow`s to be reused in places in a flow where the types do not line up. It
-combines both [`map`](#map) and [`contramap`](#contramap) into one operation.
-Just pass the function for [`contramap`](#contramap) as the first argument
-and the function [`map`](#map) as the second.
+`promap` can be used to adapt BOTH ends of an `Arrow` allowing for existing `Arrow`s
+to be reused in places in a flow where the types do not line up. It combines
+both [`map`](#map) and [`contramap`](#contramap) into one operation. Just pass
+the function for [`contramap`](#contramap) as the first argument and the
+function [`map`](#map) as the second.
 
 ```javascript
 import Arrow from 'crocks/Arrow'

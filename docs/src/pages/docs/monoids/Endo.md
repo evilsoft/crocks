@@ -98,7 +98,7 @@ Endo.empty :: () -> Endo a
 
 `empty` provides the identity for the `Monoid` in that when the value it
 provides is `concat`ed to any other value, it will return the other value. In
-the case of `Endo` the result of `empty` is the identity function, which echos
+the case of `Endo` the result of `empty` is the identity function, which echoes
 its input. `empty` is available on both the Constructor and the Instance for
 convenience.
 

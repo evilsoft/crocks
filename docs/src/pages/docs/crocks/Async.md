@@ -18,9 +18,9 @@ that can be composed together.
 
 Depending on your needs, an `Async` can be constructed in a variety of ways. The
 typical closely resembles how a `Promise` is constructed with one major
-difference, the arguments used in the function that is passed to the `Promise`
-constructor are reversed in an `Async` to match the order in which `Async` is
-parameterized.
+difference, the arguments used in the function that is passed to 
+the `Promise` constructor are reversed in an `Async` to match the order in 
+which `Async` is parameterized.
 
 There are many ways to represent asynchronous operations in JavaScript, and as
 such, the libraries available to us in our ecosystem provide different means
@@ -449,9 +449,9 @@ Async.all :: [ Async e a ] -> Async e [ a ]
 ```
 
 `Async` provides an `all` method that can be used when multiple, independent
-asynchronous operations need to be run in parallel. `all` takes an `Array` of
-`Async` instances that, when forked, will execute each instance in the
-provided `Array` in parallel.
+asynchronous operations need to be run in parallel. `all` takes
+an `Array` of `Async` instances that, when forked, will execute each instance
+in the provided `Array` in parallel.
 
 If any of the instances result in a [`Rejected`](#rejected) state, the entire flow will
 be [`Rejected`](#rejected) with value of the first [`Rejected`](#rejected) instance. If all
@@ -1057,11 +1057,11 @@ typeIso(Rejected('aaaaa'))
 Async e a ~> Async e a -> Async e a
 ```
 
-Used to provide the first settled result between two `Async`s. Just pass `race`
-another `Async` and it will return new `Async`, that when forked, will run both
-`Async`s in parallel, returning the first of the two to settle. The result can
-either be rejected or resolved, based on the instance of the first settled
-result.
+Used to provide the first settled result between two `Async`s. Just 
+pass `race` another `Async` and it will return new `Async`, that when forked, 
+will run both `Async`s in parallel, returning the first of the two to settle.
+The result can either be rejected or resolved, based on the instance of the 
+first settled result.
 
 <!-- eslint-disable no-console -->
 <!-- eslint-disable no-sequences -->

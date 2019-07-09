@@ -10,8 +10,8 @@ Any Boolean
 ```
 
 `Any` is a `Monoid` that will combine (2) values of any type using logical
-disjunction (OR) on their coerced `Boolean` values, mapping truth-y values to
-`true` and false-y values to `false`.
+disjunction (OR) on their coerced `Boolean` values, mapping truthy values to
+`true` and falsy values to `false`.
 
 ```javascript
 import Any from 'crocks/Any'

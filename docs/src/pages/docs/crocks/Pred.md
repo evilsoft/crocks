@@ -317,21 +317,21 @@ Pred a ~> () -> a -> Boolean
 ```
 
 `valueOf` is used on all `crocks` `Monoid`s as a means of extraction. While the
-extraction is available, types that implement `valueOf` are not necessarily a
-`Comonad`. This function is used primarily for convenience for some of the
+extraction is available, types that implement `valueOf` are not necessarily
+a `Comonad`. This function is used primarily for convenience for some of the
 helper functions that ship with `crocks`.
 
 Calling `valueOf` on a `Pred` instance will result in the underlying predicate
-function. Most of the time this will not be required when working with `crocks`
-because all `crocks` functions that take a predicate function can also take a
-`Pred` instance.
+function. Most of the time this will not be required when working
+with `crocks` because all `crocks` functions that take a predicate function can
+also take a `Pred` instance.
 
 ```javascript
 import Pred from 'crocks/Pred'
 
+import equals from 'crocks/pointfree/equals'
 import isArray from 'crocks/predicates/isArray'
 import isString from 'crocks/predicates/isString'
-import equals from 'crocks/pointfree/equals'
 import or from 'crocks/logic/or'
 
 // lengthIsThree :: Pred a

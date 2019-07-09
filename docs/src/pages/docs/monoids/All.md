@@ -10,8 +10,8 @@ All Boolean
 ```
 
 `All` is a `Monoid` that will combine (2) values of any type using logical
-conjunction (AND) on their coerced `Boolean` values, mapping truth-y values to
-`true` and false-y values to `false`.
+conjunction (AND) on their coerced `Boolean` values, mapping truthy values to
+`true` and falsy values to `false`.
 
 ```javascript
 import All from 'crocks/All'

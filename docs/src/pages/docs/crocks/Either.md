@@ -406,8 +406,8 @@ fold([
 Either c a ~> (a -> b) -> Either c b
 ```
 
-Used to apply transformations to values [`Right`](#right) instances of `Either`, `map`
-takes a function that it will lift into the context of the `Either` and apply to
+Used to apply transformations to values [`Right`](#right) instances of `Either`, `map` takes
+a function that it will lift into the context of the `Either` and apply to
 it the wrapped value. When ran on a [`Right`](#right) instance, `map` will apply the
 wrapped value to the provided function and return the result in a
 new [`Right`](#right) instance.
@@ -1038,8 +1038,8 @@ firstToEither :: c -> (a -> First b) -> a -> Either c a
 ```
 
 Used to transform a given [`First`][first] instance to an `Either` instance or
-flatten an `Either` of [`First`][first] into an `Either` when chained, `firstToEither`
-will turn a non-empty instance into a [`Right`](#right) wrapping the original
+flatten an `Either` of [`First`][first] into an `Either` when chained, `firstToEither` will
+turn a non-empty instance into a [`Right`](#right) wrapping the original
 value contained within the [`First`][first].
 
 The [`First`][first] datatype is based on a [`Maybe`][maybe] and as such its
@@ -1213,8 +1213,8 @@ maybeToEither :: c -> (a -> Maybe b) -> a -> Either c a
 ```
 
 Used to transform a given [`Maybe`][maybe] instance to an `Either` instance or
-flatten an `Either` of [`Maybe`][maybe] into an `Either` when chained, `maybeToEither`
-will turn a [`Just`][just] instance into a [`Right`](#right) instance wrapping
+flatten an `Either` of [`Maybe`][maybe] into an `Either` when chained, `maybeToEither` will
+turn a [`Just`][just] instance into a [`Right`](#right) instance wrapping
 the original value contained in the original [`Just`][just].
 
 A [`Nothing`][nothing] instance is fixed to a `()` type and as such can only
@@ -1286,8 +1286,8 @@ resultToEither :: (a -> Result e b) -> a -> Either e a
 Used to transform a given [`Result`][result] instance to an `Either` instance or flatten
 an `Either` of [`Result`][result] into an `Either` when chained, `resultToEither` will
 turn an `Ok` instance into a [`Right`](#right) instance wrapping the value
-contained in the original `Ok`. If an `Err` is provided, then `resultToEither`
-will return a [`Left`](#left) instance, wrapping the original `Err` value.
+contained in the original `Ok`. If an `Err` is provided, then `resultToEither` will
+return a [`Left`](#left) instance, wrapping the original `Err` value.
 
 Like all `crocks` transformation functions, `resultToEither` has two possible
 signatures and will behave differently when passed either a [`Result`][result] instance

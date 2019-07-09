@@ -317,12 +317,12 @@ eitherToLast :: Either b a -> Last a
 eitherToLast :: (a -> Either c b) -> a -> Last b
 ```
 
-Used to transform a given [`Either`][either] instance to a `Last`
-instance, `eitherToLast` will turn a [`Right`][right] instance into a non-empty `Last`,
-wrapping the original value contained in the [`Right`][right]. All [`Left`][left] instances will
-map to an [`empty`](#empty) `Last`, mapping the originally contained value to
-a `Unit`. Values on the [`Left`][left] will be lost and as such this transformation is
-considered lossy in that regard.
+Used to transform a given [`Either`][either] instance to
+a `Last` instance, `eitherToLast` will turn a [`Right`][right] instance into a
+non-empty `Last`, wrapping the original value contained in the [`Right`][right].
+All [`Left`][left] instances will map to an [`empty`](#empty) `Last`, mapping
+the originally contained value to a `Unit`. Values on the [`Left`][left] will
+be lost and as such this transformation is considered lossy in that regard.
 
 Like all `crocks` transformation functions, `eitherToLast` has two possible
 signatures and will behave differently when passed either an [`Either`][either] instance
@@ -438,9 +438,10 @@ maybeToLast :: Maybe a -> Last a
 maybeToLast :: (a -> Maybe b) -> a -> Last b
 ```
 
-Used to transform a given [`Maybe`][maybe] instance to a `Last` instance, `maybeToLast`
-will turn a [`Just`][just] into a non-empty `Last` instance, wrapping the original value
-contained within the `Last`. All [`Nothing`][nothing] instances will map to
+Used to transform a given [`Maybe`][maybe] instance to
+a `Last` instance, `maybeToLast` will turn a [`Just`][just] into a
+non-empty `Last` instance, wrapping the original value contained within
+the `Last`. All [`Nothing`][nothing] instances will map to
 an [`empty`](#empty) `Last` instance.
 
 This function is available mostly for completion sake, as `Last` can always

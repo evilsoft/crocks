@@ -258,8 +258,8 @@ Const c a ~> (a -> b) -> Const c b
 
 Typically used to lift a function into the context of an ADT, but due to the
 unique behavior of `Const`, any function that is passed in to `map` will be
-validated but it will not be applied. `map` will return a new `Const`
-with the same left value.
+validated but it will not be applied. `map` will return a new `Const` with
+the same left value.
 
 ```javascript
 import Const from 'crocks/Const'

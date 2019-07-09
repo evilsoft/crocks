@@ -2,28 +2,50 @@
 /** @author Dale Francis (dalefrancis88) */
 
 const curry = require('../core/curry')
-const isArray = require('../core/isArray')
 const isDefined = require('../core/isDefined')
 const isEmpty = require('../core/isEmpty')
+const isString = require('../core/isString')
 const isInteger = require('../core/isInteger')
 const isNil = require('../core/isNil')
+const isFoldable = require('../core/isFoldable')
 
-const isValid = keys =>
-  isArray(keys) && !isEmpty(keys) && keys.every(key => !isEmpty(key) || isInteger(key))
+// err :: String
+const err =
+  'hasProps: First argument must be a Foldable of Non-empty Strings or Integers'
 
-// hasProps : Foldable (String | Integer) -> a -> Boolean
+// isKeyValid :: a -> Boolean
+const isKeyValid = key =>
+  isString(key) && !isEmpty(key) || isInteger(key)
+
+// hasKey :: a -> (String | Integer) -> Boolean
+const hasKey = obj => key => {
+  if(!isKeyValid(key)) {
+    throw new TypeError(err)
+  }
+
+  return isDefined(obj[key])
+}
+
+// every :: (a -> Boolean) -> ((Null | Boolean), a) -> Boolean
+const every = fn => (acc, x) =>
+  (acc === null ? true : acc) && fn(x)
+
+// hasProps :: Foldable f -> a -> Boolean
 function hasProps(keys, x) {
-  if(!isValid(keys)) {
-    throw new TypeError(
-      'hasProps: First argument must be an Array of Non-empty Strings or Integers'
-    )
+  if(!isFoldable(keys)) {
+    throw new TypeError(err)
   }
 
   if(isNil(x)) {
     return false
   }
 
-  return keys.every(key => isDefined(x[key]))
+  const result = keys.reduce(
+    every(hasKey(x)),
+    null
+  )
+
+  return result === null || result
 }
 
 module.exports = curry(hasProps)

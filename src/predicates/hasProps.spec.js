@@ -1,5 +1,6 @@
 const test = require('tape')
 const helpers = require('../test/helpers')
+const List = require('../core/List')
 
 const bindFunc = helpers.bindFunc
 
@@ -23,7 +24,7 @@ test('hasProps function', t => {
 test('hasProps errors', t => {
   const fn = bindFunc(hasProps)
 
-  const err = /hasProps: First argument must be an Array of Non-empty Strings or Integers/
+  const err = /^TypeError: hasProps: First argument must be a Foldable of Non-empty Strings or Integers/
 
   t.throws(fn(undefined, {}), err, 'throws with undefined in first argument')
   t.throws(fn(null, {}), err, 'throws with null in first argument')
@@ -31,7 +32,6 @@ test('hasProps errors', t => {
   t.throws(fn(false, {}), err, 'throws with false in first argument')
   t.throws(fn(true, {}), err, 'throws with true number in first argument')
   t.throws(fn({}, {}), err, 'throws with object in first argument')
-  t.throws(fn([], {}), err, 'throws with empty array in first argument')
   t.throws(fn(unit, {}), err, 'throws with function in first argument')
   t.throws(fn('', {}), err, 'throws with empty string in first argument')
   t.throws(fn(1.265, {}), err, 'throws with float in first argument')
@@ -48,6 +48,8 @@ test('hasProps object traversal', t => {
   t.equals(fn({ a: null, b: null }), true, 'returns true when keys exists on object with a null values')
   t.equals(fn({ a: NaN, b: NaN }), true, 'returns true when keys exists on object with a NaN values')
 
+  t.equals(hasProps([], {}), true, 'returns true when keys is an empty array')
+
   t.equals(fn({ c: 10 }), false, 'returns false when keys do not exist on object')
   t.equals(fn({ a: undefined, b: undefined }), false, 'returns false when keys exists on object with undefined values')
 
@@ -63,8 +65,38 @@ test('hasProps array traversal', t => {
   t.equals(fn([ 0, null, null ]), true, 'returns true when string index exists in array with null value')
   t.equals(fn([ 0, NaN, NaN ]), true, 'returns true when string index exists in array with NaN value')
 
+  t.equals(hasProps([], []), true, 'returns true when keys is an empty array')
+
   t.equals(fn([ 0 ]), false, 'returns false when index does not exist in array')
   t.equals(fn([ 0, undefined, undefined ]), false, 'returns false when index exists in array with undefined value')
+
+  t.end()
+})
+
+test('hasProps foldable keys', t => {
+  t.equal(hasProps(List('key'), { key: '123' }), true, 'returns true when Foldable structure is passed containing single string')
+  t.equal(hasProps(List(1), [ 2, 3 ]), true, 'returns true when Foldable structure is passed containing int')
+
+  t.equal(hasProps(List('key'), { notKey: '123' }), false, 'returns false when Foldable structure is passed containing single non-existant string')
+  t.equal(hasProps(List(1), [ 2 ]), false, 'returns false when Foldable structure is passed containing a non-existant index')
+
+  t.end()
+})
+
+test('hasProps foldable errors', t => {
+  const fn = value => bindFunc(hasProps)(List(value), { })
+
+  const err = /^TypeError: hasProps: First argument must be a Foldable of Non-empty Strings or Integers/
+
+  t.throws(fn(undefined), err, 'throws with undefined in first argument')
+  t.throws(fn(null), err, 'throws with null in first argument')
+  t.throws(fn(NaN), err, 'throws with NaN in first argument')
+  t.throws(fn(false), err, 'throws with false in first argument')
+  t.throws(fn(true), err, 'throws with true number in first argument')
+  t.throws(fn({}), err, 'throws with object in first argument')
+  t.throws(fn(unit), err, 'throws with function in first argument')
+  t.throws(fn(''), err, 'throws with empty string in first argument')
+  t.throws(fn(1.265), err, 'throws with float in first argument')
 
   t.end()
 })

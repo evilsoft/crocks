@@ -279,10 +279,10 @@ StateReader.of(0)
 Monad m => ReaderT e (m a) ~> (a -> b) -> ReaderT e (m b)
 ```
 
-Provides a means for lifting a normal javascript function into the underlying
-`Monad`, allowing the innermost value of the underlying `Monad` to be mapped.
-This method will ignore the outer `ReaderT`, and be applied directly to the
-underlying `Monad`.
+Provides a means for lifting a normal javascript function into the
+underlying `Monad`, allowing the innermost value of the underlying `Monad` to
+be mapped. This method will ignore the outer `ReaderT`, and be applied directly
+to the underlying `Monad`.
 
 ```javascript
 import ReaderT from 'crocks/Reader/ReaderT'

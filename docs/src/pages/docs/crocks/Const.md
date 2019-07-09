@@ -295,8 +295,8 @@ Semigroup s => Const s (a -> b) ~> Const s a -> Const s b
 
 The unique nature of the `Const` functor allows any underlying `Semigroup` to
 act an an `Apply`. When on `Const` is applied to another `Const` whose
-underlying `Semigroup`s match, the `Semigroup`s will be combined by calling
-`concat` on the underlying `Semigroup`.
+underlying `Semigroup`s match, the `Semigroup`s will be combined by
+calling `concat` on the underlying `Semigroup`.
 
 `ap` will throw a `TypeError` if the underlying Type does not point to a type
 of `Semigroup`.

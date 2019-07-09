@@ -97,8 +97,8 @@ functions. The first is what is executed when the predicate is true, the second
 on a false condition. This will return a function ready to take a value to run
 through the predicate. After the value is evaluated, it will be ran through it's
 corresponding function, returning the result as the final result. This function
-comes in really handy when creating lifting functions for Sum Types (like
-`Either` or [`Maybe`][maybe]).
+comes in really handy when creating lifting functions for Sum Types
+(like `Either` or [`Maybe`][maybe]).
 
 ```javascript
 import ifElse from 'crocks/logic/ifElse'

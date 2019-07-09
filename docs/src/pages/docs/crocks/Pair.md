@@ -153,11 +153,12 @@ equals(Pair([ 1, 2 ], ''), [ 1, 2 ])
 Semigroup s, t => Pair s t ~> Pair s t -> Pair s t
 ```
 
-When both underlying values of a given `Pair` are fixed to a `Semigroup`,
-`concat` can be used to concatenate another `Pair` instance with underlying
-`Semigroup`s of the same type and structure. Expecting a `Maybe` wrapping a
-`Semigroup` of the same type, `concat` will give back a new `Pair` instance
-wrapping the result of combining the underlying `Semigroup` instances.
+When both underlying values of a given `Pair` are fixed to
+a `Semigroup`, `concat` can be used to concatenate another `Pair` instance
+with underlying `Semigroup`s of the same type and structure. Expecting
+a `Maybe` wrapping a `Semigroup` of the same type, `concat` will give back a
+new `Pair` instancewrapping the result of combining the
+underlying `Semigroup` instances.
 
 ```javascript
 import Pair from 'crocks/Pair'
@@ -421,13 +422,13 @@ Apply f => Pair a (f b) ~> (c -> f c) -> f (Pair a b)
 Applicative f => Pair a (f b) ~> TypeRep f -> f (Pair a b)
 ```
 
-When an instance of `Pair` wraps an `Apply` instance in its second position,
-`sequence` can be used to swap the type sequence. `sequence` requires either an
-`Applicative TypeRep` or an `Apply` returning function is provided for its
-argument.
+When an instance of `Pair` wraps an `Apply` instance in its second 
+position, `sequence` can be used to swap the type sequence. `sequence` requires
+either an `Applicative TypeRep` or an `Apply` returning function is provided
+for its argument.
 
-While it is not a requirement that the first position be occupied by a
-`Semigroup`, in having an instance there sequencing back on a data structure
+While it is not a requirement that the first position be occupied by
+a `Semigroup`, in having an instance there sequencing back on a data structure
 with multiple items can allow for accumulation then sequencing back.
 
 `sequence` can be derived from [`traverse`](#traverse) by passing it an
@@ -545,10 +546,10 @@ seqMaybe(Pair(false, Nothing()))
 Pair a b ~> (Pair a b -> c) -> Pair a c
 ```
 
-Used map the second position of a given `Pair` instance by taking the entire
-`Pair` into consideration. `extend` takes a function the receives a `Pair` as
-its input and returns a new `Pair` with the result of that function in the
-second position, while leaving the value in the first position untouched.
+Used map the second position of a given `Pair` instance by taking the
+entire `Pair` into consideration. `extend` takes a function the receives
+a `Pair` as its input and returns a new `Pair` with the result of that function
+in the second position, while leaving the value in the first position untouched.
 
 ```javascript
 import Pair from 'crocks/Pair'
@@ -659,9 +660,9 @@ Pair a b ~> () -> [ a, b ]
 
 While both [`fst`](#fst) and [`snd`](#snd) can be used to extract specific
 values out of the structure of `Pair`, `toArray` extracts values but
-maintains the structure. Taking nothing as its input, `toArray` will return an
-`Array` of two values. The first value in the `Pair` will occupy the [0] index,
-while the [1] index will house the second.
+maintains the structure. Taking nothing as its input, `toArray` will return
+an `Array` of two values. The first value in the `Pair` will occupy the [0]
+index, while the [1] index will house the second.
 
 ```javascript
 import Pair from 'crocks/Pair'
@@ -806,10 +807,10 @@ fanout :: Monad m => Star a (m b) -> Star a (m c) -> Star a (m (Pair b c))
 There are may times that you need to keep some running or persistent state while
 performing a given computation. A common way to do this is to take the input to
 the computation and branch it into a `Pair` and perform different operations on
-each version of the input. This is such a common pattern that it warrants the
-`fanout` function to take care of the initial split and mapping. Just provide a
-pair of either simple functions or a pair of one of the computation types
-(`Arrow` or `Star`). You will get back something of the same type that is
+each version of the input. This is such a common pattern that it warrants
+the `fanout` function to take care of the initial split and mapping. Just 
+provide a pair of either simple functions or a pair of one of the computation
+types (`Arrow` or `Star`). You will get back something of the same type that is
 configured to split it's input into a pair and than apply the first Function/ADT
 to the first portion of the underlying `Pair` and the second on the second.
 
@@ -861,14 +862,14 @@ getPersons(people)
 toPairs :: Object -> List (Pair String a)
 ```
 
-When dealing with `Object`s, sometimes it makes more sense to work in a
-`Foldable` structure like a `List` of key-value `Pair`s. `toPairs` provides a
-means to take an object and give you back a `List` of `Pairs` that have a
-`String` that represents the key in the `fst` and the value for that key in the
-`snd`. The primitive values are copied, while non-primitive values are
-references. Like most of the `Object` functions in `crocks`, any keys with
-`undefined` values will be omitted from the result. `crocks` provides an inverse
-to this function named [`fromPairs`][frompairs].
+When dealing with `Object`s, sometimes it makes more sense to work in
+a `Foldable` structure like a `List` of key-value `Pair`s. `toPairs` provides
+a means to take an object and give you back a `List` of `Pairs` that have
+a `String` that represents the key in the `fst` and the value for that key in
+the `snd`. The primitive values are copied, while non-primitive values are
+references. Like most of the `Object` functions in `crocks`, any keys
+with `undefined` values will be omitted from the result. `crocks` provides an
+inverse to this function named [`fromPairs`][frompairs].
 
 ```javascript
 import compose from 'crocks/helpers/compose'

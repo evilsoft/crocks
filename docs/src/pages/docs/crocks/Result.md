@@ -522,8 +522,8 @@ getInfo('down')
 Result e a ~> Result e a -> Result e a
 ```
 
-Providing a means for a fallback or alternative value, `alt` combines two
-`Result` instances and will return the first [`Ok`](#ok) it encounters or
+Providing a means for a fallback or alternative value, `alt` combines
+two `Result` instances and will return the first [`Ok`](#ok) it encounters or
 am [`Err`](#err) if neither value is an [`Ok`](#ok).
 
 If the value in both [`Err`](#err) are `Semigroup`s of the same type then they
@@ -739,8 +739,8 @@ swap the type sequence. `sequence` requires either an `Applicative TypeRep` or
 an `Apply` returning function is provided for its argument. This will be used in
 the case that the `Result` instance is a [`Err`](#err).
 
-`sequence` can be derived from [`traverse`](#traverse) by passing it an
-`identity` function (`x => x`).
+`sequence` can be derived from [`traverse`](#traverse) by passing it
+an `identity` function (`x => x`).
 
 ```javascript
 import Result from 'crocks/Result'
@@ -779,8 +779,8 @@ Applicative f => Result e a ~> (TypeRep f, (a -> f b)) -> f Result e b
 
 Used to apply the "effect" of an `Apply` to a value inside of a `Result`,
 `traverse` combines both the "effects" of the `Apply` and the `Result` by
-returning a new instance of the `Apply`, wrapping the result of the
-`Apply`s "effect" on the value in the `Result`.
+returning a new instance of the `Apply`, wrapping the result of
+the `Apply`s "effect" on the value in the `Result`.
 
 `traverse` requires either an `Applicative TypeRep` or an `Apply` returning
 function as its first argument and a function that is used to apply the
@@ -1132,8 +1132,8 @@ function that will be used to map an [`Err`](#err). While the second
 will map the value wrapped in a given [`Ok`](#ok) and return the result of that
 mapping.
 
-By composing `either` you can create functions that us the power of
-`ADT`s while returning a plain javascript type.
+By composing `either` you can create functions that us the power of `ADT`s while
+returning a plain javascript type.
 
 ```javascript
 import Result from 'crocks/Result'

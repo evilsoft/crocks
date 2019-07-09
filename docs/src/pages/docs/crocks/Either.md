@@ -125,8 +125,8 @@ equals(
 Either.Left :: c -> Either c a
 ```
 
-Used to construct a `Left` instance of an `Either` that represents the
-`false` portion of a disjunction. The `Left` constructor takes a value of any
+Used to construct a `Left` instance of an `Either` that represents
+the `false` portion of a disjunction. The `Left` constructor takes a value of any
 type and returns a `Left` instance wrapping the value passed to the constructor.
 
 When an instance is a `Left`, most `Either` returning methods on
@@ -470,9 +470,10 @@ processResult(57)
 Either c a ~> Either c a -> Either c a
 ```
 
-Providing a means for a fallback or alternative value, `alt` combines two
-`Either` instances and will return the first [`Right`](#right) it encounters or the
-last [`Left`](#left) if it does not encounter a [`Right`](#right).
+Providing a means for a fallback or alternative value, `alt` combines
+two `Either` instances and will return the first [`Right`](#right) it
+encounters or the last [`Left`](#left) if it does not encounter
+a [`Right`](#right).
 
 ```javascript
 import Either from 'crocks/Either'
@@ -717,8 +718,8 @@ Applicative f => Either c a ~> (TypeRep f, (a -> f b)) -> f Either c b
 
 Used to apply the "effect" of an `Apply` to a value inside of an `Either`,
 `traverse` combines both the "effects" of the `Apply` and the `Either` by
-returning a new instance of the `Apply`, wrapping the result of the
-`Apply`s "effect" on the value in the supplied `Either`.
+returning a new instance of the `Apply`, wrapping the result of
+the `Apply`s "effect" on the value in the supplied `Either`.
 
 `traverse` requires either an `Applicative TypeRep` or an `Apply` returning
 function as its first argument and a function that is used to apply the "effect"
@@ -873,14 +874,15 @@ getStringValue({
 Either c a ~> ((c -> b), (a -> b)) -> Either c b
 ```
 
-Used to take a [`Left`](#left) instance and not only map its internal value, but also
-to "promote" it to a [`Right`](#right) instance. `coalesce` takes two unary functions as
-its arguments and will return a new [`Right`](#right) instance.
+Used to take a [`Left`](#left) instance and not only map its internal value,
+but also to "promote" it to a [`Right`](#right) instance. `coalesce` takes two
+unary functions as its arguments and will return a new [`Right`](#right) instance.
 
-The first function is used when invoked on a [`Left`](#left) and will return a [`Right`](#right)
-instance, wrapping the result of the function. The second function is used when
-`coalesce` is invoked on a [`Right`](#right) and is used to map the original value,
-returning a new [`Right`](#right) instance wrapping the result of the second function.
+The first function is used when invoked on a [`Left`](#left) and will return
+a [`Right`](#right) instance, wrapping the result of the function. The second
+function is used when `coalesce` is invoked on a [`Right`](#right) and is used
+to map the original value, returning a new [`Right`](#right) instance wrapping
+the result of the second function.
 
 ```javascript
 import Either from 'crocks/Either'
@@ -1121,10 +1123,10 @@ lastToEither :: c -> Last a -> Either c a
 lastToEither :: c -> (a -> Last b) -> a -> Either c a
 ```
 
-Used to transform a given [`Last`][last] instance to an `Either` or flatten an
-`Either` of [`Last`][last] into an `Either` when chained, `lastToEither` will turn a
-non-empty [`Last`][last] instance into a [`Right`](#right) instance wrapping
-the original value contained in the original non-empty.
+Used to transform a given [`Last`][last] instance to an `Either` or flatten
+an `Either` of [`Last`][last] into an `Either` when chained, `lastToEither` will
+turn a non-empty [`Last`][last] instance into a [`Right`](#right) instance
+wrapping the original value contained in the original non-empty.
 
 The [`Last`][last] datatype is based on a [`Maybe`][maybe] and as such its left
 or empty value is fixed to a `()` (unit) type. As a means to allow for

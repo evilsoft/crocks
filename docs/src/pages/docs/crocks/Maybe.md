@@ -296,9 +296,9 @@ join(safeString(34), safeString('Pitt'))
 Maybe.zero :: () -> Maybe a
 ```
 
-When working with `Alt`s, `zero` provides a sort of `empty` or identity for
-`Maybe` when used with [`alt`](#alt). `zero` takes no arguments and returns a
-`Nothing` instance. Just like an `empty` method on a given `Monoid`, `zero` can
+When working with `Alt`s, `zero` provides a sort of `empty` or identity
+for `Maybe` when used with [`alt`](#alt). `zero` takes no arguments and returns
+a `Nothing` instance. Just like an `empty` method on a given `Monoid`, `zero` can
 be used to fold a collection of `Alt`s under `alt`.
 
 ```javascript
@@ -659,8 +659,8 @@ swap the type sequence. `sequence` requires either an `Applicative TypeRep` or
 an `Apply` returning function is provided for its argument. This will be used in
 the case that the `Maybe` instance is a `Nothing`.
 
-`sequence` can be derived from [`traverse`](#traverse) by passing it an
-`identity` function (`x => x`).
+`sequence` can be derived from [`traverse`](#traverse) by passing it
+an `identity` function (`x => x`).
 
 ```javascript
 import Maybe from 'crocks/Maybe'
@@ -690,8 +690,8 @@ Applicative f => Maybe a ~> (TypeRep f, (a -> f b)) -> f Maybe b
 
 Used to apply the "effect" of an `Apply` to a value inside of a `Maybe`,
 `traverse` combines both the "effects" of the `Apply` and the `Maybe` by
-returning a new instance of the `Apply`, wrapping the result of the
-`Apply`s "effect" on the value in the `Maybe`.
+returning a new instance of the `Apply`, wrapping the result of
+the `Apply`s "effect" on the value in the `Maybe`.
 
 `traverse` requires either an `Applicative TypeRep` or an `Apply` returning
 function as its first argument and a function that is used to apply the "effect"
@@ -1113,12 +1113,12 @@ getFirstValue({ value: [ 'a', 'b' ] })
 safe :: ((b -> Boolean) | Pred) -> b -> Maybe a
 ```
 
-When using a `Maybe`, it is a common practice to lift into a `Just` or a
-`Nothing` depending on a condition on the value to be lifted.  It is so common
-that it warrants a function, and that function is called `safe`. Provide a
-predicate (a function that returns a Boolean) or a [`Pred`][pred] datatypea and the value
-to be lifted. The value will be evaluated against the predicate, and will lift it into a `Just` if
-true and a `Nothing` if false.
+When using a `Maybe`, it is a common practice to lift into a `Just` or
+a `Nothing` depending on a condition on the value to be lifted.  It is so
+common that it warrants a function, and that function is called `safe`. Provide
+a predicate (a function that returns a Boolean) or a [`Pred`][pred] datatypea
+and the value to be lifted. The value will be evaluated against the predicate,
+and will lift it into a `Just` if true and a `Nothing` if false.
 
 ```javascript
 import Pred from 'crocks/Pred'
@@ -1251,13 +1251,14 @@ validProp('a', { a: 32 })
 safeLift :: ((c -> Boolean) | Pred) -> (a -> b) -> c -> Maybe b
 ```
 
-While [`safe`](#safe) is used to lift a value into a `Maybe`, you can reach for
-`safeLift` when you want to run a function in the safety of the `Maybe` context.
-Just like [`safe`](#safe), you pass it either a [`Pred`][pred] or a predicate function
-to determine if you get a `Just` or a `Nothing`, but then instead of a value,
-you pass it a unary function. `safeLift` will then give you back a new function
-that will first lift its argument into a `Maybe` and then maps your original
-function over the result.
+While [`safe`](#safe) is used to lift a value into a `Maybe`, you can reach
+for `safeLift` when you want to run a function in the safety of
+the `Maybe` context. Just like [`safe`](#safe), you pass it either
+a [`Pred`][pred] or a predicate function to determine if you get a `Just` or
+a `Nothing`, but then instead of a value, you pass it a unary
+function. `safeLift` will then give you back a new function that will first
+lift its argument into a `Maybe` and then maps your original function over
+the result.
 
 ```javascript
 import Pred from 'crocks/Pred'

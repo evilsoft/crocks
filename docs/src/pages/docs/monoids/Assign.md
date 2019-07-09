@@ -9,8 +9,8 @@ weight: 30
 Assign Object
 ```
 
-`Assign` is a `Monoid` that will combine (2) objects under assignment using
-`Object.assign` on the (2) `Object`s.
+`Assign` is a `Monoid` that will combine (2) objects under assignment
+using `Object.assign` on the (2) `Object`s.
 
 ```javascript
 import Assign from 'crocks/Assign'

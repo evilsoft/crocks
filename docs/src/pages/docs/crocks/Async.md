@@ -664,8 +664,8 @@ doubleValid('Too Silly')
 Async e a ~> Async e a -> Async e a
 ```
 
-Providing a means for a fallback or alternative value, `alt` combines two
-`Async` instances and will return the first [`Resolved`](#resolved) instance
+Providing a means for a fallback or alternative value, `alt` combines
+two `Async` instances and will return the first [`Resolved`](#resolved) instance
 it encounters or the last [`Rejected`](#rejected) instance if it does not
 encounter a [`Resolved`](#resolved) instance.
 
@@ -1104,11 +1104,11 @@ signatures depending on the need for clean up in the event of cancellation, but
 both return a function that can be used for cancellation of a given instance.
 
 The first and more common signature takes two functions that will have their
-return values ignored. The first function will be run in the event of the
-`Async` instance settling on [`Rejected`](#rejected) and will receive as its single argument
-the value or "cause" of rejection. The second function provided will be executed
-in the case of the instance settling on [`Resolved`](#resolved) and will receive as its
-single argument the value the `Async` was resolved with.
+return values ignored. The first function will be run in the event of
+the `Async` instance settling on [`Rejected`](#rejected) and will receive as its
+single argument the value or "cause" of rejection. The second function provided
+will be executed in the case of the instance settling on [`Resolved`](#resolved) and
+will receive as its single argument the value the `Async` was resolved with.
 
 The second signature is used when any cleanup needs to be performed after a
 given `Async` is canceled by having the function returned from `fork` called.
@@ -1711,12 +1711,11 @@ resultToAsync :: Result b a -> Async b a
 resultToAsync :: (a -> Result c b) -> a -> Async c b
 ```
 
-Used to transform a given [`Result`][result] instance to an `Async` instance or flatten an
-`Async` of [`Result`][result] into an `Async` when chained, `resultToAsync` will turn an
-`Ok` instance into a [`Resolved`](#resolved) instance wrapping the original
-value contained in the original `Ok`. If an `Err` is provided, then
-`resultToAsync` will return a [`Rejected`](#rejected) instance, wrapping the
-original `Err` value.
+Used to transform a given [`Result`][result] instance to an `Async` instance or flatten
+an `Async` of [`Result`][result] into an `Async` when chained, `resultToAsync` will turn
+an `Ok` instance into a [`Resolved`](#resolved) instance wrapping the original
+value contained in the original `Ok`. If an `Err` is provided, then `resultToAsync` will
+return a [`Rejected`](#rejected) instance, wrapping the original `Err` value.
 
 Like all `crocks` transformation functions, `resultToAsync` has two possible
 signatures and will behave differently when passed either a [`Result`][result] instance

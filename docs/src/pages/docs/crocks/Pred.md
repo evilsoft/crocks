@@ -125,9 +125,9 @@ Pred.empty :: () -> Pred a
 
 `empty` provides the identity for the `Monoid` in that when the value it
 provides is `concat`ed to any other value, it will return the other value. In
-the case of `Pred` the result of `empty` is a `Pred` that will always return
-`true`. `empty` is available on both the Constructor and the Instance for
-convenience.
+the case of `Pred` the result of `empty` is a `Pred` that will always
+return `true`. `empty` is available on both the Constructor and the Instance
+for convenience.
 
 ```javascript
 import Pred from 'crocks/Pred'
@@ -181,8 +181,8 @@ Pred a ~> Pred a -> Pred a
 ```
 
 `concat` is used to combine two `Semigroup`s of the same type under an operation
-specified by the `Semigroup`. In the case of `Pred`, the results of both
-`Preds`s are combined under logical conjunction.
+specified by the `Semigroup`. In the case of `Pred`, the results of
+both `Preds`s are combined under logical conjunction.
 
 ```javascript
 import Pred from 'crocks/Pred'
@@ -374,9 +374,9 @@ Pred a ~> a -> Boolean
 ```
 
 As `Pred` wraps a predicate function, it needs a mean to run it with some value
-to test against the predicate. `Pred` instances provide a method called
-`runWith` that will accept the value to be tested and then runs it through the
-predicate returning the result.
+to test against the predicate. `Pred` instances provide a method
+called `runWith` that will accept the value to be tested and then runs it
+through the predicate returning the result.
 
 Most of the time this function is not used while working with other predicate
 functions in `crocks`, as all functions that take a predicate function also

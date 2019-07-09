@@ -14,9 +14,9 @@ weight: 20
 assign :: Object -> Object -> Object
 ```
 When working with `Object`s, a common operation is to combine (2) of them. This
-can be accomplished in `crocks` by reaching for `assign`. Unlike the
-`Object.assign` that ships with JavaScript, this `assign` will combine your
-`Object`s into a new shallow copy of their merger. `assign` only takes two
+can be accomplished in `crocks` by reaching for `assign`. Unlike
+the `Object.assign` that ships with JavaScript, this `assign` will combine
+your `Object`s into a new shallow copy of their merger. `assign` only takes two
 arguments and will overwrite keys present in the second argument with values
 from the first. As with most of the `crocks` `Object` based functions, `assign` will
 omit any key-value pairs that are `undefined`. Check out a related function
@@ -35,8 +35,8 @@ nice to restrict them to a specific -arity to work with your all your wonderful
 compositions. When you want to restrict any function of any arity to a simple
 binary function. Just pass your function to `binary` and you will get back a
 curried, binary function that will only apply (2) arguments to the inner
-function, ignoring any others. This works very well with functions like
-`Array.prototype.reduce` where you may only care about the first 2 arguments.
+function, ignoring any others. This works very well with functions
+like `Array.prototype.reduce` where you may only care about the first 2 arguments.
 if you need to constrain to more than (2) arguments, then you will want to reach
 for  [`nAry`](#nary). `binary` is basically syntactic sugar for `nAry(2, fn)`.
 Also related is [`unary`](#unary), which constrains to (1) argument.
@@ -63,8 +63,8 @@ then, I would recommend reaching for [`pipe`](#pipe).
 composeK :: Chain m => ((y -> m z), ..., (a -> m b)) -> a -> m z
 ```
 There are many times that, when working with the various `crocks`, our flows are
-just a series of `chain`s. Due to some neat properties with types that provide a
-`chain` function, you can remove some boilerplate by reaching for `composeK`.
+just a series of `chain`s. Due to some neat properties with types that provide
+a `chain` function, you can remove some boilerplate by reaching for `composeK`.
 Just pass it the functions you would normally pass to `chain` and it will do all
 the boring hook up for you. Just like `compose`, functions are applied
 right-to-left, so you can turn this:
@@ -149,18 +149,18 @@ make more sense expressed in a left-to-right style.
 composeP :: Promise p => ((y -> p z c), ..., (a -> p b c)) -> a -> p z c
 ```
 
-When working with `Promise`s, it is common place to create chains on a
-`Promise`'s `then` function. Doing this involves a lot of boilerplate and forces you into a fluent style,
-whether you want to be or not. Using `composeP` you have the option to compose a
-series of `Promise` returning functions like you would any other function
-composition, in a right-to-left fashion.
+When working with `Promise`s, it is common place to create chains on
+a `Promise`'s `then` function. Doing this involves a lot of boilerplate and
+forces you into a fluent style, whether you want to be or not. Using `composeP` you
+have the option to compose a series of `Promise` returning functions like you
+would any other function composition, in a right-to-left fashion.
 
 Due to the nature of the `then` function, only the head of your composition
 needs to return a `Promise`. This will create a function that takes a value,
 which is passed through your chain, returning a `Promise` which can be extended.
 This is only a `then` chain, it does not do anything with the `catch` function.
-If you would like to provide your functions in a left-to-right manner, check out
-[pipeP](#pipep).
+If you would like to provide your functions in a left-to-right manner, check
+out [pipeP](#pipep).
 
 <!-- eslint-disable no-console -->
 
@@ -224,13 +224,13 @@ composeS :: Semigroupoid s => (s y z, ..., s a b) -> s a z
 ```
 
 When working with things like `Arrow` and `Star` there will come a point when
-you would like to compose them like you would any `Function`. That is where
-`composeS` comes in handy. Just pass it the `Semigroupoid`s you want to compose
+you would like to compose them like you would any `Function`. That is
+where `composeS` comes in handy. Just pass it the `Semigroupoid`s you want to compose
 and it will give you back a new `Semigroupoid` of the same type with all of the
-underlying functions composed and ready to be run. Like [`compose`](#compose),
-`composeS` composes the functions in a right-to-left fashion. If you would like
-to represent your flow in a more left-to-right manner, then [`pipeS`](#pipes) is
-provided for such things.
+underlying functions composed and ready to be run.
+Like [`compose`](#compose), `composeS` composes the functions in a right-to-left
+fashion. If you would like to represent your flow in a more left-to-right manner,
+then [`pipeS`](#pipes) is provided for such things.
 
 ```javascript
 import Arrow from 'crocks/Arrow'
@@ -293,16 +293,15 @@ defaultProps :: Object -> Object -> Object
 
 Picture this, you have an `Object` and you want to make sure that some
 properties are set with a given default value. When the need for this type of
-operation presents itself, `defaultProps` can come to your aid. Just pass it an
-`Object` that defines your defaults and then the `Object` your want to default
+operation presents itself, `defaultProps` can come to your aid. Just pass it
+an `Object` that defines your defaults and then the `Object` your want to default
 those props on. If a key that is present on the defaults `Object` is not defined
 on your data, then the default value will be used. Otherwise, the value from
-your data will be used instead. You could just apply
-[`flip`](combinators.html#flip) to the [`assign`](#assign) function and get the
-same result, but having a function named `defaultProps` may be easier to read in
-code. As with most `Object` related functions in `crocks`, `defaultProps` will
-return you a shallow copy of the result and not include any `undefined` values
-in either `Object`.
+your data will be used instead. You could just apply [`flip`](combinators.html#flip) to
+the [`assign`](#assign) function and get the same result, but having a function
+named `defaultProps` may be easier to read in code. As with most `Object` related
+functions in `crocks`, `defaultProps` will return you a shallow copy of the
+result and not include any `undefined` values in either `Object`.
 
 #### defaultTo
 
@@ -313,13 +312,13 @@ defaultTo :: a -> b -> a
 ```
 
 With things like `null`, `undefined` and `NaN` showing up all over the place, it
-can be hard to keep your expected types inline without resorting to nesting in a
-`Maybe` with functions like [`safe`][safe]. If you want to specifically guard
+can be hard to keep your expected types inline without resorting to nesting in
+a `Maybe` with functions like [`safe`][safe]. If you want to specifically guard
 for `null`, `undefined` and `NaN` and get things defaulted into the expected
 type, then `defaultTo` should work for you. Just pass it what you would like
 your default value to be and then the value you want guarded, and you will get
-back either the default or the passed value, depending on if the passed value is
-`null`, `undefined` or `NaN`. While this *is* JavaScript and you can return
+back either the default or the passed value, depending on if the passed value
+is `null`, `undefined` or `NaN`. While this *is* JavaScript and you can return
 anything, it is suggested to stick to the signature and only let `a`s through.
 As a `b` can be an `a` as well.
 
@@ -331,14 +330,14 @@ As a `b` can be an `a` as well.
 fromPairs :: Foldable f => f (Pair String a) -> Object
 ```
 
-As an inverse to [`toPairs`][topairs], `fromPairs` takes either an `Array` or
-`List` of key-value `Pair`s and constructs an `Object` from it. The `Pair` must
-contain a `String` in the `fst` and any type of value in the `snd`. The `fst` will
-become the key for the value in the `snd`. All primitive values are copied
-into the new `Object`, while non-primitives are references to the original. If
-you provide an `undefined` values for the second, that `Pair` will not be
-represented in the resulting `Object`. Also, when if multiple keys share the
-same name, that last value will be moved over.
+As an inverse to [`toPairs`][topairs], `fromPairs` takes either
+an `Array` or `List` of key-value `Pair`s and constructs an `Object` from it.
+The `Pair` must contain a `String` in the `fst` and any type of value in
+the `snd`. The `fst` will become the key for the value in the `snd`. All
+primitive values are copied into the new `Object`, while non-primitives are
+references to the original. If you provide an `undefined` values for the second,
+that `Pair` will not be represented in the resulting `Object`. Also, when if
+multiple keys share the same name, that last value will be moved over.
 
 #### getPathOr
 
@@ -458,8 +457,8 @@ liftA3 :: Applicative m => (a -> b -> c -> d) -> m a -> m b -> m c -> m d
 
 Ever see yourself wanting to `map` a binary or trinary function, but `map` only
 allows unary functions? Both of these functions allow you to pass in your
-function as well as the number of `Applicative`s (containers that provide both
-`of` and `ap` functions) you need to get the mapping you are looking for.
+function as well as the number of `Applicative`s (containers that provide
+both `of` and `ap` functions) you need to get the mapping you are looking for.
 
 #### liftN
 
@@ -564,8 +563,8 @@ mapProps :: { (* -> *) } -> Object -> Object
 
 Would like to map specific keys in an Object with a specific function? Just
 bring in `mapProps` and pass it an `Object` with the functions you want to apply
-on the keys you want them associated to. When the resulting function receives an
-`Object`, it will return a new `Object` with the keys mapped according to the
+on the keys you want them associated to. When the resulting function receives
+an `Object`, it will return a new `Object` with the keys mapped according to the
 mapping functions. All keys from the original `Object` that do not exist in
 the mapping `Object` will still exist untouched, but the keys with mapping
 functions with now contain the result of applying the original value to the
@@ -673,8 +672,8 @@ mreduce :: Monoid m, Foldable f => m -> f a -> a
 These two functions are very handy for combining an entire `List` or `Array` of
 values by providing a [`Monoid`](../monoids/index.html) and your collection of
 values. The difference between the two is that `mconcat` returns the result
-inside the [`Monoid`](../monoids/index.html) used to combine them. Where
-`mreduce` returns the bare value itself.
+inside the [`Monoid`](../monoids/index.html) used to combine them.
+Where `mreduce` returns the bare value itself.
 
 #### mconcatMap
 
@@ -718,9 +717,9 @@ number of arguments to avoid accidentally supplying default arguments when you
 do not what them applied. First pass `nAry` the number of arguments you wish to
 limit the function to and then the function you wish to limit. `nAry` will give
 you back a curried function that will only apply the specified number of
-arguments to the inner function. Unary and binary functions are so common that
-`crocks` provides specific functions for those cases: [`unary`](#unary) and
-[`binary`](#binary).
+arguments to the inner function. Unary and binary functions are so common
+that `crocks` provides specific functions for those
+cases: [`unary`](#unary) and [`binary`](#binary).
 
 #### objOf
 
@@ -734,8 +733,8 @@ If you ever find yourself in a situation where you have a key and a value and
 just want to combine the two into an `Object`, then it sounds like `objOf` is
 the function for you. Just pass it a `String` for the key and any type of value,
 and you'll get back an `Object` that is composed of those two. If you find
-yourself constantly concatenating the result of this function into another
-`Object`, you may want to use [`assoc`](#assoc) instead.
+yourself constantly concatenating the result of this function into
+another `Object`, you may want to use [`assoc`](#assoc) instead.
 
 #### omit
 
@@ -745,12 +744,12 @@ yourself constantly concatenating the result of this function into another
 omit :: [ String ] -> Object -> Object
 ```
 
-Sometimes you just want to strip `Object`s of unwanted properties by key. Using
-`omit` will help you get that done. Just pass it a `Foldable` structure with a
-series of `String`s as keys and then pass it an `Object` and you will get back
-not only a shallow copy, but also an `Object` free of any of those pesky
-`undefined` values. You can think of `omit` as a way to black-list or reject
-`Object` properties based on key names. This function ignores inherited
+Sometimes you just want to strip `Object`s of unwanted properties by key.
+Using `omit` will help you get that done. Just pass it a `Foldable` structure
+with a series of `String`s as keys and then pass it an `Object` and you will
+get back not only a shallow copy, but also an `Object` free of any of those
+pesky `undefined` values. You can think of `omit` as a way to black-list or
+reject `Object` properties based on key names. This function ignores inherited
 properties and should only be used with POJOs. If you want to filter or
 white-list properties rather than reject them, take a look at [`pick`](#pick).
 
@@ -778,10 +777,10 @@ partial :: (((*) -> c), *) -> (*) -> c
 There are many times when using functions from non-functional libraries or from
 built-in JS functions, where it does not make sense to wrap it in
 a [`curry`](#curry). You just want to partially apply some arguments to it and
-get back a function ready to take the rest. That is a perfect opportunity to use
-`partial`. Just pass a function as the first argument and then apply any other
-arguments to it. You will get back a curried function that is ready to accept
-the rest of the arguments.
+get back a function ready to take the rest. That is a perfect opportunity to
+use `partial`. Just pass a function as the first argument and then apply any
+other arguments to it. You will get back a curried function that is ready to
+accept the rest of the arguments.
 
 ```javascript
 import partial from 'crocks/helpers/partial'
@@ -1025,8 +1024,8 @@ setPath :: [ (String | Integer) ] -> a -> (Object | Array) -> (Object | Array)
 
 Used to set a value on a deeply nested `Object`, `setPath` will traverse down
 a path and set the a the final property to the provided value. `setPath` returns
-the an `Object`/`Array` with the modification and does not alter the original
-`Object`/`Array` along the path.
+the an `Object`/`Array` with the modification and does not alter the
+original `Object`/`Array` along the path.
 
 The provided path can be a mixture of either `Integer`s or `String`s to allow
 for traversing through both `Array`s and `Object`s. When an `Integer` zero or

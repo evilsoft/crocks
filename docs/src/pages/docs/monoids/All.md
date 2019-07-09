@@ -10,8 +10,8 @@ All Boolean
 ```
 
 `All` is a `Monoid` that will combine (2) values of any type using logical
-conjunction (AND) on their coerced `Boolean` values, mapping truthy values to
-`true` and falsy values to `false`.
+conjunction (AND) on their coerced `Boolean` values, mapping truthy values
+to `true` and falsy values to `false`.
 
 ```javascript
 import All from 'crocks/All'
@@ -152,8 +152,8 @@ All ~> () -> Boolean
 ```
 
 `valueOf` is used on all `crocks` `Monoid`s as a means of extraction. While the
-extraction is available, types that implement `valueOf` are not necessarily a
-`Comonad`. This function is used primarily for convenience for some of the
+extraction is available, types that implement `valueOf` are not necessarily
+a `Comonad`. This function is used primarily for convenience for some of the
 helper functions that ship with `crocks`. Calling `valueOf` on an `All` instance
 will result in the underlying `Boolean` value.
 

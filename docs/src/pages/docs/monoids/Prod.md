@@ -56,11 +56,11 @@ Prod :: Number -> Prod Number
 ```
 
 `Prod` provides multiplication on `Number`s and needs to be constructed with
-a `Number` instance. Calling the constructor with a `Number`, results in a new
-`Prod` that wraps the provided `Number`.
+a `Number` instance. Calling the constructor with a `Number`, results in a
+new `Prod` that wraps the provided `Number`.
 
-Passing `undefined`, `NaN` or `null` to the constructor will result in an
-`empty` instance, or an instance containing a `1`.
+Passing `undefined`, `NaN` or `null` to the constructor will result in
+an `empty` instance, or an instance containing a `1`.
 
 ```javascript
 import Prod from 'crocks/Prod'

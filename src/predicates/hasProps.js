@@ -4,10 +4,10 @@
 const curry = require('../core/curry')
 const isDefined = require('../core/isDefined')
 const isEmpty = require('../core/isEmpty')
-const isString = require('../core/isString')
+const isFoldable = require('../core/isFoldable')
 const isInteger = require('../core/isInteger')
 const isNil = require('../core/isNil')
-const isFoldable = require('../core/isFoldable')
+const isString = require('../core/isString')
 
 // err :: String
 const err =

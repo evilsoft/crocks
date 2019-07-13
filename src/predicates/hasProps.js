@@ -30,7 +30,7 @@ const hasKey = obj => key => {
 const every = fn => (acc, x) =>
   (acc === null ? true : acc) && fn(x)
 
-// hasProps :: Foldable f -> a -> Boolean
+// hasProps :: Foldable f => f (String | Integer) -> a -> Boolean
 function hasProps(keys, x) {
   if(!isFoldable(keys)) {
     throw new TypeError(err)

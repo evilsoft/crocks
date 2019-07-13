@@ -16,7 +16,7 @@ Below is a list of all the current predicates that are included with a
 description of their truth:
 
 * `hasProp :: (String | Integer) -> a -> Boolean`: an `Array` or `Object` that contains the provided index or key
-* `hasProps :: Array (String | Integer) -> a -> Boolean`: an `Array` or `Object` that contains the provided indexs or keys
+* `hasProps :: Foldable f => f (String | Integer) -> a -> Boolean`: an `Array` or `Object` that contains the provided indexs or keys
 * `hasPropPath :: [ String | Integer ] -> a -> Boolean`: an `Array` or `Object` that contains the provided index path
 * `isAlt :: a -> Boolean`: an ADT that provides `map` and `alt` methods
 * `isAlternative :: a -> Boolean`: an ADT that provides `alt`, `zero`, `map`, `ap`, `chain` and `of`methods

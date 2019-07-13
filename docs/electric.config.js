@@ -4,7 +4,7 @@ var marble = require('marble')
 var slugify = require('markdown-slug')
 
 module.exports = {
-  basePath: '/crocks',
+  basePath: '',
   deployOptions: {
     branch: 'gh-pages'
   },

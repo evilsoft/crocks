@@ -527,7 +527,7 @@ Providing a means for a fallback or alternative value, `alt` combines two
 am [`Err`](#err) if neither value is an [`Ok`](#ok).
 
 If the value in both [`Err`](#err) are `Semigroup`s of the same type then they
-will accumalte based on their rules.
+will accumulate based on their rules.
 
 ```javascript
 import Result from 'crocks/Result'
@@ -675,7 +675,7 @@ This can be used to safely combine multiple values under a given combination
 function. If any of the inputs results in an [`Err`](#err) than they will never
 be applied to the function and not provide exceptions or unexpected results.
 However if the value in both [`Err`](#err) are `Semigroup`s of the same type
-then they will accumalte based on their rules.
+then they will accumulate based on their rules.
 
 ```javascript
 import Result from 'crocks/Result'

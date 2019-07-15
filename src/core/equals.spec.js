@@ -1,7 +1,7 @@
 const test = require('tape')
 const sinon = require('sinon')
 
-const fl = require('../core/flNames')
+const fl = require('./flNames')
 const isFunction = require('./isFunction')
 
 const constant = x => () => x

@@ -17,7 +17,7 @@ test('curryN function functionality', t => {
   t.equal(f.lastCall.args.length, 3, 'only applies N arguments')
 
   t.equal(curried()()(), result, 'returns the result when curried with no args')
-  t.same(f.lastCall.args, [ undefined, undefined, undefined ], 'applies undefineds when curried with no args')
+  t.same(f.lastCall.args, [ undefined ], 'applies undefineds when curried with no args')
 
   t.end()
 })

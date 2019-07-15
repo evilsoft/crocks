@@ -1,5 +1,6 @@
 module.exports = {
   hasProp: require('./hasProp'),
+  hasProps: require('./hasProps'),
   hasPropPath: require('./hasPropPath'),
   isAlt: require('./isAlt'),
   isAlternative: require('./isAlternative'),

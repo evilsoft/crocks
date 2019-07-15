@@ -55,7 +55,7 @@ test('composed function', t => {
   const result = compose(second, first).apply(null, args)
 
   t.ok(first.calledBefore(second), 'right-most function is called first')
-  t.ok(first.calledWith.apply(first, args), 'right-most function applied with all arguments')
+  t.ok(first.calledWith.apply(first, args.slice(0, 1)), 'right-most function applied with only first argument')
   t.ok(second.calledWith('string'), 'second function receives result of the first function')
 
   t.equal(result, 'bling', 'returns the result of the left-most function')

@@ -2,6 +2,7 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const isFunction = require('../core/isFunction')
+const curry = require('./curry')
 
 const err = 'pipe: Functions required'
 
@@ -31,7 +32,7 @@ function pipe(...fns) {
   const tail =
     fns.slice(1).concat(x => x)
 
-  return tail.reduce(applyPipe, head)
+  return curry(tail.reduce(applyPipe, head))
 }
 
 module.exports = pipe

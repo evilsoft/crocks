@@ -2,7 +2,7 @@
 description: "Predicate Functions API"
 layout: "notopic"
 title: "Predicate Functions"
-functions: ["hasprop", "hasproppath", "isalt", "isalternative", "isapplicative", "isapply", "isarray", "isbifunctor", "isboolean", "iscategory", "ischain", "iscontravariant", "isDate", "isdefined", "isempty", "isextend", "isfalse", "isfalsy", "isfoldable", "isfunction", "isfunctor", "isinteger", "isiterable", "ismonad", "ismonoid", "isnil", "isnumber", "isobject", "isplus", "isprofunctor", "ispromise", "issame", "issametype", "issemigroup", "issemigroupoid", "issetoid", "isstring", "istraversable", "istrue", "istruthy", "patheq", "pathsatisfies", "propeq", "propsatisfies"]
+functions: ["hasprop", "hasprops", "hasproppath", "isalt", "isalternative", "isapplicative", "isapply", "isarray", "isbifunctor", "isboolean", "iscategory", "ischain", "iscontravariant", "isDate", "isdefined", "isempty", "isextend", "isfalse", "isfalsy", "isfoldable", "isfunction", "isfunctor", "isinteger", "isiterable", "ismonad", "ismonoid", "isnil", "isnumber", "isobject", "isplus", "isprofunctor", "ispromise", "issame", "issametype", "issemigroup", "issemigroupoid", "issetoid", "isstring", "istraversable", "istrue", "istruthy", "patheq", "pathsatisfies", "propeq", "propsatisfies"]
 weight: 40
 ---
 
@@ -16,6 +16,7 @@ Below is a list of all the current predicates that are included with a
 description of their truth:
 
 * `hasProp :: (String | Integer) -> a -> Boolean`: an `Array` or `Object` that contains the provided index or key
+* `hasProps :: Foldable f => f (String | Integer) -> a -> Boolean`: an `Array` or `Object` that contains the provided indexs or keys
 * `hasPropPath :: [ String | Integer ] -> a -> Boolean`: an `Array` or `Object` that contains the provided index path
 * `isAlt :: a -> Boolean`: an ADT that provides `map` and `alt` methods
 * `isAlternative :: a -> Boolean`: an ADT that provides `alt`, `zero`, `map`, `ap`, `chain` and `of`methods

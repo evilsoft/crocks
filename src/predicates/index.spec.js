@@ -3,6 +3,7 @@ const test = require('tape')
 const index = require('.')
 
 const hasProp = require('./hasProp')
+const hasProps = require('./hasProps')
 const hasPropPath = require('./hasPropPath')
 const isAlt = require('./isAlt')
 const isAlternative = require('./isAlternative')
@@ -51,6 +52,7 @@ const propPathSatisfies = require('./propPathSatisfies')
 
 test('predicates entry', t => {
   t.equal(index.hasProp, hasProp, 'provides the hasProp predicate')
+  t.equal(index.hasProps, hasProps, 'provides the hasProps predicate')
   t.equal(index.hasPropPath, hasPropPath, 'provides the hasPropPath predicate')
   t.equal(index.isAlt, isAlt, 'provides the isAlt predicate')
   t.equal(index.isAlternative, isAlternative, 'provides the isAlternative predicate')

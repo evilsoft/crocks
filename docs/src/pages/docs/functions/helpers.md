@@ -662,6 +662,42 @@ safeMax(data)
 mconcat :: Monoid m, Foldable f => m -> f a -> m a
 ```
 
+
+```javascript
+import mconcat from 'crocks/helpers/mconcat'
+
+import Pred from 'crocks/Pred'
+import compose from 'crocks/helpers/compose'
+import getPropOr from 'crocks/helpers/getPropOr'
+import flip from 'crocks/combinators/flip'
+
+// Record that needs validation
+const person = { name: 'Maisie', age: 22, referral: 'ANON' };
+
+// Helpers -- predicate functions
+const isOfAge = age => age >= 21;
+const isReferred = who => who === 'FRIEND';
+
+// Helpers -- point-free functions
+const defProp = flip(getPropOr);
+const getReferral = defProp('referral', 'ANON');
+const getAge = defProp('age', 0);
+
+// isValid :: a -> Pred
+const isValid = mconcat(Pred, [
+  compose(
+    isOfAge,
+    getAge
+  ),
+  compose(
+    isReferred,
+    getReferral
+  )
+])
+
+allValid.runWith(person); // => false
+```
+
 #### mreduce
 
 `crocks/helpers/mreduce`

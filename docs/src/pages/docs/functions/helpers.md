@@ -672,16 +672,16 @@ import getPropOr from 'crocks/helpers/getPropOr'
 import flip from 'crocks/combinators/flip'
 
 // Record that needs validation
-const person = { name: 'Maisie', age: 22, referral: 'ANON' };
+const person = { name: 'Maisie', age: 22, referral: 'ANON' }
 
 // Helpers -- predicate functions
-const isOfAge = age => age >= 21;
-const isReferred = who => who === 'FRIEND';
+const isOfAge = age => age >= 21
+const isReferred = who => who === 'FRIEND'
 
 // Helpers -- point-free functions
-const defProp = flip(getPropOr);
-const getReferral = defProp('referral', 'ANON');
-const getAge = defProp('age', 0);
+const defProp = flip(getPropOr)
+const getReferral = defProp('referral', 'ANON')
+const getAge = defProp('age', 0)
 
 // isValid :: a -> Pred
 const isValid = mconcat(Pred, [
@@ -695,7 +695,7 @@ const isValid = mconcat(Pred, [
   )
 ])
 
-allValid.runWith(person); // => false
+isValid.runWith(person) // => false
 ```
 
 #### mreduce

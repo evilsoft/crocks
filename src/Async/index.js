@@ -323,8 +323,10 @@ function Async(fn) {
   }
 
   function bichain(l, r) {
+    const bichainErr = 'Async.bichain: Both arguments must be Async returning functions'
+
     if(!isFunction(l) || !isFunction(r)) {
-      throw new TypeError('Async.bichain: Both arguments must be Async returning functions')
+      throw new TypeError(bichainErr)
     }
 
     return Async(function(rej, res) {
@@ -336,9 +338,7 @@ function Async(fn) {
           const m = mapFn(x)
 
           if(!isSameType(Async, m)) {
-            throw new TypeError(
-              'Async.bichain: Both arguments must be Async returning functions'
-            )
+            throw new TypeError(bichainErr)
           }
 
           innerCancel = m.fork(rej, res)

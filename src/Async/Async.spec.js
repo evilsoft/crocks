@@ -1302,6 +1302,7 @@ test('Async bichain right errors', t => {
   const bichain = bindFunc(Async(unit).bichain)
 
   const err = /Async.bichain: Both arguments must be Async returning functions/
+
   t.throws(bichain(Async.Rejected, undefined), err, 'throws with undefined')
   t.throws(bichain(Async.Rejected, null), err, 'throws with null')
   t.throws(bichain(Async.Rejected, 0), err, 'throws with falsey number')
@@ -1313,8 +1314,7 @@ test('Async bichain right errors', t => {
   t.throws(bichain(Async.Rejected, []), err, 'throws with an array')
   t.throws(bichain(Async.Rejected, {}), err, 'throws with an object')
 
-  const noAsync = /Async.bichain: Both arguments must be Async returning functions/
-  t.throws(Async.of(3).bichain(Async.Rejected, unit).fork.bind(null, unit, unit), noAsync, 'throws with a non-Async returning function')
+  t.throws(Async.of(3).bichain(Async.Rejected, unit).fork.bind(null, unit, unit), err, 'throws with a non-Async returning function')
 
   t.doesNotThrow(Async.of(3).bichain(Async.Rejected, Async.of).fork.bind(null, unit, unit), 'allows an Async returning function')
 

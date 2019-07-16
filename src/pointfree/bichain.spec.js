@@ -21,7 +21,8 @@ test('bichain pointfree', t => {
 
   t.ok(isFunction(bichain), 'is a function')
 
-  const err = /bichain: First two arguments must be Async returning functions/
+  const err = /TypeError: bichain: First two arguments must be Bichain returning functions/
+
   t.throws(m(undefined, unit, f), err, 'throws if first arg is undefined')
   t.throws(m(null, unit, f), err, 'throws if first arg is null')
   t.throws(m(0, unit, f), err, 'throws if first arg is a falsey number')

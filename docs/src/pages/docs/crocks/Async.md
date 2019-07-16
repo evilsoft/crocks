@@ -849,7 +849,7 @@ Async e a ~> (a -> Async e b) -> Async e b
 
 Combining a sequential series of transformations that capture disjunction can be
 accomplished with `chain`. `chain` expects a unary, `Async` returning function
-as its argument. When invoked on a [`Rejected`](#rejected) instance , `chain` will not run
+as its argument. When invoked on a [`Rejected`](#rejected) instance, `chain` will not run
 the function, but will instead return another [`Rejected`](#rejected) instance wrapping the
 original [`Rejected`](#rejected) value. When called on a [`Resolved`](#resolved) instance however, the
 inner value will be passed to provided function, returning the result as the
@@ -964,6 +964,76 @@ resolve(Resolved('Resolved'))
 resolve(Rejected('Rejected'))
   .fork(log('rej'), log('res'))
 //=> res: "Was Rejected"
+```
+
+#### bichain
+
+```haskell
+Async e a ~> ((e -> Async b c), (a -> Async b c)) -> Async b c
+```
+
+Combining a sequential series of transformations that capture disjunction can be
+accomplished with `chain`. Along the same lines, `bichain` allows you to do this
+from both [`Rejected`](#rejected) and [`Resolved`](#resolved). `bichain` expects
+two unary, `Async` returning functions as its arguments. When invoked on 
+a [`Rejected`](#rejected) instance, `bichain` will use
+the [`Rejected`](#rejected) value and can return either a [`Rejected`](#rejected) or
+a [`Resolved`](#resolved). When called on a [`Resolved`](#resolved) instance, it
+will behave exactly as [`chain`](#chain) would.
+
+<!-- eslint-disable no-console -->
+<!-- eslint-disable no-sequences -->
+
+```javascript
+import bichain from 'crocks/pointfree/bichain'
+
+import Async from 'crocks/Async'
+import getProp from 'crocks/Maybe/getProp'
+import reduce from 'crocks/pointfree/reduce'
+
+const { Rejected, Resolved } = Async
+
+// log :: String -> a -> a
+const log = label => x =>
+  (console.log(`${label}:`, x), x)
+
+const characters = {
+  'jane': { fname: 'Jane', lname: 'Porter' },
+  'tarzan': { fname: 'John', lname: 'Clayton' }
+}
+
+// fake404 :: () -> Async e a
+const fake404 = () => Rejected({ statusCode: 404, status: 'Not Found' })
+
+// fake404 :: * -> Async e a
+const fake200 = body => Resolved({ statusCode: 200, body })
+
+// getByName :: string -> Async e a
+const getByName = name =>
+  getProp(name, characters)
+    .either(fake404, fake200)
+
+// getFirstFound :: [string] -> Async e a
+const getFirstFound =
+  reduce(
+    (cur, name) => bichain(() => getByName(name), Resolved, cur),
+    fake404()
+  )
+
+getByName('John')
+  .bichain(() => getByName('tarzan'), Resolved)
+  .fork(
+    log('rej'),
+    log('res')
+  )
+//=> res: { statusCode: 200, body: { fname: 'John', lname: 'Clayton' } }
+
+getFirstFound([ 'sam', 'sarah' ])
+  .fork(
+    log('rej'),
+    log('res')
+  )
+//=> rej: { statusCode: 404, status: 'Not Found' }
 ```
 
 #### swap

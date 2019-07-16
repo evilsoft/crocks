@@ -8,7 +8,7 @@ const isFunction = require('../core/isFunction')
 // bichain : bichain m => (e -> m c b) -> (a -> m c b) -> m e a -> m c b
 function bichain(f, g, m) {
   if(!isFunction(f) || !isFunction(g)) {
-    throw new TypeError('bichain: First two arguments must be Async returning functions')
+    throw new TypeError('bichain: First two arguments must be Bichain returning functions')
   }
 
   if(!isBichain(m)) {

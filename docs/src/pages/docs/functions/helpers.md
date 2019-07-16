@@ -705,27 +705,27 @@ returns the bare value itself.
 
 
 ```javascript
-import mreduceMap from 'crocks/helpers/mreduceMap';
-import mreduce from 'crocks/helpers/mreduce';
+import mreduceMap from 'crocks/helpers/mreduceMap'
+import mreduce from 'crocks/helpers/mreduce'
 
-import Pred from 'crocks/Pred';
-import All from 'crocks/All';
-import Any from 'crocks/Any';
-import compose from 'crocks/helpers/compose';
-import getPropOr from 'crocks/helpers/getPropOr';
+import Pred from 'crocks/Pred'
+import All from 'crocks/All'
+import Any from 'crocks/Any'
+import compose from 'crocks/helpers/compose'
+import getPropOr from 'crocks/helpers/getPropOr'
 
-const john = { name: 'John', age: 23, referral: 'ANON' };
-const sam = { name: 'Sam', age: 32, referral: 'FRIEND' };
-const sarah = { name: 'Sarah', age: 21, referral: 'ANON' };
+const john = { name: 'John', age: 23, referral: 'ANON' }
+const sam = { name: 'Sam', age: 32, referral: 'FRIEND' }
+const sarah = { name: 'Sarah', age: 21, referral: 'ANON' }
 
-const people = [john, sam, sarah];
+const people = [ john, sam, sarah ]
 
-const isOfAge = age => age >= 21;
-const isReferred = who => who === 'FRIEND';
+const isOfAge = age => age >= 21
+const isReferred = who => who === 'FRIEND'
 
 // Helpers -- point-free functions
-const getRefs = getPropOr('ANON', 'referral');
-const getAge = getPropOr(0, 'age');
+const getRefs = getPropOr('ANON', 'referral')
+const getAge = getPropOr(0, 'age')
 
 const isValid = mreduce(Pred, [
   compose(
@@ -736,17 +736,17 @@ const isValid = mreduce(Pred, [
     isReferred,
     getRefs
   )
-]);
+])
 
 // areAllValid :: a -> All
-const areAllValid = mreduceMap(All, isValid);
+const areAllValid = mreduceMap(All, isValid)
 
 // areAllValid :: a -> Any
-const areAnyValid = mreduceMap(Any, isValid);
+const areAnyValid = mreduceMap(Any, isValid)
 
-areAllValid(people); //=> false
+areAllValid(people) //=> false
 
-areAnyValid(people); //=> true
+areAnyValid(people) //=> true
 ```
 
 #### nAry

@@ -318,13 +318,13 @@ psi ::  (b -> b -> c) -> (a -> b) -> a -> a -> c
 ```
 
 `psi` is a function that can be considered the sister of [`converge`](#converge).
-Where [`converge`](#converge) takes one argument an maps it through two functions,
-merging the resulting values with an accumulating function, `psi` takes two
-arguments and runs them through the same function individually before merging
-them with the given accumulating function.
+Where [`converge`](#converge) takes one argument and maps it through
+two `unary` functions, merging the resulting values with a binary
+function, `psi` takes two arguments and runs them each through the
+same `unary` function before merging them with the given binary function.
 
-`psi` is often used to easily [`compose`][compose] equality checking functions or when
-needing to validate two arguments of the same type.
+`psi` is often used to [`compose`][compose] equality checking functions
+or when needing to validate two arguments of the same type.
 
 ```javascript
 import psi from 'crocks/combinators/psi'
@@ -338,15 +338,15 @@ import safe from 'crocks/Maybe/safe'
 // isNonZero :: Number -> Boolean
 const isNonZero = x => x !== 0
 
-// isValid :: Number -> Boolean
-const isValid = and(isNumber, isNonZero)
+// isValidDivisor :: Number -> Boolean
+const isValidDivisor = and(isNumber, isNonZero)
 
 // divideBy :: Number -> Number -> Number
 const divideBy = x => y => y / x
 
 // safeDivide :: Number -> Number -> Maybe Number
 const safeDivide =
-  psi(liftA2(divideBy), safe(isValid))
+  psi(liftA2(divideBy), safe(isValidDivisor))
 
 safeDivide(0.5, 21)
 //=> Just 42
@@ -360,8 +360,8 @@ safeDivide(0.5, '21')
 safeDivide(29, 0)
 //=> Nothing
 
-// toTitleCase :: String -> String
-const toTitleCase = str =>
+// capitalize :: String -> String
+const capitalize = str =>
   `${str.charAt(0).toUpperCase()}${str.slice(1)}`
 
 // join :: String -> String -> String -> String
@@ -370,7 +370,7 @@ const join = delim => right => left =>
 
 // createName :: String -> String -> String
 const createName =
-  psi(join(', '), toTitleCase)
+  psi(join(', '), capitalize)
 
 createName('Jon', 'doe')
 //=> Doe, Jon

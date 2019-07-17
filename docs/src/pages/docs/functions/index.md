@@ -49,6 +49,7 @@ need to account for for the rest of your flow.
 | [`converge`][converge] | `(b -> c -> d) -> (a -> b) -> (a -> c) -> a -> d` | `crocks/combinators/converge` |
 | [`flip`][flip] | `(a -> b -> c) -> b -> a -> c` | `crocks/combinators/flip` |
 | [`identity`][identity] | `a -> a` | `crocks/combinators/identity` |
+| [`psi`][psi] | `(b -> b -> c) -> (a -> b) -> a -> a -> c` | `crocks/combinators/psi` |
 | [`substitution`][substitution] | `(a -> b -> c) -> (a -> b) -> a -> c` | `crocks/combinators/substitution` |
 
 ## Helpers
@@ -137,6 +138,7 @@ type: `Pred a` and vice-versa
 [converge]: combinators.html#converge
 [flip]: combinators.html#flip
 [identity]: combinators.html#identity
+[psi]: combinators.html#psi
 [substitution]: combinators.html#substitution
 
 [assign]: helpers.html#assign

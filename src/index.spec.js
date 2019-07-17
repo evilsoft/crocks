@@ -7,6 +7,7 @@ const composeB = require('./combinators/composeB')
 const constant = require('./combinators/constant')
 const flip = require('./combinators/flip')
 const identity = require('./combinators/identity')
+const psi = require('./combinators/psi')
 const substitution = require('./combinators/substitution')
 
 // crocks
@@ -154,6 +155,7 @@ const valueOf = require('./pointfree/valueOf')
 
 // predicates
 const hasProp = require('./predicates/hasProp')
+const hasProps = require('./predicates/hasProps')
 const hasPropPath = require('./predicates/hasPropPath')
 const isAlt = require('./predicates/isAlt')
 const isAlternative = require('./predicates/isAlternative')
@@ -245,6 +247,7 @@ test('entry', t => {
   t.equal(crocks.constant, constant, 'provides the K combinator (constant)')
   t.equal(crocks.flip, flip, 'provides the C combinator (flip)')
   t.equal(crocks.identity, identity, 'provides the I combinator (identity)')
+  t.equal(crocks.psi, psi, 'provides the P combinator (psi)')
   t.equal(crocks.substitution, substitution, 'provides the S combinator (substitution)')
 
   // crocks
@@ -393,6 +396,7 @@ test('entry', t => {
 
   // predicates
   t.equal(crocks.hasProp, hasProp, 'provides the hasProp predicate')
+  t.equal(crocks.hasProps, hasProps, 'provides the hasProps predicate')
   t.equal(crocks.hasPropPath, hasPropPath, 'provides the hasPropPath predicate')
   t.equal(crocks.isAlt, isAlt, 'provides the isAlt predicate')
   t.equal(crocks.isAlternative, isAlternative, 'provides the isAlternative predicate')

@@ -5,7 +5,7 @@ const makeFake = helpers.makeFake
 
 const isFunction = require('./isFunction')
 
-const fl = require('../core/flNames')
+const fl = require('./flNames')
 
 const isEmpty = require('./isEmpty')
 

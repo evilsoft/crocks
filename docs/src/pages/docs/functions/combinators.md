@@ -319,11 +319,11 @@ psi ::  (b -> b -> c) -> (a -> b) -> a -> a -> c
 
 `psi` is a function that can be considered the sister of [`converge`](#converge).
 Where [`converge`](#converge) takes one argument an maps it through two functions,
-merging the resultiing values with an accumulating function, `psi` takes two
-arguments and runs them through the same funciont individually before merging
+merging the resulting values with an accumulating function, `psi` takes two
+arguments and runs them through the same function individually before merging
 them with the given accumulating function.
 
-`psi` is often used to easily `compose` equality checking functions or when
+`psi` is often used to easily [`compose`][compose] equality checking functions or when
 needing to validate two arguments of the same type.
 
 ```javascript
@@ -355,6 +355,9 @@ safeDivide('0.5', 21)
 //=> Nothing
 
 safeDivide(0.5, '21')
+//=> Nothing
+
+safeDivide(29, 0)
 //=> Nothing
 
 // toTitleCase :: String -> String

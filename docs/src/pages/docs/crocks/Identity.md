@@ -203,7 +203,7 @@ const prod = a => b => a * b
 const double = prod(2)
 
 Identity(double)
-  .ap(5)
+  .ap(Identity(5))
 //=> Identity 10
 ```
 

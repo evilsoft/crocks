@@ -1003,36 +1003,31 @@ const characters = {
 }
 
 // fake404 :: () -> Async e a
-const fake404 = () => Rejected({ statusCode: 404, status: 'Not Found' })
+const fake404 = () =>
+  Rejected({ statusCode: 404, status: 'Not Found' })
 
-// fake404 :: * -> Async e a
-const fake200 = body => Resolved({ statusCode: 200, body })
+// fake200 :: * -> Async e a
+const fake200 = body =>
+  Resolved({ statusCode: 200, body })
 
-// getByName :: string -> Async e a
+// getByName :: String -> Async e a
 const getByName = name =>
   getProp(name, characters)
     .either(fake404, fake200)
 
-// getFirstFound :: [string] -> Async e a
-const getFirstFound =
-  reduce(
-    (cur, name) => bichain(() => getByName(name), Resolved, cur),
-    fake404()
-  )
+// getFirstFound :: [ String ] -> Async e a
+const getFirstFound = reduce(
+  (cur, name) => bichain(() => getByName(name), Resolved, cur),
+  fake404()
+)
 
 getByName('John')
   .bichain(() => getByName('tarzan'), Resolved)
-  .fork(
-    log('rej'),
-    log('res')
-  )
+  .fork(log('rej'), log('res'))
 //=> res: { statusCode: 200, body: { fname: 'John', lname: 'Clayton' } }
 
 getFirstFound([ 'sam', 'sarah' ])
-  .fork(
-    log('rej'),
-    log('res')
-  )
+  .fork(log('rej'), log('res'))
 //=> rej: { statusCode: 404, status: 'Not Found' }
 ```
 

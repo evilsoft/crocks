@@ -7,6 +7,7 @@ const composeB = require('./combinators/composeB')
 const constant = require('./combinators/constant')
 const flip = require('./combinators/flip')
 const identity = require('./combinators/identity')
+const psi = require('./combinators/psi')
 const substitution = require('./combinators/substitution')
 
 // crocks
@@ -246,6 +247,7 @@ test('entry', t => {
   t.equal(crocks.constant, constant, 'provides the K combinator (constant)')
   t.equal(crocks.flip, flip, 'provides the C combinator (flip)')
   t.equal(crocks.identity, identity, 'provides the I combinator (identity)')
+  t.equal(crocks.psi, psi, 'provides the P combinator (psi)')
   t.equal(crocks.substitution, substitution, 'provides the S combinator (substitution)')
 
   // crocks

@@ -2,7 +2,7 @@
 description: "Combinators API"
 layout: "notopic"
 title: "Combinators"
-functions: ["applyto", "composeb", "constant", "converge", "flip", "identity", "substitution"]
+functions: ["applyto", "composeb", "constant", "converge", "flip", "identity", "psi", "substitution"]
 weight: 10
 ---
 
@@ -308,6 +308,90 @@ This function and [`constant`](#constant) are the workhorses of writing code
 with this library. It quite simply is just a function that when you pass it
 something, it returns that thing right back to you. So simple, I will leave it
 as an exercise to reason about why this is so powerful and important.
+
+#### psi
+
+`crocks/combinators/psi`
+
+```haskell
+psi ::  (b -> b -> c) -> (a -> b) -> a -> a -> c
+```
+
+`psi` is a function that can be considered the sister of [`converge`](#converge).
+Where [`converge`](#converge) takes one argument and maps it through
+two `unary` functions, merging the resulting values with a binary
+function, `psi` takes two arguments and runs them each through the
+same `unary` function before merging them with the given binary function.
+
+`psi` is often used to [`compose`][compose] equality checking functions
+or when needing to validate two arguments of the same type.
+
+```javascript
+import psi from 'crocks/combinators/psi'
+
+import and from 'crocks/logic/and'
+import equals from 'crocks/pointfree/equals'
+import isNumber from 'crocks/predicates/isNumber'
+import liftA2 from 'crocks/helpers/liftA2'
+import safe from 'crocks/Maybe/safe'
+
+// isNonZero :: Number -> Boolean
+const isNonZero = x => x !== 0
+
+// isValidDivisor :: Number -> Boolean
+const isValidDivisor = and(isNumber, isNonZero)
+
+// divideBy :: Number -> Number -> Number
+const divideBy = x => y => y / x
+
+// safeDivide :: Number -> Number -> Maybe Number
+const safeDivide =
+  psi(liftA2(divideBy), safe(isValidDivisor))
+
+safeDivide(0.5, 21)
+//=> Just 42
+
+safeDivide('0.5', 21)
+//=> Nothing
+
+safeDivide(0.5, '21')
+//=> Nothing
+
+safeDivide(29, 0)
+//=> Nothing
+
+// capitalize :: String -> String
+const capitalize = str =>
+  `${str.charAt(0).toUpperCase()}${str.slice(1)}`
+
+// join :: String -> String -> String -> String
+const join = delim => right => left =>
+  `${left}${delim}${right}`
+
+// createName :: String -> String -> String
+const createName =
+  psi(join(', '), capitalize)
+
+createName('Jon', 'doe')
+//=> Doe, Jon
+
+createName('sara', 'smith')
+//=> Smith, Sara
+
+// toLowerCase :: String -> String
+const toLowerCase = str =>
+  str.toLowerCase()
+
+// equalsIgnoreCase :: String -> String -> Boolean
+const equalsIgnoreCase =
+  psi(equals, toLowerCase)
+
+equalsIgnoreCase('test', 'TEst')
+//=> true
+
+equalsIgnoreCase('test', 'not-test')
+//=> false
+```
 
 #### substitution
 

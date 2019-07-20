@@ -1,0 +1,58 @@
+.markdown-section pre,
+.markdown-section pre > code {
+    color: #eee; /* default color for elements not styled by prism theme */
+    background-color: #0C1021; /* dark background, because vue.css modify it */
+    border-radius: 4px;
+}
+
+.markdown-section code {
+    color: inherit; 
+    background: rgba(14, 20, 26, 0.1);
+}
+
+article {
+    background: white;
+}
+
+header {
+    background: rgba(14, 20, 26, 0.02);
+    text-align: center;
+    padding: 128px 0 60px;
+    margin-top: 0;
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    top: 0;
+}
+
+header span {
+    color: rgba(14, 20, 26, 0.8);
+    font-family: "Galano", sans-serif;
+    font-weight: 700;
+    font-size: 3.42676rem;
+    line-height: calc(3rem * 1.5);
+}
+
+nav.app-nav.no-badge {
+    margin: 0;
+    padding: 25px 32px 0 0;
+    z-index: 1;
+}
+
+.markdown-section pre > code {
+    padding: 1em 5px;
+}
+
+article.markdown-section {
+    position: relative;
+}
+
+article.markdown-section {
+    position: unset;
+}
+
+article.markdown-section {
+    padding-top: 296px;
+}

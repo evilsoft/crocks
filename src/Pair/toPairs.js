@@ -10,9 +10,9 @@ function toPairs(obj) {
     throw new TypeError('toPairs: Object required for argument')
   }
 
-  return Object.entries(obj).reduce(
-    (acc, [ key, value ]) => value !== undefined
-      ? acc.concat([ Pair(key, value) ])
+  return Object.keys(obj).reduce(
+    (acc, key) => obj[key] !== undefined
+      ? acc.concat([ Pair(key, obj[key]) ])
       : acc,
     []
   )

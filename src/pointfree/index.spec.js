@@ -5,6 +5,7 @@ const index = require('.')
 const expected = {
   alt : require('./alt'),
   ap : require('./ap'),
+  bichain: require('./bichain'),
   bimap : require('./bimap'),
   both : require('./both'),
   chain : require('./chain'),

@@ -1,7 +1,7 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const VERSION = 4
+const VERSION = 5
 
 const _implements = require('../core/implements')
 const _inspect = require('../core/inspect')
@@ -322,6 +322,35 @@ function Async(fn) {
     }
   }
 
+  function bichain(l, r) {
+    const bichainErr = 'Async.bichain: Both arguments must be Async returning functions'
+
+    if(!isFunction(l) || !isFunction(r)) {
+      throw new TypeError(bichainErr)
+    }
+
+    return Async(function(rej, res) {
+      let cancel = unit
+      let innerCancel = unit
+
+      function setInnerCancel(mapFn) {
+        return function(x) {
+          const m = mapFn(x)
+
+          if(!isSameType(Async, m)) {
+            throw new TypeError(bichainErr)
+          }
+
+          innerCancel = m.fork(rej, res)
+        }
+      }
+
+      cancel = fork(setInnerCancel(l), setInnerCancel(r))
+
+      return once(() => innerCancel(cancel()))
+    })
+  }
+
   return {
     fork, toPromise, inspect,
     toString: inspect, type,
@@ -331,6 +360,7 @@ function Async(fn) {
     bimap: bimap('bimap'),
     map: map('map'),
     chain: chain('chain'),
+    bichain,
     [fl.of]: of,
     [fl.alt]: alt(fl.alt),
     [fl.bimap]: bimap(fl.bimap),

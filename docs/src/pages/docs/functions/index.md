@@ -104,7 +104,7 @@ need to account for for the rest of your flow.
 | [`setPath`][setpath] | <code>[ (String &#124; Integer) ] -> a -> (Object &#124; Array) -> (Object &#124; Array)</code> | `crocks/helpers/setPath` |
 | [`setProp`][setprop] | <code>(String &#124; Integer) -> a -> (Object &#124; Array) -> (Object &#124; Array)</code> | `crocks/helpers/setProp` |
 | [`tap`][tap] | `(a -> b) -> a -> a` | `crocks/helpers/tap` |
-| [`toPairs`][topairs] | `Object -> List (Pair String a)` | `crocks/Pair/toPairs` |
+| [`toPairs`][topairs] | `Object -> Array (Pair String a)` | `crocks/Pair/toPairs` |
 | [`tryCatch`][trycatch] | `((*) -> b) -> (*) -> Result e b` | `crocks/Result/tryCatch` |
 | [`unary`][unary] | `((*) -> b) -> a -> b` | `crocks/helpers/unary` |
 | [`unit`][unit] | `() -> undefined` | `crocks/helpers/unit` |

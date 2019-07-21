@@ -432,14 +432,14 @@ As a `b` can be an `a` as well.
 fromPairs :: Foldable f => f (Pair String a) -> Object
 ```
 
-As an inverse to [`toPairs`][topairs], `fromPairs` takes either
-an `Array` or `List` of key-value `Pair`s and constructs an `Object` from it.
-The `Pair` must contain a `String` in the `fst` and any type of value in
-the `snd`. The `fst` will become the key for the value in the `snd`. All
-primitive values are copied into the new `Object`, while non-primitives are
-references to the original. If you provide an `undefined` values for the second,
-that `Pair` will not be represented in the resulting `Object`. Also, when if
-multiple keys share the same name, that last value will be moved over.
+As an inverse to [`toPairs`][topairs], `fromPairs` takes either a `Foldable` of
+key-value `Pair`s and constructs an `Object` from it. The `Pair` must
+contain a `String` in the `fst` and any type of value in the `snd`. The `fst`
+will become the key for the value in the `snd`. All primitive values are copied
+into the new `Object`, while non-primitives are references to the original. If
+you provide an `undefined` values for the second, that `Pair` will not be
+represented in the resulting `Object`. Also, when if multiple keys share the
+same name, that last value will be moved over.
 
 #### getPathOr
 

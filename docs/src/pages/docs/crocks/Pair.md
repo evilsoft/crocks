@@ -863,8 +863,8 @@ toPairs :: Object -> List (Pair String a)
 ```
 
 When dealing with `Object`s, sometimes it makes more sense to work in
-a `Foldable` structure like a `List` of key-value `Pair`s. `toPairs` provides
-a means to take an object and give you back a `List` of `Pairs` that have
+a `Foldable` structure like an `Array` of key-value `Pair`s. `toPairs` provides a
+means to take an object and give you back an `Array` of `Pairs` that have
 a `String` that represents the key in the `fst` and the value for that key in
 the `snd`. The primitive values are copied, while non-primitive values are
 references. Like most of the `Object` functions in `crocks`, any keys
@@ -888,10 +888,9 @@ const record = {
 const joinField = (key, value) =>
   `${key}:${value}`
 
-// joinRecord :: List String -> String
-const joinRecord = list =>
-  list.toArray()
-    .join('|')
+// joinRecord :: Array String -> String
+const joinRecord = arr =>
+  arr.join('|')
 
 // buildRecord :: Object -> String
 const buildRecord = compose(

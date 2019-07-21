@@ -1,6 +1,6 @@
 # Change Log for `crocks`
 
-v0.12.2 -- July 21, 2019
+v0.12.3 -- July 21, 2019
 --
 
 ### Additions

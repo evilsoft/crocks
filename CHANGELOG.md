@@ -1,5 +1,31 @@
 # Change Log for `crocks`
 
+v0.12.2 -- July 21, 2019
+--
+
+### Additions
+* Functions/Methods
+  * `hasProps` predicate
+  * `psi` combinator
+  * `compose2` combinator
+  * `bichain` pointfree
+  * `isBichain` predicate
+  * `bichain` instance function on `Async`
+
+### Documentation
+* Minor Spelling error corrections
+* Update to `ap` example on `Identity`
+
+### Pull Requests
+* [#416 - Minor spelling mistake](https://github.com/evilsoft/crocks/pull/416)
+* [#413 - Update on index exports](https://github.com/evilsoft/crocks/pull/413)
+* [#417 - Adding new `hasProps` predicate](https://github.com/evilsoft/crocks/pull/417)
+* [#420 - Moving `Pred` to core](https://github.com/evilsoft/crocks/pull/420)
+* [#424 - Updating `ap` example on `Identity`](https://github.com/evilsoft/crocks/pull/424)
+* [#429 - Add the powerful P combinator](https://github.com/evilsoft/crocks/pull/429)
+* [#394 - Add bichain to Async](https://github.com/evilsoft/crocks/pull/394)
+* [#431 - Adding in the `compose2` combinator](https://github.com/evilsoft/crocks/pull/431)
+
 v0.12.1 -- June 30, 2019
 --
 

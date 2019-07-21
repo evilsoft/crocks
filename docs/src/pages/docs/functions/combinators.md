@@ -20,50 +20,6 @@ give it a value and it will give you back a function ready to take a function.
 Once that function is provided, it will return the result of applying your value
 to that function.
 
-#### composeB
-
-`crocks/combinators/composeB`
-
-```haskell
-composeB :: (b -> c) -> (a -> b) -> a -> c
-```
-
-Provides a means to describe a composition between two functions. it takes two
-functions and a value. Given `composeB(f, g)`, which is read `f` after `g`, it
-will return a function that will take value `a` and apply it to `g`, passing the
-result as an argument to `f`, and will finally return the result of `f`. This
-allows only two functions, if you want to avoid things like:
-`composeB(composeB(f, g), composeB(h, i))` then check out
-[`compose`][compose].
-
-```javascript
-import composeB from 'crocks/combinators/composeB'
-
-import Either from 'crocks/Either'
-
-import ifElse from 'crocks/logic/ifElse'
-import isString from 'crocks/predicates/isString'
-
-const { Left, Right } = Either
-
-// yell :: String -> String
-const yell = x =>
-  `${x.toUpperCase()}!`
-
-// safeYell :: a -> Either a String
-const safeYell =  ifElse(
-  isString,
-  composeB(Right, yell),
-  Left
-)
-
-safeYell('quite')
-//=> Right "QUITE!"
-
-safeYell(42)
-//=> Left 42
-```
-
 #### compose2
 
 `crocks/combinators/compose2`
@@ -93,17 +49,23 @@ import safe from 'crocks/Maybe/safe'
 import safeLift from 'crocks/Maybe/safeLift'
 
 // isNonZero :: Number -> Boolean
-const isNonZero = x => x !== 0
+const isNonZero = x =>
+  x !== 0
 
 // isValidDivisor :: Number -> Boolean
-const isValidDivisor = and(isNumber, isNonZero)
+const isValidDivisor =
+  and(isNumber, isNonZero)
 
 // divideBy :: Number -> Number -> Number
-const divideBy = x => y => y / x
+const divideBy = x => y =>
+  y / x
 
 // safeDivide :: Number -> Number -> Maybe Number
-const safeDivide =
-  compose2(liftA2(divideBy), safe(isValidDivisor), safe(isNumber))
+const safeDivide = compose2(
+  liftA2(divideBy),
+  safe(isValidDivisor),
+  safe(isNumber)
+)
 
 safeDivide(0.5, 21)
 //=> Just 42
@@ -152,7 +114,7 @@ const createSummary = compose2(
 createSummary({
   name: 'Sam Smith'
 }, items)
-// => Just "Sam Smith purchased 2 items"
+//=> Just "Sam Smith purchased 2 items"
 
 // capitalize :: String -> String
 const capitalize = str =>
@@ -175,6 +137,50 @@ createName('Jon', 'doe')
 
 createName('sara', 'smith')
 //=> SMITH, Sara
+```
+
+#### composeB
+
+`crocks/combinators/composeB`
+
+```haskell
+composeB :: (b -> c) -> (a -> b) -> a -> c
+```
+
+Provides a means to describe a composition between two functions. it takes two
+functions and a value. Given `composeB(f, g)`, which is read `f` after `g`, it
+will return a function that will take value `a` and apply it to `g`, passing the
+result as an argument to `f`, and will finally return the result of `f`. This
+allows only two functions, if you want to avoid things like:
+`composeB(composeB(f, g), composeB(h, i))` then check out
+[`compose`][compose].
+
+```javascript
+import composeB from 'crocks/combinators/composeB'
+
+import Either from 'crocks/Either'
+
+import ifElse from 'crocks/logic/ifElse'
+import isString from 'crocks/predicates/isString'
+
+const { Left, Right } = Either
+
+// yell :: String -> String
+const yell = x =>
+  `${x.toUpperCase()}!`
+
+// safeYell :: a -> Either a String
+const safeYell =  ifElse(
+  isString,
+  composeB(Right, yell),
+  Left
+)
+
+safeYell('quite')
+//=> Right "QUITE!"
+
+safeYell(42)
+//=> Left 42
 ```
 
 #### constant
@@ -449,13 +455,16 @@ import liftA2 from 'crocks/helpers/liftA2'
 import safe from 'crocks/Maybe/safe'
 
 // isNonZero :: Number -> Boolean
-const isNonZero = x => x !== 0
+const isNonZero = x =>
+  x !== 0
 
 // isValidDivisor :: Number -> Boolean
-const isValidDivisor = and(isNumber, isNonZero)
+const isValidDivisor =
+  and(isNumber, isNonZero)
 
 // divideBy :: Number -> Number -> Number
-const divideBy = x => y => y / x
+const divideBy = x => y =>
+  y / x
 
 // safeDivide :: Number -> Number -> Maybe Number
 const safeDivide =

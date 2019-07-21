@@ -1,7 +1,7 @@
 module.exports = {
   applyTo: require('./applyTo'),
-  composeB: require('./composeB'),
   compose2: require('./compose2'),
+  composeB: require('./composeB'),
   constant: require('./constant'),
   converge: require('./converge'),
   flip: require('./flip'),

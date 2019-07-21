@@ -17,7 +17,7 @@ test('compose2', t => {
 
   t.ok(isFunction(compose2), 'is a function')
 
-  const err = /TypeError: compose2: First, second and third arguments must be functions/
+  const err = /^TypeError: compose2: First, second and third arguments must be functions/
   t.throws(fn(undefined, g, h, x, y), err, 'throws with first arg undefined')
   t.throws(fn(null, g, h, x, y), err, 'throws with first arg null')
   t.throws(fn(0, g, h, x, y), err, 'throws with first arg falsey number')

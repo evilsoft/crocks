@@ -3,11 +3,11 @@ const helpers = require('../test/helpers')
 
 const bindFunc = helpers.bindFunc
 
-const List = require('../core/List')
 const Pair = require('../core/Pair')
 const isSameType = require('../core/isSameType')
+const find = require('../Maybe/find')
 const unit = require('../core/_unit')
-
+const isArray = require('../core/isArray')
 const toPairs = require('./toPairs')
 
 test('toPairs', t => {
@@ -39,9 +39,9 @@ test('toPairs', t => {
 
   const result = toPairs(data)
   const allPairs = result.reduce((acc, x) => acc && isSameType(Pair, x), true)
-  const getPair = key => result.filter(x => x.fst() === key).head().option(Pair(null, 'No Key'))
+  const getPair = key => find(x => x.fst() === key, result).option(Pair(null, 'No Key'))
 
-  t.ok(isSameType(List, result), 'returns a List')
+  t.ok(isArray(result), 'returns an Array')
   t.ok(allPairs, 'list contains all Pairs')
 
   t.equals(getPair('undef').snd(), 'No Key', 'does not include keys with undefined values')

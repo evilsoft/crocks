@@ -3,6 +3,7 @@ const test = require('tape')
 const index = require('.')
 
 const applyTo = require('./applyTo')
+const compose2 = require('./compose2')
 const composeB = require('./composeB')
 const constant = require('./constant')
 const converge = require('./converge')
@@ -13,6 +14,7 @@ const substitution = require('./substitution')
 
 test('combinators entry', t => {
   t.equal(index.applyTo, applyTo, 'provides the T combinator (applyTo)')
+  t.equal(index.compose2, compose2, 'provides the compose2 combinator')
   t.equal(index.composeB, composeB, 'provides the B combinator (composeB)')
   t.equal(index.constant, constant, 'provides the K combinator (constant)')
   t.equal(index.converge, converge, 'provides the S\' combinator (converge)')

@@ -2,6 +2,7 @@ module.exports = {
   alt: require('./alt'),
   ap: require('./ap'),
   bimap: require('./bimap'),
+  bichain: require('./bichain'),
   both: require('./both'),
   chain: require('./chain'),
   coalesce: require('./coalesce'),

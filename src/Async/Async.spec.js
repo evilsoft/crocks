@@ -391,7 +391,7 @@ test('Async type', t => {
 
 test('Async @@type', t => {
   t.equal(Async(unit)['@@type'], Async['@@type'], 'static and instance versions are the same')
-  t.equal(Async(unit)['@@type'], 'crocks/Async@4', 'returns crocks/Async@4')
+  t.equal(Async(unit)['@@type'], 'crocks/Async@5', 'returns crocks/Async@5')
 
   t.end()
 })
@@ -461,6 +461,27 @@ test('Async fork settle', t => {
   Async((rej, res) => { res(10); rej(10) }).fork(rej, res)
   t.ok(res.calledOnce, 'calls resolve when called before a reject in an Async')
   t.ok(rej.notCalled, 'does not call reject after resolve in an Async')
+
+  t.end()
+})
+
+test('Async cancel bichain cleanup functions - rejected', t => {
+  const rejCleanUp = sinon.spy()
+  const forkCleanUp = sinon.spy()
+
+  const cancel =
+    Async.Rejected(0)
+      .bichain(x => Async(rej => { rej(x); return rejCleanUp }), Async.of)
+      .fork(unit, unit, forkCleanUp)
+
+  cancel()
+
+  t.ok(forkCleanUp.calledAfter(rejCleanUp), 'calls the fork cleanup last')
+
+  cancel()
+
+  t.ok(rejCleanUp.calledOnce, 'calls the Async level cleanup only once')
+  t.ok(forkCleanUp.calledOnce, 'calls the fork level cleanup only once')
 
   t.end()
 })
@@ -1051,7 +1072,7 @@ test('Async alt properties (Alt)', t => {
   a.alt(b).alt(c).fork(unit, assocLeft)
   a.alt(b.alt(c)).fork(unit, assocRight)
 
-  t.same(assocLeft.args[0], assocRight.args[0], 'assosiativity')
+  t.same(assocLeft.args[0], assocRight.args[0], 'associativity')
 
   const distLeft = sinon.spy()
   const distRight = sinon.spy()
@@ -1224,7 +1245,7 @@ test('Async chain properties (Chain)', t => {
   Async((_, res) => res(x)).chain(f).chain(g).fork(unit, aRes)
   Async((_, res) => res(x)).chain(y => f(y).chain(g)).fork(unit, bRes)
 
-  t.same(aRes.args[0], bRes.args[0], 'assosiativity')
+  t.same(aRes.args[0], bRes.args[0], 'associativity')
 
   t.end()
 })
@@ -1250,6 +1271,82 @@ test('Async chain properties (Monad)', t => {
   f(3).fork(unit, bRight)
 
   t.same(aRight.args[0], bRight.args[0], 'right identity')
+
+  t.end()
+})
+
+test('Async bichain left errors', t => {
+  const bichain = bindFunc(Async(unit).bichain)
+
+  const err = /Async.bichain: Both arguments must be Async returning functions/
+  t.throws(bichain(undefined, Async.of), err, 'throws with undefined')
+  t.throws(bichain(null, Async.of), err, 'throws with null')
+  t.throws(bichain(0, Async.of), err, 'throws with falsey number')
+  t.throws(bichain(1, Async.of), err, 'throws with truthy number')
+  t.throws(bichain('', Async.of), err, 'throws with falsey string')
+  t.throws(bichain('string', Async.of), err, 'throws with truthy string')
+  t.throws(bichain(false, Async.of), err, 'throws with false')
+  t.throws(bichain(true, Async.of), err, 'throws with true')
+  t.throws(bichain([], Async.of), err, 'throws with an array')
+  t.throws(bichain({}, Async.of), err, 'throws with an object')
+
+  const noAsync = /Async.bichain: Both arguments must be Async returning functions/
+  t.throws(Async.Rejected(3).bichain(unit, Async.of).fork.bind(null, unit, unit), noAsync, 'throws with a non-Async returning function')
+
+  t.doesNotThrow(Async.Rejected(3).bichain(Async.of, Async.of).fork.bind(null, unit, unit), 'allows an Async returning function')
+
+  t.end()
+})
+
+test('Async bichain right errors', t => {
+  const bichain = bindFunc(Async(unit).bichain)
+
+  const err = /Async.bichain: Both arguments must be Async returning functions/
+
+  t.throws(bichain(Async.Rejected, undefined), err, 'throws with undefined')
+  t.throws(bichain(Async.Rejected, null), err, 'throws with null')
+  t.throws(bichain(Async.Rejected, 0), err, 'throws with falsey number')
+  t.throws(bichain(Async.Rejected, 1), err, 'throws with truthy number')
+  t.throws(bichain(Async.Rejected, ''), err, 'throws with falsey string')
+  t.throws(bichain(Async.Rejected, 'string'), err, 'throws with truthy string')
+  t.throws(bichain(Async.Rejected, false), err, 'throws with false')
+  t.throws(bichain(Async.Rejected, true), err, 'throws with true')
+  t.throws(bichain(Async.Rejected, []), err, 'throws with an array')
+  t.throws(bichain(Async.Rejected, {}), err, 'throws with an object')
+
+  t.throws(Async.of(3).bichain(Async.Rejected, unit).fork.bind(null, unit, unit), err, 'throws with a non-Async returning function')
+
+  t.doesNotThrow(Async.of(3).bichain(Async.Rejected, Async.of).fork.bind(null, unit, unit), 'allows an Async returning function')
+
+  t.end()
+})
+
+test('Async bichain properties (Bichain)', t => {
+  t.ok(isFunction(Async(unit).bichain), 'provides a bichain function')
+
+  const aRej = sinon.spy()
+  const bRej = sinon.spy()
+
+  const fOfL = x => Async((rej) => rej(x + 2))
+  const gOfL = x => Async((rej) => rej(x + 10))
+
+  const aRes = sinon.spy()
+  const bRes = sinon.spy()
+
+  const fOfR = x => Async((_, res) => res(x * 2))
+  const gOfR = x => Async((_, res) => res(x * 10))
+
+  const x = 12
+  const y = 7
+
+  Async((rej) => rej(x)).bichain(fOfL, Async.of).bichain(gOfL, Async.of).fork(aRej, unit)
+  Async((rej) => rej(x)).bichain(y => fOfL(y).bichain(gOfL, Async.of), Async.of).fork(bRej, unit)
+
+  Async((rej) => rej(y)).bichain(Async.Rejected, fOfR).bichain(Async.Rejected, gOfR).fork(unit, aRes)
+  Async((rej) => rej(y)).bichain(Async.Rejected, y => fOfR(y).bichain(Async.Rejected, gOfR)).fork(unit, bRes)
+
+  t.same(aRej.args[0], bRej.args[0], 'left associativity')
+  t.same(aRes.args[0], bRes.args[0], 'right associativity')
 
   t.end()
 })

@@ -20,6 +20,125 @@ give it a value and it will give you back a function ready to take a function.
 Once that function is provided, it will return the result of applying your value
 to that function.
 
+#### compose2
+
+`crocks/combinators/compose2`
+
+```haskell
+compose2 :: (c -> d -> e) -> (a -> c) -> (b -> d) -> a -> b -> e
+```
+
+`compose2` allows for composition between a `binary` function and
+two `unary` functions. `compose2` takes a `binary` function followed by
+two `unary` functions and returns a `binary` function that maps the first
+argument with the first `unary` and the second with the second, passing
+the results to the given `binary` and returning the result.
+
+```javascript
+import compose2 from 'crocks/combinators/compose2'
+
+import and from 'crocks/logic/and'
+import applyTo from 'crocks/combinators/applyTo'
+import flip from 'crocks/combinators/flip'
+import hasProp from 'crocks/predicates/hasProp'
+import isNumber from 'crocks/predicates/isNumber'
+import liftA2 from 'crocks/helpers/liftA2'
+import map from 'crocks/pointfree/map'
+import prop from 'crocks/Maybe/prop'
+import safe from 'crocks/Maybe/safe'
+import safeLift from 'crocks/Maybe/safeLift'
+
+// isNonZero :: Number -> Boolean
+const isNonZero = x =>
+  x !== 0
+
+// isValidDivisor :: Number -> Boolean
+const isValidDivisor =
+  and(isNumber, isNonZero)
+
+// divideBy :: Number -> Number -> Number
+const divideBy = x => y =>
+  y / x
+
+// safeDivide :: Number -> Number -> Maybe Number
+const safeDivide = compose2(
+  liftA2(divideBy),
+  safe(isValidDivisor),
+  safe(isNumber)
+)
+
+safeDivide(0.5, 21)
+//=> Just 42
+
+safeDivide('0.5', 21)
+//=> Nothing
+
+safeDivide(0.5, '21')
+//=> Nothing
+
+safeDivide(29, 0)
+//=> Just 0
+
+safeDivide(0, 29)
+//=> Nothing
+
+// Item :: { id: Integer }
+// Items :: Array Item
+const items =
+  [ { id: 2 }, { id: 1 } ]
+
+// pluck :: String -> Array Object -> Maybe a
+const pluck =
+  compose2(applyTo, prop, flip(map))
+
+pluck('id', items)
+//=> [ Just 2, Just 1 ]
+
+// summarize :: String -> String -> String
+const summarize = name => count =>
+  `${name} purchased ${count} items`
+
+// getLength :: a -> Maybe Number
+const getLength = safeLift(
+  hasProp('length'),
+  x => x.length
+)
+
+// createSummary :: Person -> Array Item -> String
+const createSummary = compose2(
+  liftA2(summarize),
+  prop('name'),
+  getLength
+)
+
+createSummary({
+  name: 'Sam Smith'
+}, items)
+//=> Just "Sam Smith purchased 2 items"
+
+// capitalize :: String -> String
+const capitalize = str =>
+  `${str.charAt(0).toUpperCase()}${str.slice(1)}`
+
+// join :: String -> String -> String -> String
+const join = delim => right => left =>
+  `${left}${delim}${right}`
+
+// toUpper :: String -> String
+const toUpper = x =>
+  x.toUpperCase()
+
+// createName :: String -> String -> String
+const createName =
+  compose2(join(', '), capitalize, toUpper)
+
+createName('Jon', 'doe')
+//=> DOE, Jon
+
+createName('sara', 'smith')
+//=> SMITH, Sara
+```
+
 #### composeB
 
 `crocks/combinators/composeB`
@@ -336,13 +455,16 @@ import liftA2 from 'crocks/helpers/liftA2'
 import safe from 'crocks/Maybe/safe'
 
 // isNonZero :: Number -> Boolean
-const isNonZero = x => x !== 0
+const isNonZero = x =>
+  x !== 0
 
 // isValidDivisor :: Number -> Boolean
-const isValidDivisor = and(isNumber, isNonZero)
+const isValidDivisor =
+  and(isNumber, isNonZero)
 
 // divideBy :: Number -> Number -> Number
-const divideBy = x => y => y / x
+const divideBy = x => y =>
+  y / x
 
 // safeDivide :: Number -> Number -> Maybe Number
 const safeDivide =

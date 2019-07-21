@@ -538,8 +538,10 @@ const Triple = Tuple(3)
 
 const triple = Triple( 1, { key: 'value' }, 'string' )
 
-tupleToArray(triple)              // => [ 1, { key: 'value' }, 'string' ]
+tupleToArray(triple)
+//=> [ 1, { key: 'value' }, 'string' ]
 
-tupleToArray(constant(triple))()  // => [ 1, { key: 'value' }, 'string' ]
+tupleToArray(constant(triple))()
+//=> [ 1, { key: 'value' }, 'string' ]
 ```
 </article>

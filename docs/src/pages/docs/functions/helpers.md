@@ -93,7 +93,7 @@ const fluent = x =>
     .chain(getProp('mi'))
 
 fluent(data)
-// => Just 'fa'
+//=> Just 'fa'
 
 // pointfree :: a -> Maybe b
 const pointfree = compose(
@@ -104,7 +104,7 @@ const pointfree = compose(
 )
 
 pointfree(data)
-// => Just 'fa'
+//=> Just 'fa'
 ```
 
 into the more abbreviated form:
@@ -133,7 +133,7 @@ const flow = composeK(
 )
 
 flow(data)
-// => Just 'fa'
+//=> Just 'fa'
 ```
 
 As demonstrated in the above example, this function more closely resembles flows
@@ -265,7 +265,7 @@ const data =
 
 composeS(double, avg)
   .runWith(data)
-// => 148
+//=> 148
 ```
 
 #### curry
@@ -651,7 +651,7 @@ const safeMax = mapReduce(
 safeMax(data)
   .option(Max.empty())
   .valueOf()
-// => 3
+//=> 3
 ```
 
 #### mconcat
@@ -798,7 +798,7 @@ const data =
   [ 13, 5, 13 ]
 
 map(max10, data)
-// => [ 10, 5, 10]
+//=> [ 10, 5, 10]
 ```
 
 #### pick
@@ -874,7 +874,7 @@ const fluent = x =>
     .chain(scaleLog(3))
 
 fluent(0).log()
-// => List [ "adding 4 to 0", "scaling 4 by 3" ]
+//=> List [ "adding 4 to 0", "scaling 4 by 3" ]
 
 const chainPipe = pipeK(
   addLog(4),
@@ -882,7 +882,7 @@ const chainPipe = pipeK(
 )
 
 chainPipe(0).log()
-// => List [ "adding 4 to 0", "scaling 4 by 3" ]
+//=> List [ "adding 4 to 0", "scaling 4 by 3" ]
 ```
 
 #### pipeP
@@ -1009,11 +1009,11 @@ const flow = (key, num) => pipeS(
 
 flow('num', 10)
   .runWith(data)
-// => Just 66
+//=> Just 66
 
 flow('string', 100)
   .runWith(data)
-// => Nothing
+//=> Nothing
 ```
 
 #### setPath
@@ -1061,7 +1061,7 @@ setPath([ 'people', 2, 'age' ], 26, {
 // ] }
 
 setPath([ 'a', 'c' ], false, { a: { b: true } })
-// => { a: { b: true, c: false } }
+//=> { a: { b: true, c: false } }
 
 setPath([ 'list', 'a' ], 'ohhh, I see.', { list: [ 'string', 'another' ] })
 //=> { list: { 0: 'string', 1: 'another', a: 'ohhh, I see.' } }

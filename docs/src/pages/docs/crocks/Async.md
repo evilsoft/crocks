@@ -1397,10 +1397,10 @@ logResult(timeout(fast))
 //=> resolved: "All good"
 
 logResult(timeout(slow))
-// => rejected: "Error: Request has timed out"
+//=> rejected: "Error: Request has timed out"
 
 logResult(failingPromise)
-// => rejected: "Promise rejected!"
+//=> rejected: "Promise rejected!"
 ```
 
 #### eitherToAsync
@@ -1593,7 +1593,7 @@ Resolved(First.empty())
 Resolved(First(42))
   .chain(firstToAsync('Left'))
   .fork(log('rej'), log('res'))
-// => res: 42
+//=> res: 42
 ```
 
 #### lastToAsync
@@ -1694,7 +1694,7 @@ Resolved(Last.empty())
 Resolved(Last('too know!'))
   .chain(lastToAsync('Left'))
   .fork(log('rej'), log('res'))
-// => res: "too know!"
+//=> res: "too know!"
 ```
 
 #### maybeToAsync
@@ -1781,7 +1781,7 @@ Resolved(Nothing())
 Resolved(Just('the 2 of us'))
   .chain(maybeToAsync('Left'))
   .fork(log('rej'), log('res'))
-// => res: "the 2 of us"
+//=> res: "the 2 of us"
 ```
 
 #### resultToAsync
@@ -1868,7 +1868,7 @@ Resolved(Err('Invalid entry'))
 Resolved(Ok('Success!'))
   .chain(resultToAsync)
   .fork(log('rej'), log('res'))
-// => res: "Success!"
+//=> res: "Success!"
 
 ```
 

@@ -988,8 +988,12 @@ will behave exactly as [`chain`](#chain) would.
 import bichain from 'crocks/pointfree/bichain'
 
 import Async from 'crocks/Async'
-import getProp from 'crocks/Maybe/getProp'
-import reduce from 'crocks/pointfree/reduce'
+
+import equals from 'crocks/pointfree/equals'
+import maybeToAsync from 'crocks/Async/maybeToAsync'
+import propSatisfies from 'crocks/predicates/propSatisfies'
+import safe from 'crocks/Maybe/safe'
+import substitution from 'crocks/combinators/substitution'
 
 const { Rejected, Resolved } = Async
 
@@ -997,38 +1001,51 @@ const { Rejected, Resolved } = Async
 const log = label => x =>
   (console.log(`${label}:`, x), x)
 
-const characters = {
-  'jane': { fname: 'Jane', lname: 'Porter' },
-  'tarzan': { fname: 'John', lname: 'Clayton' }
-}
+const fork = m =>
+  m.fork(log('rej'), log('res'))
 
-// fake404 :: () -> Async e a
-const fake404 = () =>
-  Rejected({ statusCode: 404, status: 'Not Found' })
+fork(
+  bichain(Resolved, Rejected, Resolved(42))
+)
+//=> rej: 42
 
-// fake200 :: * -> Async e a
-const fake200 = body =>
-  Resolved({ statusCode: 200, body })
+fork(
+  bichain(Resolved, Rejected, Rejected(42))
+)
+//=> res: 42
 
-// getByName :: String -> Async e a
-const getByName = name =>
-  getProp(name, characters)
-    .either(fake404, fake200)
+// fake401 :: Async Response a
+const fake401 = Rejected({
+  status: 'Unauthorized',
+  statusCode: 401
+})
 
-// getFirstFound :: [ String ] -> Async e a
-const getFirstFound = reduce(
-  (cur, name) => bichain(() => getByName(name), Resolved, cur),
-  fake404()
+// fake500 :: Async Response a
+const fake500 = Rejected({
+  status: 'Internal Server Error',
+  statusCode: 500
+})
+
+// fake200 :: Async e Response
+const fake200 = Resolved({
+  status: 'OK',
+  statusCode: 200
+})
+
+// allow401 :: Response -> Async e a
+const allow401 = substitution(
+  maybeToAsync,
+  safe(propSatisfies('statusCode', equals(401)))
 )
 
-getByName('John')
-  .bichain(() => getByName('tarzan'), Resolved)
-  .fork(log('rej'), log('res'))
-//=> res: { statusCode: 200, body: { fname: 'John', lname: 'Clayton' } }
+fork(bichain(allow401, Resolved, fake500))
+//=> rej: { status: 'Internal Server Error', statusCode: 500 }
 
-getFirstFound([ 'sam', 'sarah' ])
-  .fork(log('rej'), log('res'))
-//=> rej: { statusCode: 404, status: 'Not Found' }
+fork(bichain(allow401, Resolved, fake401))
+//=> res: { status: 'Unauthorized', statusCode: 401 }
+
+fork(bichain(allow401, Resolved, fake200))
+//=> res: { status: 'OK', statusCode: 200 }
 ```
 
 #### swap

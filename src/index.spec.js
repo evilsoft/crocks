@@ -4,6 +4,7 @@ const crocks = require('./index')
 // combinators
 const applyTo = require('./combinators/applyTo')
 const composeB = require('./combinators/composeB')
+const compose2 = require('./combinators/compose2')
 const constant = require('./combinators/constant')
 const flip = require('./combinators/flip')
 const identity = require('./combinators/identity')
@@ -244,6 +245,7 @@ test('entry', t => {
   // combinators
   t.equal(crocks.applyTo, applyTo, 'provides the T combinator (applyTo)')
   t.equal(crocks.composeB, composeB, 'provides the B combinator (composeB)')
+  t.equal(crocks.compose2, compose2, 'provides the compose2 combinator')
   t.equal(crocks.constant, constant, 'provides the K combinator (constant)')
   t.equal(crocks.flip, flip, 'provides the C combinator (flip)')
   t.equal(crocks.identity, identity, 'provides the I combinator (identity)')

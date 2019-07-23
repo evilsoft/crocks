@@ -24,6 +24,7 @@ module.exports = {
   isFunctor: require('./isFunctor'),
   isInteger: require('./isInteger'),
   isIterable: require('./isIterable'),
+  isMap: require('./isMap'),
   isMonad: require('./isMonad'),
   isMonoid: require('./isMonoid'),
   isNil: require('./isNil'),

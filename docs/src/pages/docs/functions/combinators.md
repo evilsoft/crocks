@@ -20,6 +20,84 @@ give it a value and it will give you back a function ready to take a function.
 Once that function is provided, it will return the result of applying your value
 to that function.
 
+```javascript
+import applyTo from 'crocks/combinators/applyTo'
+
+import compose from 'crocks/helpers/compose'
+import First from 'crocks/First'
+import flip from 'crocks/combinators/flip'
+import isArray from 'crocks/predicates/isArray'
+import isNumber from 'crocks/predicates/isNumber'
+import isString from 'crocks/predicates/isString'
+import map from 'crocks/pointfree/map'
+import merge from 'crocks/pointfree/merge'
+import mreduceMap from 'crocks/helpers/mreduceMap'
+import Pair from 'crocks/Pair'
+import safeLift from 'crocks/Maybe/safeLift'
+
+// prices :: [ Number ]
+const prices = [ 4.99, 29.99, 15.99 ]
+
+// getPrices :: (a -> b) -> [ Number ]
+const getPrices = compose(
+  applyTo(prices),
+  map
+)
+
+// discount :: Number -> Number -> Number
+const discount = percent => price =>
+  Number((price - percent / 100 * price).toFixed(2))
+
+getPrices(discount(10))
+//=> [ 4.49, 26.99, 14.39 ]
+
+getPrices(discount(80))
+//=> [ 1, 6, 3.2 ]
+
+// add :: Number -> Number -> Number
+const add =
+  x => y => x + y
+
+// runAll :: [ (a -> b) ] -> a -> [ b ]
+const runAll = flip(compose(map, applyTo))
+
+runAll([ add(10), add(20) ], 3)
+//=> [ 13, 23  ]
+
+// length :: [ a ] -> Number
+const length = x => x.length
+
+// yell :: String -> String
+const yell = x => x.toUpperCase()
+
+// Strategy :: Pair (a -> Boolean) (* -> *)
+// strategies :: [ Strategy ]
+const strategies = [
+  Pair(isNumber, add(10)),
+  Pair(isArray, length),
+  Pair(isString, yell)
+]
+
+// options :: [ Strategy ] -> a -> b
+const options = flip(
+  x => mreduceMap(
+    First,
+    compose(applyTo(x), merge(safeLift))
+  )
+)
+options(strategies, 'hello')
+//=> Just "HELLO"
+
+options(strategies, [ 1, 9, 39 ])
+//=> Just 3
+
+options(strategies, 13)
+//=> Just 23
+
+options(strategies, null)
+//=> Nothing
+```
+
 #### compose2
 
 `crocks/combinators/compose2`

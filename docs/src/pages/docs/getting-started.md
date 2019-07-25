@@ -24,7 +24,7 @@ be accessed by adding something like the following in the file that needs it:
 // node require syntax
 const crocks = require('crocks')
 
-// Javascript modules (if you are transpiling)
+// JavaScript modules (if you are transpiling)
 import crocks from 'crocks'
 ```
 
@@ -41,9 +41,10 @@ that return or construct a given ADT into their respective folders. While
 general purpose functions are spread across the following
 folders: `combinators`, `helpers`, `logic`, `pointfree` and `predicates`.
 
-To access the types, just reference the folder like: `crocks/Maybe`, or
-`crocks/Result`. If you want to access a function that constructs a given type,
-reference it by name, like: `crocks/Maybe/safe` or `crocks/Result/tryCatch`.
+To access the types, just reference the folder like: `crocks/Maybe`,
+or `crocks/Result`. If you want to access a function that constructs a given
+type, reference it by name, 
+like: `crocks/Maybe/safe` or `crocks/Result/tryCatch`.
 This organization helps ensure that you only include what you need.
 
 ### Entire library (CommonJS)

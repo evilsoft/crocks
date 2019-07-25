@@ -482,8 +482,8 @@ project :: Integer -> m ...* -> a
 ```
 
 `project` takes a positive, non-zero Integer as its input and returns another
-function that accepts an `n-Tuple`. It then returns the value from the `n-Tuple`
-that resides at the provided `Integer` index.
+function that accepts an `n-Tuple`. It then returns the value from
+the `n-Tuple` that resides at the provided `Integer` index.
 
 ```javascript
 import Tuple from 'crocks/Tuple'

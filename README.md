@@ -3,11 +3,11 @@
 [![NPM version](https://badge.fury.io/js/crocks.svg)](https://www.npmjs.com/package/crocks)
 
 `crocks` is a collection of popular *Algebraic Data Types (ADTs)* that are all
-the rage in functional programming. You have heard of things like `Maybe` and
-`Either` and heck maybe even `IO`, that is what these are. The main goal of
-`crocks` is to curate and provide not only a common interface between each type
-(where possible of course), but also provide all of the helper functions needed
-to hit the ground running.
+the rage in functional programming. You have heard of things 
+like `Maybe` and `Either` and heck maybe even `IO`, that is what these are. The
+main goal of `crocks` is to curate and provide not only a common interface
+between each type (where possible of course), but also provide all of the helper
+functions needed to hit the ground running.
 
 ## Table of Contents
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
@@ -256,8 +256,8 @@ available on both the `Crocks` and `Monoids` there is a function here.
 
 * [Transformation Functions][transformation-docs]: All the functions found
 here are used to transform from one type to another, naturally. These come are
-handy in situations where you have functions that return one type (like an
-`Either`), but are working in a context of another (say `Maybe`). You would
+handy in situations where you have functions that return one type (like
+an `Either`), but are working in a context of another (say `Maybe`). You would
 like to compose these, but in doing so will result in a nesting that you will
 need to account for for the rest of your flow.
 
@@ -308,7 +308,7 @@ Thanks goes to these wonderful people ([emoji key][emojis]):
 ### Course/Videos
 
 #### Video evilsoft
-* [State Monad In Javascript (egghead.io)](https://egghead.io/courses/state-monad-in-javascript)
+* [State Monad In JavaScript (egghead.io)](https://egghead.io/courses/state-monad-in-javascript)
 * [Working With ADTs (YouTube)](https://www.youtube.com/playlist?list=PLjvgv-FpMo7XRVFZjZsWXJ5nVmRJ5a5Hv)
 * [Functional JS (YouTube)](https://www.youtube.com/playlist?list=PLjvgv-FpMo7XvlfO8YKiz4_onf8WonhiA)
 

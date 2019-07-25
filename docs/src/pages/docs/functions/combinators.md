@@ -152,8 +152,8 @@ functions and a value. Given `composeB(f, g)`, which is read `f` after `g`, it
 will return a function that will take value `a` and apply it to `g`, passing the
 result as an argument to `f`, and will finally return the result of `f`. This
 allows only two functions, if you want to avoid things like:
-`composeB(composeB(f, g), composeB(h, i))` then check out
-[`compose`][compose].
+`composeB(composeB(f, g), composeB(h, i))` then check
+out [`compose`][compose].
 
 ```javascript
 import composeB from 'crocks/combinators/composeB'

@@ -98,7 +98,7 @@ Endo.empty :: () -> Endo a
 
 `empty` provides the identity for the `Monoid` in that when the value it
 provides is `concat`ed to any other value, it will return the other value. In
-the case of `Endo` the result of `empty` is the identity function, which echos
+the case of `Endo` the result of `empty` is the identity function, which echoes
 its input. `empty` is available on both the Constructor and the Instance for
 convenience.
 
@@ -184,8 +184,8 @@ Endo a ~> () -> (a -> a)
 ```
 
 `valueOf` is used on all `crocks` `Monoid`s as a means of extraction. While the
-extraction is available, types that implement `valueOf` are not necessarily a
-`Comonad`. This function is used primarily for convenience for some of the
+extraction is available, types that implement `valueOf` are not necessarily
+a `Comonad`. This function is used primarily for convenience for some of the
 helper functions that ship with `crocks`. Calling `valueOf` on
 an `Endo` instance will result in the underlying endofunction.
 

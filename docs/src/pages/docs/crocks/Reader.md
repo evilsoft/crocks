@@ -185,9 +185,9 @@ Reader e a ~> (a -> b) -> Reader e b
 ```
 
 While the left side, or the environment, of the `Reader` must always be fixed
-to the same type, the right side, or value, of the `Reader` may vary. Using `map`
-allows a function to be lifted into the `Reader`, mapping the result into the
-result of the lifted function.
+to the same type, the right side, or value, of the `Reader` may vary.
+Using `map` allows a function to be lifted into the `Reader`, mapping the
+result into the result of the lifted function.
 
 ```javascript
 import Reader from 'crocks/Reader'

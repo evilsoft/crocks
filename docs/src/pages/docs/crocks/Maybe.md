@@ -19,13 +19,13 @@ A `Maybe` represents disjunction by using two constructors, `Nothing` or `Just`.
 A `Just` instance represents the truth case while `Nothing` is considered
 false. With the exception of [`coalesce`](#coalesce), all `Maybe` returning
 methods on an instance will be applied to a `Just` returning the result. If an
-instance is a `Nothing`, then all application is skipped and another `Nothing`
-is returned.
+instance is a `Nothing`, then all application is skipped and another `Nothing` is
+returned.
 
 It is recommended to use the available [`Just`](#just) and [`Nothing`](#nothing)
-constructors to construct `Maybe` instances in most cases. You can use the
-`Maybe` constructor to construct a `Just`, but it may read better to just use
-`Just`.
+constructors to construct `Maybe` instances in most cases. You can use
+the `Maybe` constructor to construct a `Just`, but it may read better to just
+use `Just`.
 
 ```javascript
 import Maybe from 'crocks/Maybe'
@@ -296,10 +296,10 @@ join(safeString(34), safeString('Pitt'))
 Maybe.zero :: () -> Maybe a
 ```
 
-When working with `Alt`s, `zero` provides a sort of `empty` or identity for
-`Maybe` when used with [`alt`](#alt). `zero` takes no arguments and returns a
-`Nothing` instance. Just like an `empty` method on a given `Monoid`, `zero`
-can be used to fold a collection of `Alt`s under `alt`.
+When working with `Alt`s, `zero` provides a sort of `empty` or identity
+for `Maybe` when used with [`alt`](#alt). `zero` takes no arguments and returns
+a `Nothing` instance. Just like an `empty` method on a given `Monoid`, `zero` can
+be used to fold a collection of `Alt`s under `alt`.
 
 ```javascript
 import Maybe from 'crocks/Maybe'
@@ -400,12 +400,12 @@ equals(Just([ 2, 3 ]), Just([ 2, 3 ]))
 Semigroup s => Maybe s ~> Maybe s -> Maybe s
 ```
 
-When an underlying value of a given `Maybe` is fixed to a `Semigroup`, `concat`
-can be used to concat another `Maybe` instance with an underlying `Semigroup`
-of the same type. Expecting a `Maybe` wrapping a `Semigroup` of the same type,
-`concat` will give back a new `Maybe` instance wrapping the result of combining
-the two underlying `Semigroup`s. When called on a `Nothing` instance, `concat`
-will return a `Nothing`.
+When an underlying value of a given `Maybe` is fixed to a `Semigroup`, `concat` can
+be used to concat another `Maybe` instance with an underlying `Semigroup` of
+the same type. Expecting a `Maybe` wrapping a `Semigroup` of the same
+type, `concat` will give back a new `Maybe` instance wrapping the result of combining
+the two underlying `Semigroup`s. When called on a `Nothing` instance, `concat` will
+return a `Nothing`.
 
 ```javascript
 import Maybe from 'crocks/Maybe'
@@ -525,11 +525,10 @@ setProcessed(null)
 Maybe a ~> Maybe a -> Maybe a
 ```
 
-Providing a means for a fallback or alternative value, `alt` combines two
-`Maybe` instances and will return the first `Just` it encounters or `Nothing`
-if it does not have a `Just`. This can be used in conjunction with
-[`zero`](#zero) to return the first valid value in contained in a `Foldable`
-structure.
+Providing a means for a fallback or alternative value, `alt` combines
+two `Maybe` instances and will return the first `Just` it encounters or `Nothing` if
+it does not have a `Just`. This can be used in conjunction with [`zero`](#zero) to
+return the first valid value in contained in a `Foldable` structure.
 
 ```javascript
 import Maybe from 'crocks/Maybe'
@@ -569,9 +568,10 @@ Maybe (a -> b) ~> Maybe a -> Maybe b
 ```
 
 Short for apply, `ap` is used to apply a `Maybe` instance containing a value
-to another `Maybe` instance that contains a function, resulting in new `Maybe`
-instance with the result. `ap` requires that it is called on an `instance` that
-is either a `Nothing` or a `Just` that wraps a curried polyadic function.
+to another `Maybe` instance that contains a function, resulting in 
+new `Maybe` instance with the result. `ap` requires that it is called on
+an `instance` that is either a `Nothing` or a `Just` that wraps a curried
+polyadic function.
 
 When either `Maybe` is a `Nothing`, `ap` will return a `Nothing`. This can be
 used to safely combine multiple values under a given combination function. If
@@ -659,8 +659,8 @@ swap the type sequence. `sequence` requires either an `Applicative TypeRep` or
 an `Apply` returning function is provided for its argument. This will be used in
 the case that the `Maybe` instance is a `Nothing`.
 
-`sequence` can be derived from [`traverse`](#traverse) by passing it an
-`identity` function (`x => x`).
+`sequence` can be derived from [`traverse`](#traverse) by passing it
+an `identity` function (`x => x`).
 
 ```javascript
 import Maybe from 'crocks/Maybe'
@@ -690,8 +690,8 @@ Applicative f => Maybe a ~> (TypeRep f, (a -> f b)) -> f Maybe b
 
 Used to apply the "effect" of an `Apply` to a value inside of a `Maybe`,
 `traverse` combines both the "effects" of the `Apply` and the `Maybe` by
-returning a new instance of the `Apply`, wrapping the result of the
-`Apply`s "effect" on the value in the `Maybe`.
+returning a new instance of the `Apply`, wrapping the result of
+the `Apply`s "effect" on the value in the `Maybe`.
 
 `traverse` requires either an `Applicative TypeRep` or an `Apply` returning
 function as its first argument and a function that is used to apply the "effect"
@@ -805,9 +805,9 @@ When one would like to [`option`](#option) a `Maybe` but would like to remain
 within a `Maybe` type, `coalesce` can be used. `coalesce` expects two functions
 for its inputs.
 
-The first function is used when invoked on a `Nothing` and will return a `Just`
-instance wrapping the result of the function. The second function is used when
-`coalesce` is invoked on a `Just` and is used to map the original value,
+The first function is used when invoked on a `Nothing` and will return
+a `Just` instance wrapping the result of the function. The second function is
+used when `coalesce` is invoked on a `Just` and is used to map the original value,
 returning a new `Just` instance wrapping the result of the second function.
 
 ```javascript
@@ -960,11 +960,11 @@ toArray(Nothing())
 find :: Foldable f => ((a -> Boolean) | Pred) -> f a -> Maybe a
 ```
 
-Using a provided predicate function or a `Pred` datatype, `find` takes a
-`Foldable` instance and executes for every value in the `Foldable`, skipping
+Using a provided predicate function or a `Pred` datatype, `find` takes
+a `Foldable` instance and executes for every value in the `Foldable`, skipping
 empty indexes. `find` then returns the first value it finds that passes the
-predicate. If found, `find` returns the value in a `Just`, otherwise a `Nothing`
-is returned.
+predicate. If found, `find` returns the value in a `Just`, otherwise
+a `Nothing` is returned.
 
 ```javascript
 import find from 'crocks/Maybe/find'
@@ -1057,8 +1057,8 @@ getStringFirst({ value: [ 'nice', 'jobb' ] })
 getProp :: (String | Integer) -> a -> Maybe b
 ```
 
-If you want some safety around pulling a value out of an `Object` or `Array`
-with a single key or index, you can always reach for `getProp`, previously known
+If you want some safety around pulling a value out of an `Object` or `Array` with
+a single key or index, you can always reach for `getProp`, previously known
 as `prop`. Well, as long as you are working with non-nested data that is. Just
 tell `getProp` either the key or index you are interested in, and you will get
 back a function that will take anything and return a `Just` with the wrapped
@@ -1113,12 +1113,12 @@ getFirstValue({ value: [ 'a', 'b' ] })
 safe :: ((b -> Boolean) | Pred) -> b -> Maybe a
 ```
 
-When using a `Maybe`, it is a common practice to lift into a `Just` or a
-`Nothing` depending on a condition on the value to be lifted.  It is so common
-that it warrants a function, and that function is called `safe`. Provide a
-predicate (a function that returns a Boolean) or a [`Pred`][pred] datatypea and the value
-to be lifted. The value will be evaluated against the predicate, and will lift it into a `Just` if
-true and a `Nothing` if false.
+When using a `Maybe`, it is a common practice to lift into a `Just` or
+a `Nothing` depending on a condition on the value to be lifted.  It is so
+common that it warrants a function, and that function is called `safe`. Provide
+a predicate (a function that returns a Boolean) or a [`Pred`][pred] datatypea
+and the value to be lifted. The value will be evaluated against the predicate,
+and will lift it into a `Just` if true and a `Nothing` if false.
 
 ```javascript
 import Pred from 'crocks/Pred'
@@ -1251,13 +1251,14 @@ validProp('a', { a: 32 })
 safeLift :: ((c -> Boolean) | Pred) -> (a -> b) -> c -> Maybe b
 ```
 
-While [`safe`](#safe) is used to lift a value into a `Maybe`, you can reach for
-`safeLift` when you want to run a function in the safety of the `Maybe` context.
-Just like [`safe`](#safe), you pass it either a [`Pred`][pred] or a predicate function
-to determine if you get a `Just` or a `Nothing`, but then instead of a value,
-you pass it a unary function. `safeLift` will then give you back a new function
-that will first lift its argument into a `Maybe` and then maps your original
-function over the result.
+While [`safe`](#safe) is used to lift a value into a `Maybe`, you can reach
+for `safeLift` when you want to run a function in the safety of
+the `Maybe` context. Just like [`safe`](#safe), you pass it either
+a [`Pred`][pred] or a predicate function to determine if you get a `Just` or
+a `Nothing`, but then instead of a value, you pass it a unary
+function. `safeLift` will then give you back a new function that will first
+lift its argument into a `Maybe` and then maps your original function over
+the result.
 
 ```javascript
 import Pred from 'crocks/Pred'
@@ -1333,10 +1334,10 @@ eitherToMaybe :: Either b a -> Maybe a
 eitherToMaybe :: (a -> Either c b) -> a -> Maybe b
 ```
 
-Used to transform a given [`Either`][either] instance to a `Maybe`
-instance or flatten a `Maybe` of `Either` into a `Maybe` when chained,
-`eitherToMaybe` will turn a [`Right`][right] instance into
-a [`Just`](#just) wrapping the original value contained in the [`Right`][right].
+Used to transform a given [`Either`][either] instance to a `Maybe` instance
+or flatten a `Maybe` of `Either` into a `Maybe` when chained, `eitherToMaybe` will
+turn a [`Right`][right] instance into a [`Just`](#just) wrapping the original
+value contained in the [`Right`][right].
 All [`Left`][left] instances will map to a [`Nothing`](#nothing), mapping the
 originally contained value to a `Unit`. Values on the [`Left`][left] will be
 lost and as such this transformation is considered lossy in that regard.
@@ -1406,11 +1407,11 @@ firstToMaybe :: First a -> Maybe a
 firstToMaybe :: (a -> First b) -> a -> Maybe b
 ```
 
-Used to transform a given [`First`][first] instance to a `Maybe`
-instance or flatten a `Maybe` of `First` into a `Maybe` when chained,
-`firstToMaybe` will turn a non-empty instance into a [`Just`](#just) wrapping
-the original value contained within the [`First`][first]. All empty instances
-will map to a [`Nothing`](#nothing).
+Used to transform a given [`First`][first] instance to a `Maybe` instance or
+flatten a `Maybe` of `First` into a `Maybe` when chained, `firstToMaybe` will
+turn a non-empty instance into a [`Just`](#just) wrapping the original value
+contained within the [`First`][first]. All empty instances will map to
+a [`Nothing`](#nothing).
 
 Like all `crocks` transformation functions, `firstToMaybe` has two possible
 signatures and will behave differently when passed either
@@ -1608,10 +1609,10 @@ resultToMaybe :: Result e a -> Maybe a
 resultToMaybe :: (a -> Result e b) -> a -> Maybe b
 ```
 
-Used to transform a given [`Result`][result] instance to a `Maybe`
-instance or flatten a `Maybe` of [`Result`][result] into a `Maybe` when chained,
-`resultToMaybe` will turn an `Ok` instance into a [`Just`](#just) wrapping the
-original value contained in the `Ok`.
+Used to transform a given [`Result`][result] instance to a `Maybe` instance
+or flatten a `Maybe` of [`Result`][result] into a `Maybe` when
+chained, `resultToMaybe` will turn an `Ok` instance into a [`Just`](#just) wrapping
+the original value contained in the `Ok`.
 All `Err` instances will map to a [`Nothing`](#nothing), mapping the originally
 contained value to a `Unit`. Values on the `Err` will be lost and as such this
 transformation is considered lossy in that regard.

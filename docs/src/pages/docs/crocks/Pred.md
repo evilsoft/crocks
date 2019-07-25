@@ -125,9 +125,9 @@ Pred.empty :: () -> Pred a
 
 `empty` provides the identity for the `Monoid` in that when the value it
 provides is `concat`ed to any other value, it will return the other value. In
-the case of `Pred` the result of `empty` is a `Pred` that will always return
-`true`. `empty` is available on both the Constructor and the Instance for
-convenience.
+the case of `Pred` the result of `empty` is a `Pred` that will always
+return `true`. `empty` is available on both the Constructor and the Instance
+for convenience.
 
 ```javascript
 import Pred from 'crocks/Pred'
@@ -181,8 +181,8 @@ Pred a ~> Pred a -> Pred a
 ```
 
 `concat` is used to combine two `Semigroup`s of the same type under an operation
-specified by the `Semigroup`. In the case of `Pred`, the results of both
-`Preds`s are combined under logical conjunction.
+specified by the `Semigroup`. In the case of `Pred`, the results of
+both `Preds`s are combined under logical conjunction.
 
 ```javascript
 import Pred from 'crocks/Pred'
@@ -317,21 +317,21 @@ Pred a ~> () -> a -> Boolean
 ```
 
 `valueOf` is used on all `crocks` `Monoid`s as a means of extraction. While the
-extraction is available, types that implement `valueOf` are not necessarily a
-`Comonad`. This function is used primarily for convenience for some of the
+extraction is available, types that implement `valueOf` are not necessarily
+a `Comonad`. This function is used primarily for convenience for some of the
 helper functions that ship with `crocks`.
 
 Calling `valueOf` on a `Pred` instance will result in the underlying predicate
-function. Most of the time this will not be required when working with `crocks`
-because all `crocks` functions that take a predicate function can also take a
-`Pred` instance.
+function. Most of the time this will not be required when working
+with `crocks` because all `crocks` functions that take a predicate function can
+also take a `Pred` instance.
 
 ```javascript
 import Pred from 'crocks/Pred'
 
+import equals from 'crocks/pointfree/equals'
 import isArray from 'crocks/predicates/isArray'
 import isString from 'crocks/predicates/isString'
-import equals from 'crocks/pointfree/equals'
 import or from 'crocks/logic/or'
 
 // lengthIsThree :: Pred a
@@ -374,9 +374,9 @@ Pred a ~> a -> Boolean
 ```
 
 As `Pred` wraps a predicate function, it needs a mean to run it with some value
-to test against the predicate. `Pred` instances provide a method called
-`runWith` that will accept the value to be tested and then runs it through the
-predicate returning the result.
+to test against the predicate. `Pred` instances provide a method
+called `runWith` that will accept the value to be tested and then runs it
+through the predicate returning the result.
 
 Most of the time this function is not used while working with other predicate
 functions in `crocks`, as all functions that take a predicate function also

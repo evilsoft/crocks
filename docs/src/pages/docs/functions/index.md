@@ -34,8 +34,8 @@ function here.
 
 * [Transformation Functions](transformation-functions.html): All the functions found
 here are used to transform from one type to another, naturally. These come are
-handy in situations where you have functions that return one type (like an
-`Either`), but are working in a context of another (say `Maybe`). You would
+handy in situations where you have functions that return one type (like
+an `Either`), but are working in a context of another (say `Maybe`). You would
 like to compose these, but in doing so will result in a nesting that you will
 need to account for for the rest of your flow.
 

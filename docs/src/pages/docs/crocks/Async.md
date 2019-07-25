@@ -18,9 +18,9 @@ that can be composed together.
 
 Depending on your needs, an `Async` can be constructed in a variety of ways. The
 typical closely resembles how a `Promise` is constructed with one major
-difference, the arguments used in the function that is passed to the `Promise`
-constructor are reversed in an `Async` to match the order in which `Async` is
-parameterized.
+difference, the arguments used in the function that is passed to 
+the `Promise` constructor are reversed in an `Async` to match the order in 
+which `Async` is parameterized.
 
 There are many ways to represent asynchronous operations in JavaScript, and as
 such, the libraries available to us in our ecosystem provide different means
@@ -449,9 +449,9 @@ Async.all :: [ Async e a ] -> Async e [ a ]
 ```
 
 `Async` provides an `all` method that can be used when multiple, independent
-asynchronous operations need to be run in parallel. `all` takes an `Array` of
-`Async` instances that, when forked, will execute each instance in the
-provided `Array` in parallel.
+asynchronous operations need to be run in parallel. `all` takes
+an `Array` of `Async` instances that, when forked, will execute each instance
+in the provided `Array` in parallel.
 
 If any of the instances result in a [`Rejected`](#rejected) state, the entire flow will
 be [`Rejected`](#rejected) with value of the first [`Rejected`](#rejected) instance. If all
@@ -664,8 +664,8 @@ doubleValid('Too Silly')
 Async e a ~> Async e a -> Async e a
 ```
 
-Providing a means for a fallback or alternative value, `alt` combines two
-`Async` instances and will return the first [`Resolved`](#resolved) instance
+Providing a means for a fallback or alternative value, `alt` combines
+two `Async` instances and will return the first [`Resolved`](#resolved) instance
 it encounters or the last [`Rejected`](#rejected) instance if it does not
 encounter a [`Resolved`](#resolved) instance.
 
@@ -1139,11 +1139,11 @@ typeIso(Rejected('aaaaa'))
 Async e a ~> Async e a -> Async e a
 ```
 
-Used to provide the first settled result between two `Async`s. Just pass `race`
-another `Async` and it will return new `Async`, that when forked, will run both
-`Async`s in parallel, returning the first of the two to settle. The result can
-either be rejected or resolved, based on the instance of the first settled
-result.
+Used to provide the first settled result between two `Async`s. Just 
+pass `race` another `Async` and it will return new `Async`, that when forked, 
+will run both `Async`s in parallel, returning the first of the two to settle.
+The result can either be rejected or resolved, based on the instance of the 
+first settled result.
 
 <!-- eslint-disable no-console -->
 <!-- eslint-disable no-sequences -->
@@ -1186,11 +1186,11 @@ signatures depending on the need for clean up in the event of cancellation, but
 both return a function that can be used for cancellation of a given instance.
 
 The first and more common signature takes two functions that will have their
-return values ignored. The first function will be run in the event of the
-`Async` instance settling on [`Rejected`](#rejected) and will receive as its single argument
-the value or "cause" of rejection. The second function provided will be executed
-in the case of the instance settling on [`Resolved`](#resolved) and will receive as its
-single argument the value the `Async` was resolved with.
+return values ignored. The first function will be run in the event of
+the `Async` instance settling on [`Rejected`](#rejected) and will receive as its
+single argument the value or "cause" of rejection. The second function provided
+will be executed in the case of the instance settling on [`Resolved`](#resolved) and
+will receive as its single argument the value the `Async` was resolved with.
 
 The second signature is used when any cleanup needs to be performed after a
 given `Async` is canceled by having the function returned from `fork` called.
@@ -1361,7 +1361,7 @@ import Async from 'crocks/Async'
 import race from 'crocks/Async/race'
 import asyncToPromise from 'crocks/Async/asyncToPromise'
 
-import ifElse from 'crocks/logice/ifElse'
+import ifElse from 'crocks/logic/ifElse'
 import compose from 'crocks/helpers/compose'
 import isPromise from 'crocks/pointfree/isPromise'
 
@@ -1793,12 +1793,11 @@ resultToAsync :: Result b a -> Async b a
 resultToAsync :: (a -> Result c b) -> a -> Async c b
 ```
 
-Used to transform a given [`Result`][result] instance to an `Async` instance or flatten an
-`Async` of [`Result`][result] into an `Async` when chained, `resultToAsync` will turn an
-`Ok` instance into a [`Resolved`](#resolved) instance wrapping the original
-value contained in the original `Ok`. If an `Err` is provided, then
-`resultToAsync` will return a [`Rejected`](#rejected) instance, wrapping the
-original `Err` value.
+Used to transform a given [`Result`][result] instance to an `Async` instance or flatten
+an `Async` of [`Result`][result] into an `Async` when chained, `resultToAsync` will turn
+an `Ok` instance into a [`Resolved`](#resolved) instance wrapping the original
+value contained in the original `Ok`. If an `Err` is provided, then `resultToAsync` will
+return a [`Rejected`](#rejected) instance, wrapping the original `Err` value.
 
 Like all `crocks` transformation functions, `resultToAsync` has two possible
 signatures and will behave differently when passed either a [`Result`][result] instance

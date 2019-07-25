@@ -51,11 +51,11 @@ Sum :: Number -> Sum Number
 ```
 
 `Sum` provides addition on `Number`s and needs to be constructed with
-a `Number` instance. Calling the constructor with a `Number`, results in a new
-`Sum` that wraps the provided `Number`.
+a `Number` instance. Calling the constructor with a `Number`, results in a
+new `Sum` that wraps the provided `Number`.
 
-Passing `undefined`, `NaN` or `null` to the constructor will result in an
-`empty` instance, or an instance containing a `0`.
+Passing `undefined`, `NaN` or `null` to the constructor will result in
+an `empty` instance, or an instance containing a `0`.
 
 ```javascript
 import Sum from 'crocks/Sum'
@@ -178,8 +178,8 @@ Sum ~> () -> Number
 ```
 
 `valueOf` is used on all `crocks` `Monoid`s as a means of extraction. While the
-extraction is available, types that implement `valueOf` are not necessarily a
-`Comonad`. This function is used primarily for convenience for some of the
+extraction is available, types that implement `valueOf` are not necessarily
+a `Comonad`. This function is used primarily for convenience for some of the
 helper functions that ship with `crocks`. Calling `valueOf` on a `Sum` instance
 will result in the underlying `Number`.
 

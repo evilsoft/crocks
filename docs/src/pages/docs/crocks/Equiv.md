@@ -104,9 +104,9 @@ Equiv.empty :: () -> Equiv a a
 
 `empty` provides the identity for the `Monoid` in that when the value it
 provides is `concat`ed to any other value, it will return the other value. In
-the case of `Equiv` the result of `empty` is an `Equiv` that will always return
-`true`. `empty` is available on both the Constructor and the Instance for
-convenience.
+the case of `Equiv` the result of `empty` is an `Equiv` that will always
+return `true`. `empty` is available on both the Constructor and the Instance
+for convenience.
 
 ```javascript
 import Equiv from 'crocks/Equiv'
@@ -148,8 +148,8 @@ Equiv a a ~> Equiv a a -> Equiv a a
 ```
 
 `concat` is used to combine two `Semigroup`s of the same type under an operation
-specified by the `Semigroup`. In the case of `Equiv`, the results of both
-`Equiv`s are combined under logical conjunction.
+specified by the `Semigroup`. In the case of `Equiv`, the results of
+both `Equiv`s are combined under logical conjunction.
 
 ```javascript
 import Equiv from 'crocks/Equiv'
@@ -217,8 +217,8 @@ The far right parameter of `Equiv` fixed to `Boolean` which means we cannot map
 the value as expected. However the left two parameters can vary, although they
 must vary in the same manner.
 
-This is where `contramap` comes into play as it can be used to adapt an `Equiv`
-of a given type to accept a different type or modify the value. Provide it a
+This is where `contramap` comes into play as it can be used to adapt an `Equiv` of
+a given type to accept a different type or modify the value. Provide it a
 function that has a return type that matches the input types of the `Equiv`.
 This will return a new `Equiv` matching the input type of the provided
 function.
@@ -268,10 +268,10 @@ Equiv a a ~> () -> a -> a -> Boolean
 ```
 
 `valueOf` is used on all `crocks` `Monoid`s as a means of extraction. While the
-extraction is available, types that implement `valueOf` are not necessarily a
-`Comonad`. This function is used primarily for convenience for some of the
-helper functions that ship with `crocks`. Calling `valueOf` on an `Equiv`
-instance will result in the underlying curried equivalence function.
+extraction is available, types that implement `valueOf` are not necessarily
+a `Comonad`. This function is used primarily for convenience for some of the
+helper functions that ship with `crocks`. Calling `valueOf` on
+an `Equiv` instance will result in the underlying curried equivalence function.
 
 ```javascript
 import Equiv from 'crocks/Equiv'

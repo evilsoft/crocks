@@ -325,10 +325,10 @@ Result.of :: a -> Result e a
 ```
 
 Used to wrap any value into a `Result` as an [`Ok`](#ok), `of` is used mostly
-by helper functions that work "generically" with instances of either
-`Applicative` or `Monad` types. When working specifically with the `Result`
-type, the [`Ok`](#ok) constructor should be used. Reach for `of` when working
-with functions that will work with ANY `Applicative`/`Monad`.
+by helper functions that work "generically" with instances of
+either `Applicative` or `Monad` types. When working specifically with
+the `Result` type, the [`Ok`](#ok) constructor should be used. Reach for `of` when
+working with functions that will work with ANY `Applicative`/`Monad`.
 
 ```javascript
 import Result from 'crocks/Result'
@@ -371,7 +371,7 @@ value. `equals` takes any given argument and returns `true` if the passed
 argument is a `Result` ([`Ok`](#ok) or [`Err`](#err)) with a contained value
 equal to the contained value of the `Result` the method is being called on. If
 the passed argument is not a `Result` or the contained values are not equal by
-value thn `equals` will return `false`.
+value then `equals` will return `false`.
 
 ```javascript
 import Result from 'crocks/Result'
@@ -407,13 +407,13 @@ equals(Ok('result'), 'result')
 Semigroup s => Result e s ~> Result e s -> Result e s
 ```
 
-When an underlying value of a given `Result` is fixed to a `Semigroup`, `concat`
-can be used to concat another `Result` instance with an underlying `Semigroup`
-of the same type. Expecting a `Result` wrapping a `Semigroup` of the same type,
-`concat` will give back a new `Result` instance wrapping the result of combining
-the two underlying `Semigroup`s. When called on a [`Err`](#err) instance,
-`concat` will return an [`Err`](#err) with the value of the first [`Err`](#err)
-in the chain.
+When an underlying value of a given `Result` is fixed to a `Semigroup`, `concat` can
+be used to concat another `Result` instance with an underlying `Semigroup` of
+the same type. Expecting a `Result` wrapping a `Semigroup` of the same
+type, `concat` will give back a new `Result` instance wrapping the result of
+combining the two underlying `Semigroup`s. When called on
+a [`Err`](#err) instance, `concat` will return an [`Err`](#err) with the value
+of the first [`Err`](#err) in the chain.
 
 ```javascript
 import Result from 'crocks/Result'
@@ -522,8 +522,8 @@ getInfo('down')
 Result e a ~> Result e a -> Result e a
 ```
 
-Providing a means for a fallback or alternative value, `alt` combines two
-`Result` instances and will return the first [`Ok`](#ok) it encounters or
+Providing a means for a fallback or alternative value, `alt` combines
+two `Result` instances and will return the first [`Ok`](#ok) it encounters or
 am [`Err`](#err) if neither value is an [`Ok`](#ok).
 
 If the value in both [`Err`](#err) are `Semigroup`s of the same type then they
@@ -588,7 +588,7 @@ Result e a ~> ((e -> d), (a -> b)) -> Result d b
 
 While it's more common to only [`map`](#map) over a `Result` that's an
 [`Ok`](#ok) there may come a time when you need to map over a `Result` regardless
-of wether it's an [`Ok`](#ok) or an [`Err`](#err).
+of whether it's an [`Ok`](#ok) or an [`Err`](#err).
 
 `bimap` takes two mapping functions as its arguments. The first function is
 used to map an [`Err`](#err) instance, while the second maps an [`Ok`](#ok).
@@ -665,10 +665,10 @@ Result e (a -> b) ~> Result e a -> Result e b
 ```
 
 Short for apply, `ap` is used to apply a `Result` instance containing a value to
-another `Result` instance that contains a function, resulting in new `Result`
-instance with the result. `ap` requires that it is called on an `instance` that
-is either an [`Err`](#err) or an [`Ok`](#ok) that wraps a curried polyadic
-function.
+another `Result` instance that contains a function, resulting in
+new `Result` instance with the result. `ap` requires that it is called on
+an `instance` that is either an [`Err`](#err) or an [`Ok`](#ok) that wraps a
+curried polyadic function.
 
 When either instance is an [`Err`](#err), `ap` will return an [`Err`](#err).
 This can be used to safely combine multiple values under a given combination
@@ -739,8 +739,8 @@ swap the type sequence. `sequence` requires either an `Applicative TypeRep` or
 an `Apply` returning function is provided for its argument. This will be used in
 the case that the `Result` instance is a [`Err`](#err).
 
-`sequence` can be derived from [`traverse`](#traverse) by passing it an
-`identity` function (`x => x`).
+`sequence` can be derived from [`traverse`](#traverse) by passing it
+an `identity` function (`x => x`).
 
 ```javascript
 import Result from 'crocks/Result'
@@ -779,8 +779,8 @@ Applicative f => Result e a ~> (TypeRep f, (a -> f b)) -> f Result e b
 
 Used to apply the "effect" of an `Apply` to a value inside of a `Result`,
 `traverse` combines both the "effects" of the `Apply` and the `Result` by
-returning a new instance of the `Apply`, wrapping the result of the
-`Apply`s "effect" on the value in the `Result`.
+returning a new instance of the `Apply`, wrapping the result of
+the `Apply`s "effect" on the value in the `Result`.
 
 `traverse` requires either an `Applicative TypeRep` or an `Apply` returning
 function as its first argument and a function that is used to apply the
@@ -1132,8 +1132,8 @@ function that will be used to map an [`Err`](#err). While the second
 will map the value wrapped in a given [`Ok`](#ok) and return the result of that
 mapping.
 
-By composing `either` you can create functions that us the power of
-`ADT`s while returning a plain javascript type.
+By composing `either` you can create functions that us the power of `ADT`s while
+returning a plain javascript type.
 
 ```javascript
 import Result from 'crocks/Result'
@@ -1215,7 +1215,7 @@ parameters passed and return either an [`Ok`](#ok) when successful or an
 
 Although we do our best to not use `Error` to control program flow, there are
 times when we don't have full control over the behaviour of a function. The
-saviour in this situation is `tryCatch`. You can wrap this funcition and it
+saviour in this situation is `tryCatch`. You can wrap this function and it
 will always return a `Result`
 
 ```javascript
@@ -1275,10 +1275,10 @@ eitherToResult :: Either b a -> Result b a
 eitherToResult :: (a -> Either c b) -> a -> Result c b
 ```
 
-Used to transform a given [`Either`][either] instance to a `Result`
-instance or flatten a `Result` of `Either` into a `Result` when chained,
-`eitherToMaybe` will turn a [`Right`][right] instance into
-a [`Ok`](#ok) wrapping the original value contained in the [`Right`][right].
+Used to transform a given [`Either`][either] instance to a `Result` instance
+or flatten a `Result` of `Either` into a `Result` when chained, `eitherToMaybe` will
+turn a [`Right`][right] instance into an [`Ok`](#ok) wrapping the original value
+contained in the [`Right`][right].
 All [`Left`][left] instances will map to an [`Err`](#err), mapping the
 originally contained value to a `Unit`. Values on the [`Left`][left] will be
 lost and as such this transformation is considered lossy in that regard.
@@ -1374,9 +1374,9 @@ firstToResult :: e -> First a -> Result e a
 firstToResult :: e -> (a -> First b) -> a -> Result e b
 ```
 
-Used to transform a given [`First`][first] instance to a `Result`
-instance or flatten a `Result` of [`First`][first] into a `Result` when chained,
-`firstToResult` will turn a non-empty instance into an [`Ok`](#ok) wrapping
+Used to transform a given [`First`][first] instance to a `Result` instance
+or flatten a `Result` of [`First`][first] into a `Result` when
+chained, `firstToResult` will turn a non-empty instance into an [`Ok`](#ok) wrapping
 the original value contained within the [`First`][first]. All empty instances
 will map to an [`Err`](#err) with the given value.
 
@@ -1496,10 +1496,10 @@ maybeToResult :: e -> Maybe a -> Result e a
 maybeToResult :: e -> (a -> Maybe b) -> a -> Result e b
 ```
 
-Used to transform a given [`Maybe`][maybe] instance to a `Result`
-instance or flatten a `Result` of [`Maybe`][maybe] into a `Result` when chained,
-`maybeToResult` will turn a [`Just`][just] instance into an [`Ok`](#ok) wrapping the
-original value contained in the [`Just`][just].
+Used to transform a given [`Maybe`][maybe] instance to a `Result` instance
+or flatten a `Result` of [`Maybe`][maybe] into a `Result` when
+chained, `maybeToResult` will turn a [`Just`][just] instance into
+an [`Ok`](#ok) wrapping the original value contained in the [`Just`][just].
 All [`Nothing`](nothing) instances will map to a [`Err`](#err), containing the
 given `e` value.
 

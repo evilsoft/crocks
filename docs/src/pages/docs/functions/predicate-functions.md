@@ -2,7 +2,7 @@
 description: "Predicate Functions API"
 layout: "notopic"
 title: "Predicate Functions"
-functions: ["hasprop", "hasprops", "hasproppath", "isalt", "isalternative", "isapplicative", "isapply", "isarray", "isbifunctor", "isboolean", "iscategory", "ischain", "iscontravariant", "isDate", "isdefined", "isempty", "isextend", "isfalse", "isfalsy", "isfoldable", "isfunction", "isfunctor", "isinteger", "isiterable", "ismonad", "ismonoid", "isnil", "isnumber", "isobject", "isplus", "isprofunctor", "ispromise", "issame", "issametype", "issemigroup", "issemigroupoid", "issetoid", "isstring", "istraversable", "istrue", "istruthy", "patheq", "pathsatisfies", "propeq", "propsatisfies"]
+functions: ["hasprop", "hasprops", "hasproppath", "isalt", "isalternative", "isapplicative", "isapply", "isarray", "isbifunctor", "isboolean", "iscategory", "ischain", "iscontravariant", "isDate", "isdefined", "isempty", "isextend", "isfalse", "isfalsy", "isfoldable", "isfunction", "isfunctor", "isinteger", "isiterable", "ismap", "ismonad", "ismonoid", "isnil", "isnumber", "isobject", "isplus", "isprofunctor", "ispromise", "issame", "issametype", "issemigroup", "issemigroupoid", "issetoid", "isstring", "istraversable", "istrue", "istruthy", "patheq", "pathsatisfies", "propeq", "propsatisfies"]
 weight: 40
 ---
 
@@ -39,6 +39,7 @@ description of their truth:
 * `isFunctor :: a -> Boolean`: an ADT that provides a `map` method
 * `isInteger :: a -> Boolean`: Integer
 * `isIterable :: a -> Boolean`: an `Object` with an `iterator` method
+* `isMap :: a -> Boolean`: Map
 * `isMonad :: a -> Boolean`: an ADT that provides `map`, `ap`, `chain` and `of` methods
 * `isMonoid :: a -> Boolean`: an ADT that provides `concat` and `empty` methods
 * `isNil :: a -> Boolean`: `undefined` or `null` or `NaN`

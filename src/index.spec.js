@@ -3,6 +3,7 @@ const crocks = require('./index')
 
 // combinators
 const applyTo = require('./combinators/applyTo')
+const compose2 = require('./combinators/compose2')
 const composeB = require('./combinators/composeB')
 const constant = require('./combinators/constant')
 const flip = require('./combinators/flip')
@@ -178,6 +179,7 @@ const isFunction = require('./predicates/isFunction')
 const isFunctor = require('./predicates/isFunctor')
 const isInteger = require('./predicates/isInteger')
 const isIterable = require('./predicates/isIterable')
+const isMap = require('./predicates/isMap')
 const isMonad = require('./predicates/isMonad')
 const isMonoid = require('./predicates/isMonoid')
 const isNil = require('./predicates/isNil')
@@ -243,6 +245,7 @@ test('entry', t => {
 
   // combinators
   t.equal(crocks.applyTo, applyTo, 'provides the T combinator (applyTo)')
+  t.equal(crocks.compose2, compose2, 'provides the compose2 combinator')
   t.equal(crocks.composeB, composeB, 'provides the B combinator (composeB)')
   t.equal(crocks.constant, constant, 'provides the K combinator (constant)')
   t.equal(crocks.flip, flip, 'provides the C combinator (flip)')
@@ -419,6 +422,7 @@ test('entry', t => {
   t.equal(crocks.isFunctor, isFunctor, 'provides the isFunctor predicate')
   t.equal(crocks.isInteger, isInteger, 'provides the isInteger predicate')
   t.equal(crocks.isIterable, isIterable, 'provides the isIterable predicate')
+  t.equal(crocks.isMap, isMap, 'provides the isMap predicate')
   t.equal(crocks.isMonad, isMonad, 'provides the isMonad predicate')
   t.equal(crocks.isMonoid, isMonoid, 'provides the isMonoid predicate')
   t.equal(crocks.isNil, isNil, 'provides the isNil predicate')

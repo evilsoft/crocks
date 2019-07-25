@@ -849,7 +849,7 @@ Async e a ~> (a -> Async e b) -> Async e b
 
 Combining a sequential series of transformations that capture disjunction can be
 accomplished with `chain`. `chain` expects a unary, `Async` returning function
-as its argument. When invoked on a [`Rejected`](#rejected) instance , `chain` will not run
+as its argument. When invoked on a [`Rejected`](#rejected) instance, `chain` will not run
 the function, but will instead return another [`Rejected`](#rejected) instance wrapping the
 original [`Rejected`](#rejected) value. When called on a [`Resolved`](#resolved) instance however, the
 inner value will be passed to provided function, returning the result as the
@@ -964,6 +964,88 @@ resolve(Resolved('Resolved'))
 resolve(Rejected('Rejected'))
   .fork(log('rej'), log('res'))
 //=> res: "Was Rejected"
+```
+
+#### bichain
+
+```haskell
+Async e a ~> ((e -> Async b c), (a -> Async b c)) -> Async b c
+```
+
+Combining a sequential series of transformations that capture disjunction can be
+accomplished with `chain`. Along the same lines, `bichain` allows you to do this
+from both [`Rejected`](#rejected) and [`Resolved`](#resolved). `bichain` expects
+two unary, `Async` returning functions as its arguments. When invoked on 
+a [`Rejected`](#rejected) instance, `bichain` will use
+the [`Rejected`](#rejected) value and can return either a [`Rejected`](#rejected) or
+a [`Resolved`](#resolved). When called on a [`Resolved`](#resolved) instance, it
+will behave exactly as [`chain`](#chain) would.
+
+<!-- eslint-disable no-console -->
+<!-- eslint-disable no-sequences -->
+
+```javascript
+import bichain from 'crocks/pointfree/bichain'
+
+import Async from 'crocks/Async'
+
+import equals from 'crocks/pointfree/equals'
+import maybeToAsync from 'crocks/Async/maybeToAsync'
+import propSatisfies from 'crocks/predicates/propSatisfies'
+import safe from 'crocks/Maybe/safe'
+import substitution from 'crocks/combinators/substitution'
+
+const { Rejected, Resolved } = Async
+
+// log :: String -> a -> a
+const log = label => x =>
+  (console.log(`${label}:`, x), x)
+
+const fork = m =>
+  m.fork(log('rej'), log('res'))
+
+fork(
+  bichain(Resolved, Rejected, Resolved(42))
+)
+//=> rej: 42
+
+fork(
+  bichain(Resolved, Rejected, Rejected(42))
+)
+//=> res: 42
+
+// fake401 :: Async Response a
+const fake401 = Rejected({
+  status: 'Unauthorized',
+  statusCode: 401
+})
+
+// fake500 :: Async Response a
+const fake500 = Rejected({
+  status: 'Internal Server Error',
+  statusCode: 500
+})
+
+// fake200 :: Async e Response
+const fake200 = Resolved({
+  status: 'OK',
+  statusCode: 200
+})
+
+// allow401 :: Response -> Async e a
+const allow401 = substitution(
+  maybeToAsync,
+  safe(propSatisfies('statusCode', equals(401)))
+)
+
+fork(bichain(allow401, Resolved, fake500))
+//=> rej: { status: 'Internal Server Error', statusCode: 500 }
+
+fork(bichain(allow401, Resolved, fake401))
+//=> res: { status: 'Unauthorized', statusCode: 401 }
+
+fork(bichain(allow401, Resolved, fake200))
+//=> res: { status: 'OK', statusCode: 200 }
 ```
 
 #### swap
@@ -1315,10 +1397,10 @@ logResult(timeout(fast))
 //=> resolved: "All good"
 
 logResult(timeout(slow))
-// => rejected: "Error: Request has timed out"
+//=> rejected: "Error: Request has timed out"
 
 logResult(failingPromise)
-// => rejected: "Promise rejected!"
+//=> rejected: "Promise rejected!"
 ```
 
 #### eitherToAsync
@@ -1511,7 +1593,7 @@ Resolved(First.empty())
 Resolved(First(42))
   .chain(firstToAsync('Left'))
   .fork(log('rej'), log('res'))
-// => res: 42
+//=> res: 42
 ```
 
 #### lastToAsync
@@ -1612,7 +1694,7 @@ Resolved(Last.empty())
 Resolved(Last('too know!'))
   .chain(lastToAsync('Left'))
   .fork(log('rej'), log('res'))
-// => res: "too know!"
+//=> res: "too know!"
 ```
 
 #### maybeToAsync
@@ -1699,7 +1781,7 @@ Resolved(Nothing())
 Resolved(Just('the 2 of us'))
   .chain(maybeToAsync('Left'))
   .fork(log('rej'), log('res'))
-// => res: "the 2 of us"
+//=> res: "the 2 of us"
 ```
 
 #### resultToAsync
@@ -1785,7 +1867,7 @@ Resolved(Err('Invalid entry'))
 Resolved(Ok('Success!'))
   .chain(resultToAsync)
   .fork(log('rej'), log('res'))
-// => res: "Success!"
+//=> res: "Success!"
 
 ```
 

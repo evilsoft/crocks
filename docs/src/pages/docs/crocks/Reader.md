@@ -46,11 +46,11 @@ const flow =
 
 flow
   .runWith('Thomas')
-// => Hola, Thomas...See Ya Thomas
+//=> Hola, Thomas...See Ya Thomas
 
 flow
   .runWith('Jenny')
-// => Hola, Jenny...See Ya Jenny
+//=> Hola, Jenny...See Ya Jenny
 ```
 <article id="topic-implements">
 

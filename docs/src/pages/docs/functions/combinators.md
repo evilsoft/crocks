@@ -23,8 +23,10 @@ to that function.
 ```javascript
 import applyTo from 'crocks/combinators/applyTo'
 
-import compose from 'crocks/helpers/compose'
 import First from 'crocks/First'
+import Pair from 'crocks/Pair'
+
+import compose from 'crocks/helpers/compose'
 import flip from 'crocks/combinators/flip'
 import isArray from 'crocks/predicates/isArray'
 import isNumber from 'crocks/predicates/isNumber'
@@ -32,7 +34,6 @@ import isString from 'crocks/predicates/isString'
 import map from 'crocks/pointfree/map'
 import merge from 'crocks/pointfree/merge'
 import mreduceMap from 'crocks/helpers/mreduceMap'
-import Pair from 'crocks/Pair'
 import safeLift from 'crocks/Maybe/safeLift'
 
 // prices :: [ Number ]
@@ -55,20 +56,23 @@ getPrices(discount(80))
 //=> [ 1, 6, 3.2 ]
 
 // add :: Number -> Number -> Number
-const add =
-  x => y => x + y
+const add = x => y =>
+  x + y
 
 // runAll :: [ (a -> b) ] -> a -> [ b ]
-const runAll = flip(compose(map, applyTo))
+const runAll =
+  flip(compose(map, applyTo))
 
 runAll([ add(10), add(20) ], 3)
-//=> [ 13, 23  ]
+//=> [ 13, 23 ]
 
 // length :: [ a ] -> Number
-const length = x => x.length
+const length = x =>
+  x.length
 
 // yell :: String -> String
-const yell = x => x.toUpperCase()
+const yell = x =>
+  x.toUpperCase()
 
 // Strategy :: Pair (a -> Boolean) (* -> *)
 // strategies :: [ Strategy ]
@@ -85,6 +89,7 @@ const options = flip(
     compose(applyTo(x), merge(safeLift))
   )
 )
+
 options(strategies, 'hello')
 //=> Just "HELLO"
 

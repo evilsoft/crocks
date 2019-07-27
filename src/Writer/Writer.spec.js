@@ -58,11 +58,11 @@ test('Writer', t => {
   t.ok(isFunction(Writer.type), 'provides a type function')
   t.ok(isString(Writer['@@type']), 'provides a @@type string')
 
-  const err = /^TypeError: Writer: Must be contructed with both a log entry and a value/
+  const err = /^TypeError: Writer\(Last\): Must be contructed with both a log entry and a value/
   t.throws(f(), err, 'throws with no parameters')
   t.throws(f(0), err, 'throws with one parameter')
 
-  const entryErr = /^TypeError: Writer: Log enrty must be an instance of Last/
+  const entryErr = /^TypeError: Writer\(Last\): Log enrty must be an instance of Last/
   t.throws(f(undefined, 0), entryErr, 'throws with undefined entry')
   t.throws(f(null, 0), entryErr, 'throws with null entry')
   t.throws(f(0, 0), entryErr, 'throws with falsy number entry')
@@ -200,7 +200,7 @@ test('Writer equals properties (Setoid)', t => {
 test('Writer map errors', t => {
   const map = bindFunc(Writer(Last(0), 0).map)
 
-  const err = /^TypeError: Writer.map: Function required/
+  const err = /^TypeError: Writer\(Last\).map: Function required/
   t.throws(map(undefined), err, 'throws with undefined')
   t.throws(map(null), err, 'throws with null')
   t.throws(map(0), err, 'throws with falsey number')
@@ -220,7 +220,7 @@ test('Writer map errors', t => {
 test('Writer map fantasy-land errors', t => {
   const map = bindFunc(Writer(Last(0), 0)[fl.map])
 
-  const err = /^TypeError: Writer.fantasy-land\/map: Function required/
+  const err = /^TypeError: Writer\(Last\).fantasy-land\/map: Function required/
   t.throws(map(undefined), err, 'throws with undefined')
   t.throws(map(null), err, 'throws with null')
   t.throws(map(0), err, 'throws with falsey number')
@@ -278,7 +278,7 @@ test('Writer ap errors', t => {
     x => Writer(Last(0), x).ap(Writer(Last(0), 0))
   )
 
-  const noFunc = /^TypeError: Writer.ap: Wrapped value must be a function/
+  const noFunc = /^TypeError: Writer\(Last\).ap: Wrapped value must be a function/
   t.throws(wrapAp(undefined), noFunc, 'throws when wrapped value is undefined')
   t.throws(wrapAp(null), noFunc, 'throws when wrapped value is null')
   t.throws(wrapAp(0), noFunc, 'throws when wrapped value is a falsey number')
@@ -290,7 +290,7 @@ test('Writer ap errors', t => {
   t.throws(wrapAp([]), noFunc, 'throws when wrapped value is an array')
   t.throws(wrapAp({}), noFunc, 'throws when wrapped value is an object')
 
-  const err = /^TypeError: Writer.ap: Writer required/
+  const err = /^TypeError: Writer\(Last\).ap: Writer required/
   t.throws(ap(undefined), err, 'throws with undefined')
   t.throws(ap(null), err, 'throws with null')
   t.throws(ap(0), err, 'throws with falsey number')
@@ -370,7 +370,7 @@ test('Writer chain errors', t => {
   const chain = bindFunc(m.chain)
   const fn = x => Writer(Last(0), x)
 
-  const err = /^TypeError: Writer.chain: Function required/
+  const err = /^TypeError: Writer\(Last\).chain: Function required/
   t.throws(chain(undefined), err, 'throws with undefined')
   t.throws(chain(null), err, 'throws with null')
   t.throws(chain(0), err, 'throws with falsey number')
@@ -382,7 +382,7 @@ test('Writer chain errors', t => {
   t.throws(chain([]), err, 'throws with an array')
   t.throws(chain({}), err, 'throws with an object')
 
-  const noWriter = /^TypeError: Writer.chain: Function must return a Writer/
+  const noWriter = /^TypeError: Writer\(Last\).chain: Function must return a Writer/
   t.throws(chain(unit), noWriter, 'throws with non-Writer returning function')
 
   t.doesNotThrow(chain(fn), 'allows a Writer returning function')
@@ -395,7 +395,7 @@ test('Writer chain fantasy-land errors', t => {
   const chain = bindFunc(m[fl.chain])
   const fn = x => Writer(Last(0), x)
 
-  const err = /^TypeError: Writer.fantasy-land\/chain: Function required/
+  const err = /^TypeError: Writer\(Last\).fantasy-land\/chain: Function required/
   t.throws(chain(undefined), err, 'throws with undefined')
   t.throws(chain(null), err, 'throws with null')
   t.throws(chain(0), err, 'throws with falsey number')
@@ -407,7 +407,7 @@ test('Writer chain fantasy-land errors', t => {
   t.throws(chain([]), err, 'throws with an array')
   t.throws(chain({}), err, 'throws with an object')
 
-  const noWriter = /^TypeError: Writer.fantasy-land\/chain: Function must return a Writer/
+  const noWriter = /^TypeError: Writer\(Last\).fantasy-land\/chain: Function must return a Writer/
   t.throws(chain(unit), noWriter, 'throws with non-Writer returning function')
 
   t.doesNotThrow(chain(fn), 'allows a Writer returning function')

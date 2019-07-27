@@ -34,11 +34,11 @@ function _Writer(Monoid) {
 
   function Writer(entry, val) {
     if(arguments.length !== 2) {
-      throw new TypeError('Writer: Must be contructed with both a log entry and a value')
+      throw new TypeError(`${_type()}: Must be contructed with both a log entry and a value`)
     }
 
     if(!isSameType(Monoid, entry)) {
-      throw new TypeError(`Writer: Log enrty must be an instance of ${Monoid.type()}`)
+      throw new TypeError(`${_type()}: Log enrty must be an instance of ${Monoid.type()}`)
     }
 
     const type =
@@ -66,7 +66,7 @@ function _Writer(Monoid) {
     function map(method) {
       return function(fn) {
         if(!isFunction(fn)) {
-          throw new TypeError(`Writer.${method}: Function required`)
+          throw new TypeError(`${_type()}.${method}: Function required`)
         }
 
         return Writer(log(), fn(valueOf()))
@@ -75,11 +75,11 @@ function _Writer(Monoid) {
 
     function ap(m) {
       if(!isFunction(val)) {
-        throw new TypeError('Writer.ap: Wrapped value must be a function')
+        throw new TypeError(`${_type()}.ap: Wrapped value must be a function`)
       }
 
       if(!isSameType(Writer, m)) {
-        throw new TypeError('Writer.ap: Writer required')
+        throw new TypeError(`${_type()}.ap: Writer required`)
       }
 
       return Writer(
@@ -91,13 +91,13 @@ function _Writer(Monoid) {
     function chain(method) {
       return function(fn) {
         if(!isFunction(fn)) {
-          throw new TypeError(`Writer.${method}: Function required`)
+          throw new TypeError(`${_type()}.${method}: Function required`)
         }
 
         const w = fn(valueOf())
 
         if(!isSameType(Writer, w)) {
-          throw new TypeError(`Writer.${method}: Function must return a Writer`)
+          throw new TypeError(`${_type()}.${method}: Function must return a Writer`)
         }
 
         return Writer(log().concat(w.log()), w.valueOf())

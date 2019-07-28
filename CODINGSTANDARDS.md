@@ -8,11 +8,16 @@
 
 ## Coding Standards
 
-This page will act as the basis for the `crocks` coding standards. The more this document is followed, the less comments you will recieve on your PR. If you find anything that does not match these coding standards, feel free to create a PR to align the code with them
+This page will act as the basis for the `crocks` coding standards. The more
+this document is followed, the less comments you will recieve on your PR. If you
+find anything that does not match these coding standards, feel free to create a
+PR to align the code with them
 
 ### Header
 
-Each main file (not `.spec`) file has a header similiar to the below. If you add a new file, put your own details in as well as the current year. If the file already has a header there is no need to update it.
+Each main file (not `.spec`) file has a header similiar to the below. If you add
+a new file, put your own details in as well as the current year. If the file
+already has a header there is no need to update it.
 
 ```javascript
 /** @license ISC License (c) copyright 2019 original and current authors */
@@ -36,7 +41,8 @@ The main files will follow a basic structure.
 // single line curried function assigned to module.exports 
 ```
 
-`mreduceMap` is a nice example of this structure. It also shows how each argument should be validated.
+`mreduceMap` is a nice example of this structure. It also shows how each argument
+should be validated.
 
 ```javascript
 /** @license ISC License (c) copyright 2016 original and current authors */
@@ -86,7 +92,8 @@ module.exports = curry(mreduceMap)
 // All the tests
 ```
 
-The following is the `spec` file for `mreduceMap`. It shows the structure as well as the expected level of testing for each function
+The following is the `spec` file for `mreduceMap`. It shows the structure as
+well as the expected level of testing for each function
 
 ```javascript
 const test = require('tape')
@@ -155,9 +162,17 @@ test('mreduceMap helper', t => {
 
 ## Documentation Standards
 
-If you become familiar with the documentation, it's structure and format will be easy to replicate. The docs consist of two main document structures and within them a particular coding started for the sample code. For function list pages it is a simple structure of title, signature, description and example. The container types documentation is just a larger version of this standard.
+If you become familiar with the documentation, it's structure and format will
+be easy to replicate. The docs consist of two main document structures and
+within them a particular coding started for the sample code. For function list
+pages it is a simple structure of title, signature, description and example. The
+container types documentation is just a larger version of this standard.
 
-The following is an example of a function outline. The `imports` have three sections the first is a single line that is the subject of the example, the second is an alphabetic list of and container types that are required and the third is an alphabetic list of all the functions required. We also out of habit will show some basic usage first, then launch into a more real world scenario.
+The following is an example of a function outline. The `imports` have three
+sections the first is a single line that is the subject of the example, the
+second is an alphabetic list of and container types that are required and the
+third is an alphabetic list of all the functions required. We also out of habit
+will show some basic usage first, then launch into a more real world scenario.
 
 #### composeB
 

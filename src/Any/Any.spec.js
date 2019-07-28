@@ -1,9 +1,10 @@
 const test = require('tape')
-const MockCrock = require('../test/MockCrock')
 const helpers = require('../test/helpers')
+const laws = require('../test/laws')
 
 const bindFunc = helpers.bindFunc
 
+const equals = require('../core/equals')
 const isFunction = require('../core/isFunction')
 const isObject = require('../core/isObject')
 const isString = require('../core/isString')
@@ -110,6 +111,44 @@ test('Any @@type', t => {
   t.end()
 })
 
+test('Any equals properties (Setoid)', t => {
+  const a = Any(true)
+  const b = Any(true)
+  const c = Any(true)
+  const d = Any(false)
+
+  const equals = laws.Setoid('equals')
+
+  t.ok(isFunction(a.equals), 'provides an equals function')
+
+  t.ok(equals.reflexivity(a), 'reflexivity')
+  t.ok(equals.symmetry(a, b), 'symmetry (equal)')
+  t.ok(equals.symmetry(a, d), 'symmetry (!equal)')
+  t.ok(equals.transitivity(a, b, c), 'transitivity (equal)')
+  t.ok(equals.transitivity(a, d, c), 'transitivity (!equal)')
+
+  t.end()
+})
+
+test('Any fantasy-land equals properties (Setoid)', t => {
+  const a = Any(true)
+  const b = Any(true)
+  const c = Any(true)
+  const d = Any(false)
+
+  const equals = laws.Setoid(fl.equals)
+
+  t.ok(isFunction(a[fl.equals]), 'provides an equals function')
+
+  t.ok(equals.reflexivity(a), 'reflexivity')
+  t.ok(equals.symmetry(a, b), 'symmetry (equal)')
+  t.ok(equals.symmetry(a, d), 'symmetry (!equal)')
+  t.ok(equals.transitivity(a, b, c), 'transitivity (equal)')
+  t.ok(equals.transitivity(a, d, c), 'transitivity (!equal)')
+
+  t.end()
+})
+
 test('Any concat functionality', t => {
   const a = Any(true)
   const b = Any(false)
@@ -166,58 +205,52 @@ test('Any concat properties (Semigroup)', t => {
   const b = Any(true)
   const c = Any('')
 
-  const left = a.concat(b).concat(c)
-  const right = a.concat(b.concat(c))
+  const concat = laws.Semigroup(equals, 'concat')
 
   t.ok(isFunction(a.concat), 'provides a concat function')
-  t.equal(left.valueOf(), right.valueOf(), 'associativity')
-  t.equal(a.concat(b).type(), a.type(), 'returns an Any')
+
+  t.ok(concat.associativity(a, b, c), 'associativity')
+
+  t.end()
+})
+
+test('Any fantasy-land concat properties (Semigroup)', t => {
+  const a = Any(10)
+  const b = Any(true)
+  const c = Any('string')
+
+  const concat = laws.Semigroup(equals, fl.concat)
+
+  t.ok(isFunction(a[fl.concat]), 'provides a concat function')
+  t.ok(concat.associativity(a, b, c), 'associativity')
 
   t.end()
 })
 
 test('Any empty properties (Monoid)', t => {
-  const m = Any(3)
+  const m = Any(true)
+
+  const empty = laws.Monoid(equals, 'empty', 'concat')
 
   t.ok(isFunction(m.concat), 'provides a concat function')
-  t.ok(isFunction(m.empty), 'provides an empty function')
+  t.ok(isFunction(m.constructor.empty), 'provides an empty function on constructor')
 
-  const right = m.concat(m.empty())
-  const left = m.empty().concat(m)
-
-  t.equal(right.valueOf(), m.valueOf(), 'right identity')
-  t.equal(left.valueOf(), m.valueOf(), 'left identity')
+  t.ok(empty.leftIdentity(m), 'left identity')
+  t.ok(empty.rightIdentity(m), 'right identity')
 
   t.end()
 })
 
-test('Any equals properties (Setoid)', t => {
-  const a = Any(true)
-  const b = Any(true)
-  const c = Any(false)
-  const d = Any(true)
+test('Any fantasy-land empty properties (Monoid)', t => {
+  const m = Any(true)
 
-  t.ok(isFunction(Any({}).equals), 'provides an equals function')
-  t.equal(a.equals(a), true, 'reflexivity')
-  t.equal(a.equals(b), b.equals(a), 'symmetry (equal)')
-  t.equal(a.equals(c), c.equals(a), 'symmetry (!equal)')
-  t.equal(a.equals(b) && b.equals(d), a.equals(d), 'transitivity')
+  const empty = laws.Monoid(equals, fl.empty, fl.concat)
 
-  t.end()
-})
+  t.ok(isFunction(m[fl.concat]), 'provides a concat function')
+  t.ok(isFunction(m.constructor[fl.empty]), 'provides an empty function on constructor')
 
-test('Any equals functionality', t => {
-  const a = Any(true)
-  const b = Any(true)
-  const c = Any(false)
-
-  const value = {}
-  const nonAny = MockCrock(value)
-
-  t.equal(a.equals(c), false, 'returns false when 2 Anys are not equal')
-  t.equal(a.equals(b), true, 'returns true when 2 Anys are equal')
-  t.equal(a.equals(nonAny), false, 'returns false when passed a non-Any')
-  t.equal(c.equals(value), false, 'returns false when passed a simple value')
+  t.ok(empty.leftIdentity(m), 'left identity')
+  t.ok(empty.rightIdentity(m), 'right identity')
 
   t.end()
 })

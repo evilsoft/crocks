@@ -1,13 +1,14 @@
 const test = require('tape')
 const sinon = require('sinon')
-const helpers = require('../test/helpers')
+
 const Last = require('../test/LastMonoid')
+const helpers = require('../test/helpers')
+const laws = require('../test/laws')
 
 const bindFunc = helpers.bindFunc
 
 const Pair = require('../core/Pair')
-const curry = require('../core/curry')
-const compose = curry(require('../core/compose'))
+const equals = require('../core/equals')
 const isFunction = require('../core/isFunction')
 const isObject = require('../core/isObject')
 const isSameType = require('../core/isSameType')
@@ -171,16 +172,37 @@ test('Writer equals functionality', t => {
 })
 
 test('Writer equals properties (Setoid)', t => {
-  const a = Writer('seg', 0)
-  const b = Writer(false, 0)
-  const c = Writer(null, 1)
-  const d = Writer(3, 0)
+  const a = Writer(22, 0)
+  const b = Writer(22, 0)
+  const c = Writer(22, 0)
+  const d = Writer(null, 1)
+
+  const equals = laws.Setoid('equals')
 
   t.ok(isFunction(a.equals), 'provides an equals function')
-  t.equals(a.equals(a), true, 'reflexivity')
-  t.equals(a.equals(b), b.equals(a), 'symmetry (equal)')
-  t.equals(a.equals(c), c.equals(a), 'symmetry (!equal)')
-  t.equals(a.equals(b) && b.equals(d), a.equals(d), 'transitivity')
+
+  t.ok(equals.reflexivity(a), 'reflexivity')
+  t.ok(equals.symmetry(a, b), 'symmetry (equal)')
+  t.ok(equals.symmetry(a, d), 'symmetry (!equal)')
+  t.ok(equals.transitivity(a, b, c), 'transitivity (equal)')
+  t.ok(equals.transitivity(a, d, c), 'transitivity (!equal)')
+
+  t.end()
+})
+
+test('Writer fantasy-land equals properties (Setoid)', t => {
+  const a = Writer([], 'nice')
+  const b = Writer([], 'nice')
+  const c = Writer([], 'nice')
+  const d = Writer(null, false)
+
+  const equals = laws.Setoid(fl.equals)
+
+  t.ok(equals.reflexivity(a), 'reflexivity')
+  t.ok(equals.symmetry(a, b), 'symmetry (equal)')
+  t.ok(equals.symmetry(a, d), 'symmetry (!equal)')
+  t.ok(equals.transitivity(a, b, c), 'transitivity (equal)')
+  t.ok(equals.transitivity(a, d, c), 'transitivity (!equal)')
 
   t.end()
 })
@@ -248,10 +270,28 @@ test('Writer map properties (Functor)', t => {
   const f = x => x + 54
   const g = x => x * 4
 
+  const map = laws.Functor(equals, 'map')
+
   t.ok(isFunction(m.map), 'provides a map function')
 
-  t.equal(m.map(identity).valueOf(), m.valueOf(), 'identity')
-  t.equal(m.map(compose(f, g)).valueOf(), m.map(g).map(f).valueOf(), 'composition')
+  t.ok(map.identity(m), 'identity')
+  t.ok(map.composition(f, g, m), 'composition')
+
+  t.end()
+})
+
+test('Writer fantasy-land map properties (Functor)', t => {
+  const m = Writer('blop', 49)
+
+  const f = x => x + 54
+  const g = x => x * 4
+
+  const map = laws.Functor(equals, fl.map)
+
+  t.ok(isFunction(m[fl.map]), 'provides a map function')
+
+  t.ok(map.identity(m), 'identity')
+  t.ok(map.composition(f, g, m), 'composition')
 
   t.end()
 })
@@ -297,15 +337,16 @@ test('Writer ap errors', t => {
 })
 
 test('Writer ap properties (Apply)', t => {
-  const m = Writer(0, identity)
+  const f = Writer(0, x => x + 20)
+  const g = Writer(0, x => x * 20)
+  const v = Writer(0, 20)
 
-  const a = m.map(compose).ap(m).ap(m)
-  const b = m.ap(m.ap(m))
+  const ap = laws.Apply(equals, 'ap', 'map')
 
-  t.ok(isFunction(m.map), 'implements the Functor spec')
-  t.ok(isFunction(m.ap), 'provides an ap function')
+  t.ok(isFunction(v.map), 'implements the Functor spec')
+  t.ok(isFunction(v.ap), 'provides an ap function')
 
-  t.equal(a.ap(Writer(0, 3)).valueOf(), b.ap(Writer(0, 3)).valueOf(), 'composition')
+  t.ok(ap.composition(g, f, v), 'composition')
 
   t.end()
 })
@@ -410,28 +451,58 @@ test('Writer chain functionality', t => {
 })
 
 test('Writer chain properties (Chain)', t => {
-  t.ok(isFunction(Writer(0, 0).chain), 'provides a chain function')
-  t.ok(isFunction(Writer(0, 0).ap), 'implements the Apply spec')
-
   const f = x => Writer(1, x + 2)
-  const g = x => Writer(2, x + 10)
+  const g = x => Writer(2, x * 10)
+  const v = Writer(2, 10)
 
-  const a = x => Writer(0, x).chain(f).chain(g)
-  const b = x => Writer(0, x).chain(y => f(y).chain(g))
+  const chain = laws.Chain(equals, 'chain')
 
-  t.equal(a(10).valueOf(), b(10).valueOf(), 'assosiativity')
+  t.ok(isFunction(v.chain), 'provides a chain function')
+  t.ok(isFunction(v.ap), 'implements the Apply spec')
+
+  t.ok(chain.associativity(f, g, v), 'associativity')
+
+  t.end()
+})
+
+test('Writer fantasy-land chain properties (Chain)', t => {
+  const f = x => Writer(1, x + 2)
+  const g = x => Writer(2, x * 10)
+  const v = Writer(2, 10)
+
+  const chain = laws.Chain(equals, fl.chain)
+
+  t.ok(chain.associativity(f, g, v), 'associativity')
 
   t.end()
 })
 
 test('Writer chain properties (Monad)', t => {
-  t.ok(isFunction(Writer(1, 0).chain), 'implements the Chain spec')
-  t.ok(isFunction(Writer(2, 0).of), 'implements the Applicative spec')
+  const f = x => Writer(0, x * 10)
+  const v = Writer(10, 7)
 
-  const f = x => Writer(0, x)
+  const of = laws.Monad(equals, Writer, 'of', 'chain')
 
-  t.equal(Writer.of(3).chain(f).valueOf(), f(3).valueOf(), 'left identity')
-  t.equal(f(3).chain(Writer.of).valueOf(), f(3).valueOf(), 'right identity')
+  t.ok(isFunction(v.chain), 'implements the Chain spec')
+  t.ok(isFunction(v.constructor.of), 'implements the Applicative spec')
+
+  t.ok(of.leftIdentity(f, 10), 'left identity')
+  t.ok(of.rightIdentity(f, 10), 'right identity')
+
+  t.end()
+})
+
+test('Writer fantasy-land chain properties (Monad)', t => {
+  const f = x => Writer(0, x * 10)
+  const v = Writer(10, 7)
+
+  const of = laws.Monad(equals, Writer, fl.of, fl.chain)
+
+  t.ok(isFunction(v[fl.chain]), 'implements the Chain spec')
+  t.ok(isFunction(v.constructor[fl.of]), 'implements the Applicative spec')
+
+  t.ok(of.leftIdentity(f, 10), 'left identity')
+  t.ok(of.rightIdentity(f, 10), 'right identity')
 
   t.end()
 })

@@ -1,14 +1,14 @@
 const test = require('tape')
 const sinon = require('sinon')
 const helpers = require('../test/helpers')
+const laws = require('../test/laws')
 
 const bindFunc = helpers.bindFunc
 
 const Last = require('../test/LastMonoid')
 const MockCrock = require('../test/MockCrock')
 
-const curry = require('../core/curry')
-const compose = curry(require('../core/compose'))
+const equals = require('../core/equals')
 const isFunction  = require('../core/isFunction')
 const isString = require('../core/isString')
 const unit = require('../core/_unit')
@@ -188,14 +188,37 @@ test('Const equals properties (Setoid)', t => {
 
   const a = Obj({ a: true })
   const b = Obj({ a: true })
-  const c = Obj({ a: true, b: 'not' })
-  const d = Obj({ a: true })
+  const c = Obj({ a: true })
+  const d = Obj({ a: true, b: 'not' })
+
+  const equals = laws.Setoid('equals')
 
   t.ok(isFunction(Obj({}).equals), 'provides an equals function')
-  t.equal(a.equals(a), true, 'reflexivity')
-  t.equal(a.equals(b), b.equals(a), 'symmetry (equal)')
-  t.equal(a.equals(c), c.equals(a), 'symmetry (!equal)')
-  t.equal(a.equals(b) && b.equals(d), a.equals(d), 'transitivity')
+
+  t.ok(equals.reflexivity(a), 'reflexivity')
+  t.ok(equals.symmetry(a, b), 'symmetry (equal)')
+  t.ok(equals.symmetry(a, d), 'symmetry (!equal)')
+  t.ok(equals.transitivity(a, b, c), 'transitivity (equal)')
+  t.ok(equals.transitivity(a, d, c), 'transitivity (!equal)')
+
+  t.end()
+})
+
+test('Const fantasy-land equals properties (Setoid)', t => {
+  const Obj = Const(Object)
+
+  const a = Obj({ a: true })
+  const b = Obj({ a: true })
+  const c = Obj({ a: true })
+  const d = Obj({ a: true, b: 'not' })
+
+  const equals = laws.Setoid(fl.equals)
+
+  t.ok(equals.reflexivity(a), 'reflexivity')
+  t.ok(equals.symmetry(a, b), 'symmetry (equal)')
+  t.ok(equals.symmetry(a, d), 'symmetry (!equal)')
+  t.ok(equals.transitivity(a, b, c), 'transitivity (equal)')
+  t.ok(equals.transitivity(a, d, c), 'transitivity (!equal)')
 
   t.end()
 })
@@ -271,12 +294,24 @@ test('Const concat properties (Semigroup)', t => {
   const b = Arr([ 2 ])
   const c = Arr([ 3 ])
 
-  const left = a.concat(b).concat(c)
-  const right = a.concat(b.concat(c))
+  const concat = laws.Semigroup(equals, 'concat')
 
   t.ok(isFunction(a.concat), 'provides a concat function')
-  t.same(left.valueOf(), right.valueOf(), 'associativity')
-  t.same(a.concat(b).type(), a.type(), 'returns a Const')
+  t.ok(concat.associativity(a, b, c), 'associativity')
+
+  t.end()
+})
+
+test('Const fantasy-land concat properties (Semigroup)', t => {
+  const Arr = Const(Array)
+  const a = Arr([ 16 ])
+  const b = Arr([ 29 ])
+  const c = Arr([ 33, 34 ])
+
+  const concat = laws.Semigroup(equals, fl.concat)
+
+  t.ok(isFunction(a[fl.concat]), 'provides a concat function')
+  t.ok(concat.associativity(a, b, c), 'associativity')
 
   t.end()
 })
@@ -302,14 +337,27 @@ test('Const empty fantasy-land errors', t => {
 test('Const empty properties (Monoid)', t => {
   const m = Const(Array)([ 1, 2 ])
 
+  const empty = laws.Monoid(equals, 'empty', 'concat')
+
   t.ok(isFunction(m.concat), 'provides a concat function')
-  t.ok(isFunction(m.empty), 'provides an empty function')
+  t.ok(isFunction(m.constructor.empty), 'provides an empty function on constructor')
 
-  const right = m.concat(m.empty())
-  const left = m.empty().concat(m)
+  t.ok(empty.leftIdentity(m), 'left identity')
+  t.ok(empty.rightIdentity(m), 'right identity')
 
-  t.same(right.valueOf(), m.valueOf(), 'right identity')
-  t.same(left.valueOf(), m.valueOf(), 'left identity')
+  t.end()
+})
+
+test('Const fantasy-land empty properties (Monoid)', t => {
+  const m = Const(Array)([ 1, 2 ])
+
+  const empty = laws.Monoid(equals, fl.empty, fl.concat)
+
+  t.ok(isFunction(m[fl.concat]), 'provides a concat function')
+  t.ok(isFunction(m.constructor[fl.empty]), 'provides an empty function on constructor')
+
+  t.ok(empty.leftIdentity(m), 'left identity')
+  t.ok(empty.rightIdentity(m), 'right identity')
 
   t.end()
 })
@@ -373,10 +421,28 @@ test('Const map properties (Functor)', t => {
   const f = x => x + 54
   const g = x => x * 4
 
+  const map = laws.Functor(equals, 'map')
+
   t.ok(isFunction(m.map), 'provides a map function')
 
-  t.equal(m.map(identity).valueOf(), m.valueOf(), 'identity')
-  t.equal(m.map(compose(f, g)).valueOf(), m.map(g).map(f).valueOf(), 'composition')
+  t.ok(map.identity(m))
+  t.ok(map.composition(f, g, m))
+
+  t.end()
+})
+
+test('Const map fantasy-land properties (Functor)', t => {
+  const m = Const(Boolean)(false)
+
+  const f = x => x + 54
+  const g = x => x * 4
+
+  const map = laws.Functor(equals, fl.map)
+
+  t.ok(isFunction(m[fl.map]), 'provides a map function')
+
+  t.ok(map.identity(m))
+  t.ok(map.composition(f, g, m))
 
   t.end()
 })
@@ -409,15 +475,17 @@ test('Const ap errors', t => {
 
 test('Const ap properties (Apply)', t => {
   const Arr = Const(Array)
-  const m = Arr([ 1, 2, 3 ])
 
-  const a = m.map(compose).ap(m).ap(m)
-  const b = m.ap(m.ap(m))
+  const f = Arr([ x => x - 2 ])
+  const g = Arr([ x => x * 30 ])
+  const v = Arr([ 1, 2, 3 ])
 
-  t.ok(isFunction(m.map), 'implements the Functor spec')
-  t.ok(isFunction(m.ap), 'provides an ap function')
+  const ap = laws.Apply(equals, 'ap', 'map')
 
-  t.same(a.ap(Arr([ 4 ])).valueOf(), b.ap(Arr([ 4 ])).valueOf(), 'composition')
+  t.ok(isFunction(v.map), 'implements the Functor spec')
+  t.ok(isFunction(v.ap), 'provides an ap function')
+
+  t.ok(ap.composition(g, f, v), 'composition')
 
   t.end()
 })

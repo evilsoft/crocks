@@ -1,10 +1,12 @@
 const test = require('tape')
 const helpers = require('../test/helpers')
 const sinon = require('sinon')
+const laws = require('../test/laws')
 
 const bindFunc = helpers.bindFunc
 
 const _compose = require('../core/compose')
+const equals = require('../core/equals')
 const isFunction = require('../core/isFunction')
 const isString = require('../core/isString')
 const isObject = require('../core/isObject')
@@ -20,6 +22,11 @@ const Arrow = require('.')
 
 const identity =
   x => x
+
+const equalArrows = x => (m, n) => equals(
+  m.runWith(x),
+  n.runWith(x)
+)
 
 test('Arrow', t => {
   const a = bindFunc(Arrow)
@@ -180,14 +187,25 @@ test('Arrow compose properties (Semigroupoid)', t => {
   const b = Arrow(x => x * 10)
   const c = Arrow(x => x - 5)
 
-  t.ok(isFunction(Arrow(identity).compose), 'is a function')
+  const compose = laws.Semigroupoid(equalArrows(10), 'compose')
 
-  const left = a.compose(b).compose(c).runWith
-  const right = a.compose(b.compose(c)).runWith
-  const x = 20
+  t.ok(isFunction(a.compose), 'is a function')
 
-  t.same(left(x), right(x), 'associativity')
-  t.same(a.compose(b).type(), a.type(), 'returns Semigroupoid of same type')
+  t.ok(compose.associativity(a, b, c), 'associativity')
+
+  t.end()
+})
+
+test('Arrow fantasy-land compose properties (Semigroupoid)', t => {
+  const a = Arrow(x => x + 1)
+  const b = Arrow(x => x * 10)
+  const c = Arrow(x => x - 5)
+
+  const compose = laws.Semigroupoid(equalArrows(20), fl.compose)
+
+  t.ok(isFunction(a[fl.compose]), 'is a function')
+
+  t.ok(compose.associativity(a, b, c))
 
   t.end()
 })
@@ -205,16 +223,28 @@ test('Arrow id functionality', t => {
 
 test('Arrow id properties (Category)', t => {
   const m = Arrow(x => x + 45)
-  const x = 32
+
+  const id = laws.Category(equalArrows(20), 'id', 'compose')
 
   t.ok(isFunction(m.compose), 'provides a compose function')
-  t.ok(isFunction(m.id), 'provides an id function')
+  t.ok(isFunction(m.constructor.id), 'provides an id function')
 
-  const right = m.compose(m.id()).runWith
-  const left = m.id().compose(m).runWith
+  t.ok(id.leftIdentity(m), 'left identity')
+  t.ok(id.rightIdentity(m), 'right identity')
 
-  t.same(right(x), m.runWith(x), 'right identity')
-  t.same(left(x), m.runWith(x), 'left identity')
+  t.end()
+})
+
+test('Arrow fantasy-land id properties (Category)', t => {
+  const m = Arrow(x => x + 45)
+
+  const id = laws.Category(equalArrows(20), fl.id, fl.compose)
+
+  t.ok(isFunction(m[fl.compose]), 'provides a compose function')
+  t.ok(isFunction(m.constructor[fl.id]), 'provides an id function')
+
+  t.ok(id.leftIdentity(m), 'left identity')
+  t.ok(id.rightIdentity(m), 'right identity')
 
   t.end()
 })
@@ -282,12 +312,28 @@ test('Arrow map properties (Functor)', t => {
   const f = x => x + 12
   const g = x => x * 10
 
-  const x = 76
+  const map = laws.Functor(equalArrows(76), 'map')
 
   t.ok(isFunction(m.map), 'provides a map function')
 
-  t.equal(m.map(identity).runWith(x), m.runWith(x), 'identity')
-  t.equal(m.map(_compose(f, g)).runWith(x), m.map(g).map(f).runWith(x), 'composition')
+  t.ok(map.identity(m), 'identity')
+  t.ok(map.composition(f, g, m), 'composition')
+
+  t.end()
+})
+
+test('Arrow fantasy-land map properties (Functor)', t => {
+  const m = Arrow(identity)
+
+  const f = x => x + 12
+  const g = x => x * 10
+
+  const map = laws.Functor(equalArrows(60), fl.map)
+
+  t.ok(isFunction(m[fl.map]), 'provides a map function')
+
+  t.ok(map.identity(m), 'identity')
+  t.ok(map.composition(f, g, m), 'composition')
 
   t.end()
 })
@@ -349,18 +395,32 @@ test('Arrow contramap functionality', t => {
   t.end()
 })
 
-test('Arrow contramap properties (Contra Functor)', t => {
-  const m = Arrow(identity)
-
+test('Arrow contramap properties (Contravariant)', t => {
   const f = x => x + 12
   const g = x => x * 10
+  const m = Arrow(identity)
 
-  const x = 76
+  const contramap = laws.Contravariant(equalArrows(76), 'contramap')
 
   t.ok(isFunction(m.contramap), 'provides a contramap function')
 
-  t.equal(m.contramap(identity).runWith(x), m.runWith(x), 'identity')
-  t.equal(m.contramap(_compose(f, g)).runWith(x), m.contramap(f).contramap(g).runWith(x), 'composition')
+  t.ok(contramap.composition(f, g, m), 'composition')
+  t.ok(contramap.identity(m), 'identity')
+
+  t.end()
+})
+
+test('Arrow fantasy-land contramap properties (Contravariant)', t => {
+  const f = x => x + 12
+  const g = x => x * 10
+  const m = Arrow(identity)
+
+  const contramap = laws.Contravariant(equalArrows(76), fl.contramap)
+
+  t.ok(isFunction(m[fl.contramap]), 'provides a contramap function')
+
+  t.ok(contramap.composition(f, g, m), 'composition')
+  t.ok(contramap.identity(m), 'identity')
 
   t.end()
 })
@@ -461,18 +521,33 @@ test('Arrow promap properties (Profunctor)', t => {
   const h = x => x + 2
   const k = x => x * 2
 
-  const x = 76
+  const promap = laws.Profunctor(equalArrows(50), 'promap')
 
   t.ok(isFunction(m.map), 'provides a map function')
   t.ok(isFunction(m.promap), 'provides a promap function')
 
-  t.equal(m.promap(identity, identity).runWith(x), m.runWith(x), 'identity')
+  t.ok(promap.identity(m), 'identity')
+  t.ok(promap.composition(f, g, h, k, m), 'composition')
 
-  t.equal(
-    m.promap(_compose(f, g), _compose(h, k)).runWith(x),
-    m.promap(f, k).promap(g, h).runWith(x),
-    'composition'
-  )
+  t.end()
+})
+
+test('Arrow fantasy-land promap properties (Profunctor)', t => {
+  const m = Arrow(identity)
+
+  const f = x => x + 12
+  const g = x => x * 10
+
+  const h = x => x + 2
+  const k = x => x * 2
+
+  const promap = laws.Profunctor(equalArrows(50), fl.promap)
+
+  t.ok(isFunction(m[fl.map]), 'provides a map function')
+  t.ok(isFunction(m[fl.promap]), 'provides a promap function')
+
+  t.ok(promap.identity(m), 'identity')
+  t.ok(promap.composition(f, g, h, k, m), 'composition')
 
   t.end()
 })

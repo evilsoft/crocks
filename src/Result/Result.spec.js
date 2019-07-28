@@ -1,14 +1,15 @@
 const test = require('tape')
 const sinon = require('sinon')
-const helpers = require('../test/helpers')
+
 const MockCrock = require('../test/MockCrock')
+const helpers = require('../test/helpers')
+const laws = require('../test/laws')
 
 const bindFunc = helpers.bindFunc
 
 const curry = require('../core/curry')
 const compose = curry(require('../core/compose'))
 const equals = require('../core/equals')
-const isArray = require('../core/isArray')
 const isFunction = require('../core/isFunction')
 const isObject = require('../core/isObject')
 const isSameType = require('../core/isSameType')
@@ -192,6 +193,221 @@ test('Result either', t => {
   t.end()
 })
 
+test('Result swap', t => {
+  const fn = bindFunc(Result.Ok(23).swap)
+
+  const err = /Result.swap: Requires both left and right functions/
+  t.throws(fn(null, unit), err, 'throws with null in left')
+  t.throws(fn(undefined, unit), err, 'throws with undefined in left')
+  t.throws(fn(0, unit), err, 'throws with falsey number in left')
+  t.throws(fn(1, unit), err, 'throws with truthy number in left')
+  t.throws(fn('', unit), err, 'throws with falsey string in left')
+  t.throws(fn('string', unit), err, 'throws with truthy string in left')
+  t.throws(fn(false, unit), err, 'throws with false in left')
+  t.throws(fn(true, unit), err, 'throws with true in left')
+  t.throws(fn({}, unit), err, 'throws with object in left')
+  t.throws(fn([], unit), err, 'throws with array in left')
+
+  t.throws(fn(unit, null), err, 'throws with null in right')
+  t.throws(fn(unit, undefined), err, 'throws with undefined in right')
+  t.throws(fn(unit, 0), err, 'throws with falsey number in right')
+  t.throws(fn(unit, 1), err, 'throws with truthy number in right')
+  t.throws(fn(unit, ''), err, 'throws with falsey string in right')
+  t.throws(fn(unit, 'string'), err, 'throws with truthy string in right')
+  t.throws(fn(unit, false), err, 'throws with false in right')
+  t.throws(fn(unit, true), err, 'throws with true in right')
+  t.throws(fn(unit, {}), err, 'throws with object in right')
+  t.throws(fn(unit, []), err, 'throws with array in right')
+
+  const l = Result.Err('here').swap(constant('err'), identity)
+  const r = Result.Ok('here').swap(identity, constant('ok'))
+
+  t.ok(l.equals(Result.Ok('err')), 'returns a Result.Ok wrapping err')
+  t.ok(r.equals(Result.Err('ok')), 'returns a Result.Err wrapping ok')
+
+  t.end()
+})
+
+test('Result coalesce', t => {
+  const fn = bindFunc(Result.Ok(23).coalesce)
+
+  const err = /Result.coalesce: Requires both left and right functions/
+  t.throws(fn(null, unit), err, 'throws with null in left')
+  t.throws(fn(undefined, unit), err, 'throws with undefined in left')
+  t.throws(fn(0, unit), err, 'throws with falsey number in left')
+  t.throws(fn(1, unit), err, 'throws with truthy number in left')
+  t.throws(fn('', unit), err, 'throws with falsey string in left')
+  t.throws(fn('string', unit), err, 'throws with truthy string in left')
+  t.throws(fn(false, unit), err, 'throws with false in left')
+  t.throws(fn(true, unit), err, 'throws with true in left')
+  t.throws(fn({}, unit), err, 'throws with object in left')
+  t.throws(fn([], unit), err, 'throws with array in left')
+
+  t.throws(fn(unit, null), err, 'throws with null in right')
+  t.throws(fn(unit, undefined), err, 'throws with undefined in right')
+  t.throws(fn(unit, 0), err, 'throws with falsey number in right')
+  t.throws(fn(unit, 1), err, 'throws with truthy number in right')
+  t.throws(fn(unit, ''), err, 'throws with falsey string in right')
+  t.throws(fn(unit, 'string'), err, 'throws with truthy string in right')
+  t.throws(fn(unit, false), err, 'throws with false in right')
+  t.throws(fn(unit, true), err, 'throws with true in right')
+  t.throws(fn(unit, {}), err, 'throws with object in right')
+  t.throws(fn(unit, []), err, 'throws with array in right')
+
+  const l = Result.Err('here').coalesce(constant('was left'), identity)
+  const r = Result.Ok('here').coalesce(identity, constant('was right'))
+
+  t.ok(l.equals(Result.Ok('was left')),'returns an Result.Ok wrapping was left' )
+  t.ok(r.equals(Result.Ok('was right')),'returns an Result.Ok wrapping was right' )
+
+  t.end()
+})
+
+test('Result bichain left errors', t => {
+  const { Err } = Result
+  const bichain = bindFunc(Err(0).bichain)
+
+  const err = /Result.bichain: Both arguments must be Result returning functions/
+  t.throws(bichain(undefined, Err), err, 'throws with undefined on left')
+  t.throws(bichain(null, Err), err, 'throws with null on left')
+  t.throws(bichain(0, Err), err, 'throws with falsy number on left')
+  t.throws(bichain(1, Err), err, 'throws with truthy number on left')
+  t.throws(bichain('', Err), err, 'throws with falsy string on left')
+  t.throws(bichain('string', Err), err, 'throws with truthy string on left')
+  t.throws(bichain(false, Err), err, 'throws with false on left')
+  t.throws(bichain(true, Err), err, 'throws with true on left')
+  t.throws(bichain([], Err), err, 'throws with an array on left')
+  t.throws(bichain({}, Err), err, 'throws with an object on left')
+
+  t.throws(bichain(unit, Err), err, 'throws with a non-Result returning function')
+
+  t.end()
+})
+
+test('Result bichain right errors', t => {
+  const { Ok } = Result
+  const bichain = bindFunc(Ok(0).bichain)
+
+  const err = /Result.bichain: Both arguments must be Result returning functions/
+  t.throws(bichain(Ok, undefined), err, 'throws with undefined on left')
+  t.throws(bichain(Ok, null), err, 'throws with null on left')
+  t.throws(bichain(Ok, 0), err, 'throws with falsy number on left')
+  t.throws(bichain(Ok, 1), err, 'throws with truthy number on left')
+  t.throws(bichain(Ok, ''), err, 'throws with falsy string on left')
+  t.throws(bichain(Ok, 'string'), err, 'throws with truthy string on left')
+  t.throws(bichain(Ok, false), err, 'throws with false on left')
+  t.throws(bichain(Ok, true), err, 'throws with true on left')
+  t.throws(bichain(Ok, []), err, 'throws with an array on left')
+  t.throws(bichain(Ok, {}), err, 'throws with an object on left')
+
+  t.throws(bichain(Ok, unit), err, 'throws with a non-Result returning function')
+
+  t.end()
+})
+
+test('Result bichain functionality', t => {
+  const { Err, Ok } = Result
+
+  const left = x => Err(x + 1)
+  const right = x => Ok(x + 1)
+
+  t.ok(equals(Err(0).bichain(right, left), Ok(1)), 'moves from Err to Ok')
+  t.ok(equals(Ok(0).bichain(right, left), Err(1)), 'moves from Ok to Err')
+  t.ok(equals(Ok(0).bichain(left, right), Ok(1)), 'moves from Ok to Ok')
+  t.ok(equals(Err(0).bichain(left, right), Err(1)), 'moves from Err to Err')
+
+  t.end()
+})
+
+test('Result equals functionality', t => {
+  const la = Result.Err(0)
+  const lb = Result.Err(0)
+  const lc = Result.Err(1)
+
+  const ra = Result.Ok(0)
+  const rb = Result.Ok(0)
+  const rc = Result.Ok(1)
+
+  const value = 1
+  const nonResult = { type: 'Result...Not' }
+
+  t.equal(la.equals(lc), false, 'returns false when 2 Err Results are not equal')
+  t.equal(la.equals(lb), true, 'returns true when 2 Err Results are equal')
+  t.equal(lc.equals(value), false, 'returns when Err passed a simple value')
+
+  t.equal(ra.equals(rc), false, 'returns false when 2 Ok Results are not equal')
+  t.equal(ra.equals(rb), true, 'returns true when 2 Ok Results are equal')
+  t.equal(rc.equals(value), false, 'returns when Ok passed a simple value')
+
+  t.equal(la.equals(nonResult), false, 'returns false when passed a non-Result')
+  t.equal(ra.equals(lb), false, 'returns false when Err compared to Ok')
+
+  t.end()
+})
+
+test('Result equals properties (Setoid)', t => {
+  const { Err, Ok } = Result
+
+  const la = Err(0)
+  const lb = Err(0)
+  const ld = Err(0)
+  const lc = Err(1)
+
+  const ra = Ok(0)
+  const rb = Ok(0)
+  const rc = Ok(0)
+  const rd = Ok(1)
+
+  const equals = laws.Setoid('equals')
+
+  t.ok(isFunction(Err(null).equals), 'Err provides an equals function')
+  t.ok(isFunction(Ok(null).equals), 'Ok provides an equals function')
+
+  t.ok(equals.reflexivity(la), 'Err reflexivity')
+  t.ok(equals.symmetry(la, lb), 'Err symmetry (equal)')
+  t.ok(equals.symmetry(la, ld), 'Err symmetry (!equal)')
+  t.ok(equals.transitivity(la, lb, lc), 'Err transitivity (equal)')
+  t.ok(equals.transitivity(la, ld, lc), 'Err transitivity (!equal)')
+
+  t.ok(equals.reflexivity(ra), 'Ok reflexivity')
+  t.ok(equals.symmetry(ra, rb), 'Ok symmetry (equal)')
+  t.ok(equals.symmetry(ra, rd), 'Ok symmetry (!equal)')
+  t.ok(equals.transitivity(ra, rb, rc), 'Ok transitivity (equal)')
+  t.ok(equals.transitivity(ra, rd, rc), 'Ok transitivity (!equal)')
+
+  t.end()
+})
+
+test('Result fantasy-land equals properties (Setoid)', t => {
+  const { Err, Ok } = Result
+
+  const la = Err(0)
+  const lb = Err(0)
+  const ld = Err(0)
+  const lc = Err(1)
+
+  const ra = Ok(0)
+  const rb = Ok(0)
+  const rc = Ok(0)
+  const rd = Ok(1)
+
+  const equals = laws.Setoid(fl.equals)
+
+  t.ok(equals.reflexivity(la), 'Err reflexivity')
+  t.ok(equals.symmetry(la, lb), 'Err symmetry (equal)')
+  t.ok(equals.symmetry(la, ld), 'Err symmetry (!equal)')
+  t.ok(equals.transitivity(la, lb, lc), 'Err transitivity (equal)')
+  t.ok(equals.transitivity(la, ld, lc), 'Err transitivity (!equal)')
+
+  t.ok(equals.reflexivity(ra), 'Ok reflexivity')
+  t.ok(equals.symmetry(ra, rb), 'Ok symmetry (equal)')
+  t.ok(equals.symmetry(ra, rd), 'Ok symmetry (!equal)')
+  t.ok(equals.transitivity(ra, rb, rc), 'Ok transitivity (equal)')
+  t.ok(equals.transitivity(ra, rd, rc), 'Ok transitivity (!equal)')
+
+  t.end()
+})
+
 test('Result concat errors', t => {
   const m = { type: () => 'Result...Not' }
 
@@ -346,198 +562,45 @@ test('Result concat functionality', t => {
 })
 
 test('Result concat properties (Semigroup)', t => {
-  const extract =
-    either(identity, identity)
-
-  const a = Result.Ok([ 'a' ])
-  const b = Result.Ok([ 'b' ])
-  const c = Result.Ok([ 'c' ])
-
-  const left = a.concat(b).concat(c)
-  const right = a.concat(b.concat(c))
-
-  t.ok(isFunction(a.concat), 'provides a concat function')
-
-  t.same(extract(left), extract(right), 'associativity')
-  t.ok(isArray(extract(a.concat(b))), 'returns an Array')
-
-  t.end()
-})
-
-test('Result swap', t => {
-  const fn = bindFunc(Result.Ok(23).swap)
-
-  const err = /Result.swap: Requires both left and right functions/
-  t.throws(fn(null, unit), err, 'throws with null in left')
-  t.throws(fn(undefined, unit), err, 'throws with undefined in left')
-  t.throws(fn(0, unit), err, 'throws with falsey number in left')
-  t.throws(fn(1, unit), err, 'throws with truthy number in left')
-  t.throws(fn('', unit), err, 'throws with falsey string in left')
-  t.throws(fn('string', unit), err, 'throws with truthy string in left')
-  t.throws(fn(false, unit), err, 'throws with false in left')
-  t.throws(fn(true, unit), err, 'throws with true in left')
-  t.throws(fn({}, unit), err, 'throws with object in left')
-  t.throws(fn([], unit), err, 'throws with array in left')
-
-  t.throws(fn(unit, null), err, 'throws with null in right')
-  t.throws(fn(unit, undefined), err, 'throws with undefined in right')
-  t.throws(fn(unit, 0), err, 'throws with falsey number in right')
-  t.throws(fn(unit, 1), err, 'throws with truthy number in right')
-  t.throws(fn(unit, ''), err, 'throws with falsey string in right')
-  t.throws(fn(unit, 'string'), err, 'throws with truthy string in right')
-  t.throws(fn(unit, false), err, 'throws with false in right')
-  t.throws(fn(unit, true), err, 'throws with true in right')
-  t.throws(fn(unit, {}), err, 'throws with object in right')
-  t.throws(fn(unit, []), err, 'throws with array in right')
-
-  const l = Result.Err('here').swap(constant('err'), identity)
-  const r = Result.Ok('here').swap(identity, constant('ok'))
-
-  t.ok(l.equals(Result.Ok('err')), 'returns a Result.Ok wrapping err')
-  t.ok(r.equals(Result.Err('ok')), 'returns a Result.Err wrapping ok')
-
-  t.end()
-})
-
-test('Result coalesce', t => {
-  const fn = bindFunc(Result.Ok(23).coalesce)
-
-  const err = /Result.coalesce: Requires both left and right functions/
-  t.throws(fn(null, unit), err, 'throws with null in left')
-  t.throws(fn(undefined, unit), err, 'throws with undefined in left')
-  t.throws(fn(0, unit), err, 'throws with falsey number in left')
-  t.throws(fn(1, unit), err, 'throws with truthy number in left')
-  t.throws(fn('', unit), err, 'throws with falsey string in left')
-  t.throws(fn('string', unit), err, 'throws with truthy string in left')
-  t.throws(fn(false, unit), err, 'throws with false in left')
-  t.throws(fn(true, unit), err, 'throws with true in left')
-  t.throws(fn({}, unit), err, 'throws with object in left')
-  t.throws(fn([], unit), err, 'throws with array in left')
-
-  t.throws(fn(unit, null), err, 'throws with null in right')
-  t.throws(fn(unit, undefined), err, 'throws with undefined in right')
-  t.throws(fn(unit, 0), err, 'throws with falsey number in right')
-  t.throws(fn(unit, 1), err, 'throws with truthy number in right')
-  t.throws(fn(unit, ''), err, 'throws with falsey string in right')
-  t.throws(fn(unit, 'string'), err, 'throws with truthy string in right')
-  t.throws(fn(unit, false), err, 'throws with false in right')
-  t.throws(fn(unit, true), err, 'throws with true in right')
-  t.throws(fn(unit, {}), err, 'throws with object in right')
-  t.throws(fn(unit, []), err, 'throws with array in right')
-
-  const l = Result.Err('here').coalesce(constant('was left'), identity)
-  const r = Result.Ok('here').coalesce(identity, constant('was right'))
-
-  t.ok(l.equals(Result.Ok('was left')),'returns an Result.Ok wrapping was left' )
-  t.ok(r.equals(Result.Ok('was right')),'returns an Result.Ok wrapping was right' )
-
-  t.end()
-})
-
-test('Result bichain left errors', t => {
-  const { Err } = Result
-  const bichain = bindFunc(Err(0).bichain)
-
-  const err = /Result.bichain: Both arguments must be Result returning functions/
-  t.throws(bichain(undefined, Err), err, 'throws with undefined on left')
-  t.throws(bichain(null, Err), err, 'throws with null on left')
-  t.throws(bichain(0, Err), err, 'throws with falsy number on left')
-  t.throws(bichain(1, Err), err, 'throws with truthy number on left')
-  t.throws(bichain('', Err), err, 'throws with falsy string on left')
-  t.throws(bichain('string', Err), err, 'throws with truthy string on left')
-  t.throws(bichain(false, Err), err, 'throws with false on left')
-  t.throws(bichain(true, Err), err, 'throws with true on left')
-  t.throws(bichain([], Err), err, 'throws with an array on left')
-  t.throws(bichain({}, Err), err, 'throws with an object on left')
-
-  t.throws(bichain(unit, Err), err, 'throws with a non-Result returning function')
-
-  t.end()
-})
-
-test('Result bichain right errors', t => {
-  const { Ok } = Result
-  const bichain = bindFunc(Ok(0).bichain)
-
-  const err = /Result.bichain: Both arguments must be Result returning functions/
-  t.throws(bichain(Ok, undefined), err, 'throws with undefined on left')
-  t.throws(bichain(Ok, null), err, 'throws with null on left')
-  t.throws(bichain(Ok, 0), err, 'throws with falsy number on left')
-  t.throws(bichain(Ok, 1), err, 'throws with truthy number on left')
-  t.throws(bichain(Ok, ''), err, 'throws with falsy string on left')
-  t.throws(bichain(Ok, 'string'), err, 'throws with truthy string on left')
-  t.throws(bichain(Ok, false), err, 'throws with false on left')
-  t.throws(bichain(Ok, true), err, 'throws with true on left')
-  t.throws(bichain(Ok, []), err, 'throws with an array on left')
-  t.throws(bichain(Ok, {}), err, 'throws with an object on left')
-
-  t.throws(bichain(Ok, unit), err, 'throws with a non-Result returning function')
-
-  t.end()
-})
-
-test('Result bichain functionality', t => {
   const { Err, Ok } = Result
 
-  const left = x => Err(x + 1)
-  const right = x => Ok(x + 1)
+  const ra = Ok([ 'a' ])
+  const rb = Ok([ 'b' ])
+  const rc = Ok([ 'c' ])
 
-  t.ok(equals(Err(0).bichain(right, left), Ok(1)), 'moves from Err to Ok')
-  t.ok(equals(Ok(0).bichain(right, left), Err(1)), 'moves from Ok to Err')
-  t.ok(equals(Ok(0).bichain(left, right), Ok(1)), 'moves from Ok to Ok')
-  t.ok(equals(Err(0).bichain(left, right), Err(1)), 'moves from Err to Err')
+  const la = Err([ 1 ])
+  const lb = Err([ 2 ])
+  const lc = Err([ 3 ])
 
-  t.end()
-})
+  const concat = laws.Semigroup(equals, 'concat')
 
-test('Result equals functionality', t => {
-  const la = Result.Err(0)
-  const lb = Result.Err(0)
-  const lc = Result.Err(1)
+  t.ok(isFunction(ra.concat), 'Ok provides a concat function')
+  t.ok(isFunction(la.concat), 'Err provides a concat function')
 
-  const ra = Result.Ok(0)
-  const rb = Result.Ok(0)
-  const rc = Result.Ok(1)
-
-  const value = 1
-  const nonResult = { type: 'Result...Not' }
-
-  t.equal(la.equals(lc), false, 'returns false when 2 Err Results are not equal')
-  t.equal(la.equals(lb), true, 'returns true when 2 Err Results are equal')
-  t.equal(lc.equals(value), false, 'returns when Err passed a simple value')
-
-  t.equal(ra.equals(rc), false, 'returns false when 2 Ok Results are not equal')
-  t.equal(ra.equals(rb), true, 'returns true when 2 Ok Results are equal')
-  t.equal(rc.equals(value), false, 'returns when Ok passed a simple value')
-
-  t.equal(la.equals(nonResult), false, 'returns false when passed a non-Result')
-  t.equal(ra.equals(lb), false, 'returns false when Err compared to Ok')
+  t.ok(concat.associativity(ra, rb, rc), 'Ok associativity')
+  t.ok(concat.associativity(la, lb, lc), 'Err associativity')
 
   t.end()
 })
 
-test('Result equals properties (Setoid)', t => {
-  const la = Result.Err(0)
-  const lb = Result.Err(0)
-  const lc = Result.Err(1)
-  const ld = Result.Err(0)
+test('Result fantasy-land concat properties (Semigroup)', t => {
+  const { Err, Ok } = Result
 
-  const ra = Result.Ok(0)
-  const rb = Result.Ok(0)
-  const rc = Result.Ok(1)
-  const rd = Result.Ok(0)
+  const ra = Ok([ 'a' ])
+  const rb = Ok([ 'b' ])
+  const rc = Ok([ 'c' ])
 
-  t.ok(isFunction(Result(null).equals), 'provides an equals function')
+  const la = Err([ 1 ])
+  const lb = Err([ 2 ])
+  const lc = Err([ 3 ])
 
-  t.equal(la.equals(la), true, 'Err reflexivity')
-  t.equal(la.equals(lb), lb.equals(la), 'Err symmetry (equal)')
-  t.equal(la.equals(lc), lc.equals(la), 'Err symmetry (!equal)')
-  t.equal(la.equals(lb) && lb.equals(ld), la.equals(ld), 'Err transitivity')
+  const concat = laws.Semigroup(equals, fl.concat)
 
-  t.equal(ra.equals(ra), true, 'Ok reflexivity')
-  t.equal(ra.equals(rb), rb.equals(ra), 'Ok symmetry (equal)')
-  t.equal(ra.equals(rc), rc.equals(ra), 'Ok symmetry (!equal)')
-  t.equal(ra.equals(rb) && rb.equals(rd), ra.equals(rd), 'Ok transitivity')
+  t.ok(isFunction(ra[fl.concat]), 'Ok provides a concat function')
+  t.ok(isFunction(la[fl.concat]), 'Err provides a concat function')
+
+  t.ok(concat.associativity(ra, rb, rc), 'Ok associativity')
+  t.ok(concat.associativity(la, lb, lc), 'Err associativity')
 
   t.end()
 })
@@ -621,29 +684,41 @@ test('Result map functionality', t => {
 })
 
 test('Result map properties (Functor)', t => {
+  const { Ok, Err } = Result
+
   const f = x => x + 2
   const g = x => x * 2
 
-  const Ok = Result.Ok
-  const Err = Result.Err
+  const map = laws.Functor(equals, 'map')
 
-  t.ok(isFunction(Err(0).map), 'left provides a map function')
-  t.ok(isFunction(Ok(0).map), 'right provides a map function')
+  t.ok(isFunction(Err(0).map), 'Err provides a map function')
+  t.ok(isFunction(Ok(0).map), 'Ok provides a map function')
 
-  t.equal(Ok(30).map(identity).either(constant(0), identity), 30, 'Ok identity')
+  t.ok(map.identity(Ok(undefined)), 'Ok identity')
+  t.ok(map.composition(f, g, Ok(44)), 'Ok composition')
 
-  t.equal(
-    Ok(10).map(compose(f, g)).either(constant(0), identity),
-    Ok(10).map(g).map(f).either(constant(0), identity),
-    'Ok composition'
-  )
+  t.ok(map.identity(Err(NaN)), 'Err identity')
+  t.ok(map.composition(f, g, Ok(77)), 'Err composition')
 
-  t.equal(Err(45).map(identity).either(identity, constant(0)), 45, 'Err identity')
-  t.equal(
-    Err(10).map(compose(f, g)).either(identity, constant(0)),
-    Err(10).map(g).map(f).either(identity, constant(0)),
-    'Err composition'
-  )
+  t.end()
+})
+
+test('Result fantasy-land map properties (Functor)', t => {
+  const { Ok, Err } = Result
+
+  const f = x => x + 2
+  const g = x => x * 2
+
+  const map = laws.Functor(equals, fl.map)
+
+  t.ok(isFunction(Err(0)[fl.map]), 'Err provides a map function')
+  t.ok(isFunction(Ok(0)[fl.map]), 'Ok provides a map function')
+
+  t.ok(map.identity(Ok(undefined)), 'Ok identity')
+  t.ok(map.composition(f, g, Ok(44)), 'Ok composition')
+
+  t.ok(map.identity(Err(NaN)), 'Err identity')
+  t.ok(map.composition(f, g, Ok(77)), 'Err composition')
 
   t.end()
 })
@@ -906,20 +981,32 @@ test('Result Err ap functionality', t => {
 })
 
 test('Result ap properties (Apply)', t => {
-  const Ok = Result.Ok
-  const m = Ok(identity)
+  const { Err, Ok } = Result
 
-  const a = m.map(compose).ap(m).ap(m)
-  const b = m.ap(m.ap(m))
+  const rf = Ok(x => 27 % x)
+  const rg = Ok(x => x * 45)
+  const rv = Ok(64)
 
-  t.ok(isFunction(m.ap), 'provides an ap function')
-  t.ok(isFunction(m.map), 'implements the Functor spec')
+  const lf = Err(x => 27 % x)
+  const lg = Err(x => x * 45)
+  const lv = Err(60)
 
-  t.equal(
-    a.ap(Ok(3)).either(constant(0), identity),
-    b.ap(Ok(3)).either(constant(0), identity),
-    'composition Ok'
-  )
+  const extractApply = m =>
+    m.either(identity, Function.prototype)(10)
+
+  const equalResults = (a, b) =>
+    equals(a, b) || equals(extractApply(a), extractApply(b))
+
+  const ap = laws.Apply(equalResults, 'ap', 'map')
+
+  t.ok(isFunction(rf.ap), 'Ok provides an ap function')
+  t.ok(isFunction(rf.map), 'Ok implements the Functor spec')
+
+  t.ok(isFunction(lf.ap), 'Err provides an ap function')
+  t.ok(isFunction(lf.map), 'Err implements the Functor spec')
+
+  t.ok(ap.composition(rg, rf, rv), 'Ok composition')
+  t.ok(ap.composition(lg, lf, lv), 'Err composition')
 
   t.end()
 })
@@ -1030,51 +1117,97 @@ test('Result chain errors', t => {
 })
 
 test('Result chain properties (Chain)', t => {
-  const Ok = Result.Ok
-  const Err = Result.Err
+  const { Err, Ok } = Result
 
-  t.ok(isFunction(Ok(0).chain), 'Ok provides a chain function')
-  t.ok(isFunction(Ok(0).ap), 'Ok implements the Apply spec')
+  const rf = x => Ok(x + 2)
+  const rg = x => Ok(x + 10)
+  const rv = Ok(6)
 
-  t.ok(isFunction(Err(0).chain), 'Err provides a chain function')
-  t.ok(isFunction(Err(0).ap), 'Err implements the Apply spec')
+  const lf = x => Err(x + 2)
+  const lg = x => Err(x + 10)
+  const lv = Err(6)
 
-  const f = x => Ok(x + 2)
-  const g = x => Ok(x + 10)
+  const chain = laws.Chain(equals, 'chain')
 
-  const a = x => Ok(x).chain(f).chain(g)
-  const b = x => Ok(x).chain(y => f(y).chain(g))
+  t.ok(isFunction(rv.chain), 'Ok provides a chain function')
+  t.ok(isFunction(rv.ap), 'Ok implements the Apply spec')
 
-  t.equal(
-    a(10).either(constant(0), identity),
-    b(10).either(constant(0), identity),
-    'assosiativity Ok'
-  )
+  t.ok(isFunction(lv.chain), 'Err provides a chain function')
+  t.ok(isFunction(lv.ap), 'Err implements the Apply spec')
+
+  t.ok(chain.associativity(rf, rg, rv), 'Ok associativity')
+  t.ok(chain.associativity(lf, lg, lv), 'Err associativity')
+
+  t.end()
+})
+
+test('Result fantasy-land chain properties (Chain)', t => {
+  const { Err, Ok } = Result
+
+  const rf = x => Ok(x + 2)
+  const rg = x => Ok(x + 10)
+  const rv = Ok(6)
+
+  const lf = x => Err(x + 2)
+  const lg = x => Err(x + 10)
+  const lv = Err(6)
+
+  const chain = laws.Chain(equals, fl.chain)
+
+  t.ok(chain.associativity(rf, rg, rv), 'Ok associativity')
+  t.ok(chain.associativity(lf, lg, lv), 'Err associativity')
 
   t.end()
 })
 
 test('Result chain properties (Monad)', t => {
-  const Ok = Result.Ok
+  const { Err, Ok } = Result
 
-  t.ok(isFunction(Ok(0).chain), 'Ok implements the Chain spec')
-  t.ok(isFunction(Ok(0).of), 'Ok implements the Applicative spec')
+  const rf = x => Ok(x + 30)
+  const rv = Ok(20)
 
-  const f = x => Ok(x)
+  const lf = x => Err(x * 30)
+  const lv = Err(20)
 
-  t.equal(
-    Result.of(3).chain(f).either(constant(0), identity),
-    f(3).either(constant(0), identity),
-    'left identity Ok'
-  )
+  const of = laws.Monad(equals, Result, 'of', 'chain')
 
-  const m = x => Ok(x)
+  t.ok(isFunction(rv.chain), 'Ok implements the Chain spec')
+  t.ok(isFunction(rv.constructor.of), 'Ok implements the Applicative spec')
 
-  t.equal(
-    m(3).chain(Result.of).either(constant(0), identity),
-    m(3).either(constant(0), identity),
-    'right identity Ok'
-  )
+  t.ok(isFunction(lv.chain), 'Err implements the Chain spec')
+  t.ok(isFunction(lv.constructor.of), 'Err implements the Applicative spec')
+
+  t.ok(of.leftIdentity(rf, 10), 'Ok left identity')
+  t.ok(of.rightIdentity(rf, 10), 'Ok right identity')
+
+  t.ok(of.leftIdentity(lf, 10), 'Err left identity')
+  t.ok(of.rightIdentity(lf, 10), 'Err right identity')
+
+  t.end()
+})
+
+test('Result fantasy-land chain properties (Monad)', t => {
+  const { Err, Ok } = Result
+
+  const rf = x => Ok(x + 30)
+  const rv = Ok(20)
+
+  const lf = x => Err(x * 30)
+  const lv = Err(20)
+
+  const of = laws.Monad(equals, Result, fl.of, fl.chain)
+
+  t.ok(isFunction(rv[fl.chain]), 'Ok implements the Chain spec')
+  t.ok(isFunction(rv.constructor[fl.of]), 'Ok implements the Applicative spec')
+
+  t.ok(isFunction(lv[fl.chain]), 'Err implements the Chain spec')
+  t.ok(isFunction(lv.constructor[fl.of]), 'Err implements the Applicative spec')
+
+  t.ok(of.leftIdentity(rf, 10), 'Ok left identity')
+  t.ok(of.rightIdentity(rf, 10), 'Ok right identity')
+
+  t.ok(of.leftIdentity(lf, 10), 'Err left identity')
+  t.ok(of.rightIdentity(lf, 10), 'Err right identity')
 
   t.end()
 })

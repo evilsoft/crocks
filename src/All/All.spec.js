@@ -1,9 +1,11 @@
 const test = require('tape')
 const MockCrock = require('../test/MockCrock')
 const helpers = require('../test/helpers')
+const laws = require('../test/laws')
 
 const bindFunc = helpers.bindFunc
 
+const equals = require('../core/equals')
 const isFunction = require('../core/isFunction')
 const isObject = require('../core/isObject')
 const isString = require('../core/isString')
@@ -113,6 +115,57 @@ test('All @@type', t => {
   t.end()
 })
 
+test('All equals properties (Setoid)', t => {
+  const a = All(true)
+  const b = All(true)
+  const c = All(true)
+  const d = All(false)
+
+  const equals = laws.Setoid('equals')
+
+  t.ok(isFunction(a.equals), 'provides an equals function')
+
+  t.ok(equals.reflexivity(a), 'reflexivity')
+  t.ok(equals.symmetry(a, b), 'symmetry (equal)')
+  t.ok(equals.symmetry(a, d), 'symmetry (!equal)')
+  t.ok(equals.transitivity(a, b, c), 'transitivity (equal)')
+  t.ok(equals.transitivity(a, d, c), 'transitivity (!equal)')
+
+  t.end()
+})
+
+test('All fantasy-land equals properties (Setoid)', t => {
+  const a = All(true)
+  const b = All(true)
+  const c = All(true)
+
+  const equals = laws.Setoid(fl.equals)
+
+  t.ok(isFunction(a[fl.equals]), 'provides an equals function')
+
+  t.ok(equals.reflexivity(a), 'reflexivity')
+  t.ok(equals.symmetry(a, b), 'symmetry')
+  t.ok(equals.transitivity(a, b, c), 'transitivity')
+
+  t.end()
+})
+
+test('All equals functionality', t => {
+  const a = All(true)
+  const b = All(true)
+  const c = All(false)
+
+  const value = {}
+  const nonAll = MockCrock(value)
+
+  t.equal(a.equals(c), false, 'returns false when 2 Alls are not equal')
+  t.equal(a.equals(b), true, 'returns true when 2 Alls are equal')
+  t.equal(a.equals(nonAll), false, 'returns false when passed a non-All')
+  t.equal(c.equals(value), false, 'returns false when passed a simple value')
+
+  t.end()
+})
+
 test('All concat functionality', t => {
   const a = All(true)
   const b = All(false)
@@ -168,12 +221,23 @@ test('All concat properties (Semigroup)', t => {
   const b = All(true)
   const c = All('')
 
-  const left = a.concat(b).concat(c)
-  const right = a.concat(b.concat(c))
+  const concat = laws.Semigroup(equals, 'concat')
 
   t.ok(isFunction(a.concat), 'provides a concat function')
-  t.equal(left.valueOf(), right.valueOf(), 'associativity')
-  t.equal(a.concat(b).type(), a.type(), 'returns an All')
+  t.ok(concat.associativity(a, b, c), 'associativity')
+
+  t.end()
+})
+
+test('All fantasy-land concat properties (Semigroup)', t => {
+  const a = All(7)
+  const b = All(true)
+  const c = All(34)
+
+  const concat = laws.Semigroup(equals, fl.concat)
+
+  t.ok(isFunction(a[fl.concat]), 'provides a concat function')
+  t.ok(concat.associativity(a, b, c), 'associativity')
 
   t.end()
 })
@@ -187,48 +251,30 @@ test('All empty functionality', t => {
   t.end()
 })
 
-test('All equals properties (Setoid)', t => {
-  const a = All(true)
-  const b = All(true)
-  const c = All(false)
-  const d = All(true)
-
-  t.ok(isFunction(All(5).equals), 'provides an equals function')
-  t.equal(a.equals(a), true, 'reflexivity')
-  t.equal(a.equals(b), b.equals(a), 'symmetry (equal)')
-  t.equal(a.equals(c), c.equals(a), 'symmetry (!equal)')
-  t.equal(a.equals(b) && b.equals(d), a.equals(d), 'transitivity')
-
-  t.end()
-})
-
-test('All equals functionality', t => {
-  const a = All(true)
-  const b = All(true)
-  const c = All(false)
-
-  const value = {}
-  const nonAll = MockCrock(value)
-
-  t.equal(a.equals(c), false, 'returns false when 2 Alls are not equal')
-  t.equal(a.equals(b), true, 'returns true when 2 Alls are equal')
-  t.equal(a.equals(nonAll), false, 'returns false when passed a non-All')
-  t.equal(c.equals(value), false, 'returns false when passed a simple value')
-
-  t.end()
-})
-
 test('All empty properties (Monoid)', t => {
-  const m = All(3)
+  const m = All(false)
+
+  const empty = laws.Monoid(equals, 'empty', 'concat')
 
   t.ok(isFunction(m.concat), 'provides a concat function')
-  t.ok(isFunction(m.empty), 'provides an empty function')
+  t.ok(isFunction(m.constructor.empty), 'provides an empty function on constructor')
 
-  const right = m.concat(m.empty())
-  const left = m.empty().concat(m)
+  t.ok(empty.leftIdentity(m), 'left identity')
+  t.ok(empty.rightIdentity(m), 'right identity')
 
-  t.equal(right.valueOf(), m.valueOf(), 'right identity')
-  t.equal(left.valueOf(), m.valueOf(), 'left identity')
+  t.end()
+})
+
+test('All fantasy-land empty properties (Monoid)', t => {
+  const m = All(false)
+
+  const empty = laws.Monoid(equals, fl.empty, fl.concat)
+
+  t.ok(isFunction(m[fl.concat]), 'provides a concat function')
+  t.ok(isFunction(m.constructor[fl.empty]), 'provides an empty function on constructor')
+
+  t.ok(empty.leftIdentity(m), 'left identity')
+  t.ok(empty.rightIdentity(m), 'right identity')
 
   t.end()
 })

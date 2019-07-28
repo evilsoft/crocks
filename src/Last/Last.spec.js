@@ -1,10 +1,13 @@
 const test = require('tape')
 const MockCrock = require('../test/MockCrock')
 const helpers = require('../test/helpers')
+const laws = require('../test/laws')
 
 const bindFunc = helpers.bindFunc
 
 const Maybe = require('../core/Maybe')
+
+const equals = require('../core/equals')
 const isFunction = require('../core/isFunction')
 const isObject = require('../core/isObject')
 const isSameType = require('../core/isSameType')
@@ -175,14 +178,35 @@ test('Last concat functionality', t => {
 test('Last equals properties (Setoid)', t => {
   const a = Last(3)
   const b = Last(3)
-  const c = Last(5)
-  const d = Last(3)
+  const c = Last(3)
+  const d = Last(5)
+
+  const equals = laws.Setoid('equals')
 
   t.ok(isFunction(Last({}).equals), 'provides an equals function')
-  t.equal(a.equals(a), true, 'reflexivity')
-  t.equal(a.equals(b), b.equals(a), 'symmetry (equal)')
-  t.equal(a.equals(c), c.equals(a), 'symmetry (!equal)')
-  t.equal(a.equals(b) && b.equals(d), a.equals(d), 'transitivity')
+
+  t.ok(equals.reflexivity(a), 'reflexivity')
+  t.ok(equals.symmetry(a, b), 'symmetry (equal)')
+  t.ok(equals.symmetry(a, d), 'symmetry (!equal)')
+  t.ok(equals.transitivity(a, b, c), 'transitivity (equal)')
+  t.ok(equals.transitivity(a, d, c), 'transitivity (!equal)')
+
+  t.end()
+})
+
+test('Last fantasy-land equals properties (Setoid)', t => {
+  const a = Last(false)
+  const b = Last(false)
+  const c = Last(false)
+  const d = Last(null)
+
+  const equals = laws.Setoid(fl.equals)
+
+  t.ok(equals.reflexivity(a), 'reflexivity')
+  t.ok(equals.symmetry(a, b), 'symmetry (equal)')
+  t.ok(equals.symmetry(a, d), 'symmetry (!equal)')
+  t.ok(equals.transitivity(a, b, c), 'transitivity (equal)')
+  t.ok(equals.transitivity(a, d, c), 'transitivity (!equal)')
 
   t.end()
 })
@@ -208,12 +232,23 @@ test('Last concat properties (Semigroup)', t => {
   const b = Last(1)
   const c = Last('')
 
-  const left = a.concat(b).concat(c)
-  const right = a.concat(b.concat(c))
+  const concat = laws.Semigroup(equals, 'concat')
 
   t.ok(isFunction(a.concat), 'provides a concat function')
-  t.equal(extract(left), extract(right), 'associativity')
-  t.equal(a.concat(b).type(), a.type(), 'returns an Last')
+  t.ok(concat.associativity(a, b, c), 'associativity')
+
+  t.end()
+})
+
+test('Last fantasy-land concat properties (Semigroup)', t => {
+  const a = Last(0)
+  const b = Last(1)
+  const c = Last('')
+
+  const concat = laws.Semigroup(equals, fl.concat)
+
+  t.ok(isFunction(a[fl.concat]), 'provides a concat function')
+  t.ok(concat.associativity(a, b, c), 'associativity')
 
   t.end()
 })
@@ -230,14 +265,27 @@ test('Last empty functionality', t => {
 test('Last empty properties (Monoid)', t => {
   const m = Last(3)
 
+  const empty = laws.Monoid(equals, 'empty', 'concat')
+
   t.ok(isFunction(m.concat), 'provides a concat function')
-  t.ok(isFunction(m.empty), 'provides an empty function')
+  t.ok(isFunction(m.constructor.empty), 'provides an empty function on constructor')
 
-  const right = m.concat(m.empty())
-  const left = m.empty().concat(m)
+  t.ok(empty.leftIdentity(m), 'left identity')
+  t.ok(empty.rightIdentity(m), 'right identity')
 
-  t.equal(extract(right), extract(m), 'right identity')
-  t.equal(extract(left), extract(m), 'left identity')
+  t.end()
+})
+
+test('Last fantasy-land empty properties (Monoid)', t => {
+  const m = Last('nice')
+
+  const empty = laws.Monoid(equals, fl.empty, fl.concat)
+
+  t.ok(isFunction(m[fl.concat]), 'provides a concat function')
+  t.ok(isFunction(m.constructor[fl.empty]), 'provides an empty function on constructor')
+
+  t.ok(empty.leftIdentity(m), 'left identity')
+  t.ok(empty.rightIdentity(m), 'right identity')
 
   t.end()
 })

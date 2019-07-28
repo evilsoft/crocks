@@ -2,13 +2,13 @@ const test = require('tape')
 const sinon = require('sinon')
 const MockCrock = require('../test/MockCrock')
 const helpers = require('../test/helpers')
+const laws = require('../test/laws')
 
 const bindFunc = helpers.bindFunc
 
 const curry = require('../core/curry')
 const compose = curry(require('../core/compose'))
 const equals = require('../core/equals')
-const isArray = require('../core/isArray')
 const isFunction = require('../core/isFunction')
 const isObject = require('../core/isObject')
 const isString = require('../core/isString')
@@ -324,6 +324,93 @@ test('Either bichain functionality', t => {
   t.end()
 })
 
+test('Either equals functionality', t => {
+  const la = Either.Left(0)
+  const lb = Either.Left(0)
+  const lc = Either.Left(1)
+
+  const ra = Either.Right(0)
+  const rb = Either.Right(0)
+  const rc = Either.Right(1)
+
+  const value = 1
+  const nonEither = { type: 'Either...Not' }
+
+  t.equal(la.equals(lc), false, 'returns false when 2 Left Eithers are not equal')
+  t.equal(la.equals(lb), true, 'returns true when 2 Left Eithers are equal')
+  t.equal(lc.equals(value), false, 'returns when Left passed a simple value')
+
+  t.equal(ra.equals(rc), false, 'returns false when 2 Right Eithers are not equal')
+  t.equal(ra.equals(rb), true, 'returns true when 2 Right Eithers are equal')
+  t.equal(rc.equals(value), false, 'returns when Right passed a simple value')
+
+  t.equal(la.equals(nonEither), false, 'returns false when passed a non-Either')
+  t.equal(ra.equals(lb), false, 'returns false when Left compared to Right')
+
+  t.end()
+})
+
+test('Either equals properties (Setoid)', t => {
+  const { Left, Right } = Either
+  const la = Left({ a: 'nice' })
+  const lb = Left({ a: 'nice' })
+  const lc = Left({ a: 'nice' })
+  const ld = Left({ a: 'nice', b: 45 })
+
+  const ra = Right([ 1, 2 ])
+  const rb = Right([ 1, 2 ])
+  const rc = Right([ 1, 2 ])
+  const rd = Right([ 3, 2, 1 ])
+
+  const equals = laws.Setoid('equals')
+
+  t.ok(isFunction(Right(null).equals), 'Right provides an equals function')
+  t.ok(isFunction(Left(null).equals), 'Left provides an equals function')
+
+  t.ok(equals.reflexivity(la), 'Left reflexivity')
+  t.ok(equals.symmetry(la, lb), 'Left symmetry (equal)')
+  t.ok(equals.symmetry(la, ld), 'Left symmetry (!equal)')
+  t.ok(equals.transitivity(la, lb, lc), 'Left transitivity (equal)')
+  t.ok(equals.transitivity(la, ld, lc), 'Left transitivity (!equal)')
+
+  t.ok(equals.reflexivity(ra), 'Right reflexivity')
+  t.ok(equals.symmetry(ra, rb), 'Right symmetry (equal)')
+  t.ok(equals.symmetry(ra, rd), 'Right symmetry (!equal)')
+  t.ok(equals.transitivity(ra, rb, rc), 'Right transitivity (equal)')
+  t.ok(equals.transitivity(ra, rd, rc), 'Right transitivity (!equal)')
+
+  t.end()
+})
+
+test('Either fantasy-land equals properties (Setoid)', t => {
+  const { Left, Right } = Either
+  const la = Left({ a: 'nice' })
+  const lb = Left({ a: 'nice' })
+  const lc = Left({ a: 'nice' })
+  const ld = Left({ a: 'nice', b: 45 })
+
+  const ra = Right([ 1, 2 ])
+  const rb = Right([ 1, 2 ])
+  const rc = Right([ 1, 2 ])
+  const rd = Right([ 3, 2, 1 ])
+
+  const equals = laws.Setoid(fl.equals)
+
+  t.ok(equals.reflexivity(la), 'Left reflexivity')
+  t.ok(equals.symmetry(la, lb), 'Left symmetry (equal)')
+  t.ok(equals.symmetry(la, ld), 'Left symmetry (!equal)')
+  t.ok(equals.transitivity(la, lb, lc), 'Left transitivity (equal)')
+  t.ok(equals.transitivity(la, ld, lc), 'Left transitivity (!equal)')
+
+  t.ok(equals.reflexivity(ra), 'Right reflexivity')
+  t.ok(equals.symmetry(ra, rb), 'Right symmetry (equal)')
+  t.ok(equals.symmetry(ra, rd), 'Right symmetry (!equal)')
+  t.ok(equals.transitivity(ra, rb, rc), 'Right transitivity (equal)')
+  t.ok(equals.transitivity(ra, rd, rc), 'Right transitivity (!equal)')
+
+  t.end()
+})
+
 test('Either concat errors', t => {
   const m = { type: () => 'Either...Not' }
 
@@ -478,72 +565,45 @@ test('Either concat functionality', t => {
 })
 
 test('Either concat properties (Semigroup)', t => {
-  const extract =
-    either(identity, identity)
+  const { Left, Right } = Either
 
-  const a = Either.Right([ 'a' ])
-  const b = Either.Right([ 'b' ])
-  const c = Either.Right([ 'c' ])
+  const la = Left([ 'a' ])
+  const lb = Left([ 'b' ])
+  const lc = Left([ 'c' ])
 
-  const left = a.concat(b).concat(c)
-  const right = a.concat(b.concat(c))
+  const ra = Right([ 'a' ])
+  const rb = Right([ 'b' ])
+  const rc = Right([ 'c' ])
 
-  t.ok(isFunction(a.concat), 'provides a concat function')
+  const concat = laws.Semigroup(equals, 'concat')
 
-  t.same(extract(left), extract(right), 'associativity')
-  t.ok(isArray(extract(a.concat(b))), 'returns an Array')
+  t.ok(isFunction(la.concat), 'Left provides a concat function')
+  t.ok(isFunction(ra.concat), 'Right provides a concat function')
 
-  t.end()
-})
-
-test('Either equals functionality', t => {
-  const la = Either.Left(0)
-  const lb = Either.Left(0)
-  const lc = Either.Left(1)
-
-  const ra = Either.Right(0)
-  const rb = Either.Right(0)
-  const rc = Either.Right(1)
-
-  const value = 1
-  const nonEither = { type: 'Either...Not' }
-
-  t.equal(la.equals(lc), false, 'returns false when 2 Left Eithers are not equal')
-  t.equal(la.equals(lb), true, 'returns true when 2 Left Eithers are equal')
-  t.equal(lc.equals(value), false, 'returns when Left passed a simple value')
-
-  t.equal(ra.equals(rc), false, 'returns false when 2 Right Eithers are not equal')
-  t.equal(ra.equals(rb), true, 'returns true when 2 Right Eithers are equal')
-  t.equal(rc.equals(value), false, 'returns when Right passed a simple value')
-
-  t.equal(la.equals(nonEither), false, 'returns false when passed a non-Either')
-  t.equal(ra.equals(lb), false, 'returns false when Left compared to Right')
+  t.ok(concat.associativity(la, lb, lc), 'Left associativity')
+  t.ok(concat.associativity(ra, rb, rc), 'Right associativity')
 
   t.end()
 })
 
-test('Either equals properties (Setoid)', t => {
-  const la = Either.Left({ a: 'nice' })
-  const lb = Either.Left({ a: 'nice' })
-  const lc = Either.Left({ a: 'nice', b: 45 })
-  const ld = Either.Left({ a: 'nice' })
+test('Either fantasy-land concat properties (Semigroup)', t => {
+  const { Left, Right } = Either
 
-  const ra = Either.Right([ 1, 2 ])
-  const rb = Either.Right([ 1, 2 ])
-  const rc = Either.Right([ 3, 2, 1 ])
-  const rd = Either.Right([ 1, 2 ])
+  const la = Left([ 'a' ])
+  const lb = Left([ 'b' ])
+  const lc = Left([ 'c' ])
 
-  t.ok(isFunction(Either(null).equals), 'provides an equals function')
+  const ra = Right([ 'a' ])
+  const rb = Right([ 'b' ])
+  const rc = Right([ 'c' ])
 
-  t.equal(la.equals(la), true, 'Left reflexivity')
-  t.equal(la.equals(lb), lb.equals(la), 'Left symmetry (equal)')
-  t.equal(la.equals(lc), lc.equals(la), 'Left symmetry (!equal)')
-  t.equal(la.equals(lb) && lb.equals(ld), la.equals(ld), 'Left transitivity')
+  const concat = laws.Semigroup(equals, fl.concat)
 
-  t.equal(ra.equals(ra), true, 'Right reflexivity')
-  t.equal(ra.equals(rb), rb.equals(ra), 'Right symmetry (equal)')
-  t.equal(ra.equals(rc), rc.equals(ra), 'Right symmetry (!equal)')
-  t.equal(ra.equals(rb) && rb.equals(rd), ra.equals(rd), 'Right transitivity')
+  t.ok(isFunction(la[fl.concat]), 'Left provides a concat function')
+  t.ok(isFunction(ra[fl.concat]), 'Right provides a concat function')
+
+  t.ok(concat.associativity(la, lb, lc), 'Left associativity')
+  t.ok(concat.associativity(ra, rb, rc), 'Right associativity')
 
   t.end()
 })
@@ -641,23 +701,37 @@ test('Either map properties (Functor)', t => {
   const Right = Either.Right
   const Left = Either.Left
 
+  const map = laws.Functor(equals, 'map')
+
   t.ok(isFunction(Left(0).map), 'left provides a map function')
   t.ok(isFunction(Right(0).map), 'right provides a map function')
 
-  t.equal(Right(30).map(identity).either(constant(0), identity), 30, 'Right identity')
+  t.ok(map.identity(Right(30)), 'Right identity')
+  t.ok(map.composition(f, g, Right(19)), 'Right composition')
 
-  t.equal(
-    Right(10).map(compose(f, g)).either(constant(0), identity),
-    Right(10).map(g).map(f).either(constant(0), identity),
-    'Right composition'
-  )
+  t.ok(map.identity(Left(45)), 'Left identity')
+  t.ok(map.composition(f, g, Left(54)), 'Left composition')
 
-  t.equal(Left(45).map(identity).either(identity, constant(0)), 45, 'Left identity')
-  t.equal(
-    Left(10).map(compose(f, g)).either(identity, constant(0)),
-    Left(10).map(g).map(f).either(identity, constant(0)),
-    'Left composition'
-  )
+  t.end()
+})
+
+test('Either fantasy-land map properties (Functor)', t => {
+  const f = x => x + 2
+  const g = x => x * 2
+
+  const Right = Either.Right
+  const Left = Either.Left
+
+  const map = laws.Functor(equals, fl.map)
+
+  t.ok(isFunction(Left(0)[fl.map]), 'left provides a map function')
+  t.ok(isFunction(Right(0)[fl.map]), 'right provides a map function')
+
+  t.ok(map.identity(Right(30)), 'Right identity')
+  t.ok(map.composition(f, g, Right(19)), 'Right composition')
+
+  t.ok(map.identity(Left(45)), 'Left identity')
+  t.ok(map.composition(f, g, Left(54)), 'Left composition')
 
   t.end()
 })
@@ -891,20 +965,26 @@ test('Either ap errors', t => {
 })
 
 test('Either ap properties (Apply)', t => {
-  const Right = Either.Right
-  const m = Right(identity)
+  const { Left, Right } = Either
 
-  const a = m.map(compose).ap(m).ap(m)
-  const b = m.ap(m.ap(m))
+  const rf = Right(x => x + 22)
+  const rg = Right(x => x / 2)
+  const rv = Right(10)
 
-  t.ok(isFunction(m.ap), 'provides an ap function')
-  t.ok(isFunction(m.map), 'implements the Functor spec')
+  const lf = Left(x => x * 11)
+  const lg = Left(x => x % 7)
+  const lv = Left(303)
 
-  t.equal(
-    a.ap(Right(3)).either(constant(0), identity),
-    b.ap(Right(3)).either(constant(0), identity),
-    'composition Right'
-  )
+  const ap = laws.Apply(equals, 'ap', 'map')
+
+  t.ok(isFunction(rv.ap), 'Right provides an ap function')
+  t.ok(isFunction(rv.map), 'Right implements the Functor spec')
+
+  t.ok(isFunction(lv.ap), 'Left provides an ap function')
+  t.ok(isFunction(lv.map), 'Left implements the Functor spec')
+
+  t.ok(ap.composition(rg, rf, rv), 'Right composition')
+  t.ok(ap.composition(lg, lf, lv), 'Left composition')
 
   t.end()
 })
@@ -1024,51 +1104,97 @@ test('Either chain fantasy-land errors', t => {
 })
 
 test('Either chain properties (Chain)', t => {
-  const Right = Either.Right
-  const Left = Either.Left
+  const { Left, Right } = Either
 
-  t.ok(isFunction(Right(0).chain), 'Right provides a chain function')
-  t.ok(isFunction(Right(0).ap), 'Right implements the Apply spec')
+  const rf = x => Right(x * 2)
+  const rg = x => Right(x + 10)
+  const rv = Right(5)
 
-  t.ok(isFunction(Left(0).chain), 'Left provides a chain function')
-  t.ok(isFunction(Left(0).ap), 'Left implements the Apply spec')
+  const lf = x => Left(x * 2)
+  const lg = x => Left(x + 10)
+  const lv = Left(5)
 
-  const f = x => Right(x + 2)
-  const g = x => Right(x + 10)
+  const chain = laws.Chain(equals, 'chain')
 
-  const a = x => Right(x).chain(f).chain(g)
-  const b = x => Right(x).chain(y => f(y).chain(g))
+  t.ok(isFunction(rv.chain), 'Right provides a chain function')
+  t.ok(isFunction(rv.ap), 'Right implements the Apply spec')
 
-  t.equal(
-    a(10).either(constant(0), identity),
-    b(10).either(constant(0), identity),
-    'assosiativity Right'
-  )
+  t.ok(isFunction(lv.chain), 'Left provides a chain function')
+  t.ok(isFunction(lv.ap), 'Left implements the Apply spec')
+
+  t.ok(chain.associativity(lf, lg, lv), 'Left associativity')
+  t.ok(chain.associativity(rf, rg, rv), 'Right associativity')
+
+  t.end()
+})
+
+test('Either fantasy-land chain properties (Chain)', t => {
+  const { Left, Right } = Either
+
+  const rf = x => Right(x * 2)
+  const rg = x => Right(x + 10)
+  const rv = Right(5)
+
+  const lf = x => Left(x * 2)
+  const lg = x => Left(x + 10)
+  const lv = Left(5)
+
+  const chain = laws.Chain(equals, fl.chain)
+
+  t.ok(chain.associativity(lf, lg, lv), 'Left associativity')
+  t.ok(chain.associativity(rf, rg, rv), 'Right associativity')
 
   t.end()
 })
 
 test('Either chain properties (Monad)', t => {
-  const Right = Either.Right
+  const { Left, Right } = Either
 
-  t.ok(isFunction(Right(0).chain), 'Right implements the Chain spec')
-  t.ok(isFunction(Right(0).of), 'Right implements the Applicative spec')
+  const rf = x => Right(x * 2)
+  const rv = Right(10)
 
-  const f = x => Right(x)
+  const lf = x => Left(x * 2)
+  const lv = Left(10)
 
-  t.equal(
-    Either.of(3).chain(f).either(constant(0), identity),
-    f(3).either(constant(0), identity),
-    'left identity Right'
-  )
+  const of = laws.Monad(equals, Either, 'of', 'chain')
 
-  const m = x => Right(x)
+  t.ok(isFunction(rv.chain), 'Right implements the Chain spec')
+  t.ok(isFunction(rv.constructor.of), 'Right implements the Applicative spec')
 
-  t.equal(
-    m(3).chain(Either.of).either(constant(0), identity),
-    m(3).either(constant(0), identity),
-    'right identity Right'
-  )
+  t.ok(isFunction(lv.chain), 'Left implements the Chain spec')
+  t.ok(isFunction(lv.constructor.of), 'Left implements the Applicative spec')
+
+  t.ok(of.leftIdentity(rf, 10), 'Right left identity')
+  t.ok(of.rightIdentity(rf, 10), 'Right right identity')
+
+  t.ok(of.leftIdentity(lf, 10), 'Left left identity')
+  t.ok(of.rightIdentity(lf, 10), 'Left right identity')
+
+  t.end()
+})
+
+test('Either fantasy-land chain properties (Monad)', t => {
+  const { Left, Right } = Either
+
+  const rf = x => Right(x * 2)
+  const rv = Right(10)
+
+  const lf = x => Left(x * 2)
+  const lv = Left(10)
+
+  const of = laws.Monad(equals, Either, fl.of, fl.chain)
+
+  t.ok(isFunction(rv[fl.chain]), 'Right implements the Chain spec')
+  t.ok(isFunction(rv.constructor[fl.of]), 'Right implements the Applicative spec')
+
+  t.ok(isFunction(lv[fl.chain]), 'Left implements the Chain spec')
+  t.ok(isFunction(lv.constructor[fl.of]), 'Left implements the Applicative spec')
+
+  t.ok(of.leftIdentity(rf, 10), 'Right left identity')
+  t.ok(of.rightIdentity(rf, 10), 'Right right identity')
+
+  t.ok(of.leftIdentity(lf, 10), 'Left left identity')
+  t.ok(of.rightIdentity(lf, 10), 'Left right identity')
 
   t.end()
 })

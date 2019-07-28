@@ -1,9 +1,11 @@
 const test = require('tape')
 const MockCrock = require('../test/MockCrock')
 const helpers = require('../test/helpers')
+const laws = require('../test/laws')
 
 const bindFunc = helpers.bindFunc
 
+const equals = require('../core/equals')
 const isFunction = require('../core/isFunction')
 const isObject = require('../core/isObject')
 const isString  = require('../core/isString')
@@ -113,14 +115,35 @@ test('Sum @@type', t => {
 test('Sum equals properties (Setoid)', t => {
   const a = Sum(4)
   const b = Sum(4)
-  const c = Sum(3)
-  const d = Sum(4)
+  const c = Sum(4)
+  const d = Sum(3)
+
+  const equals = laws.Setoid('equals')
 
   t.ok(isFunction(Sum(4).equals), 'provides an equals function')
-  t.equal(a.equals(a), true, 'reflexivity')
-  t.equal(a.equals(b), b.equals(a), 'symmetry (equal)')
-  t.equal(a.equals(c), c.equals(a), 'symmetry (!equal)')
-  t.equal(a.equals(b) && b.equals(d), a.equals(d), 'transitivity')
+
+  t.ok(equals.reflexivity(a), 'reflexivity')
+  t.ok(equals.symmetry(a, b), 'symmetry (equal)')
+  t.ok(equals.symmetry(a, d), 'symmetry (!equal)')
+  t.ok(equals.transitivity(a, b, c), 'transitivity (equal)')
+  t.ok(equals.transitivity(a, d, c), 'transitivity (!equal)')
+
+  t.end()
+})
+
+test('Sum fantasy-land equals properties (Setoid)', t => {
+  const a = Sum(78)
+  const b = Sum(78)
+  const c = Sum(78)
+  const d = Sum(1)
+
+  const equals = laws.Setoid(fl.equals)
+
+  t.ok(equals.reflexivity(a), 'reflexivity')
+  t.ok(equals.symmetry(a, b), 'symmetry (equal)')
+  t.ok(equals.symmetry(a, d), 'symmetry (!equal)')
+  t.ok(equals.transitivity(a, b, c), 'transitivity (equal)')
+  t.ok(equals.transitivity(a, d, c), 'transitivity (!equal)')
 
   t.end()
 })
@@ -146,13 +169,23 @@ test('Sum concat properties (Semigroup)', t => {
   const b = Sum(20)
   const c = Sum(35)
 
-  const left = a.concat(b).concat(c)
-  const right = a.concat(b.concat(c))
+  const concat = laws.Semigroup(equals, 'concat')
 
-  t.ok(isFunction(Sum(0).concat), 'is a function')
+  t.ok(isFunction(a.concat), 'provides a concat function')
+  t.ok(concat.associativity(a, b, c), 'associativity')
 
-  t.equal(left.valueOf(), right.valueOf(), 'associativity')
-  t.equal(a.concat(b).type(), a.type(), 'returns Semigroup of the same type')
+  t.end()
+})
+
+test('Sum fantasy-land concat properties (Semigroup)', t => {
+  const a = Sum(45)
+  const b = Sum(20)
+  const c = Sum(35)
+
+  const concat = laws.Semigroup(equals, fl.concat)
+
+  t.ok(isFunction(a[fl.concat]), 'provides a concat function')
+  t.ok(concat.associativity(a, b, c), 'associativity')
 
   t.end()
 })
@@ -216,16 +249,27 @@ test('Sum concat functionality', t => {
 test('Sum empty properties (Monoid)', t => {
   const m = Sum(32)
 
+  const empty = laws.Monoid(equals, 'empty', 'concat')
+
   t.ok(isFunction(m.concat), 'provides a concat function')
-  t.ok(isFunction(m.empty), 'provides a empty function')
+  t.ok(isFunction(m.constructor.empty), 'provides an empty function on constructor')
 
-  const right = m.concat(m.empty())
-  const left = m.empty().concat(m)
+  t.ok(empty.leftIdentity(m), 'left identity')
+  t.ok(empty.rightIdentity(m), 'right identity')
 
-  t.equal(right.valueOf(), m.valueOf(), 'right identity')
-  t.equal(left.valueOf(), m.valueOf(), 'left identity')
+  t.end()
+})
 
-  t.equal(m.empty().type(), m.type(), 'returns a Monoid of the same type')
+test('Sum fantasy-land empty properties (Monoid)', t => {
+  const m = Sum(32)
+
+  const empty = laws.Monoid(equals, fl.empty, fl.concat)
+
+  t.ok(isFunction(m[fl.concat]), 'provides a concat function')
+  t.ok(isFunction(m.constructor[fl.empty]), 'provides an empty function on constructor')
+
+  t.ok(empty.leftIdentity(m), 'left identity')
+  t.ok(empty.rightIdentity(m), 'right identity')
 
   t.end()
 })

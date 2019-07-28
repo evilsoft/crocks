@@ -1,14 +1,18 @@
 const test = require('tape')
 const sinon = require('sinon')
-const fl = require('../core/flNames')
+
 const helpers = require('../test/helpers')
+const laws = require('../test/laws')
+
 const bindFunc = helpers.bindFunc
-const curry = require('../core/curry')
-const compose = curry(require('../core/compose'))
+
+const equals = require('../core/equals')
 const isFunction = require('./../core/isFunction')
-const unit = require('./../core/_unit')
 const isObject = require('./../core/isObject')
 const isString = require('./../core/isString')
+const unit = require('./../core/_unit')
+
+const fl = require('../core/flNames')
 
 const Tuple = require('./index')
 
@@ -149,98 +153,6 @@ test('Tuple @@type', t => {
   t.end()
 })
 
-test('Tuple project', t => {
-  const tuple = Tuple(11)(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-
-  t.ok(isFunction(tuple.project), 'is a function')
-
-  const project = bindFunc(tuple.project)
-  const err = /11-Tuple.project: Index should be an integer between 1 and 11/
-
-  t.throws(project(0), err, 'throws with index less than 1')
-  t.throws(project(12), err, 'throws with index more than tuple length')
-
-  t.same(tuple.project(1), 0, 'provides the first value')
-  t.same(tuple.project(2), 0, 'provides the second value')
-  t.same(tuple.project(3), 0, 'provides the third value')
-  t.same(tuple.project(4), 0, 'provides the fourth value')
-  t.same(tuple.project(5), 0, 'provides the fifth value')
-  t.same(tuple.project(6), 0, 'provides the sixth value')
-  t.same(tuple.project(7), 0, 'provides the seventh value')
-  t.same(tuple.project(8), 0, 'provides the eight value')
-  t.same(tuple.project(9), 0, 'provides the ninth value')
-  t.same(tuple.project(10), 0, 'provides the tenth value')
-  t.same(tuple.project(11), 0, 'provides the eleventh value')
-
-  t.end()
-})
-
-test('Tuple map errors', t => {
-  const map = bindFunc(Tuple(4)('zalgo', 'will', 'be', 'back').map)
-  const err = /Tuple.map: Function required/
-
-  t.throws(map(undefined), err, 'throws with undefined')
-  t.throws(map(null), err, 'throws with null')
-  t.throws(map(0), err, 'throws with falsey number')
-  t.throws(map(1), err, 'throws with truthy number')
-  t.throws(map(''), err, 'throws with falsey string')
-  t.throws(map('string'), err, 'throws with truthy string')
-  t.throws(map(false), err, 'throws with false')
-  t.throws(map(true), err, 'throws with true')
-  t.throws(map([]), err, 'throws with an array')
-  t.throws(map({}), err, 'throws with object')
-
-  t.doesNotThrow(map(unit), 'allows a function')
-
-  t.end()
-})
-
-test('Tuple map fantasy-land errors', t => {
-  const map = bindFunc(Tuple(4)('zalgo', 'will', 'be', 'back')[fl.map])
-
-  const err = /Tuple.fantasy-land\/map: Function required/
-  t.throws(map(undefined), err, 'throws with undefined')
-  t.throws(map(null), err, 'throws with null')
-  t.throws(map(0), err, 'throws with falsey number')
-  t.throws(map(1), err, 'throws with truthy number')
-  t.throws(map(''), err, 'throws with falsey string')
-  t.throws(map('string'), err, 'throws with truthy string')
-  t.throws(map(false), err, 'throws with false')
-  t.throws(map(true), err, 'throws with true')
-  t.throws(map([]), err, 'throws with an array')
-  t.throws(map({}), err, 'throws with object')
-
-  t.doesNotThrow(map(unit), 'allows a function')
-
-  t.end()
-})
-
-test('Tuple map functionality', t => {
-  const m = Tuple(3)(5, 45, 50)
-  const n = m.map(x => x + 5)
-
-  t.equal(m.map(identity).type(), m.type(), 'returns a Tuple')
-  t.equal(n.project(1), 5, 'Does not modify first value')
-  t.equal(n.project(2), 45, 'Does not modify second value')
-  t.equal(n.project(3), 55, 'applies function to third value')
-
-  t.end()
-})
-
-test('Tuple map properties (Functor)', t => {
-  const m = Tuple(1)(50)
-
-  const f = x => x + 54
-  const g = x => x * 4
-
-  t.ok(isFunction(m.map), 'provides a map function')
-
-  t.equal(m.map(identity).project(1), m.project(1), 'identity')
-  t.equal(m.map(compose(f, g)).project(1), m.map(g).map(f).project(1), 'composition')
-
-  t.end()
-})
-
 test('Tuple mapAll errors', t => {
   const m = Tuple(3)(5, 45, 50)
 
@@ -282,6 +194,132 @@ test('Tuple toArray', t => {
     [ 34, 'string', 'bing' ],
     'returns an array with the Tuple\'s values'
   )
+
+  t.end()
+})
+
+test('Tuple project', t => {
+  const tuple = Tuple(11)(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+
+  t.ok(isFunction(tuple.project), 'is a function')
+
+  const project = bindFunc(tuple.project)
+  const err = /11-Tuple.project: Index should be an integer between 1 and 11/
+
+  t.throws(project(0), err, 'throws with index less than 1')
+  t.throws(project(12), err, 'throws with index more than tuple length')
+
+  t.same(tuple.project(1), 0, 'provides the first value')
+  t.same(tuple.project(2), 0, 'provides the second value')
+  t.same(tuple.project(3), 0, 'provides the third value')
+  t.same(tuple.project(4), 0, 'provides the fourth value')
+  t.same(tuple.project(5), 0, 'provides the fifth value')
+  t.same(tuple.project(6), 0, 'provides the sixth value')
+  t.same(tuple.project(7), 0, 'provides the seventh value')
+  t.same(tuple.project(8), 0, 'provides the eight value')
+  t.same(tuple.project(9), 0, 'provides the ninth value')
+  t.same(tuple.project(10), 0, 'provides the tenth value')
+  t.same(tuple.project(11), 0, 'provides the eleventh value')
+
+  t.end()
+})
+
+test('Tuple length functionality', t => {
+  const a = Tuple(2)({ deep: 'equals' }, [ 1 ])
+  const b = Tuple(3)({ deep: 'equals' }, [ 1 ], 8)
+  const c = Tuple(4)(1, 'space kitten', 'rainbow', 'unicorn')
+  const d = Tuple(2)
+  const e = Tuple(3)
+  const f = Tuple(4)
+
+  t.equal(a.tupleLength(), 2, 'returns tuple length when length is 2')
+  t.equal(b.tupleLength(), 3, 'returns tuple length when length is 3')
+  t.equal(c.tupleLength(), 4, 'returns tuple length when length is 4')
+  t.equal(d.tupleLength(), 2, 'returns tuple length when length is 2 and Tuple contains no data')
+  t.equal(e.tupleLength(), 3, 'returns tuple length when length is 3 and Tuple contains no data')
+  t.equal(f.tupleLength(), 4, 'returns tuple length when length is 4 and Tuple contains no data')
+
+  t.end()
+})
+
+test('Tuple merge', t => {
+  const m = Tuple(3)(1, 2, 3)
+  t.ok(isFunction(m.merge), 'provides a merge function')
+
+  const merge = bindFunc(m.merge)
+  const err = /3-Tuple.merge: Function required/
+  t.throws(merge(undefined), err, 'throws with undefined')
+  t.throws(merge(null), err, 'throws with null')
+  t.throws(merge(0), err, 'throws with falsey number')
+  t.throws(merge(1), err, 'throws with truthy number')
+  t.throws(merge(''), err, 'throws with falsey string')
+  t.throws(merge('string'), err, 'throws with truthy string')
+  t.throws(merge(false), err, 'throws with false')
+  t.throws(merge(true), err, 'throws with true')
+  t.throws(merge([]), err, 'throws with an array')
+  t.throws(merge({}), err, 'throws with object')
+
+  t.doesNotThrow(merge(unit), 'allows a function')
+
+  const fn = sinon.spy((x, y, z) => x + y + z)
+  const res = m.merge(fn)
+
+  t.ok(fn.returned(res), 'provides the result of the passed in function')
+  t.ok(fn.calledWith(1, 2, 3), 'passes correct values to the function')
+
+  t.end()
+})
+
+test('Tuple equals functionality', t => {
+  const a = Tuple(2)({ deep: 'equals' }, [ 1 ])
+  const b = Tuple(2)({ deep: 'equals' }, [ 1 ])
+  const c = Tuple(2)(1, 'space kitten')
+
+  const value = 'yep'
+  const nonTuple = { type: 'Tuple...Not' }
+
+  t.equal(a.equals(c), false, 'returns false when 2 Tuple are not equal')
+  t.equal(a.equals(b), true, 'returns true when 2 Tuple are equal')
+  t.equal(a.equals(value), false, 'returns false when passed a simple value')
+  t.equal(a.equals(nonTuple), false, 'returns false when passed a non-Tuple')
+
+  t.end()
+})
+
+test('Tuple equals properties (Setoid)', t => {
+  const a = Tuple(2)(0, 'like')
+  const b = Tuple(2)(0, 'like')
+  const c = Tuple(2)(1, 'rainbow')
+  const d = Tuple(2)(0, 'dislike')
+
+  const equals = laws.Setoid('equals')
+
+  t.ok(isFunction(a.equals), 'provides an equals function')
+
+  t.ok(equals.reflexivity(a), 'reflexivity')
+  t.ok(equals.symmetry(a, b), 'symmetry (equal)')
+  t.ok(equals.symmetry(a, d), 'symmetry (!equal)')
+  t.ok(equals.transitivity(a, b, c), 'transitivity (equal)')
+  t.ok(equals.transitivity(a, d, c), 'transitivity (!equal)')
+
+  t.end()
+})
+
+test('Tuple fantasy-land equals properties (Setoid)', t => {
+  const a = Tuple(2)(0, 'like')
+  const b = Tuple(2)(0, 'like')
+  const c = Tuple(2)(1, 'rainbow')
+  const d = Tuple(2)(0, 'dislike')
+
+  const equals = laws.Setoid(fl.equals)
+
+  t.ok(isFunction(a.equals), 'provides an equals function')
+
+  t.ok(equals.reflexivity(a), 'reflexivity')
+  t.ok(equals.symmetry(a, b), 'symmetry (equal)')
+  t.ok(equals.symmetry(a, d), 'symmetry (!equal)')
+  t.ok(equals.transitivity(a, b, c), 'transitivity (equal)')
+  t.ok(equals.transitivity(a, d, c), 'transitivity (!equal)')
 
   t.end()
 })
@@ -365,89 +403,107 @@ test('Tuple concat properties (Semigroup)', t => {
   const b = Tuple(2)([ 2 ], '2')
   const c = Tuple(2)([ 3 ], '3')
 
-  const left = a.concat(b).concat(c)
-  const right = a.concat(b.concat(c))
+  const concat = laws.Semigroup(equals, 'concat')
 
-  t.ok(isFunction(Tuple(2)(0, 0).concat), 'is a function')
-  t.same(left.toArray(), right.toArray(), 'associativity')
-  t.equal(a.concat(b).type(), a.type(), 'returns Semigroup of the same type')
-  t.end()
-})
-
-test('Tuple equals functionality', t => {
-  const a = Tuple(2)({ deep: 'equals' }, [ 1 ])
-  const b = Tuple(2)({ deep: 'equals' }, [ 1 ])
-  const c = Tuple(2)(1, 'space kitten')
-
-  const value = 'yep'
-  const nonTuple = { type: 'Tuple...Not' }
-
-  t.equal(a.equals(c), false, 'returns false when 2 Tuple are not equal')
-  t.equal(a.equals(b), true, 'returns true when 2 Tuple are equal')
-  t.equal(a.equals(value), false, 'returns false when passed a simple value')
-  t.equal(a.equals(nonTuple), false, 'returns false when passed a non-Tuple')
+  t.ok(isFunction(a.concat), 'provides a concat function')
+  t.ok(concat.associativity(a, b, c), 'associativity')
 
   t.end()
 })
 
-test('Tuple equals properties (Setoid)', t => {
-  const a = Tuple(2)(0, 'like')
-  const b = Tuple(2)(0, 'like')
-  const c = Tuple(2)(1, 'rainbow')
-  const d = Tuple(2)(0, 'dislike')
+test('Tuple fantasy-land concat properties (Semigroup)', t => {
+  const a = Tuple(2)([ 1 ], '1')
+  const b = Tuple(2)([ 2 ], '2')
+  const c = Tuple(2)([ 3 ], '3')
 
-  t.ok(isFunction(Tuple(2)(0, 0).equals), 'provides an equals function')
+  const concat = laws.Semigroup(equals, fl.concat)
 
-  t.equal(a.equals(a), true, 'reflexivity')
-  t.equal(a.equals(b), b.equals(a), 'symmetry (equal)')
-  t.equal(a.equals(c), c.equals(a), 'symmetry (!equal)')
-  t.equal(a.equals(b) && b.equals(d), a.equals(d), 'transitivity')
+  t.ok(isFunction(a[fl.concat]), 'provides a concat function')
+  t.ok(concat.associativity(a, b, c), 'associativity')
 
   t.end()
 })
 
-test('Tuple length functionality', t => {
-  const a = Tuple(2)({ deep: 'equals' }, [ 1 ])
-  const b = Tuple(3)({ deep: 'equals' }, [ 1 ], 8)
-  const c = Tuple(4)(1, 'space kitten', 'rainbow', 'unicorn')
-  const d = Tuple(2)
-  const e = Tuple(3)
-  const f = Tuple(4)
+test('Tuple map errors', t => {
+  const map = bindFunc(Tuple(4)('zalgo', 'will', 'be', 'back').map)
+  const err = /Tuple.map: Function required/
 
-  t.equal(a.tupleLength(), 2, 'returns tuple length when length is 2')
-  t.equal(b.tupleLength(), 3, 'returns tuple length when length is 3')
-  t.equal(c.tupleLength(), 4, 'returns tuple length when length is 4')
-  t.equal(d.tupleLength(), 2, 'returns tuple length when length is 2 and Tuple contains no data')
-  t.equal(e.tupleLength(), 3, 'returns tuple length when length is 3 and Tuple contains no data')
-  t.equal(f.tupleLength(), 4, 'returns tuple length when length is 4 and Tuple contains no data')
+  t.throws(map(undefined), err, 'throws with undefined')
+  t.throws(map(null), err, 'throws with null')
+  t.throws(map(0), err, 'throws with falsey number')
+  t.throws(map(1), err, 'throws with truthy number')
+  t.throws(map(''), err, 'throws with falsey string')
+  t.throws(map('string'), err, 'throws with truthy string')
+  t.throws(map(false), err, 'throws with false')
+  t.throws(map(true), err, 'throws with true')
+  t.throws(map([]), err, 'throws with an array')
+  t.throws(map({}), err, 'throws with object')
+
+  t.doesNotThrow(map(unit), 'allows a function')
 
   t.end()
 })
 
-test('Tuple merge', t => {
-  const m = Tuple(3)(1, 2, 3)
-  t.ok(isFunction(m.merge), 'provides a merge function')
+test('Tuple map fantasy-land errors', t => {
+  const map = bindFunc(Tuple(4)('zalgo', 'will', 'be', 'back')[fl.map])
 
-  const merge = bindFunc(m.merge)
-  const err = /3-Tuple.merge: Function required/
-  t.throws(merge(undefined), err, 'throws with undefined')
-  t.throws(merge(null), err, 'throws with null')
-  t.throws(merge(0), err, 'throws with falsey number')
-  t.throws(merge(1), err, 'throws with truthy number')
-  t.throws(merge(''), err, 'throws with falsey string')
-  t.throws(merge('string'), err, 'throws with truthy string')
-  t.throws(merge(false), err, 'throws with false')
-  t.throws(merge(true), err, 'throws with true')
-  t.throws(merge([]), err, 'throws with an array')
-  t.throws(merge({}), err, 'throws with object')
+  const err = /Tuple.fantasy-land\/map: Function required/
+  t.throws(map(undefined), err, 'throws with undefined')
+  t.throws(map(null), err, 'throws with null')
+  t.throws(map(0), err, 'throws with falsey number')
+  t.throws(map(1), err, 'throws with truthy number')
+  t.throws(map(''), err, 'throws with falsey string')
+  t.throws(map('string'), err, 'throws with truthy string')
+  t.throws(map(false), err, 'throws with false')
+  t.throws(map(true), err, 'throws with true')
+  t.throws(map([]), err, 'throws with an array')
+  t.throws(map({}), err, 'throws with object')
 
-  t.doesNotThrow(merge(unit), 'allows a function')
+  t.doesNotThrow(map(unit), 'allows a function')
 
-  const fn = sinon.spy((x, y, z) => x + y + z)
-  const res = m.merge(fn)
+  t.end()
+})
 
-  t.ok(fn.returned(res), 'provides the result of the passed in function')
-  t.ok(fn.calledWith(1, 2, 3), 'passes correct values to the function')
+test('Tuple map functionality', t => {
+  const m = Tuple(3)(5, 45, 50)
+  const n = m.map(x => x + 5)
+
+  t.equal(m.map(identity).type(), m.type(), 'returns a Tuple')
+  t.equal(n.project(1), 5, 'Does not modify first value')
+  t.equal(n.project(2), 45, 'Does not modify second value')
+  t.equal(n.project(3), 55, 'applies function to third value')
+
+  t.end()
+})
+
+test('Tuple map properties (Functor)', t => {
+  const m = Tuple(1)(50)
+
+  const f = x => x + 54
+  const g = x => x * 4
+
+  const map = laws.Functor(equals, 'map')
+
+  t.ok(isFunction(m.map), 'provides a map function')
+
+  t.ok(map.identity(m), 'identity')
+  t.ok(map.composition(f, g, m), 'composition')
+
+  t.end()
+})
+
+test('Tuple fantasy-land map properties (Functor)', t => {
+  const m = Tuple(2)(33, 66)
+
+  const f = x => x + 54
+  const g = x => x * 4
+
+  const map = laws.Functor(equals, fl.map)
+
+  t.ok(isFunction(m[fl.map]), 'provides a map function')
+
+  t.ok(map.identity(m), 'identity')
+  t.ok(map.composition(f, g, m), 'composition')
 
   t.end()
 })

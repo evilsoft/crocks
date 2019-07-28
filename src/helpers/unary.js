@@ -2,6 +2,7 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 const isFunction = require('../core/isFunction')
+const nAry = require('./nAry')
 
 // unary : (* -> b) -> a -> b
 function unary(fn) {
@@ -9,9 +10,7 @@ function unary(fn) {
     throw new TypeError('unary: Function required')
   }
 
-  return function(x) {
-    return fn(x)
-  }
+  return nAry(1, fn)
 }
 
 module.exports = unary

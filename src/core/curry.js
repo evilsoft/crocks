@@ -5,12 +5,15 @@ const isFunction = require('./isFunction')
 
 function applyCurry(fn, arg) {
   if(!isFunction(fn)) { return fn }
+
   return fn.length > 1 ? fn.bind(null, arg) : fn.call(null, arg)
 }
 
 // curry : ((a, b, c) -> d) -> a -> b -> c -> d
 function curry(fn) {
-  return function(...xs) {
+  if(fn.isCurried) { return fn }
+
+  const curried = function(...xs) {
     const args =
       xs.length ? xs : [ undefined ]
 
@@ -28,6 +31,14 @@ function curry(fn) {
 
     return val
   }
+
+  Object.defineProperty(curried, 'isCurried', {
+    enumerable: false,
+    writable: false,
+    value: true
+  })
+
+  return curried
 }
 
 module.exports = curry

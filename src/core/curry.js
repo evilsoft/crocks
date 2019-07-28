@@ -11,9 +11,9 @@ function applyCurry(fn, arg) {
 
 // curry : ((a, b, c) -> d) -> a -> b -> c -> d
 function curry(fn) {
-  if(fn.isCurried) { return fn }
+  if(fn['@@crocks/curried']) { return fn }
 
-  const curried = function(...xs) {
+  function curried(...xs) {
     const args =
       xs.length ? xs : [ undefined ]
 
@@ -32,7 +32,7 @@ function curry(fn) {
     return val
   }
 
-  Object.defineProperty(curried, 'isCurried', {
+  Object.defineProperty(curried, '@@crocks/curried', {
     enumerable: false,
     writable: false,
     value: true

@@ -3,6 +3,9 @@
 
 const isFunction = require('./isFunction')
 
+const CURRY_SYMB =
+  '@@crocks/curried'
+
 function applyCurry(fn, arg) {
   if(!isFunction(fn)) { return fn }
 
@@ -11,7 +14,9 @@ function applyCurry(fn, arg) {
 
 // curry : ((a, b, c) -> d) -> a -> b -> c -> d
 function curry(fn) {
-  if(fn['@@crocks/curried']) { return fn }
+  if(fn[CURRY_SYMB]) {
+    return fn
+  }
 
   function curried(...xs) {
     const args =
@@ -32,7 +37,7 @@ function curry(fn) {
     return val
   }
 
-  Object.defineProperty(curried, '@@crocks/curried', {
+  Object.defineProperty(curried, CURRY_SYMB, {
     enumerable: false,
     writable: false,
     value: true

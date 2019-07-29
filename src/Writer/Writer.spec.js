@@ -62,7 +62,7 @@ test('Writer', t => {
   t.throws(f(), err, 'throws with no parameters')
   t.throws(f(0), err, 'throws with one parameter')
 
-  const entryErr = /^TypeError: Writer\(Last\): Log enrty must be an instance of Last/
+  const entryErr = /^TypeError: Writer\(Last\): Log entry must be an instance of Last/
   t.throws(f(undefined, 0), entryErr, 'throws with undefined entry')
   t.throws(f(null, 0), entryErr, 'throws with null entry')
   t.throws(f(0, 0), entryErr, 'throws with falsy number entry')

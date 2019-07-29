@@ -38,7 +38,7 @@ function _Writer(Monoid) {
     }
 
     if(!isSameType(Monoid, entry)) {
-      throw new TypeError(`${_type()}: Log enrty must be an instance of ${Monoid.type()}`)
+      throw new TypeError(`${_type()}: Log entry must be an instance of ${Monoid.type()}`)
     }
 
     const type =

@@ -39,7 +39,7 @@ test('writerToPair with Writer', t => {
   const value = 'something'
   const log = 'log'
 
-  const p = writerToPair(Writer(log, value))
+  const p = writerToPair(Writer(Last(log), value))
 
   t.ok(isSameType(Pair, p), 'returns a Pair')
 
@@ -54,7 +54,7 @@ test('writerToPair with Writer returning function', t => {
   const value = 'something'
   const log = 'log'
 
-  t.ok(isFunction(constant(writerToPair(Writer(log, value)))), 'returns a function')
+  t.ok(isFunction(constant(writerToPair(Writer(Last(log), value)))), 'returns a function')
 
   const f = bindFunc(writerToPair(identity))
 
@@ -71,7 +71,7 @@ test('writerToPair with Writer returning function', t => {
   t.throws(f({}), err, 'throws if function returns an object')
 
   const lift =
-    x => Writer(log, x)
+    x => Writer(Last(log), x)
 
   const p = writerToPair(lift, value)
 

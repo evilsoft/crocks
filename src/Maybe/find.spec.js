@@ -1,22 +1,21 @@
 const test = require('tape')
 
-const isFunction = require('../core/isFunction')
-const constant = require('../combinators/constant')
-const isSameType = require('../core/isSameType')
 const Pred = require('../Pred')
-const find = require('./find')
-const Maybe = require('../core/Maybe')
-const helpers = require('../test/helpers')
 const List = require('../core/List')
+const Maybe = require('../core/Maybe')
+
+const constant = require('../combinators/constant')
+const find = require('./find')
+const isFunction = require('../core/isFunction')
 const isNumber = require('../core/isNumber')
+const isSameType = require('../core/isSameType')
 
+const { bindFunc } = require('../test/helpers')
 const { fromArray } = List
-
-const bindFunc = helpers.bindFunc
 
 test('find is protected from bad fn', t => {
   const fn = bindFunc(fn => find(fn, []))
-  const err = /find: Pred or a predicate function is required for first argument/
+  const err = /^TypeError: find: First argument must be a Pred or predicate/
 
   t.throws(fn(undefined), err, 'throws if fn is undefined')
   t.throws(fn(null), err, 'throws if fn is null')
@@ -35,7 +34,7 @@ test('find is protected from bad fn', t => {
 
 test('find is protected from bad foldable', t => {
   const fn = bindFunc(v => find(() => true, v))
-  const err = /find: Foldable required for second argument/
+  const err = /^TypeError: find: Second argument must be a foldable/
 
   t.throws(fn(undefined), err, 'throws if foldable is undefined')
   t.throws(fn(null), err, 'throws if foldable is null')

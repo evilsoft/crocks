@@ -1,7 +1,7 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const VERSION = 3
+const VERSION = 4
 
 const _defineUnion = require('../core/defineUnion')
 const _equals = require('../core/equals')
@@ -119,6 +119,23 @@ function Result(u) {
     }
 
     return Result.Ok(either(f, g))
+  }
+
+  function bichain(l, r) {
+    const bichainErr =
+      'Result.bichain: Both arguments must be Result returning functions'
+
+    if(!(isFunction(l) && isFunction(r))) {
+      throw new TypeError(bichainErr)
+    }
+
+    const m = either(l, r)
+
+    if(!isSameType(Result, m)) {
+      throw new TypeError(bichainErr)
+    }
+
+    return m
   }
 
   function map(method) {
@@ -239,7 +256,7 @@ function Result(u) {
 
   return {
     inspect, toString: inspect, equals,
-    type, either, swap, coalesce,
+    type, either, swap, coalesce, bichain,
     ap, of, sequence, traverse,
     alt: alt('alt'),
     bimap: bimap('bimap'),

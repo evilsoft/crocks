@@ -7,6 +7,7 @@ const bindFunc = helpers.bindFunc
 
 const curry = require('../core/curry')
 const compose = curry(require('../core/compose'))
+const equals = require('../core/equals')
 const isArray = require('../core/isArray')
 const isFunction = require('../core/isFunction')
 const isObject = require('../core/isObject')
@@ -148,8 +149,8 @@ test('Result @@type', t => {
   t.equal(Result['@@type'], m['@@type'], 'static and instance versions are the same for Ok')
   t.equal(Result['@@type'], e['@@type'], 'static and instance versions are the same for Err')
 
-  t.equal(m['@@type'], 'crocks/Result@3', 'reports crocks/Result@3 for Ok')
-  t.equal(e['@@type'], 'crocks/Result@3', 'reports crocks/Result@3 for Err')
+  t.equal(m['@@type'], 'crocks/Result@4', 'reports crocks/Result@4 for Ok')
+  t.equal(e['@@type'], 'crocks/Result@4', 'reports crocks/Result@4 for Err')
 
   t.end()
 })
@@ -429,6 +430,62 @@ test('Result coalesce', t => {
 
   t.ok(l.equals(Result.Ok('was left')),'returns an Result.Ok wrapping was left' )
   t.ok(r.equals(Result.Ok('was right')),'returns an Result.Ok wrapping was right' )
+
+  t.end()
+})
+
+test('Result bichain left errors', t => {
+  const { Err } = Result
+  const bichain = bindFunc(Err(0).bichain)
+
+  const err = /Result.bichain: Both arguments must be Result returning functions/
+  t.throws(bichain(undefined, Err), err, 'throws with undefined on left')
+  t.throws(bichain(null, Err), err, 'throws with null on left')
+  t.throws(bichain(0, Err), err, 'throws with falsy number on left')
+  t.throws(bichain(1, Err), err, 'throws with truthy number on left')
+  t.throws(bichain('', Err), err, 'throws with falsy string on left')
+  t.throws(bichain('string', Err), err, 'throws with truthy string on left')
+  t.throws(bichain(false, Err), err, 'throws with false on left')
+  t.throws(bichain(true, Err), err, 'throws with true on left')
+  t.throws(bichain([], Err), err, 'throws with an array on left')
+  t.throws(bichain({}, Err), err, 'throws with an object on left')
+
+  t.throws(bichain(unit, Err), err, 'throws with a non-Result returning function')
+
+  t.end()
+})
+
+test('Result bichain right errors', t => {
+  const { Ok } = Result
+  const bichain = bindFunc(Ok(0).bichain)
+
+  const err = /Result.bichain: Both arguments must be Result returning functions/
+  t.throws(bichain(Ok, undefined), err, 'throws with undefined on left')
+  t.throws(bichain(Ok, null), err, 'throws with null on left')
+  t.throws(bichain(Ok, 0), err, 'throws with falsy number on left')
+  t.throws(bichain(Ok, 1), err, 'throws with truthy number on left')
+  t.throws(bichain(Ok, ''), err, 'throws with falsy string on left')
+  t.throws(bichain(Ok, 'string'), err, 'throws with truthy string on left')
+  t.throws(bichain(Ok, false), err, 'throws with false on left')
+  t.throws(bichain(Ok, true), err, 'throws with true on left')
+  t.throws(bichain(Ok, []), err, 'throws with an array on left')
+  t.throws(bichain(Ok, {}), err, 'throws with an object on left')
+
+  t.throws(bichain(Ok, unit), err, 'throws with a non-Result returning function')
+
+  t.end()
+})
+
+test('Result bichain functionality', t => {
+  const { Err, Ok } = Result
+
+  const left = x => Err(x + 1)
+  const right = x => Ok(x + 1)
+
+  t.ok(equals(Err(0).bichain(right, left), Ok(1)), 'moves from Err to Ok')
+  t.ok(equals(Ok(0).bichain(right, left), Err(1)), 'moves from Ok to Err')
+  t.ok(equals(Ok(0).bichain(left, right), Ok(1)), 'moves from Ok to Ok')
+  t.ok(equals(Err(0).bichain(left, right), Err(1)), 'moves from Err to Err')
 
   t.end()
 })

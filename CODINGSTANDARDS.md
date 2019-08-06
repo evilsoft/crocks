@@ -6,6 +6,7 @@
 * `npm run lint` to check for styling issues
 * `npm run spec:dev` to have tests running while coding
 * `npm run spec:coverage` to ensure coverage is within expected levels
+* `npm run test` to run all things that will run on CI
 
 ## Coding Standards
 
@@ -43,22 +44,22 @@ the details of the author within the structure of the following license statemen
 
 #### Imports
 
-The imports should be in two alphabetized groups with monoids as the first
+The imports should be in two alphabetized groups with data types as the first
 group and functions as the second.
 
 ```javascript
 const Pred = require('../core/types').proxy('Pred')
 
 const curry = require('../core/curry')
-const predOrFunc = require('../core/predOrFunc')
-const isFunction = require('../core/isFunction')
 const isFoldable = require('../core/isFoldable')
+const isFunction = require('../core/isFunction')
 const isSameType = require('../core/isSameType')
+const predOrFunc = require('../core/predOrFunc')
 ```
 
-#### Private functions
+#### Local functions
 
-Private functions or destructing functions from your imports are done between
+Local or destructured functions from your imports are done between
 the imports and the main function.
 
 ```javascript
@@ -70,11 +71,11 @@ const accumulator = fn => (acc, cur) =>
 
 #### Main function
 
-The main function must have a function signature written above using the haskell
-arrow notation. If you need help, just ask on the [Gitter][gitter] channel.
-Each argument should be validated to be it's expected type, throwing 
-a `TypeError` if it is not. Errors should use a consistent voice, preferring
-active over passive voices where possible:
+The main function must have a function signature written above using the
+Hindley–Milner type notation. If you need help, just ask on
+the [Gitter][gitter] channel. Each argument should be validated to be it's
+expected type, throwing a `TypeError` if it is not. Error messages should use a
+consistent voice, preferring active over passive voices where possible:
 
 Good:
 "First argument must be a Number"
@@ -90,7 +91,7 @@ function find(fn, foldable) {
   }
 
   if(!isFoldable(foldable)) {
-    throw new TypeError('find: Second argument must be a foldable')
+    throw new TypeError('find: Second argument must be a Foldable')
   }
 
   const result = foldable.reduce(accumulator(fn), { found: false })
@@ -167,7 +168,7 @@ test('find is protected from bad fn', t => {
 
 ## Documentation Standards
 
-If you become familiar with the documentation, it's structure and format will
+If you become familiar with the documentation, its structure and format will
 become easy to replicate. The docs consist of two main document structures and
 within them a particular coding started for the sample code. For function list
 pages it is a simple structure of title, signature, description and example. The

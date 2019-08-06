@@ -21,7 +21,7 @@ function find(fn, foldable) {
   }
 
   if(!isFoldable(foldable)) {
-    throw new TypeError('find: Second argument must be a foldable')
+    throw new TypeError('find: Second argument must be a Foldable')
   }
 
   const result = foldable.reduce(accumulator(fn), { found: false })

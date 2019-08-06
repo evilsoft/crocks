@@ -34,7 +34,7 @@ test('find is protected from bad fn', t => {
 
 test('find is protected from bad foldable', t => {
   const fn = bindFunc(v => find(() => true, v))
-  const err = /^TypeError: find: Second argument must be a foldable/
+  const err = /^TypeError: find: Second argument must be a Foldable/
 
   t.throws(fn(undefined), err, 'throws if foldable is undefined')
   t.throws(fn(null), err, 'throws if foldable is null')

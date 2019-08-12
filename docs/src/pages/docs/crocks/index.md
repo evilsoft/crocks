@@ -20,17 +20,17 @@ names, but what they do from type to type may vary.
 | [`Arrow`][arrow] | [`id`][arrow-id] | [`both`][arrow-both], [`compose`][arrow-compose], [`contramap`][arrow-contra],[`first`][arrow-first], [`map`][arrow-map], [`promap`][arrow-promap], [`runWith`][arrow-runwith], [`second`][arrow-second] |
 | [`Async`][async] | [`Rejected`][async-rejected], [`Resolved`][async-resolved], [`all`][async-all], [`resolveAfter`][async-resolveAfter], [`rejectAfter`][async-rejectafter], [`fromNode`][async-fromnode], [`fromPromise`][async-frompromise], [`of`][async-of] | [`alt`][async-alt], [`ap`][async-ap], [`bichain`][async-bichain], [`bimap`][async-bimap], [`chain`][async-chain], [`coalesce`][async-coalesce], [`fork`][async-fork], [`map`][async-map], [`of`][async-of], [`race`][async-race], [`swap`][async-swap], [`toPromise`][async-topromise] |
 | [`Const`][const] | [`empty`][const-empty], [`of`][const-of] | [`ap`][const-ap], [`concat`][const-concat], [`empty`][const-empty], [`equals`][const-equals], [`map`][const-map], [`of`][const-of], [`valueOf`][const-valueof] |
-| [`Either`][either] | [`Left`][either-left], [`Right`][either-right], [`of`][either-of]| [`alt`][either-alt], [`ap`][either-ap], [`bimap`][either-bimap], [`chain`][either-chain], [`coalesce`][either-coalesce], [`concat`][either-concat], [`either`][either-either], [`equals`][either-equals], [`map`][either-map], [`of`][either-of], [`sequence`][either-sequence], [`swap`][either-swap], [`traverse`][either-traverse] |
+| [`Either`][either] | [`Left`][either-left], [`Right`][either-right], [`of`][either-of]| [`alt`][either-alt], [`ap`][either-ap], [`bichain`][either-bichain], [`bimap`][either-bimap], [`chain`][either-chain], [`coalesce`][either-coalesce], [`concat`][either-concat], [`either`][either-either], [`equals`][either-equals], [`map`][either-map], [`of`][either-of], [`sequence`][either-sequence], [`swap`][either-swap], [`traverse`][either-traverse] |
 | [`Equiv`][equiv] | [`empty`][equiv-empty] | [`concat`][equiv-concat], [`contramap`][equiv-contra], [`compareWith`][equiv-compare], [`valueOf`][equiv-value] |
 | [`Identity`][identity] | [`of`][identity-of] | [`ap`][identity-ap], [`chain`][identity-chain], [`concat`][identity-concat], [`equals`][identity-equals], [`map`][identity-map], [`of`][identity-of], [`sequence`][identity-sequence], [`traverse`][identity-traverse], [`valueOf`][identity-valueof] |
 | `IO` | `of` | `ap`, `chain`, `map`, `of`, `run` |
 | `List` |  `empty`, `fromArray`, `of` | `ap`, `chain`, `concat`, `cons`, `empty`, `equals`, `filter`, `fold`, `foldMap`, `head`, `init`, `last`, `map`, `of`, `reduce`, `reduceRight`, `reject`, `sequence`, `tail`, `toArray`, `traverse`, `valueOf` |
-| [`Maybe`][maybe] | [`Nothing`][maybe-nothing], [`Just`][maybe-just], [`of`][maybe-of], [`zero`][maybe-zero] | [`alt`][maybe-alt], [`ap`][maybe-ap], [`chain`][maybe-chain], [`coalesce`][maybe-coalesce], [`concat`][maybe-concat], [`equals`][maybe-equals], [`either`][maybe-either], [`map`][maybe-map], [`of`][maybe-of], [`option`][maybe-option], [`sequence`][maybe-sequence], [`traverse`][maybe-traverse], [`zero`][maybe-zero] |
+| [`Maybe`][maybe] | [`Nothing`][maybe-nothing], [`Just`][maybe-just], [`of`][maybe-of], [`zero`][maybe-zero] | [`alt`][maybe-alt], [`ap`][maybe-ap], [`bichain`][maybe-bichain], [`chain`][maybe-chain], [`coalesce`][maybe-coalesce], [`concat`][maybe-concat], [`equals`][maybe-equals], [`either`][maybe-either], [`map`][maybe-map], [`of`][maybe-of], [`option`][maybe-option], [`sequence`][maybe-sequence], [`traverse`][maybe-traverse], [`zero`][maybe-zero] |
 | [`Pair`][pair] | --- | [`ap`][pair-ap], [`bimap`][pair-bimap], [`chain`][pair-chain], [`concat`][pair-concat], [`equals`][pair-equals], [`extend`][pair-extend], [`fst`][pair-fst], [`map`][pair-map], [`merge`][pair-merge], [`sequence`][pair-sequence], [`snd`][pair-snd], [`swap`][pair-swap], [`traverse`][pair-traverse], [`toArray`][pair-toarray] |
 | [`Pred`][pred] * | [`empty`][pred-empty] | [`concat`][pred-concat], [`contramap`][pred-contra], [`runWith`][pred-run], [`valueOf`][pred-value] |
 | [`Reader`][reader] | [`ask`][reader-ask], [`of`][reader-of] | [`ap`][reader-ap], [`chain`][reader-chain], [`map`][reader-map], [`runWith`][reader-run] |
 | [`ReaderT`][readert] | [`ask`][readert-ask], [`lift`][readert-lift], [`liftFn`][readert-liftfn], [`of`][readert-of] | [`ap`][readert-ap], [`chain`][readert-chain], [`map`][readert-map], [`runWith`][readert-run] |
-| [`Result`][result] | [`Err`][result-err], [`Ok`][result-ok], [`of`][result-of]| [`alt`][result-alt], [`ap`][result-ap], [`bimap`][result-bimap], [`chain`][result-chain], [`coalesce`][result-coalesce], [`concat`][result-concat], [`either`][result-either], [`equals`][result-equals], [`map`][result-map], [`of`][result-of], [`sequence`][result-sequence], [`swap`][result-swap], [`traverse`][result-traverse] |
+| [`Result`][result] | [`Err`][result-err], [`Ok`][result-ok], [`of`][result-of]| [`alt`][result-alt], [`ap`][result-ap], [`bichain`][result-bichain], [`bimap`][result-bimap], [`chain`][result-chain], [`coalesce`][result-coalesce], [`concat`][result-concat], [`either`][result-either], [`equals`][result-equals], [`map`][result-map], [`of`][result-of], [`sequence`][result-sequence], [`swap`][result-swap], [`traverse`][result-traverse] |
 | `Star` | `id` | `both`, `compose`, `contramap`, `map`, `promap`, `runWith` |
 | [`State`][state] | [`get`][state-get], [`modify`][state-modify], [`of`][state-of], [`put`][state-put] | [`ap`][state-ap], [`chain`][state-chain], [`evalWith`][state-eval], [`execWith`][state-exec], [`map`][state-map], [`runWith`][state-run] |
 | [`Tuple`][tuple] | --- | [`concat`][tuple-concat], [`equals`][tuple-equals], [`map`][tuple-map], [`mapAll`][tuple-mapall], [`merge`][tuple-merge], [`project`][tuple-project], [`toArray`][tuple-toarray] |
@@ -86,6 +86,7 @@ names, but what they do from type to type may vary.
 [either-of]: Either.html#of
 [either-alt]: Either.html#alt
 [either-ap]: Either.html#ap
+[either-bichain]: Either.html#bichain
 [either-bimap]: Either.html#bimap
 [either-chain]: Either.html#chain
 [either-coalesce]: Either.html#coalesce
@@ -146,6 +147,7 @@ names, but what they do from type to type may vary.
 [maybe-zero]: Maybe.html#zero
 [maybe-alt]: Maybe.html#alt
 [maybe-ap]: Maybe.html#ap
+[maybe-bichain]: Maybe.html#bichain
 [maybe-chain]: Maybe.html#chain
 [maybe-coalesce]: Maybe.html#coalesce
 [maybe-concat]: Maybe.html#concat
@@ -181,6 +183,7 @@ names, but what they do from type to type may vary.
 [result-of]: Result.html#of
 [result-alt]: Result.html#alt
 [result-ap]: Result.html#ap
+[result-bichain]: Result.html#bichain
 [result-bimap]: Result.html#bimap
 [result-chain]: Result.html#chain
 [result-coalesce]: Result.html#coalesce

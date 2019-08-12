@@ -1054,6 +1054,25 @@ getDetails(false)
 //=> Ok { canDrink: false, age: 0 }
 ```
 
+#### bichain
+
+```haskell
+Result c a ~> ((c -> Result d b), (a -> Result d b)) -> Result d b
+```
+
+Combining a sequential series of transformations that capture disjunction can be
+accomplished with [`chain`](#chain). Along the same lines, `bichain` allows you
+to do this from both [`Err`](#err) and [`Ok`](#ok). `bichain` expects
+two unary, `Either` returning functions as its arguments. When invoked on
+an [`Err`](#err) instance, `bichain` will use
+the left, or first, function that can return either an [`Err`](#err) or
+an [`Ok`](#ok) instance. When called on an [`Ok`](#ok) instance, it
+will behave exactly as [`chain`](#chain) would with the right, or
+second, function.
+
+```javascript
+```
+
 #### swap
 
 ```haskell

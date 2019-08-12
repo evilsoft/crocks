@@ -568,7 +568,7 @@ Maybe (a -> b) ~> Maybe a -> Maybe b
 ```
 
 Short for apply, `ap` is used to apply a `Maybe` instance containing a value
-to another `Maybe` instance that contains a function, resulting in 
+to another `Maybe` instance that contains a function, resulting in
 new `Maybe` instance with the result. `ap` requires that it is called on
 an `instance` that is either a `Nothing` or a `Just` that wraps a curried
 polyadic function.
@@ -872,6 +872,25 @@ shoutValue({ value: 49 })
 
 shoutValue({})
 //=> Just { shout: '' }
+```
+
+#### bichain
+
+```haskell
+Maybe a ~> ((() -> Maybe b), (a -> Maybe b)) -> Maybe b
+```
+
+Combining a sequential series of transformations that capture disjunction can be
+accomplished with [`chain`](#chain). Along the same lines, `bichain` allows you
+to do this from both [`Nothing`](#nothing) and [`Just`](#just). `bichain` expects
+two unary, `Either` returning functions as its arguments. When invoked on
+a [`Nothing`](#nothing) instance, `bichain` will use
+the left, or first, function that can return either a [`Nothing`](#nothing) or
+a [`Just`](#just) instance. When called on a [`Just`](#just) instance, it
+will behave exactly as [`chain`](#chain) would with the right, or
+second, function.
+
+```javascript
 ```
 
 #### option

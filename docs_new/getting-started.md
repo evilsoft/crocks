@@ -1,3 +1,9 @@
+<header>
+
+# Getting Started
+
+</header>
+
 <article id="installation">
 
 ## Installation

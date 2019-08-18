@@ -891,6 +891,24 @@ will behave exactly as [`chain`](#chain) would with the right, or
 second, function.
 
 ```javascript
+import Maybe from 'crocks/Maybe'
+
+import bichain from 'crocks/pointfree/bichain'
+import constant from 'crocks/combinators/constant'
+
+const { Nothing, Just } = Maybe
+
+// swapMaybe :: Maybe a -> Maybe b
+const swapMaybe = bichain(
+  constant(Just('nothing')),
+  Nothing
+)
+
+swapMaybe(Nothing())
+//=> Just Nothing
+
+swapMaybe(Just('just'))
+//=> Nothing
 ```
 
 #### option

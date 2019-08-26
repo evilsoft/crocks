@@ -1,6 +1,6 @@
 # Crocks
 
-[![Built with Electric](https://img.shields.io/badge/built%20with-electric-f3c302.svg?style=flat)](http://electricjs.com)
+[![Built with Electric](https://img.shields.io/badge/built%20with-electric-f3c302.svg?style=flat)](https://github.com/electricjs/electric)
 
 ## Setup
 

@@ -48,7 +48,7 @@
   "bugs": {
     "url": "https://github.com/evilsoft/crocks/issues"
   },
-  "homepage": "https://evilsoft.github.io/crocks",
+  "homepage": "https://crocks.dev",
   "nyc": {
     "check-coverage": true,
     "lines": 100,
@@ -62,24 +62,24 @@
     ]
   },
   "devDependencies": {
-    "all-contributors-cli": "^6.8.1",
+    "all-contributors-cli": "^6.9.0",
     "buble": "^0.19.8",
-    "coveralls": "^3.0.5",
+    "coveralls": "^3.0.6",
     "doctoc": "^1.4.0",
-    "eslint": "^6.1.0",
+    "eslint": "^6.3.0",
     "eslint-plugin-markdown": "^1.0.0",
     "eslint-watch": "^6.0.0",
-    "husky": "^3.0.1",
-    "lint-staged": "^9.2.1",
-    "nodemon": "^1.19.1",
+    "husky": "^3.0.5",
+    "lint-staged": "^9.2.5",
+    "nodemon": "^1.19.2",
     "nyc": "^14.1.1",
     "rimraf": "^2.6.2",
-    "sinon": "^7.3.2",
+    "sinon": "^7.4.2",
     "tap-spec": "^5.0.0",
     "tape": "^4.11.0",
     "uglify-js": "^3.6.0",
-    "webpack": "^4.38.0",
-    "webpack-cli": "^3.3.6"
+    "webpack": "^4.39.3",
+    "webpack-cli": "^3.3.8"
   },
   "husky": {
     "hooks": {

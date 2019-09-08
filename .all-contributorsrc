@@ -252,7 +252,18 @@
         "doc",
         "test"
       ]
+    },
+    {
+      "login": "JacopKane",
+      "name": "Furkan Tunalı",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/68406?v=4",
+      "profile": "http://furkantunali.com",
+      "contributions": [
+        "doc",
+        "example"
+      ]
     }
   ],
-  "repoType": "github"
+  "repoType": "github",
+  "commitConvention": "none"
 }

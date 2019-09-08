@@ -266,7 +266,8 @@ need to account for for the rest of your flow.
 Thanks goes to these wonderful people ([emoji key][emojis]):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
 <table>
   <tr>
     <td align="center"><a href="https://github.com/evilsoft"><img src="https://avatars1.githubusercontent.com/u/3665793?v=4" width="100px;" alt="Ian Hofmann-Hicks"/><br /><sub><b>Ian Hofmann-Hicks</b></sub></a><br /><a href="https://github.com/evilsoft/crocks/commits?author=evilsoft" title="Code">💻</a> <a href="https://github.com/evilsoft/crocks/commits?author=evilsoft" title="Documentation">📖</a> <a href="#video-evilsoft" title="Videos">📹</a></td>
@@ -300,9 +301,12 @@ Thanks goes to these wonderful people ([emoji key][emojis]):
     <td align="center"><a href="https://github.com/faliah"><img src="https://avatars0.githubusercontent.com/u/5593080?v=4" width="100px;" alt="Denis Zolkin"/><br /><sub><b>Denis Zolkin</b></sub></a><br /><a href="https://github.com/evilsoft/crocks/commits?author=faliah" title="Documentation">📖</a></td>
     <td align="center"><a href="http://www.cnblogs.com/Answer1215/"><img src="https://avatars0.githubusercontent.com/u/11929006?v=4" width="100px;" alt="Zhentian Wan"/><br /><sub><b>Zhentian Wan</b></sub></a><br /><a href="https://github.com/evilsoft/crocks/commits?author=zhentian-wan" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/RichardForrester"><img src="https://avatars0.githubusercontent.com/u/12902182?v=4" width="100px;" alt="RichardForrester"/><br /><sub><b>RichardForrester</b></sub></a><br /><a href="https://github.com/evilsoft/crocks/commits?author=RichardForrester" title="Code">💻</a> <a href="https://github.com/evilsoft/crocks/commits?author=RichardForrester" title="Documentation">📖</a> <a href="https://github.com/evilsoft/crocks/commits?author=RichardForrester" title="Tests">⚠️</a></td>
+    <td align="center"><a href="http://furkantunali.com"><img src="https://avatars2.githubusercontent.com/u/68406?v=4" width="100px;" alt="Furkan Tunalı"/><br /><sub><b>Furkan Tunalı</b></sub></a><br /><a href="https://github.com/evilsoft/crocks/commits?author=JacopKane" title="Documentation">📖</a> <a href="#example-JacopKane" title="Examples">💡</a></td>
   </tr>
 </table>
 
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 ### Course/Videos

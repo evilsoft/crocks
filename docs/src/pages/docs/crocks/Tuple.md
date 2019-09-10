@@ -495,8 +495,8 @@ const Triple = Tuple(3)('one', 'two', 'three')
 // getFirst :: Number -> a
 const getFirst = project(1)
 
-// getFirst :: Number -> a
-const getSecond = project(1)
+// getSecond :: Number -> a
+const getSecond = project(2)
 
 getFirst(Triple)
 //=> "one"

@@ -18,8 +18,8 @@ that can be composed together.
 
 Depending on your needs, an `Async` can be constructed in a variety of ways. The
 typical closely resembles how a `Promise` is constructed with one major
-difference, the arguments used in the function that is passed to 
-the `Promise` constructor are reversed in an `Async` to match the order in 
+difference, the arguments used in the function that is passed to
+the `Promise` constructor are reversed in an `Async` to match the order in
 which `Async` is parameterized.
 
 There are many ways to represent asynchronous operations in JavaScript, and as
@@ -973,13 +973,13 @@ Async e a ~> ((e -> Async b c), (a -> Async b c)) -> Async b c
 ```
 
 Combining a sequential series of transformations that capture disjunction can be
-accomplished with `chain`. Along the same lines, `bichain` allows you to do this
-from both [`Rejected`](#rejected) and [`Resolved`](#resolved). `bichain` expects
-two unary, `Async` returning functions as its arguments. When invoked on 
-a [`Rejected`](#rejected) instance, `bichain` will use
-the [`Rejected`](#rejected) value and can return either a [`Rejected`](#rejected) or
-a [`Resolved`](#resolved). When called on a [`Resolved`](#resolved) instance, it
-will behave exactly as [`chain`](#chain) would.
+accomplished with [`chain`](#chain). Along the same lines, `bichain` allows you
+to do this from both [`Rejected`](#rejected) and [`Resolved`](#resolved). `bichain` expects
+two unary, `Async` returning functions as its arguments. When invoked on
+a [`Rejected`](#rejected) instance, `bichain` will use the left, or first, function
+that can return either a [`Rejected`](#rejected) or [`Resolved`](#resolved) instance.
+When called on a [`Resolved`](#resolved) instance, it will behave exactly
+as [`chain`](#chain) would with the right, or second function.
 
 <!-- eslint-disable no-console -->
 <!-- eslint-disable no-sequences -->
@@ -1139,10 +1139,10 @@ typeIso(Rejected('aaaaa'))
 Async e a ~> Async e a -> Async e a
 ```
 
-Used to provide the first settled result between two `Async`s. Just 
-pass `race` another `Async` and it will return new `Async`, that when forked, 
+Used to provide the first settled result between two `Async`s. Just
+pass `race` another `Async` and it will return new `Async`, that when forked,
 will run both `Async`s in parallel, returning the first of the two to settle.
-The result can either be rejected or resolved, based on the instance of the 
+The result can either be rejected or resolved, based on the instance of the
 first settled result.
 
 <!-- eslint-disable no-console -->

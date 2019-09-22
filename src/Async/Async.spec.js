@@ -1276,77 +1276,76 @@ test('Async chain properties (Monad)', t => {
 })
 
 test('Async bichain left errors', t => {
+  const { Rejected } = Async
   const bichain = bindFunc(Async(unit).bichain)
 
   const err = /Async.bichain: Both arguments must be Async returning functions/
-  t.throws(bichain(undefined, Async.of), err, 'throws with undefined')
-  t.throws(bichain(null, Async.of), err, 'throws with null')
-  t.throws(bichain(0, Async.of), err, 'throws with falsey number')
-  t.throws(bichain(1, Async.of), err, 'throws with truthy number')
-  t.throws(bichain('', Async.of), err, 'throws with falsey string')
-  t.throws(bichain('string', Async.of), err, 'throws with truthy string')
-  t.throws(bichain(false, Async.of), err, 'throws with false')
-  t.throws(bichain(true, Async.of), err, 'throws with true')
-  t.throws(bichain([], Async.of), err, 'throws with an array')
-  t.throws(bichain({}, Async.of), err, 'throws with an object')
+  t.throws(bichain(undefined, Rejected), err, 'throws with undefined on left')
+  t.throws(bichain(null, Rejected), err, 'throws with null on left')
+  t.throws(bichain(0, Rejected), err, 'throws with falsy number on left')
+  t.throws(bichain(1, Rejected), err, 'throws with truthy number on left')
+  t.throws(bichain('', Rejected), err, 'throws with falsy string on left')
+  t.throws(bichain('string', Rejected), err, 'throws with truthy string on left')
+  t.throws(bichain(false, Rejected), err, 'throws with false on left')
+  t.throws(bichain(true, Rejected), err, 'throws with true on left')
+  t.throws(bichain([], Rejected), err, 'throws with an array on left')
+  t.throws(bichain({}, Rejected), err, 'throws with an object on left')
 
-  const noAsync = /Async.bichain: Both arguments must be Async returning functions/
-  t.throws(Async.Rejected(3).bichain(unit, Async.of).fork.bind(null, unit, unit), noAsync, 'throws with a non-Async returning function')
+  const fn = () => Rejected(0)
+    .bichain(unit, Rejected)
+    .fork(unit, unit)
 
-  t.doesNotThrow(Async.Rejected(3).bichain(Async.of, Async.of).fork.bind(null, unit, unit), 'allows an Async returning function')
+  t.throws(fn, err, 'throws with a non-Async returning function')
 
   t.end()
 })
 
 test('Async bichain right errors', t => {
+  const { Resolved } = Async
   const bichain = bindFunc(Async(unit).bichain)
 
   const err = /Async.bichain: Both arguments must be Async returning functions/
 
-  t.throws(bichain(Async.Rejected, undefined), err, 'throws with undefined')
-  t.throws(bichain(Async.Rejected, null), err, 'throws with null')
-  t.throws(bichain(Async.Rejected, 0), err, 'throws with falsey number')
-  t.throws(bichain(Async.Rejected, 1), err, 'throws with truthy number')
-  t.throws(bichain(Async.Rejected, ''), err, 'throws with falsey string')
-  t.throws(bichain(Async.Rejected, 'string'), err, 'throws with truthy string')
-  t.throws(bichain(Async.Rejected, false), err, 'throws with false')
-  t.throws(bichain(Async.Rejected, true), err, 'throws with true')
-  t.throws(bichain(Async.Rejected, []), err, 'throws with an array')
-  t.throws(bichain(Async.Rejected, {}), err, 'throws with an object')
+  t.throws(bichain(Resolved, undefined), err, 'throws with undefined on right')
+  t.throws(bichain(Resolved, null), err, 'throws with null on right')
+  t.throws(bichain(Resolved, 0), err, 'throws with falsy number on right')
+  t.throws(bichain(Resolved, 1), err, 'throws with truthy number on right')
+  t.throws(bichain(Resolved, ''), err, 'throws with falsy string on right')
+  t.throws(bichain(Resolved, 'string'), err, 'throws with truthy string on right')
+  t.throws(bichain(Resolved, false), err, 'throws with false on right')
+  t.throws(bichain(Resolved, true), err, 'throws with true on right')
+  t.throws(bichain(Resolved, []), err, 'throws with an array on right')
+  t.throws(bichain(Resolved, {}), err, 'throws with an object on right')
 
-  t.throws(Async.of(3).bichain(Async.Rejected, unit).fork.bind(null, unit, unit), err, 'throws with a non-Async returning function')
+  const fn = () => Resolved(0)
+    .bichain(Resolved, unit)
+    .fork(unit, unit)
 
-  t.doesNotThrow(Async.of(3).bichain(Async.Rejected, Async.of).fork.bind(null, unit, unit), 'allows an Async returning function')
+  t.throws(fn, err, 'throws with a non-Async returning function')
 
   t.end()
 })
 
-test('Async bichain properties (Bichain)', t => {
-  t.ok(isFunction(Async(unit).bichain), 'provides a bichain function')
+test('Async bichain functionality', t => {
+  const { Rejected, Resolved } = Async
 
-  const aRej = sinon.spy()
-  const bRej = sinon.spy()
+  const left = x => Rejected(x + 1)
+  const right = x => Resolved(x + 1)
 
-  const fOfL = x => Async((rej) => rej(x + 2))
-  const gOfL = x => Async((rej) => rej(x + 10))
+  const ltr = sinon.spy()
+  const rtl = sinon.spy()
+  const rtr = sinon.spy()
+  const ltl = sinon.spy()
 
-  const aRes = sinon.spy()
-  const bRes = sinon.spy()
+  Rejected(0).bichain(right, left).fork(unit, ltr)
+  Resolved(0).bichain(right, left).fork(rtl, unit)
+  Resolved(0).bichain(left, right).fork(unit, rtr)
+  Rejected(0).bichain(left, right).fork(ltl, unit)
 
-  const fOfR = x => Async((_, res) => res(x * 2))
-  const gOfR = x => Async((_, res) => res(x * 10))
-
-  const x = 12
-  const y = 7
-
-  Async((rej) => rej(x)).bichain(fOfL, Async.of).bichain(gOfL, Async.of).fork(aRej, unit)
-  Async((rej) => rej(x)).bichain(y => fOfL(y).bichain(gOfL, Async.of), Async.of).fork(bRej, unit)
-
-  Async((rej) => rej(y)).bichain(Async.Rejected, fOfR).bichain(Async.Rejected, gOfR).fork(unit, aRes)
-  Async((rej) => rej(y)).bichain(Async.Rejected, y => fOfR(y).bichain(Async.Rejected, gOfR)).fork(unit, bRes)
-
-  t.same(aRej.args[0], bRej.args[0], 'left associativity')
-  t.same(aRes.args[0], bRes.args[0], 'right associativity')
+  t.equals(ltr.args[0][0], 1, 'moves from Rejected to Resolved')
+  t.equals(rtl.args[0][0], 1, 'moves from Resolved to Rejected')
+  t.equals(rtr.args[0][0], 1, 'moves from Resolved to Resolved')
+  t.equals(ltl.args[0][0], 1, 'moves from Rejected to Rejected')
 
   t.end()
 })

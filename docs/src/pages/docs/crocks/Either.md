@@ -940,6 +940,79 @@ incValue({ a: 44 })
 //=> Right { a: 44, value: 1 }
 ```
 
+#### bichain
+
+```haskell
+Either c a ~> ((c -> Either d b), (a -> Either d b)) -> Either d b
+```
+
+Combining a sequential series of transformations that capture disjunction can be
+accomplished with [`chain`](#chain). Along the same lines, `bichain` allows you
+to do this from both [`Left`](#left) and [`Right`](#right). `bichain` expects
+two unary, `Either` returning functions as its arguments. When invoked on
+a [`Left`](#left) instance, `bichain` will use
+the left, or first, function that can return either a [`Left`](#left) or
+a [`Right`](#right) instance. When called on a [`Right`](#right) instance, it
+will behave exactly as [`chain`](#chain) would with the right, or
+second, function.
+
+```javascript
+import Either from 'crocks/Either'
+
+import bichain from 'crocks/pointfree/bichain'
+import compose from 'crocks/helpers/compose'
+import ifElse from 'crocks/logic/ifElse'
+import isNumber from 'crocks/predicates/isNumber'
+import isString from 'crocks/predicates/isString'
+import map from 'crocks/pointfree/map'
+
+const { Left, Right } = Either
+
+// swapEither :: Either a b -> Either b a
+const swapEither =
+  bichain(Right, Left)
+
+swapEither(Left('left'))
+//=> Right "left"
+
+swapEither(Right('right'))
+//=> Left "right"
+
+// length :: String -> Number
+const length = x =>
+  x.length
+
+// add10 :: Number -> Number
+const add10 = x =>
+  x + 10
+
+// safe :: (a -> Boolean) -> a -> Either c b
+const safe = pred =>
+  ifElse(pred, Right, Left)
+
+// stringLength :: a -> Either e Number
+const stringLength = compose(
+  map(length),
+  safe(isString)
+)
+
+// nested :: a -> Either c Number
+const nested = compose(
+  map(add10),
+  bichain(stringLength, Right),
+  safe(isNumber)
+)
+
+nested('cool')
+//=> Right 14
+
+nested(true)
+//=> Left true
+
+nested(13)
+//=> Right 23
+```
+
 #### swap
 
 ```haskell

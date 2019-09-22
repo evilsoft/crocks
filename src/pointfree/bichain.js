@@ -2,20 +2,21 @@
 /** @author Dale Francis (dalefrancis88) */
 
 const curry = require('../core/curry')
-const isBichain = require('../core/isBichain')
 const isFunction = require('../core/isFunction')
 
 // bichain : bichain m => (e -> m c b) -> (a -> m c b) -> m e a -> m c b
 function bichain(f, g, m) {
   if(!isFunction(f) || !isFunction(g)) {
-    throw new TypeError('bichain: First two arguments must be Bichain returning functions')
+    throw new TypeError('bichain: First two arguments must be Sum Type returning functions')
   }
 
-  if(!isBichain(m)) {
-    throw new TypeError('bichain: Third argument must be a Bichain')
+  if(m && isFunction(m.bichain)) {
+    return m.bichain.call(m, f, g)
   }
 
-  return m.bichain.call(m, f, g)
+  throw new TypeError(
+    'bichain: Third argument must be a Sum Type'
+  )
 }
 
 module.exports = curry(bichain)

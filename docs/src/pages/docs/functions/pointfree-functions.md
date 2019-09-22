@@ -2,7 +2,7 @@
 title: "Point-free Functions"
 description: "Point-free Functions API"
 layout: "notopic"
-functions: ["alt", "ap", "bimap", "both", "chain", "coalesce", "comparewith", "concat", "cons", "contramap", "either", "empty", "equals", "extend", "filter", "first", "fold", "foldmap", "head", "init", "last", "map", "merge", "option", "promap", "race", "reduce", "reduceright", "run", "runwith", "second", "sequence", "swap", "tail", "traverse", "valueof"]
+functions: ["alt", "ap", "bichain", "bimap", "both", "chain", "coalesce", "comparewith", "concat", "cons", "contramap", "either", "empty", "equals", "extend", "filter", "first", "fold", "foldmap", "head", "init", "last", "map", "merge", "option", "promap", "race", "reduce", "reduceright", "run", "runwith", "second", "sequence", "swap", "tail", "traverse", "valueof"]
 weight: 50
 ---
 
@@ -69,6 +69,7 @@ accepted Datatype):
 |---|:---|:---|
 | `alt` | `m a -> m a -> m a` | `crocks/pointfree` |
 | `ap` | `m a -> m (a -> b) -> m b` | `crocks/pointfree` |
+| `bichain` | `(a -> m c d) -> (b -> m c d) -> m a b -> m c d` | `crocks/pointfree` |
 | `bimap` | `(a -> c) -> (b -> d) -> m a b -> m c d` | `crocks/pointfree` |
 | `both` | `m (a -> b) -> m (Pair a a -> Pair b b)` | `crocks/pointfree` |
 | `chain` | `(a -> m b) -> m a -> m b` | `crocks/pointfree` |
@@ -118,6 +119,7 @@ accepted Datatype):
 |---|:---|
 | `alt` | [`Async`][async-alt], [`Either`][either-alt], [`Maybe`][maybe-alt], [`Result`][result-alt] |
 | `ap` | `Array`, [`Async`][async-ap], [`Const`][const-ap], [`Either`][either-ap], `Identity`, `IO`, `List`, [`Maybe`][maybe-ap], [`Pair`][pair-ap], [`Reader`][reader-ap], [`Result`][result-ap], [`State`][state-ap], `Unit`, `Writer` |
+| `bichain` | [`Async`][async-bichain], [`Either`][either-bichain], [`Maybe`][maybe-bichain], [`Result`][result-bichain] |
 | `bimap` | [`Async`][async-bimap], [`Either`][either-bimap], [`Pair`][pair-bimap], [`Result`][result-bimap] |
 | `both` | [`Arrow`][arrow-both], `Function`, `Star` |
 | `chain` | `Array`, [`Async`][async-chain], [`Const`][const-chain], [`Either`][either-chain], `Identity`, `IO`, `List`, [`Maybe`][maybe-chain], [`Pair`][pair-chain], [`Reader`][reader-chain], [`Result`][result-chain], [`State`][state-chain], `Unit`, `Writer` |
@@ -185,6 +187,7 @@ accepted Datatype):
 
 [async-alt]: ../crocks/Async.html#alt
 [async-ap]: ../crocks/Async.html#ap
+[async-bichain]: ../crocks/Async.html#bichain
 [async-bimap]: ../crocks/Async.html#bimap
 [async-chain]: ../crocks/Async.html#chain
 [async-coalesce]: ../crocks/Async.html#coalesce
@@ -206,6 +209,7 @@ accepted Datatype):
 
 [either-alt]: ../crocks/Either.html#alt
 [either-ap]: ../crocks/Either.html#ap
+[either-bichain]: ../crocks/Either.html#bichain
 [either-bimap]: ../crocks/Either.html#bimap
 [either-chain]: ../crocks/Either.html#chain
 [either-coalesce]: ../crocks/Either.html#coalesce
@@ -242,6 +246,7 @@ accepted Datatype):
 
 [maybe-alt]: ../crocks/Maybe.html#alt
 [maybe-ap]: ../crocks/Maybe.html#ap
+[maybe-bichain]: ../crocks/Maybe.html#bichain
 [maybe-chain]: ../crocks/Maybe.html#chain
 [maybe-coalesce]: ../crocks/Maybe.html#coalesce
 [maybe-concat]: ../crocks/Maybe.html#concat
@@ -294,6 +299,7 @@ accepted Datatype):
 
 [result-alt]: ../crocks/Result.html#alt
 [result-ap]: ../crocks/Result.html#ap
+[result-bichain]: ../crocks/Result.html#bichain
 [result-bimap]: ../crocks/Result.html#bimap
 [result-chain]: ../crocks/Result.html#chain
 [result-coalesce]: ../crocks/Result.html#coalesce

@@ -7,6 +7,7 @@ const bindFunc = helpers.bindFunc
 
 const curry = require('../core/curry')
 const compose = curry(require('../core/compose'))
+const equals = require('../core/equals')
 const isArray = require('../core/isArray')
 const isFunction = require('../core/isFunction')
 const isObject = require('../core/isObject')
@@ -154,8 +155,8 @@ test('Either @@type', t => {
   t.equal(Right(0)['@@type'], Either['@@type'], 'static and instance versions are the same for Right')
   t.equal(Left(0)['@@type'], Either['@@type'], 'static and instance versions are the same for Left')
 
-  t.equal(Right(0)['@@type'], 'crocks/Either@3', 'returns crocks/Either@3 for Right')
-  t.equal(Left(0)['@@type'], 'crocks/Either@3', 'returns crocks/Either@3 for Left')
+  t.equal(Right(0)['@@type'], 'crocks/Either@4', 'returns crocks/Either@4 for Right')
+  t.equal(Left(0)['@@type'], 'crocks/Either@4', 'returns crocks/Either@4 for Left')
 
   t.end()
 })
@@ -263,6 +264,62 @@ test('Either coalesce', t => {
 
   t.ok(l.equals(Either.Right('was left')),'returns an Either.Right wrapping was left' )
   t.ok(r.equals(Either.Right('was right')),'returns an Either.Right wrapping was right' )
+
+  t.end()
+})
+
+test('Either bichain left errors', t => {
+  const { Left } = Either
+  const bichain = bindFunc(Left(0).bichain)
+
+  const err = /Either.bichain: Both arguments must be Either returning functions/
+  t.throws(bichain(undefined, Left), err, 'throws with undefined on left')
+  t.throws(bichain(null, Left), err, 'throws with null on left')
+  t.throws(bichain(0, Left), err, 'throws with falsy number on left')
+  t.throws(bichain(1, Left), err, 'throws with truthy number on left')
+  t.throws(bichain('', Left), err, 'throws with falsy string on left')
+  t.throws(bichain('string', Left), err, 'throws with truthy string on left')
+  t.throws(bichain(false, Left), err, 'throws with false on left')
+  t.throws(bichain(true, Left), err, 'throws with true on left')
+  t.throws(bichain([], Left), err, 'throws with an array on left')
+  t.throws(bichain({}, Left), err, 'throws with an object on left')
+
+  t.throws(bichain(unit, Left), err, 'throws with a non-Either returning function')
+
+  t.end()
+})
+
+test('Either bichain right errors', t => {
+  const { Right } = Either
+  const bichain = bindFunc(Right(0).bichain)
+
+  const err = /Either.bichain: Both arguments must be Either returning functions/
+  t.throws(bichain(Right, undefined), err, 'throws with undefined on left')
+  t.throws(bichain(Right, null), err, 'throws with null on left')
+  t.throws(bichain(Right, 0), err, 'throws with falsy number on left')
+  t.throws(bichain(Right, 1), err, 'throws with truthy number on left')
+  t.throws(bichain(Right, ''), err, 'throws with falsy string on left')
+  t.throws(bichain(Right, 'string'), err, 'throws with truthy string on left')
+  t.throws(bichain(Right, false), err, 'throws with false on left')
+  t.throws(bichain(Right, true), err, 'throws with true on left')
+  t.throws(bichain(Right, []), err, 'throws with an array on left')
+  t.throws(bichain(Right, {}), err, 'throws with an object on left')
+
+  t.throws(bichain(Right, unit), err, 'throws with a non-Either returning function')
+
+  t.end()
+})
+
+test('Either bichain functionality', t => {
+  const { Left, Right } = Either
+
+  const left = x => Left(x + 1)
+  const right = x => Right(x + 1)
+
+  t.ok(equals(Left(0).bichain(right, left), Right(1)), 'moves from Left to Right')
+  t.ok(equals(Right(0).bichain(right, left), Left(1)), 'moves from Right to Left')
+  t.ok(equals(Right(0).bichain(left, right), Right(1)), 'moves from Right to Right')
+  t.ok(equals(Left(0).bichain(left, right), Left(1)), 'moves from Left to Left')
 
   t.end()
 })

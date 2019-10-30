@@ -22,7 +22,7 @@ function applyPipe(f, g) {
   }
 }
 
-// pipeP : Promise p => ((a -> p b), (b -> p c), ..., (y -> p z)) -> a -> p z
+/** pipeP :: Promise p => ((a -> p b), (b -> p c), ..., (y -> p z)) -> a -> p z */
 function pipeP(...fns) {
   if(!arguments.length) {
     throw new TypeError(err)

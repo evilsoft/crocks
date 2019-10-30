@@ -5,7 +5,7 @@ const hasAlg = require('./hasAlg')
 const isContravariant = require('./isContravariant')
 const isFunctor = require('./isFunctor')
 
-// isProfunctor :: a -> Boolean
+/** isProfunctor :: a -> Boolean */
 function isProfunctor(m) {
   return isContravariant(m)
     && isFunctor(m)

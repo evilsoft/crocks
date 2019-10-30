@@ -6,7 +6,7 @@ const curry = require('../core/curry')
 const isFunction = require('../core/isFunction')
 
 // Composition (Bluebird)
-// composeB :: (b -> c) -> (a -> b) -> a -> c
+/** composeB :: (b -> c) -> (a -> b) -> a -> c */
 function composeB(f, g) {
   if(!(isFunction(f) && isFunction(g))) {
     throw new TypeError(

@@ -15,7 +15,7 @@ const err = name =>
   `${name}: First argument must be an Array of non-empty Strings or Integers`
 
 function fn(name) {
-  // pathEq :: [ String | Number ] -> a -> Object -> Boolean
+  /** pathEq :: [ String | Number ] -> a -> Object -> Boolean */
   function pathEq(keys, value, target) {
     if(!isArray(keys)) {
       throw new TypeError(err(name))

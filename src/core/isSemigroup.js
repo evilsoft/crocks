@@ -4,7 +4,7 @@
 const isString = require('./isString')
 const hasAlg = require('./hasAlg')
 
-// isSemigroup : a -> Boolean
+/** isSemigroup :: a -> Boolean */
 function isSemigroup(m) {
   return isString(m)
     || !!m && hasAlg('concat', m)

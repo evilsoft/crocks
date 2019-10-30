@@ -3,7 +3,7 @@
 
 const Pair = require('../core/Pair')
 
-// branch : a -> Pair a a
+/** branch :: a -> Pair a a */
 function branch(x) {
   return Pair(x, x)
 }

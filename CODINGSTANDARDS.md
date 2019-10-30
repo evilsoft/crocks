@@ -28,7 +28,7 @@ already has a header there is no need to update it.
 
 ### Main File Structure
 
-The following is an example of the normal structure of a core library file 
+The following is an example of the normal structure of a core library file
 using `find` as an example of this structure. It is also a good example of
 how each argument should be validated.
 
@@ -84,7 +84,7 @@ Bad:
 "Number is required for first argument"
 
 ```javascript
-// find :: Foldable f => ((a -> Boolean) | Pred) -> f a -> Maybe a
+/** find :: Foldable f => ((a -> Boolean) | Pred) -> f a -> Maybe a */
 function find(fn, foldable) {
   if(!isFunction(fn) && !isSameType(Pred, fn)) {
     throw new TypeError('find: First argument must be a Pred or predicate')
@@ -139,7 +139,7 @@ const { fromArray } = List
 #### Testing sections
 
 The spec file will contain one or many collections of tests grouped by subject
-matter. For example testing input validation for an argument. 
+matter. For example testing input validation for an argument.
 We also generally test with the following set of values to ensure there is
 proper protection. Remember, writing tests is about regression and protection
 from future changes.
@@ -181,11 +181,11 @@ the functions signature then a details description of the functions purpose and
 features using plain language. Any library function references should be linked
 
 > `crocks/combinators/composeB`
-> 
+>
 > ```haskell
 > composeB :: (b -> c) -> (a -> b) -> a -> c
 > ```
-> 
+>
 > Provides a means to describe a composition between two functions. it takes two
 > functions and a value. Given `composeB(f, g)`, which is read `f` after `g`, it
 > will return a function that will take value `a` and apply it to `g`, passing the
@@ -216,7 +216,7 @@ import isString from 'crocks/predicates/isString'
 When writing documentation examples start out with very simple usages to show
 how the functions works, followed by a more real-world scenario. Each function
 should also have a proper signature above it. When you invoke the function, it
-should also have the result of that invocation commented below. 
+should also have the result of that invocation commented below.
 
 ```javascript
 // yell :: String -> String

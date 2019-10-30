@@ -5,7 +5,7 @@ const curry = require('../core/curry')
 const isFunction = require('../core/isFunction')
 
 // PSI (P)
-// psi :: (b -> b -> c) -> (a -> b) -> a -> a -> c
+/** psi :: (b -> b -> c) -> (a -> b) -> a -> a -> c */
 function psi(f, g, x, y) {
   if(!isFunction(f) || !isFunction(g)) {
     throw new TypeError('psi: First and second arguments must be functions')

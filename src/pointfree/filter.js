@@ -9,7 +9,7 @@ const isObject = require('../core/isObject')
 const object = require('../core/object')
 const predOrFunc = require('../core/predOrFunc')
 
-// filter : Filterable f => (a -> Boolean) -> f a -> f a
+/** filter :: Filterable f => (a -> Boolean) -> f a -> f a */
 function filter(pred, m) {
   if(!isPredOrFunc(pred)) {
     throw new TypeError('filter: Pred or predicate function required for first argument')

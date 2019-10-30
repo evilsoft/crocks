@@ -3,7 +3,7 @@
 
 const hasAlg = require('../core/hasAlg')
 
-// isSetoid : a -> Boolean
+/** isSetoid :: a -> Boolean */
 function isSetoid(m) {
   return !!m
     && hasAlg('equals', m)

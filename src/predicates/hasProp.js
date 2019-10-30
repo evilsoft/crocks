@@ -8,7 +8,7 @@ const isInteger = require('../core/isInteger')
 const isNil = require('../core/isNil')
 const isString = require('../core/isString')
 
-// hasProp : (String | Integer) -> a -> Boolean
+/** hasProp :: (String | Integer) -> a -> Boolean */
 function hasProp(key, x) {
   if(!(isString(key) && !isEmpty(key) || isInteger(key))) {
     throw new TypeError(

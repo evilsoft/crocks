@@ -10,8 +10,8 @@ const isSameType = require('../core/isSameType')
 const applyTransform = last =>
   last.valueOf()
 
-// lastToMaybe : Last a -> Maybe a
-// lastToMaybe : (a -> Last b) -> a -> Maybe b
+/** lastToMaybe :: Last a -> Maybe a */
+/** lastToMaybe :: (a -> Last b) -> a -> Maybe b */
 function lastToMaybe(last) {
   if(isFunction(last)) {
     return function(x) {

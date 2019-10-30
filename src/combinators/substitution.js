@@ -5,7 +5,7 @@ const curry = require('../core/curry')
 const isFunction = require('../core/isFunction')
 
 // Substitution (Starling)
-// substitution : (a -> b -> c) -> (a -> b) -> a -> c
+/** substitution :: (a -> b -> c) -> (a -> b) -> a -> c */
 function substitution(f, g, x) {
   if(!(isFunction(f) && isFunction(g))) {
     throw new TypeError(

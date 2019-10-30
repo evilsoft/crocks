@@ -6,7 +6,7 @@ const isObject = require('../core/isObject')
 const isFunction = require('../core/isFunction')
 const isNil = require('../core/isNil')
 
-// applyMap :: ({ (* -> *) }, Object) -> (Object , String) -> Object
+/** applyMap :: ({ (* -> *) }, Object) -> (Object , String) -> Object */
 const applyMap = (fns, obj) =>
   function(acc, key) {
     if(isNil(fns[key])) {
@@ -28,7 +28,7 @@ const applyMap = (fns, obj) =>
     })
   }
 
-// mapProps :: { (* -> *) } -> Object -> Object
+/** mapProps :: { (* -> *) } -> Object -> Object */
 function mapProps(fns, obj) {
   if(!(isObject(fns) && isObject(obj))) {
     throw new TypeError('mapProps: Objects required for both arguments')

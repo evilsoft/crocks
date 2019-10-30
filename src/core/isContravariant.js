@@ -3,7 +3,7 @@
 
 const hasAlg = require('./hasAlg')
 
-// isContravariant : a -> Boolean
+/** isContravariant :: a -> Boolean */
 function isContravariant(m) {
   return !!m && hasAlg('contramap', m)
 }

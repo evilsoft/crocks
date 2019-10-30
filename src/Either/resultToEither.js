@@ -11,8 +11,8 @@ const isSameType = require('../core/isSameType')
 const applyTransform = result =>
   result.either(Either.Left, Either.Right)
 
-// resultToEither : Result e a -> Either e a
-// resultToEither : (a -> Result e b) -> a -> Either e b
+/** resultToEither :: Result e a -> Either e a */
+/** resultToEither :: (a -> Result e b) -> a -> Either e b */
 function resultToEither(result) {
   if(isFunction(result)) {
     return function(x) {

@@ -7,7 +7,7 @@ const isApplicative = require('../core/isApplicative')
 const isArray = require('../core/isArray')
 const isSameType = require('../core/isSameType')
 
-// ap :: Applicative m => m a -> m (a -> b) ->  m b
+/** ap :: Applicative m => m a -> m (a -> b) ->  m b */
 function ap(m, x) {
   if(!((isApplicative(m) || isArray(m)) && isSameType(m, x))) {
     throw new TypeError('ap: Both arguments must be Applys of the same type')

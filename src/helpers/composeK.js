@@ -6,7 +6,7 @@ const isFunction = require('../core/isFunction')
 
 const err = 'composeK: Chain returning functions of the same type required'
 
-// composeK : Chain m => ((y -> m z), (x -> m y), ..., (a -> m b)) -> a -> m z
+/** composeK :: Chain m => ((y -> m z), (x -> m y), ..., (a -> m b)) -> a -> m z */
 function composeK(...args) {
   if(!arguments.length) {
     throw new TypeError(err)

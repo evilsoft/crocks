@@ -1,7 +1,7 @@
 /** @license ISC License (c) copyright 2017 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-// once : ((*) -> b) -> ((*) -> b)
+/** once :: ((*) -> b) -> ((*) -> b) */
 function once(fn) {
   var called, result
 

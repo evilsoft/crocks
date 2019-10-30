@@ -14,7 +14,7 @@ const { Just, Nothing } = require('.')
 const accumulator = fn => (acc, cur) =>
   !acc.found && predOrFunc(fn, cur) ? { found: true, value: cur } : acc
 
-// find :: Foldable f => ((a -> Boolean) | Pred) -> f a -> Maybe a
+/** find :: Foldable f => ((a -> Boolean) | Pred) -> f a -> Maybe a */
 function find(fn, foldable) {
   if(!isFunction(fn) && !isSameType(Pred, fn)) {
     throw new TypeError('find: First argument must be a Pred or predicate')

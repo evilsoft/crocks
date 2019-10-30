@@ -4,7 +4,7 @@
 const hasAlg = require('./hasAlg')
 const isApplicative = require('./isApplicative')
 
-// isMonad : a -> Boolean
+/** isMonad :: a -> Boolean */
 function isMonad(m) {
   return isApplicative(m)
     && hasAlg('chain', m)

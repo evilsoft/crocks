@@ -10,8 +10,8 @@ const isSameType = require('../core/isSameType')
 const applyTransform = first =>
   first.valueOf()
 
-// firstToMaybe : First a -> Maybe a
-// firstToMaybe : (a -> First b) -> a -> Maybe b
+/** firstToMaybe :: First a -> Maybe a */
+/** firstToMaybe :: (a -> First b) -> a -> Maybe b */
 function firstToMaybe(first) {
   if(isFunction(first)) {
     return function(x) {

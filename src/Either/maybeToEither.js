@@ -16,8 +16,8 @@ const applyTransform = (left, maybe) =>
     Either.Right
   )
 
-// maybeToEither : c -> Maybe a -> Either c a
-// maybeToEither : c -> (a -> Maybe b) -> a -> Either c b
+/** maybeToEither :: c -> Maybe a -> Either c a */
+/** maybeToEither :: c -> (a -> Maybe b) -> a -> Either c b */
 function maybeToEither(left, maybe) {
   if(isFunction(maybe)) {
     return function(x) {

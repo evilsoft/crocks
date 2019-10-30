@@ -5,7 +5,7 @@ const curry = require('../core/curry')
 const isPredOrFunc = require('../core/isPredOrFunc')
 const predOrFunc = require('../core/predOrFunc')
 
-// implies :: (a -> Boolean) | Pred -> (a -> Boolean) -> a -> Boolean
+/** implies :: (a -> Boolean) | Pred -> (a -> Boolean) -> a -> Boolean */
 function implies(p, q) {
   if(!(isPredOrFunc(p) && isPredOrFunc(q))) {
     throw new TypeError(

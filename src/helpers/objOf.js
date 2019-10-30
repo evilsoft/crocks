@@ -4,7 +4,7 @@
 const curry = require('../core/curry')
 const isString = require('../core/isString')
 
-// objOf : String -> a -> Object
+/** objOf :: String -> a -> Object */
 function objOf(key, value) {
   if(!(key && isString(key))) {
     throw new TypeError('objOf: Non-empty String required for first argument')

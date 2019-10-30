@@ -2,7 +2,7 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 // Composition (Bluebird)
-// compose : (b -> c) -> (a -> b) -> a -> c
+/** compose :: (b -> c) -> (a -> b) -> a -> c */
 function compose(f, g) {
   return function(x) {
     return f(g(x))

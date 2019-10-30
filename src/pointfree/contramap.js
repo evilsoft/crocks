@@ -7,7 +7,7 @@ const isFunction = require('../core/isFunction')
 const isContravariant = require('../core/isContravariant')
 const fl = require('../core/flNames')
 
-// contramap : Functor f => (b -> a) -> f b -> f a
+/** contramap :: Functor f => (b -> a) -> f b -> f a */
 function contramap(fn, m) {
   if(!isFunction(fn)) {
     throw new TypeError(

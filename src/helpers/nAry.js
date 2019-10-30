@@ -6,7 +6,7 @@ const curryN = require('../core/curryN')
 const isFunction = require('../core/isFunction')
 const isNumber = require('../core/isNumber')
 
-// nAry : Number -> (* -> a) -> * -> * -> a
+/** nAry :: Number -> (* -> a) -> * -> * -> a */
 function nAry(num, fn) {
   if(!isNumber(num)) {
     throw new TypeError('nAry: Number required for first argument')

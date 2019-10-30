@@ -4,7 +4,7 @@
 const hasAlg = require('../core/hasAlg')
 const isSemigroupoid = require('../core/isSemigroupoid')
 
-// isCategory : a -> Boolean
+/** isCategory :: a -> Boolean */
 function isCategory(m) {
   return isSemigroupoid(m)
     && (hasAlg('id', m) || hasAlg('id', m.constructor))

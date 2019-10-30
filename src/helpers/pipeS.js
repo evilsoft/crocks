@@ -6,7 +6,7 @@ const isSemigroupoid = require('../core/isSemigroupoid')
 
 const err = 'pipeS: Semigroupoids of the same type required'
 
-// pipeS : Semigroupoid s => (s a b, s b c, ..., s y z) -> s a z
+/** pipeS :: Semigroupoid s => (s a b, s b c, ..., s y z) -> s a z */
 function pipeS(...ms) {
   if(!arguments.length) {
     throw new TypeError(err)

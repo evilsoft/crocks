@@ -3,7 +3,7 @@
 
 const hasAlg = require('./hasAlg')
 
-// isFunctor : a -> Boolean
+/** isFunctor :: a -> Boolean */
 function isFunctor(m) {
   return !!m && hasAlg('map', m)
 }

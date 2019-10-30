@@ -15,8 +15,8 @@ const toPromise = m => {
   return m.toPromise()
 }
 
-// asyncToPromise :: m e a -> Promise a e
-// asyncToPromise :: (a -> m e b) -> a -> Promise b e
+/** asyncToPromise :: m e a -> Promise a e */
+/** asyncToPromise :: (a -> m e b) -> a -> Promise b e */
 function asyncToPromise(m) {
   return isFunction(m)
     ? x => toPromise(m(x))

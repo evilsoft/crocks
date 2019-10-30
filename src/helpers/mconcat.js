@@ -8,7 +8,7 @@ const mconcatMap = require('../core/mconcatMap')
 
 const identity = x => x
 
-// mconcat : Monoid m => m -> ([ a ] | List a) -> m a
+/** mconcat :: Monoid m => m -> ([ a ] | List a) -> m a */
 function mconcat(m, xs) {
   if(!isMonoid(m)) {
     throw new TypeError(

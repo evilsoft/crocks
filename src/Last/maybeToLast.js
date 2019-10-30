@@ -11,8 +11,8 @@ const isSameType = require('../core/isSameType')
 const applyTransform = maybe =>
   Last(maybe)
 
-// maybeToLast : Maybe a -> Last a
-// maybeToLast : (a -> Maybe b) -> a -> Last b
+/** maybeToLast :: Maybe a -> Last a */
+/** maybeToLast :: (a -> Maybe b) -> a -> Last b */
 function maybeToLast(maybe) {
   if(isFunction(maybe)) {
     return function(x) {

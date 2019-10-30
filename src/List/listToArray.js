@@ -7,8 +7,8 @@ const curry = require('../core/curry')
 const isFunction = require('../core/isFunction')
 const isSameType = require('../core/isSameType')
 
-// listToArray : List a -> [ a ]
-// listToArray : (a -> List b) -> a -> [ b ]
+/** listToArray :: List a -> [ a ] */
+/** listToArray :: (a -> List b) -> a -> [ b ] */
 function listToArray(list) {
   if(isFunction(list)) {
     return function(x) {

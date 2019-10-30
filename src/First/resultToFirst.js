@@ -11,8 +11,8 @@ const isSameType = require('../core/isSameType')
 const applyTransform = result =>
   result.either(First.empty, First)
 
-// resultToFirst : Result b a -> First a
-// resultToFirst : (a -> Result c b) -> a -> First b
+/** resultToFirst :: Result b a -> First a */
+/** resultToFirst :: (a -> Result c b) -> a -> First b */
 function resultToFirst(result) {
   if(isFunction(result)) {
     return function(x) {

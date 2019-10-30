@@ -10,7 +10,7 @@ const safe = require('./safe')
 const map =
   fn => m => m.map(fn)
 
-// safeLift : ((a -> Boolean) | Pred) -> (a -> b) -> a -> Maybe b
+/** safeLift :: ((a -> Boolean) | Pred) -> (a -> b) -> a -> Maybe b */
 function safeLift(pred, fn) {
   if(!isPredOrFunc(pred)) {
     throw new TypeError('safeLift: Pred or predicate function required for first argument')

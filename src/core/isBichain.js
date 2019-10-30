@@ -3,7 +3,7 @@
 
 const hasAlg = require('./hasAlg')
 
-// isBichain : a -> Boolean
+/** isBichain :: a -> Boolean */
 function isBichain(m) {
   return hasAlg('bichain', m)
 }

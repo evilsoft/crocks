@@ -47,7 +47,7 @@ function fn(name) {
   return curry(getPathOr)
 }
 
-// getPathOr :: a -> [ String | Integer ] -> b -> c
+/** getPathOr :: a -> [ String | Integer ] -> b -> c */
 const getPathOr =
   fn('getPathOr')
 

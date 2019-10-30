@@ -3,7 +3,7 @@
 
 const hasAlg = require('./hasAlg')
 
-// isSemigroupoid : a -> Boolean
+/** isSemigroupoid :: a -> Boolean */
 function isSemigroupoid(m) {
   return !!m && hasAlg('compose', m)
 }

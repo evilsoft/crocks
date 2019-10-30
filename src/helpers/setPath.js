@@ -16,7 +16,7 @@ const isValid = x =>
 const pathErr =
   'setPath: Non-empty Array of non-empty Strings and/or Positive Integers required for first argument'
 
-// setPath :: [ String | Integer ] -> a -> (Object | Array) -> (Object | Array)
+/** setPath :: [ String | Integer ] -> a -> (Object | Array) -> (Object | Array) */
 function setPath(path, val, obj) {
   if(!isArray(path) || isEmpty(path)) {
     throw new TypeError(pathErr)

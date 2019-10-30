@@ -6,7 +6,7 @@ const fl = require('../core/flNames')
 const isExtend = require('../core/isExtend')
 const isFunction = require('../core/isFunction')
 
-// extend : Extend w => (w a -> b) -> w a -> w b
+/** extend :: Extend w => (w a -> b) -> w a -> w b */
 function extend(fn, m) {
   if(!isFunction(fn)) {
     throw new TypeError('extend: Function required for first argument')

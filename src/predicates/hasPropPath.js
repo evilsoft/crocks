@@ -9,7 +9,7 @@ const isInteger = require('../core/isInteger')
 const isNil = require('../core/isNil')
 const isString = require('../core/isString')
 
-// hasPropPath : [ String | Integer ] -> a -> Boolean
+/** hasPropPath :: [ String | Integer ] -> a -> Boolean */
 function hasPropPath(keys, target) {
   if(!isArray(keys)) {
     throw new TypeError(

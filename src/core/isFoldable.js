@@ -3,7 +3,7 @@
 
 const hasAlg = require('./hasAlg')
 
-// isFoldable : a -> Boolean
+/** isFoldable :: a -> Boolean */
 function isFoldable(m) {
   return !!m
     && hasAlg('reduce', m)

@@ -6,7 +6,7 @@ const predOrFunc = require('../core/predOrFunc')
 const isPredOrFunc = require('../core/isPredOrFunc')
 const isFunction = require('../core/isFunction')
 
-// when : (a -> Boolean) | Pred -> (a -> b) -> a -> b | a
+/** when :: (a -> Boolean) | Pred -> (a -> b) -> a -> b | a */
 function when(pred, f) {
   if(!isPredOrFunc(pred)) {
     throw new TypeError(

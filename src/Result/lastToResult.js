@@ -16,8 +16,8 @@ const applyTransform = (left, last) =>
     Result.Ok
   )
 
-// lastToResult : c -> Last a -> Result c a
-// lastToResult : c -> (a -> Last b) -> a -> Result c b
+/** lastToResult :: c -> Last a -> Result c a */
+/** lastToResult :: c -> (a -> Last b) -> a -> Result c b */
 function lastToResult(left, last) {
   if(isFunction(last)) {
     return function(x) {

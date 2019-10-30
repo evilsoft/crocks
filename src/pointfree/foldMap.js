@@ -7,7 +7,7 @@ const curry = require('../core/curry')
 const isArray = require('../core/isArray')
 const isFunction = require('../core/isFunction')
 
-// foldMap :: Foldable f, Semigroup s => (a -> s) -> f a -> s
+/** foldMap :: Foldable f, Semigroup s => (a -> s) -> f a -> s */
 function foldMap(fn, m) {
   if(!isFunction(fn)) {
     throw new TypeError(

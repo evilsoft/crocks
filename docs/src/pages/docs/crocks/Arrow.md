@@ -292,7 +292,7 @@ arrAdd10Value
 //=> 10
 
 arrAdd10Value
-  .runWith({ num: '23' })
+  .runWith({ num: 23 })
 //=> 10
 ```
 

@@ -20,6 +20,7 @@ functions needed to hit the ground running.
   - [Entire `crocks` library (JS Modules)](#entire-crocks-library-js-modules)
   - [Single entities (CommonJS)](#single-entities-commonjs)
   - [Single entities (JS Modules)](#single-entities-js-modules)
+  - [Example](#example)
 - [Documentation](#documentation)
 - [What is Included?](#what-is-included)
 - [Contributors](#contributors)
@@ -67,33 +68,6 @@ const { safe, isNumber } = crocks
 
 // still requires entire object, but removes name-spacing
 const { and, liftA2 } = require('crocks')
-
-// divide :: Number -> Number
-const divide =
-  x => y => x / y
-
-// safeNumber :: a -> Maybe Number
-const safeNumber =
-  safe(isNumber)
-
-// notZero :: a -> Maybe Number
-const notZero = safe(
-  and(isNumber, x => x !== 0)
-)
-
-// safeDivide:: a -> Maybe Number
-const safeDivide = crocks.curry(
-  (x, y) => liftA2(divide, safeNumber(x), notZero(y))
-)
-
-safeDivide(20, 0)
-//=> Nothing
-
-safeDivide(20, 5)
-//=> Just 4
-
-safeDivide('number', 5)
-//=> Nothing
 ```
 
 ### Entire `crocks` library (JS Modules)
@@ -107,33 +81,6 @@ import { and, liftA2 }  from 'crocks'
 
 // pluck anything that does not require name-spacing
 const { safe, isNumber } = crocks
-
-// divide :: Number -> Number
-const divide =
-  x => y => x / y
-
-// safeNumber :: a -> Maybe Number
-const safeNumber =
-  safe(isNumber)
-
-// notZero :: a -> Maybe Number
-const notZero = safe(
-  and(isNumber, x => x !== 0)
-)
-
-// safeDivide:: a -> Maybe Number
-const safeDivide = crocks.curry(
-  (x, y) => liftA2(divide, safeNumber(x), notZero(y))
-)
-
-safeDivide(20, 0)
-//=> Nothing
-
-safeDivide(20, 5)
-//=> Just 4
-
-safeDivide('number', 5)
-//=> Nothing
 ```
 
 ### Single entities (CommonJS)
@@ -145,33 +92,6 @@ const curry = require('crocks/helpers/curry')
 const isNumber = require('crocks/predicates/isNumber')
 const liftA2 = require('crocks/helpers/liftA2')
 const safe = require('crocks/Maybe/safe')
-
-// divide :: Number -> Number
-const divide =
-  x => y => x / y
-
-// safeNumber :: a -> Maybe Number
-const safeNumber =
-  safe(isNumber)
-
-// notZero :: a -> Maybe Number
-const notZero = safe(
-  and(isNumber, x => x !== 0)
-)
-
-// safeDivide:: a -> Maybe Number
-const safeDivide = curry(
-  (x, y) => liftA2(divide, safeNumber(x), notZero(y))
-)
-
-safeDivide(20, 0)
-//=> Nothing
-
-safeDivide(20, 5)
-//=> Just 4
-
-safeDivide('number', 5)
-//=> Nothing
 ```
 
 ### Single entities (JS Modules)
@@ -183,7 +103,17 @@ import curry from 'crocks/helpers/curry'
 import isNumber from 'crocks/predicates/isNumber'
 import liftA2 from 'crocks/helpers/liftA2'
 import safe from 'crocks/Maybe/safe'
+```
 
+### Example
+
+Documentation references: [and](https://crocks.dev/docs/functions/logic-functions.html#and),
+[curry](https://crocks.dev/docs/functions/helpers.html#curry),
+[predicates (isNumber)](https://crocks.dev/docs/functions/predicate-functions.html),
+[liftA2](https://crocks.dev/docs/functions/helpers.html#lifta2), and
+[safe](https://crocks.dev/docs/crocks/Maybe.html#safe).
+
+```javascript
 // divide :: Number -> Number
 const divide =
   x => y => x / y
@@ -201,6 +131,9 @@ const notZero = safe(
 const safeDivide = curry(
   (x, y) => liftA2(divide, safeNumber(x), notZero(y))
 )
+
+safeDivide(20)(0)
+//=> Nothing
 
 safeDivide(20, 0)
 //=> Nothing

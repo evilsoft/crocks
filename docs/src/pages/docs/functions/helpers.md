@@ -283,6 +283,66 @@ that can be called in any combination, such as: `f(x, y, z)`, `f(x)(y)(z)`,
 `f(x, y)(z)`, or even `f(x)(y, z)`. This is great for doing partial application
 on functions for maximum re-usability.
 
+```javascript
+import curry from 'crocks/helpers/curry'
+
+// add :: (Number, Number, Number) -> Number
+const add = (a, b, c) =>
+  a + b + c
+
+// partial application impossible
+add(1)
+// => 1 + undefined + undefined => NaN
+
+// NOT the only possible type signature as highlighted below
+// curriedAdd :: Number -> Number -> Number -> Number
+const curriedAdd = curry( add )
+
+curriedAdd(1)
+// => [Function: curried]
+
+// Number -> Number -> Number -> Number
+curriedAdd(1)(2)(3)
+// => 6
+
+// (Number, Number) -> Number -> Number
+curriedAdd(1, 2)(3)
+// => 6
+
+// Number -> (Number -> Number) -> Number
+curriedAdd(1)(2, 3)
+// => 6
+
+// (Number, Number, Number) -> Number
+curriedAdd(1, 2, 3)
+// => 6
+
+// optionalAdd :: (Number -> Number -> Number) -> Number
+const optionalAdd = (a, b, c = 2) =>
+  a + b + c
+
+// curriedOptionalAdd :: Number -> Number -> Number
+const curriedOptionalAdd = curry( optionalAdd )
+
+// Curried optional function completes with only two parameters
+curriedOptionalAdd(1)(2)
+// => 5  <<-- little gotcha!
+
+curriedOptionalAdd(1)(2)(100)
+// => 5  <<-- Gotcha!
+
+curriedOptionalAdd(1)
+// => [Function: curried]
+
+const disfunctionalCurryAdd = curry( (x, y = 2, z) => x + y + z )
+
+disfunctionalCurryAdd(1)
+// 1 + 2 + undefined => NaN
+
+disfunctionalCurryAdd(1)(2)(3)
+// TypeError: disfunctionalCurryAdd(...) is not a function
+```
+
 #### defaultProps
 
 `crocks/helpers/defaultProps`

@@ -280,11 +280,29 @@ Pass this function a function and it will return you a function that can be
 called in any form that you require until all arguments have been provided. For
 example if you pass a function: `f : (a, b, c) -> d` you get back a function
 that can be called in any combination, such as: `f(x, y, z)`, `f(x)(y)(z)`,
-`f(x, y)(z)`, or even `f(x)(y, z)`. This is great for doing partial application
-on functions for maximum re-usability.
+`f(x, y)(z)`, or even `f(x)(y, z)`. That is to say, this function fulfills the role
+of both curry and uncurry, returning a function that can be used as a curried
+function, an uncurried function, or any combination of argument applications in
+between. The returned function has `2^(n-1)` type signatures, where `n` is the
+number of parameters.
 
 ```javascript
+import compose from 'crocks/helpers/compose'
 import curry from 'crocks/helpers/curry'
+import map from 'crocks/pointfree/map'
+import prop from 'crocks/maybe/prop'
+
+const crocksCurriedFunc =
+  curry((a, b, c, d) => a + b + c + d)
+
+crocksCurriedFunc(1)(2)(3)(4)  // [Fully curried]
+crocksCurriedFunc(1)(2)(3, 4)
+crocksCurriedFunc(1)(2, 3)(4)
+crocksCurriedFunc(1, 2)(3)(4)
+crocksCurriedFunc(1)(2, 3, 4)
+crocksCurriedFunc(1, 2, 3)(4)
+crocksCurriedFunc(1, 2, 3, 4)  // [Fully uncurried]
+crocksCurriedFunc(1, 2)(3, 4)
 
 // add :: (Number, Number, Number) -> Number
 const add = (a, b, c) =>
@@ -292,55 +310,66 @@ const add = (a, b, c) =>
 
 // partial application impossible
 add(1)
-// => 1 + undefined + undefined => NaN
+//=> NaN
+// 1 + undefined + undefined => NaN
 
-// NOT the only possible type signature as highlighted below
-// curriedAdd :: Number -> Number -> Number -> Number
-const curriedAdd = curry( add )
+const curriedAdd =
+  curry(add)
 
-curriedAdd(1)
-// => [Function: curried]
+// appliedAdd :: Number -> Number -> Number
+const appliedAdd =
+  curriedAdd(1)
 
-// Number -> Number -> Number -> Number
+appliedAdd(1, 1)
+//=> 3
+
 curriedAdd(1)(2)(3)
-// => 6
-
-// (Number, Number) -> Number -> Number
 curriedAdd(1, 2)(3)
-// => 6
-
-// Number -> (Number -> Number) -> Number
 curriedAdd(1)(2, 3)
-// => 6
-
-// (Number, Number, Number) -> Number
 curriedAdd(1, 2, 3)
-// => 6
+//=> 6
 
-// optionalAdd :: (Number -> Number -> Number) -> Number
-const optionalAdd = (a, b, c = 2) =>
-  a + b + c
+// strictCurriedPluck :: String -> [ a ] -> Maybe b
+const strictCurriedPluck =
+  compose(map, prop)
 
-// curriedOptionalAdd :: Number -> Number -> Number
-const curriedOptionalAdd = curry( optionalAdd )
+const crockCurriedPluck =
+  curry(strictCurriedPluck)
 
-// Curried optional function completes with only two parameters
-curriedOptionalAdd(1)(2)
-// => 5  <<-- little gotcha!
+const data = [
+  { a: 'nice' },
+  { a: 'great', b: 'nice' },
+  { b: 'nice' }
+]
 
-curriedOptionalAdd(1)(2)(100)
-// => 5  <<-- Gotcha!
+strictCurriedPluck('a')(data).map(x => `${x}`)
+//=> [ Just 'nice', Just 'great', Nothing ]
 
-curriedOptionalAdd(1)
-// => [Function: curried]
+crockCurriedPluck('a', data).map(x => `${x}`)
+//=> [ Just 'nice', Just 'great', Nothing ]
 
-const disfunctionalCurryAdd = curry( (x, y = 2, z) => x + y + z )
+```
 
-disfunctionalCurryAdd(1)
-// 1 + 2 + undefined => NaN
+An important caveat when using `curry` with functions containing optional parameters,
+is that the defaults are applied immediately, reducing the number of partial
+applications to just the number of required parameters. Adding optional parameters
+to functions may not be a good choice if the intention is to use them with `curry`,
+as the ability to change the defaults is lost. Worse yet, any parameter after the
+first optional parameter, without an explicit default value, defaults to `undefined`.
 
-disfunctionalCurryAdd(1)(2)(3)
-// TypeError: disfunctionalCurryAdd(...) is not a function
+```javascript
+import curry from 'crocks/helpers/curry'
+
+// curriedConsolelog :: [ (Object | String) ] -> ()
+const curriedConsolelog =
+  curry(console.log)
+
+curriedConsolelog('Hello %s', 'World')
+//=> Hello %s
+
+curriedConsolelog('Hello', 'World')
+//=> Hello
+
 ```
 
 #### defaultProps

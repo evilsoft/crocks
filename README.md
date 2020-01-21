@@ -107,11 +107,11 @@ import safe from 'crocks/Maybe/safe'
 
 ### Example
 
-Documentation references: [and](https://crocks.dev/docs/functions/logic-functions.html#and),
-[curry](https://crocks.dev/docs/functions/helpers.html#curry),
-[predicates (isNumber)](https://crocks.dev/docs/functions/predicate-functions.html),
-[liftA2](https://crocks.dev/docs/functions/helpers.html#lifta2), and
-[safe](https://crocks.dev/docs/crocks/Maybe.html#safe).
+Documentation references: [and][and-logic-crocks],
+[curry][curry-helpers-crocks],
+[predicates (isNumber)][predicate-docs],
+[liftA2][lifta2-helpers-crocks],
+[safe][safe-maybe-crocks].
 
 ```javascript
 // divide :: Number -> Number
@@ -147,8 +147,8 @@ safeDivide('number', 5)
 
 ## Documentation
 
-* [API Documentation](https://evilsoft.github.io/crocks/docs/)
-* [Contributing Information](https://github.com/evilsoft/crocks/blob/master/CONTRIBUTORS.md)
+* [API Documentation][docs]
+* [Contributing Information][contrib]
 
 ## What is Included?
 There are (8) classifications of "things" included in this library:
@@ -260,6 +260,8 @@ Thanks goes to these wonderful people ([emoji key][emojis]):
 #### Example dbagia
 * [React Declarative Form Generator](https://github.com/dbagia/declarative-form-generator)
 
+[docs]: https://evilsoft.github.io/crocks/docs/
+[contrib]: https://github.com/evilsoft/crocks/blob/master/CONTRIBUTORS.md
 [crock-docs]: https://evilsoft.github.io/crocks/docs/crocks/
 [monoid-docs]: https://evilsoft.github.io/crocks/docs/monoids/
 [combinator-docs]: https://evilsoft.github.io/crocks/docs/functions/#combinators
@@ -269,3 +271,7 @@ Thanks goes to these wonderful people ([emoji key][emojis]):
 [pointfree-docs]: https://evilsoft.github.io/crocks/docs/functions/pointfree-functions.html
 [transformation-docs]: https://evilsoft.github.io/crocks/docs/functions/transformation-functions.html
 [emojis]:https://github.com/kentcdodds/all-contributors#emoji-key
+[and-logic-crocks]: https://crocks.dev/docs/functions/logic-functions.html#and
+[curry-helpers-crocks]: https://crocks.dev/docs/functions/helpers.html#curry
+[lifta2-helpers-crocks]: https://crocks.dev/docs/functions/helpers.html#lifta2
+[safe-maybe-crocks]: https://crocks.dev/docs/crocks/Maybe.html#safe

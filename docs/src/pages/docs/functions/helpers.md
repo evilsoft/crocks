@@ -332,10 +332,10 @@ const data = [
   { b: 'nice' }
 ]
 
-strictCurriedPluck('a')(data).map(x => `${x}`)
+strictCurriedPluck('a')(data)
 //=> [ Just "nice", Just "great", Nothing ]
 
-crockCurriedPluck('a', data).map(x => `${x}`)
+crockCurriedPluck('a', data)
 //=> [ Just "nice", Just "great", Nothing ]
 
 ```

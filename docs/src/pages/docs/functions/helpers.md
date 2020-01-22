@@ -292,18 +292,6 @@ import curry from 'crocks/helpers/curry'
 import map from 'crocks/pointfree/map'
 import prop from 'crocks/maybe/prop'
 
-const crocksCurriedFunc =
-  curry((a, b, c, d) => a + b + c + d)
-
-crocksCurriedFunc(1)(2)(3)(4)  // [Fully curried]
-crocksCurriedFunc(1)(2)(3, 4)
-crocksCurriedFunc(1)(2, 3)(4)
-crocksCurriedFunc(1, 2)(3)(4)
-crocksCurriedFunc(1)(2, 3, 4)
-crocksCurriedFunc(1, 2, 3)(4)
-crocksCurriedFunc(1, 2, 3, 4)  // [Fully uncurried]
-crocksCurriedFunc(1, 2)(3, 4)
-
 // add :: (Number, Number, Number) -> Number
 const add = (a, b, c) =>
   a + b + c
@@ -313,20 +301,21 @@ add(1)
 //=> NaN
 // 1 + undefined + undefined => NaN
 
-const curriedAdd =
+// crocksCurriedAdd :: Number -> Number -> Number -> Number
+const crocksCurriedAdd =
   curry(add)
 
 // appliedAdd :: Number -> Number -> Number
 const appliedAdd =
-  curriedAdd(1)
+  crocksCurriedAdd(1)
 
 appliedAdd(1, 1)
 //=> 3
 
-curriedAdd(1)(2)(3)
-curriedAdd(1, 2)(3)
-curriedAdd(1)(2, 3)
-curriedAdd(1, 2, 3)
+crocksCurriedAdd(1)(2)(3)
+crocksCurriedAdd(1, 2)(3)
+crocksCurriedAdd(1)(2, 3)
+crocksCurriedAdd(1, 2, 3)
 //=> 6
 
 // strictCurriedPluck :: String -> [ a ] -> Maybe b
@@ -336,6 +325,7 @@ const strictCurriedPluck =
 const crockCurriedPluck =
   curry(strictCurriedPluck)
 
+// data :: [ { a: String, b: String } ]
 const data = [
   { a: 'nice' },
   { a: 'great', b: 'nice' },
@@ -343,10 +333,10 @@ const data = [
 ]
 
 strictCurriedPluck('a')(data).map(x => `${x}`)
-//=> [ Just 'nice', Just 'great', Nothing ]
+//=> [ Just "nice", Just "great", Nothing ]
 
 crockCurriedPluck('a', data).map(x => `${x}`)
-//=> [ Just 'nice', Just 'great', Nothing ]
+//=> [ Just "nice", Just "great", Nothing ]
 
 ```
 
@@ -354,8 +344,9 @@ An important caveat when using `curry` with functions containing optional parame
 is that the defaults are applied immediately, reducing the number of partial
 applications to just the number of required parameters. Adding optional parameters
 to functions may not be a good choice if the intention is to use them with `curry`,
-as the ability to change the defaults is lost. Worse yet, any parameter after the
-first optional parameter, without an explicit default value, defaults to `undefined`.
+as the ability to change the defaults is lost. Parameters are applied up until the
+first optional parameter, at which point subsequent parameters either receive the
+declared default or go undefined.
 
 ```javascript
 import curry from 'crocks/helpers/curry'

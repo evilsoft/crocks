@@ -280,8 +280,88 @@ Pass this function a function and it will return you a function that can be
 called in any form that you require until all arguments have been provided. For
 example if you pass a function: `f : (a, b, c) -> d` you get back a function
 that can be called in any combination, such as: `f(x, y, z)`, `f(x)(y)(z)`,
-`f(x, y)(z)`, or even `f(x)(y, z)`. This is great for doing partial application
-on functions for maximum re-usability.
+`f(x, y)(z)`, or even `f(x)(y, z)`. That is to say, this function fulfills the role
+of both curry and uncurry, returning a function that can be used as a curried
+function, an uncurried function, or any combination of argument applications in
+between. The returned function has `2^(n-1)` type signatures, where `n` is the
+number of parameters.
+
+```javascript
+import compose from 'crocks/helpers/compose'
+import curry from 'crocks/helpers/curry'
+import map from 'crocks/pointfree/map'
+import prop from 'crocks/maybe/prop'
+
+// add :: (Number, Number, Number) -> Number
+const add = (a, b, c) =>
+  a + b + c
+
+// partial application impossible
+add(1)
+//=> NaN
+// 1 + undefined + undefined => NaN
+
+// crocksCurriedAdd :: Number -> Number -> Number -> Number
+const crocksCurriedAdd =
+  curry(add)
+
+// appliedAdd :: Number -> Number -> Number
+const appliedAdd =
+  crocksCurriedAdd(1)
+
+appliedAdd(1, 1)
+//=> 3
+
+crocksCurriedAdd(1)(2)(3)
+crocksCurriedAdd(1, 2)(3)
+crocksCurriedAdd(1)(2, 3)
+crocksCurriedAdd(1, 2, 3)
+//=> 6
+
+// strictCurriedPluck :: String -> [ a ] -> Maybe b
+const strictCurriedPluck =
+  compose(map, prop)
+
+const crockCurriedPluck =
+  curry(strictCurriedPluck)
+
+// data :: [ { a: String, b: String } ]
+const data = [
+  { a: 'nice' },
+  { a: 'great', b: 'nice' },
+  { b: 'nice' }
+]
+
+strictCurriedPluck('a')(data)
+//=> [ Just "nice", Just "great", Nothing ]
+
+crockCurriedPluck('a', data)
+//=> [ Just "nice", Just "great", Nothing ]
+
+```
+
+An important caveat when using `curry` with functions containing optional parameters,
+is that the defaults are applied immediately, reducing the number of partial
+applications to just the number of required parameters. Adding optional parameters
+to functions may not be a good choice if the intention is to use them with `curry`,
+as the ability to change the defaults is lost. Parameters are applied up until the
+first optional parameter, at which point subsequent parameters either receive the
+declared default or go undefined.
+
+```javascript
+import curry from 'crocks/helpers/curry'
+
+// curriedConsolelog :: [ (Object | String) ] -> ()
+const curriedConsolelog =
+  curry(console.log)
+
+curriedConsolelog('Hello %s', 'World')
+//=> Hello %s
+
+curriedConsolelog('Hello', 'World')
+//=> Hello
+
+```
 
 #### defaultProps
 

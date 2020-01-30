@@ -262,6 +262,15 @@
         "doc",
         "example"
       ]
+    },
+    {
+      "login": "sunwukonga",
+      "name": "Paul Desmond Parker",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/12194690?v=4",
+      "profile": "https://github.com/sunwukonga",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "repoType": "github",

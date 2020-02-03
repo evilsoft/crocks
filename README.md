@@ -114,7 +114,7 @@ Documentation references: [and][and-logic-crocks],
 [safe][safe-maybe-crocks].
 
 ```javascript
-// divide :: Number -> Number
+// divide :: Number -> Number -> Number
 const divide = x => y =>
   x / y
 
@@ -127,7 +127,7 @@ const notZero = safe(
   and(isNumber, x => x !== 0)
 )
 
-// safeDivide:: a -> Maybe Number
+// safeDivide:: a -> a -> Maybe Number
 const safeDivide = curry(
   (x, y) => liftA2(divide, safeNumber(x), notZero(y))
 )

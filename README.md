@@ -256,6 +256,7 @@ Thanks goes to these wonderful people ([emoji key][emojis]):
 ### Tutorials
 #### Tutorial rpearce
 * [Ramda Chops: Function Currying](https://robertwpearce.com/ramda-chops-function-currying.html)
+* [JavaScript: Writing a Functional Programming-Style map Function](https://robertwpearce.com/javascript-writing-a-functional-programming-style-map-function.html)
 
 ### Examples
 #### Example dbagia

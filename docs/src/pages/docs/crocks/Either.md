@@ -640,7 +640,7 @@ setPassed(Right({ a: 'awesome' }))
 //=> Right { a: "awesome", passed: true }
 
 setPassed(Left({ a: 'not so much' }))
-//=> Left { error: "not so much", passed: false }
+//=> Left { error: { a: "not so much" }, passed: false }
 
 // process :: a -> Either Object Object
 const process =

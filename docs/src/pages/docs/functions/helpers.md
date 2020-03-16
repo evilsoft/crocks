@@ -52,8 +52,30 @@ While the [`composeB`](combinators.html#composeb) can be used to create a
 composition of two functions, there are times when you want to compose an entire
 flow together. That is where `compose` is useful. With `compose` you can create
 a right-to-left composition of functions. It will return you a function that
-represents your flow. Not really sold on writing flows from right-to-left? Well
-then, I would recommend reaching for [`pipe`](#pipe).
+represents your flow. `crocks` provides a means to build compostions using a
+left-to-right style in the form of [`pipe`](#pipe).
+
+```javascript
+import compose from 'crocks/helpers/compose'
+
+import objOf from 'crocks/helpers/objOf'
+
+// double :: Number -> Number
+const double = x =>
+  x + x
+
+// doubleAndWrap :: Number -> Object
+const doubleAndWrap = compose(
+  objOf('result'),
+  double
+)
+
+doubleAndWrap(25)
+//=> { result: 50 }
+
+doubleAndWrap(0)
+//=> { result: 0 }
+```
 
 #### composeK
 
@@ -904,10 +926,32 @@ allowed. For black-listing properties, have a look at [`omit`](#omit).
 pipe :: ((a -> b), ..., (y -> z)) -> a -> z
 ```
 
-If you find yourself not able to come to terms with doing the typical
-right-to-left composition, then `crocks` provides a means to accommodate you.
-This function does the same thing as [`compose`](#compose), the only difference
-is it allows you define your flows in a left-to-right manner.
+Similar to [`compose`](#compose), `pipe` allows for the composition of
+functions, but takes its functions in a left-to-right fashion, which is the
+opposite of [`compose`](#compose). Just like [`compose`](#compose), `pipe`
+will return a new function that represents the composed flow.
+
+```javascript
+import pipe from 'crocks/helpers/pipe'
+
+import objOf from 'crocks/helpers/objOf'
+
+// double :: Number -> Number
+const double = x =>
+  x + x
+
+// doubleAndWrap :: Number -> Object
+const doubleAndWrap = pipe(
+  double,
+  objOf('result')
+)
+
+doubleAndWrap(25)
+//=> { result: 50 }
+
+doubleAndWrap(0)
+//=> { result: 0 }
+```
 
 #### pipeK
 

@@ -153,11 +153,12 @@ equals(Pair([ 1, 2 ], ''), [ 1, 2 ])
 Semigroup s, t => Pair s t ~> Pair s t -> Pair s t
 ```
 
-When both underlying values of a given `Pair` are fixed to a `Semigroup`,
-`concat` can be used to concatenate another `Pair` instance with underlying
-`Semigroup`s of the same type and structure. Expecting a `Maybe` wrapping a
-`Semigroup` of the same type, `concat` will give back a new `Pair` instance
-wrapping the result of combining the underlying `Semigroup` instances.
+When both underlying values of a given `Pair` are fixed to
+a `Semigroup`, `concat` can be used to concatenate another `Pair` instance
+with underlying `Semigroup`s of the same type and structure. Expecting
+a `Maybe` wrapping a `Semigroup` of the same type, `concat` will give back a
+new `Pair` instance wrapping the result of combining the
+underlying `Semigroup` instances.
 
 ```javascript
 import Pair from 'crocks/Pair'
@@ -365,16 +366,17 @@ Semigroup s => Pair s a ~> (a -> Pair s b) -> Pair s b
 ```
 
 Combining a sequential series of transformations that allows for custom
-accumulation in addition to transforming a value. `chain` requires a `Pair`
-returning function that contains a `Semigroup` in its first position. As an
-additional requirement, is that instances of the same `Semigroup` must occupy
-the first position of the source `Pair` and the `Pair` returned by the function.
+accumulation in addition to transforming a value. `chain` requires
+a `Pair` returning function that contains a `Semigroup` in its first position.
+An additional requirement, is that instances of the same `Semigroup` must
+occupy the first position of the source `Pair` and the `Pair` returned by the
+function.
 
 ```javascript
-const Pair = require('crocks/Pair')
+import Pair from 'crocks/Pair'
 
-const setProp = require('crocks/helpers/setProp')
-const omit = require('crocks/helpers/omit')
+import setProp from 'crocks/helpers/setProp'
+import omit from 'crocks/helpers/omit'
 
 // addTmp :: (String, a, Object) -> Pair [ String ] Object
 const addTmp = (key, value, x) =>
@@ -704,7 +706,7 @@ for `merge`.
 This method comes in handy when using a `Pair` as a means to run parallel
 computations and combine their results into a final answer. Typically this
 method works hand in hand with the either the [`branch`](#branch) or
-[`fanout`][fanout] helper functions.
+[`fanout`](#fanout) helper functions.
 
 ```javascript
 import Sum from 'crocks/Sum'
@@ -1032,7 +1034,7 @@ a function will be returned that takes a given value and returns an `Pair`.
 import Pair from 'crocks/Pair'
 import Sum from 'crocks/Sum'
 import Writer from 'crocks/Writer'
-import fanout from 'crocks/helpers/fanout'
+import fanout from 'crocks/Pair/fanout'
 
 import writerToPair from 'crocks/Pair/writerToPair'
 

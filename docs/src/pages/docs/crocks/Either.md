@@ -1071,7 +1071,7 @@ Either c a ~> ((c -> b), (a -> b)) -> b
 
 Used as a means to map and extract a value from an `Either` based on the
 context, `either` takes two functions as its arguments. The first will map any
-the value [`Left`](#left) in a left instance. While the second is used to map any [`Right`](#right)
+[`Left`](#left) value in a left instance. While the second is used to map any [`Right`](#right)
 instance value. The function will return the result of whichever function is
 used to map.
 

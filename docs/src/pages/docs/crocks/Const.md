@@ -147,7 +147,7 @@ an `Applicative` implementation by creating an instance that points to
 the `empty` element of the underlying `Monoid`.
 
 The `Applicative` laws work due to the fact that we can derive an `Apply` by
-mapping all every morphinism to the `concat` method of a pointed to `Semigroup`.
+mapping all every morphism to the `concat` method of a pointed to `Semigroup`.
 As, we must be a `Semigroup` before we can be a `Monoid`, [`ap`](#ap) is
 guaranteed.
 

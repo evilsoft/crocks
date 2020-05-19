@@ -114,5 +114,14 @@ make sure to run the following before committing changes:
 $ npm run doctoc
 ```
 
+### Taking Credit
+Once you've contributed your wonderful piece of code, it's time to add yourself
+to the list of contributors. All you need to do is run the following command
+at some point during your PR and following the prompts:
+
+```
+$ npm run contributors:add
+```
+
 [electric]: https://electricjs.com/
 [docs-loc]: https://github.com/evilsoft/crocks/tree/master/docs/src/pages/docs

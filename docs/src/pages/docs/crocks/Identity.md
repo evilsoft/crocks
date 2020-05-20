@@ -335,8 +335,8 @@ Identity(42)
   .valueOf()
 //=> 42
 
-Identity([10,20])
-  .concat(Identity([30,40]))
+Identity([ 10, 20 ])
+  .concat(Identity([ 30, 40 ]))
   .valueOf()
 //=>[ 10, 20, 30, 40 ]
 ```

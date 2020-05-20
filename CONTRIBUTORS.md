@@ -117,7 +117,7 @@ $ npm run doctoc
 ### Taking Credit
 Once you've contributed your wonderful piece of code, it's time to add yourself
 to the list of contributors. All you need to do is run the following command
-at some point during your PR and following the prompts:
+at some point during your PR and follow the prompts:
 
 ```
 $ npm run contributors:add

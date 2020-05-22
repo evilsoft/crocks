@@ -296,12 +296,12 @@ n.fork(log('rej'), log('res'))
 Async.fromPromise :: (* -> Promise a e) -> (* -> Async e a)
 ```
 
-Used to turn an "eager" `Promise` returning function, into a function that takes
-the same arguments but returns a "lazy" `Async` instance instead. Due to the
-lazy nature of `Async`, any curried interface will not be respected on the
-provided function. This can be solved by wrapping the resulting function
-with [`nAry`][nary], which will provide a curried function that will return the
-desired `Async`.
+Used to turn an "eager" `Promise` returning function into a function that takes
+the same arguments, but returns a "lazy" `Async` instance instead.
+
+The `Promise` returning function given to `fromPromise` is automatically curried,
+allowing you to partially apply the resulting function to its parameters until
+an `Async` type is returned.
 
 <!-- eslint-disable no-console -->
 <!-- eslint-disable no-sequences -->
@@ -311,7 +311,6 @@ import Async from 'crocks/Async'
 
 import ifElse from 'crocks/logic/ifElse'
 import isNumber from 'crocks/predicates/isNumber'
-import nAry from 'crocks/helpers/nAry'
 
 const { fromPromise } = Async
 
@@ -334,7 +333,7 @@ safeProm(isNumber, '34')
 
 // safeAsync :: (a -> Boolean) -> a -> Async a a
 const safeAsync =
-  nAry(2, fromPromise(safeProm))
+  fromPromise(safeProm)
 
 // numAsync :: a -> Async a Number
 const numAsync =
@@ -380,8 +379,8 @@ As such, the need for binding may arise. `fromNode` provides a second, optional
 argument that takes the context that will be used to bind the function being
 wrapped.
 
-Like [`fromPromise`](#frompromise), any curried interface will not be respected.
-If a curried interface is needed then [`nAry`][nary] can be used.
+Any curried interface will not be respected and if a curried interface is needed 
+then [`nAry`][nary] can be used.
 
 <!-- eslint-disable no-console -->
 <!-- eslint-disable no-sequences -->

@@ -11,6 +11,7 @@ const fl = require('../core/flNames')
 
 const array = require('../core/array')
 const compose = require('../core/compose')
+const curry = require('../core/curry')
 const once = require('../core/once')
 const unit = require('../core/_unit')
 
@@ -62,11 +63,18 @@ function fromPromise(fn) {
     throw new TypeError('Async.fromPromise: Promise returning function required')
   }
 
+  const _fn = curry(fn)
+
   return function() {
     const promiseArgs = arguments
 
+    const promise = _fn.apply(null, promiseArgs)
+
+    if (isFunction(promise)) {
+      return fromPromise(promise)
+    }
+
     return Async(function(reject, resolve) {
-      const promise = fn.apply(null, promiseArgs)
 
       if(!isPromise(promise)) {
         throw new TypeError('Async.fromPromise: Promise returning function required')

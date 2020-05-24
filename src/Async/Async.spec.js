@@ -225,6 +225,21 @@ test('Async fromNode resolution', t => {
   Async.fromNode(resCPS)(val).fork(rej(val), res(val))
 })
 
+test('Async fromNode partially applied', t => {
+  t.plan(2)
+
+  const val = 'super fun'
+
+  const rejCPS = (x, y, cf) => cf(x, y)
+  const resCPS = (x, y, cf) => cf(null, x, y)
+
+  const rej = y => x => t.equal(x, y, 'rejects an erred CPS')
+  const res = y => x => t.equal(x, y, 'resolves a good CPS')
+
+  Async.fromNode(rejCPS)(val)(val).fork(rej(val), res(val))
+  Async.fromNode(resCPS)(val)(val).fork(rej(val), res(val))
+})
+
 test('Async all', t => {
   const all = bindFunc(Async.all)
 

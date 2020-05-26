@@ -43,6 +43,12 @@ function curry(fn) {
     value: true
   })
 
+  Object.defineProperty(curried, 'length', {
+    enumerable: false,
+    writable: false,
+    value: fn.length
+  })
+
   return curried
 }
 

@@ -379,8 +379,17 @@ As such, the need for binding may arise. `fromNode` provides a second, optional
 argument that takes the context that will be used to bind the function being
 wrapped.
 
-Any curried interface will not be respected and if a curried interface is needed 
-then [`nAry`][nary] can be used.
+The function returned from `fromNode` will be automatically curried, allowing you
+to partially apply the function up to its penultimate parameter<sup>[1]</sup>, so long as the 
+arity of the original function given to `fromNode` can be determined via its `.length` property.
+
+In practice this means that functions defined via `compose` or those making use
+of `arguments`, spread args (`...args`) or default values for parameters, will not be 
+good candidates for partial application.
+
+<sup>[1]</sup> The final parameter to the incoming function is provided to you by`fromNode` rather 
+than being part of the parameters that can be partially applied.
+
 
 <!-- eslint-disable no-console -->
 <!-- eslint-disable no-sequences -->

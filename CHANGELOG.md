@@ -1,4 +1,69 @@
 # Change Log for `crocks`
+v0.12.4 -- September 22, 2019
+--
+
+### Additions
+* Functions/Methods
+  * `isMap` predicate function
+  * Add `bichain` for the following types:
+    * `Either`
+    * `Maybe`
+    * `Result`
+
+### Optimizations
+* Update `curry` to remove extra stack frames when currying.
+
+### Documentation
+* Add example for `applyTo`
+* Corrections to the `project` example
+
+### Pull Requests
+* [#434 - Add isMap predicate](https://github.com/evilsoft/crocks/pull/434)
+* [#435 - docs: add example for applyTo](https://github.com/evilsoft/crocks/pull/)
+* [#438 - Micro-optimization to curry](https://github.com/evilsoft/crocks/pull/438)
+* [#442 - Correct project example of Tuple](https://github.com/evilsoft/crocks/pull/442)
+* [#443 - Add `bichain` to remaining Sum Types](https://github.com/evilsoft/crocks/pull/443)
+
+v0.12.3 -- July 21, 2019
+--
+
+### Additions
+* Functions/Methods
+  * `hasProps` predicate
+  * `psi` combinator
+  * `compose2` combinator
+  * `bichain` pointfree
+  * `isBichain` predicate
+  * `bichain` instance function on `Async`
+
+### Documentation
+* Minor Spelling error corrections
+* Update to `ap` example on `Identity`
+
+### Pull Requests
+* [#416 - Minor spelling mistake](https://github.com/evilsoft/crocks/pull/416)
+* [#413 - Update on index exports](https://github.com/evilsoft/crocks/pull/413)
+* [#417 - Adding new `hasProps` predicate](https://github.com/evilsoft/crocks/pull/417)
+* [#420 - Moving `Pred` to core](https://github.com/evilsoft/crocks/pull/420)
+* [#424 - Updating `ap` example on `Identity`](https://github.com/evilsoft/crocks/pull/424)
+* [#429 - Add the powerful P combinator](https://github.com/evilsoft/crocks/pull/429)
+* [#394 - Add bichain to Async](https://github.com/evilsoft/crocks/pull/394)
+* [#431 - Adding in the `compose2` combinator](https://github.com/evilsoft/crocks/pull/431)
+
+v0.12.1 -- June 30, 2019
+--
+
+### Additions
+* Functions/Methods
+  * `init` Pointfree
+  * `last` Pointfree
+  * `List/maybeToList` Transformation
+  * `Maybe/maybeToArray` Transformation
+
+### Pull Requests
+* [#409 - Add `init` and `last` to pointfree](https://github.com/evilsoft/crocks/pull/409)
+* [#412 - Add `maybeToList` and `maybeToArray` transformations](https://github.com/evilsoft/crocks/pull/412)
+
 
 v0.12.0 -- June 16, 2019
 --

@@ -11,8 +11,8 @@ const isSameType = require('../core/isSameType')
 const applyTransform = result =>
   result.either(Last.empty, Last)
 
-// resultToLast : Result b a -> Last a
-// resultToLast : (a -> Result c b) -> a -> Last b
+/** resultToLast :: Result b a -> Last a */
+/** resultToLast :: (a -> Result c b) -> a -> Last b */
 function resultToLast(result) {
   if(isFunction(result)) {
     return function(x) {

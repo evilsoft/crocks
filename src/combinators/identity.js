@@ -2,7 +2,7 @@
 /** @author Ian Hofmann-Hicks (evil) */
 
 // Identity (Idiot)
-// identity :: a -> a
+/** identity :: a -> a */
 const identity =
   x => x
 

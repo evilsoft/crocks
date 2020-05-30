@@ -1,5 +1,6 @@
 module.exports = {
   hasProp: require('./hasProp'),
+  hasProps: require('./hasProps'),
   hasPropPath: require('./hasPropPath'),
   isAlt: require('./isAlt'),
   isAlternative: require('./isAlternative'),
@@ -7,6 +8,7 @@ module.exports = {
   isApply: require('./isApply'),
   isArray: require('./isArray'),
   isBifunctor: require('./isBifunctor'),
+  isBichain: require('./isBichain'),
   isBoolean: require('./isBoolean'),
   isCategory: require('./isCategory'),
   isChain: require('./isChain'),
@@ -22,6 +24,7 @@ module.exports = {
   isFunctor: require('./isFunctor'),
   isInteger: require('./isInteger'),
   isIterable: require('./isIterable'),
+  isMap: require('./isMap'),
   isMonad: require('./isMonad'),
   isMonoid: require('./isMonoid'),
   isNil: require('./isNil'),

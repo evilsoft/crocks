@@ -4,8 +4,8 @@
 const curry = require('../core/curry')
 const isFunction = require('../core/isFunction')
 
-// tupleToArray : Tuple a -> [ a ]
-// tupleToArray : (a -> Tuple b) -> a -> [ b ]
+/** tupleToArray :: Tuple a -> [ a ] */
+/** tupleToArray :: (a -> Tuple b) -> a -> [ b ] */
 function tupleToArray(tuple) {
   if(isFunction(tuple)) {
     return function(x) {

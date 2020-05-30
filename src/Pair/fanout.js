@@ -16,7 +16,7 @@ const valid = (x, y) =>
     && isFunction(x.first)
     && isFunction(x.second)
 
-// fanout : m a b -> m a c -> m a (b, c)
+/** fanout :: m a b -> m a c -> m a (b, c) */
 function fanout(fst, snd) {
   if(isFunction(fst) && isFunction(snd)) {
     return x =>

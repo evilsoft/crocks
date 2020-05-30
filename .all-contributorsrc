@@ -241,7 +241,56 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "RichardForrester",
+      "name": "RichardForrester",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/12902182?v=4",
+      "profile": "https://github.com/RichardForrester",
+      "contributions": [
+        "code",
+        "doc",
+        "test"
+      ]
+    },
+    {
+      "login": "JacopKane",
+      "name": "Furkan Tunalı",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/68406?v=4",
+      "profile": "http://furkantunali.com",
+      "contributions": [
+        "doc",
+        "example"
+      ]
+    },
+    {
+      "login": "sunwukonga",
+      "name": "Paul Desmond Parker",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/12194690?v=4",
+      "profile": "https://github.com/sunwukonga",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "area73",
+      "name": "Rodrigo Erades",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/2030605?v=4",
+      "profile": "https://github.com/area73",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "JamieDixon",
+      "name": "Jamie Dixon",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/1519443?v=4",
+      "profile": "https://twitter.com/jamiedixon",
+      "contributions": [
+        "code"
+      ]
     }
   ],
-  "repoType": "github"
+  "repoType": "github",
+  "commitConvention": "none"
 }

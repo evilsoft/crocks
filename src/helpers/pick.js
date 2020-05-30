@@ -17,7 +17,7 @@ function pickKeys(obj) {
   }
 }
 
-// pick : ([ String ] | List String) -> Object -> Object
+/** pick :: ([ String ] | List String) -> Object -> Object */
 function pick(keys, obj) {
   if(!isFoldable(keys)) {
     throw new TypeError('pick: Foldable required for first argument')

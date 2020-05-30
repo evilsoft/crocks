@@ -1,7 +1,7 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const VERSION = 3
+const VERSION = 4
 
 const _defineUnion = require('./defineUnion')
 const _equals = require('./equals')
@@ -115,6 +115,23 @@ function Maybe(u) {
     return Maybe.Just(either(f, g))
   }
 
+  function bichain(l, r) {
+    const bichainErr =
+      'Maybe.bichain: Both arguments must be Maybe returning functions'
+
+    if(!(isFunction(l) && isFunction(r))) {
+      throw new TypeError(bichainErr)
+    }
+
+    const m = either(l, r)
+
+    if(!isSameType(Maybe, m)) {
+      throw new TypeError(bichainErr)
+    }
+
+    return m
+  }
+
   function map(method) {
     return function(fn) {
       if(!isFunction(fn)) {
@@ -223,7 +240,7 @@ function Maybe(u) {
 
   return {
     inspect, toString: inspect, either,
-    option, type, equals, coalesce,
+    option, type, equals, bichain, coalesce,
     zero, ap, of, sequence,
     traverse,
     alt: alt('alt'),

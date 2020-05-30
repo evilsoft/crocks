@@ -56,11 +56,11 @@ Prod :: Number -> Prod Number
 ```
 
 `Prod` provides multiplication on `Number`s and needs to be constructed with
-a `Number` instance. Calling the constructor with a `Number`, results in a new
-`Prod` that wraps the provided `Number`.
+a `Number` instance. Calling the constructor with a `Number`, results in a
+new `Prod` that wraps the provided `Number`.
 
-Passing `undefined`, `NaN` or `null` to the constructor will result in an
-`empty` instance, or an instance containing a `1`.
+Passing `undefined`, `NaN` or `null` to the constructor will result in
+an `empty` instance, or an instance containing a `1`.
 
 ```javascript
 import Prod from 'crocks/Prod'
@@ -185,8 +185,8 @@ Prod ~> () -> Number
 `valueOf` is used on all `crocks` `Monoid`s as a means of extraction. While
 the extraction is available, types that implement `valueOf` are not necessarily
 a `Comonad`. This function is used primarily for convenience for some of the
-helper functions that ship with `crocks`. Calling `valueOf` on a `Prod`
-instance will result in the underlying `Number`.
+helper functions that ship with `crocks`. Calling `valueOf` on 
+a `Prod` instance will result in the underlying `Number`.
 
 ```javascript
 import Prod from 'crocks/Prod'

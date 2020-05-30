@@ -11,8 +11,8 @@ const isSameType = require('../core/isSameType')
 const applyTransform = either =>
   either.either(Async.Rejected, Async.Resolved)
 
-// eitherToAsync : Either e a -> Async e a
-// eitherToAsync : (a -> Either e b) -> a -> Async e b
+/** eitherToAsync :: Either e a -> Async e a */
+/** eitherToAsync :: (a -> Either e b) -> a -> Async e b */
 function eitherToAsync(either) {
   if(isFunction(either)) {
     return function(x) {

@@ -1,6 +1,6 @@
 {
   "name": "crocks",
-  "version": "0.12.0",
+  "version": "0.12.4",
   "description": "A collection of well known Algebraic Datatypes for your utter enjoyment.",
   "main": "./index.js",
   "scripts": {
@@ -26,8 +26,7 @@
   },
   "lint-staged": {
     "*.{js,md}": [
-      "eslint --fix",
-      "git add"
+      "eslint --fix"
     ]
   },
   "repository": {
@@ -48,7 +47,7 @@
   "bugs": {
     "url": "https://github.com/evilsoft/crocks/issues"
   },
-  "homepage": "https://evilsoft.github.io/crocks",
+  "homepage": "https://crocks.dev",
   "nyc": {
     "check-coverage": true,
     "lines": 100,
@@ -61,29 +60,29 @@
       "**/*.spec.js"
     ]
   },
-  "devDependencies": {
-    "all-contributors-cli": "^6.2.0",
-    "buble": "^0.19.7",
-    "coveralls": "^3.0.3",
-    "doctoc": "^1.4.0",
-    "eslint": "^5.16.0",
-    "eslint-plugin-markdown": "^1.0.0",
-    "eslint-watch": "^5.0.1",
-    "husky": "^1.3.1",
-    "lint-staged": "^8.1.5",
-    "nodemon": "^1.18.10",
-    "nyc": "^13.0.1",
-    "rimraf": "^2.6.2",
-    "sinon": "^7.3.1",
-    "tap-spec": "^5.0.0",
-    "tape": "^4.9.0",
-    "uglify-js": "^3.4.9",
-    "webpack": "^4.20.2",
-    "webpack-cli": "^3.1.1"
-  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
     }
+  },
+  "devDependencies": {
+    "all-contributors-cli": "^6.15.0",
+    "buble": "^0.20.0",
+    "coveralls": "^3.1.0",
+    "doctoc": "^1.4.0",
+    "eslint": "^7.1.0",
+    "eslint-plugin-markdown": "^1.0.2",
+    "eslint-watch": "^6.0.1",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.6",
+    "nodemon": "^2.0.4",
+    "nyc": "^15.0.1",
+    "rimraf": "^3.0.2",
+    "sinon": "^9.0.2",
+    "tap-spec": "^5.0.0",
+    "tape": "^4.13.3",
+    "uglify-js": "^3.9.3",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
   }
 }

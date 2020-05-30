@@ -4,24 +4,24 @@
 const Pred = require('../core/types').proxy('Pred')
 
 const curry = require('../core/curry')
-const { Just, Nothing } = require('.')
 const predOrFunc = require('../core/predOrFunc')
-
 const isFunction = require('../core/isFunction')
 const isFoldable = require('../core/isFoldable')
 const isSameType = require('../core/isSameType')
 
+const { Just, Nothing } = require('.')
+
 const accumulator = fn => (acc, cur) =>
   !acc.found && predOrFunc(fn, cur) ? { found: true, value: cur } : acc
 
-// find :: Foldable f => ((a -> Boolean) | Pred) -> f a -> Maybe a
+/** find :: Foldable f => ((a -> Boolean) | Pred) -> f a -> Maybe a */
 function find(fn, foldable) {
   if(!isFunction(fn) && !isSameType(Pred, fn)) {
-    throw new TypeError('find: Pred or a predicate function is required for first argument')
+    throw new TypeError('find: First argument must be a Pred or predicate')
   }
 
   if(!isFoldable(foldable)) {
-    throw new TypeError('find: Foldable required for second argument')
+    throw new TypeError('find: Second argument must be a Foldable')
   }
 
   const result = foldable.reduce(accumulator(fn), { found: false })

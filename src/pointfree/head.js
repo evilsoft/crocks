@@ -1,11 +1,11 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
+const cloneIterable = require('../core/cloneIterable')
 const isArray = require('../core/isArray')
 const isFunction = require('../core/isFunction')
 const isIterable = require('../core/isIterable')
 const isString = require('../core/isString')
-const cloneIterable = require('../core/cloneIterable')
 
 const { Nothing, Just } = require('../core/Maybe')
 

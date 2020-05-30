@@ -48,7 +48,7 @@ const add =
 
 Pair(Identity(30), StrConst('always, forever'))
   .bimap(map(add(4)), map(add(4)))
-//=> Pair(Identity 34, Const(String) "alway, forever")
+//=> Pair(Identity 34, Const(String) "always, forever")
 
 // ArrayConst :: [ b ] -> Const [ b ] a
 const ArrayConst =
@@ -147,7 +147,7 @@ an `Applicative` implementation by creating an instance that points to
 the `empty` element of the underlying `Monoid`.
 
 The `Applicative` laws work due to the fact that we can derive an `Apply` by
-mapping all every morphinism to the `concat` method of a pointed to `Semigroup`.
+mapping all every morphism to the `concat` method of a pointed to `Semigroup`.
 As, we must be a `Semigroup` before we can be a `Monoid`, [`ap`](#ap) is
 guaranteed.
 
@@ -258,8 +258,8 @@ Const c a ~> (a -> b) -> Const c b
 
 Typically used to lift a function into the context of an ADT, but due to the
 unique behavior of `Const`, any function that is passed in to `map` will be
-validated but it will not be applied. `map` will return a new `Const`
-with the same left value.
+validated but it will not be applied. `map` will return a new `Const` with
+the same left value.
 
 ```javascript
 import Const from 'crocks/Const'
@@ -295,8 +295,8 @@ Semigroup s => Const s (a -> b) ~> Const s a -> Const s b
 
 The unique nature of the `Const` functor allows any underlying `Semigroup` to
 act an an `Apply`. When on `Const` is applied to another `Const` whose
-underlying `Semigroup`s match, the `Semigroup`s will be combined by calling
-`concat` on the underlying `Semigroup`.
+underlying `Semigroup`s match, the `Semigroup`s will be combined by
+calling `concat` on the underlying `Semigroup`.
 
 `ap` will throw a `TypeError` if the underlying Type does not point to a type
 of `Semigroup`.

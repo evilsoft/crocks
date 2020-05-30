@@ -16,7 +16,7 @@ const unit = require('./_unit')
 const fl = require('./flNames')
 
 const Maybe = require('./Maybe')
-const Pred = require('../Pred')
+const Pred = require('./Pred')
 
 const constant = x => () => x
 const identity = x => x

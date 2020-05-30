@@ -5,7 +5,7 @@ const isPredOrFunc = require('../core/isPredOrFunc')
 const isFunction = require('../core/isFunction')
 const predOrFunc = require('../core/predOrFunc')
 
-// safeAfter :: ((b -> Boolean) | Pred) -> (a -> b) -> a -> Maybe b
+/** safeAfter :: ((b -> Boolean) | Pred) -> (a -> b) -> a -> Maybe b */
 function safeAfter(pred, fn) {
   if(!isPredOrFunc(pred)) {
     throw new TypeError('safeAfter: Pred or predicate function required for first argument')

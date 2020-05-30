@@ -10,7 +10,7 @@ Identity a
 ```
 
 `Identity` is a `crock` that can be used to wrap a common interface around 
-existing Javascript types and functions. It maintains integrity by lifting 
+existing JavaScript types and functions. It maintains integrity by lifting 
 and applying functions and types as is, without adding any additional structure
 or effects. By not applying and additional structure to existing functions, 
 `Identity` can be swapped in and out for other `Functor`s that do apply their 
@@ -37,7 +37,7 @@ Identity(10)
 Identity :: a -> Identity a
 ```
 
-The contstructor for an `Identity` is a unary function. When a value is passed
+The constructor for an `Identity` is a unary function. When a value is passed
 in an `Identity` of the given value is returned ready for `map` or `chain`. 
 
 ```javascript
@@ -125,10 +125,11 @@ Identity s => Identity s ~> Identity s -> Identity s
 ```
 
 When an underlying value of a given `Identity` is fixed to a `Semigroup`, 
-`concat` can be used to concat another `Identity` instance with an underlying
-`Semigroup` of the same type. Expecting an `Identity` wrapping a `Semigroup` of
-the same type, `concat` will give back a new `Identity` instance wrapping the
-result of combining the two underlying `Semigroup`s.
+`concat` can be used to concat another `Identity` instance with an
+underlying `Semigroup` of the same type. Expecting an `Identity` wrapping
+a `Semigroup` of the same type, `concat` will give back a
+new `Identity` instance wrapping the result of combining the two
+underlying `Semigroup`s.
 
 ```javascript
 import Identity from 'crocks/Identity'
@@ -166,8 +167,8 @@ sumList([ 3, 4, 5 ])
 Identity a ~> (a -> b) -> Identity b
 ```
 
-Used to apply transformations to values you've lifted into an `Identity`, `map`
-takes a function that it will lift into the context of the `Identity` and apply
+Used to apply transformations to values you've lifted into an `Identity`, `map` takes
+a function that it will lift into the context of the `Identity` and apply
 to it the wrapped value. `Identity` contains no behavior and will do nothing
 more than apply the value inside the `Identity` to the function.
 
@@ -203,7 +204,7 @@ const prod = a => b => a * b
 const double = prod(2)
 
 Identity(double)
-  .ap(5)
+  .ap(Identity(5))
 //=> Identity 10
 ```
 
@@ -218,8 +219,8 @@ When an instance of `Identity` wraps an `Apply` instance, `sequence` can be used
 swap the type sequence. `sequence` requires either an `Applicative TypeRep` or
 an `Apply` returning function to be provided for its argument.
 
-`sequence` can be derived from [`traverse`](#traverse) by passing it an
-`identity` function (`x => x`).
+`sequence` can be derived from [`traverse`](#traverse) by passing it
+an `identity` function (`x => x`).
 
 ```javascript
 import Identity from 'crocks/Identity'
@@ -244,8 +245,8 @@ Applicative f => Identity a ~> (TypeRep f, (a -> f b)) -> f (Identity a b)
 
 Used to apply the "effect" of an `Apply` to a value inside of a `Identity`,
 `traverse` combines both the "effects" of the `Apply` and the `Identity` by
-returning a new instance of the `Apply`, wrapping the result of the
-`Apply`s "effect" on the value in the `Identity`.
+returning a new instance of the `Apply`, wrapping the result of
+the `Apply`s "effect" on the value in the `Identity`.
 
 `traverse` requires either an `Applicative TypeRep` or an `Apply` returning
 function as its first argument and a function that is used to apply the "effect"
@@ -323,8 +324,9 @@ Identity a ~> () -> a
 ```
 
 `valueOf` is used as a means of extraction. This function is used primarily for
-convenience for some of the helper functions that ship with `crocks`. Calling
-`valueOf` on an `Identity` instance will return the value being contained.
+convenience for some of the helper functions that ship with `crocks`.
+Calling `valueOf` on an `Identity` instance will return the value being
+contained.
 
 ```javascript
 import Identity from 'crocks/Identity'

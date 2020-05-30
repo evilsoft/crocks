@@ -2,7 +2,7 @@
 description: "Combinators API"
 layout: "notopic"
 title: "Combinators"
-functions: ["applyto", "composeb", "constant", "converge", "flip", "identity", "substitution"]
+functions: ["applyto", "composeb", "constant", "converge", "flip", "identity", "psi", "substitution"]
 weight: 10
 ---
 
@@ -20,6 +20,208 @@ give it a value and it will give you back a function ready to take a function.
 Once that function is provided, it will return the result of applying your value
 to that function.
 
+```javascript
+import applyTo from 'crocks/combinators/applyTo'
+
+import First from 'crocks/First'
+import Pair from 'crocks/Pair'
+
+import compose from 'crocks/helpers/compose'
+import flip from 'crocks/combinators/flip'
+import isArray from 'crocks/predicates/isArray'
+import isNumber from 'crocks/predicates/isNumber'
+import isString from 'crocks/predicates/isString'
+import map from 'crocks/pointfree/map'
+import merge from 'crocks/pointfree/merge'
+import mreduceMap from 'crocks/helpers/mreduceMap'
+import safeLift from 'crocks/Maybe/safeLift'
+
+// prices :: [ Number ]
+const prices = [ 4.99, 29.99, 15.99 ]
+
+// getPrices :: (a -> b) -> [ Number ]
+const getPrices = compose(
+  applyTo(prices),
+  map
+)
+
+// discount :: Number -> Number -> Number
+const discount = percent => price =>
+  Number((price - percent / 100 * price).toFixed(2))
+
+getPrices(discount(10))
+//=> [ 4.49, 26.99, 14.39 ]
+
+getPrices(discount(80))
+//=> [ 1, 6, 3.2 ]
+
+// add :: Number -> Number -> Number
+const add = x => y =>
+  x + y
+
+// runAll :: [ (a -> b) ] -> a -> [ b ]
+const runAll =
+  flip(compose(map, applyTo))
+
+runAll([ add(10), add(20) ], 3)
+//=> [ 13, 23 ]
+
+// length :: [ a ] -> Number
+const length = x =>
+  x.length
+
+// yell :: String -> String
+const yell = x =>
+  x.toUpperCase()
+
+// Strategy :: Pair (a -> Boolean) (* -> *)
+// strategies :: [ Strategy ]
+const strategies = [
+  Pair(isNumber, add(10)),
+  Pair(isArray, length),
+  Pair(isString, yell)
+]
+
+// options :: [ Strategy ] -> a -> b
+const options = flip(
+  x => mreduceMap(
+    First,
+    compose(applyTo(x), merge(safeLift))
+  )
+)
+
+options(strategies, 'hello')
+//=> Just "HELLO"
+
+options(strategies, [ 1, 9, 39 ])
+//=> Just 3
+
+options(strategies, 13)
+//=> Just 23
+
+options(strategies, null)
+//=> Nothing
+```
+
+#### compose2
+
+`crocks/combinators/compose2`
+
+```haskell
+compose2 :: (c -> d -> e) -> (a -> c) -> (b -> d) -> a -> b -> e
+```
+
+`compose2` allows for composition between a `binary` function and
+two `unary` functions. `compose2` takes a `binary` function followed by
+two `unary` functions and returns a `binary` function that maps the first
+argument with the first `unary` and the second with the second, passing
+the results to the given `binary` and returning the result.
+
+```javascript
+import compose2 from 'crocks/combinators/compose2'
+
+import and from 'crocks/logic/and'
+import applyTo from 'crocks/combinators/applyTo'
+import flip from 'crocks/combinators/flip'
+import hasProp from 'crocks/predicates/hasProp'
+import isNumber from 'crocks/predicates/isNumber'
+import liftA2 from 'crocks/helpers/liftA2'
+import map from 'crocks/pointfree/map'
+import prop from 'crocks/Maybe/prop'
+import safe from 'crocks/Maybe/safe'
+import safeLift from 'crocks/Maybe/safeLift'
+
+// isNonZero :: Number -> Boolean
+const isNonZero = x =>
+  x !== 0
+
+// isValidDivisor :: Number -> Boolean
+const isValidDivisor =
+  and(isNumber, isNonZero)
+
+// divideBy :: Number -> Number -> Number
+const divideBy = x => y =>
+  y / x
+
+// safeDivide :: Number -> Number -> Maybe Number
+const safeDivide = compose2(
+  liftA2(divideBy),
+  safe(isValidDivisor),
+  safe(isNumber)
+)
+
+safeDivide(0.5, 21)
+//=> Just 42
+
+safeDivide('0.5', 21)
+//=> Nothing
+
+safeDivide(0.5, '21')
+//=> Nothing
+
+safeDivide(29, 0)
+//=> Just 0
+
+safeDivide(0, 29)
+//=> Nothing
+
+// Item :: { id: Integer }
+// Items :: Array Item
+const items =
+  [ { id: 2 }, { id: 1 } ]
+
+// pluck :: String -> Array Object -> Maybe a
+const pluck =
+  compose2(applyTo, prop, flip(map))
+
+pluck('id', items)
+//=> [ Just 2, Just 1 ]
+
+// summarize :: String -> String -> String
+const summarize = name => count =>
+  `${name} purchased ${count} items`
+
+// getLength :: a -> Maybe Number
+const getLength = safeLift(
+  hasProp('length'),
+  x => x.length
+)
+
+// createSummary :: Person -> Array Item -> String
+const createSummary = compose2(
+  liftA2(summarize),
+  prop('name'),
+  getLength
+)
+
+createSummary({
+  name: 'Sam Smith'
+}, items)
+//=> Just "Sam Smith purchased 2 items"
+
+// capitalize :: String -> String
+const capitalize = str =>
+  `${str.charAt(0).toUpperCase()}${str.slice(1)}`
+
+// join :: String -> String -> String -> String
+const join = delim => right => left =>
+  `${left}${delim}${right}`
+
+// toUpper :: String -> String
+const toUpper = x =>
+  x.toUpperCase()
+
+// createName :: String -> String -> String
+const createName =
+  compose2(join(', '), capitalize, toUpper)
+
+createName('Jon', 'doe')
+//=> DOE, Jon
+
+createName('sara', 'smith')
+//=> SMITH, Sara
+```
+
 #### composeB
 
 `crocks/combinators/composeB`
@@ -33,8 +235,8 @@ functions and a value. Given `composeB(f, g)`, which is read `f` after `g`, it
 will return a function that will take value `a` and apply it to `g`, passing the
 result as an argument to `f`, and will finally return the result of `f`. This
 allows only two functions, if you want to avoid things like:
-`composeB(composeB(f, g), composeB(h, i))` then check out
-[`compose`][compose].
+`composeB(composeB(f, g), composeB(h, i))` then check
+out [`compose`][compose].
 
 ```javascript
 import composeB from 'crocks/combinators/composeB'
@@ -308,6 +510,93 @@ This function and [`constant`](#constant) are the workhorses of writing code
 with this library. It quite simply is just a function that when you pass it
 something, it returns that thing right back to you. So simple, I will leave it
 as an exercise to reason about why this is so powerful and important.
+
+#### psi
+
+`crocks/combinators/psi`
+
+```haskell
+psi ::  (b -> b -> c) -> (a -> b) -> a -> a -> c
+```
+
+`psi` is a function that can be considered the sister of [`converge`](#converge).
+Where [`converge`](#converge) takes one argument and maps it through
+two `unary` functions, merging the resulting values with a binary
+function, `psi` takes two arguments and runs them each through the
+same `unary` function before merging them with the given binary function.
+
+`psi` is often used to [`compose`][compose] equality checking functions
+or when needing to validate two arguments of the same type.
+
+```javascript
+import psi from 'crocks/combinators/psi'
+
+import and from 'crocks/logic/and'
+import equals from 'crocks/pointfree/equals'
+import isNumber from 'crocks/predicates/isNumber'
+import liftA2 from 'crocks/helpers/liftA2'
+import safe from 'crocks/Maybe/safe'
+
+// isNonZero :: Number -> Boolean
+const isNonZero = x =>
+  x !== 0
+
+// isValidDivisor :: Number -> Boolean
+const isValidDivisor =
+  and(isNumber, isNonZero)
+
+// divideBy :: Number -> Number -> Number
+const divideBy = x => y =>
+  y / x
+
+// safeDivide :: Number -> Number -> Maybe Number
+const safeDivide =
+  psi(liftA2(divideBy), safe(isValidDivisor))
+
+safeDivide(0.5, 21)
+//=> Just 42
+
+safeDivide('0.5', 21)
+//=> Nothing
+
+safeDivide(0.5, '21')
+//=> Nothing
+
+safeDivide(29, 0)
+//=> Nothing
+
+// capitalize :: String -> String
+const capitalize = str =>
+  `${str.charAt(0).toUpperCase()}${str.slice(1)}`
+
+// join :: String -> String -> String -> String
+const join = delim => right => left =>
+  `${left}${delim}${right}`
+
+// createName :: String -> String -> String
+const createName =
+  psi(join(', '), capitalize)
+
+createName('Jon', 'doe')
+//=> Doe, Jon
+
+createName('sara', 'smith')
+//=> Smith, Sara
+
+// toLowerCase :: String -> String
+const toLowerCase = str =>
+  str.toLowerCase()
+
+// equalsIgnoreCase :: String -> String -> Boolean
+const equalsIgnoreCase =
+  psi(equals, toLowerCase)
+
+equalsIgnoreCase('test', 'TEst')
+//=> true
+
+equalsIgnoreCase('test', 'not-test')
+//=> false
+```
 
 #### substitution
 

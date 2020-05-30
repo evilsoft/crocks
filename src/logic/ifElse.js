@@ -6,7 +6,7 @@ const isFunction = require('../core/isFunction')
 const isPredOrFunc = require('../core/isPredOrFunc')
 const predOrFunc = require('../core/predOrFunc')
 
-// ifElse : (a -> Boolean) | Pred -> (a -> b) -> (a -> c) -> a -> (a | c)
+/** ifElse :: (a -> Boolean) | Pred -> (a -> b) -> (a -> c) -> a -> (a | c) */
 function ifElse(pred, f, g) {
   if(!isPredOrFunc(pred)) {
     throw new TypeError(

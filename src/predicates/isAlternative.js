@@ -4,7 +4,7 @@
 const isApplicative = require('../core/isApplicative')
 const isPlus = require('../core/isPlus')
 
-// isAlternative : a -> Boolean
+/** isAlternative :: a -> Boolean */
 function isAlternative(m) {
   return isPlus(m)
     && isApplicative(m)

@@ -18,8 +18,8 @@ stateful computations.
 
 All `State` instances wrap a function of the form `s -> Pair a s` and can be
 constructed by providing a function of this form. In order to get maximum
-reuse of existing functions, a few construction helpers are available on the
-`State` constructor.
+reuse of existing functions, a few construction helpers are available on
+the `State` constructor.
 
 `State` is lazy and is required to be run at the edge with some initial state.
 Three methods are available on the instance for running the `State` with a
@@ -133,9 +133,9 @@ State.get :: () -> State s s
 State.get :: (s -> a) -> State s a
 ```
 
-A construction helper that is used to access the state portion of a given
-`State` instance. To make the state accessible, `get` will place the state in
-the resultant portion, overwriting what was there previously.
+A construction helper that is used to access the state portion of a
+given `State` instance. To make the state accessible, `get` will place the
+state in the resultant portion, overwriting what was there previously.
 
 `get` may be called with or without a function as its argument. When nothing is
 provided for the argument, the state will be applied to the resultant as is. The
@@ -285,11 +285,11 @@ heckYeah
 State.of :: a -> State s a
 ```
 
-Used to "blindly" lift any Javascript value into a `State`, `of` will take the
+Used to "blindly" lift any JavaScript value into a `State`, `of` will take the
 provided value and return back a new `State` instance with the value in
 the resultant. There are many uses for `of`, but mostly it is used to set the
-resultant in the same way [`put`](#put) is used to replace the state. Many times
-`of` is used at the start of a given stateful computation or in conjunction
+resultant in the same way [`put`](#put) is used to replace the state. Many
+times `of` is used at the start of a given stateful computation or in conjunction
 with [`put`](#put) and [`modify`](#modify) to replace the `Unit` the resultant
 is set to for those construction helpers.
 
@@ -385,11 +385,11 @@ getNum
 State s (a -> b) ~> State s a -> State s b
 ```
 
-Short for apply, the `ap` method is used to apply the resultant of a given
-`State` instance to a function wrapped in another instance. On a `State`
-instance that wraps a function, calling `ap`, providing it another `State`
-instance, will return a new `State` instance with the result of the function
-in the resultant portion.
+Short for apply, the `ap` method is used to apply the resultant of a
+given `State` instance to a function wrapped in another instance. On
+a `State` instance that wraps a function, calling `ap`, providing it
+another `State` instance, will return a new `State` instance with the result of
+the function in the resultant portion.
 
 When used with curried, polyadic functions, multiple stateful computations can
 be combined using the lifted function as a means to combine each of the
@@ -458,8 +458,8 @@ State s a ~> (a -> State s b) -> State s b
 
 As a means to combine stateful computations, `chain` is used to sequence
 state transactions that either read from or write to the state. `chain` takes
-a unary function that must return a new `State` instance. `chain` returns a new
-`State` instance that will apply the computation when run.
+a unary function that must return a new `State` instance. `chain` returns a
+new `State` instance that will apply the computation when run.
 
 ```javascript
 import State from 'crocks/State'
@@ -517,8 +517,8 @@ to run the instance with. The value must be a member of the type that the
 given `State` instance is fixed to in it's state portion, `s`.
 
 When called, `runWith` will run the state transition with the given value as the
-initial state and will return the resulting [`Pair`][pair] with the resultant in the
-`fst` (first) and the state in the `snd` (second).
+initial state and will return the resulting [`Pair`][pair] with the resultant in
+the `fst` (first) and the state in the `snd` (second).
 
 
 ```javascript

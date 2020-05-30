@@ -4,7 +4,7 @@
 const hasAlg = require('./hasAlg')
 const isFunctor = require('./isFunctor')
 
-// isAlt : a -> Boolean
+/** isAlt :: a -> Boolean */
 function isAlt(m) {
   return isFunctor(m)
     && hasAlg('alt', m)

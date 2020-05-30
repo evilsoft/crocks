@@ -7,6 +7,7 @@ const bindFunc = helpers.bindFunc
 
 const curry = require('./curry')
 const compose = curry(require('./compose'))
+const equals = require('../core/equals')
 const isArray = require('./isArray')
 const isFunction = require('./isFunction')
 const isObject = require('./isObject')
@@ -126,8 +127,8 @@ test('Maybe @@type', t => {
   t.equal(Just(0)['@@type'], Maybe['@@type'], 'static and instance versions are the same for Just')
   t.equal(Nothing(0)['@@type'], Maybe['@@type'], 'static and instance versions are the same for Nothing')
 
-  t.equal(Just(0)['@@type'], 'crocks/Maybe@3', 'type returns crocks/Maybe@3 for Just')
-  t.equal(Nothing()['@@type'], 'crocks/Maybe@3', 'type returns crocks/Maybe@3 for Nothing')
+  t.equal(Just(0)['@@type'], 'crocks/Maybe@4', 'type returns crocks/Maybe@4 for Just')
+  t.equal(Nothing()['@@type'], 'crocks/Maybe@4', 'type returns crocks/Maybe@4 for Nothing')
 
   t.end()
 })
@@ -209,6 +210,62 @@ test('Maybe coalesce', t => {
 
   t.ok(nothing.equals(Maybe.Just('was nothing')),'returns a Maybe wrapping was nothing')
   t.ok(just.equals(Maybe.Just('was something')),'returns a Maybe wrapping was something')
+
+  t.end()
+})
+
+test('Maybe bichain left errors', t => {
+  const { Nothing } = Maybe
+  const bichain = bindFunc(Nothing(0).bichain)
+
+  const err = /Maybe.bichain: Both arguments must be Maybe returning functions/
+  t.throws(bichain(undefined, Nothing), err, 'throws with undefined on left')
+  t.throws(bichain(null, Nothing), err, 'throws with null on left')
+  t.throws(bichain(0, Nothing), err, 'throws with falsy number on left')
+  t.throws(bichain(1, Nothing), err, 'throws with truthy number on left')
+  t.throws(bichain('', Nothing), err, 'throws with falsy string on left')
+  t.throws(bichain('string', Nothing), err, 'throws with truthy string on left')
+  t.throws(bichain(false, Nothing), err, 'throws with false on left')
+  t.throws(bichain(true, Nothing), err, 'throws with true on left')
+  t.throws(bichain([], Nothing), err, 'throws with an array on left')
+  t.throws(bichain({}, Nothing), err, 'throws with an object on left')
+
+  t.throws(bichain(unit, Nothing), err, 'throws with a non-Maybe returning function')
+
+  t.end()
+})
+
+test('Maybe bichain right errors', t => {
+  const { Just } = Maybe
+  const bichain = bindFunc(Just(0).bichain)
+
+  const err = /Maybe.bichain: Both arguments must be Maybe returning functions/
+  t.throws(bichain(Just, undefined), err, 'throws with undefined on left')
+  t.throws(bichain(Just, null), err, 'throws with null on left')
+  t.throws(bichain(Just, 0), err, 'throws with falsy number on left')
+  t.throws(bichain(Just, 1), err, 'throws with truthy number on left')
+  t.throws(bichain(Just, ''), err, 'throws with falsy string on left')
+  t.throws(bichain(Just, 'string'), err, 'throws with truthy string on left')
+  t.throws(bichain(Just, false), err, 'throws with false on left')
+  t.throws(bichain(Just, true), err, 'throws with true on left')
+  t.throws(bichain(Just, []), err, 'throws with an array on left')
+  t.throws(bichain(Just, {}), err, 'throws with an object on left')
+
+  t.throws(bichain(Just, unit), err, 'throws with a non-Maybe returning function')
+
+  t.end()
+})
+
+test('Maybe bichain functionality', t => {
+  const { Nothing, Just } = Maybe
+
+  const left = x => Nothing(x + 1)
+  const right = x => Just((x || 0) + 1)
+
+  t.ok(equals(Nothing().bichain(right, left), Just(1)), 'moves from Nothing to Just')
+  t.ok(equals(Just(0).bichain(right, left), Nothing()), 'moves from Just to Nothing')
+  t.ok(equals(Just(0).bichain(left, right), Just(1)), 'moves from Just to Just')
+  t.ok(equals(Nothing().bichain(left, right), Nothing()), 'moves from Nothing to Nothing')
 
   t.end()
 })

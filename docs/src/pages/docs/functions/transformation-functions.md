@@ -171,23 +171,25 @@ bad
 | [`eitherToFirst`][either-first] | `Either b a -> First a` | `(a -> Either c b) -> a -> First b` | `crocks/First` |
 | [`eitherToLast`][either-last] | `Either b a -> Last a` | `(a -> Either c b) -> a -> Last b` | `crocks/Last` |
 | [`eitherToMaybe`][either-maybe] | `Either b a -> Maybe a` | `(a -> Either c b) -> a -> Maybe b` | `crocks/Maybe` |
-| `eitherToResult` | `Either e a -> Result e a` | `(a -> Either e b) -> a -> Result e b` | `crocks/Result` |
+| [`eitherToResult`][either-result] | `Either e a -> Result e a` | `(a -> Either e b) -> a -> Result e b` | `crocks/Result` |
 | [`firstToAsync`][first-async] | `e -> First a -> Async e a` | `e -> (a -> First b) -> a -> Async e b` | `crocks/Async` |
 | [`firstToEither`][first-either] | `c -> First a -> Either c a` | `c -> (a -> First b) -> a -> Either c b` | `crocks/Either` |
 | [`firstToLast`][first-last] | `First a -> Last a` | `(a -> First b) -> a -> Last b` | `crocks/Last` |
 | [`firstToMaybe`][first-maybe] | `First a -> Maybe a` | `(a -> First b) -> a -> Maybe b` | `crocks/Maybe` |
-| `firstToResult` | `c -> First a -> Result c a` | `c -> (a -> First b) -> a -> Result c b` | `crocks/Result` |
+| [`firstToResult`][first-result] | `c -> First a -> Result c a` | `c -> (a -> First b) -> a -> Result c b` | `crocks/Result` |
 | [`lastToAsync`][last-async] | `e -> Last a -> Async e a` | `e -> (a -> Last b) -> a -> Async e b` | `crocks/Async` |
 | [`lastToEither`][last-either] | `c -> Last a -> Either c a` | `c -> (a -> Last b) -> a -> Either c b` | `crocks/Either` |
 | [`lastToFirst`][last-first] | `Last a -> First a` | `(a -> Last b) -> a -> First b` | `crocks/First` |
 | [`lastToMaybe`][last-maybe] | `Last a -> Maybe a` | `(a -> Last b) -> a -> Maybe b` | `crocks/Maybe` |
-| `lastToResult` | `c -> Last a -> Result c a` | `c -> (a -> Last b) -> a -> Result c b` | `crocks/Result` |
+| [`lastToResult`][last-result] | `c -> Last a -> Result c a` | `c -> (a -> Last b) -> a -> Result c b` | `crocks/Result` |
 | `listToArray` | `List a -> [ a ]` | `(a -> List b) -> a -> [ b ]` | `crocks/List` |
+| [`maybeToArray`][maybe-array] | `Maybe a -> [ a ]` | `(a -> Maybe b) -> a -> [ b ]` | `crocks/Maybe` |
 | [`maybeToAsync`][maybe-async] | `e -> Maybe a -> Async e a` | `e -> (a -> Maybe b) -> a -> Async e b` | `crocks/Async` |
 | [`maybeToEither`][maybe-either] | `c -> Maybe a -> Either c a` | `c -> (a -> Maybe b) -> a -> Either c b` | `crocks/Either` |
 | [`maybeToFirst`][maybe-first] | `Maybe a -> First a` | `(a -> Maybe b) -> a -> First b` | `crocks/First` |
 | [`maybeToLast`][maybe-last] | `Maybe a -> Last a` | `(a -> Maybe b) -> a -> Last b` | `crocks/Last` |
-| `maybeToResult` | `c -> Maybe a -> Result c a` | `c -> (a -> Maybe b) -> a -> Result c b` | `crocks/Result` |
+| `maybeToList` | `Maybe a -> List a` | `(a -> Maybe b) -> a -> List b` | `crocks/List` |
+| [`maybeToResult`][maybe-result] | `c -> Maybe a -> Result c a` | `c -> (a -> Maybe b) -> a -> Result c b` | `crocks/Result` |
 | [`resultToAsync`][result-async] | `Result e a -> Async e a` | `(a -> Result e b) -> a -> Async e b` | `crocks/Async` |
 | [`resultToEither`][result-either] | `Result e a -> Either e a` | `(a -> Result e b) -> a -> Either e b` | `crocks/Either` |
 | [`resultToFirst`][result-first] | `Result e a -> First a` | `(a -> Result e b) -> a -> First b` | `crocks/First` |
@@ -212,6 +214,7 @@ bad
 [either-maybe]: ../crocks/Maybe.html#eithertomaybe
 [first-maybe]: ../crocks/Maybe.html#firsttomaybe
 [last-maybe]: ../crocks/Maybe.html#lasttomaybe
+[maybe-array]: ../crocks/Maybe.html#maybetoarray
 [result-maybe]: ../crocks/Maybe.html#resulttomaybe
 
 [either-first]: ../monoids/First.html#eithertofirst
@@ -223,6 +226,11 @@ bad
 [first-last]: ../monoids/Last.html#firsttolast
 [maybe-last]: ../monoids/Last.html#maybetolast
 [result-last]: ../monoids/Last.html#resulttolast
+
+[either-result]: ../crocks/Result.html#eithertoresult
+[first-result]: ../crocks/Result.html#firsttoresult
+[last-result]: ../crocks/Result.html#lasttoresult
+[maybe-result]: ../crocks/Result.html#maybetoresult
 
 [tuple-array]: ../crocks/Tuple.html#tupletoarray
 

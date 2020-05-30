@@ -16,8 +16,8 @@ const applyTransform = (left, first) =>
     Either.Right
   )
 
-// firstToEither : c -> First a -> Either c a
-// firstToEither : c -> (a -> First b) -> a -> Either c b
+/** firstToEither :: c -> First a -> Either c a */
+/** firstToEither :: c -> (a -> First b) -> a -> Either c b */
 function firstToEither(left, first) {
   if(isFunction(first)) {
     return function(x) {

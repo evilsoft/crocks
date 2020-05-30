@@ -3,7 +3,7 @@
 
 const isFunction = require('./isFunction')
 
-// isPromise : a -> Boolean
+/** isPromise :: a -> Boolean */
 function isPromise(p) {
   return !!p
     && isFunction(p.then)

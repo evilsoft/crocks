@@ -4,7 +4,7 @@
 const curry = require('../core/curry')
 const isFunction = require('../core/isFunction')
 
-// partial : ((* -> c), *) -> * -> c
+/** partial :: ((* -> c), *) -> * -> c */
 function partial(...args) {
   const fn = args[0]
   const xs = args.slice(1)

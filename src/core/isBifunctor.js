@@ -4,7 +4,7 @@
 const hasAlg = require('./hasAlg')
 const isFunctor = require('./isFunctor')
 
-// isBifunctor : a -> Boolean
+/** isBifunctor :: a -> Boolean */
 function isBifunctor(m) {
   return isFunctor(m)
     && hasAlg('bimap', m)

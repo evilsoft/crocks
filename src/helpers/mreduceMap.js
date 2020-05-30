@@ -7,7 +7,7 @@ const isFunction = require('../core/isFunction')
 const isMonoid = require('../core/isMonoid')
 const mconcatMap = require('../core/mconcatMap')
 
-// mreduceMap :: Monoid M => M -> (b -> a) -> ( [ b ] | List b ) -> a
+/** mreduceMap :: Monoid M => M -> (b -> a) -> ( [ b ] | List b ) -> a */
 function mreduceMap(m, f, xs) {
   if(!isMonoid(m)) {
     throw new TypeError(

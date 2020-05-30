@@ -14,7 +14,7 @@ function applyPipe(f, g) {
     g.call(null, f.apply(null, args))
 }
 
-// compose : ((y -> z), (x -> y), ..., (a -> b)) -> a -> z
+/** compose :: ((y -> z), (x -> y), ..., (a -> b)) -> a -> z */
 function compose(...args) {
   if(!arguments.length) {
     throw new TypeError(err)

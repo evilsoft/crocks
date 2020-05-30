@@ -12,7 +12,7 @@ const array = require('../core/array')
 const object = require('../core/object')
 const fl = require('../core/flNames')
 
-// map : Functor f => (a -> b) -> f a -> f b
+/** map :: Functor f => (a -> b) -> f a -> f b */
 function map(fn, m) {
   if(!isFunction(fn)) {
     throw new TypeError('map: Function required for first argument')

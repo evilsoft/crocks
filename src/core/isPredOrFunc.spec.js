@@ -1,6 +1,6 @@
 const test = require('tape')
 
-const Pred = require('../Pred')
+const Pred = require('./Pred')
 const isNumber = require('./isNumber')
 const unit = require('./_unit')
 const isPredOrFunc = require('./isPredOrFunc')

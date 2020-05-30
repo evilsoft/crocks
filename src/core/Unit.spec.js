@@ -13,7 +13,7 @@ const curry = require('./curry')
 const compose = curry(require('./compose'))
 const unit = require('./_unit')
 
-const fl = require('../core/flNames')
+const fl = require('./flNames')
 
 const identity = x => x
 

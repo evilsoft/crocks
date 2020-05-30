@@ -14,7 +14,7 @@ const object = require('../core/object')
 const pathError =
   'unsetPath: Non-empty Array of non-empty Strings and/or Positive Integers required for first argument'
 
-// unsetPath :: [ String | Integer ] -> a -> a
+/** unsetPath :: [ String | Integer ] -> a -> a */
 function unsetPath(path, obj) {
   if(!isArray(path) || isEmpty(path)) {
     throw new TypeError(pathError)

@@ -16,8 +16,8 @@ const applyTransform = (left, first) =>
     Async.Resolved
   )
 
-// firstToAsync : e -> First a -> Async e a
-// firstToAsync : e -> (a -> First b) -> a -> Async e b
+/** firstToAsync :: e -> First a -> Async e a */
+/** firstToAsync :: e -> (a -> First b) -> a -> Async e b */
 function firstToAsync(left, first) {
   if(isFunction(first)) {
     return function(x) {

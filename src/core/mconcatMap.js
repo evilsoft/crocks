@@ -6,7 +6,7 @@ const compose = require('./compose')
 const foldWith =
   m => (x, y) => x.concat(m(y))
 
-// mconcatMap :: Monoid M => M -> (b -> a) -> ([ b ] | List b) -> M a
+/** mconcatMap :: Monoid M => M -> (b -> a) -> ([ b ] | List b) -> M a */
 function mconcatMap(M, f, xs) {
   return xs.reduce(foldWith(compose(M, f)), M.empty())
 }

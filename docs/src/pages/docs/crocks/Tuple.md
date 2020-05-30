@@ -482,8 +482,8 @@ project :: Integer -> m ...* -> a
 ```
 
 `project` takes a positive, non-zero Integer as its input and returns another
-function that accepts an `n-Tuple`. It then returns the value from the `n-Tuple`
-that resides at the provided `Integer` index.
+function that accepts an `n-Tuple`. It then returns the value from
+the `n-Tuple` that resides at the provided `Integer` index.
 
 ```javascript
 import Tuple from 'crocks/Tuple'
@@ -495,8 +495,8 @@ const Triple = Tuple(3)('one', 'two', 'three')
 // getFirst :: Number -> a
 const getFirst = project(1)
 
-// getFirst :: Number -> a
-const getSecond = project(1)
+// getSecond :: Number -> a
+const getSecond = project(2)
 
 getFirst(Triple)
 //=> "one"
@@ -538,8 +538,10 @@ const Triple = Tuple(3)
 
 const triple = Triple( 1, { key: 'value' }, 'string' )
 
-tupleToArray(triple)              // => [ 1, { key: 'value' }, 'string' ]
+tupleToArray(triple)
+//=> [ 1, { key: 'value' }, 'string' ]
 
-tupleToArray(constant(triple))()  // => [ 1, { key: 'value' }, 'string' ]
+tupleToArray(constant(triple))()
+//=> [ 1, { key: 'value' }, 'string' ]
 ```
 </article>

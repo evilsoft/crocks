@@ -18,9 +18,9 @@ that can be composed together.
 
 Depending on your needs, an `Async` can be constructed in a variety of ways. The
 typical closely resembles how a `Promise` is constructed with one major
-difference, the arguments used in the function that is passed to the `Promise`
-constructor are reversed in an `Async` to match the order in which `Async` is
-parameterized.
+difference, the arguments used in the function that is passed to
+the `Promise` constructor are reversed in an `Async` to match the order in
+which `Async` is parameterized.
 
 There are many ways to represent asynchronous operations in JavaScript, and as
 such, the libraries available to us in our ecosystem provide different means
@@ -296,12 +296,12 @@ n.fork(log('rej'), log('res'))
 Async.fromPromise :: (* -> Promise a e) -> (* -> Async e a)
 ```
 
-Used to turn an "eager" `Promise` returning function, into a function that takes
-the same arguments but returns a "lazy" `Async` instance instead. Due to the
-lazy nature of `Async`, any curried interface will not be respected on the
-provided function. This can be solved by wrapping the resulting function
-with [`nAry`][nary], which will provide a curried function that will return the
-desired `Async`.
+Used to turn an "eager" `Promise` returning function into a function that takes
+the same arguments, but returns a "lazy" `Async` instance instead.
+
+The `Promise` returning function given to `fromPromise` is automatically curried,
+allowing you to partially apply the resulting function to its parameters until
+an `Async` type is returned.
 
 <!-- eslint-disable no-console -->
 <!-- eslint-disable no-sequences -->
@@ -311,7 +311,6 @@ import Async from 'crocks/Async'
 
 import ifElse from 'crocks/logic/ifElse'
 import isNumber from 'crocks/predicates/isNumber'
-import nAry from 'crocks/helpers/nAry'
 
 const { fromPromise } = Async
 
@@ -334,7 +333,7 @@ safeProm(isNumber, '34')
 
 // safeAsync :: (a -> Boolean) -> a -> Async a a
 const safeAsync =
-  nAry(2, fromPromise(safeProm))
+  fromPromise(safeProm)
 
 // numAsync :: a -> Async a Number
 const numAsync =
@@ -380,8 +379,8 @@ As such, the need for binding may arise. `fromNode` provides a second, optional
 argument that takes the context that will be used to bind the function being
 wrapped.
 
-Like [`fromPromise`](#frompromise), any curried interface will not be respected.
-If a curried interface is needed then [`nAry`][nary] can be used.
+Any curried interface will not be respected and if a curried interface is needed 
+then [`nAry`][nary] can be used.
 
 <!-- eslint-disable no-console -->
 <!-- eslint-disable no-sequences -->
@@ -449,9 +448,9 @@ Async.all :: [ Async e a ] -> Async e [ a ]
 ```
 
 `Async` provides an `all` method that can be used when multiple, independent
-asynchronous operations need to be run in parallel. `all` takes an `Array` of
-`Async` instances that, when forked, will execute each instance in the
-provided `Array` in parallel.
+asynchronous operations need to be run in parallel. `all` takes
+an `Array` of `Async` instances that, when forked, will execute each instance
+in the provided `Array` in parallel.
 
 If any of the instances result in a [`Rejected`](#rejected) state, the entire flow will
 be [`Rejected`](#rejected) with value of the first [`Rejected`](#rejected) instance. If all
@@ -664,8 +663,8 @@ doubleValid('Too Silly')
 Async e a ~> Async e a -> Async e a
 ```
 
-Providing a means for a fallback or alternative value, `alt` combines two
-`Async` instances and will return the first [`Resolved`](#resolved) instance
+Providing a means for a fallback or alternative value, `alt` combines
+two `Async` instances and will return the first [`Resolved`](#resolved) instance
 it encounters or the last [`Rejected`](#rejected) instance if it does not
 encounter a [`Resolved`](#resolved) instance.
 
@@ -849,7 +848,7 @@ Async e a ~> (a -> Async e b) -> Async e b
 
 Combining a sequential series of transformations that capture disjunction can be
 accomplished with `chain`. `chain` expects a unary, `Async` returning function
-as its argument. When invoked on a [`Rejected`](#rejected) instance , `chain` will not run
+as its argument. When invoked on a [`Rejected`](#rejected) instance, `chain` will not run
 the function, but will instead return another [`Rejected`](#rejected) instance wrapping the
 original [`Rejected`](#rejected) value. When called on a [`Resolved`](#resolved) instance however, the
 inner value will be passed to provided function, returning the result as the
@@ -966,6 +965,88 @@ resolve(Rejected('Rejected'))
 //=> res: "Was Rejected"
 ```
 
+#### bichain
+
+```haskell
+Async e a ~> ((e -> Async b c), (a -> Async b c)) -> Async b c
+```
+
+Combining a sequential series of transformations that capture disjunction can be
+accomplished with [`chain`](#chain). Along the same lines, `bichain` allows you
+to do this from both [`Rejected`](#rejected) and [`Resolved`](#resolved). `bichain` expects
+two unary, `Async` returning functions as its arguments. When invoked on
+a [`Rejected`](#rejected) instance, `bichain` will use the left, or first, function
+that can return either a [`Rejected`](#rejected) or [`Resolved`](#resolved) instance.
+When called on a [`Resolved`](#resolved) instance, it will behave exactly
+as [`chain`](#chain) would with the right, or second function.
+
+<!-- eslint-disable no-console -->
+<!-- eslint-disable no-sequences -->
+
+```javascript
+import bichain from 'crocks/pointfree/bichain'
+
+import Async from 'crocks/Async'
+
+import equals from 'crocks/pointfree/equals'
+import maybeToAsync from 'crocks/Async/maybeToAsync'
+import propSatisfies from 'crocks/predicates/propSatisfies'
+import safe from 'crocks/Maybe/safe'
+import substitution from 'crocks/combinators/substitution'
+
+const { Rejected, Resolved } = Async
+
+// log :: String -> a -> a
+const log = label => x =>
+  (console.log(`${label}:`, x), x)
+
+const fork = m =>
+  m.fork(log('rej'), log('res'))
+
+fork(
+  bichain(Resolved, Rejected, Resolved(42))
+)
+//=> rej: 42
+
+fork(
+  bichain(Resolved, Rejected, Rejected(42))
+)
+//=> res: 42
+
+// fake401 :: Async Response a
+const fake401 = Rejected({
+  status: 'Unauthorized',
+  statusCode: 401
+})
+
+// fake500 :: Async Response a
+const fake500 = Rejected({
+  status: 'Internal Server Error',
+  statusCode: 500
+})
+
+// fake200 :: Async e Response
+const fake200 = Resolved({
+  status: 'OK',
+  statusCode: 200
+})
+
+// allow401 :: Response -> Async e a
+const allow401 = substitution(
+  maybeToAsync,
+  safe(propSatisfies('statusCode', equals(401)))
+)
+
+fork(bichain(allow401, Resolved, fake500))
+//=> rej: { status: 'Internal Server Error', statusCode: 500 }
+
+fork(bichain(allow401, Resolved, fake401))
+//=> res: { status: 'Unauthorized', statusCode: 401 }
+
+fork(bichain(allow401, Resolved, fake200))
+//=> res: { status: 'OK', statusCode: 200 }
+```
+
 #### swap
 
 ```haskell
@@ -1057,11 +1138,11 @@ typeIso(Rejected('aaaaa'))
 Async e a ~> Async e a -> Async e a
 ```
 
-Used to provide the first settled result between two `Async`s. Just pass `race`
-another `Async` and it will return new `Async`, that when forked, will run both
-`Async`s in parallel, returning the first of the two to settle. The result can
-either be rejected or resolved, based on the instance of the first settled
-result.
+Used to provide the first settled result between two `Async`s. Just
+pass `race` another `Async` and it will return new `Async`, that when forked,
+will run both `Async`s in parallel, returning the first of the two to settle.
+The result can either be rejected or resolved, based on the instance of the
+first settled result.
 
 <!-- eslint-disable no-console -->
 <!-- eslint-disable no-sequences -->
@@ -1104,11 +1185,11 @@ signatures depending on the need for clean up in the event of cancellation, but
 both return a function that can be used for cancellation of a given instance.
 
 The first and more common signature takes two functions that will have their
-return values ignored. The first function will be run in the event of the
-`Async` instance settling on [`Rejected`](#rejected) and will receive as its single argument
-the value or "cause" of rejection. The second function provided will be executed
-in the case of the instance settling on [`Resolved`](#resolved) and will receive as its
-single argument the value the `Async` was resolved with.
+return values ignored. The first function will be run in the event of
+the `Async` instance settling on [`Rejected`](#rejected) and will receive as its
+single argument the value or "cause" of rejection. The second function provided
+will be executed in the case of the instance settling on [`Resolved`](#resolved) and
+will receive as its single argument the value the `Async` was resolved with.
 
 The second signature is used when any cleanup needs to be performed after a
 given `Async` is canceled by having the function returned from `fork` called.
@@ -1279,7 +1360,7 @@ import Async from 'crocks/Async'
 import race from 'crocks/Async/race'
 import asyncToPromise from 'crocks/Async/asyncToPromise'
 
-import ifElse from 'crocks/logice/ifElse'
+import ifElse from 'crocks/logic/ifElse'
 import compose from 'crocks/helpers/compose'
 import isPromise from 'crocks/pointfree/isPromise'
 
@@ -1315,10 +1396,10 @@ logResult(timeout(fast))
 //=> resolved: "All good"
 
 logResult(timeout(slow))
-// => rejected: "Error: Request has timed out"
+//=> rejected: "Error: Request has timed out"
 
 logResult(failingPromise)
-// => rejected: "Promise rejected!"
+//=> rejected: "Promise rejected!"
 ```
 
 #### eitherToAsync
@@ -1511,7 +1592,7 @@ Resolved(First.empty())
 Resolved(First(42))
   .chain(firstToAsync('Left'))
   .fork(log('rej'), log('res'))
-// => res: 42
+//=> res: 42
 ```
 
 #### lastToAsync
@@ -1612,7 +1693,7 @@ Resolved(Last.empty())
 Resolved(Last('too know!'))
   .chain(lastToAsync('Left'))
   .fork(log('rej'), log('res'))
-// => res: "too know!"
+//=> res: "too know!"
 ```
 
 #### maybeToAsync
@@ -1699,7 +1780,7 @@ Resolved(Nothing())
 Resolved(Just('the 2 of us'))
   .chain(maybeToAsync('Left'))
   .fork(log('rej'), log('res'))
-// => res: "the 2 of us"
+//=> res: "the 2 of us"
 ```
 
 #### resultToAsync
@@ -1711,12 +1792,11 @@ resultToAsync :: Result b a -> Async b a
 resultToAsync :: (a -> Result c b) -> a -> Async c b
 ```
 
-Used to transform a given [`Result`][result] instance to an `Async` instance or flatten an
-`Async` of [`Result`][result] into an `Async` when chained, `resultToAsync` will turn an
-`Ok` instance into a [`Resolved`](#resolved) instance wrapping the original
-value contained in the original `Ok`. If an `Err` is provided, then
-`resultToAsync` will return a [`Rejected`](#rejected) instance, wrapping the
-original `Err` value.
+Used to transform a given [`Result`][result] instance to an `Async` instance or flatten
+an `Async` of [`Result`][result] into an `Async` when chained, `resultToAsync` will turn
+an `Ok` instance into a [`Resolved`](#resolved) instance wrapping the original
+value contained in the original `Ok`. If an `Err` is provided, then `resultToAsync` will
+return a [`Rejected`](#rejected) instance, wrapping the original `Err` value.
 
 Like all `crocks` transformation functions, `resultToAsync` has two possible
 signatures and will behave differently when passed either a [`Result`][result] instance
@@ -1786,7 +1866,7 @@ Resolved(Err('Invalid entry'))
 Resolved(Ok('Success!'))
   .chain(resultToAsync)
   .fork(log('rej'), log('res'))
-// => res: "Success!"
+//=> res: "Success!"
 
 ```
 

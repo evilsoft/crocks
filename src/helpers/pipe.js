@@ -15,7 +15,7 @@ function applyPipe(f, g) {
   }
 }
 
-// pipe : ((a -> b), (b -> c), ..., (y -> z)) -> a -> z
+/** pipe :: ((a -> b), (b -> c), ..., (y -> z)) -> a -> z */
 function pipe(...fns) {
   if(!arguments.length) {
     throw new TypeError(err)

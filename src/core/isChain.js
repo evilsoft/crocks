@@ -4,7 +4,7 @@
 const hasAlg = require('./hasAlg')
 const isApply = require('./isApply')
 
-// isChain : a -> Boolean
+/** isChain :: a -> Boolean */
 function isChain(m) {
   return isApply(m)
     && hasAlg('chain', m)

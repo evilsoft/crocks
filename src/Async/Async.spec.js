@@ -150,7 +150,6 @@ test('Async fromPromise', t => {
   t.throws(fork(true), err, 'throws when true is returned from promise function')
   t.throws(fork([]), err, 'throws when an array is returned from promise function')
   t.throws(fork({}), err, 'throws when an object is returned from promise function')
-  t.throws(fork(unit), err, 'throws when an object is returned from promise function')
 
   t.end()
 })
@@ -168,6 +167,24 @@ test('Async fromPromise resolution', t => {
 
   Async.fromPromise(rejProm)(val).fork(rej(val), res(val))
   Async.fromPromise(resProm)(val).fork(rej(val), res(val))
+})
+
+test('Async fromPromise resolution with partially applied function', t => {
+  t.plan(2)
+
+  const val1 = 1
+  const val2 = 2
+
+  const val = val1 + val2
+
+  const rejProm = x => y => new Promise((_, rej) => rej(x + y))
+  const resProm = x => y => new Promise((res) => res(x + y))
+
+  const rej = y => x => t.equal(x, y, 'rejects a rejected Promise')
+  const res = y => x => t.equal(x, y, 'resolves a resolved Promise')
+
+  Async.fromPromise(rejProm)(val1)(val2).fork(rej(val), res(val))
+  Async.fromPromise(resProm)(val1)(val2).fork(rej(val), res(val))
 })
 
 test('Async fromNode', t => {
@@ -391,7 +408,7 @@ test('Async type', t => {
 
 test('Async @@type', t => {
   t.equal(Async(unit)['@@type'], Async['@@type'], 'static and instance versions are the same')
-  t.equal(Async(unit)['@@type'], 'crocks/Async@4', 'returns crocks/Async@4')
+  t.equal(Async(unit)['@@type'], 'crocks/Async@5', 'returns crocks/Async@5')
 
   t.end()
 })
@@ -461,6 +478,27 @@ test('Async fork settle', t => {
   Async((rej, res) => { res(10); rej(10) }).fork(rej, res)
   t.ok(res.calledOnce, 'calls resolve when called before a reject in an Async')
   t.ok(rej.notCalled, 'does not call reject after resolve in an Async')
+
+  t.end()
+})
+
+test('Async cancel bichain cleanup functions - rejected', t => {
+  const rejCleanUp = sinon.spy()
+  const forkCleanUp = sinon.spy()
+
+  const cancel =
+    Async.Rejected(0)
+      .bichain(x => Async(rej => { rej(x); return rejCleanUp }), Async.of)
+      .fork(unit, unit, forkCleanUp)
+
+  cancel()
+
+  t.ok(forkCleanUp.calledAfter(rejCleanUp), 'calls the fork cleanup last')
+
+  cancel()
+
+  t.ok(rejCleanUp.calledOnce, 'calls the Async level cleanup only once')
+  t.ok(forkCleanUp.calledOnce, 'calls the fork level cleanup only once')
 
   t.end()
 })
@@ -1051,7 +1089,7 @@ test('Async alt properties (Alt)', t => {
   a.alt(b).alt(c).fork(unit, assocLeft)
   a.alt(b.alt(c)).fork(unit, assocRight)
 
-  t.same(assocLeft.args[0], assocRight.args[0], 'assosiativity')
+  t.same(assocLeft.args[0], assocRight.args[0], 'associativity')
 
   const distLeft = sinon.spy()
   const distRight = sinon.spy()
@@ -1224,7 +1262,7 @@ test('Async chain properties (Chain)', t => {
   Async((_, res) => res(x)).chain(f).chain(g).fork(unit, aRes)
   Async((_, res) => res(x)).chain(y => f(y).chain(g)).fork(unit, bRes)
 
-  t.same(aRes.args[0], bRes.args[0], 'assosiativity')
+  t.same(aRes.args[0], bRes.args[0], 'associativity')
 
   t.end()
 })
@@ -1250,6 +1288,81 @@ test('Async chain properties (Monad)', t => {
   f(3).fork(unit, bRight)
 
   t.same(aRight.args[0], bRight.args[0], 'right identity')
+
+  t.end()
+})
+
+test('Async bichain left errors', t => {
+  const { Rejected } = Async
+  const bichain = bindFunc(Async(unit).bichain)
+
+  const err = /Async.bichain: Both arguments must be Async returning functions/
+  t.throws(bichain(undefined, Rejected), err, 'throws with undefined on left')
+  t.throws(bichain(null, Rejected), err, 'throws with null on left')
+  t.throws(bichain(0, Rejected), err, 'throws with falsy number on left')
+  t.throws(bichain(1, Rejected), err, 'throws with truthy number on left')
+  t.throws(bichain('', Rejected), err, 'throws with falsy string on left')
+  t.throws(bichain('string', Rejected), err, 'throws with truthy string on left')
+  t.throws(bichain(false, Rejected), err, 'throws with false on left')
+  t.throws(bichain(true, Rejected), err, 'throws with true on left')
+  t.throws(bichain([], Rejected), err, 'throws with an array on left')
+  t.throws(bichain({}, Rejected), err, 'throws with an object on left')
+
+  const fn = () => Rejected(0)
+    .bichain(unit, Rejected)
+    .fork(unit, unit)
+
+  t.throws(fn, err, 'throws with a non-Async returning function')
+
+  t.end()
+})
+
+test('Async bichain right errors', t => {
+  const { Resolved } = Async
+  const bichain = bindFunc(Async(unit).bichain)
+
+  const err = /Async.bichain: Both arguments must be Async returning functions/
+
+  t.throws(bichain(Resolved, undefined), err, 'throws with undefined on right')
+  t.throws(bichain(Resolved, null), err, 'throws with null on right')
+  t.throws(bichain(Resolved, 0), err, 'throws with falsy number on right')
+  t.throws(bichain(Resolved, 1), err, 'throws with truthy number on right')
+  t.throws(bichain(Resolved, ''), err, 'throws with falsy string on right')
+  t.throws(bichain(Resolved, 'string'), err, 'throws with truthy string on right')
+  t.throws(bichain(Resolved, false), err, 'throws with false on right')
+  t.throws(bichain(Resolved, true), err, 'throws with true on right')
+  t.throws(bichain(Resolved, []), err, 'throws with an array on right')
+  t.throws(bichain(Resolved, {}), err, 'throws with an object on right')
+
+  const fn = () => Resolved(0)
+    .bichain(Resolved, unit)
+    .fork(unit, unit)
+
+  t.throws(fn, err, 'throws with a non-Async returning function')
+
+  t.end()
+})
+
+test('Async bichain functionality', t => {
+  const { Rejected, Resolved } = Async
+
+  const left = x => Rejected(x + 1)
+  const right = x => Resolved(x + 1)
+
+  const ltr = sinon.spy()
+  const rtl = sinon.spy()
+  const rtr = sinon.spy()
+  const ltl = sinon.spy()
+
+  Rejected(0).bichain(right, left).fork(unit, ltr)
+  Resolved(0).bichain(right, left).fork(rtl, unit)
+  Resolved(0).bichain(left, right).fork(unit, rtr)
+  Rejected(0).bichain(left, right).fork(ltl, unit)
+
+  t.equals(ltr.args[0][0], 1, 'moves from Rejected to Resolved')
+  t.equals(rtl.args[0][0], 1, 'moves from Resolved to Rejected')
+  t.equals(rtr.args[0][0], 1, 'moves from Resolved to Resolved')
+  t.equals(ltl.args[0][0], 1, 'moves from Rejected to Rejected')
 
   t.end()
 })

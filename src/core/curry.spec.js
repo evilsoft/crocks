@@ -66,3 +66,23 @@ test('curried function with context application', t => {
 
   t.end()
 })
+
+test('curry on a curried function', t => {
+  const sumThree = (x, y) => z => x + y + z
+  const func = curry(sumThree)
+  const curried = curry(func)
+
+  t.ok(func['@@crocks/curried'], 'returns a func marked as curried')
+  t.notEqual(func, sumThree, 'does not return the same func when it is curried')
+  t.equal(func, curried, 'returns the same func when curry is called on an already curried func')
+
+  t.end()
+})
+
+test('curried function with arity exposed', t => {
+  const fn = (a, b) => a + b
+  const curried = curry(fn)
+  t.equal(curried.length, fn.length, 'returns the same arity as its uncurried counterpart')
+
+  t.end()
+})

@@ -4,7 +4,7 @@
 const hasAlg = require('./hasAlg')
 const isApply = require('./isApply')
 
-// isApplicative : a -> Boolean
+/** isApplicative :: a -> Boolean */
 function isApplicative(m) {
   return isApply(m)
     && (hasAlg('of', m) || hasAlg('of', m.constructor))

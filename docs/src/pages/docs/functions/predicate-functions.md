@@ -2,7 +2,7 @@
 description: "Predicate Functions API"
 layout: "notopic"
 title: "Predicate Functions"
-functions: ["hasprop", "hasproppath", "isalt", "isalternative", "isapplicative", "isapply", "isarray", "isbifunctor", "isboolean", "iscategory", "ischain", "iscontravariant", "isDate", "isdefined", "isempty", "isextend", "isfalse", "isfalsy", "isfoldable", "isfunction", "isfunctor", "isinteger", "isiterable", "ismonad", "ismonoid", "isnil", "isnumber", "isobject", "isplus", "isprofunctor", "ispromise", "issame", "issametype", "issemigroup", "issemigroupoid", "issetoid", "isstring", "istraversable", "istrue", "istruthy", "patheq", "pathsatisfies", "propeq", "propsatisfies"]
+functions: ["hasprop", "hasprops", "hasproppath", "isalt", "isalternative", "isapplicative", "isapply", "isarray", "isbifunctor", "isboolean", "iscategory", "ischain", "iscontravariant", "isDate", "isdefined", "isempty", "isextend", "isfalse", "isfalsy", "isfoldable", "isfunction", "isfunctor", "isinteger", "isiterable", "ismap", "ismonad", "ismonoid", "isnil", "isnumber", "isobject", "isplus", "isprofunctor", "ispromise", "issame", "issametype", "issemigroup", "issemigroupoid", "issetoid", "isstring", "istraversable", "istrue", "istruthy", "patheq", "pathsatisfies", "propeq", "propsatisfies"]
 weight: 40
 ---
 
@@ -16,6 +16,7 @@ Below is a list of all the current predicates that are included with a
 description of their truth:
 
 * `hasProp :: (String | Integer) -> a -> Boolean`: an `Array` or `Object` that contains the provided index or key
+* `hasProps :: Foldable f => f (String | Integer) -> a -> Boolean`: an `Array` or `Object` that contains the provided indexs or keys
 * `hasPropPath :: [ String | Integer ] -> a -> Boolean`: an `Array` or `Object` that contains the provided index path
 * `isAlt :: a -> Boolean`: an ADT that provides `map` and `alt` methods
 * `isAlternative :: a -> Boolean`: an ADT that provides `alt`, `zero`, `map`, `ap`, `chain` and `of`methods
@@ -38,11 +39,12 @@ description of their truth:
 * `isFunctor :: a -> Boolean`: an ADT that provides a `map` method
 * `isInteger :: a -> Boolean`: Integer
 * `isIterable :: a -> Boolean`: an `Object` with an `iterator` method
+* `isMap :: a -> Boolean`: Map
 * `isMonad :: a -> Boolean`: an ADT that provides `map`, `ap`, `chain` and `of` methods
 * `isMonoid :: a -> Boolean`: an ADT that provides `concat` and `empty` methods
 * `isNil :: a -> Boolean`: `undefined` or `null` or `NaN`
 * `isNumber :: a -> Boolean`: `Number` that is not a `NaN` value, `Infinity` included
-* `isObject :: a -> Boolean`: Plain Old Javascript Object (POJO)
+* `isObject :: a -> Boolean`: Plain Old JavaScript Object (POJO)
 * `isPlus :: a -> Boolean`: an ADT that provides `map`, `alt` and `zero` methods
 * `isProfunctor :: a -> Boolean`: an ADT that provides `map`, `contramap` and `promap` methods
 * `isPromise :: a -> Boolean`: an object implementing `then` and `catch`

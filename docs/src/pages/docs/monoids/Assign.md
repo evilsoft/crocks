@@ -9,8 +9,8 @@ weight: 30
 Assign Object
 ```
 
-`Assign` is a `Monoid` that will combine (2) objects under assignment using
-`Object.assign` on the (2) `Object`s.
+`Assign` is a `Monoid` that will combine (2) objects under assignment
+using `Object.assign` on the (2) `Object`s.
 
 ```javascript
 import Assign from 'crocks/Assign'
@@ -152,8 +152,8 @@ Assign ~> () -> Object
 `valueOf` is used on all `crocks` `Monoid`s as a means of extraction.
 While the extraction is available, types that implement `valueOf` are
 not necessarily a `Comonad`. This function is used primarily for convenience
-for some of the helper functions that ship with `crocks`. Calling `valueOf`
-on an `Assign` instance will result in the underlying `Object`.
+for some of the helper functions that ship with `crocks`. Calling `valueOf` on
+an `Assign` instance will result in the underlying `Object`.
 
 ```javascript
 import Assign from 'crocks/Assign'

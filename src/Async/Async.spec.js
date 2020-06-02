@@ -150,7 +150,6 @@ test('Async fromPromise', t => {
   t.throws(fork(true), err, 'throws when true is returned from promise function')
   t.throws(fork([]), err, 'throws when an array is returned from promise function')
   t.throws(fork({}), err, 'throws when an object is returned from promise function')
-  t.throws(fork(unit), err, 'throws when an object is returned from promise function')
 
   t.end()
 })
@@ -168,6 +167,24 @@ test('Async fromPromise resolution', t => {
 
   Async.fromPromise(rejProm)(val).fork(rej(val), res(val))
   Async.fromPromise(resProm)(val).fork(rej(val), res(val))
+})
+
+test('Async fromPromise resolution with partially applied function', t => {
+  t.plan(2)
+
+  const val1 = 1
+  const val2 = 2
+
+  const val = val1 + val2
+
+  const rejProm = x => y => new Promise((_, rej) => rej(x + y))
+  const resProm = x => y => new Promise((res) => res(x + y))
+
+  const rej = y => x => t.equal(x, y, 'rejects a rejected Promise')
+  const res = y => x => t.equal(x, y, 'resolves a resolved Promise')
+
+  Async.fromPromise(rejProm)(val1)(val2).fork(rej(val), res(val))
+  Async.fromPromise(resProm)(val1)(val2).fork(rej(val), res(val))
 })
 
 test('Async fromNode', t => {

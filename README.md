@@ -236,6 +236,10 @@ Thanks goes to these wonderful people ([emoji key][emojis]):
     <td align="center"><a href="https://github.com/RichardForrester"><img src="https://avatars0.githubusercontent.com/u/12902182?v=4" width="100px;" alt=""/><br /><sub><b>RichardForrester</b></sub></a><br /><a href="https://github.com/evilsoft/crocks/commits?author=RichardForrester" title="Code">💻</a> <a href="https://github.com/evilsoft/crocks/commits?author=RichardForrester" title="Documentation">📖</a> <a href="https://github.com/evilsoft/crocks/commits?author=RichardForrester" title="Tests">⚠️</a></td>
     <td align="center"><a href="http://furkantunali.com"><img src="https://avatars2.githubusercontent.com/u/68406?v=4" width="100px;" alt=""/><br /><sub><b>Furkan Tunalı</b></sub></a><br /><a href="https://github.com/evilsoft/crocks/commits?author=JacopKane" title="Documentation">📖</a> <a href="#example-JacopKane" title="Examples">💡</a></td>
     <td align="center"><a href="https://github.com/sunwukonga"><img src="https://avatars3.githubusercontent.com/u/12194690?v=4" width="100px;" alt=""/><br /><sub><b>Paul Desmond Parker</b></sub></a><br /><a href="https://github.com/evilsoft/crocks/commits?author=sunwukonga" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/area73"><img src="https://avatars3.githubusercontent.com/u/2030605?v=4" width="100px;" alt=""/><br /><sub><b>Rodrigo Erades</b></sub></a><br /><a href="https://github.com/evilsoft/crocks/commits?author=area73" title="Documentation">📖</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="http://jamie-dixon.co.uk"><img src="https://avatars2.githubusercontent.com/u/1519443?v=4" width="100px;" alt=""/><br /><sub><b>Jamie Dixon</b></sub></a><br /><a href="https://github.com/evilsoft/crocks/commits?author=JamieDixon" title="Code">💻</a></td>
   </tr>
 </table>
 

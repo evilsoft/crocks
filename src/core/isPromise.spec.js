@@ -20,8 +20,11 @@ test('isPromise core', t => {
   t.equal(isPromise([]), false, 'returns false when passed an array')
   t.equal(isPromise({}), false, 'returns false when passed an object')
 
+  const rejected = Promise.reject(0)
+  rejected.catch(() => 'Handle promise rejection, avoid error.')
+
   t.equal(isPromise(Promise.resolve(0)), true, 'returns true when passed a resolved promise')
-  t.equal(isPromise(Promise.reject(0)), true, 'returns true when passed a rejected promise')
+  t.equal(isPromise(rejected), true, 'returns true when passed a rejected promise')
 
   t.end()
 })

@@ -66,23 +66,23 @@
     }
   },
   "devDependencies": {
-    "all-contributors-cli": "^6.15.0",
+    "all-contributors-cli": "^6.16.1",
     "buble": "^0.20.0",
     "coveralls": "^3.1.0",
     "doctoc": "^1.4.0",
-    "eslint": "^7.1.0",
+    "eslint": "^7.4.0",
     "eslint-plugin-markdown": "^1.0.2",
-    "eslint-watch": "^6.0.1",
+    "eslint-watch": "^7.0.0",
     "husky": "^4.2.5",
-    "lint-staged": "^10.2.6",
+    "lint-staged": "^10.2.11",
     "nodemon": "^2.0.4",
-    "nyc": "^15.0.1",
+    "nyc": "^15.1.0",
     "rimraf": "^3.0.2",
     "sinon": "^9.0.2",
     "tap-spec": "^5.0.0",
     "tape": "^4.13.3",
-    "uglify-js": "^3.9.3",
+    "uglify-js": "^3.10.0",
     "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.11"
+    "webpack-cli": "^3.3.12"
   }
 }

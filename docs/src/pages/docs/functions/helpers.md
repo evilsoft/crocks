@@ -500,7 +500,7 @@ def([ 'arr', 'length' ], data)
 `crocks/helpers/getPropOr`
 
 ```haskell
-getPropOr :: a -> (String | Integer) -> b -> a
+getPropOr :: a -> (String | Integer) -> b -> c
 ```
 
 Reach for `getPropOr`, previously known as `propOr`, when you want some safety

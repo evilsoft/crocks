@@ -312,7 +312,7 @@ number of parameters.
 import compose from 'crocks/helpers/compose'
 import curry from 'crocks/helpers/curry'
 import map from 'crocks/pointfree/map'
-import prop from 'crocks/maybe/prop'
+import getProp from 'crocks/maybe/getProp'
 
 // add :: (Number, Number, Number) -> Number
 const add = (a, b, c) =>
@@ -342,7 +342,7 @@ crocksCurriedAdd(1, 2, 3)
 
 // strictCurriedPluck :: String -> [ a ] -> Maybe b
 const strictCurriedPluck =
-  compose(map, prop)
+  compose(map, getProp)
 
 const crockCurriedPluck =
   curry(strictCurriedPluck)
@@ -836,7 +836,7 @@ just want to combine the two into an `Object`, then it sounds like `objOf` is
 the function for you. Just pass it a `String` for the key and any type of value,
 and you'll get back an `Object` that is composed of those two. If you find
 yourself constantly concatenating the result of this function into
-another `Object`, you may want to use [`assoc`](#assoc) instead.
+another `Object`, you may want to use [`setProp`](#setprop) instead.
 
 #### omit
 

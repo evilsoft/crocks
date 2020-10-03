@@ -127,7 +127,7 @@ import hasProp from 'crocks/predicates/hasProp'
 import isNumber from 'crocks/predicates/isNumber'
 import liftA2 from 'crocks/helpers/liftA2'
 import map from 'crocks/pointfree/map'
-import prop from 'crocks/Maybe/prop'
+import getProp from 'crocks/Maybe/getProp'
 import safe from 'crocks/Maybe/safe'
 import safeLift from 'crocks/Maybe/safeLift'
 
@@ -172,7 +172,7 @@ const items =
 
 // pluck :: String -> Array Object -> Maybe a
 const pluck =
-  compose2(applyTo, prop, flip(map))
+  compose2(applyTo, getProp, flip(map))
 
 pluck('id', items)
 //=> [ Just 2, Just 1 ]
@@ -190,7 +190,7 @@ const getLength = safeLift(
 // createSummary :: Person -> Array Item -> String
 const createSummary = compose2(
   liftA2(summarize),
-  prop('name'),
+  getProp('name'),
   getLength
 )
 

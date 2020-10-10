@@ -1845,14 +1845,14 @@ Resolved(Ok('Success!'))
 
 ```
 
-[nary]: ../functions/helpers.html#nary
-[identity]: ../functions/combinators.html#identity
-[first]: ../monoids/First.html
-[last]: ../monoids/Last.html
-[maybe]: ./Maybe.html
-[just]: ./Maybe.html#just
-[nothing]: ./Maybe.html#nothing
-[either]: ./Either.html
-[left]: ./Either.html#left
-[right]: ./Either.html#right
-[result]: ./Result.html
+[nary]: ../functions/helpers#nary
+[identity]: ../functions/combinators#identity
+[first]: ../monoids/First
+[last]: ../monoids/Last
+[maybe]: ./Maybe
+[just]: ./Maybe#just
+[nothing]: ./Maybe#nothing
+[either]: ./Either
+[left]: ./Either#left
+[right]: ./Either#right
+[result]: ./Result

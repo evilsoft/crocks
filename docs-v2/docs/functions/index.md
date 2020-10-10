@@ -4,7 +4,7 @@ description: "functions"
 layout: "notopic"
 icon: "code-file"
 weight: 40
-slug: /functions
+slug: /functions/
 ---
 
 There are (6) function classifications included in this library:
@@ -24,16 +24,16 @@ this group.
 combinators. All of these functions work with predicate functions and let you
 combine them in some very interesting ways.
 
-* [Predicate Functions](predicate-functions.html): A helpful collection of predicate
+* [Predicate Functions](predicate-functions): A helpful collection of predicate
 functions to get you started.
 
-* [Point-free Functions](pointfree-functions.html): Wanna use these ADTs in a
+* [Point-free Functions](pointfree-functions): Wanna use these ADTs in a
 way that you never have to reference the actual data being worked on? Well here
 is where you will find all of these functions to do that. For every algebra
 available on both the [Crocks][crocks] and [Monoids][monoids] there is a
 function here.
 
-* [Transformation Functions](transformation-functions.html): All the functions found
+* [Transformation Functions](transformation-functions): All the functions found
 here are used to transform from one type to another, naturally. These come are
 handy in situations where you have functions that return one type (like
 an `Either`), but are working in a context of another (say `Maybe`). You would
@@ -128,74 +128,74 @@ type: `Pred a` and vice-versa
 | [`unless`][unless] | `(a -> Boolean) -> (a -> a) -> a -> a` | `crocks/logic/unless` |
 | [`when`][when] | `(a -> Boolean) -> (a -> a) -> a -> a` | `crocks/logic/when` |
 
-[monoids]: ../monoids/index.html
-[crocks]: ../crocks/index.html
-[pred]: ../crocks/Pred.html
+[monoids]: ../monoids/
+[crocks]: ../crocks/
+[pred]: ../crocks/Pred
 
-[applyto]: combinators.html#applyto
-[composeb]: combinators.html#composeb
-[constant]: combinators.html#constant
-[converge]: combinators.html#converge
-[flip]: combinators.html#flip
-[identity]: combinators.html#identity
-[psi]: combinators.html#psi
-[substitution]: combinators.html#substitution
+[applyto]: combinators#applyto
+[composeb]: combinators#composeb
+[constant]: combinators#constant
+[converge]: combinators#converge
+[flip]: combinators#flip
+[identity]: combinators#identity
+[psi]: combinators#psi
+[substitution]: combinators#substitution
 
-[assign]: helpers.html#assign
-[binary]: helpers.html#binary
-[branch]: ../crocks/Pair.html#branch
-[compose]: helpers.html#compose
-[composek]: helpers.html#composek
-[composep]: helpers.html#composep
-[composes]: helpers.html#composes
-[curry]: helpers.html#curry
-[defaultprops]: helpers.html#defaultprops
-[defaultto]: helpers.html#defaultto
-[dissoc]: helpers.html#dissoc
-[fanout]: helpers.html#fanout
-[find]: ../crocks/Maybe.html#find
-[frompairs]: helpers.html#frompairs
-[getpath]: ../crocks/Maybe.html#getpath
-[getpathor]: helpers.html#getpathor
-[getprop]: ../crocks/Maybe.html#getprop
-[getpropor]: helpers.html#getpropor
-[lifta2]: helpers.html#lifta2
-[lifta3]: helpers.html#lifta3
-[liftn]: helpers.html#liftn
-[mapprops]: helpers.html#mapprops
-[mapreduce]: helpers.html#mapreduce
-[mconcat]: helpers.html#mconcat
-[mconcatmap]: helpers.html#mconcatmap
-[mreduce]: helpers.html#mreduce
-[mreducemap]: helpers.html#mreducemap
-[nary]: helpers.html#nary
-[objof]: helpers.html#objof
-[omit]: helpers.html#omit
-[once]: helpers.html#once
-[partial]: helpers.html#partial
-[pick]: helpers.html#pick
-[pipe]: helpers.html#pipe
-[pipek]: helpers.html#pipek
-[pipep]: helpers.html#pipep
-[pipes]: helpers.html#pipes
-[proppath]: ../crocks/Maybe.html#proppath
-[safe]: ../crocks/Maybe.html#safe
-[safeafter]: ../crocks/Maybe.html#safeafter
-[safelift]: ../crocks/Maybe.html#safelift
-[setpath]: helpers.html#setpath
-[setprop]: helpers.html#setprop
-[tap]: helpers.html#tap
-[topairs]: ../crocks/Pair.html#topairs
-[trycatch]: helpers.html#trycatch
-[unary]: helpers.html#unary
-[unit]: helpers.html#unit
-[unsetpath]: helpers.html#unsetpath
-[unsetprop]: helpers.html#unsetprop
+[assign]: helpers#assign
+[binary]: helpers#binary
+[branch]: ../crocks/Pair#branch
+[compose]: helpers#compose
+[composek]: helpers#composek
+[composep]: helpers#composep
+[composes]: helpers#composes
+[curry]: helpers#curry
+[defaultprops]: helpers#defaultprops
+[defaultto]: helpers#defaultto
+[dissoc]: helpers#dissoc
+[fanout]: helpers#fanout
+[find]: ../crocks/Maybe#find
+[frompairs]: helpers#frompairs
+[getpath]: ../crocks/Maybe#getpath
+[getpathor]: helpers#getpathor
+[getprop]: ../crocks/Maybe#getprop
+[getpropor]: helpers#getpropor
+[lifta2]: helpers#lifta2
+[lifta3]: helpers#lifta3
+[liftn]: helpers#liftn
+[mapprops]: helpers#mapprops
+[mapreduce]: helpers#mapreduce
+[mconcat]: helpers#mconcat
+[mconcatmap]: helpers#mconcatmap
+[mreduce]: helpers#mreduce
+[mreducemap]: helpers#mreducemap
+[nary]: helpers#nary
+[objof]: helpers#objof
+[omit]: helpers#omit
+[once]: helpers#once
+[partial]: helpers#partial
+[pick]: helpers#pick
+[pipe]: helpers#pipe
+[pipek]: helpers#pipek
+[pipep]: helpers#pipep
+[pipes]: helpers#pipes
+[proppath]: ../crocks/Maybe#proppath
+[safe]: ../crocks/Maybe#safe
+[safeafter]: ../crocks/Maybe#safeafter
+[safelift]: ../crocks/Maybe#safelift
+[setpath]: helpers#setpath
+[setprop]: helpers#setprop
+[tap]: helpers#tap
+[topairs]: ../crocks/Pair#topairs
+[trycatch]: helpers#trycatch
+[unary]: helpers#unary
+[unit]: helpers#unit
+[unsetpath]: helpers#unsetpath
+[unsetprop]: helpers#unsetprop
 
-[and]: logic-functions.html#and
-[ifelse]: logic-functions.html#ifelse
-[implies]: logic-functions.html#implies
-[not]: logic-functions.html#not
-[or]: logic-functions.html#or
-[unless]: logic-functions.html#unless
-[when]: logic-functions.html#when
+[and]: logic-functions#and
+[ifelse]: logic-functions#ifelse
+[implies]: logic-functions#implies
+[not]: logic-functions#not
+[or]: logic-functions#or
+[unless]: logic-functions#unless
+[when]: logic-functions#when

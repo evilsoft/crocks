@@ -547,12 +547,12 @@ firstNum(null)
 //=> First( Just 0 )
 ```
 
-[just]: ../crocks/Maybe.html#just
-[maybe]: ../crocks/Maybe.html
-[nothing]: ../crocks/Maybe.html#nothing
-[option]: ../crocks/Maybe.html#option
-[last]: ./Last.html
-[either]: ../crocks/Either.html
-[left]: ../crocks/Either.html#left
-[right]: ../crocks/Either.html#right
-[result]: ../crocks/Result.html
+[just]: ../crocks/Maybe#just
+[maybe]: ../crocks/Maybe
+[nothing]: ../crocks/Maybe#nothing
+[option]: ../crocks/Maybe#option
+[last]: ./Last
+[either]: ../crocks/Either
+[left]: ../crocks/Either#left
+[right]: ../crocks/Either#right
+[result]: ../crocks/Result

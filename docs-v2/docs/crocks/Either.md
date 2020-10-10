@@ -1424,11 +1424,11 @@ Right(Ok('42'))
 //=> Right "42"
 ```
 
-[async]: ./Async.html
-[identity]: ../functions/combinators.html#identity
-[first]: ../monoids/First.html
-[last]: ../monoids/Last.html
-[maybe]: ./Maybe.html
-[nothing]: ./Maybe.html#nothing
-[just]: ./Maybe.html#just
-[result]: ./Result.html
+[async]: ./Async
+[identity]: ../functions/combinators#identity
+[first]: ../monoids/First
+[last]: ../monoids/Last
+[maybe]: ./Maybe
+[nothing]: ./Maybe#nothing
+[just]: ./Maybe#just
+[result]: ./Result

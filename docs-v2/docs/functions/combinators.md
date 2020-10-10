@@ -651,5 +651,5 @@ substitution(slice, getLastIndex, [ 1, 2, 3, 4, 5 ])
 //=> [ 5 ]
 ```
 
-[compose]: ./helpers.html#compose
-[curry]: ./helpers.html#curry
+[compose]: ./helpers#compose
+[curry]: ./helpers#curry

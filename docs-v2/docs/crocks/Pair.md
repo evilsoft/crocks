@@ -1042,6 +1042,6 @@ fanout(Sum, x => appendItem(x)([ x ]), 1)
   .chain(writerToPair)
 ```
 
-[frompairs]: ../functions/helpers.html#frompairs
-[identity]: ../functions/combinators.html#identity
-[either]: ../crocks/Either.html
+[frompairs]: ../functions/helpers#frompairs
+[identity]: ../functions/combinators#identity
+[either]: ../crocks/Either

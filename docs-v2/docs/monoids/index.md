@@ -4,7 +4,7 @@ description: "Monoids API"
 layout: "notopic"
 icon: "code-file"
 weight: 3
-slug: /monoids
+slug: /monoids/
 ---
 
 Each `Monoid` provides a means to represent a binary operation and is usually
@@ -33,23 +33,23 @@ as the following Instance Functions: `valueOf`, `empty` and `concat`.
 | [`Prod`][Prod] | Number | Multiplication | `1` |
 | [`Sum`][Sum] | Number | Addition | `0` |
 
-[crocks]: ../crocks/index.html
-[mconcat]: ../functions/helpers.html#mconcat
-[mreduce]: ../functions/helpers.html#mreduce
-[mconcatMap]: ../functions/helpers.html#mconcatmap
-[mreduceMap]: ../functions/helpers.html#mreducemap
+[crocks]: ../crocks/
+[mconcat]: ../functions/helpers#mconcat
+[mreduce]: ../functions/helpers#mreduce
+[mconcatMap]: ../functions/helpers#mconcatmap
+[mreduceMap]: ../functions/helpers#mreducemap
 
-[Maybe]: ../crocks/Maybe.html
-[just]: ../crocks/Maybe.html#just
-[nothing]: ../crocks/Maybe.html#nothing
+[Maybe]: ../crocks/Maybe
+[just]: ../crocks/Maybe#just
+[nothing]: ../crocks/Maybe#nothing
 
-[All]: All.html
-[Any]: Any.html
-[Assign]: Assign.html
-[Endo]: Endo.html
-[First]: First.html
-[Last]: Last.html
-[Max]: Max.html
-[Min]: Min.html
-[Prod]: Prod.html
-[Sum]: Sum.html
+[All]: All
+[Any]: Any
+[Assign]: Assign
+[Endo]: Endo
+[First]: First
+[Last]: Last
+[Max]: Max
+[Min]: Min
+[Prod]: Prod
+[Sum]: Sum

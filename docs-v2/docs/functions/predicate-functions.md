@@ -63,8 +63,8 @@ description of their truth:
 * `propEq :: (String | Integer) -> a -> Object -> Boolean`: an `Object` that contains the provided key with a value equal to the provided value. (equality by value)
 * `propSatisfies :: (String | Integer) -> ((a -> Boolean) | Pred) -> Object -> Boolean`: an `Object` that contains the provided key with a value that passes the provided predicate.
 
-[pred]: ../crocks/Pred.html
-[ifelse]: logic-functions.html#ifelse
-[safe]: helpers.html#safe
+[pred]: ../crocks/Pred
+[ifelse]: logic-functions#ifelse
+[safe]: helpers#safe
 [truthy]: https://developer.mozilla.org/en-US/docs/Glossary/Truthy
 [falsy]: https://developer.mozilla.org/en-US/docs/Glossary/Falsy

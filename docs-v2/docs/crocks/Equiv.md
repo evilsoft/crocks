@@ -366,4 +366,4 @@ bothBig
 //=> false
 ```
 
-[monoids]: ../monoids/index.html
+[monoids]: ../monoids/

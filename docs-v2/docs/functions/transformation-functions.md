@@ -198,43 +198,43 @@ bad
 | [`tupleToArray`][tuple-array] | `Tuple a -> [ a ]` | `(a -> Tuple b) -> a -> [ b ]` | `crocks/Tuple` |
 | `writerToPair` | `Writer m a -> Pair m a` | `(a -> Writer m b) -> a -> Pair m b` | `crocks/Pair` |
 
-[async-promise]: ../crocks/Async.html#asynctopromise
+[async-promise]: ../crocks/Async#asynctopromise
 
-[either-async]: ../crocks/Async.html#eithertoasync
-[first-async]: ../crocks/Async.html#firsttoasync
-[last-async]: ../crocks/Async.html#lasttoasync
-[maybe-async]: ../crocks/Async.html#maybetoasync
-[result-async]: ../crocks/Async.html#resulttoasync
+[either-async]: ../crocks/Async#eithertoasync
+[first-async]: ../crocks/Async#firsttoasync
+[last-async]: ../crocks/Async#lasttoasync
+[maybe-async]: ../crocks/Async#maybetoasync
+[result-async]: ../crocks/Async#resulttoasync
 
-[first-either]: ../crocks/Either.html#firsttoeither
-[last-either]: ../crocks/Either.html#lasttoeither
-[maybe-either]: ../crocks/Either.html#maybetoeither
-[result-either]: ../crocks/Either.html#resulttoeither
+[first-either]: ../crocks/Either#firsttoeither
+[last-either]: ../crocks/Either#lasttoeither
+[maybe-either]: ../crocks/Either#maybetoeither
+[result-either]: ../crocks/Either#resulttoeither
 
-[either-maybe]: ../crocks/Maybe.html#eithertomaybe
-[first-maybe]: ../crocks/Maybe.html#firsttomaybe
-[last-maybe]: ../crocks/Maybe.html#lasttomaybe
-[maybe-array]: ../crocks/Maybe.html#maybetoarray
-[result-maybe]: ../crocks/Maybe.html#resulttomaybe
+[either-maybe]: ../crocks/Maybe#eithertomaybe
+[first-maybe]: ../crocks/Maybe#firsttomaybe
+[last-maybe]: ../crocks/Maybe#lasttomaybe
+[maybe-array]: ../crocks/Maybe#maybetoarray
+[result-maybe]: ../crocks/Maybe#resulttomaybe
 
-[either-first]: ../monoids/First.html#eithertofirst
-[last-first]: ../monoids/First.html#lasttofirst
-[maybe-first]: ../monoids/First.html#maybetofirst
-[result-first]: ../monoids/First.html#resulttofirst
+[either-first]: ../monoids/First#eithertofirst
+[last-first]: ../monoids/First#lasttofirst
+[maybe-first]: ../monoids/First#maybetofirst
+[result-first]: ../monoids/First#resulttofirst
 
-[either-last]: ../monoids/Last.html#eithertolast
-[first-last]: ../monoids/Last.html#firsttolast
-[maybe-last]: ../monoids/Last.html#maybetolast
-[result-last]: ../monoids/Last.html#resulttolast
+[either-last]: ../monoids/Last#eithertolast
+[first-last]: ../monoids/Last#firsttolast
+[maybe-last]: ../monoids/Last#maybetolast
+[result-last]: ../monoids/Last#resulttolast
 
-[either-result]: ../crocks/Result.html#eithertoresult
-[first-result]: ../crocks/Result.html#firsttoresult
-[last-result]: ../crocks/Result.html#lasttoresult
-[maybe-result]: ../crocks/Result.html#maybetoresult
+[either-result]: ../crocks/Result#eithertoresult
+[first-result]: ../crocks/Result#firsttoresult
+[last-result]: ../crocks/Result#lasttoresult
+[maybe-result]: ../crocks/Result#maybetoresult
 
-[tuple-array]: ../crocks/Tuple.html#tupletoarray
+[tuple-array]: ../crocks/Tuple#tupletoarray
 
-[maybe]: ../crocks/Maybe.html
-[nothing]: ../crocks/Maybe.html#nothing
-[either]: ../crocks/Either.html
-[left]: ../crocks/Either.html#left
+[maybe]: ../crocks/Maybe
+[nothing]: ../crocks/Maybe#nothing
+[either]: ../crocks/Either
+[left]: ../crocks/Either#left

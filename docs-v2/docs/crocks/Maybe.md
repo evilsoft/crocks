@@ -1680,10 +1680,10 @@ Just(Err('to be human'))
 //=> Nothing
 ```
 
-[pred]: ./Pred.html
-[either]: ./Either.html
-[left]: ./Either.html#left
-[right]: ./Either.html#right
-[first]: ../monoids/First.html
-[last]: ../monoids/Last.html
-[result]: ./Result.html
+[pred]: ./Pred
+[either]: ./Either
+[left]: ./Either#left
+[right]: ./Either#right
+[first]: ../monoids/First
+[last]: ../monoids/Last
+[result]: ./Result

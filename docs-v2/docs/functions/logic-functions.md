@@ -563,6 +563,6 @@ doubleWhen(constant(false), 21)
 //=> 21
 ```
 
-[all]: ../monoids/All.html
-[maybe]: ../crocks/Maybe.html
-[pred]: ../crocks/Pred.html
+[all]: ../monoids/All
+[maybe]: ../crocks/Maybe
+[pred]: ../crocks/Pred

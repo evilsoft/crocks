@@ -47,7 +47,7 @@ Also related is [`unary`](#unary), which constrains to (1) argument.
 ```haskell
 compose :: ((y -> z), ..., (a -> b)) -> a -> z
 ```
-While the [`composeB`](combinators.html#composeb) can be used to create a
+While the [`composeB`](combinators#composeb) can be used to create a
 composition of two functions, there are times when you want to compose an entire
 flow together. That is where `compose` is useful. With `compose` you can create
 a right-to-left composition of functions. It will return you a function that
@@ -398,7 +398,7 @@ operation presents itself, `defaultProps` can come to your aid. Just pass it
 an `Object` that defines your defaults and then the `Object` your want to default
 those props on. If a key that is present on the defaults `Object` is not defined
 on your data, then the default value will be used. Otherwise, the value from
-your data will be used instead. You could just apply [`flip`](combinators.html#flip) to
+your data will be used instead. You could just apply [`flip`](combinators#flip) to
 the [`assign`](#assign) function and get the same result, but having a function
 named `defaultProps` may be easier to read in code. As with most `Object` related
 functions in `crocks`, `defaultProps` will return you a shallow copy of the
@@ -771,9 +771,9 @@ mreduce :: Monoid m, Foldable f => m -> f a -> a
 ```
 
 These two functions are very handy for combining an entire `List` or `Array` of
-values by providing a [`Monoid`](../monoids/index.html) and your collection of
+values by providing a [`Monoid`](../monoids/) and your collection of
 values. The difference between the two is that `mconcat` returns the result
-inside the [`Monoid`](../monoids/index.html) used to combine them.
+inside the [`Monoid`](../monoids/) used to combine them.
 Where `mreduce` returns the bare value itself.
 
 ### mconcatMap
@@ -1366,7 +1366,7 @@ unsetProp('silly', null)
 //=> null
 ```
 
-[maybe]: ../crocks/Maybe.html
-[monoids]: ../monoids/index.html
-[safe]: ../crocks/Maybe.html#safe
-[topairs]: ../crocks/Pair.html#topairs
+[maybe]: ../crocks/Maybe
+[monoids]: ../monoids/
+[safe]: ../crocks/Maybe#safe
+[topairs]: ../crocks/Pair#topairs

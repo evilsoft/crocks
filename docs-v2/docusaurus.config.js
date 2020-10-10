@@ -2,11 +2,11 @@ module.exports = {
   title: "Crocks",
   tagline:
     "A collection of well known Algebraic Data Types for your utter enjoyment.",
-  url: "https://crocks.dev",
+  url: "https://davidnussio.github.io",
   baseUrl: "/",
   onBrokenLinks: "throw",
   favicon: "img/favicon.ico",
-  organizationName: "evilsoft",
+  organizationName: "davidnussio",
   projectName: "crocks",
   scripts: ["https://embed.runkit.com"],
   themeConfig: {

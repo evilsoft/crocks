@@ -1585,7 +1585,7 @@ Used to transform a given [`Maybe`][maybe] instance to a `Result` instance
 or flatten a `Result` of [`Maybe`][maybe] into a `Result` when
 chained, `maybeToResult` will turn a [`Just`][just] instance into
 an [`Ok`](#ok) wrapping the original value contained in the [`Just`][just].
-All [`Nothing`](nothing) instances will map to a [`Err`](#err), containing the
+All [`Nothing`][nothing] instances will map to a [`Err`](#err), containing the
 given `e` value.
 
 Like all `crocks` transformation functions, `maybeToResult` has two possible
@@ -1636,14 +1636,14 @@ Ok(Nothing())
 //=> Err "An error occurred"
 ```
 
-[pred]: ./Pred.html
-[either]: ./Either.html
-[left]: ./Either.html#left
-[right]: ./Either.html#right
-[first]: ../monoids/First.html
-[last]: ../monoids/Last.html
-[maybe]: ../monoids/Maybe.html
-[just]: ./Maybe.html#just
-[nothing]: ./Maybe.html#nothing
-[helpers]: ./Maybe.html#helper-functions
-[identity]: ../functions/combinators.html#identity
+[pred]: ./Pred
+[either]: ./Either
+[left]: ./Either#left
+[right]: ./Either#right
+[first]: ../monoids/First
+[last]: ../monoids/Last
+[maybe]: ./Maybe
+[just]: ./Maybe#just
+[nothing]: ./Maybe#nothing
+[helpers]: ./Maybe#helper-functions
+[identity]: ../functions/combinators#identity

@@ -719,4 +719,4 @@ middleware({ value: 10 }, { value: 32 })
 //=> { value: 32 }
 ```
 
-[pair]: ../Pair.html
+[pair]: Pair

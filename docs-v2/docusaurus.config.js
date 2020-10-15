@@ -92,6 +92,7 @@ module.exports = {
       copyright: `Copyright © ${new Date().getFullYear()} Crocks. Built with Docusaurus.`,
     },
   },
+  plugins: [require.resolve("docusaurus-lunr-search")],
   presets: [
     [
       "@docusaurus/preset-classic",

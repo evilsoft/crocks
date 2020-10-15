@@ -1,5 +1,7 @@
 import React from "react";
 import CodeBlock from "@theme-init/CodeBlock";
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 import Embed from "react-runkit";
 import clsx from "clsx";
 
@@ -7,29 +9,44 @@ import styles from "./styles.module.css";
 
 const withLiveEditor = (Component) => {
   const WrappedComponent = (props) => {
-    const [run, setRun] = React.useState(false);
+    const playgroundRef = React.useRef(null);
+    const [height, setHeight] = React.useState(0);
+    React.useLayoutEffect(() => {
+      const newHeight = playgroundRef.current?.getBoundingClientRect().height;
+      if (height !== newHeight) {
+        setHeight(newHeight);
+      }
+    }, []);
     if (props.runkit) {
       return (
-        <div className={styles.playgroundPreview}>
-          {run ? (
-            <Embed
-              data-gutter="inside"
-              source={props.children?.replace(
-                /import (.*?) from '([^']+)'/g,
-                'const $1 = require("$2");'
-              )}
-              {...props}
-            />
-          ) : (
-            <Component {...props} />
-          )}
-          <button
-            className={clsx("button", "button--warning")}
-            type="button"
-            onClick={() => setRun((prevState) => !prevState)}
+        <div ref={playgroundRef} className={styles.playgroundPreview}>
+          <Tabs
+            defaultValue="source"
+            values={[
+              { label: "Source", value: "source" },
+              { label: "Runkit", value: "runkit" },
+            ]}
           >
-            {run ? "Source" : "runkit"}
-          </button>
+            <TabItem value="runkit">
+              <div
+                style={{
+                  minHeight: height,
+                }}
+              >
+                <Embed
+                  data-gutter="inside"
+                  source={props.children?.replace(
+                    /import (.*?) from '([^']+)'/g,
+                    'const $1 = require("$2");'
+                  )}
+                  {...props}
+                />
+              </div>
+            </TabItem>
+            <TabItem value="source">
+              <Component {...props} />
+            </TabItem>
+          </Tabs>
         </div>
       );
     }

@@ -18,20 +18,84 @@
   }
 }
 
-.buttons {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.features {
+.feature {
   display: flex;
   align-items: center;
   padding: 2rem 0;
   width: 100%;
 }
 
-.featureImage {
-  height: 200px;
-  width: 200px;
+.featuresTitle {
+  font-size: 3.5rem;
+}
+
+.highlightDescription {
+  font-size: 1.1rem;
+}
+
+.featureGraphic {
+  border-radius: 50%;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.featureGraphic [class^="icon-16-"],
+.featureGraphic [class*="icon-16-"] {
+  box-shadow: 0 2px 8px rgba(14, 20, 26, 0.2);
+  border-radius: 50%;
+  color: #ffcc00;
+  display: block;
+  font-size: 28px;
+  height: 84px;
+  line-height: 84px;
+  margin: auto;
+  width: 84px;
+}
+
+.highlight {
+  margin: 150px 0;
+}
+
+.highlightTitle {
+  font-size: 3rem;
+}
+
+.highlightDescription {
+  font-size: 1.1rem;
+}
+
+.highlightGraphic {
+  border-radius: 50%;
+  text-align: center;
+  margin: 50px 0;
+}
+
+.highlightGraphic [class^="icon-16-"],
+.highlightGraphic [class*="icon-16-"] {
+  box-shadow: 0 2px 8px rgba(14, 20, 26, 0.2);
+  border-radius: 50%;
+  font-size: 62px;
+  line-height: 137px;
+  color: #ffcc00;
+  width: 140px;
+  display: block;
+  margin: auto;
+}
+
+@media (min-width: 600px) {
+  .highlightGraphic [class^="icon-16-"],
+  .highlightGraphic [class*="icon-16-"] {
+    font-size: 100px;
+    line-height: 220px;
+    width: 220px;
+  }
+  .highlightGraphic {
+    margin-top: 0px;
+  }
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

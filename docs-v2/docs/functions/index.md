@@ -1,9 +1,7 @@
 ---
 title: "Functions"
+sidebar_label: Introduction
 description: "functions"
-layout: "notopic"
-icon: "code-file"
-weight: 40
 slug: /functions/
 ---
 

@@ -9,7 +9,7 @@ import styles from "./styles.module.css";
 const features = [
   {
     title: "Crocks",
-    imageUrl: "img/undraw_docusaurus_mountain.svg",
+    icon: <span className="icon-16-code-file" />,
     description: (
       <>
         The `crocks` are the heart and soul of this library. This is where you
@@ -19,7 +19,7 @@ const features = [
   },
   {
     title: "Monoids",
-    imageUrl: "img/undraw_docusaurus_tree.svg",
+    icon: <span className="icon-16-code-file" />,
     description: (
       <>
         Each Monoid provides a means to represent a binary operation and is
@@ -30,7 +30,7 @@ const features = [
   },
   {
     title: "Functions",
-    imageUrl: "img/undraw_docusaurus_react.svg",
+    icon: <span className="icon-16-code-file" />,
     description: (
       <>
         A wonderfully curated collection of combinators, helper functions, logic
@@ -43,7 +43,7 @@ const features = [
 const highlights = [
   {
     title: "Work in a more declarative, functional flow.",
-    imageUrl: "img/undraw_docusaurus_mountain.svg",
+    icon: <span className="icon-16-balloon-topic" />,
     description: (
       <>
         The data types provided in Crocks allow you to remove large swaths of
@@ -54,7 +54,7 @@ const highlights = [
   },
   {
     title: "Use a collection of popular Algebraic Data Types (ADTs)",
-    imageUrl: "img/undraw_docusaurus_mountain.svg",
+    icon: <span className="icon-16-menu" />,
     description: (
       <>
         Have you ever heard of Maybe, Either, or, heck, even IO? These are just
@@ -64,7 +64,7 @@ const highlights = [
   },
   {
     title: "Combine a list of values down to one value",
-    imageUrl: "img/undraw_docusaurus_mountain.svg",
+    icon: <span className="icon-16-org_chart" />,
     description: (
       <>
         Crocks provides a large variety of Monoids, which are ADTs that
@@ -76,7 +76,7 @@ const highlights = [
   },
   {
     title: "Simple and unambiguous error messages",
-    imageUrl: "img/undraw_docusaurus_mountain.svg",
+    icon: <span className="icon-16-alert" />,
     description: (
       <>
         Being a library built for and by developers, Crocks has ensured it has
@@ -88,31 +88,29 @@ const highlights = [
   },
 ];
 
-function Feature({ imageUrl, title, description }) {
-  const imgUrl = useBaseUrl(imageUrl);
+function Feature({ icon, title, description }) {
   return (
-    <div className={clsx("col col--4", styles.feature)}>
-      {imgUrl && (
-        <div className="text--center">
-          <img className={styles.featureImage} src={imgUrl} alt={title} />
-        </div>
-      )}
-      <h3>{title}</h3>
+    <div className="col text--center">
+      {icon && <div className={styles.featureGraphic}>{icon}</div>}
+      <h1>{title}</h1>
       <p>{description}</p>
     </div>
   );
 }
-function Highlights({ imageUrl, title, description }) {
-  const imgUrl = useBaseUrl(imageUrl);
+
+function Highlights({ idx, icon, title, description }) {
   return (
-    <div className={clsx("col col--", styles.feature)}>
-      {imgUrl && (
-        <div className="text--center">
-          <img className={styles.featureImage} src={imgUrl} alt={title} />
-        </div>
-      )}
-      <h2>{title}</h2>
-      <p>{description}</p>
+    <div
+      className="row margin-bottom--lg"
+      style={{ flexDirection: idx % 2 === 0 ? "row" : "row-reverse" }}
+    >
+      <div className="col col--6">
+        <h1 className={styles.highlightTitle}>{title}</h1>
+        <p className={styles.highlightDescription}>{description}</p>
+      </div>
+      <div className="col col--6">
+        {icon && <div className={styles.highlightGraphic}>{icon}</div>}
+      </div>
     </div>
   );
 }
@@ -179,12 +177,16 @@ function Home() {
           </div>
         </div>
         {features && features.length > 0 && (
-          <section className={styles.features}>
+          <section className={styles.feature}>
             <div className="container">
               <div className="row">
-                {features.map((props, idx) => (
-                  <Feature key={idx} {...props} />
-                ))}
+                <p className="col col--10 col--offset-1">
+                  <div className="row">
+                    {features.map((props, idx) => (
+                      <Feature key={idx} {...props} />
+                    ))}
+                  </div>
+                </p>
               </div>
             </div>
           </section>
@@ -194,9 +196,11 @@ function Home() {
           <section className={styles.highlights}>
             <div className="container">
               <div className="row">
-                {highlights.map((props, idx) => (
-                  <Highlights key={idx} {...props} />
-                ))}
+                <p className="col col--10 col--offset-1">
+                  {highlights.map((props, idx) => (
+                    <Highlights key={idx} idx={idx} {...props} />
+                  ))}
+                </p>
               </div>
             </div>
           </section>

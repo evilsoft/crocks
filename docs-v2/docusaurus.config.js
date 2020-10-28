@@ -3,12 +3,13 @@ module.exports = {
   tagline:
     "A collection of well known Algebraic Data Types for your utter enjoyment.",
   url: "https://davidnussio.github.io",
-  baseUrl: "/",
+  baseUrl: "/crocks/",
   onBrokenLinks: "throw",
   favicon: "img/favicon.ico",
   organizationName: "davidnussio",
   projectName: "crocks",
   scripts: ["https://embed.runkit.com"],
+  stylesheets: ["/crocks/css/icon-16.css"],
   themeConfig: {
     prism: {
       theme: require("prism-react-renderer/themes/dracula"),

@@ -1,9 +1,7 @@
 ---
 title: "Crocks"
+sidebar_label: Introduction
 description: "Crocks API"
-layout: "notopic"
-icon: "code-file"
-weight: 2
 slug: /crocks/
 ---
 

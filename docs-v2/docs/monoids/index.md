@@ -1,9 +1,7 @@
 ---
 title: "Monoids"
+sidebar_label: Introduction
 description: "Monoids API"
-layout: "notopic"
-icon: "code-file"
-weight: 3
 slug: /monoids/
 ---
 

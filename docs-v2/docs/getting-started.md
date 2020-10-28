@@ -1,9 +1,7 @@
 ---
 title: "Getting Started"
+sidebar_label: Introduction
 description: "Getting started with a Crocks."
-icon: "arrow-right-rod"
-layout: "guide"
-weight: 1
 slug: /
 ---
 

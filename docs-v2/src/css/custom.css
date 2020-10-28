@@ -23,7 +23,7 @@ main {
 }
 
 code {
-  background-color: rgba(0,0,0,0.6);
+  background-color: rgba(0, 0, 0, 0.6);
   color: #ffffff;
 }
 
@@ -55,4 +55,8 @@ code {
 
 .align-center {
   text-align: center;
+}
+
+.navbar__logo {
+  height: 60%;
 }

@@ -1,37 +1,33 @@
-# Crocks
+# Website
 
-[![Built with Electric](https://img.shields.io/badge/built%20with-electric-f3c302.svg?style=flat)](http://electricjs.com)
+This website is built using [Docusaurus 2](https://v2.docusaurus.io/), a modern static website generator.
 
-## Setup
+## Installation
 
-1. Make sure you have [node and npm](https://nodejs.org/en/download/) installed:
-
-```sh
-node -v && npm -v
+```console
+yarn install
 ```
 
-2. Install our global dependencies:
+## Local Development
 
-```sh
-[sudo] npm i -g electric-cli
+```console
+yarn start
 ```
 
-3. Install our local dependencies:
+This command starts a local development server and open up a browser window. Most changes are reflected live without having to restart the server.
 
-```sh
-npm i
+## Build
+
+```console
+yarn build
 ```
 
-## Usage
+This command generates static content into the `build` directory and can be served using any static contents hosting service.
 
-* Build the site, serve it locally, and watch for any changes:
+## Deployment
 
-```
-electric run
+```console
+GIT_USER=<Your GitHub username> USE_SSH=true yarn deploy
 ```
 
-* Deploy to production (send build files to `wedeploy` branch):
-
-```
-electric deploy
-```
+If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.

@@ -14,7 +14,7 @@
     "build": "doctoc && rimraf build && buble -i src -o build && npm run build:dist",
     "doctoc": "doctoc README.md",
     "docs:dev": "cd docs && npm start",
-    "docs:deploy": "cd docs && npm run docs:deploy",
+    "docs:deploy": "cd docs && npm run deploy",
     "lint": "eslint --ext .md,.js .",
     "lint:dev": "esw --ext .md,.js . -w --color",
     "spec:coverage": "nyc npm run spec:build",

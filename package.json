@@ -72,6 +72,7 @@
     "doctoc": "^1.4.0",
     "eslint": "^7.4.0",
     "eslint-plugin-markdown": "^1.0.2",
+    "eslint-plugin-react": "^7.22.0",
     "eslint-watch": "^7.0.0",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.11",

@@ -25,7 +25,7 @@ the `Semigroup` having the ability to be used as an `Apply`, `Const` can derive
 an [`of`](#of) function and can be used like an `Applicative`.
 
 ```js runkit
-import Const from '/crocks/Const'
+import Const from 'crocks/Const'
 import Identity from 'crocks/Identity'
 import Pair from 'crocks/Pair'
 import Sum from 'crocks/Sum'

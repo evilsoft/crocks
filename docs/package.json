@@ -5,7 +5,11 @@
   "scripts": {
     "start": "electric run --env dev",
     "docs:build": "electric build",
-    "docs:deploy": "electric deploy"
+    "docs:deploy": "electric deploy",
+    "preinstall": "npx npm-force-resolutions"
+  },
+  "resolutions": {
+    "graceful-fs": "^4.2.4"
   },
   "devDependencies": {
     "electric-cli": "^2.4.2",

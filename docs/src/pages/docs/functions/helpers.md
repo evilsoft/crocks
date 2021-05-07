@@ -446,7 +446,7 @@ multiple keys share the same name, that last value will be moved over.
 `crocks/helpers/getPathOr`
 
 ```haskell
-getPathOr :: a -> [ (String | Integer) ] -> b -> c
+getPathOr :: a -> [ (String | Integer) ] -> b -> a
 ```
 
 While [`getPropOr`](#getpropor) is good for simple, single-level

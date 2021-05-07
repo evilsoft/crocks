@@ -239,7 +239,8 @@ Thanks goes to these wonderful people ([emoji key][emojis]):
     <td align="center"><a href="https://github.com/area73"><img src="https://avatars3.githubusercontent.com/u/2030605?v=4" width="100px;" alt=""/><br /><sub><b>Rodrigo Erades</b></sub></a><br /><a href="https://github.com/evilsoft/crocks/commits?author=area73" title="Documentation">📖</a></td>
   </tr>
   <tr>
-    <td align="center"><a href="http://jamie-dixon.co.uk"><img src="https://avatars2.githubusercontent.com/u/1519443?v=4" width="100px;" alt=""/><br /><sub><b>Jamie Dixon</b></sub></a><br /><a href="https://github.com/evilsoft/crocks/commits?author=JamieDixon" title="Code">💻</a></td>
+    <td align="center"><a href="https://twitter.com/jamiedixon"><img src="https://avatars2.githubusercontent.com/u/1519443?v=4" width="100px;" alt=""/><br /><sub><b>Jamie Dixon</b></sub></a><br /><a href="https://github.com/evilsoft/crocks/commits?author=JamieDixon" title="Code">💻</a></td>
+    <td align="center"><a href="http://sharepointfordeveloper.blogspot.com"><img src="https://avatars2.githubusercontent.com/u/896016?v=4" width="100px;" alt=""/><br /><sub><b>Basant Pandey</b></sub></a><br /><a href="https://github.com/evilsoft/crocks/commits?author=BasantPandey" title="Documentation">📖</a></td>
   </tr>
 </table>
 

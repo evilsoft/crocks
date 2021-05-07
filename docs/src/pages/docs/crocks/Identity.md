@@ -333,12 +333,12 @@ import Identity from 'crocks/Identity'
 
 Identity(42)
   .valueOf()
-//=> 33
+//=> 42
 
-Identity(20)
-  .concat(Identity(22))
+Identity([ 10, 20 ])
+  .concat(Identity([ 30, 40 ]))
   .valueOf()
-//=> 35
+//=>[ 10, 20, 30, 40 ]
 ```
 
 </article>

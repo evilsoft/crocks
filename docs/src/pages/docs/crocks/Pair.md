@@ -821,7 +821,7 @@ import getProp from 'crocks/Maybe/getProp'
 import liftA2 from 'crocks/helpers/liftA2'
 import map from 'crocks/pointfree/map'
 import Maybe from 'crocks/Maybe'
-import merge from 'crocks/Pair/merge'
+import merge from 'crocks/pointfree/merge'
 import sequence from 'crocks/pointfree/sequence'
 
 // Person :: { first: String, last: String }

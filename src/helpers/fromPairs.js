@@ -24,7 +24,7 @@ function foldPairs(acc, pair) {
     : acc
 }
 
-// fromPairs : Foldable f => f (Pair String a) -> Object
+/** fromPairs :: Foldable f => f (Pair String a) -> Object */
 function fromPairs(xs) {
   if(!isFoldable(xs)) {
     throw new TypeError('fromPairs: Foldable of Pairs required for argument')

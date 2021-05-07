@@ -8,7 +8,7 @@ const isChain = require('../core/isChain')
 const isFunction = require('../core/isFunction')
 const fl = require('../core/flNames')
 
-// chain : Chain m => (a -> m b) -> m a -> m b
+/** chain :: Chain m => (a -> m b) -> m a -> m b */
 function chain(fn, m) {
   if(!isFunction(fn)) {
     throw new TypeError('chain: Chain returning function required for first argument')

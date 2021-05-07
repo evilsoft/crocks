@@ -11,7 +11,7 @@ const isSameType = require('../core/isSameType')
 const map = array.map
 const ap = array.ap
 
-// liftA2 :: Applicative m => (a -> b -> c) -> m a -> m b -> m c
+/** liftA2 :: Applicative m => (a -> b -> c) -> m a -> m b -> m c */
 function liftA2(fn, x, y) {
   if(!isFunction(fn)) {
     throw new TypeError('liftA2: Function required for first argument')

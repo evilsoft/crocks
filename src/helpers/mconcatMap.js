@@ -7,7 +7,7 @@ const isFoldable = require('../core/isFoldable')
 const isFunction = require('../core/isFunction')
 const isMonoid = require('../core/isMonoid')
 
-// mconcatMap : Monoid M => M -> (b -> a) -> ([ b ] | List b) -> M a
+/** mconcatMap :: Monoid M => M -> (b -> a) -> ([ b ] | List b) -> M a */
 function mconcatMap(m, f, xs) {
   if(!isMonoid(m)) {
     throw new TypeError(

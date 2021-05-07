@@ -6,7 +6,7 @@ const _array = require('../core/array')
 const isArray = require('../core/isArray')
 const isFunction = require('../core/isFunction')
 
-// fold : Foldable f, Semigroup s => f s -> s
+/** fold :: Foldable f, Semigroup s => f s -> s */
 function fold(m) {
   if(isArray(m)) {
     return _array.fold(m)

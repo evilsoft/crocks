@@ -5,7 +5,7 @@ const curry = require('../core/curry')
 const isPredOrFunc = require('../core/isPredOrFunc')
 const predOrFunc = require('../core/predOrFunc')
 
-// or : (a -> Boolean) | Pred -> (a -> Boolean) | Pred -> a -> Boolean
+/** or :: (a -> Boolean) | Pred -> (a -> Boolean) | Pred -> a -> Boolean */
 function or(f, g) {
   if(!(isPredOrFunc(f) && isPredOrFunc(g))) {
     throw new TypeError(

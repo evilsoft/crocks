@@ -11,8 +11,8 @@ const isSameType = require('../core/isSameType')
 const applyTransform = result =>
   result.either(Maybe.Nothing, Maybe.Just)
 
-// resultToMaybe : Result b a -> Maybe a
-// resultToMaybe : (a -> Result c b) -> a -> Maybe b
+/** resultToMaybe :: Result b a -> Maybe a */
+/** resultToMaybe :: (a -> Result c b) -> a -> Maybe b */
 function resultToMaybe(result) {
   if(isFunction(result)) {
     return function(x) {

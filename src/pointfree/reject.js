@@ -12,7 +12,7 @@ const predOrFunc = require('../core/predOrFunc')
 const not =
   fn => x => !fn(x)
 
-// reject : Foldable f => (a -> Boolean) -> f a -> f a
+/** reject :: Foldable f => (a -> Boolean) -> f a -> f a */
 function reject(pred, m) {
   if(!isPredOrFunc(pred)) {
     throw new TypeError(

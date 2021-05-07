@@ -11,8 +11,8 @@ const isSameType = require('../core/isSameType')
 const applyTransform = first =>
   Last(first.valueOf())
 
-// firstToLast : First a -> Last a
-// firstToLast : (a -> First b) -> a -> Last b
+/** firstToLast :: First a -> Last a */
+/** firstToLast :: (a -> First b) -> a -> Last b */
 function firstToLast(first) {
   if(isFunction(first)) {
     return function(x) {

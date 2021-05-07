@@ -5,7 +5,7 @@ const curry = require('./curry')
 const isFunction = require('./isFunction')
 const type = require('./type')
 
-// isSameType :: Container m => (m, m) -> Boolean
+/** isSameType :: Container m => (m, m) -> Boolean */
 function isSameType(x, y) {
   const tX = type(x)
   const tY = type(y)

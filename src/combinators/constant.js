@@ -4,7 +4,7 @@
 const curry = require('../core/curry')
 
 // Constant (Kestrel)
-// constant : a -> b -> a
+/** constant :: a -> b -> a */
 const constant =
   x => () => x
 

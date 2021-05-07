@@ -4,7 +4,7 @@
 const curry = require('../core/curry')
 const isNil = require('../core/isNil')
 
-// defaultTo : a -> b -> (a | b)
+/** defaultTo :: a -> b -> (a | b) */
 function defaultTo(def, val) {
   return isNil(val) ? def : val
 }

@@ -6,7 +6,7 @@ const fl = require('../core/flNames')
 const isAlt = require('../core/isAlt')
 const isSameType = require('../core/isSameType')
 
-// alt : Alt m => m a -> m a -> m a
+/** alt :: Alt m => m a -> m a -> m a */
 function alt(m, x) {
   if(!(isAlt(m) && isSameType(m, x))) {
     throw new TypeError(

@@ -7,7 +7,7 @@ const isFunction = require('../core/isFunction')
 
 const constant = x => () => x
 
-// tap : (a -> b) -> a -> a
+/** tap :: (a -> b) -> a -> a */
 function tap(fn, x) {
   if(!isFunction(fn)) {
     throw new TypeError(

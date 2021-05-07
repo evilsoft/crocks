@@ -5,7 +5,7 @@ const curry = require('../core/curry')
 const isPredOrFunc = require('../core/isPredOrFunc')
 const predOrFunc = require('../core/predOrFunc')
 
-// not : (a -> Boolean) | Pred -> a -> Boolean
+/** not :: (a -> Boolean) | Pred -> a -> Boolean */
 function not(pred, x) {
   if(!isPredOrFunc(pred)) {
     throw new TypeError(

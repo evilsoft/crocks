@@ -1,7 +1,7 @@
 /** @license ISC License (c) copyright 2016 original and current authors */
 /** @author Ian Hofmann-Hicks (evil) */
 
-const VERSION = 3
+const VERSION = 4
 
 const _defineUnion = require('../core/defineUnion')
 const _equals = require('../core/equals')
@@ -110,6 +110,23 @@ function Either(u) {
     }
 
     return Either.Right(either(f, g))
+  }
+
+  function bichain(l, r) {
+    const bichainErr =
+      'Either.bichain: Both arguments must be Either returning functions'
+
+    if(!(isFunction(l) && isFunction(r))) {
+      throw new TypeError(bichainErr)
+    }
+
+    const m = either(l, r)
+
+    if(!isSameType(Either, m)) {
+      throw new TypeError(bichainErr)
+    }
+
+    return m
   }
 
   function map(method) {
@@ -228,8 +245,8 @@ function Either(u) {
 
   return {
     inspect, toString: inspect, either,
-    type, swap, coalesce, equals,
-    ap, of, sequence, traverse,
+    type, swap, coalesce, bichain,
+    equals, ap, of, sequence, traverse,
     alt: alt('alt'),
     bimap: bimap('bimap'),
     concat: concat('concat'),

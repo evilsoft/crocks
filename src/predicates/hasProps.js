@@ -9,15 +9,15 @@ const isInteger = require('../core/isInteger')
 const isNil = require('../core/isNil')
 const isString = require('../core/isString')
 
-// err :: String
+/** err :: String */
 const err =
   'hasProps: First argument must be a Foldable of Non-empty Strings or Integers'
 
-// isKeyValid :: a -> Boolean
+/** isKeyValid :: a -> Boolean */
 const isKeyValid = key =>
   isString(key) && !isEmpty(key) || isInteger(key)
 
-// hasKey :: a -> (String | Integer) -> Boolean
+/** hasKey :: a -> (String | Integer) -> Boolean */
 const hasKey = obj => key => {
   if(!isKeyValid(key)) {
     throw new TypeError(err)
@@ -26,11 +26,11 @@ const hasKey = obj => key => {
   return isDefined(obj[key])
 }
 
-// every :: (a -> Boolean) -> ((Null | Boolean), a) -> Boolean
+/** every :: (a -> Boolean) -> ((Null | Boolean), a) -> Boolean */
 const every = fn => (acc, x) =>
   (acc === null ? true : acc) && fn(x)
 
-// hasProps :: Foldable f => f (String | Integer) -> a -> Boolean
+/** hasProps :: Foldable f => f (String | Integer) -> a -> Boolean */
 function hasProps(keys, x) {
   if(!isFoldable(keys)) {
     throw new TypeError(err)

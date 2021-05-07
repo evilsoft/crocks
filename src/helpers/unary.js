@@ -3,7 +3,7 @@
 
 const isFunction = require('../core/isFunction')
 
-// unary : (* -> b) -> a -> b
+/** unary :: (* -> b) -> a -> b */
 function unary(fn) {
   if(!isFunction(fn)) {
     throw new TypeError('unary: Function required')

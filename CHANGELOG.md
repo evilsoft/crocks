@@ -1,4 +1,28 @@
 # Change Log for `crocks`
+v0.12.4 -- September 22, 2019
+--
+
+### Additions
+* Functions/Methods
+  * `isMap` predicate function
+  * Add `bichain` for the following types:
+    * `Either`
+    * `Maybe`
+    * `Result`
+
+### Optimizations
+* Update `curry` to remove extra stack frames when currying.
+
+### Documentation
+* Add example for `applyTo`
+* Corrections to the `project` example
+
+### Pull Requests
+* [#434 - Add isMap predicate](https://github.com/evilsoft/crocks/pull/434)
+* [#435 - docs: add example for applyTo](https://github.com/evilsoft/crocks/pull/)
+* [#438 - Micro-optimization to curry](https://github.com/evilsoft/crocks/pull/438)
+* [#442 - Correct project example of Tuple](https://github.com/evilsoft/crocks/pull/442)
+* [#443 - Add `bichain` to remaining Sum Types](https://github.com/evilsoft/crocks/pull/443)
 
 v0.12.3 -- July 21, 2019
 --

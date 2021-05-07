@@ -10,8 +10,8 @@ const isWriter =
 const applyTransform = w =>
   w.read()
 
-// writerToPair : Monoid m => Writer m a -> Pair m a
-// writerToPair : Monoid m => (a -> Writer m a) -> Pair m b
+/** writerToPair :: Monoid m => Writer m a -> Pair m a */
+/** writerToPair :: Monoid m => (a -> Writer m a) -> Pair m b */
 function writerToPair(writer) {
   if(isFunction(writer)) {
     return function(x) {

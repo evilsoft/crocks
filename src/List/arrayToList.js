@@ -7,8 +7,8 @@ const curry = require('../core/curry')
 const isArray = require('../core/isArray')
 const isFunction = require('../core/isFunction')
 
-// arrayToList : [ a ] -> List a
-// arrayToList : (a -> [ b ]) -> a -> List b
+/** arrayToList :: [ a ] -> List a */
+/** arrayToList :: (a -> [ b ]) -> a -> List b */
 function arrayToList(array) {
   if(isArray(array)) {
     return List.fromArray(array)

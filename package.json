@@ -1,6 +1,6 @@
 {
   "name": "crocks",
-  "version": "0.12.3",
+  "version": "0.12.4",
   "description": "A collection of well known Algebraic Datatypes for your utter enjoyment.",
   "main": "./index.js",
   "scripts": {
@@ -14,7 +14,7 @@
     "build": "doctoc && rimraf build && buble -i src -o build && npm run build:dist",
     "doctoc": "doctoc README.md",
     "docs:dev": "cd docs && npm start",
-    "docs:deploy": "cd docs && npm run docs:deploy",
+    "docs:deploy": "cd docs && npm run deploy",
     "lint": "eslint --ext .md,.js .",
     "lint:dev": "esw --ext .md,.js . -w --color",
     "spec:coverage": "nyc npm run spec:build",
@@ -26,8 +26,7 @@
   },
   "lint-staged": {
     "*.{js,md}": [
-      "eslint --fix",
-      "git add"
+      "eslint --fix"
     ]
   },
   "repository": {
@@ -48,7 +47,7 @@
   "bugs": {
     "url": "https://github.com/evilsoft/crocks/issues"
   },
-  "homepage": "https://evilsoft.github.io/crocks",
+  "homepage": "https://crocks.dev",
   "nyc": {
     "check-coverage": true,
     "lines": 100,
@@ -61,29 +60,30 @@
       "**/*.spec.js"
     ]
   },
-  "devDependencies": {
-    "all-contributors-cli": "^6.8.1",
-    "buble": "^0.19.8",
-    "coveralls": "^3.0.5",
-    "doctoc": "^1.4.0",
-    "eslint": "^6.1.0",
-    "eslint-plugin-markdown": "^1.0.0",
-    "eslint-watch": "^6.0.0",
-    "husky": "^3.0.1",
-    "lint-staged": "^9.2.1",
-    "nodemon": "^1.19.1",
-    "nyc": "^14.1.1",
-    "rimraf": "^2.6.2",
-    "sinon": "^7.3.2",
-    "tap-spec": "^5.0.0",
-    "tape": "^4.11.0",
-    "uglify-js": "^3.6.0",
-    "webpack": "^4.38.0",
-    "webpack-cli": "^3.3.6"
-  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
     }
+  },
+  "devDependencies": {
+    "all-contributors-cli": "^6.16.1",
+    "buble": "^0.20.0",
+    "coveralls": "^3.1.0",
+    "doctoc": "^1.4.0",
+    "eslint": "^7.4.0",
+    "eslint-plugin-markdown": "^1.0.2",
+    "eslint-plugin-react": "^7.22.0",
+    "eslint-watch": "^7.0.0",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11",
+    "nodemon": "^2.0.4",
+    "nyc": "^15.1.0",
+    "rimraf": "^3.0.2",
+    "sinon": "^9.0.2",
+    "tap-spec": "^5.0.0",
+    "tape": "^4.13.3",
+    "uglify-js": "^3.10.0",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12"
   }
 }

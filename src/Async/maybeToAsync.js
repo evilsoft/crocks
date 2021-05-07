@@ -16,8 +16,8 @@ const applyTransform = (left, maybe) =>
     Async.Resolved
   )
 
-// maybeToAsync : e -> Maybe a -> Async e a
-// maybeToAsync : e -> (a -> Maybe b) -> a -> Async e b
+/** maybeToAsync :: e -> Maybe a -> Async e a */
+/** maybeToAsync :: e -> (a -> Maybe b) -> a -> Async e b */
 function maybeToAsync(left, maybe) {
   if(isFunction(maybe)) {
     return function(x) {

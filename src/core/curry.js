@@ -12,7 +12,7 @@ function applyCurry(fn, arg) {
   return fn.length > 1 ? fn.bind(null, arg) : fn.call(null, arg)
 }
 
-// curry : ((a, b, c) -> d) -> a -> b -> c -> d
+/** curry :: ((a, b, c) -> d) -> a -> b -> c -> d */
 function curry(fn) {
   if(fn[CURRY_SYMB]) {
     return fn
@@ -41,6 +41,12 @@ function curry(fn) {
     enumerable: false,
     writable: false,
     value: true
+  })
+
+  Object.defineProperty(curried, 'length', {
+    enumerable: false,
+    writable: false,
+    value: fn.length
   })
 
   return curried

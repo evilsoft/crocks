@@ -4,7 +4,7 @@
 const _curry = require('../core/curry')
 const isFunction = require('../core/isFunction')
 
-// curry : ((a, b, c) -> d) -> a -> b -> c -> d
+/** curry :: ((a, b, c) -> d) -> a -> b -> c -> d */
 function curry(fn) {
   if(!isFunction(fn)) {
     throw new TypeError('curry: Function required')

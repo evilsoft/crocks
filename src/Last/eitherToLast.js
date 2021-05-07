@@ -11,8 +11,8 @@ const isSameType = require('../core/isSameType')
 const applyTransform = either =>
   either.either(Last.empty, Last)
 
-// eitherToLast : Either b a -> Last a
-// eitherToLast : (a -> Either c b) -> a -> Last b
+/** eitherToLast :: Either b a -> Last a */
+/** eitherToLast :: (a -> Either c b) -> a -> Last b */
 function eitherToLast(either) {
   if(isFunction(either)) {
     return function(x) {

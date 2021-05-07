@@ -4,7 +4,7 @@
 const curryN = require('../core/curryN')
 const isFunction = require('../core/isFunction')
 
-// binary : (* -> c) -> a -> b -> c
+/** binary :: (* -> c) -> a -> b -> c */
 function binary(fn) {
   if(!isFunction(fn)) {
     throw new TypeError('binary: Function required')

@@ -16,8 +16,8 @@ const applyTransform = (left, maybe) =>
     Result.Ok
   )
 
-// maybeToResult : c -> Maybe a -> Result c a
-// maybeToResult : c -> (a -> Maybe b) -> a -> Result c b
+/** maybeToResult :: c -> Maybe a -> Result c a */
+/** maybeToResult :: c -> (a -> Maybe b) -> a -> Result c b */
 function maybeToResult(left, maybe) {
   if(isFunction(maybe)) {
     return function(x) {

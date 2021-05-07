@@ -3,7 +3,7 @@
 
 /* eslint eqeqeq: "off" */
 
-// isNil : a -> Boolean
+/** isNil :: a -> Boolean */
 function isNil(x) {
   return x == null || x !== x
 }

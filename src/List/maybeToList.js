@@ -17,8 +17,8 @@ const applyTransform = maybe =>
 const err =
   'maybeToList: Argument must be a Maybe instanstace or a Maybe returning function'
 
-// maybeToList : Maybe a -> List a
-// maybeToList : (a -> Maybe b) -> a -> List b
+/** maybeToList :: Maybe a -> List a */
+/** maybeToList :: (a -> Maybe b) -> a -> List b */
 function maybeToList(maybe) {
   if(isFunction(maybe)) {
     return function(x) {

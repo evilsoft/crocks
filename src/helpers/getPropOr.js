@@ -28,7 +28,7 @@ function fn(name) {
   return curry(getPropOr)
 }
 
-// getPropOr : a -> (String | Integer) -> b -> c
+/** getPropOr :: a -> (String | Integer) -> b -> c */
 const getPropOr =
   fn('getPropOr')
 

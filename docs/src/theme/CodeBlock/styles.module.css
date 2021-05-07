@@ -1,0 +1,94 @@
+.playgroundPreview {
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-bottom-left-radius: var(--ifm-global-radius);
+  border-bottom-right-radius: var(--ifm-global-radius);
+  position: relative;
+}
+
+.btn {
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857;
+  border-radius: 4px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.btn:focus,
+.btn.focus,
+.btn:active:focus,
+.btn:active.focus,
+.btn.active:focus,
+.btn.active.focus {
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+.btn:hover,
+.btn:focus,
+.btn.focus {
+  color: rgba(14, 20, 26, 0.6);
+  text-decoration: none;
+}
+.btn:active,
+.btn.active {
+  outline: 0;
+  background-image: none;
+  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+}
+.btn.disabled,
+.btn[disabled],
+fieldset[disabled] .btn {
+  cursor: not-allowed;
+  opacity: 0.65;
+  filter: alpha(opacity=65);
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.btnAccent {
+  transition: all 0.3s ease-in-out;
+  background-color: #ffcc00;
+  color: #000000;
+}
+.btnAccent:hover,
+.btnAccent:focus,
+.btnAccent.focus {
+  background-color: rgba(255, 204, 0, 0.8);
+  color: #000000;
+}
+.btnAccent:active:hover,
+.btnAccent:active:focus,
+.btnAccent:active.focus,
+.btnAccent.active:hover,
+.btnAccent.active:focus,
+.btnAccent.active.focus {
+  background-color: rgba(255, 204, 0, 0.8);
+  color: #000000;
+}
+
+.playgroundEditorHeader {
+  background: var(--ifm-color-emphasis-600);
+  color: var(--ifm-color-content-inverse);
+}
+
+.playgroundPreviewHeader {
+  background: var(--ifm-color-emphasis-200);
+  color: var(--ifm-color-content);
+}
+
+.playgroundEditor {
+  font-family: var(--ifm-font-family-monospace) !important;
+}
+

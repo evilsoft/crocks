@@ -4,7 +4,7 @@
 const hasAlg = require('../core/hasAlg')
 const isFunctor = require('../core/isFunctor')
 
-// isTraversable : a -> Boolean
+/** isTraversable :: a -> Boolean */
 function isTraversable(m) {
   return isFunctor(m)
     && hasAlg('traverse', m)

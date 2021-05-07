@@ -3,7 +3,7 @@
 
 const isNumber = require('./isNumber')
 
-// isInteger : a -> Boolean
+/** isInteger :: a -> Boolean */
 function isInteger(x) {
   return isNumber(x)
     && isFinite(x)

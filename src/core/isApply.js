@@ -4,7 +4,7 @@
 const hasAlg = require('./hasAlg')
 const isFunctor = require('./isFunctor')
 
-// isApply : a -> Boolean
+/** isApply :: a -> Boolean */
 function isApply(m) {
   return isFunctor(m)
     && hasAlg('ap', m)

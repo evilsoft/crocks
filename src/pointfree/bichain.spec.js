@@ -21,7 +21,7 @@ test('bichain pointfree', t => {
 
   t.ok(isFunction(bichain), 'is a function')
 
-  const err = /TypeError: bichain: First two arguments must be Bichain returning functions/
+  const err = /^TypeError: bichain: First two arguments must be Sum Type returning functions$/
 
   t.throws(m(undefined, unit, f), err, 'throws if first arg is undefined')
   t.throws(m(null, unit, f), err, 'throws if first arg is null')
@@ -45,7 +45,7 @@ test('bichain pointfree', t => {
   t.throws(m(unit, [], f), err, 'throws if second arg is an array')
   t.throws(m(unit, {}, f), err, 'throws if second arg is an object')
 
-  const last = /bichain: Third argument must be a Bichain/
+  const last = /^TypeError: bichain: Third argument must be a Sum Type$/
   t.throws(m(unit, unit, undefined), last, 'throws if third arg is undefined')
   t.throws(m(unit, unit, null), last, 'throws if third arg is null')
   t.throws(m(unit, unit, 0), last, 'throws if third arg is a falsey number')

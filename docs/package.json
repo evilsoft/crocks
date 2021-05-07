@@ -1,19 +1,37 @@
 {
-  "private": true,
-  "name": "crocks-docs",
+  "name": "docs-v-2",
   "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "start": "electric run --env dev",
-    "docs:build": "electric build",
-    "docs:deploy": "electric deploy"
+    "docusaurus": "docusaurus",
+    "start": "docusaurus start",
+    "build": "docusaurus build",
+    "swizzle": "docusaurus swizzle",
+    "deploy": "docusaurus deploy",
+    "serve": "docusaurus serve"
   },
-  "devDependencies": {
-    "electric-cli": "^2.4.2",
-    "electric-marble-components": "^3.0.0",
-    "marble": "~3.1.3",
-    "marble-topbar": "^1.0.0",
-    "markdown-slug": "^0.1.1",
-    "moment": "^2.19.2",
-    "rimraf": "^2.6.2"
+  "dependencies": {
+    "@docusaurus/core": "2.0.0-alpha.70",
+    "@docusaurus/preset-classic": "2.0.0-alpha.70",
+    "@docusaurus/theme-live-codeblock": "2.0.0-alpha.70",
+    "@mdx-js/react": "^1.5.8",
+    "clsx": "^1.1.1",
+    "crocks": "0.12.4",
+    "docusaurus-lunr-search": "2.1.10",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-runkit": "0.9.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

@@ -1153,7 +1153,7 @@ safe :: ((b -> Boolean) | Pred) -> b -> Maybe a
 When using a `Maybe`, it is a common practice to lift into a `Just` or
 a `Nothing` depending on a condition on the value to be lifted.  It is so
 common that it warrants a function, and that function is called `safe`. Provide
-a predicate (a function that returns a Boolean) or a [`Pred`][pred] datatypea
+a predicate (a function that returns a Boolean) or a [`Pred`][pred] datatype
 and the value to be lifted. The value will be evaluated against the predicate,
 and will lift it into a `Just` if true and a `Nothing` if false.
 

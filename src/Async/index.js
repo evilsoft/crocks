@@ -131,7 +131,7 @@ function Async(fn) {
 
   function fork(reject, resolve, cleanup) {
     if(!isFunction(reject) || !isFunction(resolve)) {
-      throw new TypeError('Async.fork: Resolve and reject arguments must both be Functions')
+      throw new TypeError('Async.fork: Reject and resolve arguments must both be Functions')
     }
 
     let cancelled = false

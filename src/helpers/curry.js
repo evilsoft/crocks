@@ -7,7 +7,7 @@ const isFunction = require('../core/isFunction')
 /** curry :: ((a, b, c) -> d) -> a -> b -> c -> d */
 function curry(fn) {
   if(!isFunction(fn)) {
-    throw new TypeError('curry: Function required')
+    throw new TypeError('curry: Argument must be a Function')
   }
 
   return _curry(fn)

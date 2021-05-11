@@ -27,7 +27,7 @@ test('Assign', t => {
   t.ok(isFunction(Assign.type), 'provides a type function')
   t.ok(isString(Assign['@@type']), 'provides a @@type string')
 
-  const err = /Assign: Object required/
+  const err = /Assign: Argument must be an Object/
   t.throws(Assign, err, 'throws with nothing')
   t.throws(a(identity), err, 'throws with a function')
   t.throws(a(0), err, 'throws with falsey number')
@@ -166,7 +166,7 @@ test('Assign concat functionality', t => {
 
   const cat = bindFunc(a.concat)
 
-  const err = /Assign.concat: Assign required/
+  const err = /Assign\.concat: Argument must be an Assign/
   t.throws(cat(undefined), err, 'throws with undefined')
   t.throws(cat(null), err, 'throws with null')
   t.throws(cat(0), err, 'throws with falsey number')
@@ -190,7 +190,7 @@ test('Assign concat fantasy-land errors', t => {
 
   const cat = bindFunc(a[fl.concat])
 
-  const err = /Assign.fantasy-land\/concat: Assign required/
+  const err = /Assign\.fantasy-land\/concat: Argument must be an Assign/
   t.throws(cat(undefined), err, 'throws with undefined')
   t.throws(cat(null), err, 'throws with null')
   t.throws(cat(0), err, 'throws with falsey number')

@@ -5,7 +5,7 @@ const isFunction = require('../core/isFunction')
 
 function snd(m) {
   if(!(m && isFunction(m.snd))) {
-    throw new TypeError('snd: Pair required')
+    throw new TypeError('snd: Argument must be a Pair')
   }
 
   return m.snd()

@@ -23,7 +23,7 @@ test('fanout function', t => {
 
   const f = bindFunc(fanout)
 
-  const err = /fanout: Arrows, Functions or Stars of the same type required for both arguments/
+  const err = /fanout: Both arguments must be Arrows, Functions, or Stars of the same type/
   t.throws(f(undefined, unit), err, 'throws when first arg is undefined')
   t.throws(f(null, unit), err, 'throws when first arg is null')
   t.throws(f(0, unit), err, 'throws when first arg is falsey number')

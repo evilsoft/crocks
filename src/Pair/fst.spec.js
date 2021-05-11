@@ -18,7 +18,7 @@ test('fst pointfree', t => {
 
   t.ok(isFunction(fst), 'is a function')
 
-  const err = /fst: Pair required/
+  const err = /fst: Argument must be a Pair/
   t.throws(f(undefined), err, 'throws if passed undefined')
   t.throws(f(null), err, 'throws if passed null')
   t.throws(f(0), err, 'throws if passed a falsey number')

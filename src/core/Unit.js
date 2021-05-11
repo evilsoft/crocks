@@ -36,7 +36,7 @@ function Unit() {
   function concat(method) {
     return function(m) {
       if(!isSameType(Unit, m)) {
-        throw new TypeError(`Unit.${method}: Unit required`)
+        throw new TypeError(`Unit.${method}: Argument must be a Unit`)
       }
 
       return Unit()
@@ -46,7 +46,7 @@ function Unit() {
   function map(method) {
     return function(fn) {
       if(!isFunction(fn)) {
-        throw new TypeError(`Unit.${method}: Function required`)
+        throw new TypeError(`Unit.${method}: Argument must be a Function`)
       }
 
       return Unit()
@@ -55,7 +55,7 @@ function Unit() {
 
   function ap(m) {
     if(!isSameType(Unit, m)) {
-      throw new TypeError('Unit.ap: Unit required')
+      throw new TypeError('Unit.ap: Argument must be a Unit')
     }
 
     return Unit()
@@ -64,7 +64,7 @@ function Unit() {
   function chain(method) {
     return function(fn) {
       if(!isFunction(fn)) {
-        throw new TypeError(`Unit.${method}: Function required`)
+        throw new TypeError(`Unit.${method}: Argument must be a Function`)
       }
 
       return Unit()

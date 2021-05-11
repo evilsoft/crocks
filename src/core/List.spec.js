@@ -1,12 +1,12 @@
 const test = require('tape')
 const sinon = require('sinon')
-const helpers = require('../test/helpers')
 const MockCrock = require('../test/MockCrock')
+const helpers = require('../test/helpers')
+const laws = require('../test/laws')
 
 const bindFunc = helpers.bindFunc
 
-const curry = require('./curry')
-const _compose = curry(require('./compose'))
+const equals = require('./equals')
 const isFunction = require('./isFunction')
 const isObject = require('./isObject')
 const isSameType = require('./isSameType')
@@ -231,15 +231,35 @@ test('List equals functionality', t => {
 test('List equals properties (Setoid)', t => {
   const a = List([ 0, 'like' ])
   const b = List([ 0, 'like' ])
-  const c = List([ 1, 'rainbow' ])
-  const d = List([ 'like', 0 ])
+  const c = List([ 0, 'like' ])
+  const d = List([ 1, 'rainbow' ])
+
+  const equals = laws.Setoid('equals')
 
   t.ok(isFunction(List([]).equals), 'provides an equals function')
 
-  t.equal(a.equals(a), true, 'reflexivity')
-  t.equal(a.equals(b), b.equals(a), 'symmetry (equal)')
-  t.equal(a.equals(c), c.equals(a), 'symmetry (!equal)')
-  t.equal(a.equals(b) && b.equals(d), a.equals(d), 'transitivity')
+  t.ok(equals.reflexivity(a), 'reflexivity')
+  t.ok(equals.symmetry(a, b), 'symmetry (equal)')
+  t.ok(equals.symmetry(a, d), 'symmetry (!equal)')
+  t.ok(equals.transitivity(a, b, c), 'transitivity (equal)')
+  t.ok(equals.transitivity(a, d, c), 'transitivity (!equal)')
+
+  t.end()
+})
+
+test('List fantasy-land equals properties (Setoid)', t => {
+  const a = List([ 0, 'like' ])
+  const b = List([ 0, 'like' ])
+  const c = List([ 0, 'like' ])
+  const d = List([ 1, 'rainbow' ])
+
+  const equals = laws.Setoid(fl.equals)
+
+  t.ok(equals.reflexivity(a), 'reflexivity')
+  t.ok(equals.symmetry(a, b), 'symmetry (equal)')
+  t.ok(equals.symmetry(a, d), 'symmetry (!equal)')
+  t.ok(equals.transitivity(a, b, c), 'transitivity (equal)')
+  t.ok(equals.transitivity(a, d, c), 'transitivity (!equal)')
 
   t.end()
 })
@@ -249,12 +269,23 @@ test('List concat properties (Semigroup)', t => {
   const b = List([ 0, null ])
   const c = List([ true, 'string' ])
 
-  const left = a.concat(b).concat(c)
-  const right = a.concat(b.concat(c))
+  const concat = laws.Semigroup(equals, 'concat')
 
   t.ok(isFunction(a.concat), 'provides a concat function')
-  t.same(left.valueOf(), right.valueOf(), 'associativity')
-  t.equal(a.concat(b).type(), a.type(), 'returns a List')
+  t.ok(concat.associativity(a, b, c), 'associativity')
+
+  t.end()
+})
+
+test('List fantasy-land concat properties (Semigroup)', t => {
+  const a = List([ 1, '' ])
+  const b = List([ 0, null ])
+  const c = List([ true, 'string' ])
+
+  const concat = laws.Semigroup(equals, fl.concat)
+
+  t.ok(isFunction(a[fl.concat]), 'provides a concat function')
+  t.ok(concat.associativity(a, b, c), 'associativity')
 
   t.end()
 })
@@ -318,14 +349,27 @@ test('List concat functionality', t => {
 test('List empty properties (Monoid)', t => {
   const m = List([ 1, 2 ])
 
+  const empty = laws.Monoid(equals, 'empty', 'concat')
+
   t.ok(isFunction(m.concat), 'provides a concat function')
-  t.ok(isFunction(m.empty), 'provides an empty function')
+  t.ok(isFunction(m.constructor.empty), 'provides an empty function on constructor')
 
-  const right = m.concat(m.empty())
-  const left = m.empty().concat(m)
+  t.ok(empty.leftIdentity(m), 'left identity')
+  t.ok(empty.rightIdentity(m), 'right identity')
 
-  t.same(right.valueOf(), m.valueOf(), 'right identity')
-  t.same(left.valueOf(), m.valueOf(), 'left identity')
+  t.end()
+})
+
+test('List fantasy-land empty properties (Monoid)', t => {
+  const m = List([ 1, 2 ])
+
+  const empty = laws.Monoid(equals, fl.empty, fl.concat)
+
+  t.ok(isFunction(m[fl.concat]), 'provides a concat function')
+  t.ok(isFunction(m.constructor[fl.empty]), 'provides an empty function on constructor')
+
+  t.ok(empty.leftIdentity(m), 'left identity')
+  t.ok(empty.rightIdentity(m), 'right identity')
 
   t.end()
 })
@@ -649,10 +693,28 @@ test('List map properties (Functor)', t => {
   const f = x => x + 54
   const g = x => x * 4
 
+  const map = laws.Functor(equals, 'map')
+
   t.ok(isFunction(m.map), 'provides a map function')
 
-  t.same(m.map(identity).valueOf(), m.valueOf(), 'identity')
-  t.same(m.map(_compose(f, g)).valueOf(), m.map(g).map(f).valueOf(), 'composition')
+  t.ok(map.identity(m), 'identity')
+  t.ok(map.composition(f, g, m), 'composition')
+
+  t.end()
+})
+
+test('List fantasy-land map properties (Functor)', t => {
+  const m = List([ 68 ])
+
+  const f = x => x + 54
+  const g = x => x * 4
+
+  const map = laws.Functor(equals, fl.map)
+
+  t.ok(isFunction(m[fl.map]), 'provides a map function')
+
+  t.ok(map.identity(m), 'identity')
+  t.ok(map.composition(f, g, m), 'composition')
 
   t.end()
 })
@@ -691,15 +753,16 @@ test('List ap errors', t => {
 })
 
 test('List ap properties (Apply)', t => {
-  const m = List([ identity ])
+  const f = List([ x => x.length ])
+  const g = List([ x => x * 3 ])
+  const v = List([ 'a', 'bb', 'ccc' ])
 
-  const a = m.map(_compose).ap(m).ap(m)
-  const b = m.ap(m.ap(m))
+  const ap = laws.Apply(equals, 'ap', 'map')
 
-  t.ok(isFunction(List([]).ap), 'provides an ap function')
-  t.ok(isFunction(List([]).map), 'implements the Functor spec')
+  t.ok(isFunction(v.map), 'implements the Functor spec')
+  t.ok(isFunction(v.ap), 'provides an ap function')
 
-  t.same(a.ap(List([ 3 ])).valueOf(), b.ap(List([ 3 ])).valueOf(), 'composition')
+  t.ok(ap.composition(g, f, v), 'composition')
 
   t.end()
 })
@@ -796,28 +859,58 @@ test('List chain fantasy-land errors', t => {
 })
 
 test('List chain properties (Chain)', t => {
-  t.ok(isFunction(List([]).chain), 'provides a chain function')
-  t.ok(isFunction(List([]).ap), 'implements the Apply spec')
-
-  const f = x => List.of(x + 2)
+  const f = x => List.of(x * 12)
   const g = x => List.of(x + 10)
+  const v = List.of(5)
 
-  const a = x => List.of(x).chain(f).chain(g)
-  const b = x => List.of(x).chain(y => f(y).chain(g))
+  const chain = laws.Chain(equals, 'chain')
 
-  t.same(a(10).valueOf(), b(10).valueOf(), 'assosiativity')
+  t.ok(isFunction(v.chain), 'provides a chain function')
+  t.ok(isFunction(v.ap), 'implements the Apply spec')
+
+  t.ok(chain.associativity(f, g, v), 'associativity')
+
+  t.end()
+})
+
+test('List fantasy-land chain properties (Chain)', t => {
+  const f = x => List.of(x * 12)
+  const g = x => List.of(x + 10)
+  const v = List.of(5)
+
+  const chain = laws.Chain(equals, fl.chain)
+
+  t.ok(chain.associativity(f, g, v), 'associativity')
 
   t.end()
 })
 
 test('List chain properties (Monad)', t => {
-  t.ok(isFunction(List([]).chain), 'implements the Chain spec')
-  t.ok(isFunction(List([]).of), 'implements the Applicative spec')
+  const f = x => List([ x + 38 ])
+  const v = List([ 37 ])
 
-  const f = x => List([ x ])
+  const of = laws.Monad(equals, List, 'of', 'chain')
 
-  t.same(List.of(3).chain(f).valueOf(), f(3).valueOf(), 'left identity')
-  t.same(f(3).chain(List.of).valueOf(), f(3).valueOf(), 'right identity')
+  t.ok(isFunction(v.chain), 'implements the Chain spec')
+  t.ok(isFunction(v.of), 'implements the Applicative spec')
+
+  t.ok(of.leftIdentity(f, 10), 'left identity')
+  t.ok(of.rightIdentity(f, 10), 'right identity')
+
+  t.end()
+})
+
+test('List fantasy-land chain properties (Monad)', t => {
+  const f = x => List([ x + 38 ])
+  const v = List([ 37 ])
+
+  const of = laws.Monad(equals, List, fl.of, fl.chain)
+
+  t.ok(isFunction(v[fl.chain]), 'implements the Chain spec')
+  t.ok(isFunction(v.constructor[fl.of]), 'implements the Applicative spec')
+
+  t.ok(of.leftIdentity(f, 10), 'left identity')
+  t.ok(of.rightIdentity(f, 10), 'right identity')
 
   t.end()
 })

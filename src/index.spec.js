@@ -444,7 +444,7 @@ test('entry', t => {
   t.equal(crocks.pathSatisfies, pathSatisfies, 'provides the pathSatisfies predicate')
   t.equal(crocks.pathEq, pathEq, 'provides the pathEq predicate')
   t.equal(crocks.propEq, propEq, 'provides the propEq predicate')
-  t.equal(crocks.propPathEq, propPathEq, 'provides the propEq predicate')
+  t.equal(crocks.propPathEq, propPathEq, 'provides the propPathEq predicate')
   t.equal(crocks.propSatisfies, propSatisfies, 'provides the propSatisfies predicate')
   t.equal(crocks.propPathSatisfies, propPathSatisfies, 'provides the propPathSatisfies predicate')
 

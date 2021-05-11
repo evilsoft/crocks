@@ -1,14 +1,13 @@
 const test = require('tape')
 const sinon = require('sinon')
-const helpers = require('../test/helpers')
+
 const MockCrock = require('../test/MockCrock')
+const helpers = require('../test/helpers')
+const laws = require('../test/laws')
 
 const bindFunc = helpers.bindFunc
 
-const curry = require('./curry')
-const compose = curry(require('./compose'))
-const equals = require('../core/equals')
-const isArray = require('./isArray')
+const equals = require('./equals')
 const isFunction = require('./isFunction')
 const isObject = require('./isObject')
 const isSameType = require('./isSameType')
@@ -270,6 +269,84 @@ test('Maybe bichain functionality', t => {
   t.end()
 })
 
+test('Maybe equals functionality', t => {
+  const a = Maybe.Just(0)
+  const b = Maybe.Just(0)
+  const c = Maybe.Just(1)
+
+  const d = Maybe.Just(undefined)
+  const n = Maybe.Nothing()
+
+  const value = 0
+  const nonMaybe = { type: 'Maybe...Not' }
+
+  t.equal(a.equals(c), false, 'returns false when 2 Justs are not equal')
+  t.equal(d.equals(n), false, 'returns false when Just(undefinded) and Nothing compared')
+  t.equal(a.equals(value), false, 'returns false when passed a simple value')
+  t.equal(a.equals(nonMaybe), false, 'returns false when passed a non-Maybe')
+
+  t.equal(a.equals(b), true, 'returns true when 2 Justs are equal')
+  t.equal(n.equals(Maybe.Nothing()), true, 'returns true when Nothings compared')
+
+  t.end()
+})
+
+test('Maybe equals properties (Setoid)', t => {
+  const { Just, Nothing } = Maybe
+
+  const la = Nothing()
+  const lb = Nothing()
+  const lc = Nothing()
+
+  const ra = Just([ 1, 'joe' ])
+  const rb = Just([ 1, 'joe' ])
+  const rc = Just([ 1, 'joe' ])
+  const rd = Just([ 'joe', 1 ])
+
+  const equals = laws.Setoid('equals')
+
+  t.ok(isFunction(Maybe.Just(0).equals), 'provides an equals function')
+
+  t.ok(equals.reflexivity(la), 'Nothing reflexivity')
+  t.ok(equals.symmetry(la, lb), 'Nothing symmetry (equal)')
+  t.ok(equals.transitivity(la, lb, lc), 'Nothing transitivity (equal)')
+
+  t.ok(equals.reflexivity(ra), 'Just reflexivity')
+  t.ok(equals.symmetry(ra, rb), 'Just symmetry (equal)')
+  t.ok(equals.symmetry(ra, rd), 'Just symmetry (!equal)')
+  t.ok(equals.transitivity(ra, rb, rc), 'Just transitivity (equal)')
+  t.ok(equals.transitivity(ra, rd, rc), 'Just transitivity (!equal)')
+
+  t.end()
+})
+
+test('Maybe fantasy-land equals properties (Setoid)', t => {
+  const { Just, Nothing } = Maybe
+
+  const la = Nothing()
+  const lb = Nothing()
+  const lc = Nothing()
+
+  const ra = Just([ 1, 'joe' ])
+  const rb = Just([ 1, 'joe' ])
+  const rc = Just([ 1, 'joe' ])
+  const rd = Just([ 'joe', 1 ])
+
+  const equals = laws.Setoid(fl.equals)
+
+  t.ok(equals.reflexivity(la), 'Nothing reflexivity')
+  t.ok(equals.symmetry(la, lb), 'Nothing symmetry (equal)')
+  t.ok(equals.transitivity(la, lb, lc), 'Nothing transitivity (equal)')
+
+  t.ok(equals.reflexivity(ra), 'Just reflexivity')
+  t.ok(equals.symmetry(ra, rb), 'Just symmetry (equal)')
+  t.ok(equals.symmetry(ra, rd), 'Just symmetry (!equal)')
+  t.ok(equals.transitivity(ra, rb, rc), 'Just transitivity (equal)')
+  t.ok(equals.transitivity(ra, rd, rc), 'Just transitivity (!equal)')
+
+  t.end()
+})
+
 test('Maybe concat errors', t => {
   const m = { type: () => 'Maybe...Not' }
 
@@ -396,58 +473,45 @@ test('Maybe concat functionality', t => {
 })
 
 test('Maybe concat properties (Semigroup)', t => {
-  const extract =
-    either(constant('Nothing'), identity)
+  const { Just, Nothing } = Maybe
 
-  const a = Maybe.Just([ 'a' ])
-  const b = Maybe.Just([ 'b' ])
-  const c = Maybe.Just([ 'c' ])
+  const ra = Just([ 'a' ])
+  const rb = Just([ 'b' ])
+  const rc = Just([ 'c' ])
 
-  const left = a.concat(b).concat(c)
-  const right = a.concat(b.concat(c))
+  const la = Nothing([ 1 ])
+  const lb = Nothing([ 2 ])
+  const lc = Nothing([ 3 ])
 
-  t.ok(isFunction(a.concat), 'provides a concat function')
+  const concat = laws.Semigroup(equals, 'concat')
 
-  t.same(extract(left), extract(right), 'associativity')
-  t.ok(isArray(extract(a.concat(b))), 'returns an Array')
+  t.ok(isFunction(ra.concat), 'Just provides a concat function')
+  t.ok(isFunction(la.concat), 'Nothing provides a concat function')
 
-  t.end()
-})
-
-test('Maybe equals functionality', t => {
-  const a = Maybe.Just(0)
-  const b = Maybe.Just(0)
-  const c = Maybe.Just(1)
-
-  const d = Maybe.Just(undefined)
-  const n = Maybe.Nothing()
-
-  const value = 0
-  const nonMaybe = { type: 'Maybe...Not' }
-
-  t.equal(a.equals(c), false, 'returns false when 2 Justs are not equal')
-  t.equal(d.equals(n), false, 'returns false when Just(undefinded) and Nothing compared')
-  t.equal(a.equals(value), false, 'returns false when passed a simple value')
-  t.equal(a.equals(nonMaybe), false, 'returns false when passed a non-Maybe')
-
-  t.equal(a.equals(b), true, 'returns true when 2 Justs are equal')
-  t.equal(n.equals(Maybe.Nothing()), true, 'returns true when Nothings compared')
+  t.ok(concat.associativity(ra, rb, rc), 'Just associativity')
+  t.ok(concat.associativity(la, lb, lc), 'Nothing associativity')
 
   t.end()
 })
 
-test('Maybe equals properties (Setoid)', t => {
-  const a = Maybe.Just([ 1, 'joe' ])
-  const b = Maybe.Just([ 1, 'joe' ])
-  const c = Maybe.Just([ 'joe', 1 ])
-  const d = Maybe.Just([ 1, 'joe' ])
+test('Maybe fantasy-land concat properties (Semigroup)', t => {
+  const { Just, Nothing } = Maybe
 
-  t.ok(isFunction(Maybe.Just(0).equals), 'provides an equals function')
+  const ra = Just([ 'a' ])
+  const rb = Just([ 'b' ])
+  const rc = Just([ 'c' ])
 
-  t.equal(a.equals(a), true, 'reflexivity')
-  t.equal(a.equals(b), b.equals(a), 'symmetry (equal)')
-  t.equal(a.equals(c), c.equals(a), 'symmetry (!equal)')
-  t.equal(a.equals(b) && b.equals(d), a.equals(d), 'transitivity')
+  const la = Nothing([ 1 ])
+  const lb = Nothing([ 2 ])
+  const lc = Nothing([ 3 ])
+
+  const concat = laws.Semigroup(equals, fl.concat)
+
+  t.ok(isFunction(ra[fl.concat]), 'Just provides a concat function')
+  t.ok(isFunction(la[fl.concat]), 'Nothing provides a concat function')
+
+  t.ok(concat.associativity(ra, rb, rc), 'Just associativity')
+  t.ok(concat.associativity(la, lb, lc), 'Nothing associativity')
 
   t.end()
 })
@@ -517,18 +581,41 @@ test('Maybe map functionality', t => {
 })
 
 test('Maybe map properties (Functor)', t => {
+  const { Just, Nothing } = Maybe
+
   const f = x => x + 2
   const g = x => x * 2
 
-  t.ok(isFunction(Maybe.Just(0).map), 'Just provides a map function')
-  t.ok(isFunction(Maybe.Nothing().map), 'Just provides a map function')
+  const map = laws.Functor(equals, 'map')
 
-  t.equal(Maybe.Just(null).map(identity).option('Nothing'), null, 'identity')
-  t.equal(
-    Maybe.Just(10).map(x => f(g(x))).option('Nothing'),
-    Maybe(10).map(g).map(f).option('Other'),
-    'composition'
-  )
+  t.ok(isFunction(Just(0).map), 'Just provides a map function')
+  t.ok(isFunction(Nothing().map), 'Nothing provides a map function')
+
+  t.ok(map.identity(Just(null)), 'Just identity')
+  t.ok(map.composition(f, g, Just(10)), 'Just composition')
+
+  t.ok(map.identity(Nothing()), 'Nothing identity')
+  t.ok(map.composition(f, g, Nothing()), 'Nothing composition')
+
+  t.end()
+})
+
+test('Maybe fantasy-land map properties (Functor)', t => {
+  const { Just, Nothing } = Maybe
+
+  const f = x => x + 24
+  const g = x => x * 19
+
+  const map = laws.Functor(equals, fl.map)
+
+  t.ok(isFunction(Just(0)[fl.map]), 'Just provides a map function')
+  t.ok(isFunction(Nothing()[fl.map]), 'Nothing provides a map function')
+
+  t.ok(map.identity(Just(null)), 'Just identity')
+  t.ok(map.composition(f, g, Just(10)), 'Just composition')
+
+  t.ok(map.identity(Nothing()), 'Nothing identity')
+  t.ok(map.composition(f, g, Nothing()), 'Nothing composition')
 
   t.end()
 })
@@ -681,22 +768,26 @@ test('Maybe ap errors', t => {
 })
 
 test('Maybe ap properties (Apply)', t => {
-  const m = Maybe.Just(identity)
+  const { Just, Nothing } = Maybe
 
-  const a = m.map(compose).ap(m).ap(m)
-  const b = m.ap(m.ap(m))
+  const rf = Just(x => x + 13)
+  const rg = Just(x => x * 23)
+  const rv = Just(10)
 
-  const j = Maybe.Just(3)
-  const n = Maybe.Nothing()
+  const lf = Nothing()
+  const lg = Nothing()
+  const lv = Nothing()
 
-  t.ok(isFunction(j.ap), 'Just provides an ap function')
-  t.ok(isFunction(j.map), 'Just implements the Functor spec')
+  const ap = laws.Apply(equals, 'ap', 'map')
 
-  t.ok(isFunction(n.ap), 'Nothing provides an ap function')
-  t.ok(isFunction(n.map), 'Nothing implements the Functor spec')
+  t.ok(isFunction(rv.ap), 'Just provides an ap function')
+  t.ok(isFunction(rv.map), 'Just implements the Functor spec')
 
-  t.equal(a.ap(j).option('Nothing'), b.ap(j).option('Nothing'), 'composition Just')
-  t.equal(a.ap(n).option('Nothing'), b.ap(n).option('Nothing'), 'composition Nothing')
+  t.ok(isFunction(lv.ap), 'Nothing provides an ap function')
+  t.ok(isFunction(lv.map), 'Nothing implements the Functor spec')
+
+  t.ok(ap.composition(rg, rf, rv), 'Just composition')
+  t.ok(ap.composition(lg, lf, lv), 'Nothing composition')
 
   t.end()
 })
@@ -778,34 +869,97 @@ test('Maybe chain fantasy-land errors', t => {
 })
 
 test('Maybe chain properties (Chain)', t => {
-  const j = Maybe.Just(0)
-  const n = Maybe.Nothing()
+  const { Just, Nothing } = Maybe
 
-  t.ok(isFunction(j.chain), 'Just provides a chain function')
-  t.ok(isFunction(j.ap), 'Just implements the Apply spec')
+  const rf = x => Just(x + 37)
+  const rg = x => Just(x * 10)
+  const rv = Just(4)
 
-  t.ok(isFunction(n.chain), 'Nothing provides a chain function')
-  t.ok(isFunction(n.ap), 'Nothing implements the Apply spec')
+  const lf = Nothing
+  const lg = Nothing
+  const lv = Nothing()
 
-  const f = x => Maybe.of(x + 2)
-  const g = x => Maybe.of(x + 10)
+  const chain = laws.Chain(equals, 'chain')
 
-  const a = x => Maybe.of(x).chain(f).chain(g)
-  const b = x => Maybe.of(x).chain(y => f(y).chain(g))
+  t.ok(isFunction(rv.chain), 'Just provides a chain function')
+  t.ok(isFunction(rv.ap), 'Just implements the Apply spec')
 
-  t.equal(a(10).option('Nothing'), b(10).option('Other'), 'assosiativity')
+  t.ok(isFunction(lv.chain), 'Nothing provides a chain function')
+  t.ok(isFunction(lv.ap), 'Nothing implements the Apply spec')
+
+  t.ok(chain.associativity(rf, rg, rv), 'Just associativity')
+  t.ok(chain.associativity(lf, lg, lv), 'Nothing associativity')
+
+  t.end()
+})
+
+test('Maybe fantasy-land chain properties (Chain)', t => {
+  const { Just, Nothing } = Maybe
+
+  const rf = x => Just(x + 37)
+  const rg = x => Just(x * 10)
+  const rv = Just(4)
+
+  const lf = Nothing
+  const lg = Nothing
+  const lv = Nothing()
+
+  const chain = laws.Chain(equals, fl.chain)
+
+  t.ok(chain.associativity(rf, rg, rv), 'Just associativity')
+  t.ok(chain.associativity(lf, lg, lv), 'Nothing associativity')
 
   t.end()
 })
 
 test('Maybe chain properties (Monad)', t => {
-  t.ok(isFunction(Maybe(0).chain), 'implements the Chain spec')
-  t.ok(isFunction(Maybe(0).of), 'implements the Applicative spec')
+  const { Just, Nothing } = Maybe
 
-  const f = Maybe.of
+  const rf = x => Just(x + 6)
+  const rv = Just(5)
 
-  t.equal(Maybe.of(3).chain(f).option('First'), f(3).option('Second'), 'left identity')
-  t.equal(f(3).chain(Maybe.of).option('First'), f(3).option('Second'), 'right identity')
+  const lf = Nothing
+  const lv = Nothing()
+
+  const of = laws.Monad(equals, Maybe, 'of', 'chain')
+
+  t.ok(isFunction(rv.chain), 'Just implements the Chain spec')
+  t.ok(isFunction(rv.constructor.of), 'Just implements the Applicative spec')
+
+  t.ok(isFunction(lv.chain), 'Nothing implements the Chain spec')
+  t.ok(isFunction(lv.constructor.of), 'Nothing implements the Applicative spec')
+
+  t.ok(of.leftIdentity(rf, 10), 'Just left identity')
+  t.ok(of.rightIdentity(rf, 10), 'Just right identity')
+
+  t.ok(of.leftIdentity(lf, 10), 'Nothing left identity')
+  t.ok(of.rightIdentity(lf, 10), 'Nothing right identity')
+
+  t.end()
+})
+
+test('Maybe fantasy-land chain properties (Monad)', t => {
+  const { Just, Nothing } = Maybe
+
+  const rf = x => Just(x + 6)
+  const rv = Just(5)
+
+  const lf = Nothing
+  const lv = Nothing()
+
+  const of = laws.Monad(equals, Maybe, fl.of, fl.chain)
+
+  t.ok(isFunction(rv[fl.chain]), 'Just implements the Chain spec')
+  t.ok(isFunction(rv.constructor[fl.of]), 'Just implements the Applicative spec')
+
+  t.ok(isFunction(lv[fl.chain]), 'Nothing implements the Chain spec')
+  t.ok(isFunction(lv.constructor[fl.of]), 'Nothing implements the Applicative spec')
+
+  t.ok(of.leftIdentity(rf, 10), 'Just left identity')
+  t.ok(of.rightIdentity(rf, 10), 'Just right identity')
+
+  t.ok(of.leftIdentity(lf, 10), 'Nothing left identity')
+  t.ok(of.rightIdentity(lf, 10), 'Nothing right identity')
 
   t.end()
 })

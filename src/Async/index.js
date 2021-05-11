@@ -48,14 +48,22 @@ function fromNode(fn, ctx) {
     throw new TypeError('Async.fromNode: Argument must be a continuation-passing-style Function')
   }
 
-  return (...args) =>
-    Async((reject, resolve) => {
+  const _fn = curry(fn)
+
+  return (...args) => {
+
+    if (args.length < _fn.length - 1) {
+      return fromNode(_fn(...args), ctx)
+    }
+
+    return Async((reject, resolve) => {
       fn.apply(ctx,
         args.concat(
           (err, data) => err ? reject(err) : resolve(data)
         )
       )
     })
+  }
 }
 
 function fromPromise(fn) {

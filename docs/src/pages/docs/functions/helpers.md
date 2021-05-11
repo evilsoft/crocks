@@ -312,7 +312,7 @@ number of parameters.
 import compose from 'crocks/helpers/compose'
 import curry from 'crocks/helpers/curry'
 import map from 'crocks/pointfree/map'
-import prop from 'crocks/maybe/prop'
+import getProp from 'crocks/maybe/getProp'
 
 // add :: (Number, Number, Number) -> Number
 const add = (a, b, c) =>
@@ -342,7 +342,7 @@ crocksCurriedAdd(1, 2, 3)
 
 // strictCurriedPluck :: String -> [ a ] -> Maybe b
 const strictCurriedPluck =
-  compose(map, prop)
+  compose(map, getProp)
 
 const crockCurriedPluck =
   curry(strictCurriedPluck)
@@ -836,7 +836,7 @@ just want to combine the two into an `Object`, then it sounds like `objOf` is
 the function for you. Just pass it a `String` for the key and any type of value,
 and you'll get back an `Object` that is composed of those two. If you find
 yourself constantly concatenating the result of this function into
-another `Object`, you may want to use [`assoc`](#assoc) instead.
+another `Object`, you may want to use [`setProp`](#setprop) instead.
 
 #### omit
 
@@ -1300,8 +1300,7 @@ unsetPath :: [ (String | Integer) ] -> a -> a
 ```
 
 Used to remove a property or index on a deeply nested `Object`/`Array`.
-`unsetPath`, previously called `dissoc`, will return a new instance with the
-property or index removed.
+`unsetPath` will return a new instance with the property or index removed.
 
 The provided path can be a mixture of either Positive `Integer`s or `String`s to
 allow for traversing through both `Array`s and `Object`s. When an `Integer` is
@@ -1337,11 +1336,11 @@ unsetPath([ 'a', 'b' ], { a: { c: false } })
 unsetProp :: (String | Integer) -> a -> a
 ```
 
-`unsetProp` is a binary function that takes either a property name or an index
-as its first argument. Which specifies what should be removed, or "unset", from
-the `Object` or `Array` provided as the second argument. If the value provided
-for the second argument is not an `Object` or `Array`, then the value provided
-is echoed back as the result.
+`unsetProp`, previously called `dissoc`, is a binary function that takes either
+a property name or an index as its first argument. Which specifies what should be
+removed, or "unset", from the `Object` or `Array` provided as the second argument.
+If the value provided for the second argument is not an `Object` or `Array`, then
+the value provided is echoed back as the result.
 
 The first argument must be either a non-empty `String` or
 positive `Integer`. A `String` should be provided when working with

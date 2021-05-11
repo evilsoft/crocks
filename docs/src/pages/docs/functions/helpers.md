@@ -359,7 +359,6 @@ strictCurriedPluck('a')(data)
 
 crockCurriedPluck('a', data)
 //=> [ Just "nice", Just "great", Nothing ]
-
 ```
 
 An important caveat when using `curry` with functions containing optional parameters,
@@ -369,6 +368,8 @@ to functions may not be a good choice if the intention is to use them with `curr
 as the ability to change the defaults is lost. Parameters are applied up until the
 first optional parameter, at which point subsequent parameters either receive the
 declared default or go undefined.
+
+<!-- eslint-disable no-console -->
 
 ```javascript
 import curry from 'crocks/helpers/curry'
@@ -382,8 +383,9 @@ curriedConsolelog('Hello %s', 'World')
 
 curriedConsolelog('Hello', 'World')
 //=> Hello
-
 ```
+
+<!-- eslint-enable no-console -->
 
 #### defaultProps
 
@@ -761,6 +763,55 @@ safeMax(data)
 
 ```haskell
 mconcat :: Monoid m, Foldable f => m -> f a -> m a
+```
+
+```javascript
+import mconcat from 'crocks/helpers/mconcat'
+
+import Pred from 'crocks/Pred'
+
+import composeB from 'crocks/combinators/composeB'
+import equals from 'crocks/pointfree/equals'
+import getPropOr from 'crocks/helpers/getPropOr'
+
+// Person :: { name: string, age: number, referral: string }
+// createPerson :: (string, number, string) -> Person
+const createPerson = (name, age, referral) => ({
+  name,
+  age,
+  referral
+})
+
+// gte :: number -> number -> bool
+const gte = a => b =>
+  b >= a
+
+// getIsOfAge :: person -> bool
+const getIsOfAge = composeB(
+  gte(21),
+  getPropOr(0, 'age')
+)
+
+// isReferred :: person -> bool
+const getIsReferred = composeB(
+  equals('FRIEND'),
+  getPropOr('ANON', 'referral')
+)
+
+// isValid :: a -> Pred
+const isValid = mconcat(Pred, [
+  getIsOfAge,
+  getIsReferred
+])
+
+isValid.runWith(createPerson('Sam', 37, 'ANON'))
+//=> false
+
+isValid.runWith(createPerson('Dean', 41, 'FRIEND'))
+//=> true
+
+isValid.runWith(createPerson('Jack', 3, 'FRIEND'))
+//=> false
 ```
 
 #### mreduce

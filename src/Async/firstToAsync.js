@@ -24,7 +24,7 @@ function firstToAsync(left, first) {
       const m = first(x)
 
       if(!isSameType(First, m)) {
-        throw new TypeError('firstToAsync: First returning function required for second argument')
+        throw new TypeError('firstToAsync: Second argument must be a Function that returns a First')
       }
 
       return applyTransform(left, m)
@@ -35,7 +35,7 @@ function firstToAsync(left, first) {
     return applyTransform(left, first)
   }
 
-  throw new TypeError('firstToAsync: First or First returning function required for second argument')
+  throw new TypeError('firstToAsync: Second argument must be a First or a Function that returns a First')
 }
 
 module.exports = curry(firstToAsync)

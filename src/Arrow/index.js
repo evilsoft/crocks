@@ -19,7 +19,7 @@ const _id =
 
 function Arrow(runWith) {
   if(!isFunction(runWith)) {
-    throw new TypeError('Arrow: Function required')
+    throw new TypeError('Arrow: Argument must be a Function')
   }
 
   const inspect =
@@ -34,7 +34,7 @@ function Arrow(runWith) {
   function compose(method) {
     return function(m) {
       if(!isSameType(Arrow, m)) {
-        throw new TypeError(`Arrow.${method}: Arrow required`)
+        throw new TypeError(`Arrow.${method}: Argument must be an Arrow`)
       }
 
       return _map(m.runWith)
@@ -44,7 +44,7 @@ function Arrow(runWith) {
   function map(method) {
     return function(fn) {
       if(!isFunction(fn)) {
-        throw new TypeError(`Arrow.${method}: Function required`)
+        throw new TypeError(`Arrow.${method}: Argument must be a Function`)
       }
 
       return _map(fn)
@@ -54,7 +54,7 @@ function Arrow(runWith) {
   function contramap(method) {
     return function(fn) {
       if(!isFunction(fn)) {
-        throw new TypeError(`Arrow.${method}: Function required`)
+        throw new TypeError(`Arrow.${method}: Argument must be a Function`)
       }
 
       return Arrow(x => runWith(fn(x)))
@@ -64,7 +64,7 @@ function Arrow(runWith) {
   function promap(method) {
     return function(l, r) {
       if(!isFunction(l) || !isFunction(r)) {
-        throw new TypeError(`Arrow.${method}: Functions required for both arguments`)
+        throw new TypeError(`Arrow.${method}: Both arguments must be Functions`)
       }
 
       return Arrow(x => r(runWith(l(x))))
@@ -74,7 +74,7 @@ function Arrow(runWith) {
   function first() {
     return Arrow(function(x) {
       if(!isSameType(Pair, x)) {
-        throw TypeError('Arrow.first: Pair required for inner argument')
+        throw TypeError('Arrow.first: Inner argument must be a Pair')
       }
       return x.bimap(runWith, x => x)
     })
@@ -83,7 +83,7 @@ function Arrow(runWith) {
   function second() {
     return Arrow(function(x) {
       if(!isSameType(Pair, x)) {
-        throw TypeError('Arrow.second: Pair required for inner argument')
+        throw TypeError('Arrow.second: Inner argument must be a Pair')
       }
 
       return x.bimap(x => x, runWith)
@@ -93,7 +93,7 @@ function Arrow(runWith) {
   function both() {
     return Arrow(function(x) {
       if(!isSameType(Pair, x)) {
-        throw TypeError('Arrow.both: Pair required for inner argument')
+        throw TypeError('Arrow.both: Inner argument must be a Pair')
       }
       return x.bimap(runWith, runWith)
     })

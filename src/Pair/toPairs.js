@@ -8,7 +8,7 @@ const isObject = require('../core/isObject')
 /** toPairs :: Object -> List (Pair String a) */
 function toPairs(obj) {
   if(!isObject(obj)) {
-    throw new TypeError('toPairs: Object required for argument')
+    throw new TypeError('toPairs: Argument must be an Object')
   }
 
   return Object.keys(obj).reduce(

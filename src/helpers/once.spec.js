@@ -13,7 +13,7 @@ test('once helper', t => {
 
   t.ok(isFunction(once), 'is a function')
 
-  const err = /once: Function required/
+  const err = /once: Argument must be a Function/
   t.throws(f(undefined), err, 'throws with undefined')
   t.throws(f(null), err, 'throws with null')
   t.throws(f(0), err, 'throws with falsey number')

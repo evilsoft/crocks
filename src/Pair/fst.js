@@ -5,7 +5,7 @@ const isFunction = require('../core/isFunction')
 
 function fst(m) {
   if(!(m && isFunction(m.fst))) {
-    throw new TypeError('fst: Pair required')
+    throw new TypeError('fst: Argument must be a Pair')
   }
 
   return m.fst()

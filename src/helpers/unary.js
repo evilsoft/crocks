@@ -6,7 +6,7 @@ const isFunction = require('../core/isFunction')
 /** unary :: (* -> b) -> a -> b */
 function unary(fn) {
   if(!isFunction(fn)) {
-    throw new TypeError('unary: Function required')
+    throw new TypeError('unary: Argument must be a Function')
   }
 
   return function(x) {

@@ -17,7 +17,7 @@ test('asyncToPromise transform', t => {
   const f = bindFunc(asyncToPromise)
   const m = Async(unit)
 
-  const err = /asyncToPromise: Async or a function returning an Async required/
+  const err = /asyncToPromise: Argument must be an Async or a Function that returns an Async/
 
   t.ok(isFunction(asyncToPromise), 'is a function')
 

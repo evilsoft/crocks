@@ -22,7 +22,7 @@ test('lastToAsync transform', t => {
 
   t.ok(isFunction(lastToAsync), 'is a function')
 
-  const err = /lastToAsync: Last or Last returning function required for second argument/
+  const err = /lastToAsync: Second argument must be a Last or a Function that returns a Last/
   t.throws(f(x, undefined), err, 'throws if second arg is undefined')
   t.throws(f(x, null), err, 'throws if second arg is null')
   t.throws(f(x, 0), err, 'throws if second arg is a falsey number')
@@ -67,7 +67,7 @@ test('lastToAsync with Last returning function', t => {
 
   const f = bindFunc(lastToAsync(none, identity))
 
-  const err = /lastToAsync: Last returning function required for second argument/
+  const err = /lastToAsync: Second argument must be a Function that returns a Last/
   t.throws(f(undefined), err, 'throws if function returns undefined')
   t.throws(f(null), err, 'throws if function returns null')
   t.throws(f(0), err, 'throws if function returns a falsey number')

@@ -39,7 +39,7 @@ test('Async', t => {
   t.ok(isFunction(Async.Resolved), 'provides a Resolved function')
   t.ok(isFunction(Async.Rejected), 'provides a Rejected function')
 
-  const err = /Async: Function required/
+  const err = /Async: Argument must be a Function/
   t.throws(Async, err, 'throws with no parameters')
   t.throws(a(undefined), err, 'throws with undefined')
   t.throws(a(null), err, 'throws with null')
@@ -128,7 +128,7 @@ test('Async fromPromise', t => {
   const fn = bindFunc(Async.fromPromise)
   const fork = bindFunc(x => Async.fromPromise(() => x)().fork(unit, unit))
 
-  const err = /Async.fromPromise: Promise returning function required/
+  const err = /Async\.fromPromise: Argument must be a Function that returns a Promise/
   t.throws(fn(undefined), err, 'throws with undefined')
   t.throws(fn(null), err, 'throws with null')
   t.throws(fn(0), err, 'throws with falsey number')
@@ -195,7 +195,7 @@ test('Async fromNode', t => {
 
   const fn = bindFunc(Async.fromNode)
 
-  const err = /Async.fromNode: CPS function required/
+  const err = /Async\.fromNode: Argument must be a continuation-passing-style Function/
   t.throws(fn(undefined), err, 'throws with undefined')
   t.throws(fn(null), err, 'throws with null')
   t.throws(fn(0), err, 'throws with falsey number')
@@ -230,7 +230,7 @@ test('Async all', t => {
 
   t.ok(isFunction(Async.all), 'is a function')
 
-  const err = /Async.all: Foldable structure of Asyncs required/
+  const err = /Async\.all: Argument must be a Foldable structure of Asyncs/
   t.throws(all(undefined), err, 'throws with undefined')
   t.throws(all(null), err, 'throws with null')
   t.throws(all(0), err, 'throws with falsey number')
@@ -290,7 +290,7 @@ test('Async all resolution with List', t => {
 test('Async rejectAfter errors', t => {
   const rejectAfter = bindFunc(Async.rejectAfter)
 
-  const err = /Async.rejectAfter: Positive Integer required for first argument/
+  const err = /Async\.rejectAfter: First argument must be a positive Integer/
   t.throws(rejectAfter(undefined), err, 'throws with undefined')
   t.throws(rejectAfter(null), err, 'throws with null')
   t.throws(rejectAfter(-1), err, 'throws with neg integer')
@@ -340,7 +340,7 @@ test('Async rejectAfter cancellation', t => {
 test('Async resolveAfter errors', t => {
   const resolveAfter = bindFunc(Async.resolveAfter)
 
-  const err = /Async.resolveAfter: Positive Integer required for first argument/
+  const err = /Async\.resolveAfter: First argument must be a positive Integer/
   t.throws(resolveAfter(undefined), err, 'throws with undefined')
   t.throws(resolveAfter(null), err, 'throws with null')
   t.throws(resolveAfter(-1), err, 'throws with neg integer')
@@ -631,7 +631,7 @@ test('Async toPromise', t => {
 test('Async swap', t => {
   const fn = bindFunc(Async(unit).swap)
 
-  const err = /Async.swap: Functions required for both arguments/
+  const err = /Async\.swap: Both arguments must be Functions/
   t.throws(fn(null, unit), err, 'throws with null in left')
   t.throws(fn(undefined, unit), err, 'throws with undefined in left')
   t.throws(fn(0, unit), err, 'throws with falsey number in left')
@@ -673,7 +673,7 @@ test('Async swap', t => {
 test('Async coalesce', t => {
   const fn = bindFunc(Async(unit).coalesce)
 
-  const err = /Async.coalesce: Functions required for both arguments/
+  const err = /Async\.coalesce: Both arguments must be Functions/
   t.throws(fn(null, unit), err, 'throws with null in left')
   t.throws(fn(undefined, unit), err, 'throws with undefined in left')
   t.throws(fn(0, unit), err, 'throws with falsey number in left')
@@ -714,7 +714,7 @@ test('Async coalesce', t => {
 test('Async race errors', t => {
   const race = bindFunc(Async(unit).race)
 
-  const err = /Async.race: Async required/
+  const err = /Async\.race: Argument must be an Async/
   t.throws(race(null), err, 'throws with null')
   t.throws(race(undefined), err, 'throws with undefined')
   t.throws(race(0), err, 'throws with falsey number')
@@ -788,7 +788,7 @@ test('Async race cancelled', t => {
 test('Async map errors', t => {
   const map = bindFunc(Async(unit).map)
 
-  const err = /Async.map: Function required/
+  const err = /Async\.map: Argument must be a Function/
   t.throws(map(undefined), err, 'throws with undefined')
   t.throws(map(null), err, 'throws with null')
   t.throws(map(0), err, 'throws with falsey number')
@@ -808,7 +808,7 @@ test('Async map errors', t => {
 test('Async map fantasy-land errors', t => {
   const map = bindFunc(Async(unit)[fl.map])
 
-  const err = /Async.fantasy-land\/map: Function required/
+  const err = /Async\.fantasy-land\/map: Argument must be a Function/
   t.throws(map(undefined), err, 'throws with undefined')
   t.throws(map(null), err, 'throws with null')
   t.throws(map(0), err, 'throws with falsey number')
@@ -865,7 +865,7 @@ test('Async map properties (Functor)', t => {
 test('Async bimap errors', t => {
   const bimap = bindFunc(Async(unit).bimap)
 
-  const err = /Async.bimap: Functions required for both arguments/
+  const err = /Async\.bimap: Both arguments must be Functions/
   t.throws(bimap(undefined, unit), err, 'throws with undefined in first argument')
   t.throws(bimap(null, unit), err, 'throws with null in first argument')
   t.throws(bimap(0, unit), err, 'throws with falsey number in first argument')
@@ -896,7 +896,7 @@ test('Async bimap errors', t => {
 test('Async bimap fantasy-land errors', t => {
   const bimap = bindFunc(Async(unit)[fl.bimap])
 
-  const err = /Async.fantasy-land\/bimap: Functions required for both arguments/
+  const err = /Async\.fantasy-land\/bimap: Both arguments must be Functions/
   t.throws(bimap(undefined, unit), err, 'throws with undefined in first argument')
   t.throws(bimap(null, unit), err, 'throws with null in first argument')
   t.throws(bimap(0, unit), err, 'throws with falsey number in first argument')
@@ -991,7 +991,7 @@ test('Async alt errors', t => {
 
   const altResolved = bindFunc(Async.of(0).alt)
 
-  const err = /Async.alt: Async required/
+  const err = /Async\.alt: Argument must be an Async/
   t.throws(altResolved(undefined), err, 'throws when passed an undefined with Resolved')
   t.throws(altResolved(null), err, 'throws when passed a null with Resolved')
   t.throws(altResolved(0), err, 'throws when passed a falsey number with Resolved')
@@ -1026,7 +1026,7 @@ test('Async alt fantasy-land errors', t => {
 
   const altResolved = bindFunc(Async.of(0)[fl.alt])
 
-  const err = /Async.fantasy-land\/alt: Async required/
+  const err = /Async\.fantasy-land\/alt: Argument must be an Async/
   t.throws(altResolved(undefined), err, 'throws when passed an undefined with Resolved')
   t.throws(altResolved(null), err, 'throws when passed a null with Resolved')
   t.throws(altResolved(0), err, 'throws when passed a falsey number with Resolved')
@@ -1108,7 +1108,7 @@ test('Async ap errors', t => {
   const lift = v =>
     Async.of(v).ap(Async.of(0)).fork.bind(null, unit, unit)
 
-  const err = /Async.ap: Wrapped value must be a function/
+  const err = /Async\.ap: Wrapped value must be a function/
   t.throws(lift(undefined), err, 'throws when wrapped value is undefined')
   t.throws(lift(null), err, 'throws when wrapped value is null')
   t.throws(lift(0), err, 'throws when wrapped value is a falsey number')
@@ -1120,7 +1120,7 @@ test('Async ap errors', t => {
   t.throws(lift([]), err, 'throws when wrapped value is an array')
   t.throws(lift({}), err, 'throws when wrapped value is an object')
 
-  const noAsync = /Async.ap: Async required/
+  const noAsync = /Async\.ap: Argument must be an Async/
   t.throws(Async.of(unit).ap.bind(null, undefined), noAsync, 'throws when passed undefined')
   t.throws(Async.of(unit).ap.bind(null, null), noAsync, 'throws when passed null')
   t.throws(Async.of(unit).ap.bind(null, 0), noAsync, 'throws when passed a falsey number')
@@ -1203,7 +1203,7 @@ test('Async of properties (Applicative)', t => {
 test('Async chain errors', t => {
   const chain = bindFunc(Async(unit).chain)
 
-  const err = /Async.chain: Async returning function required/
+  const err = /Async\.chain: Argument must be a Function that returns an Async/
   t.throws(chain(undefined), err, 'throws with undefined')
   t.throws(chain(null), err, 'throws with null')
   t.throws(chain(0), err, 'throws with falsey number')
@@ -1215,7 +1215,7 @@ test('Async chain errors', t => {
   t.throws(chain([]), err, 'throws with an array')
   t.throws(chain({}), err, 'throws with an object')
 
-  const noAsync = /Async.chain: Function must return another Async/
+  const noAsync = /Async\.chain: Function must return another Async/
   t.throws(Async.of(3).chain(unit).fork.bind(null, unit, unit), noAsync, 'throws with a non-Async returning function')
 
   t.doesNotThrow(Async.of(3).chain(Async.of).fork.bind(null, unit, unit), 'allows an Async returning function')
@@ -1226,7 +1226,7 @@ test('Async chain errors', t => {
 test('Async chain fantasy-land errors', t => {
   const chain = bindFunc(Async(unit)[fl.chain])
 
-  const err = /Async.fantasy-land\/chain: Async returning function required/
+  const err = /Async\.fantasy-land\/chain: Argument must be a Function that returns an Async/
   t.throws(chain(undefined), err, 'throws with undefined')
   t.throws(chain(null), err, 'throws with null')
   t.throws(chain(0), err, 'throws with falsey number')
@@ -1238,7 +1238,7 @@ test('Async chain fantasy-land errors', t => {
   t.throws(chain([]), err, 'throws with an array')
   t.throws(chain({}), err, 'throws with an object')
 
-  const noAsync = /Async.fantasy-land\/chain: Function must return another Async/
+  const noAsync = /Async\.fantasy-land\/chain: Function must return another Async/
   t.throws(Async.of(3)[fl.chain](unit).fork.bind(null, unit, unit), noAsync, 'throws with a non-Async returning function')
 
   t.doesNotThrow(Async.of(3)[fl.chain](Async.of).fork.bind(null, unit, unit), 'allows an Async returning function with Resolved')

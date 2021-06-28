@@ -8,7 +8,7 @@ const unary = require('./unary')
 test('unary helper', t => {
   const f = bindFunc(unary)
 
-  const err = /unary: Function required/
+  const err = /unary: Argument must be a Function/
   t.throws(f(undefined), err, 'throws with undefined')
   t.throws(f(null), err, 'throws with null')
   t.throws(f(0), err, 'throws with falsey number')

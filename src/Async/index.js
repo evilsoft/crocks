@@ -33,7 +33,7 @@ const Rejected =
 
 function all(asyncs) {
   if(!(isFoldable(asyncs) && allAsyncs(asyncs))) {
-    throw new TypeError('Async.all: Foldable structure of Asyncs required')
+    throw new TypeError('Async.all: Argument must be a Foldable structure of Asyncs')
   }
 
   if(isArray(asyncs)) {
@@ -45,7 +45,7 @@ function all(asyncs) {
 
 function fromNode(fn, ctx) {
   if(!isFunction(fn)) {
-    throw new TypeError('Async.fromNode: CPS function required')
+    throw new TypeError('Async.fromNode: Argument must be a continuation-passing-style Function')
   }
 
   return (...args) =>
@@ -60,7 +60,7 @@ function fromNode(fn, ctx) {
 
 function fromPromise(fn) {
   if(!isFunction(fn)) {
-    throw new TypeError('Async.fromPromise: Promise returning function required')
+    throw new TypeError('Async.fromPromise: Argument must be a Function that returns a Promise')
   }
 
   const _fn = curry(fn)
@@ -77,7 +77,7 @@ function fromPromise(fn) {
     return Async(function(reject, resolve) {
 
       if(!isPromise(promise)) {
-        throw new TypeError('Async.fromPromise: Promise returning function required')
+        throw new TypeError('Async.fromPromise: Argument must be a Function that returns a Promise')
       }
 
       promise
@@ -89,7 +89,7 @@ function fromPromise(fn) {
 function rejectAfter(ms, value) {
   if(!(isInteger(ms) && ms >= 0)) {
     throw new TypeError(
-      'Async.rejectAfter: Positive Integer required for first argument'
+      'Async.rejectAfter: First argument must be a positive Integer'
     )
   }
 
@@ -105,7 +105,7 @@ function rejectAfter(ms, value) {
 function resolveAfter(ms, value) {
   if(!(isInteger(ms) && ms >= 0)) {
     throw new TypeError(
-      'Async.resolveAfter: Positive Integer required for first argument'
+      'Async.resolveAfter: First argument must be a positive Integer'
     )
   }
 
@@ -120,7 +120,7 @@ function resolveAfter(ms, value) {
 
 function Async(fn) {
   if(!isFunction(fn)) {
-    throw new TypeError('Async: Function required')
+    throw new TypeError('Async: Argument must be a Function')
   }
 
   const of =
@@ -131,7 +131,7 @@ function Async(fn) {
 
   function fork(reject, resolve, cleanup) {
     if(!isFunction(reject) || !isFunction(resolve)) {
-      throw new TypeError('Async.fork: Reject and resolve functions required')
+      throw new TypeError('Async.fork: Reject and resolve arguments must both be Functions')
     }
 
     let cancelled = false
@@ -173,7 +173,7 @@ function Async(fn) {
 
   function race(m) {
     if(!isSameType(Async, m)) {
-      throw new TypeError('Async.race: Async required')
+      throw new TypeError('Async.race: Argument must be an Async')
     }
 
     return Async(function(reject, resolve) {
@@ -193,7 +193,7 @@ function Async(fn) {
 
   function swap(l, r) {
     if(!isFunction(l) || !isFunction(r)) {
-      throw new TypeError('Async.swap: Functions required for both arguments')
+      throw new TypeError('Async.swap: Both arguments must be Functions')
     }
 
     return Async(function(reject, resolve) {
@@ -206,7 +206,7 @@ function Async(fn) {
 
   function coalesce(l, r) {
     if(!isFunction(l) || !isFunction(r)) {
-      throw new TypeError('Async.coalesce: Functions required for both arguments')
+      throw new TypeError('Async.coalesce: Both arguments must be Functions')
     }
 
     return Async(function(reject, resolve) {
@@ -220,7 +220,7 @@ function Async(fn) {
   function map(method) {
     return function(mapFn) {
       if(!isFunction(mapFn)) {
-        throw new TypeError(`Async.${method}: Function required`)
+        throw new TypeError(`Async.${method}: Argument must be a Function`)
       }
 
       return Async(function(reject, resolve) {
@@ -232,7 +232,7 @@ function Async(fn) {
   function bimap(method) {
     return function(l, r) {
       if(!isFunction(l) || !isFunction(r)) {
-        throw new TypeError(`Async.${method}: Functions required for both arguments`)
+        throw new TypeError(`Async.${method}: Both arguments must be Functions`)
       }
 
       return Async(function(reject, resolve) {
@@ -247,7 +247,7 @@ function Async(fn) {
   function alt(method) {
     return function(m) {
       if(!isSameType(Async, m)) {
-        throw new TypeError(`Async.${method}: Async required`)
+        throw new TypeError(`Async.${method}: Argument must be an Async`)
       }
 
       return Async((rej, res) => {
@@ -264,7 +264,7 @@ function Async(fn) {
 
   function ap(m) {
     if(!isSameType(Async, m)) {
-      throw new TypeError('Async.ap: Async required')
+      throw new TypeError('Async.ap: Argument must be an Async')
     }
 
     return Async(function(reject, resolve) {
@@ -307,7 +307,7 @@ function Async(fn) {
     return function(mapFn) {
       if(!isFunction(mapFn)) {
         throw new TypeError(
-          `Async.${method}: Async returning function required`
+          `Async.${method}: Argument must be a Function that returns an Async`
         )
       }
 

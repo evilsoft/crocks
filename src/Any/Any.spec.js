@@ -27,7 +27,7 @@ test('Any', t => {
   t.ok(isFunction(Any.type), 'provides a type function')
   t.ok(isString(Any['@@type']), 'provides a @@type string')
 
-  const err = /Any: Non-function value required/
+  const err = /Any: Value must not be a Function/
   t.throws(Any, err, 'throws with nothing')
   t.throws(a(identity), err, 'throws with a function')
 

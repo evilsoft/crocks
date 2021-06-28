@@ -27,7 +27,7 @@ test('All', t => {
   t.ok(isFunction(All.type), 'provides a type function')
   t.ok(isString(All['@@type']), 'provides a @@type string')
 
-  const err = /All: Non-function value required/
+  const err = /All: Value must not be a Function/
   t.throws(All, err, 'throws with nothing')
   t.throws(m(identity), err, 'throws with a function')
 

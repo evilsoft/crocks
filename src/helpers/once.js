@@ -7,7 +7,7 @@ const _once = require('../core/once')
 /** once :: ((*) -> b) -> ((*) -> b) */
 function once(fn) {
   if(!isFunction(fn)) {
-    throw new TypeError('once: Function required')
+    throw new TypeError('once: Argument must be a Function')
   }
 
   return _once(fn)

@@ -23,7 +23,7 @@ function Assign(o) {
   const x = isNil(o) ? _empty().valueOf() : o
 
   if(!arguments.length || !isObject(x)) {
-    throw new TypeError('Assign: Object required')
+    throw new TypeError('Assign: Argument must be an Object')
   }
 
   const valueOf =
@@ -42,7 +42,7 @@ function Assign(o) {
   function concat(method) {
     return function(m) {
       if(!isSameType(Assign, m)) {
-        throw new TypeError(`Assign.${method}: Assign required`)
+        throw new TypeError(`Assign.${method}: Argument must be an Assign`)
       }
 
       return Assign(_object.assign(m.valueOf(), x))

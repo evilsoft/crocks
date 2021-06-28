@@ -19,7 +19,7 @@ function resultToAsync(result) {
       const m = result(x)
 
       if(!isSameType(Result, m)) {
-        throw new TypeError('resultToAsync: Result returning function required')
+        throw new TypeError('resultToAsync: Argument must be a Function that returns a Result')
       }
 
       return applyTransform(m)
@@ -30,7 +30,7 @@ function resultToAsync(result) {
     return applyTransform(result)
   }
 
-  throw new TypeError('resultToAsync: Result or Result returning function required')
+  throw new TypeError('resultToAsync: Argument must be a Result or a Function that returns a Result')
 }
 
 module.exports = curry(resultToAsync)

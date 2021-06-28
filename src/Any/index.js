@@ -21,7 +21,7 @@ function Any(b) {
   const x = isNil(b) ? _empty().valueOf() : b
 
   if(!arguments.length || isFunction(x)) {
-    throw new TypeError('Any: Non-function value required')
+    throw new TypeError('Any: Value must not be a Function')
   }
 
   const valueOf =

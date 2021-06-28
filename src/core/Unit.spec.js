@@ -145,7 +145,7 @@ test('Unit concat errors', t => {
 
   const cat = bindFunc(a.concat)
 
-  const err = /Unit.concat: Unit required/
+  const err = /Unit\.concat: Argument must be a Unit/
   t.throws(cat(undefined), err, 'throws with undefined')
   t.throws(cat(null), err, 'throws with null')
   t.throws(cat(0), err, 'throws with falsey number')
@@ -167,7 +167,7 @@ test('Unit concat fantasy-land errors', t => {
 
   const cat = bindFunc(a[fl.concat])
 
-  const err = /Unit.fantasy-land\/concat: Unit required/
+  const err = /Unit\.fantasy-land\/concat: Argument must be a Unit/
   t.throws(cat(undefined), err, 'throws with undefined')
   t.throws(cat(null), err, 'throws with null')
   t.throws(cat(0), err, 'throws with falsey number')
@@ -235,7 +235,7 @@ test('Unit empty functionality', t => {
 test('Unit map errors', t => {
   const map = bindFunc(Unit(0).map)
 
-  const err = /Unit.map: Function required/
+  const err = /Unit\.map: Argument must be a Function/
   t.throws(map(undefined), err, 'throws when passed undefined')
   t.throws(map(null), err, 'throws when passed null')
   t.throws(map(0), err, 'throws when passed falsey number')
@@ -255,7 +255,7 @@ test('Unit map errors', t => {
 test('Unit map fantasy-land errors', t => {
   const map = bindFunc(Unit(0)[fl.map])
 
-  const err = /Unit.fantasy-land\/map: Function required/
+  const err = /Unit\.fantasy-land\/map: Argument must be a Function/
   t.throws(map(undefined), err, 'throws when passed undefined')
   t.throws(map(null), err, 'throws when passed null')
   t.throws(map(0), err, 'throws when passed falsey number')
@@ -303,7 +303,7 @@ test('Unit ap errors', t => {
   const m = MockCrock('joy')
   const ap = bindFunc(Unit(32).ap)
 
-  const err = /Unit.ap: Unit required/
+  const err = /Unit\.ap: Argument must be a Unit/
   t.throws(ap(undefined), err, 'throws when passed undefined')
   t.throws(ap(null), err, 'throws when passed null')
   t.throws(ap(0), err, 'throws when passed a falsey number')
@@ -362,7 +362,7 @@ test('Unit of properties (Applicative)', t => {
 test('Unit chain errors', t => {
   const chain = bindFunc(Unit(0).chain)
 
-  const err = /Unit.chain: Function required/
+  const err = /Unit\.chain: Argument must be a Function/
   t.throws(chain(undefined), err, 'throws with undefined')
   t.throws(chain(null), err, 'throws with null')
   t.throws(chain(0), err, 'throws with falsey number')
@@ -382,7 +382,7 @@ test('Unit chain errors', t => {
 test('Unit chain fantasy-land errors', t => {
   const chain = bindFunc(Unit(0)[fl.chain])
 
-  const err = /Unit.fantasy-land\/chain: Function required/
+  const err = /Unit\.fantasy-land\/chain: Argument must be a Function/
   t.throws(chain(undefined), err, 'throws with undefined')
   t.throws(chain(null), err, 'throws with null')
   t.throws(chain(0), err, 'throws with falsey number')

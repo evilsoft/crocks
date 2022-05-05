@@ -11,7 +11,7 @@ const applyTransform = maybe =>
   maybe.either(() => [], x => [ x ])
 
 const err =
-  'maybeToArray: Argument must be a Maybe instanstace or a Maybe returning function'
+  'maybeToArray: Argument must be a Maybe instance or a Maybe returning function'
 
 function maybeToArray(maybe) {
   if(isFunction(maybe)) {

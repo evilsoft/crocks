@@ -17,7 +17,7 @@ test('maybeToArray transform', t => {
 
   t.ok(isFunction(maybeToArray), 'is a function')
 
-  const err = /maybeToArray: Argument must be a Maybe instanstace or a Maybe returning function/
+  const err = /maybeToArray: Argument must be a Maybe instance or a Maybe returning function/
   t.throws(f(undefined), err, 'throws if second arg is undefined')
   t.throws(f(null), err, 'throws if second arg is null')
   t.throws(f(0), err, 'throws if second arg is a falsey number')
@@ -54,7 +54,7 @@ test('maybeToArray with Maybe returning function', t => {
 
   const f = bindFunc(maybeToArray(identity))
 
-  const err = /maybeToArray: Argument must be a Maybe instanstace or a Maybe returning function/
+  const err = /maybeToArray: Argument must be a Maybe instance or a Maybe returning function/
   t.throws(f(undefined), err, 'throws if function returns undefined')
   t.throws(f(null), err, 'throws if function returns null')
   t.throws(f(0), err, 'throws if function returns a falsey number')

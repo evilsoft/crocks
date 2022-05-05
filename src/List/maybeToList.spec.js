@@ -18,7 +18,7 @@ test('maybeToList transform', t => {
 
   t.ok(isFunction(maybeToList), 'is a function')
 
-  const err = /maybeToList: Argument must be a Maybe instanstace or a Maybe returning function/
+  const err = /maybeToList: Argument must be a Maybe instance or a Maybe returning function/
   t.throws(f(undefined), err, 'throws if first arg is undefined')
   t.throws(f(null), err, 'throws if first arg is null')
   t.throws(f(0), err, 'throws if first arg is a falsey number')
@@ -55,7 +55,7 @@ test('maybeToList with Maybe returning function', t => {
 
   const f = bindFunc(maybeToList(identity))
 
-  const err = /maybeToList: Argument must be a Maybe instanstace or a Maybe returning function/
+  const err = /maybeToList: Argument must be a Maybe instance or a Maybe returning function/
   t.throws(f(undefined), err, 'throws if function returns undefined')
   t.throws(f(null), err, 'throws if function returns null')
   t.throws(f(0), err, 'throws if function returns a falsey number')

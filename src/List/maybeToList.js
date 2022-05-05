@@ -15,7 +15,7 @@ const applyTransform = maybe =>
   )
 
 const err =
-  'maybeToList: Argument must be a Maybe instanstace or a Maybe returning function'
+  'maybeToList: Argument must be a Maybe instance or a Maybe returning function'
 
 /** maybeToList :: Maybe a -> List a */
 /** maybeToList :: (a -> Maybe b) -> a -> List b */

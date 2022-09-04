@@ -5,6 +5,7 @@ const isMonoid = require('./isMonoid')
 const equals = require('./equals')
 const fl = require('./flNames')
 
+/** isEmpty :: a -> Boolean */
 function isEmpty(x) {
   if(isMonoid(x)) {
     const empty = x.constructor[fl['empty']] || x.constructor['empty'] || x['empty']

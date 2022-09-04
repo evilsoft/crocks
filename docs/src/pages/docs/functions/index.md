@@ -128,6 +128,61 @@ type: `Pred a` and vice-versa
 | [`unless`][unless] | `(a -> Boolean) -> (a -> a) -> a -> a` | `crocks/logic/unless` |
 | [`when`][when] | `(a -> Boolean) -> (a -> a) -> a -> a` | `crocks/logic/when` |
 
+## Predicate
+
+| Function | Signature | Location |
+|:---|:---|:---|
+| [`hasProp`][hasProp] | `(String or Integer) -> a -> Boolean` | `crocks/predicates/hasProp` |
+| [`hasPropPath`][hasPropPath] | `[ String or Integer ] -> a -> Boolean` | `crocks/predicates/hasPropPath` |
+| [`hasProps`][hasProps] | `Foldable f => f (String or Integer) -> a -> Boolean` | `crocks/predicates/hasProps` |
+| [`isAlternative`][isAlternative] | `a -> Boolean` | `crocks/predicates/isAlternative` |
+| [`isAlt`][isAlt] | `a -> Boolean` | `crocks/predicates/isAlt` |
+| [`isApplicative`][isApplicative] | `a -> Boolean` | `crocks/predicates/isApplicative` |
+| [`isApply`][isApply] | `a -> Boolean` | `crocks/predicates/isApply` |
+| [`isArray`][isArray] | `a -> Boolean` | `crocks/predicates/isArray` |
+| [`isBichain`][isBichain] | `a -> Boolean` | `crocks/predicates/isBichain` |
+| [`isBifunctor`][isBifunctor] | `a -> Boolean` | `crocks/predicates/isBifunctor` |
+| [`isBoolean`][isBoolean] | `a -> Boolean` | `crocks/predicates/isBoolean` |
+| [`isCategory`][isCategory] | `a -> Boolean` | `crocks/predicates/isCategory` |
+| [`isChain`][isChain] | `a -> Boolean` | `crocks/predicates/isChain` |
+| [`isContravariant`][isContravariant] | `a -> Boolean` | `crocks/predicates/isContravariant` |
+| [`isDate`][isDate] | `a -> Boolean` | `crocks/predicates/isDate` |
+| [`isDefined`][isDefined] | `a -> Boolean` | `crocks/predicates/isDefined` |
+| [`isEmpty`][isEmpty] | `a -> Boolean` | `crocks/predicates/isEmpty` |
+| [`isExtend`][isExtend] | `a -> Boolean` | `crocks/predicates/isExtend` |
+| [`isFalse`][isFalse] | `a -> Boolean` | `crocks/predicates/isFalse` |
+| [`isFalsy`][isFalsy] | `a -> Boolean` | `crocks/predicates/isFalsy` |
+| [`isFoldable`][isFoldable] | `a -> Boolean` | `crocks/predicates/isFoldable` |
+| [`isFunction`][isFunction] | `a -> Boolean` | `crocks/predicates/isFunction` |
+| [`isFunctor`][isFunctor] | `a -> Boolean` | `crocks/predicates/isFunctor` |
+| [`isInteger`][isInteger] | `a -> Boolean` | `crocks/predicates/isInteger` |
+| [`isIterable`][isIterable] | `a -> Boolean` | `crocks/predicates/isIterable` |
+| [`isMap`][isMap] | `a -> Boolean` | `crocks/predicates/isMap` |
+| [`isMonad`][isMonad] | `a -> Boolean` | `crocks/predicates/isMonad` |
+| [`isMonoid`][isMonoid] | `a -> Boolean` | `crocks/predicates/isMonoid` |
+| [`isNil`][isNil] | `a -> Boolean` | `crocks/predicates/isNil` |
+| [`isNumber`][isNumber] | `a -> Boolean` | `crocks/predicates/isNumber` |
+| [`isObject`][isObject] | `a -> Boolean` | `crocks/predicates/isObject` |
+| [`isPlus`][isPlus] | `a -> Boolean` | `crocks/predicates/isPlus` |
+| [`isProfunctor`][isProfunctor] | `a -> Boolean` | `crocks/predicates/isProfunctor` |
+| [`isPromise`][isPromise] | `a -> Boolean` | `crocks/predicates/isPromise` |
+| [`isSame`][isSame] | `(a, b) -> Boolean` | `crocks/predicates/isSame` |
+| [`isSameType`][isSameType] | `Container m => (m, m) -> Boolean` | `crocks/predicates/isSameType` |
+| [`isSemigroup`][isSemigroup] | `a -> Boolean` | `crocks/predicates/isSemigroup` |
+| [`isSemigroupoid`][isSemigroupoid] | `a -> Boolean` | `crocks/predicates/isSemigroupoid` |
+| [`isSetoid`][isSetoid] | `a -> Boolean` | `crocks/predicates/isSetoid` |
+| [`isString`][isString] | `a -> Boolean` | `crocks/predicates/isString` |
+| [`isSymbol`][isSymbol] | `a -> Boolean` | `crocks/predicates/isSymbol` |
+| [`isTraversable`][isTraversable] | `a -> Boolean` | `crocks/predicates/isTraversable` |
+| [`isTrue`][isTrue] | `a -> Boolean` | `crocks/predicates/isTrue` |
+| [`isTruthy`][isTruthy] | `a -> Boolean` | `crocks/predicates/isTruthy` |
+| [`pathEq`][pathEq] | `[ String or Number ] -> a -> Object -> Boolean` | `crocks/predicates/pathEq` |
+| [`pathSatisfies`][pathSatisfies] | `[ (String or Integer) ] -> (a -> Boolean) -> b -> Boolean` | `crocks/predicates/pathSatisfies` |
+| [`propEq`][propEq] | `(String or Integer) -> a -> b -> Boolean` | `crocks/predicates/propEq` |
+| [`propPathEq`][propPathEq] | `[ String or Number ] -> a -> Object -> Boolean` | `crocks/predicates/propPathEq` |
+| [`propPathSatisfies`][propPathSatisfies] | `[ (String or Integer) ] -> (a -> Boolean) -> b -> Boolean` | `crocks/predicates/propPathSatisfies` |
+| [`propSatisfies`][propSatisfies] | `(String or Integer) -> (a -> Boolean) -> b -> Boolean` | `crocks/predicates/propSatisfies` |
+
 [monoids]: ../monoids/index.html
 [crocks]: ../crocks/index.html
 [pred]: ../crocks/Pred.html
@@ -199,3 +254,54 @@ type: `Pred a` and vice-versa
 [or]: logic-functions.html#or
 [unless]: logic-functions.html#unless
 [when]: logic-functions.html#when
+
+[hasProp]: predicate-functions.html
+[hasPropPath]: predicate-functions.html
+[hasProps]: predicate-functions.html
+[isAlternative]: predicate-functions.html
+[isAlt]: predicate-functions.html
+[isApplicative]: predicate-functions.html
+[isApply]: predicate-functions.html
+[isArray]: predicate-functions.html
+[isBichain]: predicate-functions.html
+[isBifunctor]: predicate-functions.html
+[isBoolean]: predicate-functions.html
+[isCategory]: predicate-functions.html
+[isChain]: predicate-functions.html
+[isContravariant]: predicate-functions.html
+[isDate]: predicate-functions.html
+[isDefined]: predicate-functions.html
+[isEmpty]: predicate-functions.html
+[isExtend]: predicate-functions.html
+[isFalse]: predicate-functions.html
+[isFalsy]: predicate-functions.html
+[isFoldable]: predicate-functions.html
+[isFunction]: predicate-functions.html
+[isFunctor]: predicate-functions.html
+[isInteger]: predicate-functions.html
+[isIterable]: predicate-functions.html
+[isMap]: predicate-functions.html
+[isMonad]: predicate-functions.html
+[isMonoid]: predicate-functions.html
+[isNil]: predicate-functions.html
+[isNumber]: predicate-functions.html
+[isObject]: predicate-functions.html
+[isPlus]: predicate-functions.html
+[isProfunctor]: predicate-functions.html
+[isPromise]: predicate-functions.html
+[isSame]: predicate-functions.html
+[isSameType]: predicate-functions.html
+[isSemigroup]: predicate-functions.html
+[isSemigroupoid]: predicate-functions.html
+[isSetoid]: predicate-functions.html
+[isString]: predicate-functions.html
+[isSymbol]: predicate-functions.html
+[isTraversable]: predicate-functions.html
+[isTrue]: predicate-functions.html
+[isTruthy]: predicate-functions.html
+[pathEq]: predicate-functions.html
+[pathSatisfies]: predicate-functions.html
+[propEq]: predicate-functions.html
+[propPathEq]: predicate-functions.html
+[propPathSatisfies]: predicate-functions.html
+[propSatisfies]: predicate-functions.html

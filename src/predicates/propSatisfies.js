@@ -9,8 +9,8 @@ const isPredOrFunc = require('../core/isPredOrFunc')
 const isString = require('../core/isString')
 const predOrFunc = require('../core/predOrFunc')
 
-// propSatisfies: (String | Integer) -> (a -> Boolean) -> b -> Boolean
-// propSatisfies: (String | Integer) -> Pred a -> b -> Boolean
+/** propSatisfies :: (String | Integer) -> (a -> Boolean) -> b -> Boolean */
+/** propSatisfies :: (String | Integer) -> Pred a -> b -> Boolean */
 function propSatisfies(key, pred, x) {
   if(!(isString(key) && !isEmpty(key) || isInteger(key))) {
     throw new TypeError(

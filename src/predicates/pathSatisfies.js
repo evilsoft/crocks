@@ -14,8 +14,8 @@ const err = name =>
   `${name}: First argument must be an Array of non-empty Strings or Integers`
 
 function fn(name) {
-  // pathSatisfies: [ (String | Integer) ] -> (a -> Boolean) -> b -> Boolean
-  // pathSatisfies: [ (String | Integer) ] -> Pred a -> b -> Boolean
+  /** pathSatisfies :: [ (String | Integer) ] -> (a -> Boolean) -> b -> Boolean */
+  /** pathSatisfies :: [ (String | Integer) ] -> Pred a -> b -> Boolean */
   function pathSatisfies(keys, pred, x) {
     if(!isArray(keys)) {
       throw new TypeError(err(name))

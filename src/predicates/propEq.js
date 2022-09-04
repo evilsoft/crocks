@@ -9,7 +9,7 @@ const isInteger = require('../core/isInteger')
 const isNil = require('../core/isNil')
 const isString = require('../core/isString')
 
-// propEq: (String | Integer) -> a -> b -> Boolean
+/** propEq :: (String | Integer) -> a -> b -> Boolean */
 function propEq(key, value, x) {
   if(!(isString(key) && !isEmpty(key) || isInteger(key))) {
     throw new TypeError(
